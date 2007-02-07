@@ -203,11 +203,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return RoleFinder.findByC_N(companyId, name);
 	}
 
-	public List getRolePermissions(String roleId)
-		throws PortalException, SystemException {
-		return RoleUtil.getPermissions(roleId);
-	}
-
 	public List getUserGroupRoles(String userId, long groupId)
 		throws SystemException {
 

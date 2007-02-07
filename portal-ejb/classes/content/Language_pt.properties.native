@@ -137,37 +137,42 @@ model.resource.com.liferay.portal.model.Organization=Organização
 model.resource.com.liferay.portal.model.Role=Papel
 model.resource.com.liferay.portal.model.User=Usuário
 model.resource.com.liferay.portal.model.UserGroup=Grupo De Usuário
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Categoria
-model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Entrada
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=Entrada
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=Dobrador
-model.resource.com.liferay.portlet.calendar.model.CalEvent=Evento
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=Original
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=Atalho
-model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=Dobrador
-model.resource.com.liferay.portlet.imagegallery.model.IGFolder=Dobrador
-model.resource.com.liferay.portlet.imagegallery.model.IGImage=Imagem
-model.resource.com.liferay.portlet.journal.model.JournalArticle=Artigo
-model.resource.com.liferay.portlet.journal.model.JournalStructure=Estrutura
-model.resource.com.liferay.portlet.journal.model.JournalTemplate=Molde
-model.resource.com.liferay.portlet.messageboards.model.MBCategory=Categoria
-model.resource.com.liferay.portlet.messageboards.model.MBMessage=Mensagem
-model.resource.com.liferay.portlet.messageboards.model.MBTopic=Tópico
-model.resource.com.liferay.portlet.polls.model.PollsQuestion=Pergunta
-model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=Categoria
-model.resource.com.liferay.portlet.shopping.model.ShoppingItem=Artigo
-model.resource.com.liferay.portlet.softwarerepository.model.SRFrameworkVersion=Versão Da Estrutura
-model.resource.com.liferay.portlet.softwarerepository.model.SRLicense=Licença
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductEntry=Entrada Do Produto
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductVersion=Versão Do Produto
-model.resource.com.liferay.portlet.wiki.model.WikiNode=Nó
-model.resource.com.liferay.portlet.wiki.model.WikiPage=Página
-model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Definição
-model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Exemplo
-model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tarefa
+model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Categoria De Blogs
+model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Entrada De Blogs
+model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=Entrada Dos Bookmarks
+model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=Dobrador Dos Bookmarks
+model.resource.com.liferay.portlet.calendar.model.CalEvent=Evento Do Calendário
+model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=Original Da Biblioteca Do Original
+model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=Atalho Da Biblioteca Do Original
+model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=Dobrador Da Biblioteca Do Original
+model.resource.com.liferay.portlet.imagegallery.model.IGFolder=Dobrador Da Galeria Da Imagem
+model.resource.com.liferay.portlet.imagegallery.model.IGImage=Imagem Da Galeria Da Imagem
+model.resource.com.liferay.portlet.journal.model.JournalArticle=Artigo De Jornal
+model.resource.com.liferay.portlet.journal.model.JournalStructure=Estrutura Do Jornal
+model.resource.com.liferay.portlet.journal.model.JournalTemplate=Molde Do Jornal
+model.resource.com.liferay.portlet.messageboards.model.MBCategory=A Mensagem Boards A Categoria
+model.resource.com.liferay.portlet.messageboards.model.MBMessage=A Mensagem Boards A Mensagem
+model.resource.com.liferay.portlet.messageboards.model.MBTopic=A Mensagem Boards O Tópico
+model.resource.com.liferay.portlet.polls.model.PollsQuestion=Pergunta Das Votações
+model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=Categoria Do Shopping
+model.resource.com.liferay.portlet.shopping.model.ShoppingItem=Artigo Do Shopping
+model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=Versão Da Estrutura Do Catálogo Do Software
+model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=Licença Do Produto Do Catálogo Do Software
+model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=Entrada Do Produto Do Catálogo Do Software
+model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=Versão Do Produto Do Catálogo Do Software
+model.resource.com.liferay.portlet.wiki.model.WikiNode=Nó De Wiki
+model.resource.com.liferay.portlet.wiki.model.WikiPage=Página De Wiki
+model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Definição Do Workflow
+model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Exemplo Do Workflow
+model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tarefa Do Workflow
 
 ##
 ## Action names
+##
+
+
+##
+## Layout types
 ##
 
 action.ADD_ARTICLE=Adicione O Artigo
@@ -233,7 +238,7 @@ action.VIEW=Vista
 action.VIEW_USER=Usuário Da Vista
 
 ##
-## Layout types
+## Messages
 ##
 
 layout.types.article=Artigo
@@ -243,7 +248,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Messages
+## Currency
 ##
 
 1-day=1 dia
@@ -2172,7 +2177,7 @@ the-organization-name-is-already-taken=O nome da organização é feito exame j�
 the-page-content-cannot-be-parsed-by-the-selected-format=O índice da página não pode ser analisado gramaticalmente pelo formato selecionado.
 the-page-could-not-be-found=A página não podia ser encontrada.
 the-page-does-not-have-a-a-valid-title=A página não tem um título válido.
-the-permission-has-been-deleted=A permissão foi suprimida
+the-permission-was-deleted=A permissão foi suprimida.
 the-plugin-was-downloaded-successfully-and-is-now-being-installed=O plugin downloaded com sucesso e está sendo instalado agora.
 the-plugin-was-uploaded-successfully-and-is-now-being-installed=O plugin uploaded com sucesso e está sendo instalado agora.
 the-portal-keeps-track-of-all-live-sessions=The portal keeps track of all live sessions and records useful information such as the user's remote host and IP, browser type, OS type, number of hits, and the URLs with timestamps of the pages accessed. To see this information, hit the <i>View Live Sessions</i> button.
@@ -2187,7 +2192,7 @@ the-repository-could-not-be-found=O repositório não podia ser encontrado.
 the-resulting-first-page-must-be-a-portlet-page=A primeira página resultante deve ser uma página do portlet.
 the-resulting-first-page-must-not-be-hidden=A primeira página resultante não deve ser escondida.
 the-role-could-not-be-found=O papel não podia ser encontrado.
-the-role-permissions-have-been-updated=As permissões do papel foram atualizadas
+the-role-permissions-was-updated=As permissões do papel eram updated.
 the-selected-entry-has-been-deleted=A entrada selecionada foi suprimida.
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=O papel selecionado não pode ser suprimido porque é um papel requerido do sistema.
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=A estrutura selecionada não pode ser suprimida porque é requerido por um ou mais molde.
@@ -2583,10 +2588,6 @@ zip-postal=Zip/Postal
 zip=Fecho de correr
 zt_en=Chinês (Formosa) ao inglês
 
-##
-## Currency
-##
-
 currency.AED=Dirham dos Uae
 currency.ALL=Lek Albanian
 currency.ANG=Guilder De Neth Antilhas
@@ -2736,4 +2737,3 @@ currency.YER=Riyal De Yemen
 currency.ZAR=Margem Do Africano Sul
 currency.ZMK=Kwacha Zambian
 currency.ZWD=Dólar De Zimbabwe
-

@@ -100,6 +100,12 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 			actionIds, resourceId);
 	}
 
+	public java.util.List getRolePermissions(java.lang.String roleId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return PermissionLocalServiceFactory.getTxImpl().getRolePermissions(roleId);
+	}
+
 	public java.util.List getUserPermissions(java.lang.String userId,
 		long resourceId) throws com.liferay.portal.SystemException {
 		return PermissionLocalServiceFactory.getTxImpl().getUserPermissions(userId,

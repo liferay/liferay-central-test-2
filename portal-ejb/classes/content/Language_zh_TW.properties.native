@@ -137,37 +137,42 @@ model.resource.com.liferay.portal.model.Organization=組織
 model.resource.com.liferay.portal.model.Role=角色
 model.resource.com.liferay.portal.model.User=用戶
 model.resource.com.liferay.portal.model.UserGroup=用戶群
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=類別
-model.resource.com.liferay.portlet.blogs.model.BlogsEntry=詞條
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=詞條
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=文件夾
-model.resource.com.liferay.portlet.calendar.model.CalEvent=事件
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=文件
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=捷徑
-model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=文件夾
-model.resource.com.liferay.portlet.imagegallery.model.IGFolder=文件夾
-model.resource.com.liferay.portlet.imagegallery.model.IGImage=圖像
-model.resource.com.liferay.portlet.journal.model.JournalArticle=文章
-model.resource.com.liferay.portlet.journal.model.JournalStructure=結構
-model.resource.com.liferay.portlet.journal.model.JournalTemplate=模板
-model.resource.com.liferay.portlet.messageboards.model.MBCategory=類別
-model.resource.com.liferay.portlet.messageboards.model.MBMessage=消息
-model.resource.com.liferay.portlet.messageboards.model.MBTopic=題目
-model.resource.com.liferay.portlet.polls.model.PollsQuestion=問題
-model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=類別
-model.resource.com.liferay.portlet.shopping.model.ShoppingItem=項目
-model.resource.com.liferay.portlet.softwarerepository.model.SRFrameworkVersion=框架版本
-model.resource.com.liferay.portlet.softwarerepository.model.SRLicense=執照
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductEntry=產品詞條
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductVersion=產品版本
-model.resource.com.liferay.portlet.wiki.model.WikiNode=結
-model.resource.com.liferay.portlet.wiki.model.WikiPage=頁
-model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=定義
-model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=事例
-model.resource.com.liferay.portlet.workflow.model.WorkflowTask=任務
+model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Blogs 類別
+model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Blogs 詞條
+model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=書簽詞條
+model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=書簽文件夾
+model.resource.com.liferay.portlet.calendar.model.CalEvent=日曆事件
+model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=文件圖書館文件
+model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=文件圖書館捷徑
+model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=文件圖書館文件夾
+model.resource.com.liferay.portlet.imagegallery.model.IGFolder=圖像畫廊文件夾
+model.resource.com.liferay.portlet.imagegallery.model.IGImage=圖像畫廊圖像
+model.resource.com.liferay.portlet.journal.model.JournalArticle=期刊文章
+model.resource.com.liferay.portlet.journal.model.JournalStructure=學報結構
+model.resource.com.liferay.portlet.journal.model.JournalTemplate=學報模板
+model.resource.com.liferay.portlet.messageboards.model.MBCategory=留言簿類別
+model.resource.com.liferay.portlet.messageboards.model.MBMessage=留言簿消息
+model.resource.com.liferay.portlet.messageboards.model.MBTopic=留言簿題目
+model.resource.com.liferay.portlet.polls.model.PollsQuestion=民意測驗問題
+model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=購物類別
+model.resource.com.liferay.portlet.shopping.model.ShoppingItem=購物項目
+model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=軟體編目框架版本
+model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=軟體編目產品執照
+model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=軟體編目產品詞條
+model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=軟體編目產品版本
+model.resource.com.liferay.portlet.wiki.model.WikiNode=Wiki 結
+model.resource.com.liferay.portlet.wiki.model.WikiPage=Wiki 頁
+model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=工作流定義
+model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=工作流事例
+model.resource.com.liferay.portlet.workflow.model.WorkflowTask=工作流任務
 
 ##
 ## Action names
+##
+
+
+##
+## Layout types
 ##
 
 action.ADD_ARTICLE=增加文章
@@ -233,7 +238,7 @@ action.VIEW=看法
 action.VIEW_USER=看法用戶
 
 ##
-## Layout types
+## Messages
 ##
 
 layout.types.article=文章
@@ -243,7 +248,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Messages
+## Currency
 ##
 
 1-day=1 天
@@ -2172,7 +2177,7 @@ the-organization-name-is-already-taken=組織名已經被需要。
 the-page-content-cannot-be-parsed-by-the-selected-format=頁內容無法由選擇的格式解析。
 the-page-could-not-be-found=頁找不到。
 the-page-does-not-have-a-a-valid-title=此頁沒有一個有效的標題。
-the-permission-has-been-deleted=允許被刪除了
+the-permission-was-deleted=允許被刪除了。
 the-plugin-was-downloaded-successfully-and-is-now-being-installed=插入式成功地被下載了和現在被安裝。
 the-plugin-was-uploaded-successfully-and-is-now-being-installed=插入式成功地被上裝了和現在被安裝。
 the-portal-keeps-track-of-all-live-sessions=這portal網站會追蹤使用中連線期併記錄有用資訊, 如使用者主機IP位址, 瀏覽器名稱版本, OS種類, 點閱數, URLs存取頁面的時間戳記. 要了解此項資訊, 請按 <i>檢視活動中連線期</i> 按鈕.
@@ -2187,7 +2192,7 @@ the-repository-could-not-be-found=貯藏庫找不到。
 the-resulting-first-page-must-be-a-portlet-page=收效的第一頁必須是portlet 頁。
 the-resulting-first-page-must-not-be-hidden=收效的第一頁不能掩藏。
 the-role-could-not-be-found=角色找不到。
-the-role-permissions-have-been-updated=角色允許被更新了
+the-role-permissions-was-updated=角色允許是更新。
 the-selected-entry-has-been-deleted=選擇的項目已被刪除。
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=選擇的角色無法被刪除因為這是一個必需的系統角色。
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=選擇的結構無法被刪除因為它是必需由一個或更多範本。
@@ -2583,10 +2588,6 @@ zip-postal=Zip/Postal
 zip=郵遞區號
 zt_en=中文(臺灣) 對英語
 
-##
-## Currency
-##
-
 currency.AED=阿拉伯聯合酋長國迪拉姆
 currency.ALL=阿爾巴尼亞列克
 currency.ANG=荷屬安地列斯盾
@@ -2736,4 +2737,3 @@ currency.YER=也門里亞爾
 currency.ZAR=南非蘭特
 currency.ZMK=贊比亞克瓦查
 currency.ZWD=津巴布韋元
-

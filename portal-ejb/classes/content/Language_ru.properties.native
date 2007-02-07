@@ -115,27 +115,14 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.User=Пользователь
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Категория
-model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Запись
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=Запись
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=Папка
-model.resource.com.liferay.portlet.calendar.model.CalEvent=Событие
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=Документ
-model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=Папка
-model.resource.com.liferay.portlet.imagegallery.model.IGFolder=Папка
-model.resource.com.liferay.portlet.imagegallery.model.IGImage=Изображение
-model.resource.com.liferay.portlet.journal.model.JournalArticle=Статья
-model.resource.com.liferay.portlet.journal.model.JournalStructure=Структура
-model.resource.com.liferay.portlet.journal.model.JournalTemplate=Шаблон
-model.resource.com.liferay.portlet.messageboards.model.MBCategory=Категория
-model.resource.com.liferay.portlet.messageboards.model.MBMessage=Сообщение
-model.resource.com.liferay.portlet.messageboards.model.MBTopic=Тема
-model.resource.com.liferay.portlet.polls.model.PollsQuestion=Опрос
-model.resource.com.liferay.portlet.wiki.model.WikiNode=Узел
-model.resource.com.liferay.portlet.wiki.model.WikiPage=Страница
 
 ##
 ## Action names
+##
+
+
+##
+## Layout types
 ##
 
 action.ADD_ARTICLE=Добавить статью
@@ -169,7 +156,7 @@ action.UPDATE_DISCUSSION=Сохранить обсуждение
 action.VIEW=Посмотреть
 
 ##
-## Layout types
+## Messages
 ##
 
 layout.types.article=Статья
@@ -178,7 +165,7 @@ layout.types.portlet=Портлет
 layout.types.url=URL
 
 ##
-## Messages
+## Currency
 ##
 
 INBOX=Входящие
@@ -2169,10 +2156,6 @@ zip-postal=Zip/Postal
 zip=Почтовый индекс
 zt_en=С Китайского (Тайвань) на Английский
 
-##
-## Currency
-##
-
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek
 currency.ANG=Neth Antilles Guilder
@@ -2322,4 +2305,3 @@ currency.YER=Yemen Riyal
 currency.ZAR=South African Rand
 currency.ZMK=Zambian Kwacha
 currency.ZWD=Zimbabwe Dollar
-

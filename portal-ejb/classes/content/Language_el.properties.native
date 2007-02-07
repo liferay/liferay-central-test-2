@@ -137,37 +137,42 @@ model.resource.com.liferay.portal.model.Organization=Οργάνωση
 model.resource.com.liferay.portal.model.Role=Ρόλος
 model.resource.com.liferay.portal.model.User=Χρήστης
 model.resource.com.liferay.portal.model.UserGroup=Ομάδα χρηστών
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Κατηγορία
-model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Είσοδος
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=Είσοδος
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=Φάκελλος
-model.resource.com.liferay.portlet.calendar.model.CalEvent=Γεγονός
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=Έγγραφο
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=Συντομότερος δρόμος
-model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=Φάκελλος
-model.resource.com.liferay.portlet.imagegallery.model.IGFolder=Φάκελλος
-model.resource.com.liferay.portlet.imagegallery.model.IGImage=Εικόνα
-model.resource.com.liferay.portlet.journal.model.JournalArticle=Αρθρο
-model.resource.com.liferay.portlet.journal.model.JournalStructure=Δομή
-model.resource.com.liferay.portlet.journal.model.JournalTemplate=Πρότυπο
-model.resource.com.liferay.portlet.messageboards.model.MBCategory=Κατηγορία
-model.resource.com.liferay.portlet.messageboards.model.MBMessage=Μήνυμα
-model.resource.com.liferay.portlet.messageboards.model.MBTopic=Θέμα
-model.resource.com.liferay.portlet.polls.model.PollsQuestion=Ερώτηση
-model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=Κατηγορία
-model.resource.com.liferay.portlet.shopping.model.ShoppingItem=Στοιχείο
-model.resource.com.liferay.portlet.softwarerepository.model.SRFrameworkVersion=Έκδοση πλαισίου
-model.resource.com.liferay.portlet.softwarerepository.model.SRLicense=Αδεια
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductEntry=Είσοδος προϊόντων
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductVersion=Έκδοση προϊόντων
-model.resource.com.liferay.portlet.wiki.model.WikiNode=Κόμβος
-model.resource.com.liferay.portlet.wiki.model.WikiPage=Σελίδα
-model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Καθορισμός
-model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Περίπτωση
-model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Στόχος
+model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Κατηγορία Blogs
+model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Είσοδος Blogs
+model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=Είσοδος σελιδοδεικτών
+model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=Φάκελλος σελιδοδεικτών
+model.resource.com.liferay.portlet.calendar.model.CalEvent=Ημερολογιακό γεγονός
+model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=Έγγραφο βιβλιοθήκης εγγράφων
+model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=Συντομότερος δρόμος βιβλιοθήκης εγγράφων
+model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=Φάκελλος βιβλιοθήκης εγγράφων
+model.resource.com.liferay.portlet.imagegallery.model.IGFolder=Φάκελλος στοών εικόνας
+model.resource.com.liferay.portlet.imagegallery.model.IGImage=Εικόνα στοών εικόνας
+model.resource.com.liferay.portlet.journal.model.JournalArticle=Αρθρο σε περιοδικά
+model.resource.com.liferay.portlet.journal.model.JournalStructure=Δομή περιοδικών
+model.resource.com.liferay.portlet.journal.model.JournalTemplate=Πρότυπο περιοδικών
+model.resource.com.liferay.portlet.messageboards.model.MBCategory=Κατηγορία πινάκων μηνυμάτων
+model.resource.com.liferay.portlet.messageboards.model.MBMessage=Μήνυμα πινάκων μηνυμάτων
+model.resource.com.liferay.portlet.messageboards.model.MBTopic=Θέμα πινάκων μηνυμάτων
+model.resource.com.liferay.portlet.polls.model.PollsQuestion=Ερώτηση ψηφοφοριών
+model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=Κατηγορία αγορών
+model.resource.com.liferay.portlet.shopping.model.ShoppingItem=Στοιχείο αγορών
+model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=Έκδοση πλαισίου καταλόγων λογισμικού
+model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=Αδεια προϊόντων καταλόγων λογισμικού
+model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=Είσοδος προϊόντων καταλόγων λογισμικού
+model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=Έκδοση προϊόντων καταλόγων λογισμικού
+model.resource.com.liferay.portlet.wiki.model.WikiNode=Κόμβος Wiki
+model.resource.com.liferay.portlet.wiki.model.WikiPage=Σελίδα Wiki
+model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Καθορισμός ροής της δουλειάς
+model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Περίπτωση ροής της δουλειάς
+model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Στόχος ροής της δουλειάς
 
 ##
 ## Action names
+##
+
+
+##
+## Layout types
 ##
 
 action.ADD_ARTICLE=Προσθέστε το άρθρο
@@ -233,7 +238,7 @@ action.VIEW=Αποψη
 action.VIEW_USER=Χρήστης άποψης
 
 ##
-## Layout types
+## Messages
 ##
 
 layout.types.article=Αρθρο
@@ -243,7 +248,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Messages
+## Currency
 ##
 
 1-day=1 Ημέρα
@@ -2170,7 +2175,7 @@ the-organization-name-is-already-taken=Το όνομα οργάνωσης λαμ
 the-page-content-cannot-be-parsed-by-the-selected-format=Το περιεχόμενο της σελίδας δεν μπορεί να αναλυθεί από την επιλεγμένη μορφοποίηση.
 the-page-could-not-be-found=Η σελίδα δεν μπόρεσε να βρεθεί.
 the-page-does-not-have-a-a-valid-title=Η σελίδα δεν έχει ένα έγκυρο τίτλο.
-the-permission-has-been-deleted=Η άδεια έχει διαγραφεί
+the-permission-was-deleted=Η άδεια διαγράφηκε.
 the-plugin-was-downloaded-successfully-and-is-now-being-installed=Το plugin μεταφορτώθηκε επιτυχώς και εγκαθίσταται τώρα.
 the-plugin-was-uploaded-successfully-and-is-now-being-installed=Το plugin φορτώθηκε επιτυχώς και εγκαθίσταται τώρα.
 the-portal-keeps-track-of-all-live-sessions=Ο δικτυακός τόπος παρακολουθεί όλες τι ζωντανές συνεδρίες και γράφει χρήσιμες πληροφορίες όπως το απομακρυσμένο σύστημα του χρήστη και η διεύθυνση IP, τύπος περιηγητή, τύπος λειτουργικού συστήματος, αριθμοί πρόσβασης, και οι διευθύνσεις URL με την ώρα της πρόσβασης των σελίδων. Για να δείτε αυτές τις πληροφορίες, πατήστε το κουμπί <i>Προβολή Ζωντανών Συνεδριών</i>.
@@ -2185,7 +2190,7 @@ the-repository-could-not-be-found=Ο χώρος φύλαξης δεν βρέθη
 the-resulting-first-page-must-be-a-portlet-page=Η προκύπτουσα πρώτη σελίδα πρέπει να είναι μια σελίδα portlet.
 the-resulting-first-page-must-not-be-hidden=Η προκύπτουσα πρώτη σελίδα δεν πρέπει να κρυφτεί.
 the-role-could-not-be-found=Ο ρόλος δεν μπόρεσε να βρεθεί.
-the-role-permissions-have-been-updated=Οι άδειες ρόλου έχουν ενημερωθεί
+the-role-permissions-was-updated=Οι άδειες ρόλου ενημερώθηκαν.
 the-selected-entry-has-been-deleted=Η επιλεγμένη καταχώρηση έχει διαγραφεί.
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=Ο επιλεγμένος ρόλος δεν μπορεί να διαγραφεί διότι είναι ένας απαιτούμενος ρόλος του συστήματος.
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=Η επιλεγμένη δομή δεν μπορεί να διαγραφεί επειδή απαιτείται από ένα ή περισσότερα πρότυπα.
@@ -2581,10 +2586,6 @@ zip-postal=Φερμουάρ/ταχυδρομικός
 zip=Τ.Κ.
 zt_en=Κινέζικα (Ταϊβάν) στα αγγλικά
 
-##
-## Currency
-##
-
 currency.AED=UAE Dirham
 currency.ALL=Lek Αλβανίας
 currency.ANG=Γκίλντερ Νεθ Αντίλλες
@@ -2734,4 +2735,3 @@ currency.YER=Ριάλ Υεμένης
 currency.ZAR=Ράντ Βορέιου Αφρικής
 currency.ZMK=Κουάσσα Ζάμπιας
 currency.ZWD=Δολάρια Ζιμπάμπουε
-

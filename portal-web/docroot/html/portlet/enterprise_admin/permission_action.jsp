@@ -25,22 +25,20 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-Object[] object = (Object[])row.getObject();
-Permission permission = (Permission)object[0];
-Role role = (Role)object[1];
+Object[] objArray = (Object[])row.getObject();
 
+Permission permission = (Permission)objArray[0];
+Role role = (Role)objArray[1];
 %>
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deletePermissionURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
-	<portlet:param name="cmd" value="unset_permission" />
-	<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
-	<portlet:param name="permissionId" value="<%= Long.toString(permission.getPermissionId()) %>" />
+	<portlet:param name="<%= Constants.CMD %>" value="unset_permission" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
+	<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
+	<portlet:param name="permissionId" value="<%= String.valueOf(permission.getPermissionId()) %>" />
 </portlet:actionURL>
 
 <liferay-ui:icon image="delete" url="<%= deletePermissionURL %>" />

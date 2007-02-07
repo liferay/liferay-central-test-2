@@ -137,37 +137,42 @@ model.resource.com.liferay.portal.model.Organization=조직
 model.resource.com.liferay.portal.model.Role=역할
 model.resource.com.liferay.portal.model.User=사용자
 model.resource.com.liferay.portal.model.UserGroup=사용자 그룹
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=종류
-model.resource.com.liferay.portlet.blogs.model.BlogsEntry=입장
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=입장
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=폴더
-model.resource.com.liferay.portlet.calendar.model.CalEvent=사건
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=문서
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=편법
-model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=폴더
-model.resource.com.liferay.portlet.imagegallery.model.IGFolder=폴더
-model.resource.com.liferay.portlet.imagegallery.model.IGImage=심상
-model.resource.com.liferay.portlet.journal.model.JournalArticle=기사
-model.resource.com.liferay.portlet.journal.model.JournalStructure=구조
-model.resource.com.liferay.portlet.journal.model.JournalTemplate=템플렛
-model.resource.com.liferay.portlet.messageboards.model.MBCategory=종류
-model.resource.com.liferay.portlet.messageboards.model.MBMessage=메시지
-model.resource.com.liferay.portlet.messageboards.model.MBTopic=화제
-model.resource.com.liferay.portlet.polls.model.PollsQuestion=질문
-model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=종류
-model.resource.com.liferay.portlet.shopping.model.ShoppingItem=품목
-model.resource.com.liferay.portlet.softwarerepository.model.SRFrameworkVersion=기구 버전
-model.resource.com.liferay.portlet.softwarerepository.model.SRLicense=면허
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductEntry=제품 입장
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductVersion=제품 버전
-model.resource.com.liferay.portlet.wiki.model.WikiNode=마디
-model.resource.com.liferay.portlet.wiki.model.WikiPage=페이지
-model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=정의
-model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=경우
-model.resource.com.liferay.portlet.workflow.model.WorkflowTask=업무
+model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Blogs종류
+model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Blogs입장
+model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=갈피표 입장
+model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=갈피표 폴더
+model.resource.com.liferay.portlet.calendar.model.CalEvent=달력 사건
+model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=문서 도서관 문서
+model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=문서 도서관 편법
+model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=문서 도서관 폴더
+model.resource.com.liferay.portlet.imagegallery.model.IGFolder=심상 화랑 폴더
+model.resource.com.liferay.portlet.imagegallery.model.IGImage=심상 화랑 심상
+model.resource.com.liferay.portlet.journal.model.JournalArticle=신문 기사
+model.resource.com.liferay.portlet.journal.model.JournalStructure=전표 구조
+model.resource.com.liferay.portlet.journal.model.JournalTemplate=전표 템플렛
+model.resource.com.liferay.portlet.messageboards.model.MBCategory=전보국 종류
+model.resource.com.liferay.portlet.messageboards.model.MBMessage=전보국 메시지
+model.resource.com.liferay.portlet.messageboards.model.MBTopic=전보국 화제
+model.resource.com.liferay.portlet.polls.model.PollsQuestion=투표 질문
+model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=쇼핑 종류
+model.resource.com.liferay.portlet.shopping.model.ShoppingItem=쇼핑 품목
+model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=소프트웨어 카탈로그 기구 버전
+model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=소프트웨어 카탈로그 제품 면허
+model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=소프트웨어 카탈로그 제품 입장
+model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=소프트웨어 카탈로그 제품 버전
+model.resource.com.liferay.portlet.wiki.model.WikiNode=Wiki마디
+model.resource.com.liferay.portlet.wiki.model.WikiPage=Wiki페이지
+model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=작업 흐름 정의
+model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=작업 흐름 경우
+model.resource.com.liferay.portlet.workflow.model.WorkflowTask=작업 흐름 업무
 
 ##
 ## Action names
+##
+
+
+##
+## Layout types
 ##
 
 action.ADD_ARTICLE=기사를 추가하십시요
@@ -233,7 +238,7 @@ action.VIEW=전망
 action.VIEW_USER=전망 사용자
 
 ##
-## Layout types
+## Messages
 ##
 
 layout.types.article=기사
@@ -243,7 +248,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Messages
+## Currency
 ##
 
 1-day=1 일
@@ -2171,7 +2176,7 @@ the-organization-name-is-already-taken=조직 이름은 이미 걸린다.
 the-page-content-cannot-be-parsed-by-the-selected-format=페이지 내용은 선정한 체재에 의하여 분석될 수 없다.
 the-page-could-not-be-found=페이지는 발견될 수 없었다.
 the-page-does-not-have-a-a-valid-title=페이지에는 유효한 제목이 있지 않는다.
-the-permission-has-been-deleted=허가는 삭제되었다
+the-permission-was-deleted=허가는 삭제되었다.
 the-plugin-was-downloaded-successfully-and-is-now-being-installed=플러그 접속식은 성공적으로 데이터를 전송하고 지금 설치되고 있다.
 the-plugin-was-uploaded-successfully-and-is-now-being-installed=플러그 접속식은 성공적으로 올려주기하고 지금 설치되고 있다.
 the-portal-keeps-track-of-all-live-sessions=The portal keeps track of all live sessions and records useful information such as the user's remote host and IP, browser type, OS type, number of hits, and the URLs with timestamps of the pages accessed. To see this information, hit the <i>View Live Sessions</i> button.
@@ -2186,7 +2191,7 @@ the-repository-could-not-be-found=창고는 발견될 수 없었다.
 the-resulting-first-page-must-be-a-portlet-page=유래 첫번째 페이지는portlet페이지 이어야 한다.
 the-resulting-first-page-must-not-be-hidden=유래 첫번째 페이지는 숨기면 안된다.
 the-role-could-not-be-found=역할은 발견될 수 없었다.
-the-role-permissions-have-been-updated=역할 허가는 새롭게 했다
+the-role-permissions-was-updated=역할 허가는 개정했다.
 the-selected-entry-has-been-deleted=선정된 입장은 삭제되었다.
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=요구하기 체계 역할 이기 때문에 선정한 역할은 삭제될 수 없다
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=한개 이상 템플렛옆에 필수 이기 때문에 선정한 구조는 삭제될.
@@ -2581,10 +2586,6 @@ zip-postal=Zip/Postal
 zip=지퍼
 zt_en=영어에 중국어 (대만)
 
-##
-## Currency
-##
-
 currency.AED=아랍 에미리트 연방 Dirham
 currency.ALL=알바니아 Lek
 currency.ANG=Neth 앤틸리스 제도 Guilder
@@ -2734,4 +2735,3 @@ currency.YER=예멘 Riyal
 currency.ZAR=남쪽 아프리카 Rand
 currency.ZMK=잠비아 사람 Kwacha
 currency.ZWD=짐바브웨 달러
-

@@ -138,6 +138,7 @@ public class EditRolePermissionsAction extends PortletAction {
 		SessionMessages.add(req, "permissionDeleted");
 
 		String redirect = ParamUtil.getString(req, "redirect");
+
 		res.sendRedirect(redirect);
 	}
 

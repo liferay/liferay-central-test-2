@@ -209,19 +209,14 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 		else {
 			portlet = (Portlet)companyPortletsPool.get(rootPortletId);
-
-			if (portlet != null) {
-				portlet = portlet.getClonedInstance(portletId);
-			}
 		}
 
-		if ((portlet == null) &&
-			(!portletId.equals(PortletKeys.LIFERAY_PORTAL))) {
-
+		if (portlet == null) {
 			return false;
 		}
-
-		return true;
+		else {
+			return true;
+		}
 	}
 
 	public void initEAR(String[] xmls) {

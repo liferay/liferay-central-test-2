@@ -67,6 +67,10 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getRolePermissions(java.lang.String roleId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getUserPermissions(java.lang.String userId,
 		long resourceId) throws com.liferay.portal.SystemException;
 

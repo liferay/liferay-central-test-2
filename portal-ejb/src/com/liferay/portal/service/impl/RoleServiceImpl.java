@@ -79,15 +79,6 @@ public class RoleServiceImpl extends PrincipalBean implements RoleService {
 		return RoleLocalServiceUtil.getRole(companyId, name);
 	}
 
-	public List getRolePermissions(String roleId)
-		throws PortalException, SystemException {
-
-		RolePermission.check(
-			getPermissionChecker(), roleId, ActionKeys.ADD_PERMISSIONS);
-
-		return RoleLocalServiceUtil.getRolePermissions(roleId);
-	}
-
 	public List getUserGroupRoles(String userId, long groupId)
 		throws PortalException, SystemException {
 

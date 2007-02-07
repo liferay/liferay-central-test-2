@@ -137,37 +137,42 @@ model.resource.com.liferay.portal.model.Organization=Organisation
 model.resource.com.liferay.portal.model.Role=Rôle
 model.resource.com.liferay.portal.model.User=Utilisateur
 model.resource.com.liferay.portal.model.UserGroup=Groupe D'Utilisateur
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Catégorie
-model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Entrée
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=Entrée
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=Chemise
-model.resource.com.liferay.portlet.calendar.model.CalEvent=Événement
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=Document
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=Raccourci
-model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=Chemise
-model.resource.com.liferay.portlet.imagegallery.model.IGFolder=Chemise
-model.resource.com.liferay.portlet.imagegallery.model.IGImage=Image
-model.resource.com.liferay.portlet.journal.model.JournalArticle=Article
-model.resource.com.liferay.portlet.journal.model.JournalStructure=Structure
-model.resource.com.liferay.portlet.journal.model.JournalTemplate=Calibre
-model.resource.com.liferay.portlet.messageboards.model.MBCategory=Catégorie
-model.resource.com.liferay.portlet.messageboards.model.MBMessage=Message
-model.resource.com.liferay.portlet.messageboards.model.MBTopic=Matière
-model.resource.com.liferay.portlet.polls.model.PollsQuestion=Question
-model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=Catégorie
-model.resource.com.liferay.portlet.shopping.model.ShoppingItem=Article
-model.resource.com.liferay.portlet.softwarerepository.model.SRFrameworkVersion=Version De Cadre
-model.resource.com.liferay.portlet.softwarerepository.model.SRLicense=Permis
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductEntry=Entrée De Produit
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductVersion=Version De Produit
-model.resource.com.liferay.portlet.wiki.model.WikiNode=Noeud
-model.resource.com.liferay.portlet.wiki.model.WikiPage=Page
-model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Définition
-model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Exemple
-model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Chargez
+model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Catégorie De Blogs
+model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Entrée De Blogs
+model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=Entrée De Signets
+model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=Chemise De Signets
+model.resource.com.liferay.portlet.calendar.model.CalEvent=Événement De Calendrier
+model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=Document De Bibliothèque De Document
+model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=Raccourci De Bibliothèque De Document
+model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=Chemise De Bibliothèque De Document
+model.resource.com.liferay.portlet.imagegallery.model.IGFolder=Chemise De Galerie D'Image
+model.resource.com.liferay.portlet.imagegallery.model.IGImage=Image De Galerie D'Image
+model.resource.com.liferay.portlet.journal.model.JournalArticle=Article De Journal
+model.resource.com.liferay.portlet.journal.model.JournalStructure=Structure De Journal
+model.resource.com.liferay.portlet.journal.model.JournalTemplate=Calibre De Journal
+model.resource.com.liferay.portlet.messageboards.model.MBCategory=Le Message Embarque La Catégorie
+model.resource.com.liferay.portlet.messageboards.model.MBMessage=Le Message Embarque Le Message
+model.resource.com.liferay.portlet.messageboards.model.MBTopic=Le Message Embarque La Matière
+model.resource.com.liferay.portlet.polls.model.PollsQuestion=Question De Scrutins
+model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=Catégorie D'Achats
+model.resource.com.liferay.portlet.shopping.model.ShoppingItem=Article D'Achats
+model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=Version De Cadre De Catalogue De Logiciel
+model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=Permis De Produit De Catalogue De Logiciel
+model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=Entrée De Produit De Catalogue De Logiciel
+model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=Version De Produit De Catalogue De Logiciel
+model.resource.com.liferay.portlet.wiki.model.WikiNode=Noeud De Wiki
+model.resource.com.liferay.portlet.wiki.model.WikiPage=Page De Wiki
+model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Définition De Déroulement des opérations
+model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Exemple De Déroulement des opérations
+model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Le déroulement des opérations Chargent
 
 ##
 ## Action names
+##
+
+
+##
+## Layout types
 ##
 
 action.ADD_ARTICLE=Ajoutez L'Article
@@ -233,7 +238,7 @@ action.VIEW=Vue
 action.VIEW_USER=Utilisateur De Vue
 
 ##
-## Layout types
+## Messages
 ##
 
 layout.types.article=Article
@@ -243,7 +248,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Messages
+## Currency
 ##
 
 1-day=1 jour
@@ -2172,7 +2177,7 @@ the-organization-name-is-already-taken=Le nom d'organisation est déjà pris.
 the-page-content-cannot-be-parsed-by-the-selected-format=Le contenu de la page ne peut pas être utilisé avec le format choisi.
 the-page-could-not-be-found=La page n'a pu être trouvée.
 the-page-does-not-have-a-a-valid-title=La page n'a pas de titre valide.
-the-permission-has-been-deleted=La permission a été supprimée
+the-permission-was-deleted=La permission a été supprimée.
 the-plugin-was-downloaded-successfully-and-is-now-being-installed=Le plugin a été téléchargé avec succès et maintenant est installé.
 the-plugin-was-uploaded-successfully-and-is-now-being-installed=Le plugin a été téléchargé avec succès et maintenant est installé.
 the-portal-keeps-track-of-all-live-sessions=Le portail garde la trace de toutes les sessions utilisateurs ouvertes et des informations utiles telles que le nom de domaine et l'IP de l'utilisateur, le type de navigateur, de système d'exploitation, le nombre de page visitées et leur URL correspondantes. Pour visualiser ces informations, cliquez sur le bouton <i>Voir les sessions actives</i>.
@@ -2187,7 +2192,7 @@ the-repository-could-not-be-found=Le dépôt n'a pu être trouvé.
 the-resulting-first-page-must-be-a-portlet-page=La première page résultante doit être une page de portlet.
 the-resulting-first-page-must-not-be-hidden=La première page résultante ne doit pas être cachée.
 the-role-could-not-be-found=Le rôle n'a pu être trouvé.
-the-role-permissions-have-been-updated=Les permissions de rôle ont été mises à jour
+the-role-permissions-was-updated=Les permissions de rôle étaient mises à jour.
 the-selected-entry-has-been-deleted=L'entrée choisie a été supprimée.
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=Le rôle choisi ne peut pas être supprimé car c'est un rôle requis par le système.
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=La structure choisie ne peut pas être supprimée parce qu'elle est exigé par un ou plusieurs modèle de documents.
@@ -2583,10 +2588,6 @@ zip-postal=Zip/Postal
 zip=Code postal
 zt_en=Chinois (Taiwan) à l'anglais
 
-##
-## Currency
-##
-
 currency.AED=Dirham des EAU
 currency.ALL=Lek Albanais
 currency.ANG=Florin De Neth Antilles
@@ -2736,4 +2737,3 @@ currency.YER=Riyal Du Yémen
 currency.ZAR=Couche-point Sud-africain
 currency.ZMK=Kwacha Zambien
 currency.ZWD=Dollar Du Zimbabwe
-

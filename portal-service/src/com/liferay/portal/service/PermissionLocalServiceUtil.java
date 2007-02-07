@@ -106,6 +106,14 @@ public class PermissionLocalServiceUtil {
 			resourceId);
 	}
 
+	public static java.util.List getRolePermissions(java.lang.String roleId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.getRolePermissions(roleId);
+	}
+
 	public static java.util.List getUserPermissions(java.lang.String userId,
 		long resourceId) throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();

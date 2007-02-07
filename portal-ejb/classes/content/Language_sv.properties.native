@@ -135,37 +135,14 @@ model.resource.com.liferay.portal.model.Organization=Organisation
 model.resource.com.liferay.portal.model.Role=Roll
 model.resource.com.liferay.portal.model.User=Användare
 model.resource.com.liferay.portal.model.UserGroup=Användargrupp
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Kategori
-model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Inlägg
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=Bokmärke
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=Mapp
-model.resource.com.liferay.portlet.calendar.model.CalEvent=Händelse
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=Dokument
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=Genväg
-model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=Mapp
-model.resource.com.liferay.portlet.imagegallery.model.IGFolder=Mapp
-model.resource.com.liferay.portlet.imagegallery.model.IGImage=Bild
-model.resource.com.liferay.portlet.journal.model.JournalArticle=Artikel
-model.resource.com.liferay.portlet.journal.model.JournalStructure=Struktur
-model.resource.com.liferay.portlet.journal.model.JournalTemplate=Mall
-model.resource.com.liferay.portlet.messageboards.model.MBCategory=Kategori
-model.resource.com.liferay.portlet.messageboards.model.MBMessage=Meddelande
-model.resource.com.liferay.portlet.messageboards.model.MBTopic=Ämne
-model.resource.com.liferay.portlet.polls.model.PollsQuestion=Fråga
-model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=Kategori
-model.resource.com.liferay.portlet.shopping.model.ShoppingItem=Artikel
-model.resource.com.liferay.portlet.softwarerepository.model.SRFrameworkVersion=Ramverksverion
-model.resource.com.liferay.portlet.softwarerepository.model.SRLicense=Licens
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductEntry=Produkt
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductVersion=Produktversion
-model.resource.com.liferay.portlet.wiki.model.WikiNode=Nod
-model.resource.com.liferay.portlet.wiki.model.WikiPage=Sida
-model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Definition
-model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Exempel
-model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Uppgift
 
 ##
 ## Action names
+##
+
+
+##
+## Layout types
 ##
 
 action.ADD_ARTICLE=Lägg till artikel
@@ -230,7 +207,7 @@ action.VIEW=Granska
 action.VIEW_USER=Granska användare
 
 ##
-## Layout types
+## Messages
 ##
 
 layout.types.article=Artikel
@@ -240,7 +217,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Messages
+## Currency
 ##
 
 1-day=1 dag
@@ -2541,10 +2518,6 @@ zip-postal=Postnummer
 zip=Postnummer
 zt_en=Kinesiska (Taiwan) till Engelska
 
-##
-## Currency
-##
-
 currency.AED=arabiska dirham
 currency.ALL=Albanian Lek
 currency.ANG=Neth Antilles Guilder
@@ -2694,4 +2667,3 @@ currency.YER=Yemen Riyal
 currency.ZAR=sydafrikanska rand
 currency.ZMK=Zambian Kwacha
 currency.ZWD=Zimbabwe Dollar
-

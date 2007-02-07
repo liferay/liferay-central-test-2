@@ -71,14 +71,6 @@ public class RoleServiceUtil {
 		return roleService.getRole(companyId, name);
 	}
 
-	public static java.util.List getRolePermissions(java.lang.String roleId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		RoleService roleService = RoleServiceFactory.getService();
-
-		return roleService.getRolePermissions(roleId);
-	}
-
 	public static java.util.List getUserGroupRoles(java.lang.String userId,
 		long groupId)
 		throws com.liferay.portal.PortalException, 

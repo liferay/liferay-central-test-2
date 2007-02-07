@@ -133,30 +133,14 @@ model.resource.com.liferay.portal.model.Organization=منظمة
 model.resource.com.liferay.portal.model.Role=دور
 model.resource.com.liferay.portal.model.User=مستخدم
 model.resource.com.liferay.portal.model.UserGroup=مجموعة المستخدمين
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=تصنيف
-model.resource.com.liferay.portlet.blogs.model.BlogsEntry=مدخل
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=مدخل
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=مجلّد
-model.resource.com.liferay.portlet.calendar.model.CalEvent=مناسبة
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=مستند
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=إختصار
-model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=مجلّد
-model.resource.com.liferay.portlet.imagegallery.model.IGFolder=مجلّد
-model.resource.com.liferay.portlet.imagegallery.model.IGImage=صورة
-model.resource.com.liferay.portlet.journal.model.JournalArticle=مقالة
-model.resource.com.liferay.portlet.journal.model.JournalStructure=هيكل
-model.resource.com.liferay.portlet.journal.model.JournalTemplate=قالب
-model.resource.com.liferay.portlet.messageboards.model.MBCategory=تصنيف
-model.resource.com.liferay.portlet.messageboards.model.MBMessage=رسالة
-model.resource.com.liferay.portlet.messageboards.model.MBTopic=موضوع
-model.resource.com.liferay.portlet.polls.model.PollsQuestion=سؤال
-model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=تصنيف
-model.resource.com.liferay.portlet.shopping.model.ShoppingItem=صنف
-model.resource.com.liferay.portlet.wiki.model.WikiNode=عقدة
-model.resource.com.liferay.portlet.wiki.model.WikiPage=صفحة
 
 ##
 ## Action names
+##
+
+
+##
+## Layout types
 ##
 
 action.ADD_ARTICLE=أضف مقالة
@@ -213,7 +197,7 @@ action.VIEW=إعرض
 action.VIEW_USER=إعرض مستخدم
 
 ##
-## Layout types
+## Messages
 ##
 
 layout.types.article=مقالة
@@ -222,7 +206,7 @@ layout.types.portlet=بورتلت
 layout.types.url=رابط تشعبي
 
 ##
-## Messages
+## Currency
 ##
 
 1-day=يوم واحد
@@ -2445,10 +2429,6 @@ zip-postal=الرمز البريدي
 zip=الرمز البريدي
 zt_en=تايواني إلى إنجليزي
 
-##
-## Currency
-##
-
 currency.AED=درهم اماراتي
 currency.ALL=ليك ألباني
 currency.ANG=جلدر جزر الأنتيل الهولندي
@@ -2598,4 +2578,3 @@ currency.YER=ريال يمني
 currency.ZAR=راند جنوب أفريقيا
 currency.ZMK=كواتشة زامبيا
 currency.ZWD=دولار زمبابوي
-

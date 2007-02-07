@@ -179,6 +179,12 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		return permissions;
 	}
 
+	public List getRolePermissions(String roleId)
+		throws PortalException, SystemException {
+
+		return RoleUtil.getPermissions(roleId);
+	}
+
 	public List getUserPermissions(String userId, long resourceId)
 		throws SystemException {
 

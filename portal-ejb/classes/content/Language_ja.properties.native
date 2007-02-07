@@ -137,37 +137,42 @@ model.resource.com.liferay.portal.model.Organization=構成
 model.resource.com.liferay.portal.model.Role=役割
 model.resource.com.liferay.portal.model.User=ユーザー
 model.resource.com.liferay.portal.model.UserGroup=ユーザ・グループ
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=部門
-model.resource.com.liferay.portlet.blogs.model.BlogsEntry=記入項目
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=記入項目
-model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=ホールダー
-model.resource.com.liferay.portlet.calendar.model.CalEvent=でき事
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=文書
-model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=近道
-model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=ホールダー
-model.resource.com.liferay.portlet.imagegallery.model.IGFolder=ホールダー
-model.resource.com.liferay.portlet.imagegallery.model.IGImage=イメージ
-model.resource.com.liferay.portlet.journal.model.JournalArticle=記事
-model.resource.com.liferay.portlet.journal.model.JournalStructure=構造
-model.resource.com.liferay.portlet.journal.model.JournalTemplate=型板
-model.resource.com.liferay.portlet.messageboards.model.MBCategory=部門
-model.resource.com.liferay.portlet.messageboards.model.MBMessage=メッセージ
-model.resource.com.liferay.portlet.messageboards.model.MBTopic=トピック
-model.resource.com.liferay.portlet.polls.model.PollsQuestion=質問
-model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=部門
-model.resource.com.liferay.portlet.shopping.model.ShoppingItem=項目
-model.resource.com.liferay.portlet.softwarerepository.model.SRFrameworkVersion=フレームワーク版
-model.resource.com.liferay.portlet.softwarerepository.model.SRLicense=免許証
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductEntry=プロダクト記入項目
-model.resource.com.liferay.portlet.softwarerepository.model.SRProductVersion=プロダクト版
-model.resource.com.liferay.portlet.wiki.model.WikiNode=ノード
-model.resource.com.liferay.portlet.wiki.model.WikiPage=ページ
-model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=定義
-model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=例
-model.resource.com.liferay.portlet.workflow.model.WorkflowTask=仕事
+model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Blogs の部門
+model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Blogs の記入項目
+model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=しおりの記入項目
+model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=しおりのホールダー
+model.resource.com.liferay.portlet.calendar.model.CalEvent=カレンダーのでき事
+model.resource.com.liferay.portlet.documentlibrary.model.DLFileEntry=文書の図書館文書
+model.resource.com.liferay.portlet.documentlibrary.model.DLFileShortcut=文書の図書館の近道
+model.resource.com.liferay.portlet.documentlibrary.model.DLFolder=文書の図書館のホールダー
+model.resource.com.liferay.portlet.imagegallery.model.IGFolder=イメージのギャラリーのホールダー
+model.resource.com.liferay.portlet.imagegallery.model.IGImage=イメージのギャラリーのイメージ
+model.resource.com.liferay.portlet.journal.model.JournalArticle=ジャーナル記事
+model.resource.com.liferay.portlet.journal.model.JournalStructure=ジャーナル構造
+model.resource.com.liferay.portlet.journal.model.JournalTemplate=ジャーナル型板
+model.resource.com.liferay.portlet.messageboards.model.MBCategory=伝言板の部門
+model.resource.com.liferay.portlet.messageboards.model.MBMessage=伝言板メッセージ
+model.resource.com.liferay.portlet.messageboards.model.MBTopic=伝言板のトピック
+model.resource.com.liferay.portlet.polls.model.PollsQuestion=投票の質問
+model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=ショッピング部門
+model.resource.com.liferay.portlet.shopping.model.ShoppingItem=ショッピング項目
+model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=ソフトウェアカタログフレームワーク版
+model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=ソフトウェアカタログプロダクト免許証
+model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=ソフトウェアカタログプロダクト記入項目
+model.resource.com.liferay.portlet.softwarecatalog.model.SCProductVersion=ソフトウェアカタログプロダクト版
+model.resource.com.liferay.portlet.wiki.model.WikiNode=Wiki ノード
+model.resource.com.liferay.portlet.wiki.model.WikiPage=Wiki のページ
+model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=ワークフロー定義
+model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=ワークフローの例
+model.resource.com.liferay.portlet.workflow.model.WorkflowTask=ワークフローの仕事
 
 ##
 ## Action names
+##
+
+
+##
+## Layout types
 ##
 
 action.ADD_ARTICLE=記事を加えなさい
@@ -233,7 +238,7 @@ action.VIEW=眺め
 action.VIEW_USER=眺めのユーザー
 
 ##
-## Layout types
+## Messages
 ##
 
 layout.types.article=記事
@@ -243,7 +248,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Messages
+## Currency
 ##
 
 1-day=1 日
@@ -2169,7 +2174,7 @@ the-organization-name-is-already-taken=構成名前は既に取られる。
 the-page-content-cannot-be-parsed-by-the-selected-format=ページの内容は指定フォーマットによって分析されることができ
 the-page-could-not-be-found=ページは見つけられることができなかった。
 the-page-does-not-have-a-a-valid-title=ページに有効なタイトルがない。
-the-permission-has-been-deleted=許可は削除された
+the-permission-was-deleted=許可は削除された。
 the-plugin-was-downloaded-successfully-and-is-now-being-installed=差込式は首尾よくダウンロードされ、今取付けられている。
 the-plugin-was-uploaded-successfully-and-is-now-being-installed=差込式は首尾よくアップロードされ、今取付けられている。
 the-portal-keeps-track-of-all-live-sessions=The portal keeps track of all live sessions and records useful information such as the user's remote host and IP, browser type, OS type, number of hits, and the URLs with timestamps of the pages accessed. To see this information, hit the <i>View Live Sessions</i> button.
@@ -2184,7 +2189,7 @@ the-repository-could-not-be-found=貯蔵場所は見つけることができな�
 the-resulting-first-page-must-be-a-portlet-page=生じる最初ページはportlet のページでなければならない。
 the-resulting-first-page-must-not-be-hidden=生じる最初ページは隠れてはならない。
 the-role-could-not-be-found=役割は見つけられることができなかった。
-the-role-permissions-have-been-updated=役割の許可は更新された
+the-role-permissions-was-updated=役割の許可は更新済だった。
 the-selected-entry-has-been-deleted=指定記入項目は削除された。
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=それが要求されたシステム役割であるので指定役割は削除される
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=指定構造は一つ以上の型板によって必須行うので削除されることができない。
@@ -2579,10 +2584,6 @@ zip-postal=Zip/Postal
 zip=ジッパー
 zt_en=英語への中国語(台湾)
 
-##
-## Currency
-##
-
 currency.AED=アラブ首長国連邦のディルハム
 currency.ALL=アルバニアのLek
 currency.ANG=Neth アンチル諸島のGuilder
@@ -2732,4 +2733,3 @@ currency.YER=イエメンのRiyal
 currency.ZAR=南アフリカのランド
 currency.ZMK=ザンビアのKwacha
 currency.ZWD=ジンバブエのドル
-
