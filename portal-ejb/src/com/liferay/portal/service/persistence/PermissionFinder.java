@@ -89,12 +89,16 @@ public class PermissionFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = "";
+			String sql = null;
+
+			StringBuffer sb = new StringBuffer();
 
 			if (groups.size() > 0) {
-				sql += "(";
-				sql += CustomSQLUtil.get(COUNT_BY_GROUPS_ROLES);
-				sql += ") ";
+				sb.append("(");
+				sb.append(CustomSQLUtil.get(COUNT_BY_GROUPS_ROLES));
+				sb.append(") ");
+
+				sql = sb.toString();
 
 				sql = StringUtil.replace(
 					sql, "[$PERMISSION_IDS$]",
@@ -102,11 +106,15 @@ public class PermissionFinder {
 				sql = StringUtil.replace(
 					sql, "[$GROUP_IDS$]", _getGroupIds(groups, "Groups_Roles"));
 
-				sql += "UNION ALL ";
+				sb = new StringBuffer();
 
-				sql += "(";
-				sql += CustomSQLUtil.get(COUNT_BY_GROUPS_PERMISSIONS);
-				sql += ") ";
+				sb.append(sql);
+
+				sb.append("UNION ALL (");
+				sb.append(CustomSQLUtil.get(COUNT_BY_GROUPS_PERMISSIONS));
+				sb.append(") ");
+
+				sql = sb.toString();
 
 				sql = StringUtil.replace(
 					sql, "[$PERMISSION_IDS$]",
@@ -115,32 +123,46 @@ public class PermissionFinder {
 					sql, "[$GROUP_IDS$]",
 					_getGroupIds(groups, "Groups_Permissions"));
 
-				sql += "UNION ALL ";
+				sb = new StringBuffer();
+
+				sb.append(sql);
+
+				sb.append("UNION ALL ");
 			}
 
-			sql += "(";
-			sql += CustomSQLUtil.get(COUNT_BY_USERS_ROLES);
-			sql += ") ";
+			sb.append("(");
+			sb.append(CustomSQLUtil.get(COUNT_BY_USERS_ROLES));
+			sb.append(") ");
+
+			sql = sb.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
 				_getPermissionIds(permissions, "Roles_Permissions"));
 
-			sql += "UNION ALL ";
+			sb = new StringBuffer();
 
-			sql += "(";
-			sql += CustomSQLUtil.get(COUNT_BY_USER_GROUP_ROLE);
-			sql += ") ";
+			sb.append(sql);
+
+			sb.append("UNION ALL (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP_ROLE));
+			sb.append(") ");
+
+			sql = sb.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
 				_getPermissionIds(permissions, "Roles_Permissions"));
 
-			sql += "UNION ALL ";
+			sb = new StringBuffer();
 
-			sql += "(";
-			sql += CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS);
-			sql += ") ";
+			sb.append(sql);
+
+			sb.append("UNION ALL (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS));
+			sb.append(") ");
+
+			sql = sb.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
@@ -200,12 +222,16 @@ public class PermissionFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = "";
+			String sql = null;
+
+			StringBuffer sb = new StringBuffer();
 
 			if (groups.size() > 0) {
-				sql += "(";
-				sql += CustomSQLUtil.get(COUNT_BY_GROUPS_PERMISSIONS);
-				sql += ") ";
+				sb.append("(");
+				sb.append(CustomSQLUtil.get(COUNT_BY_GROUPS_PERMISSIONS));
+				sb.append(") ");
+
+				sql = sb.toString();
 
 				sql = StringUtil.replace(
 					sql, "[$PERMISSION_IDS$]",
@@ -214,13 +240,19 @@ public class PermissionFinder {
 					sql, "[$GROUP_IDS$]",
 					_getGroupIds(groups, "Groups_Permissions"));
 
-				sql += "UNION ALL ";
+				sb = new StringBuffer();
+
+				sb.append(sql);
+
+				sb.append("UNION ALL ");
 			}
 
 			if (roles.size() > 0) {
-				sql += "(";
-				sql += CustomSQLUtil.get(COUNT_BY_ROLES_PERMISSIONS);
-				sql += ") ";
+				sb.append("(");
+				sb.append(CustomSQLUtil.get(COUNT_BY_ROLES_PERMISSIONS));
+				sb.append(") ");
+
+				sql = sb.toString();
 
 				sql = StringUtil.replace(
 					sql, "[$PERMISSION_IDS$]",
@@ -229,12 +261,18 @@ public class PermissionFinder {
 					sql, "[$ROLE_IDS$]",
 					_getRoleIds(roles, "Roles_Permissions"));
 
-				sql += "UNION ALL ";
+				sb = new StringBuffer();
+
+				sb.append(sql);
+
+				sb.append("UNION ALL ");
 			}
 
-			sql += "(";
-			sql += CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS);
-			sql += ") ";
+			sb.append("(");
+			sb.append(CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS));
+			sb.append(") ");
+
+			sql = sb.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",

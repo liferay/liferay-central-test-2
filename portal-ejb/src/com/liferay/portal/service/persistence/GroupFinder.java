@@ -219,9 +219,15 @@ public class GroupFinder {
 			HibernateUtil.closeSession(session);
 		}
 
-		throw new NoSuchGroupException(
-			"No Group exists with the key {companyId=" + companyId + ", name=" +
-				name + "}");
+		StringBuffer sb = new StringBuffer();
+
+		sb.append("No Group exists with the key {companyId=");
+		sb.append(companyId);
+		sb.append(", name=");
+		sb.append(name);
+		sb.append("}");
+
+		throw new NoSuchGroupException(sb.toString());
 	}
 
 	public static List findByC_N_D(
@@ -263,33 +269,56 @@ public class GroupFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = null;
+			StringBuffer sb = new StringBuffer();
 
-			sql = "(";
-			sql += CustomSQLUtil.get(FIND_BY_C_N_D);
+			sb.append("(");
+
+			sb.append(CustomSQLUtil.get(FIND_BY_C_N_D));
+
+			String sql = sb.toString();
+
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params1));
 			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params1));
-			sql += ")";
+
+			sb = new StringBuffer();
+
+			sb.append(sql);
+
+			sb.append(")");
 
 			if (Validator.isNotNull(userId)) {
-				sql += " UNION ";
+				sb.append(" UNION (");
 
-				sql += "(";
-				sql += CustomSQLUtil.get(FIND_BY_C_N_D);
+				sb.append(CustomSQLUtil.get(FIND_BY_C_N_D));
+
+				sql = sb.toString();
+
 				sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params2));
 				sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params2));
-				sql += ")";
 
-				sql += " UNION ";
+				sb = new StringBuffer();
 
-				sql += "(";
-				sql += CustomSQLUtil.get(FIND_BY_C_N_D);
+				sb.append(sql);
+
+				sb.append(") UNION (");
+
+				sb.append(CustomSQLUtil.get(FIND_BY_C_N_D));
+
+				sql = sb.toString();
+
 				sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params3));
 				sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params3));
-				sql += ")";
+
+				sb = new StringBuffer();
+
+				sb.append(sql);
+
+				sb.append(")");
 			}
 
-			sql += " ORDER BY groupName ASC";
+			sb.append(" ORDER BY groupName ASC");
+
+			sql = sb.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -527,7 +556,12 @@ public class GroupFinder {
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				join = join.substring(pos + 5, join.length()) + " AND ";
+				StringBuffer sb = new StringBuffer();
+
+				sb.append(join.substring(pos + 5, join.length()));
+				sb.append(" AND ");
+
+				join = sb.toString();
 			}
 		}
 

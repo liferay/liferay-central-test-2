@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.util.CollectionFactory;
 
@@ -56,7 +57,13 @@ public class PortletConfigFactory {
 		String poolId = PortletConfigFactory.class.getName();
 
 		if (!portlet.isWARFile()) {
-			poolId += "." + portlet.getCompanyId();
+			StringBuffer sb = new StringBuffer();
+
+			sb.append(poolId);
+			sb.append(StringPool.PERIOD);
+			sb.append(portlet.getCompanyId());
+
+			poolId = sb.toString();
 		}
 
 		Map map = (Map)_pool.get(poolId);
@@ -96,7 +103,11 @@ public class PortletConfigFactory {
 		String poolId = PortletConfigFactory.class.getName();
 
 		if (!portlet.isWARFile()) {
-			poolId += "." + portlet.getCompanyId();
+			StringBuffer sb = new StringBuffer();
+			sb.append(poolId);
+			sb.append(".");
+			sb.append(portlet.getCompanyId());
+			poolId = sb.toString();
 		}
 
 		Map map = (Map)_pool.get(poolId);

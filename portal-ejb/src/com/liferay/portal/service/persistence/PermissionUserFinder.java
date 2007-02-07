@@ -309,22 +309,26 @@ public class PermissionUserFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = "";
+			StringBuffer sb = new StringBuffer();
 
-			sql += "(" + CustomSQLUtil.get(FIND_BY_ADMIN_ROLE) + ") ";
-			sql += "UNION ";
-			sql += "(" + CustomSQLUtil.get(FIND_BY_USER_PERMISSION) + ") ";
-			sql += "UNION ";
-			sql += "(" + CustomSQLUtil.get(FIND_BY_GROUP_PERMISSION) + ") ";
-			sql += "UNION ";
-			sql += "(" + CustomSQLUtil.get(FIND_BY_ORG_PERMISSION) + ") ";
-			sql += "UNION ";
-			sql += "(" + CustomSQLUtil.get(FIND_BY_USER_ROLE) + ") ";
-			sql += "UNION ";
-			sql += "(" + CustomSQLUtil.get(FIND_BY_GROUP_ROLE) + ") ";
-			sql += "UNION ";
-			sql += "(" + CustomSQLUtil.get(FIND_BY_ORG_ROLE) + ") ";
-			sql += "ORDER BY lastName ASC, firstName ASC, middleName ASC ";
+			sb.append("(");
+			sb.append(CustomSQLUtil.get(FIND_BY_ADMIN_ROLE));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_USER_PERMISSION));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_GROUP_PERMISSION));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_ORG_PERMISSION));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_USER_ROLE));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_GROUP_ROLE));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_ORG_ROLE));
+			sb.append(") ");
+			sb.append("ORDER BY lastName ASC, firstName ASC, middleName ASC ");
+
+			String sql = sb.toString();
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
@@ -397,14 +401,18 @@ public class PermissionUserFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = "";
+			StringBuffer sb = new StringBuffer();
 
-			sql += "(" + CustomSQLUtil.get(FIND_BY_ADMIN_ROLE) + ") ";
-			sql += "UNION ";
-			sql += "(" + CustomSQLUtil.get(FIND_BY_USER_PERMISSION) + ") ";
-			sql += "UNION ";
-			sql += "(" + CustomSQLUtil.get(FIND_BY_ORG_GROUP_PERMISSION) + ") ";
-			sql += "ORDER BY lastName ASC, firstName ASC, middleName ASC ";
+			sb.append("(");
+			sb.append(CustomSQLUtil.get(FIND_BY_ADMIN_ROLE));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_USER_PERMISSION));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_ORG_GROUP_PERMISSION));
+			sb.append(") ");
+			sb.append("ORDER BY lastName ASC, firstName ASC, middleName ASC ");
+
+			String sql = sb.toString();
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 

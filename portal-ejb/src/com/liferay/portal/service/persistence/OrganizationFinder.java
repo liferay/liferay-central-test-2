@@ -201,7 +201,14 @@ public class OrganizationFinder {
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
 				parentOrganizationComparator);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
-			sql += " ORDER BY orgName ASC";
+
+			StringBuffer sb = new StringBuffer();
+
+			sb.append(sql);
+
+			sb.append(" ORDER BY orgName ASC");
+
+			sql = sb.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -271,20 +278,29 @@ public class OrganizationFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = null;
+			StringBuffer sb = new StringBuffer();
 
-			sql = "(";
-			sql += CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C);
+			sb.append("(");
+
+			sb.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
+
+			String sql = sb.toString();
+
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin("groupsPermissions"));
 			sql = StringUtil.replace(
 				sql, "[$WHERE$]", _getWhere("groupsPermissions"));
-			sql += ")";
 
-			sql += " UNION ";
+			sb = new StringBuffer();
 
-			sql += "(";
-			sql += CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C);
+			sb.append(sql);
+
+			sb.append(") UNION (");
+
+			sb.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
+
+			sql = sb.toString();
+
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin("orgGroupPermission"));
 			sql = StringUtil.replace(
@@ -293,7 +309,14 @@ public class OrganizationFinder {
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
 				parentOrganizationComparator);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
-			sql += ")";
+
+			sb = new StringBuffer();
+
+			sb.append(sql);
+
+			sb.append(")");
+
+			sql = sb.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -369,20 +392,29 @@ public class OrganizationFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = null;
+			StringBuffer sb = new StringBuffer();
 
-			sql = "(";
-			sql += CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C);
+			sb.append("(");
+
+			sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
+
+			String sql = sb.toString();
+
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin("groupsPermissions"));
 			sql = StringUtil.replace(
 				sql, "[$WHERE$]", _getWhere("groupsPermissions"));
-			sql += ")";
 
-			sql += " UNION ";
+			sb = new StringBuffer();
 
-			sql += "(";
-			sql += CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C);
+			sb.append(sql);
+
+			sb.append(") UNION (");
+
+			sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
+
+			sql = sb.toString();
+
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin("orgGroupPermission"));
 			sql = StringUtil.replace(
@@ -391,9 +423,16 @@ public class OrganizationFinder {
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
 				parentOrganizationComparator);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
-			sql += ")";
 
-			sql += " ORDER BY orgName ASC";
+			sb = new StringBuffer();
+
+			sb.append(sql);
+
+			sb.append(") ");
+
+			sb.append("ORDER BY orgName ASC");
+
+			sql = sb.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -551,7 +590,12 @@ public class OrganizationFinder {
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				join = join.substring(pos + 5, join.length()) + " AND ";
+				StringBuffer sb = new StringBuffer();
+
+				sb.append(join.substring(pos + 5, join.length()));
+				sb.append(" AND ");
+
+				join = sb.toString();
 			}
 		}
 

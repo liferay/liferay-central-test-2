@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.WebKeys;
@@ -68,7 +69,13 @@ public class StrutsResourceBundle extends ResourceBundle {
 			 key.equals(WebKeys.JAVAX_PORTLET_SHORT_TITLE) ||
 			 key.equals(WebKeys.JAVAX_PORTLET_KEYWORDS))) {
 
-			key += "." + _portletName;
+			StringBuffer sb = new StringBuffer();
+
+			sb.append(key);
+			sb.append(StringPool.PERIOD);
+			sb.append(_portletName);
+
+			key = sb.toString();
 		}
 
 		try {
