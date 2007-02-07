@@ -314,7 +314,17 @@ public class LiveUsers {
 	}
 
 	private void _signOut(String sesId, String userId) throws SystemException {
-		Map liveUsers = _updateGroupStatus(userId, false);
+		List userTrackers = _getUserTrackers(userId);
+
+		Map liveUsers = null;
+
+		if (userTrackers.size() <= 1) {
+			liveUsers = _updateGroupStatus(userId, false);
+		}
+
+		if (liveUsers == null) {
+			liveUsers = _getLiveUsers();
+		}
 
 		Map sessionUsers = _getSessionUsers(liveUsers);
 
