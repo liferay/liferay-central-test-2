@@ -239,6 +239,12 @@ Liferay.Util = {
 		return entry;
 	},
 
+	disableEsc: function() {
+		if ((document.all) && (event.keyCode == 27)) {
+			event.returnValue = false;
+		}
+	},
+
 	getSelectedIndex: function(col) {
 		for (var i = 0; i < col.length; i++) {
 			if (col[i].checked == true) {

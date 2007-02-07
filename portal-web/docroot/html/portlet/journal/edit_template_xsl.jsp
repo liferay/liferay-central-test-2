@@ -119,7 +119,7 @@ else {
 		</applet>
 	</c:when>
 	<c:otherwise>
-		<textarea class="form-text" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" style="font-family: 'Courier New', courier, monospace; font-size: 12; width: 100%; height: 540px;" wrap="off" onKeyDown="Liferay.Util.checkTab(this); disableEsc();"></textarea>
+		<textarea class="form-text" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" style="font-family: 'Courier New', courier, monospace; font-size: 12; width: 100%; height: 540px;" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
 	</c:otherwise>
 </c:choose>
 

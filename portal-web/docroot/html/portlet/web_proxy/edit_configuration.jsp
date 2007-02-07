@@ -124,7 +124,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<textarea class="form-text" name="<portlet:namespace />stylesheet" style="height: 300px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); disableEsc();"><%= stylesheet %></textarea>
+		<textarea class="form-text" name="<portlet:namespace />stylesheet" style="height: 300px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= stylesheet %></textarea>
 	</td>
 </tr>
 </table>

@@ -126,7 +126,7 @@ String htmlAttributes =
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<textarea class="form-text" name="<portlet:namespace />htmlAttributes" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); disableEsc();"><%= htmlAttributes %></textarea>
+		<textarea class="form-text" name="<portlet:namespace />htmlAttributes" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= htmlAttributes %></textarea>
 	</td>
 </tr>
 </table>

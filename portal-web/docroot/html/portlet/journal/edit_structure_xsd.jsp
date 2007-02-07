@@ -105,7 +105,7 @@ boolean useEditorApplet = editorType.equals("applet");
 		</applet>
 	</c:when>
 	<c:otherwise>
-		<textarea class="form-text" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" style="font-family: 'Courier New', courier, monospace; font-size: 12; width: 100%; height: 540px" wrap="off" onKeyDown="Liferay.Util.checkTab(this); disableEsc();"></textarea>
+		<textarea class="form-text" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" style="font-family: 'Courier New', courier, monospace; font-size: 12; width: 100%; height: 540px" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
 	</c:otherwise>
 </c:choose>
 
