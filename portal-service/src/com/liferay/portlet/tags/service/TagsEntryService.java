@@ -39,14 +39,15 @@ public interface TagsEntryService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String name)
+		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, int begin, int end)
+		java.lang.String name, java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public int searchCount(java.lang.String companyId, java.lang.String name)
+	public int searchCount(java.lang.String companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long entryId,

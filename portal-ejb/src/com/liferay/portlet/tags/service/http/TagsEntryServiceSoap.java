@@ -60,11 +60,11 @@ public class TagsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntrySoap[] search(
-		java.lang.String companyId, java.lang.String name)
-		throws RemoteException {
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String[] properties) throws RemoteException {
 		try {
 			java.util.List returnValue = TagsEntryServiceUtil.search(companyId,
-					name);
+					name, properties);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
 		}
@@ -75,11 +75,12 @@ public class TagsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntrySoap[] search(
-		java.lang.String companyId, java.lang.String name, int begin, int end)
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
 		throws RemoteException {
 		try {
 			java.util.List returnValue = TagsEntryServiceUtil.search(companyId,
-					name, begin, end);
+					name, properties, begin, end);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
 		}
@@ -90,9 +91,11 @@ public class TagsEntryServiceSoap {
 	}
 
 	public static int searchCount(java.lang.String companyId,
-		java.lang.String name) throws RemoteException {
+		java.lang.String name, java.lang.String[] properties)
+		throws RemoteException {
 		try {
-			int returnValue = TagsEntryServiceUtil.searchCount(companyId, name);
+			int returnValue = TagsEntryServiceUtil.searchCount(companyId, name,
+					properties);
 
 			return returnValue;
 		}

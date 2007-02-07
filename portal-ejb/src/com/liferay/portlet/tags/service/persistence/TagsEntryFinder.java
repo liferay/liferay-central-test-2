@@ -23,9 +23,12 @@
 package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -44,13 +47,14 @@ import org.hibernate.Session;
  */
 public class TagsEntryFinder {
 
-	public static String COUNT_BY_C_N =
-		TagsEntryFinder.class.getName() + ".countByC_N";
+	public static String COUNT_BY_C_N_P =
+		TagsEntryFinder.class.getName() + ".countByC_N_P";
 
-	public static String FIND_BY_C_N =
-		TagsEntryFinder.class.getName() + ".findByC_N";
+	public static String FIND_BY_C_N_P =
+		TagsEntryFinder.class.getName() + ".findByC_N_P";
 
-	public static int countByC_N(String companyId, String name)
+	public static int countByC_N_P(
+			String companyId, String name, String[] properties)
 		throws SystemException {
 
 		Session session = null;
@@ -58,7 +62,9 @@ public class TagsEntryFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_N);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_N_P);
+
+			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(properties));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -68,6 +74,7 @@ public class TagsEntryFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			_setJoin(qPos, properties);
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(name);
@@ -92,14 +99,17 @@ public class TagsEntryFinder {
 		}
 	}
 
-	public static List findByC_N(String companyId, String name)
+	public static List findByC_N_P(
+			String companyId, String name, String[] properties)
 		throws SystemException {
 
-		return findByC_N(companyId, name, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		return findByC_N_P(
+			companyId, name, properties, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public static List findByC_N(
-			String companyId, String name, int begin, int end)
+	public static List findByC_N_P(
+			String companyId, String name, String[] properties, int begin,
+			int end)
 		throws SystemException {
 
 		Session session = null;
@@ -107,7 +117,9 @@ public class TagsEntryFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_N);
+			String sql = CustomSQLUtil.get(FIND_BY_C_N_P);
+
+			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(properties));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -117,6 +129,7 @@ public class TagsEntryFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			_setJoin(qPos, properties);
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(name);
@@ -128,6 +141,50 @@ public class TagsEntryFinder {
 		}
 		finally {
 			HibernateUtil.closeSession(session);
+		}
+	}
+
+	private static String _getJoin(String[] properties) {
+		if (properties.length == 0) {
+			return StringPool.BLANK;
+		}
+		else {
+			StringBuffer sb = new StringBuffer();
+
+			sb.append(" INNER JOIN TagsProperty ON ");
+			sb.append(" (TagsProperty.entryId = TagsEntry.entryId) AND ");
+
+			for (int i = 0; i < properties.length; i++) {
+				sb.append("(TagsProperty.key_ = ? AND ");
+				sb.append("TagsProperty.value = ?) ");
+
+				if ((i + 1) < properties.length) {
+					sb.append(" AND ");
+				}
+			}
+
+			return sb.toString();
+		}
+	}
+
+	private static void _setJoin(QueryPos qPos, String[] properties) {
+		for (int i = 0; i < properties.length; i++) {
+			String[] property = StringUtil.split(properties[i], "|");
+
+			String key = StringPool.BLANK;
+
+			if (property.length > 0) {
+				key = GetterUtil.getString(property[0]);
+			}
+
+			String value = StringPool.BLANK;
+
+			if (property.length > 1) {
+				value = GetterUtil.getString(property[1]);
+			}
+
+			qPos.add(key);
+			qPos.add(value);
 		}
 	}
 

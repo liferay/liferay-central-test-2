@@ -109,11 +109,21 @@
 				}
 			);
 
-			html = "<select><option></option>" + html + "</select>";
-
 			if (propertyKey != "") {
+				html = "<select id=\"<portlet:namespace />" + propertyKey + "FilterSel\"><option></option>" + html + "</select>";
+
 				<portlet:namespace />TagsAdmin.searchPropertiesSpan.append("<span style=\"padding: 0px 5px 0px 10px;\">" + propertyKey + "</span>");
 				<portlet:namespace />TagsAdmin.searchPropertiesSpan.append(html);
+
+				var filterSel = _$J("#<portlet:namespace />" + propertyKey + "FilterSel");
+
+				filterSel.change(
+					function() {
+						<portlet:namespace />TagsAdmin.searchFilters[propertyKey] = this.value;
+
+						<portlet:namespace />TagsAdmin.searchEntries();
+					}
+				);
 			}
 		},
 
@@ -144,7 +154,9 @@
 				}
 			);
 
-			html += <portlet:namespace />TagsAdmin.addProperty("0", "", "");
+			if (properties.length == 0) {
+				html += <portlet:namespace />TagsAdmin.addProperty("0", "", "");
+			}
 
 			<portlet:namespace />TagsAdmin.addProperties(html);
 		},
@@ -153,7 +165,8 @@
 			Liferay.Service.Tags.TagsEntry.search(
 				{
 					companyId: "<%= company.getCompanyId() %>",
-					name: "%"
+					name: "%",
+					properties: ""
 				},
 				<portlet:namespace />TagsAdmin.displayEntries
 			);
@@ -162,7 +175,7 @@
 		},
 
 		getFilters: function() {
-			var propertyKeys = new Array("Category","Country");
+			var propertyKeys = new Array("Category", "Country");
 
 			if (propertyKeys.length > 0) {
 				<portlet:namespace />TagsAdmin.searchPropertiesSpan.html("Filter By: ");
@@ -205,6 +218,8 @@
 			this.deleteEntryButton = _$J("#<portlet:namespace />deleteEntryButton");
 			this.updateEntryButton = _$J("#<portlet:namespace />updateEntryButton");
 
+			this.searchFilters = {};
+
 			// Show all entries
 
 			<portlet:namespace />TagsAdmin.getEntries();
@@ -232,14 +247,14 @@
 				}
 			);
 
-			<portlet:namespace />TagsAdmin.addEntryNameInput.focus();
-
 			<portlet:namespace />TagsAdmin.keywordsInput.bind(
 				"keyup", this,
 				function(event) {
 					event.data.searchEntries();
 				}
 			);
+
+			<portlet:namespace />TagsAdmin.keywordsInput.focus();
 
 			// Buttons
 
@@ -273,10 +288,26 @@
 		searchEntries: function() {
 			var keywords = "%" + <portlet:namespace />TagsAdmin.keywordsInput.val() + "%";
 
+			var properties = "";
+
+			_$J.each(
+				<portlet:namespace />TagsAdmin.searchFilters,
+				function(propertyKey, propertyValue) {
+					if (propertyValue != "") {
+						if (properties != "") {
+							properties += ",";
+						}
+
+						properties += propertyKey + "|" + propertyValue;
+					}
+				}
+			);
+
 			Liferay.Service.Tags.TagsEntry.search(
 				{
 					companyId: "<%= company.getCompanyId() %>",
-					name: keywords
+					name: keywords,
+					properties: properties
 				},
 				<portlet:namespace />TagsAdmin.displayEntries
 			);
@@ -323,12 +354,14 @@
 
 <form name="<portlet:namespace />fm">
 
-<fieldset id="<portlet:namespace />addEntryFields">
-	<legend>Add Tag</legend>
+<fieldset id="<portlet:namespace />searchEntriesFields">
+	<legend>Search Tag</legend>
 
-	<input class="form-text" name="<portlet:namespace />addEntryName" type="text" />
+	<input class="form-text" name="<portlet:namespace />keywords" type="text" />
 
-	<input class="portlet-form-button" id="<portlet:namespace />addEntryButton" type="button" value="Save" />
+	<span id="<portlet:namespace />searchPropertiesSpan" style="padding-left: 10px;"></span>
+
+	<div id="<portlet:namespace />searchResultsDiv" /></div>
 </fieldset>
 
 <fieldset id="<portlet:namespace />editEntryFields">
@@ -353,14 +386,12 @@
 	<table border="0" cellpadding="0" cellspacing="0" id="<portlet:namespace />propertiesTable"></table>
 </fieldset>
 
-<fieldset id="<portlet:namespace />searchEntriesFields">
-	<legend>Search Tag</legend>
+<fieldset id="<portlet:namespace />addEntryFields">
+	<legend>Add Tag</legend>
 
-	<input class="form-text" name="<portlet:namespace />keywords" type="text" />
+	<input class="form-text" name="<portlet:namespace />addEntryName" type="text" />
 
-	<span id="<portlet:namespace />searchPropertiesSpan" style="padding-left: 10px;"></span>
-
-	<div id="<portlet:namespace />searchResultsDiv" /></div>
+	<input class="portlet-form-button" id="<portlet:namespace />addEntryButton" type="button" value="Save" />
 </fieldset>
 
 </form>

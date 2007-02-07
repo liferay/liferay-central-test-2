@@ -46,27 +46,27 @@ public class TagsEntryServiceUtil {
 	}
 
 	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name)
+		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
-		return tagsEntryService.search(companyId, name);
+		return tagsEntryService.search(companyId, name, properties);
 	}
 
 	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name, int begin, int end)
+		java.lang.String name, java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
-		return tagsEntryService.search(companyId, name, begin, end);
+		return tagsEntryService.search(companyId, name, properties, begin, end);
 	}
 
 	public static int searchCount(java.lang.String companyId,
-		java.lang.String name)
+		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
-		return tagsEntryService.searchCount(companyId, name);
+		return tagsEntryService.searchCount(companyId, name, properties);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(

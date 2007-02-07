@@ -67,13 +67,15 @@ public interface TagsEntryLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException;
-
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, int begin, int end)
+		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;
 
-	public int searchCount(java.lang.String companyId, java.lang.String name)
+	public java.util.List search(java.lang.String companyId,
+		java.lang.String name, java.lang.String[] properties, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int searchCount(java.lang.String companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long entryId,

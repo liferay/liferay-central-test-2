@@ -104,25 +104,28 @@ public class TagsEntryLocalServiceUtil {
 	}
 
 	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.search(companyId, name);
-	}
-
-	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name, int begin, int end)
+		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
-		return tagsEntryLocalService.search(companyId, name, begin, end);
+		return tagsEntryLocalService.search(companyId, name, properties);
+	}
+
+	public static java.util.List search(java.lang.String companyId,
+		java.lang.String name, java.lang.String[] properties, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.search(companyId, name, properties, begin,
+			end);
 	}
 
 	public static int searchCount(java.lang.String companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+		java.lang.String name, java.lang.String[] properties)
+		throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
-		return tagsEntryLocalService.searchCount(companyId, name);
+		return tagsEntryLocalService.searchCount(companyId, name, properties);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(

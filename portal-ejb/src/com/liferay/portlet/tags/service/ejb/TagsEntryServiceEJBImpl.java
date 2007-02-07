@@ -55,27 +55,30 @@ public class TagsEntryServiceEJBImpl implements TagsEntryService, SessionBean {
 	}
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String name)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return TagsEntryServiceFactory.getTxImpl().search(companyId, name);
-	}
-
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, int begin, int end)
+		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return TagsEntryServiceFactory.getTxImpl().search(companyId, name,
-			begin, end);
+			properties);
 	}
 
-	public int searchCount(java.lang.String companyId, java.lang.String name)
+	public java.util.List search(java.lang.String companyId,
+		java.lang.String name, java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return TagsEntryServiceFactory.getTxImpl().searchCount(companyId, name);
+		return TagsEntryServiceFactory.getTxImpl().search(companyId, name,
+			properties, begin, end);
+	}
+
+	public int searchCount(java.lang.String companyId, java.lang.String name,
+		java.lang.String[] properties)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return TagsEntryServiceFactory.getTxImpl().searchCount(companyId, name,
+			properties);
 	}
 
 	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long entryId,

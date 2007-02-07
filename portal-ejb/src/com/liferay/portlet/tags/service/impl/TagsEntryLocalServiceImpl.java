@@ -63,9 +63,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		Date now = new Date();
 		name = name.trim().toLowerCase();
 
-		if (Validator.isNull(name)) {
-			throw new EntryNameException();
-		}
+		validate(name);
 
 		if (hasEntry(user.getCompanyId(), name)) {
 			throw new DuplicateEntryException();
@@ -135,20 +133,25 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return TagsEntryUtil.findByC_N(companyId, name);
 	}
 
-	public List search(String companyId, String name) throws SystemException {
-		return TagsEntryFinder.findByC_N(companyId, name);
-	}
-
-	public List search(String companyId, String name, int begin, int end)
+	public List search(String companyId, String name, String[] properties)
 		throws SystemException {
 
-		return TagsEntryFinder.findByC_N(companyId, name, begin, end);
+		return TagsEntryFinder.findByC_N_P(companyId, name, properties);
 	}
 
-	public int searchCount(String companyId, String name)
+	public List search(
+			String companyId, String name, String[] properties, int begin,
+			int end)
 		throws SystemException {
 
-		return TagsEntryFinder.countByC_N(companyId, name);
+		return TagsEntryFinder.findByC_N_P(
+			companyId, name, properties, begin, end);
+	}
+
+	public int searchCount(String companyId, String name, String[] properties)
+		throws SystemException {
+
+		return TagsEntryFinder.countByC_N_P(companyId, name, properties);
 	}
 
 	public TagsEntry updateEntry(long entryId, String name)
@@ -156,9 +159,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		name = name.trim().toLowerCase();
 
-		if (Validator.isNull(name)) {
-			throw new EntryNameException();
-		}
+		validate(name);
 
 		TagsEntry entry = TagsEntryUtil.findByPrimaryKey(entryId);
 
@@ -237,6 +238,23 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 
 		return entry;
+	}
+
+	protected void validate(String name)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(name)) {
+			throw new EntryNameException();
+		}
+		else {
+			char[] c = name.toCharArray();
+
+			for (int i = 0; i < c.length; i++) {
+				if (!Validator.isChar(c[i]) && (c[i] != ' ')) {
+					throw new EntryNameException();
+				}
+			}
+		}
 	}
 
 }

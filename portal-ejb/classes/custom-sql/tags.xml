@@ -1,26 +1,30 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByC_N">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByC_N_P">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
 			FROM
 				TagsEntry
+			[$JOIN$]
 			WHERE
 				(TagsEntry.companyId = ?) AND
 				(TagsEntry.name LIKE ? OR ? IS NULL)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByC_N">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByC_N_P">
 		<![CDATA[
 			SELECT
 				{TagsEntry.*}
 			FROM
 				TagsEntry
+			[$JOIN$]
 			WHERE
 				(TagsEntry.companyId = ?) AND
 				(TagsEntry.name LIKE ? OR ? IS NULL)
+			ORDER BY
+				TagsEntry.name ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.countByCompanyId">
@@ -41,6 +45,8 @@
 				TagsProperty
 			WHERE
 				(TagsProperty.companyId = ?)
+			ORDER BY
+				propertyKey ASC
 		]]>
 	</sql>
 </custom-sql>

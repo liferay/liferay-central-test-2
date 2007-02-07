@@ -137,5 +137,6 @@
 		<exception>DuplicateEntry</exception>
 		<exception>EntryName</exception>
 		<exception>PropertyKey</exception>
+		<exception>PropertyValue</exception>
 	</exceptions>
 </service-builder>

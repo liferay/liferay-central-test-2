@@ -52,20 +52,25 @@ public class TagsEntryServiceImpl
 		TagsEntryLocalServiceUtil.deleteEntry(entryId);
 	}
 
-	public List search(String companyId, String name) throws SystemException {
-		return TagsEntryLocalServiceUtil.search(companyId, name);
-	}
-
-	public List search(String companyId, String name, int begin, int end)
+	public List search(String companyId, String name, String[] properties)
 		throws SystemException {
 
-		return TagsEntryLocalServiceUtil.search(companyId, name, begin, end);
+		return TagsEntryLocalServiceUtil.search(companyId, name, properties);
 	}
 
-	public int searchCount(String companyId, String name)
+	public List search(
+		String companyId, String name, String[] properties, int begin, int end)
 		throws SystemException {
 
-		return TagsEntryLocalServiceUtil.searchCount(companyId, name);
+		return TagsEntryLocalServiceUtil.search(
+			companyId, name, properties, begin, end);
+	}
+
+	public int searchCount(String companyId, String name, String[] properties)
+		throws SystemException {
+
+		return TagsEntryLocalServiceUtil.searchCount(
+			companyId, name, properties);
 	}
 
 	public TagsEntry updateEntry(long entryId, String name)

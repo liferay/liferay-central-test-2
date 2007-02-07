@@ -49,26 +49,28 @@ public class TagsEntryServiceJSON {
 	}
 
 	public static JSONArray search(java.lang.String companyId,
-		java.lang.String name)
+		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		java.util.List returnValue = TagsEntryServiceUtil.search(companyId, name);
+		java.util.List returnValue = TagsEntryServiceUtil.search(companyId,
+				name, properties);
 
 		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONArray search(java.lang.String companyId,
-		java.lang.String name, int begin, int end)
+		java.lang.String name, java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		java.util.List returnValue = TagsEntryServiceUtil.search(companyId,
-				name, begin, end);
+				name, properties, begin, end);
 
 		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static int searchCount(java.lang.String companyId,
-		java.lang.String name)
+		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		int returnValue = TagsEntryServiceUtil.searchCount(companyId, name);
+		int returnValue = TagsEntryServiceUtil.searchCount(companyId, name,
+				properties);
 
 		return returnValue;
 	}

@@ -29,6 +29,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.tags.PropertyKeyException;
+import com.liferay.portlet.tags.PropertyValueException;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
@@ -58,7 +59,7 @@ public class TagsPropertyLocalServiceImpl
 		User user = UserUtil.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		validate(key);
+		validate(key, value);
 
 		long propertyId = CounterLocalServiceUtil.increment(
 			Counter.class.getName());
@@ -151,7 +152,7 @@ public class TagsPropertyLocalServiceImpl
 			long propertyId, String key, String value)
 		throws PortalException, SystemException {
 
-		validate(key);
+		validate(key, value);
 
 		TagsProperty property = TagsPropertyUtil.findByPrimaryKey(propertyId);
 
@@ -164,11 +165,33 @@ public class TagsPropertyLocalServiceImpl
 		return property;
 	}
 
-	protected void validate(String key)
+	protected void validate(String key, String value)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(key)) {
 			throw new PropertyKeyException();
+		}
+		else {
+			char[] c = key.toCharArray();
+
+			for (int i = 0; i < c.length; i++) {
+				if (!Validator.isChar(c[i]) && (c[i] != ' ')) {
+					throw new PropertyKeyException();
+				}
+			}
+		}
+
+		if (Validator.isNull(value)) {
+			throw new PropertyValueException();
+		}
+		else {
+			char[] c = value.toCharArray();
+
+			for (int i = 0; i < c.length; i++) {
+				if (!Validator.isChar(c[i]) && (c[i] != ' ')) {
+					throw new PropertyValueException();
+				}
+			}
 		}
 	}
 

@@ -108,7 +108,8 @@ public class TagsEntryServiceHttp {
 	}
 
 	public static java.util.List search(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String name)
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = companyId;
@@ -123,8 +124,14 @@ public class TagsEntryServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = properties;
+
+			if (properties == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"search", new Object[] { paramObj0, paramObj1 });
+					"search", new Object[] { paramObj0, paramObj1, paramObj2 });
 			Object returnObj = null;
 
 			try {
@@ -147,7 +154,8 @@ public class TagsEntryServiceHttp {
 	}
 
 	public static java.util.List search(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String name, int begin, int end)
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = companyId;
@@ -162,11 +170,19 @@ public class TagsEntryServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new IntegerWrapper(begin);
-			Object paramObj3 = new IntegerWrapper(end);
+			Object paramObj2 = properties;
+
+			if (properties == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj3 = new IntegerWrapper(begin);
+			Object paramObj4 = new IntegerWrapper(end);
 			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
 					"search",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 			Object returnObj = null;
 
 			try {
@@ -189,7 +205,8 @@ public class TagsEntryServiceHttp {
 	}
 
 	public static int searchCount(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String name)
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = companyId;
@@ -204,8 +221,15 @@ public class TagsEntryServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = properties;
+
+			if (properties == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"searchCount", new Object[] { paramObj0, paramObj1 });
+					"searchCount",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 			Object returnObj = null;
 
 			try {
