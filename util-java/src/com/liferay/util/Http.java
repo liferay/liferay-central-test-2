@@ -168,6 +168,10 @@ public class Http {
 		}
 	}
 
+	public static HttpClient getClient() {
+		return _instance._client;
+	}
+
 	public static String getCompleteURL(HttpServletRequest req) {
 		StringBuffer completeURL = req.getRequestURL();
 
@@ -625,6 +629,14 @@ public class Http {
 		return xml;
 	}
 
+	private Http() {
+		_client = new HttpClient();
+	}
+
 	private static Log _log = LogFactory.getLog(Http.class);
+
+	private static Http _instance = new Http();
+
+	private HttpClient _client;
 
 }
