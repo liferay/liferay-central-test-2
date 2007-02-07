@@ -66,6 +66,7 @@ public class WebAppPool {
 
 		if (map == null) {
 			map = CollectionFactory.getSyncHashMap();
+
 			_webAppPool.put(webAppId, map);
 		}
 

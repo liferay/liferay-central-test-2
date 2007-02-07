@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -19,59 +20,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portal.model;
+<%@ include file="/html/portlet/invitation/init.jsp" %>
 
-import com.liferay.portal.model.BaseModel;
+<%
+String success = ParamUtil.getString(request, "success");
+%>
 
-/**
- * <a href="GroupModel.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
-public interface GroupModel extends BaseModel {
-	public long getPrimaryKey();
+<c:if test='<%= !success.equals("") %>'>
+	<span class="portlet-msg-success" style="font-size: xx-small;">
+		<%= LanguageUtil.get(pageContext, "you-have-successfully-sent-your-invitation-emails") %>
+	</span>
+	<br><br>
+</c:if>
 
-	public void setPrimaryKey(long pk);
-
-	public long getGroupId();
-
-	public void setGroupId(long groupId);
-
-	public String getCompanyId();
-
-	public void setCompanyId(String companyId);
-
-	public String getCreatorUserId();
-
-	public void setCreatorUserId(String creatorUserId);
-
-	public String getClassName();
-
-	public void setClassName(String className);
-
-	public String getClassPK();
-
-	public void setClassPK(String classPK);
-
-	public long getParentGroupId();
-
-	public void setParentGroupId(long parentGroupId);
-
-	public String getName();
-
-	public void setName(String name);
-
-	public String getDescription();
-
-	public void setDescription(String description);
-
-	public String getType();
-
-	public void setType(String type);
-
-	public String getFriendlyURL();
-
-	public void setFriendlyURL(String friendlyURL);
-}
+<a href="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/invitation/edit"/><portlet:param name="redirect" value="<%= currentURL %>"/><portlet:param name="cmd" value="view_form"/></portlet:actionURL>">
+	Invite Friends!
+</a>

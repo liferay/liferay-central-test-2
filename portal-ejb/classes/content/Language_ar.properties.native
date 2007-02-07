@@ -622,6 +622,7 @@ commentable=قابل للتعليق
 comments=ملاحظات
 communities=مجتمعات
 community-page=صفحة المجتمع
+community-x-does-not-have-any-private-pages=Community {0} does not have any private pages.
 community=مجتمع
 company-profile=لمحة عن الشركة
 company=شركة

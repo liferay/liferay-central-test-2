@@ -443,6 +443,21 @@
 		<struts-path>quick_note</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>98</portlet-name>
+		<struts-path>software_repository</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>99</portlet-name>
+		<struts-path>tags_admin</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>100</portlet-name>
+		<struts-path>invitation</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

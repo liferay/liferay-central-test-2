@@ -45,9 +45,9 @@ import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.PortletConfigFactory;
@@ -208,12 +208,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Current users
 
-		String companyId = PortalUtil.getCompanyId(req);
-
-		Map currentUsers = (Map)WebAppPool.get(
-			companyId, WebKeys.CURRENT_USERS);
-
-		UserTracker userTracker = (UserTracker)currentUsers.get(ses.getId());
+		UserTracker userTracker = LiveUsers.getUserTracker(ses.getId());
 
 		if ((userTracker != null) && (path != null) &&
 			(!path.equals(_PATH_C)) &&
@@ -435,6 +430,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			try {
 				Portlet portlet = null;
 
+				String companyId = PortalUtil.getCompanyId(req);
 				String portletId = ParamUtil.getString(req, "p_p_id");
 
 				if (Validator.isNotNull(portletId)) {

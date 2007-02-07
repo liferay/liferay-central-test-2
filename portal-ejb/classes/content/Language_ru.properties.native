@@ -522,6 +522,7 @@ commentable=Комментируемый
 comments=Комментарии
 communities=Сообщества
 community-page=Страница сообщества:
+community-x-does-not-have-any-private-pages=Community {0} does not have any private pages.
 community=Сообщество
 company-profile=Профиль компании
 company=Компания

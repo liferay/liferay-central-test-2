@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "current");
+String tabs1 = ParamUtil.getString(request, "tabs1", "communities-owned");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -38,7 +38,7 @@ portletURL.setParameter("tabs1", tabs1);
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
 
 <liferay-ui:tabs
-	names="current,available"
+	names="communities-owned,communities-joined,communities-open"
 	url="<%= portletURL.toString() %>"
 />
 
@@ -58,8 +58,14 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 	LinkedHashMap groupParams = new LinkedHashMap();
 
-	if (tabs1.equals("current")) {
+	if (tabs1.equals("communities-owned")) {
+		groupParams.put("creatorUserId", user.getUserId());
+	}
+	else if (tabs1.equals("communities-joined")) {
 		groupParams.put("usersGroups", user.getUserId());
+	}
+	else if (tabs1.equals("communities-open")) {
+		groupParams.put("type", GroupImpl.TYPE_COMMUNITY_OPEN);
 	}
 
 	int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
@@ -74,10 +80,25 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	<br><div class="beta-separator"></div><br>
 
 	<c:if test="<%= PortalPermission.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "create-community") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 
 		<br><br>
 	</c:if>
+
+	<liferay-ui:error exception="<%= NoSuchLayoutSetException.class %>">
+
+		<%
+		NoSuchLayoutSetException nslse = (NoSuchLayoutSetException)errorException;
+
+		String ownerId = nslse.getMessage();
+
+		long groupId = LayoutImpl.getGroupId(ownerId);
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		%>
+
+		<%= LanguageUtil.format(pageContext, "community-x-does-not-have-any-private-pages", group.getName()) %>
+	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= RequiredGroupException.class %>" message="the-group-cannot-be-deleted-because-it-is-a-required-system-group" />
 
@@ -85,6 +106,8 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	List headerNames = new ArrayList();
 
 	headerNames.add("name");
+	headerNames.add("members");
+	headerNames.add("online-now");
 	headerNames.add(StringPool.BLANK);
 
 	searchContainer.setHeaderNames(headerNames);
@@ -96,9 +119,38 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 		ResultRow row = new ResultRow(new Object[] {group, tabs1}, String.valueOf(group.getPrimaryKey()), i);
 
+		PortletURL rowURL = renderResponse.createActionURL();
+
+		rowURL.setWindowState(WindowState.NORMAL);
+
+		rowURL.setParameter("struts_action", "/communities/page");
+		rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("ownerId", LayoutImpl.PRIVATE + group.getGroupId());
+
 		// Name
 
-		row.addText(group.getName());
+		if (tabs1.equals("communities-owned") || tabs1.equals("communities-joined")) {
+			row.addText(group.getName(), rowURL);
+		}
+		else {
+			row.addText(group.getName());
+		}
+
+		// Members
+
+		LinkedHashMap userParams = new LinkedHashMap();
+
+		userParams.put("usersGroups", new Long(group.getGroupId()));
+
+		int membersCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, null, null, null, true, userParams, true);
+
+		row.addText(String.valueOf(membersCount));
+
+		// Online Now
+
+		int onlineCount = LiveUsers.getGroupUsers(group.getGroupId()).size();
+
+		row.addText(String.valueOf(onlineCount));
 
 		// Action
 

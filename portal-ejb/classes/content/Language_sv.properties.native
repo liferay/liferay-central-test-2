@@ -649,6 +649,7 @@ commentable=Kommenterbar
 comments=Kommentarer
 communities=Grupper
 community-page=Gruppens Sida:
+community-x-does-not-have-any-private-pages=Community {0} does not have any private pages.
 community=Grupp
 company-profile=Företagsuppgifter
 company=Företag

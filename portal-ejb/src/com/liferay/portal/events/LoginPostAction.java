@@ -26,24 +26,19 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.ReverseAjax;
-import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.persistence.UserTrackerUtil;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
+import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messaging.util.MessagingUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.HttpHeaders;
 
-import java.util.Date;
 import java.util.Iterator;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -82,51 +77,7 @@ public class LoginPostAction extends Action {
 
 			MessagingUtil.createXMPPConnection(ses, userId);
 
-			Map currentUsers =
-				(Map)WebAppPool.get(companyId, WebKeys.CURRENT_USERS);
-
-			boolean simultaenousLogins = GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.AUTH_SIMULTANEOUS_LOGINS), true);
-
-			if (!simultaenousLogins) {
-				Map.Entry[] currentUsersArray =
-					(Map.Entry[])currentUsers.entrySet().toArray(
-						new Map.Entry[0]);
-
-				for (int i = 0; i < currentUsersArray.length; i++) {
-					Map.Entry mapEntry = currentUsersArray[i];
-
-					UserTracker userTracker = (UserTracker)mapEntry.getValue();
-
-					if (userTracker.getUserId().equals(userId)) {
-
-						// Disable old login
-
-						userTracker.getHttpSession().setAttribute(
-							WebKeys.STALE_SESSION, Boolean.TRUE);
-					}
-				}
-			}
-
-			UserTracker userTracker =
-				(UserTracker)currentUsers.get(ses.getId());
-
-			if ((userTracker == null) &&
-				(GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.SESSION_TRACKER_MEMORY_ENABLED)))) {
-
-				userTracker = UserTrackerUtil.create(ses.getId());
-
-				userTracker.setCompanyId(companyId);
-				userTracker.setUserId(req.getRemoteUser());
-				userTracker.setModifiedDate(new Date());
-				userTracker.setRemoteAddr(req.getRemoteAddr());
-				userTracker.setRemoteHost(req.getRemoteHost());
-				userTracker.setUserAgent(req.getHeader(HttpHeaders.USER_AGENT));
-				userTracker.setHttpSession(ses);
-
-				currentUsers.put(ses.getId(), userTracker);
-			}
+			LiveUsers.signIn(req);
 
 			if (!GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
 					LAYOUT_REMEMBER_SESSION_WINDOW_STATE_MAXIMIZED))) {

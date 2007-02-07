@@ -387,6 +387,8 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
+		<action path="/communities/page" type="com.liferay.portlet.myplaces.action.ViewAction" />
+
 		<action path="/communities/view" forward="portlet.communities.view" />
 
 		<!-- Countdown -->
@@ -681,6 +683,19 @@
 		<action path="/image_gallery/view_slide_show" type="com.liferay.portlet.imagegallery.action.ViewSlideShowAction">
 			<forward name="portlet.image_gallery.error" path="portlet.image_gallery.error" />
 			<forward name="portlet.image_gallery.view_slide_show" path="portlet.image_gallery.view_slide_show" />
+		</action>
+
+		<!-- Invitation -->
+
+		<action path="/invitation/edit" type="com.liferay.portlet.invitation.action.EditInvitationAction">
+			<forward name="portlet.invitation.edit" path="portlet.invitation.edit" />
+			<forward name="portlet.invitation.error" path="portlet.invitation.error" />
+			<forward name="portlet.invitation.view" path="portlet.invitation.view" />
+		</action>
+
+		<action path="/invitation/view" type="com.liferay.portlet.invitation.action.EditInvitationAction">
+			<forward name="portlet.invitation.error" path="portlet.invitation.error" />
+			<forward name="portlet.invitation.view" path="portlet.invitation.view" />
 		</action>
 
 		<!-- Journal -->

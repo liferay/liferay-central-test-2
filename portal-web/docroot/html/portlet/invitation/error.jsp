@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -19,59 +20,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portal.model;
+<%@ include file="/html/portlet/invitation/init.jsp" %>
 
-import com.liferay.portal.model.BaseModel;
+<liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
 
-/**
- * <a href="GroupModel.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
-public interface GroupModel extends BaseModel {
-	public long getPrimaryKey();
-
-	public void setPrimaryKey(long pk);
-
-	public long getGroupId();
-
-	public void setGroupId(long groupId);
-
-	public String getCompanyId();
-
-	public void setCompanyId(String companyId);
-
-	public String getCreatorUserId();
-
-	public void setCreatorUserId(String creatorUserId);
-
-	public String getClassName();
-
-	public void setClassName(String className);
-
-	public String getClassPK();
-
-	public void setClassPK(String classPK);
-
-	public long getParentGroupId();
-
-	public void setParentGroupId(long parentGroupId);
-
-	public String getName();
-
-	public void setName(String name);
-
-	public String getDescription();
-
-	public void setDescription(String description);
-
-	public String getType();
-
-	public void setType(String type);
-
-	public String getFriendlyURL();
-
-	public void setFriendlyURL(String friendlyURL);
-}
+<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />

@@ -31,6 +31,7 @@ import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
@@ -156,6 +157,9 @@ public class EditGroupAssignmentsAction extends PortletAction {
 
 		UserServiceUtil.addGroupUsers(groupId, addUserIds);
 		UserServiceUtil.unsetGroupUsers(groupId, removeUserIds);
+
+		LiveUsers.joinGroup(addUserIds, groupId);
+		LiveUsers.leaveGroup(removeUserIds, groupId);
 	}
 
 	protected void updateUserGroupRole(ActionRequest req) throws Exception {

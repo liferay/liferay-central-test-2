@@ -262,7 +262,9 @@ catch (PluginException e) {
 	_log.error(e, e);
 %>
 
-	<span class="error"><%= LanguageUtil.get(pageContext, "error-obtaining-available-plugins") %></span>
+	<span class="portlet-msg-error">
+	<%= LanguageUtil.get(pageContext, "error-obtaining-available-plugins") %>
+	</span>
 
 <%
 }

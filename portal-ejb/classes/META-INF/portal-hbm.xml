@@ -138,6 +138,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="creatorUserId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="parentGroupId" type="com.liferay.util.dao.hibernate.LongType" />

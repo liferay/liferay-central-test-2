@@ -65,6 +65,9 @@ public class GroupFinder {
 	public static String FIND_BY_C_N_D =
 		GroupFinder.class.getName() + ".findByC_N_D";
 
+	public static String JOIN_BY_CREATOR_USER_ID =
+		GroupFinder.class.getName() + ".joinByCreatorUserId";
+
 	public static String JOIN_BY_GROUPS_ORGS =
 		GroupFinder.class.getName() + ".joinByGroupsOrgs";
 
@@ -79,6 +82,9 @@ public class GroupFinder {
 
 	public static String JOIN_BY_ROLE_PERMISSIONS =
 		GroupFinder.class.getName() + ".joinByRolePermissions";
+
+	public static String JOIN_BY_TYPE =
+		GroupFinder.class.getName() + ".joinByType";
 
 	public static String JOIN_BY_USERS_GROUPS =
 		GroupFinder.class.getName() + ".joinByUsersGroups";
@@ -492,7 +498,10 @@ public class GroupFinder {
 	private static String _getWhere(String key) {
 		String join = StringPool.BLANK;
 
-		if (key.equals("groupsOrgs")) {
+		if (key.equals("creatorUserId")) {
+			join = CustomSQLUtil.get(JOIN_BY_CREATOR_USER_ID);
+		}
+		else if (key.equals("groupsOrgs")) {
 			join = CustomSQLUtil.get(JOIN_BY_GROUPS_ORGS);
 		}
 		else if (key.equals("groupsRoles")) {
@@ -506,6 +515,9 @@ public class GroupFinder {
 		}
 		else if (key.equals("rolePermissions")) {
 			join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
+		}
+		else if (key.equals("type")) {
+			join = CustomSQLUtil.get(JOIN_BY_TYPE);
 		}
 		else if (key.equals("usersGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_GROUPS);

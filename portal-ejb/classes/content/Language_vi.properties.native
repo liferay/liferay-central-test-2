@@ -360,6 +360,7 @@ comment-only=chỉ bình luận
 commentable=Có thể bình luận
 comments=Các lời bình 
 community-page=Trang cộng tác :
+community-x-does-not-have-any-private-pages=Community {0} does not have any private pages.
 company-profile=Hồ sơ công ty
 company=Công ty
 compare=So sánh

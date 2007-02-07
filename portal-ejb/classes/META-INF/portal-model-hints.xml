@@ -149,6 +149,7 @@
 	<model name="com.liferay.portal.model.Group">
 		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
+		<field name="creatorUserId" type="String" />
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
 		<field name="parentGroupId" type="long" />

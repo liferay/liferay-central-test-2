@@ -24,26 +24,4 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.AccountNameException" %>
-<%@ page import="com.liferay.portal.CompanyHomeURLException" %>
-<%@ page import="com.liferay.portal.CompanyPortalURLException" %>
-<%@ page import="com.liferay.portal.events.StartupAction" %>
-<%@ page import="com.liferay.portal.kernel.plugin.Plugin" %>
-<%@ page import="com.liferay.portal.plugin.PluginException" %>
-<%@ page import="com.liferay.portal.plugin.PluginUtil" %>
-<%@ page import="com.liferay.portal.plugin.RepositoryReport" %>
-<%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
-<%@ page import="com.liferay.portal.util.LiveUsers" %>
-<%@ page import="com.liferay.portal.util.comparator.UserTrackerModifiedDateComparator" %>
-<%@ page import="com.liferay.portlet.admin.util.OmniadminUtil" %>
-<%@ page import="com.liferay.util.License" %>
-
-<%@ page import="org.apache.log4j.Level" %>
-<%@ page import="org.apache.log4j.Logger" %>
-<%@ page import="org.apache.log4j.LogManager" %>
-
-<%
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-
-RepositoryReport repositoryReport = (RepositoryReport)portletSession.getAttribute(WebKeys.PLUGIN_REPOSITORY_REPORT);
-%>
+<%@ page import="com.liferay.portlet.invitation.action.EditInvitationAction" %>

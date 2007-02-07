@@ -582,6 +582,22 @@
 		<put name="portlet_content" value="/portlet/image_gallery/view_slide_show.jsp" />
 	</definition>
 
+	<!-- Invitation -->
+
+	<definition name="portlet.invitation" extends="portlet" />
+
+	<definition name="portlet.invitation.edit" extends="portlet.invitation">
+		<put name="portlet_content" value="/portlet/invitation/edit.jsp" />
+	</definition>
+
+	<definition name="portlet.invitation.error" extends="portlet.invitation">
+		<put name="portlet_content" value="/portlet/invitation/error.jsp" />
+	</definition>
+
+	<definition name="portlet.invitation.view" extends="portlet.invitation">
+		<put name="portlet_content" value="/portlet/invitation/view.jsp" />
+	</definition>
+
 	<!-- Journal -->
 
 	<definition name="portlet.journal" extends="portlet" />

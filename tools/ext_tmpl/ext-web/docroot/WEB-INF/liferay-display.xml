@@ -7,6 +7,7 @@
 		<portlet id="40" />
 		<portlet id="79" />
 		<portlet id="80" />
+		<portlet id="99" />
 	</category>
 	<category name="category.cms">
 		<category name="category.alfresco">
@@ -39,6 +40,7 @@
 		<portlet id="28" />
 		<portlet id="29" />
 		<portlet id="83" />
+		<portlet id="100" />		
 	</category>
 	<category name="category.entertainment">
 		<portlet id="6" />
@@ -87,6 +89,7 @@
 		<portlet id="53" />
 		<portlet id="66" />
 		<portlet id="69" />
+		<portlet id="98" />
 		<portlet id="EXT_1" />
 	</category>
 	<category name="category.tools">

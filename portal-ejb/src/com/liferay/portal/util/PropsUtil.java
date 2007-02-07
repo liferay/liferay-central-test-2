@@ -708,6 +708,12 @@ public class PropsUtil {
 
 	public static final String IG_IMAGE_THUMBNAIL_MAX_WIDTH = "ig.image.thumbnail.max.width";
 
+	// Invitation Portlet
+
+	public static final String INVITATION_EMAIL_BODY = "invitation.email.body";
+	
+	public static final String INVITATION_EMAIL_SUBJECT = "invitation.email.subject";
+
 	// Journal Portlet
 
 	public static final String JOURNAL_ARTICLE_TYPES = "journal.article.types";

@@ -40,6 +40,7 @@
 		<portlet id="28" />
 		<portlet id="29" />
 		<portlet id="83" />
+		<portlet id="100" />		
 	</category>
 	<category name="category.entertainment">
 		<portlet id="6" />

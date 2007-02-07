@@ -541,16 +541,14 @@
 
 				searchContainer.setHeaderNames(headerNames);
 
-				Map currentUsers = (Map)WebAppPool.get(company.getCompanyId(), WebKeys.CURRENT_USERS);
-
-				Map.Entry[] currentUsersArray = (Map.Entry[])currentUsers.entrySet().toArray(new Map.Entry[0]);
-
 				List results = new ArrayList();
 
-				for (int i = 0; i < currentUsersArray.length; i++) {
-					Map.Entry mapEntry = currentUsersArray[i];
+				Iterator itr = LiveUsers.getSessionUsers().entrySet().iterator();
 
-					results.add(mapEntry.getValue());
+				while (itr.hasNext()) {
+					Map.Entry entry = (Map.Entry)itr.next();
+
+					results.add(entry.getValue());
 				}
 
 				Collections.sort(results, new UserTrackerModifiedDateComparator());

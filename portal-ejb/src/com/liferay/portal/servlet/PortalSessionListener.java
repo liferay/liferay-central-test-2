@@ -23,16 +23,12 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.events.EventsProcessor;
-import com.liferay.portal.model.UserTracker;
-import com.liferay.portal.service.UserTrackerLocalServiceUtil;
 import com.liferay.portal.struts.ActionException;
+import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.util.MailSessionLock;
 import com.liferay.portlet.messaging.util.MessagingUtil;
-
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
@@ -91,40 +87,15 @@ public class PortalSessionListener implements HttpSessionListener {
 				return;
 			}
 
-			// Close mail connections
-
 			MailSessionLock.cleanUp(ses);
 
-			// User tracker
-
-			Map currentUsers =
-				(Map)WebAppPool.get(companyId, WebKeys.CURRENT_USERS);
-
-			UserTracker userTracker = null;
-
-			if (currentUsers != null) {
-				userTracker = (UserTracker)currentUsers.remove(ses.getId());
-			}
-
-			try {
-				if (userTracker != null) {
-					UserTrackerLocalServiceUtil.addUserTracker(
-						userTracker.getCompanyId(), userTracker.getUserId(),
-						userTracker.getModifiedDate(),
-						userTracker.getRemoteAddr(),
-						userTracker.getRemoteHost(), userTracker.getUserAgent(),
-						userTracker.getPaths());
-				}
-			}
-			catch (Exception e1) {
-				_log.warn(e1.getMessage());
-			}
+			LiveUsers.signOut(ses.getId(), userId);
 		}
 		catch (IllegalStateException ise) {
 			_log.warn("Please upgrade to a servlet 2.4 compliant container");
 		}
-		catch (Exception e2) {
-			_log.error(e2, e2);
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
 		// Process session destroyed events

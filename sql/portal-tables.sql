@@ -273,6 +273,7 @@ create table EmailAddress (
 create table Group_ (
 	groupId LONG primary key,
 	companyId VARCHAR(75) not null,
+	creatorUserId VARCHAR(75) null,
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null,
 	parentGroupId LONG,

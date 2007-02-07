@@ -40,6 +40,7 @@ public class GroupJSONSerializer {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId().toString());
+		jsonObj.put("creatorUserId", model.getCreatorUserId().toString());
 		jsonObj.put("className", model.getClassName().toString());
 		jsonObj.put("classPK", model.getClassPK().toString());
 		jsonObj.put("parentGroupId", model.getParentGroupId());

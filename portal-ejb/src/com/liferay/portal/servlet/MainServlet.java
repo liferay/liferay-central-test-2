@@ -76,7 +76,6 @@ import java.io.StringReader;
 
 import java.util.Iterator;
 import java.util.Set;
-import java.util.TreeMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -412,14 +411,6 @@ public class MainServlet extends ActionServlet {
 			messageResources.setServletContext(ctx);
 
 			WebAppPool.put(_companyId, Globals.MESSAGES_KEY, messageResources);
-
-			// Current users
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Current users");
-			}
-
-			WebAppPool.put(_companyId, WebKeys.CURRENT_USERS, new TreeMap());
 
 			// Last modified paths
 

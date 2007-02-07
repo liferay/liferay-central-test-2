@@ -66,10 +66,8 @@ public class WebKeys {
 	public static final String COMPANY_ID = "COMPANY_ID";
 
 	public static final String CTX = "CTX";
-
+	
 	public static final String CURRENT_URL = "CURRENT_URL";
-
-	public static final String CURRENT_USERS = "CURRENT_USERS";
 
 	public static final String DOCUMENT_LIBRARY_FILE_ENTRY = "DOCUMENT_LIBRARY_FILE_ENTRY";
 
@@ -110,6 +108,8 @@ public class WebKeys {
 	public static final String LAYOUT_LISTER_LIST = "LAYOUT_LISTER_LIST";
 
 	public static final String LAYOUTS = "LAYOUTS";
+
+	public static final String LIVE_USERS = "LIVE_USERS";
 
 	public static final String MAIN_PATH = "MAIN_PATH";
 

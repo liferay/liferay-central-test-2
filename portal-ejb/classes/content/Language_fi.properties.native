@@ -634,6 +634,7 @@ commentable=Kommentoitava
 comments=Kommentit
 communities=Yhteisöt
 community-page=Yhteisösivu:
+community-x-does-not-have-any-private-pages=Community {0} does not have any private pages.
 community=Yhteisö
 company-profile=Yrityksen profiili
 company=Yritys

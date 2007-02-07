@@ -29,7 +29,9 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.servlet.SessionErrors;
 
 import java.util.List;
 
@@ -70,6 +72,13 @@ public class ViewAction extends PortletAction {
 			Layout layout = (Layout)layouts.get(0);
 
 			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+		}
+		else {
+			redirect = ParamUtil.getString(req, "redirect");
+
+			SessionErrors.add(
+				req, NoSuchLayoutSetException.class.getName(),
+				new NoSuchLayoutSetException(ownerId));
 		}
 
 		// Send redirect

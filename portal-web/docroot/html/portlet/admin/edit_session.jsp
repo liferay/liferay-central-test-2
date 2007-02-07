@@ -29,9 +29,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String userTrackerId = ParamUtil.getString(request, "userTrackerId");
 
-Map currentUsers = (Map)WebAppPool.get(company.getCompanyId(), WebKeys.CURRENT_USERS);
+Map liveUsers = LiveUsers.getSessionUsers();
 
-UserTracker userTracker = (UserTracker)currentUsers.get(userTrackerId);
+UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_session" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">

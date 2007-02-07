@@ -262,6 +262,7 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
+		<column name="creatorUserId" type="String" />
 
 		<!-- Other fields -->
 

@@ -139,7 +139,8 @@ public class HotDeployThemeListener implements HotDeployListener {
 				LastModifiedJavaScript.clear();
 			}
 			finally {
-				Thread.currentThread().setContextClassLoader(contextClassLoader);
+				Thread.currentThread().setContextClassLoader(
+					contextClassLoader);
 			}
 
 			if (_log.isInfoEnabled()) {

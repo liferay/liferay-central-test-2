@@ -27,10 +27,12 @@ import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.RequiredGroupException;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.LiveUsers;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -123,6 +125,8 @@ public class EditGroupAction extends PortletAction {
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		GroupServiceUtil.deleteGroup(groupId);
+
+		LiveUsers.deleteGroup(groupId);
 	}
 
 	protected void updateGroup(ActionRequest req) throws Exception {
@@ -137,7 +141,10 @@ public class EditGroupAction extends PortletAction {
 
 			// Add group
 
-			GroupServiceUtil.addGroup(name, description, type, friendlyURL);
+			Group group = GroupServiceUtil.addGroup(
+				name, description, type, friendlyURL);
+
+			LiveUsers.joinGroup(req.getRemoteUser(), group.getGroupId());
 		}
 		else {
 

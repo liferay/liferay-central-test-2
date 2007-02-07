@@ -172,7 +172,8 @@ public class LoginAction extends Action {
 
 				// Invalidate the previous session to prevent phishing
 
-				LastPath lastPath = (LastPath)ses.getAttribute(WebKeys.LAST_PATH);
+				LastPath lastPath = (LastPath)ses.getAttribute(
+					WebKeys.LAST_PATH);
 
 				ses.invalidate();
 

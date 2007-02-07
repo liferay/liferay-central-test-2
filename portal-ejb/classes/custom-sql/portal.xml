@@ -56,6 +56,12 @@
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByCreatorUserId">
+		<![CDATA[
+			WHERE
+				(Group_.creatorUserId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByGroupsOrgs">
 		<![CDATA[
 			INNER JOIN
@@ -116,6 +122,12 @@
 				(Resource_.scope = ?) AND
 				(Permission_.actionId = ?) AND
 				(Roles_Permissions.roleId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByType">
+		<![CDATA[
+			WHERE
+				(Group_.type_ = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByUsersGroups">
@@ -623,7 +635,7 @@
 				Permission_ ON
 					(Permission_.permissionId = Users_Permissions.permissionId)
 			WHERE
-				(Permission_.resourceId = ?)		
+				(Permission_.resourceId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUserGroupRole">

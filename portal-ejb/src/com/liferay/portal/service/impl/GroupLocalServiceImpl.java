@@ -117,6 +117,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		Group group = GroupUtil.create(groupId);
 
 		group.setCompanyId(user.getActualCompanyId());
+		group.setCreatorUserId(userId);
 		group.setClassName(className);
 		group.setClassPK(classPK);
 		group.setParentGroupId(GroupImpl.DEFAULT_PARENT_GROUP_ID);
