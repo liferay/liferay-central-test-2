@@ -101,6 +101,13 @@ public class PermissionServiceJSON {
 	}
 
 	public static void unsetRolePermission(java.lang.String roleId,
+		long groupId, long permissionId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		PermissionServiceUtil.unsetRolePermission(roleId, groupId, permissionId);
+	}
+
+	public static void unsetRolePermission(java.lang.String roleId,
 		long groupId, java.lang.String name, java.lang.String typeId,
 		java.lang.String scope, java.lang.String primKey,
 		java.lang.String actionId)

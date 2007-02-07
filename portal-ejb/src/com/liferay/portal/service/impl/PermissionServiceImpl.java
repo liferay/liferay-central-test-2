@@ -133,6 +133,17 @@ public class PermissionServiceImpl
 	}
 
 	public void unsetRolePermission(
+		String roleId, long groupId, long permissionId)
+		throws SystemException, PortalException {
+		checkPermission(
+			getPermissionChecker(), groupId, Role.class.getName(), roleId);
+
+		PermissionLocalServiceUtil.unsetRolePermission(
+			roleId, permissionId);
+
+	}
+
+	public void unsetRolePermission(
 			String roleId, long groupId, String name, String typeId,
 			String scope, String primKey, String actionId)
 		throws PortalException, SystemException {

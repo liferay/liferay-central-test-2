@@ -521,6 +521,19 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		UserUtil.addPermissions(userId, permissions);
 	}
 
+	public void unsetRolePermission(String roleId, long permissionId)
+		throws SystemException, PortalException {
+
+		try {
+			Permission permission =
+				PermissionUtil.findByPrimaryKey(permissionId);
+
+			RoleUtil.removePermission(roleId, permission);
+		}
+		catch (NoSuchPermissionException nspe) {
+		}
+	}
+
 	public void unsetRolePermission(
 			String roleId, String companyId, String name, String typeId,
 			String scope, String primKey, String actionId)

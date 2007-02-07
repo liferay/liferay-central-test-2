@@ -204,6 +204,13 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 			actionIds, resourceId);
 	}
 
+	public void unsetRolePermission(java.lang.String roleId, long permissionId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PermissionLocalServiceFactory.getTxImpl().unsetRolePermission(roleId,
+			permissionId);
+	}
+
 	public void unsetRolePermission(java.lang.String roleId,
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,

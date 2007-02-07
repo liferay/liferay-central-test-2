@@ -189,6 +189,41 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlets;
 	}
 
+	public boolean hasPortlet(String companyId, String portletId)
+		throws SystemException {
+
+		portletId = PortalUtil.getJsSafePortletName(portletId);
+
+		if (companyId.equals(UserImpl.DEFAULT)) {
+			throw new SystemException();
+		}
+
+		Portlet portlet = null;
+
+		Map companyPortletsPool = _getPortletsPool(companyId);
+
+		String rootPortletId = PortletImpl.getRootPortletId(portletId);
+
+		if (portletId.equals(rootPortletId)) {
+			portlet = (Portlet)companyPortletsPool.get(portletId);
+		}
+		else {
+			portlet = (Portlet)companyPortletsPool.get(rootPortletId);
+
+			if (portlet != null) {
+				portlet = portlet.getClonedInstance(portletId);
+			}
+		}
+
+		if ((portlet == null) &&
+			(!portletId.equals(PortletKeys.LIFERAY_PORTAL))) {
+
+			return false;
+		}
+
+		return true;
+	}
+
 	public void initEAR(String[] xmls) {
 		String scpId = PortletServiceImpl.class.getName() + "." + _SHARED_KEY;
 

@@ -115,6 +115,15 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 	}
 
 	public void unsetRolePermission(java.lang.String roleId, long groupId,
+		long permissionId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		PermissionServiceFactory.getTxImpl().unsetRolePermission(roleId,
+			groupId, permissionId);
+	}
+
+	public void unsetRolePermission(java.lang.String roleId, long groupId,
 		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 

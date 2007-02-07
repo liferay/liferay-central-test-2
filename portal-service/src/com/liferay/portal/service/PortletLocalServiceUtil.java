@@ -97,6 +97,13 @@ public class PortletLocalServiceUtil {
 		return portletLocalService.getPortlets(companyId, showSystem, showPortal);
 	}
 
+	public static boolean hasPortlet(java.lang.String companyId,
+		java.lang.String portletId) throws com.liferay.portal.SystemException {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		return portletLocalService.hasPortlet(companyId, portletId);
+	}
+
 	public static void initEAR(java.lang.String[] xmls) {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 		portletLocalService.initEAR(xmls);

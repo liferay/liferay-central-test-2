@@ -705,6 +705,14 @@ Liferay.Service.Portal.Role = {
 		_$J.getJSON(Liferay.Service.url, params, callback);
 	},
 
+	getRolePermissions: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getRolePermissions";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
 	getUserGroupRoles: function(params, callback) {
 		params.serviceParameters = Liferay.Service.getParameters(params);
 		params.serviceClassName = this.serviceClassName;

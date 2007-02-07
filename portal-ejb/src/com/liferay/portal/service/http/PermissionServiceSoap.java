@@ -143,6 +143,18 @@ public class PermissionServiceSoap {
 	}
 
 	public static void unsetRolePermission(java.lang.String roleId,
+		long groupId, long permissionId) throws RemoteException {
+		try {
+			PermissionServiceUtil.unsetRolePermission(roleId, groupId,
+				permissionId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unsetRolePermission(java.lang.String roleId,
 		long groupId, java.lang.String name, java.lang.String typeId,
 		java.lang.String scope, java.lang.String primKey,
 		java.lang.String actionId) throws RemoteException {

@@ -99,6 +99,12 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 		return RoleLocalServiceFactory.getTxImpl().getRole(companyId, name);
 	}
 
+	public java.util.List getRolePermissions(java.lang.String roleId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return RoleLocalServiceFactory.getTxImpl().getRolePermissions(roleId);
+	}
+
 	public java.util.List getUserGroupRoles(java.lang.String userId,
 		long groupId) throws com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().getUserGroupRoles(userId,

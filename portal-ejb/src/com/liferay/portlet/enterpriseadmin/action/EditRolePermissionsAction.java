@@ -78,6 +78,9 @@ public class EditRolePermissionsAction extends PortletAction {
 			else if (cmd.equals("group_permissions")) {
 				updateGroupPermissions(req, res);
 			}
+			else if (cmd.equals("unset_permission")) {
+				unsetPermission(req, res);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchRoleException ||
@@ -116,6 +119,26 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		return mapping.findForward(
 			getForward(req, "portlet.enterprise_admin.edit_role_permissions"));
+	}
+
+	protected void unsetPermission(ActionRequest req, ActionResponse res)
+		throws Exception {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		String roleId = ParamUtil.getString(req, "roleId");
+		long permissionId = ParamUtil.getLong(req, "permissionId");
+
+		PermissionServiceUtil.unsetRolePermission(
+			roleId, themeDisplay.getPortletGroupId(), permissionId);
+
+		// Send redirect
+
+		SessionMessages.add(req, "permissionDeleted");
+
+		String redirect = ParamUtil.getString(req, "redirect");
+		res.sendRedirect(redirect);
 	}
 
 	protected void updateActions(ActionRequest req, ActionResponse res)
@@ -197,7 +220,9 @@ public class EditRolePermissionsAction extends PortletAction {
 		String redirect = ParamUtil.getString(req, "redirect");
 
 		if (groupScopeActionIds.size() == 0) {
-			redirect += "&groupScopePos=-1";
+			SessionMessages.add(req, "permissionsUpdated");
+
+			redirect += "&" + Constants.CMD + "=" + Constants.VIEW;
 		}
 		else {
 			redirect +=

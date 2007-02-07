@@ -61,6 +61,9 @@ public interface PortletLocalService {
 		boolean showSystem, boolean showPortal)
 		throws com.liferay.portal.SystemException;
 
+	public boolean hasPortlet(java.lang.String companyId,
+		java.lang.String portletId) throws com.liferay.portal.SystemException;
+
 	public void initEAR(java.lang.String[] xmls);
 
 	public java.util.List initWAR(java.lang.String servletContextName,

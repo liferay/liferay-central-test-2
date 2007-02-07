@@ -29,6 +29,7 @@ tabs1 = "roles";
 String tabs2 = ParamUtil.getString(request, "tabs2", "current");
 
 String cur = ParamUtil.getString(request, "cur");
+String cmd = ParamUtil.getString(request, Constants.CMD);
 
 Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
@@ -74,13 +75,24 @@ portletURL.setParameter("roleId", role.getRoleId());
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("modelResource", modelResource);
 
+PortletURL addPermissionURL = renderResponse.createRenderURL();
+
+addPermissionURL.setWindowState(WindowState.MAXIMIZED);
+
+addPermissionURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+addPermissionURL.setParameter("redirect", currentURL);
+addPermissionURL.setParameter(Constants.CMD, Constants.EDIT);
+addPermissionURL.setParameter("tabs1", "roles");
+addPermissionURL.setParameter("roleId", role.getRoleId());
+
+
 boolean editPortletPermissions = ParamUtil.getBoolean(request, "editPortletPermissions");
 
 if ((modelResources != null) && (modelResources.size() == 0)) {
 	editPortletPermissions = true;
 }
 
-int totalSteps = (role.getType() == RoleImpl.TYPE_REGULAR) ? 5 : 4;
+int totalSteps = (role.getType() == RoleImpl.TYPE_REGULAR) ? 4 : 3;
 
 // Breadcrumbs
 
@@ -95,16 +107,19 @@ breadcrumbsURL.setParameter("roleId", role.getRoleId());
 String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + LanguageUtil.get(pageContext, "roles") + "</a> &raquo; ";
 
 breadcrumbsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+breadcrumbsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + role.getName() + "</a>";
 
-if (Validator.isNotNull(portletResource)) {
+breadcrumbsURL.setParameter(Constants.CMD, Constants.EDIT);
+
+if ((!cmd.equals(Constants.VIEW)) && Validator.isNotNull(portletResource)) {
 	breadcrumbsURL.setParameter("portletResource", portletResource);
 
 	breadcrumbs += " &raquo; <a href=\"" + breadcrumbsURL.toString() + "\">" + portletResourceName + "</a>";
 }
 
-if (Validator.isNotNull(modelResource)) {
+if ((!cmd.equals(Constants.VIEW)) && Validator.isNotNull(modelResource)) {
 	breadcrumbsURL.setParameter("modelResource", modelResource);
 
 	breadcrumbs += " &raquo; <a href=\"" + breadcrumbsURL.toString() + "\">" + modelResourceName + "</a>";
@@ -123,7 +138,7 @@ if (Validator.isNotNull(modelResource)) {
 
 		var redirect = "";
 
-		if (groupScopePos == -1) {
+		if (cmd == Constants.VIEW) {
 			redirect = "<%= portletURL.toString() %>";
 		}
 		else if (groupScopePos == <%= groupScopeActionIdsArray.length %>) {
@@ -178,7 +193,7 @@ if (Validator.isNotNull(modelResource)) {
 
 				<br><br>
 
-				To define what this role has permission to do, you must first choose a portlet or a resource. A resource is a type of object that belongs to a portlet. For example, <i>Category</i> is a resource that belongs to the <i>Message Boards</i> portlet.
+				To add permissions to this role, you must first choose a portlet or a resource. A resource is a type of object that belongs to a portlet. For example, <i>Category</i> is a resource that belongs to the <i>Message Boards</i> portlet.
 
 				<br><br>
 
@@ -214,7 +229,7 @@ if (Validator.isNotNull(modelResource)) {
 
 				<br><br>
 
-				To define what this role has permission to do, you must first choose a portlet or a resource. A resource is a type of object that belongs to a portlet. For example, <i>Category</i> is a resource that belongs to the <i>Message Boards</i> portlet.
+				To add permissions to this role, you must first choose a portlet or a resource. A resource is a type of object that belongs to a portlet. For example, <i>Category</i> is a resource that belongs to the <i>Message Boards</i> portlet.
 
 				<br><br>
 
@@ -235,20 +250,16 @@ if (Validator.isNotNull(modelResource)) {
 </c:choose>
 
 <c:choose>
-	<c:when test="<%= groupScopePos == -1 %>">
-		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
-			Step <%= totalSteps %> of <%= totalSteps %>: You have successfully updated the <i><%= role.getName() %></i> role with the following permissions. You can repeat this process by clicking on the breadcrumbs below.
-		</div>
-
-		<br>
+	<c:when test="<%= cmd.equals(Constants.VIEW)%>">
 
 		<%= breadcrumbs %>
 
 		<br><br>
 
-		<%
-		SearchContainer searchContainer = new SearchContainer();
+		<liferay-ui:success key="permissionsUpdated" message="the-role-permissions-have-been-updated" />
+		<liferay-ui:success key="permissionDeleted" message="the-permission-has-been-deleted" />
 
+		<%
 		List headerNames = new ArrayList();
 
 		headerNames.add("resource");
@@ -258,25 +269,53 @@ if (Validator.isNotNull(modelResource)) {
 			headerNames.add("scope");
 			headerNames.add("communities");
 		}
+		headerNames.add(StringPool.BLANK);
 
-		searchContainer.setHeaderNames(headerNames);
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		List results = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+		List permissions = RoleServiceUtil.getRolePermissions(role.getRoleId());
 
-		Collections.sort(results, new ActionComparator(company.getCompanyId(), locale));
+		int total = permissions.size();
+
+		searchContainer.setTotal(total);
+
+		permissions = ListUtil.subList(permissions, searchContainer.getStart(), searchContainer.getEnd());
 
 		List resultRows = searchContainer.getResultRows();
 
-		for (int i = 0; i < results.size(); i++) {
-			String actionId = (String)results.get(i);
+		for (int i = 0; i < permissions.size(); i++) {
+			Permission permission = (Permission) permissions.get(i);
+			Resource resource = ResourceLocalServiceUtil.getResource(permission.getResourceId());
+			String resourceName = resource.getName();
+			String actionId = permission.getActionId();
+			String resourceLabel = null;
+			String resourceNameParam = null;
 
-			ResultRow row = new ResultRow(actionId, actionId, i);
+			if (PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), resourceName)) {
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), resourceName);
+				resourceLabel = PortalUtil.getPortletTitle(portlet, application, locale);
+				resourceNameParam = "portletResource";
+			} else {
+				resourceLabel = ResourceActionsUtil.getModelResource(pageContext, resourceName);
+				resourceNameParam = "modelResource";
+			}
 
-			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
-			boolean hasGroupTemplateScope = (role.getType() == RoleImpl.TYPE_COMMUNITY) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
-			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
+			ResultRow row = new ResultRow(new Object[]{permission, role}, actionId, i);
+			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resourceName, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
+			boolean hasGroupTemplateScope = (role.getType() == RoleImpl.TYPE_COMMUNITY) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resourceName, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resourceName, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
 
-			row.addText(selResourceName);
+			PortletURL editResourcePermissionsURL = renderResponse.createRenderURL();
+
+			editResourcePermissionsURL.setWindowState(WindowState.MAXIMIZED);
+
+			editResourcePermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+			editResourcePermissionsURL.setParameter("redirect", currentURL);
+			editResourcePermissionsURL.setParameter("tabs1", "roles");
+			editResourcePermissionsURL.setParameter("roleId", role.getRoleId());
+			editResourcePermissionsURL.setParameter(resourceNameParam, resource.getName());
+
+			row.addText(resourceLabel, editResourcePermissionsURL);
 			row.addText(ResourceActionsUtil.getAction(pageContext, actionId));
 
 			if (hasCompanyScope) {
@@ -294,7 +333,7 @@ if (Validator.isNotNull(modelResource)) {
 
 				List rolePermissions = new ArrayList();
 
-				rolePermissions.add(selResource);
+				rolePermissions.add(resourceName);
 				rolePermissions.add(ResourceImpl.TYPE_CLASS);
 				rolePermissions.add(ResourceImpl.SCOPE_GROUP);
 				rolePermissions.add(actionId);
@@ -317,17 +356,25 @@ if (Validator.isNotNull(modelResource)) {
 				row.addText(sb.toString());
 			}
 
+			// Action
+
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/permission_action.jsp");
+
 			if (hasCompanyScope || hasGroupTemplateScope || hasGroupScope) {
 				resultRows.add(row);
 			}
+
 		}
 		%>
 
+		<input  class="portlet-form-button" type="button" value="<%=LanguageUtil.get(pageContext, "add-permissions")%>" onClick="self.location='<%=addPermissionURL%>'">
+
+		<br><br>
+
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<br>
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "finished") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/view" /><portlet:param name="tabs1" value="roles" /></portlet:renderURL>';">
 	</c:when>
 	<c:when test="<%= (groupScopePos >= 0) && (groupScopeActionIdsArray.length > 0) %>">
 		<input name="<portlet:namespace />addGroupIds" type="hidden" value="">

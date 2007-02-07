@@ -70,6 +70,10 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getRolePermissions(java.lang.String roleId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getUserGroupRoles(java.lang.String userId,
 		long groupId) throws com.liferay.portal.SystemException;
 

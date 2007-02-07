@@ -92,6 +92,12 @@ public class PortletLocalServiceEJBImpl implements PortletLocalService,
 			showSystem, showPortal);
 	}
 
+	public boolean hasPortlet(java.lang.String companyId,
+		java.lang.String portletId) throws com.liferay.portal.SystemException {
+		return PortletLocalServiceFactory.getTxImpl().hasPortlet(companyId,
+			portletId);
+	}
+
 	public void initEAR(java.lang.String[] xmls) {
 		PortletLocalServiceFactory.getTxImpl().initEAR(xmls);
 	}

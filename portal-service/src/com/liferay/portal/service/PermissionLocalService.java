@@ -135,6 +135,10 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void unsetRolePermission(java.lang.String roleId, long permissionId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void unsetRolePermission(java.lang.String roleId,
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,

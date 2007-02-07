@@ -227,6 +227,14 @@ public class PermissionLocalServiceUtil {
 	}
 
 	public static void unsetRolePermission(java.lang.String roleId,
+		long permissionId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+		permissionLocalService.unsetRolePermission(roleId, permissionId);
+	}
+
+	public static void unsetRolePermission(java.lang.String roleId,
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)

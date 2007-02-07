@@ -54,6 +54,7 @@ Role role = (Role)row.getObject();
 <c:if test="<%= !role.getName().equals(RoleImpl.ADMINISTRATOR) && !role.getName().equals(RoleImpl.COMMUNITY_ADMINISTRATOR) && !role.getName().equals(RoleImpl.COMMUNITY_OWNER) && RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.ADD_PERMISSIONS) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editRolePermissionsURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
+		<portlet:param name="<%=Constants.CMD%>" value="<%= Constants.VIEW %>" />
 		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
 	</portlet:renderURL>
 
