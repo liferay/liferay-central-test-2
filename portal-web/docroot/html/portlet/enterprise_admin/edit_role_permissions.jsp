@@ -298,7 +298,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 			if (PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), resourceName)) {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), resourceName);
-	
+
 				resourceLabel = PortalUtil.getPortletTitle(portlet, application, locale);
 				resourceNameParam = "portletResource";
 			}
