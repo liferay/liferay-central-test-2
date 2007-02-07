@@ -73,6 +73,7 @@ import org.dom4j.io.SAXReader;
  * @author Brian Wing Shun Chan
  * @author Charles May
  * @author Alexander Chow
+ * @author Harry Mark
  *
  */
 public class ServiceBuilder {
@@ -2540,31 +2541,32 @@ public class ServiceBuilder {
 
 				sb.append(");");
 				sb.append("if (" + entity.getVarName() + " == null) {");
-				sb.append("String msg = \"No " + entity.getName() + " exists with the key \";");
+				sb.append("StringBuffer msg = new StringBuffer();");
+				sb.append("msg.append(\"No " + entity.getName() + " exists with the key \");");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (j == 0) {
-						sb.append("msg += StringPool.OPEN_CURLY_BRACE;");
+						sb.append("msg.append(StringPool.OPEN_CURLY_BRACE);");
 					}
 
-					sb.append("msg += \"" + col.getName() + "=\";");
-					sb.append("msg += " + col.getName() + ";");
+					sb.append("msg.append(\"" + col.getName() + "=\");");
+					sb.append("msg.append(" + col.getName() + ");");
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append("msg += \", \";");
+						sb.append("msg.append(\", \");");
 					}
 
 					if ((j + 1) == finderColsList.size()) {
-						sb.append("msg += StringPool.CLOSE_CURLY_BRACE;");
+						sb.append("msg.append(StringPool.CLOSE_CURLY_BRACE);");
 					}
 				}
 
 				sb.append("if (_log.isWarnEnabled()) {");
-				sb.append("_log.warn(msg);");
+				sb.append("_log.warn(msg.toString());");
 				sb.append("}");
-				sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg);");
+				sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg.toString());");
 				sb.append("}");
 				sb.append("return " + entity.getVarName() + ";");
 				sb.append("}");
@@ -2875,7 +2877,8 @@ public class ServiceBuilder {
 				}
 
 				sb.append("if (obc != null) {");
-				sb.append("query.append(\"ORDER BY \" + obc.getOrderBy());");
+				sb.append("query.append(\"ORDER BY \");");
+				sb.append("query.append(obc.getOrderBy());");
 				sb.append("}");
 
 				if (order != null) {
@@ -2977,28 +2980,29 @@ public class ServiceBuilder {
 				sb.append("0, 1, obc);");
 
 				sb.append("if (list.size() == 0) {");
-				sb.append("String msg = \"No " + entity.getName() + " exists with the key \";");
+				sb.append("StringBuffer msg = new StringBuffer();");
+				sb.append("msg.append(\"No " + entity.getName() + " exists with the key \");");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (j == 0) {
-						sb.append("msg += StringPool.OPEN_CURLY_BRACE;");
+						sb.append("msg.append(StringPool.OPEN_CURLY_BRACE);");
 					}
 
-					sb.append("msg += \"" + col.getName() + "=\";");
-					sb.append("msg += " + col.getName() + ";");
+					sb.append("msg.append(\"" + col.getName() + "=\");");
+					sb.append("msg.append(" + col.getName() + ");");
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append("msg += \", \";");
+						sb.append("msg.append(\", \");");
 					}
 
 					if ((j + 1) == finderColsList.size()) {
-						sb.append("msg += StringPool.CLOSE_CURLY_BRACE;");
+						sb.append("msg.append(StringPool.CLOSE_CURLY_BRACE);");
 					}
 				}
 
-				sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg);");				sb.append("}");
+				sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg.toString());");				sb.append("}");
 				sb.append("else {");
 				sb.append("return (" + entity.getName() + ")list.get(0);");
 				sb.append("}");
@@ -3039,28 +3043,30 @@ public class ServiceBuilder {
 				sb.append("count - 1, count, obc);");
 
 				sb.append("if (list.size() == 0) {");
-				sb.append("String msg = \"No " + entity.getName() + " exists with the key \";");
+				sb.append("StringBuffer msg = new StringBuffer();");
+				sb.append("msg.append(\"No " + entity.getName() + " exists with the key \");");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (j == 0) {
-						sb.append("msg += StringPool.OPEN_CURLY_BRACE;");
+						sb.append("msg.append(StringPool.OPEN_CURLY_BRACE);");
 					}
 
-					sb.append("msg += \"" + col.getName() + "=\";");
-					sb.append("msg += " + col.getName() + ";");
+					sb.append("msg.append(\"" + col.getName() + "=\");");
+					sb.append("msg.append(" + col.getName() + ");");
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append("msg += \", \";");
+						sb.append("msg.append(\", \");");
 					}
 
 					if ((j + 1) == finderColsList.size()) {
-						sb.append("msg += StringPool.CLOSE_CURLY_BRACE;");
+						sb.append("msg.append(StringPool.CLOSE_CURLY_BRACE);");
 					}
 				}
 
-				sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg);");				sb.append("}");
+				sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg.toString());");
+				sb.append("}");
 				sb.append("else {");
 				sb.append("return (" + entity.getName() + ")list.get(0);");
 				sb.append("}");
@@ -3122,7 +3128,8 @@ public class ServiceBuilder {
 				}
 
 				sb.append("if (obc != null) {");
-				sb.append("query.append(\"ORDER BY \" + obc.getOrderBy());");
+				sb.append("query.append(\"ORDER BY \");");
+				sb.append("query.append(obc.getOrderBy());");
 				sb.append("}");
 
 				if (order != null) {
@@ -3260,7 +3267,8 @@ public class ServiceBuilder {
 		sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " \");");
 
 		sb.append("if (obc != null) {");
-		sb.append("query.append(\"ORDER BY \" + obc.getOrderBy());");
+		sb.append("query.append(\"ORDER BY \");");
+		sb.append("query.append(obc.getOrderBy());");
 		sb.append("}");
 
 		EntityOrder order = entity.getOrder();
@@ -3547,31 +3555,34 @@ public class ServiceBuilder {
 				sb.append("Session session = null;");
 				sb.append("try {");
 				sb.append("session = HibernateUtil.openSession();");
-				sb.append("String sql = _SQL_GET" + tempEntity.getName().toUpperCase() + "S;");
+				sb.append("StringBuffer sb = new StringBuffer();");
+				sb.append("sb.append(_SQL_GET" + tempEntity.getName().toUpperCase() + "S);");
 
 				sb.append("if (obc != null) {");
-				sb.append("sql += \"ORDER BY \" + obc.getOrderBy();");
+				sb.append("sb.append(\"ORDER BY \");");
+				sb.append("sb.append(obc.getOrderBy());");
 				sb.append("}");
 
 				if (tempOrder != null) {
 					List tempOrderList = tempOrder.getColumns();
 
 					sb.append("else {");
-					sb.append("sql += \"ORDER BY \";");
+					sb.append("sb.append(\"ORDER BY \");");
 
 					for (int j = 0; j < tempOrderList.size(); j++) {
 						EntityColumn tempOrderCol = (EntityColumn)tempOrderList.get(j);
 
-						sb.append("sql += \"" + tempEntity.getTable() + "." + tempOrderCol.getDBName() + " " + (tempOrderCol.isOrderByAscending() ? "ASC" : "DESC") + "\";");
+						sb.append("sb.append(\"" + tempEntity.getTable() + "." + tempOrderCol.getDBName() + " " + (tempOrderCol.isOrderByAscending() ? "ASC" : "DESC") + "\");");
 
 						if ((j + 1) != tempOrderList.size()) {
-							sb.append("sql += \", \";");
+							sb.append("sb.append(\", \");");
 						}
 					}
 
 					sb.append("}");
 				}
 
+				sb.append("String sql = sb.toString();");
 				sb.append("SQLQuery q = session.createSQLQuery(sql);");
 				sb.append("q.setCacheable(false);");
 				sb.append("q.addEntity(\"" + tempEntity.getTable() + "\", " + tempEntity.getPackagePath() + ".model.impl." + tempEntity.getName() + "Impl.class);");
