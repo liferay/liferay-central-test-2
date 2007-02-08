@@ -705,7 +705,7 @@ create table SCFrameworkVersion (
 	createDate DATE null,
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
-	url VARCHAR(75) null,
+	url VARCHAR(1024) null,
 	active_ BOOLEAN,
 	priority INTEGER
 );
@@ -719,7 +719,7 @@ create table SCFrameworkVersions_SCProductVersions (
 create table SCLicense (
 	licenseId LONG primary key,
 	name VARCHAR(75) null,
-	url VARCHAR(75) null,
+	url VARCHAR(1024) null,
 	openSource BOOLEAN,
 	active_ BOOLEAN,
 	recommended BOOLEAN
@@ -743,7 +743,7 @@ create table SCProductEntry (
 	type_ VARCHAR(75) null,
 	shortDescription STRING null,
 	longDescription STRING null,
-	pageURL VARCHAR(75) null,
+	pageURL VARCHAR(1024) null,
 	repoGroupId VARCHAR(75) null,
 	repoArtifactId VARCHAR(75) null
 );
@@ -758,8 +758,8 @@ create table SCProductVersion (
 	productEntryId LONG,
 	version VARCHAR(75) null,
 	changeLog STRING null,
-	downloadPageURL VARCHAR(75) null,
-	directDownloadURL VARCHAR(75) null,
+	downloadPageURL VARCHAR(1024) null,
+	directDownloadURL VARCHAR(1024) null,
 	repoStoreArtifact BOOLEAN
 );
 

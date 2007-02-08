@@ -204,6 +204,57 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
+	public static java.lang.String searchAutocomplete(
+		HttpPrincipal httpPrincipal, java.lang.String companyId,
+		java.lang.String name, java.lang.String[] properties, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = companyId;
+
+			if (companyId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = properties;
+
+			if (properties == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj3 = new IntegerWrapper(begin);
+			Object paramObj4 = new IntegerWrapper(end);
+			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
+					"searchAutocomplete",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.lang.String)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static int searchCount(HttpPrincipal httpPrincipal,
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String[] properties)

@@ -142,6 +142,21 @@ public class BeanUtil {
 		}
 	}
 
+	public static Object getObject(Object bean, String param) {
+		Object beanValue = null;
+
+		if (bean != null) {
+			try {
+				beanValue = PropertyUtils.getSimpleProperty(bean, param);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return beanValue;
+	}
+
 	public static String getString(Object bean, String param) {
 		return getString(bean, param, GetterUtil.DEFAULT_STRING);
 	}

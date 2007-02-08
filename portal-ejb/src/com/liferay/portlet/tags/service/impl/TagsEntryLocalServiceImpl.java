@@ -42,6 +42,7 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.Autocomplete;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -146,6 +147,17 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		return TagsEntryFinder.findByC_N_P(
 			companyId, name, properties, begin, end);
+	}
+
+	public String searchAutocomplete(
+			String companyId, String name, String[] properties, int begin,
+			int end)
+		throws SystemException {
+
+		List list = TagsEntryFinder.findByC_N_P(
+			companyId, name, properties, begin, end);
+
+		return Autocomplete.listToXml(list, "entryId", "name");
 	}
 
 	public int searchCount(String companyId, String name, String[] properties)

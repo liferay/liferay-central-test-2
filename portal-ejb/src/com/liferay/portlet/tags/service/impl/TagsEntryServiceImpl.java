@@ -66,6 +66,15 @@ public class TagsEntryServiceImpl
 			companyId, name, properties, begin, end);
 	}
 
+	public String searchAutocomplete(
+			String companyId, String name, String[] properties, int begin,
+			int end)
+		throws SystemException {
+
+		return TagsEntryLocalServiceUtil.searchAutocomplete(
+			companyId, name, properties, begin, end);
+	}
+
 	public int searchCount(String companyId, String name, String[] properties)
 		throws SystemException {
 

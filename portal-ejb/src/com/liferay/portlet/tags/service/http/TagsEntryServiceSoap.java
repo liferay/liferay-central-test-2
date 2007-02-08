@@ -90,6 +90,22 @@ public class TagsEntryServiceSoap {
 		}
 	}
 
+	public static java.lang.String searchAutocomplete(
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = TagsEntryServiceUtil.searchAutocomplete(companyId,
+					name, properties, begin, end);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int searchCount(java.lang.String companyId,
 		java.lang.String name, java.lang.String[] properties)
 		throws RemoteException {

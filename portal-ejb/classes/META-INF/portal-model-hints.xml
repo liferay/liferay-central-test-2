@@ -1089,4 +1089,80 @@
 		</field>
 		<field name="repoStoreArtifact" type="boolean" />
 	</model>
+	<model name="com.liferay.portlet.tags.model.TagsAsset">
+		<field name="assetId" type="long" />
+		<field name="companyId" type="String" />
+		<field name="userId" type="String" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="className" type="String" />
+		<field name="classPK" type="String" />
+		<field name="startDate" type="Date" />
+		<field name="endDate" type="Date" />
+		<field name="publishDate" type="Date" />
+		<field name="expirationDate" type="Date" />
+		<field name="mimeType" type="String" />
+		<field name="title" type="String" />
+		<field name="url" type="String" />
+		<field name="height" type="int" />
+		<field name="width" type="int" />
+	</model>
+	<model name="com.liferay.portlet.tags.model.TagsEntry">
+		<field name="entryId" type="long" />
+		<field name="companyId" type="String" />
+		<field name="userId" type="String" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
+	</model>
+	<model name="com.liferay.portlet.tags.model.TagsProperty">
+		<field name="propertyId" type="long" />
+		<field name="companyId" type="String" />
+		<field name="userId" type="String" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="entryId" type="long" />
+		<field name="key" type="String" />
+		<field name="value" type="String" />
+	</model>
+	<model name="com.liferay.portlet.tags.model.TagsSource">
+		<field name="sourceId" type="long" />
+		<field name="parentSourceId" type="long" />
+		<field name="name" type="String" />
+		<field name="acronym" type="String" />
+	</model>
+	<model name="com.liferay.portlet.wiki.model.WikiNode">
+		<field name="nodeId" type="String" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="String" />
+		<field name="userId" type="String" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="lastPostDate" type="Date" />
+	</model>
+	<model name="com.liferay.portlet.wiki.model.WikiPage">
+		<field name="nodeId" type="String" />
+		<field name="title" type="String" />
+		<field name="version" type="double" />
+		<field name="companyId" type="String" />
+		<field name="userId" type="String" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="content" type="String">
+			<hint-collection name="CLOB" />
+			<hint name="display-height">375</hint>
+			<hint name="display-width">850</hint>
+			<hint name="check-tab">true</hint>
+		</field>
+		<field name="format" type="String" />
+		<field name="head" type="boolean" />
+	</model>
 </model-hints>

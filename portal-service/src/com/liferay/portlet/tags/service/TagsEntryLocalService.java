@@ -74,6 +74,10 @@ public interface TagsEntryLocalService {
 		java.lang.String name, java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.lang.String searchAutocomplete(java.lang.String companyId,
+		java.lang.String name, java.lang.String[] properties, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
 	public int searchCount(java.lang.String companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;

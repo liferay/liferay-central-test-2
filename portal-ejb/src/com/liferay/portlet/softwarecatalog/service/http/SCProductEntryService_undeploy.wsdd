@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 
 <undeployment xmlns="http://xml.apache.org/axis/wsdd/">
-	<service name="Portlet_Software_Repository_SRProductEntryService"/>
+	<service name="Portlet_Software_Catalog_SCProductEntryService"/>
 </undeployment>
