@@ -57,6 +57,7 @@ import org.apache.commons.httpclient.NTCredentials;
 import org.apache.commons.httpclient.SimpleHttpConnectionManager;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
+import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.auth.AuthPolicy;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
@@ -95,6 +96,14 @@ public class Http {
 
 	public static final int LIFERAY_PROXY_PORT = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".proxy.port"));
+
+	private static final int MAX_CONNECTIONS_PER_HOST = GetterUtil.getInteger(
+		SystemProperties.get(
+			Http.class.getName() + ".max.connections.per.host"), 2);
+
+	private static final int MAX_TOTAL_CONNECTIONS = GetterUtil.getInteger(
+		SystemProperties.get(Http.class.getName() + ".max.total.connections"),
+			20);
 
 	public static final String PROXY_HOST = GetterUtil.getString(
 		SystemProperties.get("http.proxyHost"), LIFERAY_PROXY_HOST);
@@ -169,7 +178,12 @@ public class Http {
 	}
 
 	public static HttpClient getClient() {
-		return _instance._client;
+		if (_instance._proxiedClient != null) {
+			return _instance._proxiedClient;
+		}
+		else {
+			return _instance._client;
+		}
 	}
 
 	public static String getCompleteURL(HttpServletRequest req) {
@@ -185,6 +199,10 @@ public class Http {
 		}
 
 		return completeURL.toString();
+	}
+
+	public static HttpClient getNonProxyClient() {
+		return _instance._client;
 	}
 
 	public static String getParameter(String url, String name) {
@@ -444,50 +462,10 @@ public class Http {
 
 			if (Validator.isNotNull(PROXY_HOST) && PROXY_PORT > 0) {
 				hostConfig.setProxy(PROXY_HOST, PROXY_PORT);
-
-				if (Validator.isNotNull(PROXY_USERNAME)) {
-					Credentials credentials = null;
-
-					if (PROXY_AUTH_TYPE.equals("username-password")) {
-						credentials = new UsernamePasswordCredentials(
-							PROXY_USERNAME, PROXY_PASSWORD);
-					}
-					else if (PROXY_AUTH_TYPE.equals("ntlm")) {
-						credentials = new NTCredentials(
-							PROXY_USERNAME, PROXY_PASSWORD, PROXY_NTLM_HOST,
-							PROXY_NTLM_DOMAIN);
-
-						List authPrefs = new ArrayList();
-
-						authPrefs.add(AuthPolicy.NTLM);
-						authPrefs.add(AuthPolicy.BASIC);
-						authPrefs.add(AuthPolicy.DIGEST);
-
-						client.getParams().setParameter(
-							AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
-					}
-
-					client.getState().setProxyCredentials(
-						new AuthScope(PROXY_HOST, PROXY_PORT, null),
-						credentials);
-				}
 			}
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Location is " + location);
-			}
-
-			client.setHostConfiguration(hostConfig);
-			client.setConnectionTimeout(TIMEOUT);
-			client.setTimeout(TIMEOUT);
-
-			if (cookies != null && cookies.length > 0) {
-				HttpState state = new HttpState();
-
-				state.addCookies(cookies);
-				state.setCookiePolicy(CookiePolicy.COMPATIBILITY);
-
-				client.setState(state);
 			}
 
 			if (post) {
@@ -522,9 +500,18 @@ public class Http {
 				method = new GetMethod(location);
 			}
 
+			HttpState state = null;
+			if (cookies != null && cookies.length > 0) {
+				state = new HttpState();
+
+				state.addCookies(cookies);
+				method.getParams().setCookiePolicy(
+					CookiePolicy.BROWSER_COMPATIBILITY);
+			}
+
 			//method.setFollowRedirects(true);
 
-			client.executeMethod(method);
+			client.executeMethod(hostConfig, method, state);
 
 			Header locationHeader = method.getResponseHeader("location");
 
@@ -630,7 +617,63 @@ public class Http {
 	}
 
 	private Http() {
-		_client = new HttpClient();
+		MultiThreadedHttpConnectionManager connectionManager =
+			new MultiThreadedHttpConnectionManager();
+
+		connectionManager.getParams().setParameter(
+			"maxConnectionsPerHost", new Integer(MAX_CONNECTIONS_PER_HOST));
+
+		connectionManager.getParams().setParameter(
+			"maxTotalConnections", new Integer(MAX_TOTAL_CONNECTIONS));
+
+		connectionManager.getParams().setConnectionTimeout(TIMEOUT);
+		connectionManager.getParams().setSoTimeout(TIMEOUT);
+
+		_client = new HttpClient(connectionManager);
+
+		if (Validator.isNotNull(PROXY_HOST) && PROXY_PORT > 0) {
+
+			connectionManager = new MultiThreadedHttpConnectionManager();
+
+			connectionManager.getParams().setParameter(
+				"maxConnectionsPerHost", new Integer(MAX_CONNECTIONS_PER_HOST));
+
+			connectionManager.getParams().setParameter(
+				"maxTotalConnections", new Integer(MAX_TOTAL_CONNECTIONS));
+
+			connectionManager.getParams().setConnectionTimeout(TIMEOUT);
+			connectionManager.getParams().setSoTimeout(TIMEOUT);
+
+			_proxiedClient = new HttpClient(connectionManager);
+
+			if (Validator.isNotNull(PROXY_USERNAME)) {
+				Credentials credentials = null;
+
+				if (PROXY_AUTH_TYPE.equals("username-password")) {
+					credentials = new UsernamePasswordCredentials(
+						PROXY_USERNAME, PROXY_PASSWORD);
+				}
+				else if (PROXY_AUTH_TYPE.equals("ntlm")) {
+					credentials = new NTCredentials(
+						PROXY_USERNAME, PROXY_PASSWORD, PROXY_NTLM_HOST,
+						PROXY_NTLM_DOMAIN);
+
+					List authPrefs = new ArrayList();
+
+					authPrefs.add(AuthPolicy.NTLM);
+					authPrefs.add(AuthPolicy.BASIC);
+					authPrefs.add(AuthPolicy.DIGEST);
+
+					_proxiedClient.getParams().setParameter(
+						AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
+				}
+
+				_proxiedClient.getState().setProxyCredentials(
+					new AuthScope(PROXY_HOST, PROXY_PORT, null),
+					credentials);
+			}
+		}
+
 	}
 
 	private static Log _log = LogFactory.getLog(Http.class);
@@ -638,5 +681,7 @@ public class Http {
 	private static Http _instance = new Http();
 
 	private HttpClient _client;
+	
+	private HttpClient _proxiedClient;
 
 }

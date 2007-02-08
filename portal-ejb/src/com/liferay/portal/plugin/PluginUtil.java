@@ -34,6 +34,7 @@ import com.liferay.util.License;
 import com.liferay.util.Validator;
 import com.liferay.util.Version;
 import com.liferay.util.XSSUtil;
+import com.liferay.util.Http;
 import com.liferay.util.xml.XMLSafeReader;
 
 import java.io.IOException;
@@ -215,27 +216,25 @@ public class PluginUtil {
 			repositoryURL + StringPool.SLASH + _PLUGINS_XML_FILENAME;
 
 		try {
-			HttpClient client = new HttpClient();
+			HttpClient client = Http.getClient();
 
-			int timeout = GetterUtil.getInteger(
-				PropsUtil.get(PropsUtil.PLUGIN_TIMEOUT_LIST));
+			GetMethod getFileMethod = new GetMethod(pluginsXmlURL);
+			
+			byte[] bytes = null;
+			try {
+				int responseCode = client.executeMethod(getFileMethod);
 
-			client.getHttpConnectionManager().getParams().setConnectionTimeout(
-				timeout);
+				if (responseCode != 200) {
+					throw new PluginException(
+						"Unable to download file " + pluginsXmlURL +
+							" because of response code " + responseCode);
+				}
 
-			GetMethod getFile = new GetMethod(pluginsXmlURL);
-
-			int responseCode = client.executeMethod(getFile);
-
-			if (responseCode != 200) {
-				throw new PluginException(
-					"Unable to download file " + pluginsXmlURL +
-						" because of response code " + responseCode);
+				bytes = getFileMethod.getResponseBody();
 			}
-
-			byte[] bytes = getFile.getResponseBody();
-
-			getFile.releaseConnection();
+			finally {
+				getFileMethod.releaseConnection();
+			}
 
 			if ((bytes != null) && (bytes.length > 0)) {
 				repository = _parsePluginsXml(new String(bytes), repositoryURL);

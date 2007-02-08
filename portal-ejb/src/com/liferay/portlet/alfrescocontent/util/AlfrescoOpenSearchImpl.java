@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
+import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
@@ -97,9 +98,10 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 			_log.debug("Search with " + url);
 		}
 
-		HttpClient client = new HttpClient();
+		HttpClient client = Http.getNonProxyClient();
 
-		client.getState().setCredentials(
+		HttpState state = new HttpState();
+		state.setCredentials(
 			new AuthScope(HOST, PORT, REALM),
 			new UsernamePasswordCredentials(USERNAME, PASSWORD));
 
@@ -108,7 +110,8 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 		get.setDoAuthentication(true);
 
 		try {
-			int status = client.executeMethod(get);
+			int status = client.executeMethod(
+				client.getHostConfiguration(), get, state);
 
 			xml = get.getResponseBodyAsString();
 		}

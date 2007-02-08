@@ -98,10 +98,6 @@ public class PropsUtil {
 
 	public static final String PLUGIN_REPOSITORIES = "plugin.repositories";
 
-	public static final String PLUGIN_TIMEOUT_ARTIFACT = "plugin.timeout.artifact";
-
-	public static final String PLUGIN_TIMEOUT_LIST = "plugin.timeout.list";
-
 	// Resource Actions
 
 	public static final String RESOURCE_ACTIONS_CONFIGS = "resource.actions.configs";
