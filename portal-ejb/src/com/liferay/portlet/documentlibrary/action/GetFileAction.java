@@ -28,6 +28,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
@@ -124,6 +125,9 @@ public class GetFileAction extends PortletAction {
 			name = fileShortcut.getToName();
 		}
 
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+			folderId, name);
+
 		InputStream is = null;
 
 		if (version > 0) {
@@ -135,7 +139,7 @@ public class GetFileAction extends PortletAction {
 				companyId, userId, folderId, name);
 		}
 
-		ServletResponseUtil.sendFile(res, name, is);
+		ServletResponseUtil.sendFile(res, fileEntry.getTitle(), is);
 	}
 
 }
