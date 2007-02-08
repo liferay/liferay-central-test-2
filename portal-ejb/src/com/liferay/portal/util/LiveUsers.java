@@ -318,7 +318,7 @@ public class LiveUsers {
 
 		Map liveUsers = null;
 
-		if (userTrackers.size() <= 1) {
+		if ((userTrackers == null) || (userTrackers.size() <= 1)) {
 			liveUsers = _updateGroupStatus(userId, false);
 		}
 
