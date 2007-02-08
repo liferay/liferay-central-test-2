@@ -131,8 +131,6 @@
 			<forward name="modified.jsp" path="/portal/javascript_cached.jsp" />
 		</action>
 
-		<action path="/portal/json_regions" type="com.liferay.portal.action.JSONRegionsAction" />
-
 		<action path="/portal/json_service" type="com.liferay.portal.action.JSONServiceAction" />
 
 		<action path="/portal/layout" type="com.liferay.portal.action.LayoutAction">

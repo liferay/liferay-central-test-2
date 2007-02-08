@@ -122,23 +122,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId">
-					<option value=""></option>
-
-					<%
-					List countries = CountryServiceUtil.getCountries(true);
-
-					for (int i = 0; i < countries.size(); i++) {
-						Country country = (Country)countries.get(i);
-					%>
-
-						<option <%= country.getCountryId().equals(countryId) ? "selected" : "" %> value="<%= country.getCountryId() %>"><%= LanguageUtil.get(pageContext, country.getName()) %></option>
-
-					<%
-					}
-					%>
-
-				</select>
+				<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
 			</td>
 		</tr>
 		<tr>
@@ -147,23 +131,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId">
-					<option value=""></option>
-
-					<%
-					List regions = RegionServiceUtil.getRegions(countryId);
-
-					for (int i = 0; i < regions.size(); i++) {
-						Region region = (Region)regions.get(i);
-					%>
-
-						<option <%= region.getRegionId().equals(regionId) ? "selected" : "" %> value="<%= region.getRegionId() %>"><%= LanguageUtil.get(pageContext, region.getName()) %></option>
-
-					<%
-					}
-					%>
-
-				</select>
+				<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
 			</td>
 		</tr>
 		<tr>
@@ -225,14 +193,37 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />street1.focus();
 
-	function <portlet:namespace />selectCountryPost() {
-		Liferay.Util.setSelectedValue(document.<portlet:namespace />fm.<portlet:namespace />regionId, "<%= regionId %>");
-	}
-
-	DynamicSelect.create(
-		"<%= themeDisplay.getPathMain() %>/portal/json_regions",
-		document.<portlet:namespace />fm.<portlet:namespace />countryId,
-		document.<portlet:namespace />fm.<portlet:namespace />regionId,
-		<portlet:namespace />selectCountryPost
-	)
+	new Liferay.DynamicSelect(
+		[
+			{
+				select: "<portlet:namespace />countryId",
+				selectId: "countryId",
+				selectDesc: "name",
+				selectVal: "<%= countryId %>",
+				selectData: function(callback) {
+					Liferay.Service.Portal.Country.getCountries(
+						{
+							active: true
+						},
+						callback
+					);
+				}
+			},
+			{
+				select: "<portlet:namespace />regionId",
+				selectId: "regionId",
+				selectDesc: "name",
+				selectVal: "<%= regionId %>",
+				selectData: function(callback, selectKey) {
+					Liferay.Service.Portal.Region.getRegions(
+						{
+							countryId: selectKey,
+							active: true
+						},
+						callback
+					);
+				}
+			}
+		]
+	);
 </script>

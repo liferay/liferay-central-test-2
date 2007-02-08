@@ -40,46 +40,6 @@ var DragLink = {
 	}
 };
 
-var DynamicSelect = {
-	create : function(url, source, target, callback, query) {
-		var returnObj = new Object();
-		returnObj["callback"] = callback;
-		returnObj["target"] = target;
-
-		source.onchange = function() {
-			loadPage(url, (query ? (query + "&") : "") + "sourceValue=" + this.value, DynamicSelect.returnFunction, returnObj);
-		}
-	},
-
-	returnFunction : function(xmlHttpReq, returnObj) {
-		var select;
-		var target = returnObj["target"];
-		var callback = returnObj["callback"];
-
-		try {
-			select = eval("(" + xmlHttpReq.responseText + ")");
-		}
-		catch (err) {
-		}
-
-		target.length = 0;
-		if (select.options.length > 0) {
-			target.disabled = false;
-			var options = select.options;
-			for (var i = 0; i < options.length; i++) {
-				target.options[i] = new Option(options[i].name, options[i].value);
-			}
-		}
-		else {
-			target.disabled = true;
-		}
-
-		if (callback != null) {
-			callback();
-		}
-	}
-};
-
 var LiferayDock = {
 	MODE: {
 		EXPAND: 0,

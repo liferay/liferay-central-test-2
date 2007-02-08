@@ -77,43 +77,11 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 </tr>
 <tr>
 	<td>
-		<select id="<portlet:namespace /><%= OrganizationDisplayTerms.COUNTRY_ID %>" name="<portlet:namespace /><%= OrganizationDisplayTerms.COUNTRY_ID %>">
-			<option value=""></option>
-
-			<%
-			List countries = CountryServiceUtil.getCountries(true);
-
-			for (int i = 0; i < countries.size(); i++) {
-				Country country = (Country)countries.get(i);
-			%>
-
-				<option <%= country.getCountryId().equals(displayTerms.getCountryId()) ? "selected" : "" %> value="<%= country.getCountryId() %>"><%= LanguageUtil.get(pageContext, country.getName()) %></option>
-
-			<%
-			}
-			%>
-
-		</select>
+		<select id="<portlet:namespace /><%= OrganizationDisplayTerms.COUNTRY_ID %>" name="<portlet:namespace /><%= OrganizationDisplayTerms.COUNTRY_ID %>"></select>
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<select id="<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>" name="<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>">
-			<option value=""></option>
-
-			<%
-			List regions = RegionServiceUtil.getRegions(displayTerms.getCountryId());
-
-			for (int i = 0; i < regions.size(); i++) {
-				Region region = (Region)regions.get(i);
-			%>
-
-				<option <%= region.getRegionId().equals(displayTerms.getRegionId()) ? "selected" : "" %> value="<%= region.getRegionId() %>"><%= LanguageUtil.get(pageContext, region.getName()) %></option>
-
-			<%
-			}
-			%>
-
-		</select>
+		<select id="<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>" name="<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>"></select>
 	</td>
 	<td colspan="4"></td>
 </tr>
@@ -157,16 +125,37 @@ if (Validator.isNotNull(displayTerms.getParentOrganizationId())) {
 </c:if>
 
 <script type="text/javascript">
-	function <portlet:namespace />selectCountryPost() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>.options[0] = new Option("", "");
-		document.<portlet:namespace />fm.<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>.selectedIndex = 0;
-	}
-
-	DynamicSelect.create(
-		"<%= themeDisplay.getPathMain() %>/portal/json_regions",
-		document.<portlet:namespace />fm.<portlet:namespace /><%= OrganizationDisplayTerms.COUNTRY_ID %>,
-		document.<portlet:namespace />fm.<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>,
-		<portlet:namespace />selectCountryPost,
-		"nullable=1"
-	)
+	new Liferay.DynamicSelect(
+		[
+			{
+				select: "<portlet:namespace /><%= OrganizationDisplayTerms.COUNTRY_ID %>",
+				selectId: "countryId",
+				selectDesc: "name",
+				selectVal: "<%= displayTerms.getCountryId() %>",
+				selectData: function(callback) {
+					Liferay.Service.Portal.Country.getCountries(
+						{
+							active: true
+						},
+						callback
+					);
+				}
+			},
+			{
+				select: "<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>",
+				selectId: "regionId",
+				selectDesc: "name",
+				selectVal: "<%= displayTerms.getRegionId() %>",
+				selectData: function(callback, selectKey) {
+					Liferay.Service.Portal.Region.getRegions(
+						{
+							countryId: selectKey,
+							active: true
+						},
+						callback
+					);
+				}
+			}
+		]
+	);
 </script>
