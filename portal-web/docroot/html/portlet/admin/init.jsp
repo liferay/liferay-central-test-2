@@ -44,6 +44,4 @@
 
 <%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-
-RepositoryReport repositoryReport = (RepositoryReport)portletSession.getAttribute(WebKeys.PLUGIN_REPOSITORY_REPORT);
 %>

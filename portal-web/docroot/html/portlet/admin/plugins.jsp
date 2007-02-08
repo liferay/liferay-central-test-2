@@ -246,7 +246,7 @@ try {
 		<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginUtil.getLastUpdateDate())) %><br>
 	</c:if>
 
-	<%@ include file="/html/portlet/admin/repository_report.jsp" %>
+	<liferay-util:include page="/html/portlet/admin/repository_report.jsp" />
 
 	<br>
 

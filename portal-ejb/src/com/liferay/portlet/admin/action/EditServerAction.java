@@ -79,7 +79,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
-import javax.portlet.PortletSession;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -405,12 +404,9 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void reloadRepositories(ActionRequest req) throws Exception {
-		PortletSession ses = req.getPortletSession();
-
 		RepositoryReport report = PluginUtil.reloadRepositories();
 
-		req.getPortletSession().setAttribute(
-			WebKeys.PLUGIN_REPOSITORY_REPORT, report);
+		SessionMessages.add(req, WebKeys.PLUGIN_REPOSITORY_REPORT, report);
 	}
 
 	protected void remoteDeploy(ActionRequest req) throws Exception {

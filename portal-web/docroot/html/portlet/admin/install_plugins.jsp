@@ -201,7 +201,7 @@ String uploadProgressId = "uploadPlugin" + System.currentTimeMillis();
 			<td>
 				<textarea class="form-text" name="<portlet:namespace />pluginRepositories" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES) %></textarea>
 
-				<%@ include file="/html/portlet/admin/repository_report.jsp" %>
+				<liferay-util:include page="/html/portlet/admin/repository_report.jsp" />
 			</td>
 		</tr>
 		</table>

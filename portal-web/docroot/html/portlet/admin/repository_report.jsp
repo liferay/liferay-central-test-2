@@ -21,36 +21,42 @@
  * SOFTWARE.
  */
 %>
-<% if (repositoryReport != null) { %>
-	<table border="0">
-<%
-	Iterator it = repositoryReport.getRepositoryURLs().iterator();
-		while (it.hasNext()) {
-			String repositoryURL2 = (String) it.next();
-			Object status = repositoryReport.getState(repositoryURL2);
-%>
-	<tr>
-		<th align="left"><%= repositoryURL2%></th>
-		<td>
-<%
-			if (status == RepositoryReport.SUCCESS) {
-%>
-				<span style="color: green"><%= LanguageUtil.get(pageContext, "success")%></span>
-<%
-			} else {
-%>
-				<abbr style="color: red" title="<%= "" + status %>"><%= LanguageUtil.get(pageContext, "error")%></abbr>
-<%
-			}
-%>
-		</td>
-	</tr>
-<%
-		}
-%>
-	</table>
-<%
-	portletSession.removeAttribute(WebKeys.PLUGIN_REPOSITORY_REPORT);
 
-}
-%>
+<%@ include file="/html/portlet/admin/init.jsp" %>
+
+<c:if test="<%= SessionMessages.contains(renderRequest, WebKeys.PLUGIN_REPOSITORY_REPORT) %>">
+	<br>
+
+	<%
+	RepositoryReport repositoryReport = (RepositoryReport)SessionMessages.get(renderRequest, WebKeys.PLUGIN_REPOSITORY_REPORT);
+
+	Iterator itr = repositoryReport.getRepositoryURLs().iterator();
+
+	while (itr.hasNext()) {
+		String repositoryURL = (String)itr.next();
+
+		Object status = repositoryReport.getState(repositoryURL);
+	%>
+
+		<%= repositoryURL %>
+
+		<c:choose>
+			<c:when test="<%= status == RepositoryReport.SUCCESS %>">
+				<span class="portlet-msg-success">
+				<%= LanguageUtil.get(pageContext, "ok") %>
+				</span>
+			</c:when>
+			<c:otherwise>
+				<span class="portlet-msg-error">
+				<%= status %>
+				</span>
+			</c:otherwise>
+		</c:choose>
+
+		<br>
+
+	<%
+	}
+	%>
+
+</c:if>
