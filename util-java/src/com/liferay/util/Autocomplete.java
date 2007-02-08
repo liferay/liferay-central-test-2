@@ -23,25 +23,8 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.util.StringPool;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
 
-import java.nio.channels.FileChannel;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * <a href="Autocomplete.java.html"><b><i>View Source</i></b></a>

@@ -53,11 +53,11 @@ import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.NTCredentials;
 import org.apache.commons.httpclient.SimpleHttpConnectionManager;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.auth.AuthPolicy;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
@@ -66,6 +66,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
+import org.apache.commons.httpclient.params.HttpConnectionParams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -99,11 +100,12 @@ public class Http {
 
 	private static final int MAX_CONNECTIONS_PER_HOST = GetterUtil.getInteger(
 		SystemProperties.get(
-			Http.class.getName() + ".max.connections.per.host"), 2);
+			Http.class.getName() + ".max.connections.per.host"),
+		2);
 
 	private static final int MAX_TOTAL_CONNECTIONS = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".max.total.connections"),
-			20);
+		20);
 
 	public static final String PROXY_HOST = GetterUtil.getString(
 		SystemProperties.get("http.proxyHost"), LIFERAY_PROXY_HOST);
@@ -178,11 +180,11 @@ public class Http {
 	}
 
 	public static HttpClient getClient() {
-		if (_instance._proxiedClient != null) {
-			return _instance._proxiedClient;
+		if (_instance._client != null) {
+			return _instance._client;
 		}
 		else {
-			return _instance._client;
+			return _instance._nonProxyClient;
 		}
 	}
 
@@ -202,7 +204,7 @@ public class Http {
 	}
 
 	public static HttpClient getNonProxyClient() {
-		return _instance._client;
+		return _instance._nonProxyClient;
 	}
 
 	public static String getParameter(String url, String name) {
@@ -501,10 +503,12 @@ public class Http {
 			}
 
 			HttpState state = null;
-			if (cookies != null && cookies.length > 0) {
+
+			if ((cookies != null) && (cookies.length > 0)) {
 				state = new HttpState();
 
 				state.addCookies(cookies);
+
 				method.getParams().setCookiePolicy(
 					CookiePolicy.BROWSER_COMPATIBILITY);
 			}
@@ -620,31 +624,28 @@ public class Http {
 		MultiThreadedHttpConnectionManager connectionManager =
 			new MultiThreadedHttpConnectionManager();
 
-		connectionManager.getParams().setParameter(
+		HttpConnectionParams params = connectionManager.getParams();
+
+		params.setParameter(
 			"maxConnectionsPerHost", new Integer(MAX_CONNECTIONS_PER_HOST));
-
-		connectionManager.getParams().setParameter(
+		params.setParameter(
 			"maxTotalConnections", new Integer(MAX_TOTAL_CONNECTIONS));
+		params.setConnectionTimeout(TIMEOUT);
+		params.setSoTimeout(TIMEOUT);
 
-		connectionManager.getParams().setConnectionTimeout(TIMEOUT);
-		connectionManager.getParams().setSoTimeout(TIMEOUT);
-
-		_client = new HttpClient(connectionManager);
+		_nonProxyClient = new HttpClient(connectionManager);
 
 		if (Validator.isNotNull(PROXY_HOST) && PROXY_PORT > 0) {
-
 			connectionManager = new MultiThreadedHttpConnectionManager();
 
-			connectionManager.getParams().setParameter(
+			params.setParameter(
 				"maxConnectionsPerHost", new Integer(MAX_CONNECTIONS_PER_HOST));
-
-			connectionManager.getParams().setParameter(
+			params.setParameter(
 				"maxTotalConnections", new Integer(MAX_TOTAL_CONNECTIONS));
+			params.setConnectionTimeout(TIMEOUT);
+			params.setSoTimeout(TIMEOUT);
 
-			connectionManager.getParams().setConnectionTimeout(TIMEOUT);
-			connectionManager.getParams().setSoTimeout(TIMEOUT);
-
-			_proxiedClient = new HttpClient(connectionManager);
+			_client = new HttpClient(connectionManager);
 
 			if (Validator.isNotNull(PROXY_USERNAME)) {
 				Credentials credentials = null;
@@ -664,16 +665,15 @@ public class Http {
 					authPrefs.add(AuthPolicy.BASIC);
 					authPrefs.add(AuthPolicy.DIGEST);
 
-					_proxiedClient.getParams().setParameter(
+					_client.getParams().setParameter(
 						AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 				}
 
-				_proxiedClient.getState().setProxyCredentials(
+				_client.getState().setProxyCredentials(
 					new AuthScope(PROXY_HOST, PROXY_PORT, null),
 					credentials);
 			}
 		}
-
 	}
 
 	private static Log _log = LogFactory.getLog(Http.class);
@@ -681,7 +681,6 @@ public class Http {
 	private static Http _instance = new Http();
 
 	private HttpClient _client;
-	
-	private HttpClient _proxiedClient;
+	private HttpClient _nonProxyClient;
 
 }

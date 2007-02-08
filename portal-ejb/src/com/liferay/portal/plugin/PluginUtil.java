@@ -30,11 +30,11 @@ import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
+import com.liferay.util.Http;
 import com.liferay.util.License;
 import com.liferay.util.Validator;
 import com.liferay.util.Version;
 import com.liferay.util.XSSUtil;
-import com.liferay.util.Http;
 import com.liferay.util.xml.XMLSafeReader;
 
 import java.io.IOException;
@@ -219,8 +219,9 @@ public class PluginUtil {
 			HttpClient client = Http.getClient();
 
 			GetMethod getFileMethod = new GetMethod(pluginsXmlURL);
-			
+
 			byte[] bytes = null;
+
 			try {
 				int responseCode = client.executeMethod(getFileMethod);
 

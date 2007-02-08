@@ -240,6 +240,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.struts.MultiMessageResources">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.struts.StrutsURLEncoder">
 		<priority value="ERROR" />
 	</category>

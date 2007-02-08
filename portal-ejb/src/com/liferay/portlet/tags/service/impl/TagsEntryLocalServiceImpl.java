@@ -38,11 +38,11 @@ import com.liferay.portlet.tags.service.base.TagsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
+import com.liferay.util.Autocomplete;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.Autocomplete;
 
 import java.util.Date;
 import java.util.Iterator;

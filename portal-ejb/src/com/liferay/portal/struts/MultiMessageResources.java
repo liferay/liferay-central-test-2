@@ -120,6 +120,12 @@ public class MultiMessageResources extends PropertyMessageResources {
 				url = classLoader.getResource(name);
 			}
 
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Attempting to load " + name + " " + localeKey + " " +
+						useServletContext);
+			}
+
 			if (url != null) {
 				InputStream is = url.openStream();
 
@@ -128,7 +134,8 @@ public class MultiMessageResources extends PropertyMessageResources {
 				is.close();
 
 				if (_log.isInfoEnabled()) {
-					_log.info("Loading " + url);
+					_log.info(
+						"Loading " + url + " with " + props.size() + " values");
 				}
 			}
 		}
