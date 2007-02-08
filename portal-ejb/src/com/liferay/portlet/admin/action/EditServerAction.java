@@ -409,7 +409,8 @@ public class EditServerAction extends PortletAction {
 
 		RepositoryReport report = PluginUtil.reloadRepositories();
 
-		req.setAttribute(WebKeys.PLUGIN_REPOSITORY_REPORT, report);
+		req.getPortletSession().setAttribute(
+			WebKeys.PLUGIN_REPOSITORY_REPORT, report);
 	}
 
 	protected void remoteDeploy(ActionRequest req) throws Exception {

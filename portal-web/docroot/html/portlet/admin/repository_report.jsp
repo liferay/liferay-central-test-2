@@ -49,4 +49,8 @@
 		}
 %>
 	</table>
-<% } %>
+<%
+	portletSession.removeAttribute(WebKeys.PLUGIN_REPOSITORY_REPORT);
+
+}
+%>
