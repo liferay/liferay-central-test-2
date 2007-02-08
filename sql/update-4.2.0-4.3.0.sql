@@ -168,8 +168,8 @@ create table SCProductEntry (
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
 	type_ VARCHAR(75) null,
-	shortDescription VARCHAR(75) null,
-	longDescription VARCHAR(75) null,
+	shortDescription STRING null,
+	longDescription STRING null,
 	pageURL VARCHAR(75) null,
 	repoGroupId VARCHAR(75) null,
 	repoArtifactId VARCHAR(75) null
@@ -184,7 +184,7 @@ create table SCProductVersion (
 	modifiedDate DATE null,
 	productEntryId LONG,
 	version VARCHAR(75) null,
-	changeLog VARCHAR(75) null,
+	changeLog STRING null,
 	downloadPageURL VARCHAR(75) null,
 	directDownloadURL VARCHAR(75) null,
 	repoStoreArtifact BOOLEAN
