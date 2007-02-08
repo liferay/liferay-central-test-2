@@ -299,25 +299,25 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 		for (var i = 0; i < list.length; i++) {
 			var item = list[i];
 
-			if (Element.hasClassName(item, "portlet-borderless-container")) {
+			if (_$J(item).is(".portlet-borderless-container")) {
 				this.container = item.style;
 				this.content = item.style;
 				break;
 			}
 
-			if (Element.hasClassName(item, "portlet-container")) {
+			if (_$J(item).is(".portlet-container")) {
 				this.container = item.style;
 			}
 
-			if (Element.hasClassName(item, "portlet-box")) {
+			if (_$J(item).is(".portlet-box")) {
 				this.content = item.style;
 			}
 
-			if (Element.hasClassName(item, "portlet-header-bar")) {
+			if (_$J(item).is(".portlet-header-bar")) {
 				this.header = item.style;
 			}
 
-			if (Element.hasClassName(item, "portlet-title")) {
+			if (_$J(item).is(".portlet-title")) {
 				this.title = item.style;
 			}
 		}
