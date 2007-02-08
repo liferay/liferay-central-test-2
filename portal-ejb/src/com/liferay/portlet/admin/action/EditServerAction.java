@@ -50,10 +50,10 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
+import com.liferay.util.Http;
 import com.liferay.util.servlet.NullServletResponse;
 import com.liferay.util.servlet.ProgressInputStream;
 import com.liferay.util.servlet.SessionErrors;
@@ -425,13 +425,7 @@ public class EditServerAction extends PortletAction {
 
 			String progressId = ParamUtil.getString(req, Constants.PROGRESS_ID);
 
-			HttpClient client = new HttpClient();
-
-			int timeout = GetterUtil.getInteger(
-				PropsUtil.get(PropsUtil.PLUGIN_TIMEOUT_ARTIFACT));
-
-			client.getHttpConnectionManager().getParams().setConnectionTimeout(
-				timeout);
+			HttpClient client = Http.getClient();
 
 			getFileMethod = new GetMethod(urlObj.toString());
 
