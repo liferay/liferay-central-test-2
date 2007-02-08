@@ -72,6 +72,15 @@ public class TagsEntryServiceEJBImpl implements TagsEntryService, SessionBean {
 			properties, begin, end);
 	}
 
+	public java.lang.String searchAutocomplete(java.lang.String companyId,
+		java.lang.String name, java.lang.String[] properties, int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return TagsEntryServiceFactory.getTxImpl().searchAutocomplete(companyId,
+			name, properties, begin, end);
+	}
+
 	public int searchCount(java.lang.String companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {

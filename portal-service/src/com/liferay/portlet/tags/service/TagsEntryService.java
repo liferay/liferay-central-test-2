@@ -46,6 +46,10 @@ public interface TagsEntryService {
 		java.lang.String name, java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public java.lang.String searchAutocomplete(java.lang.String companyId,
+		java.lang.String name, java.lang.String[] properties, int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public int searchCount(java.lang.String companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;

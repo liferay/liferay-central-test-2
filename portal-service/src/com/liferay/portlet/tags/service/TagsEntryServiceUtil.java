@@ -61,6 +61,16 @@ public class TagsEntryServiceUtil {
 		return tagsEntryService.search(companyId, name, properties, begin, end);
 	}
 
+	public static java.lang.String searchAutocomplete(
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
+
+		return tagsEntryService.searchAutocomplete(companyId, name, properties,
+			begin, end);
+	}
+
 	public static int searchCount(java.lang.String companyId,
 		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
