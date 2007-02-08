@@ -510,7 +510,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 
 		if (actions.size() == 0) {
-			throw new ResourceActionsException();
+			throw new ResourceActionsException(
+				"There are no actions associated with the resource " + name);
 		}
 	}
 

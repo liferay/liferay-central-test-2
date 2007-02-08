@@ -11573,7 +11573,7 @@
 			</resource-mapping>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB</name>
+			<name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
@@ -11582,8 +11582,8 @@
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
-			<jndi-name>ejb/liferay/SRLicenseLocalServiceHome</jndi-name>
-			<local-jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<jndi-name>ejb/liferay/SCLicenseLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-ref>
 				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
 				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
@@ -11605,16 +11605,16 @@
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductEntryLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCProductEntryLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCProductVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
@@ -11632,7 +11632,7 @@
 			</resource-mapping>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</name>
+			<name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
@@ -11641,7 +11641,7 @@
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</jndi-name>
+			<jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</jndi-name>
 			<ejb-ref>
 				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
 				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
@@ -11663,20 +11663,20 @@
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRLicenseLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCLicenseLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductEntryLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCProductEntryLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCProductVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
@@ -11694,7 +11694,7 @@
 			</resource-mapping>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB</name>
+			<name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
@@ -11703,8 +11703,8 @@
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
-			<jndi-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</jndi-name>
-			<local-jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<jndi-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-ref>
 				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
 				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
@@ -11726,16 +11726,16 @@
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRLicenseLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCLicenseLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductEntryLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCProductEntryLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCProductVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
@@ -11753,7 +11753,7 @@
 			</resource-mapping>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</name>
+			<name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
@@ -11762,7 +11762,7 @@
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</jndi-name>
+			<jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</jndi-name>
 			<ejb-ref>
 				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
 				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
@@ -11784,83 +11784,20 @@
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRLicenseLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCLicenseLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductEntryLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCProductEntryLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<resource-mapping>
-				<resource-name>jdbc/LiferayPool</resource-name>
-				<resource-type>javax.sql.DataSource</resource-type>
-				<resource-link>LiferayPool</resource-link>
-			</resource-mapping>
-			<resource-mapping>
-				<resource-name>mail/MailSession</resource-name>
-				<resource-type>javax.mail.Session</resource-type>
-				<resource-link>mail/MailSession</resource-link>
-			</resource-mapping>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<pk-waittimeout-millis/>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>ejb/liferay/SRProductEntryLocalServiceHome</jndi-name>
-			<local-jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-ref>
-				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
-				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
-			</ejb-ref>
-			<ejb-ref>
-				<ejb-ref-name>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-ref-name>
-				<ejb-link>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-link>
-			</ejb-ref>
-			<ejb-ref>
-				<ejb-ref-name>com_liferay_lock_service_ejb_LockServiceEJB</ejb-ref-name>
-				<ejb-link>com_liferay_lock_service_ejb_LockServiceEJB</ejb-link>
-			</ejb-ref>
-			<ejb-ref>
-				<ejb-ref-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-ref-name>
-				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
-			</ejb-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/RatingsStatsLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRLicenseLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCProductVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
@@ -11878,7 +11815,7 @@
 			</resource-mapping>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</name>
+			<name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
@@ -11887,7 +11824,8 @@
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</jndi-name>
+			<jndi-name>ejb/liferay/SCProductEntryLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-ref>
 				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
 				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
@@ -11913,20 +11851,16 @@
 				<ejb-link>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRLicenseLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCLicenseLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductEntryLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCProductVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
@@ -11944,7 +11878,7 @@
 			</resource-mapping>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB</name>
+			<name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
@@ -11953,8 +11887,7 @@
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
-			<jndi-name>ejb/liferay/SRProductVersionLocalServiceHome</jndi-name>
-			<local-jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</jndi-name>
 			<ejb-ref>
 				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
 				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
@@ -11972,16 +11905,28 @@
 				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
 			</ejb-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRLicenseLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/RatingsStatsLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductEntryLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCLicenseLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/SCProductEntryLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/SCProductVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
@@ -11999,7 +11944,7 @@
 			</resource-mapping>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</name>
+			<name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
@@ -12008,7 +11953,8 @@
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</jndi-name>
+			<jndi-name>ejb/liferay/SCProductVersionLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-ref>
 				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
 				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
@@ -12026,20 +11972,74 @@
 				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
 			</ejb-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRLicenseLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCLicenseLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductEntryLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/SCProductEntryLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SRProductVersionLocalServiceHome</ejb-ref-name>
-				<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<resource-mapping>
+				<resource-name>jdbc/LiferayPool</resource-name>
+				<resource-type>javax.sql.DataSource</resource-type>
+				<resource-link>LiferayPool</resource-link>
+			</resource-mapping>
+			<resource-mapping>
+				<resource-name>mail/MailSession</resource-name>
+				<resource-type>javax.mail.Session</resource-type>
+				<resource-link>mail/MailSession</resource-link>
+			</resource-mapping>
+		</ejb>
+		<ejb>
+			<name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</name>
+			<max-pool-size>40</max-pool-size>
+			<min-pool-size>20</min-pool-size>
+			<enable-freepool>false</enable-freepool>
+			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<pk-waittimeout-millis/>
+			<low-activity-interval>20</low-activity-interval>
+			<is-secure>false</is-secure>
+			<is-clustered>true</is-clustered>
+			<jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</jndi-name>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
+				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-ref-name>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_lock_service_ejb_LockServiceEJB</ejb-ref-name>
+				<ejb-link>com_liferay_lock_service_ejb_LockServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-ref-name>
+				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/SCLicenseLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/SCProductEntryLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/SCProductVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
@@ -13071,20 +13071,20 @@
 			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-ref>
 		<ejb-ref>
-			<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-ref>
 		<ejb-ref>
-			<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-ref>
 		<ejb-ref>
-			<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-ref>
 		<ejb-ref>
-			<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-ref>
 		<ejb-ref>
 			<ejb-ref-name>com_liferay_portlet_tags_service_ejb_TagsAssetServiceEJB</ejb-ref-name>
@@ -13391,20 +13391,20 @@
 			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/SRLicenseLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>ejb/liferay/SCLicenseLocalServiceHome</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/SRProductEntryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>ejb/liferay/SCProductEntryLocalServiceHome</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/SRProductVersionLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>ejb/liferay/SCProductVersionLocalServiceHome</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
@@ -13633,20 +13633,20 @@
 			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-ref>
 		<ejb-ref>
-			<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-ref>
 		<ejb-ref>
-			<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-ref>
 		<ejb-ref>
-			<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-ref>
 		<ejb-ref>
-			<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-ref>
 		<ejb-ref>
 			<ejb-ref-name>com_liferay_portlet_tags_service_ejb_TagsAssetServiceEJB</ejb-ref-name>
@@ -13953,20 +13953,20 @@
 			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/SRLicenseLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>ejb/liferay/SCLicenseLocalServiceHome</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/SRProductEntryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>ejb/liferay/SCProductEntryLocalServiceHome</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/SRProductVersionLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			<ejb-ref-name>ejb/liferay/SCProductVersionLocalServiceHome</ejb-ref-name>
+			<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>

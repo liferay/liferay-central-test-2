@@ -1434,8 +1434,8 @@
 					</resource-ref>
 				</session>
 				<session>
-					<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB</ejb-name>
-					<jndi-name>ejb/liferay/SRLicenseLocalServiceHome</jndi-name>
+					<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/SCLicenseLocalServiceHome</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>
@@ -1446,8 +1446,8 @@
 					</resource-ref>
 				</session>
 				<session>
-					<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-name>
-					<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</jndi-name>
+					<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</ejb-name>
+					<jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>
@@ -1458,8 +1458,8 @@
 					</resource-ref>
 				</session>
 				<session>
-					<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB</ejb-name>
-					<jndi-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</jndi-name>
+					<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>
@@ -1470,8 +1470,8 @@
 					</resource-ref>
 				</session>
 				<session>
-					<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-name>
-					<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</jndi-name>
+					<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</ejb-name>
+					<jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>
@@ -1482,8 +1482,8 @@
 					</resource-ref>
 				</session>
 				<session>
-					<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB</ejb-name>
-					<jndi-name>ejb/liferay/SRProductEntryLocalServiceHome</jndi-name>
+					<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/SCProductEntryLocalServiceHome</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>
@@ -1494,8 +1494,8 @@
 					</resource-ref>
 				</session>
 				<session>
-					<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</ejb-name>
-					<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</jndi-name>
+					<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</ejb-name>
+					<jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>
@@ -1506,8 +1506,8 @@
 					</resource-ref>
 				</session>
 				<session>
-					<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB</ejb-name>
-					<jndi-name>ejb/liferay/SRProductVersionLocalServiceHome</jndi-name>
+					<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/SCProductVersionLocalServiceHome</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>
@@ -1518,8 +1518,8 @@
 					</resource-ref>
 				</session>
 				<session>
-					<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-name>
-					<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</jndi-name>
+					<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</ejb-name>
+					<jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>

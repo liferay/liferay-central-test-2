@@ -542,53 +542,53 @@
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingOrderService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.ShoppingOrderService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRLicenseService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRLicenseService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRLicenseService" />
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCLicenseService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRLicenseService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRLicenseService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRLicenseService" />
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCLicenseService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRLicenseService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRLicenseService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRLicenseService" />
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCLicenseService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRFrameworkVersionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService" />
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCFrameworkVersionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRFrameworkVersionService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService" />
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCFrameworkVersionService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRFrameworkVersionService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService" />
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCFrameworkVersionService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRProductEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRProductEntryService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRProductEntryService" />
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCProductEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCProductEntryService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRProductEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRProductEntryService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRProductEntryService" />
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCProductEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCProductEntryService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRProductEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRProductEntryService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRProductEntryService" />
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCProductEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCProductEntryService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRProductVersionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRProductVersionService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRProductVersionService" />
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCProductVersionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCProductVersionService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRProductVersionService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRProductVersionService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRProductVersionService" />
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCProductVersionService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCProductVersionService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRProductVersionService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRProductVersionService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRProductVersionService" />
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCProductVersionService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCProductVersionService" />
 	</bean>
 	<bean name="/com_liferay_portlet_tags_service_spring_TagsAssetService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsAssetService.professional" />

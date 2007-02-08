@@ -366,9 +366,9 @@
 		</antcall>
 	</target>
 
-	<target name="build-service-portlet-softwarerepository">
+	<target name="build-service-portlet-softwarecatalog">
 		<antcall target="build-service">
-			<param name="service.file" value="src/com/liferay/portlet/softwarerepository/service.xml" />
+			<param name="service.file" value="src/com/liferay/portlet/softwarecatalog/service.xml" />
 		</antcall>
 	</target>
 
@@ -407,7 +407,7 @@
 		<antcall target="build-service-portlet-polls" />
 		<antcall target="build-service-portlet-ratings" />
 		<antcall target="build-service-portlet-shopping" />
-		<antcall target="build-service-portlet-softwarerepository" />
+		<antcall target="build-service-portlet-softwarecatalog" />
 		<antcall target="build-service-portlet-tags" />
 		<antcall target="build-service-portlet-wiki" />
 		<antcall target="build-service-portlet-workflow" />
@@ -502,9 +502,9 @@
 		</antcall>
 	</target>
 
-	<target name="build-wsdd-portlet-softwarerepository">
+	<target name="build-wsdd-portlet-softwarecatalog">
 		<antcall target="build-wsdd">
-			<param name="service.file" value="src/com/liferay/portlet/softwarerepository/service.xml" />
+			<param name="service.file" value="src/com/liferay/portlet/softwarecatalog/service.xml" />
 		</antcall>
 	</target>
 
@@ -549,7 +549,7 @@
 		<antcall target="build-wsdd-portlet-polls" />
 		<antcall target="build-wsdd-portlet-ratings" />
 		<antcall target="build-wsdd-portlet-shopping" />
-		<antcall target="build-wsdd-portlet-softwarerepository" />
+		<antcall target="build-wsdd-portlet-softwarecatalog" />
 		<antcall target="build-wsdd-portlet-tags" />
 		<antcall target="build-wsdd-portlet-wiki" />
 		<antcall target="build-wsdd-portlet-workflow" />

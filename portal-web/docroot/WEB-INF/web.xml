@@ -720,32 +720,32 @@
 		<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
-		<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-ref-name>
+		<ejb-ref-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.liferay.portlet.softwarerepository.service.ejb.SRLicenseServiceHome</home>
-		<remote>com.liferay.portlet.softwarerepository.service.ejb.SRLicenseServiceEJB</remote>
-		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-link>
+		<home>com.liferay.portlet.softwarecatalog.service.ejb.SCLicenseServiceHome</home>
+		<remote>com.liferay.portlet.softwarecatalog.service.ejb.SCLicenseServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
-		<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-ref-name>
+		<ejb-ref-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.liferay.portlet.softwarerepository.service.ejb.SRFrameworkVersionServiceHome</home>
-		<remote>com.liferay.portlet.softwarerepository.service.ejb.SRFrameworkVersionServiceEJB</remote>
-		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-link>
+		<home>com.liferay.portlet.softwarecatalog.service.ejb.SCFrameworkVersionServiceHome</home>
+		<remote>com.liferay.portlet.softwarecatalog.service.ejb.SCFrameworkVersionServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
-		<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</ejb-ref-name>
+		<ejb-ref-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.liferay.portlet.softwarerepository.service.ejb.SRProductEntryServiceHome</home>
-		<remote>com.liferay.portlet.softwarerepository.service.ejb.SRProductEntryServiceEJB</remote>
-		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</ejb-link>
+		<home>com.liferay.portlet.softwarecatalog.service.ejb.SCProductEntryServiceHome</home>
+		<remote>com.liferay.portlet.softwarecatalog.service.ejb.SCProductEntryServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
-		<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-ref-name>
+		<ejb-ref-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.liferay.portlet.softwarerepository.service.ejb.SRProductVersionServiceHome</home>
-		<remote>com.liferay.portlet.softwarerepository.service.ejb.SRProductVersionServiceEJB</remote>
-		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-link>
+		<home>com.liferay.portlet.softwarecatalog.service.ejb.SCProductVersionServiceHome</home>
+		<remote>com.liferay.portlet.softwarecatalog.service.ejb.SCProductVersionServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
 		<ejb-ref-name>com_liferay_portlet_tags_service_ejb_TagsAssetServiceEJB</ejb-ref-name>
@@ -1280,32 +1280,32 @@
 		<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/SRLicenseLocalServiceHome</ejb-ref-name>
+		<ejb-ref-name>ejb/liferay/SCLicenseLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portlet.softwarerepository.service.ejb.SRLicenseLocalServiceHome</local-home>
-		<local>com.liferay.portlet.softwarerepository.service.ejb.SRLicenseLocalServiceEJB</local>
-		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB</ejb-link>
+		<local-home>com.liferay.portlet.softwarecatalog.service.ejb.SCLicenseLocalServiceHome</local-home>
+		<local>com.liferay.portlet.softwarecatalog.service.ejb.SCLicenseLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</ejb-ref-name>
+		<ejb-ref-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portlet.softwarerepository.service.ejb.SRFrameworkVersionLocalServiceHome</local-home>
-		<local>com.liferay.portlet.softwarerepository.service.ejb.SRFrameworkVersionLocalServiceEJB</local>
-		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB</ejb-link>
+		<local-home>com.liferay.portlet.softwarecatalog.service.ejb.SCFrameworkVersionLocalServiceHome</local-home>
+		<local>com.liferay.portlet.softwarecatalog.service.ejb.SCFrameworkVersionLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/SRProductEntryLocalServiceHome</ejb-ref-name>
+		<ejb-ref-name>ejb/liferay/SCProductEntryLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portlet.softwarerepository.service.ejb.SRProductEntryLocalServiceHome</local-home>
-		<local>com.liferay.portlet.softwarerepository.service.ejb.SRProductEntryLocalServiceEJB</local>
-		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB</ejb-link>
+		<local-home>com.liferay.portlet.softwarecatalog.service.ejb.SCProductEntryLocalServiceHome</local-home>
+		<local>com.liferay.portlet.softwarecatalog.service.ejb.SCProductEntryLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/SRProductVersionLocalServiceHome</ejb-ref-name>
+		<ejb-ref-name>ejb/liferay/SCProductVersionLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portlet.softwarerepository.service.ejb.SRProductVersionLocalServiceHome</local-home>
-		<local>com.liferay.portlet.softwarerepository.service.ejb.SRProductVersionLocalServiceEJB</local>
-		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB</ejb-link>
+		<local-home>com.liferay.portlet.softwarecatalog.service.ejb.SCProductVersionLocalServiceHome</local-home>
+		<local>com.liferay.portlet.softwarecatalog.service.ejb.SCProductVersionLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>

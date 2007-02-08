@@ -3775,21 +3775,21 @@
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRLicenseLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
-			<value>com.liferay.portlet.softwarerepository.service.SRLicenseLocalService</value>
+			<value>com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService</value>
 		</property>
 		<property name="jndiName">
-			<value>ejb/liferay/SRLicenseLocalServiceHome</value>
+			<value>ejb/liferay/SCLicenseLocalServiceHome</value>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRLicenseLocalService.professional" class="com.liferay.portlet.softwarerepository.service.impl.SRLicenseLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.softwarerepository.service.SRLicenseLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.professional" class="com.liferay.portlet.softwarecatalog.service.impl.SCLicenseLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRLicenseLocalService.professional" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -3797,26 +3797,26 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRLicenseLocalServiceFactory" class="com.liferay.portlet.softwarerepository.service.SRLicenseLocalServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRLicenseLocalService.enterprise" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRLicenseService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
-			<value>com.liferay.portlet.softwarerepository.service.SRLicenseService</value>
+			<value>com.liferay.portlet.softwarecatalog.service.SCLicenseService</value>
 		</property>
 		<property name="jndiName">
-			<value>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</value>
+			<value>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</value>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRLicenseService.professional" class="com.liferay.portlet.softwarerepository.service.impl.SRLicenseServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.softwarerepository.service.SRLicenseService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService.professional" class="com.liferay.portlet.softwarecatalog.service.impl.SCLicenseServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRLicenseService.professional" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCLicenseService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -3824,12 +3824,12 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRLicenseServiceFactory" class="com.liferay.portlet.softwarerepository.service.SRLicenseServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRLicenseService.enterprise" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCLicenseService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.persistence.SRLicensePersistence" class="com.liferay.portlet.softwarerepository.service.persistence.SRLicensePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3837,26 +3837,26 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.persistence.SRLicenseUtil" class="com.liferay.portlet.softwarerepository.service.persistence.SRLicenseUtil" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.softwarerepository.service.persistence.SRLicensePersistence" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
-			<value>com.liferay.portlet.softwarerepository.service.SRFrameworkVersionLocalService</value>
+			<value>com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService</value>
 		</property>
 		<property name="jndiName">
-			<value>ejb/liferay/SRFrameworkVersionLocalServiceHome</value>
+			<value>ejb/liferay/SCFrameworkVersionLocalServiceHome</value>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionLocalService.professional" class="com.liferay.portlet.softwarerepository.service.impl.SRFrameworkVersionLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.professional" class="com.liferay.portlet.softwarecatalog.service.impl.SCFrameworkVersionLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionLocalService.professional" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -3864,26 +3864,26 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionLocalServiceFactory" class="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionLocalServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionLocalService.enterprise" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
-			<value>com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService</value>
+			<value>com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService</value>
 		</property>
 		<property name="jndiName">
-			<value>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</value>
+			<value>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</value>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService.professional" class="com.liferay.portlet.softwarerepository.service.impl.SRFrameworkVersionServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.professional" class="com.liferay.portlet.softwarecatalog.service.impl.SCFrameworkVersionServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService.professional" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -3891,12 +3891,12 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionServiceFactory" class="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService.enterprise" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.persistence.SRFrameworkVersionPersistence" class="com.liferay.portlet.softwarerepository.service.persistence.SRFrameworkVersionPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3904,26 +3904,26 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.persistence.SRFrameworkVersionUtil" class="com.liferay.portlet.softwarerepository.service.persistence.SRFrameworkVersionUtil" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.softwarerepository.service.persistence.SRFrameworkVersionPersistence" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductEntryLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
-			<value>com.liferay.portlet.softwarerepository.service.SRProductEntryLocalService</value>
+			<value>com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService</value>
 		</property>
 		<property name="jndiName">
-			<value>ejb/liferay/SRProductEntryLocalServiceHome</value>
+			<value>ejb/liferay/SCProductEntryLocalServiceHome</value>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductEntryLocalService.professional" class="com.liferay.portlet.softwarerepository.service.impl.SRProductEntryLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.professional" class="com.liferay.portlet.softwarecatalog.service.impl.SCProductEntryLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRProductEntryLocalService.professional" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -3931,26 +3931,26 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductEntryLocalServiceFactory" class="com.liferay.portlet.softwarerepository.service.SRProductEntryLocalServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRProductEntryLocalService.enterprise" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductEntryService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
-			<value>com.liferay.portlet.softwarerepository.service.SRProductEntryService</value>
+			<value>com.liferay.portlet.softwarecatalog.service.SCProductEntryService</value>
 		</property>
 		<property name="jndiName">
-			<value>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</value>
+			<value>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</value>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductEntryService.professional" class="com.liferay.portlet.softwarerepository.service.impl.SRProductEntryServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.professional" class="com.liferay.portlet.softwarecatalog.service.impl.SCProductEntryServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRProductEntryService.professional" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -3958,12 +3958,12 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductEntryServiceFactory" class="com.liferay.portlet.softwarerepository.service.SRProductEntryServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRProductEntryService.enterprise" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.persistence.SRProductEntryPersistence" class="com.liferay.portlet.softwarerepository.service.persistence.SRProductEntryPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3971,26 +3971,26 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.persistence.SRProductEntryUtil" class="com.liferay.portlet.softwarerepository.service.persistence.SRProductEntryUtil" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.softwarerepository.service.persistence.SRProductEntryPersistence" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductVersionLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
-			<value>com.liferay.portlet.softwarerepository.service.SRProductVersionLocalService</value>
+			<value>com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService</value>
 		</property>
 		<property name="jndiName">
-			<value>ejb/liferay/SRProductVersionLocalServiceHome</value>
+			<value>ejb/liferay/SCProductVersionLocalServiceHome</value>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductVersionLocalService.professional" class="com.liferay.portlet.softwarerepository.service.impl.SRProductVersionLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductVersionLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.professional" class="com.liferay.portlet.softwarecatalog.service.impl.SCProductVersionLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRProductVersionLocalService.professional" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -3998,26 +3998,26 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductVersionLocalServiceFactory" class="com.liferay.portlet.softwarerepository.service.SRProductVersionLocalServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRProductVersionLocalService.enterprise" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductVersionService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
-			<value>com.liferay.portlet.softwarerepository.service.SRProductVersionService</value>
+			<value>com.liferay.portlet.softwarecatalog.service.SCProductVersionService</value>
 		</property>
 		<property name="jndiName">
-			<value>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</value>
+			<value>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</value>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductVersionService.professional" class="com.liferay.portlet.softwarerepository.service.impl.SRProductVersionServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductVersionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.professional" class="com.liferay.portlet.softwarecatalog.service.impl.SCProductVersionServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRProductVersionService.professional" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -4025,12 +4025,12 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.SRProductVersionServiceFactory" class="com.liferay.portlet.softwarerepository.service.SRProductVersionServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.softwarerepository.service.SRProductVersionService.enterprise" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.persistence.SRProductVersionPersistence" class="com.liferay.portlet.softwarerepository.service.persistence.SRProductVersionPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4038,9 +4038,9 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarerepository.service.persistence.SRProductVersionUtil" class="com.liferay.portlet.softwarerepository.service.persistence.SRProductVersionUtil" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.softwarerepository.service.persistence.SRProductVersionPersistence" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">

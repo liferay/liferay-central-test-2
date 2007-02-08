@@ -85,7 +85,7 @@ alter_column_type ShoppingCoupon groupId LONG;
 
 alter_column_type ShoppingOrder groupId LONG;
 
-create table SRFrameworkVersion (
+create table SCFrameworkVersion (
 	frameworkVersionId LONG primary key,
 	groupId LONG,
 	companyId VARCHAR(75) not null,
@@ -94,33 +94,33 @@ create table SRFrameworkVersion (
 	createDate DATE null,
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
-	url VARCHAR(1024) null,
+	url VARCHAR(75) null,
 	active_ BOOLEAN,
 	priority INTEGER
 );
 
-create table SRFrameworkVersions_SRProductVersions (
+create table SCFrameworkVersions_SCProductVersions (
 	productVersionId LONG,
 	frameworkVersionId LONG,
 	primary key (productVersionId, frameworkVersionId)
 );
 
-create table SRLicense (
+create table SCLicense (
 	licenseId LONG primary key,
 	name VARCHAR(75) null,
-	url VARCHAR(1024) null,
+	url VARCHAR(75) null,
 	openSource BOOLEAN,
 	active_ BOOLEAN,
 	recommended BOOLEAN
 );
 
-create table SRLicenses_SRProductEntries (
+create table SCLicenses_SCProductEntries (
 	productEntryId LONG,
 	licenseId LONG,
 	primary key (productEntryId, licenseId)
 );
 
-create table SRProductEntry (
+create table SCProductEntry (
 	productEntryId LONG primary key,
 	groupId LONG,
 	companyId VARCHAR(75) not null,
@@ -130,14 +130,14 @@ create table SRProductEntry (
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
 	type_ VARCHAR(75) null,
-	shortDescription STRING null,
-	longDescription STRING null,
-	pageURL VARCHAR(1024) null,
+	shortDescription VARCHAR(75) null,
+	longDescription VARCHAR(75) null,
+	pageURL VARCHAR(75) null,
 	repoGroupId VARCHAR(75) null,
 	repoArtifactId VARCHAR(75) null
 );
 
-create table SRProductVersion (
+create table SCProductVersion (
 	productVersionId LONG primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
@@ -146,9 +146,47 @@ create table SRProductVersion (
 	modifiedDate DATE null,
 	productEntryId LONG,
 	version VARCHAR(75) null,
-	changeLog STRING null,
-	downloadPageURL VARCHAR(1024) null,
-	directDownloadURL VARCHAR(1024) null,
+	changeLog VARCHAR(75) null,
+	downloadPageURL VARCHAR(75) null,
+	directDownloadURL VARCHAR(75) null,
+	repoStoreArtifact BOOLEAN
+);
+
+create table SCLicenses_SCProductEntries (
+	productEntryId LONG,
+	licenseId LONG,
+	primary key (productEntryId, licenseId)
+);
+
+create table SCProductEntry (
+	productEntryId LONG primary key,
+	groupId LONG,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	type_ VARCHAR(75) null,
+	shortDescription VARCHAR(75) null,
+	longDescription VARCHAR(75) null,
+	pageURL VARCHAR(75) null,
+	repoGroupId VARCHAR(75) null,
+	repoArtifactId VARCHAR(75) null
+);
+
+create table SCProductVersion (
+	productVersionId LONG primary key,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	productEntryId LONG,
+	version VARCHAR(75) null,
+	changeLog VARCHAR(75) null,
+	downloadPageURL VARCHAR(75) null,
+	directDownloadURL VARCHAR(75) null,
 	repoStoreArtifact BOOLEAN
 );
 

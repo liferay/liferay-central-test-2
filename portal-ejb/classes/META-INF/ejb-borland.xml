@@ -432,36 +432,36 @@
 			<bean-local-home-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB</ejb-name>
-			<bean-local-home-name>ejb/liferay/SRLicenseLocalServiceHome</bean-local-home-name>
+			<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/SCLicenseLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</bean-home-name>
+			<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</bean-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB</ejb-name>
-			<bean-local-home-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</bean-local-home-name>
+			<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</bean-home-name>
+			<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</bean-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB</ejb-name>
-			<bean-local-home-name>ejb/liferay/SRProductEntryLocalServiceHome</bean-local-home-name>
+			<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/SCProductEntryLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</bean-home-name>
+			<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</bean-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB</ejb-name>
-			<bean-local-home-name>ejb/liferay/SRProductVersionLocalServiceHome</bean-local-home-name>
+			<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/SCProductVersionLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</bean-home-name>
+			<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</bean-home-name>
 		</session>
 		<session>
 			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-name>

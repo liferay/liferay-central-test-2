@@ -868,8 +868,8 @@
 	</portlet>
 	<portlet>
 		<portlet-name>98</portlet-name>
-		<struts-path>software_repository</struts-path>
-		<indexer-class>com.liferay.portlet.softwarerepository.util.Indexer</indexer-class>
+		<struts-path>software_catalog</struts-path>
+		<indexer-class>com.liferay.portlet.softwarecatalog.util.Indexer</indexer-class>
 		<use-default-template>true</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>

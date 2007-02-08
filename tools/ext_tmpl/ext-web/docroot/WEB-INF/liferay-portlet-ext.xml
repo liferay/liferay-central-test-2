@@ -445,7 +445,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>98</portlet-name>
-		<struts-path>software_repository</struts-path>
+		<struts-path>software_catalog</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>

@@ -1883,7 +1883,7 @@ Liferay.Service.Shopping.ShoppingOrder = {
 };
 
 Liferay.Service.SR = {
-	servicePackage: "com.liferay.portlet.softwarerepository.service.http."
+	servicePackage: "com.liferay.portlet.softwarecatalog.service.http."
 };
 
 Liferay.Service.SR.SRLicense = {
@@ -2469,6 +2469,154 @@ Liferay.Service.Workflow.WorkflowInstance = {
 		params.serviceParameters = Liferay.Service.getParameters(params);
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "signalToken";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	}
+};
+
+Liferay.Service.SC = {
+	servicePackage: "com.liferay.portlet.softwarecatalog.service.http."
+};
+
+Liferay.Service.SC.SCLicense = {
+	serviceClassName: Liferay.Service.SC.servicePackage + "SCLicense" + Liferay.Service.classNameSuffix,
+
+	addLicense: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addLicense";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	deleteLicense: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteLicense";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	getLicense: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getLicense";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	updateLicense: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateLicense";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	}
+};
+
+Liferay.Service.SC.SCFrameworkVersion = {
+	serviceClassName: Liferay.Service.SC.servicePackage + "SCFrameworkVersion" + Liferay.Service.classNameSuffix,
+
+	addFrameworkVersion: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addFrameworkVersion";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	deleteFrameworkVersion: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteFrameworkVersion";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	getFrameworkVersion: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getFrameworkVersion";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	updateFrameworkVersion: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateFrameworkVersion";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	}
+};
+
+Liferay.Service.SC.SCProductEntry = {
+	serviceClassName: Liferay.Service.SC.servicePackage + "SCProductEntry" + Liferay.Service.classNameSuffix,
+
+	addProductEntry: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addProductEntry";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	deleteProductEntry: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteProductEntry";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	getProductEntry: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getProductEntry";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	updateProductEntry: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateProductEntry";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	}
+};
+
+Liferay.Service.SC.SCProductVersion = {
+	serviceClassName: Liferay.Service.SC.servicePackage + "SCProductVersion" + Liferay.Service.classNameSuffix,
+
+	addProductVersion: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addProductVersion";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	deleteProductVersion: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteProductVersion";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	getProductVersion: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getProductVersion";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	updateProductVersion: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateProductVersion";
 
 		_$J.getJSON(Liferay.Service.url, params, callback);
 	}

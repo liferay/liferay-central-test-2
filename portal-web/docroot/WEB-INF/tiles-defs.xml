@@ -918,44 +918,44 @@
 
 	<!-- Software Repository-->
 
-	<definition name="portlet.software_repository" extends="portlet" >
+	<definition name="portlet.software_catalog" extends="portlet" >
 		<put name="portlet_decorate" value="false" />
 	</definition>
 
-	<definition name="portlet.software_repository.edit_framework_version" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/edit_framework_version.jsp" />
+	<definition name="portlet.software_catalog.edit_framework_version" extends="portlet.software_catalog">
+		<put name="portlet_content" value="/portlet/software_catalog/edit_framework_version.jsp" />
 	</definition>
 
-	<definition name="portlet.software_repository.edit_license" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/edit_license.jsp" />
+	<definition name="portlet.software_catalog.edit_license" extends="portlet.software_catalog">
+		<put name="portlet_content" value="/portlet/software_catalog/edit_license.jsp" />
 	</definition>
 
-	<definition name="portlet.software_repository.edit_product_entry" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/edit_product_entry.jsp" />
+	<definition name="portlet.software_catalog.edit_product_entry" extends="portlet.software_catalog">
+		<put name="portlet_content" value="/portlet/software_catalog/edit_product_entry.jsp" />
 	</definition>
 
-	<definition name="portlet.software_repository.edit_product_version" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/edit_product_version.jsp" />
+	<definition name="portlet.software_catalog.edit_product_version" extends="portlet.software_catalog">
+		<put name="portlet_content" value="/portlet/software_catalog/edit_product_version.jsp" />
 	</definition>
 
-	<definition name="portlet.software_repository.error" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/error.jsp" />
+	<definition name="portlet.software_catalog.error" extends="portlet.software_catalog">
+		<put name="portlet_content" value="/portlet/software_catalog/error.jsp" />
 	</definition>
 
-	<definition name="portlet.software_repository.search" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/search.jsp" />
+	<definition name="portlet.software_catalog.search" extends="portlet.software_catalog">
+		<put name="portlet_content" value="/portlet/software_catalog/search.jsp" />
 	</definition>
 
-	<definition name="portlet.software_repository.view" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/view.jsp" />
+	<definition name="portlet.software_catalog.view" extends="portlet.software_catalog">
+		<put name="portlet_content" value="/portlet/software_catalog/view.jsp" />
 	</definition>
 
-	<definition name="portlet.software_repository.view_product_entry" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/view_product_entry.jsp" />
+	<definition name="portlet.software_catalog.view_product_entry" extends="portlet.software_catalog">
+		<put name="portlet_content" value="/portlet/software_catalog/view_product_entry.jsp" />
 	</definition>
 
-	<definition name="portlet.software_repository.view_product_version" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/view_product_version.jsp" />
+	<definition name="portlet.software_catalog.view_product_version" extends="portlet.software_catalog">
+		<put name="portlet_content" value="/portlet/software_catalog/view_product_version.jsp" />
 	</definition>
 
 	<!-- Recent Documents -->

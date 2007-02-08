@@ -165,18 +165,18 @@ create index IX_EBC931B8 on Role_ (companyId, name);
 
 create index LIFERAY_002 on Roles_Permissions (permissionId);
 
-create index IX_D3AA1BC9 on SRFrameworkVersion (companyId);
-create index IX_4369008B on SRFrameworkVersion (groupId);
-create index IX_2DB6DADE on SRFrameworkVersion (groupId, active_);
+create index IX_C98C0D78 on SCFrameworkVersion (companyId);
+create index IX_272991FA on SCFrameworkVersion (groupId);
+create index IX_6E1764F on SCFrameworkVersion (groupId, active_);
 
-create index IX_297FCFE1 on SRLicense (active_);
-create index IX_4DFB798A on SRLicense (active_, recommended);
+create index IX_1C841592 on SCLicense (active_);
+create index IX_5327BB79 on SCLicense (active_, recommended);
 
-create index IX_78E10320 on SRProductEntry (companyId);
-create index IX_370FD1A2 on SRProductEntry (groupId);
-create index IX_93BA67DC on SRProductEntry (groupId, userId);
+create index IX_5D25244F on SCProductEntry (companyId);
+create index IX_72F87291 on SCProductEntry (groupId);
+create index IX_98E6A9CB on SCProductEntry (groupId, userId);
 
-create index IX_E31BA620 on SRProductVersion (productEntryId);
+create index IX_8377A211 on SCProductVersion (productEntryId);
 
 create index IX_C28B41DC on ShoppingCart (groupId);
 create index IX_54101CC8 on ShoppingCart (userId);

@@ -2222,7 +2222,7 @@
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/software_repository/view</value>
+			<value>/software_catalog/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

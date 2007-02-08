@@ -1180,7 +1180,7 @@
 		<local-jndi-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB</ejb-name>
+		<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseLocalServiceEJB</ejb-name>
 		<reference-descriptor>
 			<resource-description>
 				<res-ref-name>mail/MailSession</res-ref-name>
@@ -1188,10 +1188,10 @@
 			</resource-description>
 		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
-		<local-jndi-name>ejb/liferay/SRLicenseLocalServiceHome</local-jndi-name>
+		<local-jndi-name>ejb/liferay/SCLicenseLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-name>
+		<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</ejb-name>
 		<reference-descriptor>
 			<resource-description>
 				<res-ref-name>mail/MailSession</res-ref-name>
@@ -1199,10 +1199,10 @@
 			</resource-description>
 		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
-		<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</jndi-name>
+		<jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCLicenseServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB</ejb-name>
+		<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionLocalServiceEJB</ejb-name>
 		<reference-descriptor>
 			<resource-description>
 				<res-ref-name>mail/MailSession</res-ref-name>
@@ -1210,10 +1210,10 @@
 			</resource-description>
 		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
-		<local-jndi-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</local-jndi-name>
+		<local-jndi-name>ejb/liferay/SCFrameworkVersionLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-name>
+		<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</ejb-name>
 		<reference-descriptor>
 			<resource-description>
 				<res-ref-name>mail/MailSession</res-ref-name>
@@ -1221,10 +1221,10 @@
 			</resource-description>
 		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
-		<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</jndi-name>
+		<jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCFrameworkVersionServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB</ejb-name>
+		<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryLocalServiceEJB</ejb-name>
 		<reference-descriptor>
 			<resource-description>
 				<res-ref-name>mail/MailSession</res-ref-name>
@@ -1232,10 +1232,10 @@
 			</resource-description>
 		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
-		<local-jndi-name>ejb/liferay/SRProductEntryLocalServiceHome</local-jndi-name>
+		<local-jndi-name>ejb/liferay/SCProductEntryLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</ejb-name>
+		<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</ejb-name>
 		<reference-descriptor>
 			<resource-description>
 				<res-ref-name>mail/MailSession</res-ref-name>
@@ -1243,10 +1243,10 @@
 			</resource-description>
 		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
-		<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</jndi-name>
+		<jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductEntryServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB</ejb-name>
+		<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionLocalServiceEJB</ejb-name>
 		<reference-descriptor>
 			<resource-description>
 				<res-ref-name>mail/MailSession</res-ref-name>
@@ -1254,10 +1254,10 @@
 			</resource-description>
 		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
-		<local-jndi-name>ejb/liferay/SRProductVersionLocalServiceHome</local-jndi-name>
+		<local-jndi-name>ejb/liferay/SCProductVersionLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-name>
+		<ejb-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</ejb-name>
 		<reference-descriptor>
 			<resource-description>
 				<res-ref-name>mail/MailSession</res-ref-name>
@@ -1265,7 +1265,7 @@
 			</resource-description>
 		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
-		<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</jndi-name>
+		<jndi-name>com_liferay_portlet_softwarecatalog_service_ejb_SCProductVersionServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-name>
