@@ -25,6 +25,8 @@ package com.liferay.portlet;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.theme.PortletDisplay;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
@@ -231,6 +233,15 @@ public class RenderResponseImpl implements RenderResponse {
 
 	public void setTitle(String title) {
 		_title = title;
+
+		// See LEP-2188
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)_req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		portletDisplay.setTitle(_title);
 	}
 
 	public Boolean getUseDefaultTemplate() {
