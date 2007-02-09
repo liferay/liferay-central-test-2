@@ -26,8 +26,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.Plugin;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.lucene.LuceneFields;
+import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -66,8 +66,8 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
 
 import org.dom4j.Attribute;
@@ -145,7 +145,7 @@ public class PluginUtil {
 
 	public static void reIndex(String[] ids) throws SystemException {
 		try {
-			
+
 			Iterator itr = search(null, null, null).iterator();
 
 			while (itr.hasNext()) {
@@ -250,7 +250,7 @@ public class PluginUtil {
 	}
 
 	public static Hits search(
-			String keywords, String type, String tag, String license, 
+			String keywords, String type, String tag, String license,
 			String repositoryURL)
 		throws SystemException {
 

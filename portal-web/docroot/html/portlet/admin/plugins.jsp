@@ -27,7 +27,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 if (Validator.isNull(redirect)) {
 	redirect = currentURL;
 }
-	
+
 String keywords = ParamUtil.getString(renderRequest, "keywords");
 String type = ParamUtil.getString(renderRequest, "type");
 String tag = ParamUtil.getString(renderRequest, "tag");
@@ -62,7 +62,7 @@ try {
 	</tr>
 	<tr>
 		<td>
-			<input class="form-text" name="<portlet:namespace />keywords" size="20" type="text" value="<%= keywords %>">&nbsp;			 
+			<input class="form-text" name="<portlet:namespace />keywords" size="20" type="text" value="<%= keywords %>">&nbsp;
 		</td>
 		<td>
 			<select name="<portlet:namespace/>type">
@@ -128,7 +128,7 @@ try {
 
 	<br>
 
-	<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "search") %>" onClick="<portlet:namespace/>searchPlugins('<%=redirect%>')">
+	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "search") %>' onClick="<portlet:namespace/>searchPlugins('<%=redirect%>')">
 
 	<br><br>
 

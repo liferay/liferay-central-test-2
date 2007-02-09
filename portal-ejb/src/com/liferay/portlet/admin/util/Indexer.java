@@ -22,31 +22,32 @@
 
 package com.liferay.portlet.admin.util;
 
-import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.lucene.LuceneUtil;
-import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.plugin.PluginUtil;
+import com.liferay.portal.lucene.LuceneFields;
+import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.plugin.PluginUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.Html;
-import com.liferay.util.StringUtil;
 import com.liferay.util.License;
+import com.liferay.util.StringUtil;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Iterator;
 
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.store.Directory;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.portlet.PortletURL;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.Term;
+import org.apache.lucene.store.Directory;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>

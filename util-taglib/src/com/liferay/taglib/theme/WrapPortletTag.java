@@ -31,7 +31,6 @@ import com.liferay.taglib.util.ParamAncestorTagImpl;
 import com.liferay.taglib.util.ThemeUtil;
 import com.liferay.util.servlet.StringServletResponse;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
