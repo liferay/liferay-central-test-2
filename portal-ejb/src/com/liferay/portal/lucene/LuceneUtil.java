@@ -34,6 +34,7 @@ import com.liferay.util.lucene.KeywordsUtil;
 import java.io.IOException;
 
 import java.sql.Connection;
+import java.sql.Statement;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -240,11 +241,13 @@ public class LuceneUtil {
 		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
 				_LUCENE_STORE_TYPE_JDBC)) {
 
+			String tableName = _getTableName(companyId);
+
 			try {
 				DataSource ds = HibernateUtil.getDataSource();
 
 				JdbcDirectory directory = new JdbcDirectory(
-					ds, _dialect, _getTableName(companyId));
+					ds, _dialect, tableName);
 
 				if (directory.tableExists()) {
 					directory.delete();
@@ -254,7 +257,30 @@ public class LuceneUtil {
 				throw new RuntimeException(ioe);
 			}
 			catch (UnsupportedOperationException uoe) {
-				throw new RuntimeException(uoe);
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Database doesn't support the ability to check " +
+							"whether a table exists");
+				}
+
+				Connection con = null;
+				Statement s = null;
+
+				try {
+					con = HibernateUtil.getConnection();
+
+					s = con.createStatement();
+
+					s.executeUpdate("DELETE FROM " + tableName);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Could not truncate " + tableName);
+					}
+				}
+				finally {
+					DataAccess.cleanUp(con, s);
+				}
 			}
 		}
 		else {
@@ -279,13 +305,16 @@ public class LuceneUtil {
 		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
 				_LUCENE_STORE_TYPE_JDBC)) {
 
+			String tableName = _getTableName(companyId);
+
+			JdbcDirectory jdbcDir = null;
+
 			try {
 				DataSource ds = HibernateUtil.getDataSource();
 
-				directory = new JdbcDirectory(
-					ds, _dialect, _getTableName(companyId));
+				directory = new JdbcDirectory(ds, _dialect, tableName);
 
-				JdbcDirectory jdbcDir = (JdbcDirectory) directory;
+				jdbcDir = (JdbcDirectory)directory;
 
 				if (!jdbcDir.tableExists()) {
 					jdbcDir.create();
@@ -295,7 +324,20 @@ public class LuceneUtil {
 				throw new RuntimeException(ioe);
 			}
 			catch (UnsupportedOperationException uoe) {
-				throw new RuntimeException(uoe);
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Database doesn't support the ability to check " +
+							"whether a table exists");
+				}
+
+				try {
+					jdbcDir.create();
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Could not create " + tableName);
+					}
+				}
 			}
 		}
 		else {
