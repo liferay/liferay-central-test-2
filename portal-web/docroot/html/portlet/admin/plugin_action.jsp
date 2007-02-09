@@ -26,7 +26,10 @@
 
 <%
 	ResultRow row = (ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
-	Plugin plugin = (Plugin)row.getObject();
+	Document doc = (Document)row.getObject();
+
+	String pluginModuleId = doc.get("moduleId");
+	String pluginRepositoryURL = doc.get("repositoryURL");
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -34,8 +37,8 @@
 
 	rowURL.setParameter("struts_action", "/admin/view");
 	rowURL.setParameter("redirect", currentURL);
-	rowURL.setParameter("moduleId", plugin.getModuleId());
-	rowURL.setParameter("repositoryURL", plugin.getRepositoryURL());
+	rowURL.setParameter("moduleId", pluginModuleId);
+	rowURL.setParameter("repositoryURL", pluginRepositoryURL);
 %>
 
 <liferay-ui:icon image="view" url='<%= rowURL.toString()%>' />

@@ -22,12 +22,18 @@
 
 package com.liferay.portal.plugin;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.Plugin;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.lucene.LuceneFields;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
+import com.liferay.portlet.admin.util.Indexer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
@@ -35,6 +41,7 @@ import com.liferay.util.License;
 import com.liferay.util.Validator;
 import com.liferay.util.Version;
 import com.liferay.util.XSSUtil;
+import com.liferay.util.lucene.HitsImpl;
 import com.liferay.util.xml.XMLSafeReader;
 
 import java.io.IOException;
@@ -58,6 +65,10 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.Searcher;
 
 import org.dom4j.Attribute;
 import org.dom4j.Document;
@@ -130,6 +141,37 @@ public class PluginUtil {
 
 	public static String[] getSupportedTypes() {
 		return PropsUtil.getArray(PropsUtil.PLUGIN_TYPES);
+	}
+
+	public static void reIndex(String[] ids) throws SystemException {
+		try {
+			
+			Iterator itr = search(null, null, null).iterator();
+
+			while (itr.hasNext()) {
+				Plugin plugin = (Plugin)itr.next();
+
+				try {
+					Indexer.updatePlugin(
+						plugin.getModuleId(), plugin.getName(),
+						plugin.getVersion(), plugin.getAuthor(),
+						plugin.getType(), plugin.getTags(),
+						plugin.getLicenses(), plugin.getLiferayVersions(),
+						plugin.getShortDescription(),
+						plugin.getLongDescription(),
+						plugin.getPageURL(), plugin.getRepositoryURL());
+				}
+				catch (Exception e1) {
+					_log.error("Reindexing " + plugin.getModuleId(), e1);
+				}
+			}
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e2) {
+			throw new SystemException(e2);
+		}
 	}
 
 	public static RepositoryReport reloadRepositories() throws PluginException {
@@ -205,6 +247,87 @@ public class PluginUtil {
 		}
 
 		return new ArrayList(plugins.keySet());
+	}
+
+	public static Hits search(
+			String keywords, String type, String tag, String license, 
+			String repositoryURL)
+		throws SystemException {
+
+		_checkRepositories(repositoryURL);
+
+		try {
+			HitsImpl hits = new HitsImpl();
+
+			BooleanQuery contextQuery = new BooleanQuery();
+
+			LuceneUtil.addRequiredTerm(
+				contextQuery, LuceneFields.PORTLET_ID,
+				com.liferay.portlet.admin.util.Indexer.PORTLET_ID);
+
+			if (Validator.isNotNull(type)) {
+				LuceneUtil.addRequiredTerm(contextQuery, "type", type);
+			}
+
+			BooleanQuery fullQuery = new BooleanQuery();
+
+			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+
+			if (Validator.isNotNull(keywords)) {
+				BooleanQuery searchQuery = new BooleanQuery();
+
+				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
+				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+
+				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+			}
+
+			if (Validator.isNotNull(type)) {
+				BooleanQuery searchQuery = new BooleanQuery();
+
+				LuceneUtil.addTerm(searchQuery, "type", type);
+
+				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+			}
+
+			if (Validator.isNotNull(tag)) {
+				BooleanQuery searchQuery = new BooleanQuery();
+
+				LuceneUtil.addTerm(searchQuery, "tag", tag);
+
+				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+			}
+
+			if (Validator.isNotNull(repositoryURL)) {
+				BooleanQuery searchQuery = new BooleanQuery();
+
+				LuceneUtil.addTerm(searchQuery, "repositoryURL", repositoryURL);
+
+				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+			}
+
+			if (Validator.isNotNull(license)) {
+				BooleanQuery searchQuery = new BooleanQuery();
+
+				LuceneUtil.addTerm(searchQuery, "license", license);
+
+				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+			}
+
+			Searcher searcher = LuceneUtil.getSearcher(CompanyImpl.SYSTEM);
+
+			hits.recordHits(searcher.search(fullQuery));
+
+			return hits;
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+		catch (ParseException pe) {
+			_log.error("Parsing keywords " + keywords, pe);
+
+			return new HitsImpl();
+		}
 	}
 
 	private static PluginRepository _loadRepository(String repositoryURL)
@@ -338,6 +461,19 @@ public class PluginUtil {
 				_readText(pluginEl.elementText("recommended-war-name")));
 
 			plugins.addPlugin(plugin);
+
+			try {
+				Indexer.updatePlugin(
+					plugin.getModuleId(), plugin.getName(), plugin.getVersion(),
+					plugin.getAuthor(), plugin.getType(), plugin.getTags(),
+					plugin.getLicenses(), plugin.getLiferayVersions(),
+					plugin.getShortDescription(),
+					plugin.getLongDescription(),
+					plugin.getPageURL(), plugin.getRepositoryURL());
+			}
+			catch (Exception e1) {
+				_log.error("Reindexing " + plugin.getModuleId(), e1);
+			}
 		}
 
 		return plugins;
@@ -390,6 +526,22 @@ public class PluginUtil {
 		}
 
 		return result;
+	}
+
+	private static void _checkRepositories(String repositoryURL)
+		throws PluginException {
+		String[] repositoryURLs;
+
+		if (Validator.isNotNull(repositoryURL)) {
+			repositoryURLs = new String[]{repositoryURL};
+		}
+		else {
+			repositoryURLs = getRepositoryURLs();
+		}
+
+		for (int i = 0; i < repositoryURLs.length; i++) {
+			getRepository(repositoryURLs[i]);
+		}
 	}
 
 	private static List _readList(Element parent, String childTagName) {

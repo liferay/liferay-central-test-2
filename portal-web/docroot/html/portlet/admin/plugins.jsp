@@ -24,17 +24,14 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-
-String tag = ParamUtil.getString(renderRequest, "tag");
+if (Validator.isNull(redirect)) {
+	redirect = currentURL;
+}
+	
+String keywords = ParamUtil.getString(renderRequest, "keywords");
 String type = ParamUtil.getString(renderRequest, "type");
-
-PortletURL searchURL = renderResponse.createRenderURL();
-
-searchURL.setWindowState(WindowState.MAXIMIZED);
-searchURL.setParameter("struts_action", "/admin/view");
-searchURL.setParameter("tabs1", tabs1);
-searchURL.setParameter("tabs2", tabs2);
-searchURL.setParameter("redirect", redirect);
+String tag = ParamUtil.getString(renderRequest, "tag");
+String license = ParamUtil.getString(renderRequest, "license");
 
 PortletURL viewPluginURL = renderResponse.createRenderURL();
 
@@ -43,22 +40,14 @@ viewPluginURL.setParameter("struts_action", "/admin/view");
 viewPluginURL.setParameter("tabs1", tabs1);
 viewPluginURL.setParameter("tabs2", tabs2);
 
-PortletURL reloadRepositoriesURL = renderResponse.createActionURL();
-
-reloadRepositoriesURL.setWindowState(WindowState.MAXIMIZED);
-reloadRepositoriesURL.setParameter("struts_action", "/admin/edit_server");
-reloadRepositoriesURL.setParameter("tabs1", tabs1);
-reloadRepositoriesURL.setParameter("tabs2", tabs2);
-reloadRepositoriesURL.setParameter("cmd", "reloadRepositories");
-reloadRepositoriesURL.setParameter("redirect", currentURL);
-
 try {
 %>
 
-	<form action="<%= searchURL.toString() %>" method="post">
-
 	<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "keywords") %>
+		</td>
 		<td>
 			<%= LanguageUtil.get(pageContext, "type") %>
 		</td>
@@ -72,6 +61,9 @@ try {
 		</td>
 	</tr>
 	<tr>
+		<td>
+			<input class="form-text" name="<portlet:namespace />keywords" size="20" type="text" value="<%= keywords %>">&nbsp;			 
+		</td>
 		<td>
 			<select name="<portlet:namespace/>type">
 				<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
@@ -136,11 +128,11 @@ try {
 
 	<br>
 
-	<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+	<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "search") %>" onClick="<portlet:namespace/>searchPlugins('<%=redirect%>')">
 
-	</form>
+	<br><br>
 
-	<br><div class="beta-separator" style="clear: both;"></div><br>
+	<div class="beta-separator" style="clear: both;"></div><br>
 
 	<%
 	List headerNames = new ArrayList();
@@ -152,22 +144,30 @@ try {
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, viewPluginURL, headerNames, null);
 
-	List plugins = PluginUtil.search(type, tag, repositoryURL);
+	Hits hits = PluginUtil.search(keywords, type, tag, license, repositoryURL);
 
-	int total = plugins.size();
+	int total = hits.getLength();
 
 	searchContainer.setTotal(total);
 
-	List results = ListUtil.subList(plugins, searchContainer.getStart(), searchContainer.getEnd());
+	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 
-	searchContainer.setResults(results);
+	//searchContainer.setResults(results);
 
 	List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.size(); i++) {
-		Plugin plugin = (Plugin) results.get(i);
+	for (int i = 0; i < results.getLength(); i++) {
+		Document doc = results.doc(i);
 
-		ResultRow row = new ResultRow(plugin, plugin.getModuleId(), i);
+		String pluginModuleId = doc.get("moduleId");
+		String pluginType = doc.get("type");
+		String pluginRepositoryURL = doc.get("repositoryURL");
+		String pluginName = doc.get(LuceneFields.TITLE);
+		String pluginVersion = doc.get("version");
+		String pluginShortDescription = doc.get("shortDescription");
+		String pluginTags = doc.get("tags");
+
+		ResultRow row = new ResultRow(doc, pluginModuleId, i);
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -177,22 +177,22 @@ try {
 		rowURL.setParameter("tabs1", tabs1);
 		rowURL.setParameter("tabs2", tabs2);
 		rowURL.setParameter("redirect", currentURL);
-		rowURL.setParameter("moduleId", plugin.getModuleId());
-		rowURL.setParameter("repositoryURL", plugin.getRepositoryURL());
+		rowURL.setParameter("moduleId", pluginModuleId);
+		rowURL.setParameter("repositoryURL", pluginRepositoryURL);
 
 		// Name and short description
 
 		StringBuffer sb = new StringBuffer();
 
 		sb.append("<b>");
-		sb.append(plugin.getName());
+		sb.append(pluginName);
 		sb.append("</b> ");
-		sb.append(plugin.getVersion());
+		sb.append(pluginVersion);
 
-		if (Validator.isNotNull(plugin.getShortDescription())) {
+		if (Validator.isNotNull(pluginShortDescription)) {
 			sb.append("<br>");
 			sb.append("<span style=\"font-size: xx-small;\">");
-			sb.append(plugin.getShortDescription());
+			sb.append(pluginShortDescription);
 			sb.append("</span>");
 		}
 
@@ -200,7 +200,7 @@ try {
 
 		// Type
 
-		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, plugin.getType()), null, null, null);
+		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, pluginType), null, null, null);
 
 		row.addText(rowTextEntry);
 
@@ -208,21 +208,7 @@ try {
 
 		rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-		sb = new StringBuffer();
-
-		itr = plugin.getTags().iterator();
-
-		while (itr.hasNext()) {
-			String curTag = (String)itr.next();
-
-			sb.append(curTag);
-
-			if (itr.hasNext()) {
-				sb.append(StringPool.COMMA + StringPool.SPACE);
-			}
-		}
-
-		rowTextEntry.setName(sb.toString());
+		rowTextEntry.setName(pluginTags);
 
 		row.addText(rowTextEntry);
 
@@ -250,11 +236,8 @@ try {
 
 	<br>
 
-	<form action="<%= reloadRepositoriesURL.toString() %>" method="post">
+	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "refresh")%>'  onClick="<portlet:namespace/>reloadRepositories('<%=redirect%>')">
 
-	<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "refresh") %>">
-
-	</form>
 
 <%
 }

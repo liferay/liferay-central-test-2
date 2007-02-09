@@ -67,6 +67,17 @@ portletURL.setParameter("tabs3", tabs3);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_users" /></portlet:actionURL>");
 	}
 
+	function <portlet:namespace />searchPlugins(redirect) {
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
+		submitForm(document.<portlet:namespace />fm, "<%=portletURL.toString()%>");
+	}
+
+	function <portlet:namespace />reloadRepositories(redirect) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'reloadRepositories';
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_server" /></portlet:actionURL>")
+	}
+
 	function <portlet:namespace />updateDefaultLdap() {
 		var baseProviderURL = "";
 		var baseDN = "";
