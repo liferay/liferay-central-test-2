@@ -1,4 +1,4 @@
-#*
+<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,46 +20,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-*#
+%>
+
+<%@ include file="init.jsp" %>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td class="portlet-shadow-tl"><div></div></td>
+	<td class="portlet-shadow-tc" width="100%"></td>
+	<td class="portlet-shadow-tr"><div></div></td>
+</tr>
+<tr>
+	<td class="portlet-shadow-ml">
+	</td>
+	<td width="100%">
 
 <div class="portlet-container">
-	<div class="portlet-box-right">
+	<liferay-portlet:header-bar />
+
 	<div class="portlet-box">
-
-	<div class="portlet-header-bar">
-		<div class="portlet-header-decoration">
-			<div><div>
-				#if ($portletDisplay.getTitle() != "")
-					<span class="portlet-title">$portletDisplay.getTitle()</span>
-				#end
-			</div></div>
+		<div class="portlet-minimum-height">
+			<div id="p_p_body_<%= portletDisplay.getId() %>" <%= (portletDisplay.isStateMin()) ? "style=\"display: none;\"" : "" %>>
+    		    <div class="slide-maximize-reference">
+						<%= portletDisplay.getContent() %>
+                </div><!-- slide-maximize-reference -->
+			</div>
 		</div>
+	</div><!-- end portlet-box -->
+</div><!-- End portlet-container -->
 
-		<div class="portlet-small-icon-bar">
-		
-			$taglibLiferay.iconConfiguration()
-
-			$taglibLiferay.iconEdit()
-
-			$taglibLiferay.iconEditGuest()
-
-			$taglibLiferay.iconHelp()
-
-			$taglibLiferay.iconPrint()
-
-			$taglibLiferay.iconMinimize()
-
-			$taglibLiferay.iconMaximize()
-
-			$taglibLiferay.iconClose()
-
-		</div>
-	</div>
-
-	#if ($portletDisplay.isStateMin())
-		#set($tempVariable1 = "style='display: none;'")
-	#else
-		#set($tempVariable1 = "")
-	#end
-
-	<div class="portlet-content" id="p_p_body_$portletDisplay.getId()" $tempVariable1>
+	</td>
+	<td class="portlet-shadow-mr">
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<table border="0" cellspacing="0" cellpadding="0" width="100%">
+		<tr>
+			<td class="portlet-shadow-bl"><div></div></td>
+			<td class="portlet-shadow-bc" width="100%"></td>
+			<td class="portlet-shadow-br"><div></div></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+<div class="portlet-spacer"></div>

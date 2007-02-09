@@ -370,6 +370,14 @@ public class PortletDisplay implements Serializable {
 		_restoreCurrentView = restoreCurrentView;
 	}
 
+	public String getContent() {
+		return _content;
+	}
+
+	public void setContent(String content) {
+		_content = content;
+	}
+
 	public void recycle() {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Recycling instance " + hashCode());
@@ -414,6 +422,7 @@ public class PortletDisplay implements Serializable {
 		_urlMin = null;
 		_urlPrint = null;
 		_restoreCurrentView = false;
+		_content = null;
 	}
 
 	public void copyFrom(PortletDisplay master) {
@@ -456,6 +465,7 @@ public class PortletDisplay implements Serializable {
 		_urlMin = master.getURLMin();
 		_urlPrint = master.getURLPrint();
 		_restoreCurrentView = master.isRestoreCurrentView();
+		_content = master.getContent();
 	}
 
 	public void copyTo(PortletDisplay slave) {
@@ -498,6 +508,7 @@ public class PortletDisplay implements Serializable {
 		slave.setURLMin(_urlMin);
 		slave.setURLPrint(_urlPrint);
 		slave.setRestoreCurrentView(_restoreCurrentView);
+		slave.setContent(_content);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortletDisplay.class);
@@ -543,5 +554,6 @@ public class PortletDisplay implements Serializable {
 	private String _urlMin;
 	private String _urlPrint;
 	private boolean _restoreCurrentView;
+	private String _content;
 
 }

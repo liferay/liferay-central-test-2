@@ -16,14 +16,6 @@
 		</delete>
 
 		<antcall target="clean-common-images">
-			<param name="theme.name" value="brochure" />
-		</antcall>
-
-		<antcall target="clean-common-images">
-			<param name="theme.name" value="genesis" />
-		</antcall>
-
-		<antcall target="clean-common-images">
 			<param name="theme.name" value="velocity" />
 		</antcall>
 	</target>
@@ -370,14 +362,6 @@
 	</target>
 
 	<target name="build-common-images">
-		<antcall target="build-common-images-theme">
-			<param name="theme.name" value="brochure" />
-		</antcall>
-
-		<antcall target="build-common-images-theme">
-			<param name="theme.name" value="genesis" />
-		</antcall>
-
 		<antcall target="build-common-images-theme">
 			<param name="theme.name" value="velocity" />
 		</antcall>

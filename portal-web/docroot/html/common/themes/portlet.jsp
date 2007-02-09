@@ -293,11 +293,11 @@ if (urlBack != null) {
 	<c:otherwise>
 		<c:choose>
 			<c:when test="<%= portletDecorate %>">
-				<liferay-theme:box top="portlet_top.jsp" bottom="portlet_bottom.jsp">
+				<liferay-theme:wrap-portlet page="portlet.jsp">
 					<div id="p_p_content<%= portletDisplay.getNamespace() %>" style="margin-top: 0; margin-bottom: 0;">
 						<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
 					</div>
-				</liferay-theme:box>
+				</liferay-theme:wrap-portlet>
 			</c:when>
 			<c:otherwise>
 				<div class="portlet-borderless-container">

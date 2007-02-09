@@ -51,7 +51,7 @@
 		portletDisplay.setTitle(title);
 		%>
 
-		<liferay-theme:box top="portlet_top.jsp" bottom="portlet_bottom.jsp">
+		<liferay-theme:wrap-portlet page="portlet.jsp">
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>
 				<td style="padding: 4px 8px 10px 8px;">
@@ -59,7 +59,7 @@
 				</td>
 			</tr>
 			</table>
-		</liferay-theme:box>
+		</liferay-theme:wrap-portlet>
 	</c:otherwise>
 </c:choose>
 
