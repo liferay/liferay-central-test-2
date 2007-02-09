@@ -55,7 +55,7 @@ integerFormat.setMaximumFractionDigits(0);
 	<option value="spell"><%= LanguageUtil.get(pageContext, "spell") %></option>
 </select>
 
-<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.gif" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
+<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.png" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
 
 </form>
 

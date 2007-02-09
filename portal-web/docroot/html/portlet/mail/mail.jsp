@@ -71,10 +71,10 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 		<table border="0" cellpadding="2" cellspacing="2" class="portlet-mail-toolbar font-small" id="portlet-mail-main-toolbar">
 		<tr>
 			<td nowrap onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />';">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/check_mail.gif" /> <%= LanguageUtil.get(pageContext, "check-mail") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/check_mail.png" /> <%= LanguageUtil.get(pageContext, "check-mail") %>
 			</td>
 			<td nowrap onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>';">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" /> <%= LanguageUtil.get(pageContext, "new") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.png" /> <%= LanguageUtil.get(pageContext, "new") %>
 			</td>
 		</tr>
 		</table>
@@ -427,25 +427,25 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 		<table border="0" cellpadding="2" cellspacing="2" class="portlet-mail-toolbar font-small" id="portlet-mail-main-toolbar" width="100%">
 		<tr>
 			<td nowrap onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>';">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" /> <%= LanguageUtil.get(pageContext, "new") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.png" /> <%= LanguageUtil.get(pageContext, "new") %>
 			</td>
 			<td nowrap onClick="Mail.getFolders(true);">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/check_mail.gif" /> <%= LanguageUtil.get(pageContext, "check-mail") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/check_mail.png" /> <%= LanguageUtil.get(pageContext, "check-mail") %>
 			</td>
 			<td nowrap onClick="Mail.submitCompose('reply', document.<portlet:namespace />fm);">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/reply.gif" /> <%= LanguageUtil.get(pageContext, "reply") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/reply.png" /> <%= LanguageUtil.get(pageContext, "reply") %>
 			</td>
 			<td nowrap onClick="Mail.submitCompose('replyAll', document.<portlet:namespace />fm);">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/reply_all.gif" /> <%= LanguageUtil.get(pageContext, "reply-all") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/reply_all.png" /> <%= LanguageUtil.get(pageContext, "reply-all") %>
 			</td>
 			<td nowrap onClick="Mail.submitCompose('forward', document.<portlet:namespace />fm);">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/forward.gif" /> <%= LanguageUtil.get(pageContext, "forward") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/forward.png" /> <%= LanguageUtil.get(pageContext, "forward") %>
 			</td>
 			<td nowrap onClick="Mail.deleteSelectedMessages();">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/delete.gif" /> <%= LanguageUtil.get(pageContext, "delete") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/delete.png" /> <%= LanguageUtil.get(pageContext, "delete") %>
 			</td>
 			<td nowrap onClick="Mail.print();">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/print.gif" /> <%= LanguageUtil.get(pageContext, "print") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/print.png" /> <%= LanguageUtil.get(pageContext, "print") %>
 			</td>
 			<td style="background-color: <%= mailBgColor %>; border: 0px; cursor: default; padding-left: 0px; padding-right: 0px;" width="90%" />
 			<td style="background-color: <%= mailBgColor %>; border: 0px; cursor: default; padding-left: 0px; padding-right: 0px;">
@@ -459,7 +459,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 					</td>
 					<td style="padding-left: 5px;"></td>
 					<td>
-						<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.gif" title="Search" type="image">
+						<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.png" title="Search" type="image">
 					</td>
 					<td style="padding-left: 5px;"></td>
 					<td style="cursor: pointer; font-size: xx-small; text-align: right;">
@@ -476,13 +476,13 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 		<table border="0" cellpadding="2" cellspacing="2" class="portlet-mail-toolbar font-small" id="portlet-mail-drafts-toolbar" style="display: none;">
 		<tr>
 			<td nowrap onClick="location.href='<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>'">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" /> <%= LanguageUtil.get(pageContext, "new") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.png" /> <%= LanguageUtil.get(pageContext, "new") %>
 			</td>
 			<td nowrap onClick="Mail.submitCompose('edit', document.<portlet:namespace />fm)">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/edit_draft.gif" /> <%= LanguageUtil.get(pageContext, "edit") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/edit_draft.png" /> <%= LanguageUtil.get(pageContext, "edit") %>
 			</td>
 			<td nowrap onClick="Mail.deleteSelectedMessages()">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/delete.gif" /> <%= LanguageUtil.get(pageContext, "delete") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/delete.png" /> <%= LanguageUtil.get(pageContext, "delete") %>
 			</td>
 		</tr>
 		</table>
@@ -635,7 +635,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 									<td class="portlet-mail-msgs-title">
 										<div id="portlet-mail-msgs-title-state">
 											<div class="portlet-mail-title-text">
-												<img src="<%= themeDisplay.getPathThemeImage() %>/mail/read.gif" />
+												<img src="<%= themeDisplay.getPathThemeImage() %>/mail/read.png" />
 											</div>
 										</div>
 									</td>

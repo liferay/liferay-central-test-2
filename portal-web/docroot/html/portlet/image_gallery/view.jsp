@@ -95,7 +95,7 @@ portletURL.setParameter("folderId", folderId);
 			sb.append("\">");
 			sb.append("<img align=\"left\" border=\"0\" src=\"");
 			sb.append(themeDisplay.getPathThemeImage());
-			sb.append("/trees/folder.gif\">");
+			sb.append("/trees/folder.png\">");
 			sb.append("<b>");
 			sb.append(curFolder.getName());
 			sb.append("</b>");

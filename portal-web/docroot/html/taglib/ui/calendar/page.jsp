@@ -74,11 +74,11 @@ int curYear = curCal.get(Calendar.YEAR);
 				<td class="portlet-section-header" colspan="15" style="height: 1px;"></td>
 			</tr>
 			<tr>
-				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
+				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
 				<td align="center" colspan="13" height="20">
 					<%= dateFormat.format(selCal.getTime()) %>
 				</td>
-				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
+				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
 			</tr>
 		</c:if>
 
@@ -89,7 +89,7 @@ int curYear = curCal.get(Calendar.YEAR);
 				int daysIndex = (selCal.getFirstDayOfWeek() + i - 1) % 7;
 			%>
 
-				<td><img border="0" height="22" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
+				<td><img border="0" height="22" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
 				<td align="center" width="26">
 					<span class="font-small" style="font-weight: bold;">
 					<%= LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[daysIndex]) %>
@@ -100,7 +100,7 @@ int curYear = curCal.get(Calendar.YEAR);
 			}
 			%>
 
-			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
+			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
 		</tr>
 		<tr>
 
@@ -117,7 +117,7 @@ int curYear = curCal.get(Calendar.YEAR);
 			for (int i = 1; i < dayOfWeek; i++) {
 			%>
 
-				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
+				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
 				<td height="25" width="26">&nbsp;</td>
 
 			<%
@@ -127,7 +127,7 @@ int curYear = curCal.get(Calendar.YEAR);
 				if (dayOfWeek > 7) {
 			%>
 
-						<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
+						<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
 					</tr>
 					<tr>
 						<td class="portlet-section-header" colspan="15" style="height: 1px;"></td>
@@ -158,7 +158,7 @@ int curYear = curCal.get(Calendar.YEAR);
 				}
 			%>
 
-				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
+				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
 				<td align="center" class="<%= className %> font-small" height="25" valign="top" width="26">
 					<table border="0" cellpadding="0" cellspacing="0" width="24">
 					<tr>
@@ -169,7 +169,7 @@ int curYear = curCal.get(Calendar.YEAR);
 
 					<c:if test="<%= hasData %>">
 						<tr>
-							<td class="portlet-section-alternate"><img border="0" height="3" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
+							<td class="portlet-section-alternate"><img border="0" height="3" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
 						</tr>
 					</c:if>
 
@@ -182,14 +182,14 @@ int curYear = curCal.get(Calendar.YEAR);
 			for (int i = 7; i >= dayOfWeek; i--) {
 			%>
 
-				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
+				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
 				<td height="25" width="26">&nbsp;</td>
 
 			<%
 			}
 			%>
 
-			<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
+			<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
 		</tr>
 		<tr>
 			<td class="portlet-section-header" colspan="15" style="height: 1px;"></td>

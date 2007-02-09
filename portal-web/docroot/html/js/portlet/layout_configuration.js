@@ -11,8 +11,8 @@ var LayoutConfiguration = {
 	init : function () {
 		var arrow1 = new Image();
 		var arrow2 = new Image();
-		arrow1.src = themeDisplay.getPathThemeImage() + "/arrows/01_down.gif";
-		arrow2.src = themeDisplay.getPathThemeImage() + "/arrows/01_right.gif";
+		arrow1.src = themeDisplay.getPathThemeImage() + "/arrows/01_down.png";
+		arrow2.src = themeDisplay.getPathThemeImage() + "/arrows/01_right.png";
 		
 		var menu = document.getElementById("portal_add_content");
 		LayoutConfiguration.menu = menu;
@@ -148,18 +148,18 @@ var LayoutConfiguration = {
 		if (display) {
 			pane.style.display = display;
 			if (display.toLowerCase().match("block")) {
-				image.src = imagePath + "/arrows/01_down.gif";
+				image.src = imagePath + "/arrows/01_down.png";
 			}
 			else {
-				image.src = imagePath + "/arrows/01_right.gif";
+				image.src = imagePath + "/arrows/01_right.png";
 			}
 		}
 		else {
 			if (Liferay.Util.toggle(pane, true)) {
-				image.src = imagePath + "/arrows/01_down.gif";
+				image.src = imagePath + "/arrows/01_down.png";
 			}
 			else {
-				image.src = imagePath + "/arrows/01_right.gif";
+				image.src = imagePath + "/arrows/01_right.png";
 			}
 		}
 	}

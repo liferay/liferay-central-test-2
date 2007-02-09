@@ -180,8 +180,8 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<liferay-ui:toggle
 			id="toggle_id_enterprise_admin_edit_role_permissions"
-			onImage='<%= themeDisplay.getPathThemeImage() + "/common/help.gif" %>'
-			offImage='<%= themeDisplay.getPathThemeImage() + "/common/help.gif" %>'
+			onImage='<%= themeDisplay.getPathThemeImage() + "/common/help.png" %>'
+			offImage='<%= themeDisplay.getPathThemeImage() + "/common/help.png" %>'
 			defaultOn="false"
 		/>
 
@@ -216,8 +216,8 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<liferay-ui:toggle
 			id="toggle_id_enterprise_admin_edit_role_permissions"
-			onImage='<%= themeDisplay.getPathThemeImage() + "/common/help.gif" %>'
-			offImage='<%= themeDisplay.getPathThemeImage() + "/common/help.gif" %>'
+			onImage='<%= themeDisplay.getPathThemeImage() + "/common/help.png" %>'
+			offImage='<%= themeDisplay.getPathThemeImage() + "/common/help.png" %>'
 			defaultOn="false"
 		/>
 

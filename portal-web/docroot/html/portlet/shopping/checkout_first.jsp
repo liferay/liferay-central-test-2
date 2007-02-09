@@ -464,7 +464,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 	for (int i = 0; i < ccTypes.length; i++) {
 	%>
 
-		<img src="<%= themeDisplay.getPathThemeImage() %>/shopping/cc_<%= ccTypes[i] %>.gif">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/shopping/cc_<%= ccTypes[i] %>.png">
 
 	<%
 	}
@@ -556,7 +556,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 
 	<br>
 
-	<img src="<%= themeDisplay.getPathThemeImage() %>/shopping/cc_ver_number.gif">
+	<img src="<%= themeDisplay.getPathThemeImage() %>/shopping/cc_ver_number.png">
 
 	<br><br>
 

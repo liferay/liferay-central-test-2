@@ -30,22 +30,22 @@
 			<table border="0" cellpadding="2" cellspacing="0" width="100%">
 			<tr>
 				<td>
-					<img height="5" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" width="5" style="background-color: #FFFFCC; border: thin solid #FFCC00; cursor: pointer;" onClick="<portlet:namespace />changeColor(this)" />
+					<img height="5" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" width="5" style="background-color: #FFFFCC; border: thin solid #FFCC00; cursor: pointer;" onClick="<portlet:namespace />changeColor(this)" />
 				</td>
 				<td>
-					<img height="5" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" width="5" style="background-color: #CCFFCC; border: thin solid #00CC00; cursor: pointer;" onClick="<portlet:namespace />changeColor(this)" />
+					<img height="5" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" width="5" style="background-color: #CCFFCC; border: thin solid #00CC00; cursor: pointer;" onClick="<portlet:namespace />changeColor(this)" />
 				</td>
 				<td>
-					<img height="5" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" width="5" style="background-color: #CCCCFF; border: thin solid #330099; cursor: pointer;" onClick="<portlet:namespace />changeColor(this)" />
+					<img height="5" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" width="5" style="background-color: #CCCCFF; border: thin solid #330099; cursor: pointer;" onClick="<portlet:namespace />changeColor(this)" />
 				</td>
 				<td>
-					<img height="5" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" width="5" style="background-color: #FFCCCC; border: thin solid #FF0000; cursor: pointer;" onClick="<portlet:namespace />changeColor(this)" />
+					<img height="5" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" width="5" style="background-color: #FFCCCC; border: thin solid #FF0000; cursor: pointer;" onClick="<portlet:namespace />changeColor(this)" />
 				</td>
 				<td style="padding-left: 0px; padding-right: 0px;" width="90%" />
 
 				<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
 					<td>
-						<a border="0" href="<%= portletDisplay.getURLClose() %>"><img height="7" src="<%= themeDisplay.getPathThemeImage() %>/portlet/close.gif" width="7" /></a>
+						<a border="0" href="<%= portletDisplay.getURLClose() %>"><img height="7" src="<%= themeDisplay.getPathThemeImage() %>/portlet/close.png" width="7" /></a>
 					</td>
 				</c:if>
 			</tr>

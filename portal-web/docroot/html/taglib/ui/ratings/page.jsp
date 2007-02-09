@@ -58,7 +58,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 		</div>
 
 		<div id="<%= randomNamespace %>yourRating">
-			<img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" />
+			<img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.png" />
 		</div>
 	</td>
 	<td style="padding-left: 30px;"></td>
@@ -68,7 +68,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 		</div>
 
 		<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= stats.getAverageScore() %> Stars')">
-			<img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" />
+			<img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.png" />
 		</div>
 	</td>
 </tr>

@@ -41,7 +41,7 @@ DateFormat dateFormatMonthAndDay = new SimpleDateFormat("M/d", locale);
 				%>
 
 				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) %>&<portlet:namespace />day=<%= cal.get(Calendar.DATE) %>&<portlet:namespace />year=<%= cal.get(Calendar.YEAR) %>&<portlet:namespace />eventType=<%= eventType %>">
-				<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_left.gif">
+				<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_left.png">
 				</a>
 			</td>
 			<td style="padding-left: 10px;"></td>
@@ -67,7 +67,7 @@ DateFormat dateFormatMonthAndDay = new SimpleDateFormat("M/d", locale);
 				%>
 
 				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) %>&<portlet:namespace />day=<%= cal.get(Calendar.DATE) %>&<portlet:namespace />year=<%= cal.get(Calendar.YEAR) %>&<portlet:namespace />eventType=<%= eventType %>">
-				<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_right.gif">
+				<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_right.png">
 				</a>
 			</td>
 		</tr>
@@ -131,7 +131,7 @@ for (int i = 0; i < 7; i++) {
 
 					<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
 						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= Integer.toString(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= Integer.toString(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= Integer.toString(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
-						<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_plus.gif" title="<%= LanguageUtil.get(pageContext, "add") %>">
+						<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_plus.png" title="<%= LanguageUtil.get(pageContext, "add") %>">
 						</a>
 					</c:if>
 				</td>

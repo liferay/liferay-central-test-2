@@ -35,7 +35,7 @@
 		<tr>
 			<td>
 				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= selMonth %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear - 1 %>&<portlet:namespace />eventType=<%= eventType %>">
-				<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_left.gif">
+				<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_left.png">
 				</a>
 			</td>
 			<td style="padding-left: 10px;"></td>
@@ -57,7 +57,7 @@
 			<td style="padding-left: 10px;"></td>
 			<td>
 				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= selMonth %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear + 1 %>&<portlet:namespace />eventType=<%= eventType %>">
-				<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_right.gif">
+				<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_right.png">
 				</a>
 			</td>
 		</tr>

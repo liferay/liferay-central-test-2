@@ -104,7 +104,7 @@ portletURL.setParameter("folderId", folderId);
 			sb.append("\">");
 			sb.append("<img align=\"left\" border=\"0\" src=\"");
 			sb.append(themeDisplay.getPathThemeImage());
-			sb.append("/trees/folder.gif\">");
+			sb.append("/trees/folder.png\">");
 			sb.append("<b>");
 			sb.append(curFolder.getName());
 			sb.append("</b>");
@@ -283,7 +283,7 @@ portletURL.setParameter("folderId", folderId);
 				sb.append(themeDisplay.getPathThemeImage());
 				sb.append("/document_library/");
 				sb.append(DLUtil.getFileExtension(fileEntry.getName()));
-				sb.append(".gif\">");
+				sb.append(".png\">");
 				sb.append(fileEntry.getTitle());
 
 				if (Validator.isNotNull(fileEntry.getDescription())) {
@@ -417,7 +417,7 @@ portletURL.setParameter("folderId", folderId);
 			sb.append(themeDisplay.getPathThemeImage());
 			sb.append("/document_library/");
 			sb.append(DLUtil.getFileExtension(fileEntry.getName()));
-			sb.append(".gif\">");
+			sb.append(".png\">");
 			sb.append(fileEntry.getTitle());
 
 			if (Validator.isNotNull(fileEntry.getDescription())) {

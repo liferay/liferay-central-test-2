@@ -52,7 +52,7 @@ List ranks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId.longValue(),
 		%>
 
 				<tr>
-					<td><a href="<%= rowURL.toString() %>"><img align="left" border="0" src="<%= themeDisplay.getPathThemeImage() %>/document_library/<%= DLUtil.getFileExtension(rank.getName()) %>.gif"><%= fileEntry.getTitle() %></a></td>
+					<td><a href="<%= rowURL.toString() %>"><img align="left" border="0" src="<%= themeDisplay.getPathThemeImage() %>/document_library/<%= DLUtil.getFileExtension(rank.getName()) %>.png"><%= fileEntry.getTitle() %></a></td>
 				</tr>
 
 		<%

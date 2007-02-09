@@ -93,7 +93,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	sb.append("<img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImage());
-	sb.append("/trees/folder.gif\">");
+	sb.append("/trees/folder.png\">");
 	sb.append(curFolder.getName());
 
 	row.addText(sb.toString(), rowURL);
@@ -171,7 +171,7 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append(themeDisplay.getPathThemeImage());
 		sb.append("/document_library/");
 		sb.append(DLUtil.getFileExtension(fileEntry.getName()));
-		sb.append(".gif\">");
+		sb.append(".png\">");
 		sb.append(fileEntry.getTitle());
 
 		row.addText(sb.toString(), rowHREF);

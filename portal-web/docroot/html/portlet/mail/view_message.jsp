@@ -103,7 +103,7 @@ boolean header = ParamUtil.getBoolean(request, "header");
 		<c:if test="<%= attachments.size() > 0 %>">
 			<tr>
 				<td align="right" style="padding-right: 5px;" valign="top">
-					<img src="<%= themeDisplay.getPathThemeImage() %>/mail/clip.gif" />&nbsp;
+					<img src="<%= themeDisplay.getPathThemeImage() %>/mail/clip.png" />&nbsp;
 				</td>
 				<td>
 

@@ -89,13 +89,13 @@ long productVersionId = BeanParamUtil.getLong(productVersion, request, "productV
 		<div class="links">
 			<% if (Validator.isNotNull(productVersion.getDirectDownloadURL())) { %>
 				<a href="<%=productVersion.getDirectDownloadURL()%>" class="direct-download-url">
-				<img src="/html/themes/classic/images/common/download.gif" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "direct-download")%>')" alt="<%=LanguageUtil.get(pageContext, "direct-download")%>" align="absmiddle" border="0">
+				<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "direct-download")%>')" alt="<%=LanguageUtil.get(pageContext, "direct-download")%>" align="absmiddle" border="0">
 				<%=LanguageUtil.get(pageContext,"direct-download")%></a>
 				<br>
 			<% } %>
 			<% if (Validator.isNotNull(productVersion.getDownloadPageURL())) { %>
 				<a href="<%=productVersion.getDownloadPageURL()%>" class="download-page-url">
-				<img src="/html/themes/classic/images/common/download.gif" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "download page")%>')" alt="<%=LanguageUtil.get(pageContext, "download-page")%>" align="absmiddle" border="0">
+				<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "download page")%>')" alt="<%=LanguageUtil.get(pageContext, "download-page")%>" align="absmiddle" border="0">
 				<%=LanguageUtil.get(pageContext,"download-page")%></a>
 			<% } %>
 		</div>

@@ -158,7 +158,7 @@ function minimizePortlet(plid, portletId, restore, doAsUserId) {
 			var html = buttonsEl.innerHTML;
 
 			html = html.replace(", true", ", false");
-			html = html.replace("restore.gif", "minimize.gif");
+			html = html.replace("restore.png", "minimize.png");
 			html = html.replace("<%= LanguageUtil.get(pageContext, "restore") %>", "<%= LanguageUtil.get(pageContext, "minimize") %>");
 
 			buttonsEl.innerHTML = html;
@@ -179,7 +179,7 @@ function minimizePortlet(plid, portletId, restore, doAsUserId) {
 			var html = buttonsEl.innerHTML;
 
 			html = html.replace(", false", ", true");
-			html = html.replace("minimize.gif", "restore.gif");
+			html = html.replace("minimize.png", "restore.png");
 			html = html.replace("<%= LanguageUtil.get(pageContext, "minimize") %>", "<%= LanguageUtil.get(pageContext, "restore") %>");
 
 			buttonsEl.innerHTML = html;

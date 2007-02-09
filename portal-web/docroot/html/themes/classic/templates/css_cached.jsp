@@ -139,7 +139,7 @@ textarea { font-family: Arial; font-size: <%= fontDefault %>; }
 }
 
 .alpha-gradient {
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_title_bg_gradient.gif) repeat-x;
+	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_title_bg_gradient.png) repeat-x;
 }
 
 .alpha-neg-alert {
@@ -151,7 +151,7 @@ textarea { font-family: Arial; font-size: <%= fontDefault %>; }
 }
 
 .alpha-separator {
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_title_bg_x.gif) repeat-x;
+	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_title_bg_x.png) repeat-x;
 	height: 1px;
 	font-size: 0;
 }
@@ -179,7 +179,7 @@ FONT.alpha {
 }
 
 .beta-gradient {
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_menu_bg_gradient.gif) repeat-x;
+	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_menu_bg_gradient.png) repeat-x;
 }
 
 .beta-neg-alert {
@@ -191,7 +191,7 @@ FONT.alpha {
 }
 
 .beta-separator {
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_menu_bg_x.gif) repeat-x;
+	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_menu_bg_x.png) repeat-x;
 	height: 1px;
 	font-size: 0;
 }
@@ -219,7 +219,7 @@ A.beta:hover {
 }
 
 .gamma-gradient {
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_bg_x.gif) repeat-x;
+	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_bg_x.png) repeat-x;
 }
 
 .gamma-neg-alert {
@@ -569,7 +569,7 @@ FONT.bg {
 }
 
 .layout-column-highlight {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/common/diagonal-lines.gif) scroll repeat;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/common/diagonal-lines.png) scroll repeat;
 }
 
 /******************************************************************************/
@@ -602,7 +602,7 @@ FONT.bg {
 }
 
 .portlet-loading {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif) no-repeat top left;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.png) no-repeat top left;
 	margin-top: 10px;
 	padding-top: 40px;
 	text-align: left;
@@ -709,7 +709,7 @@ FONT.bg {
 
 .portlet-header-bar {
 	border: 1px solid <%= colorScheme.getPortletTitleBg() %>;
-	background: <%= colorScheme.getPortletTitleBg() %> url(<%= themeDisplay.getPathColorSchemeImage() %>/button_gradient.gif) scroll repeat-x center left;
+	background: <%= colorScheme.getPortletTitleBg() %> url(<%= themeDisplay.getPathColorSchemeImage() %>/button_gradient.png) scroll repeat-x center left;
 	position: relative;
 }
 
@@ -879,7 +879,7 @@ FONT.bg {
 }
 
 .portlet-form-button {
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/button_gradient.gif) repeat-x;
+	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/button_gradient.png) repeat-x;
 	border-color: <%= colorScheme.getPortletTitleBg() %>;
 	border-style: solid;
 	border-width: 1px;

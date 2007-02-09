@@ -277,7 +277,7 @@ for (int i = 0; i < childNodes.length; i++) {
 		sb.append("page");
 	}
 
-	sb.append(".gif\">");
+	sb.append(".png\">");
 
 	String nodeName = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
 

@@ -83,7 +83,7 @@
 			</c:if>
 
 			<td align="center" width="<%= 100 / CELLS_PER_ROW %>%">
-				<img onclick="document.getElementById('layoutTemplateId_<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>/thumbnail.gif" /><br />
+				<img onclick="document.getElementById('layoutTemplateId_<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>/thumbnail.png" /><br />
 				<input type="radio" id="layoutTemplateId_<%= i %>" name="layoutTemplateId" <%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> value="<%= layoutTemplate.getLayoutTemplateId() %>" />
 				<label for="layoutTemplateId_<%= i %>"><%= layoutTemplate.getName() %></label>
 			</td>

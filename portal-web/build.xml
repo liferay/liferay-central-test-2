@@ -15,9 +15,9 @@
 			<fileset dir="docroot" includes="**/Thumbs.db" />
 		</delete>
 
-		<antcall target="clean-common-images">
+		<!--<antcall target="clean-common-images">
 			<param name="theme.name" value="velocity" />
-		</antcall>
+		</antcall>-->
 	</target>
 
 	<target name="clean-common-images">
@@ -362,9 +362,9 @@
 	</target>
 
 	<target name="build-common-images">
-		<antcall target="build-common-images-theme">
+		<!--<antcall target="build-common-images-theme">
 			<param name="theme.name" value="velocity" />
-		</antcall>
+		</antcall>-->
 	</target>
 
 	<target name="build-common-images-theme">

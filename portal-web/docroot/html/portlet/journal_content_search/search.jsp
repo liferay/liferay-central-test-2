@@ -104,7 +104,7 @@
 			<td>
 				<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }">
 
-				<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.gif" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
+				<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.png" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
 			</td>
 			<td align="right">
 				<liferay-ui:search-speed searchContainer="<%= searchContainer %>" hits="<%= hits %>" />

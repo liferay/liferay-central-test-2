@@ -34,7 +34,7 @@
 
 		row.cells[0].innerHTML = "<input class=\"form-text\" name=\"<portlet:namespace />title\" />";
 		row.cells[1].innerHTML = "<input class=\"form-text\" name=\"<portlet:namespace />url\" style=\"width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;\" />";
-		row.cells[2].innerHTML = "<a href=\"javascript:void(0)\" onclick=\"Element.remove(this.parentNode.parentNode)\"><img src=\"<%= themeDisplay.getPathThemeImage() %>/common/unsubscribe.gif\" /></a>";
+		row.cells[2].innerHTML = "<a href=\"javascript:void(0)\" onclick=\"Element.remove(this.parentNode.parentNode)\"><img src=\"<%= themeDisplay.getPathThemeImage() %>/common/unsubscribe.png\" /></a>";
 		table.appendChild(row);
 	}
 </script>
@@ -74,7 +74,7 @@
 		<bean:message key="url" />
 	</td>
 	<td>
-		<a href="javascript: void(0);" onclick="AddRssRow(this.parentNode.parentNode.parentNode)"><img src="<%= themeDisplay.getPathThemeImage() %>/common/add_location.gif" /></a>
+		<a href="javascript: void(0);" onclick="AddRssRow(this.parentNode.parentNode.parentNode)"><img src="<%= themeDisplay.getPathThemeImage() %>/common/add_location.png" /></a>
 	</td>
 </tr>
 
@@ -95,7 +95,7 @@ for (int i = 0; i < urls.length; i++) {
 			<input class="form-text" name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= urls[i] %>" />
 		</td>
 		<td>
-			<a href="javascript: void(0);" onclick="Element.remove(this.parentNode.parentNode);"><img src="<%= themeDisplay.getPathThemeImage() %>/common/unsubscribe.gif" /></a>
+			<a href="javascript: void(0);" onclick="Element.remove(this.parentNode.parentNode);"><img src="<%= themeDisplay.getPathThemeImage() %>/common/unsubscribe.png" /></a>
 		</td>
 	</tr>
 

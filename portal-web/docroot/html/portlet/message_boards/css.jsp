@@ -37,13 +37,13 @@
 	}
 
 	.message-board-quote {
-		background: white url(<%= themeDisplay.getPathThemeImage() %>/message_boards/quoteleft.gif) left top no-repeat;
+		background: white url(<%= themeDisplay.getPathThemeImage() %>/message_boards/quoteleft.png) left top no-repeat;
 		border: 1px solid <%= colorScheme.getPortletFontDim() %>;
 		padding: 5px 0px 0px 5px;
 	}
 
 	.message-board-quote-content {
-		background: transparent url(<%= themeDisplay.getPathThemeImage() %>/message_boards/quoteright.gif) right bottom no-repeat;
+		background: transparent url(<%= themeDisplay.getPathThemeImage() %>/message_boards/quoteright.png) right bottom no-repeat;
 		padding: 5px 30px 10px 30px;
 	}
 

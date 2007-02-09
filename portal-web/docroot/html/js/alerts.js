@@ -79,7 +79,7 @@ var Alerts = {
 		
 		cell1.className = "pop-up-close";
 		cell1.width = "1%";
-		cell1.innerHTML = "<a href=\"javascript:void(0)\" onclick=\"Alerts.killAlert(this)\"><img border=\"0\" src=\"" + themeDisplay.getPathThemeImage() + "/portlet/close.gif\"/></a>"
+		cell1.innerHTML = "<a href=\"javascript:void(0)\" onclick=\"Alerts.killAlert(this)\"><img border=\"0\" src=\"" + themeDisplay.getPathThemeImage() + "/portlet/close.png\"/></a>"
 		
 		inner.appendChild(heading);
 		inner.appendChild(message);

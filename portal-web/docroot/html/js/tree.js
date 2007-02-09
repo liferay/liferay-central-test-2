@@ -54,10 +54,10 @@ function Tree_addNode(parentNode, recursedNodes) {
 					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "join" + nodeValues[0] + "\" src=\"");
 
 					if (ino) {
-						this.treeHTML += (this.icons[6]);	// minus_bottom.gif
+						this.treeHTML += (this.icons[6]);	// minus_bottom.png
 					}
 					else {
-						this.treeHTML += (this.icons[8]);	// plus_bottom.gif
+						this.treeHTML += (this.icons[8]);	// plus_bottom.png
 					}
 
 					this.treeHTML += ("\" vspace=\"0\" width=\"19\"></a>");
@@ -67,10 +67,10 @@ function Tree_addNode(parentNode, recursedNodes) {
 					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "join" + nodeValues[0] + "\" src=\"");
 
 					if (ino) {
-						this.treeHTML += (this.icons[5]);	// minus.gif
+						this.treeHTML += (this.icons[5]);	// minus.png
 					}
 					else {
-						this.treeHTML += (this.icons[7]);	// plus.gif
+						this.treeHTML += (this.icons[7]);	// plus.png
 					}
 
 					this.treeHTML += ("\" vspace=\"0\" width=\"19\"></a>");
@@ -93,10 +93,10 @@ function Tree_addNode(parentNode, recursedNodes) {
 				this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "icon" + nodeValues[0] + "\" src=\"")
 
 				if (ino) {
-					this.treeHTML += (this.icons[10]); // folder_open.gif
+					this.treeHTML += (this.icons[10]); // folder_open.png
 				}
 				else {
-					this.treeHTML += (this.icons[9]);	// folder.gif
+					this.treeHTML += (this.icons[9]);	// folder.png
 				}
 
 				this.treeHTML += ("\" vspace=\"0\" width=\"19\">");
@@ -194,26 +194,26 @@ function Tree_toggle(treeId, node, bottom) {
 
 	if (divEl.style.display == "none") {
 		if (bottom == 1) {
-			joinEl.src = this.icons[6];	// minus_bottom.gif
+			joinEl.src = this.icons[6];	// minus_bottom.png
 		}
 		else {
-			joinEl.src = this.icons[5]; // minus.gif
+			joinEl.src = this.icons[5]; // minus.png
 		}
 
-		iconEl.src = this.icons[10];	// folder_open.gif
+		iconEl.src = this.icons[10];	// folder_open.png
 		divEl.style.display = "";
 
 		openNode = true;
 	}
 	else {
 		if (bottom == 1) {
-			joinEl.src = this.icons[8];	// plus_bottom.gif
+			joinEl.src = this.icons[8];	// plus_bottom.png
 		}
 		else {
-			joinEl.src = this.icons[7]; // plus.gif
+			joinEl.src = this.icons[7]; // plus.png
 		}
 
-		iconEl.src = this.icons[9];		// folder.gif
+		iconEl.src = this.icons[9];		// folder.png
 		divEl.style.display = "none";
 	}
 

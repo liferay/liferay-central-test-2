@@ -84,7 +84,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	sb.append("<img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImage());
-	sb.append("/trees/folder.gif\">");
+	sb.append("/trees/folder.png\">");
 	sb.append(curFolder.getName());
 
 	row.addText(sb.toString(), rowURL);

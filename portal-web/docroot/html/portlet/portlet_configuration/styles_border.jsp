@@ -64,7 +64,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<html:text property='<%= propertyPrefix + "BorderColor" %>' styleClass="form-text" onchange='<%= "preview." + previewObject + ".borderColor = this.value;" %>' /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.gif" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
+					<html:text property='<%= propertyPrefix + "BorderColor" %>' styleClass="form-text" onchange='<%= "preview." + previewObject + ".borderColor = this.value;" %>' /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
 				</td>
 			</tr>
 			</table>

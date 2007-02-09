@@ -50,12 +50,12 @@ String message = (String)request.getAttribute("liferay-ui:upload-progress:messag
 		<%= LanguageUtil.get(pageContext, message) %>...<br>
 	</c:if>
 
-	<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_middle.gif) scroll repeat-x top left; margin: auto; text-align: left; width: 80%;">
-		<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_left.gif) scroll no-repeat top left;">
-			<div style="height: 23px; background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_right.gif) scroll no-repeat top right;">
-				<div id="<%= id %>-bar" style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_middle.gif) scroll repeat-x top left; overflow: hidden; width: 0;">
-					<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_left.gif) scroll no-repeat top left;">
-						<div class="font-small" style="font-weight: bold; height: 23px; padding-top: 3px; text-align: center; background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_right.gif) scroll no-repeat top right;">
+	<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_middle.png) scroll repeat-x top left; margin: auto; text-align: left; width: 80%;">
+		<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_left.png) scroll no-repeat top left;">
+			<div style="height: 23px; background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_right.png) scroll no-repeat top right;">
+				<div id="<%= id %>-bar" style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_middle.png) scroll repeat-x top left; overflow: hidden; width: 0;">
+					<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_left.png) scroll no-repeat top left;">
+						<div class="font-small" style="font-weight: bold; height: 23px; padding-top: 3px; text-align: center; background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_right.png) scroll no-repeat top right;">
 						</div>
 					</div>
 				</div>

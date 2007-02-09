@@ -122,7 +122,7 @@
 			<%= selectedTitle %>
 		</td>
 		<td class="layout-my-places-arrow">
-			<img style="vertical-align: middle" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_down.gif" />
+			<img style="vertical-align: middle" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_down.png" />
 		</td>
 	</tr>
 	</table>
