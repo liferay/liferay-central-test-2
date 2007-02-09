@@ -42,12 +42,12 @@ public class Autocomplete {
 		sb.append("<ajaxresponse>");
 
 		for (int i = 0; i < array.length; i++) {
-			String key = array[i][0];
+			String text = array[i][0];
 			String value = array[i][1];
 
 			sb.append("<item>");
 			sb.append("<text><![CDATA[");
-			sb.append(key);
+			sb.append(text);
 			sb.append("]]></text>");
 			sb.append("<value><![CDATA[");
 			sb.append(value);
@@ -61,26 +61,26 @@ public class Autocomplete {
 	}
 
 	public static String[][] listToArray(
-		List list, String keyParam, String valueParam) {
+		List list, String textParam, String valueParam) {
 
 		String[][] array = new String[list.size()][2];
 
 		for (int i = 0; i < list.size(); i++) {
 			Object bean = list.get(i);
 
-			Object key = BeanUtil.getObject(bean, keyParam);
+			Object text = BeanUtil.getObject(bean, textParam);
 
-			if (key != null) {
-				key = StringPool.BLANK;
+			if (text == null) {
+				text = StringPool.BLANK;
 			}
 
 			Object value = BeanUtil.getObject(bean, valueParam);
 
-			if (value != null) {
+			if (value == null) {
 				value = StringPool.BLANK;
 			}
 
-			array[i][0] = key.toString();
+			array[i][0] = text.toString();
 			array[i][1] = value.toString();
 		}
 
@@ -88,9 +88,9 @@ public class Autocomplete {
 	}
 
 	public static String listToXml(
-		List list, String keyParam, String valueParam) {
+		List list, String textParam, String valueParam) {
 
-		return arrayToXml(listToArray(list, keyParam, valueParam));
+		return arrayToXml(listToArray(list, textParam, valueParam));
 	}
 
 }

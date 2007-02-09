@@ -1345,6 +1345,8 @@
 
 		<!-- Tags Admin -->
 
+		<action path="/tags_admin/autocomplete_entries" type="com.liferay.portlet.tagsadmin.action.AutocompleteEntriesAction" />
+
 		<action path="/tags_admin/edit_entry" type="com.liferay.portlet.tagsadmin.action.EditEntryAction" />
 
 		<action path="/tags_admin/edit_property" type="com.liferay.portlet.tagsadmin.action.EditPropertyAction" />

@@ -157,7 +157,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		List list = TagsEntryFinder.findByC_N_P(
 			companyId, name, properties, begin, end);
 
-		return Autocomplete.listToXml(list, "entryId", "name");
+		return Autocomplete.listToXml(list, "name", "name");
 	}
 
 	public int searchCount(String companyId, String name, String[] properties)
