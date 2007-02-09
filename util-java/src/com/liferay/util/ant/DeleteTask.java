@@ -25,6 +25,7 @@ package com.liferay.util.ant;
 import java.io.File;
 
 import org.apache.tools.ant.taskdefs.Delete;
+import org.apache.tools.ant.types.FileSet;
 
 /**
  * <a href="DeleteTask.java.html"><b><i>View Source</i></b></a>
@@ -58,6 +59,29 @@ public class DeleteTask {
 		delete.setProject(AntUtil.getProject());
 		delete.setFile(file);
 		delete.setFailOnError(false);
+
+		delete.execute();
+	}
+
+	public static void deleteFiles(
+		String dir, String includes, String excludes) {
+
+		deleteFiles(new File(dir), includes, excludes);
+	}
+
+	public static void deleteFiles(File dir, String includes, String excludes) {
+		Delete delete = new Delete();
+
+		delete.setProject(AntUtil.getProject());
+		delete.setFailOnError(false);
+
+		FileSet fileSet = new FileSet();
+
+		fileSet.setDir(dir);
+		fileSet.setIncludes(includes);
+		fileSet.setExcludes(excludes);
+
+		delete.addFileset(fileSet);
 
 		delete.execute();
 	}

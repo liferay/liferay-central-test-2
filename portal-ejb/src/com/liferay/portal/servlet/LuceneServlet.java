@@ -22,7 +22,9 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.job.JobScheduler;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.lucene.CleanUpJob;
 import com.liferay.portal.lucene.LuceneIndexer;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -39,6 +41,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.store.Directory;
+
+import org.quartz.SchedulerException;
 
 /**
  * <a href="LuceneServlet.java.html"><b><i>View Source</i></b></a>
@@ -106,6 +110,17 @@ public class LuceneServlet extends HttpServlet {
 							_log.error(ioe);
 						}
 					}
+				}
+			}
+
+			if (GetterUtil.getBoolean(
+					PropsUtil.get(PropsUtil.LUCENE_STORE_JDBC_AUTO_CLEAN_UP))) {
+
+				try {
+					JobScheduler.schedule(new CleanUpJob());
+				}
+				catch (SchedulerException se) {
+					_log.error(se);
 				}
 			}
 		}
