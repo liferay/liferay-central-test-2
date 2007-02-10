@@ -58,12 +58,12 @@ public class ToggleTagUtil {
 
 			if (Validator.isNull(onImage)) {
 				onImage =
-					themeDisplay.getPathThemeImage() + "/arrows/01_down.gif";
+					themeDisplay.getPathThemeImage() + "/arrows/01_down.png";
 			}
 
 			if (Validator.isNull(offImage)) {
 				offImage =
-					themeDisplay.getPathThemeImage() + "/arrows/01_right.gif";
+					themeDisplay.getPathThemeImage() + "/arrows/01_right.png";
 			}
 
 			String defaultStateValue = defaultOn ? StringPool.BLANK : "none";
