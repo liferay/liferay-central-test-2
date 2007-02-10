@@ -569,11 +569,10 @@ public class Http {
 	}
 
 	/**
-	 * This uses a different implementation because the URL object may not
-	 * necessarily be referencing a HTTP URL. It may be referencing a local
-	 * file or some JNDI resource. Use the other <code>URLtoString()</code>
-	 * methods that take in a string location to utilize our Commons HttpClient
-	 * implementation.
+	 * This method only uses the default Commons HttpClient implementation when
+	 * the URL object represents a HTTP resource. The URL object could also
+	 * represent a file or some JNDI resource. In that case, the default Java
+	 * implementation is used.
 	 *
 	 * @param		url URL object
 	 * @return		A string representation of the resource referenced by the
@@ -584,6 +583,12 @@ public class Http {
 		String xml = null;
 
 		if (url != null) {
+			String protocol = url.getProtocol().toLowerCase();
+
+			if (protocol.startsWith(HTTP) || protocol.startsWith(HTTPS)) {
+				return URLtoString(url.toString());
+			}
+
 			URLConnection con = url.openConnection();
 
 			con.setRequestProperty(
