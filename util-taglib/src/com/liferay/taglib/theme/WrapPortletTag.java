@@ -70,8 +70,6 @@ public class WrapPortletTag extends ParamAncestorTagImpl {
 		res.recycle();
 
 		ThemeUtil.include(ctx, req, res, pageContext, wrapPage, theme);
-
-		pageContext.getOut().print(res.getString());
 	}
 
 	public int doStartTag() {
