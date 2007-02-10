@@ -349,18 +349,6 @@
 		</if>
 	</target>
 
-	<target name="build-color-scheme">
-		<java
-			classname="com.liferay.portal.tools.ColorSchemeBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="false"
-		>
-			<jvmarg value="-Dcolor.scheme.builder.overwrite=true" />
-			<jvmarg value="-Djava.awt.headless=true" />
-		</java>
-	</target>
-
 	<target name="build-common-images">
 		<!--<antcall target="build-common-images-theme">
 			<param name="theme.name" value="velocity" />

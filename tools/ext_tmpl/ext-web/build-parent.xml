@@ -353,18 +353,6 @@
 		</if>
 	</target>
 
-	<target name="build-color-scheme">
-		<java
-			classname="com.liferay.portal.tools.ColorSchemeBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="false"
-		>
-			<jvmarg value="-Dcolor.scheme.builder.overwrite=true" />
-			<jvmarg value="-Djava.awt.headless=true" />
-		</java>
-	</target>
-
 	<target name="build-webxml">
 		<java
 			classname="com.liferay.portal.tools.WebXMLBuilder"
@@ -423,7 +411,6 @@
 			overwrite="true"
 		/>
 
-		<antcall target="build-color-scheme" />
 		<antcall target="build-webxml" />
 	</target>
 </project>

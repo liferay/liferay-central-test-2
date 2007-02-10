@@ -21,7 +21,6 @@
 
 		<ant dir="portal-ejb" target="build-newscategories" inheritAll="false" />
 		<ant dir="portal-ejb" target="build-reverendfun" inheritAll="false" />
-  		<ant dir="portal-ejb" target="build-color-scheme" inheritAll="false" />
   		<ant dir="portal-ejb" target="build-common-images" inheritAll="false" />
   		<ant dir="portal-ejb" target="build-website" inheritAll="false" />
 
