@@ -269,6 +269,14 @@ public class ThemeDisplay implements Serializable {
 		}
 	}
 
+	public boolean isFreeformLayout() {
+		return _freeformLayout;
+	}
+
+	public void setFreeformLayout(boolean freeformLayout) {
+		_freeformLayout = freeformLayout;
+	}
+
 	public int getServerPort() {
 		return _serverPort;
 	}
@@ -676,6 +684,7 @@ public class ThemeDisplay implements Serializable {
 	private TimeZone _timeZone;
 	private Theme _theme;
 	private ColorScheme _colorScheme;
+	private boolean _freeformLayout;
 	private int _serverPort;
 	private boolean _secure;
 	private int _resolution;

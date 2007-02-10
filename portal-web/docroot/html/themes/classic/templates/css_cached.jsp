@@ -748,6 +748,27 @@ FONT.bg {
 	height: 10px;
 }
 
+.portlet-resize-container,
+.portlet-decorate-resize-container {
+	position: relative;
+}
+
+.portlet-resize-handle {
+	background: url(<%= themeDisplay.getPathThemeImage() %>/arrows/resize.png) scroll no-repeat;
+	cursor: se-resize;
+	font-size: 0;
+	position: absolute;
+	top: -28px;
+	right: 5px;
+	height: 10px;
+	width: 10px;
+}
+
+.portlet-resize-container .portlet-resize-handle {
+	top: -10px;
+	right: 0
+}
+
 /* Fonts */
 
 .portlet-font {

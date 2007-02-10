@@ -18,14 +18,17 @@ jQuery.getOne = function(s, context) {
 		else {
 			rt = jQuery(s, context);
 		}
-
 		rt = (rt.length == 0 ? null : rt.get(0))
 	}
 
 	return rt;
 };
 
-Liferay = {};
+jQuery.fn.getOne = function(s) {
+	return jQuery.getOne(s, this);
+}
+
+var Liferay = new Object();
 
 Liferay.DynamicSelect = new Class({
 
@@ -329,12 +332,6 @@ Liferay.Util = {
 		}
 	
 		return entry;
-	},
-
-	disableEsc: function() {
-		if ((document.all) && (event.keyCode == 27)) {
-			event.returnValue = false;
-		}
 	},
 
 	getSelectedIndex: function(col) {

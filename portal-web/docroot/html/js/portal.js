@@ -260,7 +260,6 @@ var LiferayDock = {
 
 var LayoutColumns = {
 	arrow: null,
-	portletCount: 0,
 	current: null,
 	doAsUserId: "",
 	freeform: false,
@@ -391,30 +390,26 @@ var LayoutColumns = {
 				this.style.zIndex = "";
 			};
 
-			var contents = _$J(".portlet-container", portlet).get(0);
-			contents.container = portlet;
+			var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
+			var resizeHandle = _$J(portlet).getOne(".portlet-resize-handle");
 
-			contents.onclick = function() {
-				if (LayoutColumns.current != this.container) {
-					LayoutColumns.moveToTop(this.container);
-					LayoutColumns.savePosition(this.container);
-					
-					LayoutColumns.current = this.container;
-				}
-			};
-
-			var resizeHandleList = _$J(".portlet-resize-handle", portlet).get(0);
-
-			if (resizeHandleList.length > 0) {
-				var resizeHandle = resizeHandleList[0];
-				var resizeBox = document.getElementById("p_p_body_" + portlet.portletId);
-	
+			if (resizeBox && resizeHandle) {
 				var portletResize = Resize.createHandle(resizeHandle, null, function() {});
 				var minimized = resizeBox.style.height == "1px";
-				portletResize.addRule(new ResizeRule(resizeBox, Resize.HORIZONTAL, Resize.ADD));
+				
+				portletResize.addRule(new ResizeRule(portlet, Resize.HORIZONTAL, Resize.ADD));
 				portletResize.addRule(new ResizeRule(resizeBox, Resize.VERTICAL, Resize.ADD));
 	
 				resizeHandle.container = portlet;
+				resizeBox.container = portlet;
+
+				resizeBox.onclick = function() {
+					if (LayoutColumns.current != this.container) {
+						LayoutColumns.moveToTop(this.container);
+						LayoutColumns.savePosition(this.container);
+						LayoutColumns.current = this.container;
+					}
+				};
 	
 				resizeHandle.onResizeStart = function() {
 					LayoutColumns.moveToTop(this.container);
@@ -422,31 +417,22 @@ var LayoutColumns = {
 	
 				resizeHandle.onResizeEnd = function() {
 					var portlet = this.container;
-					var resizeBox = document.getElementById("p_p_body_" + portlet.portletId);
+					var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
 					var height = parseInt(resizeBox.style.height);
-					var width = parseInt(resizeBox.style.width);
+					var width = parseInt(portlet.style.width);
 	
 					height = Math.round(height/10) * 10;
 					width = Math.round(width/10) * 10;
 	
 					resizeBox.style.height = height + "px";
-					resizeBox.style.width = width + "px";
+					portlet.style.width = width + "px";
 					LayoutColumns.savePosition(portlet);
 				};
-	
-				if (portlet.freeformStyles) {
-					_$J(portlet).css(portlet.freeformStyles.position);
-					_$J(resizeBox).css(portlet.freeformStyles.dimensions);
-					
-					if (minimized) {
-						resizeBox.style.height = "1px";
-					}
-				}
-				else {
-					portlet.style.top = (20 * this.portletCount) + "px";
-					portlet.style.left = (20 * this.portletCount++) + "px";
-					resizeBox.style.width = "300px";
-				}
+			}
+
+			if ((parseInt(portlet.style.top) + parseInt(portlet.style.left)) == 0) {
+				portlet.style.top = (20 * portlet.columnPos) + "px";
+				portlet.style.left = (20 * portlet.columnPos) + "px";
 			}
 		}
 		else {
@@ -589,7 +575,7 @@ var LayoutColumns = {
 	},
 
 	savePosition : function(portlet) {
-		var resizeBox = document.getElementById("p_p_body_" + portlet.portletId);
+		var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
 		var newPosition = this.findPosition(portlet);
 		
 		if (newPosition != portlet.oldPosition) {
@@ -598,8 +584,8 @@ var LayoutColumns = {
 		
 		if (resizeBox) {
 			AjaxUtil.request(themeDisplay.getPathMain() + "/portal/update_layout?plid=" + LayoutColumns.plid +
-				"&height=" + resizeBox.offsetHeight + "px" +
-				"&width=" + resizeBox.offsetWidth + "px" +
+				"&height=" + resizeBox.style.height +
+				"&width=" + portlet.style.width +
 				"&top=" + portlet.style.top +
 				"&left=" + portlet.style.left +
 				"&p_p_id=" + portlet.portletId +

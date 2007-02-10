@@ -25,6 +25,7 @@ package com.liferay.portal.action;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.LayoutServiceUtil;
@@ -35,10 +36,12 @@ import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.InstancePool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
 
+import javax.portlet.PortletPreferences;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -82,6 +85,27 @@ public class UpdateLayoutAction extends Action {
 
 				layoutTypePortlet.removePortletId(portletId);
 			}
+		}
+		else if (cmd.equals("drag")) {
+			StringBuffer sb = new StringBuffer();
+			String plid = ParamUtil.getString(req, "plid");
+			String height = ParamUtil.getString(req, "height", "");
+			String width = ParamUtil.getString(req, "width", "");
+			String top = ParamUtil.getString(req, "top", "");
+			String left = ParamUtil.getString(req, "left", "");
+			
+			PortletPreferences portletSetup =
+				PortletPreferencesFactory.getPortletSetup(
+					portletId, LayoutImpl.getLayoutId(plid),
+						LayoutImpl.getOwnerId(plid));
+
+			sb.append("height=" + height + "\n");
+			sb.append("width=" + width + "\n");
+			sb.append("top=" + top + "\n");
+			sb.append("left=" + left + "\n");
+
+			portletSetup.setValue("portlet-freeform-styles", sb.toString());
+			portletSetup.store();
 		}
 		else if (cmd.equals("minimize")) {
 			boolean restore = ParamUtil.getBoolean(req, "p_p_restore");

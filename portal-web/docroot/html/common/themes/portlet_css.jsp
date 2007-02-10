@@ -23,12 +23,23 @@
 %>
 
 <%
-String portletContainerClass = portletDecorate ? ".portlet-container" : ".portlet-borderless-container";
-String portletBoxClass = portletDecorate ? ".portlet-box" : ".portlet-borderless-container";
+Properties cssProps = PropertiesUtil.load(portletSetup.getValue("portlet-setup-css", StringPool.BLANK));
 %>
 
+<c:if test="<%= (cssProps != null) && (cssProps.size() > 0) %>">
+
+<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+	<%-- 
+	/* Style Block Hack for IE */
+	--%>
+	<table cellpadding="0" cellspacing="0" border="0" style="display:none">
+	<tr>
+		<td>
+</c:if>
+
 <style type="text/css">
-	#p_p_id<%= portletDisplay.getNamespace() %> <%= portletContainerClass %> {
+	#p_p_id<%= portletDisplay.getNamespace() %> .portlet-container,
+	#p_p_id<%= portletDisplay.getNamespace() %> .portlet-borderless-container {
 
 		<%
 		String portletBgColor = cssProps.getProperty("portletBgColor");
@@ -156,7 +167,8 @@ String portletBoxClass = portletDecorate ? ".portlet-box" : ".portlet-borderless
 		</c:if>
 	}
 
-	#p_p_id<%= portletDisplay.getNamespace() %> <%= portletBoxClass %> {
+	#p_p_id<%= portletDisplay.getNamespace() %> .portlet-box,
+	#p_p_id<%= portletDisplay.getNamespace() %> .portlet-borderless-container {
 
 		<%
 		String contentBgColor = cssProps.getProperty("contentBgColor");
@@ -232,7 +244,8 @@ String portletBoxClass = portletDecorate ? ".portlet-box" : ".portlet-borderless
 		</c:if>
 	}
 
-	#p_p_id<%= portletDisplay.getNamespace() %> <%= portletBoxClass %> A {
+	#p_p_id<%= portletDisplay.getNamespace() %> .portlet-box A,
+	#p_p_id<%= portletDisplay.getNamespace() %> .portlet-borderless-container A {
 
 		<%
 		String contentLinkColor = cssProps.getProperty("contentLinkColor");
@@ -268,7 +281,8 @@ String portletBoxClass = portletDecorate ? ".portlet-box" : ".portlet-borderless
 		</c:if>
 	}
 
-	#p_p_id<%= portletDisplay.getNamespace() %> <%= portletBoxClass %> A:visited {
+	#p_p_id<%= portletDisplay.getNamespace() %> .portlet-box A:visited,
+	#p_p_id<%= portletDisplay.getNamespace() %> .portlet-borderless-container A:visited {
 
 		<%
 		String contentLinkVisitedColor = cssProps.getProperty("contentLinkVisitedColor");
@@ -304,7 +318,8 @@ String portletBoxClass = portletDecorate ? ".portlet-box" : ".portlet-borderless
 		</c:if>
 	}
 
-	#p_p_id<%= portletDisplay.getNamespace() %> <%= portletBoxClass %> A:hover {
+	#p_p_id<%= portletDisplay.getNamespace() %> .portlet-box A:hover,
+	#p_p_id<%= portletDisplay.getNamespace() %> .portlet-borderless-container A:hover {
 
 		<%
 		String contentLinkHoverColor = cssProps.getProperty("contentLinkHoverColor");
@@ -340,3 +355,11 @@ String portletBoxClass = portletDecorate ? ".portlet-box" : ".portlet-borderless
 		</c:if>
 	}
 </style>
+
+<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		</td>
+	</tr>
+	</table>
+</c:if>
+
+</c:if>

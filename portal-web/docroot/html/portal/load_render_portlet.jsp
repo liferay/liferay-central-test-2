@@ -37,34 +37,10 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 		[$TEMPLATE_PORTLET_<%= portlet.getPortletId() %>$]
 	</c:when>
 	<c:otherwise>
-
 		<%
-		boolean tilesPortletDecorateBoolean = true;
-
-		try {
-		%>
-
-			<tiles:useAttribute id="tilesPortletDecorate" name="portlet_decorate" classname="java.lang.String" ignore="true" />
-
-		<%
-			tilesPortletDecorateBoolean = GetterUtil.getBoolean(tilesPortletDecorate, true);
-		}
-		catch (Exception e) {
-		}
-
 		portletDisplay.setId(portlet.getPortletId());
 		portletDisplay.setNamespace(PortalUtil.getPortletNamespace(portlet.getPortletId()));
-
-		PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletDisplay.getId(), true, true);
-
-		boolean portletDecorate = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-show-borders", String.valueOf(tilesPortletDecorateBoolean)));
-
-		Properties cssProps = PropertiesUtil.load(portletSetup.getValue("portlet-setup-css", StringPool.BLANK));
 		%>
-
-		<c:if test="<%= (cssProps != null) && (cssProps.size() > 0) %>">
-			<%@ include file="/html/common/themes/portlet_css.jsp" %>
-		</c:if>
 
 		<div id="p_load<%= portletDisplay.getNamespace() %>" style="text-align: left;">
 			<img src="<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif" />
@@ -119,7 +95,6 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 			AjaxUtil.request("<%= url.toString() %>", {
 				onComplete: function(xmlHttpReq) {
 					var portletDiv = document.getElementById("p_load<%= portletDisplay.getNamespace() %>");
-
 					addPortletHTML(xmlHttpReq.responseText, portletDiv.parentNode, portletDiv);
 				}
 			});

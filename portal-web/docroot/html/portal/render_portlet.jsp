@@ -316,14 +316,32 @@ if (portlet.isActive() && access) {
 	SessionMessages.clear(renderRequestImpl);
 	SessionErrors.clear(renderRequestImpl);
 }
+
+String freeformStyles = "";
+PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletDisplay.getId(), true, true);
+
+if (themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax()) {
+	StringBuffer sb = new StringBuffer();
+	Properties styleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
+
+	sb.append("style=\"position:absolute;");
+	sb.append("width:" + styleProps.getProperty("width", "300px") + ";");
+	sb.append("left:" + styleProps.getProperty("left", "0") + ";");
+	sb.append("top:" + styleProps.getProperty("top", "0") + ";");
+	sb.append("\"");
+	freeformStyles = sb.toString();
+}
+
 %>
 
 <%@ include file="/html/portal/render_portlet-ext.jsp" %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() %>">
-	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %>">
+	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %>" <%= freeformStyles %>>
 		<a name="p_<%= portletId %>"></a>
 </c:if>
+
+<%@ include file="/html/common/themes/portlet_css.jsp" %>
 
 <c:choose>
 	<c:when test="<%= !access && !portlet.isShowPortletAccessDenied() %>">
@@ -457,6 +475,7 @@ else {
 <c:if test="<%= !themeDisplay.isStateExclusive() && !runtimePortlet %>">
 	<script type="text/javascript">
 		document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
+		document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").columnPos = <%= columnPos %>;
 
 		<c:if test='<%= !staticVar.equals("no") %>'>
 			document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").isStatic = "<%= staticVar %>";

@@ -57,15 +57,6 @@ if (!portletDecorate) {
 	portletPadding = false;
 }
 
-Properties cssProps = PropertiesUtil.load(portletSetup.getValue("portlet-setup-css", StringPool.BLANK));
-%>
-
-<c:if test="<%= (cssProps != null) && (cssProps.size() > 0) %>">
-	<%@ include file="/html/common/themes/portlet_css.jsp" %>
-</c:if>
-
-<%
-
 // Portlet title
 
 String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, LocaleUtil.toLanguageId(locale));
@@ -265,6 +256,24 @@ if (urlBack != null) {
 	portletDisplay.setShowBackIcon(true);
 	portletDisplay.setURLBack(urlBack);
 }
+
+
+Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
+boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
+boolean freeformPortlet =  themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax();
+String freeformStyles = "";
+
+if (freeformPortlet) {
+	StringBuffer sb = new StringBuffer();
+	Properties styleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
+
+	sb.append("style=\"");
+	sb.append("height:" + styleProps.getProperty("height", "300px") + ";");
+	sb.append("overflow:auto;");
+	sb.append("\"");
+	freeformStyles = sb.toString();
+}
+
 %>
 
 <c:choose>
@@ -294,13 +303,21 @@ if (urlBack != null) {
 		<c:choose>
 			<c:when test="<%= portletDecorate %>">
 				<liferay-theme:wrap-portlet page="portlet.jsp">
-					<div id="p_p_content<%= portletDisplay.getNamespace() %>" style="margin-top: 0; margin-bottom: 0;">
+					<div class="portlet-content-container" <%= freeformStyles %>>
+
 						<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
+
 					</div>
 				</liferay-theme:wrap-portlet>
+
+				<c:if test="<%= freeformPortlet %>">
+					<div class="portlet-decorate-resize-container">
+						<div class="portlet-resize-handle"></div>
+					</div>
+				</c:if>
 			</c:when>
 			<c:otherwise>
-				<div class="portlet-borderless-container">
+				<div class="portlet-borderless-container" <%= freeformStyles %>>
 					<c:if test="<%= tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon() %>">
 						<div class="portlet-borderless-bar">
 							<span class="portlet-title-default"><%= portletTitle %></span>
@@ -322,7 +339,14 @@ if (urlBack != null) {
 					</c:if>
 
 					<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
+
 				</div>
+
+				<c:if test="<%= freeformPortlet %>">
+					<div class="portlet-resize-container">
+						<div class="portlet-resize-handle"></div>
+					</div>
+				</c:if>
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>

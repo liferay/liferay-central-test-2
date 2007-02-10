@@ -498,6 +498,7 @@ public class ServicePreAction extends Action {
 					"struts_action", "/my_account/edit_user");
 
 				themeDisplay.setURLMyAccount(myAccountURL);
+				themeDisplay.setFreeformLayout(layoutTypePortlet.getLayoutTemplateId().equals("freeform"));
 			}
 
 			boolean termsOfUseRequired = GetterUtil.getBoolean(
