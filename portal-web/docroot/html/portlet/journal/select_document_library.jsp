@@ -194,7 +194,7 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append("opener.");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectDocumentLibrary('");
-		sb.append("@main_path@/document_library?get_file?folderId=");
+		sb.append("@main_path@/document_library/get_file?folderId=");
 		sb.append(fileEntry.getFolderId());
 		sb.append("&name=");
 		sb.append(Http.encodeURL(fileEntry.getName()));
