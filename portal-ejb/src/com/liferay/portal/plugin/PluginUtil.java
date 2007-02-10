@@ -33,7 +33,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
-import com.liferay.portlet.admin.util.Indexer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
@@ -145,21 +144,20 @@ public class PluginUtil {
 
 	public static void reIndex(String[] ids) throws SystemException {
 		try {
-
 			Iterator itr = search(null, null, null).iterator();
 
 			while (itr.hasNext()) {
 				Plugin plugin = (Plugin)itr.next();
 
 				try {
-					Indexer.updatePlugin(
+					PluginIndexer.updatePlugin(
 						plugin.getModuleId(), plugin.getName(),
 						plugin.getVersion(), plugin.getAuthor(),
 						plugin.getType(), plugin.getTags(),
 						plugin.getLicenses(), plugin.getLiferayVersions(),
 						plugin.getShortDescription(),
-						plugin.getLongDescription(),
-						plugin.getPageURL(), plugin.getRepositoryURL());
+						plugin.getLongDescription(), plugin.getPageURL(),
+						plugin.getRepositoryURL());
 				}
 				catch (Exception e1) {
 					_log.error("Reindexing " + plugin.getModuleId(), e1);
@@ -263,7 +261,7 @@ public class PluginUtil {
 
 			LuceneUtil.addRequiredTerm(
 				contextQuery, LuceneFields.PORTLET_ID,
-				com.liferay.portlet.admin.util.Indexer.PORTLET_ID);
+				PluginIndexer.PORTLET_ID);
 
 			if (Validator.isNotNull(type)) {
 				LuceneUtil.addRequiredTerm(contextQuery, "type", type);
@@ -464,16 +462,15 @@ public class PluginUtil {
 			plugins.addPlugin(plugin);
 
 			try {
-				Indexer.updatePlugin(
+				PluginIndexer.updatePlugin(
 					plugin.getModuleId(), plugin.getName(), plugin.getVersion(),
 					plugin.getAuthor(), plugin.getType(), plugin.getTags(),
 					plugin.getLicenses(), plugin.getLiferayVersions(),
-					plugin.getShortDescription(),
-					plugin.getLongDescription(),
+					plugin.getShortDescription(), plugin.getLongDescription(),
 					plugin.getPageURL(), plugin.getRepositoryURL());
 			}
-			catch (Exception e1) {
-				_log.error("Reindexing " + plugin.getModuleId(), e1);
+			catch (Exception e) {
+				_log.error("Reindexing " + plugin.getModuleId(), e);
 			}
 		}
 
@@ -531,10 +528,11 @@ public class PluginUtil {
 
 	private static void _checkRepositories(String repositoryURL)
 		throws PluginException {
-		String[] repositoryURLs;
+
+		String[] repositoryURLs = null;
 
 		if (Validator.isNotNull(repositoryURL)) {
-			repositoryURLs = new String[]{repositoryURL};
+			repositoryURLs = new String[] {repositoryURL};
 		}
 		else {
 			repositoryURLs = getRepositoryURLs();

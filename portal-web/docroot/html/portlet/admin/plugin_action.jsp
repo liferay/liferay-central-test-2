@@ -25,20 +25,21 @@
 <%@ include file="/html/portlet/admin/init.jsp" %>
 
 <%
-	ResultRow row = (ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
-	Document doc = (Document)row.getObject();
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-	String pluginModuleId = doc.get("moduleId");
-	String pluginRepositoryURL = doc.get("repositoryURL");
+Document doc = (Document)row.getObject();
 
-	PortletURL rowURL = renderResponse.createRenderURL();
+String moduleId = doc.get("moduleId");
+String repositoryURL = doc.get("repositoryURL");
 
-	rowURL.setWindowState(WindowState.MAXIMIZED);
+PortletURL rowURL = renderResponse.createRenderURL();
 
-	rowURL.setParameter("struts_action", "/admin/view");
-	rowURL.setParameter("redirect", currentURL);
-	rowURL.setParameter("moduleId", pluginModuleId);
-	rowURL.setParameter("repositoryURL", pluginRepositoryURL);
+rowURL.setWindowState(WindowState.MAXIMIZED);
+
+rowURL.setParameter("struts_action", "/admin/view");
+rowURL.setParameter("redirect", currentURL);
+rowURL.setParameter("moduleId", moduleId);
+rowURL.setParameter("repositoryURL", repositoryURL);
 %>
 
-<liferay-ui:icon image="view" url='<%= rowURL.toString()%>' />
+<liferay-ui:icon image="view" url="<%= rowURL.toString() %>" />

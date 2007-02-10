@@ -20,16 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.admin.util;
+package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
-import com.liferay.portal.plugin.PluginUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.Html;
 import com.liferay.util.License;
 import com.liferay.util.StringUtil;
@@ -50,16 +49,15 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
 
 /**
- * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
+ * <a href="PluginIndexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  *
  */
-public class Indexer
-	implements com.liferay.portal.kernel.search.Indexer {
+public class PluginIndexer implements Indexer {
 
-	public static final String PORTLET_ID = PortletKeys.ADMIN;
+	public static final String PORTLET_ID = "PluginIndexer";
 
 	public static void addPlugin(
 			String moduleId, String name, String version,
@@ -96,23 +94,24 @@ public class Indexer
 			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
 
 			doc.add(LuceneFields.getKeyword("moduleId", moduleId));
-			doc.add(LuceneFields.getKeyword("type", type));
-			doc.add(LuceneFields.getKeyword("repositoryURL", repositoryURL));
 			doc.add(LuceneFields.getKeyword("version", version));
+			doc.add(LuceneFields.getKeyword("type", type));
 			doc.add(LuceneFields.getKeyword(
 				"shortDescription", shortDescription));
+			doc.add(LuceneFields.getKeyword("repositoryURL", repositoryURL));
 
 			StringBuffer sb = new StringBuffer();
 
-			Iterator iterator = tags.iterator();
+			Iterator itr = tags.iterator();
 
-			while (iterator.hasNext()) {
-				String tag = (String) iterator.next();
+			while (itr.hasNext()) {
+				String tag = (String)itr.next();
+
 				doc.add(LuceneFields.getKeyword("tag", tag));
 
 				sb.append(tag);
 
-					if (iterator.hasNext()) {
+				if (itr.hasNext()) {
 					sb.append(StringPool.COMMA + StringPool.SPACE);
 				}
 			}
@@ -121,18 +120,21 @@ public class Indexer
 
 			boolean osiLicense = false;
 
-			iterator = licenses.iterator();
+			itr = licenses.iterator();
 
-			while (iterator.hasNext()) {
-				License license = (License) iterator.next();
+			while (itr.hasNext()) {
+				License license = (License)itr.next();
+
 				doc.add(LuceneFields.getKeyword("license", license.getName()));
+
 				if (license.isOsiApproved()) {
 					osiLicense = true;
 				}
 			}
 
-			doc.add(LuceneFields.getKeyword(
-				"osi-approved-license", Boolean.toString(osiLicense)));
+			doc.add(
+				LuceneFields.getKeyword(
+					"osi-approved-license", String.valueOf(osiLicense)));
 
 			writer.addDocument(doc);
 
@@ -214,6 +216,7 @@ public class Indexer
 
 	private static IndexWriter _getWriter() {
 		IndexWriter writer = null;
+
 		Directory luceneDir = LuceneUtil.getLuceneDir(CompanyImpl.SYSTEM);
 
 		try {
@@ -242,6 +245,6 @@ public class Indexer
 		return writer;
 	}
 
-	private static Log _log = LogFactory.getLog(Indexer.class);
+	private static Log _log = LogFactory.getLog(PluginIndexer.class);
 
 }
