@@ -136,76 +136,8 @@ public class Http {
 	public static final int TIMEOUT = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".timeout"), 5000);
 
-	private static HttpClient _client = new HttpClient();
-	
-	private static HttpClientParams _clientParams = new HttpClientParams();
-	
-	private static HttpState _state = new HttpState();
-	
-	private static HttpClientParams _proxyClientParams = new HttpClientParams();
-	
-	private static HttpState _proxyState = new HttpState();
-	
-	public static HostConfiguration _hostConfig = new HostConfiguration();
-
-	public static HostConfiguration _proxyHostConfig = new HostConfiguration();
-
 	static {
-		// Mimic behavior of java.net
-		// See http://java.sun.com/j2se/1.5.0/docs/guide/net/properties.html
-		
-		if (Validator.isNotNull(NON_PROXY_HOSTS)) {
-			
-			NON_PROXY_HOSTS_PATTERN = 
-				NON_PROXY_HOSTS.replaceAll("\\.", "\\\\."); 
-			NON_PROXY_HOSTS_PATTERN = 
-				NON_PROXY_HOSTS.replaceAll("\\*", ".*?"); 
-			NON_PROXY_HOSTS_PATTERN = 
-				NON_PROXY_HOSTS.replaceAll("\\|", ")|(");
-			
-			NON_PROXY_HOSTS_PATTERN = "(" + NON_PROXY_HOSTS_PATTERN + ")";
-		}
-
-		MultiThreadedHttpConnectionManager connectionManager =
-			new MultiThreadedHttpConnectionManager();
-
-		HttpConnectionParams params = connectionManager.getParams();
-
-		params.setParameter(
-			"maxConnectionsPerHost", new Integer(MAX_CONNECTIONS_PER_HOST));
-		params.setParameter(
-			"maxTotalConnections", new Integer(MAX_TOTAL_CONNECTIONS));
-		params.setConnectionTimeout(TIMEOUT);
-		params.setSoTimeout(TIMEOUT);
-
-		if (Validator.isNotNull(PROXY_USERNAME)) {
-			Credentials credentials = null;
-
-			if (PROXY_AUTH_TYPE.equals("username-password")) {
-				credentials = new UsernamePasswordCredentials(
-					PROXY_USERNAME, PROXY_PASSWORD);
-			}
-			else if (PROXY_AUTH_TYPE.equals("ntlm")) {
-				credentials = new NTCredentials(
-					PROXY_USERNAME, PROXY_PASSWORD, PROXY_NTLM_HOST,
-					PROXY_NTLM_DOMAIN);
-
-				List authPrefs = new ArrayList();
-
-				authPrefs.add(AuthPolicy.NTLM);
-				authPrefs.add(AuthPolicy.BASIC);
-				authPrefs.add(AuthPolicy.DIGEST);
-
-				_proxyClientParams.setParameter(
-					AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
-			}
-			
-			_proxyHostConfig.setProxy(PROXY_HOST, PROXY_PORT);
-
-			_proxyState.setProxyCredentials(
-				new AuthScope(PROXY_HOST, PROXY_PORT, null),
-				credentials);
-		}
+		_init();
 	}
 	
 	public static String addParameter(String url, String name, String value) {
@@ -264,6 +196,8 @@ public class Http {
 		URI uri = new URI(location);
 
 		if (Validator.isNull(NON_PROXY_HOSTS_PATTERN) || 
+			Validator.isNull(PROXY_HOST) ||
+			PROXY_PORT <= 0 ||
 			uri.getHost().matches(NON_PROXY_HOSTS_PATTERN)) {
 			
 			_hostConfig.setHost(uri);
@@ -697,6 +631,79 @@ public class Http {
 
 		return xml;
 	}
+
+	private static void _init() {
+		// Mimic behavior of java.net
+		// See http://java.sun.com/j2se/1.5.0/docs/guide/net/properties.html
+		
+		if (Validator.isNotNull(NON_PROXY_HOSTS)) {
+			
+			NON_PROXY_HOSTS_PATTERN = 
+				NON_PROXY_HOSTS.replaceAll("\\.", "\\\\."); 
+			NON_PROXY_HOSTS_PATTERN = 
+				NON_PROXY_HOSTS.replaceAll("\\*", ".*?"); 
+			NON_PROXY_HOSTS_PATTERN = 
+				NON_PROXY_HOSTS.replaceAll("\\|", ")|(");
+			
+			NON_PROXY_HOSTS_PATTERN = "(" + NON_PROXY_HOSTS_PATTERN + ")";
+		}
+
+		MultiThreadedHttpConnectionManager connectionManager =
+			new MultiThreadedHttpConnectionManager();
+
+		HttpConnectionParams params = connectionManager.getParams();
+
+		params.setParameter(
+			"maxConnectionsPerHost", new Integer(MAX_CONNECTIONS_PER_HOST));
+		params.setParameter(
+			"maxTotalConnections", new Integer(MAX_TOTAL_CONNECTIONS));
+		params.setConnectionTimeout(TIMEOUT);
+		params.setSoTimeout(TIMEOUT);
+
+		if (Validator.isNotNull(PROXY_USERNAME)) {
+			Credentials credentials = null;
+
+			if (PROXY_AUTH_TYPE.equals("username-password")) {
+				credentials = new UsernamePasswordCredentials(
+					PROXY_USERNAME, PROXY_PASSWORD);
+			}
+			else if (PROXY_AUTH_TYPE.equals("ntlm")) {
+				credentials = new NTCredentials(
+					PROXY_USERNAME, PROXY_PASSWORD, PROXY_NTLM_HOST,
+					PROXY_NTLM_DOMAIN);
+
+				List authPrefs = new ArrayList();
+
+				authPrefs.add(AuthPolicy.NTLM);
+				authPrefs.add(AuthPolicy.BASIC);
+				authPrefs.add(AuthPolicy.DIGEST);
+
+				_proxyClientParams.setParameter(
+					AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
+			}
+			
+			_proxyHostConfig.setProxy(PROXY_HOST, PROXY_PORT);
+
+			_proxyState.setProxyCredentials(
+				new AuthScope(PROXY_HOST, PROXY_PORT, null),
+				credentials);
+		}
+
+	}
+
+	private static HttpClient _client = new HttpClient();
+	
+	private static HttpClientParams _clientParams = new HttpClientParams();
+	
+	private static HttpState _state = new HttpState();
+	
+	private static HttpClientParams _proxyClientParams = new HttpClientParams();
+	
+	private static HttpState _proxyState = new HttpState();
+	
+	private static HostConfiguration _hostConfig = new HostConfiguration();
+
+	private static HostConfiguration _proxyHostConfig = new HostConfiguration();
 
 	private static Log _log = LogFactory.getLog(Http.class);
 
