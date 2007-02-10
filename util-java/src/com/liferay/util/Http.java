@@ -30,7 +30,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
@@ -115,8 +114,6 @@ public class Http {
 
 	public static final String NON_PROXY_HOSTS =
 		SystemProperties.get("http.nonProxyHosts");
-	
-	public static String NON_PROXY_HOSTS_PATTERN;
 
 	public static final String PROXY_AUTH_TYPE = GetterUtil.getString(
 		SystemProperties.get(Http.class.getName() + ".proxy.auth.type"));
@@ -136,10 +133,6 @@ public class Http {
 	public static final int TIMEOUT = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".timeout"), 5000);
 
-	static {
-		_init();
-	}
-	
 	public static String addParameter(String url, String name, String value) {
 		if (url == null) {
 			return null;
@@ -189,34 +182,9 @@ public class Http {
 	}
 
 	public static HttpClient getClient(String location) throws IOException {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Location is " + location);
-		}
-
-		URI uri = new URI(location);
-
-		if (Validator.isNull(PROXY_HOST) ||
-			PROXY_PORT <= 0 ||
-			Validator.isNull(NON_PROXY_HOSTS_PATTERN) ||
-			uri.getHost().matches(NON_PROXY_HOSTS_PATTERN)) {
-			
-			_hostConfig.setHost(uri);
-			
-			_client.setHostConfiguration(_hostConfig);
-			_client.setParams(_clientParams);
-			_client.setState(_state);			
-		}
-		else if (Validator.isNotNull(PROXY_HOST) && PROXY_PORT > 0) {
-			_proxyHostConfig.setHost(uri);
-
-			_client.setHostConfiguration(_proxyHostConfig);
-			_client.setParams(_proxyClientParams);
-			_client.setState(_proxyState);
-		}
-
-		return _client;
+		return _instance._getClient(location);
 	}
-	
+
 	public static String getCompleteURL(HttpServletRequest req) {
 		StringBuffer completeURL = req.getRequestURL();
 
@@ -479,7 +447,7 @@ public class Http {
 
 				location = HTTP_WITH_SLASH + location;
 			}
-			
+
 			HttpClient client = getClient(location);
 
 			if (post) {
@@ -609,30 +577,23 @@ public class Http {
 		return xml;
 	}
 
-	private static void _init() {
-		// Mimic behavior of java.net
-		// See http://java.sun.com/j2se/1.5.0/docs/guide/net/properties.html
-		
-		if (Validator.isNotNull(NON_PROXY_HOSTS)) {
-			NON_PROXY_HOSTS_PATTERN = NON_PROXY_HOSTS;
-			
-			NON_PROXY_HOSTS_PATTERN = 
-				NON_PROXY_HOSTS_PATTERN.replaceAll("\\.", "\\\\."); 
-			NON_PROXY_HOSTS_PATTERN = 
-				NON_PROXY_HOSTS_PATTERN.replaceAll("\\*", ".*?"); 
-			NON_PROXY_HOSTS_PATTERN = 
-				NON_PROXY_HOSTS_PATTERN.replaceAll("\\|", ")|(");
-			
-			NON_PROXY_HOSTS_PATTERN = "(" + NON_PROXY_HOSTS_PATTERN + ")";
-		}
+	private Http() {
 
-		_client = new HttpClient();
-		_clientParams = new HttpClientParams();
-		_state = new HttpState();
-		_proxyClientParams = new HttpClientParams();
-		_proxyState = new HttpState();
-		_hostConfig = new HostConfiguration();
-		_proxyHostConfig = new HostConfiguration();
+		// Mimic behavior found in
+		// http://java.sun.com/j2se/1.5.0/docs/guide/net/properties.html
+
+		if (Validator.isNotNull(NON_PROXY_HOSTS)) {
+			_nonProxyHostsPattern = NON_PROXY_HOSTS;
+
+			_nonProxyHostsPattern = _nonProxyHostsPattern.replaceAll(
+				"\\.", "\\\\.");
+			_nonProxyHostsPattern = _nonProxyHostsPattern.replaceAll(
+				"\\*", ".*?");
+			_nonProxyHostsPattern = _nonProxyHostsPattern.replaceAll(
+				"\\|", ")|(");
+
+			_nonProxyHostsPattern = "(" + _nonProxyHostsPattern + ")";
+		}
 
 		MultiThreadedHttpConnectionManager connectionManager =
 			new MultiThreadedHttpConnectionManager();
@@ -647,7 +608,7 @@ public class Http {
 		params.setSoTimeout(TIMEOUT);
 
 		_client.setHttpConnectionManager(connectionManager);
-		
+
 		if (Validator.isNotNull(PROXY_USERNAME)) {
 			Credentials credentials = null;
 
@@ -669,30 +630,53 @@ public class Http {
 				_proxyClientParams.setParameter(
 					AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 			}
-			
+
 			_proxyHostConfig.setProxy(PROXY_HOST, PROXY_PORT);
 
 			_proxyState.setProxyCredentials(
-				new AuthScope(PROXY_HOST, PROXY_PORT, null),
-				credentials);
+				new AuthScope(PROXY_HOST, PROXY_PORT, null), credentials);
 		}
-
 	}
 
-	private static HttpClient _client;
-	
-	private static HttpClientParams _clientParams;
-	
-	private static HttpState _state;
-	
-	private static HttpClientParams _proxyClientParams;
-	
-	private static HttpState _proxyState;
-	
-	private static HostConfiguration _hostConfig;
+	private HttpClient _getClient(String location) throws IOException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Location is " + location);
+		}
 
-	private static HostConfiguration _proxyHostConfig;
+		URI uri = new URI(location);
+
+		if (Validator.isNull(PROXY_HOST) || (PROXY_PORT <= 0) ||
+			Validator.isNull(_nonProxyHostsPattern) ||
+			uri.getHost().matches(_nonProxyHostsPattern)) {
+
+			_hostConfig.setHost(uri);
+
+			_client.setHostConfiguration(_hostConfig);
+			_client.setParams(_clientParams);
+			_client.setState(_state);
+		}
+		else if (Validator.isNotNull(PROXY_HOST) && (PROXY_PORT > 0)) {
+			_proxyHostConfig.setHost(uri);
+
+			_client.setHostConfiguration(_proxyHostConfig);
+			_client.setParams(_proxyClientParams);
+			_client.setState(_proxyState);
+		}
+
+		return _client;
+	}
 
 	private static Log _log = LogFactory.getLog(Http.class);
+
+	private static Http _instance = new Http();
+
+	private HttpClient _client = new HttpClient();
+	private HostConfiguration _hostConfig = new HostConfiguration();
+	private HostConfiguration _proxyHostConfig = new HostConfiguration();
+	private HttpClientParams _clientParams = new HttpClientParams();
+	private HttpClientParams _proxyClientParams = new HttpClientParams();
+	private HttpState _state = new HttpState();
+	private HttpState _proxyState = new HttpState();
+	private String _nonProxyHostsPattern;
 
 }

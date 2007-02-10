@@ -410,7 +410,7 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void remoteDeploy(ActionRequest req) throws Exception {
-		GetMethod getFileMethod = null;
+		GetMethod getMethod = null;
 
 		try {
 			String url = ParamUtil.getString(req, "url");
@@ -422,14 +422,12 @@ public class EditServerAction extends PortletAction {
 
 			String progressId = ParamUtil.getString(req, Constants.PROGRESS_ID);
 
-			String urlString = urlObj.toString();
-						
-			HttpClient client = Http.getClient(urlString);
+			HttpClient client = Http.getClient(url);
 
-			getFileMethod = new GetMethod(urlString);
+			getMethod = new GetMethod(url);
 
 			int responseCode = client.executeMethod(
-				client.getHostConfiguration(), getFileMethod);
+				client.getHostConfiguration(), getMethod);
 
 			if (responseCode != 200) {
 				SessionErrors.add(
@@ -439,7 +437,7 @@ public class EditServerAction extends PortletAction {
 				return;
 			}
 
-			long contentLength = getFileMethod.getResponseContentLength();
+			long contentLength = getMethod.getResponseContentLength();
 
 			String fileName = url.substring(
 				url.lastIndexOf(StringPool.SLASH) + 1);
@@ -448,7 +446,7 @@ public class EditServerAction extends PortletAction {
 				recommendedWARName, url, fileName);
 
 			ProgressInputStream pis = new ProgressInputStream(
-				req, getFileMethod.getResponseBodyAsStream(), contentLength,
+				req, getMethod.getResponseBodyAsStream(), contentLength,
 				progressId);
 
 			String deployDir = PrefsPropsUtil.getString(
@@ -479,7 +477,7 @@ public class EditServerAction extends PortletAction {
 				pis.clearProgress();
 			}
 
-			getFileMethod.releaseConnection();
+			getMethod.releaseConnection();
 
 			if (pis.getTotalRead() > 0) {
 				String destination =
@@ -501,15 +499,15 @@ public class EditServerAction extends PortletAction {
 			}
 		}
 		catch (MalformedURLException murle) {
-			if (getFileMethod != null) {
-				getFileMethod.releaseConnection();
+			if (getMethod != null) {
+				getMethod.releaseConnection();
 			}
 
 			SessionErrors.add(req, "invalidUrl", murle);
 		}
 		catch (IOException ioe) {
-			if (getFileMethod != null) {
-				getFileMethod.releaseConnection();
+			if (getMethod != null) {
+				getMethod.releaseConnection();
 			}
 
 			SessionErrors.add(req, "errorConnectingToServer", ioe);

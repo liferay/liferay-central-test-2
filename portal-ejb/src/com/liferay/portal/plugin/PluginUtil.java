@@ -346,9 +346,8 @@ public class PluginUtil {
 			byte[] bytes = null;
 
 			try {
-				int responseCode = 
-					client.executeMethod(
-						client.getHostConfiguration(), getFileMethod);
+				int responseCode = client.executeMethod(
+					client.getHostConfiguration(), getFileMethod);
 
 				if (responseCode != 200) {
 					throw new PluginException(

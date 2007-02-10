@@ -99,16 +99,15 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 		}
 
 		HttpClient client = null;
-		
+
 		try {
 			client = Http.getClient(url);
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
-			
+
 			throw new SearchException(ioe);
 		}
-		
 
 		HttpState state = new HttpState();
 

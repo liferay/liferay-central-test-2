@@ -364,10 +364,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
-//	public String exportToiCal(String eventId) {
-//		
-//	}
-	
 	public CalEvent getEvent(String eventId)
 		throws PortalException, SystemException {
 
