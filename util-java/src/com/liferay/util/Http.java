@@ -195,9 +195,9 @@ public class Http {
 
 		URI uri = new URI(location);
 
-		if (Validator.isNull(NON_PROXY_HOSTS_PATTERN) || 
-			Validator.isNull(PROXY_HOST) ||
+		if (Validator.isNull(PROXY_HOST) ||
 			PROXY_PORT <= 0 ||
+			Validator.isNull(NON_PROXY_HOSTS_PATTERN) ||
 			uri.getHost().matches(NON_PROXY_HOSTS_PATTERN)) {
 			
 			_hostConfig.setHost(uri);
@@ -603,30 +603,7 @@ public class Http {
 		String xml = null;
 
 		if (url != null) {
-			URLConnection con = url.openConnection();
-
-			con.setRequestProperty(
-				"Content-Type", "application/x-www-form-urlencoded");
-
-			con.setRequestProperty(
-				"User-agent",
-				"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
-
-			InputStream is = con.getInputStream();
-
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			byte[] bytes = new byte[512];
-
-			for (int i = is.read(bytes, 0, 512); i != -1;
-					i = is.read(bytes, 0, 512)) {
-
-				buffer.write(bytes, 0, i);
-			}
-
-			xml = new String(buffer.toByteArray());
-
-			is.close();
-			buffer.close();
+			xml = URLtoString(url.toString());
 		}
 
 		return xml;
@@ -637,16 +614,25 @@ public class Http {
 		// See http://java.sun.com/j2se/1.5.0/docs/guide/net/properties.html
 		
 		if (Validator.isNotNull(NON_PROXY_HOSTS)) {
+			NON_PROXY_HOSTS_PATTERN = NON_PROXY_HOSTS;
 			
 			NON_PROXY_HOSTS_PATTERN = 
-				NON_PROXY_HOSTS.replaceAll("\\.", "\\\\."); 
+				NON_PROXY_HOSTS_PATTERN.replaceAll("\\.", "\\\\."); 
 			NON_PROXY_HOSTS_PATTERN = 
-				NON_PROXY_HOSTS.replaceAll("\\*", ".*?"); 
+				NON_PROXY_HOSTS_PATTERN.replaceAll("\\*", ".*?"); 
 			NON_PROXY_HOSTS_PATTERN = 
-				NON_PROXY_HOSTS.replaceAll("\\|", ")|(");
+				NON_PROXY_HOSTS_PATTERN.replaceAll("\\|", ")|(");
 			
 			NON_PROXY_HOSTS_PATTERN = "(" + NON_PROXY_HOSTS_PATTERN + ")";
 		}
+
+		_client = new HttpClient();
+		_clientParams = new HttpClientParams();
+		_state = new HttpState();
+		_proxyClientParams = new HttpClientParams();
+		_proxyState = new HttpState();
+		_hostConfig = new HostConfiguration();
+		_proxyHostConfig = new HostConfiguration();
 
 		MultiThreadedHttpConnectionManager connectionManager =
 			new MultiThreadedHttpConnectionManager();
@@ -693,19 +679,19 @@ public class Http {
 
 	}
 
-	private static HttpClient _client = new HttpClient();
+	private static HttpClient _client;
 	
-	private static HttpClientParams _clientParams = new HttpClientParams();
+	private static HttpClientParams _clientParams;
 	
-	private static HttpState _state = new HttpState();
+	private static HttpState _state;
 	
-	private static HttpClientParams _proxyClientParams = new HttpClientParams();
+	private static HttpClientParams _proxyClientParams;
 	
-	private static HttpState _proxyState = new HttpState();
+	private static HttpState _proxyState;
 	
-	private static HostConfiguration _hostConfig = new HostConfiguration();
+	private static HostConfiguration _hostConfig;
 
-	private static HostConfiguration _proxyHostConfig = new HostConfiguration();
+	private static HostConfiguration _proxyHostConfig;
 
 	private static Log _log = LogFactory.getLog(Http.class);
 
