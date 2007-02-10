@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
@@ -567,11 +568,46 @@ public class Http {
 		return new String(URLtoByteArray(location, cookies, parts, post));
 	}
 
+	/**
+	 * This uses a different implementation because the URL object may not
+	 * necessarily be referencing a HTTP URL. It may be referencing a local
+	 * file or some JNDI resource. Use the other <code>URLtoString()</code>
+	 * methods that take in a string location to utilize our Commons HttpClient
+	 * implementation.
+	 *
+	 * @param		url URL object
+	 * @return		A string representation of the resource referenced by the
+	 *				URL object
+	 * @throws		IOException
+	 */
 	public static String URLtoString(URL url) throws IOException {
 		String xml = null;
 
 		if (url != null) {
-			xml = URLtoString(url.toString());
+			URLConnection con = url.openConnection();
+
+			con.setRequestProperty(
+				"Content-Type", "application/x-www-form-urlencoded");
+
+			con.setRequestProperty(
+				"User-agent",
+				"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
+
+			InputStream is = con.getInputStream();
+
+			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+			byte[] bytes = new byte[512];
+
+			for (int i = is.read(bytes, 0, 512); i != -1;
+					i = is.read(bytes, 0, 512)) {
+
+				buffer.write(bytes, 0, i);
+			}
+
+			xml = new String(buffer.toByteArray());
+
+			is.close();
+			buffer.close();
 		}
 
 		return xml;
