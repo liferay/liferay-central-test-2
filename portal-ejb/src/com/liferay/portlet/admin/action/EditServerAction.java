@@ -422,11 +422,14 @@ public class EditServerAction extends PortletAction {
 
 			String progressId = ParamUtil.getString(req, Constants.PROGRESS_ID);
 
-			HttpClient client = Http.getClient();
+			String urlString = urlObj.toString();
+						
+			HttpClient client = Http.getClient(urlString);
 
-			getFileMethod = new GetMethod(urlObj.toString());
+			getFileMethod = new GetMethod(urlString);
 
-			int responseCode = client.executeMethod(getFileMethod);
+			int responseCode = client.executeMethod(
+				client.getHostConfiguration(), getFileMethod);
 
 			if (responseCode != 200) {
 				SessionErrors.add(

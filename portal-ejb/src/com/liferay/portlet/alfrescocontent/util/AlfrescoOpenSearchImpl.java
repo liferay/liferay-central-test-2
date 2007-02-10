@@ -98,7 +98,17 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 			_log.debug("Search with " + url);
 		}
 
-		HttpClient client = Http.getNonProxyClient();
+		HttpClient client = null;
+		
+		try {
+			client = Http.getClient(url);
+		}
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
+			
+			throw new SearchException(ioe);
+		}
+		
 
 		HttpState state = new HttpState();
 
@@ -111,7 +121,7 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 		get.setDoAuthentication(true);
 
 		try {
-			int status = client.executeMethod(
+			client.executeMethod(
 				client.getHostConfiguration(), get, state);
 
 			xml = get.getResponseBodyAsString();

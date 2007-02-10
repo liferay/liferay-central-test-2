@@ -55,7 +55,6 @@ import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.NTCredentials;
-import org.apache.commons.httpclient.SimpleHttpConnectionManager;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthPolicy;
@@ -66,6 +65,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
+import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -113,6 +113,11 @@ public class Http {
 	public static final int PROXY_PORT = GetterUtil.getInteger(
 		SystemProperties.get("http.proxyPort"), LIFERAY_PROXY_PORT);
 
+	public static final String NON_PROXY_HOSTS =
+		SystemProperties.get("http.nonProxyHosts");
+	
+	public static String NON_PROXY_HOSTS_PATTERN;
+
 	public static final String PROXY_AUTH_TYPE = GetterUtil.getString(
 		SystemProperties.get(Http.class.getName() + ".proxy.auth.type"));
 
@@ -131,6 +136,78 @@ public class Http {
 	public static final int TIMEOUT = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".timeout"), 5000);
 
+	private static HttpClient _client = new HttpClient();
+	
+	private static HttpClientParams _clientParams = new HttpClientParams();
+	
+	private static HttpState _state = new HttpState();
+	
+	private static HttpClientParams _proxyClientParams = new HttpClientParams();
+	
+	private static HttpState _proxyState = new HttpState();
+	
+	public static HostConfiguration _hostConfig = new HostConfiguration();
+
+	public static HostConfiguration _proxyHostConfig = new HostConfiguration();
+
+	static {
+		// Mimic behavior of java.net
+		// See http://java.sun.com/j2se/1.5.0/docs/guide/net/properties.html
+		
+		if (Validator.isNotNull(NON_PROXY_HOSTS)) {
+			
+			NON_PROXY_HOSTS_PATTERN = 
+				NON_PROXY_HOSTS.replaceAll("\\.", "\\\\."); 
+			NON_PROXY_HOSTS_PATTERN = 
+				NON_PROXY_HOSTS.replaceAll("\\*", ".*?"); 
+			NON_PROXY_HOSTS_PATTERN = 
+				NON_PROXY_HOSTS.replaceAll("\\|", ")|(");
+			
+			NON_PROXY_HOSTS_PATTERN = "(" + NON_PROXY_HOSTS_PATTERN + ")";
+		}
+
+		MultiThreadedHttpConnectionManager connectionManager =
+			new MultiThreadedHttpConnectionManager();
+
+		HttpConnectionParams params = connectionManager.getParams();
+
+		params.setParameter(
+			"maxConnectionsPerHost", new Integer(MAX_CONNECTIONS_PER_HOST));
+		params.setParameter(
+			"maxTotalConnections", new Integer(MAX_TOTAL_CONNECTIONS));
+		params.setConnectionTimeout(TIMEOUT);
+		params.setSoTimeout(TIMEOUT);
+
+		if (Validator.isNotNull(PROXY_USERNAME)) {
+			Credentials credentials = null;
+
+			if (PROXY_AUTH_TYPE.equals("username-password")) {
+				credentials = new UsernamePasswordCredentials(
+					PROXY_USERNAME, PROXY_PASSWORD);
+			}
+			else if (PROXY_AUTH_TYPE.equals("ntlm")) {
+				credentials = new NTCredentials(
+					PROXY_USERNAME, PROXY_PASSWORD, PROXY_NTLM_HOST,
+					PROXY_NTLM_DOMAIN);
+
+				List authPrefs = new ArrayList();
+
+				authPrefs.add(AuthPolicy.NTLM);
+				authPrefs.add(AuthPolicy.BASIC);
+				authPrefs.add(AuthPolicy.DIGEST);
+
+				_proxyClientParams.setParameter(
+					AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
+			}
+			
+			_proxyHostConfig.setProxy(PROXY_HOST, PROXY_PORT);
+
+			_proxyState.setProxyCredentials(
+				new AuthScope(PROXY_HOST, PROXY_PORT, null),
+				credentials);
+		}
+	}
+	
 	public static String addParameter(String url, String name, String value) {
 		if (url == null) {
 			return null;
@@ -179,15 +256,33 @@ public class Http {
 		}
 	}
 
-	public static HttpClient getClient() {
-		if (_instance._client != null) {
-			return _instance._client;
+	public static HttpClient getClient(String location) throws IOException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Location is " + location);
 		}
-		else {
-			return _instance._nonProxyClient;
-		}
-	}
 
+		URI uri = new URI(location);
+
+		if (Validator.isNull(NON_PROXY_HOSTS_PATTERN) || 
+			uri.getHost().matches(NON_PROXY_HOSTS_PATTERN)) {
+			
+			_hostConfig.setHost(uri);
+			
+			_client.setHostConfiguration(_hostConfig);
+			_client.setParams(_clientParams);
+			_client.setState(_state);			
+		}
+		else if (Validator.isNotNull(PROXY_HOST) && PROXY_PORT > 0) {
+			_proxyHostConfig.setHost(uri);
+
+			_client.setHostConfiguration(_proxyHostConfig);
+			_client.setParams(_proxyClientParams);
+			_client.setState(_proxyState);
+		}
+
+		return _client;
+	}
+	
 	public static String getCompleteURL(HttpServletRequest req) {
 		StringBuffer completeURL = req.getRequestURL();
 
@@ -201,10 +296,6 @@ public class Http {
 		}
 
 		return completeURL.toString();
-	}
-
-	public static HttpClient getNonProxyClient() {
-		return _instance._nonProxyClient;
 	}
 
 	public static String getParameter(String url, String name) {
@@ -446,9 +537,6 @@ public class Http {
 		HttpMethod method = null;
 
 		try {
-			HttpClient client =
-				new HttpClient(new SimpleHttpConnectionManager());
-
 			if (location == null) {
 				return byteArray;
 			}
@@ -457,18 +545,8 @@ public class Http {
 
 				location = HTTP_WITH_SLASH + location;
 			}
-
-			HostConfiguration hostConfig = new HostConfiguration();
-
-			hostConfig.setHost(new URI(location));
-
-			if (Validator.isNotNull(PROXY_HOST) && PROXY_PORT > 0) {
-				hostConfig.setProxy(PROXY_HOST, PROXY_PORT);
-			}
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Location is " + location);
-			}
+			
+			HttpClient client = getClient(location);
 
 			if (post) {
 				method = new PostMethod(location);
@@ -515,7 +593,7 @@ public class Http {
 
 			//method.setFollowRedirects(true);
 
-			client.executeMethod(hostConfig, method, state);
+			client.executeMethod(client.getHostConfiguration(), method, state);
 
 			Header locationHeader = method.getResponseHeader("location");
 
@@ -620,67 +698,6 @@ public class Http {
 		return xml;
 	}
 
-	private Http() {
-		MultiThreadedHttpConnectionManager connectionManager =
-			new MultiThreadedHttpConnectionManager();
-
-		HttpConnectionParams params = connectionManager.getParams();
-
-		params.setParameter(
-			"maxConnectionsPerHost", new Integer(MAX_CONNECTIONS_PER_HOST));
-		params.setParameter(
-			"maxTotalConnections", new Integer(MAX_TOTAL_CONNECTIONS));
-		params.setConnectionTimeout(TIMEOUT);
-		params.setSoTimeout(TIMEOUT);
-
-		_nonProxyClient = new HttpClient(connectionManager);
-
-		if (Validator.isNotNull(PROXY_HOST) && PROXY_PORT > 0) {
-			connectionManager = new MultiThreadedHttpConnectionManager();
-
-			params.setParameter(
-				"maxConnectionsPerHost", new Integer(MAX_CONNECTIONS_PER_HOST));
-			params.setParameter(
-				"maxTotalConnections", new Integer(MAX_TOTAL_CONNECTIONS));
-			params.setConnectionTimeout(TIMEOUT);
-			params.setSoTimeout(TIMEOUT);
-
-			_client = new HttpClient(connectionManager);
-
-			if (Validator.isNotNull(PROXY_USERNAME)) {
-				Credentials credentials = null;
-
-				if (PROXY_AUTH_TYPE.equals("username-password")) {
-					credentials = new UsernamePasswordCredentials(
-						PROXY_USERNAME, PROXY_PASSWORD);
-				}
-				else if (PROXY_AUTH_TYPE.equals("ntlm")) {
-					credentials = new NTCredentials(
-						PROXY_USERNAME, PROXY_PASSWORD, PROXY_NTLM_HOST,
-						PROXY_NTLM_DOMAIN);
-
-					List authPrefs = new ArrayList();
-
-					authPrefs.add(AuthPolicy.NTLM);
-					authPrefs.add(AuthPolicy.BASIC);
-					authPrefs.add(AuthPolicy.DIGEST);
-
-					_client.getParams().setParameter(
-						AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
-				}
-
-				_client.getState().setProxyCredentials(
-					new AuthScope(PROXY_HOST, PROXY_PORT, null),
-					credentials);
-			}
-		}
-	}
-
 	private static Log _log = LogFactory.getLog(Http.class);
-
-	private static Http _instance = new Http();
-
-	private HttpClient _client;
-	private HttpClient _nonProxyClient;
 
 }

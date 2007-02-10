@@ -105,7 +105,7 @@ public class PluginUtil {
 			String repositoryURL = repositoryURLs[i];
 
 			try {
-				PluginRepository repository =  getRepository(repositoryURL);
+				PluginRepository repository = getRepository(repositoryURL);
 
 				return repository.findPluginByArtifactURL(url);
 			}
@@ -339,14 +339,16 @@ public class PluginUtil {
 			repositoryURL + StringPool.SLASH + _PLUGINS_XML_FILENAME;
 
 		try {
-			HttpClient client = Http.getClient();
+			HttpClient client = Http.getClient(pluginsXmlURL);
 
 			GetMethod getFileMethod = new GetMethod(pluginsXmlURL);
 
 			byte[] bytes = null;
 
 			try {
-				int responseCode = client.executeMethod(getFileMethod);
+				int responseCode = 
+					client.executeMethod(
+						client.getHostConfiguration(), getFileMethod);
 
 				if (responseCode != 200) {
 					throw new PluginException(
