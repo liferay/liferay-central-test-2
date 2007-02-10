@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -109,37 +110,42 @@ public class GetFileAction extends PortletAction {
 			ThemeDisplay themeDisplay, HttpServletResponse res)
 		throws Exception {
 
-		String companyId = themeDisplay.getCompanyId();
-		String userId = themeDisplay.getUserId();
+		try {
+			String companyId = themeDisplay.getCompanyId();
+			String userId = themeDisplay.getUserId();
 
-		if (fileShortcutId <= 0) {
-			DLFileEntryPermission.check(
-				themeDisplay.getPermissionChecker(), folderId, name,
-				ActionKeys.VIEW);
+			if (fileShortcutId <= 0) {
+				DLFileEntryPermission.check(
+					themeDisplay.getPermissionChecker(), folderId, name,
+					ActionKeys.VIEW);
+			}
+			else {
+				DLFileShortcut fileShortcut =
+					DLFileShortcutServiceUtil.getFileShortcut(fileShortcutId);
+
+				folderId = fileShortcut.getToFolderId();
+				name = fileShortcut.getToName();
+			}
+
+			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+				folderId, name);
+
+			InputStream is = null;
+
+			if (version > 0) {
+				is = DLFileEntryLocalServiceUtil.getFileAsStream(
+					companyId, userId, folderId, name, version);
+			}
+			else {
+				is = DLFileEntryLocalServiceUtil.getFileAsStream(
+					companyId, userId, folderId, name);
+			}
+
+			ServletResponseUtil.sendFile(res, fileEntry.getTitle(), is);
 		}
-		else {
-			DLFileShortcut fileShortcut =
-				DLFileShortcutServiceUtil.getFileShortcut(fileShortcutId);
-
-			folderId = fileShortcut.getToFolderId();
-			name = fileShortcut.getToName();
+		catch (PortalException pe) {
+			res.sendError(HttpServletResponse.SC_NOT_FOUND, pe.getMessage());
 		}
-
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-			folderId, name);
-
-		InputStream is = null;
-
-		if (version > 0) {
-			is = DLFileEntryLocalServiceUtil.getFileAsStream(
-				companyId, userId, folderId, name, version);
-		}
-		else {
-			is = DLFileEntryLocalServiceUtil.getFileAsStream(
-				companyId, userId, folderId, name);
-		}
-
-		ServletResponseUtil.sendFile(res, fileEntry.getTitle(), is);
 	}
 
 }
