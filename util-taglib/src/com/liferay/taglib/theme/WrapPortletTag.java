@@ -31,9 +31,11 @@ import com.liferay.taglib.util.ParamAncestorTagImpl;
 import com.liferay.taglib.util.ThemeUtil;
 import com.liferay.util.servlet.StringServletResponse;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 
 /**
  * <a href="WrapPortletTag.java.html"><b><i>View Source</i></b></a>
@@ -42,6 +44,35 @@ import javax.servlet.jsp.JspException;
  *
  */
 public class WrapPortletTag extends ParamAncestorTagImpl {
+
+	public static void doTag(
+			String wrapPage, String portletPage, ServletContext ctx,
+			HttpServletRequest req, StringServletResponse res,
+			PageContext pageContext)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Theme theme = themeDisplay.getTheme();
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		// Portlet content
+
+		RequestDispatcher rd = ctx.getRequestDispatcher(portletPage);
+
+		rd.include(req, res);
+
+		portletDisplay.setContent(res.getString());
+
+		// Page
+
+		res.recycle();
+
+		ThemeUtil.include(ctx, req, res, pageContext, wrapPage, theme);
+
+		pageContext.getOut().print(res.getString());
+	}
 
 	public int doStartTag() {
 		return EVAL_BODY_BUFFERED;

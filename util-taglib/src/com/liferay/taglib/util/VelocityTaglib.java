@@ -40,6 +40,7 @@ import com.liferay.taglib.security.DoAsURLTag;
 import com.liferay.taglib.security.PermissionsURLTag;
 import com.liferay.taglib.theme.LayoutIconTag;
 import com.liferay.taglib.theme.MetaTagsTag;
+import com.liferay.taglib.theme.WrapPortletTag;
 import com.liferay.taglib.ui.JournalContentSearchTag;
 import com.liferay.taglib.ui.LanguageTag;
 import com.liferay.taglib.ui.PngImageTag;
@@ -399,6 +400,17 @@ public class VelocityTaglib {
 
 		ToggleTag.doTag(
 			id, onImage, offImage, defaultOn, null, _ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String wrapPortlet(String wrapPage, String portletPage)
+		throws Exception {
+
+		_res.recycle();
+
+		WrapPortletTag.doTag(
+			wrapPage, portletPage, _ctx, _req, _res, _pageContext);
 
 		return _res.getString();
 	}
