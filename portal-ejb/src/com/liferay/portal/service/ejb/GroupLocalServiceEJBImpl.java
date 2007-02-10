@@ -52,11 +52,11 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 	public com.liferay.portal.model.Group addGroup(java.lang.String userId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL)
+		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return GroupLocalServiceFactory.getTxImpl().addGroup(userId, className,
-			classPK, name, description, type, friendlyURL);
+			classPK, name, description, type, friendlyURL, active);
 	}
 
 	public void addRoleGroups(java.lang.String roleId, long[] groupIds)
@@ -180,11 +180,11 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 
 	public com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL)
+		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return GroupLocalServiceFactory.getTxImpl().updateGroup(groupId, name,
-			description, type, friendlyURL);
+			description, type, friendlyURL, active);
 	}
 
 	public void ejbCreate() throws CreateException {

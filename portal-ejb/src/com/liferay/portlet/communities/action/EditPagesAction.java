@@ -508,7 +508,7 @@ public class EditPagesAction extends PortletAction {
 
 		GroupServiceUtil.updateGroup(
 			groupId, group.getName(), group.getDescription(), group.getType(),
-			friendlyURL);
+			friendlyURL, group.isActive());
 	}
 
 }

@@ -48,7 +48,8 @@ public class GroupModelImpl extends BaseModelImpl {
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "type_", new Integer(Types.VARCHAR) },
-			{ "friendlyURL", new Integer(Types.VARCHAR) }
+			{ "friendlyURL", new Integer(Types.VARCHAR) },
+			{ "active_", new Integer(Types.BOOLEAN) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group"), XSS_ALLOW);
@@ -244,6 +245,20 @@ public class GroupModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public boolean getActive() {
+		return _active;
+	}
+
+	public boolean isActive() {
+		return _active;
+	}
+
+	public void setActive(boolean active) {
+		if (active != _active) {
+			_active = active;
+		}
+	}
+
 	public Object clone() {
 		GroupImpl clone = new GroupImpl();
 		clone.setGroupId(getGroupId());
@@ -256,6 +271,7 @@ public class GroupModelImpl extends BaseModelImpl {
 		clone.setDescription(getDescription());
 		clone.setType(getType());
 		clone.setFriendlyURL(getFriendlyURL());
+		clone.setActive(getActive());
 
 		return clone;
 	}
@@ -314,4 +330,5 @@ public class GroupModelImpl extends BaseModelImpl {
 	private String _description;
 	private String _type;
 	private String _friendlyURL;
+	private boolean _active;
 }

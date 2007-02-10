@@ -355,7 +355,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		GroupLocalServiceUtil.addGroup(
 			user.getUserId(), User.class.getName(),
-			user.getPrimaryKey().toString(), null, null, null, null);
+			user.getPrimaryKey().toString(), null, null, null, null, true);
 
 		// Default groups
 

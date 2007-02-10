@@ -94,7 +94,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public Group addGroup(
 			String userId, String className, String classPK, String name,
-			String description, String type, String friendlyURL)
+			String description, String type, String friendlyURL, boolean active)
 		throws PortalException, SystemException {
 
 		// Group
@@ -125,6 +125,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setDescription(description);
 		group.setType(type);
 		group.setFriendlyURL(friendlyURL);
+		group.setActive(active);
 
 		GroupUtil.update(group);
 
@@ -182,7 +183,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			catch (NoSuchGroupException nsge) {
 				group = addGroup(
 					UserImpl.getDefaultUserId(companyId), null, null,
-					systemGroups[i], null, null, null);
+					systemGroups[i], null, null, null, true);
 			}
 
 			if (group.getName().equals(GroupImpl.GUEST)) {
@@ -432,7 +433,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public Group updateGroup(
 			long groupId, String name, String description, String type,
-			String friendlyURL)
+			String friendlyURL, boolean active)
 		throws PortalException, SystemException {
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);
@@ -457,6 +458,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setDescription(description);
 		group.setType(type);
 		group.setFriendlyURL(friendlyURL);
+		group.setActive(active);
 
 		GroupUtil.update(group);
 

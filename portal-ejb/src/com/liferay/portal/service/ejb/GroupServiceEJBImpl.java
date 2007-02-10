@@ -39,13 +39,13 @@ import javax.ejb.SessionContext;
 public class GroupServiceEJBImpl implements GroupService, SessionBean {
 	public com.liferay.portal.model.Group addGroup(java.lang.String name,
 		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL)
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return GroupServiceFactory.getTxImpl().addGroup(name, description,
-			type, friendlyURL);
+			type, friendlyURL, active);
 	}
 
 	public void addRoleGroups(java.lang.String roleId, long[] groupIds)
@@ -118,13 +118,13 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 
 	public com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL)
+		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return GroupServiceFactory.getTxImpl().updateGroup(groupId, name,
-			description, type, friendlyURL);
+			description, type, friendlyURL, active);
 	}
 
 	public void ejbCreate() throws CreateException {

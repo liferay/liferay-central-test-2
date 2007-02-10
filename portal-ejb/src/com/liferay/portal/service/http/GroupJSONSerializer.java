@@ -48,6 +48,7 @@ public class GroupJSONSerializer {
 		jsonObj.put("description", model.getDescription().toString());
 		jsonObj.put("type", model.getType().toString());
 		jsonObj.put("friendlyURL", model.getFriendlyURL().toString());
+		jsonObj.put("active", model.getActive());
 
 		return jsonObj;
 	}

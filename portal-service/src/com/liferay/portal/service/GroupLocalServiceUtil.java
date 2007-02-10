@@ -49,13 +49,13 @@ public class GroupLocalServiceUtil {
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK, java.lang.String name,
 		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL)
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.addGroup(userId, className, classPK, name,
-			description, type, friendlyURL);
+			description, type, friendlyURL, active);
 	}
 
 	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
@@ -208,12 +208,12 @@ public class GroupLocalServiceUtil {
 
 	public static com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL)
+		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.updateGroup(groupId, name, description, type,
-			friendlyURL);
+			friendlyURL, active);
 	}
 }

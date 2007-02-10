@@ -31,12 +31,13 @@ package com.liferay.portal.service;
 public class GroupServiceUtil {
 	public static com.liferay.portal.model.Group addGroup(
 		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL)
+		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
-		return groupService.addGroup(name, description, type, friendlyURL);
+		return groupService.addGroup(name, description, type, friendlyURL,
+			active);
 	}
 
 	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
@@ -110,12 +111,12 @@ public class GroupServiceUtil {
 
 	public static com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL)
+		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
 		return groupService.updateGroup(groupId, name, description, type,
-			friendlyURL);
+			friendlyURL, active);
 	}
 }

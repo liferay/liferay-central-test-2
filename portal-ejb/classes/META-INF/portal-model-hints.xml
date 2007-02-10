@@ -161,6 +161,7 @@
 		</field>
 		<field name="type" type="String" />
 		<field name="friendlyURL" type="String" />
+		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Image">
 		<field name="imageId" type="String">

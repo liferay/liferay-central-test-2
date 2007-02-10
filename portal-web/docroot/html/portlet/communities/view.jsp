@@ -63,9 +63,11 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	}
 	else if (tabs1.equals("communities-joined")) {
 		groupParams.put("usersGroups", user.getUserId());
+		groupParams.put("active", Boolean.TRUE);
 	}
 	else if (tabs1.equals("communities-open")) {
 		groupParams.put("type", GroupImpl.TYPE_COMMUNITY_OPEN);
+		groupParams.put("active", Boolean.TRUE);
 	}
 
 	int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
@@ -108,6 +110,11 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	headerNames.add("name");
 	headerNames.add("members");
 	headerNames.add("online-now");
+
+	if (tabs1.equals("communities-owned")) {
+		headerNames.add("active");
+	}
+
 	headerNames.add(StringPool.BLANK);
 
 	searchContainer.setHeaderNames(headerNames);
@@ -151,6 +158,12 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		int onlineCount = LiveUsers.getGroupUsers(group.getGroupId()).size();
 
 		row.addText(String.valueOf(onlineCount));
+
+		// Active
+
+		if (tabs1.equals("communities-owned")) {
+			row.addText(LanguageUtil.get(pageContext, (group.isActive() ? "yes" : "no")));
+		}
 
 		// Action
 

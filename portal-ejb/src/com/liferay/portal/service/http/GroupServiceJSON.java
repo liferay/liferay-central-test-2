@@ -36,11 +36,11 @@ import org.json.JSONObject;
 public class GroupServiceJSON {
 	public static JSONObject addGroup(java.lang.String name,
 		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL)
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
-				description, type, friendlyURL);
+				description, type, friendlyURL, active);
 
 		return GroupJSONSerializer.toJSONObject(returnValue);
 	}
@@ -112,11 +112,11 @@ public class GroupServiceJSON {
 
 	public static JSONObject updateGroup(long groupId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL)
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
-				name, description, type, friendlyURL);
+				name, description, type, friendlyURL, active);
 
 		return GroupJSONSerializer.toJSONObject(returnValue);
 	}

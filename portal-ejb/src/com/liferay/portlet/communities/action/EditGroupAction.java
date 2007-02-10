@@ -136,13 +136,14 @@ public class EditGroupAction extends PortletAction {
 		String description = ParamUtil.getString(req, "description");
 		String type = ParamUtil.getString(req, "type");
 		String friendlyURL = ParamUtil.getString(req, "friendlyURL");
+		boolean active = ParamUtil.getBoolean(req, "active");
 
 		if (groupId <= 0) {
 
 			// Add group
 
 			Group group = GroupServiceUtil.addGroup(
-				name, description, type, friendlyURL);
+				name, description, type, friendlyURL, active);
 
 			LiveUsers.joinGroup(req.getRemoteUser(), group.getGroupId());
 		}
@@ -151,7 +152,7 @@ public class EditGroupAction extends PortletAction {
 			// Update group
 
 			GroupServiceUtil.updateGroup(
-				groupId, name, description, type, friendlyURL);
+				groupId, name, description, type, friendlyURL, active);
 		}
 	}
 

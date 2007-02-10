@@ -74,4 +74,10 @@ public interface GroupModel extends BaseModel {
 	public String getFriendlyURL();
 
 	public void setFriendlyURL(String friendlyURL);
+
+	public boolean getActive();
+
+	public boolean isActive();
+
+	public void setActive(boolean active);
 }

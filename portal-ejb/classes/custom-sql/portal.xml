@@ -56,6 +56,12 @@
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByActive">
+		<![CDATA[
+			WHERE
+				(Group_.active_ = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByCreatorUserId">
 		<![CDATA[
 			WHERE

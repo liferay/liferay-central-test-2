@@ -37,11 +37,11 @@ import java.rmi.RemoteException;
 public class GroupServiceSoap {
 	public static com.liferay.portal.model.GroupSoap addGroup(
 		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL)
+		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
-					description, type, friendlyURL);
+					description, type, friendlyURL, active);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}
@@ -163,11 +163,11 @@ public class GroupServiceSoap {
 
 	public static com.liferay.portal.model.GroupSoap updateGroup(long groupId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL)
+		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
-					name, description, type, friendlyURL);
+					name, description, type, friendlyURL, active);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}

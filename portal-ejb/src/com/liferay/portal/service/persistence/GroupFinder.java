@@ -65,6 +65,9 @@ public class GroupFinder {
 	public static String FIND_BY_C_N_D =
 		GroupFinder.class.getName() + ".findByC_N_D";
 
+	public static String JOIN_BY_ACTIVE =
+		GroupFinder.class.getName() + ".joinByActive";
+
 	public static String JOIN_BY_CREATOR_USER_ID =
 		GroupFinder.class.getName() + ".joinByCreatorUserId";
 
@@ -527,7 +530,10 @@ public class GroupFinder {
 	private static String _getWhere(String key) {
 		String join = StringPool.BLANK;
 
-		if (key.equals("creatorUserId")) {
+		if (key.equals("active")) {
+			join = CustomSQLUtil.get(JOIN_BY_ACTIVE);
+		}
+		else if (key.equals("creatorUserId")) {
 			join = CustomSQLUtil.get(JOIN_BY_CREATOR_USER_ID);
 		}
 		else if (key.equals("groupsOrgs")) {
@@ -577,7 +583,7 @@ public class GroupFinder {
 
 				String key = (String)entry.getKey();
 
-				if (key.equals("layoutSet")) {
+				if (key.equals("active") || key.equals("layoutSet")) {
 					Boolean value = (Boolean)entry.getValue();
 
 					qPos.add(value);

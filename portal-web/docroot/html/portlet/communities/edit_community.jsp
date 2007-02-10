@@ -82,6 +82,15 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 		<input <%= type.equals(GroupImpl.TYPE_COMMUNITY_OPEN) ? "checked" : "" %> name="<portlet:namespace />type" value="<%= GroupImpl.TYPE_COMMUNITY_OPEN %>" type="checkbox">
 	</td>
 </tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "active") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="active" defaultValue="<%= Boolean.TRUE %>" />
+	</td>
+</tr>
 </table>
 
 <br>

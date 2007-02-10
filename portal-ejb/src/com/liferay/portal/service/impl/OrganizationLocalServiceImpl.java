@@ -107,7 +107,8 @@ public class OrganizationLocalServiceImpl
 
 		GroupLocalServiceUtil.addGroup(
 			userId, Organization.class.getName(),
-			organization.getPrimaryKey().toString(), null, null, null, null);
+			organization.getPrimaryKey().toString(), null, null, null, null,
+			true);
 
 		// Resources
 

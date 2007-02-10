@@ -273,6 +273,7 @@
 		<column name="description" type="String" />
 		<column name="type" type="String" />
 		<column name="friendlyURL" type="String" />
+		<column name="active" type="boolean" />
 
 		<!-- Relationships -->
 

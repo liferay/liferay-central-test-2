@@ -43,14 +43,16 @@ import java.util.List;
 public class GroupServiceImpl extends PrincipalBean implements GroupService {
 
 	public Group addGroup(
-			String name, String description, String type, String friendlyURL)
+			String name, String description, String type, String friendlyURL,
+			boolean active)
 		throws PortalException, SystemException {
 
 		PortalPermission.check(
 			getPermissionChecker(), ActionKeys.ADD_COMMUNITY);
 
 		return GroupLocalServiceUtil.addGroup(
-			getUserId(), null, null, name, description, type, friendlyURL);
+			getUserId(), null, null, name, description, type, friendlyURL,
+			active);
 	}
 
 	public void addRoleGroups(String roleId, long[] groupIds)
@@ -115,14 +117,14 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 
 	public Group updateGroup(
 			long groupId, String name, String description, String type,
-			String friendlyURL)
+			String friendlyURL, boolean active)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
 		return GroupLocalServiceUtil.updateGroup(
-			groupId, name, description, type, friendlyURL);
+			groupId, name, description, type, friendlyURL, active);
 	}
 
 }
