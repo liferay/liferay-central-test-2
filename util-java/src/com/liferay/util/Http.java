@@ -660,6 +660,8 @@ public class Http {
 		params.setConnectionTimeout(TIMEOUT);
 		params.setSoTimeout(TIMEOUT);
 
+		_client.setHttpConnectionManager(connectionManager);
+		
 		if (Validator.isNotNull(PROXY_USERNAME)) {
 			Credentials credentials = null;
 
