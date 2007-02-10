@@ -41,7 +41,7 @@ String rowBreak = (String)request.getAttribute("liferay-ui:error:rowBreak");
 	</c:when>
 	<c:when test="<%= key == null %>">
 		<c:if test="<%= !SessionErrors.isEmpty(renderRequest) %>">
-			<span class="portlet-msg-error" style="font-size: xx-small;">
+			<span class="portlet-msg-error">
 			<%= LanguageUtil.get(pageContext, "you-have-entered-invalid-data") %>
 			</span>
 
@@ -50,7 +50,7 @@ String rowBreak = (String)request.getAttribute("liferay-ui:error:rowBreak");
 	</c:when>
 	<c:otherwise>
 		<c:if test="<%= SessionErrors.contains(renderRequest, key) %>">
-			<span class="portlet-msg-error" style="font-size: xx-small;">
+			<span class="portlet-msg-error">
 
 			<c:choose>
 				<c:when test="<%= translateMessage %>">

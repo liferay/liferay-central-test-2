@@ -31,7 +31,7 @@ boolean translateMessage = GetterUtil.getBoolean((String)request.getAttribute("l
 %>
 
 <c:if test="<%= SessionMessages.contains(renderRequest, key) %>">
-	<span class="portlet-msg-success" style="font-size: xx-small;">
+	<span class="portlet-msg-success">
 
 	<c:choose>
 		<c:when test="<%= translateMessage %>">

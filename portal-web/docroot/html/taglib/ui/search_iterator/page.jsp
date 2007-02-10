@@ -39,7 +39,7 @@ if (rowChecker != null) {
 
 <c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (searchContainer.getEmptyResultsMessage() != null)) %>">
 	<table cellpadding="4" cellspacing="0" style="border: 1px solid <%= colorScheme.getPortletMenuBg() %>;" width="100%">
-	<tr class="portlet-section-header" style="font-weight: bold;">
+	<th class="portlet-section-header">
 
 	<%
 	for (int i = 0; i < headerNames.size(); i++) {
@@ -118,7 +118,7 @@ if (rowChecker != null) {
 	}
 	%>
 
-	</tr>
+	</th>
 
 	<c:if test="<%= (resultRows.size() == 0) && (searchContainer.getEmptyResultsMessage() != null) %>">
 		<tr class="portlet-section-body">
@@ -160,11 +160,7 @@ if (rowChecker != null) {
 		}
 	%>
 
-		<tr class="<%= className %>" style="font-weight: <%= row.isBold() ? "bold" : "normal" %>;"
-			<c:if test="<%= searchContainer.isHover() %>">
-				onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';"
-			</c:if>
-		>
+		<tr class="<%= className %>" style="font-weight: <%= row.isBold() ? "bold" : "normal" %>;">
 
 		<%
 		for (int j = 0; j < entries.size(); j++) {
@@ -194,6 +190,23 @@ if (rowChecker != null) {
 	<c:if test="<%= (rowChecker != null) && (resultRows.size() > 0) && Validator.isNotNull(rowChecker.getAllRowsId()) && allRowsIsChecked %>">
 		<script type="text/javascript">
 			document.<%= rowChecker.getFormName() %>.<%= rowChecker.getAllRowsId() %>.checked = true;
+
+			<c:if test="<%= searchContainer.isHover() %>">
+				_$J(".portlet-section-body").hover(
+					function() {
+						var row = _$J(this);
+
+						row.addClass("portlet-section-body-hover");
+						row.removeClass("portlet-section-body");
+					},
+					function() {
+						var row = _$J(this);
+
+						row.addClass("portlet-section-body");
+						row.removeClass("portlet-section-body-hover");
+					}
+				);
+			</c:if>
 		</script>
 	</c:if>
 </c:if>
