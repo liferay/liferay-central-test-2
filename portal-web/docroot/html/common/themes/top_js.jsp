@@ -169,7 +169,11 @@
 			%>};
 		</c:when>
 		<c:otherwise>
-			_$J(document).ready(function(){Liferay.Portlet.processLast();});
+			_$J(document).ready(
+				function() {
+						Liferay.Portlet.processLast();
+				}
+			);
 		</c:otherwise>
 	</c:choose>
 

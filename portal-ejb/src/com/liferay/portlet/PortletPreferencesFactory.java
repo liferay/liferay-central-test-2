@@ -272,7 +272,7 @@ public class PortletPreferencesFactory {
 	}
 
 	public static PortletPreferences getPortletSetup(
-		String portletId, String layoutId, String ownerId)
+			String portletId, String layoutId, String ownerId)
 		throws PortalException, SystemException {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);

@@ -620,6 +620,7 @@ public class ThemeDisplay implements Serializable {
 		_timeZone = null;
 		_theme = null;
 		_colorScheme = null;
+		_freeformLayout = false;
 		_serverPort = 0;
 		_secure = false;
 		_resolution = 0;

@@ -259,21 +259,25 @@ if (urlBack != null) {
 
 
 Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
+
 boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
-boolean freeformPortlet =  themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax();
-String freeformStyles = "";
+
+boolean freeformPortlet = themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax();
+
+String freeformStyles = StringPool.BLANK;
 
 if (freeformPortlet) {
 	StringBuffer sb = new StringBuffer();
-	Properties styleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
+
+	Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
 
 	sb.append("style=\"");
-	sb.append("height:" + styleProps.getProperty("height", "300px") + ";");
-	sb.append("overflow:auto;");
+	sb.append("height: " + freeformStyleProps.getProperty("height", "300px") + ";");
+	sb.append("overflow: auto;");
 	sb.append("\"");
+
 	freeformStyles = sb.toString();
 }
-
 %>
 
 <c:choose>
@@ -304,9 +308,7 @@ if (freeformPortlet) {
 			<c:when test="<%= portletDecorate %>">
 				<liferay-theme:wrap-portlet page="portlet.jsp">
 					<div class="portlet-content-container" <%= freeformStyles %>>
-
 						<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
-
 					</div>
 				</liferay-theme:wrap-portlet>
 
@@ -339,7 +341,6 @@ if (freeformPortlet) {
 					</c:if>
 
 					<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
-
 				</div>
 
 				<c:if test="<%= freeformPortlet %>">

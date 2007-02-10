@@ -22,17 +22,20 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.permission.LayoutPermission;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.servlet.NamespaceServletRequest;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -42,6 +45,7 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
 
 import javax.portlet.PortletPreferences;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -63,10 +67,14 @@ public class UpdateLayoutAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
+		Layout layout = themeDisplay.getLayout();
 		LayoutTypePortlet layoutTypePortlet =
-			(LayoutTypePortlet)layout.getLayoutType();
+			themeDisplay.getLayoutTypePortlet();
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
@@ -87,25 +95,31 @@ public class UpdateLayoutAction extends Action {
 			}
 		}
 		else if (cmd.equals("drag")) {
-			StringBuffer sb = new StringBuffer();
-			String plid = ParamUtil.getString(req, "plid");
-			String height = ParamUtil.getString(req, "height", "");
-			String width = ParamUtil.getString(req, "width", "");
-			String top = ParamUtil.getString(req, "top", "");
-			String left = ParamUtil.getString(req, "left", "");
-			
-			PortletPreferences portletSetup =
-				PortletPreferencesFactory.getPortletSetup(
-					portletId, LayoutImpl.getLayoutId(plid),
-						LayoutImpl.getOwnerId(plid));
+			if (LayoutPermission.contains(
+					permissionChecker, layout.getLayoutId(),
+					layout.getOwnerId(), ActionKeys.UPDATE)) {
 
-			sb.append("height=" + height + "\n");
-			sb.append("width=" + width + "\n");
-			sb.append("top=" + top + "\n");
-			sb.append("left=" + left + "\n");
+				String height = ParamUtil.getString(req, "height");
+				String width = ParamUtil.getString(req, "width");
+				String top = ParamUtil.getString(req, "top");
+				String left = ParamUtil.getString(req, "left");
 
-			portletSetup.setValue("portlet-freeform-styles", sb.toString());
-			portletSetup.store();
+				PortletPreferences portletSetup =
+					PortletPreferencesFactory.getPortletSetup(
+						portletId, layout.getLayoutId(), layout.getOwnerId());
+
+				StringBuffer sb = new StringBuffer();
+
+				sb.append("height=" + height + "\n");
+				sb.append("width=" + width + "\n");
+				sb.append("top=" + top + "\n");
+				sb.append("left=" + left + "\n");
+
+				portletSetup.setValue(
+					"portlet-freeform-styles", sb.toString());
+
+				portletSetup.store();
+			}
 		}
 		else if (cmd.equals("minimize")) {
 			boolean restore = ParamUtil.getBoolean(req, "p_p_restore");

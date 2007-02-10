@@ -439,6 +439,12 @@ public class ServicePreAction extends Action {
 
 			if (layout != null) {
 				if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+					boolean freeformLayout =
+						layoutTypePortlet.getLayoutTemplateId().equals(
+							"freeform");
+
+					themeDisplay.setFreeformLayout(freeformLayout);
+
 					boolean hasUpdateLayoutPermission =
 						LayoutPermission.contains(
 							permissionChecker, layout, ActionKeys.UPDATE);
@@ -498,7 +504,6 @@ public class ServicePreAction extends Action {
 					"struts_action", "/my_account/edit_user");
 
 				themeDisplay.setURLMyAccount(myAccountURL);
-				themeDisplay.setFreeformLayout(layoutTypePortlet.getLayoutTemplateId().equals("freeform"));
 			}
 
 			boolean termsOfUseRequired = GetterUtil.getBoolean(

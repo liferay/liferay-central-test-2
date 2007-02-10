@@ -37,6 +37,7 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 		[$TEMPLATE_PORTLET_<%= portlet.getPortletId() %>$]
 	</c:when>
 	<c:otherwise>
+
 		<%
 		portletDisplay.setId(portlet.getPortletId());
 		portletDisplay.setNamespace(PortalUtil.getPortletNamespace(portlet.getPortletId()));
@@ -95,6 +96,7 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 			AjaxUtil.request("<%= url.toString() %>", {
 				onComplete: function(xmlHttpReq) {
 					var portletDiv = document.getElementById("p_load<%= portletDisplay.getNamespace() %>");
+
 					addPortletHTML(xmlHttpReq.responseText, portletDiv.parentNode, portletDiv);
 				}
 			});
