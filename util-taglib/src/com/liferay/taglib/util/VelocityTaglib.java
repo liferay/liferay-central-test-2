@@ -409,10 +409,8 @@ public class VelocityTaglib {
 
 		_res.recycle();
 
-		WrapPortletTag.doTag(
+		return WrapPortletTag.doTag(
 			wrapPage, portletPage, _ctx, _req, _res, _pageContext);
-
-		return _res.getString();
 	}
 
 	private ServletContext _ctx;

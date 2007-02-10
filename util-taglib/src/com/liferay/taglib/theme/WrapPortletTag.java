@@ -45,7 +45,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class WrapPortletTag extends ParamAncestorTagImpl {
 
-	public static void doTag(
+	public static String doTag(
 			String wrapPage, String portletPage, ServletContext ctx,
 			HttpServletRequest req, StringServletResponse res,
 			PageContext pageContext)
@@ -69,7 +69,8 @@ public class WrapPortletTag extends ParamAncestorTagImpl {
 
 		res.recycle();
 
-		ThemeUtil.include(ctx, req, res, pageContext, wrapPage, theme);
+		return ThemeUtil.includeVM(
+			ctx, req, pageContext, wrapPage, theme, false);
 	}
 
 	public int doStartTag() {

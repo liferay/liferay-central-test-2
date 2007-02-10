@@ -65,7 +65,7 @@ public class ThemeUtil {
 		String extension = theme.getTemplateExtension();
 
 		if (extension.equals("vm")) {
-			includeVM(ctx, req, pageContext, page, theme);
+			includeVM(ctx, req, pageContext, page, theme, true);
 		}
 		else {
 			String path =
@@ -75,7 +75,7 @@ public class ThemeUtil {
 		}
 	}
 
-	protected static void includeJSP(
+	public static void includeJSP(
 			ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
 			String path, Theme theme)
 		throws Exception {
@@ -127,9 +127,9 @@ public class ThemeUtil {
 		}
 	}
 
-	protected static void includeVM(
+	public static String includeVM(
 			ServletContext ctx, HttpServletRequest req, PageContext pageContext,
-			String page, Theme theme)
+			String page, Theme theme, boolean write)
 		throws Exception {
 
 		// Get template
@@ -159,7 +159,7 @@ public class ThemeUtil {
 		if (!Velocity.resourceExists(source)) {
 			_log.error(source + " does not exist");
 
-			return;
+			return null;
 		}
 
 		Template template = Velocity.getTemplate(source);
@@ -187,7 +187,16 @@ public class ThemeUtil {
 
 		// Print output
 
-		pageContext.getOut().print(sw.toString());
+		String output = sw.toString();
+
+		if (write) {
+			pageContext.getOut().print(output);
+
+			return null;
+		}
+		else {
+			return output;
+		}
 	}
 
 	private static String _getTilesVariables(
