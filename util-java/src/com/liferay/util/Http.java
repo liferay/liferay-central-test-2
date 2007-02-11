@@ -182,7 +182,9 @@ public class Http {
 		}
 	}
 
-	public static HttpClient getClient(HostConfiguration hostConfig) throws IOException {
+	public static HttpClient getClient(HostConfiguration hostConfig) 
+		throws IOException {
+
 		return _instance._getClient(hostConfig);
 	}
 	
@@ -197,7 +199,7 @@ public class Http {
 
 		hostConfig.setHost(new URI(location));
 
-		if (hasProxyConfig()) {
+		if (isProxyHost(hostConfig.getHost())) {
 			hostConfig.setProxy(PROXY_HOST, PROXY_PORT);
 		}
 
@@ -211,9 +213,7 @@ public class Http {
 		
 		String host = hostConfig.getHost();
 		
-		if (hasProxyConfig() && !isNonProxyHost(host) && 
-			proxyCredentials != null) {
-			
+		if (isProxyHost(host) && proxyCredentials != null) {
 			AuthScope scope = new AuthScope(PROXY_HOST, PROXY_PORT, null);
 				
 			state.setProxyCredentials(scope, proxyCredentials);
@@ -224,6 +224,10 @@ public class Http {
 		return Validator.isNotNull(PROXY_HOST) && (PROXY_PORT > 0);
 	}
 
+	public static boolean isProxyHost(String host) {
+		return hasProxyConfig() && !isNonProxyHost(host);
+	}
+	
 	public static boolean isNonProxyHost(String host) {
 		return _instance._isNonProxyHost(host);
 	}
@@ -722,10 +726,7 @@ public class Http {
 	private HttpClient _getClient(HostConfiguration hostConfig) 
 		throws IOException {
 		
-		if (_isNonProxyHost(hostConfig.getHost())) {
-			return _client;
-		}
-		else if (hasProxyConfig()) {
+		if (isProxyHost(hostConfig.getHost())) {
 			return _proxyClient;
 		}
 		else {
