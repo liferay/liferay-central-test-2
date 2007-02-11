@@ -122,7 +122,7 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 			new AuthScope(HOST, PORT, REALM),
 			new UsernamePasswordCredentials(USERNAME, PASSWORD));
 
-		state = Http.getState(state, null, get, hostConfig);
+		Http.proxifyState(state, hostConfig);
 
 		try {
 			client.executeMethod(

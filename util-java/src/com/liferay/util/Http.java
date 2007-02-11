@@ -66,7 +66,6 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
-import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -205,20 +204,9 @@ public class Http {
 		return hostConfig;
 	}
 
-	public static HttpState getState(HttpState state, Cookie[] cookies, 
-		HttpMethod method, HostConfiguration hostConfig) {
-		
-		if (state == null) {
-			state = new HttpState();
-		}
-
-		if ((cookies != null) && (cookies.length > 0)) {
-			state.addCookies(cookies);
-
-			method.getParams().setCookiePolicy(
-				CookiePolicy.BROWSER_COMPATIBILITY);
-		}
-		
+	public static void proxifyState(
+		HttpState state, HostConfiguration hostConfig) {
+				
 		Credentials proxyCredentials = _instance._proxyCredentials;
 		
 		String host = hostConfig.getHost();
@@ -230,8 +218,6 @@ public class Http {
 				
 			state.setProxyCredentials(scope, proxyCredentials);
 		}
-		
-		return state;
 	}
 	
 	public static boolean hasProxyConfig() {
@@ -543,7 +529,16 @@ public class Http {
 
 			//method.setFollowRedirects(true);
 
-			HttpState state = getState(null, cookies, method, hostConfig);
+			HttpState state = new HttpState();
+
+			if ((cookies != null) && (cookies.length > 0)) {
+				state.addCookies(cookies);
+
+				method.getParams().setCookiePolicy(
+					CookiePolicy.BROWSER_COMPATIBILITY);
+			}
+
+			proxifyState(state, hostConfig);
 			
 			client.executeMethod(hostConfig, method, state);
 
