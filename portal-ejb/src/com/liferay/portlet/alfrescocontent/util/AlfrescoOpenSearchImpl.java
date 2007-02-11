@@ -100,10 +100,12 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 		}
 
 		HostConfiguration hostConfig = null;
+
 		HttpClient client = null;
-		
+
 		try {
 			hostConfig = Http.getHostConfig(url);
+
 			client = Http.getClient(hostConfig);
 		}
 		catch (IOException ioe) {
@@ -112,9 +114,9 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 			throw new SearchException(ioe);
 		}
 
-		GetMethod get = new GetMethod(url);
+		GetMethod getMethod = new GetMethod(url);
 
-		get.setDoAuthentication(true);
+		getMethod.setDoAuthentication(true);
 
 		HttpState state = new HttpState();
 
@@ -125,16 +127,15 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 		Http.proxifyState(state, hostConfig);
 
 		try {
-			client.executeMethod(
-				hostConfig, get, state);
+			client.executeMethod(hostConfig, getMethod, state);
 
-			xml = get.getResponseBodyAsString();
+			xml = getMethod.getResponseBodyAsString();
 		}
 		catch (IOException ioe) {
 			_log.error("Unable to search with " + url, ioe);
 		}
 		finally {
-			get.releaseConnection();
+			getMethod.releaseConnection();
 		}
 
 		return xml;

@@ -424,7 +424,7 @@ public class EditServerAction extends PortletAction {
 			String progressId = ParamUtil.getString(req, Constants.PROGRESS_ID);
 
 			HostConfiguration hostConfig = Http.getHostConfig(url.toString());
-			
+
 			HttpClient client = Http.getClient(hostConfig);
 
 			getMethod = new GetMethod(url);

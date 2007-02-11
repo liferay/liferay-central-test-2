@@ -339,7 +339,7 @@ public class PluginUtil {
 
 		try {
 			HostConfiguration hostConfig = Http.getHostConfig(pluginsXmlURL);
-			
+
 			HttpClient client = Http.getClient(hostConfig);
 
 			GetMethod getFileMethod = new GetMethod(pluginsXmlURL);

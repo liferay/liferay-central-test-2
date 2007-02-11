@@ -182,12 +182,27 @@ public class Http {
 		}
 	}
 
-	public static HttpClient getClient(HostConfiguration hostConfig) 
+	public static HttpClient getClient(HostConfiguration hostConfig)
 		throws IOException {
 
 		return _instance._getClient(hostConfig);
 	}
-	
+
+	public static String getCompleteURL(HttpServletRequest req) {
+		StringBuffer completeURL = req.getRequestURL();
+
+		if (completeURL == null) {
+			completeURL = new StringBuffer();
+		}
+
+		if (req.getQueryString() != null) {
+			completeURL.append(StringPool.QUESTION);
+			completeURL.append(req.getQueryString());
+		}
+
+		return completeURL.toString();
+	}
+
 	public static HostConfiguration getHostConfig(String location)
 		throws IOException {
 
@@ -204,47 +219,6 @@ public class Http {
 		}
 
 		return hostConfig;
-	}
-
-	public static void proxifyState(
-		HttpState state, HostConfiguration hostConfig) {
-				
-		Credentials proxyCredentials = _instance._proxyCredentials;
-		
-		String host = hostConfig.getHost();
-		
-		if (isProxyHost(host) && proxyCredentials != null) {
-			AuthScope scope = new AuthScope(PROXY_HOST, PROXY_PORT, null);
-				
-			state.setProxyCredentials(scope, proxyCredentials);
-		}
-	}
-	
-	public static boolean hasProxyConfig() {
-		return Validator.isNotNull(PROXY_HOST) && (PROXY_PORT > 0);
-	}
-
-	public static boolean isProxyHost(String host) {
-		return hasProxyConfig() && !isNonProxyHost(host);
-	}
-	
-	public static boolean isNonProxyHost(String host) {
-		return _instance._isNonProxyHost(host);
-	}
-
-	public static String getCompleteURL(HttpServletRequest req) {
-		StringBuffer completeURL = req.getRequestURL();
-
-		if (completeURL == null) {
-			completeURL = new StringBuffer();
-		}
-
-		if (req.getQueryString() != null) {
-			completeURL.append(StringPool.QUESTION);
-			completeURL.append(req.getQueryString());
-		}
-
-		return completeURL.toString();
 	}
 
 	public static String getParameter(String url, String name) {
@@ -357,6 +331,28 @@ public class Http {
 		return req.getRequestURL().toString();
 	}
 
+	public static boolean hasProxyConfig() {
+		if (Validator.isNotNull(PROXY_HOST) && (PROXY_PORT > 0)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean isNonProxyHost(String host) {
+		return _instance._isNonProxyHost(host);
+	}
+
+	public static boolean isProxyHost(String host) {
+		if (hasProxyConfig() && !isNonProxyHost(host)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static String parameterMapToString(Map parameterMap) {
 		return parameterMapToString(parameterMap, true);
 	}
@@ -420,6 +416,20 @@ public class Http {
 
 	public static String protocolize(String url, RenderRequest req) {
 		return protocolize(url, req.isSecure());
+	}
+
+	public static void proxifyState(
+		HttpState state, HostConfiguration hostConfig) {
+
+		Credentials proxyCredentials = _instance._proxyCredentials;
+
+		String host = hostConfig.getHost();
+
+		if (isProxyHost(host) && (proxyCredentials != null)) {
+			AuthScope scope = new AuthScope(PROXY_HOST, PROXY_PORT, null);
+
+			state.setProxyCredentials(scope, proxyCredentials);
+		}
 	}
 
 	public static void submit(String location) throws IOException {
@@ -496,7 +506,7 @@ public class Http {
 			}
 
 			HostConfiguration hostConfig = getHostConfig(location);
-			
+
 			HttpClient client = getClient(hostConfig);
 
 			if (post) {
@@ -543,7 +553,7 @@ public class Http {
 			}
 
 			proxifyState(state, hostConfig);
-			
+
 			client.executeMethod(hostConfig, method, state);
 
 			Header locationHeader = method.getResponseHeader("location");
@@ -680,9 +690,9 @@ public class Http {
 				"\\*", ".*?");
 			nonProxyHostsRegEx = nonProxyHostsRegEx.replaceAll(
 				"\\|", ")|(");
-			
+
 			nonProxyHostsRegEx = "(" + nonProxyHostsRegEx + ")";
-			
+
 			_nonProxyHostsPattern = Pattern.compile(nonProxyHostsRegEx);
 		}
 
@@ -700,7 +710,7 @@ public class Http {
 
 		_client.setHttpConnectionManager(connectionManager);
 		_proxyClient.setHttpConnectionManager(connectionManager);
-		
+
 		if (hasProxyConfig() && Validator.isNotNull(PROXY_USERNAME)) {
 			if (PROXY_AUTH_TYPE.equals("username-password")) {
 				_proxyCredentials = new UsernamePasswordCredentials(
@@ -723,9 +733,9 @@ public class Http {
 		}
 	}
 
-	private HttpClient _getClient(HostConfiguration hostConfig) 
+	private HttpClient _getClient(HostConfiguration hostConfig)
 		throws IOException {
-		
+
 		if (isProxyHost(hostConfig.getHost())) {
 			return _proxyClient;
 		}
@@ -735,10 +745,16 @@ public class Http {
 	}
 
 	private boolean _isNonProxyHost(String host) {
-		return _nonProxyHostsPattern == null || 
-			_nonProxyHostsPattern.matcher(host).matches();
+		if (_nonProxyHostsPattern == null ||
+			_nonProxyHostsPattern.matcher(host).matches()) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
-	
+
 	private static Log _log = LogFactory.getLog(Http.class);
 
 	private static Http _instance = new Http();
