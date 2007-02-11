@@ -60,6 +60,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
@@ -337,7 +338,9 @@ public class PluginUtil {
 			repositoryURL + StringPool.SLASH + _PLUGINS_XML_FILENAME;
 
 		try {
-			HttpClient client = Http.getClient(pluginsXmlURL);
+			HostConfiguration hostConfig = Http.getHostConfig(pluginsXmlURL);
+			
+			HttpClient client = Http.getClient(hostConfig);
 
 			GetMethod getFileMethod = new GetMethod(pluginsXmlURL);
 
@@ -345,7 +348,7 @@ public class PluginUtil {
 
 			try {
 				int responseCode = client.executeMethod(
-					client.getHostConfiguration(), getFileMethod);
+					hostConfig, getFileMethod);
 
 				if (responseCode != 200) {
 					throw new PluginException(

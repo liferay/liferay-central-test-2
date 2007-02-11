@@ -85,6 +85,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
@@ -422,12 +423,13 @@ public class EditServerAction extends PortletAction {
 
 			String progressId = ParamUtil.getString(req, Constants.PROGRESS_ID);
 
-			HttpClient client = Http.getClient(url);
+			HostConfiguration hostConfig = Http.getHostConfig(url.toString());
+			
+			HttpClient client = Http.getClient(hostConfig);
 
 			getMethod = new GetMethod(url);
 
-			int responseCode = client.executeMethod(
-				client.getHostConfiguration(), getMethod);
+			int responseCode = client.executeMethod(hostConfig, getMethod);
 
 			if (responseCode != 200) {
 				SessionErrors.add(

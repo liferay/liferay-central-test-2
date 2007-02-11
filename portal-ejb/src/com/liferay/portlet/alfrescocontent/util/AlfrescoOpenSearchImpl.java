@@ -33,6 +33,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
@@ -98,10 +99,12 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 			_log.debug("Search with " + url);
 		}
 
+		HostConfiguration hostConfig = null;
 		HttpClient client = null;
-
+		
 		try {
-			client = Http.getClient(url);
+			hostConfig = Http.getHostConfig(url);
+			client = Http.getClient(hostConfig);
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
@@ -109,19 +112,21 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 			throw new SearchException(ioe);
 		}
 
+		GetMethod get = new GetMethod(url);
+
+		get.setDoAuthentication(true);
+
 		HttpState state = new HttpState();
 
 		state.setCredentials(
 			new AuthScope(HOST, PORT, REALM),
 			new UsernamePasswordCredentials(USERNAME, PASSWORD));
 
-		GetMethod get = new GetMethod(url);
-
-		get.setDoAuthentication(true);
+		state = Http.getState(state, null, get, hostConfig);
 
 		try {
 			client.executeMethod(
-				client.getHostConfiguration(), get, state);
+				hostConfig, get, state);
 
 			xml = get.getResponseBodyAsString();
 		}

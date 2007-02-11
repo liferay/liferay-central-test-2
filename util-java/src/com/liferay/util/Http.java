@@ -40,6 +40,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -182,8 +183,63 @@ public class Http {
 		}
 	}
 
-	public static HttpClient getClient(String location) throws IOException {
-		return _instance._getClient(location);
+	public static HttpClient getClient(HostConfiguration hostConfig) throws IOException {
+		return _instance._getClient(hostConfig);
+	}
+	
+	public static HostConfiguration getHostConfig(String location)
+		throws IOException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Location is " + location);
+		}
+
+		HostConfiguration hostConfig = new HostConfiguration();
+
+		hostConfig.setHost(new URI(location));
+
+		if (hasProxyConfig()) {
+			hostConfig.setProxy(PROXY_HOST, PROXY_PORT);
+		}
+
+		return hostConfig;
+	}
+
+	public static HttpState getState(HttpState state, Cookie[] cookies, 
+		HttpMethod method, HostConfiguration hostConfig) {
+		
+		if (state == null) {
+			state = new HttpState();
+		}
+
+		if ((cookies != null) && (cookies.length > 0)) {
+			state.addCookies(cookies);
+
+			method.getParams().setCookiePolicy(
+				CookiePolicy.BROWSER_COMPATIBILITY);
+		}
+		
+		Credentials proxyCredentials = _instance._proxyCredentials;
+		
+		String host = hostConfig.getHost();
+		
+		if (hasProxyConfig() && !isNonProxyHost(host) && 
+			proxyCredentials != null) {
+			
+			AuthScope scope = new AuthScope(PROXY_HOST, PROXY_PORT, null);
+				
+			state.setProxyCredentials(scope, proxyCredentials);
+		}
+		
+		return state;
+	}
+	
+	public static boolean hasProxyConfig() {
+		return Validator.isNotNull(PROXY_HOST) && (PROXY_PORT > 0);
+	}
+
+	public static boolean isNonProxyHost(String host) {
+		return _instance._isNonProxyHost(host);
 	}
 
 	public static String getCompleteURL(HttpServletRequest req) {
@@ -449,7 +505,9 @@ public class Http {
 				location = HTTP_WITH_SLASH + location;
 			}
 
-			HttpClient client = getClient(location);
+			HostConfiguration hostConfig = getHostConfig(location);
+			
+			HttpClient client = getClient(hostConfig);
 
 			if (post) {
 				method = new PostMethod(location);
@@ -483,20 +541,11 @@ public class Http {
 				method = new GetMethod(location);
 			}
 
-			HttpState state = null;
-
-			if ((cookies != null) && (cookies.length > 0)) {
-				state = new HttpState();
-
-				state.addCookies(cookies);
-
-				method.getParams().setCookiePolicy(
-					CookiePolicy.BROWSER_COMPATIBILITY);
-			}
-
 			//method.setFollowRedirects(true);
 
-			client.executeMethod(client.getHostConfiguration(), method, state);
+			HttpState state = getState(null, cookies, method, hostConfig);
+			
+			client.executeMethod(hostConfig, method, state);
 
 			Header locationHeader = method.getResponseHeader("location");
 
@@ -624,16 +673,18 @@ public class Http {
 		// http://java.sun.com/j2se/1.5.0/docs/guide/net/properties.html
 
 		if (Validator.isNotNull(NON_PROXY_HOSTS)) {
-			_nonProxyHostsPattern = NON_PROXY_HOSTS;
+			String nonProxyHostsRegEx = NON_PROXY_HOSTS;
 
-			_nonProxyHostsPattern = _nonProxyHostsPattern.replaceAll(
+			nonProxyHostsRegEx = nonProxyHostsRegEx.replaceAll(
 				"\\.", "\\\\.");
-			_nonProxyHostsPattern = _nonProxyHostsPattern.replaceAll(
+			nonProxyHostsRegEx = nonProxyHostsRegEx.replaceAll(
 				"\\*", ".*?");
-			_nonProxyHostsPattern = _nonProxyHostsPattern.replaceAll(
+			nonProxyHostsRegEx = nonProxyHostsRegEx.replaceAll(
 				"\\|", ")|(");
-
-			_nonProxyHostsPattern = "(" + _nonProxyHostsPattern + ")";
+			
+			nonProxyHostsRegEx = "(" + nonProxyHostsRegEx + ")";
+			
+			_nonProxyHostsPattern = Pattern.compile(nonProxyHostsRegEx);
 		}
 
 		MultiThreadedHttpConnectionManager connectionManager =
@@ -649,16 +700,15 @@ public class Http {
 		params.setSoTimeout(TIMEOUT);
 
 		_client.setHttpConnectionManager(connectionManager);
-
-		if (Validator.isNotNull(PROXY_USERNAME)) {
-			Credentials credentials = null;
-
+		_proxyClient.setHttpConnectionManager(connectionManager);
+		
+		if (hasProxyConfig() && Validator.isNotNull(PROXY_USERNAME)) {
 			if (PROXY_AUTH_TYPE.equals("username-password")) {
-				credentials = new UsernamePasswordCredentials(
+				_proxyCredentials = new UsernamePasswordCredentials(
 					PROXY_USERNAME, PROXY_PASSWORD);
 			}
 			else if (PROXY_AUTH_TYPE.equals("ntlm")) {
-				credentials = new NTCredentials(
+				_proxyCredentials = new NTCredentials(
 					PROXY_USERNAME, PROXY_PASSWORD, PROXY_NTLM_HOST,
 					PROXY_NTLM_DOMAIN);
 
@@ -668,56 +718,38 @@ public class Http {
 				authPrefs.add(AuthPolicy.BASIC);
 				authPrefs.add(AuthPolicy.DIGEST);
 
-				_proxyClientParams.setParameter(
+				_proxyClient.getParams().setParameter(
 					AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 			}
-
-			_proxyHostConfig.setProxy(PROXY_HOST, PROXY_PORT);
-
-			_proxyState.setProxyCredentials(
-				new AuthScope(PROXY_HOST, PROXY_PORT, null), credentials);
 		}
 	}
 
-	private HttpClient _getClient(String location) throws IOException {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Location is " + location);
+	private HttpClient _getClient(HostConfiguration hostConfig) 
+		throws IOException {
+		
+		if (_isNonProxyHost(hostConfig.getHost())) {
+			return _client;
 		}
-
-		URI uri = new URI(location);
-
-		if (Validator.isNull(PROXY_HOST) || (PROXY_PORT <= 0) ||
-			Validator.isNull(_nonProxyHostsPattern) ||
-			uri.getHost().matches(_nonProxyHostsPattern)) {
-
-			_hostConfig.setHost(uri);
-
-			_client.setHostConfiguration(_hostConfig);
-			_client.setParams(_clientParams);
-			_client.setState(_state);
+		else if (hasProxyConfig()) {
+			return _proxyClient;
 		}
-		else if (Validator.isNotNull(PROXY_HOST) && (PROXY_PORT > 0)) {
-			_proxyHostConfig.setHost(uri);
-
-			_client.setHostConfiguration(_proxyHostConfig);
-			_client.setParams(_proxyClientParams);
-			_client.setState(_proxyState);
+		else {
+			return _client;
 		}
-
-		return _client;
 	}
 
+	private boolean _isNonProxyHost(String host) {
+		return _nonProxyHostsPattern == null || 
+			_nonProxyHostsPattern.matcher(host).matches();
+	}
+	
 	private static Log _log = LogFactory.getLog(Http.class);
 
 	private static Http _instance = new Http();
 
 	private HttpClient _client = new HttpClient();
-	private HostConfiguration _hostConfig = new HostConfiguration();
-	private HostConfiguration _proxyHostConfig = new HostConfiguration();
-	private HttpClientParams _clientParams = new HttpClientParams();
-	private HttpClientParams _proxyClientParams = new HttpClientParams();
-	private HttpState _state = new HttpState();
-	private HttpState _proxyState = new HttpState();
-	private String _nonProxyHostsPattern;
+	private HttpClient _proxyClient = new HttpClient();
+	private Credentials _proxyCredentials;
+	private Pattern _nonProxyHostsPattern;
 
 }
