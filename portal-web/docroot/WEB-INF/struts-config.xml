@@ -685,14 +685,11 @@
 
 		<!-- Invitation -->
 
-		<action path="/invitation/edit" type="com.liferay.portlet.invitation.action.EditInvitationAction">
-			<forward name="portlet.invitation.edit" path="portlet.invitation.edit" />
-			<forward name="portlet.invitation.error" path="portlet.invitation.error" />
-			<forward name="portlet.invitation.view" path="portlet.invitation.view" />
+		<action path="/invitation/edit_configuration" type="com.liferay.portlet.invitation.action.EditConfigurationAction">
+			<forward name="portlet.invitation.edit_configuration" path="portlet.invitation.edit_configuration" />
 		</action>
 
-		<action path="/invitation/view" type="com.liferay.portlet.invitation.action.EditInvitationAction">
-			<forward name="portlet.invitation.error" path="portlet.invitation.error" />
+		<action path="/invitation/view" type="com.liferay.portlet.invitation.action.ViewAction">
 			<forward name="portlet.invitation.view" path="portlet.invitation.view" />
 		</action>
 

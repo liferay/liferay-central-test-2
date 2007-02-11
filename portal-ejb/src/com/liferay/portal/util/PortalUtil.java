@@ -568,6 +568,14 @@ public class PortalUtil {
 		return getPortalURL(req.getServerName(), req.getServerPort(), secure);
 	}
 
+	public static String getPortalURL(PortletRequest req) {
+		return getPortalURL(req, req.isSecure());
+	}
+
+	public static String getPortalURL(PortletRequest req, boolean secure) {
+		return getPortalURL(req.getServerName(), req.getServerPort(), secure);
+	}
+
 	public static String getPortalURL(
 		String serverName, int serverPort, boolean secure) {
 

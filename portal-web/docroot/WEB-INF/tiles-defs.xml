@@ -586,12 +586,8 @@
 
 	<definition name="portlet.invitation" extends="portlet" />
 
-	<definition name="portlet.invitation.edit" extends="portlet.invitation">
-		<put name="portlet_content" value="/portlet/invitation/edit.jsp" />
-	</definition>
-
-	<definition name="portlet.invitation.error" extends="portlet.invitation">
-		<put name="portlet_content" value="/portlet/invitation/error.jsp" />
+	<definition name="portlet.invitation.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/invitation/edit_configuration.jsp" />
 	</definition>
 
 	<definition name="portlet.invitation.view" extends="portlet.invitation">

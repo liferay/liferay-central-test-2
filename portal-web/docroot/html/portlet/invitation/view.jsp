@@ -24,17 +24,18 @@
 
 <%@ include file="/html/portlet/invitation/init.jsp" %>
 
-<%
-String success = ParamUtil.getString(request, "success");
-%>
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/invitation/view" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 
-<c:if test='<%= !success.equals("") %>'>
-	<span class="portlet-msg-success" style="font-size: xx-small;">
-		<%= LanguageUtil.get(pageContext, "you-have-successfully-sent-your-invitation-emails") %>
-	</span>
-	<br><br>
-</c:if>
+<liferay-ui:success key="invitationSent" message="your-invitations-have-been-sent" />
 
-<a href="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/invitation/edit"/><portlet:param name="redirect" value="<%= currentURL %>"/><portlet:param name="cmd" value="view_form"/></portlet:actionURL>">
-	Invite Friends!
-</a>
+<%= LanguageUtil.format(pageContext, "enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite", String.valueOf(InvitationUtil.getEmailMessageMaxRecipients())) %>
+
+<br><br>
+
+<textarea class="form-text" name="<portlet:namespace />emailAddresses" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
+
+<br><br>
+
+<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "invite-friends") %>' onClick="submitForm(document.<portlet:namespace />fm);">
+
+</form>

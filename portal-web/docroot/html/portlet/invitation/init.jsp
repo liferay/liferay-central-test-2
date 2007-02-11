@@ -24,4 +24,4 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.invitation.action.EditInvitationAction" %>
+<%@ page import="com.liferay.portlet.invitation.util.InvitationUtil" %>

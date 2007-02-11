@@ -20,71 +20,59 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portlet.invitation.util;
 
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Validator;
 
-import java.text.DateFormat;
+import java.io.IOException;
 
-import java.util.Date;
+import javax.portlet.PortletPreferences;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="InvitationUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class InvitationUtil {
 
-	static String name = "Liferay Portal";
+	public static int getEmailMessageMaxRecipients() {
+		return GetterUtil.getInteger(PropsUtil.get(
+			PropsUtil.INVITATION_EMAIL_MAX_RECIPIENTS));
+	}
 
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
+	public static String getEmailMessageBody(PortletPreferences prefs)
+		throws IOException {
+
+		String emailMessageBody = prefs.getValue(
+			"email-message-body", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailMessageBody)) {
+			return emailMessageBody;
 		}
 		else {
-			name += " Professional";
+			return ContentUtil.get(PropsUtil.get(
+				PropsUtil.INVITATION_EMAIL_MESSAGE_BODY));
 		}
 	}
 
-	static String version = "4.2.0";
+	public static String getEmailMessageSubject(PortletPreferences prefs)
+		throws IOException {
 
-	static String codeName = "Machen";
+		String emailMessageSubject = prefs.getValue(
+			"email-message-subject", StringPool.BLANK);
 
-	static String build = "3691";
-
-	static String date = "February 10, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
-	}
-
-	public static final String getCodeName() {
-		return codeName;
-	}
-
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
+		if (Validator.isNotNull(emailMessageSubject)) {
+			return emailMessageSubject;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsUtil.INVITATION_EMAIL_MESSAGE_SUBJECT));
+		}
 	}
 
 }

@@ -39,13 +39,22 @@ public class ContactImpl extends ContactModelImpl implements Contact {
 	public static String getFullName(
 		String firstName, String middleName, String lastName) {
 
+		StringBuffer sb = new StringBuffer();
+
 		if (Validator.isNull(middleName)) {
-			return firstName + StringPool.SPACE + lastName;
+			sb.append(firstName);
+			sb.append(StringPool.SPACE);
+			sb.append(lastName);
 		}
 		else {
-			return firstName + StringPool.SPACE + middleName +
-				StringPool.SPACE + lastName;
+			sb.append(firstName);
+			sb.append(StringPool.SPACE);
+			sb.append(middleName);
+			sb.append(StringPool.SPACE);
+			sb.append(lastName);
 		}
+
+		return sb.toString();
 	}
 
 	public ContactImpl() {

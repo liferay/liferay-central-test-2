@@ -708,9 +708,11 @@ public class PropsUtil {
 
 	// Invitation Portlet
 
-	public static final String INVITATION_EMAIL_BODY = "invitation.email.body";
+	public static final String INVITATION_EMAIL_MAX_RECIPIENTS = "invitation.email.max.recipients";
+
+	public static final String INVITATION_EMAIL_MESSAGE_BODY = "invitation.email.message.body";
 	
-	public static final String INVITATION_EMAIL_SUBJECT = "invitation.email.subject";
+	public static final String INVITATION_EMAIL_MESSAGE_SUBJECT = "invitation.email.message.subject";
 
 	// Journal Portlet
 
