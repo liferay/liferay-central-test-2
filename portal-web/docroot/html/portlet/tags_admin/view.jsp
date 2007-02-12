@@ -33,6 +33,8 @@
 				},
 				<portlet:namespace />TagsAdmin.getEntries
 			);
+
+			<portlet:namespace />TagsAdmin.addEntryNameInput.val("");
 		},
 
 		addProperties: function(html) {
