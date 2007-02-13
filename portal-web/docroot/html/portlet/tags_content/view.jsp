@@ -46,58 +46,67 @@ for (int i = 0; i < results.size(); i++) {
 	String classPK = GetterUtil.getString(asset.getClassPK());
 %>
 
-	<c:choose>
-		<c:when test="<%= className.equals(BookmarksEntry.class.getName()) %>">
-			<%= className %> <%= classPK %> <%= asset.getAssetId() %>
-		</c:when>
-		<c:when test="<%= className.equals(DLFileEntry.class.getName()) %>">
+	<div>
+		<c:choose>
+			<c:when test="<%= className.equals(BookmarksEntry.class.getName()) %>">
 
-			<%
-			PKParser pkParser = new PKParser(classPK);
+				<%
+				String entryId = classPK;
 
-			String folderId = pkParser.getString("folderId");
-			String name = pkParser.getString("name");
+				BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(entryId);
+				%>
 
-			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-				folderId, name);
-			%>
+				<a href="<%= entry.getUrl() %>"><%= entry.getName() %></a>
+			</c:when>
+			<c:when test="<%= className.equals(DLFileEntry.class.getName()) %>">
 
-			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= fileEntry.getFolderId() %>&name=<%= Http.encodeURL(fileEntry.getName()) %>">
-			<img align="left" border="0" src="<%= themeDisplay.getPathThemeImage() %>/document_library/<%= DLUtil.getFileExtension(fileEntry.getName()) %>.png"><%= fileEntry.getTitle() %>
-			</a>
-		</c:when>
-		<c:when test="<%= className.equals(IGImage.class.getName()) %>">
+				<%
+				PKParser pkParser = new PKParser(classPK);
 
-			<%
-			PKParser pkParser = new PKParser(classPK);
+				String folderId = pkParser.getString("folderId");
+				String name = pkParser.getString("name");
 
-			String companyId = pkParser.getString("companyId");
-			String imageId = pkParser.getString("imageId");
-			%>
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+					folderId, name);
+				%>
 
-			<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= imageId %>&large=1">
-		</c:when>
-		<c:when test="<%= className.equals(JournalArticle.class.getName()) %>">
+				<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= fileEntry.getFolderId() %>&name=<%= Http.encodeURL(fileEntry.getName()) %>">
+				<img align="left" border="0" src="<%= themeDisplay.getPathThemeImage() %>/document_library/<%= DLUtil.getFileExtension(fileEntry.getName()) %>.png"><%= fileEntry.getTitle() %>
+				</a>
+			</c:when>
+			<c:when test="<%= className.equals(IGImage.class.getName()) %>">
 
-			<%
-			PKParser pkParser = new PKParser(classPK);
+				<%
+				PKParser pkParser = new PKParser(classPK);
 
-			String companyId = pkParser.getString("companyId");
-			long groupId = pkParser.getLong("groupId");
-			String articleId = pkParser.getString("articleId");
-			double version = pkParser.getDouble("version");
-			String languageId = LanguageUtil.getLanguageId(request);
+				String companyId = pkParser.getString("companyId");
+				String imageId = pkParser.getString("imageId");
+				%>
 
-			String content = JournalArticleLocalServiceUtil.getArticleContent(
-				companyId, groupId, articleId, version, languageId, themeDisplay);
-			%>
+				<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= imageId %>&large=1">
+			</c:when>
+			<c:when test="<%= className.equals(JournalArticle.class.getName()) %>">
 
-			<%= content %>
-		</c:when>
-		<c:otherwise>
-			<%= className %> is not a valid type.
-		</c:otherwise>
-	</c:choose>
+				<%
+				PKParser pkParser = new PKParser(classPK);
+
+				String companyId = pkParser.getString("companyId");
+				long groupId = pkParser.getLong("groupId");
+				String articleId = pkParser.getString("articleId");
+				double version = pkParser.getDouble("version");
+				String languageId = LanguageUtil.getLanguageId(request);
+
+				String content = JournalArticleLocalServiceUtil.getArticleContent(
+					companyId, groupId, articleId, version, languageId, themeDisplay);
+				%>
+
+				<%= content %>
+			</c:when>
+			<c:otherwise>
+				<%= className %> is not a valid type.
+			</c:otherwise>
+		</c:choose>
+	</div>
 
 	<br>
 

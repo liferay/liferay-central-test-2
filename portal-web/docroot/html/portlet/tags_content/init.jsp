@@ -25,6 +25,7 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portlet.bookmarks.model.BookmarksEntry" %>
+<%@ page import="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
