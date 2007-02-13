@@ -122,7 +122,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 			parent.Alerts.resizeIframe({height: box.scrollHeight});
 		}
 
-		_$J(document).ready(<portlet:namespace />resizeParent);
+		_$J(window).load(<portlet:namespace />resizeParent);
 		_$J(document).click(<portlet:namespace />resizeParent);
 	</c:if>
 
