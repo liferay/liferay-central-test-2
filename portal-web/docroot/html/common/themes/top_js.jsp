@@ -24,6 +24,9 @@
 
 <script type="text/javascript">
 	var themeDisplay = {
+		getCompanyId : function() {
+			return "<%= themeDisplay.getCompanyId() %>";
+		},
 		getDoAsUserIdEncoded : function() {
 
 			// Use Java to encode the encrypted user id because IE doesn't

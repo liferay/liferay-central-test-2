@@ -25,63 +25,205 @@
 <%@ include file="/html/portlet/tags_admin/init.jsp" %>
 
 <script type="text/javascript">
-	var <portlet:namespace />TagsAdmin = {
-		addEntry: function() {
-			Liferay.Service.Tags.TagsEntry.addEntry(
-				{
-					name: <portlet:namespace />TagsAdmin.addEntryNameInput.val()
-				},
-				<portlet:namespace />TagsAdmin.getEntries
+	Liferay.Portlet.TagsAdmin = new Class({
+		initialize: function(params) {
+			var instance = this;
+
+			instance._searchFilters = {};
+
+			instance.params = params;
+
+			var addEntryButton = _$J("#" + params.addEntryButton);
+			var addEntryNameInput = _$J("#" + params.addEntryNameInput);
+			var addPropertyButton = _$J("#" + params.addPropertyButton);
+			var cancelEditEntryButton = _$J("#" + params.cancelEditEntryButton);
+			var deleteEntryButton = _$J("#" + params.deleteEntryButton);
+			var editEntryFields = _$J("#" + params.editEntryFields);
+			var form = _$J("#" + params.form);
+			var keywordsInput = _$J("#" + params.keywordsInput);
+			var updateEntryButton = _$J("#" + params.updateEntryButton);
+
+			// Show all entries
+
+			instance._getEntries(instance);
+
+			// Divs
+
+			editEntryFields.css("display", "none");
+
+			// Form
+
+			form.submit(
+				function() {
+					return false;
+				}
 			);
 
-			<portlet:namespace />TagsAdmin.addEntryNameInput.val("");
-		},
+			// Inputs
 
-		addProperties: function(html) {
-			<portlet:namespace />TagsAdmin.propertiesTable.append(html);
+			addEntryNameInput.bind(
+				"keypress", this,
+				function(event) {
+					if (event.keyCode == 13) {
+						instance._addEntry(instance);
+					}
+				}
+			);
 
-			<portlet:namespace />TagsAdmin.propertiesTable.find("tr").each(
-				function(i, row) {
-					_$J("input[@name='<portlet:namespace />deletePropertyButton']", row).click(<portlet:namespace />TagsAdmin.deleteProperty);
+			keywordsInput.bind(
+				"keyup", this,
+				function(event) {
+					instance._searchEntries(instance);
+				}
+			);
+
+			keywordsInput.focus();
+
+			// Buttons
+
+			addEntryButton.click(
+				function() {
+					instance._addEntry(instance);
+				}
+			);
+
+			addPropertyButton.click(
+				function() {
+					var html = instance._addProperty(instance, "0", "", "");
+
+					instance._addProperties(instance, html);
+				}
+			);
+
+			cancelEditEntryButton.click(
+				function() {
+					editEntryFields.css("display", "none");
+				}
+			);
+
+			deleteEntryButton.click(
+				function() {
+					instance._deleteEntry(instance);
+				}
+			);
+
+			updateEntryButton.click(
+				function() {
+					instance._updateEntry(instance);
 				}
 			);
 		},
 
-		addProperty: function(propertyId, key, value) {
+		editEntry: function(instance, entryId, name) {
+			var params = instance.params;
+
+			instance._entryId = entryId;
+
+			var editEntryFields = _$J("#" + params.editEntryFields);
+			var editEntryNameInput = _$J("#" + params.editEntryNameInput);
+			var propertiesTable = _$J("#" + params.propertiesTable);
+
+			editEntryNameInput.val(name);
+
+			propertiesTable.find("tr").gt(-1).remove();
+
+			Liferay.Service.Tags.TagsProperty.getProperties(
+				{
+					entryId: entryId
+				},
+				function(properties) {
+					instance._editProperties(instance, properties);
+				}
+			);
+
+			editEntryFields.css("display", "");
+		},
+
+		_addEntry: function(instance) {
+			var params = instance.params;
+
+			var addEntryNameInput = _$J("#" + params.addEntryNameInput);
+
+			Liferay.Service.Tags.TagsEntry.addEntry(
+				{
+					name: addEntryNameInput.val()
+				},
+				function() {
+					instance._getEntries(instance);
+				}
+			);
+
+			addEntryNameInput.val("");
+		},
+
+		_addProperties: function(instance, html) {
+			var params = instance.params;
+
+			var instanceVar = params.instanceVar;
+			var propertiesTable = _$J("#" + params.propertiesTable);
+
+			propertiesTable.append(html);
+
+			propertiesTable.find("tr").each(
+				function(i, row) {
+					_$J("input[@name='" + instanceVar + "deletePropertyButton']", row).click(
+						instance._deleteProperty
+					);
+				}
+			);
+		},
+
+		_addProperty: function(instance, propertyId, key, value) {
+			var params = instance.params;
+
+			var instanceVar = params.instanceVar;
+
 			var html = "";
 
 			html += "<tr><td>";
-			html += "<input name=\"<portlet:namespace />propertyId\" type=\"hidden\" value=\"" + propertyId + "\" />\n";
-			html += "<input class=\"form-text\" name=\"<portlet:namespace />propertyKey\" type=\"text\" value=\"" + key + "\" />\n";
-			html += "<input class=\"form-text\" name=\"<portlet:namespace />propertyValue\" type=\"text\" value=\"" + value + "\" />\n";
-			html += "<input class=\"portlet-form-button\" name=\"<portlet:namespace />deletePropertyButton\" type=\"button\" value=\"Delete\" />\n";
+			html += "<input name=\"" + instanceVar + "propertyId\" type=\"hidden\" value=\"" + propertyId + "\" />\n";
+			html += "<input class=\"form-text\" name=\"" + instanceVar + "propertyKey\" type=\"text\" value=\"" + key + "\" />\n";
+			html += "<input class=\"form-text\" name=\"" + instanceVar + "propertyValue\" type=\"text\" value=\"" + value + "\" />\n";
+			html += "<input class=\"portlet-form-button\" name=\"" + instanceVar + "deletePropertyButton\" type=\"button\" value=\"Delete\" />\n";
 			html += "</td></tr>";
 
 			return html;
 		},
 
-		deleteEntry: function() {
+		_deleteEntry: function(instance) {
+			var params = instance.params;
+
+			var instanceVar = params.instanceVar;
+			var editEntryFields = _$J("#" + params.editEntryFields);
+
 			Liferay.Service.Tags.TagsEntry.deleteEntry(
 				{
-					entryId: <portlet:namespace />TagsAdmin.entryId
+					entryId: instance._entryId
 				},
-				<portlet:namespace />TagsAdmin.getEntries
+				function() {
+					instance._getEntries(instance);
+				}
 			);
 
-			<portlet:namespace />TagsAdmin.editEntryFields.css("display", "none");
+			editEntryFields.css("display", "none");
 		},
 
-		deleteProperty: function() {
+		_deleteProperty: function() {
 			_$J(this).parents("tr").eq(0).remove();
 		},
 
-		displayEntries: function(entries) {
+		_displayEntries: function(instance, entries) {
+			var params = instance.params;
+
+			var instanceVar = params.instanceVar;
+			var searchResultsDiv = _$J("#" + params.searchResultsDiv);
+
 			var html = "<br />";
 
 			_$J.each(
 				entries,
 				function(i, entry) {
-					var hrefJS = "<portlet:namespace />TagsAdmin.editEntry(" + entry.entryId + ",'" + encodeURIComponent(entry.name) + "');";
+					var hrefJS = instanceVar + ".editEntry(" + instanceVar + ", " + entry.entryId + ", '" + encodeURIComponent(entry.name) + "');";
 
 					html += "<a href=\"javascript: " + hrefJS + "\">" + entry.name + "</a>";
 
@@ -95,92 +237,84 @@
 				html += "no-tags-found";
 			}
 
-			<portlet:namespace />TagsAdmin.searchResultsDiv.html(html);
+			searchResultsDiv.html(html);
 		},
 
-		displayFilters: function(properties) {
-			var propertyKey = "";
+		_displayFilters: function(instance, propertyKey, properties) {
+			var params = instance.params;
+
+			var instanceVar = params.instanceVar;
+			var searchPropertiesSpan = _$J("#" + params.searchPropertiesSpan);
+
 			var html = "";
 
 			_$J.each(
 				properties,
 				function(i, property) {
-					propertyKey = property.key;
-
 					html += "<option value=\"" + property.value + "\">" + property.value + "</option>";
 				}
 			);
 
-			if (propertyKey != "") {
-				html = "<select id=\"<portlet:namespace />" + propertyKey + "FilterSel\"><option></option>" + html + "</select>";
+			if (properties.length > 0) {
+				html = "<select id=\"" + instanceVar + propertyKey + "FilterSel\"><option></option>" + html + "</select>";
 
-				<portlet:namespace />TagsAdmin.searchPropertiesSpan.append("<span style=\"padding: 0px 5px 0px 10px;\">" + propertyKey + "</span>");
-				<portlet:namespace />TagsAdmin.searchPropertiesSpan.append(html);
+				searchPropertiesSpan.append("<span style=\"padding: 0px 5px 0px 10px;\">" + propertyKey + "</span>");
+				searchPropertiesSpan.append(html);
 
-				var filterSel = _$J("#<portlet:namespace />" + propertyKey + "FilterSel");
+				var filterSel = _$J("#" + instanceVar + propertyKey + "FilterSel");
 
 				filterSel.change(
 					function() {
-						<portlet:namespace />TagsAdmin.searchFilters[propertyKey] = this.value;
+						instance._searchFilters[propertyKey] = this.value;
 
-						<portlet:namespace />TagsAdmin.searchEntries();
+						instance._searchEntries(instance);
 					}
 				);
 			}
 		},
 
-		editEntry: function(entryId, name) {
-			<portlet:namespace />TagsAdmin.entryId = entryId;
-
-			<portlet:namespace />TagsAdmin.editEntryNameInput.val(name);
-
-			<portlet:namespace />TagsAdmin.propertiesTable.find("tr").gt(-1).remove();
-
-			Liferay.Service.Tags.TagsProperty.getProperties(
-				{
-					entryId: entryId
-				},
-				<portlet:namespace />TagsAdmin.editProperties
-			);
-
-			<portlet:namespace />TagsAdmin.editEntryFields.css("display", "");
-		},
-
-		editProperties: function(properties) {
+		_editProperties: function(instance, properties) {
 			var html = "";
 
 			_$J.each(
 				properties,
 				function(i, property) {
-					html += <portlet:namespace />TagsAdmin.addProperty(property.propertyId, property.key, property.value);
+					html += instance._addProperty(instance, property.propertyId, property.key, property.value);
 				}
 			);
 
 			if (properties.length == 0) {
-				html += <portlet:namespace />TagsAdmin.addProperty("0", "", "");
+				html += instance._addProperty("0", "", "");
 			}
 
-			<portlet:namespace />TagsAdmin.addProperties(html);
+			instance._addProperties(instance, html);
 		},
 
-		getEntries: function() {
+		_getEntries: function(instance) {
 			Liferay.Service.Tags.TagsEntry.search(
 				{
-					companyId: "<%= company.getCompanyId() %>",
+					companyId: themeDisplay.getCompanyId(),
 					name: "%",
 					properties: ""
 				},
-				<portlet:namespace />TagsAdmin.displayEntries
+				function(entries) {
+					instance._displayEntries(instance, entries);
+				}
 			);
 
-			<portlet:namespace />TagsAdmin.getFilters();
+			instance._getFilters(instance);
 		},
 
-		getFilters: function() {
+		_getFilters: function(instance) {
+			var params = instance.params;
+
+			var instanceVar = params.instanceVar;
+			var searchPropertiesSpan = _$J("#" + params.searchPropertiesSpan);
+
 			var propertyKeys = new Array("Category", "Country");
 
 			if (propertyKeys.length > 0) {
-				<portlet:namespace />TagsAdmin.searchPropertiesSpan.html("Filter By: ");
+				searchPropertiesSpan.html("Filter By: ");
 			}
 
 			_$J.each(
@@ -188,113 +322,30 @@
 				function(i, propertyKey) {
 					Liferay.Service.Tags.TagsProperty.getPropertyValues(
 						{
-							companyId: "<%= company.getCompanyId() %>",
+							companyId: themeDisplay.getCompanyId(),
 							key: propertyKey
 						},
-						<portlet:namespace />TagsAdmin.displayFilters
+						function(properties) {
+							instance._displayFilters(instance, propertyKey, properties);
+						}
 					);
 				}
 			);
 		},
 
-		init: function() {
+		_searchEntries: function(instance) {
+			var params = instance.params;
 
-			// Set variables
+			var keywordsInput = _$J("#" + params.keywordsInput);
 
-			this.addEntryFields = _$J("#<portlet:namespace />addEntryFields");
-			this.editEntryFields = _$J("#<portlet:namespace />editEntryFields");
-			this.propertiesTable = _$J("#<portlet:namespace />propertiesTable");
-			this.searchEntriesFields = _$J("#<portlet:namespace />searchEntriesFields");
-			this.searchPropertiesSpan = _$J("#<portlet:namespace />searchPropertiesSpan");
-			this.searchResultsDiv = _$J("#<portlet:namespace />searchResultsDiv");
-
-			this.form = _$J("form[@name='<portlet:namespace />fm']");
-
-			this.addEntryNameInput = _$J("input[@name='<portlet:namespace />addEntryName']", this.form);
-			this.editEntryNameInput = _$J("input[@name='<portlet:namespace />editEntryName']", this.form);
-			this.keywordsInput = _$J("input[@name='<portlet:namespace />keywords']", this.form);
-
-			this.addEntryButton = _$J("#<portlet:namespace />addEntryButton");
-			this.addPropertyButton = _$J("#<portlet:namespace />addPropertyButton");
-			this.cancelEditEntryButton = _$J("#<portlet:namespace />cancelEditEntryButton");
-			this.deleteEntryButton = _$J("#<portlet:namespace />deleteEntryButton");
-			this.updateEntryButton = _$J("#<portlet:namespace />updateEntryButton");
-
-			this.searchFilters = {};
-
-			// Show all entries
-
-			<portlet:namespace />TagsAdmin.getEntries();
-
-			// Divs
-
-			<portlet:namespace />TagsAdmin.editEntryFields.css("display", "none");
-
-			// Form
-
-			<portlet:namespace />TagsAdmin.form.submit(
-				function() {
-					return false;
-				}
-			);
-
-			// Inputs
-
-			<portlet:namespace />TagsAdmin.addEntryNameInput.bind(
-				"keypress", this,
-				function(event) {
-					if (event.keyCode == 13) {
-						event.data.addEntry();
-					}
-				}
-			);
-
-			<portlet:namespace />TagsAdmin.keywordsInput.bind(
-				"keyup", this,
-				function(event) {
-					event.data.searchEntries();
-				}
-			);
-
-			<portlet:namespace />TagsAdmin.keywordsInput.focus();
-
-			// Buttons
-
-			<portlet:namespace />TagsAdmin.addEntryButton.click(
-				<portlet:namespace />TagsAdmin.addEntry
-			);
-
-			<portlet:namespace />TagsAdmin.addPropertyButton.click(
-				function() {
-					var html = <portlet:namespace />TagsAdmin.addProperty("0", "", "");
-
-					<portlet:namespace />TagsAdmin.addProperties(html);
-				}
-			);
-
-			<portlet:namespace />TagsAdmin.cancelEditEntryButton.click(
-				function() {
-					<portlet:namespace />TagsAdmin.editEntryFields.css("display", "none");
-				}
-			);
-
-			<portlet:namespace />TagsAdmin.deleteEntryButton.click(
-				<portlet:namespace />TagsAdmin.deleteEntry
-			);
-
-			<portlet:namespace />TagsAdmin.updateEntryButton.click(
-				<portlet:namespace />TagsAdmin.updateEntry
-			);
-		},
-
-		searchEntries: function() {
-			var keywords = "%" + <portlet:namespace />TagsAdmin.keywordsInput.val() + "%";
+			var keywords = "%" + keywordsInput.val() + "%";
 
 			var properties = "";
 
 			_$J.each(
-				<portlet:namespace />TagsAdmin.searchFilters,
+				instance._searchFilters,
 				function(propertyKey, propertyValue) {
+
 					if (propertyValue != "") {
 						if (properties != "") {
 							properties += ",";
@@ -307,24 +358,33 @@
 
 			Liferay.Service.Tags.TagsEntry.search(
 				{
-					companyId: "<%= company.getCompanyId() %>",
+					companyId: themeDisplay.getCompanyId(),
 					name: keywords,
 					properties: properties
 				},
-				<portlet:namespace />TagsAdmin.displayEntries
+				function(entries) {
+					instance._displayEntries(instance, entries);
+				}
 			);
 		},
 
-		updateEntry: function() {
+		_updateEntry: function(instance) {
+			var params = instance.params;
+
+			var instanceVar = params.instanceVar;
+			var editEntryNameInput = _$J("#" + params.editEntryNameInput);
+			var editEntryFields = _$J("#" + params.editEntryFields);
+			var propertiesTable = _$J("#" + params.propertiesTable);
+
 			var properties = "";
 
-			var rows = <portlet:namespace />TagsAdmin.propertiesTable.find("tr");
+			var rows = propertiesTable.find("tr");
 
 			rows.each(
 				function(i, row) {
-					var propertyId = _$J("input[@name='<portlet:namespace />propertyId']", row).val();
-					var propertyKey = _$J("input[@name='<portlet:namespace />propertyKey']", row).val();
-					var propertyValue = _$J("input[@name='<portlet:namespace />propertyValue']", row).val();
+					var propertyId = _$J("input[@name='" + instanceVar + "propertyId']", row).val();
+					var propertyKey = _$J("input[@name='" + instanceVar + "propertyKey']", row).val();
+					var propertyValue = _$J("input[@name='" + instanceVar + "propertyValue']", row).val();
 
 					properties += propertyId + "|" + propertyKey + "|" + propertyValue;
 
@@ -336,30 +396,26 @@
 
 			Liferay.Service.Tags.TagsEntry.updateEntry(
 				{
-					entryId: <portlet:namespace />TagsAdmin.entryId,
-					name: <portlet:namespace />TagsAdmin.editEntryNameInput.val(),
+					entryId: instance._entryId,
+					name: editEntryNameInput.val(),
 					properties: properties
 				},
-				<portlet:namespace />TagsAdmin.getEntries
+				function() {
+					instance._getEntries(instance);
+				}
 			);
 
-			<portlet:namespace />TagsAdmin.editEntryFields.css("display", "none");
+			editEntryFields.css("display", "none");
 		}
-	};
-
-	_$J(
-		function() {
-			<portlet:namespace />TagsAdmin.init();
-		}
-	);
+	});
 </script>
 
-<form name="<portlet:namespace />fm">
+<form id="<portlet:namespace />fm">
 
 <fieldset id="<portlet:namespace />searchEntriesFields">
 	<legend>Search Tag</legend>
 
-	<input class="form-text" name="<portlet:namespace />keywords" type="text" />
+	<input class="form-text" id="<portlet:namespace />keywordsInput" type="text" />
 
 	<span id="<portlet:namespace />searchPropertiesSpan" style="padding-left: 10px;"></span>
 
@@ -369,7 +425,7 @@
 <fieldset id="<portlet:namespace />editEntryFields">
 	<legend>Edit Tag</legend>
 
-	<input class="form-text" name="<portlet:namespace />editEntryName" type="text" value="" />
+	<input class="form-text" id="<portlet:namespace />editEntryNameInput" type="text" value="" />
 
 	<input class="portlet-form-button" id="<portlet:namespace />updateEntryButton" type="button" value="Save" />
 
@@ -391,9 +447,30 @@
 <fieldset id="<portlet:namespace />addEntryFields">
 	<legend>Add Tag</legend>
 
-	<input class="form-text" name="<portlet:namespace />addEntryName" type="text" />
+	<input class="form-text" id="<portlet:namespace />addEntryNameInput" type="text" />
 
 	<input class="portlet-form-button" id="<portlet:namespace />addEntryButton" type="button" value="Save" />
 </fieldset>
 
 </form>
+
+<script type="text/javascript">
+	var <portlet:namespace />tagsAdmin = new Liferay.Portlet.TagsAdmin(
+		{
+			instanceVar: "<portlet:namespace />tagsAdmin",
+			addEntryButton: "<portlet:namespace />addEntryButton",
+			addEntryNameInput: "<portlet:namespace />addEntryNameInput",
+			addPropertyButton: "<portlet:namespace />addPropertyButton",
+			cancelEditEntryButton: "<portlet:namespace />cancelEditEntryButton",
+			deleteEntryButton: "<portlet:namespace />deleteEntryButton",
+			editEntryFields: "<portlet:namespace />editEntryFields",
+			editEntryNameInput: "<portlet:namespace />editEntryNameInput",
+			form: "<portlet:namespace />fm",
+			keywordsInput: "<portlet:namespace />keywordsInput",
+			propertiesTable: "<portlet:namespace />propertiesTable",
+			searchPropertiesSpan: "<portlet:namespace />searchPropertiesSpan",
+			searchResultsDiv: "<portlet:namespace />searchResultsDiv",
+			updateEntryButton: "<portlet:namespace />updateEntryButton"
+		}
+	);
+</script>

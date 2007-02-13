@@ -118,6 +118,15 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 		<%= PortalUtil.getPortalURL(request) %><%= PortalUtil.getLayoutURL(layout, themeDisplay) %>
 	</td>
 </tr>
+<tr>
+	<td>
+		<b>[$PORTAL_URL$]</b>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<%= company.getPortalURL() %>
+	</td>
+</tr>
 </table>
 
 <br>

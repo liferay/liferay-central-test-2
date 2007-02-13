@@ -136,6 +136,8 @@ Liferay.TagsSelector = new Class({
 	initialize: function(params) {
 		var instance = this;
 
+		instance._curTags = [];
+
 		instance.params = params;
 
 		var hiddenInput = _$J("#" + params.hiddenInput);
@@ -234,9 +236,7 @@ Liferay.TagsSelector = new Class({
 		var tagsSummary = _$J("#" + params.summarySpan);
 
 		tagsSummary.html(html);
-	},
-
-	_curTags: []
+	}
 });
 
 Liferay.Portlet = {

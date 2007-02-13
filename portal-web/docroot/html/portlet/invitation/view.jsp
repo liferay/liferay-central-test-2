@@ -24,18 +24,49 @@
 
 <%@ include file="/html/portlet/invitation/init.jsp" %>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/invitation/view" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<c:choose>
+	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
+		<liferay-ui:success key="invitationSent" message="your-invitations-have-been-sent" />
 
-<liferay-ui:success key="invitationSent" message="your-invitations-have-been-sent" />
+		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/invitation/view"/></portlet:renderURL>">
+			<%= LanguageUtil.get(pageContext, "invite-friends") %>
+		</a>
+	</c:when>
+	<c:otherwise>
+		<form action="<portlet:actionURL><portlet:param name="struts_action" value="/invitation/view" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+		<input name="redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>" />">
 
-<%= LanguageUtil.format(pageContext, "enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite", String.valueOf(InvitationUtil.getEmailMessageMaxRecipients())) %>
+		<%= LanguageUtil.format(pageContext, "enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite", String.valueOf(InvitationUtil.getEmailMessageMaxRecipients())) %>
 
-<br><br>
+		<br><br>
 
-<textarea class="form-text" name="<portlet:namespace />emailAddresses" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
+		<%
+		Set invalidEmailAddresses = (Set)SessionErrors.get(renderRequest, "emailAddresses");
 
-<br><br>
+		int emailMessageMaxRecipients = InvitationUtil.getEmailMessageMaxRecipients();
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "invite-friends") %>' onClick="submitForm(document.<portlet:namespace />fm);">
+		for (int i = 0; i < emailMessageMaxRecipients; i++) {
+			String emailAddress = ParamUtil.getString(request, "emailAddress" + i);
+		%>
 
-</form>
+			<c:if test='<%= (invalidEmailAddresses != null) && invalidEmailAddresses.contains("emailAddress" + i) %>'>
+				<div class="portlet-msg-error">
+				<%= LanguageUtil.get(pageContext, "please-enter-a-valid-email-address") %>
+				</div>
+			</c:if>
+
+			<input class="form-text" name="<portlet:namespace />emailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
+
+			<br>
+
+		<%
+		}
+		%>
+
+		<br>
+
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "invite-friends") %>' onClick="submitForm(document.<portlet:namespace />fm);">
+
+		</form>
+	</c:otherwise>
+</c:choose>

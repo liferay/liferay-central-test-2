@@ -33,13 +33,16 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.invitation.util.InvitationUtil;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.mail.internet.InternetAddress;
 
@@ -62,27 +65,31 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ViewAction extends PortletAction {
 
-	public static final int MAX_EMAILS = 20;
-
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		List validEmailAddresses = new ArrayList();
+		Set invalidEmailAddresses = CollectionFactory.getHashSet();
 
-		String[] emailAddresses = StringUtil.split(
-			ParamUtil.getString(req, "emailAddresses"), "\n");
+		int emailMessageMaxRecipients =
+			InvitationUtil.getEmailMessageMaxRecipients();
 
-		for (int i = 0; i < emailAddresses.length; i++) {
-			String emailAddress = emailAddresses[i];
+		for (int i = 0; i < emailMessageMaxRecipients; i++) {
+			String emailAddress = ParamUtil.getString(req, "emailAddress" + i);
 
 			if (Validator.isEmailAddress(emailAddress)) {
 				validEmailAddresses.add(emailAddress);
 			}
+			else if (Validator.isNotNull(emailAddress)) {
+				invalidEmailAddresses.add("emailAddress" + i);
+			}
 		}
 
-		if (validEmailAddresses.size() == 0) {
+		if (invalidEmailAddresses.size() > 0) {
+			SessionErrors.add(req, "emailAddresses", invalidEmailAddresses);
+
 			return;
 		}
 
@@ -98,9 +105,10 @@ public class ViewAction extends PortletAction {
 
 		Layout layout = themeDisplay.getLayout();
 
+		String portalURL = PortalUtil.getPortalURL(req);
+
 		String pageURL =
-			PortalUtil.getPortalURL(req) +
-				PortalUtil.getLayoutURL(layout, themeDisplay);
+			portalURL + PortalUtil.getLayoutURL(layout, themeDisplay);
 
 		PortletPreferences prefs =
 			PortletPreferencesFactory.getPortletSetup(
@@ -114,12 +122,14 @@ public class ViewAction extends PortletAction {
 			new String[] {
 				"[$FROM_ADDRESS$]",
 				"[$FROM_NAME$]",
-				"[$PAGE_URL$]"
+				"[$PAGE_URL$]",
+				"[$PORTAL_URL$]"
 			},
 			new String[] {
 				fromAddress,
 				fromName,
-				pageURL
+				pageURL,
+				portalURL
 			});
 
 		body = StringUtil.replace(
@@ -127,12 +137,14 @@ public class ViewAction extends PortletAction {
 			new String[] {
 				"[$FROM_ADDRESS$]",
 				"[$FROM_NAME$]",
-				"[$PAGE_URL$]"
+				"[$PAGE_URL$]",
+				"[$PORTAL_URL$]"
 			},
 			new String[] {
 				fromAddress,
 				fromName,
-				pageURL
+				pageURL,
+				portalURL
 			});
 
 		for (int i = 0; i < validEmailAddresses.size(); i++) {
@@ -140,12 +152,17 @@ public class ViewAction extends PortletAction {
 
 			InternetAddress to = new InternetAddress(emailAddress);
 
-			MailMessage message = new MailMessage(from, to, subject, body, true);
+			MailMessage message = new MailMessage(
+				from, to, subject, body, true);
 
 			MailServiceUtil.sendEmail(message);
 		}
 
 		SessionMessages.add(req, "invitationSent");
+
+		String redirect = ParamUtil.getString(req, "redirect");
+
+		res.sendRedirect(redirect);
 	}
 
 	public ActionForward render(
