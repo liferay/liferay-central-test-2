@@ -48,6 +48,16 @@ public class TagsEntryServiceJSON {
 		TagsEntryServiceUtil.deleteEntry(entryId);
 	}
 
+	public static JSONArray getEntries(java.lang.String className,
+		java.lang.String classPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		java.util.List returnValue = TagsEntryServiceUtil.getEntries(className,
+				classPK);
+
+		return TagsEntryJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static JSONArray search(java.lang.String companyId,
 		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {

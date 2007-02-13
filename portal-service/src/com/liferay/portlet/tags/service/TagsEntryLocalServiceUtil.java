@@ -85,6 +85,15 @@ public class TagsEntryLocalServiceUtil {
 		return tagsEntryLocalService.getEntries();
 	}
 
+	public static java.util.List getEntries(java.lang.String className,
+		java.lang.String classPK)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.getEntries(className, classPK);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException, 
@@ -101,6 +110,15 @@ public class TagsEntryLocalServiceUtil {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.getEntry(companyId, name);
+	}
+
+	public static long[] getEntryIds(java.lang.String companyId,
+		java.lang.String[] names)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.getEntryIds(companyId, names);
 	}
 
 	public static java.util.List search(java.lang.String companyId,

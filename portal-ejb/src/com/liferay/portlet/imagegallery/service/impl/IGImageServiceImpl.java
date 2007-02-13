@@ -46,27 +46,29 @@ public class IGImageServiceImpl
 
 	public IGImage addImage(
 			String folderId, String description, File file, String contentType,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String[] tagsEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_IMAGE);
 
 		return IGImageLocalServiceUtil.addImage(
-			getUserId(), folderId, description, file, contentType,
+			getUserId(), folderId, description, file, contentType, tagsEntries,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public IGImage addImage(
 			String folderId, String description, File file, String contentType,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] tagsEntries, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_IMAGE);
 
 		return IGImageLocalServiceUtil.addImage(
-			getUserId(), folderId, description, file, contentType,
+			getUserId(), folderId, description, file, contentType, tagsEntries,
 			communityPermissions, guestPermissions);
 	}
 
@@ -90,7 +92,7 @@ public class IGImageServiceImpl
 
 	public IGImage updateImage(
 			String imageId, String folderId, String description, File file,
-			String contentType)
+			String contentType, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -101,7 +103,7 @@ public class IGImageServiceImpl
 
 		return IGImageLocalServiceUtil.updateImage(
 			user.getCompanyId(), imageId, folderId, description, file,
-			contentType);
+			contentType, tagsEntries);
 	}
 
 }

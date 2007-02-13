@@ -49,7 +49,7 @@ public class DLFileEntryServiceImpl
 
 	public DLFileEntry addFileEntry(
 			String folderId, String name, String title, String description,
-			String extraSettings, byte[] byteArray,
+			String[] tagsEntries, String extraSettings, byte[] byteArray,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -57,13 +57,14 @@ public class DLFileEntryServiceImpl
 			getPermissionChecker(), folderId, ActionKeys.ADD_DOCUMENT);
 
 		return DLFileEntryLocalServiceUtil.addFileEntry(
-			getUserId(), folderId, name, title, description, extraSettings,
-			byteArray, addCommunityPermissions, addGuestPermissions);
+			getUserId(), folderId, name, title, description, tagsEntries,
+			extraSettings, byteArray, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public DLFileEntry addFileEntry(
 			String folderId, String name, String title, String description,
-			String extraSettings, byte[] byteArray,
+			String[] tagsEntries, String extraSettings, byte[] byteArray,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -71,8 +72,8 @@ public class DLFileEntryServiceImpl
 			getPermissionChecker(), folderId, ActionKeys.ADD_DOCUMENT);
 
 		return DLFileEntryLocalServiceUtil.addFileEntry(
-			getUserId(), folderId, name, title, description, extraSettings,
-			byteArray, communityPermissions, guestPermissions);
+			getUserId(), folderId, name, title, description, tagsEntries,
+			extraSettings, byteArray, communityPermissions, guestPermissions);
 	}
 
 	public void deleteFileEntry(String folderId, String name)
@@ -171,7 +172,7 @@ public class DLFileEntryServiceImpl
 	public DLFileEntry updateFileEntry(
 			String folderId, String newFolderId, String name,
 			String sourceFileName, String title, String description,
-			String extraSettings, byte[] byteArray)
+			String[] tagsEntries, String extraSettings, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException {
 
 		User user = getUser();
@@ -195,7 +196,7 @@ public class DLFileEntryServiceImpl
 
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.updateFileEntry(
 			getUserId(), folderId, newFolderId, name, sourceFileName, title,
-			description, extraSettings, byteArray);
+			description, tagsEntries, extraSettings, byteArray);
 
 		if (!alreadyHasLock) {
 

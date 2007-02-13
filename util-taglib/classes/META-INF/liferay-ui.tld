@@ -1240,6 +1240,41 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>tags-selector</name>
+		<tagclass>com.liferay.taglib.ui.TagsSelectorTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>className</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>classPK</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>hiddenInput</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>curTags</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>focus</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>toggle</name>
 		<tagclass>com.liferay.taglib.ui.ToggleTag</tagclass>
 		<bodycontent>JSP</bodycontent>

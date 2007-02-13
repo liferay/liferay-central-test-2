@@ -1098,6 +1098,18 @@
 		<put name="portlet_content" value="/portlet/tags_admin/view.jsp" />
 	</definition>
 
+	<!-- Tags Content -->
+
+	<definition name="portlet.tags_content" extends="portlet" />
+
+	<definition name="portlet.tags_content.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/tags_content/edit_configuration.jsp" />
+	</definition>
+
+	<definition name="portlet.tags_content.view" extends="portlet.tags_content">
+		<put name="portlet_content" value="/portlet/tags_content/view.jsp" />
+	</definition>
+
 	<!-- Weather -->
 
 	<definition name="portlet.weather" extends="portlet" />
@@ -1210,5 +1222,17 @@
 
 	<definition name="portlet.workflow.view" extends="portlet.workflow">
 		<put name="portlet_content" value="/portlet/workflow/view.jsp" />
+	</definition>
+
+	<!-- XSL Content -->
+
+	<definition name="portlet.xsl_content" extends="portlet" />
+
+	<definition name="portlet.xsl_content.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/xsl_content/edit_configuration.jsp" />
+	</definition>
+
+	<definition name="portlet.xsl_content.view" extends="portlet.xsl_content">
+		<put name="portlet_content" value="/portlet/xsl_content/view.jsp" />
 	</definition>
 </tiles-definitions>

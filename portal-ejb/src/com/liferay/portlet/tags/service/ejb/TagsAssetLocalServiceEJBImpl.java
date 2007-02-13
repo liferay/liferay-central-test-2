@@ -56,6 +56,12 @@ public class TagsAssetLocalServiceEJBImpl implements TagsAssetLocalService,
 		TagsAssetLocalServiceFactory.getTxImpl().deleteAsset(assetId);
 	}
 
+	public void deleteAsset(java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsAssetLocalServiceFactory.getTxImpl().deleteAsset(className, classPK);
+	}
+
 	public void deleteAsset(com.liferay.portlet.tags.model.TagsAsset asset)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -66,6 +72,35 @@ public class TagsAssetLocalServiceEJBImpl implements TagsAssetLocalService,
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return TagsAssetLocalServiceFactory.getTxImpl().getAsset(assetId);
+	}
+
+	public com.liferay.portlet.tags.model.TagsAsset getAsset(
+		java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return TagsAssetLocalServiceFactory.getTxImpl().getAsset(className,
+			classPK);
+	}
+
+	public java.util.List getAssets(long[] entryIds, boolean andOperator,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return TagsAssetLocalServiceFactory.getTxImpl().getAssets(entryIds,
+			andOperator, begin, end);
+	}
+
+	public int getAssetsCount(long[] entryIds, boolean andOperator)
+		throws com.liferay.portal.SystemException {
+		return TagsAssetLocalServiceFactory.getTxImpl().getAssetsCount(entryIds,
+			andOperator);
+	}
+
+	public com.liferay.portlet.tags.model.TagsAsset updateAsset(
+		java.lang.String userId, java.lang.String className,
+		java.lang.String classPK, java.lang.String[] entryNames)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return TagsAssetLocalServiceFactory.getTxImpl().updateAsset(userId,
+			className, classPK, entryNames);
 	}
 
 	public void ejbCreate() throws CreateException {

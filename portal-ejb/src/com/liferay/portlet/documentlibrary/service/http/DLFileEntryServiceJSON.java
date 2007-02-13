@@ -35,28 +35,29 @@ import org.json.JSONObject;
 public class DLFileEntryServiceJSON {
 	public static JSONObject addFileEntry(java.lang.String folderId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		byte[] byteArray, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, byte[] byteArray,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
-				name, title, description, extraSettings, byteArray,
-				addCommunityPermissions, addGuestPermissions);
+				name, title, description, tagsEntries, extraSettings,
+				byteArray, addCommunityPermissions, addGuestPermissions);
 
 		return DLFileEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject addFileEntry(java.lang.String folderId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		byte[] byteArray, java.lang.String[] communityPermissions,
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, byte[] byteArray,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
-				name, title, description, extraSettings, byteArray,
-				communityPermissions, guestPermissions);
+				name, title, description, tagsEntries, extraSettings,
+				byteArray, communityPermissions, guestPermissions);
 
 		return DLFileEntryJSONSerializer.toJSONObject(returnValue);
 	}
@@ -102,13 +103,13 @@ public class DLFileEntryServiceJSON {
 	public static JSONObject updateFileEntry(java.lang.String folderId,
 		java.lang.String newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		byte[] byteArray)
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, byte[] byteArray)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.updateFileEntry(folderId,
 				newFolderId, name, sourceFileName, title, description,
-				extraSettings, byteArray);
+				tagsEntries, extraSettings, byteArray);
 
 		return DLFileEntryJSONSerializer.toJSONObject(returnValue);
 	}

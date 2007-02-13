@@ -22,11 +22,14 @@
 
 package com.liferay.portlet.shopping.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,23 +41,129 @@ import java.util.List;
 public class ShoppingCouponJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingCoupon model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("couponId", model.getCouponId().toString());
+		String couponId = model.getCouponId();
+
+		if (couponId == null) {
+			jsonObj.put("couponId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("couponId", couponId.toString());
+		}
+
 		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("description", model.getDescription().toString());
-		jsonObj.put("startDate", model.getStartDate().toString());
-		jsonObj.put("endDate", model.getEndDate().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String description = model.getDescription();
+
+		if (description == null) {
+			jsonObj.put("description", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("description", description.toString());
+		}
+
+		Date startDate = model.getStartDate();
+
+		if (startDate == null) {
+			jsonObj.put("startDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("startDate", startDate.toString());
+		}
+
+		Date endDate = model.getEndDate();
+
+		if (endDate == null) {
+			jsonObj.put("endDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("endDate", endDate.toString());
+		}
+
 		jsonObj.put("active", model.getActive());
-		jsonObj.put("limitCategories", model.getLimitCategories().toString());
-		jsonObj.put("limitSkus", model.getLimitSkus().toString());
+
+		String limitCategories = model.getLimitCategories();
+
+		if (limitCategories == null) {
+			jsonObj.put("limitCategories", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("limitCategories", limitCategories.toString());
+		}
+
+		String limitSkus = model.getLimitSkus();
+
+		if (limitSkus == null) {
+			jsonObj.put("limitSkus", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("limitSkus", limitSkus.toString());
+		}
+
 		jsonObj.put("minOrder", model.getMinOrder());
 		jsonObj.put("discount", model.getDiscount());
-		jsonObj.put("discountType", model.getDiscountType().toString());
+
+		String discountType = model.getDiscountType();
+
+		if (discountType == null) {
+			jsonObj.put("discountType", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("discountType", discountType.toString());
+		}
 
 		return jsonObj;
 	}

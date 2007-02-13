@@ -49,7 +49,7 @@ public interface JournalArticleLocalService {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -66,7 +66,7 @@ public interface JournalArticleLocalService {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -84,7 +84,7 @@ public interface JournalArticleLocalService {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -306,7 +306,7 @@ public interface JournalArticleLocalService {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs)
+		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

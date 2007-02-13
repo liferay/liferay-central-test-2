@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserGroupRole;
 
 import org.json.JSONArray;
@@ -38,9 +39,25 @@ import java.util.List;
 public class UserGroupRoleJSONSerializer {
 	public static JSONObject toJSONObject(UserGroupRole model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("userId", model.getUserId().toString());
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
 		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("roleId", model.getRoleId().toString());
+
+		String roleId = model.getRoleId();
+
+		if (roleId == null) {
+			jsonObj.put("roleId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("roleId", roleId.toString());
+		}
 
 		return jsonObj;
 	}

@@ -378,6 +378,7 @@ enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=Enter the default community names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
+enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite=Enter up to {0} email addresses of friends you would like to invite. Enter one email address per line.
 entries=Girişler
 entry-information=Giriş Bilgisi
 error=Hata

@@ -31,14 +31,15 @@ package com.liferay.portlet.bookmarks.service;
 public interface BookmarksEntryService {
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		java.lang.String folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String comments, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		java.lang.String folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments, java.lang.String[] communityPermissions,
+		java.lang.String comments, java.lang.String[] tagsEntries,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
@@ -59,7 +60,8 @@ public interface BookmarksEntryService {
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		java.lang.String entryId, java.lang.String folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments)
+		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

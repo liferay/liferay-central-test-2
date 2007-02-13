@@ -22,11 +22,14 @@
 
 package com.liferay.portlet.documentlibrary.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,14 +42,78 @@ public class DLFileShortcutJSONSerializer {
 	public static JSONObject toJSONObject(DLFileShortcut model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("fileShortcutId", model.getFileShortcutId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("folderId", model.getFolderId().toString());
-		jsonObj.put("toFolderId", model.getToFolderId().toString());
-		jsonObj.put("toName", model.getToName().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String folderId = model.getFolderId();
+
+		if (folderId == null) {
+			jsonObj.put("folderId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("folderId", folderId.toString());
+		}
+
+		String toFolderId = model.getToFolderId();
+
+		if (toFolderId == null) {
+			jsonObj.put("toFolderId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("toFolderId", toFolderId.toString());
+		}
+
+		String toName = model.getToName();
+
+		if (toName == null) {
+			jsonObj.put("toName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("toName", toName.toString());
+		}
 
 		return jsonObj;
 	}

@@ -22,11 +22,14 @@
 
 package com.liferay.portlet.softwarecatalog.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,18 +43,114 @@ public class SCProductEntryJSONSerializer {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("productEntryId", model.getProductEntryId());
 		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("type", model.getType().toString());
-		jsonObj.put("shortDescription", model.getShortDescription().toString());
-		jsonObj.put("longDescription", model.getLongDescription().toString());
-		jsonObj.put("pageURL", model.getPageURL().toString());
-		jsonObj.put("repoGroupId", model.getRepoGroupId().toString());
-		jsonObj.put("repoArtifactId", model.getRepoArtifactId().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String type = model.getType();
+
+		if (type == null) {
+			jsonObj.put("type", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("type", type.toString());
+		}
+
+		String shortDescription = model.getShortDescription();
+
+		if (shortDescription == null) {
+			jsonObj.put("shortDescription", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("shortDescription", shortDescription.toString());
+		}
+
+		String longDescription = model.getLongDescription();
+
+		if (longDescription == null) {
+			jsonObj.put("longDescription", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("longDescription", longDescription.toString());
+		}
+
+		String pageURL = model.getPageURL();
+
+		if (pageURL == null) {
+			jsonObj.put("pageURL", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("pageURL", pageURL.toString());
+		}
+
+		String repoGroupId = model.getRepoGroupId();
+
+		if (repoGroupId == null) {
+			jsonObj.put("repoGroupId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("repoGroupId", repoGroupId.toString());
+		}
+
+		String repoArtifactId = model.getRepoArtifactId();
+
+		if (repoArtifactId == null) {
+			jsonObj.put("repoArtifactId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("repoArtifactId", repoArtifactId.toString());
+		}
 
 		return jsonObj;
 	}

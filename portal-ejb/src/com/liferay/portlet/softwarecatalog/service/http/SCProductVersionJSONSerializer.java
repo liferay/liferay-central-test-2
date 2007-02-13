@@ -22,11 +22,14 @@
 
 package com.liferay.portlet.softwarecatalog.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,16 +42,90 @@ public class SCProductVersionJSONSerializer {
 	public static JSONObject toJSONObject(SCProductVersion model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("productVersionId", model.getProductVersionId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
 		jsonObj.put("productEntryId", model.getProductEntryId());
-		jsonObj.put("version", model.getVersion().toString());
-		jsonObj.put("changeLog", model.getChangeLog().toString());
-		jsonObj.put("downloadPageURL", model.getDownloadPageURL().toString());
-		jsonObj.put("directDownloadURL", model.getDirectDownloadURL().toString());
+
+		String version = model.getVersion();
+
+		if (version == null) {
+			jsonObj.put("version", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("version", version.toString());
+		}
+
+		String changeLog = model.getChangeLog();
+
+		if (changeLog == null) {
+			jsonObj.put("changeLog", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("changeLog", changeLog.toString());
+		}
+
+		String downloadPageURL = model.getDownloadPageURL();
+
+		if (downloadPageURL == null) {
+			jsonObj.put("downloadPageURL", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("downloadPageURL", downloadPageURL.toString());
+		}
+
+		String directDownloadURL = model.getDirectDownloadURL();
+
+		if (directDownloadURL == null) {
+			jsonObj.put("directDownloadURL", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("directDownloadURL", directDownloadURL.toString());
+		}
+
 		jsonObj.put("repoStoreArtifact", model.getRepoStoreArtifact());
 
 		return jsonObj;

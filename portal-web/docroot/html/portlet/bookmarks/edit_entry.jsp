@@ -132,6 +132,34 @@ String folderId = BeanParamUtil.getString(entry, request, "folderId");
 	</tr>
 </c:if>
 
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "tags") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+
+		<%
+		String classPK = StringPool.BLANK;
+
+		if (entry != null) {
+			classPK = entry.getPrimaryKey().toString();
+		}
+		%>
+
+		<liferay-ui:tags-selector
+			className="<%= BookmarksEntry.class.getName() %>"
+			classPK="<%= classPK %>"
+			hiddenInput="tagsEntries"
+		/>
+	</td>
+</tr>
+
 <c:if test="<%= entry == null %>">
 	<tr>
 		<td colspan="3">

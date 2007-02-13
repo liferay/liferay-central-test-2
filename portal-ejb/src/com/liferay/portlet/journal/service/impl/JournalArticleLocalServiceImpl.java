@@ -73,6 +73,7 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.Html;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.MathUtil;
@@ -130,8 +131,8 @@ public class JournalArticleLocalServiceImpl
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, Map images, String articleURL,
-			PortletPreferences prefs, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			PortletPreferences prefs, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addArticle(
@@ -142,7 +143,7 @@ public class JournalArticleLocalServiceImpl
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, images, articleURL, prefs,
-			new Boolean(addCommunityPermissions),
+			tagsEntries, new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
 
@@ -157,8 +158,8 @@ public class JournalArticleLocalServiceImpl
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, Map images, String articleURL,
-			PortletPreferences prefs, String[] communityPermissions,
-			String[] guestPermissions)
+			PortletPreferences prefs, String[] tagsEntries,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addArticle(
@@ -168,8 +169,8 @@ public class JournalArticleLocalServiceImpl
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, images, articleURL, prefs, null,
-			null, communityPermissions, guestPermissions);
+			reviewDateMinute, neverReview, images, articleURL, prefs,
+			tagsEntries, null, null, communityPermissions, guestPermissions);
 	}
 
 	public JournalArticle addArticle(
@@ -183,9 +184,9 @@ public class JournalArticleLocalServiceImpl
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, Map images, String articleURL,
-			PortletPreferences prefs, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			PortletPreferences prefs, String[] tagsEntries,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Article
@@ -269,6 +270,12 @@ public class JournalArticleLocalServiceImpl
 			addArticleResources(
 				article, communityPermissions, guestPermissions);
 		}
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			userId, JournalArticle.class.getName(),
+			article.getPrimaryKey().toString(), tagsEntries);
 
 		// Email
 
@@ -471,6 +478,11 @@ public class JournalArticleLocalServiceImpl
 
 			sendEmail(article, articleURL, prefs, "denied");
 		}
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.deleteAsset(
+			JournalArticle.class.getName(), article.getPrimaryKey().toString());
 
 		// Content searches
 
@@ -1027,7 +1039,7 @@ public class JournalArticleLocalServiceImpl
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, Map images, String articleURL,
-			PortletPreferences prefs)
+			PortletPreferences prefs, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		// Article
@@ -1120,6 +1132,12 @@ public class JournalArticleLocalServiceImpl
 		article.setReviewDate(reviewDate);
 
 		JournalArticleUtil.update(article);
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			userId, JournalArticle.class.getName(),
+			article.getPrimaryKey().toString(), tagsEntries);
 
 		// Email
 

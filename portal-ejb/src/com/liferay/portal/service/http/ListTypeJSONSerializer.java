@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ListType;
 
 import org.json.JSONArray;
@@ -39,8 +40,24 @@ public class ListTypeJSONSerializer {
 	public static JSONObject toJSONObject(ListType model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("listTypeId", model.getListTypeId());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("type", model.getType().toString());
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String type = model.getType();
+
+		if (type == null) {
+			jsonObj.put("type", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("type", type.toString());
+		}
 
 		return jsonObj;
 	}

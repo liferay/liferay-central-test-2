@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 
 import org.json.JSONArray;
@@ -38,19 +39,109 @@ import java.util.List;
 public class LayoutJSONSerializer {
 	public static JSONObject toJSONObject(Layout model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("layoutId", model.getLayoutId().toString());
-		jsonObj.put("ownerId", model.getOwnerId().toString());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("parentLayoutId", model.getParentLayoutId().toString());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("title", model.getTitle().toString());
-		jsonObj.put("type", model.getType().toString());
-		jsonObj.put("typeSettings", model.getTypeSettings().toString());
+		String layoutId = model.getLayoutId();
+
+		if (layoutId == null) {
+			jsonObj.put("layoutId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("layoutId", layoutId.toString());
+		}
+
+		String ownerId = model.getOwnerId();
+
+		if (ownerId == null) {
+			jsonObj.put("ownerId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("ownerId", ownerId.toString());
+		}
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String parentLayoutId = model.getParentLayoutId();
+
+		if (parentLayoutId == null) {
+			jsonObj.put("parentLayoutId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("parentLayoutId", parentLayoutId.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String title = model.getTitle();
+
+		if (title == null) {
+			jsonObj.put("title", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("title", title.toString());
+		}
+
+		String type = model.getType();
+
+		if (type == null) {
+			jsonObj.put("type", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("type", type.toString());
+		}
+
+		String typeSettings = model.getTypeSettings();
+
+		if (typeSettings == null) {
+			jsonObj.put("typeSettings", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("typeSettings", typeSettings.toString());
+		}
+
 		jsonObj.put("hidden", model.getHidden());
-		jsonObj.put("friendlyURL", model.getFriendlyURL().toString());
+
+		String friendlyURL = model.getFriendlyURL();
+
+		if (friendlyURL == null) {
+			jsonObj.put("friendlyURL", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("friendlyURL", friendlyURL.toString());
+		}
+
 		jsonObj.put("iconImage", model.getIconImage());
-		jsonObj.put("themeId", model.getThemeId().toString());
-		jsonObj.put("colorSchemeId", model.getColorSchemeId().toString());
+
+		String themeId = model.getThemeId();
+
+		if (themeId == null) {
+			jsonObj.put("themeId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("themeId", themeId.toString());
+		}
+
+		String colorSchemeId = model.getColorSchemeId();
+
+		if (colorSchemeId == null) {
+			jsonObj.put("colorSchemeId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("colorSchemeId", colorSchemeId.toString());
+		}
+
 		jsonObj.put("priority", model.getPriority());
 
 		return jsonObj;

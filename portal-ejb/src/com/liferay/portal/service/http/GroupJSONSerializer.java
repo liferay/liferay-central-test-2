@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 
 import org.json.JSONArray;
@@ -39,15 +40,81 @@ public class GroupJSONSerializer {
 	public static JSONObject toJSONObject(Group model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("creatorUserId", model.getCreatorUserId().toString());
-		jsonObj.put("className", model.getClassName().toString());
-		jsonObj.put("classPK", model.getClassPK().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String creatorUserId = model.getCreatorUserId();
+
+		if (creatorUserId == null) {
+			jsonObj.put("creatorUserId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("creatorUserId", creatorUserId.toString());
+		}
+
+		String className = model.getClassName();
+
+		if (className == null) {
+			jsonObj.put("className", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("className", className.toString());
+		}
+
+		String classPK = model.getClassPK();
+
+		if (classPK == null) {
+			jsonObj.put("classPK", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("classPK", classPK.toString());
+		}
+
 		jsonObj.put("parentGroupId", model.getParentGroupId());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("description", model.getDescription().toString());
-		jsonObj.put("type", model.getType().toString());
-		jsonObj.put("friendlyURL", model.getFriendlyURL().toString());
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String description = model.getDescription();
+
+		if (description == null) {
+			jsonObj.put("description", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("description", description.toString());
+		}
+
+		String type = model.getType();
+
+		if (type == null) {
+			jsonObj.put("type", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("type", type.toString());
+		}
+
+		String friendlyURL = model.getFriendlyURL();
+
+		if (friendlyURL == null) {
+			jsonObj.put("friendlyURL", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("friendlyURL", friendlyURL.toString());
+		}
+
 		jsonObj.put("active", model.getActive());
 
 		return jsonObj;

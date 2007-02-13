@@ -796,7 +796,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>92</portlet-name>
@@ -892,6 +891,30 @@
 		<configuration-path>/invitation/edit_configuration</configuration-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+	</portlet>
+	<portlet>
+		<portlet-name>101</portlet-name>
+		<struts-path>tags_content</struts-path>
+		<configuration-path>/tags_content/edit_configuration</configuration-path>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<layout-cacheable>true</layout-cacheable>
+		<instanceable>true</instanceable>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+	</portlet>
+	<portlet>
+		<portlet-name>102</portlet-name>
+		<struts-path>xsl_content</struts-path>
+		<configuration-path>/xsl_content/edit_configuration</configuration-path>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<layout-cacheable>true</layout-cacheable>
+		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>

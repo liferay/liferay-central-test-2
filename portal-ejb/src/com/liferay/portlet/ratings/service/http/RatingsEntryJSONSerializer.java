@@ -22,11 +22,14 @@
 
 package com.liferay.portlet.ratings.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,13 +42,70 @@ public class RatingsEntryJSONSerializer {
 	public static JSONObject toJSONObject(RatingsEntry model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("entryId", model.getEntryId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("className", model.getClassName().toString());
-		jsonObj.put("classPK", model.getClassPK().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String className = model.getClassName();
+
+		if (className == null) {
+			jsonObj.put("className", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("className", className.toString());
+		}
+
+		String classPK = model.getClassPK();
+
+		if (classPK == null) {
+			jsonObj.put("classPK", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("classPK", classPK.toString());
+		}
+
 		jsonObj.put("score", model.getScore());
 
 		return jsonObj;

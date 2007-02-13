@@ -31,10 +31,12 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.tags.DuplicateEntryException;
 import com.liferay.portlet.tags.EntryNameException;
+import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsEntryLocalServiceBaseImpl;
+import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
@@ -44,6 +46,7 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -122,6 +125,19 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return TagsEntryUtil.findAll();
 	}
 
+	public List getEntries(String className, String classPK)
+		throws PortalException, SystemException {
+
+		TagsAsset asset = TagsAssetUtil.fetchByC_C(className, classPK);
+
+		if (asset == null) {
+			return new ArrayList();
+		}
+		else {
+			return TagsAssetUtil.getTagsEntries(asset.getAssetId());
+		}
+	}
+
 	public TagsEntry getEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -132,6 +148,32 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return TagsEntryUtil.findByC_N(companyId, name);
+	}
+
+	public long[] getEntryIds(String companyId, String[] names)
+		throws PortalException, SystemException {
+
+		List list = new ArrayList(names.length);
+
+		for (int i = 0; i < names.length; i++) {
+			String name = names[i];
+
+			TagsEntry entry = TagsEntryUtil.fetchByC_N(companyId, name);
+
+			if (entry != null) {
+				list.add(entry);
+			}
+		}
+
+		long[] entryIds = new long[list.size()];
+
+		for (int i = 0; i < list.size(); i++) {
+			TagsEntry entry = (TagsEntry)list.get(i);
+
+			entryIds[i] = entry.getEntryId();
+		}
+
+		return entryIds;
 	}
 
 	public List search(String companyId, String name, String[] properties)
@@ -262,7 +304,9 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			char[] c = name.toCharArray();
 
 			for (int i = 0; i < c.length; i++) {
-				if (!Validator.isChar(c[i]) && (c[i] != ' ')) {
+				if (!Validator.isChar(c[i]) && !Validator.isDigit(c[i]) &&
+					(c[i] != ' ')) {
+
 					throw new EntryNameException();
 				}
 			}

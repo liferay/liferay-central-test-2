@@ -458,6 +458,16 @@
 		<struts-path>invitation</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>101</portlet-name>
+		<struts-path>tags_content</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>102</portlet-name>
+		<struts-path>xsl_content</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

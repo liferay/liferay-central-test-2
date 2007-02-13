@@ -53,6 +53,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.Validator;
@@ -87,55 +88,61 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
-			String description, String extraSettings, File file,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String description, String[] tagsEntries, String extraSettings,
+			File file, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addFileEntry(
-			userId, folderId, name, title, description, extraSettings,
-			file, new Boolean(addCommunityPermissions),
+			userId, folderId, name, title, description, tagsEntries,
+			extraSettings, file, new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
 
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
-			String description, String extraSettings, byte[] byteArray,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String description, String[] tagsEntries, String extraSettings,
+			byte[] byteArray, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addFileEntry(
-			userId, folderId, name, title, description, extraSettings,
-			byteArray, new Boolean(addCommunityPermissions),
+			userId, folderId, name, title, description, tagsEntries,
+			extraSettings, byteArray, new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
 
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
-			String description, String extraSettings, File file,
-			String[] communityPermissions, String[] guestPermissions)
+			String description, String[] tagsEntries, String extraSettings,
+			File file, String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addFileEntry(
-			userId, folderId, name, title, description, extraSettings, file,
-			null, null, communityPermissions, guestPermissions);
+			userId, folderId, name, title, description, tagsEntries,
+			extraSettings, file, null, null, communityPermissions,
+			guestPermissions);
 	}
 
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
-			String description, String extraSettings, byte[] byteArray,
-			String[] communityPermissions, String[] guestPermissions)
+			String description, String[] tagsEntries, String extraSettings,
+			byte[] byteArray, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addFileEntry(
-			userId, folderId, name, title, description, extraSettings,
-			byteArray, null, null, communityPermissions, guestPermissions);
+			userId, folderId, name, title, description, tagsEntries,
+			extraSettings, byteArray, null, null, communityPermissions,
+			guestPermissions);
 	}
 
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
-			String description,	String extraSettings, File file,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			String description,	String[] tagsEntries, String extraSettings,
+			File file, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		if ((file == null) || (file.length() == 0)) {
@@ -148,9 +155,9 @@ public class DLFileEntryLocalServiceImpl
 			is = new BufferedInputStream(new FileInputStream(file));
 
 			return addFileEntry(
-				userId, folderId, name, title, description, extraSettings, is,
-				file.length(), addCommunityPermissions, addGuestPermissions,
-				communityPermissions, guestPermissions);
+				userId, folderId, name, title, description, tagsEntries,
+				extraSettings, is, file.length(), addCommunityPermissions,
+				addGuestPermissions, communityPermissions, guestPermissions);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new FileSizeException();
@@ -169,9 +176,10 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
-			String description,	String extraSettings, byte[] byteArray,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			String description,	String[] tagsEntries, String extraSettings,
+			byte[] byteArray, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		if ((byteArray == null) || (byteArray.length == 0)) {
@@ -181,16 +189,17 @@ public class DLFileEntryLocalServiceImpl
 		InputStream is = new ByteArrayInputStream(byteArray);
 
 		return addFileEntry(
-			userId, folderId, name, title, description, extraSettings, is,
-			byteArray.length, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+			userId, folderId, name, title, description, tagsEntries,
+			extraSettings, is, byteArray.length, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
-			String description,	String extraSettings, InputStream is, long size,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			String description,	String[] tagsEntries, String extraSettings,
+			InputStream is, long size, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -235,6 +244,8 @@ public class DLFileEntryLocalServiceImpl
 
 		DLFileEntryUtil.update(fileEntry);
 
+		// File
+
 		DLLocalServiceUtil.addFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			folder.getGroupId(), folderId, name, is);
@@ -252,6 +263,12 @@ public class DLFileEntryLocalServiceImpl
 			addFileEntryResources(
 				folder, fileEntry, communityPermissions, guestPermissions);
 		}
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			userId, DLFileEntry.class.getName(),
+			fileEntry.getPrimaryKey().toString(), tagsEntries);
 
 		// Folder
 
@@ -395,6 +412,11 @@ public class DLFileEntryLocalServiceImpl
 		// Ratings
 
 		RatingsStatsLocalServiceUtil.deleteStats(
+			DLFileEntry.class.getName(), fileEntry.getPrimaryKey().toString());
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.deleteAsset(
 			DLFileEntry.class.getName(), fileEntry.getPrimaryKey().toString());
 
 		// Resources
@@ -542,7 +564,7 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry updateFileEntry(
 			String userId, String folderId, String newFolderId, String name,
 			String sourceFileName, String title, String description,
-			String extraSettings, File file)
+			String[] tagsEntries, String extraSettings, File file)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -557,7 +579,7 @@ public class DLFileEntryLocalServiceImpl
 
 			return updateFileEntry(
 				userId, folderId, newFolderId, name, sourceFileName, title,
-				description, extraSettings, is, size);
+				description, tagsEntries, extraSettings, is, size);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException();
@@ -577,7 +599,7 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry updateFileEntry(
 			String userId, String folderId, String newFolderId, String name,
 			String sourceFileName, String title, String description,
-			String extraSettings, byte[] byteArray)
+			String[] tagsEntries, String extraSettings, byte[] byteArray)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -590,13 +612,14 @@ public class DLFileEntryLocalServiceImpl
 
 		return updateFileEntry(
 			userId, folderId, newFolderId, name, sourceFileName, title,
-			description, extraSettings, is, size);
+			description, tagsEntries, extraSettings, is, size);
 	}
 
 	public DLFileEntry updateFileEntry(
 			String userId, String folderId, String newFolderId, String name,
 			String sourceFileName, String title, String description,
-			String extraSettings, InputStream is, long size)
+			String[] tagsEntries, String extraSettings, InputStream is,
+			long size)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -691,6 +714,12 @@ public class DLFileEntryLocalServiceImpl
 			folderId = newFolderId;
 			folder = newFolder;
 		}
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			userId, DLFileEntry.class.getName(),
+			fileEntry.getPrimaryKey().toString(), tagsEntries);
 
 		// File version
 

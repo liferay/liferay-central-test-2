@@ -818,6 +818,33 @@ String[] availableLocales = null;
 		</table>
 	</td>
 </tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "tags") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+
+		<%
+		String classPK = StringPool.BLANK;
+
+		if (article != null) {
+			classPK = article.getPrimaryKey().toString();
+		}
+		%>
+
+		<liferay-ui:tags-selector
+			className="<%= JournalArticle.class.getName() %>"
+			classPK="<%= classPK %>"
+			hiddenInput="tagsEntries"
+		/>
+	</td>
+</tr>
 
 <c:if test="<%= article == null %>">
 	<tr>

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 
 import org.json.JSONArray;
@@ -38,11 +39,50 @@ import java.util.List;
 public class CompanyJSONSerializer {
 	public static JSONObject toJSONObject(Company model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("key", model.getKey().toString());
-		jsonObj.put("portalURL", model.getPortalURL().toString());
-		jsonObj.put("homeURL", model.getHomeURL().toString());
-		jsonObj.put("mx", model.getMx().toString());
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String key = model.getKey();
+
+		if (key == null) {
+			jsonObj.put("key", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("key", key.toString());
+		}
+
+		String portalURL = model.getPortalURL();
+
+		if (portalURL == null) {
+			jsonObj.put("portalURL", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("portalURL", portalURL.toString());
+		}
+
+		String homeURL = model.getHomeURL();
+
+		if (homeURL == null) {
+			jsonObj.put("homeURL", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("homeURL", homeURL.toString());
+		}
+
+		String mx = model.getMx();
+
+		if (mx == null) {
+			jsonObj.put("mx", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("mx", mx.toString());
+		}
 
 		return jsonObj;
 	}

@@ -134,6 +134,33 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 		<liferay-ui:input-field model="<%= IGImage.class %>" bean="<%= image %>" field="description" />
 	</td>
 </tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "tags") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+
+		<%
+		String classPK = StringPool.BLANK;
+
+		if (image != null) {
+			classPK = image.getPrimaryKey().toString();
+		}
+		%>
+
+		<liferay-ui:tags-selector
+			className="<%= IGImage.class.getName() %>"
+			classPK="<%= classPK %>"
+			hiddenInput="tagsEntries"
+		/>
+	</td>
+</tr>
 
 <c:if test="<%= image == null %>">
 	<tr>

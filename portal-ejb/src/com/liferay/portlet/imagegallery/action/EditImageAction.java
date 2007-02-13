@@ -33,6 +33,7 @@ import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
@@ -147,6 +148,9 @@ public class EditImageAction extends PortletAction {
 		File file = uploadReq.getFile("file");
 		String contentType = uploadReq.getContentType("file");
 
+		String[] tagsEntries = StringUtil.split(
+			ParamUtil.getString(uploadReq, "tagsEntries"));
+
 		String[] communityPermissions = req.getParameterValues(
 			"communityPermissions");
 		String[] guestPermissions = req.getParameterValues(
@@ -157,15 +161,15 @@ public class EditImageAction extends PortletAction {
 			// Add image
 
 			IGImageServiceUtil.addImage(
-				folderId, description, file, contentType, communityPermissions,
-				guestPermissions);
+				folderId, description, file, contentType, tagsEntries,
+				communityPermissions, guestPermissions);
 		}
 		else {
 
 			// Update image
 
 			IGImageServiceUtil.updateImage(
-				imageId, folderId, description, file, contentType);
+				imageId, folderId, description, file, contentType, tagsEntries);
 		}
 	}
 

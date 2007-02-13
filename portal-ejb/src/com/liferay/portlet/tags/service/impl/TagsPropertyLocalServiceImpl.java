@@ -34,6 +34,7 @@ import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsPropertyLocalServiceBaseImpl;
+import com.liferay.portlet.tags.service.persistence.TagsPropertyFinder;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.util.Validator;
@@ -145,7 +146,7 @@ public class TagsPropertyLocalServiceImpl
 	public List getPropertyValues(String companyId, String key)
 		throws SystemException {
 
-		return TagsPropertyUtil.findByC_K(companyId, key);
+		return TagsPropertyFinder.findByC_K(companyId, key);
 	}
 
 	public TagsProperty updateProperty(
@@ -175,7 +176,9 @@ public class TagsPropertyLocalServiceImpl
 			char[] c = key.toCharArray();
 
 			for (int i = 0; i < c.length; i++) {
-				if (!Validator.isChar(c[i]) && (c[i] != ' ')) {
+				if (!Validator.isChar(c[i]) && !Validator.isDigit(c[i]) &&
+					(c[i] != ' ')) {
+
 					throw new PropertyKeyException();
 				}
 			}
@@ -188,7 +191,9 @@ public class TagsPropertyLocalServiceImpl
 			char[] c = value.toCharArray();
 
 			for (int i = 0; i < c.length; i++) {
-				if (!Validator.isChar(c[i]) && (c[i] != ' ')) {
+				if (!Validator.isChar(c[i]) && !Validator.isDigit(c[i]) &&
+					(c[i] != ' ')) {
+
 					throw new PropertyValueException();
 				}
 			}

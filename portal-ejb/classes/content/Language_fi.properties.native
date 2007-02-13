@@ -908,6 +908,7 @@ enter-the-name,-image,-and-priority-level-in-descending-order=Syötä nimi, kuva
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=Syötä julkinen ja yksityinen virtuaali hosti, jotka liitetään julkiseen ja yksityiseen käyttäjäystävälliseen URL:iin.
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=Syötä hakufiltteri jota käytetään käyttäjän oikeellisuuden testaukseen. Koodit @company_id@, @email_address@, ja @user_id@ korvataan ajon aikana oikeilla arvoilla.
 enter-the-workflow-definition-below-in-xml-format=Syötä työnkulkun määritys alle XML muodossa.
+enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite=Enter up to {0} email addresses of friends you would like to invite. Enter one email address per line.
 enterprise-logo=Yrityksen logo
 enterprise=Yritys
 entire-message=Koko viesti

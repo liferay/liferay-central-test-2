@@ -22,11 +22,14 @@
 
 package com.liferay.portlet.blogs.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import com.liferay.portlet.blogs.model.BlogsEntry;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,17 +41,97 @@ import java.util.List;
 public class BlogsEntryJSONSerializer {
 	public static JSONObject toJSONObject(BlogsEntry model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("entryId", model.getEntryId().toString());
+		String entryId = model.getEntryId();
+
+		if (entryId == null) {
+			jsonObj.put("entryId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("entryId", entryId.toString());
+		}
+
 		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("categoryId", model.getCategoryId().toString());
-		jsonObj.put("title", model.getTitle().toString());
-		jsonObj.put("content", model.getContent().toString());
-		jsonObj.put("displayDate", model.getDisplayDate().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String categoryId = model.getCategoryId();
+
+		if (categoryId == null) {
+			jsonObj.put("categoryId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("categoryId", categoryId.toString());
+		}
+
+		String title = model.getTitle();
+
+		if (title == null) {
+			jsonObj.put("title", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("title", title.toString());
+		}
+
+		String content = model.getContent();
+
+		if (content == null) {
+			jsonObj.put("content", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("content", content.toString());
+		}
+
+		Date displayDate = model.getDisplayDate();
+
+		if (displayDate == null) {
+			jsonObj.put("displayDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("displayDate", displayDate.toString());
+		}
 
 		return jsonObj;
 	}

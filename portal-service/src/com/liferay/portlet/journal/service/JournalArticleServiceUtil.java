@@ -41,7 +41,7 @@ public class JournalArticleServiceUtil {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -54,7 +54,7 @@ public class JournalArticleServiceUtil {
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, images, articleURL,
-			prefs, addCommunityPermissions, addGuestPermissions);
+			prefs, tagsEntries, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
@@ -69,7 +69,7 @@ public class JournalArticleServiceUtil {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -83,7 +83,7 @@ public class JournalArticleServiceUtil {
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, images, articleURL,
-			prefs, communityPermissions, guestPermissions);
+			prefs, tagsEntries, communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle approveArticle(
@@ -184,7 +184,7 @@ public class JournalArticleServiceUtil {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs)
+		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
@@ -196,6 +196,7 @@ public class JournalArticleServiceUtil {
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, images, articleURL, prefs);
+			reviewDateMinute, neverReview, images, articleURL, prefs,
+			tagsEntries);
 	}
 }

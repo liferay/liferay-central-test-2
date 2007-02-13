@@ -52,6 +52,12 @@ public class TagsEntryServiceImpl
 		TagsEntryLocalServiceUtil.deleteEntry(entryId);
 	}
 
+	public List getEntries(String className, String classPK)
+		throws PortalException, SystemException {
+
+		return TagsEntryLocalServiceUtil.getEntries(className, classPK);
+	}
+
 	public List search(String companyId, String name, String[] properties)
 		throws SystemException {
 

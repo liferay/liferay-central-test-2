@@ -35,11 +35,12 @@ import org.json.JSONObject;
 public class BookmarksEntryServiceJSON {
 	public static JSONObject addEntry(java.lang.String folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.addEntry(folderId,
-				name, url, comments, addCommunityPermissions,
+				name, url, comments, tagsEntries, addCommunityPermissions,
 				addGuestPermissions);
 
 		return BookmarksEntryJSONSerializer.toJSONObject(returnValue);
@@ -47,12 +48,14 @@ public class BookmarksEntryServiceJSON {
 
 	public static JSONObject addEntry(java.lang.String folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.addEntry(folderId,
-				name, url, comments, communityPermissions, guestPermissions);
+				name, url, comments, tagsEntries, communityPermissions,
+				guestPermissions);
 
 		return BookmarksEntryJSONSerializer.toJSONObject(returnValue);
 	}
@@ -81,11 +84,11 @@ public class BookmarksEntryServiceJSON {
 
 	public static JSONObject updateEntry(java.lang.String entryId,
 		java.lang.String folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments)
+		java.lang.String comments, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.updateEntry(entryId,
-				folderId, name, url, comments);
+				folderId, name, url, comments, tagsEntries);
 
 		return BookmarksEntryJSONSerializer.toJSONObject(returnValue);
 	}

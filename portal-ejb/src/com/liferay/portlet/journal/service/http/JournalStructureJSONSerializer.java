@@ -22,11 +22,14 @@
 
 package com.liferay.portlet.journal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import com.liferay.portlet.journal.model.JournalStructure;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,16 +41,88 @@ import java.util.List;
 public class JournalStructureJSONSerializer {
 	public static JSONObject toJSONObject(JournalStructure model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("companyId", model.getCompanyId().toString());
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
 		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("structureId", model.getStructureId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("description", model.getDescription().toString());
-		jsonObj.put("xsd", model.getXsd().toString());
+
+		String structureId = model.getStructureId();
+
+		if (structureId == null) {
+			jsonObj.put("structureId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("structureId", structureId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String description = model.getDescription();
+
+		if (description == null) {
+			jsonObj.put("description", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("description", description.toString());
+		}
+
+		String xsd = model.getXsd();
+
+		if (xsd == null) {
+			jsonObj.put("xsd", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("xsd", xsd.toString());
+		}
 
 		return jsonObj;
 	}

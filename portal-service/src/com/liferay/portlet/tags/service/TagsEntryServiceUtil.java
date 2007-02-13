@@ -45,6 +45,15 @@ public class TagsEntryServiceUtil {
 		tagsEntryService.deleteEntry(entryId);
 	}
 
+	public static java.util.List getEntries(java.lang.String className,
+		java.lang.String classPK)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
+
+		return tagsEntryService.getEntries(className, classPK);
+	}
+
 	public static java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {

@@ -5088,6 +5088,8 @@ public class ServiceBuilder {
 		// Imports
 
 		sb.append("import " + _packagePath + ".model." + entity.getName() + ";");
+		sb.append("import com.liferay.portal.kernel.util.StringPool;");
+		sb.append("import java.util.Date;");
 		sb.append("import java.util.List;");
 		sb.append("import org.json.JSONArray;");
 		sb.append("import org.json.JSONObject;");
@@ -5108,7 +5110,13 @@ public class ServiceBuilder {
 				sb.append("jsonObj.put(\"" + col.getName() + "\", model.get" + col.getMethodName() + "());");
 			}
 			else {
-				sb.append("jsonObj.put(\"" + col.getName() + "\", model.get" + col.getMethodName() + "().toString());");
+				sb.append(col.getType() + " " + col.getName() + " = model.get" + col.getMethodName() + "();");
+				sb.append("if (" + col.getName() + " == null) {");
+				sb.append("jsonObj.put(\"" + col.getName() + "\", StringPool.BLANK);");
+				sb.append("}");
+				sb.append("else {");
+				sb.append("jsonObj.put(\"" + col.getName() + "\", " + col.getName() + ".toString());");
+				sb.append("}");
 			}
 		}
 

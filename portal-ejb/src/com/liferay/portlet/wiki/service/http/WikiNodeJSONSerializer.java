@@ -22,11 +22,14 @@
 
 package com.liferay.portlet.wiki.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import com.liferay.portlet.wiki.model.WikiNode;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,16 +41,88 @@ import java.util.List;
 public class WikiNodeJSONSerializer {
 	public static JSONObject toJSONObject(WikiNode model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("nodeId", model.getNodeId().toString());
+		String nodeId = model.getNodeId();
+
+		if (nodeId == null) {
+			jsonObj.put("nodeId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("nodeId", nodeId.toString());
+		}
+
 		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("description", model.getDescription().toString());
-		jsonObj.put("lastPostDate", model.getLastPostDate().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String description = model.getDescription();
+
+		if (description == null) {
+			jsonObj.put("description", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("description", description.toString());
+		}
+
+		Date lastPostDate = model.getLastPostDate();
+
+		if (lastPostDate == null) {
+			jsonObj.put("lastPostDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("lastPostDate", lastPostDate.toString());
+		}
 
 		return jsonObj;
 	}

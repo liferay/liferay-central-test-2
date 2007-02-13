@@ -198,6 +198,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					String name = _fixName(_getFileEntryName(fileName));
 					String title = name;
 					String description = name;
+					String[] tagsEntries = new String[0];
+					String extraSettings = StringPool.BLANK;
 					boolean addCommunityPermissions = true;
 					boolean addGuestPermissions = true;
 
@@ -207,8 +209,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 					DLFileEntryLocalServiceUtil.addFileEntry(
 						userId, subfolderId, name, title, description,
-						StringPool.BLANK, byteArray, addCommunityPermissions,
-						addGuestPermissions);
+						tagsEntries, extraSettings, byteArray,
+						addCommunityPermissions, addGuestPermissions);
 				}
 			}
 		}

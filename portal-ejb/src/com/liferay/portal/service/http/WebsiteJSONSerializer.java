@@ -22,11 +22,13 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Website;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,14 +41,79 @@ public class WebsiteJSONSerializer {
 	public static JSONObject toJSONObject(Website model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("websiteId", model.getWebsiteId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("className", model.getClassName().toString());
-		jsonObj.put("classPK", model.getClassPK().toString());
-		jsonObj.put("url", model.getUrl().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String className = model.getClassName();
+
+		if (className == null) {
+			jsonObj.put("className", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("className", className.toString());
+		}
+
+		String classPK = model.getClassPK();
+
+		if (classPK == null) {
+			jsonObj.put("classPK", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("classPK", classPK.toString());
+		}
+
+		String url = model.getUrl();
+
+		if (url == null) {
+			jsonObj.put("url", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("url", url.toString());
+		}
+
 		jsonObj.put("typeId", model.getTypeId());
 		jsonObj.put("primary", model.getPrimary());
 

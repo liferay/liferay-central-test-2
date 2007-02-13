@@ -47,6 +47,7 @@
 		<reference package-path="com.liferay.portal" entity="Contact" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
+		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 		<reference>
 			<![CDATA[
 			<ejb-local-ref>

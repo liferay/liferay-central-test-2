@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Role;
 
 import org.json.JSONArray;
@@ -38,12 +39,60 @@ import java.util.List;
 public class RoleJSONSerializer {
 	public static JSONObject toJSONObject(Role model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("roleId", model.getRoleId().toString());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("className", model.getClassName().toString());
-		jsonObj.put("classPK", model.getClassPK().toString());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("description", model.getDescription().toString());
+		String roleId = model.getRoleId();
+
+		if (roleId == null) {
+			jsonObj.put("roleId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("roleId", roleId.toString());
+		}
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String className = model.getClassName();
+
+		if (className == null) {
+			jsonObj.put("className", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("className", className.toString());
+		}
+
+		String classPK = model.getClassPK();
+
+		if (classPK == null) {
+			jsonObj.put("classPK", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("classPK", classPK.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String description = model.getDescription();
+
+		if (description == null) {
+			jsonObj.put("description", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("description", description.toString());
+		}
+
 		jsonObj.put("type", model.getType());
 
 		return jsonObj;

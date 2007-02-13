@@ -95,7 +95,7 @@ public class ContentTransformerListener extends TransformerListener {
 			xml = JournalUtil.formatXML(doc);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			_log.warn(e.getMessage());
 		}
 
 		return xml;

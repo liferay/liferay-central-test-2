@@ -20,57 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.tagsadmin.action;
+package com.liferay.portlet.xslcontent.action;
 
-import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
-import com.liferay.util.dao.DAOParamUtil;
-import com.liferay.util.servlet.ServletResponseUtil;
+import com.liferay.portal.struts.PortletAction;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="AutocompleteEntriesAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AutocompleteEntriesAction extends Action {
+public class ViewAction extends PortletAction {
 
-	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		try {
-			String companyId = PortalUtil.getCompanyId(req);
-
-			String name = DAOParamUtil.getLike(req, "value");
-			String[] properties = new String[0];
-			int begin = 0;
-			int end = 20;
-
-			String xml = TagsEntryLocalServiceUtil.searchAutocomplete(
-				companyId, name, properties, begin, end);
-
-			ServletResponseUtil.sendFile(
-				res, null, xml.getBytes(), Constants.TEXT_XML);
-
-			return null;
-		}
-		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
-
-			return mapping.findForward(Constants.COMMON_ERROR);
-		}
+		return mapping.findForward("portlet.xsl_content.view");
 	}
 
 }

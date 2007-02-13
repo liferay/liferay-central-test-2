@@ -894,6 +894,7 @@ enter-the-name,-image,-and-priority-level-in-descending-order=Skriv in namnet, b
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=Skriv in allmänna och egna virtuella värden som ska mappa till både allmänna och egna URL.
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=Skriv in sökfiltern för att testa användarens giltighet. Symbolerna @company_id@, @email_address@, och @user_id@ byts ut med rätt värde vid körning.
 enter-the-workflow-definition-below-in-xml-format=Lägg in arbetsflöde definition nedan i XML format.
+enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite=Enter up to {0} email addresses of friends you would like to invite. Enter one email address per line.
 enterprise-logo=Företagslogo
 enterprise=Företag
 entire-message=Hela meddelandet

@@ -141,6 +141,7 @@
 <%@ page import="com.liferay.util.MathUtil" %>
 <%@ page import="com.liferay.util.OrderedProperties" %>
 <%@ page import="com.liferay.util.ParamUtil" %>
+<%@ page import="com.liferay.util.PKParser" %>
 <%@ page import="com.liferay.util.PropertiesUtil" %>
 <%@ page import="com.liferay.util.PwdGenerator" %>
 <%@ page import="com.liferay.util.Randomizer" %>

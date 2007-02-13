@@ -22,11 +22,14 @@
 
 package com.liferay.portlet.journal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import com.liferay.portlet.journal.model.JournalTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,20 +41,117 @@ import java.util.List;
 public class JournalTemplateJSONSerializer {
 	public static JSONObject toJSONObject(JournalTemplate model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("companyId", model.getCompanyId().toString());
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
 		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("templateId", model.getTemplateId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("structureId", model.getStructureId().toString());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("description", model.getDescription().toString());
-		jsonObj.put("xsl", model.getXsl().toString());
-		jsonObj.put("langType", model.getLangType().toString());
+
+		String templateId = model.getTemplateId();
+
+		if (templateId == null) {
+			jsonObj.put("templateId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("templateId", templateId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String structureId = model.getStructureId();
+
+		if (structureId == null) {
+			jsonObj.put("structureId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("structureId", structureId.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String description = model.getDescription();
+
+		if (description == null) {
+			jsonObj.put("description", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("description", description.toString());
+		}
+
+		String xsl = model.getXsl();
+
+		if (xsl == null) {
+			jsonObj.put("xsl", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("xsl", xsl.toString());
+		}
+
+		String langType = model.getLangType();
+
+		if (langType == null) {
+			jsonObj.put("langType", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("langType", langType.toString());
+		}
+
 		jsonObj.put("smallImage", model.getSmallImage());
-		jsonObj.put("smallImageURL", model.getSmallImageURL().toString());
+
+		String smallImageURL = model.getSmallImageURL();
+
+		if (smallImageURL == null) {
+			jsonObj.put("smallImageURL", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("smallImageURL", smallImageURL.toString());
+		}
 
 		return jsonObj;
 	}

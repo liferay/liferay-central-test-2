@@ -167,6 +167,33 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 		<liferay-ui:input-field model="<%= DLFileEntry.class %>" bean="<%= fileEntry %>" field="description" />
 	</td>
 </tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "tags") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+
+		<%
+		String classPK = StringPool.BLANK;
+
+		if (fileEntry != null) {
+			classPK = fileEntry.getPrimaryKey().toString();
+		}
+		%>
+
+		<liferay-ui:tags-selector
+			className="<%= DLFileEntry.class.getName() %>"
+			classPK="<%= classPK %>"
+			hiddenInput="tagsEntries"
+		/>
+	</td>
+</tr>
 
 <%
 if (fileEntry == null) {
@@ -225,7 +252,9 @@ if (fileEntry == null) {
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />file.focus();
 
-	_$J(document).ready(function() {
-		parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
-	});
+	_$J(document).ready(
+		function() {
+			parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
+		}
+	);
 </script>

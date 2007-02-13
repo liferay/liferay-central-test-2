@@ -52,6 +52,14 @@ public class TagsAssetLocalServiceUtil {
 		tagsAssetLocalService.deleteAsset(assetId);
 	}
 
+	public static void deleteAsset(java.lang.String className,
+		java.lang.String classPK)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+		tagsAssetLocalService.deleteAsset(className, classPK);
+	}
+
 	public static void deleteAsset(
 		com.liferay.portlet.tags.model.TagsAsset asset)
 		throws com.liferay.portal.PortalException, 
@@ -67,5 +75,40 @@ public class TagsAssetLocalServiceUtil {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 
 		return tagsAssetLocalService.getAsset(assetId);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAsset getAsset(
+		java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getAsset(className, classPK);
+	}
+
+	public static java.util.List getAssets(long[] entryIds,
+		boolean andOperator, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getAssets(entryIds, andOperator, begin, end);
+	}
+
+	public static int getAssetsCount(long[] entryIds, boolean andOperator)
+		throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getAssetsCount(entryIds, andOperator);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
+		java.lang.String userId, java.lang.String className,
+		java.lang.String classPK, java.lang.String[] entryNames)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.updateAsset(userId, className, classPK,
+			entryNames);
 	}
 }

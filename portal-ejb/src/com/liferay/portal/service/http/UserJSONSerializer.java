@@ -22,11 +22,13 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,26 +40,164 @@ import java.util.List;
 public class UserJSONSerializer {
 	public static JSONObject toJSONObject(User model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("contactId", model.getContactId().toString());
-		jsonObj.put("password", model.getPassword().toString());
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String contactId = model.getContactId();
+
+		if (contactId == null) {
+			jsonObj.put("contactId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("contactId", contactId.toString());
+		}
+
+		String password = model.getPassword();
+
+		if (password == null) {
+			jsonObj.put("password", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("password", password.toString());
+		}
+
 		jsonObj.put("passwordEncrypted", model.getPasswordEncrypted());
-		jsonObj.put("passwordExpirationDate",
-			model.getPasswordExpirationDate().toString());
+
+		Date passwordExpirationDate = model.getPasswordExpirationDate();
+
+		if (passwordExpirationDate == null) {
+			jsonObj.put("passwordExpirationDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("passwordExpirationDate",
+				passwordExpirationDate.toString());
+		}
+
 		jsonObj.put("passwordReset", model.getPasswordReset());
-		jsonObj.put("emailAddress", model.getEmailAddress().toString());
-		jsonObj.put("languageId", model.getLanguageId().toString());
-		jsonObj.put("timeZoneId", model.getTimeZoneId().toString());
-		jsonObj.put("greeting", model.getGreeting().toString());
-		jsonObj.put("resolution", model.getResolution().toString());
-		jsonObj.put("comments", model.getComments().toString());
-		jsonObj.put("loginDate", model.getLoginDate().toString());
-		jsonObj.put("loginIP", model.getLoginIP().toString());
-		jsonObj.put("lastLoginDate", model.getLastLoginDate().toString());
-		jsonObj.put("lastLoginIP", model.getLastLoginIP().toString());
+
+		String emailAddress = model.getEmailAddress();
+
+		if (emailAddress == null) {
+			jsonObj.put("emailAddress", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("emailAddress", emailAddress.toString());
+		}
+
+		String languageId = model.getLanguageId();
+
+		if (languageId == null) {
+			jsonObj.put("languageId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("languageId", languageId.toString());
+		}
+
+		String timeZoneId = model.getTimeZoneId();
+
+		if (timeZoneId == null) {
+			jsonObj.put("timeZoneId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("timeZoneId", timeZoneId.toString());
+		}
+
+		String greeting = model.getGreeting();
+
+		if (greeting == null) {
+			jsonObj.put("greeting", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("greeting", greeting.toString());
+		}
+
+		String resolution = model.getResolution();
+
+		if (resolution == null) {
+			jsonObj.put("resolution", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("resolution", resolution.toString());
+		}
+
+		String comments = model.getComments();
+
+		if (comments == null) {
+			jsonObj.put("comments", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("comments", comments.toString());
+		}
+
+		Date loginDate = model.getLoginDate();
+
+		if (loginDate == null) {
+			jsonObj.put("loginDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("loginDate", loginDate.toString());
+		}
+
+		String loginIP = model.getLoginIP();
+
+		if (loginIP == null) {
+			jsonObj.put("loginIP", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("loginIP", loginIP.toString());
+		}
+
+		Date lastLoginDate = model.getLastLoginDate();
+
+		if (lastLoginDate == null) {
+			jsonObj.put("lastLoginDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("lastLoginDate", lastLoginDate.toString());
+		}
+
+		String lastLoginIP = model.getLastLoginIP();
+
+		if (lastLoginIP == null) {
+			jsonObj.put("lastLoginIP", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("lastLoginIP", lastLoginIP.toString());
+		}
+
 		jsonObj.put("failedLoginAttempts", model.getFailedLoginAttempts());
 		jsonObj.put("agreedToTermsOfUse", model.getAgreedToTermsOfUse());
 		jsonObj.put("active", model.getActive());

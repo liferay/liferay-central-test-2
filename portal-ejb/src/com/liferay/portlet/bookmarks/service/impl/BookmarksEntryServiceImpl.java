@@ -43,28 +43,30 @@ public class BookmarksEntryServiceImpl
 
 	public BookmarksEntry addEntry(
 			String folderId, String name, String url, String comments,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String[] tagsEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_ENTRY);
 
 		return BookmarksEntryLocalServiceUtil.addEntry(
-			getUserId(), folderId, name, url, comments, addCommunityPermissions,
-			addGuestPermissions);
+			getUserId(), folderId, name, url, comments, tagsEntries,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public BookmarksEntry addEntry(
 			String folderId, String name, String url, String comments,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] tagsEntries, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_ENTRY);
 
 		return BookmarksEntryLocalServiceUtil.addEntry(
-			getUserId(), folderId, name, url, comments, communityPermissions,
-			guestPermissions);
+			getUserId(), folderId, name, url, comments, tagsEntries,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteEntry(String entryId)
@@ -96,14 +98,15 @@ public class BookmarksEntryServiceImpl
 
 	public BookmarksEntry updateEntry(
 			String entryId, String folderId, String name, String url,
-			String comments)
+			String comments, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		BookmarksEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
 		return BookmarksEntryLocalServiceUtil.updateEntry(
-			getUser().getCompanyId(), entryId, folderId, name, url, comments);
+			getUser().getCompanyId(), entryId, folderId, name, url, comments,
+			tagsEntries);
 	}
 
 }

@@ -22,11 +22,14 @@
 
 package com.liferay.portlet.polls.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import com.liferay.portlet.polls.model.PollsQuestion;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,17 +41,97 @@ import java.util.List;
 public class PollsQuestionJSONSerializer {
 	public static JSONObject toJSONObject(PollsQuestion model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("questionId", model.getQuestionId().toString());
+		String questionId = model.getQuestionId();
+
+		if (questionId == null) {
+			jsonObj.put("questionId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("questionId", questionId.toString());
+		}
+
 		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("title", model.getTitle().toString());
-		jsonObj.put("description", model.getDescription().toString());
-		jsonObj.put("expirationDate", model.getExpirationDate().toString());
-		jsonObj.put("lastVoteDate", model.getLastVoteDate().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String title = model.getTitle();
+
+		if (title == null) {
+			jsonObj.put("title", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("title", title.toString());
+		}
+
+		String description = model.getDescription();
+
+		if (description == null) {
+			jsonObj.put("description", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("description", description.toString());
+		}
+
+		Date expirationDate = model.getExpirationDate();
+
+		if (expirationDate == null) {
+			jsonObj.put("expirationDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("expirationDate", expirationDate.toString());
+		}
+
+		Date lastVoteDate = model.getLastVoteDate();
+
+		if (lastVoteDate == null) {
+			jsonObj.put("lastVoteDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("lastVoteDate", lastVoteDate.toString());
+		}
 
 		return jsonObj;
 	}

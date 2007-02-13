@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Country;
 
 import org.json.JSONArray;
@@ -38,12 +39,60 @@ import java.util.List;
 public class CountryJSONSerializer {
 	public static JSONObject toJSONObject(Country model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("countryId", model.getCountryId().toString());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("a2", model.getA2().toString());
-		jsonObj.put("a3", model.getA3().toString());
-		jsonObj.put("number", model.getNumber().toString());
-		jsonObj.put("idd", model.getIdd().toString());
+		String countryId = model.getCountryId();
+
+		if (countryId == null) {
+			jsonObj.put("countryId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("countryId", countryId.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String a2 = model.getA2();
+
+		if (a2 == null) {
+			jsonObj.put("a2", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("a2", a2.toString());
+		}
+
+		String a3 = model.getA3();
+
+		if (a3 == null) {
+			jsonObj.put("a3", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("a3", a3.toString());
+		}
+
+		String number = model.getNumber();
+
+		if (number == null) {
+			jsonObj.put("number", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("number", number.toString());
+		}
+
+		String idd = model.getIdd();
+
+		if (idd == null) {
+			jsonObj.put("idd", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("idd", idd.toString());
+		}
+
 		jsonObj.put("active", model.getActive());
 
 		return jsonObj;

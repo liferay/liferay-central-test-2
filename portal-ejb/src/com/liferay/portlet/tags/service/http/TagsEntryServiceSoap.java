@@ -59,6 +59,21 @@ public class TagsEntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.tags.model.TagsEntrySoap[] getEntries(
+		java.lang.String className, java.lang.String classPK)
+		throws RemoteException {
+		try {
+			java.util.List returnValue = TagsEntryServiceUtil.getEntries(className,
+					classPK);
+
+			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.tags.model.TagsEntrySoap[] search(
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String[] properties) throws RemoteException {

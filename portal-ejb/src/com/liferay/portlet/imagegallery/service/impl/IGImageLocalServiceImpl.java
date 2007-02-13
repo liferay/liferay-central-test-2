@@ -42,6 +42,7 @@ import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageFinder;
 import com.liferay.portlet.imagegallery.service.persistence.IGImagePK;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ImageUtil;
@@ -70,32 +71,32 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public IGImage addImage(
 			String userId, String folderId, String description, File file,
-			String contentType, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String contentType, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addImage(
-			userId, folderId, description, file, contentType,
+			userId, folderId, description, file, contentType, tagsEntries,
 			new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
 
 	public IGImage addImage(
 			String userId, String folderId, String description, File file,
-			String contentType, String[] communityPermissions,
-			String[] guestPermissions)
+			String contentType, String[] tagsEntries,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addImage(
-			userId, folderId, description, file, contentType, null, null,
-			communityPermissions, guestPermissions);
+			userId, folderId, description, file, contentType, tagsEntries,
+			null, null, communityPermissions, guestPermissions);
 	}
 
 	public IGImage addImage(
 			String userId, String folderId, String description, File file,
-			String contentType, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			String contentType, String[] tagsEntries,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		try {
@@ -148,6 +149,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				addImageResources(
 					folder, image, communityPermissions, guestPermissions);
 			}
+
+			// Tags
+
+			TagsAssetLocalServiceUtil.updateAsset(
+				userId, IGImage.class.getName(),
+				image.getPrimaryKey().toString(), tagsEntries);
 
 			return image;
 		}
@@ -216,10 +223,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public void deleteImage(IGImage image)
 		throws PortalException, SystemException {
 
-		// Images
+		// Tags
 
-		ImageLocalUtil.remove(image.getLargeImageId());
-		ImageLocalUtil.remove(image.getSmallImageId());
+		TagsAssetLocalServiceUtil.deleteAsset(
+			IGImage.class.getName(), image.getPrimaryKey().toString());
 
 		// Resources
 
@@ -227,6 +234,11 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.getCompanyId(), IGImage.class.getName(),
 			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			image.getPrimaryKey().toString());
+
+		// Images
+
+		ImageLocalUtil.remove(image.getLargeImageId());
+		ImageLocalUtil.remove(image.getSmallImageId());
 
 		// Image
 
@@ -314,7 +326,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public IGImage updateImage(
 			String companyId, String imageId, String folderId,
-			String description, File file, String contentType)
+			String description, File file, String contentType,
+			String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		try {
@@ -344,6 +357,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			saveImages(
 				image.getLargeImageId(), bufferedImage, image.getSmallImageId(),
 				file, bytes, contentType);
+
+			// Tags
+
+			TagsAssetLocalServiceUtil.updateAsset(
+				image.getUserId(), IGImage.class.getName(),
+				image.getPrimaryKey().toString(), tagsEntries);
 
 			return image;
 		}

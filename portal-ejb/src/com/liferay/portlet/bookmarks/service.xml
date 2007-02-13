@@ -40,6 +40,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<entity name="BookmarksFolder" local-service="true" remote-service="true">
 

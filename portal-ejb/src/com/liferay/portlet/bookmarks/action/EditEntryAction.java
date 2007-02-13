@@ -30,6 +30,7 @@ import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -125,6 +126,9 @@ public class EditEntryAction extends PortletAction {
 		String url = ParamUtil.getString(req, "url");
 		String comments = ParamUtil.getString(req, "comments");
 
+		String[] tagsEntries = StringUtil.split(
+			ParamUtil.getString(req, "tagsEntries"));
+
 		String[] communityPermissions = req.getParameterValues(
 			"communityPermissions");
 		String[] guestPermissions = req.getParameterValues(
@@ -135,15 +139,15 @@ public class EditEntryAction extends PortletAction {
 			// Add entry
 
 			BookmarksEntryServiceUtil.addEntry(
-				folderId, name, url, comments, communityPermissions,
-				guestPermissions);
+				folderId, name, url, comments, tagsEntries,
+				communityPermissions, guestPermissions);
 		}
 		else {
 
 			// Update entry
 
 			BookmarksEntryServiceUtil.updateEntry(
-				entryId, folderId, name, url, comments);
+				entryId, folderId, name, url, comments, tagsEntries);
 		}
 	}
 

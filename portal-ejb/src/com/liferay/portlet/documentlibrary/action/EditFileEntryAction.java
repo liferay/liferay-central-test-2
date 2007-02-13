@@ -44,6 +44,7 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermiss
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.PropertiesUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 
@@ -195,6 +196,9 @@ public class EditFileEntryAction extends PortletAction {
 		String title = ParamUtil.getString(uploadReq, "title");
 		String description = ParamUtil.getString(uploadReq, "description");
 
+		String[] tagsEntries = StringUtil.split(
+			ParamUtil.getString(uploadReq, "tagsEntries"));
+
 		String extraSettings = PropertiesUtil.toString(
 			fileEntryForm.getExtraSettingsProperties());
 
@@ -215,8 +219,8 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLFileEntryLocalServiceUtil.addFileEntry(
 				themeDisplay.getUserId(), folderId, sourceFileName, title,
-				description, extraSettings, file, communityPermissions,
-				guestPermissions);
+				description, tagsEntries, extraSettings, file,
+				communityPermissions, guestPermissions);
 		}
 		else {
 
@@ -228,7 +232,8 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLFileEntryLocalServiceUtil.updateFileEntry(
 				themeDisplay.getUserId(), folderId, newFolderId, name,
-				sourceFileName, title, description, extraSettings, file);
+				sourceFileName, title, description, tagsEntries, extraSettings,
+				file);
 		}
 	}
 

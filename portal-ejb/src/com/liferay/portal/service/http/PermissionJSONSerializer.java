@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Permission;
 
 import org.json.JSONArray;
@@ -39,8 +40,25 @@ public class PermissionJSONSerializer {
 	public static JSONObject toJSONObject(Permission model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("permissionId", model.getPermissionId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("actionId", model.getActionId().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String actionId = model.getActionId();
+
+		if (actionId == null) {
+			jsonObj.put("actionId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("actionId", actionId.toString());
+		}
+
 		jsonObj.put("resourceId", model.getResourceId());
 
 		return jsonObj;

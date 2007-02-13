@@ -36,6 +36,7 @@ import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBase
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.Validator;
 
 import java.net.MalformedURLException;
@@ -57,32 +58,32 @@ public class BookmarksEntryLocalServiceImpl
 
 	public BookmarksEntry addEntry(
 			String userId, String folderId, String name, String url,
-			String comments, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String comments, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addEntry(
-			userId, folderId, name, url, comments,
+			userId, folderId, name, url, comments, tagsEntries,
 			new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
 
 	public BookmarksEntry addEntry(
 			String userId, String folderId, String name, String url,
-			String comments, String[] communityPermissions,
-			String[] guestPermissions)
+			String comments, String[] tagsEntries,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addEntry(
-			userId, folderId, name, url, comments, null, null,
+			userId, folderId, name, url, comments, tagsEntries, null, null,
 			communityPermissions, guestPermissions);
 	}
 
 	public BookmarksEntry addEntry(
 			String userId, String folderId, String name, String url,
-			String comments, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			String comments, String[] tagsEntries,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -127,6 +128,12 @@ public class BookmarksEntryLocalServiceImpl
 			addEntryResources(
 				folder, entry, communityPermissions, guestPermissions);
 		}
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			userId, BookmarksEntry.class.getName(),
+			entry.getPrimaryKey().toString(), tagsEntries);
 
 		return entry;
 	}
@@ -199,6 +206,11 @@ public class BookmarksEntryLocalServiceImpl
 
 	public void deleteEntry(BookmarksEntry entry)
 		throws PortalException, SystemException {
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.deleteAsset(
+			BookmarksEntry.class.getName(), entry.getPrimaryKey().toString());
 
 		// Resources
 
@@ -281,8 +293,10 @@ public class BookmarksEntryLocalServiceImpl
 
 	public BookmarksEntry updateEntry(
 			String companyId, String entryId, String folderId, String name,
-			String url, String comments)
+			String url, String comments, String[] tagsEntries)
 		throws PortalException, SystemException {
+
+		// Entry
 
 		BookmarksEntry entry = BookmarksEntryUtil.findByPrimaryKey(entryId);
 
@@ -301,6 +315,12 @@ public class BookmarksEntryLocalServiceImpl
 		entry.setComments(comments);
 
 		BookmarksEntryUtil.update(entry);
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			entry.getUserId(), BookmarksEntry.class.getName(),
+			entry.getPrimaryKey().toString(), tagsEntries);
 
 		return entry;
 	}

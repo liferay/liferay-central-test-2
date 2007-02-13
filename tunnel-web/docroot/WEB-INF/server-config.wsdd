@@ -1136,6 +1136,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="url" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="comments" type="tns:string"></parameter>
+			<parameter xmlns:tns="urn:http.service.bookmarks.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
 			<parameter xmlns:tns="urn:http.service.bookmarks.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
 			<parameter xmlns:tns="urn:http.service.bookmarks.portlet.liferay.com" qname="guestPermissions" type="tns:ArrayOf_xsd_string"></parameter>
 		</operation>
@@ -1144,6 +1145,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="url" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="comments" type="tns:string"></parameter>
+			<parameter xmlns:tns="urn:http.service.bookmarks.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
 		</operation>
@@ -1162,6 +1164,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="url" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="comments" type="tns:string"></parameter>
+			<parameter xmlns:tns="urn:http.service.bookmarks.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="getEntry updateEntry addEntry openEntry deleteEntry"/>
 		<arrayMapping xmlns:ns="urn:http.service.bookmarks.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
@@ -1317,6 +1320,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
+			<parameter xmlns:tns="urn:http.service.documentlibrary.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="extraSettings" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="byteArray" type="tns:base64Binary"></parameter>
 			<parameter xmlns:tns="urn:http.service.documentlibrary.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
@@ -1327,6 +1331,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
+			<parameter xmlns:tns="urn:http.service.documentlibrary.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="extraSettings" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="byteArray" type="tns:base64Binary"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
@@ -1360,6 +1365,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sourceFileName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
+			<parameter xmlns:tns="urn:http.service.documentlibrary.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="extraSettings" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="byteArray" type="tns:base64Binary"></parameter>
 		</operation>
@@ -2275,19 +2281,23 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="urn:http.service.tags.portlet.liferay.com" qname="properties" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="urn:http.service.tags.portlet.liferay.com" xmlns:tns2="http://model.tags.portlet.liferay.com" name="search" qname="operNS:search" returnQName="searchReturn" returnType="rtns:ArrayOf_tns2_TagsEntrySoap" returnItemType="tns2:TagsEntrySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="urn:http.service.tags.portlet.liferay.com" qname="properties" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://model.tags.portlet.liferay.com" name="addEntry" qname="operNS:addEntry" returnQName="addEntryReturn" returnType="rtns:TagsEntrySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" name="deleteEntry" qname="operNS:deleteEntry" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="urn:http.service.tags.portlet.liferay.com" xmlns:tns2="http://model.tags.portlet.liferay.com" name="getEntries" qname="operNS:getEntries" returnQName="getEntriesReturn" returnType="rtns:ArrayOf_tns2_TagsEntrySoap" returnItemType="tns2:TagsEntrySoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="searchAutocomplete" qname="operNS:searchAutocomplete" returnQName="searchAutocompleteReturn" returnType="rtns:string" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
@@ -2310,7 +2320,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="search updateEntry searchCount searchAutocomplete addEntry deleteEntry"/>
+		<parameter name="allowedMethods" value="search updateEntry searchCount searchAutocomplete addEntry deleteEntry getEntries"/>
 		<arrayMapping xmlns:ns="urn:http.service.tags.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.tags.portlet.liferay.com" xmlns:cmp-ns="http://model.tags.portlet.liferay.com" qname="ns:ArrayOf_tns2_TagsEntrySoap" type="java:com.liferay.portlet.tags.model.TagsEntrySoap[]" innerType="cmp-ns:TagsEntrySoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.tags.portlet.liferay.com" qname="ns:TagsEntrySoap" type="java:com.liferay.portlet.tags.model.TagsEntrySoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>

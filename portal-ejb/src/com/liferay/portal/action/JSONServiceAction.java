@@ -119,6 +119,11 @@ public class JSONServiceAction extends JSONAction {
 						return null;
 					}
 				}
+				else {
+					JSONObject jsonObj = new JSONObject();
+
+					return jsonObj.toString();
+				}
 			}
 			catch (InvocationTargetException ite) {
 				JSONObject jsonObj = new JSONObject();

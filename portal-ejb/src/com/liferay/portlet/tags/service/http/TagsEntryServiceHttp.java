@@ -107,6 +107,50 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
+	public static java.util.List getEntries(HttpPrincipal httpPrincipal,
+		java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = classPK;
+
+			if (classPK == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
+					"getEntries", new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static java.util.List search(HttpPrincipal httpPrincipal,
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String[] properties)

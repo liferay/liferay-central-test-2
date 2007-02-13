@@ -22,11 +22,14 @@
 
 package com.liferay.portlet.polls.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import com.liferay.portlet.polls.model.PollsVote;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,10 +41,41 @@ import java.util.List;
 public class PollsVoteJSONSerializer {
 	public static JSONObject toJSONObject(PollsVote model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("questionId", model.getQuestionId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("choiceId", model.getChoiceId().toString());
-		jsonObj.put("voteDate", model.getVoteDate().toString());
+		String questionId = model.getQuestionId();
+
+		if (questionId == null) {
+			jsonObj.put("questionId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("questionId", questionId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String choiceId = model.getChoiceId();
+
+		if (choiceId == null) {
+			jsonObj.put("choiceId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("choiceId", choiceId.toString());
+		}
+
+		Date voteDate = model.getVoteDate();
+
+		if (voteDate == null) {
+			jsonObj.put("voteDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("voteDate", voteDate.toString());
+		}
 
 		return jsonObj;
 	}

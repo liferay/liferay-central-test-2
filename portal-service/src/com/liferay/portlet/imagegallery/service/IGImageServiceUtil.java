@@ -32,18 +32,21 @@ public class IGImageServiceUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
 		java.lang.String folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGImageService igImageService = IGImageServiceFactory.getService();
 
 		return igImageService.addImage(folderId, description, file,
-			contentType, addCommunityPermissions, addGuestPermissions);
+			contentType, tagsEntries, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
 		java.lang.String folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,
+		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -51,7 +54,7 @@ public class IGImageServiceUtil {
 		IGImageService igImageService = IGImageServiceFactory.getService();
 
 		return igImageService.addImage(folderId, description, file,
-			contentType, communityPermissions, guestPermissions);
+			contentType, tagsEntries, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteImage(java.lang.String companyId,
@@ -74,12 +77,12 @@ public class IGImageServiceUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		java.lang.String imageId, java.lang.String folderId,
 		java.lang.String description, java.io.File file,
-		java.lang.String contentType)
+		java.lang.String contentType, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGImageService igImageService = IGImageServiceFactory.getService();
 
 		return igImageService.updateImage(imageId, folderId, description, file,
-			contentType);
+			contentType, tagsEntries);
 	}
 }

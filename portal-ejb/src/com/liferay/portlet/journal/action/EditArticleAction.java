@@ -338,6 +338,9 @@ public class EditArticleAction extends PortletAction {
 
 		String articleURL = ParamUtil.getString(req, "articleURL");
 
+		String[] tagsEntries = StringUtil.split(
+			ParamUtil.getString(req, "tagsEntries"));
+
 		String[] communityPermissions = req.getParameterValues(
 			"communityPermissions");
 		String[] guestPermissions = req.getParameterValues(
@@ -359,8 +362,8 @@ public class EditArticleAction extends PortletAction {
 				expirationDateYear, expirationDateHour, expirationDateMinute,
 				neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 				reviewDateHour, reviewDateMinute, neverReview, images,
-				articleURL, req.getPreferences(), communityPermissions,
-				guestPermissions);
+				articleURL, req.getPreferences(), tagsEntries,
+				communityPermissions, guestPermissions);
 		}
 		else {
 
@@ -391,7 +394,8 @@ public class EditArticleAction extends PortletAction {
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, reviewDateMonth,
 				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
-				neverReview, images, articleURL, req.getPreferences());
+				neverReview, images, articleURL, req.getPreferences(),
+				tagsEntries);
 		}
 
 		if (approve) {

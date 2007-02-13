@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutSet;
 
 import org.json.JSONArray;
@@ -38,16 +39,66 @@ import java.util.List;
 public class LayoutSetJSONSerializer {
 	public static JSONObject toJSONObject(LayoutSet model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("ownerId", model.getOwnerId().toString());
-		jsonObj.put("companyId", model.getCompanyId().toString());
+		String ownerId = model.getOwnerId();
+
+		if (ownerId == null) {
+			jsonObj.put("ownerId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("ownerId", ownerId.toString());
+		}
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
 		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("userId", model.getUserId().toString());
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
 		jsonObj.put("privateLayout", model.getPrivateLayout());
 		jsonObj.put("logo", model.getLogo());
-		jsonObj.put("themeId", model.getThemeId().toString());
-		jsonObj.put("colorSchemeId", model.getColorSchemeId().toString());
+
+		String themeId = model.getThemeId();
+
+		if (themeId == null) {
+			jsonObj.put("themeId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("themeId", themeId.toString());
+		}
+
+		String colorSchemeId = model.getColorSchemeId();
+
+		if (colorSchemeId == null) {
+			jsonObj.put("colorSchemeId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("colorSchemeId", colorSchemeId.toString());
+		}
+
 		jsonObj.put("pageCount", model.getPageCount());
-		jsonObj.put("virtualHost", model.getVirtualHost().toString());
+
+		String virtualHost = model.getVirtualHost();
+
+		if (virtualHost == null) {
+			jsonObj.put("virtualHost", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("virtualHost", virtualHost.toString());
+		}
 
 		return jsonObj;
 	}

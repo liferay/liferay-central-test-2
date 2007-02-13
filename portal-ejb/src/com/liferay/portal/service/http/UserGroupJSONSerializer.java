@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserGroup;
 
 import org.json.JSONArray;
@@ -38,11 +39,50 @@ import java.util.List;
 public class UserGroupJSONSerializer {
 	public static JSONObject toJSONObject(UserGroup model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("userGroupId", model.getUserGroupId().toString());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("parentUserGroupId", model.getParentUserGroupId().toString());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("description", model.getDescription().toString());
+		String userGroupId = model.getUserGroupId();
+
+		if (userGroupId == null) {
+			jsonObj.put("userGroupId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userGroupId", userGroupId.toString());
+		}
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String parentUserGroupId = model.getParentUserGroupId();
+
+		if (parentUserGroupId == null) {
+			jsonObj.put("parentUserGroupId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("parentUserGroupId", parentUserGroupId.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String description = model.getDescription();
+
+		if (description == null) {
+			jsonObj.put("description", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("description", description.toString());
+		}
 
 		return jsonObj;
 	}

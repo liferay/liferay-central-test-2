@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.OrgLabor;
 
 import org.json.JSONArray;
@@ -38,8 +39,24 @@ import java.util.List;
 public class OrgLaborJSONSerializer {
 	public static JSONObject toJSONObject(OrgLabor model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("orgLaborId", model.getOrgLaborId().toString());
-		jsonObj.put("organizationId", model.getOrganizationId().toString());
+		String orgLaborId = model.getOrgLaborId();
+
+		if (orgLaborId == null) {
+			jsonObj.put("orgLaborId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("orgLaborId", orgLaborId.toString());
+		}
+
+		String organizationId = model.getOrganizationId();
+
+		if (organizationId == null) {
+			jsonObj.put("organizationId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("organizationId", organizationId.toString());
+		}
+
 		jsonObj.put("typeId", model.getTypeId());
 		jsonObj.put("sunOpen", model.getSunOpen());
 		jsonObj.put("sunClose", model.getSunClose());

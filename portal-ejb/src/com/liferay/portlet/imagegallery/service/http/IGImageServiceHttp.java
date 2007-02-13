@@ -42,8 +42,8 @@ public class IGImageServiceHttp {
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
 		HttpPrincipal httpPrincipal, java.lang.String folderId,
 		java.lang.String description, java.io.File file,
-		java.lang.String contentType, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String contentType, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -71,13 +71,19 @@ public class IGImageServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = new BooleanWrapper(addCommunityPermissions);
-			Object paramObj5 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj4 = tagsEntries;
+
+			if (tagsEntries == null) {
+				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj5 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj6 = new BooleanWrapper(addGuestPermissions);
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
 					"addImage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 			Object returnObj = null;
 
@@ -107,7 +113,8 @@ public class IGImageServiceHttp {
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
 		HttpPrincipal httpPrincipal, java.lang.String folderId,
 		java.lang.String description, java.io.File file,
-		java.lang.String contentType, java.lang.String[] communityPermissions,
+		java.lang.String contentType, java.lang.String[] tagsEntries,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -136,23 +143,29 @@ public class IGImageServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = communityPermissions;
+			Object paramObj4 = tagsEntries;
 
-			if (communityPermissions == null) {
+			if (tagsEntries == null) {
 				paramObj4 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj5 = guestPermissions;
+			Object paramObj5 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj5 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj6 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj5 = new NullWrapper("[Ljava.lang.String;");
+				paramObj6 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
 					"addImage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 			Object returnObj = null;
 
@@ -268,7 +281,8 @@ public class IGImageServiceHttp {
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		HttpPrincipal httpPrincipal, java.lang.String imageId,
 		java.lang.String folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType)
+		java.io.File file, java.lang.String contentType,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -302,10 +316,17 @@ public class IGImageServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj5 = tagsEntries;
+
+			if (tagsEntries == null) {
+				paramObj5 = new NullWrapper("[Ljava.lang.String;");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
 					"updateImage",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
 					});
 			Object returnObj = null;
 

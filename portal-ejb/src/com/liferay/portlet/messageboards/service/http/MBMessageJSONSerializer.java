@@ -22,11 +22,14 @@
 
 package com.liferay.portlet.messageboards.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import com.liferay.portlet.messageboards.model.MBMessage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,18 +41,114 @@ import java.util.List;
 public class MBMessageJSONSerializer {
 	public static JSONObject toJSONObject(MBMessage model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("topicId", model.getTopicId().toString());
-		jsonObj.put("messageId", model.getMessageId().toString());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("categoryId", model.getCategoryId().toString());
-		jsonObj.put("threadId", model.getThreadId().toString());
-		jsonObj.put("parentMessageId", model.getParentMessageId().toString());
-		jsonObj.put("subject", model.getSubject().toString());
-		jsonObj.put("body", model.getBody().toString());
+		String topicId = model.getTopicId();
+
+		if (topicId == null) {
+			jsonObj.put("topicId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("topicId", topicId.toString());
+		}
+
+		String messageId = model.getMessageId();
+
+		if (messageId == null) {
+			jsonObj.put("messageId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("messageId", messageId.toString());
+		}
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String categoryId = model.getCategoryId();
+
+		if (categoryId == null) {
+			jsonObj.put("categoryId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("categoryId", categoryId.toString());
+		}
+
+		String threadId = model.getThreadId();
+
+		if (threadId == null) {
+			jsonObj.put("threadId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("threadId", threadId.toString());
+		}
+
+		String parentMessageId = model.getParentMessageId();
+
+		if (parentMessageId == null) {
+			jsonObj.put("parentMessageId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("parentMessageId", parentMessageId.toString());
+		}
+
+		String subject = model.getSubject();
+
+		if (subject == null) {
+			jsonObj.put("subject", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("subject", subject.toString());
+		}
+
+		String body = model.getBody();
+
+		if (body == null) {
+			jsonObj.put("body", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("body", body.toString());
+		}
+
 		jsonObj.put("attachments", model.getAttachments());
 		jsonObj.put("anonymous", model.getAnonymous());
 

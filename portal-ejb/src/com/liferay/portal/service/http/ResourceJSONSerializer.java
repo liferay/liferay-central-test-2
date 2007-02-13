@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Resource;
 
 import org.json.JSONArray;
@@ -39,11 +40,51 @@ public class ResourceJSONSerializer {
 	public static JSONObject toJSONObject(Resource model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("resourceId", model.getResourceId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("typeId", model.getTypeId().toString());
-		jsonObj.put("scope", model.getScope().toString());
-		jsonObj.put("primKey", model.getPrimKey().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String typeId = model.getTypeId();
+
+		if (typeId == null) {
+			jsonObj.put("typeId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("typeId", typeId.toString());
+		}
+
+		String scope = model.getScope();
+
+		if (scope == null) {
+			jsonObj.put("scope", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("scope", scope.toString());
+		}
+
+		String primKey = model.getPrimKey();
+
+		if (primKey == null) {
+			jsonObj.put("primKey", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("primKey", primKey.toString());
+		}
 
 		return jsonObj;
 	}

@@ -8365,6 +8365,10 @@
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/BookmarksFolderLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksFolderLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -8413,6 +8417,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/BookmarksEntryLocalServiceHome</ejb-ref-name>
@@ -8688,6 +8696,10 @@
 				<ejb-link>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -8760,6 +8772,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/RatingsStatsLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
@@ -9322,6 +9338,10 @@
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/IGFolderLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGFolderLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -9370,6 +9390,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/IGFolderLocalServiceHome</ejb-ref-name>
@@ -9429,6 +9453,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/JournalContentSearchLocalServiceHome</ejb-ref-name>
@@ -9491,6 +9519,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/JournalArticleLocalServiceHome</ejb-ref-name>

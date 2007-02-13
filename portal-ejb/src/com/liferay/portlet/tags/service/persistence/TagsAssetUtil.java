@@ -149,55 +149,17 @@ public class TagsAssetUtil {
 		return getPersistence().fetchByPrimaryKey(assetId);
 	}
 
-	public static java.util.List findByC_C_C(java.lang.String companyId,
+	public static com.liferay.portlet.tags.model.TagsAsset findByC_C(
+		java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchAssetException {
+		return getPersistence().findByC_C(className, classPK);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAsset fetchByC_C(
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C(companyId, className, classPK);
-	}
-
-	public static java.util.List findByC_C_C(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C(companyId, className, classPK,
-			begin, end);
-	}
-
-	public static java.util.List findByC_C_C(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C(companyId, className, classPK,
-			begin, end, obc);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsAsset findByC_C_C_First(
-		java.lang.String companyId, java.lang.String className,
-		java.lang.String classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException {
-		return getPersistence().findByC_C_C_First(companyId, className,
-			classPK, obc);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsAsset findByC_C_C_Last(
-		java.lang.String companyId, java.lang.String className,
-		java.lang.String classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException {
-		return getPersistence().findByC_C_C_Last(companyId, className, classPK,
-			obc);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsAsset[] findByC_C_C_PrevAndNext(
-		long assetId, java.lang.String companyId, java.lang.String className,
-		java.lang.String classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException {
-		return getPersistence().findByC_C_C_PrevAndNext(assetId, companyId,
-			className, classPK, obc);
+		return getPersistence().fetchByC_C(className, classPK);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -229,20 +191,20 @@ public class TagsAssetUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByC_C_C(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByC_C_C(companyId, className, classPK);
+	public static void removeByC_C(java.lang.String className,
+		java.lang.String classPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchAssetException {
+		getPersistence().removeByC_C(className, classPK);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
 
-	public static int countByC_C_C(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_C_C(companyId, className, classPK);
+	public static int countByC_C(java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_C(className, classPK);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

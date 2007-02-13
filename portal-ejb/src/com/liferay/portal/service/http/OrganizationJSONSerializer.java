@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Organization;
 
 import org.json.JSONArray;
@@ -38,16 +39,72 @@ import java.util.List;
 public class OrganizationJSONSerializer {
 	public static JSONObject toJSONObject(Organization model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("organizationId", model.getOrganizationId().toString());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("parentOrganizationId",
-			model.getParentOrganizationId().toString());
-		jsonObj.put("name", model.getName().toString());
+		String organizationId = model.getOrganizationId();
+
+		if (organizationId == null) {
+			jsonObj.put("organizationId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("organizationId", organizationId.toString());
+		}
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String parentOrganizationId = model.getParentOrganizationId();
+
+		if (parentOrganizationId == null) {
+			jsonObj.put("parentOrganizationId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("parentOrganizationId", parentOrganizationId.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
 		jsonObj.put("recursable", model.getRecursable());
-		jsonObj.put("regionId", model.getRegionId().toString());
-		jsonObj.put("countryId", model.getCountryId().toString());
+
+		String regionId = model.getRegionId();
+
+		if (regionId == null) {
+			jsonObj.put("regionId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("regionId", regionId.toString());
+		}
+
+		String countryId = model.getCountryId();
+
+		if (countryId == null) {
+			jsonObj.put("countryId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("countryId", countryId.toString());
+		}
+
 		jsonObj.put("statusId", model.getStatusId());
-		jsonObj.put("comments", model.getComments().toString());
+
+		String comments = model.getComments();
+
+		if (comments == null) {
+			jsonObj.put("comments", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("comments", comments.toString());
+		}
 
 		return jsonObj;
 	}

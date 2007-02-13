@@ -61,7 +61,8 @@ public class JournalArticleServiceImpl
 			int reviewDateDay, int reviewDateYear, int reviewDateHour,
 			int reviewDateMinute, boolean neverReview, Map images,
 			String articleURL, PortletPreferences prefs,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String[] tagsEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -76,7 +77,7 @@ public class JournalArticleServiceImpl
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, images, articleURL, prefs,
-			addCommunityPermissions, addGuestPermissions);
+			tagsEntries, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public JournalArticle addArticle(
@@ -89,7 +90,7 @@ public class JournalArticleServiceImpl
 			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
 			int reviewDateDay, int reviewDateYear, int reviewDateHour,
 			int reviewDateMinute, boolean neverReview, Map images,
-			String articleURL, PortletPreferences prefs,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -105,7 +106,7 @@ public class JournalArticleServiceImpl
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, images, articleURL, prefs,
-			communityPermissions, guestPermissions);
+			tagsEntries, communityPermissions, guestPermissions);
 	}
 
 	public JournalArticle approveArticle(
@@ -225,7 +226,7 @@ public class JournalArticleServiceImpl
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, Map images, String articleURL,
-			PortletPreferences prefs)
+			PortletPreferences prefs, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
@@ -240,7 +241,7 @@ public class JournalArticleServiceImpl
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, images, articleURL,
-			prefs);
+			prefs, tagsEntries);
 	}
 
 }

@@ -103,6 +103,8 @@
 
 		<!-- Portal -->
 
+		<action path="/portal/autocomplete_tags_entries" type="com.liferay.portal.action.AutocompleteTagsEntriesAction" />
+
 		<action path="/portal/change_password" type="com.liferay.portal.action.ChangePasswordAction">
 			<forward name="portal.change_password" path="portal.change_password" />
 		</action>
@@ -1342,13 +1344,21 @@
 
 		<!-- Tags Admin -->
 
-		<action path="/tags_admin/autocomplete_entries" type="com.liferay.portlet.tagsadmin.action.AutocompleteEntriesAction" />
-
 		<action path="/tags_admin/edit_entry" type="com.liferay.portlet.tagsadmin.action.EditEntryAction" />
 
 		<action path="/tags_admin/edit_property" type="com.liferay.portlet.tagsadmin.action.EditPropertyAction" />
 
 		<action path="/tags_admin/view" forward="portlet.tags_admin.view" />
+
+		<!-- Tags Content -->
+
+		<action path="/tags_content/edit_configuration" type="com.liferay.portlet.tagscontent.action.EditConfigurationAction">
+			<forward name="portlet.tags_content.edit_configuration" path="portlet.tags_content.edit_configuration" />
+		</action>
+
+		<action path="/tags_content/view" type="com.liferay.portlet.tagscontent.action.ViewAction">
+			<forward name="portlet.tags_content.view" path="portlet.tags_content.view" />
+		</action>
 
 		<!-- Weather -->
 
@@ -1476,6 +1486,16 @@
 		<!-- WSRP Producer -->
 
 		<action path="/wsrp" type="com.liferay.portal.wsrp.WSRPAction" />
+
+		<!-- XSL Content -->
+
+		<action path="/xsl_content/edit_configuration" type="com.liferay.portlet.xslcontent.action.EditConfigurationAction">
+			<forward name="portlet.xsl_content.edit_configuration" path="portlet.xsl_content.edit_configuration" />
+		</action>
+
+		<action path="/xsl_content/view" type="com.liferay.portlet.xslcontent.action.ViewAction">
+			<forward name="portlet.xsl_content.view" path="portlet.xsl_content.view" />
+		</action>
 	</action-mappings>
 
 	<!-- Custom Request Processor -->

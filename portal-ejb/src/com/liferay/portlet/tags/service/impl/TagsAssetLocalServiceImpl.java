@@ -22,11 +22,22 @@
 
 package com.liferay.portlet.tags.service.impl;
 
+import com.liferay.counter.model.Counter;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
+import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.base.TagsAssetLocalServiceBaseImpl;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
+import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="TagsAssetLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -44,6 +55,16 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		deleteAsset(asset);
 	}
 
+	public void deleteAsset(String className, String classPK)
+		throws PortalException, SystemException {
+
+		TagsAsset asset = TagsAssetUtil.fetchByC_C(className, classPK);
+
+		if (asset != null) {
+			deleteAsset(asset);
+		}
+	}
+
 	public void deleteAsset(TagsAsset asset)
 		throws PortalException, SystemException {
 
@@ -54,6 +75,74 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return TagsAssetUtil.findByPrimaryKey(assetId);
+	}
+
+	public TagsAsset getAsset(String className, String classPK)
+		throws PortalException, SystemException {
+
+		return TagsAssetUtil.findByC_C(className, classPK);
+	}
+
+	public List getAssets(
+			long[] entryIds, boolean andOperator, int begin, int end)
+		throws SystemException {
+
+		return TagsAssetFinder.findByEntryIds(
+			entryIds, andOperator, begin, end);
+	}
+
+	public int getAssetsCount(long[] entryIds, boolean andOperator)
+		throws SystemException {
+
+		return TagsAssetFinder.countByEntryIds(entryIds, andOperator);
+	}
+
+	public TagsAsset updateAsset(
+			String userId, String className, String classPK,
+			String[] entryNames)
+		throws PortalException, SystemException {
+
+		// Asset
+
+		User user = UserUtil.findByPrimaryKey(userId);
+		Date now = new Date();
+
+		TagsAsset asset = TagsAssetUtil.fetchByC_C(className, classPK);
+
+		if (asset == null) {
+			long assetId = CounterLocalServiceUtil.increment(
+				Counter.class.getName());
+
+			asset = TagsAssetUtil.create(assetId);
+
+			asset.setCompanyId(user.getCompanyId());
+			asset.setUserId(user.getUserId());
+			asset.setUserName(user.getFullName());
+			asset.setCreateDate(now);
+			asset.setClassName(className);
+			asset.setClassPK(classPK);
+		}
+
+		asset.setModifiedDate(now);
+
+		TagsAssetUtil.update(asset);
+
+		// Entries
+
+		List entries = new ArrayList(entryNames.length);
+
+		for (int i = 0; i < entryNames.length; i++) {
+			TagsEntry entry = TagsEntryUtil.fetchByC_N(
+				user.getCompanyId(), entryNames[i]);
+
+			if (entry != null) {
+				entries.add(entry);
+			}
+		}
+
+		TagsAssetUtil.setTagsEntries(asset.getAssetId(), entries);
+
+		return asset;
 	}
 
 }

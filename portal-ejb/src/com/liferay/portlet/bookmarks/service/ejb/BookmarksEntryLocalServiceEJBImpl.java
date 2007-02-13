@@ -53,29 +53,32 @@ public class BookmarksEntryLocalServiceEJBImpl
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return BookmarksEntryLocalServiceFactory.getTxImpl().addEntry(userId,
-			folderId, name, url, comments, addCommunityPermissions,
-			addGuestPermissions);
+			folderId, name, url, comments, tagsEntries,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return BookmarksEntryLocalServiceFactory.getTxImpl().addEntry(userId,
-			folderId, name, url, comments, communityPermissions,
+			folderId, name, url, comments, tagsEntries, communityPermissions,
 			guestPermissions);
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -83,8 +86,9 @@ public class BookmarksEntryLocalServiceEJBImpl
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return BookmarksEntryLocalServiceFactory.getTxImpl().addEntry(userId,
-			folderId, name, url, comments, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
+			folderId, name, url, comments, tagsEntries,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
 	}
 
 	public void addEntryResources(java.lang.String folderId,
@@ -205,11 +209,11 @@ public class BookmarksEntryLocalServiceEJBImpl
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		java.lang.String companyId, java.lang.String entryId,
 		java.lang.String folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments)
+		java.lang.String comments, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return BookmarksEntryLocalServiceFactory.getTxImpl().updateEntry(companyId,
-			entryId, folderId, name, url, comments);
+			entryId, folderId, name, url, comments, tagsEntries);
 	}
 
 	public void ejbCreate() throws CreateException {

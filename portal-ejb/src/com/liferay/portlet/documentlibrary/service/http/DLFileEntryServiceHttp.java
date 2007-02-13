@@ -43,9 +43,9 @@ public class DLFileEntryServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		HttpPrincipal httpPrincipal, java.lang.String folderId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		byte[] byteArray, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, byte[] byteArray,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -73,25 +73,31 @@ public class DLFileEntryServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = extraSettings;
+			Object paramObj4 = tagsEntries;
+
+			if (tagsEntries == null) {
+				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj5 = extraSettings;
 
 			if (extraSettings == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = byteArray;
+			Object paramObj6 = byteArray;
 
 			if (byteArray == null) {
-				paramObj5 = new NullWrapper("[B");
+				paramObj6 = new NullWrapper("[B");
 			}
 
-			Object paramObj6 = new BooleanWrapper(addCommunityPermissions);
-			Object paramObj7 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj7 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj8 = new BooleanWrapper(addGuestPermissions);
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
 					"addFileEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 			Object returnObj = null;
 
@@ -121,8 +127,9 @@ public class DLFileEntryServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		HttpPrincipal httpPrincipal, java.lang.String folderId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		byte[] byteArray, java.lang.String[] communityPermissions,
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, byte[] byteArray,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -151,35 +158,41 @@ public class DLFileEntryServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = extraSettings;
+			Object paramObj4 = tagsEntries;
+
+			if (tagsEntries == null) {
+				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj5 = extraSettings;
 
 			if (extraSettings == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = byteArray;
+			Object paramObj6 = byteArray;
 
 			if (byteArray == null) {
-				paramObj5 = new NullWrapper("[B");
+				paramObj6 = new NullWrapper("[B");
 			}
 
-			Object paramObj6 = communityPermissions;
+			Object paramObj7 = communityPermissions;
 
 			if (communityPermissions == null) {
-				paramObj6 = new NullWrapper("[Ljava.lang.String;");
+				paramObj7 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj7 = guestPermissions;
+			Object paramObj8 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj7 = new NullWrapper("[Ljava.lang.String;");
+				paramObj8 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
 					"addFileEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 			Object returnObj = null;
 
@@ -437,8 +450,8 @@ public class DLFileEntryServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String folderId,
 		java.lang.String newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		byte[] byteArray)
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, byte[] byteArray)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		try {
@@ -478,23 +491,29 @@ public class DLFileEntryServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = extraSettings;
+			Object paramObj6 = tagsEntries;
 
-			if (extraSettings == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
+			if (tagsEntries == null) {
+				paramObj6 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj7 = byteArray;
+			Object paramObj7 = extraSettings;
+
+			if (extraSettings == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = byteArray;
 
 			if (byteArray == null) {
-				paramObj7 = new NullWrapper("[B");
+				paramObj8 = new NullWrapper("[B");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
 					"updateFileEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 			Object returnObj = null;
 

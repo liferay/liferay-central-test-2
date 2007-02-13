@@ -2073,6 +2073,14 @@ Liferay.Service.Tags.TagsEntry = {
 		_$J.getJSON(Liferay.Service.url, params, callback);
 	},
 
+	getEntries: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getEntries";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
 	search: function(params, callback) {
 		params.serviceParameters = Liferay.Service.getParameters(params);
 		params.serviceClassName = this.serviceClassName;

@@ -93,7 +93,8 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 			DLFileEntryLocalServiceUtil.addFileEntry(
 				arg.getUserId(), folder.getFolderId(), fileName, fileName,
-				StringPool.BLANK, StringPool.BLANK, file, true, true);
+				StringPool.BLANK, new String[0], StringPool.BLANK, file, true,
+				true);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);

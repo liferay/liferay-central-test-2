@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Region;
 
 import org.json.JSONArray;
@@ -38,10 +39,42 @@ import java.util.List;
 public class RegionJSONSerializer {
 	public static JSONObject toJSONObject(Region model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("regionId", model.getRegionId().toString());
-		jsonObj.put("countryId", model.getCountryId().toString());
-		jsonObj.put("regionCode", model.getRegionCode().toString());
-		jsonObj.put("name", model.getName().toString());
+		String regionId = model.getRegionId();
+
+		if (regionId == null) {
+			jsonObj.put("regionId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("regionId", regionId.toString());
+		}
+
+		String countryId = model.getCountryId();
+
+		if (countryId == null) {
+			jsonObj.put("countryId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("countryId", countryId.toString());
+		}
+
+		String regionCode = model.getRegionCode();
+
+		if (regionCode == null) {
+			jsonObj.put("regionCode", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("regionCode", regionCode.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
 		jsonObj.put("active", model.getActive());
 
 		return jsonObj;

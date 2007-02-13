@@ -41,11 +41,32 @@ public interface TagsAssetLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void deleteAsset(java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void deleteAsset(com.liferay.portlet.tags.model.TagsAsset asset)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsAsset getAsset(long assetId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.tags.model.TagsAsset getAsset(
+		java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List getAssets(long[] entryIds, boolean andOperator,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public int getAssetsCount(long[] entryIds, boolean andOperator)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsAsset updateAsset(
+		java.lang.String userId, java.lang.String className,
+		java.lang.String classPK, java.lang.String[] entryNames)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

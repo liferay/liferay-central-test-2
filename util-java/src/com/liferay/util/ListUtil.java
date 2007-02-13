@@ -193,4 +193,30 @@ public class ListUtil {
 		return newList;
 	}
 
+	public static String toString(List list, String param) {
+		return toString(list, param, StringPool.COMMA);
+	}
+
+	public static String toString(List list, String param, String delimiter) {
+		StringBuffer sb = new StringBuffer();
+
+		for (int i = 0; i < list.size(); i++) {
+			Object bean = list.get(i);
+
+			Object value = BeanUtil.getObject(bean, param);
+
+			if (value == null) {
+				value = StringPool.BLANK;
+			}
+
+			sb.append(value.toString());
+
+			if ((i + 1) != list.size()) {
+				sb.append(delimiter);
+			}
+		}
+
+		return sb.toString();
+	}
+
 }

@@ -22,11 +22,13 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,20 +41,133 @@ public class AddressJSONSerializer {
 	public static JSONObject toJSONObject(Address model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("addressId", model.getAddressId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("className", model.getClassName().toString());
-		jsonObj.put("classPK", model.getClassPK().toString());
-		jsonObj.put("street1", model.getStreet1().toString());
-		jsonObj.put("street2", model.getStreet2().toString());
-		jsonObj.put("street3", model.getStreet3().toString());
-		jsonObj.put("city", model.getCity().toString());
-		jsonObj.put("zip", model.getZip().toString());
-		jsonObj.put("regionId", model.getRegionId().toString());
-		jsonObj.put("countryId", model.getCountryId().toString());
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String className = model.getClassName();
+
+		if (className == null) {
+			jsonObj.put("className", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("className", className.toString());
+		}
+
+		String classPK = model.getClassPK();
+
+		if (classPK == null) {
+			jsonObj.put("classPK", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("classPK", classPK.toString());
+		}
+
+		String street1 = model.getStreet1();
+
+		if (street1 == null) {
+			jsonObj.put("street1", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("street1", street1.toString());
+		}
+
+		String street2 = model.getStreet2();
+
+		if (street2 == null) {
+			jsonObj.put("street2", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("street2", street2.toString());
+		}
+
+		String street3 = model.getStreet3();
+
+		if (street3 == null) {
+			jsonObj.put("street3", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("street3", street3.toString());
+		}
+
+		String city = model.getCity();
+
+		if (city == null) {
+			jsonObj.put("city", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("city", city.toString());
+		}
+
+		String zip = model.getZip();
+
+		if (zip == null) {
+			jsonObj.put("zip", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("zip", zip.toString());
+		}
+
+		String regionId = model.getRegionId();
+
+		if (regionId == null) {
+			jsonObj.put("regionId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("regionId", regionId.toString());
+		}
+
+		String countryId = model.getCountryId();
+
+		if (countryId == null) {
+			jsonObj.put("countryId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("countryId", countryId.toString());
+		}
+
 		jsonObj.put("typeId", model.getTypeId());
 		jsonObj.put("mailing", model.getMailing());
 		jsonObj.put("primary", model.getPrimary());

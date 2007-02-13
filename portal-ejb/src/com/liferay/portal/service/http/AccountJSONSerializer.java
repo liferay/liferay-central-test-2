@@ -22,11 +22,13 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Account;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,22 +40,149 @@ import java.util.List;
 public class AccountJSONSerializer {
 	public static JSONObject toJSONObject(Account model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("accountId", model.getAccountId().toString());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("parentAccountId", model.getParentAccountId().toString());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("legalName", model.getLegalName().toString());
-		jsonObj.put("legalId", model.getLegalId().toString());
-		jsonObj.put("legalType", model.getLegalType().toString());
-		jsonObj.put("sicCode", model.getSicCode().toString());
-		jsonObj.put("tickerSymbol", model.getTickerSymbol().toString());
-		jsonObj.put("industry", model.getIndustry().toString());
-		jsonObj.put("type", model.getType().toString());
-		jsonObj.put("size", model.getSize().toString());
+		String accountId = model.getAccountId();
+
+		if (accountId == null) {
+			jsonObj.put("accountId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("accountId", accountId.toString());
+		}
+
+		String companyId = model.getCompanyId();
+
+		if (companyId == null) {
+			jsonObj.put("companyId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("companyId", companyId.toString());
+		}
+
+		String userId = model.getUserId();
+
+		if (userId == null) {
+			jsonObj.put("userId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userId", userId.toString());
+		}
+
+		String userName = model.getUserName();
+
+		if (userName == null) {
+			jsonObj.put("userName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("userName", userName.toString());
+		}
+
+		Date createDate = model.getCreateDate();
+
+		if (createDate == null) {
+			jsonObj.put("createDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("createDate", createDate.toString());
+		}
+
+		Date modifiedDate = model.getModifiedDate();
+
+		if (modifiedDate == null) {
+			jsonObj.put("modifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		String parentAccountId = model.getParentAccountId();
+
+		if (parentAccountId == null) {
+			jsonObj.put("parentAccountId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("parentAccountId", parentAccountId.toString());
+		}
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
+		}
+
+		String legalName = model.getLegalName();
+
+		if (legalName == null) {
+			jsonObj.put("legalName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("legalName", legalName.toString());
+		}
+
+		String legalId = model.getLegalId();
+
+		if (legalId == null) {
+			jsonObj.put("legalId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("legalId", legalId.toString());
+		}
+
+		String legalType = model.getLegalType();
+
+		if (legalType == null) {
+			jsonObj.put("legalType", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("legalType", legalType.toString());
+		}
+
+		String sicCode = model.getSicCode();
+
+		if (sicCode == null) {
+			jsonObj.put("sicCode", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("sicCode", sicCode.toString());
+		}
+
+		String tickerSymbol = model.getTickerSymbol();
+
+		if (tickerSymbol == null) {
+			jsonObj.put("tickerSymbol", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("tickerSymbol", tickerSymbol.toString());
+		}
+
+		String industry = model.getIndustry();
+
+		if (industry == null) {
+			jsonObj.put("industry", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("industry", industry.toString());
+		}
+
+		String type = model.getType();
+
+		if (type == null) {
+			jsonObj.put("type", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("type", type.toString());
+		}
+
+		String size = model.getSize();
+
+		if (size == null) {
+			jsonObj.put("size", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("size", size.toString());
+		}
 
 		return jsonObj;
 	}

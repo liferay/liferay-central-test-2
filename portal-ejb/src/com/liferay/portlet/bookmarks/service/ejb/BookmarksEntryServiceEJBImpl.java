@@ -41,26 +41,29 @@ public class BookmarksEntryServiceEJBImpl implements BookmarksEntryService,
 	SessionBean {
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		java.lang.String folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String comments, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return BookmarksEntryServiceFactory.getTxImpl().addEntry(folderId,
-			name, url, comments, addCommunityPermissions, addGuestPermissions);
+			name, url, comments, tagsEntries, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		java.lang.String folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments, java.lang.String[] communityPermissions,
+		java.lang.String comments, java.lang.String[] tagsEntries,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return BookmarksEntryServiceFactory.getTxImpl().addEntry(folderId,
-			name, url, comments, communityPermissions, guestPermissions);
+			name, url, comments, tagsEntries, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteEntry(java.lang.String entryId)
@@ -90,13 +93,14 @@ public class BookmarksEntryServiceEJBImpl implements BookmarksEntryService,
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		java.lang.String entryId, java.lang.String folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments)
+		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return BookmarksEntryServiceFactory.getTxImpl().updateEntry(entryId,
-			folderId, name, url, comments);
+			folderId, name, url, comments, tagsEntries);
 	}
 
 	public void ejbCreate() throws CreateException {

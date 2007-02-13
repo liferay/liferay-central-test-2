@@ -54,7 +54,7 @@ public class JournalArticleServiceHttp {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -143,8 +143,14 @@ public class JournalArticleServiceHttp {
 				paramObj28 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
-			Object paramObj29 = new BooleanWrapper(addCommunityPermissions);
-			Object paramObj30 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj29 = tagsEntries;
+
+			if (tagsEntries == null) {
+				paramObj29 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj30 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj31 = new BooleanWrapper(addGuestPermissions);
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
 					"addArticle",
 					new Object[] {
@@ -155,7 +161,7 @@ public class JournalArticleServiceHttp {
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
-						paramObj30
+						paramObj30, paramObj31
 					});
 			Object returnObj = null;
 
@@ -194,7 +200,7 @@ public class JournalArticleServiceHttp {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs,
+		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -284,16 +290,22 @@ public class JournalArticleServiceHttp {
 				paramObj28 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
-			Object paramObj29 = communityPermissions;
+			Object paramObj29 = tagsEntries;
 
-			if (communityPermissions == null) {
+			if (tagsEntries == null) {
 				paramObj29 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj30 = guestPermissions;
+			Object paramObj30 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj30 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj31 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj30 = new NullWrapper("[Ljava.lang.String;");
+				paramObj31 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
@@ -306,7 +318,7 @@ public class JournalArticleServiceHttp {
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
-						paramObj30
+						paramObj30, paramObj31
 					});
 			Object returnObj = null;
 
@@ -805,7 +817,8 @@ public class JournalArticleServiceHttp {
 		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
 		int reviewDateDay, int reviewDateYear, int reviewDateHour,
 		int reviewDateMinute, boolean neverReview, java.util.Map images,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -895,6 +908,12 @@ public class JournalArticleServiceHttp {
 				paramObj30 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
+			Object paramObj31 = tagsEntries;
+
+			if (tagsEntries == null) {
+				paramObj31 = new NullWrapper("[Ljava.lang.String;");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
 					"updateArticle",
 					new Object[] {
@@ -905,7 +924,7 @@ public class JournalArticleServiceHttp {
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
-						paramObj30
+						paramObj30, paramObj31
 					});
 			Object returnObj = null;
 
