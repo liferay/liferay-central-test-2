@@ -20,30 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.ejb;
+package com.liferay.test.ldap.security.auth;
 
-import com.liferay.test.TestCase;
 import com.liferay.test.TestProps;
+import com.liferay.test.ldap.BaseLDAPTest;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
-import javax.rmi.PortableRemoteObject;
+import javax.naming.directory.BasicAttribute;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.ModificationItem;
 
 /**
- * <a href="BaseEJBTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="LDAPAttributesModificationsTest.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Brian Wing Shun Chan
+ * @author Jerry Niu
  *
  */
-public class BaseEJBTest extends TestCase {
+public class LDAPAttributesModificationsTest extends BaseLDAPTest {
 
-	protected Object lookup(String jndiName, Class c) throws NamingException {
-		InitialContext ctx = new InitialContext(TestProps.getProperties());
+	protected void useContext(DirContext ctx) {
+		modifyAttribute(ctx);
+	}
 
-		Object obj = ctx.lookup(jndiName);
+	protected void modifyAttribute(DirContext ctx) {
+		try {
+			String name = TestProps.get("ldap.attribute.mod.name");
 
-		return PortableRemoteObject.narrow(obj, c);
+			ModificationItem[] mods = new ModificationItem[1];
+
+			mods[0] = new ModificationItem(
+				DirContext.REPLACE_ATTRIBUTE,
+				new BasicAttribute(
+					TestProps.get("ldap.attribute.mod.name.id"),
+					TestProps.get("ldap.attribute.mod.name.value")));
+
+			ctx.modifyAttributes(name, mods);
+		}
+		catch (Exception e) {
+			fail(e);
+		}
 	}
 
 }

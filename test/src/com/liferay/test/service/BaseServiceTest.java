@@ -20,69 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.security.auth;
+package com.liferay.test.service;
 
+import com.liferay.portal.bean.BeanLocatorImpl;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.test.TestCase;
 import com.liferay.test.TestProps;
 
-import java.util.Properties;
-
-import javax.naming.Context;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.InitialDirContext;
-
 /**
- * <a href="BaseLDAPTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseServiceTest.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jerry Niu
+ * @author Michael Young
  *
  */
-public abstract class BaseLDAPTest extends TestCase {
+public class BaseServiceTest extends TestCase {
 
-	protected Properties getLdapProperties() {
-		Properties env = new Properties();
-		try {
-			env.put(
-				Context.INITIAL_CONTEXT_FACTORY,
-				TestProps.get("ldap.factory.initial"));
-			env.put(
-				Context.PROVIDER_URL,
-				TestProps.get("ldap.provider.url"));
-			env.put(
-				Context.SECURITY_PRINCIPAL,
-				TestProps.get("ldap.security.principal"));
-			env.put(
-				Context.SECURITY_CREDENTIALS,
-				TestProps.get("ldap.security.credentials"));
-		} catch (Exception e) {
-			fail(e);
-		}
-		return env;
+	protected void setUp() throws Exception {
+		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
+
+		String userId = TestProps.get("service.user.id");
+
+		PrincipalThreadLocal.setName(userId);
+
+		User user = UserLocalServiceUtil.getUserById(userId);
+
+		_permissionChecker = PermissionCheckerFactory.create(user, true, true);
+
+		PermissionThreadLocal.setPermissionChecker(_permissionChecker);
 	}
 
-	public void test() {
-		DirContext ctx = null;
-
-		try {
-			ctx = new InitialDirContext(getLdapProperties());
-
-			useContext(ctx);
-		}
-		catch (Exception e) {
-			fail(e);
-		}
-		finally {
-			try {
-				if (ctx != null) {
-					ctx.close();
-				}
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+	protected void tearDown() throws Exception {
+		PermissionCheckerFactory.recycle(_permissionChecker);
 	}
 
-	protected abstract void useContext(DirContext ctx);
+	private PermissionCheckerImpl _permissionChecker = null;
 
 }

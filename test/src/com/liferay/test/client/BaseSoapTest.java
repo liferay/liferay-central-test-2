@@ -20,44 +20,50 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service;
+package com.liferay.test.client;
 
-import com.liferay.portal.bean.BeanLocatorImpl;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.kernel.util.Digester;
 import com.liferay.test.TestCase;
 import com.liferay.test.TestProps;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
- * <a href="BaseServiceTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseSoapTest.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Brian Wing Shun Chan
  *
  */
-public class BaseServiceTest extends TestCase {
+public class BaseSoapTest extends TestCase {
 
-	protected void setUp() throws Exception {
-		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
-
-		String userId = TestProps.get("service.user.id");
-
-		PrincipalThreadLocal.setName(userId);
-
-		User user = UserLocalServiceUtil.getUserById(userId);
-
-		_permissionChecker = PermissionCheckerFactory.create(user, true, true);
-
-		PermissionThreadLocal.setPermissionChecker(_permissionChecker);
+	protected URL getURL(String serviceName) throws MalformedURLException {
+		return getURL(serviceName, true);
 	}
 
-	protected void tearDown() throws Exception {
-		PermissionCheckerFactory.recycle(_permissionChecker);
-	}
+	protected URL getURL(String serviceName, boolean authenticated)
+		throws MalformedURLException {
 
-	private PermissionCheckerImpl _permissionChecker = null;
+		String url = TestProps.get("soap.url");
+
+		if (authenticated) {
+			String userId = TestProps.get("soap.user.id");
+			String password = Digester.digest(TestProps.get("soap.password"));
+
+			int pos = url.indexOf("://");
+
+			String protocol = url.substring(0, pos + 3);
+			String host = url.substring(pos + 3, url.length());
+
+			url =
+				protocol + userId + ":" + password + "@" + host +
+					"/tunnel-web/secure/axis/" + serviceName;
+		}
+		else {
+			url += "/tunnel-web/axis/" + serviceName;
+		}
+
+		return new URL(url);
+	}
 
 }

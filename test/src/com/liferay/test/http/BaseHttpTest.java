@@ -20,44 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.security.auth;
+package com.liferay.test.http;
 
+import com.liferay.portal.security.auth.HttpPrincipal;
+import com.liferay.test.TestCase;
 import com.liferay.test.TestProps;
 
-import javax.naming.directory.BasicAttribute;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.ModificationItem;
-
 /**
- * <a href="LDAPAttributesModificationsTest.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="BaseHttpTest.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jerry Niu
+ * @author Brian Wing Shun Chan
  *
  */
-public class LDAPAttributesModificationsTest extends BaseLDAPTest {
+public class BaseHttpTest extends TestCase {
 
-	protected void useContext(DirContext ctx) {
-		modifyAttribute(ctx);
+	protected HttpPrincipal getHttpPrincipal() {
+		return getHttpPrincipal(true);
 	}
 
-	protected void modifyAttribute(DirContext ctx) {
-		try {
-			String name = TestProps.get("ldap.attribute.mod.name");
+	protected HttpPrincipal getHttpPrincipal(boolean authenticated) {
+		HttpPrincipal httpPrincipal = null;
 
-			ModificationItem[] mods = new ModificationItem[1];
-
-			mods[0] = new ModificationItem(
-				DirContext.REPLACE_ATTRIBUTE,
-				new BasicAttribute(
-					TestProps.get("ldap.attribute.mod.name.id"),
-					TestProps.get("ldap.attribute.mod.name.value")));
-
-			ctx.modifyAttributes(name, mods);
+		if (authenticated) {
+			httpPrincipal = new HttpPrincipal(
+				TestProps.get("http.url"), TestProps.get("http.user.id"),
+				TestProps.get("http.password"));
 		}
-		catch (Exception e) {
-			fail(e);
+		else {
+			httpPrincipal = new HttpPrincipal(TestProps.get("http.url"));
 		}
+
+		return httpPrincipal;
 	}
 
 }

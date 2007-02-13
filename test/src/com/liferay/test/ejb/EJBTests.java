@@ -20,9 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.test;
+package com.liferay.test.ejb;
 
-import com.liferay.counter.service.CounterServiceTest;
+import com.liferay.test.ResultPrinter;
+import com.liferay.test.ejb.portal.PortalEJBTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -30,12 +31,12 @@ import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
 /**
- * <a href="ServiceTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="EJBTests.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Brian Wing Shun Chan
  *
  */
-public class ServiceTests {
+public class EJBTests {
 
 	public static void main(String[] args) {
 		TestRunner runner = new TestRunner(new ResultPrinter(System.out));
@@ -46,7 +47,7 @@ public class ServiceTests {
 	public static Test suite() {
 		TestSuite suite = new TestSuite();
 
-		suite.addTestSuite(CounterServiceTest.class);
+		suite.addTestSuite(PortalEJBTest.class);
 
 		return suite;
 	}

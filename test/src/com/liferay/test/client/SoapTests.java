@@ -20,9 +20,11 @@
  * SOFTWARE.
  */
 
-package com.liferay.test;
+package com.liferay.test.client;
 
-import com.liferay.portal.service.ejb.PortalEJBTest;
+import com.liferay.test.ResultPrinter;
+import com.liferay.test.client.portal.PortalSoapTest;
+import com.liferay.test.client.portlet.messageboards.MessageBoardsSoapTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -30,12 +32,12 @@ import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
 /**
- * <a href="EJBTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SoapTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EJBTests {
+public class SoapTests {
 
 	public static void main(String[] args) {
 		TestRunner runner = new TestRunner(new ResultPrinter(System.out));
@@ -46,7 +48,8 @@ public class EJBTests {
 	public static Test suite() {
 		TestSuite suite = new TestSuite();
 
-		suite.addTestSuite(PortalEJBTest.class);
+		suite.addTestSuite(PortalSoapTest.class);
+		suite.addTestSuite(MessageBoardsSoapTest.class);
 
 		return suite;
 	}

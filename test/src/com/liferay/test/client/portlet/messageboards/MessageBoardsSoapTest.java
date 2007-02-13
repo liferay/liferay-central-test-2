@@ -20,11 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.client.portlet.messageboards.service.http;
+package com.liferay.test.client.portlet.messageboards;
 
-import com.liferay.client.portal.service.http.BaseSoapTest;
 import com.liferay.client.portlet.messageboards.model.MBCategorySoap;
 import com.liferay.client.portlet.messageboards.model.MBMessageSoap;
+import com.liferay.client.portlet.messageboards.service.http.MBCategoryServiceSoap;
+import com.liferay.client.portlet.messageboards.service.http.MBCategoryServiceSoapServiceLocator;
+import com.liferay.client.portlet.messageboards.service.http.MBMessageServiceSoap;
+import com.liferay.client.portlet.messageboards.service.http.MBMessageServiceSoapServiceLocator;
+import com.liferay.test.client.BaseSoapTest;
 
 /**
  * <a href="MessageBoardsSoapTest.java.html"><b><i>View Source</i></b></a>

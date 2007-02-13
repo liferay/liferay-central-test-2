@@ -20,12 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.ejb;
+package com.liferay.test.ejb.portal;
 
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.PortalService;
 import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.ejb.PortalServiceHome;
+import com.liferay.portal.service.ejb.UserServiceHome;
 import com.liferay.test.TestConstants;
+import com.liferay.test.ejb.BaseEJBTest;
 
 import java.util.Calendar;
 import java.util.Locale;

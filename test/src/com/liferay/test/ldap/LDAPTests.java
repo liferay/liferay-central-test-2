@@ -20,10 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.test;
+package com.liferay.test.ldap;
 
-import com.liferay.client.portal.service.http.PortalSoapTest;
-import com.liferay.client.portlet.messageboards.service.http.MessageBoardsSoapTest;
+import com.liferay.test.ResultPrinter;
+import com.liferay.test.ldap.security.auth.LDAPAttributesModificationsTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -31,12 +31,12 @@ import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
 /**
- * <a href="SoapTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="LDAPTests.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Jerry Niu
  *
  */
-public class SoapTests {
+public class LDAPTests {
 
 	public static void main(String[] args) {
 		TestRunner runner = new TestRunner(new ResultPrinter(System.out));
@@ -47,8 +47,7 @@ public class SoapTests {
 	public static Test suite() {
 		TestSuite suite = new TestSuite();
 
-		suite.addTestSuite(PortalSoapTest.class);
-		suite.addTestSuite(MessageBoardsSoapTest.class);
+		suite.addTestSuite(LDAPAttributesModificationsTest.class);
 
 		return suite;
 	}

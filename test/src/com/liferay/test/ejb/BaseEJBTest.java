@@ -20,37 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.http;
+package com.liferay.test.ejb;
 
-import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.test.TestCase;
 import com.liferay.test.TestProps;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import javax.rmi.PortableRemoteObject;
+
 /**
- * <a href="BaseHttpTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseEJBTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BaseHttpTest extends TestCase {
+public class BaseEJBTest extends TestCase {
 
-	protected HttpPrincipal getHttpPrincipal() {
-		return getHttpPrincipal(true);
-	}
+	protected Object lookup(String jndiName, Class c) throws NamingException {
+		InitialContext ctx = new InitialContext(TestProps.getProperties());
 
-	protected HttpPrincipal getHttpPrincipal(boolean authenticated) {
-		HttpPrincipal httpPrincipal = null;
+		Object obj = ctx.lookup(jndiName);
 
-		if (authenticated) {
-			httpPrincipal = new HttpPrincipal(
-				TestProps.get("http.url"), TestProps.get("http.user.id"),
-				TestProps.get("http.password"));
-		}
-		else {
-			httpPrincipal = new HttpPrincipal(TestProps.get("http.url"));
-		}
-
-		return httpPrincipal;
+		return PortableRemoteObject.narrow(obj, c);
 	}
 
 }

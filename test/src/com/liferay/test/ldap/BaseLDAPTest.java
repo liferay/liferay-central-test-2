@@ -20,25 +20,72 @@
  * SOFTWARE.
  */
 
-package com.liferay.counter.service;
+package com.liferay.test.ldap;
 
-import com.liferay.portal.service.BaseServiceTest;
+import com.liferay.test.TestCase;
+import com.liferay.test.TestProps;
+
+import java.util.Properties;
+
+import javax.naming.Context;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.InitialDirContext;
 
 /**
- * <a href="CounterServiceTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseLDAPTest.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Jerry Niu
  *
  */
-public class CounterServiceTest extends BaseServiceTest {
+public abstract class BaseLDAPTest extends TestCase {
 
-	public void test() {
+	protected Properties getLdapProperties() {
+		Properties env = new Properties();
+
 		try {
-			CounterServiceUtil.increment(this.getClass().getName());
+			env.put(
+				Context.INITIAL_CONTEXT_FACTORY,
+				TestProps.get("ldap.factory.initial"));
+			env.put(
+				Context.PROVIDER_URL,
+				TestProps.get("ldap.provider.url"));
+			env.put(
+				Context.SECURITY_PRINCIPAL,
+				TestProps.get("ldap.security.principal"));
+			env.put(
+				Context.SECURITY_CREDENTIALS,
+				TestProps.get("ldap.security.credentials"));
 		}
 		catch (Exception e) {
 			fail(e);
 		}
+
+		return env;
 	}
+
+	public void test() {
+		DirContext ctx = null;
+
+		try {
+			ctx = new InitialDirContext(getLdapProperties());
+
+			useContext(ctx);
+		}
+		catch (Exception e) {
+			fail(e);
+		}
+		finally {
+			try {
+				if (ctx != null) {
+					ctx.close();
+				}
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	protected abstract void useContext(DirContext ctx);
 
 }

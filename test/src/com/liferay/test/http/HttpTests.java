@@ -20,9 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.test;
+package com.liferay.test.http;
 
-import com.liferay.portal.service.http.PortalHttpTest;
+import com.liferay.test.ResultPrinter;
+import com.liferay.test.http.portal.PortalHttpTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

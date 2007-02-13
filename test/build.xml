@@ -84,7 +84,7 @@
 
 	<target name="test-http" depends="compile">
 		<java
-			classname="com.liferay.test.HttpTests"
+			classname="com.liferay.test.http.HttpTests"
 			classpathref="test-http.classpath"
 			fork="true"
 			newenvironment="true"
@@ -93,7 +93,7 @@
 
 	<target name="test-ldap" depends="compile">
 		<java
-			classname="com.liferay.test.LDAPTests"
+			classname="com.liferay.test.ldap.LDAPTests"
 			classpathref="test-ldap.classpath"
 			fork="true"
 			newenvironment="true"
@@ -102,7 +102,7 @@
 
 	<target name="test-service" depends="compile">
 		<java
-			classname="com.liferay.test.ServiceTests"
+			classname="com.liferay.test.service.ServiceTests"
 			classpathref="project.classpath"
 			fork="true"
 			newenvironment="true"
@@ -111,7 +111,7 @@
 
 	<target name="test-soap" depends="compile">
 		<java
-			classname="com.liferay.test.SoapTests"
+			classname="com.liferay.test.client.SoapTests"
 			classpathref="test-soap.classpath"
 			fork="true"
 			newenvironment="true"

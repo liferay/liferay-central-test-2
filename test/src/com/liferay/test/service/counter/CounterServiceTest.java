@@ -20,50 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.client.portal.service.http;
+package com.liferay.test.service.counter;
 
-import com.liferay.portal.kernel.util.Digester;
-import com.liferay.test.TestCase;
-import com.liferay.test.TestProps;
-
-import java.net.MalformedURLException;
-import java.net.URL;
+import com.liferay.counter.service.CounterServiceUtil;
+import com.liferay.test.service.BaseServiceTest;
 
 /**
- * <a href="BaseSoapTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterServiceTest.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
-public class BaseSoapTest extends TestCase {
+public class CounterServiceTest extends BaseServiceTest {
 
-	protected URL getURL(String serviceName) throws MalformedURLException {
-		return getURL(serviceName, true);
-	}
-
-	protected URL getURL(String serviceName, boolean authenticated)
-		throws MalformedURLException {
-
-		String url = TestProps.get("soap.url");
-
-		if (authenticated) {
-			String userId = TestProps.get("soap.user.id");
-			String password = Digester.digest(TestProps.get("soap.password"));
-
-			int pos = url.indexOf("://");
-
-			String protocol = url.substring(0, pos + 3);
-			String host = url.substring(pos + 3, url.length());
-
-			url =
-				protocol + userId + ":" + password + "@" + host +
-					"/tunnel-web/secure/axis/" + serviceName;
+	public void test() {
+		try {
+			CounterServiceUtil.increment(this.getClass().getName());
 		}
-		else {
-			url += "/tunnel-web/axis/" + serviceName;
+		catch (Exception e) {
+			fail(e);
 		}
-
-		return new URL(url);
 	}
 
 }

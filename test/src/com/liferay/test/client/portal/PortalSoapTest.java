@@ -20,10 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.client.portal.service.http;
+package com.liferay.test.client.portal;
 
 import com.liferay.client.portal.model.UserSoap;
+import com.liferay.client.portal.service.http.PortalServiceSoap;
+import com.liferay.client.portal.service.http.PortalServiceSoapServiceLocator;
+import com.liferay.client.portal.service.http.UserServiceSoap;
+import com.liferay.client.portal.service.http.UserServiceSoapServiceLocator;
 import com.liferay.test.TestConstants;
+import com.liferay.test.client.BaseSoapTest;
 
 import java.util.Calendar;
 import java.util.Locale;

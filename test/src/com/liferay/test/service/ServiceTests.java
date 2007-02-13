@@ -20,9 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.test;
+package com.liferay.test.service;
 
-import com.liferay.portal.security.auth.LDAPAttributesModificationsTest;
+import com.liferay.test.ResultPrinter;
+import com.liferay.test.service.counter.CounterServiceTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -30,12 +31,12 @@ import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
 /**
- * <a href="LDAPTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ServiceTests.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jerry Niu
+ * @author Michael Young
  *
  */
-public class LDAPTests {
+public class ServiceTests {
 
 	public static void main(String[] args) {
 		TestRunner runner = new TestRunner(new ResultPrinter(System.out));
@@ -46,7 +47,7 @@ public class LDAPTests {
 	public static Test suite() {
 		TestSuite suite = new TestSuite();
 
-		suite.addTestSuite(LDAPAttributesModificationsTest.class);
+		suite.addTestSuite(CounterServiceTest.class);
 
 		return suite;
 	}
