@@ -232,6 +232,26 @@ Liferay.Util = {
 	    }
 	},
 	
+	addInputType: function(el) {
+		var item;
+
+		if (el) {
+			item = document.getElementById(el);
+		}
+		else {
+			item = document.body;
+		}
+
+		_$J("input", item).each(function() {
+			var current = _$J(this);
+			var type = this.type || "text";
+			
+			if (!current.is("." + type)) {
+				current.addClass(type);
+			}
+		});
+	},
+	
 	check: function(form, name, checked) {
 		for (var i = 0; i < form.elements.length; i++) {
 			var e = form.elements[i];

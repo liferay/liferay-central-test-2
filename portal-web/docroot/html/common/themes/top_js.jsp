@@ -113,6 +113,9 @@
 		AjaxUtil.update(url, message);
 	}
 
+	_$J(document).ready(function(){Liferay.Util.addInputType();});
+	Liferay.Portlet.ready(Liferay.Util.addInputType);
+
 	<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 		function showPageSettings() {
 			var url = "<%= themeDisplay.getURLPageSettings().toString() %>";
