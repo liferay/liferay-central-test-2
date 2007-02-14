@@ -24,6 +24,7 @@ package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 
 import java.io.InputStream;
 
@@ -31,6 +32,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.Environment;
 
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 
@@ -74,6 +76,22 @@ public class HibernateConfiguration extends LocalSessionFactoryBean {
 		}
 
 		return cfg;
+	}
+
+	protected void postProcessConfiguration(Configuration cfg) {
+
+		// Make sure that settings in portal.properties are set. See
+		// the buildSessionFactory implementation in the
+		// LocalSessionFactoryBean class to understand how Spring automates a
+		// lot of configuration for Hibernate.
+
+		String connectionReleaseMode = PropsUtil.get(
+			Environment.RELEASE_CONNECTIONS);
+
+		if (Validator.isNotNull(connectionReleaseMode)) {
+			cfg.setProperty(
+				Environment.RELEASE_CONNECTIONS, connectionReleaseMode);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(HibernateConfiguration.class);

@@ -41,6 +41,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.SessionFactoryImplementor;
+import org.hibernate.impl.SessionImpl;
 
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 
@@ -150,7 +151,17 @@ public class HibernateUtil {
 
 		// Let Spring manage sessions
 
-		return sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
+
+		if (_log.isDebugEnabled()) {
+			SessionImpl sessionImpl = (SessionImpl)session;
+
+			_log.debug(
+				"Session is using connection release mode " +
+					sessionImpl.getConnectionReleaseMode());
+		}
+
+		return session;
 	}
 
 	public static String getCountColumnName() {
