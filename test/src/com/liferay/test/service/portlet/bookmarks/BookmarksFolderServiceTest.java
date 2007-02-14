@@ -20,38 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.test.service;
+package com.liferay.test.service.portlet.bookmarks;
 
-import com.liferay.test.ResultPrinter;
-import com.liferay.test.service.counter.CounterServiceTest;
-import com.liferay.test.service.portlet.bookmarks.BookmarksFolderServiceTest;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
-import junit.textui.TestRunner;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
+import com.liferay.test.service.BaseServiceTest;
 
 /**
- * <a href="ServiceTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="BookmarksFolderServiceTest.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Brian Wing Shun Chan
  *
  */
-public class ServiceTests {
+public class BookmarksFolderServiceTest extends BaseServiceTest {
 
-	public static void main(String[] args) {
-		TestRunner runner = new TestRunner(new ResultPrinter(System.out));
+	public void test() {
+		try {
+			String plid = "PRI.3.1";
+			String parentFolderId = "-1";
+			String name = "Test Folder";
+			String description = "This is a test folder.";
 
-		runner.doRun(suite());
-	}
+			String[] communityPermissions = new String[0];
+			String[] guestPermissions = new String[0];
 
-	public static Test suite() {
-		TestSuite suite = new TestSuite();
-
-		suite.addTestSuite(CounterServiceTest.class);
-		suite.addTestSuite(BookmarksFolderServiceTest.class);
-
-		return suite;
+			BookmarksFolderServiceUtil.addFolder(
+				plid, parentFolderId, name, description, communityPermissions,
+				guestPermissions);
+		}
+		catch (Exception e) {
+			fail(e);
+		}
 	}
 
 }

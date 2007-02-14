@@ -106,7 +106,9 @@
 			classpathref="project.classpath"
 			fork="true"
 			newenvironment="true"
-		/>
+		>
+			<!--<jvmarg value="-Dorg.xml.sax.driver=org.apache.xerces.parsers.SAXParser" />-->
+		</java>
 	</target>
 
 	<target name="test-soap" depends="compile">
