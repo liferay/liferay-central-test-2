@@ -63,7 +63,8 @@ public class PluginIndexer implements Indexer {
 			String moduleId, String name, String version,
 			String author, String type, List tags, List licenses,
 			List liferayVersions, String shortDescription,
-			String longDescription, String pageURL,	String repositoryURL)
+			String longDescription, String pageURL,	String repositoryURL,
+			String status)
 		throws IOException {
 
 		synchronized (IndexWriter.class) {
@@ -136,6 +137,8 @@ public class PluginIndexer implements Indexer {
 				LuceneFields.getKeyword(
 					"osi-approved-license", String.valueOf(osiLicense)));
 
+			doc.add(LuceneFields.getKeyword("status", status));
+
 			writer.addDocument(doc);
 
 			LuceneUtil.write(writer);
@@ -163,7 +166,8 @@ public class PluginIndexer implements Indexer {
 			String moduleId, String name, String version,
 			String author, String type, List tags, List licenses,
 			List liferayVersions, String shortDescription,
-			String longDescription, String pageURL,	String repositoryURL)
+			String longDescription, String pageURL,	String repositoryURL,
+			String status)
 		throws IOException {
 
 		try {
@@ -175,7 +179,7 @@ public class PluginIndexer implements Indexer {
 		addPlugin(
 			moduleId, name, version, author, type, tags, licenses,
 			liferayVersions, shortDescription, longDescription, pageURL,
-			repositoryURL);
+			repositoryURL, status);
 	}
 
 	public DocumentSummary getDocumentSummary(

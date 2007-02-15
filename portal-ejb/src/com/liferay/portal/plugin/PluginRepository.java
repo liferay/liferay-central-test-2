@@ -23,10 +23,9 @@
 package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.plugin.Plugin;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -45,6 +44,8 @@ public class PluginRepository {
 	public void addPlugin(Plugin plugin) {
 		_artifactURLIndex.put(plugin.getArtifactURL(), plugin);
 		_moduleIdIndex.put(plugin.getModuleId(), plugin);
+		_addToGroupAndArtifactIndex(
+			plugin.getGroupId(), plugin.getArtifactId(), plugin);
 
 		_plugins.add(plugin);
 		_tags.addAll(plugin.getTags());
@@ -66,24 +67,48 @@ public class PluginRepository {
 		return _tags;
 	}
 
-	public Collection search(String type, String tag) {
-		List result = new ArrayList();
-
-		Iterator itr = _plugins.iterator();
-
-		while (itr.hasNext()) {
-			Plugin plugin = (Plugin)itr.next();
-
-			if ((Validator.isNull(type) || type.equals(plugin.getType())) &&
-				(Validator.isNull(tag) || plugin.getTags().contains(tag))){
-
-				result.add(plugin);
-			}
-		}
-
-		return result;
+	public List findPluginsByGroupIdAndArtifactId(
+		String groupId, String artifactId) {
+		return (List) _groupAndArtifactIndex.get(
+			groupId+ StringPool.SLASH + artifactId);
 	}
 
+	public void removePlugin(Plugin plugin) {
+		_artifactURLIndex.remove(plugin.getArtifactURL());
+		_moduleIdIndex.remove(plugin.getModuleId());
+		_removeFromGroupAndArtifactIndex(
+			plugin.getGroupId(), plugin.getArtifactId(), plugin.getModuleId());
+
+		_plugins.remove(plugin);
+	}
+
+	private void _addToGroupAndArtifactIndex(
+		String groupId, String artifactId, Plugin plugin) {
+		List plugins = findPluginsByGroupIdAndArtifactId(groupId, artifactId);
+		if (plugins == null) {
+			plugins = new ArrayList();
+			_groupAndArtifactIndex.put(
+				groupId+ StringPool.SLASH + artifactId, plugins);
+		}
+		plugins.add(plugin);
+	}
+
+	private void _removeFromGroupAndArtifactIndex(
+		String groupId, String artifactId, String moduleId) {
+		List plugins = findPluginsByGroupIdAndArtifactId(groupId, artifactId);
+		if (plugins != null) {
+			Iterator iterator = plugins.iterator();
+			while (iterator.hasNext()) {
+				Plugin plugin =  (Plugin) iterator.next();
+				if (plugin.getModuleId().equals(moduleId)) {
+					iterator.remove();
+					break;
+				}
+			}
+		}
+	}
+
+	private Map _groupAndArtifactIndex = new HashMap();
 	private Map _artifactURLIndex = new HashMap();
 	private Map _moduleIdIndex = new HashMap();
 	private List _plugins = new ArrayList();

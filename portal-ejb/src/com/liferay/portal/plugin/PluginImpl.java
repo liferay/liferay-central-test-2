@@ -63,6 +63,14 @@ public class PluginImpl implements Comparable, Plugin {
 		return _moduleId.isLaterVersionThan(plugin.getVersion());
 	}
 
+	public boolean isPreviousVersionThan(Plugin plugin) {
+		return _moduleId.isPreviousVersionThan(plugin.getVersion());
+	}
+
+	public boolean isSameVersionThan(Plugin plugin) {
+		return _moduleId.isSameVersionThan(plugin.getVersion());
+	}
+
 	public String getAuthor() {
 		return _author;
 	}
@@ -153,6 +161,14 @@ public class PluginImpl implements Comparable, Plugin {
 
 	public String getArtifactURL() {
 		return getRepositoryURL() + _moduleId.getArtifactPath();
+	}
+
+	public String getArtifactId() {
+		return _moduleId.getArtifactId();
+	}
+
+	public String getGroupId() {
+		return _moduleId.getGroupId();
 	}
 
 	public String getWARName() {

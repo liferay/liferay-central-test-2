@@ -183,7 +183,7 @@ portletURL.setParameter("tabs1", tabs1);
 							<option value=""></option>
 							<option value="portlet"><%= LanguageUtil.get(pageContext, "portlet") %></option>
 							<option value="theme"><%= LanguageUtil.get(pageContext, "theme") %></option>
-							<option value="layout"><%= LanguageUtil.get(pageContext, "layout") %></option>
+							<option value="layout-template"><%= LanguageUtil.get(pageContext, "layout-template") %></option>
 							<option value="extension"><%= LanguageUtil.get(pageContext, "extension") %></option>
 						</select>
 

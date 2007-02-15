@@ -75,6 +75,14 @@ public class ModuleId {
 		return _pluginVersion.isLaterVersionThan(version);
 	}
 
+	public boolean isPreviousVersionThan(String version) {
+		return _pluginVersion.isPreviousVersionThan(version);
+	}
+
+	public boolean isSameVersionThan(String version) {
+		return _pluginVersion.isSameVersionThan(version);
+	}
+
 	public boolean equals(Object obj) {
 		if (!(obj instanceof ModuleId)) {
 			return false;

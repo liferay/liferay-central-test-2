@@ -677,6 +677,26 @@
 		</finder>
 	</entity>
 	<entity name="Portal" local-service="false" remote-service="true" />
+	<entity name="PluginSetting" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="pluginSettingId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="companyId" type="String" />
+		<column name="pluginId" type="String" />
+		<column name="pluginType" type="String" />
+		<column name="roles" type="String" />
+		<column name="active" type="boolean" />
+
+		<!-- Finder methods -->
+
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+	</entity>
 	<entity name="Portlet" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

@@ -32,6 +32,7 @@ import com.liferay.portal.model.ThemeCompanyLimit;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
+import com.liferay.portal.plugin.PluginUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -503,6 +504,12 @@ public class ThemeLocalUtil {
 						null, ctx, null, customEl, false, themeId);
 				}
 			}
+		}
+
+		Element moduleIdEl = root.element("module-id");
+
+		if (moduleIdEl != null) {
+			PluginUtil.registerPlugin(moduleIdEl.getText());
 		}
 
 		return themeIds;

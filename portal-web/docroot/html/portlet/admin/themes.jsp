@@ -21,84 +21,66 @@
  * SOFTWARE.
  */
 %>
+
 <%
-type = "portlet";
+type = "theme";
 
 installPluginsURL.setParameter("tabs2", type);
 %>
 
-<c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId()) && PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
-	<input class="portlet-form-button" type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-portlets")%>'/>
+<c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId())  && PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)%>">
+	<input class="portlet-form-button" type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-themes")%>'/>
 	<br><br>
 </c:if>
-
-
 <%
 List headerNames = new ArrayList();
 
-headerNames.add("portlet");
+headerNames.add(type);
 headerNames.add("active");
-//headerNames.add("indexed");
 headerNames.add("roles");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
+List themes = themes = ThemeLocalUtil.getThemes(company.getCompanyId());
 
-Collections.sort(portlets, new PortletTitleComparator(application, locale));
-
-int total = portlets.size();
+int total = themes.size();
 
 searchContainer.setTotal(total);
 
-List results = ListUtil.subList(portlets, searchContainer.getStart(), searchContainer.getEnd());
+List results = ListUtil.subList(themes, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
-	Portlet portlet = (Portlet)results.get(i);
+	Theme theme2 = (Theme) results.get(i);
 
-	ResultRow row = new ResultRow(portlet, portlet.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(theme2, theme2.getThemeId().toString(), i);
 
-	PortletURL rowURL = renderResponse.createRenderURL();
-
-	rowURL.setWindowState(WindowState.MAXIMIZED);
-
-	rowURL.setParameter("struts_action", "/admin/edit_portlet");
-	rowURL.setParameter("redirect", currentURL);
-	rowURL.setParameter("portletId", portlet.getPortletId());
-
-	// Name and description
+	// Name and Thumbnail
 
 	StringBuffer sb = new StringBuffer();
 
-	String title = PortalUtil.getPortletTitle(portlet, application, locale);
-	String displayName = portlet.getDisplayName();
-
-	sb.append(title);
-
-	if (Validator.isNotNull(displayName) && !title.equals(displayName)) {
-		sb.append("<br>");
-		sb.append("<span style=\"font-size: xx-small;\">");
-		sb.append(portlet.getDisplayName());
-		sb.append("</span>");
-	}
-
-	row.addText(sb.toString(), rowURL);
+	sb.append("<img src='");
+	sb.append(theme2.getContextPath());
+	sb.append(theme2.getImagesPath());
+	sb.append("/thumbnail.png");
+	sb.append("' width='100' align='left' style='margin-right: 10px'/>");
+	sb.append("<b>");
+	sb.append(theme2.getName());
+	sb.append("</b>");
+	row.addText(sb.toString());
 
 	// Active
 
-	row.addText(LanguageUtil.get(pageContext, (portlet.isActive() ? "yes" : "no")), rowURL);
-
-	// Indexed
-
-	//row.addText(LanguageUtil.get(pageContext, (Validator.isNotNull(portlet.getIndexerClass()) ? "yes" : "no")), rowURL);
+	boolean isActive = true;
+	row.addText(LanguageUtil.get(pageContext, (isActive ? "yes" : "no")));
 
 	// Roles
 
-	row.addText(StringUtil.merge(portlet.getRolesArray(), ", "), rowURL);
+	String roles = "";
+	row.addText(roles);
 
 	// Add result row
 

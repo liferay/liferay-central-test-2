@@ -229,6 +229,8 @@
 
 		<action path="/admin/view" forward="portlet.admin.view" />
 
+		<action path="/admin/plugin_installer" forward="portlet.admin.plugin_installer" />
+
 		<!-- Alfresco Content -->
 
 		<action path="/alfresco_content/edit_configuration" type="com.liferay.portlet.alfrescocontent.action.EditConfigurationAction">

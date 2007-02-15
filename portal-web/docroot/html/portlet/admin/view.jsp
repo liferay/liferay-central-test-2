@@ -45,19 +45,7 @@ portletURL.setParameter("tabs3", tabs3);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_enterprise" /></portlet:actionURL>");
 	}
 
-	function <portlet:namespace />saveServer(cmd, progressId, redirect) {
-		if (cmd == "hotDeploy") {
-			document.<portlet:namespace />fm.encoding = "multipart/form-data";
-		}
-
-		if (progressId) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.PROGRESS_ID %>.value = progressId;
-		}
-
-		if (redirect) {
-			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-		}
-
+	function <portlet:namespace />saveServer(cmd) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_server" /></portlet:actionURL>");
 	}
@@ -65,17 +53,6 @@ portletURL.setParameter("tabs3", tabs3);
 	function <portlet:namespace />saveUsers(cmd) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_users" /></portlet:actionURL>");
-	}
-
-	function <portlet:namespace />searchPlugins(redirect) {
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-		submitForm(document.<portlet:namespace />fm, "<%= portletURL.toString() %>");
-	}
-
-	function <portlet:namespace />reloadRepositories(redirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_server" /></portlet:actionURL>")
 	}
 
 	function <portlet:namespace />updateDefaultLdap() {
@@ -132,11 +109,7 @@ portletURL.setParameter("tabs3", tabs3);
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /></portlet:renderURL>">
 
 <%
-String tabsNames = "server,install-plugins,enterprise,portlets,users";
-
-if (!OmniadminUtil.isOmniadmin(user.getUserId())) {
-	tabsNames = StringUtil.replace(tabsNames, "install-plugins,", "");
-}
+String tabsNames = "server,monitoring,plugins,settings";
 %>
 
 <liferay-ui:tabs
@@ -145,17 +118,14 @@ if (!OmniadminUtil.isOmniadmin(user.getUserId())) {
 />
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("install-plugins") && OmniadminUtil.isOmniadmin(user.getUserId()) %>'>
-		<%@ include file="/html/portlet/admin/install_plugins.jsp" %>
+	<c:when test='<%= tabs1.equals("plugins")%>'>
+		<%@ include file="/html/portlet/admin/plugins.jsp" %>
 	</c:when>
-	<c:when test='<%= tabs1.equals("enterprise") %>'>
-		<%@ include file="/html/portlet/admin/enterprise.jsp" %>
+	<c:when test='<%= tabs1.equals("settings") %>'>
+		<%@ include file="/html/portlet/admin/settings.jsp" %>
 	</c:when>
-	<c:when test='<%= tabs1.equals("portlets") %>'>
-		<%@ include file="/html/portlet/admin/portlets.jsp" %>
-	</c:when>
-	<c:when test='<%= tabs1.equals("users") %>'>
-		<%@ include file="/html/portlet/admin/users.jsp" %>
+	<c:when test='<%= tabs1.equals("monitoring") %>'>
+		<%@ include file="/html/portlet/admin/monitoring.jsp" %>
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/admin/server.jsp" %>

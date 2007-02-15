@@ -2,6 +2,7 @@
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 4.3.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_4_3_0.dtd">
 
 <liferay-portlet-app>
+	<module-id>custom-portal/custom-portlets/4.3.0/war</module-id>
 
 	<!-- Custom Portlets -->
 

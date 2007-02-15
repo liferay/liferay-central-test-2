@@ -117,6 +117,10 @@
 		<put name="portlet_content" value="/portlet/admin/view.jsp" />
 	</definition>
 
+	<definition name="portlet.admin.plugin_installer" extends="portlet.admin">
+		<put name="portlet_content" value="/portlet/admin/plugin_installer.jsp" />
+	</definition>
+
 	<!-- Alfresco Content -->
 
 	<definition name="portlet.alfresco_content" extends="portlet" />

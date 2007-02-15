@@ -28,6 +28,7 @@ import EDU.oswego.cs.dl.util.concurrent.WriterPreferenceReadWriteLock;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.impl.LayoutTemplateImpl;
+import com.liferay.portal.plugin.PluginUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.layoutconfiguration.util.velocity.InitColumnProcessor;
 import com.liferay.util.CollectionFactory;
@@ -330,6 +331,12 @@ public class LayoutTemplateLocalUtil {
 			readLayoutTemplate(
 				servletContextName, ctx, layoutTemplateIds, customEl, false,
 				null);
+		}
+
+		Element moduleIdEl = root.element("module-id");
+
+		if (moduleIdEl != null) {
+			PluginUtil.registerPlugin(moduleIdEl.getText());
 		}
 
 		return layoutTemplateIds;

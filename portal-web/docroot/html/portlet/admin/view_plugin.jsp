@@ -23,8 +23,6 @@
 %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 Plugin plugin = PluginUtil.getPluginById(moduleId, repositoryURL);
 
 PortletURL installURL = renderResponse.createActionURL();
@@ -36,23 +34,11 @@ installURL.setParameter("redirect", currentURL.toString());
 
 // Breadcrumbs
 
-PortletURL breadcrumbsURL = renderResponse.createRenderURL();
+breadcrumbs.append(" &raquo; <a href=\"" + portletURL.toString() + "\">" + plugin.getName() + "</a>");
 
-breadcrumbsURL.setWindowState(WindowState.MAXIMIZED);
-
-breadcrumbsURL.setParameter("struts_action", "/admin/view");
-breadcrumbsURL.setParameter("tabs1", tabs1);
-breadcrumbsURL.setParameter("tabs2", tabs2);
-
-String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + LanguageUtil.get(pageContext, "repositories") + "</a> &raquo; ";
-
-breadcrumbsURL.setParameter("moduleId", moduleId);
-breadcrumbsURL.setParameter("repositoryURL", repositoryURL);
-
-breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName() + "</a>";
 %>
 
-<%= breadcrumbs %>
+<%= breadcrumbs.toString() %>
 
 <br><br>
 
@@ -246,7 +232,7 @@ List screenshotURLs = plugin.getScreenshotURLs();
 
 <input type="hidden" name="<portlet:namespace/>url" value="<%= plugin.getArtifactURL() %>">
 
-<input class="portlet-form-button" type="button" value='<%=LanguageUtil.get(pageContext, "install")%>' onClick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />saveServer('remoteDeploy', '<%= downloadProgressId %>', '<%= currentURL %>');">
+<input class="portlet-form-button" type="button" value='<%=LanguageUtil.get(pageContext, "install")%>' onClick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />installPlugin('remoteDeploy', '<%= downloadProgressId %>', '<%= currentURL %>');">
 
 <liferay-ui:upload-progress
 	id="<%= downloadProgressId %>"

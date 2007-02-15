@@ -120,8 +120,18 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//Liferay//DTD Layout Templates 4.3.0//EN",
+			"liferay-layout-templates_4_3_0.dtd"
+		),
+
+		new KeyValuePair(
 			"-//Liferay//DTD Look and Feel 4.0.0//EN",
 			"liferay-look-and-feel_4_0_0.dtd"
+		),
+
+		new KeyValuePair(
+			"-//Liferay//DTD Look and Feel 4.3.0//EN",
+			"liferay-look-and-feel_4_3_0.dtd"
 		),
 
 		new KeyValuePair(

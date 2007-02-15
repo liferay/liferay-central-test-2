@@ -1,0 +1,32 @@
+<!--
+This is the DTD for the Layout Templates parameters for Liferay Portal.
+
+<!DOCTYPE layout-templates PUBLIC
+	"-//Liferay//DTD Layout Templates 4.0.0//EN"
+	"http://www.liferay.com/dtd/liferay-layout-templates_4_0_0.dtd">
+-->
+
+<!ELEMENT layout-templates (module-id, standard?, custom?)>
+
+<!--
+The module-id element contains the full identifier of the plugin using the
+Maven based syntax: groupId/artifactId/version/file-type.
+
+Example: my-company/sample-layout-template/1.0.0/war
+-->
+<!ELEMENT module-id (#PCDATA)>
+
+<!ELEMENT standard (layout-template*)>
+
+<!ELEMENT layout-template (template-path, thumbnail-path?)>
+
+<!ATTLIST layout-template
+	id CDATA #REQUIRED
+	name CDATA #IMPLIED
+>
+
+<!ELEMENT template-path (#PCDATA)>
+
+<!ELEMENT thumbnail-path (#PCDATA)>
+
+<!ELEMENT custom (layout-template*)>

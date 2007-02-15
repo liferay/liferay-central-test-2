@@ -118,6 +118,17 @@ public class LuceneUtil {
 		}
 	}
 
+	public static void addExactTerm(
+			BooleanQuery booleanQuery, String field, String text)
+		throws ParseException {
+
+		text = KeywordsUtil.escape(text);
+
+		Query query = new TermQuery(new Term(field, text));
+
+		booleanQuery.add(query, BooleanClause.Occur.SHOULD);
+	}
+
 	public static void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, long number) {
 

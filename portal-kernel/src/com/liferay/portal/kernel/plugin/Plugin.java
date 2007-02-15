@@ -84,10 +84,18 @@ public interface Plugin {
 
 	public String getArtifactURL();
 
+	public String getArtifactId();
+
+	public String getGroupId();
+
 	public String getWARName();
 
 	public String getVersion();
 
-	public boolean isLaterVersionThan(Plugin previous);
+	public boolean isLaterVersionThan(Plugin plugin);
+
+	public boolean isPreviousVersionThan(Plugin plugin);
+
+	public boolean isSameVersionThan(Plugin plugin);
 
 }

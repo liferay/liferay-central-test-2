@@ -94,6 +94,24 @@ public class Version implements Comparable {
 		}
 	}
 
+	public boolean isPreviousVersionThan(String version) {
+		if (compareTo(new Version(version)) < 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isSameVersionThan(String version) {
+		if (compareTo(new Version(version)) == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean includes(Version version) {
 		if (equals(version)) {
 			return true;
@@ -152,25 +170,25 @@ public class Version implements Comparable {
 
 		Version version = (Version)obj;
 
-		int result = _major.compareTo(version.getMajor());
+		int result = _compareVersionFragments(_major, version.getMajor());
 
 		if (result != 0) {
 			return result;
 		}
 
-		result = _minor.compareTo(version.getMinor());
+		result = _compareVersionFragments(_minor, version.getMinor());
 
 		if (result != 0) {
 			return result;
 		}
 
-		result = _bugFix.compareTo(version.getBugFix());
+		result = _compareVersionFragments(_bugFix, version.getBugFix());
 
 		if (result != 0) {
 			return result;
 		}
 
-		return _buildNumber.compareTo(version.getBuildNumber());
+		return _compareVersionFragments(_buildNumber, version.getBuildNumber());
 	}
 
 	public boolean equals(Object obj) {
@@ -185,6 +203,18 @@ public class Version implements Comparable {
 
 	public int hashCode() {
 		return toString().hashCode();
+	}
+
+	private int _compareVersionFragments(
+		String versionFragmentA, String versionFragmentB) {
+		if (Validator.isNull(versionFragmentA)) {
+			versionFragmentA = "0";
+		}
+		if (Validator.isNull(versionFragmentB)) {
+			versionFragmentB = "0";
+		}
+		return versionFragmentA.compareTo(versionFragmentB);
+
 	}
 
 	private static final String _SEPARATOR = StringPool.PERIOD;

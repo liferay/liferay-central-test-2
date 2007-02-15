@@ -56,8 +56,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.apache.commons.httpclient.HostConfiguration;
@@ -84,8 +82,39 @@ import org.dom4j.io.SAXReader;
  */
 public class PluginUtil {
 
+	public static List getAllPlugins()
+		throws PluginException {
+
+		List plugins = new ArrayList();
+
+		String[] repositoryURLs = getRepositoryURLs();
+
+		for (int i = 0; i < repositoryURLs.length; i++) {
+			try {
+				PluginRepository repository = getRepository(repositoryURLs[i]);
+
+				Collection repoPlugins = repository.getPlugins();
+				plugins.addAll(repoPlugins);
+			}
+			catch(PluginException pe) {
+				_log.error(
+					"Unable to load repository " + repositoryURLs[i], pe);
+			}
+		}
+
+		return plugins;
+	}
+
 	public static Collection getAvailableTags() {
 		return _availableTagsCache;
+	}
+
+	public static Plugin getInstalledVersion(
+		String groupId, String artifactId) {
+		List pluginList = _installedPlugins.findPluginsByGroupIdAndArtifactId(
+			groupId, artifactId);
+
+		return (pluginList == null)?null:(Plugin) pluginList.get(0);
 	}
 
 	public static Date getLastUpdateDate() {
@@ -143,26 +172,19 @@ public class PluginUtil {
 		return PropsUtil.getArray(PropsUtil.PLUGIN_TYPES);
 	}
 
+	public static void registerPlugin(String moduleId) {
+		Plugin plugin = new PluginImpl(moduleId);
+		_installedPlugins.addPlugin(plugin);
+	}
+
 	public static void reIndex(String[] ids) throws SystemException {
 		try {
-			Iterator itr = search(null, null, null).iterator();
+			Iterator itr = getAllPlugins().iterator();
 
 			while (itr.hasNext()) {
 				Plugin plugin = (Plugin)itr.next();
 
-				try {
-					PluginIndexer.updatePlugin(
-						plugin.getModuleId(), plugin.getName(),
-						plugin.getVersion(), plugin.getAuthor(),
-						plugin.getType(), plugin.getTags(),
-						plugin.getLicenses(), plugin.getLiferayVersions(),
-						plugin.getShortDescription(),
-						plugin.getLongDescription(), plugin.getPageURL(),
-						plugin.getRepositoryURL());
-				}
-				catch (Exception e1) {
-					_log.error("Reindexing " + plugin.getModuleId(), e1);
-				}
+				indexPlugin(plugin);
 			}
 		}
 		catch (SystemException se) {
@@ -201,56 +223,9 @@ public class PluginUtil {
 		return report;
 	}
 
-	public static List search(String type, String tags, String repositoryURL)
-		throws PluginException {
-
-		SortedMap plugins = new TreeMap();
-
-		String[] repositoryURLs = null;
-
-		if (Validator.isNull(repositoryURL)) {
-			repositoryURLs = getRepositoryURLs();
-		}
-		else {
-			repositoryURLs = new String[] {repositoryURL};
-		}
-
-		for (int i = 0; i < repositoryURLs.length; i++) {
-			try {
-				PluginRepository repository = getRepository(repositoryURLs[i]);
-
-				Collection repoPlugins = repository.search(type, tags);
-
-				Iterator itr = repoPlugins.iterator();
-
-				while (itr.hasNext()) {
-					Plugin plugin = (Plugin)itr.next();
-
-					// If the plugin was in another repository keep the
-					// latest version
-
-					Plugin previous = (Plugin)plugins.get(plugin);
-
-					if ((previous != null) &&
-						plugin.isLaterVersionThan(previous)) {
-
-						plugins.remove(previous);
-					}
-
-					plugins.put(plugin, plugin);
-				}
-			}
-			catch(PluginException pe) {
-				_log.error("Unable to load repository " + repositoryURL, pe);
-			}
-		}
-
-		return new ArrayList(plugins.keySet());
-	}
-
 	public static Hits search(
 			String keywords, String type, String tag, String license,
-			String repositoryURL)
+			String repositoryURL, String status)
 		throws SystemException {
 
 		_checkRepositories(repositoryURL);
@@ -284,7 +259,7 @@ public class PluginUtil {
 			if (Validator.isNotNull(type)) {
 				BooleanQuery searchQuery = new BooleanQuery();
 
-				LuceneUtil.addTerm(searchQuery, "type", type);
+				LuceneUtil.addExactTerm(searchQuery, "type", type);
 
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
@@ -292,7 +267,7 @@ public class PluginUtil {
 			if (Validator.isNotNull(tag)) {
 				BooleanQuery searchQuery = new BooleanQuery();
 
-				LuceneUtil.addTerm(searchQuery, "tag", tag);
+				LuceneUtil.addExactTerm(searchQuery, "tag", tag);
 
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
@@ -300,7 +275,8 @@ public class PluginUtil {
 			if (Validator.isNotNull(repositoryURL)) {
 				BooleanQuery searchQuery = new BooleanQuery();
 
-				LuceneUtil.addTerm(searchQuery, "repositoryURL", repositoryURL);
+				LuceneUtil.addExactTerm(
+					searchQuery, "repositoryURL", repositoryURL);
 
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
@@ -308,7 +284,23 @@ public class PluginUtil {
 			if (Validator.isNotNull(license)) {
 				BooleanQuery searchQuery = new BooleanQuery();
 
-				LuceneUtil.addTerm(searchQuery, "license", license);
+				LuceneUtil.addExactTerm(searchQuery, "license", license);
+
+				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+			}
+
+			if (Validator.isNotNull(status) && !status.equals("all")) {
+				BooleanQuery searchQuery = new BooleanQuery();
+
+				if (status.equals("notInstalledOrNewVersion")) {
+					LuceneUtil.addExactTerm(
+						searchQuery, "status", "notInstalled");
+					LuceneUtil.addExactTerm(
+						searchQuery, "status", "newVersion");
+				}
+				else {
+					LuceneUtil.addExactTerm(searchQuery, "status", status);
+				}
 
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
@@ -327,6 +319,11 @@ public class PluginUtil {
 
 			return new HitsImpl();
 		}
+	}
+
+	public static void unregisterPlugin(String moduleId) {
+		Plugin plugin = new PluginImpl(moduleId);
+		_installedPlugins.removePlugin(plugin);
 	}
 
 	private static PluginRepository _loadRepository(String repositoryURL)
@@ -464,20 +461,37 @@ public class PluginUtil {
 
 			plugins.addPlugin(plugin);
 
-			try {
-				PluginIndexer.updatePlugin(
-					plugin.getModuleId(), plugin.getName(), plugin.getVersion(),
-					plugin.getAuthor(), plugin.getType(), plugin.getTags(),
-					plugin.getLicenses(), plugin.getLiferayVersions(),
-					plugin.getShortDescription(), plugin.getLongDescription(),
-					plugin.getPageURL(), plugin.getRepositoryURL());
-			}
-			catch (Exception e) {
-				_log.error("Reindexing " + plugin.getModuleId(), e);
-			}
+			indexPlugin(plugin);
 		}
 
 		return plugins;
+	}
+
+	private static void indexPlugin(Plugin plugin) {
+		String status;
+		Plugin installedPlugin = getInstalledVersion(
+			plugin.getGroupId(), plugin.getArtifactId());
+		if (installedPlugin == null) {
+			status = "notInstalled";
+		} else if (installedPlugin.isLaterVersionThan(plugin)) {
+			status = "laterVersionInstalled";
+		} else if (installedPlugin.isPreviousVersionThan(plugin)) {
+			status = "newVersion";
+		} else {
+			status = "alreadyInstalled";
+		}
+
+		try {
+			PluginIndexer.updatePlugin(
+				plugin.getModuleId(), plugin.getName(), plugin.getVersion(),
+				plugin.getAuthor(), plugin.getType(), plugin.getTags(),
+				plugin.getLicenses(), plugin.getLiferayVersions(),
+				plugin.getShortDescription(), plugin.getLongDescription(),
+				plugin.getPageURL(), plugin.getRepositoryURL(), status);
+		}
+		catch (Exception e) {
+			_log.error("Error reindexing " + plugin.getModuleId(), e);
+		}
 	}
 
 	private static boolean _isCurrentVersionSupported(List versions) {
@@ -570,6 +584,7 @@ public class PluginUtil {
 
 	private static Log _log = LogFactory.getLog(PluginUtil.class);
 
+	private static PluginRepository _installedPlugins = new PluginRepository();
 	private static Map _repositoryCache = new HashMap();
 	private static Set _availableTagsCache = new TreeSet();
 	private static Date _lastUpdateDate = null;

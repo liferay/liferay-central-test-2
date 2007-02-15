@@ -30,6 +30,7 @@ import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.UserImpl;
+import com.liferay.portal.plugin.PluginUtil;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.service.persistence.PortletUtil;
@@ -1067,6 +1068,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.getCustomUserAttributes().putAll(
 					customUserAttributes);
 			}
+		}
+
+		Element moduleIdEl = root.element("module-id");
+
+		if (moduleIdEl != null) {
+			PluginUtil.registerPlugin(moduleIdEl.getText());
+			//portletModel.setModuleId(moduleIdEl.getText());
 		}
 
 		return liferayPortletIds;

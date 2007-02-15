@@ -23,7 +23,7 @@
 %>
 
 <liferay-ui:tabs
-	names="live-sessions,authentication,default-associations,reserved-users,mail-host-names,emails"
+	names="general,authentication,default-user-associations,reserved-user-ids,mail-host-names,email-notifications"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
@@ -219,7 +219,7 @@
 			</c:otherwise>
 		</c:choose>
 	</c:when>
-	<c:when test='<%= tabs2.equals("default-associations") %>'>
+	<c:when test='<%= tabs2.equals("default-user-associations") %>'>
 		<%= LanguageUtil.get(pageContext, "enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users") %>
 
 		<br><br>
@@ -246,7 +246,7 @@
 
 		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateDefaultGroupsAndRoles');">
 	</c:when>
-	<c:when test='<%= tabs2.equals("reserved-users") %>'>
+	<c:when test='<%= tabs2.equals("reserved-user-ids") %>'>
 		<%= LanguageUtil.get(pageContext, "enter-one-user-id-per-line-to-reserve-the-user-id") %>
 
 		<br><br>
@@ -276,7 +276,7 @@
 
 		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateMailHostNames');">
 	</c:when>
-	<c:when test='<%= tabs2.equals("emails") %>'>
+	<c:when test='<%= tabs2.equals("email-notifications") %>'>
 		<script type="text/javascript">
 
 			<%
@@ -292,11 +292,11 @@
 			String editorParam = "";
 			String editorContent = "";
 
-			if (tabs3.equals("user-added-email")) {
+			if (tabs3.equals("account-created-notification")) {
 				editorParam = "emailUserAddedBody";
 				editorContent = emailUserAddedBody;
 			}
-			else if (tabs3.equals("password-sent-email")) {
+			else if (tabs3.equals("password-changed-notification")) {
 				editorParam = "emailPasswordSentBody";
 				editorContent = emailPasswordSentBody;
 			}
@@ -309,7 +309,7 @@
 			function <portlet:namespace />saveEmails() {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "updateEmails";
 
-				<c:if test='<%= tabs3.endsWith("-email") %>'>
+				<c:if test='<%= tabs3.endsWith("-notification") %>'>
 					document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = parent.<portlet:namespace />editor.getHTML();
 				</c:if>
 
@@ -318,7 +318,7 @@
 		</script>
 
 		<liferay-ui:tabs
-			names="email-from,user-added-email,password-sent-email"
+			names="general,account-created-notification,password-changed-notification"
 			param="tabs3"
 			url="<%= portletURL.toString() %>"
 		/>
@@ -331,7 +331,7 @@
 		<liferay-ui:error key="emailUserAddedSubject" message="please-enter-a-valid-subject" />
 
 		<c:choose>
-			<c:when test='<%= tabs3.endsWith("-email") %>'>
+			<c:when test='<%= tabs3.endsWith("-notification") %>'>
 				<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
@@ -340,10 +340,10 @@
 					<td style="padding-left: 10px;"></td>
 					<td>
 						<c:choose>
-							<c:when test='<%= tabs3.equals("user-added-email") %>'>
+							<c:when test='<%= tabs3.equals("account-created-notification") %>'>
 								<liferay-ui:input-checkbox param="emailUserAddedEnabled" defaultValue="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_USER_ADDED_ENABLED) %>" />
 							</c:when>
-							<c:when test='<%= tabs3.equals("password-sent-email") %>'>
+							<c:when test='<%= tabs3.equals("password-changed-notification") %>'>
 								<liferay-ui:input-checkbox param="emailPasswordSentEnabled" defaultValue="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_ENABLED) %>" />
 							</c:when>
 						</c:choose>
@@ -361,10 +361,10 @@
 					<td style="padding-left: 10px;"></td>
 					<td>
 						<c:choose>
-							<c:when test='<%= tabs3.equals("user-added-email") %>'>
+							<c:when test='<%= tabs3.equals("account-created-notification") %>'>
 								<input class="form-text" name="<portlet:namespace />emailUserAddedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailUserAddedSubject %>">
 							</c:when>
-							<c:when test='<%= tabs3.equals("password-sent-email") %>'>
+							<c:when test='<%= tabs3.equals("password-changed-notification") %>'>
 								<input class="form-text" name="<portlet:namespace />emailPasswordSentSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailPasswordSentSubject %>">
 							</c:when>
 						</c:choose>
@@ -423,7 +423,7 @@
 					</td>
 				</tr>
 
-				<c:if test='<%= tabs3.equals("password-sent-email") %>'>
+				<c:if test='<%= tabs3.equals("password-changed-notification") %>'>
 					<tr>
 						<td>
 							<b>[$REMOTE_ADDRESS$]</b>
@@ -463,7 +463,7 @@
 					</td>
 				</tr>
 
-				<c:if test='<%= tabs3.equals("password-sent-email") %>'>
+				<c:if test='<%= tabs3.equals("password-changed-notification") %>'>
 					<tr>
 						<td>
 							<b>[$USER_AGENT$]</b>
@@ -497,6 +497,11 @@
 			</c:when>
 			<c:otherwise>
 				<table border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td colspan="3">
+							<%= LanguageUtil.get(pageContext, "the-remitent-of-mail-notifications-will-be") %>:
+						</td>
+					</tr>
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "name") %>
@@ -524,94 +529,7 @@
 		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveEmails();">
 	</c:when>
 	<c:otherwise>
-		<c:choose>
-			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TRACKER_MEMORY_ENABLED)) %>">
-
-				<%
-				SearchContainer searchContainer = new SearchContainer();
-
-				List headerNames = new ArrayList();
-
-				headerNames.add("session-id");
-				headerNames.add("user-id");
-				headerNames.add("name");
-				headerNames.add("email-address");
-				headerNames.add("last-request");
-				headerNames.add("num-of-hits");
-
-				searchContainer.setHeaderNames(headerNames);
-
-				List results = new ArrayList();
-
-				Iterator itr = LiveUsers.getSessionUsers().entrySet().iterator();
-
-				while (itr.hasNext()) {
-					Map.Entry entry = (Map.Entry)itr.next();
-
-					results.add(entry.getValue());
-				}
-
-				Collections.sort(results, new UserTrackerModifiedDateComparator());
-
-				List resultRows = searchContainer.getResultRows();
-
-				for (int i = 0; i < results.size(); i++) {
-					UserTracker userTracker = (UserTracker)results.get(i);
-
-					ResultRow row = new ResultRow(userTracker, userTracker.getPrimaryKey().toString(), i);
-
-					PortletURL rowURL = renderResponse.createRenderURL();
-
-					rowURL.setWindowState(WindowState.MAXIMIZED);
-
-					rowURL.setParameter("struts_action", "/admin/edit_session");
-					rowURL.setParameter("redirect", currentURL);
-					rowURL.setParameter("userTrackerId", userTracker.getUserTrackerId());
-
-					User user2 = null;
-
-					try {
-						user2 = UserLocalServiceUtil.getUserById(userTracker.getUserId());
-					}
-					catch (NoSuchUserException nsue) {
-					}
-
-					// Session ID
-
-					row.addText(userTracker.getUserTrackerId(), rowURL);
-
-					// User ID
-
-					row.addText(userTracker.getUserId(), rowURL);
-
-					// Name
-
-					row.addText(((user2 != null) ? user2.getFullName() : LanguageUtil.get(pageContext, "not-available")), rowURL);
-
-					// Email Address
-
-					row.addText(((user2 != null) ? user2.getEmailAddress() : LanguageUtil.get(pageContext, "not-available")), rowURL);
-
-					// Last Request
-
-					row.addText(dateFormatDateTime.format(userTracker.getModifiedDate()), rowURL);
-
-					// # of Hits
-
-					row.addText(String.valueOf(userTracker.getHits()), rowURL);
-
-					// Add result row
-
-					resultRows.add(row);
-				}
-				%>
-
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:when>
-			<c:otherwise>
-				<%= LanguageUtil.format(pageContext, "display-of-live-session-data-is-disabled", PropsUtil.SESSION_TRACKER_MEMORY_ENABLED) %>
-			</c:otherwise>
-		</c:choose>
+		<%@ include file="/html/portlet/admin/settings_general.jsp" %>
 	</c:otherwise>
 </c:choose>
 

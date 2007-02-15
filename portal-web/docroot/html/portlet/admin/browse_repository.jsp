@@ -23,35 +23,27 @@
 %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
-if (Validator.isNull(redirect)) {
-	redirect = currentURL;
-}
-
 String keywords = ParamUtil.getString(request, "keywords");
-String type = ParamUtil.getString(request, "type");
 String tag = ParamUtil.getString(request, "tag");
 String license = ParamUtil.getString(request, "license");
-
-PortletURL pluginsURL = renderResponse.createRenderURL();
-
-pluginsURL.setWindowState(WindowState.MAXIMIZED);
-pluginsURL.setParameter("struts_action", "/admin/view");
-pluginsURL.setParameter("tabs1", tabs1);
-pluginsURL.setParameter("tabs2", tabs2);
+String status = ParamUtil.getString(request, "status");
+if (Validator.isNull(status)) {
+	status = "notInstalledOrNewVersion";
+}
 
 try {
 %>
+
+<%= breadcrumbs.toString() %>
+
+<br><br>
+
+<input type="hidden" name="<portlet:namespace/>type" value="<%=type%>">
 
 	<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "keywords") %>
-		</td>
-		<td style="padding-left: 5px;"></td>
-		<td>
-			<%= LanguageUtil.get(pageContext, "type") %>
 		</td>
 		<td style="padding-left: 5px;"></td>
 		<td>
@@ -61,30 +53,14 @@ try {
 		<td>
 			<%= LanguageUtil.get(pageContext, "repository") %>
 		</td>
+		<td style="padding-left: 5px;"></td>
+		<td>
+			<%= LanguageUtil.get(pageContext, "status") %>
+		</td>
 	</tr>
 	<tr>
 		<td>
 			<input class="form-text" name="<portlet:namespace />keywords" size="20" type="text" value="<%= keywords %>">
-		</td>
-		<td style="padding-left: 5px;"></td>
-		<td>
-			<select name="<portlet:namespace/>type">
-				<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
-
-				<%
-				String[] types = PluginUtil.getSupportedTypes();
-
-				for (int i = 0; i < types.length; i++) {
-					String curType = types[i];
-				%>
-
-					<option <%= (type.equals(curType)) ? "selected" : "" %> value="<%= curType %>"><%= LanguageUtil.get(pageContext, curType) %></option>
-
-				<%
-				}
-				%>
-
-			</select>
 		</td>
 		<td style="padding-left: 5px;"></td>
 		<td>
@@ -126,6 +102,15 @@ try {
 
 			</select>
 		</td>
+		<td style="padding-left: 5px;"></td>
+		<td>
+			<select name="<portlet:namespace/>status">
+				<option <%= (status.equals("notInstalledOrNewVersion")) ? "selected": "" %> value="notInstalledOrNewVersion"><%= LanguageUtil.get(pageContext, "not-installed-or-new-version") %></option>
+				<option <%= (status.equals("newVersion")) ? "selected": "" %> value="newVersion"><%= LanguageUtil.get(pageContext, "new-version") %></option>
+				<option <%= (status.equals("notInstalled")) ? "selected": "" %> value="notInstalled"><%= LanguageUtil.get(pageContext, "not-installed") %></option>
+				<option <%= (status.equals("all")) ? "selected": "" %> value="all"><%= LanguageUtil.get(pageContext, "all") %></option>
+			</select>
+		</td>
 	</tr>
 	</table>
 
@@ -140,14 +125,23 @@ try {
 	<%
 	List headerNames = new ArrayList();
 
-	headerNames.add("plugin-name");
-	headerNames.add("type");
+	if (type.equals("theme")) {
+		headerNames.add("theme-package");
+	}
+	else if (type.equals("portlet")) {
+		headerNames.add("portlet-package");
+	}
+	else if (type.equals("layout-template")) {
+		headerNames.add("layout-template-package");
+	}
+
 	headerNames.add("tags");
+	headerNames.add("status");
 	headerNames.add(StringPool.BLANK);
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, pluginsURL, headerNames, null);
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	Hits hits = PluginUtil.search(keywords, type, tag, license, repositoryURL);
+	Hits hits = PluginUtil.search(keywords, type, tag, license, repositoryURL, status);
 
 	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 	int total = hits.getLength();
@@ -162,10 +156,10 @@ try {
 		String pluginModuleId = doc.get("moduleId");
 		String pluginName = doc.get(LuceneFields.TITLE);
 		String pluginVersion = doc.get("version");
-		String pluginType = doc.get("type");
 		String pluginTags = doc.get("tags");
 		String pluginShortDescription = doc.get("shortDescription");
 		String pluginRepositoryURL = doc.get("repositoryURL");
+		String pluginStatus = doc.get("status");
 
 		ResultRow row = new ResultRow(doc, pluginModuleId, i);
 
@@ -173,10 +167,11 @@ try {
 
 		rowURL.setWindowState(WindowState.MAXIMIZED);
 
-		rowURL.setParameter("struts_action", "/admin/view");
+		rowURL.setParameter("struts_action", "/admin/plugin_installer");
 		rowURL.setParameter("tabs1", tabs1);
-		rowURL.setParameter("tabs2", tabs2);
+		rowURL.setParameter("referer", referer);
 		rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("type", type);
 		rowURL.setParameter("moduleId", pluginModuleId);
 		rowURL.setParameter("repositoryURL", pluginRepositoryURL);
 
@@ -198,17 +193,17 @@ try {
 
 		row.addText(sb.toString(), rowURL);
 
-		// Type
+		// Tags
 
-		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, pluginType), null, null, null);
+		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, pluginTags), null, null, null);
 
 		row.addText(rowTextEntry);
 
-		// Tags
+		// Status
 
 		rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-		rowTextEntry.setName(pluginTags);
+		rowTextEntry.setName(pluginStatus);
 
 		row.addText(rowTextEntry);
 
@@ -236,7 +231,7 @@ try {
 
 	<br>
 
-	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "refresh") %>'  onClick="<portlet:namespace/>reloadRepositories('<%= redirect %>');">
+	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "refresh") %>'  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');">
 
 <%
 }
@@ -253,5 +248,5 @@ catch (PluginException e) {
 %>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.admin.plugins.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.admin.browse_repository.jsp");
 %>
