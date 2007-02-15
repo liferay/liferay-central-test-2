@@ -236,6 +236,8 @@ public class PropsUtil {
 
 	public static final String PORTAL_JAAS_IMPL = "portal.jaas.impl";
 
+	public static final String PORTAL_JAAS_STRICT_PASSWORD = "portal.jaas.strict.password";
+
 	public static final String PORTAL_IMPERSONATION_ENABLE = "portal.impersonation.enable";
 
 	// LDAP Import
