@@ -11,6 +11,7 @@ lang.line.end=right
 ##
 
 javax.portlet.title.100=Πρόσκληση
+javax.portlet.title.101=Περιεκτικότητα σε ετικέττες
 javax.portlet.title.102=XSL
 javax.portlet.title.10=Βιβλίο Διευθύνσεων
 javax.portlet.title.11=Κατάλογος
@@ -1166,6 +1167,7 @@ interest-rate=Επιτόκιο
 intermediate=Μέσος
 interval=Διάστημα
 interview=Συνέντευξη
+invite-friends=Προσκαλέστε τους φίλους
 invoice=Τιμολόγιο
 irc=IRC
 is-temporarily-unavailable={0} είναι προσωρινά μη διαθέσιμο.

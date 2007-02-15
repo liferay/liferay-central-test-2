@@ -11,6 +11,7 @@ lang.line.end=right
 ##
 
 javax.portlet.title.100=안내장
+javax.portlet.title.101=꼬리표 내용
 javax.portlet.title.102=XSL
 javax.portlet.title.10=주소 책
 javax.portlet.title.11=전화번호부
@@ -1166,6 +1167,7 @@ interest-rate=금리
 intermediate=중간
 interval=간격
 interview=면접시험
+invite-friends=친구를 초대하십시요
 invoice=청구서
 irc=IRC
 is-temporarily-unavailable={0} is temporarily unavailable.

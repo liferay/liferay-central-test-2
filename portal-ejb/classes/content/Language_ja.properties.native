@@ -11,6 +11,7 @@ lang.line.end=right
 ##
 
 javax.portlet.title.100=招待
+javax.portlet.title.101=札の内容
 javax.portlet.title.102=XSL
 javax.portlet.title.10=住所録
 javax.portlet.title.11=登録簿
@@ -1165,6 +1166,7 @@ interest-rate=金利
 intermediate=中間
 interval=間隔
 interview=インタビュー
+invite-friends=友人を誘いなさい
 invoice=インボイス
 irc=Irc
 is-temporarily-unavailable={0} is temporarily unavailable.
@@ -2574,6 +2576,7 @@ your-cart-has-items-that-are-out-of-stock=あなたのカートは項目を備�
 your-cart-is-empty=あなたのカートは空である。
 your-first-page-must-be-a-portlet-page=あなたの最初ページはportlet のページでなければならない。
 your-first-page-must-not-be-hidden=あなたの最初ページは隠れてはならない。
+your-invitations-have-been-sent=あなたの招待は送られた。
 your-junk-mail-folder-is-taking-up-a-lot-of-space=あなたの不要郵便物のホールダーは多くのスペースをとている。あなたの不要郵便物を今空けたいと思うか。
 your-new-email-address-is-x=Your new email address is {0}.
 your-order-cannot-be-processed-because-it-falls-below-the-minimum-required-amount-of-x=Your order cannot be processed because it falls below the minimum required amount of {0}.

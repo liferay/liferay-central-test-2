@@ -11,6 +11,7 @@ lang.line.end=right
 ##
 
 javax.portlet.title.100=邀请
+javax.portlet.title.101=标记内容
 javax.portlet.title.102=XSL
 javax.portlet.title.10=地址本
 javax.portlet.title.11=目录
@@ -1167,6 +1168,7 @@ interest-rate=利率
 intermediate=中间
 interval=间隔时间
 interview=采访
+invite-friends=邀请朋友
 invoice=发货票
 irc=IRC
 is-temporarily-unavailable={0} 暂时无法使用.
@@ -2576,6 +2578,7 @@ your-cart-has-items-that-are-out-of-stock=您的推车有缺货项目。您仍�
 your-cart-is-empty=您的推车是空的。
 your-first-page-must-be-a-portlet-page=您的第一页必须是个portlet 页。
 your-first-page-must-not-be-hidden=您的第一页不能隐藏。
+your-invitations-have-been-sent=您的邀请被送了。
 your-junk-mail-folder-is-taking-up-a-lot-of-space=您的垃圾邮件文件夹占去很多空间。您要不要现在清空您的垃圾邮件?
 your-new-email-address-is-x=您的邮件地址为 {0}.
 your-order-cannot-be-processed-because-it-falls-below-the-minimum-required-amount-of-x=因为最低需要 {0} , 您的订单无法处理.
