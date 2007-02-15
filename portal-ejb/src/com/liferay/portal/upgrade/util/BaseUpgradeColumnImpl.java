@@ -57,8 +57,6 @@ public abstract class BaseUpgradeColumnImpl implements UpgradeColumn {
 		}
 	}
 
-	public abstract Object getNewValue(Object oldValue) throws Exception;
-
 	private int _pos = -1;
 	private String _name;
 

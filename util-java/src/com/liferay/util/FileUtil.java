@@ -254,6 +254,7 @@ public class FileUtil {
 
 			while (c != -1) {
 				out.write(c);
+
 				c = in.read();
 			}
 		}
