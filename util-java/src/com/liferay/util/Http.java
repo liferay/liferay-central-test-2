@@ -541,6 +541,13 @@ public class Http {
 				method = new GetMethod(location);
 			}
 
+			method.addRequestHeader(
+				"Content-Type", "application/x-www-form-urlencoded");
+
+			method.addRequestHeader(
+				"User-agent",
+				"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
+
 			//method.setFollowRedirects(true);
 
 			HttpState state = new HttpState();
@@ -648,13 +655,6 @@ public class Http {
 			}
 
 			URLConnection con = url.openConnection();
-
-			con.setRequestProperty(
-				"Content-Type", "application/x-www-form-urlencoded");
-
-			con.setRequestProperty(
-				"User-agent",
-				"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
 
 			InputStream is = con.getInputStream();
 
