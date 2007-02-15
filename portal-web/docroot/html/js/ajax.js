@@ -177,7 +177,7 @@ var AjaxUtil = {
 
 var ReverseAjax = {
 	initialize: function() {
-		_$J(window).unload(ReverseAjax.release);
+		Liferay.Util.addEventHandler(window, "unload", ReverseAjax.release);
 		ReverseAjax.request();
 	},
 	

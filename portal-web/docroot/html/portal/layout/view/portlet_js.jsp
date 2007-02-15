@@ -96,12 +96,15 @@ function addPortletHTML(html, container, placeHolder) {
 
 	portletBound.portletId = portletId;
 
-	container.insertBefore(portletBound, placeHolder);
+	Liferay.Portlet.flagAjax(portletId);
 
-	placeHolder.parentNode.removeChild(placeHolder);
+	container.replaceChild(portletBound, placeHolder);
 
 	executeLoadedScript(addDiv);
-	executeLoadedScript(portletBound);
+
+	if (!_$J.browser.firefox) {
+		executeLoadedScript(portletBound);
+	}
 
 	if (!portletBound.isStatic) {
 		LayoutColumns.initPortlet(portletBound);

@@ -53,7 +53,7 @@ var Drag = {
 		group.constrainVertical = Drag.constrainVertical;
 		group.constrainHorizontal = Drag.constrainHorizontal;
 
-		group.handle.onmousedown = Drag.onMouseDown;
+		_$J(group.handle).mousedown(Drag.onMouseDown);
 	},
 
 	constrainVertical : function() {
@@ -118,8 +118,8 @@ var Drag = {
 			this.handle = this;
 
 		this.handle.group = this;
-		this.onmousedown = null;
-		this.handle.onmousedown = Drag.onMouseDown;
+		_$J(this).unbind("mousedown");
+		_$J(this.handle).mousedown(Drag.onMouseDown);
 	},
 
 	setDragThreshold : function(threshold) {
@@ -200,8 +200,8 @@ var Drag = {
 		group.mouseMin = new Coordinate(minMouseX, minMouseY);
 		group.mouseMax = new Coordinate(maxMouseX, maxMouseY);
 
-		document.onmousemove = Drag.onMouseMove;
-		document.onmouseup = Drag.onMouseUp;
+		_$J(document).mousemove(Drag.onMouseMove);
+		_$J(document).mouseup(Drag.onMouseUp);
 
 		return false;
 	},
@@ -321,8 +321,8 @@ var Drag = {
 		var sePosition = Coordinates.southeastPosition(group);
 		var seOffset = Coordinates.southeastOffset(group, true);
 
-		document.onmousemove = null;
-		document.onmouseup   = null;
+		_$J(document).unbind("mousemove");
+		_$J(document).unbind("mouseup");
 
 		group.onDragEnd(nwPosition, sePosition, nwOffset, seOffset);
 		Drag.group = null;

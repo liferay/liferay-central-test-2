@@ -327,11 +327,11 @@ if (themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.has
 	Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
 
 	sb.append("style=\"position: absolute; ");
-	sb.append("width: " + freeformStyleProps.getProperty("width", "300px"));
+	sb.append("width:" + freeformStyleProps.getProperty("width", "400px"));
 	sb.append("; ");
-	sb.append("top: " + freeformStyleProps.getProperty("top", "0"));
+	sb.append("top:" + freeformStyleProps.getProperty("top", "0"));
 	sb.append("; ");
-	sb.append("left: /" + freeformStyleProps.getProperty("left", "0"));
+	sb.append("left:" + freeformStyleProps.getProperty("left", "0"));
 	sb.append(";\"");
 
 	freeformStyles = sb.toString();
@@ -485,7 +485,9 @@ else {
 			document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
 		</c:if>
 
-		Liferay.Portlet.process("<%= portletDisplay.getId() %>");
+		if (!Liferay.Portlet.isAjax("<%= portletDisplay.getId() %>")) {
+			Liferay.Portlet.process("<%= portletDisplay.getId() %>");
+		}
 	</script>
 </c:if>
 

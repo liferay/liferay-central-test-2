@@ -118,16 +118,16 @@
 
 	<table border="0" cellspacing="0" cellpadding="0" onclick="MyPlaces.show();">
 	<tr>
-		<td class="layout-my-places">
+		<td class="portlet-my-places">
 			<%= selectedTitle %>
 		</td>
-		<td class="layout-my-places-arrow">
+		<td class="portlet-my-places-arrow">
 			<img style="vertical-align: middle" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_down.png" />
 		</td>
 	</tr>
 	</table>
 
-	<ul id="layout-my-places-menu" style="display: none">
+	<ul id="portlet-my-places-menu" style="display: none">
 
 		<%
 		for (int i = 0; i < links.size(); i++) {
@@ -147,14 +147,14 @@
 
 			show: function() {
 				if (!MyPlaces.showing) {
-					document.getElementById("layout-my-places-menu").style.display = "";
+					document.getElementById("portlet-my-places-menu").style.display = "";
 					setTimeout("document.onclick = function() { MyPlaces.hide(); }", 0);
 					MyPlaces.showing = true;
 				}
 			},
 
 			hide: function() {
-				document.getElementById("layout-my-places-menu").style.display = "none";
+				document.getElementById("portlet-my-places-menu").style.display = "none";
 				MyPlaces.showing = false;
 				document.onclick = function() {};
 			}

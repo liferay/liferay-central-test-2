@@ -244,7 +244,16 @@ Liferay.Portlet = {
 	fn: new Object(),
 	fnAll: new Array(),
 	fnLast: new Array(),
+	ajaxList: new Object(),
 	list: new Object(),
+
+	isAjax: function(id) {
+		return (this.ajaxList[id] == 1);
+	},
+
+	flagAjax: function(id) {
+		this.ajaxList[id] = 1;
+	},
 
 	process: function(id) {
 
@@ -833,7 +842,7 @@ Liferay.Util = {
 
 	toggle: function(obj, returnState, displayType) {
 		var hidden = false;
-		var display = "block";
+		var display = "";
 		obj = _$J.getOne(obj);
 
 		if (displayType != null) {

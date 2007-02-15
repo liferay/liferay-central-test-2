@@ -115,6 +115,9 @@ var LiferayDock = {
 			_$J(this).bind("mouseout", {self: self}, self.collapse);
 			this.constants = self.constants[self.ORDER[index]];
 			this.style.zIndex = size - index;
+			if (index != 0) {
+				this.style.display = "none";
+			}
 		});
 
 		var myPlaces = _$J(".portal-dock-my-places:first")
@@ -205,6 +208,7 @@ var LiferayDock = {
 
 					// Calculate max radian
 					if (collapse) {
+						var movement = 0;
 						if (cached) {
 							item.style.left = cached[1][index][count][0] + "px";
 							item.style.top = cached[1][index][count][1] + "px";
@@ -217,6 +221,10 @@ var LiferayDock = {
 							item.style.top = (distRatio * (item.constants.y)) + "px";
 
 							//LiferayDock.dockCoords[1][index][count] = [Math.round(distRatio * (item.constants.x)), Math.round(distRatio * (item.constants.y))];
+						}
+						
+						if (ratio == 0) {
+							item.style.display = "none";
 						}
 					}
 					else {
@@ -233,6 +241,7 @@ var LiferayDock = {
 
 							//LiferayDock.dockCoords[0][index][count] = [Math.round(distRatio * (item.constants.x/Math.sin(maxRad))), Math.round(distRatio * (item.constants.y/Math.sin(maxRad)))];
 						}
+						item.style.display = "";
 					}
 
 					updated = true;
@@ -365,6 +374,14 @@ var LayoutColumns = {
 			portlet.style.position = "absolute";
 			Drag.makeDraggable(portlet, handle);
 			portlet.threshold = 5;
+			
+			_$J(portlet).click(function() {
+				if (LayoutColumns.current != this) {
+					LayoutColumns.moveToTop(this);
+					LayoutColumns.savePosition(this);
+					LayoutColumns.current = this;
+				}
+			});
 
 			portlet.onDragStart = function() {
 				this.wasClicked = true;
@@ -403,14 +420,6 @@ var LayoutColumns = {
 				resizeHandle.container = portlet;
 				resizeBox.container = portlet;
 
-				resizeBox.onclick = function() {
-					if (LayoutColumns.current != this.container) {
-						LayoutColumns.moveToTop(this.container);
-						LayoutColumns.savePosition(this.container);
-						LayoutColumns.current = this.container;
-					}
-				};
-	
 				resizeHandle.onResizeStart = function() {
 					LayoutColumns.moveToTop(this.container);
 				};

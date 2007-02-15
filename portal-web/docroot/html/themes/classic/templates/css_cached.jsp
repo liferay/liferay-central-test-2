@@ -384,14 +384,14 @@ FONT.bg {
 	text-align: right;
 }
 
-.layout-my-places {
+.portlet-my-places {
 	background-color: <%= colorScheme.getPortletBg() %>;
 	border: 1px solid #CCCCCC;
 	padding: 2px;
 	white-space: nowrap;
 }
 
-.layout-my-places-arrow {
+.portlet-my-places-arrow {
 	background-color: #CCCCCC;
 	padding: 2px;
 }

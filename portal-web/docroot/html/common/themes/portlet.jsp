@@ -320,18 +320,20 @@ if (freeformPortlet) {
 			</c:when>
 			<c:otherwise>
 				<div class="portlet-borderless-container" <%= freeformStyles %>>
-					<c:if test="<%= tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon() %>">
+					<c:if test="<%= (tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon()) || portletDisplay.isShowBackIcon() %>">
 						<div class="portlet-borderless-bar">
-							<span class="portlet-title-default"><%= portletTitle %></span>
+							<c:if test="<%= (tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon()) %>">
+								<span class="portlet-title-default"><%= portletTitle %></span>
 
-							- <a href="<%= portletDisplay.getURLConfiguration() %>"><bean:message key="configuration" /></a>
+								- <a href="<%= portletDisplay.getURLConfiguration() %>"><bean:message key="configuration" /></a>
 
-							<c:if test="<%= portletDisplay.isShowEditIcon() %>">
-								- <a href="<%= portletDisplay.getURLEdit() %>"><bean:message key="preferences" /></a>
-							</c:if>
+								<c:if test="<%= portletDisplay.isShowEditIcon() %>">
+									- <a href="<%= portletDisplay.getURLEdit() %>"><bean:message key="preferences" /></a>
+								</c:if>
 
-							<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
-								- <a href="<%= portletDisplay.getURLClose() %>"><bean:message key="close" /></a>
+								<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
+									- <a href="<%= portletDisplay.getURLClose() %>"><bean:message key="close" /></a>
+								</c:if>
 							</c:if>
 
 							<c:if test="<%= portletDisplay.isShowBackIcon() %>">
