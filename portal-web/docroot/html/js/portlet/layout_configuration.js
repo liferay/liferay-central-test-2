@@ -51,7 +51,7 @@ var LayoutConfiguration = {
 
 	toggle : function (plid, ppid, doAsUserId) {
 		if (!LayoutConfiguration.menu) {
-			var url = themeDisplay.getPathMain() + "/portal/render_portlet?p_l_id=" + plid + "&p_p_id=" + ppid + "&doAsUserId=" + doAsUserId;
+			var url = themeDisplay.getPathMain() + "/portal/render_portlet?p_l_id=" + plid + "&p_p_id=" + ppid + "&doAsUserId=" + doAsUserId + "&p_p_state=exclusive";
 			var popup = Alerts.fireMessageBox({
 					width: 250,
 					noCenter: true,

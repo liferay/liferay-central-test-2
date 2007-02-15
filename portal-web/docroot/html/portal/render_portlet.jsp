@@ -318,29 +318,32 @@ if (portlet.isActive() && access) {
 }
 
 PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletDisplay.getId(), true, true);
-
-String freeformStyles = StringPool.BLANK;
-
-if (themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax()) {
-	StringBuffer sb = new StringBuffer();
-
-	Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
-
-	sb.append("style=\"position: absolute; ");
-	sb.append("width:" + freeformStyleProps.getProperty("width", "400px"));
-	sb.append("; ");
-	sb.append("top:" + freeformStyleProps.getProperty("top", "0"));
-	sb.append("; ");
-	sb.append("left:" + freeformStyleProps.getProperty("left", "0"));
-	sb.append(";\"");
-
-	freeformStyles = sb.toString();
-}
 %>
 
 <%@ include file="/html/portal/render_portlet-ext.jsp" %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() %>">
+	<%
+	
+	String freeformStyles = StringPool.BLANK;
+	
+	if (themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax()) {
+		StringBuffer sb = new StringBuffer();
+	
+		Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
+	
+		sb.append("style=\"position: absolute; ");
+		sb.append("width:" + freeformStyleProps.getProperty("width", "400px"));
+		sb.append("; ");
+		sb.append("top:" + freeformStyleProps.getProperty("top", "0"));
+		sb.append("; ");
+		sb.append("left:" + freeformStyleProps.getProperty("left", "0"));
+		sb.append(";\"");
+	
+		freeformStyles = sb.toString();
+	}
+	%>
+
 	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %>" <%= freeformStyles %>>
 		<a name="p_<%= portletId %>"></a>
 </c:if>

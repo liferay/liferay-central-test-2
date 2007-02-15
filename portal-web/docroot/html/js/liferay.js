@@ -260,13 +260,7 @@ Liferay.Portlet = {
 		if (this.list[id] == 1) {
 			this.list[id] = 0;
 
-			if (this.fn[id]) {
-				for (var i = 0; i < this.fn[id].length; i++) {
-					this.fn[id][i](id, _$J("#p_p_id_" + id + "_"));
-				}
-				this.fn[id] = new Array();
-			}
-			
+			this.processPortlet(id);
 			this.processAll(id);
 		}
 		else if (this.list[id] == 0) {
@@ -275,7 +269,7 @@ Liferay.Portlet = {
 		else {
 			// New portlet. Process and mark.
 			this.list[id] = 0;
-			this.processAll(id);
+			this.processPortlet(id);
 		}
 
 		var count = 0;
@@ -284,7 +278,7 @@ Liferay.Portlet = {
 			count += this.list[i];
 		}
 
-		if (count <= 0) {
+		if (count == 0) {
 			this.processLast(id);
 		}
 	},
@@ -292,6 +286,15 @@ Liferay.Portlet = {
 	processAll: function(id) {
 		for (var i = 0; i < this.fnAll.length; i++) {
 			this.fnAll[i](id, _$J("#p_p_id_" + id + "_"));
+		}
+	},
+
+	processPortlet: function(id) {
+		if (this.fn[id]) {
+			for (var i = 0; i < this.fn[id].length; i++) {
+				this.fn[id][i](id, _$J("#p_p_id_" + id + "_"));
+			}
+			this.fn[id] = new Array();
 		}
 	},
 
