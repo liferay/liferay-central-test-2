@@ -206,7 +206,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<input class="portlet-form-button" type="button" value="<bean:message key="launch-editor" />" onClick="var templateXslWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm.<portlet:namespace />langType.value, 'templateXsl', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); templateXslWindow.focus();">
 
 		<c:if test="<%= template != null %>">
-			<input class="portlet-form-button" type="button" value="<bean:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= String.valueOf(template.getGroupId()) %>templateId=<%= template.getTemplateId() %>&transform=0';">
+			<input class="portlet-form-button" type="button" value="<bean:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= String.valueOf(template.getGroupId()) %>&templateId=<%= template.getTemplateId() %>&transform=0';">
 		</c:if>
 	</td>
 </tr>
