@@ -322,7 +322,7 @@ if (freeformPortlet) {
 				<div class="portlet-borderless-container" <%= freeformStyles %>>
 					<c:if test="<%= (tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon()) || portletDisplay.isShowBackIcon() %>">
 						<div class="portlet-borderless-bar">
-							<c:if test="<%= (tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon()) %>">
+							<c:if test="<%= tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon() %>">
 								<span class="portlet-title-default"><%= portletTitle %></span>
 
 								- <a href="<%= portletDisplay.getURLConfiguration() %>"><bean:message key="configuration" /></a>

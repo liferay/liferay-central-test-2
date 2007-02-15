@@ -323,23 +323,23 @@ PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(requ
 <%@ include file="/html/portal/render_portlet-ext.jsp" %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() %>">
+
 	<%
-	
 	String freeformStyles = StringPool.BLANK;
-	
+
 	if (themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax()) {
 		StringBuffer sb = new StringBuffer();
-	
+
 		Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
-	
+
 		sb.append("style=\"position: absolute; ");
-		sb.append("width:" + freeformStyleProps.getProperty("width", "400px"));
+		sb.append("width: " + freeformStyleProps.getProperty("width", "400px"));
 		sb.append("; ");
-		sb.append("top:" + freeformStyleProps.getProperty("top", "0"));
+		sb.append("top: " + freeformStyleProps.getProperty("top", "0"));
 		sb.append("; ");
-		sb.append("left:" + freeformStyleProps.getProperty("left", "0"));
+		sb.append("left: " + freeformStyleProps.getProperty("left", "0"));
 		sb.append(";\"");
-	
+
 		freeformStyles = sb.toString();
 	}
 	%>
