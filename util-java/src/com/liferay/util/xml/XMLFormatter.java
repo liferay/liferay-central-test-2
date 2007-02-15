@@ -113,10 +113,10 @@ public class XMLFormatter {
 
 		String content = baos.toString(ENCODING);
 
-		content = StringUtil.replace(
+		/*content = StringUtil.replace(
 			content,
 			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
-			"<?xml version=\"1.0\"?>");
+			"<?xml version=\"1.0\"?>");*/
 
 		int x = content.indexOf("<!DOCTYPE");
 

@@ -135,9 +135,8 @@ public interface DLFolderLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
-		java.lang.String companyId, java.lang.String folderId,
-		java.lang.String parentFolderId, java.lang.String name,
-		java.lang.String description)
+		java.lang.String folderId, java.lang.String parentFolderId,
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

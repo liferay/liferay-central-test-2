@@ -200,13 +200,12 @@ public class DLFolderLocalServiceEJBImpl implements DLFolderLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
-		java.lang.String companyId, java.lang.String folderId,
-		java.lang.String parentFolderId, java.lang.String name,
-		java.lang.String description)
+		java.lang.String folderId, java.lang.String parentFolderId,
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return DLFolderLocalServiceFactory.getTxImpl().updateFolder(companyId,
-			folderId, parentFolderId, name, description);
+		return DLFolderLocalServiceFactory.getTxImpl().updateFolder(folderId,
+			parentFolderId, name, description);
 	}
 
 	public void ejbCreate() throws CreateException {

@@ -131,16 +131,8 @@
 			<param-value>com.liferay.portal.webdav.WebDAVServlet</param-value>
 		</init-param>
 		<init-param>
-			<param-name>ResourceHandlerImplementation</param-name>
-			<param-value>com.liferay.portlet.documentlibrary.webdav.WebDAVStorageImpl</param-value>
-		</init-param>
-		<init-param>
-			<param-name>servletDebug</param-name>
-			<param-value>1</param-value>
-		</init-param>
-		<init-param>
-			<param-name>uri-prefix</param-name>
-			<param-value>/webdav/document_library</param-value>
+			<param-name>storage-class</param-name>
+			<param-value>com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl</param-value>
 		</init-param>
 		<load-on-startup>4</load-on-startup>
 	</servlet>
@@ -179,26 +171,18 @@
 		<web-resource-collection>
 			<web-resource-name>/secure/axis/*</web-resource-name>
 			<url-pattern>/secure/axis/*</url-pattern>
-			<http-method>GET</http-method>
-			<http-method>POST</http-method>
 		</web-resource-collection>
 		<web-resource-collection>
 			<web-resource-name>/secure/liferay/*</web-resource-name>
 			<url-pattern>/secure/liferay/*</url-pattern>
-			<http-method>GET</http-method>
-			<http-method>POST</http-method>
 		</web-resource-collection>
 		<web-resource-collection>
 			<web-resource-name>/secure/spring/*</web-resource-name>
 			<url-pattern>/secure/spring/*</url-pattern>
-			<http-method>GET</http-method>
-			<http-method>POST</http-method>
 		</web-resource-collection>
 		<web-resource-collection>
 			<web-resource-name>/secure/webdav/*</web-resource-name>
 			<url-pattern>/secure/webdav/*</url-pattern>
-			<http-method>GET</http-method>
-			<http-method>POST</http-method>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>users</role-name>

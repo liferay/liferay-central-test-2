@@ -280,8 +280,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public DLFolder updateFolder(
-			String companyId, String folderId, String parentFolderId,
-			String name, String description)
+			String folderId, String parentFolderId, String name,
+			String description)
 		throws PortalException, SystemException {
 
 		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);

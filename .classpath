@@ -140,7 +140,6 @@
 	<classpathentry kind="lib" path="lib/portal/textmining.jar"/>
 	<classpathentry kind="lib" path="lib/portal/trove.jar"/>
 	<classpathentry kind="lib" path="lib/portal/velocity.jar"/>
-	<classpathentry kind="lib" path="lib/portal/webdav-servlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsdl4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wss4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xalan.jar"/>

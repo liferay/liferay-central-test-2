@@ -218,14 +218,13 @@ public class DLFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
-		java.lang.String companyId, java.lang.String folderId,
-		java.lang.String parentFolderId, java.lang.String name,
-		java.lang.String description)
+		java.lang.String folderId, java.lang.String parentFolderId,
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
-		return dlFolderLocalService.updateFolder(companyId, folderId,
-			parentFolderId, name, description);
+		return dlFolderLocalService.updateFolder(folderId, parentFolderId,
+			name, description);
 	}
 }

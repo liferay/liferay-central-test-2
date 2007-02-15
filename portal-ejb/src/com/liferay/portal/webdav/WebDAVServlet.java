@@ -22,9 +22,23 @@
 
 package com.liferay.portal.webdav;
 
-import javax.servlet.http.HttpServletRequest;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.webdav.methods.Method;
+import com.liferay.portal.webdav.methods.MethodFactory;
+import com.liferay.util.InstancePool;
 
-import net.sf.webdav.WebdavServlet;
+import java.io.IOException;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,18 +49,95 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class WebDAVServlet extends WebdavServlet {
+public class WebDAVServlet extends HttpServlet {
 
-	protected String getRelativePath(HttpServletRequest request) {
-		String path = request.getServletPath() + request.getPathInfo();
+	public void init(ServletConfig config) throws ServletException {
+		synchronized (WebDAVServlet.class) {
+			super.init(config);
+
+			String storageClass = config.getInitParameter("storage-class");
+
+			_storage = (WebDAVStorage)InstancePool.get(storageClass);
+		}
+	}
+
+ 	public void service(HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
+
+		PermissionCheckerImpl permissionChecker = null;
+
+		try {
+
+			// Set the path only if it hasn't already been set. This works if
+			// and only if the servlet is not mapped to more than one URL.
+
+			if (_storage.getRootPath() == null) {
+				_storage.setRootPath(getRootPath(req));
+			}
+
+			// Permission checker
+
+			String remoteUser = req.getRemoteUser();
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Remote user " + remoteUser);
+			}
+
+			if (remoteUser != null) {
+				PrincipalThreadLocal.setName(remoteUser);
+
+				User user = UserLocalServiceUtil.getUserById(remoteUser);
+
+				permissionChecker = PermissionCheckerFactory.create(
+					user, true, true);
+
+				PermissionThreadLocal.setPermissionChecker(permissionChecker);
+			}
+
+			// Get the method instance
+
+			Method method = MethodFactory.create(req);
+
+			// Process the method
+
+			WebDAVRequest webDavReq = new WebDAVRequest(
+				_storage, req, res, permissionChecker);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Path " + webDavReq.getPath());
+			}
+
+			method.process(webDavReq);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+		finally {
+			try {
+				PermissionCheckerFactory.recycle(permissionChecker);
+			}
+			catch (Exception e) {
+			}
+		}
+	}
+
+	protected String getRootPath(HttpServletRequest req) {
+		StringBuffer sb = new StringBuffer();
+
+		sb.append(WebDAVUtil.fixPath(req.getContextPath()));
+		sb.append(WebDAVUtil.fixPath(req.getServletPath()));
+
+		String rootPath = sb.toString();
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Relative path " + path);
+			_log.debug("Root path " + rootPath);
 		}
 
-		return path;
+		return rootPath;
 	}
 
 	private static Log _log = LogFactory.getLog(WebDAVServlet.class);
+
+	private WebDAVStorage _storage;
 
 }

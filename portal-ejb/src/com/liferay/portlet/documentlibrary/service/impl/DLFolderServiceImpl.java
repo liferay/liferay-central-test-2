@@ -95,8 +95,7 @@ public class DLFolderServiceImpl
 			getPermissionChecker(), folderId, ActionKeys.UPDATE);
 
 		return DLFolderLocalServiceUtil.updateFolder(
-			getUser().getCompanyId(), folderId, parentFolderId, name,
-			description);
+			folderId, parentFolderId, name, description);
 	}
 
 }
