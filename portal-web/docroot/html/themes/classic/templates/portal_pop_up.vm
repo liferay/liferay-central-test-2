@@ -1,15 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 #parse("$fullTemplatesPath/init_portal.vm")
 
-<html>
+<html dir="#language("lang.dir")">
 
 <head>
-	<title>$tilesTitle</title>
-	$theme.include("/html/common/themes/top_head.jsp")
+	<title>$the_title</title>
+
+	$theme.include($top_head_include)
+
+	#css($css_main_file)
+	#js($js_main_file)
 </head>
 
 <body>
 
-$theme.include($portlet_include)
+$theme.include($content_include)
 
 </body>
 

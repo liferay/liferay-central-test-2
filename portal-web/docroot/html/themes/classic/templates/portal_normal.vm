@@ -1,47 +1,51 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 #parse("$fullTemplatesPath/init_portal.vm")
 
-<html class="" dir="#language("lang.dir")">
-
+<html dir="#language("lang.dir")">
 
 <head>
 	<title>$company_name - $the_title</title>
-	$theme.include("/html/common/themes/top_head.jsp")
-	#js("$javascript_folder/interface.js")
-	#js($js_main_file)
+
+	$theme.include($top_head_include)
+
 	#css($css_main_file)
-	<style>
-		.portlet-saved{
-			background: #ff9;
-		}
-	</style>
+	#js($js_main_file)
 </head>
-<body id="body-bg">
-$theme.include("/html/common/themes/top_warning.jsp")
+
+<body>
+
+$theme.include($top_warning_include)
+
 <div id="wrapper">
 	<div id="banner">
-	<h1 class="logo"><a href="$company_url">$company_name</a></h1>
+		<h1 class="logo">
+			<a href="$company_url">$company_name</a>
+		</h1>
 
-	#parse("$full_templates_path/dock.vm")
-
+		#parse("$full_templates_path/dock.vm")
 	</div>
+
 	<div id="navigation">
-	#parse("$full_templates_path/navigation.vm")
+		#parse("$full_templates_path/navigation.vm")
 	</div>
-					#if ( $selectable )
-						$theme.include($portlet_include)
-					#else
-						$portletDisplay.recycle()
-						$portletDisplay.setTitle($the_title)
-						$theme.wrapPortlet("portlet.vm", $portlet_include)
-					#end
+
+	#if ( $selectable )
+		$theme.include($content_include)
+	#else
+		$portletDisplay.recycle()
+		$portletDisplay.setTitle($the_title)
+
+		$theme.wrapPortlet("portlet.vm", $content_include)
+	#end
+
 	<div id="footer"></div>
-	
 </div>
-$theme.include("/html/common/themes/bottom-ext.jsp")
-$theme.include("/html/common/themes/session_timeout.jsp")
-$theme.include("/html/common/themes/sound_alerts.jsp")
+
+$theme.include($bottom_ext_include)
+$theme.include($session_timeout_include)
+$theme.include($sound_alerts_include)
+
 </body>
 
 </html>

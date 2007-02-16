@@ -177,9 +177,11 @@ public class ThemeUtil {
 		StringServletResponse stringServletResponse = new StringServletResponse(
 			(HttpServletResponse)pageContext.getResponse());
 
-		vc.put(
-			"taglibLiferay",
-			new VelocityTaglib(ctx, req, stringServletResponse, pageContext));
+		VelocityTaglib velocityTaglib = new VelocityTaglib(
+			ctx, req, stringServletResponse, pageContext);
+
+		vc.put("taglibLiferay", velocityTaglib);
+		vc.put("theme", velocityTaglib);
 
 		// Merge templates
 

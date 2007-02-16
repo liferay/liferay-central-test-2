@@ -1,111 +1,79 @@
-#**
- * Copyright (c) 2000-2007 Liferay, LLC. All rights reserved.
- * Liferay is licensed under the M.I.T. License
- *#
-#set ( $tilesTitle = $languageUtil.get($pageContext, $tilesTitle) )
+## ---------- Common Variables ---------- ##
+
+#set ( $the_title = $languageUtil.get($pageContext, $tilesTitle) )
 #set ( $selectable = $tilesSelectable.equals("true") )
-#set ( $in_navigation = $selectable )
+
 #if ( $layout )
-	#set ( $tilesTitle = $languageUtil.get($pageContext, $tilesTitle, $layout.getName($locale)) )
+	#set ( $the_title = $languageUtil.get($pageContext, $the_title, $layout.getName($locale)) )
 #end
 
-#set ( $theme = $taglibLiferay )
-#set ( $portlet_display = $portletDisplay )
 #set ( $theme_display = $themeDisplay )
-#set ( $templates_folder = "$themeDisplay.getPathThemeRoot()/templates" )
+#set ( $portlet_display = $portletDisplay )
+
+#set ( $css_folder = "$theme_display.getPathThemeRoot()/css" )
+#set ( $images_folder = "$theme_display.getPathThemeRoot()/images" )
+#set ( $javascript_folder = "$theme_display.getPathThemeRoot()/javascript" )
+#set ( $templates_folder = "$theme_display.getPathThemeRoot()/templates" )
+
 #set ( $full_templates_path = $fullTemplatesPath )
-#set ( $images_folder = "$themeDisplay.getPathThemeRoot()/images" )
-#set ( $css_folder = "$themeDisplay.getPathThemeRoot()/css" )
-#set ( $javascript_folder = "$themeDisplay.getPathThemeRoot()/javascript" )
-#set ( $javascript_common_folder = $themeDisplay.getPathJavaScript() )
-#set ( $header_file = "$templates_folder/portal_header.vm" )
-#set ( $footer_file = "$templates_folder/portal_footer.vm" )
 
 #set ( $css_main_file = "$css_folder/main.css" )
 #set ( $js_main_file = "$javascript_folder/javascript.js" )
-#set ( $css_file = "$templates_folder/css.vm" )
-#set ( $js_file = "$templates_folder/javascript.vm" )
 
-#set ( $the_title = $tilesTitle )
-#set ( $company_name="$company.getName()" )
-#set ( $company_logo="$themeDisplay.getCompanyLogo()" )
-#set ( $company_url="$themeDisplay.getURLHome()" )
+#set ( $company_name = $company.getName() )
+#set ( $company_logo = $theme_display.getCompanyLogo() )
+#set ( $company_url = $theme_display.getURLHome() )
+
 #set ( $user_greeting = $user.getGreeting() )
-#set ( $home_url = $themeDisplay.getURLHome() )
 
-## --------- Navigation --------- ##
+## ---------- URLs ---------- ##
 
-#set ( $ancestor_layout_id = "" )
+#set ( $show_add_content = $theme_display.isShowAddContentIcon() )
 
-#set ( $show_home = false )
-	#set ( $home_icon = "" )
-	#set ( $home_text = "" )
-	#set ( $home_url = "" )
-#set ( $show_sign_in = false )
-	#set ( $sign_in_icon = "" )
-	#set ( $sign_in_text = "" )
-	#set ( $sign_in_url = "" )
-#set ( $show_my_account = false )
-	#set ( $my_account_icon = "" )
-	#set ( $my_account_text = "" )
-	#set ( $my_account_url = "" )
-#set ( $show_sign_out = false )
-	#set ( $sign_out_icon = "" )
-	#set ( $sign_out_text = "" )
-	#set ( $sign_out_url = "" )
-#set ( $show_add_account = false )
-	#set ( $add_content_icon = "" )
-	#set ( $add_content_text = "" )
-	#set ( $add_content_url = "" )
-#set ( $show_page_settings = false )
-	#set ( $page_settings_icon = "" )
-	#set ( $page_settings_url = "" )
-	#set ( $page_settings_text = "" )
-
-
-#if ( $themeDisplay.isShowHomeIcon() )
-	#set ( $show_home = $themeDisplay.isShowHomeIcon() )
-	#set ( $home_text = $languageUtil.get($pageContext, "home") )
-	#set ( $home_url = $themeDisplay.getURLHome() )
-	#set ( $home_icon = "<a href='$home_url'>$home_text</a> - " )
-#end
-
-#if ( $themeDisplay.isShowSignInIcon() )
-	#set ( $show_sign_in = $themeDisplay.isShowSignInIcon() )
-	#set ( $sign_in_text = $languageUtil.get($pageContext, "sign-in") )
-	#set ( $sign_in_url = $themeDisplay.getURLSignIn() )
-	#set ( $sign_in_icon = "<a href='$sign_in_url'>$sign_in_text</a> - " )
-#end
-#if ( $themeDisplay.isShowMyAccountIcon() )
-	#set ( $show_my_account = $themeDisplay.isShowMyAccountIcon() )
-	#set ( $my_account_text = $languageUtil.get($pageContext, "my-account") )
-	#set ( $my_account_url = $themeDisplay.getURLMyAccount() )
-	#set ( $my_account_icon = "<a href='$my_account_url'>$my_account_text</a> - " )
-#end
-
-#if ( $themeDisplay.isShowSignOutIcon() )
-	#set ( $show_sign_out = $themeDisplay.isShowSignOutIcon() )
-	#set ( $sign_out_text = $languageUtil.get($pageContext, "sign-out") )
-	#set ( $sign_out_url = $themeDisplay.getURLSignOut() )
-	#set ( $sign_out_icon = "<a href='$sign_out_url'>$sign_out_text</a> - " )
-#end
-
-#if ( $themeDisplay.isShowAddContentIcon() )
-	#set ( $show_add_content = $themeDisplay.isShowAddContentIcon() )
+#if ( $show_add_content )
 	#set ( $add_content_text = $languageUtil.get($pageContext, "add-content") )
-	#set ( $add_content_url = $themeDisplay.getURLAddContent() )
-	#set ( $add_content_icon = "<a href='javascript:void(0)' onClick='$add_content_url'>$add_content_text</a>&nbsp;-&nbsp;" )
-	
+	#set ( $add_content_url = $theme_display.getURLAddContent() )
+
 	#set ( $layout_text = $languageUtil.get($pageContext, "layout") )
-	#set ( $layout_url = $themeDisplay.getURLLayoutTemplates() )
+	#set ( $layout_url = $theme_display.getURLLayoutTemplates() )
 #end
 
-#if ( $themeDisplay.isShowPageSettingsIcon() )
-	#set ( $show_page_settings = $themeDisplay.isShowPageSettingsIcon() )
-	#set ( $page_settings_text = $languageUtil.get($pageContext, "page-settings") )
-	#set ( $page_settings_url = $themeDisplay.getURLPageSettings().toString() )
-	#set ( $page_settings_icon = "<a href='$page_settings_url'>$page_settings_text</a>" )
+#set ( $show_home = $theme_display.isShowHomeIcon() )
+
+#if ( $show_home )
+	#set ( $home_text = $languageUtil.get($pageContext, "home") )
+	#set ( $home_url = $theme_display.getURLHome() )
 #end
+
+#set ( $show_my_account = $theme_display.isShowMyAccountIcon() )
+
+#if ( $show_my_account )
+	#set ( $my_account_text = $languageUtil.get($pageContext, "my-account") )
+	#set ( $my_account_url = $theme_display.getURLMyAccount() )
+#end
+
+#set ( $show_page_settings = $theme_display.isShowPageSettingsIcon() )
+
+#if ( $show_page_settings )
+	#set ( $page_settings_text = $languageUtil.get($pageContext, "page-settings") )
+	#set ( $page_settings_url = $theme_display.getURLPageSettings().toString() )
+#end
+
+#set ( $show_sign_in = $theme_display.isShowSignInIcon() )
+
+#if ( $show_sign_in )
+	#set ( $sign_in_text = $languageUtil.get($pageContext, "sign-in") )
+	#set ( $sign_in_url = $theme_display.getURLSignIn() )
+#end
+
+#set ( $show_sign_out = $theme_display.isShowSignOutIcon() )
+
+#if ( $show_sign_out )
+	#set ( $sign_out_text = $languageUtil.get($pageContext, "sign-out") )
+	#set ( $sign_out_url = $theme_display.getURLSignOut() )
+#end
+
+## ---------- Navigation ---------- ##
 
 #if ( $layout )
 	#set ( $ancestor_layout_id = $layout.getAncestorLayoutId() )	
@@ -113,34 +81,30 @@
 
 #set ( $has_navigation = ($layouts && $layouts.size() > 0) )
 #set ( $nav_items = $layouts )
-#set ( $portlet_include = "/html$tilesContent" )
 
-##set ( $my_places = [{"url":"javascript:;","name":"CMS (private)"}, {"url":"javascript:;",name:"Liferay Employees (Private)"}, {"url":"javascript:;","name":"Guest (Public)"}] )
-#set ( $has_places = true )
+## ---------- Includes ---------- ##
 
+#set ( $bottom_ext_include = "/html/common/themes/bottom-ext.jsp" )
+#set ( $content_include = "/html$tilesContent" )
+#set ( $session_timeout_include = "/html/common/themes/session_timeout.jsp" )
+#set ( $sound_alerts_include = "/html/common/themes/sound_alerts.jsp" )
+#set ( $top_head_include = "/html/common/themes/top_head.jsp" )
+#set ( $top_warning_include = "/html/common/themes/top_warning.jsp" )
 
-## --------- End Navigation --------- ##
+## ---------- Macros ---------- ##
+	
+#macro(css $file_name)
+	<link href="$file_name" rel="stylesheet" type="text/css" />
+#end
 
+#macro(import_css $file_name)
+	@import url("$file_name");
+#end
 
+#macro(js $file_name)
+	<script src="$file_name" type="text/javascript"></script>
+#end
 
-## --------- Macros --------- ##
-	#macro(css $file_name)
-		<link type="text/css" rel="stylesheet" href="$file_name" />
-	#end
-	#macro(import_css $file_name)
-		@import url("$file_name");
-	#end
-		#* /-----/ *#
-	#macro(js $file_name)
-		<script type="text/javascript" src="$file_name"></script>
-	#end
-		#* /-----/ *#
-	#macro(js_common $file_name)
-		#if ( !$javascript_common_folder )
-			#set ( $javascript_common_folder = $themeDisplay.getPathJavaScript() )
-		#end
-		<script type="text/javascript" src="$javascript_common_folder/$file_name"></script>
-	#end
-	#macro(language $lang_key)
-		$languageUtil.get($pageContext, $lang_key)
-	#end
+#macro(language $lang_key)
+	$languageUtil.get($pageContext, $lang_key)
+#end

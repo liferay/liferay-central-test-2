@@ -30,6 +30,5 @@ jQuery(document).last(
 	*/
 
 	function() {
-		Liferay.Draggables.init();
 	}
 );

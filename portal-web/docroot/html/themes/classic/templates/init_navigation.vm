@@ -3,7 +3,6 @@
 
 #if ( $is_selected && $layoutTypePortlet.hasStateMax() )
 	#set ( $curPortletId = "$arrayUtil.getValue($stringUtil.split($layoutTypePortlet.getStateMax()), 0)" )
-
 	#set ( $curPortletURLImpl = $portletURLFactory.create($request, $curPortletId, $plid, false) )
 
 	$curPortletURLImpl.setWindowState("normal")
