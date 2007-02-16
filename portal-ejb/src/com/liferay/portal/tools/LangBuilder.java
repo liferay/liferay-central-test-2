@@ -50,13 +50,21 @@ import java.util.TreeSet;
 public class LangBuilder {
 
 	public static void main(String[] args) {
-		new LangBuilder();
+		if (args.length == 2) {
+			new LangBuilder(args[0], args[1]);
+		}
+		else {
+			throw new IllegalArgumentException();
+		}
 	}
 
-	public LangBuilder() {
+	public LangBuilder(String langDir, String langFile) {
 		try {
+			_langDir = langDir;
+			_langFile = langFile;
+
 			String content = _orderProps(
-				new File(_LANG_DIR + "Language.properties"));
+				new File(_langDir + "/" + _langFile + ".properties"));
 
 			_createProps(content, "ar"); // Arabic
 			_createProps(content, "ca"); // Catalan
@@ -88,7 +96,7 @@ public class LangBuilder {
 		throws IOException {
 
 		File propsFile = new File(
-			_LANG_DIR + "Language_" + languageId + ".properties");
+			_langDir + "/" + _langFile + "_" + languageId + ".properties");
 
 		Properties props = new Properties();
 
@@ -107,7 +115,8 @@ public class LangBuilder {
 
 		BufferedReader br = new BufferedReader(new StringReader(content));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(
-			_LANG_DIR + "Language_" + languageId + ".properties.native"));
+			_langDir + "/" + _langFile + "_" + languageId +
+				".properties.native"));
 
 		String line = null;
 
@@ -284,6 +293,7 @@ public class LangBuilder {
 		return toText;
 	}
 
-	private String _LANG_DIR = "../portal-ejb/classes/content/";
+	private String _langDir;
+	private String _langFile;
 
 }

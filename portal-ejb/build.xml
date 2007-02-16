@@ -133,6 +133,13 @@
 	</target>
 
 	<target name="build-lang">
+		<antcall target="build-lang-cmd">
+			<param name="lang.dir" value="classes/content" />
+			<param name="lang.file" value="Language" />
+		</antcall>
+	</target>
+
+	<target name="build-lang-cmd">
 		<antcall target="build-lang-native2ascii-all" />
 
 		<java
@@ -142,22 +149,24 @@
 			newenvironment="true"
 		>
 			<jvmarg value="-Dfile.encoding=UTF-8" />
+			<arg value="${lang.dir}" />
+			<arg value="${lang.file}" />
 		</java>
 
 		<antcall target="build-lang-native2ascii-all" />
 
-		<copy file="classes/content/Language.properties" tofile="classes/content/Language_en.properties" />
+		<copy file="${lang.dir}/${lang.file}.properties" tofile="${lang.dir}/${lang.file}_en.properties" />
 	</target>
 
 	<target name="build-lang-native2ascii">
-		<delete file="classes/content/Language_${lang.code}.properties" failonerror="false" />
+		<delete file="${lang.dir}/${lang.file}_${lang.code}.properties" failonerror="false" />
 
-		<exec dir="classes/content" executable="cmd.exe" os="Windows 95,Windows 98,Windows NT,Windows 2000,Windows XP">
-			<arg line="/c ${env.JAVA_HOME}/bin/native2ascii -encoding UTF-8 Language_${lang.code}.properties.native Language_${lang.code}.properties" />
+		<exec dir="${lang.dir}" executable="cmd.exe" os="Windows 95,Windows 98,Windows NT,Windows 2000,Windows XP">
+			<arg line="/c ${env.JAVA_HOME}/bin/native2ascii -encoding UTF-8 ${lang.file}_${lang.code}.properties.native ${lang.file}_${lang.code}.properties" />
 		</exec>
 		
-		<exec dir="classes/content" executable="${env.JAVA_HOME}/bin/native2ascii" os="Linux,FreeBSD,Solaris,Mac OS X">
-			<arg line="-encoding UTF-8 Language_${lang.code}.properties.native Language_${lang.code}.properties" />
+		<exec dir="${lang.dir}" executable="${env.JAVA_HOME}/bin/native2ascii" os="Linux,FreeBSD,Solaris,Mac OS X">
+			<arg line="-encoding UTF-8 ${lang.file}_${lang.code}.properties.native ${lang.file}_${lang.code}.properties" />
 		</exec>
 	</target>
 
