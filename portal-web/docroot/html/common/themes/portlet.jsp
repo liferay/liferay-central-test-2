@@ -270,9 +270,13 @@ if (freeformPortlet) {
 	StringBuffer sb = new StringBuffer();
 
 	Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
+	String height = freeformStyleProps.getProperty("height");
+	if (Validator.isNull(height)) {
+		height = "300px";
+	}
 
 	sb.append("style=\"");
-	sb.append("height: " + freeformStyleProps.getProperty("height", "300px") + ";");
+	sb.append("height: " + height + ";");
 	sb.append("overflow: auto;");
 	sb.append("\"");
 

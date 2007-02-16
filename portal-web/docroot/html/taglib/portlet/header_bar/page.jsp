@@ -26,8 +26,8 @@
 
 <div class="portlet-header-bar" id="portlet-header-bar_<%= portletDisplay.getId() %>"
 	<c:if test="<%= !portletDisplay.isShowBackIcon() %>">
-		onmouseover="PortletHeaderBar.show(this.id)"
-		onmouseout="PortletHeaderBar.hide(this.id)"
+		onmouseover="PortletHeaderBar.show('<%= portletDisplay.getId() %>')"
+		onmouseout="PortletHeaderBar.hide('<%= portletDisplay.getId() %>')"
 	</c:if>
 	>
 

@@ -190,7 +190,7 @@ var LiferayDock = {
 		self.modeTimer = setTimeout("LiferayDock.setMode(LiferayDock.MODE.EXPAND)", 100);
 	},
 
-	animate: function(obj) {
+	animate: function(data) {
 		var collapse = (this.direction == this.MODE.COLLAPSE);
 		var count = this.count;
 		var updated = false;
@@ -412,7 +412,6 @@ var LayoutColumns = {
 
 			if (resizeBox && resizeHandle) {
 				var portletResize = Resize.createHandle(resizeHandle, null, function() {});
-				var minimized = resizeBox.style.height == "1px";
 				
 				portletResize.addRule(new ResizeRule(portlet, Resize.HORIZONTAL, Resize.ADD));
 				portletResize.addRule(new ResizeRule(resizeBox, Resize.VERTICAL, Resize.ADD));
@@ -894,123 +893,54 @@ var Navigation = {
 };
 
 var PortletHeaderBar = {
+	mode: new Object(),
 
-	fadeIn : function (id) {
-		var bar = document.getElementById(id);
+	fade: function(data) {
+		var count = data.count;
+		var id = data.id;
 
-		// portlet has been removed.  exit.
-		if (bar == null)
-			return;
+		var changed = false;
+		var icons = _$J("#portlet-header-bar_" + id + " .portlet-small-icon-bar");
 
-		if (bar.startOut) {
-			// stop fadeOut prematurely
-			clearTimeout(bar.timerOut);
-			bar.timerOut = 0;
-		}
-		bar.startOut = false;		
-		bar.startIn = true;		
-
-		bar.opac += 20;
-		for (var i = 0; i < bar.iconList.length; i++) {
-			Element.changeOpacity(bar.iconList[i], bar.opac);
-		}
-		bar.iconBar.style.display = "block";
-
-		if (bar.opac < 100) {
-			bar.timerIn = setTimeout("PortletHeaderBar.fadeIn(\"" + id + "\")", 50);
-		}
-		else {
-			bar.timerIn = 0;
-			bar.startIn = false;
-		}
-	},
-
-	fadeOut : function (id) {
-		var bar = document.getElementById(id);
-
-		// portlet has been removed.  exit.
-		if (bar == null)
-			return;
-
-		if (bar.startIn) {
-			// stop fadeIn prematurely
-			clearTimeout(bar.timerIn);
-			bar.timerIn = 0;
-		}
-		bar.startIn = false;
-		bar.startOut = true;		
-
-		bar.opac -= 20;
-		for (var i = 0; i < bar.iconList.length; i++) {
-			Element.changeOpacity(bar.iconList[i], bar.opac);
-		}
-		bar.iconBar.style.display = "block";
-		if (bar.opac > 0) {
-			bar.timerOut = setTimeout("PortletHeaderBar.fadeOut(\"" + id + "\")", 50);
-		}
-		else {
-			bar.iconBar.style.display = "none";
-			bar.timerOut = 0;
-			bar.startOut = false;
-		}
-	},
-
-	init : function (bar) {
-		if (!bar.iconBar) {
-			bar.iconBar = _$J(".portlet-small-icon-bar:first", bar).get(0);
-		}
-
-		if (!bar.iconList) {
-			bar.iconList = bar.iconBar.getElementsByTagName("img");
-		}
-	},
-
-	hide : function (id) {
-		var bar = document.getElementById(id);
-
-		// If fadeIn timer has been set, but hasn't started, cancel it
-		if (bar.timerIn && !bar.startIn) {
-			// cancel unstarted fadeIn
-			clearTimeout(bar.timerIn);
-			bar.timerIn = 0;
-		}	
-
-		if (!bar.startOut && bar.opac > 0) {
-			if (bar.timerOut) {
-				// reset unstarted fadeOut timer
-				clearTimeout(bar.timerOut);
-				bar.timerOut = 0;
+		if (PortletHeaderBar.mode[id] == "in") {
+			if (count <= 10) {
+				if (count >= 0) {
+					icons.css({"opacity": (count/10), "display": ""});
+				}
+				changed = true;
+				data.count++;
 			}
-
-			this.init(bar);
-			bar.timerOut = setTimeout("PortletHeaderBar.fadeOut(\"" + id + "\")", 150);
 		}
+		else if (PortletHeaderBar.mode[id] == "out") {
+			if (count >= 0) {
+				if (count <= 10) {
+					icons.css("opacity", (count/10));
+				}
+				data.count--;
+				changed = true;
+			}
+			else {
+				icons.css("display", "none");
+			}
+		}
+		
+		return changed;
 	},
 
-	show : function (id) {
-		var bar = document.getElementById(id);
+	hide: function (id) {
+		this.mode[id] = "out";
+		Liferay.Animate("header-icon-fade_" + id,
+			PortletHeaderBar.fade,
+			{ count: 15, id: id }
+		);
+	},
 
-		// If fadeOut timer has been set, but hasn't started, cancel it
-		if (bar.timerOut && !bar.startOut) {
-			// cancel unstarted fadeOut
-			clearTimeout(bar.timerOut);
-			bar.timerOut = 0;
-		}
-
-		if (!bar.startIn && (!bar.opac || bar.opac < 100)){
-			if (!bar.opac) {
-				bar.opac = 0;
-			}
-
-			if (bar.timerIn) {
-				// reset unstarted fadeIn timer
-				clearTimeout(bar.timerIn);
-				bar.timerIn = 0;
-			}
-
-			this.init(bar);
-			bar.timerIn = setTimeout("PortletHeaderBar.fadeIn(\"" + id + "\")", 150);
-		}
+	show: function (id) {
+		this.mode[id] = "in";
+		Liferay.Animate("header-icon-fade_" + id,
+			PortletHeaderBar.fade,
+			{ count: -5, id: id }
+		);
 	}
 };
 
@@ -1340,26 +1270,6 @@ var ToolTip = {
 	hide: function(event) {
 		if (ToolTip.current) {
 			ToolTip.current.style.display = "none";
-		}
-	},
-
-	fadeOut: function() {
-		if (ToolTip.current) {
-			var tip = ToolTip.current;
-			var opacity = ToolTip.opacity;
-
-			if (opacity > 0 && opacity < 100) {
-				ToolTip.opacity -= 20;
-				Element.changeOpacity(tip, ToolTip.opacity);
-				ToolTip.timeout = setTimeout("ToolTip.fadeOut()", 30);
-			}
-			else {
-				Element.changeOpacity(tip, 100);
-
-				if (opacity <= 0) {
-					ToolTip.current.style.display = "none";
-				}
-			}
 		}
 	}
 };

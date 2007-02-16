@@ -76,7 +76,11 @@ var Drag = {
 		this.maxY = sePosition.y;
 	},
 
-    scroll : function() {
+	scroll : function() {
+		Liferay.Animate("layout-drag-scroll", Drag.scrollStart);
+	},
+
+    scrollStart : function() {
         var nwPosition;
         var group = Drag.group;
         var setTimer = false;
@@ -101,13 +105,10 @@ var Drag = {
             setTimer = false;
         }
 
-        if (setTimer) {
-            Drag.scrollTimer = setTimeout("Drag.scroll()", 30);
-        }
-        else {
-            clearTimeout(Drag.scrollTimer);
+        if (!setTimer) {
             Drag.scrollDirection = "";
             Drag.scrollTimer = 0;
+            return false;
         }
     },
 
