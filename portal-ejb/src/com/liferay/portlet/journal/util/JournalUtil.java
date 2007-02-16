@@ -610,7 +610,7 @@ public class JournalUtil {
 					0, availableLocales.length() - 1);
 			}
 
-			root.setAttributeValue("available-locales", availableLocales);
+			root.addAttribute("available-locales", availableLocales);
 
 			removeArticleLocale(root, languageId);
 

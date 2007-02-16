@@ -80,9 +80,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="GroupLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -542,7 +539,5 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		catch (NoSuchGroupException nsge) {
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(GroupLocalServiceImpl.class);
 
 }

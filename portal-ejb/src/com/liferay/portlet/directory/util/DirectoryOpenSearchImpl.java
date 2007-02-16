@@ -24,10 +24,8 @@ package com.liferay.portlet.directory.util;
 
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.BaseOpenSearchImpl;
-import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -108,9 +106,6 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 			User user = (User)results.get(i);
 
 			String portletId = PortletKeys.DIRECTORY;
-
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				themeDisplay.getCompanyId(), portletId);
 
 			String portletTitle = PortalUtil.getPortletTitle(
 				portletId, themeDisplay.getUser());
