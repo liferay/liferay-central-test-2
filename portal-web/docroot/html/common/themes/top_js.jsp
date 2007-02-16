@@ -222,6 +222,4 @@
 	);
 
 	<%@ include file="/html/js/log/log.jsp" %>
-
-	<liferay-theme:include page="javascript.jsp" />
 </script>

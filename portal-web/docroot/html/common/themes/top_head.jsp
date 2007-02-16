@@ -40,10 +40,6 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 }
 %>
 
-<style type="text/css">
-	<liferay-theme:include page="css.jsp" />
-</style>
-
 <c:if test="<%= portlets != null %>">
 
 	<%
