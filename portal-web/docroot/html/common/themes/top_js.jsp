@@ -44,6 +44,9 @@
 		getPathThemeRoot : function() {
 			return "<%= themeDisplay.getPathThemeRoot() %>";
 		},
+		getPlid: function() {
+			return "<%= themeDisplay.getPlid() %>";
+		},
 		getURLHome : function() {
 			return "<%= themeDisplay.getURLHome() %>";
 		}
@@ -116,7 +119,12 @@
 		AjaxUtil.update(url, message);
 	}
 
-	_$J(document).ready(function(){Liferay.Util.addInputType();});
+	_$J(document).ready(
+		function() {
+			Liferay.Util.addInputType();
+		}
+	);
+
 	Liferay.Portlet.ready(Liferay.Util.addInputType);
 
 	<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
@@ -141,12 +149,20 @@
 
 	<c:if test="<%= !themeDisplay.isStatePopUp() %>">
 		<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-			_$J(document).ready(function() { Messaging.init("<%= request.getRemoteUser() %>"); });
+			_$J(document).ready(
+				function() {
+					Messaging.init("<%= request.getRemoteUser() %>");
+				}
+			);
 		</c:if>
 
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED)) && themeDisplay.isSignedIn()%>">
 			if (!is_safari) {
-				_$J(document).ready(function() { setTimeout("ReverseAjax.initialize()", 2000); });
+				_$J(document).ready(
+					function() {
+						setTimeout("ReverseAjax.initialize()", 2000);
+					}
+				);
 			}
 		</c:if>
 
@@ -155,7 +171,11 @@
 		%>
 
 		<c:if test="<%= Validator.isNotNull(scroll) %>">
-			_$J(document).last(function() { document.getElementById("<%= scroll %>").scrollIntoView(); });
+			_$J(document).last(
+				function() {
+					document.getElementById("<%= scroll %>").scrollIntoView();
+				}
+			);
 		</c:if>
 	</c:if>
 
@@ -169,6 +189,7 @@
 			Liferay.Portlet.list = {<%
 				for (int i = 0; i < portletIds.size(); i++) {
 					out.print("\"" + portletIds.get(i) + "\":1");
+
 					if (i < portletIds.size() - 1) {
 						out.print(",");
 					}
@@ -187,6 +208,18 @@
 	<c:if test="<%= themeDisplay.isFreeformLayout() %>">
 		LayoutColumns.freeform = true;
 	</c:if>
+
+	jQuery(document).ready(
+		function() {
+			Liferay.Dock.init();
+		}
+	);
+
+	jQuery(document).last(
+		function() {
+			Liferay.Draggables.init();
+		}
+	);
 
 	<%@ include file="/html/js/log/log.jsp" %>
 

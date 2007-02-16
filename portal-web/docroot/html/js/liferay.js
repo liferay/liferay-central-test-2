@@ -112,6 +112,132 @@ Liferay.Animate = Liferay.createLibrary(
 	}
 );
 
+Liferay.Dock = {
+	init: function() {
+		var instance = this;
+
+		var dock = jQuery('.lfr-dock');
+		var dockList = dock.find('.lfr-dock-list');
+
+		if (dockList.length > 0){
+			var myPlaces = jQuery('.my-places', dock);
+
+			dockList.hide();
+			dockList.wrap('<div class="lfr-dock-list-container"></div>');
+
+			dock.css(
+				{
+					cursor: 'pointer',
+					position: 'absolute',
+					zIndex: '150'
+				}
+			);
+
+			dock.bind(
+				'click',
+				{
+					dock: dock,
+					dockList: dockList
+				},
+				instance._toggle
+			);
+
+			myPlaces.bind(
+				'mouseover',
+				myPlaces,
+				instance._togglePlaces
+			);
+
+			myPlaces.bind(
+				'mouseout',
+				myPlaces,
+				instance._togglePlaces
+			);
+
+			var dockParent = dock.parent();
+
+			dockParent.css(
+				{
+					position: 'relative',
+					zIndex: '80'
+				}
+			);
+		}
+	},
+
+	_toggle: function(event) {
+		var params = event.data;
+
+		var dock = params.dock;
+		var dockList = params.dockList;
+
+		dockList.animate(
+			{
+			  opacity: 'toggle'
+			},
+			'slow',
+			'easein'
+		);
+
+		dock.toggleClass('expanded');
+	},
+
+	_togglePlaces: function(event) {
+		var myPlaces = event.data;
+
+		var myPlacesList = myPlaces.find('> ul');
+
+		myPlacesList.toggleClass('show-my-places');
+	}
+};
+
+Liferay.Draggables = {
+	init: function() {
+		var instance = this;
+
+		var drags = jQuery(instance._dragList);
+
+		if (drags.length > 0){
+			drags.Sortable(
+				{
+					accept: 'portlet-boundary',
+					handle: '.portlet-title',
+					helperclass: 'portlet-placeholder',
+					onStop: instance._onStop,
+					opacity: 0.7,
+					tolerance: 'intersect'
+				}
+			);
+		}
+	},
+
+	_onStop: function() {
+		var currentPortlet = jQuery(this);
+
+		var currentColumn = currentPortlet.parents('div[@id^=layout-column_]');
+		var currentColumnId = currentColumn[0].id.replace(/^layout-column_/, '');
+
+		var newPosition = -1;
+
+		var portlet = currentPortlet.parents('.portlet-boundary')[0];
+
+		var portletId = portlet.id.replace(/^(p_p_id_)/, '');
+		portletId = portletId.substring(0, portletId.length - 1);
+
+		jQuery(".portlet-boundary", currentColumn).each(
+			function(i) {
+				if (portlet == this) {
+					newPosition = i;
+				}
+			}
+		);
+
+		movePortlet(themeDisplay.getPlid(), portletId, currentColumnId, newPosition, themeDisplay.getDoAsUserIdEncoded());
+	},
+
+	_dragList: '#content-wrapper div[@id^=layout-column_]'
+};
+
 Liferay.DynamicSelect = new Class({
 
 	/*
@@ -127,10 +253,10 @@ Liferay.DynamicSelect = new Class({
 
 		instance.array = array;
 
-		_$J.each(
+		jQuery.each(
 			array,
 			function(i, params) {
-				var select = _$J("#" + params.select);
+				var select = jQuery('#' + params.select);
 				var selectData = params.selectData;
 
 				var prevSelectVal = null;
@@ -146,10 +272,10 @@ Liferay.DynamicSelect = new Class({
 					prevSelectVal
 				);
 
-				select.attr("name", select.attr("id"));
+				select.attr('name', select.attr('id'));
 
 				select.bind(
-					"change",
+					'change',
 					function() {
 						instance._callSelectData(instance, i);
 					}
@@ -162,7 +288,7 @@ Liferay.DynamicSelect = new Class({
 		var array = instance.array;
 
 		if ((i + 1) < array.length) {
-			var curSelect = _$J("#" + array[i].select);
+			var curSelect = jQuery('#' + array[i].select);
 			var nextSelectData = array[i + 1].selectData;
 
 			nextSelectData(
@@ -177,30 +303,30 @@ Liferay.DynamicSelect = new Class({
 	_updateSelect: function(instance, i, list) {
 		var params = instance.array[i];
 
-		var select = _$J("#" + params.select);
+		var select = jQuery('#' + params.select);
 		var selectId = params.selectId;
 		var selectDesc = params.selectDesc;
 		var selectVal = params.selectVal;
 		var selectNullable = params.selectNullable || true;
 
-		var options = "";
+		var options = '';
 
 		if (selectNullable) {
-			options += "<option value=\"\"></option>";
+			options += '<option value=""></option>';
 		}
 
-		_$J.each(
+		jQuery.each(
 			list,
 			function(i, obj) {
-				eval("var key = obj." + selectId + ";");
-				eval("var value = obj." + selectDesc + ";");
+				eval('var key = obj.' + selectId + ';');
+				eval('var value = obj.' + selectDesc + ';');
 
-				options += "<option value=\"" + key + "\">" + value + "</option>";
+				options += '<option value="' + key + '">' + value + '</option>';
 			}
 		);
 
 		select.html(options);
-		select.find("option[@value=" + selectVal + "]").attr("selected", "selected");
+		select.find('option[@value=' + selectVal + ']').attr('selected', 'selected');
 	}
 });
 
@@ -221,26 +347,26 @@ Liferay.TagsSelector = new Class({
 
 		instance.params = params;
 
-		var hiddenInput = _$J("#" + params.hiddenInput);
+		var hiddenInput = jQuery('#' + params.hiddenInput);
 
-		hiddenInput.attr("name", hiddenInput.attr("id"));
+		hiddenInput.attr('name', hiddenInput.attr('id'));
 
-		var textInput = _$J("#" + params.textInput);
+		var textInput = jQuery('#' + params.textInput);
 
 		textInput.Autocomplete(
 			{
-				source: mainPath + "/portal/autocomplete_tags_entries",
+				source: mainPath + '/portal/autocomplete_tags_entries',
 				delay: 0,
 				fx: {
-					type: "slide",
+					type: 'slide',
 					duration: 400
 				},
 				autofill: true,
-				helperClass: "autocompleter",
-				selectClass: "selectAutocompleter",
+				helperClass: 'autocompleter',
+				selectClass: 'selectAutocompleter',
 				minchars: 1,
 				onSelect: function(option) {
-					textInput.val("");
+					textInput.val('');
 
 					var curTags = instance._curTags;
 					var selTag = option.text;
@@ -262,8 +388,8 @@ Liferay.TagsSelector = new Class({
 			textInput.focus();
 		}
 
-		if (params.curTags != "") {
-			instance._curTags = params.curTags.split(",");
+		if (params.curTags != '') {
+			instance._curTags = params.curTags.split(',');
 
 			instance._update(instance);
 		}
@@ -273,7 +399,7 @@ Liferay.TagsSelector = new Class({
 		var params = instance.params;
 		var curTags = instance._curTags;
 
-		_$J("#" + params.instanceVar + "CurTags" + id).remove();
+		jQuery('#' + params.instanceVar + 'CurTags' + id).remove();
 
 		curTags.splice(id, 1);
 
@@ -289,32 +415,32 @@ Liferay.TagsSelector = new Class({
 		var params = instance.params;
 		var curTags = instance._curTags;
 
-		var hiddenInput = _$J("#" + params.hiddenInput);
+		var hiddenInput = jQuery('#' + params.hiddenInput);
 
-		hiddenInput.val(curTags.join(","));
+		hiddenInput.val(curTags.join(','));
 	},
 
 	_updateSummarySpan: function(instance) {
 		var params = instance.params;
 		var curTags = instance._curTags;
 
-		var html = "";
+		var html = '';
 
-		_$J(curTags).each(
+		jQuery(curTags).each(
 			function(i, curTag) {
-				html += "<span id=\"" + params.instanceVar + "CurTags" + i + "\">";
-				html += curTag + " ";
-				html += "[<a href=\"javascript: " + params.instanceVar + ".deleteTag(" + params.instanceVar + ", " + i + "); void('');\">x</a>]";
+				html += '<span id="' + params.instanceVar + 'CurTags' + i + '">';
+				html += curTag + ' ';
+				html += '[<a href="javascript: ' + params.instanceVar + '.deleteTag(' + params.instanceVar + ', ' + i + ');">x</a>]';
 
 				if ((i + 1) < curTags.length) {
-					html += ", ";
+					html += ', ';
 				}
 
-				html += "</span>";
+				html += '</span>';
 			}
 		);
 
-		var tagsSummary = _$J("#" + params.summarySpan);
+		var tagsSummary = jQuery('#' + params.summarySpan);
 
 		tagsSummary.html(html);
 	}

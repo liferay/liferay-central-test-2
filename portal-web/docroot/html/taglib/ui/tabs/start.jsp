@@ -96,15 +96,25 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 		%>
 
 			<li <%= (values.length == 1) || value.equals(values[i]) ? "class=\"current\"" : "" %> id="<%= namespace %><%= param %><%= values[i] %>TabsId">
-				<c:if test="<%= values.length > 1 %>">
-					<a href="<%= curURL %>">
-				</c:if>
+				<c:choose>
+					<c:when test="<%= values.length > 1 %>">
+						<a href="<%= curURL %>">
+					</c:when>
+					<c:otherwise>
+						<span>
+					</c:otherwise>
+				</c:choose>
 
 				<%= LanguageUtil.get(pageContext, names[i]) %>
 
-				<c:if test="<%= values.length > 1 %>">
-					</a>
-				</c:if>
+				<c:choose>
+					<c:when test="<%= values.length > 1 %>">
+						</a>
+					</c:when>
+					<c:otherwise>
+						</span>
+					</c:otherwise>
+				</c:choose>
 			</li>
 
 		<%

@@ -44,29 +44,4 @@ else {
 
 	RuntimePortletUtil.processTemplate(application, pageContext, request, response, StringUtil.split(layoutTypePortlet.getStateMax())[0], content);
 }
-
-if (!themeDisplay.isStateExclusive()) {
-	List columns = layoutTypePortlet.getLayoutTemplate().getColumns();
-%>
-
-	<script type="text/javascript">
-		LayoutColumns.layoutMaximized = <%= layoutMaximized %>;
-		LayoutColumns.plid = "<%= plid %>";
-		LayoutColumns.doAsUserId = "<%= themeDisplay.getDoAsUserId() %>";
-
-		<c:if test="<%= !layoutMaximized && themeDisplay.isSignedIn() %>">
-			LayoutColumns.init([<%
-				for (int i = 0; i < columns.size(); i++) {
-					out.print("\"" + (String)columns.get(i) + "\"");
-
-					if (i < columns.size() - 1) {
-						out.print(",");
-					}
-				}
-				%>]);
-		</c:if>
-	</script>
-
-<%
-}
 %>

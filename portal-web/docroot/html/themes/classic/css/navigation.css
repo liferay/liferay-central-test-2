@@ -45,68 +45,68 @@
 		
 /* Account Navigation
 -----------------------------------------------------------------*/
-.nav-account {
+.lfr-dock {
 	position:absolute;
 	right:10px;
 	top:10px;
 }
-	.nav-account h2 {
+	.lfr-dock h2 {
 		margin-bottom: 0.5em;
 		text-align:right;
 		font-size:1.2em;
 		background: url(../images/custom/welcome_message.png) no-repeat 0 50%;
 		padding-left: 2em;
 	}
-	.nav-account ul {
+	.lfr-dock ul {
 		float:left;
 		display:inline;
 	}
-		.nav-account li {
+		.lfr-dock li {
 			float:left;
 			display:inline;
 			margin-left: 15px;
 		}
-			.nav-account li a {
+			.lfr-dock li a {
 				padding: 2px 0 2px 20px;
 				background: url() no-repeat 0 50%;
 			}
-			.nav-account li.home a {
+			.lfr-dock li.home a {
 				background-image: url(../images/custom/home.gif);
 			}
-			.nav-account li.my-account a {
+			.lfr-dock li.my-account a {
 				background-image: url(../images/custom/my_account.gif);
 			}
-			.nav-account li.sign-out a {
+			.lfr-dock li.sign-out a {
 				background-image: url(../images/custom/sign_in.gif);
 			}
-			.nav-account li.sign-out a {
+			.lfr-dock li.sign-out a {
 				background-image: url(../images/custom/sign_out.gif);
 			}
-			.nav-account li.add-content a {
+			.lfr-dock li.add-content a {
 				background-image: url(../images/custom/add_content.gif);
 			}
-			.nav-account li.layout a {
+			.lfr-dock li.layout a {
 				background-image: url(../images/custom/layout.gif);
 			}
-			.nav-account li.page-settings a {
+			.lfr-dock li.page-settings a {
 				background-image: url(../images/custom/page_settings.gif);
 			}
-			.nav-account li.my-places a {
+			.lfr-dock li.my-places a {
 				background-image: url(../images/custom/my_places.gif);
 			}
-		.nav-account li.my-places{
+		.lfr-dock li.my-places{
 			display: none;
 		}
 /* Javascript enabled Nav Menu
 -----------------------------------------------------------------*/
-.js .nav-account {
+.js .lfr-dock {
 	right:10px;
 	top:10px;
 	position:relative;
 	float:right;
 	min-width: 150px;
 }
-	.js .nav-account h2 {
+	.js .lfr-dock h2 {
 		padding: 0 29px 0 0;
 		font-size:1.2em;
 		background: url(../images/custom/widget_bar.png) no-repeat 100% -30px;
@@ -114,7 +114,7 @@
 		position: relative;
 		z-index: 82;
 	}
-			.js .nav-account h2 span{
+			.js .lfr-dock h2 span{
 				padding:0.5em 0.5em 0.5em 2em;
 				display: block;
 				font-size:1.2em;
@@ -122,27 +122,27 @@
 				background: url(../images/custom/widget_bar.png) no-repeat 0 0;
 				margin-bottom: 0;
 			}
-		.js .nav-account.expanded .nav-widget-container{
+		.js .lfr-dock.expanded .lfr-dock-list-container{
 			background: #60738c;
 			border: 1px solid #b5b9bb;
 			border-top: none;
 			position: relative;
 			top:  -2px;
 		}
-	.js .nav-account ul {
+	.js .lfr-dock ul {
 		margin-tops: 0.25em;
 		border-left: 20px solid #DAE3EF;
 		background: url(../images/custom/widget_menu_bkg.gif) no-repeat 0 0;
 		display:none;
 		float: none;
 	}
-		.js .nav-account li {
+		.js .lfr-dock li {
 			display:block;
 			float: none;
 			margin-bottom:0pt;
 			margin-left:0.2em;
 		}
-			.js .nav-account li a {
+			.js .lfr-dock li a {
 				background-position:0.5em 50%;
 				border-top:1px solid #ccc;
 				margin-left:0.3em;
@@ -150,26 +150,26 @@
 				padding:0.5em 0pt 0.5em 2.5em;
 				text-decoration:none;
 			}
-			.js .nav-account li:first-child a {
+			.js .lfr-dock li:first-child a {
 				
 				border-top:none;
 				
 			}
-				.js .nav-account li a:hover {
+				.js .lfr-dock li a:hover {
 					border-top:1px solid #e0d79f;
 					background-color: #FFF5BA;
 					padding-left: 3.5em;
 					background-position: 1.5em 50%;
 				}
-					.js .nav-account li:first-child a,
-					.js .nav-account li:first-child a:hover {
+					.js .lfr-dock li:first-child a,
+					.js .lfr-dock li:first-child a:hover {
 						border-top: none;
 					}
 			.js .my-places {
 				display: none;
 				position: relative;
 			}
-				.js .nav-account li.my-places  li a {
+				.js .lfr-dock li.my-places  li a {
 					background-image: none;
 				}
 			.js .my-places .show-my-places {
@@ -201,24 +201,24 @@
 						background-image: url(../images/custom/my_place_private.gif);
 					}
 			/*------ IE Specific Hacks ------*/
-			.ie6.js .nav-account {
+			.ie6.js .lfr-dock {
 				width: 150px;
 				white-space:nowrap;
 			}
-				.ie6.js .nav-account h2{
+				.ie6.js .lfr-dock h2{
 					
 				}
-					.ie6.js .nav-account.expanded .nav-widget-container{
+					.ie6.js .lfr-dock.expanded .lfr-dock-list-container{
 						zoom:1;
 					}
 				.ie6.js .my-places .show-my-places{
 					width:200px;
 				}
 					
-			.ie6.js .nav-account li {
+			.ie6.js .lfr-dock li {
 				zoom:1;
 			}
-			.ie6.js .nav-account li a{
+			.ie6.js .lfr-dock li a{
 				zoom:1;
 			}
 			

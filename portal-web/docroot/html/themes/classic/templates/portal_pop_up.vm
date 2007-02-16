@@ -1,9 +1,4 @@
-#**
- * Copyright (c) 2000-2007 Liferay, LLC. All rights reserved.
- * Liferay is licensed under the M.I.T. License
- *#
-
-#parse("$fullTemplatesPath/portal_init.vm")
+#parse("$fullTemplatesPath/init_portal.vm")
 
 <html>
 
