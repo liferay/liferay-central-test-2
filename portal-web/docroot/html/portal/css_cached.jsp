@@ -36,5 +36,3 @@ response.setContentType(Constants.TEXT_CSS);
 	border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;
 	font-weight: bold;
 }
-
-<liferay-theme:include page="css_cached.jsp" />
