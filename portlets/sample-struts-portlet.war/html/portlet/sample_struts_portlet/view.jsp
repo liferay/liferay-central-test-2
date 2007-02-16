@@ -24,4 +24,18 @@
 
 <%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
 
+<%
+Locale locale = (Locale)session.getAttribute("org.apache.struts.action.LOCALE");
+
+ResourceBundle bundle = ResourceBundle.getBundle("content.test.Language", locale);
+%>
+
+<!--
+You can use the Struts tag library or build your own Java resource bundle. Both
+refer to the same properties files in located in
+/WEB-INF/classes/content/test/Language.properties.
+
 <b>View <bean:message key="hello-there" /></b>
+-->
+
+<b>View <%= bundle.getString("hello-there") %></b>

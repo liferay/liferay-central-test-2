@@ -185,6 +185,13 @@
 		</java>
 	</target>
 
+	<target name="build-lang">
+		<ant dir="../portal-ejb" target="build-lang-cmd">
+			<property name="lang.dir" value="../portlets/sample-struts-portlet.war/WEB-INF/classes/content/test" />
+			<property name="lang.file" value="Language" />
+		</ant>
+	</target>
+
 	<target name="loop-modules">
 		<for param="module.name">
 			<path>
