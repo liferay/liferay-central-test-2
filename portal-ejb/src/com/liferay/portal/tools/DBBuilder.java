@@ -387,7 +387,7 @@ public class DBBuilder {
 		String db2 = _buildTemplate(fileName, _DB2, "db2");
 
 		db2 = _rewordDb2(db2);
-		//db2 = _removeLongInserts(db2);
+		db2 = _removeLongInserts(db2);
 		db2 = _removeNull(db2);
 		db2 = StringUtil.replace(db2, "\\'", "''");
 
