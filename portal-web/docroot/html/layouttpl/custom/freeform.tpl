@@ -1,7 +1,5 @@
-<div id="layout-content-outer-decoration">
-	<div id="layout-content-inner-decoration">
-		<div id="layout-content-container" style="position: relative;">
-			$processor.processColumn("column-1")
-		</div>
+<div class="freeform" id="content-wrapper">
+	<div class="lfr-column" id="column-1">
+		$processor.processColumn("column-1")
 	</div>
 </div>

@@ -1,0 +1,21 @@
+#set ( $portlet_id = $portletDisplay.getId() )
+#set ( $portlet_title = $portletDisplay.getTitle() )
+<div class="portlet"  id="portlet-id-$portlet_id">
+	<div class="portlet-topper"> <span class="portlet-title">$portlet_title </span>
+		<div class="portlet-icons" id="portlet-small-icon-bar_$portlet_id"> 
+		#if ( $portletDisplay.isShowBackIcon() )
+			$taglibLiferay.iconBack()
+			#else
+			$taglibLiferay.iconConfiguration()
+			$taglibLiferay.iconEdit()
+			$taglibLiferay.iconEditGuest()
+			$taglibLiferay.iconHelp()
+			$taglibLiferay.iconPrint()
+			$taglibLiferay.iconMinimize()
+			$taglibLiferay.iconMaximize()
+			$taglibLiferay.iconClose()
+			#end
+		</div>
+	</div>
+	<div class="portlet-content"> $portletDisplay.getContent() </div>
+</div>

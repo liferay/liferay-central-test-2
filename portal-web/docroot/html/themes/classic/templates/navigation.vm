@@ -1,0 +1,22 @@
+#if ( $has_navigation )
+	<ul>		
+				#foreach ( $nav_item in $nav_items )
+					#parse("$full_templates_path/init_navigation.vm")
+						#if ( $is_selected )
+							#set ( $current_item_class = "selected" )
+						#else
+							#set ( $current_item_class = "" )
+						#end
+					<li class="$current_item_class">
+						 <a href="$item_url" $item_target><span>$item_text</span></a>
+						 #if ( $has_children )
+							<ul class="child-menu">
+ 							 #foreach ( $children in $nav_children )
+								<li>$children.getName($locale)</li>
+							 #end
+							</ul>
+						 #end
+					</li>
+				#end
+	</ul>
+#end

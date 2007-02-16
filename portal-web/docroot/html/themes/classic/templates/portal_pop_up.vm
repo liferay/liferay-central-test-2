@@ -1,0 +1,21 @@
+#**
+ * Copyright (c) 2000-2007 Liferay, LLC. All rights reserved.
+ * Liferay is licensed under the M.I.T. License
+ *#
+
+#parse("$fullTemplatesPath/portal_init.vm")
+
+<html>
+
+<head>
+	<title>$tilesTitle</title>
+	$theme.include("/html/common/themes/top_head.jsp")
+</head>
+
+<body>
+
+$theme.include($portlet_include)
+
+</body>
+
+</html>

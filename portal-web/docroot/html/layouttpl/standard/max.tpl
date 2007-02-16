@@ -1,9 +1,5 @@
-<div id="layout-content-outer-decoration">
-	<div id="layout-content-inner-decoration">
-		<div id="layout-content-container">
-			<div valign="top">
-				$processor.processMax()
-			</div>
-		</div>
+<div class="columns-max" id="content-wrapper">
+	<div class="lfr-column" id="column-1">
+		$processor.processMax()
 	</div>
 </div>

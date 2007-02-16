@@ -14,7 +14,7 @@
 		<root-path>/html/themes/classic</root-path>
 		<templates-path>/html/themes/classic/templates</templates-path>
 		<images-path>/html/themes/classic/images</images-path>
-		<template-extension>jsp</template-extension>
+		<template-extension>vm</template-extension>
 		<settings>
 			<setting key="hello" value="world" />
 			<setting key="hi" value="mom" />

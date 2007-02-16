@@ -1,0 +1,218 @@
+
+/* Defines the positioning of the icons and title 
+-----------------------------------------------------------------*/
+
+.portlet {
+margin-bottom: 10px;
+background: #fff;
+}
+	.portlet-topper {
+	position: relative;
+	background: url(../images/custom/portlet_header_bkg.gif) no-repeat 100% 0;
+	}
+		.portlet-title {
+			background: url(../images/custom/portlet_header_bkg.gif) no-repeat 0 -50px;
+			display: block;
+			font-weight: bold;
+			min-width: 50%;
+			padding: 5px 10px;
+		}
+		.portlet-icons {
+			margin: 3px;
+			position: absolute;
+			right: 3px;
+			text-align: right;
+			top: 0;
+		}
+	.portlet-content {
+		border: 1px solid #6374d0;
+		padding: 10px;
+	}
+	/*------ IE Specific Hacks ------*/
+		.ie6 .portlet-topper {
+			zoom: 1;
+		}
+		.ie6 .portlet-icons {
+			margin-top: 5px;
+		}
+	
+/* Place holder for drag/drop
+-----------------------------------------------------------------*/
+.portlet-placeholder {
+	border: 1px dashed #508fb4;
+	background: url(../images/custom/placeholder_bkg.gif);
+}
+/* Porlet Standard Styles (Defined in the JSR-168 standard)
+-----------------------------------------------------------------*/
+
+/*  Fonts    //---------------------------*/
+.portlet-font {
+	/*------ Font attributes for the "normal" fragment font. ------*/
+}
+
+.portlet-font-dim {
+	/*------ Font  attributes  similar  to  the  .portlet-font  but  the  color is lighter.  ------*/
+}
+
+/*  Messages    //---------------------------*/
+.portlet-msg-status {
+	/*------ Status  of  the  current operation.  ------*/
+}
+
+
+.portlet-msg-info {
+	/*------ Help  messages,  general additional information, etc. ------*/
+	background: #fafafa;
+	padding: 0.5em;
+	border: 1px solid #53B2F8;
+	width: 30%;
+	margin: 0.15em auto;
+	text-align: left;
+	font-size: 90%;
+	color:#777;
+}
+
+.portlet-msg-error {
+	/*------  Error messages. ------*/
+	background: #FFF1ED url(../images/custom/messages/error.gif) no-repeat 0.5em 50%;
+	padding: 0.5em 0.5em 0.5em 2.5em;
+	border: 1px solid #900;
+	margin: 0.15em auto;
+	text-align: center;
+	display:block;
+}
+
+.portlet-msg-alert {
+	/*------  Warning messages. ------*/
+	background: #FEFFDF url(../images/alert.gif) no-repeat 0.5em 10%;
+	padding: 0.5em 0.5em 0.5em 2.2em;
+	border: 1px solid #EFEFEF;
+	width: 30%;
+	margin: 0.15em auto;
+	text-align: center;
+}
+
+.portlet-msg-success {
+	/*------  Verification of the successful completion of a task. ------*/
+	background: #F4FDEF url(../images/custom/messages/success.gif) no-repeat 0.5em 50%;
+	padding: 0.5em 0.5em 0.5em 2.2em;
+	border: 1px solid #3F9305;
+	width: 30%;
+	display:block;
+	margin: 0.15em auto;
+	text-align: center;
+}
+
+/*  Sections    //---------------------------*/
+
+.portlet-section-header {
+	/*------ Table or section header. ------*/
+} 
+	.portlet-section-header th {
+		color:#333;
+		padding: 0.3em 1em;
+	}
+.portlet-section-body {
+	/*------ Normal text in a table cell.  ------*/
+} 
+	.portlet-section-body td {
+		border-top:1px solid #bfbfbf;
+		background: #dcdcdc;
+		padding: 0.3em 1em;
+	}
+.portlet-section-alternate {
+	/*------ Text in every other row in the cell.  ------*/
+} 
+	.portlet-section-alternate td {
+		border-top:1px solid #bfbfbf;
+		background: #fff;
+		padding: 0.3em 1em;
+	}
+		.portlet-section-alternate.hover td,
+		.portlet-section-body.hover td {
+			border-top:1px solid #e0d79f;
+			border-bottom:1px solid #e0d79f;
+			background: #FFF5BA;
+		}
+.portlet-section-selected {
+	/*------ Text in a selected cell range. ------*/
+} 
+ 
+.portlet-section-subheader {
+	/*------ Text of a subheading. ------*/
+}  
+
+.portlet-section-footer {
+	/*------ Table or section footnote. ------*/
+}  
+
+.portlet-section-text {
+	/*------ Text that belongs to the table but does not fall in one of the other categories (e.g. explanatory or help text that is 
+associated with the section).  ------*/
+}
+
+/*  Forms    //---------------------------*/
+.portlet-form-label {
+ 	/*------  Text used for the descriptive label of the whole form (not the labels for fields).------*/
+}
+
+.portlet-form-input-field {
+ 	/*------ Text of the user-input in an input field. ------*/
+}
+ 
+.portlet-form-button {
+ 	/*------ Text on a button  ------*/
+}
+.portlet-icon-label  {
+ 	/*------ Text  that  appears  beside  a  context  dependent  action icon. ------*/
+}
+
+.portlet-dlg-icon-label {
+ 	/*------ Text that appears beside a “standard” icon (e.g. Ok, or Cancel). ------*/
+}
+
+.portlet-form-field-label {
+ 	/*------ Text for a separator of fields (e.g. checkboxes, etc.). ------*/
+}
+   
+.portlet-form-field {
+ 	/*------ Text for a field (not input field, e.g. checkboxes, etc). ------*/
+}
+/*  Menus    //---------------------------*/
+
+portlet-menu {
+ 	/*------ General  menu  settings  such  as  background color, margins, etc. ------*/
+}
+ 
+portlet-menu-item {
+ 	/*------ Normal, unselected menu item.  ------*/
+}
+  
+portlet-menu-item-selected {
+ 	/*------ Selected menu item.  ------*/
+}
+  
+portlet-menu-item-hover {
+ 	/*------ Normal,  unselected  menu  item  when  the mouse hovers over it. ------*/
+}
+ 
+portlet-menu-item-hover-selected {
+ 	/*------ Selected menu item when the mouse hovers over it. ------*/
+}
+ 
+portlet-menu-cascade-item {
+ 	/*------ Normal, unselected menu item that has sub-menus. ------*/
+}
+ 
+portlet-menu-cascade-item-selected {
+ 	/*------ Selected sub-menu item that has sub-menus.  ------*/ 	
+}
+  
+portlet-menu-description {
+	/*------ Descriptive text for the menu (e.g. in a help context below the menu) . ------*/
+}
+ 
+portlet-menu-caption {
+ 	/*------ Menu caption. ------*/
+}
+  

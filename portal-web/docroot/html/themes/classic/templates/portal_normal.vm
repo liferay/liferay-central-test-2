@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+#parse("$fullTemplatesPath/init_portal.vm")
+
+<html class="" dir="#language("lang.dir")">
+
+
+<head>
+	<title>$company_name - $the_title</title>
+	$theme.include("/html/common/themes/top_head.jsp")
+	#js("$javascript_folder/interface.js")
+	#js($js_main_file)
+	#css($css_main_file)
+	<style>
+		.portlet-saved{
+			background: #ff9;
+		}
+	</style>
+</head>
+<body id="body-bg">
+$theme.include("/html/common/themes/top_warning.jsp")
+<div id="wrapper">
+	<div id="banner">
+	<h1 class="logo"><a href="$company_url">$company_name</a></h1>
+	<div class="nav-account"><h2 class="user-greeting"><span>$user_greeting</span></h2>
+	<ul class="nav-widget">
+		#if ( $show_home )
+			<li class="home"><a href="$home_url">$home_text</a></li>
+		#end
+		#if ( $show_sign_in )
+			<li class="sign-in"><a href="$sign_in_url">$sign_in_text</a></li>
+		#end
+		#if ( $show_my_account )
+			<li class="my-account"><a href="$my_account_url">$my_account_text</a></li>
+		#end
+		#if ( $show_sign_out )
+			<li class="sign-out"><a href="$sign_out_url">$sign_out_text</a></li>
+		#end
+		#if ( $show_add_content )
+			<li class="add-content"><a href="javascript:void(0)" onclick="$add_content_url">$add_content_text</a></li>
+			<li class="layout"><a href="javascript:void(0)" onclick="$layout_url">$layout_text</a></li>
+		#end
+		#if ( $show_page_settings )
+			<li class="page-settings"><a href="$page_settings_url">$page_settings_text</a></li>
+		#end
+		#if ( $has_places )
+			<li class="my-places"> <a href="javascript:;">My Places</a>
+				<ul>
+				<li class="public"><a href="javascript:;">My Community (Public)</a></li>
+				<li class="private"><a href="javascript:;">Liferay Employees (Private)</a></li>
+				<li class="public"><a href="javascript:;">Guest (Public )</a></li>
+				<li class="private"><a href="javascript:;">CMS (private)</a></li>
+				</ul>
+			</li>
+		#end
+		</ul></div>
+	</div>
+	<div id="navigation">
+	#parse("$full_templates_path/navigation.vm")
+	</div>
+					#if ( $selectable )
+						$theme.include($portlet_include)
+					#else
+						$portletDisplay.recycle()
+						$portletDisplay.setTitle($the_title)
+						$theme.wrapPortlet("portlet.vm", $portlet_include)
+					#end
+	<div id="footer"></div>
+	
+</div>
+$theme.include("/html/common/themes/bottom-ext.jsp")
+$theme.include("/html/common/themes/session_timeout.jsp")
+$theme.include("/html/common/themes/sound_alerts.jsp")
+</body>
+
+</html>

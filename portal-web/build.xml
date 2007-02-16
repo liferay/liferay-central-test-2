@@ -335,6 +335,7 @@
 			<then>
 				<copy todir="${app.server.deploy.dir}/ROOT">
 					<fileset dir="docroot">
+						<include name="**/*.css" />
 						<include name="**/*.gif" />
 						<include name="**/*.jar" />
 						<include name="**/*.jpg" />

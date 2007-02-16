@@ -1,25 +1,15 @@
-<div id="layout-content-outer-decoration">
-	<div id="layout-content-inner-decoration">
-		<div id="layout-content-container">
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr>
-				<td valign="top" width="33%">
-					$processor.processColumn("column-1")
-				</td>
-				<td class="layout-column-spacer" width="1%">
-					<div>&nbsp;</div>
-				</td>
-				<td valign="top" width="33%">
-					$processor.processColumn("column-2")
-				</td>
-				<td class="layout-column-spacer" width="1%">
-					<div>&nbsp;</div>
-				</td>
-				<td valign="top" width="33%">
-					$processor.processColumn("column-3")
-				</td>
-			</tr>
-			</table>
-		</div>
-	</div>
+<div class="columns-3" id="content-wrapper">
+	<table id="layout-grid">
+	<tr>
+		<td class="lfr-column thirty" id="column-1" valign="top">
+			$processor.processColumn("column-1")
+		</td>
+		<td class="lfr-column thirty" id="column-2" valign="top">
+			$processor.processColumn("column-2")
+		</td>
+		<td class="lfr-column thirty" id="column-3" valign="top">
+			$processor.processColumn("column-3")
+		</td>
+	</tr>
+	</table>
 </div>

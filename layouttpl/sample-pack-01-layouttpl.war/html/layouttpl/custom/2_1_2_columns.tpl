@@ -1,29 +1,25 @@
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td valign="top" width="50%">
-		$processor.processColumn("column-1")
-	</td>
-	<td class="layout-column-spacer" width="1%">
-		<div>&nbsp;</div>
-	</td>
-	<td valign="top" width="49%">
-		$processor.processColumn("column-2")
-	</td>
-</tr>
-<tr>
-	<td colspan="3" valign="top">
-		$processor.processColumn("column-3")
-	</td>
-</tr>
-<tr>
-	<td valign="top" width="50%">
-		$processor.processColumn("column-4")
-	</td>
-	<td class="layout-column-spacer" width="1%">
-		<div>&nbsp;</div>
-	</td>
-	<td valign="top" width="49%">
-		$processor.processColumn("column-5")
-	</td>
-</tr>
-</table>
+<div class="columns-2-1-2" id="content-wrapper">
+	<table id="layout-grid">
+	<tr id="column-center">
+		<td class="lfr-column fifty" id="column-1" valign="top">
+			$processor.processColumn("column-1")
+		</td>
+		<td class="lfr-column fifty" id="column-2" valign="top">
+			$processor.processColumn("column-2")
+		</td>
+	</tr>
+	<tr>
+		<td class="lfr-column" colspan="3" id="column-3" valign="top">
+			$processor.processColumn("column-3")
+		</td>
+	</tr>
+	<tr id="column-center">
+		<td class="lfr-column fifty" id="column-4" valign="top">
+			$processor.processColumn("column-4")
+		</td>
+		<td class="lfr-column fifty" id="column-5" valign="top">
+			$processor.processColumn("column-5")
+		</td>
+	</tr>
+	</table>
+</div>

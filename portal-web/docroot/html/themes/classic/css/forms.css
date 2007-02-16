@@ -1,0 +1,56 @@
+input:not([type="checkbox"]),
+input:not([type="hidden"]),
+input:not([type="radio"]),
+input:not([type="image"]),
+select,
+textarea {
+	padding:0.3em;
+	font: 1em 'Tahoma','Lucida Sans Unicode','Lucida Grande', 'Lucida', Arial, Verdana, sans-serif;
+	border:1px solid #aaa;
+	border-left-color:#777;
+	border-top-color:#777;
+	background:#fff url(../images/custom/input_shadow.gif) no-repeat;
+}
+	input {
+		padding:0.5em;
+	}
+	select {
+		padding:0.3em;
+	}
+input[type="submit"],
+input[type="button"] {
+	border: 3px double #999;
+	border-top-color: #ccc;
+	border-left-color: #ccc;
+	padding: 0.25em;
+	color: #333;
+	font-weight: bold;
+	background:#fafafa url(../images/custom/button.gif) repeat-x;
+}
+/*------ IE6 chokes on attribute selectors in a chain, 
+		 so we separate them into their own rule ------*/
+	
+	.ie6 input.text,
+	.ie6 input.password,
+	.ie6 input.submit,
+	.ie6 input.file,
+	.ie6 input.button {
+		padding:0.3em;
+		font: 1em 'Tahoma','Lucida Sans Unicode','Lucida Grande', 'Lucida', Arial, Verdana, sans-serif;
+		border:1px solid #aaa;
+		border-left-color:#777;
+		border-top-color:#777;
+		background:#fff url(../images/custom/input_shadow.gif) no-repeat;
+	}
+		 
+	.portlet-form-button,
+	.ie6 input.submit,
+	.ie6 input.button {
+		border: 3px double #999;
+		border-top-color: #ccc;
+		border-left-color: #ccc;
+		padding: 0.25em;
+		color: #333;
+		font-weight: bold;
+		background:#fafafa url(../images/custom/button.gif) repeat-x;
+	}
