@@ -276,7 +276,9 @@ if (freeformPortlet) {
 	}
 
 	sb.append("style=\"");
-	sb.append("height: " + height + ";");
+	sb.append("height: ");
+	sb.append(GetterUtil.getString(freeformStyleProps.getProperty("height"), "300px"));
+	sb.append(";");
 	sb.append("overflow: auto;");
 	sb.append("\"");
 

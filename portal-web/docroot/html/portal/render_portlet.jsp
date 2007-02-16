@@ -332,26 +332,15 @@ PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(requ
 
 		Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
 
-		String width = freeformStyleProps.getProperty("width");
-		String top = freeformStyleProps.getProperty("top");
-		String left = freeformStyleProps.getProperty("left");
-		
-		if (Validator.isNull(width)) {
-			width = "400px";
-		}
-		if (Validator.isNull(top)) {
-			top = "0";
-		}
-		if (Validator.isNull(left)) {
-			left = "0";
-		}
-
 		sb.append("style=\"position: absolute; ");
-		sb.append("width: " + width);
+		sb.append("width: ");
+		sb.append(GetterUtil.getString(freeformStyleProps.getProperty("width"), "400px"));
 		sb.append("; ");
-		sb.append("top: " + top);
+		sb.append("top: ");
+		sb.append(GetterUtil.getString(freeformStyleProps.getProperty("top"), "0"));
 		sb.append("; ");
-		sb.append("left: " + left);
+		sb.append("left: ");
+		sb.append(GetterUtil.getString(freeformStyleProps.getProperty("left"), "0"));
 		sb.append(";\"");
 
 		freeformStyles = sb.toString();
