@@ -845,17 +845,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			PortletPreferences prefs = (PortletPreferences)itr.next();
 
+			javax.portlet.PortletPreferences jxPrefs =
+				PortletPreferencesLocalServiceUtil.getPreferences(
+					layout.getCompanyId(), prefs.getPrimaryKey());
+
 			String portletId = prefs.getPortletId();
 
 			if (layoutTypePortlet.hasPortletId(portletId)) {
-				exportPortletData(context, portletId, prefs, parentEl);
+				exportPortletData(context, portletId, jxPrefs, parentEl);
 			}
 		}
 	}
 
 	protected void exportPortletData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs, Element parentEl)
+			javax.portlet.PortletPreferences prefs, Element parentEl)
 		throws PortalException, SystemException {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
@@ -882,14 +886,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			_log.debug("Exporting data for " + portletId);
 		}
 
-		String data = null;
-
-		PortletPreferencesImpl prefsImpl =
-			(PortletPreferencesImpl)
-				PortletPreferencesSerializer.fromDefaultXML(
-					prefs.getPreferences());
-
-		data = portletDataHandler.exportData(context, portletId, prefsImpl);
+		String data = portletDataHandler.exportData(context, portletId, prefs);
 
 		if (data == null) {
 			if (_log.isDebugEnabled()) {
