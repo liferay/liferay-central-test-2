@@ -35,11 +35,6 @@ lang.line.end=right
 ## Messages
 ##
 
-
-##
-## Currency
-##
-
 a-page-may-not-contain-more-than-x-portlets=A page may not contain more than {0} portlets.
 all-email-from-x-is-being-forwarded-to-x=All email from {0} is being forwarded to {1}.
 be-sure-to-browse-our-guestbook-for-the-latest-entries=Be sure to {0}browse{1} our guestbook for the latest entries!
@@ -151,4 +146,8 @@ your-account-with-login-x-is-not-active={0}, your account with login {1} is not 
 your-new-email-address-is-x=Your new email address is {0}.
 your-order-cannot-be-processed-because-it-falls-below-the-minimum-required-amount-of-x=Your order cannot be processed because it falls below the minimum required amount of {0}.
 your-password-has-been-sent-to-x=Your password has been sent to {0}.
+
+##
+## Currency
+##
 

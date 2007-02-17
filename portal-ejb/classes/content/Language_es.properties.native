@@ -172,11 +172,6 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tarea del Workflo
 ## Action names
 ##
 
-
-##
-## Layout types
-##
-
 action.ADD_ARTICLE=Añadir un artículo
 action.ADD_CATEGORY=Añadir una categoría
 action.ADD_COMMUNITY=Añadir una comunidad
@@ -240,7 +235,7 @@ action.VIEW=Ver
 action.VIEW_USER=Ver usuario
 
 ##
-## Messages
+## Layout types
 ##
 
 layout.types.article=Artículo
@@ -250,7 +245,7 @@ layout.types.portlet=Portlets
 layout.types.url=URL
 
 ##
-## Currency
+## Messages
 ##
 
 1-day=1 día
@@ -1370,6 +1365,7 @@ my-account=Mi cuenta
 my-addresses=Mi dirección
 my-blog=Mi blog
 my-communities=Mis comunidades
+my-community=Mi Comunidad
 my-documents=Mis documentos
 my-entries=Mis entradas
 my-images=Mis imágenes
@@ -1749,6 +1745,7 @@ print=Imprimir
 priority=Prioridad
 private-node=Nodo privado
 private-nodes=Nodos privados
+private-pages=Páginas Privadas
 private-virtual-host=Servidor virtual privado
 private=Privado
 processing-login=Autenticando...
@@ -1772,6 +1769,7 @@ proxy-port=Puerto del proxy
 pt_en=De portugués a inglés
 public-node=Nodo público
 public-nodes=Nodos públicos
+public-pages=Páginas Públicas
 public-virtual-host=Servidor virtual público
 public=Público
 publisher=Editor
@@ -2597,6 +2595,10 @@ zh_en=De chino a inglés
 zip-postal=Zip/Postal
 zip=Código postal
 zt_en=De chino (Taiwán) a inglés
+
+##
+## Currency
+##
 
 currency.AED=Dirham de los EAU
 currency.ALL=Lek Albanés

@@ -72,11 +72,6 @@ javax.portlet.title.9=Yönetim
 ## Messages
 ##
 
-
-##
-## Currency
-##
-
 INBOX=Gelen
 a-page-may-not-contain-more-than-x-portlets=Bir sayfa {0} portletden fazlasını barındıramaz.
 about=Hakkında
@@ -1091,6 +1086,10 @@ your-password-has-been-sent-to-x=Your password has been sent to {0}.
 your-selections=Seçenekleriniz
 zh_en=Çinceden İngilizceye
 zip=Posta Kodu
+
+##
+## Currency
+##
 
 currency.AED=BAE Dirhem
 currency.ALL=Arnavutluk Leki

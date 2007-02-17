@@ -182,6 +182,18 @@
 		<property name="service" ref="com.liferay.portal.service.PortalService.professional" />
 		<property name="serviceInterface" value="com.liferay.portal.service.PortalService" />
 	</bean>
+	<bean name="/com_liferay_portal_service_spring_PluginSettingService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.PluginSettingService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.PluginSettingService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PluginSettingService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.PluginSettingService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.PluginSettingService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PluginSettingService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.PluginSettingService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.PluginSettingService" />
+	</bean>
 	<bean name="/com_liferay_portal_service_spring_PortletService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.PortletService.professional" />
 		<property name="serviceInterface" value="com.liferay.portal.service.PortletService" />

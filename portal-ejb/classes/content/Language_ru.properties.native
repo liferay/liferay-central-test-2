@@ -120,11 +120,6 @@ model.resource.com.liferay.portal.model.User=Пользователь
 ## Action names
 ##
 
-
-##
-## Layout types
-##
-
 action.ADD_ARTICLE=Добавить статью
 action.ADD_CATEGORY=Добавить категорию
 action.ADD_DISCUSSION=Добавить обсуждение
@@ -156,7 +151,7 @@ action.UPDATE_DISCUSSION=Сохранить обсуждение
 action.VIEW=Посмотреть
 
 ##
-## Messages
+## Layout types
 ##
 
 layout.types.article=Статья
@@ -165,7 +160,7 @@ layout.types.portlet=Портлет
 layout.types.url=URL
 
 ##
-## Currency
+## Messages
 ##
 
 INBOX=Входящие
@@ -2156,6 +2151,10 @@ zh_en=С Китайского (Китай) на Английский
 zip-postal=Zip/Postal
 zip=Почтовый индекс
 zt_en=С Китайского (Тайвань) на Английский
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

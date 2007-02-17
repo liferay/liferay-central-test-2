@@ -163,11 +163,6 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tehtävä
 ## Action names
 ##
 
-
-##
-## Layout types
-##
-
 action.ADD_ARTICLE=Lisää artikkeli
 action.ADD_CATEGORY=Lisää kategoria
 action.ADD_COMMUNITY=Lisää yhteisö
@@ -227,7 +222,7 @@ action.VIEW=Näytä
 action.VIEW_USER=Näytä käyttäjä
 
 ##
-## Messages
+## Layout types
 ##
 
 layout.types.article=Artikkeli
@@ -236,7 +231,7 @@ layout.types.portlet=Portletti
 layout.types.url=URL
 
 ##
-## Currency
+## Messages
 ##
 
 1-day=Päivän sisällä
@@ -2495,6 +2490,10 @@ zh_en=Kiinasta (Kiina) englanniksi
 zip-postal=Postinumero
 zip=Postinumero
 zt_en=Kiinasta (Taiwan) englanniksi
+
+##
+## Currency
+##
 
 currency.AED=UAE:n dirham
 currency.ALL=Albanian lek

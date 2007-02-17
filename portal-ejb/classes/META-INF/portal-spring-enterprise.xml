@@ -1059,6 +1059,73 @@
 			<ref bean="com.liferay.portal.service.PortalService.enterprise" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PluginSettingLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portal.service.PluginSettingLocalService</value>
+		</property>
+		<property name="jndiName">
+			<value>ejb/liferay/PluginSettingLocalServiceHome</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PluginSettingLocalService.professional" class="com.liferay.portal.service.impl.PluginSettingLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.PluginSettingLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PluginSettingLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PluginSettingLocalServiceFactory" class="com.liferay.portal.service.PluginSettingLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PluginSettingLocalService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PluginSettingService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portal.service.PluginSettingService</value>
+		</property>
+		<property name="jndiName">
+			<value>com_liferay_portal_service_ejb_PluginSettingServiceEJB</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PluginSettingService.professional" class="com.liferay.portal.service.impl.PluginSettingServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.PluginSettingService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PluginSettingService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PluginSettingServiceFactory" class="com.liferay.portal.service.PluginSettingServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PluginSettingService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PluginSettingPersistence" class="com.liferay.portal.service.persistence.PluginSettingPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PluginSettingUtil" class="com.liferay.portal.service.persistence.PluginSettingUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.PluginSettingPersistence" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PortletLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
 			<value>com.liferay.portal.service.PortletLocalService</value>

@@ -111,6 +111,15 @@
 				(LayoutSet.pageCount != 0)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByPageCount">
+		<![CDATA[
+			INNER JOIN
+				LayoutSet ON
+					(LayoutSet.groupId = Group_.groupId)
+			WHERE
+				(LayoutSet.pageCount != 0)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByRolePermissions">
 		<![CDATA[
 			INNER JOIN

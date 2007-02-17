@@ -172,11 +172,6 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=작업 흐름 업
 ## Action names
 ##
 
-
-##
-## Layout types
-##
-
 action.ADD_ARTICLE=기사를 추가하십시요
 action.ADD_CATEGORY=종류를 추가하십시요
 action.ADD_COMMUNITY=지역 사회를 추가하십시요
@@ -240,7 +235,7 @@ action.VIEW=전망
 action.VIEW_USER=전망 사용자
 
 ##
-## Messages
+## Layout types
 ##
 
 layout.types.article=기사
@@ -250,7 +245,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Currency
+## Messages
 ##
 
 1-day=1 일
@@ -1369,6 +1364,7 @@ my-account=나의 계정
 my-addresses=나의 주소
 my-blog=나의Blog
 my-communities=나의 지역 사회
+my-community=나의 지역 사회
 my-documents=나의 문서
 my-entries=나의 입장
 my-images=나의 심상
@@ -1748,6 +1744,7 @@ print=인쇄
 priority=우선권
 private-node=개인 마디
 private-nodes=개인 마디
+private-pages=개인 페이지
 private-virtual-host=개인 사실상 주인
 private=개인
 processing-login=로그온을 가공한
@@ -1771,6 +1768,7 @@ proxy-port=대리권 항구
 pt_en=영어에 포르트갈 사람
 public-node=공중 마디
 public-nodes=공중 마디
+public-pages=공중 페이지
 public-virtual-host=공중 사실상 주인
 public=공중
 publisher=발행인
@@ -2595,6 +2593,10 @@ zh_en=영어에 중국인
 zip-postal=Zip/Postal
 zip=지퍼
 zt_en=영어에 중국어 (대만)
+
+##
+## Currency
+##
 
 currency.AED=아랍 에미리트 연방 Dirham
 currency.ALL=알바니아 Lek

@@ -37,11 +37,6 @@ category.development=Vývoj
 ## Messages
 ##
 
-
-##
-## Currency
-##
-
 INBOX=Inbox
 a-page-may-not-contain-more-than-x-portlets=Stránka nemůže obsahovat více než {0} aplikací.
 about=O nás
@@ -1631,6 +1626,10 @@ your-trash-folder-is-taking-up-a-lot-of-space=Váš koš překročil povolenou v
 zh_en=Čínsky (China) -> Anglicky
 zip=PSČ
 zt_en=Čínsky (Taiwan) -> Anglicky
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

@@ -588,6 +588,15 @@ create table Phone (
 	primary_ BOOLEAN
 );
 
+create table PluginSetting (
+	pluginSettingId LONG primary key,
+	companyId VARCHAR(75) not null,
+	pluginId VARCHAR(75) null,
+	pluginType VARCHAR(75) null,
+	roles VARCHAR(75) null,
+	active_ BOOLEAN
+);
+
 create table PollsChoice (
 	questionId VARCHAR(75) not null,
 	choiceId VARCHAR(75) not null,

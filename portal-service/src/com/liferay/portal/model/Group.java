@@ -34,4 +34,12 @@ public interface Group extends GroupModel {
 	public boolean isOrganization();
 
 	public boolean isUser();
+
+	public int getPrivateLayoutsPageCount();
+
+	public boolean hasPrivateLayouts();
+
+	public int getPublicLayoutsPageCount();
+
+	public boolean hasPublicLayouts();
 }

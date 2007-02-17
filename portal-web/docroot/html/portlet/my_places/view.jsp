@@ -25,139 +25,75 @@
 <%@ include file="/html/portlet/my_places/init.jsp" %>
 
 <c:if test="<%= themeDisplay.isSignedIn() %>">
+	<li class="my-places">
+		<a><%= LanguageUtil.get(pageContext, "my-places") %></a>
 
-	<%
-	PortletURL portletURL = renderResponse.createActionURL();
-	portletURL.setParameter("struts_action", "/my_places/view");
-
-	String displayTitle = null;
-	String selectedStyle = "style=\"background: " + colorScheme.getPortletMenuBg() + "; color: " + colorScheme.getPortletMenuText() + ";\" ";
-	String selectedTitle = "";
-	boolean selectedPlace = false;
-
-	Group userGroup = user.getGroup();
-
-	List links = new ArrayList();
-	List titles = new ArrayList();
-
-	if ((userGroup != null) && user.hasPublicLayouts()) {
-		selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == userGroup.getGroupId());
-		displayTitle =  contact.getFullName() + " (" + LanguageUtil.get(pageContext, "public") + ")";
-
-		if (selectedPlace) {
-			selectedTitle = displayTitle;
-		}
-		else {
-			portletURL.setParameter("ownerId", LayoutImpl.PUBLIC + userGroup.getGroupId());
-
-			links.add(portletURL.toString());
-			titles.add(displayTitle);
-		}
-	}
-
-	LinkedHashMap groupParams = new LinkedHashMap();
-
-	groupParams.put("usersGroups", user.getUserId());
-	groupParams.put("layoutSet", Boolean.FALSE);
-
-	List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-	for (int i = 0; i < communities.size(); i++) {
-		Group community = (Group)communities.get(i);
-
-		selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
-		displayTitle =  community.getName() + " (" + LanguageUtil.get(pageContext, "public") + ")";
-
-		if (selectedPlace) {
-			selectedTitle = displayTitle;
-		}
-		else {
-			portletURL.setParameter("ownerId", LayoutImpl.PUBLIC + community.getGroupId());
-
-			links.add(portletURL.toString());
-			titles.add(displayTitle);
-		}
-	}
-
-	if ((userGroup != null) && user.hasPrivateLayouts()) {
-		selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == userGroup.getGroupId());
-		displayTitle =  contact.getFullName() + " (" + LanguageUtil.get(pageContext, "private") + ")";
-
-		if (selectedPlace) {
-			selectedTitle = displayTitle;
-		}
-		else {
-			portletURL.setParameter("ownerId", LayoutImpl.PRIVATE + userGroup.getGroupId());
-
-			links.add(portletURL.toString());
-			titles.add(displayTitle);
-		}
-	}
-
-	groupParams.put("layoutSet", Boolean.TRUE);
-
-	communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-	for (int i = 0; i < communities.size(); i++) {
-		Group community = (Group)communities.get(i);
-
-		selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
-		displayTitle = community.getName() + " (" + LanguageUtil.get(pageContext, "private") + ")";
-
-		if (selectedPlace) {
-			selectedTitle = displayTitle;
-		}
-		else {
-			portletURL.setParameter("ownerId", LayoutImpl.PRIVATE + community.getGroupId());
-
-			links.add(portletURL.toString());
-			titles.add(displayTitle);
-		}
-	}
-	%>
-
-	<table border="0" cellspacing="0" cellpadding="0" onclick="MyPlaces.show();">
-	<tr>
-		<td class="portlet-my-places">
-			<%= selectedTitle %>
-		</td>
-		<td class="portlet-my-places-arrow">
-			<img style="vertical-align: middle" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_down.png" />
-		</td>
-	</tr>
-	</table>
-
-	<ul id="portlet-my-places-menu" style="display: none">
-
-		<%
-		for (int i = 0; i < links.size(); i++) {
-			%>
-
-			<li onmouseover="this.style.backgroundColor='#cccccc'" onmouseout="this.style.backgroundColor='transparent'" onclick="window.location='<%= (String)(links.get(i)) %>'"><%= (String)(titles.get(i)) %></li>
+		<ul>
 
 			<%
-		}
-		%>
+			PortletURL portletURL = renderResponse.createActionURL();
 
-	</ul>
+			portletURL.setParameter("struts_action", "/my_places/view");
 
-	<script type="text/javascript">
-		var MyPlaces = {
-			showing: false,
+			LinkedHashMap groupParams = new LinkedHashMap();
 
-			show: function() {
-				if (!MyPlaces.showing) {
-					document.getElementById("portlet-my-places-menu").style.display = "";
-					setTimeout("document.onclick = function() { MyPlaces.hide(); }", 0);
-					MyPlaces.showing = true;
-				}
-			},
+			groupParams.put("usersGroups", user.getUserId());
+			//groupParams.put("pageCount", StringPool.BLANK);
 
-			hide: function() {
-				document.getElementById("portlet-my-places-menu").style.display = "none";
-				MyPlaces.showing = false;
-				document.onclick = function() {};
+			List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+			if (user.isLayoutsRequired()) {
+				Group userGroup = user.getGroup();
+
+				communities.add(0, userGroup);
 			}
-		}
-	</script>
+
+			for (int i = 0; i < communities.size(); i++) {
+				Group community = (Group)communities.get(i);
+
+				int publicLayoutsPageCount = community.getPublicLayoutsPageCount();
+				int privateLayoutsPageCount = community.getPrivateLayoutsPageCount();
+			%>
+
+				<li>
+					<h3>
+						<c:choose>
+							<c:when test="<%= community.isUser() %>">
+								<%= LanguageUtil.get(pageContext, "my-community") %>
+							</c:when>
+							<c:otherwise>
+								<%= community.getName() %>
+							</c:otherwise>
+						</c:choose>
+					</h3>
+					<ul>
+
+						<%
+						portletURL.setParameter("ownerId", LayoutImpl.PUBLIC + community.getGroupId());
+
+						boolean selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
+						%>
+
+						<li class="public <%= selectedPlace ? "current" : "" %>">
+							<a href="<%= portletURL.toString() %>"><%= LanguageUtil.get(pageContext, "public-pages") %> (<%= publicLayoutsPageCount %>)</a>
+						</li>
+
+						<%
+						portletURL.setParameter("ownerId", LayoutImpl.PRIVATE + community.getGroupId());
+
+						selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
+						%>
+
+						<li class="private <%= selectedPlace ? "current" : "" %>">
+							<a href="<%= portletURL.toString() %>"><%= LanguageUtil.get(pageContext, "private-pages") %> (<%= privateLayoutsPageCount %>)</a>
+						</li>
+					</ul>
+				</li>
+
+			<%
+			}
+			%>
+
+		</ul>
+	</li>
 </c:if>

@@ -89,7 +89,11 @@ public interface User extends UserModel {
 
 	public com.liferay.portal.model.Organization getLocation();
 
+	public int getPrivateLayoutsPageCount();
+
 	public boolean hasPrivateLayouts();
+
+	public int getPublicLayoutsPageCount();
 
 	public boolean hasPublicLayouts();
 

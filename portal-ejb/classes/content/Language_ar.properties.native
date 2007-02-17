@@ -138,11 +138,6 @@ model.resource.com.liferay.portal.model.UserGroup=مجموعة المستخدم�
 ## Action names
 ##
 
-
-##
-## Layout types
-##
-
 action.ADD_ARTICLE=أضف مقالة
 action.ADD_CATEGORY=أضف تصنيف
 action.ADD_COMMUNITY=أضف مجتمع
@@ -197,7 +192,7 @@ action.VIEW=إعرض
 action.VIEW_USER=إعرض مستخدم
 
 ##
-## Messages
+## Layout types
 ##
 
 layout.types.article=مقالة
@@ -206,7 +201,7 @@ layout.types.portlet=بورتلت
 layout.types.url=رابط تشعبي
 
 ##
-## Currency
+## Messages
 ##
 
 1-day=يوم واحد
@@ -2429,6 +2424,10 @@ zh_en=صيني إلى الإنجليزي
 zip-postal=الرمز البريدي
 zip=الرمز البريدي
 zt_en=تايواني إلى إنجليزي
+
+##
+## Currency
+##
 
 currency.AED=درهم اماراتي
 currency.ALL=ليك ألباني

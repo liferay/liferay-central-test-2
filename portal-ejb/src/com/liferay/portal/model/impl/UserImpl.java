@@ -28,14 +28,12 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -343,48 +341,58 @@ public class UserImpl extends UserModelImpl implements User {
 		return new OrganizationImpl();
 	}
 
-	public boolean hasPrivateLayouts() {
+	public int getPrivateLayoutsPageCount() {
 		try {
 			Group group = getGroup();
 
 			if (group == null) {
-				return false;
+				return 0;
 			}
-
-			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				LayoutImpl.PRIVATE + group.getGroupId());
-
-			if (layoutSet.getPageCount() > 0) {
-				return true;
+			else {
+				return group.getPrivateLayoutsPageCount();
 			}
 		}
 		catch (Exception e) {
 			_log.error(e);
 		}
 
-		return false;
+		return 0;
+	}
+
+	public boolean hasPrivateLayouts() {
+		if (getPrivateLayoutsPageCount() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public int getPublicLayoutsPageCount() {
+		try {
+			Group group = getGroup();
+
+			if (group == null) {
+				return 0;
+			}
+			else {
+				return group.getPublicLayoutsPageCount();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return 0;
 	}
 
 	public boolean hasPublicLayouts() {
-		try {
-			Group group = getGroup();
-
-			if (group == null) {
-				return false;
-			}
-
-			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				LayoutImpl.PUBLIC + group.getGroupId());
-
-			if (layoutSet.getPageCount() > 0) {
-				return true;
-			}
+		if (getPublicLayoutsPageCount() > 0) {
+			return true;
 		}
-		catch (Exception e) {
-			_log.error(e);
+		else {
+			return false;
 		}
-
-		return false;
 	}
 
 	public boolean isLayoutsRequired() {

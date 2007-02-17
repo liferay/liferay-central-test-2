@@ -286,6 +286,14 @@
 		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
 	</model>
+	<model name="com.liferay.portal.model.PluginSetting">
+		<field name="pluginSettingId" type="long" />
+		<field name="companyId" type="String" />
+		<field name="pluginId" type="String" />
+		<field name="pluginType" type="String" />
+		<field name="roles" type="String" />
+		<field name="active" type="boolean" />
+	</model>
 	<model name="com.liferay.portal.model.Portlet">
 		<field name="portletId" type="String" />
 		<field name="companyId" type="String" />

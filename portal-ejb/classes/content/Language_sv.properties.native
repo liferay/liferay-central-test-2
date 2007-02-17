@@ -139,11 +139,6 @@ model.resource.com.liferay.portal.model.UserGroup=Användargrupp
 ## Action names
 ##
 
-
-##
-## Layout types
-##
-
 action.ADD_ARTICLE=Lägg till artikel
 action.ADD_CATEGORY=Lägg till kategori
 action.ADD_COMMUNITY=Lägg till grupp
@@ -206,7 +201,7 @@ action.VIEW=Granska
 action.VIEW_USER=Granska användare
 
 ##
-## Messages
+## Layout types
 ##
 
 layout.types.article=Artikel
@@ -216,7 +211,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Currency
+## Messages
 ##
 
 1-day=1 dag
@@ -2517,6 +2512,10 @@ zh_en=Kinesiska (Kina) till Engelska
 zip-postal=Postnummer
 zip=Postnummer
 zt_en=Kinesiska (Taiwan) till Engelska
+
+##
+## Currency
+##
 
 currency.AED=arabiska dirham
 currency.ALL=Albanian Lek

@@ -130,6 +130,8 @@ create index IX_A074A44 on Phone (companyId, className, classPK);
 create index IX_2CAADF95 on Phone (companyId, className, classPK, primary_);
 create index IX_F202B9CE on Phone (userId);
 
+create index IX_B9746445 on PluginSetting (companyId);
+
 create index IX_EC370F10 on PollsChoice (questionId);
 
 create index IX_9FF342EA on PollsQuestion (groupId);

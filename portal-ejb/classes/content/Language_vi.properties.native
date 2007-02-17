@@ -95,11 +95,6 @@ category.wiki=Wiki
 ## Messages
 ##
 
-
-##
-## Currency
-##
-
 INBOX=Inbox
 a-page-may-not-contain-more-than-x-portlets=Một trang không thể có hơn {0} portlets.
 about=About
@@ -1625,6 +1620,10 @@ your-trash-folder-is-taking-up-a-lot-of-space=Thùng rác của bạn chiếm nh
 zh_en=Chinese (China) to English
 zip=Zip
 zt_en=Chinese (Taiwan) to English
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

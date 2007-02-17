@@ -23,10 +23,15 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.util.GroupNames;
 import com.liferay.util.Validator;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="GroupImpl.java.html"><b><i>View Source</i></b></a>
@@ -88,5 +93,53 @@ public class GroupImpl extends GroupModelImpl implements Group {
 			return false;
 		}
 	}
+
+	public int getPrivateLayoutsPageCount() {
+		try {
+			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+				LayoutImpl.PRIVATE + getGroupId());
+
+			return layoutSet.getPageCount();
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return 0;
+	}
+
+	public boolean hasPrivateLayouts() {
+		if (getPrivateLayoutsPageCount() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public int getPublicLayoutsPageCount() {
+		try {
+			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+				LayoutImpl.PUBLIC + getGroupId());
+
+			return layoutSet.getPageCount();
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return 0;
+	}
+
+	public boolean hasPublicLayouts() {
+		if (getPublicLayoutsPageCount() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(GroupImpl.class);
 
 }

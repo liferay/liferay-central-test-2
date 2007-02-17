@@ -172,11 +172,6 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tarefa Do Workflo
 ## Action names
 ##
 
-
-##
-## Layout types
-##
-
 action.ADD_ARTICLE=Adicione O Artigo
 action.ADD_CATEGORY=Adicione A Categoria
 action.ADD_COMMUNITY=Adicione A Comunidade
@@ -240,7 +235,7 @@ action.VIEW=Vista
 action.VIEW_USER=Usuário Da Vista
 
 ##
-## Messages
+## Layout types
 ##
 
 layout.types.article=Artigo
@@ -250,7 +245,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Currency
+## Messages
 ##
 
 1-day=1 dia
@@ -1370,6 +1365,7 @@ my-account=Meu Cliente
 my-addresses=Meus Endereços
 my-blog=Meu Blog
 my-communities=Minhas Comunidades
+my-community=Minha Comunidade
 my-documents=Meus Originais
 my-entries=Minhas Entradas
 my-images=Minhas Imagens
@@ -1749,6 +1745,7 @@ print=Cópia
 priority=Prioridade
 private-node=Nó Confidencial
 private-nodes=Nós Confidenciais
+private-pages=Páginas Confidenciais
 private-virtual-host=Anfitrião Virtual Confidencial
 private=Confidencial
 processing-login=Processando o início de uma sessão
@@ -1772,6 +1769,7 @@ proxy-port=Porto Do Proxy
 pt_en=Português ao inglês
 public-node=Nó Público
 public-nodes=Nós Públicos
+public-pages=Páginas Públicas
 public-virtual-host=Anfitrião Virtual Público
 public=Público
 publisher=Publisher
@@ -2597,6 +2595,10 @@ zh_en=Chinês (China) ao inglês
 zip-postal=Zip/Postal
 zip=Fecho de correr
 zt_en=Chinês (Formosa) ao inglês
+
+##
+## Currency
+##
 
 currency.AED=Dirham dos Uae
 currency.ALL=Lek Albanian

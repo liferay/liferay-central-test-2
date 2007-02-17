@@ -108,3 +108,7 @@
 #macro(language $lang_key)
 	$languageUtil.get($pageContext, $lang_key)
 #end
+
+#macro(my_places_list)
+	$theme.runtime("49")
+#end

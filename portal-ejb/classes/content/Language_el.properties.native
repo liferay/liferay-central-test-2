@@ -172,11 +172,6 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Στόχος ρο
 ## Action names
 ##
 
-
-##
-## Layout types
-##
-
 action.ADD_ARTICLE=Προσθέστε το άρθρο
 action.ADD_CATEGORY=Προσθέστε την κατηγορία
 action.ADD_COMMUNITY=Προσθέστε την Κοινότητα
@@ -240,7 +235,7 @@ action.VIEW=Αποψη
 action.VIEW_USER=Χρήστης άποψης
 
 ##
-## Messages
+## Layout types
 ##
 
 layout.types.article=Αρθρο
@@ -250,7 +245,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Currency
+## Messages
 ##
 
 1-day=1 Ημέρα
@@ -1369,6 +1364,7 @@ my-account=Ο Λογαριασμός μου
 my-addresses=Η Διευθυνσή μου
 my-blog=To blog μου
 my-communities=Οι Κοινότητές μου
+my-community=Η Κοινότητά μου
 my-documents=Τα έγγραφά μου
 my-entries=Οι καταχωρήσεις μου
 my-images=Οι εικόνες μου
@@ -1747,6 +1743,7 @@ print=Εκτύπωση
 priority=Προτεραιότητα
 private-node=Ιδιωτικός Κόμβος
 private-nodes=Ιδιωτικοί Κόμβοι
+private-pages=Ιδιωτικές σελίδες
 private-virtual-host=Ιδιωτικός εικονικός οικοδεσπότης
 private=Ιδιωτικός
 processing-login=Επεξεργασία Εισόδου
@@ -1770,6 +1767,7 @@ proxy-port=Λιμένας πληρεξούσιου
 pt_en=Πορτογαλλικά σε Αγγλικά
 public-node=Δημόσιος Κόμβος
 public-nodes=Δημόσιοι Κόμβοι
+public-pages=Δημόσιες σελίδες
 public-virtual-host=Δημόσιος εικονικός οικοδεσπότης
 public=Δημόσιος
 publisher=Εκδότης
@@ -2595,6 +2593,10 @@ zh_en=Κινέζικα σε Αγγλικά
 zip-postal=Φερμουάρ/ταχυδρομικός
 zip=Τ.Κ.
 zt_en=Κινέζικα (Ταϊβάν) στα αγγλικά
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Lek Αλβανίας

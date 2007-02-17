@@ -286,6 +286,17 @@
 		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
+	<class name="com.liferay.portal.model.impl.PluginSettingImpl" table="PluginSetting">
+		<cache usage="read-write" />
+		<id name="pluginSettingId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="pluginId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="pluginType" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="roles" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
+	</class>
 	<class name="com.liferay.portal.model.impl.PortletImpl" table="Portlet">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.PortletPK">

@@ -172,11 +172,6 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=ワークフロ�
 ## Action names
 ##
 
-
-##
-## Layout types
-##
-
 action.ADD_ARTICLE=記事を加えなさい
 action.ADD_CATEGORY=部門を加えなさい
 action.ADD_COMMUNITY=コミュニティを加えなさい
@@ -240,7 +235,7 @@ action.VIEW=眺め
 action.VIEW_USER=眺めのユーザー
 
 ##
-## Messages
+## Layout types
 ##
 
 layout.types.article=記事
@@ -250,7 +245,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Currency
+## Messages
 ##
 
 1-day=1 日
@@ -1368,6 +1363,7 @@ my-account=私の記述
 my-addresses=私の住所
 my-blog=私のBlog
 my-communities=私のコミュニティ
+my-community=私のコミュニティ
 my-documents=私の文書
 my-entries=私の記入項目
 my-images=私のイメージ
@@ -1746,6 +1742,7 @@ print=印刷物
 priority=優先順位
 private-node=私用ノード
 private-nodes=私用ノード
+private-pages=私用ページ
 private-virtual-host=私用事実上のホスト
 private=私用
 processing-login=ログオンの処理
@@ -1769,6 +1766,7 @@ proxy-port=委任状の港
 pt_en=ポルトガル語から英語
 public-node=公共ノード
 public-nodes=公共ノード
+public-pages=公共のページ
 public-virtual-host=公共の事実上のホスト
 public=公衆
 publisher=出版業者
@@ -2593,6 +2591,10 @@ zh_en=中国語から英語
 zip-postal=Zip/Postal
 zip=ジッパー
 zt_en=英語への中国語(台湾)
+
+##
+## Currency
+##
 
 currency.AED=アラブ首長国連邦のディルハム
 currency.ALL=アルバニアのLek

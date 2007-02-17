@@ -363,6 +363,30 @@
 		</jonas-resource>
 	</jonas-session>
 	<jonas-session>
+		<ejb-name>com_liferay_portal_service_ejb_PluginSettingLocalServiceEJB</ejb-name>
+		<jndi-name>ejb/liferay/PluginSettingLocalServiceHome</jndi-name>
+		<jonas-resource>
+			<res-ref-name>jdbc/LiferayPool</res-ref-name>
+			<jndi-name>jdbc/LiferayPool</jndi-name>
+		</jonas-resource>
+		<jonas-resource>
+			<res-ref-name>mail/MailSession</res-ref-name>
+			<jndi-name>mail/MailSession</jndi-name>
+		</jonas-resource>
+	</jonas-session>
+	<jonas-session>
+		<ejb-name>com_liferay_portal_service_ejb_PluginSettingServiceEJB</ejb-name>
+		<jndi-name>com_liferay_portal_service_ejb_PluginSettingServiceEJB</jndi-name>
+		<jonas-resource>
+			<res-ref-name>jdbc/LiferayPool</res-ref-name>
+			<jndi-name>jdbc/LiferayPool</jndi-name>
+		</jonas-resource>
+		<jonas-resource>
+			<res-ref-name>mail/MailSession</res-ref-name>
+			<jndi-name>mail/MailSession</jndi-name>
+		</jonas-resource>
+	</jonas-session>
+	<jonas-session>
 		<ejb-name>com_liferay_portal_service_ejb_PortletLocalServiceEJB</ejb-name>
 		<jndi-name>ejb/liferay/PortletLocalServiceHome</jndi-name>
 		<jonas-resource>

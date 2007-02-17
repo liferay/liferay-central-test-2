@@ -172,11 +172,6 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Le déroulement d
 ## Action names
 ##
 
-
-##
-## Layout types
-##
-
 action.ADD_ARTICLE=Ajoutez L'Article
 action.ADD_CATEGORY=Ajoutez La Catégorie
 action.ADD_COMMUNITY=Ajoutez La Communauté
@@ -240,7 +235,7 @@ action.VIEW=Vue
 action.VIEW_USER=Utilisateur De Vue
 
 ##
-## Messages
+## Layout types
 ##
 
 layout.types.article=Article
@@ -250,7 +245,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Currency
+## Messages
 ##
 
 1-day=1 jour
@@ -1370,6 +1365,7 @@ my-account=Mon Compte
 my-addresses=Mes Adresses
 my-blog=Mon Blog
 my-communities=Mes Communautés
+my-community=Ma Communauté
 my-documents=Mes Documents
 my-entries=Mes Entrées
 my-images=Mes Images
@@ -1749,6 +1745,7 @@ print=Imprimer
 priority=Priorité
 private-node=Noeud privé
 private-nodes=Noeuds privés
+private-pages=Pages Privées
 private-virtual-host=Centre serveur Virtuel Privé
 private=Privé
 processing-login=Chargement du compte utilisateur en cours...
@@ -1772,6 +1769,7 @@ proxy-port=Port De Procuration
 pt_en=Portugais en Anglais
 public-node=Noeud public
 public-nodes=Noeuds publics
+public-pages=Pages Publiques
 public-virtual-host=Centre serveur Virtuel Public
 public=Public
 publisher=Éditeur
@@ -2597,6 +2595,10 @@ zh_en=Chinois en Anglais
 zip-postal=Zip/Postal
 zip=Code postal
 zt_en=Chinois (Taiwan) à l'anglais
+
+##
+## Currency
+##
 
 currency.AED=Dirham des EAU
 currency.ALL=Lek Albanais

@@ -83,6 +83,9 @@ public class GroupFinder {
 	public static String JOIN_BY_LAYOUT_SET =
 		GroupFinder.class.getName() + ".joinByLayoutSet";
 
+	public static String JOIN_BY_PAGE_COUNT =
+		GroupFinder.class.getName() + ".joinByPageCount";
+
 	public static String JOIN_BY_ROLE_PERMISSIONS =
 		GroupFinder.class.getName() + ".joinByRolePermissions";
 
@@ -486,6 +489,9 @@ public class GroupFinder {
 		else if (key.equals("layoutSet")) {
 			join = CustomSQLUtil.get(JOIN_BY_LAYOUT_SET);
 		}
+		else if (key.equals("pageCount")) {
+			join = CustomSQLUtil.get(JOIN_BY_PAGE_COUNT);
+		}
 		else if (key.equals("rolePermissions")) {
 			join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
 		}
@@ -548,6 +554,9 @@ public class GroupFinder {
 		else if (key.equals("layoutSet")) {
 			join = CustomSQLUtil.get(JOIN_BY_LAYOUT_SET);
 		}
+		else if (key.equals("pageCount")) {
+			join = CustomSQLUtil.get(JOIN_BY_PAGE_COUNT);
+		}
 		else if (key.equals("rolePermissions")) {
 			join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
 		}
@@ -587,6 +596,8 @@ public class GroupFinder {
 					Boolean value = (Boolean)entry.getValue();
 
 					qPos.add(value);
+				}
+				else if (key.equals("pageCount")) {
 				}
 				else if (key.equals("rolePermissions")) {
 					List values = (List)entry.getValue();

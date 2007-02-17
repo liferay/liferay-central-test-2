@@ -172,11 +172,6 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=工作流任務
 ## Action names
 ##
 
-
-##
-## Layout types
-##
-
 action.ADD_ARTICLE=增加文章
 action.ADD_CATEGORY=增加類別
 action.ADD_COMMUNITY=增加公共
@@ -240,7 +235,7 @@ action.VIEW=看法
 action.VIEW_USER=看法用戶
 
 ##
-## Messages
+## Layout types
 ##
 
 layout.types.article=文章
@@ -250,7 +245,7 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
-## Currency
+## Messages
 ##
 
 1-day=1 天
@@ -1370,6 +1365,7 @@ my-account=我的帳戶
 my-addresses=我的地址
 my-blog=我的部落格
 my-communities=我的社群
+my-community=我的公共
 my-documents=我的文件
 my-entries=我的詞條
 my-images=我的圖像
@@ -1749,6 +1745,7 @@ print=印刷品
 priority=優先權
 private-node=私人節點
 private-nodes=私人節點
+private-pages=私有頁
 private-virtual-host=私有真正主人
 private=私人
 processing-login=處理登入中, 請稍後
@@ -1772,6 +1769,7 @@ proxy-port=代理人口岸
 pt_en=葡萄牙語到英語
 public-node=公開節點
 public-nodes=公開節點
+public-pages=公開頁
 public-virtual-host=公開真正主人
 public=公開
 publisher=出版者
@@ -2597,6 +2595,10 @@ zh_en=中文(中國) 對英語
 zip-postal=Zip/Postal
 zip=郵遞區號
 zt_en=中文(臺灣) 對英語
+
+##
+## Currency
+##
 
 currency.AED=阿拉伯聯合酋長國迪拉姆
 currency.ALL=阿爾巴尼亞列克

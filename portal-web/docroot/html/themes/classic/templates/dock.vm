@@ -43,32 +43,6 @@
 			</li>
 		#end
 
-		<li class="my-places">
-			<a>My Places</a>
-
-			<ul>
-				<li>
-					<h3>My Community</h3>
-					<ul>
-						<li class="public"><a href="http://">Public Pages</a></li>
-						<li class="private"><a href="http://">Private Pages</a></li>
-					</ul>
-				</li>
-				<li>
-					<h3>Guest</h3>
-					<ul>
-						<li class="public current"><a href="http://">Public Pages</a></li>
-						<li class="private"><a href="http://">Private Pages</a></li>
-					</ul>
-				</li>
-				<li>
-					<h3>CMS</h3>
-					<ul>
-						<li class="public"><a href="http://">Public Pages</a></li>
-						<li class="private"><a href="http://">Private Pages</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
+		#my_places_list()
 	</ul>
 </div>
