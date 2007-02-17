@@ -34,7 +34,7 @@ installURL.setParameter("redirect", currentURL.toString());
 
 // Breadcrumbs
 
-breadcrumbs.append(" &raquo; <a href=\"" + portletURL.toString() + "\">" + plugin.getName() + "</a>");
+breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + plugin.getName() + "</a>");
 
 %>
 

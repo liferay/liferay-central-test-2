@@ -25,6 +25,13 @@
 <%@ include file="/html/portlet/admin/init.jsp" %>
 
 <%
+String referer = request.getParameter(WebKeys.REFERER);
+String tabs1 = ParamUtil.getString(request, "tabs1");
+String tabs2 = ParamUtil.getString(request, "tabs2");
+if (Validator.isNull(tabs2)) {
+	tabs2 = "portlet";
+}
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 Document doc = (Document)row.getObject();
@@ -36,10 +43,14 @@ PortletURL rowURL = renderResponse.createRenderURL();
 
 rowURL.setWindowState(WindowState.MAXIMIZED);
 
-rowURL.setParameter("struts_action", "/admin/view");
+rowURL.setParameter("struts_action", "/admin/plugin_installer");
+rowURL.setParameter("referer", referer);
 rowURL.setParameter("redirect", currentURL);
+rowURL.setParameter("tabs1", tabs1);
+rowURL.setParameter("tabs2", tabs2);
 rowURL.setParameter("moduleId", moduleId);
 rowURL.setParameter("repositoryURL", repositoryURL);
+		
 %>
 
 <liferay-ui:icon image="view" url="<%= rowURL.toString() %>" />

@@ -168,10 +168,10 @@ try {
 		rowURL.setWindowState(WindowState.MAXIMIZED);
 
 		rowURL.setParameter("struts_action", "/admin/plugin_installer");
-		rowURL.setParameter("tabs1", tabs1);
 		rowURL.setParameter("referer", referer);
 		rowURL.setParameter("redirect", currentURL);
-		rowURL.setParameter("type", type);
+		rowURL.setParameter("tabs1", tabs1);
+		rowURL.setParameter("tabs2", tabs2);
 		rowURL.setParameter("moduleId", pluginModuleId);
 		rowURL.setParameter("repositoryURL", pluginRepositoryURL);
 

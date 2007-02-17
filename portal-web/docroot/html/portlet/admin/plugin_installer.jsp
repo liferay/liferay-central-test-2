@@ -50,7 +50,6 @@ portletURL.setParameter("struts_action", "/admin/plugin_installer");
 portletURL.setParameter("referer", referer);
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
-portletURL.setParameter("type", type);
 
 String tabs1Options = "browse-repository,upload-file,download-file,configuration";
 if (!PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)) {
