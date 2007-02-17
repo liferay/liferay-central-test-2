@@ -47,14 +47,26 @@
 			<a>My Places</a>
 
 			<ul>
-				<li class="public">
-					<a>My Community (Public)</a>
+				<li>
+					<h3>My Community</h3>
+					<ul>
+						<li class="public"><a href="http://">Public Pages</a></li>
+						<li class="private"><a href="http://">Private Pages</a></li>
+					</ul>
 				</li>
-				<li class="public">
-					<a>Guest (Public )</a>
+				<li>
+					<h3>Guest</h3>
+					<ul>
+						<li class="public current"><a href="http://">Public Pages</a></li>
+						<li class="private"><a href="http://">Private Pages</a></li>
+					</ul>
 				</li>
-				<li class="private">
-					<a>CMS (private)</a>
+				<li>
+					<h3>CMS</h3>
+					<ul>
+						<li class="public"><a href="http://">Public Pages</a></li>
+						<li class="private"><a href="http://">Private Pages</a></li>
+					</ul>
 				</li>
 			</ul>
 		</li>

@@ -150,7 +150,8 @@
 				padding:0.5em 0pt 0.5em 2.5em;
 				text-decoration:none;
 			}
-			.js .lfr-dock li:first-child a {
+			.js .lfr-dock ul.lfr-dock-list > li:first-child a,
+			.js .lfr-dock ul.lfr-dock-list > li:first-child  ul.show-my-places li:first-child a {
 				
 				border-top:none;
 				
@@ -161,8 +162,10 @@
 					padding-left: 3.5em;
 					background-position: 1.5em 50%;
 				}
-					.js .lfr-dock li:first-child a,
-					.js .lfr-dock li:first-child a:hover {
+					.js .lfr-dock ul.lfr-dock-list > li:first-child a,
+					.js .lfr-dock ul.lfr-dock-list > li:first-child a:hover,
+					.js .lfr-dock ul.lfr-dock-list > li.my-places ul.show-my-places li ul li:first-child a,
+					.js .lfr-dock ul.lfr-dock-list > li.my-places ul.show-my-places li ul li:first-child a:hover  {
 						border-top: none;
 					}
 			.js .my-places {
@@ -172,8 +175,15 @@
 				.js .lfr-dock li.my-places  li a {
 					background-image: none;
 				}
+					.js .lfr-dock li.my-places li ul li.current a,
+					.js .lfr-dock li.my-places li ul li.current a:hover {
+						background: #e5f7fd url(../images/dock/my_place_current.png) no-repeat 1em 50%;
+						margin: 0.1em 0 0 0.2em;
+						padding-left: 3.5em;
+					}
 			.js .my-places .show-my-places {
 				position: absolute;
+				padding: 0.2em;
 				display: block;
 				min-width: 200px;
 				top: 0;
@@ -189,17 +199,35 @@
 					top: 100%;
 					left: 0;
 				}
-				.js .my-places .show-my-places li {
-					background: url() no-repeat 3px 50%;
-				}
-					.js .my-places .show-my-places li.public,
-					.js .my-places .show-my-places li.public a:hover {
-						background-image: url(../images/custom/my_place_public.gif);
+					.js .my-places .show-my-places li {
+						background: url() no-repeat 5px 50%;
+						margin: 0;
+						pasdding: 0.5em;
 					}
-					.js .my-places .show-my-places li.private,
-					.js .my-places .show-my-places li.private a:hover {
-						background-image: url(../images/custom/my_place_private.gif);
-					}
+						.js .my-places .show-my-places li h3 {
+							background: url(../images/dock/my_place.png) no-repeat 3px 50%;
+							border-bottom: 1px solid #999;
+							padding: 0.5em 0.2em 0.5em 2em;
+							font-size: 1.1em;
+							font-weight: bold;
+							color: #333;
+						}
+						.js .my-places .show-my-places li ul {
+							display:block;
+							border: none;
+							background: url() no-repeat 3px 50%;
+						}
+							.js .my-places .show-my-places li ul {
+								margin-left: 0.5em;
+							}
+								.js .my-places .show-my-places ul li.public a,
+								.js .my-places .show-my-places ul li.public a:hover {
+									background-image: url(../images/dock/my_places_public.png);
+								}
+								.js .my-places .show-my-places li.private a,
+								.js .my-places .show-my-places li.private a:hover {
+									background-image: url(../images/dock/my_places_private.png);
+								}
 			/*------ IE Specific Hacks ------*/
 			.ie6.js .lfr-dock {
 				width: 150px;
