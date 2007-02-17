@@ -5843,9 +5843,7 @@ public class ServiceBuilder {
 						colName.equals("companyId") ||
 						colName.equals("userId")) {
 
-						if (!col.isPrimitiveType()) {
-							sb.append(" not null");
-						}
+						sb.append(" not null");
 
 						if (col.isPrimary() && !entity.hasCompoundPK()) {
 							sb.append(" primary key");
