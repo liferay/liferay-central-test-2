@@ -61,7 +61,7 @@ catch (Exception e) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />password" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= password %>">
+		<input class="form-text" name="<portlet:namespace />password" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value="<%= password %>">
 	</td>
 </tr>
 <tr>
