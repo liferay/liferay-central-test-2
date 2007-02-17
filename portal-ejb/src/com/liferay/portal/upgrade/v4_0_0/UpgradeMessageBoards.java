@@ -147,7 +147,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				long groupId = rs.getLong("groupId");
 				String userId = rs.getString("userId");
 
-				String plid = LayoutImpl.PUBLIC + groupId + ".1";
+				String plid = LayoutImpl.getUnknownPlid(groupId);
 				String parentCategoryId =
 					MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
 				String name = "Default Category";
@@ -196,7 +196,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				String name = rs.getString("name");
 				String description = rs.getString("description");
 
-				String plid = LayoutImpl.PUBLIC + groupId + ".1";
+				String plid = LayoutImpl.getUnknownPlid(groupId);
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 

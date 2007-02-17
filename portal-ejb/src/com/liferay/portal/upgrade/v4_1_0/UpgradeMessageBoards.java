@@ -398,7 +398,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 					if ((groupId > 0) &&
 						(groupId != GroupImpl.DEFAULT_PARENT_GROUP_ID)) {
 
-						String plid = LayoutImpl.PUBLIC + groupId + ".1";
+						String plid = LayoutImpl.getUnknownPlid(groupId);
 						boolean addCommunityPermissions = true;
 						boolean addGuestPermissions = true;
 

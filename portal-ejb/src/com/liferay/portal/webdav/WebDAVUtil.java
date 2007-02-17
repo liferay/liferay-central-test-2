@@ -23,9 +23,8 @@
 package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.util.FileUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 
 import java.io.IOException;
@@ -81,20 +80,7 @@ public class WebDAVUtil {
 			return 0;
 		}
 		else {
-			try {
-				String companyId = pathArray[0];
-				String groupName = pathArray[1];
-
-				Group group = GroupLocalServiceUtil.getGroup(
-					companyId, groupName);
-
-				return group.getGroupId();
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-
-				return 0;
-			}
+			return GetterUtil.getLong(pathArray[1]);
 		}
 	}
 

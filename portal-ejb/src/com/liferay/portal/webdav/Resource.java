@@ -36,6 +36,8 @@ public interface Resource {
 
  	public String getHREF();
 
+	public String getDisplayName();
+
  	public Date getCreateDate();
 
  	public Date getModifiedDate();

@@ -105,8 +105,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			}
 			catch (NoSuchFolderException nsfe) {
 				String userId = parentFolder.getUserId();
-				String plid =
-					LayoutImpl.PUBLIC + parentFolder.getGroupId() + ".1";
+				String plid = LayoutImpl.getUnknownPlid(
+					parentFolder.getGroupId());
 				String parentFolderId = parentFolder.getFolderId();
 				String name = _fixName(folderNames[i]);
 				String description = name;

@@ -70,6 +70,10 @@ public class WebDAVRequest {
 		return _path;
 	}
 
+	public String[] getPathArray() {
+		return WebDAVUtil.getPathArray(_path);
+	}
+
 	public String getCompanyId() {
 		return _companyId;
 	}

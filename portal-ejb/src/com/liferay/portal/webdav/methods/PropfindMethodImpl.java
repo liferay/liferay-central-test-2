@@ -124,6 +124,7 @@ public class PropfindMethodImpl implements Method {
 
 		Element prop = propstat.addElement("D:prop");
 
+		DocUtil.add(prop, "D:displayname", resource.getDisplayName());
 		DocUtil.add(
 			prop, "D:creationdate",
 			createDateFormat.format(resource.getCreateDate()));
@@ -263,7 +264,7 @@ public class PropfindMethodImpl implements Method {
 				addResponse(
 					new BaseResourceImpl(
 						storage.getRootPath() + StringPool.SLASH + companyId,
-						true),
+						companyId, true),
 					props, multistatus, createDateFormat, modifiedDateFormat);
 
 				if (props.size() > 0) {

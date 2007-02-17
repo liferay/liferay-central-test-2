@@ -52,7 +52,18 @@ public class GetMethodImpl implements Method {
 
 			Resource resource = storage.getResource(webDavReq);
 
-			InputStream is = resource.getContentAsStream();
+			InputStream is = null;
+
+			if (resource != null) {
+				try {
+					is = resource.getContentAsStream();
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(e.getMessage());
+					}
+				}
+			}
 
 			if (is == null) {
 				res.setStatus(HttpServletResponse.SC_NOT_FOUND);

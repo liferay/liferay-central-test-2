@@ -34,20 +34,21 @@ import java.util.Date;
  */
 public class BaseResourceImpl implements Resource {
 
-	public BaseResourceImpl(String href, boolean folder) {
-		this(href, folder, null, null);
+	public BaseResourceImpl(String href, String displayName, boolean folder) {
+		this(href, displayName, folder, null, null);
 	}
 
-	public BaseResourceImpl(String href, boolean folder, Date createDate,
-							Date modifiedDate) {
+	public BaseResourceImpl(String href, String displayName, boolean folder,
+							Date createDate, Date modifiedDate) {
 
-		this(href, folder, createDate, modifiedDate, 0);
+		this(href, displayName, folder, createDate, modifiedDate, 0);
 	}
 
-	public BaseResourceImpl(String href, boolean folder, Date createDate,
-							Date modifiedDate, int size) {
+	public BaseResourceImpl(String href, String displayName, boolean folder,
+							Date createDate, Date modifiedDate, int size) {
 
 		_href = href;
+		_displayName = displayName;
 		_folder = folder;
 
 		if (createDate == null) {
@@ -69,6 +70,10 @@ public class BaseResourceImpl implements Resource {
 
  	public String getHREF() {
 		return _href;
+	}
+
+	public String getDisplayName() {
+		return _displayName;
 	}
 
 	public boolean isFolder() {
@@ -100,6 +105,7 @@ public class BaseResourceImpl implements Resource {
 	}
 
 	private String _href;
+	private String _displayName;
 	private boolean _folder;
 	private Date _createDate;
 	private Date _modifiedDate;

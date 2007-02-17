@@ -95,13 +95,13 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 	protected Resource getResource(Group group) throws WebDAVException {
 		String href =
 			getRootPath() + StringPool.SLASH + group.getCompanyId() +
-				StringPool.SLASH + group.getName();
+				StringPool.SLASH + group.getGroupId();
 
-		return new BaseResourceImpl(href, true);
+		return new BaseResourceImpl(href, group.getName(), true);
 	}
 
 	protected String getPlid(long groupId) {
-		return LayoutImpl.PUBLIC + groupId + ".1";
+		return LayoutImpl.getUnknownPlid(groupId);
 	}
 
 	private static Log _log = LogFactory.getLog(BaseWebDAVStorageImpl.class);

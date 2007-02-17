@@ -88,6 +88,18 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 	public static final String TYPE_ARTICLE = "article";
 
+	public static long getGroupId(String ownerId) {
+		if ((ownerId != null) &&
+			(ownerId.startsWith(PRIVATE) || ownerId.startsWith(PUBLIC))) {
+
+			return GetterUtil.getLong(
+				ownerId.substring(PRIVATE.length(), ownerId.length()));
+		}
+		else {
+			return 0;
+		}
+	}
+
 	public static String getLayoutId(String plid) {
 		if (plid != null) {
 			int pos = plid.lastIndexOf(StringPool.PERIOD);
@@ -112,16 +124,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return null;
 	}
 
-	public static long getGroupId(String ownerId) {
-		if ((ownerId != null) &&
-			(ownerId.startsWith(PRIVATE) || ownerId.startsWith(PUBLIC))) {
-
-			return GetterUtil.getLong(
-				ownerId.substring(PRIVATE.length(), ownerId.length()));
-		}
-		else {
-			return 0;
-		}
+	public static String getUnknownPlid(long groupId) {
+		return PUBLIC + groupId + StringPool.PERIOD + DEFAULT_PARENT_LAYOUT_ID;
 	}
 
 	public static boolean isPrivateLayout(String ownerId) {

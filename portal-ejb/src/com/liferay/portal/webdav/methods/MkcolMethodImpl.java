@@ -42,6 +42,7 @@ public class MkcolMethodImpl implements Method {
 		long groupId = webDavReq.getGroupId();
 
 		if (groupId == 0) {
+			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 		else {
 			int status = storage.addFolder(webDavReq);

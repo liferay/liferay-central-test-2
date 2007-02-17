@@ -27,6 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -65,10 +66,24 @@ public class LayoutPermission {
 			String ownerId, String actionId)
 		throws PortalException, SystemException {
 
-		Layout layout =
-			LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+		if (layoutId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
+			long groupId = LayoutImpl.getGroupId(ownerId);
 
-		return contains(permissionChecker, layout, actionId);
+			if (GroupPermission.contains(
+					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
+
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			Layout layout =
+				LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+
+			return contains(permissionChecker, layout, actionId);
+		}
 	}
 
 	public static boolean contains(
