@@ -26,14 +26,6 @@
 		<image-medium>THEME-AQUA.screenshot-handprint.jpg</image-medium>
 		<image-small>THEME-AQUA.screenshot-thumbnail.jpg</image-small>
 	</entry>
-	<entry name="Bedolla">
-		<description>This theme is used by Jason's Deli and named after a man named Bedolla.</description>
-		<categories>Professional</categories>
-		<download>bedolla-themes.war</download>
-		<image-large>THEME-BEDOLLA.screenshot-full.png</image-large>
-		<image-medium>THEME-BEDOLLA.screenshot-handprint.jpg</image-medium>
-		<image-small>THEME-BEDOLLA.screenshot-thumbnail.jpg</image-small>
-	</entry>
 	<entry name="Boys are Stupid">
 		<description>Boys are stupid, so throw rocks at them!</description>
 		<categories>Miscellaneous</categories>
