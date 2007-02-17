@@ -68,6 +68,15 @@ alter_column_type Permission_ resourceId LONG;
 alter_column_type Phone phoneId LONG;
 alter_column_type Phone typeId INTEGER;
 
+create table PluginSetting (
+	pluginSettingId LONG primary key,
+	companyId VARCHAR(75) not null,
+	pluginId VARCHAR(75) null,
+	pluginType VARCHAR(75) null,
+	roles VARCHAR(75) null,
+	active_ BOOLEAN
+);
+
 alter_column_type PollsQuestion groupId LONG;
 
 alter table Release_ add verified BOOLEAN;

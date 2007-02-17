@@ -683,9 +683,12 @@
 
 		<column name="pluginSettingId" type="long" primary="true" />
 
-		<!-- Other fields -->
+		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
+
+		<!-- Other fields -->
+
 		<column name="pluginId" type="String" />
 		<column name="pluginType" type="String" />
 		<column name="roles" type="String" />
