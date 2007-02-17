@@ -165,7 +165,7 @@ var Alerts = {
 			message.innerHTML = myMessage;
 		}
 		else {
-			message.innerHTML = "<div class=\"portlet-loading\"></div>";
+			message.innerHTML = "<div class=\"loading-animation\"></div>";
 		}
 		
 		if (msgHeight) {
@@ -322,7 +322,7 @@ var Alerts = {
     resizeIframe: function(options) {
     	if (Alerts.message && options) {
     		var iframe = Alerts.message.getElementsByTagName("iframe")[0];
-			var loading = _$J.getOne(".portlet-loading", Alerts.message);
+			var loading = _$J.getOne(".loading-animation", Alerts.message);
 			
 			if (loading) {
 				loading.parentNode.removeChild(loading);

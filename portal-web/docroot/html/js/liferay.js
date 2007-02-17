@@ -1,6 +1,8 @@
 $ = null;
 var _$J = jQuery;
 
+Function.prototype.extendNativeFunctionObject = jQuery.extend;
+
 jQuery.getOne = function(s, context) {
 	var rt;
 
@@ -31,86 +33,60 @@ jQuery.fn.getOne = function(s) {
 
 Liferay = {};
 
-Liferay.createLibrary = function () {
-	/* Create a static library
-	 * Usage: Liferay.createLibrary(init, props);
-	 *        Liferay.createLibrary(props);
-	 *
-	 * props - object that the library extends
-	 * init - function asigned to the library itself
-	 */ 
-	var lib = new Object();
+Liferay.Animate = function(id, fn, data) {
+	/* id - unique identifier for this process
+	 * fn - animation function
+	 * data - object that is passed to the animation function
+	 * data.delay - assign a number (in milliseconds) to this property
+	 *				to delay the start of the animation process
+	 */
+	var lib = Liferay.Animate;
 
-	for (var i = 0; i < arguments.length && i < 2; i++) {
-		var arg = arguments[i];
-		
-		if (typeof arg == "function") {
-			lib = arg;
-			
-		}
-		else if (typeof arg == "object") {
-			lib.extend = jQuery.extend;
-			lib.extend(arg);
-		}
+	if (!lib.q[id]) {
+		lib.q[id] = {"id": id, "fn": fn, "data": data};
 	}
 
-	return lib;
-};
+	if (!lib.timer) {
+		lib.start();
+	}
+}
 
-Liferay.Animate = Liferay.createLibrary(
-	function(id, fn, data) {
-		/* id - unique identifier for this process
-		 * fn - animation function
-		 * data - object that is passed to the animation function
-		 */
-		var lib = Liferay.Animate;
+Liferay.Animate.extendNativeFunctionObject({
+	q: new Object,
+	timer: 0,
 
-		if (!lib.q[id]) {
-			lib.q[id] = {"id": id, "fn": fn, "data": data};
+	process: function() {
+		var processed = false;
+		for (var i in this.q) {
+			var item = this.q[i];
+			if (item) {
+				var rt = item.fn(item.data);
+
+				if (rt == false) {
+					this.q[i] = null;
+				}
+				processed = true;
+			}
 		}
-
-		if (!lib.timer) {
-			lib.start();
+		
+		if (!processed) {
+			this.stop();
 		}
 	},
 
-	{
-		q: new Object,
-		timer: 0,
-
-		process: function() {
-			var processed = false;
-			for (var i in this.q) {
-				var item = this.q[i];
-				if (item) {
-					var rt = item.fn(item.data);
-
-					if (rt == false) {
-						this.q[i] = null;
-					}
-					processed = true;
-				}
-			}
-			
-			if (!processed) {
-				this.stop();
-			}
-		},
-
-		start: function() {
-			var lib = Liferay.Animate;
-			if (!lib.timer) {
-				Liferay.Animate.process();
-				Liferay.Animate.timer = setInterval("Liferay.Animate.process()", 30);
-			}
-		},
-		
-		stop: function() {
-			clearInterval(Liferay.Animate.timer);
-			Liferay.Animate.timer = 0;
+	start: function() {
+		var lib = Liferay.Animate;
+		if (!lib.timer) {
+			Liferay.Animate.process();
+			Liferay.Animate.timer = setInterval("Liferay.Animate.process()", 30);
 		}
+	},
+	
+	stop: function() {
+		clearInterval(Liferay.Animate.timer);
+		Liferay.Animate.timer = 0;
 	}
-);
+});
 
 Liferay.Dock = {
 	init: function() {
@@ -523,6 +499,12 @@ Liferay.Portlet = {
 
 			this.fn[arg1].push(arg2);
 		}
+	},
+	
+	remove: function(id) {
+		this.ajaxList[id] = 0;
+		this.list[id] = 1;
+		this.fn[id] = new Array();
 	},
 
 	last: function(arg1) {

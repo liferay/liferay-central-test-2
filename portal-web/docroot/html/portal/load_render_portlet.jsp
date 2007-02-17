@@ -43,9 +43,7 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 		portletDisplay.setNamespace(PortalUtil.getPortletNamespace(portlet.getPortletId()));
 		%>
 
-		<div id="p_load<%= portletDisplay.getNamespace() %>" style="text-align: left;">
-			<img src="<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif" />
-		</div>
+		<div class="loading-animation" id="p_load<%= portletDisplay.getNamespace() %>"></div>
 
 		<%
 		String doAsUserId = themeDisplay.getDoAsUserId();

@@ -56,7 +56,7 @@ function addPortlet(plid, portletId, doAsUserId) {
 			return;
 		}
 
-		loadingDiv.className = "portlet-loading";
+		loadingDiv.className = "loading-animation";
 
 		container.appendChild(loadingDiv);
 
@@ -115,8 +115,8 @@ function addPortletHTML(html, container, placeHolder) {
 	return portletId;
 }
 
-function closePortlet(plid, portletId, doAsUserId) {
-	if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-remove-this-component") %>')) {
+function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
+	if (skipConfirm || confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-remove-this-component") %>')) {
 		var curItem = document.getElementById("p_p_id_" + portletId + "_");
 		var parent = curItem.parentNode;
 
@@ -138,6 +138,8 @@ function closePortlet(plid, portletId, doAsUserId) {
 		else {
 			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.DELETE %>");
 		}
+
+		Liferay.Portlet.remove(portletId);
 	}
 	else {
 		self.focus();
