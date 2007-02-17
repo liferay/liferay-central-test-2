@@ -250,7 +250,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				String userId = rs.getString("userId");
 				String name = _fixName(rs.getString("name"));
 
-				String plid = LayoutImpl.PUBLIC + groupId + ".1";
+				String plid = LayoutImpl.getUnknownPlid(groupId);
 				String parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 				String description = name;
 				boolean addCommunityPermissions = true;
