@@ -78,7 +78,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		if (permission == null) {
 			long permissionId =	CounterLocalServiceUtil.increment(
-				Permission.class.getName());
+				Counter.class.getName());
 
 			permission = PermissionUtil.create(permissionId);
 
