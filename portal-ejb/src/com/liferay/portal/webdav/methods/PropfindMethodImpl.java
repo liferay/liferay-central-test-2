@@ -31,10 +31,10 @@ import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.xml.DocUtil;
 import com.liferay.util.xml.XMLFormatter;
 
-import java.io.OutputStream;
 import java.io.StringReader;
 
 import java.text.DateFormat;
@@ -72,36 +72,14 @@ public class PropfindMethodImpl implements Method {
 
 			String xml = getResponseXML(webDavReq);
 
-			byte[] byteArray = xml.getBytes("UTF-8");
-
-			res.setContentLength(byteArray.length);
 			res.setContentType("text/xml; charset=UTF-8");
 			res.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 
-			OutputStream out = res.getOutputStream();
-
 			try {
-				if (!res.isCommitted()) {
-					out.write(byteArray);
-				}
+				ServletResponseUtil.write(res, xml);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(e, e);
-				}
-			}
-			finally {
-				try {
-					out.flush();
-				}
-				catch (Exception e) {
-					_log.warn(e);
-				}
-
-				try {
-					out.close();
-				}
-				catch (Exception e) {
 					_log.warn(e);
 				}
 			}

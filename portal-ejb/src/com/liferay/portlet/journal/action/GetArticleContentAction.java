@@ -55,7 +55,8 @@ public class GetArticleContentAction extends Action {
 			String fileName = "content.xml";
 			byte[] byteArray = xml.getBytes();
 
-			ServletResponseUtil.sendFile(res, fileName, byteArray);
+			ServletResponseUtil.sendFile(
+				res, fileName, byteArray, Constants.TEXT_XML);
 
 			return null;
 		}

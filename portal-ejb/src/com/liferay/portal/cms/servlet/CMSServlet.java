@@ -37,6 +37,7 @@ import com.liferay.util.ExtPropertiesLoader;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 
@@ -45,7 +46,6 @@ import java.util.Properties;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -174,19 +174,13 @@ public class CMSServlet extends HttpServlet {
 
 				res.setContentType(mimeType);
 
-				ServletOutputStream out = res.getOutputStream();
-
 				try {
-					if (!res.isCommitted()) {
-						out.print(content);
-					}
+					ServletResponseUtil.write(res, content);
 				}
 				catch (Exception e) {
-					_log.warn(e, e);
-				}
-				finally {
-					out.flush();
-					out.close();
+					if (_log.isWarnEnabled()) {
+						_log.warn(e, e);
+					}
 				}
 			}
 			else {

@@ -26,6 +26,7 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.SystemProperties;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 
@@ -33,7 +34,6 @@ import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -248,16 +248,8 @@ public class StripFilter implements Filter {
 					newByteArrayPos = oldByteArray.length;
 				}
 
-				// Set the content length, see LEP-536
-
-				res.setContentLength(newByteArrayPos);
-
-				ServletOutputStream out = httpRes.getOutputStream();
-
-				out.write(newByteArray, 0, newByteArrayPos);
-
-				out.flush();
-				out.close();
+				ServletResponseUtil.write(
+					httpRes, newByteArray, newByteArrayPos);
 			}
 		}
 		else {

@@ -30,6 +30,7 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 
@@ -38,7 +39,6 @@ import java.util.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -305,21 +305,13 @@ public class ImageServlet extends HttpServlet {
 				res.setContentType("image/" + image.getType());
 			}
 
-			ServletOutputStream out = res.getOutputStream();
-
 			try {
-				if (!res.isCommitted()) {
-					out.write(image.getTextObj());
-				}
+				ServletResponseUtil.write(res, image.getTextObj());
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(e, e);
 				}
-			}
-			finally {
-				out.flush();
-				out.close();
 			}
 		}
 	}

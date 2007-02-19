@@ -87,7 +87,8 @@ public class GetArticlesAction extends Action {
 			String fileName = "articles.xml";
 			byte[] byteArray = getContent(req, articles);
 
-			ServletResponseUtil.sendFile(res, fileName, byteArray);
+			ServletResponseUtil.sendFile(
+				res, fileName, byteArray, Constants.TEXT_XML);
 
 			return null;
 		}

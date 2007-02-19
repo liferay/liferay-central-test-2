@@ -27,8 +27,8 @@ import com.liferay.util.Validator;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
@@ -45,11 +45,50 @@ public class ServletResponseUtil {
 	public static final String DEFAULT_CONTENT_TYPE =
 		"application/octet-stream";
 
+	public static void cleanUp(OutputStream os) {
+		cleanUp(os, null);
+	}
+
+	public static void cleanUp(OutputStream os, InputStream is) {
+		try {
+			if (is != null) {
+				is.close();
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+		}
+
+		try {
+			if (os != null) {
+				os.flush();
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+		}
+
+		try {
+			if (os != null) {
+				os.close();
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+		}
+	}
+
 	public static void sendFile(
 			HttpServletResponse res, String fileName, byte[] byteArray)
 		throws IOException {
 
-		sendFile(res, fileName, byteArray, DEFAULT_CONTENT_TYPE);
+		sendFile(res, fileName, byteArray, null);
 	}
 
 	public static void sendFile(
@@ -61,7 +100,11 @@ public class ServletResponseUtil {
 			_log.debug("Sending file of type " + contentType);
 		}
 
-		res.setContentType(contentType);
+		// LEP-2201
+
+		if (Validator.isNotNull(contentType)) {
+			res.setContentType(contentType);
+		}
 
 		res.setHeader(HttpHeaders.CACHE_CONTROL, HttpHeaders.PUBLIC);
 		res.setHeader(HttpHeaders.PRAGMA, HttpHeaders.PUBLIC);
@@ -72,35 +115,14 @@ public class ServletResponseUtil {
 				"attachment; filename=\"" + fileName + "\"");
 		}
 
-		ServletOutputStream sos = null;
-
-		try {
-			sos = res.getOutputStream();
-
-			sos.write(byteArray);
-		}
-		finally {
-			try {
-				sos.flush();
-			}
-			catch (Exception e) {
-				_log.warn(e);
-			}
-
-			try {
-				sos.close();
-			}
-			catch (Exception e) {
-				_log.warn(e);
-			}
-		}
+		write(res, byteArray);
 	}
 
 	public static void sendFile(
 			HttpServletResponse res, String fileName, InputStream is)
 		throws IOException {
 
-		sendFile(res, fileName, is, DEFAULT_CONTENT_TYPE);
+		sendFile(res, fileName, is, null);
 	}
 
 	public static void sendFile(
@@ -112,7 +134,11 @@ public class ServletResponseUtil {
 			_log.debug("Sending file of type " + contentType);
 		}
 
-		res.setContentType(contentType);
+		// LEP-2201
+
+		if (Validator.isNotNull(contentType)) {
+			res.setContentType(contentType);
+		}
 
 		res.setHeader(HttpHeaders.CACHE_CONTROL, HttpHeaders.PUBLIC);
 		res.setHeader(HttpHeaders.PRAGMA, HttpHeaders.PUBLIC);
@@ -123,40 +149,68 @@ public class ServletResponseUtil {
 				"attachment; filename=\"" + fileName + "\"");
 		}
 
-		ServletOutputStream sos = null;
+		write(res, is);
+	}
+
+	public static void write(HttpServletResponse res, String s)
+		throws IOException {
+
+		write(res, s.getBytes("UTF-8"));
+	}
+
+	public static void write(HttpServletResponse res, byte[] byteArray)
+		throws IOException {
+
+		write(res, byteArray, 0);
+	}
+
+	public static void write(
+			HttpServletResponse res, byte[] byteArray, int contentLength)
+		throws IOException {
+
+		OutputStream os = null;
 
 		try {
-			sos = res.getOutputStream();
+			if (!res.isCommitted()) {
 
-			int c = is.read();
+				// LEP-536
 
-			while (c != -1) {
-				sos.write(c);
+				if (contentLength == 0) {
+					contentLength = byteArray.length;
+				}
 
-				c = is.read();
+				res.setContentLength(contentLength);
+
+				os = res.getOutputStream();
+
+				os.write(byteArray, 0, contentLength);
 			}
 		}
 		finally {
-			try {
-				is.close();
-			}
-			catch (Exception e) {
-				_log.warn(e);
-			}
+			cleanUp(os);
+		}
+	}
 
-			try {
-				sos.flush();
-			}
-			catch (Exception e) {
-				_log.warn(e);
-			}
+	public static void write(HttpServletResponse res, InputStream is)
+		throws IOException {
 
-			try {
-				sos.close();
+		OutputStream os = null;
+
+		try {
+			if (!res.isCommitted()) {
+				os = res.getOutputStream();
+
+				int c = is.read();
+
+				while (c != -1) {
+					os.write(c);
+
+					c = is.read();
+				}
 			}
-			catch (Exception e) {
-				_log.warn(e);
-			}
+		}
+		finally {
+			cleanUp(os, is);
 		}
 	}
 

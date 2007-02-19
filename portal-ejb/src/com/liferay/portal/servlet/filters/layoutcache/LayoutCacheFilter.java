@@ -43,6 +43,7 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.Header;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 
@@ -56,7 +57,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -184,17 +184,9 @@ public class LayoutCacheFilter implements Filter {
 				}
 			}
 
-			byte[] byteArray = data.getData();
-
-			httpRes.setContentLength(byteArray.length);
 			httpRes.setContentType(data.getContentType());
 
-			ServletOutputStream out = httpRes.getOutputStream();
-
-			out.write(byteArray, 0, byteArray.length);
-
-			out.flush();
-			out.close();
+			ServletResponseUtil.write(httpRes, data.getData());
 		}
 		else {
 			if (_log.isDebugEnabled()) {

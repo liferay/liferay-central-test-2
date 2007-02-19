@@ -27,12 +27,12 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.util.ContentTypes;
 import com.liferay.util.HttpHeaders;
+import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.UploadServletRequest;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,19 +67,13 @@ public class JBPMServlet extends HttpServlet {
 
 		res.setContentType("text/xml");
 
-		ServletOutputStream out = res.getOutputStream();
-
 		try {
-			if (!res.isCommitted()) {
-				out.print(result);
-			}
+			ServletResponseUtil.write(res, result);
 		}
 		catch (Exception e) {
-			_log.warn(e, e);
-		}
-		finally {
-			out.flush();
-			out.close();
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 		}
 	}
 

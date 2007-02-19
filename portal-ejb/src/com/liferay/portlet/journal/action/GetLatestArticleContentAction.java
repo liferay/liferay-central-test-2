@@ -69,7 +69,8 @@ public class GetLatestArticleContentAction extends Action {
 			byte[] byteArray =
 				article.getContentByLocale(languageId).getBytes();
 
-			ServletResponseUtil.sendFile(res, fileName, byteArray);
+			ServletResponseUtil.sendFile(
+				res, fileName, byteArray, Constants.TEXT_XML);
 
 			return null;
 		}

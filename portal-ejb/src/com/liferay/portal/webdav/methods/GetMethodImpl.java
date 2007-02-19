@@ -26,9 +26,9 @@ import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.InputStream;
-import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,43 +71,11 @@ public class GetMethodImpl implements Method {
 			else {
 				res.setStatus(HttpServletResponse.SC_OK);
 
-				OutputStream out = res.getOutputStream();
-
 				try {
-					if (!res.isCommitted()) {
-						int c = is.read();
-
-						while (c != -1) {
-							out.write(c);
-
-							c = is.read();
-						}
-					}
+					ServletResponseUtil.write(res, is);
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
-						_log.warn(e, e);
-					}
-				}
-				finally {
-					try {
-						is.close();
-					}
-					catch (Exception e) {
-						_log.warn(e);
-					}
-
-					try {
-						out.flush();
-					}
-					catch (Exception e) {
-						_log.warn(e);
-					}
-
-					try {
-						out.close();
-					}
-					catch (Exception e) {
 						_log.warn(e);
 					}
 				}
