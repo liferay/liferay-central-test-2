@@ -118,14 +118,14 @@ String tabsNames = "server,monitoring,plugins,settings";
 />
 
 <c:choose>
+	<c:when test='<%= tabs1.equals("monitoring") %>'>
+		<%@ include file="/html/portlet/admin/monitoring.jsp" %>
+	</c:when>
 	<c:when test='<%= tabs1.equals("plugins")%>'>
 		<%@ include file="/html/portlet/admin/plugins.jsp" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("settings") %>'>
 		<%@ include file="/html/portlet/admin/settings.jsp" %>
-	</c:when>
-	<c:when test='<%= tabs1.equals("monitoring") %>'>
-		<%@ include file="/html/portlet/admin/monitoring.jsp" %>
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/admin/server.jsp" %>

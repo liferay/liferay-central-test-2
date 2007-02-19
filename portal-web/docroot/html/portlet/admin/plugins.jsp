@@ -23,16 +23,9 @@
 %>
 
 <%
-String type = ParamUtil.getString(request, "type");
-
 String redirect = ParamUtil.getString(request, "redirect");
 if (Validator.isNull(redirect)) {
 	redirect = currentURL;
-}
-
-boolean showPluginInstaller = false;
-if (OmniadminUtil.isOmniadmin(user.getUserId())) {
-	showPluginInstaller = true;
 }
 
 if (Validator.isNull(tabs2)) {

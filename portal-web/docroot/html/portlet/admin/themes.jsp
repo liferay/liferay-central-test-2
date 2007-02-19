@@ -22,12 +22,6 @@
  */
 %>
 
-<%
-type = "theme";
-
-installPluginsURL.setParameter("tabs2", type);
-%>
-
 <c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId())  && PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)%>">
 	<input class="portlet-form-button" type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-themes")%>'/>
 	<br><br>
@@ -35,7 +29,7 @@ installPluginsURL.setParameter("tabs2", type);
 <%
 List headerNames = new ArrayList();
 
-headerNames.add(type);
+headerNames.add("theme");
 headerNames.add("active");
 headerNames.add("roles");
 

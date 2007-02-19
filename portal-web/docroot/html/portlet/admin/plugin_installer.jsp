@@ -27,11 +27,19 @@
 String tabs1 = ParamUtil.getString(request, "tabs1");
 String tabs2 = ParamUtil.getString(request, "tabs2");
 if (Validator.isNull(tabs2)) {
-	tabs2 = "portlet";
+	tabs2 = "portlets";
 }
 
-String type = tabs2;
-
+String type = null;
+if (tabs2.equals("themes")) {
+	type = "theme";
+}
+else if (tabs2.equals("layout-templates")) {
+	type = "layout-template";
+}
+else if (tabs2.equals("portlets")) {
+	type = "portlet";
+}
 
 String referer = request.getParameter(WebKeys.REFERER);
 String redirect = ParamUtil.getString(request, "redirect");
@@ -56,9 +64,6 @@ if (!PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)) {
 	tabs1Options = "configuration";
 	tabs1 = "configuration";
 }
-
-String tabs2Names = "portlet-packages,theme-packages,layout-template-packages";
-String tabs2Values = "portlet,theme,layout-template";
 
 // Breadcrumbs
 
@@ -252,8 +257,8 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 	<c:otherwise>
 
 		<liferay-ui:tabs
-			names="<%=tabs2Names%>"
-			tabsValues="<%=tabs2Values%>"
+			names="portlet-packages,theme-packages,layout-template-packages"
+			tabsValues="portlets,themes,layout-templates"
 			param="tabs2"
 			url="<%= portletURL.toString() %>"
 		/>
