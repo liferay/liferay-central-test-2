@@ -50,7 +50,7 @@ rowURL.setParameter("tabs1", tabs1);
 rowURL.setParameter("tabs2", tabs2);
 rowURL.setParameter("moduleId", moduleId);
 rowURL.setParameter("repositoryURL", repositoryURL);
-		
+
 %>
 
 <liferay-ui:icon image="view" url="<%= rowURL.toString() %>" />

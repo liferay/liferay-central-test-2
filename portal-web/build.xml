@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="portal-web" basedir="." default="war">
+<project name="portal-web" basedir="." default="war" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="../build-common-web.xml" />
 
 	<property name="war.file" value="${ant.project.name}" />
@@ -363,6 +363,103 @@
 				excludes="**/thumbnail.gif,**/custom/**,**/flash/**"
 			/>
 		</copy>
+	</target>
+
+	<target name="build-css">
+		<!--<if>
+			<not>
+				<available file="../tools/csstidy-1.2.exe" />
+			</not>
+			<then>
+				<get
+					src="http://easynews.dl.sourceforge.net/sourceforge/csstidy/csstidy-exe-1.2.zip"
+					dest="../tools/csstidy-exe-1.2.zip"
+					usetimestamp="true"
+					verbose="true"
+				/>
+
+				<unzip src="../tools/csstidy-exe-1.2.zip" dest="../tools" /> 
+
+				<move file="../tools/csstidy.exe" tofile="../tools/csstidy-1.2.exe" />
+
+				<delete file="../tools/csstidy-exe-1.2.zip" />
+			</then>
+		</if>-->
+
+		<for param="css.file">
+			<path>
+				<fileset
+					dir="docroot/html/themes/classic/css/"
+					includes="*.css"
+					excludes="custom.css,main.css"
+				/>
+			</path>
+			<sequential>
+				<antcall target="build-css-cmd">
+					<param name="css.file" value="@{css.file}" />
+				</antcall>
+			</sequential>
+		</for>
+	</target>
+
+	<target name="build-css-cmd">
+		<loadfile property="css.content" srcFile="${css.file}" />
+
+		<antelope:post
+			append="false"
+			property="css.formatted"
+			to="http://teenage.cz/acidofil/tools/cssformat.php"
+			verbose="false"
+		>
+			<antelope:prop name="css" value="${css.content}" />
+			<antelope:prop name="akce" value="format" />
+			<antelope:prop name="sortclasses" value="0" />
+			<antelope:prop name="sortattrs" value="1" />
+			<antelope:prop name="stripcomms" value="0" />
+			<antelope:prop name="textarea" value="1" />
+			<antelope:prop name="mergeclasses" value="0" />
+			<antelope:prop name="mergeattrs" value="1" />
+			<antelope:prop name="shortcolors" value="1" />
+			<antelope:prop name="shortattrs" value="1" />
+		</antelope:post>
+
+		<!--
+		<textarea rows="12" cols="100">
+		-->
+
+		<antelope:stringutil string="${css.formatted}" property="css.formatted.beginindex">
+			<indexof string="textarea rows" />
+		</antelope:stringutil>
+
+		<math
+			datatype="int"
+			operand1="${css.formatted.beginindex}"
+			operand2="31"
+			operation="+"
+			result="css.formatted.beginindex"
+		/>
+
+		<!--
+		</textarea>
+		-->
+
+		<antelope:stringutil string="${css.formatted}" property="css.formatted.endindex">
+			<indexof string="/textarea" fromindex="${css.formatted.beginindex}" />
+		</antelope:stringutil>
+
+		<math
+			datatype="int"
+			operand1="${css.formatted.endindex}"
+			operand2="3"
+			operation="-"
+			result="css.formatted.endindex"
+		/>
+
+		<antelope:stringutil string="${css.formatted}" property="css.formatted">
+			<substring beginindex="${css.formatted.beginindex}" endindex="${css.formatted.endindex}" />
+		</antelope:stringutil>
+
+		<echo message="${css.formatted}" file="${css.file}" />
 	</target>
 
 	<target name="build-javascript">

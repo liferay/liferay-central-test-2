@@ -43,6 +43,7 @@ import com.liferay.taglib.theme.MetaTagsTag;
 import com.liferay.taglib.theme.WrapPortletTag;
 import com.liferay.taglib.ui.JournalContentSearchTag;
 import com.liferay.taglib.ui.LanguageTag;
+import com.liferay.taglib.ui.MyPlacesTag;
 import com.liferay.taglib.ui.PngImageTag;
 import com.liferay.taglib.ui.SearchTag;
 import com.liferay.taglib.ui.ToggleTag;
@@ -314,6 +315,14 @@ public class VelocityTaglib {
 		_res.recycle();
 
 		MetaTagsTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String myPlaces() throws Exception {
+		_res.recycle();
+
+		MyPlacesTag.doTag(_ctx, _req, _res);
 
 		return _res.getString();
 	}

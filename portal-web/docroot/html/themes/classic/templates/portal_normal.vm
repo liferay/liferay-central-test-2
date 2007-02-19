@@ -34,6 +34,7 @@ $theme.include($top_warning_include)
 		$theme.include($content_include)
 	#else
 		$portletDisplay.recycle()
+
 		$portletDisplay.setTitle($the_title)
 
 		$theme.wrapPortlet("portlet.vm", $content_include)

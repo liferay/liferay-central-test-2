@@ -853,6 +853,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>my-places</name>
+		<tagclass>com.liferay.taglib.ui.MyPlacesTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>navigation</name>
 		<tagclass>com.liferay.taglib.ui.NavigationTag</tagclass>
 		<bodycontent>JSP</bodycontent>

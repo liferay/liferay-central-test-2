@@ -43,6 +43,6 @@
 			</li>
 		#end
 
-		#my_places_list()
+		$theme.myPlaces()
 	</ul>
 </div>
