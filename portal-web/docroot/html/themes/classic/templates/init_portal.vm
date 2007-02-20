@@ -1,4 +1,4 @@
-## ---------- Common Variables ---------- ##
+## ---------- Common variables ---------- ##
 
 #set ( $the_title = $languageUtil.get($pageContext, $tilesTitle) )
 #set ( $selectable = $tilesSelectable.equals("true") )

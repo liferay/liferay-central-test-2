@@ -460,6 +460,15 @@
 		</antelope:stringutil>
 
 		<echo message="${css.formatted}" file="${css.file}" />
+
+		<java
+			classname="com.liferay.portal.tools.CSSFormatter"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg line="${css.file}" />
+		</java>
 	</target>
 
 	<target name="build-javascript">

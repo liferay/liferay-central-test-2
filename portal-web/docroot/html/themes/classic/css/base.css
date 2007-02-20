@@ -1,59 +1,67 @@
+/* This CSS sets the default styles for the base components. */
 
-/* Browser Normalization for whitespace, borders, and fonts
- * Copyright 2006, Yahoo! Inc.
- * reset.css/fonts.css
------------------------------------------------------------------*/
+/* ---------- Browser normalization ---------- */
+
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
-	margin:0;
-	padding:0;
+	margin: 0;
+	padding: 0;
 }
-table {
-	border-collapse:collapse;
-	border-spacing:0;
-}
-fieldset, img {
-	border:0;
-}
-address, caption, cite, code, dfn, em, strong, th, var {
-	font-style:normal;
-	font-weight:normal;
-}
-ol, ul {
-	list-style:none;
-}
-caption, th {
-	text-align:left;
-}
-q:before, q:after {
-	content:'';
-}
-abbr, acronym {
-	border:0;
-}
-body {
-	font: 62.5%/1.6em 'Tahoma','Lucida Sans Unicode','Lucida Grande', 'Lucida', Arial, Verdana, sans-serif;
-}
-html, body {
-	height:100%;
-}
-/*  /End normalization    //---------------------------*/
 
-/* Links 
------------------------------------------------------------------*/
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+fieldset, img {
+	border: 0;
+}
+
+address, caption, cite, code, dfn, em, strong, th, var {
+	font-style: normal;
+	font-weight: normal;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+caption, th {
+	text-align: left;
+}
+
+q:before, q:after {
+	content: '';
+}
+
+abbr, acronym {
+	border: 0;
+}
+
+body {
+	font: 62.5%/1.6em 'Tahoma','Lucida Sans Unicode','Lucida Grande','Lucida',Arial,Verdana,sans-serif;
+}
+
+html, body {
+	height: 100%;
+}
+
+/* ---------- Links ---------- */
 
 a {
-	text-decoration:underline;
-	color:#036;
+	color: #036;
+	text-decoration: underline;
 }
-	a:hover {
-		text-decoration:none;
-		color:#06c;
-	}
-	a:visited {
-	}
 
-/* Headers
------------------------------------------------------------------*/
+a:hover {
+	color: #06c;
+	text-decoration: none;
+}
+
+a:visited {
+}
+
+/* ---------- Headers ---------- */
+
 h1 {
 }
 
@@ -62,119 +70,105 @@ h2 {
 
 h3 {
 }
+
 h4 {
 }
+
 h5 {
 }
+
 h6 {
 }
 
-/* Text Formatting
------------------------------------------------------------------*/
+/* ---------- Text formatting ---------- */
+
 b, strong {
-	font-weight:bold;
+	font-weight: bold;
 }
+
 i, em {
-font-style:italic;
+	font-style: italic;
 }
+
 code, pre {
-	font-family:"Courier New", Courier, monospace;
-	white-space:pre;
+	font-family: "Courier New",Courier,monospace;
+	white-space: pre;
 }
 
-/*  Main content body    //---------------------------*/
+/* ---------- Main content body ---------- */
+
 #wrapper {
-	width: 95%;
 	margin: 0 auto;
+	width: 95%;
 }
-/*  Banner    //---------------------------*/
+
+/* ---------- Banner ---------- */
+
 #banner {
-	background:transparent url(../images/custom/banner_bkg.gif) no-repeat scroll 100% 100%;
-	height:7em;
-	position:relative;
+	background: transparent url(../images/custom/banner_bkg.gif) no-repeat scroll 100% 100%;
+	height: 7em;
+	position: relative;
 }
-	#banner .logo {
-		background:transparent url(../images/custom/banner_bkg.gif) no-repeat scroll 0 100%;
-		display:block;
-		padding: 1.25em 0.6em 1.45em;
-		font-size:2em;
-		float:left;
-	}
-		#banner .logo a {
-			text-decoration:none;
-		}
 
-/*------ IE-Specific Hacks ------*/
-	.ie6 #banner .logo {
-		zoom:1;
-	}
-
-/* Alerts/Popups
------------------------------------------------------------------*/
-/*------ Deprecated ------*/
-.pop-up-outer {
-	background:#fff;
-	border:2px solid #8cb6f7;
-	padding:5px;
+#banner .logo {
+	background: transparent url(../images/custom/banner_bkg.gif) no-repeat scroll 0 100%;
+	display: block;
+	float: left;
+	font-size: 2em;
+	padding: 1.25em 0.6em 1.45em;
 }
-	.pop-up-header {
-		background: #EEF0F1;
-		border-bottom:2px solid #777;
-	}
-		.pop-up-header td {
-			padding: 5px 10px;
-		}
-		.pop-up-header .pop-up-title {
-			font-weight:bold;
-			color: #069;
-		}
-/*------ New ------*/
+
+#banner .logo a {
+	text-decoration: none;
+}
+
+.ie6 #banner .logo {
+	zoom: 1;
+}
+
+/* ---------- Alerts and popups ---------- */
+
 .popup {
-	background:#fff;
-	border:2px solid #8cb6f7;
-	padding:5px;
-}
-	.popup-header {
-		background:#EEF0F1 none repeat scroll 0%;
-		border-bottom:2px solid #777777;
-		margin-bottom:20px;
-		padding:5px;
-		color:#333;
-	}	
-		.popup-title {
-			width:90%;
-		}
-		.popup-close {
-		width:5%;
-		}
-
-	/* Add Content Popup
-	-----------------------------------------------------------------*/
-	.portal-add-content {
-		background: #fff;
-		padding: 8px;
-		text-align: left;
-		z-index: 20;
-	}
-		.portal-add-content a {
-			text-decoration:none;
-		}
-
-/* Beta "Gradient" Headers
------------------------------------------------------------------*/
-.beta-gradient {
-	border:1px solid #DDE1E3;
-	background:#EEF0F1;
-	padding:5px;
-	border-spacing: 5px;
+	background: #fff;
+	border: 2px solid #8CB6F7;
+	padding: 5px;
 }
 
-/* Tooltips
------------------------------------------------------------------*/
+.popup-header {
+	background: #EEF0F1 none repeat scroll 0%;
+	border-bottom: 2px solid #777;
+	color: #333;
+	margin-bottom: 20px;
+	padding: 5px;
+}
+
+.popup-title {
+	width: 90%;
+}
+
+.popup-close {
+	width: 5%;
+}
+
+/* ---------- Portal add content ---------- */
+
+.portal-add-content {
+	background: #fff;
+	padding: 8px;
+	text-align: left;
+	z-index: 20;
+}
+
+.portal-add-content a {
+	text-decoration: none;
+}
+
+/* ---------- Portal tool tips ---------- */
+
 .portal-tool-tip {
-	border: 1px solid #bfbfbf;
+	background: #DCDCDC;
+	border: 1px solid #BFBFBF;
+	color: #333;
+	font-weight: bold;
 	padding: 0.5em 0.3em;
-	color:#333;
-	background: #dcdcdc;
-	font-weight:bold;
 }

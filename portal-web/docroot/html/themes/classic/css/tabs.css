@@ -1,41 +1,46 @@
-.gamma-tab {
+/* This CSS sets the default styles for tabs. */
+
+.tabs {
+	border-bottom: 1px solid #8DB2E3;
 	margin: 0 0 1.5em 0;
-	border-bottom:1px solid #8DB2E3;
-	padding:0 0 2.6em 1em;
+	padding: 0 0 2.6em 1em;
 }
-	 .gamma-tab li {
-		display: inline;
-		float: left;
-		line-height:2.25;
-		margin-right: 0.8em;
-		text-decoration: none;
-		background: url(../images/custom/gamma_tab_bkg.gif) 100% -50px;
-	 	padding:0;
-	 	position:relative;
-	}
-		 .gamma-tab li a,
-		 .gamma-tab li span {
-		 background: url(../images/custom/gamma_tab_bkg.gif) 0 -150px;
-		 display:block;
-		 padding:  0.35em 1em 0;
-		 text-decoration:none;
-		 float:left;
-		 }
-	.gamma-tab li.current {
-		 background: url(../images/custom/gamma_tab_bkg.gif) 100% 0;
-		 top:0.15em;
-		 font-weight:bold;
-	}
-			.gamma-tab li.current a,
-			.gamma-tab li.current span {
-				 background: url(../images/custom/gamma_tab_bkg.gif) 0 -100px;
-				 color:#333;
-				 padding:  0.15em 1em;
-			}
-/*------ IE Hacks ------*/
-	.ie6 .gamma-tab li {
-			line-height:2.35;
-		}
-		.ie6 .gamma-tab li.current {
-				 top:0.2em;
-			}
+
+.tabs li {
+	background: url(../images/custom/gamma_tab_bkg.gif) 100% -50px;
+	display: inline;
+	float: left;
+	line-height: 2.25;
+	margin-right: 0.8em;
+	padding: 0;
+	position: relative;
+	text-decoration: none;
+}
+
+.tabs li a, .tabs li span {
+	background: url(../images/custom/gamma_tab_bkg.gif) 0 -150px;
+	display: block;
+	float: left;
+	padding: 0.35em 1em 0;
+	text-decoration: none;
+}
+
+.tabs li.current {
+	background: url(../images/custom/gamma_tab_bkg.gif) 100% 0;
+	font-weight: bold;
+	top: 0.15em;
+}
+
+.tabs li.current a, .tabs li.current span {
+	background: url(../images/custom/gamma_tab_bkg.gif) 0 -100px;
+	color: #333;
+	padding: 0.15em 1em;
+}
+
+.ie6 .tabs li {
+	line-height: 2.35;
+}
+
+.ie6 .tabs li.current {
+	top: 0.2em;
+}

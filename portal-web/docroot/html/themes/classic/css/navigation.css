@@ -1,262 +1,295 @@
-/* Main Nav
------------------------------------------------------------------*/
+/* This CSS sets the default styles for the main navigation. */
+
+/* ---------- Main navigation ---------- */
+
 #navigation {
-	background:transparent url(../images/custom/nav_bkg.gif) no-repeat 100% 100%;
-	margin:0 auto 2em;
-	min-height:2em;
-	padding:0.5em 2em;
-	position:relative;
-	width:93%;
+	background: transparent url(../images/custom/nav_bkg.gif) no-repeat 100% 100%;
+	margin: 0 auto 2em;
+	min-height: 2em;
+	padding: 0.5em 2em;
+	position: relative;
+	width: 93%;
 }
-	#navigation ul {
-		background:transparent url(../images/custom/nav_bkg.gif) no-repeat 0 100%;
-		float:left;
-		left:0;
-		min-height:2em;
-		padding:0.5em 2em;
-		position:absolute;
-		top:0;
-	}
-	/*------ IE Specific Hacks ------*/
-	.ie6 #navigation,
-	.ie6 #navigation ul {
-		height:2em;
-	}
-		
-	#navigation li {
-		float:left;
-		display:inline;
-		margin-right:1.5em;
-	}
-	#navigation li a {
-		display:block;
-		background:url(../images/custom/nav_bullet.gif) no-repeat 0 50%;
-		padding-left: 17px;
-		text-decoration:none;
-	}
-		#navigation li a:hover {
-			background:url(../images/custom/nav_bullet_over.gif) no-repeat 0 50%;
-		}
-		/*------ IE Specific Hacks ------*/
-		.ie #navigation li a {
-			padding-top:0.2em;	
-		}
-	/*------ Nav Dark ------*/
-		
-/* Account Navigation
------------------------------------------------------------------*/
+
+#navigation ul {
+	background: transparent url(../images/custom/nav_bkg.gif) no-repeat 0 100%;
+	float: left;
+	left: 0;
+	min-height: 2em;
+	padding: 0.5em 2em;
+	position: absolute;
+	top: 0;
+}
+
+.ie6 #navigation, .ie6 #navigation ul {
+	height: 2em;
+}
+
+#navigation li {
+	display: inline;
+	float: left;
+	margin-right: 1.5em;
+}
+
+#navigation li a {
+	background: url(../images/custom/nav_bullet.gif) no-repeat 0 50%;
+	display: block;
+	padding-left: 17px;
+	text-decoration: none;
+}
+
+#navigation li a:hover {
+	background: url(../images/custom/nav_bullet_over.gif) no-repeat 0 50%;
+}
+
+.ie #navigation li a {
+	padding-top: 0.2em;
+}
+
+/* ---------- Dock without Javascript ---------- */
+
 .lfr-dock {
-	position:absolute;
-	right:10px;
-	top:10px;
+	position: absolute;
+	right: 10px;
+	top: 10px;
 }
-	.lfr-dock h2 {
-		margin-bottom: 0.5em;
-		text-align:right;
-		font-size:1.2em;
-		background: url(../images/custom/welcome_message.png) no-repeat 0 50%;
-		padding-left: 2em;
-	}
-	.lfr-dock ul {
-		float:left;
-		display:inline;
-	}
-		.lfr-dock li {
-			float:left;
-			display:inline;
-			margin-left: 15px;
-		}
-			.lfr-dock li a {
-				padding: 2px 0 2px 20px;
-				background: url() no-repeat 0 50%;
-			}
-			.lfr-dock li.home a {
-				background-image: url(../images/custom/home.gif);
-			}
-			.lfr-dock li.my-account a {
-				background-image: url(../images/custom/my_account.gif);
-			}
-			.lfr-dock li.sign-in a {
-				background-image: url(../images/custom/sign_in.gif);
-			}
-			.lfr-dock li.sign-out a {
-				background-image: url(../images/custom/sign_out.gif);
-			}
-			.lfr-dock li.add-content a {
-				background-image: url(../images/custom/add_content.gif);
-			}
-			.lfr-dock li.layout a {
-				background-image: url(../images/custom/layout.gif);
-			}
-			.lfr-dock li.page-settings a {
-				background-image: url(../images/custom/page_settings.gif);
-			}
-			.lfr-dock li.my-places a {
-				background-image: url(../images/custom/my_places.gif);
-			}
-		.lfr-dock li.my-places{
-			display: none;
-		}
-/* Javascript enabled Nav Menu
------------------------------------------------------------------*/
+
+.lfr-dock h2 {
+	background: url(../images/custom/welcome_message.png) no-repeat 0 50%;
+	font-size: 1.2em;
+	margin-bottom: 0.5em;
+	padding-left: 2em;
+	text-align: right;
+}
+
+.lfr-dock ul {
+	display: inline;
+	float: left;
+}
+
+.lfr-dock li {
+	display: inline;
+	float: left;
+	margin-left: 15px;
+}
+
+.lfr-dock li a {
+	background: url() no-repeat 0 50%;
+	padding: 2px 0 2px 20px;
+}
+
+.lfr-dock li.home a {
+	background-image: url(../images/custom/home.gif);
+}
+
+.lfr-dock li.my-account a {
+	background-image: url(../images/custom/my_account.gif);
+}
+
+.lfr-dock li.sign-in a {
+	background-image: url(../images/custom/sign_in.gif);
+}
+
+.lfr-dock li.sign-out a {
+	background-image: url(../images/custom/sign_out.gif);
+}
+
+.lfr-dock li.add-content a {
+	background-image: url(../images/custom/add_content.gif);
+}
+
+.lfr-dock li.layout a {
+	background-image: url(../images/custom/layout.gif);
+}
+
+.lfr-dock li.page-settings a {
+	background-image: url(../images/custom/page_settings.gif);
+}
+
+.lfr-dock li.my-places a {
+	background-image: url(../images/custom/my_places.gif);
+}
+
+.lfr-dock li.my-places {
+	display: none;
+}
+
+/* ---------- Dock with Javascript ---------- */
+
 .js .lfr-dock {
-	right:10px;
-	top:10px;
-	position:relative;
-	float:right;
+	float: right;
 	min-width: 150px;
+	position: relative;
+	right: 10px;
+	top: 10px;
 }
-	.js .lfr-dock h2 {
-		padding: 0 29px 0 0;
-		font-size:1.2em;
-		background: url(../images/custom/widget_bar.png) no-repeat 100% -30px;
-		margin-bottom: 0;
-		position: relative;
-		z-index: 82;
-	}
-			.js .lfr-dock h2 span{
-				padding:0.5em 0.5em 0.5em 2em;
-				display: block;
-				font-size:1.2em;
-				color: #fff;
-				background: url(../images/custom/widget_bar.png) no-repeat 0 0;
-				margin-bottom: 0;
-			}
-		.js .lfr-dock.expanded .lfr-dock-list-container{
-			background: #60738c;
-			border: 1px solid #b5b9bb;
-			border-top: none;
-			position: relative;
-			top:  -2px;
-		}
-	.js .lfr-dock ul {
-		margin-tops: 0.25em;
-		border-left: 20px solid #DAE3EF;
-		background: url(../images/custom/widget_menu_bkg.gif) no-repeat 0 0;
-		display:none;
-		float: none;
-	}
-		.js .lfr-dock li {
-			display:block;
-			float: none;
-			margin-bottom:0pt;
-			margin-left:0.2em;
-		}
-			.js .lfr-dock li a {
-				background-position:0.5em 50%;
-				border-top:1px solid #ccc;
-				margin-left:0.3em;
-				display:block;
-				padding:0.5em 0pt 0.5em 2.5em;
-				text-decoration:none;
-			}
-			.js .lfr-dock ul.lfr-dock-list > li:first-child a,
-			.js .lfr-dock ul.lfr-dock-list > li:first-child  ul.show-my-places li:first-child a {
-				
-				border-top:none;
-				
-			}
-				.js .lfr-dock li a:hover {
-					border-top:1px solid #e0d79f;
-					background-color: #FFF5BA;
-					padding-left: 3.5em;
-					background-position: 1.5em 50%;
-				}
-					.js .lfr-dock ul.lfr-dock-list > li:first-child a,
-					.js .lfr-dock ul.lfr-dock-list > li:first-child a:hover,
-					.js .lfr-dock ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a,
-					.js .lfr-dock ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a:hover  {
-						border-top: none;
-					}
-			.js .my-places {
-				display: none;
-				position: relative;
-			}
-				.js .lfr-dock li.my-places  li a {
-					background-image: none;
-				}
-					.js .lfr-dock li.my-places li ul li.current a,
-					.js .lfr-dock li.my-places li ul li.current a:hover {
-						background: #e5f7fd url(../images/dock/my_place_current.png) no-repeat 1em 50%;
-						margin: 0.1em 0 0 0.2em;
-						padding-left: 3.5em;
-					}
-			.js .my-places .show-my-places {
-				position: absolute;
-				padding: 0.2em;
-				display: block;
-				min-width: 200px;
-				top: 0;
-				right: 100%;
-				border: 1px solid #ccc;
-				background: #fff;
-			}
-				.js .my-places.send-right .show-my-places {
-					top: -10px;
-					left: 100%;
-				}
-				.js .my-places.send-down .show-my-places {
-					top: 100%;
-					left: 0;
-				}
-					.js .my-places .show-my-places li {
-						background: url() no-repeat 5px 50%;
-						margin: 0;
-						pasdding: 0.5em;
-					}
-					li.my-places ul li ul {
-						
-					}
-						.js .my-places .show-my-places li .my-places-toggle {
-							background: url(../images/dock/my_place.png) no-repeat 3px 50%;
-							border-bottom: 1px solid #999;
-							padding: 0.5em 0.2em 0.5em 2em;
-							font-size: 1.1em;
-							font-weight: bold;
-							color: #333;
-						}
-						.js .my-places .show-my-places li .my-places-toggle h3 {
-							background: url(../images/custom/expand_community.png) no-repeat 100% 50%;
-							padding-right: 1.8em;
-						}
-							.js .my-places .show-my-places li .my-places-toggle.hide h3 {
-								background-image: url(../images/custom/collapse_community.png);
-							}
-						.js .my-places .show-my-places li ul {
-							display: none;
-							border: none;
-							background: url() no-repeat 3px 50%;
-						}
-							.js .my-places .show-my-places li ul {
-								margin-left: 0.5em;
-							}
-								.js .my-places .show-my-places ul li.public a,
-								.js .my-places .show-my-places ul li.public a:hover {
-									background-image: url(../images/dock/my_places_public.png);
-								}
-								.js .my-places .show-my-places li.private a,
-								.js .my-places .show-my-places li.private a:hover {
-									background-image: url(../images/dock/my_places_private.png);
-								}
-			/*------ IE Specific Hacks ------*/
-			.ie6.js .lfr-dock {
-				width: 150px;
-				white-space:nowrap;
-			}
-				.ie6.js .lfr-dock h2{
-					
-				}
-					.ie6.js .lfr-dock.expanded .lfr-dock-list-container{
-						zoom:1;
-					}
-				.ie6.js .my-places .show-my-places{
-					width:200px;
-				}
-					
-			.ie6.js .lfr-dock li {
-				zoom:1;
-			}
-			.ie6.js .lfr-dock li a{
-				zoom:1;
-			}
-			
+
+.js .lfr-dock h2 {
+	background: url(../images/custom/widget_bar.png) no-repeat 100% -30px;
+	font-size: 1.2em;
+	margin-bottom: 0;
+	padding: 0 29px 0 0;
+	position: relative;
+	z-index: 82;
+}
+
+.js .lfr-dock h2 span {
+	background: url(../images/custom/widget_bar.png) no-repeat 0 0;
+	color: #fff;
+	display: block;
+	font-size: 1.2em;
+	margin-bottom: 0;
+	padding: 0.5em 0.5em 0.5em 2em;
+}
+
+.js .lfr-dock.expanded .lfr-dock-list-container {
+	background: #60738C;
+	border: 1px solid #B5B9BB;
+	border-top: none;
+	position: relative;
+	top: -2px;
+}
+
+.js .lfr-dock ul {
+	background: url(../images/custom/widget_menu_bkg.gif) no-repeat 0 0;
+	border-left: 20px solid #DAE3EF;
+	display: none;
+	float: none;
+	margin-tops: 0.25em;
+}
+
+.js .lfr-dock li {
+	display: block;
+	float: none;
+	margin-bottom: 0pt;
+	margin-left: 0.2em;
+}
+
+.js .lfr-dock li a {
+	background-position: 0.5em 50%;
+	border-top: 1px solid #ccc;
+	display: block;
+	margin-left: 0.3em;
+	padding: 0.5em 0pt 0.5em 2.5em;
+	text-decoration: none;
+}
+
+.js .lfr-dock ul.lfr-dock-list > li:first-child a, .js .lfr-dock ul.lfr-dock-list > li:first-child ul.show-my-places li:first-child a {
+	border-top: none;
+}
+
+.js .lfr-dock li a:hover {
+	background-color: #FFF5BA;
+	background-position: 1.5em 50%;
+	border-top: 1px solid #E0D79F;
+	padding-left: 3.5em;
+}
+
+.js .lfr-dock ul.lfr-dock-list > li:first-child a, .js .lfr-dock ul.lfr-dock-list > li:first-child a:hover, .js .lfr-dock ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a, .js .lfr-dock ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a:hover {
+	border-top: none;
+}
+
+.js .my-places {
+	display: none;
+	position: relative;
+}
+
+.js .lfr-dock li.my-places li a {
+	background-image: none;
+}
+
+.js .lfr-dock li.my-places li ul li.current a, .js .lfr-dock li.my-places li ul li.current a:hover {
+	background: #E5F7FD url(../images/dock/my_place_current.png) no-repeat 1em 50%;
+	margin: 0.1em 0 0 0.2em;
+	padding-left: 3.5em;
+}
+
+.js .my-places .show-my-places {
+	background: #fff;
+	border: 1px solid #ccc;
+	display: block;
+	min-width: 200px;
+	padding: 0.2em;
+	position: absolute;
+	right: 100%;
+	top: 0;
+}
+
+.js .my-places.send-right .show-my-places {
+	left: 100%;
+	top: -10px;
+}
+
+.js .my-places.send-down .show-my-places {
+	left: 0;
+	top: 100%;
+}
+
+.js .my-places .show-my-places li {
+	background: url() no-repeat 5px 50%;
+	margin: 0;
+	pasdding: 0.5em;
+}
+
+li.my-places ul li ul {
+}
+
+.js .my-places .show-my-places li .my-places-toggle {
+	background: url(../images/dock/my_place.png) no-repeat 3px 50%;
+	border-bottom: 1px solid #999;
+	color: #333;
+	font-size: 1.1em;
+	font-weight: bold;
+	padding: 0.5em 0.2em 0.5em 2em;
+}
+
+.js .my-places .show-my-places li .my-places-toggle h3 {
+	background: url(../images/custom/expand_community.png) no-repeat 100% 50%;
+	padding-right: 1.8em;
+}
+
+.js .my-places .show-my-places li .my-places-toggle.hide h3 {
+	background-image: url(../images/custom/collapse_community.png);
+}
+
+.js .my-places .show-my-places li ul {
+	background: url() no-repeat 3px 50%;
+	border: none;
+	display: none;
+}
+
+.js .my-places .show-my-places li ul {
+	margin-left: 0.5em;
+}
+
+.js .my-places .show-my-places ul li.public a, .js .my-places .show-my-places ul li.public a:hover {
+	background-image: url(../images/dock/my_places_public.png);
+}
+
+.js .my-places .show-my-places li.private a, .js .my-places .show-my-places li.private a:hover {
+	background-image: url(../images/dock/my_places_private.png);
+}
+
+.ie6.js .lfr-dock {
+	white-space: nowrap;
+	width: 150px;
+}
+
+.ie6.js .lfr-dock h2 {
+}
+
+.ie6.js .lfr-dock.expanded .lfr-dock-list-container {
+	zoom: 1;
+}
+
+.ie6.js .my-places .show-my-places {
+	width: 200px;
+}
+
+.ie6.js .lfr-dock li {
+	zoom: 1;
+}
+
+.ie6.js .lfr-dock li a {
+	zoom: 1;
+}

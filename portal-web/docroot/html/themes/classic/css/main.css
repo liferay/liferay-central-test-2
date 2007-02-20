@@ -1,4 +1,8 @@
+/* This is the main CSS that includes other CSS files. */
+
 @import url(base.css);
+
+@import url(deprecated.css);
 
 @import url(layout.css);
 

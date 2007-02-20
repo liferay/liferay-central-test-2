@@ -79,7 +79,7 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 <c:if test="<%= names.length > 0 %>">
 	<input name="<%= namespace %><%= param %>TabsScroll" type="hidden">
 
-	<ul class="gamma-tab">
+	<ul class="tabs">
 
 		<%
 		for (int i = 0; i < values.length; i++) {
