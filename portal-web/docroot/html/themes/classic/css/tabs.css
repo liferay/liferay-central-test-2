@@ -7,7 +7,7 @@
 }
 
 .tabs li {
-	background: url(../images/custom/gamma_tab_bkg.gif) 100% -50px;
+	background: url(../images/common/tabs_bg.gif) 100% -50px;
 	display: inline;
 	float: left;
 	line-height: 2.25;
@@ -18,7 +18,7 @@
 }
 
 .tabs li a, .tabs li span {
-	background: url(../images/custom/gamma_tab_bkg.gif) 0 -150px;
+	background: url(../images/common/tabs_bg.gif) 0 -150px;
 	display: block;
 	float: left;
 	padding: 0.35em 1em 0;
@@ -26,13 +26,13 @@
 }
 
 .tabs li.current {
-	background: url(../images/custom/gamma_tab_bkg.gif) 100% 0;
+	background: url(../images/common/tabs_bg.gif) 100% 0;
 	font-weight: bold;
 	top: 0.15em;
 }
 
 .tabs li.current a, .tabs li.current span {
-	background: url(../images/custom/gamma_tab_bkg.gif) 0 -100px;
+	background: url(../images/common/tabs_bg.gif) 0 -100px;
 	color: #333;
 	padding: 0.15em 1em;
 }

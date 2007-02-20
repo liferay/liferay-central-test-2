@@ -3,7 +3,7 @@
 /* ---------- Main navigation ---------- */
 
 #navigation {
-	background: transparent url(../images/custom/nav_bkg.gif) no-repeat 100% 100%;
+	background: transparent url(../images/navigation/bg.gif) no-repeat 100% 100%;
 	margin: 0 auto 2em;
 	min-height: 2em;
 	padding: 0.5em 2em;
@@ -12,7 +12,7 @@
 }
 
 #navigation ul {
-	background: transparent url(../images/custom/nav_bkg.gif) no-repeat 0 100%;
+	background: transparent url(../images/navigation/bg.gif) no-repeat 0 100%;
 	float: left;
 	left: 0;
 	min-height: 2em;
@@ -32,14 +32,14 @@
 }
 
 #navigation li a {
-	background: url(../images/custom/nav_bullet.gif) no-repeat 0 50%;
+	background: url(../images/navigation/bullet.gif) no-repeat 0 50%;
 	display: block;
 	padding-left: 17px;
 	text-decoration: none;
 }
 
 #navigation li a:hover {
-	background: url(../images/custom/nav_bullet_over.gif) no-repeat 0 50%;
+	background: url(../images/navigation/bullet_over.gif) no-repeat 0 50%;
 }
 
 .ie #navigation li a {
@@ -55,7 +55,7 @@
 }
 
 .lfr-dock h2 {
-	background: url(../images/custom/welcome_message.png) no-repeat 0 50%;
+	background: url(../images/navigation/welcome_message.png) no-repeat 0 50%;
 	font-size: 1.2em;
 	margin-bottom: 0.5em;
 	padding-left: 2em;
@@ -79,35 +79,35 @@
 }
 
 .lfr-dock li.home a {
-	background-image: url(../images/custom/home.gif);
+	background-image: url(../images/dock/home.gif);
 }
 
 .lfr-dock li.my-account a {
-	background-image: url(../images/custom/my_account.gif);
+	background-image: url(../images/dock/my_account.gif);
 }
 
 .lfr-dock li.sign-in a {
-	background-image: url(../images/custom/sign_in.gif);
+	background-image: url(../images/dock/sign_in.gif);
 }
 
 .lfr-dock li.sign-out a {
-	background-image: url(../images/custom/sign_out.gif);
+	background-image: url(../images/dock/sign_out.gif);
 }
 
 .lfr-dock li.add-content a {
-	background-image: url(../images/custom/add_content.gif);
+	background-image: url(../images/dock/add_content.gif);
 }
 
 .lfr-dock li.layout a {
-	background-image: url(../images/custom/layout.gif);
+	background-image: url(../images/dock/layout.gif);
 }
 
 .lfr-dock li.page-settings a {
-	background-image: url(../images/custom/page_settings.gif);
+	background-image: url(../images/dock/page_settings.gif);
 }
 
 .lfr-dock li.my-places a {
-	background-image: url(../images/custom/my_places.gif);
+	background-image: url(../images/dock/my_places.gif);
 }
 
 .lfr-dock li.my-places {
@@ -125,7 +125,7 @@
 }
 
 .js .lfr-dock h2 {
-	background: url(../images/custom/widget_bar.png) no-repeat 100% -30px;
+	background: url(../images/dock/bar.png) no-repeat 100% -30px;
 	font-size: 1.2em;
 	margin-bottom: 0;
 	padding: 0 29px 0 0;
@@ -134,7 +134,7 @@
 }
 
 .js .lfr-dock h2 span {
-	background: url(../images/custom/widget_bar.png) no-repeat 0 0;
+	background: url(../images/dock/bar.png) no-repeat 0 0;
 	color: #fff;
 	display: block;
 	font-size: 1.2em;
@@ -151,11 +151,10 @@
 }
 
 .js .lfr-dock ul {
-	background: url(../images/custom/widget_menu_bkg.gif) no-repeat 0 0;
+	background: url(../images/dock/menu_bg.gif) no-repeat 0 0;
 	border-left: 20px solid #DAE3EF;
 	display: none;
 	float: none;
-	margin-tops: 0.25em;
 }
 
 .js .lfr-dock li {
@@ -244,12 +243,12 @@ li.my-places ul li ul {
 }
 
 .js .my-places .show-my-places li .my-places-toggle h3 {
-	background: url(../images/custom/expand_community.png) no-repeat 100% 50%;
+	background: url(../images/dock/expand_community.png) no-repeat 100% 50%;
 	padding-right: 1.8em;
 }
 
 .js .my-places .show-my-places li .my-places-toggle.hide h3 {
-	background-image: url(../images/custom/collapse_community.png);
+	background-image: url(../images/dock/collapse_community.png);
 }
 
 .js .my-places .show-my-places li ul {
