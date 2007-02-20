@@ -29,7 +29,8 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.util.Validator;
 
 /**
- * <a href="PrimKeyUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PreferencesUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author  Alexander Chow
  *
