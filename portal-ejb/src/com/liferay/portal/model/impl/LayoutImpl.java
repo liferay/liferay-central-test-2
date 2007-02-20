@@ -292,6 +292,26 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return false;
 	}
 
+	public boolean isFirstParent() {
+		if (isFirstChild() &&
+			getParentLayoutId().equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isFirstChild() {
+		if (getPriority() == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public List getChildren() throws PortalException, SystemException {
 		return LayoutLocalServiceUtil.getLayouts(getOwnerId(), getLayoutId());
 	}
