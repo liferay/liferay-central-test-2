@@ -3,6 +3,7 @@
 #set ( $portlet_id = $portlet_display.getId() )
 #set ( $portlet_title = $portlet_display.getTitle() )
 #set ( $portlet_content = $portlet_display.getContent() )
+#set ( $portlet_back_url = $portlet_display.getURLBack() )
 
 <div class="portlet" id="portlet-id-$portlet_id">
 	<div class="portlet-topper">
@@ -12,7 +13,7 @@
 
 		<div class="portlet-icons" id="portlet-small-icon-bar_$portlet_id">
 			#if ( $portlet_display.isShowBackIcon() )
-				$theme.iconBack()
+				<a href="$portlet_back_url" class="portlet-icon-back">#language("back")</a>
 			#else
 				$theme.iconConfiguration()
 				$theme.iconEdit()

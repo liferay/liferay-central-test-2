@@ -76,7 +76,7 @@
 			.lfr-dock li.my-account a {
 				background-image: url(../images/custom/my_account.gif);
 			}
-			.lfr-dock li.sign-out a {
+			.lfr-dock li.sign-in a {
 				background-image: url(../images/custom/sign_in.gif);
 			}
 			.lfr-dock li.sign-out a {
@@ -164,8 +164,8 @@
 				}
 					.js .lfr-dock ul.lfr-dock-list > li:first-child a,
 					.js .lfr-dock ul.lfr-dock-list > li:first-child a:hover,
-					.js .lfr-dock ul.lfr-dock-list > li.my-places ul.show-my-places li ul li:first-child a,
-					.js .lfr-dock ul.lfr-dock-list > li.my-places ul.show-my-places li ul li:first-child a:hover  {
+					.js .lfr-dock ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a,
+					.js .lfr-dock ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a:hover  {
 						border-top: none;
 					}
 			.js .my-places {
@@ -204,7 +204,10 @@
 						margin: 0;
 						pasdding: 0.5em;
 					}
-						.js .my-places .show-my-places li h3 {
+					li.my-places ul li ul {
+						
+					}
+						.js .my-places .show-my-places li .my-places-toggle {
 							background: url(../images/dock/my_place.png) no-repeat 3px 50%;
 							border-bottom: 1px solid #999;
 							padding: 0.5em 0.2em 0.5em 2em;
@@ -212,8 +215,15 @@
 							font-weight: bold;
 							color: #333;
 						}
+						.js .my-places .show-my-places li .my-places-toggle h3 {
+							background: url(../images/custom/expand_community.png) no-repeat 100% 50%;
+							padding-right: 1.8em;
+						}
+							.js .my-places .show-my-places li .my-places-toggle.hide h3 {
+								background-image: url(../images/custom/collapse_community.png);
+							}
 						.js .my-places .show-my-places li ul {
-							display:block;
+							display: none;
 							border: none;
 							background: url() no-repeat 3px 50%;
 						}

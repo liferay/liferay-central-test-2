@@ -35,7 +35,11 @@ background: #fff;
 		.ie6 .portlet-icons {
 			margin-top: 5px;
 		}
-	
+.portlet-icon-back {
+	background: url(../images/portlet/back.png) no-repeat 0 50%;
+	font-weight: bold;
+	padding: 0.2em 0 0.5em 1.8em;
+}
 /* Place holder for drag/drop
 -----------------------------------------------------------------*/
 .portlet-placeholder {
@@ -46,22 +50,25 @@ background: #fff;
 -----------------------------------------------------------------*/
 
 /*  Fonts    //---------------------------*/
-.portlet-font {
-	/*------ Font attributes for the "normal" fragment font. ------*/
-}
 
+/*------ Font attributes for the 'normal' fragment font. ------*/
+.portlet-font {
+	
+}
+/*------ Font  attributes  similar  to  the  .portlet-font  but  the  color is lighter.  ------*/
 .portlet-font-dim {
-	/*------ Font  attributes  similar  to  the  .portlet-font  but  the  color is lighter.  ------*/
+	
 }
 
 /*  Messages    //---------------------------*/
+
+/*------ Status  of  the  current operation.  ------*/
 .portlet-msg-status {
-	/*------ Status  of  the  current operation.  ------*/
 }
 
-
+/*------ Help  messages,  general additional information, etc. ------*/
 .portlet-msg-info {
-	/*------ Help  messages,  general additional information, etc. ------*/
+	
 	background: #fafafa;
 	padding: 0.5em;
 	border: 1px solid #53B2F8;
@@ -71,9 +78,8 @@ background: #fff;
 	font-size: 90%;
 	color:#777;
 }
-
+/*------  Error messages. ------*/
 .portlet-msg-error {
-	/*------  Error messages. ------*/
 	background: #FFF1ED url(../images/custom/messages/error.gif) no-repeat 0.5em 50%;
 	padding: 0.5em 0.5em 0.5em 2.5em;
 	border: 1px solid #900;
@@ -81,9 +87,8 @@ background: #fff;
 	text-align: center;
 	display:block;
 }
-
+/*------  Warning messages. ------*/
 .portlet-msg-alert {
-	/*------  Warning messages. ------*/
 	background: #FEFFDF url(../images/alert.gif) no-repeat 0.5em 10%;
 	padding: 0.5em 0.5em 0.5em 2.2em;
 	border: 1px solid #EFEFEF;
@@ -91,9 +96,8 @@ background: #fff;
 	margin: 0.15em auto;
 	text-align: center;
 }
-
+/*------  Verification of the successful completion of a task. ------*/
 .portlet-msg-success {
-	/*------  Verification of the successful completion of a task. ------*/
 	background: #F4FDEF url(../images/custom/messages/success.gif) no-repeat 0.5em 50%;
 	padding: 0.5em 0.5em 0.5em 2.2em;
 	border: 1px solid #3F9305;
@@ -105,23 +109,26 @@ background: #fff;
 
 /*  Sections    //---------------------------*/
 
+/*------ Table or section header. ------*/
 .portlet-section-header {
-	/*------ Table or section header. ------*/
+	
 } 
 	.portlet-section-header th {
 		color:#333;
 		padding: 0.3em 1em;
 	}
+/*------ Normal text in a table cell.  ------*/
 .portlet-section-body {
-	/*------ Normal text in a table cell.  ------*/
+	
 } 
 	.portlet-section-body td {
 		border-top:1px solid #bfbfbf;
 		background: #dcdcdc;
 		padding: 0.3em 1em;
 	}
+/*------ Text in every other row in the cell.  ------*/
 .portlet-section-alternate {
-	/*------ Text in every other row in the cell.  ------*/
+	
 } 
 	.portlet-section-alternate td {
 		border-top:1px solid #bfbfbf;
@@ -134,85 +141,89 @@ background: #fff;
 			border-bottom:1px solid #e0d79f;
 			background: #FFF5BA;
 		}
+/*------ Text in a selected cell range. ------*/
 .portlet-section-selected {
-	/*------ Text in a selected cell range. ------*/
+	
 } 
- 
+/*------ Text of a subheading. ------*/ 
 .portlet-section-subheader {
-	/*------ Text of a subheading. ------*/
+	
 }  
-
+/*------ Table or section footnote. ------*/
 .portlet-section-footer {
-	/*------ Table or section footnote. ------*/
+	
 }  
-
-.portlet-section-text {
-	/*------ Text that belongs to the table but does not fall in one of the other categories (e.g. explanatory or help text that is 
+/*------ Text that belongs to the table but does not fall in one of the other categories (e.g. explanatory or help text that is 
 associated with the section).  ------*/
+.portlet-section-text {
+	
 }
 
 /*  Forms    //---------------------------*/
+
+/*------  Text used for the descriptive label of the whole form (not the labels for fields).------*/
 .portlet-form-label {
- 	/*------  Text used for the descriptive label of the whole form (not the labels for fields).------*/
+ 	
 }
-
+/*------ Text of the user-input in an input field. ------*/
 .portlet-form-input-field {
- 	/*------ Text of the user-input in an input field. ------*/
+ 	
 }
- 
+/*------ Text on a button  ------*/ 
 .portlet-form-button {
- 	/*------ Text on a button  ------*/
+ 	
 }
+/*------ Text  that  appears  beside  a  context  dependent  action icon. ------*/
 .portlet-icon-label  {
- 	/*------ Text  that  appears  beside  a  context  dependent  action icon. ------*/
+ 	
 }
-
+/*------ Text that appears beside a “standard” icon (e.g. Ok, or Cancel). ------*/
 .portlet-dlg-icon-label {
- 	/*------ Text that appears beside a “standard” icon (e.g. Ok, or Cancel). ------*/
+ 	
 }
-
+/*------ Text for a separator of fields (e.g. checkboxes, etc.). ------*/
 .portlet-form-field-label {
- 	/*------ Text for a separator of fields (e.g. checkboxes, etc.). ------*/
+ 	
 }
-   
+/*------ Text for a field (not input field, e.g. checkboxes, etc). ------*/   
 .portlet-form-field {
- 	/*------ Text for a field (not input field, e.g. checkboxes, etc). ------*/
+ 	
 }
 /*  Menus    //---------------------------*/
-
-portlet-menu {
- 	/*------ General  menu  settings  such  as  background color, margins, etc. ------*/
+/*------ General  menu  settings  such  as  background color, margins, etc. ------*/
+.portlet-menu {
+ 	
 }
- 
-portlet-menu-item {
- 	/*------ Normal, unselected menu item.  ------*/
+/*------ Normal, unselected menu item.  ------*/ 
+.portlet-menu-item {
+ 	
 }
-  
-portlet-menu-item-selected {
- 	/*------ Selected menu item.  ------*/
+/*------ Selected menu item.  ------*/  
+.portlet-menu-item-selected {
+ 	
 }
-  
-portlet-menu-item-hover {
- 	/*------ Normal,  unselected  menu  item  when  the mouse hovers over it. ------*/
+/*------ Normal,  unselected  menu  item  when  the mouse hovers over it. ------*/  
+.portlet-menu-item-hover {
+ 	
 }
- 
-portlet-menu-item-hover-selected {
- 	/*------ Selected menu item when the mouse hovers over it. ------*/
+/*------ Selected menu item when the mouse hovers over it. ------*/ 
+.portlet-menu-item-hover-selected {
+ 	
 }
- 
-portlet-menu-cascade-item {
- 	/*------ Normal, unselected menu item that has sub-menus. ------*/
+/*------ Normal, unselected menu item that has sub-menus. ------*/ 
+.portlet-menu-cascade-item {
+ 	
 }
- 
-portlet-menu-cascade-item-selected {
- 	/*------ Selected sub-menu item that has sub-menus.  ------*/ 	
+/*------ Selected sub-menu item that has sub-menus.  ------*/ 
+.portlet-menu-cascade-item-selected {
+ 	 	
 }
-  
-portlet-menu-description {
-	/*------ Descriptive text for the menu (e.g. in a help context below the menu) . ------*/
+/*------ Descriptive text for the menu (e.g. in a help context below the menu) . ------*/  
+.portlet-menu-description {
+	
 }
- 
-portlet-menu-caption {
- 	/*------ Menu caption. ------*/
+/*------ Menu caption. ------*/ 
+.portlet-menu-caption {
+ 	
 }
   

@@ -98,6 +98,8 @@ Liferay.Dock = {
 		if (dockList.length > 0){
 			var myPlaces = jQuery('.my-places', dock);
 
+			instance._hideCommunities(myPlaces);
+
 			dockList.hide();
 			dockList.wrap('<div class="lfr-dock-list-container"></div>');
 
@@ -119,15 +121,21 @@ Liferay.Dock = {
 			);
 
 			myPlaces.bind(
-				'mouseover',
+				'mouseout',
 				myPlaces,
 				instance._togglePlaces
 			);
 
 			myPlaces.bind(
-				'mouseout',
+				'mouseover',
 				myPlaces,
 				instance._togglePlaces
+			);
+
+			myPlaces.find('.my-places-toggle').click(
+				function() {
+					return false;					
+				}
 			);
 
 			var dockParent = dock.parent();
@@ -139,6 +147,34 @@ Liferay.Dock = {
 				}
 			);
 		}
+	},
+
+	_hideCommunities: function(jQueryObj) {
+		var myPlaces = jQueryObj;
+
+		var communities = myPlaces.find('> ul > li');
+		var communityList = communities.find('ul');
+		var currentCommunity = communityList.find('li.current');
+		var heading = communities.find('h3');
+		
+		heading.wrap('<div class="my-places-toggle"></div>');
+		heading = heading.parent();
+		
+		communityList.hide();
+		currentCommunity.parent().show();
+		
+		var currentCommunityHeading = currentCommunity.parent().prev();
+
+		currentCommunityHeading.addClass('hide');
+		
+		heading.click(
+			function() {
+				var heading = jQuery(this);
+
+				heading.toggleClass('hide');
+				heading.next('ul').slideToggle('fast');					
+			}
+		);
 	},
 
 	_toggle: function(event) {
@@ -174,6 +210,13 @@ Liferay.Draggables = {
 		var drags = jQuery(instance._dragList);
 
 		if (drags.length > 0){
+			
+			jQuery('.portlet-title').css(
+				 {
+					cursor: 'move'	 
+				 }
+			);
+			
 			drags.Sortable(
 				{
 					accept: 'portlet-boundary',
