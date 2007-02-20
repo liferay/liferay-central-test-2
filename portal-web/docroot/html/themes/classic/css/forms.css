@@ -1,7 +1,7 @@
 /* This CSS sets the default styles for forms. */
 
 input:not([type="checkbox"]), input:not([type="hidden"]), input:not([type="radio"]), input:not([type="image"]), select, textarea {
-	background: #fff url(../images/custom/input_shadow.gif) no-repeat;
+	background: #fff url(../images/forms/input_shadow.gif) no-repeat;
 	border: 1px solid #aaa;
 	border-left-color: #777;
 	border-top-color: #777;
@@ -18,7 +18,7 @@ select {
 }
 
 input[type="submit"], input[type="button"] {
-	background: #FAFAFA url(../images/custom/button.gif) repeat-x;
+	background: #FAFAFA url(../images/forms/button.gif) repeat-x;
 	border: 3px double #999;
 	border-left-color: #ccc;
 	border-top-color: #ccc;
@@ -30,7 +30,7 @@ input[type="submit"], input[type="button"] {
 /* ---------- IE6 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
 
 .ie6 input.text, .ie6 input.password, .ie6 input.submit, .ie6 input.file, .ie6 input.button {
-	background: #fff url(../images/custom/input_shadow.gif) no-repeat;
+	background: #fff url(../images/forms/input_shadow.gif) no-repeat;
 	border: 1px solid #aaa;
 	border-left-color: #777;
 	border-top-color: #777;
@@ -39,7 +39,7 @@ input[type="submit"], input[type="button"] {
 }
 
 .portlet-form-button, .ie6 input.submit, .ie6 input.button {
-	background: #FAFAFA url(../images/custom/button.gif) repeat-x;
+	background: #FAFAFA url(../images/forms/button.gif) repeat-x;
 	border: 3px double #999;
 	border-left-color: #ccc;
 	border-top-color: #ccc;

@@ -125,7 +125,7 @@
 }
 
 .js .lfr-dock h2 {
-	background: url(../images/dock/bar.png) no-repeat 100% -30px;
+	background: url(../images/dock/menu_bar.png) no-repeat 100% -30px;
 	font-size: 1.2em;
 	margin-bottom: 0;
 	padding: 0 29px 0 0;
@@ -134,7 +134,7 @@
 }
 
 .js .lfr-dock h2 span {
-	background: url(../images/dock/bar.png) no-repeat 0 0;
+	background: url(../images/dock/menu_bar.png) no-repeat 0 0;
 	color: #fff;
 	display: block;
 	font-size: 1.2em;

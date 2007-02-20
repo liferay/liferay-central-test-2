@@ -8,12 +8,12 @@
 }
 
 .portlet-topper {
-	background: url(../images/custom/portlet_header_bkg.gif) no-repeat 100% 0;
+	background: url(../images/portlet/header_bg.gif) no-repeat 100% 0;
 	position: relative;
 }
 
 .portlet-title {
-	background: url(../images/custom/portlet_header_bkg.gif) no-repeat 0 -50px;
+	background: url(../images/portlet/header_bg.gif) no-repeat 0 -50px;
 	display: block;
 	font-weight: bold;
 	min-width: 50%;
@@ -50,7 +50,7 @@
 /* ---------- Placeholder to enable drag and drop ---------- */
 
 .portlet-placeholder {
-	background: url(../images/custom/placeholder_bkg.gif);
+	background: url(../images/portlet/placeholder_bg.gif);
 	border: 1px dashed #508FB4;
 }
 
@@ -91,7 +91,7 @@
 /* ---------- Error messages ---------- */
 
 .portlet-msg-error {
-	background: #FFF1ED url(../images/custom/messages/error.gif) no-repeat 0.5em 50%;
+	background: #FFF1ED url(../images/messages/error.gif) no-repeat 0.5em 50%;
 	border: 1px solid #900;
 	display: block;
 	margin: 0.15em auto;
@@ -102,7 +102,7 @@
 /* ---------- Warning messages ---------- */
 
 .portlet-msg-alert {
-	background: #FEFFDF url(../images/alert.gif) no-repeat 0.5em 10%;
+	background: #FEFFDF url(../images/messages/alert.gif) no-repeat 0.5em 10%;
 	border: 1px solid #EFEFEF;
 	margin: 0.15em auto;
 	padding: 0.5em 0.5em 0.5em 2.2em;
@@ -113,7 +113,7 @@
 /* ---------- Success messages ---------- */
 
 .portlet-msg-success {
-	background: #F4FDEF url(../images/custom/messages/success.gif) no-repeat 0.5em 50%;
+	background: #F4FDEF url(../images/messages/success.gif) no-repeat 0.5em 50%;
 	border: 1px solid #3F9305;
 	display: block;
 	margin: 0.15em auto;
