@@ -72,10 +72,9 @@
 	</target>
 
 	<target name="jar" depends="compile">
-		<ant dir="../portal-service" target="deploy" inheritAll="false" />
 		<ant dir="../util-bridges" target="jar" inheritAll="false" />
 		<ant dir="../util-java" target="jar" inheritAll="false" />
-		<ant dir="../util-taglib" target="deploy" inheritAll="false" />
+		<ant dir="../util-taglib" target="jar" inheritAll="false" />
 
 		<manifest file="classes/META-INF/MANIFEST.MF.JOnAS">
 			<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
@@ -94,6 +93,12 @@
 		</jar>
 
 		<antcall target="jar-jonas-genic" />
+	</target>
+
+	<target name="deploy">
+		<ant dir="../portal-service" target="jar" inheritAll="false" />
+
+		<antcall target="build-common-ejb.deploy" />
 	</target>
 
 	<target name="deploy-properties">
