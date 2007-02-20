@@ -90,8 +90,9 @@ public class DefaultUpgradeTableImpl
 				}
 				catch (StagnantRowException sre) {
 					throw new StagnantRowException(
-						"Column '" + columns[i][0] + "' with value '" +
-						sre.getMessage() + "'", sre);
+						"Column " + columns[i][0] + " with value " +
+							sre.getMessage(),
+						sre);
 				}
 			}
 		}

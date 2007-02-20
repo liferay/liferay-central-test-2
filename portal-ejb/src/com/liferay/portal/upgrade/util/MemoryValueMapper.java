@@ -70,8 +70,7 @@ public class MemoryValueMapper implements ValueMapper {
 		_exceptions = exceptions;
 	}
 
-	private Set _exceptions;
-
 	private Map _map;
+	private Set _exceptions;
 
 }

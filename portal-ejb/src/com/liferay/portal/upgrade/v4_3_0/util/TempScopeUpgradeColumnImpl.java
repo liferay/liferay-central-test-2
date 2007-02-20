@@ -44,11 +44,21 @@ public class TempScopeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public boolean isScopeGroup() {
-		return ResourceImpl.SCOPE_GROUP.equals(_temp);
+		if (_temp.equals(ResourceImpl.SCOPE_GROUP)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isScopeIndividual() {
-		return ResourceImpl.SCOPE_INDIVIDUAL.equals(_temp);
+		if (_temp.equals(ResourceImpl.SCOPE_INDIVIDUAL)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private Object _temp;

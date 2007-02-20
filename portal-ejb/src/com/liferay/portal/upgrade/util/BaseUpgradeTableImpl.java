@@ -90,12 +90,12 @@ public abstract class BaseUpgradeTableImpl {
 
 		if (value == null) {
 			throw new UpgradeException(
-				"Nulls should never be inserted into the database.  " +
-				"Attempting to appendColumn to: " + sb.toString());
+				"Nulls should never be inserted into the database. " +
+					"Attempted to append column to " + sb.toString() + ".");
 		}
 		else if (value instanceof Clob || value instanceof String) {
-			value =
-				StringUtil.replace((String)value, _safeChars[0], _safeChars[1]);
+			value = StringUtil.replace(
+				(String)value, _SAFE_CHARS[0], _SAFE_CHARS[1]);
 
 			sb.append(value);
 		}
@@ -264,8 +264,8 @@ public abstract class BaseUpgradeTableImpl {
 		else if (t == Types.BOOLEAN) {
 			ps.setBoolean(index, GetterUtil.getBoolean(value));
 		}
-		else if (t == Types.CLOB || t == Types.VARCHAR) {
-			value = StringUtil.replace(value, _safeChars[1], _safeChars[0]);
+		else if ((t == Types.CLOB) || (t == Types.VARCHAR)) {
+			value = StringUtil.replace(value, _SAFE_CHARS[1], _SAFE_CHARS[0]);
 
 			ps.setString(index, value);
 		}
@@ -320,22 +320,28 @@ public abstract class BaseUpgradeTableImpl {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String str = null;
+				String data = null;
 
 				try {
-					str = getExportedData(rs);
+					data = getExportedData(rs);
 
-					bw.write(str);
+					bw.write(data);
 
 					isEmpty = false;
 				}
 				catch (StagnantRowException sre) {
-					_log.warn(
-						_tableName + " has stagnant data: " + sre.getMessage());
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							_tableName + " has stagnant data " +
+								sre.getMessage());
+					}
 				}
 			}
 
-			_log.info(_tableName + " table backed up to file " + tempFilename);
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					_tableName + " table backed up to file " + tempFilename);
+			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -370,7 +376,9 @@ public abstract class BaseUpgradeTableImpl {
 				boolean useBatch = con.getMetaData().supportsBatchUpdates();
 
 				if (!useBatch) {
-					_log.info("Database does not support batch updates");
+					if (_log.isInfoEnabled()) {
+						_log.info("Database does not support batch updates");
+					}
 				}
 
 				int count = 0;
@@ -380,8 +388,8 @@ public abstract class BaseUpgradeTableImpl {
 
 					if (values.length != _columns.length) {
 						throw new UpgradeException(
-							"Columns differ between temp file and schema.  " +
-							"Attempting to insert row: " + line);
+							"Columns differ between temp file and schema. " +
+								"Attempted to insert row " + line  + ".");
 					}
 
 					if (count == 0) {
@@ -431,7 +439,9 @@ public abstract class BaseUpgradeTableImpl {
 
 		FileUtil.delete(tempFilename);
 
-		_log.info(_tableName + " table repopulated with data");
+		if (_log.isInfoEnabled()) {
+			_log.info(_tableName + " table repopulated with data");
+		}
 	}
 
 	private static final int _BATCH_SIZE = GetterUtil.getInteger(
@@ -446,7 +456,7 @@ public abstract class BaseUpgradeTableImpl {
 	private static final String _SAFE_NEWLINE_CHARACTER =
 		"_SAFE_NEWLINE_CHARACTER_";
 
-	private static final String[][] _safeChars = {
+	private static final String[][] _SAFE_CHARS = {
 		{StringPool.RETURN, StringPool.COMMA, StringPool.NEW_LINE},
 		{_SAFE_RETURN_CHARACTER, _SAFE_COMMA_CHARACTER, _SAFE_NEWLINE_CHARACTER}
 	};

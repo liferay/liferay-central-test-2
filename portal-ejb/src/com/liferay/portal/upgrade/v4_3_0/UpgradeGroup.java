@@ -90,7 +90,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 	public void _upgradeGroupIds() throws Exception {
 
-		// Handle Group_ table
+		// Group_
 
 		LongPKUpgradeColumnImpl longPKUpgradeColumn =
 			new LongPKUpgradeColumnImpl(0, true);
@@ -100,9 +100,12 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// Groups_Orgs
+
 		_groupIdMapper = longPKUpgradeColumn.getValueMapper();
 
 		Set groupExceptions = new HashSet();
+
 		groupExceptions.add(new Long(-1));
 		groupExceptions.add(new Long(0));
 		groupExceptions.add("null");
@@ -110,8 +113,6 @@ public class UpgradeGroup extends UpgradeProcess {
 		_groupIdMapper.setExceptions(groupExceptions);
 
 		_ownerIdMapper = new OwnerIdMapper(_groupIdMapper);
-
-		// Handle mapping tables
 
 		UpgradeColumn upgradeGroupIdColumn =
 			new SwapUpgradeColumnImpl("groupId", _groupIdMapper);
@@ -122,11 +123,15 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// Groups_Permissions
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_GROUPS_PERMISSIONS, _COLUMNS_GROUPS_PERMISSIONS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
+
+		// Groups_Roles
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_GROUPS_ROLES, _COLUMNS_GROUPS_ROLES,
@@ -134,11 +139,15 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// Groups_UserGroups
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_GROUPS_USERGROUPS, _COLUMNS_GROUPS_USERGROUPS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
+
+		// OrgGroupPermission
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			OrgGroupPermissionImpl.TABLE_NAME,
@@ -146,11 +155,15 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// OrgGroupRole
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			OrgGroupRoleImpl.TABLE_NAME, OrgGroupRoleImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
+
+		// Users_Groups
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_USERS_GROUPS, _COLUMNS_USERS_GROUPS,
@@ -158,25 +171,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// Handle portlets
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			JournalStructureImpl.TABLE_NAME, JournalStructureImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			JournalTemplateImpl.TABLE_NAME, JournalTemplateImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
+		// BlogsEntry
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,
@@ -184,11 +179,15 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// BookmarksFolder
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksFolderImpl.TABLE_NAME, BookmarksFolderImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
+
+		// CalEvent
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			CalEventImpl.TABLE_NAME, CalEventImpl.TABLE_COLUMNS,
@@ -196,11 +195,15 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// DLFolder
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFolderImpl.TABLE_NAME, DLFolderImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
+
+		// IGFolder
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			IGFolderImpl.TABLE_NAME, IGFolderImpl.TABLE_COLUMNS,
@@ -208,11 +211,39 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// JournalArticle
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
+			upgradeGroupIdColumn);
+
+		upgradeTable.updateTable();
+
+		// JournalStructure
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			JournalStructureImpl.TABLE_NAME, JournalStructureImpl.TABLE_COLUMNS,
+			upgradeGroupIdColumn);
+
+		upgradeTable.updateTable();
+
+		// JournalTemplate
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			JournalTemplateImpl.TABLE_NAME, JournalTemplateImpl.TABLE_COLUMNS,
+			upgradeGroupIdColumn);
+
+		upgradeTable.updateTable();
+
+		// MBCategory
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBCategoryImpl.TABLE_NAME, MBCategoryImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
+
+		// MBStatsUser
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBStatsUserImpl.TABLE_NAME, MBStatsUserImpl.TABLE_COLUMNS,
@@ -220,11 +251,15 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// PollsQuestion
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			PollsQuestionImpl.TABLE_NAME, PollsQuestionImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
+
+		// ShoppingCart
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingCartImpl.TABLE_NAME, ShoppingCartImpl.TABLE_COLUMNS,
@@ -232,11 +267,15 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// ShoppingCategory
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingCategoryImpl.TABLE_NAME, ShoppingCategoryImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
+
+		// ShoppingCoupon
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingCouponImpl.TABLE_NAME, ShoppingCouponImpl.TABLE_COLUMNS,
@@ -244,11 +283,15 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// ShoppingOrder
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingOrderImpl.TABLE_NAME, ShoppingOrderImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
+
+		// WikiNode
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			WikiNodeImpl.TABLE_NAME, WikiNodeImpl.TABLE_COLUMNS,
@@ -264,7 +307,7 @@ public class UpgradeGroup extends UpgradeProcess {
 		UpgradeColumn upgradeGroupIdColumn =
 			new SwapUpgradeColumnImpl("groupId", _groupIdMapper);
 
-		// Handle Layout and LayoutSet tables
+		// Layout
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			LayoutImpl.TABLE_NAME, LayoutImpl.TABLE_COLUMNS,
@@ -272,13 +315,15 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// LayoutSet
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			LayoutSetImpl.TABLE_NAME, LayoutSetImpl.TABLE_COLUMNS,
 			upgradeOwnerIdColumn, upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
 
-		// Other tables
+		// PortletPreferences
 
 		UpgradeColumn upgradePreferencesColumn =
 			new PreferencesUpgradeColumnImpl(_groupIdMapper);
@@ -289,6 +334,8 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradeOwnerIdColumn, upgradePreferencesColumn);
 
 		upgradeTable.updateTable();
+
+		// JournalContentSearch
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			JournalContentSearchImpl.TABLE_NAME,

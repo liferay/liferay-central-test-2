@@ -69,9 +69,9 @@ public class UpgradePermission extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		ValueMapper resourcePKMapper = longPKUpgradeColumn.getValueMapper();
+		// Permission
 
-		// Permissions
+		ValueMapper resourcePKMapper = longPKUpgradeColumn.getValueMapper();
 
 		longPKUpgradeColumn = new LongPKUpgradeColumnImpl(0, true);
 

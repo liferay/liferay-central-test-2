@@ -52,19 +52,19 @@ public class OwnerIdMapper implements ValueMapper {
 			if (ownerId.startsWith(PortletKeys.PREFS_OWNER_ID_GROUP)) {
 				int index = PortletKeys.PREFS_OWNER_ID_GROUP.length() + 1;
 
-				String str = ownerId.substring(index);
+				String s = ownerId.substring(index);
 
-				if (Validator.isNumber(str)) {
+				if (Validator.isNumber(s)) {
 					Long groupId =
-						(Long)_groupIdMapper.getNewValue(new Long(str));
+						(Long)_groupIdMapper.getNewValue(new Long(s));
 
 					ownerId =
 						PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
-						groupId;
+							groupId;
 				}
 			}
 			else if (ownerId.startsWith(LayoutImpl.PUBLIC) ||
-					ownerId.startsWith(LayoutImpl.PRIVATE)) {
+					 ownerId.startsWith(LayoutImpl.PRIVATE)) {
 
 				String[] parts = StringUtil.split(ownerId, StringPool.PERIOD);
 
@@ -72,7 +72,7 @@ public class OwnerIdMapper implements ValueMapper {
 
 				if (groupId.longValue() <= 0) {
 					throw new UpgradeException(
-						"OwnerId is invalid: " + ownerId);
+						"Owner id " + ownerId + " is invalid");
 				}
 
 				groupId = (Long)_groupIdMapper.getNewValue(groupId);
@@ -90,15 +90,9 @@ public class OwnerIdMapper implements ValueMapper {
 	}
 
 	public void mapValue(Object oldValue, Object newValue) throws Exception {
-
-		// Do nothing
-
 	}
 
 	public void setExceptions(Set exceptions) {
-
-		// Do nothing
-
 	}
 
 	private ValueMapper _groupIdMapper;

@@ -54,7 +54,7 @@ public class DatabaseValueMapper implements ValueMapper {
 
 	public void setExceptions(Set exceptions) {
 
-		// Do nothing
+		// Exceptions
 
 	}
 
