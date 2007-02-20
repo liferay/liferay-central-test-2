@@ -18,7 +18,7 @@ create table Account_ (
 );
 
 create table Address (
-	addressId LONG primary key,
+	addressId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -257,7 +257,7 @@ create table DLFolder (
 );
 
 create table EmailAddress (
-	emailAddressId LONG primary key,
+	emailAddressId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -271,7 +271,7 @@ create table EmailAddress (
 );
 
 create table Group_ (
-	groupId LONG primary key,
+	groupId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	creatorUserId VARCHAR(75) null,
 	className VARCHAR(75) null,
@@ -430,7 +430,7 @@ create table Layout (
 create table LayoutSet (
 	ownerId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,
-	groupId LONG,
+	groupId LONG not null,
 	userId VARCHAR(75) not null,
 	privateLayout BOOLEAN,
 	logo BOOLEAN,
@@ -441,7 +441,7 @@ create table LayoutSet (
 );
 
 create table ListType (
-	listTypeId INTEGER primary key,
+	listTypeId INTEGER not null primary key,
 	name VARCHAR(75) null,
 	type_ VARCHAR(75) null
 );
@@ -527,14 +527,14 @@ create table Organization_ (
 
 create table OrgGroupPermission (
 	organizationId VARCHAR(75) not null,
-	groupId LONG,
-	permissionId LONG,
+	groupId LONG not null,
+	permissionId LONG not null,
 	primary key (organizationId, groupId, permissionId)
 );
 
 create table OrgGroupRole (
 	organizationId VARCHAR(75) not null,
-	groupId LONG,
+	groupId LONG not null,
 	roleId VARCHAR(75) not null,
 	primary key (organizationId, groupId, roleId)
 );
@@ -567,14 +567,14 @@ create table PasswordTracker (
 );
 
 create table Permission_ (
-	permissionId LONG primary key,
+	permissionId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	actionId VARCHAR(75) null,
 	resourceId LONG
 );
 
 create table Phone (
-	phoneId LONG primary key,
+	phoneId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -589,7 +589,7 @@ create table Phone (
 );
 
 create table PluginSetting (
-	pluginSettingId LONG primary key,
+	pluginSettingId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	pluginId VARCHAR(75) null,
 	pluginType VARCHAR(75) null,
@@ -681,7 +681,7 @@ create table Release_ (
 );
 
 create table Resource_ (
-	resourceId LONG primary key,
+	resourceId LONG not null primary key,
 	companyId VARCHAR(25) not null,
 	name VARCHAR(75) null,
 	typeId VARCHAR(15) null,
@@ -1042,7 +1042,7 @@ create table User_ (
 
 create table UserGroupRole (
 	userId VARCHAR(75) not null,
-	groupId LONG,
+	groupId LONG not null,
 	roleId VARCHAR(75) not null,
 	primary key (userId, groupId, roleId)
 );
@@ -1103,7 +1103,7 @@ create table UserTrackerPath (
 );
 
 create table Website (
-	websiteId LONG primary key,
+	websiteId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,

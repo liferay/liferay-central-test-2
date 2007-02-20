@@ -69,7 +69,7 @@ alter_column_type Phone phoneId LONG;
 alter_column_type Phone typeId INTEGER;
 
 create table PluginSetting (
-	pluginSettingId LONG primary key,
+	pluginSettingId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	pluginId VARCHAR(75) null,
 	pluginType VARCHAR(75) null,
@@ -258,7 +258,7 @@ create table TagsSource (
 
 create table UserGroupRole (
 	userId VARCHAR(75) not null,
-	groupId LONG,
+	groupId LONG not null,
 	roleId VARCHAR(75) not null,
 	primary key (userId, groupId, roleId)
 );
