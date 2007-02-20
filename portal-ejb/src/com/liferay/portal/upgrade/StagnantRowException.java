@@ -20,58 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.upgrade;
 
-import com.liferay.portal.upgrade.StagnantRowException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="MemoryValueMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="StagnantRowException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- * @author Brian Wing Shun Chan
  *
  */
-public class MemoryValueMapper implements ValueMapper {
+public class StagnantRowException extends PortalException {
 
-	public MemoryValueMapper() {
-		this(new HashSet());
+	public StagnantRowException() {
+		super();
 	}
 
-	public MemoryValueMapper(Set exceptions) {
-		_map = new HashMap();
-		_exceptions = exceptions;
+	public StagnantRowException(String msg) {
+		super(msg);
 	}
 
-	public Object getNewValue(Object oldValue) throws Exception {
-		Object value = _map.get(oldValue);
-
-		if (value == null) {
-			if (_exceptions.contains(oldValue)) {
-				value = oldValue;
-			}
-			else {
-				throw new StagnantRowException(oldValue.toString());
-			}
-		}
-
-		return value;
+	public StagnantRowException(String msg, Throwable cause) {
+		super(msg, cause);
 	}
 
-	public void mapValue(Object oldValue, Object newValue) throws Exception {
-		_map.put(oldValue, newValue);
+	public StagnantRowException(Throwable cause) {
+		super(cause);
 	}
-
-	public void setExceptions(Set exceptions) {
-		_exceptions = exceptions;
-	}
-
-	private Set _exceptions;
-
-	private Map _map;
 
 }

@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.DateUtil;
@@ -42,7 +43,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.StringReader;
 
 import java.sql.Clob;
 import java.sql.Connection;
@@ -90,14 +90,12 @@ public abstract class BaseUpgradeTableImpl {
 
 		if (value == null) {
 			throw new UpgradeException(
-				"Nulls should never be inserted into the database");
+				"Nulls should never be inserted into the database.  " +
+				"Attempting to appendColumn to: " + sb.toString());
 		}
 		else if (value instanceof Clob || value instanceof String) {
-			value = StringUtil.replace(
-				(String)value, StringPool.COMMA, _SAFE_COMMA_CHARACTER);
-
-			value = StringUtil.replace(
-				(String)value, StringPool.NEW_LINE, _SAFE_NEWLINE_CHARACTER);
+			value =
+				StringUtil.replace((String)value, _safeChars[0], _safeChars[1]);
 
 			sb.append(value);
 		}
@@ -206,11 +204,11 @@ public abstract class BaseUpgradeTableImpl {
 				String line = null;
 
 				while ((line = br.readLine()) != null) {
-					sb.append(line + StringPool.NEW_LINE);
-				}
+					if (sb.length() != 0) {
+						sb.append(_SAFE_NEWLINE_CHARACTER);
+					}
 
-				if (sb.length() > 0) {
-					sb.deleteCharAt(sb.length() - 1);
+					sb.append(line);
 				}
 
 				value = sb.toString();
@@ -236,7 +234,7 @@ public abstract class BaseUpgradeTableImpl {
 			}
 
 			if (value == null) {
-				value = new Date();
+				value = StringPool.NULL;
 			}
 		}
 		else if (t == Types.VARCHAR) {
@@ -266,16 +264,10 @@ public abstract class BaseUpgradeTableImpl {
 		else if (t == Types.BOOLEAN) {
 			ps.setBoolean(index, GetterUtil.getBoolean(value));
 		}
-		else if (t == Types.CLOB) {
-			value = StringUtil.replace(
-				value, _SAFE_COMMA_CHARACTER, StringPool.COMMA);
+		else if (t == Types.CLOB || t == Types.VARCHAR) {
+			value = StringUtil.replace(value, _safeChars[1], _safeChars[0]);
 
-			value = StringUtil.replace(
-				value, _SAFE_NEWLINE_CHARACTER, StringPool.NEW_LINE);
-
-			StringReader reader = new StringReader(value);
-
-			ps.setCharacterStream(index, reader, value.length());
+			ps.setString(index, value);
 		}
 		else if (t == Types.DOUBLE) {
 			ps.setDouble(index, GetterUtil.getDouble(value));
@@ -290,21 +282,15 @@ public abstract class BaseUpgradeTableImpl {
 			ps.setShort(index, GetterUtil.getShort(value));
 		}
 		else if (t == Types.TIMESTAMP) {
-			DateFormat df = DateUtil.getISOFormat();
+			if (StringPool.NULL.equals(value)) {
+				ps.setTimestamp(index, null);
+			}
+			else {
+				DateFormat df = DateUtil.getISOFormat();
 
-			ps.setTimestamp(
-				index, new Timestamp(df.parse(value).getTime()));
-		}
-		else if (t == Types.VARCHAR) {
-			value =
-				StringUtil.replace(
-					value, _SAFE_COMMA_CHARACTER, StringPool.COMMA);
-
-			value =
-				StringUtil.replace(
-					value, _SAFE_NEWLINE_CHARACTER, StringPool.NEW_LINE);
-
-			ps.setString(index, value);
+				ps.setTimestamp(
+					index, new Timestamp(df.parse(value).getTime()));
+			}
 		}
 		else {
 			throw new UpgradeException(
@@ -334,9 +320,19 @@ public abstract class BaseUpgradeTableImpl {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				bw.write(getExportedData(rs));
+				String str = null;
 
-				isEmpty = false;
+				try {
+					str = getExportedData(rs);
+
+					bw.write(str);
+
+					isEmpty = false;
+				}
+				catch (StagnantRowException sre) {
+					_log.warn(
+						_tableName + " has stagnant data: " + sre.getMessage());
+				}
 			}
 
 			_log.info(_tableName + " table backed up to file " + tempFilename);
@@ -384,7 +380,8 @@ public abstract class BaseUpgradeTableImpl {
 
 					if (values.length != _columns.length) {
 						throw new UpgradeException(
-							"Columns differ between temp file and schema");
+							"Columns differ between temp file and schema.  " +
+							"Attempting to insert row: " + line);
 					}
 
 					if (count == 0) {
@@ -440,11 +437,19 @@ public abstract class BaseUpgradeTableImpl {
 	private static final int _BATCH_SIZE = GetterUtil.getInteger(
 		PropsUtil.get("hibernate.jdbc.batch_size"));
 
+	private static final String _SAFE_RETURN_CHARACTER =
+		"_SAFE_RETURN_CHARACTER_";
+
 	private static final String _SAFE_COMMA_CHARACTER =
 		"_SAFE_COMMA_CHARACTER_";
 
 	private static final String _SAFE_NEWLINE_CHARACTER =
 		"_SAFE_NEWLINE_CHARACTER_";
+
+	private static final String[][] _safeChars = {
+		{StringPool.RETURN, StringPool.COMMA, StringPool.NEW_LINE},
+		{_SAFE_RETURN_CHARACTER, _SAFE_COMMA_CHARACTER, _SAFE_NEWLINE_CHARACTER}
+	};
 
 	private static Log _log = LogFactory.getLog(BaseUpgradeTableImpl.class);
 

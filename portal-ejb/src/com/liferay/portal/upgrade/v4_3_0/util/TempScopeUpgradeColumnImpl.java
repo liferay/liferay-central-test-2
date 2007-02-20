@@ -20,58 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.StagnantRowException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
- * <a href="MemoryValueMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="TempScopeUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
- * @author Brian Wing Shun Chan
+ * @author  Alexander Chow
  *
  */
-public class MemoryValueMapper implements ValueMapper {
+public class TempScopeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public MemoryValueMapper() {
-		this(new HashSet());
-	}
-
-	public MemoryValueMapper(Set exceptions) {
-		_map = new HashMap();
-		_exceptions = exceptions;
+	public TempScopeUpgradeColumnImpl() {
+		super("scope");
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Object value = _map.get(oldValue);
+		_temp = oldValue;
 
-		if (value == null) {
-			if (_exceptions.contains(oldValue)) {
-				value = oldValue;
-			}
-			else {
-				throw new StagnantRowException(oldValue.toString());
-			}
-		}
-
-		return value;
+		return oldValue;
 	}
 
-	public void mapValue(Object oldValue, Object newValue) throws Exception {
-		_map.put(oldValue, newValue);
+	public boolean isScopeGroup() {
+		return ResourceImpl.SCOPE_GROUP.equals(_temp);
 	}
 
-	public void setExceptions(Set exceptions) {
-		_exceptions = exceptions;
+	public boolean isScopeIndividual() {
+		return ResourceImpl.SCOPE_INDIVIDUAL.equals(_temp);
 	}
 
-	private Set _exceptions;
-
-	private Map _map;
+	private Object _temp;
 
 }

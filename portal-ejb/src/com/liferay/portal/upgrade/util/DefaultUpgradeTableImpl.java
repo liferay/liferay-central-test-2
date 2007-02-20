@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.util;
 
+import com.liferay.portal.upgrade.StagnantRowException;
+
 import java.sql.ResultSet;
 
 /**
@@ -78,12 +80,19 @@ public class DefaultUpgradeTableImpl
 					last);
 			}
 			else {
-				Object oldValue = getValue(
-					rs, (String)columns[i][0], (Integer)columns[i][1]);
+				try {
+					Object oldValue = getValue(
+						rs, (String)columns[i][0], (Integer)columns[i][1]);
 
-				Object newValue = _upgradeColumns[i].getNewValue(oldValue);
+					Object newValue = _upgradeColumns[i].getNewValue(oldValue);
 
-				appendColumn(sb, newValue, last);
+					appendColumn(sb, newValue, last);
+				}
+				catch (StagnantRowException sre) {
+					throw new StagnantRowException(
+						"Column '" + columns[i][0] + "' with value '" +
+						sre.getMessage() + "'", sre);
+				}
 			}
 		}
 

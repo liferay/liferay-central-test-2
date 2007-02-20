@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.util;
 
+import java.util.Set;
+
 /**
  * <a href="DatabaseValueMapper.java.html"><b><i>View Source</i></b></a>
  *
@@ -47,6 +49,12 @@ public class DatabaseValueMapper implements ValueMapper {
 	public void mapValue(Object oldValue, Object newValue) throws Exception {
 
 		// Insert
+
+	}
+
+	public void setExceptions(Set exceptions) {
+
+		// Do nothing
 
 	}
 

@@ -20,58 +20,48 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.StagnantRowException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portlet.PortletPreferencesImpl;
+import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.util.Validator;
 
 /**
- * <a href="MemoryValueMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="PrimKeyUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
- * @author Brian Wing Shun Chan
+ * @author  Alexander Chow
  *
  */
-public class MemoryValueMapper implements ValueMapper {
+public class PreferencesUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public MemoryValueMapper() {
-		this(new HashSet());
-	}
+	public PreferencesUpgradeColumnImpl(ValueMapper groupIdMapper) {
+		super("preferences");
 
-	public MemoryValueMapper(Set exceptions) {
-		_map = new HashMap();
-		_exceptions = exceptions;
+		_groupIdMapper = groupIdMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Object value = _map.get(oldValue);
+		String xml = (String)oldValue;
 
-		if (value == null) {
-			if (_exceptions.contains(oldValue)) {
-				value = oldValue;
-			}
-			else {
-				throw new StagnantRowException(oldValue.toString());
-			}
+		PortletPreferencesImpl prefs = (PortletPreferencesImpl)
+			PortletPreferencesSerializer.fromDefaultXML(xml);
+
+		String groupId = (String)prefs.getValue("group-id", null);
+
+		if (Validator.isNotNull(groupId)) {
+			Long newGroupId =
+				(Long)_groupIdMapper.getNewValue(new Long(groupId));
+
+			prefs.setValue("group-id", newGroupId.toString());
+
+			xml = PortletPreferencesSerializer.toXML(prefs);
 		}
 
-		return value;
+		return xml;
 	}
 
-	public void mapValue(Object oldValue, Object newValue) throws Exception {
-		_map.put(oldValue, newValue);
-	}
-
-	public void setExceptions(Set exceptions) {
-		_exceptions = exceptions;
-	}
-
-	private Set _exceptions;
-
-	private Map _map;
+	private ValueMapper _groupIdMapper;
 
 }
