@@ -491,7 +491,9 @@ public class PortalUtil {
 					layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
 					themeDisplay.isSecure());
 
-				return portalURL + layoutFriendlyURL;
+				String contextPath = themeDisplay.getPathContext();
+
+				return portalURL + contextPath + layoutFriendlyURL;
 			}
 
 			Group group = GroupLocalServiceUtil.getGroup(

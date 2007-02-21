@@ -27,14 +27,15 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.servlet.MainServlet;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.SetUtil;
 import com.liferay.util.StringUtil;
@@ -108,6 +109,15 @@ public class VirtualHostFilter implements Filter {
 
 		String friendlyURL = httpReq.getRequestURI().toLowerCase();
 
+		String rootPath = _ctx.getInitParameter("root_path");
+
+		if (!rootPath.equals(StringPool.SLASH) &&
+			friendlyURL.contains(rootPath)) {
+
+			friendlyURL = friendlyURL.substring(
+				rootPath.length(), friendlyURL.length());
+		}
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Friendly URL " + friendlyURL);
 		}
@@ -116,7 +126,7 @@ public class VirtualHostFilter implements Filter {
 
 		if (USE_VIRTUAL_HOST_FILTER && isValidFriendlyURL(friendlyURL)) {
 			String host = PortalUtil.getHost(httpReq);
-			String mainPath = (String)_ctx.getAttribute(WebKeys.MAIN_PATH);
+			String mainPath = MainServlet.DEFAULT_MAIN_PATH;
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Host " + host);
