@@ -272,8 +272,12 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.velocity.ClassLoaderVelocityResourceListener">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.velocity.MultipleResourceLoader">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.verify">

@@ -52,6 +52,10 @@ public class ClassLoaderVelocityResourceListener
 		if (pos == -1) {
 			ClassLoader classLoader = getClass().getClassLoader();
 
+			if (_log.isDebugEnabled()) {
+				_log.debug("Loading " + source);
+			}
+
 			is = classLoader.getResourceAsStream(source);
 		}
 

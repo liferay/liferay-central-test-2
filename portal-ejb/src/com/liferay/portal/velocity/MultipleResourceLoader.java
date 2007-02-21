@@ -72,7 +72,7 @@ public class MultipleResourceLoader extends FileResourceLoader {
 
 		for (int i = 0; (is == null) && (i < _listeners.length); i++) {
 			if (_listeners[i] != null) {
-				if (is != null) {
+				if (is == null) {
 					is = _listeners[i].getResourceStream(source);
 				}
 			}
