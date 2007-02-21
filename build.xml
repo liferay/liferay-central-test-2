@@ -145,11 +145,29 @@
 			/>
 		</delete>
 
-		<delete dir="${app.server.log.dir}" />
+		<if>
+			<equals arg1="${clean.log.dir}" arg2="true" />
+			<then>
+				<delete dir="${app.server.log.dir}" />
+			</then>
+		</if>
+
 		<delete dir="${app.server.portal.dir}" />
 		<delete file="${app.server.portal.dir}" />
-		<delete dir="${app.server.temp.dir}" />
-		<delete dir="${app.server.work.dir}" />
+
+		<if>
+			<equals arg1="${clean.temp.dir}" arg2="true" />
+			<then>
+				<delete dir="${app.server.temp.dir}" />
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${clean.work.dir}" arg2="true" />
+			<then>
+				<delete dir="${app.server.work.dir}" />
+			</then>
+		</if>
 	</target>
 
 	<target name="compile">
