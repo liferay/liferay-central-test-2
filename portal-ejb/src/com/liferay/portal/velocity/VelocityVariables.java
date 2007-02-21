@@ -197,6 +197,7 @@ public class VelocityVariables {
 		// Portal util
 
 		vc.put("portalUtil", PortalUtil_IW.getInstance());
+		vc.put("portal", PortalUtil_IW.getInstance());
 
 		// Props util
 
