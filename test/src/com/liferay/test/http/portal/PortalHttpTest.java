@@ -72,6 +72,9 @@ public class PortalHttpTest extends BaseHttpTest {
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
 				birthdayYear, jobTitle, organizationId, locationId);
 
+			user = UserServiceHttp.getUserByEmailAddress(
+				getHttpPrincipal(), TestConstants.COMPANY_ID, emailAddress);
+
 			UserServiceHttp.deleteUser(getHttpPrincipal(), user.getUserId());
 		}
 		catch (Exception e) {

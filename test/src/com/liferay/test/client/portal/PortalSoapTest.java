@@ -74,6 +74,9 @@ public class PortalSoapTest extends BaseSoapTest {
 				suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 				jobTitle, organizationId, locationId);
 
+			user = getUserService().getUserByEmailAddress(
+				TestConstants.COMPANY_ID, emailAddress);
+
 			getUserService().deleteUser(user.getUserId());
 		}
 		catch (Exception e) {
