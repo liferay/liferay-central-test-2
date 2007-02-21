@@ -50,14 +50,14 @@ var Alerts = {
 		var heading = document.createElement("table");
 		var close = document.createElement("a");
 		
-		outer.className = "pop-up-outer";
+		outer.className = "popup";
 		outer.align = "center";
-		inner.className = "pop-up-inner";
+		inner.className = "popup-inner";
 		
 		close.innerHTML = "Close";
 		close.href = "javascript:Alerts.killAlert()";
 		
-		heading.className = "pop-up-header";
+		heading.className = "popup-header";
 		heading.border = 0;
 		heading.width = "100%";
 		heading.cellSpacing = 0;
@@ -70,14 +70,14 @@ var Alerts = {
 		
 		var cell0 = row.cells[0];
 		var cell1 = row.cells[1];
-		cell0.className = "pop-up-title";
+		cell0.className = "popup-title";
 		cell0.width = "99%";
 		
 		if (title) {
 			cell0.innerHTML = title;
 		}
 		
-		cell1.className = "pop-up-close";
+		cell1.className = "popup-close";
 		cell1.width = "1%";
 		cell1.innerHTML = "<a href=\"javascript:void(0)\" onclick=\"Alerts.killAlert(this)\"><img border=\"0\" src=\"" + themeDisplay.getPathThemeImage() + "/portlet/close.png\"/></a>"
 		
@@ -97,7 +97,7 @@ var Alerts = {
 			var wrapper = oLink;
 			
 			while (wrapper.parentNode) {
-				if (wrapper.className && wrapper.className.match("pop-up-outer")) {
+				if (wrapper.className && wrapper.className == "popup") {
 					break;
 				}
 				wrapper = wrapper.parentNode;

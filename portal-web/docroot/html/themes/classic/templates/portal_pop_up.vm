@@ -13,7 +13,7 @@
 	#js($js_main_file)
 </head>
 
-<body>
+<body class="portal-popup">
 
 $theme.include($content_include)
 

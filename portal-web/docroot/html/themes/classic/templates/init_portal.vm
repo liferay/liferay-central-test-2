@@ -1,12 +1,5 @@
 ## ---------- Common variables ---------- ##
 
-#set ( $the_title = $languageUtil.get($pageContext, $tilesTitle) )
-#set ( $selectable = $tilesSelectable.equals("true") )
-
-#if ( $layout )
-	#set ( $the_title = $languageUtil.get($pageContext, $the_title, $layout.getName($locale)) )
-#end
-
 #set ( $theme_display = $themeDisplay )
 #set ( $portlet_display = $portletDisplay )
 
@@ -73,14 +66,29 @@
 	#set ( $sign_out_url = $theme_display.getURLSignOut() )
 #end
 
-## ---------- Navigation ---------- ##
+## ---------- Page ---------- ##
 
-#if ( $layout )
-	#set ( $ancestor_layout_id = $layout.getAncestorLayoutId() )	
+#set ( $the_title = $languageUtil.get($pageContext, $tilesTitle) )
+#set ( $selectable = $tilesSelectable.equals("true") )
+
+#set ( $page = $layout )
+#set ( $all_pages = $layouts )
+
+#set ( $is_first_child = $page.isFirstChild() )
+#set ( $is_first_parent = $page.isFirstParent() )
+
+#if ( $page )
+	#set ( $the_title = $languageUtil.get($pageContext, $the_title, $page.getName($locale)) )
 #end
 
-#set ( $has_navigation = ($layouts && $layouts.size() > 0) )
-#set ( $nav_items = $layouts )
+## ---------- Navigation ---------- ##
+
+#if ( $page )
+	#set ( $ancestor_layout_id = $page.getAncestorLayoutId() )	
+#end
+
+#set ( $has_navigation = ($all_pages && $all_pages.size() > 0) )
+#set ( $nav_items = $all_pages )
 
 ## ---------- Includes ---------- ##
 

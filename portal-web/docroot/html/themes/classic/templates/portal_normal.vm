@@ -26,9 +26,7 @@ $theme.include($top_warning_include)
 		#parse("$full_templates_path/dock.vm")
 	</div>
 
-	<div id="navigation">
-		#parse("$full_templates_path/navigation.vm")
-	</div>
+	#parse("$full_templates_path/navigation.vm")
 
 	#if ( $selectable )
 		$theme.include($content_include)

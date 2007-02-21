@@ -1,5 +1,14 @@
 /* This CSS sets the default styles for forms. */
 
+fieldset {
+	border: 1px solid #ccc;
+	padding: 0.7em;
+}
+legend {
+	padding: 0.5em;
+	font-weight: bold;
+}
+
 input:not([type="checkbox"]), input:not([type="hidden"]), input:not([type="radio"]), input:not([type="image"]), select, textarea {
 	background: #fff url(../images/forms/input_shadow.gif) no-repeat;
 	border: 1px solid #aaa;

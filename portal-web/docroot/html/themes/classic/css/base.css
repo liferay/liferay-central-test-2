@@ -172,3 +172,24 @@ code, pre {
 	font-weight: bold;
 	padding: 0.5em 0.3em;
 }
+
+/* ---------- Autocomplete styles ---------- */
+
+.autocomplete-box {
+	background: #e2ecf2;
+	border: 1px solid #abc6d7;
+	color: #333;
+	padding: 0;
+	min-width: 200px;
+}
+.ie6 .autocomplete-box{
+	width: 200px;
+}
+.autocomplete-selected {
+	background: #c0d5e3;
+	border-top: 1px solid #abc6d7;
+	border-bottom: 1px solid #abc6d7;
+	color: #333;
+	font-weight: bold;
+	padding: 0.5em 0.3em;
+}
