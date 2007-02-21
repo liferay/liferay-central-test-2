@@ -132,6 +132,8 @@
 .portlet-section-header th {
 	color: #333;
 	padding: 0.3em 1em;
+	border-bottom: 1px solid #ccc;
+	font-weight: bold;
 }
 
 /* ---------- Normal text in a table cell ---------- */

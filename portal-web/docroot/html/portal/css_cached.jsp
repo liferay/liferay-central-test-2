@@ -27,12 +27,3 @@
 <%
 response.setContentType(Constants.TEXT_CSS);
 %>
-
-.important {
-	font-weight:bold;
-}
-
-.portlet_section_header th {
-	border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;
-	font-weight: bold;
-}

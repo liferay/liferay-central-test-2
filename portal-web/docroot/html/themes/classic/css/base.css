@@ -95,6 +95,10 @@ code, pre {
 	white-space: pre;
 }
 
+.important {
+	font-weight: bold;
+}
+
 /* ---------- Main content body ---------- */
 
 #wrapper {
@@ -194,4 +198,13 @@ code, pre {
 	color: #333;
 	font-weight: bold;
 	padding: 0.5em 0.3em;
+}
+
+/* ---------- Loading animation ---------- */
+
+.loading-animation {
+	background: url(../images/progress_bar/loading_animation.gif) no-repeat top left;
+	margin-top: 10px;
+	padding-top: 40px;
+	text-align: left;
 }
