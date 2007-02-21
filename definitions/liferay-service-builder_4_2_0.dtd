@@ -360,6 +360,7 @@ used to compare this column.
 -->
 <!ATTLIST finder-column
 	name CDATA #REQUIRED
+	db-name CDATA #IMPLIED
 	comparator CDATA #IMPLIED
 >
 
