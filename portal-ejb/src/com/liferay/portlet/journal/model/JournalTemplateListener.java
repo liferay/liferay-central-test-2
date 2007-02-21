@@ -27,6 +27,7 @@ import com.liferay.portal.cms.servlet.CMSServletUtil;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
+import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
 /**
@@ -73,6 +74,10 @@ public class JournalTemplateListener implements ModelListener {
 		JournalTemplateModel template = (JournalTemplateModel)model;
 
 		LayoutCacheUtil.clearCache(template.getCompanyId());
+
+		// Velocity cache
+
+		LiferayResourceCacheUtil.clear();
 	}
 
 }

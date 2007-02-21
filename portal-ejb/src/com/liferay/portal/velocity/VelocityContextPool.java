@@ -22,7 +22,7 @@
 
 package com.liferay.portal.velocity;
 
-import EDU.oswego.cs.dl.util.concurrent.ConcurrentReaderHashMap;
+import com.liferay.util.CollectionFactory;
 
 import java.util.Map;
 
@@ -49,7 +49,7 @@ public class VelocityContextPool {
 	}
 
 	private VelocityContextPool() {
-		_pool = new ConcurrentReaderHashMap();
+		_pool = CollectionFactory.getSyncHashMap();
 	}
 
 	private ServletContext _get(String name) {

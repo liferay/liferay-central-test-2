@@ -60,7 +60,7 @@ public class ServletVelocityResourceListener extends VelocityResourceListener {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						name + " is associated with the servlet context " +
-							ctx);
+							ctxName + " " + ctx);
 				}
 
 				is = ctx.getResourceAsStream(name);

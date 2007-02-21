@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
@@ -124,8 +125,6 @@ public class HotDeployThemeListener implements HotDeployListener {
 				return;
 			}
 
-			VelocityContextPool.remove(servletContextName);
-
 			// LEP-2057
 
 			ClassLoader contextClassLoader =
@@ -134,6 +133,10 @@ public class HotDeployThemeListener implements HotDeployListener {
 			try {
 				Thread.currentThread().setContextClassLoader(
 					PortalClassLoaderUtil.getClassLoader());
+
+				VelocityContextPool.remove(servletContextName);
+
+				LiferayResourceCacheUtil.clear();
 
 				LastModifiedCSS.clear();
 				LastModifiedJavaScript.clear();

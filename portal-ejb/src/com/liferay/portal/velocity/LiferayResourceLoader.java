@@ -22,6 +22,9 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.GetterUtil;
+
 import java.io.InputStream;
 
 import org.apache.commons.collections.ExtendedProperties;
@@ -29,15 +32,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.Resource;
-import org.apache.velocity.runtime.resource.loader.FileResourceLoader;
+import org.apache.velocity.runtime.resource.loader.ResourceLoader;
 
 /**
- * <a href="MultipleResourceLoader.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferayResourceLoader.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MultipleResourceLoader extends FileResourceLoader {
+public class LiferayResourceLoader extends ResourceLoader {
 
 	private static VelocityResourceListener[] _listeners =
 		new VelocityResourceListener[0];
@@ -59,6 +62,11 @@ public class MultipleResourceLoader extends FileResourceLoader {
 	}
 
 	public void init(ExtendedProperties props) {
+		boolean cachingOn = GetterUtil.getBoolean(PropsUtil.get(
+			PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED));
+
+		setCachingOn(cachingOn);
+		setModificationCheckInterval(0);
 	}
 
 	public InputStream getResourceStream(String source)
@@ -91,14 +99,22 @@ public class MultipleResourceLoader extends FileResourceLoader {
 		return is;
 	}
 
-	public boolean isSourceModified(Resource resource) {
-		return false;
-	}
-
 	public long getLastModified(Resource resource) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Get last modified for " + resource.getName());
+		}
+
 		return 0;
 	}
 
-	private static Log _log = LogFactory.getLog(MultipleResourceLoader.class);
+	public boolean isSourceModified(Resource resource) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Check modified status for " + resource.getName());
+		}
+
+		return false;
+	}
+
+	private static Log _log = LogFactory.getLog(LiferayResourceLoader.class);
 
 }

@@ -608,9 +608,15 @@ public class PropsUtil {
 
 	public static final String VELOCITY_ENGINE_RESOURCE_LISTENERS = "velocity.engine.resource.listeners";
 
+	public static final String VELOCITY_ENGINE_RESOURCE_MANAGER = "velocity.engine.resource.manager";
+
+	public static final String VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE = "velocity.engine.resource.manager.cache";
+
+	public static final String VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED = "velocity.engine.resource.manager.cache.enabled";
+
 	public static final String VELOCITY_ENGINE_VELOCIMACRO_LIBRARY = "velocity.engine.velocimacro.library";
 
-	public static final String VELOCITY_ENGINE_LOGGER_IMPL = "velocity.engine.logger.impl";
+	public static final String VELOCITY_ENGINE_LOGGER = "velocity.engine.logger";
 
 	public static final String VELOCITY_ENGINE_LOGGER_CATEGORY = "velocity.engine.logger.category";
 

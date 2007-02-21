@@ -20,49 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.velocity;
 
-import java.util.Map;
+import java.util.Iterator;
+
+import org.apache.velocity.runtime.RuntimeServices;
+import org.apache.velocity.runtime.resource.Resource;
+import org.apache.velocity.runtime.resource.ResourceCache;
 
 /**
- * <a href="SimpleCachePool.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferayResourceCache.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SimpleCachePool {
+public class LiferayResourceCache implements ResourceCache {
 
-	public static Object get(String id) {
-		return _instance._get(id);
+	public void initialize(RuntimeServices rs) {
 	}
 
-	public static void put(String id, Object obj) {
-		_instance._put(id, obj);
+	public Resource get(Object key) {
+		return LiferayResourceCacheUtil.get(key.toString());
 	}
 
-	public static Object remove(String id) {
-		return _instance._remove(id);
+	public Resource put(Object key, Resource resource) {
+		return LiferayResourceCacheUtil.put(key.toString(), resource);
 	}
 
-	private SimpleCachePool() {
-		_pool = CollectionFactory.getSyncHashMap(_SIZE);
+	public Resource remove(Object key) {
+		return LiferayResourceCacheUtil.remove(key.toString());
 	}
 
-	private Object _get(String id) {
-		return _pool.get(id);
+	public Iterator enumerateKeys() {
+ 		throw new RuntimeException("enumerateKeys is not implemented");
 	}
-
-	private void _put(String id, Object obj) {
-		_pool.put(id, obj);
-	}
-
-	private Object _remove(String id) {
-		return _pool.remove(id);
-	}
-
-	private static SimpleCachePool _instance = new SimpleCachePool();
-	private static int _SIZE = 10000;
-
-	private Map _pool;
 
 }

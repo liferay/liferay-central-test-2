@@ -20,49 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.velocity;
 
-import java.util.Map;
+import org.apache.velocity.runtime.resource.ResourceManagerImpl;
 
 /**
- * <a href="SimpleCachePool.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferayResourceManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SimpleCachePool {
+public class LiferayResourceManager extends ResourceManagerImpl {
 
-	public static Object get(String id) {
-		return _instance._get(id);
+	public String getLoaderNameForResource(String source) {
+
+		// Velocity's default implementation makes its cache useless because
+		// getResourceStream is called to test the availability of a template
+
+		if (globalCache.get(source) != null) {
+			return LiferayResourceLoader.class.getName();
+		}
+		else {
+			return super.getLoaderNameForResource(source);
+		}
 	}
-
-	public static void put(String id, Object obj) {
-		_instance._put(id, obj);
-	}
-
-	public static Object remove(String id) {
-		return _instance._remove(id);
-	}
-
-	private SimpleCachePool() {
-		_pool = CollectionFactory.getSyncHashMap(_SIZE);
-	}
-
-	private Object _get(String id) {
-		return _pool.get(id);
-	}
-
-	private void _put(String id, Object obj) {
-		_pool.put(id, obj);
-	}
-
-	private Object _remove(String id) {
-		return _pool.remove(id);
-	}
-
-	private static SimpleCachePool _instance = new SimpleCachePool();
-	private static int _SIZE = 10000;
-
-	private Map _pool;
 
 }

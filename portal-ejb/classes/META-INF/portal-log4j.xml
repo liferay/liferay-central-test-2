@@ -276,7 +276,11 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.velocity.MultipleResourceLoader">
+	<category name="com.liferay.portal.velocity.LiferayResourceLoader">
+		<priority value="DEBUG" />
+	</category>
+
+	<category name="com.liferay.portal.velocity.ServletVelocityResourceListener">
 		<priority value="ERROR" />
 	</category>
 

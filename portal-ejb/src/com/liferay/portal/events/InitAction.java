@@ -32,7 +32,7 @@ import com.liferay.portal.security.jaas.PortalConfiguration;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.velocity.MultipleResourceLoader;
+import com.liferay.portal.velocity.LiferayResourceLoader;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
@@ -176,7 +176,7 @@ public class InitAction extends SimpleAction {
 
 		// Velocity
 
-		MultipleResourceLoader.setListeners(PropsUtil.getArray(
+		LiferayResourceLoader.setListeners(PropsUtil.getArray(
 			PropsUtil.VELOCITY_ENGINE_RESOURCE_LISTENERS));
 
 		ExtendedProperties props = new ExtendedProperties();
@@ -185,7 +185,15 @@ public class InitAction extends SimpleAction {
 
 		props.setProperty(
 			"servlet." + RuntimeConstants.RESOURCE_LOADER + ".class",
-			MultipleResourceLoader.class.getName());
+			LiferayResourceLoader.class.getName());
+
+		props.setProperty(
+			RuntimeConstants.RESOURCE_MANAGER_CLASS,
+			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER));
+
+		props.setProperty(
+			RuntimeConstants.RESOURCE_MANAGER_CACHE_CLASS,
+			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE));
 
 		props.setProperty(
 			"velocimacro.library",
@@ -193,7 +201,7 @@ public class InitAction extends SimpleAction {
 
 		props.setProperty(
 			RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS,
-			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_LOGGER_IMPL));
+			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_LOGGER));
 
 		props.setProperty(
 			"runtime.log.logsystem.log4j.category",
