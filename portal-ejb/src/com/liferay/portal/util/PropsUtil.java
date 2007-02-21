@@ -604,6 +604,16 @@ public class PropsUtil {
 
 	public static final String SMTP_SERVER_SUBDOMAIN = "smtp.server.subdomain";
 
+	// Velocity Engine
+
+	public static final String VELOCITY_ENGINE_RESOURCE_LISTENERS = "velocity.engine.resource.listeners";
+
+	public static final String VELOCITY_ENGINE_VELOCIMACRO_LIBRARY = "velocity.engine.velocimacro.library";
+
+	public static final String VELOCITY_ENGINE_LOGGER_IMPL = "velocity.engine.logger.impl";
+
+	public static final String VELOCITY_ENGINE_LOGGER_CATEGORY = "velocity.engine.logger.category";
+
 	// Web Server
 
 	public static final String WEB_SERVER_HTTP_PORT = "web.server.http.port";

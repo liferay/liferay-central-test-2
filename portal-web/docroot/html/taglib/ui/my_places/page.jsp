@@ -31,7 +31,10 @@
 		<ul>
 
 			<%
-			PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, false);
+			PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, true);
+
+			portletURL.setWindowState(WindowState.NORMAL);
+			portletURL.setPortletMode(PortletMode.VIEW);
 
 			portletURL.setParameter("struts_action", "/my_places/view");
 

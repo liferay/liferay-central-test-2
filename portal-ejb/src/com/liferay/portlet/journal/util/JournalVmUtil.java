@@ -23,10 +23,10 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.portlet.journal.TransformException;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
-import com.liferay.util.velocity.VelocityResourceListener;
 import com.liferay.util.xml.CDATAUtil;
 
 import java.io.IOException;

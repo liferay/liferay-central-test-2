@@ -1,0 +1,11 @@
+#macro(css $file_name)
+	<link href="$file_name" rel="stylesheet" type="text/css" />
+#end
+
+#macro(js $file_name)
+	<script src="$file_name" type="text/javascript"></script>
+#end
+
+#macro(language $lang_key)
+	$languageUtil.get($pageContext, $lang_key)
+#end

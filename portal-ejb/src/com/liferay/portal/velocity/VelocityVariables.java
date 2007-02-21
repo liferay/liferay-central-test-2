@@ -41,7 +41,6 @@ import com.liferay.util.StaticFieldGetter;
 import com.liferay.util.StringUtil_IW;
 import com.liferay.util.UnicodeFormatter_IW;
 import com.liferay.util.Validator;
-import com.liferay.util.velocity.VelocityResourceListener;
 
 import java.util.Iterator;
 import java.util.Map;

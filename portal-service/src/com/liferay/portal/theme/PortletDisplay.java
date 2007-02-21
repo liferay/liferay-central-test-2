@@ -384,12 +384,12 @@ public class PortletDisplay implements Serializable {
 		}
 
 		_id = StringPool.BLANK;
-		_resourcePK = null;
-		_namespace = null;
-		_title = null;
+		_resourcePK = StringPool.BLANK;
+		_namespace = StringPool.BLANK;
+		_title = StringPool.BLANK;
 		_access = false;
 		_active = false;
-		_columnId = null;
+		_columnId = StringPool.BLANK;
 		_stateExclusive = false;
 		_stateMax = false;
 		_stateMin = false;
@@ -412,17 +412,17 @@ public class PortletDisplay implements Serializable {
 		_showMinIcon = false;
 		_showMoveIcon = false;
 		_showPrintIcon = false;
-		_urlBack = null;
-		_urlClose = null;
-		_urlConfiguration = null;
-		_urlEdit = null;
-		_urlEditGuest = null;
-		_urlHelp = null;
-		_urlMax = null;
-		_urlMin = null;
-		_urlPrint = null;
+		_urlBack = StringPool.BLANK;
+		_urlClose = StringPool.BLANK;
+		_urlConfiguration = StringPool.BLANK;
+		_urlEdit = StringPool.BLANK;
+		_urlEditGuest = StringPool.BLANK;
+		_urlHelp = StringPool.BLANK;
+		_urlMax = StringPool.BLANK;
+		_urlMin = StringPool.BLANK;
+		_urlPrint = StringPool.BLANK;
 		_restoreCurrentView = false;
-		_content = null;
+		_content = StringPool.BLANK;
 	}
 
 	public void copyFrom(PortletDisplay master) {
@@ -514,12 +514,12 @@ public class PortletDisplay implements Serializable {
 	private static Log _log = LogFactoryUtil.getLog(PortletDisplay.class);
 
 	private String _id = StringPool.BLANK;
-	private String _resourcePK;
-	private String _namespace;
-	private String _title;
+	private String _resourcePK = StringPool.BLANK;
+	private String _namespace = StringPool.BLANK;
+	private String _title = StringPool.BLANK;
 	private boolean _access;
 	private boolean _active;
-	private String _columnId;
+	private String _columnId = StringPool.BLANK;
 	private int _columnPos;
 	private int _columnCount;
 	private boolean _stateExclusive;
@@ -544,16 +544,16 @@ public class PortletDisplay implements Serializable {
 	private boolean _showMinIcon;
 	private boolean _showMoveIcon;
 	private boolean _showPrintIcon;
-	private String _urlBack;
-	private String _urlClose;
-	private String _urlConfiguration;
-	private String _urlEdit;
-	private String _urlEditGuest;
-	private String _urlHelp;
-	private String _urlMax;
-	private String _urlMin;
-	private String _urlPrint;
+	private String _urlBack = StringPool.BLANK;
+	private String _urlClose = StringPool.BLANK;
+	private String _urlConfiguration = StringPool.BLANK;
+	private String _urlEdit = StringPool.BLANK;
+	private String _urlEditGuest = StringPool.BLANK;
+	private String _urlHelp = StringPool.BLANK;
+	private String _urlMax = StringPool.BLANK;
+	private String _urlMin = StringPool.BLANK;
+	private String _urlPrint = StringPool.BLANK;
 	private boolean _restoreCurrentView;
-	private String _content;
+	private String _content = StringPool.BLANK;
 
 }

@@ -27,8 +27,8 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.velocity.VelocityContextPool;
 
 import java.util.Iterator;
 import java.util.Map;

@@ -23,7 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.util.Constants;
-import com.liferay.util.velocity.VelocityResourceListener;
+import com.liferay.portal.velocity.VelocityResourceListener;
 
 import java.io.IOException;
 import java.io.PrintWriter;

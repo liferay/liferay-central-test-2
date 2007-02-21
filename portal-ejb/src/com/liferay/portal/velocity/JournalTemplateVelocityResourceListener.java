@@ -29,7 +29,6 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.velocity.VelocityResourceListener;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

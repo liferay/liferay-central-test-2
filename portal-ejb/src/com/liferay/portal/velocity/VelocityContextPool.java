@@ -22,38 +22,50 @@
 
 package com.liferay.portal.velocity;
 
-import com.liferay.util.velocity.VelocityResourceListener;
+import EDU.oswego.cs.dl.util.concurrent.ConcurrentReaderHashMap;
 
-import java.io.InputStream;
+import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.velocity.exception.ResourceNotFoundException;
+import javax.servlet.ServletContext;
 
 /**
- * <a href="DefaultVelocityResourceListener.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="VelocityContextPool.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class DefaultVelocityResourceListener extends VelocityResourceListener {
+public class VelocityContextPool {
 
-	public InputStream getResourceStream(String source)
-		throws ResourceNotFoundException {
-
-		InputStream is = null;
-
-		if (source.equals("VM_global_library.vm")) {
-			_log.warn("Getting VM_global_library.vm from default class loader");
-
-			is = getClass().getClassLoader().getResourceAsStream(source);
-		}
-
-		return is;
+	public static ServletContext get(String name) {
+		return _instance._get(name);
 	}
 
-	private static Log _log =
-		LogFactory.getLog(DefaultVelocityResourceListener.class);
+	public static void put(String name, ServletContext ctx) {
+		_instance._put(name, ctx);
+	}
+
+	public static ServletContext remove(String name) {
+		return _instance._remove(name);
+	}
+
+	private VelocityContextPool() {
+		_pool = new ConcurrentReaderHashMap();
+	}
+
+	private ServletContext _get(String name) {
+		return (ServletContext)_pool.get(name);
+	}
+
+	private void _put(String name, ServletContext ctx) {
+		_pool.put(name, ctx);
+	}
+
+	private ServletContext _remove(String name) {
+		return (ServletContext)_pool.remove(name);
+	}
+
+	private static VelocityContextPool _instance = new VelocityContextPool();
+
+	private Map _pool;
 
 }

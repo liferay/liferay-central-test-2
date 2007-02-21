@@ -22,9 +22,6 @@
 
 package com.liferay.portal.velocity;
 
-import com.liferay.util.velocity.VelocityContextPool;
-import com.liferay.util.velocity.VelocityResourceListener;
-
 import java.io.InputStream;
 
 import javax.servlet.ServletContext;

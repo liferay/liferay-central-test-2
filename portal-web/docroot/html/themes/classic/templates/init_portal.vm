@@ -90,21 +90,3 @@
 #set ( $sound_alerts_include = "/html/common/themes/sound_alerts.jsp" )
 #set ( $top_head_include = "/html/common/themes/top_head.jsp" )
 #set ( $top_warning_include = "/html/common/themes/top_warning.jsp" )
-
-## ---------- Macros ---------- ##
-	
-#macro(css $file_name)
-	<link href="$file_name" rel="stylesheet" type="text/css" />
-#end
-
-#macro(import_css $file_name)
-	@import url("$file_name");
-#end
-
-#macro(js $file_name)
-	<script src="$file_name" type="text/javascript"></script>
-#end
-
-#macro(language $lang_key)
-	$languageUtil.get($pageContext, $lang_key)
-#end

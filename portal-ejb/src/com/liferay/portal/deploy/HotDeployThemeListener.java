@@ -29,9 +29,9 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
-import com.liferay.util.velocity.VelocityContextPool;
 
 import java.util.List;
 import java.util.Map;

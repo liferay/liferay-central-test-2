@@ -20,25 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.velocity;
+package com.liferay.portal.velocity;
 
-import java.io.InputStream;
+import java.io.StringWriter;
 
-import org.apache.velocity.exception.ResourceNotFoundException;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
 
 /**
- * <a href="VelocityResourceListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="VelocityUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public abstract class VelocityResourceListener {
+public class VelocityUtil {
 
-	public static final String JOURNAL_SEPARATOR = "_JOURNAL_CONTEXT_";
+	public static String evaluate(String input) throws Exception {
+		Velocity.init();
 
-	public static final String SERVLET_SEPARATOR = "_SERVLET_CONTEXT_";
+		VelocityContext context = new VelocityContext();
 
-	public abstract InputStream getResourceStream(String source)
-		throws ResourceNotFoundException;
+		StringWriter output = new StringWriter();
+
+		Velocity.evaluate(context, output, VelocityUtil.class.getName(), input);
+
+		return output.toString();
+	}
 
 }

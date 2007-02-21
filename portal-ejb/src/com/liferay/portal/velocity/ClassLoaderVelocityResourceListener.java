@@ -20,83 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.velocity;
+package com.liferay.portal.velocity;
 
 import java.io.InputStream;
 
-import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
-import org.apache.velocity.runtime.resource.Resource;
-import org.apache.velocity.runtime.resource.loader.FileResourceLoader;
 
 /**
- * <a href="MultipleResourceLoader.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClassLoaderVelocityResourceListener.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MultipleResourceLoader extends FileResourceLoader {
-
-	private static VelocityResourceListener[] _listeners =
-		new VelocityResourceListener[0];
-
-	public static void setListeners(String[] listeners) {
-		_listeners = new VelocityResourceListener[listeners.length];
-
-		for (int i = 0; i < listeners.length; i++) {
-			try {
-				_listeners[i] = (VelocityResourceListener)Class.forName(
-					listeners[i]).newInstance();
-			}
-			catch (Exception ex) {
-				_log.error(ex);
-
-				_listeners[i] = null;
-			}
-		}
-	}
-
-	public void init(ExtendedProperties props) {
-	}
+public class ClassLoaderVelocityResourceListener
+	extends VelocityResourceListener {
 
 	public InputStream getResourceStream(String source)
 		throws ResourceNotFoundException {
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Get resource for " + source);
-		}
-
 		InputStream is = null;
 
-		for (int i = 0; is == null && i < _listeners.length; i++) {
-			if (_listeners[i] != null) {
-				is = _listeners[i].getResourceStream(source);
-			}
+		int pos = source.indexOf(JOURNAL_SEPARATOR);
+
+		if (pos == -1) {
+			pos = source.indexOf(SERVLET_SEPARATOR);
 		}
 
-		if (is == null) {
-			_log.error("Failed to get " + source);
+		if (pos == -1) {
+			ClassLoader classLoader = getClass().getClassLoader();
 
-			throw new ResourceNotFoundException(source);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Successfully got " + source);
+			is = classLoader.getResourceAsStream(source);
 		}
 
 		return is;
 	}
 
-	public boolean isSourceModified(Resource resource) {
-		return false;
-	}
-
-	public long getLastModified(Resource resource) {
-		return 0;
-	}
-
-	private static Log _log = LogFactory.getLog(MultipleResourceLoader.class);
+	private static Log _log =
+		LogFactory.getLog(ClassLoaderVelocityResourceListener.class);
 
 }
