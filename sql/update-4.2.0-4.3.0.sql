@@ -89,8 +89,8 @@ update Role_ SET type_ = 1;
 alter_column_type Roles_Permissions permissionId LONG;
 
 create table SCFrameworkVersion (
-	frameworkVersionId LONG primary key,
-	groupId LONG,
+	frameworkVersionId LONG not null primary key,
+	groupId LONG not null,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -109,7 +109,7 @@ create table SCFrameworkVersions_SCProductVersions (
 );
 
 create table SCLicense (
-	licenseId LONG primary key,
+	licenseId LONG not null primary key,
 	name VARCHAR(75) null,
 	url VARCHAR(1024) null,
 	openSource BOOLEAN,
@@ -124,8 +124,8 @@ create table SCLicenses_SCProductEntries (
 );
 
 create table SCProductEntry (
-	productEntryId LONG primary key,
-	groupId LONG,
+	productEntryId LONG not null primary key,
+	groupId LONG not null,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -141,7 +141,7 @@ create table SCProductEntry (
 );
 
 create table SCProductVersion (
-	productVersionId LONG primary key,
+	productVersionId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -202,7 +202,7 @@ alter_column_type ShoppingCoupon groupId LONG;
 alter_column_type ShoppingOrder groupId LONG;
 
 create table TagsAsset (
-	assetId LONG primary key,
+	assetId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -228,7 +228,7 @@ create table TagsAssets_TagsEntries (
 );
 
 create table TagsEntry (
-	entryId LONG primary key,
+	entryId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -238,7 +238,7 @@ create table TagsEntry (
 );
 
 create table TagsProperty (
-	propertyId LONG primary key,
+	propertyId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -250,7 +250,7 @@ create table TagsProperty (
 );
 
 create table TagsSource (
-	sourceId LONG primary key,
+	sourceId LONG not null primary key,
 	parentSourceId LONG,
 	name VARCHAR(75) null,
 	acronym VARCHAR(75) null

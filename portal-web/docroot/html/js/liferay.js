@@ -34,6 +34,7 @@ jQuery.fn.getOne = function(s) {
 Liferay = {};
 
 Liferay.Animate = function(id, fn, data) {
+
 	/* id - unique identifier for this process
 	 * fn - animation function
 	 * data - object that is passed to the animation function
@@ -381,8 +382,8 @@ Liferay.TagsSelector = new Class({
 					duration: 400
 				},
 				autofill: true,
-				helperClass: 'autocompleter',
-				selectClass: 'selectAutocompleter',
+				helperClass: 'autocomplete-box',
+				selectClass: 'autocomplete-selected',
 				minchars: 1,
 				onSelect: function(option) {
 					textInput.val('');
