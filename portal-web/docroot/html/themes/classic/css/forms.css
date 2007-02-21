@@ -4,9 +4,10 @@ fieldset {
 	border: 1px solid #ccc;
 	padding: 0.7em;
 }
+
 legend {
-	padding: 0.5em;
 	font-weight: bold;
+	padding: 0.5em;
 }
 
 input:not([type="checkbox"]), input:not([type="hidden"]), input:not([type="radio"]), input:not([type="image"]), select, textarea {

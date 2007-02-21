@@ -52,7 +52,7 @@ public class CSSFormatter {
 
 			content = StringUtil.replace(
 				content,
-				new String[] {"*/\n", "*/ /*"},
+				new String[] {"*/\n", "*/    /*"},
 				new String[] {"*/\n\n", "*/\n\n/*"}
 			);
 
