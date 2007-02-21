@@ -26,11 +26,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.velocity.VelocityContextPool;
+import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.servlet.StringServletResponse;
-import com.liferay.util.velocity.VelocityContextPool;
-import com.liferay.util.velocity.VelocityResourceListener;
 
 import java.io.StringWriter;
 
