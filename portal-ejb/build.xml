@@ -96,7 +96,7 @@
 	</target>
 
 	<target name="deploy">
-		<ant dir="../portal-service" target="jar" inheritAll="false" />
+		<ant dir="../portal-service" target="deploy" inheritAll="false" />
 
 		<antcall target="build-common-ejb.deploy" />
 	</target>
