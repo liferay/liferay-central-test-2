@@ -20,7 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.servlet;
+package com.liferay.portal.kernel.servlet;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <a href="URLEncoder.java.html"><b><i>View Source</i></b></a>
@@ -30,6 +32,6 @@ package com.liferay.util.servlet;
  */
 public interface URLEncoder {
 
-	public String encodeURL(String path);
+	public String encodeURL(HttpServletResponse res, String path);
 
 }

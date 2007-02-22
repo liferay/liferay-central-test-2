@@ -23,6 +23,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletInfo;
@@ -150,7 +151,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 					   String portletClass, String indexerClass,
 					   String openSearchClass, String schedulerClass,
 					   String portletURLClass, String friendlyURLPluginClass,
-					   String portletDataHandlerClass,
+					   String urlEncoderClass, String portletDataHandlerClass,
 					   String smtpMessageListenerClass,
 					   String defaultPreferences, String prefsValidator,
 					   boolean prefsCompanyWide, boolean prefsUniquePerLayout,
@@ -182,6 +183,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_schedulerClass = schedulerClass;
 		_portletURLClass = portletURLClass;
 		_friendlyURLPluginClass = friendlyURLPluginClass;
+		_urlEncoderClass = urlEncoderClass;
 		_portletDataHandlerClass = portletDataHandlerClass;
 		_smtpMessageListenerClass = smtpMessageListenerClass;
 		_defaultPreferences = defaultPreferences;
@@ -410,6 +412,46 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setFriendlyURLPluginClass(String friendlyURLPluginClass) {
 		_friendlyURLPluginClass = friendlyURLPluginClass;
+	}
+
+	/**
+	 * Gets the URL encoder of the portlet.
+	 *
+	 * @return		the URL encoder of the portlet
+	 */
+	public URLEncoder getURLEncoder() {
+		if (Validator.isNotNull(getURLEncoderClass())) {
+			if (isWARFile()) {
+				PortletContextWrapper pcw =
+					PortletContextPool.get(getRootPortletId());
+
+				return pcw.getURLEncoder();
+			}
+			else {
+				return (URLEncoder)InstancePool.get(getURLEncoderClass());
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Gets the name of the URL encoder class of the portlet.
+	 *
+	 * @return		the name of the URL encoder class of the portlet
+	 */
+	public String getURLEncoderClass() {
+		return _urlEncoderClass;
+	}
+
+	/**
+	 * Sets the name of the URL encoder class of the portlet.
+	 *
+	 * @param		urlEncoderClass the name of the URL encoder class of the
+	 *				portlet
+	 */
+	public void setURLEncoderClass(String urlEncoderClass) {
+		_urlEncoderClass = urlEncoderClass;
 	}
 
 	/**
@@ -1726,20 +1768,21 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getConfigurationPath(), getDisplayName(), getPortletClass(),
 			getIndexerClass(), getOpenSearchClass(), getSchedulerClass(),
 			getPortletURLClass(), getFriendlyURLPluginClass(),
-			getPortletDataHandlerClass(), getSmtpMessageListenerClass(),
-			getDefaultPreferences(), getPreferencesValidator(),
-			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
-			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
-			isShowPortletAccessDenied(), isShowPortletInactive(),
-			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
-			isMaximizeHelp(), isMaximizePrint(), isLayoutCacheable(),
-			isInstanceable(), isPrivateRequestAttributes(),
-			isPrivateSessionAttributes(), getRenderWeight(), isAjaxable(),
-			getHeaderCss(), getHeaderJavaScript(), isAddDefaultResource(),
-			getRoles(), getUnlinkedRoles(), getRoleMappers(), isSystem(),
-			isActive(), isInclude(), getInitParams(), getExpCache(),
-			getPortletModes(), getSupportedLocales(), getResourceBundle(),
-			getPortletInfo(), getUserAttributes(), getCustomUserAttributes(),
+			getURLEncoderClass(), getPortletDataHandlerClass(),
+			getSmtpMessageListenerClass(), getDefaultPreferences(),
+			getPreferencesValidator(), isPreferencesCompanyWide(),
+			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
+			isUseDefaultTemplate(), isShowPortletAccessDenied(),
+			isShowPortletInactive(), isActionURLRedirect(),
+			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
+			isMaximizePrint(), isLayoutCacheable(), isInstanceable(),
+			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
+			getRenderWeight(), isAjaxable(), getHeaderCss(),
+			getHeaderJavaScript(), isAddDefaultResource(), getRoles(),
+			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
+			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
+			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
+			getUserAttributes(), getCustomUserAttributes(),
 			getServletContextName(), getServletURLPatterns());
 	}
 
@@ -1807,6 +1850,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the friendly URL plugin class of the portlet.
 	 */
 	private String _friendlyURLPluginClass;
+
+	/**
+	 * The name of the URL encoder class of the portlet.
+	 */
+	private String _urlEncoderClass;
 
  	/**
 	 * The name of the portlet data handler class of the portlet.

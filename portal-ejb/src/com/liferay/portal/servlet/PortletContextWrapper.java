@@ -25,6 +25,7 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.smtp.MessageListener;
 
 import java.util.Locale;
@@ -49,6 +50,7 @@ public class PortletContextWrapper {
 								 Portlet portletInstance,
 								 Indexer indexerInstance,
 								 Scheduler schedulerInstance,
+								 URLEncoder urlEncoder,
 								 PortletDataHandler portletDataHandler,
 								 MessageListener smtpMessageListener,
 								 PreferencesValidator prefsValidator,
@@ -60,6 +62,7 @@ public class PortletContextWrapper {
 		_portletInstance = portletInstance;
 		_indexerInstance = indexerInstance;
 		_schedulerInstance = schedulerInstance;
+		_urlEncoder = urlEncoder;
 		_portletDataHandler = portletDataHandler;
 		_smtpMessageListener = smtpMessageListener;
 		_prefsValidator = prefsValidator;
@@ -89,6 +92,10 @@ public class PortletContextWrapper {
 
 	public Scheduler getSchedulerInstance() {
 		return _schedulerInstance;
+	}
+
+	public URLEncoder getURLEncoder() {
+		return _urlEncoder;
 	}
 
 	public PortletDataHandler getPortletDataHandler() {
@@ -124,6 +131,7 @@ public class PortletContextWrapper {
 	private Portlet _portletInstance;
 	private Indexer _indexerInstance;
 	private Scheduler _schedulerInstance;
+	private URLEncoder _urlEncoder;
 	private PortletDataHandler _portletDataHandler;
 	private MessageListener _smtpMessageListener;
 	private PreferencesValidator _prefsValidator;

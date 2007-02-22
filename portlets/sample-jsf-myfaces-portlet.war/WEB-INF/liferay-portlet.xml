@@ -5,6 +5,7 @@
 	<module-id>liferay-portlets/sample-jsf-myfaces-portlet/4.3.0/war</module-id>
 	<portlet>
 		<portlet-name>sample_jsf_myfaces_portlet</portlet-name>
+		<url-encoder-class>com.sample.jsfmyfaces.portlet.LogURLEncoder</url-encoder-class>
 		<instanceable>true</instanceable>
 	</portlet>
 	<role-mapper>

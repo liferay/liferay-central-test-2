@@ -26,7 +26,7 @@ The portlet element contains the declarative data of a portlet.
 -->
 <!ELEMENT portlet (portlet-name, struts-path?, configuration-path?,
 indexer-class?, open-search-class?, scheduler-class?, portlet-url-class?,
-friendly-url-plugin-class?, portlet-data-handler-class?,
+friendly-url-plugin-class?, url-encoder-class?, portlet-data-handler-class?,
 smtp-message-listener-class?, preferences-company-wide?,
 preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
@@ -123,6 +123,14 @@ See:
 http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/enterpriseadmin/EnterpriseAdminPortletURL.html
 -->
 <!ELEMENT friendly-url-plugin-class (#PCDATA)>
+
+<!--
+The url-encoder-class value must be a class that implements
+com.liferay.portal.kernel.servlet.URLEncoder. Use this to set a custom
+URLEncoder that is used by the RenderResponse class to implement the encodeURL
+method. This is useful if you need to add custom logic to rewrite URLs.
+-->
+<!ELEMENT url-encoder-class (#PCDATA)>
 
 <!--
 The portlet-data-handler-class value must be a class that implements

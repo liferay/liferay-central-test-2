@@ -47,19 +47,6 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		super(res);
 	}
 
-	public void setURLEncoder(URLEncoder urlEncoder) {
-		_urlEncoder = urlEncoder;
-	}
-
-	public String encodeURL(String path) {
-		if (_urlEncoder != null) {
-			return _urlEncoder.encodeURL(path);
-		}
-		else {
-			return super.encodeURL(path);
-		}
-	}
-
 	public String getContentType() {
 		return _contentType;
 	}
@@ -140,7 +127,6 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public void recycle() {
-		_urlEncoder = null;
 		_baos.reset();
 		//_sos = new StringServletOutputStream(_baos);
 		_status = SC_OK;
@@ -151,7 +137,6 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		_string = null;
 	}
 
-	private URLEncoder _urlEncoder;
 	private String _contentType;
 	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
 	private ServletOutputStream _sos = new StringServletOutputStream(_baos);

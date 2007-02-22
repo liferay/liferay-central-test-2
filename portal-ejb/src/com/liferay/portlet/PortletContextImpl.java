@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.util.GetterUtil;
 
@@ -52,7 +53,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PortletContextImpl implements PortletContext {
 
-	public PortletContextImpl(ServletContext ctx) {
+	public PortletContextImpl(Portlet portlet, ServletContext ctx) {
+		_portlet = portlet;
 		_ctx = ctx;
 		_ctxName = GetterUtil.getString(_ctx.getServletContextName());
 	}
@@ -193,6 +195,10 @@ public class PortletContextImpl implements PortletContext {
 		return _ctx.getInitParameterNames();
 	}
 
+	public Portlet getPortlet() {
+		return _portlet;
+	}
+
 	public ServletContext getServletContext() {
 		return _ctx;
 	}
@@ -215,6 +221,7 @@ public class PortletContextImpl implements PortletContext {
 
 	private static Log _log = LogFactory.getLog(PortletContextImpl.class);
 
+	private Portlet _portlet;
 	private ServletContext _ctx;
 	private String _ctxName = null;
 

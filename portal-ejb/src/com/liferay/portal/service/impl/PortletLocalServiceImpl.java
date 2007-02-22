@@ -964,6 +964,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 						portletId, portletModel.getFriendlyURLPluginClass());
 				}
 
+				portletModel.setURLEncoderClass(GetterUtil.getString(
+					portlet.elementText("url-encoder-class"),
+					portletModel.getURLEncoderClass()));
 				portletModel.setPortletDataHandlerClass(GetterUtil.getString(
 					portlet.elementText("portlet-data-handler-class"),
 					portletModel.getPortletDataHandlerClass()));

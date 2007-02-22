@@ -103,7 +103,7 @@ public class PortletContextFactory {
 				ctx.setAttribute(WebKeys.MAIN_PATH, mainPath);
 			}
 
-			portletContext = new PortletContextImpl(ctx);
+			portletContext = new PortletContextImpl(portlet, ctx);
 
 			VelocityContextPool.put(
 				portletContext.getPortletContextName(), ctx);

@@ -70,6 +70,12 @@ public interface Portlet extends PortletModel {
 	public void setFriendlyURLPluginClass(
 		java.lang.String friendlyURLPluginClass);
 
+	public com.liferay.portal.kernel.servlet.URLEncoder getURLEncoder();
+
+	public java.lang.String getURLEncoderClass();
+
+	public void setURLEncoderClass(java.lang.String urlEncoderClass);
+
 	public com.liferay.portal.kernel.lar.PortletDataHandler getPortletDataHandler();
 
 	public java.lang.String getPortletDataHandlerClass();

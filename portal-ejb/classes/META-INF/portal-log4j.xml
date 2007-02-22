@@ -277,7 +277,7 @@
 	</category>
 
 	<category name="com.liferay.portal.velocity.LiferayResourceLoader">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.velocity.ServletVelocityResourceListener">
@@ -386,6 +386,10 @@
 
 	<category name="com.opensymphony.oscache.plugins.clustersupport.JavaGroupsBroadcastingListener">
 		<priority value="ERROR" />
+	</category>
+
+	<category name="com.sample">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.sun.faces">

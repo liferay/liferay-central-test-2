@@ -22,13 +22,13 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.servlet.URLEncoder;
 
 import java.util.HashMap;
 
@@ -36,6 +36,8 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -97,7 +99,7 @@ public class StrutsURLEncoder implements URLEncoder {
 		_portletMode = portletURL.getPortletMode();
 	}
 
-	public String encodeURL(String path) {
+	public String encodeURL(HttpServletResponse res, String path) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Path " + path);
 			_log.debug("Context path " + _contextPath);

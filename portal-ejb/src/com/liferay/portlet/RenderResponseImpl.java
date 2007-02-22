@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -31,7 +32,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Validator;
-import com.liferay.util.servlet.URLEncoder;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -170,7 +170,7 @@ public class RenderResponseImpl implements RenderResponse {
 		}
 
 		if (_urlEncoder != null) {
-			return _urlEncoder.encodeURL(path);
+			return _urlEncoder.encodeURL(_res, path);
 		}
 		else {
 			return path;

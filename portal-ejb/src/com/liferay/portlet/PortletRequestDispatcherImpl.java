@@ -22,7 +22,9 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.struts.StrutsURLEncoder;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -73,6 +75,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 										String path) {
 
 		_rd = rd;
+		_portlet = portletCtxImpl.getPortlet();
 		_portletCtxImpl = portletCtxImpl;
 		_path = path;
 	}
@@ -223,7 +226,12 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 				new PortletServletResponse(
 					resImpl.getHttpServletResponse(), resImpl);
 
-			if (strutsURLEncoder) {
+			URLEncoder urlEncoder = _portlet.getURLEncoder();
+
+			if (urlEncoder != null) {
+				resImpl.setURLEncoder(urlEncoder);
+			}
+			else if (strutsURLEncoder) {
 				ThemeDisplay themeDisplay =
 					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
@@ -247,6 +255,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 		LogFactory.getLog(PortletRequestDispatcherImpl.class);
 
 	private RequestDispatcher _rd;
+	private Portlet _portlet;
 	private PortletContextImpl _portletCtxImpl;
 	private String _path;
 
