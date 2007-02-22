@@ -569,7 +569,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 				</tr>
 				<tr>
 					<td>
-						<br><div class="beta-separator"></div><br>
+						<br><div class="separator"></div><br>
 					</td>
 				</tr>
 				<tr>
@@ -719,7 +719,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 				%>
 
 				<c:if test="<%= (selLayoutChildren != null) && (selLayoutChildren.size() > 0) %>">
-					<br><div class="beta-separator"></div><br>
+					<br><div class="separator"></div><br>
 
 					<liferay-ui:error exception="<%= RequiredLayoutException.class %>">
 

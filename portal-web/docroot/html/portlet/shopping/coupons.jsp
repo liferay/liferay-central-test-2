@@ -74,7 +74,7 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 	searchContainer.setResults(results);
 	%>
 
-	<br><div class="beta-separator"></div><br>
+	<br><div class="separator"></div><br>
 
 	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_coupon" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 

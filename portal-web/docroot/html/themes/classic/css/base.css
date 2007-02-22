@@ -208,3 +208,9 @@ code, pre {
 	padding-top: 40px;
 	text-align: left;
 }
+
+/* ---------- Separator ---------- */
+
+.separator {
+	border: 1px dotted #CCC;
+}

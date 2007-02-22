@@ -199,7 +199,7 @@ List messages = treeWalker.getMessages();
 		<c:if test="<%= i + 1 < messages.size() %>">
 			<tr>
 				<td>
-					<br><div class="beta-separator"></div><br>
+					<br><div class="separator"></div><br>
 				</td>
 			</tr>
 		</c:if>

@@ -131,7 +131,7 @@ type = ParamUtil.getString(request, "type", type);
 
 </form>
 
-<br><div class="beta-separator"></div><br>
+<br><div class="separator"></div><br>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
@@ -156,7 +156,7 @@ ArticleSearch searchContainer = new ArticleSearch(dynamicRenderReq, portletURL);
 	<liferay-ui:param name="type" value="<%= type %>" />
 </liferay-ui:search-form>
 
-<br><div class="beta-separator"></div><br>
+<br><div class="separator"></div><br>
 
 <%
 OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(searchContainer.getOrderByCol(), searchContainer.getOrderByType());

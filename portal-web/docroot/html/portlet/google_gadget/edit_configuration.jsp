@@ -29,7 +29,7 @@
 	queryString="struts_action=/google_gadget/view"
 />
 
-<br><div class="beta-separator"></div><br>
+<br><div class="separator"></div><br>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">

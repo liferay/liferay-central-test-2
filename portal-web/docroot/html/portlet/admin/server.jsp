@@ -100,7 +100,7 @@
 			<html:link page="/admin/view?windowState=maximized&portletMode=view&actionURL=0"><bean:message key="more-options" /></html:link> &raquo;
 		</c:when>
 		<c:otherwise>
-			<br><div class="beta-separator"></div><br>
+			<br><div class="separator"></div><br>
 
 			<%= LanguageUtil.get(pageContext, "shutdown-the-server-in-the-specified-number-of-minutes") %>
 
@@ -131,7 +131,7 @@
 
 			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "shutdown") %>' onClick="<portlet:namespace />saveServer('shutdown');"><br>
 
-			<br><div class="beta-separator"></div><br>
+			<br><div class="separator"></div><br>
 
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>

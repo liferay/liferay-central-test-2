@@ -135,7 +135,7 @@ Assign Community roles to users.
 			searchContainer.setResults(results);
 			%>
 
-			<br><div class="beta-separator"></div><br>
+			<br><div class="separator"></div><br>
 
 			<%
 			List resultRows = searchContainer.getResultRows();
@@ -228,7 +228,7 @@ Assign Community roles to users.
 		searchContainer.setResults(results);
 		%>
 
-		<br><div class="beta-separator"></div><br>
+		<br><div class="separator"></div><br>
 
 		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateUserGroupRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 

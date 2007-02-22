@@ -120,7 +120,7 @@ try {
 
 	<br><br>
 
-	<div class="beta-separator" style="clear: both;"></div><br>
+	<div class="separator" style="clear: both;"></div><br>
 
 	<%
 	List headerNames = new ArrayList();

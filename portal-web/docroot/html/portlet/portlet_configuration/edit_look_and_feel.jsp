@@ -60,7 +60,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 	</div>
 </div>
 
-<br><div class="beta-separator"></div><br>
+<br><div class="separator"></div><br>
 
 <script type="text/javascript">
 	function <portlet:namespace />updateLookAndFeel(cmd) {

@@ -104,7 +104,7 @@ List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.g
 searchContainer.setResults(results);
 %>
 
-<br><div class="beta-separator"></div><br>
+<br><div class="separator"></div><br>
 
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateUserGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
