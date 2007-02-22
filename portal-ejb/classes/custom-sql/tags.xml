@@ -1,7 +1,17 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.countByEntryIds">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.countByAndEntryIds">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT TagsAsset.assetId) AS COUNT_VALUE
+			FROM
+				TagsAssets_TagsEntries
+			WHERE
+				entryId = ? and assetId IN (
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.countByOrEntryIds">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT TagsAsset.assetId) AS COUNT_VALUE
@@ -17,7 +27,17 @@
 				[$ENTRY_ID$]
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.findByEntryIds">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.findByAndEntryIds">
+		<![CDATA[
+			SELECT
+				DISTINCT TagsAssets_TagsEntries.assetId
+			FROM
+				TagsAssets_TagsEntries
+			WHERE
+				entryId = ?
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.findByOrEntryIds">
 		<![CDATA[
 			SELECT
 				DISTINCT {TagsAsset.*}

@@ -48,6 +48,8 @@ public class StringPool {
 
 	public static final String CLOSE_CURLY_BRACE = "}";
 
+	public static final String CLOSE_PARENTHESIS = ")";
+
 	public static final String COLON = ":";
 
 	public static final String COMMA = ",";
@@ -73,6 +75,8 @@ public class StringPool {
 	public static final String OPEN_BRACKET = "[";
 
 	public static final String OPEN_CURLY_BRACE = "{";
+
+	public static final String OPEN_PARENTHESIS = "(";
 
 	public static final String PERCENT = "%";
 
