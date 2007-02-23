@@ -86,7 +86,10 @@ import com.liferay.util.zip.ZipReader;
 import com.liferay.util.zip.ZipWriter;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 
 import java.util.ArrayList;
@@ -449,6 +452,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public void importLayouts(String userId, String ownerId, File file)
 		throws PortalException, SystemException {
 
+		try {
+			importLayouts(userId, ownerId, new FileInputStream(file));
+		}
+		catch (FileNotFoundException fnfe) {
+			throw new SystemException(fnfe);
+		}
+	}
+
+	public void importLayouts(String userId, String ownerId, InputStream is)
+		throws PortalException, SystemException {
+
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
 		PortletDataContext context = new PortletDataContext(
@@ -458,12 +472,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			layoutSet.getCompanyId(), GroupImpl.GUEST);
 
-		// XML file
+		// XML
 
 		Element root = null;
 
 		try {
-			ZipReader zipReader = new ZipReader(file);
+			ZipReader zipReader = new ZipReader(is);
 
 			String xml = zipReader.getEntryAsString("layouts.xml");
 

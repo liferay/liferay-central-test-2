@@ -149,6 +149,14 @@ public class LayoutLocalServiceUtil {
 		layoutLocalService.importLayouts(userId, ownerId, file);
 	}
 
+	public static void importLayouts(java.lang.String userId,
+		java.lang.String ownerId, java.io.InputStream is)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.importLayouts(userId, ownerId, is);
+	}
+
 	public static void setLayouts(java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String[] layoutIds)
 		throws com.liferay.portal.PortalException, 

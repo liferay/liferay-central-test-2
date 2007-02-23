@@ -93,6 +93,11 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void importLayouts(java.lang.String userId,
+		java.lang.String ownerId, java.io.InputStream is)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void setLayouts(java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String[] layoutIds)
 		throws com.liferay.portal.SystemException, 

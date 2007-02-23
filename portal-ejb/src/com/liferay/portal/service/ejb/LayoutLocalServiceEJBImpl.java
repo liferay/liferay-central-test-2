@@ -137,6 +137,13 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 			file);
 	}
 
+	public void importLayouts(java.lang.String userId,
+		java.lang.String ownerId, java.io.InputStream is)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalServiceFactory.getTxImpl().importLayouts(userId, ownerId, is);
+	}
+
 	public void setLayouts(java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String[] layoutIds)
 		throws com.liferay.portal.PortalException, 
