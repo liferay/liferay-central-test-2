@@ -84,10 +84,15 @@ public class LayoutAction extends Action {
 		throws Exception {
 
 		String plid = ParamUtil.getString(req, "p_l_id");
+		boolean resetLayout = ParamUtil.getBoolean(req, "p_l_reset");
 		String action = ParamUtil.getString(req, "p_p_action");
 
 		if (Validator.isNotNull(plid)) {
 			try {
+				if (resetLayout) {
+					RenderParametersPool.clear(req, plid);
+				}
+
 				if (action.equals("1")) {
 					Portlet portlet = _processActionRequest(req, res);
 

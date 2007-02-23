@@ -31,17 +31,23 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutType;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.NullSafeProperties;
 import com.liferay.util.PropertiesUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -52,6 +58,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+
+import javax.portlet.PortletException;
+import javax.portlet.PortletMode;
+import javax.portlet.WindowState;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -460,6 +472,92 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return ThemeLocalUtil.getColorScheme(
 				getCompanyId(), getTheme().getThemeId(), getColorSchemeId());
 		}
+	}
+
+	public String getRegularURL(HttpServletRequest req)
+		throws PortalException, SystemException {
+
+		return _getURL(req, false, false);
+	}
+
+	public String getResetMaxStateURL(HttpServletRequest req)
+		throws PortalException, SystemException {
+
+		return _getURL(req, true, false);
+	}
+
+	public String getResetLayoutURL(HttpServletRequest req)
+		throws PortalException, SystemException {
+
+		return _getURL(req, true, true);
+	}
+
+	public String getTarget() {
+		return PortalUtil.getLayoutTarget(this);
+	}
+
+	public boolean isSelected(
+		boolean selectable, Layout layout, String ancestorLayoutId) {
+
+		if (selectable) {
+			String layoutId = getLayoutId();
+
+			if (layoutId.equals(layout.getLayoutId()) ||
+				layoutId.equals(ancestorLayoutId)) {
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private String _getURL(
+			HttpServletRequest req, boolean resetMaxState,
+			boolean resetRenderParameters)
+		throws PortalException, SystemException {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		if (resetMaxState) {
+			Layout layout = themeDisplay.getLayout();
+
+			LayoutTypePortlet layoutTypePortlet = null;
+
+			if (layout.equals(this)) {
+				layoutTypePortlet = themeDisplay.getLayoutTypePortlet();
+			}
+			else {
+				layoutTypePortlet = (LayoutTypePortlet)getLayoutType();
+			}
+
+			if (layoutTypePortlet.hasStateMax()) {
+				String portletId =
+					StringUtil.split(layoutTypePortlet.getStateMax())[0];
+
+				PortletURLImpl portletURLImpl = new PortletURLImpl(
+					req, portletId, getPlid(), true);
+
+				try {
+					portletURLImpl.setWindowState(WindowState.NORMAL);
+					portletURLImpl.setPortletMode(PortletMode.VIEW);
+				}
+				catch (PortletException pe) {
+					throw new SystemException(pe);
+				}
+
+				portletURLImpl.setAnchor(false);
+
+				if (resetRenderParameters) {
+					portletURLImpl.setParameter("p_l_reset", "1");
+				}
+
+				return portletURLImpl.toString();
+			}
+		}
+
+		return PortalUtil.getLayoutURL(this, themeDisplay);
 	}
 
 	private String _parseLocalizedXml(String xml, String localeLanguageId) {

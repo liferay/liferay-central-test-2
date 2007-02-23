@@ -72,7 +72,7 @@
 #set ( $selectable = $tilesSelectable.equals("true") )
 
 #set ( $page = $layout )
-#set ( $all_pages = $layouts )
+#set ( $pages = $layouts )
 
 #set ( $is_first_child = $page.isFirstChild() )
 #set ( $is_first_parent = $page.isFirstParent() )
@@ -87,8 +87,8 @@
 	#set ( $ancestor_layout_id = $page.getAncestorLayoutId() )	
 #end
 
-#set ( $has_navigation = ($all_pages && $all_pages.size() > 0) )
-#set ( $nav_items = $all_pages )
+#set ( $has_navigation = ($pages && $pages.size() > 0) )
+#set ( $nav_items = $pages )
 
 ## ---------- Includes ---------- ##
 

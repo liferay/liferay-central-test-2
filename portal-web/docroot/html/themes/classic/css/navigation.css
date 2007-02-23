@@ -46,6 +46,10 @@
 	padding-top: 0.2em;
 }
 
+#navigation .child-menu {
+	display: none;
+}
+
 /* ---------- Dock without Javascript ---------- */
 
 .lfr-dock {

@@ -97,4 +97,25 @@ public interface Layout extends LayoutModel {
 	public com.liferay.portal.model.ColorScheme getColorScheme()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public java.lang.String getRegularURL(
+		javax.servlet.http.HttpServletRequest req)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.lang.String getResetMaxStateURL(
+		javax.servlet.http.HttpServletRequest req)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.lang.String getResetLayoutURL(
+		javax.servlet.http.HttpServletRequest req)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.lang.String getTarget();
+
+	public boolean isSelected(boolean selectable,
+		com.liferay.portal.model.Layout layout,
+		java.lang.String ancestorLayoutId);
 }

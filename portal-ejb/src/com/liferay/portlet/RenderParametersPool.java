@@ -39,30 +39,53 @@ import javax.servlet.http.HttpSession;
  */
 public class RenderParametersPool {
 
+	public static void clear(HttpServletRequest req, String plid) {
+		Map plidPool = get(req, plid);
+
+		plidPool.clear();
+	}
+
 	public static void clear(
 		HttpServletRequest req, String plid, String portletId) {
 
-		get(req, plid, portletId).clear();
+		Map params = get(req, plid, portletId);
+
+		params.clear();
+	}
+
+	public static Map get(HttpServletRequest req, String plid) {
+		HttpSession ses = req.getSession();
+
+		if (plid == null) {
+			return CollectionFactory.getHashMap();
+		}
+
+		String key = RenderParametersPool.class.getName() + plid;
+
+		Map pool = (Map)_getRenderParametersPool(ses);
+
+		Map plidPool = (Map)pool.get(key);
+
+		if (plidPool == null) {
+			plidPool = CollectionFactory.getHashMap();
+
+			pool.put(key, plidPool);
+		}
+
+		return plidPool;
 	}
 
 	public static Map get(
 		HttpServletRequest req, String plid, String portletId) {
 
-		HttpSession ses = req.getSession();
+		Map plidPool = get(req, plid);
 
-		if (plid == null) {
-			return new HashMap();
-		}
-
-		String rppId =
-			plid + RenderParametersPool.class.getName() + portletId;
-
-		Map params = (Map)_getRenderParametersPool(ses).get(rppId);
+		Map params = (Map)plidPool.get(portletId);
 
 		if (params == null) {
 			params = new HashMap();
 
-			_getRenderParametersPool(ses).put(rppId, params);
+			plidPool.put(portletId, params);
 		}
 
 		return params;
@@ -71,15 +94,9 @@ public class RenderParametersPool {
 	public static void put(
 		HttpServletRequest req, String plid, String portletId, Map params) {
 
-		HttpSession ses = req.getSession();
+		Map plidPool = get(req, plid);
 
-		if (plid == null) {
-			return;
-		}
-
-		String rppId = plid + RenderParametersPool.class.getName() + portletId;
-
-		_getRenderParametersPool(ses).put(rppId, params);
+		plidPool.put(portletId, params);
 	}
 
 	private static Map _getRenderParametersPool(HttpSession ses) {

@@ -142,6 +142,14 @@ public class VelocityVariables {
 				"fullTemplatesPath",
 				ctxName + VelocityResourceListener.SERVLET_SEPARATOR +
 					theme.getTemplatesPath());
+
+			// Init
+
+			vc.put(
+				"init",
+				themeDisplay.getPathContext() +
+					VelocityResourceListener.SERVLET_SEPARATOR +
+						"/html/themes/_common/templates/init.vm");
 		}
 
 		// Tiles attributes

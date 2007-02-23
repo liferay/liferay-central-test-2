@@ -2,26 +2,26 @@
 	<div id="navigation">
 		<ul>		
 			#foreach ( $nav_item in $nav_items )
-				#parse("$full_templates_path/init_navigation.vm")
-	
-				#if ( $is_selected )
-					#set ( $current_item_class = "selected" )
+				#if ( $nav_item.isSelected($selectable, $page, $ancestor_layout_id) )
+					#set ( $nav_item_class = "selected" )
 				#else
-					#set ( $current_item_class = "" )
+					#set ( $nav_item_class = "" )
 				#end
+
+				<li class="$nav_item_class">
+					<a href="$nav_item.getResetLayoutURL($request)" $nav_item.getTarget()><span>$nav_item.getName($locale)</span></a>
 	
-				<li class="$current_item_class">
-					 <a href="$item_url" $item_target><span>$item_text</span></a>
-	
-					 #if ( $has_children )
+					#set ( $nav_children = $nav_item.getChildren() )
+
+					#if ( $nav_children.size() > 0 )
 						<ul class="child-menu">
-							#foreach ( $children in $nav_children )
+							#foreach ( $nav_child in $nav_children )
 								<li>
-									<a href="$portal.getLayoutURL($children, $themeDisplay)">$children.getName($locale)</a>
+									<a href="$nav_child.getResetLayoutURL($request)" $nav_child.getTarget()>$nav_child.getName($locale)</a>
 								</li>
 							#end
 						</ul>
-					 #end
+					#end
 				</li>
 			#end
 		</ul>

@@ -1504,6 +1504,7 @@ public class PortalUtil {
 		_reservedParams = CollectionFactory.getHashSet();
 
 		_reservedParams.add("p_l_id");
+		_reservedParams.add("p_l_reset");
 		_reservedParams.add("p_p_id");
 		_reservedParams.add("p_p_action");
 		_reservedParams.add("p_p_state");
