@@ -1381,24 +1381,29 @@ public class MailUtil {
 		}
 	}
 
-	private static void _getFolders(List list, Folder[] folders)
-		throws MessagingException {
-
+	private static void _getFolders(List list, Folder[] folders) {
 		for (int i = 0; i < folders.length; i++) {
 			Folder folder = folders[i];
 
-			int folderType = folder.getType();
+			try {
+				int folderType = folder.getType();
 
-			if ((folderType & IMAPFolder.HOLDS_MESSAGES) != 0) {
-				MailFolder mailFolder = new MailFolder(
-					folder.getName(), folder.getMessageCount(),
-					folder.getUnreadMessageCount());
+				if ((folderType & IMAPFolder.HOLDS_MESSAGES) != 0) {
+					MailFolder mailFolder = new MailFolder(
+						folder.getName(), folder.getMessageCount(),
+						folder.getUnreadMessageCount());
 
-				list.add(mailFolder);
+					list.add(mailFolder);
+				}
+
+				if ((folderType & IMAPFolder.HOLDS_FOLDERS) != 0) {
+					_getFolders(list, folder.list());
+				}
 			}
-
-			if ((folderType & IMAPFolder.HOLDS_FOLDERS) != 0) {
-				_getFolders(list, folder.list());
+			catch (MessagingException me) {
+				_log.error(
+					"Skipping IMAP folder that rendered an exception.  " +
+					me.getMessage());
 			}
 		}
 	}
