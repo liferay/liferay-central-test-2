@@ -55,7 +55,7 @@ if (event != null) {
 	}
 }
 
-String durationHour = String.valueOf(BeanParamUtil.getInteger(event, request, "durationHour"));
+String durationHour = String.valueOf(BeanParamUtil.getInteger(event, request, "durationHour", 1));
 String durationMinute = String.valueOf(BeanParamUtil.getInteger(event, request, "durationMinute"));
 String type = BeanParamUtil.getString(event, request, "type");
 boolean repeating = BeanParamUtil.getBoolean(event, request, "repeating");
@@ -270,7 +270,7 @@ if (Validator.isNull(endDateOccurrenceParam) && (event != null)) {
 	}
 }
 
-String remindBy = BeanParamUtil.getString(event, request, "remindBy", CalEventImpl.REMIND_BY_NONE);
+String remindBy = BeanParamUtil.getString(event, request, "remindBy", CalEventImpl.REMIND_BY_EMAIL);
 int firstReminder = BeanParamUtil.getInteger(event, request, "firstReminder", (int)Time.MINUTE * 15);
 int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", (int)Time.MINUTE * 5);
 %>
@@ -297,13 +297,13 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	}
 
 	function <portlet:namespace />showTable(id) {
-		document.all["<portlet:namespace />neverTable"].style.display = "none";
-		document.all["<portlet:namespace />dailyTable"].style.display = "none";
-		document.all["<portlet:namespace />weeklyTable"].style.display = "none";
-		document.all["<portlet:namespace />monthlyTable"].style.display = "none";
-		document.all["<portlet:namespace />yearlyTable"].style.display = "none";
+		document.getElementById("<portlet:namespace />neverTable").style.display = "none";
+		document.getElementById("<portlet:namespace />dailyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />weeklyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />monthlyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />yearlyTable").style.display = "none";
 
-		document.all[id].style.display = "block";
+		document.getElementById(id).style.display = "block";
 	}
 
 	function <portlet:namespace />saveEvent() {
@@ -413,7 +413,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-field model="<%= CalEvent.class %>" bean="<%= event %>" field="title" />
+		<liferay-ui:input-field model="<%= CalEvent.class %>" field="title" defaultValue="<%= event == null ? LanguageUtil.get(pageContext, "new-event") : event.getTitle() %>" />
 	</td>
 </tr>
 <tr>
