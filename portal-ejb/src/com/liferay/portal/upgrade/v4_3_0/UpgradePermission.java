@@ -27,7 +27,7 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.LongPKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
@@ -60,29 +60,28 @@ public class UpgradePermission extends UpgradeProcess {
 
 		// Resource
 
-		LongPKUpgradeColumnImpl longPKUpgradeColumn =
-			new LongPKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			ResourceImpl.TABLE_NAME, ResourceImpl.TABLE_COLUMNS,
-			longPKUpgradeColumn);
+			pkUpgradeColumn);
 
 		upgradeTable.updateTable();
 
 		// Permission
 
-		ValueMapper resourcePKMapper = longPKUpgradeColumn.getValueMapper();
+		ValueMapper resourcePKMapper = pkUpgradeColumn.getValueMapper();
 
-		longPKUpgradeColumn = new LongPKUpgradeColumnImpl(0, true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			PermissionImpl.TABLE_NAME, PermissionImpl.TABLE_COLUMNS,
-			longPKUpgradeColumn,
+			pkUpgradeColumn,
 			new SwapUpgradeColumnImpl("resourceId", resourcePKMapper));
 
 		upgradeTable.updateTable();
 
-		ValueMapper permissionPKMapper = longPKUpgradeColumn.getValueMapper();
+		ValueMapper permissionPKMapper = pkUpgradeColumn.getValueMapper();
 
 		// Groups_Permissions
 

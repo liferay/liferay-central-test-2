@@ -26,12 +26,17 @@ package com.liferay.portal.upgrade.util;
  * <a href="UpgradeColumn.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public interface UpgradeColumn {
 
 	public boolean isApplicable(int pos, String name);
 
+	public Integer getNewColumnType(Integer defaultType);
+
 	public Object getNewValue(Object oldValue) throws Exception;
+
+	public Integer getOldColumnType(Integer defaultType);
 
 }

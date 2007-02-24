@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade.util;
 
 import com.liferay.portal.upgrade.StagnantRowException;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
@@ -81,8 +82,11 @@ public class DefaultUpgradeTableImpl
 			}
 			else {
 				try {
-					Object oldValue = getValue(
-						rs, (String)columns[i][0], (Integer)columns[i][1]);
+					Integer columnType = _upgradeColumns[i].getOldColumnType(
+						(Integer)columns[i][1]);
+					
+					Object oldValue =
+						getValue(rs, (String)columns[i][0], columnType);
 
 					Object newValue = _upgradeColumns[i].getNewValue(oldValue);
 
@@ -98,6 +102,17 @@ public class DefaultUpgradeTableImpl
 		}
 
 		return sb.toString();
+	}
+
+	public void setColumn(
+			PreparedStatement ps, int index, Integer type, String value)
+		throws Exception {
+
+		if (_upgradeColumns[index] != null) {
+			type = _upgradeColumns[index].getNewColumnType(type);
+		}
+
+		super.setColumn(ps, index, type, value);
 	}
 
 	protected void prepareUpgradeColumns(UpgradeColumn upgradeColumn) {

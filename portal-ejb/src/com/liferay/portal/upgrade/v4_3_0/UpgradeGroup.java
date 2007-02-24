@@ -32,7 +32,7 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.LongPKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
@@ -92,17 +92,16 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		// Group_
 
-		LongPKUpgradeColumnImpl longPKUpgradeColumn =
-			new LongPKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS, longPKUpgradeColumn);
+			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS, pkUpgradeColumn);
 
 		upgradeTable.updateTable();
 
 		// Groups_Orgs
 
-		_groupIdMapper = longPKUpgradeColumn.getValueMapper();
+		_groupIdMapper = pkUpgradeColumn.getValueMapper();
 
 		Set groupExceptions = new HashSet();
 
@@ -118,8 +117,7 @@ public class UpgradeGroup extends UpgradeProcess {
 			new SwapUpgradeColumnImpl("groupId", _groupIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_GROUPS_ORGS, _COLUMNS_GROUPS_ORGS,
-			upgradeGroupIdColumn);
+			_TABLE_GROUPS_ORGS, _COLUMNS_GROUPS_ORGS, upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
 

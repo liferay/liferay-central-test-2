@@ -26,7 +26,7 @@ import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.LongPKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 
 import org.apache.commons.logging.Log;
@@ -54,7 +54,7 @@ public class UpgradePhone extends UpgradeProcess {
 	private void _upgradePhone() throws Exception {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			PhoneImpl.TABLE_NAME, PhoneImpl.TABLE_COLUMNS,
-			new LongPKUpgradeColumnImpl());
+			new PKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
 	}

@@ -26,20 +26,33 @@ import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 
 /**
- * <a href="LongPKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public class LongPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public LongPKUpgradeColumnImpl() {
+	public PKUpgradeColumnImpl() {
 		this(0, false);
 	}
+	
+	public PKUpgradeColumnImpl(String name, boolean trackValues) {
+		this(name, null, null, trackValues);
+	}
 
-	public LongPKUpgradeColumnImpl(int pos, boolean trackValues) {
-		super(pos);
+	public PKUpgradeColumnImpl(int pos, boolean trackValues) {
+		this(pos, null, null, trackValues);
+	}
 
+	public PKUpgradeColumnImpl(String name, Integer oldColumnType,
+							   Integer newColumnType, boolean trackValues) {
+		
+		super(name);
+
+		_oldColumnType = oldColumnType;
+		_newColumnType = newColumnType;
 		_trackValues = trackValues;
 
 		if (_trackValues) {
@@ -47,13 +60,26 @@ public class LongPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		}
 	}
 
-	public LongPKUpgradeColumnImpl(String name, boolean trackValues) {
-		super(name);
+	public PKUpgradeColumnImpl(int pos, Integer oldColumnType,
+							   Integer newColumnType, boolean trackValues) {
+		
+		super(pos);
 
+		_oldColumnType = oldColumnType;
+		_newColumnType = newColumnType;
 		_trackValues = trackValues;
 
 		if (_trackValues) {
 			_valueMapper = new MemoryValueMapper();
+		}
+	}
+
+	public Integer getNewColumnType(Integer defaultType) {
+		if (_newColumnType == null) {
+			return defaultType;
+		}
+		else {
+			return _newColumnType;
 		}
 	}
 
@@ -68,10 +94,21 @@ public class LongPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		return newValue;
 	}
 
+	public Integer getOldColumnType(Integer defaultType) {
+		if (_oldColumnType == null) {
+			return defaultType;
+		}
+		else {
+			return _oldColumnType;
+		}
+	}
+
 	public ValueMapper getValueMapper() {
 		return _valueMapper;
 	}
 
+	private Integer _newColumnType;
+	private Integer _oldColumnType;
 	private boolean _trackValues;
 	private ValueMapper _valueMapper;
 

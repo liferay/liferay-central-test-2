@@ -26,7 +26,7 @@ import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.LongPKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 
 import org.apache.commons.logging.Log;
@@ -54,7 +54,7 @@ public class UpgradeWebsite extends UpgradeProcess {
 	private void _upgradeWebsite() throws Exception {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS,
-			new LongPKUpgradeColumnImpl());
+			new PKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
 	}
