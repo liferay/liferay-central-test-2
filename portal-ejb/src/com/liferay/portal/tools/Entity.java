@@ -47,16 +47,16 @@ public class Entity {
 
 	public Entity(String name) {
 		this(null, null, null, name, null, false, true, null, null, null, null,
-			 null, null, null, null, null, null);
+			 null, null, null, null, null, null, null);
 	}
 
 	public Entity(String packagePath, String portletName,
 				  String portletShortName, String name, String table,
 				  boolean localService, boolean remoteService,
 				  String persistenceClass, String dataSource,
-				  String sessionFactory, List pkList, List regularColList,
-				  List collectionList, List columnList, EntityOrder order,
-				  List finderList, List referenceList) {
+				  String sessionFactory, String txManager, List pkList,
+				  List regularColList, List collectionList, List columnList,
+				  EntityOrder order, List finderList, List referenceList) {
 
 		_packagePath = packagePath;
 		_portletName = portletName;
@@ -69,6 +69,8 @@ public class Entity {
 		_dataSource = GetterUtil.getString(dataSource, "liferayDataSource");
 		_sessionFactory = GetterUtil.getString(
 			sessionFactory, "liferaySessionFactory");
+		_txManager = GetterUtil.getString(
+			txManager, "liferayTransactionManager");
 		_pkList = pkList;
 		_regularColList = regularColList;
 		_collectionList = collectionList;
@@ -128,6 +130,10 @@ public class Entity {
 
 	public String getSessionFactory() {
 		return _sessionFactory;
+	}
+
+	public String getTXManager() {
+		return _txManager;
 	}
 
 	public String getPKClassName() {
@@ -264,6 +270,7 @@ public class Entity {
 	private String _persistenceClass;
 	private String _dataSource;
 	private String _sessionFactory;
+	private String _txManager;
 	private List _pkList;
 	private List _regularColList;
 	private List _collectionList;

@@ -93,13 +93,20 @@ Point "spring.configs" in portal.properties to load your custom Spring XML with
 the defintions of your custom data source and session factory. Then set the
 data-source and session-factory values to your custom values.
 
-The data-source value specifies the the data source target that is set to the
+The data-source value specifies the data source target that is set to the
 persistence class. The default value is the Liferay data source. This is used in
-conjunction with session-factory.
+conjunction with session-factory. See data-source-spring-professional.xml (or
+data-source-spring-enterprise.xml).
 
-The session-factory value specifies the the session factory that is set to the
+The session-factory value specifies the session factory that is set to the
 persistence class. The default value is the Liferay session factory. This is
-used in conjunction with data-source.
+used in conjunction with data-source. See data-source-spring-professional.xml
+(or data-source-spring-enterprise.xml).
+
+The tx-manager value specifies the transaction manager that Spring uses. The
+default value is the Spring Hibernate transaction manager that wraps the Liferay
+data source and session factory. See data-source-spring-professional.xml (or
+data-source-spring-enterprise.xml).
 -->
 <!ATTLIST entity
 	name CDATA #REQUIRED
@@ -109,6 +116,7 @@ used in conjunction with data-source.
 	persistence-class CDATA #IMPLIED
 	data-source CDATA #IMPLIED
 	session-factory CDATA #IMPLIED
+	tx-manager CDATA #IMPLIED
 >
 
 <!--

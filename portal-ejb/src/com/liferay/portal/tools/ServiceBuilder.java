@@ -428,6 +428,8 @@ public class ServiceBuilder {
 				String dataSource = entityEl.attributeValue("data-source");
 				String sessionFactory = entityEl.attributeValue(
 					"session-factory");
+				String txManager = entityEl.attributeValue(
+					"tx-manager");
 
 				Iterator itr2 = null;
 
@@ -623,9 +625,9 @@ public class ServiceBuilder {
 					new Entity(
 						_packagePath, _portletName, _portletShortName, ejbName,
 						table, localService, remoteService, persistenceClass,
-						dataSource, sessionFactory, pkList, regularColList,
-						collectionList, columnList, order, finderList,
-						referenceList));
+						dataSource, sessionFactory, txManager, pkList,
+						regularColList, collectionList, columnList, order,
+						finderList, referenceList));
 			}
 
 			List exceptionList = new ArrayList();
@@ -5492,7 +5494,7 @@ public class ServiceBuilder {
 
 		sb.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.transaction\" class=\"org.springframework.transaction.interceptor.TransactionProxyFactoryBean\" lazy-init=\"true\">\n");
 		sb.append("\t\t<property name=\"transactionManager\">\n");
-		sb.append("\t\t\t<ref bean=\"liferayTransactionManager\" />\n");
+		sb.append("\t\t\t<ref bean=\"" + entity.getTXManager() + "\" />\n");
 		sb.append("\t\t</property>\n");
 		sb.append("\t\t<property name=\"target\">\n");
 		sb.append("\t\t\t<ref bean=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" />\n");
