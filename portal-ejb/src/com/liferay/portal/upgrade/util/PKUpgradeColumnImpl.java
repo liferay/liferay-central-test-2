@@ -37,7 +37,7 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public PKUpgradeColumnImpl() {
 		this(0, false);
 	}
-	
+
 	public PKUpgradeColumnImpl(String name, boolean trackValues) {
 		this(name, null, null, trackValues);
 	}
@@ -48,7 +48,7 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public PKUpgradeColumnImpl(String name, Integer oldColumnType,
 							   Integer newColumnType, boolean trackValues) {
-		
+
 		super(name);
 
 		_oldColumnType = oldColumnType;
@@ -62,7 +62,7 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public PKUpgradeColumnImpl(int pos, Integer oldColumnType,
 							   Integer newColumnType, boolean trackValues) {
-		
+
 		super(pos);
 
 		_oldColumnType = oldColumnType;
@@ -71,6 +71,15 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 		if (_trackValues) {
 			_valueMapper = new MemoryValueMapper();
+		}
+	}
+
+	public Integer getOldColumnType(Integer defaultType) {
+		if (_oldColumnType == null) {
+			return defaultType;
+		}
+		else {
+			return _oldColumnType;
 		}
 	}
 
@@ -94,21 +103,12 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		return newValue;
 	}
 
-	public Integer getOldColumnType(Integer defaultType) {
-		if (_oldColumnType == null) {
-			return defaultType;
-		}
-		else {
-			return _oldColumnType;
-		}
-	}
-
 	public ValueMapper getValueMapper() {
 		return _valueMapper;
 	}
 
-	private Integer _newColumnType;
 	private Integer _oldColumnType;
+	private Integer _newColumnType;
 	private boolean _trackValues;
 	private ValueMapper _valueMapper;
 

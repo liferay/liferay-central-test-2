@@ -84,9 +84,9 @@ public class DefaultUpgradeTableImpl
 				try {
 					Integer columnType = _upgradeColumns[i].getOldColumnType(
 						(Integer)columns[i][1]);
-					
-					Object oldValue =
-						getValue(rs, (String)columns[i][0], columnType);
+
+					Object oldValue = getValue(
+						rs, (String)columns[i][0], columnType);
 
 					Object newValue = _upgradeColumns[i].getNewValue(oldValue);
 

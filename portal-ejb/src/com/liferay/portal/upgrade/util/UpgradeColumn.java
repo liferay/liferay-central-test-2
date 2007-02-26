@@ -33,10 +33,10 @@ public interface UpgradeColumn {
 
 	public boolean isApplicable(int pos, String name);
 
+	public Integer getOldColumnType(Integer defaultType);
+
 	public Integer getNewColumnType(Integer defaultType);
 
 	public Object getNewValue(Object oldValue) throws Exception;
-
-	public Integer getOldColumnType(Integer defaultType);
 
 }
