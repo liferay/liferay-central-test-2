@@ -1401,9 +1401,7 @@ public class MailUtil {
 				}
 			}
 			catch (MessagingException me) {
-				_log.error(
-					"Skipping IMAP folder that rendered an exception.  " +
-					me.getMessage());
+				_log.error("Skipping IMAP folder because " + me.getMessage());
 			}
 		}
 	}
