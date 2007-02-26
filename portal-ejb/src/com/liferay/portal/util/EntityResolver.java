@@ -170,6 +170,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//Liferay//DTD Service Builder 4.3.0//EN",
+			"liferay-service-builder_4_3_0.dtd"
+		),
+
+		new KeyValuePair(
 			"-//Pramati Technologies //DTD Pramati J2ee Server 3.0//EN",
 			"pramati-j2ee-server_3_0.dtd"
 		),
