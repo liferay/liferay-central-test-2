@@ -93,11 +93,11 @@ Point "spring.configs" in portal.properties to load your custom Spring XML with
 the defintions of your custom data source and session factory. Then set the
 data-source and session-factory values to your custom values.
 
-The data-source value specifies the the data source target that is set to the
+The data-source value specifies the data source target that is set to the
 persistence class. The default value is the Liferay data source. This is used in
 conjunction with session-factory.
 
-The session-factory value specifies the the session factory that is set to the
+The session-factory value specifies the session factory that is set to the
 persistence class. The default value is the Liferay session factory. This is
 used in conjunction with data-source.
 -->
