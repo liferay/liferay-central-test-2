@@ -27,12 +27,12 @@ import com.liferay.portal.deploy.AutoDeployPortletListener;
 import com.liferay.portal.deploy.AutoDeployThemeListener;
 import com.liferay.portal.kernel.deploy.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.AutoDeployUtil;
-import com.liferay.portal.kernel.plugin.Plugin;
+import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
-import com.liferay.portal.plugin.PluginException;
-import com.liferay.portal.plugin.PluginUtil;
+import com.liferay.portal.plugin.PluginPackageException;
+import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.plugin.RepositoryReport;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
@@ -405,7 +405,7 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void reloadRepositories(ActionRequest req) throws Exception {
-		RepositoryReport report = PluginUtil.reloadRepositories();
+		RepositoryReport report = PluginPackageUtil.reloadRepositories();
 
 		SessionMessages.add(req, WebKeys.PLUGIN_REPOSITORY_REPORT, report);
 	}
@@ -549,7 +549,7 @@ public class EditServerAction extends PortletAction {
 
 	private String _getDestFileName(
 			String recommendedWARName, String url, String fileName)
-		throws PluginException {
+		throws PluginPackageException {
 
 		String destFileName = null;
 
@@ -558,10 +558,10 @@ public class EditServerAction extends PortletAction {
 		}
 
 		if (Validator.isNull(destFileName)) {
-			Plugin plugin = PluginUtil.getPluginByURL(url);
+			PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByURL(url);
 
-			if (plugin != null) {
-				destFileName = plugin.getWARName();
+			if (pluginPackage != null) {
+				destFileName = pluginPackage.getWARName();
 			}
 		}
 

@@ -43,7 +43,7 @@ public class RepositoryReport {
 		_reportMap.put(repositoryURL, SUCCESS);
 	}
 
-	public void addError(String repositoryURL, PluginException pe) {
+	public void addError(String repositoryURL, PluginPackageException pe) {
 		StringBuffer sb = new StringBuffer();
 
 		if (Validator.isNotNull(pe.getMessage())) {

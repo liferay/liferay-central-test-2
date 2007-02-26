@@ -358,6 +358,277 @@ public class PluginSettingPersistence extends BasePersistence {
 		}
 	}
 
+	public List findByC_I_T(String companyId, String pluginId, String pluginType)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (pluginId == null) {
+				query.append("pluginId IS NULL");
+			}
+			else {
+				query.append("pluginId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (pluginType == null) {
+				query.append("pluginType IS NULL");
+			}
+			else {
+				query.append("pluginType = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (pluginId != null) {
+				q.setString(queryPos++, pluginId);
+			}
+
+			if (pluginType != null) {
+				q.setString(queryPos++, pluginType);
+			}
+
+			return q.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByC_I_T(String companyId, String pluginId,
+		String pluginType, int begin, int end) throws SystemException {
+		return findByC_I_T(companyId, pluginId, pluginType, begin, end, null);
+	}
+
+	public List findByC_I_T(String companyId, String pluginId,
+		String pluginType, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (pluginId == null) {
+				query.append("pluginId IS NULL");
+			}
+			else {
+				query.append("pluginId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (pluginType == null) {
+				query.append("pluginType IS NULL");
+			}
+			else {
+				query.append("pluginType = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (pluginId != null) {
+				q.setString(queryPos++, pluginId);
+			}
+
+			if (pluginType != null) {
+				q.setString(queryPos++, pluginType);
+			}
+
+			return QueryUtil.list(q, getDialect(), begin, end);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PluginSetting findByC_I_T_First(String companyId, String pluginId,
+		String pluginType, OrderByComparator obc)
+		throws NoSuchPluginSettingException, SystemException {
+		List list = findByC_I_T(companyId, pluginId, pluginType, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PluginSetting exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("pluginId=");
+			msg.append(pluginId);
+			msg.append(", ");
+			msg.append("pluginType=");
+			msg.append(pluginType);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPluginSettingException(msg.toString());
+		}
+		else {
+			return (PluginSetting)list.get(0);
+		}
+	}
+
+	public PluginSetting findByC_I_T_Last(String companyId, String pluginId,
+		String pluginType, OrderByComparator obc)
+		throws NoSuchPluginSettingException, SystemException {
+		int count = countByC_I_T(companyId, pluginId, pluginType);
+		List list = findByC_I_T(companyId, pluginId, pluginType, count - 1,
+				count, obc);
+
+		if (list.size() == 0) {
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PluginSetting exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("pluginId=");
+			msg.append(pluginId);
+			msg.append(", ");
+			msg.append("pluginType=");
+			msg.append(pluginType);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPluginSettingException(msg.toString());
+		}
+		else {
+			return (PluginSetting)list.get(0);
+		}
+	}
+
+	public PluginSetting[] findByC_I_T_PrevAndNext(long pluginSettingId,
+		String companyId, String pluginId, String pluginType,
+		OrderByComparator obc)
+		throws NoSuchPluginSettingException, SystemException {
+		PluginSetting pluginSetting = findByPrimaryKey(pluginSettingId);
+		int count = countByC_I_T(companyId, pluginId, pluginType);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (pluginId == null) {
+				query.append("pluginId IS NULL");
+			}
+			else {
+				query.append("pluginId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (pluginType == null) {
+				query.append("pluginType IS NULL");
+			}
+			else {
+				query.append("pluginType = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (pluginId != null) {
+				q.setString(queryPos++, pluginId);
+			}
+
+			if (pluginType != null) {
+				q.setString(queryPos++, pluginType);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					pluginSetting);
+			PluginSetting[] array = new PluginSettingImpl[3];
+			array[0] = (PluginSetting)objArray[0];
+			array[1] = (PluginSetting)objArray[1];
+			array[2] = (PluginSetting)objArray[2];
+
+			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		Session session = null;
@@ -442,6 +713,16 @@ public class PluginSettingPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByC_I_T(String companyId, String pluginId,
+		String pluginType) throws SystemException {
+		Iterator itr = findByC_I_T(companyId, pluginId, pluginType).iterator();
+
+		while (itr.hasNext()) {
+			PluginSetting pluginSetting = (PluginSetting)itr.next();
+			remove(pluginSetting);
+		}
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -476,6 +757,81 @@ public class PluginSettingPersistence extends BasePersistence {
 
 			if (companyId != null) {
 				q.setString(queryPos++, companyId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByC_I_T(String companyId, String pluginId, String pluginType)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (pluginId == null) {
+				query.append("pluginId IS NULL");
+			}
+			else {
+				query.append("pluginId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (pluginType == null) {
+				query.append("pluginType IS NULL");
+			}
+			else {
+				query.append("pluginType = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (pluginId != null) {
+				q.setString(queryPos++, pluginId);
+			}
+
+			if (pluginType != null) {
+				q.setString(queryPos++, pluginType);
 			}
 
 			Iterator itr = q.list().iterator();

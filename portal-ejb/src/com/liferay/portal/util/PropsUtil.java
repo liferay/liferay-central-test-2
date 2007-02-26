@@ -460,8 +460,6 @@ public class PropsUtil {
 
 	public static final String LAYOUT_DEFAULT_TEMPLATE_ID = "layout.default.template.id";
 
-	public static final String LAYOUT_TEMPLATE_RESTRICTIONS = "layout.template.restrictions";
-
 	public static final String LAYOUT_PARALLEL_RENDER_ENABLE = "layout.parallel.render.enable";
 
 	// Portlet URL

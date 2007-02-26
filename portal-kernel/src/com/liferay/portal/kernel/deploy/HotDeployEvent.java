@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.deploy;
 
+import com.liferay.portal.kernel.plugin.PluginPackage;
+
 import javax.servlet.ServletContext;
 
 /**
@@ -48,7 +50,16 @@ public class HotDeployEvent {
 		return _contextClassLoader;
 	}
 
+	public PluginPackage getPluginPackage() {
+		return _pluginPackage;
+	}
+
+	public void setPluginPackage(PluginPackage pluginPackage) {
+		_pluginPackage = pluginPackage;
+	}
+
 	private ServletContext _servletContext;
 	private ClassLoader _contextClassLoader;
+	private PluginPackage _pluginPackage;
 
 }

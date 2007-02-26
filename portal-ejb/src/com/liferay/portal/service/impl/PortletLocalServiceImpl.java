@@ -25,12 +25,12 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchPortletException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.UserImpl;
-import com.liferay.portal.plugin.PluginUtil;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.service.persistence.PortletUtil;
@@ -220,7 +220,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 	}
 
-	public void initEAR(String[] xmls) {
+	public void initEAR(String[] xmls, PluginPackage pluginPackage) {
 		String scpId = PortletServiceImpl.class.getName() + "." + _SHARED_KEY;
 
 		Map portletsPool = (Map)SimpleCachePool.get(scpId);
@@ -235,10 +235,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			List servletURLPatterns = _readWebXML(xmls[4]);
 
 			Set portletIds =
-				_readPortletXML(xmls[0], portletsPool, servletURLPatterns);
+				_readPortletXML(xmls[0], portletsPool, servletURLPatterns,
+					pluginPackage);
 
 			portletIds.addAll(
-				_readPortletXML(xmls[1], portletsPool, servletURLPatterns));
+				_readPortletXML(xmls[1], portletsPool, servletURLPatterns,
+					pluginPackage));
 
 			Set liferayPortletIds =
 				_readLiferayPortletXML(xmls[2], portletsPool);
@@ -299,7 +301,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 	}
 
-	public List initWAR(String servletContextName, String[] xmls) {
+	public List initWAR(String servletContextName, String[] xmls,
+						PluginPackage pluginPackage) {
 		List portlets = new ArrayList();
 
 		String scpId = PortletServiceImpl.class.getName() + "." + _SHARED_KEY;
@@ -316,7 +319,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			List servletPatterns = _readWebXML(xmls[2]);
 
 			Set portletIds = _readPortletXML(
-				servletContextName, xmls[0], portletsPool, servletPatterns);
+				servletContextName, xmls[0], portletsPool, servletPatterns,
+				pluginPackage);
 
 			Set liferayPortletIds = _readLiferayPortletXML(
 				servletContextName, xmls[1], portletsPool);
@@ -512,6 +516,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				// portlet WAR is not yet loaded
 
 				if (portletModel != null) {
+					portletModel.setPluginPackage(portlet.getPluginPackage());
+					portletModel.setDefaultPluginSetting(
+						portlet.getDefaultPluginSetting());
 					portletModel.setRoles(portlet.getRoles());
 					portletModel.setActive(portlet.getActive());
 				}
@@ -524,15 +531,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private Set _readPortletXML(
-			String xml, Map portletsPool, List servletURLPatterns)
+			String xml, Map portletsPool, List servletURLPatterns,
+			PluginPackage pluginPackage)
 		throws DocumentException, IOException {
 
-		return _readPortletXML(null, xml, portletsPool, servletURLPatterns);
+		return _readPortletXML(
+			null, xml, portletsPool, servletURLPatterns, pluginPackage);
 	}
 
 	private Set _readPortletXML(
 			String servletContextName, String xml, Map portletsPool,
-			List servletURLPatterns)
+			List servletURLPatterns, PluginPackage pluginPackage)
 		throws DocumentException, IOException {
 
 		Set portletIds = new HashSet();
@@ -736,6 +745,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 
 			portletModel.getUserAttributes().addAll(userAttributes);
+
+			portletModel.setPluginPackage(pluginPackage);
 		}
 
 		return portletIds;
@@ -1071,13 +1082,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.getCustomUserAttributes().putAll(
 					customUserAttributes);
 			}
-		}
-
-		Element moduleIdEl = root.element("module-id");
-
-		if (moduleIdEl != null) {
-			PluginUtil.registerPlugin(moduleIdEl.getText());
-			//portletModel.setModuleId(moduleIdEl.getText());
 		}
 
 		return liferayPortletIds;

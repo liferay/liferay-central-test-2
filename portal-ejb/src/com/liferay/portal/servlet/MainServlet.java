@@ -22,9 +22,11 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.deploy.HotDeployPluginPackageListener;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.job.Scheduler;
+import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.StringPool;
@@ -187,6 +189,17 @@ public class MainServlet extends ActionServlet {
 
 			ctx.setAttribute(WebKeys.IMAGE_PATH, rootPath + "/image");
 
+			// Read bundled plugins package info
+
+			PluginPackage pluginPackage = null;
+			try {
+				pluginPackage =
+					HotDeployPluginPackageListener.readPluginPackage(ctx);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+
 			// Initialize portlets
 
 			if (_log.isDebugEnabled()) {
@@ -205,7 +218,7 @@ public class MainServlet extends ActionServlet {
 					Http.URLtoString(ctx.getResource("/WEB-INF/web.xml"))
 				};
 
-				PortletLocalServiceUtil.initEAR(xmls);
+				PortletLocalServiceUtil.initEAR(xmls, pluginPackage);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -255,7 +268,7 @@ public class MainServlet extends ActionServlet {
 						"/WEB-INF/liferay-layout-templates-ext.xml"))
 				};
 
-				LayoutTemplateLocalUtil.init(ctx, xmls);
+				LayoutTemplateLocalUtil.init(ctx, xmls, pluginPackage);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -275,7 +288,7 @@ public class MainServlet extends ActionServlet {
 						"/WEB-INF/liferay-look-and-feel-ext.xml"))
 				};
 
-				ThemeLocalUtil.init(ctx, xmls);
+				ThemeLocalUtil.init(ctx, xmls, pluginPackage);
 			}
 			catch (Exception e) {
 				_log.error(e, e);

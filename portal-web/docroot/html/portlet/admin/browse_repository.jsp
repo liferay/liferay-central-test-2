@@ -38,7 +38,7 @@ try {
 
 <br><br>
 
-<input type="hidden" name="<portlet:namespace/>type" value="<%=type%>">
+<input type="hidden" name="<portlet:namespace/>pluginType" value="<%=pluginType%>">
 
 	<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
@@ -68,7 +68,7 @@ try {
 				<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
 
 				<%
-				Iterator itr = PluginUtil.getAvailableTags().iterator();
+				Iterator itr = PluginPackageUtil.getAvailableTags().iterator();
 
 				while (itr.hasNext()) {
 					String curTag = (String)itr.next();
@@ -88,7 +88,7 @@ try {
 				<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
 
 				<%
-				String[] repositoryURLs = PluginUtil.getRepositoryURLs();
+				String[] repositoryURLs = PluginPackageUtil.getRepositoryURLs();
 
 				for (int i = 0; i < repositoryURLs.length; i++) {
 					String curRepositoryURL = repositoryURLs[i];
@@ -125,23 +125,14 @@ try {
 	<%
 	List headerNames = new ArrayList();
 
-	if (type.equals("theme")) {
-		headerNames.add("theme-package");
-	}
-	else if (type.equals("portlet")) {
-		headerNames.add("portlet-package");
-	}
-	else if (type.equals("layout-template")) {
-		headerNames.add("layout-template-package");
-	}
-
+	headerNames.add(pluginType + "-package");
 	headerNames.add("tags");
 	headerNames.add("status");
 	headerNames.add(StringPool.BLANK);
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	Hits hits = PluginUtil.search(keywords, type, tag, license, repositoryURL, status);
+	Hits hits = PluginPackageUtil.search(keywords, pluginType, tag, license, repositoryURL, status);
 
 	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 	int total = hits.getLength();
@@ -153,15 +144,15 @@ try {
 	for (int i = 0; i < results.getLength(); i++) {
 		Document doc = results.doc(i);
 
-		String pluginModuleId = doc.get("moduleId");
-		String pluginName = doc.get(LuceneFields.TITLE);
-		String pluginVersion = doc.get("version");
-		String pluginTags = doc.get("tags");
-		String pluginShortDescription = doc.get("shortDescription");
-		String pluginRepositoryURL = doc.get("repositoryURL");
-		String pluginStatus = doc.get("status");
+		String pluginPackageModuleId = doc.get("moduleId");
+		String pluginPackageName = doc.get(LuceneFields.TITLE);
+		String pluginPackageVersion = doc.get("version");
+		String pluginPackageTags = doc.get("tags");
+		String pluginPackageShortDescription = doc.get("shortDescription");
+		String pluginPackageRepositoryURL = doc.get("repositoryURL");
+		String pluginPackageStatus = doc.get("status");
 
-		ResultRow row = new ResultRow(doc, pluginModuleId, i);
+		ResultRow row = new ResultRow(doc, pluginPackageModuleId, i);
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -172,30 +163,38 @@ try {
 		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("tabs1", tabs1);
 		rowURL.setParameter("tabs2", tabs2);
-		rowURL.setParameter("moduleId", pluginModuleId);
-		rowURL.setParameter("repositoryURL", pluginRepositoryURL);
+		rowURL.setParameter("moduleId", pluginPackageModuleId);
+		rowURL.setParameter("repositoryURL", pluginPackageRepositoryURL);
 
 		// Name and short description
 
 		StringBuffer sb = new StringBuffer();
 
+		sb.append("<a href='");
+		sb.append(rowURL.toString());
+		sb.append("'>");
 		sb.append("<b>");
-		sb.append(pluginName);
+		sb.append(pluginPackageName);
 		sb.append("</b> ");
-		sb.append(pluginVersion);
+		sb.append(pluginPackageVersion);
+		sb.append("</a>");
 
-		if (Validator.isNotNull(pluginShortDescription)) {
+		if (Validator.isNotNull(pluginPackageShortDescription)) {
 			sb.append("<br>");
 			sb.append("<span style=\"font-size: xx-small;\">");
-			sb.append(pluginShortDescription);
+			sb.append(LanguageUtil.get(pageContext, "package-id"));
+			sb.append(": ");
+			sb.append(pluginPackageModuleId);
+			sb.append("<br>");
+			sb.append(pluginPackageShortDescription);
 			sb.append("</span>");
 		}
 
-		row.addText(sb.toString(), rowURL);
+		row.addText(sb.toString());
 
 		// Tags
 
-		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, pluginTags), null, null, null);
+		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, pluginPackageTags), null, null, null);
 
 		row.addText(rowTextEntry);
 
@@ -203,7 +202,7 @@ try {
 
 		rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-		rowTextEntry.setName(pluginStatus);
+		rowTextEntry.setName(pluginPackageStatus);
 
 		row.addText(rowTextEntry);
 
@@ -221,10 +220,10 @@ try {
 
 	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
-	<c:if test="<%= PluginUtil.getLastUpdateDate() != null %>">
+	<c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
 		<br>
 
-		<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginUtil.getLastUpdateDate())) %><br>
+		<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %><br>
 	</c:if>
 
 	<liferay-util:include page="/html/portlet/admin/repository_report.jsp" />
@@ -235,8 +234,8 @@ try {
 
 <%
 }
-catch (PluginException e) {
-	_log.error(e, e);
+catch (PluginPackageException e) {
+	_log.error("Error browsing the repository", e);
 %>
 
 	<span class="portlet-msg-error">

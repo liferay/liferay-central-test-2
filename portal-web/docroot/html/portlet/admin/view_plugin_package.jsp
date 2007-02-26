@@ -23,7 +23,7 @@
 %>
 
 <%
-Plugin plugin = PluginUtil.getPluginById(moduleId, repositoryURL);
+PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(moduleId, repositoryURL);
 
 PortletURL installURL = renderResponse.createActionURL();
 
@@ -34,7 +34,7 @@ installURL.setParameter("redirect", currentURL.toString());
 
 // Breadcrumbs
 
-breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + plugin.getName() + "</a>");
+breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.getName() + "</a>");
 
 %>
 
@@ -55,7 +55,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + plugin.getName()
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<b><a href="<%= plugin.getPageURL() %>"><%= plugin.getName() %></a></b> (v<%= plugin.getVersion() %>) <a href="<%= plugin.getArtifactURL() %>">[<%= LanguageUtil.get(pageContext, "download") %>]</a>
+		<b><a href="<%= pluginPackage.getPageURL() %>"><%= pluginPackage.getName() %></a></b> (v<%= pluginPackage.getVersion() %>) <a href="<%= pluginPackage.getArtifactURL() %>">[<%= LanguageUtil.get(pageContext, "download") %>]</a>
 	</td>
 </tr>
 <tr>
@@ -64,16 +64,27 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + plugin.getName()
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<%= LanguageUtil.get(pageContext, plugin.getAuthor()) %>
+		<%= LanguageUtil.get(pageContext, pluginPackage.getAuthor()) %>
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "type") %>
+		<%= LanguageUtil.get(pageContext, "types") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<%= LanguageUtil.get(pageContext, plugin.getType()) %>
+		<%
+		Iterator itr = pluginPackage.getTypes().iterator();
+
+		while (itr.hasNext()) {
+			String type = (String)itr.next();
+		%>
+
+			<%= type %><c:if test="<%= itr.hasNext() %>">, </c:if>
+
+		<%
+		}
+		%>
 	</td>
 </tr>
 <tr>
@@ -84,7 +95,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + plugin.getName()
 	<td>
 
 		<%
-		Iterator itr = plugin.getTags().iterator();
+		itr = pluginPackage.getTags().iterator();
 
 		while (itr.hasNext()) {
 			String tag = (String)itr.next();
@@ -106,7 +117,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + plugin.getName()
 	<td>
 
 		<%
-		itr = plugin.getLicenses().iterator();
+		itr = pluginPackage.getLicenses().iterator();
 
 		while (itr.hasNext()) {
 			License license = (License)itr.next();
@@ -142,7 +153,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + plugin.getName()
 	<td>
 
 		<%
-		Iterator itr3 = plugin.getLiferayVersions().iterator();
+		Iterator itr3 = pluginPackage.getLiferayVersions().iterator();
 
 		while (itr3.hasNext()) {
 			String liferayVersion = (String)itr3.next();
@@ -162,7 +173,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + plugin.getName()
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<a href="<%= plugin.getRepositoryURL() %>"><%= plugin.getRepositoryURL() %></a>
+		<a href="<%= pluginPackage.getRepositoryURL() %>"><%= pluginPackage.getRepositoryURL() %></a>
 	</td>
 </tr>
 <tr>
@@ -176,27 +187,27 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + plugin.getName()
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<%= plugin.getShortDescription() %>
+		<%= pluginPackage.getShortDescription() %>
 	</td>
 </tr>
 
-<c:if test="<%= Validator.isNotNull(plugin.getLongDescription()) %>">
+<c:if test="<%= Validator.isNotNull(pluginPackage.getLongDescription()) %>">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "long-description") %>
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<%= plugin.getLongDescription() %>
+			<%= pluginPackage.getLongDescription() %>
 		</td>
 	</tr>
 </c:if>
 
 <%
-List screenshotURLs = plugin.getScreenshotURLs();
+List screenshots = pluginPackage.getScreenshots();
 %>
 
-<c:if test="<%= (screenshotURLs != null) && !screenshotURLs.isEmpty() %>">
+<c:if test="<%= (screenshots != null) && !screenshots.isEmpty() %>">
 	<tr>
 		<td colspan="3">
 			<br>
@@ -210,13 +221,13 @@ List screenshotURLs = plugin.getScreenshotURLs();
 		<td>
 
 			<%
-			itr = screenshotURLs.iterator();
+			itr = screenshots.iterator();
 
 			while (itr.hasNext()) {
-				String screenshotURL = (String)itr.next();
+				Screenshot screenshot = (Screenshot)itr.next();
 			%>
 
-				<a href="<%= screenshotURL %>"><img align="left" src="<%= screenshotURL %>" width="120"></a>
+				<a href="<%= screenshot.getLargeImageURL() %>"><img align="left" src="<%= screenshot.getThumbnailURL() %>" width="120"></a>
 
 			<%
 			}
@@ -230,9 +241,9 @@ List screenshotURLs = plugin.getScreenshotURLs();
 
 <br>
 
-<input type="hidden" name="<portlet:namespace/>url" value="<%= plugin.getArtifactURL() %>">
+<input type="hidden" name="<portlet:namespace/>url" value="<%= pluginPackage.getArtifactURL() %>">
 
-<input class="portlet-form-button" type="button" value='<%=LanguageUtil.get(pageContext, "install")%>' onClick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />installPlugin('remoteDeploy', '<%= downloadProgressId %>', '<%= currentURL %>');">
+<input class="portlet-form-button" type="button" value='<%=LanguageUtil.get(pageContext, "install")%>' onClick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy', '<%= downloadProgressId %>', '<%= currentURL %>');">
 
 <liferay-ui:upload-progress
 	id="<%= downloadProgressId %>"

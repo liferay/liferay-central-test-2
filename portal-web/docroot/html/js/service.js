@@ -626,6 +626,18 @@ Liferay.Service.Portal.Portal = {
 	}
 };
 
+Liferay.Service.Portal.PluginSetting = {
+	serviceClassName: Liferay.Service.Portal.servicePackage + "PluginSetting" + Liferay.Service.classNameSuffix,
+
+	updatePluginSetting: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updatePluginSetting";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	}
+};
+
 Liferay.Service.Portal.Portlet = {
 	serviceClassName: Liferay.Service.Portal.servicePackage + "Portlet" + Liferay.Service.classNameSuffix,
 

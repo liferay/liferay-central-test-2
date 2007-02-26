@@ -25,12 +25,12 @@ package com.liferay.portal.kernel.plugin;
 import java.util.List;
 
 /**
- * <a href="Plugin.java.html"><b><i>View Source</i></b></a>
+ * <a href="PluginPackage.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public interface Plugin {
+public interface PluginPackage {
 
 	public String getModuleId();
 
@@ -42,9 +42,9 @@ public interface Plugin {
 
 	public void setAuthor(String author);
 
-	public String getType();
+	public List getTypes();
 
-	public void setType(String type);
+	public void setTypes(List types);
 
 	public List getTags();
 
@@ -66,17 +66,23 @@ public interface Plugin {
 
 	public void setLongDescription(String longDescription);
 
-	public void setScreenshotURLs(List screenshotURLs);
+	public void setScreenshots(List screenshots);
 
-	public List getScreenshotURLs();
+	public List getScreenshots();
 
 	public String getPageURL();
 
 	public void setPageURL(String pageURL);
 
+	public String getDownloadURL();
+
+	public void setDownloadURL(String downloadURL);
+
 	public String getRepositoryURL();
 
-	public void setRepositoryURL(String repositoryURL);
+	public PluginPackageRepository getRepository();
+
+	public void setRepository(PluginPackageRepository repository);
 
 	public String getRecommendedWARName();
 
@@ -92,10 +98,10 @@ public interface Plugin {
 
 	public String getVersion();
 
-	public boolean isLaterVersionThan(Plugin plugin);
+	public boolean isLaterVersionThan(PluginPackage pluginPackage);
 
-	public boolean isPreviousVersionThan(Plugin plugin);
+	public boolean isPreviousVersionThan(PluginPackage pluginPackage);
 
-	public boolean isSameVersionThan(Plugin plugin);
+	public boolean isSameVersionThan(PluginPackage pluginPackage);
 
 }

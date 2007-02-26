@@ -26,9 +26,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetService;
+import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermission;
 
 import java.io.File;
@@ -61,6 +63,9 @@ public class LayoutSetServiceImpl
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		PluginSettingLocalServiceUtil.checkPermission(
+			getUserId(), themeId, ThemeImpl.PLUGIN_TYPE);
 
 		return LayoutSetLocalServiceUtil.updateLookAndFeel(
 			ownerId, themeId, colorSchemeId);

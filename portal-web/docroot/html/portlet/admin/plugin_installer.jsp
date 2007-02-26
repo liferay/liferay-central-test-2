@@ -30,15 +30,15 @@ if (Validator.isNull(tabs2)) {
 	tabs2 = "portlets";
 }
 
-String type = null;
+String pluginType = null;
 if (tabs2.equals("themes")) {
-	type = "theme";
+	pluginType = ThemeImpl.PLUGIN_TYPE;
 }
 else if (tabs2.equals("layout-templates")) {
-	type = "layout-template";
+	pluginType = LayoutTemplateImpl.PLUGIN_TYPE;
 }
 else if (tabs2.equals("portlets")) {
-	type = "portlet";
+	pluginType = PortletImpl.PLUGIN_TYPE;
 }
 
 String referer = request.getParameter(WebKeys.REFERER);
@@ -70,12 +70,12 @@ if (!PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)) {
 StringBuffer breadcrumbs = new StringBuffer();
 breadcrumbs.append(LanguageUtil.get(pageContext, "repositories") + " &raquo; ");
 
-breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, type+"-packages") + "</a>");
+breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, pluginType+"-packages") + "</a>");
 
 
 %>
 <script type="text/javascript">
-	function <portlet:namespace />installPlugin(cmd, progressId, redirect) {
+	function <portlet:namespace />installPluginPackage(cmd, progressId, redirect) {
 		if (cmd == "localDeploy") {
 			document.<portlet:namespace />fm.encoding = "multipart/form-data";
 		}
@@ -115,7 +115,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
 <input name="<portlet:namespace />referer" type="hidden" value="<%=referer%>">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%=currentURL%>">
-<input name="<portlet:namespace />type" type="hidden" value="<%= type %>">
+<input name="<portlet:namespace />pluginType" type="hidden" value="<%= pluginType %>">
 <input name="<portlet:namespace />progressId" type="hidden" value="">
 
 <h3><%= LanguageUtil.get(pageContext, "plugin-installer") %></h3>
@@ -270,7 +270,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(moduleId) && Validator.isNotNull(repositoryURL) %>">
-				<%@ include file="/html/portlet/admin/view_plugin.jsp" %>
+				<%@ include file="/html/portlet/admin/view_plugin_package.jsp" %>
 			</c:when>
 			<c:otherwise>
 				<%@ include file="/html/portlet/admin/browse_repository.jsp" %>

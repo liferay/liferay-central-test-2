@@ -77,7 +77,7 @@ public class HotDeployLayoutTemplateListener implements HotDeployListener {
 			}
 
 			List layoutTemplateIds = LayoutTemplateLocalUtil.init(
-				servletContextName, ctx, xmls);
+				servletContextName, ctx, xmls, event.getPluginPackage());
 
 			_vars.put(servletContextName, layoutTemplateIds);
 

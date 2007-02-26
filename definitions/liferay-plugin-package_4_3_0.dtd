@@ -2,9 +2,9 @@
 This is the DTD for the Liferay Plugins XML file that lists the plugins
 available in a plugin repository
 
-<!DOCTYPE liferay-plugin-list PUBLIC
-	"-//Liferay//DTD Plugins 4.3.0//EN"
-	"http://www.liferay.com/dtd/liferay-plugins_4_3_0.dtd">
+<!DOCTYPE plugin-package PUBLIC
+	"-//Liferay//DTD Plugin Package 4.3.0//EN"
+	"http://www.liferay.com/dtd/liferay-plugin-package_4_3_0.dtd">
 -->
 
 <!--
@@ -14,21 +14,15 @@ variable.
 <!ENTITY % boolean "(true|false|yes|no)">
 
 <!--
-The liferay-versions is the root of the XML file listing the available plugins
-in a repository.
--->
-<!ELEMENT liferay-plugin-list (plugin)*>
-
-<!--
 The plugin element contains the declarative data of a plugin.
 -->
-<!ELEMENT plugin (name, module-id, recommended-war-name?, type, tags?,
+<!ELEMENT plugin-package (name, module-id, installation-file-name?, types, tags?,
 short-description, long-description?, page-url, screenshots?, author, licenses,
-liferay-versions)*>
+liferay-versions)>
 
 <!--
-The name element contains the name of the plugin that will be shown to the
-users.
+The name element contains the name of the plugin package that will be shown to
+the users.
 -->
 <!ELEMENT name (#PCDATA)>
 
@@ -44,11 +38,16 @@ Example: liferay-samples/sample-struts-portlet/4.2.1/war
 The recommended-war-name element contains the recommended WAR name that will be
 used to deploy this plugin.
 -->
-<!ELEMENT recommended-war-name (#PCDATA)>
+<!ELEMENT installation-file-name (#PCDATA)>
 
 <!--
-The type element contains the type of the plugin. Valid values are: portlet,
-layout, and theme.
+The types element contains a list of plugin types included in the package
+-->
+<!ELEMENT types (type)+>
+
+<!--
+The type element contains the type of the plugin. Valid values are: portlets,
+layout-templates, and themes.
 -->
 <!ELEMENT type (#PCDATA)>
 
@@ -86,14 +85,27 @@ The page-url element contains the URL of the home page of the plugin.
 <!--
 The screenshots element contains a list of screenshots for the plugin.
 -->
-<!ELEMENT screenshots (screenshot-url)+>
+<!ELEMENT screenshots (screenshot)+>
 
 <!--
-The screenshot-url element contains the URL of a screenshot of the plugin.
-It is recommended that the weight of the image that is referenced does not
-exceed the standards common for webpages.
+The screenshot element contains two URLs for the thumbnail and large images
+versions of the screenshot
 -->
-<!ELEMENT screenshot-url (#PCDATA)>
+<!ELEMENT screenshot (thumbnail-url,large-image-url)>
+
+<!--
+The thumbnail-url element contains the URL of a screenshot of the plugin.
+It is recommended that the width of the images is 120 pixels and that the height
+is in the same size range.
+-->
+<!ELEMENT thumbnail-url (#PCDATA)>
+
+<!--
+The large-image-url element contains the URL of a screenshot of the plugin.
+It is recommended that the width of the images is 120 pixels and that the height
+is in the same size range.
+-->
+<!ELEMENT large-image-url (#PCDATA)>
 
 <!--
 The author element contains the name of the author of the plugin.

@@ -20,9 +20,8 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.plugin;
+package com.liferay.portal.kernel.plugin;
 
-import com.liferay.portal.kernel.plugin.Plugin;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
@@ -30,41 +29,63 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * <a href="PluginRepository.java.html"><b><i>View Source</i></b></a>
+ * <a href="PluginPackageRepository.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class PluginRepository {
+public class PluginPackageRepository {
 
-	public void addPlugin(Plugin plugin) {
-		_artifactURLIndex.put(plugin.getArtifactURL(), plugin);
-		_moduleIdIndex.put(plugin.getModuleId(), plugin);
-		_addToGroupAndArtifactIndex(
-			plugin.getGroupId(), plugin.getArtifactId(), plugin);
+	public static final String LOCAL_URL = "LOCAL_URL";
 
-		_plugins.add(plugin);
-		_tags.addAll(plugin.getTags());
+	public static final String SETTING_USE_DOWNLOAD_URL = "use-download-url";
+
+	public PluginPackageRepository(String repositoryURL) {
+		_repositoryURL = repositoryURL;
 	}
 
-	public Plugin findPluginByArtifactURL(String artifactURL) {
-		return (Plugin)_artifactURLIndex.get(artifactURL);
-	}
-
-	public Plugin findPluginByModuleId(String moduleId) {
-		return (Plugin)_moduleIdIndex.get(moduleId);
+	public String getRepositoryURL() {
+		return _repositoryURL;
 	}
 
 	public List getPlugins() {
 		return _plugins;
 	}
 
+	public Properties getSettings() {
+		return _settings;
+	}
+
+	public void setSettings(Properties settings) {
+		_settings = settings;
+	}
+
 	public Set getTags() {
 		return _tags;
+	}
+
+	public void addPluginPackage(PluginPackage pluginPackage) {
+		_artifactURLIndex.put(pluginPackage.getArtifactURL(), pluginPackage);
+		_moduleIdIndex.put(pluginPackage.getModuleId(), pluginPackage);
+		_addToGroupAndArtifactIndex(
+			pluginPackage.getGroupId(), pluginPackage.getArtifactId(),
+			pluginPackage);
+
+		_plugins.add(pluginPackage);
+		_tags.addAll(pluginPackage.getTags());
+	}
+
+	public PluginPackage findPluginByArtifactURL(String artifactURL) {
+		return (PluginPackage)_artifactURLIndex.get(artifactURL);
+	}
+
+	public PluginPackage findPluginPackageByModuleId(String moduleId) {
+		return (PluginPackage)_moduleIdIndex.get(moduleId);
 	}
 
 	public List findPluginsByGroupIdAndArtifactId(
@@ -73,24 +94,25 @@ public class PluginRepository {
 			groupId+ StringPool.SLASH + artifactId);
 	}
 
-	public void removePlugin(Plugin plugin) {
-		_artifactURLIndex.remove(plugin.getArtifactURL());
-		_moduleIdIndex.remove(plugin.getModuleId());
+	public void removePlugin(PluginPackage pluginPackage) {
+		_artifactURLIndex.remove(pluginPackage.getArtifactURL());
+		_moduleIdIndex.remove(pluginPackage.getModuleId());
 		_removeFromGroupAndArtifactIndex(
-			plugin.getGroupId(), plugin.getArtifactId(), plugin.getModuleId());
+			pluginPackage.getGroupId(), pluginPackage.getArtifactId(),
+			pluginPackage.getModuleId());
 
-		_plugins.remove(plugin);
+		_plugins.remove(pluginPackage);
 	}
 
 	private void _addToGroupAndArtifactIndex(
-		String groupId, String artifactId, Plugin plugin) {
+		String groupId, String artifactId, PluginPackage pluginPackage) {
 		List plugins = findPluginsByGroupIdAndArtifactId(groupId, artifactId);
 		if (plugins == null) {
 			plugins = new ArrayList();
 			_groupAndArtifactIndex.put(
 				groupId+ StringPool.SLASH + artifactId, plugins);
 		}
-		plugins.add(plugin);
+		plugins.add(pluginPackage);
 	}
 
 	private void _removeFromGroupAndArtifactIndex(
@@ -99,8 +121,8 @@ public class PluginRepository {
 		if (plugins != null) {
 			Iterator iterator = plugins.iterator();
 			while (iterator.hasNext()) {
-				Plugin plugin =  (Plugin) iterator.next();
-				if (plugin.getModuleId().equals(moduleId)) {
+				PluginPackage pluginPackage =  (PluginPackage) iterator.next();
+				if (pluginPackage.getModuleId().equals(moduleId)) {
 					iterator.remove();
 					break;
 				}
@@ -108,10 +130,13 @@ public class PluginRepository {
 		}
 	}
 
+	private String _repositoryURL;
+
 	private Map _groupAndArtifactIndex = new HashMap();
 	private Map _artifactURLIndex = new HashMap();
 	private Map _moduleIdIndex = new HashMap();
 	private List _plugins = new ArrayList();
+	private Properties _settings = null;
 	private Set _tags = new TreeSet();
 
 }

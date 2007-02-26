@@ -23,6 +23,12 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.PluginSetting;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.util.ArrayUtil;
+import com.liferay.util.StringUtil;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PluginSettingImpl.java.html"><b><i>View Source</i></b></a>
@@ -32,6 +38,102 @@ import com.liferay.portal.model.PluginSetting;
  */
 public class PluginSettingImpl extends PluginSettingModelImpl
 	implements PluginSetting {
+
 	public PluginSettingImpl() {
 	}
+
+	public void addRole(String role) {
+		setRolesArray(ArrayUtil.append(_rolesArray, role));
+	}
+
+	/**
+	 * Sets a string of ordered comma delimited plugin ids.
+	 *
+	 * @param		roles a string of ordered comma delimited plugin ids
+	 */
+	public void setRoles(String roles) {
+		_rolesArray = StringUtil.split(roles);
+
+		super.setRoles(roles);
+	}
+
+	/**
+	 * Gets an array of required roles of the plugin.
+	 *
+	 * @return		an array of required roles of the plugin
+	 */
+	public String[] getRolesArray() {
+		return _rolesArray;
+	}
+
+	/**
+	 * Sets an array of required roles of the plugin.
+	 *
+	 * @param		rolesArray an array of required roles of the plugin
+	 */
+	public void setRolesArray(String[] rolesArray) {
+		_rolesArray = rolesArray;
+
+		super.setRoles(StringUtil.merge(rolesArray));
+	}
+
+	/**
+	 * Returns true if the plugin has a role with the specified name.
+	 *
+	 * @return		true if the plugin has a role with the specified name
+	 */
+	public boolean hasRoleWithName(String roleName) {
+		for (int i = 0; i < _rolesArray.length; i++) {
+			if (_rolesArray[i].equalsIgnoreCase(roleName)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Returns true if the user has permission to use this plugin
+	 *
+	 * @return		true if the user has permission to use this plugin
+	 * @param userId the id of the user
+	 */
+	public boolean hasPermission(String userId) {
+		try {
+			if (_rolesArray.length == 0) {
+				return true;
+			}
+			else if (RoleLocalServiceUtil.hasUserRoles(
+						userId, getCompanyId(), _rolesArray)) {
+
+				return true;
+			}
+			else if (RoleLocalServiceUtil.hasUserRole(
+						userId, getCompanyId(), RoleImpl.ADMINISTRATOR)) {
+
+				return true;
+			}
+			else if (UserImpl.isDefaultUser(userId)) {
+				if (hasRoleWithName(RoleImpl.GUEST)) {
+					return true;
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return false;
+	}
+
+	/**
+	 * Log instance for this class.
+	 */
+	private static Log _log = LogFactory.getLog(PortletImpl.class);
+
+	/**
+	 * An array of required roles of the plugin.
+	 */
+	private String[] _rolesArray;
+
 }

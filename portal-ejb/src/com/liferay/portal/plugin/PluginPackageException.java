@@ -25,26 +25,26 @@ package com.liferay.portal.plugin;
 import com.liferay.portal.SystemException;
 
 /**
- * <a href="PluginException.java.html"><b><i>View Source</i></b></a>
+ * <a href="PluginPackageException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class PluginException extends SystemException {
+public class PluginPackageException extends SystemException {
 
-	public PluginException() {
+	public PluginPackageException() {
 		super();
 	}
 
-	public PluginException(String msg) {
+	public PluginPackageException(String msg) {
 		super(msg);
 	}
 
-	public PluginException(String msg, Throwable cause) {
+	public PluginPackageException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public PluginException(Throwable cause) {
+	public PluginPackageException(Throwable cause) {
 		super(cause);
 	}
 

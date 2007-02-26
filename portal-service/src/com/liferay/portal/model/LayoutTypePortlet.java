@@ -38,7 +38,10 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public String getLayoutTemplateId();
 
-	public void setLayoutTemplateId(String newLayoutTemplateId);
+	public void setLayoutTemplateId(String userId, String newLayoutTemplateId);
+
+	public void setLayoutTemplateId(
+		String userId, String newLayoutTemplateId, boolean checkPermission);
 
 	public int getNumOfColumns();
 

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE plugin-package PUBLIC "-//Liferay//DTD Plugin Package 4.3.0//EN" "http://www.liferay.com/dtd/liferay-plugin-package_4_3_0.dtd">
+
+<plugin-package>
+	<name>Sample Spring Portlet</name>
+	<module-id>liferay-samples/sample-spring-portlet/4.3.0/war</module-id>
+	<types>
+		<type>portlet</type>
+	</types>
+	<short-description>
+		This portlet shows how to use Spring within Liferay
+	</short-description>
+	<page-url>http://www.liferay.com/web/guest/downloads<page-url>
+	<liferay-versions>
+		<liferay-version>4.2.*</liferay-version>
+	</liferay-versions>
+</plugin-package>

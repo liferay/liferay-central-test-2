@@ -36,4 +36,29 @@ public interface PluginSettingLocalService {
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public void checkPermission(java.lang.String userId,
+		java.lang.String pluginId, java.lang.String pluginType)
+		throws com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.PluginSetting getDefaultPluginSetting();
+
+	public com.liferay.portal.model.PluginSetting getSettingOrDefault(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.PluginSetting getByC_I_T(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType) throws com.liferay.portal.SystemException;
+
+	public boolean hasPermission(java.lang.String userId,
+		java.lang.String pluginId, java.lang.String pluginType);
+
+	public com.liferay.portal.model.PluginSetting updatePluginSetting(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType, java.lang.String roles, boolean active)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

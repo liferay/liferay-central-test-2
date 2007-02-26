@@ -38,6 +38,10 @@ public class ModuleId {
 	public ModuleId(String moduleId) {
 		StringTokenizer st = new StringTokenizer(moduleId, StringPool.SLASH);
 
+		if (st.countTokens() < 4) {
+			throw new RuntimeException(
+				"The moduleId " + moduleId + " is not correct");
+		}
 		_groupId = st.nextToken();
 		_artifactId = st.nextToken();
 		_pluginVersion = new Version(st.nextToken());

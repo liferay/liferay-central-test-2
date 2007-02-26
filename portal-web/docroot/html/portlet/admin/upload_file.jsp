@@ -41,7 +41,7 @@
 
 <br><br>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "install") %>' onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPlugin('localDeploy', '<%= uploadProgressId %>');">
+<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "install") %>' onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('localDeploy', '<%= uploadProgressId %>');">
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"

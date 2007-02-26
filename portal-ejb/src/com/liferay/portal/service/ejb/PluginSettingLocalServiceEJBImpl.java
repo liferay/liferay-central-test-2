@@ -50,6 +50,49 @@ public class PluginSettingLocalServiceEJBImpl
 			begin, end);
 	}
 
+	public void checkPermission(java.lang.String userId,
+		java.lang.String pluginId, java.lang.String pluginType)
+		throws com.liferay.portal.PortalException {
+		PluginSettingLocalServiceFactory.getTxImpl().checkPermission(userId,
+			pluginId, pluginType);
+	}
+
+	public com.liferay.portal.model.PluginSetting getDefaultPluginSetting() {
+		return PluginSettingLocalServiceFactory.getTxImpl()
+											   .getDefaultPluginSetting();
+	}
+
+	public com.liferay.portal.model.PluginSetting getSettingOrDefault(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return PluginSettingLocalServiceFactory.getTxImpl().getSettingOrDefault(companyId,
+			pluginId, pluginType);
+	}
+
+	public com.liferay.portal.model.PluginSetting getByC_I_T(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType) throws com.liferay.portal.SystemException {
+		return PluginSettingLocalServiceFactory.getTxImpl().getByC_I_T(companyId,
+			pluginId, pluginType);
+	}
+
+	public boolean hasPermission(java.lang.String userId,
+		java.lang.String pluginId, java.lang.String pluginType) {
+		return PluginSettingLocalServiceFactory.getTxImpl().hasPermission(userId,
+			pluginId, pluginType);
+	}
+
+	public com.liferay.portal.model.PluginSetting updatePluginSetting(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType, java.lang.String roles, boolean active)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return PluginSettingLocalServiceFactory.getTxImpl().updatePluginSetting(companyId,
+			pluginId, pluginType, roles, active);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

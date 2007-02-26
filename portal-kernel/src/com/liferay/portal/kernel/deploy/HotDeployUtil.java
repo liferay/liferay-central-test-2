@@ -65,6 +65,23 @@ public class HotDeployUtil {
 
 	private synchronized void _fireDeployEvent(HotDeployEvent event) {
 
+//		try {
+//			URL resource =
+//				event.getServletContext().getResource(
+//					"/WEB-INF/plugin-package.xml");
+//
+//			String xml = Http.URLtoString(resource);
+//
+//			PluginPackage pluginPackage = _readPluginPackage(xml);
+//
+//			event.setPluginPackage(pluginPackage);
+//		}
+//		catch (Exception e) {
+//			_log.warn(
+//				"The package does not have a descriptor or it cannot be read",
+//				e);
+//		}
+//
 		// Capture events that are fired before the portal initialized. These
 		// events are later fired by flushEvents.
 

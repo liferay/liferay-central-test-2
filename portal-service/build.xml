@@ -10,6 +10,7 @@
 		<mkdir dir="classes" />
 
 		<path id="web-lib.classpath">
+			<pathelement path="${project.dir}/portal-kernel/classes" />
 		</path>
 
 		<javac

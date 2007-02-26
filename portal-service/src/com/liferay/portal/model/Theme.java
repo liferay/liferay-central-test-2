@@ -34,7 +34,7 @@ import java.util.Properties;
  * @author Brian Wing Shun Chan
  *
  */
-public interface Theme extends Comparable, Serializable {
+public interface Theme extends Comparable, Plugin, Serializable {
 
 	public String getThemeId();
 

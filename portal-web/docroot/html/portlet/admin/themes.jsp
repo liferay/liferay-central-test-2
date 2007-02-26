@@ -49,13 +49,26 @@ List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
 	Theme theme2 = (Theme) results.get(i);
+	PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getSettingOrDefault(company.getCompanyId(), theme2.getThemeId(), "theme");
 
 	ResultRow row = new ResultRow(theme2, theme2.getThemeId().toString(), i);
+
+	PortletURL rowURL = renderResponse.createRenderURL();
+
+	rowURL.setWindowState(WindowState.MAXIMIZED);
+
+	rowURL.setParameter("struts_action", "/admin/edit_plugin_setting");
+	rowURL.setParameter("redirect", currentURL);
+	rowURL.setParameter("pluginId", theme2.getThemeId());
+	rowURL.setParameter("pluginType", ThemeImpl.PLUGIN_TYPE);
 
 	// Name and Thumbnail
 
 	StringBuffer sb = new StringBuffer();
 
+	sb.append("<a href='");
+	sb.append(rowURL.toString());
+	sb.append("'>");
 	sb.append("<img src='");
 	sb.append(theme2.getContextPath());
 	sb.append(theme2.getImagesPath());
@@ -64,16 +77,34 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append("<b>");
 	sb.append(theme2.getName());
 	sb.append("</b>");
+	sb.append("</a>");
+	sb.append("<br>");
+	sb.append("<span style=\"font-size: xx-small;\">");
+	sb.append(LanguageUtil.get(pageContext, "package"));
+	sb.append(": ");
+	sb.append((theme2.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(theme2.getPluginPackage().getName() + " (" + theme2.getPluginPackage().getModuleId() + ")"));
+	sb.append("<br>");
+	sb.append(LanguageUtil.get(pageContext, "color-schemes"));
+	sb.append(": ");
+	List colorSchemes = theme2.getColorSchemes();
+	for (int j = 0; j < colorSchemes.size(); j++) {
+		ColorScheme colorScheme2 = (ColorScheme) colorSchemes.get(j);
+		sb.append(colorScheme2.getName());
+		if ((j + 1) < colorSchemes.size()) {
+			sb.append(", ");
+		}
+	}
+	sb.append("</span>");
 	row.addText(sb.toString());
 
 	// Active
 
-	boolean isActive = true;
+	boolean isActive = pluginSetting.isActive();
 	row.addText(LanguageUtil.get(pageContext, (isActive ? "yes" : "no")));
 
 	// Roles
 
-	String roles = "";
+	String roles = pluginSetting.getRoles();
 	row.addText(roles);
 
 	// Add result row

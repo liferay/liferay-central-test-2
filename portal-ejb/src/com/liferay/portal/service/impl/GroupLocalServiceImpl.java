@@ -480,7 +480,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		String layoutTemplateId = PropsUtil.get(
 			PropsUtil.DEFAULT_GUEST_LAYOUT_TEMPLATE_ID);
 
-		layoutTypePortlet.setLayoutTemplateId(layoutTemplateId);
+		layoutTypePortlet.setLayoutTemplateId(null, layoutTemplateId, false);
 
 		for (int i = 0; i < 10; i++) {
 			String columnId = "column-" + i;

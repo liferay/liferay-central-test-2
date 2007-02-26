@@ -568,7 +568,7 @@ public class ServicePreAction extends Action {
 		String layoutTemplateId = PropsUtil.get(
 			PropsUtil.DEFAULT_USER_LAYOUT_TEMPLATE_ID);
 
-		layoutTypePortlet.setLayoutTemplateId(layoutTemplateId);
+		layoutTypePortlet.setLayoutTemplateId(null, layoutTemplateId, false);
 
 		for (int i = 0; i < 10; i++) {
 			String columnId = "column-" + i;

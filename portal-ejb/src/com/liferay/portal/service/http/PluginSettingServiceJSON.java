@@ -22,6 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.service.PluginSettingServiceUtil;
+
+import org.json.JSONObject;
+
 /**
  * <a href="PluginSettingServiceJSON.java.html"><b><i>View Source</i></b></a>
  *
@@ -29,4 +33,14 @@ package com.liferay.portal.service.http;
  *
  */
 public class PluginSettingServiceJSON {
+	public static JSONObject updatePluginSetting(java.lang.String companyId,
+		java.lang.String pluginId, java.lang.String pluginType,
+		java.lang.String roles, boolean active)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portal.model.PluginSetting returnValue = PluginSettingServiceUtil.updatePluginSetting(companyId,
+				pluginId, pluginType, roles, active);
+
+		return PluginSettingJSONSerializer.toJSONObject(returnValue);
+	}
 }

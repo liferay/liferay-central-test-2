@@ -28,63 +28,79 @@
 </c:if>
 
 <%
-	List headerNames = new ArrayList();
+List headerNames = new ArrayList();
 
-	headerNames.add("layout-template");
-	headerNames.add("active");
-	headerNames.add("roles");
+headerNames.add("layout-template");
+headerNames.add("active");
+headerNames.add("roles");
 
-	SearchContainer searchContainer = new SearchContainer(
-		renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM,
-		SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	List layoutTemplates = layoutTemplates = LayoutTemplateLocalUtil.getLayoutTemplates();
+List layoutTemplates = layoutTemplates = LayoutTemplateLocalUtil.getLayoutTemplates();
 
-	int total = layoutTemplates.size();
+int total = layoutTemplates.size();
 
-	searchContainer.setTotal(total);
+searchContainer.setTotal(total);
 
-	List results = ListUtil
-		.subList(layoutTemplates, searchContainer.getStart(), searchContainer.getEnd());
+List results = ListUtil.subList(layoutTemplates, searchContainer.getStart(), searchContainer.getEnd());
 
-	searchContainer.setResults(results);
+searchContainer.setResults(results);
 
-	List resultRows = searchContainer.getResultRows();
+List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.size(); i++) {
-		LayoutTemplate layoutTemplate = (LayoutTemplate) results.get(i);
+for (int i = 0; i < results.size(); i++) {
+	LayoutTemplate layoutTemplate = (LayoutTemplate) results.get(i);
+	PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getSettingOrDefault(company.getCompanyId(), layoutTemplate.getLayoutTemplateId(), LayoutTemplateImpl.PLUGIN_TYPE);
 
-		ResultRow row = new ResultRow(layoutTemplate, layoutTemplate.getLayoutTemplateId().toString(), i);
+	ResultRow row = new ResultRow(layoutTemplate, layoutTemplate.getLayoutTemplateId().toString(), i);
 
-		// Name and Thumbnail
+	PortletURL rowURL = renderResponse.createRenderURL();
 
-		StringBuffer sb = new StringBuffer();
+	rowURL.setWindowState(WindowState.MAXIMIZED);
 
-		sb.append("<img src='");
-		sb.append(layoutTemplate.getContextPath());
-		sb.append(layoutTemplate.getThumbnailPath());
-		sb.append("/thumbnail.gif");
-		sb.append("' width='100' align='left' style='margin-right: 10px'/>");
-		sb.append("<b>");
-		sb.append(layoutTemplate.getName());
-		sb.append("</b>");
-		row.addText(sb.toString());
+	rowURL.setParameter("struts_action", "/admin/edit_plugin_setting");
+	rowURL.setParameter("redirect", currentURL);
+	rowURL.setParameter("pluginId", layoutTemplate.getLayoutTemplateId());
+	rowURL.setParameter("pluginType", "layout-template");
 
-		// Active
+	// Name and Thumbnail
 
-		boolean isActive = true;
-		row.addText(
-			LanguageUtil.get(pageContext, (isActive ? "yes" : "no")));
+	StringBuffer sb = new StringBuffer();
 
-		// Roles
+	sb.append("<a href='");
+	sb.append(rowURL.toString());
+	sb.append("'>");
+	sb.append("<img src='");
+	sb.append(layoutTemplate.getContextPath());
+	sb.append(layoutTemplate.getThumbnailPath());
+	sb.append("/thumbnail.gif");
+	sb.append("' width='100' align='left' style='margin-right: 10px'/>");
+	sb.append("<b>");
+	sb.append(layoutTemplate.getName());
+	sb.append("</b>");
+	sb.append("</a>");
+	sb.append("<br>");
+	sb.append("<span style=\"font-size: xx-small;\">");
+	sb.append(LanguageUtil.get(pageContext, "package"));
+	sb.append(": ");
+	sb.append((layoutTemplate.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(layoutTemplate.getPluginPackage().getName() + " (" + layoutTemplate.getPluginPackage().getModuleId() + ")"));
+	sb.append("</span>");
+	row.addText(sb.toString());
 
-		String roles = "";
-		row.addText(roles);
+	// Active
 
-		// Add result row
+	boolean isActive = pluginSetting.isActive();
+	row.addText(LanguageUtil.get(pageContext, (isActive ? "yes" : "no")));
 
-		resultRows.add(row);
-	}
+	// Roles
+
+	String roles = pluginSetting.getRoles();
+	row.addText(roles);
+
+	// Add result row
+
+	resultRows.add(row);
+}
 %>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

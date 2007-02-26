@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.PortletLocalService;
 import com.liferay.portal.service.PortletLocalServiceFactory;
+import com.liferay.portal.kernel.plugin.PluginPackage;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -98,14 +99,16 @@ public class PortletLocalServiceEJBImpl implements PortletLocalService,
 			portletId);
 	}
 
-	public void initEAR(java.lang.String[] xmls) {
-		PortletLocalServiceFactory.getTxImpl().initEAR(xmls);
+	public void initEAR(java.lang.String[] xmls,
+		PluginPackage pluginPackage) {
+		PortletLocalServiceFactory.getTxImpl().initEAR(xmls, pluginPackage);
 	}
 
 	public java.util.List initWAR(java.lang.String servletContextName,
-		java.lang.String[] xmls) {
+		java.lang.String[] xmls,
+		PluginPackage pluginPackage) {
 		return PortletLocalServiceFactory.getTxImpl().initWAR(servletContextName,
-			xmls);
+			xmls, pluginPackage);
 	}
 
 	public com.liferay.portal.model.Portlet updatePortlet(

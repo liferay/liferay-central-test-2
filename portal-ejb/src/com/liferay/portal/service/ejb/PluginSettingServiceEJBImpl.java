@@ -23,6 +23,8 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.PluginSettingService;
+import com.liferay.portal.service.PluginSettingServiceFactory;
+import com.liferay.portal.service.impl.PrincipalSessionBean;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -36,6 +38,17 @@ import javax.ejb.SessionContext;
  */
 public class PluginSettingServiceEJBImpl implements PluginSettingService,
 	SessionBean {
+	public com.liferay.portal.model.PluginSetting updatePluginSetting(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType, java.lang.String roles, boolean active)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return PluginSettingServiceFactory.getTxImpl().updatePluginSetting(companyId,
+			pluginId, pluginType, roles, active);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

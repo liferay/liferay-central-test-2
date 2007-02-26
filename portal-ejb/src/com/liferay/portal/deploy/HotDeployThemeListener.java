@@ -77,7 +77,8 @@ public class HotDeployThemeListener implements HotDeployListener {
 				_log.info("Registering themes for " + servletContextName);
 			}
 
-			List themeIds = ThemeLocalUtil.init(servletContextName, ctx, xmls);
+			List themeIds = ThemeLocalUtil.init(
+				servletContextName, ctx, xmls, event.getPluginPackage());
 
 			VelocityContextPool.put(servletContextName, ctx);
 

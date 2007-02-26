@@ -1,0 +1,181 @@
+<!--
+This is the DTD for the Liferay Plugins XML file that lists the plugins
+available in a plugin repository
+
+<!DOCTYPE plugin-repository PUBLIC
+	"-//Liferay//DTD Plugin Repository 4.3.0//EN"
+	"http://www.liferay.com/dtd/liferay-plugin-repository_4_3_0.dtd">
+-->
+
+<!--
+A boolean type is the string representation of a boolean (true or false)
+variable.
+-->
+<!ENTITY % boolean "(true|false|yes|no)">
+
+<!--
+The liferay-versions is the root of the XML file listing the available plugins
+in a repository.
+-->
+<!ELEMENT plugin-repository (settings?, plugin-package)*>
+
+<!--
+The settings element contains a list of settings that specify how a client
+should interact with the repository
+-->
+<!ELEMENT settings (setting)+>
+
+<!ELEMENT setting (#PCDATA)>
+
+<!--
+Setting name and value. Current supported names are:
+- use-download-url: set to true to use the download-url of each package instead
+  of downloading from this repository. The default is false.
+-->
+<!ATTLIST setting
+	name CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!--
+The plugin element contains the declarative data of a plugin.
+-->
+<!ELEMENT plugin-package (name, module-id, installation-file-name?, types, tags?,
+short-description, long-description?, page-url, download-url?, screenshots?, author, licenses,
+liferay-versions)*>
+
+<!--
+The name element contains the name of the plugin package that will be shown to
+the users.
+-->
+<!ELEMENT name (#PCDATA)>
+
+<!--
+The module-id element contains the full identifier of the plugin using the
+Maven based syntax: groupId/artifactId/version/file-type.
+
+Example: liferay-samples/sample-struts-portlet/4.2.1/war
+-->
+<!ELEMENT module-id (#PCDATA)>
+
+<!--
+The recommended-war-name element contains the recommended WAR name that will be
+used to deploy this plugin.
+-->
+<!ELEMENT installation-file-name (#PCDATA)>
+
+<!--
+The types element contains a list of plugin types included in the package
+-->
+<!ELEMENT types (type)+>
+
+<!--
+The type element contains the type of the plugin. Valid values are: portlets,
+layout-templates, and themes.
+-->
+<!ELEMENT type (#PCDATA)>
+
+<!--
+The tags element contains a list of tags to categorize this plugin.
+-->
+<!ELEMENT tags (tag)*>
+
+<!--
+The tag element contains a tag that categorizes to this plugin.
+-->
+<!ELEMENT tag (#PCDATA)>
+
+<!--
+The short-description element contains a short description of this plugin.
+-->
+<!ELEMENT short-description (#PCDATA)>
+
+<!--
+The long-description element contains a detailed description of this plugin. It
+is recommended that installation or update instructions are provided if the
+portal administrator has to perform extra steps to be able to use the plugin
+after it is deployed.
+
+Note: the text of this element might contain simple HTML formatting if encoded
+within a CDATA section.
+-->
+<!ELEMENT long-description (#PCDATA)>
+
+<!--
+The page-url element contains the URL of the home page of the plugin.
+-->
+<!ELEMENT page-url (#PCDATA)>
+
+<!--
+The download-url element contains the URL to download the plugin
+-->
+<!ELEMENT download-url (#PCDATA)>
+
+<!--
+The screenshots element contains a list of screenshots for the plugin.
+-->
+<!ELEMENT screenshots (screenshot)+>
+
+<!--
+The screenshot element contains two URLs for the thumbnail and large images
+versions of the screenshot
+-->
+<!ELEMENT screenshot (thumbnail-url,large-image-url)>
+
+<!--
+The thumbnail-url element contains the URL of a screenshot of the plugin.
+It is recommended that the width of the images is 120 pixels and that the height
+is in the same size range.
+-->
+<!ELEMENT thumbnail-url (#PCDATA)>
+
+<!--
+The large-image-url element contains the URL of a screenshot of the plugin.
+It is recommended that the width of the images is 120 pixels and that the height
+is in the same size range.
+-->
+<!ELEMENT large-image-url (#PCDATA)>
+
+<!--
+The author element contains the name of the author of the plugin.
+-->
+<!ELEMENT author (#PCDATA)>
+
+<!--
+The licenses element contains a list of licence under which this plugin is
+provided.
+-->
+<!ELEMENT licenses (license)+>
+
+<!--
+The license element contains the name of a licence under which this plugin is
+provided.
+-->
+<!ELEMENT license (#PCDATA)>
+
+<!--
+The osi-approved attribute specifies if the license is open source, approved by
+the Open Source Initiative (OSI). In that case it's value is true.
+-->
+<!ATTLIST license
+	osi-approved %boolean; #REQUIRED
+>
+
+<!--
+The url attribute specifies a URL of a page that describes the license.
+-->
+<!ATTLIST license
+	url CDATA #IMPLIED
+>
+
+<!--
+The liferay-versions element contains a list of Liferay Portal versions that
+are supported by this plugin.
+-->
+<!ELEMENT liferay-versions (liferay-version)+>
+
+<!--
+The liferay-version element contains a version of Liferay Portal that is
+supported by this plugin.
+-->
+<!ELEMENT liferay-version (#PCDATA)>

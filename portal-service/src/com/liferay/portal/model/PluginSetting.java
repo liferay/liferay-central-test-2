@@ -29,4 +29,15 @@ package com.liferay.portal.model;
  *
  */
 public interface PluginSetting extends PluginSettingModel {
+	public void addRole(java.lang.String role);
+
+	public void setRoles(java.lang.String roles);
+
+	public java.lang.String[] getRolesArray();
+
+	public void setRolesArray(java.lang.String[] rolesArray);
+
+	public boolean hasRoleWithName(java.lang.String roleName);
+
+	public boolean hasPermission(java.lang.String userId);
 }

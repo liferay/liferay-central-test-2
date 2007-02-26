@@ -23,8 +23,10 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.smtp.MessageListener;
+import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -62,6 +64,11 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class PortletImpl extends PortletModelImpl implements Portlet {
+
+	/**
+	 * Plugin type
+	 */
+	public static final String PLUGIN_TYPE = "portlet";
 
 	/**
 	 * War file separator.
@@ -146,11 +153,13 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Constructs a portlet with the specified parameters.
 	 */
-	public PortletImpl(String portletId, String companyId, String strutsPath,
-					   String configurationPath, String displayName,
-					   String portletClass, String indexerClass,
-					   String openSearchClass, String schedulerClass,
-					   String portletURLClass, String friendlyURLPluginClass,
+	public PortletImpl(String portletId, PluginPackage pluginPackage,
+					   PluginSetting pluginSetting, String companyId,
+					   String strutsPath, String configurationPath,
+					   String displayName, String portletClass,
+					   String indexerClass, String openSearchClass,
+					   String schedulerClass, String portletURLClass,
+					   String friendlyURLPluginClass,
 					   String urlEncoderClass, String portletDataHandlerClass,
 					   String smtpMessageListenerClass,
 					   String defaultPreferences, String prefsValidator,
@@ -173,6 +182,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 					   String servletContextName, List servletURLPatterns) {
 
 		setPortletId(portletId);
+		_pluginPackage = pluginPackage;
+		_defaultPluginSetting = pluginSetting;
 		setCompanyId(companyId);
 		_strutsPath = strutsPath;
 		_configurationPath = configurationPath;
@@ -246,6 +257,58 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public String getInstanceId() {
 		return getInstanceId(getPortletId());
+	}
+
+	/**
+	 * Gets the plugin id for this portlet
+	 * @return 		the plugin id
+	 */
+	public String getPluginId() {
+		return getRootPortletId();
+	}
+
+	/**
+	 * Get the type of plugin that a portlet is
+	 *
+	 * @return the plugin type
+	 */
+	public String getPluginType() {
+		return PLUGIN_TYPE;
+	}
+
+	/**
+	 * Get the package to which this portlet belongs to
+	 *
+	 * @return the plugin package
+	 */
+	public PluginPackage getPluginPackage() {
+		return _pluginPackage;
+	}
+
+	/**
+	 * Sets the plugin package to which this portlet belongs to
+	 *
+	 * @param pluginPackage the plugin package
+	 */
+	public void setPluginPackage(PluginPackage pluginPackage) {
+		_pluginPackage = pluginPackage;
+	}
+
+	/**
+	 * Get the default plugin settings of this portlet
+	 * @return the plugin settings
+	 */
+	public PluginSetting getDefaultPluginSetting() {
+		return _defaultPluginSetting;
+	}
+
+	/**
+	 * Sets the default plugin settings for this portlet
+	 *
+	 * @param pluginSetting the plugin setting
+	 */
+	public void setDefaultPluginSetting(PluginSetting pluginSetting) {
+		_defaultPluginSetting = pluginSetting;
 	}
 
 	/**
@@ -1764,25 +1827,25 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public Object clone() {
 		return new PortletImpl(
-			getPortletId(), getCompanyId(), getStrutsPath(),
-			getConfigurationPath(), getDisplayName(), getPortletClass(),
-			getIndexerClass(), getOpenSearchClass(), getSchedulerClass(),
-			getPortletURLClass(), getFriendlyURLPluginClass(),
-			getURLEncoderClass(), getPortletDataHandlerClass(),
-			getSmtpMessageListenerClass(), getDefaultPreferences(),
-			getPreferencesValidator(), isPreferencesCompanyWide(),
-			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
-			isUseDefaultTemplate(), isShowPortletAccessDenied(),
-			isShowPortletInactive(), isActionURLRedirect(),
-			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
-			isMaximizePrint(), isLayoutCacheable(), isInstanceable(),
-			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
-			getRenderWeight(), isAjaxable(), getHeaderCss(),
-			getHeaderJavaScript(), isAddDefaultResource(), getRoles(),
-			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
-			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
-			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
-			getUserAttributes(), getCustomUserAttributes(),
+			getPortletId(), getPluginPackage(), getDefaultPluginSetting(),
+			getCompanyId(), getStrutsPath(), getConfigurationPath(),
+			getDisplayName(), getPortletClass(), getIndexerClass(),
+			getOpenSearchClass(), getSchedulerClass(), getPortletURLClass(),
+			getFriendlyURLPluginClass(), getURLEncoderClass(),
+			getPortletDataHandlerClass(), getSmtpMessageListenerClass(),
+			getDefaultPreferences(), getPreferencesValidator(),
+			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
+			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
+			isShowPortletAccessDenied(), isShowPortletInactive(),
+			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
+			isMaximizeHelp(), isMaximizePrint(), isLayoutCacheable(),
+			isInstanceable(), isPrivateRequestAttributes(),
+			isPrivateSessionAttributes(), getRenderWeight(), isAjaxable(),
+			getHeaderCss(), getHeaderJavaScript(), isAddDefaultResource(),
+			getRoles(), getUnlinkedRoles(), getRoleMappers(), isSystem(),
+			isActive(), isInclude(), getInitParams(), getExpCache(),
+			getPortletModes(), getSupportedLocales(), getResourceBundle(),
+			getPortletInfo(), getUserAttributes(), getCustomUserAttributes(),
 			getServletContextName(), getServletURLPatterns());
 	}
 
@@ -1805,6 +1868,16 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Log instance for this class.
 	 */
 	private static Log _log = LogFactory.getLog(PortletImpl.class);
+
+	/**
+	 * Package to which this plugin belongs to
+	 */
+	private PluginPackage _pluginPackage;
+
+	/**
+	 * Plugin settings associated with this portlet
+	 */
+	private PluginSetting _defaultPluginSetting;
 
 	/**
 	 * The struts path of the portlet.

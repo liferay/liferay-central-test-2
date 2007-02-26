@@ -128,7 +128,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 			}
 
 			List portlets = PortletLocalServiceUtil.initWAR(
-				servletContextName, xmls);
+				servletContextName, xmls, event.getPluginPackage());
 
 			// Class loader
 

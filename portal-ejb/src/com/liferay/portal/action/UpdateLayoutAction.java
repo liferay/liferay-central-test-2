@@ -146,7 +146,8 @@ public class UpdateLayoutAction extends Action {
 			String layoutTemplateId = ParamUtil.getString(
 				req, "layoutTemplateId");
 
-			layoutTypePortlet.setLayoutTemplateId(layoutTemplateId);
+			layoutTypePortlet.setLayoutTemplateId(
+				req.getRemoteUser(), layoutTemplateId);
 		}
 
 		if (updateLayout) {

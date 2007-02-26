@@ -11,15 +11,7 @@ The look-and-feel element is the root of the deployment descriptor for
 a Liferay look and feel archive. The look and feel archive will hereafter
 be referred to as a LAF archive.
 -->
-<!ELEMENT look-and-feel (module-id, compatibility, company-limit?, theme*)>
-
-<!--
-The module-id element contains the full identifier of the plugin using the
-Maven based syntax: groupId/artifactId/version/file-type.
-
-Example: my-company/sample-theme/1.0.0/war
--->
-<!ELEMENT module-id (#PCDATA)>
+<!ELEMENT look-and-feel (compatibility, company-limit?, theme*)>
 
 <!--
 The compatibility element specifies a list of Liferay Portal versions that will
@@ -80,7 +72,7 @@ See the comments in the company-id element.
 The theme element contains the declarative data of a theme.
 -->
 <!ELEMENT theme (root-path, templates-path, images-path, template-extension,
-enable-drag-and-drop?, settings?, color-scheme+, layout-templates?)>
+enable-drag-and-drop?, settings?, roles?, color-scheme+, layout-templates?)>
 
 <!--
 The id attribute specifies the unique key for a theme. The name attribute
@@ -152,6 +144,18 @@ See the comments in the settings element.
 	key CDATA #REQUIRED
 	value CDATA #REQUIRED
 >
+
+<!--
+The roles element contains a list of role names. The users which have
+any of these roles will be able to use this theme for their layouts and
+layout sets. The default is to allow usage of the theme to any user.
+-->
+<!ELEMENT roles (role-name)>
+
+<!--
+The role-name designates the name of a security role
+-->
+<!ELEMENT role-name (#PCDATA)>
 
 <!--
 A theme can have many color schemes. It works very similar to Windows. The

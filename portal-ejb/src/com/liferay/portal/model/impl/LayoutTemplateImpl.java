@@ -22,8 +22,10 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutTemplate;
+import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Validator;
 
@@ -34,9 +36,12 @@ import java.util.List;
  * <a href="LayoutTemplateImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class LayoutTemplateImpl implements LayoutTemplate {
+
+	public static final String PLUGIN_TYPE = "layout-template";
 
 	public LayoutTemplateImpl() {
 	}
@@ -52,6 +57,30 @@ public class LayoutTemplateImpl implements LayoutTemplate {
 
 	public String getLayoutTemplateId() {
 		return _layoutTemplateId;
+	}
+
+	public String getPluginId() {
+		return getLayoutTemplateId();
+	}
+
+	public String getPluginType() {
+		return PLUGIN_TYPE;
+	}
+
+	public PluginPackage getPluginPackage() {
+		return _pluginPackage;
+	}
+
+	public void setPluginPackage(PluginPackage pluginPackage) {
+		_pluginPackage = pluginPackage;
+	}
+
+	public PluginSetting getDefaultPluginSetting() {
+		return _pluginSetting;
+	}
+
+	public void setDefaultPluginSetting(PluginSetting pluginSetting) {
+		_pluginSetting = pluginSetting;
 	}
 
 	public boolean getStandard() {
@@ -190,6 +219,8 @@ public class LayoutTemplateImpl implements LayoutTemplate {
 	}
 
 	private String _layoutTemplateId;
+	private PluginPackage _pluginPackage;
+	private PluginSetting _pluginSetting;
 	private boolean _standard;
 	private String _name;
 	private String _templatePath;

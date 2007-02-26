@@ -192,6 +192,57 @@ public class PluginSettingUtil {
 			companyId, obc);
 	}
 
+	public static java.util.List findByC_I_T(java.lang.String companyId,
+		java.lang.String pluginId, java.lang.String pluginType)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_I_T(companyId, pluginId, pluginType);
+	}
+
+	public static java.util.List findByC_I_T(java.lang.String companyId,
+		java.lang.String pluginId, java.lang.String pluginType, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_I_T(companyId, pluginId, pluginType,
+			begin, end);
+	}
+
+	public static java.util.List findByC_I_T(java.lang.String companyId,
+		java.lang.String pluginId, java.lang.String pluginType, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_I_T(companyId, pluginId, pluginType,
+			begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.PluginSetting findByC_I_T_First(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPluginSettingException {
+		return getPersistence().findByC_I_T_First(companyId, pluginId,
+			pluginType, obc);
+	}
+
+	public static com.liferay.portal.model.PluginSetting findByC_I_T_Last(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPluginSettingException {
+		return getPersistence().findByC_I_T_Last(companyId, pluginId,
+			pluginType, obc);
+	}
+
+	public static com.liferay.portal.model.PluginSetting[] findByC_I_T_PrevAndNext(
+		long pluginSettingId, java.lang.String companyId,
+		java.lang.String pluginId, java.lang.String pluginType,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPluginSettingException {
+		return getPersistence().findByC_I_T_PrevAndNext(pluginSettingId,
+			companyId, pluginId, pluginType, obc);
+	}
+
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -226,6 +277,12 @@ public class PluginSettingUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
+	public static void removeByC_I_T(java.lang.String companyId,
+		java.lang.String pluginId, java.lang.String pluginType)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByC_I_T(companyId, pluginId, pluginType);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -233,6 +290,12 @@ public class PluginSettingUtil {
 	public static int countByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
+	}
+
+	public static int countByC_I_T(java.lang.String companyId,
+		java.lang.String pluginId, java.lang.String pluginType)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_I_T(companyId, pluginId, pluginType);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

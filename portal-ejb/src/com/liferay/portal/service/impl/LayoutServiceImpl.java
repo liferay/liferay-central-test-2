@@ -27,9 +27,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutService;
+import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.LayoutPermission;
 
@@ -166,6 +168,9 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 		LayoutPermission.check(
 			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
+
+		PluginSettingLocalServiceUtil.checkPermission(
+			getUserId(), themeId, ThemeImpl.PLUGIN_TYPE);
 
 		return LayoutLocalServiceUtil.updateLookAndFeel(
 			layoutId, ownerId, themeId, colorSchemeId);

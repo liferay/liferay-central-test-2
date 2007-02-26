@@ -340,7 +340,8 @@ public class EditPagesAction extends PortletAction {
 					(LayoutTypePortlet)layout.getLayoutType();
 
 				layoutTypePortlet.setLayoutTemplateId(
-					PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_TEMPLATE_ID));
+					null, PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_TEMPLATE_ID),
+					false);
 
 				LayoutServiceUtil.updateLayout(
 					layout.getLayoutId(), layout.getOwnerId(),

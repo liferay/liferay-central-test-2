@@ -699,6 +699,12 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
+		
+		<finder name="C_I_T" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="pluginId" />
+			<finder-column name="pluginType" />
+		</finder>
 	</entity>
 	<entity name="Portlet" local-service="true" remote-service="true">
 

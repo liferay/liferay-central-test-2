@@ -45,4 +45,56 @@ public class PluginSettingLocalServiceUtil {
 		return pluginSettingLocalService.dynamicQuery(queryInitializer, begin,
 			end);
 	}
+
+	public static void checkPermission(java.lang.String userId,
+		java.lang.String pluginId, java.lang.String pluginType)
+		throws com.liferay.portal.PortalException {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+		pluginSettingLocalService.checkPermission(userId, pluginId, pluginType);
+	}
+
+	public static com.liferay.portal.model.PluginSetting getDefaultPluginSetting() {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.getDefaultPluginSetting();
+	}
+
+	public static com.liferay.portal.model.PluginSetting getSettingOrDefault(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.getSettingOrDefault(companyId,
+			pluginId, pluginType);
+	}
+
+	public static com.liferay.portal.model.PluginSetting getByC_I_T(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType) throws com.liferay.portal.SystemException {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.getByC_I_T(companyId, pluginId,
+			pluginType);
+	}
+
+	public static boolean hasPermission(java.lang.String userId,
+		java.lang.String pluginId, java.lang.String pluginType) {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.hasPermission(userId, pluginId,
+			pluginType);
+	}
+
+	public static com.liferay.portal.model.PluginSetting updatePluginSetting(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType, java.lang.String roles, boolean active)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.updatePluginSetting(companyId,
+			pluginId, pluginType, roles, active);
+	}
 }

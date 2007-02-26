@@ -25,10 +25,12 @@ package com.liferay.portal.service.impl;
 import EDU.oswego.cs.dl.util.concurrent.SyncMap;
 import EDU.oswego.cs.dl.util.concurrent.WriterPreferenceReadWriteLock;
 
+import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.model.LayoutTemplate;
+import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.impl.LayoutTemplateImpl;
-import com.liferay.portal.plugin.PluginUtil;
+import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.layoutconfiguration.util.velocity.InitColumnProcessor;
 import com.liferay.util.CollectionFactory;
@@ -67,6 +69,7 @@ import org.dom4j.io.SAXReader;
  * <a href="LayoutTemplateLocalUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Ivica Cardic
+ * @author Jorge Ferrer
  *
 */
 public class LayoutTemplateLocalUtil {
@@ -147,19 +150,21 @@ public class LayoutTemplateLocalUtil {
 		return customLayoutTemplates;
 	}
 
-	public static List init(ServletContext ctx, String[] xmls) {
-		return init(null, ctx, xmls);
+	public static List init(ServletContext ctx, String[] xmls,
+							PluginPackage pluginPackage) {
+		return init(null, ctx, xmls, pluginPackage);
 	}
 
 	public static List init(
-		String servletContextName, ServletContext ctx, String[] xmls) {
+		String servletContextName, ServletContext ctx, String[] xmls,
+		PluginPackage pluginPackage) {
 
 		List layoutTemplateIds = new ArrayList();
 
 		try {
 			for (int i = 0; i < xmls.length; i++) {
 				Iterator itr = _readLayoutTemplates(
-					servletContextName, ctx, xmls[i]).iterator();
+					servletContextName, ctx, xmls[i], pluginPackage).iterator();
 
 				while (itr.hasNext()) {
 					ObjectValuePair ovp = (ObjectValuePair)itr.next();
@@ -179,7 +184,8 @@ public class LayoutTemplateLocalUtil {
 
 	public static void readLayoutTemplate(
 			String servletContextName, ServletContext ctx,
-			Set layoutTemplateIds, Element el, boolean standard, String themeId)
+			Set layoutTemplateIds, Element el, boolean standard, String themeId,
+			PluginPackage pluginPackage)
 		throws IOException {
 
 		Map layoutTemplates = null;
@@ -230,6 +236,11 @@ public class LayoutTemplateLocalUtil {
 				layoutTemplates.put(layoutTemplateId, layoutTemplateModel);
 			}
 
+			PluginSetting pluginSetting =
+				PluginSettingLocalServiceUtil.getDefaultPluginSetting();
+
+			layoutTemplateModel.setPluginPackage(pluginPackage);
+
 			if (servletContextName != null) {
 				layoutTemplateModel.setServletContextName(servletContextName);
 			}
@@ -257,6 +268,20 @@ public class LayoutTemplateLocalUtil {
 				layoutTemplateModel.setContent(content);
 				layoutTemplateModel.setColumns(_getColumns(content));
 			}
+
+			Element rolesEl = layoutTemplate.element("roles");
+
+			if (rolesEl != null) {
+				Iterator itr2 = rolesEl.elements("role-name").iterator();
+
+				while (itr2.hasNext()) {
+					Element roleNameEl = (Element)itr2.next();
+
+					pluginSetting.addRole(roleNameEl.getText());
+				}
+			}
+
+			layoutTemplateModel.setDefaultPluginSetting(pluginSetting);
 		}
 	}
 
@@ -302,7 +327,8 @@ public class LayoutTemplateLocalUtil {
 	}
 
 	private static Set _readLayoutTemplates(
-			String servletContextName, ServletContext ctx, String xml)
+			String servletContextName, ServletContext ctx, String xml,
+			PluginPackage pluginPackage)
 		throws DocumentException, IOException {
 
 		Set layoutTemplateIds = new HashSet();
@@ -322,7 +348,7 @@ public class LayoutTemplateLocalUtil {
 		if (standardEl != null) {
 			readLayoutTemplate(
 				servletContextName, ctx, layoutTemplateIds, standardEl, true,
-				null);
+				null, pluginPackage);
 		}
 
 		Element customEl = root.element("custom");
@@ -330,13 +356,7 @@ public class LayoutTemplateLocalUtil {
 		if (customEl != null) {
 			readLayoutTemplate(
 				servletContextName, ctx, layoutTemplateIds, customEl, false,
-				null);
-		}
-
-		Element moduleIdEl = root.element("module-id");
-
-		if (moduleIdEl != null) {
-			PluginUtil.registerPlugin(moduleIdEl.getText());
+				null, pluginPackage);
 		}
 
 		return layoutTemplateIds;

@@ -22,7 +22,14 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.PluginSetting;
+import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.PluginSettingService;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 
 /**
  * <a href="PluginSettingServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -32,4 +39,20 @@ import com.liferay.portal.service.PluginSettingService;
  */
 public class PluginSettingServiceImpl extends PrincipalBean
 	implements PluginSettingService {
+
+	public PluginSetting updatePluginSetting(
+			String companyId, String pluginId, String pluginType, String roles,
+			boolean active)
+		throws PortalException, SystemException {
+
+		if (!RoleLocalServiceUtil.hasUserRole(
+				getUserId(), companyId, RoleImpl.ADMINISTRATOR)) {
+
+			throw new PrincipalException();
+		}
+
+		return PluginSettingLocalServiceUtil.updatePluginSetting(
+			companyId, pluginId, pluginType, roles, active);
+	}
+
 }

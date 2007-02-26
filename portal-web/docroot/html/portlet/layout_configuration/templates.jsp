@@ -58,24 +58,24 @@
 		selector2 = "firstLayout";
 	}
 
-	String[] restrictedTemplates = PropsUtil.getComponentProperties().getStringArray(PropsUtil.LAYOUT_TEMPLATE_RESTRICTIONS, Filter.by(selector1, selector2));
+	List visibleLayoutTemplates = new ArrayList();
+
+	// Filter out disabled layout templates and those for which the user does
+    // not have the desired permissions
 
 	for (int i = 0; i < layoutTemplates.size(); i++) {
 		LayoutTemplate layoutTemplate = (LayoutTemplate)layoutTemplates.get(i);
 
-		String layoutTemplateId = layoutTemplate.getLayoutTemplateId();
+		PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getSettingOrDefault(company.getCompanyId(), layoutTemplate.getLayoutTemplateId(), "layout-template");
 
-		boolean restrictedTemplate = false;
-
-		for (int j = 0; j < restrictedTemplates.length; j++) {
-			if (layoutTemplateId.equals(restrictedTemplates[j])) {
-				restrictedTemplate = true;
-
-				break;
-			}
+		if ((pluginSetting.isActive()) && (pluginSetting.hasPermission(user.getUserId()))) {
+			visibleLayoutTemplates.add(layoutTemplate);
 		}
+	}
 
-		if (!restrictedTemplate) {
+	for (int i = 0; i < visibleLayoutTemplates.size(); i++) {
+		LayoutTemplate layoutTemplate = (LayoutTemplate)visibleLayoutTemplates.get(i);
+
 	%>
 
 			<c:if test="<%= (i % CELLS_PER_ROW) == 0 %>">
@@ -93,7 +93,6 @@
 			</c:if>
 
 	<%
-		}
 	}
 	%>
 

@@ -22,6 +22,12 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.service.PluginSettingServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * <a href="PluginSettingServiceSoap.java.html"><b><i>View Source</i></b></a>
  *
@@ -29,4 +35,21 @@ package com.liferay.portal.service.http;
  *
  */
 public class PluginSettingServiceSoap {
+	public static com.liferay.portal.model.PluginSettingSoap updatePluginSetting(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType, java.lang.String roles, boolean active)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.PluginSetting returnValue = PluginSettingServiceUtil.updatePluginSetting(companyId,
+					pluginId, pluginType, roles, active);
+
+			return com.liferay.portal.model.PluginSettingSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(PluginSettingServiceSoap.class);
 }

@@ -22,6 +22,15 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.security.auth.HttpPrincipal;
+import com.liferay.portal.service.PluginSettingServiceUtil;
+import com.liferay.portal.service.http.TunnelUtil;
+
 /**
  * <a href="PluginSettingServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
@@ -29,4 +38,67 @@ package com.liferay.portal.service.http;
  *
  */
 public class PluginSettingServiceHttp {
+	public static com.liferay.portal.model.PluginSetting updatePluginSetting(
+		HttpPrincipal httpPrincipal, java.lang.String companyId,
+		java.lang.String pluginId, java.lang.String pluginType,
+		java.lang.String roles, boolean active)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = companyId;
+
+			if (companyId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = pluginId;
+
+			if (pluginId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = pluginType;
+
+			if (pluginType == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = roles;
+
+			if (roles == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new BooleanWrapper(active);
+			MethodWrapper methodWrapper = new MethodWrapper(PluginSettingServiceUtil.class.getName(),
+					"updatePluginSetting",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.PluginSetting)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(PluginSettingServiceHttp.class);
 }

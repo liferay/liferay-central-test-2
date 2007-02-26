@@ -71,20 +71,30 @@ for (int i = 0; i < results.size(); i++) {
 	String title = PortalUtil.getPortletTitle(portlet, application, locale);
 	String displayName = portlet.getDisplayName();
 
+	sb.append("<a href='");
+	sb.append(rowURL.toString());
+	sb.append("'>");
+	sb.append("<b>");
 	sb.append(title);
+	sb.append("</b>");
+	sb.append("</a>");
 
+	sb.append("<br>");
+	sb.append("<span style=\"font-size: xx-small;\">");
+	sb.append(LanguageUtil.get(pageContext, "package"));
+	sb.append(": ");
+	sb.append((portlet.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(portlet.getPluginPackage().getName() + " (" + portlet.getPluginPackage().getModuleId() + ")"));
 	if (Validator.isNotNull(displayName) && !title.equals(displayName)) {
 		sb.append("<br>");
-		sb.append("<span style=\"font-size: xx-small;\">");
 		sb.append(portlet.getDisplayName());
-		sb.append("</span>");
 	}
+	sb.append("</span>");
 
 	row.addText(sb.toString(), rowURL);
 
 	// Active
 
-	row.addText(LanguageUtil.get(pageContext, (portlet.isActive() ? "yes" : "no")), rowURL);
+	row.addText(LanguageUtil.get(pageContext, (portlet.isActive() ? "yes" : "no")));
 
 	// Indexed
 
@@ -92,7 +102,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Roles
 
-	row.addText(StringUtil.merge(portlet.getRolesArray(), ", "), rowURL);
+	row.addText(StringUtil.merge(portlet.getRolesArray(), ", "));
 
 	// Add result row
 

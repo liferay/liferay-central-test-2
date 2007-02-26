@@ -26,6 +26,7 @@ import com.liferay.portal.deploy.AutoDeployLayoutTemplateListener;
 import com.liferay.portal.deploy.AutoDeployPortletListener;
 import com.liferay.portal.deploy.AutoDeployThemeListener;
 import com.liferay.portal.deploy.HotDeployLayoutTemplateListener;
+import com.liferay.portal.deploy.HotDeployPluginPackageListener;
 import com.liferay.portal.deploy.HotDeployPortletListener;
 import com.liferay.portal.deploy.HotDeployThemeListener;
 import com.liferay.portal.jcr.JCRFactoryUtil;
@@ -80,6 +81,7 @@ public class GlobalStartupAction extends SimpleAction {
 
 		_log.debug("Registering hot deploy listeners");
 
+		HotDeployUtil.registerListener(new HotDeployPluginPackageListener());
 		HotDeployUtil.registerListener(new HotDeployLayoutTemplateListener());
 		HotDeployUtil.registerListener(new HotDeployPortletListener());
 		HotDeployUtil.registerListener(new HotDeployThemeListener());

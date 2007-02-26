@@ -31,6 +31,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -128,7 +129,20 @@ public class LayoutTypePortletImpl
 		return layoutTemplateId;
 	}
 
-	public void setLayoutTemplateId(String newLayoutTemplateId) {
+	public void setLayoutTemplateId(String userId, String newLayoutTemplateId) {
+		setLayoutTemplateId(userId, newLayoutTemplateId, true);
+	}
+
+	public void setLayoutTemplateId(
+		String userId, String newLayoutTemplateId, boolean checkPermission) {
+
+		if (checkPermission &&
+			!PluginSettingLocalServiceUtil.hasPermission(
+				userId, newLayoutTemplateId,
+				LayoutTemplateImpl.PLUGIN_TYPE)) {
+			return;
+		}
+
 		String oldLayoutTemplateId = getLayoutTemplateId();
 
 		getTypeSettingsProperties().setProperty(

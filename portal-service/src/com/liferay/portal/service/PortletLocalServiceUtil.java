@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.plugin.PluginPackage;
+
 /**
  * <a href="PortletLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -104,16 +106,19 @@ public class PortletLocalServiceUtil {
 		return portletLocalService.hasPortlet(companyId, portletId);
 	}
 
-	public static void initEAR(java.lang.String[] xmls) {
+	public static void initEAR(java.lang.String[] xmls,
+		PluginPackage pluginPackage) {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
-		portletLocalService.initEAR(xmls);
+		portletLocalService.initEAR(xmls, pluginPackage);
 	}
 
 	public static java.util.List initWAR(java.lang.String servletContextName,
-		java.lang.String[] xmls) {
+		java.lang.String[] xmls,
+		PluginPackage pluginPackage) {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-		return portletLocalService.initWAR(servletContextName, xmls);
+		return portletLocalService.initWAR(servletContextName, xmls,
+			pluginPackage);
 	}
 
 	public static com.liferay.portal.model.Portlet updatePortlet(

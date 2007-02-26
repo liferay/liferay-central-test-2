@@ -32,7 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public interface LayoutTemplate extends Comparable, Serializable {
+public interface LayoutTemplate extends Comparable, Plugin, Serializable {
 
 	public String getLayoutTemplateId();
 

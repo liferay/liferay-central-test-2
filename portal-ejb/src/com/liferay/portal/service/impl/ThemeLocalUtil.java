@@ -24,15 +24,17 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ColorScheme;
+import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.ThemeCompanyId;
 import com.liferay.portal.model.ThemeCompanyLimit;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
-import com.liferay.portal.plugin.PluginUtil;
+import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -69,6 +71,7 @@ import org.dom4j.io.SAXReader;
  * <a href="ThemeLocalUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class ThemeLocalUtil {
@@ -128,19 +131,21 @@ public class ThemeLocalUtil {
 		return themes;
 	}
 
-	public static List init(ServletContext ctx, String[] xmls) {
-		return init(null, ctx, xmls);
+	public static List init(ServletContext ctx, String[] xmls,
+							PluginPackage pluginPackage) {
+		return init(null, ctx, xmls, pluginPackage);
 	}
 
 	public static List init(
-		String servletContextName, ServletContext ctx, String[] xmls) {
+		String servletContextName, ServletContext ctx, String[] xmls,
+		PluginPackage pluginPackage) {
 
 		List themeIds = new ArrayList();
 
 		try {
 			for (int i = 0; i < xmls.length; i++) {
 				Iterator itr = _readThemes(
-					servletContextName, ctx, xmls[i]).iterator();
+					servletContextName, ctx, xmls[i], pluginPackage).iterator();
 
 				while (itr.hasNext()) {
 					String themeId = (String)itr.next();
@@ -351,7 +356,8 @@ public class ThemeLocalUtil {
 	}
 
 	private static Set _readThemes(
-			String servletContextName, ServletContext ctx, String xml)
+			String servletContextName, ServletContext ctx, String xml,
+			PluginPackage pluginPackage)
 		throws DocumentException, IOException {
 
 		Set themeIds = new HashSet();
@@ -442,6 +448,11 @@ public class ThemeLocalUtil {
 				_themes.put(themeId, themeModel);
 			}
 
+			PluginSetting pluginSetting =
+				PluginSettingLocalServiceUtil.getDefaultPluginSetting();
+
+			themeModel.setPluginPackage(pluginPackage);
+
 			if (companyLimit != null) {
 				_themeCompanyLimits.put(themeId, companyLimit);
 			}
@@ -484,6 +495,19 @@ public class ThemeLocalUtil {
 				}
 			}
 
+			Element rolesEl = theme.element("roles");
+
+			if (rolesEl != null) {
+				Iterator itr2 = rolesEl.elements("role-name").iterator();
+
+				while (itr2.hasNext()) {
+					Element roleNameEl = (Element)itr2.next();
+
+					pluginSetting.addRole(roleNameEl.getText());
+
+				}
+			}
+
 			_readColorSchemes(theme, themeModel.getColorSchemesMap());
 			_readColorSchemes(theme, themeModel.getColorSchemesMap());
 
@@ -494,22 +518,21 @@ public class ThemeLocalUtil {
 
 				if (standardEl != null) {
 					LayoutTemplateLocalUtil.readLayoutTemplate(
-						null, ctx, null, standardEl, true, themeId);
+						null, ctx, null, standardEl, true, themeId,
+						pluginPackage);
 				}
 
 				Element customEl = layoutTemplatesEl.element("custom");
 
 				if (customEl != null) {
 					LayoutTemplateLocalUtil.readLayoutTemplate(
-						null, ctx, null, customEl, false, themeId);
+						null, ctx, null, customEl, false, themeId,
+						pluginPackage);
 				}
 			}
-		}
 
-		Element moduleIdEl = root.element("module-id");
+			themeModel.setDefaultPluginSetting(pluginSetting);
 
-		if (moduleIdEl != null) {
-			PluginUtil.registerPlugin(moduleIdEl.getText());
 		}
 
 		return themeIds;

@@ -65,7 +65,6 @@
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletMode" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
 <%@ page import="com.liferay.portal.kernel.security.permission.PermissionChecker" %>
-<%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portal.kernel.util.BooleanWrapper" %>
 <%@ page import="com.liferay.portal.kernel.util.IntegerWrapper" %>
 <%@ page import="com.liferay.portal.kernel.util.KeyValuePair" %>

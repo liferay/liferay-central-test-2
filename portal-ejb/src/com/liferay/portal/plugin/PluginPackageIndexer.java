@@ -49,19 +49,19 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
 
 /**
- * <a href="PluginIndexer.java.html"><b><i>View Source</i></b></a>
+ * <a href="PluginPackageIndexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  *
  */
-public class PluginIndexer implements Indexer {
+public class PluginPackageIndexer implements Indexer {
 
-	public static final String PORTLET_ID = "PluginIndexer";
+	public static final String PORTLET_ID = "PluginPackageIndexer";
 
-	public static void addPlugin(
+	public static void addPluginPackage(
 			String moduleId, String name, String version,
-			String author, String type, List tags, List licenses,
+			String author, List types, List tags, List licenses,
 			List liferayVersions, String shortDescription,
 			String longDescription, String pageURL,	String repositoryURL,
 			String status)
@@ -96,14 +96,30 @@ public class PluginIndexer implements Indexer {
 
 			doc.add(LuceneFields.getKeyword("moduleId", moduleId));
 			doc.add(LuceneFields.getKeyword("version", version));
-			doc.add(LuceneFields.getKeyword("type", type));
 			doc.add(LuceneFields.getKeyword(
 				"shortDescription", shortDescription));
 			doc.add(LuceneFields.getKeyword("repositoryURL", repositoryURL));
 
 			StringBuffer sb = new StringBuffer();
 
-			Iterator itr = tags.iterator();
+			Iterator itr = types.iterator();
+
+			while (itr.hasNext()) {
+				String type = (String)itr.next();
+
+				doc.add(LuceneFields.getKeyword("type", type));
+
+				sb.append(type);
+
+				if (itr.hasNext()) {
+					sb.append(StringPool.COMMA + StringPool.SPACE);
+				}
+			}
+
+			doc.add(LuceneFields.getKeyword("types", sb.toString()));
+
+			sb = new StringBuffer();
+			itr = tags.iterator();
 
 			while (itr.hasNext()) {
 				String tag = (String)itr.next();
@@ -145,7 +161,8 @@ public class PluginIndexer implements Indexer {
 		}
 	}
 
-	public static void deletePlugin(String moduleId, String repositoryURL)
+	public static void removePluginPackage(
+		String moduleId, String repositoryURL)
 		throws IOException {
 
 		String pluginId = repositoryURL + StringPool.SLASH + moduleId;
@@ -162,22 +179,22 @@ public class PluginIndexer implements Indexer {
 		}
 	}
 
-	public static void updatePlugin(
+	public static void updatePluginPackage(
 			String moduleId, String name, String version,
-			String author, String type, List tags, List licenses,
+			String author, List types, List tags, List licenses,
 			List liferayVersions, String shortDescription,
 			String longDescription, String pageURL,	String repositoryURL,
 			String status)
 		throws IOException {
 
 		try {
-			deletePlugin(moduleId, repositoryURL);
+			removePluginPackage(moduleId, repositoryURL);
 		}
 		catch (IOException ioe) {
 		}
 
-		addPlugin(
-			moduleId, name, version, author, type, tags, licenses,
+		addPluginPackage(
+			moduleId, name, version, author, types, tags, licenses,
 			liferayVersions, shortDescription, longDescription, pageURL,
 			repositoryURL, status);
 	}
@@ -211,7 +228,7 @@ public class PluginIndexer implements Indexer {
 
 	public void reIndex(String[] ids) throws SearchException {
 		try {
-			PluginUtil.reIndex(ids);
+			PluginPackageUtil.reIndex(ids);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -249,6 +266,6 @@ public class PluginIndexer implements Indexer {
 		return writer;
 	}
 
-	private static Log _log = LogFactory.getLog(PluginIndexer.class);
+	private static Log _log = LogFactory.getLog(PluginPackageIndexer.class);
 
 }

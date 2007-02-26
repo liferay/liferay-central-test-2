@@ -11,15 +11,7 @@ Liferay Portal.
 The liferay-portlet-app element is the root of the deployment descriptor for
 a Liferay portlet application.
 -->
-<!ELEMENT liferay-portlet-app (module-id, portlet*, role-mapper*, custom-user-attribute*)>
-
-<!--
-The module-id element contains the full identifier of the plugin using the
-Maven based syntax: groupId/artifactId/version/file-type.
-
-Example: my-company/sample-portlet/1.0.0/war
--->
-<!ELEMENT module-id (#PCDATA)>
+<!ELEMENT liferay-portlet-app (portlet*, role-mapper*, custom-user-attribute*)>
 
 <!--
 The portlet element contains the declarative data of a portlet.

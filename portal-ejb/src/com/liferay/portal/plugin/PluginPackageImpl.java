@@ -22,7 +22,9 @@
 
 package com.liferay.portal.plugin;
 
-import com.liferay.portal.kernel.plugin.Plugin;
+import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.plugin.PluginPackageRepository;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
@@ -32,14 +34,14 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * <a href="PluginImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PluginPackageImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class PluginImpl implements Comparable, Plugin {
+public class PluginPackageImpl implements Comparable, PluginPackage {
 
-	public PluginImpl(String moduleId) {
+	public PluginPackageImpl(String moduleId) {
 		_moduleId = new ModuleId(moduleId);
 	}
 
@@ -59,16 +61,16 @@ public class PluginImpl implements Comparable, Plugin {
 		return _moduleId.getVersion();
 	}
 
-	public boolean isLaterVersionThan(Plugin plugin) {
-		return _moduleId.isLaterVersionThan(plugin.getVersion());
+	public boolean isLaterVersionThan(PluginPackage pluginPackage) {
+		return _moduleId.isLaterVersionThan(pluginPackage.getVersion());
 	}
 
-	public boolean isPreviousVersionThan(Plugin plugin) {
-		return _moduleId.isPreviousVersionThan(plugin.getVersion());
+	public boolean isPreviousVersionThan(PluginPackage pluginPackage) {
+		return _moduleId.isPreviousVersionThan(pluginPackage.getVersion());
 	}
 
-	public boolean isSameVersionThan(Plugin plugin) {
-		return _moduleId.isSameVersionThan(plugin.getVersion());
+	public boolean isSameVersionThan(PluginPackage pluginPackage) {
+		return _moduleId.isSameVersionThan(pluginPackage.getVersion());
 	}
 
 	public String getAuthor() {
@@ -79,12 +81,12 @@ public class PluginImpl implements Comparable, Plugin {
 		_author = author;
 	}
 
-	public String getType() {
-		return _type;
+	public List getTypes() {
+		return _types;
 	}
 
-	public void setType(String type) {
-		_type = type;
+	public void setTypes(List types) {
+		_types = types;
 	}
 
 	public List getTags() {
@@ -127,12 +129,12 @@ public class PluginImpl implements Comparable, Plugin {
 		_longDescription = longDescription;
 	}
 
-	public List getScreenshotURLs() {
-		return _screenshotURLs;
+	public List getScreenshots() {
+		return _screenshots;
 	}
 
-	public void setScreenshotURLs(List screenshotURLs) {
-		_screenshotURLs = screenshotURLs;
+	public void setScreenshots(List screenshots) {
+		_screenshots = screenshots;
 	}
 
 	public String getPageURL() {
@@ -143,12 +145,31 @@ public class PluginImpl implements Comparable, Plugin {
 		_pageURL = pageURL;
 	}
 
-	public String getRepositoryURL() {
-		return _repositoryURL;
+	public String getDownloadURL() {
+		String useDownloadURL = getRepository().getSettings().getProperty(
+			PluginPackageRepository.SETTING_USE_DOWNLOAD_URL);
+
+		if (!GetterUtil.getBoolean(useDownloadURL, false)) {
+			return getArtifactURL();
+		}
+
+		return _downloadURL;
 	}
 
-	public void setRepositoryURL(String repositoryURL) {
-		_repositoryURL = repositoryURL;
+	public void setDownloadURL(String downloadURL) {
+		_downloadURL = downloadURL;
+	}
+
+	public PluginPackageRepository getRepository() {
+		return _repository;
+	}
+
+	public void setRepository(PluginPackageRepository repository) {
+		_repository = repository;
+	}
+
+	public String getRepositoryURL() {
+		return _repository.getRepositoryURL();
 	}
 
 	public String getRecommendedWARName() {
@@ -182,26 +203,27 @@ public class PluginImpl implements Comparable, Plugin {
 	}
 
 	public int compareTo(Object obj) {
-		if (!(obj instanceof Plugin)) {
+		if (!(obj instanceof PluginPackage)) {
 			return -1;
 		}
 
-		Plugin plugin = (Plugin)obj;
+		PluginPackage pluginPackage = (PluginPackage)obj;
 
-		return getName().compareTo(plugin.getName());
+		return getName().compareTo(pluginPackage.getName());
 	}
 
 	public boolean equals(Object obj) {
-		if (!(obj instanceof Plugin)) {
+		if (!(obj instanceof PluginPackage)) {
 			return false;
 		}
 
-		Plugin plugin = (Plugin)obj;
+		PluginPackage pluginPackage = (PluginPackage)obj;
 
 		EqualsBuilder equalsBuilder = new EqualsBuilder();
 
-		equalsBuilder.append(getModuleId(), plugin.getModuleId());
-		equalsBuilder.append(getRepositoryURL(), plugin.getRepositoryURL());
+		equalsBuilder.append(getModuleId(), pluginPackage.getModuleId());
+		equalsBuilder.append(
+			getRepositoryURL(), pluginPackage.getRepositoryURL());
 
 		return equalsBuilder.isEquals();
 	}
@@ -218,15 +240,16 @@ public class PluginImpl implements Comparable, Plugin {
 	private ModuleId _moduleId;
 	private String _name;
 	private String _author;
-	private String _type;
+	private List _types;
 	private List _tags = new ArrayList();
 	private List _licenses = new ArrayList();
 	private List _liferayVersions = new ArrayList();
 	private String _shortDescription;
 	private String _longDescription;
-	private List _screenshotURLs = new ArrayList();
+	private List _screenshots = new ArrayList();
 	private String _pageURL;
-	private String _repositoryURL;
+	private String _downloadURL;
+	private PluginPackageRepository _repository;
 	private String _recommendedWARName;
 
 }
