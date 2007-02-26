@@ -2,7 +2,6 @@
 <!DOCTYPE look-and-feel PUBLIC "-//Liferay//DTD Look and Feel 4.3.0//EN" "http://www.liferay.com/dtd/liferay-look-and-feel_4_3_0.dtd">
 
 <look-and-feel>
-	<module-id>liferay-portal/bundled-themes/4.3.0/war</module-id>
 	<compatibility>
 		<version>4.2.0</version>
 	</compatibility>
@@ -19,6 +18,9 @@
 			<setting key="hello" value="world" />
 			<setting key="hi" value="mom" />
 		</settings>
+		<roles>
+			<role-name>User</role-name>
+		</roles>
 		<color-scheme id="01" name="Blue">
 			<![CDATA[
 				body-bg=#e9eff5
