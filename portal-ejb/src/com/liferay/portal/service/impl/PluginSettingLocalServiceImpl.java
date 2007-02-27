@@ -87,10 +87,6 @@ public class PluginSettingLocalServiceImpl
 				plugin = LayoutTemplateLocalUtil.getLayoutTemplate(
 					pluginId, false, null);
 			}
-			else if (pluginType.equals(PortletImpl.PLUGIN_TYPE)) {
-				plugin = PortletLocalServiceUtil.getPortletById(
-					companyId, pluginId);
-			}
 
 			if ((plugin == null)
 				|| (plugin.getDefaultPluginSetting() == null)) {
