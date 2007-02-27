@@ -24,6 +24,7 @@ package com.liferay.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.util.Map;
 import java.util.StringTokenizer;
 
 /**
@@ -34,39 +35,16 @@ import java.util.StringTokenizer;
  */
 public class Version implements Comparable {
 
-	public Version(String major, String minor, String bugFix,
-				   String buildNumber) {
+	public static Version getInstance(String version) {
+		Version versionObj = (Version)_versions.get(version);
 
-		_major = major;
-		_minor = minor;
-		_bugFix = bugFix;
-		_buildNumber = buildNumber;
-	}
+		if (versionObj == null) {
+			versionObj =  new Version(version);
 
-	public Version(String version) {
-		StringTokenizer st = new StringTokenizer(version, _SEPARATOR);
-
-		_major = st.nextToken();
-
-		if (st.hasMoreTokens()) {
-			_minor = st.nextToken();
+			_versions.put(version, versionObj);
 		}
 
-		if (st.hasMoreTokens()) {
-			_bugFix = st.nextToken();
-		}
-
-		StringBuffer buildNumber = new StringBuffer();
-
-		while (st.hasMoreTokens()) {
-			buildNumber.append(st.nextToken());
-
-			if (st.hasMoreTokens()) {
-				buildNumber.append(_SEPARATOR);
-			}
-		}
-
-		_buildNumber = buildNumber.toString();
+		return versionObj;
 	}
 
 	public String getMajor() {
@@ -86,7 +64,7 @@ public class Version implements Comparable {
 	}
 
 	public boolean isLaterVersionThan(String version) {
-		if (compareTo(new Version(version)) > 0) {
+		if (compareTo(getInstance(version)) > 0) {
 			return true;
 		}
 		else {
@@ -95,7 +73,7 @@ public class Version implements Comparable {
 	}
 
 	public boolean isPreviousVersionThan(String version) {
-		if (compareTo(new Version(version)) < 0) {
+		if (compareTo(getInstance(version)) < 0) {
 			return true;
 		}
 		else {
@@ -104,7 +82,7 @@ public class Version implements Comparable {
 	}
 
 	public boolean isSameVersionAs(String version) {
-		if (compareTo(new Version(version)) == 0) {
+		if (compareTo(getInstance(version)) == 0) {
 			return true;
 		}
 		else {
@@ -205,6 +183,32 @@ public class Version implements Comparable {
 		return toString().hashCode();
 	}
 
+	protected Version(String version) {
+		StringTokenizer st = new StringTokenizer(version, _SEPARATOR);
+
+		_major = st.nextToken();
+
+		if (st.hasMoreTokens()) {
+			_minor = st.nextToken();
+		}
+
+		if (st.hasMoreTokens()) {
+			_bugFix = st.nextToken();
+		}
+
+		StringBuffer buildNumber = new StringBuffer();
+
+		while (st.hasMoreTokens()) {
+			buildNumber.append(st.nextToken());
+
+			if (st.hasMoreTokens()) {
+				buildNumber.append(_SEPARATOR);
+			}
+		}
+
+		_buildNumber = buildNumber.toString();
+	}
+
 	private int _compareVersionFragments(
 		String versionFragmentA, String versionFragmentB) {
 
@@ -220,6 +224,8 @@ public class Version implements Comparable {
 	}
 
 	private static final String _SEPARATOR = StringPool.PERIOD;
+
+	private static Map _versions = CollectionFactory.getSyncHashMap();
 
 	private String _major;
 	private String _minor;

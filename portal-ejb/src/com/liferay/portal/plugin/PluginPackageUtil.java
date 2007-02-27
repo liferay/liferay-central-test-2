@@ -97,7 +97,7 @@ public class PluginPackageUtil {
 				PluginPackageRepository repository =
 					getRepository(repositoryURLs[i]);
 
-				plugins.addAll(= repository.getPlugins());
+				plugins.addAll(repository.getPlugins());
 			}
 			catch(PluginPackageException pe) {
 				_log.error(
@@ -436,9 +436,11 @@ public class PluginPackageUtil {
 
 	private static boolean _isCurrentVersionSupported(List versions) {
 		for (int i = 0; i < versions.size(); i++) {
-			Version supportedVersion = new Version((String)versions.get(i));
+			Version supportedVersion = Version.getInstance(
+				(String)versions.get(i));
 
-			Version currentVersion = new Version(ReleaseInfo.getVersion());
+			Version currentVersion = Version.getInstance(
+				ReleaseInfo.getVersion());
 
 			if (supportedVersion.includes(currentVersion)) {
 				return true;
@@ -546,29 +548,33 @@ public class PluginPackageUtil {
 
 		pluginPackageRepository.setSettings(settings);
 
-		Iterator itr = root.elements("plugin-package").iterator();
+		Iterator itr1 = root.elements("plugin-package").iterator();
 
-		while (itr.hasNext()) {
-			Element pluginPackageEl = (Element)itr.next();
+		while (itr1.hasNext()) {
+			Element pluginPackageEl = (Element)itr1.next();
 
 			PluginPackage pluginPackage = readPluginPackageXml(pluginPackageEl);
 
 			if (!_isCurrentVersionSupported(
-				pluginPackage.getLiferayVersions())) {
+					pluginPackage.getLiferayVersions())) {
+
 				continue;
 			}
 
-			Iterator iterator = pluginPackage.getTypes().iterator();
+			Iterator itr2 = pluginPackage.getTypes().iterator();
 
 			boolean containsSupportedTypes = false;
 
-			while (iterator.hasNext()) {
-				String type = (String) iterator.next();
+			while (itr2.hasNext()) {
+				String type = (String)itr2.next();
+
 				if (supportedPluginTypes.contains(type)) {
 					containsSupportedTypes = true;
+
 					break;
 				}
 			}
+
 			if (!containsSupportedTypes) {
 				continue;
 			}
@@ -660,9 +666,10 @@ public class PluginPackageUtil {
 		if (parent != null) {
 			List screenshots = parent.elements("screenshot");
 
-			Iterator iterator = screenshots.iterator();
-			while (iterator.hasNext()) {
-				Element screenshotEl = (Element) iterator.next();
+			Iterator itr = screenshots.iterator();
+
+			while (itr.hasNext()) {
+				Element screenshotEl = (Element)itr.next();
 
 				Screenshot screenshot = new Screenshot();
 
@@ -672,7 +679,6 @@ public class PluginPackageUtil {
 					screenshotEl.element("large-image-url").getText());
 
 				result.add(screenshot);
-
 			}
 		}
 

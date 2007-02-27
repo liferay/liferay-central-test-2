@@ -45,7 +45,7 @@ public class ModuleId {
 
 		_groupId = st.nextToken();
 		_artifactId = st.nextToken();
-		_pluginVersion = new Version(st.nextToken());
+		_pluginVersion = Version.getInstance(st.nextToken());
 		_type = st.nextToken();
 	}
 
