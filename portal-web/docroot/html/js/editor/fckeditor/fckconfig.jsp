@@ -29,6 +29,8 @@ String plid = ParamUtil.getString(request, "p_l_id");
 String mainPath = ParamUtil.getString(request, "p_main_path");
 %>
 
+FCKConfig.IncludeLatinEntities	= false ;
+
 /*
 FCKConfig.ToolbarSets["Liferay"] = [
 	['Source','DocProps','-','NewPage','Preview','-','Templates'],
