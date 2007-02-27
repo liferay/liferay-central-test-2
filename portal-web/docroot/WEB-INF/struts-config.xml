@@ -232,9 +232,9 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/admin/view" forward="portlet.admin.view" />
-
 		<action path="/admin/plugin_installer" forward="portlet.admin.plugin_installer" />
+
+		<action path="/admin/view" forward="portlet.admin.view" />
 
 		<!-- Alfresco Content -->
 

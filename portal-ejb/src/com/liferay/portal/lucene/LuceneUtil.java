@@ -72,6 +72,17 @@ public class LuceneUtil {
 	public static final Pattern TERM_END_PATTERN =
 		Pattern.compile("(\\w{4,}?)\\b");
 
+	public static void addExactTerm(
+			BooleanQuery booleanQuery, String field, String text)
+		throws ParseException {
+
+		text = KeywordsUtil.escape(text);
+
+		Query query = new TermQuery(new Term(field, text));
+
+		booleanQuery.add(query, BooleanClause.Occur.SHOULD);
+	}
+
 	public static void addTerm(
 			BooleanQuery booleanQuery, String field, String text)
 		throws ParseException {
@@ -116,17 +127,6 @@ public class LuceneUtil {
 				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 			}
 		}
-	}
-
-	public static void addExactTerm(
-			BooleanQuery booleanQuery, String field, String text)
-		throws ParseException {
-
-		text = KeywordsUtil.escape(text);
-
-		Query query = new TermQuery(new Term(field, text));
-
-		booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 	}
 
 	public static void addRequiredTerm(

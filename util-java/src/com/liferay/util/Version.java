@@ -103,7 +103,7 @@ public class Version implements Comparable {
 		}
 	}
 
-	public boolean isSameVersionThan(String version) {
+	public boolean isSameVersionAs(String version) {
 		if (compareTo(new Version(version)) == 0) {
 			return true;
 		}
@@ -118,17 +118,17 @@ public class Version implements Comparable {
 		}
 
 		if (getMajor().equals(version.getMajor())) {
-			if (getMinor().equals("*")) {
+			if (getMinor().equals(StringPool.STAR)) {
 				return true;
 			}
 
 			if (getMinor().equals(version.getMinor())) {
-				if (getBugFix().equals("*")) {
+				if (getBugFix().equals(StringPool.STAR)) {
 					return true;
 				}
 
 				if (getBugFix().equals(version.getBugFix())) {
-					if (getBuildNumber().equals("*") ||
+					if (getBuildNumber().equals(StringPool.STAR) ||
 						getBuildNumber().equals(version.getBuildNumber())) {
 
 						return true;
@@ -207,14 +207,16 @@ public class Version implements Comparable {
 
 	private int _compareVersionFragments(
 		String versionFragmentA, String versionFragmentB) {
+
 		if (Validator.isNull(versionFragmentA)) {
 			versionFragmentA = "0";
 		}
+
 		if (Validator.isNull(versionFragmentB)) {
 			versionFragmentB = "0";
 		}
-		return versionFragmentA.compareTo(versionFragmentB);
 
+		return versionFragmentA.compareTo(versionFragmentB);
 	}
 
 	private static final String _SEPARATOR = StringPool.PERIOD;

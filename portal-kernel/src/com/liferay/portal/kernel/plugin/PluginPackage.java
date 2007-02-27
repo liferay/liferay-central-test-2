@@ -102,6 +102,6 @@ public interface PluginPackage {
 
 	public boolean isPreviousVersionThan(PluginPackage pluginPackage);
 
-	public boolean isSameVersionThan(PluginPackage pluginPackage);
+	public boolean isSameVersionAs(PluginPackage pluginPackage);
 
 }

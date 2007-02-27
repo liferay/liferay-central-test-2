@@ -69,8 +69,8 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 		return _moduleId.isPreviousVersionThan(pluginPackage.getVersion());
 	}
 
-	public boolean isSameVersionThan(PluginPackage pluginPackage) {
-		return _moduleId.isSameVersionThan(pluginPackage.getVersion());
+	public boolean isSameVersionAs(PluginPackage pluginPackage) {
+		return _moduleId.isSameVersionAs(pluginPackage.getVersion());
 	}
 
 	public String getAuthor() {

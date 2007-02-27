@@ -97,8 +97,7 @@ public class PluginPackageUtil {
 				PluginPackageRepository repository =
 					getRepository(repositoryURLs[i]);
 
-				Collection repoPlugins = repository.getPlugins();
-				plugins.addAll(repoPlugins);
+				plugins.addAll(= repository.getPlugins());
 			}
 			catch(PluginPackageException pe) {
 				_log.error(
@@ -115,10 +114,16 @@ public class PluginPackageUtil {
 
 	public static PluginPackage getInstalledVersion(
 		String groupId, String artifactId) {
+
 		List pluginList = _installedPlugins.findPluginsByGroupIdAndArtifactId(
 			groupId, artifactId);
 
-		return (pluginList == null)?null:(PluginPackage) pluginList.get(0);
+		if (pluginList == null) {
+			return null;
+		}
+		else {
+			return (PluginPackage)pluginList.get(0);
+		}
 	}
 
 	public static Date getLastUpdateDate() {
@@ -395,17 +400,22 @@ public class PluginPackageUtil {
 	}
 
 	private static void _indexPluginPackage(PluginPackage pluginPackage) {
-		String status;
 		PluginPackage installedPluginPackage = getInstalledVersion(
 			pluginPackage.getGroupId(), pluginPackage.getArtifactId());
+
+		String status = null;
+
 		if (installedPluginPackage == null) {
 			status = "notInstalled";
-		} else if (installedPluginPackage.isLaterVersionThan(pluginPackage)) {
+		}
+		else if (installedPluginPackage.isLaterVersionThan(pluginPackage)) {
 			status = "laterVersionInstalled";
-		} else if (installedPluginPackage.isPreviousVersionThan(
+		}
+		else if (installedPluginPackage.isPreviousVersionThan(
 			pluginPackage)) {
 			status = "newVersion";
-		} else {
+		}
+		else {
 			status = "alreadyInstalled";
 		}
 
