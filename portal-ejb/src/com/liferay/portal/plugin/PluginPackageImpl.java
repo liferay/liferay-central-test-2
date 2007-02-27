@@ -169,7 +169,12 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 	}
 
 	public String getRepositoryURL() {
-		return _repository.getRepositoryURL();
+		if (_repository != null) {
+			return _repository.getRepositoryURL();
+		}
+		else {
+			return PluginPackageRepository.LOCAL_URL; 
+		}
 	}
 
 	public String getRecommendedWARName() {
