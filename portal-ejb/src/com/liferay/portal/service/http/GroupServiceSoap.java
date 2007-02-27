@@ -139,6 +139,37 @@ public class GroupServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.GroupSoap[] search(
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String description, java.lang.String[] params, int begin,
+		int end) throws RemoteException {
+		try {
+			java.util.List returnValue = GroupServiceUtil.search(companyId,
+					name, description, params, begin, end);
+
+			return com.liferay.portal.model.GroupSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int searchCount(java.lang.String companyId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] params) throws RemoteException {
+		try {
+			int returnValue = GroupServiceUtil.searchCount(companyId, name,
+					description, params);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void setRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws RemoteException {
 		try {

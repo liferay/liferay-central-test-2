@@ -31,7 +31,9 @@ import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.PortalPermission;
 import com.liferay.portal.service.permission.RolePermission;
+import com.liferay.util.MapUtil;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -97,6 +99,27 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 		throws SystemException {
 
 		return GroupLocalServiceUtil.hasUserGroup(userId, groupId);
+	}
+
+	public List search(
+			String companyId, String name, String description, String[] params,
+			int begin, int end)
+		throws SystemException {
+
+		LinkedHashMap paramsObj = MapUtil.toLinkedHashMap(params);
+
+		return GroupLocalServiceUtil.search(
+			companyId, name, description, paramsObj, begin, end);
+	}
+
+	public int searchCount(
+			String companyId, String name, String description, String[] params)
+		throws SystemException {
+
+		LinkedHashMap paramsObj = MapUtil.toLinkedHashMap(params);
+
+		return GroupLocalServiceUtil.searchCount(
+			companyId, name, description, paramsObj);
 	}
 
 	public void setRoleGroups(String roleId, long[] groupIds)

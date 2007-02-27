@@ -241,7 +241,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		Set keepProperties = CollectionFactory.getHashSet();
 
 		for (int i = 0; i < properties.length; i++) {
-			String[] property = StringUtil.split(properties[i], "|");
+			String[] property = StringUtil.split(
+				properties[i], StringPool.COLON);
 
 			Long propertyId = new Long(0);
 

@@ -34,8 +34,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		// Inputs
 
-		addEntryNameInput.bind(
-			'keypress', this,
+		addEntryNameInput.keypress(
 			function(event) {
 				if (event.keyCode == 13) {
 					instance._addEntry(instance);
@@ -43,8 +42,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
-		keywordsInput.bind(
-			'keyup', this,
+		keywordsInput.keyup(
 			function(event) {
 				instance._searchEntries(instance);
 			}
@@ -324,7 +322,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 						properties += ',';
 					}
 
-					properties += propertyKey + '|' + propertyValue;
+					properties += propertyKey + ':' + propertyValue;
 				}
 			}
 		);
@@ -359,7 +357,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 				var propertyKey = jQuery('input[@name=' + instanceVar + 'propertyKey]', row).val();
 				var propertyValue = jQuery('input[@name=' + instanceVar + 'propertyValue]', row).val();
 
-				properties += propertyId + '|' + propertyKey + '|' + propertyValue;
+				properties += propertyId + ':' + propertyKey + ':' + propertyValue;
 
 				if ((i + 1) < rows.length) {
 					properties += ',';

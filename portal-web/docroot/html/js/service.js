@@ -217,6 +217,22 @@ Liferay.Service.Portal.Group = {
 		_$J.getJSON(Liferay.Service.url, params, callback);
 	},
 
+	search: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "search";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	searchCount: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "searchCount";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
 	setRoleGroups: function(params, callback) {
 		params.serviceParameters = Liferay.Service.getParameters(params);
 		params.serviceClassName = this.serviceClassName;

@@ -95,6 +95,25 @@ public class GroupServiceUtil {
 		return groupService.hasUserGroup(userId, groupId);
 	}
 
+	public static java.util.List search(java.lang.String companyId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] params, int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		GroupService groupService = GroupServiceFactory.getService();
+
+		return groupService.search(companyId, name, description, params, begin,
+			end);
+	}
+
+	public static int searchCount(java.lang.String companyId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] params)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		GroupService groupService = GroupServiceFactory.getService();
+
+		return groupService.searchCount(companyId, name, description, params);
+	}
+
 	public static void setRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

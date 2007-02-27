@@ -98,6 +98,26 @@ public class GroupServiceJSON {
 		return returnValue;
 	}
 
+	public static JSONArray search(java.lang.String companyId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] params, int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		java.util.List returnValue = GroupServiceUtil.search(companyId, name,
+				description, params, begin, end);
+
+		return GroupJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static int searchCount(java.lang.String companyId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] params)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		int returnValue = GroupServiceUtil.searchCount(companyId, name,
+				description, params);
+
+		return returnValue;
+	}
+
 	public static void setRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

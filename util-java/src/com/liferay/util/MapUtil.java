@@ -22,7 +22,10 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -50,6 +53,18 @@ public class MapUtil {
 
 			copy.put(key, value);
 		}
+	}
+
+	public static LinkedHashMap toLinkedHashMap(String[] params) {
+		LinkedHashMap map = new LinkedHashMap();
+
+		for (int i = 0; i < params.length; i++) {
+			String[] kvp = StringUtil.split(params[i], StringPool.COLON);
+
+			map.put(kvp[0], kvp[1]);
+		}
+
+		return map;
 	}
 
 }

@@ -63,6 +63,15 @@ public interface GroupService {
 	public boolean hasUserGroup(java.lang.String userId, long groupId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public java.util.List search(java.lang.String companyId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] params, int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public int searchCount(java.lang.String companyId, java.lang.String name,
+		java.lang.String description, java.lang.String[] params)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public void setRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

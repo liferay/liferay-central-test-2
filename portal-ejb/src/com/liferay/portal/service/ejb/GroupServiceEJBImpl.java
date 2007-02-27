@@ -102,6 +102,25 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		return GroupServiceFactory.getTxImpl().hasUserGroup(userId, groupId);
 	}
 
+	public java.util.List search(java.lang.String companyId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] params, int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return GroupServiceFactory.getTxImpl().search(companyId, name,
+			description, params, begin, end);
+	}
+
+	public int searchCount(java.lang.String companyId, java.lang.String name,
+		java.lang.String description, java.lang.String[] params)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return GroupServiceFactory.getTxImpl().searchCount(companyId, name,
+			description, params);
+	}
+
 	public void setRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

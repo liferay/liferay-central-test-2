@@ -169,7 +169,8 @@ public class TagsEntryFinder {
 
 	private static void _setJoin(QueryPos qPos, String[] properties) {
 		for (int i = 0; i < properties.length; i++) {
-			String[] property = StringUtil.split(properties[i], "|");
+			String[] property = StringUtil.split(
+				properties[i], StringPool.COLON);
 
 			String key = StringPool.BLANK;
 
