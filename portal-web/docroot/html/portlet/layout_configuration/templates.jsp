@@ -66,7 +66,7 @@
 	for (int i = 0; i < layoutTemplates.size(); i++) {
 		LayoutTemplate layoutTemplate = (LayoutTemplate)layoutTemplates.get(i);
 
-		PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getSettingOrDefault(company.getCompanyId(), layoutTemplate.getLayoutTemplateId(), "layout-template");
+		PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(company.getCompanyId(), layoutTemplate.getLayoutTemplateId(), "layout-template");
 
 		if ((pluginSetting.isActive()) && (pluginSetting.hasPermission(user.getUserId()))) {
 			visibleLayoutTemplates.add(layoutTemplate);

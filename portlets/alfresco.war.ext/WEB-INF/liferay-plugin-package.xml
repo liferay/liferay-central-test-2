@@ -8,9 +8,13 @@
 		<type>portlet</type>
 	</types>
 	<short-description>
-		Access the Alfresco UI as a portlet
+		Access the Alfresco UI as a portlet.
 	</short-description>
 	<page-url>http://www.liferay.com/web/guest/downloads<page-url>
+	<author>Alfresco Software, Inc.</author>
+	<licenses>
+		<license osi-approved="true">GPL</license>
+	</licenses>
 	<liferay-versions>
 		<liferay-version>4.2.*</liferay-version>
 	</liferay-versions>

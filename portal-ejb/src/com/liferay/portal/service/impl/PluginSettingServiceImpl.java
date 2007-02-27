@@ -37,8 +37,8 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
  * @author Brian Wing Shun Chan
  *
  */
-public class PluginSettingServiceImpl extends PrincipalBean
-	implements PluginSettingService {
+public class PluginSettingServiceImpl
+	extends PrincipalBean implements PluginSettingService {
 
 	public PluginSetting updatePluginSetting(
 			String companyId, String pluginId, String pluginType, String roles,

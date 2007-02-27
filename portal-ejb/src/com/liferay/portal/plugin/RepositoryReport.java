@@ -43,21 +43,21 @@ public class RepositoryReport {
 		_reportMap.put(repositoryURL, SUCCESS);
 	}
 
-	public void addError(String repositoryURL, PluginPackageException pe) {
+	public void addError(String repositoryURL, PluginPackageException ppe) {
 		StringBuffer sb = new StringBuffer();
 
-		if (Validator.isNotNull(pe.getMessage())) {
-			sb.append(pe.getMessage());
+		if (Validator.isNotNull(ppe.getMessage())) {
+			sb.append(ppe.getMessage());
 		}
 
-		if ((pe.getCause() != null) &&
-			Validator.isNull(pe.getCause().getMessage())) {
+		if ((ppe.getCause() != null) &&
+			Validator.isNull(ppe.getCause().getMessage())) {
 
-			sb.append(pe.getCause().getMessage());
+			sb.append(ppe.getCause().getMessage());
 		}
 
 		if (sb.length() == 0) {
-			sb.append(pe.toString());
+			sb.append(ppe.toString());
 		}
 
 		_reportMap.put(repositoryURL, sb.toString());

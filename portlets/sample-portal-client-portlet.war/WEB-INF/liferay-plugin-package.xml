@@ -7,10 +7,17 @@
 	<types>
 		<type>portlet</type>
 	</types>
+	<tags>
+		<tag>sample</tag>
+	</tags>
 	<short-description>
-		This portlet shows how to use the portal-client to access Liferay's Services using SOAP
+		This portlet shows how to use the portal-client.jar to access Liferay's services using SOAP.
 	</short-description>
 	<page-url>http://www.liferay.com/web/guest/downloads<page-url>
+	<author>Liferay, Inc.</author>
+	<licenses>
+		<license osi-approved="true">MIT</license>
+	</licenses>
 	<liferay-versions>
 		<liferay-version>4.2.*</liferay-version>
 	</liferay-versions>

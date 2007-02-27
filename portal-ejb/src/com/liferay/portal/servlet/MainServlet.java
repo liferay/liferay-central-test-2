@@ -189,9 +189,10 @@ public class MainServlet extends ActionServlet {
 
 			ctx.setAttribute(WebKeys.IMAGE_PATH, rootPath + "/image");
 
-			// Read bundled plugins package info
+			// Read bundled plugins package information
 
 			PluginPackage pluginPackage = null;
+
 			try {
 				pluginPackage =
 					HotDeployPluginPackageListener.readPluginPackage(ctx);

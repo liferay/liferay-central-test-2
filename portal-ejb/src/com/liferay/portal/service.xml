@@ -699,8 +699,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		
-		<finder name="C_I_T" return-type="Collection">
+		<finder name="C_I_T" return-type="PluginSetting">
 			<finder-column name="companyId" />
 			<finder-column name="pluginId" />
 			<finder-column name="pluginType" />

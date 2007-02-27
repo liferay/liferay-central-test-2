@@ -824,7 +824,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 						for (int i = 0; i < themes.size(); i++) {
 							Theme candidateTheme = (Theme)themes.get(i);
 
-							PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getSettingOrDefault(company.getCompanyId(), candidateTheme.getThemeId(), ThemeImpl.PLUGIN_TYPE);
+							PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(company.getCompanyId(), candidateTheme.getThemeId(), ThemeImpl.PLUGIN_TYPE);
 
 							if ((pluginSetting.isActive()) && (pluginSetting.hasPermission(user.getUserId()))) {
 								visibleThemes.add(candidateTheme);

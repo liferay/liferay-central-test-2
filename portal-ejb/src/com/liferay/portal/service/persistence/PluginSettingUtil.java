@@ -192,55 +192,18 @@ public class PluginSettingUtil {
 			companyId, obc);
 	}
 
-	public static java.util.List findByC_I_T(java.lang.String companyId,
-		java.lang.String pluginId, java.lang.String pluginType)
-		throws com.liferay.portal.SystemException {
+	public static com.liferay.portal.model.PluginSetting findByC_I_T(
+		java.lang.String companyId, java.lang.String pluginId,
+		java.lang.String pluginType)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPluginSettingException {
 		return getPersistence().findByC_I_T(companyId, pluginId, pluginType);
 	}
 
-	public static java.util.List findByC_I_T(java.lang.String companyId,
-		java.lang.String pluginId, java.lang.String pluginType, int begin,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_I_T(companyId, pluginId, pluginType,
-			begin, end);
-	}
-
-	public static java.util.List findByC_I_T(java.lang.String companyId,
-		java.lang.String pluginId, java.lang.String pluginType, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_I_T(companyId, pluginId, pluginType,
-			begin, end, obc);
-	}
-
-	public static com.liferay.portal.model.PluginSetting findByC_I_T_First(
+	public static com.liferay.portal.model.PluginSetting fetchByC_I_T(
 		java.lang.String companyId, java.lang.String pluginId,
-		java.lang.String pluginType,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchPluginSettingException {
-		return getPersistence().findByC_I_T_First(companyId, pluginId,
-			pluginType, obc);
-	}
-
-	public static com.liferay.portal.model.PluginSetting findByC_I_T_Last(
-		java.lang.String companyId, java.lang.String pluginId,
-		java.lang.String pluginType,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchPluginSettingException {
-		return getPersistence().findByC_I_T_Last(companyId, pluginId,
-			pluginType, obc);
-	}
-
-	public static com.liferay.portal.model.PluginSetting[] findByC_I_T_PrevAndNext(
-		long pluginSettingId, java.lang.String companyId,
-		java.lang.String pluginId, java.lang.String pluginType,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchPluginSettingException {
-		return getPersistence().findByC_I_T_PrevAndNext(pluginSettingId,
-			companyId, pluginId, pluginType, obc);
+		java.lang.String pluginType) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_I_T(companyId, pluginId, pluginType);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -279,7 +242,8 @@ public class PluginSettingUtil {
 
 	public static void removeByC_I_T(java.lang.String companyId,
 		java.lang.String pluginId, java.lang.String pluginType)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPluginSettingException {
 		getPersistence().removeByC_I_T(companyId, pluginId, pluginType);
 	}
 

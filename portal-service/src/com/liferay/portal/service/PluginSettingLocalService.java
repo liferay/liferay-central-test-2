@@ -43,15 +43,11 @@ public interface PluginSettingLocalService {
 
 	public com.liferay.portal.model.PluginSetting getDefaultPluginSetting();
 
-	public com.liferay.portal.model.PluginSetting getSettingOrDefault(
+	public com.liferay.portal.model.PluginSetting getPluginSetting(
 		java.lang.String companyId, java.lang.String pluginId,
 		java.lang.String pluginType)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
-
-	public com.liferay.portal.model.PluginSetting getByC_I_T(
-		java.lang.String companyId, java.lang.String pluginId,
-		java.lang.String pluginType) throws com.liferay.portal.SystemException;
 
 	public boolean hasPermission(java.lang.String userId,
 		java.lang.String pluginId, java.lang.String pluginType);

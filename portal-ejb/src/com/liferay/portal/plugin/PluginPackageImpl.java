@@ -173,7 +173,7 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 			return _repository.getRepositoryURL();
 		}
 		else {
-			return PluginPackageRepository.LOCAL_URL; 
+			return PluginPackageRepository.LOCAL_URL;
 		}
 	}
 

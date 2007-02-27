@@ -159,8 +159,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 					   String displayName, String portletClass,
 					   String indexerClass, String openSearchClass,
 					   String schedulerClass, String portletURLClass,
-					   String friendlyURLPluginClass,
-					   String urlEncoderClass, String portletDataHandlerClass,
+					   String friendlyURLPluginClass, String urlEncoderClass,
+					   String portletDataHandlerClass,
 					   String smtpMessageListenerClass,
 					   String defaultPreferences, String prefsValidator,
 					   boolean prefsCompanyWide, boolean prefsUniquePerLayout,
@@ -260,52 +260,54 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the plugin id for this portlet
-	 * @return 		the plugin id
+	 * Gets the plugin id of the portlet.
+	 *
+	 * @return 		the plugin id of the portlet
 	 */
 	public String getPluginId() {
 		return getRootPortletId();
 	}
 
 	/**
-	 * Get the type of plugin that a portlet is
+	 * Gets the plugin type of the portlet.
 	 *
-	 * @return the plugin type
+	 * @return 		the plugin type of the portlet
 	 */
 	public String getPluginType() {
 		return PLUGIN_TYPE;
 	}
 
 	/**
-	 * Get the package to which this portlet belongs to
+	 * Get the package to which the portlet belongs to.
 	 *
-	 * @return the plugin package
+	 * @return		the plugin package of the portlet
 	 */
 	public PluginPackage getPluginPackage() {
 		return _pluginPackage;
 	}
 
 	/**
-	 * Sets the plugin package to which this portlet belongs to
+	 * Sets the plugin package to which this portlet belongs to.
 	 *
-	 * @param pluginPackage the plugin package
+	 * @param		pluginPackage the plugin package
 	 */
 	public void setPluginPackage(PluginPackage pluginPackage) {
 		_pluginPackage = pluginPackage;
 	}
 
 	/**
-	 * Get the default plugin settings of this portlet
-	 * @return the plugin settings
+	 * Get the default plugin settings of the portlet.
+	 *
+	 * @return		the plugin settings
 	 */
 	public PluginSetting getDefaultPluginSetting() {
 		return _defaultPluginSetting;
 	}
 
 	/**
-	 * Sets the default plugin settings for this portlet
+	 * Sets the default plugin settings of the portlet.
 	 *
-	 * @param pluginSetting the plugin setting
+	 * @param		pluginSetting the plugin setting
 	 */
 	public void setDefaultPluginSetting(PluginSetting pluginSetting) {
 		_defaultPluginSetting = pluginSetting;
@@ -1323,10 +1325,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			String roleLink = (String)_roleMappers.get(unlinkedRole);
 
 			if (Validator.isNotNull(roleLink)) {
-				_log.debug(
-					"Linking role for portlet [" + getPortletId() +
-						"] with role-name [" + unlinkedRole +
-							"] to role-link [" + roleLink + "]");
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Linking role for portlet [" + getPortletId() +
+							"] with role-name [" + unlinkedRole +
+								"] to role-link [" + roleLink + "]");
+				}
 
 				linkedRoles.add(roleLink);
 			}
@@ -1870,12 +1874,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private static Log _log = LogFactory.getLog(PortletImpl.class);
 
 	/**
-	 * Package to which this plugin belongs to
+	 * Package to which this plugin belongs to.
 	 */
 	private PluginPackage _pluginPackage;
 
 	/**
-	 * Plugin settings associated with this portlet
+	 * Plugin settings associated with the portlet.
 	 */
 	private PluginSetting _defaultPluginSetting;
 

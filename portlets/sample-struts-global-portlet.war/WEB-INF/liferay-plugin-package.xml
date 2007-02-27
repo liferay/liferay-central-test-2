@@ -7,10 +7,17 @@
 	<types>
 		<type>portlet</type>
 	</types>
+	<tags>
+		<tag>sample</tag>
+	</tags>
 	<short-description>
-		This portlet shows how to use Liferay's Struts Bridge
+		This portlet shows how to use Liferay's Struts Bridge.
 	</short-description>
 	<page-url>http://www.liferay.com/web/guest/downloads<page-url>
+	<author>Liferay, Inc.</author>
+	<licenses>
+		<license osi-approved="true">MIT</license>
+	</licenses>
 	<liferay-versions>
 		<liferay-version>4.2.*</liferay-version>
 	</liferay-versions>

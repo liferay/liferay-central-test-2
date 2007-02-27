@@ -41,12 +41,12 @@ Setting name and value. Current supported names are:
 The plugin element contains the declarative data of a plugin.
 -->
 <!ELEMENT plugin-package (name, module-id, installation-file-name?, types, tags?,
-short-description, long-description?, page-url, download-url?, screenshots?, author, licenses,
-liferay-versions)*>
+short-description, long-description?, page-url, download-url?, screenshots?,
+author, licenses, liferay-versions)*>
 
 <!--
 The name element contains the name of the plugin package that will be shown to
-the users.
+users.
 -->
 <!ELEMENT name (#PCDATA)>
 
@@ -54,18 +54,18 @@ the users.
 The module-id element contains the full identifier of the plugin using the
 Maven based syntax: groupId/artifactId/version/file-type.
 
-Example: liferay-samples/sample-struts-portlet/4.2.1/war
+Example: liferay-samples/sample-struts-portlet/4.3.0/war
 -->
 <!ELEMENT module-id (#PCDATA)>
 
 <!--
-The recommended-war-name element contains the recommended WAR name that will be
-used to deploy this plugin.
+The installation-file-name element contains the file name that will be used to
+deploy the plugin.
 -->
 <!ELEMENT installation-file-name (#PCDATA)>
 
 <!--
-The types element contains a list of plugin types included in the package
+The types element contains a list of plugin types included in the package.
 -->
 <!ELEMENT types (type)+>
 
@@ -76,22 +76,22 @@ layout-templates, and themes.
 <!ELEMENT type (#PCDATA)>
 
 <!--
-The tags element contains a list of tags to categorize this plugin.
+The tags element contains a list of tags to categorize the plugin.
 -->
 <!ELEMENT tags (tag)*>
 
 <!--
-The tag element contains a tag that categorizes to this plugin.
+The tag element contains a tag that categorizes the plugin.
 -->
 <!ELEMENT tag (#PCDATA)>
 
 <!--
-The short-description element contains a short description of this plugin.
+The short-description element contains a short description of the plugin.
 -->
 <!ELEMENT short-description (#PCDATA)>
 
 <!--
-The long-description element contains a detailed description of this plugin. It
+The long-description element contains a detailed description of the plugin. It
 is recommended that installation or update instructions are provided if the
 portal administrator has to perform extra steps to be able to use the plugin
 after it is deployed.
@@ -107,7 +107,7 @@ The page-url element contains the URL of the home page of the plugin.
 <!ELEMENT page-url (#PCDATA)>
 
 <!--
-The download-url element contains the URL to download the plugin
+The download-url element contains the URL to download the plugin.
 -->
 <!ELEMENT download-url (#PCDATA)>
 
@@ -120,19 +120,19 @@ The screenshots element contains a list of screenshots for the plugin.
 The screenshot element contains two URLs for the thumbnail and large images
 versions of the screenshot
 -->
-<!ELEMENT screenshot (thumbnail-url,large-image-url)>
+<!ELEMENT screenshot (thumbnail-url, large-image-url)>
 
 <!--
-The thumbnail-url element contains the URL of a screenshot of the plugin.
-It is recommended that the width of the images is 120 pixels and that the height
-is in the same size range.
+The thumbnail-url element contains the URL of a screenshot of the plugin. It is
+recommended that the width of the images is 120 pixels and that the height is in
+the same size range.
 -->
 <!ELEMENT thumbnail-url (#PCDATA)>
 
 <!--
-The large-image-url element contains the URL of a screenshot of the plugin.
-It is recommended that the width of the images is 120 pixels and that the height
-is in the same size range.
+The large-image-url element contains the URL of a screenshot of the plugin. It
+is recommended that the width of the images is 120 pixels and that the height is
+in the same size range.
 -->
 <!ELEMENT large-image-url (#PCDATA)>
 
@@ -142,13 +142,13 @@ The author element contains the name of the author of the plugin.
 <!ELEMENT author (#PCDATA)>
 
 <!--
-The licenses element contains a list of licence under which this plugin is
+The licenses element contains a list of licences under which the plugin is
 provided.
 -->
 <!ELEMENT licenses (license)+>
 
 <!--
-The license element contains the name of a licence under which this plugin is
+The license element contains the name of a licence under which the plugin is
 provided.
 -->
 <!ELEMENT license (#PCDATA)>
@@ -170,12 +170,12 @@ The url attribute specifies a URL of a page that describes the license.
 
 <!--
 The liferay-versions element contains a list of Liferay Portal versions that
-are supported by this plugin.
+are supported by the plugin.
 -->
 <!ELEMENT liferay-versions (liferay-version)+>
 
 <!--
 The liferay-version element contains a version of Liferay Portal that is
-supported by this plugin.
+supported by the plugin.
 -->
 <!ELEMENT liferay-version (#PCDATA)>

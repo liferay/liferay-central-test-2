@@ -50,7 +50,7 @@ List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
 	LayoutTemplate layoutTemplate = (LayoutTemplate) results.get(i);
-	PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getSettingOrDefault(company.getCompanyId(), layoutTemplate.getLayoutTemplateId(), LayoutTemplateImpl.PLUGIN_TYPE);
+	PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(company.getCompanyId(), layoutTemplate.getLayoutTemplateId(), LayoutTemplateImpl.PLUGIN_TYPE);
 
 	ResultRow row = new ResultRow(layoutTemplate, layoutTemplate.getLayoutTemplateId().toString(), i);
 

@@ -49,7 +49,7 @@ List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
 	Theme theme2 = (Theme) results.get(i);
-	PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getSettingOrDefault(company.getCompanyId(), theme2.getThemeId(), "theme");
+	PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(company.getCompanyId(), theme2.getThemeId(), "theme");
 
 	ResultRow row = new ResultRow(theme2, theme2.getThemeId().toString(), i);
 

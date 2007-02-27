@@ -131,8 +131,9 @@ public class ThemeLocalUtil {
 		return themes;
 	}
 
-	public static List init(ServletContext ctx, String[] xmls,
-							PluginPackage pluginPackage) {
+	public static List init(
+		ServletContext ctx, String[] xmls, PluginPackage pluginPackage) {
+
 		return init(null, ctx, xmls, pluginPackage);
 	}
 
@@ -452,6 +453,7 @@ public class ThemeLocalUtil {
 				PluginSettingLocalServiceUtil.getDefaultPluginSetting();
 
 			themeModel.setPluginPackage(pluginPackage);
+			themeModel.setDefaultPluginSetting(pluginSetting);
 
 			if (companyLimit != null) {
 				_themeCompanyLimits.put(themeId, companyLimit);
@@ -530,9 +532,6 @@ public class ThemeLocalUtil {
 						pluginPackage);
 				}
 			}
-
-			themeModel.setDefaultPluginSetting(pluginSetting);
-
 		}
 
 		return themeIds;

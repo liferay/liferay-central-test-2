@@ -75,7 +75,6 @@ public class PluginPackageRepository {
 		_addToGroupAndArtifactIndex(
 			pluginPackage.getGroupId(), pluginPackage.getArtifactId(),
 			pluginPackage);
-
 		_plugins.add(pluginPackage);
 		_tags.addAll(pluginPackage.getTags());
 	}
@@ -90,8 +89,9 @@ public class PluginPackageRepository {
 
 	public List findPluginsByGroupIdAndArtifactId(
 		String groupId, String artifactId) {
-		return (List) _groupAndArtifactIndex.get(
-			groupId+ StringPool.SLASH + artifactId);
+
+		return (List)_groupAndArtifactIndex.get(
+			groupId + StringPool.SLASH + artifactId);
 	}
 
 	public void removePlugin(PluginPackage pluginPackage) {
@@ -100,30 +100,38 @@ public class PluginPackageRepository {
 		_removeFromGroupAndArtifactIndex(
 			pluginPackage.getGroupId(), pluginPackage.getArtifactId(),
 			pluginPackage.getModuleId());
-
 		_plugins.remove(pluginPackage);
 	}
 
 	private void _addToGroupAndArtifactIndex(
 		String groupId, String artifactId, PluginPackage pluginPackage) {
+
 		List plugins = findPluginsByGroupIdAndArtifactId(groupId, artifactId);
+
 		if (plugins == null) {
 			plugins = new ArrayList();
+
 			_groupAndArtifactIndex.put(
 				groupId+ StringPool.SLASH + artifactId, plugins);
 		}
+
 		plugins.add(pluginPackage);
 	}
 
 	private void _removeFromGroupAndArtifactIndex(
 		String groupId, String artifactId, String moduleId) {
+
 		List plugins = findPluginsByGroupIdAndArtifactId(groupId, artifactId);
+
 		if (plugins != null) {
-			Iterator iterator = plugins.iterator();
-			while (iterator.hasNext()) {
-				PluginPackage pluginPackage =  (PluginPackage) iterator.next();
+			Iterator itr = plugins.iterator();
+
+			while (itr.hasNext()) {
+				PluginPackage pluginPackage = (PluginPackage)itr.next();
+
 				if (pluginPackage.getModuleId().equals(moduleId)) {
-					iterator.remove();
+					itr.remove();
+
 					break;
 				}
 			}
@@ -131,10 +139,9 @@ public class PluginPackageRepository {
 	}
 
 	private String _repositoryURL;
-
-	private Map _groupAndArtifactIndex = new HashMap();
 	private Map _artifactURLIndex = new HashMap();
 	private Map _moduleIdIndex = new HashMap();
+	private Map _groupAndArtifactIndex = new HashMap();
 	private List _plugins = new ArrayList();
 	private Properties _settings = null;
 	private Set _tags = new TreeSet();

@@ -62,19 +62,12 @@ public class PluginSettingLocalServiceEJBImpl
 											   .getDefaultPluginSetting();
 	}
 
-	public com.liferay.portal.model.PluginSetting getSettingOrDefault(
+	public com.liferay.portal.model.PluginSetting getPluginSetting(
 		java.lang.String companyId, java.lang.String pluginId,
 		java.lang.String pluginType)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return PluginSettingLocalServiceFactory.getTxImpl().getSettingOrDefault(companyId,
-			pluginId, pluginType);
-	}
-
-	public com.liferay.portal.model.PluginSetting getByC_I_T(
-		java.lang.String companyId, java.lang.String pluginId,
-		java.lang.String pluginType) throws com.liferay.portal.SystemException {
-		return PluginSettingLocalServiceFactory.getTxImpl().getByC_I_T(companyId,
+		return PluginSettingLocalServiceFactory.getTxImpl().getPluginSetting(companyId,
 			pluginId, pluginType);
 	}
 

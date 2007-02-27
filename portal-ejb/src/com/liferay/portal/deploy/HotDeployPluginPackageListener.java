@@ -52,6 +52,41 @@ import org.dom4j.io.SAXReader;
  */
 public class HotDeployPluginPackageListener implements HotDeployListener {
 
+	public static PluginPackage readPluginPackage(ServletContext ctx)
+		throws DocumentException, IOException {
+
+		String servletContextName =  ctx.getServletContextName();
+
+		String xml = Http.URLtoString(ctx.getResource(
+			"/WEB-INF/liferay-plugin-package.xml"));
+
+		if (xml == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Plugin package on context " + servletContextName +
+						" cannot be tracked because there isn't a " +
+							"liferay-plugin-package.xml file");
+			}
+
+			return null;
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Reading plugin package for " + servletContextName);
+		}
+
+		SAXReader reader = SAXReaderFactory.getInstance(false);
+
+		Document doc = reader.read(new XMLSafeReader(xml));
+
+		Element root = doc.getRootElement();
+
+		PluginPackage pluginPackage =
+			PluginPackageUtil.readPluginPackageXml(root);
+
+		return pluginPackage;
+	}
+
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
 		String servletContextName = null;
 
@@ -65,6 +100,7 @@ public class HotDeployPluginPackageListener implements HotDeployListener {
 			}
 
 			PluginPackage pluginPackage = readPluginPackage(ctx);
+
 			if (pluginPackage != null) {
 				event.setPluginPackage(pluginPackage);
 
@@ -73,7 +109,7 @@ public class HotDeployPluginPackageListener implements HotDeployListener {
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"Plugin package " + pluginPackage.getModuleId() +
-						" registered successfully");
+							" registered successfully");
 				}
 			}
 		}
@@ -97,6 +133,7 @@ public class HotDeployPluginPackageListener implements HotDeployListener {
 			}
 
 			PluginPackage pluginPackage = readPluginPackage(ctx);
+
 			if (pluginPackage != null) {
 				event.setPluginPackage(pluginPackage);
 
@@ -105,7 +142,7 @@ public class HotDeployPluginPackageListener implements HotDeployListener {
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"Plugin package " + pluginPackage.getModuleId() +
-						" unregistered successfully");
+							" unregistered successfully");
 				}
 			}
 		}
@@ -114,38 +151,6 @@ public class HotDeployPluginPackageListener implements HotDeployListener {
 				"Error unregistering plugins for " + servletContextName,
 				e);
 		}
-	}
-
-	public static PluginPackage readPluginPackage(ServletContext ctx)
-		throws DocumentException, IOException {
-		String servletContextName =  ctx.getServletContextName();
-
-		String xml = Http.URLtoString(ctx.getResource(
-				"/WEB-INF/liferay-plugin-package.xml"));
-
-		if (xml == null) {
-			_log.warn(
-				"Plugin package on context " + servletContextName +
-					" cannot be tracked because there isn't a " +
-						"liferay-plugin-package.xml file");
-			return null;
-		}
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Reading plugin package for " + servletContextName);
-		}
-
-		SAXReader reader = SAXReaderFactory.getInstance(false);
-
-		Document doc = reader.read(new XMLSafeReader(xml));
-
-		Element root = doc.getRootElement();
-
-		PluginPackage pluginPackage =
-			PluginPackageUtil.readPluginPackageXml(root);
-
-		return pluginPackage;
 	}
 
 	private static Log _log =

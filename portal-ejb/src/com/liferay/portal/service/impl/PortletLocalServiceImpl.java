@@ -234,13 +234,11 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		try {
 			List servletURLPatterns = _readWebXML(xmls[4]);
 
-			Set portletIds =
-				_readPortletXML(xmls[0], portletsPool, servletURLPatterns,
-					pluginPackage);
+			Set portletIds = _readPortletXML(
+				xmls[0], portletsPool, servletURLPatterns, pluginPackage);
 
-			portletIds.addAll(
-				_readPortletXML(xmls[1], portletsPool, servletURLPatterns,
-					pluginPackage));
+			portletIds.addAll(_readPortletXML(
+				xmls[1], portletsPool, servletURLPatterns, pluginPackage));
 
 			Set liferayPortletIds =
 				_readLiferayPortletXML(xmls[2], portletsPool);
@@ -301,8 +299,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 	}
 
-	public List initWAR(String servletContextName, String[] xmls,
-						PluginPackage pluginPackage) {
+	public List initWAR(
+		String servletContextName, String[] xmls, PluginPackage pluginPackage) {
+
 		List portlets = new ArrayList();
 
 		String scpId = PortletServiceImpl.class.getName() + "." + _SHARED_KEY;
@@ -597,6 +596,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletsPool.put(portletId, portletModel);
 			}
 
+			portletModel.setPluginPackage(pluginPackage);
+
 			if (servletContextName != null) {
 				portletModel.setServletContextName(servletContextName);
 			}
@@ -745,8 +746,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 
 			portletModel.getUserAttributes().addAll(userAttributes);
-
-			portletModel.setPluginPackage(pluginPackage);
 		}
 
 		return portletIds;

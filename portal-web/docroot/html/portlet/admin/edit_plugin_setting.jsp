@@ -30,7 +30,7 @@
 	String pluginId = ParamUtil.getString(request, "pluginId");
 	String pluginType = ParamUtil.getString(request, "pluginType");
 
-	PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getSettingOrDefault(company.getCompanyId(), pluginId, pluginType);
+	PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(company.getCompanyId(), pluginId, pluginType);
 %>
 
 <script type="text/javascript">

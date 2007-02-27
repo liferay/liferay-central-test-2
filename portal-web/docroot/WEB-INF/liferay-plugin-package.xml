@@ -1,21 +1,19 @@
 <?xml version="1.0"?>
-<!DOCTYPE plugin-package PUBLIC
-	"-//Liferay//DTD Plugin Package 4.3.0//EN"
-	"http://www.liferay.com/dtd/liferay-plugin-package_4_3_0.dtd">
+<!DOCTYPE plugin-package PUBLIC "-//Liferay//DTD Plugin Package 4.3.0//EN" "http://www.liferay.com/dtd/liferay-plugin-package_4_3_0.dtd">
 
 <plugin-package>
 	<name>Liferay Core Plugins</name>
 	<module-id>liferay/core-plugins/4.3.0/war</module-id>
 	<types>
+		<type>layout-templates</type>
 		<type>portlets</type>
 		<type>themes</type>
-		<type>layout-templates</type>
 	</types>
 	<short-description>
-		Portlets, Themes and Layout templates included with Liferay Portal
+		Portlets, themes, and layout templates included with Liferay Portal.
 	</short-description>
 	<page-url>http://www.liferay.com/products</page-url>
-	<author>Liferay Inc.</author>
+	<author>Liferay, Inc.</author>
 	<licenses>
 		<license osi-approved="true">MIT</license>
 	</licenses>

@@ -138,8 +138,8 @@ public class LayoutTypePortletImpl
 
 		if (checkPermission &&
 			!PluginSettingLocalServiceUtil.hasPermission(
-				userId, newLayoutTemplateId,
-				LayoutTemplateImpl.PLUGIN_TYPE)) {
+				userId, newLayoutTemplateId, LayoutTemplateImpl.PLUGIN_TYPE)) {
+
 			return;
 		}
 

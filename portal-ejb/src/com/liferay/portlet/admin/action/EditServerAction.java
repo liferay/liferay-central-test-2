@@ -558,7 +558,8 @@ public class EditServerAction extends PortletAction {
 		}
 
 		if (Validator.isNull(destFileName)) {
-			PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByURL(url);
+			PluginPackage pluginPackage =
+				PluginPackageUtil.getPluginPackageByURL(url);
 
 			if (pluginPackage != null) {
 				destFileName = pluginPackage.getWARName();

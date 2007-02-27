@@ -36,12 +36,17 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class PluginSettingImpl extends PluginSettingModelImpl
-	implements PluginSetting {
+public class PluginSettingImpl
+	extends PluginSettingModelImpl implements PluginSetting {
 
 	public PluginSettingImpl() {
 	}
 
+	/**
+	 * Adds a role to the list of roles.
+	 *
+	 * @param		role a role name
+	 */
 	public void addRole(String role) {
 		setRolesArray(ArrayUtil.append(_rolesArray, role));
 	}

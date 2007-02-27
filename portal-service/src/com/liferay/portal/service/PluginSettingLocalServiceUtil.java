@@ -59,23 +59,14 @@ public class PluginSettingLocalServiceUtil {
 		return pluginSettingLocalService.getDefaultPluginSetting();
 	}
 
-	public static com.liferay.portal.model.PluginSetting getSettingOrDefault(
+	public static com.liferay.portal.model.PluginSetting getPluginSetting(
 		java.lang.String companyId, java.lang.String pluginId,
 		java.lang.String pluginType)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
 
-		return pluginSettingLocalService.getSettingOrDefault(companyId,
-			pluginId, pluginType);
-	}
-
-	public static com.liferay.portal.model.PluginSetting getByC_I_T(
-		java.lang.String companyId, java.lang.String pluginId,
-		java.lang.String pluginType) throws com.liferay.portal.SystemException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.getByC_I_T(companyId, pluginId,
+		return pluginSettingLocalService.getPluginSetting(companyId, pluginId,
 			pluginType);
 	}
 

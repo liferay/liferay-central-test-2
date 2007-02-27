@@ -150,8 +150,9 @@ public class LayoutTemplateLocalUtil {
 		return customLayoutTemplates;
 	}
 
-	public static List init(ServletContext ctx, String[] xmls,
-							PluginPackage pluginPackage) {
+	public static List init(
+		ServletContext ctx, String[] xmls, PluginPackage pluginPackage) {
+
 		return init(null, ctx, xmls, pluginPackage);
 	}
 

@@ -42,6 +42,7 @@ public class ModuleId {
 			throw new RuntimeException(
 				"The moduleId " + moduleId + " is not correct");
 		}
+
 		_groupId = st.nextToken();
 		_artifactId = st.nextToken();
 		_pluginVersion = new Version(st.nextToken());
