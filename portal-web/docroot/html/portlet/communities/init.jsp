@@ -39,6 +39,7 @@
 <%@ page import="com.liferay.portal.NoSuchRoleException" %>
 <%@ page import="com.liferay.portal.RequiredGroupException" %>
 <%@ page import="com.liferay.portal.RequiredLayoutException" %>
+<%@ page import="com.liferay.portal.plugin.PluginUtil" %>
 <%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
 <%@ page import="com.liferay.portal.service.permission.GroupPermission" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>

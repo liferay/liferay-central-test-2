@@ -59,6 +59,7 @@ public class PortletContextFactory {
 
 	private PortletContext _create(Portlet portlet, ServletContext ctx) {
 		String poolId = PortletContextFactory.class.getName();
+
 		if (!portlet.isWARFile()) {
 			StringBuffer sb = new StringBuffer();
 
@@ -116,6 +117,7 @@ public class PortletContextFactory {
 
 	private void _destroy(Portlet portlet) {
 		String poolId = PortletContextFactory.class.getName();
+
 		if (!portlet.isWARFile()) {
 			StringBuffer sb = new StringBuffer();
 

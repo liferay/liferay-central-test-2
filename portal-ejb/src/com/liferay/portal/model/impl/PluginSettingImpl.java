@@ -134,7 +134,7 @@ public class PluginSettingImpl
 	/**
 	 * Log instance for this class.
 	 */
-	private static Log _log = LogFactory.getLog(PortletImpl.class);
+	private static Log _log = LogFactory.getLog(PluginSettingImpl.class);
 
 	/**
 	 * An array of required roles of the plugin.

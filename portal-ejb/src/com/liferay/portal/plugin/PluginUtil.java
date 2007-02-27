@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,10 +19,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/common/init.jsp" %>
+package com.liferay.portal.plugin;
 
-<%@ page import="com.liferay.portal.plugin.PluginUtil" %>
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Plugin;
+import com.liferay.portal.model.PluginSetting;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 
-<portlet:defineObjects />
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * <a href="PluginUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class PluginUtil {
+
+	public static List restrictPlugins(List plugins, User user)
+		throws PortalException, SystemException {
+
+		List visiblePlugins = new ArrayList(plugins.size());
+
+		for (int i = 0; i < plugins.size(); i++) {
+			Plugin plugin = (Plugin)plugins.get(i);
+
+			PluginSetting pluginSetting =
+				PluginSettingLocalServiceUtil.getPluginSetting(
+					user.getCompanyId(), plugin.getPluginId(),
+					plugin.getPluginType());
+
+			if (pluginSetting.isActive() &&
+				pluginSetting.hasPermission(user.getUserId())) {
+
+				visiblePlugins.add(plugin);
+			}
+		}
+
+		return visiblePlugins;
+	}
+
+}

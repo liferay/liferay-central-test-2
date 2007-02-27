@@ -38,6 +38,8 @@
 
 	List layoutTemplates = LayoutTemplateLocalUtil.getLayoutTemplates();
 
+	layoutTemplates = PluginUtil.restrictPlugins(layoutTemplates, user);
+
 	Group group = layout.getGroup();
 
 	String selector1 = StringPool.BLANK;
@@ -58,39 +60,23 @@
 		selector2 = "firstLayout";
 	}
 
-	List visibleLayoutTemplates = new ArrayList();
-
-	// Filter out disabled layout templates and those for which the user does
-    // not have the desired permissions
-
 	for (int i = 0; i < layoutTemplates.size(); i++) {
 		LayoutTemplate layoutTemplate = (LayoutTemplate)layoutTemplates.get(i);
-
-		PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(company.getCompanyId(), layoutTemplate.getLayoutTemplateId(), "layout-template");
-
-		if ((pluginSetting.isActive()) && (pluginSetting.hasPermission(user.getUserId()))) {
-			visibleLayoutTemplates.add(layoutTemplate);
-		}
-	}
-
-	for (int i = 0; i < visibleLayoutTemplates.size(); i++) {
-		LayoutTemplate layoutTemplate = (LayoutTemplate)visibleLayoutTemplates.get(i);
-
 	%>
 
-			<c:if test="<%= (i % CELLS_PER_ROW) == 0 %>">
-				<tr>
-			</c:if>
+		<c:if test="<%= (i % CELLS_PER_ROW) == 0 %>">
+			<tr>
+		</c:if>
 
-			<td align="center" width="<%= 100 / CELLS_PER_ROW %>%">
-				<img onclick="document.getElementById('layoutTemplateId_<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>/thumbnail.png" /><br />
-				<input type="radio" id="layoutTemplateId_<%= i %>" name="layoutTemplateId" <%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> value="<%= layoutTemplate.getLayoutTemplateId() %>" />
-				<label for="layoutTemplateId_<%= i %>"><%= layoutTemplate.getName() %></label>
-			</td>
+		<td align="center" width="<%= 100 / CELLS_PER_ROW %>%">
+			<img onclick="document.getElementById('layoutTemplateId_<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>/thumbnail.png" /><br />
+			<input type="radio" id="layoutTemplateId_<%= i %>" name="layoutTemplateId" <%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> value="<%= layoutTemplate.getLayoutTemplateId() %>" />
+			<label for="layoutTemplateId_<%= i %>"><%= layoutTemplate.getName() %></label>
+		</td>
 
-			<c:if test="<%= (i % CELLS_PER_ROW) == (CELLS_PER_ROW - 1) %>">
-				</tr>
-			</c:if>
+		<c:if test="<%= (i % CELLS_PER_ROW) == (CELLS_PER_ROW - 1) %>">
+			</tr>
+		</c:if>
 
 	<%
 	}

@@ -108,6 +108,7 @@ function addPortletHTML(html, container, placeHolder) {
 
 	if (!portletBound.isStatic) {
 		//LayoutColumns.initPortlet(portletBound);
+		Liferay.Draggables.init();
 	}
 
 	Liferay.Portlet.process(portletId);

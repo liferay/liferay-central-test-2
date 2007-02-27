@@ -820,22 +820,11 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 						<%
 						List themes = ThemeLocalUtil.getThemes(company.getCompanyId());
 
-						List visibleThemes = new ArrayList();
-						for (int i = 0; i < themes.size(); i++) {
-							Theme candidateTheme = (Theme)themes.get(i);
-
-							PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(company.getCompanyId(), candidateTheme.getThemeId(), ThemeImpl.PLUGIN_TYPE);
-
-							if ((pluginSetting.isActive()) && (pluginSetting.hasPermission(user.getUserId()))) {
-								visibleThemes.add(candidateTheme);
-							}
-						}
-
-
+						themes = PluginUtil.restrictPlugins(themes, user);
 						%>
 
 						<liferay-ui:table-iterator
-							list="<%= visibleThemes %>"
+							list="<%= themes %>"
 							listType="com.liferay.portal.model.Theme"
 							rowLength="2">
 
