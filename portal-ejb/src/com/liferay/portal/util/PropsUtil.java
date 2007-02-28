@@ -354,6 +354,8 @@ public class PropsUtil {
 
 	public static final String APPLICATION_STARTUP_EVENTS = "application.startup.events";
 
+	public static final String SHUTDOWN_PROGRAMMATICALLY_EXIT = "shutdown.programmatically.exit";
+
 	// Shutdown Events
 
 	public static final String GLOBAL_SHUTDOWN_EVENTS = "global.shutdown.events";

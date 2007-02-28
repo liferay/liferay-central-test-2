@@ -124,6 +124,45 @@ public class GlobalShutdownAction extends SimpleAction {
 		}
 		catch (Exception e) {
 		}
+
+		// Programmatically exit
+
+		if (GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.SHUTDOWN_PROGRAMMATICALLY_EXIT))) {
+
+			Thread thread = Thread.currentThread();
+
+			ThreadGroup threadGroup = thread.getThreadGroup();
+
+			for (int i = 0; i < 10; i++) {
+				if (threadGroup.getParent() == null) {
+					break;
+				}
+				else {
+					threadGroup = threadGroup.getParent();
+				}
+			}
+
+			//threadGroup.list();
+
+			Thread[] threads = new Thread[threadGroup.activeCount() * 2];
+
+			threadGroup.enumerate(threads);
+
+			for (int i = 0; i < threads.length; i++) {
+				Thread curThread = threads[i];
+
+				if ((curThread != null) && (curThread != thread)) {
+					try {
+						curThread.interrupt();
+					}
+					catch (Exception e) {
+					}
+				}
+			}
+
+			threadGroup.destroy();
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalShutdownAction.class);
