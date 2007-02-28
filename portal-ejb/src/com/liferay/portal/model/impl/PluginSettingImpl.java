@@ -42,6 +42,14 @@ public class PluginSettingImpl
 	public PluginSettingImpl() {
 	}
 
+	public PluginSettingImpl(PluginSetting pluginSetting) {
+		setActive(pluginSetting.getActive());
+		setCompanyId(pluginSetting.getCompanyId());
+		setPluginId(pluginSetting.getPluginId());
+		setPluginType(pluginSetting.getPluginType());
+		setRoles(pluginSetting.getRoles());
+	}
+
 	/**
 	 * Adds a role to the list of roles.
 	 *

@@ -22,8 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.plugin.PluginPackage;
-
 /**
  * <a href="PortletLocalService.java.html"><b><i>View Source</i></b></a>
  *
@@ -67,11 +65,11 @@ public interface PortletLocalService {
 		java.lang.String portletId) throws com.liferay.portal.SystemException;
 
 	public void initEAR(java.lang.String[] xmls,
-		PluginPackage pluginPackage);
+		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
 
 	public java.util.List initWAR(java.lang.String servletContextName,
 		java.lang.String[] xmls,
-		PluginPackage pluginPackage);
+		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
 
 	public com.liferay.portal.model.Portlet updatePortlet(
 		java.lang.String companyId, java.lang.String portletId,

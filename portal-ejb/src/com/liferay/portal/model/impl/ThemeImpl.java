@@ -22,9 +22,7 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -43,7 +41,7 @@ import java.util.Properties;
  * @author Brian Wing Shun Chan
  *
  */
-public class ThemeImpl implements Theme {
+public class ThemeImpl extends PluginBaseImpl implements Theme {
 
 	public static final String PLUGIN_TYPE = "theme";
 
@@ -74,22 +72,6 @@ public class ThemeImpl implements Theme {
 
 	public String getPluginType() {
 		return PLUGIN_TYPE;
-	}
-
-	public PluginPackage getPluginPackage() {
-		return _pluginPackage;
-	}
-
-	public void setPluginPackage(PluginPackage pluginPackage) {
-		_pluginPackage = pluginPackage;
-	}
-
-	public PluginSetting getDefaultPluginSetting() {
-		return _defaultPluginSetting;
-	}
-
-	public void setDefaultPluginSetting(PluginSetting pluginSetting) {
-		_defaultPluginSetting = pluginSetting;
 	}
 
 	public String getName() {
@@ -237,8 +219,6 @@ public class ThemeImpl implements Theme {
 	}
 
 	private String _themeId;
-	private PluginPackage _pluginPackage;
-	private PluginSetting _defaultPluginSetting;
 	private String _name;
 	private String _rootPath;
 	private String _templatesPath;

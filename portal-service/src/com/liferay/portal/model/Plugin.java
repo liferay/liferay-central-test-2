@@ -42,6 +42,8 @@ public interface Plugin {
 
 	public PluginSetting getDefaultPluginSetting();
 
+	public PluginSetting getDefaultPluginSetting(String companyId);
+
 	public void setDefaultPluginSetting(PluginSetting pluginSetting);
 
 }

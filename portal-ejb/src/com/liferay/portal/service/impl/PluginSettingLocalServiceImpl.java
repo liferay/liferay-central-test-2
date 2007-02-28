@@ -91,12 +91,12 @@ public class PluginSettingLocalServiceImpl
 				(plugin.getDefaultPluginSetting() == null)) {
 
 				pluginSetting = getDefaultPluginSetting();
+				pluginSetting.setCompanyId(companyId);
 			}
 			else {
-				pluginSetting = plugin.getDefaultPluginSetting();
+				pluginSetting = plugin.getDefaultPluginSetting(companyId);
 			}
 
-			pluginSetting.setCompanyId(companyId);
 		}
 
 		return pluginSetting;

@@ -28,7 +28,7 @@ package com.liferay.portal.model;
  * @author Brian Wing Shun Chan
  *
  */
-public interface Portlet extends PortletModel, Plugin {
+public interface Portlet extends PortletModel {
 	public java.lang.String getRootPortletId();
 
 	public java.lang.String getInstanceId();
@@ -36,6 +36,11 @@ public interface Portlet extends PortletModel, Plugin {
 	public java.lang.String getPluginId();
 
 	public java.lang.String getPluginType();
+
+	public com.liferay.portal.kernel.plugin.PluginPackage getPluginPackage();
+
+	public void setPluginPackage(
+		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
 
 	public com.liferay.portal.model.PluginSetting getDefaultPluginSetting();
 
@@ -324,5 +329,4 @@ public interface Portlet extends PortletModel, Plugin {
 	public java.lang.Object clone();
 
 	public int compareTo(java.lang.Object obj);
-
 }
