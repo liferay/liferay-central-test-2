@@ -171,13 +171,11 @@ public class LuceneUtil {
 	public static IndexWriter getWriter(String companyId, boolean create)
 		throws IOException {
 
-		return new IndexWriter(
-			getLuceneDir(companyId), getAnalyzer(), create);
+		return _instance._sharedWriter.getWriter(companyId, create);
 	}
 
 	public static void write(IndexWriter writer) throws IOException {
-		writer.optimize();
-		writer.close();
+		_instance._sharedWriter.write(writer);
 	}
 
 	public static void delete(String companyId) {
@@ -390,6 +388,7 @@ public class LuceneUtil {
 
 	private static LuceneUtil _instance = new LuceneUtil();
 
+	private IndexWriterFactory _sharedWriter = new IndexWriterFactory();
 	private Class _analyzerClass = WhitespaceAnalyzer.class;
 	private Dialect _dialect;
 
