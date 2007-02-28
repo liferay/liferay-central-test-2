@@ -65,14 +65,18 @@ if (curTagsParam != null) {
 </table>
 
 <script type="text/javascript">
-	var <%= randomNamespace %> = new Liferay.TagsSelector(
-		{
-			instanceVar: "<%= randomNamespace %>",
-			hiddenInput: "<%= namespace + hiddenInput %>",
-			textInput: "<%= randomNamespace %>tags",
-			summarySpan: "<%= randomNamespace %>tagsSummary",
-			curTags: "<%= curTags %>",
-			focus: <%= focus %>
+	jQuery(
+		function() {
+			var <%= randomNamespace %> = new Liferay.TagsSelector(
+				{
+					instanceVar: "<%= randomNamespace %>",
+					hiddenInput: "<%= namespace + hiddenInput %>",
+					textInput: "<%= randomNamespace %>tags",
+					summarySpan: "<%= randomNamespace %>tagsSummary",
+					curTags: "<%= curTags %>",
+					focus: <%= focus %>
+				}
+			);
 		}
 	);
 </script>
