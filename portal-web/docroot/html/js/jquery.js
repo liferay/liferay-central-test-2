@@ -1,14 +1,14 @@
 /* prevent execution of jQuery if included more than once */
 if(typeof window.jQuery == "undefined") {
 /*
- * jQuery 1.1.1 - New Wave Javascript
+ * jQuery 1.1.2 - New Wave Javascript
  *
  * Copyright (c) 2007 John Resig (jquery.com)
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2007-01-22 00:27:54 -0500 (Mon, 22 Jan 2007) $
- * $Rev: 1153 $
+ * $Date: 2007-02-28 12:03:00 -0500 (Wed, 28 Feb 2007) $
+ * $Rev: 1465 $
  */
 
 // Global undefined variable
@@ -29,7 +29,7 @@ var jQuery = function(a,c) {
 	// Handle HTML strings
 	if ( typeof a  == "string" ) {
 		// HANDLE: $(html) -> $(array)
-		var m = /^[^<]*(<(.|\n)+>)[^>]*$/.exec(a);
+		var m = /^[^<]*(<(.|\s)+>)[^>]*$/.exec(a);
 		if ( m )
 			a = jQuery.clean( [ m[1] ] );
 		
@@ -58,7 +58,7 @@ if ( typeof $ != "undefined" )
 var $ = jQuery;
 
 jQuery.fn = jQuery.prototype = {
-	jquery: "1.1.1",
+	jquery: "1.1.2",
 
 	size: function() {
 		return this.length;
@@ -76,9 +76,9 @@ jQuery.fn = jQuery.prototype = {
 			this[num];
 	},
 	pushStack: function( a ) {
-		var ret = jQuery(this);
+		var ret = jQuery(a);
 		ret.prevObject = this;
-		return ret.setArray( a );
+		return ret;
 	},
 	setArray: function( a ) {
 		this.length = 0;
@@ -184,11 +184,13 @@ jQuery.fn = jQuery.prototype = {
 	find: function(t) {
 		return this.pushStack( jQuery.map( this, function(a){
 			return jQuery.find(t,a);
-		}) );
+		}), t );
 	},
 	clone: function(deep) {
 		return this.pushStack( jQuery.map( this, function(a){
-			return a.cloneNode( deep != undefined ? deep : true );
+			var a = a.cloneNode( deep != undefined ? deep : true );
+			a.$events = null; // drop $events expando to avoid firing incorrect events
+			return a;
 		}) );
 	},
 
@@ -205,14 +207,14 @@ jQuery.fn = jQuery.prototype = {
 	not: function(t) {
 		return this.pushStack(
 			t.constructor == String &&
-			jQuery.multiFilter(t,this,true) ||
+			jQuery.multiFilter(t, this, true) ||
 
-			jQuery.grep(this,function(a){
-					if ( t.constructor == Array || t.jquery )
-						return jQuery.inArray( t, a ) < 0;
-					else
-						return a != t;
-			}) );
+			jQuery.grep(this, function(a) {
+				return ( t.constructor == Array || t.jquery )
+					? jQuery.inArray( a, t ) < 0
+					: a != t;
+			})
+		);
 	},
 
 	add: function(t) {
@@ -220,7 +222,7 @@ jQuery.fn = jQuery.prototype = {
 			this.get(),
 			t.constructor == String ?
 				jQuery(t).get() :
-				t.length != undefined && !t.nodeName ?
+				t.length != undefined && (!t.nodeName || t.nodeName == "FORM") ?
 					t : [t] )
 		);
 	},
@@ -288,8 +290,13 @@ jQuery.extend({
 	// This may seem like some crazy code, but trust me when I say that this
 	// is the only cross-browser way to do this. --John
 	isFunction: function( fn ) {
-		return !!fn && typeof fn != "string" &&
+		return !!fn && typeof fn != "string" && !fn.nodeName && 
 			typeof fn[0] == "undefined" && /function/i.test( fn + "" );
+	},
+	
+	// check if an element is in a XML document
+	isXMLDoc: function(elem) {
+		return elem.tagName && elem.ownerDocument && !elem.ownerDocument.body;
 	},
 
 	nodeName: function( elem, name ) {
@@ -309,16 +316,15 @@ jQuery.extend({
 	prop: function(elem, value, type, index, prop){
 			// Handle executable functions
 			if ( jQuery.isFunction( value ) )
-				return value.call( elem, [index] );
+				value = value.call( elem, [index] );
 				
 			// exclude the following css properties to add px
 			var exclude = /z-?index|font-?weight|opacity|zoom|line-?height/i;
 
 			// Handle passing in a number to a CSS property
-			if ( value.constructor == Number && type == "curCSS" && !exclude.test(prop) )
-				return value + "px";
-
-			return value;
+			return value && value.constructor == Number && type == "curCSS" && !exclude.test(prop) ?
+				value + "px" :
+				value;
 	},
 
 	className: {
@@ -341,6 +347,8 @@ jQuery.extend({
 		// internal only, use is(".class")
 		has: function( t, c ) {
 			t = t.className || t;
+			// escape regex characters
+			c = c.replace(/([\.\\\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|\:])/g, "\\$1");
 			return t && new RegExp("(^|\\s)" + c + "(\\s|$)").test( t );
 		}
 	},
@@ -489,13 +497,15 @@ jQuery.extend({
 					
 				}
 				
-				arg = div.childNodes;
+				arg = [];
+				for (var i=0, l=div.childNodes.length; i<l; i++)
+					arg.push(div.childNodes[i]);
 			}
 
-			if ( arg.length === 0 )
+			if ( arg.length === 0 && !jQuery.nodeName(arg, "form") )
 				return;
 			
-			if ( arg[0] == undefined )
+			if ( arg[0] == undefined || jQuery.nodeName(arg, "form") )
 				r.push( arg );
 			else
 				r = jQuery.merge( r, arg );
@@ -506,7 +516,7 @@ jQuery.extend({
 	},
 	
 	attr: function(elem, name, value){
-		var fix = {
+		var fix = jQuery.isXMLDoc(elem) ? {} : {
 			"for": "htmlFor",
 			"class": "className",
 			"float": jQuery.browser.msie ? "styleFloat" : "cssFloat",
@@ -537,6 +547,7 @@ jQuery.extend({
 		// Mozilla doesn't play well with opacity 1
 		if ( name == "opacity" && jQuery.browser.mozilla && value == 1 )
 			value = 0.9999;
+			
 
 		// Certain attributes only work when accessed via the old DOM 0 way
 		if ( fix[name] ) {
@@ -549,8 +560,11 @@ jQuery.extend({
 		// IE elem.getAttribute passes even for style
 		else if ( elem.tagName ) {
 			if ( value != undefined ) elem.setAttribute( name, value );
+			if ( jQuery.browser.msie && /href|src/.test(name) && !jQuery.isXMLDoc(elem) ) 
+				return elem.getAttribute( name, 2 );
 			return elem.getAttribute( name );
 
+		// elem is actually elem.style ... set the style
 		} else {
 			name = name.replace(/-([a-z])/ig,function(z,b){return b.toUpperCase();});
 			if ( value != undefined ) elem[name] = value;
@@ -797,7 +811,7 @@ jQuery.extend({
 			_resort: function(m){
 				return ["", m[1], m[3], m[2], m[5]];
 			},
-			_prefix: "z=a[m[3]]||jQuery.attr(a,m[3]);"
+			_prefix: "z=a[m[3]];if(!z||/href|src/.test(m[3]))z=jQuery.attr(a,m[3]);"
 		},
 		"[": "jQuery.find(m[2],a).length"
 	},
@@ -823,7 +837,7 @@ jQuery.extend({
 		/^(\+)/, "jQuery.nth(a,2,'nextSibling')",
 		/^(~)/, function(a){
 			var s = jQuery.sibling(a.parentNode.firstChild);
-			return s.slice(0, jQuery.inArray(a,s));
+			return s.slice(jQuery.inArray(a,s) + 1);
 		}
 	],
 
@@ -954,11 +968,15 @@ jQuery.extend({
 					if ( m[1] == "#" && ret[ret.length-1].getElementById ) {
 						// Optimization for HTML document case
 						var oid = ret[ret.length-1].getElementById(m[2]);
+						
+						// Do a quick check for the existence of the actual ID attribute
+						// to avoid selecting by the name attribute in IE
+						if ( jQuery.browser.msie && oid && oid.id != m[2] )
+							oid = jQuery('[@id="'+m[2]+'"]', ret[ret.length-1])[0];
 
 						// Do a quick check for node name (where applicable) so
 						// that div#foo searches will be really fast
-						ret = r = oid && 
-						  (!m[3] || jQuery.nodeName(oid, m[3])) ? [oid] : [];
+						ret = r = oid && (!m[3] || jQuery.nodeName(oid, m[3])) ? [oid] : [];
 
 					} else {
 						// Pre-compile a regular expression to handle class searches
@@ -1163,16 +1181,16 @@ jQuery.event = {
 			handler.guid = this.guid++;
 
 		// Init the element's event structure
-		if (!element.events)
-			element.events = {};
+		if (!element.$events)
+			element.$events = {};
 
 		// Get the current list of functions bound to this event
-		var handlers = element.events[type];
+		var handlers = element.$events[type];
 
 		// If it hasn't been initialized yet
 		if (!handlers) {
 			// Init the event handler queue
-			handlers = element.events[type] = {};
+			handlers = element.$events[type] = {};
 
 			// Remember an existing handler, if it's already there
 			if (element["on" + type])
@@ -1196,21 +1214,39 @@ jQuery.event = {
 
 	// Detach an event or set of events from an element
 	remove: function(element, type, handler) {
-		if (element.events)
-			if ( type && type.type )
-				delete element.events[ type.type ][ type.handler.guid ];
-			else if (type && element.events[type])
+		if (element.$events) {
+			var i,j,k;
+			if ( type && type.type ) { // type is actually an event object here
+				handler = type.handler;
+				type    = type.type;
+			}
+			
+			if (type && element.$events[type])
+				// remove the given handler for the given type
 				if ( handler )
-					delete element.events[type][handler.guid];
+					delete element.$events[type][handler.guid];
+					
+				// remove all handlers for the given type
 				else
-					for ( var i in element.events[type] )
-						delete element.events[type][i];
+					for ( i in element.$events[type] )
+						delete element.$events[type][i];
+						
+			// remove all handlers		
 			else
-				for ( var j in element.events )
+				for ( j in element.$events )
 					this.remove( element, j );
+			
+			// remove event handler if no more handlers exist
+			for ( k in element.$events[type] )
+				if (k) {
+					k = true;
+					break;
+				}
+			if (!k) element["on" + type] = null;
+		}
 	},
 
-	trigger: function(type,data,element) {
+	trigger: function(type, data, element) {
 		// Clone the incoming data, if any
 		data = jQuery.makeArray(data || []);
 
@@ -1252,7 +1288,7 @@ jQuery.event = {
 		// returned undefined or false
 		var returnValue;
 
-		var c = this.events[event.type];
+		var c = this.$events[event.type];
 
 		var args = [].slice.call( arguments, 1 );
 		args.unshift( event );
@@ -1504,6 +1540,392 @@ if (jQuery.browser.msie)
 		}
 	});
 jQuery.fn.extend({
+	loadIfModified: function( url, params, callback ) {
+		this.load( url, params, callback, 1 );
+	},
+	load: function( url, params, callback, ifModified ) {
+		if ( jQuery.isFunction( url ) )
+			return this.bind("load", url);
+
+		callback = callback || function(){};
+
+		// Default to a GET request
+		var type = "GET";
+
+		// If the second parameter was provided
+		if ( params )
+			// If it's a function
+			if ( jQuery.isFunction( params ) ) {
+				// We assume that it's the callback
+				callback = params;
+				params = null;
+
+			// Otherwise, build a param string
+			} else {
+				params = jQuery.param( params );
+				type = "POST";
+			}
+
+		var self = this;
+
+		// Request the remote document
+		jQuery.ajax({
+			url: url,
+			type: type,
+			data: params,
+			ifModified: ifModified,
+			complete: function(res, status){
+				if ( status == "success" || !ifModified && status == "notmodified" )
+					// Inject the HTML into all the matched elements
+					self.attr("innerHTML", res.responseText)
+					  // Execute all the scripts inside of the newly-injected HTML
+					  .evalScripts()
+					  // Execute callback
+					  .each( callback, [res.responseText, status, res] );
+				else
+					callback.apply( self, [res.responseText, status, res] );
+			}
+		});
+		return this;
+	},
+	serialize: function() {
+		return jQuery.param( this );
+	},
+	evalScripts: function() {
+		return this.find("script").each(function(){
+			if ( this.src )
+				jQuery.getScript( this.src );
+			else
+				jQuery.globalEval( this.text || this.textContent || this.innerHTML || "" );
+		}).end();
+	}
+
+});
+
+// If IE is used, create a wrapper for the XMLHttpRequest object
+if ( !window.XMLHttpRequest )
+	XMLHttpRequest = function(){
+		return new ActiveXObject("Microsoft.XMLHTTP");
+	};
+
+// Attach a bunch of functions for handling common AJAX events
+
+jQuery.each( "ajaxStart,ajaxStop,ajaxComplete,ajaxError,ajaxSuccess,ajaxSend".split(","), function(i,o){
+	jQuery.fn[o] = function(f){
+		return this.bind(o, f);
+	};
+});
+
+jQuery.extend({
+	get: function( url, data, callback, type, ifModified ) {
+		// shift arguments if data argument was ommited
+		if ( jQuery.isFunction( data ) ) {
+			callback = data;
+			data = null;
+		}
+		
+		return jQuery.ajax({
+			url: url,
+			data: data,
+			success: callback,
+			dataType: type,
+			ifModified: ifModified
+		});
+	},
+	getIfModified: function( url, data, callback, type ) {
+		return jQuery.get(url, data, callback, type, 1);
+	},
+	getScript: function( url, callback ) {
+		return jQuery.get(url, null, callback, "script");
+	},
+	getJSON: function( url, data, callback ) {
+		return jQuery.get(url, data, callback, "json");
+	},
+	post: function( url, data, callback, type ) {
+		if ( jQuery.isFunction( data ) ) {
+			callback = data;
+			data = {};
+		}
+
+		return jQuery.ajax({
+			type: "POST",
+			url: url,
+			data: data,
+			success: callback,
+			dataType: type
+		});
+	},
+
+	// timeout (ms)
+	//timeout: 0,
+	ajaxTimeout: function( timeout ) {
+		jQuery.ajaxSettings.timeout = timeout;
+	},
+	ajaxSetup: function( settings ) {
+		jQuery.extend( jQuery.ajaxSettings, settings );
+	},
+
+	ajaxSettings: {
+		global: true,
+		type: "GET",
+		timeout: 0,
+		contentType: "application/x-www-form-urlencoded",
+		processData: true,
+		async: true,
+		data: null
+	},
+	
+	// Last-Modified header cache for next request
+	lastModified: {},
+	ajax: function( s ) {
+		// TODO introduce global settings, allowing the client to modify them for all requests, not only timeout
+		s = jQuery.extend({}, jQuery.ajaxSettings, s);
+
+		// if data available
+		if ( s.data ) {
+			// convert data if not already a string
+			if (s.processData && typeof s.data != "string")
+    			s.data = jQuery.param(s.data);
+			// append data to url for get requests
+			if( s.type.toLowerCase() == "get" ) {
+				// "?" + data or "&" + data (in case there are already params)
+				s.url += ((s.url.indexOf("?") > -1) ? "&" : "?") + s.data;
+				// IE likes to send both get and post data, prevent this
+				s.data = null;
+			}
+		}
+
+		// Watch for a new set of requests
+		if ( s.global && ! jQuery.active++ )
+			jQuery.event.trigger( "ajaxStart" );
+
+		var requestDone = false;
+
+		// Create the request object
+		var xml = new XMLHttpRequest();
+
+		// Open the socket
+		xml.open(s.type, s.url, s.async);
+
+		// Set the correct header, if data is being sent
+		if ( s.data )
+			xml.setRequestHeader("Content-Type", s.contentType);
+
+		// Set the If-Modified-Since header, if ifModified mode.
+		if ( s.ifModified )
+			xml.setRequestHeader("If-Modified-Since",
+				jQuery.lastModified[s.url] || "Thu, 01 Jan 1970 00:00:00 GMT" );
+
+		// Set header so the called script knows that it's an XMLHttpRequest
+		xml.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
+		// Make sure the browser sends the right content length
+		if ( xml.overrideMimeType )
+			xml.setRequestHeader("Connection", "close");
+			
+		// Allow custom headers/mimetypes
+		if( s.beforeSend )
+			s.beforeSend(xml);
+			
+		if ( s.global )
+		    jQuery.event.trigger("ajaxSend", [xml, s]);
+
+		// Wait for a response to come back
+		var onreadystatechange = function(isTimeout){
+			// The transfer is complete and the data is available, or the request timed out
+			if ( xml && (xml.readyState == 4 || isTimeout == "timeout") ) {
+				requestDone = true;
+				
+				// clear poll interval
+				if (ival) {
+					clearInterval(ival);
+					ival = null;
+				}
+				
+				var status;
+				try {
+					status = jQuery.httpSuccess( xml ) && isTimeout != "timeout" ?
+						s.ifModified && jQuery.httpNotModified( xml, s.url ) ? "notmodified" : "success" : "error";
+					// Make sure that the request was successful or notmodified
+					if ( status != "error" ) {
+						// Cache Last-Modified header, if ifModified mode.
+						var modRes;
+						try {
+							modRes = xml.getResponseHeader("Last-Modified");
+						} catch(e) {} // swallow exception thrown by FF if header is not available
+	
+						if ( s.ifModified && modRes )
+							jQuery.lastModified[s.url] = modRes;
+	
+						// process the data (runs the xml through httpData regardless of callback)
+						var data = jQuery.httpData( xml, s.dataType );
+	
+						// If a local callback was specified, fire it and pass it the data
+						if ( s.success )
+							s.success( data, status );
+	
+						// Fire the global callback
+						if( s.global )
+							jQuery.event.trigger( "ajaxSuccess", [xml, s] );
+					} else
+						jQuery.handleError(s, xml, status);
+				} catch(e) {
+					status = "error";
+					jQuery.handleError(s, xml, status, e);
+				}
+
+				// The request was completed
+				if( s.global )
+					jQuery.event.trigger( "ajaxComplete", [xml, s] );
+
+				// Handle the global AJAX counter
+				if ( s.global && ! --jQuery.active )
+					jQuery.event.trigger( "ajaxStop" );
+
+				// Process result
+				if ( s.complete )
+					s.complete(xml, status);
+
+				// Stop memory leaks
+				if(s.async)
+					xml = null;
+			}
+		};
+		
+		// don't attach the handler to the request, just poll it instead
+		var ival = setInterval(onreadystatechange, 13); 
+
+		// Timeout checker
+		if ( s.timeout > 0 )
+			setTimeout(function(){
+				// Check to see if the request is still happening
+				if ( xml ) {
+					// Cancel the request
+					xml.abort();
+
+					if( !requestDone )
+						onreadystatechange( "timeout" );
+				}
+			}, s.timeout);
+			
+		// Send the data
+		try {
+			xml.send(s.data);
+		} catch(e) {
+			jQuery.handleError(s, xml, null, e);
+		}
+		
+		// firefox 1.5 doesn't fire statechange for sync requests
+		if ( !s.async )
+			onreadystatechange();
+		
+		// return XMLHttpRequest to allow aborting the request etc.
+		return xml;
+	},
+
+	handleError: function( s, xml, status, e ) {
+		// If a local callback was specified, fire it
+		if ( s.error ) s.error( xml, status, e );
+
+		// Fire the global callback
+		if ( s.global )
+			jQuery.event.trigger( "ajaxError", [xml, s, e] );
+	},
+
+	// Counter for holding the number of active queries
+	active: 0,
+
+	// Determines if an XMLHttpRequest was successful or not
+	httpSuccess: function( r ) {
+		try {
+			return !r.status && location.protocol == "file:" ||
+				( r.status >= 200 && r.status < 300 ) || r.status == 304 ||
+				jQuery.browser.safari && r.status == undefined;
+		} catch(e){}
+		return false;
+	},
+
+	// Determines if an XMLHttpRequest returns NotModified
+	httpNotModified: function( xml, url ) {
+		try {
+			var xmlRes = xml.getResponseHeader("Last-Modified");
+
+			// Firefox always returns 200. check Last-Modified date
+			return xml.status == 304 || xmlRes == jQuery.lastModified[url] ||
+				jQuery.browser.safari && xml.status == undefined;
+		} catch(e){}
+		return false;
+	},
+
+	/* Get the data out of an XMLHttpRequest.
+	 * Return parsed XML if content-type header is "xml" and type is "xml" or omitted,
+	 * otherwise return plain text.
+	 * (String) data - The type of data that you're expecting back,
+	 * (e.g. "xml", "html", "script")
+	 */
+	httpData: function( r, type ) {
+		var ct = r.getResponseHeader("content-type");
+		var data = !type && ct && ct.indexOf("xml") >= 0;
+		data = type == "xml" || data ? r.responseXML : r.responseText;
+
+		// If the type is "script", eval it in global context
+		if ( type == "script" )
+			jQuery.globalEval( data );
+
+		// Get the JavaScript object, if JSON is used.
+		if ( type == "json" )
+			eval( "data = " + data );
+
+		// evaluate scripts within html
+		if ( type == "html" )
+			jQuery("<div>").html(data).evalScripts();
+
+		return data;
+	},
+
+	// Serialize an array of form elements or a set of
+	// key/values into a query string
+	param: function( a ) {
+		var s = [];
+
+		// If an array was passed in, assume that it is an array
+		// of form elements
+		if ( a.constructor == Array || a.jquery )
+			// Serialize the form elements
+			jQuery.each( a, function(){
+				s.push( encodeURIComponent(this.name) + "=" + encodeURIComponent( this.value ) );
+			});
+
+		// Otherwise, assume that it's an object of key/value pairs
+		else
+			// Serialize the key/values
+			for ( var j in a )
+				// If the value is an array then the key names need to be repeated
+				if ( a[j] && a[j].constructor == Array )
+					jQuery.each( a[j], function(){
+						s.push( encodeURIComponent(j) + "=" + encodeURIComponent( this ) );
+					});
+				else
+					s.push( encodeURIComponent(j) + "=" + encodeURIComponent( a[j] ) );
+
+		// Return the resulting serialization
+		return s.join("&");
+	},
+	
+	// evalulates a script in global context
+	// not reliable for safari
+	globalEval: function( data ) {
+		if ( window.execScript )
+			window.execScript( data );
+		else if ( jQuery.browser.safari )
+			// safari doesn't provide a synchronous global eval
+			window.setTimeout( data, 0 );
+		else
+			eval.call( window, data );
+	}
+
+});
+jQuery.fn.extend({
 
 	show: function(speed,callback){
 		var hidden = this.filter(":hidden");
@@ -1665,9 +2087,6 @@ jQuery.extend({
 		// Store display property
 		var oldDisplay = jQuery.css(elem, "display");
 
-		// Set display property to block for animation
-		y.display = "block";
-
 		// Make sure that nothing sneaks out
 		y.overflow = "hidden";
 
@@ -1680,6 +2099,8 @@ jQuery.extend({
 				jQuery.attr(y, "opacity", z.now); // Let attr handle opacity
 			else if ( parseInt(z.now) ) // My hate for IE will never die
 				y[prop] = parseInt(z.now) + "px";
+			
+			y.display = "block"; // Set display property to block for animation
 		};
 
 		// Figure out the maximum number to run to
@@ -1820,382 +2241,5 @@ jQuery.extend({
 		};
 	
 	}
-});
-jQuery.fn.extend({
-	loadIfModified: function( url, params, callback ) {
-		this.load( url, params, callback, 1 );
-	},
-	load: function( url, params, callback, ifModified ) {
-		if ( jQuery.isFunction( url ) )
-			return this.bind("load", url);
-
-		callback = callback || function(){};
-
-		// Default to a GET request
-		var type = "GET";
-
-		// If the second parameter was provided
-		if ( params )
-			// If it's a function
-			if ( jQuery.isFunction( params ) ) {
-				// We assume that it's the callback
-				callback = params;
-				params = null;
-
-			// Otherwise, build a param string
-			} else {
-				params = jQuery.param( params );
-				type = "POST";
-			}
-
-		var self = this;
-
-		// Request the remote document
-		jQuery.ajax({
-			url: url,
-			type: type,
-			data: params,
-			ifModified: ifModified,
-			complete: function(res, status){
-				if ( status == "success" || !ifModified && status == "notmodified" )
-					// Inject the HTML into all the matched elements
-					self.attr("innerHTML", res.responseText)
-					  // Execute all the scripts inside of the newly-injected HTML
-					  .evalScripts()
-					  // Execute callback
-					  .each( callback, [res.responseText, status, res] );
-				else
-					callback.apply( self, [res.responseText, status, res] );
-			}
-		});
-		return this;
-	},
-	serialize: function() {
-		return jQuery.param( this );
-	},
-	evalScripts: function() {
-		return this.find("script").each(function(){
-			if ( this.src )
-				jQuery.getScript( this.src );
-			else
-				jQuery.globalEval( this.text || this.textContent || this.innerHTML || "" );
-		}).end();
-	}
-
-});
-
-// If IE is used, create a wrapper for the XMLHttpRequest object
-if ( !window.XMLHttpRequest )
-	XMLHttpRequest = function(){
-		return new ActiveXObject("Microsoft.XMLHTTP");
-	};
-
-// Attach a bunch of functions for handling common AJAX events
-
-jQuery.each( "ajaxStart,ajaxStop,ajaxComplete,ajaxError,ajaxSuccess,ajaxSend".split(","), function(i,o){
-	jQuery.fn[o] = function(f){
-		return this.bind(o, f);
-	};
-});
-
-jQuery.extend({
-	get: function( url, data, callback, type, ifModified ) {
-		// shift arguments if data argument was ommited
-		if ( jQuery.isFunction( data ) ) {
-			callback = data;
-			data = null;
-		}
-		
-		return jQuery.ajax({
-			url: url,
-			data: data,
-			success: callback,
-			dataType: type,
-			ifModified: ifModified
-		});
-	},
-	getIfModified: function( url, data, callback, type ) {
-		return jQuery.get(url, data, callback, type, 1);
-	},
-	getScript: function( url, callback ) {
-		return jQuery.get(url, null, callback, "script");
-	},
-	getJSON: function( url, data, callback ) {
-		return jQuery.get(url, data, callback, "json");
-	},
-	post: function( url, data, callback, type ) {
-		if ( jQuery.isFunction( data ) ) {
-			callback = data;
-			data = {};
-		}
-
-		return jQuery.ajax({
-			type: "POST",
-			url: url,
-			data: data,
-			success: callback,
-			dataType: type
-		});
-	},
-
-	// timeout (ms)
-	//timeout: 0,
-	ajaxTimeout: function( timeout ) {
-		jQuery.ajaxSettings.timeout = timeout;
-	},
-	ajaxSetup: function( settings ) {
-		jQuery.extend( jQuery.ajaxSettings, settings );
-	},
-
-	ajaxSettings: {
-		global: true,
-		type: "GET",
-		timeout: 0,
-		contentType: "application/x-www-form-urlencoded",
-		processData: true,
-		async: true,
-		data: null
-	},
-	
-	// Last-Modified header cache for next request
-	lastModified: {},
-	ajax: function( s ) {
-		// TODO introduce global settings, allowing the client to modify them for all requests, not only timeout
-		s = jQuery.extend({}, jQuery.ajaxSettings, s);
-
-		// if data available
-		if ( s.data ) {
-			// convert data if not already a string
-			if (s.processData && typeof s.data != "string")
-    			s.data = jQuery.param(s.data);
-			// append data to url for get requests
-			if( s.type.toLowerCase() == "get" )
-				// "?" + data or "&" + data (in case there are already params)
-				s.url += ((s.url.indexOf("?") > -1) ? "&" : "?") + s.data;
-		}
-
-		// Watch for a new set of requests
-		if ( s.global && ! jQuery.active++ )
-			jQuery.event.trigger( "ajaxStart" );
-
-		var requestDone = false;
-
-		// Create the request object
-		var xml = new XMLHttpRequest();
-
-		// Open the socket
-		xml.open(s.type, s.url, s.async);
-
-		// Set the correct header, if data is being sent
-		if ( s.data )
-			xml.setRequestHeader("Content-Type", s.contentType);
-
-		// Set the If-Modified-Since header, if ifModified mode.
-		if ( s.ifModified )
-			xml.setRequestHeader("If-Modified-Since",
-				jQuery.lastModified[s.url] || "Thu, 01 Jan 1970 00:00:00 GMT" );
-
-		// Set header so the called script knows that it's an XMLHttpRequest
-		xml.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-
-		// Make sure the browser sends the right content length
-		if ( xml.overrideMimeType )
-			xml.setRequestHeader("Connection", "close");
-			
-		// Allow custom headers/mimetypes
-		if( s.beforeSend )
-			s.beforeSend(xml);
-			
-		if ( s.global )
-		    jQuery.event.trigger("ajaxSend", [xml, s]);
-
-		// Wait for a response to come back
-		var onreadystatechange = function(isTimeout){
-			// The transfer is complete and the data is available, or the request timed out
-			if ( xml && (xml.readyState == 4 || isTimeout == "timeout") ) {
-				requestDone = true;
-				var status;
-				try {
-					status = jQuery.httpSuccess( xml ) && isTimeout != "timeout" ?
-						s.ifModified && jQuery.httpNotModified( xml, s.url ) ? "notmodified" : "success" : "error";
-					// Make sure that the request was successful or notmodified
-					if ( status != "error" ) {
-						// Cache Last-Modified header, if ifModified mode.
-						var modRes;
-						try {
-							modRes = xml.getResponseHeader("Last-Modified");
-						} catch(e) {} // swallow exception thrown by FF if header is not available
-	
-						if ( s.ifModified && modRes )
-							jQuery.lastModified[s.url] = modRes;
-	
-						// process the data (runs the xml through httpData regardless of callback)
-						var data = jQuery.httpData( xml, s.dataType );
-	
-						// If a local callback was specified, fire it and pass it the data
-						if ( s.success )
-							s.success( data, status );
-	
-						// Fire the global callback
-						if( s.global )
-							jQuery.event.trigger( "ajaxSuccess", [xml, s] );
-					} else
-						jQuery.handleError(s, xml, status);
-				} catch(e) {
-					status = "error";
-					jQuery.handleError(s, xml, status, e);
-				}
-
-				// The request was completed
-				if( s.global )
-					jQuery.event.trigger( "ajaxComplete", [xml, s] );
-
-				// Handle the global AJAX counter
-				if ( s.global && ! --jQuery.active )
-					jQuery.event.trigger( "ajaxStop" );
-
-				// Process result
-				if ( s.complete )
-					s.complete(xml, status);
-
-				// Stop memory leaks
-				xml.onreadystatechange = function(){};
-				xml = null;
-			}
-		};
-		xml.onreadystatechange = onreadystatechange;
-
-		// Timeout checker
-		if ( s.timeout > 0 )
-			setTimeout(function(){
-				// Check to see if the request is still happening
-				if ( xml ) {
-					// Cancel the request
-					xml.abort();
-
-					if( !requestDone )
-						onreadystatechange( "timeout" );
-				}
-			}, s.timeout);
-			
-		// save non-leaking reference 
-		var xml2 = xml;
-
-		// Send the data
-		try {
-			xml2.send(s.data);
-		} catch(e) {
-			jQuery.handleError(s, xml, null, e);
-		}
-		
-		// firefox 1.5 doesn't fire statechange for sync requests
-		if ( !s.async )
-			onreadystatechange();
-		
-		// return XMLHttpRequest to allow aborting the request etc.
-		return xml2;
-	},
-
-	handleError: function( s, xml, status, e ) {
-		// If a local callback was specified, fire it
-		if ( s.error ) s.error( xml, status, e );
-
-		// Fire the global callback
-		if ( s.global )
-			jQuery.event.trigger( "ajaxError", [xml, s, e] );
-	},
-
-	// Counter for holding the number of active queries
-	active: 0,
-
-	// Determines if an XMLHttpRequest was successful or not
-	httpSuccess: function( r ) {
-		try {
-			return !r.status && location.protocol == "file:" ||
-				( r.status >= 200 && r.status < 300 ) || r.status == 304 ||
-				jQuery.browser.safari && r.status == undefined;
-		} catch(e){}
-		return false;
-	},
-
-	// Determines if an XMLHttpRequest returns NotModified
-	httpNotModified: function( xml, url ) {
-		try {
-			var xmlRes = xml.getResponseHeader("Last-Modified");
-
-			// Firefox always returns 200. check Last-Modified date
-			return xml.status == 304 || xmlRes == jQuery.lastModified[url] ||
-				jQuery.browser.safari && xml.status == undefined;
-		} catch(e){}
-		return false;
-	},
-
-	/* Get the data out of an XMLHttpRequest.
-	 * Return parsed XML if content-type header is "xml" and type is "xml" or omitted,
-	 * otherwise return plain text.
-	 * (String) data - The type of data that you're expecting back,
-	 * (e.g. "xml", "html", "script")
-	 */
-	httpData: function( r, type ) {
-		var ct = r.getResponseHeader("content-type");
-		var data = !type && ct && ct.indexOf("xml") >= 0;
-		data = type == "xml" || data ? r.responseXML : r.responseText;
-
-		// If the type is "script", eval it in global context
-		if ( type == "script" )
-			jQuery.globalEval( data );
-
-		// Get the JavaScript object, if JSON is used.
-		if ( type == "json" )
-			eval( "data = " + data );
-
-		// evaluate scripts within html
-		if ( type == "html" )
-			jQuery("<div>").html(data).evalScripts();
-
-		return data;
-	},
-
-	// Serialize an array of form elements or a set of
-	// key/values into a query string
-	param: function( a ) {
-		var s = [];
-
-		// If an array was passed in, assume that it is an array
-		// of form elements
-		if ( a.constructor == Array || a.jquery )
-			// Serialize the form elements
-			jQuery.each( a, function(){
-				s.push( encodeURIComponent(this.name) + "=" + encodeURIComponent( this.value ) );
-			});
-
-		// Otherwise, assume that it's an object of key/value pairs
-		else
-			// Serialize the key/values
-			for ( var j in a )
-				// If the value is an array then the key names need to be repeated
-				if ( a[j] && a[j].constructor == Array )
-					jQuery.each( a[j], function(){
-						s.push( encodeURIComponent(j) + "=" + encodeURIComponent( this ) );
-					});
-				else
-					s.push( encodeURIComponent(j) + "=" + encodeURIComponent( a[j] ) );
-
-		// Return the resulting serialization
-		return s.join("&");
-	},
-	
-	// evalulates a script in global context
-	// not reliable for safari
-	globalEval: function( data ) {
-		if ( window.execScript )
-			window.execScript( data );
-		else if ( jQuery.browser.safari )
-			// safari doesn't provide a synchronous global eval
-			window.setTimeout( data, 0 );
-		else
-			eval.call( window, data );
-	}
-
 });
 }
