@@ -205,7 +205,7 @@ else {
 		String[] months = CalendarUtil.getMonths(locale, "MMM");
 		%>
 
-		<select <%= disabled ? "disabled" : "" %> name="<%= monthAndYearNullable %>">
+		<select <%= disabled ? "disabled" : "" %> name="<%= monthAndYearParam %>">
 			<c:if test="<%= monthAndYearNullable %>">
 				<option value=""></option>
 			</c:if>
