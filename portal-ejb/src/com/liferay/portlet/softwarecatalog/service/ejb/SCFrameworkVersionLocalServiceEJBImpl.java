@@ -152,6 +152,13 @@ public class SCFrameworkVersionLocalServiceEJBImpl
 			begin, end);
 	}
 
+	public java.util.List getFrameworkVersions(long groupId, boolean active)
+		throws com.liferay.portal.SystemException {
+		return SCFrameworkVersionLocalServiceFactory.getTxImpl()
+													.getFrameworkVersions(groupId,
+			active);
+	}
+
 	public java.util.List getFrameworkVersions(long groupId, boolean active,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return SCFrameworkVersionLocalServiceFactory.getTxImpl()

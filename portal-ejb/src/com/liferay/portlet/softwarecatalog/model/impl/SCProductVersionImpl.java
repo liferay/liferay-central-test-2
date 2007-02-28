@@ -24,11 +24,13 @@ package com.liferay.portlet.softwarecatalog.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -65,6 +67,22 @@ public class SCProductVersionImpl
 	public List getFrameworkVersions() throws PortalException, SystemException {
 		return SCFrameworkVersionLocalServiceUtil.
 			getProductVersionFrameworkVersions(getProductVersionId());
+	}
+
+	public boolean supportsFrameworkVersion(long frameworkVersionId)
+		throws SystemException, PortalException {
+		Iterator itr = getFrameworkVersions().iterator();
+
+		while (itr.hasNext()) {
+			SCFrameworkVersion frameworkVersion =
+				(SCFrameworkVersion) itr.next();
+
+			if (frameworkVersionId == frameworkVersion.getFrameworkVersionId()){
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private static Log _log = LogFactory.getLog(SCProductVersionImpl.class);

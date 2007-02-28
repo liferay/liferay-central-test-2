@@ -146,10 +146,17 @@ public class ActionUtil {
 		long productVersionId = ParamUtil.getLong(req, "productVersionId");
 
 		SCProductVersion productVersion = null;
+		SCProductEntry productEntry = null;
 
 		if (productVersionId > 0) {
 			productVersion = SCProductVersionServiceUtil.getProductVersion(
 				productVersionId);
+			productEntry = SCProductEntryServiceUtil.getProductEntry(
+				productVersion.getProductEntryId());
+			req.setAttribute(
+				WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY, productEntry);
+		} else {
+			getProductEntry(req);
 		}
 
 		req.setAttribute(

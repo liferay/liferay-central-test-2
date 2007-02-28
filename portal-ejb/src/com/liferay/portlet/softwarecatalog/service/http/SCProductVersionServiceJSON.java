@@ -24,6 +24,7 @@ package com.liferay.portlet.softwarecatalog.service.http;
 
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -76,6 +77,24 @@ public class SCProductVersionServiceJSON {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.getProductVersion(productVersionId);
 
 		return SCProductVersionJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONArray getProductVersions(long productEntryId, int begin,
+		int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		java.util.List returnValue = SCProductVersionServiceUtil.getProductVersions(productEntryId,
+				begin, end);
+
+		return SCProductVersionJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static int getProductVersionsCount(long productEntryId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		int returnValue = SCProductVersionServiceUtil.getProductVersionsCount(productEntryId);
+
+		return returnValue;
 	}
 
 	public static JSONObject updateProductVersion(long productVersionId,

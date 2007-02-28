@@ -153,6 +153,14 @@ public class SCFrameworkVersionLocalServiceUtil {
 	}
 
 	public static java.util.List getFrameworkVersions(long groupId,
+		boolean active) throws com.liferay.portal.SystemException {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getFrameworkVersions(groupId,
+			active);
+	}
+
+	public static java.util.List getFrameworkVersions(long groupId,
 		boolean active, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();

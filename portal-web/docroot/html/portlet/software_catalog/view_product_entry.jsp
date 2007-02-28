@@ -30,17 +30,38 @@ String redirect = ParamUtil.getString(request, "redirect");
 String tabs1 = ParamUtil.getString(request, "tabs1", "comments");
 
 SCProductEntry productEntry = (SCProductEntry) request.getAttribute(WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY);
+SCProductVersion lastProductVersion = productEntry.getLastVersion();
 
 long productEntryId = BeanParamUtil.getLong(productEntry, request, "productEntryId");
 
-PortletURL portletURL = renderResponse.createRenderURL();
+PortletURL viewProductEntryURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
+viewProductEntryURL.setWindowState(WindowState.MAXIMIZED);
 
-portletURL.setParameter("struts_action", "/software_catalog/view_product_entry");
-portletURL.setParameter("tabs1", tabs1);
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("productEntryId", String.valueOf(productEntryId));
+viewProductEntryURL.setParameter("struts_action", "/software_catalog/view_product_entry");
+viewProductEntryURL.setParameter("tabs1", tabs1);
+viewProductEntryURL.setParameter("redirect", redirect);
+viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId));
+
+PortletURL editProductEntryURL = renderResponse.createRenderURL();
+
+editProductEntryURL.setWindowState(WindowState.MAXIMIZED);
+
+editProductEntryURL.setParameter("struts_action", "/software_catalog/edit_product_entry");
+editProductEntryURL.setParameter("tabs1", tabs1);
+editProductEntryURL.setParameter("redirect", currentURL);
+editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId));
+
+PortletURL addProductVersionURL = renderResponse.createRenderURL();
+
+addProductVersionURL.setWindowState(WindowState.MAXIMIZED);
+
+addProductVersionURL.setParameter("struts_action", "/software_catalog/edit_product_version");
+addProductVersionURL.setParameter(Constants.CMD, Constants.ADD);
+addProductVersionURL.setParameter("tabs1", tabs1);
+addProductVersionURL.setParameter("redirect", currentURL);
+addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryId));
+
 %>
 
 <liferay-ui:tabs
@@ -48,16 +69,9 @@ portletURL.setParameter("productEntryId", String.valueOf(productEntryId));
 	backURL="<%= redirect %>"
 />
 
-<table border="0" cellpadding="0" cellspacing="0">
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "name") %>:
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<%= productEntry.getName() %>
-	</td>
-</tr>
+<h2><%= productEntry.getName() %> <%= (lastProductVersion == null)?"":lastProductVersion.getVersion() %></h2>
+
+<table cellpadding="2" cellspacing="4">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>:
@@ -116,6 +130,77 @@ portletURL.setParameter("productEntryId", String.valueOf(productEntryId));
 		<%= productEntry.getLongDescription() %>
 	</td>
 </tr>
+
+<%
+if (lastProductVersion != null) {
+%>
+<tr>
+	<td colspan="3">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<th colspan="3">
+		<%= LanguageUtil.get(pageContext, "information-about-the-latest-version") %>:
+	</th>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "release-date") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<%= lastProductVersion.getModifiedDate() %>
+	</td>
+</tr><tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "changeLog") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<%= lastProductVersion.getChangeLog() %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "supported-framework-versions") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<%= _buildFrameworkVersions(lastProductVersion.getFrameworkVersions()) %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "download-links") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<% if (Validator.isNotNull(lastProductVersion.getDirectDownloadURL())) { %>
+			<a href="<%=lastProductVersion.getDirectDownloadURL()%>">
+				<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "direct-download")%>')" alt="<%=LanguageUtil.get(pageContext, "direct-download")%>" align="absmiddle" border="0">
+			</a>
+		<% } %>
+		<% if (Validator.isNotNull(lastProductVersion.getDownloadPageURL())) { %>
+			<a href="<%=lastProductVersion.getDownloadPageURL()%>">
+				<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "download-page")%>')" alt="<%=LanguageUtil.get(pageContext, "download-page")%>" align="absmiddle" border="0">
+			</a>
+		<% } %>
+	</td>
+</tr>
+<%
+}
+else {
+%>
+	<tr>
+		<td style="color:red" colspan="3">
+			<b><%=LanguageUtil.get(pageContext, "note") %></b>: <%=LanguageUtil.get(pageContext, "this-product-has-not-yet-uploaded-any-release")%>
+		</td>
+	</tr>
+<%
+}
+%>
+
 </table>
 
 <br>
@@ -126,9 +211,20 @@ portletURL.setParameter("productEntryId", String.valueOf(productEntryId));
 	url='<%= themeDisplay.getPathMain() + "/software_catalog/rate_product_entry?productEntryId=" + productEntryId %>'
 />
 
+<c:if test="<%= SCProductEntryPermission.contains(permissionChecker, productEntryId, ActionKeys.UPDATE) %>">
+	<div class="actions" style="margin-bottom: 20px; margin-top:15px">
+		<form action="<%=editProductEntryURL.toString()%>" method="post" style="display:inline">
+			<input type="submit" value="<%=LanguageUtil.get(pageContext,"edit-product-entry")%>"/>
+		</form>
+		<form action="<%=addProductVersionURL.toString()%>" method="post" style="display:inline">
+			<input type="submit" value="<%=LanguageUtil.get(pageContext,"add-product-version")%>"/>
+		</form>
+	</div>
+</c:if>
+
 <liferay-ui:tabs
 	names="comments,version-history"
-	url="<%= portletURL.toString() %>"
+	url="<%= viewProductEntryURL.toString() %>"
 />
 
 <c:choose>
@@ -147,230 +243,76 @@ portletURL.setParameter("productEntryId", String.valueOf(productEntryId));
 		/>
 	</c:when>
 	<c:when test='<%= tabs1.equals("version-history") %>'>
+		<div class="version-history">
+			<%
+			PortletURL viewProductVersionURL = renderResponse.createRenderURL();
+
+			viewProductVersionURL.setWindowState(WindowState.MAXIMIZED);
+
+			viewProductVersionURL.setParameter("struts_action", "/software_catalog/view_product_entry");
+			viewProductVersionURL.setParameter("productEntryId", "" + productEntryId);
+
+			List headerNames = new ArrayList();
+
+			headerNames.add("version");
+			headerNames.add("supported-framework-versions");
+			headerNames.add("date");
+			headerNames.add(StringPool.BLANK);
+
+			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, viewProductVersionURL, headerNames, null);
+
+			int total = SCProductVersionServiceUtil.getProductVersionsCount(productEntryId);
+
+			searchContainer.setTotal(total);
+
+			List results = SCProductVersionServiceUtil.getProductVersions(productEntryId, searchContainer.getStart(), searchContainer.getEnd());
+
+			searchContainer.setResults(results);
+
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				SCProductVersion curProductVersion = (SCProductVersion) results.get(i);
+
+				ResultRow row = new ResultRow(curProductVersion, String.valueOf(curProductVersion.getPrimaryKey()), i);
+
+				// Name and description
+
+				StringBuffer sb = new StringBuffer();
+
+				sb.append("<b>");
+				sb.append(curProductVersion.getVersion());
+				sb.append("</b>");
+
+				if (Validator.isNotNull(curProductVersion.getChangeLog())) {
+					sb.append("<br>");
+					sb.append("<span style=\"font-size: xx-small;\">");
+					sb.append(curProductVersion.getChangeLog());
+					sb.append("</span>");
+				}
+
+				sb.append("</a>");
+
+				row.addText(sb.toString());
+
+				row.addText(_buildFrameworkVersions(curProductVersion.getFrameworkVersions()));
+				row.addText("" + curProductVersion.getModifiedDate());
+
+				// Action
+
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/software_catalog/product_version_action.jsp");
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
+
+		</div>
 	</c:when>
 </c:choose>
-
-<%--<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
-	<portlet:param name="struts_action" value="/software_catalog/view_product_entry" />
-	<portlet:param name="productEntryId" value="<%= String.valueOf(productEntry.getProductEntryId()) %>" />
-</portlet:renderURL>
-
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editProductEntryURL">
-	<portlet:param name="struts_action" value="/software_catalog/edit_product_entry" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="productEntryId" value="<%= String.valueOf(productEntry.getProductEntryId()) %>" />
-</portlet:renderURL>
-
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addProductVersionURL">
-	<portlet:param name="struts_action" value="/software_catalog/edit_product_version" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="cmd" value="add" />
-	<portlet:param name="productEntryId" value="<%= String.valueOf(productEntry.getProductEntryId()) %>" />
-</portlet:renderURL>
-
-<portlet:renderURL var="listURL">
-	<portlet:param name="struts_action" value="/software_catalog/view" />
-</portlet:renderURL>
-
-<div class="product-entry-detail">
-	<h2>
-		<%=productEntry.getName()%>
-		<%=LanguageUtil.get(pageContext, "by")%> <span class="author"><%= productEntry.getUserName() %></span>
-	</h2>
-	<div class="ratings" style="display: inline; margin-bottom: 35px" align="left">
-		<liferay-ui:ratings
-			className="<%= SCProductEntry.class.getName() %>"
-			classPK="<%= String.valueOf(productEntry.getPrimaryKey()) %>"
-			url='<%= themeDisplay.getPathMain() + "/software_catalog/rate_product_entry?productEntryId=" + productEntryId %>'
-		/>
-	</div>
-
-	<div class="preview-image"  style="float:right" align="right">
-		<img src="http://www.liferay.com/image/company_logo?img_id=liferay.com" alt="<%=LanguageUtil.get(pageContext, "product-screenshot")%>" />
-		<p>
-		 <a href="">More screenshots</a>
-		</p>
-	</div>
-
-	<p class="short-description"><%=productEntry.getShortDescription()%></p>
-	<p class="long-description"><%=productEntry.getLongDescription()%></p>
-
-	<div class="links">
-		<a href="<%=productEntry.getPageURL()%>" class="home-page"><%=LanguageUtil.get(pageContext,"home-page")%></a>
-	</div>
-	<%
-		PortletURL viewProductVersionURL = renderResponse.createRenderURL();
-
-		viewProductVersionURL.setWindowState(WindowState.MAXIMIZED);
-
-		viewProductVersionURL.setParameter("struts_action", "/software_catalog/view_product_entry");
-		viewProductVersionURL.setParameter("productEntryId", "" + productEntryId);
-
-		List headerNames = new ArrayList();
-
-		headerNames.add("version");
-		headerNames.add("supported-framework-versions");
-		headerNames.add("date");
-		headerNames.add(StringPool.BLANK);
-
-		SearchContainer searchContainer = new SearchContainer(
-			renderRequest, null, null, "cur1",
-			SearchContainer.DEFAULT_DELTA, viewProductVersionURL, headerNames, null);
-
-		int total = SCProductVersionServiceUtil.getProductVersionsCount(productEntryId);
-
-		searchContainer.setTotal(total);
-		List results = SCProductVersionServiceUtil.getProductVersions(
-			productEntryId, searchContainer.getStart(),
-			searchContainer.getEnd());
-	%>
-
-	<%
-		if (results.size() > 0) {
-			SCProductVersion lastVersion = (SCProductVersion) results.get(0);
-	%>
-	<div class="last-product-version">
-		<h2><%=LanguageUtil.get(pageContext, "last-version")%>: <%= lastVersion.getVersion()%></h2>
-		<p>
-			<%= lastVersion.getChangeLog()%>
-		</p>
-		<p>
-			<%= LanguageUtil.get(pageContext, "supported-framework-versions") + ": " + lastVersion.getFrameworkVersionNames()%>
-		</p>
-		<p>
-			<%= LanguageUtil.get(pageContext, "date") + ": " + lastVersion.getModifiedDate()%>
-		</p>
-		<div class="links">
-			<% if (Validator.isNotNull(lastVersion.getDirectDownloadURL())) { %>
-				<a href="<%=lastVersion.getDirectDownloadURL()%>" class="direct-download-url">
-				<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "direct-download")%>')" alt="<%=LanguageUtil.get(pageContext, "direct-download")%>" align="absmiddle" border="0">
-				<%=LanguageUtil.get(pageContext,"direct-download")%></a>
-				<br>
-			<% } %>
-			<% if (Validator.isNotNull(lastVersion.getDownloadPageURL())) { %>
-				<a href="<%=lastVersion.getDownloadPageURL()%>" class="download-page-url">
-				<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "download page")%>')" alt="<%=LanguageUtil.get(pageContext, "download-page")%>" align="absmiddle" border="0">
-				<%=LanguageUtil.get(pageContext,"download-page")%></a>
-			<% } %>
-		</div>
-	</div>
-	<%
-		} else {
-	%>
-			<p style="color:red">
-				<b>Note</b>: <%=LanguageUtil.get(pageContext, "this-product-has-not-yet-uploaded-any-release")%>
-			</p>
-	<%
-		}
-	%>
-
-	<div class="actions" style="margin-bottom: 20px; margin-top:15px">
-		<form action="<%=editProductEntryURL.toString()%>" method="post" style="display:inline">
-			<input type="submit" value="<%=LanguageUtil.get(pageContext,"edit-product-entry")%>"/>
-		</form>
-		<form action="<%=addProductVersionURL.toString()%>" method="post" style="display:inline">
-			<input type="submit" value="<%=LanguageUtil.get(pageContext,"add-product-version")%>"/>
-		</form>
-	</div>
-
-	<liferay-ui:tabs
-		names="comments,version-history"
-		param="tabs2"
-		url="<%= portletURL.toString() %>"
-	/>
-	<c:choose>
-		<c:when test='<%= tabs2.equals("comments") %>'>
-			<div class="comments">
-				<portlet:actionURL var="discussionURL">
-					<portlet:param name="struts_action" value="/software_catalog/edit_product_entry_discussion" />
-				</portlet:actionURL>
-
-				<liferay-ui:discussion
-					formAction="<%= discussionURL %>"
-					className="<%= SCProductEntry.class.getName() %>"
-					classPK="<%= String.valueOf(productEntry.getPrimaryKey()) %>"
-					userId="<%= productEntry.getUserId() %>"
-					subject="<%= productEntry.getName() %>"
-					redirect="<%= currentURL %>"
-				/>
-			</div>
-		</c:when>
-		<c:when test='<%= tabs2.equals("version-history") %>'>
-			<div class="version-history">
-				<%
-
-					searchContainer.setResults(results);
-
-					List resultRows = searchContainer.getResultRows();
-
-					for (int i = 0; i < results.size(); i++) {
-						SCProductVersion curProductVersion =
-							(SCProductVersion) results.get(i);
-
-						ResultRow row = new ResultRow(
-							curProductVersion,
-							String.valueOf(curProductVersion.getPrimaryKey()), i);
-
-						PortletURL rowURL = renderResponse.createRenderURL();
-
-						rowURL.setWindowState(WindowState.MAXIMIZED);
-
-						rowURL
-							.setParameter(
-								"struts_action",
-								"/software_catalog/view_product_version");
-						rowURL.setParameter(
-							"productVersionId",
-							String.valueOf(curProductVersion.getProductVersionId()));
-
-						// Name and description
-
-						StringBuffer sb = new StringBuffer();
-
-						sb.append("<a href=\"");
-						sb.append(rowURL);
-						sb.append("\"><b>");
-						sb.append(curProductVersion.getVersion());
-						sb.append("</b>");
-
-						if (Validator
-							.isNotNull(curProductVersion.getChangeLog())) {
-							sb.append("<br>");
-							sb.append("<span style=\"font-size: xx-small;\">");
-							sb.append(curProductVersion.getChangeLog());
-							sb.append("</span>");
-						}
-
-						sb.append("</a>");
-
-						row.addText(sb.toString());
-
-						row.addText(curProductVersion.getFrameworkVersionNames());
-						row.addText("" + curProductVersion.getModifiedDate());
-
-						// Action
-
-						row.addJSP(
-							"right", SearchEntry.DEFAULT_VALIGN,
-							"/html/portlet/software_catalog/product_version_action.jsp");
-
-						// Add result row
-
-						resultRows.add(row);
-					}
-				%>
-
-					<c:if test="<%= results.size() > 0 %>">
-						<br>
-					</c:if>
-
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
-
-			</div>
-
-		</c:when>
-	</c:choose>
-</div>--%>

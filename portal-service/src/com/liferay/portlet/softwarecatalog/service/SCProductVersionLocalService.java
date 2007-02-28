@@ -66,33 +66,6 @@ public interface SCProductVersionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addProductVersionResources(long productEntryId,
-		long productVersionId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public void addProductVersionResources(
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion productVersion,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public void addProductVersionResources(long productEntryId,
-		long productVersionId, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public void addProductVersionResources(
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion productVersion,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public void deleteProductVersion(long productVersionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

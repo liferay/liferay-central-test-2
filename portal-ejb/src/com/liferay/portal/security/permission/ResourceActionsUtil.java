@@ -391,6 +391,7 @@ public class ResourceActionsUtil {
 					actions.add(ActionKeys.ADD_ORGANIZATION);
 					actions.add(ActionKeys.ADD_ROLE);
 					actions.add(ActionKeys.ADD_USER_GROUP);
+					actions.add(ActionKeys.ADD_LICENSE);
 				}
 				else {
 					Portlet portlet = PortletLocalServiceUtil.getPortletById(

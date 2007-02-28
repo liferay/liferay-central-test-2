@@ -20,19 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.softwarecatalog.model;
+package com.liferay.portlet.softwarecatalog;
+
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="SCProductEntry.java.html"><b><i>View Source</i></b></a>
+ * <a href="ProductVersionChangeLogException.java.html"><b><i>View Source</i>
+ * </b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
-public interface SCProductEntry extends SCProductEntryModel {
-	public java.util.List getLicenses()
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
+public class ProductVersionChangeLogException extends PortalException {
 
-	public com.liferay.portlet.softwarecatalog.model.SCProductVersion getLastVersion()
-		throws com.liferay.portal.SystemException;
+	public ProductVersionChangeLogException() {
+		super();
+	}
+
+	public ProductVersionChangeLogException(String msg) {
+		super(msg);
+	}
+
+	public ProductVersionChangeLogException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public ProductVersionChangeLogException(Throwable cause) {
+		super(cause);
+	}
+
 }

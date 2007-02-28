@@ -24,10 +24,13 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.permission.PortalPermission;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseService;
+import com.liferay.portlet.softwarecatalog.service.permission.SCLicensePermission;
 
 /**
  * <a href="SCLicenseServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -44,12 +47,17 @@ public class SCLicenseServiceImpl
 			boolean recommended)
 		throws PortalException, SystemException {
 
+		PortalPermission.check(getPermissionChecker(), ActionKeys.ADD_LICENSE);
+
 		return SCLicenseLocalServiceUtil.addLicense(
 			name, url, openSource, active, recommended);
 	}
 
 	public void deleteLicense(long licenseId)
 		throws PortalException, SystemException {
+
+		SCLicensePermission.check(getPermissionChecker(),
+			licenseId, ActionKeys.DELETE);
 
 		SCLicenseLocalServiceUtil.deleteLicense(licenseId);
 	}
@@ -64,6 +72,9 @@ public class SCLicenseServiceImpl
 			long licenseId, String name, String url, boolean openSource,
 			boolean active, boolean recommended)
 		throws PortalException, SystemException {
+
+		SCLicensePermission.check(getPermissionChecker(),
+			licenseId, ActionKeys.UPDATE);
 
 		return SCLicenseLocalServiceUtil.updateLicense(
 			licenseId, name, url, openSource, active, recommended);

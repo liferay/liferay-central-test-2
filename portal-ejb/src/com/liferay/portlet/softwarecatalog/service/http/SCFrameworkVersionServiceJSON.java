@@ -24,6 +24,7 @@ package com.liferay.portlet.softwarecatalog.service.http;
 
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -63,6 +64,23 @@ public class SCFrameworkVersionServiceJSON {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		SCFrameworkVersionServiceUtil.deleteFrameworkVersion(frameworkVersionId);
+	}
+
+	public static JSONArray getFrameworkVersions(long groupId, boolean active)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		java.util.List returnValue = SCFrameworkVersionServiceUtil.getFrameworkVersions(groupId,
+				active);
+
+		return SCFrameworkVersionJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static JSONArray getFrameworkVersions(long groupId, boolean active,
+		int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		java.util.List returnValue = SCFrameworkVersionServiceUtil.getFrameworkVersions(groupId,
+				active, begin, end);
+
+		return SCFrameworkVersionJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONObject getFrameworkVersion(long frameworkVersionId)

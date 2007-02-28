@@ -203,6 +203,68 @@ public class SCFrameworkVersionServiceHttp {
 		}
 	}
 
+	public static java.util.List getFrameworkVersions(
+		HttpPrincipal httpPrincipal, long groupId, boolean active)
+		throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(active);
+			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
+					"getFrameworkVersions",
+					new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static java.util.List getFrameworkVersions(
+		HttpPrincipal httpPrincipal, long groupId, boolean active, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(active);
+			Object paramObj2 = new IntegerWrapper(begin);
+			Object paramObj3 = new IntegerWrapper(end);
+			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
+					"getFrameworkVersions",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion getFrameworkVersion(
 		HttpPrincipal httpPrincipal, long frameworkVersionId)
 		throws com.liferay.portal.SystemException, 

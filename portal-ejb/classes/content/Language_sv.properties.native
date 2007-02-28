@@ -1,15 +1,20 @@
-##
+
+###
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.title.10=Adressbok
 javax.portlet.title.11=Register
 javax.portlet.title.12=Aktier
@@ -94,10 +99,10 @@ javax.portlet.title.96=Google kartor
 javax.portlet.title.97=Post-it lapp
 javax.portlet.title.9=Administration
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Administration
 category.alfresco=Alfresco
 category.christianity=Kristendom
@@ -123,10 +128,10 @@ category.wiki=Wiki
 category.workflow=Arbetsflöde
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.portal.model.Group=Grupp
 model.resource.com.liferay.portal.model.Layout=Sida
 model.resource.com.liferay.portal.model.Location=Plats
@@ -135,10 +140,10 @@ model.resource.com.liferay.portal.model.Role=Roll
 model.resource.com.liferay.portal.model.User=Användare
 model.resource.com.liferay.portal.model.UserGroup=Användargrupp
 
-##
-## Action names
-##
 
+##
+## Layout types
+##
 action.ADD_ARTICLE=Lägg till artikel
 action.ADD_CATEGORY=Lägg till kategori
 action.ADD_COMMUNITY=Lägg till grupp
@@ -200,20 +205,20 @@ action.UPDATE_USER=Uppdatera användare
 action.VIEW=Granska
 action.VIEW_USER=Granska användare
 
-##
-## Layout types
-##
 
+##
+## Messages
+##
 layout.types.article=Artikel
 layout.types.embedded=Inbäddad
 layout.types.link_to_layout=Länk till sida
 layout.types.portlet=Portlet
 layout.types.url=URL
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 dag
 1-month=1 månad
 1-week=1 vecka
@@ -2512,10 +2517,6 @@ zh_en=Kinesiska (Kina) till Engelska
 zip-postal=Postnummer
 zip=Postnummer
 zt_en=Kinesiska (Taiwan) till Engelska
-
-##
-## Currency
-##
 
 currency.AED=arabiska dirham
 currency.ALL=Albanian Lek

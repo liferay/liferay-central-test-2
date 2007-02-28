@@ -1,15 +1,20 @@
-##
+
+###
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.title.100=邀请
 javax.portlet.title.101=标记内容
 javax.portlet.title.102=XSL
@@ -99,10 +104,10 @@ javax.portlet.title.98=软件编目
 javax.portlet.title.99=标记Admin
 javax.portlet.title.9=管理
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=管理
 category.alfresco=Alfresco
 category.christianity=基督教
@@ -128,10 +133,10 @@ category.wiki=Wiki
 category.workflow=工作流
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.portal.model.Group=社区
 model.resource.com.liferay.portal.model.Layout=页
 model.resource.com.liferay.portal.model.Location=场所
@@ -168,10 +173,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=工作流�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=工作流事例
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=工作流任务
 
-##
-## Action names
-##
 
+##
+## Layout types
+##
 action.ADD_ARTICLE=增加文章
 action.ADD_CATEGORY=增加类别
 action.ADD_COMMUNITY=增加社区
@@ -188,6 +193,7 @@ action.ADD_GROUP=增加群组
 action.ADD_IMAGE=增加图象
 action.ADD_INSTANCE=增加事例
 action.ADD_ITEM=增加项目
+action.ADD_LICENSE=增加执照
 action.ADD_LOCATION=增加场所
 action.ADD_MESSAGE=增加消息
 action.ADD_NODE=增加结点
@@ -234,20 +240,20 @@ action.UPDATE_USER=更新用户
 action.VIEW=查看
 action.VIEW_USER=查看用户
 
-##
-## Layout types
-##
 
+##
+## Messages
+##
 layout.types.article=文章
 layout.types.embedded=嵌入
 layout.types.link_to_layout=页的链接
 layout.types.portlet=Portlet
 layout.types.url=URL
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 天
 1-month=1 个月
 1-week=1 个星期
@@ -2594,10 +2600,6 @@ zh_en=中文(中国) 到英语
 zip-postal=Zip/Postal
 zip=邮递区号
 zt_en=中文(台湾) 到英语
-
-##
-## Currency
-##
 
 currency.AED=阿拉伯联合酋长国迪拉姆
 currency.ALL=阿尔巴尼亚列克

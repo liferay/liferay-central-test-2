@@ -121,6 +121,8 @@ public class ActionKeys {
 
 	public static final String IMPERSONATE = "IMPERSONATE";
 
+	public static final String ADD_LICENSE = "ADD_LICENSE";
+
 	public static final String MANAGE = "MANAGE";
 
 	public static final String MANAGE_COUPONS = "MANAGE_COUPONS";

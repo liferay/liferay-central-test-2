@@ -1,15 +1,20 @@
-##
+
+###
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.title.10=Osoitekirja
 javax.portlet.title.11=Hakemisto
 javax.portlet.title.12=Osakkeet
@@ -94,10 +99,10 @@ javax.portlet.title.96=Google kartat
 javax.portlet.title.97=Quick Note
 javax.portlet.title.9=Ylläpito
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Ylläpito
 category.alfresco=Alfresco
 category.christianity=Kristillisyys
@@ -123,10 +128,10 @@ category.wiki=Wiki
 category.workflow=Työnkulku
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.portal.model.Group=Yhteisö
 model.resource.com.liferay.portal.model.Layout=Sivu
 model.resource.com.liferay.portal.model.Location=Sijainti
@@ -159,10 +164,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Määritys
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Instanssi
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tehtävä
 
-##
-## Action names
-##
 
+##
+## Layout types
+##
 action.ADD_ARTICLE=Lisää artikkeli
 action.ADD_CATEGORY=Lisää kategoria
 action.ADD_COMMUNITY=Lisää yhteisö
@@ -221,19 +226,19 @@ action.UPDATE_USER=Päivitä käyttäjä
 action.VIEW=Näytä
 action.VIEW_USER=Näytä käyttäjä
 
-##
-## Layout types
-##
 
+##
+## Messages
+##
 layout.types.article=Artikkeli
 layout.types.embedded=Sisällytetty
 layout.types.portlet=Portletti
 layout.types.url=URL
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=Päivän sisällä
 1-month=Kuukauden sisällä
 1-week=Viikon sisällä
@@ -2490,10 +2495,6 @@ zh_en=Kiinasta (Kiina) englanniksi
 zip-postal=Postinumero
 zip=Postinumero
 zt_en=Kiinasta (Taiwan) englanniksi
-
-##
-## Currency
-##
 
 currency.AED=UAE:n dirham
 currency.ALL=Albanian lek

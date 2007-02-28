@@ -83,6 +83,35 @@ public class SCFrameworkVersionServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap[] getFrameworkVersions(
+		long groupId, boolean active) throws RemoteException {
+		try {
+			java.util.List returnValue = SCFrameworkVersionServiceUtil.getFrameworkVersions(groupId,
+					active);
+
+			return com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap[] getFrameworkVersions(
+		long groupId, boolean active, int begin, int end)
+		throws RemoteException {
+		try {
+			java.util.List returnValue = SCFrameworkVersionServiceUtil.getFrameworkVersions(groupId,
+					active, begin, end);
+
+			return com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap getFrameworkVersion(
 		long frameworkVersionId) throws RemoteException {
 		try {

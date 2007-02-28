@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portal.service.permission.PortalPermission" %>
 <%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
@@ -43,126 +44,108 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("products") || tabs1.equals("my-products") %>'>
 
 		<%
-			List headerNames = new ArrayList();
+		List headerNames = new ArrayList();
 
-			headerNames.add("name");
-			headerNames.add("type");
-			headerNames.add("licenses");
-			headerNames.add("modified-date");
-			headerNames.add(StringPool.BLANK);
+		headerNames.add("name");
+		headerNames.add("type");
+		headerNames.add("licenses");
+		headerNames.add("modified-date");
+		headerNames.add(StringPool.BLANK);
 
-			SearchContainer searchContainer = new SearchContainer(
-				renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM,
-				SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-			int total = 0;
+		int total = 0;
 
-			if (tabs1.equals("products")) {
-				total = SCProductEntryLocalServiceUtil
-					.getProductEntriesCount(portletGroupId.longValue());
+		if (tabs1.equals("products")) {
+			total = SCProductEntryLocalServiceUtil.getProductEntriesCount(portletGroupId.longValue());
+		}
+		else {
+			total = SCProductEntryLocalServiceUtil.getProductEntriesCount(portletGroupId.longValue(), user.getUserId());
+		}
+
+		searchContainer.setTotal(total);
+
+		List results = null;
+
+		if (tabs1.equals("products")) {
+			results = SCProductEntryLocalServiceUtil.getProductEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
+		}
+		else {
+			results = SCProductEntryLocalServiceUtil.getProductEntries(portletGroupId.longValue(), user.getUserId(), searchContainer.getStart(), searchContainer.getEnd());
+		}
+
+		searchContainer.setResults(results);
+
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			SCProductEntry productEntry = (SCProductEntry) results.get(i);
+
+			String productEntryId = String.valueOf(productEntry.getProductEntryId());
+
+			ResultRow row = new ResultRow(productEntry, productEntryId, i);
+
+			PortletURL rowURL = renderResponse.createRenderURL();
+
+			rowURL.setWindowState(WindowState.MAXIMIZED);
+
+			rowURL.setParameter("struts_action", "/software_catalog/view_product_entry");
+			rowURL.setParameter("redirect", currentURL);
+			rowURL.setParameter("productEntryId", productEntryId);
+
+			// Name and short description
+
+			StringBuffer sb = new StringBuffer();
+
+			sb.append("<b>");
+			sb.append(productEntry.getName());
+			sb.append("</b>");
+
+			if (Validator.isNotNull(productEntry.getShortDescription())) {
+				sb.append("<br>");
+				sb.append("<span style=\"font-size: xx-small;\">");
+				sb.append(productEntry.getShortDescription());
+				sb.append("</span>");
 			}
-			else {
-				total = SCProductEntryLocalServiceUtil.getProductEntriesCount(
-					portletGroupId.longValue(), user.getUserId());
-			}
 
-			searchContainer.setTotal(total);
+			row.addText(sb.toString(), rowURL);
 
-			List results = null;
+			// Type
 
-			if (tabs1.equals("products")) {
-				results = SCProductEntryLocalServiceUtil.getProductEntries(
-					portletGroupId.longValue(), searchContainer.getStart(),
-					searchContainer.getEnd());
-			}
-			else {
-				results = SCProductEntryLocalServiceUtil.getProductEntries(
-					portletGroupId.longValue(), user.getUserId(),
-					searchContainer.getStart(), searchContainer.getEnd());
-			}
+			row.addText(LanguageUtil.get(pageContext, productEntry.getType()), rowURL);
 
-			searchContainer.setResults(results);
+			// Licenses
 
-			List resultRows = searchContainer.getResultRows();
+			sb = new StringBuffer();
 
-			for (int i = 0; i < results.size(); i++) {
-				SCProductEntry productEntry = (SCProductEntry) results.get(i);
+			Iterator itr = productEntry.getLicenses().iterator();
 
-				String productEntryId =
-					String.valueOf(productEntry.getProductEntryId());
+			while (itr.hasNext()) {
+				SCLicense license = (SCLicense) itr.next();
 
-				ResultRow row = new ResultRow(productEntry, productEntryId, i);
+				sb.append(license.getName());
 
-				PortletURL rowURL = renderResponse.createRenderURL();
-
-				rowURL.setWindowState(WindowState.MAXIMIZED);
-
-				rowURL.setParameter(
-					"struts_action", "/software_catalog/view_product_entry");
-				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("productEntryId", productEntryId);
-
-				// Name and short description
-
-				StringBuffer sb = new StringBuffer();
-
-				sb.append("<b>");
-				sb.append(productEntry.getName());
-				sb.append("</b>");
-
-				if (Validator.isNotNull(productEntry.getShortDescription())) {
-					sb.append("<br>");
-					sb.append("<span style=\"font-size: xx-small;\">");
-					sb.append(productEntry.getShortDescription());
-					sb.append("</span>");
+				if (itr.hasNext()) {
+					sb.append(", ");
 				}
-
-				row.addText(sb.toString(), rowURL);
-
-				// Type
-
-				row.addText(
-					LanguageUtil.get(pageContext, productEntry.getType()),
-					rowURL);
-
-				// Licenses
-
-				sb = new StringBuffer();
-
-				Iterator itr = productEntry.getLicenses().iterator();
-
-				while (itr.hasNext()) {
-					SCLicense license = (SCLicense) itr.next();
-
-					sb.append(license.getName());
-
-					if (itr.hasNext()) {
-						sb.append(", ");
-					}
-				}
-
-				row.addText(sb.toString(), rowURL);
-
-				// Modified date
-
-				row.addText(
-					dateFormatDateTime.format(productEntry.getModifiedDate()),
-					rowURL);
-
-				// Action
-
-				row.addJSP(
-					"right", SearchEntry.DEFAULT_VALIGN,
-					"/html/portlet/software_catalog/product_entry_action.jsp");
-
-				// Add result row
-
-				resultRows.add(row);
 			}
 
-			boolean showAddProductEntryButton = SCProductEntryPermission
-				.contains(
-					permissionChecker, plid, ActionKeys.ADD_PRODUCT_ENTRY);
+			row.addText(sb.toString(), rowURL);
+
+			// Modified date
+
+			row.addText(dateFormatDateTime.format(productEntry.getModifiedDate()), rowURL);
+
+			// Action
+
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/software_catalog/product_entry_action.jsp");
+
+			// Add result row
+
+			resultRows.add(row);
+		}
+
+		boolean showAddProductEntryButton = SCProductEntryPermission.contains(permissionChecker, plid, ActionKeys.ADD_PRODUCT_ENTRY);
 		%>
 
 		<c:if test="<%= showAddProductEntryButton || (results.size() > 0) %>">
@@ -205,78 +188,62 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("framework-versions") %>'>
 
 		<%
-			List headerNames = new ArrayList();
+		List headerNames = new ArrayList();
 
-			headerNames.add("name");
-			headerNames.add("url");
-			headerNames.add("active");
-			headerNames.add(StringPool.BLANK);
+		headerNames.add("name");
+		headerNames.add("url");
+		headerNames.add("active");
+		headerNames.add(StringPool.BLANK);
 
-			SearchContainer searchContainer = new SearchContainer(
-				renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM,
-				SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-			int total = SCFrameworkVersionLocalServiceUtil
-				.getFrameworkVersionsCount(portletGroupId.longValue());
+		int total = SCFrameworkVersionLocalServiceUtil.getFrameworkVersionsCount(portletGroupId.longValue());
 
-			searchContainer.setTotal(total);
+		searchContainer.setTotal(total);
 
-			List results = SCFrameworkVersionLocalServiceUtil
-				.getFrameworkVersions(
-					portletGroupId.longValue(), searchContainer.getStart(),
-					searchContainer.getEnd());
+		List results = SCFrameworkVersionLocalServiceUtil.getFrameworkVersions(portletGroupId.longValue(), searchContainer.getStart(),searchContainer.getEnd());
 
-			searchContainer.setResults(results);
+		searchContainer.setResults(results);
 
-			List resultRows = searchContainer.getResultRows();
+		List resultRows = searchContainer.getResultRows();
 
-			for (int i = 0; i < results.size(); i++) {
-				SCFrameworkVersion frameworkVersion =
-					(SCFrameworkVersion) results.get(i);
+		for (int i = 0; i < results.size(); i++) {
+			SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) results.get(i);
 
-				ResultRow row = new ResultRow(
-					frameworkVersion, frameworkVersion.getPrimaryKey(), i);
+			ResultRow row = new ResultRow(frameworkVersion, frameworkVersion.getPrimaryKey(), i);
 
-				String rowHREF = frameworkVersion.getUrl();
+			String rowHREF = frameworkVersion.getUrl();
 
-				TextSearchEntry rowTextEntry = new TextSearchEntry(
-					SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN,
-					frameworkVersion.getName(), rowHREF, "_blank",
-					frameworkVersion.getName());
+			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, frameworkVersion.getName(), rowHREF, "_blank", frameworkVersion.getName());
 
-				// Name
+			// Name
 
-				row.addText(rowTextEntry);
+			row.addText(rowTextEntry);
 
-				// URL
+			// URL
 
-				rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+			rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
 
-				rowTextEntry.setName(frameworkVersion.getUrl());
+			rowTextEntry.setName(frameworkVersion.getUrl());
 
-				row.addText(rowTextEntry);
+			row.addText(rowTextEntry);
 
-				// Active
+			// Active
 
-				rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+			rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
 
-				rowTextEntry.setName(
-					LanguageUtil.get(
-						pageContext,
-						frameworkVersion.isActive() ? "yes" : "no"));
+			rowTextEntry.setName(LanguageUtil.get(pageContext,frameworkVersion.isActive() ? "yes" : "no"));
 
-				row.addText(rowTextEntry);
+			row.addText(rowTextEntry);
 
-				// Action
+			// Action
 
-				row.addJSP(
-					"right", SearchEntry.DEFAULT_VALIGN,
-					"/html/portlet/software_catalog/framework_version_action.jsp");
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/software_catalog/framework_version_action.jsp");
 
-				// Add result row
+			// Add result row
 
-				resultRows.add(row);
-			}
+			resultRows.add(row);
+		}
 		%>
 
 		<c:if test="<%= SCFrameworkVersionPermission.contains(permissionChecker, plid, ActionKeys.ADD_FRAMEWORK_VERSION) %>">
@@ -294,97 +261,83 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("licenses") %>'>
 
 		<%
-			List headerNames = new ArrayList();
+		List headerNames = new ArrayList();
 
-			headerNames.add("name");
-			headerNames.add("url");
-			headerNames.add("open-source");
-			headerNames.add("active");
-			headerNames.add("recommended");
-			headerNames.add(StringPool.BLANK);
+		headerNames.add("name");
+		headerNames.add("url");
+		headerNames.add("open-source");
+		headerNames.add("active");
+		headerNames.add("recommended");
+		headerNames.add(StringPool.BLANK);
 
-			SearchContainer searchContainer = new SearchContainer(
-				renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM,
-				SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-			int total = SCLicenseLocalServiceUtil.getLicensesCount();
+		int total = SCLicenseLocalServiceUtil.getLicensesCount();
 
-			searchContainer.setTotal(total);
+		searchContainer.setTotal(total);
 
-			List results = SCLicenseLocalServiceUtil.getLicenses(
-				searchContainer.getStart(), searchContainer.getEnd());
+		List results = SCLicenseLocalServiceUtil.getLicenses(searchContainer.getStart(), searchContainer.getEnd());
 
-			searchContainer.setResults(results);
+		searchContainer.setResults(results);
 
-			List resultRows = searchContainer.getResultRows();
+		List resultRows = searchContainer.getResultRows();
 
-			for (int i = 0; i < results.size(); i++) {
-				SCLicense license = (SCLicense) results.get(i);
+		for (int i = 0; i < results.size(); i++) {
+			SCLicense license = (SCLicense) results.get(i);
 
-				ResultRow row =
-					new ResultRow(license, license.getPrimaryKey(), i);
+			ResultRow row = new ResultRow(license, license.getPrimaryKey(), i);
 
-				String rowHREF = license.getUrl();
+			String rowHREF = license.getUrl();
 
-				TextSearchEntry rowTextEntry = new TextSearchEntry(
-					SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN,
-					license.getName(), rowHREF, "_blank", license.getName());
+			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, license.getName(), rowHREF, "_blank", license.getName());
 
-				// Name
+			// Name
 
-				row.addText(rowTextEntry);
+			row.addText(rowTextEntry);
 
-				// URL
+			// URL
 
-				rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+			rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
 
-				rowTextEntry.setName(license.getUrl());
+			rowTextEntry.setName(license.getUrl());
 
-				row.addText(rowTextEntry);
+			row.addText(rowTextEntry);
 
-				// Open source
+			// Open source
 
-				rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+			rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
 
-				rowTextEntry.setName(
-					LanguageUtil.get(
-						pageContext, license.isOpenSource() ? "yes" : "no"));
+			rowTextEntry.setName(LanguageUtil.get(pageContext, license.isOpenSource() ? "yes" : "no"));
 
-				row.addText(rowTextEntry);
+			row.addText(rowTextEntry);
 
-				// Active
+			// Active
 
-				rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+			rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
 
-				rowTextEntry.setName(
-					LanguageUtil.get(
-						pageContext, license.isActive() ? "yes" : "no"));
+			rowTextEntry.setName(LanguageUtil.get(pageContext, license.isActive() ? "yes" : "no"));
 
-				row.addText(rowTextEntry);
+			row.addText(rowTextEntry);
 
-				// Recommended
+			// Recommended
 
-				rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+			rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
 
-				rowTextEntry.setName(
-					LanguageUtil.get(
-						pageContext, license.isRecommended() ? "yes" : "no"));
+			rowTextEntry.setName(LanguageUtil.get(pageContext, license.isRecommended() ? "yes" : "no"));
 
-				row.addText(rowTextEntry);
+			row.addText(rowTextEntry);
 
-				// Action
+			// Action
 
-				row.addJSP(
-					"right", SearchEntry.DEFAULT_VALIGN,
-					"/html/portlet/software_catalog/license_action.jsp");
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/software_catalog/license_action.jsp");
 
-				// Add result row
+			// Add result row
 
-				resultRows.add(row);
-			}
+			resultRows.add(row);
+		}
 		%>
 
-		<c:if test="<%= true %>">
+		<c:if test="<%= PortalPermission.contains(permissionChecker, ActionKeys.ADD_LICENSE) %>">
 			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-license") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_license" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';"><br>
 
 			<c:if test="<%= results.size() > 0 %>">

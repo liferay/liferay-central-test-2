@@ -33,6 +33,10 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
+import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
+import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
+import com.liferay.portlet.softwarecatalog.ProductEntryTypeException;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryLocalServiceBaseImpl;
@@ -99,6 +103,8 @@ public class SCProductEntryLocalServiceImpl
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
+
+		validate(name, type, shortDescription, licenseIds);
 
 		// Product entry
 
@@ -374,6 +380,8 @@ public class SCProductEntryLocalServiceImpl
 			String repoGroupId, String repoArtifactId, long[] licenseIds)
 		throws PortalException, SystemException {
 
+		validate(name, type, shortDescription, licenseIds);
+
 		// Product entry
 
 		SCProductEntry productEntry =
@@ -408,6 +416,24 @@ public class SCProductEntryLocalServiceImpl
 		}
 
 		return productEntry;
+	}
+
+	protected void validate(
+		String name, String type, String shortDescription, long[] licenseIds)
+		throws PortalException {
+
+		if (Validator.isNull(name)) {
+			throw new ProductEntryNameException();
+		}
+		else if (Validator.isNull(type)) {
+			throw new ProductEntryTypeException();
+		}
+		else if (Validator.isNull(shortDescription)) {
+			throw new ProductEntryShortDescriptionException();
+		}
+		else if (licenseIds.length == 0) {
+			throw new ProductEntryLicenseException();
+		}
 	}
 
 	private static Log _log =

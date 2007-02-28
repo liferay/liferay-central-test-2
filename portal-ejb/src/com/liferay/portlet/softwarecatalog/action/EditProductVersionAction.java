@@ -28,6 +28,10 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
+import com.liferay.portlet.softwarecatalog.ProductVersionChangeLogException;
+import com.liferay.portlet.softwarecatalog.ProductVersionDownloadURLException;
+import com.liferay.portlet.softwarecatalog.ProductVersionFrameworkVersionException;
+import com.liferay.portlet.softwarecatalog.ProductVersionNameException;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -74,6 +78,13 @@ public class EditProductVersionAction extends PortletAction {
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.software_catalog.error");
+			}
+			else if (e instanceof ProductVersionNameException ||
+					 e instanceof ProductVersionChangeLogException ||
+					 e instanceof ProductVersionDownloadURLException ||
+					 e instanceof ProductVersionFrameworkVersionException) {
+
+				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {
 				throw e;

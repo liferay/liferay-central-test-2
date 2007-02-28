@@ -51,6 +51,8 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 
 <liferay-ui:tabs names="license" />
 
+<liferay-ui:error exception="<%= LicenseNameException.class %>" message="please-select-at-least-one-framework-version" />
+
 <table border="0" cellpadding="0" cellspacing="0">
 
 <tr>

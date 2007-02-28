@@ -33,9 +33,19 @@ tabs1URL.setWindowState(WindowState.MAXIMIZED);
 
 tabs1URL.setParameter("struts_action", "/software_catalog/view");
 tabs1URL.setParameter("tabs1", tabs1);
+
+String tabs1Names = "products,my-products";
+
+if (PortalPermission.contains(permissionChecker, ActionKeys.ADD_LICENSE)) {
+	tabs1Names += ",licenses";
+}
+
+if (SCFrameworkVersionPermission.contains(permissionChecker, plid, ActionKeys.ADD_FRAMEWORK_VERSION)) {
+	tabs1Names += ",framework-versions";
+}
 %>
 
 <liferay-ui:tabs
-	names="products,my-products,framework-versions,licenses"
+	names="<%=tabs1Names%>"
 	url="<%= tabs1URL.toString() %>"
 />

@@ -110,7 +110,7 @@
 		</action>
 
 		<action path="/portal/css_cached" type="com.liferay.portal.action.CSSCachedAction">
-			<forward name="modified.jsp" path="/portal/css_cached.jsp" />
+			<forward name="modified.jsp" path="/portal/css_cached.jsp" c/>
 		</action>
 
 		<action path="/portal/error" forward="portal.error" />
@@ -1226,11 +1226,6 @@
 
 		<action path="/software_catalog/view_product_entry" type="com.liferay.portlet.softwarecatalog.action.ViewProductEntryAction">
 			<forward name="portlet.software_catalog.view_product_entry" path="portlet.software_catalog.view_product_entry" />
-			<forward name="portlet.software_catalog.error" path="portlet.software_catalog.error" />
-		</action>
-
-		<action path="/software_catalog/view_product_version" type="com.liferay.portlet.softwarecatalog.action.ViewProductVersionAction">
-			<forward name="portlet.software_catalog.view_product_version" path="portlet.software_catalog.view_product_version" />
 			<forward name="portlet.software_catalog.error" path="portlet.software_catalog.error" />
 		</action>
 

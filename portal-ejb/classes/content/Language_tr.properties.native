@@ -1,15 +1,20 @@
-##
+
+###
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.title.10=Adres Defteri
 javax.portlet.title.11=Fihrist
 javax.portlet.title.12=Borsa
@@ -48,10 +53,6 @@ javax.portlet.title.7=İncil Arayüzü
 javax.portlet.title.8=Takvim
 javax.portlet.title.9=Yönetim
 
-##
-## Category titles
-##
-
 
 ##
 ## Model resources
@@ -72,6 +73,10 @@ javax.portlet.title.9=Yönetim
 ## Messages
 ##
 
+
+##
+## Currency
+##
 INBOX=Gelen
 a-page-may-not-contain-more-than-x-portlets=Bir sayfa {0} portletden fazlasını barındıramaz.
 about=Hakkında
@@ -1086,10 +1091,6 @@ your-password-has-been-sent-to-x=Your password has been sent to {0}.
 your-selections=Seçenekleriniz
 zh_en=Çinceden İngilizceye
 zip=Posta Kodu
-
-##
-## Currency
-##
 
 currency.AED=BAE Dirhem
 currency.ALL=Arnavutluk Leki

@@ -1,17 +1,22 @@
-##
+
+###
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.title.100=Invitaciones
-javax.portlet.title.101=Contenido De las Etiquetas
+javax.portlet.title.101=Contenido de las etiquetas
 javax.portlet.title.102=Contenido de XSL
 javax.portlet.title.10=Contactos
 javax.portlet.title.11=Directorio
@@ -95,14 +100,14 @@ javax.portlet.title.94=Google AdSense
 javax.portlet.title.95=Google Gadget
 javax.portlet.title.96=Mapas de Google
 javax.portlet.title.97=Nota Rápida
-javax.portlet.title.98=Catálogo Del Software
+javax.portlet.title.98=Catálogo de software
 javax.portlet.title.99=Administración de etiquetas
 javax.portlet.title.9=Administración
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Administración
 category.alfresco=Alfresco
 category.christianity=Cristianismo
@@ -128,10 +133,10 @@ category.wiki=Wiki
 category.workflow=Workflow
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.portal.model.Group=Comunidad
 model.resource.com.liferay.portal.model.Layout=Página
 model.resource.com.liferay.portal.model.Location=Localización
@@ -168,10 +173,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Definición
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Ejemplar del Workflow
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tarea del Workflow
 
+
 ##
 ## Action names
 ##
-
 action.ADD_ARTICLE=Añadir un artículo
 action.ADD_CATEGORY=Añadir una categoría
 action.ADD_COMMUNITY=Añadir una comunidad
@@ -186,8 +191,9 @@ action.ADD_FOLDER=Añadir una carpeta
 action.ADD_FRAMEWORK_VERSION=Añadir versión del framework
 action.ADD_GROUP=Añadir un grupo
 action.ADD_IMAGE=Añadir una imagen
-action.ADD_INSTANCE=Agregue El Caso
+action.ADD_INSTANCE=Añadir un ejemplar
 action.ADD_ITEM=Añadir un artículo
+action.ADD_LICENSE=Añadir licencia
 action.ADD_LOCATION=Añadir una localización
 action.ADD_MESSAGE=Añadir un mensaje
 action.ADD_NODE=Añadir un nodo
@@ -234,20 +240,20 @@ action.UPDATE_USER=Usuario en modo actualización
 action.VIEW=Ver
 action.VIEW_USER=Ver usuario
 
+
 ##
 ## Layout types
 ##
-
 layout.types.article=Artículo
 layout.types.embedded=Web insertada
 layout.types.link_to_layout=Enlace a página
 layout.types.portlet=Portlets
 layout.types.url=URL
 
+
 ##
 ## Messages
 ##
-
 1-day=1 día
 1-month=1 mes
 1-week=1 semana
@@ -389,7 +395,7 @@ alternative-shipping=Método de envío alternativo
 an-applet-version-of-the-editor-is-also-available=Una versión del editor como applet también está disponible. Es más pesado que el editor normal pero más fácil de usar y proporciona resaltado de texto, búsqueda y reemplazo así como otras funcionalidades. Puede elegir utilizar este editor cambiando las preferencias del portlet.
 an-email-has-been-sent-to-all-journal-administrators-asking-them-to-approve-your-article=Se ha enviado un correo electrónico a todos los administradores del diario para que aprueben su artículo.
 an-error-occurred-while-parsing-your-xml-please-check-the-syntax-of-your-xml=Ocurrió un error mientras se analizaba el contenido XML proporcionado. Por favor compruebe la sintaxis XML.
-an-error-occurred-while-processing-your-xml-and-xsl=Un error ocurri� mientras que procesaba su XML y XSL.
+an-error-occurred-while-processing-your-xml-and-xsl=Se ha producido un error al procesar el contenido XML y XSL.
 an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=Se ha producido un error inesperado en la base de datos mientras se consultaba la ciudad y el estado proporcionados.
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=Se ha producido un error inesperado en la base de datos mientras se consultaba la calle, ciudad y estado proporcionados.
 an-unexpected-database-error-occurred-while-querying-the-given-zip=Se ha producido un error inesperado en la base de datos mientras se consultaba el código postal proporcionado.
@@ -942,7 +948,7 @@ enter-the-name,-image,-and-priority-level-in-descending-order=Introduzca el nomb
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=Introduzca los servidores virtuales público y privado que serán asociados a las URLs amigables pública y privada respectivamente.
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=Introduzca el filtro de la búsqueda que será utilizado para probar la validez de un usuario. Los símbolos @company_id@, el @email_address@ y @user_id@ serán sustituidos automáticamente por los valores correctos.
 enter-the-workflow-definition-below-in-xml-format=Incorpore la definición del workflow abajo en formato de XML.
-enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite=Enter up to {0} email addresses of friends you would like to invite. Enter one email address per line.
+enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite=Introduzca hasta un maximo {0} direcciones de amigos a los que invitar. Introduzca una direccion por línea.
 enterprise-logo=Logo de la empresa
 enterprise=Empresa
 entire-message=Mensaje completo
@@ -1163,7 +1169,7 @@ interest-rate=Tipo de interés
 intermediate=Intermedio
 interval=Intervalo
 interview=Entrevista
-invite-friends=Invite A Amigos
+invite-friends=Invitar amigos
 invoice=Factura
 irc=IRC
 is-temporarily-unavailable={0} no está disponible temporalmente
@@ -1365,7 +1371,7 @@ my-account=Mi cuenta
 my-addresses=Mi dirección
 my-blog=Mi blog
 my-communities=Mis comunidades
-my-community=Mi Comunidad
+my-community=Mi comunidad
 my-documents=Mis documentos
 my-entries=Mis entradas
 my-images=Mis imágenes
@@ -1382,7 +1388,7 @@ never-auto-expire=No expira automáticamente
 never-expire=No expira
 never-review=No revisado
 never=Nunca
-new-event=Nuevo Acontecimiento
+new-event=Nuevo evento
 new-friendly-url=Nueva URL amigable
 new-game=Nuevo juego
 new-mail-notification=Notificación de correo nuevo
@@ -1662,10 +1668,10 @@ please-enter-a-valid-title=Por favor, introduzca un título válido.
 please-enter-a-valid-topic-name=Por favor, introduzca un nombre de tema válido.
 please-enter-a-valid-url=Por favor, introduzca una URL válida.
 please-enter-a-valid-user-id=Por favor, introduzca un id. de usuario válido.
-please-enter-a-valid-xml-url=Incorpore por favor un URL v�lido de XML.
+please-enter-a-valid-xml-url=Por favor introduzca una URL del XML valida.
 please-enter-a-valid-xsd=Por favor, introduzca una definición de esquema XML válida.
 please-enter-a-valid-xsl-template=Por favor, introduzca una plantilla XSL válida.
-please-enter-a-valid-xsl-url=Incorpore por favor un URL v�lido de XSL.
+please-enter-a-valid-xsl-url=Por favor introduzca una URL del XML valida.
 please-enter-a-valid-zip=Por favor, introduzca un código postal válido.
 please-enter-a-value=Incorpore por favor un valor.
 please-enter-a-word-that-is-at-least-3-characters-long=Por favor, introduzca una palabra de al menos 3 caracteres.
@@ -1770,7 +1776,7 @@ proxy-port=Puerto del proxy
 pt_en=De portugués a inglés
 public-node=Nodo público
 public-nodes=Nodos públicos
-public-pages=Páginas Públicas
+public-pages=Páginas públicas
 public-virtual-host=Servidor virtual público
 public=Público
 publisher=Editor
@@ -2183,7 +2189,7 @@ the-organization-name-is-already-taken=Ese nombre de organización ya está sien
 the-page-content-cannot-be-parsed-by-the-selected-format=El contenido de la página no puede ser analizado usando el formato seleccionado.
 the-page-could-not-be-found=La página no pudo ser encontrada.
 the-page-does-not-have-a-a-valid-title=La página no tiene un título válido.
-the-permission-was-deleted=El permiso fue suprimido.
+the-permission-was-deleted=El permiso fue borrado.
 the-plugin-was-downloaded-successfully-and-is-now-being-installed=El plugin fue descargado con éxito y está siendo instalado.
 the-plugin-was-uploaded-successfully-and-is-now-being-installed=El plugin enviado con éxito y ahora está siendo instalado.
 the-portal-keeps-track-of-all-live-sessions=El portal realiza un seguimiento de todas las sesiones activas y registra información útil como usuarios, servidores remotos e IPs, tipos de navegadores y sistema operativo, número de visitas y las URLs con los instantes de acceso de las páginas visitadas. Para ver esta información, pincha en el botón "Ver sesiones activas".
@@ -2198,7 +2204,7 @@ the-repository-could-not-be-found=El repositorio no pudo ser encontrado.
 the-resulting-first-page-must-be-a-portlet-page=La primera página debe ser siempre una página de portlets.
 the-resulting-first-page-must-not-be-hidden=La primera página puede estar en estado 'ocultadada'.
 the-role-could-not-be-found=El rol no existe
-the-role-permissions-was-updated=Los permisos del papel eran actualizados.
+the-role-permissions-was-updated=Los permisos del rol han sido actualizados.
 the-selected-entry-has-been-deleted=La entrada seleccionada ha sido eliminada.
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=El rol seleccionado no puede ser eliminado porque es un rol de sistema.
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=La estructura seleccionada no puede ser eliminada porque está siendo usada por una o más plantillas.
@@ -2466,11 +2472,11 @@ x-is-a-required-system-role=<b>{0}</b> es un rol del sistema obligatorio.
 x-is-not-approved,-does-not-have-any-content,-or-no-longer-exists={0} no ha sido aprobado aún, no tiene ningún contenido o ha dejado de existir.
 x-users-were-successfully-notified={0} usuarios han sido notificados.
 xml-feeds=Feeds XML
-xml-url=URL DE XML
+xml-url=URL del XML
 xml=XML
 xsd=Definición del esquema de XML (XSD)
 xsl-template=Plantilla XSL
-xsl-url=URL DE XSL
+xsl-url=URL del XSL
 xsl=Lenguaje extensible de hojas de estilo (XSL)
 yahoo-csv-file=Archivo CSV de Yahoo!
 yahoo-cvs=CSV de Yahoo!:
@@ -2596,10 +2602,6 @@ zh_en=De chino a inglés
 zip-postal=Zip/Postal
 zip=Código postal
 zt_en=De chino (Taiwán) a inglés
-
-##
-## Currency
-##
 
 currency.AED=Dirham de los EAU
 currency.ALL=Lek Albanés

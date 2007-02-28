@@ -1,15 +1,20 @@
-##
+
+###
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.title.100=안내장
 javax.portlet.title.101=꼬리표 내용
 javax.portlet.title.102=XSL
@@ -99,10 +104,10 @@ javax.portlet.title.98=소프트웨어 카탈로그
 javax.portlet.title.99=꼬리표Admin
 javax.portlet.title.9=Admin
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Admin
 category.alfresco=Alfresco
 category.christianity=기독교
@@ -128,10 +133,10 @@ category.wiki=Wiki
 category.workflow=작업 흐름
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.portal.model.Group=지역 사회
 model.resource.com.liferay.portal.model.Layout=페이지
 model.resource.com.liferay.portal.model.Location=위치
@@ -168,10 +173,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=작업 흐�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=작업 흐름 경우
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=작업 흐름 업무
 
-##
-## Action names
-##
 
+##
+## Layout types
+##
 action.ADD_ARTICLE=기사를 추가하십시요
 action.ADD_CATEGORY=종류를 추가하십시요
 action.ADD_COMMUNITY=지역 사회를 추가하십시요
@@ -188,6 +193,7 @@ action.ADD_GROUP=그룹을 추가하십시요
 action.ADD_IMAGE=심상을 추가하십시요
 action.ADD_INSTANCE=경우를 추가하십시요
 action.ADD_ITEM=품목을 추가하십시요
+action.ADD_LICENSE=면허를 추가하십시요
 action.ADD_LOCATION=위치를 추가하십시요
 action.ADD_MESSAGE=메시지를 추가하십시요
 action.ADD_NODE=마디를 추가하십시요
@@ -234,20 +240,20 @@ action.UPDATE_USER=갱신 사용자
 action.VIEW=전망
 action.VIEW_USER=전망 사용자
 
-##
-## Layout types
-##
 
+##
+## Messages
+##
 layout.types.article=기사
 layout.types.embedded=끼워넣는
 layout.types.link_to_layout=페이지에 연결
 layout.types.portlet=Portlet
 layout.types.url=URL
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 일
 1-month=1 달
 1-week=1 주
@@ -1381,6 +1387,7 @@ never-auto-expire=결코 자동 만료되십시요
 never-expire=결코 만료되지 말라
 never-review=결코 검토
 never=결코
+new-event=새로운 사건
 new-friendly-url=새로운 친절한URL
 new-game=새로운 게임
 new-mail-notification=새로운 우편물 통보
@@ -2593,10 +2600,6 @@ zh_en=영어에 중국인
 zip-postal=Zip/Postal
 zip=지퍼
 zt_en=영어에 중국어 (대만)
-
-##
-## Currency
-##
 
 currency.AED=아랍 에미리트 연방 Dirham
 currency.ALL=알바니아 Lek

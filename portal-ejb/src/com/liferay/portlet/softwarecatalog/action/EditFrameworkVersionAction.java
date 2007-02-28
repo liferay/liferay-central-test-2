@@ -27,6 +27,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.softwarecatalog.FrameworkVersionNameException;
 import com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil;
 import com.liferay.util.ParamUtil;
@@ -74,6 +75,10 @@ public class EditFrameworkVersionAction extends PortletAction {
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.software_catalog.error");
+			}
+			else if (e instanceof FrameworkVersionNameException) {
+
+				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {
 				throw e;

@@ -97,49 +97,6 @@ public class SCProductVersionLocalServiceUtil {
 			guestPermissions);
 	}
 
-	public static void addProductVersionResources(long productEntryId,
-		long productVersionId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-		scProductVersionLocalService.addProductVersionResources(productEntryId,
-			productVersionId, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static void addProductVersionResources(
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion productVersion,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-		scProductVersionLocalService.addProductVersionResources(productEntry,
-			productVersion, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static void addProductVersionResources(long productEntryId,
-		long productVersionId, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-		scProductVersionLocalService.addProductVersionResources(productEntryId,
-			productVersionId, communityPermissions, guestPermissions);
-	}
-
-	public static void addProductVersionResources(
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion productVersion,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-		scProductVersionLocalService.addProductVersionResources(productEntry,
-			productVersion, communityPermissions, guestPermissions);
-	}
-
 	public static void deleteProductVersion(long productVersionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -87,6 +87,25 @@ public class SCProductVersionServiceEJBImpl implements SCProductVersionService,
 		return SCProductVersionServiceFactory.getTxImpl().getProductVersion(productVersionId);
 	}
 
+	public java.util.List getProductVersions(long productEntryId, int begin,
+		int end)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return SCProductVersionServiceFactory.getTxImpl().getProductVersions(productEntryId,
+			begin, end);
+	}
+
+	public int getProductVersionsCount(long productEntryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return SCProductVersionServiceFactory.getTxImpl()
+											 .getProductVersionsCount(productEntryId);
+	}
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion updateProductVersion(
 		long productVersionId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,

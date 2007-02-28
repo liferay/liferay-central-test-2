@@ -25,62 +25,77 @@ package com.liferay.portlet.softwarecatalog.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
-import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
-import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil;
+import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.softwarecatalog.model.SCLicense;
+import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil;
 
 /**
- * <a href="SCProductVersionPermission.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCLicensePermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  *
  */
-public class SCProductVersionPermission {
+public class SCLicensePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long productVersionId,
-			String actionId)
+			PermissionChecker permissionChecker, String plid, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, productVersionId, actionId)) {
+		if (!contains(permissionChecker, plid, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker,
-			SCProductVersion productVersion, String actionId)
+			PermissionChecker permissionChecker, long productEntryId,
+			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, productVersion, actionId)) {
+		if (!contains(permissionChecker, productEntryId, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
+			PermissionChecker permissionChecker, SCLicense license,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, license, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long productVersionId,
-			String actionId)
+			PermissionChecker permissionChecker, String plid, String actionId)
 		throws PortalException, SystemException {
 
-		SCProductVersion productVersion =
-			SCProductVersionLocalServiceUtil.getProductVersion(
-				productVersionId);
-
-		return contains(permissionChecker, productVersion, actionId);
+		return PortletPermission.contains(
+			permissionChecker, plid, PortletKeys.SOFTWARE_CATALOG, actionId);
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker,
-			SCProductVersion productVersion, String actionId)
+			PermissionChecker permissionChecker, long licenseId,
+			String actionId)
 		throws PortalException, SystemException {
 
-		SCProductEntry productEntry = productVersion.getProductEntry();
+		SCLicense license = SCLicenseLocalServiceUtil.getLicense(licenseId);
+
+		return contains(permissionChecker, license, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, SCLicense license,
+			String actionId)
+		throws PortalException, SystemException {
 
 		return permissionChecker.hasPermission(
-			productEntry.getGroupId(), SCProductVersion.class.getName(),
-			productVersion.getPrimaryKey(), actionId);
+			GroupImpl.DEFAULT_PARENT_GROUP_ID, SCLicense.class.getName(),
+			license.getPrimaryKey(), actionId);
 	}
 
 }

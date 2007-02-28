@@ -28,20 +28,20 @@
 String redirect = ParamUtil.getString(request, "redirect");
 
 SCProductEntry productEntry = (SCProductEntry) request.getAttribute(WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY);
-	SCProductVersion productVersion = (SCProductVersion) request
-		.getAttribute(WebKeys.SOFTWARE_CATALOG_PRODUCT_VERSION);
+SCProductVersion productVersion = (SCProductVersion) request.getAttribute(WebKeys.SOFTWARE_CATALOG_PRODUCT_VERSION);
 
-	long productEntryId =
-		BeanParamUtil.getLong(productEntry, request, "productEntryId");
-	long productVersionId =
-		BeanParamUtil.getLong(productVersion, request, "productVersionId");
+long productEntryId = productEntry.getProductEntryId();
+long productVersionId = BeanParamUtil.getLong(productVersion, request, "productVersionId");
+
+PortletURL editProductEntryURL = renderResponse.createRenderURL();
+
+editProductEntryURL.setWindowState(WindowState.MAXIMIZED);
+
+editProductEntryURL.setParameter("struts_action", "/software_catalog/edit_product_entry");
+editProductEntryURL.setParameter("redirect", redirect);
+editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId));
+
 %>
-
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editProductEntryURL">
-	<portlet:param name="struts_action" value="/software_catalog/edit_product_entry" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="productEntryId" value="<%= String.valueOf(productEntry.getProductEntryId()) %>" />
-</portlet:renderURL>
 
 <script type="text/javascript">
 	function <portlet:namespace />saveEntry() {
@@ -59,7 +59,10 @@ SCProductEntry productEntry = (SCProductEntry) request.getAttribute(WebKeys.SOFT
 
 <liferay-ui:tabs names="product-entry" />
 
-<%--<liferay-ui:error exception="<%= EntryURLException.class %>" message="please-enter-a-valid-url" />--%>
+<liferay-ui:error exception="<%= ProductVersionNameException.class %>" message="please-enter-a-valid-version-name" />
+<liferay-ui:error exception="<%= ProductVersionChangeLogException.class %>" message="please-enter-a-valid-change-log" />
+<liferay-ui:error exception="<%= ProductVersionDownloadURLException.class %>" message="please-enter-at-least-one-of-direct-download-url-or-download-page-url" />
+<liferay-ui:error exception="<%= ProductVersionFrameworkVersionException.class %>" message="please-select-at-least-one-framework-version" />
 
 <h3><%=LanguageUtil.get(pageContext, "product-version-for-product") + " " + productEntry.getName()%></h3>
 
@@ -69,7 +72,7 @@ SCProductEntry productEntry = (SCProductEntry) request.getAttribute(WebKeys.SOFT
 
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "version") %>
+			<%= LanguageUtil.get(pageContext, "version-name") %>
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -97,7 +100,7 @@ SCProductEntry productEntry = (SCProductEntry) request.getAttribute(WebKeys.SOFT
 				while (frameworkVersionsIt.hasNext()) {
 					SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) frameworkVersionsIt.next();
 				%>
-						<option <%= ((productVersion != null) && (productVersion.getFrameworkVersionIds().contains(new Long(frameworkVersion.getFrameworkVersionId())))) ? "selected" : "" %>
+						<option <%= ((productVersion != null) && (productVersion.supportsFrameworkVersion(frameworkVersion.getFrameworkVersionId()))) ? "selected" : "" %>
 							value="<%= String.valueOf(frameworkVersion.getPrimaryKey()) %>"><%= frameworkVersion.getName() %></option>
 				<%
 				}
@@ -128,7 +131,7 @@ SCProductEntry productEntry = (SCProductEntry) request.getAttribute(WebKeys.SOFT
 		</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "add-artifact-to-this-repository") %>
+			<%= LanguageUtil.get(pageContext, "include-artifact-in-repository") %>
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<% if (Validator.isNotNull(productEntry.getRepoArtifactId()) && Validator.isNotNull(productEntry.getRepoArtifactId())) { %>

@@ -77,6 +77,24 @@ public class SCProductVersionServiceUtil {
 		return scProductVersionService.getProductVersion(productVersionId);
 	}
 
+	public static java.util.List getProductVersions(long productEntryId,
+		int begin, int end)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		SCProductVersionService scProductVersionService = SCProductVersionServiceFactory.getService();
+
+		return scProductVersionService.getProductVersions(productEntryId,
+			begin, end);
+	}
+
+	public static int getProductVersionsCount(long productEntryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		SCProductVersionService scProductVersionService = SCProductVersionServiceFactory.getService();
+
+		return scProductVersionService.getProductVersionsCount(productEntryId);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion updateProductVersion(
 		long productVersionId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,

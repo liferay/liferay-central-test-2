@@ -68,6 +68,11 @@ else {
 
 <liferay-ui:tabs names="product" />
 
+<liferay-ui:error exception="<%= ProductEntryNameException.class %>" message="please-enter-a-valid-name" />
+<liferay-ui:error exception="<%= ProductEntryTypeException.class %>" message="please-select-a-valid-type" />
+<liferay-ui:error exception="<%= ProductEntryShortDescriptionException.class %>" message="please-enter-a-valid-short-description" />
+<liferay-ui:error exception="<%= ProductEntryLicenseException.class %>" message="please-select-at-least-one-license" />
+
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>

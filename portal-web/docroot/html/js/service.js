@@ -1969,6 +1969,14 @@ Liferay.Service.SC.SCFrameworkVersion = {
 		_$J.getJSON(Liferay.Service.url, params, callback);
 	},
 
+	getFrameworkVersions: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getFrameworkVersions";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
 	getFrameworkVersion: function(params, callback) {
 		params.serviceParameters = Liferay.Service.getParameters(params);
 		params.serviceClassName = this.serviceClassName;
@@ -2045,6 +2053,22 @@ Liferay.Service.SC.SCProductVersion = {
 		params.serviceParameters = Liferay.Service.getParameters(params);
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getProductVersion";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	getProductVersions: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getProductVersions";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	getProductVersionsCount: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getProductVersionsCount";
 
 		_$J.getJSON(Liferay.Service.url, params, callback);
 	},

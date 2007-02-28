@@ -28,6 +28,10 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
+import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
+import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
+import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
+import com.liferay.portlet.softwarecatalog.ProductEntryTypeException;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -74,6 +78,13 @@ public class EditProductEntryAction extends PortletAction {
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.software_catalog.error");
+			}
+			else if (e instanceof ProductEntryNameException ||
+					 e instanceof ProductEntryTypeException ||
+					 e instanceof ProductEntryShortDescriptionException ||
+					 e instanceof ProductEntryLicenseException) {
+
+				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {
 				throw e;

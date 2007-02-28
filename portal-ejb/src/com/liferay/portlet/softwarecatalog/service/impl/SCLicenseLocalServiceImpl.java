@@ -25,10 +25,12 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portlet.softwarecatalog.LicenseNameException;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.service.base.SCLicenseLocalServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
+import com.liferay.util.Validator;
 
 import java.util.List;
 
@@ -45,6 +47,8 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 			String name, String url, boolean openSource, boolean active,
 			boolean recommended)
 		throws PortalException, SystemException {
+
+		validate(name);
 
 		long licenseId = CounterLocalServiceUtil.increment(
 			SCLicense.class.getName());
@@ -116,6 +120,8 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 			boolean active, boolean recommended)
 		throws PortalException, SystemException {
 
+		validate(name);
+
 		SCLicense license =
 			SCLicenseUtil.findByPrimaryKey(licenseId);
 
@@ -128,6 +134,13 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 		SCLicenseUtil.update(license);
 
 		return license;
+	}
+
+	protected void validate(String name) throws PortalException {
+
+		if (Validator.isNull(name)) {
+			throw new LicenseNameException();
+		}
 	}
 
 }

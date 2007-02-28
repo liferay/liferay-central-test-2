@@ -1,15 +1,20 @@
-##
+
+###
 ## Language settings
 ##
 
-lang.dir=rtl
-lang.line.begin=right
-lang.line.end=left
 
 ##
 ## Portlet titles
 ##
+lang.dir=rtl
+lang.line.begin=right
+lang.line.end=left
 
+
+##
+## Category titles
+##
 javax.portlet.title.10=كتاب العناوين
 javax.portlet.title.11=الدليل
 javax.portlet.title.12=المخزون
@@ -94,10 +99,10 @@ javax.portlet.title.96=خرائط غوغل
 javax.portlet.title.97=ملاحظات
 javax.portlet.title.9=إدارة الموقع
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=إدارة
 category.alfresco=Alfresco
 category.christianity=مسيحية
@@ -122,10 +127,10 @@ category.wiki=ويكي
 category.workflow=تدفق العمل
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.portal.model.Group=مجتمع
 model.resource.com.liferay.portal.model.Layout=تصميم
 model.resource.com.liferay.portal.model.Location=موقع
@@ -134,10 +139,10 @@ model.resource.com.liferay.portal.model.Role=دور
 model.resource.com.liferay.portal.model.User=مستخدم
 model.resource.com.liferay.portal.model.UserGroup=مجموعة المستخدمين
 
-##
-## Action names
-##
 
+##
+## Layout types
+##
 action.ADD_ARTICLE=أضف مقالة
 action.ADD_CATEGORY=أضف تصنيف
 action.ADD_COMMUNITY=أضف مجتمع
@@ -191,19 +196,19 @@ action.UPDATE_USER=حدّث مستخدم
 action.VIEW=إعرض
 action.VIEW_USER=إعرض مستخدم
 
-##
-## Layout types
-##
 
+##
+## Messages
+##
 layout.types.article=مقالة
 layout.types.embedded=مضمّن
 layout.types.portlet=بورتلت
 layout.types.url=رابط تشعبي
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=يوم واحد
 1-month=شهر واحد
 1-week=أسبوع واحد
@@ -2424,10 +2429,6 @@ zh_en=صيني إلى الإنجليزي
 zip-postal=الرمز البريدي
 zip=الرمز البريدي
 zt_en=تايواني إلى إنجليزي
-
-##
-## Currency
-##
 
 currency.AED=درهم اماراتي
 currency.ALL=ليك ألباني

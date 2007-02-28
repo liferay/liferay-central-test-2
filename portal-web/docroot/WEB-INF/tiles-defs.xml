@@ -958,10 +958,6 @@
 		<put name="portlet_content" value="/portlet/software_catalog/view_product_entry.jsp" />
 	</definition>
 
-	<definition name="portlet.software_catalog.view_product_version" extends="portlet.software_catalog">
-		<put name="portlet_content" value="/portlet/software_catalog/view_product_version.jsp" />
-	</definition>
-
 	<!-- Recent Documents -->
 
 	<definition name="portlet.recent_documents" extends="portlet" />

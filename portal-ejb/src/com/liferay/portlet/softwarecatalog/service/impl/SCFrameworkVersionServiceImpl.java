@@ -31,6 +31,8 @@ import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServic
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
 import com.liferay.portlet.softwarecatalog.service.permission.SCFrameworkVersionPermission;
 
+import java.util.List;
+
 /**
  * <a href="SCFrameworkVersionServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
@@ -78,11 +80,24 @@ public class SCFrameworkVersionServiceImpl
 			frameworkVersionId);
 	}
 
+	public List getFrameworkVersions(
+			long groupId, boolean active)
+		throws SystemException {
+
+		return SCFrameworkVersionLocalServiceUtil.getFrameworkVersions(
+			groupId, active);
+	}
+
+	public List getFrameworkVersions(
+			long groupId, boolean active, int begin, int end)
+		throws SystemException {
+
+		return SCFrameworkVersionLocalServiceUtil.getFrameworkVersions(
+			groupId, active, begin, end);
+	}
+
 	public SCFrameworkVersion getFrameworkVersion(long frameworkVersionId)
 		throws PortalException, SystemException {
-
-		SCFrameworkVersionPermission.check(
-			getPermissionChecker(), frameworkVersionId, ActionKeys.VIEW);
 
 		return SCFrameworkVersionLocalServiceUtil.getFrameworkVersion(
 			frameworkVersionId);

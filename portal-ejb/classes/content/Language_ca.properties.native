@@ -1,15 +1,20 @@
-##
+
+###
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.title.10=Contactes
 javax.portlet.title.11=Directori
 javax.portlet.title.12=Bossa
@@ -89,10 +94,10 @@ javax.portlet.title.90=Porta
 javax.portlet.title.91=Contingut Alfresco
 javax.portlet.title.9=Administració
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Administració
 category.alfresco=Alfresco
 category.christianity=Cristianisme
@@ -113,10 +118,10 @@ category.undefined=Indefinit
 category.wiki=Wiki
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.portal.model.Group=Comunitat
 model.resource.com.liferay.portal.model.Layout=Pàgina
 model.resource.com.liferay.portal.model.Location=Localització
@@ -124,10 +129,10 @@ model.resource.com.liferay.portal.model.Organization=Organització
 model.resource.com.liferay.portal.model.Role=Rol
 model.resource.com.liferay.portal.model.User=Usuari
 
-##
-## Action names
-##
 
+##
+## Layout types
+##
 action.ADD_ARTICLE=Afegir un article
 action.ADD_CATEGORY=Afegir una categoria
 action.ADD_COMMUNITY=Afegeixi a Comunitat
@@ -175,19 +180,19 @@ action.UPDATE_USER=Usuari en mode actualització
 action.VIEW=Vista
 action.VIEW_USER=Usuari de la Vista
 
-##
-## Layout types
-##
 
+##
+## Messages
+##
 layout.types.article=Article
 layout.types.embedded=Web inserida
 layout.types.portlet=Portlets
 layout.types.url=URL
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1024-by-768-pixels=1024 per 768 pixels
 800-by-600-pixels=800 per 600 pixels
 INBOX=entrants
@@ -2198,10 +2203,6 @@ zh_en=Xinès a anglès
 zip-postal=Zip/Postal
 zip=codi postal
 zt_en=Xinès (Taiwan)a l'anglès
-
-##
-## Currency
-##
 
 currency.AED=Dirham dels EAU
 currency.ALL=Lek Albanès

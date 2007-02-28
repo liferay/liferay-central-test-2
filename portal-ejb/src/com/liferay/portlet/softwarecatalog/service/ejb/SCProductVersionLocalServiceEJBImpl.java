@@ -98,49 +98,6 @@ public class SCProductVersionLocalServiceEJBImpl
 			guestPermissions);
 	}
 
-	public void addProductVersionResources(long productEntryId,
-		long productVersionId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		SCProductVersionLocalServiceFactory.getTxImpl()
-										   .addProductVersionResources(productEntryId,
-			productVersionId, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addProductVersionResources(
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion productVersion,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		SCProductVersionLocalServiceFactory.getTxImpl()
-										   .addProductVersionResources(productEntry,
-			productVersion, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addProductVersionResources(long productEntryId,
-		long productVersionId, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		SCProductVersionLocalServiceFactory.getTxImpl()
-										   .addProductVersionResources(productEntryId,
-			productVersionId, communityPermissions, guestPermissions);
-	}
-
-	public void addProductVersionResources(
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion productVersion,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		SCProductVersionLocalServiceFactory.getTxImpl()
-										   .addProductVersionResources(productEntry,
-			productVersion, communityPermissions, guestPermissions);
-	}
-
 	public void deleteProductVersion(long productVersionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

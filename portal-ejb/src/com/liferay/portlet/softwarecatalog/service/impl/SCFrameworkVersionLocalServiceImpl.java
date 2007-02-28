@@ -29,10 +29,12 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.softwarecatalog.FrameworkVersionNameException;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCFrameworkVersionLocalServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
+import com.liferay.util.Validator;
 
 import java.util.Date;
 import java.util.List;
@@ -77,6 +79,8 @@ public class SCFrameworkVersionLocalServiceImpl
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
+
+		validate(name);
 
 		// Framework version
 
@@ -187,6 +191,13 @@ public class SCFrameworkVersionLocalServiceImpl
 	}
 
 	public List getFrameworkVersions(
+			long groupId, boolean active)
+		throws SystemException {
+
+		return SCFrameworkVersionUtil.findByG_A(groupId, active);
+	}
+
+	public List getFrameworkVersions(
 			long groupId, boolean active, int begin, int end)
 		throws SystemException {
 
@@ -216,6 +227,8 @@ public class SCFrameworkVersionLocalServiceImpl
 			int priority)
 		throws PortalException, SystemException {
 
+		validate(name);
+
 		SCFrameworkVersion frameworkVersion =
 			SCFrameworkVersionUtil.findByPrimaryKey(frameworkVersionId);
 
@@ -227,6 +240,13 @@ public class SCFrameworkVersionLocalServiceImpl
 		SCFrameworkVersionUtil.update(frameworkVersion);
 
 		return frameworkVersion;
+	}
+
+	protected void validate(String name) throws PortalException {
+
+		if (Validator.isNull(name)) {
+			throw new FrameworkVersionNameException();
+		}
 	}
 
 }

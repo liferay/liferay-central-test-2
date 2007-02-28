@@ -48,6 +48,8 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", f
 
 <liferay-ui:tabs names="framework-version" />
 
+<liferay-ui:error exception="<%= FrameworkVersionNameException.class %>" message="please-enter-a-valid-name" />
+
 <table border="0" cellpadding="0" cellspacing="0">
 
 <tr>

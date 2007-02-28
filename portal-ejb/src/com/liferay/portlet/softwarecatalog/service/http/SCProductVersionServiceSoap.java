@@ -103,6 +103,33 @@ public class SCProductVersionServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap[] getProductVersions(
+		long productEntryId, int begin, int end) throws RemoteException {
+		try {
+			java.util.List returnValue = SCProductVersionServiceUtil.getProductVersions(productEntryId,
+					begin, end);
+
+			return com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getProductVersionsCount(long productEntryId)
+		throws RemoteException {
+		try {
+			int returnValue = SCProductVersionServiceUtil.getProductVersionsCount(productEntryId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap updateProductVersion(
 		long productVersionId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,

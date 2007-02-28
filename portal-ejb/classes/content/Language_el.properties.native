@@ -1,15 +1,20 @@
-##
+
+###
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.title.100=Πρόσκληση
 javax.portlet.title.101=Περιεκτικότητα σε ετικέττες
 javax.portlet.title.102=XSL
@@ -99,10 +104,10 @@ javax.portlet.title.98=Κατάλογος λογισμικού
 javax.portlet.title.99=Ετικέττες Admin
 javax.portlet.title.9=Διαχείρηση
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Admin
 category.alfresco=Υπαίθριος
 category.christianity=Χριστιανισμός
@@ -128,10 +133,10 @@ category.wiki=Wiki
 category.workflow=Ροή της δουλειάς
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.portal.model.Group=Κοινότητα
 model.resource.com.liferay.portal.model.Layout=Σελίδα
 model.resource.com.liferay.portal.model.Location=Θέση
@@ -168,10 +173,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Καθορ�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Περίπτωση ροής της δουλειάς
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Στόχος ροής της δουλειάς
 
-##
-## Action names
-##
 
+##
+## Layout types
+##
 action.ADD_ARTICLE=Προσθέστε το άρθρο
 action.ADD_CATEGORY=Προσθέστε την κατηγορία
 action.ADD_COMMUNITY=Προσθέστε την Κοινότητα
@@ -188,6 +193,7 @@ action.ADD_GROUP=Προσθέστε την ομάδα
 action.ADD_IMAGE=Προσθέστε την εικόνα
 action.ADD_INSTANCE=Προσθέστε την περίπτωση
 action.ADD_ITEM=Προσθέστε το στοιχείο
+action.ADD_LICENSE=Προσθέστε την άδεια
 action.ADD_LOCATION=Προσθέστε τη θέση
 action.ADD_MESSAGE=Προσθέστε το μήνυμα
 action.ADD_NODE=Προσθέστε τον κόμβο
@@ -234,20 +240,20 @@ action.UPDATE_USER=Χρήστης αναπροσαρμογών
 action.VIEW=Αποψη
 action.VIEW_USER=Χρήστης άποψης
 
-##
-## Layout types
-##
 
+##
+## Messages
+##
 layout.types.article=Αρθρο
 layout.types.embedded=Ενσωματωμένος
 layout.types.link_to_layout=Σύνδεση με τη σελίδα
 layout.types.portlet=Portlet
 layout.types.url=URL
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 Ημέρα
 1-month=1 Μήνας
 1-week=1 Εβδομάδα
@@ -2594,10 +2600,6 @@ zh_en=Κινέζικα σε Αγγλικά
 zip-postal=Φερμουάρ/ταχυδρομικός
 zip=Τ.Κ.
 zt_en=Κινέζικα (Ταϊβάν) στα αγγλικά
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Lek Αλβανίας

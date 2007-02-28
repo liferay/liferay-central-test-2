@@ -98,6 +98,9 @@ public interface SCFrameworkVersionLocalService {
 	public java.util.List getFrameworkVersions(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getFrameworkVersions(long groupId, boolean active)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getFrameworkVersions(long groupId, boolean active,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
