@@ -69,6 +69,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="LayoutCacheFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Javier de Ros
  *
  */
 public class LayoutCacheFilter implements Filter {
@@ -200,33 +201,44 @@ public class LayoutCacheFilter implements Filter {
 	public void destroy() {
 	}
 
+	protected String getBrowserType(HttpServletRequest req) {
+		if (BrowserSniffer.is_ie_7(req)) {
+			return _BROWSER_TYPE_IE_7;
+		}
+		else if (BrowserSniffer.is_ie(req)) {
+			return _BROWSER_TYPE_IE;
+		}
+		else {
+			return _BROWSER_TYPE_OTHER;
+		}
+	}
+
 	protected String getCacheKey(HttpServletRequest req) {
+		StringBuffer sb = new StringBuffer();
 
-		// URL
+		// Url
 
-		String url =
-			req.getServletPath() + req.getPathInfo() + StringPool.QUESTION +
-				req.getQueryString();
+		sb.append(req.getServletPath());
+		sb.append(req.getPathInfo());
+		sb.append(StringPool.QUESTION);
+		sb.append(req.getQueryString());
 
 		// Language
 
-		String languageId = LanguageUtil.getLanguageId(req);
+		sb.append(StringPool.POUND);
+		sb.append(LanguageUtil.getLanguageId(req));
 
 		// Browser type
 
-		boolean isIe = BrowserSniffer.is_ie(req);
+		sb.append(StringPool.POUND);
+		sb.append(getBrowserType(req));
 
 		// Gzip compression
 
-		boolean acceptsGzip = BrowserSniffer.acceptsGzip(req);
+		sb.append(StringPool.POUND);
+		sb.append(BrowserSniffer.acceptsGzip(req));
 
-		// Cache key
-
-		String key =
-			url + StringPool.POUND + languageId + StringPool.POUND + isIe +
-				StringPool.POUND + acceptsGzip;
-
-		return key.trim().toUpperCase();
+		return sb.toString().trim().toUpperCase();
 	}
 
 	protected String getPlid(
@@ -448,6 +460,12 @@ public class LayoutCacheFilter implements Filter {
 	private static final int _PATTERN_LAYOUT = 1;
 
 	private static final int _PATTERN_RESOURCE = 2;
+
+	private static final String _BROWSER_TYPE_IE_7 = "ie_7";
+
+	private static final String _BROWSER_TYPE_IE = "ie";
+
+	private static final String _BROWSER_TYPE_OTHER = "other";
 
 	private static Log _log = LogFactory.getLog(LayoutCacheFilter.class);
 
