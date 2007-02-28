@@ -301,22 +301,22 @@ public class LayoutCacheFilter implements Filter {
 
 		// If there is no layout path take the first from the group or user
 
-		Layout layout = null;
-
 		try {
-			layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
+			Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
 				ownerId, friendlyURL);
+
+			return layout.getPlid();
 		}
 		catch (NoSuchLayoutException nsle) {
 			_log.warn(nsle);
+
+			return null;
 		}
 		catch (Exception e) {
 			_log.error(e);
 
 			return null;
 		}
-
-		return layout.getPlid();
 	}
 
 	protected boolean isAlreadyFiltered(HttpServletRequest req) {
