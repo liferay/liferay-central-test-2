@@ -110,7 +110,7 @@
 		</action>
 
 		<action path="/portal/css_cached" type="com.liferay.portal.action.CSSCachedAction">
-			<forward name="modified.jsp" path="/portal/css_cached.jsp" c/>
+			<forward name="modified.jsp" path="/portal/css_cached.jsp" />
 		</action>
 
 		<action path="/portal/error" forward="portal.error" />
