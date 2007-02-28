@@ -22,12 +22,13 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.ListUtil;
+import com.liferay.util.PwdGenerator;
 
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -35,87 +36,57 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
- * <a href="SharedSessionWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="NullSession.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SharedSessionWrapper implements HttpSession {
+public class NullSession implements HttpSession {
 
-	public SharedSessionWrapper(HttpSession ses) {
-		this(ses, CollectionFactory.getSyncHashMap());
-	}
-
-	public SharedSessionWrapper(HttpSession ses, Map sharedAttributes) {
-		if (ses == null) {
-			_ses = new NullSession();
-
-			if (_log.isWarnEnabled()) {
-				_log.warn("Wrapped session is null");
-			}
-		}
-		else {
-			_ses = ses;
-		}
-
-		_sharedAttributes = sharedAttributes;
+	public NullSession() {
+		_attributes = CollectionFactory.getSyncHashMap();
+		_creationTime = System.currentTimeMillis();
+		_id =
+			NullSession.class.getName() + StringPool.POUND +
+				PwdGenerator.getPinNumber();
+		_lastAccessedTime = _creationTime;
+		_maxInactiveInterval = 0;
+		_servletContext = null;
+		_sessionContext = null;
+		_new = true;
 	}
 
 	public Object getAttribute(String name) {
-		Object value = _ses.getAttribute(name);
-
-		if (value == null) {
-			value = _sharedAttributes.get(name);
-		}
-
-		return value;
+		return _attributes.get(name);
 	}
 
 	public Enumeration getAttributeNames() {
-		if (_sharedAttributes.size() > 0) {
-			List names = ListUtil.fromEnumeration(_ses.getAttributeNames());
-
-			Iterator itr = _sharedAttributes.keySet().iterator();
-
-			while (itr.hasNext()) {
-				String name = (String)itr.next();
-
-				names.add(name);
-			}
-
-			return Collections.enumeration(names);
-		}
-		else {
-			return _ses.getAttributeNames();
-		}
+		return Collections.enumeration(_attributes.keySet());
 	}
 
 	public long getCreationTime() {
-		return _ses.getCreationTime();
+		return _creationTime;
 	}
 
 	public String getId() {
-		return _ses.getId();
+		return _id;
 	}
 
 	public long getLastAccessedTime() {
-		return _ses.getLastAccessedTime();
+		return _lastAccessedTime;
 	}
 
 	public int getMaxInactiveInterval() {
-		return _ses.getMaxInactiveInterval();
+		return _maxInactiveInterval;
 	}
 
 	public ServletContext getServletContext() {
-		return _ses.getServletContext();
+		return _servletContext;
 	}
 
 	public HttpSessionContext getSessionContext() {
-		return _ses.getSessionContext();
+		return _sessionContext;
 	}
 
 	public Object getValue(String name) {
@@ -129,11 +100,11 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public void invalidate() {
-		_ses.invalidate();
+		_attributes.clear();
 	}
 
 	public boolean isNew() {
-		return _ses.isNew();
+		return _new;
 	}
 
 	public void putValue(String name, Object value) {
@@ -141,7 +112,7 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public void removeAttribute(String name) {
-		_ses.removeAttribute(name);
+		_attributes.remove(name);
 	}
 
 	public void removeValue(String name) {
@@ -149,16 +120,20 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public void setAttribute(String name, Object value) {
-		_ses.setAttribute(name, value);
+		_attributes.put(name, value);
 	}
 
 	public void setMaxInactiveInterval(int maxInactiveInterval) {
-		_ses.setMaxInactiveInterval(maxInactiveInterval);
+		_maxInactiveInterval = maxInactiveInterval;
 	}
 
-	private static Log _log = LogFactory.getLog(SharedSessionWrapper.class);
-
-	private HttpSession _ses;
-	private Map _sharedAttributes;
+	private Map _attributes;
+	private long _creationTime;
+	private String _id;
+	private long _lastAccessedTime;
+	private int _maxInactiveInterval;
+	private ServletContext _servletContext;
+	private HttpSessionContext _sessionContext;
+	private boolean _new;
 
 }
