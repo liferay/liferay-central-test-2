@@ -198,17 +198,21 @@ public class LoginAction extends Action {
 				CookieKeys.ID,
 				UserLocalServiceUtil.encryptUserId(userId));
 
-			idCookie.setPath("/");
+			idCookie.setPath(StringPool.SLASH);
 
 			Cookie passwordCookie = new Cookie(
 				CookieKeys.PASSWORD,
 				Encryptor.encrypt(company.getKeyObj(), password));
 
-			passwordCookie.setPath("/");
+			passwordCookie.setPath(StringPool.SLASH);
+
+			int loginMaxAge = GetterUtil.getInteger(
+				PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE),
+				CookieKeys.MAX_AGE);
 
 			if (rememberMe) {
-				idCookie.setMaxAge(CookieKeys.MAX_AGE);
-				passwordCookie.setMaxAge(CookieKeys.MAX_AGE);
+				idCookie.setMaxAge(loginMaxAge);
+				passwordCookie.setMaxAge(loginMaxAge);
 			}
 			else {
 				idCookie.setMaxAge(0);
@@ -217,8 +221,8 @@ public class LoginAction extends Action {
 
 			Cookie loginCookie = new Cookie(CookieKeys.LOGIN, login);
 
-			loginCookie.setPath("/");
-			loginCookie.setMaxAge(CookieKeys.MAX_AGE);
+			loginCookie.setPath(StringPool.SLASH);
+			loginCookie.setMaxAge(loginMaxAge);
 
 			CookieKeys.addCookie(res, idCookie);
 			CookieKeys.addCookie(res, passwordCookie);
@@ -248,13 +252,13 @@ public class LoginAction extends Action {
 			CookieKeys.ID,
 			UserLocalServiceUtil.encryptUserId(userId));
 
-		idCookie.setPath("/");
+		idCookie.setPath(StringPool.SLASH);
 
 		Cookie passwordCookie = new Cookie(
 			CookieKeys.PASSWORD,
 			Encryptor.encrypt(company.getKeyObj(), password));
 
-		passwordCookie.setPath("/");
+		passwordCookie.setPath(StringPool.SLASH);
 
 		if (rememberMe) {
 			idCookie.setMaxAge(CookieKeys.MAX_AGE);
@@ -267,7 +271,7 @@ public class LoginAction extends Action {
 
 		Cookie loginCookie = new Cookie(CookieKeys.LOGIN, login);
 
-		loginCookie.setPath("/");
+		loginCookie.setPath(StringPool.SLASH);
 		loginCookie.setMaxAge(CookieKeys.MAX_AGE);
 
 		CookieKeys.addCookie(res, idCookie);
