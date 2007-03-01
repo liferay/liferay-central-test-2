@@ -105,10 +105,12 @@ function addPortletHTML(html, container, placeHolder) {
 	if (!_$J.browser.firefox) {
 		executeLoadedScript(portletBound);
 	}
-
-	if (!portletBound.isStatic) {
-		//LayoutColumns.initPortlet(portletBound);
-		Liferay.Draggables.init();
+	
+	//TODO: Check to see if user has permissions
+	if (true) {
+		if (!portletBound.isStatic) {
+			Liferay.Draggables.addItem(portletBound);
+		}
 	}
 
 	Liferay.Portlet.process(portletId);

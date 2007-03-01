@@ -29,17 +29,13 @@
 				<%@ include file="/html/common/themes/portlet_content.jsp" %>
 			</c:when>
 			<c:when test="<%= portletDisplay.isAccess() %>">
-				<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					<td <%= portletPadding ? "style=\"padding: 4px 8px 10px 8px;\"" : "" %>>
-						<c:if test='<%= !tilesPortletContent.endsWith("/error.jsp") %>'>
-							<%@ include file="/html/common/themes/portlet_messages.jsp" %>
-						</c:if>
-
-						<%@ include file="/html/common/themes/portlet_content.jsp" %>
-					</td>
-				</tr>
-				</table>
+				<div>
+					<c:if test='<%= !tilesPortletContent.endsWith("/error.jsp") %>'>
+						<%@ include file="/html/common/themes/portlet_messages.jsp" %>
+					</c:if>
+	
+					<%@ include file="/html/common/themes/portlet_content.jsp" %>
+				</div>
 			</c:when>
 			<c:otherwise>
 				<liferay-util:include page="/html/portal/portlet_access_denied.jsp" />

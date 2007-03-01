@@ -27,6 +27,12 @@ select {
 	padding: 0.3em;
 }
 
+input[type="image"] {
+border: none;
+background: transparent none;
+padding: 0;
+}
+
 input[type="submit"], input[type="button"] {
 	background: #FAFAFA url(../images/forms/button.gif) repeat-x;
 	border: 3px double #999;

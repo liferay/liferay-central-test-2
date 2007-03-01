@@ -291,23 +291,19 @@ if (freeformPortlet) {
 		<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
 	</c:when>
 	<c:when test="<%= themeDisplay.isStatePopUp() %>">
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td <%= portletPadding ? "style=\"padding: 4px 8px 10px 8px;\"" : "" %>>
-				<c:if test="<%= Validator.isNotNull(tilesPortletContent) %>">
-					<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletContent %>" />
-				</c:if>
+		<div>
+			<c:if test="<%= Validator.isNotNull(tilesPortletContent) %>">
+				<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletContent %>" />
+			</c:if>
 
-				<c:if test="<%= Validator.isNull(tilesPortletContent) %>">
+			<c:if test="<%= Validator.isNull(tilesPortletContent) %>">
 
-					<%
-					pageContext.getOut().print(renderRequest.getAttribute(WebKeys.PORTLET_CONTENT));
-					%>
+				<%
+				pageContext.getOut().print(renderRequest.getAttribute(WebKeys.PORTLET_CONTENT));
+				%>
 
-				</c:if>
-			</td>
-		</tr>
-		</table>
+			</c:if>
+		</div>
 	</c:when>
 	<c:otherwise>
 		<c:choose>

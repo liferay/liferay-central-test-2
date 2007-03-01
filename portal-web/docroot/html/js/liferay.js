@@ -229,6 +229,18 @@ Liferay.Draggables = {
 				}
 			);
 		}
+
+		instance.drags = drags;
+		
+		return instance;
+	},
+	
+	addItem: function(el) {
+		var instance = this;
+			
+		jQuery(el).find('.portlet-title').css('cursor', 'move');
+			
+		instance.drags.SortableAddItem(el);
 	},
 
 	_onStop: function() {
@@ -239,7 +251,7 @@ Liferay.Draggables = {
 
 		var newPosition = -1;
 
-		var portlet = currentPortlet.parents('.portlet-boundary')[0];
+		var portlet = currentPortlet[0];
 
 		var portletId = portlet.id.replace(/^(p_p_id_)/, '');
 		portletId = portletId.substring(0, portletId.length - 1);
