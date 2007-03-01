@@ -338,25 +338,36 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				new IGImagePK(companyId, imageId));
 
 			IGFolder folder = getFolder(image, folderId);
-			BufferedImage bufferedImage = ImageIO.read(file);
-			byte[] bytes = FileUtil.getBytes(file);
+
+			BufferedImage bufferedImage = null;
+			byte[] bytes = null;
+
+			if (file.exists()) {
+				bufferedImage = ImageIO.read(file);
+				bytes = FileUtil.getBytes(file);
+			}
 
 			validate(file, bytes);
 
 			image.setModifiedDate(new Date());
 			image.setFolderId(folder.getFolderId());
 			image.setDescription(description);
-			image.setHeight(bufferedImage.getHeight());
-			image.setWidth(bufferedImage.getWidth());
-			image.setSize(bytes.length);
+
+			if (bufferedImage != null) {
+				image.setHeight(bufferedImage.getHeight());
+				image.setWidth(bufferedImage.getWidth());
+				image.setSize(bytes.length);
+			}
 
 			IGImageUtil.update(image);
 
 			// Images
 
-			saveImages(
-				image.getLargeImageId(), bufferedImage, image.getSmallImageId(),
-				file, bytes, contentType);
+			if (bufferedImage != null) {
+				saveImages(
+					image.getLargeImageId(), bufferedImage,
+					image.getSmallImageId(), file, bytes, contentType);
+			}
 
 			// Tags
 
