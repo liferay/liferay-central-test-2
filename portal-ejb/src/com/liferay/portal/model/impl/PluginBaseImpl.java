@@ -23,11 +23,11 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
-import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Plugin;
+import com.liferay.portal.model.PluginSetting;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <a href="PluginBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -35,7 +35,7 @@ import java.util.HashMap;
  * @author Jorge Ferrer
  */
 public abstract class PluginBaseImpl implements Plugin {
-	
+
 	public PluginPackage getPluginPackage() {
 		return _pluginPackage;
 	}
@@ -68,5 +68,5 @@ public abstract class PluginBaseImpl implements Plugin {
 	private PluginPackage _pluginPackage;
 	private PluginSetting _defaultPluginSetting;
 	private Map _defaultPluginSettings = new HashMap();
-	
+
 }

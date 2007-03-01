@@ -44,15 +44,16 @@ public class SCProductEntryServiceEJBImpl implements SCProductEntryService,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.util.Map images, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return SCProductEntryServiceFactory.getTxImpl().addProductEntry(plid,
 			name, type, shortDescription, longDescription, pageURL,
-			repoGroupId, repoArtifactId, licenseIds, addCommunityPermissions,
-			addGuestPermissions);
+			repoGroupId, repoArtifactId, licenseIds, images,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
@@ -60,7 +61,7 @@ public class SCProductEntryServiceEJBImpl implements SCProductEntryService,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.lang.String[] communityPermissions,
+		java.util.Map images, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -68,8 +69,8 @@ public class SCProductEntryServiceEJBImpl implements SCProductEntryService,
 
 		return SCProductEntryServiceFactory.getTxImpl().addProductEntry(plid,
 			name, type, shortDescription, longDescription, pageURL,
-			repoGroupId, repoArtifactId, licenseIds, communityPermissions,
-			guestPermissions);
+			repoGroupId, repoArtifactId, licenseIds, images,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteProductEntry(long productEntryId)
@@ -92,14 +93,14 @@ public class SCProductEntryServiceEJBImpl implements SCProductEntryService,
 		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds)
+		java.lang.String repoArtifactId, long[] licenseIds, java.util.Map images)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return SCProductEntryServiceFactory.getTxImpl().updateProductEntry(productEntryId,
 			name, type, shortDescription, longDescription, pageURL,
-			repoGroupId, repoArtifactId, licenseIds);
+			repoGroupId, repoArtifactId, licenseIds, images);
 	}
 
 	public void ejbCreate() throws CreateException {

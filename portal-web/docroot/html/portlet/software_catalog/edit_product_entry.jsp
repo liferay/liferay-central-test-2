@@ -61,7 +61,7 @@ else {
 
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveProductEntry(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" enctype="multipart/form-data" onSubmit="<portlet:namespace />saveProductEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 <input name="<portlet:namespace />productEntryId" type="hidden" value="<%= productEntryId %>">
@@ -72,6 +72,8 @@ else {
 <liferay-ui:error exception="<%= ProductEntryTypeException.class %>" message="please-select-a-valid-type" />
 <liferay-ui:error exception="<%= ProductEntryShortDescriptionException.class %>" message="please-enter-a-valid-short-description" />
 <liferay-ui:error exception="<%= ProductEntryLicenseException.class %>" message="please-select-at-least-one-license" />
+<liferay-ui:error exception="<%= ProductEntryImagesException.class %>" message="please-enter-a valid-main-screenshot" />
+<liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -165,6 +167,59 @@ else {
 	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="longDescription" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "main-screenshot") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<%
+		String mainImageName = SCProductEntryImpl.MAIN_IMAGE_NAME;
+		%>
+		<input class="form-text" name="<portlet:namespace />screenshot_update_<%=mainImageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<%
+		if (productEntry != null) {
+			String imageId = productEntry.getImageId(mainImageName);
+			if (imageId != null) {
+				String imageURL = themeDisplay.getPathImage() + "/software_catalog?img_id=" + imageId + "&small=1";
+		%>
+				<br clear="all"/>
+				<img src="<%=imageURL%>"/>
+		<%
+			}
+		}
+
+		%>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "secondary-screenshots") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<%
+		for (int i = 1; i < 5; i++) {
+			String imageName = Integer.toString(i);
+		%>
+ 			<br clear="all"/>
+			<input class="form-text" name="<portlet:namespace />screenshot_update_<%=imageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<%
+			if (productEntry != null) {
+				String imageId = productEntry.getImageId(imageName);
+				if (imageId != null) {
+					String imageURL = themeDisplay.getPathImage() + "/software_catalog?img_id=" + imageId + "&small=1";
+		%>
+					<br clear="all"/>
+					<img src="<%=imageURL%>" width="100"/>
+					<input type="checkbox" name="<portlet:namespace />screenshot_delete_<%=imageName%>"/> <%= LanguageUtil.get(pageContext, "delete")%>
+		<%
+				}
+			}
+		}
+		%>
 	</td>
 </tr>
 

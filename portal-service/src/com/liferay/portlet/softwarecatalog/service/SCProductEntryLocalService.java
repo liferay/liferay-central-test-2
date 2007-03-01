@@ -42,8 +42,8 @@ public interface SCProductEntryLocalService {
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long[] licenseIds, java.util.Map images,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -52,7 +52,8 @@ public interface SCProductEntryLocalService {
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, java.lang.String[] communityPermissions,
+		long[] licenseIds, java.util.Map images,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -62,7 +63,8 @@ public interface SCProductEntryLocalService {
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, java.lang.Boolean addCommunityPermissions,
+		long[] licenseIds, java.util.Map images,
+		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -120,6 +122,11 @@ public interface SCProductEntryLocalService {
 	public int getProductEntriesCount(long groupId, java.lang.String userId)
 		throws com.liferay.portal.SystemException;
 
+	public java.lang.String getProductEntryImageId(long productEntryId,
+		java.lang.String imageName)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 
@@ -131,7 +138,7 @@ public interface SCProductEntryLocalService {
 		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds)
+		java.lang.String repoArtifactId, long[] licenseIds, java.util.Map images)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

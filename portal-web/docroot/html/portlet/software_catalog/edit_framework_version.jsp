@@ -31,7 +31,7 @@ SCFrameworkVersion frameworkVersion = (SCFrameworkVersion)request.getAttribute(W
 
 long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "frameworkVersionId");
 
-boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", false);
+boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", true);
 %>
 
 <script type="text/javascript">

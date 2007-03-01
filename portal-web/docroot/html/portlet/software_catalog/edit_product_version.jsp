@@ -33,6 +33,25 @@ SCProductVersion productVersion = (SCProductVersion) request.getAttribute(WebKey
 long productEntryId = productEntry.getProductEntryId();
 long productVersionId = BeanParamUtil.getLong(productVersion, request, "productVersionId");
 
+Set frameworkVersionIds = CollectionFactory.getHashSet();
+
+if ((productVersion != null) && (request.getParameterValues("frameworkVersions") == null)) {
+	Iterator itr = productVersion.getFrameworkVersions().iterator();
+
+	while (itr.hasNext()) {
+		SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) itr.next();
+
+		frameworkVersionIds.add(new Long(frameworkVersion.getFrameworkVersionId()));
+	}
+}
+else {
+	long[] frameworkVersionIdsArray = ParamUtil.getLongValues(request, "frameworkVersions");
+
+	for (int i = 0; i < frameworkVersionIdsArray.length; i++) {
+		frameworkVersionIds.add(new Long(frameworkVersionIdsArray[i]));
+	}
+}
+
 PortletURL editProductEntryURL = renderResponse.createRenderURL();
 
 editProductEntryURL.setWindowState(WindowState.MAXIMIZED);
@@ -100,7 +119,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 				while (frameworkVersionsIt.hasNext()) {
 					SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) frameworkVersionsIt.next();
 				%>
-						<option <%= ((productVersion != null) && (productVersion.supportsFrameworkVersion(frameworkVersion.getFrameworkVersionId()))) ? "selected" : "" %>
+						<option <%= (frameworkVersionIds.contains(new Long(frameworkVersion.getFrameworkVersionId()))) ? "selected" : "" %>
 							value="<%= String.valueOf(frameworkVersion.getPrimaryKey()) %>"><%= frameworkVersion.getName() %></option>
 				<%
 				}

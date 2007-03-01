@@ -55,14 +55,14 @@ public class SCProductEntryLocalServiceEJBImpl
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long[] licenseIds, java.util.Map images,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return SCProductEntryLocalServiceFactory.getTxImpl().addProductEntry(userId,
 			plid, name, type, shortDescription, longDescription, pageURL,
-			repoGroupId, repoArtifactId, licenseIds, addCommunityPermissions,
-			addGuestPermissions);
+			repoGroupId, repoArtifactId, licenseIds, images,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
@@ -70,14 +70,15 @@ public class SCProductEntryLocalServiceEJBImpl
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, java.lang.String[] communityPermissions,
+		long[] licenseIds, java.util.Map images,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return SCProductEntryLocalServiceFactory.getTxImpl().addProductEntry(userId,
 			plid, name, type, shortDescription, longDescription, pageURL,
-			repoGroupId, repoArtifactId, licenseIds, communityPermissions,
-			guestPermissions);
+			repoGroupId, repoArtifactId, licenseIds, images,
+			communityPermissions, guestPermissions);
 	}
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
@@ -85,7 +86,8 @@ public class SCProductEntryLocalServiceEJBImpl
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, java.lang.Boolean addCommunityPermissions,
+		long[] licenseIds, java.util.Map images,
+		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -93,8 +95,9 @@ public class SCProductEntryLocalServiceEJBImpl
 			com.liferay.portal.SystemException {
 		return SCProductEntryLocalServiceFactory.getTxImpl().addProductEntry(userId,
 			plid, name, type, shortDescription, longDescription, pageURL,
-			repoGroupId, repoArtifactId, licenseIds, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
+			repoGroupId, repoArtifactId, licenseIds, images,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
 	}
 
 	public void addProductEntryResources(long productEntryId,
@@ -179,6 +182,15 @@ public class SCProductEntryLocalServiceEJBImpl
 			userId);
 	}
 
+	public java.lang.String getProductEntryImageId(long productEntryId,
+		java.lang.String imageName)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return SCProductEntryLocalServiceFactory.getTxImpl()
+												.getProductEntryImageId(productEntryId,
+			imageName);
+	}
+
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		SCProductEntryLocalServiceFactory.getTxImpl().reIndex(ids);
@@ -195,12 +207,12 @@ public class SCProductEntryLocalServiceEJBImpl
 		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds)
+		java.lang.String repoArtifactId, long[] licenseIds, java.util.Map images)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return SCProductEntryLocalServiceFactory.getTxImpl().updateProductEntry(productEntryId,
 			name, type, shortDescription, longDescription, pageURL,
-			repoGroupId, repoArtifactId, licenseIds);
+			repoGroupId, repoArtifactId, licenseIds, images);
 	}
 
 	public void ejbCreate() throws CreateException {

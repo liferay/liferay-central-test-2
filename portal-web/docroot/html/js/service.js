@@ -1997,14 +1997,6 @@ Liferay.Service.SC.SCFrameworkVersion = {
 Liferay.Service.SC.SCProductEntry = {
 	serviceClassName: Liferay.Service.SC.servicePackage + "SCProductEntry" + Liferay.Service.classNameSuffix,
 
-	addProductEntry: function(params, callback) {
-		params.serviceParameters = Liferay.Service.getParameters(params);
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addProductEntry";
-
-		_$J.getJSON(Liferay.Service.url, params, callback);
-	},
-
 	deleteProductEntry: function(params, callback) {
 		params.serviceParameters = Liferay.Service.getParameters(params);
 		params.serviceClassName = this.serviceClassName;
@@ -2017,14 +2009,6 @@ Liferay.Service.SC.SCProductEntry = {
 		params.serviceParameters = Liferay.Service.getParameters(params);
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getProductEntry";
-
-		_$J.getJSON(Liferay.Service.url, params, callback);
-	},
-
-	updateProductEntry: function(params, callback) {
-		params.serviceParameters = Liferay.Service.getParameters(params);
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateProductEntry";
 
 		_$J.getJSON(Liferay.Service.url, params, callback);
 	}

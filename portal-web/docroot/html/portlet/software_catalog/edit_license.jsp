@@ -32,8 +32,8 @@ SCLicense license = (SCLicense)request.getAttribute(WebKeys.SOFTWARE_CATALOG_LIC
 long licenseId = BeanParamUtil.getLong(license, request, "licenseId");
 
 boolean openSource = BeanParamUtil.getBoolean(license, request, "openSource", false);
-boolean active = BeanParamUtil.getBoolean(license, request, "active", false);
-boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", false);
+boolean active = BeanParamUtil.getBoolean(license, request, "active", true);
+boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", true);
 %>
 
 <script type="text/javascript">

@@ -236,6 +236,20 @@ public class ImageServlet extends HttpServlet {
 			}
 		}
 
+		// Software catalog
+
+		else if (path.startsWith("/software_catalog")) {
+			if (!imageId.equals(StringPool.BLANK)) {
+
+				if (ParamUtil.get(req, "small", false)) {
+					imageId += ".small";
+				}
+				else {
+					imageId += ".large";
+				}
+			}
+		}
+
 		return imageId;
 	}
 

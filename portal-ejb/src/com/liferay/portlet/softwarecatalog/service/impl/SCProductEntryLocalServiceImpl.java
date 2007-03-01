@@ -28,28 +28,43 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.model.Image;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.imagegallery.ImageSizeException;
+import com.liferay.portlet.softwarecatalog.ProductEntryImagesException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
 import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
 import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
 import com.liferay.portlet.softwarecatalog.ProductEntryTypeException;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
+import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryLocalServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
 import com.liferay.portlet.softwarecatalog.util.Indexer;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.ImageUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
 
+import java.awt.image.BufferedImage;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -73,12 +88,13 @@ public class SCProductEntryLocalServiceImpl
 			String userId, String plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			Map images, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addProductEntry(
 			userId, plid, name, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, licenseIds,
+			pageURL, repoGroupId, repoArtifactId, licenseIds, images,
 			new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
@@ -87,24 +103,26 @@ public class SCProductEntryLocalServiceImpl
 			String userId, String plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
-			String[] communityPermissions, String[] guestPermissions)
+			Map images, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addProductEntry(
 			userId, plid, name, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, licenseIds, null, null,
-			communityPermissions, guestPermissions);
+			pageURL, repoGroupId, repoArtifactId, licenseIds, images, null,
+			null, communityPermissions, guestPermissions);
 	}
 
 	public SCProductEntry addProductEntry(
 			String userId, String plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			Map images, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		validate(name, type, shortDescription, licenseIds);
+		validate(name, type, shortDescription, licenseIds, images, true);
 
 		// Product entry
 
@@ -132,6 +150,10 @@ public class SCProductEntryLocalServiceImpl
 		productEntry.setRepoArtifactId(repoArtifactId);
 
 		SCProductEntryUtil.update(productEntry);
+
+		// Images
+
+		processImages(productEntry, images);
 
 		// Resources
 
@@ -286,6 +308,19 @@ public class SCProductEntryLocalServiceImpl
 		return SCProductEntryUtil.countByG_U(groupId, userId);
 	}
 
+	public String getProductEntryImageId(long productEntryId, String imageName)
+		throws PortalException, SystemException {
+		SCProductEntry productEntry = getProductEntry(productEntryId);
+		String imageId = buildImageId(productEntry, imageName);
+		Image image = ImageLocalUtil.get(imageId + ".large");
+		if (image != null) {
+			return imageId;
+		}
+		else {
+			return null;
+		}
+	}
+
 	public void reIndex(String[] ids) throws SystemException {
 		try {
 			String companyId = ids[0];
@@ -377,10 +412,11 @@ public class SCProductEntryLocalServiceImpl
 	public SCProductEntry updateProductEntry(
 			long productEntryId, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
-			String repoGroupId, String repoArtifactId, long[] licenseIds)
+			String repoGroupId, String repoArtifactId, long[] licenseIds,
+			Map images)
 		throws PortalException, SystemException {
 
-		validate(name, type, shortDescription, licenseIds);
+		validate(name, type, shortDescription, licenseIds, images, false);
 
 		// Product entry
 
@@ -402,6 +438,10 @@ public class SCProductEntryLocalServiceImpl
 
 		SCProductEntryUtil.setSCLicenses(productEntryId, licenseIds);
 
+		// Images
+
+		processImages(productEntry, images);
+
 		// Lucene
 
 		try {
@@ -418,8 +458,89 @@ public class SCProductEntryLocalServiceImpl
 		return productEntry;
 	}
 
+	protected String buildImageId(
+		SCProductEntry productEntry, String imageName) {
+		return productEntry.getCompanyId() + ".software_catalog.product_entry."
+					+ productEntry.getProductEntryId() + "." + imageName;
+	}
+
+	protected void processImages(SCProductEntry productEntry, Map images)
+		throws SystemException {
+		Iterator itr = images.keySet().iterator();
+
+		while (itr.hasNext()) {
+			String imageName = (String) itr.next();
+			String imageId = buildImageId(productEntry, imageName);
+
+			Object imageObj = images.get(imageName);
+
+			if (imageObj instanceof String) {
+				String cmd = (String) imageObj;
+
+				if (cmd.equals("delete") &&
+					(!imageName.equals(SCProductEntryImpl.MAIN_IMAGE_NAME))) {
+					ImageLocalUtil.remove(imageId);
+				}
+			}
+			else if (imageObj instanceof Object[]) {
+				String contentType = (String) ((Object[]) imageObj)[0];
+				byte[] bytes = (byte[]) ((Object[]) imageObj)[1];
+
+				saveImage(imageId, contentType, bytes);
+			}
+		}
+	}
+
+	protected void saveImage(String imageId, String contentType, byte[] bytes)
+		throws SystemException {
+		try {
+
+			String largeImageId = imageId + ".large";
+			String smallImageId = imageId + ".small";
+
+			// Image
+
+			ImageLocalUtil.put(largeImageId, bytes);
+
+			// Thumbnail
+
+			BufferedImage bufferedImage = ImageIO.read(
+				new ByteArrayInputStream(bytes));
+
+			int thumbnailMaxHeight = GetterUtil.getInteger(
+				PropsUtil.get(PropsUtil.SC_IMAGE_THUMBNAIL_MAX_HEIGHT));
+
+			int thumbnailMaxWidth = GetterUtil.getInteger(
+				PropsUtil.get(PropsUtil.SC_IMAGE_THUMBNAIL_MAX_WIDTH));
+
+			BufferedImage thumbnail = ImageUtil.scale(
+				bufferedImage, thumbnailMaxHeight, thumbnailMaxWidth);
+
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+			if (contentType.indexOf("gif") != -1) {
+				ImageUtil.encodeGIF(thumbnail, baos);
+			}
+			else if (contentType.indexOf("jpg") != -1 ||
+					 contentType.indexOf("jpeg") != -1) {
+
+				ImageIO.write(thumbnail, "jpeg", baos);
+			}
+			else if (contentType.indexOf("png") != -1) {
+				ImageIO.write(thumbnail, "png", baos);
+			}
+
+			ImageLocalUtil.put(smallImageId, baos.toByteArray());
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+
+	}
+
 	protected void validate(
-		String name, String type, String shortDescription, long[] licenseIds)
+		String name, String type, String shortDescription, long[] licenseIds,
+		Map images, boolean checkMainImage)
 		throws PortalException {
 
 		if (Validator.isNull(name)) {
@@ -434,6 +555,29 @@ public class SCProductEntryLocalServiceImpl
 		else if (licenseIds.length == 0) {
 			throw new ProductEntryLicenseException();
 		}
+		else if (checkMainImage &&
+			(images.get(SCProductEntryImpl.MAIN_IMAGE_NAME) == null)) {
+			throw new ProductEntryImagesException();
+		}
+
+		long imageMaxSize = GetterUtil.getLong(
+			PropsUtil.get(PropsUtil.SC_IMAGE_MAX_SIZE));
+
+		Iterator iterator = images.keySet().iterator();
+		while (iterator.hasNext()) {
+			String imageName = (String) iterator.next();
+			Object imageObj = images.get(imageName);
+			 if (imageObj instanceof Object[]) {
+				String contentType = (String) ((Object[]) imageObj)[0];
+				byte[] bytes = (byte[]) ((Object[]) imageObj)[1];
+
+				if ((imageMaxSize > 0) && (bytes.length > imageMaxSize)) {
+
+					throw new ImageSizeException();
+				}
+			}
+		}
+
 	}
 
 	private static Log _log =

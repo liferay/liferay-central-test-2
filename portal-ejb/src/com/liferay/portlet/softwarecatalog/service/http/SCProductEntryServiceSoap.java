@@ -36,50 +36,6 @@ import java.rmi.RemoteException;
  *
  */
 public class SCProductEntryServiceSoap {
-	public static com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap addProductEntry(
-		java.lang.String plid, java.lang.String name, java.lang.String type,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue =
-				SCProductEntryServiceUtil.addProductEntry(plid, name, type,
-					shortDescription, longDescription, pageURL, repoGroupId,
-					repoArtifactId, licenseIds, addCommunityPermissions,
-					addGuestPermissions);
-
-			return com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap addProductEntry(
-		java.lang.String plid, java.lang.String name, java.lang.String type,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue =
-				SCProductEntryServiceUtil.addProductEntry(plid, name, type,
-					shortDescription, longDescription, pageURL, repoGroupId,
-					repoArtifactId, licenseIds, communityPermissions,
-					guestPermissions);
-
-			return com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void deleteProductEntry(long productEntryId)
 		throws RemoteException {
 		try {
@@ -96,26 +52,6 @@ public class SCProductEntryServiceSoap {
 		try {
 			com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue =
 				SCProductEntryServiceUtil.getProductEntry(productEntryId);
-
-			return com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap updateProductEntry(
-		long productEntryId, java.lang.String name, java.lang.String type,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue =
-				SCProductEntryServiceUtil.updateProductEntry(productEntryId,
-					name, type, shortDescription, longDescription, pageURL,
-					repoGroupId, repoArtifactId, licenseIds);
 
 			return com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap.toSoapModel(returnValue);
 		}

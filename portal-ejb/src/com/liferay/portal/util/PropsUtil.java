@@ -892,6 +892,14 @@ public class PropsUtil {
 
 	public static final String SHOPPING_EMAIL_ORDER_SHIPPING_BODY = "shopping.email.order.shipping.body";
 
+	// Software Catalog Portlet
+
+	public static final String SC_IMAGE_MAX_SIZE = "sc.image.max.size";
+
+	public static final String SC_IMAGE_THUMBNAIL_MAX_HEIGHT = "sc.image.thumbnail.max.height";
+
+	public static final String SC_IMAGE_THUMBNAIL_MAX_WIDTH = "sc.image.thumbnail.max.width";
+
 	// Translator Portlet
 
 	public static final String TRANSLATOR_DEFAULT_LANGUAGES = "translator.default.languages";

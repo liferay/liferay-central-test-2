@@ -103,15 +103,17 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 
 	</td>
 </tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "page-url") %>:
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<a href="<%= productEntry.getPageURL() %>"><%= productEntry.getPageURL() %></a>
-	</td>
-</tr>
+<c:if test="<%=Validator.isNotNull(productEntry.getPageURL())%>">
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "page-url") %>:
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<a href="<%= productEntry.getPageURL() %>"><%= productEntry.getPageURL() %></a>
+		</td>
+	</tr>
+</c:if>
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "short-description") %>:
@@ -121,13 +123,43 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 		<%= productEntry.getShortDescription() %>
 	</td>
 </tr>
+<c:if test="<%=Validator.isNotNull(productEntry.getLongDescription())%>">
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "long-description") %>:
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<%= productEntry.getLongDescription() %>
+		</td>
+	</tr>
+</c:if>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "long-description") %>:
+		<%= LanguageUtil.get(pageContext, "screenshots") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<%= productEntry.getLongDescription() %>
+		<%
+		String imageName = SCProductEntryImpl.MAIN_IMAGE_NAME;
+		String imageId = productEntry.getImageId(imageName);
+		if (imageId != null) {
+			String imageURL = themeDisplay.getPathImage() + "/software_catalog?img_id=" + imageId;
+		%>
+			<a href="<%=imageURL + "&large=1"%>"><img src="<%=imageURL + "&small=1"%>" border="0"/>
+		<%
+		}
+		for (int i = 1; i < 4; i++) {
+			imageName = Integer.toString(i);
+			imageId = productEntry.getImageId(imageName);
+			if (imageId != null) {
+				String imageURL = themeDisplay.getPathImage() + "/software_catalog?img_id=" + imageId;
+		%>
+				<a href="<%=imageURL + "&large=1"%>"><img src="<%=imageURL + "&small=1"%>" border="0"/>
+		<%
+			}
+		}
+		%>
 	</td>
 </tr>
 
