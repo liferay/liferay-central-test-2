@@ -196,7 +196,7 @@
 			<arg value="classes/META-INF/ext-spring-professional.xml" />
 			<arg value="com.liferay.portal.kernel.bean.BeanLocatorUtil" />
 			<arg value="${project.dir}/ext-service/src" />
-			<arg value="${project.dir}/ext-web/docroot/html/js/service.js" />
+			<arg value="${project.dir}/ext-web/docroot/html/js/ext-service.js" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />
