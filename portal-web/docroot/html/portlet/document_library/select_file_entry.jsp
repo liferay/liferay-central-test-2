@@ -87,14 +87,14 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append("<img align=\"left\" border=\"0\" src=\"");
-	sb.append(themeDisplay.getPathThemeImage());
-	sb.append("/trees/folder.png\">");
-	sb.append(curFolder.getName());
+	sm.append("<img align=\"left\" border=\"0\" src=\"");
+	sm.append(themeDisplay.getPathThemeImage());
+	sm.append("/trees/folder.png\">");
+	sm.append(curFolder.getName());
 
-	row.addText(sb.toString(), rowURL);
+	row.addText(sm.toString(), rowURL);
 
 	// Statistics
 
@@ -152,39 +152,39 @@ for (int i = 0; i < results.size(); i++) {
 
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getPrimaryKey().toString(), i);
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("javascript: opener.");
-		sb.append(renderResponse.getNamespace());
-		sb.append("selectFileEntry('");
-		sb.append(fileEntry.getFolderId());
-		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(fileEntry.getName()));
-		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(fileEntry.getTitle()));
-		sb.append("'); window.close();");
+		sm.append("javascript: opener.");
+		sm.append(renderResponse.getNamespace());
+		sm.append("selectFileEntry('");
+		sm.append(fileEntry.getFolderId());
+		sm.append("', '");
+		sm.append(UnicodeFormatter.toString(fileEntry.getName()));
+		sm.append("', '");
+		sm.append(UnicodeFormatter.toString(fileEntry.getTitle()));
+		sm.append("'); window.close();");
 
-		String rowHREF = sb.toString();
+		String rowHREF = sm.toString();
 
 		// Title and description
 
-		sb = new StringBuffer();
+		sm = new StringMaker();
 
-		sb.append("<img align=\"left\" border=\"0\" src=\"");
-		sb.append(themeDisplay.getPathThemeImage());
-		sb.append("/document_library/");
-		sb.append(DLUtil.getFileExtension(fileEntry.getName()));
-		sb.append(".png\">");
-		sb.append(fileEntry.getTitle());
+		sm.append("<img align=\"left\" border=\"0\" src=\"");
+		sm.append(themeDisplay.getPathThemeImage());
+		sm.append("/document_library/");
+		sm.append(DLUtil.getFileExtension(fileEntry.getName()));
+		sm.append(".png\">");
+		sm.append(fileEntry.getTitle());
 
 		if (Validator.isNotNull(fileEntry.getDescription())) {
-			sb.append("<br>");
-			sb.append("<span style=\"font-size: xx-small;\">");
-			sb.append(fileEntry.getDescription());
-			sb.append("</span>");
+			sm.append("<br>");
+			sm.append("<span style=\"font-size: xx-small;\">");
+			sm.append(fileEntry.getDescription());
+			sm.append("</span>");
 		}
 
-		row.addText(sb.toString(), rowHREF);
+		row.addText(sm.toString(), rowHREF);
 
 		// Statistics
 

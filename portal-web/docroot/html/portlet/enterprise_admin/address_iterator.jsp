@@ -73,21 +73,21 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Street
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append(address.getStreet1());
+	sm.append(address.getStreet1());
 
 	if (Validator.isNotNull(address.getStreet2())) {
-		sb.append("<br>");
-		sb.append(address.getStreet2());
+		sm.append("<br>");
+		sm.append(address.getStreet2());
 	}
 
 	if (Validator.isNotNull(address.getStreet3())) {
-		sb.append("<br>");
-		sb.append(address.getStreet3());
+		sm.append("<br>");
+		sm.append(address.getStreet3());
 	}
 
-	row.addText(sb.toString());
+	row.addText(sm.toString());
 
 	// Other fields
 

@@ -310,22 +310,22 @@ else {
 
 				// Name and description
 
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
-				sb.append("<b>");
-				sb.append(curProductVersion.getVersion());
-				sb.append("</b>");
+				sm.append("<b>");
+				sm.append(curProductVersion.getVersion());
+				sm.append("</b>");
 
 				if (Validator.isNotNull(curProductVersion.getChangeLog())) {
-					sb.append("<br>");
-					sb.append("<span style=\"font-size: xx-small;\">");
-					sb.append(curProductVersion.getChangeLog());
-					sb.append("</span>");
+					sm.append("<br>");
+					sm.append("<span style=\"font-size: xx-small;\">");
+					sm.append(curProductVersion.getChangeLog());
+					sm.append("</span>");
 				}
 
-				sb.append("</a>");
+				sm.append("</a>");
 
-				row.addText(sb.toString());
+				row.addText(sm.toString());
 
 				row.addText(_buildFrameworkVersions(curProductVersion.getFrameworkVersions()));
 				row.addText("" + curProductVersion.getModifiedDate());

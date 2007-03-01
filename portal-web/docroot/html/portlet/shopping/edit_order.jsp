@@ -467,7 +467,7 @@ WindowState windowState = renderRequest.getWindowState();
 </c:if>
 
 <%
-StringBuffer itemIds = new StringBuffer();
+StringMaker itemIds = new StringMaker();
 
 SearchContainer searchContainer = new SearchContainer();
 
@@ -525,17 +525,17 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	// Description
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append(orderItem.getName());
+	sm.append(orderItem.getName());
 
 	if (fieldsArray.length > 0) {
-		sb.append(" (");
-		sb.append(StringUtil.replace(StringUtil.merge(fieldsArray, ", "), "=", ": "));
-		sb.append(")");
+		sm.append(" (");
+		sm.append(StringUtil.replace(StringUtil.merge(fieldsArray, ", "), "=", ": "));
+		sm.append(")");
 	}
 
-	row.addText(sb.toString(), rowURL);
+	row.addText(sm.toString(), rowURL);
 
 	// Quantity
 

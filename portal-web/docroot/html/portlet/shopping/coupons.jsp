@@ -104,18 +104,18 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 
 		// Name and description
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append(coupon.getName());
+		sm.append(coupon.getName());
 
 		if (Validator.isNotNull(coupon.getDescription())) {
-			sb.append("<br>");
-			sb.append("<span style=\"font-size: xx-small;\">");
-			sb.append(coupon.getDescription());
-			sb.append("</span>");
+			sm.append("<br>");
+			sm.append("<span style=\"font-size: xx-small;\">");
+			sm.append(coupon.getDescription());
+			sm.append("</span>");
 		}
 
-		row.addText(sb.toString(), rowURL);
+		row.addText(sm.toString(), rowURL);
 
 		// Start date
 

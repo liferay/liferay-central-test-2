@@ -88,57 +88,57 @@ portletURL.setParameter("folderId", folderId);
 
 			// Name and description
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append("<a href=\"");
-			sb.append(rowURL);
-			sb.append("\">");
-			sb.append("<img align=\"left\" border=\"0\" src=\"");
-			sb.append(themeDisplay.getPathThemeImage());
-			sb.append("/trees/folder.png\">");
-			sb.append("<b>");
-			sb.append(curFolder.getName());
-			sb.append("</b>");
+			sm.append("<a href=\"");
+			sm.append(rowURL);
+			sm.append("\">");
+			sm.append("<img align=\"left\" border=\"0\" src=\"");
+			sm.append(themeDisplay.getPathThemeImage());
+			sm.append("/trees/folder.png\">");
+			sm.append("<b>");
+			sm.append(curFolder.getName());
+			sm.append("</b>");
 
 			if (Validator.isNotNull(curFolder.getDescription())) {
-				sb.append("<br>");
-				sb.append("<span style=\"font-size: xx-small;\">");
-				sb.append(curFolder.getDescription());
-				sb.append("</span>");
+				sm.append("<br>");
+				sm.append("<span style=\"font-size: xx-small;\">");
+				sm.append(curFolder.getDescription());
+				sm.append("</span>");
 			}
 
-			sb.append("</a>");
+			sm.append("</a>");
 
 			List subfolders = IGFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), curFolder.getFolderId(), 0, 5);
 
 			if (subfolders.size() > 0) {
-				sb.append("<br>");
-				sb.append("<span style=\"font-size: xx-small; font-weight: bold;\"><u>");
-				sb.append(LanguageUtil.get(pageContext, "subfolders"));
-				sb.append("</u>: ");
+				sm.append("<br>");
+				sm.append("<span style=\"font-size: xx-small; font-weight: bold;\"><u>");
+				sm.append(LanguageUtil.get(pageContext, "subfolders"));
+				sm.append("</u>: ");
 
 				for (int j = 0; j < subfolders.size(); j++) {
 					IGFolder subfolder = (IGFolder)subfolders.get(j);
 
 					rowURL.setParameter("folderId", subfolder.getFolderId());
 
-					sb.append("<a href=\"");
-					sb.append(rowURL);
-					sb.append("\">");
-					sb.append(subfolder.getName());
-					sb.append("</a>");
+					sm.append("<a href=\"");
+					sm.append(rowURL);
+					sm.append("\">");
+					sm.append(subfolder.getName());
+					sm.append("</a>");
 
 					if ((j + 1) < subfolders.size()) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
 				rowURL.setParameter("folderId", curFolder.getFolderId());
 
-				sb.append("</span>");
+				sm.append("</span>");
 			}
 
-			row.addText(sb.toString());
+			row.addText(sm.toString());
 
 			// Statistics
 

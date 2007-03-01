@@ -235,17 +235,17 @@ portletURL.setParameter("name", name);
 
 				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getPrimaryKey().toString(), i);
 
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
-				sb.append(themeDisplay.getPathMain());
-				sb.append("/document_library/get_file?folderId=");
-				sb.append(folderId);
-				sb.append("&name=");
-				sb.append(Http.encodeURL(name));
-				sb.append("&version=");
-				sb.append(String.valueOf(fileVersion.getVersion()));
+				sm.append(themeDisplay.getPathMain());
+				sm.append("/document_library/get_file?folderId=");
+				sm.append(folderId);
+				sm.append("&name=");
+				sm.append(Http.encodeURL(name));
+				sm.append("&version=");
+				sm.append(String.valueOf(fileVersion.getVersion()));
 
-				String rowHREF = sb.toString();
+				String rowHREF = sm.toString();
 
 				// Statistics
 

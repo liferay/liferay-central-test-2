@@ -25,29 +25,29 @@
 <%@ include file="/html/taglib/ui/breadcrumb/init.jsp" %>
 
 <%
-StringBuffer sb = new StringBuffer();
+StringMaker sm = new StringMaker();
 
-_buildBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sb);
+_buildBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sm);
 %>
 
-<%= sb.toString() %>
+<%= sm.toString() %>
 
 <%!
-private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringBuffer sb) throws Exception {
+private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringMaker sm) throws Exception {
 	String layoutURL = _getBreadcrumbLayoutURL(selLayout, selLayoutParam, portletURL, themeDisplay);
 	String target = PortalUtil.getLayoutTarget(selLayout);
 
-	StringBuffer breadCrumbSB = new StringBuffer();
+	StringMaker breadCrumbSM = new StringMaker();
 
-	breadCrumbSB.append("<a href=\"");
-	breadCrumbSB.append(layoutURL);
-	breadCrumbSB.append("\" ");
-	breadCrumbSB.append(target);
-	breadCrumbSB.append(">");
+	breadCrumbSM.append("<a href=\"");
+	breadCrumbSM.append(layoutURL);
+	breadCrumbSM.append("\" ");
+	breadCrumbSM.append(target);
+	breadCrumbSM.append(">");
 
-	breadCrumbSB.append(selLayout.getName(themeDisplay.getLocale()));
+	breadCrumbSM.append(selLayout.getName(themeDisplay.getLocale()));
 
-	breadCrumbSB.append("</a>");
+	breadCrumbSM.append("</a>");
 
 	Layout layoutParent = null;
 	String layoutParentId = selLayout.getParentLayoutId();
@@ -55,13 +55,13 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 	if (!layoutParentId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
 		layoutParent = LayoutLocalServiceUtil.getLayout(layoutParentId, selLayout.getOwnerId());
 
-		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sb);
+		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sm);
 
-		sb.append(" &raquo; ");
-		sb.append(breadCrumbSB.toString());
+		sm.append(" &raquo; ");
+		sm.append(breadCrumbSM.toString());
 	}
 	else {
-		sb.append(breadCrumbSB.toString());
+		sm.append(breadCrumbSM.toString());
 	}
 }
 

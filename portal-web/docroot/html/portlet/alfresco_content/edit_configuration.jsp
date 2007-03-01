@@ -234,56 +234,56 @@ for (int i = 0; i < childNodes.length; i++) {
 
 	NamedValue[] nodeNamedValues = resultSetRow.getColumns();
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append("javascript: ");
+	sm.append("javascript: ");
 
 	String propContent = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_CONTENT);
 
 	if (propContent == null) {
-		sb.append("document.");
-		sb.append(renderResponse.getNamespace());
-		sb.append("fm1.");
-		sb.append(renderResponse.getNamespace());
-		sb.append(Constants.CMD);
-		sb.append(".value = ''; ");
+		sm.append("document.");
+		sm.append(renderResponse.getNamespace());
+		sm.append("fm1.");
+		sm.append(renderResponse.getNamespace());
+		sm.append(Constants.CMD);
+		sm.append(".value = ''; ");
 	}
 
-	sb.append("document.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("fm1.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("uuid.value = '");
-	sb.append(node.getId());
-	sb.append("'; ");
-	sb.append("submitForm(document.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("fm1);");
+	sm.append("document.");
+	sm.append(renderResponse.getNamespace());
+	sm.append("fm1.");
+	sm.append(renderResponse.getNamespace());
+	sm.append("uuid.value = '");
+	sm.append(node.getId());
+	sm.append("'; ");
+	sm.append("submitForm(document.");
+	sm.append(renderResponse.getNamespace());
+	sm.append("fm1);");
 
-	String rowHREF = sb.toString();
+	String rowHREF = sm.toString();
 
 	// Name
 
-	sb = new StringBuffer();
+	sm = new StringMaker();
 
-	sb.append("<img align=\"left\" border=\"0\" src=\"");
-	sb.append(themeDisplay.getPathThemeImage());
-	sb.append("/trees/");
+	sm.append("<img align=\"left\" border=\"0\" src=\"");
+	sm.append(themeDisplay.getPathThemeImage());
+	sm.append("/trees/");
 
 	if (propContent == null) {
-		sb.append("folder");
+		sm.append("folder");
 	}
 	else {
-		sb.append("page");
+		sm.append("page");
 	}
 
-	sb.append(".png\">");
+	sm.append(".png\">");
 
 	String nodeName = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
 
-	sb.append(nodeName);
+	sm.append(nodeName);
 
-	row.addText(sb.toString(), rowHREF);
+	row.addText(sm.toString(), rowHREF);
 
 	// Add result row
 

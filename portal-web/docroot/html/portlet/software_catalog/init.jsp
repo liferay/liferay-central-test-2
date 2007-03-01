@@ -65,19 +65,19 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 <%!
 public String _buildFrameworkVersions(List frameworkVersions) {
 	Iterator itr = frameworkVersions.iterator();
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 	while (itr.hasNext()) {
 		SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) itr.next();
 
-		sb.append("<a href='");
-		sb.append(frameworkVersion.getUrl());
-		sb.append("'>");
-		sb.append(frameworkVersion.getName());
-		sb.append("</a>");
+		sm.append("<a href='");
+		sm.append(frameworkVersion.getUrl());
+		sm.append("'>");
+		sm.append(frameworkVersion.getName());
+		sm.append("</a>");
 		if (itr.hasNext()) {
-			sb.append(", ");
+			sm.append(", ");
 		}
 	}
-	return sb.toString();
+	return sm.toString();
 }
 %>

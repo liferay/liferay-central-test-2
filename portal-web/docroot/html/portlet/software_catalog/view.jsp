@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portal.service.permission.PortalPermission" %>
 <%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
@@ -95,28 +94,28 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Name and short description
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			String imageId = productEntry.getImageId("0");
 			if (imageId != null) {
 				String imageURL = themeDisplay.getPathImage() + "/software_catalog?img_id=" + imageId + "&small=1";
-				sb.append("<img src='");
-				sb.append(imageURL);
-				sb.append("' align='left' style='margin-right: 10px'/>");
+				sm.append("<img src='");
+				sm.append(imageURL);
+				sm.append("' align='left' style='margin-right: 10px'/>");
 			}
 
-			sb.append("<b>");
-			sb.append(productEntry.getName());
-			sb.append("</b>");
+			sm.append("<b>");
+			sm.append(productEntry.getName());
+			sm.append("</b>");
 
 			if (Validator.isNotNull(productEntry.getShortDescription())) {
-				sb.append("<br>");
-				sb.append("<span style=\"font-size: xx-small;\">");
-				sb.append(productEntry.getShortDescription());
-				sb.append("</span>");
+				sm.append("<br>");
+				sm.append("<span style=\"font-size: xx-small;\">");
+				sm.append(productEntry.getShortDescription());
+				sm.append("</span>");
 			}
 
-			row.addText(sb.toString(), rowURL);
+			row.addText(sm.toString(), rowURL);
 
 			// Type
 
@@ -124,21 +123,21 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Licenses
 
-			sb = new StringBuffer();
+			sm = new StringMaker();
 
 			Iterator itr = productEntry.getLicenses().iterator();
 
 			while (itr.hasNext()) {
 				SCLicense license = (SCLicense) itr.next();
 
-				sb.append(license.getName());
+				sm.append(license.getName());
 
 				if (itr.hasNext()) {
-					sb.append(", ");
+					sm.append(", ");
 				}
 			}
 
-			row.addText(sb.toString(), rowURL);
+			row.addText(sm.toString(), rowURL);
 
 			// Modified date
 

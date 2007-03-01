@@ -81,17 +81,17 @@ double version = ParamUtil.getDouble(request, "version");
 			String rowHREF = null;
 
 			if (pageURL.equals("popUp")) {
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
-				sb.append(themeDisplay.getPathMain());
-				sb.append("/journal_articles/view_article_content?groupId=");
-				sb.append(article.getGroupId());
-				sb.append("&articleId=");
-				sb.append(article.getArticleId());
-				sb.append("&version=");
-				sb.append(article.getVersion());
+				sm.append(themeDisplay.getPathMain());
+				sm.append("/journal_articles/view_article_content?groupId=");
+				sm.append(article.getGroupId());
+				sm.append("&articleId=");
+				sm.append(article.getArticleId());
+				sm.append("&version=");
+				sm.append(article.getVersion());
 
-				rowHREF = sb.toString();
+				rowHREF = sm.toString();
 			}
 			else {
 				portletURL.setParameter("groupId", String.valueOf(article.getGroupId()));

@@ -178,15 +178,15 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(null, curArticle.getArticleId() + EditArticleAction.VERSION_SEPARATOR + curArticle.getVersion(), i);
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append("javascript: ");
-	sb.append(renderResponse.getNamespace());
-	sb.append("addArticle('");
-	sb.append(curArticle.getArticleId());
-	sb.append("', true);");
+	sm.append("javascript: ");
+	sm.append(renderResponse.getNamespace());
+	sm.append("addArticle('");
+	sm.append(curArticle.getArticleId());
+	sm.append("', true);");
 
-	String rowHREF = sb.toString();
+	String rowHREF = sm.toString();
 
 	// Article id
 

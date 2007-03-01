@@ -25,40 +25,40 @@
 <%@ include file="/html/taglib/ui/breadcrumb/init.jsp" %>
 
 <%
-StringBuffer sb = new StringBuffer();
+StringMaker sm = new StringMaker();
 
-_buildBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sb);
+_buildBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sm);
 %>
 
-<%= sb.toString() %>
+<%= sm.toString() %>
 
 <%!
-private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringBuffer sb) throws Exception {
+private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringMaker sm) throws Exception {
 	String layoutURL = _getBreadcrumbLayoutURL(selLayout, selLayoutParam, portletURL, themeDisplay);
 	String target = PortalUtil.getLayoutTarget(selLayout);
 	String layoutParentId = selLayout.getParentLayoutId();
 
-	StringBuffer breadCrumbSB = new StringBuffer();
+	StringMaker breadCrumbSM = new StringMaker();
 
 	if (selectedLayout) {
 		if (!layoutParentId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
-			breadCrumbSB.append("<br />");
-			breadCrumbSB.append("<br />");
+			breadCrumbSM.append("<br />");
+			breadCrumbSM.append("<br />");
 		}
 
-		breadCrumbSB.append("<div class=\"font-xx-large\" style=\"font-weight: bold;\">");
-		breadCrumbSB.append(selLayout.getName(themeDisplay.getLocale()));
-		breadCrumbSB.append("</div>");
-		breadCrumbSB.append("<br />");
+		breadCrumbSM.append("<div class=\"font-xx-large\" style=\"font-weight: bold;\">");
+		breadCrumbSM.append(selLayout.getName(themeDisplay.getLocale()));
+		breadCrumbSM.append("</div>");
+		breadCrumbSM.append("<br />");
 	}
 	else {
-		breadCrumbSB.append("<a href=\"");
-		breadCrumbSB.append(layoutURL);
-		breadCrumbSB.append("\" ");
-		breadCrumbSB.append(target);
-		breadCrumbSB.append(">");
-		breadCrumbSB.append(selLayout.getName(themeDisplay.getLocale()));
-		breadCrumbSB.append("</a>");
+		breadCrumbSM.append("<a href=\"");
+		breadCrumbSM.append(layoutURL);
+		breadCrumbSM.append("\" ");
+		breadCrumbSM.append(target);
+		breadCrumbSM.append(">");
+		breadCrumbSM.append(selLayout.getName(themeDisplay.getLocale()));
+		breadCrumbSM.append("</a>");
 	}
 
 	Layout layoutParent = null;
@@ -66,13 +66,13 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 	if (!layoutParentId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
 		layoutParent = LayoutLocalServiceUtil.getLayout(layoutParentId, selLayout.getOwnerId());
 
-		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sb);
+		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sm);
 
-		sb.append(" &raquo; ");
-		sb.append(breadCrumbSB.toString());
+		sm.append(" &raquo; ");
+		sm.append(breadCrumbSM.toString());
 	}
 	else {
-		sb.append(breadCrumbSB.toString());
+		sm.append(breadCrumbSM.toString());
 	}
 }
 

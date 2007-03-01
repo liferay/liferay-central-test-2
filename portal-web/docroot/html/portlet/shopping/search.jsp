@@ -85,45 +85,45 @@ for (int i = 0; i < results.size(); i++) {
 
 	// SKU and small image
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
 	if (item.isSmallImage()) {
-		sb.append("<br>");
-		sb.append("<img alt=\"");
-		sb.append(item.getSku());
-		sb.append("\" border=\"0\" src=\"");
+		sm.append("<br>");
+		sm.append("<img alt=\"");
+		sm.append(item.getSku());
+		sm.append("\" border=\"0\" src=\"");
 
 		if (Validator.isNotNull(item.getSmallImageURL())) {
-			sb.append(item.getSmallImageURL());
+			sm.append(item.getSmallImageURL());
 		}
 		else {
-			sb.append(themeDisplay.getPathImage());
-			sb.append("/shopping/item?img_id=");
-			sb.append(item.getItemId());
-			sb.append("&small=1");
+			sm.append(themeDisplay.getPathImage());
+			sm.append("/shopping/item?img_id=");
+			sm.append(item.getItemId());
+			sm.append("&small=1");
 		}
 
-		sb.append("\">");
+		sm.append("\">");
 	}
 	else {
-		sb.append("<span style=\"font-size: xx-small;\">");
-		sb.append(item.getSku());
-		sb.append("</span>");
+		sm.append("<span style=\"font-size: xx-small;\">");
+		sm.append(item.getSku());
+		sm.append("</span>");
 	}
 
-	row.addText(sb.toString(), rowURL);
+	row.addText(sm.toString(), rowURL);
 
 	// Description
 
-	sb = new StringBuffer();
+	sm = new StringMaker();
 
-	sb.append(item.getName());
+	sm.append(item.getName());
 
-	sb.append("<span style=\"font-size: xx-small;\">");
+	sm.append("<span style=\"font-size: xx-small;\">");
 
 	if (Validator.isNotNull(item.getDescription())) {
-		sb.append("<br>");
-		sb.append(item.getDescription());
+		sm.append("<br>");
+		sm.append(item.getDescription());
 	}
 
 	Properties props = new OrderedProperties();
@@ -136,15 +136,15 @@ for (int i = 0; i < results.size(); i++) {
 		String propsKey = (String)enu.nextElement();
 		String propsValue = props.getProperty(propsKey, StringPool.BLANK);
 
-		sb.append("<br>");
-		sb.append(propsKey);
-		sb.append(": ");
-		sb.append(propsValue);
+		sm.append("<br>");
+		sm.append(propsKey);
+		sm.append(": ");
+		sm.append(propsValue);
 	}
 
-	sb.append("</span>");
+	sm.append("</span>");
 
-	row.addText(sb.toString(), rowURL);
+	row.addText(sm.toString(), rowURL);
 
 	// Minimum quantity
 

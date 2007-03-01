@@ -335,7 +335,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			else if (hasGroupScope) {
 				row.addText(LanguageUtil.get(pageContext, "community"));
 
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
 				LinkedHashMap groupParams = new LinkedHashMap();
 
@@ -354,14 +354,14 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 				for (int j = 0; j < groups.size(); j++) {
 					Group group = (Group)groups.get(j);
 
-					sb.append(group.getName());
+					sm.append(group.getName());
 
 					if ((j + 1) != groups.size()) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				row.addText(sb.toString());
+				row.addText(sm.toString());
 			}
 
 			// Action

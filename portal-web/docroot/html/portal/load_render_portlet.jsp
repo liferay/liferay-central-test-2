@@ -48,7 +48,7 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 		<%
 		String doAsUserId = themeDisplay.getDoAsUserId();
 
-		StringBuffer url = new StringBuffer();
+		StringMaker url = new StringMaker();
 
 		url.append(themeDisplay.getPathMain());
 		url.append("/portal/render_portlet");

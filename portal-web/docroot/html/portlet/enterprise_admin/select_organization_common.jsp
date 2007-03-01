@@ -111,26 +111,26 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(organization, organization.getPrimaryKey().toString(), i);
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append("javascript: opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("select");
+	sm.append("javascript: opener.");
+	sm.append(renderResponse.getNamespace());
+	sm.append("select");
 
 	if (rootOrganization) {
-		sb.append("Organization");
+		sm.append("Organization");
 	}
 	else {
-		sb.append("Location");
+		sm.append("Location");
 	}
 
-	sb.append("('");
-	sb.append(organization.getOrganizationId());
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(organization.getName()));
-	sb.append("'); window.close();");
+	sm.append("('");
+	sm.append(organization.getOrganizationId());
+	sm.append("', '");
+	sm.append(UnicodeFormatter.toString(organization.getName()));
+	sm.append("'); window.close();");
 
-	String rowHREF = sb.toString();
+	String rowHREF = sm.toString();
 
 	// Name
 

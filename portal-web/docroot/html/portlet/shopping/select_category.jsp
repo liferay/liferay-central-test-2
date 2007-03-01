@@ -80,18 +80,18 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name and description
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append(curCategory.getName());
+	sm.append(curCategory.getName());
 
 	if (Validator.isNotNull(curCategory.getDescription())) {
-		sb.append("<br>");
-		sb.append("<span style=\"font-size: xx-small;\">");
-		sb.append(curCategory.getDescription());
-		sb.append("</span>");
+		sm.append("<br>");
+		sm.append("<span style=\"font-size: xx-small;\">");
+		sm.append(curCategory.getDescription());
+		sm.append("</span>");
 	}
 
-	row.addText(sb.toString(), rowURL);
+	row.addText(sm.toString(), rowURL);
 
 	// Statistics
 
@@ -109,17 +109,17 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Action
 
-	sb = new StringBuffer();
+	sm = new StringMaker();
 
-	sb.append("opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectCategory('");
-	sb.append(curCategory.getCategoryId());
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(curCategory.getName()));
-	sb.append("'); window.close();");
+	sm.append("opener.");
+	sm.append(renderResponse.getNamespace());
+	sm.append("selectCategory('");
+	sm.append(curCategory.getCategoryId());
+	sm.append("', '");
+	sm.append(UnicodeFormatter.toString(curCategory.getName()));
+	sm.append("'); window.close();");
 
-	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
+	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sm.toString());
 
 	// Add result row
 

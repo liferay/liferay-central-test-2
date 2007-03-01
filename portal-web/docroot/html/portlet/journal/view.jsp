@@ -262,18 +262,18 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Name and description
 
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
-				sb.append(structure.getName());
+				sm.append(structure.getName());
 
 				if (Validator.isNotNull(structure.getDescription())) {
-					sb.append("<br>");
-					sb.append("<span style=\"font-size: xx-small;\">");
-					sb.append(structure.getDescription());
-					sb.append("</span>");
+					sm.append("<br>");
+					sm.append("<span style=\"font-size: xx-small;\">");
+					sm.append(structure.getDescription());
+					sm.append("</span>");
 				}
 
-				row.addText(sb.toString(), rowURL);
+				row.addText(sm.toString(), rowURL);
 
 				// Action
 

@@ -67,7 +67,7 @@ if (!PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)) {
 
 // Breadcrumbs
 
-StringBuffer breadcrumbs = new StringBuffer();
+StringMaker breadcrumbs = new StringMaker();
 breadcrumbs.append(LanguageUtil.get(pageContext, "repositories") + " &raquo; ");
 
 breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, pluginType+"-packages") + "</a>");

@@ -66,31 +66,31 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name and description
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
 	String title = PortalUtil.getPortletTitle(portlet, application, locale);
 	String displayName = portlet.getDisplayName();
 
-	sb.append("<a href='");
-	sb.append(rowURL.toString());
-	sb.append("'>");
-	sb.append("<b>");
-	sb.append(title);
-	sb.append("</b>");
-	sb.append("</a>");
+	sm.append("<a href='");
+	sm.append(rowURL.toString());
+	sm.append("'>");
+	sm.append("<b>");
+	sm.append(title);
+	sm.append("</b>");
+	sm.append("</a>");
 
-	sb.append("<br>");
-	sb.append("<span style=\"font-size: xx-small;\">");
-	sb.append(LanguageUtil.get(pageContext, "package"));
-	sb.append(": ");
-	sb.append((portlet.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(portlet.getPluginPackage().getName() + " (" + portlet.getPluginPackage().getModuleId() + ")"));
+	sm.append("<br>");
+	sm.append("<span style=\"font-size: xx-small;\">");
+	sm.append(LanguageUtil.get(pageContext, "package"));
+	sm.append(": ");
+	sm.append((portlet.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(portlet.getPluginPackage().getName() + " (" + portlet.getPluginPackage().getModuleId() + ")"));
 	if (Validator.isNotNull(displayName) && !title.equals(displayName)) {
-		sb.append("<br>");
-		sb.append(portlet.getDisplayName());
+		sm.append("<br>");
+		sm.append(portlet.getDisplayName());
 	}
-	sb.append("</span>");
+	sm.append("</span>");
 
-	row.addText(sb.toString(), rowURL);
+	row.addText(sm.toString(), rowURL);
 
 	// Active
 

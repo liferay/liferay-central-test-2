@@ -123,18 +123,18 @@ portletURL.setParameter("categoryId", categoryId);
 
 			// Name and description
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append(curCategory.getName());
+			sm.append(curCategory.getName());
 
 			if (Validator.isNotNull(curCategory.getDescription())) {
-				sb.append("<br>");
-				sb.append("<span style=\"font-size: xx-small;\">");
-				sb.append(curCategory.getDescription());
-				sb.append("</span>");
+				sm.append("<br>");
+				sm.append("<span style=\"font-size: xx-small;\">");
+				sm.append(curCategory.getDescription());
+				sm.append("</span>");
 			}
 
-			row.addText(sb.toString(), rowURL);
+			row.addText(sm.toString(), rowURL);
 
 			// Statistics
 

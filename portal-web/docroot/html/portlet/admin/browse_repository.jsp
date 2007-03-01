@@ -168,29 +168,29 @@ try {
 
 		// Name and short description
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("<a href='");
-		sb.append(rowURL.toString());
-		sb.append("'>");
-		sb.append("<b>");
-		sb.append(pluginPackageName);
-		sb.append("</b> ");
-		sb.append(pluginPackageVersion);
-		sb.append("</a>");
+		sm.append("<a href='");
+		sm.append(rowURL.toString());
+		sm.append("'>");
+		sm.append("<b>");
+		sm.append(pluginPackageName);
+		sm.append("</b> ");
+		sm.append(pluginPackageVersion);
+		sm.append("</a>");
 
 		if (Validator.isNotNull(pluginPackageShortDescription)) {
-			sb.append("<br>");
-			sb.append("<span style=\"font-size: xx-small;\">");
-			sb.append(LanguageUtil.get(pageContext, "package-id"));
-			sb.append(": ");
-			sb.append(pluginPackageModuleId);
-			sb.append("<br>");
-			sb.append(pluginPackageShortDescription);
-			sb.append("</span>");
+			sm.append("<br>");
+			sm.append("<span style=\"font-size: xx-small;\">");
+			sm.append(LanguageUtil.get(pageContext, "package-id"));
+			sm.append(": ");
+			sm.append(pluginPackageModuleId);
+			sm.append("<br>");
+			sm.append(pluginPackageShortDescription);
+			sm.append("</span>");
 		}
 
-		row.addText(sb.toString());
+		row.addText(sm.toString());
 
 		// Tags
 

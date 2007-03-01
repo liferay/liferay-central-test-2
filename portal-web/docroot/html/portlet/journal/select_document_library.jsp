@@ -89,14 +89,14 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append("<img align=\"left\" border=\"0\" src=\"");
-	sb.append(themeDisplay.getPathThemeImage());
-	sb.append("/trees/folder.png\">");
-	sb.append(curFolder.getName());
+	sm.append("<img align=\"left\" border=\"0\" src=\"");
+	sm.append(themeDisplay.getPathThemeImage());
+	sm.append("/trees/folder.png\">");
+	sm.append(curFolder.getName());
 
-	row.addText(sb.toString(), rowURL);
+	row.addText(sm.toString(), rowURL);
 
 	// Statistics
 
@@ -153,28 +153,28 @@ for (int i = 0; i < results.size(); i++) {
 
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getPrimaryKey().toString(), i);
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append(themeDisplay.getPathMain());
-		sb.append("/document_library/get_file?folderId=");
-		sb.append(folder.getFolderId());
-		sb.append("&name=");
-		sb.append(Http.encodeURL(fileEntry.getName()));
+		sm.append(themeDisplay.getPathMain());
+		sm.append("/document_library/get_file?folderId=");
+		sm.append(folder.getFolderId());
+		sm.append("&name=");
+		sm.append(Http.encodeURL(fileEntry.getName()));
 
-		String rowHREF = sb.toString();
+		String rowHREF = sm.toString();
 
 		// Title
 
-		sb = new StringBuffer();
+		sm = new StringMaker();
 
-		sb.append("<img align=\"left\" border=\"0\" src=\"");
-		sb.append(themeDisplay.getPathThemeImage());
-		sb.append("/document_library/");
-		sb.append(DLUtil.getFileExtension(fileEntry.getName()));
-		sb.append(".png\">");
-		sb.append(fileEntry.getTitle());
+		sm.append("<img align=\"left\" border=\"0\" src=\"");
+		sm.append(themeDisplay.getPathThemeImage());
+		sm.append("/document_library/");
+		sm.append(DLUtil.getFileExtension(fileEntry.getName()));
+		sm.append(".png\">");
+		sm.append(fileEntry.getTitle());
 
-		row.addText(sb.toString(), rowHREF);
+		row.addText(sm.toString(), rowHREF);
 
 		// Statistics
 
@@ -189,18 +189,18 @@ for (int i = 0; i < results.size(); i++) {
 
 		// Action
 
-		sb = new StringBuffer();
+		sm = new StringMaker();
 
-		sb.append("opener.");
-		sb.append(renderResponse.getNamespace());
-		sb.append("selectDocumentLibrary('");
-		sb.append("@main_path@/document_library/get_file?folderId=");
-		sb.append(fileEntry.getFolderId());
-		sb.append("&name=");
-		sb.append(Http.encodeURL(fileEntry.getName()));
-		sb.append("'); window.close();");
+		sm.append("opener.");
+		sm.append(renderResponse.getNamespace());
+		sm.append("selectDocumentLibrary('");
+		sm.append("@main_path@/document_library/get_file?folderId=");
+		sm.append(fileEntry.getFolderId());
+		sm.append("&name=");
+		sm.append(Http.encodeURL(fileEntry.getName()));
+		sm.append("'); window.close();");
 
-		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
+		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sm.toString());
 
 		// Add result row
 

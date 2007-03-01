@@ -332,15 +332,15 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 				ResultRow row = new ResultRow(new Object[] {toFileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getPrimaryKey().toString(), i);
 
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
-				sb.append(themeDisplay.getPathMain());
-				sb.append("/document_library/get_file?fileShortcutId=");
-				sb.append(fileShortcutId);
-				sb.append("&version=");
-				sb.append(String.valueOf(fileVersion.getVersion()));
+				sm.append(themeDisplay.getPathMain());
+				sm.append("/document_library/get_file?fileShortcutId=");
+				sm.append(fileShortcutId);
+				sm.append("&version=");
+				sm.append(String.valueOf(fileVersion.getVersion()));
 
-				String rowHREF = sb.toString();
+				String rowHREF = sm.toString();
 
 				// Statistics
 

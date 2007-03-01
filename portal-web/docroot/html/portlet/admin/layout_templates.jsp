@@ -65,27 +65,28 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name and Thumbnail
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append("<a href='");
-	sb.append(rowURL.toString());
-	sb.append("'>");
-	sb.append("<img src='");
-	sb.append(layoutTemplate.getContextPath());
-	sb.append(layoutTemplate.getThumbnailPath());
-	sb.append("/thumbnail.gif");
-	sb.append("' width='100' align='left' style='margin-right: 10px'/>");
-	sb.append("<b>");
-	sb.append(layoutTemplate.getName());
-	sb.append("</b>");
-	sb.append("</a>");
-	sb.append("<br>");
-	sb.append("<span style=\"font-size: xx-small;\">");
-	sb.append(LanguageUtil.get(pageContext, "package"));
-	sb.append(": ");
-	sb.append((layoutTemplate.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(layoutTemplate.getPluginPackage().getName() + " (" + layoutTemplate.getPluginPackage().getModuleId() + ")"));
-	sb.append("</span>");
-	row.addText(sb.toString());
+	sm.append("<a href='");
+	sm.append(rowURL.toString());
+	sm.append("'>");
+	sm.append("<img src='");
+	sm.append(layoutTemplate.getContextPath());
+	sm.append(layoutTemplate.getThumbnailPath());
+	sm.append("/thumbnail.gif");
+	sm.append("' width='100' align='left' style='margin-right: 10px'/>");
+	sm.append("<b>");
+	sm.append(layoutTemplate.getName());
+	sm.append("</b>");
+	sm.append("</a>");
+	sm.append("<br>");
+	sm.append("<span style=\"font-size: xx-small;\">");
+	sm.append(LanguageUtil.get(pageContext, "package"));
+	sm.append(": ");
+	sm.append((layoutTemplate.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(layoutTemplate.getPluginPackage().getName() + " (" + layoutTemplate.getPluginPackage().getModuleId() + ")"));
+	sm.append("</span>");
+
+	row.addText(sm.toString());
 
 	// Active
 

@@ -156,16 +156,16 @@ for (int i = 0; i < results.size(); i++) {
 
 		// Action
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("opener.");
-		sb.append(renderResponse.getNamespace());
-		sb.append("selectImageGallery('");
-		sb.append("@image_path@/image_gallery?img_id=");
-		sb.append(image.getImageId());
-		sb.append("'); window.close();");
+		sm.append("opener.");
+		sm.append(renderResponse.getNamespace());
+		sm.append("selectImageGallery('");
+		sm.append("@image_path@/image_gallery?img_id=");
+		sm.append(image.getImageId());
+		sm.append("'); window.close();");
 
-		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
+		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sm.toString());
 
 		// Add result row
 

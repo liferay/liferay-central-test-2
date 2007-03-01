@@ -68,17 +68,17 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(structure, structure.getPrimaryKey().toString(), i);
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append("javascript: opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectStructure('");
-	sb.append(structure.getStructureId());
-	sb.append("', '");
-	sb.append(structure.getName());
-	sb.append("'); window.close();");
+	sm.append("javascript: opener.");
+	sm.append(renderResponse.getNamespace());
+	sm.append("selectStructure('");
+	sm.append(structure.getStructureId());
+	sm.append("', '");
+	sm.append(structure.getName());
+	sm.append("'); window.close();");
 
-	String rowHREF = sb.toString();
+	String rowHREF = sm.toString();
 
 	// Structure id
 
@@ -86,18 +86,18 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name and description
 
-	sb = new StringBuffer();
+	sm = new StringMaker();
 
-	sb.append(structure.getName());
+	sm.append(structure.getName());
 
 	if (Validator.isNotNull(structure.getDescription())) {
-		sb.append("<br>");
-		sb.append("<span style=\"font-size: xx-small;\">");
-		sb.append(structure.getDescription());
-		sb.append("</span>");
+		sm.append("<br>");
+		sm.append("<span style=\"font-size: xx-small;\">");
+		sm.append(structure.getDescription());
+		sm.append("</span>");
 	}
 
-	row.addText(sb.toString(), rowHREF);
+	row.addText(sm.toString(), rowHREF);
 
 	// Add result row
 

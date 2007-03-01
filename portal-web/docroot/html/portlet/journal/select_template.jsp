@@ -68,17 +68,17 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(template, template.getPrimaryKey().toString(), i);
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append("javascript: opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectTemplate('");
-	sb.append(template.getStructureId());
-	sb.append("', '");
-	sb.append(template.getTemplateId());
-	sb.append("'); window.close();");
+	sm.append("javascript: opener.");
+	sm.append(renderResponse.getNamespace());
+	sm.append("selectTemplate('");
+	sm.append(template.getStructureId());
+	sm.append("', '");
+	sm.append(template.getTemplateId());
+	sm.append("'); window.close();");
 
-	String rowHREF = sb.toString();
+	String rowHREF = sm.toString();
 
 	row.setParameter("rowHREF", rowHREF);
 

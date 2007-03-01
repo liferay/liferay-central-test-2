@@ -56,18 +56,18 @@ JournalArticle article = (JournalArticle)row.getObject();
 <c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.VIEW) %>">
 
 	<%
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append(themeDisplay.getPathMain());
-	sb.append("/journal/view_article_content?groupId=");
-	sb.append(article.getGroupId());
-	sb.append("&articleId=");
-	sb.append(article.getArticleId());
-	sb.append("&version=");
-	sb.append(article.getVersion());
+	sm.append(themeDisplay.getPathMain());
+	sm.append("/journal/view_article_content?groupId=");
+	sm.append(article.getGroupId());
+	sm.append("&articleId=");
+	sm.append(article.getArticleId());
+	sm.append("&version=");
+	sm.append(article.getVersion());
 	%>
 
-	<liferay-ui:icon image="preview" url="<%= sb.toString() %>" target="_blank" />
+	<liferay-ui:icon image="preview" url="<%= sm.toString() %>" target="_blank" />
 </c:if>
 
 <c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">

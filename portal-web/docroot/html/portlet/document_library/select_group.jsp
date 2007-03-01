@@ -67,17 +67,17 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(group, String.valueOf(group.getPrimaryKey()), i);
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	sb.append("javascript: opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectGroup('");
-	sb.append(group.getGroupId());
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(group.getName()));
-	sb.append("'); window.close();");
+	sm.append("javascript: opener.");
+	sm.append(renderResponse.getNamespace());
+	sm.append("selectGroup('");
+	sm.append(group.getGroupId());
+	sm.append("', '");
+	sm.append(UnicodeFormatter.toString(group.getName()));
+	sm.append("'); window.close();");
 
-	String rowHREF = sb.toString();
+	String rowHREF = sm.toString();
 
 	// Name
 

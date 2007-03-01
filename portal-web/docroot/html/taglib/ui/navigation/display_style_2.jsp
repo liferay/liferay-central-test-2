@@ -60,19 +60,19 @@ if (layoutFamilySet.size() >= depth) {
 
 	long groupId = depthLevelLayout.getGroupId();
 
-	StringBuffer sb = new StringBuffer();
+	StringMaker sm = new StringMaker();
 
-	_buildNavigation(depthLevelLayout, layout, layoutFamilySet, themeDisplay, 1, bulletStyle, showTitle, sb);
+	_buildNavigation(depthLevelLayout, layout, layoutFamilySet, themeDisplay, 1, bulletStyle, showTitle, sm);
 %>
 
-	<%= sb.toString() %>
+	<%= sm.toString() %>
 
 <%
 }
 %>
 
 <%!
-private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilySet, ThemeDisplay themeDisplay, int layoutLevel, int bulletStyle, boolean showTitle, StringBuffer sb) throws Exception {
+private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilySet, ThemeDisplay themeDisplay, int layoutLevel, int bulletStyle, boolean showTitle, StringMaker sm) throws Exception {
 	List layoutChildren = layout.getChildren();
 
 	if (layoutChildren.size() > 0) {
@@ -83,35 +83,35 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 			if (showTitle) {
 				PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-				sb.append("<script type='text/javascript'>");
-				sb.append(portletDisplay.getNamespace() + "updateTitle('");
-				sb.append("<a style=\"color: ");
-				sb.append(themeDisplay.getColorScheme().getPortletTitleText());
-				sb.append(";\" href=\"");
+				sm.append("<script type='text/javascript'>");
+				sm.append(portletDisplay.getNamespace() + "updateTitle('");
+				sm.append("<a style=\"color: ");
+				sm.append(themeDisplay.getColorScheme().getPortletTitleText());
+				sm.append(";\" href=\"");
 			}
 			else {
-				sb.append("<h3>");
-				sb.append("<a href=\"");
+				sm.append("<h3>");
+				sm.append("<a href=\"");
 			}
 
-			sb.append(layoutURL);
-			sb.append("\" ");
-			sb.append(target);
-			sb.append("> ");
-			sb.append(layout.getName(themeDisplay.getLocale()));
-			sb.append("</a>");
+			sm.append(layoutURL);
+			sm.append("\" ");
+			sm.append(target);
+			sm.append("> ");
+			sm.append(layout.getName(themeDisplay.getLocale()));
+			sm.append("</a>");
 
 			if (!showTitle) {
-				sb.append("</h3>");
+				sm.append("</h3>");
 			}
 			else {
-				sb.append("');");
-				sb.append("</script>");
+				sm.append("');");
+				sm.append("</script>");
 			}
 		}
 
 		if (bulletStyle == 1) {
-			sb.append("<ul>");
+			sm.append("<ul>");
 
 			for (int i = 0; i < layoutChildren.size(); i++) {
 				Layout layoutChild = (Layout)layoutChildren.get(i);
@@ -120,30 +120,30 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 					String layoutURL = PortalUtil.getLayoutURL(layoutChild, themeDisplay);
 					String target = PortalUtil.getLayoutTarget(layoutChild);
 
-					sb.append("<li>");
-					sb.append("<a href=\"");
-					sb.append(layoutURL);
-					sb.append("\" ");
-					sb.append(target);
-					sb.append("> ");
-					sb.append(layoutChild.getName(themeDisplay.getLocale()));
-					sb.append("</a>");
-					sb.append("</li>");
+					sm.append("<li>");
+					sm.append("<a href=\"");
+					sm.append(layoutURL);
+					sm.append("\" ");
+					sm.append(target);
+					sm.append("> ");
+					sm.append(layoutChild.getName(themeDisplay.getLocale()));
+					sm.append("</a>");
+					sm.append("</li>");
 
 					if (layoutFamilySet.contains(layoutChild)) {
-						_buildNavigation(layoutChild, selLayout, layoutFamilySet, themeDisplay, layoutLevel + 1, bulletStyle, showTitle, sb);
+						_buildNavigation(layoutChild, selLayout, layoutFamilySet, themeDisplay, layoutLevel + 1, bulletStyle, showTitle, sm);
 					}
 				}
 			}
 
-			sb.append("</ul>");
+			sm.append("</ul>");
 		}
 		else {
 			if (layoutLevel == 1) {
-				sb.append("<div style=\"margin-left: 5px;\">");
+				sm.append("<div style=\"margin-left: 5px;\">");
 			}
 			else {
-				sb.append("<div style=\"margin-left: 10px;\">");
+				sm.append("<div style=\"margin-left: 10px;\">");
 			}
 
 			for (int i = 0; i < layoutChildren.size(); i++) {
@@ -157,61 +157,61 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 
 					if (layoutLevel == 1) {
 						if (i != 0) {
-							sb.append("<div class=\"alpha-separator\"></div>");
+							sm.append("<div class=\"alpha-separator\"></div>");
 						}
 
-						sb.append("<div style=\"padding: 2px;\">");
+						sm.append("<div style=\"padding: 2px;\">");
 					}
 					else {
-						sb.append("<div style=\"padding: 2px;\" class=\"font-small\">");
+						sm.append("<div style=\"padding: 2px;\" class=\"font-small\">");
 					}
 
 					if (layoutLevel == 2) {
-						sb.append(" &raquo; ");
+						sm.append(" &raquo; ");
 					}
 					else if (layoutLevel >= 3) {
-						sb.append(" &#9642; ");
+						sm.append(" &#9642; ");
 					}
 
 					if (layoutFamilySet.contains(layoutChild)) {
-						sb.append("<b>");
+						sm.append("<b>");
 					}
 
-					sb.append("<a href=\"");
-					sb.append(layoutURL);
-					sb.append("\" ");
+					sm.append("<a href=\"");
+					sm.append(layoutURL);
+					sm.append("\" ");
 
 					if (layoutLevel != 1) {
-						sb.append("style=\"color: #606060;\" ");
+						sm.append("style=\"color: #606060;\" ");
 					}
 
-					sb.append(target);
-					sb.append(">");
-					sb.append(layoutName);
-					sb.append("</a>");
+					sm.append(target);
+					sm.append(">");
+					sm.append(layoutName);
+					sm.append("</a>");
 
 					if (layoutFamilySet.contains(layoutChild)) {
-						sb.append("</b>");
+						sm.append("</b>");
 					}
 
-					sb.append("</div>");
+					sm.append("</div>");
 
 					if (layoutLevel == 1) {
 						if (i == layoutChildren.size() - 1) {
-							sb.append("<div class=\"alpha-separator\"></div>");
+							sm.append("<div class=\"alpha-separator\"></div>");
 						}
 						else if (layoutFamilySet.contains(layoutChild) && layoutChild.getChildren().size() > 0) {
-							sb.append("<div class=\"alpha-separator\"></div>");
+							sm.append("<div class=\"alpha-separator\"></div>");
 						}
 					}
 
 					if (layoutFamilySet.contains(layoutChild)) {
-						_buildNavigation(layoutChild, selLayout, layoutFamilySet, themeDisplay, layoutLevel + 1, bulletStyle, showTitle, sb);
+						_buildNavigation(layoutChild, selLayout, layoutFamilySet, themeDisplay, layoutLevel + 1, bulletStyle, showTitle, sm);
 					}
 				}
 			}
 
-			sb.append("</div>");
+			sm.append("</div>");
 		}
 	}
 }

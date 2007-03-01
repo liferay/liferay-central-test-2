@@ -328,22 +328,22 @@ PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(requ
 	String freeformStyles = StringPool.BLANK;
 
 	if (themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax()) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
 
-		sb.append("style=\"position: absolute; ");
-		sb.append("width: ");
-		sb.append(GetterUtil.getString(freeformStyleProps.getProperty("width"), "400px"));
-		sb.append("; ");
-		sb.append("top: ");
-		sb.append(GetterUtil.getString(freeformStyleProps.getProperty("top"), "0"));
-		sb.append("; ");
-		sb.append("left: ");
-		sb.append(GetterUtil.getString(freeformStyleProps.getProperty("left"), "0"));
-		sb.append(";\"");
+		sm.append("style=\"position: absolute; ");
+		sm.append("width: ");
+		sm.append(GetterUtil.getString(freeformStyleProps.getProperty("width"), "400px"));
+		sm.append("; ");
+		sm.append("top: ");
+		sm.append(GetterUtil.getString(freeformStyleProps.getProperty("top"), "0"));
+		sm.append("; ");
+		sm.append("left: ");
+		sm.append(GetterUtil.getString(freeformStyleProps.getProperty("left"), "0"));
+		sm.append(";\"");
 
-		freeformStyles = sb.toString();
+		freeformStyles = sm.toString();
 	}
 	%>
 

@@ -36,7 +36,8 @@ String elType = el.attributeValue("type", StringPool.BLANK);
 String elContent = StringPool.BLANK;
 String elLanguageId = StringPool.BLANK;
 
-StringBuffer elPath = new StringBuffer();
+StringMaker elPath = new StringMaker();
+
 elPath.append(elName);
 
 Element elParent = (Element)el.getParent();

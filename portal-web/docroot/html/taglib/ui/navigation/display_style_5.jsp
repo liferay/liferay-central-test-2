@@ -30,13 +30,13 @@ int displayDepth = 0;
 
 List rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getOwnerId(), rootLayoutId);
 
-StringBuffer sb = new StringBuffer();
+StringMaker sm = new StringMaker();
 
-_buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sb);
+_buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sm);
 %>
 
 <div class="portlet-nav-map">
-	<%= sb.toString() %>
+	<%= sm.toString() %>
 </div>
 
 <script type="text/javascript">
@@ -50,7 +50,7 @@ _buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sb);
 </script>
 
 <%!
-private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDisplay themeDisplay, StringBuffer sb) throws Exception {
+private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
 	PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
 
 	boolean openList = true;
@@ -65,34 +65,34 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 			int children = layout.getChildren().size();
 
 			if (openList) {
-				sb.append("<ul class=\"portlet-nav-map-list portlet-nav-map-level_" + curDepth + "\">");
+				sm.append("<ul class=\"portlet-nav-map-list portlet-nav-map-level_" + curDepth + "\">");
 				openList = false;
 				closeList = true;
 			}
 
-			sb.append("<li>");
-			sb.append("<a href=\"");
-			sb.append(layoutURL);
-			sb.append("\" ");
-			sb.append(target);
-			sb.append("> ");
-			sb.append(layout.getName(themeDisplay.getLocale()));
-			sb.append("</a>");
+			sm.append("<li>");
+			sm.append("<a href=\"");
+			sm.append(layoutURL);
+			sm.append("\" ");
+			sm.append(target);
+			sm.append("> ");
+			sm.append(layout.getName(themeDisplay.getLocale()));
+			sm.append("</a>");
 
 			if ((curDepth > 1) && (children > 0)) {
-				sb.append("&nbsp;&raquo;");
+				sm.append("&nbsp;&raquo;");
 			}
 
 			if (((displayDepth == 0) || (displayDepth > curDepth)) && (children > 0)) {
-				_buildSiteMap(layout.getChildren(), displayDepth, curDepth + 1, themeDisplay, sb);
+				_buildSiteMap(layout.getChildren(), displayDepth, curDepth + 1, themeDisplay, sm);
 			}
 
-			sb.append("</li>");
+			sm.append("</li>");
 		}
 	}
 
 	if (closeList) {
-		sb.append("</ul>");
+		sm.append("</ul>");
 	}
 }
 %>

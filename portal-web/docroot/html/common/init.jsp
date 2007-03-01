@@ -149,6 +149,7 @@
 <%@ page import="com.liferay.util.State" %>
 <%@ page import="com.liferay.util.StateUtil" %>
 <%@ page import="com.liferay.util.StringComparator" %>
+<%@ page import="com.liferay.util.StringMaker" %>
 <%@ page import="com.liferay.util.StringUtil" %>
 <%@ page import="com.liferay.util.TextFormatter" %>
 <%@ page import="com.liferay.util.Time" %>

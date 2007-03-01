@@ -153,24 +153,24 @@ for (int i = 0; i < portlets.size(); i++) {
 			String entryHref = el.element("link").attributeValue("href");
 			String summary = el.elementText("summary");
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append("<a href=\"");
-			sb.append(entryHref);
-			sb.append("\"");
+			sm.append("<a href=\"");
+			sm.append(entryHref);
+			sm.append("\"");
 
 			if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-				sb.append(" target=\"_blank\"");
+				sm.append(" target=\"_blank\"");
 			}
 
-			sb.append(">");
-			sb.append("<span style=\"font-size: x-small; font-style: italic;\">");
-			sb.append(entryTitle);
-			sb.append("</span><br>");
-			sb.append(summary);
-			sb.append("</a>");
+			sm.append(">");
+			sm.append("<span style=\"font-size: x-small; font-style: italic;\">");
+			sm.append(entryTitle);
+			sm.append("</span><br>");
+			sm.append(summary);
+			sm.append("</a>");
 
-			row.addText(StringUtil.highlight(sb.toString(), keywords));
+			row.addText(StringUtil.highlight(sm.toString(), keywords));
 
 			// Score
 
