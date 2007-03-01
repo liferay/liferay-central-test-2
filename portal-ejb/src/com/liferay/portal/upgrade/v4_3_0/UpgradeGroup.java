@@ -70,7 +70,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <a href="UpgradeGroup.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Alexander Chow
+ * @author Alexander Chow
  *
  */
 public class UpgradeGroup extends UpgradeProcess {

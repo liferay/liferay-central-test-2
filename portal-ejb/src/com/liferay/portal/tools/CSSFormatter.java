@@ -30,7 +30,7 @@ import java.io.File;
 /**
  * <a href="CSSFormatter.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author Brian Wing Shun Chan
  *
  */
 public class CSSFormatter {

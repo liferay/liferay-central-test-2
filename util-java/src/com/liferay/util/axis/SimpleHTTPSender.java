@@ -54,12 +54,16 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SimpleHTTPSender extends HTTPSender {
 
-	public static final String URL_REGEXP_PATTERN = GetterUtil
-			.getString(SystemProperties.get(SimpleHTTPSender.class.getName()
-					+ ".regexp.pattern"));
+	public static final String URL_REGEXP_PATTERN = GetterUtil.getString(
+		SystemProperties.get(
+			SimpleHTTPSender.class.getName() + ".regexp.pattern"));
 
-	public static final Pattern URL_PATTERN = Pattern
-			.compile(URL_REGEXP_PATTERN);
+	public static final Pattern URL_PATTERN = Pattern.compile(
+		URL_REGEXP_PATTERN);
+
+	public static String getCurrentCookie() {
+		return (String)_currentCookie.get();
+	}
 
 	public void invoke(MessageContext ctx) throws AxisFault {
 		String url = ctx.getStrProp(MessageContext.TRANS_URL);
@@ -82,18 +86,14 @@ public class SimpleHTTPSender extends HTTPSender {
 		}
 	}
 
-	public static String getCurrentCookie() {
-		return (String)_currentCookie.get();
-	}
-
 	private void _invoke(MessageContext ctx, String url) throws AxisFault {
 		try {
 			String userName = ctx.getUsername();
 			String password = ctx.getPassword();
 
 			if ((userName != null) && (password != null)) {
-				Authenticator.setDefault(new SimpleAuthenticator(userName,
-						password));
+				Authenticator.setDefault(
+					new SimpleAuthenticator(userName, password));
 			}
 
 			URL urlObj = new URL(url);
@@ -111,30 +111,8 @@ public class SimpleHTTPSender extends HTTPSender {
 		}
 	}
 
-	private void _writeToConnection(URLConnection urlc, MessageContext ctx)
-			throws Exception {
-		urlc.setDoOutput(true);
-
-		Message request = ctx.getRequestMessage();
-
-		String contentType = request.getContentType(ctx.getSOAPConstants());
-
-		urlc.setRequestProperty("Content-Type", contentType);
-
-		if (ctx.useSOAPAction()) {
-			urlc.setRequestProperty("SOAPAction", ctx.getSOAPActionURI());
-		}
-
-		OutputStream out = new BufferedOutputStream(urlc.getOutputStream(),
-				8192);
-
-		request.writeTo(out);
-
-		out.flush();
-	}
-
 	private void _readFromConnection(URLConnection urlc, MessageContext ctx)
-			throws Exception {
+		throws Exception {
 
 		String contentType = urlc.getContentType();
 		String contentLocation = urlc.getHeaderField("Content-Location");
@@ -148,6 +126,7 @@ public class SimpleHTTPSender extends HTTPSender {
 		in = new BufferedInputStream(in, 8192);
 
 		Message response = new Message(in, false, contentType, contentLocation);
+
 		response.setMessageType(Message.RESPONSE);
 
 		ctx.setResponseMessage(response);
@@ -165,6 +144,29 @@ public class SimpleHTTPSender extends HTTPSender {
 		}
 
 		_currentCookie.set(cookie);
+	}
+
+	private void _writeToConnection(URLConnection urlc, MessageContext ctx)
+		throws Exception {
+
+		urlc.setDoOutput(true);
+
+		Message request = ctx.getRequestMessage();
+
+		String contentType = request.getContentType(ctx.getSOAPConstants());
+
+		urlc.setRequestProperty("Content-Type", contentType);
+
+		if (ctx.useSOAPAction()) {
+			urlc.setRequestProperty("SOAPAction", ctx.getSOAPActionURI());
+		}
+
+		OutputStream out = new BufferedOutputStream(
+			urlc.getOutputStream(), 8192);
+
+		request.writeTo(out);
+
+		out.flush();
 	}
 
 	private static ThreadLocal _currentCookie = new ThreadLocal() {

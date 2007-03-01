@@ -36,7 +36,7 @@ import java.util.Set;
 /**
  * <a href="OwnerIdMapper.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Alexander Chow
+ * @author Alexander Chow
  *
  */
 public class OwnerIdMapper implements ValueMapper {

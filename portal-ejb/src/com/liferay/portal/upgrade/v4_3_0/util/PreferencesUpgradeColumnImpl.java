@@ -32,7 +32,7 @@ import com.liferay.util.Validator;
  * <a href="PreferencesUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author  Alexander Chow
+ * @author Alexander Chow
  *
  */
 public class PreferencesUpgradeColumnImpl extends BaseUpgradeColumnImpl {
