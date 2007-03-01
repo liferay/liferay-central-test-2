@@ -105,7 +105,7 @@ function addPortletHTML(html, container, placeHolder) {
 	if (!_$J.browser.firefox) {
 		executeLoadedScript(portletBound);
 	}
-	
+
 	//TODO: Check to see if user has permissions
 	if (true) {
 		if (!portletBound.isStatic) {

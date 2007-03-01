@@ -33,7 +33,7 @@
 					<c:if test='<%= !tilesPortletContent.endsWith("/error.jsp") %>'>
 						<%@ include file="/html/common/themes/portlet_messages.jsp" %>
 					</c:if>
-	
+
 					<%@ include file="/html/common/themes/portlet_content.jsp" %>
 				</div>
 			</c:when>

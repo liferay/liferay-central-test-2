@@ -208,22 +208,22 @@
 	<c:if test="<%= themeDisplay.isFreeformLayout() %>">
 		LayoutColumns.freeform = true;
 	</c:if>
-	
+
 	//TODO: Check to see if user has permissions
-	<c:if test="true">	
+
+	<c:if test="true">
 		jQuery(document).ready(
 			function() {
 				Liferay.Draggables.init();
 			}
 		);
 	</c:if>
-	
+
 	jQuery(document).ready(
 		function() {
 			Liferay.Dock.init();
 		}
 	);
-	
 
 	<%@ include file="/html/js/log/log.jsp" %>
 </script>
