@@ -21,9 +21,15 @@
 
 	<target name="compile-module">
 		<mkdir dir="${module.name}.war/WEB-INF/classes" />
-		
+
+		<path id="web-lib.classpath">
+			<fileset dir="${project.dir}/lib/development" includes="*.jar" />
+			<fileset dir="${project.dir}/lib/global" includes="*.jar" />
+			<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
+		</path>
+
 		<javac
-			classpathref="project.classpath"
+			classpathref="web.classpath"
 			compiler="${javac.compiler}"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
