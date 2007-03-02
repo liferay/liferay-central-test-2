@@ -29,6 +29,7 @@ import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.persistence.CyrusUserUtil;
 import com.liferay.mail.service.persistence.CyrusVirtualUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
@@ -61,36 +62,36 @@ public class CyrusHook implements Hook {
 				if ((filters.size() > 0) || (emailAddresses.size() > 0) ||
 					(leaveCopy)) {
 
-					StringBuffer sb = new StringBuffer();
+					StringMaker sm = new StringMaker();
 
 					for (int i = 0; i < filters.size(); i++) {
 						Filter filter = (Filter)filters.get(i);
 
-						sb.append(":0\n");
-						sb.append("* ^(From|Cc|To).*");
-						sb.append(filter.getEmailAddress());
-						sb.append("\n");
-						sb.append("| $DELIVER -e -a $USER -m user.$USER.");
-						sb.append(filter.getFolder());
-						sb.append("\n\n");
+						sm.append(":0\n");
+						sm.append("* ^(From|Cc|To).*");
+						sm.append(filter.getEmailAddress());
+						sm.append("\n");
+						sm.append("| $DELIVER -e -a $USER -m user.$USER.");
+						sm.append(filter.getFolder());
+						sm.append("\n\n");
 					}
 
 					if (leaveCopy) {
-						sb.append(":0 c\n");
-						sb.append("| $DELIVER -e -a $USER -m user.$USER\n\n");
+						sm.append(":0 c\n");
+						sm.append("| $DELIVER -e -a $USER -m user.$USER\n\n");
 					}
 
 					if (emailAddresses.size() > 0) {
-						sb.append(":0\n");
-						sb.append("!");
+						sm.append(":0\n");
+						sm.append("!");
 
 						for (int i = 0; i < emailAddresses.size(); i++) {
 							String emailAddress = (String)emailAddresses.get(i);
-							sb.append(" ").append(emailAddress);
+							sm.append(" ").append(emailAddress);
 						}
 					}
 
-					String content = sb.toString();
+					String content = sm.toString();
 
 					while (content.endsWith("\n")) {
 						content = content.substring(0, content.length() - 1);
@@ -251,22 +252,22 @@ public class CyrusHook implements Hook {
 			return;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < blocked.size(); i++) {
 			String emailAddress = (String)blocked.get(i);
 
-			sb.append("\n");
-			sb.append(":0\n");
-			sb.append("* ^From.*").append(emailAddress).append("\n");
-			sb.append("{\n");
-			sb.append(":0\n");
-			sb.append("/dev/null\n");
-			sb.append("}\n");
+			sm.append("\n");
+			sm.append(":0\n");
+			sm.append("* ^From.*").append(emailAddress).append("\n");
+			sm.append("{\n");
+			sm.append(":0\n");
+			sm.append("/dev/null\n");
+			sm.append("}\n");
 		}
 
 		try {
-			FileUtil.write(file, sb.toString());
+			FileUtil.write(file, sm.toString());
 		}
 		catch (Exception e) {
 			_log.error(e, e);

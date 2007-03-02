@@ -23,6 +23,7 @@
 package com.liferay.mail.util;
 
 import com.liferay.portal.kernel.util.ProcessUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringUtil;
@@ -136,7 +137,7 @@ public class ShellHook implements Hook {
 			int exitValue = p.exitValue();
 
 			if (exitValue != 0) {
-				StringBuffer cmd = new StringBuffer();
+				StringMaker cmd = new StringMaker();
 
 				for (int i = 0; i < cmdLine.length; i++) {
 					cmd.append(cmdLine[i]);

@@ -23,6 +23,7 @@
 package com.liferay.mail.util;
 
 import com.liferay.portal.kernel.util.ProcessUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
@@ -54,14 +55,16 @@ public class SendmailHook implements Hook {
 				File file = new File(home + "/" + userId + "/.forward");
 
 				if (emailAddresses.size() > 0) {
-					StringBuffer sb = new StringBuffer();
+					StringMaker sm = new StringMaker();
 
 					for (int i = 0; i < emailAddresses.size(); i++) {
 						String emailAddress = (String)emailAddresses.get(i);
-						sb.append(emailAddress).append("\n");
+
+						sm.append(emailAddress);
+						sm.append("\n");
 					}
 
-					FileUtil.write(file, sb.toString());
+					FileUtil.write(file, sm.toString());
 				}
 				else {
 					file.delete();
@@ -144,25 +147,28 @@ public class SendmailHook implements Hook {
 			return;
 		}
 
-		StringBuffer sb = new StringBuffer();
-		sb.append("ORGMAIL /var/spool/mail/$LOGNAME\n");
-		sb.append("MAILDIR $HOME/\n");
-		sb.append("SENDMAIL /usr/sbin/sendmail\n");
+		StringMaker sm = new StringMaker();
+
+		sm.append("ORGMAIL /var/spool/mail/$LOGNAME\n");
+		sm.append("MAILDIR $HOME/\n");
+		sm.append("SENDMAIL /usr/smin/sendmail\n");
 
 		for (int i = 0; i < blocked.size(); i++) {
 			String emailAddress = (String)blocked.get(i);
 
-			sb.append("\n");
-			sb.append(":0\n");
-			sb.append("* ^From.*").append(emailAddress).append("\n");
-			sb.append("{\n");
-			sb.append(":0\n");
-			sb.append("/dev/null\n");
-			sb.append("}\n");
+			sm.append("\n");
+			sm.append(":0\n");
+			sm.append("* ^From.*");
+			sm.append(emailAddress);
+			sm.append("\n");
+			sm.append("{\n");
+			sm.append(":0\n");
+			sm.append("/dev/null\n");
+			sm.append("}\n");
 		}
 
 		try {
-			FileUtil.write(file, sb.toString());
+			FileUtil.write(file, sm.toString());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -177,22 +183,26 @@ public class SendmailHook implements Hook {
 			FileReader fr = new FileReader(virtusertable);
 			BufferedReader br = new BufferedReader(fr);
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			for (String s = br.readLine(); s != null; s = br.readLine()) {
 				if (!s.endsWith(" " + userId)) {
-					sb.append(s).append('\n');
+					sm.append(s);
+					sm.append('\n');
 				}
 			}
 
 			if ((emailAddress != null) && (!emailAddress.equals(""))) {
-				sb.append(emailAddress).append(" ").append(userId).append('\n');
+				sm.append(emailAddress);
+				sm.append(" ");
+				sm.append(userId);
+				sm.append('\n');
 			}
 
 			br.close();
 			fr.close();
 
-			FileUtil.write(virtusertable, sb.toString());
+			FileUtil.write(virtusertable, sm.toString());
 
 			String virtusertableRefreshCmd =
 				PropsUtil.get(

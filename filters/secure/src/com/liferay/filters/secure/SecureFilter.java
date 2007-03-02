@@ -22,6 +22,7 @@
 
 package com.liferay.filters.secure;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
@@ -116,7 +117,7 @@ public class SecureFilter implements Filter {
 				_log.debug("Securing " + completeURL);
 			}
 
-			StringBuffer redirectURL = new StringBuffer();
+			StringMaker redirectURL = new StringMaker();
 
 			redirectURL.append(Http.HTTPS_WITH_SLASH);
 			redirectURL.append(httpReq.getServerName());

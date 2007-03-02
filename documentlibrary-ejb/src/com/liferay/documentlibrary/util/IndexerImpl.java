@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -170,12 +171,12 @@ public class IndexerImpl {
 						}
 					}
 
-					StringBuffer sb = new StringBuffer();
+					StringMaker sm = new StringMaker();
 
-					sb.append(fileEntry.getTitle());
-					sb.append(StringPool.SPACE);
-					sb.append(fileEntry.getDescription());
-					sb.append(StringPool.SPACE);
+					sm.append(fileEntry.getTitle());
+					sm.append(StringPool.SPACE);
+					sm.append(fileEntry.getDescription());
+					sm.append(StringPool.SPACE);
 
 					Properties extraSettingsProps =
 						fileEntry.getExtraSettingsProperties();
@@ -189,10 +190,10 @@ public class IndexerImpl {
 						String value = GetterUtil.getString(
 							(String)entry.getValue());
 
-						sb.append(value);
+						sm.append(value);
 					}
 
-					doc.add(LuceneFields.getText(LuceneFields.PROPERTIES, sb));
+					doc.add(LuceneFields.getText(LuceneFields.PROPERTIES, sm));
 				}
 				catch (PortalException pe) {
 					throw new IOException(pe.getMessage());
