@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
-
-import com.liferay.portal.kernel.util.StringPool;
+package com.liferay.portal.kernel.util;
 
 import java.io.ByteArrayOutputStream;
 
@@ -34,8 +32,17 @@ import java.io.ByteArrayOutputStream;
  */
 public class ByteArrayMaker extends ByteArrayOutputStream {
 
-	static boolean collect = GetterUtil.getBoolean(
-		SystemProperties.get(MakerStats.class.getName()), true);
+	static boolean collect = false;
+	
+	static {
+		String collectString = System.getProperty(MakerStats.class.getName());
+
+		if (collectString != null) {
+			if (collectString.equals("true")) {
+				collect = true;
+			}
+		}
+	}
 
 	static MakerStats stats = null;
 
@@ -45,16 +52,28 @@ public class ByteArrayMaker extends ByteArrayOutputStream {
 		}
 	}
 
-	public static int DEFAULT_INIT_SIZE = GetterUtil.getInteger(
-		SystemProperties.get(ByteArrayMaker.class.getName() + ".initial.size"),
-		8000);
+	static int defaultInitSize = 8000;
+
+	static {
+		String defaultInitSizeString = System.getProperty(
+			ByteArrayMaker.class.getName() + ".initial.size");
+
+		if (defaultInitSizeString != null) {
+			try {
+				defaultInitSize = Integer.parseInt(defaultInitSizeString);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public static MakerStats getStatistics() {
 		return stats;
 	}
 
 	public ByteArrayMaker() {
-		super(DEFAULT_INIT_SIZE);
+		super(defaultInitSize);
 
 		if (collect) {
 			_getInfo(new Throwable());

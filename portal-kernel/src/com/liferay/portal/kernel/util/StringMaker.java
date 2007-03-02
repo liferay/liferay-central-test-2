@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
-
-import com.liferay.portal.kernel.util.StringPool;
+package com.liferay.portal.kernel.util;
 
 /**
  * <a href="StringMaker.java.html"><b><i>View Source</i></b></a>
@@ -32,8 +30,17 @@ import com.liferay.portal.kernel.util.StringPool;
  */
 public class StringMaker {
 
-	static boolean collect = GetterUtil.getBoolean(
-		SystemProperties.get(MakerStats.class.getName()), true);
+	static boolean collect = false;
+	
+	static {
+		String collectString = System.getProperty(MakerStats.class.getName());
+
+		if (collectString != null) {
+			if (collectString.equals("true")) {
+				collect = true;
+			}
+		}
+	}
 
 	static MakerStats stats = null;
 
@@ -43,16 +50,28 @@ public class StringMaker {
 		}
 	}
 
-	public static int DEFAULT_INIT_SIZE = GetterUtil.getInteger(
-		SystemProperties.get(StringMaker.class.getName() + ".initial.size"),
-		128);
+	static int defaultInitSize = 128;
+
+	static {
+		String defaultInitSizeString = System.getProperty(
+			StringMaker.class.getName() + ".initial.size");
+
+		if (defaultInitSizeString != null) {
+			try {
+				defaultInitSize = Integer.parseInt(defaultInitSizeString);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public static MakerStats getStatistics() {
 		return stats;
 	}
 
 	public StringMaker() {
-		_sb = new StringBuffer(DEFAULT_INIT_SIZE);
+		_sb = new StringBuffer(defaultInitSize);
 
 		if (collect) {
 			_getInfo(new Throwable());
@@ -72,7 +91,7 @@ public class StringMaker {
 			throw new NullPointerException();
 		}
 
-		_sb = new StringBuffer(s.length() + DEFAULT_INIT_SIZE);
+		_sb = new StringBuffer(s.length() + defaultInitSize);
 
 		if (collect) {
 			_getInfo(new Throwable());
@@ -83,7 +102,7 @@ public class StringMaker {
 
 	public StringMaker(StringBuffer sb) throws NullPointerException {
 		if (sb == null) {
-			_sb = new StringBuffer(DEFAULT_INIT_SIZE);
+			_sb = new StringBuffer(defaultInitSize);
 		}
 		else {
 			_sb = sb;
