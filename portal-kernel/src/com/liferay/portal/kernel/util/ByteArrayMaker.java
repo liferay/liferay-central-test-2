@@ -33,7 +33,7 @@ import java.io.ByteArrayOutputStream;
 public class ByteArrayMaker extends ByteArrayOutputStream {
 
 	static boolean collect = false;
-	
+
 	static {
 		String collectString = System.getProperty(MakerStats.class.getName());
 

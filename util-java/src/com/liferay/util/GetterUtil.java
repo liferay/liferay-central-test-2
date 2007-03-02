@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.text.DateFormat;
@@ -347,7 +348,7 @@ public class GetterUtil {
 		if (value != null) {
 			value = value.trim();
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			char[] charArray = value.toCharArray();
 
@@ -356,11 +357,11 @@ public class GetterUtil {
 					(charArray[i] == '-' && i == 0) ||
 					(charArray[i] == '.')) {
 
-					sb.append(charArray[i]);
+					sm.append(charArray[i]);
 				}
 			}
 
-			value = sb.toString();
+			value = sm.toString();
 		}
 
 		return value;

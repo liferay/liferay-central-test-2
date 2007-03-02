@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
@@ -33,7 +34,6 @@ import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 
-import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;

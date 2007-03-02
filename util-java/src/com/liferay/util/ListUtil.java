@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.BufferedReader;
@@ -198,7 +199,7 @@ public class ListUtil {
 	}
 
 	public static String toString(List list, String param, String delimiter) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < list.size(); i++) {
 			Object bean = list.get(i);
@@ -209,14 +210,14 @@ public class ListUtil {
 				value = StringPool.BLANK;
 			}
 
-			sb.append(value.toString());
+			sm.append(value.toString());
 
 			if ((i + 1) != list.size()) {
-				sb.append(delimiter);
+				sm.append(delimiter);
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 }

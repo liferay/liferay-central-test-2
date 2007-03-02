@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -34,7 +35,6 @@ import com.liferay.portlet.tags.NoSuchEntryException;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
 
-import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 

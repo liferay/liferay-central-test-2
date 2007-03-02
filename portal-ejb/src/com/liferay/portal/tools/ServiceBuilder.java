@@ -23,13 +23,13 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.ArrayUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringMaker;
 import com.liferay.util.StringUtil;
 import com.liferay.util.TextFormatter;
 import com.liferay.util.Time;
@@ -185,6 +185,7 @@ public class ServiceBuilder {
 			"com.liferay.portal.kernel.util.NullWrapper",
 			"com.liferay.portal.kernel.util.OrderByComparator",
 			"com.liferay.portal.kernel.util.ShortWrapper",
+			"com.liferay.portal.kernel.util.StringMaker",
 			"com.liferay.portal.kernel.util.StringPool",
 			"com.liferay.portal.security.auth.HttpPrincipal",
 			"com.liferay.portal.service.http.TunnelUtil",
@@ -194,7 +195,6 @@ public class ServiceBuilder {
 			"com.liferay.util.DateUtil",
 			"com.liferay.util.GetterUtil",
 			"com.liferay.util.InstancePool",
-			"com.liferay.util.StringMaker",
 			"com.liferay.util.dao.hibernate.QueryPos",
 			"com.liferay.util.dao.hibernate.QueryUtil",
 			"java.rmi.RemoteException",
@@ -2335,10 +2335,10 @@ public class ServiceBuilder {
 		sm.append("import com.liferay.portal.kernel.dao.DynamicQuery;");
 		sm.append("import com.liferay.portal.kernel.dao.DynamicQueryInitializer;");
 		sm.append("import com.liferay.portal.kernel.util.OrderByComparator;");
+		sm.append("import com.liferay.portal.kernel.util.StringMaker;");
 		sm.append("import com.liferay.portal.kernel.util.StringPool;");
 		sm.append("import com.liferay.portal.service.persistence.BasePersistence;");
 		sm.append("import com.liferay.portal.spring.hibernate.HibernateUtil;");
-		sm.append("import com.liferay.util.StringMaker;");
 		sm.append("import com.liferay.util.dao.hibernate.QueryPos;");
 		sm.append("import com.liferay.util.dao.hibernate.QueryUtil;");
 		sm.append("import java.sql.ResultSet;");

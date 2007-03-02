@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
@@ -44,15 +45,15 @@ public class CreditCard {
 		int numberLen = number.length();
 
 		if (numberLen > 4) {
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			for (int i = 0; i < numberLen - 4; i++) {
-				sb.append(x);
+				sm.append(x);
 			}
 
-			sb.append(number.substring(numberLen - 4, numberLen));
+			sm.append(number.substring(numberLen - 4, numberLen));
 
-			number = sb.toString();
+			number = sm.toString();
 		}
 
 		return number;

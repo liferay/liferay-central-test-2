@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
@@ -33,7 +34,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 
-import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;

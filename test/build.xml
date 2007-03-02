@@ -67,7 +67,7 @@
 
 		<antcall target="test-ejb" />
 		<antcall target="test-http" />
-		<antcall target="test-services" />
+		<antcall target="test-service" />
 		<antcall target="test-soap" />
 	</target>
 

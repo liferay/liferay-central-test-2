@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 import javax.servlet.http.Cookie;
 
 /**
@@ -82,12 +84,12 @@ public class CookieUtil {
 		if (cookie.startsWith(tag)) {
 			int y = cookie.indexOf(';');
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append(tag).append(sub).append(";");
-			sb.append(cookie.substring(y + 1, cookie.length()));
+			sm.append(tag).append(sub).append(";");
+			sm.append(cookie.substring(y + 1, cookie.length()));
 
-			return sb.toString();
+			return sm.toString();
 		}
 
 		tag = ";" + tag;
@@ -97,13 +99,13 @@ public class CookieUtil {
 		if (x != -1) {
 			int y = cookie.indexOf(';', x + 1);
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append(cookie.substring(0, x + tag.length()));
-			sb.append(sub);
-			sb.append(cookie.substring(y, cookie.length()));
+			sm.append(cookie.substring(0, x + tag.length()));
+			sm.append(sub);
+			sm.append(cookie.substring(y, cookie.length()));
 
-			return sb.toString();
+			return sm.toString();
 		}
 
 		return cookie + tag.substring(1, tag.length()) + sub + ";";

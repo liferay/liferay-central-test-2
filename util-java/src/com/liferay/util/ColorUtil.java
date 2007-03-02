@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 import java.awt.Color;
 
 /**
@@ -60,32 +62,32 @@ public class ColorUtil {
 	}
 
 	public static String getHex(int[] rgb) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("#");
+		sm.append("#");
 
-		sb.append(
+		sm.append(
 			_KEY.substring(
 				(int)Math.floor(rgb[0] / 16),
 				(int)Math.floor(rgb[0] / 16) + 1));
 
-		sb.append(_KEY.substring(rgb[0] % 16, (rgb[0] % 16) + 1));
+		sm.append(_KEY.substring(rgb[0] % 16, (rgb[0] % 16) + 1));
 
-		sb.append(
+		sm.append(
 			_KEY.substring(
 				(int)Math.floor(rgb[1] / 16),
 				(int)Math.floor(rgb[1] / 16) + 1));
 
-		sb.append(_KEY.substring(rgb[1] % 16, (rgb[1] % 16) + 1));
+		sm.append(_KEY.substring(rgb[1] % 16, (rgb[1] % 16) + 1));
 
-		sb.append(
+		sm.append(
 			_KEY.substring(
 				(int)Math.floor(rgb[2] / 16),
 				(int)Math.floor(rgb[2] / 16) + 1));
 
-		sb.append(_KEY.substring(rgb[2] % 16, (rgb[2] % 16) + 1));
+		sm.append(_KEY.substring(rgb[2] % 16, (rgb[2] % 16) + 1));
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public static int[] getRGB(String hex) {

@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
@@ -33,7 +34,6 @@ import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 
-import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;

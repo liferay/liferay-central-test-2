@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.List;
@@ -35,29 +36,29 @@ import java.util.List;
 public class Autocomplete {
 
 	public static String arrayToXml(String[][] array) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("<?xml version=\"1.0\"?>");
+		sm.append("<?xml version=\"1.0\"?>");
 
-		sb.append("<ajaxresponse>");
+		sm.append("<ajaxresponse>");
 
 		for (int i = 0; i < array.length; i++) {
 			String text = array[i][0];
 			String value = array[i][1];
 
-			sb.append("<item>");
-			sb.append("<text><![CDATA[");
-			sb.append(text);
-			sb.append("]]></text>");
-			sb.append("<value><![CDATA[");
-			sb.append(value);
-			sb.append("]]></value>");
-			sb.append("</item>");
+			sm.append("<item>");
+			sm.append("<text><![CDATA[");
+			sm.append(text);
+			sm.append("]]></text>");
+			sm.append("<value><![CDATA[");
+			sm.append(value);
+			sm.append("]]></value>");
+			sm.append("</item>");
 		}
 
-		sb.append("</ajaxresponse>");
+		sm.append("</ajaxresponse>");
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public static String[][] listToArray(

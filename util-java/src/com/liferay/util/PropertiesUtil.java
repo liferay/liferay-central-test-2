@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.ByteArrayInputStream;
@@ -161,20 +162,20 @@ public class PropertiesUtil {
 	}
 
 	public static String toString(Properties p) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Enumeration enu = p.propertyNames();
 
 		while (enu.hasMoreElements()) {
 			String key = (String)enu.nextElement();
 
-			sb.append(key);
-			sb.append(StringPool.EQUAL);
-			sb.append(p.getProperty(key));
-			sb.append("\n");
+			sm.append(key);
+			sm.append(StringPool.EQUAL);
+			sm.append(p.getProperty(key));
+			sm.append("\n");
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public static void trimKeys(Properties p) {

@@ -31,7 +31,7 @@ package com.liferay.portal.kernel.util;
 public class StringMaker {
 
 	static boolean collect = false;
-	
+
 	static {
 		String collectString = System.getProperty(MakerStats.class.getName());
 

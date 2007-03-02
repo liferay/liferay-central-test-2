@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 /**
  * <a href="Html.java.html"><b><i>View Source</i></b></a>
  *
@@ -49,30 +51,35 @@ public class Html {
 			text = StringUtil.replace(text, "& ", "&amp; ");
 		}
 
-		StringBuffer sb = new StringBuffer(text.length());
+		StringMaker sm = new StringMaker(text.length());
 
 		for (int i = 0; i < text.length(); i++) {
 			char c = text.charAt(i);
 
 			switch (c) {
 				case '<':
-					sb.append("&lt;");
+					sm.append("&lt;");
+
 					break;
 
 				case '>':
-					sb.append("&gt;");
+					sm.append("&gt;");
+
 					break;
 
 				case '\'':
-					sb.append("&#39;");
+					sm.append("&#39;");
+
 					break;
 
 				case '\"':
-					sb.append("&quot;");
+					sm.append("&quot;");
+
 					break;
 
 				case ',':
-					sb.append("&#44;");
+					sm.append("&#44;");
+
 					break;
 
 				case '\r':
@@ -92,15 +99,15 @@ public class Html {
 
 				default:
 					if (((int)c) > 255) {
-						sb.append("&#").append(((int)c)).append(";");
+						sm.append("&#").append(((int)c)).append(";");
 					}
 					else {
-						sb.append(c);
+						sm.append(c);
 					}
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public static String formatTo(String text) {
@@ -131,7 +138,7 @@ public class Html {
 	}
 
 	public static String stripBetween(String text, String tag) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String tagBegin = "<" + tag;
 		String tagEnd = "</" + tag + ">";
@@ -140,17 +147,17 @@ public class Html {
 		int y = text.indexOf(tagBegin);
 
 		while (y != -1) {
-			sb.append(text.substring(x, y));
+			sm.append(text.substring(x, y));
 
 			x = text.indexOf(tagEnd, y) + tagEnd.length();
 			y = text.indexOf(tagBegin, x);
 		}
 
 		if (y == -1) {
-			sb.append(text.substring(x, text.length()));
+			sm.append(text.substring(x, text.length()));
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public static String stripComments(String text) {
@@ -158,23 +165,23 @@ public class Html {
 			return null;
 		}
 
-		StringBuffer sb = new StringBuffer(text.length());
+		StringMaker sm = new StringMaker(text.length());
 
 		int x = 0;
 		int y = text.indexOf("<!--");
 
 		while (y != -1) {
-			sb.append(text.substring(x, y));
+			sm.append(text.substring(x, y));
 
 			x = text.indexOf("-->", y) + 3;
 			y = text.indexOf("<!--", x);
 		}
 
 		if (y == -1) {
-			sb.append(text.substring(x, text.length()));
+			sm.append(text.substring(x, text.length()));
 		}
 
-		return sb.toString();
+		return sm.toString();
 
 		/*
 		int x = text.indexOf("<!--");
@@ -202,13 +209,13 @@ public class Html {
 
 		text = stripComments(text);
 
-		StringBuffer sb = new StringBuffer(text.length());
+		StringMaker sm = new StringMaker(text.length());
 
 		int x = 0;
 		int y = text.indexOf("<");
 
 		while (y != -1) {
-			sb.append(text.substring(x, y));
+			sm.append(text.substring(x, y));
 
 			// Look for text enclosed by <script></script>
 
@@ -267,10 +274,10 @@ public class Html {
 		}
 
 		if (y == -1) {
-			sb.append(text.substring(x, text.length()));
+			sm.append(text.substring(x, text.length()));
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public static String toInputSafe(String text) {

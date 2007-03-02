@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.net.URLDecoder;
@@ -106,21 +107,21 @@ public class JS {
 	}
 
 	public static String toScript(String[] array) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("new Array(");
+		sm.append("new Array(");
 
 		for (int i = 0; i < array.length; i++) {
-			sb.append("'" + array[i] + "'");
+			sm.append("'" + array[i] + "'");
 
 			if (i + 1 < array.length) {
-				sb.append(",");
+				sm.append(",");
 			}
 		}
 
-		sb.append(")");
+		sm.append(")");
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 }

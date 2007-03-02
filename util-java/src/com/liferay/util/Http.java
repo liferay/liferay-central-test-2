@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.ByteArrayOutputStream;
@@ -360,11 +361,11 @@ public class Http {
 	public static String parameterMapToString(
 		Map parameterMap, boolean addQuestion) {
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		if (parameterMap.size() > 0) {
 			if (addQuestion) {
-				sb.append(StringPool.QUESTION);
+				sm.append(StringPool.QUESTION);
 			}
 
 			Iterator itr = parameterMap.entrySet().iterator();
@@ -376,17 +377,17 @@ public class Http {
 				String[] values = (String[])entry.getValue();
 
 				for (int i = 0; i < values.length; i++) {
-					sb.append(name);
-					sb.append(StringPool.EQUAL);
-					sb.append(Http.encodeURL(values[i]));
-					sb.append(StringPool.AMPERSAND);
+					sm.append(name);
+					sm.append(StringPool.EQUAL);
+					sm.append(Http.encodeURL(values[i]));
+					sm.append(StringPool.AMPERSAND);
 				}
 			}
 
-			sb.deleteCharAt(sb.length() - 1);
+			sm.deleteCharAt(sm.length() - 1);
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public static String protocolize(String url, boolean secure) {
