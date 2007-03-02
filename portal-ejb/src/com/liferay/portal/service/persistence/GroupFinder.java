@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.GroupImpl;
@@ -225,15 +226,15 @@ public class GroupFinder {
 			HibernateUtil.closeSession(session);
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("No Group exists with the key {companyId=");
-		sb.append(companyId);
-		sb.append(", name=");
-		sb.append(name);
-		sb.append("}");
+		sm.append("No Group exists with the key {companyId=");
+		sm.append(companyId);
+		sm.append(", name=");
+		sm.append(name);
+		sm.append("}");
 
-		throw new NoSuchGroupException(sb.toString());
+		throw new NoSuchGroupException(sm.toString());
 	}
 
 	public static List findByC_N_D(
@@ -275,56 +276,56 @@ public class GroupFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append("(");
+			sm.append("(");
 
-			sb.append(CustomSQLUtil.get(FIND_BY_C_N_D));
+			sm.append(CustomSQLUtil.get(FIND_BY_C_N_D));
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params1));
 			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params1));
 
-			sb = new StringBuffer();
+			sm = new StringMaker();
 
-			sb.append(sql);
+			sm.append(sql);
 
-			sb.append(")");
+			sm.append(")");
 
 			if (Validator.isNotNull(userId)) {
-				sb.append(" UNION (");
+				sm.append(" UNION (");
 
-				sb.append(CustomSQLUtil.get(FIND_BY_C_N_D));
+				sm.append(CustomSQLUtil.get(FIND_BY_C_N_D));
 
-				sql = sb.toString();
+				sql = sm.toString();
 
 				sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params2));
 				sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params2));
 
-				sb = new StringBuffer();
+				sm = new StringMaker();
 
-				sb.append(sql);
+				sm.append(sql);
 
-				sb.append(") UNION (");
+				sm.append(") UNION (");
 
-				sb.append(CustomSQLUtil.get(FIND_BY_C_N_D));
+				sm.append(CustomSQLUtil.get(FIND_BY_C_N_D));
 
-				sql = sb.toString();
+				sql = sm.toString();
 
 				sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params3));
 				sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params3));
 
-				sb = new StringBuffer();
+				sm = new StringMaker();
 
-				sb.append(sql);
+				sm.append(sql);
 
-				sb.append(")");
+				sm.append(")");
 			}
 
-			sb.append(" ORDER BY groupName ASC");
+			sm.append(" ORDER BY groupName ASC");
 
-			sql = sb.toString();
+			sql = sm.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -456,7 +457,7 @@ public class GroupFinder {
 			return StringPool.BLANK;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = params.entrySet().iterator();
 
@@ -467,11 +468,11 @@ public class GroupFinder {
 			Object value = entry.getValue();
 
 			if (value != null) {
-				sb.append(_getJoin(key));
+				sm.append(_getJoin(key));
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _getJoin(String key) {
@@ -515,7 +516,7 @@ public class GroupFinder {
 			return StringPool.BLANK;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = params.entrySet().iterator();
 
@@ -526,11 +527,11 @@ public class GroupFinder {
 			Object value = entry.getValue();
 
 			if (value != null) {
-				sb.append(_getWhere(key));
+				sm.append(_getWhere(key));
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _getWhere(String key) {
@@ -571,12 +572,12 @@ public class GroupFinder {
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
-				sb.append(join.substring(pos + 5, join.length()));
-				sb.append(" AND ");
+				sm.append(join.substring(pos + 5, join.length()));
+				sm.append(" AND ");
 
-				join = sb.toString();
+				join = sm.toString();
 			}
 		}
 

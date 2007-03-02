@@ -23,6 +23,7 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -108,15 +109,15 @@ public class UpdateLayoutAction extends Action {
 					PortletPreferencesFactory.getPortletSetup(
 						portletId, layout.getLayoutId(), layout.getOwnerId());
 
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
-				sb.append("height=" + height + "\n");
-				sb.append("width=" + width + "\n");
-				sb.append("top=" + top + "\n");
-				sb.append("left=" + left + "\n");
+				sm.append("height=" + height + "\n");
+				sm.append("width=" + width + "\n");
+				sm.append("top=" + top + "\n");
+				sm.append("left=" + left + "\n");
 
 				portletSetup.setValue(
-					"portlet-freeform-styles", sb.toString());
+					"portlet-freeform-styles", sm.toString());
 
 				portletSetup.store();
 			}

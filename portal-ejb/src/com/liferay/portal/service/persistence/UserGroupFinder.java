@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.UserGroupImpl;
@@ -211,7 +212,7 @@ public class UserGroupFinder {
 			return StringPool.BLANK;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = params.entrySet().iterator();
 
@@ -222,11 +223,11 @@ public class UserGroupFinder {
 			Object value = entry.getValue();
 
 			if (value != null) {
-				sb.append(_getJoin(key));
+				sm.append(_getJoin(key));
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _getJoin(String key) {
@@ -258,7 +259,7 @@ public class UserGroupFinder {
 			return StringPool.BLANK;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = params.entrySet().iterator();
 
@@ -269,11 +270,11 @@ public class UserGroupFinder {
 			Object value = entry.getValue();
 
 			if (value != null) {
-				sb.append(_getWhere(key));
+				sm.append(_getWhere(key));
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _getWhere(String key) {

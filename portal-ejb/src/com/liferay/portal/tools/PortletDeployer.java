@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -120,7 +121,7 @@ public class PortletDeployer extends BaseDeployer {
 	private String _getServletContent(File portletXML, File webXML)
 		throws Exception {
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		SAXReader reader = SAXReaderFactory.getInstance(false);
 
@@ -139,30 +140,30 @@ public class PortletDeployer extends BaseDeployer {
 				portlet.elementText("portlet-name"));
 			String portletClass = portlet.elementText("portlet-class");
 
-			sb.append("<servlet>");
-			sb.append("<servlet-name>");
-			sb.append(portletName);
-			sb.append("</servlet-name>");
-			sb.append("<servlet-class>");
-			sb.append("com.liferay.portal.kernel.servlet.PortletServlet");
-			sb.append("</servlet-class>");
-			sb.append("<init-param>");
-			sb.append("<param-name>portlet-class</param-name>");
-			sb.append("<param-value>");
-			sb.append(portletClass);
-			sb.append("</param-value>");
-			sb.append("</init-param>");
-			sb.append("<load-on-startup>0</load-on-startup>");
-			sb.append("</servlet>");
+			sm.append("<servlet>");
+			sm.append("<servlet-name>");
+			sm.append(portletName);
+			sm.append("</servlet-name>");
+			sm.append("<servlet-class>");
+			sm.append("com.liferay.portal.kernel.servlet.PortletServlet");
+			sm.append("</servlet-class>");
+			sm.append("<init-param>");
+			sm.append("<param-name>portlet-class</param-name>");
+			sm.append("<param-value>");
+			sm.append(portletClass);
+			sm.append("</param-value>");
+			sm.append("</init-param>");
+			sm.append("<load-on-startup>0</load-on-startup>");
+			sm.append("</servlet>");
 
-			sb.append("<servlet-mapping>");
-			sb.append("<servlet-name>");
-			sb.append(portletName);
-			sb.append("</servlet-name>");
-			sb.append("<url-pattern>/");
-			sb.append(portletName);
-			sb.append("/*</url-pattern>");
-			sb.append("</servlet-mapping>");
+			sm.append("<servlet-mapping>");
+			sm.append("<servlet-name>");
+			sm.append(portletName);
+			sm.append("</servlet-name>");
+			sm.append("<url-pattern>/");
+			sm.append(portletName);
+			sm.append("/*</url-pattern>");
+			sm.append("</servlet-mapping>");
 		}
 
 		// Make sure there is a company id specified
@@ -190,10 +191,10 @@ public class PortletDeployer extends BaseDeployer {
 		}
 
 		if (!hasCompanyId) {
-			sb.append("<context-param>");
-			sb.append("<param-name>company_id</param-name>");
-			sb.append("<param-value>liferay.com</param-value>");
-			sb.append("</context-param>");
+			sm.append("<context-param>");
+			sm.append("<param-name>company_id</param-name>");
+			sm.append("<param-value>liferay.com</param-value>");
+			sm.append("</context-param>");
 		}
 
 		// Remove deprecated references to SharedServletWrapper
@@ -217,30 +218,30 @@ public class PortletDeployer extends BaseDeployer {
 				(servletClass.equals(
 					"com.liferay.portal.servlet.SharedServletWrapper"))) {
 
-				sb.append("<servlet>");
+				sm.append("<servlet>");
 
 				if (icon != null) {
-					sb.append("<icon>");
-					sb.append(icon);
-					sb.append("</icon>");
+					sm.append("<icon>");
+					sm.append(icon);
+					sm.append("</icon>");
 				}
 
 				if (servletName != null) {
-					sb.append("<servlet-name>");
-					sb.append(servletName);
-					sb.append("</servlet-name>");
+					sm.append("<servlet-name>");
+					sm.append(servletName);
+					sm.append("</servlet-name>");
 				}
 
 				if (displayName != null) {
-					sb.append("<display-name>");
-					sb.append(displayName);
-					sb.append("</display-name>");
+					sm.append("<display-name>");
+					sm.append(displayName);
+					sm.append("</display-name>");
 				}
 
 				if (description != null) {
-					sb.append("<description>");
-					sb.append(description);
-					sb.append("</description>");
+					sm.append("<description>");
+					sm.append(description);
+					sm.append("</description>");
 				}
 
 				Iterator itr2 = initParams.iterator();
@@ -254,9 +255,9 @@ public class PortletDeployer extends BaseDeployer {
 					if ((paramName != null) &&
 						(paramName.equals("servlet-class"))) {
 
-						sb.append("<servlet-class>");
-						sb.append(paramValue);
-						sb.append("</servlet-class>");
+						sm.append("<servlet-class>");
+						sm.append(paramValue);
+						sm.append("</servlet-class>");
 					}
 				}
 
@@ -272,37 +273,37 @@ public class PortletDeployer extends BaseDeployer {
 					if ((paramName != null) &&
 						(!paramName.equals("servlet-class"))) {
 
-						sb.append("<init-param>");
-						sb.append("<param-name>");
-						sb.append(paramName);
-						sb.append("</param-name>");
+						sm.append("<init-param>");
+						sm.append("<param-name>");
+						sm.append(paramName);
+						sm.append("</param-name>");
 
 						if (paramValue != null) {
-							sb.append("<param-value>");
-							sb.append(paramValue);
-							sb.append("</param-value>");
+							sm.append("<param-value>");
+							sm.append(paramValue);
+							sm.append("</param-value>");
 						}
 
 						if (paramDesc != null) {
-							sb.append("<description>");
-							sb.append(paramDesc);
-							sb.append("</description>");
+							sm.append("<description>");
+							sm.append(paramDesc);
+							sm.append("</description>");
 						}
 
-						sb.append("</init-param>");
+						sm.append("</init-param>");
 					}
 				}
 
 				if (loadOnStartup != null) {
-					sb.append("<load-on-startup>");
-					sb.append(loadOnStartup);
-					sb.append("</load-on-startup>");
+					sm.append("<load-on-startup>");
+					sm.append(loadOnStartup);
+					sm.append("</load-on-startup>");
 				}
 
 				if (runAs != null) {
-					sb.append("<run-as>");
-					sb.append(runAs);
-					sb.append("</run-as>");
+					sm.append("<run-as>");
+					sm.append(runAs);
+					sm.append("</run-as>");
 				}
 
 				itr2 = securityRoleRefs.iterator();
@@ -314,34 +315,34 @@ public class PortletDeployer extends BaseDeployer {
 					String roleName = roleRef.elementText("role-name");
 					String roleLink = roleRef.elementText("role-link");
 
-					sb.append("<security-role-ref>");
+					sm.append("<security-role-ref>");
 
 					if (roleDesc != null) {
-						sb.append("<description>");
-						sb.append(roleDesc);
-						sb.append("</description>");
+						sm.append("<description>");
+						sm.append(roleDesc);
+						sm.append("</description>");
 					}
 
 					if (roleName != null) {
-						sb.append("<role-name>");
-						sb.append(roleName);
-						sb.append("</role-name>");
+						sm.append("<role-name>");
+						sm.append(roleName);
+						sm.append("</role-name>");
 					}
 
 					if (roleLink != null) {
-						sb.append("<role-link>");
-						sb.append(roleLink);
-						sb.append("</role-link>");
+						sm.append("<role-link>");
+						sm.append(roleLink);
+						sm.append("</role-link>");
 					}
 
-					sb.append("</security-role-ref>");
+					sm.append("</security-role-ref>");
 				}
 
-				sb.append("</servlet>");
+				sm.append("</servlet>");
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private void _setupJSF(File facesXML, File portletXML) throws Exception {

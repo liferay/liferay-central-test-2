@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Role;
@@ -91,14 +92,14 @@ public class PermissionFinder {
 
 			String sql = null;
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			if (groups.size() > 0) {
-				sb.append("(");
-				sb.append(CustomSQLUtil.get(COUNT_BY_GROUPS_ROLES));
-				sb.append(") ");
+				sm.append("(");
+				sm.append(CustomSQLUtil.get(COUNT_BY_GROUPS_ROLES));
+				sm.append(") ");
 
-				sql = sb.toString();
+				sql = sm.toString();
 
 				sql = StringUtil.replace(
 					sql, "[$PERMISSION_IDS$]",
@@ -106,15 +107,15 @@ public class PermissionFinder {
 				sql = StringUtil.replace(
 					sql, "[$GROUP_IDS$]", _getGroupIds(groups, "Groups_Roles"));
 
-				sb = new StringBuffer();
+				sm = new StringMaker();
 
-				sb.append(sql);
+				sm.append(sql);
 
-				sb.append("UNION ALL (");
-				sb.append(CustomSQLUtil.get(COUNT_BY_GROUPS_PERMISSIONS));
-				sb.append(") ");
+				sm.append("UNION ALL (");
+				sm.append(CustomSQLUtil.get(COUNT_BY_GROUPS_PERMISSIONS));
+				sm.append(") ");
 
-				sql = sb.toString();
+				sql = sm.toString();
 
 				sql = StringUtil.replace(
 					sql, "[$PERMISSION_IDS$]",
@@ -123,46 +124,46 @@ public class PermissionFinder {
 					sql, "[$GROUP_IDS$]",
 					_getGroupIds(groups, "Groups_Permissions"));
 
-				sb = new StringBuffer();
+				sm = new StringMaker();
 
-				sb.append(sql);
+				sm.append(sql);
 
-				sb.append("UNION ALL ");
+				sm.append("UNION ALL ");
 			}
 
-			sb.append("(");
-			sb.append(CustomSQLUtil.get(COUNT_BY_USERS_ROLES));
-			sb.append(") ");
+			sm.append("(");
+			sm.append(CustomSQLUtil.get(COUNT_BY_USERS_ROLES));
+			sm.append(") ");
 
-			sql = sb.toString();
-
-			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Roles_Permissions"));
-
-			sb = new StringBuffer();
-
-			sb.append(sql);
-
-			sb.append("UNION ALL (");
-			sb.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP_ROLE));
-			sb.append(") ");
-
-			sql = sb.toString();
+			sql = sm.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
 				_getPermissionIds(permissions, "Roles_Permissions"));
 
-			sb = new StringBuffer();
+			sm = new StringMaker();
 
-			sb.append(sql);
+			sm.append(sql);
 
-			sb.append("UNION ALL (");
-			sb.append(CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS));
-			sb.append(") ");
+			sm.append("UNION ALL (");
+			sm.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP_ROLE));
+			sm.append(") ");
 
-			sql = sb.toString();
+			sql = sm.toString();
+
+			sql = StringUtil.replace(
+				sql, "[$PERMISSION_IDS$]",
+				_getPermissionIds(permissions, "Roles_Permissions"));
+
+			sm = new StringMaker();
+
+			sm.append(sql);
+
+			sm.append("UNION ALL (");
+			sm.append(CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS));
+			sm.append(") ");
+
+			sql = sm.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
@@ -224,14 +225,14 @@ public class PermissionFinder {
 
 			String sql = null;
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			if (groups.size() > 0) {
-				sb.append("(");
-				sb.append(CustomSQLUtil.get(COUNT_BY_GROUPS_PERMISSIONS));
-				sb.append(") ");
+				sm.append("(");
+				sm.append(CustomSQLUtil.get(COUNT_BY_GROUPS_PERMISSIONS));
+				sm.append(") ");
 
-				sql = sb.toString();
+				sql = sm.toString();
 
 				sql = StringUtil.replace(
 					sql, "[$PERMISSION_IDS$]",
@@ -240,19 +241,19 @@ public class PermissionFinder {
 					sql, "[$GROUP_IDS$]",
 					_getGroupIds(groups, "Groups_Permissions"));
 
-				sb = new StringBuffer();
+				sm = new StringMaker();
 
-				sb.append(sql);
+				sm.append(sql);
 
-				sb.append("UNION ALL ");
+				sm.append("UNION ALL ");
 			}
 
 			if (roles.size() > 0) {
-				sb.append("(");
-				sb.append(CustomSQLUtil.get(COUNT_BY_ROLES_PERMISSIONS));
-				sb.append(") ");
+				sm.append("(");
+				sm.append(CustomSQLUtil.get(COUNT_BY_ROLES_PERMISSIONS));
+				sm.append(") ");
 
-				sql = sb.toString();
+				sql = sm.toString();
 
 				sql = StringUtil.replace(
 					sql, "[$PERMISSION_IDS$]",
@@ -261,18 +262,18 @@ public class PermissionFinder {
 					sql, "[$ROLE_IDS$]",
 					_getRoleIds(roles, "Roles_Permissions"));
 
-				sb = new StringBuffer();
+				sm = new StringMaker();
 
-				sb.append(sql);
+				sm.append(sql);
 
-				sb.append("UNION ALL ");
+				sm.append("UNION ALL ");
 			}
 
-			sb.append("(");
-			sb.append(CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS));
-			sb.append(") ");
+			sm.append("(");
+			sm.append(CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS));
+			sm.append(") ");
 
-			sql = sb.toString();
+			sql = sm.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
@@ -763,76 +764,76 @@ public class PermissionFinder {
 	}
 
 	private static String _getActionIds(String[] actionIds) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < actionIds.length; i++) {
-			sb.append("Permission_.actionId = ?");
+			sm.append("Permission_.actionId = ?");
 
 			if ((i + 1) < actionIds.length) {
-				sb.append(" OR ");
+				sm.append(" OR ");
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _getGroupIds(List groups, String table) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < groups.size(); i++) {
-			sb.append(table);
-			sb.append(".groupId = ?");
+			sm.append(table);
+			sm.append(".groupId = ?");
 
 			if ((i + 1) < groups.size()) {
-				sb.append(" OR ");
+				sm.append(" OR ");
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _getPermissionIds(List permissions, String table) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < permissions.size(); i++) {
-			sb.append(table);
-			sb.append(".permissionId = ?");
+			sm.append(table);
+			sm.append(".permissionId = ?");
 
 			if ((i + 1) < permissions.size()) {
-				sb.append(" OR ");
+				sm.append(" OR ");
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _getResourceIds(long[] resourceIds) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < resourceIds.length; i++) {
-			sb.append("resourceId = ?");
+			sm.append("resourceId = ?");
 
 			if ((i + 1) < resourceIds.length) {
-				sb.append(" OR ");
+				sm.append(" OR ");
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _getRoleIds(List roles, String table) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < roles.size(); i++) {
-			sb.append(table);
-			sb.append(".roleId = ?");
+			sm.append(table);
+			sm.append(".roleId = ?");
 
 			if ((i + 1) < roles.size()) {
-				sb.append(" OR ");
+				sm.append(" OR ");
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static void _setGroupIds(QueryPos qPos, List groups) {

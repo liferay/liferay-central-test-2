@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
@@ -138,27 +139,27 @@ public class WebSiteBuilder {
 		BufferedReader br = new BufferedReader(new FileReader(
 			_portalExtProperties));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
 			if (line.startsWith("portal.instances")) {
-				sb.append("portal.instances=" + webSites.size());
+				sm.append("portal.instances=" + webSites.size());
 			}
 			else {
-				sb.append(line);
+				sm.append(line);
 			}
 
-			sb.append("\n");
+			sm.append("\n");
 		}
 
 		br.close();
 
-		FileUtil.write(_portalExtProperties, sb.toString());
+		FileUtil.write(_portalExtProperties, sm.toString());
 
 		// /orion/config/application.xml
 
-		sb = new StringBuffer();
+		sm = new StringMaker();
 
 		Iterator itr = webSites.iterator();
 
@@ -166,12 +167,12 @@ public class WebSiteBuilder {
 			WebSite webSite = (WebSite)itr.next();
 
 			if (webSite.isHttpEnabled() || webSite.isHttpsEnabled()) {
-				sb.append("\t<web-module id=\"");
-				sb.append(webSite.getId());
-				sb.append("-web\" ");
-				sb.append("path=\"../applications/");
-				sb.append(webSite.getId());
-				sb.append("-web.war\" />\n");
+				sm.append("\t<web-module id=\"");
+				sm.append(webSite.getId());
+				sm.append("-web\" ");
+				sm.append("path=\"../applications/");
+				sm.append(webSite.getId());
+				sm.append("-web.war\" />\n");
 			}
 		}
 
@@ -183,14 +184,14 @@ public class WebSiteBuilder {
 		int y = content.indexOf("<!-- End ASP -->");
 
 		content =
-			content.substring(0, x  + 20) + sb.toString() +
+			content.substring(0, x  + 20) + sm.toString() +
 				content.substring(y - 2, content.length());
 
 		FileUtil.write(file, content);
 
 		// /orion/config/server.xml
 
-		sb = new StringBuffer();
+		sm = new StringMaker();
 
 		itr = webSites.iterator();
 
@@ -198,15 +199,15 @@ public class WebSiteBuilder {
 			WebSite webSite = (WebSite)itr.next();
 
 			if (webSite.isHttpEnabled()) {
-				sb.append("\t<web-site path=\"./web-sites/");
-				sb.append(webSite.getId());
-				sb.append("-web.xml\" />\n");
+				sm.append("\t<web-site path=\"./web-sites/");
+				sm.append(webSite.getId());
+				sm.append("-web.xml\" />\n");
 			}
 
 			if (webSite.isHttpsEnabled()) {
-				sb.append("\t<web-site path=\"./web-sites/");
-				sb.append(webSite.getId());
-				sb.append("-web-secure.xml\" />\n");
+				sm.append("\t<web-site path=\"./web-sites/");
+				sm.append(webSite.getId());
+				sm.append("-web-secure.xml\" />\n");
 			}
 		}
 
@@ -218,7 +219,7 @@ public class WebSiteBuilder {
 		y = content.indexOf("<!-- End ASP -->");
 
 		content =
-			content.substring(0, x  + 20) + sb.toString() +
+			content.substring(0, x  + 20) + sm.toString() +
 				content.substring(y - 2, content.length());
 
 		FileUtil.write(file, content);

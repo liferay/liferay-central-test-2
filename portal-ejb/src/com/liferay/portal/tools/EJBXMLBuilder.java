@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
@@ -74,13 +75,13 @@ public class EJBXMLBuilder {
 	}
 
 	private void _buildBorlandXML() throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("<?xml version=\"1.0\"?>\n");
-		sb.append("<!DOCTYPE ejb-jar PUBLIC \"-//Borland Software Corporation//DTD Enterprise JavaBeans 2.0//EN\" \"http://www.borland.com/devsupport/appserver/dtds/ejb-jar_2_0-borland.dtd\">\n");
+		sm.append("<?xml version=\"1.0\"?>\n");
+		sm.append("<!DOCTYPE ejb-jar PUBLIC \"-//Borland Software Corporation//DTD Enterprise JavaBeans 2.0//EN\" \"http://www.borland.com/devsupport/appserver/dtds/ejb-jar_2_0-borland.dtd\">\n");
 
-		sb.append("\n<ejb-jar>\n");
-		sb.append("\t<enterprise-beans>\n");
+		sm.append("\n<ejb-jar>\n");
+		sm.append("\t<enterprise-beans>\n");
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -91,47 +92,47 @@ public class EJBXMLBuilder {
 		while (itr.hasNext()) {
 			Element entity = (Element)itr.next();
 
-			sb.append("\t\t<session>\n");
-			sb.append("\t\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
+			sm.append("\t\t<session>\n");
+			sm.append("\t\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
 
 			String displayName = entity.elementText("display-name");
 
 			if (displayName.endsWith("LocalServiceEJB")) {
-				sb.append("\t\t\t<bean-local-home-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</bean-local-home-name>\n");
+				sm.append("\t\t\t<bean-local-home-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</bean-local-home-name>\n");
 			}
 			else {
-				sb.append("\t\t\t<bean-home-name>").append(entity.elementText("ejb-name")).append("</bean-home-name>\n");
+				sm.append("\t\t\t<bean-home-name>").append(entity.elementText("ejb-name")).append("</bean-home-name>\n");
 			}
 
-			sb.append("\t\t</session>\n");
+			sm.append("\t\t</session>\n");
 		}
 
-		sb.append("\t</enterprise-beans>\n");
-		sb.append("\t<property>\n");
-		sb.append("\t\t<prop-name>ejb.default_transaction_attribute</prop-name>\n");
-		sb.append("\t\t<prop-type>String</prop-type>\n");
-		sb.append("\t\t<prop-value>Supports</prop-value>\n");
-		sb.append("\t</property>\n");
-		sb.append("</ejb-jar>");
+		sm.append("\t</enterprise-beans>\n");
+		sm.append("\t<property>\n");
+		sm.append("\t\t<prop-name>ejb.default_transaction_attribute</prop-name>\n");
+		sm.append("\t\t<prop-type>String</prop-type>\n");
+		sm.append("\t\t<prop-value>Supports</prop-value>\n");
+		sm.append("\t</property>\n");
+		sm.append("</ejb-jar>");
 
 		File outputFile = new File("classes/META-INF/ejb-borland.xml");
 
 		if (!outputFile.exists() ||
-			!FileUtil.read(outputFile).equals(sb.toString())) {
+			!FileUtil.read(outputFile).equals(sm.toString())) {
 
-			FileUtil.write(outputFile, sb.toString());
+			FileUtil.write(outputFile, sm.toString());
 
 			System.out.println(outputFile.toString());
 		}
 	}
 
 	private void _buildJOnASXML() throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("<?xml version=\"1.0\"?>\n");
-		sb.append("<!DOCTYPE jonas-ejb-jar PUBLIC \"-//ObjectWeb//DTD JOnAS 3.2//EN\" \"http://www.objectweb.org/jonas/dtds/jonas-ejb-jar_3_2.dtd\">\n");
+		sm.append("<?xml version=\"1.0\"?>\n");
+		sm.append("<!DOCTYPE jonas-ejb-jar PUBLIC \"-//ObjectWeb//DTD JOnAS 3.2//EN\" \"http://www.objectweb.org/jonas/dtds/jonas-ejb-jar_3_2.dtd\">\n");
 
-		sb.append("\n<jonas-ejb-jar>\n");
+		sm.append("\n<jonas-ejb-jar>\n");
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -142,50 +143,50 @@ public class EJBXMLBuilder {
 		while (itr.hasNext()) {
 			Element entity = (Element)itr.next();
 
-			sb.append("\t<jonas-session>\n");
-			sb.append("\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
+			sm.append("\t<jonas-session>\n");
+			sm.append("\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
 
 			String displayName = entity.elementText("display-name");
 
 			if (displayName.endsWith("LocalServiceEJB")) {
-				sb.append("\t\t<jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</jndi-name>\n");
+				sm.append("\t\t<jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</jndi-name>\n");
 			}
 			else {
-				sb.append("\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
+				sm.append("\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
 			}
 
-			sb.append("\t\t<jonas-resource>\n");
-			sb.append("\t\t\t<res-ref-name>jdbc/LiferayPool</res-ref-name>\n");
-			sb.append("\t\t\t<jndi-name>jdbc/LiferayPool</jndi-name>\n");
-			sb.append("\t\t</jonas-resource>\n");
-			sb.append("\t\t<jonas-resource>\n");
-			sb.append("\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
-			sb.append("\t\t\t<jndi-name>mail/MailSession</jndi-name>\n");
-			sb.append("\t\t</jonas-resource>\n");
-			sb.append("\t</jonas-session>\n");
+			sm.append("\t\t<jonas-resource>\n");
+			sm.append("\t\t\t<res-ref-name>jdbc/LiferayPool</res-ref-name>\n");
+			sm.append("\t\t\t<jndi-name>jdbc/LiferayPool</jndi-name>\n");
+			sm.append("\t\t</jonas-resource>\n");
+			sm.append("\t\t<jonas-resource>\n");
+			sm.append("\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
+			sm.append("\t\t\t<jndi-name>mail/MailSession</jndi-name>\n");
+			sm.append("\t\t</jonas-resource>\n");
+			sm.append("\t</jonas-session>\n");
 		}
 
-		sb.append("</jonas-ejb-jar>");
+		sm.append("</jonas-ejb-jar>");
 
 		File outputFile = new File("classes/META-INF/jonas-ejb-jar.xml");
 
 		if (!outputFile.exists() ||
-			!FileUtil.read(outputFile).equals(sb.toString())) {
+			!FileUtil.read(outputFile).equals(sm.toString())) {
 
-			FileUtil.write(outputFile, sb.toString());
+			FileUtil.write(outputFile, sm.toString());
 
 			System.out.println(outputFile.toString());
 		}
 	}
 
 	private void _buildJRunXML() throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("<?xml version=\"1.0\"?>\n");
-		sb.append("<!DOCTYPE jrun-ejb-jar PUBLIC \"-//Macromedia, Inc.//DTD jrun-ejb-jar 4.0//EN\" \"http://jrun.macromedia.com/dtds/jrun-ejb-jar.dtd\">\n");
+		sm.append("<?xml version=\"1.0\"?>\n");
+		sm.append("<!DOCTYPE jrun-ejb-jar PUBLIC \"-//Macromedia, Inc.//DTD jrun-ejb-jar 4.0//EN\" \"http://jrun.macromedia.com/dtds/jrun-ejb-jar.dtd\">\n");
 
-		sb.append("\n<jrun-ejb-jar>\n");
-		sb.append("\t<enterprise-beans>\n");
+		sm.append("\n<jrun-ejb-jar>\n");
+		sm.append("\t<enterprise-beans>\n");
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -196,50 +197,50 @@ public class EJBXMLBuilder {
 		while (itr.hasNext()) {
 			Element entity = (Element)itr.next();
 
-			sb.append("\t\t<session>\n");
-			sb.append("\t\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
+			sm.append("\t\t<session>\n");
+			sm.append("\t\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
 
 			String displayName = entity.elementText("display-name");
 
 			if (displayName.endsWith("LocalServiceEJB")) {
-				sb.append("\t\t\t<local-jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</local-jndi-name>\n");
+				sm.append("\t\t\t<local-jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</local-jndi-name>\n");
 			}
 			else {
-				sb.append("\t\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
+				sm.append("\t\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
 			}
 
-			sb.append("\t\t\t<cluster-home>false</cluster-home>\n");
-			sb.append("\t\t\t<cluster-object>false</cluster-object>\n");
-			sb.append("\t\t\t<timeout>3000</timeout>\n");
-			sb.append("\t\t</session>\n");
+			sm.append("\t\t\t<cluster-home>false</cluster-home>\n");
+			sm.append("\t\t\t<cluster-object>false</cluster-object>\n");
+			sm.append("\t\t\t<timeout>3000</timeout>\n");
+			sm.append("\t\t</session>\n");
 		}
 
-		sb.append("\t</enterprise-beans>\n");
-		sb.append("</jrun-ejb-jar>");
+		sm.append("\t</enterprise-beans>\n");
+		sm.append("</jrun-ejb-jar>");
 
 		File outputFile = new File("classes/META-INF/jrun-ejb-jar.xml");
 
 		if (!outputFile.exists() ||
-			!FileUtil.read(outputFile).equals(sb.toString())) {
+			!FileUtil.read(outputFile).equals(sm.toString())) {
 
-			FileUtil.write(outputFile, sb.toString());
+			FileUtil.write(outputFile, sm.toString());
 
 			System.out.println(outputFile.toString());
 		}
 	}
 
 	private void _buildPramatiXML() throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("<?xml version=\"1.0\"?>\n");
-		sb.append("<!DOCTYPE pramati-j2ee-server PUBLIC \"-//Pramati Technologies //DTD Pramati J2ee Server 5.0//EN\" \"http://www.pramati.com/dtd/pramati-j2ee-server_5_0.dtd\">\n");
+		sm.append("<?xml version=\"1.0\"?>\n");
+		sm.append("<!DOCTYPE pramati-j2ee-server PUBLIC \"-//Pramati Technologies //DTD Pramati J2ee Server 5.0//EN\" \"http://www.pramati.com/dtd/pramati-j2ee-server_5_0.dtd\">\n");
 
-		sb.append("\n<pramati-j2ee-server>\n");
-		sb.append("\t<vhost-name>default</vhost-name>\n");
-		sb.append("\t<auto-start>TRUE</auto-start>\n");
-		sb.append("\t<realm-name />\n");
-		sb.append("\t<ejb-module>\n");
-		sb.append("\t\t<name>").append(_jarFileName).append("</name>\n");
+		sm.append("\n<pramati-j2ee-server>\n");
+		sm.append("\t<vhost-name>default</vhost-name>\n");
+		sm.append("\t<auto-start>TRUE</auto-start>\n");
+		sm.append("\t<realm-name />\n");
+		sm.append("\t<ejb-module>\n");
+		sm.append("\t\t<name>").append(_jarFileName).append("</name>\n");
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -250,58 +251,58 @@ public class EJBXMLBuilder {
 		while (itr.hasNext()) {
 			Element entity = (Element)itr.next();
 
-			sb.append("\t\t<ejb>\n");
-			sb.append("\t\t\t<name>").append(entity.elementText("ejb-name")).append("</name>\n");
-			sb.append("\t\t\t<max-pool-size>40</max-pool-size>\n");
-			sb.append("\t\t\t<min-pool-size>20</min-pool-size>\n");
-			sb.append("\t\t\t<enable-freepool>false</enable-freepool>\n");
-			sb.append("\t\t\t<pool-waittimeout-millis>60000</pool-waittimeout-millis>\n");
-			sb.append("\t\t\t<pk-waittimeout-millis/>\n");
-			sb.append("\t\t\t<low-activity-interval>20</low-activity-interval>\n");
-			sb.append("\t\t\t<is-secure>false</is-secure>\n");
-			sb.append("\t\t\t<is-clustered>true</is-clustered>\n");
+			sm.append("\t\t<ejb>\n");
+			sm.append("\t\t\t<name>").append(entity.elementText("ejb-name")).append("</name>\n");
+			sm.append("\t\t\t<max-pool-size>40</max-pool-size>\n");
+			sm.append("\t\t\t<min-pool-size>20</min-pool-size>\n");
+			sm.append("\t\t\t<enable-freepool>false</enable-freepool>\n");
+			sm.append("\t\t\t<pool-waittimeout-millis>60000</pool-waittimeout-millis>\n");
+			sm.append("\t\t\t<pk-waittimeout-millis/>\n");
+			sm.append("\t\t\t<low-activity-interval>20</low-activity-interval>\n");
+			sm.append("\t\t\t<is-secure>false</is-secure>\n");
+			sm.append("\t\t\t<is-clustered>true</is-clustered>\n");
 
 			String displayName = entity.elementText("display-name");
 
 			if (displayName.endsWith("LocalServiceEJB")) {
-				sb.append("\t\t\t<jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</jndi-name>\n");
-				sb.append("\t\t\t<local-jndi-name>").append(entity.elementText("ejb-name")).append("__PRAMATI_LOCAL").append("</local-jndi-name>\n");
+				sm.append("\t\t\t<jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</jndi-name>\n");
+				sm.append("\t\t\t<local-jndi-name>").append(entity.elementText("ejb-name")).append("__PRAMATI_LOCAL").append("</local-jndi-name>\n");
 			}
 			else {
-				sb.append("\t\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
+				sm.append("\t\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
 			}
 
-			sb.append(_buildPramatiXMLRefs(entity));
+			sm.append(_buildPramatiXMLRefs(entity));
 
-			sb.append("\t\t</ejb>\n");
+			sm.append("\t\t</ejb>\n");
 		}
 
-		sb.append("\t</ejb-module>\n");
-		sb.append("</pramati-j2ee-server>");
+		sm.append("\t</ejb-module>\n");
+		sm.append("</pramati-j2ee-server>");
 
 		File outputFile = new File("classes/pramati-j2ee-server.xml");
 
 		if (!outputFile.exists() ||
-			!FileUtil.read(outputFile).equals(sb.toString())) {
+			!FileUtil.read(outputFile).equals(sm.toString())) {
 
-			FileUtil.write(outputFile, sb.toString());
+			FileUtil.write(outputFile, sm.toString());
 
 			System.out.println(outputFile.toString());
 		}
 	}
 
 	private String _buildPramatiXMLRefs(Element entity) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = entity.elements("ejb-ref").iterator();
 
 		while (itr.hasNext()) {
 			Element ejbRef = (Element)itr.next();
 
-			sb.append("\t\t\t<ejb-ref>\n");
-			sb.append("\t\t\t\t<ejb-ref-name>").append(ejbRef.elementText("ejb-ref-name")).append("</ejb-ref-name>\n");
-			sb.append("\t\t\t\t<ejb-link>").append(ejbRef.elementText("ejb-link")).append("</ejb-link>\n");
-			sb.append("\t\t\t</ejb-ref>\n");
+			sm.append("\t\t\t<ejb-ref>\n");
+			sm.append("\t\t\t\t<ejb-ref-name>").append(ejbRef.elementText("ejb-ref-name")).append("</ejb-ref-name>\n");
+			sm.append("\t\t\t\t<ejb-link>").append(ejbRef.elementText("ejb-link")).append("</ejb-link>\n");
+			sm.append("\t\t\t</ejb-ref>\n");
 		}
 
 		itr = entity.elements("ejb-local-ref").iterator();
@@ -309,34 +310,34 @@ public class EJBXMLBuilder {
 		while (itr.hasNext()) {
 			Element ejbRef = (Element)itr.next();
 
-			sb.append("\t\t\t<ejb-local-ref>\n");
-			sb.append("\t\t\t\t<ejb-ref-name>").append(ejbRef.elementText("ejb-ref-name")).append("</ejb-ref-name>\n");
-			sb.append("\t\t\t\t<ejb-link>").append(ejbRef.elementText("ejb-link")).append("__PRAMATI_LOCAL").append("</ejb-link>\n");
-			sb.append("\t\t\t</ejb-local-ref>\n");
+			sm.append("\t\t\t<ejb-local-ref>\n");
+			sm.append("\t\t\t\t<ejb-ref-name>").append(ejbRef.elementText("ejb-ref-name")).append("</ejb-ref-name>\n");
+			sm.append("\t\t\t\t<ejb-link>").append(ejbRef.elementText("ejb-link")).append("__PRAMATI_LOCAL").append("</ejb-link>\n");
+			sm.append("\t\t\t</ejb-local-ref>\n");
 		}
 
-		sb.append("\t\t\t<resource-mapping>\n");
-		sb.append("\t\t\t\t<resource-name>jdbc/LiferayPool</resource-name>\n");
-		sb.append("\t\t\t\t<resource-type>javax.sql.DataSource</resource-type>\n");
-		sb.append("\t\t\t\t<resource-link>LiferayPool</resource-link>\n");
-		sb.append("\t\t\t</resource-mapping>\n");
+		sm.append("\t\t\t<resource-mapping>\n");
+		sm.append("\t\t\t\t<resource-name>jdbc/LiferayPool</resource-name>\n");
+		sm.append("\t\t\t\t<resource-type>javax.sql.DataSource</resource-type>\n");
+		sm.append("\t\t\t\t<resource-link>LiferayPool</resource-link>\n");
+		sm.append("\t\t\t</resource-mapping>\n");
 
-		sb.append("\t\t\t<resource-mapping>\n");
-		sb.append("\t\t\t\t<resource-name>mail/MailSession</resource-name>\n");
-		sb.append("\t\t\t\t<resource-type>javax.mail.Session</resource-type>\n");
-		sb.append("\t\t\t\t<resource-link>mail/MailSession</resource-link>\n");
-		sb.append("\t\t\t</resource-mapping>\n");
+		sm.append("\t\t\t<resource-mapping>\n");
+		sm.append("\t\t\t\t<resource-name>mail/MailSession</resource-name>\n");
+		sm.append("\t\t\t\t<resource-type>javax.mail.Session</resource-type>\n");
+		sm.append("\t\t\t\t<resource-link>mail/MailSession</resource-link>\n");
+		sm.append("\t\t\t</resource-mapping>\n");
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private void _buildRexIPXML() throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("<?xml version=\"1.0\"?>\n");
+		sm.append("<?xml version=\"1.0\"?>\n");
 
-		sb.append("\n<rexip-ejb-jar>\n");
-		sb.append("\t<enterprise-beans>\n");
+		sm.append("\n<rexip-ejb-jar>\n");
+		sm.append("\t<enterprise-beans>\n");
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -347,46 +348,46 @@ public class EJBXMLBuilder {
 		while (itr.hasNext()) {
 			Element entity = (Element)itr.next();
 
-			sb.append("\t\t<session>\n");
-			sb.append("\t\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
+			sm.append("\t\t<session>\n");
+			sm.append("\t\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
 
 			String displayName = entity.elementText("display-name");
 
 			if (displayName.endsWith("LocalServiceEJB")) {
-				sb.append("\t\t\t<local-jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</local-jndi-name>\n");
+				sm.append("\t\t\t<local-jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</local-jndi-name>\n");
 			}
 			else {
-				sb.append("\t\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
+				sm.append("\t\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
 			}
 
-			sb.append("\t\t\t<clustered>true</clustered>\n");
-			sb.append("\t\t\t<pool-size>20</pool-size>\n");
-			sb.append("\t\t\t<cache-size>20</cache-size>\n");
-			sb.append("\t\t</session>\n");
+			sm.append("\t\t\t<clustered>true</clustered>\n");
+			sm.append("\t\t\t<pool-size>20</pool-size>\n");
+			sm.append("\t\t\t<cache-size>20</cache-size>\n");
+			sm.append("\t\t</session>\n");
 		}
 
-		sb.append("\t</enterprise-beans>\n");
-		sb.append("</rexip-ejb-jar>");
+		sm.append("\t</enterprise-beans>\n");
+		sm.append("</rexip-ejb-jar>");
 
 		File outputFile = new File("classes/META-INF/rexip-ejb-jar.xml");
 
 		if (!outputFile.exists() ||
-			!FileUtil.read(outputFile).equals(sb.toString())) {
+			!FileUtil.read(outputFile).equals(sm.toString())) {
 
-			FileUtil.write(outputFile, sb.toString());
+			FileUtil.write(outputFile, sm.toString());
 
 			System.out.println(outputFile.toString());
 		}
 	}
 
 	private void _buildSunXML() throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("<?xml version=\"1.0\"?>\n");
-		sb.append("<!DOCTYPE sun-ejb-jar PUBLIC \"-//Sun Microsystems, Inc.//DTD Sun ONE Application Server 7.0 EJB 2.0//EN\" \"http://www.sun.com/software/sunone/appserver/dtds/sun-ejb-jar_2_0-0.dtd\">\n");
+		sm.append("<?xml version=\"1.0\"?>\n");
+		sm.append("<!DOCTYPE sun-ejb-jar PUBLIC \"-//Sun Microsystems, Inc.//DTD Sun ONE Application Server 7.0 EJB 2.0//EN\" \"http://www.sun.com/software/sunone/appserver/dtds/sun-ejb-jar_2_0-0.dtd\">\n");
 
-		sb.append("\n<sun-ejb-jar>\n");
-		sb.append("\t<enterprise-beans>\n");
+		sm.append("\n<sun-ejb-jar>\n");
+		sm.append("\t<enterprise-beans>\n");
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -397,53 +398,53 @@ public class EJBXMLBuilder {
 		while (itr.hasNext()) {
 			Element entity = (Element)itr.next();
 
-			sb.append("\t\t<ejb>\n");
-			sb.append("\t\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
+			sm.append("\t\t<ejb>\n");
+			sm.append("\t\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
 
 			String displayName = entity.elementText("display-name");
 
 			if (displayName.endsWith("LocalServiceEJB")) {
-				sb.append("\t\t\t<jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</jndi-name>\n");
+				sm.append("\t\t\t<jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</jndi-name>\n");
 			}
 			else {
-				sb.append("\t\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
+				sm.append("\t\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
 			}
 
-			sb.append("\t\t\t<bean-pool>\n");
-			sb.append("\t\t\t\t<steady-pool-size>0</steady-pool-size>\n");
-			sb.append("\t\t\t\t<resize-quantity>60</resize-quantity>\n");
-			sb.append("\t\t\t\t<max-pool-size>60</max-pool-size>\n");
-			sb.append("\t\t\t\t<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>\n");
-			sb.append("\t\t\t</bean-pool>\n");
-			sb.append("\t\t</ejb>\n");
+			sm.append("\t\t\t<bean-pool>\n");
+			sm.append("\t\t\t\t<steady-pool-size>0</steady-pool-size>\n");
+			sm.append("\t\t\t\t<resize-quantity>60</resize-quantity>\n");
+			sm.append("\t\t\t\t<max-pool-size>60</max-pool-size>\n");
+			sm.append("\t\t\t\t<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>\n");
+			sm.append("\t\t\t</bean-pool>\n");
+			sm.append("\t\t</ejb>\n");
 		}
 
-		sb.append("\t</enterprise-beans>\n");
-		sb.append("</sun-ejb-jar>");
+		sm.append("\t</enterprise-beans>\n");
+		sm.append("</sun-ejb-jar>");
 
 		File outputFile = new File("classes/META-INF/sun-ejb-jar.xml");
 
 		if (!outputFile.exists() ||
-			!FileUtil.read(outputFile).equals(sb.toString())) {
+			!FileUtil.read(outputFile).equals(sm.toString())) {
 
-			FileUtil.write(outputFile, sb.toString());
+			FileUtil.write(outputFile, sm.toString());
 
 			System.out.println(outputFile.toString());
 		}
 	}
 
 	private void _buildWebLogicXML(double version) throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("<?xml version=\"1.0\"?>\n");
+		sm.append("<?xml version=\"1.0\"?>\n");
 
 		if (version == 8.1) {
-			sb.append("<!DOCTYPE weblogic-ejb-jar PUBLIC \"-//BEA Systems, Inc.//DTD WebLogic 8.1.0 EJB//EN\" \"http://www.bea.com/servers/wls810/dtd/weblogic-ejb-jar.dtd\">\n");
+			sm.append("<!DOCTYPE weblogic-ejb-jar PUBLIC \"-//BEA Systems, Inc.//DTD WebLogic 8.1.0 EJB//EN\" \"http://www.bea.com/servers/wls810/dtd/weblogic-ejb-jar.dtd\">\n");
 
-			sb.append("\n<weblogic-ejb-jar>\n");
+			sm.append("\n<weblogic-ejb-jar>\n");
 		}
 		else {
-			sb.append("\n<weblogic-ejb-jar xmlns=\"http://www.bea.com/ns/weblogic/90\" xmlns:j2ee=\"http://java.sun.com/xml/ns/j2ee\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.bea.com/ns/weblogic/90 http://www.bea.com/ns/weblogic/90/weblogic-ejb-jar.xsd\">\n");
+			sm.append("\n<weblogic-ejb-jar xmlns=\"http://www.bea.com/ns/weblogic/90\" xmlns:j2ee=\"http://java.sun.com/xml/ns/j2ee\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.bea.com/ns/weblogic/90 http://www.bea.com/ns/weblogic/90/weblogic-ejb-jar.xsd\">\n");
 		}
 
 		SAXReader reader = SAXReaderFactory.getInstance();
@@ -455,39 +456,39 @@ public class EJBXMLBuilder {
 		while (itr.hasNext()) {
 			Element entity = (Element)itr.next();
 
-			sb.append("\t<weblogic-enterprise-bean>\n");
-			sb.append("\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
+			sm.append("\t<weblogic-enterprise-bean>\n");
+			sm.append("\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
 
 			String displayName = entity.elementText("display-name");
 
 			if (version == 8.1) {
-				sb.append("\t\t<reference-descriptor>\n");
-				sb.append("\t\t\t<resource-description>\n");
-				sb.append("\t\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
-				sb.append("\t\t\t\t<jndi-name>mail/MailSession</jndi-name>\n");
-				sb.append("\t\t\t</resource-description>\n");
-				sb.append("\t\t</reference-descriptor>\n");
+				sm.append("\t\t<reference-descriptor>\n");
+				sm.append("\t\t\t<resource-description>\n");
+				sm.append("\t\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
+				sm.append("\t\t\t\t<jndi-name>mail/MailSession</jndi-name>\n");
+				sm.append("\t\t\t</resource-description>\n");
+				sm.append("\t\t</reference-descriptor>\n");
 			}
 			else {
-				sb.append("\t\t<resource-description>\n");
-				sb.append("\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
-				sb.append("\t\t\t<jndi-name>mail/MailSession</jndi-name>\n");
-				sb.append("\t\t</resource-description>\n");
+				sm.append("\t\t<resource-description>\n");
+				sm.append("\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
+				sm.append("\t\t\t<jndi-name>mail/MailSession</jndi-name>\n");
+				sm.append("\t\t</resource-description>\n");
 			}
 
-			sb.append("\t\t<enable-call-by-reference>true</enable-call-by-reference>\n");
+			sm.append("\t\t<enable-call-by-reference>true</enable-call-by-reference>\n");
 
 			if (displayName.endsWith("LocalServiceEJB")) {
-				sb.append("\t\t<local-jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</local-jndi-name>\n");
+				sm.append("\t\t<local-jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</local-jndi-name>\n");
 			}
 			else {
-				sb.append("\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
+				sm.append("\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
 			}
 
-			sb.append("\t</weblogic-enterprise-bean>\n");
+			sm.append("\t</weblogic-enterprise-bean>\n");
 		}
 
-		sb.append("</weblogic-ejb-jar>");
+		sm.append("</weblogic-ejb-jar>");
 
 		File outputFile = null;
 		
@@ -499,9 +500,9 @@ public class EJBXMLBuilder {
 		}
 
 		if (!outputFile.exists() ||
-			!FileUtil.read(outputFile).equals(sb.toString())) {
+			!FileUtil.read(outputFile).equals(sm.toString())) {
 
-			FileUtil.write(outputFile, sb.toString());
+			FileUtil.write(outputFile, sm.toString());
 
 			System.out.println(outputFile.toString());
 		}
@@ -510,7 +511,7 @@ public class EJBXMLBuilder {
 	private void _updateEJBXML() throws Exception {
 		File xmlFile = new File("classes/META-INF/ejb-jar.xml");
 
-		StringBuffer methodsSB = new StringBuffer();
+		StringMaker methodsSB = new StringMaker();
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -538,18 +539,18 @@ public class EJBXMLBuilder {
 			methodsSB.append("\t\t\t</method>\n");
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("\t<assembly-descriptor>\n");
-		sb.append("\t\t<method-permission>\n");
-		sb.append("\t\t\t<unchecked />\n");
-		sb.append(methodsSB);
-		sb.append("\t\t</method-permission>\n");
-		/*sb.append("\t\t<container-transaction>\n");
-		sb.append(methodsSB);
-		sb.append("\t\t\t<trans-attribute>Required</trans-attribute>\n");
-		sb.append("\t\t</container-transaction>\n");*/
-		sb.append("\t</assembly-descriptor>\n");
+		sm.append("\t<assembly-descriptor>\n");
+		sm.append("\t\t<method-permission>\n");
+		sm.append("\t\t\t<unchecked />\n");
+		sm.append(methodsSB);
+		sm.append("\t\t</method-permission>\n");
+		/*sm.append("\t\t<container-transaction>\n");
+		sm.append(methodsSB);
+		sm.append("\t\t\t<trans-attribute>Required</trans-attribute>\n");
+		sm.append("\t\t</container-transaction>\n");*/
+		sm.append("\t</assembly-descriptor>\n");
 
 		String content = FileUtil.read(xmlFile);
 
@@ -562,7 +563,7 @@ public class EJBXMLBuilder {
 		}
 
 		String newContent =
-			content.substring(0, x) + sb.toString() +
+			content.substring(0, x) + sm.toString() +
 			content.substring(y, content.length());
 
 		if (!content.equals(newContent)) {
@@ -573,7 +574,7 @@ public class EJBXMLBuilder {
 	}
 
 	private void _updateRemotingXML() throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -601,20 +602,20 @@ public class EJBXMLBuilder {
 				serviceName = StringUtil.replace(
 					serviceName, ".service.ejb.", ".service.");
 
-				sb.append("\t<bean name=\"/").append(serviceMapping).append("-burlap\" class=\"org.springframework.remoting.caucho.BurlapServiceExporter\">\n");
-				sb.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");
-				sb.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
-				sb.append("\t</bean>\n");
+				sm.append("\t<bean name=\"/").append(serviceMapping).append("-burlap\" class=\"org.springframework.remoting.caucho.BurlapServiceExporter\">\n");
+				sm.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");
+				sm.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
+				sm.append("\t</bean>\n");
 
-				sb.append("\t<bean name=\"/").append(serviceMapping).append("-hessian\" class=\"org.springframework.remoting.caucho.HessianServiceExporter\">\n");
-				sb.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");
-				sb.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
-				sb.append("\t</bean>\n");
+				sm.append("\t<bean name=\"/").append(serviceMapping).append("-hessian\" class=\"org.springframework.remoting.caucho.HessianServiceExporter\">\n");
+				sm.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");
+				sm.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
+				sm.append("\t</bean>\n");
 
-				sb.append("\t<bean name=\"/").append(serviceMapping).append("-http\" class=\"org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter\">\n");
-				sb.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");
-				sb.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
-				sb.append("\t</bean>\n");
+				sm.append("\t<bean name=\"/").append(serviceMapping).append("-http\" class=\"org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter\">\n");
+				sm.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");
+				sm.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
+				sm.append("\t</bean>\n");
 			}
 		}
 
@@ -633,14 +634,14 @@ public class EJBXMLBuilder {
 
 		if (x != -1) {
 			newContent =
-				content.substring(0, x - 1) + sb.toString() +
+				content.substring(0, x - 1) + sm.toString() +
 					content.substring(y, content.length());
 		}
 		else {
 			x = content.indexOf("</beans>");
 
 			newContent =
-				content.substring(0, x) + sb.toString() +
+				content.substring(0, x) + sm.toString() +
 					content.substring(x, content.length());
 		}
 
@@ -652,7 +653,7 @@ public class EJBXMLBuilder {
 	}
 
 	private void _updateWebXML() throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -668,13 +669,13 @@ public class EJBXMLBuilder {
 			String displayName = entity.elementText("display-name");
 
 			if (!displayName.endsWith("LocalServiceEJB")) {
-				sb.append("\t<ejb-ref>\n");
-				sb.append("\t\t<ejb-ref-name>").append(entity.elementText("ejb-name")).append("</ejb-ref-name>\n");
-				sb.append("\t\t<ejb-ref-type>Session</ejb-ref-type>\n");
-				sb.append("\t\t<home>").append(entity.elementText("home")).append("</home>\n");
-				sb.append("\t\t<remote>").append(entity.elementText("remote")).append("</remote>\n");
-				sb.append("\t\t<ejb-link>").append(entity.elementText("ejb-name")).append("</ejb-link>\n");
-				sb.append("\t</ejb-ref>\n");
+				sm.append("\t<ejb-ref>\n");
+				sm.append("\t\t<ejb-ref-name>").append(entity.elementText("ejb-name")).append("</ejb-ref-name>\n");
+				sm.append("\t\t<ejb-ref-type>Session</ejb-ref-type>\n");
+				sm.append("\t\t<home>").append(entity.elementText("home")).append("</home>\n");
+				sm.append("\t\t<remote>").append(entity.elementText("remote")).append("</remote>\n");
+				sm.append("\t\t<ejb-link>").append(entity.elementText("ejb-name")).append("</ejb-link>\n");
+				sm.append("\t</ejb-ref>\n");
 			}
 		}
 
@@ -694,7 +695,7 @@ public class EJBXMLBuilder {
 			int y = content.lastIndexOf("</ejb-ref>") + 11;
 
 			if (x != -1) {
-				sb.append(content.substring(x - 1, y));
+				sm.append(content.substring(x - 1, y));
 			}
 		}
 
@@ -708,13 +709,13 @@ public class EJBXMLBuilder {
 			String displayName = entity.elementText("display-name");
 
 			if (displayName.endsWith("LocalServiceEJB")) {
-				sb.append("\t<ejb-local-ref>\n");
-				sb.append("\t\t<ejb-ref-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</ejb-ref-name>\n");
-				sb.append("\t\t<ejb-ref-type>Session</ejb-ref-type>\n");
-				sb.append("\t\t<local-home>").append(entity.elementText("local-home")).append("</local-home>\n");
-				sb.append("\t\t<local>").append(entity.elementText("local")).append("</local>\n");
-				sb.append("\t\t<ejb-link>").append(entity.elementText("ejb-name")).append("</ejb-link>\n");
-				sb.append("\t</ejb-local-ref>\n");
+				sm.append("\t<ejb-local-ref>\n");
+				sm.append("\t\t<ejb-ref-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</ejb-ref-name>\n");
+				sm.append("\t\t<ejb-ref-type>Session</ejb-ref-type>\n");
+				sm.append("\t\t<local-home>").append(entity.elementText("local-home")).append("</local-home>\n");
+				sm.append("\t\t<local>").append(entity.elementText("local")).append("</local>\n");
+				sm.append("\t\t<ejb-link>").append(entity.elementText("ejb-name")).append("</ejb-link>\n");
+				sm.append("\t</ejb-local-ref>\n");
 			}
 		}
 
@@ -735,18 +736,18 @@ public class EJBXMLBuilder {
 			int y = content.lastIndexOf("</ejb-local-ref>") + 17;
 
 			if (x != -1) {
-				sb.append(content.substring(x - 1, y));
+				sm.append(content.substring(x - 1, y));
 			}
 		}
 
 		// web.xml
 
-		_updateWebXML("../portal-web/docroot/WEB-INF/web.xml", sb);
-		_updateWebXML("../ext-web/docroot/WEB-INF/web.xml", sb);
-		_updateWebXML("../tunnel-web/docroot/WEB-INF/web.xml", sb);
+		_updateWebXML("../portal-web/docroot/WEB-INF/web.xml", sm);
+		_updateWebXML("../ext-web/docroot/WEB-INF/web.xml", sm);
+		_updateWebXML("../tunnel-web/docroot/WEB-INF/web.xml", sm);
 	}
 
-	private void _updateWebXML(String fileName, StringBuffer sb)
+	private void _updateWebXML(String fileName, StringMaker sm)
 		throws Exception {
 
 		File outputFile = new File(fileName);
@@ -775,14 +776,14 @@ public class EJBXMLBuilder {
 
 		if (x != -1) {
 			newContent =
-				content.substring(0, x - 1) + sb.toString() +
+				content.substring(0, x - 1) + sm.toString() +
 					content.substring(y, content.length());
 		}
 		else {
 			x = content.indexOf("</web-app>");
 
 			newContent =
-				content.substring(0, x) + sb.toString() +
+				content.substring(0, x) + sm.toString() +
 					content.substring(x, content.length());
 		}
 

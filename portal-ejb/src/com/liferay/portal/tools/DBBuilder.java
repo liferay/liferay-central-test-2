@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.velocity.VelocityUtil;
 import com.liferay.util.FileUtil;
@@ -104,20 +105,20 @@ public class DBBuilder {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-db2.sql");
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("drop database " + _databaseName + ";\n");
-		sb.append("create database " + _databaseName + ";\n");
-		sb.append("connect to " + _databaseName + ";\n");
-		sb.append(
+		sm.append("drop database " + _databaseName + ";\n");
+		sm.append("create database " + _databaseName + ";\n");
+		sm.append("connect to " + _databaseName + ";\n");
+		sm.append(
 			FileUtil.read("../sql/portal" + minimalSuffix + "/portal" +
 				minimalSuffix + "-db2.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
 
-		FileUtil.write(file, sb.toString());
+		FileUtil.write(file, sm.toString());
 	}
 
 	private void _buildCreateDerby() throws IOException {
@@ -132,21 +133,21 @@ public class DBBuilder {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-derby.sql");
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("drop database " + _databaseName + ";\n");
-		sb.append("create database " + _databaseName + ";\n");
-		sb.append("connect to " + _databaseName + ";\n");
-		sb.append(
+		sm.append("drop database " + _databaseName + ";\n");
+		sm.append("create database " + _databaseName + ";\n");
+		sm.append("connect to " + _databaseName + ";\n");
+		sm.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-derby.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-derby.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/sequences/sequences-derby.sql"));
 
-		FileUtil.write(file, sb.toString());
+		FileUtil.write(file, sm.toString());
 	}
 
 	private void _buildCreateFirebird() throws IOException {
@@ -161,21 +162,21 @@ public class DBBuilder {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-firebird.sql");
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append(
+		sm.append(
 			"create database '" + _databaseName +
 				".gdb' page_size 8192 user 'sysdba' password 'masterkey';\n");
-		sb.append(
+		sm.append(
 			"connect '" + _databaseName +
 				".gdb' user 'sysdba' password 'masterkey';\n");
-		sb.append(
+		sm.append(
 			_readSQL(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-firebird.sql",
 				_FIREBIRD[0], ";\n"));
 
-		FileUtil.write(file, sb.toString());
+		FileUtil.write(file, sm.toString());
 	}
 
 	private void _buildCreateMySQL() throws IOException {
@@ -190,24 +191,24 @@ public class DBBuilder {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-mysql.sql");
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("drop database if exists " + _databaseName + ";\n");
-		sb.append(
+		sm.append("drop database if exists " + _databaseName + ";\n");
+		sm.append(
 			"create database " + _databaseName + " character set utf8;\n");
-		sb.append("use ");
-		sb.append(_databaseName);
-		sb.append(";\n\n");
-		sb.append(
+		sm.append("use ");
+		sm.append(_databaseName);
+		sm.append(";\n\n");
+		sm.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-mysql.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-mysql.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/sequences/sequences-mysql.sql"));
 
-		FileUtil.write(file, sb.toString());
+		FileUtil.write(file, sm.toString());
 	}
 
 	private void _buildCreateOracle() throws IOException {
@@ -222,26 +223,26 @@ public class DBBuilder {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-oracle.sql");
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("drop user &1 cascade;\n");
-		sb.append("create user &1 identified by &2;\n");
-		sb.append("grant connect,resource to &1;\n");
-		sb.append("connect &1/&2;\n");
-		sb.append("set define off;\n");
-		sb.append("\n");
-		sb.append(
+		sm.append("drop user &1 cascade;\n");
+		sm.append("create user &1 identified by &2;\n");
+		sm.append("grant connect,resource to &1;\n");
+		sm.append("connect &1/&2;\n");
+		sm.append("set define off;\n");
+		sm.append("\n");
+		sm.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-oracle.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-oracle.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-oracle.sql"));
-		sb.append("\n");
-		sb.append("quit");
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/indexes/indexes-oracle.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/sequences/sequences-oracle.sql"));
+		sm.append("\n");
+		sm.append("quit");
 
-		FileUtil.write(file, sb.toString());
+		FileUtil.write(file, sm.toString());
 	}
 
 	private void _buildCreatePostgreSQL() throws IOException {
@@ -256,22 +257,22 @@ public class DBBuilder {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-postgresql.sql");
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("drop database " + _databaseName + ";\n");
-		sb.append(
+		sm.append("drop database " + _databaseName + ";\n");
+		sm.append(
 			"create database " + _databaseName + " encoding = 'UNICODE';\n");
-		sb.append("\\c " + _databaseName + ";\n\n");
-		sb.append(
+		sm.append("\\c " + _databaseName + ";\n\n");
+		sm.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-postgresql.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-postgresql.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/sequences/sequences-postgresql.sql"));
 
-		FileUtil.write(file, sb.toString());
+		FileUtil.write(file, sm.toString());
 	}
 
 	private void _buildCreateSQLServer() throws IOException {
@@ -286,24 +287,24 @@ public class DBBuilder {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-sql-server.sql");
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("drop database " + _databaseName + ";\n");
-		sb.append("create database " + _databaseName + ";\n");
-		sb.append("\n");
-		sb.append("go\n");
-		sb.append("\n");
-		sb.append("use " + _databaseName + ";\n\n");
-		sb.append(
+		sm.append("drop database " + _databaseName + ";\n");
+		sm.append("create database " + _databaseName + ";\n");
+		sm.append("\n");
+		sm.append("go\n");
+		sm.append("\n");
+		sm.append("use " + _databaseName + ";\n\n");
+		sm.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-sql-server.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-sql-server.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/sequences/sequences-sql-server.sql"));
 
-		FileUtil.write(file, sb.toString());
+		FileUtil.write(file, sm.toString());
 	}
 
 	private void _buildCreateSybase() throws IOException {
@@ -318,21 +319,21 @@ public class DBBuilder {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-sybase.sql");
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb = new StringBuffer();
+		sm = new StringMaker();
 
-		sb.append("use " + _databaseName + "\n\n");
-		sb.append(
+		sm.append("use " + _databaseName + "\n\n");
+		sm.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-sybase.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
 
-		FileUtil.write(file, sb.toString());
+		FileUtil.write(file, sm.toString());
 	}
 
 	private static String[] _buildColumnNameTokens(String line) {
@@ -468,66 +469,66 @@ public class DBBuilder {
 
 		BufferedReader br = new BufferedReader(new StringReader(oracle));
 
-		StringBuffer imageSB = new StringBuffer();
-		StringBuffer journalArticleSB = new StringBuffer();
-		StringBuffer journalStructureSB = new StringBuffer();
-		StringBuffer journalTemplateSB = new StringBuffer();
-		StringBuffer shoppingItemSB = new StringBuffer();
+		StringMaker imageSM = new StringMaker();
+		StringMaker journalArticleSM = new StringMaker();
+		StringMaker journalStructureSM = new StringMaker();
+		StringMaker journalTemplateSM = new StringMaker();
+		StringMaker shoppingItemSM = new StringMaker();
 
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
 			if (line.startsWith("insert into Image")) {
-				_convertToOracleCSV(line, imageSB);
+				_convertToOracleCSV(line, imageSM);
 			}
 			else if (line.startsWith("insert into JournalArticle")) {
-				_convertToOracleCSV(line, journalArticleSB);
+				_convertToOracleCSV(line, journalArticleSM);
 			}
 			else if (line.startsWith("insert into JournalStructure")) {
-				_convertToOracleCSV(line, journalStructureSB);
+				_convertToOracleCSV(line, journalStructureSM);
 			}
 			else if (line.startsWith("insert into JournalTemplate")) {
-				_convertToOracleCSV(line, journalTemplateSB);
+				_convertToOracleCSV(line, journalTemplateSM);
 			}
 			else if (line.startsWith("insert into ShoppingItem")) {
-				_convertToOracleCSV(line, shoppingItemSB);
+				_convertToOracleCSV(line, shoppingItemSM);
 			}
 		}
 
 		br.close();
 
-		if (imageSB.length() > 0) {
+		if (imageSM.length() > 0) {
 			FileUtil.write(
 				"../sql/" + fileName + "/" + fileName + "-oracle-image.csv",
-				imageSB.toString());
+				imageSM.toString());
 		}
 
-		if (journalArticleSB.length() > 0) {
+		if (journalArticleSM.length() > 0) {
 			FileUtil.write(
 				"../sql/" + fileName + "/" + fileName +
 					"-oracle-journalarticle.csv",
-				journalArticleSB.toString());
+				journalArticleSM.toString());
 		}
 
-		if (journalStructureSB.length() > 0) {
+		if (journalStructureSM.length() > 0) {
 			FileUtil.write(
 				"../sql/" + fileName + "/" + fileName +
 					"-oracle-journalstructure.csv",
-				journalStructureSB.toString());
+				journalStructureSM.toString());
 		}
 
-		if (journalTemplateSB.length() > 0) {
+		if (journalTemplateSM.length() > 0) {
 			FileUtil.write(
 				"../sql/" + fileName + "/" + fileName +
 					"-oracle-journaltemplate.csv",
-				journalTemplateSB.toString());
+				journalTemplateSM.toString());
 		}
 
-		if (shoppingItemSB.length() > 0) {
+		if (shoppingItemSM.length() > 0) {
 			FileUtil.write(
 				"../sql/" + fileName + "/" + fileName +
 					"-oracle-shoppingitem.csv",
-				shoppingItemSB.toString());
+				shoppingItemSM.toString());
 		}
 
 		oracle = _removeLongInserts(oracle);
@@ -598,7 +599,7 @@ public class DBBuilder {
 
 			BufferedReader br = new BufferedReader(new StringReader(template));
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			String line = null;
 
@@ -623,18 +624,18 @@ public class DBBuilder {
 					include = _convertTimestamp(include, server);
 					include = StringUtil.replace(include, _TEMPLATE, replace);
 
-					sb.append(include);
-					sb.append("\n\n");
+					sm.append(include);
+					sm.append("\n\n");
 				}
 				else {
-					sb.append(line);
-					sb.append("\n");
+					sm.append(line);
+					sm.append("\n");
 				}
 			}
 
 			br.close();
 
-			template = sb.toString();
+			template = sm.toString();
 		}
 
 		//if (fileName.startsWith("update-")) {
@@ -663,7 +664,7 @@ public class DBBuilder {
 		return s;
 	}
 
-	private void _convertToOracleCSV(String line, StringBuffer sb) {
+	private void _convertToOracleCSV(String line, StringMaker sm) {
 		int x = line.indexOf("values (");
 		int y = line.lastIndexOf(");");
 
@@ -671,8 +672,8 @@ public class DBBuilder {
 
 		line = StringUtil.replace(line, "sysdate, ", "20050101, ");
 
-		sb.append(line);
-		sb.append("\n");
+		sm.append(line);
+		sm.append("\n");
 	}
 
 	private String _evaluateVM(String template) throws Exception {
@@ -682,20 +683,20 @@ public class DBBuilder {
 
 		BufferedReader br = new BufferedReader(new StringReader(template));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
 			line = line.trim();
 
-			sb.append(line);
-			sb.append("\n");
+			sm.append(line);
+			sm.append("\n");
 		}
 
 		br.close();
 
-		template = sb.toString();
+		template = sm.toString();
 		template = StringUtil.replace(template, "\n\n\n", "\n\n");
 
 		return template;
@@ -716,7 +717,7 @@ public class DBBuilder {
 		BufferedReader br = new BufferedReader(
 			new FileReader(new File(fileName)));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -728,18 +729,18 @@ public class DBBuilder {
 					new String[] {"", ""});
 
 				if (line.endsWith(";")) {
-					sb.append(line.substring(0, line.length() - 1));
-					sb.append(eol);
+					sm.append(line.substring(0, line.length() - 1));
+					sm.append(eol);
 				}
 				else {
-					sb.append(line);
+					sm.append(line);
 				}
 			}
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _removeBooleanIndexes(String data) throws IOException {
@@ -747,7 +748,7 @@ public class DBBuilder {
 
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -783,20 +784,20 @@ public class DBBuilder {
 			}
 
 			if (append) {
-				sb.append(line);
-				sb.append("\n");
+				sm.append(line);
+				sm.append("\n");
 			}
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _removeInserts(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -804,20 +805,20 @@ public class DBBuilder {
 			if (!line.startsWith("insert into ") &&
 				!line.startsWith("update ")) {
 
-				sb.append(line);
-				sb.append("\n");
+				sm.append(line);
+				sm.append("\n");
 			}
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _removeLongInserts(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -828,14 +829,14 @@ public class DBBuilder {
 				!line.startsWith("insert into JournalTemplate") &&
 				!line.startsWith("insert into ShoppingItem")) {
 
-				sb.append(line);
-				sb.append("\n");
+				sm.append(line);
+				sm.append("\n");
 			}
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _removeNull(String content) {
@@ -849,7 +850,7 @@ public class DBBuilder {
 	private String _rewordDb2(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -860,19 +861,19 @@ public class DBBuilder {
 				line = "-- " + line;
 			}
 
-			sb.append(line);
-			sb.append("\n");
+			sm.append(line);
+			sm.append("\n");
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _rewordDerby(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -883,19 +884,19 @@ public class DBBuilder {
 				line = "-- " + line;
 			}
 
-			sb.append(line);
-			sb.append("\n");
+			sm.append(line);
+			sm.append("\n");
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _rewordFirebird(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -915,19 +916,19 @@ public class DBBuilder {
 					_REWORD_TEMPLATE, template);
 			}
 
-			sb.append(line);
-			sb.append("\n");
+			sm.append(line);
+			sm.append("\n");
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _rewordHypersonic(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -947,19 +948,19 @@ public class DBBuilder {
 					_REWORD_TEMPLATE, template);
 			}
 
-			sb.append(line);
-			sb.append("\n");
+			sm.append(line);
+			sm.append("\n");
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _rewordMysql(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -979,19 +980,19 @@ public class DBBuilder {
 					_REWORD_TEMPLATE, template);
 			}
 
-			sb.append(line);
-			sb.append("\n");
+			sm.append(line);
+			sm.append("\n");
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _rewordOracle(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -1011,19 +1012,19 @@ public class DBBuilder {
 					_REWORD_TEMPLATE, template);
 			}
 
-			sb.append(line);
-			sb.append("\n");
+			sm.append(line);
+			sm.append("\n");
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _rewordPostgreSQL(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -1043,19 +1044,19 @@ public class DBBuilder {
 					_REWORD_TEMPLATE, template);
 			}
 
-			sb.append(line);
-			sb.append("\n");
+			sm.append(line);
+			sm.append("\n");
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _rewordSAP(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -1075,19 +1076,19 @@ public class DBBuilder {
 					_REWORD_TEMPLATE, template);
 			}
 
-			sb.append(line);
-			sb.append("\n");
+			sm.append(line);
+			sm.append("\n");
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _rewordSQLServer(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String line = null;
 
@@ -1107,13 +1108,13 @@ public class DBBuilder {
 					_REWORD_TEMPLATE, template);
 			}
 
-			sb.append(line);
-			sb.append("\n");
+			sm.append(line);
+			sm.append("\n");
 		}
 
 		br.close();
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _rewordSybase(String data) throws IOException {

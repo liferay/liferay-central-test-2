@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.network.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.network.model.Whois;
 import com.liferay.util.ConverterException;
@@ -63,7 +64,7 @@ public class WhoisConverter implements WebCacheable {
 
 			out.println(_domain);
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 			String line = null;
 
 			while ((line = br.readLine()) != null) {
@@ -71,7 +72,7 @@ public class WhoisConverter implements WebCacheable {
 					break;
 				}
 
-				sb.append(line).append("\n");
+				sm.append(line).append("\n");
 			}
 
 			br.close();
@@ -79,7 +80,7 @@ public class WhoisConverter implements WebCacheable {
 
 			whois = new Whois(
 				_domain,
-				StringUtil.replace(sb.toString().trim(), "\n\n", "\n"));
+				StringUtil.replace(sm.toString().trim(), "\n\n", "\n"));
 		}
 		catch (Exception e) {
 			throw new ConverterException(_domain + " " + e.toString());

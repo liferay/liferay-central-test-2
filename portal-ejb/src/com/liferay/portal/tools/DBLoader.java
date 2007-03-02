@@ -27,6 +27,7 @@ import Zql.ZInsert;
 import Zql.ZStatement;
 import Zql.ZqlParser;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
@@ -166,7 +167,7 @@ public class DBLoader {
 	private void _loadDerby(Connection con, String fileName)
 		throws Exception {
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		BufferedReader br = new BufferedReader(
 			new StringReader(FileUtil.read(fileName)));
@@ -175,10 +176,10 @@ public class DBLoader {
 
 		while ((line = br.readLine()) != null) {
 			if (!line.startsWith("--")) {
-				sb.append(line);
+				sm.append(line);
 
 				if (line.endsWith(";")) {
-					String sql = sb.toString();
+					String sql = sm.toString();
 
 					sql =
 						StringUtil.replace(
@@ -200,7 +201,7 @@ public class DBLoader {
 
 					sql = sql.substring(0, sql.length() - 1);
 
-					sb = new StringBuffer();
+					sm = new StringMaker();
 
 					try {
 						if (sql.startsWith("commit")) {
@@ -295,7 +296,7 @@ public class DBLoader {
 	private void _loadHypersonic(Connection con, String fileName)
 		throws Exception {
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		BufferedReader br = new BufferedReader(
 			new StringReader(FileUtil.read(fileName)));
@@ -304,10 +305,10 @@ public class DBLoader {
 
 		while ((line = br.readLine()) != null) {
 			if (!line.startsWith("//")) {
-				sb.append(line);
+				sm.append(line);
 
 				if (line.endsWith(";")) {
-					String sql = sb.toString();
+					String sql = sm.toString();
 
 					sql =
 						StringUtil.replace(
@@ -325,7 +326,7 @@ public class DBLoader {
 								"\\u000a"
 							});
 
-					sb = new StringBuffer();
+					sm = new StringMaker();
 
 					PreparedStatement ps = con.prepareStatement(sql);
 

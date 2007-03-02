@@ -46,8 +46,6 @@ public class CSSFormatter {
 
 	public CSSFormatter(File file) {
 		try {
-			StringBuffer sb = new StringBuffer();
-
 			String content = FileUtil.read(file);
 
 			content = StringUtil.replace(

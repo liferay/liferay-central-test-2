@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
@@ -385,7 +386,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 	}
 
 	protected String generateToString() {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)_req.getAttribute(WebKeys.THEME_DISPLAY);
@@ -394,7 +395,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 
 		String portalURL = PortalUtil.getPortalURL(_req, _secure);
 
-		sb.append(portalURL);
+		sm.append(portalURL);
 
 		try {
 			if (_layoutFriendlyURL == null) {
@@ -432,66 +433,66 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		}
 
 		if (Validator.isNull(_layoutFriendlyURL)) {
-			sb.append(themeDisplay.getPathMain());
-			sb.append("/portal/layout?");
+			sm.append(themeDisplay.getPathMain());
+			sm.append("/portal/layout?");
 
-			sb.append("p_l_id");
-			sb.append(StringPool.EQUAL);
-			sb.append(_processValue(key, _plid));
-			sb.append(StringPool.AMPERSAND);
+			sm.append("p_l_id");
+			sm.append(StringPool.EQUAL);
+			sm.append(_processValue(key, _plid));
+			sm.append(StringPool.AMPERSAND);
 		}
 		else {
-			sb.append(_layoutFriendlyURL);
-			sb.append(StringPool.QUESTION);
+			sm.append(_layoutFriendlyURL);
+			sm.append(StringPool.QUESTION);
 		}
 
-		sb.append("p_p_id");
-		sb.append(StringPool.EQUAL);
-		sb.append(_processValue(key, _portletName));
-		sb.append(StringPool.AMPERSAND);
+		sm.append("p_p_id");
+		sm.append(StringPool.EQUAL);
+		sm.append(_processValue(key, _portletName));
+		sm.append(StringPool.AMPERSAND);
 
-		sb.append("p_p_action");
-		sb.append(StringPool.EQUAL);
-		sb.append(_action ? _processValue(key, "1") : _processValue(key, "0"));
-		sb.append(StringPool.AMPERSAND);
+		sm.append("p_p_action");
+		sm.append(StringPool.EQUAL);
+		sm.append(_action ? _processValue(key, "1") : _processValue(key, "0"));
+		sm.append(StringPool.AMPERSAND);
 
 		if (_windowState != null) {
-			sb.append("p_p_state");
-			sb.append(StringPool.EQUAL);
-			sb.append(_processValue(key, _windowState.toString()));
-			sb.append(StringPool.AMPERSAND);
+			sm.append("p_p_state");
+			sm.append(StringPool.EQUAL);
+			sm.append(_processValue(key, _windowState.toString()));
+			sm.append(StringPool.AMPERSAND);
 		}
 
 		if (_portletMode != null) {
-			sb.append("p_p_mode");
-			sb.append(StringPool.EQUAL);
-			sb.append(_processValue(key, _portletMode.toString()));
-			sb.append(StringPool.AMPERSAND);
+			sm.append("p_p_mode");
+			sm.append(StringPool.EQUAL);
+			sm.append(_processValue(key, _portletMode.toString()));
+			sm.append(StringPool.AMPERSAND);
 		}
 
-		sb.append("p_p_col_id");
-		sb.append(StringPool.EQUAL);
-		sb.append(_processValue(key, portletDisplay.getColumnId()));
-		sb.append(StringPool.AMPERSAND);
+		sm.append("p_p_col_id");
+		sm.append(StringPool.EQUAL);
+		sm.append(_processValue(key, portletDisplay.getColumnId()));
+		sm.append(StringPool.AMPERSAND);
 
-		sb.append("p_p_col_pos");
-		sb.append(StringPool.EQUAL);
-		sb.append(_processValue(key, portletDisplay.getColumnPos()));
-		sb.append(StringPool.AMPERSAND);
+		sm.append("p_p_col_pos");
+		sm.append(StringPool.EQUAL);
+		sm.append(_processValue(key, portletDisplay.getColumnPos()));
+		sm.append(StringPool.AMPERSAND);
 
-		sb.append("p_p_col_count");
-		sb.append(StringPool.EQUAL);
-		sb.append(_processValue(key, portletDisplay.getColumnCount()));
-		sb.append(StringPool.AMPERSAND);
+		sm.append("p_p_col_count");
+		sm.append(StringPool.EQUAL);
+		sm.append(_processValue(key, portletDisplay.getColumnCount()));
+		sm.append(StringPool.AMPERSAND);
 
 		if (Validator.isNotNull(_doAsUserId)) {
 			try {
 				Company company = PortalUtil.getCompany(_req);
 
-				sb.append("doAsUserId");
-				sb.append(StringPool.EQUAL);
-				sb.append(_processValue(company.getKeyObj(), _doAsUserId));
-				sb.append(StringPool.AMPERSAND);
+				sm.append("doAsUserId");
+				sm.append(StringPool.EQUAL);
+				sm.append(_processValue(company.getKeyObj(), _doAsUserId));
+				sm.append(StringPool.AMPERSAND);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -501,10 +502,10 @@ public class PortletURLImpl implements PortletURL, Serializable {
 			String doAsUserId = themeDisplay.getDoAsUserId();
 
 			if (Validator.isNotNull(doAsUserId)) {
-				sb.append("doAsUserId");
-				sb.append(StringPool.EQUAL);
-				sb.append(_processValue(key, doAsUserId));
-				sb.append(StringPool.AMPERSAND);
+				sm.append("doAsUserId");
+				sm.append(StringPool.EQUAL);
+				sm.append(_processValue(key, doAsUserId));
+				sm.append(StringPool.AMPERSAND);
 			}
 		}
 
@@ -519,18 +520,18 @@ public class PortletURLImpl implements PortletURL, Serializable {
 			String[] values = (String[])entry.getValue();
 
 			for (int i = 0; i < values.length; i++) {
-				sb.append(name);
-				sb.append(StringPool.EQUAL);
-				sb.append(_processValue(key, values[i]));
+				sm.append(name);
+				sm.append(StringPool.EQUAL);
+				sm.append(_processValue(key, values[i]));
 
 				if ((i + 1 < values.length) || itr.hasNext()) {
-					sb.append(StringPool.AMPERSAND);
+					sm.append(StringPool.AMPERSAND);
 				}
 			}
 		}
 
 		if (_encrypt) {
-			sb.append(StringPool.AMPERSAND + WebKeys.ENCRYPT + "=1");
+			sm.append(StringPool.AMPERSAND + WebKeys.ENCRYPT + "=1");
 		}
 
 		if (GetterUtil.getBoolean(PropsUtil.get(
@@ -541,15 +542,15 @@ public class PortletURLImpl implements PortletURL, Serializable {
 				(!_windowState.equals(LiferayWindowState.EXCLUSIVE)) &&
 				(!_windowState.equals(LiferayWindowState.POP_UP))) {
 
-				if (sb.lastIndexOf(StringPool.AMPERSAND) != (sb.length() - 1)) {
-					sb.append(StringPool.AMPERSAND);
+				if (sm.lastIndexOf(StringPool.AMPERSAND) != (sm.length() - 1)) {
+					sm.append(StringPool.AMPERSAND);
 				}
 
-				sb.append("#p_").append(_portletName);
+				sm.append("#p_").append(_portletName);
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _processValue(Key key, int value) {

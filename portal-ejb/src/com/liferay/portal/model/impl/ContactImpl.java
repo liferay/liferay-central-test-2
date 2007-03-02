@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Contact;
 import com.liferay.util.Validator;
@@ -39,22 +40,22 @@ public class ContactImpl extends ContactModelImpl implements Contact {
 	public static String getFullName(
 		String firstName, String middleName, String lastName) {
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		if (Validator.isNull(middleName)) {
-			sb.append(firstName);
-			sb.append(StringPool.SPACE);
-			sb.append(lastName);
+			sm.append(firstName);
+			sm.append(StringPool.SPACE);
+			sm.append(lastName);
 		}
 		else {
-			sb.append(firstName);
-			sb.append(StringPool.SPACE);
-			sb.append(middleName);
-			sb.append(StringPool.SPACE);
-			sb.append(lastName);
+			sm.append(firstName);
+			sm.append(StringPool.SPACE);
+			sm.append(middleName);
+			sm.append(StringPool.SPACE);
+			sm.append(lastName);
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public ContactImpl() {

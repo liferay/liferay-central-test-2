@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
@@ -170,17 +171,17 @@ public class MBMessageFinder {
 	}
 
 	private static String _getCategoryIds(List categoryIds) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < categoryIds.size(); i++) {
-			sb.append("categoryId = ? ");
+			sm.append("categoryId = ? ");
 
 			if ((i + 1) != categoryIds.size()) {
-				sb.append("OR ");
+				sm.append("OR ");
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 }

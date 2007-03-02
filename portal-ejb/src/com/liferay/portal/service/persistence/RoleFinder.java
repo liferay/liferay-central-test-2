@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.RoleImpl;
@@ -273,18 +274,18 @@ public class RoleFinder {
 	}
 
 	private static String _getGroupIds(List groups, String table) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < groups.size(); i++) {
-			sb.append(table);
-			sb.append(".groupId = ?");
+			sm.append(table);
+			sm.append(".groupId = ?");
 
 			if ((i + 1) < groups.size()) {
-				sb.append(" OR ");
+				sm.append(" OR ");
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static void _setGroupIds(QueryPos qPos, List groups) {

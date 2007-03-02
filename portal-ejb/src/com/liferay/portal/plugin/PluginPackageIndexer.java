@@ -25,6 +25,7 @@ package com.liferay.portal.plugin;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -100,7 +101,7 @@ public class PluginPackageIndexer implements Indexer {
 				"shortDescription", shortDescription));
 			doc.add(LuceneFields.getKeyword("repositoryURL", repositoryURL));
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			Iterator itr = types.iterator();
 
@@ -109,16 +110,17 @@ public class PluginPackageIndexer implements Indexer {
 
 				doc.add(LuceneFields.getKeyword("type", type));
 
-				sb.append(type);
+				sm.append(type);
 
 				if (itr.hasNext()) {
-					sb.append(StringPool.COMMA + StringPool.SPACE);
+					sm.append(StringPool.COMMA + StringPool.SPACE);
 				}
 			}
 
-			doc.add(LuceneFields.getKeyword("types", sb.toString()));
+			doc.add(LuceneFields.getKeyword("types", sm.toString()));
 
-			sb = new StringBuffer();
+			sm = new StringMaker();
+
 			itr = tags.iterator();
 
 			while (itr.hasNext()) {
@@ -126,14 +128,14 @@ public class PluginPackageIndexer implements Indexer {
 
 				doc.add(LuceneFields.getKeyword("tag", tag));
 
-				sb.append(tag);
+				sm.append(tag);
 
 				if (itr.hasNext()) {
-					sb.append(StringPool.COMMA + StringPool.SPACE);
+					sm.append(StringPool.COMMA + StringPool.SPACE);
 				}
 			}
 
-			doc.add(LuceneFields.getKeyword("tags", sb.toString()));
+			doc.add(LuceneFields.getKeyword("tags", sm.toString()));
 
 			boolean osiLicense = false;
 

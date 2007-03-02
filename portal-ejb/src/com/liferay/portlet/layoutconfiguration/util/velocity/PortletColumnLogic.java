@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -71,14 +72,14 @@ public class PortletColumnLogic extends RuntimeLogic {
 		}
 	}
 
-	public void processContent(StringBuffer sb, Map attributes)
+	public void processContent(StringMaker sm, Map attributes)
 		throws Exception {
 
 		String columnId = (String)attributes.get("id");
 
-		sb.append("<div id=\"layout-column_");
-		sb.append(columnId);
-		sb.append("\">");
+		sm.append("<div id=\"layout-column_");
+		sm.append(columnId);
+		sm.append("\">");
 
 		LayoutTypePortlet layoutTypePortlet =
 			_themeDisplay.getLayoutTypePortlet();
@@ -109,11 +110,11 @@ public class PortletColumnLogic extends RuntimeLogic {
 			}
 
 			RuntimePortletUtil.processPortlet(
-				sb, _ctx, _req, _res, null, null, rootPortletId, instanceId,
+				sm, _ctx, _req, _res, null, null, rootPortletId, instanceId,
 				queryString, columnId, columnPos, columnCount, path);
 		}
 
-		sb.append("</div>");
+		sm.append("</div>");
 	}
 
 	public Map getPortletsMap() {

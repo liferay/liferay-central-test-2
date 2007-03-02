@@ -23,6 +23,7 @@
 package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -71,34 +72,34 @@ public class TagsAssetFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append("SELECT COUNT(DISTINCT assetId) AS COUNT_VALUE ");
-			sb.append("FROM TagsAssets_TagsEntries WHERE entryId = ?");
+			sm.append("SELECT COUNT(DISTINCT assetId) AS COUNT_VALUE ");
+			sm.append("FROM TagsAssets_TagsEntries WHERE entryId = ?");
 
 			if (entryIds.length > 1) {
-				sb.append(" AND assetId IN (");
+				sm.append(" AND assetId IN (");
 			}
 
 			for (int i = 1; i < entryIds.length; i++) {
-				sb.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+				sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
 
 				if ((i + 1) < entryIds.length) {
-					sb.append(" AND assetId IN (");
+					sm.append(" AND assetId IN (");
 				}
 			}
 
 			for (int i = 1; i < entryIds.length; i++) {
 				if ((i + 1) < entryIds.length) {
-					sb.append(StringPool.CLOSE_PARENTHESIS);
+					sm.append(StringPool.CLOSE_PARENTHESIS);
 				}
 			}
 
 			if (entryIds.length > 1) {
-				sb.append(StringPool.CLOSE_PARENTHESIS);
+				sm.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -189,28 +190,28 @@ public class TagsAssetFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append("SELECT DISTINCT {TagsAsset.*} ");
-			sb.append("FROM TagsAsset WHERE assetId IN (");
+			sm.append("SELECT DISTINCT {TagsAsset.*} ");
+			sm.append("FROM TagsAsset WHERE assetId IN (");
 
 			for (int i = 0; i < entryIds.length; i++) {
-				sb.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+				sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
 
 				if ((i + 1) < entryIds.length) {
-					sb.append(" AND assetId IN (");
+					sm.append(" AND assetId IN (");
 				}
 			}
 
 			for (int i = 0; i < entryIds.length; i++) {
 				if ((i + 1) < entryIds.length) {
-					sb.append(StringPool.CLOSE_PARENTHESIS);
+					sm.append(StringPool.CLOSE_PARENTHESIS);
 				}
 			}
 
-			sb.append(") ORDER BY TagsAsset.modifiedDate DESC");
+			sm.append(") ORDER BY TagsAsset.modifiedDate DESC");
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -276,17 +277,17 @@ public class TagsAssetFinder {
 	}
 
 	private static String _getEntryIds(long[] entryIds) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < entryIds.length; i++) {
-			sb.append("TagsEntry.entryId = ? ");
+			sm.append("TagsEntry.entryId = ? ");
 
 			if ((i + 1) != entryIds.length) {
-				sb.append("OR ");
+				sm.append("OR ");
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static void _setEntryIds(QueryPos qPos, long[] entryIds) {

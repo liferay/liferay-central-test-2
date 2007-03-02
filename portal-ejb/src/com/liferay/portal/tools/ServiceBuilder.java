@@ -806,6 +806,7 @@ public class ServiceBuilder {
 
 		// Imports
 
+		sm.append("import com.liferay.portal.kernel.util.StringMaker;");
 		sm.append("import com.liferay.portal.kernel.util.StringPool;");
 		sm.append("import com.liferay.util.DateUtil;");
 		sm.append("import java.io.Serializable;");
@@ -985,24 +986,24 @@ public class ServiceBuilder {
 		// To string method
 
 		sm.append("public String toString() {");
-		sm.append("StringBuffer sb = new StringBuffer();");
-		sm.append("sb.append(StringPool.OPEN_CURLY_BRACE);");
+		sm.append("StringMaker sm = new StringMaker();");
+		sm.append("sm.append(StringPool.OPEN_CURLY_BRACE);");
 
 		for (int i = 0; i < pkList.size(); i++) {
 			EntityColumn col = (EntityColumn)pkList.get(i);
 
-			sm.append("sb.append(\"" + col.getName() + "\");");
-			sm.append("sb.append(StringPool.EQUAL);");
-			sm.append("sb.append(" + col.getName() + ");");
+			sm.append("sm.append(\"" + col.getName() + "\");");
+			sm.append("sm.append(StringPool.EQUAL);");
+			sm.append("sm.append(" + col.getName() + ");");
 
 			if ((i + 1) != pkList.size()) {
-				sm.append("sb.append(StringPool.COMMA);");
-				sm.append("sb.append(StringPool.SPACE);");
+				sm.append("sm.append(StringPool.COMMA);");
+				sm.append("sm.append(StringPool.SPACE);");
 			}
 		}
 
-		sm.append("sb.append(StringPool.CLOSE_CURLY_BRACE);");
-		sm.append("return sb.toString();");
+		sm.append("sm.append(StringPool.CLOSE_CURLY_BRACE);");
+		sm.append("return sm.toString();");
 		sm.append("}");
 
 		// Class close brace

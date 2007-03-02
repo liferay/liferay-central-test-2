@@ -22,6 +22,7 @@
 
 package com.liferay.portal.lucene;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.InstancePool;
 
@@ -171,8 +172,8 @@ public class LuceneFields {
 		return new Field(field, text, Field.Store.YES, Field.Index.TOKENIZED);
 	}
 
-	public static Field getText(String field, StringBuffer sb) {
-		return getText(field, sb.toString());
+	public static Field getText(String field, StringMaker sm) {
+		return getText(field, sm.toString());
 	}
 
 	private static final String _UID_PORTLET = "_PORTLET_";

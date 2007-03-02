@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.mail.action;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
@@ -365,7 +366,7 @@ public class EditMessageAction extends PortletAction {
 	protected String getBody(RenderRequest req, MailMessage mailMessage)
 		throws Exception {
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		InternetAddress from = (InternetAddress)mailMessage.getFrom();
 
@@ -375,19 +376,19 @@ public class EditMessageAction extends PortletAction {
 		DateFormat dateFormatDateTime = DateFormats.getDateTime(
 			themeDisplay.getLocale(), themeDisplay.getTimeZone());
 
-		sb.append("<br /><br />");
-		sb.append("On " + dateFormatDateTime.format(mailMessage.getSentDate()));
-		sb.append(StringPool.COMMA + StringPool.NBSP + from.getPersonal());
-		sb.append(" &lt;<a href=\"mailto: " + from.getAddress() + "\">");
-		sb.append(from.getAddress() + "</a>&gt; wrote:<br />");
-		sb.append("<div style=\"");
-		sb.append("border-left: 1px solid rgb(204, 204, 204); ");
-		sb.append("margin: 0pt 0pt 0pt 1ex; ");
-		sb.append("padding-left: 1ex; \">");
-		sb.append(mailMessage.getBody());
-		sb.append("</div>");
+		sm.append("<br /><br />");
+		sm.append("On " + dateFormatDateTime.format(mailMessage.getSentDate()));
+		sm.append(StringPool.COMMA + StringPool.NBSP + from.getPersonal());
+		sm.append(" &lt;<a href=\"mailto: " + from.getAddress() + "\">");
+		sm.append(from.getAddress() + "</a>&gt; wrote:<br />");
+		sm.append("<div style=\"");
+		sm.append("border-left: 1px solid rgb(204, 204, 204); ");
+		sm.append("margin: 0pt 0pt 0pt 1ex; ");
+		sm.append("padding-left: 1ex; \">");
+		sm.append(mailMessage.getBody());
+		sm.append("</div>");
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	protected List getRemoteAttachments(PortletRequest req)

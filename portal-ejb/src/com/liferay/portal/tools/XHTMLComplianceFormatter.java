@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ListUtil;
@@ -119,7 +120,7 @@ public class XHTMLComplianceFormatter {
 	 *	Formats all HTML tags found in the JSP
 	 */
 	private String _formatTags(String content) throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 		boolean foundBeginForm = false;
 		boolean foundEndForm = false;
 		boolean processingJava = false;
@@ -203,22 +204,22 @@ public class XHTMLComplianceFormatter {
 
 			// Needs a closing paragraph tag before a closing form tag
 			if (foundEndForm) {
-				sb.append("</p>").append("\n");
+				sm.append("</p>").append("\n");
 				foundEndForm = false;
 			}
 
-			sb.append(line).append("\n");
+			sm.append(line).append("\n");
 
 			// Needs an opening paragraph tag after an opening form tag
 			if (foundBeginForm) {
-				sb.append("<p>").append("\n");
+				sm.append("<p>").append("\n");
 				foundBeginForm = false;
 			}
 		}
 
 		br.close();
 
-		String newContent = sb.toString();
+		String newContent = sm.toString();
 		if (newContent.endsWith("\n")) {
 			newContent = newContent.substring(0, newContent.length() -1);
 		}
@@ -552,7 +553,7 @@ public class XHTMLComplianceFormatter {
 	private String _formatJSPContent(String fileName, String content)
 		throws IOException {
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		BufferedReader br =
 			new BufferedReader(new StringReader(content));
@@ -597,12 +598,12 @@ public class XHTMLComplianceFormatter {
 
 			line = StringUtil.trimTrailing(line);
 
-			sb.append(line).append("\n");
+			sm.append(line).append("\n");
 		}
 
 		br.close();
 
-		String newContent = sb.toString();
+		String newContent = sm.toString();
 		if (newContent.endsWith("\n")) {
 			newContent = newContent.substring(0, newContent.length() -1);
 		}

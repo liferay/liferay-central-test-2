@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.NoSuchPortletPreferencesException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
@@ -127,65 +128,65 @@ public class ExportAction extends Action {
 		}
 	}
 
-	protected void addColumn(StringBuffer sb, boolean value) {
-		//sb.append("'");
+	protected void addColumn(StringMaker sm, boolean value) {
+		//sm.append("'");
 
 		if (value) {
-			sb.append("TRUE");
+			sm.append("TRUE");
 		}
 		else {
-			sb.append("FALSE");
+			sm.append("FALSE");
 		}
 
-		//sb.append("', ");
-		sb.append(", ");
+		//sm.append("', ");
+		sm.append(", ");
 	}
 
-	protected void addColumn(StringBuffer sb, double value) {
-		sb.append(value);
-		sb.append(", ");
+	protected void addColumn(StringMaker sm, double value) {
+		sm.append(value);
+		sm.append(", ");
 	}
 
-	protected void addColumn(StringBuffer sb, float value) {
-		sb.append(value);
-		sb.append(", ");
+	protected void addColumn(StringMaker sm, float value) {
+		sm.append(value);
+		sm.append(", ");
 	}
 
-	protected void addColumn(StringBuffer sb, int value) {
-		sb.append(value);
-		sb.append(", ");
+	protected void addColumn(StringMaker sm, int value) {
+		sm.append(value);
+		sm.append(", ");
 	}
 
-	protected void addColumn(StringBuffer sb, long value) {
-		sb.append(value);
-		sb.append(", ");
+	protected void addColumn(StringMaker sm, long value) {
+		sm.append(value);
+		sm.append(", ");
 	}
 
-	protected void addColumn(StringBuffer sb, short value) {
-		sb.append(value);
-		sb.append(", ");
+	protected void addColumn(StringMaker sm, short value) {
+		sm.append(value);
+		sm.append(", ");
 	}
 
-	protected void addColumn(StringBuffer sb, Date value) {
-		addColumn(sb, value, true);
+	protected void addColumn(StringMaker sm, Date value) {
+		addColumn(sm, value, true);
 	}
 
-	protected void addColumn(StringBuffer sb, Date value, boolean current) {
+	protected void addColumn(StringMaker sm, Date value, boolean current) {
 		if (current) {
-			sb.append("CURRENT_TIMESTAMP, ");
+			sm.append("CURRENT_TIMESTAMP, ");
 		}
 		else {
-			sb.append("SPECIFIC_TIMESTAMP_");
-			sb.append(Time.getSimpleDate(value, "yyyyMMddHHmmss"));
-			sb.append(", ");
+			sm.append("SPECIFIC_TIMESTAMP_");
+			sm.append(Time.getSimpleDate(value, "yyyyMMddHHmmss"));
+			sm.append(", ");
 		}
 	}
 
-	protected void addColumn(StringBuffer sb, String value) {
-		addColumn(sb, value, true);
+	protected void addColumn(StringMaker sm, String value) {
+		addColumn(sm, value, true);
 	}
 
-	protected void addColumn(StringBuffer sb, String value, boolean format) {
+	protected void addColumn(StringMaker sm, String value, boolean format) {
 		if (format) {
 			value = StringUtil.replace(
 				value,
@@ -195,16 +196,16 @@ public class ExportAction extends Action {
 
 		value = GetterUtil.getString(value);
 
-		sb.append("'");
-		sb.append(value);
-		sb.append("', ");
+		sm.append("'");
+		sm.append(value);
+		sm.append("', ");
 	}
 
 	protected void insertDataCMSContent(
 			long cmsGroupId, ZipWriter zipWriter, List journalContentSearches)
 		throws Exception {
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		List igImages = new ArrayList();
 
@@ -214,26 +215,26 @@ public class ExportAction extends Action {
 		while (itr.hasNext()) {
 			IGFolder folder = (IGFolder)itr.next();
 
-			sb.append("insert into IGFolder (");
-			sb.append("folderId, groupId, companyId, userId, createDate, ");
-			sb.append("modifiedDate, parentFolderId, name");
-			sb.append(") values (");
-			addColumn(sb, folder.getFolderId());
-			addColumn(sb, folder.getGroupId());
-			addColumn(sb, folder.getCompanyId());
-			addColumn(sb, folder.getUserId());
-			addColumn(sb, folder.getCreateDate());
-			addColumn(sb, folder.getModifiedDate());
-			addColumn(sb, folder.getParentFolderId());
-			addColumn(sb, folder.getName());
-			removeTrailingComma(sb);
-			sb.append(");\n");
+			sm.append("insert into IGFolder (");
+			sm.append("folderId, groupId, companyId, userId, createDate, ");
+			sm.append("modifiedDate, parentFolderId, name");
+			sm.append(") values (");
+			addColumn(sm, folder.getFolderId());
+			addColumn(sm, folder.getGroupId());
+			addColumn(sm, folder.getCompanyId());
+			addColumn(sm, folder.getUserId());
+			addColumn(sm, folder.getCreateDate());
+			addColumn(sm, folder.getModifiedDate());
+			addColumn(sm, folder.getParentFolderId());
+			addColumn(sm, folder.getName());
+			removeTrailingComma(sm);
+			sm.append(");\n");
 
 			igImages.addAll(
 				IGImageLocalServiceUtil.getImages(folder.getFolderId()));
 		}
 
-		//sb.append("\n");
+		//sm.append("\n");
 
 		Collections.sort(igImages);
 
@@ -242,25 +243,25 @@ public class ExportAction extends Action {
 		while (itr.hasNext()) {
 			IGImage image = (IGImage)itr.next();
 
-			sb.append("insert into IGImage (");
-			sb.append("imageId, companyId, userId, createDate, modifiedDate, ");
-			sb.append("folderId, description, height, width, size_");
-			sb.append(") values (");
-			addColumn(sb, image.getImageId());
-			addColumn(sb, image.getCompanyId());
-			addColumn(sb, image.getUserId());
-			addColumn(sb, image.getCreateDate());
-			addColumn(sb, image.getModifiedDate());
-			addColumn(sb, image.getFolderId());
-			addColumn(sb, image.getDescription());
-			addColumn(sb, image.getHeight());
-			addColumn(sb, image.getWidth());
-			addColumn(sb, image.getSize());
-			removeTrailingComma(sb);
-			sb.append(");\n");
+			sm.append("insert into IGImage (");
+			sm.append("imageId, companyId, userId, createDate, modifiedDate, ");
+			sm.append("folderId, description, height, width, size_");
+			sm.append(") values (");
+			addColumn(sm, image.getImageId());
+			addColumn(sm, image.getCompanyId());
+			addColumn(sm, image.getUserId());
+			addColumn(sm, image.getCreateDate());
+			addColumn(sm, image.getModifiedDate());
+			addColumn(sm, image.getFolderId());
+			addColumn(sm, image.getDescription());
+			addColumn(sm, image.getHeight());
+			addColumn(sm, image.getWidth());
+			addColumn(sm, image.getSize());
+			removeTrailingComma(sm);
+			sm.append(");\n");
 		}
 
-		//sb.append("\n");
+		//sm.append("\n");
 
 		itr = JournalArticleLocalServiceUtil.getArticles(
 			cmsGroupId).iterator();
@@ -273,44 +274,44 @@ public class ExportAction extends Action {
 					article.getCompanyId(), article.getGroupId(),
 					article.getArticleId(), article.getVersion())) {
 
-				sb.append("insert into JournalArticle (");
-				sb.append("companyId, groupId, articleId, version, userId, ");
-				sb.append("userName, createDate, modifiedDate, title, ");
-				sb.append("description, content, type_, structureId, ");
-				sb.append("templateId, displayDate, approved, ");
-				sb.append("approvedByUserId, approvedByUserName, expired");
-				sb.append(") values (");
-				addColumn(sb, article.getCompanyId());
-				addColumn(sb, article.getGroupId());
-				addColumn(sb, article.getArticleId());
-				addColumn(sb, JournalArticleImpl.DEFAULT_VERSION);
-				//addColumn(sb, article.getUserId());
-				//addColumn(sb, article.getUserName());
-				addColumn(sb, "liferay.com.1");
-				addColumn(sb, "Joe Bloggs");
-				addColumn(sb, article.getCreateDate());
-				addColumn(sb, article.getModifiedDate());
-				addColumn(sb, article.getTitle());
-				addColumn(sb, article.getDescription());
-				addColumn(sb, article.getContent());
-				addColumn(sb, article.getType());
-				addColumn(sb, article.getStructureId());
-				addColumn(sb, article.getTemplateId());
-				addColumn(sb, article.getDisplayDate(), false);
-				addColumn(sb, article.getApproved());
-				//addColumn(sb, article.getApprovedByUserId());
-				//addColumn(sb, article.getApprovedByUserName());
-				addColumn(sb, "liferay.com.1");
-				addColumn(sb, "Joe Bloggs");
-				addColumn(sb, article.getExpired());
-				//addColumn(sb, article.getExpirationDate());
-				//addColumn(sb, article.getReviewDate());
-				removeTrailingComma(sb);
-				sb.append(");\n");
+				sm.append("insert into JournalArticle (");
+				sm.append("companyId, groupId, articleId, version, userId, ");
+				sm.append("userName, createDate, modifiedDate, title, ");
+				sm.append("description, content, type_, structureId, ");
+				sm.append("templateId, displayDate, approved, ");
+				sm.append("approvedByUserId, approvedByUserName, expired");
+				sm.append(") values (");
+				addColumn(sm, article.getCompanyId());
+				addColumn(sm, article.getGroupId());
+				addColumn(sm, article.getArticleId());
+				addColumn(sm, JournalArticleImpl.DEFAULT_VERSION);
+				//addColumn(sm, article.getUserId());
+				//addColumn(sm, article.getUserName());
+				addColumn(sm, "liferay.com.1");
+				addColumn(sm, "Joe Bloggs");
+				addColumn(sm, article.getCreateDate());
+				addColumn(sm, article.getModifiedDate());
+				addColumn(sm, article.getTitle());
+				addColumn(sm, article.getDescription());
+				addColumn(sm, article.getContent());
+				addColumn(sm, article.getType());
+				addColumn(sm, article.getStructureId());
+				addColumn(sm, article.getTemplateId());
+				addColumn(sm, article.getDisplayDate(), false);
+				addColumn(sm, article.getApproved());
+				//addColumn(sm, article.getApprovedByUserId());
+				//addColumn(sm, article.getApprovedByUserName());
+				addColumn(sm, "liferay.com.1");
+				addColumn(sm, "Joe Bloggs");
+				addColumn(sm, article.getExpired());
+				//addColumn(sm, article.getExpirationDate());
+				//addColumn(sm, article.getReviewDate());
+				removeTrailingComma(sm);
+				sm.append(");\n");
 			}
 		}
 
-		sb.append("\n");
+		sm.append("\n");
 
 		itr = journalContentSearches.iterator();
 
@@ -318,22 +319,22 @@ public class ExportAction extends Action {
 			JournalContentSearch contentSearch =
 				(JournalContentSearch)itr.next();
 
-			sb.append("insert into JournalContentSearch (");
-			sb.append("portletId, layoutId, ownerId, articleId, companyId, ");
-			sb.append("groupId");
-			sb.append(") values (");
-			addColumn(sb, contentSearch.getPortletId());
-			addColumn(sb, contentSearch.getLayoutId());
-			addColumn(sb, contentSearch.getOwnerId());
-			addColumn(sb, contentSearch.getArticleId());
-			addColumn(sb, contentSearch.getCompanyId());
-			addColumn(sb, contentSearch.getGroupId());
+			sm.append("insert into JournalContentSearch (");
+			sm.append("portletId, layoutId, ownerId, articleId, companyId, ");
+			sm.append("groupId");
+			sm.append(") values (");
+			addColumn(sm, contentSearch.getPortletId());
+			addColumn(sm, contentSearch.getLayoutId());
+			addColumn(sm, contentSearch.getOwnerId());
+			addColumn(sm, contentSearch.getArticleId());
+			addColumn(sm, contentSearch.getCompanyId());
+			addColumn(sm, contentSearch.getGroupId());
 
-			removeTrailingComma(sb);
-			sb.append(");\n");
+			removeTrailingComma(sm);
+			sm.append(");\n");
 		}
 
-		sb.append("\n");
+		sm.append("\n");
 
 		itr = JournalStructureLocalServiceUtil.getStructures(
 			cmsGroupId).iterator();
@@ -341,25 +342,25 @@ public class ExportAction extends Action {
 		while (itr.hasNext()) {
 			JournalStructure structure = (JournalStructure)itr.next();
 
-			sb.append("insert into JournalStructure (");
-			sb.append("companyId, structureId, groupId, userId, userName, ");
-			sb.append("createDate, modifiedDate, name, description, xsd");
-			sb.append(") values (");
-			addColumn(sb, structure.getCompanyId());
-			addColumn(sb, structure.getStructureId());
-			addColumn(sb, structure.getGroupId());
-			addColumn(sb, structure.getUserId());
-			addColumn(sb, structure.getUserName());
-			addColumn(sb, structure.getCreateDate());
-			addColumn(sb, structure.getModifiedDate());
-			addColumn(sb, structure.getName());
-			addColumn(sb, structure.getDescription());
-			addColumn(sb, structure.getXsd());
-			removeTrailingComma(sb);
-			sb.append(");\n");
+			sm.append("insert into JournalStructure (");
+			sm.append("companyId, structureId, groupId, userId, userName, ");
+			sm.append("createDate, modifiedDate, name, description, xsd");
+			sm.append(") values (");
+			addColumn(sm, structure.getCompanyId());
+			addColumn(sm, structure.getStructureId());
+			addColumn(sm, structure.getGroupId());
+			addColumn(sm, structure.getUserId());
+			addColumn(sm, structure.getUserName());
+			addColumn(sm, structure.getCreateDate());
+			addColumn(sm, structure.getModifiedDate());
+			addColumn(sm, structure.getName());
+			addColumn(sm, structure.getDescription());
+			addColumn(sm, structure.getXsd());
+			removeTrailingComma(sm);
+			sm.append(");\n");
 		}
 
-		sb.append("\n");
+		sm.append("\n");
 
 		itr = JournalTemplateLocalServiceUtil.getTemplates(
 			cmsGroupId).iterator();
@@ -367,32 +368,32 @@ public class ExportAction extends Action {
 		while (itr.hasNext()) {
 			JournalTemplate template = (JournalTemplate)itr.next();
 
-			sb.append("insert into JournalTemplate (");
-			sb.append("companyId, templateId, groupId, userId, userName, ");
-			sb.append("createDate, modifiedDate, structureId, name, ");
-			sb.append("description, xsl, langType, smallImage, smallImageURL");
-			sb.append(") values (");
-			addColumn(sb, template.getCompanyId());
-			addColumn(sb, template.getTemplateId());
-			addColumn(sb, template.getGroupId());
-			addColumn(sb, template.getUserId());
-			addColumn(sb, template.getUserName());
-			addColumn(sb, template.getCreateDate());
-			addColumn(sb, template.getModifiedDate());
-			addColumn(sb, template.getStructureId());
-			addColumn(sb, template.getName());
-			addColumn(sb, template.getDescription());
-			addColumn(sb, template.getXsl());
-			addColumn(sb, template.getLangType());
-			addColumn(sb, template.getSmallImage());
-			addColumn(sb, template.getSmallImageURL());
-			removeTrailingComma(sb);
-			sb.append(");\n");
+			sm.append("insert into JournalTemplate (");
+			sm.append("companyId, templateId, groupId, userId, userName, ");
+			sm.append("createDate, modifiedDate, structureId, name, ");
+			sm.append("description, xsl, langType, smallImage, smallImageURL");
+			sm.append(") values (");
+			addColumn(sm, template.getCompanyId());
+			addColumn(sm, template.getTemplateId());
+			addColumn(sm, template.getGroupId());
+			addColumn(sm, template.getUserId());
+			addColumn(sm, template.getUserName());
+			addColumn(sm, template.getCreateDate());
+			addColumn(sm, template.getModifiedDate());
+			addColumn(sm, template.getStructureId());
+			addColumn(sm, template.getName());
+			addColumn(sm, template.getDescription());
+			addColumn(sm, template.getXsl());
+			addColumn(sm, template.getLangType());
+			addColumn(sm, template.getSmallImage());
+			addColumn(sm, template.getSmallImageURL());
+			removeTrailingComma(sm);
+			sm.append(");\n");
 		}
 
-		removeTrailingNewLine(sb);
+		removeTrailingNewLine(sm);
 
-		zipWriter.addEntry("portal-data-cms-content.sql", sb);
+		zipWriter.addEntry("portal-data-cms-content.sql", sm);
 	}
 
 	protected void insertDataCMSLayout(
@@ -400,7 +401,7 @@ public class ExportAction extends Action {
 			List journalContentSearches)
 		throws Exception {
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		List layouts = LayoutLocalServiceUtil.getLayouts(
 			LayoutImpl.PUBLIC + siteGroupId);
@@ -412,29 +413,29 @@ public class ExportAction extends Action {
 		while (itr.hasNext()) {
 			Layout layout = (Layout)itr.next();
 
-			sb.append("insert into Layout (");
-			sb.append("layoutId, ownerId, companyId, parentLayoutId, name, ");
-			sb.append("title, type_, typeSettings, hidden_, friendlyURL, ");
-			sb.append("themeId, colorSchemeId, priority");
-			sb.append(") values (");
-			addColumn(sb, layout.getLayoutId());
-			addColumn(sb, layout.getOwnerId());
-			addColumn(sb, layout.getCompanyId());
-			addColumn(sb, layout.getParentLayoutId());
-			addColumn(sb, layout.getName());
-			addColumn(sb, layout.getTitle());
-			addColumn(sb, layout.getType());
-			addColumn(sb, layout.getTypeSettings());
-			addColumn(sb, layout.getHidden());
-			addColumn(sb, layout.getFriendlyURL());
-			addColumn(sb, layout.getThemeId());
-			addColumn(sb, layout.getColorSchemeId());
-			addColumn(sb, layout.getPriority());
-			removeTrailingComma(sb);
-			sb.append(");\n");
+			sm.append("insert into Layout (");
+			sm.append("layoutId, ownerId, companyId, parentLayoutId, name, ");
+			sm.append("title, type_, typeSettings, hidden_, friendlyURL, ");
+			sm.append("themeId, colorSchemeId, priority");
+			sm.append(") values (");
+			addColumn(sm, layout.getLayoutId());
+			addColumn(sm, layout.getOwnerId());
+			addColumn(sm, layout.getCompanyId());
+			addColumn(sm, layout.getParentLayoutId());
+			addColumn(sm, layout.getName());
+			addColumn(sm, layout.getTitle());
+			addColumn(sm, layout.getType());
+			addColumn(sm, layout.getTypeSettings());
+			addColumn(sm, layout.getHidden());
+			addColumn(sm, layout.getFriendlyURL());
+			addColumn(sm, layout.getThemeId());
+			addColumn(sm, layout.getColorSchemeId());
+			addColumn(sm, layout.getPriority());
+			removeTrailingComma(sm);
+			sm.append(");\n");
 		}
 
-		sb.append("\n");
+		sm.append("\n");
 
 		itr = layouts.iterator();
 
@@ -495,32 +496,32 @@ public class ExportAction extends Action {
 						journalContentSearches.add(journalContentSearch);
 					}
 
-					sb.append("insert into PortletPreferences (");
-					sb.append("portletId, layoutId, ownerId, preferences");
-					sb.append(") values (");
-					addColumn(sb, portletId);
-					addColumn(sb, portletPreferences.getLayoutId());
-					addColumn(sb, portletPreferences.getOwnerId());
-					addColumn(sb, prefsXml);
-					removeTrailingComma(sb);
-					sb.append(");\n");
+					sm.append("insert into PortletPreferences (");
+					sm.append("portletId, layoutId, ownerId, preferences");
+					sm.append(") values (");
+					addColumn(sm, portletId);
+					addColumn(sm, portletPreferences.getLayoutId());
+					addColumn(sm, portletPreferences.getOwnerId());
+					addColumn(sm, prefsXml);
+					removeTrailingComma(sm);
+					sm.append(");\n");
 				}
 				catch (NoSuchPortletPreferencesException nsppe) {
 					_log.warn(nsppe.getMessage());
 				}
 			}
 
-			sb.append("\n");
+			sm.append("\n");
 		}
 
-		removeTrailingNewLine(sb);
-		removeTrailingNewLine(sb);
+		removeTrailingNewLine(sm);
+		removeTrailingNewLine(sm);
 
-		zipWriter.addEntry("portal-data-cms-layout.sql", sb);
+		zipWriter.addEntry("portal-data-cms-layout.sql", sm);
 	}
 
 	protected void insertDataImage(ZipWriter zipWriter) throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = ImageLocalServiceUtil.search(
 			COMPANY_ID + "%").iterator();
@@ -551,30 +552,30 @@ public class ExportAction extends Action {
 			}
 
 			if (insert) {
-				sb.append("insert into Image (");
-				sb.append("imageId, modifiedDate, text_, type_");
-				sb.append(") values (");
-				addColumn(sb, image.getImageId());
-				addColumn(sb, image.getModifiedDate());
-				addColumn(sb, image.getText(), false);
-				addColumn(sb, image.getType());
-				removeTrailingComma(sb);
-				sb.append(");\n");
+				sm.append("insert into Image (");
+				sm.append("imageId, modifiedDate, text_, type_");
+				sm.append(") values (");
+				addColumn(sm, image.getImageId());
+				addColumn(sm, image.getModifiedDate());
+				addColumn(sm, image.getText(), false);
+				addColumn(sm, image.getType());
+				removeTrailingComma(sm);
+				sm.append(");\n");
 			}
 		}
 
-		removeTrailingNewLine(sb);
+		removeTrailingNewLine(sm);
 
-		zipWriter.addEntry("portal-data-image.sql", sb);
+		zipWriter.addEntry("portal-data-image.sql", sm);
 	}
 
-	protected void removeTrailingComma(StringBuffer sb) {
-		sb.delete(sb.length() - 2, sb.length());
+	protected void removeTrailingComma(StringMaker sm) {
+		sm.delete(sm.length() - 2, sm.length());
 	}
 
-	protected void removeTrailingNewLine(StringBuffer sb) {
-		if (sb.length() > 0) {
-			sb.delete(sb.length() - 1, sb.length());
+	protected void removeTrailingNewLine(StringMaker sm) {
+		if (sm.length() > 0) {
+			sm.delete(sm.length() - 1, sm.length());
 		}
 	}
 

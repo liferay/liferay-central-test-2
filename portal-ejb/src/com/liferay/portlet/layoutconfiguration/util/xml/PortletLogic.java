@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util.xml;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 
 import java.io.StringReader;
@@ -70,7 +71,7 @@ public class PortletLogic extends RuntimeLogic {
 		return CLOSE_1_TAG;
 	}
 
-	public void processXML(StringBuffer sb, String xml) throws Exception {
+	public void processXML(StringMaker sm, String xml) throws Exception {
 		SAXReader reader = new SAXReader();
 
 		Document doc = reader.read(new StringReader(xml));
@@ -82,7 +83,7 @@ public class PortletLogic extends RuntimeLogic {
 		String queryString = root.attributeValue("queryString");
 
 		RuntimePortletUtil.processPortlet(
-			sb, _ctx, _req, _res, _renderRequest, _renderResponse, portletId,
+			sm, _ctx, _req, _res, _renderRequest, _renderResponse, portletId,
 			instanceId, queryString);
 	}
 

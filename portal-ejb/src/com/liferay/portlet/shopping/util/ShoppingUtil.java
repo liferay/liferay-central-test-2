@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Company;
@@ -907,27 +908,27 @@ public class ShoppingUtil {
 
 		String currencyCode = prefs.getCurrencyId();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("https://www.paypal.com/cgi-bin/webscr?");
-		sb.append("cmd=_xclick&");
-		sb.append("business=").append(payPalEmailAddress).append("&");
-		sb.append("item_name=").append(order.getOrderId()).append("&");
-		sb.append("item_number=").append(order.getOrderId()).append("&");
-		sb.append("invoice=").append(order.getOrderId()).append("&");
-		sb.append("amount=").append(amount).append("&");
-		sb.append("return=").append(returnURL).append("&");
-		sb.append("notify_url=").append(notifyURL).append("&");
-		sb.append("first_name=").append(firstName).append("&");
-		sb.append("last_name=").append(lastName).append("&");
-		sb.append("address1=").append(address1).append("&");
-		sb.append("city=").append(city).append("&");
-		sb.append("state=").append(state).append("&");
-		sb.append("zip=").append(zip).append("&");
-		sb.append("no_note=1&");
-		sb.append("currency_code=").append(currencyCode).append("");
+		sm.append("https://www.paypal.com/cgi-bin/webscr?");
+		sm.append("cmd=_xclick&");
+		sm.append("business=").append(payPalEmailAddress).append("&");
+		sm.append("item_name=").append(order.getOrderId()).append("&");
+		sm.append("item_number=").append(order.getOrderId()).append("&");
+		sm.append("invoice=").append(order.getOrderId()).append("&");
+		sm.append("amount=").append(amount).append("&");
+		sm.append("return=").append(returnURL).append("&");
+		sm.append("notify_url=").append(notifyURL).append("&");
+		sm.append("first_name=").append(firstName).append("&");
+		sm.append("last_name=").append(lastName).append("&");
+		sm.append("address1=").append(address1).append("&");
+		sm.append("city=").append(city).append("&");
+		sm.append("state=").append(state).append("&");
+		sm.append("zip=").append(zip).append("&");
+		sm.append("no_note=1&");
+		sm.append("currency_code=").append(currencyCode).append("");
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public static String getPayPalReturnURL(

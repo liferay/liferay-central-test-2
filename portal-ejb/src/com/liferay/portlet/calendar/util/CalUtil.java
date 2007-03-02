@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.calendar.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -149,17 +150,17 @@ public class CalUtil {
 	}
 
 	public static String toString(Calendar cal) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append(cal.get(Calendar.YEAR));
-		sb.append(StringPool.PERIOD);
-		sb.append(cal.get(Calendar.MONTH));
-		sb.append(StringPool.PERIOD);
-		sb.append(cal.get(Calendar.DATE));
-		sb.append(StringPool.PERIOD);
-		sb.append(cal.getTimeZone().getRawOffset());
+		sm.append(cal.get(Calendar.YEAR));
+		sm.append(StringPool.PERIOD);
+		sm.append(cal.get(Calendar.MONTH));
+		sm.append(StringPool.PERIOD);
+		sm.append(cal.get(Calendar.DATE));
+		sm.append(StringPool.PERIOD);
+		sm.append(cal.getTimeZone().getRawOffset());
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 }

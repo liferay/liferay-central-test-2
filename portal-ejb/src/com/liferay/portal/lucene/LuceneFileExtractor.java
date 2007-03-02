@@ -22,6 +22,7 @@
 
 package com.liferay.portal.lucene;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.GetterUtil;
 
@@ -112,7 +113,7 @@ public class LuceneFileExtractor {
 							" for extension " + fileExt);
 				}
 
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
 				Map fields = filter.doFilter(
 					state, System.getProperty("encoding"));
@@ -127,13 +128,13 @@ public class LuceneFileExtractor {
 					int i;
 
 					while ((i = reader.read()) != -1) {
-						sb.append((char) i);
+						sm.append((char) i);
 					}
 
 					reader.close();
 				}
 
-				text = sb.toString();
+				text = sm.toString();
 			}
 			else {
 				if (_log.isInfoEnabled()) {

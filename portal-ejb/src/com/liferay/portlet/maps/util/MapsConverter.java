@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.maps.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.maps.model.MapsAddress;
@@ -69,7 +70,7 @@ public class MapsConverter implements WebCacheable {
 		}
 
 		try {
-			StringBuffer url = new StringBuffer();
+			StringMaker url = new StringMaker();
 
 			url.append("http://www.mapquest.com/maps/map.adp?country=US");
 			url.append("&address=").append(Http.encodeURL(street));

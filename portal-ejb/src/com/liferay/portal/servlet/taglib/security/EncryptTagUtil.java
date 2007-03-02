@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet.taglib.security;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Encryptor;
@@ -56,31 +57,31 @@ public class EncryptTagUtil {
 		throws JspException {
 
 		try {
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			// Open anchor
 
-			sb.append("<a ");
+			sm.append("<a ");
 
 			// Class
 
 			if (Validator.isNotNull(className)) {
-				sb.append("class=\"");
-				sb.append(className);
-				sb.append("\" ");
+				sm.append("class=\"");
+				sm.append(className);
+				sm.append("\" ");
 			}
 
 			// HREF
 
-			sb.append("href=\"").append(protocol).append("://");
+			sm.append("href=\"").append(protocol).append("://");
 
 			int pos = url.indexOf("?");
 
 			if (pos == -1) {
-				sb.append(url);
+				sm.append(url);
 			}
 			else {
-				sb.append(url.substring(0, pos)).append("?");
+				sm.append(url.substring(0, pos)).append("?");
 
 				Company company = PortalUtil.getCompany(
 					(HttpServletRequest)pageContext.getRequest());
@@ -99,14 +100,14 @@ public class EncryptTagUtil {
 					String value = paramAndValue.substring(
 						x + 1, paramAndValue.length());
 
-					sb.append(param).append("=");
+					sm.append(param).append("=");
 
 					if (unencryptedParamsSet.contains(param)) {
-						sb.append(Http.encodeURL(value));
+						sm.append(Http.encodeURL(value));
 					}
 					else {
 						try {
-							sb.append(Http.encodeURL(
+							sm.append(Http.encodeURL(
 								Encryptor.encrypt(key, value)));
 						}
 						catch (EncryptorException ee) {
@@ -114,35 +115,35 @@ public class EncryptTagUtil {
 						}
 
 						if (st.hasMoreTokens()) {
-							sb.append("&");
+							sm.append("&");
 						}
 					}
 				}
 
-				sb.append("&shuo=1");
+				sm.append("&shuo=1");
 			}
 
-			sb.append("\" ");
+			sm.append("\" ");
 
 			// Style
 
 			if (Validator.isNotNull(style)) {
-				sb.append("style=\"");
-				sb.append(style);
-				sb.append("\" ");
+				sm.append("style=\"");
+				sm.append(style);
+				sm.append("\" ");
 			}
 
 			// Target
 
 			if (Validator.isNotNull(target)) {
-				sb.append("target=\"" + target + "\"");
+				sm.append("target=\"" + target + "\"");
 			}
 
 			// Close anchor
 
-			sb.append(">");
+			sm.append(">");
 
-			pageContext.getOut().print(sb.toString());
+			pageContext.getOut().print(sm.toString());
 		}
 		catch (Exception e) {
 			throw new JspException(e);

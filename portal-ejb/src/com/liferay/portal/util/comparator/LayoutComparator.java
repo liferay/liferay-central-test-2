@@ -23,6 +23,7 @@
 package com.liferay.portal.util.comparator;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 
@@ -91,7 +92,7 @@ public class LayoutComparator extends OrderByComparator {
 			int decPlacesTotal = 4;
 
 			if (decPlacesTotal > decPlacesCount) {
-				StringBuffer zeroes = new StringBuffer();
+				StringMaker zeroes = new StringMaker();
 
 				int decPlacesDiff = decPlacesTotal - decPlacesCount;
 

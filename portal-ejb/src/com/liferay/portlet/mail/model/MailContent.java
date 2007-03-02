@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.mail.model;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
@@ -106,15 +107,15 @@ public class MailContent {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append(getHtmlBody());
+		sm.append(getHtmlBody());
 
 		for (int i = 0; i < _subContent.size(); i++) {
-			sb.append("<HR/>" + _subContent.get(i).toString());
+			sm.append("<HR/>" + _subContent.get(i).toString());
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _plainBody;

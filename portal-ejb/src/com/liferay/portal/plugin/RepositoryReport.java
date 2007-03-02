@@ -22,6 +22,7 @@
 
 package com.liferay.portal.plugin;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.Validator;
 
 import java.util.Iterator;
@@ -44,23 +45,23 @@ public class RepositoryReport {
 	}
 
 	public void addError(String repositoryURL, PluginPackageException ppe) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		if (Validator.isNotNull(ppe.getMessage())) {
-			sb.append(ppe.getMessage());
+			sm.append(ppe.getMessage());
 		}
 
 		if ((ppe.getCause() != null) &&
 			Validator.isNull(ppe.getCause().getMessage())) {
 
-			sb.append(ppe.getCause().getMessage());
+			sm.append(ppe.getCause().getMessage());
 		}
 
-		if (sb.length() == 0) {
-			sb.append(ppe.toString());
+		if (sm.length() == 0) {
+			sm.append(ppe.toString());
 		}
 
-		_reportMap.put(repositoryURL, sb.toString());
+		_reportMap.put(repositoryURL, sm.toString());
 	}
 
 	public Set getRepositoryURLs() {
@@ -72,19 +73,19 @@ public class RepositoryReport {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = getRepositoryURLs().iterator();
 
 		while (itr.hasNext()) {
 			String repositoryURL = (String)itr.next();
 
-			sb.append(repositoryURL);
-			sb.append(": ");
-			sb.append(_reportMap.get(repositoryURL));
+			sm.append(repositoryURL);
+			sm.append(": ");
+			sm.append(_reportMap.get(repositoryURL));
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private Map _reportMap = new TreeMap();

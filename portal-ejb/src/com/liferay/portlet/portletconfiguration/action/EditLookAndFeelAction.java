@@ -23,6 +23,7 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -307,7 +308,7 @@ public class EditLookAndFeelAction extends PortletAction {
 			showBorders = true;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Map styleMap = form.getMap();
 
@@ -320,7 +321,10 @@ public class EditLookAndFeelAction extends PortletAction {
 				String value = form.getString(key);
 
 				if (Validator.isNotNull(value)) {
-					sb.append(key + "=" + value + "\n");
+					sm.append(key);
+					sm.append("=");
+					sm.append(value);
+					sm.append("\n");
 				}
 			}
 		}
@@ -330,7 +334,7 @@ public class EditLookAndFeelAction extends PortletAction {
 			"portlet-setup-use-custom-title", String.valueOf(useCustomTitle));
 		portletSetup.setValue(
 			"portlet-setup-show-borders", String.valueOf(showBorders));
-		portletSetup.setValue("portlet-setup-css", sb.toString());
+		portletSetup.setValue("portlet-setup-css", sm.toString());
 
 		portletSetup.store();
 

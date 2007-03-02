@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.translator.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.translator.model.Translation;
 import com.liferay.util.ConverterException;
@@ -48,7 +49,7 @@ public class TranslationConverter implements WebCacheable {
 		Translation translation = new Translation(_translationId, _fromText);
 
 		try {
-			StringBuffer url = new StringBuffer();
+			StringMaker url = new StringMaker();
 
 			url.append("http://babelfish.altavista.com/babelfish/tr?doit=done");
 			url.append("&urltext=").append(Http.encodeURL(_fromText));

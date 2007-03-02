@@ -23,6 +23,7 @@
 package com.liferay.portlet.bookmarks.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
@@ -249,17 +250,17 @@ public class BookmarksEntryFinder {
 	}
 
 	private static String _getFolderIds(List folderIds) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < folderIds.size(); i++) {
-			sb.append("folderId = ? ");
+			sm.append("folderId = ? ");
 
 			if ((i + 1) != folderIds.size()) {
-				sb.append("OR ");
+				sm.append("OR ");
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 }

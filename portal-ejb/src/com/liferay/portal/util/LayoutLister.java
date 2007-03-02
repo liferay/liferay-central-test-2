@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -74,27 +75,27 @@ public class LayoutLister {
 				}
 			}
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append(++_nodeId).append("|");
-			sb.append(parentId).append("|");
+			sm.append(++_nodeId).append("|");
+			sm.append(parentId).append("|");
 
 			if ((i + 1) == layouts.size()) {
-				sb.append("1");
+				sm.append("1");
 			}
 			else {
-				sb.append("0");
+				sm.append("0");
 			}
 
-			sb.append("|");
-			sb.append(layout.getPlid()).append("|");
-			sb.append(layout.getName(_locale)).append("|");
-			//sb.append("9");
-			sb.append("11");
-			sb.append("|");
-			sb.append(depth);
+			sm.append("|");
+			sm.append(layout.getPlid()).append("|");
+			sm.append(layout.getName(_locale)).append("|");
+			//sm.append("9");
+			sm.append("11");
+			sm.append("|");
+			sm.append(depth);
 
-			_list.add(sb.toString());
+			_list.add(sm.toString());
 
 			_createList(layout.getLayoutId(), _nodeId, depth);
 		}

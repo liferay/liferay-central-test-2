@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.StagnantRowException;
@@ -85,44 +86,44 @@ public abstract class BaseUpgradeTableImpl {
 
 	public abstract String getExportedData(ResultSet rs) throws Exception;
 
-	public void appendColumn(StringBuffer sb, Object value, boolean last)
+	public void appendColumn(StringMaker sm, Object value, boolean last)
 		throws Exception {
 
 		if (value == null) {
 			throw new UpgradeException(
 				"Nulls should never be inserted into the database. " +
-					"Attempted to append column to " + sb.toString() + ".");
+					"Attempted to append column to " + sm.toString() + ".");
 		}
 		else if (value instanceof Clob || value instanceof String) {
 			value = StringUtil.replace(
 				(String)value, _SAFE_CHARS[0], _SAFE_CHARS[1]);
 
-			sb.append(value);
+			sm.append(value);
 		}
 		else if (value instanceof Date) {
 			DateFormat df = DateUtil.getISOFormat();
 
-			sb.append(df.format(value));
+			sm.append(df.format(value));
 		}
 		else {
-			sb.append(value);
+			sm.append(value);
 		}
 
-		sb.append(StringPool.COMMA);
+		sm.append(StringPool.COMMA);
 
 		if (last) {
-			sb.append(StringPool.NEW_LINE);
+			sm.append(StringPool.NEW_LINE);
 		}
 	}
 
 	public void appendColumn(
-			StringBuffer sb, ResultSet rs, String name, Integer type,
+			StringMaker sm, ResultSet rs, String name, Integer type,
 			boolean last)
 		throws Exception {
 
 		Object value = getValue(rs, name, type);
 
-		appendColumn(sb, value, last);
+		appendColumn(sm, value, last);
 	}
 
 	public String getDeleteSQL() throws Exception {
@@ -199,19 +200,19 @@ public abstract class BaseUpgradeTableImpl {
 				BufferedReader br = new BufferedReader(
 					clob.getCharacterStream());
 
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
 				String line = null;
 
 				while ((line = br.readLine()) != null) {
-					if (sb.length() != 0) {
-						sb.append(_SAFE_NEWLINE_CHARACTER);
+					if (sm.length() != 0) {
+						sm.append(_SAFE_NEWLINE_CHARACTER);
 					}
 
-					sb.append(line);
+					sm.append(line);
 				}
 
-				value = sb.toString();
+				value = sm.toString();
 			}
 		}
 		else if (t == Types.DOUBLE) {

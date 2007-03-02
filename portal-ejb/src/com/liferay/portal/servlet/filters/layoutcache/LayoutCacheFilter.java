@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet.filters.layoutcache;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Group;
@@ -214,31 +215,31 @@ public class LayoutCacheFilter implements Filter {
 	}
 
 	protected String getCacheKey(HttpServletRequest req) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Url
 
-		sb.append(req.getServletPath());
-		sb.append(req.getPathInfo());
-		sb.append(StringPool.QUESTION);
-		sb.append(req.getQueryString());
+		sm.append(req.getServletPath());
+		sm.append(req.getPathInfo());
+		sm.append(StringPool.QUESTION);
+		sm.append(req.getQueryString());
 
 		// Language
 
-		sb.append(StringPool.POUND);
-		sb.append(LanguageUtil.getLanguageId(req));
+		sm.append(StringPool.POUND);
+		sm.append(LanguageUtil.getLanguageId(req));
 
 		// Browser type
 
-		sb.append(StringPool.POUND);
-		sb.append(getBrowserType(req));
+		sm.append(StringPool.POUND);
+		sm.append(getBrowserType(req));
 
 		// Gzip compression
 
-		sb.append(StringPool.POUND);
-		sb.append(BrowserSniffer.acceptsGzip(req));
+		sm.append(StringPool.POUND);
+		sm.append(BrowserSniffer.acceptsGzip(req));
 
-		return sb.toString().trim().toUpperCase();
+		return sm.toString().trim().toUpperCase();
 	}
 
 	protected String getPlid(

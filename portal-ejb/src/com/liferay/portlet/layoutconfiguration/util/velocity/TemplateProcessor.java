@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.comparator.PortletRenderWeightComparator;
 
 import java.util.HashMap;
@@ -59,15 +60,15 @@ public class TemplateProcessor {
 
 		PortletColumnLogic logic = new PortletColumnLogic(_ctx, _req, _res);
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		logic.processContent(sb, attributes);
+		logic.processContent(sm, attributes);
 
 		_portletsMap.putAll(logic.getPortletsMap());
 
 		String columnIdPlaceHolder = "[$TEMPLATE_COLUMN_" + columnId + "$]";
 
-		_columnsMap.put(columnIdPlaceHolder, sb.toString());
+		_columnsMap.put(columnIdPlaceHolder, sm.toString());
 
 		return columnIdPlaceHolder;
 	}
@@ -75,11 +76,11 @@ public class TemplateProcessor {
 	public String processMax() throws Exception {
 		RuntimeLogic logic = new PortletLogic(_ctx, _req, _res, _portletId);
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		logic.processContent(sb, new HashMap());
+		logic.processContent(sm, new HashMap());
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public Map getColumnsMap() {

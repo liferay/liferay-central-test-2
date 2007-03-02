@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
@@ -196,7 +197,7 @@ public class UserFinder {
 			return StringPool.BLANK;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = params.entrySet().iterator();
 
@@ -207,11 +208,11 @@ public class UserFinder {
 			Object value = entry.getValue();
 
 			if (value != null) {
-				sb.append(_getJoin(key));
+				sm.append(_getJoin(key));
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _getJoin(String key) {
@@ -252,7 +253,7 @@ public class UserFinder {
 			return StringPool.BLANK;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = params.entrySet().iterator();
 
@@ -263,11 +264,11 @@ public class UserFinder {
 			Object value = entry.getValue();
 
 			if (value != null) {
-				sb.append(_getWhere(key));
+				sm.append(_getWhere(key));
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _getWhere(String key) {

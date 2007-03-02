@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.PortletImpl;
@@ -66,19 +67,19 @@ import org.apache.velocity.app.Velocity;
 public class RuntimePortletUtil {
 
 	public static void processPortlet(
-			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
+			StringMaker sm, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
 			RenderResponse renderResponse, String portletId, String instanceId,
 			String queryString)
 		throws Exception {
 
 		processPortlet(
-			sb, ctx, req, res, renderRequest, renderResponse, portletId,
+			sm, ctx, req, res, renderRequest, renderResponse, portletId,
 			instanceId, queryString, null, null, null);
 	}
 
 	public static void processPortlet(
-			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
+			StringMaker sm, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
 			RenderResponse renderResponse, String portletId, String instanceId,
 			String queryString, String columnId, Integer columnPos,
@@ -86,12 +87,12 @@ public class RuntimePortletUtil {
 		throws Exception {
 
 		processPortlet(
-			sb, ctx, req, res, renderRequest, renderResponse, portletId,
+			sm, ctx, req, res, renderRequest, renderResponse, portletId,
 			instanceId, queryString, columnId, columnPos, columnCount, null);
 	}
 
 	public static void processPortlet(
-			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
+			StringMaker sm, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
 			RenderResponse renderResponse, String portletId, String instanceId,
 			String queryString, String columnId, Integer columnPos,
@@ -145,7 +146,7 @@ public class RuntimePortletUtil {
 
 		try {
 			PortalUtil.renderPortlet(
-				sb, ctx, req, res, portlet, queryString, columnId, columnPos,
+				sm, ctx, req, res, portlet, queryString, columnId, columnPos,
 				columnCount, path);
 		}
 		finally {
@@ -233,15 +234,15 @@ public class RuntimePortletUtil {
 			Integer columnPos = (Integer)value[4];
 			Integer columnCount = (Integer)value[5];
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			RuntimePortletUtil.processPortlet(
-				sb, ctx, req, res, null, null, rootPortletId, instanceId,
+				sm, ctx, req, res, null, null, rootPortletId, instanceId,
 				queryString, columnId, columnPos, columnCount);
 
 			output = StringUtil.replace(
 				output, "[$TEMPLATE_PORTLET_" + portlet.getPortletId() + "$]",
-				sb.toString());
+				sm.toString());
 		}
 
 		pageContext.getOut().print(output);
@@ -258,13 +259,13 @@ public class RuntimePortletUtil {
 		try {
 			req.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			int x = 0;
 			int y = content.indexOf(runtimeLogic.getOpenTag());
 
 			while (y != -1) {
-				sb.append(content.substring(x, y));
+				sm.append(content.substring(x, y));
 
 				int close1 = content.indexOf(runtimeLogic.getClose1Tag(), y);
 				int close2 = content.indexOf(runtimeLogic.getClose2Tag(), y);
@@ -276,16 +277,16 @@ public class RuntimePortletUtil {
 					x = close2 + runtimeLogic.getClose2Tag().length();
 				}
 
-				runtimeLogic.processXML(sb, content.substring(y, x));
+				runtimeLogic.processXML(sm, content.substring(y, x));
 
 				y = content.indexOf(runtimeLogic.getOpenTag(), x);
 			}
 
 			if (y == -1) {
-				sb.append(content.substring(x, content.length()));
+				sm.append(content.substring(x, content.length()));
 			}
 
-			return sb.toString();
+			return sm.toString();
 		}
 		finally {
 			req.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);

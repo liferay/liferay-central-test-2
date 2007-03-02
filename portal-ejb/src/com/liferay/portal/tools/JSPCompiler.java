@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
@@ -132,11 +133,11 @@ public class JSPCompiler {
 					BufferedReader br = new BufferedReader(
 						new InputStreamReader(p.getErrorStream()));
 
-					StringBuffer sb = new StringBuffer();
+					StringMaker sm = new StringMaker();
 					String line = null;
 
 					while ((line = br.readLine()) != null) {
-						sb.append(line).append("\n");
+						sm.append(line).append("\n");
 					}
 
 					br.close();
@@ -147,7 +148,7 @@ public class JSPCompiler {
 					if (!classFile.exists()) {
 						FileUtil.write(
 							classFile.toString() + ".jspc_error",
-							sb.toString());
+							sm.toString());
 					}
 				}
 				catch (Exception e) {

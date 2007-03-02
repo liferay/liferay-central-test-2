@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.servlet.PortletContextPool;
@@ -95,26 +96,26 @@ public class PortletConfigImpl implements PortletConfig {
 			ResourceBundle bundle = (ResourceBundle)_bundlePool.get(poolId);
 
 			if (bundle == null) {
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
 				try {
-					sb.append(WebKeys.JAVAX_PORTLET_TITLE);
-					sb.append("=");
-					sb.append(_portletInfo.getTitle());
-					sb.append("\n");
+					sm.append(WebKeys.JAVAX_PORTLET_TITLE);
+					sm.append("=");
+					sm.append(_portletInfo.getTitle());
+					sm.append("\n");
 
-					sb.append(WebKeys.JAVAX_PORTLET_SHORT_TITLE);
-					sb.append("=");
-					sb.append(_portletInfo.getShortTitle());
-					sb.append("\n");
+					sm.append(WebKeys.JAVAX_PORTLET_SHORT_TITLE);
+					sm.append("=");
+					sm.append(_portletInfo.getShortTitle());
+					sm.append("\n");
 
-					sb.append(WebKeys.JAVAX_PORTLET_KEYWORDS);
-					sb.append("=");
-					sb.append(_portletInfo.getKeywords());
-					sb.append("\n");
+					sm.append(WebKeys.JAVAX_PORTLET_KEYWORDS);
+					sm.append("=");
+					sm.append(_portletInfo.getKeywords());
+					sm.append("\n");
 
 					bundle = new PropertyResourceBundle(
-						new ByteArrayInputStream(sb.toString().getBytes()));
+						new ByteArrayInputStream(sm.toString().getBytes()));
 				}
 				catch (Exception e) {
 					e.printStackTrace();

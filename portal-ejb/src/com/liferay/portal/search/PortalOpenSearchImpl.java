@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.model.Portlet;
@@ -141,17 +142,17 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 					String articleId = result.get("articleId");
 					String version = result.get("version");
 
-					StringBuffer sb = new StringBuffer();
+					StringMaker sm = new StringMaker();
 
-					sb.append(themeDisplay.getPathMain());
-					sb.append("/journal/view_article_content?groupId=");
-					sb.append(groupId);
-					sb.append("&articleId=");
-					sb.append(articleId);
-					sb.append("&version=");
-					sb.append(version);
+					sm.append(themeDisplay.getPathMain());
+					sm.append("/journal/view_article_content?groupId=");
+					sm.append(groupId);
+					sm.append("&articleId=");
+					sm.append(articleId);
+					sm.append("&version=");
+					sm.append(version);
 
-					url = sb.toString();
+					url = sm.toString();
 				}
 			}
 

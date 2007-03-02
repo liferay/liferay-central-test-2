@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.mail.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
@@ -1068,7 +1069,7 @@ public class MailUtil {
 
 				Address[] recipients = message.getAllRecipients();
 
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
 				if (Validator.isNotNull(recipients)) {
 					for (int j = 0; j < recipients.length; j++) {
@@ -1078,16 +1079,16 @@ public class MailUtil {
 						String recipient = GetterUtil.getString(
 							address.getPersonal(), address.getAddress());
 
-						sb.append(recipient);
+						sm.append(recipient);
 
 						if (j < (recipients.length - 1)) {
-							sb.append(", ");
+							sm.append(", ");
 						}
 					}
 				}
 
-				if (sb.length() > 0) {
-					mailEnvelope.setRecipient(sb.toString());
+				if (sm.length() > 0) {
+					mailEnvelope.setRecipient(sm.toString());
 				}
 			}
 			else {

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
@@ -111,7 +112,7 @@ public class BBCodeUtil {
 
 		BBCodeTag tag = null;
 
-		StringBuffer sb = null;
+		StringMaker sm = null;
 
 		while ((tag = getFirstTag(html, "code")) != null) {
 			String preTag = html.substring(0, tag.getStartPos());
@@ -121,18 +122,18 @@ public class BBCodeUtil {
 			String[] lines = Html.escape(code, false).split("\\n");
 			int digits = Integer.toString(lines.length + 1).length();
 
-			sb = new StringBuffer(preTag);
+			sm = new StringMaker(preTag);
 
-			sb.append("<div class='message-board-code'>");
+			sm.append("<div class='message-board-code'>");
 
 			for (int i = 0; i < lines.length; i++) {
 				String index = Integer.toString(i + 1);
 				int ld = index.length();
 
-				sb.append("<span class='message-board-code-lines'>");
+				sm.append("<span class='message-board-code-lines'>");
 
 				for (int j = 0; j < digits - ld; j++) {
-					sb.append("&nbsp;");
+					sm.append("&nbsp;");
 				}
 
 				lines[i] = StringUtil.replace(lines[i], "   ",
@@ -140,38 +141,38 @@ public class BBCodeUtil {
 				lines[i] = StringUtil.replace(lines[i], "  ",
 					StringPool.NBSP + StringPool.SPACE);
 
-				sb.append(index + "</span>");
-				sb.append(lines[i]);
+				sm.append(index + "</span>");
+				sm.append(lines[i]);
 
 				if (index.length() < lines.length) {
-					sb.append("<br />");
+					sm.append("<br />");
 				}
 			}
 
-			sb.append("</div>");
-			sb.append(postTag);
+			sm.append("</div>");
+			sm.append(postTag);
 
-			html = sb.toString();
+			html = sm.toString();
 		}
 
 		while ((tag = getFirstTag(html, "color")) != null) {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb = new StringBuffer(preTag);
+			sm = new StringMaker(preTag);
 
 			if (tag.hasParameter()) {
-				sb.append("<span style='color: ");
-				sb.append(tag.getParameter() + ";'>");
-				sb.append(tag.getElement() + "</span>");
+				sm.append("<span style='color: ");
+				sm.append(tag.getParameter() + ";'>");
+				sm.append(tag.getElement() + "</span>");
 			}
 			else {
-				sb.append(tag.getElement());
+				sm.append(tag.getElement());
 			}
 
-			sb.append(postTag);
+			sm.append(postTag);
 
-			html = sb.toString();
+			html = sm.toString();
 		}
 
 		while ((tag = getFirstTag(html, "email")) != null) {
@@ -181,45 +182,45 @@ public class BBCodeUtil {
 			String mailto = GetterUtil.getString(
 				tag.getParameter(), tag.getElement().trim());
 
-			sb = new StringBuffer(preTag);
+			sm = new StringMaker(preTag);
 
-			sb.append("<a href='mailto: " + mailto + "'>");
-			sb.append(tag.getElement() + "</a>");
-			sb.append(postTag);
+			sm.append("<a href='mailto: " + mailto + "'>");
+			sm.append(tag.getElement() + "</a>");
+			sm.append(postTag);
 
-			html = sb.toString();
+			html = sm.toString();
 		}
 
 		while ((tag = getFirstTag(html, "font")) != null) {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb = new StringBuffer(preTag);
+			sm = new StringMaker(preTag);
 
 			if (tag.hasParameter()) {
-				sb.append("<span style='font-family: ");
-				sb.append(tag.getParameter() + "';>");
-				sb.append(tag.getElement() + "</span>");
+				sm.append("<span style='font-family: ");
+				sm.append(tag.getParameter() + "';>");
+				sm.append(tag.getElement() + "</span>");
 			}
 			else {
-				sb.append(tag.getElement());
+				sm.append(tag.getElement());
 			}
 
-			sb.append(postTag);
+			sm.append(postTag);
 
-			html = sb.toString();
+			html = sm.toString();
 		}
 
 		while ((tag = getFirstTag(html, "img")) != null) {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb = new StringBuffer(preTag);
+			sm = new StringMaker(preTag);
 
-			sb.append("<img src='" + tag.getElement().trim() + "' />");
-			sb.append(postTag);
+			sm.append("<img src='" + tag.getElement().trim() + "' />");
+			sm.append(postTag);
 
-			html = sb.toString();
+			html = sm.toString();
 		}
 
 		while ((tag = getFirstTag(html, "list")) != null) {
@@ -228,63 +229,63 @@ public class BBCodeUtil {
 
 			String[] items = StringUtil.split(tag.getElement(), "[*]");
 
-			sb = new StringBuffer(preTag);
+			sm = new StringMaker(preTag);
 
 			if (tag.hasParameter() &&
 				listStyles.containsKey(tag.getParameter())) {
 
-				sb.append(listStyles.get(tag.getParameter()));
+				sm.append(listStyles.get(tag.getParameter()));
 
 				for (int i = 0; i < items.length; i++) {
 					if (items[i].trim().length() > 0) {
-						sb.append("<li>" + items[i].trim() + "</li>");
+						sm.append("<li>" + items[i].trim() + "</li>");
 					}
 				}
 
-				sb.append("</ol>");
+				sm.append("</ol>");
 			}
 			else {
-				sb.append("<ul style='list-style-type: disc';>");
+				sm.append("<ul style='list-style-type: disc';>");
 
 				for (int i = 0; i < items.length; i++) {
 					if (items[i].trim().length() > 0) {
-						sb.append("<li>" + items[i].trim() + "</li>");
+						sm.append("<li>" + items[i].trim() + "</li>");
 					}
 				}
 
-				sb.append("</ul>");
+				sm.append("</ul>");
 			}
 
-			sb.append(postTag);
+			sm.append(postTag);
 
-			html = sb.toString();
+			html = sm.toString();
 		}
 
 		while ((tag = getFirstTag(html, "quote")) != null) {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb = new StringBuffer(preTag);
+			sm = new StringMaker(preTag);
 
 			if (tag.hasParameter()) {
-				sb.append("<div class='message-board-quote-title'>");
-				sb.append(tag.getParameter() + ":</div>");
+				sm.append("<div class='message-board-quote-title'>");
+				sm.append(tag.getParameter() + ":</div>");
 			}
 
-			sb.append("<div class='message-board-quote'>");
-			sb.append("<div class='message-board-quote-content'>");
-			sb.append(tag.getElement());
-			sb.append("</div></div>");
-			sb.append(postTag);
+			sm.append("<div class='message-board-quote'>");
+			sm.append("<div class='message-board-quote-content'>");
+			sm.append(tag.getElement());
+			sm.append("</div></div>");
+			sm.append(postTag);
 
-			html = sb.toString();
+			html = sm.toString();
 		}
 
 		while ((tag = getFirstTag(html, "size")) != null) {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb = new StringBuffer(preTag);
+			sm = new StringMaker(preTag);
 
 			if (tag.hasParameter()) {
 				Integer size = new Integer(
@@ -295,20 +296,20 @@ public class BBCodeUtil {
 				}
 
 				if (fontSizes.containsKey(size)) {
-					sb.append(fontSizes.get(size));
-					sb.append(tag.getElement() + "</span>");
+					sm.append(fontSizes.get(size));
+					sm.append(tag.getElement() + "</span>");
 				}
 				else {
-					sb.append(tag.getElement());
+					sm.append(tag.getElement());
 				}
 			}
 			else {
-				sb.append(tag.getElement());
+				sm.append(tag.getElement());
 			}
 
-			sb.append(postTag);
+			sm.append(postTag);
 
-			html = sb.toString();
+			html = sm.toString();
 		}
 
 		while ((tag = getFirstTag(html, "url")) != null) {
@@ -318,13 +319,13 @@ public class BBCodeUtil {
 			String url = GetterUtil.getString(
 				tag.getParameter(), tag.getElement().trim());
 
-			sb = new StringBuffer(preTag);
+			sm = new StringMaker(preTag);
 
-			sb.append("<a href='" + url + "'>");
-			sb.append(tag.getElement() + "</a>");
-			sb.append(postTag);
+			sm.append("<a href='" + url + "'>");
+			sm.append(tag.getElement() + "</a>");
+			sm.append(postTag);
 
-			html = sb.toString();
+			html = sm.toString();
 		}
 
 		html = StringUtil.replace(html, "\n", "<br />");

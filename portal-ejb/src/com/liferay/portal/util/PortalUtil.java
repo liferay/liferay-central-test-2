@@ -30,6 +30,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.language.LanguageUtil;
@@ -581,25 +582,25 @@ public class PortalUtil {
 	public static String getPortalURL(
 		String serverName, int serverPort, boolean secure) {
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		String serverProtocol = GetterUtil.getString(
 			PropsUtil.get(PropsUtil.WEB_SERVER_PROTOCOL));
 
 		if (secure || Http.HTTPS.equals(serverProtocol)) {
-			sb.append(Http.HTTPS_WITH_SLASH);
+			sm.append(Http.HTTPS_WITH_SLASH);
 		}
 		else {
-			sb.append(Http.HTTP_WITH_SLASH);
+			sm.append(Http.HTTP_WITH_SLASH);
 		}
 
 		String serverHost = PropsUtil.get(PropsUtil.WEB_SERVER_HOST);
 
 		if (Validator.isNull(serverHost)) {
-			sb.append(serverName);
+			sm.append(serverName);
 		}
 		else {
-			sb.append(serverHost);
+			sm.append(serverHost);
 		}
 
 		int serverHttpPort = GetterUtil.getInteger(
@@ -607,15 +608,15 @@ public class PortalUtil {
 
 		if (serverHttpPort == -1) {
 			if (!secure && (serverPort != Http.HTTP_PORT)) {
-				sb.append(StringPool.COLON);
-				sb.append(serverPort);
+				sm.append(StringPool.COLON);
+				sm.append(serverPort);
 			}
 		}
 		else {
 			if (!secure && (serverPort != serverHttpPort)) {
 				if (serverHttpPort != Http.HTTP_PORT) {
-					sb.append(StringPool.COLON);
-					sb.append(serverHttpPort);
+					sm.append(StringPool.COLON);
+					sm.append(serverHttpPort);
 				}
 			}
 		}
@@ -625,20 +626,20 @@ public class PortalUtil {
 
 		if (serverHttpsPort == -1) {
 			if (secure && (serverPort != Http.HTTPS_PORT)) {
-				sb.append(StringPool.COLON);
-				sb.append(serverPort);
+				sm.append(StringPool.COLON);
+				sm.append(serverPort);
 			}
 		}
 		else {
 			if (secure && (serverPort != serverHttpsPort)) {
 				if (serverHttpsPort != Http.HTTPS_PORT) {
-					sb.append(StringPool.COLON);
-					sb.append(serverHttpsPort);
+					sm.append(StringPool.COLON);
+					sm.append(serverHttpsPort);
 				}
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public static Object[] getPortletFriendlyURLPlugin(
@@ -1044,7 +1045,7 @@ public class PortalUtil {
 	}
 
 	public static void renderPage(
-			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
+			StringMaker sm, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, String path)
 		throws IOException, ServletException {
 
@@ -1055,31 +1056,31 @@ public class PortalUtil {
 
 		rd.include(req, stringServletRes);
 
-		sb.append(stringServletRes.getString());
+		sm.append(stringServletRes.getString());
 	}
 
 	public static void renderPortlet(
-			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
+			StringMaker sm, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString)
 		throws IOException, ServletException {
 
 		renderPortlet(
-			sb, ctx, req, res, portlet, queryString, null, null, null);
+			sm, ctx, req, res, portlet, queryString, null, null, null);
 	}
 
 	public static void renderPortlet(
-			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
+			StringMaker sm, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString,
 			String columnId, Integer columnPos, Integer columnCount)
 		throws IOException, ServletException {
 
 		renderPortlet(
-			sb, ctx, req, res, portlet, queryString, columnId, columnPos,
+			sm, ctx, req, res, portlet, queryString, columnId, columnPos,
 			columnCount, null);
 	}
 
 	public static void renderPortlet(
-			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
+			StringMaker sm, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString,
 			String columnId, Integer columnPos, Integer columnCount,
 			String path)
@@ -1108,13 +1109,13 @@ public class PortalUtil {
 
 		RequestDispatcher rd = ctx.getRequestDispatcher(path);
 
-		if (sb != null) {
+		if (sm != null) {
 			StringServletResponse stringServletRes =
 				new StringServletResponse(res);
 
 			rd.include(req, stringServletRes);
 
-			sb.append(stringServletRes.getString());
+			sm.append(stringServletRes.getString());
 		}
 		else {
 

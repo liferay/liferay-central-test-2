@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 
@@ -67,7 +68,7 @@ public class EARXMLBuilder {
 	}
 
 	private void _buildGeronimoXML() throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -80,25 +81,25 @@ public class EARXMLBuilder {
 
 			String displayName = entity.elementText("display-name");
 
-			sb.append("\t\t\t\t<session>\n");
-			sb.append("\t\t\t\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
+			sm.append("\t\t\t\t<session>\n");
+			sm.append("\t\t\t\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
 
 			if (displayName.endsWith("LocalServiceEJB")) {
-				sb.append("\t\t\t\t\t<jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</jndi-name>\n");
+				sm.append("\t\t\t\t\t<jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</jndi-name>\n");
 			}
 			else {
-				sb.append("\t\t\t\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
+				sm.append("\t\t\t\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
 			}
 
-			sb.append("\t\t\t\t\t<resource-ref>\n");
-			sb.append("\t\t\t\t\t\t<ref-name>jdbc/LiferayPool</ref-name>\n");
-			sb.append("\t\t\t\t\t\t<resource-link>LiferayPool</resource-link>\n");
-			sb.append("\t\t\t\t\t</resource-ref>\n");
-			sb.append("\t\t\t\t\t<resource-ref>\n");
-			sb.append("\t\t\t\t\t\t<ref-name>mail/MailSession</ref-name>\n");
-			sb.append("\t\t\t\t\t\t<resource-link>LiferayMailSession</resource-link>\n");
-			sb.append("\t\t\t\t\t</resource-ref>\n");
-			sb.append("\t\t\t\t</session>\n");
+			sm.append("\t\t\t\t\t<resource-ref>\n");
+			sm.append("\t\t\t\t\t\t<ref-name>jdbc/LiferayPool</ref-name>\n");
+			sm.append("\t\t\t\t\t\t<resource-link>LiferayPool</resource-link>\n");
+			sm.append("\t\t\t\t\t</resource-ref>\n");
+			sm.append("\t\t\t\t\t<resource-ref>\n");
+			sm.append("\t\t\t\t\t\t<ref-name>mail/MailSession</ref-name>\n");
+			sm.append("\t\t\t\t\t\t<resource-link>LiferayMailSession</resource-link>\n");
+			sm.append("\t\t\t\t\t</resource-ref>\n");
+			sm.append("\t\t\t\t</session>\n");
 		}
 
 		// geronimo-application.xml
@@ -115,7 +116,7 @@ public class EARXMLBuilder {
 		int y = content.indexOf("</enterprise-beans>", x) - 3;
 
 		newContent =
-			content.substring(0, x - 1) + sb.toString() +
+			content.substring(0, x - 1) + sm.toString() +
 				content.substring(y, content.length());
 
 		if (!content.equals(newContent)) {
@@ -129,47 +130,47 @@ public class EARXMLBuilder {
 
 		// pramati-j2ee-server.xml
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("<?xml version=\"1.0\"?>\n");
-		sb.append("<!DOCTYPE pramati-j2ee-server PUBLIC \"-//Pramati Technologies //DTD Pramati J2ee Server 5.0//EN\" \"http://www.pramati.com/dtd/pramati-j2ee-server_5_0.dtd\">\n");
+		sm.append("<?xml version=\"1.0\"?>\n");
+		sm.append("<!DOCTYPE pramati-j2ee-server PUBLIC \"-//Pramati Technologies //DTD Pramati J2ee Server 5.0//EN\" \"http://www.pramati.com/dtd/pramati-j2ee-server_5_0.dtd\">\n");
 
-		sb.append("\n<pramati-j2ee-server>\n");
-		sb.append("\t<vhost-name>default</vhost-name>\n");
-		sb.append("\t<auto-start>TRUE</auto-start>\n");
-		sb.append("\t<realm-name>PortalRealm</realm-name>\n");
-		sb.append("\t<deployment-properties app-versioning=\"true\" delete-previous-versions=\"false\" forced-deployment=\"false\">\n");
-		sb.append("\t\t<jsp-files pre-compilation=\"true\" />\n");
-		sb.append("\t\t<ejb-files retain-generated-code=\"false\" />\n");
-		sb.append("\t\t<validation>\n");
-		sb.append("\t\t\t<app-validation on-prepare=\"true\" on-start=\"true\" />\n");
-		sb.append("\t\t</validation>\n");
-		sb.append("\t</deployment-properties>\n");
+		sm.append("\n<pramati-j2ee-server>\n");
+		sm.append("\t<vhost-name>default</vhost-name>\n");
+		sm.append("\t<auto-start>TRUE</auto-start>\n");
+		sm.append("\t<realm-name>PortalRealm</realm-name>\n");
+		sm.append("\t<deployment-properties app-versioning=\"true\" delete-previous-versions=\"false\" forced-deployment=\"false\">\n");
+		sm.append("\t\t<jsp-files pre-compilation=\"true\" />\n");
+		sm.append("\t\t<ejb-files retain-generated-code=\"false\" />\n");
+		sm.append("\t\t<validation>\n");
+		sm.append("\t\t\t<app-validation on-prepare=\"true\" on-start=\"true\" />\n");
+		sm.append("\t\t</validation>\n");
+		sm.append("\t</deployment-properties>\n");
 
 		for (int i = 0; i < EJB_PATHS.length; i++) {
-			sb.append(_buildPramatiXMLEJBModule(EJB_PATHS[i]));
+			sm.append(_buildPramatiXMLEJBModule(EJB_PATHS[i]));
 		}
 
 		for (int i = 0; i < WEB_PATHS.length; i++) {
-			sb.append(_buildPramatiXMLWebModule(WEB_PATHS[i]));
+			sm.append(_buildPramatiXMLWebModule(WEB_PATHS[i]));
 		}
 
 		for (int i = 0; i < EJB_PATHS.length; i++) {
-			sb.append(_buildPramatiXMLRoleMapping(EJB_PATHS[i], "jar"));
+			sm.append(_buildPramatiXMLRoleMapping(EJB_PATHS[i], "jar"));
 		}
 
 		for (int i = 0; i < WEB_PATHS.length; i++) {
-			sb.append(_buildPramatiXMLRoleMapping(WEB_PATHS[i], "war"));
+			sm.append(_buildPramatiXMLRoleMapping(WEB_PATHS[i], "war"));
 		}
 
-		sb.append("</pramati-j2ee-server>");
+		sm.append("</pramati-j2ee-server>");
 
 		File outputFile = new File("../portal-ear/modules/pramati-j2ee-server.xml");
 
 		if (!outputFile.exists() ||
-			!FileUtil.read(outputFile).equals(sb.toString())) {
+			!FileUtil.read(outputFile).equals(sm.toString())) {
 
-			FileUtil.write(outputFile, sb.toString());
+			FileUtil.write(outputFile, sm.toString());
 
 			System.out.println(outputFile.toString());
 		}
@@ -197,15 +198,15 @@ public class EARXMLBuilder {
 	private String _buildPramatiXMLRoleMapping(String path, String extension)
 		throws IOException {
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("\t<role-mapping>\n");
-		sb.append("\t\t<module-name>").append(path.substring(3, path.length())).append(".").append(extension).append("</module-name>\n");
-		sb.append("\t\t<role-name>users</role-name>\n");
-		sb.append("\t\t<role-link>everybody</role-link>\n");
-		sb.append("\t</role-mapping>\n");
+		sm.append("\t<role-mapping>\n");
+		sm.append("\t\t<module-name>").append(path.substring(3, path.length())).append(".").append(extension).append("</module-name>\n");
+		sm.append("\t\t<role-name>users</role-name>\n");
+		sm.append("\t\t<role-link>everybody</role-link>\n");
+		sm.append("\t</role-mapping>\n");
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private String _buildPramatiXMLWebModule(String path)
@@ -218,14 +219,14 @@ public class EARXMLBuilder {
 			contextRoot = "/";
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("\t<web-module>\n");
-		sb.append("\t\t<name>").append(contextRoot).append("</name>\n");
+		sm.append("\t<web-module>\n");
+		sm.append("\t\t<name>").append(contextRoot).append("</name>\n");
 
-		sb.append("\t\t<module-name>");
+		sm.append("\t\t<module-name>");
 
-		sb.append(path.substring(3, path.length())).append(".war</module-name>\n");
+		sm.append(path.substring(3, path.length())).append(".war</module-name>\n");
 
 		SAXReader reader = SAXReaderFactory.getInstance(false);
 
@@ -236,10 +237,10 @@ public class EARXMLBuilder {
 		while (itr.hasNext()) {
 			Element ejbLocalRef = (Element)itr.next();
 
-			sb.append("\t\t<ejb-ref>\n");
-			sb.append("\t\t\t<ejb-ref-name>").append(ejbLocalRef.elementText("ejb-ref-name")).append("</ejb-ref-name>\n");
-			sb.append("\t\t\t<ejb-link>").append(ejbLocalRef.elementText("ejb-link")).append("__PRAMATI_LOCAL</ejb-link>\n");
-			sb.append("\t\t</ejb-ref>\n");
+			sm.append("\t\t<ejb-ref>\n");
+			sm.append("\t\t\t<ejb-ref-name>").append(ejbLocalRef.elementText("ejb-ref-name")).append("</ejb-ref-name>\n");
+			sm.append("\t\t\t<ejb-link>").append(ejbLocalRef.elementText("ejb-link")).append("__PRAMATI_LOCAL</ejb-link>\n");
+			sm.append("\t\t</ejb-ref>\n");
 		}
 
 		itr = doc.getRootElement().elements("ejb-local-ref").iterator();
@@ -247,10 +248,10 @@ public class EARXMLBuilder {
 		while (itr.hasNext()) {
 			Element ejbLocalRef = (Element)itr.next();
 
-			sb.append("\t\t<ejb-local-ref>\n");
-			sb.append("\t\t\t<ejb-ref-name>").append(ejbLocalRef.elementText("ejb-ref-name")).append("</ejb-ref-name>\n");
-			sb.append("\t\t\t<ejb-link>").append(ejbLocalRef.elementText("ejb-link")).append("__PRAMATI_LOCAL</ejb-link>\n");
-			sb.append("\t\t</ejb-local-ref>\n");
+			sm.append("\t\t<ejb-local-ref>\n");
+			sm.append("\t\t\t<ejb-ref-name>").append(ejbLocalRef.elementText("ejb-ref-name")).append("</ejb-ref-name>\n");
+			sm.append("\t\t\t<ejb-link>").append(ejbLocalRef.elementText("ejb-link")).append("__PRAMATI_LOCAL</ejb-link>\n");
+			sm.append("\t\t</ejb-local-ref>\n");
 		}
 
 		itr = doc.getRootElement().elements("resource-ref").iterator();
@@ -258,16 +259,16 @@ public class EARXMLBuilder {
 		while (itr.hasNext()) {
 			Element resourceRef = (Element)itr.next();
 
-			sb.append("\t\t<resource-mapping>\n");
-			sb.append("\t\t\t<resource-name>").append(resourceRef.elementText("res-ref-name")).append("</resource-name>\n");
-			sb.append("\t\t\t<resource-type>").append(resourceRef.elementText("res-type")).append("</resource-type>\n");
-			sb.append("\t\t\t<resource-link>").append(resourceRef.elementText("res-ref-name")).append("</resource-link>\n");
-			sb.append("\t\t</resource-mapping>\n");
+			sm.append("\t\t<resource-mapping>\n");
+			sm.append("\t\t\t<resource-name>").append(resourceRef.elementText("res-ref-name")).append("</resource-name>\n");
+			sm.append("\t\t\t<resource-type>").append(resourceRef.elementText("res-type")).append("</resource-type>\n");
+			sm.append("\t\t\t<resource-link>").append(resourceRef.elementText("res-ref-name")).append("</resource-link>\n");
+			sm.append("\t\t</resource-mapping>\n");
 		}
 
-		sb.append("\t</web-module>\n");
+		sm.append("\t</web-module>\n");
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 }

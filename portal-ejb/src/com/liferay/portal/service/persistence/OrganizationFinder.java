@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
@@ -202,13 +203,13 @@ public class OrganizationFinder {
 				parentOrganizationComparator);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append(sql);
+			sm.append(sql);
 
-			sb.append(" ORDER BY orgName ASC");
+			sm.append(" ORDER BY orgName ASC");
 
-			sql = sb.toString();
+			sql = sm.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -278,28 +279,28 @@ public class OrganizationFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append("(");
+			sm.append("(");
 
-			sb.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
+			sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin("groupsPermissions"));
 			sql = StringUtil.replace(
 				sql, "[$WHERE$]", _getWhere("groupsPermissions"));
 
-			sb = new StringBuffer();
+			sm = new StringMaker();
 
-			sb.append(sql);
+			sm.append(sql);
 
-			sb.append(") UNION (");
+			sm.append(") UNION (");
 
-			sb.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
+			sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
 
-			sql = sb.toString();
+			sql = sm.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin("orgGroupPermission"));
@@ -310,13 +311,13 @@ public class OrganizationFinder {
 				parentOrganizationComparator);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
-			sb = new StringBuffer();
+			sm = new StringMaker();
 
-			sb.append(sql);
+			sm.append(sql);
 
-			sb.append(")");
+			sm.append(")");
 
-			sql = sb.toString();
+			sql = sm.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -392,28 +393,28 @@ public class OrganizationFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append("(");
+			sm.append("(");
 
-			sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
+			sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin("groupsPermissions"));
 			sql = StringUtil.replace(
 				sql, "[$WHERE$]", _getWhere("groupsPermissions"));
 
-			sb = new StringBuffer();
+			sm = new StringMaker();
 
-			sb.append(sql);
+			sm.append(sql);
 
-			sb.append(") UNION (");
+			sm.append(") UNION (");
 
-			sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
+			sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
 
-			sql = sb.toString();
+			sql = sm.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin("orgGroupPermission"));
@@ -424,15 +425,15 @@ public class OrganizationFinder {
 				parentOrganizationComparator);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
-			sb = new StringBuffer();
+			sm = new StringMaker();
 
-			sb.append(sql);
+			sm.append(sql);
 
-			sb.append(") ");
+			sm.append(") ");
 
-			sb.append("ORDER BY orgName ASC");
+			sm.append("ORDER BY orgName ASC");
 
-			sql = sb.toString();
+			sql = sm.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -502,7 +503,7 @@ public class OrganizationFinder {
 			return StringPool.BLANK;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = params.entrySet().iterator();
 
@@ -513,11 +514,11 @@ public class OrganizationFinder {
 			Object value = entry.getValue();
 
 			if (value != null) {
-				sb.append(_getJoin(key));
+				sm.append(_getJoin(key));
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _getJoin(String key) {
@@ -552,7 +553,7 @@ public class OrganizationFinder {
 			return StringPool.BLANK;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = params.entrySet().iterator();
 
@@ -563,11 +564,11 @@ public class OrganizationFinder {
 			Object value = entry.getValue();
 
 			if (value != null) {
-				sb.append(_getWhere(key));
+				sm.append(_getWhere(key));
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _getWhere(String key) {
@@ -590,12 +591,12 @@ public class OrganizationFinder {
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
-				sb.append(join.substring(pos + 5, join.length()));
-				sb.append(" AND ");
+				sm.append(join.substring(pos + 5, join.length()));
+				sm.append(" AND ");
 
-				join = sb.toString();
+				join = sm.toString();
 			}
 		}
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util.xml;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderResponseImpl;
@@ -60,7 +61,7 @@ public class ActionURLLogic extends RuntimeLogic {
 		return CLOSE_1_TAG;
 	}
 
-	public void processXML(StringBuffer sb, String xml) throws Exception {
+	public void processXML(StringMaker sm, String xml) throws Exception {
 		SAXReader reader = new SAXReader();
 
 		Document doc = reader.read(new StringReader(xml));
@@ -89,7 +90,7 @@ public class ActionURLLogic extends RuntimeLogic {
 			portletURL.setParameter(paramName, paramValue);
 		}
 
-		sb.append(portletURL.toString());
+		sm.append(portletURL.toString());
 	}
 
 	public boolean isAction() {

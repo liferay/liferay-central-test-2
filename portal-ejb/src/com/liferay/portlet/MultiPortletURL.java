@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Validator;
@@ -61,10 +62,10 @@ public class MultiPortletURL extends PortletURLWrapper {
 			return url;
 		}
 		else {
-			StringBuffer sb = new StringBuffer(url);
+			StringMaker sm = new StringMaker(url);
 
 			if (!url.endsWith(StringPool.AMPERSAND)) {
-				sb.append(StringPool.AMPERSAND);
+				sm.append(StringPool.AMPERSAND);
 			}
 
 			String suffix = StringPool.BLANK;
@@ -74,7 +75,7 @@ public class MultiPortletURL extends PortletURLWrapper {
 			if (pos >= 0) {
 				suffix = url.substring(pos);
 
-				sb.delete(pos, sb.length());
+				sm.delete(pos, sm.length());
 			}
 
 			Iterator itr1 = _portletsParams.keySet().iterator();
@@ -96,16 +97,16 @@ public class MultiPortletURL extends PortletURLWrapper {
 					for (int i = 0; i < values.size(); i++) {
 						String value = (String)values.get(i);
 
-						sb.append(namespace);
-						sb.append(name);
-						sb.append(StringPool.EQUAL);
-						sb.append(HtmlUtils.htmlEscape(value));
-						sb.append(StringPool.AMPERSAND);
+						sm.append(namespace);
+						sm.append(name);
+						sm.append(StringPool.EQUAL);
+						sm.append(HtmlUtils.htmlEscape(value));
+						sm.append(StringPool.AMPERSAND);
 					}
 				}
 			}
 
-			return sb.toString() + suffix;
+			return sm.toString() + suffix;
 		}
 	}
 

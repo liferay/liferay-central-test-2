@@ -29,6 +29,7 @@ import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.UserActiveException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -216,17 +217,17 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			(path.indexOf(_PATH_PORTAL_PROTECTED) == -1) &&
 			(!_trackerIgnorePaths.contains(path))) {
 
-			StringBuffer fullPathSB = new StringBuffer();
+			StringMaker fullPathSM = new StringMaker();
 
-			fullPathSB.append(path);
-			fullPathSB.append(StringPool.QUESTION);
-			fullPathSB.append(req.getQueryString());
+			fullPathSM.append(path);
+			fullPathSM.append(StringPool.QUESTION);
+			fullPathSM.append(req.getQueryString());
 
 			UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(
 				StringPool.BLANK);
 
 			userTrackerPath.setUserTrackerId(userTracker.getUserTrackerId());
-			userTrackerPath.setPath(fullPathSB.toString());
+			userTrackerPath.setPath(fullPathSM.toString());
 			userTrackerPath.setPathDate(new Date());
 
 			userTracker.addPath(userTrackerPath);
@@ -576,11 +577,11 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		String portalURL = PortalUtil.getPortalURL(req);
 		String mainPath = (String)req.getAttribute(WebKeys.MAIN_PATH);
 
-		StringBuffer defaultPathSB = new StringBuffer();
+		StringMaker defaultPathSM = new StringMaker();
 
-		defaultPathSB.append(portalURL);
-		defaultPathSB.append(mainPath);
-		defaultPathSB.append(_PATH_PORTAL_LAYOUT);
+		defaultPathSM.append(portalURL);
+		defaultPathSM.append(mainPath);
+		defaultPathSM.append(_PATH_PORTAL_LAYOUT);
 
 		boolean forwardByLastPath = GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_LAST_PATH), true);
@@ -592,19 +593,19 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				// forward to the user's default layout to prevent a lagging
 				// loop
 
-				defaultPathSB.append(StringPool.QUESTION);
-				defaultPathSB.append("p_l_id");
-				defaultPathSB.append(StringPool.EQUAL);
-				defaultPathSB.append(LayoutImpl.DEFAULT_PLID);
+				defaultPathSM.append(StringPool.QUESTION);
+				defaultPathSM.append("p_l_id");
+				defaultPathSM.append(StringPool.EQUAL);
+				defaultPathSM.append(LayoutImpl.DEFAULT_PLID);
 			}
 
-			return defaultPathSB.toString();
+			return defaultPathSM.toString();
 		}
 
 		LastPath lastPath = (LastPath)ses.getAttribute(WebKeys.LAST_PATH);
 
 		if (lastPath == null) {
-			return defaultPathSB.toString();
+			return defaultPathSM.toString();
 		}
 
 		Map parameterMap = lastPath.getParameterMap();
@@ -618,18 +619,18 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 					lastPath.getPath());
 
 			if ((mapping == null) || (parameterMap == null)) {
-				return defaultPathSB.toString();
+				return defaultPathSM.toString();
 			}
 		}
 
-		StringBuffer lastPathSB = new StringBuffer();
+		StringMaker lastPathSM = new StringMaker();
 
-		lastPathSB.append(portalURL);
-		lastPathSB.append(lastPath.getContextPath());
-		lastPathSB.append(lastPath.getPath());
-		lastPathSB.append(Http.parameterMapToString(parameterMap));
+		lastPathSM.append(portalURL);
+		lastPathSM.append(lastPath.getContextPath());
+		lastPathSM.append(lastPath.getPath());
+		lastPathSM.append(Http.parameterMapToString(parameterMap));
 
-		return lastPathSB.toString();
+		return lastPathSM.toString();
 	}
 
 	protected boolean isPortletPath(String path) {

@@ -24,6 +24,7 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -152,7 +153,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 				fileEl.setAttribute("desc", fileEntry.getTitle());
 				fileEl.setAttribute("size", getSize(fileEntry.getSize()));
 
-				StringBuffer url = new StringBuffer();
+				StringMaker url = new StringMaker();
 
 				ThemeDisplay themeDisplay = arg.getThemeDisplay();
 

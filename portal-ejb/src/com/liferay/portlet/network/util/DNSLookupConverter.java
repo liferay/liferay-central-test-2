@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.network.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.network.model.DNSLookup;
 import com.liferay.util.ConverterException;
@@ -60,19 +61,19 @@ public class DNSLookupConverter implements WebCacheable {
 			}
 
 			if (results == null) {
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
 				InetAddress[] ia = InetAddress.getAllByName(_domain);
 
 				for (int i = 0; i < ia.length; i++) {
-					sb.append(ia[i].getHostName());
+					sm.append(ia[i].getHostName());
 
 					if (i + 1 <= ia.length) {
-						sb.append(",");
+						sm.append(",");
 					}
 				}
 
-				results = sb.toString();
+				results = sm.toString();
 			}
 
 			dnsLookup = new DNSLookup(_domain, results);

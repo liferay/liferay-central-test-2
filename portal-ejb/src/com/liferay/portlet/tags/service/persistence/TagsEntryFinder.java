@@ -23,6 +23,7 @@
 package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -149,21 +150,21 @@ public class TagsEntryFinder {
 			return StringPool.BLANK;
 		}
 		else {
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append(" INNER JOIN TagsProperty ON ");
-			sb.append(" (TagsProperty.entryId = TagsEntry.entryId) AND ");
+			sm.append(" INNER JOIN TagsProperty ON ");
+			sm.append(" (TagsProperty.entryId = TagsEntry.entryId) AND ");
 
 			for (int i = 0; i < properties.length; i++) {
-				sb.append("(TagsProperty.key_ = ? AND ");
-				sb.append("TagsProperty.value = ?) ");
+				sm.append("(TagsProperty.key_ = ? AND ");
+				sm.append("TagsProperty.value = ?) ");
 
 				if ((i + 1) < properties.length) {
-					sb.append(" AND ");
+					sm.append(" AND ");
 				}
 			}
 
-			return sb.toString();
+			return sm.toString();
 		}
 	}
 
