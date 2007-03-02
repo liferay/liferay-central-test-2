@@ -83,7 +83,7 @@ public class Base64 {
 	}
 
 	public static String encode(byte raw[]) {
-		StringBuffer encoded = new StringBuffer();
+		StringMaker encoded = new StringMaker();
 
 		for (int i = 0; i < raw.length; i += 3) {
 			encoded.append(encodeBlock(raw, i));

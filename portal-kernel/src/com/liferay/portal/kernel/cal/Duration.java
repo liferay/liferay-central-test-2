@@ -30,6 +30,8 @@
 
 package com.liferay.portal.kernel.cal;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 import java.io.Serializable;
 
 /**
@@ -435,22 +437,22 @@ public class Duration implements Cloneable, Serializable {
 	 *
 	 */
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		buffer.append(getClass().getName());
-		buffer.append("[weeks=");
-		buffer.append(weeks);
-		buffer.append(",days=");
-		buffer.append(days);
-		buffer.append(",hours=");
-		buffer.append(hours);
-		buffer.append(",minutes=");
-		buffer.append(minutes);
-		buffer.append(",seconds=");
-		buffer.append(seconds);
-		buffer.append("]");
+		sm.append(getClass().getName());
+		sm.append("[weeks=");
+		sm.append(weeks);
+		sm.append(",days=");
+		sm.append(days);
+		sm.append(",hours=");
+		sm.append(hours);
+		sm.append(",minutes=");
+		sm.append(minutes);
+		sm.append(",seconds=");
+		sm.append(seconds);
+		sm.append("]");
 
-		return buffer.toString();
+		return sm.toString();
 	}
 
 }

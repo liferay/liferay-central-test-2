@@ -30,6 +30,8 @@
 
 package com.liferay.util.cal;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 import java.io.Serializable;
 
 import java.util.Calendar;
@@ -1240,54 +1242,54 @@ public class Recurrence implements Serializable {
 	 *
 	 */
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append(getClass().getName());
-		sb.append("[dtStart=");
-		sb.append((dtStart != null) ? dtStart.toString() : "null");
-		sb.append(",duration=");
-		sb.append((duration != null) ? duration.toString() : "null");
-		sb.append(",frequency=");
-		sb.append(frequency);
-		sb.append(",interval=");
-		sb.append(interval);
-		sb.append(",until=");
-		sb.append((until != null) ? until.toString() : "null");
-		sb.append(",byDay=");
+		sm.append(getClass().getName());
+		sm.append("[dtStart=");
+		sm.append((dtStart != null) ? dtStart.toString() : "null");
+		sm.append(",duration=");
+		sm.append((duration != null) ? duration.toString() : "null");
+		sm.append(",frequency=");
+		sm.append(frequency);
+		sm.append(",interval=");
+		sm.append(interval);
+		sm.append(",until=");
+		sm.append((until != null) ? until.toString() : "null");
+		sm.append(",byDay=");
 
 		if (byDay == null) {
-			sb.append("null");
+			sm.append("null");
 		}
 		else {
-			sb.append("[");
+			sm.append("[");
 
 			for (int i = 0; i < byDay.length; i++) {
 				if (i != 0) {
-					sb.append(",");
+					sm.append(",");
 				}
 
 				if (byDay[i] != null) {
-					sb.append(byDay[i].toString());
+					sm.append(byDay[i].toString());
 				}
 				else {
-					sb.append("null");
+					sm.append("null");
 				}
 			}
 
-			sb.append("]");
+			sm.append("]");
 		}
 
-		sb.append(",byMonthDay=");
-		sb.append(stringizeIntArray(byMonthDay));
-		sb.append(",byYearDay=");
-		sb.append(stringizeIntArray(byYearDay));
-		sb.append(",byWeekNo=");
-		sb.append(stringizeIntArray(byWeekNo));
-		sb.append(",byMonth=");
-		sb.append(stringizeIntArray(byMonth));
-		sb.append(']');
+		sm.append(",byMonthDay=");
+		sm.append(stringizeIntArray(byMonthDay));
+		sm.append(",byYearDay=");
+		sm.append(stringizeIntArray(byYearDay));
+		sm.append(",byWeekNo=");
+		sm.append(stringizeIntArray(byWeekNo));
+		sm.append(",byMonth=");
+		sm.append(stringizeIntArray(byMonth));
+		sm.append(']');
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	/**
@@ -1304,21 +1306,21 @@ public class Recurrence implements Serializable {
 			return "null";
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("[");
+		sm.append("[");
 
 		for (int i = 0; i < a.length; i++) {
 			if (i != 0) {
-				sb.append(",");
+				sm.append(",");
 			}
 
-			sb.append(a[i]);
+			sm.append(a[i]);
 		}
 
-		sb.append("]");
+		sm.append("]");
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 }

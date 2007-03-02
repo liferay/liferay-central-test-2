@@ -30,6 +30,8 @@
 
 package com.liferay.util.cal;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 import java.io.Serializable;
 
 import java.util.Calendar;
@@ -240,16 +242,16 @@ public class DayAndPosition implements Cloneable, Serializable {
 	 *
 	 */
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		buffer.append(getClass().getName());
-		buffer.append("[day=");
-		buffer.append(day);
-		buffer.append(",position=");
-		buffer.append(position);
-		buffer.append("]");
+		sm.append(getClass().getName());
+		sm.append("[day=");
+		sm.append(day);
+		sm.append(",position=");
+		sm.append(position);
+		sm.append("]");
 
-		return buffer.toString();
+		return sm.toString();
 	}
 
 }
