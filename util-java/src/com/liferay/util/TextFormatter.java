@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 import java.text.NumberFormat;
 
 import java.util.Locale;
@@ -183,20 +185,20 @@ public class TextFormatter {
 	}
 
 	private static String _formatH(String s) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		char[] c = s.toCharArray();
 
 		for (int i = 0; i < c.length; i++) {
 			if (Character.isUpperCase(c[i])) {
-				sb.append(" ").append(Character.toLowerCase(c[i]));
+				sm.append(" ").append(Character.toLowerCase(c[i]));
 			}
 			else {
-				sb.append(c[i]);
+				sm.append(c[i]);
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _formatI(String s) {
@@ -211,7 +213,7 @@ public class TextFormatter {
 				s.substring(1, s.length());
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		char[] c = s.toCharArray();
 
@@ -219,20 +221,20 @@ public class TextFormatter {
 			if ((i + 1 != c.length) &&
 				(Character.isLowerCase(c[i + 1]))) {
 
-				sb.append(s.substring(i, c.length));
+				sm.append(s.substring(i, c.length));
 
 				break;
 			}
 			else {
-				sb.append(Character.toLowerCase(c[i]));
+				sm.append(Character.toLowerCase(c[i]));
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static String _formatJ(String s) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		s = StringUtil.replace(s, "-", " ");
 		s = StringUtil.replace(s, "_", " ");
@@ -241,14 +243,14 @@ public class TextFormatter {
 
 		for (int i = 0; i < c.length; i++) {
 			if ((i == 0) || (c[i - 1] == ' ')) {
-				sb.append(Character.toUpperCase(c[i]));
+				sm.append(Character.toUpperCase(c[i]));
 			}
 			else {
-				sb.append(Character.toLowerCase(c[i]));
+				sm.append(Character.toLowerCase(c[i]));
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 }

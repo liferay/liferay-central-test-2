@@ -22,6 +22,8 @@
 
 package com.liferay.util.dao;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,7 +57,7 @@ public class CounterDAO {
 		try {
 			con = DataAccess.getConnection(location);
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 
 			query.append(
 				"SELECT currentId FROM " + tableName + " WHERE name = ?");
@@ -118,7 +120,7 @@ public class CounterDAO {
 		try {
 			con = DataAccess.getConnection(location);
 
-			StringBuffer update = new StringBuffer();
+			StringMaker update = new StringMaker();
 
 			update.append("DELETE FROM " + tableName + " WHERE name = ?");
 

@@ -22,6 +22,7 @@
 
 package com.liferay.util.mail;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Validator;
 
@@ -76,19 +77,19 @@ public class InternetAddressUtil {
 	public static String toString(Address[] addresses) {
 		InternetAddress[] internetAddresses = (InternetAddress[])addresses;
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		if (internetAddresses != null) {
 			for (int i = 0; i < internetAddresses.length; i++) {
-				sb.append(internetAddresses[i].toUnicodeString());
+				sm.append(internetAddresses[i].toUnicodeString());
 
 				if (i < internetAddresses.length - 1) {
-					sb.append(StringPool.COMMA + StringPool.NBSP);
+					sm.append(StringPool.COMMA + StringPool.NBSP);
 				}
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 }

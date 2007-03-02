@@ -22,6 +22,8 @@
 
 package com.liferay.util.poi;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 import java.io.InputStream;
 
 import java.util.Iterator;
@@ -41,7 +43,7 @@ public class XLSTextStripper {
 
 	public XLSTextStripper(InputStream in) {
 		try {
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			HSSFWorkbook workbook = new HSSFWorkbook(in);
 
@@ -75,16 +77,16 @@ public class XLSTextStripper {
 						}
 
 						if (cellStringValue != null) {
-							sb.append(cellStringValue);
-							sb.append("\t");
+							sm.append(cellStringValue);
+							sm.append("\t");
 						}
 					}
 
-					sb.append("\n");
+					sm.append("\n");
 				}
 			}
 
-			_text = sb.toString();
+			_text = sm.toString();
 		}
 		catch (Exception e) {
 			e.printStackTrace();

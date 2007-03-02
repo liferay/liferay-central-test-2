@@ -22,6 +22,8 @@
 
 package com.liferay.util.dao.search;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -39,16 +41,16 @@ public class ButtonSearchEntry extends TextSearchEntry {
 	}
 
 	public void print(PageContext pageContext) throws Exception {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("<input class=\"portlet-form-button\" type=\"button\" ");
-		sb.append("value=\"");
-		sb.append(getName());
-		sb.append("\" onClick=\"");
-		sb.append(getHref());
-		sb.append("\">");
+		sm.append("<input class=\"portlet-form-button\" type=\"button\" ");
+		sm.append("value=\"");
+		sm.append(getName());
+		sm.append("\" onClick=\"");
+		sm.append(getHref());
+		sm.append("\">");
 
-		pageContext.getOut().print(sb.toString());
+		pageContext.getOut().print(sm.toString());
 	}
 
 	public Object clone() {

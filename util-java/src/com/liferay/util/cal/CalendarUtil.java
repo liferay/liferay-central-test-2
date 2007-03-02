@@ -22,6 +22,7 @@
 
 package com.liferay.util.cal;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.SimpleCachePool;
 import com.liferay.util.Validator;
 
@@ -124,15 +125,16 @@ public class CalendarUtil {
 			pattern = "EEEE";
 		}
 
-		StringBuffer sb = new StringBuffer();
-		sb.append("util-java.days_");
-		sb.append(pattern);
-		sb.append("_");
-		sb.append(locale.getLanguage());
-		sb.append("_");
-		sb.append(locale.getCountry());
+		StringMaker sm = new StringMaker();
 
-		String id = sb.toString();
+		sm.append("util-java.days_");
+		sm.append(pattern);
+		sm.append("_");
+		sm.append(locale.getLanguage());
+		sm.append("_");
+		sm.append(locale.getCountry());
+
+		String id = sm.toString();
 
 		String[] days = (String[])SimpleCachePool.get(id);
 
@@ -262,15 +264,16 @@ public class CalendarUtil {
 			pattern = "MMMM";
 		}
 
-		StringBuffer sb = new StringBuffer();
-		sb.append("util-java.months_");
-		sb.append(pattern);
-		sb.append("_");
-		sb.append(locale.getLanguage());
-		sb.append("_");
-		sb.append(locale.getCountry());
+		StringMaker sm = new StringMaker();
 
-		String id = sb.toString();
+		sm.append("util-java.months_");
+		sm.append(pattern);
+		sm.append("_");
+		sm.append(locale.getLanguage());
+		sm.append("_");
+		sm.append(locale.getCountry());
+
+		String id = sm.toString();
 
 		String[] months = (String[])SimpleCachePool.get(id);
 

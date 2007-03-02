@@ -22,6 +22,8 @@
 
 package com.liferay.util.jsf.sun.faces.renderkit.html_basic;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 import java.io.IOException;
 import java.io.Writer;
 
@@ -49,11 +51,11 @@ public class WriterWrapper extends Writer {
 	}
 
 	public void write(char[] cbuf, int off, int len) throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append(cbuf, off, len);
+		sm.append(cbuf, off, len);
 
-		_writer.write(sb.toString());
+		_writer.write(sm.toString());
 	}
 
 	public void write(int c) throws IOException {

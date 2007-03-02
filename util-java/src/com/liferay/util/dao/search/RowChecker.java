@@ -22,6 +22,7 @@
 
 package com.liferay.util.dao.search;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Validator;
 
@@ -74,50 +75,50 @@ public class RowChecker {
 			return StringPool.BLANK;
 		}
 		else {
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append("<input name=\"");
-			sb.append(_allRowsId);
-			sb.append("\" type=\"checkbox\" ");
-			sb.append("onClick=\"Liferay.Util.checkAll(");
-			sb.append(_formName);
-			sb.append(", '");
-			sb.append(_rowId);
-			sb.append("', this");
-			sb.append(");\">");
+			sm.append("<input name=\"");
+			sm.append(_allRowsId);
+			sm.append("\" type=\"checkbox\" ");
+			sm.append("onClick=\"Liferay.Util.checkAll(");
+			sm.append(_formName);
+			sm.append(", '");
+			sm.append(_rowId);
+			sm.append("', this");
+			sm.append(");\">");
 
-			return sb.toString();
+			return sm.toString();
 		}
 	}
 
 	public String getRowCheckBox(boolean checked, String primaryKey) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append("<input ");
+		sm.append("<input ");
 
 		if (checked) {
-			sb.append("checked ");
+			sm.append("checked ");
 		}
 
-		sb.append("name=\"");
-		sb.append(_rowId);
-		sb.append("\" type=\"checkbox\" value=\"");
-		sb.append(primaryKey);
-		sb.append("\" ");
+		sm.append("name=\"");
+		sm.append(_rowId);
+		sm.append("\" type=\"checkbox\" value=\"");
+		sm.append(primaryKey);
+		sm.append("\" ");
 
 		if (Validator.isNotNull(_allRowsId)) {
-			sb.append("onClick=\"Liferay.Util.checkAllBox(");
-			sb.append(_formName);
-			sb.append(", '");
-			sb.append(_rowId);
-			sb.append("', ");
-			sb.append(_allRowsId);
-			sb.append(");\"");
+			sm.append("onClick=\"Liferay.Util.checkAllBox(");
+			sm.append(_formName);
+			sm.append(", '");
+			sm.append(_rowId);
+			sm.append("', ");
+			sm.append(_allRowsId);
+			sm.append(");\"");
 		}
 
-		sb.append(">");
+		sm.append(">");
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public boolean isChecked(Object obj) {

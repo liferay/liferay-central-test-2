@@ -22,6 +22,7 @@
 
 package com.liferay.util.dao.search;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.Validator;
 
 import javax.servlet.jsp.PageContext;
@@ -92,29 +93,29 @@ public class TextSearchEntry extends SearchEntry {
 			pageContext.getOut().print(_name);
 		}
 		else {
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append("<a href=\"");
-			sb.append(_href);
-			sb.append("\"");
+			sm.append("<a href=\"");
+			sm.append(_href);
+			sm.append("\"");
 
 			if (Validator.isNotNull(_target)) {
-				sb.append(" target=\"");
-				sb.append(_target);
-				sb.append("\"");
+				sm.append(" target=\"");
+				sm.append(_target);
+				sm.append("\"");
 			}
 
 			if (Validator.isNotNull(_title)) {
-				sb.append(" title=\"");
-				sb.append(_title);
-				sb.append("\"");
+				sm.append(" title=\"");
+				sm.append(_title);
+				sm.append("\"");
 			}
 
-			sb.append(">");
-			sb.append(_name);
-			sb.append("</a>");
+			sm.append(">");
+			sm.append(_name);
+			sm.append("</a>");
 
-			pageContext.getOut().print(sb.toString());
+			pageContext.getOut().print(sm.toString());
 		}
 	}
 

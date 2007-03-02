@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 /**
  * <a href="UnicodeFormatter.java.html"><b><i>View Source</i></b></a>
  *
@@ -49,14 +51,14 @@ public class UnicodeFormatter {
 	}
 
 	public static String toString(char[] array) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < array.length; i++) {
-			sb.append("\\u");
-			sb.append(charToHex(array[i]));
+			sm.append("\\u");
+			sm.append(charToHex(array[i]));
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public static String toString(String s) {

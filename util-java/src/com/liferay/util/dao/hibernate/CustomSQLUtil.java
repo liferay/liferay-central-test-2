@@ -23,6 +23,7 @@
 package com.liferay.util.dao.hibernate;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.StringUtil;
@@ -183,7 +184,7 @@ public abstract class CustomSQLUtil {
 	}
 
 	protected String trim(String sql) {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		try {
 			BufferedReader br = new BufferedReader(new StringReader(sql));
@@ -191,8 +192,8 @@ public abstract class CustomSQLUtil {
 			String line = null;
 
 			while ((line = br.readLine()) != null) {
-				sb.append(line.trim());
-				sb.append(StringPool.SPACE);
+				sm.append(line.trim());
+				sm.append(StringPool.SPACE);
 			}
 
 			br.close();
@@ -201,7 +202,7 @@ public abstract class CustomSQLUtil {
 			return sql;
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	private static Log _log = LogFactory.getLog(CustomSQLUtil.class);

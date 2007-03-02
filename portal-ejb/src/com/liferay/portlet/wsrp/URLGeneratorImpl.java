@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wsrp;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.axis.SimpleHTTPSender;
 
@@ -50,7 +51,7 @@ import org.apache.wsrp4j.util.WindowStates;
 public class URLGeneratorImpl implements URLGenerator {
 
 	public static String getResourceProxyURL(Map params) {
-		StringBuffer url = new StringBuffer();
+		StringMaker url = new StringMaker();
 
 		url.append("/wsrp/resource_proxy/get");
 

@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Map;
@@ -119,26 +120,26 @@ public class Version implements Comparable {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
-		sb.append(_major);
+		sm.append(_major);
 
 		if (Validator.isNotNull(_minor)) {
-			sb.append(_SEPARATOR);
-			sb.append(_minor);
+			sm.append(_SEPARATOR);
+			sm.append(_minor);
 
 			if (Validator.isNotNull(_bugFix)) {
-				sb.append(_SEPARATOR);
-				sb.append(_bugFix);
+				sm.append(_SEPARATOR);
+				sm.append(_bugFix);
 
 				if (Validator.isNotNull(_buildNumber)) {
-					sb.append(_SEPARATOR);
-					sb.append(_buildNumber);
+					sm.append(_SEPARATOR);
+					sm.append(_buildNumber);
 				}
 			}
 		}
 
-		return sb.toString();
+		return sm.toString();
 	}
 
 	public int compareTo(Object obj) {
@@ -196,7 +197,7 @@ public class Version implements Comparable {
 			_bugFix = st.nextToken();
 		}
 
-		StringBuffer buildNumber = new StringBuffer();
+		StringMaker buildNumber = new StringMaker();
 
 		while (st.hasMoreTokens()) {
 			buildNumber.append(st.nextToken());
