@@ -22,7 +22,8 @@
 
 package com.liferay.filters.compression;
 
-import java.io.ByteArrayOutputStream;
+import com.liferay.portal.kernel.util.ByteArrayMaker;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -48,7 +49,7 @@ public class CompressionStream extends ServletOutputStream {
 
 		_res = res;
 		_output = res.getOutputStream();
-		_bufferedOutput = new ByteArrayOutputStream();
+		_bufferedOutput = new ByteArrayMaker();
 		_closed = false;
 	}
 
@@ -57,11 +58,10 @@ public class CompressionStream extends ServletOutputStream {
 			throw new IOException();
 		}
 
-		if (_bufferedOutput instanceof ByteArrayOutputStream) {
-			ByteArrayOutputStream baos = (ByteArrayOutputStream)_bufferedOutput;
+		if (_bufferedOutput instanceof ByteArrayMaker) {
+			ByteArrayMaker baos = (ByteArrayMaker)_bufferedOutput;
 
-			ByteArrayOutputStream compressedContent =
-				new ByteArrayOutputStream();
+			ByteArrayMaker compressedContent = new ByteArrayMaker();
 
 			GZIPOutputStream gzipOutput =
 				new GZIPOutputStream(compressedContent);

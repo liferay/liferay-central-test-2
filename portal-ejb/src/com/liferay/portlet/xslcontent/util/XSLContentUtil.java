@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.xslcontent.util;
 
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.util.Http;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -65,11 +65,11 @@ public class XSLContentUtil {
 		Transformer transformer =
 			transformerFactory.newTransformer(xslSource);
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ByteArrayMaker bam = new ByteArrayMaker();
 
-		transformer.transform(xmlSource, new StreamResult(baos));
+		transformer.transform(xmlSource, new StreamResult(bam));
 
-		return baos.toString();
+		return bam.toString();
 	}
 
 }

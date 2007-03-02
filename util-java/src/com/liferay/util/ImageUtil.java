@@ -22,13 +22,14 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.ByteArrayMaker;
+
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.awt.image.SampleModel;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -107,7 +108,7 @@ public class ImageUtil {
 			return byteArray;
 		}
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ByteArrayMaker bam = new ByteArrayMaker();
 
 		try {
 			byte[] bytes = new byte[512];
@@ -115,10 +116,10 @@ public class ImageUtil {
 			for (int i = is.read(bytes, 0, 512); i != -1;
 					i = is.read(bytes, 0, 512)) {
 
-				baos.write(bytes, 0, i);
+				bam.write(bytes, 0, i);
 			}
 
-			byteArray = baos.toByteArray();
+			byteArray = bam.toByteArray();
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -133,7 +134,7 @@ public class ImageUtil {
 			}
 
 			try {
-				baos.close();
+				bam.close();
 			}
 			catch (Exception e) {
 			}

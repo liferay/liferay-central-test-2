@@ -22,9 +22,9 @@
 
 package com.liferay.util.xml;
 
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.util.StringUtil;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -100,18 +100,18 @@ public class XMLFormatter {
 	public static String toString(Branch branch, String indent)
 		throws IOException {
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ByteArrayMaker bam = new ByteArrayMaker();
 
 		OutputFormat format = OutputFormat.createPrettyPrint();
 
 		format.setIndent(indent);
 		format.setLineSeparator("\n");
 
-		XMLWriter writer = new XMLWriter(baos, format);
+		XMLWriter writer = new XMLWriter(bam, format);
 
 		writer.write(branch);
 
-		String content = baos.toString(ENCODING);
+		String content = bam.toString(ENCODING);
 
 		/*content = StringUtil.replace(
 			content,

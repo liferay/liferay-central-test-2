@@ -22,10 +22,10 @@
 
 package com.liferay.portal.servlet.filters.layoutcache;
 
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.Header;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -112,11 +112,11 @@ public class LayoutCacheResponse extends HttpServletResponseWrapper {
 	public byte[] getData() {
 		finishResponse();
 
-		return _baos.toByteArray();
+		return _bam.toByteArray();
 	}
 
 	private ServletOutputStream _createOutputStream() throws IOException {
-		return new LayoutCacheStream(_baos);
+		return new LayoutCacheStream(_bam);
 	}
 
 	public void addDateHeader(String name, long value) {
@@ -213,7 +213,7 @@ public class LayoutCacheResponse extends HttpServletResponseWrapper {
 		return _headers;
 	}
 
-	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
+	private ByteArrayMaker _bam = new ByteArrayMaker();
 	private ServletOutputStream _stream = null;
 	private PrintWriter _writer = null;
 	private String _contentType;

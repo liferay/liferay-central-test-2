@@ -25,7 +25,6 @@ package com.liferay.portal.kernel.util;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -154,11 +153,12 @@ public class Base64 {
 			return null;
 		}
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream(32000);
+		ByteArrayMaker bam = new ByteArrayMaker(32000);
 
 		try {
-			ObjectOutputStream os =
-				new ObjectOutputStream(new BufferedOutputStream(baos));
+			ObjectOutputStream os = new ObjectOutputStream(
+				new BufferedOutputStream(bam));
+
 			os.flush();
 			os.writeObject(o);
 			os.flush();
@@ -167,7 +167,7 @@ public class Base64 {
 			e.printStackTrace();
 		}
 
-		return encode(baos.toByteArray());
+		return encode(bam.toByteArray());
 	}
 
 	public static Object stringToObject(String s) {

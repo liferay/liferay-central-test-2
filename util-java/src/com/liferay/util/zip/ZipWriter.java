@@ -22,12 +22,12 @@
 
 package com.liferay.util.zip;
 
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringMaker;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -43,8 +43,8 @@ import java.util.zip.ZipOutputStream;
 public class ZipWriter implements Serializable {
 
 	public ZipWriter() {
-		_baos = new ByteArrayOutputStream();
-		_zos = new ZipOutputStream(new BufferedOutputStream(_baos));
+		_bam = new ByteArrayMaker();
+		_zos = new ZipOutputStream(new BufferedOutputStream(_bam));
 	}
 
 	public void addEntry(String name, StringMaker sm) throws IOException {
@@ -75,12 +75,12 @@ public class ZipWriter implements Serializable {
 	public byte[] finish() throws IOException {
 		_zos.close();
 
-		return _baos.toByteArray();
+		return _bam.toByteArray();
 	}
 
 	private static final int _BUFFER = 2048;
 
-	private ByteArrayOutputStream _baos;
+	private ByteArrayMaker _bam;
 	private ZipOutputStream _zos;
 	private byte[] _data = new byte[_BUFFER];
 

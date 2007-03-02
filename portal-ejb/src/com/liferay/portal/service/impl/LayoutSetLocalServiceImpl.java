@@ -27,6 +27,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
@@ -45,7 +46,6 @@ import com.liferay.util.Validator;
 
 import java.awt.image.BufferedImage;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -150,21 +150,21 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 				// PNG logo
 
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ByteArrayMaker bam = new ByteArrayMaker();
 
-				ImageIO.write(thumbnail, "png", baos);
+				ImageIO.write(thumbnail, "png", bam);
 
 				ImageLocalUtil.put(
-					layoutSet.getPngLogoImageId(), baos.toByteArray());
+					layoutSet.getPngLogoImageId(), bam.toByteArray());
 
 				// WBMP logo
 
-				baos = new ByteArrayOutputStream();
+				bam = new ByteArrayMaker();
 
-				ImageUtil.encodeWBMP(thumbnail, baos);
+				ImageUtil.encodeWBMP(thumbnail, bam);
 
 				ImageLocalUtil.put(
-					layoutSet.getWbmpLogoImageId(), baos.toByteArray());
+					layoutSet.getWbmpLogoImageId(), bam.toByteArray());
 			}
 			else {
 				ImageLocalUtil.remove(layoutSet.getLogoImageId());

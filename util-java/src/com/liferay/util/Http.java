@@ -22,10 +22,10 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -573,19 +573,19 @@ public class Http {
 			InputStream is = method.getResponseBodyAsStream();
 
 			if (is != null) {
-				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+				ByteArrayMaker bam = new ByteArrayMaker();
 				byte[] bytes = new byte[512];
 
 				for (int i = is.read(bytes, 0, 512); i != -1;
 						i = is.read(bytes, 0, 512)) {
 
-					buffer.write(bytes, 0, i);
+					bam.write(bytes, 0, i);
 				}
 
-				byteArray = buffer.toByteArray();
+				byteArray = bam.toByteArray();
 
 				is.close();
-				buffer.close();
+				bam.close();
 			}
 
 			return byteArray;
@@ -659,19 +659,19 @@ public class Http {
 
 			InputStream is = con.getInputStream();
 
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+			ByteArrayMaker bam = new ByteArrayMaker();
 			byte[] bytes = new byte[512];
 
 			for (int i = is.read(bytes, 0, 512); i != -1;
 					i = is.read(bytes, 0, 512)) {
 
-				buffer.write(bytes, 0, i);
+				bam.write(bytes, 0, i);
 			}
 
-			xml = new String(buffer.toByteArray());
+			xml = new String(bam.toByteArray());
 
 			is.close();
-			buffer.close();
+			bam.close();
 		}
 
 		return xml;

@@ -22,9 +22,9 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
@@ -83,7 +83,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 			return _string;
 		}
 		else if (_callGetOutputStream) {
-			return _baos.toString();
+			return _bam.toString();
 		}
 		else if (_callGetWriter) {
 			return _sw.toString();
@@ -117,7 +117,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 
 	public void resetBuffer() {
 		if (_callGetOutputStream) {
-			_baos.reset();
+			_bam.reset();
 		}
 		else if (_callGetWriter) {
 			StringBuffer sb = _sw.getBuffer();
@@ -127,8 +127,8 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public void recycle() {
-		_baos.reset();
-		//_sos = new StringServletOutputStream(_baos);
+		_bam.reset();
+		//_sos = new StringServletOutputStream(_bam);
 		_status = SC_OK;
 		_sw = new StringWriter();
 		_pw = new PrintWriter(_sw);
@@ -138,8 +138,8 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	}
 
 	private String _contentType;
-	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
-	private ServletOutputStream _sos = new StringServletOutputStream(_baos);
+	private ByteArrayMaker _bam = new ByteArrayMaker();
+	private ServletOutputStream _sos = new StringServletOutputStream(_bam);
 	private int _status = SC_OK;
 	private StringWriter _sw = new StringWriter();
 	private PrintWriter _pw = new PrintWriter(_sw);

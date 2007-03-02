@@ -31,6 +31,7 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -63,7 +64,6 @@ import com.liferay.util.lucene.HitsImpl;
 
 import java.awt.image.BufferedImage;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -471,19 +471,19 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			// PNG
 
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ByteArrayMaker bam = new ByteArrayMaker();
 
-			ImageIO.write(thumbnail, "png", baos);
+			ImageIO.write(thumbnail, "png", bam);
 
-			ImageLocalUtil.put(companyId + ".png", baos.toByteArray());
+			ImageLocalUtil.put(companyId + ".png", bam.toByteArray());
 
 			// WBMP
 
-			baos = new ByteArrayOutputStream();
+			bam = new ByteArrayMaker();
 
-			ImageUtil.encodeWBMP(thumbnail, baos);
+			ImageUtil.encodeWBMP(thumbnail, bam);
 
-			ImageLocalUtil.put(companyId + ".wbmp", baos.toByteArray());
+			ImageLocalUtil.put(companyId + ".wbmp", bam.toByteArray());
 		}
 		catch (InterruptedException ie) {
 			throw new SystemException(ie);

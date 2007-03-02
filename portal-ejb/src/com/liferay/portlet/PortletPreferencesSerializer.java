@@ -24,11 +24,11 @@ package com.liferay.portlet;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -177,14 +177,14 @@ public class PortletPreferencesSerializer {
 				portletPreferences.add(prefEl);
 			}
 
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ByteArrayMaker bam = new ByteArrayMaker();
 
 			XMLWriter writer = new XMLWriter(
-				baos, OutputFormat.createCompactFormat());
+				bam, OutputFormat.createCompactFormat());
 
 			writer.write(portletPreferences);
 
-			return baos.toString();
+			return bam.toString();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

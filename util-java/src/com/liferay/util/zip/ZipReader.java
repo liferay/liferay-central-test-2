@@ -22,7 +22,8 @@
 
 package com.liferay.util.zip;
 
-import java.io.ByteArrayOutputStream;
+import com.liferay.portal.kernel.util.ByteArrayMaker;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -68,15 +69,15 @@ public class ZipReader implements Serializable {
 			while ((entry = _zis.getNextEntry()) != null) {
 				String currentName = entry.getName();
 
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ByteArrayMaker bam = new ByteArrayMaker();
 
 				int count;
 
 				while ((count = _zis.read(_data, 0, _BUFFER)) != -1) {
-					baos.write(_data, 0, count);
+					bam.write(_data, 0, count);
 				}
 
-				byte[] byteArray = baos.toByteArray();
+				byte[] byteArray = bam.toByteArray();
 
 				_entries.put(currentName, byteArray);
 

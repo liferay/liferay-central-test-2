@@ -22,10 +22,11 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.ByteArrayMaker;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -232,13 +233,13 @@ public class FileUtil {
 	public static byte[] getBytes(InputStream in, int bufferSize)
 		throws IOException {
 
-		ByteArrayOutputStream out = null;
+		ByteArrayMaker out = null;
 
 		if (bufferSize <= 0) {
-			out = new ByteArrayOutputStream();
+			out = new ByteArrayMaker();
 		}
 		else {
-			out = new ByteArrayOutputStream(bufferSize);
+			out = new ByteArrayMaker(bufferSize);
 		}
 
 		boolean createBuffered = false;

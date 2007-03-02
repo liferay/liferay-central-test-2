@@ -22,7 +22,8 @@
 
 package com.liferay.filters.strip;
 
-import java.io.ByteArrayOutputStream;
+import com.liferay.portal.kernel.util.ByteArrayMaker;
+
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -105,14 +106,14 @@ public class StripResponse extends HttpServletResponseWrapper {
 	public byte[] getData() {
 		finishResponse();
 
-		return _baos.toByteArray();
+		return _bam.toByteArray();
 	}
 
 	private ServletOutputStream _createOutputStream() throws IOException {
-		return new StripStream(_baos);
+		return new StripStream(_bam);
 	}
 
-	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
+	private ByteArrayMaker _bam = new ByteArrayMaker();
 	private ServletOutputStream _stream = null;
 	private PrintWriter _writer = null;
 	private String _contentType;

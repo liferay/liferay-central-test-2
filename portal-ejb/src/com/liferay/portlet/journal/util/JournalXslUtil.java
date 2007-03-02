@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portlet.journal.TransformException;
 
-import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
 
 import java.util.Map;
@@ -47,7 +47,7 @@ public class JournalXslUtil {
 			Map tokens, String languageId, String xml, String script)
 		throws TransformException {
 
-		ByteArrayOutputStream outputBaos = new ByteArrayOutputStream();
+		ByteArrayMaker bam = new ByteArrayMaker();
 
 		try {
 			StreamSource xmlSource = new StreamSource(new StringReader(xml));
@@ -63,13 +63,13 @@ public class JournalXslUtil {
 			Transformer transformer =
 				transformerFactory.newTransformer(scriptSource);
 
-			transformer.transform(xmlSource, new StreamResult(outputBaos));
+			transformer.transform(xmlSource, new StreamResult(bam));
 		}
 		catch (TransformerException te) {
 			throw new TransformException(te.getMessage());
 		}
 
-		return outputBaos.toString();
+		return bam.toString();
 	}
 
 }

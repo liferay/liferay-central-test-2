@@ -22,11 +22,11 @@
 
 package com.liferay.util.servlet.fileupload;
 
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.util.servlet.ByteArrayInputStreamWrapper;
 import com.liferay.util.servlet.ServletInputStreamWrapper;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.servlet.ServletInputStream;
@@ -91,6 +91,6 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 	private HttpSession _ses;
 	private int _totalRead;
 	private int _totalSize;
-	private ByteArrayOutputStream _cachedBytes = new ByteArrayOutputStream();
+	private ByteArrayMaker _cachedBytes = new ByteArrayMaker();
 
 }

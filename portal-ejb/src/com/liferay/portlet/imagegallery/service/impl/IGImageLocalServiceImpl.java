@@ -25,6 +25,7 @@ package com.liferay.portlet.imagegallery.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
@@ -51,7 +52,6 @@ import com.liferay.util.Validator;
 
 import java.awt.image.BufferedImage;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -423,21 +423,21 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			BufferedImage thumbnail = ImageUtil.scale(
 				bufferedImage, thumbnailMaxHeight, thumbnailMaxWidth);
 
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ByteArrayMaker bam = new ByteArrayMaker();
 
 			if (contentType.indexOf("gif") != -1) {
-				ImageUtil.encodeGIF(thumbnail, baos);
+				ImageUtil.encodeGIF(thumbnail, bam);
 			}
 			else if (contentType.indexOf("jpg") != -1 ||
 					 contentType.indexOf("jpeg") != -1) {
 
-				ImageIO.write(thumbnail, "jpeg", baos);
+				ImageIO.write(thumbnail, "jpeg", bam);
 			}
 			else if (contentType.indexOf("png") != -1) {
-				ImageIO.write(thumbnail, "png", baos);
+				ImageIO.write(thumbnail, "png", bam);
 			}
 
-			ImageLocalUtil.put(thumbnailKey, baos.toByteArray());
+			ImageLocalUtil.put(thumbnailKey, bam.toByteArray());
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

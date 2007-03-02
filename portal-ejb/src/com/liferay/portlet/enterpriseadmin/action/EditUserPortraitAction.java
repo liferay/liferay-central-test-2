@@ -24,6 +24,7 @@ package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.UserPortraitException;
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
@@ -34,7 +35,6 @@ import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadException;
 import com.liferay.util.servlet.UploadPortletRequest;
 
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 import java.util.List;
@@ -142,7 +142,7 @@ public class EditUserPortraitAction extends PortletAction {
 		InputStream in = req.getPortletInputStream();
 
 		if (in != null) {
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			ByteArrayMaker out = new ByteArrayMaker();
 
 			int c = -1;
 

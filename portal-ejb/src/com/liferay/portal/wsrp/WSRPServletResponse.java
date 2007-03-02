@@ -22,7 +22,8 @@
 
 package com.liferay.portal.wsrp;
 
-import java.io.ByteArrayOutputStream;
+import com.liferay.portal.kernel.util.ByteArrayMaker;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -112,7 +113,7 @@ public class WSRPServletResponse implements HttpServletResponse, Serializable {
 
 	public String getString() throws UnsupportedEncodingException {
 		if (_callGetOutputStream) {
-			return _baos.toString();
+			return _bam.toString();
 		}
 		else if (_callGetWriter) {
 			return _sw.toString();
@@ -178,11 +179,11 @@ public class WSRPServletResponse implements HttpServletResponse, Serializable {
 	public void sendRedirect(String location) {
 	}
 
-	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
+	private ByteArrayMaker _bam = new ByteArrayMaker();
 	private Locale _locale;
 	private ServletOutputStream _sos = new ServletOutputStream() {
 		public void write(int b) throws IOException {
-			_baos.write(b);
+			_bam.write(b);
 		}
 	};
 
