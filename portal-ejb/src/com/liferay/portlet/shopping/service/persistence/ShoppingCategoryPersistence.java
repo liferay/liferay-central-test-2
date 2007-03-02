@@ -33,6 +33,7 @@ import com.liferay.portlet.shopping.NoSuchCategoryException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -189,7 +190,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
 			query.append("groupId = ?");
@@ -226,7 +227,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
 			query.append("groupId = ?");
@@ -263,7 +264,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ShoppingCategory exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -282,7 +283,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ShoppingCategory exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -305,7 +306,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
 			query.append("groupId = ?");
@@ -351,7 +352,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
 			query.append("groupId = ?");
@@ -401,7 +402,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
 			query.append("groupId = ?");
@@ -452,7 +453,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		List list = findByG_P(groupId, parentCategoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ShoppingCategory exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -475,7 +476,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		List list = findByG_P(groupId, parentCategoryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ShoppingCategory exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -501,7 +502,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
 			query.append("groupId = ?");
@@ -607,7 +608,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory ");
 
@@ -667,7 +668,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
@@ -707,7 +708,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
@@ -759,7 +760,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory");

@@ -32,6 +32,7 @@ import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -181,7 +182,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
@@ -226,7 +227,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
@@ -271,7 +272,7 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Website exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -290,7 +291,7 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Website exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -313,7 +314,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
@@ -365,7 +366,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (userId == null) {
@@ -410,7 +411,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (userId == null) {
@@ -455,7 +456,7 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Website exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("userId=");
@@ -474,7 +475,7 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Website exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("userId=");
@@ -496,7 +497,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (userId == null) {
@@ -549,7 +550,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
@@ -607,7 +608,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
@@ -665,7 +666,7 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByC_C(companyId, className, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Website exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -687,7 +688,7 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByC_C(companyId, className, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Website exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -713,7 +714,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
@@ -779,7 +780,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
@@ -850,7 +851,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
@@ -922,7 +923,7 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByC_C_C(companyId, className, classPK, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Website exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -949,7 +950,7 @@ public class WebsitePersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Website exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -978,7 +979,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
@@ -1057,7 +1058,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
@@ -1135,7 +1136,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
@@ -1212,7 +1213,7 @@ public class WebsitePersistence extends BasePersistence {
 				obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Website exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -1242,7 +1243,7 @@ public class WebsitePersistence extends BasePersistence {
 				count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Website exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -1274,7 +1275,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
@@ -1404,7 +1405,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Website ");
 
 			if (obc != null) {
@@ -1492,7 +1493,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
@@ -1540,7 +1541,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
@@ -1589,7 +1590,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
@@ -1651,7 +1652,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
@@ -1726,7 +1727,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
@@ -1804,7 +1805,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Website");
 

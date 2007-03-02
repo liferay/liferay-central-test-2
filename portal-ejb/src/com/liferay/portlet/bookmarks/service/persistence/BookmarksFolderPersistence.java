@@ -33,6 +33,7 @@ import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -187,7 +188,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 			query.append("groupId = ?");
@@ -224,7 +225,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 			query.append("groupId = ?");
@@ -261,7 +262,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No BookmarksFolder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -280,7 +281,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No BookmarksFolder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -303,7 +304,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 			query.append("groupId = ?");
@@ -349,7 +350,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 			query.append("groupId = ?");
@@ -399,7 +400,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 			query.append("groupId = ?");
@@ -449,7 +450,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		List list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No BookmarksFolder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -471,7 +472,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		List list = findByG_P(groupId, parentFolderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No BookmarksFolder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -497,7 +498,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 			query.append("groupId = ?");
@@ -603,7 +604,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder ");
 
@@ -663,7 +664,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
@@ -703,7 +704,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
@@ -755,7 +756,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder");

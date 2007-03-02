@@ -33,6 +33,7 @@ import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -181,7 +182,7 @@ public class WikiNodePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 			query.append("groupId = ?");
 			query.append(" ");
@@ -216,7 +217,7 @@ public class WikiNodePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 			query.append("groupId = ?");
 			query.append(" ");
@@ -251,7 +252,7 @@ public class WikiNodePersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No WikiNode exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -270,7 +271,7 @@ public class WikiNodePersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No WikiNode exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -292,7 +293,7 @@ public class WikiNodePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 			query.append("groupId = ?");
 			query.append(" ");
@@ -334,7 +335,7 @@ public class WikiNodePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (companyId == null) {
@@ -379,7 +380,7 @@ public class WikiNodePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (companyId == null) {
@@ -424,7 +425,7 @@ public class WikiNodePersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No WikiNode exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -443,7 +444,7 @@ public class WikiNodePersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No WikiNode exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -466,7 +467,7 @@ public class WikiNodePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (companyId == null) {
@@ -566,7 +567,7 @@ public class WikiNodePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiNode ");
 
 			if (obc != null) {
@@ -623,7 +624,7 @@ public class WikiNodePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 			query.append("groupId = ?");
@@ -661,7 +662,7 @@ public class WikiNodePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
@@ -709,7 +710,7 @@ public class WikiNodePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.wiki.model.WikiNode");
 

@@ -32,6 +32,7 @@ import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -182,7 +183,7 @@ public class ListTypePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
 			if (type == null) {
@@ -227,7 +228,7 @@ public class ListTypePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
 			if (type == null) {
@@ -272,7 +273,7 @@ public class ListTypePersistence extends BasePersistence {
 		List list = findByType(type, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ListType exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("type=");
@@ -291,7 +292,7 @@ public class ListTypePersistence extends BasePersistence {
 		List list = findByType(type, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ListType exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("type=");
@@ -313,7 +314,7 @@ public class ListTypePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
 			if (type == null) {
@@ -413,7 +414,7 @@ public class ListTypePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.ListType ");
 
 			if (obc != null) {
@@ -461,7 +462,7 @@ public class ListTypePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
@@ -509,7 +510,7 @@ public class ListTypePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.ListType");
 

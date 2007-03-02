@@ -29,6 +29,7 @@ import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.ArrayUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.StringMaker;
 import com.liferay.util.StringUtil;
 import com.liferay.util.TextFormatter;
 import com.liferay.util.Time;
@@ -193,6 +194,7 @@ public class ServiceBuilder {
 			"com.liferay.util.DateUtil",
 			"com.liferay.util.GetterUtil",
 			"com.liferay.util.InstancePool",
+			"com.liferay.util.StringMaker",
 			"com.liferay.util.dao.hibernate.QueryPos",
 			"com.liferay.util.dao.hibernate.QueryUtil",
 			"java.rmi.RemoteException",
@@ -241,6 +243,7 @@ public class ServiceBuilder {
 		StringBuffer sb = new StringBuffer();
 
 		Jalopy jalopy = new Jalopy();
+
 		jalopy.setFileFormat(FileFormat.UNIX);
 		jalopy.setInput(tempFile);
 		jalopy.setOutput(sb);
@@ -252,6 +255,7 @@ public class ServiceBuilder {
 		}
 
 		Environment env = Environment.getInstance();
+
 		env.set("author", author);
 		env.set("fileName", file.getName());
 
@@ -775,77 +779,77 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _appendNullLogic(EntityColumn col, StringBuffer sb) {
-		sb.append("if (" + col.getName() + " == null) {");
+	private void _appendNullLogic(EntityColumn col, StringMaker sm) {
+		sm.append("if (" + col.getName() + " == null) {");
 
 		if (col.getComparator().equals("=")) {
-			sb.append("query.append(\"" + col.getDBName() + " IS NULL\");");
+			sm.append("query.append(\"" + col.getDBName() + " IS NULL\");");
 		}
 		else if (col.getComparator().equals("<>") || col.getComparator().equals("!=")) {
-			sb.append("query.append(\"" + col.getDBName() + " IS NOT NULL\");");
+			sm.append("query.append(\"" + col.getDBName() + " IS NOT NULL\");");
 		}
 		else {
-			sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " null\");");
+			sm.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " null\");");
 		}
 
-		sb.append("} else {");
+		sm.append("} else {");
 	}
 
 	private void _createEJBPK(Entity entity) throws IOException {
 		List pkList = entity.getPKList();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.persistence;");
+		sm.append("package " + _packagePath + ".service.persistence;");
 
 		// Imports
 
-		sb.append("import com.liferay.portal.kernel.util.StringPool;");
-		sb.append("import com.liferay.util.DateUtil;");
-		sb.append("import java.io.Serializable;");
-		sb.append("import java.util.Date;");
+		sm.append("import com.liferay.portal.kernel.util.StringPool;");
+		sm.append("import com.liferay.util.DateUtil;");
+		sm.append("import java.io.Serializable;");
+		sm.append("import java.util.Date;");
 
 		// Class declaration
 
-		sb.append("public class " + entity.getPKClassName() + " implements Comparable, Serializable {");
+		sm.append("public class " + entity.getPKClassName() + " implements Comparable, Serializable {");
 
 		// Fields
 
 		for (int i = 0; i < pkList.size(); i++) {
 			EntityColumn col = (EntityColumn)pkList.get(i);
 
-			sb.append("public " + col.getType() + " " + col.getName() + ";");
+			sm.append("public " + col.getType() + " " + col.getName() + ";");
 		}
 
 		// Default constructor
 
-		sb.append("public " + entity.getPKClassName() + "() {}");
+		sm.append("public " + entity.getPKClassName() + "() {}");
 
 		// Primary key constructor
 
-		sb.append("public " + entity.getPKClassName() + "(");
+		sm.append("public " + entity.getPKClassName() + "(");
 
 		for (int i = 0; i < pkList.size(); i++) {
 			EntityColumn col = (EntityColumn)pkList.get(i);
 
-			sb.append(col.getType() + " " + col.getName());
+			sm.append(col.getType() + " " + col.getName());
 
 			if ((i + 1) != pkList.size()) {
-				sb.append(", ");
+				sm.append(", ");
 			}
 		}
 
-		sb.append(") {");
+		sm.append(") {");
 
 		for (int i = 0; i < pkList.size(); i++) {
 			EntityColumn col = (EntityColumn)pkList.get(i);
 
-			sb.append("this." + col.getName() + " = " + col.getName() + ";");
+			sm.append("this." + col.getName() + " = " + col.getName() + ";");
 		}
 
-		sb.append("}");
+		sm.append("}");
 
 		// Getter and setter methods
 
@@ -853,24 +857,24 @@ public class ServiceBuilder {
 			EntityColumn col = (EntityColumn)pkList.get(i);
 
 			if (!col.isCollection()) {
-				sb.append("public " + col.getType() + " get" + col.getMethodName() + "() {");
-				sb.append("return " + col.getName() + ";");
-				sb.append("}");
+				sm.append("public " + col.getType() + " get" + col.getMethodName() + "() {");
+				sm.append("return " + col.getName() + ";");
+				sm.append("}");
 
-				sb.append("public void set" + col.getMethodName() + "(" + col.getType() + " " + col.getName() + ") {");
-				sb.append("this." + col.getName() + " = " + col.getName() + ";");
-				sb.append("}");
+				sm.append("public void set" + col.getMethodName() + "(" + col.getType() + " " + col.getName() + ") {");
+				sm.append("this." + col.getName() + " = " + col.getName() + ";");
+				sm.append("}");
 			}
 		}
 
 		// Compare to method
 
-		sb.append("public int compareTo(Object obj) {");
-		sb.append("if (obj == null) {");
-		sb.append("return -1;");
-		sb.append("}");
-		sb.append(entity.getPKClassName() + " pk = (" + entity.getPKClassName() + ")obj;");
-		sb.append("int value = 0;");
+		sm.append("public int compareTo(Object obj) {");
+		sm.append("if (obj == null) {");
+		sm.append("return -1;");
+		sm.append("}");
+		sm.append(entity.getPKClassName() + " pk = (" + entity.getPKClassName() + ")obj;");
+		sm.append("int value = 0;");
 
 		for (int i = 0; i < pkList.size(); i++) {
 			EntityColumn col = (EntityColumn)pkList.get(i);
@@ -879,137 +883,137 @@ public class ServiceBuilder {
 
 			if (!col.isPrimitiveType()) {
 				if (colType.equals("Date")) {
-					sb.append("value = DateUtil.compareTo(" + col.getName() + ", pk." + col.getName() + ");");
+					sm.append("value = DateUtil.compareTo(" + col.getName() + ", pk." + col.getName() + ");");
 				}
 				else {
-					sb.append("value = " + col.getName() + ".compareTo(pk." + col.getName() + ");");
+					sm.append("value = " + col.getName() + ".compareTo(pk." + col.getName() + ");");
 				}
 			}
 			else {
 				if (colType.equals("boolean")) {
-					sb.append("if (!" + col.getName() + " && pk." + col.getName() + ") {");
-					sb.append("value = -1;");
-					sb.append("}");
-					sb.append("else if (" + col.getName() + " && !pk." + col.getName() + ") {");
-					sb.append("value = 1;");
-					sb.append("}");
-					sb.append("else {");
-					sb.append("value = 0;");
-					sb.append("}");
+					sm.append("if (!" + col.getName() + " && pk." + col.getName() + ") {");
+					sm.append("value = -1;");
+					sm.append("}");
+					sm.append("else if (" + col.getName() + " && !pk." + col.getName() + ") {");
+					sm.append("value = 1;");
+					sm.append("}");
+					sm.append("else {");
+					sm.append("value = 0;");
+					sm.append("}");
 				}
 				else {
-					sb.append("if (" + col.getName() + " < pk." + col.getName() + ") {");
-					sb.append("value = -1;");
-					sb.append("}");
-					sb.append("else if (" + col.getName() + " > pk." + col.getName() + ") {");
-					sb.append("value = 1;");
-					sb.append("}");
-					sb.append("else {");
-					sb.append("value = 0;");
-					sb.append("}");
+					sm.append("if (" + col.getName() + " < pk." + col.getName() + ") {");
+					sm.append("value = -1;");
+					sm.append("}");
+					sm.append("else if (" + col.getName() + " > pk." + col.getName() + ") {");
+					sm.append("value = 1;");
+					sm.append("}");
+					sm.append("else {");
+					sm.append("value = 0;");
+					sm.append("}");
 				}
 			}
 
-			sb.append("if (value != 0) {");
-			sb.append("return value;");
-			sb.append("}");
+			sm.append("if (value != 0) {");
+			sm.append("return value;");
+			sm.append("}");
 		}
 
-		sb.append("return 0;");
-		sb.append("}");
+		sm.append("return 0;");
+		sm.append("}");
 
 		// Equals method
 
-		sb.append("public boolean equals(Object obj) {");
-		sb.append("if (obj == null) {");
-		sb.append("return false;");
-		sb.append("}");
-		sb.append(entity.getPKClassName() + " pk = null;");
-		sb.append("try {");
-		sb.append("pk = (" + entity.getPKClassName() + ")obj;");
-		sb.append("}");
-		sb.append("catch (ClassCastException cce) {");
-		sb.append("return false;");
-		sb.append("}");
-		sb.append("if (");
+		sm.append("public boolean equals(Object obj) {");
+		sm.append("if (obj == null) {");
+		sm.append("return false;");
+		sm.append("}");
+		sm.append(entity.getPKClassName() + " pk = null;");
+		sm.append("try {");
+		sm.append("pk = (" + entity.getPKClassName() + ")obj;");
+		sm.append("}");
+		sm.append("catch (ClassCastException cce) {");
+		sm.append("return false;");
+		sm.append("}");
+		sm.append("if (");
 
 		for (int i = 0; i < pkList.size(); i++) {
 			EntityColumn col = (EntityColumn)pkList.get(i);
 
 			if (!col.isPrimitiveType()) {
-				sb.append("(" + col.getName() + ".equals(pk." + col.getName() + "))");
+				sm.append("(" + col.getName() + ".equals(pk." + col.getName() + "))");
 			}
 			else {
-				sb.append("(" + col.getName() + " == pk." + col.getName() + ")");
+				sm.append("(" + col.getName() + " == pk." + col.getName() + ")");
 			}
 
 			if ((i + 1) != pkList.size()) {
-				sb.append(" && ");
+				sm.append(" && ");
 			}
 		}
 
-		sb.append(") {");
-		sb.append("return true;");
-		sb.append("} else {");
-		sb.append("return false;");
-		sb.append("}");
-		sb.append("}");
+		sm.append(") {");
+		sm.append("return true;");
+		sm.append("} else {");
+		sm.append("return false;");
+		sm.append("}");
+		sm.append("}");
 
 		// Hash code method
 
-		sb.append("public int hashCode() {");
-		sb.append("return (");
+		sm.append("public int hashCode() {");
+		sm.append("return (");
 
 		for (int i = 0; i < pkList.size(); i++) {
 			EntityColumn col = (EntityColumn)pkList.get(i);
 
 			if (i != 0) {
-				sb.append(" + ");
+				sm.append(" + ");
 			}
 
 			if (!col.isPrimitiveType() && !col.getType().equals("String")) {
-				sb.append(col.getName() + ".toString()");
+				sm.append(col.getName() + ".toString()");
 			}
 			else {
-				sb.append(col.getName());
+				sm.append(col.getName());
 			}
 		}
 
-		sb.append(").hashCode();");
-		sb.append("}");
+		sm.append(").hashCode();");
+		sm.append("}");
 
 		// To string method
 
-		sb.append("public String toString() {");
-		sb.append("StringBuffer sb = new StringBuffer();");
-		sb.append("sb.append(StringPool.OPEN_CURLY_BRACE);");
+		sm.append("public String toString() {");
+		sm.append("StringBuffer sb = new StringBuffer();");
+		sm.append("sb.append(StringPool.OPEN_CURLY_BRACE);");
 
 		for (int i = 0; i < pkList.size(); i++) {
 			EntityColumn col = (EntityColumn)pkList.get(i);
 
-			sb.append("sb.append(\"" + col.getName() + "\");");
-			sb.append("sb.append(StringPool.EQUAL);");
-			sb.append("sb.append(" + col.getName() + ");");
+			sm.append("sb.append(\"" + col.getName() + "\");");
+			sm.append("sb.append(StringPool.EQUAL);");
+			sm.append("sb.append(" + col.getName() + ");");
 
 			if ((i + 1) != pkList.size()) {
-				sb.append("sb.append(StringPool.COMMA);");
-				sb.append("sb.append(StringPool.SPACE);");
+				sm.append("sb.append(StringPool.COMMA);");
+				sm.append("sb.append(StringPool.SPACE);");
 			}
 		}
 
-		sb.append("sb.append(StringPool.CLOSE_CURLY_BRACE);");
-		sb.append("return sb.toString();");
-		sb.append("}");
+		sm.append("sb.append(StringPool.CLOSE_CURLY_BRACE);");
+		sm.append("return sb.toString();");
+		sm.append("}");
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_serviceOutputPath + "/service/persistence/" + entity.getPKClassName() + ".java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 
 		if (Validator.isNotNull(_serviceDir)) {
 			ejbFile = new File(_outputPath + "/service/persistence/" + entity.getPKClassName() + ".java");
@@ -1023,7 +1027,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createEJBXML() throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = (Entity)_ejbList.get(i);
@@ -1031,11 +1035,11 @@ public class ServiceBuilder {
 			List referenceList = entity.getReferenceList();
 
 			if (entity.hasLocalService()) {
-				_createEJBXMLSession(entity, referenceList, sb, _LOCAL);
+				_createEJBXMLSession(entity, referenceList, sm, _LOCAL);
 			}
 
 			if (entity.hasRemoteService()) {
-				_createEJBXMLSession(entity, referenceList, sb, _REMOTE);
+				_createEJBXMLSession(entity, referenceList, sm, _REMOTE);
 			}
 		}
 
@@ -1076,7 +1080,7 @@ public class ServiceBuilder {
 
 			x = newContent.indexOf("</enterprise-beans>") - 1;
 			newContent =
-				newContent.substring(0, x) + sb.toString() +
+				newContent.substring(0, x) + sm.toString() +
 				newContent.substring(x, newContent.length());
 		}
 		else {
@@ -1092,7 +1096,7 @@ public class ServiceBuilder {
 			if (firstSession == -1 || firstSession > y) {
 				x = newContent.indexOf("</enterprise-beans>") - 1;
 				newContent =
-					newContent.substring(0, x) + sb.toString() +
+					newContent.substring(0, x) + sm.toString() +
 					newContent.substring(x, newContent.length());
 			}
 			else {
@@ -1102,7 +1106,7 @@ public class ServiceBuilder {
 					"</session>", lastSession) + 11;
 
 				newContent =
-					newContent.substring(0, firstSession) + sb.toString() +
+					newContent.substring(0, firstSession) + sm.toString() +
 					newContent.substring(lastSession, newContent.length());
 			}
 		}
@@ -1112,15 +1116,15 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createEJBXMLSession(Entity entity, List referenceList, StringBuffer sb, int sessionType) throws IOException {
-		sb.append("\t\t<session>\n");
-		sb.append("\t\t\t<display-name>" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</display-name>\n");
-		sb.append("\t\t\t<ejb-name>" + StringUtil.replace(_packagePath + ".service.ejb.", ".", "_") + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</ejb-name>\n");
-		sb.append("\t\t\t<" + (sessionType == _LOCAL ? "local-" : "") + "home>" + _packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome</" + (sessionType == _LOCAL ? "local-" : "") + "home>\n");
-		sb.append("\t\t\t<" + (sessionType == _LOCAL ? "local" : "remote") + ">" + _packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</" + (sessionType == _LOCAL ? "local" : "remote") + ">\n");
-		sb.append("\t\t\t<ejb-class>" + _packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl</ejb-class>\n");
-		sb.append("\t\t\t<session-type>Stateless</session-type>\n");
-		sb.append("\t\t\t<transaction-type>Bean</transaction-type>\n");
+	private void _createEJBXMLSession(Entity entity, List referenceList, StringMaker sm, int sessionType) throws IOException {
+		sm.append("\t\t<session>\n");
+		sm.append("\t\t\t<display-name>" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</display-name>\n");
+		sm.append("\t\t\t<ejb-name>" + StringUtil.replace(_packagePath + ".service.ejb.", ".", "_") + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</ejb-name>\n");
+		sm.append("\t\t\t<" + (sessionType == _LOCAL ? "local-" : "") + "home>" + _packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome</" + (sessionType == _LOCAL ? "local-" : "") + "home>\n");
+		sm.append("\t\t\t<" + (sessionType == _LOCAL ? "local" : "remote") + ">" + _packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</" + (sessionType == _LOCAL ? "local" : "remote") + ">\n");
+		sm.append("\t\t\t<ejb-class>" + _packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl</ejb-class>\n");
+		sm.append("\t\t\t<session-type>Stateless</session-type>\n");
+		sm.append("\t\t\t<transaction-type>Bean</transaction-type>\n");
 
 		File manualFile = new File("../portal-ejb/classes/META-INF/ejb-jar-ref.xml");
 
@@ -1138,7 +1142,7 @@ public class ServiceBuilder {
 				content = content.substring(x - 1, y);
 				content = StringUtil.replace(content, "\t<", "\t\t\t<");
 
-				sb.append(content);
+				sm.append(content);
 			}
 		}
 
@@ -1149,17 +1153,17 @@ public class ServiceBuilder {
 				Entity entityRef = (Entity)referenceList.get(j);
 
 				if (entityRef.hasLocalService()) {
-					sb.append("\t\t\t<ejb-local-ref>\n");
-					sb.append("\t\t\t\t<ejb-ref-name>ejb/liferay/" + entityRef.getName() + "LocalServiceHome</ejb-ref-name>\n");
-					sb.append("\t\t\t\t<ejb-ref-type>Session</ejb-ref-type>\n");
-					sb.append("\t\t\t\t<local-home>" + entityRef.getPackagePath() + ".service.ejb." + entityRef.getName() + "LocalServiceHome</local-home>\n");
-					sb.append("\t\t\t\t<local>" + entityRef.getPackagePath() + ".service.ejb." + entityRef.getName() + "LocalServiceEJB</local>\n");
-					sb.append("\t\t\t\t<ejb-link>" + StringUtil.replace(entityRef.getPackagePath() + ".service.ejb.", ".", "_") + entityRef.getName() + "LocalServiceEJB</ejb-link>\n");
-					sb.append("\t\t\t</ejb-local-ref>\n");
+					sm.append("\t\t\t<ejb-local-ref>\n");
+					sm.append("\t\t\t\t<ejb-ref-name>ejb/liferay/" + entityRef.getName() + "LocalServiceHome</ejb-ref-name>\n");
+					sm.append("\t\t\t\t<ejb-ref-type>Session</ejb-ref-type>\n");
+					sm.append("\t\t\t\t<local-home>" + entityRef.getPackagePath() + ".service.ejb." + entityRef.getName() + "LocalServiceHome</local-home>\n");
+					sm.append("\t\t\t\t<local>" + entityRef.getPackagePath() + ".service.ejb." + entityRef.getName() + "LocalServiceEJB</local>\n");
+					sm.append("\t\t\t\t<ejb-link>" + StringUtil.replace(entityRef.getPackagePath() + ".service.ejb.", ".", "_") + entityRef.getName() + "LocalServiceEJB</ejb-link>\n");
+					sm.append("\t\t\t</ejb-local-ref>\n");
 				}
 			}
 			else if (reference instanceof String) {
-				sb.append("\t\t\t" + reference + "\n");
+				sm.append("\t\t\t" + reference + "\n");
 			}
 		}
 
@@ -1167,13 +1171,13 @@ public class ServiceBuilder {
 			Entity entityRef = (Entity)_ejbList.get(j);
 
 			if (!((sessionType == _LOCAL) && entity.equals(entityRef)) && entityRef.hasLocalService()) {
-				sb.append("\t\t\t<ejb-local-ref>\n");
-				sb.append("\t\t\t\t<ejb-ref-name>ejb/liferay/" + entityRef.getName() + "LocalServiceHome</ejb-ref-name>\n");
-				sb.append("\t\t\t\t<ejb-ref-type>Session</ejb-ref-type>\n");
-				sb.append("\t\t\t\t<local-home>" + _packagePath + ".service.ejb." + entityRef.getName() + "LocalServiceHome</local-home>\n");
-				sb.append("\t\t\t\t<local>" + _packagePath + ".service.ejb." + entityRef.getName() + "LocalServiceEJB</local>\n");
-				sb.append("\t\t\t\t<ejb-link>" + StringUtil.replace(_packagePath + ".service.ejb.", ".", "_") + entityRef.getName() + "LocalServiceEJB</ejb-link>\n");
-				sb.append("\t\t\t</ejb-local-ref>\n");
+				sm.append("\t\t\t<ejb-local-ref>\n");
+				sm.append("\t\t\t\t<ejb-ref-name>ejb/liferay/" + entityRef.getName() + "LocalServiceHome</ejb-ref-name>\n");
+				sm.append("\t\t\t\t<ejb-ref-type>Session</ejb-ref-type>\n");
+				sm.append("\t\t\t\t<local-home>" + _packagePath + ".service.ejb." + entityRef.getName() + "LocalServiceHome</local-home>\n");
+				sm.append("\t\t\t\t<local>" + _packagePath + ".service.ejb." + entityRef.getName() + "LocalServiceEJB</local>\n");
+				sm.append("\t\t\t\t<ejb-link>" + StringUtil.replace(_packagePath + ".service.ejb.", ".", "_") + entityRef.getName() + "LocalServiceEJB</ejb-link>\n");
+				sm.append("\t\t\t</ejb-local-ref>\n");
 			}
 		}
 
@@ -1193,22 +1197,22 @@ public class ServiceBuilder {
 				content = content.substring(x - 1, y);
 				content = StringUtil.replace(content, "\t<", "\t\t\t<");
 
-				sb.append(content);
+				sm.append(content);
 			}
 		}
 
-		sb.append("\t\t\t<resource-ref>\n");
-		sb.append("\t\t\t\t<res-ref-name>jdbc/LiferayPool</res-ref-name>\n");
-		sb.append("\t\t\t\t<res-type>javax.sql.DataSource</res-type>\n");
-		sb.append("\t\t\t\t<res-auth>Container</res-auth>\n");
-		sb.append("\t\t\t\t<res-sharing-scope>Shareable</res-sharing-scope>\n");
-		sb.append("\t\t\t</resource-ref>\n");
-		sb.append("\t\t\t<resource-ref>\n");
-		sb.append("\t\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
-		sb.append("\t\t\t\t<res-type>javax.mail.Session</res-type>\n");
-		sb.append("\t\t\t\t<res-auth>Container</res-auth>\n");
-		sb.append("\t\t\t</resource-ref>\n");
-		sb.append("\t\t</session>\n");
+		sm.append("\t\t\t<resource-ref>\n");
+		sm.append("\t\t\t\t<res-ref-name>jdbc/LiferayPool</res-ref-name>\n");
+		sm.append("\t\t\t\t<res-type>javax.sql.DataSource</res-type>\n");
+		sm.append("\t\t\t\t<res-auth>Container</res-auth>\n");
+		sm.append("\t\t\t\t<res-sharing-scope>Shareable</res-sharing-scope>\n");
+		sm.append("\t\t\t</resource-ref>\n");
+		sm.append("\t\t\t<resource-ref>\n");
+		sm.append("\t\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
+		sm.append("\t\t\t\t<res-type>javax.mail.Session</res-type>\n");
+		sm.append("\t\t\t\t<res-auth>Container</res-auth>\n");
+		sm.append("\t\t\t</resource-ref>\n");
+		sm.append("\t\t</session>\n");
 	}
 
 	private void _createExceptions(List exceptions) throws IOException {
@@ -1230,51 +1234,51 @@ public class ServiceBuilder {
 		for (int i = 0; i < exceptions.size(); i++) {
 			String exception = (String)exceptions.get(i);
 
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			if (Validator.isNotNull(copyright)) {
-				sb.append(copyright + "\n");
-				sb.append("\n");
+				sm.append(copyright + "\n");
+				sm.append("\n");
 			}
 
-			sb.append("package " + _packagePath + ";\n");
-			sb.append("\n");
-			sb.append("import com.liferay.portal.PortalException;\n");
-			sb.append("\n");
+			sm.append("package " + _packagePath + ";\n");
+			sm.append("\n");
+			sm.append("import com.liferay.portal.PortalException;\n");
+			sm.append("\n");
 
 			if (Validator.isNotNull(copyright)) {
-				sb.append("/**\n");
-				sb.append(" * <a href=\"" + exception + "Exception.java.html\"><b><i>View Source</i></b></a>\n");
-				sb.append(" *\n");
-				sb.append(" * @author Brian Wing Shun Chan\n");
-				sb.append(" *\n");
-				sb.append(" */\n");
+				sm.append("/**\n");
+				sm.append(" * <a href=\"" + exception + "Exception.java.html\"><b><i>View Source</i></b></a>\n");
+				sm.append(" *\n");
+				sm.append(" * @author Brian Wing Shun Chan\n");
+				sm.append(" *\n");
+				sm.append(" */\n");
 			}
 
-			sb.append("public class " + exception + "Exception extends PortalException {\n");
-			sb.append("\n");
-			sb.append("\tpublic " + exception + "Exception() {\n");
-			sb.append("\t\tsuper();\n");
-			sb.append("\t}\n");
-			sb.append("\n");
-			sb.append("\tpublic " + exception + "Exception(String msg) {\n");
-			sb.append("\t\tsuper(msg);\n");
-			sb.append("\t}\n");
-			sb.append("\n");
-			sb.append("\tpublic " + exception + "Exception(String msg, Throwable cause) {\n");
-			sb.append("\t\tsuper(msg, cause);\n");
-			sb.append("\t}\n");
-			sb.append("\n");
-			sb.append("\tpublic " + exception + "Exception(Throwable cause) {\n");
-			sb.append("\t\tsuper(cause);\n");
-			sb.append("\t}\n");
-			sb.append("\n");
-			sb.append("}");
+			sm.append("public class " + exception + "Exception extends PortalException {\n");
+			sm.append("\n");
+			sm.append("\tpublic " + exception + "Exception() {\n");
+			sm.append("\t\tsuper();\n");
+			sm.append("\t}\n");
+			sm.append("\n");
+			sm.append("\tpublic " + exception + "Exception(String msg) {\n");
+			sm.append("\t\tsuper(msg);\n");
+			sm.append("\t}\n");
+			sm.append("\n");
+			sm.append("\tpublic " + exception + "Exception(String msg, Throwable cause) {\n");
+			sm.append("\t\tsuper(msg, cause);\n");
+			sm.append("\t}\n");
+			sm.append("\n");
+			sm.append("\tpublic " + exception + "Exception(Throwable cause) {\n");
+			sm.append("\t\tsuper(cause);\n");
+			sm.append("\t}\n");
+			sm.append("\n");
+			sm.append("}");
 
 			File exceptionFile = new File(_serviceOutputPath + "/" + exception + "Exception.java");
 
 			if (!exceptionFile.exists()) {
-				FileUtil.write(exceptionFile, sb.toString());
+				FileUtil.write(exceptionFile, sm.toString());
 			}
 
 			if (Validator.isNotNull(_serviceDir)) {
@@ -1294,15 +1298,15 @@ public class ServiceBuilder {
 
 		JavaMethod[] methods = javaClass.getMethods();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".model;");
+		sm.append("package " + _packagePath + ".model;");
 
 		// Interface declaration
 
-		sb.append("public interface " + entity.getName() + " extends " + entity.getName() + "Model {");
+		sm.append("public interface " + entity.getName() + " extends " + entity.getName() + "Model {");
 
 		// Methods
 
@@ -1312,21 +1316,21 @@ public class ServiceBuilder {
 			String methodName = javaMethod.getName();
 
 			if (!javaMethod.isConstructor() && !javaMethod.isStatic() && javaMethod.isPublic()) {
-				sb.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+				sm.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sb.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+					sm.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(")");
+				sm.append(")");
 
 				Type[] thrownExceptions = javaMethod.getExceptions();
 
@@ -1339,32 +1343,32 @@ public class ServiceBuilder {
 				}
 
 				if (newExceptions.size() > 0) {
-					sb.append(" throws ");
+					sm.append(" throws ");
 
 					Iterator itr = newExceptions.iterator();
 
 					while (itr.hasNext()) {
-						sb.append(itr.next());
+						sm.append(itr.next());
 
 						if (itr.hasNext()) {
-							sb.append(", ");
+							sm.append(", ");
 						}
 					}
 				}
 
-				sb.append(";");
+				sm.append(";");
 			}
 		}
 
 		// Interface close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File modelFile = new File(_serviceOutputPath + "/model/" + entity.getName() + ".java");
 
-		writeFile(modelFile, sb.toString());
+		writeFile(modelFile, sm.toString());
 
 		if (Validator.isNotNull(_serviceDir)) {
 			modelFile = new File(_outputPath + "/model/" + entity.getName() + ".java");
@@ -1378,35 +1382,35 @@ public class ServiceBuilder {
 	}
 
 	private void _createExtendedModelImpl(Entity entity) throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".model.impl;");
+		sm.append("package " + _packagePath + ".model.impl;");
 
 		// Imports
 
-		sb.append("import " + _packagePath + ".model." + entity.getName() + ";");
+		sm.append("import " + _packagePath + ".model." + entity.getName() + ";");
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + "Impl extends " + entity.getName() + "ModelImpl implements " + entity.getName() + " {");
+		sm.append("public class " + entity.getName() + "Impl extends " + entity.getName() + "ModelImpl implements " + entity.getName() + " {");
 
 		// Empty constructor
 
-		sb.append("public " + entity.getName() + "Impl() {");
-		sb.append("}");
+		sm.append("public " + entity.getName() + "Impl() {");
+		sm.append("}");
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File modelFile = new File(_outputPath + "/model/impl/" + entity.getName() + "Impl.java");
 
 		if (!modelFile.exists()) {
-			writeFile(modelFile, sb.toString());
+			writeFile(modelFile, sm.toString());
 		}
 	}
 
@@ -1431,7 +1435,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createHBMXML() throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = (Entity)_ejbList.get(i);
@@ -1440,62 +1444,62 @@ public class ServiceBuilder {
 			List columnList = entity.getColumnList();
 
 			if (entity.hasColumns()) {
-				sb.append("\t<class name=\"" + _packagePath + ".model.impl." + entity.getName() + "Impl\" table=\"" + entity.getTable() + "\">\n");
-				sb.append("\t\t<cache usage=\"read-write\" />\n");
+				sm.append("\t<class name=\"" + _packagePath + ".model.impl." + entity.getName() + "Impl\" table=\"" + entity.getTable() + "\">\n");
+				sm.append("\t\t<cache usage=\"read-write\" />\n");
 
 				if (entity.hasCompoundPK()) {
-					sb.append("\t\t<composite-id name=\"primaryKey\" class=\"" + _packagePath + ".service.persistence." + entity.getName() + "PK\">\n");
+					sm.append("\t\t<composite-id name=\"primaryKey\" class=\"" + _packagePath + ".service.persistence." + entity.getName() + "PK\">\n");
 
 					for (int j = 0; j < pkList.size(); j++) {
 						EntityColumn col = (EntityColumn)pkList.get(j);
 
-						sb.append("\t\t\t<key-property name=\"" + col.getName() + "\" ");
+						sm.append("\t\t\t<key-property name=\"" + col.getName() + "\" ");
 
 						if (!col.getName().equals(col.getDBName())) {
-							sb.append("column=\"" + col.getDBName() + "\" />\n");
+							sm.append("column=\"" + col.getDBName() + "\" />\n");
 						}
 						else {
-							sb.append("/>\n");
+							sm.append("/>\n");
 						}
 					}
 
-					sb.append("\t\t</composite-id>\n");
+					sm.append("\t\t</composite-id>\n");
 				}
 				else {
 					EntityColumn col = (EntityColumn)pkList.get(0);
 
-					sb.append("\t\t<id name=\"" + col.getName() + "\" ");
+					sm.append("\t\t<id name=\"" + col.getName() + "\" ");
 
 					if (!col.getName().equals(col.getDBName())) {
-						sb.append("column=\"" + col.getDBName() + "\" ");
+						sm.append("column=\"" + col.getDBName() + "\" ");
 					}
 
-					sb.append("type=\"");
+					sm.append("type=\"");
 
 					if (!entity.hasPrimitivePK()) {
-						sb.append("java.lang.");
+						sm.append("java.lang.");
 					}
 
-					sb.append(col.getType() + "\">\n");
+					sm.append(col.getType() + "\">\n");
 
 					String colIdType = col.getIdType();
 
 					if (Validator.isNull(colIdType)) {
-						sb.append("\t\t\t<generator class=\"assigned\" />\n");
+						sm.append("\t\t\t<generator class=\"assigned\" />\n");
 					}
 					else if (colIdType.equals("class")) {
-						sb.append("\t\t\t<generator class=\"" + col.getIdParam() + "\" />\n");
+						sm.append("\t\t\t<generator class=\"" + col.getIdParam() + "\" />\n");
 					}
 					else if (colIdType.equals("sequence")) {
-						sb.append("\t\t\t<generator class=\"sequence\">\n");
-						sb.append("\t\t\t\t<param name=\"sequence\">" + col.getIdParam() + "</param>\n");
-						sb.append("\t\t\t</generator>\n");
+						sm.append("\t\t\t<generator class=\"sequence\">\n");
+						sm.append("\t\t\t\t<param name=\"sequence\">" + col.getIdParam() + "</param>\n");
+						sm.append("\t\t\t</generator>\n");
 					}
 					else {
-						sb.append("\t\t\t<generator class=\"" + colIdType + "\" />\n");
+						sm.append("\t\t\t<generator class=\"" + colIdType + "\" />\n");
 					}
 
-					sb.append("\t\t</id>\n");
+					sm.append("\t\t</id>\n");
 				}
 
 				for (int j = 0; j < columnList.size(); j++) {
@@ -1504,23 +1508,23 @@ public class ServiceBuilder {
 					String colType = col.getType();
 
 					if (!col.isPrimary() && !col.isCollection() && col.getEJBName() == null) {
-						sb.append("\t\t<property name=\"" + col.getName() + "\" ");
+						sm.append("\t\t<property name=\"" + col.getName() + "\" ");
 
 						if (!col.getName().equals(col.getDBName())) {
-							sb.append("column=\"" + col.getDBName() + "\" ");
+							sm.append("column=\"" + col.getDBName() + "\" ");
 						}
 
 						if (col.isPrimitiveType() || colType.equals("String")) {
-							sb.append("type=\"com.liferay.util.dao.hibernate.");
-							sb.append(_getPrimitiveObj(colType));
-							sb.append("Type\" ");
+							sm.append("type=\"com.liferay.util.dao.hibernate.");
+							sm.append(_getPrimitiveObj(colType));
+							sm.append("Type\" ");
 						}
 
-						sb.append("/>\n");
+						sm.append("/>\n");
 					}
 				}
 
-				sb.append("\t</class>\n");
+				sm.append("\t</class>\n");
 			}
 		}
 
@@ -1549,7 +1553,7 @@ public class ServiceBuilder {
 			int x = newContent.indexOf("</hibernate-mapping>");
 
 			newContent =
-				newContent.substring(0, x) + sb.toString() +
+				newContent.substring(0, x) + sm.toString() +
 				newContent.substring(x, newContent.length());
 		}
 		else {
@@ -1559,7 +1563,7 @@ public class ServiceBuilder {
 				"</class>", lastClass) + 9;
 
 			newContent =
-				newContent.substring(0, firstClass) + sb.toString() +
+				newContent.substring(0, firstClass) + sm.toString() +
 				newContent.substring(lastClass, newContent.length());
 		}
 
@@ -1569,12 +1573,12 @@ public class ServiceBuilder {
 	}
 
 	private void _createJSONJS() throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		if (_ejbList.size() > 0) {
-			sb.append("Liferay.Service." + _portletShortName + " = {\n");
-			sb.append("\tservicePackage: \"" + _packagePath + ".service.http.\"\n");
-			sb.append("};\n\n");
+			sm.append("Liferay.Service." + _portletShortName + " = {\n");
+			sm.append("\tservicePackage: \"" + _packagePath + ".service.http.\"\n");
+			sm.append("};\n\n");
 		}
 
 		for (int i = 0; i < _ejbList.size(); i++) {
@@ -1598,29 +1602,29 @@ public class ServiceBuilder {
 				}
 
 				if (jsonMethods.size() > 0) {
-					sb.append("Liferay.Service." + _portletShortName + "." + entity.getName() + " = {\n");
-					sb.append("\tserviceClassName: Liferay.Service." + _portletShortName + ".servicePackage + \"" + entity.getName() + "\" + Liferay.Service.classNameSuffix,\n\n");
+					sm.append("Liferay.Service." + _portletShortName + "." + entity.getName() + " = {\n");
+					sm.append("\tserviceClassName: Liferay.Service." + _portletShortName + ".servicePackage + \"" + entity.getName() + "\" + Liferay.Service.classNameSuffix,\n\n");
 
 					Iterator itr = jsonMethods.iterator();
 
 					while (itr.hasNext()) {
 						String methodName = (String)itr.next();
 
-						sb.append("\t" + methodName + ": function(params, callback) {\n");
-						sb.append("\t\tparams.serviceParameters = Liferay.Service.getParameters(params);\n");
-						sb.append("\t\tparams.serviceClassName = this.serviceClassName;\n");
-						sb.append("\t\tparams.serviceMethodName = \"" + methodName + "\";\n\n");
-						sb.append("\t\t_$J.getJSON(Liferay.Service.url, params, callback);\n");
-						sb.append("\t}");
+						sm.append("\t" + methodName + ": function(params, callback) {\n");
+						sm.append("\t\tparams.serviceParameters = Liferay.Service.getParameters(params);\n");
+						sm.append("\t\tparams.serviceClassName = this.serviceClassName;\n");
+						sm.append("\t\tparams.serviceMethodName = \"" + methodName + "\";\n\n");
+						sm.append("\t\t_$J.getJSON(Liferay.Service.url, params, callback);\n");
+						sm.append("\t}");
 
 						if (itr.hasNext()) {
-							sb.append(",\n");
+							sm.append(",\n");
 						}
 
-						sb.append("\n");
+						sm.append("\n");
 					}
 
-					sb.append("};\n\n");
+					sm.append("};\n\n");
 				}
 			}
 		}
@@ -1651,11 +1655,11 @@ public class ServiceBuilder {
 		newEnd = newContent.indexOf("};", newEnd);
 
 		if (newBegin == -1) {
-			newContent = oldContent + "\n\n" + sb.toString().trim();
+			newContent = oldContent + "\n\n" + sm.toString().trim();
 		}
 		else {
 			newContent =
-				newContent.substring(0, oldBegin) + sb.toString().trim() +
+				newContent.substring(0, oldBegin) + sm.toString().trim() +
 				newContent.substring(oldEnd + 2, newContent.length());
 		}
 
@@ -1667,30 +1671,30 @@ public class ServiceBuilder {
 	private void _createModel(Entity entity) throws IOException {
 		List regularColList = entity.getRegularColList();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".model;");
+		sm.append("package " + _packagePath + ".model;");
 
 		// Imports
 
 		if (entity.hasCompoundPK()) {
-			sb.append("import " + _packagePath + ".service.persistence." + entity.getName() + "PK;");
+			sm.append("import " + _packagePath + ".service.persistence." + entity.getName() + "PK;");
 		}
 
-		sb.append("import com.liferay.portal.model.BaseModel;");
-		sb.append("import java.util.Date;");
+		sm.append("import com.liferay.portal.model.BaseModel;");
+		sm.append("import java.util.Date;");
 
 		// Interface declaration
 
-		sb.append("public interface " + entity.getName() + "Model extends BaseModel {");
+		sm.append("public interface " + entity.getName() + "Model extends BaseModel {");
 
 		// Primary key accessor
 
-		sb.append("public " + entity.getPKClassName() + " getPrimaryKey();");
+		sm.append("public " + entity.getPKClassName() + " getPrimaryKey();");
 
-		sb.append("public void setPrimaryKey(" + entity.getPKClassName() + " pk);");
+		sm.append("public void setPrimaryKey(" + entity.getPKClassName() + " pk);");
 
 		// Getter and setter methods
 
@@ -1699,24 +1703,24 @@ public class ServiceBuilder {
 
 			String colType = col.getType();
 
-			sb.append("public " + colType + " get" + col.getMethodName() + "();");
+			sm.append("public " + colType + " get" + col.getMethodName() + "();");
 
 			if (colType.equals("boolean")) {
-				sb.append("public " + colType + " is" + col.getMethodName() + "();");
+				sm.append("public " + colType + " is" + col.getMethodName() + "();");
 			}
 
-			sb.append("public void set" + col.getMethodName() + "(" + colType + " " + col.getName() + ");");
+			sm.append("public void set" + col.getMethodName() + "(" + colType + " " + col.getName() + ");");
 		}
 
 		// Interface close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File modelFile = new File(_serviceOutputPath + "/model/" + entity.getName() + "Model.java");
 
-		writeFile(modelFile, sb.toString());
+		writeFile(modelFile, sm.toString());
 
 		if (Validator.isNotNull(_serviceDir)) {
 			modelFile = new File(_outputPath + "/model/" + entity.getName() + "Model.java");
@@ -1730,7 +1734,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createModelHintsXML() throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = (Entity)_ejbList.get(i);
@@ -1738,12 +1742,12 @@ public class ServiceBuilder {
 			List columnList = entity.getColumnList();
 
 			if (entity.hasColumns()) {
-				sb.append("\t<model name=\"" + _packagePath + ".model." + entity.getName() + "\">\n");
+				sm.append("\t<model name=\"" + _packagePath + ".model." + entity.getName() + "\">\n");
 
 				Map defaultHints = ModelHintsUtil.getDefaultHints(_packagePath + ".model." + entity.getName());
 
 				if ((defaultHints != null) && (defaultHints.size() > 0)) {
-					sb.append("\t\t<default-hints>\n");
+					sm.append("\t\t<default-hints>\n");
 
 					Iterator itr = defaultHints.entrySet().iterator();
 
@@ -1753,17 +1757,17 @@ public class ServiceBuilder {
 						String key = (String)entry.getKey();
 						String value = (String)entry.getValue();
 
-						sb.append("\t\t\t<hint name=\"" + key + "\">" + value + "</hint>\n");
+						sm.append("\t\t\t<hint name=\"" + key + "\">" + value + "</hint>\n");
 					}
 
-					sb.append("\t\t</default-hints>\n");
+					sm.append("\t\t</default-hints>\n");
 				}
 
 				for (int j = 0; j < columnList.size(); j++) {
 					EntityColumn col = (EntityColumn)columnList.get(j);
 
 					if (!col.isCollection()) {
-						sb.append("\t\t<field name=\"" + col.getName() + "\" type=\"" + col.getType() + "\"");
+						sm.append("\t\t<field name=\"" + col.getName() + "\" type=\"" + col.getType() + "\"");
 
 						Element field = ModelHintsUtil.getFieldsEl(_packagePath + ".model." + entity.getName(), col.getName());
 
@@ -1774,10 +1778,10 @@ public class ServiceBuilder {
 						}
 
 						if ((hints == null) || (hints.size() == 0)) {
-							sb.append(" />\n");
+							sm.append(" />\n");
 						}
 						else {
-							sb.append(">\n");
+							sm.append(">\n");
 
 							Iterator itr = hints.iterator();
 
@@ -1785,19 +1789,19 @@ public class ServiceBuilder {
 								Element hint = (Element)itr.next();
 
 								if (hint.getName().equals("hint")) {
-									sb.append("\t\t\t<hint name=\"" + hint.attributeValue("name") + "\">" + hint.getText() + "</hint>\n");
+									sm.append("\t\t\t<hint name=\"" + hint.attributeValue("name") + "\">" + hint.getText() + "</hint>\n");
 								}
 								else {
-									sb.append("\t\t\t<hint-collection name=\"" + hint.attributeValue("name") + "\" />\n");
+									sm.append("\t\t\t<hint-collection name=\"" + hint.attributeValue("name") + "\" />\n");
 								}
 							}
 
-							sb.append("\t\t</field>\n");
+							sm.append("\t\t</field>\n");
 						}
 					}
 				}
 
-				sb.append("\t</model>\n");
+				sm.append("\t</model>\n");
 			}
 		}
 
@@ -1824,7 +1828,7 @@ public class ServiceBuilder {
 		if (firstModel == -1) {
 			int x = newContent.indexOf("</model-hints>");
 			newContent =
-				newContent.substring(0, x) + sb.toString() +
+				newContent.substring(0, x) + sm.toString() +
 				newContent.substring(x, newContent.length());
 		}
 		else {
@@ -1834,7 +1838,7 @@ public class ServiceBuilder {
 				"</model>", lastModel) + 9;
 
 			newContent =
-				newContent.substring(0, firstModel) + sb.toString() +
+				newContent.substring(0, firstModel) + sm.toString() +
 				newContent.substring(lastModel, newContent.length());
 		}
 
@@ -1847,110 +1851,110 @@ public class ServiceBuilder {
 		List pkList = entity.getPKList();
 		List regularColList = entity.getRegularColList();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".model.impl;");
+		sm.append("package " + _packagePath + ".model.impl;");
 
 		// Imports
 
 		if (entity.hasCompoundPK()) {
-			sb.append("import " + _packagePath + ".service.persistence." + entity.getName() + "PK;");
+			sm.append("import " + _packagePath + ".service.persistence." + entity.getName() + "PK;");
 		}
 
-		sb.append("import com.liferay.portal.model.impl.BaseModelImpl;");
-		sb.append("import com.liferay.portal.util.PropsUtil;");
-		sb.append("import com.liferay.util.DateUtil;");
-		sb.append("import com.liferay.util.GetterUtil;");
-		sb.append("import com.liferay.util.XSSUtil;");
-		sb.append("import java.sql.Types;");
-		sb.append("import java.util.Date;");
+		sm.append("import com.liferay.portal.model.impl.BaseModelImpl;");
+		sm.append("import com.liferay.portal.util.PropsUtil;");
+		sm.append("import com.liferay.util.DateUtil;");
+		sm.append("import com.liferay.util.GetterUtil;");
+		sm.append("import com.liferay.util.XSSUtil;");
+		sm.append("import java.sql.Types;");
+		sm.append("import java.util.Date;");
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + "ModelImpl extends BaseModelImpl {");
+		sm.append("public class " + entity.getName() + "ModelImpl extends BaseModelImpl {");
 
 		// Fields
 
-		sb.append("public static String TABLE_NAME = \"" + entity.getTable() + "\";");
+		sm.append("public static String TABLE_NAME = \"" + entity.getTable() + "\";");
 
-		sb.append("public static Object[][] TABLE_COLUMNS = {");
+		sm.append("public static Object[][] TABLE_COLUMNS = {");
 
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = (EntityColumn)regularColList.get(i);
 
 			String sqlType = _getSqlType(_packagePath + ".model." + entity.getName(), col.getName(), col.getType());
 
-			sb.append("{\"" + col.getDBName() + "\", new Integer(Types." + sqlType + ")}");
+			sm.append("{\"" + col.getDBName() + "\", new Integer(Types." + sqlType + ")}");
 
 			if ((i + 1) < regularColList.size()) {
-				sb.append(",");
+				sm.append(",");
 			}
 		}
 
-		sb.append("};");
+		sm.append("};");
 
-		sb.append("public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "\"), XSS_ALLOW);");
+		sm.append("public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "\"), XSS_ALLOW);");
 
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = (EntityColumn)regularColList.get(i);
 
 			if (col.getType().equals("String")) {
-				sb.append("public static boolean XSS_ALLOW_" + col.getName().toUpperCase() + " = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "." + col.getName() + "\"), XSS_ALLOW_BY_MODEL);");
+				sm.append("public static boolean XSS_ALLOW_" + col.getName().toUpperCase() + " = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "." + col.getName() + "\"), XSS_ALLOW_BY_MODEL);");
 			}
 		}
 
-		sb.append("public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(\"lock.expiration.time." + _packagePath + ".model." + entity.getName() + "Model\"));");
+		sm.append("public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(\"lock.expiration.time." + _packagePath + ".model." + entity.getName() + "Model\"));");
 
 		// Empty constructor
 
-		sb.append("public " + entity.getName() + "ModelImpl() {");
-		sb.append("}");
+		sm.append("public " + entity.getName() + "ModelImpl() {");
+		sm.append("}");
 
 		// Primary key accessor
 
-		sb.append("public " + entity.getPKClassName() + " getPrimaryKey() {");
+		sm.append("public " + entity.getPKClassName() + " getPrimaryKey() {");
 
 		if (entity.hasCompoundPK()) {
-			sb.append("return new " + entity.getPKClassName() + "(");
+			sm.append("return new " + entity.getPKClassName() + "(");
 
 			for (int i = 0; i < pkList.size(); i++) {
 				EntityColumn col = (EntityColumn)pkList.get(i);
 
-				sb.append("_" + col.getName());
+				sm.append("_" + col.getName());
 
 				if ((i + 1) != (pkList.size())) {
-					sb.append(", ");
+					sm.append(", ");
 				}
 			}
 
-			sb.append(");");
+			sm.append(");");
 		}
 		else {
 			EntityColumn col = (EntityColumn)pkList.get(0);
 
-			sb.append("return _" + col.getName() + ";");
+			sm.append("return _" + col.getName() + ";");
 		}
 
-		sb.append("}");
+		sm.append("}");
 
-		sb.append("public void setPrimaryKey(" + entity.getPKClassName() + " pk) {");
+		sm.append("public void setPrimaryKey(" + entity.getPKClassName() + " pk) {");
 
 		if (entity.hasCompoundPK()) {
 			for (int i = 0; i < pkList.size(); i++) {
 				EntityColumn col = (EntityColumn)pkList.get(i);
 
-				sb.append("set" + col.getMethodName() + "(pk." + col.getName() + ");");
+				sm.append("set" + col.getMethodName() + "(pk." + col.getName() + ");");
 			}
 		}
 		else {
 			EntityColumn col = (EntityColumn)pkList.get(0);
 
-			sb.append("set" + col.getMethodName() + "(pk);");
+			sm.append("set" + col.getMethodName() + "(pk);");
 		}
 
-		sb.append("}");
+		sm.append("}");
 
 		// Getter and setter methods
 
@@ -1959,85 +1963,85 @@ public class ServiceBuilder {
 
 			String colType = col.getType();
 
-			sb.append("public " + colType + " get" + col.getMethodName() + "() {");
+			sm.append("public " + colType + " get" + col.getMethodName() + "() {");
 
 			if (colType.equals("String") && col.isConvertNull()) {
-				sb.append("return GetterUtil.getString(_" + col.getName() + ");");
+				sm.append("return GetterUtil.getString(_" + col.getName() + ");");
 			}
 			else {
-				sb.append("return _" + col.getName() + ";");
+				sm.append("return _" + col.getName() + ";");
 			}
 
-			sb.append("}");
+			sm.append("}");
 
 			if (colType.equals("boolean")) {
-				sb.append("public " + colType + " is" + col.getMethodName() + "() {");
-				sb.append("return _" + col.getName() + ";");
-				sb.append("}");
+				sm.append("public " + colType + " is" + col.getMethodName() + "() {");
+				sm.append("return _" + col.getName() + ";");
+				sm.append("}");
 			}
 
-			sb.append("public void set" + col.getMethodName() + "(" + colType + " " + col.getName() + ") {");
-			sb.append("if (");
+			sm.append("public void set" + col.getMethodName() + "(" + colType + " " + col.getName() + ") {");
+			sm.append("if (");
 
 			if (!col.isPrimitiveType()) {
-				sb.append("(" + col.getName() + " == null && _" + col.getName() + " != null) ||");
-				sb.append("(" + col.getName() + " != null && _" + col.getName() + " == null) ||");
-				sb.append("(" + col.getName() + " != null && _" + col.getName() + " != null && !" + col.getName() + ".equals(_" + col.getName() + "))");
+				sm.append("(" + col.getName() + " == null && _" + col.getName() + " != null) ||");
+				sm.append("(" + col.getName() + " != null && _" + col.getName() + " == null) ||");
+				sm.append("(" + col.getName() + " != null && _" + col.getName() + " != null && !" + col.getName() + ".equals(_" + col.getName() + "))");
 			}
 			else {
-				sb.append(col.getName() + " != _" + col.getName());
+				sm.append(col.getName() + " != _" + col.getName());
 			}
 
-			sb.append(") {");
+			sm.append(") {");
 
 			if (colType.equals("String")) {
-				sb.append("if (!XSS_ALLOW_" + col.getName().toUpperCase() + ") {");
-				sb.append(col.getName() + " = XSSUtil.strip(" + col.getName() + ");");
-				sb.append("}");
+				sm.append("if (!XSS_ALLOW_" + col.getName().toUpperCase() + ") {");
+				sm.append(col.getName() + " = XSSUtil.strip(" + col.getName() + ");");
+				sm.append("}");
 			}
 
-			sb.append("_" + col.getName() + " = " + col.getName() + ";");
-			sb.append("}");
-			sb.append("}");
+			sm.append("_" + col.getName() + " = " + col.getName() + ";");
+			sm.append("}");
+			sm.append("}");
 		}
 
 		// Clone method
 
-		sb.append("public Object clone() {");
-		sb.append(entity.getName() + "Impl clone = new " + entity.getName() + "Impl();");
+		sm.append("public Object clone() {");
+		sm.append(entity.getName() + "Impl clone = new " + entity.getName() + "Impl();");
 
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = (EntityColumn)regularColList.get(i);
 
-			sb.append("clone.set" + col.getMethodName() + "(");
+			sm.append("clone.set" + col.getMethodName() + "(");
 
 			if (col.getEJBName() == null) {
-				sb.append("get" + col.getMethodName() + "()");
+				sm.append("get" + col.getMethodName() + "()");
 			}
 			else {
-				sb.append("(" + col.getEJBName() + ")get" + col.getMethodName() + "().clone()");
+				sm.append("(" + col.getEJBName() + ")get" + col.getMethodName() + "().clone()");
 			}
 
-			sb.append(");");
+			sm.append(");");
 		}
 
-		sb.append("return clone;");
-		sb.append("}");
+		sm.append("return clone;");
+		sm.append("}");
 
 		// Compare to method
 
-		sb.append("public int compareTo(Object obj) {");
-		sb.append("if (obj == null) {");
-		sb.append("return -1;");
-		sb.append("}");
-		sb.append(entity.getName() + "Impl " + entity.getVarName() + " = (" + entity.getName() + "Impl)obj;");
+		sm.append("public int compareTo(Object obj) {");
+		sm.append("if (obj == null) {");
+		sm.append("return -1;");
+		sm.append("}");
+		sm.append(entity.getName() + "Impl " + entity.getVarName() + " = (" + entity.getName() + "Impl)obj;");
 
 		if (entity.isOrdered()) {
 			EntityOrder order = entity.getOrder();
 
 			List orderList = order.getColumns();
 
-			sb.append("int value = 0;");
+			sm.append("int value = 0;");
 
 			for (int i = 0; i < orderList.size(); i++) {
 				EntityColumn col = (EntityColumn)orderList.get(i);
@@ -2046,14 +2050,14 @@ public class ServiceBuilder {
 
 				if (!col.isPrimitiveType()) {
 					if (colType.equals("Date")) {
-						sb.append("value = DateUtil.compareTo(get" + col.getMethodName() + "(), " + entity.getVarName() + ".get" + col.getMethodName() + "());");
+						sm.append("value = DateUtil.compareTo(get" + col.getMethodName() + "(), " + entity.getVarName() + ".get" + col.getMethodName() + "());");
 					}
 					else {
 						if (col.isCaseSensitive()) {
-							sb.append("value = get" + col.getMethodName() + "().compareTo(" + entity.getVarName() + ".get" + col.getMethodName() + "());");
+							sm.append("value = get" + col.getMethodName() + "().compareTo(" + entity.getVarName() + ".get" + col.getMethodName() + "());");
 						}
 						else {
-							sb.append("value = get" + col.getMethodName() + "().toLowerCase().compareTo(" + entity.getVarName() + ".get" + col.getMethodName() + "().toLowerCase());");
+							sm.append("value = get" + col.getMethodName() + "().toLowerCase().compareTo(" + entity.getVarName() + ".get" + col.getMethodName() + "().toLowerCase());");
 						}
 					}
 				}
@@ -2066,206 +2070,206 @@ public class ServiceBuilder {
 						gtComparator = "!=";
 					}
 
-					sb.append("if (get" + col.getMethodName() + "() " + ltComparator + " " + entity.getVarName() + ".get" + col.getMethodName() + "()) {");
-					sb.append("value = -1;");
-					sb.append("}");
-					sb.append("else if (get" + col.getMethodName() + "() " + gtComparator + " " + entity.getVarName() + ".get" + col.getMethodName() + "()) {");
-					sb.append("value = 1;");
-					sb.append("}");
-					sb.append("else {");
-					sb.append("value = 0;");
-					sb.append("}");
+					sm.append("if (get" + col.getMethodName() + "() " + ltComparator + " " + entity.getVarName() + ".get" + col.getMethodName() + "()) {");
+					sm.append("value = -1;");
+					sm.append("}");
+					sm.append("else if (get" + col.getMethodName() + "() " + gtComparator + " " + entity.getVarName() + ".get" + col.getMethodName() + "()) {");
+					sm.append("value = 1;");
+					sm.append("}");
+					sm.append("else {");
+					sm.append("value = 0;");
+					sm.append("}");
 				}
 
 				if (!col.isOrderByAscending()) {
-					sb.append("value = value * -1;");
+					sm.append("value = value * -1;");
 				}
 
-				sb.append("if (value != 0) {");
-				sb.append("return value;");
-				sb.append("}");
+				sm.append("if (value != 0) {");
+				sm.append("return value;");
+				sm.append("}");
 			}
 
-			sb.append("return 0;");
+			sm.append("return 0;");
 		}
 		else {
-			sb.append(entity.getPKClassName() + " pk = " + entity.getVarName() + ".getPrimaryKey();");
+			sm.append(entity.getPKClassName() + " pk = " + entity.getVarName() + ".getPrimaryKey();");
 
 			if (entity.hasPrimitivePK()) {
-				sb.append("if (getPrimaryKey() < pk) {");
-				sb.append("return -1;");
-				sb.append("}");
-				sb.append("else if (getPrimaryKey() > pk) {");
-				sb.append("return 1;");
-				sb.append("}");
-				sb.append("else {");
-				sb.append("return 0;");
-				sb.append("}");
+				sm.append("if (getPrimaryKey() < pk) {");
+				sm.append("return -1;");
+				sm.append("}");
+				sm.append("else if (getPrimaryKey() > pk) {");
+				sm.append("return 1;");
+				sm.append("}");
+				sm.append("else {");
+				sm.append("return 0;");
+				sm.append("}");
 			}
 			else {
-				sb.append("return getPrimaryKey().compareTo(pk);");
+				sm.append("return getPrimaryKey().compareTo(pk);");
 			}
 		}
 
-		sb.append("}");
+		sm.append("}");
 
 		// Equals method
 
-		sb.append("public boolean equals(Object obj) {");
-		sb.append("if (obj == null) {");
-		sb.append("return false;");
-		sb.append("}");
-		sb.append(entity.getName() + "Impl " + entity.getVarName() + " = null;");
-		sb.append("try {");
-		sb.append(entity.getVarName() + " = (" + entity.getName() + "Impl)obj;");
-		sb.append("}");
-		sb.append("catch (ClassCastException cce) {");
-		sb.append("return false;");
-		sb.append("}");
-		sb.append(entity.getPKClassName() + " pk = " + entity.getVarName() + ".getPrimaryKey();");
+		sm.append("public boolean equals(Object obj) {");
+		sm.append("if (obj == null) {");
+		sm.append("return false;");
+		sm.append("}");
+		sm.append(entity.getName() + "Impl " + entity.getVarName() + " = null;");
+		sm.append("try {");
+		sm.append(entity.getVarName() + " = (" + entity.getName() + "Impl)obj;");
+		sm.append("}");
+		sm.append("catch (ClassCastException cce) {");
+		sm.append("return false;");
+		sm.append("}");
+		sm.append(entity.getPKClassName() + " pk = " + entity.getVarName() + ".getPrimaryKey();");
 
 		if (entity.hasPrimitivePK()) {
-			sb.append("if (getPrimaryKey() == pk) {");
+			sm.append("if (getPrimaryKey() == pk) {");
 		}
 		else {
-			sb.append("if (getPrimaryKey().equals(pk)) {");
+			sm.append("if (getPrimaryKey().equals(pk)) {");
 		}
 
-		sb.append("return true;");
-		sb.append("}");
-		sb.append("else {");
-		sb.append("return false;");
-		sb.append("}");
-		sb.append("}");
+		sm.append("return true;");
+		sm.append("}");
+		sm.append("else {");
+		sm.append("return false;");
+		sm.append("}");
+		sm.append("}");
 
 		// Hash code method
 
-		sb.append("public int hashCode() {");
+		sm.append("public int hashCode() {");
 
 		if (entity.hasPrimitivePK()) {
-			sb.append("return (int)getPrimaryKey();");
+			sm.append("return (int)getPrimaryKey();");
 		}
 		else {
-			sb.append("return getPrimaryKey().hashCode();");
+			sm.append("return getPrimaryKey().hashCode();");
 		}
 
-		sb.append("}");
+		sm.append("}");
 
 		// Fields
 
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = (EntityColumn)regularColList.get(i);
 
-			sb.append("private " + col.getType() + " _" + col.getName() + ";");
+			sm.append("private " + col.getType() + " _" + col.getName() + ";");
 		}
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File modelFile = new File(_outputPath + "/model/impl/" + entity.getName() + "ModelImpl.java");
 
-		writeFile(modelFile, sb.toString());
+		writeFile(modelFile, sm.toString());
 	}
 
 	private void _createModelSoap(Entity entity) throws IOException {
 		List pkList = entity.getPKList();
 		List regularColList = entity.getRegularColList();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".model;");
+		sm.append("package " + _packagePath + ".model;");
 
 		// Imports
 
 		if (entity.hasCompoundPK()) {
-			sb.append("import " + _packagePath + ".service.persistence." + entity.getName() + "PK;");
+			sm.append("import " + _packagePath + ".service.persistence." + entity.getName() + "PK;");
 		}
 
-		sb.append("import java.io.Serializable;");
-		sb.append("import java.util.ArrayList;");
-		sb.append("import java.util.Date;");
-		sb.append("import java.util.List;");
+		sm.append("import java.io.Serializable;");
+		sm.append("import java.util.ArrayList;");
+		sm.append("import java.util.Date;");
+		sm.append("import java.util.List;");
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + "Soap implements Serializable {");
+		sm.append("public class " + entity.getName() + "Soap implements Serializable {");
 
 		// Methods
 
-		sb.append("public static " + entity.getName() + "Soap toSoapModel(" + entity.getName() + " model) {");
-		sb.append(entity.getName() + "Soap soapModel = new " + entity.getName() + "Soap();");
+		sm.append("public static " + entity.getName() + "Soap toSoapModel(" + entity.getName() + " model) {");
+		sm.append(entity.getName() + "Soap soapModel = new " + entity.getName() + "Soap();");
 
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = (EntityColumn)regularColList.get(i);
 
-			sb.append("soapModel.set" + col.getMethodName() + "(model.get" + col.getMethodName() + "());");
+			sm.append("soapModel.set" + col.getMethodName() + "(model.get" + col.getMethodName() + "());");
 		}
 
-		sb.append("return soapModel;");
-		sb.append("}");
+		sm.append("return soapModel;");
+		sm.append("}");
 
-		sb.append("public static " + entity.getName() + "Soap[] toSoapModels(List models) {");
-		sb.append("List soapModels = new ArrayList(models.size());");
-		sb.append("for (int i = 0; i < models.size(); i++) {");
-		sb.append(entity.getName() + " model = (" + entity.getName() + ")models.get(i);");
-		sb.append("soapModels.add(toSoapModel(model));");
-		sb.append("}");
-		sb.append("return (" + entity.getName() + "Soap[])soapModels.toArray(new " + entity.getName() + "Soap[0]);");
-		sb.append("}");
+		sm.append("public static " + entity.getName() + "Soap[] toSoapModels(List models) {");
+		sm.append("List soapModels = new ArrayList(models.size());");
+		sm.append("for (int i = 0; i < models.size(); i++) {");
+		sm.append(entity.getName() + " model = (" + entity.getName() + ")models.get(i);");
+		sm.append("soapModels.add(toSoapModel(model));");
+		sm.append("}");
+		sm.append("return (" + entity.getName() + "Soap[])soapModels.toArray(new " + entity.getName() + "Soap[0]);");
+		sm.append("}");
 
 		// Empty constructor
 
-		sb.append("public " + entity.getName() + "Soap() {");
-		sb.append("}");
+		sm.append("public " + entity.getName() + "Soap() {");
+		sm.append("}");
 
 		// Primary key accessor
 
-		sb.append("public " + entity.getPKClassName() + " getPrimaryKey() {");
+		sm.append("public " + entity.getPKClassName() + " getPrimaryKey() {");
 
 		if (entity.hasCompoundPK()) {
-			sb.append("return new " + entity.getPKClassName() + "(");
+			sm.append("return new " + entity.getPKClassName() + "(");
 
 			for (int i = 0; i < pkList.size(); i++) {
 				EntityColumn col = (EntityColumn)pkList.get(i);
 
-				sb.append("_" + col.getName());
+				sm.append("_" + col.getName());
 
 				if ((i + 1) != (pkList.size())) {
-					sb.append(", ");
+					sm.append(", ");
 				}
 			}
 
-			sb.append(");");
+			sm.append(");");
 		}
 		else {
 			EntityColumn col = (EntityColumn)pkList.get(0);
 
-			sb.append("return _" + col.getName() + ";");
+			sm.append("return _" + col.getName() + ";");
 		}
 
-		sb.append("}");
+		sm.append("}");
 
-		sb.append("public void setPrimaryKey(" + entity.getPKClassName() + " pk) {");
+		sm.append("public void setPrimaryKey(" + entity.getPKClassName() + " pk) {");
 
 		if (entity.hasCompoundPK()) {
 			for (int i = 0; i < pkList.size(); i++) {
 				EntityColumn col = (EntityColumn)pkList.get(i);
 
-				sb.append("set" + col.getMethodName() + "(pk." + col.getName() + ");");
+				sm.append("set" + col.getMethodName() + "(pk." + col.getName() + ");");
 			}
 		}
 		else {
 			EntityColumn col = (EntityColumn)pkList.get(0);
 
-			sb.append("set" + col.getMethodName() + "(pk);");
+			sm.append("set" + col.getMethodName() + "(pk);");
 		}
 
-		sb.append("}");
+		sm.append("}");
 
 		// Getter and setter methods
 
@@ -2274,19 +2278,19 @@ public class ServiceBuilder {
 
 			String colType = col.getType();
 
-			sb.append("public " + colType + " get" + col.getMethodName() + "() {");
-			sb.append("return _" + col.getName() + ";");
-			sb.append("}");
+			sm.append("public " + colType + " get" + col.getMethodName() + "() {");
+			sm.append("return _" + col.getName() + ";");
+			sm.append("}");
 
 			if (colType.equals("boolean")) {
-				sb.append("public " + colType + " is" + col.getMethodName() + "() {");
-				sb.append("return _" + col.getName() + ";");
-				sb.append("}");
+				sm.append("public " + colType + " is" + col.getMethodName() + "() {");
+				sm.append("return _" + col.getName() + ";");
+				sm.append("}");
 			}
 
-			sb.append("public void set" + col.getMethodName() + "(" + colType + " " + col.getName() + ") {");
-			sb.append("_" + col.getName() + " = " + col.getName() + ";");
-			sb.append("}");
+			sm.append("public void set" + col.getMethodName() + "(" + colType + " " + col.getName() + ") {");
+			sm.append("_" + col.getName() + " = " + col.getName() + ";");
+			sm.append("}");
 		}
 
 		// Fields
@@ -2294,18 +2298,18 @@ public class ServiceBuilder {
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = (EntityColumn)regularColList.get(i);
 
-			sb.append("private " + col.getType() + " _" + col.getName() + ";");
+			sm.append("private " + col.getType() + " _" + col.getName() + ";");
 		}
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File modelFile = new File(_serviceOutputPath + "/model/" + entity.getName() + "Soap.java");
 
-		writeFile(modelFile, sb.toString());
+		writeFile(modelFile, sm.toString());
 	}
 
 	private void _createPersistence(Entity entity) throws IOException {
@@ -2315,107 +2319,108 @@ public class ServiceBuilder {
 		String pkClassName = entity.getPKClassName();
 		String pkVarName = entity.getPKVarName();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.persistence;");
+		sm.append("package " + _packagePath + ".service.persistence;");
 
 		// Imports
 
-		sb.append("import " + _packagePath + "." + _getNoSuchEntityException(entity) + "Exception;");
-		sb.append("import " + _packagePath + ".model." + entity.getName() + ";");
-		sb.append("import " + _packagePath + ".model.impl." + entity.getName() + "Impl;");
-		sb.append("import com.liferay.portal.PortalException;");
-		sb.append("import com.liferay.portal.SystemException;");
-		sb.append("import com.liferay.portal.kernel.dao.DynamicQuery;");
-		sb.append("import com.liferay.portal.kernel.dao.DynamicQueryInitializer;");
-		sb.append("import com.liferay.portal.kernel.util.OrderByComparator;");
-		sb.append("import com.liferay.portal.kernel.util.StringPool;");
-		sb.append("import com.liferay.portal.service.persistence.BasePersistence;");
-		sb.append("import com.liferay.portal.spring.hibernate.HibernateUtil;");
-		sb.append("import com.liferay.util.dao.hibernate.QueryPos;");
-		sb.append("import com.liferay.util.dao.hibernate.QueryUtil;");
-		sb.append("import java.sql.ResultSet;");
-		sb.append("import java.sql.SQLException;");
-		sb.append("import java.sql.Types;");
-		sb.append("import java.util.Collection;");
-		sb.append("import java.util.Collections;");
-		sb.append("import java.util.Date;");
-		sb.append("import java.util.HashSet;");
-		sb.append("import java.util.Iterator;");
-		sb.append("import java.util.List;");
-		sb.append("import java.util.Set;");
-		sb.append("import javax.sql.DataSource;");
-		sb.append("import org.apache.commons.logging.Log;");
-		sb.append("import org.apache.commons.logging.LogFactory;");
-		sb.append("import org.hibernate.Hibernate;");
-		sb.append("import org.hibernate.HibernateException;");
-		sb.append("import org.hibernate.ObjectNotFoundException;");
-		sb.append("import org.hibernate.Query;");
-		sb.append("import org.hibernate.Session;");
-		sb.append("import org.hibernate.SQLQuery;");
-		sb.append("import org.springframework.dao.DataAccessException;");
-		sb.append("import org.springframework.jdbc.core.SqlParameter;");
-		sb.append("import org.springframework.jdbc.object.MappingSqlQuery;");
-		sb.append("import org.springframework.jdbc.object.SqlUpdate;");
+		sm.append("import " + _packagePath + "." + _getNoSuchEntityException(entity) + "Exception;");
+		sm.append("import " + _packagePath + ".model." + entity.getName() + ";");
+		sm.append("import " + _packagePath + ".model.impl." + entity.getName() + "Impl;");
+		sm.append("import com.liferay.portal.PortalException;");
+		sm.append("import com.liferay.portal.SystemException;");
+		sm.append("import com.liferay.portal.kernel.dao.DynamicQuery;");
+		sm.append("import com.liferay.portal.kernel.dao.DynamicQueryInitializer;");
+		sm.append("import com.liferay.portal.kernel.util.OrderByComparator;");
+		sm.append("import com.liferay.portal.kernel.util.StringPool;");
+		sm.append("import com.liferay.portal.service.persistence.BasePersistence;");
+		sm.append("import com.liferay.portal.spring.hibernate.HibernateUtil;");
+		sm.append("import com.liferay.util.StringMaker;");
+		sm.append("import com.liferay.util.dao.hibernate.QueryPos;");
+		sm.append("import com.liferay.util.dao.hibernate.QueryUtil;");
+		sm.append("import java.sql.ResultSet;");
+		sm.append("import java.sql.SQLException;");
+		sm.append("import java.sql.Types;");
+		sm.append("import java.util.Collection;");
+		sm.append("import java.util.Collections;");
+		sm.append("import java.util.Date;");
+		sm.append("import java.util.HashSet;");
+		sm.append("import java.util.Iterator;");
+		sm.append("import java.util.List;");
+		sm.append("import java.util.Set;");
+		sm.append("import javax.sql.DataSource;");
+		sm.append("import org.apache.commons.logging.Log;");
+		sm.append("import org.apache.commons.logging.LogFactory;");
+		sm.append("import org.hibernate.Hibernate;");
+		sm.append("import org.hibernate.HibernateException;");
+		sm.append("import org.hibernate.ObjectNotFoundException;");
+		sm.append("import org.hibernate.Query;");
+		sm.append("import org.hibernate.Session;");
+		sm.append("import org.hibernate.SQLQuery;");
+		sm.append("import org.springframework.dao.DataAccessException;");
+		sm.append("import org.springframework.jdbc.core.SqlParameter;");
+		sm.append("import org.springframework.jdbc.object.MappingSqlQuery;");
+		sm.append("import org.springframework.jdbc.object.SqlUpdate;");
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + "Persistence extends BasePersistence {");
+		sm.append("public class " + entity.getName() + "Persistence extends BasePersistence {");
 
 		// Create method
 
-		sb.append("public " + entity.getName() + " create(" + entity.getPKClassName() + " " + pkVarName + ") {");
-		sb.append(entity.getName() + " " + entity.getVarName() + " = new " + entity.getName() + "Impl();");
-		sb.append(entity.getVarName() + ".setNew(true);");
-		sb.append(entity.getVarName() + ".setPrimaryKey(" + pkVarName + ");");
-		sb.append("return " + entity.getVarName() + ";");
-		sb.append("}");
+		sm.append("public " + entity.getName() + " create(" + entity.getPKClassName() + " " + pkVarName + ") {");
+		sm.append(entity.getName() + " " + entity.getVarName() + " = new " + entity.getName() + "Impl();");
+		sm.append(entity.getVarName() + ".setNew(true);");
+		sm.append(entity.getVarName() + ".setPrimaryKey(" + pkVarName + ");");
+		sm.append("return " + entity.getVarName() + ";");
+		sm.append("}");
 
 		// Remove method
 
-		sb.append("public " + entity.getName() + " remove(" + pkClassName + " " + pkVarName + ") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-		sb.append("Session session = null;");
-		sb.append("try {");
-		sb.append("session = openSession();");
-		sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")session.get(" + entity.getName() + "Impl.class, ");
+		sm.append("public " + entity.getName() + " remove(" + pkClassName + " " + pkVarName + ") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+		sm.append("Session session = null;");
+		sm.append("try {");
+		sm.append("session = openSession();");
+		sm.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")session.get(" + entity.getName() + "Impl.class, ");
 
 		if (entity.hasPrimitivePK()) {
-			sb.append("new ");
-			sb.append(_getPrimitiveObj(entity.getPKClassName()));
-			sb.append("(");
+			sm.append("new ");
+			sm.append(_getPrimitiveObj(entity.getPKClassName()));
+			sm.append("(");
 		}
 
-		sb.append(pkVarName);
+		sm.append(pkVarName);
 
 		if (entity.hasPrimitivePK()) {
-			sb.append(")");
+			sm.append(")");
 		}
 
-		sb.append(");");
-		sb.append("if (" + entity.getVarName() + " == null) {");
-		sb.append("if (_log.isWarnEnabled()) {");
-		sb.append("_log.warn(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ");");
-		sb.append("}");
-		sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ");");
-		sb.append("}");
-		sb.append("return remove(" + entity.getVarName() + ");");
-		sb.append("}");
-		sb.append("catch (HibernateException he) {");
-		sb.append("throw new SystemException(he);");
-		sb.append("}");
-		sb.append("finally {");
-		sb.append("closeSession(session);");
-		sb.append("}");
-		sb.append("}");
+		sm.append(");");
+		sm.append("if (" + entity.getVarName() + " == null) {");
+		sm.append("if (_log.isWarnEnabled()) {");
+		sm.append("_log.warn(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ");");
+		sm.append("}");
+		sm.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ");");
+		sm.append("}");
+		sm.append("return remove(" + entity.getVarName() + ");");
+		sm.append("}");
+		sm.append("catch (HibernateException he) {");
+		sm.append("throw new SystemException(he);");
+		sm.append("}");
+		sm.append("finally {");
+		sm.append("closeSession(session);");
+		sm.append("}");
+		sm.append("}");
 
-		sb.append("public " + entity.getName() + " remove(" + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
-		sb.append("Session session = null;");
-		sb.append("try {");
-		sb.append("session = openSession();");
-		sb.append("session.delete(" + entity.getVarName() + ");");
-		sb.append("session.flush();");
+		sm.append("public " + entity.getName() + " remove(" + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
+		sm.append("Session session = null;");
+		sm.append("try {");
+		sm.append("session = openSession();");
+		sm.append("session.delete(" + entity.getVarName() + ");");
+		sm.append("session.flush();");
 
 		for (int i = 0; i < columnList.size(); i++) {
 			EntityColumn col = (EntityColumn)columnList.get(i);
@@ -2425,90 +2430,90 @@ public class ServiceBuilder {
 
 				// clearUsers(String pk)
 
-				sb.append("clear" + tempEntity.getNames() + ".clear(" + entity.getVarName() + ".getPrimaryKey());");
+				sm.append("clear" + tempEntity.getNames() + ".clear(" + entity.getVarName() + ".getPrimaryKey());");
 			}
 		}
 
-		sb.append("return " + entity.getVarName() + ";");
-		sb.append("}");
-		sb.append("catch (HibernateException he) {");
-		sb.append("throw new SystemException(he);");
-		sb.append("}");
-		sb.append("finally {");
-		sb.append("closeSession(session);");
-		sb.append("}");
-		sb.append("}");
+		sm.append("return " + entity.getVarName() + ";");
+		sm.append("}");
+		sm.append("catch (HibernateException he) {");
+		sm.append("throw new SystemException(he);");
+		sm.append("}");
+		sm.append("finally {");
+		sm.append("closeSession(session);");
+		sm.append("}");
+		sm.append("}");
 
 		// Update method
 
-		sb.append("public " + _packagePath + ".model." + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
-		sb.append("return update(" + entity.getVarName() + ", false);");
-		sb.append("}");
+		sm.append("public " + _packagePath + ".model." + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
+		sm.append("return update(" + entity.getVarName() + ", false);");
+		sm.append("}");
 
-		sb.append("public " + _packagePath + ".model." + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ", boolean saveOrUpdate) throws SystemException {");
-		sb.append("Session session = null;");
-		sb.append("try {");
-		sb.append("session = openSession();");
-		sb.append("if (saveOrUpdate) {");
-		sb.append("session.saveOrUpdate(" + entity.getVarName() + ");");
-		sb.append("}");
-		sb.append("else {");
-		sb.append("if (" + entity.getVarName() + ".isNew()) {");
-		sb.append("session.save(" + entity.getVarName() + ");");
-		sb.append("}");
-		sb.append("}");
-		sb.append("session.flush();");
-		sb.append(entity.getVarName() + ".setNew(false);");
-		sb.append("return " + entity.getVarName() + ";");
-		sb.append("}");
-		sb.append("catch (HibernateException he) {");
-		sb.append("throw new SystemException(he);");
-		sb.append("}");
-		sb.append("finally {");
-		sb.append("closeSession(session);");
-		sb.append("}");
-		sb.append("}");
+		sm.append("public " + _packagePath + ".model." + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ", boolean saveOrUpdate) throws SystemException {");
+		sm.append("Session session = null;");
+		sm.append("try {");
+		sm.append("session = openSession();");
+		sm.append("if (saveOrUpdate) {");
+		sm.append("session.saveOrUpdate(" + entity.getVarName() + ");");
+		sm.append("}");
+		sm.append("else {");
+		sm.append("if (" + entity.getVarName() + ".isNew()) {");
+		sm.append("session.save(" + entity.getVarName() + ");");
+		sm.append("}");
+		sm.append("}");
+		sm.append("session.flush();");
+		sm.append(entity.getVarName() + ".setNew(false);");
+		sm.append("return " + entity.getVarName() + ";");
+		sm.append("}");
+		sm.append("catch (HibernateException he) {");
+		sm.append("throw new SystemException(he);");
+		sm.append("}");
+		sm.append("finally {");
+		sm.append("closeSession(session);");
+		sm.append("}");
+		sm.append("}");
 
 		// Finder methods
 
-		sb.append("public " + entity.getName() + " findByPrimaryKey(" + pkClassName + " " + pkVarName + ") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-		sb.append(entity.getName() + " " + entity.getVarName() + " = fetchByPrimaryKey(" + pkVarName + ");");
-		sb.append("if (" + entity.getVarName() + " == null) {");
-		sb.append("if (_log.isWarnEnabled()) {");
-		sb.append("_log.warn(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ");");
-		sb.append("}");
-		sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ");");
-		sb.append("}");
-		sb.append("return " + entity.getVarName() + ";");
-		sb.append("}");
+		sm.append("public " + entity.getName() + " findByPrimaryKey(" + pkClassName + " " + pkVarName + ") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+		sm.append(entity.getName() + " " + entity.getVarName() + " = fetchByPrimaryKey(" + pkVarName + ");");
+		sm.append("if (" + entity.getVarName() + " == null) {");
+		sm.append("if (_log.isWarnEnabled()) {");
+		sm.append("_log.warn(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ");");
+		sm.append("}");
+		sm.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ");");
+		sm.append("}");
+		sm.append("return " + entity.getVarName() + ";");
+		sm.append("}");
 
-		sb.append("public " + entity.getName() + " fetchByPrimaryKey(" + pkClassName + " " + pkVarName + ") throws SystemException {");
-		sb.append("Session session = null;");
-		sb.append("try {");
-		sb.append("session = openSession();");
-		sb.append("return (" + entity.getName() + ")session.get(" + entity.getName() + "Impl.class, ");
-
-		if (entity.hasPrimitivePK()) {
-			sb.append("new ");
-			sb.append(_getPrimitiveObj(entity.getPKClassName()));
-			sb.append("(");
-		}
-
-		sb.append(pkVarName);
+		sm.append("public " + entity.getName() + " fetchByPrimaryKey(" + pkClassName + " " + pkVarName + ") throws SystemException {");
+		sm.append("Session session = null;");
+		sm.append("try {");
+		sm.append("session = openSession();");
+		sm.append("return (" + entity.getName() + ")session.get(" + entity.getName() + "Impl.class, ");
 
 		if (entity.hasPrimitivePK()) {
-			sb.append(")");
+			sm.append("new ");
+			sm.append(_getPrimitiveObj(entity.getPKClassName()));
+			sm.append("(");
 		}
 
-		sb.append(");");
-		sb.append("}");
-		sb.append("catch (HibernateException he) {");
-		sb.append("throw new SystemException(he);");
-		sb.append("}");
-		sb.append("finally {");
-		sb.append("closeSession(session);");
-		sb.append("}");
-		sb.append("}");
+		sm.append(pkVarName);
+
+		if (entity.hasPrimitivePK()) {
+			sm.append(")");
+		}
+
+		sm.append(");");
+		sm.append("}");
+		sm.append("catch (HibernateException he) {");
+		sm.append("throw new SystemException(he);");
+		sm.append("}");
+		sm.append("finally {");
+		sm.append("closeSession(session);");
+		sm.append("}");
+		sm.append("}");
 
 		for (int i = 0; i < finderList.size(); i++) {
 			EntityFinder finder = (EntityFinder)finderList.get(i);
@@ -2516,103 +2521,103 @@ public class ServiceBuilder {
 			List finderColsList = finder.getColumns();
 
 			if (!finder.isCollection()) {
-				sb.append("public " + entity.getName() + " findBy" + finder.getName() + "(");
+				sm.append("public " + entity.getName() + " findBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append(col.getType() + " " + col.getName());
+					sm.append(col.getType() + " " + col.getName());
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-				sb.append(entity.getName() + " " + entity.getVarName() + " = fetchBy" + finder.getName() + "(");
+				sm.append(") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+				sm.append(entity.getName() + " " + entity.getVarName() + " = fetchBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append(col.getName());
+					sm.append(col.getName());
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(");");
-				sb.append("if (" + entity.getVarName() + " == null) {");
-				sb.append("StringBuffer msg = new StringBuffer();");
-				sb.append("msg.append(\"No " + entity.getName() + " exists with the key \");");
+				sm.append(");");
+				sm.append("if (" + entity.getVarName() + " == null) {");
+				sm.append("StringMaker msg = new StringMaker();");
+				sm.append("msg.append(\"No " + entity.getName() + " exists with the key \");");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (j == 0) {
-						sb.append("msg.append(StringPool.OPEN_CURLY_BRACE);");
+						sm.append("msg.append(StringPool.OPEN_CURLY_BRACE);");
 					}
 
-					sb.append("msg.append(\"" + col.getName() + "=\");");
-					sb.append("msg.append(" + col.getName() + ");");
+					sm.append("msg.append(\"" + col.getName() + "=\");");
+					sm.append("msg.append(" + col.getName() + ");");
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append("msg.append(\", \");");
+						sm.append("msg.append(\", \");");
 					}
 
 					if ((j + 1) == finderColsList.size()) {
-						sb.append("msg.append(StringPool.CLOSE_CURLY_BRACE);");
+						sm.append("msg.append(StringPool.CLOSE_CURLY_BRACE);");
 					}
 				}
 
-				sb.append("if (_log.isWarnEnabled()) {");
-				sb.append("_log.warn(msg.toString());");
-				sb.append("}");
-				sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg.toString());");
-				sb.append("}");
-				sb.append("return " + entity.getVarName() + ";");
-				sb.append("}");
+				sm.append("if (_log.isWarnEnabled()) {");
+				sm.append("_log.warn(msg.toString());");
+				sm.append("}");
+				sm.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg.toString());");
+				sm.append("}");
+				sm.append("return " + entity.getVarName() + ";");
+				sm.append("}");
 
-				sb.append("public " + entity.getName() + " fetchBy" + finder.getName() + "(");
+				sm.append("public " + entity.getName() + " fetchBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append(col.getType() + " " + col.getName());
+					sm.append(col.getType() + " " + col.getName());
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(") throws SystemException {");
-				sb.append("Session session = null;");
-				sb.append("try {");
-				sb.append("session = openSession();");
-				sb.append("StringBuffer query = new StringBuffer();");
-				sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
+				sm.append(") throws SystemException {");
+				sm.append("Session session = null;");
+				sm.append("try {");
+				sm.append("session = openSession();");
+				sm.append("StringMaker query = new StringMaker();");
+				sm.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (_requiresNullCheck(col)) {
-						_appendNullLogic(col, sb);
+						_appendNullLogic(col, sm);
 					}
 
-					sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+					sm.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
 
 					if (_requiresNullCheck(col)) {
-						sb.append("}");
+						sm.append("}");
 					}
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append("query.append(\" AND \");");
+						sm.append("query.append(\" AND \");");
 					}
 					else if (Validator.isNull(finder.getWhere())) {
-						sb.append("query.append(\" \");");
+						sm.append("query.append(\" \");");
 					}
 					else {
-						sb.append("query.append(\" AND " + finder.getWhere() + " \");");
+						sm.append("query.append(\" AND " + finder.getWhere() + " \");");
 					}
 				}
 
@@ -2621,31 +2626,31 @@ public class ServiceBuilder {
 				if (order != null) {
 					List orderList = order.getColumns();
 
-					sb.append("query.append(\"ORDER BY \");");
+					sm.append("query.append(\"ORDER BY \");");
 
 					for (int j = 0; j < orderList.size(); j++) {
 						EntityColumn col = (EntityColumn)orderList.get(j);
 
-						sb.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
+						sm.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
 
 						if ((j + 1) != orderList.size()) {
-							sb.append(".append(\", \");");
+							sm.append(".append(\", \");");
 						}
 						else {
-							sb.append(";");
+							sm.append(";");
 						}
 					}
 				}
 
-				sb.append("Query q = session.createQuery(query.toString());");
-				sb.append("q.setCacheable(true);");
-				sb.append("int queryPos = 0;");
+				sm.append("Query q = session.createQuery(query.toString());");
+				sm.append("q.setCacheable(true);");
+				sm.append("int queryPos = 0;");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (_requiresNullCheck(col)) {
-						sb.append("if (" + col.getName() + " != null) {");
+						sm.append("if (" + col.getName() + " != null) {");
 					}
 
 					String colType = col.getType();
@@ -2655,90 +2660,90 @@ public class ServiceBuilder {
 						colObjType = _getPrimitiveObj(colType);
 					}
 
-					sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
+					sm.append("q.set" + colObjType + "(queryPos++, " + col.getName());
 
 					if (colType.equals("Boolean")) {
-						sb.append(".booleanValue()");
+						sm.append(".booleanValue()");
 					}
 					else if (colType.equals("Double")) {
-						sb.append(".doubleValue()");
+						sm.append(".doubleValue()");
 					}
 					else if (colType.equals("Float")) {
-						sb.append(".floatValue()");
+						sm.append(".floatValue()");
 					}
 					else if (colType.equals("Integer")) {
-						sb.append(".intValue()");
+						sm.append(".intValue()");
 					}
 					else if (colType.equals("Long")) {
-						sb.append(".longValue()");
+						sm.append(".longValue()");
 					}
 					else if (colType.equals("Short")) {
-						sb.append(".shortValue()");
+						sm.append(".shortValue()");
 					}
 
-					sb.append(");");
+					sm.append(");");
 
 					if (_requiresNullCheck(col)) {
-						sb.append("}");
+						sm.append("}");
 					}
 				}
 
-				sb.append("List list = q.list();");
-				sb.append("if (list.size() == 0) {");
-				sb.append("return null;");
-				sb.append("}");
-				sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")list.get(0);");
-				sb.append("return " + entity.getVarName() + ";");
-				sb.append("}");
-				sb.append("catch (HibernateException he) {");
-				sb.append("throw new SystemException(he);");
-				sb.append("}");
-				sb.append("finally {");
-				sb.append("closeSession(session);");
-				sb.append("}");
-				sb.append("}");
+				sm.append("List list = q.list();");
+				sm.append("if (list.size() == 0) {");
+				sm.append("return null;");
+				sm.append("}");
+				sm.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")list.get(0);");
+				sm.append("return " + entity.getVarName() + ";");
+				sm.append("}");
+				sm.append("catch (HibernateException he) {");
+				sm.append("throw new SystemException(he);");
+				sm.append("}");
+				sm.append("finally {");
+				sm.append("closeSession(session);");
+				sm.append("}");
+				sm.append("}");
 			}
 			else {
-				sb.append("public List findBy" + finder.getName() + "(");
+				sm.append("public List findBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append(col.getType() + " " + col.getName());
+					sm.append(col.getType() + " " + col.getName());
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(") throws SystemException {");
-				sb.append("Session session = null;");
-				sb.append("try {");
-				sb.append("session = openSession();");
-				sb.append("StringBuffer query = new StringBuffer();");
-				sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
+				sm.append(") throws SystemException {");
+				sm.append("Session session = null;");
+				sm.append("try {");
+				sm.append("session = openSession();");
+				sm.append("StringMaker query = new StringMaker();");
+				sm.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (_requiresNullCheck(col)) {
-						_appendNullLogic(col, sb);
+						_appendNullLogic(col, sm);
 					}
 
-					sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+					sm.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
 
 					if (_requiresNullCheck(col)) {
-						sb.append("}");
+						sm.append("}");
 					}
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append("query.append(\" AND \");");
+						sm.append("query.append(\" AND \");");
 					}
 					else if (Validator.isNull(finder.getWhere())) {
-						sb.append("query.append(\" \");");
+						sm.append("query.append(\" \");");
 					}
 					else {
-						sb.append("query.append(\" AND " + finder.getWhere() + " \");");
+						sm.append("query.append(\" AND " + finder.getWhere() + " \");");
 					}
 				}
 
@@ -2747,31 +2752,31 @@ public class ServiceBuilder {
 				if (order != null) {
 					List orderList = order.getColumns();
 
-					sb.append("query.append(\"ORDER BY \");");
+					sm.append("query.append(\"ORDER BY \");");
 
 					for (int j = 0; j < orderList.size(); j++) {
 						EntityColumn col = (EntityColumn)orderList.get(j);
 
-						sb.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
+						sm.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
 
 						if ((j + 1) != orderList.size()) {
-							sb.append(".append(\", \");");
+							sm.append(".append(\", \");");
 						}
 						else {
-							sb.append(";");
+							sm.append(";");
 						}
 					}
 				}
 
-				sb.append("Query q = session.createQuery(query.toString());");
-				sb.append("q.setCacheable(true);");
-				sb.append("int queryPos = 0;");
+				sm.append("Query q = session.createQuery(query.toString());");
+				sm.append("q.setCacheable(true);");
+				sm.append("int queryPos = 0;");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (_requiresNullCheck(col)) {
-						sb.append("if (" + col.getName() + " != null) {");
+						sm.append("if (" + col.getName() + " != null) {");
 					}
 
 					String colType = col.getType();
@@ -2781,139 +2786,139 @@ public class ServiceBuilder {
 						colObjType = _getPrimitiveObj(colType);
 					}
 
-					sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
+					sm.append("q.set" + colObjType + "(queryPos++, " + col.getName());
 
 					if (colType.equals("Boolean")) {
-						sb.append(".booleanValue()");
+						sm.append(".booleanValue()");
 					}
 					else if (colType.equals("Double")) {
-						sb.append(".doubleValue()");
+						sm.append(".doubleValue()");
 					}
 					else if (colType.equals("Float")) {
-						sb.append(".floatValue()");
+						sm.append(".floatValue()");
 					}
 					else if (colType.equals("Integer")) {
-						sb.append(".intValue()");
+						sm.append(".intValue()");
 					}
 					else if (colType.equals("Long")) {
-						sb.append(".longValue()");
+						sm.append(".longValue()");
 					}
 					else if (colType.equals("Short")) {
-						sb.append(".shortValue()");
+						sm.append(".shortValue()");
 					}
 
-					sb.append(");");
+					sm.append(");");
 
 					if (_requiresNullCheck(col)) {
-						sb.append("}");
+						sm.append("}");
 					}
 				}
 
-				sb.append("return q.list();");
-				sb.append("}");
-				sb.append("catch (HibernateException he) {");
-				sb.append("throw new SystemException(he);");
-				sb.append("}");
-				sb.append("finally {");
-				sb.append("closeSession(session);");
-				sb.append("}");
-				sb.append("}");
+				sm.append("return q.list();");
+				sm.append("}");
+				sm.append("catch (HibernateException he) {");
+				sm.append("throw new SystemException(he);");
+				sm.append("}");
+				sm.append("finally {");
+				sm.append("closeSession(session);");
+				sm.append("}");
+				sm.append("}");
 
-				sb.append("public List findBy" + finder.getName() + "(");
-
-				for (int j = 0; j < finderColsList.size(); j++) {
-					EntityColumn col = (EntityColumn)finderColsList.get(j);
-
-					sb.append(col.getType() + " " + col.getName() + ", ");
-				}
-
-				sb.append("int begin, int end) throws SystemException {");
-				sb.append("return findBy" + finder.getName() + "(");
+				sm.append("public List findBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append("" + col.getName() + ", ");
+					sm.append(col.getType() + " " + col.getName() + ", ");
 				}
 
-				sb.append("begin, end, null);");
-				sb.append("}");
-
-				sb.append("public List findBy" + finder.getName() + "(");
+				sm.append("int begin, int end) throws SystemException {");
+				sm.append("return findBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append(col.getType() + " " + col.getName() + ", ");
+					sm.append("" + col.getName() + ", ");
 				}
 
-				sb.append("int begin, int end, OrderByComparator obc) throws SystemException {");
-				sb.append("Session session = null;");
-				sb.append("try {");
-				sb.append("session = openSession();");
-				sb.append("StringBuffer query = new StringBuffer();");
-				sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
+				sm.append("begin, end, null);");
+				sm.append("}");
+
+				sm.append("public List findBy" + finder.getName() + "(");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					sm.append(col.getType() + " " + col.getName() + ", ");
+				}
+
+				sm.append("int begin, int end, OrderByComparator obc) throws SystemException {");
+				sm.append("Session session = null;");
+				sm.append("try {");
+				sm.append("session = openSession();");
+				sm.append("StringMaker query = new StringMaker();");
+				sm.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (_requiresNullCheck(col)) {
-						_appendNullLogic(col, sb);
+						_appendNullLogic(col, sm);
 					}
 
-					sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+					sm.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
 
 					if (_requiresNullCheck(col)) {
-						sb.append("}");
+						sm.append("}");
 					}
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append("query.append(\" AND \");");
+						sm.append("query.append(\" AND \");");
 					}
 					else if (Validator.isNull(finder.getWhere())) {
-						sb.append("query.append(\" \");");
+						sm.append("query.append(\" \");");
 					}
 					else {
-						sb.append("query.append(\" AND " + finder.getWhere() + " \");");
+						sm.append("query.append(\" AND " + finder.getWhere() + " \");");
 					}
 				}
 
-				sb.append("if (obc != null) {");
-				sb.append("query.append(\"ORDER BY \");");
-				sb.append("query.append(obc.getOrderBy());");
-				sb.append("}");
+				sm.append("if (obc != null) {");
+				sm.append("query.append(\"ORDER BY \");");
+				sm.append("query.append(obc.getOrderBy());");
+				sm.append("}");
 
 				if (order != null) {
 					List orderList = order.getColumns();
 
-					sb.append("else {");
-					sb.append("query.append(\"ORDER BY \");");
+					sm.append("else {");
+					sm.append("query.append(\"ORDER BY \");");
 
 					for (int j = 0; j < orderList.size(); j++) {
 						EntityColumn col = (EntityColumn)orderList.get(j);
 
-						sb.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
+						sm.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
 
 						if ((j + 1) != orderList.size()) {
-							sb.append(".append(\", \");");
+							sm.append(".append(\", \");");
 						}
 						else {
-							sb.append(";");
+							sm.append(";");
 						}
 					}
 
-					sb.append("}");
+					sm.append("}");
 				}
 
-				sb.append("Query q = session.createQuery(query.toString());");
-				sb.append("q.setCacheable(true);");
-				sb.append("int queryPos = 0;");
+				sm.append("Query q = session.createQuery(query.toString());");
+				sm.append("q.setCacheable(true);");
+				sm.append("int queryPos = 0;");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (_requiresNullCheck(col)) {
-						sb.append("if (" + col.getName() + " != null) {");
+						sm.append("if (" + col.getName() + " != null) {");
 					}
 
 					String colType = col.getType();
@@ -2923,248 +2928,248 @@ public class ServiceBuilder {
 						colObjType = _getPrimitiveObj(colType);
 					}
 
-					sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
+					sm.append("q.set" + colObjType + "(queryPos++, " + col.getName());
 
 					if (colType.equals("Boolean")) {
-						sb.append(".booleanValue()");
+						sm.append(".booleanValue()");
 					}
 					else if (colType.equals("Double")) {
-						sb.append(".doubleValue()");
+						sm.append(".doubleValue()");
 					}
 					else if (colType.equals("Float")) {
-						sb.append(".floatValue()");
+						sm.append(".floatValue()");
 					}
 					else if (colType.equals("Integer")) {
-						sb.append(".intValue()");
+						sm.append(".intValue()");
 					}
 					else if (colType.equals("Long")) {
-						sb.append(".longValue()");
+						sm.append(".longValue()");
 					}
 					else if (colType.equals("Short")) {
-						sb.append(".shortValue()");
+						sm.append(".shortValue()");
 					}
 
-					sb.append(");");
+					sm.append(");");
 
 					if (_requiresNullCheck(col)) {
-						sb.append("}");
+						sm.append("}");
 					}
 				}
 
-				sb.append("return QueryUtil.list(q, getDialect(), begin, end);");
-				sb.append("}");
-				sb.append("catch (HibernateException he) {");
-				sb.append("throw new SystemException(he);");
-				sb.append("}");
-				sb.append("finally {");
-				sb.append("closeSession(session);");
-				sb.append("}");
-				sb.append("}");
+				sm.append("return QueryUtil.list(q, getDialect(), begin, end);");
+				sm.append("}");
+				sm.append("catch (HibernateException he) {");
+				sm.append("throw new SystemException(he);");
+				sm.append("}");
+				sm.append("finally {");
+				sm.append("closeSession(session);");
+				sm.append("}");
+				sm.append("}");
 
-				sb.append("public " + entity.getName() + " findBy" + finder.getName() + "_First(");
-
-				for (int j = 0; j < finderColsList.size(); j++) {
-					EntityColumn col = (EntityColumn)finderColsList.get(j);
-
-					sb.append(col.getType() + " " + col.getName() + ", ");
-				}
-
-				sb.append("OrderByComparator obc) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-
-				sb.append("List list = findBy" + finder.getName() + "(");
+				sm.append("public " + entity.getName() + " findBy" + finder.getName() + "_First(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append("" + col.getName() + ", ");
+					sm.append(col.getType() + " " + col.getName() + ", ");
 				}
 
-				sb.append("0, 1, obc);");
+				sm.append("OrderByComparator obc) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
 
-				sb.append("if (list.size() == 0) {");
-				sb.append("StringBuffer msg = new StringBuffer();");
-				sb.append("msg.append(\"No " + entity.getName() + " exists with the key \");");
+				sm.append("List list = findBy" + finder.getName() + "(");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					sm.append("" + col.getName() + ", ");
+				}
+
+				sm.append("0, 1, obc);");
+
+				sm.append("if (list.size() == 0) {");
+				sm.append("StringMaker msg = new StringMaker();");
+				sm.append("msg.append(\"No " + entity.getName() + " exists with the key \");");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (j == 0) {
-						sb.append("msg.append(StringPool.OPEN_CURLY_BRACE);");
+						sm.append("msg.append(StringPool.OPEN_CURLY_BRACE);");
 					}
 
-					sb.append("msg.append(\"" + col.getName() + "=\");");
-					sb.append("msg.append(" + col.getName() + ");");
+					sm.append("msg.append(\"" + col.getName() + "=\");");
+					sm.append("msg.append(" + col.getName() + ");");
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append("msg.append(\", \");");
+						sm.append("msg.append(\", \");");
 					}
 
 					if ((j + 1) == finderColsList.size()) {
-						sb.append("msg.append(StringPool.CLOSE_CURLY_BRACE);");
+						sm.append("msg.append(StringPool.CLOSE_CURLY_BRACE);");
 					}
 				}
 
-				sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg.toString());");				sb.append("}");
-				sb.append("else {");
-				sb.append("return (" + entity.getName() + ")list.get(0);");
-				sb.append("}");
-				sb.append("}");
+				sm.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg.toString());");				sm.append("}");
+				sm.append("else {");
+				sm.append("return (" + entity.getName() + ")list.get(0);");
+				sm.append("}");
+				sm.append("}");
 
-				sb.append("public " + entity.getName() + " findBy" + finder.getName() + "_Last(");
+				sm.append("public " + entity.getName() + " findBy" + finder.getName() + "_Last(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append(col.getType() + " " + col.getName() + ", ");
+					sm.append(col.getType() + " " + col.getName() + ", ");
 				}
 
-				sb.append("OrderByComparator obc) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+				sm.append("OrderByComparator obc) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
 
-				sb.append("int count = countBy" + finder.getName() + "(");
+				sm.append("int count = countBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append("" + col.getName());
+					sm.append("" + col.getName());
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(");");
+				sm.append(");");
 
-				sb.append("List list = findBy" + finder.getName() + "(");
+				sm.append("List list = findBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append("" + col.getName() + ", ");
+					sm.append("" + col.getName() + ", ");
 				}
 
-				sb.append("count - 1, count, obc);");
+				sm.append("count - 1, count, obc);");
 
-				sb.append("if (list.size() == 0) {");
-				sb.append("StringBuffer msg = new StringBuffer();");
-				sb.append("msg.append(\"No " + entity.getName() + " exists with the key \");");
+				sm.append("if (list.size() == 0) {");
+				sm.append("StringMaker msg = new StringMaker();");
+				sm.append("msg.append(\"No " + entity.getName() + " exists with the key \");");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (j == 0) {
-						sb.append("msg.append(StringPool.OPEN_CURLY_BRACE);");
+						sm.append("msg.append(StringPool.OPEN_CURLY_BRACE);");
 					}
 
-					sb.append("msg.append(\"" + col.getName() + "=\");");
-					sb.append("msg.append(" + col.getName() + ");");
+					sm.append("msg.append(\"" + col.getName() + "=\");");
+					sm.append("msg.append(" + col.getName() + ");");
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append("msg.append(\", \");");
+						sm.append("msg.append(\", \");");
 					}
 
 					if ((j + 1) == finderColsList.size()) {
-						sb.append("msg.append(StringPool.CLOSE_CURLY_BRACE);");
+						sm.append("msg.append(StringPool.CLOSE_CURLY_BRACE);");
 					}
 				}
 
-				sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg.toString());");
-				sb.append("}");
-				sb.append("else {");
-				sb.append("return (" + entity.getName() + ")list.get(0);");
-				sb.append("}");
-				sb.append("}");
+				sm.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg.toString());");
+				sm.append("}");
+				sm.append("else {");
+				sm.append("return (" + entity.getName() + ")list.get(0);");
+				sm.append("}");
+				sm.append("}");
 
-				sb.append("public " + entity.getName() + "[] findBy" + finder.getName() + "_PrevAndNext(" + pkClassName + " " + pkVarName + ", ");
+				sm.append("public " + entity.getName() + "[] findBy" + finder.getName() + "_PrevAndNext(" + pkClassName + " " + pkVarName + ", ");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append(col.getType() + " " + col.getName() + ", ");
+					sm.append(col.getType() + " " + col.getName() + ", ");
 				}
 
-				sb.append("OrderByComparator obc) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-				sb.append(entity.getName() + " " + entity.getVarName() + " = findByPrimaryKey(" + pkVarName + ");");
+				sm.append("OrderByComparator obc) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+				sm.append(entity.getName() + " " + entity.getVarName() + " = findByPrimaryKey(" + pkVarName + ");");
 
-				sb.append("int count = countBy" + finder.getName() + "(");
+				sm.append("int count = countBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append("" + col.getName());
+					sm.append("" + col.getName());
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(");");
+				sm.append(");");
 
-				sb.append("Session session = null;");
-				sb.append("try {");
-				sb.append("session = openSession();");
-				sb.append("StringBuffer query = new StringBuffer();");
-				sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
+				sm.append("Session session = null;");
+				sm.append("try {");
+				sm.append("session = openSession();");
+				sm.append("StringMaker query = new StringMaker();");
+				sm.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (_requiresNullCheck(col)) {
-						_appendNullLogic(col, sb);
+						_appendNullLogic(col, sm);
 					}
 
-					sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+					sm.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
 
 					if (_requiresNullCheck(col)) {
-						sb.append("}");
+						sm.append("}");
 					}
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append("query.append(\" AND \");");
+						sm.append("query.append(\" AND \");");
 					}
 					else if (Validator.isNull(finder.getWhere())) {
-						sb.append("query.append(\" \");");
+						sm.append("query.append(\" \");");
 					}
 					else {
-						sb.append("query.append(\" AND " + finder.getWhere() + " \");");
+						sm.append("query.append(\" AND " + finder.getWhere() + " \");");
 					}
 				}
 
-				sb.append("if (obc != null) {");
-				sb.append("query.append(\"ORDER BY \");");
-				sb.append("query.append(obc.getOrderBy());");
-				sb.append("}");
+				sm.append("if (obc != null) {");
+				sm.append("query.append(\"ORDER BY \");");
+				sm.append("query.append(obc.getOrderBy());");
+				sm.append("}");
 
 				if (order != null) {
 					List orderList = order.getColumns();
 
-					sb.append("else {");
-					sb.append("query.append(\"ORDER BY \");");
+					sm.append("else {");
+					sm.append("query.append(\"ORDER BY \");");
 
 					for (int j = 0; j < orderList.size(); j++) {
 						EntityColumn col = (EntityColumn)orderList.get(j);
 
-						sb.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
+						sm.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
 
 						if ((j + 1) != orderList.size()) {
-							sb.append(".append(\", \");");
+							sm.append(".append(\", \");");
 						}
 						else {
-							sb.append(";");
+							sm.append(";");
 						}
 					}
 
-					sb.append("}");
+					sm.append("}");
 				}
 
-				sb.append("Query q = session.createQuery(query.toString());");
-				sb.append("q.setCacheable(true);");
-				sb.append("int queryPos = 0;");
+				sm.append("Query q = session.createQuery(query.toString());");
+				sm.append("q.setCacheable(true);");
+				sm.append("int queryPos = 0;");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (_requiresNullCheck(col)) {
-						sb.append("if (" + col.getName() + " != null) {");
+						sm.append("if (" + col.getName() + " != null) {");
 					}
 
 					String colType = col.getType();
@@ -3174,140 +3179,140 @@ public class ServiceBuilder {
 						colObjType = _getPrimitiveObj(colType);
 					}
 
-					sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
+					sm.append("q.set" + colObjType + "(queryPos++, " + col.getName());
 
 					if (colType.equals("Boolean")) {
-						sb.append(".booleanValue()");
+						sm.append(".booleanValue()");
 					}
 					else if (colType.equals("Double")) {
-						sb.append(".doubleValue()");
+						sm.append(".doubleValue()");
 					}
 					else if (colType.equals("Float")) {
-						sb.append(".floatValue()");
+						sm.append(".floatValue()");
 					}
 					else if (colType.equals("Integer")) {
-						sb.append(".intValue()");
+						sm.append(".intValue()");
 					}
 					else if (colType.equals("Long")) {
-						sb.append(".longValue()");
+						sm.append(".longValue()");
 					}
 					else if (colType.equals("Short")) {
-						sb.append(".shortValue()");
+						sm.append(".shortValue()");
 					}
 
-					sb.append(");");
+					sm.append(");");
 
 					if (_requiresNullCheck(col)) {
-						sb.append("}");
+						sm.append("}");
 					}
 				}
 
-				sb.append("Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, " + entity.getVarName() + ");");
+				sm.append("Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, " + entity.getVarName() + ");");
 
-				sb.append(entity.getName() + "[] array = new " + entity.getName() + "Impl[3];");
+				sm.append(entity.getName() + "[] array = new " + entity.getName() + "Impl[3];");
 
-				sb.append("array[0] = (" + entity.getName() + ")objArray[0];");
-				sb.append("array[1] = (" + entity.getName() + ")objArray[1];");
-				sb.append("array[2] = (" + entity.getName() + ")objArray[2];");
+				sm.append("array[0] = (" + entity.getName() + ")objArray[0];");
+				sm.append("array[1] = (" + entity.getName() + ")objArray[1];");
+				sm.append("array[2] = (" + entity.getName() + ")objArray[2];");
 
-				sb.append("return array;");
-				sb.append("}");
-				sb.append("catch (HibernateException he) {");
-				sb.append("throw new SystemException(he);");
-				sb.append("}");
-				sb.append("finally {");
-				sb.append("closeSession(session);");
-				sb.append("}");
-				sb.append("}");
+				sm.append("return array;");
+				sm.append("}");
+				sm.append("catch (HibernateException he) {");
+				sm.append("throw new SystemException(he);");
+				sm.append("}");
+				sm.append("finally {");
+				sm.append("closeSession(session);");
+				sm.append("}");
+				sm.append("}");
 			}
 		}
 
-		sb.append("public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {");
-		sb.append("Session session = null;");
-		sb.append("try {");
-		sb.append("session = openSession();");
-		sb.append("DynamicQuery query = queryInitializer.initialize(session);");
-		sb.append("return query.list();");
-		sb.append("}");
-		sb.append("catch (HibernateException he) {");
-		sb.append("throw new SystemException(he);");
-		sb.append("}");
-		sb.append("finally {");
-		sb.append("closeSession(session);");
-		sb.append("}");
-		sb.append("}");
+		sm.append("public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {");
+		sm.append("Session session = null;");
+		sm.append("try {");
+		sm.append("session = openSession();");
+		sm.append("DynamicQuery query = queryInitializer.initialize(session);");
+		sm.append("return query.list();");
+		sm.append("}");
+		sm.append("catch (HibernateException he) {");
+		sm.append("throw new SystemException(he);");
+		sm.append("}");
+		sm.append("finally {");
+		sm.append("closeSession(session);");
+		sm.append("}");
+		sm.append("}");
 
-		sb.append("public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {");
-		sb.append("Session session = null;");
-		sb.append("try {");
-		sb.append("session = openSession();");
-		sb.append("DynamicQuery query = queryInitializer.initialize(session);");
-		sb.append("query.setLimit(begin, end);");
-		sb.append("return query.list();");
-		sb.append("}");
-		sb.append("catch (HibernateException he) {");
-		sb.append("throw new SystemException(he);");
-		sb.append("}");
-		sb.append("finally {");
-		sb.append("closeSession(session);");
-		sb.append("}");
-		sb.append("}");
+		sm.append("public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {");
+		sm.append("Session session = null;");
+		sm.append("try {");
+		sm.append("session = openSession();");
+		sm.append("DynamicQuery query = queryInitializer.initialize(session);");
+		sm.append("query.setLimit(begin, end);");
+		sm.append("return query.list();");
+		sm.append("}");
+		sm.append("catch (HibernateException he) {");
+		sm.append("throw new SystemException(he);");
+		sm.append("}");
+		sm.append("finally {");
+		sm.append("closeSession(session);");
+		sm.append("}");
+		sm.append("}");
 
-		sb.append("public List findAll() throws SystemException {");
-		sb.append("return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);");
-		sb.append("}");
+		sm.append("public List findAll() throws SystemException {");
+		sm.append("return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);");
+		sm.append("}");
 
-		sb.append("public List findAll(int begin, int end) throws SystemException {");
-		sb.append("return findAll(begin, end, null);");
-		sb.append("}");
+		sm.append("public List findAll(int begin, int end) throws SystemException {");
+		sm.append("return findAll(begin, end, null);");
+		sm.append("}");
 
-		sb.append("public List findAll(int begin, int end, OrderByComparator obc) throws SystemException {");
-		sb.append("Session session = null;");
-		sb.append("try {");
-		sb.append("session = openSession();");
-		sb.append("StringBuffer query = new StringBuffer();");
-		sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " \");");
+		sm.append("public List findAll(int begin, int end, OrderByComparator obc) throws SystemException {");
+		sm.append("Session session = null;");
+		sm.append("try {");
+		sm.append("session = openSession();");
+		sm.append("StringMaker query = new StringMaker();");
+		sm.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " \");");
 
-		sb.append("if (obc != null) {");
-		sb.append("query.append(\"ORDER BY \");");
-		sb.append("query.append(obc.getOrderBy());");
-		sb.append("}");
+		sm.append("if (obc != null) {");
+		sm.append("query.append(\"ORDER BY \");");
+		sm.append("query.append(obc.getOrderBy());");
+		sm.append("}");
 
 		EntityOrder order = entity.getOrder();
 
 		if (order != null) {
 			List orderList = order.getColumns();
 
-			sb.append("else {");
-			sb.append("query.append(\"ORDER BY \");");
+			sm.append("else {");
+			sm.append("query.append(\"ORDER BY \");");
 
 			for (int j = 0; j < orderList.size(); j++) {
 				EntityColumn col = (EntityColumn)orderList.get(j);
 
-				sb.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
+				sm.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
 
 				if ((j + 1) != orderList.size()) {
-					sb.append(".append(\", \");");
+					sm.append(".append(\", \");");
 				}
 				else {
-					sb.append(";");
+					sm.append(";");
 				}
 			}
 
-			sb.append("}");
+			sm.append("}");
 		}
 
-		sb.append("Query q = session.createQuery(query.toString());");
-		sb.append("q.setCacheable(true);");
-		sb.append("return QueryUtil.list(q, getDialect(), begin, end);");
-		sb.append("}");
-		sb.append("catch (HibernateException he) {");
-		sb.append("throw new SystemException(he);");
-		sb.append("}");
-		sb.append("finally {");
-		sb.append("closeSession(session);");
-		sb.append("}");
-		sb.append("}");
+		sm.append("Query q = session.createQuery(query.toString());");
+		sm.append("q.setCacheable(true);");
+		sm.append("return QueryUtil.list(q, getDialect(), begin, end);");
+		sm.append("}");
+		sm.append("catch (HibernateException he) {");
+		sm.append("throw new SystemException(he);");
+		sm.append("}");
+		sm.append("finally {");
+		sm.append("closeSession(session);");
+		sm.append("}");
+		sm.append("}");
 
 		// Remove by methods
 
@@ -3317,75 +3322,75 @@ public class ServiceBuilder {
 			List finderColsList = finder.getColumns();
 
 			if (!finder.isCollection()) {
-				sb.append("public void removeBy" + finder.getName() + "(");
+				sm.append("public void removeBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append(col.getType() + " " + col.getName());
+					sm.append(col.getType() + " " + col.getName());
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
-				sb.append(") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-				sb.append(entity.getName() + " " + entity.getVarName() + " = findBy" + finder.getName() + "(");
+				sm.append(") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+				sm.append(entity.getName() + " " + entity.getVarName() + " = findBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append(col.getName());
+					sm.append(col.getName());
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(");");
-				sb.append("remove(" + entity.getVarName() + ");");
-				sb.append("}");
+				sm.append(");");
+				sm.append("remove(" + entity.getVarName() + ");");
+				sm.append("}");
 			}
 			else {
-				sb.append("public void removeBy" + finder.getName() + "(");
+				sm.append("public void removeBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append(col.getType() + " " + col.getName());
+					sm.append(col.getType() + " " + col.getName());
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(") throws SystemException {");
-				sb.append("Iterator itr = findBy" + finder.getName() + "(");
+				sm.append(") throws SystemException {");
+				sm.append("Iterator itr = findBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-					sb.append(col.getName());
+					sm.append(col.getName());
 
 					if ((j + 1) != finderColsList.size()) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(").iterator();");
-				sb.append("while (itr.hasNext()) {");
-				sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")itr.next();");
-				sb.append("remove(" + entity.getVarName() + ");");
-				sb.append("}");
-				sb.append("}");
+				sm.append(").iterator();");
+				sm.append("while (itr.hasNext()) {");
+				sm.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")itr.next();");
+				sm.append("remove(" + entity.getVarName() + ");");
+				sm.append("}");
+				sm.append("}");
 			}
 		}
 
-		sb.append("public void removeAll() throws SystemException {");
-		sb.append("Iterator itr = findAll().iterator();");
-		sb.append("while (itr.hasNext()) {");
-		sb.append("remove((" + entity.getName() + ")itr.next());");
-		sb.append("}");
-		sb.append("}");
+		sm.append("public void removeAll() throws SystemException {");
+		sm.append("Iterator itr = findAll().iterator();");
+		sm.append("while (itr.hasNext()) {");
+		sm.append("remove((" + entity.getName() + ")itr.next());");
+		sm.append("}");
+		sm.append("}");
 
 		// Count by methods
 
@@ -3394,59 +3399,59 @@ public class ServiceBuilder {
 
 			List finderColsList = finder.getColumns();
 
-			sb.append("public int countBy" + finder.getName() + "(");
+			sm.append("public int countBy" + finder.getName() + "(");
 
 			for (int j = 0; j < finderColsList.size(); j++) {
 				EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-				sb.append(col.getType() + " " + col.getName());
+				sm.append(col.getType() + " " + col.getName());
 
 				if ((j + 1) != finderColsList.size()) {
-					sb.append(", ");
+					sm.append(", ");
 				}
 			}
 
-			sb.append(") throws SystemException {");
-			sb.append("Session session = null;");
-			sb.append("try {");
-			sb.append("session = openSession();");
-			sb.append("StringBuffer query = new StringBuffer();");
-			sb.append("query.append(\"SELECT COUNT(*) \");");
-			sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
+			sm.append(") throws SystemException {");
+			sm.append("Session session = null;");
+			sm.append("try {");
+			sm.append("session = openSession();");
+			sm.append("StringMaker query = new StringMaker();");
+			sm.append("query.append(\"SELECT COUNT(*) \");");
+			sm.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
 
 			for (int j = 0; j < finderColsList.size(); j++) {
 				EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 				if (_requiresNullCheck(col)) {
-					_appendNullLogic(col, sb);
+					_appendNullLogic(col, sm);
 				}
 
-				sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+				sm.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
 
 				if (_requiresNullCheck(col)) {
-					sb.append("}");
+					sm.append("}");
 				}
 
 				if ((j + 1) != finderColsList.size()) {
-					sb.append("query.append(\" AND \");");
+					sm.append("query.append(\" AND \");");
 				}
 				else if (Validator.isNull(finder.getWhere())) {
-					sb.append("query.append(\" \");");
+					sm.append("query.append(\" \");");
 				}
 				else {
-					sb.append("query.append(\" AND " + finder.getWhere() + " \");");
+					sm.append("query.append(\" AND " + finder.getWhere() + " \");");
 				}
 			}
 
-			sb.append("Query q = session.createQuery(query.toString());");
-			sb.append("q.setCacheable(true);");
-			sb.append("int queryPos = 0;");
+			sm.append("Query q = session.createQuery(query.toString());");
+			sm.append("q.setCacheable(true);");
+			sm.append("int queryPos = 0;");
 
 			for (int j = 0; j < finderColsList.size(); j++) {
 				EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 				if (_requiresNullCheck(col)) {
-					sb.append("if (" + col.getName() + " != null) {");
+					sm.append("if (" + col.getName() + " != null) {");
 				}
 
 				String colType = col.getType();
@@ -3456,77 +3461,77 @@ public class ServiceBuilder {
 					colObjType = _getPrimitiveObj(colType);
 				}
 
-				sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
+				sm.append("q.set" + colObjType + "(queryPos++, " + col.getName());
 
 				if (colType.equals("Boolean")) {
-					sb.append(".booleanValue()");
+					sm.append(".booleanValue()");
 				}
 				else if (colType.equals("Double")) {
-					sb.append(".doubleValue()");
+					sm.append(".doubleValue()");
 				}
 				else if (colType.equals("Float")) {
-					sb.append(".floatValue()");
+					sm.append(".floatValue()");
 				}
 				else if (colType.equals("Integer")) {
-					sb.append(".intValue()");
+					sm.append(".intValue()");
 				}
 				else if (colType.equals("Long")) {
-					sb.append(".longValue()");
+					sm.append(".longValue()");
 				}
 				else if (colType.equals("Short")) {
-					sb.append(".shortValue()");
+					sm.append(".shortValue()");
 				}
 
-				sb.append(");");
+				sm.append(");");
 
 				if (_requiresNullCheck(col)) {
-					sb.append("}");
+					sm.append("}");
 				}
 			}
 
-			sb.append("Iterator itr = q.list().iterator();");
-			sb.append("if (itr.hasNext()) {");
-			sb.append("Long count = (Long)itr.next();");
-			sb.append("if (count != null) {");
-			sb.append("return count.intValue();");
-			sb.append("}");
-			sb.append("}");
-			sb.append("return 0;");
-			sb.append("}");
-			sb.append("catch (HibernateException he) {");
-			sb.append("throw new SystemException(he);");
-			sb.append("}");
-			sb.append("finally {");
-			sb.append("closeSession(session);");
-			sb.append("}");
-			sb.append("}");
+			sm.append("Iterator itr = q.list().iterator();");
+			sm.append("if (itr.hasNext()) {");
+			sm.append("Long count = (Long)itr.next();");
+			sm.append("if (count != null) {");
+			sm.append("return count.intValue();");
+			sm.append("}");
+			sm.append("}");
+			sm.append("return 0;");
+			sm.append("}");
+			sm.append("catch (HibernateException he) {");
+			sm.append("throw new SystemException(he);");
+			sm.append("}");
+			sm.append("finally {");
+			sm.append("closeSession(session);");
+			sm.append("}");
+			sm.append("}");
 		}
 
-		sb.append("public int countAll() throws SystemException {");
-		sb.append("Session session = null;");
-		sb.append("try {");
-		sb.append("session = openSession();");
-		sb.append("StringBuffer query = new StringBuffer();");
-		sb.append("query.append(\"SELECT COUNT(*) \");");
-		sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + "\");");
-		sb.append("Query q = session.createQuery(query.toString());");
-		sb.append("q.setCacheable(true);");
-		sb.append("Iterator itr = q.list().iterator();");
-		sb.append("if (itr.hasNext()) {");
-		sb.append("Long count = (Long)itr.next();");
-		sb.append("if (count != null) {");
-		sb.append("return count.intValue();");
-		sb.append("}");
-		sb.append("}");
-		sb.append("return 0;");
-		sb.append("}");
-		sb.append("catch (HibernateException he) {");
-		sb.append("throw new SystemException(he);");
-		sb.append("}");
-		sb.append("finally {");
-		sb.append("closeSession(session);");
-		sb.append("}");
-		sb.append("}");
+		sm.append("public int countAll() throws SystemException {");
+		sm.append("Session session = null;");
+		sm.append("try {");
+		sm.append("session = openSession();");
+		sm.append("StringMaker query = new StringMaker();");
+		sm.append("query.append(\"SELECT COUNT(*) \");");
+		sm.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + "\");");
+		sm.append("Query q = session.createQuery(query.toString());");
+		sm.append("q.setCacheable(true);");
+		sm.append("Iterator itr = q.list().iterator();");
+		sm.append("if (itr.hasNext()) {");
+		sm.append("Long count = (Long)itr.next();");
+		sm.append("if (count != null) {");
+		sm.append("return count.intValue();");
+		sm.append("}");
+		sm.append("}");
+		sm.append("return 0;");
+		sm.append("}");
+		sm.append("catch (HibernateException he) {");
+		sm.append("throw new SystemException(he);");
+		sm.append("}");
+		sm.append("finally {");
+		sm.append("closeSession(session);");
+		sm.append("}");
+		sm.append("}");
 
 		// Relationship methods
 
@@ -3541,259 +3546,259 @@ public class ServiceBuilder {
 
 				// getUsers(String pk)
 
-				sb.append("public List get" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-				sb.append("return get" + tempEntity.getNames() + "(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);");
-				sb.append("}");
+				sm.append("public List get" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+				sm.append("return get" + tempEntity.getNames() + "(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);");
+				sm.append("}");
 
 				// getUsers(String pk, int begin, int end)
 
-				sb.append("public List get" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, int begin, int end) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-				sb.append("return get" + tempEntity.getNames() + "(pk, begin, end, null);");
-				sb.append("}");
+				sm.append("public List get" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, int begin, int end) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+				sm.append("return get" + tempEntity.getNames() + "(pk, begin, end, null);");
+				sm.append("}");
 
 				// getUsers(String pk, int begin, int end, OrderByComparator obc)
 
-				sb.append("public List get" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, int begin, int end, OrderByComparator obc) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-				sb.append("Session session = null;");
-				sb.append("try {");
-				sb.append("session = HibernateUtil.openSession();");
-				sb.append("StringBuffer sb = new StringBuffer();");
-				sb.append("sb.append(_SQL_GET" + tempEntity.getName().toUpperCase() + "S);");
+				sm.append("public List get" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, int begin, int end, OrderByComparator obc) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+				sm.append("Session session = null;");
+				sm.append("try {");
+				sm.append("session = HibernateUtil.openSession();");
+				sm.append("StringMaker sm = new StringMaker();");
+				sm.append("sm.append(_SQL_GET" + tempEntity.getName().toUpperCase() + "S);");
 
-				sb.append("if (obc != null) {");
-				sb.append("sb.append(\"ORDER BY \");");
-				sb.append("sb.append(obc.getOrderBy());");
-				sb.append("}");
+				sm.append("if (obc != null) {");
+				sm.append("sm.append(\"ORDER BY \");");
+				sm.append("sm.append(obc.getOrderBy());");
+				sm.append("}");
 
 				if (tempOrder != null) {
 					List tempOrderList = tempOrder.getColumns();
 
-					sb.append("else {");
-					sb.append("sb.append(\"ORDER BY \");");
+					sm.append("else {");
+					sm.append("sm.append(\"ORDER BY \");");
 
 					for (int j = 0; j < tempOrderList.size(); j++) {
 						EntityColumn tempOrderCol = (EntityColumn)tempOrderList.get(j);
 
-						sb.append("sb.append(\"" + tempEntity.getTable() + "." + tempOrderCol.getDBName() + " " + (tempOrderCol.isOrderByAscending() ? "ASC" : "DESC") + "\");");
+						sm.append("sm.append(\"" + tempEntity.getTable() + "." + tempOrderCol.getDBName() + " " + (tempOrderCol.isOrderByAscending() ? "ASC" : "DESC") + "\");");
 
 						if ((j + 1) != tempOrderList.size()) {
-							sb.append("sb.append(\", \");");
+							sm.append("sm.append(\", \");");
 						}
 					}
 
-					sb.append("}");
+					sm.append("}");
 				}
 
-				sb.append("String sql = sb.toString();");
-				sb.append("SQLQuery q = session.createSQLQuery(sql);");
-				sb.append("q.setCacheable(false);");
-				sb.append("q.addEntity(\"" + tempEntity.getTable() + "\", " + tempEntity.getPackagePath() + ".model.impl." + tempEntity.getName() + "Impl.class);");
-				sb.append("QueryPos qPos = QueryPos.getInstance(q);");
-				sb.append("qPos.add(pk);");
-				sb.append("return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);");
-				sb.append("}");
-				sb.append("catch (Exception e) {");
-				sb.append("throw new SystemException(e);");
-				sb.append("}");
-				sb.append("finally {");
-				sb.append("HibernateUtil.closeSession(session);");
-				sb.append("}");
-				sb.append("}");
+				sm.append("String sql = sm.toString();");
+				sm.append("SQLQuery q = session.createSQLQuery(sql);");
+				sm.append("q.setCacheable(false);");
+				sm.append("q.addEntity(\"" + tempEntity.getTable() + "\", " + tempEntity.getPackagePath() + ".model.impl." + tempEntity.getName() + "Impl.class);");
+				sm.append("QueryPos qPos = QueryPos.getInstance(q);");
+				sm.append("qPos.add(pk);");
+				sm.append("return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);");
+				sm.append("}");
+				sm.append("catch (Exception e) {");
+				sm.append("throw new SystemException(e);");
+				sm.append("}");
+				sm.append("finally {");
+				sm.append("HibernateUtil.closeSession(session);");
+				sm.append("}");
+				sm.append("}");
 
 				// getUsersSize(String pk)
 
-				sb.append("public int get" + tempEntity.getNames() + "Size(" + entity.getPKClassName() + " pk) throws SystemException {");
-				sb.append("Session session = null;");
-				sb.append("try {");
-				sb.append("session = openSession();");
-				sb.append("SQLQuery q = session.createSQLQuery(_SQL_GET" + tempEntity.getName().toUpperCase() + "SSIZE);");
-				sb.append("q.setCacheable(false);");
-				sb.append("q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);");
-				sb.append("QueryPos qPos = QueryPos.getInstance(q);");
-				sb.append("qPos.add(pk);");
-				sb.append("Iterator itr = q.list().iterator();");
-				sb.append("if (itr.hasNext()) {");
-				sb.append("Long count = (Long)itr.next();");
-				sb.append("if (count != null) {");
-				sb.append("return count.intValue();");
-				sb.append("}");
-				sb.append("}");
-				sb.append("return 0;");
-				sb.append("}");
-				sb.append("catch (HibernateException he) {");
-				sb.append("throw new SystemException(he);");
-				sb.append("}");
-				sb.append("finally {");
-				sb.append("closeSession(session);");
-				sb.append("}");
-				sb.append("}");
+				sm.append("public int get" + tempEntity.getNames() + "Size(" + entity.getPKClassName() + " pk) throws SystemException {");
+				sm.append("Session session = null;");
+				sm.append("try {");
+				sm.append("session = openSession();");
+				sm.append("SQLQuery q = session.createSQLQuery(_SQL_GET" + tempEntity.getName().toUpperCase() + "SSIZE);");
+				sm.append("q.setCacheable(false);");
+				sm.append("q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);");
+				sm.append("QueryPos qPos = QueryPos.getInstance(q);");
+				sm.append("qPos.add(pk);");
+				sm.append("Iterator itr = q.list().iterator();");
+				sm.append("if (itr.hasNext()) {");
+				sm.append("Long count = (Long)itr.next();");
+				sm.append("if (count != null) {");
+				sm.append("return count.intValue();");
+				sm.append("}");
+				sm.append("}");
+				sm.append("return 0;");
+				sm.append("}");
+				sm.append("catch (HibernateException he) {");
+				sm.append("throw new SystemException(he);");
+				sm.append("}");
+				sm.append("finally {");
+				sm.append("closeSession(session);");
+				sm.append("}");
+				sm.append("}");
 
 				// containsUser(String pk, String userPK)
 
-				sb.append("public boolean contains" + tempEntity.getName() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + " " + tempEntity.getVarName() + "PK) throws SystemException {");
-				sb.append("try {");
-				sb.append("return contains" + tempEntity.getName() + ".contains(pk, " + tempEntity.getVarName() + "PK);");
-				sb.append("}");
-				sb.append("catch (DataAccessException dae) {");
-				sb.append("throw new SystemException(dae);");
-				sb.append("}");
-				sb.append("}");
+				sm.append("public boolean contains" + tempEntity.getName() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + " " + tempEntity.getVarName() + "PK) throws SystemException {");
+				sm.append("try {");
+				sm.append("return contains" + tempEntity.getName() + ".contains(pk, " + tempEntity.getVarName() + "PK);");
+				sm.append("}");
+				sm.append("catch (DataAccessException dae) {");
+				sm.append("throw new SystemException(dae);");
+				sm.append("}");
+				sm.append("}");
 
 				// containsUsers(String pk)
 
-				sb.append("public boolean contains" + tempEntity.getName() + "s(" + entity.getPKClassName() + " pk) throws SystemException {");
-				sb.append("if (get" + tempEntity.getNames() + "Size(pk) > 0) {");
-				sb.append("return true;");
-				sb.append("}");
-				sb.append("else {");
-				sb.append("return false;");
-				sb.append("}");
-				sb.append("}");
+				sm.append("public boolean contains" + tempEntity.getName() + "s(" + entity.getPKClassName() + " pk) throws SystemException {");
+				sm.append("if (get" + tempEntity.getNames() + "Size(pk) > 0) {");
+				sm.append("return true;");
+				sm.append("}");
+				sm.append("else {");
+				sm.append("return false;");
+				sm.append("}");
+				sm.append("}");
 
 				if (col.isMappingManyToMany()) {
 
 					// addUser(String pk, String userPK)
 
-					sb.append("public void add" + tempEntity.getName() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + " " + tempEntity.getVarName() + "PK) throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
-					sb.append("try {");
-					sb.append("add" + tempEntity.getName() + ".add(pk, " + tempEntity.getVarName() + "PK);");
-					sb.append("}");
-					sb.append("catch (DataAccessException dae) {");
-					sb.append("throw new SystemException(dae);");
-					sb.append("}");
-					sb.append("}");
+					sm.append("public void add" + tempEntity.getName() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + " " + tempEntity.getVarName() + "PK) throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
+					sm.append("try {");
+					sm.append("add" + tempEntity.getName() + ".add(pk, " + tempEntity.getVarName() + "PK);");
+					sm.append("}");
+					sm.append("catch (DataAccessException dae) {");
+					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("}");
 
 					// addUser(String pk, User user)
 
-					sb.append("public void add" + tempEntity.getName() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPackagePath() + ".model." + tempEntity.getName() + " " + tempEntity.getVarName() + ") throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
-					sb.append("try {");
-					sb.append("add" + tempEntity.getName() + ".add(pk, " + tempEntity.getVarName() + ".getPrimaryKey());");
-					sb.append("}");
-					sb.append("catch (DataAccessException dae) {");
-					sb.append("throw new SystemException(dae);");
-					sb.append("}");
-					sb.append("}");
+					sm.append("public void add" + tempEntity.getName() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPackagePath() + ".model." + tempEntity.getName() + " " + tempEntity.getVarName() + ") throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
+					sm.append("try {");
+					sm.append("add" + tempEntity.getName() + ".add(pk, " + tempEntity.getVarName() + ".getPrimaryKey());");
+					sm.append("}");
+					sm.append("catch (DataAccessException dae) {");
+					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("}");
 
 					// addUsers(String pk, String[] userPKs)
 
-					sb.append("public void add" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + "[] " + tempEntity.getVarName() + "PKs) throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
-					sb.append("try {");
-					sb.append("for (int i = 0; i < " + tempEntity.getVarName() + "PKs.length; i++) {");
-					sb.append("add" + tempEntity.getName() + ".add(pk, " + tempEntity.getVarName() + "PKs[i]);");
-					sb.append("}");
-					sb.append("}");
-					sb.append("catch (DataAccessException dae) {");
-					sb.append("throw new SystemException(dae);");
-					sb.append("}");
-					sb.append("}");
+					sm.append("public void add" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + "[] " + tempEntity.getVarName() + "PKs) throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
+					sm.append("try {");
+					sm.append("for (int i = 0; i < " + tempEntity.getVarName() + "PKs.length; i++) {");
+					sm.append("add" + tempEntity.getName() + ".add(pk, " + tempEntity.getVarName() + "PKs[i]);");
+					sm.append("}");
+					sm.append("}");
+					sm.append("catch (DataAccessException dae) {");
+					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("}");
 
 					// addUsers(String pk, List users)
 
-					sb.append("public void add" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, List " + tempEntity.getVarNames() + ") throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
-					sb.append("try {");
-					sb.append("for (int i = 0; i < " + tempEntity.getVarNames() + ".size(); i++) {");
-					sb.append(tempEntity.getPackagePath() + ".model." + tempEntity.getName() + " " + tempEntity.getVarName() + " = (" + tempEntity.getPackagePath() + ".model." + tempEntity.getName() + ")" + tempEntity.getVarNames() + ".get(i);");
-					sb.append("add" + tempEntity.getName() + ".add(pk, " + tempEntity.getVarName() + ".getPrimaryKey());");
-					sb.append("}");
-					sb.append("}");
-					sb.append("catch (DataAccessException dae) {");
-					sb.append("throw new SystemException(dae);");
-					sb.append("}");
-					sb.append("}");
+					sm.append("public void add" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, List " + tempEntity.getVarNames() + ") throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
+					sm.append("try {");
+					sm.append("for (int i = 0; i < " + tempEntity.getVarNames() + ".size(); i++) {");
+					sm.append(tempEntity.getPackagePath() + ".model." + tempEntity.getName() + " " + tempEntity.getVarName() + " = (" + tempEntity.getPackagePath() + ".model." + tempEntity.getName() + ")" + tempEntity.getVarNames() + ".get(i);");
+					sm.append("add" + tempEntity.getName() + ".add(pk, " + tempEntity.getVarName() + ".getPrimaryKey());");
+					sm.append("}");
+					sm.append("}");
+					sm.append("catch (DataAccessException dae) {");
+					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("}");
 
 					// clearUsers(String pk)
 
-					sb.append("public void clear" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-					sb.append("try {");
-					sb.append("clear" + tempEntity.getNames() + ".clear(pk);");
-					sb.append("}");
-					sb.append("catch (DataAccessException dae) {");
-					sb.append("throw new SystemException(dae);");
-					sb.append("}");
-					sb.append("}");
+					sm.append("public void clear" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+					sm.append("try {");
+					sm.append("clear" + tempEntity.getNames() + ".clear(pk);");
+					sm.append("}");
+					sm.append("catch (DataAccessException dae) {");
+					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("}");
 
 					// removeUser(String pk, String userPK)
 
-					sb.append("public void remove" + tempEntity.getName() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + " " + tempEntity.getVarName() + "PK) throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
-					sb.append("try {");
-					sb.append("remove" + tempEntity.getName() + ".remove(pk, " + tempEntity.getVarName() + "PK);");
-					sb.append("}");
-					sb.append("catch (DataAccessException dae) {");
-					sb.append("throw new SystemException(dae);");
-					sb.append("}");
-					sb.append("}");
+					sm.append("public void remove" + tempEntity.getName() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + " " + tempEntity.getVarName() + "PK) throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
+					sm.append("try {");
+					sm.append("remove" + tempEntity.getName() + ".remove(pk, " + tempEntity.getVarName() + "PK);");
+					sm.append("}");
+					sm.append("catch (DataAccessException dae) {");
+					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("}");
 
 					// removeUser(String pk, User user)
 
-					sb.append("public void remove" + tempEntity.getName() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPackagePath() + ".model." + tempEntity.getName() + " " + tempEntity.getVarName() + ") throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
-					sb.append("try {");
-					sb.append("remove" + tempEntity.getName() + ".remove(pk, " + tempEntity.getVarName() + ".getPrimaryKey());");
-					sb.append("}");
-					sb.append("catch (DataAccessException dae) {");
-					sb.append("throw new SystemException(dae);");
-					sb.append("}");
-					sb.append("}");
+					sm.append("public void remove" + tempEntity.getName() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPackagePath() + ".model." + tempEntity.getName() + " " + tempEntity.getVarName() + ") throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
+					sm.append("try {");
+					sm.append("remove" + tempEntity.getName() + ".remove(pk, " + tempEntity.getVarName() + ".getPrimaryKey());");
+					sm.append("}");
+					sm.append("catch (DataAccessException dae) {");
+					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("}");
 
 					// removeUsers(String pk, String[] userPKs)
 
-					sb.append("public void remove" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + "[] " + tempEntity.getVarName() + "PKs) throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
-					sb.append("try {");
-					sb.append("for (int i = 0; i < " + tempEntity.getVarName() + "PKs.length; i++) {");
-					sb.append("remove" + tempEntity.getName() + ".remove(pk, " + tempEntity.getVarName() + "PKs[i]);");
-					sb.append("}");
-					sb.append("}");
-					sb.append("catch (DataAccessException dae) {");
-					sb.append("throw new SystemException(dae);");
-					sb.append("}");
-					sb.append("}");
+					sm.append("public void remove" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + "[] " + tempEntity.getVarName() + "PKs) throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
+					sm.append("try {");
+					sm.append("for (int i = 0; i < " + tempEntity.getVarName() + "PKs.length; i++) {");
+					sm.append("remove" + tempEntity.getName() + ".remove(pk, " + tempEntity.getVarName() + "PKs[i]);");
+					sm.append("}");
+					sm.append("}");
+					sm.append("catch (DataAccessException dae) {");
+					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("}");
 
 					// removeUsers(String pk, List users)
 
-					sb.append("public void remove" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, List " + tempEntity.getVarNames() + ") throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
-					sb.append("try {");
-					sb.append("for (int i = 0; i < " + tempEntity.getVarNames() + ".size(); i++) {");
-					sb.append(tempEntity.getPackagePath() + ".model." + tempEntity.getName() + " " + tempEntity.getVarName() + " = (" + tempEntity.getPackagePath() + ".model." + tempEntity.getName() + ")" + tempEntity.getVarNames() + ".get(i);");
-					sb.append("remove" + tempEntity.getName() + ".remove(pk, " + tempEntity.getVarName() + ".getPrimaryKey());");
-					sb.append("}");
-					sb.append("}");
-					sb.append("catch (DataAccessException dae) {");
-					sb.append("throw new SystemException(dae);");
-					sb.append("}");
-					sb.append("}");
+					sm.append("public void remove" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, List " + tempEntity.getVarNames() + ") throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
+					sm.append("try {");
+					sm.append("for (int i = 0; i < " + tempEntity.getVarNames() + ".size(); i++) {");
+					sm.append(tempEntity.getPackagePath() + ".model." + tempEntity.getName() + " " + tempEntity.getVarName() + " = (" + tempEntity.getPackagePath() + ".model." + tempEntity.getName() + ")" + tempEntity.getVarNames() + ".get(i);");
+					sm.append("remove" + tempEntity.getName() + ".remove(pk, " + tempEntity.getVarName() + ".getPrimaryKey());");
+					sm.append("}");
+					sm.append("}");
+					sm.append("catch (DataAccessException dae) {");
+					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("}");
 
 					// setUsers(String pk, String[] pks)
 
-					sb.append("public void set" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + "[] " + tempEntity.getVarName() + "PKs) throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
-					sb.append("try {");
-					sb.append("clear" + tempEntity.getNames() + ".clear(pk);");
-					sb.append("for (int i = 0; i < " + tempEntity.getVarName() + "PKs.length; i++) {");
-					sb.append("add" + tempEntity.getName() + ".add(pk, " + tempEntity.getVarName() + "PKs[i]);");
-					sb.append("}");
-					sb.append("}");
-					sb.append("catch (DataAccessException dae) {");
-					sb.append("throw new SystemException(dae);");
-					sb.append("}");
-					sb.append("}");
+					sm.append("public void set" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + "[] " + tempEntity.getVarName() + "PKs) throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
+					sm.append("try {");
+					sm.append("clear" + tempEntity.getNames() + ".clear(pk);");
+					sm.append("for (int i = 0; i < " + tempEntity.getVarName() + "PKs.length; i++) {");
+					sm.append("add" + tempEntity.getName() + ".add(pk, " + tempEntity.getVarName() + "PKs[i]);");
+					sm.append("}");
+					sm.append("}");
+					sm.append("catch (DataAccessException dae) {");
+					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("}");
 
 					// setUsers(String pk, List pks)
 
-					sb.append("public void set" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, List " + tempEntity.getVarNames() + ") throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
-					sb.append("try {");
-					sb.append("clear" + tempEntity.getNames() + ".clear(pk);");
-					sb.append("for (int i = 0; i < " + tempEntity.getVarNames() + ".size(); i++) {");
-					sb.append(tempEntity.getPackagePath() + ".model." + tempEntity.getName() + " " + tempEntity.getVarName() + " = (" + tempEntity.getPackagePath() + ".model." + tempEntity.getName() + ")" + tempEntity.getVarNames() + ".get(i);");
-					sb.append("add" + tempEntity.getName() + ".add(pk, " + tempEntity.getVarName() + ".getPrimaryKey());");
-					sb.append("}");
-					sb.append("}");
-					sb.append("catch (DataAccessException dae) {");
-					sb.append("throw new SystemException(dae);");
-					sb.append("}");
-					sb.append("}");
+					sm.append("public void set" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, List " + tempEntity.getVarNames() + ") throws " + _getNoSuchEntityException(entity) + "Exception, " + tempEntity.getPackagePath() + "." + _getNoSuchEntityException(tempEntity) + "Exception, SystemException {");
+					sm.append("try {");
+					sm.append("clear" + tempEntity.getNames() + ".clear(pk);");
+					sm.append("for (int i = 0; i < " + tempEntity.getVarNames() + ".size(); i++) {");
+					sm.append(tempEntity.getPackagePath() + ".model." + tempEntity.getName() + " " + tempEntity.getVarName() + " = (" + tempEntity.getPackagePath() + ".model." + tempEntity.getName() + ")" + tempEntity.getVarNames() + ".get(i);");
+					sm.append("add" + tempEntity.getName() + ".add(pk, " + tempEntity.getVarName() + ".getPrimaryKey());");
+					sm.append("}");
+					sm.append("}");
+					sm.append("catch (DataAccessException dae) {");
+					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("}");
 				}
 			}
 		}
 
-		sb.append("protected void initDao() {");
+		sm.append("protected void initDao() {");
 
 		for (int i = 0; i < columnList.size(); i++) {
 			EntityColumn col = (EntityColumn)columnList.get(i);
@@ -3805,26 +3810,26 @@ public class ServiceBuilder {
 
 				// containsUser(String pk, String userPK)
 
-				sb.append("contains" + tempEntity.getName() + " = new Contains" + tempEntity.getName() + "(this);");
+				sm.append("contains" + tempEntity.getName() + " = new Contains" + tempEntity.getName() + "(this);");
 
 				if (col.isMappingManyToMany()) {
 
 					// addUser(String pk, String userPK)
 
-					sb.append("add" + tempEntity.getName() + " = new Add" + tempEntity.getName() + "(this);");
+					sm.append("add" + tempEntity.getName() + " = new Add" + tempEntity.getName() + "(this);");
 
 					// clearUsers(String pk)
 
-					sb.append("clear" + tempEntity.getNames() + " = new Clear" + tempEntity.getNames() + "(this);");
+					sm.append("clear" + tempEntity.getNames() + " = new Clear" + tempEntity.getNames() + "(this);");
 
 					// removeUser(String pk, String userPK)
 
-					sb.append("remove" + tempEntity.getName() + " = new Remove" + tempEntity.getName() + "(this);");
+					sm.append("remove" + tempEntity.getName() + " = new Remove" + tempEntity.getName() + "(this);");
 				}
 			}
 		}
 
-		sb.append("}");
+		sm.append("}");
 
 		for (int i = 0; i < columnList.size(); i++) {
 			EntityColumn col = (EntityColumn)columnList.get(i);
@@ -3836,21 +3841,21 @@ public class ServiceBuilder {
 
 				// containsUser(String pk, String userPK)
 
-				sb.append("protected Contains" + tempEntity.getName() + " contains" + tempEntity.getName() + ";");
+				sm.append("protected Contains" + tempEntity.getName() + " contains" + tempEntity.getName() + ";");
 
 				if (col.isMappingManyToMany()) {
 
 					// addUser(String pk, String userPK)
 
-					sb.append("protected Add" + tempEntity.getName() + " add" + tempEntity.getName() + ";");
+					sm.append("protected Add" + tempEntity.getName() + " add" + tempEntity.getName() + ";");
 
 					// clearUsers(String pk)
 
-					sb.append("protected Clear" + tempEntity.getNames() + " clear" + tempEntity.getNames() + ";");
+					sm.append("protected Clear" + tempEntity.getNames() + " clear" + tempEntity.getNames() + ";");
 
 					// removeUser(String pk, String userPK)
 
-					sb.append("protected Remove" + tempEntity.getName() + " remove" + tempEntity.getName() + ";");
+					sm.append("protected Remove" + tempEntity.getName() + " remove" + tempEntity.getName() + ";");
 				}
 			}
 		}
@@ -3881,74 +3886,74 @@ public class ServiceBuilder {
 
 				// containsUser(String pk, String userPK)
 
-				sb.append("protected class Contains" + tempEntity.getName() + " extends MappingSqlQuery {");
-				sb.append("protected Contains" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
-				sb.append("super(persistence.getDataSource(), _SQL_CONTAINS" + tempEntity.getName().toUpperCase() + ");");
-				sb.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
-				sb.append("declareParameter(new SqlParameter(Types." + tempEntitySqlType + "));");
-				sb.append("compile();");
-				sb.append("}");
-				sb.append("protected Object mapRow(ResultSet rs, int rowNumber) throws SQLException {");
-				sb.append("return new Integer(rs.getInt(\"COUNT_VALUE\"));");
-				sb.append("}");
-				sb.append("protected boolean contains(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
-				sb.append("List results = execute(new Object[] {" + pkVarNameWrapper + ", " + tempEntityPkVarNameWrapper + "});");
-				sb.append("if (results.size() > 0) {");
-				sb.append("Integer count = (Integer)results.get(0);");
-				sb.append("if (count.intValue() > 0) {");
-				sb.append("return true;");
-				sb.append("}");
-				sb.append("}");
-				sb.append("return false;");
-				sb.append("}");
-				sb.append("}");
+				sm.append("protected class Contains" + tempEntity.getName() + " extends MappingSqlQuery {");
+				sm.append("protected Contains" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
+				sm.append("super(persistence.getDataSource(), _SQL_CONTAINS" + tempEntity.getName().toUpperCase() + ");");
+				sm.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
+				sm.append("declareParameter(new SqlParameter(Types." + tempEntitySqlType + "));");
+				sm.append("compile();");
+				sm.append("}");
+				sm.append("protected Object mapRow(ResultSet rs, int rowNumber) throws SQLException {");
+				sm.append("return new Integer(rs.getInt(\"COUNT_VALUE\"));");
+				sm.append("}");
+				sm.append("protected boolean contains(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
+				sm.append("List results = execute(new Object[] {" + pkVarNameWrapper + ", " + tempEntityPkVarNameWrapper + "});");
+				sm.append("if (results.size() > 0) {");
+				sm.append("Integer count = (Integer)results.get(0);");
+				sm.append("if (count.intValue() > 0) {");
+				sm.append("return true;");
+				sm.append("}");
+				sm.append("}");
+				sm.append("return false;");
+				sm.append("}");
+				sm.append("}");
 
 				if (col.isMappingManyToMany()) {
 
 					// addUser(String pk, String userPK)
 
-					sb.append("protected class Add" + tempEntity.getName() + " extends SqlUpdate {");
-					sb.append("protected Add" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
-					sb.append("super(persistence.getDataSource(), \"INSERT INTO " + col.getMappingTable() + " (" + pkVarName + ", " + tempEntity.getPKVarName() + ") VALUES (?, ?)\");");
-					sb.append("_persistence = persistence;");
-					sb.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
-					sb.append("declareParameter(new SqlParameter(Types." + tempEntitySqlType + "));");
-					sb.append("compile();");
-					sb.append("}");
-					sb.append("protected void add(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
-					sb.append("if (!_persistence.contains" + tempEntity.getName() + ".contains(" + pkVarName + ", " + tempEntity.getPKVarName() + ")) {");
-					sb.append("update(new Object[] {" + pkVarNameWrapper + ", " + tempEntityPkVarNameWrapper + "});");
-					sb.append("}");
-					sb.append("}");
-					sb.append("private " + entity.getName() + "Persistence _persistence;");
-					sb.append("}");
+					sm.append("protected class Add" + tempEntity.getName() + " extends SqlUpdate {");
+					sm.append("protected Add" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
+					sm.append("super(persistence.getDataSource(), \"INSERT INTO " + col.getMappingTable() + " (" + pkVarName + ", " + tempEntity.getPKVarName() + ") VALUES (?, ?)\");");
+					sm.append("_persistence = persistence;");
+					sm.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
+					sm.append("declareParameter(new SqlParameter(Types." + tempEntitySqlType + "));");
+					sm.append("compile();");
+					sm.append("}");
+					sm.append("protected void add(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
+					sm.append("if (!_persistence.contains" + tempEntity.getName() + ".contains(" + pkVarName + ", " + tempEntity.getPKVarName() + ")) {");
+					sm.append("update(new Object[] {" + pkVarNameWrapper + ", " + tempEntityPkVarNameWrapper + "});");
+					sm.append("}");
+					sm.append("}");
+					sm.append("private " + entity.getName() + "Persistence _persistence;");
+					sm.append("}");
 
 					// clearUsers(String pk)
 
-					sb.append("protected class Clear" + tempEntity.getNames() + " extends SqlUpdate {");
-					sb.append("protected Clear" + tempEntity.getNames() + "(" + entity.getName() + "Persistence persistence) {");
-					sb.append("super(persistence.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ?\");");
-					sb.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
-					sb.append("compile();");
-					sb.append("}");
-					sb.append("protected void clear(" + pkClassName + " " + pkVarName + ") {");
-					sb.append("update(new Object[] {" + pkVarNameWrapper + "});");
-					sb.append("}");
-					sb.append("}");
+					sm.append("protected class Clear" + tempEntity.getNames() + " extends SqlUpdate {");
+					sm.append("protected Clear" + tempEntity.getNames() + "(" + entity.getName() + "Persistence persistence) {");
+					sm.append("super(persistence.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ?\");");
+					sm.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
+					sm.append("compile();");
+					sm.append("}");
+					sm.append("protected void clear(" + pkClassName + " " + pkVarName + ") {");
+					sm.append("update(new Object[] {" + pkVarNameWrapper + "});");
+					sm.append("}");
+					sm.append("}");
 
 					// removeUser(String pk, String userPK)
 
-					sb.append("protected class Remove" + tempEntity.getName() + " extends SqlUpdate {");
-					sb.append("protected Remove" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
-					sb.append("super(persistence.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ? AND " + tempEntity.getPKVarName() + " = ?\");");
-					sb.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
-					sb.append("declareParameter(new SqlParameter(Types." + tempEntitySqlType + "));");
-					sb.append("compile();");
-					sb.append("}");
-					sb.append("protected void remove(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
-					sb.append("update(new Object[] {" + pkVarNameWrapper + ", " + tempEntityPkVarNameWrapper + "});");
-					sb.append("}");
-					sb.append("}");
+					sm.append("protected class Remove" + tempEntity.getName() + " extends SqlUpdate {");
+					sm.append("protected Remove" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
+					sm.append("super(persistence.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ? AND " + tempEntity.getPKVarName() + " = ?\");");
+					sm.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
+					sm.append("declareParameter(new SqlParameter(Types." + tempEntitySqlType + "));");
+					sm.append("compile();");
+					sm.append("}");
+					sm.append("protected void remove(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
+					sm.append("update(new Object[] {" + pkVarNameWrapper + ", " + tempEntityPkVarNameWrapper + "});");
+					sm.append("}");
+					sm.append("}");
 				}
 			}
 		}
@@ -3963,46 +3968,46 @@ public class ServiceBuilder {
 
 					// getUsers(String pk)
 
-					sb.append("private static final String _SQL_GET" + tempEntity.getName().toUpperCase() + "S = \"SELECT {" + tempEntity.getTable() + ".*} FROM " + tempEntity.getTable() + " INNER JOIN " + col.getMappingTable() + " ON (" + col.getMappingTable() + "." + tempEntity.getPKVarName() + " = " + tempEntity.getTable() + "." + tempEntity.getPKVarName() + ") WHERE (" + col.getMappingTable() + "." + entity.getPKVarName() + " = ?)\";");
+					sm.append("private static final String _SQL_GET" + tempEntity.getName().toUpperCase() + "S = \"SELECT {" + tempEntity.getTable() + ".*} FROM " + tempEntity.getTable() + " INNER JOIN " + col.getMappingTable() + " ON (" + col.getMappingTable() + "." + tempEntity.getPKVarName() + " = " + tempEntity.getTable() + "." + tempEntity.getPKVarName() + ") WHERE (" + col.getMappingTable() + "." + entity.getPKVarName() + " = ?)\";");
 
 					// getUsersSize(String pk)
 
-					sb.append("private static final String _SQL_GET" + tempEntity.getName().toUpperCase() + "SSIZE = \"SELECT COUNT(*) AS COUNT_VALUE FROM " + col.getMappingTable() + " WHERE " + entity.getPKVarName() + " = ?\";");
+					sm.append("private static final String _SQL_GET" + tempEntity.getName().toUpperCase() + "SSIZE = \"SELECT COUNT(*) AS COUNT_VALUE FROM " + col.getMappingTable() + " WHERE " + entity.getPKVarName() + " = ?\";");
 
 					// containsUser(String pk, String userPK)
 
-					sb.append("private static final String _SQL_CONTAINS" + tempEntity.getName().toUpperCase() + " = \"SELECT COUNT(*) AS COUNT_VALUE FROM " + col.getMappingTable() + " WHERE " + entity.getPKVarName() + " = ? AND " + tempEntity.getPKVarName() + " = ?\";");
+					sm.append("private static final String _SQL_CONTAINS" + tempEntity.getName().toUpperCase() + " = \"SELECT COUNT(*) AS COUNT_VALUE FROM " + col.getMappingTable() + " WHERE " + entity.getPKVarName() + " = ? AND " + tempEntity.getPKVarName() + " = ?\";");
 				}
 				else if (col.isMappingOneToMany()) {
 
 					// getUsers(String pk)
 
-					sb.append("private static final String _SQL_GET" + tempEntity.getName().toUpperCase() + "S = \"SELECT {" + tempEntity.getTable() + ".*} FROM " + tempEntity.getTable() + " INNER JOIN " + entity.getTable() + " ON (" + entity.getTable() + "." + entity.getPKVarName() + " = " + tempEntity.getTable() + "." + entity.getPKVarName() + ") WHERE (" + entity.getTable() + "." + entity.getPKVarName() + " = ?)\";");
+					sm.append("private static final String _SQL_GET" + tempEntity.getName().toUpperCase() + "S = \"SELECT {" + tempEntity.getTable() + ".*} FROM " + tempEntity.getTable() + " INNER JOIN " + entity.getTable() + " ON (" + entity.getTable() + "." + entity.getPKVarName() + " = " + tempEntity.getTable() + "." + entity.getPKVarName() + ") WHERE (" + entity.getTable() + "." + entity.getPKVarName() + " = ?)\";");
 
 					// getUsersSize(String pk)
 
-					sb.append("private static final String _SQL_GET" + tempEntity.getName().toUpperCase() + "SSIZE = \"SELECT COUNT(*) AS COUNT_VALUE FROM " + tempEntity.getTable() + " WHERE " + entity.getPKVarName() + " = ?\";");
+					sm.append("private static final String _SQL_GET" + tempEntity.getName().toUpperCase() + "SSIZE = \"SELECT COUNT(*) AS COUNT_VALUE FROM " + tempEntity.getTable() + " WHERE " + entity.getPKVarName() + " = ?\";");
 
 					// containsUser(String pk, String userPK)
 
-					sb.append("private static final String _SQL_CONTAINS" + tempEntity.getName().toUpperCase() + " = \"SELECT COUNT(*) AS COUNT_VALUE FROM " + tempEntity.getTable() + " WHERE " + entity.getPKVarName() + " = ? AND " + tempEntity.getPKVarName() + " = ?\";");
+					sm.append("private static final String _SQL_CONTAINS" + tempEntity.getName().toUpperCase() + " = \"SELECT COUNT(*) AS COUNT_VALUE FROM " + tempEntity.getTable() + " WHERE " + entity.getPKVarName() + " = ? AND " + tempEntity.getPKVarName() + " = ?\";");
 				}
 			}
 		}
 
 		// Fields
 
-		sb.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "Persistence.class);");
+		sm.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "Persistence.class);");
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_outputPath + "/service/persistence/" + entity.getName() + "Persistence.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createPersistenceUtil(Entity entity) throws IOException {
@@ -4010,25 +4015,25 @@ public class ServiceBuilder {
 
 		JavaMethod[] methods = javaClass.getMethods();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.persistence;");
+		sm.append("package " + _packagePath + ".service.persistence;");
 
 		// Imports
 
-		sb.append("import com.liferay.portal.model.ModelListener;");
-		sb.append("import com.liferay.portal.util.PropsUtil;");
-		sb.append("import com.liferay.util.GetterUtil;");
-		sb.append("import com.liferay.util.InstancePool;");
-		sb.append("import com.liferay.util.Validator;");
-		sb.append("import org.apache.commons.logging.Log;");
-		sb.append("import org.apache.commons.logging.LogFactory;");
+		sm.append("import com.liferay.portal.model.ModelListener;");
+		sm.append("import com.liferay.portal.util.PropsUtil;");
+		sm.append("import com.liferay.util.GetterUtil;");
+		sm.append("import com.liferay.util.InstancePool;");
+		sm.append("import com.liferay.util.Validator;");
+		sm.append("import org.apache.commons.logging.Log;");
+		sm.append("import org.apache.commons.logging.LogFactory;");
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + "Util {");
+		sm.append("public class " + entity.getName() + "Util {");
 
 		// Methods
 
@@ -4038,7 +4043,7 @@ public class ServiceBuilder {
 			String methodName = javaMethod.getName();
 
 			if (!javaMethod.isConstructor()) {
-				sb.append("public static " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+				sm.append("public static " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
@@ -4051,159 +4056,159 @@ public class ServiceBuilder {
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sb.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+					sm.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(")");
+				sm.append(")");
 
 				Type[] thrownExceptions = javaMethod.getExceptions();
 
 				if (thrownExceptions.length > 0) {
-					sb.append(" throws ");
+					sm.append(" throws ");
 
 					for (int j = 0; j < thrownExceptions.length; j++) {
 						Type thrownException = thrownExceptions[j];
 
-						sb.append(thrownException.getValue());
+						sm.append(thrownException.getValue());
 
 						if ((j + 1) != thrownExceptions.length) {
-							sb.append(", ");
+							sm.append(", ");
 						}
 					}
 				}
 
-				sb.append(" {");
+				sm.append(" {");
 
 				if (methodName.equals("remove") || methodName.equals("update")) {
-					sb.append("ModelListener listener = _getListener();");
+					sm.append("ModelListener listener = _getListener();");
 
 					if (methodName.equals("update")) {
-						sb.append("boolean isNew = " + p0Name + ".isNew();");
+						sm.append("boolean isNew = " + p0Name + ".isNew();");
 					}
 
-					sb.append("if (listener != null) {");
+					sm.append("if (listener != null) {");
 
 					if (methodName.equals("remove")) {
 						if (entity.getVarName().equals(p0Name)) {
-							sb.append("listener.onBeforeRemove(" + p0Name + ");");
+							sm.append("listener.onBeforeRemove(" + p0Name + ");");
 						}
 						else {
-							sb.append("listener.onBeforeRemove(findByPrimaryKey(" + p0Name + "));");
+							sm.append("listener.onBeforeRemove(findByPrimaryKey(" + p0Name + "));");
 						}
 					}
 					else {
-						sb.append("if (isNew) {");
-						sb.append("listener.onBeforeCreate(" + p0Name + ");");
-						sb.append("}");
-						sb.append("else {");
-						sb.append("listener.onBeforeUpdate(" + p0Name + ");");
-						sb.append("}");
+						sm.append("if (isNew) {");
+						sm.append("listener.onBeforeCreate(" + p0Name + ");");
+						sm.append("}");
+						sm.append("else {");
+						sm.append("listener.onBeforeUpdate(" + p0Name + ");");
+						sm.append("}");
 					}
 
-					sb.append("}");
+					sm.append("}");
 
 					if (methodName.equals("remove") && !entity.getVarName().equals(p0Name)) {
-						sb.append(_packagePath + ".model." + entity.getName() + " " + entity.getVarName() + " = ");
+						sm.append(_packagePath + ".model." + entity.getName() + " " + entity.getVarName() + " = ");
 					}
 					else {
-						sb.append(entity.getVarName() + " = ");
+						sm.append(entity.getVarName() + " = ");
 					}
 				}
 				else {
 					if (!javaMethod.getReturns().getValue().equals("void")) {
-						sb.append("return ");
+						sm.append("return ");
 					}
 				}
 
-				sb.append("getPersistence()." + methodName + "(");
+				sm.append("getPersistence()." + methodName + "(");
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sb.append(javaParameter.getName());
+					sm.append(javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(");");
+				sm.append(");");
 
 				if (methodName.equals("remove") || methodName.equals("update")) {
-					sb.append("if (listener != null) {");
+					sm.append("if (listener != null) {");
 
 					if (methodName.equals("remove")) {
-						sb.append("listener.onAfterRemove(" + entity.getVarName() + ");");
+						sm.append("listener.onAfterRemove(" + entity.getVarName() + ");");
 					}
 					else {
-						sb.append("if (isNew) {");
-						sb.append("listener.onAfterCreate(" + entity.getVarName() + ");");
-						sb.append("}");
-						sb.append("else {");
-						sb.append("listener.onAfterUpdate(" + entity.getVarName() + ");");
-						sb.append("}");
+						sm.append("if (isNew) {");
+						sm.append("listener.onAfterCreate(" + entity.getVarName() + ");");
+						sm.append("}");
+						sm.append("else {");
+						sm.append("listener.onAfterUpdate(" + entity.getVarName() + ");");
+						sm.append("}");
 					}
 
-					sb.append("}");
+					sm.append("}");
 
-					sb.append("return " + entity.getVarName() + ";");
+					sm.append("return " + entity.getVarName() + ";");
 				}
 
-				sb.append("}");
+				sm.append("}");
 			}
 		}
 
-		sb.append("public static " + entity.getName() + "Persistence getPersistence() {");
-		sb.append("return _getUtil()._persistence;");
-		sb.append("}");
+		sm.append("public static " + entity.getName() + "Persistence getPersistence() {");
+		sm.append("return _getUtil()._persistence;");
+		sm.append("}");
 
-		sb.append("public void setPersistence(" + entity.getName() + "Persistence persistence) {");
-		sb.append("_persistence = persistence;");
-		sb.append("}");
+		sm.append("public void setPersistence(" + entity.getName() + "Persistence persistence) {");
+		sm.append("_persistence = persistence;");
+		sm.append("}");
 
-		sb.append("private static " + entity.getName() + "Util _getUtil() {");
-		sb.append("if (_util == null) {");
-		sb.append("_util = (" + entity.getName() + "Util)" + _beanLocatorUtilClassName + ".locate(_UTIL);");
-		sb.append("}");
-		sb.append("return _util;");
-		sb.append("}");
+		sm.append("private static " + entity.getName() + "Util _getUtil() {");
+		sm.append("if (_util == null) {");
+		sm.append("_util = (" + entity.getName() + "Util)" + _beanLocatorUtilClassName + ".locate(_UTIL);");
+		sm.append("}");
+		sm.append("return _util;");
+		sm.append("}");
 
-		sb.append("private static ModelListener _getListener() {");
-		sb.append("if (Validator.isNotNull(_LISTENER)) {");
-		sb.append("try {");
-		sb.append("return (ModelListener)Class.forName(_LISTENER).newInstance();");
-		sb.append("}");
-		sb.append("catch (Exception e) {");
-		sb.append("_log.error(e);");
-		sb.append("}");
-		sb.append("}");
-		sb.append("return null;");
-		sb.append("}");
+		sm.append("private static ModelListener _getListener() {");
+		sm.append("if (Validator.isNotNull(_LISTENER)) {");
+		sm.append("try {");
+		sm.append("return (ModelListener)Class.forName(_LISTENER).newInstance();");
+		sm.append("}");
+		sm.append("catch (Exception e) {");
+		sm.append("_log.error(e);");
+		sm.append("}");
+		sm.append("}");
+		sm.append("return null;");
+		sm.append("}");
 
 		// Fields
 
-		sb.append("private static final String _UTIL = " + entity.getName() + "Util.class.getName();");
-		sb.append("private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(\"value.object.listener." + _packagePath + ".model." + entity.getName() + "\"));");
+		sm.append("private static final String _UTIL = " + entity.getName() + "Util.class.getName();");
+		sm.append("private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(\"value.object.listener." + _packagePath + ".model." + entity.getName() + "\"));");
 
-		sb.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "Util.class);");
+		sm.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "Util.class);");
 
-		sb.append("private static " + entity.getName() + "Util _util;");
+		sm.append("private static " + entity.getName() + "Util _util;");
 
-		sb.append("private " + entity.getName() + "Persistence _persistence;");
+		sm.append("private " + entity.getName() + "Persistence _persistence;");
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_outputPath + "/service/persistence/" + entity.getName() + "Util.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createPool(Entity entity) throws IOException {
@@ -4235,15 +4240,15 @@ public class ServiceBuilder {
 			}
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service;");
+		sm.append("package " + _packagePath + ".service;");
 
 		// Interface declaration
 
-		sb.append("public interface " + entity.getName() + _getSessionTypeName(sessionType) + "Service {");
+		sm.append("public interface " + entity.getName() + _getSessionTypeName(sessionType) + "Service {");
 
 		// Methods
 
@@ -4253,21 +4258,21 @@ public class ServiceBuilder {
 			String methodName = javaMethod.getName();
 
 			if (!javaMethod.isConstructor() && javaMethod.isPublic() && _isCustomMethod(javaMethod)) {
-				sb.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+				sm.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sb.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+					sm.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(")");
+				sm.append(")");
 
 				Type[] thrownExceptions = javaMethod.getExceptions();
 
@@ -4284,32 +4289,32 @@ public class ServiceBuilder {
 				}
 
 				if (newExceptions.size() > 0) {
-					sb.append(" throws ");
+					sm.append(" throws ");
 
 					Iterator itr = newExceptions.iterator();
 
 					while (itr.hasNext()) {
-						sb.append(itr.next());
+						sm.append(itr.next());
 
 						if (itr.hasNext()) {
-							sb.append(", ");
+							sm.append(", ");
 						}
 					}
 				}
 
-				sb.append(";");
+				sm.append(";");
 			}
 		}
 
 		// Interface close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_serviceOutputPath + "/service/" + entity.getName() + _getSessionTypeName(sessionType) + "Service.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 
 		ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "Service.java");
 
@@ -4321,76 +4326,76 @@ public class ServiceBuilder {
 	}
 
 	private void _createServiceBaseImpl(Entity entity) throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.base;");
+		sm.append("package " + _packagePath + ".service.base;");
 
 		// Imports
 
-		sb.append("import " + _packagePath + ".service." + entity.getName() + "LocalService;");
-		sb.append("import " + _packagePath + ".service.persistence." + entity.getName() + "Util;");
-		sb.append("import com.liferay.portal.SystemException;");
-		sb.append("import com.liferay.portal.kernel.dao.DynamicQueryInitializer;");
-		sb.append("import java.util.List;");
+		sm.append("import " + _packagePath + ".service." + entity.getName() + "LocalService;");
+		sm.append("import " + _packagePath + ".service.persistence." + entity.getName() + "Util;");
+		sm.append("import com.liferay.portal.SystemException;");
+		sm.append("import com.liferay.portal.kernel.dao.DynamicQueryInitializer;");
+		sm.append("import java.util.List;");
 
 		// Class declaration
 
-		sb.append("public abstract class " + entity.getName() + "LocalServiceBaseImpl implements " + entity.getName() + "LocalService {");
+		sm.append("public abstract class " + entity.getName() + "LocalServiceBaseImpl implements " + entity.getName() + "LocalService {");
 
 		// Methods
 
-		sb.append("public List dynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {");
-		sb.append("return " + entity.getName() + "Util.findWithDynamicQuery(queryInitializer);");
-		sb.append("}");
+		sm.append("public List dynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {");
+		sm.append("return " + entity.getName() + "Util.findWithDynamicQuery(queryInitializer);");
+		sm.append("}");
 
-		sb.append("public List dynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {");
-		sb.append("return " + entity.getName() + "Util.findWithDynamicQuery(queryInitializer, begin, end);");
-		sb.append("}");
+		sm.append("public List dynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {");
+		sm.append("return " + entity.getName() + "Util.findWithDynamicQuery(queryInitializer, begin, end);");
+		sm.append("}");
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_outputPath + "/service/base/" + entity.getName() + "LocalServiceBaseImpl.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createServiceEJB(Entity entity, int sessionType) throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.ejb;");
+		sm.append("package " + _packagePath + ".service.ejb;");
 
 		// Imports
 
-		sb.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
+		sm.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
 
 		if (sessionType == _LOCAL) {
-			sb.append("import javax.ejb.EJBLocalObject;");
+			sm.append("import javax.ejb.EJBLocalObject;");
 		}
 		else {
-			sb.append("import javax.ejb.EJBObject;");
+			sm.append("import javax.ejb.EJBObject;");
 		}
 
 		// Interface declaration
 
-		sb.append("public interface " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB extends EJB" + (sessionType == _LOCAL ? "Local" : "") + "Object, " + entity.getName() + _getSessionTypeName(sessionType) + "Service {");
+		sm.append("public interface " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB extends EJB" + (sessionType == _LOCAL ? "Local" : "") + "Object, " + entity.getName() + _getSessionTypeName(sessionType) + "Service {");
 
 		// Interface close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_outputPath + "/service/ejb/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createServiceEJBImpl(Entity entity, int sessionType) throws IOException {
@@ -4398,31 +4403,31 @@ public class ServiceBuilder {
 
 		JavaMethod[] methods = javaClass.getMethods();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.ejb;");
+		sm.append("package " + _packagePath + ".service.ejb;");
 
 		// Imports
 
-		sb.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
+		sm.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
 
 		if (methods.length > 0) {
-			sb.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory;");
+			sm.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory;");
 		}
 
-		sb.append("import javax.ejb.CreateException;");
-		sb.append("import javax.ejb.SessionContext;");
-		sb.append("import javax.ejb.SessionBean;");
+		sm.append("import javax.ejb.CreateException;");
+		sm.append("import javax.ejb.SessionContext;");
+		sm.append("import javax.ejb.SessionBean;");
 
 		if (sessionType == _REMOTE) {
-			sb.append("import com.liferay.portal.service.impl.PrincipalSessionBean;");
+			sm.append("import com.liferay.portal.service.impl.PrincipalSessionBean;");
 		}
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl implements " + entity.getName() + _getSessionTypeName(sessionType) + "Service, SessionBean {");
+		sm.append("public class " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl implements " + entity.getName() + _getSessionTypeName(sessionType) + "Service, SessionBean {");
 
 		// Methods
 
@@ -4432,21 +4437,21 @@ public class ServiceBuilder {
 			String methodName = javaMethod.getName();
 
 			if (!javaMethod.isConstructor() && javaMethod.isPublic() && _isCustomMethod(javaMethod)) {
-				sb.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+				sm.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sb.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+					sm.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(")");
+				sm.append(")");
 
 				Type[] thrownExceptions = javaMethod.getExceptions();
 
@@ -4459,135 +4464,135 @@ public class ServiceBuilder {
 				}
 
 				if (newExceptions.size() > 0) {
-					sb.append(" throws ");
+					sm.append(" throws ");
 
 					Iterator itr = newExceptions.iterator();
 
 					while (itr.hasNext()) {
-						sb.append(itr.next());
+						sm.append(itr.next());
 
 						if (itr.hasNext()) {
-							sb.append(", ");
+							sm.append(", ");
 						}
 					}
 				}
 
-				sb.append("{");
+				sm.append("{");
 
 				if (sessionType == _REMOTE) {
-					sb.append("PrincipalSessionBean.setThreadValues(_sc);");
+					sm.append("PrincipalSessionBean.setThreadValues(_sc);");
 				}
 
 				if (!javaMethod.getReturns().getValue().equals("void")) {
-					sb.append("return ");
+					sm.append("return ");
 				}
 
-				sb.append(entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.getTxImpl()." + methodName + "(");
+				sm.append(entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.getTxImpl()." + methodName + "(");
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sb.append(javaParameter.getName());
+					sm.append(javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(");");
-				sb.append("}");
+				sm.append(");");
+				sm.append("}");
 			}
 		}
 
-		sb.append("public void ejbCreate() throws CreateException {");
-		sb.append("}");
+		sm.append("public void ejbCreate() throws CreateException {");
+		sm.append("}");
 
-		sb.append("public void ejbRemove() {");
-		sb.append("}");
+		sm.append("public void ejbRemove() {");
+		sm.append("}");
 
-		sb.append("public void ejbActivate() {");
-		sb.append("}");
+		sm.append("public void ejbActivate() {");
+		sm.append("}");
 
-		sb.append("public void ejbPassivate() {");
-		sb.append("}");
+		sm.append("public void ejbPassivate() {");
+		sm.append("}");
 
-		sb.append("public SessionContext getSessionContext() {");
-		sb.append("return _sc;");
-		sb.append("}");
+		sm.append("public SessionContext getSessionContext() {");
+		sm.append("return _sc;");
+		sm.append("}");
 
-		sb.append("public void setSessionContext(SessionContext sc) {");
-		sb.append("_sc = sc;");
-		sb.append("}");
+		sm.append("public void setSessionContext(SessionContext sc) {");
+		sm.append("_sc = sc;");
+		sm.append("}");
 
 		// Fields
 
-		sb.append("private SessionContext _sc;");
+		sm.append("private SessionContext _sc;");
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_outputPath + "/service/ejb/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createServiceFactory(Entity entity, int sessionType) throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service;");
+		sm.append("package " + _packagePath + ".service;");
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory {");
+		sm.append("public class " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory {");
 
 		// Methods
 
-		sb.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getService() {");
-		sb.append("return _getFactory()._service;");
-		sb.append("}");
+		sm.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getService() {");
+		sm.append("return _getFactory()._service;");
+		sm.append("}");
 
-		sb.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getTxImpl() {");
-		sb.append("if (_txImpl == null) {");
-		sb.append("_txImpl = (" + entity.getName() + _getSessionTypeName(sessionType) + "Service)" + _beanLocatorUtilClassName + ".locate(_TX_IMPL);");
-		sb.append("}");
-		sb.append("return _txImpl;");
-		sb.append("}");
+		sm.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getTxImpl() {");
+		sm.append("if (_txImpl == null) {");
+		sm.append("_txImpl = (" + entity.getName() + _getSessionTypeName(sessionType) + "Service)" + _beanLocatorUtilClassName + ".locate(_TX_IMPL);");
+		sm.append("}");
+		sm.append("return _txImpl;");
+		sm.append("}");
 
-		sb.append("public void setService(" + entity.getName() + _getSessionTypeName(sessionType) + "Service service) {");
-		sb.append("_service = service;");
-		sb.append("}");
+		sm.append("public void setService(" + entity.getName() + _getSessionTypeName(sessionType) + "Service service) {");
+		sm.append("_service = service;");
+		sm.append("}");
 
-		sb.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory _getFactory() {");
-		sb.append("if (_factory == null) {");
-		sb.append("_factory = (" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory)" + _beanLocatorUtilClassName + ".locate(_FACTORY);");
-		sb.append("}");
-		sb.append("return _factory;");
-		sb.append("}");
+		sm.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory _getFactory() {");
+		sm.append("if (_factory == null) {");
+		sm.append("_factory = (" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory)" + _beanLocatorUtilClassName + ".locate(_FACTORY);");
+		sm.append("}");
+		sm.append("return _factory;");
+		sm.append("}");
 
 		// Fields
 
-		sb.append("private static final String _FACTORY = " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.class.getName();");
-		sb.append("private static final String _TX_IMPL = " + entity.getName() + _getSessionTypeName(sessionType) + "Service.class.getName() + \".transaction\";");
+		sm.append("private static final String _FACTORY = " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.class.getName();");
+		sm.append("private static final String _TX_IMPL = " + entity.getName() + _getSessionTypeName(sessionType) + "Service.class.getName() + \".transaction\";");
 
-		sb.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory _factory;");
-		sb.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "Service _txImpl;");
+		sm.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory _factory;");
+		sm.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "Service _txImpl;");
 
-		sb.append("private " + entity.getName() + _getSessionTypeName(sessionType) + "Service _service;");
+		sm.append("private " + entity.getName() + _getSessionTypeName(sessionType) + "Service _service;");
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_serviceOutputPath + "/service/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 
 		ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.java");
 
@@ -4599,47 +4604,47 @@ public class ServiceBuilder {
 	}
 
 	private void _createServiceHome(Entity entity, int sessionType) throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.ejb;");
+		sm.append("package " + _packagePath + ".service.ejb;");
 
 		// Imports
 
-		sb.append("import javax.ejb.CreateException;");
+		sm.append("import javax.ejb.CreateException;");
 
 		if (sessionType == _LOCAL) {
-			sb.append("import javax.ejb.EJBLocalHome;");
+			sm.append("import javax.ejb.EJBLocalHome;");
 		}
 		else {
-			sb.append("import java.rmi.RemoteException;");
-			sb.append("import javax.ejb.EJBHome;");
+			sm.append("import java.rmi.RemoteException;");
+			sm.append("import javax.ejb.EJBHome;");
 		}
 
 		// Interface declaration
 
-		sb.append("public interface " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome extends EJB" + (sessionType == _LOCAL ? "Local" : "") + "Home {");
+		sm.append("public interface " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome extends EJB" + (sessionType == _LOCAL ? "Local" : "") + "Home {");
 
 		// Create method
 
-		sb.append("public " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB create() throws CreateException");
+		sm.append("public " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB create() throws CreateException");
 
 		if (sessionType != _LOCAL) {
-			sb.append(", RemoteException");
+			sm.append(", RemoteException");
 		}
 
-		sb.append(";");
+		sm.append(";");
 
 		// Interface close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_outputPath + "/service/ejb/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createServiceHttp(Entity entity) throws IOException {
@@ -4647,34 +4652,34 @@ public class ServiceBuilder {
 
 		JavaMethod[] methods = javaClass.getMethods();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.http;");
+		sm.append("package " + _packagePath + ".service.http;");
 
 		// Imports
 
 		if (_hasHttpMethods(javaClass)) {
-			sb.append("import " + _packagePath + ".service." + entity.getName() + "ServiceUtil;");
+			sm.append("import " + _packagePath + ".service." + entity.getName() + "ServiceUtil;");
 		}
 
-		sb.append("import com.liferay.portal.kernel.log.Log;");
-		sb.append("import com.liferay.portal.kernel.log.LogFactoryUtil;");
-		sb.append("import com.liferay.portal.kernel.util.BooleanWrapper;");
-		sb.append("import com.liferay.portal.kernel.util.DoubleWrapper;");
-		sb.append("import com.liferay.portal.kernel.util.FloatWrapper;");
-		sb.append("import com.liferay.portal.kernel.util.IntegerWrapper;");
-		sb.append("import com.liferay.portal.kernel.util.LongWrapper;");
-		sb.append("import com.liferay.portal.kernel.util.MethodWrapper;");
-		sb.append("import com.liferay.portal.kernel.util.NullWrapper;");
-		sb.append("import com.liferay.portal.kernel.util.ShortWrapper;");
-		sb.append("import com.liferay.portal.security.auth.HttpPrincipal;");
-		sb.append("import com.liferay.portal.service.http.TunnelUtil;");
+		sm.append("import com.liferay.portal.kernel.log.Log;");
+		sm.append("import com.liferay.portal.kernel.log.LogFactoryUtil;");
+		sm.append("import com.liferay.portal.kernel.util.BooleanWrapper;");
+		sm.append("import com.liferay.portal.kernel.util.DoubleWrapper;");
+		sm.append("import com.liferay.portal.kernel.util.FloatWrapper;");
+		sm.append("import com.liferay.portal.kernel.util.IntegerWrapper;");
+		sm.append("import com.liferay.portal.kernel.util.LongWrapper;");
+		sm.append("import com.liferay.portal.kernel.util.MethodWrapper;");
+		sm.append("import com.liferay.portal.kernel.util.NullWrapper;");
+		sm.append("import com.liferay.portal.kernel.util.ShortWrapper;");
+		sm.append("import com.liferay.portal.security.auth.HttpPrincipal;");
+		sm.append("import com.liferay.portal.service.http.TunnelUtil;");
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + "ServiceHttp {");
+		sm.append("public class " + entity.getName() + "ServiceHttp {");
 
 		// Methods
 
@@ -4687,7 +4692,7 @@ public class ServiceBuilder {
 				Type returnType = javaMethod.getReturns();
 				String returnTypeName = returnType.getValue() + _getDimensions(returnType);
 
-				sb.append("public static " + returnTypeName + " " + methodName + "(HttpPrincipal httpPrincipal");
+				sm.append("public static " + returnTypeName + " " + methodName + "(HttpPrincipal httpPrincipal");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
@@ -4695,17 +4700,17 @@ public class ServiceBuilder {
 					JavaParameter javaParameter = parameters[j];
 
 					if (j == 0) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 
-					sb.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+					sm.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(")");
+				sm.append(")");
 
 				Type[] thrownExceptions = javaMethod.getExceptions();
 
@@ -4720,21 +4725,21 @@ public class ServiceBuilder {
 				newExceptions.add("com.liferay.portal.SystemException");
 
 				if (newExceptions.size() > 0) {
-					sb.append(" throws ");
+					sm.append(" throws ");
 
 					Iterator itr = newExceptions.iterator();
 
 					while (itr.hasNext()) {
-						sb.append(itr.next());
+						sm.append(itr.next());
 
 						if (itr.hasNext()) {
-							sb.append(", ");
+							sm.append(", ");
 						}
 					}
 				}
 
-				sb.append("{");
-				sb.append("try {");
+				sm.append("{");
+				sm.append("try {");
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
@@ -4743,170 +4748,170 @@ public class ServiceBuilder {
 						javaParameter.getType().getValue() +
 							_getDimensions(javaParameter.getType());
 
-					sb.append("Object paramObj" + j + " = ");
+					sm.append("Object paramObj" + j + " = ");
 
 					if (parameterTypeName.equals("boolean")) {
-						sb.append("new BooleanWrapper(" + javaParameter.getName() + ");");
+						sm.append("new BooleanWrapper(" + javaParameter.getName() + ");");
 					}
 					else if (parameterTypeName.equals("double")) {
-						sb.append("new DoubleWrapper(" + javaParameter.getName() + ");");
+						sm.append("new DoubleWrapper(" + javaParameter.getName() + ");");
 					}
 					else if (parameterTypeName.equals("float")) {
-						sb.append("new FloatWrapper(" + javaParameter.getName() + ");");
+						sm.append("new FloatWrapper(" + javaParameter.getName() + ");");
 					}
 					else if (parameterTypeName.equals("int")) {
-						sb.append("new IntegerWrapper(" + javaParameter.getName() + ");");
+						sm.append("new IntegerWrapper(" + javaParameter.getName() + ");");
 					}
 					else if (parameterTypeName.equals("long")) {
-						sb.append("new LongWrapper(" + javaParameter.getName() + ");");
+						sm.append("new LongWrapper(" + javaParameter.getName() + ");");
 					}
 					else if (parameterTypeName.equals("short")) {
-						sb.append("new ShortWrapper(" + javaParameter.getName() + ");");
+						sm.append("new ShortWrapper(" + javaParameter.getName() + ");");
 					}
 					else {
-						sb.append(javaParameter.getName() + ";");
+						sm.append(javaParameter.getName() + ";");
 
-						sb.append("if (" + javaParameter.getName() + " == null) {");
-						sb.append("paramObj" + j + " = new NullWrapper(\"" + _getClassName(javaParameter.getType()) + "\");");
-						sb.append("}");
+						sm.append("if (" + javaParameter.getName() + " == null) {");
+						sm.append("paramObj" + j + " = new NullWrapper(\"" + _getClassName(javaParameter.getType()) + "\");");
+						sm.append("}");
 					}
 				}
 
-				sb.append("MethodWrapper methodWrapper = new MethodWrapper(");
-				sb.append(entity.getName() + "ServiceUtil.class.getName(),");
-				sb.append("\"" + methodName + "\",");
+				sm.append("MethodWrapper methodWrapper = new MethodWrapper(");
+				sm.append(entity.getName() + "ServiceUtil.class.getName(),");
+				sm.append("\"" + methodName + "\",");
 
 				if (parameters.length == 0) {
-					sb.append("new Object[0]);");
+					sm.append("new Object[0]);");
 				}
 				else {
-					sb.append("new Object[] {");
+					sm.append("new Object[] {");
 
 					for (int j = 0; j < parameters.length; j++) {
-						sb.append("paramObj" + j);
+						sm.append("paramObj" + j);
 
 						if ((j + 1) != parameters.length) {
-							sb.append(", ");
+							sm.append(", ");
 						}
 					}
 
-					sb.append("});");
+					sm.append("});");
 				}
 
 				if (!returnTypeName.equals("void")) {
-					sb.append("Object returnObj = null;");
+					sm.append("Object returnObj = null;");
 				}
 
-				sb.append("try {");
+				sm.append("try {");
 
 				if (!returnTypeName.equals("void")) {
-					sb.append("returnObj =");
+					sm.append("returnObj =");
 				}
 
-				sb.append("TunnelUtil.invoke(httpPrincipal, methodWrapper);");
-				sb.append("}");
-				sb.append("catch (Exception e) {");
+				sm.append("TunnelUtil.invoke(httpPrincipal, methodWrapper);");
+				sm.append("}");
+				sm.append("catch (Exception e) {");
 
 				Iterator itr = newExceptions.iterator();
 
 				while (itr.hasNext()) {
 					String exceptionType = (String)itr.next();
 
-					sb.append("if (e instanceof " + exceptionType + ") {");
-					sb.append("throw (" + exceptionType + ")e;");
-					sb.append("}");
+					sm.append("if (e instanceof " + exceptionType + ") {");
+					sm.append("throw (" + exceptionType + ")e;");
+					sm.append("}");
 				}
 
-				sb.append("throw new com.liferay.portal.SystemException(e);");
-				sb.append("}");
+				sm.append("throw new com.liferay.portal.SystemException(e);");
+				sm.append("}");
 
 				if (!returnTypeName.equals("void")) {
 					if (returnTypeName.equals("boolean")) {
-						sb.append("return ((Boolean)returnObj).booleanValue();");
+						sm.append("return ((Boolean)returnObj).booleanValue();");
 					}
 					else if (returnTypeName.equals("double")) {
-						sb.append("return ((Double)returnObj).doubleValue();");
+						sm.append("return ((Double)returnObj).doubleValue();");
 					}
 					else if (returnTypeName.equals("float")) {
-						sb.append("return ((Float)returnObj).floatValue();");
+						sm.append("return ((Float)returnObj).floatValue();");
 					}
 					else if (returnTypeName.equals("int")) {
-						sb.append("return ((Integer)returnObj).intValue();");
+						sm.append("return ((Integer)returnObj).intValue();");
 					}
 					else if (returnTypeName.equals("long")) {
-						sb.append("return ((Long)returnObj).longValue();");
+						sm.append("return ((Long)returnObj).longValue();");
 					}
 					else if (returnTypeName.equals("short")) {
-						sb.append("return ((Short)returnObj).shortValue();");
+						sm.append("return ((Short)returnObj).shortValue();");
 					}
 					else {
-						sb.append("return (" + returnTypeName + ")returnObj;");
+						sm.append("return (" + returnTypeName + ")returnObj;");
 					}
 				}
 
-				sb.append("}");
-				sb.append("catch (com.liferay.portal.SystemException se) {");
-				sb.append("_log.error(se, se);");
-				sb.append("throw se;");
-				sb.append("}");
-				sb.append("}");
+				sm.append("}");
+				sm.append("catch (com.liferay.portal.SystemException se) {");
+				sm.append("_log.error(se, se);");
+				sm.append("throw se;");
+				sm.append("}");
+				sm.append("}");
 			}
 		}
 
 		// Fields
 
-		if (sb.indexOf("_log.") != -1) {
-			sb.append("private static Log _log = LogFactoryUtil.getLog(" + entity.getName() + "ServiceHttp.class);");
+		if (sm.indexOf("_log.") != -1) {
+			sm.append("private static Log _log = LogFactoryUtil.getLog(" + entity.getName() + "ServiceHttp.class);");
 		}
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_outputPath + "/service/http/" + entity.getName() + "ServiceHttp.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createServiceImpl(Entity entity, int sessionType) throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.impl;");
+		sm.append("package " + _packagePath + ".service.impl;");
 
 		// Imports
 
-		sb.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
+		sm.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
 
 		if (sessionType == _REMOTE) {
-			sb.append("import com.liferay.portal.service.impl.PrincipalBean;");
+			sm.append("import com.liferay.portal.service.impl.PrincipalBean;");
 		}
 		else {
-			sb.append("import " + _packagePath + ".service.base." + entity.getName() + "LocalServiceBaseImpl;");
+			sm.append("import " + _packagePath + ".service.base." + entity.getName() + "LocalServiceBaseImpl;");
 		}
 
 		// Class declaration
 
 		if (sessionType == _REMOTE) {
-			sb.append("public class " + entity.getName() + "ServiceImpl extends PrincipalBean implements " + entity.getName() + "Service {");
+			sm.append("public class " + entity.getName() + "ServiceImpl extends PrincipalBean implements " + entity.getName() + "Service {");
 		}
 		else {
-			sb.append("public class " + entity.getName() + "LocalServiceImpl extends " + entity.getName() + "LocalServiceBaseImpl {");
+			sm.append("public class " + entity.getName() + "LocalServiceImpl extends " + entity.getName() + "LocalServiceBaseImpl {");
 		}
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_outputPath + "/service/impl/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl.java");
 
 		if (!ejbFile.exists()) {
-			writeFile(ejbFile, sb.toString());
+			writeFile(ejbFile, sm.toString());
 		}
 	}
 
@@ -4915,24 +4920,24 @@ public class ServiceBuilder {
 
 		JavaMethod[] methods = javaClass.getMethods();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.http;");
+		sm.append("package " + _packagePath + ".service.http;");
 
 		// Imports
 
 		if (_hasSoapMethods(javaClass)) {
-			sb.append("import " + _packagePath + ".service." + entity.getName() + "ServiceUtil;");
+			sm.append("import " + _packagePath + ".service." + entity.getName() + "ServiceUtil;");
 		}
 
-		sb.append("import org.json.JSONArray;");
-		sb.append("import org.json.JSONObject;");
+		sm.append("import org.json.JSONArray;");
+		sm.append("import org.json.JSONObject;");
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + "ServiceJSON {");
+		sm.append("public class " + entity.getName() + "ServiceJSON {");
 
 		// Methods
 
@@ -4948,24 +4953,24 @@ public class ServiceBuilder {
 				String extendedModelName = _packagePath + ".model." + entity.getName();
 				String soapModelName = "JSONObject";
 
-				sb.append("public static ");
+				sm.append("public static ");
 
 				if (returnValueName.equals(extendedModelName)) {
-					sb.append(soapModelName + returnValueDimension);
+					sm.append(soapModelName + returnValueDimension);
 				}
 				else if (returnValueName.equals("java.util.List")) {
 					if (entity.hasColumns()) {
-						sb.append("JSONArray");
+						sm.append("JSONArray");
 					}
 					else {
-						sb.append("java.util.List");
+						sm.append("java.util.List");
 					}
 				}
 				else {
-					sb.append(returnValueName + returnValueDimension);
+					sm.append(returnValueName + returnValueDimension);
 				}
 
-				sb.append(" " + methodName + "(");
+				sm.append(" " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
@@ -4978,14 +4983,14 @@ public class ServiceBuilder {
 						parameterTypeName = "String";
 					}
 
-					sb.append(parameterTypeName + " " + javaParameter.getName());
+					sm.append(parameterTypeName + " " + javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(")");
+				sm.append(")");
 
 				Type[] thrownExceptions = javaMethod.getExceptions();
 
@@ -5000,26 +5005,26 @@ public class ServiceBuilder {
 				newExceptions.add("java.rmi.RemoteException");
 
 				if (newExceptions.size() > 0) {
-					sb.append(" throws ");
+					sm.append(" throws ");
 
 					Iterator itr = newExceptions.iterator();
 
 					while (itr.hasNext()) {
-						sb.append(itr.next());
+						sm.append(itr.next());
 
 						if (itr.hasNext()) {
-							sb.append(", ");
+							sm.append(", ");
 						}
 					}
 				}
 
-				sb.append("{");
+				sm.append("{");
 
 				if (!returnValueName.equals("void")) {
-					sb.append(returnValueName + returnValueDimension + " returnValue = ");
+					sm.append(returnValueName + returnValueDimension + " returnValue = ");
 				}
 
-				sb.append(entity.getName() + "ServiceUtil." + methodName + "(");
+				sm.append(entity.getName() + "ServiceUtil." + methodName + "(");
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
@@ -5029,120 +5034,120 @@ public class ServiceBuilder {
 							_getDimensions(javaParameter.getType());
 
 					if (parameterTypeName.equals("java.util.Locale")) {
-						sb.append("new java.util.Locale(");
+						sm.append("new java.util.Locale(");
 					}
 
-					sb.append(javaParameter.getName());
+					sm.append(javaParameter.getName());
 
 					if (parameterTypeName.equals("java.util.Locale")) {
-						sb.append(")");
+						sm.append(")");
 					}
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(");");
+				sm.append(");");
 
 				if (!returnValueName.equals("void")) {
 					if (returnValueName.equals(extendedModelName)) {
-						sb.append("return " + entity.getName() + "JSONSerializer.toJSONObject(returnValue);");
+						sm.append("return " + entity.getName() + "JSONSerializer.toJSONObject(returnValue);");
 					}
 					else if (entity.hasColumns() && returnValueName.equals("java.util.List")) {
-						sb.append("return " + entity.getName() + "JSONSerializer.toJSONArray(returnValue);");
+						sm.append("return " + entity.getName() + "JSONSerializer.toJSONArray(returnValue);");
 					}
 					else {
-						sb.append("return returnValue;");
+						sm.append("return returnValue;");
 					}
 				}
 
-				sb.append("}");
+				sm.append("}");
 			}
 		}
 
 		// Fields
 
-		if (sb.indexOf("_log.") != -1) {
-			sb.append("private static Log _log = LogFactoryUtil.getLog(" + entity.getName() + "ServiceJSON.class);");
+		if (sm.indexOf("_log.") != -1) {
+			sm.append("private static Log _log = LogFactoryUtil.getLog(" + entity.getName() + "ServiceJSON.class);");
 		}
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_outputPath + "/service/http/" + entity.getName() + "ServiceJSON.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createServiceJSONSerializer(Entity entity) throws IOException {
 		List regularColList = entity.getRegularColList();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.http;");
+		sm.append("package " + _packagePath + ".service.http;");
 
 		// Imports
 
-		sb.append("import " + _packagePath + ".model." + entity.getName() + ";");
-		sb.append("import com.liferay.portal.kernel.util.StringPool;");
-		sb.append("import java.util.Date;");
-		sb.append("import java.util.List;");
-		sb.append("import org.json.JSONArray;");
-		sb.append("import org.json.JSONObject;");
+		sm.append("import " + _packagePath + ".model." + entity.getName() + ";");
+		sm.append("import com.liferay.portal.kernel.util.StringPool;");
+		sm.append("import java.util.Date;");
+		sm.append("import java.util.List;");
+		sm.append("import org.json.JSONArray;");
+		sm.append("import org.json.JSONObject;");
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + "JSONSerializer {");
+		sm.append("public class " + entity.getName() + "JSONSerializer {");
 
 		// Methods
 
-		sb.append("public static JSONObject toJSONObject(" + entity.getName() + " model) {");
-		sb.append("JSONObject jsonObj = new JSONObject();");
+		sm.append("public static JSONObject toJSONObject(" + entity.getName() + " model) {");
+		sm.append("JSONObject jsonObj = new JSONObject();");
 
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = (EntityColumn)regularColList.get(i);
 
 			if (col.isPrimitiveType()) {
-				sb.append("jsonObj.put(\"" + col.getName() + "\", model.get" + col.getMethodName() + "());");
+				sm.append("jsonObj.put(\"" + col.getName() + "\", model.get" + col.getMethodName() + "());");
 			}
 			else {
-				sb.append(col.getType() + " " + col.getName() + " = model.get" + col.getMethodName() + "();");
-				sb.append("if (" + col.getName() + " == null) {");
-				sb.append("jsonObj.put(\"" + col.getName() + "\", StringPool.BLANK);");
-				sb.append("}");
-				sb.append("else {");
-				sb.append("jsonObj.put(\"" + col.getName() + "\", " + col.getName() + ".toString());");
-				sb.append("}");
+				sm.append(col.getType() + " " + col.getName() + " = model.get" + col.getMethodName() + "();");
+				sm.append("if (" + col.getName() + " == null) {");
+				sm.append("jsonObj.put(\"" + col.getName() + "\", StringPool.BLANK);");
+				sm.append("}");
+				sm.append("else {");
+				sm.append("jsonObj.put(\"" + col.getName() + "\", " + col.getName() + ".toString());");
+				sm.append("}");
 			}
 		}
 
-		sb.append("return jsonObj;");
-		sb.append("}");
+		sm.append("return jsonObj;");
+		sm.append("}");
 
-		sb.append("public static JSONArray toJSONArray(List models) {");
-		sb.append("JSONArray jsonArray = new JSONArray();");
-		sb.append("for (int i = 0; i < models.size(); i++) {");
-		sb.append(entity.getName() + " model = (" + entity.getName() + ")models.get(i);");
-		sb.append("jsonArray.put(toJSONObject(model));");
-		sb.append("}");
-		sb.append("return jsonArray;");
-		sb.append("}");
+		sm.append("public static JSONArray toJSONArray(List models) {");
+		sm.append("JSONArray jsonArray = new JSONArray();");
+		sm.append("for (int i = 0; i < models.size(); i++) {");
+		sm.append(entity.getName() + " model = (" + entity.getName() + ")models.get(i);");
+		sm.append("jsonArray.put(toJSONObject(model));");
+		sm.append("}");
+		sm.append("return jsonArray;");
+		sm.append("}");
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_outputPath + "/service/http/" + entity.getName() + "JSONSerializer.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createServiceSoap(Entity entity) throws IOException {
@@ -5150,25 +5155,25 @@ public class ServiceBuilder {
 
 		JavaMethod[] methods = javaClass.getMethods();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.http;");
+		sm.append("package " + _packagePath + ".service.http;");
 
 		// Imports
 
 		if (_hasSoapMethods(javaClass)) {
-			sb.append("import " + _packagePath + ".service." + entity.getName() + "ServiceUtil;");
+			sm.append("import " + _packagePath + ".service." + entity.getName() + "ServiceUtil;");
 		}
 
-		sb.append("import com.liferay.portal.kernel.log.Log;");
-		sb.append("import com.liferay.portal.kernel.log.LogFactoryUtil;");
-		sb.append("import java.rmi.RemoteException;");
+		sm.append("import com.liferay.portal.kernel.log.Log;");
+		sm.append("import com.liferay.portal.kernel.log.LogFactoryUtil;");
+		sm.append("import java.rmi.RemoteException;");
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + "ServiceSoap {");
+		sm.append("public class " + entity.getName() + "ServiceSoap {");
 
 		// Methods
 
@@ -5184,24 +5189,24 @@ public class ServiceBuilder {
 				String extendedModelName = _packagePath + ".model." + entity.getName();
 				String soapModelName = _packagePath + ".model." + entity.getName() + "Soap";
 
-				sb.append("public static ");
+				sm.append("public static ");
 
 				if (returnValueName.equals(extendedModelName)) {
-					sb.append(soapModelName + returnValueDimension);
+					sm.append(soapModelName + returnValueDimension);
 				}
 				else if (returnValueName.equals("java.util.List")) {
 					if (entity.hasColumns()) {
-						sb.append(soapModelName + "[]");
+						sm.append(soapModelName + "[]");
 					}
 					else {
-						sb.append("java.util.List");
+						sm.append("java.util.List");
 					}
 				}
 				else {
-					sb.append(returnValueName + returnValueDimension);
+					sm.append(returnValueName + returnValueDimension);
 				}
 
-				sb.append(" " + methodName + "(");
+				sm.append(" " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
@@ -5214,21 +5219,21 @@ public class ServiceBuilder {
 						parameterTypeName = "String";
 					}
 
-					sb.append(parameterTypeName + " " + javaParameter.getName());
+					sm.append(parameterTypeName + " " + javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(") throws RemoteException {");
-				sb.append("try {");
+				sm.append(") throws RemoteException {");
+				sm.append("try {");
 
 				if (!returnValueName.equals("void")) {
-					sb.append(returnValueName + returnValueDimension + " returnValue = ");
+					sm.append(returnValueName + returnValueDimension + " returnValue = ");
 				}
 
-				sb.append(entity.getName() + "ServiceUtil." + methodName + "(");
+				sm.append(entity.getName() + "ServiceUtil." + methodName + "(");
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
@@ -5238,59 +5243,59 @@ public class ServiceBuilder {
 							_getDimensions(javaParameter.getType());
 
 					if (parameterTypeName.equals("java.util.Locale")) {
-						sb.append("new java.util.Locale(");
+						sm.append("new java.util.Locale(");
 					}
 
-					sb.append(javaParameter.getName());
+					sm.append(javaParameter.getName());
 
 					if (parameterTypeName.equals("java.util.Locale")) {
-						sb.append(")");
+						sm.append(")");
 					}
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(");");
+				sm.append(");");
 
 				if (!returnValueName.equals("void")) {
 					if (returnValueName.equals(extendedModelName)) {
-						sb.append("return " + soapModelName + ".toSoapModel(returnValue);");
+						sm.append("return " + soapModelName + ".toSoapModel(returnValue);");
 					}
 					else if (entity.hasColumns() && returnValueName.equals("java.util.List")) {
-						sb.append("return " + soapModelName + ".toSoapModels(returnValue);");
+						sm.append("return " + soapModelName + ".toSoapModels(returnValue);");
 					}
 					else {
-						sb.append("return returnValue;");
+						sm.append("return returnValue;");
 					}
 				}
 
-				sb.append("}");
+				sm.append("}");
 
-				sb.append("catch (Exception e) {");
-				sb.append("_log.error(e, e);");
-				sb.append("throw new RemoteException(e.getMessage());");
-				sb.append("}");
-				sb.append("}");
+				sm.append("catch (Exception e) {");
+				sm.append("_log.error(e, e);");
+				sm.append("throw new RemoteException(e.getMessage());");
+				sm.append("}");
+				sm.append("}");
 			}
 		}
 
 		// Fields
 
-		if (sb.indexOf("_log.") != -1) {
-			sb.append("private static Log _log = LogFactoryUtil.getLog(" + entity.getName() + "ServiceSoap.class);");
+		if (sm.indexOf("_log.") != -1) {
+			sm.append("private static Log _log = LogFactoryUtil.getLog(" + entity.getName() + "ServiceSoap.class);");
 		}
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_outputPath + "/service/http/" + entity.getName() + "ServiceSoap.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createServiceUtil(Entity entity, int sessionType) throws IOException {
@@ -5298,15 +5303,15 @@ public class ServiceBuilder {
 
 		JavaMethod[] methods = javaClass.getMethods();
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service;");
+		sm.append("package " + _packagePath + ".service;");
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil {");
+		sm.append("public class " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil {");
 
 		// Methods
 
@@ -5316,21 +5321,21 @@ public class ServiceBuilder {
 			String methodName = javaMethod.getName();
 
 			if (!javaMethod.isConstructor() && javaMethod.isPublic() && _isCustomMethod(javaMethod)) {
-				sb.append("public static " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+				sm.append("public static " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sb.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+					sm.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(")");
+				sm.append(")");
 
 				Type[] thrownExceptions = javaMethod.getExceptions();
 
@@ -5343,52 +5348,52 @@ public class ServiceBuilder {
 				}
 
 				if (newExceptions.size() > 0) {
-					sb.append(" throws ");
+					sm.append(" throws ");
 
 					Iterator itr = newExceptions.iterator();
 
 					while (itr.hasNext()) {
-						sb.append(itr.next());
+						sm.append(itr.next());
 
 						if (itr.hasNext()) {
-							sb.append(", ");
+							sm.append(", ");
 						}
 					}
 				}
 
-				sb.append("{");
-				sb.append(entity.getName() + _getSessionTypeName(sessionType) + "Service " + entity.getVarName() + _getSessionTypeName(sessionType) + "Service = " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.getService();");
+				sm.append("{");
+				sm.append(entity.getName() + _getSessionTypeName(sessionType) + "Service " + entity.getVarName() + _getSessionTypeName(sessionType) + "Service = " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.getService();");
 
 				if (!javaMethod.getReturns().getValue().equals("void")) {
-					sb.append("return ");
+					sm.append("return ");
 				}
 
-				sb.append(entity.getVarName() + _getSessionTypeName(sessionType) + "Service." + methodName + "(");
+				sm.append(entity.getVarName() + _getSessionTypeName(sessionType) + "Service." + methodName + "(");
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sb.append(javaParameter.getName());
+					sm.append(javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sb.append(", ");
+						sm.append(", ");
 					}
 				}
 
-				sb.append(");");
-				sb.append("}");
+				sm.append(");");
+				sm.append("}");
 			}
 		}
 
 		// Class close brace
 
-		sb.append("}");
+		sm.append("}");
 
 		// Write file
 
 		File ejbFile = new File(_serviceOutputPath + "/service/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil.java");
 
-		writeFile(ejbFile, sb.toString());
+		writeFile(ejbFile, sm.toString());
 
 		ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil.java");
 
@@ -5400,20 +5405,20 @@ public class ServiceBuilder {
 	}
 
 	private void _createSpringXML(boolean enterprise) throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = (Entity)_ejbList.get(i);
 
 			if (entity.hasLocalService()) {
-				_createSpringXMLSession(entity, sb, _LOCAL, enterprise);
+				_createSpringXMLSession(entity, sm, _LOCAL, enterprise);
 			}
 
 			if (entity.hasRemoteService()) {
-				_createSpringXMLSession(entity, sb, _REMOTE, enterprise);
+				_createSpringXMLSession(entity, sm, _REMOTE, enterprise);
 			}
 
-			_createSpringXMLSession(entity, sb);
+			_createSpringXMLSession(entity, sm);
 		}
 
 		File xmlFile = null;
@@ -5451,7 +5456,7 @@ public class ServiceBuilder {
 		if (firstSession == -1 || firstSession > y) {
 			x = newContent.indexOf("</beans>");
 			newContent =
-				newContent.substring(0, x) + sb.toString() +
+				newContent.substring(0, x) + sm.toString() +
 				newContent.substring(x, newContent.length());
 		}
 		else {
@@ -5459,7 +5464,7 @@ public class ServiceBuilder {
 			lastSession = newContent.indexOf("</bean>", lastSession) + 8;
 
 			newContent =
-				newContent.substring(0, firstSession) + sb.toString() +
+				newContent.substring(0, firstSession) + sm.toString() +
 				newContent.substring(lastSession, newContent.length());
 		}
 
@@ -5468,68 +5473,68 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createSpringXMLSession(Entity entity, StringBuffer sb, int sessionType, boolean enterprise) {
+	private void _createSpringXMLSession(Entity entity, StringMaker sm, int sessionType, boolean enterprise) {
 		if (enterprise) {
-			sb.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.enterprise\" class=\"" + (sessionType == _LOCAL ? "com.liferay.portal.spring.ejb.LocalSessionFactoryBean" : "com.liferay.portal.spring.ejb.RemoteSessionFactoryBean") + "\" lazy-init=\"true\">\n");
+			sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.enterprise\" class=\"" + (sessionType == _LOCAL ? "com.liferay.portal.spring.ejb.LocalSessionFactoryBean" : "com.liferay.portal.spring.ejb.RemoteSessionFactoryBean") + "\" lazy-init=\"true\">\n");
 
-			sb.append("\t\t<property name=\"businessInterface\">\n");
-			sb.append("\t\t\t<value>" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service</value>\n");
-			sb.append("\t\t</property>\n");
+			sm.append("\t\t<property name=\"businessInterface\">\n");
+			sm.append("\t\t\t<value>" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service</value>\n");
+			sm.append("\t\t</property>\n");
 
-			sb.append("\t\t<property name=\"jndiName\">\n");
+			sm.append("\t\t<property name=\"jndiName\">\n");
 
 			if (sessionType == _LOCAL) {
-				sb.append("\t\t\t<value>ejb/liferay/" + entity.getName() + "LocalServiceHome</value>\n");
+				sm.append("\t\t\t<value>ejb/liferay/" + entity.getName() + "LocalServiceHome</value>\n");
 			}
 			else {
-				sb.append("\t\t\t<value>" + StringUtil.replace(_packagePath + ".service.ejb.", ".", "_") + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</value>\n");
+				sm.append("\t\t\t<value>" + StringUtil.replace(_packagePath + ".service.ejb.", ".", "_") + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</value>\n");
 			}
 
-			sb.append("\t\t</property>\n");
+			sm.append("\t\t</property>\n");
 
-			sb.append("\t</bean>\n");
+			sm.append("\t</bean>\n");
 		}
 
-		sb.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" class=\"" + _packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl\" lazy-init=\"true\" />\n");
+		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" class=\"" + _packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl\" lazy-init=\"true\" />\n");
 
-		sb.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.transaction\" class=\"org.springframework.transaction.interceptor.TransactionProxyFactoryBean\" lazy-init=\"true\">\n");
-		sb.append("\t\t<property name=\"transactionManager\">\n");
-		sb.append("\t\t\t<ref bean=\"" + entity.getTXManager() + "\" />\n");
-		sb.append("\t\t</property>\n");
-		sb.append("\t\t<property name=\"target\">\n");
-		sb.append("\t\t\t<ref bean=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" />\n");
-		sb.append("\t\t</property>\n");
-		sb.append("\t\t<property name=\"transactionAttributes\">\n");
-		sb.append("\t\t\t<props>\n");
-		//sb.append("\t\t\t\t<prop key=\"*\">PROPAGATION_REQUIRED,-PortalException,-SystemException</prop>\n");
-		sb.append("\t\t\t\t<prop key=\"*\">PROPAGATION_REQUIRED</prop>\n");
-		sb.append("\t\t\t</props>\n");
-		sb.append("\t\t</property>\n");
-		sb.append("\t</bean>\n");
+		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.transaction\" class=\"org.springframework.transaction.interceptor.TransactionProxyFactoryBean\" lazy-init=\"true\">\n");
+		sm.append("\t\t<property name=\"transactionManager\">\n");
+		sm.append("\t\t\t<ref bean=\"" + entity.getTXManager() + "\" />\n");
+		sm.append("\t\t</property>\n");
+		sm.append("\t\t<property name=\"target\">\n");
+		sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" />\n");
+		sm.append("\t\t</property>\n");
+		sm.append("\t\t<property name=\"transactionAttributes\">\n");
+		sm.append("\t\t\t<props>\n");
+		//sm.append("\t\t\t\t<prop key=\"*\">PROPAGATION_REQUIRED,-PortalException,-SystemException</prop>\n");
+		sm.append("\t\t\t\t<prop key=\"*\">PROPAGATION_REQUIRED</prop>\n");
+		sm.append("\t\t\t</props>\n");
+		sm.append("\t\t</property>\n");
+		sm.append("\t</bean>\n");
 
-		sb.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory\" class=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory\" lazy-init=\"true\">\n");
-		sb.append("\t\t<property name=\"service\">\n");
-		sb.append("\t\t\t<ref bean=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service." + (enterprise ? "enterprise" : "transaction") + "\" />\n");
-		sb.append("\t\t</property>\n");
-		sb.append("\t</bean>\n");
+		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory\" class=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory\" lazy-init=\"true\">\n");
+		sm.append("\t\t<property name=\"service\">\n");
+		sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service." + (enterprise ? "enterprise" : "transaction") + "\" />\n");
+		sm.append("\t\t</property>\n");
+		sm.append("\t</bean>\n");
 	}
 
-	private void _createSpringXMLSession(Entity entity, StringBuffer sb) {
+	private void _createSpringXMLSession(Entity entity, StringMaker sm) {
 		if (entity.hasColumns()) {
-			sb.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "Persistence\" class=\"" + entity.getPersistenceClass() + "\" lazy-init=\"true\">\n");
-			sb.append("\t\t<property name=\"dataSource\">\n");
-			sb.append("\t\t\t<ref bean=\"" + entity.getDataSource() + "\" />\n");
-			sb.append("\t\t</property>\n");
-			sb.append("\t\t<property name=\"sessionFactory\">\n");
-			sb.append("\t\t\t<ref bean=\"" + entity.getSessionFactory() + "\" />\n");
-			sb.append("\t\t</property>\n");
-			sb.append("\t</bean>\n");
+			sm.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "Persistence\" class=\"" + entity.getPersistenceClass() + "\" lazy-init=\"true\">\n");
+			sm.append("\t\t<property name=\"dataSource\">\n");
+			sm.append("\t\t\t<ref bean=\"" + entity.getDataSource() + "\" />\n");
+			sm.append("\t\t</property>\n");
+			sm.append("\t\t<property name=\"sessionFactory\">\n");
+			sm.append("\t\t\t<ref bean=\"" + entity.getSessionFactory() + "\" />\n");
+			sm.append("\t\t</property>\n");
+			sm.append("\t</bean>\n");
 
-			sb.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "Util\" class=\"" + _packagePath + ".service.persistence." + entity.getName() + "Util\" lazy-init=\"true\">\n");
-			sb.append("\t\t<property name=\"persistence\">\n");
-			sb.append("\t\t\t<ref bean=\"" + _packagePath + ".service.persistence." + entity.getName() + "Persistence\" />\n");
-			sb.append("\t\t</property>\n");
-			sb.append("\t</bean>\n");
+			sm.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "Util\" class=\"" + _packagePath + ".service.persistence." + entity.getName() + "Util\" lazy-init=\"true\">\n");
+			sm.append("\t\t<property name=\"persistence\">\n");
+			sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service.persistence." + entity.getName() + "Persistence\" />\n");
+			sm.append("\t\t</property>\n");
+			sm.append("\t</bean>\n");
 		}
 	}
 
@@ -5597,37 +5602,37 @@ public class ServiceBuilder {
 				EntityFinder finder = (EntityFinder)finderList.get(j);
 
 				if (finder.isDBIndex()) {
-					StringBuffer sb = new StringBuffer();
+					StringMaker sm = new StringMaker();
 
-					sb.append(entity.getTable() + " (");
+					sm.append(entity.getTable() + " (");
 
 					List finderColsList = finder.getColumns();
 
 					for (int k = 0; k < finderColsList.size(); k++) {
 						EntityColumn col = (EntityColumn)finderColsList.get(k);
 
-						sb.append(col.getDBName());
+						sm.append(col.getDBName());
 
 						if ((k + 1) != finderColsList.size()) {
-							sb.append(", ");
+							sm.append(", ");
 						}
 					}
 
-					sb.append(");");
+					sm.append(");");
 
-					String indexSpec = sb.toString();
+					String indexSpec = sm.toString();
 
 					String indexHash =
 						Integer.toHexString(indexSpec.hashCode()).toUpperCase();
 
 					String indexName = "IX_" + indexHash;
 
-					sb = new StringBuffer();
+					sm = new StringMaker();
 
-					sb.append("create index " + indexName + " on ");
-					sb.append(indexSpec);
+					sm.append("create index " + indexName + " on ");
+					sm.append(indexSpec);
 
-					indexSQLs.put(indexSpec, sb.toString());
+					indexSQLs.put(indexSpec, sm.toString());
 
 					String finderName =
 						entity.getTable() + StringPool.PERIOD +
@@ -5638,7 +5643,7 @@ public class ServiceBuilder {
 			}
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = indexSQLs.values().iterator();
 
@@ -5652,23 +5657,23 @@ public class ServiceBuilder {
 			if ((prevEntityName != null) &&
 				(!prevEntityName.equals(entityName))) {
 
-				sb.append("\n");
+				sm.append("\n");
 			}
 
-			sb.append(indexSQL);
+			sm.append(indexSQL);
 
 			if (itr.hasNext()) {
-				sb.append("\n");
+				sm.append("\n");
 			}
 
 			prevEntityName = entityName;
 		}
 
-		FileUtil.write(sqlFile, sb.toString(), true);
+		FileUtil.write(sqlFile, sm.toString(), true);
 
 		// indexes.properties
 
-		sb = new StringBuffer();
+		sm = new StringMaker();
 
 		itr = indexProps.keySet().iterator();
 
@@ -5684,19 +5689,19 @@ public class ServiceBuilder {
 			if ((prevEntityName != null) &&
 				(!prevEntityName.equals(entityName))) {
 
-				sb.append("\n");
+				sm.append("\n");
 			}
 
-			sb.append(indexName + StringPool.EQUAL + finderName);
+			sm.append(indexName + StringPool.EQUAL + finderName);
 
 			if (itr.hasNext()) {
-				sb.append("\n");
+				sm.append("\n");
 			}
 
 			prevEntityName = entityName;
 		}
 
-		FileUtil.write(propsFile, sb.toString(), true);
+		FileUtil.write(propsFile, sm.toString(), true);
 	}
 
 	private void _createSQLSequences() throws IOException {
@@ -5731,7 +5736,7 @@ public class ServiceBuilder {
 				EntityColumn column = (EntityColumn)columnList.get(j);
 
 				if ("sequence".equals(column.getIdType())) {
-					StringBuffer sb = new StringBuffer();
+					StringMaker sm = new StringMaker();
 
 					String sequenceName = column.getIdParam();
 
@@ -5739,9 +5744,9 @@ public class ServiceBuilder {
 						sequenceName = sequenceName.substring(0, 30);
 					}
 
-					sb.append("create sequence " + sequenceName + ";");
+					sm.append("create sequence " + sequenceName + ";");
 
-					String sequenceSQL = sb.toString();
+					String sequenceSQL = sm.toString();
 
 					if (!sequenceSQLs.contains(sequenceSQL)) {
 						sequenceSQLs.add(sequenceSQL);
@@ -5750,21 +5755,21 @@ public class ServiceBuilder {
 			}
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		Iterator itr = sequenceSQLs.iterator();
 
 		while (itr.hasNext()) {
 			String sequenceSQL = (String)itr.next();
 
-			sb.append(sequenceSQL);
+			sm.append(sequenceSQL);
 
 			if (itr.hasNext()) {
-				sb.append("\n");
+				sm.append("\n");
 			}
 		}
 
-		FileUtil.write(sqlFile, sb.toString(), true);
+		FileUtil.write(sqlFile, sm.toString(), true);
 	}
 
 	private void _createSQLTables() throws IOException {
@@ -5783,9 +5788,9 @@ public class ServiceBuilder {
 			List regularColList = entity.getRegularColList();
 
 			if (regularColList.size() > 0) {
-				StringBuffer sb = new StringBuffer();
+				StringMaker sm = new StringMaker();
 
-				sb.append(_CREATE_TABLE + entity.getTable() + " (\n");
+				sm.append(_CREATE_TABLE + entity.getTable() + " (\n");
 
 				for (int j = 0; j < regularColList.size(); j++) {
 					EntityColumn col = (EntityColumn)regularColList.get(j);
@@ -5794,25 +5799,25 @@ public class ServiceBuilder {
 					String colType = col.getType();
 					String colIdType = col.getIdType();
 
-					sb.append("\t" + col.getDBName());
-					sb.append(" ");
+					sm.append("\t" + col.getDBName());
+					sm.append(" ");
 
 					if (colType.equalsIgnoreCase("boolean")) {
-						sb.append("BOOLEAN");
+						sm.append("BOOLEAN");
 					}
 					else if (colType.equalsIgnoreCase("double") ||
 							 colType.equalsIgnoreCase("float")) {
 
-						sb.append("DOUBLE");
+						sm.append("DOUBLE");
 					}
 					else if (colType.equals("int") ||
 							 colType.equals("Integer") ||
 							 colType.equalsIgnoreCase("short")) {
 
-						sb.append("INTEGER");
+						sm.append("INTEGER");
 					}
 					else if (colType.equalsIgnoreCase("long")) {
-						sb.append("LONG");
+						sm.append("LONG");
 					}
 					else if (colType.equals("String")) {
 						Map hints = ModelHintsUtil.getHints(_packagePath + ".model." + entity.getName(), colName);
@@ -5825,70 +5830,70 @@ public class ServiceBuilder {
 						}
 
 						if (maxLength < 4000) {
-							sb.append("VARCHAR(" + maxLength + ")");
+							sm.append("VARCHAR(" + maxLength + ")");
 						}
 						else if (maxLength == 4000) {
-							sb.append("STRING");
+							sm.append("STRING");
 						}
 						else if (maxLength > 4000) {
-							sb.append("TEXT");
+							sm.append("TEXT");
 						}
 					}
 					else if (colType.equals("Date")) {
-						sb.append("DATE null");
+						sm.append("DATE null");
 					}
 					else {
-						sb.append("invalid");
+						sm.append("invalid");
 					}
 
 					if (col.isPrimary() || colName.equals("groupId") ||
 						colName.equals("companyId") ||
 						colName.equals("userId")) {
 
-						sb.append(" not null");
+						sm.append(" not null");
 
 						if (col.isPrimary() && !entity.hasCompoundPK()) {
-							sb.append(" primary key");
+							sm.append(" primary key");
 						}
 					}
 					else if (colType.equals("String")) {
-						sb.append(" null");
+						sm.append(" null");
 					}
 
 					if (Validator.isNotNull(colIdType) &&
 						colIdType.equals("identity")) {
 
-						sb.append(" IDENTITY");
+						sm.append(" IDENTITY");
 					}
 
 					if (((j + 1) != regularColList.size()) ||
 						(entity.hasCompoundPK())) {
 
-						sb.append(",");
+						sm.append(",");
 					}
 
-					sb.append("\n");
+					sm.append("\n");
 				}
 
 				if (entity.hasCompoundPK()) {
-					sb.append("\tprimary key (");
+					sm.append("\tprimary key (");
 
 					for (int k = 0; k < pkList.size(); k++) {
 						EntityColumn pk = (EntityColumn)pkList.get(k);
 
-						sb.append(pk.getDBName());
+						sm.append(pk.getDBName());
 
 						if ((k + 1) != pkList.size()) {
-							sb.append(", ");
+							sm.append(", ");
 						}
 					}
 
-					sb.append(")\n");
+					sm.append(")\n");
 				}
 
-				sb.append(");");
+				sm.append(");");
 
-				String newCreateTableString = sb.toString();
+				String newCreateTableString = sm.toString();
 
 				_createSQLTables(sqlFile, newCreateTableString, entity, true);
 				_createSQLTables(new File(sqlPath + "/update-4.2.0-4.3.0.sql"), newCreateTableString, entity, false);
@@ -5918,7 +5923,7 @@ public class ServiceBuilder {
 			}
 		}
 		else if (addMissingTables) {
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			BufferedReader br = new BufferedReader(new StringReader(content));
 
@@ -5933,27 +5938,27 @@ public class ServiceBuilder {
 					String tableName = line.substring(x, y);
 
 					if (tableName.compareTo(entity.getTable()) > 0) {
-						sb.append(newCreateTableString + "\n\n");
+						sm.append(newCreateTableString + "\n\n");
 
 						appendNewTable = false;
 					}
 				}
 
-				sb.append(line).append('\n');
+				sm.append(line).append('\n');
 			}
 
 			if (appendNewTable) {
-				sb.append("\n" + newCreateTableString);
+				sm.append("\n" + newCreateTableString);
 			}
 
 			br.close();
 
-			FileUtil.write(sqlFile, sb.toString(), true);
+			FileUtil.write(sqlFile, sm.toString(), true);
 		}
 	}
 
 	private String _fixHBMXML(String content) throws IOException {
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		BufferedReader br = new BufferedReader(new StringReader(content));
 
@@ -5982,13 +5987,13 @@ public class ServiceBuilder {
 				}
 			}
 
-			sb.append(line);
-			sb.append('\n');
+			sm.append(line);
+			sm.append('\n');
 		}
 
 		br.close();
 
-		return sb.toString().trim();
+		return sm.toString().trim();
 	}
 
 	private String _fixSpringXML(String content) throws IOException {
@@ -6000,38 +6005,38 @@ public class ServiceBuilder {
 		String name = type.getValue();
 
 		if (dimensions > 0) {
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			for (int i = 0; i < dimensions; i++) {
-				sb.append("[");
+				sm.append("[");
 			}
 
 			if (name.equals("boolean")) {
-				return sb.toString() + "Z";
+				return sm.toString() + "Z";
 			}
 			else if (name.equals("byte")) {
-				return sb.toString() + "B";
+				return sm.toString() + "B";
 			}
 			else if (name.equals("char")) {
-				return sb.toString() + "C";
+				return sm.toString() + "C";
 			}
 			else if (name.equals("double")) {
-				return sb.toString() + "D";
+				return sm.toString() + "D";
 			}
 			else if (name.equals("float")) {
-				return sb.toString() + "F";
+				return sm.toString() + "F";
 			}
 			else if (name.equals("int")) {
-				return sb.toString() + "I";
+				return sm.toString() + "I";
 			}
 			else if (name.equals("long")) {
-				return sb.toString() + "J";
+				return sm.toString() + "J";
 			}
 			else if (name.equals("short")) {
-				return sb.toString() + "S";
+				return sm.toString() + "S";
 			}
 			else {
-				return sb.toString() + "L" + name + ";";
+				return sm.toString() + "L" + name + ";";
 			}
 		}
 

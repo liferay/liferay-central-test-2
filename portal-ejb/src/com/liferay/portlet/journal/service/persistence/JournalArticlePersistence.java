@@ -33,6 +33,7 @@ import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -188,7 +189,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -235,7 +236,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -282,7 +283,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No JournalArticle exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -301,7 +302,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No JournalArticle exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -324,7 +325,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -379,7 +380,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 			query.append("groupId = ?");
@@ -416,7 +417,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 			query.append("groupId = ?");
@@ -453,7 +454,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No JournalArticle exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -472,7 +473,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No JournalArticle exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -495,7 +496,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 			query.append("groupId = ?");
@@ -541,7 +542,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -605,7 +606,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -670,7 +671,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		List list = findByC_G_A(companyId, groupId, articleId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No JournalArticle exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -697,7 +698,7 @@ public class JournalArticlePersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No JournalArticle exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -727,7 +728,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -800,7 +801,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -864,7 +865,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -929,7 +930,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		List list = findByC_G_S(companyId, groupId, structureId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No JournalArticle exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -956,7 +957,7 @@ public class JournalArticlePersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No JournalArticle exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -986,7 +987,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -1059,7 +1060,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -1123,7 +1124,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -1188,7 +1189,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		List list = findByC_G_T(companyId, groupId, templateId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No JournalArticle exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -1215,7 +1216,7 @@ public class JournalArticlePersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No JournalArticle exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -1245,7 +1246,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -1318,7 +1319,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -1388,7 +1389,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -1458,7 +1459,7 @@ public class JournalArticlePersistence extends BasePersistence {
 				1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No JournalArticle exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -1488,7 +1489,7 @@ public class JournalArticlePersistence extends BasePersistence {
 				count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No JournalArticle exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -1521,7 +1522,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -1645,7 +1646,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle ");
 
@@ -1745,7 +1746,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
@@ -1794,7 +1795,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
@@ -1834,7 +1835,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
@@ -1901,7 +1902,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
@@ -1968,7 +1969,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
@@ -2035,7 +2036,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
@@ -2105,7 +2106,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle");

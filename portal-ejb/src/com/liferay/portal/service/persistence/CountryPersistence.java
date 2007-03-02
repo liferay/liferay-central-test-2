@@ -32,6 +32,7 @@ import com.liferay.portal.model.Country;
 import com.liferay.portal.model.impl.CountryImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -181,7 +182,7 @@ public class CountryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Country WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -216,7 +217,7 @@ public class CountryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Country WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -251,7 +252,7 @@ public class CountryPersistence extends BasePersistence {
 		List list = findByActive(active, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Country exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("active=");
@@ -270,7 +271,7 @@ public class CountryPersistence extends BasePersistence {
 		List list = findByActive(active, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Country exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("active=");
@@ -292,7 +293,7 @@ public class CountryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Country WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -382,7 +383,7 @@ public class CountryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Country ");
 
 			if (obc != null) {
@@ -430,7 +431,7 @@ public class CountryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Country WHERE ");
 			query.append("active_ = ?");
@@ -468,7 +469,7 @@ public class CountryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Country");
 

@@ -32,6 +32,7 @@ import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.model.impl.UserTrackerPathImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -188,7 +189,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.UserTrackerPath WHERE ");
 
 			if (userTrackerId == null) {
@@ -231,7 +232,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.UserTrackerPath WHERE ");
 
 			if (userTrackerId == null) {
@@ -273,7 +274,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		List list = findByUserTrackerId(userTrackerId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No UserTrackerPath exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("userTrackerId=");
@@ -293,7 +294,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		List list = findByUserTrackerId(userTrackerId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No UserTrackerPath exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("userTrackerId=");
@@ -316,7 +317,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.UserTrackerPath WHERE ");
 
 			if (userTrackerId == null) {
@@ -413,7 +414,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.UserTrackerPath ");
 
 			if (obc != null) {
@@ -459,7 +460,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.UserTrackerPath WHERE ");
 
@@ -507,7 +508,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.UserTrackerPath");
 

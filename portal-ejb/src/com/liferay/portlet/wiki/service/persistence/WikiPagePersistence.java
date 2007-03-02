@@ -33,6 +33,7 @@ import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -184,7 +185,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
@@ -231,7 +232,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
@@ -278,7 +279,7 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByNodeId(nodeId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No WikiPage exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("nodeId=");
@@ -297,7 +298,7 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByNodeId(nodeId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No WikiPage exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("nodeId=");
@@ -320,7 +321,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
@@ -375,7 +376,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
@@ -435,7 +436,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
@@ -495,7 +496,7 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByN_T(nodeId, title, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No WikiPage exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("nodeId=");
@@ -517,7 +518,7 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByN_T(nodeId, title, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No WikiPage exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("nodeId=");
@@ -543,7 +544,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
@@ -611,7 +612,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
@@ -662,7 +663,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
@@ -713,7 +714,7 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByN_H(nodeId, head, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No WikiPage exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("nodeId=");
@@ -735,7 +736,7 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByN_H(nodeId, head, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No WikiPage exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("nodeId=");
@@ -761,7 +762,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
@@ -820,7 +821,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
@@ -884,7 +885,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
@@ -949,7 +950,7 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByN_T_H(nodeId, title, head, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No WikiPage exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("nodeId=");
@@ -974,7 +975,7 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByN_T_H(nodeId, title, head, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No WikiPage exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("nodeId=");
@@ -1003,7 +1004,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
@@ -1122,7 +1123,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage ");
 
 			if (obc != null) {
@@ -1202,7 +1203,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
@@ -1251,7 +1252,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
@@ -1313,7 +1314,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
@@ -1366,7 +1367,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
@@ -1431,7 +1432,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage");
 

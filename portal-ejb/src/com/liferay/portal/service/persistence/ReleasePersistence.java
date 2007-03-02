@@ -31,6 +31,7 @@ import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -228,7 +229,7 @@ public class ReleasePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Release ");
 
 			if (obc != null) {
@@ -263,7 +264,7 @@ public class ReleasePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Release");
 

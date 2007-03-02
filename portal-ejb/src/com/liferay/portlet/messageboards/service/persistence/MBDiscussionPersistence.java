@@ -33,6 +33,7 @@ import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -186,7 +187,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 		MBDiscussion mbDiscussion = fetchByC_C(className, classPK);
 
 		if (mbDiscussion == null) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No MBDiscussion exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("className=");
@@ -213,7 +214,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
 
@@ -320,7 +321,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBDiscussion ");
 
@@ -363,7 +364,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
@@ -425,7 +426,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBDiscussion");

@@ -32,6 +32,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -180,7 +181,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
@@ -226,7 +227,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
@@ -272,7 +273,7 @@ public class LayoutPersistence extends BasePersistence {
 		List list = findByOwnerId(ownerId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Layout exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("ownerId=");
@@ -291,7 +292,7 @@ public class LayoutPersistence extends BasePersistence {
 		List list = findByOwnerId(ownerId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Layout exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("ownerId=");
@@ -314,7 +315,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
@@ -368,7 +369,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
@@ -427,7 +428,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
@@ -486,7 +487,7 @@ public class LayoutPersistence extends BasePersistence {
 		List list = findByO_P(ownerId, parentLayoutId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Layout exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("ownerId=");
@@ -508,7 +509,7 @@ public class LayoutPersistence extends BasePersistence {
 		List list = findByO_P(ownerId, parentLayoutId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Layout exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("ownerId=");
@@ -534,7 +535,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
@@ -599,7 +600,7 @@ public class LayoutPersistence extends BasePersistence {
 		Layout layout = fetchByO_F(ownerId, friendlyURL);
 
 		if (layout == null) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Layout exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("ownerId=");
@@ -626,7 +627,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
@@ -735,7 +736,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Layout ");
 
 			if (obc != null) {
@@ -800,7 +801,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
@@ -849,7 +850,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
@@ -911,7 +912,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
@@ -972,7 +973,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Layout");
 

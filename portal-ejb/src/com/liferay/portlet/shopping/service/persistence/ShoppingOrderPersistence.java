@@ -33,6 +33,7 @@ import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -186,7 +187,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
 			query.append("groupId = ?");
@@ -249,7 +250,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
 			query.append("groupId = ?");
@@ -312,7 +313,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		List list = findByG_U_PPPS(groupId, userId, ppPaymentStatus, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ShoppingOrder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -339,7 +340,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ShoppingOrder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -368,7 +369,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
 			query.append("groupId = ?");
@@ -486,7 +487,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrder ");
 
@@ -538,7 +539,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
@@ -603,7 +604,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrder");

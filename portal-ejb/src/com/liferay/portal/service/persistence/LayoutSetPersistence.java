@@ -32,6 +32,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutSetImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -182,7 +183,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
 			query.append("groupId = ?");
 			query.append(" ");
@@ -215,7 +216,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
 			query.append("groupId = ?");
 			query.append(" ");
@@ -246,7 +247,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No LayoutSet exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -265,7 +266,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No LayoutSet exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -287,7 +288,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
 			query.append("groupId = ?");
 			query.append(" ");
@@ -325,7 +326,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		LayoutSet layoutSet = fetchByC_V(companyId, virtualHost);
 
 		if (layoutSet == null) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No LayoutSet exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -352,7 +353,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
 
 			if (companyId == null) {
@@ -458,7 +459,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.LayoutSet ");
 
 			if (obc != null) {
@@ -508,7 +509,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
 			query.append("groupId = ?");
@@ -547,7 +548,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
 
@@ -608,7 +609,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.LayoutSet");
 

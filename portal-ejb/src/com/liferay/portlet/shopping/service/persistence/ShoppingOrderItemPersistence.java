@@ -33,6 +33,7 @@ import com.liferay.portlet.shopping.NoSuchOrderItemException;
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -190,7 +191,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
 
@@ -237,7 +238,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
 
@@ -284,7 +285,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		List list = findByOrderId(orderId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ShoppingOrderItem exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("orderId=");
@@ -303,7 +304,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		List list = findByOrderId(orderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ShoppingOrderItem exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("orderId=");
@@ -326,7 +327,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
 
@@ -429,7 +430,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem ");
 
@@ -479,7 +480,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
@@ -528,7 +529,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem");

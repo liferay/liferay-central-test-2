@@ -33,6 +33,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -184,7 +185,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 			query.append("groupId = ?");
@@ -221,7 +222,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 			query.append("groupId = ?");
@@ -258,7 +259,7 @@ public class DLFolderPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFolder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -277,7 +278,7 @@ public class DLFolderPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFolder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -299,7 +300,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 			query.append("groupId = ?");
@@ -343,7 +344,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 
@@ -390,7 +391,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 
@@ -437,7 +438,7 @@ public class DLFolderPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFolder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -456,7 +457,7 @@ public class DLFolderPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFolder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -479,7 +480,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 
@@ -534,7 +535,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 			query.append("groupId = ?");
@@ -584,7 +585,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 			query.append("groupId = ?");
@@ -634,7 +635,7 @@ public class DLFolderPersistence extends BasePersistence {
 		List list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFolder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -656,7 +657,7 @@ public class DLFolderPersistence extends BasePersistence {
 		List list = findByG_P(groupId, parentFolderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFolder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -682,7 +683,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 			query.append("groupId = ?");
@@ -738,7 +739,7 @@ public class DLFolderPersistence extends BasePersistence {
 		DLFolder dlFolder = fetchByP_N(parentFolderId, name);
 
 		if (dlFolder == null) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFolder exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("parentFolderId=");
@@ -765,7 +766,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 
@@ -875,7 +876,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder ");
 
@@ -950,7 +951,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
@@ -989,7 +990,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
@@ -1039,7 +1040,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
@@ -1092,7 +1093,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
@@ -1154,7 +1155,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder");

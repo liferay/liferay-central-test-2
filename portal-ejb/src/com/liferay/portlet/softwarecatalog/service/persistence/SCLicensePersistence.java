@@ -33,6 +33,7 @@ import com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -185,7 +186,7 @@ public class SCLicensePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
 			query.append("active_ = ?");
@@ -221,7 +222,7 @@ public class SCLicensePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
 			query.append("active_ = ?");
@@ -257,7 +258,7 @@ public class SCLicensePersistence extends BasePersistence {
 		List list = findByActive(active, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No SCLicense exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("active=");
@@ -276,7 +277,7 @@ public class SCLicensePersistence extends BasePersistence {
 		List list = findByActive(active, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No SCLicense exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("active=");
@@ -298,7 +299,7 @@ public class SCLicensePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
 			query.append("active_ = ?");
@@ -343,7 +344,7 @@ public class SCLicensePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
 			query.append("active_ = ?");
@@ -382,7 +383,7 @@ public class SCLicensePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
 			query.append("active_ = ?");
@@ -421,7 +422,7 @@ public class SCLicensePersistence extends BasePersistence {
 		List list = findByA_R(active, recommended, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No SCLicense exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("active=");
@@ -443,7 +444,7 @@ public class SCLicensePersistence extends BasePersistence {
 		List list = findByA_R(active, recommended, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No SCLicense exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("active=");
@@ -469,7 +470,7 @@ public class SCLicensePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
 			query.append("active_ = ?");
@@ -564,7 +565,7 @@ public class SCLicensePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense ");
 
@@ -623,7 +624,7 @@ public class SCLicensePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
@@ -663,7 +664,7 @@ public class SCLicensePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
@@ -705,7 +706,7 @@ public class SCLicensePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense");

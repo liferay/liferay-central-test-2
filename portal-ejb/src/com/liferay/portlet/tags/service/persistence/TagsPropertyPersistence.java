@@ -33,6 +33,7 @@ import com.liferay.portlet.tags.NoSuchPropertyException;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.model.impl.TagsPropertyImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -187,7 +188,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
 
@@ -233,7 +234,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
 
@@ -279,7 +280,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No TagsProperty exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -298,7 +299,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No TagsProperty exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -321,7 +322,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
 
@@ -375,7 +376,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
 			query.append("entryId = ?");
@@ -411,7 +412,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
 			query.append("entryId = ?");
@@ -447,7 +448,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		List list = findByEntryId(entryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No TagsProperty exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("entryId=");
@@ -466,7 +467,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		List list = findByEntryId(entryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No TagsProperty exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("entryId=");
@@ -489,7 +490,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
 			query.append("entryId = ?");
@@ -534,7 +535,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
 
@@ -593,7 +594,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
 
@@ -652,7 +653,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		List list = findByC_K(companyId, key, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No TagsProperty exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -674,7 +675,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		List list = findByC_K(companyId, key, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No TagsProperty exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -700,7 +701,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
 
@@ -766,7 +767,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		TagsProperty tagsProperty = fetchByE_K(entryId, key);
 
 		if (tagsProperty == null) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No TagsProperty exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("entryId=");
@@ -793,7 +794,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
 			query.append("entryId = ?");
@@ -892,7 +893,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.tags.model.TagsProperty ");
 
 			if (obc != null) {
@@ -965,7 +966,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
@@ -1014,7 +1015,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
@@ -1054,7 +1055,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
@@ -1116,7 +1117,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
@@ -1168,7 +1169,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.tags.model.TagsProperty");
 

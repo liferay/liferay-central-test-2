@@ -33,6 +33,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -189,7 +190,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
 
@@ -250,7 +251,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
 
@@ -312,7 +313,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 		List list = findByF_N(folderId, name, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFileVersion exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("folderId=");
@@ -335,7 +336,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 		List list = findByF_N(folderId, name, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFileVersion exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("folderId=");
@@ -362,7 +363,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
 
@@ -479,7 +480,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion ");
 
@@ -532,7 +533,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
@@ -594,7 +595,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion");

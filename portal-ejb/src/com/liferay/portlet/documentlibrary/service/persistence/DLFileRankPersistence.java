@@ -33,6 +33,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -185,7 +186,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
 
@@ -231,7 +232,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
 
@@ -277,7 +278,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFileRank exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("userId=");
@@ -296,7 +297,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFileRank exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("userId=");
@@ -319,7 +320,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
 
@@ -374,7 +375,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
 
@@ -433,7 +434,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
 
@@ -492,7 +493,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		List list = findByF_N(folderId, name, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFileRank exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("folderId=");
@@ -514,7 +515,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		List list = findByF_N(folderId, name, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No DLFileRank exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("folderId=");
@@ -540,7 +541,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
 
@@ -655,7 +656,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank ");
 
@@ -714,7 +715,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
@@ -764,7 +765,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
@@ -826,7 +827,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank");

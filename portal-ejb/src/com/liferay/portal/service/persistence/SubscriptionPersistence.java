@@ -32,6 +32,7 @@ import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -187,7 +188,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (userId == null) {
@@ -230,7 +231,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (userId == null) {
@@ -271,7 +272,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Subscription exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("userId=");
@@ -290,7 +291,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Subscription exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("userId=");
@@ -313,7 +314,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (userId == null) {
@@ -363,7 +364,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (companyId == null) {
@@ -432,7 +433,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (companyId == null) {
@@ -500,7 +501,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		List list = findByC_C_C(companyId, className, classPK, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Subscription exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -527,7 +528,7 @@ public class SubscriptionPersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Subscription exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -557,7 +558,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (companyId == null) {
@@ -633,7 +634,7 @@ public class SubscriptionPersistence extends BasePersistence {
 				className, classPK);
 
 		if (subscription == null) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Subscription exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -666,7 +667,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (companyId == null) {
@@ -798,7 +799,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Subscription ");
 
 			if (obc != null) {
@@ -860,7 +861,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
@@ -909,7 +910,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
@@ -984,7 +985,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
@@ -1071,7 +1072,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Subscription");
 

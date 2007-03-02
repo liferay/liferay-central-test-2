@@ -34,6 +34,7 @@ import com.liferay.portlet.shopping.NoSuchItemException;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -198,7 +199,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
 
@@ -244,7 +245,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
 
@@ -290,7 +291,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		List list = findByCategoryId(categoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ShoppingItem exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("categoryId=");
@@ -309,7 +310,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		List list = findByCategoryId(categoryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ShoppingItem exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("categoryId=");
@@ -332,7 +333,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
 
@@ -385,7 +386,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		ShoppingItem shoppingItem = fetchByC_S(companyId, sku);
 
 		if (shoppingItem == null) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No ShoppingItem exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -412,7 +413,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
 
@@ -521,7 +522,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem ");
 
@@ -576,7 +577,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
@@ -626,7 +627,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
@@ -688,7 +689,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.shopping.model.ShoppingItem");
 
@@ -732,21 +733,21 @@ public class ShoppingItemPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
-			sb.append(_SQL_GETSHOPPINGITEMPRICES);
+			StringMaker sm = new StringMaker();
+			sm.append(_SQL_GETSHOPPINGITEMPRICES);
 
 			if (obc != null) {
-				sb.append("ORDER BY ");
-				sb.append(obc.getOrderBy());
+				sm.append("ORDER BY ");
+				sm.append(obc.getOrderBy());
 			}
 			else {
-				sb.append("ORDER BY ");
-				sb.append("ShoppingItemPrice.itemId ASC");
-				sb.append(", ");
-				sb.append("ShoppingItemPrice.itemPriceId ASC");
+				sm.append("ORDER BY ");
+				sm.append("ShoppingItemPrice.itemId ASC");
+				sm.append(", ");
+				sm.append("ShoppingItemPrice.itemPriceId ASC");
 			}
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("ShoppingItemPrice",

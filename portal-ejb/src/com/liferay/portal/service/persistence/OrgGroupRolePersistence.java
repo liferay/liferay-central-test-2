@@ -32,6 +32,7 @@ import com.liferay.portal.model.OrgGroupRole;
 import com.liferay.portal.model.impl.OrgGroupRoleImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -187,7 +188,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 			query.append("groupId = ?");
 			query.append(" ");
@@ -220,7 +221,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 			query.append("groupId = ?");
 			query.append(" ");
@@ -251,7 +252,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No OrgGroupRole exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -270,7 +271,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No OrgGroupRole exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
@@ -293,7 +294,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 			query.append("groupId = ?");
 			query.append(" ");
@@ -332,7 +333,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 
 			if (roleId == null) {
@@ -375,7 +376,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 
 			if (roleId == null) {
@@ -416,7 +417,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		List list = findByRoleId(roleId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No OrgGroupRole exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("roleId=");
@@ -435,7 +436,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		List list = findByRoleId(roleId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No OrgGroupRole exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("roleId=");
@@ -458,7 +459,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 
 			if (roleId == null) {
@@ -555,7 +556,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.OrgGroupRole ");
 
 			if (obc != null) {
@@ -608,7 +609,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 			query.append("groupId = ?");
@@ -646,7 +647,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 
@@ -694,7 +695,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.OrgGroupRole");
 

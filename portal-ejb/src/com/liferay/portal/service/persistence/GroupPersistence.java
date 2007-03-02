@@ -33,6 +33,7 @@ import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -197,7 +198,7 @@ public class GroupPersistence extends BasePersistence {
 		Group group = fetchByC_N(companyId, name);
 
 		if (group == null) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Group exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -224,7 +225,7 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Group WHERE ");
 
 			if (companyId == null) {
@@ -283,7 +284,7 @@ public class GroupPersistence extends BasePersistence {
 		Group group = fetchByC_F(companyId, friendlyURL);
 
 		if (group == null) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Group exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -310,7 +311,7 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Group WHERE ");
 
 			if (companyId == null) {
@@ -369,7 +370,7 @@ public class GroupPersistence extends BasePersistence {
 		Group group = fetchByC_C_C(companyId, className, classPK);
 
 		if (group == null) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Group exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -399,7 +400,7 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Group WHERE ");
 
 			if (companyId == null) {
@@ -520,7 +521,7 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Group ");
 
 			if (obc != null) {
@@ -578,7 +579,7 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Group WHERE ");
 
@@ -640,7 +641,7 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Group WHERE ");
 
@@ -702,7 +703,7 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Group WHERE ");
 
@@ -776,7 +777,7 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Group");
 
@@ -820,19 +821,19 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
-			sb.append(_SQL_GETORGANIZATIONS);
+			StringMaker sm = new StringMaker();
+			sm.append(_SQL_GETORGANIZATIONS);
 
 			if (obc != null) {
-				sb.append("ORDER BY ");
-				sb.append(obc.getOrderBy());
+				sm.append("ORDER BY ");
+				sm.append(obc.getOrderBy());
 			}
 			else {
-				sb.append("ORDER BY ");
-				sb.append("Organization_.name ASC");
+				sm.append("ORDER BY ");
+				sm.append("Organization_.name ASC");
 			}
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("Organization_",
@@ -1061,15 +1062,15 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
-			sb.append(_SQL_GETPERMISSIONS);
+			StringMaker sm = new StringMaker();
+			sm.append(_SQL_GETPERMISSIONS);
 
 			if (obc != null) {
-				sb.append("ORDER BY ");
-				sb.append(obc.getOrderBy());
+				sm.append("ORDER BY ");
+				sm.append(obc.getOrderBy());
 			}
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("Permission_",
@@ -1297,19 +1298,19 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
-			sb.append(_SQL_GETROLES);
+			StringMaker sm = new StringMaker();
+			sm.append(_SQL_GETROLES);
 
 			if (obc != null) {
-				sb.append("ORDER BY ");
-				sb.append(obc.getOrderBy());
+				sm.append("ORDER BY ");
+				sm.append(obc.getOrderBy());
 			}
 			else {
-				sb.append("ORDER BY ");
-				sb.append("Role_.name ASC");
+				sm.append("ORDER BY ");
+				sm.append("Role_.name ASC");
 			}
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("Role_", com.liferay.portal.model.impl.RoleImpl.class);
@@ -1535,19 +1536,19 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
-			sb.append(_SQL_GETUSERGROUPS);
+			StringMaker sm = new StringMaker();
+			sm.append(_SQL_GETUSERGROUPS);
 
 			if (obc != null) {
-				sb.append("ORDER BY ");
-				sb.append(obc.getOrderBy());
+				sm.append("ORDER BY ");
+				sm.append(obc.getOrderBy());
 			}
 			else {
-				sb.append("ORDER BY ");
-				sb.append("UserGroup.name ASC");
+				sm.append("ORDER BY ");
+				sm.append("UserGroup.name ASC");
 			}
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("UserGroup",
@@ -1775,15 +1776,15 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
-			sb.append(_SQL_GETUSERS);
+			StringMaker sm = new StringMaker();
+			sm.append(_SQL_GETUSERS);
 
 			if (obc != null) {
-				sb.append("ORDER BY ");
-				sb.append(obc.getOrderBy());
+				sm.append("ORDER BY ");
+				sm.append(obc.getOrderBy());
 			}
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("User_", com.liferay.portal.model.impl.UserImpl.class);

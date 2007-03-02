@@ -32,6 +32,7 @@ import com.liferay.portal.model.Region;
 import com.liferay.portal.model.impl.RegionImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -179,7 +180,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
@@ -224,7 +225,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
@@ -269,7 +270,7 @@ public class RegionPersistence extends BasePersistence {
 		List list = findByCountryId(countryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Region exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("countryId=");
@@ -288,7 +289,7 @@ public class RegionPersistence extends BasePersistence {
 		List list = findByCountryId(countryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Region exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("countryId=");
@@ -311,7 +312,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
@@ -363,7 +364,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -398,7 +399,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -433,7 +434,7 @@ public class RegionPersistence extends BasePersistence {
 		List list = findByActive(active, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Region exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("active=");
@@ -452,7 +453,7 @@ public class RegionPersistence extends BasePersistence {
 		List list = findByActive(active, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Region exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("active=");
@@ -474,7 +475,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -517,7 +518,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
@@ -566,7 +567,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
@@ -615,7 +616,7 @@ public class RegionPersistence extends BasePersistence {
 		List list = findByC_A(countryId, active, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Region exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("countryId=");
@@ -637,7 +638,7 @@ public class RegionPersistence extends BasePersistence {
 		List list = findByC_A(countryId, active, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Region exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("countryId=");
@@ -663,7 +664,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
@@ -767,7 +768,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Region ");
 
 			if (obc != null) {
@@ -834,7 +835,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
@@ -882,7 +883,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
 			query.append("active_ = ?");
@@ -921,7 +922,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
@@ -973,7 +974,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Region");
 

@@ -33,6 +33,7 @@ import com.liferay.portlet.polls.NoSuchChoiceException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -186,7 +187,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
 
@@ -232,7 +233,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
 
@@ -278,7 +279,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		List list = findByQuestionId(questionId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No PollsChoice exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("questionId=");
@@ -297,7 +298,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		List list = findByQuestionId(questionId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No PollsChoice exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("questionId=");
@@ -320,7 +321,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
 
@@ -422,7 +423,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.polls.model.PollsChoice ");
 
 			if (obc != null) {
@@ -470,7 +471,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
@@ -519,7 +520,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.polls.model.PollsChoice");
 

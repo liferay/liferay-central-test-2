@@ -32,6 +32,7 @@ import com.liferay.portlet.tags.NoSuchSourceException;
 import com.liferay.portlet.tags.model.TagsSource;
 import com.liferay.portlet.tags.model.impl.TagsSourceImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -232,7 +233,7 @@ public class TagsSourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.tags.model.TagsSource ");
 
 			if (obc != null) {
@@ -267,7 +268,7 @@ public class TagsSourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.tags.model.TagsSource");
 

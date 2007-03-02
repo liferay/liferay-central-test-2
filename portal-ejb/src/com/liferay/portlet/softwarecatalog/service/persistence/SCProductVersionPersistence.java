@@ -34,6 +34,7 @@ import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -205,7 +206,7 @@ public class SCProductVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
 			query.append("productEntryId = ?");
@@ -241,7 +242,7 @@ public class SCProductVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
 			query.append("productEntryId = ?");
@@ -278,7 +279,7 @@ public class SCProductVersionPersistence extends BasePersistence {
 		List list = findByProductEntryId(productEntryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No SCProductVersion exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("productEntryId=");
@@ -298,7 +299,7 @@ public class SCProductVersionPersistence extends BasePersistence {
 		List list = findByProductEntryId(productEntryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No SCProductVersion exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("productEntryId=");
@@ -321,7 +322,7 @@ public class SCProductVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
 			query.append("productEntryId = ?");
@@ -413,7 +414,7 @@ public class SCProductVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion ");
 
@@ -464,7 +465,7 @@ public class SCProductVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
@@ -503,7 +504,7 @@ public class SCProductVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion");
@@ -549,21 +550,21 @@ public class SCProductVersionPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
-			sb.append(_SQL_GETSCFRAMEWORKVERSIONS);
+			StringMaker sm = new StringMaker();
+			sm.append(_SQL_GETSCFRAMEWORKVERSIONS);
 
 			if (obc != null) {
-				sb.append("ORDER BY ");
-				sb.append(obc.getOrderBy());
+				sm.append("ORDER BY ");
+				sm.append(obc.getOrderBy());
 			}
 			else {
-				sb.append("ORDER BY ");
-				sb.append("SCFrameworkVersion.priority ASC");
-				sb.append(", ");
-				sb.append("SCFrameworkVersion.name ASC");
+				sm.append("ORDER BY ");
+				sm.append("SCFrameworkVersion.priority ASC");
+				sm.append(", ");
+				sm.append("SCFrameworkVersion.name ASC");
 			}
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("SCFrameworkVersion",

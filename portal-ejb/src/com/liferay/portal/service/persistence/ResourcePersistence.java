@@ -32,6 +32,7 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -183,7 +184,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
@@ -226,7 +227,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
@@ -267,7 +268,7 @@ public class ResourcePersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -286,7 +287,7 @@ public class ResourcePersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -309,7 +310,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
@@ -357,7 +358,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (name == null) {
@@ -400,7 +401,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (name == null) {
@@ -441,7 +442,7 @@ public class ResourcePersistence extends BasePersistence {
 		List list = findByName(name, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("name=");
@@ -460,7 +461,7 @@ public class ResourcePersistence extends BasePersistence {
 		List list = findByName(name, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("name=");
@@ -482,7 +483,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (name == null) {
@@ -531,7 +532,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
@@ -614,7 +615,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
@@ -695,7 +696,7 @@ public class ResourcePersistence extends BasePersistence {
 		List list = findByC_N_T_S(companyId, name, typeId, scope, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -725,7 +726,7 @@ public class ResourcePersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -757,7 +758,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
@@ -845,7 +846,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
@@ -928,7 +929,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
@@ -1009,7 +1010,7 @@ public class ResourcePersistence extends BasePersistence {
 		List list = findByC_T_S_P(companyId, typeId, scope, primKey, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -1039,7 +1040,7 @@ public class ResourcePersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -1071,7 +1072,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
@@ -1159,7 +1160,7 @@ public class ResourcePersistence extends BasePersistence {
 				primKey);
 
 		if (resource == null) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("companyId=");
@@ -1195,7 +1196,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
@@ -1340,7 +1341,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource ");
 
 			if (obc != null) {
@@ -1422,7 +1423,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
@@ -1470,7 +1471,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
@@ -1519,7 +1520,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
@@ -1607,7 +1608,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
@@ -1695,7 +1696,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
@@ -1795,7 +1796,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Resource");
 

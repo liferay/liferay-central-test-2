@@ -33,6 +33,7 @@ import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -188,7 +189,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
 
@@ -234,7 +235,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
 
@@ -280,7 +281,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		List list = findByParentCategoryId(parentCategoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No BlogsCategory exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("parentCategoryId=");
@@ -300,7 +301,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 				obc);
 
 		if (list.size() == 0) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No BlogsCategory exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("parentCategoryId=");
@@ -323,7 +324,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
 
@@ -425,7 +426,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.blogs.model.BlogsCategory ");
 
 			if (obc != null) {
@@ -475,7 +476,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
@@ -524,7 +525,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.blogs.model.BlogsCategory");
 

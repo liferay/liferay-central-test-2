@@ -34,6 +34,7 @@ import com.liferay.portlet.tags.NoSuchAssetException;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 
+import com.liferay.util.StringMaker;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -197,7 +198,7 @@ public class TagsAssetPersistence extends BasePersistence {
 		TagsAsset tagsAsset = fetchByC_C(className, classPK);
 
 		if (tagsAsset == null) {
-			StringBuffer msg = new StringBuffer();
+			StringMaker msg = new StringMaker();
 			msg.append("No TagsAsset exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("className=");
@@ -224,7 +225,7 @@ public class TagsAssetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.tags.model.TagsAsset WHERE ");
 
 			if (className == null) {
@@ -330,7 +331,7 @@ public class TagsAssetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.tags.model.TagsAsset ");
 
 			if (obc != null) {
@@ -372,7 +373,7 @@ public class TagsAssetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.tags.model.TagsAsset WHERE ");
 
@@ -433,7 +434,7 @@ public class TagsAssetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			StringBuffer query = new StringBuffer();
+			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.tags.model.TagsAsset");
 
@@ -477,19 +478,19 @@ public class TagsAssetPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringBuffer sb = new StringBuffer();
-			sb.append(_SQL_GETTAGSENTRYS);
+			StringMaker sm = new StringMaker();
+			sm.append(_SQL_GETTAGSENTRYS);
 
 			if (obc != null) {
-				sb.append("ORDER BY ");
-				sb.append(obc.getOrderBy());
+				sm.append("ORDER BY ");
+				sm.append(obc.getOrderBy());
 			}
 			else {
-				sb.append("ORDER BY ");
-				sb.append("TagsEntry.name ASC");
+				sm.append("ORDER BY ");
+				sm.append("TagsEntry.name ASC");
 			}
 
-			String sql = sb.toString();
+			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("TagsEntry",
