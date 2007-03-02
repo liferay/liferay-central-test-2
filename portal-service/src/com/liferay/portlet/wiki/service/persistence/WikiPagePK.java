@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
@@ -134,23 +135,23 @@ public class WikiPagePK implements Comparable, Serializable {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(StringPool.OPEN_CURLY_BRACE);
-		sb.append("nodeId");
-		sb.append(StringPool.EQUAL);
-		sb.append(nodeId);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("title");
-		sb.append(StringPool.EQUAL);
-		sb.append(title);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("version");
-		sb.append(StringPool.EQUAL);
-		sb.append(version);
-		sb.append(StringPool.CLOSE_CURLY_BRACE);
+		StringMaker sm = new StringMaker();
+		sm.append(StringPool.OPEN_CURLY_BRACE);
+		sm.append("nodeId");
+		sm.append(StringPool.EQUAL);
+		sm.append(nodeId);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("title");
+		sm.append(StringPool.EQUAL);
+		sm.append(title);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("version");
+		sm.append(StringPool.EQUAL);
+		sm.append(version);
+		sm.append(StringPool.CLOSE_CURLY_BRACE);
 
-		return sb.toString();
+		return sm.toString();
 	}
 }

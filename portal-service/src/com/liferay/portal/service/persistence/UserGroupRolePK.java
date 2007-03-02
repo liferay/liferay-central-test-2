@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
@@ -134,23 +135,23 @@ public class UserGroupRolePK implements Comparable, Serializable {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(StringPool.OPEN_CURLY_BRACE);
-		sb.append("userId");
-		sb.append(StringPool.EQUAL);
-		sb.append(userId);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("groupId");
-		sb.append(StringPool.EQUAL);
-		sb.append(groupId);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("roleId");
-		sb.append(StringPool.EQUAL);
-		sb.append(roleId);
-		sb.append(StringPool.CLOSE_CURLY_BRACE);
+		StringMaker sm = new StringMaker();
+		sm.append(StringPool.OPEN_CURLY_BRACE);
+		sm.append("userId");
+		sm.append(StringPool.EQUAL);
+		sm.append(userId);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("groupId");
+		sm.append(StringPool.EQUAL);
+		sm.append(groupId);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("roleId");
+		sm.append(StringPool.EQUAL);
+		sm.append(roleId);
+		sm.append(StringPool.CLOSE_CURLY_BRACE);
 
-		return sb.toString();
+		return sm.toString();
 	}
 }

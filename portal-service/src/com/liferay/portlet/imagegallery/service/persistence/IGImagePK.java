@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
@@ -109,18 +110,18 @@ public class IGImagePK implements Comparable, Serializable {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(StringPool.OPEN_CURLY_BRACE);
-		sb.append("companyId");
-		sb.append(StringPool.EQUAL);
-		sb.append(companyId);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("imageId");
-		sb.append(StringPool.EQUAL);
-		sb.append(imageId);
-		sb.append(StringPool.CLOSE_CURLY_BRACE);
+		StringMaker sm = new StringMaker();
+		sm.append(StringPool.OPEN_CURLY_BRACE);
+		sm.append("companyId");
+		sm.append(StringPool.EQUAL);
+		sm.append(companyId);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("imageId");
+		sm.append(StringPool.EQUAL);
+		sm.append(imageId);
+		sm.append(StringPool.CLOSE_CURLY_BRACE);
 
-		return sb.toString();
+		return sm.toString();
 	}
 }

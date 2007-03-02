@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
@@ -126,23 +127,23 @@ public class MBMessageFlagPK implements Comparable, Serializable {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(StringPool.OPEN_CURLY_BRACE);
-		sb.append("topicId");
-		sb.append(StringPool.EQUAL);
-		sb.append(topicId);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("messageId");
-		sb.append(StringPool.EQUAL);
-		sb.append(messageId);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("userId");
-		sb.append(StringPool.EQUAL);
-		sb.append(userId);
-		sb.append(StringPool.CLOSE_CURLY_BRACE);
+		StringMaker sm = new StringMaker();
+		sm.append(StringPool.OPEN_CURLY_BRACE);
+		sm.append("topicId");
+		sm.append(StringPool.EQUAL);
+		sm.append(topicId);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("messageId");
+		sm.append(StringPool.EQUAL);
+		sm.append(messageId);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("userId");
+		sm.append(StringPool.EQUAL);
+		sm.append(userId);
+		sm.append(StringPool.CLOSE_CURLY_BRACE);
 
-		return sb.toString();
+		return sm.toString();
 	}
 }

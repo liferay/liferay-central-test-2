@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
@@ -159,28 +160,28 @@ public class JournalArticlePK implements Comparable, Serializable {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(StringPool.OPEN_CURLY_BRACE);
-		sb.append("companyId");
-		sb.append(StringPool.EQUAL);
-		sb.append(companyId);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("groupId");
-		sb.append(StringPool.EQUAL);
-		sb.append(groupId);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("articleId");
-		sb.append(StringPool.EQUAL);
-		sb.append(articleId);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("version");
-		sb.append(StringPool.EQUAL);
-		sb.append(version);
-		sb.append(StringPool.CLOSE_CURLY_BRACE);
+		StringMaker sm = new StringMaker();
+		sm.append(StringPool.OPEN_CURLY_BRACE);
+		sm.append("companyId");
+		sm.append(StringPool.EQUAL);
+		sm.append(companyId);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("groupId");
+		sm.append(StringPool.EQUAL);
+		sm.append(groupId);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("articleId");
+		sm.append(StringPool.EQUAL);
+		sm.append(articleId);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("version");
+		sm.append(StringPool.EQUAL);
+		sm.append(version);
+		sm.append(StringPool.CLOSE_CURLY_BRACE);
 
-		return sb.toString();
+		return sm.toString();
 	}
 }

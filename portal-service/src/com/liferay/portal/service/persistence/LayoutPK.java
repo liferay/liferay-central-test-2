@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
@@ -109,18 +110,18 @@ public class LayoutPK implements Comparable, Serializable {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(StringPool.OPEN_CURLY_BRACE);
-		sb.append("layoutId");
-		sb.append(StringPool.EQUAL);
-		sb.append(layoutId);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("ownerId");
-		sb.append(StringPool.EQUAL);
-		sb.append(ownerId);
-		sb.append(StringPool.CLOSE_CURLY_BRACE);
+		StringMaker sm = new StringMaker();
+		sm.append(StringPool.OPEN_CURLY_BRACE);
+		sm.append("layoutId");
+		sm.append(StringPool.EQUAL);
+		sm.append(layoutId);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("ownerId");
+		sm.append(StringPool.EQUAL);
+		sm.append(ownerId);
+		sm.append(StringPool.CLOSE_CURLY_BRACE);
 
-		return sb.toString();
+		return sm.toString();
 	}
 }

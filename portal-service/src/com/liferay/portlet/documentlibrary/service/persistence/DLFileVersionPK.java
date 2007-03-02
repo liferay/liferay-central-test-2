@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
@@ -134,23 +135,23 @@ public class DLFileVersionPK implements Comparable, Serializable {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(StringPool.OPEN_CURLY_BRACE);
-		sb.append("folderId");
-		sb.append(StringPool.EQUAL);
-		sb.append(folderId);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("name");
-		sb.append(StringPool.EQUAL);
-		sb.append(name);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append("version");
-		sb.append(StringPool.EQUAL);
-		sb.append(version);
-		sb.append(StringPool.CLOSE_CURLY_BRACE);
+		StringMaker sm = new StringMaker();
+		sm.append(StringPool.OPEN_CURLY_BRACE);
+		sm.append("folderId");
+		sm.append(StringPool.EQUAL);
+		sm.append(folderId);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("name");
+		sm.append(StringPool.EQUAL);
+		sm.append(name);
+		sm.append(StringPool.COMMA);
+		sm.append(StringPool.SPACE);
+		sm.append("version");
+		sm.append(StringPool.EQUAL);
+		sm.append(version);
+		sm.append(StringPool.CLOSE_CURLY_BRACE);
 
-		return sb.toString();
+		return sm.toString();
 	}
 }
