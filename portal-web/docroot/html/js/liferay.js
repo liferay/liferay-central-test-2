@@ -223,6 +223,8 @@ Liferay.Draggables = {
 					accept: 'portlet-boundary',
 					handle: '.portlet-title',
 					helperclass: 'portlet-placeholder',
+					hoverclass: 'portlet-dragging',
+					activeclass: 'portlet-hover',
 					onStop: instance._onStop,
 					opacity: 0.7,
 					tolerance: 'intersect'

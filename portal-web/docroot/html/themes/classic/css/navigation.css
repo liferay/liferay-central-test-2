@@ -278,7 +278,8 @@ li.my-places ul li ul {
 	width: 150px;
 }
 
-.ie6.js .lfr-dock h2 {
+.ie6.js .lfr-dock .my-places .show-my-places h3 {
+	font-size: 1.1em;
 }
 
 .ie6.js .lfr-dock.expanded .lfr-dock-list-container {

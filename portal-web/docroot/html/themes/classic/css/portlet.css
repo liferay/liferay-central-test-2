@@ -47,11 +47,23 @@
 	padding: 0.2em 0 0.5em 1.8em;
 }
 
-/* ---------- Placeholder to enable drag and drop ---------- */
+/* ---------- Drag and Drop classes ---------- */
+
+.portlet-dragging {
+	background: #ffffe3 !important;
+	border: 3px solid #666;
+	padding: 10px;
+}
+
+.portlet-hover {
+	background: #ddd;
+	padding: 10px;
+}
 
 .portlet-placeholder {
 	background: url(../images/portlet/placeholder_bg.gif);
 	border: 1px dashed #508FB4;
+	width: 100% !important;
 }
 
 /* ---------- Standard styles defined in the JSR 168 ---------- */
