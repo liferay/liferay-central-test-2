@@ -22,6 +22,8 @@
 
 package com.liferay.portal.theme;
 
+import com.liferay.portal.util.CachePropsUtil;
+
 import org.apache.commons.pool.BasePoolableObjectFactory;
 import org.apache.commons.pool.ObjectPool;
 import org.apache.commons.pool.impl.StackObjectPool;
@@ -35,11 +37,18 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class PortletDisplayFactory {
 
 	public static PortletDisplay create() throws Exception {
-		return (PortletDisplay)_instance._pool.borrowObject();
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			return (PortletDisplay)_instance._pool.borrowObject();
+		}
+		else {
+			return new PortletDisplay();
+		}
 	}
 
 	public static void recycle(PortletDisplay portletDisplay) throws Exception {
-		_instance._pool.returnObject(portletDisplay);
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			_instance._pool.returnObject(portletDisplay);
+		}
 	}
 
 	private PortletDisplayFactory() {

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.util.CachePropsUtil;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
@@ -51,14 +53,23 @@ public class RenderResponseFactory {
 			String companyId, String plid)
 		throws Exception {
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
-					_instance._pool.getNumActive());
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
+						_instance._pool.getNumActive());
+			}
 		}
 
-		RenderResponseImpl renderResponseImpl =
-			(RenderResponseImpl)_instance._pool.borrowObject();
+		RenderResponseImpl renderResponseImpl = null;
+
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			renderResponseImpl =
+				(RenderResponseImpl)_instance._pool.borrowObject();
+		}
+		else {
+			renderResponseImpl = new RenderResponseImpl();
+		}
 
 		renderResponseImpl.init(req, res, portletName, companyId, plid);
 
@@ -68,13 +79,15 @@ public class RenderResponseFactory {
 	public static void recycle(RenderResponseImpl renderResponseImpl)
 		throws Exception {
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
-					_instance._pool.getNumActive());
-		}
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
+						_instance._pool.getNumActive());
+			}
 
-		_instance._pool.returnObject(renderResponseImpl);
+			_instance._pool.returnObject(renderResponseImpl);
+		}
 	}
 
 	private RenderResponseFactory() {

@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.util.CachePropsUtil;
 
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
@@ -62,14 +63,23 @@ public class RenderRequestFactory {
 			PortletMode portletMode, PortletPreferences prefs, String plid)
 		throws Exception {
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
-					_instance._pool.getNumActive());
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
+						_instance._pool.getNumActive());
+			}
 		}
 
-		RenderRequestImpl renderRequestImpl =
-			(RenderRequestImpl)_instance._pool.borrowObject();
+		RenderRequestImpl renderRequestImpl = null;
+
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			renderRequestImpl =
+				(RenderRequestImpl)_instance._pool.borrowObject();
+		}
+		else {
+			renderRequestImpl = new RenderRequestImpl();
+		}
 
 		renderRequestImpl.init(
 			req, portlet, cachePortlet, portletCtx, windowState, portletMode,
@@ -81,13 +91,15 @@ public class RenderRequestFactory {
 	public static void recycle(RenderRequestImpl renderRequestImpl)
 		throws Exception {
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
-					_instance._pool.getNumActive());
-		}
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
+						_instance._pool.getNumActive());
+			}
 
-		_instance._pool.returnObject(renderRequestImpl);
+			_instance._pool.returnObject(renderRequestImpl);
+		}
 	}
 
 	private RenderRequestFactory() {

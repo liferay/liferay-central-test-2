@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
+import com.liferay.portal.util.CachePropsUtil;
 
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
@@ -48,8 +49,15 @@ public class ActionResponseFactory {
 			PortletMode portletMode)
 		throws Exception {
 
-		ActionResponseImpl actionResponseImpl =
-			(ActionResponseImpl)_instance._pool.borrowObject();
+		ActionResponseImpl actionResponseImpl = null;
+
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			actionResponseImpl =
+				(ActionResponseImpl)_instance._pool.borrowObject();
+		}
+		else {
+			actionResponseImpl = new ActionResponseImpl();
+		}
 
 		actionResponseImpl.init(
 			req, res, portletName, user, layout, windowState, portletMode);
@@ -60,7 +68,9 @@ public class ActionResponseFactory {
 	public static void recycle(ActionResponseImpl actionResponseImpl)
 		throws Exception {
 
-		_instance._pool.returnObject(actionResponseImpl);
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			_instance._pool.returnObject(actionResponseImpl);
+		}
 	}
 
 	private ActionResponseFactory() {

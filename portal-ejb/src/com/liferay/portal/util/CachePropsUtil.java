@@ -20,57 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.theme;
+package com.liferay.portal.util;
 
-import com.liferay.portal.util.CachePropsUtil;
-
-import org.apache.commons.pool.BasePoolableObjectFactory;
-import org.apache.commons.pool.ObjectPool;
-import org.apache.commons.pool.impl.StackObjectPool;
+import com.liferay.util.GetterUtil;
 
 /**
- * <a href="ThemeDisplayFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="CachePropsUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ThemeDisplayFactory {
+public class CachePropsUtil {
 
-	public static ThemeDisplay create() throws Exception {
-		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
-			return (ThemeDisplay)_instance._pool.borrowObject();
-		}
-		else {
-			return new ThemeDisplay();
-		}
-	}
-
-	public static void recycle(ThemeDisplay themeDisplay) throws Exception {
-		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
-			_instance._pool.returnObject(themeDisplay);
-		}
-	}
-
-	private ThemeDisplayFactory() {
-		_pool = new StackObjectPool(new Factory());
-	}
-
-	private static ThemeDisplayFactory _instance = new ThemeDisplayFactory();
-
-	private ObjectPool _pool;
-
-	private class Factory extends BasePoolableObjectFactory {
-
-		public Object makeObject() {
-			return new ThemeDisplay();
-		}
-
-		public void passivateObject(Object obj) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)obj;
-
-			themeDisplay.recycle();
-		}
-
-	}
+	public static final boolean COMMONS_POOL_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.COMMONS_POOL_ENABLED));
 
 }

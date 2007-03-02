@@ -23,6 +23,7 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.model.User;
+import com.liferay.portal.util.CachePropsUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import org.apache.commons.logging.Log;
@@ -44,14 +45,24 @@ public class PermissionCheckerFactory {
 			User user, boolean signedIn, boolean checkGuest)
 		throws Exception {
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
-					_instance._pool.getNumActive());
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
+						_instance._pool.getNumActive());
+			}
 		}
 
-		PermissionCheckerImpl permissionChecker =
-			(PermissionCheckerImpl)_instance._pool.borrowObject();
+		PermissionCheckerImpl permissionChecker = null;
+
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			permissionChecker =
+				(PermissionCheckerImpl)_instance._pool.borrowObject();
+		}
+		else {
+			permissionChecker = (PermissionCheckerImpl)Class.forName(
+				PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER)).newInstance();
+		}
 
 		permissionChecker.init(user, signedIn, checkGuest);
 
@@ -61,17 +72,19 @@ public class PermissionCheckerFactory {
 	public static void recycle(PermissionCheckerImpl permissionChecker)
 		throws Exception {
 
-		if (permissionChecker == null) {
-			return;
-		}
+		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+			if (permissionChecker == null) {
+				return;
+			}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
-					_instance._pool.getNumActive());
-		}
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
+						_instance._pool.getNumActive());
+			}
 
-		_instance._pool.returnObject(permissionChecker);
+			_instance._pool.returnObject(permissionChecker);
+		}
 	}
 
 	private PermissionCheckerFactory() {
