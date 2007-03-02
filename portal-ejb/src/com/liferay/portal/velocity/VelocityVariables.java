@@ -24,7 +24,10 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.language.LanguageUtil_IW;
 import com.liferay.portal.language.UnicodeLanguageUtil_IW;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.theme.NavItem;
+import com.liferay.portal.theme.RequestVars;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil_IW;
 import com.liferay.portal.util.PropsUtil_IW;
@@ -43,6 +46,7 @@ import com.liferay.util.UnicodeFormatter_IW;
 import com.liferay.util.Validator;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletRequest;
@@ -117,12 +121,15 @@ public class VelocityVariables {
 		if (themeDisplay != null) {
 			Theme theme = themeDisplay.getTheme();
 
+			Layout layout = themeDisplay.getLayout();
+			List layouts = themeDisplay.getLayouts();
+
 			vc.put("themeDisplay", themeDisplay);
 			vc.put("company", themeDisplay.getCompany());
 			vc.put("user", themeDisplay.getUser());
 			vc.put("realUser", themeDisplay.getRealUser());
-			vc.put("layout", themeDisplay.getLayout());
-			vc.put("layouts", themeDisplay.getLayouts());
+			vc.put("layout", layout);
+			vc.put("layouts", layouts);
 			vc.put("plid", themeDisplay.getPlid());
 			vc.put("layoutTypePortlet", themeDisplay.getLayoutTypePortlet());
 			vc.put(
@@ -132,6 +139,17 @@ public class VelocityVariables {
 			vc.put("theme", theme);
 			vc.put("colorScheme", themeDisplay.getColorScheme());
 			vc.put("portletDisplay", themeDisplay.getPortletDisplay());
+
+			// Navigation items
+
+			if (layout != null) {
+				RequestVars requestVars = new RequestVars(
+					req, themeDisplay, layout.getAncestorLayoutId());
+
+				List navItems = NavItem.fromLayouts(requestVars, layouts);
+
+				vc.put("navItems", navItems);
+			}
 
 			// Full templates path
 
@@ -154,9 +172,18 @@ public class VelocityVariables {
 
 		// Tiles attributes
 
-		_insertTilesVariables(vc, pageContext, "tilesTitle", "title");
-		_insertTilesVariables(vc, pageContext, "tilesContent", "content");
-		_insertTilesVariables(vc, pageContext, "tilesSelectable", "selectable");
+		String tilesTitle = _insertTilesVariables(
+			vc, pageContext, "tilesTitle", "title");
+		String tilesContent = _insertTilesVariables(
+			vc, pageContext, "tilesContent", "content");
+		boolean tilesSelectable = GetterUtil.getBoolean(_insertTilesVariables(
+			vc, pageContext, "tilesSelectable", "selectable"));
+
+		if (themeDisplay != null) {
+			themeDisplay.setTilesTitle(tilesTitle);
+			themeDisplay.setTilesContent(tilesContent);
+			themeDisplay.setTilesSelectable(tilesSelectable);
+		}
 
 		// Helper utilities
 
@@ -236,7 +263,7 @@ public class VelocityVariables {
 		vc.put("unicodeFormatter", UnicodeFormatter_IW.getInstance());
 	}
 
-	private static void _insertTilesVariables(
+	private static String _insertTilesVariables(
 		VelocityContext vc, PageContext pageContext, String attributeId,
 		String attributeName) {
 
@@ -245,13 +272,17 @@ public class VelocityVariables {
 				ComponentConstants.COMPONENT_CONTEXT,
 				PageContext.REQUEST_SCOPE);
 
+		String value = null;
+
 		if (componentContext != null) {
-			Object value = componentContext.getAttribute(attributeName);
+			value = (String)componentContext.getAttribute(attributeName);
 
 			if (value != null) {
 				vc.put(attributeId, value);
 			}
 		}
+
+		return value;
 	}
 
 }

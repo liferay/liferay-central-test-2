@@ -259,26 +259,29 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public String getAncestorLayoutId()
-		throws PortalException, SystemException {
-
+	public String getAncestorLayoutId() {
 		String ancestorLayoutId = StringPool.BLANK;
 
-		Layout ancestorLayout = this;
+		try {
+			Layout ancestorLayout = this;
 
-		while (true) {
-			if (!ancestorLayout.getParentLayoutId().equals(
-					LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
+			while (true) {
+				if (!ancestorLayout.getParentLayoutId().equals(
+						LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
 
-				ancestorLayout = LayoutLocalServiceUtil.getLayout(
-					ancestorLayout.getParentLayoutId(),
-					ancestorLayout.getOwnerId());
+					ancestorLayout = LayoutLocalServiceUtil.getLayout(
+						ancestorLayout.getParentLayoutId(),
+						ancestorLayout.getOwnerId());
+				}
+				else {
+					ancestorLayoutId = ancestorLayout.getLayoutId();
+
+					break;
+				}
 			}
-			else {
-				ancestorLayoutId = ancestorLayout.getLayoutId();
-
-				break;
-			}
+		}
+		catch (Exception e) {
+			_log.error(e);
 		}
 
 		return ancestorLayoutId;

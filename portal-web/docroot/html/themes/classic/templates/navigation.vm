@@ -1,29 +1,25 @@
-#if ( $has_navigation )
-	<div id="navigation">
-		<ul>		
-			#foreach ( $nav_item in $nav_items )
-				#if ( $nav_item.isSelected($selectable, $page, $ancestor_layout_id) )
-					#set ( $nav_item_class = "selected" )
-				#else
-					#set ( $nav_item_class = "" )
-				#end
-
-				<li class="$nav_item_class">
-					<a href="$nav_item.getResetLayoutURL($request)" $nav_item.getTarget()><span>$nav_item.getName($locale)</span></a>
-	
-					#set ( $nav_children = $nav_item.getChildren() )
-
-					#if ( $nav_children.size() > 0 )
-						<ul class="child-menu">
-							#foreach ( $nav_child in $nav_children )
-								<li>
-									<a href="$nav_child.getResetLayoutURL($request)" $nav_child.getTarget()>$nav_child.getName($locale)</a>
-								</li>
-							#end
-						</ul>
-					#end
-				</li>
+<div id="navigation">
+	<ul>		
+		#foreach ( $nav_item in $nav_items )
+			#if ( $nav_item.isSelected() )
+				#set ( $nav_item_class = "selected" )
+			#else
+				#set ( $nav_item_class = "" )
 			#end
-		</ul>
-	</div>
-#end
+
+			<li class="$nav_item_class">
+				<a href="$nav_item.getURL()" $nav_item.getTarget()><span>$nav_item.getName()</span></a>
+
+				#if ( $nav_item.hasChildren() )
+					<ul class="child-menu">
+						#foreach ( $nav_child in $nav_item.getChildren() )
+							<li>
+								<a href="$nav_child.getURL()" $nav_child.getTarget()>$nav_child.getName()</a>
+							</li>
+						#end
+					</ul>
+				#end
+			</li>
+		#end
+	</ul>
+</div>

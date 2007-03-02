@@ -41,9 +41,7 @@ public interface Layout extends LayoutModel {
 
 	public boolean isShared();
 
-	public java.lang.String getAncestorLayoutId()
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
+	public java.lang.String getAncestorLayoutId();
 
 	public boolean hasAncestor(java.lang.String layoutId)
 		throws com.liferay.portal.SystemException, 

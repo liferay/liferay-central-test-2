@@ -69,7 +69,7 @@
 ## ---------- Page ---------- ##
 
 #set ( $the_title = $languageUtil.get($pageContext, $tilesTitle) )
-#set ( $selectable = $tilesSelectable.equals("true") )
+#set ( $selectable = $theme_display.isTilesSelectable() )
 
 #set ( $page = $layout )
 #set ( $pages = $layouts )
@@ -83,12 +83,8 @@
 
 ## ---------- Navigation ---------- ##
 
-#if ( $page )
-	#set ( $ancestor_layout_id = $page.getAncestorLayoutId() )	
-#end
-
-#set ( $has_navigation = ($pages && $pages.size() > 0) )
-#set ( $nav_items = $pages )
+#set ( $nav_items = $navItems )
+#set ( $has_navigation = ($nav_items && $nav_items.size() > 0) )
 
 ## ---------- Includes ---------- ##
 

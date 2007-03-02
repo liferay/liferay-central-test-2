@@ -581,7 +581,7 @@ public class ThemeDisplay implements Serializable {
 		_tilesContent = tilesContent;
 	}
 
-	public boolean getTilesSelectable() {
+	public boolean isTilesSelectable() {
 		return _tilesSelectable;
 	}
 
