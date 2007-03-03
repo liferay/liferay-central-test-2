@@ -33,6 +33,7 @@
 <%@ page import="com.liferay.documentlibrary.NoSuchFileException" %>
 <%@ page import="com.liferay.documentlibrary.SourceFileNameException" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
+<%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portlet.documentlibrary.FileShortcutPermissionException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.FolderNameException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.NoSuchFileEntryException" %>
