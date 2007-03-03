@@ -312,11 +312,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>imageDir</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>message</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

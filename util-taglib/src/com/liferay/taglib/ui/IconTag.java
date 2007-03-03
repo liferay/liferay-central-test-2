@@ -38,7 +38,6 @@ public class IconTag extends IncludeTag {
 		ServletRequest req = pageContext.getRequest();
 
 		req.setAttribute("liferay-ui:icon:image", _image);
-		req.setAttribute("liferay-ui:icon:imageDir", _imageDir);
 		req.setAttribute("liferay-ui:icon:message", _message);
 		req.setAttribute("liferay-ui:icon:url", _url);
 		req.setAttribute("liferay-ui:icon:target", _target);
@@ -49,10 +48,6 @@ public class IconTag extends IncludeTag {
 
 	public void setImage(String image) {
 		_image = image;
-	}
-
-	public void setImageDir(String imageDir) {
-		_imageDir = imageDir;
 	}
 
 	public void setMessage(String message) {
@@ -78,7 +73,6 @@ public class IconTag extends IncludeTag {
 	private static final String _PAGE = "/html/taglib/ui/icon/page.jsp";
 
 	private String _image;
-	private String _imageDir = "common";
 	private String _message;
 	private String _url;
 	private String _target = "_self";

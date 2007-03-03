@@ -44,7 +44,7 @@ if (treeWalker.isOdd()) {
 }
 %>
 
-	<%@ include file="/html/portlet/message_boards/view_thread_message.jsp" %>
+<%@ include file="/html/portlet/message_boards/view_thread_message.jsp" %>
 
 <%
 List messages = treeWalker.getMessages();

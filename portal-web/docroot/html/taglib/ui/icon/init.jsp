@@ -27,8 +27,6 @@
 <%
 String image = (String)request.getAttribute("liferay-ui:icon:image");
 
-String imageDir = (String)request.getAttribute("liferay-ui:icon:imageDir");
-
 String message = (String)request.getAttribute("liferay-ui:icon:message");
 
 if (message == null) {
