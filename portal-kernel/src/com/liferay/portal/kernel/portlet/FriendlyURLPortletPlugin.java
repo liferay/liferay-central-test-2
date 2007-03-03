@@ -20,12 +20,13 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet;
+package com.liferay.portal.kernel.portlet;
 
 /**
  * <a href="FriendlyURLPortletPlugin.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Myunghun Kim
+ * @author Brian Wing Shun Chan
  *
  */
 public interface FriendlyURLPortletPlugin {

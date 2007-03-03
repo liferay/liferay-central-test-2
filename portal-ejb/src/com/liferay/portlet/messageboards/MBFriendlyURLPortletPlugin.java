@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.messageboards;
 
-import com.liferay.portal.servlet.FriendlyURLPortletPlugin;
+import com.liferay.portal.kernel.portlet.FriendlyURLPortletPlugin;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 
 /**
