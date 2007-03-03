@@ -51,7 +51,20 @@ MBThread lastThread = messageDisplay.getLastThread();
 boolean isFirstThread = messageDisplay.isFirstThread();
 boolean isLastThread = messageDisplay.isLastThread();
 
-boolean threadView = ParamUtil.get(request, "threadView", true);
+boolean flatView = true;
+boolean showShortcut = true;
+
+PortletPreferences prefs = PortletPreferencesFactory.getUserSetup(request, portletDisplay.getId());
+
+String threadView = prefs.getValue("thread-view", StringPool.BLANK);
+
+if (threadView.equals("tree")) {
+	flatView = false;
+	showShortcut = false;
+}
+else if (threadView.equals("flat")) {
+	showShortcut = false;
+}
 %>
 
 <script type="text/javascript">
@@ -67,7 +80,47 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
-<%= MBUtil.getBreadcrumbs(null, message, pageContext, renderRequest, renderResponse) %>
+<table cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td width="99%">
+			<%= MBUtil.getBreadcrumbs(null, message, pageContext, renderRequest, renderResponse) %>
+		</td>
+
+<c:if test="<%= themeDisplay.isSignedIn() %>">
+		<td>
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="comboViewURL">
+				<portlet:param name="struts_action" value="/message_boards/edit_display" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
+				<portlet:param name="threadView" value="combination" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon image="thread_view_combination" imageDir="message_boards" message="combination-view" url="<%= comboViewURL %>" />
+		</td>
+		<td>
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="flatViewURL">
+				<portlet:param name="struts_action" value="/message_boards/edit_display" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
+				<portlet:param name="threadView" value="flat" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon image="thread_view_flat" imageDir="message_boards" message="flat-view" url="<%= flatViewURL %>" />
+		</td>
+		<td>
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="treeViewURL">
+				<portlet:param name="struts_action" value="/message_boards/edit_display" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
+				<portlet:param name="threadView" value="tree" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon image="thread_view_tree" imageDir="message_boards" message="tree-view" url="<%= treeViewURL %>" />
+		</td>
+</c:if>
+
+	</tr>
+</table>
 
 <br><br>
 
@@ -171,13 +224,14 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 	Collections.sort(messages, new MessageCreateDateComparator(true));
 	%>
 
-	<c:if test="<%= messages.size() > 1 %>">
-		<div id="<portlet:namespace />messageScroll0" style="margin: 5px 0px 0px 0px;">
-			<liferay-ui:toggle
-				id="toggle_id_message_boards_view_message_thread"
-				defaultOn="true"
-			/>
-		</div>
+	<div id="<portlet:namespace />messageScroll0" style="margin: 5px 0px 0px 0px;">
+	</div>
+
+	<c:if test="<%= showShortcut && (messages.size() > 1) %>">
+		<liferay-ui:toggle
+			id="toggle_id_message_boards_view_message_thread"
+			defaultOn="true"
+		/>
 
 		<table border="0" cellpadding="1" cellspacing="0" id="toggle_id_message_boards_view_message_thread" width="100%" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; display: <liferay-ui:toggle-value id="toggle_id_message_boards_view_message_thread" />; margin: 5px 0px 0px 0px;">
 
@@ -188,35 +242,30 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, new Boolean(false));
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
-		%>
 
-		<liferay-util:include page="/html/portlet/message_boards/view_message_thread.jsp" />
+		%>
+		<liferay-util:include page="/html/portlet/message_boards/view_thread_shortcut.jsp" />
 
 		</table>
 	</c:if>
 
-	<%
-	boolean editable = true;
+	<c:choose>
+		<c:when test="<%= flatView %>">
+			<%@ include file="/html/portlet/message_boards/view_thread_flat.jsp" %>
+		</c:when>
+		<c:otherwise>
+			<%
+			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
+			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, message);
+			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, treeWalker.getRoot());
+			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
+			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, new Boolean(false));
+			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
+			%>
 
-	int depth = 0;
-
-	for (int i = 0; i < messages.size(); i++) {
-		message = (MBMessage)messages.get(i);
-
-		String className = "portlet-section-alternate";
-		String classHoverName = "portlet-section-alternate-hover";
-
-		if (MathUtil.isOdd(i)) {
-			className = "portlet-section-body";
-			classHoverName = "portlet-section-body-hover";
-		}
-	%>
-
-		<%@ include file="/html/portlet/message_boards/view_message_thread_message.jsp" %>
-
-	<%
-	}
-	%>
+			<liferay-util:include page="/html/portlet/message_boards/view_thread_tree.jsp" />
+		</c:otherwise>
+	</c:choose>
 
 </div>
 

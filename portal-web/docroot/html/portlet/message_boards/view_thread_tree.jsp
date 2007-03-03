@@ -24,6 +24,7 @@
 
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
+
 <%
 boolean editable = true;
 
@@ -43,85 +44,7 @@ if (treeWalker.isOdd()) {
 }
 %>
 
-<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-	<td width="90%">
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td style="padding-left: <%= depth * 10 %>px;"></td>
-			<td>
-				<c:if test="<%= !message.isRoot() %>">
-					<c:choose>
-						<c:when test="<%= !lastNode %>">
-							<img src="<%= themeDisplay.getPathThemeImage() %>/message_boards/t.png">
-						</c:when>
-						<c:otherwise>
-							<img src="<%= themeDisplay.getPathThemeImage() %>/message_boards/l.png">
-						</c:otherwise>
-					</c:choose>
-				</c:if>
-			</td>
-			<td style="padding-left: 5px;"></td>
-			<td>
-
-				<%
-				String rowHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + message.getMessageId() + ");";
-				%>
-
-				<a href="<%= rowHREF %>">
-
-				<%
-				boolean readFlag = true;
-
-				if (themeDisplay.isSignedIn()) {
-					readFlag = MBMessageFlagLocalServiceUtil.hasReadFlag(message.getMessageId(), request.getRemoteUser());
-				}
-				%>
-
-				<c:if test="<%= !readFlag %>">
-					<b>
-				</c:if>
-
-				<%= message.getSubject() %>
-
-				<c:if test="<%= !readFlag %>">
-					</b>
-				</c:if>
-
-				</a>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td></td>
-	<td nowrap>
-		<a href="<%= rowHREF %>">
-
-		<c:if test="<%= !readFlag %>">
-			<b>
-		</c:if>
-
-		<c:choose>
-			<c:when test="<%= message.isAnonymous() %>">
-				<%= LanguageUtil.get(pageContext, "anonymous") %>
-			</c:when>
-			<c:otherwise>
-				<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>
-			</c:otherwise>
-		</c:choose>
-
-		<c:if test="<%= !readFlag %>">
-			</b>
-		</c:if>
-
-		</a>
-	</td>
-	<td></td>
-	<td nowrap>
-		<a href="<%= rowHREF %>">
-		<%= dateFormatDateTime.format(message.getModifiedDate()) %>
-		</a>
-	</td>
-</tr>
+	<%@ include file="/html/portlet/message_boards/view_thread_message.jsp" %>
 
 <%
 List messages = treeWalker.getMessages();
@@ -146,12 +69,12 @@ for (int i = range[0]; i < range[1]; i++) {
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(depth));
 %>
 
-	<liferay-util:include page="/html/portlet/message_boards/view_message_thread.jsp" />
+	<liferay-util:include page="/html/portlet/message_boards/view_thread_tree.jsp" />
 
 <%
 }
 %>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.view_message_thread.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.view_thread_tree.jsp");
 %>

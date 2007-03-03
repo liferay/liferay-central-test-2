@@ -938,6 +938,11 @@
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 		</action>
 
+		<action path="/message_boards/edit_display" type="com.liferay.portlet.messageboards.action.EditDisplayAction">
+			<forward name="portlet.message_boards.view_message" path="portlet.message_boards.view_message" />
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+		</action>
+
 		<action path="/message_boards/edit_message" type="com.liferay.portlet.messageboards.action.EditMessageAction">
 			<forward name="portlet.message_boards.edit_message" path="portlet.message_boards.edit_message" />
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />

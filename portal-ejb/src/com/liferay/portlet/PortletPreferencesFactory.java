@@ -378,4 +378,45 @@ public class PortletPreferencesFactory {
 		}
 	}
 
+	public static PortletPreferences getUserSetup(
+			HttpServletRequest req, String portletId)
+		throws PortalException, SystemException {
+
+		String layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
+
+		String companyId = PortalUtil.getCompanyId(req);
+
+		String userId = PortalUtil.getUserId(req);
+
+		if (userId == null) {
+			userId = UserImpl.getDefaultUserId(companyId);
+		}
+
+		String ownerId =
+			PortletKeys.PREFS_OWNER_ID_USER + StringPool.PERIOD + userId;
+
+		PortletPreferencesPK pk = new PortletPreferencesPK(
+			portletId, layoutId, ownerId);
+
+		return PortletPreferencesLocalServiceUtil.getPreferences(companyId, pk);
+	}
+
+	public static PortletPreferences getUserSetup(
+			ActionRequest req, String portletId)
+		throws PortalException, SystemException {
+
+		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+
+		return getUserSetup(reqImpl.getHttpServletRequest(), portletId);
+	}
+
+	public static PortletPreferences getUserSetup(
+			RenderRequest req, String portletId)
+		throws PortalException, SystemException {
+
+		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+
+		return getUserSetup(reqImpl.getHttpServletRequest(), portletId);
+	}
+
 }

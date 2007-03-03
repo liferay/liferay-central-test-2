@@ -22,29 +22,25 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%
+boolean editable = true;
+
+int depth = 0;
+
+for (int i = 0; i < messages.size(); i++) {
+	message = (MBMessage)messages.get(i);
+
+	String className = "portlet-section-alternate";
+	String classHoverName = "portlet-section-alternate-hover";
+
+	if (MathUtil.isOdd(i)) {
+		className = "portlet-section-body";
+		classHoverName = "portlet-section-body-hover";
+	}
+%>
+
+	<%@ include file="/html/portlet/message_boards/view_thread_message.jsp" %>
 
 <%
-String image = (String)request.getAttribute("liferay-ui:icon:image");
-
-String imageDir = (String)request.getAttribute("liferay-ui:icon:imageDir");
-
-String message = (String)request.getAttribute("liferay-ui:icon:message");
-
-if (message == null) {
-	message = StringUtil.replace(image, StringPool.UNDERLINE, StringPool.DASH);
-}
-
-String url = (String)request.getAttribute("liferay-ui:icon:url");
-String target = (String)request.getAttribute("liferay-ui:icon:target");
-boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:toolTip"));
-
-String details = null;
-
-if (toolTip) {
-	details = "onmousemove=\"ToolTip.show(event, this, '" + UnicodeLanguageUtil.get(pageContext, message) + "')\"";
-}
-else {
-	details = "title=\"" + LanguageUtil.get(pageContext, message) + "\"";
 }
 %>

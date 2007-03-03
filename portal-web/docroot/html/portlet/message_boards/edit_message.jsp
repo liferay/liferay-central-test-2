@@ -127,7 +127,7 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 	String classHoverName = "portlet-section-body-hover";
 	%>
 
-	<%@ include file="/html/portlet/message_boards/view_message_thread_message.jsp" %>
+	<%@ include file="/html/portlet/message_boards/view_thread_message.jsp" %>
 
 	<%
 	message = temp;
@@ -392,7 +392,7 @@ if (message != null) {
 	String classHoverName = "portlet-section-body-hover";
 	%>
 
-	<%@ include file="/html/portlet/message_boards/view_message_thread_message.jsp" %>
+	<%@ include file="/html/portlet/message_boards/view_thread_message.jsp" %>
 </c:if>
 
 </form>
