@@ -158,6 +158,8 @@
 			newenvironment="true"
 		>
 			<jvmarg value="-Dfile.encoding=UTF-8" />
+			<jvmarg value="-Duser.country=US" />
+			<jvmarg value="-Duser.language=en" />
 			<arg value="${lang.dir}" />
 			<arg value="${lang.file}" />
 		</java>
