@@ -36,7 +36,7 @@ import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
-import com.liferay.portal.kernel.portlet.FriendlyURLPortletPlugin;
+import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -1373,25 +1373,25 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			LayoutImpl.validateFriendlyURLKeyword(friendlyURL);
 
-			Map portletPlugins =
-				PortletLocalServiceUtil.getFriendlyURLPlugins();
+			Map friendlyURLMappers =
+				PortletLocalServiceUtil.getFriendlyURLMappers();
 
-			Iterator itr = portletPlugins.entrySet().iterator();
+			Iterator itr = friendlyURLMappers.entrySet().iterator();
 
 			while (itr.hasNext()) {
 				Map.Entry entry = (Map.Entry)itr.next();
 
 				String className = (String)entry.getValue();
 
-				FriendlyURLPortletPlugin portletPlugin =
-					(FriendlyURLPortletPlugin)InstancePool.get(className);
+				FriendlyURLMapper friendlyURLMapper =
+					(FriendlyURLMapper)InstancePool.get(className);
 
-				if (friendlyURL.indexOf(portletPlugin.getMapping()) != -1) {
+				if (friendlyURL.indexOf(friendlyURLMapper.getMapping()) != -1) {
 					LayoutFriendlyURLException lfurle =
 						new LayoutFriendlyURLException(
 							LayoutFriendlyURLException.KEYWORD_CONFLICT);
 
-					lfurle.setKeywordConflict(portletPlugin.getMapping());
+					lfurle.setKeywordConflict(friendlyURLMapper.getMapping());
 
 					throw lfurle;
 				}

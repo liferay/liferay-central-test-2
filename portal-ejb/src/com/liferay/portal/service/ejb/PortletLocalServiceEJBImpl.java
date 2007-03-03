@@ -62,8 +62,8 @@ public class PortletLocalServiceEJBImpl implements PortletLocalService,
 			xml);
 	}
 
-	public java.util.Map getFriendlyURLPlugins() {
-		return PortletLocalServiceFactory.getTxImpl().getFriendlyURLPlugins();
+	public java.util.Map getFriendlyURLMappers() {
+		return PortletLocalServiceFactory.getTxImpl().getFriendlyURLMappers();
 	}
 
 	public com.liferay.portal.model.Portlet getPortletById(

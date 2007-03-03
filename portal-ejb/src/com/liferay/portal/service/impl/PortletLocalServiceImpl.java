@@ -106,8 +106,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 	}
 
-	public Map getFriendlyURLPlugins() {
-		return _getFriendlyURLPlugins();
+	public Map getFriendlyURLMappers() {
+		return _getFriendlyURLMappers();
 	}
 
 	public Portlet getPortletById(String companyId, String portletId)
@@ -414,19 +414,19 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlet;
 	}
 
-	private Map _getFriendlyURLPlugins() {
+	private Map _getFriendlyURLMappers() {
 		String scpId =
-			PortletServiceImpl.class.getName() + ".friendlyURLPlugins";
+			PortletServiceImpl.class.getName() + ".friendlyURLMappers";
 
-		Map friendlyURLPlugins = (Map)SimpleCachePool.get(scpId);
+		Map friendlyURLMappers = (Map)SimpleCachePool.get(scpId);
 
-		if (friendlyURLPlugins == null) {
-			friendlyURLPlugins = CollectionFactory.getHashMap();
+		if (friendlyURLMappers == null) {
+			friendlyURLMappers = CollectionFactory.getHashMap();
 
-			SimpleCachePool.put(scpId, friendlyURLPlugins);
+			SimpleCachePool.put(scpId, friendlyURLMappers);
 		}
 
-		return friendlyURLPlugins;
+		return friendlyURLMappers;
 	}
 
 	private String _getPortletId(String securityPath) throws SystemException {
@@ -916,7 +916,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 		}
 
-		Map friendlyURLPlugins = _getFriendlyURLPlugins();
+		Map friendlyURLMappers = _getFriendlyURLMappers();
 
 		itr1 = root.elements("portlet").iterator();
 
@@ -960,18 +960,18 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					portlet.elementText("portlet-url-class"),
 					portletModel.getPortletURLClass()));
 
-				portletModel.setFriendlyURLPluginClass(GetterUtil.getString(
-					portlet.elementText("friendly-url-plugin-class"),
-					portletModel.getFriendlyURLPluginClass()));
+				portletModel.setFriendlyURLMapperClass(GetterUtil.getString(
+					portlet.elementText("friendly-url-mapper-class"),
+					portletModel.getFriendlyURLMapperClass()));
 
 				if (Validator.isNull(
-						portletModel.getFriendlyURLPluginClass())) {
+						portletModel.getFriendlyURLMapperClass())) {
 
-					friendlyURLPlugins.remove(portletId);
+					friendlyURLMappers.remove(portletId);
 				}
 				else {
-					friendlyURLPlugins.put(
-						portletId, portletModel.getFriendlyURLPluginClass());
+					friendlyURLMappers.put(
+						portletId, portletModel.getFriendlyURLMapperClass());
 				}
 
 				portletModel.setURLEncoderClass(GetterUtil.getString(

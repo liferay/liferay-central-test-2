@@ -200,7 +200,7 @@
 		<configuration-path>/message_boards/edit_configuration</configuration-path>
 		<indexer-class>com.liferay.portlet.messageboards.util.Indexer</indexer-class>
 		<portlet-url-class>com.liferay.portlet.messageboards.MBFriendlyPortletURL</portlet-url-class>
-		<friendly-url-plugin-class>com.liferay.portlet.messageboards.MBFriendlyURLPortletPlugin</friendly-url-plugin-class>
+		<friendly-url-mapper-class>com.liferay.portlet.messageboards.MBFriendlyURLMapper</friendly-url-mapper-class>
 		<smtp-message-listener-class>com.liferay.portlet.messageboards.smtp.MessageListenerImpl</smtp-message-listener-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>

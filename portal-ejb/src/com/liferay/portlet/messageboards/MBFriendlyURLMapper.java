@@ -22,16 +22,16 @@
 
 package com.liferay.portlet.messageboards;
 
-import com.liferay.portal.kernel.portlet.FriendlyURLPortletPlugin;
+import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 
 /**
- * <a href="MBFriendlyURLPortletPlugin.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MBFriendlyURLPortletPlugin implements FriendlyURLPortletPlugin {
+public class MBFriendlyURLMapper implements FriendlyURLMapper {
 
 	public String getMapping() {
 		return _MAPPING;

@@ -18,7 +18,7 @@ The portlet element contains the declarative data of a portlet.
 -->
 <!ELEMENT portlet (portlet-name, struts-path?, configuration-path?,
 indexer-class?, open-search-class?, scheduler-class?, portlet-url-class?,
-friendly-url-plugin-class?, url-encoder-class?, portlet-data-handler-class?,
+friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
 smtp-message-listener-class?, preferences-company-wide?,
 preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
@@ -105,16 +105,16 @@ http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portal/struts/Strut
 <!ELEMENT portlet-url-class (#PCDATA)>
 
 <!--
-The friendly-url-plugin-class value must be a class that implements
-com.liferay.portal.kernel.portlet.FriendlyURLPortletPlugin. Use this if content
-inside a portlet needs to have a friendly URL. See the Message Boards portlet
-for an example of its uses.
+The friendly-url-mapper-class value must be a class that implements
+com.liferay.portal.kernel.portlet.FriendlyURLMapper. Use this if content inside
+a portlet needs to have a friendly URL. See the Message Boards portlet for an
+example of its uses.
 
 See:
 
-http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/messageboards/MBFriendlyURLPortletPlugin.html
+http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/messageboards/MBFriendlyURLMapper.html
 -->
-<!ELEMENT friendly-url-plugin-class (#PCDATA)>
+<!ELEMENT friendly-url-mapper-class (#PCDATA)>
 
 <!--
 The url-encoder-class value must be a class that implements

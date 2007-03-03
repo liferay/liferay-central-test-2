@@ -28,7 +28,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.portlet.FriendlyURLPortletPlugin;
+import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -457,11 +457,11 @@ public class PortalUtil {
 			}
 		}
 		else {
-			Object[] portletPlugin =
+			Object[] friendlyURLMapper =
 				getPortletFriendlyURLPlugin(ownerId, friendlyURL);
 
-			layout = (Layout)portletPlugin[0];
-			queryString = (String)portletPlugin[1];
+			layout = (Layout)friendlyURLMapper[0];
+			queryString = (String)friendlyURLMapper[1];
 		}
 
 		String layoutActualURL =
@@ -649,28 +649,31 @@ public class PortalUtil {
 		String friendlyURL = url;
 		String queryString = StringPool.BLANK;
 
-		Map portletPlugins = PortletLocalServiceUtil.getFriendlyURLPlugins();
+		Map friendlyURLMappers =
+			PortletLocalServiceUtil.getFriendlyURLMappers();
 
-		Iterator itr = portletPlugins.entrySet().iterator();
+		Iterator itr = friendlyURLMappers.entrySet().iterator();
 
 		while (itr.hasNext()) {
 			Map.Entry entry = (Map.Entry)itr.next();
 
 			String className = (String)entry.getValue();
 
-			FriendlyURLPortletPlugin portletPlugin =
-				(FriendlyURLPortletPlugin)InstancePool.get(className);
+			FriendlyURLMapper friendlyURLMapper =
+				(FriendlyURLMapper)InstancePool.get(className);
 
-			if (url.endsWith(StringPool.SLASH + portletPlugin.getMapping())) {
+			if (url.endsWith(
+					StringPool.SLASH + friendlyURLMapper.getMapping())) {
+
 				url += StringPool.SLASH;
 			}
 
 			int pos = url.indexOf(
-				StringPool.SLASH + portletPlugin.getMapping() +
+				StringPool.SLASH + friendlyURLMapper.getMapping() +
 					StringPool.SLASH);
 
 			if (pos != -1) {
-				String[] values = portletPlugin.getValues(url, pos);
+				String[] values = friendlyURLMapper.getValues(url, pos);
 
 				friendlyURL = values[0];
 				queryString = values[1];

@@ -60,10 +60,10 @@ public class PortletLocalServiceUtil {
 		return portletLocalService.getWARDisplay(servletContextName, xml);
 	}
 
-	public static java.util.Map getFriendlyURLPlugins() {
+	public static java.util.Map getFriendlyURLMappers() {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-		return portletLocalService.getFriendlyURLPlugins();
+		return portletLocalService.getFriendlyURLMappers();
 	}
 
 	public static com.liferay.portal.model.Portlet getPortletById(
