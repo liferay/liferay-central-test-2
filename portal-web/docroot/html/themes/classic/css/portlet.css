@@ -47,10 +47,10 @@
 	padding: 0.2em 0 0.5em 1.8em;
 }
 
-/* ---------- Drag and Drop classes ---------- */
+/* ---------- Drag and drop ---------- */
 
 .portlet-dragging {
-	background: #ffffe3 !important;
+	background: #FFFFE3 !important;
 	border: 3px solid #666;
 	padding: 10px;
 }
