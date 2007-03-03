@@ -82,24 +82,39 @@ else {
 		<%= MBUtil.getBreadcrumbs(null, message, pageContext, renderRequest, renderResponse) %>
 	</td>
 	<td>
+
+		<%
+		currentURLObj.setParameter("threadView", "combination");
+		%>
+
 		<liferay-ui:icon
 			image="../message_boards/thread_view_combination"
 			message="combination-view"
-			url='<%= currentURL + "&" + renderResponse.getNamespace() + "threadView=combination" %>'
+			url="<%= currentURLObj.toString() %>"
 		/>
 	</td>
 	<td>
+
+		<%
+		currentURLObj.setParameter("threadView", "flat");
+		%>
+
 		<liferay-ui:icon
 			image="../message_boards/thread_view_flat"
 			message="flat-view"
-			url='<%= currentURL + "&" + renderResponse.getNamespace() + "threadView=flat" %>'
+			url="<%= currentURLObj.toString() %>"
 		/>
 	</td>
 	<td>
+
+		<%
+		currentURLObj.setParameter("threadView", "tree");
+		%>
+
 		<liferay-ui:icon
 			image="../message_boards/thread_view_tree"
 			message="tree-view"
-			url='<%= currentURL + "&" + renderResponse.getNamespace() + "threadView=tree" %>'
+			url="<%= currentURLObj.toString() %>"
 		/>
 	</td>
 </tr>

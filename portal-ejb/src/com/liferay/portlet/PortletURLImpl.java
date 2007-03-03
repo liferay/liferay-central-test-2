@@ -336,6 +336,14 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		return _layoutFriendlyURL;
 	}
 
+	protected String getNamespace() {
+		if (_namespace == null) {
+			_namespace = PortalUtil.getPortletNamespace(_portletName);
+		}
+
+		return _namespace;
+	}
+
 	protected String getParameter(String name) {
 		String[] values = (String[])_params.get(name);
 
@@ -514,12 +522,11 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		while (itr.hasNext()) {
 			Map.Entry entry = (Map.Entry)itr.next();
 
-			String name =
-				PortalUtil.getPortletNamespace(_portletName) +
-				(String)entry.getKey();
+			String name = (String)entry.getKey();
 			String[] values = (String[])entry.getValue();
 
 			for (int i = 0; i < values.length; i++) {
+				sm.append(getNamespace());
 				sm.append(name);
 				sm.append(StringPool.EQUAL);
 				sm.append(_processValue(key, values[i]));
@@ -577,6 +584,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 	private PortletRequest _portletReq;
 	private String _portletName;
 	private Portlet _portlet;
+	private String _namespace;
 	private String _plid;
 	private Layout _layout;
 	private String _layoutFriendlyURL;

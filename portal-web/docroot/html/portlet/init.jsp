@@ -27,7 +27,8 @@
 <portlet:defineObjects />
 
 <%
-String currentURL = PortletURLUtil.getCurrent(renderRequest, renderResponse).toString();
+PortletURL currentURLObj = PortletURLUtil.getCurrent(renderRequest, renderResponse);
+String currentURL = currentURLObj.toString();
 %>
 
 <%@ include file="/html/portlet/init-ext.jsp" %>

@@ -151,7 +151,11 @@ public class RenderResponseImpl implements RenderResponse {
 	}
 
 	public String getNamespace() {
-		return PortalUtil.getPortletNamespace(_portletName);
+		if (_namespace == null) {
+			_namespace = PortalUtil.getPortletNamespace(_portletName);
+		}
+
+		return _namespace;
 	}
 
 	public void setURLEncoder(URLEncoder urlEncoder) {
@@ -333,6 +337,7 @@ public class RenderResponseImpl implements RenderResponse {
 		_res = null;
 		_portletName = null;
 		_portlet = null;
+		_namespace = null;
 		_companyId = null;
 		_plid = null;
 		_urlEncoder = null;
@@ -393,6 +398,7 @@ public class RenderResponseImpl implements RenderResponse {
 	private HttpServletResponse _res;
 	private String _portletName;
 	private Portlet _portlet;
+	private String _namespace;
 	private String _companyId;
 	private String _plid;
 	private Map _properties;

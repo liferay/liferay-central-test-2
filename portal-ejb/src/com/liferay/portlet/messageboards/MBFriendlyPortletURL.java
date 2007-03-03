@@ -80,6 +80,12 @@ public class MBFriendlyPortletURL extends PortletURLImplWrapper {
 			toString =
 				toString.substring(0, pos + layoutFriendlyURL.length()) +
 					friendlyURL;
+
+			String threadView = getParameter("threadView");
+
+			if (Validator.isNotNull(threadView)) {
+				toString += "?" + getNamespace() + "threadView=" + threadView;
+			}
 		}
 
 		return toString;
