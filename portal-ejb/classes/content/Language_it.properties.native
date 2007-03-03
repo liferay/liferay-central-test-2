@@ -1,20 +1,15 @@
-
-###
+##
 ## Language settings
 ##
 
-
-##
-## Portlet titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet titles
+##
 
-##
-## Category titles
-##
 javax.portlet.title.100=Invito
 javax.portlet.title.101=Soddisfare Delle Modifiche
 javax.portlet.title.102=Soddisfare di XSL
@@ -104,10 +99,10 @@ javax.portlet.title.98=Catalogo Del Software
 javax.portlet.title.99=Modifiche Admin
 javax.portlet.title.9=Amministrazione
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Amministrazione
 category.alfresco=Alfresco
 category.christianity=Cristianit�
@@ -133,10 +128,10 @@ category.wiki=Wiki
 category.workflow=Workflow
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.portal.model.Group=Comunit�
 model.resource.com.liferay.portal.model.Layout=Pagina
 model.resource.com.liferay.portal.model.Location=Posizione
@@ -173,10 +168,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Definizione
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Caso Di Workflow
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Operazione Di Workflow
 
+##
+## Action names
+##
 
-##
-## Layout types
-##
 action.ADD_ARTICLE=Aggiungi un Articolo
 action.ADD_CATEGORY=Aggiungi una Categoria
 action.ADD_COMMUNITY=Aggiungi una Comunit�
@@ -193,7 +188,6 @@ action.ADD_GROUP=Aggiungi un Gruppo
 action.ADD_IMAGE=Aggiungi una Immagine
 action.ADD_INSTANCE=Aggiunga Il Caso
 action.ADD_ITEM=Aggiungi una Articolo
-action.ADD_LICENSE=Aggiunga L'Autorizzazione
 action.ADD_LOCATION=Aggiungi una Location
 action.ADD_MESSAGE=Aggiungi un Messaggio
 action.ADD_NODE=Aggiungi un Nodo
@@ -240,20 +234,20 @@ action.UPDATE_USER=Aggiorna Utente
 action.VIEW=Visualizza
 action.VIEW_USER=Visualizza Utente
 
+##
+## Layout types
+##
 
-##
-## Messages
-##
 layout.types.article=Articolo
 layout.types.embedded=Incorporato
 layout.types.link_to_layout=Collegamento alla pagina
 layout.types.portlet=Portlet
 layout.types.url=URL
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 giorno
 1-month=1 mese
 1-week=1 settimana
@@ -662,6 +656,7 @@ column_2=Colonna 2
 column_3=Colonna 3
 column_4=Colonna 4
 column_5=Colonna 5
+combination-view=Visualizzazione Combinata
 comment-only=Commento Solo
 commentable=Commentabile
 comments=Commenti
@@ -1022,6 +1017,7 @@ first=Primo
 flash-attributes=Attributi Flash
 flash-variables=Variabili Flash
 flat-amount=Flat Amount
+flat-view=Vista Piana
 folder-display-settings=Impostazioni Visualizzazione Cartelle
 folder-name=Nome Cartella
 folder-path=Path della Cartella
@@ -2323,6 +2319,7 @@ transaction-id=TXN ID
 translate=Traduttore
 trash=Cestino
 travel=Viaggi
+tree-view=Vista Dell'Albero
 true=Vero
 tuesday-abbreviation=M
 tv-show=Show Televisivo
@@ -2602,6 +2599,10 @@ zh_en=Cinese all�inglese
 zip-postal=Codice di Avviamento Postale
 zip=CAP
 zt_en=Cinese (Taiwan) all�inglese
+
+##
+## Currency
+##
 
 currency.AED=Dirham dei Uae
 currency.ALL=Lek Albanese

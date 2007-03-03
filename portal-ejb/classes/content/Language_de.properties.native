@@ -1,20 +1,15 @@
-
-###
+##
 ## Language settings
 ##
 
-
-##
-## Portlet titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet titles
+##
 
-##
-## Category titles
-##
 javax.portlet.title.100=Einladung
 javax.portlet.title.101=Umbau-Inhalt
 javax.portlet.title.102=XSL Inhalt
@@ -104,10 +99,10 @@ javax.portlet.title.98=Software-Katalog
 javax.portlet.title.99=Umbauten Admin
 javax.portlet.title.9=Admin
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Admin
 category.alfresco=Alfresco
 category.christianity=Christliches
@@ -133,10 +128,10 @@ category.wiki=Wiki
 category.workflow=Workflow
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.portal.model.Group=Gemeinschaft
 model.resource.com.liferay.portal.model.Layout=Seite
 model.resource.com.liferay.portal.model.Location=Position
@@ -173,10 +168,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Workflow-De
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Workflow-Fall
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Workflow-Aufgabe
 
+##
+## Action names
+##
 
-##
-## Layout types
-##
 action.ADD_ARTICLE=Artikel hinzufügen
 action.ADD_CATEGORY=Kategorie hinzufügen
 action.ADD_COMMUNITY=Gemeinschaft hinzufügen
@@ -193,7 +188,6 @@ action.ADD_GROUP=Gruppe hinzufügen
 action.ADD_IMAGE=Bild hinzufügen
 action.ADD_INSTANCE=Addieren Sie Fall
 action.ADD_ITEM=Artikel hinzufügen
-action.ADD_LICENSE=Addieren Sie Lizenz
 action.ADD_LOCATION=Ort hinzufügen
 action.ADD_MESSAGE=Nachricht hinzufügen
 action.ADD_NODE=Knoten hinzufügen
@@ -240,20 +234,20 @@ action.UPDATE_USER=Benutzer aktualisieren
 action.VIEW=Anzeigen
 action.VIEW_USER=Benutzer anzeigen
 
+##
+## Layout types
+##
 
-##
-## Messages
-##
 layout.types.article=Artikel
 layout.types.embedded=Eingebettet
 layout.types.link_to_layout=Verbindung zur Seite
 layout.types.portlet=Portlet
 layout.types.url=URL
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 Tag
 1-month=1 Monat
 1-week=1 Woche
@@ -662,6 +656,7 @@ column_2=Spalte 2
 column_3=Spalte 3
 column_4=Spalte 4
 column_5=Spalte 5
+combination-view=Kombination Ansicht
 comment-only=Nur Kommentare
 commentable=Kommentierbar
 comments=Kommentare
@@ -1022,6 +1017,7 @@ first=Erste
 flash-attributes=Flash Attribute
 flash-variables=Flash Variablen
 flat-amount=Pauschalbetrag
+flat-view=Flache Ansicht
 folder-display-settings=Ordner Display Einstellungen
 folder-name=Ordnername
 folder-path=Ordnername
@@ -2323,6 +2319,7 @@ transaction-id=TXN ID
 translate=übersetzen
 trash=Müll
 travel=Reise
+tree-view=Baum-Ansicht
 true=Wahr
 tuesday-abbreviation=Di
 tv-show=Fernsehsendung
@@ -2602,6 +2599,10 @@ zh_en=Chinesisch (China) zu Englisch
 zip-postal=PLZ/Postadresse
 zip=PLZ
 zt_en=Chinesisch (Taiwan) zu Englisch
+
+##
+## Currency
+##
 
 currency.AED=Arabische Dirham
 currency.ALL=Albanischer Lek

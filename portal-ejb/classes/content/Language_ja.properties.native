@@ -1,20 +1,15 @@
-
-###
+##
 ## Language settings
 ##
 
-
-##
-## Portlet titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet titles
+##
 
-##
-## Category titles
-##
 javax.portlet.title.100=招待
 javax.portlet.title.101=札の内容
 javax.portlet.title.102=XSL
@@ -104,10 +99,10 @@ javax.portlet.title.98=ソフトウェアカタログ
 javax.portlet.title.99=札Admin
 javax.portlet.title.9=Admin
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Admin
 category.alfresco=野外で
 category.christianity=キリスト教
@@ -133,10 +128,10 @@ category.wiki=Wiki
 category.workflow=ワークフロー
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.portal.model.Group=コミュニティ
 model.resource.com.liferay.portal.model.Layout=ページ
 model.resource.com.liferay.portal.model.Location=位置
@@ -173,10 +168,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=ワーク�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=ワークフローの例
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=ワークフローの仕事
 
+##
+## Action names
+##
 
-##
-## Layout types
-##
 action.ADD_ARTICLE=記事を加えなさい
 action.ADD_CATEGORY=部門を加えなさい
 action.ADD_COMMUNITY=コミュニティを加えなさい
@@ -193,7 +188,6 @@ action.ADD_GROUP=グループを加えなさい
 action.ADD_IMAGE=イメージを加えなさい
 action.ADD_INSTANCE=例を加えなさい
 action.ADD_ITEM=項目を加えなさい
-action.ADD_LICENSE=免許証を加えなさい
 action.ADD_LOCATION=位置を加えなさい
 action.ADD_MESSAGE=メッセージを加えなさい
 action.ADD_NODE=ノードを加えなさい
@@ -240,20 +234,20 @@ action.UPDATE_USER=更新のユーザー
 action.VIEW=眺め
 action.VIEW_USER=眺めのユーザー
 
+##
+## Layout types
+##
 
-##
-## Messages
-##
 layout.types.article=記事
 layout.types.embedded=埋め込まれる
 layout.types.link_to_layout=ページへのリンク
 layout.types.portlet=Portlet
 layout.types.url=URL
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 日
 1-month=1 か月
 1-week=1 週
@@ -661,6 +655,7 @@ column_2=2 コラム
 column_3=3 コラム
 column_4=4 コラム
 column_5=5 コラム
+combination-view=組合せ眺め
 comment-only=唯一のコメント
 commentable=Commentable
 comments=コメント
@@ -1020,6 +1015,7 @@ first=最初に
 flash-attributes=フラッシュの属性
 flash-variables=抜け目がない変数
 flat-amount=平らな量
+flat-view=平らな眺め
 folder-display-settings=ホールダーの表示設定
 folder-name=ホールダーの名前
 folder-path=ホールダー道
@@ -2319,6 +2315,7 @@ transaction-id=TXN ID
 translate=翻訳しなさい
 trash=屑
 travel=旅行
+tree-view=木の眺め
 true=本当
 tuesday-abbreviation=t
 tv-show=Tv ショー
@@ -2598,6 +2595,10 @@ zh_en=中国語から英語
 zip-postal=Zip/Postal
 zip=ジッパー
 zt_en=英語への中国語(台湾)
+
+##
+## Currency
+##
 
 currency.AED=アラブ首長国連邦のディルハム
 currency.ALL=アルバニアのLek

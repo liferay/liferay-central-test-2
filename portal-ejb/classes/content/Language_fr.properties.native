@@ -1,20 +1,15 @@
-
-###
+##
 ## Language settings
 ##
 
-
-##
-## Portlet titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet titles
+##
 
-##
-## Category titles
-##
 javax.portlet.title.100=Invitation
 javax.portlet.title.101=Contenu D'�tiquettes
 javax.portlet.title.102=Contenu de XSL
@@ -104,10 +99,10 @@ javax.portlet.title.98=Catalogue De Logiciel
 javax.portlet.title.99=Étiquettes Admin
 javax.portlet.title.9=Administrateur
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Admin
 category.alfresco=En plein air
 category.christianity=Christianisme
@@ -133,10 +128,10 @@ category.wiki=Wiki
 category.workflow=Déroulement des opérations
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.portal.model.Group=La Communauté
 model.resource.com.liferay.portal.model.Layout=Page
 model.resource.com.liferay.portal.model.Location=Endroit
@@ -173,10 +168,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Définition
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Exemple De Déroulement des opérations
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Le déroulement des opérations Chargent
 
+##
+## Action names
+##
 
-##
-## Layout types
-##
 action.ADD_ARTICLE=Ajoutez L'Article
 action.ADD_CATEGORY=Ajoutez La Catégorie
 action.ADD_COMMUNITY=Ajoutez La Communauté
@@ -193,7 +188,6 @@ action.ADD_GROUP=Ajoutez Le Groupe
 action.ADD_IMAGE=Ajoutez L'Image
 action.ADD_INSTANCE=Ajoutez L'Exemple
 action.ADD_ITEM=Ajoutez L'Article
-action.ADD_LICENSE=Ajoutez Le Permis
 action.ADD_LOCATION=Ajoutez L'Endroit
 action.ADD_MESSAGE=Ajoutez Le Message
 action.ADD_NODE=Ajoutez Le Noeud
@@ -240,20 +234,20 @@ action.UPDATE_USER=Utilisateur De Mise à jour
 action.VIEW=Vue
 action.VIEW_USER=Utilisateur De Vue
 
+##
+## Layout types
+##
 
-##
-## Messages
-##
 layout.types.article=Article
 layout.types.embedded=Incorporé
 layout.types.link_to_layout=Lien à la page
 layout.types.portlet=Portlet
 layout.types.url=URL
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 jour
 1-month=1 mois
 1-week=1 semaine
@@ -662,6 +656,7 @@ column_2=Colonne 2
 column_3=Colonne 3
 column_4=Colonne 4
 column_5=Colonne 5
+combination-view=Vue De Combinaison
 comment-only=Commentaire seulement
 commentable=Commentable
 comments=Commentaires
@@ -1022,6 +1017,7 @@ first=Premier
 flash-attributes=Attributs D'Instantané
 flash-variables=Variables Instantanées
 flat-amount=Quantité
+flat-view=Vue Plate
 folder-display-settings=Paramètres d'affichage de répertoire
 folder-name=Nom du répertoire
 folder-path=Chemin du répertoire
@@ -2323,6 +2319,7 @@ transaction-id=identifiant de la transaction
 translate=Traduisez
 trash=Corbeille
 travel=Voyage
+tree-view=Vue D'Arbre
 true=Vrai
 tuesday-abbreviation=M
 tv-show=Show TV
@@ -2602,6 +2599,10 @@ zh_en=Chinois en Anglais
 zip-postal=Zip/Postal
 zip=Code postal
 zt_en=Chinois (Taiwan) à l'anglais
+
+##
+## Currency
+##
 
 currency.AED=Dirham des EAU
 currency.ALL=Lek Albanais

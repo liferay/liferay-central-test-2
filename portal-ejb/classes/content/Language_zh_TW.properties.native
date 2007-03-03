@@ -1,20 +1,15 @@
-
-###
+##
 ## Language settings
 ##
 
-
-##
-## Portlet titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet titles
+##
 
-##
-## Category titles
-##
 javax.portlet.title.100=邀請
 javax.portlet.title.101=標記內容
 javax.portlet.title.102=XSL
@@ -104,10 +99,10 @@ javax.portlet.title.98=軟體編目
 javax.portlet.title.99=標記Admin
 javax.portlet.title.9=管理者
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Admin
 category.alfresco=在戶外
 category.christianity=基督教
@@ -133,10 +128,10 @@ category.wiki=Wiki網典
 category.workflow=工作流
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.portal.model.Group=公共
 model.resource.com.liferay.portal.model.Layout=頁
 model.resource.com.liferay.portal.model.Location=地點
@@ -173,10 +168,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=工作流�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=工作流事例
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=工作流任務
 
+##
+## Action names
+##
 
-##
-## Layout types
-##
 action.ADD_ARTICLE=增加文章
 action.ADD_CATEGORY=增加類別
 action.ADD_COMMUNITY=增加公共
@@ -193,7 +188,6 @@ action.ADD_GROUP=增加小組
 action.ADD_IMAGE=增加圖像
 action.ADD_INSTANCE=增加事例
 action.ADD_ITEM=增加項目
-action.ADD_LICENSE=增加執照
 action.ADD_LOCATION=增加地點
 action.ADD_MESSAGE=增加消息
 action.ADD_NODE=增加結
@@ -240,20 +234,20 @@ action.UPDATE_USER=更新用戶
 action.VIEW=看法
 action.VIEW_USER=看法用戶
 
+##
+## Layout types
+##
 
-##
-## Messages
-##
 layout.types.article=文章
 layout.types.embedded=埋置
 layout.types.link_to_layout=頁的鏈接
 layout.types.portlet=Portlet
 layout.types.url=URL
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 天
 1-month=1 個月
 1-week=1 個星期
@@ -662,6 +656,7 @@ column_2=專欄2
 column_3=專欄3
 column_4=專欄4
 column_5=專欄5
+combination-view=組合圖
 comment-only=評論唯一
 commentable=可評論的
 comments=評論
@@ -1022,6 +1017,7 @@ first=首先
 flash-attributes=閃光屬性
 flash-variables=一剎那可變物
 flat-amount=統一金額
+flat-view=平的看法
 folder-display-settings=文件夾顯示設定
 folder-name=文件夾名字
 folder-path=文件夾路徑
@@ -2323,6 +2319,7 @@ transaction-id=交易編號
 translate=翻譯
 trash=垃圾
 travel=旅行
+tree-view=樹看法
 true=真實
 tuesday-abbreviation=T
 tv-show=電視展示
@@ -2602,6 +2599,10 @@ zh_en=中文(中國) 對英語
 zip-postal=Zip/Postal
 zip=郵遞區號
 zt_en=中文(臺灣) 對英語
+
+##
+## Currency
+##
 
 currency.AED=阿拉伯聯合酋長國迪拉姆
 currency.ALL=阿爾巴尼亞列克

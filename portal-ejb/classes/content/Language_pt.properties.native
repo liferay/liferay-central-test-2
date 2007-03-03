@@ -1,20 +1,15 @@
-
-###
+##
 ## Language settings
 ##
 
-
-##
-## Portlet titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet titles
+##
 
-##
-## Category titles
-##
 javax.portlet.title.100=Invitation
 javax.portlet.title.101=�ndice Dos Tag
 javax.portlet.title.102=�ndice de XSL
@@ -104,10 +99,10 @@ javax.portlet.title.98=Catálogo Do Software
 javax.portlet.title.99=Tag Admin
 javax.portlet.title.9=Admin
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Admin
 category.alfresco=Alfresco
 category.christianity=Christianity
@@ -133,10 +128,10 @@ category.wiki=Wiki
 category.workflow=Workflow
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.portal.model.Group=Comunidade
 model.resource.com.liferay.portal.model.Layout=Página
 model.resource.com.liferay.portal.model.Location=Posição
@@ -173,10 +168,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Definição
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Exemplo Do Workflow
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tarefa Do Workflow
 
+##
+## Action names
+##
 
-##
-## Layout types
-##
 action.ADD_ARTICLE=Adicione O Artigo
 action.ADD_CATEGORY=Adicione A Categoria
 action.ADD_COMMUNITY=Adicione A Comunidade
@@ -193,7 +188,6 @@ action.ADD_GROUP=Adicione O Grupo
 action.ADD_IMAGE=Adicione A Imagem
 action.ADD_INSTANCE=Adicione O Exemplo
 action.ADD_ITEM=Adicione O Artigo
-action.ADD_LICENSE=Adicione A Licença
 action.ADD_LOCATION=Adicione A Posição
 action.ADD_MESSAGE=Adicione A Mensagem
 action.ADD_NODE=Adicione O Nó
@@ -240,20 +234,20 @@ action.UPDATE_USER=Usuário De Update
 action.VIEW=Vista
 action.VIEW_USER=Usuário Da Vista
 
+##
+## Layout types
+##
 
-##
-## Messages
-##
 layout.types.article=Artigo
 layout.types.embedded=Encaixado
 layout.types.link_to_layout=Ligação à página
 layout.types.portlet=Portlet
 layout.types.url=URL
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 dia
 1-month=1 mês
 1-week=1 semana
@@ -662,6 +656,7 @@ column_2=Coluna 2
 column_3=Coluna 3
 column_4=Coluna 4
 column_5=Coluna 5
+combination-view=Vista De Combinação
 comment-only=Comentário Somente
 commentable=Commentable
 comments=Comentários
@@ -1022,6 +1017,7 @@ first=Primeiramente
 flash-attributes=Atributos Do Flash
 flash-variables=Variáveis Flash
 flat-amount=Uma Quantidade Lisa
+flat-view=Vista Lisa
 folder-display-settings=Ajustes Da Exposição Do Dobrador
 folder-name=Nome Do Dobrador
 folder-path=Trajeto Do Dobrador
@@ -2323,6 +2319,7 @@ transaction-id=TXN ID
 translate=Traduza
 trash=Lixo
 travel=Curso
+tree-view=Vista Da Árvore
 true=Verdadeiro
 tuesday-abbreviation=T
 tv-show=Mostra da Tevê
@@ -2602,6 +2599,10 @@ zh_en=Chinês (China) ao inglês
 zip-postal=Zip/Postal
 zip=Fecho de correr
 zt_en=Chinês (Formosa) ao inglês
+
+##
+## Currency
+##
 
 currency.AED=Dirham dos Uae
 currency.ALL=Lek Albanian

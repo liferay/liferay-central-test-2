@@ -1,20 +1,15 @@
-
-###
+##
 ## Language settings
 ##
 
-
-##
-## Portlet titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet titles
+##
 
-##
-## Category titles
-##
 javax.portlet.title.10=Адресная книга
 javax.portlet.title.11=Directory
 javax.portlet.title.12=Ценные бумаги
@@ -92,10 +87,10 @@ javax.portlet.title.88=Настройка страницы
 javax.portlet.title.8=Календарь
 javax.portlet.title.9=Управление
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Администрирование
 category.christianity=Христианство
 category.cms=Система управления контентом
@@ -115,16 +110,16 @@ category.undefined=Неопределено
 category.wiki=Wiki
 category.wsrp=WSRP
 
+##
+## Model resources
+##
+
+model.resource.com.liferay.portal.model.User=Пользователь
 
 ##
 ## Action names
 ##
-model.resource.com.liferay.portal.model.User=Пользователь
 
-
-##
-## Layout types
-##
 action.ADD_ARTICLE=Добавить статью
 action.ADD_CATEGORY=Добавить категорию
 action.ADD_DISCUSSION=Добавить обсуждение
@@ -155,19 +150,19 @@ action.UPDATE=Сохранить
 action.UPDATE_DISCUSSION=Сохранить обсуждение
 action.VIEW=Посмотреть
 
+##
+## Layout types
+##
 
-##
-## Messages
-##
 layout.types.article=Статья
 layout.types.embedded=Втроенный
 layout.types.portlet=Портлет
 layout.types.url=URL
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 INBOX=Входящие
 a-map-could-not-be-found-for-the-address=Связь для данного адреса не найдена:
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=A page cannot become a child of a page that is not parentable.
@@ -2156,6 +2151,10 @@ zh_en=С Китайского (Китай) на Английский
 zip-postal=Zip/Postal
 zip=Почтовый индекс
 zt_en=С Китайского (Тайвань) на Английский
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

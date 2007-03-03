@@ -1,20 +1,15 @@
-
-###
+##
 ## Language settings
 ##
 
-
-##
-## Portlet titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet titles
+##
 
-##
-## Category titles
-##
 javax.portlet.title.100=Uitnodiging
 javax.portlet.title.101=De Inhoud van markeringen
 javax.portlet.title.102=Inhoud XSL
@@ -104,10 +99,10 @@ javax.portlet.title.98=De Catalogus van de software
 javax.portlet.title.99=Markeringen Admin
 javax.portlet.title.9=Beheerder
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Beheerder
 category.alfresco=alfresco
 category.christianity=Christendom
@@ -133,10 +128,10 @@ category.wiki=Wiki
 category.workflow=workflow
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.portal.model.Group=Groep
 model.resource.com.liferay.portal.model.Layout=Pagina
 model.resource.com.liferay.portal.model.Location=Locatie
@@ -173,10 +168,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=De Definiti
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=De Instantie van het werkschema
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=De Taak van het werkschema
 
+##
+## Action names
+##
 
-##
-## Layout types
-##
 action.ADD_ARTICLE=Artikel toevoegen
 action.ADD_CATEGORY=Categorie toevoegen
 action.ADD_COMMUNITY=Community toevoegen
@@ -193,7 +188,6 @@ action.ADD_GROUP=Groep toevoegen
 action.ADD_IMAGE=Afbeelding toevoegen
 action.ADD_INSTANCE=Voeg Instantie toe
 action.ADD_ITEM=Item toevoegen
-action.ADD_LICENSE=Voeg Vergunning toe
 action.ADD_LOCATION=Locatie toevoegen
 action.ADD_MESSAGE=Bericht toevoegen
 action.ADD_NODE=Knooppunt toevoegen
@@ -240,20 +234,20 @@ action.UPDATE_USER=Bijwerken Gebruiker
 action.VIEW=Toon
 action.VIEW_USER=Toon Gebruiker
 
+##
+## Layout types
+##
 
-##
-## Messages
-##
 layout.types.article=Artikel
 layout.types.embedded=Ingebed
 layout.types.link_to_layout=Verbinding met pagina
 layout.types.portlet=Portlet
 layout.types.url=URL
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 Dag
 1-month=1 Maand
 1-week=1 Week
@@ -662,6 +656,7 @@ column_2=Kolom 2
 column_3=Kolom 3
 column_4=Kolom 4
 column_5=Kolom 5
+combination-view=De Mening van de combinatie
 comment-only=Alleen opmerkingen
 commentable=Opmerkbaar maken
 comments=Opmerkingen
@@ -1022,6 +1017,7 @@ first=Eerst
 flash-attributes=Flash attributen
 flash-variables=Flash variabelen
 flat-amount=Vast bedrag
+flat-view=Vlakke Mening
 folder-display-settings=Map's vertoningseigenschappen
 folder-name=Mapnaam
 folder-path=Mappad
@@ -2323,6 +2319,7 @@ transaction-id=transactie ID
 translate=Vertaal
 trash=Afval
 travel=Reis
+tree-view=De Mening van de boom
 true=Waar
 tuesday-abbreviation=Di
 tv-show=TV show
@@ -2602,6 +2599,10 @@ zh_en=Chinees naar Engels
 zip-postal=Postcode
 zip=postcode
 zt_en=Chinees (Taiwan) naar Engels
+
+##
+## Currency
+##
 
 currency.AED=Dirham van de V.A.E
 currency.ALL=Albanese Lek
