@@ -13,7 +13,10 @@
 	<short-description>
 		This portlet shows how to use the portal-client.jar to access Liferay's services using SOAP.
 	</short-description>
-	<page-url>http://www.liferay.com/web/guest/downloads<page-url>
+	<change-log>
+		Adapted to the latest version of Liferay
+	</change-log>
+	<page-url>http://www.liferay.com/web/guest/downloads</page-url>
 	<author>Liferay, Inc.</author>
 	<licenses>
 		<license osi-approved="true">MIT</license>

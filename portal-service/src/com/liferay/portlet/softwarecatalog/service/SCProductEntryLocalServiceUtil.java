@@ -165,6 +165,17 @@ public class SCProductEntryLocalServiceUtil {
 		return scProductEntryLocalService.getProductEntry(productEntryId);
 	}
 
+	public static java.lang.String getRepositoryXML(long groupId,
+		java.lang.String baseImageURL, java.util.Date oldestDate,
+		int maxNumOfVersions, java.util.Properties repoSettings)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getRepositoryXML(groupId,
+			baseImageURL, oldestDate, maxNumOfVersions, repoSettings);
+	}
+
 	public static java.util.List getProductEntries(long groupId, int begin,
 		int end) throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();

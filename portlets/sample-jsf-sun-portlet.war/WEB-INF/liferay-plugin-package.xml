@@ -13,6 +13,9 @@
 	<short-description>
 		This portlet shows how to use Sun's implementation of JSF within Liferay.
 	</short-description>
+	<change-log>
+		Adapted to the latest version of Liferay
+	</change-log>
 	<page-url>http://www.liferay.com/web/guest/downloads/samples</page-url>
 	<author>Liferay, Inc.</author>
 	<licenses>

@@ -41,7 +41,7 @@ Setting name and value. Current supported names are:
 The plugin element contains the declarative data of a plugin.
 -->
 <!ELEMENT plugin-package (name, module-id, installation-file-name?, types, tags?,
-short-description, long-description?, page-url, download-url?, screenshots?,
+short-description, long-description?, change-log, page-url, download-url?, screenshots?,
 author, licenses, liferay-versions)*>
 
 <!--
@@ -100,6 +100,16 @@ Note: the text of this element might contain simple HTML formatting if encoded
 within a CDATA section.
 -->
 <!ELEMENT long-description (#PCDATA)>
+
+<!--
+The change-log element contains an explanation of the changes made in the latest
+release. It is recommended to try to offer all the information that a user
+might need to decide whether to update a previous version.
+
+Note: the text of this element might contain simple HTML formatting if encoded
+within a CDATA section.
+-->
+<!ELEMENT change-log (#PCDATA)>
 
 <!--
 The page-url element contains the URL of the home page of the plugin.

@@ -126,7 +126,7 @@ public class SCProductVersionLocalServiceImpl
 		// Framework versions
 
 		SCProductVersionUtil.setSCFrameworkVersions(
-			productEntryId, frameworkVersionIds);
+			productVersionId, frameworkVersionIds);
 
 		// Product entry
 

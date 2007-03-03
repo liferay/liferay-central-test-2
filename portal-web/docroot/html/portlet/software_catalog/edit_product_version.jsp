@@ -155,9 +155,9 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		<td style="padding-left: 10px;"></td>
 		<% if (Validator.isNotNull(productEntry.getRepoArtifactId()) && Validator.isNotNull(productEntry.getRepoArtifactId())) { %>
 			<td>
-				<select name="<portlet:namespace/>repoAllowAddArtifact" size="1">
-					<option <%= ((productVersion != null) && (productVersion.getRepoStoreArtifact())) ? "selected" : "" %>><%= LanguageUtil.get(pageContext, "yes") %></option>
-					<option <%= ((productVersion != null) && (!productVersion.getRepoStoreArtifact())) ? "selected" : "" %>><%= LanguageUtil.get(pageContext, "no") %></option>
+				<select name="<portlet:namespace/>repoStoreArtifact" size="1">
+					<option <%= ((productVersion != null) && (!productVersion.getRepoStoreArtifact())) ? "selected" : "" %> value="false"><%= LanguageUtil.get(pageContext, "no") %></option>
+					<option <%= ((productVersion != null) && (productVersion.getRepoStoreArtifact())) ? "selected" : "" %> value="true"><%= LanguageUtil.get(pageContext, "yes") %></option>
 				</select>
 			</td>
 		<% } else { %>
@@ -178,15 +178,16 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 </form>
 
 <script type="text/javascript">
-	function <portlet:namespace />showAddArtifactToRepo() {
+	function <portlet:namespace />showRepoStoreArtifact() {
 		if (document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.value == '') {
-			document.<portlet:namespace />fm.<portlet:namespace />repoAllowAddArtifact.disabled = true;
+			document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact.disabled = true;
+			document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact.options[0].selected = true;
 		} else {
-			document.<portlet:namespace />fm.<portlet:namespace />repoAllowAddArtifact.disabled = false;
+			document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact.disabled = false;
 		}
 	}
 	document.<portlet:namespace />fm.<portlet:namespace />version.focus();
-	document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.onchange = <portlet:namespace />showAddArtifactToRepo;
-	<portlet:namespace />showAddArtifactToRepo();
+	document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.onkeyup = <portlet:namespace />showRepoStoreArtifact;
+	<portlet:namespace />showRepoStoreArtifact();
 
 </script>

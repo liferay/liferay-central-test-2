@@ -103,8 +103,14 @@ public class ModuleId {
 	}
 
 	public String toString() {
-		return _groupId + StringPool.SLASH + _artifactId + StringPool.SLASH +
-			_pluginVersion + StringPool.SLASH + _type;
+		return toString(
+			_groupId, _artifactId, _pluginVersion.toString(), _type);
+	}
+
+	public static String toString(
+		String groupId, String artifactId, String version, String type) {
+		return groupId + StringPool.SLASH + artifactId + StringPool.SLASH +
+			version + StringPool.SLASH + type;
 	}
 
 	private String _artifactId;

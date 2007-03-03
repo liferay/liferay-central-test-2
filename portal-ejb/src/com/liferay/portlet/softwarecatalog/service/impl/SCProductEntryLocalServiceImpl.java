@@ -32,6 +32,7 @@ import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -43,11 +44,15 @@ import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
 import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
 import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
 import com.liferay.portlet.softwarecatalog.ProductEntryTypeException;
+import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
+import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
+import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryLocalServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
 import com.liferay.portlet.softwarecatalog.util.Indexer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ImageUtil;
@@ -63,6 +68,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.imageio.ImageIO;
 
@@ -72,6 +78,10 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 
 /**
  * <a href="SCProductEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -281,6 +291,62 @@ public class SCProductEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return SCProductEntryUtil.findByPrimaryKey(productEntryId);
+	}
+
+	public String getRepositoryXML(
+		long groupId, String baseImageURL, Date oldestDate,
+		int maxNumOfVersions, Properties repoSettings)
+		throws PortalException, SystemException{
+		Document doc = DocumentHelper.createDocument();
+
+		doc.setXMLEncoding("UTF-8");
+
+		Element root = doc.addElement("plugin-repository");
+
+		Element settingsEl = root.addElement("settings");
+		_populateSettingsElement(settingsEl, repoSettings);
+
+		List productEntries = SCProductEntryUtil.findByGroupId(groupId);
+		Iterator itr = productEntries.iterator();
+
+		while (itr.hasNext()) {
+			SCProductEntry productEntry = (SCProductEntry) itr.next();
+
+			if (Validator.isNull(productEntry.getRepoGroupId()) ||
+				Validator.isNull(productEntry.getRepoArtifactId())) {
+				continue;
+			}
+
+			List productVersions = SCProductVersionUtil.findByProductEntryId(
+				productEntry.getProductEntryId());
+
+			Iterator itr2 = productVersions.iterator();
+
+			for (int i = 1; itr2.hasNext(); i++) {
+				SCProductVersion productVersion =
+					(SCProductVersion) itr2.next();
+
+				if ((maxNumOfVersions > 0) && (maxNumOfVersions < i)) {
+					break;
+				}
+
+				if (!productVersion.getRepoStoreArtifact()) {
+					continue;
+				}
+
+				if ((oldestDate != null) &&
+					(oldestDate.after(productVersion.getModifiedDate()))) {
+					continue;
+				}
+
+				Element el = root.addElement("plugin-package");
+				_populatePluginPackageElement(
+					el, productEntry, productVersion, baseImageURL);
+			}
+		}
+
+		return doc.asXML();
+
 	}
 
 	public List getProductEntries(long groupId, int begin, int end)
@@ -578,6 +644,94 @@ public class SCProductEntryLocalServiceImpl
 			}
 		}
 
+	}
+
+	private void _populatePluginPackageElement(
+		Element el, SCProductEntry productEntry,
+		SCProductVersion productVersion, String baseImageURL)
+		throws PortalException, SystemException{
+
+		el.addElement("name").addText(productEntry.getName());
+
+		String moduleId = ModuleId.toString(
+			productEntry.getRepoGroupId(), productEntry.getRepoArtifactId(),
+			productVersion.getVersion(), "war");
+		el.addElement("module-id").addText(moduleId);
+
+		el.addElement("types").addElement("type").addText(
+			productEntry.getType());
+
+		el.addElement("short-description").addText(
+			productEntry.getShortDescription());
+
+		if (Validator.isNotNull(productEntry.getLongDescription())) {
+			el.addElement("long-description").addText(
+				productEntry.getLongDescription());
+		}
+
+		if (Validator.isNotNull(productVersion.getChangeLog())) {
+			el.addElement("change-log").addText(
+				productVersion.getChangeLog());
+		}
+
+		if (Validator.isNotNull(productVersion.getDirectDownloadURL())) {
+			el.addElement("download-url").addText(
+				productVersion.getDirectDownloadURL());
+		}
+
+		String imageId =
+			productEntry.getImageId(SCProductEntryImpl.MAIN_IMAGE_NAME);
+
+		Element screenshotsEl = el.addElement("screenshots");
+		Element screenshotEl = screenshotsEl.addElement("screenshot");
+		screenshotEl.addElement("thumbnail-url").addText(
+			baseImageURL + "?img_id=" + imageId + "&small=1");
+		screenshotEl.addElement("large-image-url").addText(
+			baseImageURL + "?img_id=" + imageId + "&large=1");
+
+		el.addElement("author").addText(productEntry.getUserName());
+
+		Element licensesEl = el.addElement("licenses");
+		Iterator itr = productEntry.getLicenses().iterator();
+
+		while (itr.hasNext()) {
+			SCLicense license = (SCLicense) itr.next();
+			Element licenseEl = licensesEl.addElement("license");
+			licenseEl.addText(license.getName());
+			licenseEl.addAttribute(
+				"osi-approved", Boolean.toString(license.isOpenSource()));
+		}
+
+		Element liferayVersionsEl = el.addElement("liferay-versions");
+		itr = productVersion.getFrameworkVersions().iterator();
+
+		while (itr.hasNext()) {
+			SCFrameworkVersion frameworkVersion =
+				(SCFrameworkVersion) itr.next();
+
+			Element frameworkVersionEl =
+				liferayVersionsEl.addElement("liferay-version");
+
+			frameworkVersionEl.addText(frameworkVersion.getName());
+		}
+
+	}
+
+	private void _populateSettingsElement(Element el, Properties repoSettings) {
+		if (repoSettings == null) {
+			return;
+		}
+
+		Iterator itr = repoSettings.keySet().iterator();
+
+		while (itr.hasNext()) {
+			String key = (String) itr.next();
+
+			Element settingEl = el.addElement("setting");
+
+			settingEl.addAttribute("name", key);
+			settingEl.addAttribute("value", repoSettings.getProperty(key));
+		}
 	}
 
 	private static Log _log =

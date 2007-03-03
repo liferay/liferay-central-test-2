@@ -156,6 +156,15 @@ public class SCProductEntryLocalServiceEJBImpl
 		return SCProductEntryLocalServiceFactory.getTxImpl().getProductEntry(productEntryId);
 	}
 
+	public java.lang.String getRepositoryXML(long groupId,
+		java.lang.String baseImageURL, java.util.Date oldestDate,
+		int maxNumOfVersions, java.util.Properties repoSettings)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return SCProductEntryLocalServiceFactory.getTxImpl().getRepositoryXML(groupId,
+			baseImageURL, oldestDate, maxNumOfVersions, repoSettings);
+	}
+
 	public java.util.List getProductEntries(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return SCProductEntryLocalServiceFactory.getTxImpl().getProductEntries(groupId,

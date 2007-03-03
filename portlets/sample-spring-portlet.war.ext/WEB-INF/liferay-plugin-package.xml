@@ -13,7 +13,10 @@
 	<short-description>
 		This portlet shows how to use Spring within Liferay.
 	</short-description>
-	<page-url>http://www.liferay.com/web/guest/downloads<page-url>
+	<change-log>
+		Adapted to the latest version of Liferay
+	</change-log>
+	<page-url>http://www.liferay.com/web/guest/downloads</page-url>
 	<author>Interface21</author>
 	<licenses>
 		<license osi-approved="true">Apache</license>

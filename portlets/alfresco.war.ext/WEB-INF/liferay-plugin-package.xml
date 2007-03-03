@@ -10,7 +10,10 @@
 	<short-description>
 		Access the Alfresco UI as a portlet.
 	</short-description>
-	<page-url>http://www.liferay.com/web/guest/downloads<page-url>
+	<change-log>
+		Adapted to the latest version of Liferay
+	</change-log>
+	<page-url>http://www.liferay.com/web/guest/downloads</page-url>
 	<author>Alfresco Software, Inc.</author>
 	<licenses>
 		<license osi-approved="true">GPL</license>
