@@ -92,14 +92,14 @@ http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portal/struts/Strut
 <!ELEMENT portlet-url-class (#PCDATA)>
 
 <!--
-The portlet-url-class value must be a class that implements
+The friendly-url-plugin-class value must be a class that implements
 com.liferay.portal.servlet.FriendlyURLPortletPlugin. Use this if content inside
 a portlet needs to have a friendly URL. See the Message Boards portlet for an
 example of its uses.
 
 See:
 
-http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/enterpriseadmin/EnterpriseAdminPortletURL.html
+http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/messageboards/MBFriendlyURLPortletPlugin.html
 -->
 <!ELEMENT friendly-url-plugin-class (#PCDATA)>
 
