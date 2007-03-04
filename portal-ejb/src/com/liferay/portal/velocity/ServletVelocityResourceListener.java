@@ -65,6 +65,11 @@ public class ServletVelocityResourceListener extends VelocityResourceListener {
 
 				is = ctx.getResourceAsStream(name);
 			}
+			else {
+				_log.error(
+					source + " is not valid because " + ctxName +
+						" does not map to a servlet context ");
+			}
 		}
 
 		return is;

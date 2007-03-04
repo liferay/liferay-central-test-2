@@ -136,8 +136,9 @@ public class ThemeUtil {
 
 		// The servlet context name will be null when the theme is deployed to
 		// the root directory in Tomcat. See
-		// com.liferay.portlet.PortletContextImpl where a null servlet context
-		// name is also converted to an empty string.
+		// com.liferay.portal.servlet.MainServlet and
+		// com.liferay.portlet.PortletContextImpl for other cases where a null
+		// servlet context name is also converted to an empty string.
 
 		String ctxName = GetterUtil.getString(theme.getServletContextName());
 

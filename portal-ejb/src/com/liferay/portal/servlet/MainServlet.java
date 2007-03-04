@@ -60,6 +60,7 @@ import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
@@ -152,6 +153,9 @@ public class MainServlet extends ActionServlet {
 			}
 
 			ServletContext ctx = getServletContext();
+
+			String servletContextName = GetterUtil.getString(
+				ctx.getServletContextName());
 
 			_companyId = ctx.getInitParameter("company_id");
 
@@ -290,6 +294,8 @@ public class MainServlet extends ActionServlet {
 				};
 
 				ThemeLocalUtil.init(ctx, xmls, pluginPackage);
+
+				VelocityContextPool.put(servletContextName, ctx);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
