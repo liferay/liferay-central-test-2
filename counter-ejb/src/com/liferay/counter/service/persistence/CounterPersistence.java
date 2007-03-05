@@ -25,8 +25,18 @@ package com.liferay.counter.service.persistence;
 import com.liferay.counter.model.Counter;
 import com.liferay.counter.model.CounterRegister;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Address;
+import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.Phone;
+import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.blogs.model.BlogsCategory;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.util.GetterUtil;
 
 import java.util.ArrayList;
@@ -36,6 +46,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
 import org.hibernate.ObjectNotFoundException;
@@ -90,6 +102,20 @@ public class CounterPersistence extends BasePersistence {
 
 	public long increment(String name, int size)
 		throws SystemException {
+
+		for (int i = 0; i < _GUID_CHECK.length; i++) {
+			if (name.equals(_GUID_CHECK[i])) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Using '" + Counter.class.getName() + "' instead of '" +
+						name + "'.  The id is deprecated and using a GUID.");
+				}
+
+				name = Counter.class.getName();
+
+				break;
+			}
+		}
 
 		if (size < _MINIMUM_INCREMENT_SIZE) {
 			size = _MINIMUM_INCREMENT_SIZE;
@@ -274,7 +300,22 @@ public class CounterPersistence extends BasePersistence {
 
 	private static final int _COUNTER_INCREMENT = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.COUNTER_INCREMENT), _MINIMUM_INCREMENT_SIZE);
+	
+	private static final String[] _GUID_CHECK = {
+		Address.class.getName(),
+		BlogsEntry.class.getName(),
+		BlogsCategory.class.getName(),
+		CalEvent.class.getName(),
+		EmailAddress.class.getName(),
+		Group.class.getName(),
+		Resource.class.getName(),
+		Permission.class.getName(),
+		Phone.class.getName(),
+		Website.class.getName()
+	};
 
 	private static Map registerLookup = new HashMap();
+
+	private static Log _log = LogFactory.getLog(CounterPersistence.class);
 
 }
