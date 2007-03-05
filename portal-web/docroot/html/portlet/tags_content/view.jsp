@@ -25,6 +25,16 @@
 <%@ include file="/html/portlet/tags_content/init.jsp" %>
 
 <%
+String[] compilerTagsEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
+
+if ((compilerTagsEntries != null) && (compilerTagsEntries.length > 0)) {
+	String[] newTagsEntries = new String[tagsEntries.length + compilerTagsEntries.length];
+
+	ArrayUtil.combine(tagsEntries, compilerTagsEntries, newTagsEntries);
+
+	tagsEntries = newTagsEntries;
+}
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);

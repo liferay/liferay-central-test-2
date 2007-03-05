@@ -65,6 +65,12 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		GroupLocalServiceFactory.getTxImpl().addRoleGroups(roleId, groupIds);
 	}
 
+	public void addUserGroups(java.lang.String userId, long[] groupIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		GroupLocalServiceFactory.getTxImpl().addUserGroups(userId, groupIds);
+	}
+
 	public void checkSystemGroups(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -172,10 +178,22 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		GroupLocalServiceFactory.getTxImpl().setRoleGroups(roleId, groupIds);
 	}
 
+	public void setUserGroups(java.lang.String userId, long[] groupIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		GroupLocalServiceFactory.getTxImpl().setUserGroups(userId, groupIds);
+	}
+
 	public void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalServiceFactory.getTxImpl().unsetRoleGroups(roleId, groupIds);
+	}
+
+	public void unsetUserGroups(java.lang.String userId, long[] groupIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		GroupLocalServiceFactory.getTxImpl().unsetUserGroups(userId, groupIds);
 	}
 
 	public com.liferay.portal.model.Group updateGroup(long groupId,

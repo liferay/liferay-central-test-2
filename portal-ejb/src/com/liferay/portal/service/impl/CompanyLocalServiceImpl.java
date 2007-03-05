@@ -38,10 +38,12 @@ import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ContactImpl;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -276,6 +278,13 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				firstName, middleName, lastName, nickName, prefixId, suffixId,
 				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
 				organizationId, locationId, false);
+
+			Group guestGroup = GroupLocalServiceUtil.getGroup(
+				companyId, GroupImpl.GUEST);
+
+			long[] groupIds = new long[] {guestGroup.getGroupId()};
+
+			GroupLocalServiceUtil.setUserGroups(user.getUserId(), groupIds);
 
 			Role adminRole = RoleLocalServiceUtil.getRole(
 				companyId, RoleImpl.ADMINISTRATOR);

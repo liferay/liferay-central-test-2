@@ -64,8 +64,8 @@ public class HotDeployPluginPackageListener implements HotDeployListener {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Plugin package on context " + servletContextName +
-						" cannot be tracked because there isn't a " +
-							"liferay-plugin-package.xml file");
+						" cannot be tracked because this WAR does not " +
+							"contain a liferay-plugin-package.xml file");
 			}
 
 			return null;

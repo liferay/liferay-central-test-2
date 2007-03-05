@@ -46,7 +46,7 @@ if (Validator.isNotNull(portletResource)) {
 }
 
 String[] tagsEntries = prefs.getValues("tags-entries", new String[0]);
-boolean andOperator = GetterUtil.getBoolean(prefs.getValue("and-operator", StringPool.BLANK));
+boolean andOperator = GetterUtil.getBoolean(prefs.getValue("and-operator", null), true);
 
 Arrays.sort(tagsEntries);
 %>

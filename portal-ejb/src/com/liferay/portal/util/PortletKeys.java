@@ -104,6 +104,8 @@ public class PortletKeys {
 
 	public static final String STOCKS = "12";
 
+	public static final String TAGS_COMPILER = "103";
+
 	public static final String WIKI = "36";
 
 	public static final String WORKFLOW = "93";

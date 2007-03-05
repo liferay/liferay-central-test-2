@@ -921,6 +921,20 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
 	</portlet>
+	<portlet>
+		<portlet-name>103</portlet-name>
+		<struts-path>tags_compiler</struts-path>
+		<friendly-url-mapper-class>com.liferay.portlet.tagscompiler.TagsCompilerFriendlyURLMapper</friendly-url-mapper-class>
+		<use-default-template>false</use-default-template>
+		<show-portlet-access-denied>false</show-portlet-access-denied>
+		<show-portlet-inactive>false</show-portlet-inactive>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>100</render-weight>
+		<add-default-resource>true</add-default-resource>
+		<system>true</system>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

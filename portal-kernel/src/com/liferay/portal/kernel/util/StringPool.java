@@ -64,6 +64,8 @@ public class StringPool {
 
 	public static final String LESS_THAN = "<";
 
+	public static final String MINUS = "-";
+
 	public static final String NBSP = "&nbsp;";
 
 	public static final String NEW_LINE = "\n";
@@ -83,6 +85,8 @@ public class StringPool {
 	public static final String PERIOD = ".";
 
 	public static final String PIPE = "|";
+
+	public static final String PLUS = "+";
 
 	public static final String POUND = "#";
 

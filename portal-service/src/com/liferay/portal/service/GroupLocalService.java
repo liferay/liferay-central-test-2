@@ -48,6 +48,10 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void addUserGroups(java.lang.String userId, long[] groupIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void checkSystemGroups(java.lang.String companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -117,7 +121,15 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void setUserGroups(java.lang.String userId, long[] groupIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void unsetUserGroups(java.lang.String userId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

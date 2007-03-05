@@ -65,6 +65,13 @@ public class GroupLocalServiceUtil {
 		groupLocalService.addRoleGroups(roleId, groupIds);
 	}
 
+	public static void addUserGroups(java.lang.String userId, long[] groupIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.addUserGroups(userId, groupIds);
+	}
+
 	public static void checkSystemGroups(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -199,11 +206,25 @@ public class GroupLocalServiceUtil {
 		groupLocalService.setRoleGroups(roleId, groupIds);
 	}
 
+	public static void setUserGroups(java.lang.String userId, long[] groupIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setUserGroups(userId, groupIds);
+	}
+
 	public static void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 		groupLocalService.unsetRoleGroups(roleId, groupIds);
+	}
+
+	public static void unsetUserGroups(java.lang.String userId, long[] groupIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.unsetUserGroups(userId, groupIds);
 	}
 
 	public static com.liferay.portal.model.Group updateGroup(long groupId,

@@ -297,6 +297,8 @@ public class WebKeys {
 
 	public static final String TAB_INDEX = "TAB_INDEX";
 
+	public static final String TAGS_COMPILER_ENTRIES = "TAGS_COMPILER_ENTRIES";
+
 	public static final String TASK_LIST = "TASK_LIST";
 
 	public static final String THEME = "THEME";

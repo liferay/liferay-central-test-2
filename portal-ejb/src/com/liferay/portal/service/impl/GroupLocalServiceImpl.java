@@ -167,6 +167,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		RoleUtil.addGroups(roleId, groupIds);
 	}
 
+	public void addUserGroups(String userId, long[] groupIds)
+		throws PortalException, SystemException {
+
+		UserUtil.addGroups(userId, groupIds);
+	}
+
 	public void checkSystemGroups(String companyId)
 		throws PortalException, SystemException {
 
@@ -423,10 +429,22 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		RoleUtil.setGroups(roleId, groupIds);
 	}
 
+	public void setUserGroups(String userId, long[] groupIds)
+		throws PortalException, SystemException {
+
+		UserUtil.setGroups(userId, groupIds);
+	}
+
 	public void unsetRoleGroups(String roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		RoleUtil.removeGroups(roleId, groupIds);
+	}
+
+	public void unsetUserGroups(String userId, long[] groupIds)
+		throws PortalException, SystemException {
+
+		UserUtil.removeGroups(userId, groupIds);
 	}
 
 	public Group updateGroup(

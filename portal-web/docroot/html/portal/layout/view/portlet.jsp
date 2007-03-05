@@ -24,6 +24,8 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
+<liferay-portlet:runtime portletName="<%= PortletKeys.TAGS_COMPILER %>" />
+
 <%
 boolean layoutMaximized = layoutTypePortlet.hasStateMax();
 
