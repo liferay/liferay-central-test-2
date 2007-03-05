@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.model.impl.ResourceImpl;
@@ -50,15 +51,17 @@ public class ResourceUtil {
 
 	public static void upgradePrimKey(ValueMapper pkMapper, String name)
 		throws Exception {
-		
+
 		upgradePrimKey(pkMapper, name, true);
 	}
-	
+
 	public static void upgradePrimKey(
 			ValueMapper pkMapper, String name, boolean isLong)
 		throws Exception {
 
-		_log.info("Upgrading Resource_.primKey with name: " + name);
+		if (_log.isInfoEnabled()) {
+			_log.info("Upgrading Resource_.primKey with name " + name);
+		}
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -127,10 +130,12 @@ public class ResourceUtil {
 					}
 				}
 				catch (StagnantRowException sre) {
-					_log.warn(
-						"Resource_.primKey has stagnant data where " +
-						"Resource_.name like '" + name + "': " +
-						sre.getMessage());
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Resource_.primKey has stagnant data where " +
+								"Resource_.name like '" + name + "': " +
+									sre.getMessage());
+					}
 
 					badPks.add(oldPk);
 
@@ -230,15 +235,16 @@ public class ResourceUtil {
 	}
 
 	private static final int _BATCH_SIZE = GetterUtil.getInteger(
-			PropsUtil.get("hibernate.jdbc.batch_size"));
+		PropsUtil.get("hibernate.jdbc.batch_size"));
 
-	private static final String _SELECT_PRIMKEY = 
+	private static final String _SELECT_PRIMKEY =
 		"SELECT * FROM Resource_ WHERE name = ? AND scope = ?";
 
 	private static final String _UPDATE_PRIMKEY =
-		"UPDATE Resource_ SET primKey = ? WHERE name = ? AND scope = ? AND primKey = ?";
+		"UPDATE Resource_ SET primKey = ? WHERE name = ? AND scope = ? AND " +
+			"primKey = ?";
 
-	private static final String _CLEAN_PRIMKEY = 
+	private static final String _CLEAN_PRIMKEY =
 		"DELETE FROM Resource_ WHERE name = ? AND scope = ? AND primKey = ?";
 
 	private static Log _log = LogFactory.getLog(ResourceUtil.class.getName());
