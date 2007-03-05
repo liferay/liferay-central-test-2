@@ -152,7 +152,8 @@ public class ActionResponseImpl implements ActionResponse {
 
 		try {
 			_portletMode = PortalUtil.updatePortletMode(
-				_portletName, _user, _layout, portletMode);
+				_portletName, _user, _layout, portletMode,
+				_req.getHttpServletRequest());
 
 			_req.setPortletMode(_portletMode);
 		}

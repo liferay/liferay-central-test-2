@@ -1148,7 +1148,8 @@ public class PortalUtil {
 	}
 
 	public static PortletMode updatePortletMode(
-			String portletId, User user, Layout layout, PortletMode portletMode)
+			String portletId, User user, Layout layout, PortletMode portletMode,
+			HttpServletRequest req)
 		throws PortalException, RemoteException, SystemException {
 
 		LayoutTypePortlet layoutType =
@@ -1256,6 +1257,14 @@ public class PortalUtil {
 						layout.getLayoutId(), layout.getOwnerId(),
 						layout.getTypeSettings());
 				}
+				else {
+					LayoutClone layoutClone = LayoutCloneFactory.getInstance();
+
+					if (layoutClone != null) {
+						layoutClone.update(
+							req, layout.getPlid(), layout.getTypeSettings());
+					}
+				}
 			}
 
 			return portletMode;
@@ -1358,6 +1367,14 @@ public class PortalUtil {
 					LayoutServiceUtil.updateLayout(
 						layout.getLayoutId(), layout.getOwnerId(),
 						layout.getTypeSettings());
+				}
+				else {
+					LayoutClone layoutClone = LayoutCloneFactory.getInstance();
+
+					if (layoutClone != null) {
+						layoutClone.update(
+							req, layout.getPlid(), layout.getTypeSettings());
+					}
 				}
 			}
 

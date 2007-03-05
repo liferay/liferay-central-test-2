@@ -260,7 +260,8 @@ public class LayoutAction extends Action {
 			PortalUtil.updateWindowState(
 				portletId, user, layout, windowState, req);
 
-			PortalUtil.updatePortletMode(portletId, user, layout, portletMode);
+			PortalUtil.updatePortletMode(
+				portletId, user, layout, portletMode, req);
 		}
 
 		return portlet;

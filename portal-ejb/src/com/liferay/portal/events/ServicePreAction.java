@@ -42,6 +42,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
@@ -60,6 +61,8 @@ import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.CookieKeys;
+import com.liferay.portal.util.LayoutClone;
+import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -72,7 +75,9 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ListUtil;
 import com.liferay.util.LocaleUtil;
+import com.liferay.util.NullSafeProperties;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -82,6 +87,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.TimeZone;
 
 import javax.portlet.PortletMode;
@@ -324,6 +330,30 @@ public class ServicePreAction extends Action {
 				// session
 
 				layout = (Layout)((LayoutImpl)layout).clone();
+
+				LayoutClone layoutClone = LayoutCloneFactory.getInstance();
+
+				if (layoutClone != null) {
+					String typeSettings =
+						layoutClone.get(req, layout.getPlid());
+
+					if (typeSettings != null) {
+						Properties props = new NullSafeProperties();
+
+						PropertiesUtil.load(props, typeSettings);
+
+						String stateMax = props.getProperty(
+							LayoutTypePortletImpl.STATE_MAX);
+						String stateMin = props.getProperty(
+							LayoutTypePortletImpl.STATE_MIN);
+
+						LayoutTypePortlet layoutTypePortlet =
+							(LayoutTypePortlet)layout.getLayoutType();
+
+						layoutTypePortlet.setStateMax(stateMax);
+						layoutTypePortlet.setStateMin(stateMin);
+					}
+				}
 			}
 
 			LayoutTypePortlet layoutTypePortlet = null;
