@@ -185,9 +185,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				group = GroupFinder.findByC_N(companyId, systemGroups[i]);
 			}
 			catch (NoSuchGroupException nsge) {
+				String friendlyURL = null;
+
+				if (systemGroups[i].equals(GroupImpl.GUEST)) {
+					friendlyURL = "/guest";
+				}
+
 				group = addGroup(
 					UserImpl.getDefaultUserId(companyId), null, null,
-					systemGroups[i], null, null, null, true);
+					systemGroups[i], null, null, friendlyURL, true);
 			}
 
 			if (group.getName().equals(GroupImpl.GUEST)) {

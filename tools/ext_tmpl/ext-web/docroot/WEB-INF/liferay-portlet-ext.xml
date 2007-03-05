@@ -461,7 +461,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>101</portlet-name>
-		<struts-path>tags_content</struts-path>
+		<struts-path>tagged_content</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>

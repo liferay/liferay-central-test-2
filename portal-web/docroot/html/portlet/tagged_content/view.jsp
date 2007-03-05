@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/tags_content/init.jsp" %>
+<%@ include file="/html/portlet/tagged_content/init.jsp" %>
 
 <%
 String[] compilerTagsEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);

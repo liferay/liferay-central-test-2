@@ -1094,24 +1094,24 @@
 		<put name="portlet_content" value="/portlet/stocks/view.jsp" />
 	</definition>
 
+	<!-- Tagged Content -->
+
+	<definition name="portlet.tagged_content" extends="portlet" />
+
+	<definition name="portlet.tagged_content.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/tagged_content/edit_configuration.jsp" />
+	</definition>
+
+	<definition name="portlet.tagged_content.view" extends="portlet.tagged_content">
+		<put name="portlet_content" value="/portlet/tagged_content/view.jsp" />
+	</definition>
+
 	<!-- Tags Admin -->
 
 	<definition name="portlet.tags_admin" extends="portlet" />
 
 	<definition name="portlet.tags_admin.view" extends="portlet.tags_admin">
 		<put name="portlet_content" value="/portlet/tags_admin/view.jsp" />
-	</definition>
-
-	<!-- Tags Content -->
-
-	<definition name="portlet.tags_content" extends="portlet" />
-
-	<definition name="portlet.tags_content.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/tags_content/edit_configuration.jsp" />
-	</definition>
-
-	<definition name="portlet.tags_content.view" extends="portlet.tags_content">
-		<put name="portlet_content" value="/portlet/tags_content/view.jsp" />
 	</definition>
 
 	<!-- Weather -->

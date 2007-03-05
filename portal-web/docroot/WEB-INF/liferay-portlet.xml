@@ -899,8 +899,8 @@
 	</portlet>
 	<portlet>
 		<portlet-name>101</portlet-name>
-		<struts-path>tags_content</struts-path>
-		<configuration-path>/tags_content/edit_configuration</configuration-path>
+		<struts-path>tagged_content</struts-path>
+		<configuration-path>/tagged_content/edit_configuration</configuration-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.tagscontent.action;
+package com.liferay.portlet.taggedcontent.action;
 
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
@@ -83,7 +83,7 @@ public class EditConfigurationAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward("portlet.tags_content.edit_configuration");
+		return mapping.findForward("portlet.tagged_content.edit_configuration");
 	}
 
 }

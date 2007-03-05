@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.tagscontent.action;
+package com.liferay.portlet.taggedcontent.action;
 
 import com.liferay.portal.struts.PortletAction;
 
@@ -45,7 +45,7 @@ public class ViewAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward("portlet.tags_content.view");
+		return mapping.findForward("portlet.tagged_content.view");
 	}
 
 }

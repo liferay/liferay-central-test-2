@@ -1344,6 +1344,12 @@
 
 		<action path="/stocks/view" forward="portlet.stocks.view" />
 
+		<!-- Tagged Content -->
+
+		<action path="/tagged_content/edit_configuration" type="com.liferay.portlet.taggedcontent.action.EditConfigurationAction">
+			<forward name="portlet.tagged_content.edit_configuration" path="portlet.tagged_content.edit_configuration" />
+		</action>
+
 		<!-- Tags Admin -->
 
 		<action path="/tags_admin/edit_entry" type="com.liferay.portlet.tagsadmin.action.EditEntryAction" />
@@ -1352,14 +1358,8 @@
 
 		<action path="/tags_admin/view" forward="portlet.tags_admin.view" />
 
-		<!-- Tags Content -->
-
-		<action path="/tags_content/edit_configuration" type="com.liferay.portlet.tagscontent.action.EditConfigurationAction">
-			<forward name="portlet.tags_content.edit_configuration" path="portlet.tags_content.edit_configuration" />
-		</action>
-
-		<action path="/tags_content/view" type="com.liferay.portlet.tagscontent.action.ViewAction">
-			<forward name="portlet.tags_content.view" path="portlet.tags_content.view" />
+		<action path="/tagged_content/view" type="com.liferay.portlet.taggedcontent.action.ViewAction">
+			<forward name="portlet.tagged_content.view" path="portlet.tagged_content.view" />
 		</action>
 
 		<!-- Weather -->

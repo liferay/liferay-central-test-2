@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/tags_content/init.jsp" %>
+<%@ include file="/html/portlet/tagged_content/init.jsp" %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
