@@ -277,22 +277,22 @@
 
 	<target name="replace-servlet23-jar">
 		<tstamp>
-			<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<mkdir dir="${tstamp.dir}" />
+		<mkdir dir="${tstamp.value}" />
 
 		<copy
 			file="${project.dir}/${module.file}/classes/META-INF/weblogic-ejb-jar.xml.81"
-			tofile="${tstamp.dir}/META-INF/weblogic-ejb-jar.xml"
+			tofile="${tstamp.value}/META-INF/weblogic-ejb-jar.xml"
 		/>
 
 		<jar
-			basedir="${tstamp.dir}"
+			basedir="${tstamp.value}"
 			jarfile="modules/${module.file}.jar"
 			update="yes"
 		/>
 
-		<delete dir="${tstamp.dir}" />
+		<delete dir="${tstamp.value}" />
 	</target>
 </project>

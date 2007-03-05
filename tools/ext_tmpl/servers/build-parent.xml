@@ -52,13 +52,13 @@
 		</antcall>
 
 		<tstamp>
-			<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<mkdir dir="${tstamp.dir}" />
+		<mkdir dir="${tstamp.value}" />
 
 		<java
-			dir="${tstamp.dir}"
+			dir="${tstamp.value}"
 			fork="true"
 			input="glassfish/input.txt"
 			jar="${downloads.dir}/${app.server.glassfish.zip.name}"
@@ -67,9 +67,9 @@
 			<arg value="-console"/>
 		</java>
 
-		<move file="${tstamp.dir}/glassfish" tofile="${app.server.glassfish.dir}" />
+		<move file="${tstamp.value}/glassfish" tofile="${app.server.glassfish.dir}" />
 
-		<delete dir="${tstamp.dir}" />
+		<delete dir="${tstamp.value}" />
 
 		<ant antfile="${app.server.glassfish.dir}/setup.xml" inheritAll="false" />
 

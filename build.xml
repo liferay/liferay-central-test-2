@@ -533,17 +533,17 @@
 			</or>
 			<then>
 				<tstamp>
-					<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 				</tstamp>
 
 				<jar
 					basedir="${app.server.portal.dir}"
-					jarfile="${tstamp.dir}"
+					jarfile="${tstamp.value}"
 				/>
 
 				<delete dir="${app.server.portal.dir}" />
 
-				<move file="${tstamp.dir}" tofile="${app.server.portal.dir}" />
+				<move file="${tstamp.value}" tofile="${app.server.portal.dir}" />
 			</then>
 		</if>
 	</target>
@@ -570,12 +570,12 @@
 				</or>
 				<then>
 					<tstamp>
-						<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+						<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 					</tstamp>
 
-					<mkdir dir="${tstamp.dir}" />
+					<mkdir dir="${tstamp.value}" />
 
-					<copy todir="${tstamp.dir}" overwrite="yes">
+					<copy todir="${tstamp.value}" overwrite="yes">
 						<fileset dir="portal-ejb/classes">
 							<include name="*-ext.properties" />
 						</fileset>
@@ -583,10 +583,10 @@
 
 					<if>
 						<not>
-							<available file="${tstamp.dir}/portal-ext.properties" />
+							<available file="${tstamp.value}/portal-ext.properties" />
 						</not>
 						<then>
-							<echo file="${tstamp.dir}/portal-ext.properties" append="false">portal.release=enterprise
+							<echo file="${tstamp.value}/portal-ext.properties" append="false">portal.release=enterprise
 
 portal.ctx=/
 
@@ -597,7 +597,7 @@ auto.deploy.dest.dir=../webapps</echo>
 					<if>
 						<equals arg1="${app.server.type}" arg2="glassfish" />
 						<then>
-							<replace file="${tstamp.dir}/portal-ext.properties">
+							<replace file="${tstamp.value}/portal-ext.properties">
 								<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
 								<replacevalue>auto.deploy.dest.dir=../domains/domain1/autodeploy</replacevalue>
 							</replace>
@@ -608,7 +608,7 @@ auto.deploy.dest.dir=../webapps</echo>
 								<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 							</or>
 							<then>
-								<replace file="${tstamp.dir}/portal-ext.properties">
+								<replace file="${tstamp.value}/portal-ext.properties">
 									<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
 									<replacevalue>auto.deploy.dest.dir=../server/default/deploy</replacevalue>
 								</replace>
@@ -617,7 +617,7 @@ auto.deploy.dest.dir=../webapps</echo>
 						<elseif>
 							<equals arg1="${app.server.type}" arg2="pramati" />
 							<then>
-								<replace file="${tstamp.dir}/portal-ext.properties">
+								<replace file="${tstamp.value}/portal-ext.properties">
 									<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
 									<replacevalue>auto.deploy.dest.dir=../nodes/liferay/archives/autodeploy</replacevalue>
 								</replace>
@@ -626,12 +626,12 @@ auto.deploy.dest.dir=../webapps</echo>
 					</if>
 
 					<jar
-						basedir="${tstamp.dir}"
+						basedir="${tstamp.value}"
 						destfile="${app.server.portal.dir}/portal-ejb.jar"
 						update="yes"
 					/>
 
-					<delete dir="${tstamp.dir}" />
+					<delete dir="${tstamp.value}" />
 				</then>
 			</elseif>
 			<else>

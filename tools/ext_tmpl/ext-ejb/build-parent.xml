@@ -62,10 +62,10 @@
 			</or>
 			<then>
 				<tstamp>
-					<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 				</tstamp>
 
-				<mkdir dir="${tstamp.dir}" />
+				<mkdir dir="${tstamp.value}" />
 
 				<java
 					classname="org.objectweb.jonas.server.Bootstrap"
@@ -77,10 +77,10 @@
 					<jvmarg value="-Djonas.base=${env.JONAS_ROOT}" />
 					<jvmarg value="-Djava.security.policy=${env.JONAS_ROOT}/conf/java.policy" />
 					<jvmarg value="-Djava.endorsed.dirs=${env.JONAS_ROOT}/lib/endorsed" />
-					<jvmarg value="-Djava.io.tmpdir=${tstamp.dir}" />
+					<jvmarg value="-Djava.io.tmpdir=${tstamp.value}" />
 					<arg value="org.objectweb.jonas_ejb.genic.GenIC" />
 					<arg value="-d" />
-					<arg value="${tstamp.dir}" />
+					<arg value="${tstamp.value}" />
 					<arg value="-nocompil" />
 					<arg value="-protocols" />
 					<arg value="jrmp" />
@@ -91,13 +91,13 @@
 
 				<javac
 					classpath="${classpath.jonas.compiler}"
-					srcdir="${tstamp.dir}"
+					srcdir="${tstamp.value}"
 					fork="true"
 					memoryMaximumSize="512m"
 				/>
 
 				<rmic
-					base="${tstamp.dir}"
+					base="${tstamp.value}"
 					classpath="${classpath.jonas.compiler}"
 					excludes="**/*LocalHome.class"
 					includes="**/*Home.class,**/*Remote.class"
@@ -109,12 +109,12 @@
 					update="yes"
 				>
 					<fileset
-						dir="${tstamp.dir}"
+						dir="${tstamp.value}"
 						includes="**/*.class,**/*.xml"
 					/>
 				</jar>
 
-				<delete dir="${tstamp.dir}" />
+				<delete dir="${tstamp.value}" />
 
 				<delete>
 					<fileset dir="." includes="jonas*.log*" />

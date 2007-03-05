@@ -74,49 +74,49 @@
 		</java>
 
 		<tstamp>
-			<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<mkdir dir="${tstamp.dir}/geronimo/var/derby/lportal" />
+		<mkdir dir="${tstamp.value}/geronimo/var/derby/lportal" />
 
-		<move todir="${tstamp.dir}/geronimo/var/derby/lportal">
+		<move todir="${tstamp.value}/geronimo/var/derby/lportal">
 			<fileset dir="${database.name}" />
 		</move>
 
 		<jar
-			basedir="${tstamp.dir}"
+			basedir="${tstamp.value}"
 			jarfile="${database.name}.jar"
 		/>
 
 		<mkdir dir="${database.name}" />
 
 		<move todir="${database.name}">
-			<fileset dir="${tstamp.dir}/geronimo/var/derby/lportal" />
+			<fileset dir="${tstamp.value}/geronimo/var/derby/lportal" />
 		</move>
 
-		<delete dir="${tstamp.dir}" />
+		<delete dir="${tstamp.value}" />
 
 		<tstamp>
-			<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<mkdir dir="${tstamp.dir}" />
+		<mkdir dir="${tstamp.value}" />
 
 		<unzip
 			src="${app.server.geronimo-tomcat.dir}/repository/tranql/tranql-connector/1.2/tranql-connector-1.2.rar"
-			dest="${tstamp.dir}"
+			dest="${tstamp.value}"
 		/>
 
-		<copy file="${database.name}.jar" todir="${tstamp.dir}" />
+		<copy file="${database.name}.jar" todir="${tstamp.value}" />
 
 		<delete file="geronimo/derby/tranql-connector-1.2.rar" />
 
 		<jar
-			basedir="${tstamp.dir}"
+			basedir="${tstamp.value}"
 			jarfile="geronimo/derby/tranql-connector-1.2.rar"
 		/>
 
-		<delete dir="${tstamp.dir}" />
+		<delete dir="${tstamp.value}" />
 	</target>
 
 	<target name="rebuild-firebird">
