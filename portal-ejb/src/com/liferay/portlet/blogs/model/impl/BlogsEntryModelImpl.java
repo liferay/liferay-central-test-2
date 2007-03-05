@@ -42,14 +42,14 @@ import java.util.Date;
 public class BlogsEntryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "BlogsEntry";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "entryId", new Integer(Types.VARCHAR) },
+			{ "entryId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "categoryId", new Integer(Types.VARCHAR) },
+			{ "categoryId", new Integer(Types.BIGINT) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "content", new Integer(Types.CLOB) },
 			{ "displayDate", new Integer(Types.TIMESTAMP) }
@@ -57,9 +57,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ENTRYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.entryId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -68,9 +65,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.categoryId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.title"),
@@ -84,27 +78,20 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 	public BlogsEntryModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _entryId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setEntryId(pk);
 	}
 
-	public String getEntryId() {
-		return GetterUtil.getString(_entryId);
+	public long getEntryId() {
+		return _entryId;
 	}
 
-	public void setEntryId(String entryId) {
-		if (((entryId == null) && (_entryId != null)) ||
-				((entryId != null) && (_entryId == null)) ||
-				((entryId != null) && (_entryId != null) &&
-				!entryId.equals(_entryId))) {
-			if (!XSS_ALLOW_ENTRYID) {
-				entryId = XSSUtil.strip(entryId);
-			}
-
+	public void setEntryId(long entryId) {
+		if (entryId != _entryId) {
 			_entryId = entryId;
 		}
 	}
@@ -196,19 +183,12 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCategoryId() {
-		return GetterUtil.getString(_categoryId);
+	public long getCategoryId() {
+		return _categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
-		if (((categoryId == null) && (_categoryId != null)) ||
-				((categoryId != null) && (_categoryId == null)) ||
-				((categoryId != null) && (_categoryId != null) &&
-				!categoryId.equals(_categoryId))) {
-			if (!XSS_ALLOW_CATEGORYID) {
-				categoryId = XSSUtil.strip(categoryId);
-			}
-
+	public void setCategoryId(long categoryId) {
+		if (categoryId != _categoryId) {
 			_categoryId = categoryId;
 		}
 	}
@@ -307,9 +287,9 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = blogsEntry.getPrimaryKey();
+		long pk = blogsEntry.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -318,17 +298,17 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _entryId;
+	private long _entryId;
 	private long _groupId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _categoryId;
+	private long _categoryId;
 	private String _title;
 	private String _content;
 	private Date _displayDate;

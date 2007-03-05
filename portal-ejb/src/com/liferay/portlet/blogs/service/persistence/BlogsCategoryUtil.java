@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class BlogsCategoryUtil {
 	public static com.liferay.portlet.blogs.model.BlogsCategory create(
-		java.lang.String categoryId) {
+		long categoryId) {
 		return getPersistence().create(categoryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory remove(
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.blogs.NoSuchCategoryException {
 		ModelListener listener = _getListener();
@@ -140,40 +140,37 @@ public class BlogsCategoryUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory findByPrimaryKey(
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.blogs.NoSuchCategoryException {
 		return getPersistence().findByPrimaryKey(categoryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory fetchByPrimaryKey(
-		java.lang.String categoryId) throws com.liferay.portal.SystemException {
+		long categoryId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(categoryId);
 	}
 
-	public static java.util.List findByParentCategoryId(
-		java.lang.String parentCategoryId)
+	public static java.util.List findByParentCategoryId(long parentCategoryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByParentCategoryId(parentCategoryId);
 	}
 
-	public static java.util.List findByParentCategoryId(
-		java.lang.String parentCategoryId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List findByParentCategoryId(long parentCategoryId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByParentCategoryId(parentCategoryId, begin,
 			end);
 	}
 
-	public static java.util.List findByParentCategoryId(
-		java.lang.String parentCategoryId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByParentCategoryId(long parentCategoryId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByParentCategoryId(parentCategoryId, begin,
 			end, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory findByParentCategoryId_First(
-		java.lang.String parentCategoryId,
+		long parentCategoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.blogs.NoSuchCategoryException {
@@ -182,7 +179,7 @@ public class BlogsCategoryUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory findByParentCategoryId_Last(
-		java.lang.String parentCategoryId,
+		long parentCategoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.blogs.NoSuchCategoryException {
@@ -191,7 +188,7 @@ public class BlogsCategoryUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory[] findByParentCategoryId_PrevAndNext(
-		java.lang.String categoryId, java.lang.String parentCategoryId,
+		long categoryId, long parentCategoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.blogs.NoSuchCategoryException {
@@ -228,8 +225,7 @@ public class BlogsCategoryUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByParentCategoryId(
-		java.lang.String parentCategoryId)
+	public static void removeByParentCategoryId(long parentCategoryId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByParentCategoryId(parentCategoryId);
 	}
@@ -238,7 +234,7 @@ public class BlogsCategoryUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByParentCategoryId(java.lang.String parentCategoryId)
+	public static int countByParentCategoryId(long parentCategoryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByParentCategoryId(parentCategoryId);
 	}

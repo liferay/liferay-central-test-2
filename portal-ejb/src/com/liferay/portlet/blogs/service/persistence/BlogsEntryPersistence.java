@@ -53,7 +53,7 @@ import java.util.List;
  *
  */
 public class BlogsEntryPersistence extends BasePersistence {
-	public BlogsEntry create(String entryId) {
+	public BlogsEntry create(long entryId) {
 		BlogsEntry blogsEntry = new BlogsEntryImpl();
 		blogsEntry.setNew(true);
 		blogsEntry.setPrimaryKey(entryId);
@@ -61,7 +61,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		return blogsEntry;
 	}
 
-	public BlogsEntry remove(String entryId)
+	public BlogsEntry remove(long entryId)
 		throws NoSuchEntryException, SystemException {
 		Session session = null;
 
@@ -69,7 +69,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			session = openSession();
 
 			BlogsEntry blogsEntry = (BlogsEntry)session.get(BlogsEntryImpl.class,
-					entryId);
+					new Long(entryId));
 
 			if (blogsEntry == null) {
 				if (_log.isWarnEnabled()) {
@@ -145,7 +145,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BlogsEntry findByPrimaryKey(String entryId)
+	public BlogsEntry findByPrimaryKey(long entryId)
 		throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = fetchByPrimaryKey(entryId);
 
@@ -162,14 +162,14 @@ public class BlogsEntryPersistence extends BasePersistence {
 		return blogsEntry;
 	}
 
-	public BlogsEntry fetchByPrimaryKey(String entryId)
-		throws SystemException {
+	public BlogsEntry fetchByPrimaryKey(long entryId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (BlogsEntry)session.get(BlogsEntryImpl.class, entryId);
+			return (BlogsEntry)session.get(BlogsEntryImpl.class,
+				new Long(entryId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -289,7 +289,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BlogsEntry[] findByGroupId_PrevAndNext(String entryId, long groupId,
+	public BlogsEntry[] findByGroupId_PrevAndNext(long entryId, long groupId,
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
 		int count = countByGroupId(groupId);
@@ -466,7 +466,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BlogsEntry[] findByCompanyId_PrevAndNext(String entryId,
+	public BlogsEntry[] findByCompanyId_PrevAndNext(long entryId,
 		String companyId, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
@@ -524,7 +524,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCategoryId(String categoryId) throws SystemException {
+	public List findByCategoryId(long categoryId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -533,14 +533,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("displayDate DESC");
@@ -549,10 +542,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			return q.list();
 		}
@@ -564,12 +554,12 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCategoryId(String categoryId, int begin, int end)
+	public List findByCategoryId(long categoryId, int begin, int end)
 		throws SystemException {
 		return findByCategoryId(categoryId, begin, end, null);
 	}
 
-	public List findByCategoryId(String categoryId, int begin, int end,
+	public List findByCategoryId(long categoryId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -579,14 +569,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -602,10 +585,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -617,7 +597,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BlogsEntry findByCategoryId_First(String categoryId,
+	public BlogsEntry findByCategoryId_First(long categoryId,
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		List list = findByCategoryId(categoryId, 0, 1, obc);
 
@@ -635,7 +615,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BlogsEntry findByCategoryId_Last(String categoryId,
+	public BlogsEntry findByCategoryId_Last(long categoryId,
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		int count = countByCategoryId(categoryId);
 		List list = findByCategoryId(categoryId, count - 1, count, obc);
@@ -654,8 +634,8 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BlogsEntry[] findByCategoryId_PrevAndNext(String entryId,
-		String categoryId, OrderByComparator obc)
+	public BlogsEntry[] findByCategoryId_PrevAndNext(long entryId,
+		long categoryId, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
 		int count = countByCategoryId(categoryId);
@@ -667,14 +647,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -690,10 +663,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsEntry);
@@ -809,7 +779,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCategoryId(String categoryId) throws SystemException {
+	public void removeByCategoryId(long categoryId) throws SystemException {
 		Iterator itr = findByCategoryId(categoryId).iterator();
 
 		while (itr.hasNext()) {
@@ -914,7 +884,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCategoryId(String categoryId) throws SystemException {
+	public int countByCategoryId(long categoryId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -924,24 +894,14 @@ public class BlogsEntryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			Iterator itr = q.list().iterator();
 

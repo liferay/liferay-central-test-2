@@ -43,7 +43,7 @@ public class BlogsEntryServiceImpl
 	extends PrincipalBean implements BlogsEntryService {
 
 	public BlogsEntry addEntry(
-			String plid, String categoryId, String title, String content,
+			String plid, long categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -60,7 +60,7 @@ public class BlogsEntryServiceImpl
 	}
 
 	public BlogsEntry addEntry(
-			String plid, String categoryId, String title, String content,
+			String plid, long categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute,
 			String[] communityPermissions, String[] guestPermissions)
@@ -76,7 +76,7 @@ public class BlogsEntryServiceImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteEntry(String entryId)
+	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
 		BlogsEntryPermission.check(
@@ -85,7 +85,7 @@ public class BlogsEntryServiceImpl
 		BlogsEntryLocalServiceUtil.deleteEntry(entryId);
 	}
 
-	public BlogsEntry getEntry(String entryId)
+	public BlogsEntry getEntry(long entryId)
 		throws PortalException, SystemException {
 
 		BlogsEntryPermission.check(
@@ -95,7 +95,7 @@ public class BlogsEntryServiceImpl
 	}
 
 	public BlogsEntry updateEntry(
-			String entryId, String categoryId, String title, String content,
+			long entryId, long categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute)
 		throws PortalException, SystemException {

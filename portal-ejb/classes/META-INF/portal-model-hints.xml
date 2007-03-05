@@ -449,27 +449,27 @@
 		<field name="primary" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.blogs.model.BlogsCategory">
-		<field name="categoryId" type="String" />
+		<field name="categoryId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="parentCategoryId" type="String" />
+		<field name="parentCategoryId" type="long" />
 		<field name="name" type="String" />
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
 	</model>
 	<model name="com.liferay.portlet.blogs.model.BlogsEntry">
-		<field name="entryId" type="String" />
+		<field name="entryId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="categoryId" type="String" />
+		<field name="categoryId" type="long" />
 		<field name="title" type="String" />
 		<field name="content" type="String">
 			<hint-collection name="CLOB" />

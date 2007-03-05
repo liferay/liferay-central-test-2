@@ -24,7 +24,7 @@
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 
-<c:if test="<%= (category == null) && !entry.getCategoryId().equals(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) %>">
+<c:if test="<%= (category == null) && (entry.getCategoryId() != BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) %>">
 	<tr>
 		<td>
 			<%= BlogsUtil.getBreadcrumbs(entry.getCategoryId(), pageContext, renderRequest, renderResponse) %>
@@ -39,7 +39,7 @@
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewEntryURL">
 			<portlet:param name="struts_action" value="/blogs/view_entry" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="entryId" value="<%= entry.getEntryId() %>" />
+			<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 		</portlet:renderURL>
 
 		<span style="font-size: small;"><b><a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a></b></span><br>
@@ -57,7 +57,7 @@
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editEntryURL">
 				<portlet:param name="struts_action" value="/blogs/edit_entry" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="entryId" value="<%= entry.getEntryId() %>" />
+				<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 			</portlet:renderURL>
 
 			<liferay-ui:icon image="edit" url="<%= editEntryURL %>" />
@@ -67,7 +67,7 @@
 			<liferay-security:permissionsURL
 				modelResource="<%= BlogsEntry.class.getName() %>"
 				modelResourceDescription="<%= entry.getTitle() %>"
-				resourcePrimKey="<%= entry.getPrimaryKey().toString() %>"
+				resourcePrimKey="<%= String.valueOf(entry.getPrimaryKey()) %>"
 				var="permissionsEntryURL"
 			/>
 
@@ -79,7 +79,7 @@
 				<portlet:param name="struts_action" value="/blogs/edit_entry" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="entryId" value="<%= entry.getEntryId() %>" />
+				<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 			</portlet:actionURL>
 
 			<liferay-ui:icon-delete url="<%= deleteEntryURL %>" />

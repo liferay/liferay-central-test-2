@@ -29,9 +29,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
-String entryId = BeanParamUtil.getString(entry, request, "entryId");
+long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
-String categoryId = BeanParamUtil.getString(entry, request, "categoryId", BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+long categoryId = BeanParamUtil.getLong(entry, request, "categoryId", BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 String categoryName = StringPool.BLANK;
 
@@ -104,11 +104,11 @@ if (entry != null) {
 	<td>
 		<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>">
 
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/view" /><portlet:param name="tabs1" value="categories" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
+		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/view" /><portlet:param name="tabs1" value="categories" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
 		<%= categoryName %>
 		</a>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/blogs/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/blogs/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
 	</td>
 </tr>
 <tr>

@@ -69,7 +69,7 @@ public class BlogsEntryFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < categoryIds.size(); i++) {
-				String categoryId = (String)categoryIds.get(i);
+				Long categoryId = (Long)categoryIds.get(i);
 
 				qPos.add(categoryId);
 			}

@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/blogs/init.jsp" %>
 
 <%
-String breadcrumbsCategoryId = ParamUtil.getString(request, "breadcrumbsCategoryId");
+long breadcrumbsCategoryId = ParamUtil.getLong(request, "breadcrumbsCategoryId");
 
 long groupId = ParamUtil.getLong(request, "groupId");
 String userId = null;
@@ -49,7 +49,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/blogs/search");
-portletURL.setParameter("breadcrumbsCategoryId", breadcrumbsCategoryId);
+portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
 portletURL.setParameter("categoryIds", categoryIds);
 portletURL.setParameter("keywords", keywords);
 
@@ -82,13 +82,13 @@ for (int i = 0; i < results.getLength(); i++) {
 
 	// Category and entry
 
-	String categoryId = doc.get("categoryId");
-	String entryId = doc.get("entryId");
+	long categoryId = GetterUtil.getLong(doc.get("categoryId"), BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+	long entryId = GetterUtil.getLong(doc.get("entryId"));
 
 	String categoryName = LanguageUtil.get(pageContext, "not-available");
 
 	try {
-		if (!categoryId.equals(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+		if (categoryId != BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
 			BlogsCategory category = BlogsCategoryLocalServiceUtil.getCategory(categoryId);
 
 			categoryName = category.getName();
@@ -104,7 +104,7 @@ for (int i = 0; i < results.getLength(); i++) {
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/blogs/view_entry");
-	rowURL.setParameter("entryId", entryId);
+	rowURL.setParameter("entryId", String.valueOf(entryId));
 
 	row.addText(categoryName, rowURL);
 	row.addText(entry.getTitle(), rowURL);

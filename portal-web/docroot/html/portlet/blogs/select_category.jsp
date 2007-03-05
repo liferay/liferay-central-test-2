@@ -27,7 +27,7 @@
 <%
 BlogsCategory category = (BlogsCategory)request.getAttribute(WebKeys.BLOGS_CATEGORY);
 
-String categoryId = BeanParamUtil.getString(category, request, "categoryId", BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+long categoryId = BeanParamUtil.getLong(category, request, "categoryId", BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
 <form method="post" name="<portlet:namespace />fm">
@@ -69,18 +69,18 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	BlogsCategory curCategory = (BlogsCategory)results.get(i);
 
-	ResultRow row = new ResultRow(curCategory, curCategory.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(curCategory, String.valueOf(curCategory.getPrimaryKey()), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(LiferayWindowState.POP_UP);
 
 	rowURL.setParameter("struts_action", "/blogs/select_category");
-	rowURL.setParameter("categoryId", curCategory.getCategoryId());
+	rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
 
 	List subcategoryIds = new ArrayList();
 
-	subcategoryIds.add(curCategory.getCategoryId());
+	subcategoryIds.add(new Long(curCategory.getCategoryId()));
 
 	BlogsCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, curCategory.getCategoryId());
 

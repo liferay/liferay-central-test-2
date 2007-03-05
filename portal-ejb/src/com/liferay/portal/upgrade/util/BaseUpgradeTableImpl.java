@@ -259,38 +259,40 @@ public abstract class BaseUpgradeTableImpl {
 
 		int t = type.intValue();
 
+		int parameterIndex = index + 1;
+
 		if (t == Types.BIGINT) {
-			ps.setLong(index, GetterUtil.getLong(value));
+			ps.setLong(parameterIndex, GetterUtil.getLong(value));
 		}
 		else if (t == Types.BOOLEAN) {
-			ps.setBoolean(index, GetterUtil.getBoolean(value));
+			ps.setBoolean(parameterIndex, GetterUtil.getBoolean(value));
 		}
 		else if ((t == Types.CLOB) || (t == Types.VARCHAR)) {
 			value = StringUtil.replace(value, _SAFE_CHARS[1], _SAFE_CHARS[0]);
 
-			ps.setString(index, value);
+			ps.setString(parameterIndex, value);
 		}
 		else if (t == Types.DOUBLE) {
-			ps.setDouble(index, GetterUtil.getDouble(value));
+			ps.setDouble(parameterIndex, GetterUtil.getDouble(value));
 		}
 		else if (t == Types.FLOAT) {
-			ps.setFloat(index, GetterUtil.getFloat(value));
+			ps.setFloat(parameterIndex, GetterUtil.getFloat(value));
 		}
 		else if (t == Types.INTEGER) {
-			ps.setInt(index, GetterUtil.getInteger(value));
+			ps.setInt(parameterIndex, GetterUtil.getInteger(value));
 		}
 		else if (t == Types.SMALLINT) {
-			ps.setShort(index, GetterUtil.getShort(value));
+			ps.setShort(parameterIndex, GetterUtil.getShort(value));
 		}
 		else if (t == Types.TIMESTAMP) {
 			if (StringPool.NULL.equals(value)) {
-				ps.setTimestamp(index, null);
+				ps.setTimestamp(parameterIndex, null);
 			}
 			else {
 				DateFormat df = DateUtil.getISOFormat();
 
 				ps.setTimestamp(
-					index, new Timestamp(df.parse(value).getTime()));
+					parameterIndex, new Timestamp(df.parse(value).getTime()));
 			}
 		}
 		else {
@@ -333,7 +335,7 @@ public abstract class BaseUpgradeTableImpl {
 				catch (StagnantRowException sre) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							_tableName + " has stagnant data " +
+							_tableName + " has stagnant data: " +
 								sre.getMessage());
 					}
 				}
@@ -398,8 +400,7 @@ public abstract class BaseUpgradeTableImpl {
 					}
 
 					for (int i = 0; i < _columns.length; i++) {
-						setColumn(
-							ps, i + 1, (Integer)_columns[i][1], values[i]);
+						setColumn(ps, i, (Integer)_columns[i][1], values[i]);
 					}
 
 					if (useBatch) {

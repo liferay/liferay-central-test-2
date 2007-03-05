@@ -27,9 +27,9 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.blogs.CategoryNameException;
 import com.liferay.portlet.blogs.NoSuchCategoryException;
+import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.service.BlogsCategoryServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -110,15 +110,17 @@ public class EditCategoryAction extends PortletAction {
 	}
 
 	protected void deleteCategory(ActionRequest req) throws Exception {
-		String categoryId = ParamUtil.getString(req, "categoryId");
+		long categoryId = ParamUtil.getLong(req, "categoryId");
 
 		BlogsCategoryServiceUtil.deleteCategory(categoryId);
 	}
 
 	protected void updateCategory(ActionRequest req) throws Exception {
-		String categoryId = ParamUtil.getString(req, "categoryId");
+		long categoryId = ParamUtil.getLong(req, "categoryId");
 
-		String parentCategoryId = ParamUtil.getString(req, "parentCategoryId");
+		long parentCategoryId = ParamUtil.getLong(
+			req, "parentCategoryId",
+			BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
 
@@ -127,7 +129,7 @@ public class EditCategoryAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (Validator.isNull(categoryId)) {
+		if (categoryId <= 0) {
 
 			// Add category
 

@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.util;
 
-import java.util.Set;
-
 /**
  * <a href="ValueMapper.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,6 +35,6 @@ public interface ValueMapper {
 
 	public void mapValue(Object oldValue, Object newValue) throws Exception;
 
-	public void setExceptions(Set exceptions);
+	public void appendException(Object exception);
 
 }

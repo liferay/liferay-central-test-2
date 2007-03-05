@@ -26,11 +26,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.service.BlogsCategoryServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -58,13 +56,11 @@ public class ActionUtil {
 	}
 
 	public static void getCategory(HttpServletRequest req) throws Exception {
-		String categoryId = ParamUtil.getString(req, "categoryId");
+		long categoryId = ParamUtil.getLong(req, "categoryId");
 
 		BlogsCategory category = null;
 
-		if (Validator.isNotNull(categoryId) &&
-			!categoryId.equals(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
-
+		if (categoryId > 0) {
 			category = BlogsCategoryServiceUtil.getCategory(categoryId);
 		}
 
@@ -84,11 +80,11 @@ public class ActionUtil {
 	}
 
 	public static void getEntry(HttpServletRequest req) throws Exception {
-		String entryId = ParamUtil.getString(req, "entryId");
+		long entryId = ParamUtil.getLong(req, "entryId");
 
 		BlogsEntry entry = null;
 
-		if (Validator.isNotNull(entryId)) {
+		if (entryId > 0) {
 			entry = BlogsEntryServiceUtil.getEntry(entryId);
 		}
 

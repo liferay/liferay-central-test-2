@@ -66,19 +66,19 @@ public class BlogsEntrySoap implements Serializable {
 	public BlogsEntrySoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _entryId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setEntryId(pk);
 	}
 
-	public String getEntryId() {
+	public long getEntryId() {
 		return _entryId;
 	}
 
-	public void setEntryId(String entryId) {
+	public void setEntryId(long entryId) {
 		_entryId = entryId;
 	}
 
@@ -130,11 +130,11 @@ public class BlogsEntrySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getCategoryId() {
+	public long getCategoryId() {
 		return _categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(long categoryId) {
 		_categoryId = categoryId;
 	}
 
@@ -162,14 +162,14 @@ public class BlogsEntrySoap implements Serializable {
 		_displayDate = displayDate;
 	}
 
-	private String _entryId;
+	private long _entryId;
 	private long _groupId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _categoryId;
+	private long _categoryId;
 	private String _title;
 	private String _content;
 	private Date _displayDate;

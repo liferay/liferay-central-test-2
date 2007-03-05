@@ -25,6 +25,7 @@ package com.liferay.portlet.blogs.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -40,18 +41,13 @@ import com.liferay.portlet.blogs.service.BlogsCategoryServiceUtil;
  */
 public class BlogsCategoryServiceHttp {
 	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		HttpPrincipal httpPrincipal, java.lang.String parentCategoryId,
+		HttpPrincipal httpPrincipal, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = parentCategoryId;
-
-			if (parentCategoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(parentCategoryId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -97,19 +93,14 @@ public class BlogsCategoryServiceHttp {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		HttpPrincipal httpPrincipal, java.lang.String parentCategoryId,
+		HttpPrincipal httpPrincipal, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = parentCategoryId;
-
-			if (parentCategoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(parentCategoryId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -165,16 +156,11 @@ public class BlogsCategoryServiceHttp {
 	}
 
 	public static void deleteCategory(HttpPrincipal httpPrincipal,
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(categoryId);
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsCategoryServiceUtil.class.getName(),
 					"deleteCategory", new Object[] { paramObj0 });
 
@@ -200,16 +186,11 @@ public class BlogsCategoryServiceHttp {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory getCategory(
-		HttpPrincipal httpPrincipal, java.lang.String categoryId)
+		HttpPrincipal httpPrincipal, long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(categoryId);
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsCategoryServiceUtil.class.getName(),
 					"getCategory", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -238,24 +219,13 @@ public class BlogsCategoryServiceHttp {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory updateCategory(
-		HttpPrincipal httpPrincipal, java.lang.String categoryId,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description)
+		HttpPrincipal httpPrincipal, long categoryId, long parentCategoryId,
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = parentCategoryId;
-
-			if (parentCategoryId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(categoryId);
+			Object paramObj1 = new LongWrapper(parentCategoryId);
 			Object paramObj2 = name;
 
 			if (name == null) {

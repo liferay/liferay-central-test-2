@@ -66,8 +66,8 @@ public class MemoryValueMapper implements ValueMapper {
 		_map.put(oldValue, newValue);
 	}
 
-	public void setExceptions(Set exceptions) {
-		_exceptions = exceptions;
+	public void appendException(Object exception) {
+		_exceptions.add(exception);
 	}
 
 	private Map _map;

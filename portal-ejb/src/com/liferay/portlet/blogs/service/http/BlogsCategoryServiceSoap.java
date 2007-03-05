@@ -37,7 +37,7 @@ import java.rmi.RemoteException;
  */
 public class BlogsCategoryServiceSoap {
 	public static com.liferay.portlet.blogs.model.BlogsCategorySoap addCategory(
-		java.lang.String parentCategoryId, java.lang.String name,
+		long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions) throws RemoteException {
 		try {
@@ -54,7 +54,7 @@ public class BlogsCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategorySoap addCategory(
-		java.lang.String parentCategoryId, java.lang.String name,
+		long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
@@ -69,7 +69,7 @@ public class BlogsCategoryServiceSoap {
 		}
 	}
 
-	public static void deleteCategory(java.lang.String categoryId)
+	public static void deleteCategory(long categoryId)
 		throws RemoteException {
 		try {
 			BlogsCategoryServiceUtil.deleteCategory(categoryId);
@@ -81,7 +81,7 @@ public class BlogsCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategorySoap getCategory(
-		java.lang.String categoryId) throws RemoteException {
+		long categoryId) throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsCategory returnValue = BlogsCategoryServiceUtil.getCategory(categoryId);
 
@@ -94,9 +94,8 @@ public class BlogsCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategorySoap updateCategory(
-		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description)
-		throws RemoteException {
+		long categoryId, long parentCategoryId, java.lang.String name,
+		java.lang.String description) throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsCategory returnValue = BlogsCategoryServiceUtil.updateCategory(categoryId,
 					parentCategoryId, name, description);

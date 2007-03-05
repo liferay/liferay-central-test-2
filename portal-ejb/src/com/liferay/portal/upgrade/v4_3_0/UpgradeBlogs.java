@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,20 +19,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.liferay.portal.upgrade.v4_3_0;
 
-package com.liferay.portal.upgrade.v4_0_0;
-
-import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.util.dao.DataAccess;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
+import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,7 +37,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <a href="UpgradeBlogs.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author  Alexander Chow
  *
  */
 public class UpgradeBlogs extends UpgradeProcess {
@@ -49,58 +46,45 @@ public class UpgradeBlogs extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeEntry();
+			_upgradeBlogs();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
+	
+	private void _upgradeBlogs() throws Exception {
+		
+		// Blogs Category
+		
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
 
-	private void _upgradeEntry() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			BlogsCategoryImpl.TABLE_NAME, BlogsCategoryImpl.TABLE_COLUMNS,
+			pkUpgradeColumn);
 
-		try {
-			con = HibernateUtil.getConnection();
+		upgradeTable.updateTable();
 
-			ps = con.prepareStatement(_UPGRADE_ENTRY_1);
+		ValueMapper categoryIdMapper = pkUpgradeColumn.getValueMapper();
 
-			rs = ps.executeQuery();
+		categoryIdMapper.appendException(
+			new Long(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID));
+		
+		upgradeTable = new DefaultUpgradeTableImpl(
+			BlogsCategoryImpl.TABLE_NAME, BlogsCategoryImpl.TABLE_COLUMNS,
+			new SwapUpgradeColumnImpl("parentCategoryId", categoryIdMapper));
 
-			while (rs.next()) {
-				long entryId = rs.getLong("entryId");
-				String companyId = rs.getString("companyId");
-				String userId = rs.getString("userId");
+		upgradeTable.updateTable();
 
-				Group group = GroupLocalServiceUtil.getUserGroup(
-					companyId, userId);
+		// Blogs Entry
 
-				boolean addCommunityPermissions = true;
-				boolean addGuestPermissions = true;
+		upgradeTable = new DefaultUpgradeTableImpl(
+			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,
+			new PKUpgradeColumnImpl(), 
+			new SwapUpgradeColumnImpl("categoryId", categoryIdMapper));
 
-				_log.info("Upgrading entry " + entryId);
-
-				ps = con.prepareStatement(_UPGRADE_ENTRY_2);
-
-				ps.setLong(1, group.getGroupId());
-				ps.setLong(2, entryId);
-
-				ps.executeUpdate();
-
-				BlogsEntryLocalServiceUtil.addEntryResources(
-					entryId, addCommunityPermissions, addGuestPermissions);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+		upgradeTable.updateTable();
 	}
-
-	private static final String _UPGRADE_ENTRY_1 = "SELECT * FROM BlogsEntry";
-
-	private static final String _UPGRADE_ENTRY_2 =
-		"UPDATE BlogsEntry SET groupId = ? WHERE entryId = ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeBlogs.class);
 

@@ -34,7 +34,6 @@ import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.NoSuchEntryException;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.Calendar;
@@ -121,7 +120,7 @@ public class EditEntryAction extends PortletAction {
 	}
 
 	protected void deleteEntry(ActionRequest req) throws Exception {
-		String entryId = ParamUtil.getString(req, "entryId");
+		long entryId = ParamUtil.getLong(req, "entryId");
 
 		BlogsEntryServiceUtil.deleteEntry(entryId);
 	}
@@ -129,9 +128,9 @@ public class EditEntryAction extends PortletAction {
 	protected void updateEntry(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String entryId = ParamUtil.getString(req, "entryId");
+		long entryId = ParamUtil.getLong(req, "entryId");
 
-		String categoryId = ParamUtil.getString(req, "categoryId");
+		long categoryId = ParamUtil.getLong(req, "categoryId");
 		String title = ParamUtil.getString(req, "title");
 		String content = ParamUtil.getString(req, "content");
 
@@ -151,7 +150,7 @@ public class EditEntryAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (Validator.isNull(entryId)) {
+		if (entryId <= 0) {
 
 			// Add entry
 

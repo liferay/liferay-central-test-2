@@ -44,7 +44,7 @@ import javax.servlet.jsp.PageContext;
 public class BlogsUtil {
 
 	public static String getBreadcrumbs(
-			String categoryId, PageContext pageContext, RenderRequest req,
+			long categoryId, PageContext pageContext, RenderRequest req,
 			RenderResponse res)
 		throws Exception {
 
@@ -107,7 +107,7 @@ public class BlogsUtil {
 					portletURL.setParameter("struts_action", "/blogs/view");
 					portletURL.setParameter("tabs1", "categories");
 					portletURL.setParameter(
-						"categoryId", category.getCategoryId());
+						"categoryId", String.valueOf(category.getCategoryId()));
 				}
 
 				String categoryLink =

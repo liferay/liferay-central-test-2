@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -56,16 +57,7 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
 
-import com.sun.syndication.feed.synd.SyndContent;
-import com.sun.syndication.feed.synd.SyndContentImpl;
-import com.sun.syndication.feed.synd.SyndEntry;
-import com.sun.syndication.feed.synd.SyndEntryImpl;
-import com.sun.syndication.feed.synd.SyndFeed;
-import com.sun.syndication.feed.synd.SyndFeedImpl;
-import com.sun.syndication.io.FeedException;
-
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -80,6 +72,14 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TermQuery;
 
+import com.sun.syndication.feed.synd.SyndContent;
+import com.sun.syndication.feed.synd.SyndContentImpl;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndEntryImpl;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.io.FeedException;
+
 /**
  * <a href="BlogsEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
@@ -91,7 +91,7 @@ import org.apache.lucene.search.TermQuery;
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			String userId, String plid, String categoryId, String title,
+			String userId, String plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -105,7 +105,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry addEntry(
-			String userId, String plid, String categoryId, String title,
+			String userId, String plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			String[] communityPermissions, String[] guestPermissions)
@@ -118,7 +118,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry addEntry(
-			String userId, String plid, String categoryId, String title,
+			String userId, String plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
@@ -139,8 +139,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		validate(title, content);
 
-		String entryId = String.valueOf(CounterLocalServiceUtil.increment(
-			BlogsEntry.class.getName()));
+		long entryId = CounterLocalServiceUtil.increment(
+			Counter.class.getName());
 
 		BlogsEntry entry = BlogsEntryUtil.create(entryId);
 
@@ -185,7 +185,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public void addEntryResources(
-			String entryId, boolean addCommunityPermissions,
+			long entryId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -201,12 +201,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
-			BlogsEntry.class.getName(), entry.getPrimaryKey().toString(), false,
-			addCommunityPermissions, addGuestPermissions);
+			BlogsEntry.class.getName(), String.valueOf(entry.getPrimaryKey()),
+			false, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addEntryResources(
-			String entryId, String[] communityPermissions,
+			long entryId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -222,7 +222,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addModelResources(
 			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
-			BlogsEntry.class.getName(), entry.getPrimaryKey().toString(),
+			BlogsEntry.class.getName(), String.valueOf(entry.getPrimaryKey()),
 			communityPermissions, guestPermissions);
 	}
 
@@ -238,7 +238,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteEntry(String entryId)
+	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
 		BlogsEntry entry = BlogsEntryUtil.findByPrimaryKey(entryId);
@@ -261,14 +261,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Message boards
 
 		MBMessageLocalServiceUtil.deleteDiscussionMessages(
-			BlogsEntry.class.getName(), entry.getEntryId());
+			BlogsEntry.class.getName(), String.valueOf(entry.getEntryId()));
 
 		// Resources
 
 		ResourceLocalServiceUtil.deleteResource(
 			entry.getCompanyId(), BlogsEntry.class.getName(),
 			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			entry.getPrimaryKey().toString());
+			String.valueOf(entry.getPrimaryKey()));
 
 		// Entry
 
@@ -281,17 +281,17 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return BlogsEntryFinder.countByCategoryIds(categoryIds);
 	}
 
-	public List getEntries(String categoryId, int begin, int end)
+	public List getEntries(long categoryId, int begin, int end)
 		throws SystemException {
 
 		return BlogsEntryUtil.findByCategoryId(categoryId, begin, end);
 	}
 
-	public int getEntriesCount(String categoryId) throws SystemException {
+	public int getEntriesCount(long categoryId) throws SystemException {
 		return BlogsEntryUtil.countByCategoryId(categoryId);
 	}
 
-	public BlogsEntry getEntry(String entryId)
+	public BlogsEntry getEntry(long entryId)
 		throws PortalException, SystemException {
 
 		return BlogsEntryUtil.findByPrimaryKey(entryId);
@@ -381,8 +381,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 				long groupId = entry.getGroupId();
 				String userId = entry.getUserId();
-				String categoryId = entry.getCategoryId();
-				String entryId = entry.getEntryId();
+				long categoryId = entry.getCategoryId();
+				long entryId = entry.getEntryId();
 				String title = entry.getTitle();
 				String content = entry.getContent();
 
@@ -470,7 +470,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry updateEntry(
-			String userId, String entryId, String categoryId, String title,
+			String userId, long entryId, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute)
 		throws PortalException, SystemException {
@@ -511,10 +511,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
-	protected String getCategoryId(String companyId, String categoryId)
+	protected long getCategoryId(String companyId, long categoryId)
 		throws PortalException, SystemException {
 
-		if (!categoryId.equals(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+		if (categoryId != BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
 
 			// Ensure category exists and belongs to the proper company
 

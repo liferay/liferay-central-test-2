@@ -41,15 +41,7 @@ import java.util.List;
 public class BlogsEntryJSONSerializer {
 	public static JSONObject toJSONObject(BlogsEntry model) {
 		JSONObject jsonObj = new JSONObject();
-		String entryId = model.getEntryId();
-
-		if (entryId == null) {
-			jsonObj.put("entryId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("entryId", entryId.toString());
-		}
-
+		jsonObj.put("entryId", model.getEntryId());
 		jsonObj.put("groupId", model.getGroupId());
 
 		String companyId = model.getCompanyId();
@@ -97,14 +89,7 @@ public class BlogsEntryJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String categoryId = model.getCategoryId();
-
-		if (categoryId == null) {
-			jsonObj.put("categoryId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("categoryId", categoryId.toString());
-		}
+		jsonObj.put("categoryId", model.getCategoryId());
 
 		String title = model.getTitle();
 

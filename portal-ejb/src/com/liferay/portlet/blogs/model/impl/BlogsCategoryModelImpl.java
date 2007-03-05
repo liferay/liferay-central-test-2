@@ -41,22 +41,19 @@ import java.util.Date;
 public class BlogsCategoryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "BlogsCategory";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "categoryId", new Integer(Types.VARCHAR) },
+			{ "categoryId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "parentCategoryId", new Integer(Types.VARCHAR) },
+			{ "parentCategoryId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsCategory"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.blogs.model.BlogsCategory.categoryId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsCategory.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -65,9 +62,6 @@ public class BlogsCategoryModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsCategory.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTCATEGORYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.blogs.model.BlogsCategory.parentCategoryId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsCategory.name"),
@@ -81,27 +75,20 @@ public class BlogsCategoryModelImpl extends BaseModelImpl {
 	public BlogsCategoryModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _categoryId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setCategoryId(pk);
 	}
 
-	public String getCategoryId() {
-		return GetterUtil.getString(_categoryId);
+	public long getCategoryId() {
+		return _categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
-		if (((categoryId == null) && (_categoryId != null)) ||
-				((categoryId != null) && (_categoryId == null)) ||
-				((categoryId != null) && (_categoryId != null) &&
-				!categoryId.equals(_categoryId))) {
-			if (!XSS_ALLOW_CATEGORYID) {
-				categoryId = XSSUtil.strip(categoryId);
-			}
-
+	public void setCategoryId(long categoryId) {
+		if (categoryId != _categoryId) {
 			_categoryId = categoryId;
 		}
 	}
@@ -183,19 +170,12 @@ public class BlogsCategoryModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getParentCategoryId() {
-		return GetterUtil.getString(_parentCategoryId);
+	public long getParentCategoryId() {
+		return _parentCategoryId;
 	}
 
-	public void setParentCategoryId(String parentCategoryId) {
-		if (((parentCategoryId == null) && (_parentCategoryId != null)) ||
-				((parentCategoryId != null) && (_parentCategoryId == null)) ||
-				((parentCategoryId != null) && (_parentCategoryId != null) &&
-				!parentCategoryId.equals(_parentCategoryId))) {
-			if (!XSS_ALLOW_PARENTCATEGORYID) {
-				parentCategoryId = XSSUtil.strip(parentCategoryId);
-			}
-
+	public void setParentCategoryId(long parentCategoryId) {
+		if (parentCategoryId != _parentCategoryId) {
 			_parentCategoryId = parentCategoryId;
 		}
 	}
@@ -279,9 +259,9 @@ public class BlogsCategoryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = blogsCategory.getPrimaryKey();
+		long pk = blogsCategory.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -290,16 +270,16 @@ public class BlogsCategoryModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _categoryId;
+	private long _categoryId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _parentCategoryId;
+	private long _parentCategoryId;
 	private String _name;
 	private String _description;
 }

@@ -33,13 +33,13 @@ import java.util.Date;
  *
  */
 public interface BlogsEntryModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getEntryId();
+	public long getEntryId();
 
-	public void setEntryId(String entryId);
+	public void setEntryId(long entryId);
 
 	public long getGroupId();
 
@@ -65,9 +65,9 @@ public interface BlogsEntryModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public String getCategoryId();
+	public long getCategoryId();
 
-	public void setCategoryId(String categoryId);
+	public void setCategoryId(long categoryId);
 
 	public String getTitle();
 

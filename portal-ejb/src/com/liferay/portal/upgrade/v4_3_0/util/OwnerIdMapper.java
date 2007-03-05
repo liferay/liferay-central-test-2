@@ -31,8 +31,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
-import java.util.Set;
-
 /**
  * <a href="OwnerIdMapper.java.html"><b><i>View Source</i></b></a>
  *
@@ -92,7 +90,7 @@ public class OwnerIdMapper implements ValueMapper {
 	public void mapValue(Object oldValue, Object newValue) throws Exception {
 	}
 
-	public void setExceptions(Set exceptions) {
+	public void appendException(Object exception) {
 	}
 
 	private ValueMapper _groupIdMapper;

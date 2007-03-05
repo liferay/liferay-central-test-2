@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.LayoutSetImpl;
@@ -41,6 +42,7 @@ import com.liferay.portal.upgrade.v4_3_0.util.OwnerIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.PreferencesUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.PrimKeyUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.TempScopeUpgradeColumnImpl;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
@@ -61,9 +63,6 @@ import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 
 import java.sql.Types;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -82,6 +81,7 @@ public class UpgradeGroup extends UpgradeProcess {
 			_upgradeGroupIds();
 			_upgradeOwnerIds();
 			_upgradeResources();
+			_upgradeLucene();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -103,13 +103,10 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		_groupIdMapper = pkUpgradeColumn.getValueMapper();
 
-		Set groupExceptions = new HashSet();
-
-		groupExceptions.add(new Long(-1));
-		groupExceptions.add(new Long(0));
-		groupExceptions.add("null");
-
-		_groupIdMapper.setExceptions(groupExceptions);
+		_groupIdMapper.appendException(
+			new Long(GroupImpl.DEFAULT_PARENT_GROUP_ID));
+		_groupIdMapper.appendException(new Long(0));
+		_groupIdMapper.appendException(StringPool.NULL);
 
 		_ownerIdMapper = new OwnerIdMapper(_groupIdMapper);
 
@@ -356,6 +353,10 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradeScopeColumn, upgradePrimKeyColumn);
 
 		upgradeTable.updateTable();
+	}
+
+	private void _upgradeLucene() throws Exception {
+		PropsUtil.set(PropsUtil.INDEX_ON_STARTUP, "true");
 	}
 
 	private ValueMapper _groupIdMapper;

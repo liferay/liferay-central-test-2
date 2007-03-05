@@ -29,13 +29,13 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
 BlogsCategory category = (BlogsCategory)request.getAttribute(WebKeys.BLOGS_CATEGORY);
 
-String categoryId = BeanParamUtil.getString(category, request, "categoryId", BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+long categoryId = BeanParamUtil.getLong(category, request, "categoryId", BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/blogs/view");
 portletURL.setParameter("tabs1", tabs1);
-portletURL.setParameter("categoryId", categoryId);
+portletURL.setParameter("categoryId", String.valueOf(categoryId));
 %>
 
 <liferay-ui:tabs
@@ -79,7 +79,7 @@ portletURL.setParameter("categoryId", categoryId);
 		%>
 
 		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>">
+		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= String.valueOf(categoryId) %>">
 		<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= StringUtil.merge(categoryIds) %>">
 
 		<c:if test="<%= category != null %>">
@@ -111,7 +111,7 @@ portletURL.setParameter("categoryId", categoryId);
 		for (int i = 0; i < results.size(); i++) {
 			BlogsCategory curCategory = (BlogsCategory)results.get(i);
 
-			ResultRow row = new ResultRow(curCategory, curCategory.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(curCategory, String.valueOf(curCategory.getPrimaryKey()), i);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -119,7 +119,7 @@ portletURL.setParameter("categoryId", categoryId);
 
 			rowURL.setParameter("struts_action", "/blogs/view");
 			rowURL.setParameter("tabs1", "categories");
-			rowURL.setParameter("categoryId", curCategory.getCategoryId());
+			rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
 
 			// Name and description
 
@@ -140,7 +140,7 @@ portletURL.setParameter("categoryId", categoryId);
 
 			List subcategoryIds = new ArrayList();
 
-			subcategoryIds.add(curCategory.getCategoryId());
+			subcategoryIds.add(new Long(curCategory.getCategoryId()));
 
 			BlogsCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, curCategory.getCategoryId());
 
@@ -167,7 +167,7 @@ portletURL.setParameter("categoryId", categoryId);
 			<tr>
 				<c:if test="<%= showAddCategoryButton %>">
 					<td>
-						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-category") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
+						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-category") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';">
 					</td>
 					<td style="padding-left: 30px;"></td>
 				</c:if>

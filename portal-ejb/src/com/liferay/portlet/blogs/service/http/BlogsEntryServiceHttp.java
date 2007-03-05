@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -41,11 +42,11 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
  */
 public class BlogsEntryServiceHttp {
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		HttpPrincipal httpPrincipal, java.lang.String plid,
-		java.lang.String categoryId, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		HttpPrincipal httpPrincipal, java.lang.String plid, long categoryId,
+		java.lang.String title, java.lang.String content, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -55,12 +56,7 @@ public class BlogsEntryServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = categoryId;
-
-			if (categoryId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(categoryId);
 			Object paramObj2 = title;
 
 			if (title == null) {
@@ -113,11 +109,10 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		HttpPrincipal httpPrincipal, java.lang.String plid,
-		java.lang.String categoryId, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		java.lang.String[] communityPermissions,
+		HttpPrincipal httpPrincipal, java.lang.String plid, long categoryId,
+		java.lang.String title, java.lang.String content, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -128,12 +123,7 @@ public class BlogsEntryServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = categoryId;
-
-			if (categoryId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(categoryId);
 			Object paramObj2 = title;
 
 			if (title == null) {
@@ -195,17 +185,11 @@ public class BlogsEntryServiceHttp {
 		}
 	}
 
-	public static void deleteEntry(HttpPrincipal httpPrincipal,
-		java.lang.String entryId)
+	public static void deleteEntry(HttpPrincipal httpPrincipal, long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = entryId;
-
-			if (entryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(entryId);
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"deleteEntry", new Object[] { paramObj0 });
 
@@ -231,16 +215,11 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
-		HttpPrincipal httpPrincipal, java.lang.String entryId)
+		HttpPrincipal httpPrincipal, long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = entryId;
-
-			if (entryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(entryId);
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"getEntry", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -269,25 +248,15 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
-		HttpPrincipal httpPrincipal, java.lang.String entryId,
-		java.lang.String categoryId, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute)
+		HttpPrincipal httpPrincipal, long entryId, long categoryId,
+		java.lang.String title, java.lang.String content, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = entryId;
-
-			if (entryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = categoryId;
-
-			if (categoryId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(entryId);
+			Object paramObj1 = new LongWrapper(categoryId);
 			Object paramObj2 = title;
 
 			if (title == null) {

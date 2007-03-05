@@ -317,15 +317,15 @@ public class StringUtil {
 	}
 
 	public static String merge(List list, String delimiter) {
-		return merge((String[])list.toArray(
-			new String[list.size()]), delimiter);
+		return merge((Object[])list.toArray(
+			new Object[list.size()]), delimiter);
 	}
 
-	public static String merge(String[] array) {
+	public static String merge(Object[] array) {
 		return merge(array, StringPool.COMMA);
 	}
 
-	public static String merge(String[] array, String delimiter) {
+	public static String merge(Object[] array, String delimiter) {
 		if (array == null) {
 			return null;
 		}
@@ -333,7 +333,7 @@ public class StringUtil {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < array.length; i++) {
-			sm.append(array[i].trim());
+			sm.append(String.valueOf(array[i]).trim());
 
 			if ((i + 1) != array.length) {
 				sm.append(delimiter);

@@ -33,7 +33,7 @@ import org.json.JSONObject;
  *
  */
 public class BlogsCategoryServiceJSON {
-	public static JSONObject addCategory(java.lang.String parentCategoryId,
+	public static JSONObject addCategory(long parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -44,7 +44,7 @@ public class BlogsCategoryServiceJSON {
 		return BlogsCategoryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addCategory(java.lang.String parentCategoryId,
+	public static JSONObject addCategory(long parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -56,13 +56,13 @@ public class BlogsCategoryServiceJSON {
 		return BlogsCategoryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteCategory(java.lang.String categoryId)
+	public static void deleteCategory(long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		BlogsCategoryServiceUtil.deleteCategory(categoryId);
 	}
 
-	public static JSONObject getCategory(java.lang.String categoryId)
+	public static JSONObject getCategory(long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.blogs.model.BlogsCategory returnValue = BlogsCategoryServiceUtil.getCategory(categoryId);
@@ -70,8 +70,8 @@ public class BlogsCategoryServiceJSON {
 		return BlogsCategoryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateCategory(java.lang.String categoryId,
-		java.lang.String parentCategoryId, java.lang.String name,
+	public static JSONObject updateCategory(long categoryId,
+		long parentCategoryId, java.lang.String name,
 		java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

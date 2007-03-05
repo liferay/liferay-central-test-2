@@ -41,14 +41,7 @@ import java.util.List;
 public class BlogsCategoryJSONSerializer {
 	public static JSONObject toJSONObject(BlogsCategory model) {
 		JSONObject jsonObj = new JSONObject();
-		String categoryId = model.getCategoryId();
-
-		if (categoryId == null) {
-			jsonObj.put("categoryId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("categoryId", categoryId.toString());
-		}
+		jsonObj.put("categoryId", model.getCategoryId());
 
 		String companyId = model.getCompanyId();
 
@@ -95,14 +88,7 @@ public class BlogsCategoryJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String parentCategoryId = model.getParentCategoryId();
-
-		if (parentCategoryId == null) {
-			jsonObj.put("parentCategoryId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("parentCategoryId", parentCategoryId.toString());
-		}
+		jsonObj.put("parentCategoryId", model.getParentCategoryId());
 
 		String name = model.getName();
 

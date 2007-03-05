@@ -37,11 +37,11 @@ import java.rmi.RemoteException;
  */
 public class BlogsEntryServiceSoap {
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap addEntry(
-		java.lang.String plid, java.lang.String categoryId,
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		java.lang.String plid, long categoryId, java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.addEntry(plid,
 					categoryId, title, content, displayDateMonth,
@@ -58,10 +58,10 @@ public class BlogsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap addEntry(
-		java.lang.String plid, java.lang.String categoryId,
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, java.lang.String[] communityPermissions,
+		java.lang.String plid, long categoryId, java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.addEntry(plid,
@@ -77,8 +77,7 @@ public class BlogsEntryServiceSoap {
 		}
 	}
 
-	public static void deleteEntry(java.lang.String entryId)
-		throws RemoteException {
+	public static void deleteEntry(long entryId) throws RemoteException {
 		try {
 			BlogsEntryServiceUtil.deleteEntry(entryId);
 		}
@@ -89,7 +88,7 @@ public class BlogsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap getEntry(
-		java.lang.String entryId) throws RemoteException {
+		long entryId) throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.getEntry(entryId);
 
@@ -102,10 +101,10 @@ public class BlogsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap updateEntry(
-		java.lang.String entryId, java.lang.String categoryId,
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute) throws RemoteException {
+		long entryId, long categoryId, java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.updateEntry(entryId,
 					categoryId, title, content, displayDateMonth,

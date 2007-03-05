@@ -38,23 +38,22 @@ public interface BlogsCategoryLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		java.lang.String userId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String userId, long parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		java.lang.String userId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+		java.lang.String userId, long parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		java.lang.String userId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
+		java.lang.String userId, long parentCategoryId, java.lang.String name,
+		java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -62,7 +61,7 @@ public interface BlogsCategoryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addCategoryResources(java.lang.String categoryId,
+	public void addCategoryResources(long categoryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -73,7 +72,7 @@ public interface BlogsCategoryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addCategoryResources(java.lang.String categoryId,
+	public void addCategoryResources(long categoryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -86,7 +85,7 @@ public interface BlogsCategoryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteCategory(java.lang.String categoryId)
+	public void deleteCategory(long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -95,23 +94,23 @@ public interface BlogsCategoryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getCategories(java.lang.String parentCategoryId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List getCategories(long parentCategoryId, int begin,
+		int end) throws com.liferay.portal.SystemException;
 
-	public int getCategoriesCount(java.lang.String parentCategoryId)
+	public int getCategoriesCount(long parentCategoryId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsCategory getCategory(
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void getSubcategoryIds(java.util.List categoryIds,
-		java.lang.String categoryId) throws com.liferay.portal.SystemException;
+	public void getSubcategoryIds(java.util.List categoryIds, long categoryId)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsCategory updateCategory(
-		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description)
+		long categoryId, long parentCategoryId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

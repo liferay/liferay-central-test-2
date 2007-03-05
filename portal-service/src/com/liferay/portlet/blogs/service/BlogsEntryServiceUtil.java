@@ -30,11 +30,10 @@ package com.liferay.portlet.blogs.service;
  */
 public class BlogsEntryServiceUtil {
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String plid, java.lang.String categoryId,
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String plid, long categoryId, java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
@@ -45,10 +44,10 @@ public class BlogsEntryServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String plid, java.lang.String categoryId,
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, java.lang.String[] communityPermissions,
+		java.lang.String plid, long categoryId, java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -59,7 +58,7 @@ public class BlogsEntryServiceUtil {
 			displayDateMinute, communityPermissions, guestPermissions);
 	}
 
-	public static void deleteEntry(java.lang.String entryId)
+	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
@@ -67,7 +66,7 @@ public class BlogsEntryServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
-		java.lang.String entryId)
+		long entryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
@@ -76,10 +75,9 @@ public class BlogsEntryServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
-		java.lang.String entryId, java.lang.String categoryId,
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute)
+		long entryId, long categoryId, java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();

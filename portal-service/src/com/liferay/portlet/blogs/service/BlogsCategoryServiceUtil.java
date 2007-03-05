@@ -30,7 +30,7 @@ package com.liferay.portlet.blogs.service;
  */
 public class BlogsCategoryServiceUtil {
 	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		java.lang.String parentCategoryId, java.lang.String name,
+		long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -42,7 +42,7 @@ public class BlogsCategoryServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		java.lang.String parentCategoryId, java.lang.String name,
+		long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -53,7 +53,7 @@ public class BlogsCategoryServiceUtil {
 			description, communityPermissions, guestPermissions);
 	}
 
-	public static void deleteCategory(java.lang.String categoryId)
+	public static void deleteCategory(long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsCategoryService blogsCategoryService = BlogsCategoryServiceFactory.getService();
@@ -61,7 +61,7 @@ public class BlogsCategoryServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory getCategory(
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsCategoryService blogsCategoryService = BlogsCategoryServiceFactory.getService();
@@ -70,8 +70,8 @@ public class BlogsCategoryServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory updateCategory(
-		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description)
+		long categoryId, long parentCategoryId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsCategoryService blogsCategoryService = BlogsCategoryServiceFactory.getService();

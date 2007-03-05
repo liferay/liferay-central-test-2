@@ -47,9 +47,9 @@ public class BlogsCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		java.lang.String userId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String userId, long parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
@@ -59,9 +59,8 @@ public class BlogsCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		java.lang.String userId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+		java.lang.String userId, long parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -72,8 +71,8 @@ public class BlogsCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		java.lang.String userId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
+		java.lang.String userId, long parentCategoryId, java.lang.String name,
+		java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -87,7 +86,7 @@ public class BlogsCategoryLocalServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
-	public static void addCategoryResources(java.lang.String categoryId,
+	public static void addCategoryResources(long categoryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -106,7 +105,7 @@ public class BlogsCategoryLocalServiceUtil {
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public static void addCategoryResources(java.lang.String categoryId,
+	public static void addCategoryResources(long categoryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -127,7 +126,7 @@ public class BlogsCategoryLocalServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
-	public static void deleteCategory(java.lang.String categoryId)
+	public static void deleteCategory(long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
@@ -142,16 +141,15 @@ public class BlogsCategoryLocalServiceUtil {
 		blogsCategoryLocalService.deleteCategory(category);
 	}
 
-	public static java.util.List getCategories(
-		java.lang.String parentCategoryId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List getCategories(long parentCategoryId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
 
 		return blogsCategoryLocalService.getCategories(parentCategoryId, begin,
 			end);
 	}
 
-	public static int getCategoriesCount(java.lang.String parentCategoryId)
+	public static int getCategoriesCount(long parentCategoryId)
 		throws com.liferay.portal.SystemException {
 		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
 
@@ -159,7 +157,7 @@ public class BlogsCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory getCategory(
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
@@ -168,14 +166,14 @@ public class BlogsCategoryLocalServiceUtil {
 	}
 
 	public static void getSubcategoryIds(java.util.List categoryIds,
-		java.lang.String categoryId) throws com.liferay.portal.SystemException {
+		long categoryId) throws com.liferay.portal.SystemException {
 		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
 		blogsCategoryLocalService.getSubcategoryIds(categoryIds, categoryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory updateCategory(
-		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description)
+		long categoryId, long parentCategoryId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();

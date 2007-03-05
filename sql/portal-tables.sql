@@ -39,26 +39,26 @@ create table Address (
 );
 
 create table BlogsCategory (
-	categoryId VARCHAR(75) not null primary key,
+	categoryId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	parentCategoryId VARCHAR(75) null,
+	parentCategoryId LONG,
 	name VARCHAR(75) null,
 	description STRING null
 );
 
 create table BlogsEntry (
-	entryId VARCHAR(75) not null primary key,
+	entryId LONG not null primary key,
 	groupId LONG not null,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	categoryId VARCHAR(75) null,
+	categoryId LONG,
 	title VARCHAR(75) null,
 	content TEXT null,
 	displayDate DATE null

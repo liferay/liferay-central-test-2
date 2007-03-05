@@ -7,7 +7,7 @@
 
 		<!-- PK fields -->
 
-		<column name="categoryId" type="String" primary="true" />
+		<column name="categoryId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -19,7 +19,7 @@
 
 		<!-- Other fields -->
 
-		<column name="parentCategoryId" type="String" />
+		<column name="parentCategoryId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 
@@ -43,7 +43,7 @@
 
 		<!-- PK fields -->
 
-		<column name="entryId" type="String" primary="true" />
+		<column name="entryId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -59,7 +59,7 @@
 
 		<!-- Other fields -->
 
-		<column name="categoryId" type="String" />
+		<column name="categoryId" type="long" />
 		<column name="title" type="String" />
 		<column name="content" type="String" />
 		<column name="displayDate" type="Date" />

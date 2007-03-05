@@ -31,7 +31,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
-import com.liferay.util.Validator;
 
 /**
  * <a href="BlogsCategoryPermission.java.html"><b><i>View Source</i></b></a>
@@ -42,7 +41,7 @@ import com.liferay.util.Validator;
 public class BlogsCategoryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String categoryId,
+			PermissionChecker permissionChecker, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -62,12 +61,11 @@ public class BlogsCategoryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String categoryId,
+			PermissionChecker permissionChecker, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (Validator.equals(
-				categoryId, BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+		if (categoryId == BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
 
 			return PortletPermission.contains(
 				permissionChecker, PortletKeys.BLOGS, actionId); // FIX ME
@@ -87,7 +85,7 @@ public class BlogsCategoryPermission {
 
 		return permissionChecker.hasPermission(
 			0, BlogsCategory.class.getName(),
-			category.getPrimaryKey().toString(), actionId);
+			String.valueOf(category.getPrimaryKey()), actionId);
 	}
 
 }
