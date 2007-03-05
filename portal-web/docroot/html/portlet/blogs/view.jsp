@@ -79,7 +79,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		%>
 
 		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= String.valueOf(categoryId) %>">
+		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>">
 		<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= StringUtil.merge(categoryIds) %>">
 
 		<c:if test="<%= category != null %>">

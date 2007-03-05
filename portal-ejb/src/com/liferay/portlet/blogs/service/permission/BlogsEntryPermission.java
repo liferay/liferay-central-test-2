@@ -72,7 +72,7 @@ public class BlogsEntryPermission {
 
 		return permissionChecker.hasPermission(
 			entry.getGroupId(), BlogsEntry.class.getName(),
-			String.valueOf(entry.getPrimaryKey()), actionId);
+			entry.getPrimaryKey(), actionId);
 	}
 
 }

@@ -40,11 +40,8 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.OwnerIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.PreferencesUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.PrimKeyGroupOrOwnerIdMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.PrimKeyLayoutIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.PrimKeyUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.TempScopeUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
@@ -91,7 +88,7 @@ public class UpgradeGroup extends UpgradeProcess {
 		}
 	}
 
-	public void _upgradeGroupIds() throws Exception {
+	private void _upgradeGroupIds() throws Exception {
 
 		// Group_
 
@@ -298,7 +295,11 @@ public class UpgradeGroup extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
-	public void _upgradeOwnerIds() throws Exception {
+	private void _upgradeLucene() throws Exception {
+		PropsUtil.set(PropsUtil.INDEX_ON_STARTUP, "true");
+	}
+
+	private void _upgradeOwnerIds() throws Exception {
 		UpgradeColumn upgradeOwnerIdColumn =
 			new SwapUpgradeColumnImpl("ownerId", _ownerIdMapper);
 
@@ -343,7 +344,7 @@ public class UpgradeGroup extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
-	public void _upgradeResources() throws Exception {
+	private void _upgradeResources() throws Exception {
 		TempScopeUpgradeColumnImpl upgradeScopeColumn =
 			new TempScopeUpgradeColumnImpl();
 
@@ -380,10 +381,6 @@ public class UpgradeGroup extends UpgradeProcess {
 			StringPool.BLANK, ResourceImpl.SCOPE_INDIVIDUAL, "%ownerId=%",
 			false);
 		 */
-	}
-
-	private void _upgradeLucene() throws Exception {
-		PropsUtil.set(PropsUtil.INDEX_ON_STARTUP, "true");
 	}
 
 	private ValueMapper _groupIdMapper;

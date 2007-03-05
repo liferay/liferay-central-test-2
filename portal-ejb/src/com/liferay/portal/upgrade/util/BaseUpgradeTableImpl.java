@@ -259,40 +259,40 @@ public abstract class BaseUpgradeTableImpl {
 
 		int t = type.intValue();
 
-		int parameterIndex = index + 1;
+		int paramIndex = index + 1;
 
 		if (t == Types.BIGINT) {
-			ps.setLong(parameterIndex, GetterUtil.getLong(value));
+			ps.setLong(paramIndex, GetterUtil.getLong(value));
 		}
 		else if (t == Types.BOOLEAN) {
-			ps.setBoolean(parameterIndex, GetterUtil.getBoolean(value));
+			ps.setBoolean(paramIndex, GetterUtil.getBoolean(value));
 		}
 		else if ((t == Types.CLOB) || (t == Types.VARCHAR)) {
 			value = StringUtil.replace(value, _SAFE_CHARS[1], _SAFE_CHARS[0]);
 
-			ps.setString(parameterIndex, value);
+			ps.setString(paramIndex, value);
 		}
 		else if (t == Types.DOUBLE) {
-			ps.setDouble(parameterIndex, GetterUtil.getDouble(value));
+			ps.setDouble(paramIndex, GetterUtil.getDouble(value));
 		}
 		else if (t == Types.FLOAT) {
-			ps.setFloat(parameterIndex, GetterUtil.getFloat(value));
+			ps.setFloat(paramIndex, GetterUtil.getFloat(value));
 		}
 		else if (t == Types.INTEGER) {
-			ps.setInt(parameterIndex, GetterUtil.getInteger(value));
+			ps.setInt(paramIndex, GetterUtil.getInteger(value));
 		}
 		else if (t == Types.SMALLINT) {
-			ps.setShort(parameterIndex, GetterUtil.getShort(value));
+			ps.setShort(paramIndex, GetterUtil.getShort(value));
 		}
 		else if (t == Types.TIMESTAMP) {
 			if (StringPool.NULL.equals(value)) {
-				ps.setTimestamp(parameterIndex, null);
+				ps.setTimestamp(paramIndex, null);
 			}
 			else {
 				DateFormat df = DateUtil.getISOFormat();
 
 				ps.setTimestamp(
-					parameterIndex, new Timestamp(df.parse(value).getTime()));
+					paramIndex, new Timestamp(df.parse(value).getTime()));
 			}
 		}
 		else {

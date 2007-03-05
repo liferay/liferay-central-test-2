@@ -84,8 +84,8 @@ public class BlogsCategoryPermission {
 		throws PortalException, SystemException {
 
 		return permissionChecker.hasPermission(
-			0, BlogsCategory.class.getName(),
-			String.valueOf(category.getPrimaryKey()), actionId);
+			0, BlogsCategory.class.getName(), category.getPrimaryKey(),
+			actionId);
 	}
 
 }

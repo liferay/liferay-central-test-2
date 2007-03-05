@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.upgrade.UpgradeException;
@@ -59,7 +60,7 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 	private void _upgradeBlogs() throws Exception {
 
-		// Blogs Category
+		// BlogsCategory
 
 		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
 
@@ -80,7 +81,7 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// Blogs Entry
+		// BlogsEntry
 
 		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
 
@@ -102,7 +103,6 @@ public class UpgradeBlogs extends UpgradeProcess {
 	}
 
 	private ValueMapper _categoryIdMapper;
-
 	private ValueMapper _entryIdMapper;
 
 	private static Log _log = LogFactory.getLog(UpgradeBlogs.class);

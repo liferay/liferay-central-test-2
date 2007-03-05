@@ -5,8 +5,8 @@ alter_column_type BlogsCategory categoryId LONG;
 alter_column_type BlogsCategory parentCategoryId LONG;
 
 alter_column_type BlogsEntry entryId LONG;
-alter_column_type BlogsEntry categoryId LONG;
 alter_column_type BlogsEntry groupId LONG;
+alter_column_type BlogsEntry categoryId LONG;
 
 alter_column_type BookmarksFolder groupId LONG;
 

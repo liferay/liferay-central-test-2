@@ -147,8 +147,7 @@ public class BlogsCategoryLocalServiceImpl
 
 		ResourceLocalServiceUtil.addResources(
 			category.getCompanyId(), 0, category.getUserId(),
-			BlogsCategory.class.getName(),
-			String.valueOf(category.getPrimaryKey()), false,
+			BlogsCategory.class.getName(), category.getPrimaryKey(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -169,9 +168,8 @@ public class BlogsCategoryLocalServiceImpl
 
 		ResourceLocalServiceUtil.addModelResources(
 			category.getCompanyId(), 0, category.getUserId(),
-			BlogsCategory.class.getName(),
-			String.valueOf(category.getPrimaryKey()), communityPermissions,
-			guestPermissions);
+			BlogsCategory.class.getName(), category.getPrimaryKey(),
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteCategory(long categoryId)
@@ -229,7 +227,7 @@ public class BlogsCategoryLocalServiceImpl
 		ResourceLocalServiceUtil.deleteResource(
 			category.getCompanyId(), BlogsCategory.class.getName(),
 			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			String.valueOf(category.getPrimaryKey()));
+			category.getPrimaryKey());
 
 		// Category
 

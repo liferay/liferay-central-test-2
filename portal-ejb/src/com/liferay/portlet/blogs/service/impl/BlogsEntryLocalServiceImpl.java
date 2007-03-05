@@ -202,8 +202,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
-			BlogsEntry.class.getName(), String.valueOf(entry.getPrimaryKey()),
-			false, addCommunityPermissions, addGuestPermissions);
+			BlogsEntry.class.getName(), entry.getPrimaryKey(), false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addEntryResources(
@@ -223,7 +223,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addModelResources(
 			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
-			BlogsEntry.class.getName(), String.valueOf(entry.getPrimaryKey()),
+			BlogsEntry.class.getName(), entry.getPrimaryKey(),
 			communityPermissions, guestPermissions);
 	}
 
@@ -269,7 +269,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		ResourceLocalServiceUtil.deleteResource(
 			entry.getCompanyId(), BlogsEntry.class.getName(),
 			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			String.valueOf(entry.getPrimaryKey()));
+			entry.getPrimaryKey());
 
 		// Entry
 
