@@ -258,8 +258,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			event.getCompanyId(), event.getGroupId(), event.getUserId(),
-			CalEvent.class.getName(), String.valueOf(event.getPrimaryKey()),
-			false, addCommunityPermissions, addGuestPermissions);
+			CalEvent.class.getName(), event.getPrimaryKey(), false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addEventResources(
@@ -279,7 +279,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addModelResources(
 			event.getCompanyId(), event.getGroupId(), event.getUserId(),
-			CalEvent.class.getName(), String.valueOf(event.getPrimaryKey()),
+			CalEvent.class.getName(), event.getPrimaryKey(),
 			communityPermissions, guestPermissions);
 	}
 
@@ -346,7 +346,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		ResourceLocalServiceUtil.deleteResource(
 			event.getCompanyId(), CalEvent.class.getName(),
 			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			String.valueOf(event.getPrimaryKey()));
+			event.getPrimaryKey());
 
 		// Event
 

@@ -48,7 +48,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	CalEvent event = (CalEvent)results.get(i);
 
-	ResultRow row = new ResultRow(event, String.valueOf(event.getPrimaryKey()), i);
+	ResultRow row = new ResultRow(event, event.getPrimaryKey(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 

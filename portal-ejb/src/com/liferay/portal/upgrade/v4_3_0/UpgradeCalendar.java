@@ -74,4 +74,5 @@ public class UpgradeCalendar extends UpgradeProcess {
 	private ValueMapper _eventIdMapper;
 
 	private static Log _log = LogFactory.getLog(UpgradeCalendar.class);
+
 }

@@ -76,7 +76,7 @@ String versionRootDir = PropsUtil.get(PropsUtil.DL_VERSION_ROOT_DIR);
 for (int i = 0; i < results.getLength(); i++) {
 	Document doc = results.doc(i);
 
-	ResultRow row = new ResultRow(doc, String.valueOf(i), i);
+	ResultRow row = new ResultRow(doc, i, i);
 
 	// Position
 

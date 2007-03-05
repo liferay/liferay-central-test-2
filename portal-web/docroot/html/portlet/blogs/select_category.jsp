@@ -69,7 +69,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	BlogsCategory curCategory = (BlogsCategory)results.get(i);
 
-	ResultRow row = new ResultRow(curCategory, String.valueOf(curCategory.getPrimaryKey()), i);
+	ResultRow row = new ResultRow(curCategory, curCategory.getPrimaryKey(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
