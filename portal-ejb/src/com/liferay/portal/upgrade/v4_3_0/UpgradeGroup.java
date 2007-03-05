@@ -357,30 +357,6 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradeScopeColumn, upgradePrimKeyColumn);
 
 		upgradeTable.updateTable();
-
-		/*
-		ResourceUtil.upgradePrimKey(
-			_groupIdMapper, StringPool.BLANK, ResourceImpl.SCOPE_GROUP,
-			StringPool.BLANK, true);
-
-		ResourceUtil.upgradePrimKey(new PrimKeyLayoutIdMapper(_groupIdMapper),
-			StringPool.BLANK, ResourceImpl.SCOPE_INDIVIDUAL,
-			LayoutImpl.PUBLIC + StringPool.PERCENT, false);
-
-		ResourceUtil.upgradePrimKey(new PrimKeyLayoutIdMapper(_groupIdMapper),
-			StringPool.BLANK, ResourceImpl.SCOPE_INDIVIDUAL,
-			LayoutImpl.PRIVATE + StringPool.PERCENT, false);
-
-		ResourceUtil.upgradePrimKey(
-			new PrimKeyGroupOrOwnerIdMapper(_groupIdMapper, true),
-			StringPool.BLANK, ResourceImpl.SCOPE_INDIVIDUAL, "%groupId=%",
-			false);
-
-		ResourceUtil.upgradePrimKey(
-			new PrimKeyGroupOrOwnerIdMapper(_ownerIdMapper, false),
-			StringPool.BLANK, ResourceImpl.SCOPE_INDIVIDUAL, "%ownerId=%",
-			false);
-		 */
 	}
 
 	private ValueMapper _groupIdMapper;

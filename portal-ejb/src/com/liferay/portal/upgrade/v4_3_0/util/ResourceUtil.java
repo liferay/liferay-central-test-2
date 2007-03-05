@@ -21,15 +21,12 @@
  */
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
@@ -53,27 +50,15 @@ public class ResourceUtil {
 
 	public static void upgradePrimKey(ValueMapper pkMapper, String name)
 		throws Exception {
-
-		upgradePrimKey(
-			pkMapper, name, ResourceImpl.SCOPE_INDIVIDUAL, StringPool.BLANK,
-			true);
+		
+		upgradePrimKey(pkMapper, name, true);
 	}
-
+	
 	public static void upgradePrimKey(
-			ValueMapper pkMapper, String name, String scope, String likePk,
-			boolean isLong)
+			ValueMapper pkMapper, String name, boolean isLong)
 		throws Exception {
 
-		StringMaker sm = new StringMaker();
-
-		sm.append("Upgrading Resource_.primKey with:\n");
-		sm.append("\t\tValueMapper: " + pkMapper.getClass().getName() + "\n");
-		sm.append("\t\tname:        " + name + "\n");
-		sm.append("\t\tscope:       " + scope + "\n");
-		sm.append("\t\tlikePk:      " + likePk + "\n");
-		sm.append("\t\tisLong:      " + isLong);
-
-		_log.info(sm.toString());
+		_log.info("Upgrading Resource_.primKey with name: " + name);
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -86,21 +71,10 @@ public class ResourceUtil {
 		try {
 			con = HibernateUtil.getConnection();
 
-			if (Validator.isNotNull(name)) {
-				ps = con.prepareStatement(_SELECT_PRIMKEY[2]);
+			ps = con.prepareStatement(_SELECT_PRIMKEY);
 
-				ps.setString(2, name);
-			}
-			else if (Validator.isNotNull(likePk)) {
-				ps = con.prepareStatement(_SELECT_PRIMKEY[1]);
-
-				ps.setString(2, likePk);
-			}
-			else {
-				ps = con.prepareStatement(_SELECT_PRIMKEY[0]);
-			}
-
-			ps.setString(1, scope);
+			ps.setString(1, name);
+			ps.setString(2, ResourceImpl.SCOPE_INDIVIDUAL);
 
 			rs = ps.executeQuery();
 
@@ -135,12 +109,7 @@ public class ResourceUtil {
 
 			while (itr.hasNext()) {
 				if (count == 0) {
-					if (Validator.isNull(name)) {
-						ps = con.prepareStatement(_UPDATE_PRIMKEY[0]);
-					}
-					else {
-						ps = con.prepareStatement(_UPDATE_PRIMKEY[1]);
-					}
+					ps = con.prepareStatement(_UPDATE_PRIMKEY);
 				}
 
 				String oldPk = (String)itr.next();
@@ -169,12 +138,9 @@ public class ResourceUtil {
 				}
 
 				ps.setString(1, newPk);
-				ps.setString(2, scope);
-				ps.setString(3, oldPk);
-
-				if (Validator.isNotNull(name)) {
-					ps.setString(4, name);
-				}
+				ps.setString(2, name);
+				ps.setString(3, ResourceImpl.SCOPE_INDIVIDUAL);
+				ps.setString(4, oldPk);
 
 				if (useBatch) {
 					ps.addBatch();
@@ -220,22 +186,14 @@ public class ResourceUtil {
 
 			while (itr.hasNext()) {
 				if (count == 0) {
-					if (Validator.isNull(name)) {
-						ps = con.prepareStatement(_CLEAN_PRIMKEY[0]);
-					}
-					else {
-						ps = con.prepareStatement(_CLEAN_PRIMKEY[1]);
-					}
+					ps = con.prepareStatement(_CLEAN_PRIMKEY);
 				}
 
 				String badPk = (String)itr.next();
 
-				ps.setString(1, scope);
-				ps.setString(2, badPk);
-
-				if (Validator.isNotNull(name)) {
-					ps.setString(3, name);
-				}
+				ps.setString(1, name);
+				ps.setString(2, ResourceImpl.SCOPE_INDIVIDUAL);
+				ps.setString(3, badPk);
 
 				if (useBatch) {
 					ps.addBatch();
@@ -274,21 +232,14 @@ public class ResourceUtil {
 	private static final int _BATCH_SIZE = GetterUtil.getInteger(
 			PropsUtil.get("hibernate.jdbc.batch_size"));
 
-	private static final String[] _SELECT_PRIMKEY = {
-		"SELECT * FROM Resource_ WHERE scope = ?",
-		"SELECT * FROM Resource_ WHERE scope = ? AND primKey like ?",
-		"SELECT * FROM Resource_ WHERE scope = ? AND name = ?"
-	};
+	private static final String _SELECT_PRIMKEY = 
+		"SELECT * FROM Resource_ WHERE name = ? AND scope = ?";
 
-	private static final String[] _UPDATE_PRIMKEY = {
-		"UPDATE Resource_ SET primKey = ? WHERE scope = ? AND primKey = ?",
-		"UPDATE Resource_ SET primKey = ? WHERE scope = ? AND primKey = ? AND name = ?"
-	};
+	private static final String _UPDATE_PRIMKEY =
+		"UPDATE Resource_ SET primKey = ? WHERE name = ? AND scope = ? AND primKey = ?";
 
-	private static final String[] _CLEAN_PRIMKEY = {
-		"DELETE FROM Resource_ WHERE scope = ? AND primKey = ?",
-		"DELETE FROM Resource_ WHERE scope = ? AND primKey = ? AND name = ?"
-	};
+	private static final String _CLEAN_PRIMKEY = 
+		"DELETE FROM Resource_ WHERE name = ? AND scope = ? AND primKey = ?";
 
 	private static Log _log = LogFactory.getLog(ResourceUtil.class.getName());
 
