@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CalEventUtil {
 	public static com.liferay.portlet.calendar.model.CalEvent create(
-		java.lang.String eventId) {
+		long eventId) {
 		return getPersistence().create(eventId);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent remove(
-		java.lang.String eventId)
+		long eventId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
 		ModelListener listener = _getListener();
@@ -140,14 +140,14 @@ public class CalEventUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent findByPrimaryKey(
-		java.lang.String eventId)
+		long eventId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
 		return getPersistence().findByPrimaryKey(eventId);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent fetchByPrimaryKey(
-		java.lang.String eventId) throws com.liferay.portal.SystemException {
+		long eventId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(eventId);
 	}
 
@@ -182,7 +182,7 @@ public class CalEventUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent[] findByGroupId_PrevAndNext(
-		java.lang.String eventId, long groupId,
+		long eventId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
@@ -222,7 +222,7 @@ public class CalEventUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent[] findByG_T_PrevAndNext(
-		java.lang.String eventId, long groupId, java.lang.String type,
+		long eventId, long groupId, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
@@ -263,7 +263,7 @@ public class CalEventUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent[] findByG_R_PrevAndNext(
-		java.lang.String eventId, long groupId, boolean repeating,
+		long eventId, long groupId, boolean repeating,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {

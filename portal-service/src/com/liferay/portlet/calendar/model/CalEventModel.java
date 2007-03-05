@@ -33,13 +33,13 @@ import java.util.Date;
  *
  */
 public interface CalEventModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getEventId();
+	public long getEventId();
 
-	public void setEventId(String eventId);
+	public void setEventId(long eventId);
 
 	public long getGroupId();
 

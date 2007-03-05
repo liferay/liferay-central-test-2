@@ -41,15 +41,7 @@ import java.util.List;
 public class CalEventJSONSerializer {
 	public static JSONObject toJSONObject(CalEvent model) {
 		JSONObject jsonObj = new JSONObject();
-		String eventId = model.getEventId();
-
-		if (eventId == null) {
-			jsonObj.put("eventId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("eventId", eventId.toString());
-		}
-
+		jsonObj.put("eventId", model.getEventId());
 		jsonObj.put("groupId", model.getGroupId());
 
 		String companyId = model.getCompanyId();

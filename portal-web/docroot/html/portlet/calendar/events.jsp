@@ -48,14 +48,14 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	CalEvent event = (CalEvent)results.get(i);
 
-	ResultRow row = new ResultRow(event, event.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(event, String.valueOf(event.getPrimaryKey()), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/calendar/view_event");
-	rowURL.setParameter("eventId", event.getEventId());
+	rowURL.setParameter("eventId", String.valueOf(event.getEventId()));
 
 	// Date
 

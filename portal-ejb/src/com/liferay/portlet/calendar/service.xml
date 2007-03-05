@@ -7,7 +7,7 @@
 
 		<!-- PK fields -->
 
-		<column name="eventId" type="String" primary="true" />
+		<column name="eventId" type="long" primary="true" />
 
 		<!-- Group instance -->
 

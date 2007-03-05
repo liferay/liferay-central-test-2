@@ -41,6 +41,7 @@ import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
+
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -147,7 +148,7 @@ public class BlogsCategoryLocalServiceImpl
 		ResourceLocalServiceUtil.addResources(
 			category.getCompanyId(), 0, category.getUserId(),
 			BlogsCategory.class.getName(),
-			String.valueOf(category.getPrimaryKey()), false, 
+			String.valueOf(category.getPrimaryKey()), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 

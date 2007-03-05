@@ -228,7 +228,7 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 								</c:choose>
 							</c:if>
 
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view_event" /><portlet:param name="eventId" value="<%= event.getEventId() %>" /></portlet:renderURL>">
+							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view_event" /><portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" /></portlet:renderURL>">
 							<%= StringUtil.shorten(event.getTitle(), 80) %>
 							</a>
 						</div>

@@ -117,7 +117,7 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
-	public void addEventResources(java.lang.String eventId,
+	public void addEventResources(long eventId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -134,7 +134,7 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addEventResources(java.lang.String eventId,
+	public void addEventResources(long eventId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -159,7 +159,7 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 		CalEventLocalServiceFactory.getTxImpl().checkEvents();
 	}
 
-	public void deleteEvent(java.lang.String eventId)
+	public void deleteEvent(long eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CalEventLocalServiceFactory.getTxImpl().deleteEvent(eventId);
@@ -177,8 +177,7 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 		CalEventLocalServiceFactory.getTxImpl().deleteEvents(groupId);
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent getEvent(
-		java.lang.String eventId)
+	public com.liferay.portlet.calendar.model.CalEvent getEvent(long eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return CalEventLocalServiceFactory.getTxImpl().getEvent(eventId);
@@ -224,13 +223,13 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 	}
 
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
-		java.lang.String userId, java.lang.String eventId,
-		java.lang.String title, java.lang.String description,
-		int startDateMonth, int startDateDay, int startDateYear,
-		int startDateHour, int startDateMinute, int endDateMonth,
-		int endDateDay, int endDateYear, int durationHour, int durationMinute,
-		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
-		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
+		java.lang.String userId, long eventId, java.lang.String title,
+		java.lang.String description, int startDateMonth, int startDateDay,
+		int startDateYear, int startDateHour, int startDateMinute,
+		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
+		int durationMinute, boolean allDay, boolean timeZoneSensitive,
+		java.lang.String type, boolean repeating,
+		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

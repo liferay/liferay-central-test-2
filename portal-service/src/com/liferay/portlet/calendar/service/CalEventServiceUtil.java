@@ -74,7 +74,7 @@ public class CalEventServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
-	public static void deleteEvent(java.lang.String eventId)
+	public static void deleteEvent(long eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CalEventService calEventService = CalEventServiceFactory.getService();
@@ -82,7 +82,7 @@ public class CalEventServiceUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
-		java.lang.String eventId)
+		long eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CalEventService calEventService = CalEventServiceFactory.getService();
@@ -91,13 +91,12 @@ public class CalEventServiceUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(
-		java.lang.String eventId, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		long eventId, java.lang.String title, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

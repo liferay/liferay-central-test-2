@@ -91,7 +91,7 @@ public class CalEventServiceImpl
 			guestPermissions);
 	}
 
-	public void deleteEvent(String eventId)
+	public void deleteEvent(long eventId)
 		throws PortalException, SystemException {
 
 		CalEventPermission.check(
@@ -100,7 +100,7 @@ public class CalEventServiceImpl
 		CalEventLocalServiceUtil.deleteEvent(eventId);
 	}
 
-	public CalEvent getEvent(String eventId)
+	public CalEvent getEvent(long eventId)
 		throws PortalException, SystemException {
 
 		CalEventPermission.check(
@@ -110,7 +110,7 @@ public class CalEventServiceImpl
 	}
 
 	public CalEvent updateEvent(
-			String eventId, String title, String description,
+			long eventId, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,

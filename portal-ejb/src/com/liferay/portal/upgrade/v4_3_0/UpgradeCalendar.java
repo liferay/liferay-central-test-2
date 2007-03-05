@@ -20,19 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_0_0;
+package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
-import com.liferay.util.dao.DataAccess;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
+import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,7 +38,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <a href="UpgradeCalendar.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public class UpgradeCalendar extends UpgradeProcess {
@@ -49,52 +47,31 @@ public class UpgradeCalendar extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeEvent();
+			_upgradeCalendar();
+			_upgradeResource();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeEvent() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+	private void _upgradeCalendar() throws Exception {
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
 
-		try {
-			con = HibernateUtil.getConnection();
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			CalEventImpl.TABLE_NAME, CalEventImpl.TABLE_COLUMNS,
+			pkUpgradeColumn);
 
-			ps = con.prepareStatement(_UPGRADE_EVENT);
+		upgradeTable.updateTable();
 
-			ps.setLong(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long eventId = rs.getLong("eventId");
-
-				boolean addCommunityPermissions = true;
-				boolean addGuestPermissions = true;
-
-				_log.info("Upgrading event " + eventId);
-
-				CalEventLocalServiceUtil.addEventResources(
-					eventId, addCommunityPermissions, addGuestPermissions);
-			}
-		}
-		catch (NoSuchGroupException nsge) {
-			_log.error(
-				"Upgrade failed because data does not have a valid group id. " +
-					"Manually assign a group id in the database.");
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+		_eventIdMapper = pkUpgradeColumn.getValueMapper();
 	}
 
-	private static final String _UPGRADE_EVENT =
-		"SELECT * FROM CalEvent WHERE groupId != ?";
+	private void _upgradeResource() throws Exception {
+		ResourceUtil.upgradePrimKey(_eventIdMapper, CalEvent.class.getName());
+	}
+
+	private ValueMapper _eventIdMapper;
 
 	private static Log _log = LogFactory.getLog(UpgradeCalendar.class);
-
 }

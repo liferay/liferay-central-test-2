@@ -27,8 +27,6 @@
 <%
 CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 
-String eventId = event.getEventId();
-
 Recurrence recurrence = null;
 
 int recurrenceType = ParamUtil.getInteger(request, "recurrenceType", Recurrence.NO_RECURRENCE);

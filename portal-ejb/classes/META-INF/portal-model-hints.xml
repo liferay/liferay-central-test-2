@@ -506,7 +506,7 @@
 		</field>
 	</model>
 	<model name="com.liferay.portlet.calendar.model.CalEvent">
-		<field name="eventId" type="String" />
+		<field name="eventId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />

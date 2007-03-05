@@ -85,15 +85,14 @@ public class CalEventServiceEJBImpl implements CalEventService, SessionBean {
 			guestPermissions);
 	}
 
-	public void deleteEvent(java.lang.String eventId)
+	public void deleteEvent(long eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		CalEventServiceFactory.getTxImpl().deleteEvent(eventId);
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent getEvent(
-		java.lang.String eventId)
+	public com.liferay.portlet.calendar.model.CalEvent getEvent(long eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -102,13 +101,12 @@ public class CalEventServiceEJBImpl implements CalEventService, SessionBean {
 	}
 
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
-		java.lang.String eventId, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		long eventId, java.lang.String title, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

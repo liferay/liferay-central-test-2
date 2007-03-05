@@ -76,19 +76,19 @@ public class CalEventSoap implements Serializable {
 	public CalEventSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _eventId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setEventId(pk);
 	}
 
-	public String getEventId() {
+	public long getEventId() {
 		return _eventId;
 	}
 
-	public void setEventId(String eventId) {
+	public void setEventId(long eventId) {
 		_eventId = eventId;
 	}
 
@@ -264,7 +264,7 @@ public class CalEventSoap implements Serializable {
 		_secondReminder = secondReminder;
 	}
 
-	private String _eventId;
+	private long _eventId;
 	private long _groupId;
 	private String _companyId;
 	private String _userId;

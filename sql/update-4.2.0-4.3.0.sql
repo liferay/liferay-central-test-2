@@ -10,6 +10,7 @@ alter_column_type BlogsEntry groupId LONG;
 
 alter_column_type BookmarksFolder groupId LONG;
 
+alter_column_type CalEvent eventId LONG;
 alter_column_type CalEvent groupId LONG;
 
 alter_column_type Contact_ prefixId INTEGER;

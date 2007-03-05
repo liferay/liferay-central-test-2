@@ -92,8 +92,7 @@ public class CalEventServiceSoap {
 		}
 	}
 
-	public static void deleteEvent(java.lang.String eventId)
-		throws RemoteException {
+	public static void deleteEvent(long eventId) throws RemoteException {
 		try {
 			CalEventServiceUtil.deleteEvent(eventId);
 		}
@@ -104,7 +103,7 @@ public class CalEventServiceSoap {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEventSoap getEvent(
-		java.lang.String eventId) throws RemoteException {
+		long eventId) throws RemoteException {
 		try {
 			com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.getEvent(eventId);
 
@@ -117,13 +116,12 @@ public class CalEventServiceSoap {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEventSoap updateEvent(
-		java.lang.String eventId, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		long eventId, java.lang.String title, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws RemoteException {
 		try {

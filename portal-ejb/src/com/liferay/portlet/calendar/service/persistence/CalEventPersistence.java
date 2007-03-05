@@ -53,7 +53,7 @@ import java.util.List;
  *
  */
 public class CalEventPersistence extends BasePersistence {
-	public CalEvent create(String eventId) {
+	public CalEvent create(long eventId) {
 		CalEvent calEvent = new CalEventImpl();
 		calEvent.setNew(true);
 		calEvent.setPrimaryKey(eventId);
@@ -61,7 +61,7 @@ public class CalEventPersistence extends BasePersistence {
 		return calEvent;
 	}
 
-	public CalEvent remove(String eventId)
+	public CalEvent remove(long eventId)
 		throws NoSuchEventException, SystemException {
 		Session session = null;
 
@@ -69,7 +69,7 @@ public class CalEventPersistence extends BasePersistence {
 			session = openSession();
 
 			CalEvent calEvent = (CalEvent)session.get(CalEventImpl.class,
-					eventId);
+					new Long(eventId));
 
 			if (calEvent == null) {
 				if (_log.isWarnEnabled()) {
@@ -145,7 +145,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent findByPrimaryKey(String eventId)
+	public CalEvent findByPrimaryKey(long eventId)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = fetchByPrimaryKey(eventId);
 
@@ -161,13 +161,13 @@ public class CalEventPersistence extends BasePersistence {
 		return calEvent;
 	}
 
-	public CalEvent fetchByPrimaryKey(String eventId) throws SystemException {
+	public CalEvent fetchByPrimaryKey(long eventId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (CalEvent)session.get(CalEventImpl.class, eventId);
+			return (CalEvent)session.get(CalEventImpl.class, new Long(eventId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -289,7 +289,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent[] findByGroupId_PrevAndNext(String eventId, long groupId,
+	public CalEvent[] findByGroupId_PrevAndNext(long eventId, long groupId,
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 		int count = countByGroupId(groupId);
@@ -480,7 +480,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent[] findByG_T_PrevAndNext(String eventId, long groupId,
+	public CalEvent[] findByG_T_PrevAndNext(long eventId, long groupId,
 		String type, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
@@ -666,7 +666,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent[] findByG_R_PrevAndNext(String eventId, long groupId,
+	public CalEvent[] findByG_R_PrevAndNext(long eventId, long groupId,
 		boolean repeating, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);

@@ -78,13 +78,13 @@ public class CalEventServiceJSON {
 		return CalEventJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteEvent(java.lang.String eventId)
+	public static void deleteEvent(long eventId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		CalEventServiceUtil.deleteEvent(eventId);
 	}
 
-	public static JSONObject getEvent(java.lang.String eventId)
+	public static JSONObject getEvent(long eventId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.getEvent(eventId);
@@ -92,13 +92,13 @@ public class CalEventServiceJSON {
 		return CalEventJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateEvent(java.lang.String eventId,
-		java.lang.String title, java.lang.String description,
-		int startDateMonth, int startDateDay, int startDateYear,
-		int startDateHour, int startDateMinute, int endDateMonth,
-		int endDateDay, int endDateYear, int durationHour, int durationMinute,
-		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
-		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
+	public static JSONObject updateEvent(long eventId, java.lang.String title,
+		java.lang.String description, int startDateMonth, int startDateDay,
+		int startDateYear, int startDateHour, int startDateMinute,
+		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
+		int durationMinute, boolean allDay, boolean timeZoneSensitive,
+		java.lang.String type, boolean repeating,
+		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

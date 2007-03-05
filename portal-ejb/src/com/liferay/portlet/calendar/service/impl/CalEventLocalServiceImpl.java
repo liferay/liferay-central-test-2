@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.calendar.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.PortalException;
@@ -191,8 +192,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			title, startDateMonth, startDateDay, startDateYear, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay);
 
-		String eventId = String.valueOf(CounterLocalServiceUtil.increment(
-			CalEvent.class.getName()));
+		long eventId = CounterLocalServiceUtil.increment(
+			Counter.class.getName());
 
 		CalEvent event = CalEventUtil.create(eventId);
 
@@ -240,7 +241,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public void addEventResources(
-			String eventId, boolean addCommunityPermissions,
+			long eventId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -257,12 +258,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			event.getCompanyId(), event.getGroupId(), event.getUserId(),
-			CalEvent.class.getName(), event.getPrimaryKey().toString(), false,
+			CalEvent.class.getName(), String.valueOf(event.getPrimaryKey()), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addEventResources(
-			String eventId, String[] communityPermissions,
+			long eventId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -278,7 +279,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addModelResources(
 			event.getCompanyId(), event.getGroupId(), event.getUserId(),
-			CalEvent.class.getName(), event.getPrimaryKey().toString(),
+			CalEvent.class.getName(), String.valueOf(event.getPrimaryKey()),
 			communityPermissions, guestPermissions);
 	}
 
@@ -325,7 +326,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteEvent(String eventId)
+	public void deleteEvent(long eventId)
 		throws PortalException, SystemException {
 
 		CalEvent event = CalEventUtil.findByPrimaryKey(eventId);
@@ -345,7 +346,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		ResourceLocalServiceUtil.deleteResource(
 			event.getCompanyId(), CalEvent.class.getName(),
 			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			event.getPrimaryKey().toString());
+			String.valueOf(event.getPrimaryKey()));
 
 		// Event
 
@@ -364,7 +365,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
-	public CalEvent getEvent(String eventId)
+	public CalEvent getEvent(long eventId)
 		throws PortalException, SystemException {
 
 		return CalEventUtil.findByPrimaryKey(eventId);
@@ -505,7 +506,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public CalEvent updateEvent(
-			String userId, String eventId, String title, String description,
+			String userId, long eventId, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,

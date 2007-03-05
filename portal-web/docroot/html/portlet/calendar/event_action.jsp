@@ -34,7 +34,7 @@ CalEvent event = (CalEvent)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/calendar/edit_event" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="eventId" value="<%= event.getEventId() %>" />
+		<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -44,7 +44,7 @@ CalEvent event = (CalEvent)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= CalEvent.class.getName() %>"
 		modelResourceDescription="<%= event.getTitle() %>"
-		resourcePrimKey="<%= event.getPrimaryKey().toString() %>"
+		resourcePrimKey="<%= String.valueOf(event.getPrimaryKey()) %>"
 		var="permissionsURL"
 	/>
 
@@ -56,7 +56,7 @@ CalEvent event = (CalEvent)row.getObject();
 		<portlet:param name="struts_action" value="/calendar/edit_event" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="eventId" value="<%= event.getEventId() %>" />
+		<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />

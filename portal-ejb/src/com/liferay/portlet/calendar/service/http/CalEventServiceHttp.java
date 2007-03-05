@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -255,17 +256,11 @@ public class CalEventServiceHttp {
 		}
 	}
 
-	public static void deleteEvent(HttpPrincipal httpPrincipal,
-		java.lang.String eventId)
+	public static void deleteEvent(HttpPrincipal httpPrincipal, long eventId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = eventId;
-
-			if (eventId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(eventId);
 			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
 					"deleteEvent", new Object[] { paramObj0 });
 
@@ -291,16 +286,11 @@ public class CalEventServiceHttp {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
-		HttpPrincipal httpPrincipal, java.lang.String eventId)
+		HttpPrincipal httpPrincipal, long eventId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = eventId;
-
-			if (eventId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(eventId);
 			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
 					"getEvent", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -329,23 +319,18 @@ public class CalEventServiceHttp {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(
-		HttpPrincipal httpPrincipal, java.lang.String eventId,
-		java.lang.String title, java.lang.String description,
-		int startDateMonth, int startDateDay, int startDateYear,
-		int startDateHour, int startDateMinute, int endDateMonth,
-		int endDateDay, int endDateYear, int durationHour, int durationMinute,
-		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
-		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
+		HttpPrincipal httpPrincipal, long eventId, java.lang.String title,
+		java.lang.String description, int startDateMonth, int startDateDay,
+		int startDateYear, int startDateHour, int startDateMinute,
+		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
+		int durationMinute, boolean allDay, boolean timeZoneSensitive,
+		java.lang.String type, boolean repeating,
+		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = eventId;
-
-			if (eventId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(eventId);
 			Object paramObj1 = title;
 
 			if (title == null) {

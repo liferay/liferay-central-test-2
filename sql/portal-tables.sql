@@ -90,7 +90,7 @@ create table BookmarksFolder (
 );
 
 create table CalEvent (
-	eventId VARCHAR(75) not null primary key,
+	eventId LONG not null primary key,
 	groupId LONG not null,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,

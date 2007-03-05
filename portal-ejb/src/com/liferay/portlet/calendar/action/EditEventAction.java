@@ -39,7 +39,6 @@ import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.NoSuchEventException;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.ArrayList;
@@ -131,7 +130,7 @@ public class EditEventAction extends PortletAction {
 	}
 
 	protected void deleteEvent(ActionRequest req) throws Exception {
-		String eventId = ParamUtil.getString(req, "eventId");
+		long eventId = ParamUtil.getLong(req, "eventId");
 
 		CalEventServiceUtil.deleteEvent(eventId);
 	}
@@ -139,7 +138,7 @@ public class EditEventAction extends PortletAction {
 	protected void updateEvent(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String eventId = ParamUtil.getString(req, "eventId");
+		long eventId = ParamUtil.getLong(req, "eventId");
 
 		String title = ParamUtil.getString(req, "title");
 		String description = ParamUtil.getString(req, "description");
@@ -377,7 +376,7 @@ public class EditEventAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (Validator.isNull(eventId)) {
+		if (eventId <= 0) {
 
 			// Add event
 

@@ -42,7 +42,7 @@ import java.util.Date;
 public class CalEventModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "CalEvent";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "eventId", new Integer(Types.VARCHAR) },
+			{ "eventId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
@@ -67,9 +67,6 @@ public class CalEventModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_EVENTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.eventId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -100,27 +97,20 @@ public class CalEventModelImpl extends BaseModelImpl {
 	public CalEventModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _eventId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setEventId(pk);
 	}
 
-	public String getEventId() {
-		return GetterUtil.getString(_eventId);
+	public long getEventId() {
+		return _eventId;
 	}
 
-	public void setEventId(String eventId) {
-		if (((eventId == null) && (_eventId != null)) ||
-				((eventId != null) && (_eventId == null)) ||
-				((eventId != null) && (_eventId != null) &&
-				!eventId.equals(_eventId))) {
-			if (!XSS_ALLOW_EVENTID) {
-				eventId = XSSUtil.strip(eventId);
-			}
-
+	public void setEventId(long eventId) {
+		if (eventId != _eventId) {
 			_eventId = eventId;
 		}
 	}
@@ -467,9 +457,9 @@ public class CalEventModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = calEvent.getPrimaryKey();
+		long pk = calEvent.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -478,10 +468,10 @@ public class CalEventModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _eventId;
+	private long _eventId;
 	private long _groupId;
 	private String _companyId;
 	private String _userId;

@@ -27,7 +27,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -55,11 +54,11 @@ public class ActionUtil {
 	}
 
 	public static void getEvent(HttpServletRequest req) throws Exception {
-		String eventId = ParamUtil.getString(req, "eventId");
+		long eventId = ParamUtil.getLong(req, "eventId");
 
 		CalEvent event = null;
 
-		if (Validator.isNotNull(eventId)) {
+		if (eventId > 0) {
 			event = CalEventServiceUtil.getEvent(eventId);
 		}
 
