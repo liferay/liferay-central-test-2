@@ -121,6 +121,8 @@ public class LangBuilder {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
+			line = line.trim();
+
 			int pos = line.indexOf("=");
 
 			if (pos != -1) {
