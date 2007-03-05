@@ -40,8 +40,11 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.OwnerIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.PreferencesUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.PrimKeyGroupOrOwnerIdMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.PrimKeyLayoutIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.PrimKeyUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.TempScopeUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
@@ -353,6 +356,30 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradeScopeColumn, upgradePrimKeyColumn);
 
 		upgradeTable.updateTable();
+
+		/*
+		ResourceUtil.upgradePrimKey(
+			_groupIdMapper, StringPool.BLANK, ResourceImpl.SCOPE_GROUP,
+			StringPool.BLANK, true);
+
+		ResourceUtil.upgradePrimKey(new PrimKeyLayoutIdMapper(_groupIdMapper),
+			StringPool.BLANK, ResourceImpl.SCOPE_INDIVIDUAL,
+			LayoutImpl.PUBLIC + StringPool.PERCENT, false);
+
+		ResourceUtil.upgradePrimKey(new PrimKeyLayoutIdMapper(_groupIdMapper),
+			StringPool.BLANK, ResourceImpl.SCOPE_INDIVIDUAL,
+			LayoutImpl.PRIVATE + StringPool.PERCENT, false);
+
+		ResourceUtil.upgradePrimKey(
+			new PrimKeyGroupOrOwnerIdMapper(_groupIdMapper, true),
+			StringPool.BLANK, ResourceImpl.SCOPE_INDIVIDUAL, "%groupId=%",
+			false);
+
+		ResourceUtil.upgradePrimKey(
+			new PrimKeyGroupOrOwnerIdMapper(_ownerIdMapper, false),
+			StringPool.BLANK, ResourceImpl.SCOPE_INDIVIDUAL, "%ownerId=%",
+			false);
+		 */
 	}
 
 	private void _upgradeLucene() throws Exception {

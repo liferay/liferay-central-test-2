@@ -258,8 +258,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			event.getCompanyId(), event.getGroupId(), event.getUserId(),
-			CalEvent.class.getName(), String.valueOf(event.getPrimaryKey()), false,
-			addCommunityPermissions, addGuestPermissions);
+			CalEvent.class.getName(), String.valueOf(event.getPrimaryKey()),
+			false, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addEventResources(

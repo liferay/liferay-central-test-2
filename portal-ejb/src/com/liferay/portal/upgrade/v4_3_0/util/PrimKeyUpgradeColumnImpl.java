@@ -69,7 +69,7 @@ public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 				keyParts[1] = String.valueOf(groupId);
 
-				primKey = StringUtil.merge(keyParts, StringPool.PERIOD);
+				newValue = StringUtil.merge(keyParts, StringPool.PERIOD);
 			}
 			else if (primKey.indexOf("groupId=") != -1 ||
 					 primKey.indexOf("ownerId=") != -1) {
@@ -100,7 +100,7 @@ public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 					}
 				}
 
-				primKey =
+				newValue =
 					StringPool.OPEN_CURLY_BRACE +
 					StringUtil.merge(
 						keyParts, StringPool.COMMA + StringPool.SPACE) +

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -69,9 +68,7 @@ public class UpgradeCalendar extends UpgradeProcess {
 	}
 
 	private void _upgradeResource() throws Exception {
-		ResourceUtil.upgradePrimKey(
-			_eventIdMapper, CalEvent.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL);
+		ResourceUtil.upgradePrimKey(_eventIdMapper, CalEvent.class.getName());
 	}
 
 	private ValueMapper _eventIdMapper;
