@@ -28,6 +28,9 @@ import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
+import com.liferay.portlet.blogs.model.BlogsCategory;
+import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 
@@ -47,16 +50,17 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		try {
 			_upgradeBlogs();
+			_upgradeResource();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
-	
+
 	private void _upgradeBlogs() throws Exception {
-		
+
 		// Blogs Category
-		
+
 		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
@@ -65,26 +69,42 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		ValueMapper categoryIdMapper = pkUpgradeColumn.getValueMapper();
+		_categoryIdMapper = pkUpgradeColumn.getValueMapper();
 
-		categoryIdMapper.appendException(
+		_categoryIdMapper.appendException(
 			new Long(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID));
-		
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsCategoryImpl.TABLE_NAME, BlogsCategoryImpl.TABLE_COLUMNS,
-			new SwapUpgradeColumnImpl("parentCategoryId", categoryIdMapper));
+			new SwapUpgradeColumnImpl("parentCategoryId", _categoryIdMapper));
 
 		upgradeTable.updateTable();
 
 		// Blogs Entry
 
+		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl(), 
-			new SwapUpgradeColumnImpl("categoryId", categoryIdMapper));
+			pkUpgradeColumn,
+			new SwapUpgradeColumnImpl("categoryId", _categoryIdMapper));
 
 		upgradeTable.updateTable();
+
+		_entryIdMapper = pkUpgradeColumn.getValueMapper();
 	}
+
+	private void _upgradeResource() throws Exception {
+		ResourceUtil.upgradePrimKey(
+			_categoryIdMapper, BlogsCategory.class.getName());
+
+		ResourceUtil.upgradePrimKey(
+			_entryIdMapper, BlogsEntry.class.getName());
+	}
+
+	private ValueMapper _categoryIdMapper;
+
+	private ValueMapper _entryIdMapper;
 
 	private static Log _log = LogFactory.getLog(UpgradeBlogs.class);
 
