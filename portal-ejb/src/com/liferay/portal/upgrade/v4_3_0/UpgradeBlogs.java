@@ -21,6 +21,7 @@
  */
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -96,10 +97,12 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 	private void _upgradeResource() throws Exception {
 		ResourceUtil.upgradePrimKey(
-			_categoryIdMapper, BlogsCategory.class.getName());
+			_categoryIdMapper, BlogsCategory.class.getName(),
+			ResourceImpl.SCOPE_INDIVIDUAL);
 
 		ResourceUtil.upgradePrimKey(
-			_entryIdMapper, BlogsEntry.class.getName());
+			_entryIdMapper, BlogsEntry.class.getName(),
+			ResourceImpl.SCOPE_INDIVIDUAL);
 	}
 
 	private ValueMapper _categoryIdMapper;

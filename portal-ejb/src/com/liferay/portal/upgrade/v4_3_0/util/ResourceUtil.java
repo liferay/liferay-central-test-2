@@ -21,7 +21,6 @@
  */
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.util.ValueMapper;
@@ -48,7 +47,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ResourceUtil {
 
-	public static void upgradePrimKey(ValueMapper longPKMapper, String name)
+	public static void upgradePrimKey(
+			ValueMapper longPKMapper, String name, String scope)
 		throws Exception {
 
 		_log.info("Upgrading Resource_.primKey for Resource_.name: " + name);
@@ -67,7 +67,7 @@ public class ResourceUtil {
 			ps = con.prepareStatement(_SELECT_PRIMKEY);
 
 			ps.setString(1, name);
-			ps.setString(2, ResourceImpl.SCOPE_INDIVIDUAL);
+			ps.setString(2, scope);
 
 			rs = ps.executeQuery();
 
@@ -126,7 +126,7 @@ public class ResourceUtil {
 
 				ps.setString(1, newPk.toString());
 				ps.setString(2, name);
-				ps.setString(3, ResourceImpl.SCOPE_INDIVIDUAL);
+				ps.setString(3, scope);
 				ps.setString(4, oldPk.toString());
 
 				if (useBatch) {
@@ -179,7 +179,7 @@ public class ResourceUtil {
 				Long badPk = (Long)itr.next();
 
 				ps.setString(1, name);
-				ps.setString(2, ResourceImpl.SCOPE_INDIVIDUAL);
+				ps.setString(2, scope);
 				ps.setString(3, badPk.toString());
 
 				if (useBatch) {
