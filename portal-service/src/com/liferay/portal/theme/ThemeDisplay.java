@@ -714,11 +714,11 @@ public class ThemeDisplay implements Serializable {
 	private boolean _showSignInIcon;
 	private boolean _showSignOutIcon;
 	private String _urlAddContent = StringPool.BLANK;
-	private PortletURL _urlCreateAccount = null;
+	private transient PortletURL _urlCreateAccount = null;
 	private String _urlHome = StringPool.BLANK;
 	private String _urlLayoutTemplates = StringPool.BLANK;
-	private PortletURL _urlMyAccount = null;
-	private PortletURL _urlPageSettings = null;
+	private transient PortletURL _urlMyAccount = null;
+	private transient PortletURL _urlPageSettings = null;
 	private String _urlPortal = StringPool.BLANK;
 	private String _urlSignIn = StringPool.BLANK;
 	private String _urlSignOut = StringPool.BLANK;
