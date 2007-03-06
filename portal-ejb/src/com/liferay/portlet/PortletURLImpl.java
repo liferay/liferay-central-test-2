@@ -526,7 +526,10 @@ public class PortletURLImpl implements PortletURL, Serializable {
 			String[] values = (String[])entry.getValue();
 
 			for (int i = 0; i < values.length; i++) {
-				sm.append(getNamespace());
+				if (!PortalUtil.isReservedParameter(name)) {
+					sm.append(getNamespace());
+				}
+
 				sm.append(name);
 				sm.append(StringPool.EQUAL);
 				sm.append(_processValue(key, values[i]));
