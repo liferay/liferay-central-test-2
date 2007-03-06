@@ -119,6 +119,8 @@ public class SourceFormatter {
 
 			list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
 
+			String copyright = FileUtil.read("../copyright.txt");
+
 			String[] files = (String[])list.toArray(new String[list.size()]);
 
 			for (int i = 0; i < files.length; i++) {
@@ -155,8 +157,6 @@ public class SourceFormatter {
 					newContent = StringUtil.replace(
 						newContent, "$\n */", "$\n *\n */");
 				}
-
-				String copyright = FileUtil.read("../copyright.txt");
 
 				if (newContent.indexOf(copyright) == -1) {
 					System.out.println("(c): " + files[i]);
@@ -309,7 +309,7 @@ public class SourceFormatter {
 			DirectoryScanner ds = new DirectoryScanner();
 			ds.setIncludes(
 				new String[] {
-					"**\\*.jsp"
+					"**\\*.jsp", "**\\*.vm"
 				});
 			ds.setExcludes(
 				new String[] {
@@ -320,6 +320,8 @@ public class SourceFormatter {
 
 			list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
 
+			String copyright = FileUtil.read("../copyright.txt");
+
 			String[] files = (String[])list.toArray(new String[list.size()]);
 
 			for (int i = 0; i < files.length; i++) {
@@ -328,10 +330,10 @@ public class SourceFormatter {
 				String content = FileUtil.read(file);
 				String newContent = _formatJSPContent(files[i], content);
 
-				String copyright = FileUtil.read("../copyright.txt");
-
-				if (newContent.indexOf(copyright) == -1) {
-					System.out.println("(c): " + files[i]);
+				if (files[i].endsWith(".jsp")) {
+					if (newContent.indexOf(copyright) == -1) {
+						System.out.println("(c): " + files[i]);
+					}
 				}
 
 				if (newContent.indexOf("alert('<%= LanguageUtil.") != -1) {

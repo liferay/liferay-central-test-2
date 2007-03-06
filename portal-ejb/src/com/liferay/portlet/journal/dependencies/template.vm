@@ -22,8 +22,8 @@
 ##   $main-text.getName()      - The name "main-text"
 ##   $main-text.getData()      - The data in the article for main-text
 ##   $main-text.getType()      - The type "text-area"
-##   $main-text.getChildren()  - A collection with two nodes (sub-image and 
-##                               sub-text) that can be used in the #foreach 
+##   $main-text.getChildren()  - A collection with two nodes (sub-image and
+##                               sub-text) that can be used in the #foreach
 ##                               clause
 ##
 ## One special accessor exists for elements of type 'multi-list':
