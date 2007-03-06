@@ -39,10 +39,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.ContextReplace;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
-import com.liferay.util.NullSafeProperties;
-import com.liferay.util.PropertiesUtil;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
@@ -54,7 +53,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -322,7 +320,8 @@ public class ThemeLocalUtil {
 		}
 	}
 
-	private static void _readColorSchemes(Element theme, Map colorSchemes)
+	private static void _readColorSchemes(
+			Element theme, Map colorSchemes, ContextReplace themeContextReplace)
 		throws IOException {
 
 		Iterator itr = theme.elements("color-scheme").iterator();
@@ -330,9 +329,12 @@ public class ThemeLocalUtil {
 		while (itr.hasNext()) {
 			Element colorScheme = (Element)itr.next();
 
+			ContextReplace colorSchemeContextReplace =
+				(ContextReplace)themeContextReplace.clone();
+
 			String id = colorScheme.attributeValue("id");
-			String name = colorScheme.attributeValue("name");
-			String settings = colorScheme.getText();
+
+			colorSchemeContextReplace.addValue("color-scheme-id", id);
 
 			ColorScheme colorSchemeModel =
 				(ColorScheme)colorSchemes.get(id);
@@ -341,16 +343,33 @@ public class ThemeLocalUtil {
 				colorSchemeModel = new ColorSchemeImpl(id);
 			}
 
-			colorSchemeModel.setName(GetterUtil.getString(
-				name, colorSchemeModel.getName()));
+			String name = GetterUtil.getString(
+				colorScheme.attributeValue("name"), colorSchemeModel.getName());
 
-			Properties p = new NullSafeProperties();
+			name = colorSchemeContextReplace.replace(name);
 
-			PropertiesUtil.load(p, settings);
-			PropertiesUtil.trimKeys(p);
+			String cssClass = GetterUtil.getString(
+				colorScheme.elementText("css-class"),
+				colorSchemeModel.getCssClass());
 
-			PropertiesUtil.merge(
-				colorSchemeModel.getSettingsProperties(), p);
+			cssClass = colorSchemeContextReplace.replace(cssClass);
+
+			colorSchemeContextReplace.addValue("css-class", cssClass);
+
+			String colorSchemeImagesPath = GetterUtil.getString(
+				colorScheme.elementText("color-scheme-images-path"),
+				colorSchemeModel.getColorSchemeImagesPath());
+
+			colorSchemeImagesPath = colorSchemeContextReplace.replace(
+				colorSchemeImagesPath);
+
+			colorSchemeContextReplace.addValue(
+				"color-scheme-images-path", colorSchemeImagesPath);
+
+			colorSchemeModel.setName(name);
+			colorSchemeModel.setCssClass(cssClass);
+			colorSchemeModel.setColorSchemeImagesPath(
+				colorSchemeImagesPath);
 
 			colorSchemes.put(id, colorSchemeModel);
 		}
@@ -430,6 +449,8 @@ public class ThemeLocalUtil {
 		while (itr1.hasNext()) {
 			Element theme = (Element)itr1.next();
 
+			ContextReplace themeContextReplace = new ContextReplace();
+
 			String themeId = theme.attributeValue("id");
 
 			if (servletContextName != null) {
@@ -438,6 +459,8 @@ public class ThemeLocalUtil {
 			}
 
 			themeId = PortalUtil.getJsSafePortletName(themeId);
+
+			themeContextReplace.addValue("theme-id", themeId);
 
 			themeIds.add(themeId);
 
@@ -463,24 +486,41 @@ public class ThemeLocalUtil {
 				themeModel.setServletContextName(servletContextName);
 			}
 
-			themeModel.setName(GetterUtil.getString(
-				theme.attributeValue("name"),
-				themeModel.getName()));
-			themeModel.setRootPath(GetterUtil.getString(
-				theme.elementText("root-path"),
-				themeModel.getRootPath()));
-			themeModel.setTemplatesPath(GetterUtil.getString(
+			String name = GetterUtil.getString(
+				theme.attributeValue("name"), themeModel.getName());
+
+			String rootPath = GetterUtil.getString(
+				theme.elementText("root-path"), themeModel.getRootPath());
+
+			rootPath = themeContextReplace.replace(rootPath);
+
+			themeContextReplace.addValue("root-path", rootPath);
+
+			String templatesPath = GetterUtil.getString(
 				theme.elementText("templates-path"),
-				themeModel.getTemplatesPath()));
-			themeModel.setImagesPath(GetterUtil.getString(
+				themeModel.getTemplatesPath());
+
+			templatesPath = themeContextReplace.replace(templatesPath);
+
+			themeContextReplace.addValue("templates-path", templatesPath);
+
+			String imagesPath = GetterUtil.getString(
 				theme.elementText("images-path"),
-				themeModel.getImagesPath()));
-			themeModel.setTemplateExtension(GetterUtil.getString(
+				themeModel.getImagesPath());
+
+			imagesPath = themeContextReplace.replace(imagesPath);
+
+			themeContextReplace.addValue("images-path", imagesPath);
+
+			String templateExtension = GetterUtil.getString(
 				theme.elementText("template-extension"),
-				themeModel.getTemplateExtension()));
-			themeModel.setEnableDragAndDrop(GetterUtil.getBoolean(
-				theme.elementText("enable-drag-and-drop"),
-				themeModel.isEnableDragAndDrop()));
+				themeModel.getTemplateExtension());
+
+			themeModel.setName(name);
+			themeModel.setRootPath(rootPath);
+			themeModel.setTemplatesPath(templatesPath);
+			themeModel.setImagesPath(imagesPath);
+			themeModel.setTemplateExtension(templateExtension);
 
 			Element settingsEl = theme.element("settings");
 
@@ -506,12 +546,13 @@ public class ThemeLocalUtil {
 					Element roleNameEl = (Element)itr2.next();
 
 					pluginSetting.addRole(roleNameEl.getText());
-
 				}
 			}
 
-			_readColorSchemes(theme, themeModel.getColorSchemesMap());
-			_readColorSchemes(theme, themeModel.getColorSchemesMap());
+			_readColorSchemes(
+				theme, themeModel.getColorSchemesMap(), themeContextReplace);
+			_readColorSchemes(
+				theme, themeModel.getColorSchemesMap(), themeContextReplace);
 
 			Element layoutTemplatesEl = theme.element("layout-templates");
 

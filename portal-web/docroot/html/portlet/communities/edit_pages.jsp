@@ -171,11 +171,13 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 		var colorSchemeRadio = document.<portlet:namespace />fm.<portlet:namespace />colorSchemeId;
 
-		if (colorSchemeRadio.length) {
-			colorSchemeRadio[Liferay.Util.getSelectedIndex(colorSchemeRadio)].value = colorSchemeId;
-		}
-		else {
-			colorSchemeRadio.value = colorSchemeId;
+		if (colorSchemeRadio) {
+			if (colorSchemeRadio.length) {
+				colorSchemeRadio[Liferay.Util.getSelectedIndex(colorSchemeRadio)].value = colorSchemeId;
+			}
+			else {
+				colorSchemeRadio.value = colorSchemeId;
+			}
 		}
 
 		submitForm(document.<portlet:namespace />fm);
@@ -839,67 +841,33 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 							</table>
 						</liferay-ui:table-iterator>
 					</td>
-					<td style="padding-left: 30px;"></td>
-					<td valign="top">
-						<liferay-ui:tabs names="color-schemes" />
 
-						<%
-						List colorSchemes = selTheme.getColorSchemes();
-						%>
+					<%
+					List colorSchemes = selTheme.getColorSchemes();
+					%>
 
-						<liferay-ui:table-iterator
-							list="<%= colorSchemes %>"
-							listType="com.liferay.portal.model.ColorScheme"
-							rowLength="1">
+					<c:if test="<%= colorSchemes.size() > 0 %>">
+						<td style="padding-left: 30px;"></td>
+						<td valign="top">
+							<liferay-ui:tabs names="color-schemes" />
 
-							<table border="0" cellpadding="0" cellspacing="0">
-							<tr>
-								<td align="center">
-									<%= tableIteratorObj.getName() %> <input <%= selColorScheme.getColorSchemeId().equals(tableIteratorObj.getColorSchemeId()) ? "checked" : "" %> name="<portlet:namespace />colorSchemeId" type="radio" value="<%= tableIteratorObj.getColorSchemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= tableIteratorObj.getColorSchemeId() %>')"><br>
+							<liferay-ui:table-iterator
+								list="<%= colorSchemes %>"
+								listType="com.liferay.portal.model.ColorScheme"
+								rowLength="1">
 
-									<table border="1" cellpadding="1" cellspacing="1">
-									<tr>
-										<td>
-											<table border="0" cellpadding="2" cellspacing="0">
-											<tr>
-												<td bgcolor="<%= tableIteratorObj.getLayoutTabSelectedBg() %>">
-													<font color="<%= tableIteratorObj.getLayoutTabSelectedText() %>" face="Tahoma, Verdana, Arial" size="2">&nbsp;<b>Tab Selected</b>&nbsp;</font>
-												</td>
-											</tr>
-											<tr>
-												<td bgcolor="<%= tableIteratorObj.getLayoutTabBg() %>">
-													<font color="<%= tableIteratorObj.getLayoutTabText() %>" face="Tahoma, Verdana, Arial" size="2">&nbsp;<b>Tab Unselected</b>&nbsp;</font>
-												</td>
-											</tr>
-											<tr>
-												<td bgcolor="<%= tableIteratorObj.getPortletTitleBg() %>">
-													<font color="<%= tableIteratorObj.getPortletTitleText() %>" face="Tahoma, Verdana, Arial" size="2">&nbsp;<b>Portlet Title</b>&nbsp;</font>
-												</td>
-											</tr>
-											<tr>
-												<td bgcolor="<%= tableIteratorObj.getPortletMenuBg() %>">
-													<font color="<%= tableIteratorObj.getPortletMenuText() %>" face="Tahoma, Verdana, Arial" size="2">&nbsp;Portlet Menu&nbsp;</font>
-												</td>
-											</tr>
-											<tr>
-												<td bgcolor="<%= tableIteratorObj.getPortletBg() %>">
-													<font color="<%= tableIteratorObj.getPortletFont() %>" face="Tahoma, Verdana, Arial" size="2">&nbsp;Portlet Body&nbsp;</font>
-												</td>
-											</tr>
-											<tr>
-												<td bgcolor="<%= tableIteratorObj.getBodyBg() %>">
-													<font color="<%= tableIteratorObj.getLayoutText() %>" face="Tahoma, Verdana, Arial" size="2">&nbsp;Page Background&nbsp;<br></font>
-												</td>
-											</tr>
-											</table>
-										</td>
-									</tr>
-									</table>
-								</td>
-							</tr>
-							</table>
-						</liferay-ui:table-iterator>
-					</td>
+								<table border="0" cellpadding="0" cellspacing="0">
+								<tr>
+									<td align="center">
+										<%= tableIteratorObj.getName() %> <input <%= selColorScheme.getColorSchemeId().equals(tableIteratorObj.getColorSchemeId()) ? "checked" : "" %> name="<portlet:namespace />colorSchemeId" type="radio" value="<%= tableIteratorObj.getColorSchemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= tableIteratorObj.getColorSchemeId() %>')"><br>
+
+										<img border="0" hspace="0" src="<%= selTheme.getContextPath() %><%= tableIteratorObj.getColorSchemeImagesPath() %>/thumbnail.png" vspace="0">
+									</td>
+								</tr>
+								</table>
+							</liferay-ui:table-iterator>
+						</td>
+					</c:if>
 				</tr>
 				</table>
 			</c:when>

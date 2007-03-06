@@ -3,6 +3,7 @@
 #set ( $theme_display = $themeDisplay )
 #set ( $portlet_display = $portletDisplay )
 
+#set ( $css_class = $theme_display.getColorScheme().getCssClass() )
 #set ( $css_folder = "$theme_display.getPathThemeRoot()/css" )
 #set ( $images_folder = "$theme_display.getPathThemeRoot()/images" )
 #set ( $javascript_folder = "$theme_display.getPathThemeRoot()/javascript" )

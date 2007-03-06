@@ -58,10 +58,6 @@ public interface Theme extends Comparable, Plugin, Serializable {
 
 	public void setTemplateExtension(String templateExtension);
 
-	public boolean isEnableDragAndDrop();
-
-	public void setEnableDragAndDrop(boolean enableDragAndDrop);
-
 	public Properties getSettings();
 
 	public String getSetting(String key);

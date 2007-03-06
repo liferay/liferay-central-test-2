@@ -23,7 +23,7 @@
 	<target name="clean-themes">
 		<for param="module.name">
 			<path>
-				<dirset dir="docroot/html/themes" excludes="_common,classic" includes="*" />
+				<dirset dir="docroot/html/themes" excludes="_common" includes="*" />
 			</path>
 			<sequential>
 				<delete includeemptydirs="true" quiet="true" failonerror="false">
@@ -510,7 +510,7 @@
 	<target name="build-themes">
 		<for param="module.name">
 			<path>
-				<dirset dir="docroot/html/themes" excludes="_common,classic" includes="*" />
+				<dirset dir="docroot/html/themes" excludes="_common" includes="*" />
 			</path>
 			<sequential>
 				<copy todir="@{module.name}">

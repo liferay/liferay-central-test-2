@@ -147,10 +147,10 @@ public class ColorSchemeImpl implements ColorScheme {
 		_colorSchemeId = colorSchemeId;
 	}
 
-	public ColorSchemeImpl(String colorSchemeId, String name, String settings) {
+	public ColorSchemeImpl(String colorSchemeId, String name, String cssClass) {
 		_colorSchemeId = colorSchemeId;
 		_name = name;
-		setSettings(settings);
+		_cssClass = cssClass;
 	}
 
 	public String getColorSchemeId() {
@@ -168,6 +168,22 @@ public class ColorSchemeImpl implements ColorScheme {
 
 	public void setName(String name) {
 		_name = name;
+	}
+
+	public String getCssClass() {
+		return _cssClass;
+	}
+
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
+	}
+
+	public String getColorSchemeImagesPath() {
+		return _colorSchemeImagesPath;
+	}
+
+	public void setColorSchemeImagesPath(String colorSchemeImagesPath) {
+		_colorSchemeImagesPath = colorSchemeImagesPath;
 	}
 
 	public String getSettings() {
@@ -376,6 +392,9 @@ public class ColorSchemeImpl implements ColorScheme {
 
 	private String _colorSchemeId;
 	private String _name;
+	private String _cssClass;
+	private String _colorSchemeImagesPath =
+		"${images-path}/color_schemes/${css-class}";
 	private Properties _settingsProperties = new NullSafeProperties();
 
 }

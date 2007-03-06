@@ -114,14 +114,6 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_templateExtension = templateExtension;
 	}
 
-	public boolean isEnableDragAndDrop() {
-		return _enableDragAndDrop;
-	}
-
-	public void setEnableDragAndDrop(boolean enableDragAndDrop) {
-		_enableDragAndDrop = enableDragAndDrop;
-	}
-
 	public Properties getSettings() {
 		return _settings;
 	}
@@ -220,11 +212,10 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 
 	private String _themeId;
 	private String _name;
-	private String _rootPath;
-	private String _templatesPath;
-	private String _imagesPath;
-	private String _templateExtension = "jsp";
-	private boolean _enableDragAndDrop = true;
+	private String _rootPath = "/${theme-id}";
+	private String _templatesPath = "${root-path}/templates";
+	private String _imagesPath = "${root-path}/images";
+	private String _templateExtension = "vm";
 	private Properties _settings = new Properties();
 	private Map _colorSchemesMap = new HashMap();
 	private String _servletContextName;

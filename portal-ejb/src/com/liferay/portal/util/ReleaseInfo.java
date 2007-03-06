@@ -51,7 +51,7 @@ public class ReleaseInfo {
 
 	static String codeName = "Machen";
 
-	static String build = "3785";
+	static String build = "3788";
 
 	static String date = "March 6, 2007";
 

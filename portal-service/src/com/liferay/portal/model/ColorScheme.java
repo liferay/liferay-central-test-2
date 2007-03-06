@@ -40,6 +40,14 @@ public interface ColorScheme extends Comparable, Serializable {
 
 	public void setName(String name);
 
+	public String getCssClass();
+
+	public void setCssClass(String cssClass);
+
+	public String getColorSchemeImagesPath();
+
+	public void setColorSchemeImagesPath(String colorSchemeImagesPath);
+
 	public String getSettings();
 
 	public void setSettings(String settings);

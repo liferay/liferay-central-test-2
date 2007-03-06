@@ -45,13 +45,15 @@ public abstract class PluginBaseImpl implements Plugin {
 	}
 
 	public PluginSetting getDefaultPluginSetting(String companyId) {
-		PluginSetting setting = (PluginSetting) _defaultPluginSettings.get(
+		PluginSetting setting = (PluginSetting)_defaultPluginSettings.get(
 			companyId);
 
 		if (setting == null) {
 			setting = new PluginSettingImpl(_defaultPluginSetting);
+
 			setting.setCompanyId(companyId);
-			_defaultPluginSettings.put(companyId, _defaultPluginSetting);
+
+			_defaultPluginSettings.put(companyId, setting);
 		}
 
 		return setting;

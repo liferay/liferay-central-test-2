@@ -2,7 +2,7 @@
 
 #parse($init)
 
-<html dir="#language("lang.dir")">
+<html class="$css_class" dir="#language("lang.dir")">
 
 <head>
 	<title>$company_name - $the_title</title>
