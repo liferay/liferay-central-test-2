@@ -30,7 +30,7 @@
 		<mkdir dir="${module.name}.war/WEB-INF/lib" />
 
 		<if>
-			<equals arg1="${module.name}" arg2="sample-struts-global-portlet" />
+			<equals arg1="${module.name}" arg2="sample-struts-liferay-portlet" />
 			<then>
 				<path id="web-lib.classpath">
 					<path refid="project.classpath" />
