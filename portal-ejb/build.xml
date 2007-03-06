@@ -105,10 +105,6 @@
 		<ant dir=".." target="deploy-properties" inheritAll="false" />
 	</target>
 
-	<target name="build-common-images">
-		<ant dir="../portal-web" target="build-common-images" />
-	</target>
-
 	<target name="build-css">
 		<ant dir="../portal-web" target="build-css" />
 	</target>
@@ -432,6 +428,10 @@
 	<target name="build-services">
 		<antcall target="build-service-portal" />
 		<antcall target="build-service-portlets" />
+	</target>
+
+	<target name="build-themes">
+		<ant dir="../portal-web" target="build-themes" />
 	</target>
 
 	<target name="build-website">
