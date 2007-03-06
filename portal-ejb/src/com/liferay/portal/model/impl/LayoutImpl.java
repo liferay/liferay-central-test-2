@@ -39,6 +39,8 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.LayoutClone;
+import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -515,6 +517,46 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return false;
 	}
 
+	private LayoutTypePortlet _getLayoutTypePortletClone(
+			HttpServletRequest req)
+		throws IOException {
+
+		LayoutTypePortlet layoutTypePortlet = null;
+
+		if (isShared()) {
+			LayoutClone layoutClone = LayoutCloneFactory.getInstance();
+
+			if (layoutClone != null) {
+				String typeSettings = layoutClone.get(req, getPlid());
+
+				if (typeSettings != null) {
+					Properties props = new NullSafeProperties();
+
+					PropertiesUtil.load(props, typeSettings);
+
+					String stateMax = props.getProperty(
+						LayoutTypePortletImpl.STATE_MAX);
+					String stateMin = props.getProperty(
+						LayoutTypePortletImpl.STATE_MIN);
+
+					Layout layout = (Layout)((LayoutImpl)this).clone();
+
+					layoutTypePortlet =
+						(LayoutTypePortlet)layout.getLayoutType();
+
+					layoutTypePortlet.setStateMax(stateMax);
+					layoutTypePortlet.setStateMin(stateMin);
+				}
+			}
+		}
+
+		if (layoutTypePortlet == null) {
+			layoutTypePortlet = (LayoutTypePortlet)getLayoutType();
+		}
+
+		return layoutTypePortlet;
+	}
+
 	private String _getURL(
 			HttpServletRequest req, boolean resetMaxState,
 			boolean resetRenderParameters)
@@ -532,7 +574,14 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 				layoutTypePortlet = themeDisplay.getLayoutTypePortlet();
 			}
 			else {
-				layoutTypePortlet = (LayoutTypePortlet)getLayoutType();
+				try {
+					layoutTypePortlet = _getLayoutTypePortletClone(req);
+				}
+				catch (IOException ioe) {
+					_log.error("Unable to clone layout settings", ioe);
+
+					layoutTypePortlet = (LayoutTypePortlet)getLayoutType();
+				}
 			}
 
 			if (layoutTypePortlet.hasStateMax()) {
