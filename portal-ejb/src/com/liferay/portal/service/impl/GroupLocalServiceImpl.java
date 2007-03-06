@@ -493,10 +493,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		String userId = UserImpl.getDefaultUserId(group.getCompanyId());
 		String name = PropsUtil.get(PropsUtil.DEFAULT_GUEST_LAYOUT_NAME);
 
+		String friendlyURL = StringPool.BLANK;
+
+		if (Validator.isNotNull(group.getFriendlyURL())) {
+			friendlyURL = PropsUtil.get(PropsUtil.DEFAULT_GUEST_FRIENDLY_URL);
+		}
+
 		Layout layout = LayoutLocalServiceUtil.addLayout(
 			group.getGroupId(), userId, false,
 			LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
-			LayoutImpl.TYPE_PORTLET, false, StringPool.BLANK);
+			LayoutImpl.TYPE_PORTLET, false, friendlyURL);
 
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();

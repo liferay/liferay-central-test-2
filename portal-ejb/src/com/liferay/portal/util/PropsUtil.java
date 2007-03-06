@@ -396,6 +396,8 @@ public class PropsUtil {
 
 	public static final String DEFAULT_GUEST_LAYOUT_COLUMN = "default.guest.layout.column-";
 
+	public static final String DEFAULT_GUEST_FRIENDLY_URL = "default.guest.friendly.url";
+
 	public static final String DEFAULT_GUEST_LAYOUT_RESOLUTION = "default.guest.layout.resolution";
 
 	// Default User
