@@ -217,6 +217,8 @@
 		<ant dir="web-sites" target="war" inheritAll="false" />
 
 		<ant dir="portlets" target="war" inheritAll="false" />
+
+		<ant dir="support-catalina" target="jar" inheritAll="false" />
 	</target>
 
 	<target name="java2html">
@@ -435,6 +437,8 @@
 			<elseif>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
 				<then>
+					<ant dir="support-catalina" target="deploy" inheritAll="false" />
+
 					<copy todir="${app.server.dir}/common/endorsed">
 						<fileset
 							dir="lib/development"
@@ -810,6 +814,10 @@ auto.deploy.dest.dir=../webapps</echo>
 		</copy>
 
 		<delete file="${lp.ext.dir}/lib/portal/util-jsf.jar" failonerror="false" />
+
+		<copy todir="${lp.ext.dir}/lib/development" overwrite="yes">
+			<fileset dir="${project.dir}/support-catalina" includes="support-catalina.jar" />
+		</copy>
 
 		<copy todir="${lp.ext.dir}/lib/global" overwrite="yes">
 			<fileset dir="${project.dir}/portal-kernel" includes="portal-kernel.jar" />

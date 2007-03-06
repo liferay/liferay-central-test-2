@@ -25,7 +25,6 @@
 			<fileset dir="${app.server.bin.dir}" includes="*.log*,ActiveMQ/**,alf_data/**" />
 		</delete>
 
-
 		<if>
 			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
@@ -287,6 +286,13 @@
 			<elseif>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
 				<then>
+					<copy todir="${app.server.dir}/common/endorsed">
+						<fileset
+							dir="lib/development"
+							includes="support-catalina.jar"
+						/>
+					</copy>
+
 					<copy todir="${app.server.dir}/common/endorsed">
 						<fileset
 							dir="lib/development"
