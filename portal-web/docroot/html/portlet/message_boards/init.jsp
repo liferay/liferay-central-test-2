@@ -29,6 +29,7 @@
 <%@ page import="com.liferay.documentlibrary.NoSuchDirectoryException" %>
 <%@ page import="com.liferay.documentlibrary.service.DLServiceUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
+<%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portlet.messageboards.CategoryNameException" %>
 <%@ page import="com.liferay.portlet.messageboards.MessageBodyException" %>
 <%@ page import="com.liferay.portlet.messageboards.MessageSubjectException" %>

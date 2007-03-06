@@ -25,6 +25,7 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
+<%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portal.service.permission.PortalPermission" %>
 <%@ page import="com.liferay.portlet.imagegallery.ImageSizeException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.action.ActionUtil" %>

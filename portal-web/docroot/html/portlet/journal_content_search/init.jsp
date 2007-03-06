@@ -27,6 +27,7 @@
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.DocumentSummary" %>
 <%@ page import="com.liferay.portal.kernel.search.Indexer" %>
+<%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portlet.journal.model.impl.JournalArticleImpl" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journalcontentsearch.util.ContentHits" %>
