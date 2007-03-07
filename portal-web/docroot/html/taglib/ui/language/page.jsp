@@ -141,9 +141,7 @@ for (int i = 0; i < locales.length; i++) {
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<a href="<%= formAction %>&<%= name %>=<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>">
-					<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png" alt="<%= locales[i].getDisplayName(locales[i]) %>" title="<%= locales[i].getDisplayName(locales[i]) %>">
-					</a>
+					<a href="<%= formAction %>&<%= name %>=<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>"><img border="0" src="<%= themeDisplay.getPathThemeImage() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png" alt="<%= locales[i].getDisplayName(locales[i]) %>" title="<%= locales[i].getDisplayName(locales[i]) %>"></a>
 				</c:otherwise>
 			</c:choose>
 
