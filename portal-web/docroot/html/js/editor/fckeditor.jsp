@@ -28,6 +28,7 @@
 <%
 String plid = ParamUtil.getString(request, "p_l_id");
 String mainPath = ParamUtil.getString(request, "p_main_path");
+String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METHOD);
 String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 
@@ -45,13 +46,6 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 	<title>Editor</title>
 	<script src="fckeditor/fckeditor.js" type="text/javascript"></script>
 	<script type="text/javascript">
-
-		// Preload config file to prevent race condition
-
-		var fckConfigFile = new Image();
-
-		fckConfigFile.src = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= mainPath %>";
-
 		function getHTML() {
 			return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
 		}
@@ -67,7 +61,7 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 
 			var fckEditor = new FCKeditor("FCKeditor1");
 
-			fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= mainPath %>";
+			fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= mainPath %>&doAsUserId=<%= doAsUserId %>";
 
 			fckEditor.BasePath = "fckeditor/";
 			fckEditor.Width = "100%";
@@ -98,23 +92,7 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 		}
 
 		window.onload = function() {
-			if (document.all) {
-
-				// Stagger loading for IE
-
-				if (parent.fckEditorCount == null) {
-					parent.fckEditorCount = 0;
-				}
-
-				setTimeout("initFckArea()", 500 * parent.fckEditorCount);
-				setTimeout("setInterval('onChangeCallback()', 300)", 550 * parent.fckEditorCount)
-
-				parent.fckEditorCount++;
-			}
-			else {
-				initFckArea();
-				setTimeout("setInterval('onChangeCallback()', 300)", 300);
-			}
+			initFckArea();
 		}
 	</script>
 </head>

@@ -83,14 +83,14 @@ public class BasicAutoLogin implements AutoLogin {
 			Cookie cookie = new Cookie(CookieKeys.ID, StringPool.BLANK);
 
 			cookie.setMaxAge(0);
-			cookie.setPath("/");
+			cookie.setPath(StringPool.SLASH);
 
 			CookieKeys.addCookie(res, cookie);
 
 			cookie = new Cookie(CookieKeys.PASSWORD, StringPool.BLANK);
 
 			cookie.setMaxAge(0);
-			cookie.setPath("/");
+			cookie.setPath(StringPool.SLASH);
 
 			CookieKeys.addCookie(res, cookie);
 

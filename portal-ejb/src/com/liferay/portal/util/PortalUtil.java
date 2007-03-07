@@ -931,6 +931,10 @@ public class PortalUtil {
 				doAsUserId = _getDoAsUserId(req, doAsUserId);
 
 				if (doAsUserId != null) {
+					if (_log.isDebugEnabled()) {
+						_log.debug("Impersonating user " + doAsUserId); 
+					}
+
 					return doAsUserId;
 				}
 			}

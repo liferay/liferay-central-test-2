@@ -41,15 +41,29 @@ String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:on
 String height = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:height"), "400");
 String width = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:width"), "640");
 
-String editorURL = themeDisplay.getPathJavaScript() + "/editor/editor.jsp?p_l_id=" + plid + "&p_main_path=" + themeDisplay.getPathMain() + "&editorImpl=" + editorImpl;
+StringMaker sm = new StringMaker();
+
+sm.append(themeDisplay.getPathJavaScript());
+sm.append("/editor/editor.jsp?p_l_id=");
+sm.append(plid);
+sm.append("&p_main_path=");
+sm.append(themeDisplay.getPathMain());
+sm.append("&doAsUserId=");
+sm.append(themeDisplay.getDoAsUserId());
+sm.append("&editorImpl=");
+sm.append(editorImpl);
 
 if (Validator.isNotNull(initMethod)) {
-	editorURL += "&initMethod=" + initMethod;
+	sm.append("&initMethod=");
+	sm.append(initMethod);
 }
 
 if (Validator.isNotNull(onChangeMethod)) {
-	editorURL += "&onChangeMethod=" + onChangeMethod;
+	sm.append("&onChangeMethod=");
+	sm.append(onChangeMethod);
 }
+
+String editorURL = sm.toString();
 %>
 
 <iframe frameborder="0" height="<%= height %>" id="<%= name %>" name="<%= name %>" scrolling="no" src="<%= editorURL %>" width="<%= width %>"></iframe>

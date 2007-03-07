@@ -233,52 +233,6 @@ public class LoginAction extends Action {
 		}
 	}
 
-	public static void processAuthenticatedUser(
-			HttpServletRequest req, HttpServletResponse res, Company company,
-			String login, String userId, String password, boolean rememberMe)
-		throws EncryptorException, PortalException, SystemException {
-
-		HttpSession ses = req.getSession();
-
-		User user = UserLocalServiceUtil.getUserById(userId);
-
-		ses.setAttribute("j_username", userId);
-		ses.setAttribute("j_password", user.getPassword());
-		ses.setAttribute("j_remoteuser", userId);
-
-		ses.setAttribute(WebKeys.USER_PASSWORD, password);
-
-		Cookie idCookie = new Cookie(
-			CookieKeys.ID,
-			UserLocalServiceUtil.encryptUserId(userId));
-
-		idCookie.setPath(StringPool.SLASH);
-
-		Cookie passwordCookie = new Cookie(
-			CookieKeys.PASSWORD,
-			Encryptor.encrypt(company.getKeyObj(), password));
-
-		passwordCookie.setPath(StringPool.SLASH);
-
-		if (rememberMe) {
-			idCookie.setMaxAge(CookieKeys.MAX_AGE);
-			passwordCookie.setMaxAge(CookieKeys.MAX_AGE);
-		}
-		else {
-			idCookie.setMaxAge(0);
-			passwordCookie.setMaxAge(0);
-		}
-
-		Cookie loginCookie = new Cookie(CookieKeys.LOGIN, login);
-
-		loginCookie.setPath(StringPool.SLASH);
-		loginCookie.setMaxAge(CookieKeys.MAX_AGE);
-
-		CookieKeys.addCookie(res, idCookie);
-		CookieKeys.addCookie(res, passwordCookie);
-		CookieKeys.addCookie(res, loginCookie);
-	}
-
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
