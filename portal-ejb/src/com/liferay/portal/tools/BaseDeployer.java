@@ -442,6 +442,22 @@ public class BaseDeployer {
 			File webXML, File srcFile, String displayName)
 		throws Exception {
 
+		if (!webXML.exists()) {
+			String content = "";
+
+			content += "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+			content +=
+				"<!DOCTYPE web-app PUBLIC \"-//Sun Microsystems, Inc.//" +
+					"DTD Web Application 2.3//EN\" " +
+						"\"http://java.sun.com/dtd/web-app_2_3.dtd\">\n\n";
+			content += "<web-app>\n";
+			content += "</web-app>";
+
+			FileUtil.write(webXML, content);
+
+			System.out.println("  Adding Servlet " + webXML);
+		}
+
 		String content = FileUtil.read(webXML);
 
 		int pos = content.indexOf("<web-app");
@@ -482,7 +498,7 @@ public class BaseDeployer {
 		FileUtil.write(webXML, newContent, true);
 
 		System.out.println(
-			"  Modifying Servlet " + webXmlVersion + " " + webXML );
+			"  Modifying Servlet " + webXmlVersion + " " + webXML);
 	}
 
 	protected String baseDir;

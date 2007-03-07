@@ -95,7 +95,7 @@ means you can find the files for the Classic theme in
 For convenience, the root-path attribute can be referenced in the rest of the
 theme element as ${root-path}.
 
-The default value is "/${theme-id}".
+The default value is "/".
 -->
 <!ELEMENT root-path (#PCDATA)>
 

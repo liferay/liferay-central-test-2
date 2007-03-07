@@ -1,37 +1,141 @@
 <?xml version="1.0"?>
 
-<project name="themes" basedir="." default="deploy">
+<project name="themes" basedir="." default="deploy" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="../build-common.xml" />
 
-	<target name="deploy">
-		<java
-			classname="com.liferay.portal.tools.ThemeDeployer"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
+	<target name="clean">
+		<antcall target="loop-modules">
+			<param name="loop.modules.cmd" value="clean" />
+		</antcall>
+	</target>
 
-			<!-- Required Arguments -->
+	<target name="clean-module">
+		<delete includeemptydirs="true" quiet="true" failonerror="false">
+			<fileset
+				dir="${module.name}.war"
+				excludes="_diffs/**,WEB-INF/**"
+			/>
+		</delete>
+	</target>
 
-			<jvmarg value="-Ddeployer.base.dir=./" />
-			<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
-			<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
-			<jvmarg value="-Ddeployer.theme.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-theme.tld" />
-			<jvmarg value="-Ddeployer.util.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-util.tld" />
-			<jvmarg value="-Ddeployer.unpack.war=true" />
+	<target name="war" depends="merge">
+		<antcall target="loop-modules">
+			<param name="loop.modules.cmd" value="war" />
+		</antcall>
+	</target>
 
-			<!-- Optional Arguments -->
+	<target name="war-module">
+		<jar
+			basedir="${module.name}.war"
+			destfile="${project.dir}/${module.name}-${lp.version.file.name}.war"
+		/>
+	</target>
 
-			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
+	<target name="deploy" depends="merge">
+		<antcall target="loop-modules">
+			<param name="loop.modules.cmd" value="deploy" />
+		</antcall>
+	</target>
 
-			<!-- Dependent Libraries -->
+	<target name="deploy-module">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
 
-			<arg value="${project.dir}/util-java/util-java.jar" />
-			<arg value="${project.dir}/util-taglib/util-taglib.jar" />
+		<jar
+			basedir="${module.name}.war"
+			destfile="${tstamp.value}"
+			excludes="_diffs/**"
+		/>
 
-			<!-- Specific WARs -->
+		<move file="${tstamp.value}" tofile="${auto.deploy.dir}/${module.name}.war" />
+	</target>
 
-			<arg line="${deploy.specific.wars}" />
-		</java>
+	<target name="loop-modules">
+		<for param="module.name">
+			<path>
+				<dirset dir="." includes="*.war" />
+			</path>
+			<sequential>
+				<antelope:stringutil string="@{module.name}" property="module.name.beginindex">
+					<lastindexof string="${file.separator}" />
+				</antelope:stringutil>
+
+				<math
+					datatype="int"
+					operand1="${module.name.beginindex}"
+					operand2="1"
+					operation="+"
+					result="module.name.beginindex"
+				/>
+
+				<antelope:stringutil string="@{module.name}" property="module.name.endindex">
+					<lastindexof string=".war" />
+				</antelope:stringutil>
+
+				<antelope:stringutil string="@{module.name}" property="module.name">
+					<substring beginindex="${module.name.beginindex}" endindex="${module.name.endindex}" />
+				</antelope:stringutil>
+
+				<if>
+					<or>
+						<equals arg1="${deploy.specific.wars}" arg2="" />
+						<antelope:contains string="${deploy.specific.wars}" substring="${module.name}" />
+					</or>
+					<then>
+						<if>
+							<equals arg1="${loop.modules.cmd}" arg2="clean" />
+							<then>
+								<antcall target="clean-module" />
+							</then>
+							<elseif>
+								<equals arg1="${loop.modules.cmd}" arg2="war" />
+								<then>
+									<antcall target="war-module" />
+								</then>
+							</elseif>
+							<elseif>
+								<equals arg1="${loop.modules.cmd}" arg2="deploy" />
+								<then>
+									<antcall target="deploy-module" />
+								</then>
+							</elseif>
+							<elseif>
+								<equals arg1="${loop.modules.cmd}" arg2="merge" />
+								<then>
+									<antcall target="merge-module" />
+								</then>
+							</elseif>
+						</if>
+					</then>
+				</if>
+			</sequential>
+		</for>
+	</target>
+
+	<target name="merge">
+		<antcall target="loop-modules">
+			<param name="loop.modules.cmd" value="merge" />
+		</antcall>
+	</target>
+
+	<target name="merge-module">
+		<copy todir="${module.name}.war">
+			<fileset
+				dir="${project.dir}/portal-web/docroot/html/themes/_common"
+				excludes="templates/init.vm"
+			/>
+		</copy>
+
+		<if>
+			<available file="${module.name}.war/_diffs" />
+			<then>
+				<copy todir="${module.name}.war" overwrite="yes">
+					<fileset
+						dir="${module.name}.war/_diffs"
+					/>
+				</copy>
+			</then>
+		</if>
 	</target>
 </project>

@@ -10,7 +10,7 @@
 	</target>
 
 	<target name="clean-module">
-		<delete file="../${module.name}.war" failonerror="false" />
+		<delete file="${project.dir}/${module.name}.war" failonerror="false" />
 		<delete dir="${module.name}.war/WEB-INF/classes/com" failonerror="false" />
 
 		<delete failonerror="false">
@@ -65,7 +65,7 @@
 
 		<copy
 			file="sample-spring-portlet.war"
-			tofile="../sample-spring-portlet-${lp.version.file.name}.war"
+			tofile="${project.dir}/sample-spring-portlet-${lp.version.file.name}.war"
 		/>
 	</target>
 
@@ -126,7 +126,7 @@
 
 		<war
 			basedir="${module.name}.war"
-			destfile="../${module.name}-${lp.version.file.name}.war"
+			destfile="${project.dir}/${module.name}-${lp.version.file.name}.war"
 			excludes="WEB-INF/web.xml*"
 			webxml="${module.name}.war/WEB-INF/web.xml"
 		/>
@@ -186,8 +186,8 @@
 	</target>
 
 	<target name="build-lang">
-		<ant dir="../portal-ejb" target="build-lang-cmd">
-			<property name="lang.dir" value="../portlets/sample-struts-portlet.war/WEB-INF/classes/content/test" />
+		<ant dir="${project.dir}/portal-ejb" target="build-lang-cmd">
+			<property name="lang.dir" value="${project.dir}/portlets/sample-struts-portlet.war/WEB-INF/classes/content/test" />
 			<property name="lang.file" value="Language" />
 		</ant>
 	</target>
