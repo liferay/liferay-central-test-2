@@ -36,7 +36,7 @@ String content = doc.get(LuceneFields.CONTENT);
 content = StringUtil.shorten(content, 200);
 content = StringUtil.highlight(content, keywords);
 
-long groupId = portletGroupId;
+long groupId = portletGroupId.longValue();
 String articleId = doc.get("articleId");
 
 String hitOwnerId = layout.getOwnerId();
