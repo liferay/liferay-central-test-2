@@ -184,13 +184,7 @@ Liferay.Dock = {
 		var dock = params.dock;
 		var dockList = params.dockList;
 
-		dockList.animate(
-			{
-			  opacity: 'toggle'
-			},
-			'slow',
-			'easein'
-		);
+		dockList.toggle();
 
 		dock.toggleClass('expanded');
 	},
