@@ -211,7 +211,16 @@ public class ColorSchemeImpl implements ColorScheme {
 	}
 
 	public String getSetting(String key) {
-		return _settingsProperties.getProperty(key);
+		//return _settingsProperties.getProperty(key);
+
+		// FIX ME
+
+		if (key.endsWith("-bg")) {
+			return "#FFFFFF";
+		}
+		else {
+			return "#000000";
+		}
 	}
 
 	public String getBodyBg() {
