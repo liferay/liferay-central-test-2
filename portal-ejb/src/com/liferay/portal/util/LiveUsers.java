@@ -337,7 +337,6 @@ public class LiveUsers {
 					userTracker.getModifiedDate(), userTracker.getRemoteAddr(),
 					userTracker.getRemoteHost(), userTracker.getUserAgent(),
 					userTracker.getPaths());
-				}
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
