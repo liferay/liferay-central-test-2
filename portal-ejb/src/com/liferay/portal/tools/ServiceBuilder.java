@@ -4347,13 +4347,15 @@ public class ServiceBuilder {
 
 		// Methods
 
-		sm.append("public List dynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {");
-		sm.append("return " + entity.getName() + "Util.findWithDynamicQuery(queryInitializer);");
-		sm.append("}");
+		if (entity.hasColumns()) {
+			sm.append("public List dynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {");
+			sm.append("return " + entity.getName() + "Util.findWithDynamicQuery(queryInitializer);");
+			sm.append("}");
 
-		sm.append("public List dynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {");
-		sm.append("return " + entity.getName() + "Util.findWithDynamicQuery(queryInitializer, begin, end);");
-		sm.append("}");
+			sm.append("public List dynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {");
+			sm.append("return " + entity.getName() + "Util.findWithDynamicQuery(queryInitializer, begin, end);");
+			sm.append("}");
+		}
 
 		// Class close brace
 
