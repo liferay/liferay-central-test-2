@@ -611,9 +611,7 @@ Liferay.Util = {
 			var current = _$J(this);
 			var type = this.type || "text";
 			
-			if (!current.is("." + type)) {
-				current.addClass(type);
-			}
+			current.addClass(type);
 		});
 	},
 	

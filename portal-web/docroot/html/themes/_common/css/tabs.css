@@ -37,10 +37,10 @@
 	padding: 0.15em 1em;
 }
 
-.ie6 .tabs li {
+.ie .tabs li {
 	line-height: 2.35;
 }
 
-.ie6 .tabs li.current {
+.ie .tabs li.current {
 	top: 0.2em;
 }

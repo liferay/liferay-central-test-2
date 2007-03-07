@@ -196,6 +196,11 @@ font {
 	top: 45px;
 }
 
+/* ---------- Tabs ---------- */
+.ie .tabs li {
+	line-height: 2.25;
+}
+
 /* ---------- Dock with Javascript ---------- */
 
 .js .lfr-dock h2 {

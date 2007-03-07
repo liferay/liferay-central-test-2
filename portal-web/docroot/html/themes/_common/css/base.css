@@ -147,10 +147,15 @@ code, pre {
 }
 
 .popup-title {
+	font-size: 1.8em;
+	font-weight: bold;
+	padding: 0.25em;
 	width: 90%;
 }
 
 .popup-close {
+	padding: 0.5em;
+	text-align: right;
 	width: 5%;
 }
 

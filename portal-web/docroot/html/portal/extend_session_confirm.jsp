@@ -53,9 +53,9 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		</tr>
 		<tr>
 			<td align="center" id="session_btns">
-				<input id="ok_btn" type="button" value="<%= LanguageUtil.get(pageContext, "ok") %>" onClick="extendSession(); Alerts.killAlert(this);">
+				<input class="button" id="ok_btn" type="button" value="<%= LanguageUtil.get(pageContext, "ok") %>" onClick="extendSession(); Alerts.killAlert(this);">
 
-				<input id="cancel_btn" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="Alerts.killAlert(this);">
+				<input class="button" id="cancel_btn" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="Alerts.killAlert(this);">
 			</td>
 		</tr>
 		</table>
