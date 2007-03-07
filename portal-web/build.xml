@@ -381,9 +381,12 @@
 		<for param="css.file">
 			<path>
 				<fileset
-					dir="docroot/html/themes/classic/css/"
-					includes="*.css"
+					dir="docroot/html/themes/_common/css"
 					excludes="custom.css,main.css"
+				/>
+				<fileset
+					dir="docroot/html/themes"
+					includes="**/_diffs/css/*.css"
 				/>
 			</path>
 			<sequential>

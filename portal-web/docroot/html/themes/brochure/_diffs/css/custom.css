@@ -1,4 +1,5 @@
 /* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+
 #wrapper {
 	width: 825px;
 }
@@ -29,6 +30,7 @@ font {
 }
 
 /* ---------- Banner ---------- */
+
 #banner {
 	background: transparent url(../images/common/banner_bg.png) no-repeat 100% 100%;
 	height: auto;
@@ -69,6 +71,7 @@ font {
 }
 
 /* ---------- Main navigation ---------- */
+
 #navigation {
 	background: url(../images/navigation/bg.png) no-repeat 0 0;
 	bottom: 0.5em;
@@ -138,6 +141,7 @@ font {
 }
 
 /* ---------- Portlet ---------- */
+
 .portlet {
 	background: transparent;
 }
@@ -185,6 +189,7 @@ font {
 }
 
 /* ---------- Page search ---------- */
+
 #page-search {
 	position: absolute;
 	right: 10px;
@@ -192,6 +197,7 @@ font {
 }
 
 /* ---------- Dock with Javascript ---------- */
+
 .js .lfr-dock h2 {
 	background-position: 100% -25px;
 	font-size: 1.1em;
@@ -209,6 +215,7 @@ font {
 }
 
 /* ---------- Footer ---------- */
+
 #footer {
 	background: #002F62 url(../images/common/footer.png) no-repeat 0 -50px;
 	padding-left: 3px;
