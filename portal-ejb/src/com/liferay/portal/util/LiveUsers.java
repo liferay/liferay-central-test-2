@@ -330,22 +330,23 @@ public class LiveUsers {
 
 		UserTracker userTracker = (UserTracker)sessionUsers.remove(sesId);
 
-		try {
-			if (userTracker != null) {
+		if (userTracker != null) {
+			try {
 				UserTrackerLocalServiceUtil.addUserTracker(
 					userTracker.getCompanyId(), userTracker.getUserId(),
 					userTracker.getModifiedDate(), userTracker.getRemoteAddr(),
 					userTracker.getRemoteHost(), userTracker.getUserAgent(),
 					userTracker.getPaths());
+				}
 			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e.getMessage());
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e.getMessage());
+				}
 			}
-		}
 
-		_removeUserTracker(userId, userTracker);
+			_removeUserTracker(userId, userTracker);
+		}
 	}
 
 	private Map _updateGroupStatus(String userId, boolean signedIn)
