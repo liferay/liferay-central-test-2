@@ -520,11 +520,16 @@
 					/>
 				</copy>
 
-				<copy todir="@{module.name}" overwrite="yes">
-					<fileset
-						dir="@{module.name}/_diffs"
-					/>
-				</copy>
+				<if>
+					<available file="@{module.name}/_diffs" />
+					<then>
+						<copy todir="@{module.name}" overwrite="yes">
+							<fileset
+								dir="@{module.name}/_diffs"
+							/>
+						</copy>
+					</then>
+				</if>
 			</sequential>
 		</for>
 	</target>
