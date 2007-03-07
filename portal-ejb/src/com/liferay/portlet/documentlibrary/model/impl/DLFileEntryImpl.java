@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.model.impl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.util.FileUtil;
 import com.liferay.util.NullSafeProperties;
 import com.liferay.util.PropertiesUtil;
 
@@ -64,6 +65,16 @@ public class DLFileEntryImpl
 		}
 
 		return folder;
+	}
+
+	public String getTitleWithExtension() {
+		String titleWithExtension = getTitle();
+
+		if (FileUtil.getExtension(titleWithExtension) == null) {
+			titleWithExtension += FileUtil.getExtension(getName());
+		}
+
+		return titleWithExtension;
 	}
 
 	public String getExtraSettings() {

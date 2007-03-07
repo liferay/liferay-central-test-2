@@ -23,6 +23,7 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -270,27 +271,42 @@ public class FileUtil {
 		return out.toByteArray();
 	}
 
+	public static String getExtension(String fileName) {
+		if (fileName == null) {
+			return null;
+		}
+
+		int pos = fileName.lastIndexOf(StringPool.PERIOD);
+
+		if (pos != -1) {
+			return fileName.substring(pos + 1, fileName.length());
+		}
+		else {
+			return null;
+		}
+	}
+
 	public static String getPath(String fullFileName) {
-		int pos = fullFileName.lastIndexOf("/");
+		int pos = fullFileName.lastIndexOf(StringPool.SLASH);
 
 		if (pos == -1) {
-			pos = fullFileName.lastIndexOf("\\");
+			pos = fullFileName.lastIndexOf(StringPool.BACK_SLASH);
 		}
 
 		String shortFileName = fullFileName.substring(0, pos);
 
 		if (Validator.isNull(shortFileName)) {
-			return "/";
+			return StringPool.SLASH;
 		}
 
 		return shortFileName;
 	}
 
 	public static String getShortFileName(String fullFileName) {
-		int pos = fullFileName.lastIndexOf("/");
+		int pos = fullFileName.lastIndexOf(StringPool.SLASH);
 
 		if (pos == -1) {
-			pos = fullFileName.lastIndexOf("\\");
+			pos = fullFileName.lastIndexOf(StringPool.BACK_SLASH);
 		}
 
 		String shortFileName =
@@ -376,7 +392,8 @@ public class FileUtil {
 
 		String s = new String(bytes);
 
-		return StringUtil.replace(s, "\r\n", "\n");
+		return StringUtil.replace(
+			s, StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
 	}
 
 	public static File[] sortFiles(File[] files) {
@@ -400,7 +417,8 @@ public class FileUtil {
 	}
 
 	public static String replaceSeparator(String fileName) {
-		return StringUtil.replace(fileName, '\\', "/");
+		return StringUtil.replace(
+			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 	}
 
 	public static List toList(Reader reader) {

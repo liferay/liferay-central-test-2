@@ -23,6 +23,7 @@
 package com.liferay.util.servlet.fileupload;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.SystemProperties;
 
@@ -79,18 +80,7 @@ public class LiferayFileItem extends DiskFileItem {
 	}
 
 	public String getFileNameExtension() {
-		if (_fileName == null) {
-			return null;
-		}
-
-		int pos = _fileName.lastIndexOf(".");
-
-		if (pos != -1) {
-			return _fileName.substring(pos + 1, _fileName.length());
-		}
-		else {
-			return null;
-		}
+		return FileUtil.getExtension(_fileName);
 	}
 
 	public String getString() {

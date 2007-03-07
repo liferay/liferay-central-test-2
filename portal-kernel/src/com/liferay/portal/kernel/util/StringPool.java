@@ -96,6 +96,8 @@ public class StringPool {
 
 	public static final String RETURN = "\r";
 
+	public static final String RETURN_NEW_LINE = "\r\n";
+
 	public static final String SEMICOLON = ";";
 
 	public static final String SLASH = FORWARD_SLASH;

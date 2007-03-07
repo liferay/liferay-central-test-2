@@ -141,7 +141,8 @@ public class GetFileAction extends PortletAction {
 					companyId, userId, folderId, name);
 			}
 
-			ServletResponseUtil.sendFile(res, fileEntry.getTitle(), is);
+			ServletResponseUtil.sendFile(
+				res, fileEntry.getTitleWithExtension(), is);
 		}
 		catch (PortalException pe) {
 			res.sendError(HttpServletResponse.SC_NOT_FOUND, pe.getMessage());
