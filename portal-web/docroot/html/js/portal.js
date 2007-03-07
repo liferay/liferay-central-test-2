@@ -719,7 +719,7 @@ var Navigation = {
 
 			AjaxUtil.request(url, {
 				onComplete: function() {
-					window.location = themeDisplay.getURLHome();
+					window.location = themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + params.ownerId + ".1";
 				}
 			});
 		}
