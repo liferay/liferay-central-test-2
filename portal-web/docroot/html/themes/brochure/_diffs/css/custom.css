@@ -1,0 +1,225 @@
+/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+#wrapper {
+	width: 825px;
+}
+
+#content-wrapper {
+	background: #F2F2F2;
+	border-left: 1px solid #D7D7D7;
+	border-right: 1px solid #D7D7D7;
+	font-size: 1.2em;
+	margin: 0 3px;
+	margin-top: -5px;
+	padding: 5px;
+}
+
+#content-wrapper.login {
+	padding-top: 10px;
+}
+
+font {
+	font-size: 1em !important;
+}
+
+#column-1 {
+	border-right: 1px solid #D7D7D7;
+}
+
+#layout-grid .lfr-column {
+}
+
+/* ---------- Banner ---------- */
+#banner {
+	background: transparent url(../images/common/banner_bg.png) no-repeat 100% 100%;
+	height: auto;
+	margin-bottom: 0;
+	padding-right: 5px;
+	position: relative;
+}
+
+#banner-inner {
+	background: transparent url(../images/common/banner_bg.png) no-repeat 0 100%;
+	min-height: 7em;
+	padding: 1em 0.6em 0.5em;
+}
+
+#banner .logo {
+	background: url(../images/custom/liferay-logo.png) no-repeat;
+	display: block;
+	float: none;
+	font-size: 0;
+	height: 49px;
+	margin-bottom: 20px;
+	margin-left: 0.5em;
+	padding: 0;
+	text-indent: -9999em;
+	width: auto;
+}
+
+#banner .logo a {
+	text-decoration: none;
+}
+
+.js.ie #banner {
+	z-index: 1;
+}
+
+.ie6 #banner .logo {
+	zoom: 1;
+}
+
+/* ---------- Main navigation ---------- */
+#navigation {
+	background: url(../images/navigation/bg.png) no-repeat 0 0;
+	bottom: 0.5em;
+	height: 25px;
+	left: 5px;
+	margin: 1em auto 0.5em;
+	padding: 0;
+	position: relative;
+	width: 99%;
+}
+
+#navigation ul {
+	background: url(../images/navigation/bg.png) no-repeat 100% 100%;
+	float: left;
+	height: 25px;
+	left: 0;
+	padding: 0;
+	position: static;
+	top: 0;
+	width: 100%;
+}
+
+.ie6 #navigation, .ie6 #navigation ul {
+	height: 25px;
+}
+
+#navigation li {
+	display: inline;
+	float: left;
+	margin: 0 1em;
+	padding: 0;
+}
+
+#navigation li a {
+	background: url() no-repeat 0 50%;
+	color: #fff;
+	display: block;
+	float: left;
+	font-weight: bold;
+	height: 15px;
+	padding: 5px 10px;
+	text-decoration: none;
+}
+
+#navigation li a:hover {
+	background: url(../images/navigation/bg_hover.png) repeat-x;
+	border-left: 1px solid #1D4A81;
+	border-right: 1px solid #1D4A81;
+	padding-left: 9px;
+	padding-right: 9px;
+}
+
+#navigation li.selected a {
+	background: url(../images/navigation/bg_selected.png) repeat-x;
+	border-left: 1px solid #1D4A81;
+	border-right: 1px solid #1D4A81;
+}
+
+#navigation li.selected a:hover {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.ie #navigation li a {
+	padding-bottom: 3px;
+	padding-top: 5px;
+}
+
+/* ---------- Portlet ---------- */
+.portlet {
+	background: transparent;
+}
+
+.portlet .portlet-topper {
+	background: #124E8E;
+	color: #fff;
+}
+
+.portlet .portlet-title, .portlet .portlet-icons {
+	background: none;
+}
+
+.portlet .portlet-title {
+	font-size: 1.1em;
+	padding: 2px 10px;
+}
+
+.portlet .portlet-content {
+	background: none;
+	border: none;
+}
+
+.portlet-icons {
+	margin: 1px;
+	position: absolute;
+	right: 3px;
+	text-align: right;
+	top: 0;
+}
+
+.ie6 .portlet .portlet-topper {
+	position: static;
+	z-index: 0;
+}
+
+.ie6 .portlet .portlet-title {
+	float: left;
+}
+
+.ie6 .portlet .portlet-icons {
+	float: right;
+	margin-top: 1px;
+	position: static;
+}
+
+/* ---------- Page search ---------- */
+#page-search {
+	position: absolute;
+	right: 10px;
+	top: 45px;
+}
+
+/* ---------- Dock with Javascript ---------- */
+.js .lfr-dock h2 {
+	background-position: 100% -25px;
+	font-size: 1.1em;
+}
+
+.js .lfr-dock h2 span {
+	color: #0C3163;
+	font-size: 1.1em;
+	padding: 0.4em 0.5em 0.35em 2.5em;
+	text-align: left;
+}
+
+.ie.js .lfr-dock h2 {
+	height: 25px;
+}
+
+/* ---------- Footer ---------- */
+#footer {
+	background: #002F62 url(../images/common/footer.png) no-repeat 0 -50px;
+	padding-left: 3px;
+}
+
+#footer .language {
+	background: #002F62 url(../images/common/footer.png) no-repeat 100% 0;
+	padding: 0.8em 0.5em 0.25em;
+	text-align: right;
+}
+
+#footer .language a {
+	margin-right: 5px;
+}
