@@ -42,7 +42,7 @@ public class LayoutTemplateExplodedTomcatDeployer
 		throws AutoDeployException {
 
 		try {
-			deployDirectory(webAppDir, getDisplayName(contextFile));
+			deployDirectory(webAppDir, getDisplayName(contextFile), false);
 		}
 		catch (Exception e) {
 			throw new AutoDeployException(e);
