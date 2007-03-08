@@ -10,9 +10,7 @@
 	$theme.include($top_head_include)
 
 	#css($css_main_file)
-
 	#js($js_main_file)
-
 </head>
 
 <body>
@@ -21,36 +19,37 @@ $theme.include($top_warning_include)
 
 <div id="wrapper">
 	<div id="banner">
-		<div id="banner-inner">    
+		<div id="banner-inner">
 			<h1 class="logo">
 				<a href="$company_url">$company_name</a>
 			</h1>
+
 			<div id="page-search">
 				$theme.journalContentSearch()
 			</div>
-			
+
 			#parse("$full_templates_path/dock.vm")
-			
+
 			#if ( $has_navigation )
 				#parse("$full_templates_path/navigation.vm")
 			#end
 		</div>
 	</div>
 
-	
 	#if ( $selectable )
 		$theme.include($content_include)
 	#else
-	<div id="content-wrapper" class="login">
-		$portletDisplay.recycle()
+		<div id="content-wrapper" class="login">
+			$portletDisplay.recycle()
 
-		$portletDisplay.setTitle($the_title)
+			$portletDisplay.setTitle($the_title)
 
-		$theme.wrapPortlet("portlet.vm", $content_include)
-	</div>
+			$theme.wrapPortlet("portlet.vm", $content_include)
+		</div>
 	#end
+
 	<div id="footer">
-	<p class="language">$theme.language()</p>
+		<p class="language">$theme.language()</p>
 	</div>
 </div>
 
