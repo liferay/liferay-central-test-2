@@ -106,6 +106,8 @@ public class PortletKeys {
 
 	public static final String TAGS_COMPILER = "103";
 
+	public static final String UPDATE_MANAGER = "104";
+
 	public static final String WIKI = "36";
 
 	public static final String WORKFLOW = "93";

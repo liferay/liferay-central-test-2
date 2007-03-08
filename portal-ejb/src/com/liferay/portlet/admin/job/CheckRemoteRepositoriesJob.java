@@ -20,48 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portlet.admin.job;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Layout;
+import com.liferay.portal.job.IntervalJob;
+import com.liferay.portal.plugin.PluginPackageException;
 import com.liferay.portal.plugin.PluginPackageUtil;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.admin.util.OmniadminUtil;
+import com.liferay.util.Time;
+
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
 /**
- * <a href="PortalUtil_IW.java.html"><b><i>View Source</i></b></a>
+ * <a href="CheckRemoteRepositoriesJob.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- *
+ * @author Jorge Ferrer
  */
-public class PortalUtil_IW {
-
-	public static PortalUtil_IW getInstance() {
-		return _instance;
+public class CheckRemoteRepositoriesJob implements IntervalJob {
+	public long getInterval() {
+		return Time.DAY;
 	}
 
-	public static String getLayoutURL(Layout layout, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return PortalUtil.getLayoutURL(layout, themeDisplay);
+	public void execute(JobExecutionContext jobExecutionContext)
+		throws JobExecutionException {
+		try {
+			PluginPackageUtil.reloadRepositories();
+		}
+		catch (PluginPackageException e) {
+			throw new JobExecutionException(e);
+		}
 	}
-
-	public static String getLayoutTarget(Layout layout) {
-		return PortalUtil.getLayoutTarget(layout);
-	}
-
-	public static boolean isUpdateAvailable() {
-		return PluginPackageUtil.isUpdateAvailable();
-	}
-
-	public static boolean isOmniadmin(String userId) {
-		return OmniadminUtil.isOmniadmin(userId);
-	}
-
-	private PortalUtil_IW() {
-	}
-
-	private static PortalUtil_IW _instance = new PortalUtil_IW();
 
 }

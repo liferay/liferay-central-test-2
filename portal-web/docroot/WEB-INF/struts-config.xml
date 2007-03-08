@@ -1362,6 +1362,14 @@
 			<forward name="portlet.tagged_content.view" path="portlet.tagged_content.view" />
 		</action>
 
+		<!-- Update Manager -->
+
+		<action path="/update_manager/view" forward="portlet.update_manager.view" />
+
+		<action path="/update_manager/edit_server" type="com.liferay.portlet.admin.action.EditServerAction">
+			<forward name="portlet.admin.error" path="portlet.admin.error" />
+		</action>
+
 		<!-- Weather -->
 
 		<action path="/weather/edit" type="com.liferay.portlet.weather.action.EditPreferencesAction">

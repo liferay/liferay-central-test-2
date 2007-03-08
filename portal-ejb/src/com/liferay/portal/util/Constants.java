@@ -159,4 +159,8 @@ public interface Constants {
 	public static final String MYFACES_CONTEXT_FACTORY =
 		"com.liferay.util.jsf.apache.myfaces.context.MyFacesContextFactoryImpl";
 
+	// Plugin management
+
+	public static final String DEPLOY_TO_PREFIX = "DEPLOY_TO__";
+
 }

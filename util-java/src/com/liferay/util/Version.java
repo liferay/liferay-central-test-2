@@ -36,6 +36,8 @@ import java.util.StringTokenizer;
  */
 public class Version implements Comparable {
 
+	public static final String UNKNOWN = "unknown";
+
 	public static Version getInstance(String version) {
 		Version versionObj = (Version)_versions.get(version);
 
@@ -144,10 +146,20 @@ public class Version implements Comparable {
 
 	public int compareTo(Object obj) {
 		if ((obj == null) || (!(obj instanceof Version))) {
-			return -1;
+			return 1;
 		}
 
 		Version version = (Version)obj;
+
+		// Unknown is always considered a lower version
+
+		if (version.toString().equals(UNKNOWN)) {
+			return 1;
+		}
+
+		if (toString().equals(UNKNOWN)) {
+			return -1;
+		}
 
 		int result = _compareVersionFragments(_major, version.getMajor());
 
@@ -176,6 +188,11 @@ public class Version implements Comparable {
 		}
 
 		Version version = (Version)obj;
+
+		if (version.toString().equals(UNKNOWN) ||
+			(toString().equals(UNKNOWN))) {
+			return false;
+		}
 
 		return toString().equals(version.toString());
 	}

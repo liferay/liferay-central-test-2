@@ -24,6 +24,10 @@ $theme.include($top_warning_include)
 		</h1>
 
 		#parse("$full_templates_path/dock.vm")
+
+		#if ( $update_available_url )
+			<a class="update-available" href="$update_available_url">#language("updates-available")</a>
+		#end
 	</div>
 
 	#if ( $has_navigation )

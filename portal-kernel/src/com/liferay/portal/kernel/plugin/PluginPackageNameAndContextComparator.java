@@ -20,48 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.kernel.plugin;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.plugin.PluginPackageUtil;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.admin.util.OmniadminUtil;
+import java.util.Comparator;
 
 /**
- * <a href="PortalUtil_IW.java.html"><b><i>View Source</i></b></a>
+ * <a href="PluginPackageNameAndContextComparator.java.html"><b>
+ * <i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- *
+ * @author Jorge Ferrer
  */
-public class PortalUtil_IW {
+public class PluginPackageNameAndContextComparator implements Comparator {
+	public int compare(Object obj1, Object obj2) {
+		if (!(obj1 instanceof PluginPackage)) {
+			return -1;
+		}
 
-	public static PortalUtil_IW getInstance() {
-		return _instance;
+		if (!(obj2 instanceof PluginPackage)) {
+			return 1;
+		}
+		PluginPackage package1 = (PluginPackage) obj1;
+		PluginPackage package2 = (PluginPackage) obj2;
+
+		int result = package1.getName().compareTo(package2.getName());
+
+		if (result == 0) {
+			result = package1.getContext().compareTo(package2.getContext());
+		}
+
+		return result;
 	}
-
-	public static String getLayoutURL(Layout layout, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return PortalUtil.getLayoutURL(layout, themeDisplay);
-	}
-
-	public static String getLayoutTarget(Layout layout) {
-		return PortalUtil.getLayoutTarget(layout);
-	}
-
-	public static boolean isUpdateAvailable() {
-		return PluginPackageUtil.isUpdateAvailable();
-	}
-
-	public static boolean isOmniadmin(String userId) {
-		return OmniadminUtil.isOmniadmin(userId);
-	}
-
-	private PortalUtil_IW() {
-	}
-
-	private static PortalUtil_IW _instance = new PortalUtil_IW();
 
 }

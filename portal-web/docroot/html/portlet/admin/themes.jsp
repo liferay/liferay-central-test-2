@@ -66,6 +66,8 @@ for (int i = 0; i < results.size(); i++) {
 
 	StringMaker sm = new StringMaker();
 
+	String context = (theme2.getPluginPackage().getContext() == null)?"":(" (" + theme2.getPluginPackage().getContext() + ")");
+
 	sm.append("<a href='");
 	sm.append(rowURL.toString());
 	sm.append("'>");
@@ -82,7 +84,7 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append("<span style=\"font-size: xx-small;\">");
 	sm.append(LanguageUtil.get(pageContext, "package"));
 	sm.append(": ");
-	sm.append((theme2.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(theme2.getPluginPackage().getName() + " (" + theme2.getPluginPackage().getModuleId() + ")"));
+	sm.append((theme2.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(theme2.getPluginPackage().getName() + context));
 	sm.append("<br>");
 	sm.append(LanguageUtil.get(pageContext, "color-schemes"));
 	sm.append(": ");

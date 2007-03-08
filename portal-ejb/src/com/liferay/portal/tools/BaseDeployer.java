@@ -22,7 +22,11 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.plugin.PluginPackageUtil;
+import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
@@ -38,12 +42,18 @@ import com.liferay.util.ant.WarTask;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
@@ -192,9 +202,64 @@ public class BaseDeployer {
 				}
 
 				if (deploy) {
+					PluginPackage pluginPackage = _readPluginPackage(srcFile);
+
 					System.out.println("\nDeploying " + srcFile.getName());
 
-					String deployDir = srcFile.getName();
+					String deployDir = null;
+					String displayName = null;
+					boolean overwrite = false;
+					String preliminaryContext = null;
+
+					// File names starting with DEPLOY_TO_PREFIX should
+					// use the filename after the prefix as the deployment
+					//  context
+
+					if (srcFile.getName().startsWith(
+						Constants.DEPLOY_TO_PREFIX)) {
+						displayName = srcFile.getName().substring(
+							Constants.DEPLOY_TO_PREFIX.length(),
+								srcFile.getName().length() - 4);
+
+						preliminaryContext = displayName;
+
+						overwrite = true;
+					}
+
+					if (preliminaryContext == null) {
+						preliminaryContext = getDisplayName(srcFile);
+					}
+
+					if (pluginPackage != null) {
+
+						if (!PluginPackageUtil.isCurrentVersionSupported(
+								pluginPackage.getLiferayVersions())) {
+
+							throw new AutoDeployException(
+								srcFile.getName() + " does not support this " +
+									"version of Liferay");
+						}
+
+						if (displayName == null) {
+							displayName =
+								pluginPackage.getRecommendedDeploymentContext();
+						}
+						if (Validator.isNull(displayName)) {
+							displayName = getDisplayName(srcFile);
+						}
+
+						pluginPackage.setContext(displayName);
+						PluginPackageUtil.updateInstallingPluginPackage(
+							preliminaryContext, pluginPackage);
+
+					}
+
+					if (displayName != null) {
+						deployDir = displayName + ".war";
+					}
+					else {
+						deployDir = srcFile.getName();
+					}
 
 					if (appServerType.equals("jetty") ||
 						appServerType.equals("oc4j") ||
@@ -210,13 +275,46 @@ public class BaseDeployer {
 
 					deployDir = destDir + "/" + deployDir;
 
-					if (srcFile.isDirectory()) {
-						deployDirectory(
-							srcFile, new File(deployDir),
-							getDisplayName(srcFile));
-					}
-					else {
-						deployFile(srcFile, new File(deployDir));
+					try {
+						PluginPackage previousPluginPackage =
+							_readPreviousPluginPackage(deployDir);
+
+						if (previousPluginPackage != null) {
+							System.out.println(
+								"Updating " + pluginPackage.getName() + " from "
+									+ "version " +
+										previousPluginPackage.getVersion()
+											+ " to version " +
+													pluginPackage.getVersion());
+
+							if (pluginPackage.isLaterVersionThan(
+								previousPluginPackage)) {
+
+								overwrite = true;
+							}
+						}
+
+						if (srcFile.isDirectory()) {
+							deployDirectory(
+								srcFile, new File(deployDir),
+								displayName, overwrite);
+						}
+						else {
+							boolean deployed = deployFile(
+								srcFile, new File(deployDir), displayName,
+								overwrite);
+							if (!deployed) {
+								PluginPackageUtil.endPluginPackageInstallation(
+									pluginPackage.getContext());
+							}
+						}
+
+					} catch (Exception e) {
+						if (pluginPackage != null) {
+							PluginPackageUtil.endPluginPackageInstallation(
+								pluginPackage.getContext());
+						}
+						throw e;
 					}
 				}
 			}
@@ -226,14 +324,15 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void deployDirectory(File srcFile, String displayName)
+	protected void deployDirectory(
+		File srcFile, String displayName, boolean override)
 		throws Exception {
 
-		deployDirectory(srcFile, null, displayName);
+		deployDirectory(srcFile, null, displayName, override);
 	}
 
 	protected void deployDirectory(
-			File srcFile, File deployDir, String displayName)
+			File srcFile, File deployDir, String displayName, boolean overwrite)
 		throws Exception {
 
 		copyJars(srcFile);
@@ -261,7 +360,7 @@ public class BaseDeployer {
 			}
 			else {
 
-				// The deployer only copies files that have been modified.
+				// The deployer might only copy files that have been modified.
 				// However, the deployer always copies and overwrites web.xml
 				// after the other files have been copied because application
 				// servers usually detect that a WAR has been modified based on
@@ -270,7 +369,7 @@ public class BaseDeployer {
 				excludes += "**/WEB-INF/web.xml";
 
 				CopyTask.copyDirectory(
-					srcFile, deployDir, StringPool.BLANK, excludes, false,
+					srcFile, deployDir, StringPool.BLANK, excludes, overwrite,
 					true);
 
 				CopyTask.copyDirectory(
@@ -293,9 +392,13 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void deployFile(File srcFile, File deployDir) throws Exception {
-		if (UpToDateTask.isUpToDate(srcFile, deployDir)) {
-			return;
+	protected boolean deployFile(
+		File srcFile, File deployDir, String displayName, boolean overwrite)
+		throws Exception {
+		if (!overwrite && UpToDateTask.isUpToDate(srcFile, deployDir)) {
+			System.out.println(deployDir + " is up to date. No deployment " +
+				"is necessary");
+			return false;
 		}
 
 		// Don't delete the deploy directory because it can cause problems in
@@ -309,9 +412,11 @@ public class BaseDeployer {
 
 		ExpandTask.expand(srcFile, tempDir);
 
-		deployDirectory(tempDir, deployDir, getDisplayName(srcFile));
+		deployDirectory(tempDir, deployDir, displayName, overwrite);
 
 		DeleteTask.deleteDirectory(tempDir);
+
+		return true;
 	}
 
 	protected String getDisplayName(File srcFile) {
@@ -505,6 +610,71 @@ public class BaseDeployer {
 
 		System.out.println(
 			"  Modifying Servlet " + webXmlVersion + " " + webXML);
+	}
+
+	private PluginPackage _readPreviousPluginPackage(String deployDir)
+		throws DocumentException {
+		PluginPackage pluginPackage = null;
+
+		if (new File(deployDir).exists()) {
+
+			File previousPluginPackageXml =
+				new File(deployDir + "/WEB-INF/liferay-plugin-package.xml");
+
+			if (previousPluginPackageXml.exists()) {
+				try {
+
+					InputStream is =
+						new FileInputStream(previousPluginPackageXml);
+
+					String xml = StringUtil.read(is);
+
+					pluginPackage = PluginPackageUtil.readPluginPackageXml(xml);
+				} catch (IOException ioe) {
+				}
+			}
+		}
+
+		return pluginPackage;
+	}
+
+	private PluginPackage _readPluginPackage(File file) {
+		ZipFile zipFile = null;
+
+		try {
+			zipFile = new ZipFile(file);
+
+			ZipEntry zipEntry =
+				zipFile.getEntry("WEB-INF/liferay-plugin-package.xml");
+			if (zipEntry == null) {
+				System.out.println(
+					file.getPath() + " does not have " +
+						"WEB-INF/liferay-plugin-package.xml");
+				return null;
+			}
+
+			InputStream is = zipFile.getInputStream(zipEntry);
+			String xml = StringUtil.read(is);
+			xml = XMLFormatter.fixProlog(xml);
+
+			return PluginPackageUtil.readPluginPackageXml(xml);
+		}
+		catch (IOException ioe) {
+			System.err.println(file.getPath() + ": " + ioe.toString());
+		}
+		catch (DocumentException de) {
+			System.err.println(file.getPath() + ": " + de.toString());
+		}
+		finally {
+			if (zipFile != null) {
+				try {
+					zipFile.close();
+				}
+				catch (IOException ioe) {
+				}
+			}
+		}
+		return null;
 	}
 
 	protected String baseDir;

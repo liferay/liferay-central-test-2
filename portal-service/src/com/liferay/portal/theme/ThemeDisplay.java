@@ -564,6 +564,14 @@ public class ThemeDisplay implements Serializable {
 		_urlSignOut = urlSignOut;
 	}
 
+	public PortletURL  getURLUpdateManager() {
+		return _urlUpdateManager;
+	}
+
+	public void setURLUpdateManager(PortletURL urlUpdateManager) {
+		_urlUpdateManager = urlUpdateManager;
+	}
+
 	public String getTilesTitle() {
 		return _tilesTitle;
 	}
@@ -721,6 +729,7 @@ public class ThemeDisplay implements Serializable {
 	private String _urlPortal = StringPool.BLANK;
 	private String _urlSignIn = StringPool.BLANK;
 	private String _urlSignOut = StringPool.BLANK;
+	private transient PortletURL _urlUpdateManager = null;
 	private String _tilesTitle = StringPool.BLANK;
 	private String _tilesContent = StringPool.BLANK;
 	private boolean _tilesSelectable;

@@ -67,6 +67,8 @@ for (int i = 0; i < results.size(); i++) {
 
 	StringMaker sm = new StringMaker();
 
+	String context = (layoutTemplate.getPluginPackage().getContext() == null)?"":(" (/" + layoutTemplate.getPluginPackage().getContext() + ")");
+
 	sm.append("<a href='");
 	sm.append(rowURL.toString());
 	sm.append("'>");
@@ -83,7 +85,7 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append("<span style=\"font-size: xx-small;\">");
 	sm.append(LanguageUtil.get(pageContext, "package"));
 	sm.append(": ");
-	sm.append((layoutTemplate.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(layoutTemplate.getPluginPackage().getName() + " (" + layoutTemplate.getPluginPackage().getModuleId() + ")"));
+	sm.append((layoutTemplate.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(layoutTemplate.getPluginPackage().getName() + context));
 	sm.append("</span>");
 
 	row.addText(sm.toString());

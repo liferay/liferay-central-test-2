@@ -118,7 +118,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 <input name="<portlet:namespace />pluginType" type="hidden" value="<%= pluginType %>">
 <input name="<portlet:namespace />progressId" type="hidden" value="">
 
-<h3><%= LanguageUtil.get(pageContext, "plugin-installer") %></h3>
+<h3><%= LanguageUtil.get(pageContext, "plugin-package-installer") %></h3>
 
 <liferay-ui:tabs
 	names="<%=tabs1Options%>"

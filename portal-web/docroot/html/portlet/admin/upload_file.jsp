@@ -33,11 +33,13 @@
 
 <br><br>
 
-<%= LanguageUtil.get(pageContext, "specify-an-optional-plugin-file-name") %>
+<%= LanguageUtil.get(pageContext, "specify-an-optional-context-for-deployment") %>
+
+<%= LanguageUtil.format(pageContext, "for-example-x", "<i>sample-jsp-portlet</i>") %>
 
 <br><br>
 
-<input class="form-text" name="<portlet:namespace />localDeployWARName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;">
+<input class="form-text" name="<portlet:namespace />deploymentContext" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;">
 
 <br><br>
 

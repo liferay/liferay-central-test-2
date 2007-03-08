@@ -34,18 +34,19 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * <a href="PluginPackageRepository.java.html"><b><i>View Source</i></b></a>
+ * <a href="RemotePluginPackageRepository.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Jorge Ferrer
  *
  */
-public class PluginPackageRepository {
+public class RemotePluginPackageRepository {
 
 	public static final String LOCAL_URL = "LOCAL_URL";
 
 	public static final String SETTING_USE_DOWNLOAD_URL = "use-download-url";
 
-	public PluginPackageRepository(String repositoryURL) {
+	public RemotePluginPackageRepository(String repositoryURL) {
 		_repositoryURL = repositoryURL;
 	}
 
@@ -53,8 +54,8 @@ public class PluginPackageRepository {
 		return _repositoryURL;
 	}
 
-	public List getPlugins() {
-		return _plugins;
+	public List getPluginPackages() {
+		return _pluginPackages;
 	}
 
 	public Properties getSettings() {
@@ -70,12 +71,26 @@ public class PluginPackageRepository {
 	}
 
 	public void addPluginPackage(PluginPackage pluginPackage) {
+
+		// Avoid duplicates
+
+		PluginPackage existingPackage =
+			(PluginPackage) _moduleIdIndex.get(pluginPackage.getModuleId());
+
+		if (existingPackage != null) {
+		   return;
+		}
+
 		_artifactURLIndex.put(pluginPackage.getArtifactURL(), pluginPackage);
+
 		_moduleIdIndex.put(pluginPackage.getModuleId(), pluginPackage);
+
 		_addToGroupAndArtifactIndex(
 			pluginPackage.getGroupId(), pluginPackage.getArtifactId(),
 			pluginPackage);
-		_plugins.add(pluginPackage);
+
+		_pluginPackages.add(pluginPackage);
+
 		_tags.addAll(pluginPackage.getTags());
 	}
 
@@ -100,7 +115,7 @@ public class PluginPackageRepository {
 		_removeFromGroupAndArtifactIndex(
 			pluginPackage.getGroupId(), pluginPackage.getArtifactId(),
 			pluginPackage.getModuleId());
-		_plugins.remove(pluginPackage);
+		_pluginPackages.remove(pluginPackage);
 	}
 
 	private void _addToGroupAndArtifactIndex(
@@ -142,7 +157,7 @@ public class PluginPackageRepository {
 	private Map _artifactURLIndex = new HashMap();
 	private Map _moduleIdIndex = new HashMap();
 	private Map _groupAndArtifactIndex = new HashMap();
-	private List _plugins = new ArrayList();
+	private List _pluginPackages = new ArrayList();
 	private Properties _settings = null;
 	private Set _tags = new TreeSet();
 

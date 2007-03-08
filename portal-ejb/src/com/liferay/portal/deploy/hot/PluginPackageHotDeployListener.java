@@ -26,10 +26,11 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.plugin.PluginPackageImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.Http;
-import com.liferay.util.xml.XMLSafeReader;
+import com.liferay.util.Version;
 
 import java.io.IOException;
 
@@ -38,10 +39,7 @@ import javax.servlet.ServletContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="PluginPackageHotDeployListener.java.html"><b><i>View Source</i></b>
@@ -54,6 +52,8 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 
 	public static PluginPackage readPluginPackage(ServletContext ctx)
 		throws DocumentException, IOException {
+
+		PluginPackage pluginPackage = null;
 
 		String servletContextName =  ctx.getServletContextName();
 
@@ -68,21 +68,24 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 							"contain a liferay-plugin-package.xml file");
 			}
 
-			return null;
+			pluginPackage =
+				new PluginPackageImpl(
+					servletContextName + StringPool.SLASH + servletContextName +
+						StringPool.SLASH + Version.UNKNOWN + StringPool.SLASH +
+							"war");
+
+			pluginPackage.setName(servletContextName);
+
+			return pluginPackage;
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Reading plugin package for " + servletContextName);
+			_log.info("Reading plugin package for " +
+				((servletContextName == null)?" root context":
+					servletContextName));
 		}
 
-		SAXReader reader = SAXReaderFactory.getInstance(false);
-
-		Document doc = reader.read(new XMLSafeReader(xml));
-
-		Element root = doc.getRootElement();
-
-		PluginPackage pluginPackage =
-			PluginPackageUtil.readPluginPackageXml(root);
+		pluginPackage = PluginPackageUtil.readPluginPackageXml(xml);
 
 		return pluginPackage;
 	}
@@ -102,9 +105,10 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 			PluginPackage pluginPackage = readPluginPackage(ctx);
 
 			if (pluginPackage != null) {
+				pluginPackage.setContext(servletContextName);
 				event.setPluginPackage(pluginPackage);
 
-				PluginPackageUtil.registerPluginPackage(pluginPackage);
+				PluginPackageUtil.registerInstalledPluginPackage(pluginPackage);
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
@@ -137,7 +141,8 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 			if (pluginPackage != null) {
 				event.setPluginPackage(pluginPackage);
 
-				PluginPackageUtil.unregisterPluginPackage(pluginPackage);
+				PluginPackageUtil.unregisterInstalledPluginPackage(
+					pluginPackage);
 
 				if (_log.isInfoEnabled()) {
 					_log.info(

@@ -23,7 +23,7 @@
 package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
-import com.liferay.portal.kernel.plugin.PluginPackageRepository;
+import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
@@ -41,12 +41,42 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class PluginPackageImpl implements Comparable, PluginPackage {
 
+	public static final String STATUS_ALL = "all";
+
+	public static final String STATUS_OLDER_VERSION_INSTALLED =
+		"olderVersionInstalled";
+	public static final String STATUS_SAME_VERSION_INSTALLED =
+		"sameVersionInstalled";
+	public static final String STATUS_NEWER_VERSION_INSTALLED =
+		"newerVersionInstalled";
+	public static final String STATUS_NOT_INSTALLED = "notInstalled";
+
+	public static final String STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED
+		= "notInstalledOrOlderVersionInstalled";
+	public static final String STATUS_INSTALLATION_IN_PROCESS =
+		"installationInProcess";
+
 	public PluginPackageImpl(String moduleId) {
-		_moduleId = new ModuleId(moduleId);
+		_moduleId = ModuleId.getInstance(moduleId);
 	}
 
 	public String getModuleId() {
 		return _moduleId.toString();
+	}
+
+	public String getRecommendedDeploymentContext() {
+		String context = _recommendedDeploymentContext;
+
+		if (Validator.isNull(context)) {
+			context = _moduleId.getArtifactId();
+		}
+
+		return context;
+	}
+
+	public void setRecommendedDeploymentContext(
+		String recommendedDeploymentContext) {
+		_recommendedDeploymentContext = recommendedDeploymentContext;
 	}
 
 	public String getName() {
@@ -129,6 +159,14 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 		_longDescription = longDescription;
 	}
 
+	public String getChangeLog() {
+		return _changeLog;
+	}
+
+	public void setChangeLog(String changeLog) {
+		_changeLog = changeLog;
+	}
+
 	public List getScreenshots() {
 		return _screenshots;
 	}
@@ -147,24 +185,28 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 
 	public String getDownloadURL() {
 		String useDownloadURL = getRepository().getSettings().getProperty(
-			PluginPackageRepository.SETTING_USE_DOWNLOAD_URL);
+			RemotePluginPackageRepository.SETTING_USE_DOWNLOAD_URL);
 
 		if (!GetterUtil.getBoolean(useDownloadURL, false)) {
 			return getArtifactURL();
 		}
 
-		return _downloadURL;
+		if (Validator.isNotNull(_downloadURL)) {
+			return _downloadURL;
+		}
+
+		return getArtifactURL();
 	}
 
 	public void setDownloadURL(String downloadURL) {
 		_downloadURL = downloadURL;
 	}
 
-	public PluginPackageRepository getRepository() {
+	public RemotePluginPackageRepository getRepository() {
 		return _repository;
 	}
 
-	public void setRepository(PluginPackageRepository repository) {
+	public void setRepository(RemotePluginPackageRepository repository) {
 		_repository = repository;
 	}
 
@@ -173,16 +215,16 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 			return _repository.getRepositoryURL();
 		}
 		else {
-			return PluginPackageRepository.LOCAL_URL;
+			return RemotePluginPackageRepository.LOCAL_URL;
 		}
 	}
 
-	public String getRecommendedWARName() {
-		return _recommendedWARName;
+	public String getContext() {
+		return _context;
 	}
 
-	public void setRecommendedWARName(String recommendedWARName) {
-		_recommendedWARName = recommendedWARName;
+	public void setContext(String context) {
+		_context = context;
 	}
 
 	public String getArtifactURL() {
@@ -195,16 +237,6 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 
 	public String getGroupId() {
 		return _moduleId.getGroupId();
-	}
-
-	public String getWARName() {
-		String name = getRecommendedWARName();
-
-		if (Validator.isNull(name)) {
-			name = _moduleId.getArtifactWARName();
-		}
-
-		return name;
 	}
 
 	public int compareTo(Object obj) {
@@ -243,6 +275,7 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 	}
 
 	private ModuleId _moduleId;
+	private String _recommendedDeploymentContext;
 	private String _name;
 	private String _author;
 	private List _types;
@@ -251,10 +284,11 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 	private List _liferayVersions = new ArrayList();
 	private String _shortDescription;
 	private String _longDescription;
+	private String _changeLog;
 	private List _screenshots = new ArrayList();
 	private String _pageURL;
 	private String _downloadURL;
-	private PluginPackageRepository _repository;
-	private String _recommendedWARName;
+	private RemotePluginPackageRepository _repository;
+	private String _context;
 
 }

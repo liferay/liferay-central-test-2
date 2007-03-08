@@ -34,6 +34,10 @@ public interface PluginPackage {
 
 	public String getModuleId();
 
+	public String getRecommendedDeploymentContext();
+
+	public void setRecommendedDeploymentContext(String deploymentContext);
+
 	public String getName();
 
 	public void setName(String name);
@@ -66,6 +70,10 @@ public interface PluginPackage {
 
 	public void setLongDescription(String longDescription);
 
+	public String getChangeLog();
+
+	public void setChangeLog(String changeLog);
+
 	public void setScreenshots(List screenshots);
 
 	public List getScreenshots();
@@ -80,21 +88,19 @@ public interface PluginPackage {
 
 	public String getRepositoryURL();
 
-	public PluginPackageRepository getRepository();
+	public RemotePluginPackageRepository getRepository();
 
-	public void setRepository(PluginPackageRepository repository);
+	public void setRepository(RemotePluginPackageRepository repository);
 
-	public String getRecommendedWARName();
+	public String getContext();
 
-	public void setRecommendedWARName(String recommendedWARName);
+	public void setContext(String context);
 
 	public String getArtifactURL();
 
 	public String getArtifactId();
 
 	public String getGroupId();
-
-	public String getWARName();
 
 	public String getVersion();
 

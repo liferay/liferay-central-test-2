@@ -24,7 +24,7 @@ package com.liferay.portal.plugin;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
-import com.liferay.portal.kernel.plugin.PluginPackageRepository;
+import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
@@ -85,7 +85,118 @@ import org.dom4j.io.SAXReader;
  */
 public class PluginPackageUtil {
 
-	public static List getAllPluginPackages()
+	public static String[] getSupportedTypes() {
+		return PropsUtil.getArray(PropsUtil.PLUGIN_TYPES);
+	}
+
+	public static List getInstalledPluginPackages() {
+		return _installedPluginPackages.getSortedPluginPackages();
+	}
+
+	public static PluginPackage getLatestInstalledPluginPackage(
+		String groupId, String artifactId) {
+		return _installedPluginPackages.getLatestPluginPackage(
+			groupId, artifactId);
+	}
+
+	public static void registerInstalledPluginPackage(
+		PluginPackage pluginPackage) {
+
+		_installedPluginPackages.addPluginPackage(pluginPackage);
+		_updateAvailable = null;
+
+		try {
+			reIndex();
+		}
+		catch (SystemException e) {
+			_log.warn("The repositories could not be reindexed", e);
+		}
+	}
+
+	public static void unregisterInstalledPluginPackage(
+		PluginPackage pluginPackage) {
+		_installedPluginPackages.removePluginPackage(pluginPackage);
+	}
+
+	public static void registerInstallingPluginPackage(
+		PluginPackage pluginPackage) {
+		_installedPluginPackages.registerPluginPackageInstallation(
+			pluginPackage);
+	}
+
+	public static void registerInstallingPluginPackage(
+		String preliminaryContext) {
+
+		_installedPluginPackages.registerPluginPackageInstallation(
+			preliminaryContext);
+	}
+
+	public static void updateInstallingPluginPackage(
+		String preliminaryContext, PluginPackage pluginPackage) {
+		_installedPluginPackages.unregisterPluginPackageInstallation(
+			preliminaryContext);
+		_installedPluginPackages.registerPluginPackageInstallation(
+			pluginPackage);
+	}
+
+	public static void endPluginPackageInstallation(String preliminaryContext) {
+		_installedPluginPackages.unregisterPluginPackageInstallation(
+			preliminaryContext);
+	}
+
+	public static boolean isInstallationInProcess(String context) {
+
+		if (_installedPluginPackages.getInstallingPluginPackage(
+				context) != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean isUpdateAvailable() {
+
+		if (_updateAvailable != null) {
+			return _updateAvailable.booleanValue();
+		}
+
+		Iterator it = _installedPluginPackages.getPluginPackages().iterator();
+
+		while (it.hasNext()) {
+
+			PluginPackage pluginPackage = (PluginPackage) it.next();
+			PluginPackage availablePluginPackage = null;
+			try {
+				availablePluginPackage =
+					PluginPackageUtil.getLatestAvailablePluginPackage(
+						pluginPackage.getGroupId(),
+						pluginPackage.getArtifactId());
+
+				if ((availablePluginPackage != null) &&
+					Version.getInstance(
+						availablePluginPackage.getVersion()).isLaterVersionThan(
+							pluginPackage.getVersion())) {
+					_updateAvailable = Boolean.TRUE;
+					break;
+				}
+			}
+			catch (Exception se) {
+			}
+		}
+
+		if (_updateAvailable == null) {
+			_updateAvailable = Boolean.FALSE;
+		}
+
+		return _updateAvailable.booleanValue();
+	}
+
+	public static Date getLastUpdateDate() {
+		return _lastUpdateDate;
+	}
+
+	public static List getAllAvailablePluginPackages()
 		throws PluginPackageException {
 
 		List plugins = new ArrayList();
@@ -94,10 +205,10 @@ public class PluginPackageUtil {
 
 		for (int i = 0; i < repositoryURLs.length; i++) {
 			try {
-				PluginPackageRepository repository =
+				RemotePluginPackageRepository repository =
 					getRepository(repositoryURLs[i]);
 
-				plugins.addAll(repository.getPlugins());
+				plugins.addAll(repository.getPluginPackages());
 			}
 			catch(PluginPackageException pe) {
 				_log.error(
@@ -112,22 +223,29 @@ public class PluginPackageUtil {
 		return _availableTagsCache;
 	}
 
-	public static PluginPackage getInstalledVersion(
-		String groupId, String artifactId) {
+	public static PluginPackage getLatestAvailablePluginPackage(
+		String groupId, String artifactId)
+		throws SystemException {
 
-		List pluginList = _installedPlugins.findPluginsByGroupIdAndArtifactId(
-			groupId, artifactId);
+		List pluginPackages = new ArrayList();
 
-		if (pluginList == null) {
-			return null;
+		String[] repositoryURLs = getRepositoryURLs();
+
+		for (int i = 0; i < repositoryURLs.length; i++) {
+
+			RemotePluginPackageRepository repository =
+				getRepository(repositoryURLs[i]);
+
+			List pluginPackages2 =
+				repository.findPluginsByGroupIdAndArtifactId(
+					groupId, artifactId);
+
+			if (pluginPackages2 != null) {
+				pluginPackages.addAll(pluginPackages2);
+			}
 		}
-		else {
-			return (PluginPackage)pluginList.get(0);
-		}
-	}
 
-	public static Date getLastUpdateDate() {
-		return _lastUpdateDate;
+		return _findLatestVersion(pluginPackages);
 	}
 
 	public static PluginPackage getPluginPackageByModuleId(
@@ -146,7 +264,7 @@ public class PluginPackageUtil {
 			String repositoryURL = repositoryURLs[i];
 
 			try {
-				PluginPackageRepository repository =
+				RemotePluginPackageRepository repository =
 					getRepository(repositoryURL);
 
 				return repository.findPluginByArtifactURL(url);
@@ -159,11 +277,12 @@ public class PluginPackageUtil {
 		return null;
 	}
 
-	public static PluginPackageRepository getRepository(String repositoryURL)
+	public static RemotePluginPackageRepository getRepository(
+		String repositoryURL)
 		throws PluginPackageException {
 
-		PluginPackageRepository repository =
-			(PluginPackageRepository)_repositoryCache.get(repositoryURL);
+		RemotePluginPackageRepository repository =
+			(RemotePluginPackageRepository)_repositoryCache.get(repositoryURL);
 
 		if (repository != null) {
 			return repository;
@@ -182,8 +301,31 @@ public class PluginPackageUtil {
 		}
 	}
 
-	public static String[] getSupportedTypes() {
-		return PropsUtil.getArray(PropsUtil.PLUGIN_TYPES);
+	public static boolean isCurrentVersionSupported(List versions) {
+		for (int i = 0; i < versions.size(); i++) {
+			Version supportedVersion = Version.getInstance(
+				(String)versions.get(i));
+
+			Version currentVersion = Version.getInstance(
+				ReleaseInfo.getVersion());
+
+			if (supportedVersion.includes(currentVersion)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public static PluginPackage readPluginPackageXml(String xml)
+		throws DocumentException {
+		SAXReader reader = SAXReaderFactory.getInstance(false);
+
+		Document doc = reader.read(new XMLSafeReader(xml));
+
+		Element root = doc.getRootElement();
+
+		return readPluginPackageXml(root);
 	}
 
 	public static PluginPackage readPluginPackageXml(Element pluginPackageEl) {
@@ -216,26 +358,24 @@ public class PluginPackageUtil {
 			_readText(pluginPackageEl.elementText("short-description")));
 		pluginPackage.setLongDescription(
 			_readHtml(pluginPackageEl.elementText("long-description")));
+		pluginPackage.setChangeLog(
+			_readHtml(pluginPackageEl.elementText("change-log")));
 		pluginPackage.setScreenshots(
 			_readScreenshots(pluginPackageEl.element("screenshots")));
 		pluginPackage.setPageURL(
 			_readText(pluginPackageEl.elementText("page-url")));
 		pluginPackage.setDownloadURL(
 			_readText(pluginPackageEl.elementText("download-url")));
-		pluginPackage.setRecommendedWARName(
+		pluginPackage.setRecommendedDeploymentContext(
 			_readText(
-				pluginPackageEl.elementText("installation-file-name")));
+				pluginPackageEl.elementText("recommended-deployment-context")));
 
 		return pluginPackage;
 	}
 
-	public static void registerPluginPackage(PluginPackage pluginPackage) {
-		_installedPlugins.addPluginPackage(pluginPackage);
-	}
-
-	public static void reIndex(String[] ids) throws SystemException {
+	public static void reIndex() throws SystemException {
 		try {
-			Iterator itr = getAllPluginPackages().iterator();
+			Iterator itr = getAllAvailablePluginPackages().iterator();
 
 			while (itr.hasNext()) {
 				PluginPackage pluginPackage = (PluginPackage)itr.next();
@@ -349,11 +489,15 @@ public class PluginPackageUtil {
 			if (Validator.isNotNull(status) && !status.equals("all")) {
 				BooleanQuery searchQuery = new BooleanQuery();
 
-				if (status.equals("notInstalledOrNewVersion")) {
+				if (status.equals(
+					PluginPackageImpl.
+						STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED)) {
 					LuceneUtil.addExactTerm(
-						searchQuery, "status", "notInstalled");
+						searchQuery, "status",
+						PluginPackageImpl.STATUS_NOT_INSTALLED);
 					LuceneUtil.addExactTerm(
-						searchQuery, "status", "newVersion");
+						searchQuery, "status",
+						PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED);
 				}
 				else {
 					LuceneUtil.addExactTerm(searchQuery, "status", status);
@@ -378,10 +522,6 @@ public class PluginPackageUtil {
 		}
 	}
 
-	public static void unregisterPluginPackage(PluginPackage pluginPackage) {
-		_installedPlugins.removePlugin(pluginPackage);
-	}
-
 	private static void _checkRepositories(String repositoryURL)
 		throws PluginPackageException {
 
@@ -399,26 +539,47 @@ public class PluginPackageUtil {
 		}
 	}
 
+	private static PluginPackage _findLatestVersion(List pluginPackages) {
+		PluginPackage pluginPackage = null;
+
+		Iterator iterator = pluginPackages.iterator();
+
+		while (iterator.hasNext()) {
+			PluginPackage pluginPackage2 = (PluginPackage) iterator.next();
+			if ((pluginPackage == null) ||
+				(pluginPackage2.isLaterVersionThan(pluginPackage))) {
+				pluginPackage = pluginPackage2;
+			}
+		}
+
+		return pluginPackage;
+	}
+
 	private static void _indexPluginPackage(PluginPackage pluginPackage) {
-		PluginPackage installedPluginPackage = getInstalledVersion(
-			pluginPackage.getGroupId(), pluginPackage.getArtifactId());
+
+		PluginPackage installedPluginPackage =
+			_installedPluginPackages.getLatestPluginPackage(
+				pluginPackage.getGroupId(), pluginPackage.getArtifactId());
 
 		String status = null;
+		String installedVersion = null;
 
 		if (installedPluginPackage == null) {
-			status = "notInstalled";
-		}
-		else if (installedPluginPackage.isLaterVersionThan(pluginPackage)) {
-			status = "laterVersionInstalled";
-		}
-		else if (installedPluginPackage.isPreviousVersionThan(
-			pluginPackage)) {
-			status = "newVersion";
+			status = PluginPackageImpl.STATUS_NOT_INSTALLED;
 		}
 		else {
-			status = "alreadyInstalled";
+			installedVersion = installedPluginPackage.getVersion();
+			if (installedPluginPackage.isLaterVersionThan(pluginPackage)) {
+				status = PluginPackageImpl.STATUS_NEWER_VERSION_INSTALLED;
+			}
+			else if (installedPluginPackage.isPreviousVersionThan(
+				pluginPackage)) {
+				status = PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED;
+			}
+			else {
+				status = PluginPackageImpl.STATUS_SAME_VERSION_INSTALLED;
+			}
 		}
-
 		try {
 			PluginPackageIndexer.updatePluginPackage(
 				pluginPackage.getModuleId(), pluginPackage.getName(),
@@ -426,34 +587,20 @@ public class PluginPackageUtil {
 				pluginPackage.getTypes(), pluginPackage.getTags(),
 				pluginPackage.getLicenses(), pluginPackage.getLiferayVersions(),
 				pluginPackage.getShortDescription(),
-				pluginPackage.getLongDescription(), pluginPackage.getPageURL(),
-				pluginPackage.getRepositoryURL(), status);
+				pluginPackage.getLongDescription(),
+				pluginPackage.getChangeLog(), pluginPackage.getPageURL(),
+				pluginPackage.getRepositoryURL(), status, installedVersion);
 		}
 		catch (Exception e) {
 			_log.error("Error reindexing " + pluginPackage.getModuleId(), e);
 		}
 	}
 
-	private static boolean _isCurrentVersionSupported(List versions) {
-		for (int i = 0; i < versions.size(); i++) {
-			Version supportedVersion = Version.getInstance(
-				(String)versions.get(i));
-
-			Version currentVersion = Version.getInstance(
-				ReleaseInfo.getVersion());
-
-			if (supportedVersion.includes(currentVersion)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	private static PluginPackageRepository _loadRepository(String repositoryURL)
+	private static RemotePluginPackageRepository _loadRepository(
+		String repositoryURL)
 		throws PluginPackageException {
 
-		PluginPackageRepository repository = null;
+		RemotePluginPackageRepository repository = null;
 
 		String pluginsXmlURL =
 			repositoryURL + StringPool.SLASH + _REPOSITORY_XML_FILENAME;
@@ -490,6 +637,7 @@ public class PluginPackageUtil {
 				_repositoryCache.put(repositoryURL, repository);
 				_availableTagsCache.addAll(repository.getTags());
 				_lastUpdateDate = new Date();
+				_updateAvailable = null;
 
 				return repository;
 			}
@@ -520,7 +668,7 @@ public class PluginPackageUtil {
 		}
 	}
 
-	private static PluginPackageRepository _parseRepositoryXml(
+	private static RemotePluginPackageRepository _parseRepositoryXml(
 			String xml, String repositoryURL)
 		throws DocumentException, IOException {
 
@@ -530,8 +678,8 @@ public class PluginPackageUtil {
 			_log.debug("Plugin Repository: " + xml);
 		}
 
-		PluginPackageRepository pluginPackageRepository =
-			new PluginPackageRepository(repositoryURL);
+		RemotePluginPackageRepository pluginPackageRepository =
+			new RemotePluginPackageRepository(repositoryURL);
 
 		if (xml == null) {
 			return pluginPackageRepository;
@@ -555,7 +703,7 @@ public class PluginPackageUtil {
 
 			PluginPackage pluginPackage = readPluginPackageXml(pluginPackageEl);
 
-			if (!_isCurrentVersionSupported(
+			if (!isCurrentVersionSupported(
 					pluginPackage.getLiferayVersions())) {
 
 				continue;
@@ -694,8 +842,9 @@ public class PluginPackageUtil {
 
 	private static Log _log = LogFactory.getLog(PluginPackageUtil.class);
 
-	private static PluginPackageRepository _installedPlugins =
-		new PluginPackageRepository(PluginPackageRepository.LOCAL_URL);
+	private static LocalPluginPackageRepository _installedPluginPackages =
+		new LocalPluginPackageRepository();
+	private static Boolean _updateAvailable;
 	private static Map _repositoryCache = new HashMap();
 	private static Set _availableTagsCache = new TreeSet();
 	private static Date _lastUpdateDate = null;

@@ -16,7 +16,7 @@ variable.
 <!--
 The plugin-package element contains the declarative data of a plugin.
 -->
-<!ELEMENT plugin-package (name, module-id, installation-file-name?, types,
+<!ELEMENT plugin-package (name, module-id, recommended-deployment-context?, types,
 tags?, short-description, long-description?, change-log, page-url?, screenshots?, author,
 licenses, liferay-versions)>
 
@@ -35,10 +35,11 @@ Example: liferay-samples/sample-struts-portlet/4.3.0/war
 <!ELEMENT module-id (#PCDATA)>
 
 <!--
-The installation-file-name element contains the file name that will be used to
-deploy the plugin.
+The recommended-deployment-context element determines the context to which this
+plugin should be deployed. Some portlet packages require this because their own
+code references itself through URLs that include the context
 -->
-<!ELEMENT installation-file-name (#PCDATA)>
+<!ELEMENT recommended-deployment-context (#PCDATA)>
 
 <!--
 The types element contains a list of plugin types included in the package.

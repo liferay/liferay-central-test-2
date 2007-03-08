@@ -40,7 +40,7 @@ Setting name and value. Current supported names are:
 <!--
 The plugin element contains the declarative data of a plugin.
 -->
-<!ELEMENT plugin-package (name, module-id, installation-file-name?, types, tags?,
+<!ELEMENT plugin-package (name, module-id, types, tags?,
 short-description, long-description?, change-log, page-url, download-url?, screenshots?,
 author, licenses, liferay-versions)*>
 
@@ -57,12 +57,6 @@ Maven based syntax: groupId/artifactId/version/file-type.
 Example: liferay-samples/sample-struts-portlet/4.3.0/war
 -->
 <!ELEMENT module-id (#PCDATA)>
-
-<!--
-The installation-file-name element contains the file name that will be used to
-deploy the plugin.
--->
-<!ELEMENT installation-file-name (#PCDATA)>
 
 <!--
 The types element contains a list of plugin types included in the package.

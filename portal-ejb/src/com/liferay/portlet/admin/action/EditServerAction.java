@@ -25,11 +25,9 @@ package com.liferay.portlet.admin.action;
 import com.liferay.portal.events.GlobalStartupAction;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
-import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
-import com.liferay.portal.plugin.PluginPackageException;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.plugin.RepositoryReport;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -240,16 +238,22 @@ public class EditServerAction extends PortletAction {
 		UploadPortletRequest uploadReq =
 			PortalUtil.getUploadPortletRequest(req);
 
-		String recommendedWARName = ParamUtil.getString(
-			req, "localDeployWARName");
-
 		File file = uploadReq.getFile("file");
+		String deploymentContext =
+			ParamUtil.getString(req, "deploymentContext");
 
-		String fileName = recommendedWARName;
+		String fileName = null;
 
-		if (Validator.isNull(fileName)) {
-			fileName = uploadReq.getFileName("file");
+		if (Validator.isNotNull(deploymentContext)) {
+			fileName = Constants.DEPLOY_TO_PREFIX + deploymentContext
+				+ ".war";
 		}
+		else {
+			fileName = uploadReq.getFileName("file");
+			deploymentContext = fileName.substring(0, fileName.length() - 4);
+		}
+
+		PluginPackageUtil.registerInstallingPluginPackage(deploymentContext);
 
 		byte[] bytes = FileUtil.getBytes(file);
 
@@ -409,11 +413,25 @@ public class EditServerAction extends PortletAction {
 
 		try {
 			String url = ParamUtil.getString(req, "url");
+			String deploymentContext =
+				ParamUtil.getString(req, "deploymentContext");
+
+			String fileName;
+
+			if (Validator.isNotNull(deploymentContext)) {
+				fileName = Constants.DEPLOY_TO_PREFIX + deploymentContext
+					+ ".war";
+			}
+			else {
+				fileName = url.substring(url.lastIndexOf(StringPool.SLASH) + 1);
+				deploymentContext =
+					fileName.substring(0, fileName.length() - 4);
+			}
+
+			PluginPackageUtil.registerInstallingPluginPackage(
+				deploymentContext);
 
 			URL urlObj = new URL(url);
-
-			String recommendedWARName = ParamUtil.getString(
-				req, "remoteDeployWARName");
 
 			String progressId = ParamUtil.getString(req, Constants.PROGRESS_ID);
 
@@ -435,12 +453,6 @@ public class EditServerAction extends PortletAction {
 
 			long contentLength = getMethod.getResponseContentLength();
 
-			String fileName = url.substring(
-				url.lastIndexOf(StringPool.SLASH) + 1);
-
-			String destFileName = _getDestFileName(
-				recommendedWARName, url, fileName);
-
 			ProgressInputStream pis = new ProgressInputStream(
 				req, getMethod.getResponseBodyAsStream(), contentLength,
 				progressId);
@@ -450,7 +462,7 @@ public class EditServerAction extends PortletAction {
 
 			String tmpFilePath =
 				deployDir + StringPool.SLASH + _DOWNLOAD_DIR +
-					StringPool.SLASH + destFileName;
+					StringPool.SLASH + fileName;
 
 			File tmpFile = new File(tmpFilePath);
 
@@ -477,7 +489,7 @@ public class EditServerAction extends PortletAction {
 
 			if (pis.getTotalRead() > 0) {
 				String destination =
-					deployDir + StringPool.SLASH + destFileName;
+					deployDir + StringPool.SLASH + fileName;
 
 				File destinationFile = new File(destination);
 
@@ -539,32 +551,6 @@ public class EditServerAction extends PortletAction {
 				logger.setLevel(Level.toLevel(priority));
 			}
 		}
-	}
-
-	private String _getDestFileName(
-			String recommendedWARName, String url, String fileName)
-		throws PluginPackageException {
-
-		String destFileName = null;
-
-		if (Validator.isNull(destFileName)) {
-			destFileName = recommendedWARName;
-		}
-
-		if (Validator.isNull(destFileName)) {
-			PluginPackage pluginPackage =
-				PluginPackageUtil.getPluginPackageByURL(url);
-
-			if (pluginPackage != null) {
-				destFileName = pluginPackage.getWARName();
-			}
-		}
-
-		if (Validator.isNull(destFileName)) {
-			destFileName = fileName;
-		}
-
-		return destFileName;
 	}
 
 	private static final String _DOWNLOAD_DIR = "download";

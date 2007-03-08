@@ -25,13 +25,6 @@
 <%
 PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(moduleId, repositoryURL);
 
-PortletURL installURL = renderResponse.createActionURL();
-
-installURL.setWindowState(WindowState.MAXIMIZED);
-installURL.setParameter("struts_action", "/admin/edit_server");
-installURL.setParameter("cmd", "remoteDeploy");
-installURL.setParameter("redirect", currentURL.toString());
-
 // Breadcrumbs
 
 breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.getName() + "</a>");
@@ -199,6 +192,18 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= pluginPackage.getLongDescription() %>
+		</td>
+	</tr>
+</c:if>
+
+<c:if test="<%= Validator.isNotNull(pluginPackage.getChangeLog()) %>">
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "change-log") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<%= pluginPackage.getChangeLog() %>
 		</td>
 	</tr>
 </c:if>

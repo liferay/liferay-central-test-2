@@ -23,15 +23,15 @@
 %>
 
 <%
-String keywords = ParamUtil.getString(request, "keywords");
-String tag = ParamUtil.getString(request, "tag");
-String license = ParamUtil.getString(request, "license");
-String status = ParamUtil.getString(request, "status");
-if (Validator.isNull(status)) {
-	status = "notInstalledOrNewVersion";
-}
+	String keywords = ParamUtil.getString(request, "keywords");
+	String tag = ParamUtil.getString(request, "tag");
+	String license = ParamUtil.getString(request, "license");
+	String installStatus = ParamUtil.getString(request, "installStatus");
+	if (Validator.isNull(installStatus)) {
+		installStatus = PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED;
+	}
 
-try {
+	try {
 %>
 
 <%= breadcrumbs.toString() %>
@@ -55,7 +55,7 @@ try {
 		</td>
 		<td style="padding-left: 5px;"></td>
 		<td>
-			<%= LanguageUtil.get(pageContext, "status") %>
+			<%= LanguageUtil.get(pageContext, "install-status") %>
 		</td>
 	</tr>
 	<tr>
@@ -104,11 +104,11 @@ try {
 		</td>
 		<td style="padding-left: 5px;"></td>
 		<td>
-			<select name="<portlet:namespace/>status">
-				<option <%= (status.equals("notInstalledOrNewVersion")) ? "selected": "" %> value="notInstalledOrNewVersion"><%= LanguageUtil.get(pageContext, "not-installed-or-new-version") %></option>
-				<option <%= (status.equals("newVersion")) ? "selected": "" %> value="newVersion"><%= LanguageUtil.get(pageContext, "new-version") %></option>
-				<option <%= (status.equals("notInstalled")) ? "selected": "" %> value="notInstalled"><%= LanguageUtil.get(pageContext, "not-installed") %></option>
-				<option <%= (status.equals("all")) ? "selected": "" %> value="all"><%= LanguageUtil.get(pageContext, "all") %></option>
+			<select name="<portlet:namespace/>installStatus">
+				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED%>"><%= LanguageUtil.get(pageContext, "not-installed-or-older-version-installed") %></option>
+				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED%>"><%= LanguageUtil.get(pageContext, "older-version-installed") %></option>
+				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED%>"><%= LanguageUtil.get(pageContext, "not-installed") %></option>
+				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_ALL)) ? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_ALL%>"><%= LanguageUtil.get(pageContext, "all") %></option>
 			</select>
 		</td>
 	</tr>
@@ -127,14 +127,18 @@ try {
 
 	headerNames.add(pluginType + "-package");
 	headerNames.add("tags");
-	headerNames.add("status");
-	headerNames.add(StringPool.BLANK);
+	headerNames.add("installed-version");
+	headerNames.add("available-version");
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+	SearchContainer searchContainer = new SearchContainer(
+		renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM,
+		SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	Hits hits = PluginPackageUtil.search(keywords, pluginType, tag, license, repositoryURL, status);
+	Hits hits = PluginPackageUtil.search(
+		keywords, pluginType, tag, license, repositoryURL, installStatus);
 
-	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
+	Hits results =
+		hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 	int total = hits.getLength();
 
 	searchContainer.setTotal(total);
@@ -145,12 +149,16 @@ try {
 		Document doc = results.doc(i);
 
 		String pluginPackageModuleId = doc.get("moduleId");
+		String pluginPackageGroupId = doc.get("groupId");
+		String pluginPackageArtifactId = doc.get("artifactId");
 		String pluginPackageName = doc.get(LuceneFields.TITLE);
-		String pluginPackageVersion = doc.get("version");
+		String pluginPackageAvailableVersion = doc.get("version");
 		String pluginPackageTags = doc.get("tags");
 		String pluginPackageShortDescription = doc.get("shortDescription");
+		String pluginPackageChangeLog = doc.get("changeLog");
 		String pluginPackageRepositoryURL = doc.get("repositoryURL");
-		String pluginPackageStatus = doc.get("status");
+
+		PluginPackage installedPluginPackage = PluginPackageUtil.getLatestInstalledPluginPackage(pluginPackageGroupId, pluginPackageArtifactId);
 
 		ResultRow row = new ResultRow(doc, pluginPackageModuleId, i);
 
@@ -176,7 +184,7 @@ try {
 		sm.append("<b>");
 		sm.append(pluginPackageName);
 		sm.append("</b> ");
-		sm.append(pluginPackageVersion);
+		sm.append(pluginPackageAvailableVersion);
 		sm.append("</a>");
 
 		if (Validator.isNotNull(pluginPackageShortDescription)) {
@@ -198,17 +206,18 @@ try {
 
 		row.addText(rowTextEntry);
 
-		// Status
+		// Installed version
 
-		rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+		if (installedPluginPackage != null) {
+			row.addText(installedPluginPackage.getVersion());
+		}
+		else {
+			row.addText(StringPool.DASH);
+		}
 
-		rowTextEntry.setName(pluginPackageStatus);
+		// Available version
 
-		row.addText(rowTextEntry);
-
-		// Action
-
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/admin/plugin_action.jsp");
+		row.addText(pluginPackageAvailableVersion + getNoteIcon(themeDisplay, pluginPackageChangeLog));
 
 		// Add result row
 
@@ -218,24 +227,27 @@ try {
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
+    <br>
+
 	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
-	<c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
+	<div class="separator" style="clear: both;"/>
+
+	<div>
+		<c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
+			 <%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
+		</c:if>
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "refresh") %>'  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');">
+
 		<br>
 
-		<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %><br>
-	</c:if>
+		<liferay-util:include page="/html/portlet/admin/repository_report.jsp" />
 
-	<liferay-util:include page="/html/portlet/admin/repository_report.jsp" />
-
-	<br>
-
-	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "refresh") %>'  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');">
-
+	</div>
 <%
 }
 catch (PluginPackageException e) {
-	_log.error("Error browsing the repository", e);
+	_log.warn("Error browsing the repository", e);
 %>
 
 	<span class="portlet-msg-error">

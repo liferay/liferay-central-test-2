@@ -64,13 +64,15 @@ public class PluginPackageIndexer implements Indexer {
 			String moduleId, String name, String version,
 			String author, List types, List tags, List licenses,
 			List liferayVersions, String shortDescription,
-			String longDescription, String pageURL,	String repositoryURL,
-			String status)
+			String longDescription, String changeLog, String pageURL,
+			String repositoryURL, String status, String installedVersion)
 		throws IOException {
 
 		synchronized (IndexWriter.class) {
 			shortDescription = Html.stripHtml(shortDescription);
 			longDescription = Html.stripHtml(longDescription);
+
+			ModuleId moduleIdObj = ModuleId.getInstance(moduleId);
 
 			String content =
 				name + " " + author + " " + shortDescription + " " +
@@ -96,9 +98,17 @@ public class PluginPackageIndexer implements Indexer {
 			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
 
 			doc.add(LuceneFields.getKeyword("moduleId", moduleId));
+			doc.add(
+				LuceneFields.getKeyword("groupId", moduleIdObj.getGroupId()));
+			doc.add(
+				LuceneFields.getKeyword(
+					"artifactId", moduleIdObj.getArtifactId()));
+			doc.add(LuceneFields.getKeyword("moduleId", moduleId));
 			doc.add(LuceneFields.getKeyword("version", version));
 			doc.add(LuceneFields.getKeyword(
 				"shortDescription", shortDescription));
+			doc.add(LuceneFields.getKeyword(
+				"changeLog", changeLog));
 			doc.add(LuceneFields.getKeyword("repositoryURL", repositoryURL));
 
 			StringMaker sm = new StringMaker();
@@ -157,6 +167,12 @@ public class PluginPackageIndexer implements Indexer {
 
 			doc.add(LuceneFields.getKeyword("status", status));
 
+			if (installedVersion != null) {
+				doc.add(
+					LuceneFields.getKeyword(
+						"installedVersion", installedVersion));
+			}
+
 			writer.addDocument(doc);
 
 			LuceneUtil.write(writer);
@@ -185,8 +201,8 @@ public class PluginPackageIndexer implements Indexer {
 			String moduleId, String name, String version,
 			String author, List types, List tags, List licenses,
 			List liferayVersions, String shortDescription,
-			String longDescription, String pageURL,	String repositoryURL,
-			String status)
+			String longDescription, String changeLog, String pageURL,
+			String repositoryURL, String status, String installedVersion)
 		throws IOException {
 
 		try {
@@ -197,8 +213,8 @@ public class PluginPackageIndexer implements Indexer {
 
 		addPluginPackage(
 			moduleId, name, version, author, types, tags, licenses,
-			liferayVersions, shortDescription, longDescription, pageURL,
-			repositoryURL, status);
+			liferayVersions, shortDescription, longDescription, changeLog,
+			pageURL, repositoryURL, status, installedVersion);
 	}
 
 	public DocumentSummary getDocumentSummary(
@@ -230,7 +246,7 @@ public class PluginPackageIndexer implements Indexer {
 
 	public void reIndex(String[] ids) throws SearchException {
 		try {
-			PluginPackageUtil.reIndex(ids);
+			PluginPackageUtil.reIndex();
 		}
 		catch (Exception e) {
 			throw new SearchException(e);

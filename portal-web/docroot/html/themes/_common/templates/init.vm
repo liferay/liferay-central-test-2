@@ -67,6 +67,12 @@
 	#set ( $sign_out_url = $theme_display.getURLSignOut() )
 #end
 
+#if ( $portalUtil.isOmniadmin($user.getUserId()) )
+	#if ( $portalUtil.isUpdateAvailable() )
+    	#set ( $update_available_url = $theme_display.getURLUpdateManager() )
+	#end
+#end
+
 ## ---------- Page ---------- ##
 
 #set ( $the_title = $languageUtil.get($pageContext, $tilesTitle) )

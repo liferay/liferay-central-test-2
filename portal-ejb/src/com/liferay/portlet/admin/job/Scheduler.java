@@ -36,6 +36,7 @@ public class Scheduler implements com.liferay.portal.job.Scheduler {
 
 	public void schedule() throws SchedulerException {
 		JobScheduler.schedule(new LDAPImportJob());
+		JobScheduler.schedule(new CheckRemoteRepositoriesJob());
 	}
 
 }

@@ -23,8 +23,10 @@
 package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.Version;
 
+import java.util.Map;
 import java.util.StringTokenizer;
 
 /**
@@ -35,7 +37,28 @@ import java.util.StringTokenizer;
  */
 public class ModuleId {
 
-	public ModuleId(String moduleId) {
+	public static ModuleId getInstance(String moduleId) {
+		ModuleId moduleIdObj = (ModuleId)_moduleIds.get(moduleId);
+
+		if (moduleIdObj == null) {
+				moduleIdObj =  new ModuleId(moduleId);
+
+			_moduleIds.put(moduleId, moduleIdObj);
+		}
+
+		return moduleIdObj;
+	}
+
+	private ModuleId(
+		String groupId, String artifactId, Version pluginVersion, String type) {
+
+		_groupId = groupId;
+		_artifactId = artifactId;
+		_pluginVersion = pluginVersion;
+		_type = type;
+	}
+
+	private ModuleId(String moduleId) {
 		StringTokenizer st = new StringTokenizer(moduleId, StringPool.SLASH);
 
 		if (st.countTokens() < 4) {
@@ -112,6 +135,8 @@ public class ModuleId {
 		return groupId + StringPool.SLASH + artifactId + StringPool.SLASH +
 			version + StringPool.SLASH + type;
 	}
+
+	private static Map _moduleIds = CollectionFactory.getSyncHashMap();
 
 	private String _artifactId;
 	private String _groupId;

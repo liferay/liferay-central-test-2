@@ -34,9 +34,9 @@
 
 <br><br>
 
-<%= LanguageUtil.get(pageContext, "specify-an-optional-plugin-file-name") %>
+<%= LanguageUtil.get(pageContext, "specify-an-optional-context-for-deployment") %>
 
-<%= LanguageUtil.format(pageContext, "for-example-x", "<i>sample-jsp-portlet.war</i>") %>
+<%= LanguageUtil.format(pageContext, "for-example-x", "<i>sample-jsp-portlet</i>") %>
 
 <br><br>
 

@@ -70,6 +70,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	String title = PortalUtil.getPortletTitle(portlet, application, locale);
 	String displayName = portlet.getDisplayName();
+	String context = (portlet.getPluginPackage().getContext() == null)?"":(" (" + portlet.getPluginPackage().getContext() + ")");
 
 	sm.append("<a href='");
 	sm.append(rowURL.toString());
@@ -83,7 +84,7 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append("<span style=\"font-size: xx-small;\">");
 	sm.append(LanguageUtil.get(pageContext, "package"));
 	sm.append(": ");
-	sm.append((portlet.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(portlet.getPluginPackage().getName() + " (" + portlet.getPluginPackage().getModuleId() + ")"));
+	sm.append((portlet.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(portlet.getPluginPackage().getName() + context));
 	if (Validator.isNotNull(displayName) && !title.equals(displayName)) {
 		sm.append("<br>");
 		sm.append(portlet.getDisplayName());
