@@ -28,10 +28,14 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.RenderParametersPool;
+import com.liferay.portlet.tagscompiler.util.TagsCompilerSessionUtil;
+import com.liferay.util.ArrayUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 
 import java.io.IOException;
+
+import java.util.Collection;
 
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
@@ -53,16 +57,32 @@ public class TagsCompilerPortlet extends LiferayPortlet {
 	public void render(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
-		// Compile tags entries
+		// Compile entries
 
-		String tagsEntries = ParamUtil.getString(req, "tagsEntries");
+		String entriesFromURL = ParamUtil.getString(req, "entries");
+		String[] entriesFromURLArray = StringUtil.split(entriesFromURL);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Compile entries " + tagsEntries);
+			_log.debug("Entries from friendly URL " + entriesFromURL);
 		}
 
-		req.setAttribute(
-			WebKeys.TAGS_COMPILER_ENTRIES, StringUtil.split(tagsEntries));
+		Collection entriesFromSession = TagsCompilerSessionUtil.getEntries(req);
+		String[] entriesFromSessionArray =
+			(String[])entriesFromSession.toArray(new String[0]);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Entries from session " +
+					StringUtil.merge(entriesFromSessionArray));
+		}
+
+		String[] entries = new String[
+			entriesFromURLArray.length + entriesFromSessionArray.length];
+
+		ArrayUtil.combine(
+			entriesFromURLArray, entriesFromSessionArray, entries);
+
+		req.setAttribute(WebKeys.TAGS_COMPILER_ENTRIES, entries);
 
 		// Clear render parameters cache
 

@@ -32,8 +32,8 @@ Content with the following tags will be displayed.
 <br><br>
 
 <liferay-ui:tags-selector
-	hiddenInput="tagsEntries"
-	curTags="<%= StringUtil.merge(tagsEntries) %>"
+	hiddenInput="entries"
+	curTags="<%= StringUtil.merge(entries) %>"
 	focus="<%= true %>"
 />
 

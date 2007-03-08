@@ -59,8 +59,8 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(req, "tagsEntries"));
+		String[] entries = StringUtil.split(
+			ParamUtil.getString(req, "entries"));
 		boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
 
 		String portletResource = ParamUtil.getString(
@@ -70,7 +70,7 @@ public class EditConfigurationAction extends PortletAction {
 			PortletPreferencesFactory.getPortletSetup(
 				req, portletResource, true, true);
 
-		prefs.setValues("tags-entries", tagsEntries);
+		prefs.setValues("entries", entries);
 		prefs.setValue("and-operator", String.valueOf(andOperator));
 
 		prefs.store();

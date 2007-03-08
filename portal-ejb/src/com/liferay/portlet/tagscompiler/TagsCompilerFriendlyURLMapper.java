@@ -49,27 +49,27 @@ public class TagsCompilerFriendlyURLMapper implements FriendlyURLMapper {
 		int x = url.indexOf(StringPool.SLASH, pos + 1);
 		int y = url.length();
 
-		String[] tagsEntries = StringUtil.split(
+		String[] entries = StringUtil.split(
 			url.substring(x + 1, y), StringPool.SLASH);
 
-		if (tagsEntries.length > 0) {
+		if (entries.length > 0) {
 			StringBuffer sb = new StringBuffer();
 
 			sb.append(queryString);
 			sb.append(StringPool.AMPERSAND);
 			sb.append(
 				PortalUtil.getPortletNamespace(PortletKeys.TAGS_COMPILER));
-			sb.append("tagsEntries=");
+			sb.append("entries=");
 
-			for (int i = 0; i < tagsEntries.length; i++) {
-				String tagsEntry = StringUtil.replace(
-					tagsEntries[i], StringPool.PLUS, StringPool.SPACE);
+			for (int i = 0; i < entries.length; i++) {
+				String entry = StringUtil.replace(
+					entries[i], StringPool.PLUS, StringPool.SPACE);
 
 				if (i != 0) {
 					sb.append(StringPool.COMMA);
 				}
 
-				sb.append(tagsEntry);
+				sb.append(entry);
 			}
 
 			queryString = sb.toString();

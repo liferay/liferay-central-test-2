@@ -45,8 +45,8 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
 
-String[] tagsEntries = prefs.getValues("tags-entries", new String[0]);
+String[] entries = prefs.getValues("entries", new String[0]);
 boolean andOperator = GetterUtil.getBoolean(prefs.getValue("and-operator", null), true);
 
-Arrays.sort(tagsEntries);
+Arrays.sort(entries);
 %>

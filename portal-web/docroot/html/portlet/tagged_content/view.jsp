@@ -25,21 +25,21 @@
 <%@ include file="/html/portlet/tagged_content/init.jsp" %>
 
 <%
-String[] compilerTagsEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
+String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
 
-if ((compilerTagsEntries != null) && (compilerTagsEntries.length > 0)) {
-	String[] newTagsEntries = new String[tagsEntries.length + compilerTagsEntries.length];
+if ((compilerEntries != null) && (compilerEntries.length > 0)) {
+	String[] newEntries = new String[entries.length + compilerEntries.length];
 
-	ArrayUtil.combine(tagsEntries, compilerTagsEntries, newTagsEntries);
+	ArrayUtil.combine(entries, compilerEntries, newEntries);
 
-	tagsEntries = newTagsEntries;
+	entries = newEntries;
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
-long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), tagsEntries);
+long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), entries);
 
 int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, andOperator);
 
