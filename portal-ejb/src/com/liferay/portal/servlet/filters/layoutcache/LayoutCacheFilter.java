@@ -43,14 +43,12 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
-import com.liferay.util.servlet.Header;
-import com.liferay.util.servlet.ServletResponseUtil;
+import com.liferay.util.servlet.filters.CacheResponse;
+import com.liferay.util.servlet.filters.CacheResponseData;
+import com.liferay.util.servlet.filters.CacheResponseUtil;
 
 import java.io.IOException;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.Filter;
@@ -126,8 +124,8 @@ public class LayoutCacheFilter implements Filter {
 
 			String key = getCacheKey(httpReq);
 
-			LayoutCacheResponseData data =
-				LayoutCacheUtil.getLayoutCacheResponseData(_companyId, key);
+			CacheResponseData data =
+				LayoutCacheUtil.getCacheResponseData(_companyId, key);
 
 			if (data == null) {
 				if (!isCacheable(httpReq)) {
@@ -144,51 +142,22 @@ public class LayoutCacheFilter implements Filter {
 					_log.info("Caching layout " + key);
 				}
 
-				LayoutCacheResponse layoutCacheResponse =
-					new LayoutCacheResponse(httpRes);
+				CacheResponse cacheResponse = new CacheResponse(
+					httpRes, ENCODING);
 
-				chain.doFilter(req, layoutCacheResponse);
+				chain.doFilter(req, cacheResponse);
 
-				data = new LayoutCacheResponseData(
-					layoutCacheResponse.getData(),
-					layoutCacheResponse.getContentType(),
-					layoutCacheResponse.getHeaders());
+				data = new CacheResponseData(
+					cacheResponse.getData(), cacheResponse.getContentType(),
+					cacheResponse.getHeaders());
 
 				if (data.getData().length > 0) {
-					LayoutCacheUtil.putLayoutCacheResponseData(
+					LayoutCacheUtil.putCacheResponseData(
 						_companyId, key, data);
 				}
 			}
 
-			Map headers = data.getHeaders();
-
-			Iterator itr = headers.keySet().iterator();
-
-			while (itr.hasNext()) {
-				String headerKey = (String)itr.next();
-
-				List headerValues = (List)headers.get(headerKey);
-
-				for (int i = 0; i < headerValues.size(); i++) {
-					Header header = (Header)headerValues.get(i);
-
-					int type = header.getType();
-
-					if (type == Header.DATE_TYPE) {
-						httpRes.addDateHeader(headerKey, header.getDateValue());
-					}
-					else if (type == Header.INTEGER_TYPE) {
-						httpRes.addIntHeader(headerKey, header.getIntValue());
-					}
-					else if (type == Header.STRING_TYPE) {
-						httpRes.addHeader(headerKey, header.getStringValue());
-					}
-				}
-			}
-
-			httpRes.setContentType(data.getContentType());
-
-			ServletResponseUtil.write(httpRes, data.getData());
+			CacheResponseUtil.write(httpRes, data);
 		}
 		else {
 			if (_log.isDebugEnabled()) {

@@ -29,6 +29,7 @@ import com.liferay.util.CachePolicy;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
+import com.liferay.util.servlet.filters.CacheResponseData;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;
@@ -80,10 +81,10 @@ public class LayoutCacheUtil {
 		}
 	}
 
-	public static LayoutCacheResponseData getLayoutCacheResponseData(
+	public static CacheResponseData getCacheResponseData(
 		String companyId, String key) {
 
-		LayoutCacheResponseData data = null;
+		CacheResponseData data = null;
 
 		if (Validator.isNull(key)) {
 			return null;
@@ -92,7 +93,7 @@ public class LayoutCacheUtil {
 		key = _encodeKey(companyId, key);
 
 		try {
-			data = (LayoutCacheResponseData)_cache.getFromCache(key);
+			data = (CacheResponseData)_cache.getFromCache(key);
 		}
 		catch (NeedsRefreshException nre) {
 			if (_log.isWarnEnabled()) {
@@ -108,8 +109,8 @@ public class LayoutCacheUtil {
 		return data;
 	}
 
-	public static void putLayoutCacheResponseData(
-		String companyId, String key, LayoutCacheResponseData data) {
+	public static void putCacheResponseData(
+		String companyId, String key, CacheResponseData data) {
 
 		if (data != null) {
 			key = _encodeKey(companyId, key);

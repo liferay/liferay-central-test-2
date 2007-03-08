@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet.filters.layoutcache;
+package com.liferay.util.servlet.filters;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.util.CollectionFactory;
@@ -39,84 +39,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 /**
- * <a href="LayoutCacheResponse.java.html"><b><i>View Source</i></b></a>
+ * <a href="CacheResponse.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class LayoutCacheResponse extends HttpServletResponseWrapper {
+public class CacheResponse extends HttpServletResponseWrapper {
 
-	public LayoutCacheResponse(HttpServletResponse res) {
+	public CacheResponse(HttpServletResponse res, String encoding) {
 		super(res);
-	}
 
-	public void finishResponse() {
-		try {
-			if (_writer != null) {
-				_writer.close();
-			}
-			else if (_stream != null) {
-				_stream.close();
-			}
-		}
-		catch (IOException e) {
-		}
-	}
-
-	public void flushBuffer() throws IOException {
-		if (_stream != null) {
-			_stream.flush();
-		}
-	}
-
-	public ServletOutputStream getOutputStream() throws IOException {
-		if (_writer != null) {
-			throw new IllegalStateException();
-		}
-
-		if (_stream == null) {
-			_stream = _createOutputStream();
-		}
-
-		return _stream;
-	}
-
-	public PrintWriter getWriter() throws IOException {
-		if (_writer != null) {
-			return _writer;
-		}
-
-		if (_stream != null) {
-			throw new IllegalStateException();
-		}
-
-		_stream = _createOutputStream();
-
-		_writer = new PrintWriter(new OutputStreamWriter(
-			//_stream, _res.getCharacterEncoding()));
-			_stream, LayoutCacheFilter.ENCODING));
-
-		return _writer;
-	}
-
-	public String getContentType() {
-		return _contentType;
-	}
-
-	public void setContentType(String contentType) {
-		_contentType = contentType;
-
-		super.setContentType(contentType);
-	}
-
-	public byte[] getData() {
-		finishResponse();
-
-		return _bam.toByteArray();
-	}
-
-	private ServletOutputStream _createOutputStream() throws IOException {
-		return new LayoutCacheStream(_bam);
+		_encoding = encoding;
 	}
 
 	public void addDateHeader(String name, long value) {
@@ -170,6 +103,87 @@ public class LayoutCacheResponse extends HttpServletResponseWrapper {
 		values.add(header);
 	}
 
+	public void finishResponse() {
+		try {
+			if (_writer != null) {
+				_writer.close();
+			}
+			else if (_stream != null) {
+				_stream.close();
+			}
+		}
+		catch (IOException e) {
+		}
+	}
+
+	public void flushBuffer() throws IOException {
+		if (_stream != null) {
+			_stream.flush();
+		}
+	}
+
+	public String getContentType() {
+		return _contentType;
+	}
+
+	public byte[] getData() {
+		finishResponse();
+
+		return _bam.toByteArray();
+	}
+
+	public Map getHeaders() {
+		return _headers;
+	}
+
+	public ServletOutputStream getOutputStream() throws IOException {
+		if (_writer != null) {
+			throw new IllegalStateException();
+		}
+
+		if (_stream == null) {
+			_stream = _createOutputStream();
+		}
+
+		return _stream;
+	}
+
+	public PrintWriter getWriter() throws IOException {
+		if (_writer != null) {
+			return _writer;
+		}
+
+		if (_stream != null) {
+			throw new IllegalStateException();
+		}
+
+		_stream = _createOutputStream();
+
+		_writer = new PrintWriter(new OutputStreamWriter(
+			//_stream, _res.getCharacterEncoding()));
+			_stream, _encoding));
+
+		return _writer;
+	}
+
+	public boolean isCommitted() {
+		if (_writer != null) {
+			return true;
+		}
+
+		if ((_stream != null) && _stream.isClosed()) {
+            return true;
+        }
+
+        return super.isCommitted();
+    }
+
+	public void setContentType(String contentType) {
+		_contentType = contentType;
+
+		super.setContentType(contentType);
+	}
+
 	public void setDateHeader(String name, long value) {
 		List values = new ArrayList();
 
@@ -209,13 +223,14 @@ public class LayoutCacheResponse extends HttpServletResponseWrapper {
 		values.add(header);
 	}
 
-	public Map getHeaders() {
-		return _headers;
+	private CacheResponseStream _createOutputStream() throws IOException {
+		return new CacheResponseStream(_bam);
 	}
 
+	private String _encoding;
 	private ByteArrayMaker _bam = new ByteArrayMaker();
-	private ServletOutputStream _stream = null;
-	private PrintWriter _writer = null;
+	private CacheResponseStream _stream;
+	private PrintWriter _writer;
 	private String _contentType;
 	private Map _headers = CollectionFactory.getHashMap();
 

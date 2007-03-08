@@ -20,44 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet.filters.layoutcache;
+package com.liferay.util.servlet.filters;
 
-import java.io.Serializable;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
-import java.util.Map;
+import javax.servlet.ServletOutputStream;
 
 /**
- * <a href="LayoutCacheResponseData.java.html"><b><i>View Source</i></b></a>
+ * <a href="CacheResponseStream.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Alexander Chow
  *
  */
-public class LayoutCacheResponseData implements Serializable {
+public class CacheResponseStream extends ServletOutputStream {
 
-	public LayoutCacheResponseData(byte[] data, String contentType,
-								   Map headers) {
-
-		super();
-
-		_data = data;
-		_contentType = contentType;
-		_headers = headers;
+	public CacheResponseStream(OutputStream os) {
+		_dos = new DataOutputStream(os);
 	}
 
-	public byte[] getData() {
-		return _data;
+	public void close() throws IOException {
+        super.close();
+
+        _closed = true;
+    }
+
+    public boolean isClosed() {
+        return _closed;
+    }
+
+	public void write(int b) throws IOException {
+		_dos.write(b);
 	}
 
-	public String getContentType() {
-		return _contentType;
+	public void write(byte[] b) throws IOException {
+		_dos.write(b);
 	}
 
-	public Map getHeaders() {
-		return _headers;
+	public void write(byte[] b, int off, int len) throws IOException {
+		_dos.write(b, off, len);
 	}
 
-	private byte[] _data;
-	private String _contentType;
-	private Map _headers;
+	private boolean _closed;
+	private DataOutputStream _dos = null;
 
 }

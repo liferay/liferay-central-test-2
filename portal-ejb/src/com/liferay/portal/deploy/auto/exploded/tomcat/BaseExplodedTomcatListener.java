@@ -77,19 +77,19 @@ public abstract class BaseExplodedTomcatListener implements AutoDeployListener {
 		String docBase = null;
 
 		try {
-            String content = FileUtil.read(file);
+			String content = FileUtil.read(file);
 
-            SAXReader reader = SAXReaderFactory.getInstance(false);
+			SAXReader reader = SAXReaderFactory.getInstance(false);
 
-            Document doc = reader.read(new StringReader(content));
+			Document doc = reader.read(new StringReader(content));
 
 			Element root = doc.getRootElement();
 
 			docBase = root.attributeValue("docBase");
-        }
-        catch (Exception e) {
-            throw new AutoDeployException(e);
-        }
+		}
+		catch (Exception e) {
+			throw new AutoDeployException(e);
+		}
 
 		if (Validator.isNull(docBase)) {
 			if (_log.isDebugEnabled()) {

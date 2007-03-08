@@ -20,38 +20,59 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet.filters.layoutcache;
+package com.liferay.util.servlet.filters;
 
-import java.io.DataOutputStream;
+import com.liferay.util.servlet.Header;
+import com.liferay.util.servlet.ServletResponseUtil;
+
 import java.io.IOException;
-import java.io.OutputStream;
 
-import javax.servlet.ServletOutputStream;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="LayoutCacheStream.java.html"><b><i>View Source</i></b></a>
+ * <a href="CacheResponseUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class LayoutCacheStream extends ServletOutputStream {
+public class CacheResponseUtil {
 
-	public LayoutCacheStream(OutputStream os) {
-		_dos = new DataOutputStream(os);
+	public static void write(HttpServletResponse res, CacheResponseData data)
+		throws IOException {
+
+		Map headers = data.getHeaders();
+
+		Iterator itr = headers.keySet().iterator();
+
+		while (itr.hasNext()) {
+			String headerKey = (String)itr.next();
+
+			List headerValues = (List)headers.get(headerKey);
+
+			for (int i = 0; i < headerValues.size(); i++) {
+				Header header = (Header)headerValues.get(i);
+
+				int type = header.getType();
+
+				if (type == Header.DATE_TYPE) {
+					res.addDateHeader(headerKey, header.getDateValue());
+				}
+				else if (type == Header.INTEGER_TYPE) {
+					res.addIntHeader(headerKey, header.getIntValue());
+				}
+				else if (type == Header.STRING_TYPE) {
+					res.addHeader(headerKey, header.getStringValue());
+				}
+			}
+		}
+
+		res.setContentType(data.getContentType());
+
+		ServletResponseUtil.write(res, data.getData());
 	}
-
-	public void write(int b) throws IOException {
-		_dos.write(b);
-	}
-
-	public void write(byte[] b) throws IOException {
-		_dos.write(b);
-	}
-
-	public void write(byte[] b, int off, int len) throws IOException {
-		_dos.write(b, off, len);
-	}
-
-	private DataOutputStream _dos = null;
 
 }
