@@ -83,7 +83,11 @@
 				<dirset dir="." excludes="${deploy.wars.excludes}" includes="${deploy.wars.includes}" />
 			</path>
 			<sequential>
-				<antelope:grep in="@{module.name}" regex="(.*\\)(.*)(\.war)" group="2" property="module.name" />
+				<antelope:stringutil string="@{module.name}" property="module.name.unix">
+					<replace regex="\\" replacement="/" />
+				</antelope:stringutil>
+
+				<antelope:grep in="${module.name.unix}" regex="(.*/)(.*)(\.war)" group="2" property="module.name" />
 
 				<antcall target="${loop.modules.cmd}" />
 			</sequential>
