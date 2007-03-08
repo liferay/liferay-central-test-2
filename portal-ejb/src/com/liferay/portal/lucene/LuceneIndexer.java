@@ -36,6 +36,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.IndexWriter;
@@ -80,7 +81,13 @@ public class LuceneIndexer implements Runnable {
 			}
 		}
 
-		long start1 = System.currentTimeMillis();
+		StopWatch stopWatch1 = null;
+
+		if (_log.isInfoEnabled()) {
+			stopWatch1 = new StopWatch();
+
+			stopWatch1.start();
+		}
 
 		LuceneUtil.delete(_companyId);
 
@@ -108,7 +115,13 @@ public class LuceneIndexer implements Runnable {
 				String className = portlet.getIndexerClass();
 
 				if (portlet.isActive() && className != null) {
-					long start2 = System.currentTimeMillis();
+					StopWatch stopWatch2 = null;
+
+					if (_log.isInfoEnabled()) {
+						stopWatch2 = new StopWatch();
+
+						stopWatch2.start();
+					}
 
 					if (_log.isInfoEnabled()) {
 						_log.info(
@@ -119,22 +132,19 @@ public class LuceneIndexer implements Runnable {
 
 					indexer.reIndex(indexIds);
 
-					long end2 = System.currentTimeMillis();
-
 					if (_log.isInfoEnabled()) {
 						_log.info(
 							"Re-indexing with " + className + " completed in " +
-								((end2 - start2) / Time.SECOND) + " seconds");
+								(stopWatch2.getTime() / Time.SECOND) +
+									" seconds");
 					}
 				}
 			}
 
-			long end1 = System.currentTimeMillis();
-
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					"Re-indexing Lucene completed in " +
-						((end1 - start1) / Time.SECOND) + " seconds");
+						(stopWatch1.getTime() / Time.SECOND) + " seconds");
 			}
 		}
 		catch (Exception e) {

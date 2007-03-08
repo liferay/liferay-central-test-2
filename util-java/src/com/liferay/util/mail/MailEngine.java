@@ -43,6 +43,7 @@ import javax.mail.internet.MimeMessage;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -166,10 +167,12 @@ public class MailEngine {
 			String inReplyTo)
 		throws MailEngineException {
 
-		long start = 0;
+		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 
 			_log.debug("From: " + from);
 			_log.debug("To: " + to);
@@ -246,9 +249,7 @@ public class MailEngine {
 		}
 
 		if (_log.isDebugEnabled()) {
-			long end = System.currentTimeMillis();
-
-			_log.debug("Sending mail takes " + (end - start) + " ms");
+			_log.debug("Sending mail takes " + stopWatch.getTime() + " ms");
 		}
 	}
 

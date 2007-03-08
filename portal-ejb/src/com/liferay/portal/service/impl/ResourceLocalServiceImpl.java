@@ -46,6 +46,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -194,15 +195,17 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		long start = 0;
+		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
 		validate(companyId, name, portletActions);
 
-		start = logAddResources(name, primKey, start, 1);
+		logAddResources(name, primKey, stopWatch, 1);
 
 		// Company
 
@@ -210,7 +213,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			companyId, name, ResourceImpl.TYPE_CLASS,
 			ResourceImpl.SCOPE_COMPANY, companyId);
 
-		start = logAddResources(name, primKey, start, 2);
+		logAddResources(name, primKey, stopWatch, 2);
 
 		// Guest
 
@@ -221,7 +224,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			companyId, name, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
 			String.valueOf(guestGroup.getGroupId()));
 
-		start = logAddResources(name, primKey, start, 3);
+		logAddResources(name, primKey, stopWatch, 3);
 
 		// Group
 
@@ -231,7 +234,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				ResourceImpl.SCOPE_GROUP, String.valueOf(groupId));
 		}
 
-		start = logAddResources(name, primKey, start, 4);
+		logAddResources(name, primKey, stopWatch, 4);
 
 		if (primKey != null) {
 
@@ -241,14 +244,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				companyId, name, ResourceImpl.TYPE_CLASS,
 				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 
-			start = logAddResources(name, primKey, start, 5);
+			logAddResources(name, primKey, stopWatch, 5);
 
 			// Permissions
 
 			List permissions = PermissionLocalServiceUtil.addPermissions(
 				companyId, name, resource.getResourceId(), portletActions);
 
-			start = logAddResources(name, primKey, start, 6);
+			logAddResources(name, primKey, stopWatch, 6);
 
 			// User permissions
 
@@ -256,7 +259,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				UserUtil.addPermissions(userId, permissions);
 			}
 
-			start = logAddResources(name, primKey, start, 7);
+			logAddResources(name, primKey, stopWatch, 7);
 
 			// Community permissions
 
@@ -265,7 +268,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 					groupId, name, resource.getResourceId(), portletActions);
 			}
 
-			start = logAddResources(name, primKey, start, 8);
+			logAddResources(name, primKey, stopWatch, 8);
 
 			// Guest permissions
 
@@ -288,7 +291,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				}
 			}
 
-			start = logAddResources(name, primKey, start, 9);
+			logAddResources(name, primKey, stopWatch, 9);
 		}
 	}
 
@@ -387,15 +390,17 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			boolean portletActions)
 		throws PortalException, SystemException {
 
-		long start = 0;
+		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);
 
-		start = logAddCommunityPermissions(groupId, name, resourceId, start, 1);
+		logAddCommunityPermissions(groupId, name, resourceId, stopWatch, 1);
 
 		List actions = null;
 
@@ -410,18 +415,18 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 					name);
 		}
 
-		start = logAddCommunityPermissions(groupId, name, resourceId, start, 2);
+		logAddCommunityPermissions(groupId, name, resourceId, stopWatch, 2);
 
 		String[] actionIds = (String[])actions.toArray(new String[0]);
 
 		List permissions = PermissionLocalServiceUtil.getPermissions(
 			group.getCompanyId(), actionIds, resourceId);
 
-		start = logAddCommunityPermissions(groupId, name, resourceId, start, 3);
+		logAddCommunityPermissions(groupId, name, resourceId, stopWatch, 3);
 
 		GroupUtil.addPermissions(groupId, permissions);
 
-		start = logAddCommunityPermissions(groupId, name, resourceId, start, 4);
+		logAddCommunityPermissions(groupId, name, resourceId, stopWatch, 4);
 	}
 
 	protected void addGuestPermissions(
@@ -462,37 +467,30 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		GroupUtil.addPermissions(groupId, permissions);
 	}
 
-	protected long logAddCommunityPermissions(
-		long groupId, String name, long resourceId, long start, int block) {
+	protected void logAddCommunityPermissions(
+		long groupId, String name, long resourceId, StopWatch stopWatch,
+		int block) {
 
 		if (!_log.isDebugEnabled()) {
-			return 0;
+			return;
 		}
-
-		long end = System.currentTimeMillis();
 
 		_log.debug(
 			"Adding community permissions block " + block + " for " + groupId +
-				" " + name + " " + resourceId + " takes " + (end - start) +
-					" ms");
-
-		return end;
+				" " + name + " " + resourceId + " takes " +
+					stopWatch.getTime() + " ms");
 	}
 
-	protected long logAddResources(
-		String name, String primKey, long start, int block) {
+	protected void logAddResources(
+		String name, String primKey, StopWatch stopWatch, int block) {
 
 		if (!_log.isDebugEnabled()) {
-			return 0;
+			return;
 		}
-
-		long end = System.currentTimeMillis();
 
 		_log.debug(
 			"Adding resources block " + block + " for " + name + " " + primKey +
-				" takes " + (end - start) + " ms");
-
-		return end;
+				" takes " + stopWatch.getTime() + " ms");
 	}
 
 	protected void validate(

@@ -53,6 +53,7 @@ import java.util.Map;
 
 import javax.portlet.PortletRequest;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -132,10 +133,12 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	public boolean hasPermission(
 		long groupId, String name, String primKey, String actionId) {
 
-		long start = 0;
+		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
 		PermissionCheckerBag bag = getBag(groupId);
@@ -199,12 +202,10 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				}
 
 				if (_log.isDebugEnabled()) {
-					long end = System.currentTimeMillis();
-
 					_log.debug(
 						"Creating bag for " + groupId + " " + name + " " +
 							primKey + " " + actionId + " takes " +
-								(end - start) + " ms");
+								stopWatch.getTime() + " ms");
 				}
 
 				bag = new PermissionCheckerBagImpl(
@@ -233,12 +234,10 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			results.put(resultsKey, resultsValue);
 
 			if (_log.isDebugEnabled()) {
-				long end = System.currentTimeMillis();
-
 				_log.debug(
 					"Checking permission for " + groupId + " " + name + " " +
-						primKey + " " + actionId + " takes " + (end - start) +
-							" ms");
+						primKey + " " + actionId + " takes " +
+							stopWatch.getTime() + " ms");
 			}
 		}
 
@@ -340,10 +339,12 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			long groupId, String name, String primKey, String actionId)
 		throws Exception {
 
-		long start = 0;
+		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
 		String companyId = user.getActualCompanyId();
@@ -352,8 +353,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			return true;
 		}
 
-		start = logHasUserPermission(
-			groupId, name, primKey, actionId, start, 1);
+		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 1);
 
 		// Individual
 
@@ -376,8 +376,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			}
 		}
 
-		start = logHasUserPermission(
-			groupId, name, primKey, actionId, start, 2);
+		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 2);
 
 		// Group
 
@@ -400,8 +399,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			}
 		}
 
-		start = logHasUserPermission(
-			groupId, name, primKey, actionId, start, 3);
+		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 3);
 
 		// Group template
 
@@ -426,8 +424,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			}
 		}
 
-		start = logHasUserPermission(
-			groupId, name, primKey, actionId, start, 4);
+		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 4);
 
 		// Company
 
@@ -448,8 +445,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			}
 		}
 
-		start = logHasUserPermission(
-			groupId, name, primKey, actionId, start, 5);
+		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 5);
 
 		// Check if user has access to perform the action on the given
 		// resource scopes. The resources are scoped to check first for an
@@ -461,8 +457,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		boolean value = PermissionServiceUtil.hasUserPermissions(
 			user.getUserId(), groupId, actionId, resourceIds, bag);
 
-		start = logHasUserPermission(
-			groupId, name, primKey, actionId, start, 6);
+		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 6);
 
 		return value;
 	}
@@ -491,22 +486,18 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		return false;
 	}
 
-	protected long logHasUserPermission(
+	protected void logHasUserPermission(
 		long groupId, String name, String primKey, String actionId,
-		long start, int block) {
+		StopWatch stopWatch, int block) {
 
 		if (!_log.isDebugEnabled()) {
-			return 0;
+			return;
 		}
-
-		long end = System.currentTimeMillis();
 
 		_log.debug(
 			"Checking user permission block " + block + " for " + groupId +
 				" " + name + " " + primKey + " " + actionId + " takes " +
-					(end - start) + " ms");
-
-		return end;
+					stopWatch.getTime() + " ms");
 	}
 
 	protected void putBag(long groupId, PermissionCheckerBag bag) {

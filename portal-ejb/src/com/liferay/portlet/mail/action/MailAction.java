@@ -56,6 +56,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.MultiHashMap;
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
@@ -208,10 +209,12 @@ public class MailAction extends JSONAction {
 	}
 
 	protected String getPreview(HttpServletRequest req) throws Exception {
-		long start = 0;
+		StopWatch stopWatch = null;
 
 		if (_log.isInfoEnabled()) {
-			start = System.currentTimeMillis();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
 		JSONObject jsonObj = new JSONObject();
@@ -232,8 +235,7 @@ public class MailAction extends JSONAction {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Total time to get preview " +
-					(System.currentTimeMillis() - start) + "ms");
+				"Total time to get preview " + stopWatch.getTime() + "ms");
 		}
 
 		return jsonObj.toString();
@@ -366,10 +368,12 @@ public class MailAction extends JSONAction {
 	private void _getFolders(HttpServletRequest req, JSONObject jsonObj)
 		throws Exception {
 
-		long start = 0;
+		StopWatch stopWatch = null;
 
 		if (_log.isInfoEnabled()) {
-			start = System.currentTimeMillis();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
 		JSONArray jsonFolders = new JSONArray();
@@ -402,8 +406,7 @@ public class MailAction extends JSONAction {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Total time to get folders " +
-					(System.currentTimeMillis() - start) + "ms");
+				"Total time to get folders " + stopWatch.getTime() + "ms");
 		}
 	}
 

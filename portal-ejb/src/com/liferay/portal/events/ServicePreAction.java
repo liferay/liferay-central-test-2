@@ -98,6 +98,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
@@ -114,10 +115,12 @@ public class ServicePreAction extends Action {
 	public void run(HttpServletRequest req, HttpServletResponse res)
 		throws ActionException {
 
-		long start = 0;
+		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
 		try {
@@ -583,9 +586,7 @@ public class ServicePreAction extends Action {
 		}
 
 		if (_log.isDebugEnabled()) {
-			long end = System.currentTimeMillis();
-
-			_log.debug("Running takes " + (end - start) + " ms");
+			_log.debug("Running takes " + stopWatch.getTime() + " ms");
 		}
 	}
 

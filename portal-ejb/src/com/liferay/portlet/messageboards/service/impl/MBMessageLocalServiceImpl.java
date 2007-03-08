@@ -103,6 +103,7 @@ import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -222,10 +223,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		long start = 0;
+		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
 		// Message
@@ -241,7 +244,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String messageId = String.valueOf(CounterLocalServiceUtil.increment(
 			MBMessage.class.getName()));
 
-		start = logAddMessage(messageId, start, 1);
+		logAddMessage(messageId, stopWatch, 1);
 
 		MBMessage message = MBMessageUtil.create(
 			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID, messageId));
@@ -295,7 +298,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setPriority(priority);
 		}
 
-		start = logAddMessage(messageId, start, 2);
+		logAddMessage(messageId, stopWatch, 2);
 
 		// Message
 
@@ -346,14 +349,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		start = logAddMessage(messageId, start, 3);
+		logAddMessage(messageId, stopWatch, 3);
 
 		// Commit
 
 		MBThreadUtil.update(thread);
 		MBMessageUtil.update(message);
 
-		start = logAddMessage(messageId, start, 4);
+		logAddMessage(messageId, stopWatch, 4);
 
 		// Resources
 
@@ -371,7 +374,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		start = logAddMessage(messageId, start, 5);
+		logAddMessage(messageId, stopWatch, 5);
 
 		// Statistics
 
@@ -380,13 +383,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				category.getGroupId(), userId);
 		}
 
-		start = logAddMessage(messageId, start, 6);
+		logAddMessage(messageId, stopWatch, 6);
 
 		// Subscriptions
 
 		notifySubscribers(category, message, prefs, false);
 
-		start = logAddMessage(messageId, start, 7);
+		logAddMessage(messageId, stopWatch, 7);
 
 		// Category
 
@@ -394,7 +397,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBCategoryUtil.update(category);
 
-		start = logAddMessage(messageId, start, 8);
+		logAddMessage(messageId, stopWatch, 8);
 
 		// Testing roll back
 
@@ -416,7 +419,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			_log.error("Indexing " + messageId, ioe);
 		}
 
-		start = logAddMessage(messageId, start, 9);
+		logAddMessage(messageId, stopWatch, 9);
 
 		return message;
 	}
@@ -1170,24 +1173,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return MBCategoryUtil.findByPrimaryKey(categoryId);
 	}
 
-	protected long logAddMessage(String messageId, long start, int block) {
-		if (!_log.isDebugEnabled()) {
-			return 0;
-		}
+	protected void logAddMessage(
+		String messageId, StopWatch stopWatch, int block) {
 
 		int messageIdInt = GetterUtil.getInteger(messageId);
 
 		if ((messageIdInt != 1) && ((messageIdInt % 10) != 0)) {
-			return 0;
+			return;
 		}
-
-		long end = System.currentTimeMillis();
 
 		_log.debug(
 			"Adding message block " + block + " for " + messageId + " takes " +
-				(end - start) + " ms");
-
-		return end;
+				stopWatch.getTime() + " ms");
 	}
 
 	protected void notifySubscribers(

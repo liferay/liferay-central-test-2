@@ -56,6 +56,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -148,30 +149,32 @@ public class CachePortlet implements Portlet {
 	public void processAction(ActionRequest req, ActionResponse res)
 		throws IOException, PortletException {
 
-		long start = 0;
+		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
 		_invoke(req, res, true);
 
 		if (_log.isDebugEnabled()) {
-			long end = System.currentTimeMillis();
-
 			_log.debug(
-				"processAction for " + _portletId + " takes " + (end - start) +
-					" ms");
+				"processAction for " + _portletId + " takes " +
+					stopWatch.getTime() + " ms");
 		}
 	}
 
 	public void render(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
-		long start = 0;
+		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
 		String userId = req.getRemoteUser();
@@ -227,10 +230,9 @@ public class CachePortlet implements Portlet {
 		}
 
 		if (_log.isDebugEnabled()) {
-			long end = System.currentTimeMillis();
-
 			_log.debug(
-				"render for " + _portletId + " takes " + (end - start) + " ms");
+				"render for " + _portletId + " takes " + stopWatch.getTime() +
+					" ms");
 		}
 	}
 

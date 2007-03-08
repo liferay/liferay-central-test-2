@@ -58,6 +58,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -289,12 +290,15 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long[] resourceIds, PermissionCheckerBag permissionCheckerBag)
 		throws PortalException, SystemException {
 
-		long start = 0;
-		int block = 1;
+		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
+
+		int block = 1;
 
 		// Return false if there is no resources
 
@@ -316,8 +320,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		long resourceId = resourceIds[0];
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		List userGroups = permissionCheckerBag.getUserGroups();
 		List userOrgs = permissionCheckerBag.getUserOrgs();
@@ -327,8 +330,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		List groups = permissionCheckerBag.getGroups();
 		List roles = permissionCheckerBag.getRoles();
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		// Check the organization and community intersection table. Break out of
 		// this method if the user has one of the permissions set at the
@@ -338,28 +340,27 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 1) {
 			return hasUserPermissions_1(
 				userId, actionId, resourceId, permissions, groups, groupId,
-				start, block);
+				stopWatch, block);
 		}
 		else if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 2) {
 			return hasUserPermissions_2(
 				userId, actionId, resourceId, permissions, groups, groupId,
-				start, block);
+				stopWatch, block);
 		}
 		else if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 3) {
 			return hasUserPermissions_3(
-				userId, actionId, resourceId, permissions, groups, roles, start,
-				block);
+				userId, actionId, resourceId, permissions, groups, roles,
+				stopWatch, block);
 		}
 		else if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 4) {
 			return hasUserPermissions_4(
-				userId, actionId, resourceId, permissions, groups, roles, start,
-				block);
+				userId, actionId, resourceId, permissions, groups, roles,
+				stopWatch, block);
 		}
 
 		return false;
@@ -651,7 +652,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 	protected boolean hasUserPermissions_1(
 			String userId, String actionId, long resourceId, List permissions,
-			List groups, long groupId, long start, int block)
+			List groups, long groupId, StopWatch stopWatch, int block)
 		throws PortalException, SystemException {
 
 		// Is the user connected to one of the permissions via group or
@@ -663,8 +664,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			}
 		}
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		// Is the user associated with groups or organizations that are directly
 		// connected to one of the permissions?
@@ -677,8 +677,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			}
 		}
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		// Is the user connected to one of the permissions via user roles?
 
@@ -686,8 +685,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		// Is the user connected to one of the permissions via user group roles?
 
@@ -697,8 +695,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		// Is the user directly connected to one of the permissions?
 
@@ -706,15 +703,14 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		return false;
 	}
 
 	protected boolean hasUserPermissions_2(
 			String userId, String actionId, long resourceId, List permissions,
-			List groups, long groupId, long start, int block)
+			List groups, long groupId, StopWatch stopWatch, int block)
 		throws PortalException, SystemException {
 
 		// Call countByGroupsRoles, countByGroupsPermissions, countByUsersRoles,
@@ -726,15 +722,14 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		return false;
 	}
 
 	protected boolean hasUserPermissions_3(
 			String userId, String actionId, long resourceId, List permissions,
-			List groups, List roles, long start, int block)
+			List groups, List roles, StopWatch stopWatch, int block)
 		throws PortalException, SystemException {
 
 		// Is the user associated with groups or organizations that are directly
@@ -748,8 +743,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			}
 		}
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		// Is the user associated with a role that is directly connected to one
 		// of the permissions?
@@ -762,8 +756,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			}
 		}
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		// Is the user directly connected to one of the permissions?
 
@@ -771,15 +764,14 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		return false;
 	}
 
 	protected boolean hasUserPermissions_4(
 			String userId, String actionId, long resourceId, List permissions,
-			List groups, List roles, long start, int block)
+			List groups, List roles, StopWatch stopWatch, int block)
 		throws PortalException, SystemException {
 
 		// Call countByGroupsPermissions, countByRolesPermissions, and
@@ -791,28 +783,23 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		start = logHasUserPermissions(
-			userId, actionId, resourceId, start, block++);
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
 		return false;
 	}
 
-	protected long logHasUserPermissions(
-		String userId, String actionId, long resourceId, long start,
+	protected void logHasUserPermissions(
+		String userId, String actionId, long resourceId, StopWatch stopWatch,
 		int block) {
 
 		if (!_log.isDebugEnabled()) {
-			return 0;
+			return;
 		}
-
-		long end = System.currentTimeMillis();
 
 		_log.debug(
 			"Checking user permissions block " + block + " for " + userId +
-				" " + actionId + " " + resourceId + " takes " + (end - start) +
-					" ms");
-
-		return end;
+				" " + actionId + " " + resourceId + " takes " +
+					stopWatch.getTime() + " ms");
 	}
 
 	private static Log _log =
