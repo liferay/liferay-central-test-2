@@ -20,35 +20,48 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.servlet;
+package com.liferay.portal.kernel.deploy.auto;
 
-import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
-import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * <a href="PortletContextListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="AutoDeployUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletContextListener implements ServletContextListener {
+public class AutoDeployUtil {
 
-	public void contextInitialized(ServletContextEvent sce) {
-		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public static void registerDir(AutoDeployDir dir) {
+		_instance._registerDir(dir);
 	}
 
-	public void contextDestroyed(ServletContextEvent sce) {
-		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public static void unregisterDir(String name) {
+		_instance._unregisterDir(name);
 	}
+
+	private AutoDeployUtil() {
+		_dirs = new HashMap();
+	}
+
+	private void _registerDir(AutoDeployDir dir) {
+		_dirs.put(dir.getName(), dir);
+
+		dir.start();
+	}
+
+	private void _unregisterDir(String name) {
+		AutoDeployDir dir = (AutoDeployDir)_dirs.remove(name);
+
+		if (dir != null) {
+			dir.stop();
+		}
+	}
+
+	private static AutoDeployUtil _instance = new AutoDeployUtil();
+
+	private Map _dirs;
 
 }

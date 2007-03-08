@@ -47,7 +47,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CookieUtil;
 import com.liferay.util.Encryptor;
-import com.liferay.util.EncryptorException;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.InstancePool;

@@ -22,11 +22,9 @@
 
 package com.liferay.portlet.admin.action;
 
-import com.liferay.portal.deploy.AutoDeployLayoutTemplateListener;
-import com.liferay.portal.deploy.AutoDeployPortletListener;
-import com.liferay.portal.deploy.AutoDeployThemeListener;
-import com.liferay.portal.kernel.deploy.AutoDeployDir;
-import com.liferay.portal.kernel.deploy.AutoDeployUtil;
+import com.liferay.portal.events.GlobalStartupAction;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
@@ -68,7 +66,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
@@ -219,11 +216,8 @@ public class EditServerAction extends PortletAction {
 				_log.info("Registering auto deploy directories");
 			}
 
-			List autoDeployListeners = new ArrayList();
-
-			autoDeployListeners.add(new AutoDeployLayoutTemplateListener());
-			autoDeployListeners.add(new AutoDeployPortletListener());
-			autoDeployListeners.add(new AutoDeployThemeListener());
+			List autoDeployListeners =
+				GlobalStartupAction.getAutoDeployListeners();
 
 			AutoDeployDir autoDeployDir = new AutoDeployDir(
 				"defaultAutoDeployDir", new File(deployDir), new File(destDir),

@@ -20,35 +20,46 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.servlet;
+package com.liferay.portal.kernel.deploy.hot;
 
-import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
-import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
+import com.liferay.portal.kernel.plugin.PluginPackage;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import javax.servlet.ServletContext;
 
 /**
- * <a href="PortletContextListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="HotDeployEvent.java.html"><b><i>View Source</i></b></a>
  *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletContextListener implements ServletContextListener {
+public class HotDeployEvent {
 
-	public void contextInitialized(ServletContextEvent sce) {
-		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public HotDeployEvent(ServletContext servletContext,
+						  ClassLoader contextClassLoader) {
+
+		_servletContext = servletContext;
+		_contextClassLoader = contextClassLoader;
 	}
 
-	public void contextDestroyed(ServletContextEvent sce) {
-		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public ServletContext getServletContext() {
+		return _servletContext;
 	}
+
+	public ClassLoader getContextClassLoader() {
+		return _contextClassLoader;
+	}
+
+	public PluginPackage getPluginPackage() {
+		return _pluginPackage;
+	}
+
+	public void setPluginPackage(PluginPackage pluginPackage) {
+		_pluginPackage = pluginPackage;
+	}
+
+	private ServletContext _servletContext;
+	private ClassLoader _contextClassLoader;
+	private PluginPackage _pluginPackage;
 
 }

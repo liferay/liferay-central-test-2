@@ -80,6 +80,8 @@ public class PropsUtil {
 
 	// Auto Deploy
 
+	public static final String AUTO_DEPLOY_LISTENERS = "auto.deploy.listeners";
+
 	public static final String AUTO_DEPLOY_ENABLED = "auto.deploy.enabled";
 
 	public static final String AUTO_DEPLOY_DEPLOY_DIR = "auto.deploy.deploy.dir";
@@ -90,7 +92,13 @@ public class PropsUtil {
 
 	public static final String AUTO_DEPLOY_UNPACK_WAR = "auto.deploy.unpack.war";
 
+	public static final String AUTO_DEPLOY_TOMCAT_CONF_DIR = "auto.deploy.tomcat.conf.dir";
+
 	public static final String AUTO_DEPLOY_TOMCAT_LIB_DIR = "auto.deploy.tomcat.lib.dir";
+
+	// Hot Deploy
+
+	public static final String HOT_DEPLOY_LISTENERS = "hot.deploy.listeners";
 
 	// Plugin
 

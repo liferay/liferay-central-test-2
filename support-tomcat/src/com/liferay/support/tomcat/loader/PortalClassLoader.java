@@ -20,35 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.servlet;
+package com.liferay.support.tomcat.loader;
 
-import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
-import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import org.apache.catalina.loader.WebappClassLoader;
 
 /**
- * <a href="PortletContextListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalClassLoader.java.html"><b><i>View Source</i></b></a>
  *
- * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletContextListener implements ServletContextListener {
+public class PortalClassLoader extends WebappClassLoader {
 
-	public void contextInitialized(ServletContextEvent sce) {
-		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public PortalClassLoader(ClassLoader parent) {
+		super(
+			PortalClassLoaderUtil.getClassLoader() != null ?
+				PortalClassLoaderUtil.getClassLoader() : null);
+
+		if (PortalClassLoaderUtil.getClassLoader() == null) {
+			_log.error(
+				"Portal class loader is not available to override the " +
+					"default Catalina web class loader");
+		}
 	}
 
-	public void contextDestroyed(ServletContextEvent sce) {
-		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
-	}
+	private static Log _log = LogFactoryUtil.getLog(PortalClassLoader.class);
 
 }

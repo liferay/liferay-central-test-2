@@ -20,35 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.servlet;
+package com.liferay.portal.kernel.deploy.auto;
 
-import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
-import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="PortletContextListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="AutoDeployException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletContextListener implements ServletContextListener {
+public class AutoDeployException extends PortalException {
 
-	public void contextInitialized(ServletContextEvent sce) {
-		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public AutoDeployException() {
+		super();
 	}
 
-	public void contextDestroyed(ServletContextEvent sce) {
-		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public AutoDeployException(String msg) {
+		super(msg);
+	}
+
+	public AutoDeployException(Throwable cause) {
+		super(cause);
+	}
+
+	public AutoDeployException(String msg, Throwable cause) {
+		super(msg, cause);
 	}
 
 }

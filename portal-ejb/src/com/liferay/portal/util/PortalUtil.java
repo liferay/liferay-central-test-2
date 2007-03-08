@@ -932,7 +932,7 @@ public class PortalUtil {
 
 				if (doAsUserId != null) {
 					if (_log.isDebugEnabled()) {
-						_log.debug("Impersonating user " + doAsUserId); 
+						_log.debug("Impersonating user " + doAsUserId);
 					}
 
 					return doAsUserId;

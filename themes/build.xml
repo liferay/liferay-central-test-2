@@ -5,7 +5,7 @@
 
 	<target name="clean">
 		<antcall target="loop-modules">
-			<param name="loop.modules.cmd" value="clean" />
+			<param name="loop.modules.cmd" value="clean-module" />
 		</antcall>
 	</target>
 
@@ -18,9 +18,35 @@
 		</delete>
 	</target>
 
-	<target name="war" depends="merge">
+	<target name="compile">
 		<antcall target="loop-modules">
-			<param name="loop.modules.cmd" value="war" />
+			<param name="loop.modules.cmd" value="compile-module" />
+		</antcall>
+	</target>
+
+	<target name="compile-module">
+		<copy todir="${module.name}.war">
+			<fileset
+				dir="${project.dir}/portal-web/docroot/html/themes/_common"
+				excludes="templates/init.vm"
+			/>
+		</copy>
+
+		<if>
+			<available file="${module.name}.war/_diffs" />
+			<then>
+				<copy todir="${module.name}.war" overwrite="yes">
+					<fileset
+						dir="${module.name}.war/_diffs"
+					/>
+				</copy>
+			</then>
+		</if>
+	</target>
+
+	<target name="war" depends="compile">
+		<antcall target="loop-modules">
+			<param name="loop.modules.cmd" value="war-module" />
 		</antcall>
 	</target>
 
@@ -31,9 +57,9 @@
 		/>
 	</target>
 
-	<target name="deploy" depends="merge">
+	<target name="deploy" depends="compile">
 		<antcall target="loop-modules">
-			<param name="loop.modules.cmd" value="deploy" />
+			<param name="loop.modules.cmd" value="deploy-module" />
 		</antcall>
 	</target>
 
@@ -54,88 +80,13 @@
 	<target name="loop-modules">
 		<for param="module.name">
 			<path>
-				<dirset dir="." includes="*.war" />
+				<dirset dir="." excludes="${deploy.wars.excludes}" includes="${deploy.wars.includes}" />
 			</path>
 			<sequential>
-				<antelope:stringutil string="@{module.name}" property="module.name.beginindex">
-					<lastindexof string="${file.separator}" />
-				</antelope:stringutil>
+				<antelope:grep in="@{module.name}" regex="(.*\\)(.*)(\.war)" group="2" property="module.name" />
 
-				<math
-					datatype="int"
-					operand1="${module.name.beginindex}"
-					operand2="1"
-					operation="+"
-					result="module.name.beginindex"
-				/>
-
-				<antelope:stringutil string="@{module.name}" property="module.name.endindex">
-					<lastindexof string=".war" />
-				</antelope:stringutil>
-
-				<antelope:stringutil string="@{module.name}" property="module.name">
-					<substring beginindex="${module.name.beginindex}" endindex="${module.name.endindex}" />
-				</antelope:stringutil>
-
-				<if>
-					<or>
-						<equals arg1="${deploy.specific.wars}" arg2="" />
-						<antelope:contains string="${deploy.specific.wars}" substring="${module.name}" />
-					</or>
-					<then>
-						<if>
-							<equals arg1="${loop.modules.cmd}" arg2="clean" />
-							<then>
-								<antcall target="clean-module" />
-							</then>
-							<elseif>
-								<equals arg1="${loop.modules.cmd}" arg2="war" />
-								<then>
-									<antcall target="war-module" />
-								</then>
-							</elseif>
-							<elseif>
-								<equals arg1="${loop.modules.cmd}" arg2="deploy" />
-								<then>
-									<antcall target="deploy-module" />
-								</then>
-							</elseif>
-							<elseif>
-								<equals arg1="${loop.modules.cmd}" arg2="merge" />
-								<then>
-									<antcall target="merge-module" />
-								</then>
-							</elseif>
-						</if>
-					</then>
-				</if>
+				<antcall target="${loop.modules.cmd}" />
 			</sequential>
 		</for>
-	</target>
-
-	<target name="merge">
-		<antcall target="loop-modules">
-			<param name="loop.modules.cmd" value="merge" />
-		</antcall>
-	</target>
-
-	<target name="merge-module">
-		<copy todir="${module.name}.war">
-			<fileset
-				dir="${project.dir}/portal-web/docroot/html/themes/_common"
-				excludes="templates/init.vm"
-			/>
-		</copy>
-
-		<if>
-			<available file="${module.name}.war/_diffs" />
-			<then>
-				<copy todir="${module.name}.war" overwrite="yes">
-					<fileset
-						dir="${module.name}.war/_diffs"
-					/>
-				</copy>
-			</then>
-		</if>
 	</target>
 </project>

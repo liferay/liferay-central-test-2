@@ -22,8 +22,8 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.deploy.HotDeployEvent;
-import com.liferay.portal.kernel.deploy.HotDeployUtil;
+import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
+import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

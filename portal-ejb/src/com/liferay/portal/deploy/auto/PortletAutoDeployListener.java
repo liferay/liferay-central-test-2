@@ -20,35 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.servlet;
+package com.liferay.portal.deploy.auto;
 
-import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
-import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import java.io.File;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="PortletContextListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletAutoDeployListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletContextListener implements ServletContextListener {
+public class PortletAutoDeployListener extends BaseAutoDeployListener {
 
-	public void contextInitialized(ServletContextEvent sce) {
-		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public PortletAutoDeployListener() {
+		_deployer = new PortletAutoDeployer();
 	}
 
-	public void contextDestroyed(ServletContextEvent sce) {
-		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public void deploy(File file) throws AutoDeployException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking deploy for " + file.getPath());
+		}
+
+		if (!isMatchingFile(file, "portlet.xml")) {
+			return;
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Copying portlets for " + file.getPath());
+		}
+
+		_deployer.autoDeploy(file.getName());
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Portlets for " + file.getPath() + " copied successfully");
+		}
 	}
+
+	private static Log _log =
+		LogFactory.getLog(PortletAutoDeployListener.class);
+
+	private AutoDeployer _deployer;
 
 }

@@ -289,7 +289,7 @@
 					<copy todir="${app.server.dir}/common/endorsed">
 						<fileset
 							dir="lib/development"
-							includes="support-catalina.jar"
+							includes="support-tomcat.jar"
 						/>
 					</copy>
 

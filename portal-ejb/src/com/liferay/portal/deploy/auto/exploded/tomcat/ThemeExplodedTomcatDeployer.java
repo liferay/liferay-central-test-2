@@ -20,35 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.servlet;
+package com.liferay.portal.deploy.auto.exploded.tomcat;
 
-import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
-import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
+import com.liferay.portal.deploy.auto.ThemeAutoDeployer;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import java.io.File;
 
 /**
- * <a href="PortletContextListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThemeExplodedTomcatDeployer.java.html"><b><i>View Source</i></b></a>
  *
- * @author Ivica Cardic
+ * @author Olaf Fricke
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletContextListener implements ServletContextListener {
+public class ThemeExplodedTomcatDeployer
+	extends ThemeAutoDeployer implements ExplodedTomcatDeployer {
 
-	public void contextInitialized(ServletContextEvent sce) {
-		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
-	}
+	public void exlodedTomcatDeploy(File contextFile, File webAppDir)
+		throws AutoDeployException {
 
-	public void contextDestroyed(ServletContextEvent sce) {
-		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+		try {
+			deployDirectory(webAppDir, getDisplayName(contextFile));
+		}
+		catch (Exception e) {
+			throw new AutoDeployException(e);
+		}
 	}
 
 }

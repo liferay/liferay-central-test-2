@@ -22,17 +22,12 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.deploy.AutoDeployLayoutTemplateListener;
-import com.liferay.portal.deploy.AutoDeployPortletListener;
-import com.liferay.portal.deploy.AutoDeployThemeListener;
-import com.liferay.portal.deploy.HotDeployLayoutTemplateListener;
-import com.liferay.portal.deploy.HotDeployPluginPackageListener;
-import com.liferay.portal.deploy.HotDeployPortletListener;
-import com.liferay.portal.deploy.HotDeployThemeListener;
 import com.liferay.portal.jcr.JCRFactoryUtil;
-import com.liferay.portal.kernel.deploy.AutoDeployDir;
-import com.liferay.portal.kernel.deploy.AutoDeployUtil;
-import com.liferay.portal.kernel.deploy.HotDeployUtil;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
+import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
+import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.struts.ActionException;
@@ -45,6 +40,7 @@ import com.liferay.util.InstancePool;
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -57,6 +53,58 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class GlobalStartupAction extends SimpleAction {
+
+	public static List getAutoDeployListeners() {
+		List list = new ArrayList();
+
+		String[] autoDeployListeners =
+			PropsUtil.getArray(PropsUtil.AUTO_DEPLOY_LISTENERS);
+
+		for (int i = 0; i < autoDeployListeners.length; i++) {
+			try {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Instantiating " + autoDeployListeners[i]);
+				}
+
+				AutoDeployListener autoDeployListener =
+					(AutoDeployListener)Class.forName(
+						autoDeployListeners[i]).newInstance();
+
+				list.add(autoDeployListener);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return list;
+	}
+
+	public static List getHotDeployListeners() {
+		List list = new ArrayList();
+
+		String[] hotDeployListeners =
+			PropsUtil.getArray(PropsUtil.HOT_DEPLOY_LISTENERS);
+
+		for (int i = 0; i < hotDeployListeners.length; i++) {
+			try {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Instantiating " + hotDeployListeners[i]);
+				}
+
+				HotDeployListener hotDeployListener =
+					(HotDeployListener)Class.forName(
+						hotDeployListeners[i]).newInstance();
+
+				list.add(hotDeployListener);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return list;
+	}
 
 	public void run(String[] ids) throws ActionException {
 
@@ -81,10 +129,13 @@ public class GlobalStartupAction extends SimpleAction {
 
 		_log.debug("Registering hot deploy listeners");
 
-		HotDeployUtil.registerListener(new HotDeployPluginPackageListener());
-		HotDeployUtil.registerListener(new HotDeployLayoutTemplateListener());
-		HotDeployUtil.registerListener(new HotDeployPortletListener());
-		HotDeployUtil.registerListener(new HotDeployThemeListener());
+		Iterator itr = getHotDeployListeners().iterator();
+
+		while (itr.hasNext()) {
+			HotDeployListener hotDeployListener = (HotDeployListener)itr.next();
+
+			HotDeployUtil.registerListener(hotDeployListener);
+		}
 
 		HotDeployUtil.flushEvents();
 
@@ -103,11 +154,7 @@ public class GlobalStartupAction extends SimpleAction {
 				long interval = PrefsPropsUtil.getLong(
 					PropsUtil.AUTO_DEPLOY_INTERVAL);
 
-				List autoDeployListeners = new ArrayList();
-
-				autoDeployListeners.add(new AutoDeployLayoutTemplateListener());
-				autoDeployListeners.add(new AutoDeployPortletListener());
-				autoDeployListeners.add(new AutoDeployThemeListener());
+				List autoDeployListeners = getAutoDeployListeners();
 
 				AutoDeployDir autoDeployDir = new AutoDeployDir(
 					"defaultAutoDeployDir", deployDir, destDir, interval,

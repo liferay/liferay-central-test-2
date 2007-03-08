@@ -5,7 +5,7 @@
 
 	<target name="clean">
 		<antcall target="loop-modules">
-			<param name="loop.modules.cmd" value="clean" />
+			<param name="loop.modules.cmd" value="clean-module" />
 		</antcall>
 	</target>
 
@@ -21,7 +21,7 @@
 
 	<target name="compile">
 		<antcall target="loop-modules">
-			<param name="loop.modules.cmd" value="compile" />
+			<param name="loop.modules.cmd" value="compile-module" />
 		</antcall>
 	</target>
 
@@ -58,9 +58,9 @@
 		/>
 	</target>
 
-	<target name="war">
+	<target name="war" depends="compile">
 		<antcall target="loop-modules">
-			<param name="loop.modules.cmd" value="war" />
+			<param name="loop.modules.cmd" value="war-module" />
 		</antcall>
 
 		<copy
@@ -149,40 +149,23 @@
 		/>
 	</target>
 
-	<target name="deploy">
-		<java
-			classname="com.liferay.portal.tools.PortletDeployer"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
+	<target name="deploy" depends="compile">
+		<antcall target="loop-modules">
+			<param name="loop.modules.cmd" value="deploy-module" />
+		</antcall>
+	</target>
 
-			<!-- Required Arguments -->
+	<target name="deploy-module">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
 
-			<jvmarg value="-Ddeployer.base.dir=./" />
-			<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
-			<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
-			<jvmarg value="-Ddeployer.portlet.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-portlet.tld" />
-			<jvmarg value="-Ddeployer.unpack.war=true" />
+		<jar
+			basedir="${module.name}.war"
+			destfile="${tstamp.value}"
+		/>
 
-			<!-- Optional Arguments -->
-
-			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
-
-			<!-- Dependent Libraries -->
-
-			<arg value="${project.dir}/util-bridges/util-bridges.jar" />
-			<arg value="${project.dir}/util-java/util-java.jar" />
-			<arg value="${project.dir}/util-taglib/util-taglib.jar" />
-
-			<!-- Specific WARs -->
-
-			<!--
-			<arg line="sample-dao-portlet.war sample-jsf-myfaces-portlet.war" />
-			-->
-
-			<arg line="${deploy.specific.wars}" />
-		</java>
+		<move file="${tstamp.value}" tofile="${auto.deploy.dir}/${module.name}.war" />
 	</target>
 
 	<target name="build-lang">
@@ -195,55 +178,12 @@
 	<target name="loop-modules">
 		<for param="module.name">
 			<path>
-				<dirset dir="." includes="*.war" />
+				<dirset dir="." excludes="${deploy.wars.excludes}" includes="${deploy.wars.includes}" />
 			</path>
 			<sequential>
-				<antelope:stringutil string="@{module.name}" property="module.name.beginindex">
-					<lastindexof string="${file.separator}" />
-				</antelope:stringutil>
+				<antelope:grep in="@{module.name}" regex="(.*\\)(.*)(\.war)" group="2" property="module.name" />
 
-				<math
-					datatype="int"
-					operand1="${module.name.beginindex}"
-					operand2="1"
-					operation="+"
-					result="module.name.beginindex"
-				/>
-
-				<antelope:stringutil string="@{module.name}" property="module.name.endindex">
-					<lastindexof string=".war" />
-				</antelope:stringutil>
-
-				<antelope:stringutil string="@{module.name}" property="module.name">
-					<substring beginindex="${module.name.beginindex}" endindex="${module.name.endindex}" />
-				</antelope:stringutil>
-
-				<if>
-					<or>
-						<equals arg1="${deploy.specific.wars}" arg2="" />
-						<antelope:contains string="${deploy.specific.wars}" substring="${module.name}" />
-					</or>
-					<then>
-						<if>
-							<equals arg1="${loop.modules.cmd}" arg2="clean" />
-							<then>
-								<antcall target="clean-module" />
-							</then>
-							<elseif>
-								<equals arg1="${loop.modules.cmd}" arg2="compile" />
-								<then>
-									<antcall target="compile-module" />
-								</then>
-							</elseif>
-							<elseif>
-								<equals arg1="${loop.modules.cmd}" arg2="war" />
-								<then>
-									<antcall target="war-module" />
-								</then>
-							</elseif>
-						</if>
-					</then>
-				</if>
+				<antcall target="${loop.modules.cmd}" />
 			</sequential>
 		</for>
 	</target>

@@ -44,10 +44,6 @@
 		<priority value="INFO" />
 	</category>
 
-	<category name="com.liferay.portal.deploy.HotDeployPortletListener">
-		<priority value="INFO" />
-	</category>
-
 	<category name="com.liferay.portal.editor">
 		<priority value="ERROR" />
 	</category>

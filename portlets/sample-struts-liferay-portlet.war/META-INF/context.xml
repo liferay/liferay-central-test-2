@@ -1,5 +1,5 @@
 <Context>
 	<Loader 
-		loaderClass="com.liferay.support.catalina.PortalClassLoader"
+		loaderClass="com.liferay.support.tomcat.loader.PortalClassLoader"
 	/>
 </Context>

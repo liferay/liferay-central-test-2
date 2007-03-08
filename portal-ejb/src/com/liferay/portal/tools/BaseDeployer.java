@@ -226,6 +226,12 @@ public class BaseDeployer {
 		}
 	}
 
+	protected void deployDirectory(File srcFile, String displayName)
+		throws Exception {
+
+		deployDirectory(srcFile, null, displayName);
+	}
+
 	protected void deployDirectory(
 			File srcFile, File deployDir, String displayName)
 		throws Exception {
@@ -239,7 +245,7 @@ public class BaseDeployer {
 
 		updateWebXML(webXML, srcFile, displayName);
 
-		if (!baseDir.equals(destDir)) {
+		if ((deployDir != null) && !baseDir.equals(destDir)) {
 			String excludes = StringPool.BLANK;
 
 			if (appServerType.equals("tomcat")) {

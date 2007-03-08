@@ -20,35 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.servlet;
-
-import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
-import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+package com.liferay.portal.kernel.deploy.auto;
 
 /**
- * <a href="PortletContextListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="AutoDeployScanner.java.html"><b><i>View Source</i></b></a>
  *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletContextListener implements ServletContextListener {
+public class AutoDeployScanner extends Thread {
 
-	public void contextInitialized(ServletContextEvent sce) {
-		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public AutoDeployScanner(ThreadGroup group, String name,
+							 AutoDeployDir dir) {
+
+		super(group, name);
+
+		_dir = dir;
+
+		setContextClassLoader(getClass().getClassLoader());
+		setDaemon(true);
+		setPriority(MIN_PRIORITY);
 	}
 
-	public void contextDestroyed(ServletContextEvent sce) {
-		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public void run() {
+		try {
+			sleep(1000 * 10);
+		}
+		catch (InterruptedException ie) {
+		}
+
+		while (_started) {
+			try {
+				sleep(_dir.getInterval());
+			}
+			catch (InterruptedException ie) {
+			}
+
+			_dir.scanDirectory();
+		}
 	}
+
+	public void pause() {
+		_started = false;
+	}
+
+	private AutoDeployDir _dir;
+	private boolean _started = true;
 
 }

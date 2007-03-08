@@ -65,6 +65,7 @@ public class CopyTask {
 		Copy copy = new Copy();
 
 		FileSet fileSet = new FileSet();
+
 		fileSet.setDir(source);
 
 		if (Validator.isNotNull(includes)) {

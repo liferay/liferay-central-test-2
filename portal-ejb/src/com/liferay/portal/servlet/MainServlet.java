@@ -22,7 +22,7 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.deploy.HotDeployPluginPackageListener;
+import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.job.Scheduler;
@@ -199,7 +199,7 @@ public class MainServlet extends ActionServlet {
 
 			try {
 				pluginPackage =
-					HotDeployPluginPackageListener.readPluginPackage(ctx);
+					PluginPackageHotDeployListener.readPluginPackage(ctx);
 			}
 			catch (Exception e) {
 				_log.error(e, e);

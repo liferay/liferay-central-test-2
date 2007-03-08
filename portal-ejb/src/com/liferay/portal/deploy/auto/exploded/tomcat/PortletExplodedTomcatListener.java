@@ -20,35 +20,57 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.servlet;
+package com.liferay.portal.deploy.auto.exploded.tomcat;
 
-import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
-import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import java.io.File;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="PortletContextListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletExplodedTomcatListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Ivica Cardic
+ * @author Olaf Fricke
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletContextListener implements ServletContextListener {
+public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 
-	public void contextInitialized(ServletContextEvent sce) {
-		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public PortletExplodedTomcatListener() {
+		_deployer = new PortletExplodedTomcatDeployer();
 	}
 
-	public void contextDestroyed(ServletContextEvent sce) {
-		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				sce.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public void deploy(File file) throws AutoDeployException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking deploy for " + file.getPath());
+		}
+
+		File docBaseDir = getDocBaseDir(file, "portlet.xml");
+
+		if (docBaseDir == null) {
+			return;
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Modifying portlets for " + file.getPath());
+		}
+
+		_deployer.exlodedTomcatDeploy(file, docBaseDir);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Portlets for " + file.getPath() + " modified successfully");
+		}
+
+		copyContextFile(file);
 	}
+
+	private static Log _log =
+		LogFactory.getLog(PortletExplodedTomcatListener.class);
+
+	private ExplodedTomcatDeployer _deployer;
 
 }
