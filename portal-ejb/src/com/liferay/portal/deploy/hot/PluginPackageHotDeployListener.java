@@ -55,7 +55,7 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 
 		PluginPackage pluginPackage = null;
 
-		String servletContextName =  ctx.getServletContextName();
+		String servletContextName = ctx.getServletContextName();
 
 		String xml = Http.URLtoString(ctx.getResource(
 			"/WEB-INF/liferay-plugin-package.xml"));
