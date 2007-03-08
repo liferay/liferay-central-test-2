@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
@@ -71,7 +72,8 @@ public class DLFileEntryImpl
 		String titleWithExtension = getTitle();
 
 		if (FileUtil.getExtension(titleWithExtension) == null) {
-			titleWithExtension += FileUtil.getExtension(getName());
+			titleWithExtension +=
+				StringPool.PERIOD + FileUtil.getExtension(getName());
 		}
 
 		return titleWithExtension;
