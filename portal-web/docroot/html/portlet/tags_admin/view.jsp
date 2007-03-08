@@ -29,9 +29,17 @@
 <fieldset id="<portlet:namespace />searchEntriesFields">
 	<legend>Search Tag</legend>
 
-	<input class="form-text" id="<portlet:namespace />keywordsInput" type="text" />
+	Enter text below to refine the list of tags.
+
+	<br /><br />
+
+	<input class="form-text" id="<portlet:namespace />keywordsInput" type="text" size="40"/>
 
 	<span id="<portlet:namespace />searchPropertiesSpan" style="padding-left: 10px;"></span>
+
+	<br /><br />
+
+	Click on any tag to edit it.
 
 	<div id="<portlet:namespace />searchResultsDiv" /></div>
 </fieldset>
@@ -39,23 +47,29 @@
 <fieldset id="<portlet:namespace />editEntryFields">
 	<legend>Edit Tag</legend>
 
+	Tag Value
+
+	<br />
+
 	<input class="form-text" id="<portlet:namespace />editEntryNameInput" type="text" value="" />
 
-	<input class="portlet-form-button" id="<portlet:namespace />updateEntryButton" type="button" value="Save" />
-
 	<%--<input class="portlet-form-button" id="<portlet:namespace />updateEntryButton" type="button" value="Copy" />--%>
-
-	<input class="portlet-form-button" id="<portlet:namespace />deleteEntryButton" type="button" value="Delete" />
-
-	<input class="portlet-form-button" id="<portlet:namespace />addPropertyButton" type="button" value="Add Property" />
-
-	<input class="portlet-form-button" id="<portlet:namespace />cancelEditEntryButton" type="button" value="Cancel" />
 
 	<br /><br />
 
 	Properties
 
 	<table border="0" cellpadding="0" cellspacing="0" id="<portlet:namespace />propertiesTable"></table>
+
+	<input class="portlet-form-button" id="<portlet:namespace />addPropertyButton" type="button" value="Add Property" />
+
+	<hr />
+
+	<input class="portlet-form-button" id="<portlet:namespace />updateEntryButton" type="button" value="Save" />
+
+	<input class="portlet-form-button" id="<portlet:namespace />deleteEntryButton" type="button" value="Delete" />
+
+	<input class="portlet-form-button" id="<portlet:namespace />cancelEditEntryButton" type="button" value="Cancel" />
 </fieldset>
 
 <fieldset id="<portlet:namespace />addEntryFields">
