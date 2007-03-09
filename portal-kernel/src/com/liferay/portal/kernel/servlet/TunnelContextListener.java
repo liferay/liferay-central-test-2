@@ -38,12 +38,12 @@ public class TunnelContextListener implements ServletContextListener {
 		return _ctx;
 	}
 
-	public void contextDestroyed(ServletContextEvent event) {
-		_ctx = null;
-	}
-
 	public void contextInitialized(ServletContextEvent event) {
 		_ctx = event.getServletContext();
+	}
+
+	public void contextDestroyed(ServletContextEvent event) {
+		_ctx = null;
 	}
 
 	private static ServletContext _ctx;
