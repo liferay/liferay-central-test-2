@@ -28,6 +28,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.filters.doubleclick">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.filters.strip">
 		<priority value="ERROR" />
 	</category>
@@ -41,10 +45,6 @@
 	</category>
 
 	<category name="com.liferay.portal.deploy">
-		<priority value="INFO" />
-	</category>
-
-	<category name="com.liferay.portal.deploy.HotDeployPortletListener">
 		<priority value="INFO" />
 	</category>
 
