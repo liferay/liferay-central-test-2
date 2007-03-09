@@ -68,8 +68,8 @@
 		<load-on-startup>7</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>SoftwareCatalogServlet</servlet-name>
-		<servlet-class>com.liferay.portal.servlet.SoftwareCatalogServlet</servlet-class>
+		<servlet-name>PortalDelegatorServlet</servlet-name>
+		<servlet-class>com.liferay.portal.kernel.servlet.PortalDelegatorServlet</servlet-class>
 		<load-on-startup>8</load-on-startup>
 	</servlet>
 	<servlet>
@@ -100,7 +100,12 @@
 			<param-name>ignorePostToGetRequestHeaders</param-name>
 			<param-value>content-type,content-length</param-value>
 		</init-param>
-		<load-on-startup>9</load-on-startup>
+		<load-on-startup>10</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>SoftwareCatalogServlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.SoftwareCatalogServlet</servlet-class>
+		<load-on-startup>11</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
@@ -123,16 +128,20 @@
 		<url-pattern>/sitemap.xml</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
+		<servlet-name>PortalDelegatorServlet</servlet-name>
+		<url-pattern>/delegate/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PortletBridgeServlet</servlet-name>
+		<url-pattern>/pbhs/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PortletBridgeServlet</servlet-name>
+		<url-pattern>/pbhs/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>SoftwareCatalogServlet</servlet-name>
 		<url-pattern>/software_catalog/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>PortletBridgeServlet</servlet-name>
-		<url-pattern>/pbhs/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>PortletBridgeServlet</servlet-name>
-		<url-pattern>/pbhs/*</url-pattern>
 	</servlet-mapping>
 	<session-config>
 		<session-timeout>[$SESSION_TIMEOUT$]</session-timeout>
