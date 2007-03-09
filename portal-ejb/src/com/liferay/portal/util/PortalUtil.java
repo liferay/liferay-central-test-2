@@ -485,7 +485,7 @@ public class PortalUtil {
 		String layoutFriendlyURL = layout.getFriendlyURL();
 
 		if (Validator.isNull(layoutFriendlyURL)) {
-			layoutFriendlyURL = layout.getDefaultFriendlyURL();			
+			layoutFriendlyURL = layout.getDefaultFriendlyURL();
 		}
 
 		LayoutSet layoutSet = layout.getLayoutSet();

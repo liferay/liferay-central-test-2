@@ -22,13 +22,13 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.util.GroupNames;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Validator;
 
 import org.apache.commons.logging.Log;
@@ -96,9 +96,9 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	public String getDefaultFriendlyURL() {
-		return StringPool.SLASH + Long.toString(getGroupId());		
+		return StringPool.SLASH + Long.toString(getGroupId());
 	}
-	
+
 	public int getPrivateLayoutsPageCount() {
 		try {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(

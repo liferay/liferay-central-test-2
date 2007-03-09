@@ -103,6 +103,8 @@ public class WebKeys {
 
 	public static final String IMAGE_PATH = "IMAGE_PATH";
 
+	public static final String IS_DEFAULT_LAYOUT = "IS_DEFAULT_LAYOUT";
+
 	public static final String LAYOUT = "LAYOUT";
 
 	public static final String LAYOUT_LISTER_LIST = "LAYOUT_LISTER_LIST";
