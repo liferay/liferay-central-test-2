@@ -25,12 +25,14 @@ package com.liferay.portlet.journal.lar;
 import com.liferay.portlet.journal.model.JournalArticle;
 
 /**
+ * <a href="JournalCreationStrategy.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
  * An interface defining how newly created content should be added to the
  * Journal when imported from a LAR file. A class implementing this interface
  * should be specified in <i>portal.properties</i> under the
  * <b>journal.lar.creation.strategy</b> property.
- *
- * <p><a href="JournalCreationStrategy.java.html"><b><i>View Source</i></b></a>
+ * </p>
  *
  * @author Joel Kozikowski
  *

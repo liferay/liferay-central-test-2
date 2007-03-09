@@ -27,10 +27,12 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.InstancePool;
 
 /**
+ * <a href="AccountFinderLocator.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
  * AccountFinderLocator locates the appropriate implementation of an
  * AccountFinder and caches it.
- *
- * <p><a href="AccountFinderLocator.java.html"><b><i>View Source</i></b></a>
+ * </p>
  *
  * @author Jorge Ferrer
  *

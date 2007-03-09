@@ -34,16 +34,19 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * <a href="JournalCreationStrategyImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
  * Provides the strategy for creating new content when new Journal content is
  * imported into a layout set from a LAR. The default strategy implemented by
  * this class is to return the first user in the database that is a member of
  * the specified group as the author Id. If the group contains no users, the
  * original author will remain unchanged.
+ * </p>
  *
- * <p>Content will be added as is (i.e. no transformations).
- *
- * <p><a href="JournalCreationStrategyImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <p>
+ * Content will be added as is (i.e. no transformations).
+ * </p>
  *
  * @author Joel Kozikowski
  *

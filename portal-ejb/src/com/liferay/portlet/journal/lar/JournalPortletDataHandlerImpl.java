@@ -52,20 +52,24 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 /**
+ * <a href="JournalPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
  * Provides the Journal portlet export and import functionality, which is to
  * clone all articles, structures, and templates associated with the layout's
  * group. Upon import, new instances of the corresponding articles, structures,
  * and templates are created or updated. The author of the newly created
  * objects are determined by the JournalCreationStrategy class defined in
  * <i>portal.properties</i>.
+ * </p>
  *
- * <p>This <code>PortletDataHandler</code> differs from
+ * <p>
+ * This <code>PortletDataHandler</code> differs from
  * <code>JournalContentPortletDataHandlerImpl</code> in that it exports all
  * articles owned by the group whether or not they are actually displayed in a
  * portlet in the layout set.
- *
- * <p><a href="JournalPortletDataHandlerImpl.java.html"><b><i>View Source</i>
- *</b></a>
+ * </p>
  *
  * @author Raymond Auge
  * @author Joel Kozikowski

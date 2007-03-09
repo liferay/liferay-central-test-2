@@ -43,9 +43,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Handles all the mail accounts that belong to the current user
+ * <a href="MailAccounts.java.html"><b><i>View Source</i></b></a>
  *
- * <p><a href="MailAccounts.java.html"><b><i>View Source</i></b></a>
+ * <p>
+ * Handles all the mail accounts that belong to the current user.
+ * </p>
  *
  * @author Jorge Ferrer
  *

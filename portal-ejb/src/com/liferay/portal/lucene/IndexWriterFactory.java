@@ -32,11 +32,13 @@ import java.util.Map;
 import org.apache.lucene.index.IndexWriter;
 
 /**
+ * <a href="IndexWriterFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
  * Lucene only allows one IndexWriter to be open at a time. However, multiple
  * threads can use this single IndexWriter. This class manages a global
  * IndexWriter and uses reference counting to determine when it can be closed.
- *
- * <p><a href="IndexWriterFactory.java.html"><b><i>View Source</i></b></a>
+ * </p>
  *
  * @author Harry Mark
  *

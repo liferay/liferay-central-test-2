@@ -63,6 +63,10 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 /**
+ * <a href="JournalContentPortletDataHandlerImpl.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * <p>
  * Provides the Journal Content portlet export and import functionality, which
  * is to clone the article, structure, and template referenced in the
  * Journal Content portlet if the article is associated with the layout's group.
@@ -70,15 +74,15 @@ import org.dom4j.io.SAXReader;
  * templates are created or updated. The author of the newly created
  * objects are determined by the JournalCreationStrategy class defined in
  * <i>portal.properties</i>.
+ * </p>
  *
- * <p>This <code>PortletDataHandler</code> differs from from
+ * <p>
+ * This <code>PortletDataHandler</code> differs from from
  * <code>JournalPortletDataHandlerImpl</code> in that it only exports articles
  * referenced in Journal Content portlets. Articles not displayed in Journal
  * Content portlets will not be exported unless
  * <code>JournalPortletDataHandlerImpl</code> is activated.
- *
- * <p><a href="JournalContentPortletDataHandlerImpl.java.html"><b><i>View Source
- * </i></b></a>
+ * </p>
  *
  * @author Joel Kozikowski
  *

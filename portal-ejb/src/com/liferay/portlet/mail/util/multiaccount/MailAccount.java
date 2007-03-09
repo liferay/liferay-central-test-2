@@ -37,10 +37,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * <a href="MailAccount.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
  * MailAccount represents a mail account. It contains all the necessary
  * information to connect to the IMAP server with its credentials.
- *
- * <p><a href="MailAccount.java.html"><b><i>View Source</i></b></a>
+ * </p>
  *
  * @author Jorge Ferrer
  *

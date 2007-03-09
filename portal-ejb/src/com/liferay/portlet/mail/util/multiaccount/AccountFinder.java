@@ -29,9 +29,11 @@ import com.liferay.portlet.mail.MailAccountsException;
 import java.util.Collection;
 
 /**
- * AccountFinder represents a class that can find account information.
+ * <a href="AccountFinder.java.html"><b><i>View Source</i></b></a>
  *
- * <p><a href="AccountFinder.java.html"><b><i>View Source</i></b></a>
+ * <p>
+ * AccountFinder represents a class that can find account information.
+ * </p>
  *
  * @author Jorge Ferrer
  *
