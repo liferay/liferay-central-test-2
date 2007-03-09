@@ -1,17 +1,22 @@
 /* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
 
+body {
+	font-family: 'Lucida Sans Unicode','Lucida Grande','Lucida Sans','Tahoma',Arial,Verdana,sans-serif;
+}
+
 #wrapper {
 	width: 825px;
 }
 
 #content-wrapper {
-	background: #F2F2F2;
+	background: #fff url(../images/custom/content-bg.png) repeat-y 100% 0;
 	border-left: 1px solid #D7D7D7;
 	border-right: 1px solid #D7D7D7;
 	font-size: 1.2em;
+	line-height: 1.35;
 	margin: 0 3px;
 	margin-top: -5px;
-	padding: 5px;
+	padding: 15px 5px 5px;
 }
 
 #content-wrapper.login {
@@ -101,7 +106,7 @@ font {
 #navigation li {
 	display: inline;
 	float: left;
-	margin: 0 1em;
+	margin: 0 0.89em;
 	padding: 0;
 }
 
@@ -110,7 +115,7 @@ font {
 	color: #fff;
 	display: block;
 	float: left;
-	font-weight: bold;
+	font-size: 1.1em;
 	height: 15px;
 	padding: 5px 10px;
 	text-decoration: none;
@@ -147,8 +152,9 @@ font {
 }
 
 .portlet .portlet-topper {
-	background: #124E8E;
-	color: #fff;
+	background: none;
+	border-bottom:2px solid #12558e;
+	color:#12558e;
 }
 
 .portlet .portlet-title, .portlet .portlet-icons {
@@ -156,8 +162,10 @@ font {
 }
 
 .portlet .portlet-title {
-	font-size: 1.1em;
-	padding: 2px 10px;
+	color:#12558e;
+	font-size: 1.2em;
+	font-weight: normal;
+	padding: 5px 3px;
 }
 
 .portlet .portlet-content {
@@ -197,6 +205,42 @@ font {
 }
 
 /* ---------- Tabs ---------- */
+
+.tabs {
+	border-bottom: 1px solid #2b5a79;
+}
+
+.tabs li {
+	background: url(../images/common/tabs_bg.png) no-repeat 0 -100px;
+	display: inline;
+	float: left;
+	line-height: 2.25;
+	margin-right: 0.8em;
+	padding: 0;
+	position: relative;
+	text-decoration: none;
+}
+
+.tabs li a, .tabs li span {
+	background: url(../images/common/tabs_bg.png) no-repeat 100% -300px;
+	color: #fff;
+	display: block;
+	float: left;
+	padding: 0.35em 1em 0;
+	text-decoration: none;
+}
+
+.tabs li.current {
+	background: url(../images/common/tabs_bg.png) no-repeat 0 0;
+	font-weight: bold;
+	top: 0.15em;
+}
+
+.tabs li.current a, .tabs li.current span {
+	background: url(../images/common/tabs_bg.png) no-repeat 100% -200px;
+	color: #fff;
+	padding: 0.15em 1em;
+}
 
 .ie .tabs li {
 	line-height: 2.25;

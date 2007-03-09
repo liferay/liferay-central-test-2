@@ -114,6 +114,8 @@ function addPortletHTML(html, container, placeHolder) {
 	}
 
 	Liferay.Portlet.process(portletId);
+	
+	Liferay.Util.addInputType(portletBound.id);
 
 	return portletId;
 }

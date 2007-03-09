@@ -60,7 +60,12 @@ var LayoutConfiguration = {
 						LayoutConfiguration.menu = null;
 					}
 				});
-			AjaxUtil.update(url, popup, {onComplete: LayoutConfiguration.init});
+			AjaxUtil.update(url, popup, {
+							onComplete: function() {
+											LayoutConfiguration.init();
+											Liferay.Util.addInputType();
+										}
+									});
 		}
 	},
 

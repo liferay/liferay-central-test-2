@@ -221,8 +221,8 @@ var Alerts = {
 		}
 
 		_$J(window).resize(Alerts.center);
-		
 		body.appendChild(wrapper);
+		Liferay.Util.addInputType(wrapper);
 		window.focus();
 		return message;
 	},
