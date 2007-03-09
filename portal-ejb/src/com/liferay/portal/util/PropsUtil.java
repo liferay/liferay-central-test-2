@@ -452,6 +452,8 @@ public class PropsUtil {
 
 	public static final String LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING = "layout.friendly.url.private.servlet.mapping";
 
+	public static final String LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING = "layout.friendly.url.private.user.servlet.mapping";
+
 	public static final String LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING = "layout.friendly.url.public.servlet.mapping";
 
 	public static final String LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND = "layout.friendly.url.page.not.found";

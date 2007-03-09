@@ -144,6 +144,15 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONObject getUserByDisplayUserId(
+		java.lang.String displayUserId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portal.model.User returnValue = UserServiceUtil.getUserByDisplayUserId(displayUserId);
+
+		return UserJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static boolean hasGroupUser(long groupId, java.lang.String userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

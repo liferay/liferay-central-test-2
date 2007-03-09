@@ -26,8 +26,10 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -67,6 +69,8 @@ public class FriendlyURLServlet extends HttpServlet {
 			_companyId = ctx.getInitParameter("company_id");
 			_private = GetterUtil.getBoolean(
 				config.getInitParameter("private"));
+			_user = GetterUtil.getBoolean(
+				config.getInitParameter("user"), false);
 		}
 	}
 
@@ -87,8 +91,15 @@ public class FriendlyURLServlet extends HttpServlet {
 		String friendlyURLPath = null;
 
 		if (_private) {
-			friendlyURLPath =
-				(String)ctx.getAttribute(WebKeys.FRIENDLY_URL_PRIVATE_PATH);
+			if (_user) {
+				friendlyURLPath =
+					(String)ctx.getAttribute(
+						WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH);
+			}
+			else {
+				friendlyURLPath =
+					(String)ctx.getAttribute(WebKeys.FRIENDLY_URL_PRIVATE_PATH);
+			}
 		}
 		else {
 			friendlyURLPath =
@@ -177,8 +188,17 @@ public class FriendlyURLServlet extends HttpServlet {
 
 		if (group == null) {
 			try {
-				long groupId = Long.parseLong(friendlyURL.substring(1));
-				group = GroupLocalServiceUtil.getGroup(groupId);
+				if (_private & _user) {
+					String displayUserId = friendlyURL.substring(1);
+					User user =
+						UserLocalServiceUtil.getUserByDisplayUserId(
+							displayUserId);
+					group = user.getGroup();
+				}
+				else {
+					long groupId = Long.parseLong(friendlyURL.substring(1));
+					group = GroupLocalServiceUtil.getGroup(groupId);
+				}
 			}
 			catch (Exception e) {
 			}
@@ -210,5 +230,6 @@ public class FriendlyURLServlet extends HttpServlet {
 
 	private String _companyId;
 	private boolean _private;
+	private boolean _user;
 
 }

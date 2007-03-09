@@ -61,6 +61,8 @@ public interface User extends UserModel {
 
 	public void setResolution(java.lang.String resolution);
 
+	public java.lang.String getDisplayUserId();
+
 	public com.liferay.portal.model.Contact getContact();
 
 	public java.lang.String getFirstName();

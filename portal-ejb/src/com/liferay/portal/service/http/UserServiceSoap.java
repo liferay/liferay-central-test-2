@@ -198,6 +198,19 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.UserSoap getUserByDisplayUserId(
+		java.lang.String displayUserId) throws RemoteException {
+		try {
+			com.liferay.portal.model.User returnValue = UserServiceUtil.getUserByDisplayUserId(displayUserId);
+
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static boolean hasGroupUser(long groupId, java.lang.String userId)
 		throws RemoteException {
 		try {

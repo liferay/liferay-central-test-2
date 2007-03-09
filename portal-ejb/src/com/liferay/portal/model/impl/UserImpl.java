@@ -229,6 +229,11 @@ public class UserImpl extends UserModelImpl implements User {
 		super.setResolution(resolution);
 	}
 
+	public String getDisplayUserId() {
+		// Placeholder implementation until displayUserId is added to the model
+		return getUserId();
+	}
+
 	public Contact getContact() {
 		Contact contact = null;
 

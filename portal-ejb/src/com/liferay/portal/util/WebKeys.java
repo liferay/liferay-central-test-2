@@ -85,6 +85,8 @@ public class WebKeys {
 
 	public static final String FRIENDLY_URL_PRIVATE_PATH = "FRIENDLY_URL_PRIVATE_PATH";
 
+	public static final String FRIENDLY_URL_PRIVATE_USER_PATH = "FRIENDLY_URL_PRIVATE_USER_PATH";
+
 	public static final String FRIENDLY_URL_PUBLIC_PATH = "FRIENDLY_URL_PUBLIC_PATH";
 
 	public static final String GOOGLE_CACHED_PAGE = "GOOGLE_CACHED_PAGE";

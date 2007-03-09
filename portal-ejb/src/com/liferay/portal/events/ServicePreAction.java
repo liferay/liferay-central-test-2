@@ -145,6 +145,9 @@ public class ServicePreAction extends Action {
 			String mainPath = (String)req.getAttribute(WebKeys.MAIN_PATH);
 			String friendlyURLPrivatePath =
 				(String)req.getAttribute(WebKeys.FRIENDLY_URL_PRIVATE_PATH);
+			String friendlyURLPrivateUserPath =
+				(String)req.getAttribute(
+					WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH);
 			String friendlyURLPublicPath =
 				(String)req.getAttribute(WebKeys.FRIENDLY_URL_PUBLIC_PATH);
 			String imagePath = (String)req.getAttribute(WebKeys.IMAGE_PATH);
@@ -442,6 +445,8 @@ public class ServicePreAction extends Action {
 			themeDisplay.setPathContext(contextPath);
 			themeDisplay.setPathFlash(contextPath + "/flash");
 			themeDisplay.setPathFriendlyURLPrivate(friendlyURLPrivatePath);
+			themeDisplay.setPathFriendlyURLPrivateUser(
+				friendlyURLPrivateUserPath);
 			themeDisplay.setPathFriendlyURLPublic(friendlyURLPublicPath);
 			themeDisplay.setPathImage(imagePath);
 			themeDisplay.setPathJavaScript(contextPath + "/html/js");

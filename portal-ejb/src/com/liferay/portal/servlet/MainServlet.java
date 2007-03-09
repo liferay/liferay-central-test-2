@@ -185,6 +185,13 @@ public class MainServlet extends ActionServlet {
 			ctx.setAttribute(
 				WebKeys.FRIENDLY_URL_PRIVATE_PATH, friendlyURLPrivatePath);
 
+			String friendlyURLPrivateUserPath = rootPath + PropsUtil.get(
+				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
+
+			ctx.setAttribute(
+				WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH,
+				friendlyURLPrivateUserPath);
+
 			String friendlyURLPublicPath = rootPath + PropsUtil.get(
 				PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
 
@@ -656,6 +663,28 @@ public class MainServlet extends ActionServlet {
 
 		req.setAttribute(
 			WebKeys.FRIENDLY_URL_PRIVATE_PATH, friendlyURLPrivatePath);
+
+		// FRIENDLY_URL_PRIVATE_USER_PATH variable
+
+		String friendlyURLPrivateUserPath =
+			(String)ctx.getAttribute(
+				WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH);
+
+		if (portalCtx.getAttribute(
+			WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH) == null) {
+			portalCtx.setAttribute(
+				WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH,
+				friendlyURLPrivateUserPath);
+		}
+
+		if (ses.getAttribute(WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH) == null) {
+			ses.setAttribute(
+				WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH,
+				friendlyURLPrivateUserPath);
+		}
+
+		req.setAttribute(
+			WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH, friendlyURLPrivateUserPath);
 
 		// FRIENDLY_URL_PUBLIC_PATH variable
 

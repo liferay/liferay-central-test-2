@@ -506,13 +506,25 @@ public class PortalUtil {
 		String parentFriendlyURL = group.getFriendlyURL();
 
 		if (Validator.isNull(parentFriendlyURL)) {
-			parentFriendlyURL = group.getDefaultFriendlyURL();
+			if (layout.isPrivateLayout() && layout.getGroup().isUser()) {
+				String userId = layout.getGroup().getClassPK();
+				User user = UserLocalServiceUtil.getUserById(userId);
+				parentFriendlyURL = StringPool.SLASH + user.getDisplayUserId();
+			}
+			else {
+				parentFriendlyURL = group.getDefaultFriendlyURL();
+			}
 		}
 
 		String friendlyURL;
 
 		if (layout.isPrivateLayout()) {
+			if (layout.getGroup().isUser()) {
+				friendlyURL = themeDisplay.getPathFriendlyURLPrivateUser();
+			}
+			else {
 				friendlyURL = themeDisplay.getPathFriendlyURLPrivate();
+			}
 		}
 		else {
 			friendlyURL = themeDisplay.getPathFriendlyURLPublic();

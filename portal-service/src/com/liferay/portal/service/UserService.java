@@ -93,6 +93,11 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public com.liferay.portal.model.User getUserByDisplayUserId(
+		java.lang.String displayUserId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public boolean hasGroupUser(long groupId, java.lang.String userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
