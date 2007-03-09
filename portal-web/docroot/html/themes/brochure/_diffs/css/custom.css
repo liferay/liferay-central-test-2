@@ -9,7 +9,7 @@ body {
 }
 
 #content-wrapper {
-	background: #fff url(../images/custom/content-bg.png) repeat-y 100% 0;
+	background: #fff url(../images/custom/content_bg.png) repeat-y 100% 0;
 	border-left: 1px solid #D7D7D7;
 	border-right: 1px solid #D7D7D7;
 	font-size: 1.2em;
@@ -51,7 +51,7 @@ font {
 }
 
 #banner .logo {
-	background: url(../images/custom/liferay-logo.png) no-repeat;
+	background: url(../images/custom/liferay_logo.png) no-repeat;
 	display: block;
 	float: none;
 	font-size: 0;
