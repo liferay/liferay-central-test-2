@@ -167,19 +167,32 @@ public class FriendlyURLServlet extends HttpServlet {
 
 		String ownerId = null;
 
+		Group group = null;
 		try {
-			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(
+			group = GroupLocalServiceUtil.getFriendlyURLGroup(
 				_companyId, friendlyURL);
-
-			if (_private) {
-				ownerId = LayoutImpl.PRIVATE + group.getGroupId();
-			}
-			else {
-				ownerId = LayoutImpl.PUBLIC + group.getGroupId();
-			}
 		}
 		catch (NoSuchGroupException nsge) {
+		}
+
+		if (group == null) {
+			try {
+				long groupId = Long.parseLong(friendlyURL.substring(1));
+				group = GroupLocalServiceUtil.getGroup(groupId);
+			}
+			catch (Exception e) {
+			}
+		}
+
+		if (group == null) {
 			return mainPath;
+		}
+
+		if (_private) {
+			ownerId = LayoutImpl.PRIVATE + group.getGroupId();
+		}
+		else {
+			ownerId = LayoutImpl.PUBLIC + group.getGroupId();
 		}
 
 		// Layout friendly URL

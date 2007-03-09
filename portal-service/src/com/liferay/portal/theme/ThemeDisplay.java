@@ -364,6 +364,15 @@ public class ThemeDisplay implements Serializable {
 		_pathFriendlyURLPrivate = pathFriendlyURLPrivate;
 	}
 
+	public String getPathFriendlyURLPrivateUser() {
+		return _pathFriendlyURLPrivateUser;
+	}
+
+	public void setPathFriendlyURLPrivateUser(
+		String pathFriendlyURLPrivateUser) {
+		_pathFriendlyURLPrivateUser = pathFriendlyURLPrivateUser;
+	}
+
 	public String getPathFriendlyURLPublic() {
 		return _pathFriendlyURLPublic;
 	}
@@ -704,6 +713,7 @@ public class ThemeDisplay implements Serializable {
 	private String _pathContext = StringPool.BLANK;
 	private String _pathFlash = StringPool.BLANK;
 	private String _pathFriendlyURLPrivate = StringPool.BLANK;
+	private String _pathFriendlyURLPrivateUser = StringPool.BLANK;
 	private String _pathFriendlyURLPublic = StringPool.BLANK;
 	private String _pathImage = StringPool.BLANK;
 	private String _pathJavaScript = StringPool.BLANK;

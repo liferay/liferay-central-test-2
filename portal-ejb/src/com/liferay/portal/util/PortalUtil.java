@@ -484,39 +484,47 @@ public class PortalUtil {
 
 		String layoutFriendlyURL = layout.getFriendlyURL();
 
-		if (Validator.isNotNull(layoutFriendlyURL)) {
-			LayoutSet layoutSet = layout.getLayoutSet();
-
-			if (Validator.isNotNull(layoutSet.getVirtualHost())) {
-				String portalURL = PortalUtil.getPortalURL(
-					layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
-					themeDisplay.isSecure());
-
-				String contextPath = themeDisplay.getPathContext();
-
-				return portalURL + contextPath + layoutFriendlyURL;
-			}
-
-			Group group = GroupLocalServiceUtil.getGroup(
-				layout.getGroupId());
-
-			String parentFriendlyURL = group.getFriendlyURL();
-
-			if (Validator.isNotNull(parentFriendlyURL)) {
-				String friendlyURL = null;
-
-				if (layout.isPrivateLayout()) {
-					friendlyURL = themeDisplay.getPathFriendlyURLPrivate();
-				}
-				else {
-					friendlyURL = themeDisplay.getPathFriendlyURLPublic();
-				}
-
-				return friendlyURL + parentFriendlyURL + layoutFriendlyURL;
-			}
+		if (Validator.isNull(layoutFriendlyURL)) {
+			layoutFriendlyURL = StringPool.SLASH + layout.getLayoutId();
 		}
 
-		return null;
+		LayoutSet layoutSet = layout.getLayoutSet();
+
+		if (Validator.isNotNull(layoutSet.getVirtualHost())) {
+			String portalURL = PortalUtil.getPortalURL(
+				layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
+				themeDisplay.isSecure());
+
+			String contextPath = themeDisplay.getPathContext();
+
+			return portalURL + contextPath + layoutFriendlyURL;
+		}
+
+		Group group = GroupLocalServiceUtil.getGroup(
+			layout.getGroupId());
+
+		String parentFriendlyURL = group.getFriendlyURL();
+
+		if (Validator.isNull(parentFriendlyURL)) {
+			parentFriendlyURL =
+				StringPool.SLASH + Long.toString(group.getGroupId());
+		}
+
+		String friendlyURL;
+
+		if (layout.isPrivateLayout()) {
+			if (group.isUser()) {
+				friendlyURL = themeDisplay.getPathFriendlyURLPrivateUser();
+			}
+			else {
+				friendlyURL = themeDisplay.getPathFriendlyURLPrivate();
+			}
+		}
+		else {
+			friendlyURL = themeDisplay.getPathFriendlyURLPublic();
+		}
+
+		return friendlyURL + parentFriendlyURL + layoutFriendlyURL;
 	}
 
 	public static String getLayoutTarget(Layout layout) {
@@ -688,8 +696,14 @@ public class PortalUtil {
 			friendlyURL = friendlyURL.substring(0, friendlyURL.length() - 1);
 		}
 
-		Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-			ownerId, friendlyURL);
+		Layout layout;
+		try {
+			layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
+				ownerId, friendlyURL);
+		} catch(NoSuchLayoutException e) {
+			String layoutId = friendlyURL.substring(1);
+			layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+		}
 
 		return new Object[] {layout, queryString};
 	}
