@@ -111,6 +111,8 @@ public interface Layout extends LayoutModel {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.lang.String getDefaultFriendlyURL();
+
 	public java.lang.String getTarget();
 
 	public boolean isSelected(boolean selectable,

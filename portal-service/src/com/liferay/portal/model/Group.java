@@ -35,6 +35,8 @@ public interface Group extends GroupModel {
 
 	public boolean isUser();
 
+	public java.lang.String getDefaultFriendlyURL();
+
 	public int getPrivateLayoutsPageCount();
 
 	public boolean hasPrivateLayouts();

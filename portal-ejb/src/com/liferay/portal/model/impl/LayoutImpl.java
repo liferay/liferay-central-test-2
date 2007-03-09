@@ -497,6 +497,10 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return _getURL(req, true, true);
 	}
 
+	public String getDefaultFriendlyURL() {
+		return StringPool.SLASH + getLayoutId();
+	}
+
 	public String getTarget() {
 		return PortalUtil.getLayoutTarget(this);
 	}

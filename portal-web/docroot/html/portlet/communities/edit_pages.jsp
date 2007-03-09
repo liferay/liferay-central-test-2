@@ -525,18 +525,16 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 									<%
 									String parentFriendlyURL = group.getFriendlyURL();
+									if (Validator.isNull(parentFriendlyURL)) {
+										parentFriendlyURL = group.getDefaultFriendlyURL();
+									}
 									%>
 
-									<c:choose>
-										<c:when test="<%= Validator.isNull(parentFriendlyURL) %>">
-											<a href="<%= portletURL.toString() %>&tabs3=virtual-host"><%= LanguageUtil.get(pageContext, "you-must-first-enter-a-frienly-url-for-the-" + (portletName.equals(PortletKeys.COMMUNITIES) ? "community" : "user")) %></a>
-										</c:when>
-										<c:otherwise>
-											<%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= privateLayout ? themeDisplay.getPathFriendlyURLPrivate() : themeDisplay.getPathFriendlyURLPublic() %><%= parentFriendlyURL %>
+									<%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= privateLayout ? themeDisplay.getPathFriendlyURLPrivate() : themeDisplay.getPathFriendlyURLPublic() %><%= parentFriendlyURL %>
 
-											<input class="form-text" name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
-										</c:otherwise>
-									</c:choose>
+									<input class="form-text" name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
+									<%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
+
 								</td>
 							</tr>
 						</c:if>

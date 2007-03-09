@@ -534,9 +534,6 @@ public class JournalUtil {
 		tokens.put(
 			"friendly_url_private", themeDisplay.getPathFriendlyURLPrivate());
 		tokens.put(
-			"friendly_url_private_user",
-			themeDisplay.getPathFriendlyURLPrivateUser());
-		tokens.put(
 			"friendly_url_public", themeDisplay.getPathFriendlyURLPublic());
 		tokens.put("main_path", themeDisplay.getPathMain());
 		tokens.put("portal_ctx", themeDisplay.getPathContext());
