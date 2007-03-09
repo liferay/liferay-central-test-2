@@ -40,7 +40,6 @@ import javax.servlet.http.HttpServlet;
  * @author Brian Wing Shun Chan
  *
  */
-
 public class PortalDelegateServlet extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
