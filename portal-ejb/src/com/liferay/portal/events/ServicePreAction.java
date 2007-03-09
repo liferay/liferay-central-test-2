@@ -298,7 +298,7 @@ public class ServicePreAction extends Action {
 				layout = (Layout)defaultLayout[0];
 				layouts = (List)defaultLayout[1];
 
-				req.setAttribute(WebKeys.IS_DEFAULT_LAYOUT, Boolean.TRUE);
+				req.setAttribute(WebKeys.LAYOUT_DEFAULT, Boolean.TRUE);
 			}
 
 			Object[] viewableLayouts = getViewableLayouts(

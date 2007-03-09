@@ -83,14 +83,14 @@ public class LayoutAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		Boolean isDefaultLayout =
-				(Boolean)req.getAttribute(WebKeys.IS_DEFAULT_LAYOUT);
+		Boolean layoutDefault  = (Boolean)req.getAttribute(
+			WebKeys.LAYOUT_DEFAULT);
 
-		if ((isDefaultLayout != null) && (isDefaultLayout.booleanValue())) {
+		if ((layoutDefault  != null) && (layoutDefault.booleanValue())) {
+			Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-			Layout layout = (Layout) req.getAttribute(WebKeys.LAYOUT);
 			ThemeDisplay themeDisplay =
-				(ThemeDisplay) req.getAttribute(WebKeys.THEME_DISPLAY);
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 			String redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
 
