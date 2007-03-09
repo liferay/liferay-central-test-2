@@ -22,8 +22,6 @@
 
 package com.liferay.util;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * <a href="BrowserSniffer_IW.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,61 +29,67 @@ import javax.servlet.http.HttpServletRequest;
  *
  */
 public class BrowserSniffer_IW {
-
 	public static BrowserSniffer_IW getInstance() {
 		return _instance;
 	}
 
-	public boolean is_ie(HttpServletRequest req) {
+	public boolean acceptsGzip(javax.servlet.http.HttpServletRequest req) {
+		return BrowserSniffer.acceptsGzip(req);
+	}
+
+	public boolean is_ie(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_ie(req);
 	}
 
-	public boolean is_ie_4(HttpServletRequest req) {
+	public boolean is_ie_4(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_ie_4(req);
 	}
 
-	public boolean is_ie_5(HttpServletRequest req) {
+	public boolean is_ie_5(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_ie_5(req);
 	}
 
-	public boolean is_ie_5_5(HttpServletRequest req) {
+	public boolean is_ie_5_5(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_ie_5_5(req);
-
 	}
 
-	public boolean is_ie_5_5_up(HttpServletRequest req) {
+	public boolean is_ie_5_5_up(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_ie_5_5_up(req);
 	}
 
-	public boolean is_ie_6(HttpServletRequest req) {
+	public boolean is_ie_6(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_ie_6(req);
 	}
 
-	public boolean is_ie_7(HttpServletRequest req) {
+	public boolean is_ie_7(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_ie_7(req);
 	}
 
-	public boolean is_linux(HttpServletRequest req) {
+	public boolean is_linux(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_linux(req);
 	}
 
-	public boolean is_mozilla(HttpServletRequest req) {
+	public boolean is_mozilla(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_mozilla(req);
 	}
 
-	public boolean is_mozilla_1_3_up(HttpServletRequest req) {
+	public boolean is_mozilla_1_3_up(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_mozilla_1_3_up(req);
 	}
 
-	public boolean is_ns_4(HttpServletRequest req) {
+	public boolean is_ns_4(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_ns_4(req);
 	}
 
-	public boolean is_rtf(HttpServletRequest req) {
+	public boolean is_rtf(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_rtf(req);
 	}
 
-	public boolean is_wml(HttpServletRequest req) {
+	public boolean is_safari(javax.servlet.http.HttpServletRequest req) {
+		return BrowserSniffer.is_safari(req);
+	}
+
+	public boolean is_wml(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_wml(req);
 	}
 
@@ -93,5 +97,4 @@ public class BrowserSniffer_IW {
 	}
 
 	private static BrowserSniffer_IW _instance = new BrowserSniffer_IW();
-
 }

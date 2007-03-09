@@ -51,6 +51,10 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.plugin.PluginPackageUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.admin.util.OmniadminUtil;
+
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -1059,6 +1063,10 @@ public class PortalUtil {
 			PropsUtil.LAYOUT_SITEMAPABLE, Filter.by(layout.getType()), true);
 	}
 
+	public static boolean isOmniadmin(String userId) {
+		return OmniadminUtil.isOmniadmin(userId);
+	}
+
 	public static boolean isReservedParameter(String name) {
 		return _instance._reservedParams.contains(name);
 	}
@@ -1069,6 +1077,10 @@ public class PortalUtil {
 
 	public static boolean isSystemRole(String roleName) {
 		return _instance._isSystemRole(roleName);
+	}
+
+	public static boolean isUpdateAvailable() {
+		return PluginPackageUtil.isUpdateAvailable();
 	}
 
 	public static void renderPage(

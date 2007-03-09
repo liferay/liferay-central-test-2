@@ -29,16 +29,29 @@ package com.liferay.util;
  *
  */
 public class ArrayUtil_IW {
-
 	public static ArrayUtil_IW getInstance() {
 		return _instance;
 	}
 
-	public int getLength(Object[] array) {
+	public java.lang.String[] append(java.lang.String[] array,
+		java.lang.String obj) {
+		return ArrayUtil.append(array, obj);
+	}
+
+	public void combine(java.lang.Object[] array1, java.lang.Object[] array2,
+		java.lang.Object[] combinedArray) {
+		ArrayUtil.combine(array1, array2, combinedArray);
+	}
+
+	public boolean contains(java.lang.Object[] array, java.lang.Object obj) {
+		return ArrayUtil.contains(array, obj);
+	}
+
+	public int getLength(java.lang.Object[] array) {
 		return ArrayUtil.getLength(array);
 	}
 
-	public Object getValue(Object[] array, int pos) {
+	public java.lang.Object getValue(java.lang.Object[] array, int pos) {
 		return ArrayUtil.getValue(array, pos);
 	}
 
@@ -46,5 +59,4 @@ public class ArrayUtil_IW {
 	}
 
 	private static ArrayUtil_IW _instance = new ArrayUtil_IW();
-
 }

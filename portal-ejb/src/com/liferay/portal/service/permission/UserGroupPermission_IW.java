@@ -20,49 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.service.permission;
 
 /**
- * <a href="PropsUtil_IW.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserGroupPermission_IW.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PropsUtil_IW {
-	public static PropsUtil_IW getInstance() {
+public class UserGroupPermission_IW {
+	public static UserGroupPermission_IW getInstance() {
 		return _instance;
 	}
 
-	public boolean containsKey(java.lang.String key) {
-		return PropsUtil.containsKey(key);
+	public void check(
+		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
+		java.lang.String userGroupId, java.lang.String actionId)
+		throws com.liferay.portal.security.auth.PrincipalException {
+		UserGroupPermission.check(permissionChecker, userGroupId, actionId);
 	}
 
-	public java.lang.String get(java.lang.String key) {
-		return PropsUtil.get(key);
+	public boolean contains(
+		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
+		java.lang.String userGroupId, java.lang.String actionId) {
+		return UserGroupPermission.contains(permissionChecker, userGroupId,
+			actionId);
 	}
 
-	public java.lang.String get(java.lang.String companyId, java.lang.String key) {
-		return PropsUtil.get(companyId, key);
+	private UserGroupPermission_IW() {
 	}
 
-	public void set(java.lang.String key, java.lang.String value) {
-		PropsUtil.set(key, value);
-	}
-
-	public java.lang.String[] getArray(java.lang.String key) {
-		return PropsUtil.getArray(key);
-	}
-
-	public java.util.Properties getProperties() {
-		return PropsUtil.getProperties();
-	}
-
-	public com.germinus.easyconf.ComponentProperties getComponentProperties() {
-		return PropsUtil.getComponentProperties();
-	}
-
-	private PropsUtil_IW() {
-	}
-
-	private static PropsUtil_IW _instance = new PropsUtil_IW();
+	private static UserGroupPermission_IW _instance = new UserGroupPermission_IW();
 }

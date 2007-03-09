@@ -133,6 +133,17 @@
 		</java>
 	</target>
 
+	<target name="build-iw">
+		<java
+			classname="com.liferay.portal.tools.InstanceWrapperBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg value="src/com/liferay/portal/tools/instance_wrappers.xml" />
+		</java>
+	</target>
+
 	<target name="build-javascript">
 		<ant dir="../portal-web" target="build-javascript" />
 	</target>

@@ -26,6 +26,17 @@ import com.liferay.portal.language.LanguageUtil_IW;
 import com.liferay.portal.language.UnicodeLanguageUtil_IW;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.service.permission.AccountPermission_IW;
+import com.liferay.portal.service.permission.CommonPermission_IW;
+import com.liferay.portal.service.permission.GroupPermission_IW;
+import com.liferay.portal.service.permission.LayoutPermission_IW;
+import com.liferay.portal.service.permission.LocationPermission_IW;
+import com.liferay.portal.service.permission.OrganizationPermission_IW;
+import com.liferay.portal.service.permission.PortalPermission_IW;
+import com.liferay.portal.service.permission.PortletPermission_IW;
+import com.liferay.portal.service.permission.RolePermission_IW;
+import com.liferay.portal.service.permission.UserGroupPermission_IW;
+import com.liferay.portal.service.permission.UserPermission_IW;
 import com.liferay.portal.theme.NavItem;
 import com.liferay.portal.theme.RequestVars;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -261,6 +272,20 @@ public class VelocityVariables {
 		// Unicode formatter
 
 		vc.put("unicodeFormatter", UnicodeFormatter_IW.getInstance());
+
+		// Permissions
+
+		vc.put("accountPermission", AccountPermission_IW.getInstance());
+		vc.put("commonPermission", CommonPermission_IW.getInstance());
+		vc.put("groupPermission", GroupPermission_IW.getInstance());
+		vc.put("layoutPermission", LayoutPermission_IW.getInstance());
+		vc.put("locationPermission", LocationPermission_IW.getInstance());
+		vc.put("organizationPermission", OrganizationPermission_IW.getInstance());
+		vc.put("portalPermission", PortalPermission_IW.getInstance());
+		vc.put("portletPermission", PortletPermission_IW.getInstance());
+		vc.put("rolePermission", RolePermission_IW.getInstance());
+		vc.put("userGroupPermission", UserGroupPermission_IW.getInstance());
+		vc.put("userPermission", UserPermission_IW.getInstance());
 	}
 
 	private static String _insertTilesVariables(

@@ -29,24 +29,23 @@ package com.liferay.util;
  *
  */
 public class UnicodeFormatter_IW {
-
 	public static UnicodeFormatter_IW getInstance() {
 		return _instance;
 	}
 
-	public String byteToHex(byte b) {
+	public java.lang.String byteToHex(byte b) {
 		return UnicodeFormatter.byteToHex(b);
 	}
 
-	public String charToHex(char c) {
+	public java.lang.String charToHex(char c) {
 		return UnicodeFormatter.charToHex(c);
 	}
 
-	public String toString(char[] array) {
+	public java.lang.String toString(char[] array) {
 		return UnicodeFormatter.toString(array);
 	}
 
-	public String toString(String s) {
+	public java.lang.String toString(java.lang.String s) {
 		return UnicodeFormatter.toString(s);
 	}
 
@@ -54,5 +53,4 @@ public class UnicodeFormatter_IW {
 	}
 
 	private static UnicodeFormatter_IW _instance = new UnicodeFormatter_IW();
-
 }

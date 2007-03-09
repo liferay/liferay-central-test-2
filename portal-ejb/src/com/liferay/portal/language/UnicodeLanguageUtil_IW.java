@@ -22,12 +22,6 @@
 
 package com.liferay.portal.language;
 
-import com.liferay.portal.model.User;
-
-import java.util.Locale;
-
-import javax.servlet.jsp.PageContext;
-
 /**
  * <a href="UnicodeLanguageUtil_IW.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,110 +29,102 @@ import javax.servlet.jsp.PageContext;
  *
  */
 public class UnicodeLanguageUtil_IW {
-
 	public static UnicodeLanguageUtil_IW getInstance() {
 		return _instance;
 	}
 
-	public String get(User user, String key) throws LanguageException {
+	public java.lang.String get(com.liferay.portal.model.User user,
+		java.lang.String key)
+		throws com.liferay.portal.language.LanguageException {
 		return UnicodeLanguageUtil.get(user, key);
 	}
 
-	public String get(String companyId, Locale locale, String key)
-		throws LanguageException {
-
+	public java.lang.String get(java.lang.String companyId,
+		java.util.Locale locale, java.lang.String key)
+		throws com.liferay.portal.language.LanguageException {
 		return UnicodeLanguageUtil.get(companyId, locale, key);
 	}
 
-	public String get(PageContext pageContext, String key)
-		throws LanguageException {
-
+	public java.lang.String get(javax.servlet.jsp.PageContext pageContext,
+		java.lang.String key)
+		throws com.liferay.portal.language.LanguageException {
 		return UnicodeLanguageUtil.get(pageContext, key);
 	}
 
-	public String format(
-			PageContext pageContext, String pattern, Object argument)
-		throws LanguageException {
-
+	public java.lang.String format(javax.servlet.jsp.PageContext pageContext,
+		java.lang.String pattern, java.lang.Object argument)
+		throws com.liferay.portal.language.LanguageException {
 		return UnicodeLanguageUtil.format(pageContext, pattern, argument);
 	}
 
-	public String format(
-			PageContext pageContext, String pattern, Object argument,
-			boolean translateArguments)
-		throws LanguageException {
-
-		return UnicodeLanguageUtil.format(
-			pageContext, pattern, argument, translateArguments);
+	public java.lang.String format(javax.servlet.jsp.PageContext pageContext,
+		java.lang.String pattern, java.lang.Object argument,
+		boolean translateArguments)
+		throws com.liferay.portal.language.LanguageException {
+		return UnicodeLanguageUtil.format(pageContext, pattern, argument,
+			translateArguments);
 	}
 
-	public String format(
-			PageContext pageContext, String pattern, Object[] arguments)
-		throws LanguageException {
-
+	public java.lang.String format(javax.servlet.jsp.PageContext pageContext,
+		java.lang.String pattern, java.lang.Object[] arguments)
+		throws com.liferay.portal.language.LanguageException {
 		return UnicodeLanguageUtil.format(pageContext, pattern, arguments);
 	}
 
-	public String format(
-			PageContext pageContext, String pattern, Object[] arguments,
-			boolean translateArguments)
-		throws LanguageException {
-
-		return UnicodeLanguageUtil.format(
-			pageContext, pattern, arguments, translateArguments);
+	public java.lang.String format(javax.servlet.jsp.PageContext pageContext,
+		java.lang.String pattern, java.lang.Object[] arguments,
+		boolean translateArguments)
+		throws com.liferay.portal.language.LanguageException {
+		return UnicodeLanguageUtil.format(pageContext, pattern, arguments,
+			translateArguments);
 	}
 
-	public String format(
-			PageContext pageContext, String pattern, LanguageWrapper argument)
-		throws LanguageException {
-
+	public java.lang.String format(javax.servlet.jsp.PageContext pageContext,
+		java.lang.String pattern,
+		com.liferay.portal.language.LanguageWrapper argument)
+		throws com.liferay.portal.language.LanguageException {
 		return UnicodeLanguageUtil.format(pageContext, pattern, argument);
 	}
 
-	public String format(
-			PageContext pageContext, String pattern, LanguageWrapper argument,
-			boolean translateArguments)
-		throws LanguageException {
-
-		return UnicodeLanguageUtil.format(
-			pageContext, pattern, argument, translateArguments);
+	public java.lang.String format(javax.servlet.jsp.PageContext pageContext,
+		java.lang.String pattern,
+		com.liferay.portal.language.LanguageWrapper argument,
+		boolean translateArguments)
+		throws com.liferay.portal.language.LanguageException {
+		return UnicodeLanguageUtil.format(pageContext, pattern, argument,
+			translateArguments);
 	}
 
-	public String format(
-			PageContext pageContext, String pattern,
-			LanguageWrapper[] arguments)
-		throws LanguageException {
-
+	public java.lang.String format(javax.servlet.jsp.PageContext pageContext,
+		java.lang.String pattern,
+		com.liferay.portal.language.LanguageWrapper[] arguments)
+		throws com.liferay.portal.language.LanguageException {
 		return UnicodeLanguageUtil.format(pageContext, pattern, arguments);
 	}
 
-	public String format(
-			PageContext pageContext, String pattern,
-			LanguageWrapper[] arguments, boolean translateArguments)
-		throws LanguageException {
-
-		return UnicodeLanguageUtil.format(
-			pageContext, pattern, arguments, translateArguments);
+	public java.lang.String format(javax.servlet.jsp.PageContext pageContext,
+		java.lang.String pattern,
+		com.liferay.portal.language.LanguageWrapper[] arguments,
+		boolean translateArguments)
+		throws com.liferay.portal.language.LanguageException {
+		return UnicodeLanguageUtil.format(pageContext, pattern, arguments,
+			translateArguments);
 	}
 
-	public String getTimeDescription(PageContext pageContext, Long milliseconds)
-		throws LanguageException {
-
-		return UnicodeLanguageUtil.getTimeDescription(
-			pageContext, milliseconds);
+	public java.lang.String getTimeDescription(
+		javax.servlet.jsp.PageContext pageContext, java.lang.Long milliseconds)
+		throws com.liferay.portal.language.LanguageException {
+		return UnicodeLanguageUtil.getTimeDescription(pageContext, milliseconds);
 	}
 
-	public String getTimeDescription(PageContext pageContext, long milliseconds)
-		throws LanguageException {
-
-		return UnicodeLanguageUtil.getTimeDescription(
-			pageContext, milliseconds);
+	public java.lang.String getTimeDescription(
+		javax.servlet.jsp.PageContext pageContext, long milliseconds)
+		throws com.liferay.portal.language.LanguageException {
+		return UnicodeLanguageUtil.getTimeDescription(pageContext, milliseconds);
 	}
 
 	private UnicodeLanguageUtil_IW() {
 	}
 
-	private static UnicodeLanguageUtil_IW _instance =
-		new UnicodeLanguageUtil_IW();
-
+	private static UnicodeLanguageUtil_IW _instance = new UnicodeLanguageUtil_IW();
 }

@@ -73,7 +73,7 @@ public class SourceFormatter {
 					"**\\JSMin.java", "**\\PropsUtil.java",
 					"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
 					"**\\UserAttributes.java", "**\\WebKeys.java",
-					"**\\XHTMLComplianceFormatter.java",
+					"**\\*_IW.java", "**\\XHTMLComplianceFormatter.java",
 					"**\\portal-service\\**\\model\\*Model.java",
 					"**\\portal-service\\**\\model\\*Soap.java",
 					"**\\model\\impl\\*ModelImpl.java",
@@ -102,7 +102,7 @@ public class SourceFormatter {
 				});
 			ds.setExcludes(
 				new String[] {
-					"**\\tools\\ext_tmpl\\**"
+					"**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
 				});
 			ds.setBasedir(basedir);
 			ds.scan();

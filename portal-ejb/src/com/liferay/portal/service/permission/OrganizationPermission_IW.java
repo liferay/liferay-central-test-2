@@ -20,49 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.service.permission;
 
 /**
- * <a href="PropsUtil_IW.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrganizationPermission_IW.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PropsUtil_IW {
-	public static PropsUtil_IW getInstance() {
+public class OrganizationPermission_IW {
+	public static OrganizationPermission_IW getInstance() {
 		return _instance;
 	}
 
-	public boolean containsKey(java.lang.String key) {
-		return PropsUtil.containsKey(key);
+	public void check(
+		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
+		java.lang.String organizationId, java.lang.String actionId)
+		throws com.liferay.portal.security.auth.PrincipalException {
+		OrganizationPermission.check(permissionChecker, organizationId, actionId);
 	}
 
-	public java.lang.String get(java.lang.String key) {
-		return PropsUtil.get(key);
+	public boolean contains(
+		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
+		java.lang.String organizationId, java.lang.String actionId) {
+		return OrganizationPermission.contains(permissionChecker,
+			organizationId, actionId);
 	}
 
-	public java.lang.String get(java.lang.String companyId, java.lang.String key) {
-		return PropsUtil.get(companyId, key);
+	private OrganizationPermission_IW() {
 	}
 
-	public void set(java.lang.String key, java.lang.String value) {
-		PropsUtil.set(key, value);
-	}
-
-	public java.lang.String[] getArray(java.lang.String key) {
-		return PropsUtil.getArray(key);
-	}
-
-	public java.util.Properties getProperties() {
-		return PropsUtil.getProperties();
-	}
-
-	public com.germinus.easyconf.ComponentProperties getComponentProperties() {
-		return PropsUtil.getComponentProperties();
-	}
-
-	private PropsUtil_IW() {
-	}
-
-	private static PropsUtil_IW _instance = new PropsUtil_IW();
+	private static OrganizationPermission_IW _instance = new OrganizationPermission_IW();
 }
