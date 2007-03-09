@@ -32,16 +32,16 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
- * <a href="PortalServletContextListenerWrapper.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="PortalClassLoaderServletContextListener.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class PortalServletContextListenerWrapper
+public abstract class PortalClassLoaderServletContextListener
 	implements PortalInitable, ServletContextListener {
 
-	public PortalServletContextListenerWrapper() {
+	public PortalClassLoaderServletContextListener() {
 	}
 
 	public void portalInit() {
@@ -89,7 +89,7 @@ public abstract class PortalServletContextListenerWrapper
 	protected abstract ServletContextListener getInstance() throws Exception;
 
 	private static Log _log =
-		LogFactoryUtil.getLog(PortalServletContextListenerWrapper.class);
+		LogFactoryUtil.getLog(PortalClassLoaderServletContextListener.class);
 
 	private ServletContextListener _servletContextListener;
 	private ServletContextEvent _sce;

@@ -34,7 +34,7 @@ import javax.servlet.ServletContextListener;
  *
  */
 public class SpringServletContextListener
-	extends PortalServletContextListenerWrapper {
+	extends PortalClassLoaderServletContextListener {
 
 	protected ServletContextListener getInstance() throws Exception {
 		Class classObj = Class.forName(

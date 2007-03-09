@@ -37,12 +37,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="PortalServletWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalClassLoaderServlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalServletWrapper
+public class PortalClassLoaderServlet
 	extends HttpServlet implements PortalInitable {
 
 	public void portalInit() {
@@ -107,7 +107,8 @@ public class PortalServletWrapper
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PortalServletWrapper.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(PortalClassLoaderServlet.class);
 
 	private HttpServlet _servlet;
 	private ServletConfig _config;

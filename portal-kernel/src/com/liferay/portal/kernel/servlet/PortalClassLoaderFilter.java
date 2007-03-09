@@ -38,12 +38,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
- * <a href="PortalFilterWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalClassLoaderFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalFilterWrapper implements Filter, PortalInitable {
+public class PortalClassLoaderFilter implements Filter, PortalInitable {
 
 	public void portalInit() {
 		try {
@@ -99,7 +99,8 @@ public class PortalFilterWrapper implements Filter, PortalInitable {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PortalFilterWrapper.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(PortalClassLoaderFilter.class);
 
 	private Filter _filter;
 	private FilterConfig _config;
