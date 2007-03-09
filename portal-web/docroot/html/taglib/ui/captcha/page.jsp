@@ -44,7 +44,7 @@ String url = (String)request.getAttribute("liferay-ui:captcha:url");
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="<%= namespace %>captchaText" size="10" type="text" value="">
+			<input name="<%= namespace %>captchaText" size="10" type="text" value="">
 		</td>
 	</tr>
 	</table>

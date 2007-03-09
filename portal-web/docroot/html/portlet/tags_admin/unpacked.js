@@ -153,9 +153,9 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		html += '<tr><td>';
 		html += '<input name="' + instanceVar + 'propertyId" type="hidden" value="' + propertyId + '" />\n';
-		html += '<input class="form-text" name="' + instanceVar + 'propertyKey" type="text" value="' + key + '" />\n';
-		html += '<input class="form-text" name="' + instanceVar + 'propertyValue" type="text" value="' + value + '" />\n';
-		html += '<input class="portlet-form-button" name="' + instanceVar + 'deletePropertyButton" type="button" value="Delete" />\n';
+		html += '<input name="' + instanceVar + 'propertyKey" type="text" value="' + key + '" />\n';
+		html += '<input name="' + instanceVar + 'propertyValue" type="text" value="' + value + '" />\n';
+		html += '<input name="' + instanceVar + 'deletePropertyButton" type="button" value="Delete" />\n';
 		html += '</td></tr>';
 
 		return html;

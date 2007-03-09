@@ -41,7 +41,7 @@ String suggestion = (String)request.getAttribute(WebKeys.GOOGLE_SPELLING_SUGGEST
 		return false;"
 >
 
-<input class="form-text" name="<portlet:namespace />args" size="30" type="text" value="<%= args %>">
+<input name="<portlet:namespace />args" size="30" type="text" value="<%= args %>">
 
 <select name="<portlet:namespace />directive">
 	<option value="search"><%= LanguageUtil.get(pageContext, "search") %></option>

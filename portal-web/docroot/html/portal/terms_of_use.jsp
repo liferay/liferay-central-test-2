@@ -193,6 +193,6 @@ Welcome to our site. We maintain this web site as a service to our members. By u
 	</li>
 </ol>
 
-<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "i-agree") %>" onClick="submitForm(document.fm);"> <input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "i-disagree") %>" onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "you-must-agree-with-the-terms-of-use-to-continue") %>');">
+<input type="button" value="<%= LanguageUtil.get(pageContext, "i-agree") %>" onClick="submitForm(document.fm);"> <input type="button" value="<%= LanguageUtil.get(pageContext, "i-disagree") %>" onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "you-must-agree-with-the-terms-of-use-to-continue") %>');">
 
 </form>

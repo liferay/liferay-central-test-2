@@ -97,7 +97,7 @@ for (int i = 0; i < results.getLength(); i++) {
 }
 %>
 
-<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
+<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
 
 <select name="<portlet:namespace/>type">
 	<option value=""></option>
@@ -107,7 +107,7 @@ for (int i = 0; i < results.getLength(); i++) {
 	<option <%= type.equals("extension")? "selected" : "" %> value="extension"><%= LanguageUtil.get(pageContext, "extension") %></option>
 </select>
 
-<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search-products") %>">
+<input type="submit" value="<%= LanguageUtil.get(pageContext, "search-products") %>">
 
 <br><br>
 

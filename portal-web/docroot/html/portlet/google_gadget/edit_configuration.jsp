@@ -69,7 +69,7 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />title" type="text" value="<%= title %>">
+				<input name="<portlet:namespace />title" type="text" value="<%= title %>">
 			</td>
 		</tr>
 		<tr>
@@ -78,7 +78,7 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />width" size="4" type="text" value="<%= width %>"> px
+				<input name="<portlet:namespace />width" size="4" type="text" value="<%= width %>"> px
 			</td>
 		</tr>
 		<tr>
@@ -87,7 +87,7 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />height" size="4" type="text" value="<%= height %>"> px
+				<input name="<portlet:namespace />height" size="4" type="text" value="<%= height %>"> px
 			</td>
 		</tr>
 		<tr>
@@ -121,14 +121,14 @@
 
 		<br>
 
-		<textarea class="form-text" rows="5" cols="50" name="<portlet:namespace />gadgetCode"><%= gadgetCode %></textarea>
+		<textarea rows="5" cols="50" name="<portlet:namespace />gadgetCode"><%= gadgetCode %></textarea>
 	</td>
 </tr>
 </table>
 
 <br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 
 </form>
 

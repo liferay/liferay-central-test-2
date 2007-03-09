@@ -32,8 +32,8 @@
 		row.insertCell(1);
 		row.insertCell(2);
 
-		row.cells[0].innerHTML = "<input class=\"form-text\" name=\"<portlet:namespace />title\" />";
-		row.cells[1].innerHTML = "<input class=\"form-text\" name=\"<portlet:namespace />url\" style=\"width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;\" />";
+		row.cells[0].innerHTML = "<input name=\"<portlet:namespace />title\" />";
+		row.cells[1].innerHTML = "<input name=\"<portlet:namespace />url\" style=\"width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;\" />";
 		row.cells[2].innerHTML = "<a href=\"javascript:void(0)\" onclick=\"Element.remove(this.parentNode.parentNode)\"><img src=\"<%= themeDisplay.getPathThemeImage() %>/common/unsubscribe.png\" /></a>";
 		table.appendChild(row);
 	}
@@ -89,10 +89,10 @@ for (int i = 0; i < urls.length; i++) {
 
 	<tr>
 		<td>
-			<input class="form-text" name="<portlet:namespace />title" value="<%= title %>" />
+			<input name="<portlet:namespace />title" value="<%= title %>" />
 		</td>
 		<td>
-			<input class="form-text" name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= urls[i] %>" />
+			<input name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= urls[i] %>" />
 		</td>
 		<td>
 			<a href="javascript: void(0);" onclick="Element.remove(this.parentNode.parentNode);"><img src="<%= themeDisplay.getPathThemeImage() %>/common/unsubscribe.png" /></a>
@@ -131,6 +131,6 @@ for (int i = 0; i < urls.length; i++) {
 
 <br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 
 </form>

@@ -241,7 +241,7 @@ Assign permissions to users.
 
 				<br><div class="separator"></div><br>
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserPermissions();">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserPermissions();">
 
 				<br><br>
 
@@ -340,12 +340,12 @@ Assign permissions to users.
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td>
-						<input class="portlet-form-button" <%= userIdsPos > 0 ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos - 1 %>, '<%= userIdsArray[userIdsPos] %>');">
+						<input <%= userIdsPos > 0 ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos - 1 %>, '<%= userIdsArray[userIdsPos] %>');">
 
-						<input class="portlet-form-button" <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
+						<input <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
 					</td>
 					<td align="right">
-						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');">
+						<input type="button" value='<%= LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');">
 					</td>
 				</tr>
 				</table>
@@ -372,7 +372,7 @@ Assign permissions to users.
 			portletURL.setParameter("editUserPermissions", "1");
 			%>
 
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="self.location = '<%= portletURL.toString() %>';">
+			<input type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="self.location = '<%= portletURL.toString() %>';">
 
 			<%
 			portletURL.setParameter("editUserPermissions", String.valueOf(editUserPermissions));

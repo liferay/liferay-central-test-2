@@ -48,7 +48,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />password1" size="30" type="password" value="">
+		<input name="<portlet:namespace />password1" size="30" type="password" value="">
 	</td>
 </tr>
 <tr>
@@ -60,7 +60,7 @@
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
-				<input class="form-text" name="<portlet:namespace />password2" size="30" type="password" value="">
+				<input name="<portlet:namespace />password2" size="30" type="password" value="">
 			</td>
 
 			<c:if test="<%= !user.getUserId().equals(user2.getUserId()) %>">
@@ -79,6 +79,6 @@
 
 <br>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUser('password');">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUser('password');">
 
 <br><br>

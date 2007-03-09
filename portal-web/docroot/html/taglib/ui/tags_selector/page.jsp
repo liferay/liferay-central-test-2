@@ -55,7 +55,7 @@ if (curTagsParam != null) {
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<input class="form-text" id="<%= randomNamespace %>tags" type="text">
+		<input id="<%= randomNamespace %>tags" type="text">
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>

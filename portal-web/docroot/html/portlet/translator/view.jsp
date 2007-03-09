@@ -40,7 +40,7 @@ if (translation == null) {
 	<br><br>
 </c:if>
 
-<textarea class="form-text" name="<portlet:namespace />text" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= translation.getFromText() %></textarea>
+<textarea name="<portlet:namespace />text" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= translation.getFromText() %></textarea>
 
 <br><br>
 
@@ -70,7 +70,7 @@ if (translation == null) {
 	<option <%= (translation.getTranslationId().equals("es_en")) ? "selected" : "" %> value="es_en"><%= LanguageUtil.get(pageContext, "es_en") %></option>
 </select>
 
-<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "translate") %>">
+<input type="submit" value="<%= LanguageUtil.get(pageContext, "translate") %>">
 
 </form>
 

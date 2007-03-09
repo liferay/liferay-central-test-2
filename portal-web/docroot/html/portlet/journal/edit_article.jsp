@@ -678,7 +678,7 @@ String[] availableLocales = null;
 						</select>
 
 						<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
-							<input class="portlet-form-button" type="button" name="<portlet:namespace />removeArticleLocaleButton" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeArticleLocale();">
+							<input type="button" name="<portlet:namespace />removeArticleLocaleButton" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeArticleLocale();">
 						</c:if>
 					</td>
 					<td style="padding-left: 30px;"></td>
@@ -869,35 +869,35 @@ String[] availableLocales = null;
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
 <c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE) %>">
-	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save-and-approve") %>' onClick="<portlet:namespace />saveAndApproveArticle();">
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "save-and-approve") %>' onClick="<portlet:namespace />saveAndApproveArticle();">
 
 	<c:if test="<%= article != null %>">
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "approve") %>' onClick="<portlet:namespace />approveArticle();">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "approve") %>' onClick="<portlet:namespace />approveArticle();">
 	</c:if>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(structureId) %>">
-	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "preview") %>' onClick="<portlet:namespace />previewArticle();">
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "preview") %>' onClick="<portlet:namespace />previewArticle();">
 </c:if>
 
 <c:if test="<%= structure != null %>">
-	<input class="portlet-form-button" type="button" value="<bean:message key="download" />" onClick="<portlet:namespace />downloadArticleContent();">
+	<input type="button" value="<bean:message key="download" />" onClick="<portlet:namespace />downloadArticleContent();">
 </c:if>
 
 <c:if test="<%= article != null %>">
 	<c:if test="<%= !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "expire") %>' onClick="<portlet:namespace />expireArticle();">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "expire") %>' onClick="<portlet:namespace />expireArticle();">
 	</c:if>
 
 	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteArticle();">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteArticle();">
 	</c:if>
 </c:if>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 <br><br>
 
@@ -916,7 +916,7 @@ String[] availableLocales = null;
 		<%= structureName %>
 		</a>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>'
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>'
 			onClick="
 				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates") %>')) {
 					var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680');
@@ -925,7 +925,7 @@ String[] availableLocales = null;
 				}"
 			>
 
-		<input <%= Validator.isNull(structureId) ? "disabled" : "" %> class="portlet-form-button" id="<portlet:namespace />removeStructureButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeStructure();">
+		<input <%= Validator.isNull(structureId) ? "disabled" : "" %> id="<portlet:namespace />removeStructureButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeStructure();">
 	</td>
 </tr>
 <tr>
@@ -943,7 +943,7 @@ String[] availableLocales = null;
 			<c:when test="<%= templates.size() == 0 %>">
 				<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>">
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>'
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>'
 					onClick="
 						if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
 							var templateWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'template', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680');

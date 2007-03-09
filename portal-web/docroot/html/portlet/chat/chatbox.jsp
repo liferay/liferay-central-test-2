@@ -55,7 +55,7 @@ int left = ParamUtil.getInteger(request, "left");
 			<%= messages %>
 		</div>
 
-		<input class="msg-type-area form-text" style="width: 100%" tabIndex=1 onKeyPress="Messaging.sendChat(this, event)" />
+		<input class="msg-type-area" style="width: 100%" tabIndex=1 onKeyPress="Messaging.sendChat(this, event)" />
 
 		<c:if test="<%= addUser %>">
 			<img src="<%= themeDisplay.getPathThemeImage() %>/chat/add_user.png" style="cursor: pointer; margin-top: 2px" onclick="MessagingRoster.addEntry('<%= toId %>'); Element.remove(this)" />

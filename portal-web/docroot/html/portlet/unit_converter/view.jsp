@@ -102,7 +102,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />fromValue" size="30" type="text" value="<%= conversion.getFromValue() %>">
+		<input name="<portlet:namespace />fromValue" size="30" type="text" value="<%= conversion.getFromValue() %>">
 
 		<select name="<portlet:namespace />fromId">
 			<c:if test="<%= type == 0 %>">
@@ -172,7 +172,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />to_value" size="30" type="text" value="<%= conversion.getToValue() %>">
+		<input name="<portlet:namespace />to_value" size="30" type="text" value="<%= conversion.getToValue() %>">
 
 		<select name="<portlet:namespace />toId">
 			<c:if test="<%= type == 0 %>">
@@ -277,7 +277,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 
 <br>
 
-<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "convert") %>">
+<input type="submit" value="<%= LanguageUtil.get(pageContext, "convert") %>">
 
 </form>
 

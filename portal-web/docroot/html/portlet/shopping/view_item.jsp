@@ -226,17 +226,17 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 		}
 		%>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-to-shopping-cart") %>' onClick="<portlet:namespace />addToCart();"><br>
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "add-to-shopping-cart") %>' onClick="<portlet:namespace />addToCart();"><br>
 
 		<c:if test="<%= (prevAndNext[0] != null) || (prevAndNext[2] != null) %>">
 			<br>
 
 			<c:if test="<%= prevAndNext[0] != null %>">
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= prevAndNext[0].getItemId() %>" /></portlet:renderURL>';">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= prevAndNext[0].getItemId() %>" /></portlet:renderURL>';">
 			</c:if>
 
 			<c:if test="<%= prevAndNext[2] != null %>">
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= prevAndNext[2].getItemId() %>" /></portlet:renderURL>';">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= prevAndNext[2].getItemId() %>" /></portlet:renderURL>';">
 			</c:if>
 		</c:if>
 	</td>

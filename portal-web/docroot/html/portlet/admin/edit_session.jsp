@@ -46,7 +46,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 
 		<br><br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 	</c:when>
 	<c:otherwise>
 
@@ -276,10 +276,10 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		<br>
 
 		<c:if test="<%= userSessionAlive && !session.getId().equals(userTrackerId) %>">
-			<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "kill-session") %>'>
+			<input type="submit" value='<%= LanguageUtil.get(pageContext, "kill-session") %>'>
 		</c:if>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 	</c:otherwise>
 </c:choose>
 

@@ -374,7 +374,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		}
 		%>
 
-		<input  class="portlet-form-button" type="button" value="<%=LanguageUtil.get(pageContext, "add-permissions")%>" onClick="self.location = '<%= addPermissionURL %>';">
+		<input  type="button" value="<%=LanguageUtil.get(pageContext, "add-permissions")%>" onClick="self.location = '<%= addPermissionURL %>';">
 
 		<c:if test="<%= total > 0 %>">
 			<br><br>
@@ -459,7 +459,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<br><div class="separator"></div><br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos %>);">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos %>);">
 
 		<br><br>
 
@@ -490,9 +490,9 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td>
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos - 1 %>);">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos - 1 %>);">
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos + 1 %>);">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos + 1 %>);">
 			</td>
 		</tr>
 		</table>
@@ -610,7 +610,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />updateActions();">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />updateActions();">
 	</c:when>
 	<c:when test="<%= Validator.isNotNull(portletResource) %>">
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
@@ -627,7 +627,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<br><br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="self.location = '<%= portletURL.toString() %>&editPortletPermissions=1';">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="self.location = '<%= portletURL.toString() %>&editPortletPermissions=1';">
 
 		<c:if test="<%= modelResources.size() > 0 %>">
 			<br><br>

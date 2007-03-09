@@ -33,13 +33,13 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<html:file property="file" styleClass="form-text" />
+		<html:file property="file" />
 	</td>
 </tr>
 </table>
 
 <br>
 
-<html:submit styleClass="portlet-form-button">Upload File</html:submit>
+<html:submit>Upload File</html:submit>
 
 </html:form>

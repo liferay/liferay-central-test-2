@@ -55,7 +55,7 @@
 				</div>
 			</c:if>
 
-			<input class="form-text" name="<portlet:namespace />emailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
+			<input name="<portlet:namespace />emailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
 
 			<br>
 
@@ -65,7 +65,7 @@
 
 		<br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "invite-friends") %>' onClick="submitForm(document.<portlet:namespace />fm);">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "invite-friends") %>' onClick="submitForm(document.<portlet:namespace />fm);">
 
 		</form>
 	</c:otherwise>

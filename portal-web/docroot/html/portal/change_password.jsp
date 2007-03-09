@@ -68,7 +68,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="password1" size="30" type="password" value="">
+		<input name="password1" size="30" type="password" value="">
 	</td>
 </tr>
 <tr>
@@ -77,14 +77,14 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="password2" size="30" type="password" value="">
+		<input name="password2" size="30" type="password" value="">
 	</td>
 </tr>
 </table>
 
 <br>
 
-<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "save") %>">
+<input type="submit" value="<%= LanguageUtil.get(pageContext, "save") %>">
 
 </form>
 

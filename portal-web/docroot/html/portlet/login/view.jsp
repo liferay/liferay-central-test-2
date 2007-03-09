@@ -61,7 +61,7 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />login" style="width: 120px;" type="text" value="<%= login %>">
+				<input name="<portlet:namespace />login" style="width: 120px;" type="text" value="<%= login %>">
 			</td>
 		</tr>
 		<tr>
@@ -70,7 +70,7 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />password" style="width: 120px;" type="password" value="<%= password %>">
+				<input name="<portlet:namespace />password" style="width: 120px;" type="password" value="<%= password %>">
 			</td>
 		</tr>
 
@@ -100,10 +100,10 @@
 
 		<br>
 
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "sign-in") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "sign-in") %>">
 
 		<c:if test="<%= company.isStrangers() %>">
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "create-account") %>' onClick="self.location = '<%= themeDisplay.getURLCreateAccount() %>';">
+			<input type="button" value='<%= LanguageUtil.get(pageContext, "create-account") %>' onClick="self.location = '<%= themeDisplay.getURLCreateAccount() %>';">
 		</c:if>
 
 		<c:if test="<%= company.isSendPassword() %>">

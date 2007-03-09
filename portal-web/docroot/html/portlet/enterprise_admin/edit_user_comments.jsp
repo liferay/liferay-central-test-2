@@ -28,6 +28,6 @@
 	<c:if test="<%= editable %>">
 		<br><br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUser('comments');">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUser('comments');">
 	</c:if>
 </liferay-ui:tabs>

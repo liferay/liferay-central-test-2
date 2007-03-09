@@ -33,7 +33,7 @@
 		<input name="showfn" type="hidden" value="yes">
 		<input name="showxref" type="hidden" value="yes">
 
-		<input class="form-text" name="passage" type="text" size="30">
+		<input name="passage" type="text" size="30">
 
 		<select name="version">
 			<option value="ESV">ESV</option>
@@ -52,7 +52,7 @@
 
 		<br><br>
 
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "lookup") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "lookup") %>">
 
 		</form>
 	</liferay-ui:section>
@@ -72,7 +72,7 @@
 				return false;"
 		>
 
-		<input class="form-text" name="<portlet:namespace />passage" type="text" size="30"><br>
+		<input name="<portlet:namespace />passage" type="text" size="30"><br>
 
 		<input name="<portlet:namespace />version" type="checkbox" value="ESV"> <span style="font-size: xx-small;">ESV</span>
 
@@ -90,14 +90,14 @@
 
 		<br><br>
 
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "compare") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "compare") %>">
 
 		</form>
 	</liferay-ui:section>
 	<liferay-ui:section>
 		<form method="get" target="_blank" name="<portlet:namespace />fm3" onSubmit="submitForm(document.<portlet:namespace />fm3, 'http://www.biblegateway.com/cgi-bin/bible', false); return false;">
 
-		<input class="form-text" name="search" type="text" size="30">
+		<input name="search" type="text" size="30">
 
 		<select name="version">
 			<option value="ESV">ESV</option>
@@ -304,7 +304,7 @@
 
 		<br>
 
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
 		</form>
 	</liferay-ui:section>

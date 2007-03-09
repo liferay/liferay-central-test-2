@@ -206,9 +206,9 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 <br><br>
 
@@ -233,7 +233,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />minOrder" size="4" type="text" value="<%= currency.getSymbol() %><%= doubleFormat.format(minOrder) %>">
+		<input name="<portlet:namespace />minOrder" size="4" type="text" value="<%= currency.getSymbol() %><%= doubleFormat.format(minOrder) %>">
 	</td>
 	<td style="padding-left: 30px;"></td>
 	<td>
@@ -241,7 +241,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />discount" size="4" type="text" value="<%= doubleFormat.format(discount) %>">
+		<input name="<portlet:namespace />discount" size="4" type="text" value="<%= doubleFormat.format(discount) %>">
 	</td>
 	<td style="padding-left: 30px;"></td>
 	<td>

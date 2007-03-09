@@ -34,7 +34,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />initUrl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= initUrl %>">
+		<input name="<portlet:namespace />initUrl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= initUrl %>">
 	</td>
 </tr>
 <tr>
@@ -43,7 +43,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />scope" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= scope %>">
+		<input name="<portlet:namespace />scope" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= scope %>">
 	</td>
 </tr>
 <tr>
@@ -52,7 +52,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />proxyHost" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyHost %>">
+		<input name="<portlet:namespace />proxyHost" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyHost %>">
 	</td>
 </tr>
 <tr>
@@ -61,7 +61,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />proxyPort" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyPort %>">
+		<input name="<portlet:namespace />proxyPort" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyPort %>">
 	</td>
 </tr>
 <tr>
@@ -83,7 +83,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />proxyAuthenticationUsername" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationUsername %>">
+		<input name="<portlet:namespace />proxyAuthenticationUsername" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationUsername %>">
 	</td>
 </tr>
 <tr>
@@ -92,7 +92,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />proxyAuthenticationPassword" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationPassword %>">
+		<input name="<portlet:namespace />proxyAuthenticationPassword" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationPassword %>">
 	</td>
 </tr>
 <tr>
@@ -101,7 +101,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />proxyAuthenticationHost" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationHost %>">
+		<input name="<portlet:namespace />proxyAuthenticationHost" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationHost %>">
 	</td>
 </tr>
 <tr>
@@ -110,7 +110,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />proxyAuthenticationDomain" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationDomain %>">
+		<input name="<portlet:namespace />proxyAuthenticationDomain" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationDomain %>">
 	</td>
 </tr>
 <tr>
@@ -124,14 +124,14 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<textarea class="form-text" name="<portlet:namespace />stylesheet" style="height: 300px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= stylesheet %></textarea>
+		<textarea name="<portlet:namespace />stylesheet" style="height: 300px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= stylesheet %></textarea>
 	</td>
 </tr>
 </table>
 
 <br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 
 </form>
 

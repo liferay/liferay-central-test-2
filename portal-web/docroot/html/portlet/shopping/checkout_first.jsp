@@ -581,7 +581,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 
 <br><br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="continue" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="continue" />" onClick="submitForm(document.<portlet:namespace />fm);">
 
 </form>
 

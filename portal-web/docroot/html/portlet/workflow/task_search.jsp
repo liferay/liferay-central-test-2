@@ -46,11 +46,11 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 <tr>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= TaskDisplayTerms.TASK_NAME %>" size="20" type="text" value="<%= displayTerms.getTaskName() %>">
+		<input name="<portlet:namespace /><%= TaskDisplayTerms.TASK_NAME %>" size="20" type="text" value="<%= displayTerms.getTaskName() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= TaskDisplayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>">
+		<input name="<portlet:namespace /><%= TaskDisplayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
@@ -122,7 +122,7 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>
 </tr>
 </table>

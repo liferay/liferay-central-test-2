@@ -62,7 +62,7 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 
 		<%= LanguageUtil.get(pageContext, "page") %>
 
-		<input class="form-text" id="<%= namespace %>page-iterator-value" size="1" style="font-weight: italicized;" type="text" value="<%= curValue %>" onKeyPress="if (event.keyCode == 13) { <%= namespace %>submitPageIterator(); return false; }">
+		<input id="<%= namespace %>page-iterator-value" size="1" style="font-weight: italicized;" type="text" value="<%= curValue %>" onKeyPress="if (event.keyCode == 13) { <%= namespace %>submitPageIterator(); return false; }">
 
 		<%= LanguageUtil.get(pageContext, "of") %>
 

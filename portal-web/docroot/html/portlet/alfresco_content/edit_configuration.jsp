@@ -52,7 +52,7 @@ catch (Exception e) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />userId" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= userId %>">
+		<input name="<portlet:namespace />userId" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= userId %>">
 	</td>
 </tr>
 <tr>
@@ -61,7 +61,7 @@ catch (Exception e) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />password" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value="<%= password %>">
+		<input name="<portlet:namespace />password" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value="<%= password %>">
 	</td>
 </tr>
 <tr>
@@ -79,9 +79,9 @@ catch (Exception e) {
 
 <br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm1);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm1);">
 
-<input class="portlet-form-button" type="button" value="<bean:message key="clear-cache" />" onClick="document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = 'clearCache'; submitForm(document.<portlet:namespace />fm1);"><br>
+<input type="button" value="<bean:message key="clear-cache" />" onClick="document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = 'clearCache'; submitForm(document.<portlet:namespace />fm1);"><br>
 
 <%
 String cmd = ParamUtil.getString(request, Constants.CMD);
@@ -295,9 +295,9 @@ for (int i = 0; i < childNodes.length; i++) {
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm2">
 
-<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
+<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
 
-<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
 </form>
 

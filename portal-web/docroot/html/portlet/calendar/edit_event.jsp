@@ -470,9 +470,9 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 <br><br>
 
@@ -505,7 +505,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td>
-					<input <%= (dailyType == 0) ? "checked" : "" %> name="<portlet:namespace />dailyType" type="radio" value="0"> <input class="form-text" maxlength="3" name="<portlet:namespace />dailyInterval" size="3" type="text" value="<%= dailyInterval %>"> <%= LanguageUtil.get(pageContext, "day-s") %><br>
+					<input <%= (dailyType == 0) ? "checked" : "" %> name="<portlet:namespace />dailyType" type="radio" value="0"> <input maxlength="3" name="<portlet:namespace />dailyInterval" size="3" type="text" value="<%= dailyInterval %>"> <%= LanguageUtil.get(pageContext, "day-s") %><br>
 					<input <%= (dailyType == 1) ? "checked" : "" %> name="<portlet:namespace />dailyType" type="radio" value="1"> <%= LanguageUtil.get(pageContext, "every-weekday") %>
 				</td>
 			</tr>
@@ -516,7 +516,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "recur-every") %> <input class="form-text" maxlength="2" name="<portlet:namespace />weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>"> <%= LanguageUtil.get(pageContext, "weeks-on") %>
+					<%= LanguageUtil.get(pageContext, "recur-every") %> <input maxlength="2" name="<portlet:namespace />weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>"> <%= LanguageUtil.get(pageContext, "weeks-on") %>
 
 					<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
@@ -559,7 +559,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td nowrap>
-					<input <%= (monthlyType == 0) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="0"> <%= LanguageUtil.get(pageContext, "day") %> <input class="form-text" maxlength="2" name="<portlet:namespace />monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>"> <%= LanguageUtil.get(pageContext, "of-every") %> <input class="form-text" maxlength="2" name="<portlet:namespace />monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>"> <%= LanguageUtil.get(pageContext, "month-s") %><br>
+					<input <%= (monthlyType == 0) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="0"> <%= LanguageUtil.get(pageContext, "day") %> <input maxlength="2" name="<portlet:namespace />monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>"> <%= LanguageUtil.get(pageContext, "of-every") %> <input maxlength="2" name="<portlet:namespace />monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>"> <%= LanguageUtil.get(pageContext, "month-s") %><br>
 
 					<input <%= (monthlyType == 1) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="1">
 
@@ -585,7 +585,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 						<option <%= (monthlyDay1 == Calendar.SATURDAY) ? "selected" : "" %> value="<%= Calendar.SATURDAY %>"><%= days[6] %></option>
 					</select>
 
-					<%= LanguageUtil.get(pageContext, "of-every") %> <input class="form-text" maxlength="2" name="<portlet:namespace />monthlyInterval1" size="2" type="text" value="<%= monthlyInterval1 %>"> <%= LanguageUtil.get(pageContext, "month-s") %>
+					<%= LanguageUtil.get(pageContext, "of-every") %> <input maxlength="2" name="<portlet:namespace />monthlyInterval1" size="2" type="text" value="<%= monthlyInterval1 %>"> <%= LanguageUtil.get(pageContext, "month-s") %>
 				</td>
 			</tr>
 			</table>
@@ -611,7 +611,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 					</select>
 
-					<input class="form-text" maxlength="2" name="<portlet:namespace />yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>"> <%= LanguageUtil.get(pageContext, "of-every") %> <input class="form-text" maxlength="2" name="<portlet:namespace />yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>"> <%= LanguageUtil.get(pageContext, "year-s") %><br>
+					<input maxlength="2" name="<portlet:namespace />yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>"> <%= LanguageUtil.get(pageContext, "of-every") %> <input maxlength="2" name="<portlet:namespace />yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>"> <%= LanguageUtil.get(pageContext, "year-s") %><br>
 
 					<input <%= (yearlyType == 1) ? "checked" : "" %> name="<portlet:namespace />yearlyType" type="radio" value="1"> <%= LanguageUtil.get(pageContext, "the") %>
 
@@ -651,7 +651,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 					</select>
 
-					<%= LanguageUtil.get(pageContext, "of-every") %> <input class="form-text" maxlength="2" name="<portlet:namespace />yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>"> <%= LanguageUtil.get(pageContext, "year-s") %>
+					<%= LanguageUtil.get(pageContext, "of-every") %> <input maxlength="2" name="<portlet:namespace />yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>"> <%= LanguageUtil.get(pageContext, "year-s") %>
 				</td>
 			</tr>
 			</table>
@@ -673,7 +673,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		<tr>
 			<td>
 				<input <%= (endDateType == 0) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="0"> <%= LanguageUtil.get(pageContext, "no-end-date") %><br>
-				<%--<input <%= (endDateType == 1) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="1"> End after <input class="form-text" maxlength="3" name="<portlet:namespace />endDateOccurrence" size="3" type="text" value="<%= endDateOccurrence %>"> occurrence(s)<br>--%>
+				<%--<input <%= (endDateType == 1) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="1"> End after <input maxlength="3" name="<portlet:namespace />endDateOccurrence" size="3" type="text" value="<%= endDateOccurrence %>"> occurrence(s)<br>--%>
 
 				<input <%= (endDateType == 2) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="2"> <%= LanguageUtil.get(pageContext, "end-by") %>
 

@@ -37,7 +37,7 @@
 				</font>
 			</td>
 			<td>
-				<h:inputText id="name" required="true" styleClass="form-text" value="#{user.name}" />
+				<h:inputText id="name" required="true" value="#{user.name}" />
 			</td>
 		</tr>
 		<tr>
@@ -49,7 +49,7 @@
 		</tr>
 		<tr>
 			<td align="center" colspan="2">
-				<h:commandButton action="submit" styleClass="portlet-form-button" value="Submit" />
+				<h:commandButton action="submit" value="Submit" />
 			</td>
 		</tr>
 		</table>

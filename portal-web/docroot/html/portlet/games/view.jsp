@@ -73,7 +73,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<option <%= level.equals("expert") ? "selected" : "" %> value="expert"><%= LanguageUtil.get(pageContext, "expert") %></option>
 		</select>
 
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "new-game") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "new-game") %>">
 
 		<br><br>
 

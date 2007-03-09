@@ -46,15 +46,15 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 </tr>
 <tr>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= TemplateDisplayTerms.TEMPLATE_ID %>" size="20" type="text" value="<%= displayTerms.getTemplateId() %>">
+		<input name="<portlet:namespace /><%= TemplateDisplayTerms.TEMPLATE_ID %>" size="20" type="text" value="<%= displayTerms.getTemplateId() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= TemplateDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
+		<input name="<portlet:namespace /><%= TemplateDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= TemplateDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
+		<input name="<portlet:namespace /><%= TemplateDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
 	</td>
 </tr>
 </table>
@@ -71,7 +71,7 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>
 </tr>
 </table>

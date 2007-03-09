@@ -115,6 +115,6 @@ catch (Exception e) {
 
 <br><br>
 
-<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "generate") %>">
+<input type="submit" value="<%= LanguageUtil.get(pageContext, "generate") %>">
 
 </form>

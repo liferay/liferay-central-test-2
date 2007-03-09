@@ -104,7 +104,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 
 		<br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "vote") %>' onClick="submitForm(document.<portlet:namespace />fm);">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "vote") %>' onClick="submitForm(document.<portlet:namespace />fm);">
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/polls/view_question_results.jsp" %>

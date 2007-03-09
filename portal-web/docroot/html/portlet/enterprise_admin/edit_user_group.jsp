@@ -79,7 +79,7 @@ String userGroupId = BeanParamUtil.getString(userGroup, request, "userGroupId");
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
 </form>
 

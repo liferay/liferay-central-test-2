@@ -46,7 +46,7 @@
 					<div>
 						<span id="portal_add_content_title" style="margin-right: 5px; cursor: move;"><%= LanguageUtil.get(pageContext, "content") %></span>
 
-						<input class="form-text" id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" onKeyUp="LayoutConfiguration.startShowTimer(this.value);" />
+						<input id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" onKeyUp="LayoutConfiguration.startShowTimer(this.value);" />
 					</div>
 
 					<br>

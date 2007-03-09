@@ -50,19 +50,19 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 </tr>
 <tr>
 	<%--<td>
-		<input class="form-text" name="<portlet:namespace /><%= InstanceDisplayTerms.INSTANCE_ID %>" size="20" type="text" value="<%= displayTerms.getInstanceIdString() %>">
+		<input name="<portlet:namespace /><%= InstanceDisplayTerms.INSTANCE_ID %>" size="20" type="text" value="<%= displayTerms.getInstanceIdString() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>">
+		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>--%>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>">
+		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_VERSION %>" size="20" type="text" value="<%= displayTerms.getDefinitionVersion() %>">
+		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_VERSION %>" size="20" type="text" value="<%= displayTerms.getDefinitionVersion() %>">
 	</td>
 </tr>
 </table>
@@ -112,7 +112,7 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>
 </tr>
 </table>

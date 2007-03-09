@@ -62,11 +62,11 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 
 <br><br>
 
-<textarea class="form-text" name="<portlet:namespace />isbns" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= isbnsString %></textarea>
+<textarea name="<portlet:namespace />isbns" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= isbnsString %></textarea>
 
 <br><br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 
 </form>
 

@@ -46,15 +46,15 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 </tr>
 <tr>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= StructureDisplayTerms.STRUCTURE_ID %>" size="20" type="text" value="<%= displayTerms.getStructureId() %>">
+		<input name="<portlet:namespace /><%= StructureDisplayTerms.STRUCTURE_ID %>" size="20" type="text" value="<%= displayTerms.getStructureId() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= StructureDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
+		<input name="<portlet:namespace /><%= StructureDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= StructureDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
+		<input name="<portlet:namespace /><%= StructureDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
 	</td>
 </tr>
 </table>
@@ -71,7 +71,7 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>
 </tr>
 </table>

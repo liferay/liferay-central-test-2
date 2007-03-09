@@ -26,14 +26,14 @@
 
 <form name="<portlet:namespace />fm" onSubmit="window.open(document.<portlet:namespace />fm.<portlet:namespace />type[document.<portlet:namespace />fm.<portlet:namespace />type.selectedIndex].value + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />word.value)); return false;">
 
-<input class="form-text" name="<portlet:namespace />word" size="30" type="text">
+<input name="<portlet:namespace />word" size="30" type="text">
 
 <select name="<portlet:namespace />type">
 	<option value="http://dictionary.reference.com/search?q="><%= LanguageUtil.get(pageContext, "dictionary") %></option>
 	<option value="http://thesaurus.reference.com/search?q="><%= LanguageUtil.get(pageContext, "thesaurus") %></option>
 </select>
 
-<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "find") %>">
+<input type="submit" value="<%= LanguageUtil.get(pageContext, "find") %>">
 
 </form>
 

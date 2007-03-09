@@ -41,7 +41,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<html:text name="subscribeForm" property="firstName" size="23" styleClass="form-text" />
+		<html:text name="subscribeForm" property="firstName" size="23" />
 	</td>
 </tr>
 <tr>
@@ -50,7 +50,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<html:text name="subscribeForm" property="lastName" size="23" styleClass="form-text" />
+		<html:text name="subscribeForm" property="lastName" size="23" />
 	</td>
 </tr>
 <tr>
@@ -59,13 +59,13 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<html:text name="subscribeForm" property="emailAddress" size="23" styleClass="form-text" />
+		<html:text name="subscribeForm" property="emailAddress" size="23" />
 	</td>
 </tr>
 </table>
 
 <br>
 
-<html:submit styleClass="portlet-form-button">Subscribe</html:submit>
+<html:submit>Subscribe</html:submit>
 
 </html:form>

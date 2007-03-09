@@ -120,9 +120,9 @@ for (int i = 0; i < results.getLength(); i++) {
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td>
-		<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
+		<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
 
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>
 	<td align="right">
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />

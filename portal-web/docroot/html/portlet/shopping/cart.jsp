@@ -374,7 +374,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		sm.append("</select>");
 	}
 	else {
-		sm.append("<input class=\"form-text\" name=\"");
+		sm.append("<input name=\"");
 		sm.append(renderResponse.getNamespace());
 		sm.append("item_");
 		sm.append(item.getItemId());
@@ -515,7 +515,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />couponIds" size="30" style="text-transform: uppercase;" type="text" value="<%= cart.getCouponIds() %>">
+		<input name="<portlet:namespace />couponIds" size="30" style="text-transform: uppercase;" type="text" value="<%= cart.getCouponIds() %>">
 
 		<c:if test="<%= coupon != null %>">
 			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= coupon.getCouponId() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();" style="font-size: xx-small;">(<%= LanguageUtil.get(pageContext, "description") %>)</a>
@@ -569,10 +569,10 @@ else if (!shoppingPrefs.usePayPal() && (ccTypes.length > 0)) {
 }
 %>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-cart") %>' onClick="<portlet:namespace />updateCart();">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "update-cart") %>' onClick="<portlet:namespace />updateCart();">
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "empty-cart") %>' onClick="<portlet:namespace />emptyCart();">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "empty-cart") %>' onClick="<portlet:namespace />emptyCart();">
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "checkout") %>' onClick="<portlet:namespace />checkout();">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "checkout") %>' onClick="<portlet:namespace />checkout();">
 
 </form>

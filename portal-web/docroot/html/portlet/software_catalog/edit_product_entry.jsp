@@ -178,7 +178,7 @@ else {
 		<%
 		String mainImageName = SCProductEntryImpl.MAIN_IMAGE_NAME;
 		%>
-		<input class="form-text" name="<portlet:namespace />screenshot_update_<%=mainImageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<input name="<portlet:namespace />screenshot_update_<%=mainImageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 		<%
 		if (productEntry != null) {
 			String imageId = productEntry.getImageId(mainImageName);
@@ -205,7 +205,7 @@ else {
 			String imageName = Integer.toString(i);
 		%>
  			<br clear="all"/>
-			<input class="form-text" name="<portlet:namespace />screenshot_update_<%=imageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+			<input name="<portlet:namespace />screenshot_update_<%=imageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 		<%
 			if (productEntry != null) {
 				String imageId = productEntry.getImageId(imageName);
@@ -271,9 +271,9 @@ else {
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 </form>
 

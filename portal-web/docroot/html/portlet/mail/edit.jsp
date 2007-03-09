@@ -114,11 +114,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<tr>
 				<td>
-					<input class="form-text" name="<portlet:namespace />filterEmailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
+					<input name="<portlet:namespace />filterEmailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<input class="form-text" name="<portlet:namespace />filterFolder<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= folder %>">
+					<input name="<portlet:namespace />filterFolder<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= folder %>">
 				</td>
 			</tr>
 
@@ -141,7 +141,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br><br>
 
-		<textarea class="form-text" name="<portlet:namespace />forwardAddress" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= forwardAddress %></textarea>
+		<textarea name="<portlet:namespace />forwardAddress" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= forwardAddress %></textarea>
 
 		<br><br>
 
@@ -179,7 +179,7 @@ portletURL.setParameter("tabs1", tabs1);
 	</c:when>
 </c:choose>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />savePreferences();">
+<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />savePreferences();">
 
 </form>
 

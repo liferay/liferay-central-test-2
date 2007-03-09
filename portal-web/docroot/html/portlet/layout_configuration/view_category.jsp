@@ -110,7 +110,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 									<%= PortalUtil.getPortletTitle(portlet, application, locale) %>
 								</td>
 								<td align="right">
-									<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "add") %>"
+									<input type="button" value="<%= LanguageUtil.get(pageContext, "add") %>"
 										onClick="
 											addPortlet('<%= plid %>', '<%= portlet.getPortletId() %>', '<%= themeDisplay.getDoAsUserId() %>');
 

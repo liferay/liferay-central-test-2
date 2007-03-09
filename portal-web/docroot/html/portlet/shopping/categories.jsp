@@ -128,16 +128,16 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 	<tr>
 		<c:if test="<%= showAddCategoryButton %>">
 			<td>
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-category") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "add-category") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
 			</td>
 			<td style="padding-left: 30px;"></td>
 		</c:if>
 
 		<c:if test="<%= results.size() > 0 %>">
 			<td>
-				<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text">
+				<input name="<portlet:namespace />keywords" size="30" type="text">
 
-				<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search-categories") %>">
+				<input type="submit" value="<%= LanguageUtil.get(pageContext, "search-categories") %>">
 			</td>
 		</c:if>
 	</tr>
@@ -326,18 +326,18 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 		<tr>
 			<c:if test="<%= showAddItemButton %>">
 				<td>
-					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-item") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
+					<input type="button" value='<%= LanguageUtil.get(pageContext, "add-item") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
 
-					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-books") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/add_book_items" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
+					<input type="button" value='<%= LanguageUtil.get(pageContext, "add-books") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/add_book_items" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
 				</td>
 				<td style="padding-left: 30px;"></td>
 			</c:if>
 
 			<c:if test="<%= results.size() > 0 %>">
 				<td>
-					<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text">
+					<input name="<portlet:namespace />keywords" size="30" type="text">
 
-					<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search-items") %>">
+					<input type="submit" value="<%= LanguageUtil.get(pageContext, "search-items") %>">
 				</td>
 			</c:if>
 		</tr>

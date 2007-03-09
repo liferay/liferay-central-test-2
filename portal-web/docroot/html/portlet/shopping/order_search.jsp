@@ -54,7 +54,7 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 </tr>
 <tr>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= OrderDisplayTerms.ORDER_ID %>" size="20" type="text" value="<%= displayTerms.getOrderId() %>">
+		<input name="<portlet:namespace /><%= OrderDisplayTerms.ORDER_ID %>" size="20" type="text" value="<%= displayTerms.getOrderId() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
@@ -75,15 +75,15 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= OrderDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>">
+		<input name="<portlet:namespace /><%= OrderDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= OrderDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>">
+		<input name="<portlet:namespace /><%= OrderDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= OrderDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>">
+		<input name="<portlet:namespace /><%= OrderDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>">
 	</td>
 </tr>
 </table>
@@ -100,7 +100,7 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>
 </tr>
 </table>

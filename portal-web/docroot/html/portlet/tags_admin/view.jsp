@@ -33,7 +33,7 @@
 
 	<br /><br />
 
-	<input class="form-text" id="<portlet:namespace />keywordsInput" type="text" size="40"/>
+	<input id="<portlet:namespace />keywordsInput" type="text" size="40"/>
 
 	<span id="<portlet:namespace />searchPropertiesSpan" style="padding-left: 10px;"></span>
 
@@ -51,9 +51,9 @@
 
 	<br />
 
-	<input class="form-text" id="<portlet:namespace />editEntryNameInput" type="text" value="" />
+	<input id="<portlet:namespace />editEntryNameInput" type="text" value="" />
 
-	<%--<input class="portlet-form-button" id="<portlet:namespace />updateEntryButton" type="button" value="Copy" />--%>
+	<%--<input id="<portlet:namespace />updateEntryButton" type="button" value="Copy" />--%>
 
 	<br /><br />
 
@@ -61,23 +61,23 @@
 
 	<table border="0" cellpadding="0" cellspacing="0" id="<portlet:namespace />propertiesTable"></table>
 
-	<input class="portlet-form-button" id="<portlet:namespace />addPropertyButton" type="button" value="Add Property" />
+	<input id="<portlet:namespace />addPropertyButton" type="button" value="Add Property" />
 
 	<hr />
 
-	<input class="portlet-form-button" id="<portlet:namespace />updateEntryButton" type="button" value="Save" />
+	<input id="<portlet:namespace />updateEntryButton" type="button" value="Save" />
 
-	<input class="portlet-form-button" id="<portlet:namespace />deleteEntryButton" type="button" value="Delete" />
+	<input id="<portlet:namespace />deleteEntryButton" type="button" value="Delete" />
 
-	<input class="portlet-form-button" id="<portlet:namespace />cancelEditEntryButton" type="button" value="Cancel" />
+	<input id="<portlet:namespace />cancelEditEntryButton" type="button" value="Cancel" />
 </fieldset>
 
 <fieldset id="<portlet:namespace />addEntryFields">
 	<legend>Add Tag</legend>
 
-	<input class="form-text" id="<portlet:namespace />addEntryNameInput" type="text" />
+	<input id="<portlet:namespace />addEntryNameInput" type="text" />
 
-	<input class="portlet-form-button" id="<portlet:namespace />addEntryButton" type="button" value="Save" />
+	<input id="<portlet:namespace />addEntryButton" type="button" value="Save" />
 </fieldset>
 
 </form>

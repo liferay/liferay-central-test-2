@@ -44,4 +44,4 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 	<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
 </portlet:actionURL>
 
-<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "revert") %>" onClick="self.location = '<%= revertURL %>'">
+<input type="button" value="<%= LanguageUtil.get(pageContext, "revert") %>" onClick="self.location = '<%= revertURL %>'">

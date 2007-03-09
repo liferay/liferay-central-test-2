@@ -85,11 +85,11 @@ boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 
 		<br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "vote") %>' onClick="submitForm(document.<portlet:namespace />fm);">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "vote") %>' onClick="submitForm(document.<portlet:namespace />fm);">
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "see-current-results") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="questionId" value="<%= question.getQuestionId() %>" /></portlet:renderURL>';">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "see-current-results") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="questionId" value="<%= question.getQuestionId() %>" /></portlet:renderURL>';">
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/polls/view_question_results.jsp" %>
@@ -98,12 +98,12 @@ boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 			<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
 				<br><br>
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "back-to-vote") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="questionId" value="<%= question.getQuestionId() %>" /></portlet:renderURL>';">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "back-to-vote") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="questionId" value="<%= question.getQuestionId() %>" /></portlet:renderURL>';">
 			</c:when>
 			<c:when test="<%= Validator.isNotNull(redirect) %>">
 				<br><br>
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "back") %>' onClick="self.location = '<%= redirect %>';">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "back") %>' onClick="self.location = '<%= redirect %>';">
 			</c:when>
 		</c:choose>
 	</c:otherwise>

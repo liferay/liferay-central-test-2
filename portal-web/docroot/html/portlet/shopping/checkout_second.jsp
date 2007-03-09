@@ -543,6 +543,6 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 
 <br>
 
-<input class="portlet-form-button" type="button" value='<%= shoppingPrefs.usePayPal() ? LanguageUtil.get(pageContext, "continue") : LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />continueCheckout();">
+<input type="button" value='<%= shoppingPrefs.usePayPal() ? LanguageUtil.get(pageContext, "continue") : LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />continueCheckout();">
 
 </form>

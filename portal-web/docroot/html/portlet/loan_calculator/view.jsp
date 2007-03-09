@@ -57,7 +57,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />loanAmount" size="5" type="text" value="<%= integerFormat.format(loanAmount) %>">
+		<input name="<portlet:namespace />loanAmount" size="5" type="text" value="<%= integerFormat.format(loanAmount) %>">
 	</td>
 </tr>
 <tr>
@@ -66,7 +66,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />interest" size="5" type="text" value="<%= doubleFormat.format(interest) %>">
+		<input name="<portlet:namespace />interest" size="5" type="text" value="<%= doubleFormat.format(interest) %>">
 	</td>
 </tr>
 <tr>
@@ -75,7 +75,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />years" size="5" type="text" value="<%= years %>">
+		<input name="<portlet:namespace />years" size="5" type="text" value="<%= years %>">
 	</td>
 </tr>
 <tr>
@@ -109,7 +109,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 <br>
 
-<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "calculate") %>">
+<input type="submit" value="<%= LanguageUtil.get(pageContext, "calculate") %>">
 
 </form>
 

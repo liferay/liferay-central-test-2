@@ -41,7 +41,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<html:text property='<%= propertyPrefix + "LinkColor" %>' styleClass="form-text" onchange="preview.aColor(this.value);" /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
+					<html:text property='<%= propertyPrefix + "LinkColor" %>' onchange="preview.aColor(this.value);" /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
 				</td>
 			</tr>
 			<tr>
@@ -111,7 +111,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<html:text property='<%= propertyPrefix + "LinkHoverColor" %>' styleClass="form-text" onchange="preview.setHoverStyle('color', this.value);" /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
+					<html:text property='<%= propertyPrefix + "LinkHoverColor" %>' onchange="preview.setHoverStyle('color', this.value);" /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
 				</td>
 			</tr>
 			<tr>
@@ -181,7 +181,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<html:text property='<%= propertyPrefix + "LinkVisitedColor" %>' styleClass="form-text" onchange="" /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
+					<html:text property='<%= propertyPrefix + "LinkVisitedColor" %>' onchange="" /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
 				</td>
 			</tr>
 			<tr>

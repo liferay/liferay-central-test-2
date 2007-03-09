@@ -43,7 +43,7 @@ public class ButtonSearchEntry extends TextSearchEntry {
 	public void print(PageContext pageContext) throws Exception {
 		StringMaker sm = new StringMaker();
 
-		sm.append("<input class=\"portlet-form-button\" type=\"button\" ");
+		sm.append("<input type=\"button\" ");
 		sm.append("value=\"");
 		sm.append(getName());
 		sm.append("\" onClick=\"");

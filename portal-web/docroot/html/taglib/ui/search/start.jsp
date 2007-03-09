@@ -40,6 +40,6 @@ portletURL.setParameter("struts_action", "/search/search");
 
 <form action="<%= portletURL.toString() %>" method="post" name="<%= namespace %>fm" onSubmit="submitForm(this); return false;">
 
-<input class="form-text" name="<%= namespace %>keywords" size="30" type="text" value="<%= keywords %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }">
+<input name="<%= namespace %>keywords" size="30" type="text" value="<%= keywords %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }">
 
 <input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.png" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">

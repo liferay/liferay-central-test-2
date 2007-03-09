@@ -49,7 +49,7 @@
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
-				<input class="form-text" name="<portlet:namespace />userName" type="text">
+				<input name="<portlet:namespace />userName" type="text">
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
@@ -64,7 +64,7 @@
 
 		<br>
 
-		<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "register") %>'>
+		<input type="submit" value='<%= LanguageUtil.get(pageContext, "register") %>'>
 
 		</form>
 

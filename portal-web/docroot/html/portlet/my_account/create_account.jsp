@@ -167,7 +167,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
 </form>
 

@@ -226,7 +226,7 @@ try {
 
    <br>
 
-   <input class="portlet-form-button" type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-plugins")%>'/>
+   <input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-plugins")%>'/>
 
 	<div class="separator" style="clear: both;"/>
 
@@ -234,7 +234,7 @@ try {
 	   <c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
 			<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
 	   </c:if>
-	   <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "refresh") %>'  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');">
+	   <input type="button" value='<%= LanguageUtil.get(pageContext, "refresh") %>'  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');">
 
 	   <br>
 

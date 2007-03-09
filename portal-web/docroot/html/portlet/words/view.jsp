@@ -36,14 +36,14 @@ String[] words = (String[])request.getAttribute(WebKeys.WORDS_LIST);
 
 <liferay-ui:error exception="<%= ScramblerException.class %>" message="please-enter-a-word-that-is-at-least-3-characters-long" />
 
-<input class="form-text" name="<portlet:namespace />word" type="text" value="<%= word %>">
+<input name="<portlet:namespace />word" type="text" value="<%= word %>">
 
 <select name="<portlet:namespace />scramble">
 	<option <%= scramble ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "scramble") %></option>
 	<option <%= !scramble ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "unscramble") %></option>
 </select>
 
-<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
 <c:if test="<%= (words != null) && (words.length > 0) %>">
 	<br><br>

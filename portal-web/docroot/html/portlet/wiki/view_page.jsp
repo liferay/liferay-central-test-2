@@ -40,9 +40,9 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 <br>
 
-<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text">
+<input name="<portlet:namespace />keywords" size="30" type="text">
 
-<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
 <br><br>
 

@@ -150,7 +150,7 @@ User user2 = company.getDefaultUser();
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveEnterprise('<%= Constants.UPDATE %>');">
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveEnterprise('<%= Constants.UPDATE %>');">
 
 <br><br>
 
@@ -234,7 +234,7 @@ User user2 = company.getDefaultUser();
 
 <br>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveEnterprise('display');">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveEnterprise('display');">
 
 <br><br>
 

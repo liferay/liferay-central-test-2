@@ -62,7 +62,7 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 
 <br><br>
 
-<textarea class="form-text" name="<portlet:namespace />zips" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= zipsString %></textarea>
+<textarea name="<portlet:namespace />zips" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= zipsString %></textarea>
 
 <br><br>
 
@@ -83,7 +83,7 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 
 <br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 
 </form>
 

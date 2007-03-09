@@ -42,7 +42,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<html:text property='<%= propertyPrefix + "BgColor" %>' styleClass="form-text" onchange='<%= "preview." + previewObject + ".backgroundColor = this.value;" %>' /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onClick="colorPicker.toggle(this);" />
+					<html:text property='<%= propertyPrefix + "BgColor" %>' onchange='<%= "preview." + previewObject + ".backgroundColor = this.value;" %>' /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onClick="colorPicker.toggle(this);" />
 				</td>
 			</tr>
 			<tr>
@@ -51,7 +51,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<html:text property='<%= propertyPrefix + "BgImageUrl" %>' styleClass="form-text" onchange='<%= "preview." + previewObject + ".backgroundImage = \'url(\' + this.value + \')\';" %>' />
+					<html:text property='<%= propertyPrefix + "BgImageUrl" %>' onchange='<%= "preview." + previewObject + ".backgroundImage = \'url(\' + this.value + \')\';" %>' />
 				</td>
 			</tr>
 			<tr>

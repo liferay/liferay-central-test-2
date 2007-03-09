@@ -39,7 +39,7 @@
 		</tr>
 		<tr>
 			<td align="center">
-				<h:commandButton action="back" styleClass="portlet-form-button" value="Back" />
+				<h:commandButton action="back" value="Back" />
 			</td>
 		</tr>
 		</table>

@@ -60,7 +60,7 @@
 	</tr>
 	<tr>
 		<td>
-			<input class="form-text" name="<portlet:namespace />keywords" size="20" type="text" value="<%= keywords %>">
+			<input name="<portlet:namespace />keywords" size="20" type="text" value="<%= keywords %>">
 		</td>
 		<td style="padding-left: 5px;"></td>
 		<td>
@@ -116,7 +116,7 @@
 
 	<br>
 
-	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "search") %>' onClick="<portlet:namespace/>searchPlugins('<%=redirect%>')">
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "search") %>' onClick="<portlet:namespace/>searchPlugins('<%=redirect%>')">
 
 	<br><br>
 
@@ -237,7 +237,7 @@
 		<c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
 			 <%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
 		</c:if>
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "refresh") %>'  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "refresh") %>'  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');">
 
 		<br>
 

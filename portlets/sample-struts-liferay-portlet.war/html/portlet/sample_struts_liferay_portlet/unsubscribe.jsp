@@ -41,7 +41,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<html:text name="unsubscribeForm" property="firstName" size="23" styleClass="form-text" />
+		<html:text name="unsubscribeForm" property="firstName" size="23" />
 	</td>
 </tr>
 <tr>
@@ -50,7 +50,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<html:text name="unsubscribeForm" property="lastName" size="23" styleClass="form-text" />
+		<html:text name="unsubscribeForm" property="lastName" size="23" />
 	</td>
 </tr>
 <tr>
@@ -59,13 +59,13 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<html:text name="unsubscribeForm" property="emailAddress" size="23" styleClass="form-text" />
+		<html:text name="unsubscribeForm" property="emailAddress" size="23" />
 	</td>
 </tr>
 </table>
 
 <br>
 
-<html:submit styleClass="portlet-form-button">Unsubscribe</html:submit>
+<html:submit>Unsubscribe</html:submit>
 
 </html:form>

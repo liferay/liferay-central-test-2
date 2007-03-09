@@ -62,7 +62,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<liferay-ui:error exception="<%= DNSLookup.class %>" message="please-enter-a-valid-host-name-or-ip" />
 
-		<input class="form-text" name="<portlet:namespace />domain" size="30" type="text" value="<%= domain %>"> <input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input name="<portlet:namespace />domain" size="30" type="text" value="<%= domain %>"> <input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
 		<c:if test="<%= dnsLookup != null %>">
 <pre>
@@ -181,7 +181,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<liferay-ui:error exception="<%= Whois.class %>" message="an-unexpected-error-occurred" />
 
-		<input class="form-text" name="<portlet:namespace />domain" size="30" type="text" value="<%= domain %>"> <input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input name="<portlet:namespace />domain" size="30" type="text" value="<%= domain %>"> <input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
 		<c:if test="<%= whois != null %>">
 <pre>

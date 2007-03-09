@@ -83,7 +83,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="name" type="text" value="<%= name %>">
+			<input name="name" type="text" value="<%= name %>">
 		</td>
 	</tr>
 	<tr>
@@ -92,14 +92,14 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="points" type="text" value="<%= points %>">
+			<input name="points" type="text" value="<%= points %>">
 		</td>
 	</tr>
 	</table>
 
 	<br>
 
-	<input class="portlet-form-button" type="submit" value="Save">
+	<input type="submit" value="Save">
 
 	<%
 	if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
@@ -120,7 +120,7 @@ else {
 	<input name="command" type="hidden" value="">
 	<input name="id" type="hidden" value="">
 
-	<input class="portlet-form-button" type="button" value="Add" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="add" /></portlet:renderURL>';">
+	<input type="button" value="Add" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="add" /></portlet:renderURL>';">
 
 	<br><br>
 
@@ -158,9 +158,9 @@ else {
 				<%= foodItem.getPoints() %>
 			</td>
 			<td>
-				<input class="portlet-form-button" type="button" value="Edit" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="edit" /><portlet:param name="id" value="<%= String.valueOf(foodItem.getId()) %>" /></portlet:renderURL>';">
+				<input type="button" value="Edit" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="edit" /><portlet:param name="id" value="<%= String.valueOf(foodItem.getId()) %>" /></portlet:renderURL>';">
 
-				<input class="portlet-form-button" type="button" value="Delete" onClick="document.fm.command.value = 'delete'; document.fm.id.value = '<%= foodItem.getId() %>'; document.fm.submit();">
+				<input type="button" value="Delete" onClick="document.fm.command.value = 'delete'; document.fm.id.value = '<%= foodItem.getId() %>'; document.fm.submit();">
 			</td>
 		</tr>
 

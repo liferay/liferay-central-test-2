@@ -103,7 +103,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
+				<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
 			</td>
 		</tr>
 		<tr>
@@ -112,7 +112,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
+				<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
 			</td>
 		</tr>
 		</table>
@@ -202,10 +202,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("message-added-email") %>'>
-						<input class="form-text" name="<portlet:namespace />emailMessageAddedSubjectPrefix" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageAddedSubjectPrefix %>">
+						<input name="<portlet:namespace />emailMessageAddedSubjectPrefix" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageAddedSubjectPrefix %>">
 					</c:when>
 					<c:when test='<%= tabs2.equals("message-updated-email") %>'>
-						<input class="form-text" name="<portlet:namespace />emailMessageUpdatedSubjectPrefix" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageUpdatedSubjectPrefix %>">
+						<input name="<portlet:namespace />emailMessageUpdatedSubjectPrefix" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageUpdatedSubjectPrefix %>">
 					</c:when>
 				</c:choose>
 			</td>
@@ -221,7 +221,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<textarea class="form-text" name="<%= bodyEditorParam %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= bodyEditorContent %></textarea>
+				<textarea name="<%= bodyEditorParam %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= bodyEditorContent %></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -235,7 +235,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<textarea class="form-text" name="<%= signatureEditorParam %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= signatureEditorContent %></textarea>
+				<textarea name="<%= signatureEditorParam %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= signatureEditorContent %></textarea>
 			</td>
 		</tr>
 		</table>
@@ -413,15 +413,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 			<tr>
 				<td>
-					<input class="form-text" name="<portlet:namespace />priorityName<%= i %>" size="20" type="text" value="<%= name %>">
+					<input name="<portlet:namespace />priorityName<%= i %>" size="20" type="text" value="<%= name %>">
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<input class="form-text" name="<portlet:namespace />priorityImage<%= i %>" size="50" type="text" value="<%= image %>">
+					<input name="<portlet:namespace />priorityImage<%= i %>" size="50" type="text" value="<%= image %>">
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<input class="form-text" name="<portlet:namespace />priorityValue<%= i %>" size="4" type="text" value="<%= value %>">
+					<input name="<portlet:namespace />priorityValue<%= i %>" size="4" type="text" value="<%= value %>">
 				</td>
 			</tr>
 
@@ -440,7 +440,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		String languageId = ParamUtil.getString(request, "languageId", LocaleUtil.toLanguageId(locale));
 		%>
 
-		<textarea class="form-text" name="<portlet:namespace />ranks" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= StringUtil.merge(prefs.getValues(MBUtil.getRanksKey(languageId), new String[0]), StringPool.NEW_LINE) %></textarea><br>
+		<textarea name="<portlet:namespace />ranks" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= StringUtil.merge(prefs.getValues(MBUtil.getRanksKey(languageId), new String[0]), StringPool.NEW_LINE) %></textarea><br>
 
 		<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />getLocalizedRanks();">
 
@@ -470,9 +470,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 </form>
 

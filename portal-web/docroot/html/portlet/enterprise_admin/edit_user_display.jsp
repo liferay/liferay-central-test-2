@@ -84,7 +84,7 @@
 <c:if test="<%= editable %>">
 	<br>
 
-	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUser('display');">
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUser('display');">
 </c:if>
 
 <br><br>

@@ -132,7 +132,7 @@ for (int i = 0; i < rowsCount; i++) {
 		%>
 
 		<td>
-			<input class="form-text" name="<portlet:namespace />fieldsQuantity<%= i %>" type="text" size="4" value="<%= fieldsQuantity %>">
+			<input name="<portlet:namespace />fieldsQuantity<%= i %>" type="text" size="4" value="<%= fieldsQuantity %>">
 		</td>
 	</tr>
 
@@ -144,8 +144,8 @@ for (int i = 0; i < rowsCount; i++) {
 
 <br>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<portlet:namespace />updateItemQuantities();">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<portlet:namespace />updateItemQuantities();">
 
-<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="self.close();">
+<input type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="self.close();">
 
 </form>

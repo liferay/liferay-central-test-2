@@ -171,8 +171,8 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 </fieldset>
 
 <div class="form-buttons">
-	<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
-	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+	<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 </div>
 
 </form>

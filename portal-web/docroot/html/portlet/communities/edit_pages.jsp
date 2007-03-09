@@ -446,7 +446,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 								<table border="0" cellpadding="0" cellspacing="0">
 								<tr>
 									<td>
-										<input class="form-text" name="<portlet:namespace />name" size="30" type="text" value="<%= name %>">
+										<input name="<portlet:namespace />name" size="30" type="text" value="<%= name %>">
 									</td>
 									<td style="padding-left: 10px;"></td>
 									<td>
@@ -476,7 +476,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 							</td>
 							<td style="padding-left: 10px;"></td>
 							<td>
-								<input class="form-text" name="<portlet:namespace />title" size="30" type="text" value="<%= title %>">
+								<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>">
 							</td>
 						</tr>
 						<tr>
@@ -532,7 +532,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 									<%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= privateLayout ? themeDisplay.getPathFriendlyURLPrivate() : themeDisplay.getPathFriendlyURLPublic() %><%= parentFriendlyURL %>
 
-									<input class="form-text" name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
+									<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
 									<%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
 
 								</td>
@@ -552,7 +552,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 							<td>
 								<liferay-theme:layout-icon layout="<%= selLayout %>" />
 
-								<input class="form-text" name="<portlet:namespace />iconFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />iconImage.value = true; document.<portlet:namespace />fm.<portlet:namespace />iconImageCheckbox.checked = true;">
+								<input name="<portlet:namespace />iconFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />iconImage.value = true; document.<portlet:namespace />fm.<portlet:namespace />iconImageCheckbox.checked = true;">
 							</td>
 						</tr>
 						<tr>
@@ -586,7 +586,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 				<br>
 
-				<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+				<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
 				<liferay-security:permissionsURL
 					modelResource="<%= Layout.class.getName() %>"
@@ -595,9 +595,9 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 					var="permissionURL"
 				/>
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "permissions") %>' onClick="self.location = '<%= permissionURL %>';">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "permissions") %>' onClick="self.location = '<%= permissionURL %>';">
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deletePage();">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deletePage();">
 
 				<script type="text/javascript">
 					document.<portlet:namespace />fm.<portlet:namespace />name.focus();
@@ -659,7 +659,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />name" size="30" type="text" value="<%= name %>">
+						<input name="<portlet:namespace />name" size="30" type="text" value="<%= name %>">
 					</td>
 				</tr>
 				<tr>
@@ -701,7 +701,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 				<br>
 
-				<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "add-page") %>'><br>
+				<input type="submit" value='<%= LanguageUtil.get(pageContext, "add-page") %>'><br>
 
 				<script type="text/javascript">
 					document.<portlet:namespace />fm.<portlet:namespace />name.focus();
@@ -773,7 +773,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 					<br>
 
-					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-display-order") %>' onClick="<portlet:namespace />updateDisplayOrder();">
+					<input type="button" value='<%= LanguageUtil.get(pageContext, "update-display-order") %>' onClick="<portlet:namespace />updateDisplayOrder();">
 				</c:if>
 			</c:when>
 			<c:when test='<%= tabs3.equals("look-and-feel") %>'>
@@ -893,7 +893,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />logoFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />logo.value = true; document.<portlet:namespace />fm.<portlet:namespace />logoCheckbox.checked = true;">
+						<input name="<portlet:namespace />logoFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />logo.value = true; document.<portlet:namespace />fm.<portlet:namespace />logoCheckbox.checked = true;">
 					</td>
 				</tr>
 				<tr>
@@ -909,7 +909,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 				<br>
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />updateLogo();">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />updateLogo();">
 			</c:when>
 			<c:when test='<%= tabs3.equals("import-export") %>'>
 				<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
@@ -919,9 +919,9 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 					<br><br>
 
-					<input class="form-text" name="<portlet:namespace />importFileName" size="50" type="file">
+					<input name="<portlet:namespace />importFileName" size="50" type="file">
 
-					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "import") %>' onClick="<portlet:namespace />importPages();">
+					<input type="button" value='<%= LanguageUtil.get(pageContext, "import") %>' onClick="<portlet:namespace />importPages();">
 
 					<br><br>
 				</c:if>
@@ -930,9 +930,9 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 				<br><br>
 
-				<input class="form-text" name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar">
+				<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar">
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "export") %>' onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value;">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "export") %>' onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value;">
 			</c:when>
 			<c:when test='<%= tabs3.equals("virtual-host") %>'>
 				<%= LanguageUtil.get(pageContext, "enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url") %>
@@ -957,7 +957,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 						String publicVirtualHost = ParamUtil.getString(request, "publicVirtualHost", BeanParamUtil.getString(publicLayoutSet, request, "virtualHost"));
 						%>
 
-						<input class="form-text" name="<portlet:namespace />publicVirtualHost" size="50" type="text" value="<%= publicVirtualHost %>">
+						<input name="<portlet:namespace />publicVirtualHost" size="50" type="text" value="<%= publicVirtualHost %>">
 					</td>
 				</tr>
 				<tr>
@@ -975,7 +975,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 						String privateVirtualHost = ParamUtil.getString(request, "privateVirtualHost", BeanParamUtil.getString(privateLayoutSet, request, "virtualHost"));
 						%>
 
-						<input class="form-text" name="<portlet:namespace />privateVirtualHost" size="50" type="text" value="<%= privateVirtualHost %>">
+						<input name="<portlet:namespace />privateVirtualHost" size="50" type="text" value="<%= privateVirtualHost %>">
 					</td>
 				</tr>
 				</table>
@@ -1000,14 +1000,14 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 						String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 						%>
 
-						<input class="form-text" name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
+						<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
 					</td>
 				</tr>
 				</table>
 
 				<br>
 
-				<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+				<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 			</c:when>
 			<c:when test='<%= tabs3.equals("sitemap") %>'>
 

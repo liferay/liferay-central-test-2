@@ -190,7 +190,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 			<%= category.getName() %>
 			</a>
 
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+			<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
 		</td>
 	</tr>
 	<tr>
@@ -301,9 +301,9 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 <br><br>
 
@@ -378,7 +378,7 @@ for (int i = 0; i < fieldsCount; i++) {
 		<c:if test="<%= fieldsCount > 0 %>">
 			<td style="padding-left: 30px;"></td>
 			<td>
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteField(<%= i %>);">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteField(<%= i %>);">
 			</td>
 		</c:if>
 	</tr>
@@ -393,10 +393,10 @@ for (int i = 0; i < fieldsCount; i++) {
 	<br>
 </c:if>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-field") %>' onClick="<portlet:namespace />addField();">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "add-field") %>' onClick="<portlet:namespace />addField();">
 
 <c:if test="<%= fieldsCount > 0 %>">
-	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "edit-stock-quantity") %>' onClick="<portlet:namespace />editItemQuantities();">
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "edit-stock-quantity") %>' onClick="<portlet:namespace />editItemQuantities();">
 </c:if>
 
 <br><br>
@@ -593,7 +593,7 @@ for (int i = 0; i < pricesCount; i++) {
 				<c:if test="<%= pricesCount > 1 %>">
 					<td style="padding-left: 30px;"></td>
 					<td>
-						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deletePrice(<%= i %>);">
+						<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deletePrice(<%= i %>);">
 					</td>
 				</c:if>
 			</tr>
@@ -613,7 +613,7 @@ for (int i = 0; i < pricesCount; i++) {
 
 <br>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-price") %>' onClick="<portlet:namespace />addPrice();">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "add-price") %>' onClick="<portlet:namespace />addPrice();">
 
 <br><br>
 
@@ -668,7 +668,7 @@ for (int i = 0; i < pricesCount; i++) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />smallFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<input name="<portlet:namespace />smallFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 	</td>
 </tr>
 <tr>
@@ -700,7 +700,7 @@ for (int i = 0; i < pricesCount; i++) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />mediumFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<input name="<portlet:namespace />mediumFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 	</td>
 </tr>
 <tr>
@@ -732,7 +732,7 @@ for (int i = 0; i < pricesCount; i++) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />largeFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<input name="<portlet:namespace />largeFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 	</td>
 </tr>
 <tr>

@@ -50,19 +50,19 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 </tr>
 <tr>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= ArticleDisplayTerms.ARTICLE_ID %>" size="20" type="text" value="<%= displayTerms.getArticleId() %>">
+		<input name="<portlet:namespace /><%= ArticleDisplayTerms.ARTICLE_ID %>" size="20" type="text" value="<%= displayTerms.getArticleId() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= ArticleDisplayTerms.VERSION %>" size="20" type="text" value="<%= displayTerms.getVersionString() %>">
+		<input name="<portlet:namespace /><%= ArticleDisplayTerms.VERSION %>" size="20" type="text" value="<%= displayTerms.getVersionString() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= ArticleDisplayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>">
+		<input name="<portlet:namespace /><%= ArticleDisplayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= ArticleDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
+		<input name="<portlet:namespace /><%= ArticleDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
 	</td>
 </tr>
 <tr>
@@ -87,7 +87,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 </tr>
 <tr>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= ArticleDisplayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>">
+		<input name="<portlet:namespace /><%= ArticleDisplayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
@@ -156,7 +156,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>
 </tr>
 </table>

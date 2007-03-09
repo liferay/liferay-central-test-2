@@ -46,7 +46,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 </tr>
 <tr>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= CouponDisplayTerms.COUPON_ID %>" size="20" type="text" value="<%= displayTerms.getCouponId() %>">
+		<input name="<portlet:namespace /><%= CouponDisplayTerms.COUPON_ID %>" size="20" type="text" value="<%= displayTerms.getCouponId() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
@@ -87,7 +87,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>
 </tr>
 </table>

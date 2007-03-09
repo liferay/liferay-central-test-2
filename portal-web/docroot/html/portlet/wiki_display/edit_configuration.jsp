@@ -63,6 +63,6 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 
 <br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 
 </form>

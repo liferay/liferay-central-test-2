@@ -113,7 +113,7 @@
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<input class="form-text" name="<portlet:namespace />minutes" size="3" type="text">
+					<input name="<portlet:namespace />minutes" size="3" type="text">
 				</td>
 			</tr>
 			<tr>
@@ -122,14 +122,14 @@
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<textarea class="form-text" name="<portlet:namespace />message" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
+					<textarea name="<portlet:namespace />message" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
 				</td>
 			</tr>
 			</table>
 
 			<br>
 
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "shutdown") %>' onClick="<portlet:namespace />saveServer('shutdown');"><br>
+			<input type="button" value='<%= LanguageUtil.get(pageContext, "shutdown") %>' onClick="<portlet:namespace />saveServer('shutdown');"><br>
 
 			<br><div class="separator"></div><br>
 
@@ -160,7 +160,7 @@
 							</td>
 							</td>
 							<td align="right">
-								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('gc');">
+								<input type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('gc');">
 							</td>
 						</tr>
 						<tr class="portlet-section-body">
@@ -169,7 +169,7 @@
 							</td>
 							</td>
 							<td align="right">
-								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheSingle');">
+								<input type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheSingle');">
 							</td>
 						</tr>
 						<tr class="portlet-section-alternate">
@@ -178,7 +178,7 @@
 							</td>
 							</td>
 							<td align="right">
-								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheMulti');">
+								<input type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheMulti');">
 							</td>
 						</tr>
 						<tr class="portlet-section-body">
@@ -187,7 +187,7 @@
 							</td>
 							</td>
 							<td align="right">
-								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheDb');">
+								<input type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheDb');">
 							</td>
 						</tr>
 						<tr class="portlet-section-alternate">
@@ -196,7 +196,7 @@
 							</td>
 							</td>
 							<td align="right">
-								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "please-be-patient") %>'); <portlet:namespace />saveServer('precompile');">
+								<input type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "please-be-patient") %>'); <portlet:namespace />saveServer('precompile');">
 							</td>
 						</tr>
 						</table>
@@ -291,7 +291,7 @@
 
 						<br>
 
-						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveServer('updateLogLevels');">
+						<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveServer('updateLogLevels');">
 
 						<br><br>
 					</div>

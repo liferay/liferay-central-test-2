@@ -48,7 +48,7 @@ integerFormat.setMaximumFractionDigits(0);
 		return false;"
 >
 
-<input class="form-text" name="<portlet:namespace />args" size="30" type="text" value="<%= searchResult.getSearchQuery() %>">
+<input name="<portlet:namespace />args" size="30" type="text" value="<%= searchResult.getSearchQuery() %>">
 
 <select name="<portlet:namespace />directive">
 	<option selected value="search"><%= LanguageUtil.get(pageContext, "search") %></option>

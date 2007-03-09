@@ -147,7 +147,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="login" style="width: 150px;" type="text" value="<%= login %>">
+				<input name="login" style="width: 150px;" type="text" value="<%= login %>">
 			</td>
 		</tr>
 		<tr>
@@ -156,7 +156,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<%= SessionParameters.get(request, "password") %>" style="width: 150px" type="password" value="<%= password %>">
+				<input name="<%= SessionParameters.get(request, "password") %>" style="width: 150px" type="password" value="<%= password %>">
 			</td>
 		</tr>
 
@@ -186,7 +186,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 		<br>
 
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "sign-in") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "sign-in") %>">
 
 		</form>
 	</liferay-ui:section>
@@ -240,14 +240,14 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="emailAddress" size="30" type="text" value="<%= emailAddress %>">
+				<input name="emailAddress" size="30" type="text" value="<%= emailAddress %>">
 			</td>
 		</tr>
 		</table>
 
 		<br>
 
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "send-new-password") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "send-new-password") %>">
 
 		</form>
 	</liferay-ui:section>

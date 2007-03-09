@@ -108,7 +108,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />payPalEmailAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= shoppingPrefs.getPayPalEmailAddress() %>">
+				<input name="<portlet:namespace />payPalEmailAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= shoppingPrefs.getPayPalEmailAddress() %>">
 			</td>
 		</tr>
 		<tr>
@@ -215,7 +215,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" maxlength="7" name="<portlet:namespace />taxRate" type="text" size="7" value="<%= taxFormat.format(shoppingPrefs.getTaxRate()) %>">
+				<input maxlength="7" name="<portlet:namespace />taxRate" type="text" size="7" value="<%= taxFormat.format(shoppingPrefs.getTaxRate()) %>">
 			</td>
 		</tr>
 		<tr>
@@ -229,7 +229,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" maxlength="7" name="<portlet:namespace />minOrder" type="text" size="7" value="<%= currency.getSymbol() %><%= doubleFormat.format(shoppingPrefs.getMinOrder()) %>">
+				<input maxlength="7" name="<portlet:namespace />minOrder" type="text" size="7" value="<%= currency.getSymbol() %><%= doubleFormat.format(shoppingPrefs.getMinOrder()) %>">
 			</td>
 		</tr>
 		</table>
@@ -287,7 +287,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						</td>
 						<td style="padding-left: 10px;"></td>
 						<td>
-							<input class="form-text" maxlength="6" name="<portlet:namespace />shipping<%= i %>" size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getShipping()[i]) %>">
+							<input maxlength="6" name="<portlet:namespace />shipping<%= i %>" size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getShipping()[i]) %>">
 						</td>
 					</tr>
 
@@ -353,7 +353,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						</td>
 						<td style="padding-left: 10px;"></td>
 						<td>
-							<input class="form-text" maxlength="6" name="<portlet:namespace />insurance<%= i %>" size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getInsurance()[i]) %>">
+							<input maxlength="6" name="<portlet:namespace />insurance<%= i %>" size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getInsurance()[i]) %>">
 						</td>
 					</tr>
 
@@ -412,10 +412,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("confirmation-email") %>'>
-								<input class="form-text" name="<portlet:namespace />emailOrderConfirmationSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailOrderConfirmationSubject %>">
+								<input name="<portlet:namespace />emailOrderConfirmationSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailOrderConfirmationSubject %>">
 							</c:when>
 							<c:when test='<%= tabs3.equals("shipping-email") %>'>
-								<input class="form-text" name="<portlet:namespace />emailOrderShippingSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailOrderShippingSubject %>">
+								<input name="<portlet:namespace />emailOrderShippingSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailOrderShippingSubject %>">
 							</c:when>
 						</c:choose>
 					</td>
@@ -554,7 +554,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
+						<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
 					</td>
 				</tr>
 				<tr>
@@ -563,7 +563,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
+						<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
 					</td>
 				</tr>
 				</table>
@@ -574,9 +574,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 </form>
 

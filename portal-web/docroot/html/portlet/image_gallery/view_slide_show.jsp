@@ -85,7 +85,7 @@
 <table border="0" cellpadding="4" cellspacing="0">
 <tr>
 	<td>
-		<input class="portlet-form-button" type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />showPrevious();"> <input class="portlet-form-button" type="button" value="<bean:message key="play" />" onClick="<portlet:namespace />play();"> <input class="portlet-form-button" type="button" value="<bean:message key="pause" />" onClick="<portlet:namespace />pause();"> <input class="portlet-form-button" type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />showNext();">
+		<input type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />showPrevious();"> <input type="button" value="<bean:message key="play" />" onClick="<portlet:namespace />play();"> <input type="button" value="<bean:message key="pause" />" onClick="<portlet:namespace />pause();"> <input type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />showNext();">
 	</td>
 	<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="100"></td>
 	<td>

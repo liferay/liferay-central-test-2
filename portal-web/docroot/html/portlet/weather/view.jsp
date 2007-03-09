@@ -70,9 +70,9 @@ for (int i = 0; i < zips.length; i++) {
 
 <%= LanguageUtil.get(pageContext, "city-or-zip-code") %>
 
-<input class="form-text" name="where" size="23" type="text">
+<input name="where" size="23" type="text">
 
-<input class="portlet-form-button" type="submit" value="<bean:message key="search" />">
+<input type="submit" value="<bean:message key="search" />">
 
 </form>
 

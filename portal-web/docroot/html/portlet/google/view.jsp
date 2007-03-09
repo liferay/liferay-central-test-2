@@ -36,7 +36,7 @@
 		return false;"
 >
 
-<input class="form-text" name="<portlet:namespace />args" size="30" type="text">
+<input name="<portlet:namespace />args" size="30" type="text">
 
 <select name="<portlet:namespace />directive">
 	<option value="search"><%= LanguageUtil.get(pageContext, "search") %></option>

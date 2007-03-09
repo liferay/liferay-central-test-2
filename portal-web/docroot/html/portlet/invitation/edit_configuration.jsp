@@ -63,7 +63,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />emailMessageSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageSubject %>">
+		<input name="<portlet:namespace />emailMessageSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageSubject %>">
 	</td>
 </tr>
 <tr>
@@ -131,7 +131,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
 </form>
 

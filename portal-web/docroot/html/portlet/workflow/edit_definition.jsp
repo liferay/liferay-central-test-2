@@ -98,9 +98,9 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save-new-version") %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save-new-version") %>'>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 </form>
 

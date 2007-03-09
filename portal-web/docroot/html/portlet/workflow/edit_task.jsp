@@ -178,10 +178,10 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 							<input name="<portlet:namespace /><%= displayName %>" type="hidden" value="">
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_EMAIL) || type.equals(WorkflowTaskFormElement.TYPE_NUMBER) || type.equals(WorkflowTaskFormElement.TYPE_PHONE) || type.equals(WorkflowTaskFormElement.TYPE_TEXT) %>">
-							<input class="form-text" name="<portlet:namespace /><%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= value %>">
+							<input name="<portlet:namespace /><%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= value %>">
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_PASSWORD) %>">
-							<input class="form-text" name="<portlet:namespace /><%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value="<%= value %>">
+							<input name="<portlet:namespace /><%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value="<%= value %>">
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_RADIO) %>">
 
@@ -214,7 +214,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 							</select>
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_TEXTAREA) %>">
-							<textarea class="form-text" name="<portlet:namespace /><%= displayName %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= value %></textarea>
+							<textarea name="<portlet:namespace /><%= displayName %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= value %></textarea>
 						</c:when>
 					</c:choose>
 				</c:when>
@@ -258,12 +258,12 @@ for (int i = 0; i < taskTransitions.size(); i++) {
 	String taskTransition = (String)taskTransitions.get(i);
 %>
 
-	<input class="portlet-form-button" type="button" name="<%= LanguageUtil.get(pageContext, taskTransition) %>" value="<%= LanguageUtil.get(pageContext, taskTransition) %>" onClick="<portlet:namespace />saveTask('<%= taskTransition %>');">
+	<input type="button" name="<%= LanguageUtil.get(pageContext, taskTransition) %>" value="<%= LanguageUtil.get(pageContext, taskTransition) %>" onClick="<portlet:namespace />saveTask('<%= taskTransition %>');">
 
 <%
 }
 %>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 </form>

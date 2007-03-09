@@ -455,7 +455,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				<table border="0" cellpadding="0" cellspacing="0" id="portlet-mail-toolbar-search">
 				<tr>
 					<td>
-						<input class="form-text font-small" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
+						<input class="font-small" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
 					</td>
 					<td style="padding-left: 5px;"></td>
 					<td>
@@ -511,19 +511,19 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			</tr>
 			<tr>
 				<td>
-					<input class="form-text" name="<%= MailDisplayTerms.FROM %>" size="20" type="text">
+					<input name="<%= MailDisplayTerms.FROM %>" size="20" type="text">
 				</td>
 				<td style="padding-left: 5px;"></td>
 				<td>
-					<input class="form-text" name="<%= MailDisplayTerms.TO %>" size="20" type="text">
+					<input name="<%= MailDisplayTerms.TO %>" size="20" type="text">
 				</td>
 				<td style="padding-left: 5px;"></td>
 				<td>
-					<input class="form-text" name="<%= MailDisplayTerms.SUBJECT %>" size="20" type="text">
+					<input name="<%= MailDisplayTerms.SUBJECT %>" size="20" type="text">
 				</td>
 				<td style="padding-left: 5px;"></td>
 				<td>
-					<input class="form-text" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
+					<input name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
 				</td>
 			</tr>
 			</table>
@@ -594,11 +594,11 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				</td>
 				<td style="padding-left: 5px;"></td>
 				<td>
-					<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+					<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 				</td>
 				<td style="padding-left: 5px;"></td>
 				<td>
-					<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="hideAdvancedSearch();">
+					<input type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="hideAdvancedSearch();">
 				</td>
 			</tr>
 			</table>

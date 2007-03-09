@@ -41,7 +41,7 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<%= namespace %>postReplySubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text"><br>
+				<input name="<%= namespace %>postReplySubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text"><br>
 			</td>
 		</tr>
 		<tr>
@@ -50,16 +50,16 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<textarea class="form-text" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
+				<textarea name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
 			</td>
 		</tr>
 		</table>
 
 		<br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "reply") %>' onClick="<%= namespace %>postReply(<%= i %>);">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "reply") %>' onClick="<%= namespace %>postReply(<%= i %>);">
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="document.getElementById('<%= namespace %>postReplyForm<%= i %>').style.display = 'none'; void('');">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="document.getElementById('<%= namespace %>postReplyForm<%= i %>').style.display = 'none'; void('');">
 
 		<br><br>
 	</td>
@@ -75,7 +75,7 @@
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<input class="form-text" name="<%= namespace %>editSubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= Html.toInputSafe(message.getSubject()) %>"><br>
+					<input name="<%= namespace %>editSubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= Html.toInputSafe(message.getSubject()) %>"><br>
 				</td>
 			</tr>
 			<tr>
@@ -84,16 +84,16 @@
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<textarea class="form-text" name="<%= namespace %>editBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= Html.toInputSafe(message.getBody()) %></textarea>
+					<textarea name="<%= namespace %>editBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= Html.toInputSafe(message.getBody()) %></textarea>
 				</td>
 			</tr>
 			</table>
 
 			<br>
 
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<%= namespace %>updateMessage(<%= i %>);">
+			<input type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<%= namespace %>updateMessage(<%= i %>);">
 
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="document.getElementById('<%= namespace %>editForm<%= i %>').style.display = 'none'; void('');">
+			<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="document.getElementById('<%= namespace %>editForm<%= i %>').style.display = 'none'; void('');">
 
 			<br><br>
 		</td>

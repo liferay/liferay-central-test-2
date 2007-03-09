@@ -41,13 +41,13 @@ String csz = ParamUtil.getString(request, "csz");
 
 		<%= LanguageUtil.get(pageContext, "street-address") %><br>
 
-		<html:text name="mapsMapsForm" property="street" size="30" styleClass="form-text" />
+		<html:text name="mapsMapsForm" property="street" size="30" />
 
 		<br>
 
 		<%= LanguageUtil.get(pageContext, "city-state-or-zip") %><br>
 
-		<html:text name="mapsMapsForm" property="csz" size="30" styleClass="form-text" />
+		<html:text name="mapsMapsForm" property="csz" size="30" />
 
 		<br>
 
@@ -57,7 +57,7 @@ String csz = ParamUtil.getString(request, "csz");
 
 		<br><br>
 
-		<html:submit styleClass="portlet-form-button"><bean:message key="search" /></html:submit>
+		<html:submit><bean:message key="search" /></html:submit>
 
 		</html:form>
 

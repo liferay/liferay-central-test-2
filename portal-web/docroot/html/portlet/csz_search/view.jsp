@@ -33,13 +33,13 @@ String csz = ParamUtil.getString(request, "csz");
 
 <%= LanguageUtil.get(pageContext, "street-address") %> <i>(<%= LanguageUtil.get(pageContext, "optional") %>)</i><br>
 
-<input class="form-text" name="<portlet:namespace />street" size="30" type="text" value="<%= street %>">
+<input name="<portlet:namespace />street" size="30" type="text" value="<%= street %>">
 
 <br><br>
 
 <%= LanguageUtil.get(pageContext, "city-state-or-zip") %><br>
 
-<input class="form-text" name="<portlet:namespace />csz" size="30" type="text" value="<%= csz %>">
+<input name="<portlet:namespace />csz" size="30" type="text" value="<%= csz %>">
 
 <br><br>
 
@@ -49,7 +49,7 @@ String csz = ParamUtil.getString(request, "csz");
 
 <br><br>
 
-<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(street) %>">

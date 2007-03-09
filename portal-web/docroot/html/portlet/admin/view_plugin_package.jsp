@@ -248,7 +248,7 @@ List screenshots = pluginPackage.getScreenshots();
 
 <input type="hidden" name="<portlet:namespace/>url" value="<%= pluginPackage.getArtifactURL() %>">
 
-<input class="portlet-form-button" type="button" value='<%=LanguageUtil.get(pageContext, "install")%>' onClick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy', '<%= downloadProgressId %>', '<%= currentURL %>');">
+<input type="button" value='<%=LanguageUtil.get(pageContext, "install")%>' onClick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy', '<%= downloadProgressId %>', '<%= currentURL %>');">
 
 <liferay-ui:upload-progress
 	id="<%= downloadProgressId %>"

@@ -34,16 +34,16 @@ boolean showAddEntryButton = tabs1.equals("entries") && PortletPermission.contai
 			<tr>
 				<c:if test="<%= showAddEntryButton %>">
 					<td>
-						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-entry") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+						<input type="button" value='<%= LanguageUtil.get(pageContext, "add-entry") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 					</td>
 					<td style="padding-left: 30px;"></td>
 				</c:if>
 
 				<c:if test="<%= results.size() > 0 %>">
 					<td>
-						<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text">
+						<input name="<portlet:namespace />keywords" size="30" type="text">
 
-						<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search-entries") %>">
+						<input type="submit" value="<%= LanguageUtil.get(pageContext, "search-entries") %>">
 					</td>
 				</c:if>
 			</tr>

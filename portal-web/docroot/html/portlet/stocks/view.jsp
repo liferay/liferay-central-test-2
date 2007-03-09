@@ -78,7 +78,7 @@
 
 		<br>
 
-		<input class="form-text" maxlength="10" name="<portlet:namespace />symbol" size="10" type="text"> <input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "get-quote") %>'>
+		<input maxlength="10" name="<portlet:namespace />symbol" size="10" type="text"> <input type="submit" value='<%= LanguageUtil.get(pageContext, "get-quote") %>'>
 	</c:when>
 	<c:otherwise>
 
@@ -115,7 +115,7 @@
 		}
 		%>
 
-		<input class="form-text" maxlength="10" name="<portlet:namespace />symbol" size="10" type="text" value="<%= symbol %>">
+		<input maxlength="10" name="<portlet:namespace />symbol" size="10" type="text" value="<%= symbol %>">
 
 		<select name="<portlet:namespace />time" onChange="submitForm(document.<portlet:namespace />fm);">
 			<option <%= (time == 1) ? "selected" : "" %> value="1">1 <%= LanguageUtil.get(pageContext, "day") %></option>
@@ -136,7 +136,7 @@
 			<option <%= (time == 20) ? "selected" : "" %> value="20"><%= LanguageUtil.get(pageContext, "all-data") %></option>
 		</select>
 
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "get-quote") %>">
+		<input type="submit" value="<%= LanguageUtil.get(pageContext, "get-quote") %>">
 
 		<br><br>
 

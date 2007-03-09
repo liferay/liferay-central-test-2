@@ -88,7 +88,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="<portlet:namespace />title" size="30" type="text" value="<%= title %>">
+			<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>">
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -136,9 +136,9 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 
 <br>
 
-<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />updateLookAndFeel();">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />updateLookAndFeel();">
 
-<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "reset") %>' onClick="<portlet:namespace />updateLookAndFeel('<%= Constants.RESET %>');">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "reset") %>' onClick="<portlet:namespace />updateLookAndFeel('<%= Constants.RESET %>');">
 
 <br><br>
 

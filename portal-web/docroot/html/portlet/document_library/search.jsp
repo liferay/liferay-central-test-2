@@ -118,9 +118,9 @@ for (int i = 0; i < results.getLength(); i++) {
 }
 %>
 
-<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
+<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
 
-<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
 <br><br>
 

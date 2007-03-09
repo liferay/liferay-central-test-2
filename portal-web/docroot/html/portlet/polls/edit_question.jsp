@@ -198,7 +198,7 @@ if (choiceId > 0) {
 						<c:if test="<%= choicesCount > 2 %>">
 							<td style="padding-left: 10px;"></td>
 							<td>
-								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceId.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);">
+								<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceId.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);">
 							</td>
 						</c:if>
 
@@ -212,7 +212,7 @@ if (choiceId > 0) {
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td valign="bottom">
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-choice") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>'; submitForm(document.<portlet:namespace />fm);">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "add-choice") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>'; submitForm(document.<portlet:namespace />fm);">
 			</td>
 		</tr>
 		</table>
@@ -242,9 +242,9 @@ if (choiceId > 0) {
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 </form>
 
