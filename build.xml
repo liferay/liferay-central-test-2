@@ -828,6 +828,7 @@ auto.deploy.dest.dir=../webapps</echo>
 
 		<copy todir="${lp.ext.dir}/lib/portal" overwrite="yes">
 			<fileset dir="${project.dir}/filters/compression" includes="compression-filter.jar" />
+			<fileset dir="${project.dir}/filters/doubleclick" includes="doubleclick-filter.jar" />
 			<fileset dir="${project.dir}/filters/secure" includes="secure-filter.jar" />
 			<fileset dir="${project.dir}/filters/sso" includes="sso-filter.jar" />
 			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
