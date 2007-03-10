@@ -64,17 +64,22 @@
 	</target>
 
 	<target name="deploy-module">
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
+		<if>
+			<available file="${auto.deploy.dir}" />
+			<then>
+				<tstamp>
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
 
-		<jar
-			basedir="${module.name}.war"
-			destfile="${tstamp.value}"
-			excludes="_diffs/**"
-		/>
+				<jar
+					basedir="${module.name}.war"
+					destfile="${tstamp.value}"
+					excludes="_diffs/**"
+				/>
 
-		<move file="${tstamp.value}" tofile="${auto.deploy.dir}/${module.name}.war" />
+				<move file="${tstamp.value}" tofile="${auto.deploy.dir}/${module.name}.war" />
+			</then>
+		</if>
 	</target>
 
 	<target name="loop-modules">
