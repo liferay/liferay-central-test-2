@@ -327,7 +327,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.ReleaseImpl" table="Release_">
 		<cache usage="read-write" />
-		<id name="releaseId" type="java.lang.String">
+		<id name="releaseId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="createDate" />

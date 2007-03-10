@@ -38,13 +38,11 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ReleaseUtil {
-	public static com.liferay.portal.model.Release create(
-		java.lang.String releaseId) {
+	public static com.liferay.portal.model.Release create(long releaseId) {
 		return getPersistence().create(releaseId);
 	}
 
-	public static com.liferay.portal.model.Release remove(
-		java.lang.String releaseId)
+	public static com.liferay.portal.model.Release remove(long releaseId)
 		throws com.liferay.portal.NoSuchReleaseException, 
 			com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
@@ -139,14 +137,14 @@ public class ReleaseUtil {
 	}
 
 	public static com.liferay.portal.model.Release findByPrimaryKey(
-		java.lang.String releaseId)
+		long releaseId)
 		throws com.liferay.portal.NoSuchReleaseException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(releaseId);
 	}
 
 	public static com.liferay.portal.model.Release fetchByPrimaryKey(
-		java.lang.String releaseId) throws com.liferay.portal.SystemException {
+		long releaseId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(releaseId);
 	}
 

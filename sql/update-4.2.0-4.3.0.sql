@@ -90,6 +90,7 @@ create table PluginSetting (
 
 alter_column_type PollsQuestion groupId LONG;
 
+alter_column_type Relase_ releaseId LONG;
 alter table Release_ add verified BOOLEAN;
 
 alter_column_type Resource_ resourceId LONG;

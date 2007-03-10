@@ -316,7 +316,7 @@
 		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Release">
-		<field name="releaseId" type="String" />
+		<field name="releaseId" type="long" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="buildNumber" type="int" />

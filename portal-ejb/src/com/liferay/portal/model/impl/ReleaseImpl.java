@@ -32,7 +32,7 @@ import com.liferay.portal.model.Release;
  */
 public class ReleaseImpl extends ReleaseModelImpl implements Release {
 
-	public static final String DEFAULT_ID = "1";
+	public static final long DEFAULT_ID = 1;
 
 	public ReleaseImpl() {
 	}

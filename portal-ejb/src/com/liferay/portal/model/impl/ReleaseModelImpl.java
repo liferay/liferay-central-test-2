@@ -41,7 +41,7 @@ import java.util.Date;
 public class ReleaseModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Release_";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "releaseId", new Integer(Types.VARCHAR) },
+			{ "releaseId", new Integer(Types.BIGINT) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "buildNumber", new Integer(Types.INTEGER) },
@@ -50,36 +50,26 @@ public class ReleaseModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Release"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_RELEASEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Release.releaseId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ReleaseModel"));
 
 	public ReleaseModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _releaseId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setReleaseId(pk);
 	}
 
-	public String getReleaseId() {
-		return GetterUtil.getString(_releaseId);
+	public long getReleaseId() {
+		return _releaseId;
 	}
 
-	public void setReleaseId(String releaseId) {
-		if (((releaseId == null) && (_releaseId != null)) ||
-				((releaseId != null) && (_releaseId == null)) ||
-				((releaseId != null) && (_releaseId != null) &&
-				!releaseId.equals(_releaseId))) {
-			if (!XSS_ALLOW_RELEASEID) {
-				releaseId = XSSUtil.strip(releaseId);
-			}
-
+	public void setReleaseId(long releaseId) {
+		if (releaseId != _releaseId) {
 			_releaseId = releaseId;
 		}
 	}
@@ -165,9 +155,17 @@ public class ReleaseModelImpl extends BaseModelImpl {
 		}
 
 		ReleaseImpl release = (ReleaseImpl)obj;
-		String pk = release.getPrimaryKey();
+		long pk = release.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -184,9 +182,9 @@ public class ReleaseModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = release.getPrimaryKey();
+		long pk = release.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -195,10 +193,10 @@ public class ReleaseModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _releaseId;
+	private long _releaseId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private int _buildNumber;

@@ -33,13 +33,13 @@ import java.util.Date;
  *
  */
 public interface ReleaseModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getReleaseId();
+	public long getReleaseId();
 
-	public void setReleaseId(String releaseId);
+	public void setReleaseId(long releaseId);
 
 	public Date getCreateDate();
 

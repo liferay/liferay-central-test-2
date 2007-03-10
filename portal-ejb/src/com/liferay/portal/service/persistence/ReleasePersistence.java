@@ -51,7 +51,7 @@ import java.util.List;
  *
  */
 public class ReleasePersistence extends BasePersistence {
-	public Release create(String releaseId) {
+	public Release create(long releaseId) {
 		Release release = new ReleaseImpl();
 		release.setNew(true);
 		release.setPrimaryKey(releaseId);
@@ -59,14 +59,15 @@ public class ReleasePersistence extends BasePersistence {
 		return release;
 	}
 
-	public Release remove(String releaseId)
+	public Release remove(long releaseId)
 		throws NoSuchReleaseException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Release release = (Release)session.get(ReleaseImpl.class, releaseId);
+			Release release = (Release)session.get(ReleaseImpl.class,
+					new Long(releaseId));
 
 			if (release == null) {
 				if (_log.isWarnEnabled()) {
@@ -141,7 +142,7 @@ public class ReleasePersistence extends BasePersistence {
 		}
 	}
 
-	public Release findByPrimaryKey(String releaseId)
+	public Release findByPrimaryKey(long releaseId)
 		throws NoSuchReleaseException, SystemException {
 		Release release = fetchByPrimaryKey(releaseId);
 
@@ -158,14 +159,13 @@ public class ReleasePersistence extends BasePersistence {
 		return release;
 	}
 
-	public Release fetchByPrimaryKey(String releaseId)
-		throws SystemException {
+	public Release fetchByPrimaryKey(long releaseId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (Release)session.get(ReleaseImpl.class, releaseId);
+			return (Release)session.get(ReleaseImpl.class, new Long(releaseId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

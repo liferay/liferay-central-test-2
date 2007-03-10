@@ -787,7 +787,7 @@
 
 		<!-- PK fields -->
 
-		<column name="releaseId" type="String" primary="true" />
+		<column name="releaseId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 

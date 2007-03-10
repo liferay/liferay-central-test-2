@@ -61,19 +61,19 @@ public class ReleaseSoap implements Serializable {
 	public ReleaseSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _releaseId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setReleaseId(pk);
 	}
 
-	public String getReleaseId() {
+	public long getReleaseId() {
 		return _releaseId;
 	}
 
-	public void setReleaseId(String releaseId) {
+	public void setReleaseId(long releaseId) {
 		_releaseId = releaseId;
 	}
 
@@ -121,7 +121,7 @@ public class ReleaseSoap implements Serializable {
 		_verified = verified;
 	}
 
-	private String _releaseId;
+	private long _releaseId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private int _buildNumber;

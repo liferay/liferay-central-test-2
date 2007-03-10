@@ -672,7 +672,7 @@ create table Region (
 );
 
 create table Release_ (
-	releaseId VARCHAR(75) not null primary key,
+	releaseId LONG not null primary key,
 	createDate DATE null,
 	modifiedDate DATE null,
 	buildNumber INTEGER,
