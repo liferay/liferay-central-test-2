@@ -39,7 +39,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeBlogs.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeBookmarks.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
