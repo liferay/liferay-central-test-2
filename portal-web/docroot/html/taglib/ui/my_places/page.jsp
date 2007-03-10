@@ -78,7 +78,7 @@
 						%>
 
 						<li class="public <%= selectedPlace ? "current" : "" %>">
-							<a href="<%= portletURL.toString() %>"><%= LanguageUtil.get(pageContext, "public-pages") %> (<%= publicLayoutsPageCount %>)</a>
+							<a href="<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>"><%= LanguageUtil.get(pageContext, "public-pages") %> (<%= publicLayoutsPageCount %>)</a>
 						</li>
 
 						<%
@@ -88,7 +88,7 @@
 						%>
 
 						<li class="private <%= selectedPlace ? "current" : "" %>">
-							<a href="<%= portletURL.toString() %>"><%= LanguageUtil.get(pageContext, "private-pages") %> (<%= privateLayoutsPageCount %>)</a>
+							<a href="<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>"><%= LanguageUtil.get(pageContext, "private-pages") %> (<%= privateLayoutsPageCount %>)</a>
 						</li>
 					</ul>
 				</li>

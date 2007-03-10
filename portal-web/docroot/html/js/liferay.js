@@ -159,6 +159,7 @@ Liferay.Dock = {
 		var heading = communities.find('h3');
 		
 		heading.wrap('<div class="my-places-toggle"></div>');
+
 		heading = heading.parent();
 		
 		communityList.hide();
