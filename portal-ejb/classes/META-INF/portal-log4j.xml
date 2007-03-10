@@ -284,6 +284,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.velocity.VelocityContextPool">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.verify">
 		<priority value="INFO" />
 	</category>

@@ -198,6 +198,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			defaultUser.setCreateDate(now);
 			defaultUser.setModifiedDate(now);
 			defaultUser.setPassword("password");
+			defaultUser.setScreenName(defaultUser.getUserId());
 			defaultUser.setEmailAddress(UserImpl.DEFAULT + "@" + companyMx);
 			defaultUser.setLanguageId(null);
 			defaultUser.setTimeZoneId(null);

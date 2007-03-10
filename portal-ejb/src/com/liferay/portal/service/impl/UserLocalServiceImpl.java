@@ -266,6 +266,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordEncrypted(true);
 		user.setPasswordExpirationDate(expirationDate);
 		user.setPasswordReset(passwordReset);
+		user.setScreenName(user.getUserId());
 		user.setEmailAddress(emailAddress);
 		user.setLanguageId(locale.toString());
 		user.setTimeZoneId(defaultUser.getTimeZoneId());

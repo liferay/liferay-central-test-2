@@ -28,6 +28,9 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="VelocityContextPool.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +38,10 @@ import javax.servlet.ServletContext;
  *
  */
 public class VelocityContextPool {
+
+	public static boolean containsKey(String name) {
+		return _instance._containsKey(name);
+	}
 
 	public static ServletContext get(String name) {
 		return _instance._get(name);
@@ -52,17 +59,45 @@ public class VelocityContextPool {
 		_pool = CollectionFactory.getSyncHashMap();
 	}
 
+	private boolean _containsKey(String name) {
+		boolean value = _pool.containsKey(name);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Contains key " + name + " " + value);
+		}
+
+		return value;
+	}
+
 	private ServletContext _get(String name) {
-		return (ServletContext)_pool.get(name);
+		ServletContext ctx = (ServletContext)_pool.get(name);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Get " + name + " " + ctx);
+		}
+
+		return ctx;
 	}
 
 	private void _put(String name, ServletContext ctx) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Put " + name + " " + ctx);
+		}
+
 		_pool.put(name, ctx);
 	}
 
 	private ServletContext _remove(String name) {
-		return (ServletContext)_pool.remove(name);
+		ServletContext ctx = (ServletContext)_pool.remove(name);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Remove " + name + " " + ctx);
+		}
+
+		return ctx;
 	}
+
+	private static Log _log = LogFactory.getLog(VelocityContextPool.class);
 
 	private static VelocityContextPool _instance = new VelocityContextPool();
 
