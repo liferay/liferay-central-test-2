@@ -179,11 +179,12 @@ public class MainServlet extends ActionServlet {
 			ctx.setAttribute(WebKeys.ROOT_PATH, rootPath);
 			ctx.setAttribute(WebKeys.MAIN_PATH, rootPath + DEFAULT_MAIN_PATH);
 
-			String friendlyURLPrivatePath = rootPath + PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING);
+			String friendlyURLPrivateGroupPath = rootPath + PropsUtil.get(
+				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
 
 			ctx.setAttribute(
-				WebKeys.FRIENDLY_URL_PRIVATE_PATH, friendlyURLPrivatePath);
+				WebKeys.FRIENDLY_URL_PRIVATE_GROUP_PATH,
+				friendlyURLPrivateGroupPath);
 
 			String friendlyURLPrivateUserPath = rootPath + PropsUtil.get(
 				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
@@ -646,23 +647,30 @@ public class MainServlet extends ActionServlet {
 
 		req.setAttribute(WebKeys.MAIN_PATH, mainPath);
 
-		// FRIENDLY_URL_PRIVATE_PATH variable
+		// FRIENDLY_URL_PRIVATE_GROUP_PATH variable
 
-		String friendlyURLPrivatePath =
-			(String)ctx.getAttribute(WebKeys.FRIENDLY_URL_PRIVATE_PATH);
+		String friendlyURLPrivateGroupPath =
+			(String)ctx.getAttribute(WebKeys.FRIENDLY_URL_PRIVATE_GROUP_PATH);
 
-		if (portalCtx.getAttribute(WebKeys.FRIENDLY_URL_PRIVATE_PATH) == null) {
+		if (portalCtx.getAttribute(
+				WebKeys.FRIENDLY_URL_PRIVATE_GROUP_PATH) == null) {
+
 			portalCtx.setAttribute(
-				WebKeys.FRIENDLY_URL_PRIVATE_PATH, friendlyURLPrivatePath);
+				WebKeys.FRIENDLY_URL_PRIVATE_GROUP_PATH,
+				friendlyURLPrivateGroupPath);
 		}
 
-		if (ses.getAttribute(WebKeys.FRIENDLY_URL_PRIVATE_PATH) == null) {
+		if (ses.getAttribute(
+				WebKeys.FRIENDLY_URL_PRIVATE_GROUP_PATH) == null) {
+
 			ses.setAttribute(
-				WebKeys.FRIENDLY_URL_PRIVATE_PATH, friendlyURLPrivatePath);
+				WebKeys.FRIENDLY_URL_PRIVATE_GROUP_PATH,
+				friendlyURLPrivateGroupPath);
 		}
 
 		req.setAttribute(
-			WebKeys.FRIENDLY_URL_PRIVATE_PATH, friendlyURLPrivatePath);
+			WebKeys.FRIENDLY_URL_PRIVATE_GROUP_PATH,
+			friendlyURLPrivateGroupPath);
 
 		// FRIENDLY_URL_PRIVATE_USER_PATH variable
 
@@ -672,6 +680,7 @@ public class MainServlet extends ActionServlet {
 
 		if (portalCtx.getAttribute(
 			WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH) == null) {
+
 			portalCtx.setAttribute(
 				WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH,
 				friendlyURLPrivateUserPath);

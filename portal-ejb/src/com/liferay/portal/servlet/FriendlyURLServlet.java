@@ -92,18 +92,17 @@ public class FriendlyURLServlet extends HttpServlet {
 
 		if (_private) {
 			if (_user) {
-				friendlyURLPath =
-					(String)ctx.getAttribute(
-						WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH);
+				friendlyURLPath = (String)ctx.getAttribute(
+					WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH);
 			}
 			else {
-				friendlyURLPath =
-					(String)ctx.getAttribute(WebKeys.FRIENDLY_URL_PRIVATE_PATH);
+				friendlyURLPath = (String)ctx.getAttribute(
+					WebKeys.FRIENDLY_URL_PRIVATE_GROUP_PATH);
 			}
 		}
 		else {
-			friendlyURLPath =
-				(String)ctx.getAttribute(WebKeys.FRIENDLY_URL_PUBLIC_PATH);
+			friendlyURLPath = (String)ctx.getAttribute(
+				WebKeys.FRIENDLY_URL_PUBLIC_PATH);
 		}
 
 		String redirect = mainPath;
@@ -179,6 +178,7 @@ public class FriendlyURLServlet extends HttpServlet {
 		String ownerId = null;
 
 		Group group = null;
+
 		try {
 			group = GroupLocalServiceUtil.getFriendlyURLGroup(
 				_companyId, friendlyURL);
@@ -188,15 +188,17 @@ public class FriendlyURLServlet extends HttpServlet {
 
 		if (group == null) {
 			try {
-				if (_private & _user) {
+				if (_private && _user) {
 					String displayUserId = friendlyURL.substring(1);
-					User user =
-						UserLocalServiceUtil.getUserByDisplayUserId(
-							displayUserId);
+
+					User user = UserLocalServiceUtil.getUserByDisplayUserId(
+						displayUserId);
+
 					group = user.getGroup();
 				}
 				else {
-					long groupId = Long.parseLong(friendlyURL.substring(1));
+					long groupId = GetterUtil.getLong(friendlyURL.substring(1));
+
 					group = GroupLocalServiceUtil.getGroup(groupId);
 				}
 			}

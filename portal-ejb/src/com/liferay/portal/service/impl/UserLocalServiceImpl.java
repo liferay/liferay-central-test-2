@@ -707,21 +707,20 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return UserUtil.findByPrimaryKey(userId);
 	}
 
-	public User getUserByDisplayUserId(String displayUserId)
-		throws PortalException, SystemException {
-
-		displayUserId = displayUserId.trim().toLowerCase();
-
-		// Placeholder implementation until displayUserId is added to the model
-		return UserUtil.findByPrimaryKey(displayUserId);
-	}
-
 	public User getUserById(String companyId, String userId)
 		throws PortalException, SystemException {
 
 		userId = userId.trim().toLowerCase();
 
 		return UserUtil.findByC_U(companyId, userId);
+	}
+
+	public User getUserByDisplayUserId(String displayUserId)
+		throws PortalException, SystemException {
+
+		displayUserId = displayUserId.trim().toLowerCase();
+
+		return UserUtil.findByPrimaryKey(displayUserId);
 	}
 
 	public String getUserId(String companyId, String emailAddress)

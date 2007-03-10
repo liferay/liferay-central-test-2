@@ -50,7 +50,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -502,15 +501,16 @@ public class PortalUtil {
 			return portalURL + contextPath + layoutFriendlyURL;
 		}
 
-		Group group = GroupLocalServiceUtil.getGroup(
-			layout.getGroupId());
+		Group group = layout.getGroup();
 
 		String parentFriendlyURL = group.getFriendlyURL();
 
 		if (Validator.isNull(parentFriendlyURL)) {
-			if (layout.isPrivateLayout() && layout.getGroup().isUser()) {
-				String userId = layout.getGroup().getClassPK();
+			if (layout.isPrivateLayout() && group.isUser()) {
+				String userId = group.getClassPK();
+
 				User user = UserLocalServiceUtil.getUserById(userId);
+
 				parentFriendlyURL = StringPool.SLASH + user.getDisplayUserId();
 			}
 			else {
@@ -518,14 +518,14 @@ public class PortalUtil {
 			}
 		}
 
-		String friendlyURL;
+		String friendlyURL = null;
 
 		if (layout.isPrivateLayout()) {
-			if (layout.getGroup().isUser()) {
+			if (group.isUser()) {
 				friendlyURL = themeDisplay.getPathFriendlyURLPrivateUser();
 			}
 			else {
-				friendlyURL = themeDisplay.getPathFriendlyURLPrivate();
+				friendlyURL = themeDisplay.getPathFriendlyURLPrivateGroup();
 			}
 		}
 		else {
@@ -704,12 +704,15 @@ public class PortalUtil {
 			friendlyURL = friendlyURL.substring(0, friendlyURL.length() - 1);
 		}
 
-		Layout layout;
+		Layout layout = null;
+
 		try {
 			layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
 				ownerId, friendlyURL);
-		} catch(NoSuchLayoutException e) {
+		}
+		catch(NoSuchLayoutException nsle) {
 			String layoutId = friendlyURL.substring(1);
+
 			layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
 		}
 

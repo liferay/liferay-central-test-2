@@ -151,13 +151,13 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.User getUserByDisplayUserId(
-		java.lang.String displayUserId)
+	public com.liferay.portal.model.User getUserById(
+		java.lang.String companyId, java.lang.String userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.User getUserById(
-		java.lang.String companyId, java.lang.String userId)
+	public com.liferay.portal.model.User getUserByDisplayUserId(
+		java.lang.String displayUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

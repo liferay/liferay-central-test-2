@@ -82,6 +82,8 @@ public interface Layout extends LayoutModel {
 	public void setTypeSettingsProperties(
 		java.util.Properties typeSettingsProperties);
 
+	public java.lang.String getDefaultFriendlyURL();
+
 	public java.lang.String getIconImageId();
 
 	public com.liferay.portal.model.LayoutSet getLayoutSet();
@@ -110,8 +112,6 @@ public interface Layout extends LayoutModel {
 		javax.servlet.http.HttpServletRequest req)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
-
-	public java.lang.String getDefaultFriendlyURL();
 
 	public java.lang.String getTarget();
 

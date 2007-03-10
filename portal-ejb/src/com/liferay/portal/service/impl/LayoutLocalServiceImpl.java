@@ -990,12 +990,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String url = GetterUtil.getString(typeSettings.getProperty("url"));
 
-			String friendlyURLPrivatePath = PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING);
+			String friendlyURLPrivateGroupPath = PropsUtil.get(
+				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
+			String friendlyURLPrivateUserPath = PropsUtil.get(
+				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
 			String friendlyURLPublicPath = PropsUtil.get(
 				PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
 
-			if (url.startsWith(friendlyURLPrivatePath) ||
+			if (url.startsWith(friendlyURLPrivateGroupPath) ||
+				url.startsWith(friendlyURLPrivateUserPath) ||
 				url.startsWith(friendlyURLPublicPath)) {
 
 				int x = url.indexOf(StringPool.SLASH, 1);

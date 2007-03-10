@@ -525,16 +525,15 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 									<%
 									String parentFriendlyURL = group.getFriendlyURL();
+
 									if (Validator.isNull(parentFriendlyURL)) {
 										parentFriendlyURL = group.getDefaultFriendlyURL();
 									}
 									%>
 
-									<%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= privateLayout ? themeDisplay.getPathFriendlyURLPrivate() : themeDisplay.getPathFriendlyURLPublic() %><%= parentFriendlyURL %>
+									<%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= privateLayout ? group.getPathFriendlyURLPrivate(themeDisplay) : themeDisplay.getPathFriendlyURLPublic() %><%= parentFriendlyURL %>
 
-									<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
-									<%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
-
+									<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>"> <%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
 								</td>
 							</tr>
 						</c:if>
@@ -984,7 +983,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 				<%= LanguageUtil.get(pageContext, "enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages") %>
 
-				<%= LanguageUtil.format(pageContext, "the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages", new Object[] {Http.getProtocol(request) + "://" + company.getPortalURL() + themeDisplay.getPathFriendlyURLPublic(), Http.getProtocol(request) + "://" + company.getPortalURL() + themeDisplay.getPathFriendlyURLPrivate()}) %>
+				<%= LanguageUtil.format(pageContext, "the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages", new Object[] {Http.getProtocol(request) + "://" + company.getPortalURL() + themeDisplay.getPathFriendlyURLPublic(), Http.getProtocol(request) + "://" + company.getPortalURL() + group.getPathFriendlyURLPrivate(themeDisplay)}) %>
 
 				<br><br>
 

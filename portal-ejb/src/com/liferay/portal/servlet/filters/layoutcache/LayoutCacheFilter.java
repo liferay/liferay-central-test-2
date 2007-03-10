@@ -250,7 +250,7 @@ public class LayoutCacheFilter implements Filter {
 				_companyId, friendlyURL);
 
 			if (servletPath.startsWith(
-					_LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING) ||
+					_LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING) ||
 				servletPath.startsWith(
 					_LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING)) {
 
@@ -421,8 +421,10 @@ public class LayoutCacheFilter implements Filter {
 	private static final String _ALREADY_FILTERED =
 		LayoutCacheFilter.class + "_ALREADY_FILTERED";
 
-	private static final String _LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING =
-		PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING);
+	private static final String
+		_LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING =
+			PropsUtil.get(
+				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
 
 	private static final String
 		_LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING =

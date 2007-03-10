@@ -28,6 +28,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.GroupNames;
 import com.liferay.util.Validator;
 
@@ -95,8 +96,17 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		}
 	}
 
+	public String getPathFriendlyURLPrivate(ThemeDisplay themeDisplay) {
+		if (isUser()) {
+			return themeDisplay.getPathFriendlyURLPrivateUser();
+		}
+		else {
+			return themeDisplay.getPathFriendlyURLPrivateGroup();
+		}
+	}
+
 	public String getDefaultFriendlyURL() {
-		return StringPool.SLASH + Long.toString(getGroupId());
+		return StringPool.SLASH + String.valueOf(getGroupId());
 	}
 
 	public int getPrivateLayoutsPageCount() {

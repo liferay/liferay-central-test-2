@@ -450,7 +450,7 @@ public class PropsUtil {
 
 	public static final String LAYOUT_STATIC_PORTLETS_END = "layout.static.portlets.end.";
 
-	public static final String LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING = "layout.friendly.url.private.servlet.mapping";
+	public static final String LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING = "layout.friendly.url.private.group.servlet.mapping";
 
 	public static final String LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING = "layout.friendly.url.private.user.servlet.mapping";
 

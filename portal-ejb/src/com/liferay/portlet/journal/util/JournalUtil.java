@@ -532,7 +532,8 @@ public class JournalUtil {
 		tokens.put("cms_url", themeDisplay.getPathRoot() + "/cms/servlet");
 		tokens.put("image_path", themeDisplay.getPathImage());
 		tokens.put(
-			"friendly_url_private", themeDisplay.getPathFriendlyURLPrivate());
+			"friendly_url_private_group",
+			themeDisplay.getPathFriendlyURLPrivateGroup());
 		tokens.put(
 			"friendly_url_private_user",
 			themeDisplay.getPathFriendlyURLPrivateUser());
@@ -547,6 +548,9 @@ public class JournalUtil {
 		// Deprecated tokens
 
 		tokens.put("friendly_url", themeDisplay.getPathFriendlyURLPublic());
+		tokens.put(
+			"friendly_url_private",
+			themeDisplay.getPathFriendlyURLPrivateGroup());
 		tokens.put("page_url", themeDisplay.getPathFriendlyURLPublic());
 
 		return tokens;

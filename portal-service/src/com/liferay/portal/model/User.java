@@ -45,6 +45,8 @@ public interface User extends UserModel {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.lang.String getDisplayUserId();
+
 	public java.lang.String getPasswordUnencrypted();
 
 	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted);
@@ -60,8 +62,6 @@ public interface User extends UserModel {
 	public void setTimeZoneId(java.lang.String timeZoneId);
 
 	public void setResolution(java.lang.String resolution);
-
-	public java.lang.String getDisplayUserId();
 
 	public com.liferay.portal.model.Contact getContact();
 

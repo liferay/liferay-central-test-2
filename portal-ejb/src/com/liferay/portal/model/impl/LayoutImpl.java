@@ -428,6 +428,10 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		super.setTypeSettings(PropertiesUtil.toString(_typeSettingsProperties));
 	}
 
+	public String getDefaultFriendlyURL() {
+		return StringPool.SLASH + getLayoutId();
+	}
+
 	public String getIconImageId() {
 		return getCompanyId() + ".layout." + getPlid();
 	}
@@ -495,10 +499,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		throws PortalException, SystemException {
 
 		return _getURL(req, true, true);
-	}
-
-	public String getDefaultFriendlyURL() {
-		return StringPool.SLASH + getLayoutId();
 	}
 
 	public String getTarget() {

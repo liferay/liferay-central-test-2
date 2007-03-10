@@ -91,8 +91,8 @@ public class CMSServlet extends HttpServlet {
 				_rootPath = StringPool.BLANK;
 			}
 
-			_friendlyURLPrivatePath = _rootPath + PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING);
+			_friendlyURLPrivateGroupPath = _rootPath + PropsUtil.get(
+				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
 			_friendlyURLPrivateUserPath = _rootPath + PropsUtil.get(
 				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
 			_friendlyURLPublicPath = _rootPath + PropsUtil.get(
@@ -157,7 +157,8 @@ public class CMSServlet extends HttpServlet {
 			themeDisplay.setCompany(company);
 			themeDisplay.setPortletGroupId(groupId);
 			themeDisplay.setPathContext(_contextPath);
-			themeDisplay.setPathFriendlyURLPrivate(_friendlyURLPrivatePath);
+			themeDisplay.setPathFriendlyURLPrivateGroup(
+				_friendlyURLPrivateGroupPath);
 			themeDisplay.setPathFriendlyURLPrivateUser(
 				_friendlyURLPrivateUserPath);
 			themeDisplay.setPathFriendlyURLPublic(_friendlyURLPublicPath);
@@ -218,7 +219,7 @@ public class CMSServlet extends HttpServlet {
 	private long _groupId;
 	private String _contextPath;
 	private String _rootPath;
-	private String _friendlyURLPrivatePath;
+	private String _friendlyURLPrivateGroupPath;
 	private String _friendlyURLPrivateUserPath;
 	private String _friendlyURLPublicPath;
 	private String _imagePath;

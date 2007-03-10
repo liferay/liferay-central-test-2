@@ -83,7 +83,7 @@ public class WebKeys {
 
 	public static final String FORWARD_URL = "FORWARD_URL";
 
-	public static final String FRIENDLY_URL_PRIVATE_PATH = "FRIENDLY_URL_PRIVATE_PATH";
+	public static final String FRIENDLY_URL_PRIVATE_GROUP_PATH = "FRIENDLY_URL_PRIVATE_GROUP_PATH";
 
 	public static final String FRIENDLY_URL_PRIVATE_USER_PATH = "FRIENDLY_URL_PRIVATE_USER_PATH";
 

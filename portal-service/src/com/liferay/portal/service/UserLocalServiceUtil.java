@@ -248,15 +248,6 @@ public class UserLocalServiceUtil {
 		return userLocalService.getUserById(userId);
 	}
 
-	public static com.liferay.portal.model.User getUserByDisplayUserId(
-		java.lang.String displayUserId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserByDisplayUserId(displayUserId);
-	}
-
 	public static com.liferay.portal.model.User getUserById(
 		java.lang.String companyId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
@@ -264,6 +255,15 @@ public class UserLocalServiceUtil {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.getUserById(companyId, userId);
+	}
+
+	public static com.liferay.portal.model.User getUserByDisplayUserId(
+		java.lang.String displayUserId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getUserByDisplayUserId(displayUserId);
 	}
 
 	public static java.lang.String getUserId(java.lang.String companyId,

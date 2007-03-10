@@ -356,12 +356,14 @@ public class ThemeDisplay implements Serializable {
 		_pathFlash = pathFlash;
 	}
 
-	public String getPathFriendlyURLPrivate() {
-		return _pathFriendlyURLPrivate;
+	public String getPathFriendlyURLPrivateGroup() {
+		return _pathFriendlyURLPrivateGroup;
 	}
 
-	public void setPathFriendlyURLPrivate(String pathFriendlyURLPrivate) {
-		_pathFriendlyURLPrivate = pathFriendlyURLPrivate;
+	public void setPathFriendlyURLPrivateGroup(
+		String pathFriendlyURLPrivateGroup) {
+
+		_pathFriendlyURLPrivateGroup = pathFriendlyURLPrivateGroup;
 	}
 
 	public String getPathFriendlyURLPrivateUser() {
@@ -370,6 +372,7 @@ public class ThemeDisplay implements Serializable {
 
 	public void setPathFriendlyURLPrivateUser(
 		String pathFriendlyURLPrivateUser) {
+
 		_pathFriendlyURLPrivateUser = pathFriendlyURLPrivateUser;
 	}
 
@@ -647,7 +650,8 @@ public class ThemeDisplay implements Serializable {
 		_pathColorSchemeImage = StringPool.BLANK;
 		_pathContext = StringPool.BLANK;
 		_pathFlash = StringPool.BLANK;
-		_pathFriendlyURLPrivate = StringPool.BLANK;
+		_pathFriendlyURLPrivateGroup = StringPool.BLANK;
+		_pathFriendlyURLPrivateUser = StringPool.BLANK;
 		_pathFriendlyURLPublic = StringPool.BLANK;
 		_pathImage = StringPool.BLANK;
 		_pathJavaScript = StringPool.BLANK;
@@ -712,7 +716,7 @@ public class ThemeDisplay implements Serializable {
 	private String _pathColorSchemeImage = StringPool.BLANK;
 	private String _pathContext = StringPool.BLANK;
 	private String _pathFlash = StringPool.BLANK;
-	private String _pathFriendlyURLPrivate = StringPool.BLANK;
+	private String _pathFriendlyURLPrivateGroup = StringPool.BLANK;
 	private String _pathFriendlyURLPrivateUser = StringPool.BLANK;
 	private String _pathFriendlyURLPublic = StringPool.BLANK;
 	private String _pathImage = StringPool.BLANK;
