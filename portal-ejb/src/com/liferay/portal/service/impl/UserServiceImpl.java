@@ -185,10 +185,10 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return user;
 	}
 
-	public User getUserByDisplayUserId(String displayUserId)
+	public User getUserByScreenName(String screenName)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getUserByDisplayUserId(displayUserId);
+		User user = UserLocalServiceUtil.getUserByScreenName(screenName);
 
 		checkPermission(user.getUserId(), ActionKeys.VIEW);
 

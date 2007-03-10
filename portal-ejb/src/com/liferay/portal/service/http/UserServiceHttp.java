@@ -661,19 +661,19 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.model.User getUserByDisplayUserId(
-		HttpPrincipal httpPrincipal, java.lang.String displayUserId)
+	public static com.liferay.portal.model.User getUserByScreenName(
+		HttpPrincipal httpPrincipal, java.lang.String screenName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = displayUserId;
+			Object paramObj0 = screenName;
 
-			if (displayUserId == null) {
+			if (screenName == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
-					"getUserByDisplayUserId", new Object[] { paramObj0 });
+					"getUserByScreenName", new Object[] { paramObj0 });
 			Object returnObj = null;
 
 			try {

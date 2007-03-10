@@ -715,12 +715,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return UserUtil.findByC_U(companyId, userId);
 	}
 
-	public User getUserByDisplayUserId(String displayUserId)
+	public User getUserByScreenName(String screenName)
 		throws PortalException, SystemException {
 
-		displayUserId = displayUserId.trim().toLowerCase();
+		screenName = screenName.trim().toLowerCase();
 
-		return UserUtil.findByPrimaryKey(displayUserId);
+		return UserUtil.findByPrimaryKey(screenName);
 	}
 
 	public String getUserId(String companyId, String emailAddress)

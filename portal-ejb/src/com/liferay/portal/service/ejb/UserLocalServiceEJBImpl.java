@@ -227,11 +227,11 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		return UserLocalServiceFactory.getTxImpl().getUserById(companyId, userId);
 	}
 
-	public com.liferay.portal.model.User getUserByDisplayUserId(
-		java.lang.String displayUserId)
+	public com.liferay.portal.model.User getUserByScreenName(
+		java.lang.String screenName)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return UserLocalServiceFactory.getTxImpl().getUserByDisplayUserId(displayUserId);
+		return UserLocalServiceFactory.getTxImpl().getUserByScreenName(screenName);
 	}
 
 	public java.lang.String getUserId(java.lang.String companyId,

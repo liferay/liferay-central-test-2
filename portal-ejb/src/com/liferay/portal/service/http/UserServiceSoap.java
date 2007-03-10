@@ -198,10 +198,10 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserSoap getUserByDisplayUserId(
-		java.lang.String displayUserId) throws RemoteException {
+	public static com.liferay.portal.model.UserSoap getUserByScreenName(
+		java.lang.String screenName) throws RemoteException {
 		try {
-			com.liferay.portal.model.User returnValue = UserServiceUtil.getUserByDisplayUserId(displayUserId);
+			com.liferay.portal.model.User returnValue = UserServiceUtil.getUserByScreenName(screenName);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}

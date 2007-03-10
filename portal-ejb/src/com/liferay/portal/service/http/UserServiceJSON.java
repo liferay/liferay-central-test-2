@@ -144,11 +144,10 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject getUserByDisplayUserId(
-		java.lang.String displayUserId)
+	public static JSONObject getUserByScreenName(java.lang.String screenName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.User returnValue = UserServiceUtil.getUserByDisplayUserId(displayUserId);
+		com.liferay.portal.model.User returnValue = UserServiceUtil.getUserByScreenName(screenName);
 
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}

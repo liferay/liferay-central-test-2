@@ -76,15 +76,6 @@ public class UserJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String displayUserId = model.getDisplayUserId();
-
-		if (displayUserId == null) {
-			jsonObj.put("displayUserId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("displayUserId", displayUserId.toString());
-		}
-
 		String contactId = model.getContactId();
 
 		if (contactId == null) {
@@ -116,6 +107,15 @@ public class UserJSONSerializer {
 		}
 
 		jsonObj.put("passwordReset", model.getPasswordReset());
+
+		String screenName = model.getScreenName();
+
+		if (screenName == null) {
+			jsonObj.put("screenName", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("screenName", screenName.toString());
+		}
 
 		String emailAddress = model.getEmailAddress();
 

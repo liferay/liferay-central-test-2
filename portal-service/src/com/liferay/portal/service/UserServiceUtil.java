@@ -145,13 +145,13 @@ public class UserServiceUtil {
 		return userService.getUserById(userId);
 	}
 
-	public static com.liferay.portal.model.User getUserByDisplayUserId(
-		java.lang.String displayUserId)
+	public static com.liferay.portal.model.User getUserByScreenName(
+		java.lang.String screenName)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
-		return userService.getUserByDisplayUserId(displayUserId);
+		return userService.getUserByScreenName(screenName);
 	}
 
 	public static boolean hasGroupUser(long groupId, java.lang.String userId)

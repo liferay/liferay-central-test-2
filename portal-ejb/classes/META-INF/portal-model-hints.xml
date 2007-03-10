@@ -375,12 +375,12 @@
 		<field name="companyId" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="displayUserId" type="String" />
 		<field name="contactId" type="String" />
 		<field name="password" type="String" />
 		<field name="passwordEncrypted" type="boolean" />
 		<field name="passwordExpirationDate" type="Date" />
 		<field name="passwordReset" type="boolean" />
+		<field name="screenName" type="String" />
 		<field name="emailAddress" type="String" />
 		<field name="languageId" type="String" />
 		<field name="timeZoneId" type="String" />

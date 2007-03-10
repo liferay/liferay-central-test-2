@@ -189,10 +189,10 @@ public class FriendlyURLServlet extends HttpServlet {
 		if (group == null) {
 			try {
 				if (_private && _user) {
-					String displayUserId = friendlyURL.substring(1);
+					String screenName = friendlyURL.substring(1);
 
-					User user = UserLocalServiceUtil.getUserByDisplayUserId(
-						displayUserId);
+					User user = UserLocalServiceUtil.getUserByScreenName(
+						screenName);
 
 					group = user.getGroup();
 				}

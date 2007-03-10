@@ -381,12 +381,12 @@
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="displayUserId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="contactId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="password" column="password_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="passwordEncrypted" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="passwordExpirationDate" />
 		<property name="passwordReset" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="screenName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="emailAddress" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="languageId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="timeZoneId" type="com.liferay.util.dao.hibernate.StringType" />

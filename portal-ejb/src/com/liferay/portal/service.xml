@@ -941,12 +941,12 @@
 
 		<!-- Other fields -->
 
-		<column name="displayUserId" type="String" />
 		<column name="contactId" type="String" />
 		<column name="password" type="String" />
 		<column name="passwordEncrypted" type="boolean" />
 		<column name="passwordExpirationDate" type="Date" />
 		<column name="passwordReset" type="boolean" />
+		<column name="screenName" type="String" />
 		<column name="emailAddress" type="String" />
 		<column name="languageId" type="String" />
 		<column name="timeZoneId" type="String" />

@@ -45,12 +45,12 @@ public class UserModelImpl extends BaseModelImpl {
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "displayUserId", new Integer(Types.VARCHAR) },
 			{ "contactId", new Integer(Types.VARCHAR) },
 			{ "password_", new Integer(Types.VARCHAR) },
 			{ "passwordEncrypted", new Integer(Types.BOOLEAN) },
 			{ "passwordExpirationDate", new Integer(Types.TIMESTAMP) },
 			{ "passwordReset", new Integer(Types.BOOLEAN) },
+			{ "screenName", new Integer(Types.VARCHAR) },
 			{ "emailAddress", new Integer(Types.VARCHAR) },
 			{ "languageId", new Integer(Types.VARCHAR) },
 			{ "timeZoneId", new Integer(Types.VARCHAR) },
@@ -73,14 +73,14 @@ public class UserModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DISPLAYUSERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.displayUserId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CONTACTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.contactId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.password"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_SCREENNAME = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.User.screenName"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_EMAILADDRESS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.emailAddress"),
@@ -180,23 +180,6 @@ public class UserModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getDisplayUserId() {
-		return GetterUtil.getString(_displayUserId);
-	}
-
-	public void setDisplayUserId(String displayUserId) {
-		if (((displayUserId == null) && (_displayUserId != null)) ||
-				((displayUserId != null) && (_displayUserId == null)) ||
-				((displayUserId != null) && (_displayUserId != null) &&
-				!displayUserId.equals(_displayUserId))) {
-			if (!XSS_ALLOW_DISPLAYUSERID) {
-				displayUserId = XSSUtil.strip(displayUserId);
-			}
-
-			_displayUserId = displayUserId;
-		}
-	}
-
 	public String getContactId() {
 		return GetterUtil.getString(_contactId);
 	}
@@ -272,6 +255,23 @@ public class UserModelImpl extends BaseModelImpl {
 	public void setPasswordReset(boolean passwordReset) {
 		if (passwordReset != _passwordReset) {
 			_passwordReset = passwordReset;
+		}
+	}
+
+	public String getScreenName() {
+		return GetterUtil.getString(_screenName);
+	}
+
+	public void setScreenName(String screenName) {
+		if (((screenName == null) && (_screenName != null)) ||
+				((screenName != null) && (_screenName == null)) ||
+				((screenName != null) && (_screenName != null) &&
+				!screenName.equals(_screenName))) {
+			if (!XSS_ALLOW_SCREENNAME) {
+				screenName = XSSUtil.strip(screenName);
+			}
+
+			_screenName = screenName;
 		}
 	}
 
@@ -481,12 +481,12 @@ public class UserModelImpl extends BaseModelImpl {
 		clone.setCompanyId(getCompanyId());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setDisplayUserId(getDisplayUserId());
 		clone.setContactId(getContactId());
 		clone.setPassword(getPassword());
 		clone.setPasswordEncrypted(getPasswordEncrypted());
 		clone.setPasswordExpirationDate(getPasswordExpirationDate());
 		clone.setPasswordReset(getPasswordReset());
+		clone.setScreenName(getScreenName());
 		clone.setEmailAddress(getEmailAddress());
 		clone.setLanguageId(getLanguageId());
 		clone.setTimeZoneId(getTimeZoneId());
@@ -547,12 +547,12 @@ public class UserModelImpl extends BaseModelImpl {
 	private String _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _displayUserId;
 	private String _contactId;
 	private String _password;
 	private boolean _passwordEncrypted;
 	private Date _passwordExpirationDate;
 	private boolean _passwordReset;
+	private String _screenName;
 	private String _emailAddress;
 	private String _languageId;
 	private String _timeZoneId;

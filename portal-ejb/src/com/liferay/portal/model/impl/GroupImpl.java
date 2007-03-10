@@ -123,7 +123,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 
-			return StringPool.SLASH + user.getDisplayUserId();
+			return StringPool.SLASH + user.getScreenName();
 		}
 		else {
 			return StringPool.SLASH + String.valueOf(getGroupId());

@@ -149,13 +149,13 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		return UserServiceFactory.getTxImpl().getUserById(userId);
 	}
 
-	public com.liferay.portal.model.User getUserByDisplayUserId(
-		java.lang.String displayUserId)
+	public com.liferay.portal.model.User getUserByScreenName(
+		java.lang.String screenName)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return UserServiceFactory.getTxImpl().getUserByDisplayUserId(displayUserId);
+		return UserServiceFactory.getTxImpl().getUserByScreenName(screenName);
 	}
 
 	public boolean hasGroupUser(long groupId, java.lang.String userId)

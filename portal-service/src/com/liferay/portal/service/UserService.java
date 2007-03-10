@@ -93,8 +93,8 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.User getUserByDisplayUserId(
-		java.lang.String displayUserId)
+	public com.liferay.portal.model.User getUserByScreenName(
+		java.lang.String screenName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

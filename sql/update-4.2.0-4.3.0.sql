@@ -267,8 +267,8 @@ create table TagsSource (
 	acronym VARCHAR(75) null
 );
 
-alter table User_ add displayUserId VARCHAR(75) null;
-update User_ set displayUserId = userId;
+alter table User_ add screenName VARCHAR(75) null;
+update User_ set screenName = userId;
 
 create table UserGroupRole (
 	userId VARCHAR(75) not null,

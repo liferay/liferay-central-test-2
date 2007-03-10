@@ -849,10 +849,10 @@ Liferay.Service.Portal.User = {
 		_$J.getJSON(Liferay.Service.url, params, callback);
 	},
 
-	getUserByDisplayUserId: function(params, callback) {
+	getUserByScreenName: function(params, callback) {
 		params.serviceParameters = Liferay.Service.getParameters(params);
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserByDisplayUserId";
+		params.serviceMethodName = "getUserByScreenName";
 
 		_$J.getJSON(Liferay.Service.url, params, callback);
 	},

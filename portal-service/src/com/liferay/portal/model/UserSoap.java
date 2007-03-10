@@ -41,12 +41,12 @@ public class UserSoap implements Serializable {
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setDisplayUserId(model.getDisplayUserId());
 		soapModel.setContactId(model.getContactId());
 		soapModel.setPassword(model.getPassword());
 		soapModel.setPasswordEncrypted(model.getPasswordEncrypted());
 		soapModel.setPasswordExpirationDate(model.getPasswordExpirationDate());
 		soapModel.setPasswordReset(model.getPasswordReset());
+		soapModel.setScreenName(model.getScreenName());
 		soapModel.setEmailAddress(model.getEmailAddress());
 		soapModel.setLanguageId(model.getLanguageId());
 		soapModel.setTimeZoneId(model.getTimeZoneId());
@@ -118,14 +118,6 @@ public class UserSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getDisplayUserId() {
-		return _displayUserId;
-	}
-
-	public void setDisplayUserId(String displayUserId) {
-		_displayUserId = displayUserId;
-	}
-
 	public String getContactId() {
 		return _contactId;
 	}
@@ -172,6 +164,14 @@ public class UserSoap implements Serializable {
 
 	public void setPasswordReset(boolean passwordReset) {
 		_passwordReset = passwordReset;
+	}
+
+	public String getScreenName() {
+		return _screenName;
+	}
+
+	public void setScreenName(String screenName) {
+		_screenName = screenName;
 	}
 
 	public String getEmailAddress() {
@@ -290,12 +290,12 @@ public class UserSoap implements Serializable {
 	private String _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _displayUserId;
 	private String _contactId;
 	private String _password;
 	private boolean _passwordEncrypted;
 	private Date _passwordExpirationDate;
 	private boolean _passwordReset;
+	private String _screenName;
 	private String _emailAddress;
 	private String _languageId;
 	private String _timeZoneId;
