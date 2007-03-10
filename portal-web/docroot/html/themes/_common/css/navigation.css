@@ -169,6 +169,7 @@
 
 .js .lfr-dock li a {
 	background-position: 0.5em 50%;
+	background-repeat: no-repeat;
 	border-top: 1px solid #ccc;
 	display: block;
 	margin-left: 0.3em;
@@ -254,7 +255,7 @@ li.my-places ul li ul {
 }
 
 .js .my-places .show-my-places li ul {
-	background: url() no-repeat 3px 50%;
+	background: none no-repeat 3px 50%;
 	border: none;
 	display: none;
 }

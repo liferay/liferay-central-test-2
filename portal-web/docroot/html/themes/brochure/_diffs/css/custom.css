@@ -111,7 +111,7 @@ font {
 }
 
 #navigation li a {
-	background: url() no-repeat 0 50%;
+	background: none no-repeat 0 50%;
 	color: #fff;
 	display: block;
 	float: left;
@@ -244,6 +244,10 @@ font {
 
 .ie .tabs li {
 	line-height: 2.25;
+}
+
+.safari .tabs li {
+	line-height: 2.35;
 }
 
 /* ---------- Dock with Javascript ---------- */

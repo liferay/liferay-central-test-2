@@ -2,7 +2,7 @@
 
 #parse($init)
 
-<html class="$css_class" dir="#language("lang.dir")">
+<html dir="#language("lang.dir")">
 
 <head>
 	<title>$the_title</title>
@@ -13,7 +13,7 @@
 	#js($js_main_file)
 </head>
 
-<body class="portal-popup">
+<body class="portal-popup $css_class">
 
 $theme.include($content_include)
 
