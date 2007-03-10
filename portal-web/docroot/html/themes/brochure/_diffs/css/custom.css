@@ -153,8 +153,8 @@ font {
 
 .portlet .portlet-topper {
 	background: none;
-	border-bottom:2px solid #12558e;
-	color:#12558e;
+	border-bottom: 2px solid #12558E;
+	color: #12558E;
 }
 
 .portlet .portlet-title, .portlet .portlet-icons {
@@ -162,7 +162,7 @@ font {
 }
 
 .portlet .portlet-title {
-	color:#12558e;
+	color: #12558E;
 	font-size: 1.2em;
 	font-weight: normal;
 	padding: 5px 3px;
@@ -207,7 +207,7 @@ font {
 /* ---------- Tabs ---------- */
 
 .tabs {
-	border-bottom: 1px solid #2b5a79;
+	border-bottom: 1px solid #2B5A79;
 }
 
 .tabs li {
