@@ -79,6 +79,9 @@
 
 				<move file="${tstamp.value}" tofile="${auto.deploy.dir}/${module.name}.war" />
 			</then>
+			<else>
+				<echo message="Please create ${auto.deploy.dir}" />
+			</else>
 		</if>
 	</target>
 
