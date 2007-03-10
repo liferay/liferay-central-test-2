@@ -64,19 +64,19 @@ public class BookmarksFolderSoap implements Serializable {
 	public BookmarksFolderSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _folderId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setFolderId(pk);
 	}
 
-	public String getFolderId() {
+	public long getFolderId() {
 		return _folderId;
 	}
 
-	public void setFolderId(String folderId) {
+	public void setFolderId(long folderId) {
 		_folderId = folderId;
 	}
 
@@ -120,11 +120,11 @@ public class BookmarksFolderSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getParentFolderId() {
+	public long getParentFolderId() {
 		return _parentFolderId;
 	}
 
-	public void setParentFolderId(String parentFolderId) {
+	public void setParentFolderId(long parentFolderId) {
 		_parentFolderId = parentFolderId;
 	}
 
@@ -144,13 +144,13 @@ public class BookmarksFolderSoap implements Serializable {
 		_description = description;
 	}
 
-	private String _folderId;
+	private long _folderId;
 	private long _groupId;
 	private String _companyId;
 	private String _userId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _parentFolderId;
+	private long _parentFolderId;
 	private String _name;
 	private String _description;
 }

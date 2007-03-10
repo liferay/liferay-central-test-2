@@ -37,7 +37,7 @@ import java.rmi.RemoteException;
  */
 public class BookmarksEntryServiceSoap {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap addEntry(
-		java.lang.String folderId, java.lang.String name, java.lang.String url,
+		long folderId, java.lang.String name, java.lang.String url,
 		java.lang.String comments, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws RemoteException {
@@ -55,7 +55,7 @@ public class BookmarksEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap addEntry(
-		java.lang.String folderId, java.lang.String name, java.lang.String url,
+		long folderId, java.lang.String name, java.lang.String url,
 		java.lang.String comments, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
@@ -72,8 +72,7 @@ public class BookmarksEntryServiceSoap {
 		}
 	}
 
-	public static void deleteEntry(java.lang.String entryId)
-		throws RemoteException {
+	public static void deleteEntry(long entryId) throws RemoteException {
 		try {
 			BookmarksEntryServiceUtil.deleteEntry(entryId);
 		}
@@ -84,7 +83,7 @@ public class BookmarksEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap getEntry(
-		java.lang.String entryId) throws RemoteException {
+		long entryId) throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.getEntry(entryId);
 
@@ -97,7 +96,7 @@ public class BookmarksEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap openEntry(
-		java.lang.String entryId) throws RemoteException {
+		long entryId) throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.openEntry(entryId);
 
@@ -110,8 +109,8 @@ public class BookmarksEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap updateEntry(
-		java.lang.String entryId, java.lang.String folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
+		long entryId, long folderId, java.lang.String name,
+		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries) throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.updateEntry(entryId,

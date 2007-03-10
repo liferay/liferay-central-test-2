@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.bookmarks.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -56,7 +57,7 @@ public class BookmarksFolderLocalServiceImpl
 	extends BookmarksFolderLocalServiceBaseImpl {
 
 	public BookmarksFolder addFolder(
-			String userId, String plid, String parentFolderId, String name,
+			String userId, String plid, long parentFolderId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -68,7 +69,7 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public BookmarksFolder addFolder(
-			String userId, String plid, String parentFolderId, String name,
+			String userId, String plid, long parentFolderId, String name,
 			String description, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -79,7 +80,7 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public BookmarksFolder addFolder(
-			String userId, String plid, String parentFolderId, String name,
+			String userId, String plid, long parentFolderId, String name,
 			String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
@@ -94,8 +95,8 @@ public class BookmarksFolderLocalServiceImpl
 
 		validate(name);
 
-		String folderId = String.valueOf(CounterLocalServiceUtil.increment(
-			BookmarksFolder.class.getName()));
+		long folderId = CounterLocalServiceUtil.increment(
+			Counter.class.getName());
 
 		BookmarksFolder folder = BookmarksFolderUtil.create(folderId);
 
@@ -127,7 +128,7 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public void addFolderResources(
-			String folderId, boolean addCommunityPermissions,
+			long folderId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -144,12 +145,13 @@ public class BookmarksFolderLocalServiceImpl
 
 		ResourceLocalServiceUtil.addResources(
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			BookmarksFolder.class.getName(), folder.getPrimaryKey().toString(),
-			false, addCommunityPermissions, addGuestPermissions);
+			BookmarksFolder.class.getName(),
+			String.valueOf(folder.getPrimaryKey()), false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addFolderResources(
-			String folderId, String[] communityPermissions,
+			long folderId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -165,11 +167,12 @@ public class BookmarksFolderLocalServiceImpl
 
 		ResourceLocalServiceUtil.addModelResources(
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			BookmarksFolder.class.getName(), folder.getPrimaryKey().toString(),
-			communityPermissions, guestPermissions);
+			BookmarksFolder.class.getName(),
+			String.valueOf(folder.getPrimaryKey()), communityPermissions,
+			guestPermissions);
 	}
 
-	public void deleteFolder(String folderId)
+	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
 		BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(folderId);
@@ -200,7 +203,7 @@ public class BookmarksFolderLocalServiceImpl
 		ResourceLocalServiceUtil.deleteResource(
 			folder.getCompanyId(), BookmarksFolder.class.getName(),
 			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			folder.getPrimaryKey().toString());
+			String.valueOf(folder.getPrimaryKey()));
 
 		// Folder
 
@@ -219,28 +222,28 @@ public class BookmarksFolderLocalServiceImpl
 		}
 	}
 
-	public BookmarksFolder getFolder(String folderId)
+	public BookmarksFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
 		return BookmarksFolderUtil.findByPrimaryKey(folderId);
 	}
 
 	public List getFolders(
-			long groupId, String parentFolderId, int begin, int end)
+			long groupId, long parentFolderId, int begin, int end)
 		throws SystemException {
 
 		return BookmarksFolderUtil.findByG_P(
 			groupId, parentFolderId, begin, end);
 	}
 
-	public int getFoldersCount(long groupId, String parentFolderId)
+	public int getFoldersCount(long groupId, long parentFolderId)
 		throws SystemException {
 
 		return BookmarksFolderUtil.countByG_P(groupId, parentFolderId);
 	}
 
 	public void getSubfolderIds(
-			List folderIds, long groupId, String folderId)
+			List folderIds, long groupId, long folderId)
 		throws SystemException {
 
 		Iterator itr = BookmarksFolderUtil.findByG_P(
@@ -249,7 +252,7 @@ public class BookmarksFolderLocalServiceImpl
 		while (itr.hasNext()) {
 			BookmarksFolder folder = (BookmarksFolder)itr.next();
 
-			folderIds.add(folder.getFolderId());
+			folderIds.add(new Long(folder.getFolderId()));
 
 			getSubfolderIds(
 				folderIds, folder.getGroupId(), folder.getFolderId());
@@ -257,7 +260,7 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public BookmarksFolder updateFolder(
-			String folderId, String parentFolderId, String name,
+			long folderId, long parentFolderId, String name,
 			String description, boolean mergeWithParentFolder)
 		throws PortalException, SystemException {
 
@@ -265,7 +268,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(folderId);
 
-		String oldFolderId = folder.getParentFolderId();
+		long oldFolderId = folder.getParentFolderId();
 		parentFolderId = getParentFolderId(folder, parentFolderId);
 
 		validate(name);
@@ -279,9 +282,8 @@ public class BookmarksFolderLocalServiceImpl
 
 		// Merge folders
 
-		if (mergeWithParentFolder && !oldFolderId.equals(parentFolderId) &&
-			!parentFolderId.equals(
-				BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+		if (mergeWithParentFolder && (oldFolderId != parentFolderId) &&
+			(parentFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			mergeFolders(folder, parentFolderId);
 		}
@@ -289,12 +291,10 @@ public class BookmarksFolderLocalServiceImpl
 		return folder;
 	}
 
-	protected String getParentFolderId(long groupId, String parentFolderId)
+	protected long getParentFolderId(long groupId, long parentFolderId)
 		throws SystemException {
 
-		if (!parentFolderId.equals(
-				BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
-
+		if (parentFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			BookmarksFolder parentFolder =
 				BookmarksFolderUtil.fetchByPrimaryKey(parentFolderId);
 
@@ -308,17 +308,15 @@ public class BookmarksFolderLocalServiceImpl
 		return parentFolderId;
 	}
 
-	protected String getParentFolderId(
-			BookmarksFolder folder, String parentFolderId)
+	protected long getParentFolderId(
+			BookmarksFolder folder, long parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId.equals(
-				BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
-
+		if (parentFolderId == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			return parentFolderId;
 		}
 
-		if (folder.getFolderId().equals(parentFolderId)) {
+		if (folder.getFolderId() == parentFolderId) {
 			return folder.getParentFolderId();
 		}
 		else {
@@ -336,7 +334,7 @@ public class BookmarksFolderLocalServiceImpl
 			getSubfolderIds(
 				subfolderIds, folder.getGroupId(), folder.getFolderId());
 
-			if (subfolderIds.contains(parentFolderId)) {
+			if (subfolderIds.contains(new Long(parentFolderId))) {
 				return folder.getParentFolderId();
 			}
 
@@ -344,7 +342,7 @@ public class BookmarksFolderLocalServiceImpl
 		}
 	}
 
-	protected void mergeFolders(BookmarksFolder fromFolder, String toFolderId)
+	protected void mergeFolders(BookmarksFolder fromFolder, long toFolderId)
 		throws PortalException, SystemException {
 
 		Iterator itr = BookmarksFolderUtil.findByG_P(

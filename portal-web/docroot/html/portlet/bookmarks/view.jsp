@@ -29,14 +29,14 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
 BookmarksFolder folder = (BookmarksFolder)request.getAttribute(WebKeys.BOOKMARKS_FOLDER);
 
-String folderId = BeanParamUtil.getString(folder, request, "folderId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long folderId = BeanParamUtil.getLong(folder, request, "folderId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/bookmarks/view");
-portletURL.setParameter("folderId", folderId);
+portletURL.setParameter("folderId", String.valueOf(folderId));
 %>
 
 <form method="post" name="<portlet:namespace />">
@@ -77,14 +77,14 @@ portletURL.setParameter("folderId", folderId);
 		for (int i = 0; i < results.size(); i++) {
 			BookmarksFolder curFolder = (BookmarksFolder)results.get(i);
 
-			ResultRow row = new ResultRow(curFolder, curFolder.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(curFolder, String.valueOf(curFolder.getPrimaryKey()), i);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
 			rowURL.setWindowState(WindowState.MAXIMIZED);
 
 			rowURL.setParameter("struts_action", "/bookmarks/view");
-			rowURL.setParameter("folderId", curFolder.getFolderId());
+			rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 			// Name and description
 
@@ -120,7 +120,7 @@ portletURL.setParameter("folderId", folderId);
 				for (int j = 0; j < subfolders.size(); j++) {
 					BookmarksFolder subfolder = (BookmarksFolder)subfolders.get(j);
 
-					rowURL.setParameter("folderId", subfolder.getFolderId());
+					rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
 
 					sm.append("<a href=\"");
 					sm.append(rowURL);
@@ -133,7 +133,7 @@ portletURL.setParameter("folderId", folderId);
 					}
 				}
 
-				rowURL.setParameter("folderId", curFolder.getFolderId());
+				rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 				sm.append("</span>");
 			}
@@ -144,7 +144,7 @@ portletURL.setParameter("folderId", folderId);
 
 			List subfolderIds = new ArrayList();
 
-			subfolderIds.add(curFolder.getFolderId());
+			subfolderIds.add(new Long(curFolder.getFolderId()));
 
 			BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId.longValue(), curFolder.getFolderId());
 
@@ -165,7 +165,7 @@ portletURL.setParameter("folderId", folderId);
 		%>
 
 		<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER) %>">
-			<input type="button" value='<%= LanguageUtil.get(pageContext, "add-folder") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= folderId %>" /></portlet:renderURL>';"><br>
+			<input type="button" value='<%= LanguageUtil.get(pageContext, "add-folder") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';"><br>
 
 			<c:if test="<%= results.size() > 0 %>">
 				<br>
@@ -204,7 +204,7 @@ portletURL.setParameter("folderId", folderId);
 			for (int i = 0; i < results.size(); i++) {
 				BookmarksEntry entry = (BookmarksEntry)results.get(i);
 
-				ResultRow row = new ResultRow(entry, entry.getPrimaryKey().toString(), i);
+				ResultRow row = new ResultRow(entry, String.valueOf(entry.getPrimaryKey()), i);
 
 				StringMaker sm = new StringMaker();
 
@@ -247,7 +247,7 @@ portletURL.setParameter("folderId", folderId);
 			%>
 
 			<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_ENTRY) %>">
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "add-entry") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>';"><br>
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "add-entry") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';"><br>
 
 				<c:if test="<%= results.size() > 0 %>">
 					<br>
@@ -292,7 +292,7 @@ portletURL.setParameter("folderId", folderId);
 		for (int i = 0; i < results.size(); i++) {
 			BookmarksEntry entry = (BookmarksEntry)results.get(i);
 
-			ResultRow row = new ResultRow(entry, entry.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(entry, String.valueOf(entry.getPrimaryKey()), i);
 
 			StringMaker sm = new StringMaker();
 

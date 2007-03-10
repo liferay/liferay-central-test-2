@@ -41,12 +41,12 @@ import java.util.Date;
 public class BookmarksEntryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "BookmarksEntry";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "entryId", new Integer(Types.VARCHAR) },
+			{ "entryId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "folderId", new Integer(Types.VARCHAR) },
+			{ "folderId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "url", new Integer(Types.VARCHAR) },
 			{ "comments", new Integer(Types.VARCHAR) },
@@ -55,17 +55,11 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ENTRYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.entryId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.companyId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.userId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FOLDERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.folderId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.name"),
@@ -82,27 +76,20 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 	public BookmarksEntryModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _entryId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setEntryId(pk);
 	}
 
-	public String getEntryId() {
-		return GetterUtil.getString(_entryId);
+	public long getEntryId() {
+		return _entryId;
 	}
 
-	public void setEntryId(String entryId) {
-		if (((entryId == null) && (_entryId != null)) ||
-				((entryId != null) && (_entryId == null)) ||
-				((entryId != null) && (_entryId != null) &&
-				!entryId.equals(_entryId))) {
-			if (!XSS_ALLOW_ENTRYID) {
-				entryId = XSSUtil.strip(entryId);
-			}
-
+	public void setEntryId(long entryId) {
+		if (entryId != _entryId) {
 			_entryId = entryId;
 		}
 	}
@@ -167,19 +154,12 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getFolderId() {
-		return GetterUtil.getString(_folderId);
+	public long getFolderId() {
+		return _folderId;
 	}
 
-	public void setFolderId(String folderId) {
-		if (((folderId == null) && (_folderId != null)) ||
-				((folderId != null) && (_folderId == null)) ||
-				((folderId != null) && (_folderId != null) &&
-				!folderId.equals(_folderId))) {
-			if (!XSS_ALLOW_FOLDERID) {
-				folderId = XSSUtil.strip(folderId);
-			}
-
+	public void setFolderId(long folderId) {
+		if (folderId != _folderId) {
 			_folderId = folderId;
 		}
 	}
@@ -266,7 +246,16 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 
 		BookmarksEntryImpl bookmarksEntry = (BookmarksEntryImpl)obj;
 		int value = 0;
-		value = getFolderId().compareTo(bookmarksEntry.getFolderId());
+
+		if (getFolderId() < bookmarksEntry.getFolderId()) {
+			value = -1;
+		}
+		else if (getFolderId() > bookmarksEntry.getFolderId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -296,9 +285,9 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = bookmarksEntry.getPrimaryKey();
+		long pk = bookmarksEntry.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -307,15 +296,15 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _entryId;
+	private long _entryId;
 	private String _companyId;
 	private String _userId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _folderId;
+	private long _folderId;
 	private String _name;
 	private String _url;
 	private String _comments;

@@ -7,7 +7,7 @@
 
 		<!-- PK fields -->
 
-		<column name="entryId" type="String" primary="true" />
+		<column name="entryId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -18,7 +18,7 @@
 
 		<!-- Other fields -->
 
-		<column name="folderId" type="String" />
+		<column name="folderId" type="long" />
 		<column name="name" type="String" />
 		<column name="url" type="String" />
 		<column name="comments" type="String" />
@@ -46,7 +46,7 @@
 
 		<!-- PK fields -->
 
-		<column name="folderId" type="String" primary="true" />
+		<column name="folderId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -61,7 +61,7 @@
 
 		<!-- Other fields -->
 
-		<column name="parentFolderId" type="String" />
+		<column name="parentFolderId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 

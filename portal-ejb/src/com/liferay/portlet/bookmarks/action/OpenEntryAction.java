@@ -51,7 +51,7 @@ public class OpenEntryAction extends Action {
 		throws Exception {
 
 		try {
-			String entryId = ParamUtil.getString(req, "entryId");
+			long entryId = ParamUtil.getLong(req, "entryId");
 
 			BookmarksEntry entry =
 				BookmarksEntryServiceUtil.openEntry(entryId);

@@ -36,7 +36,7 @@ public class BookmarksFolderServiceTest extends BaseServiceTest {
 	public void test() {
 		try {
 			String plid = "PRI.3.1";
-			String parentFolderId = "-1";
+			long parentFolderId = -1;
 			String name = "Test Folder";
 			String description = "This is a test folder.";
 

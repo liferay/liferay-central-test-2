@@ -41,7 +41,7 @@ public class BookmarksFolderServiceImpl
 	extends PrincipalBean implements BookmarksFolderService {
 
 	public BookmarksFolder addFolder(
-			String plid, String parentFolderId, String name, String description,
+			String plid, long parentFolderId, String name, String description,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -55,7 +55,7 @@ public class BookmarksFolderServiceImpl
 	}
 
 	public BookmarksFolder addFolder(
-			String plid, String parentFolderId, String name, String description,
+			String plid, long parentFolderId, String name, String description,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -68,7 +68,7 @@ public class BookmarksFolderServiceImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteFolder(String folderId)
+	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
 		BookmarksFolderPermission.check(
@@ -77,7 +77,7 @@ public class BookmarksFolderServiceImpl
 		BookmarksFolderLocalServiceUtil.deleteFolder(folderId);
 	}
 
-	public BookmarksFolder getFolder(String folderId)
+	public BookmarksFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
 		BookmarksFolderPermission.check(
@@ -87,7 +87,7 @@ public class BookmarksFolderServiceImpl
 	}
 
 	public BookmarksFolder updateFolder(
-			String folderId, String parentFolderId, String name,
+			long folderId, long parentFolderId, String name,
 			String description, boolean mergeWithParentFolder)
 		throws PortalException, SystemException {
 

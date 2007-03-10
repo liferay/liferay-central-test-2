@@ -23,7 +23,6 @@
 package com.liferay.portlet.bookmarks.model.impl;
 
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.util.Validator;
 
 /**
  * <a href="BookmarksFolderImpl.java.html"><b><i>View Source</i></b></a>
@@ -34,13 +33,18 @@ import com.liferay.util.Validator;
 public class BookmarksFolderImpl
 	extends BookmarksFolderModelImpl implements BookmarksFolder {
 
-	public static final String DEFAULT_PARENT_FOLDER_ID = "-1";
+	public static final long DEFAULT_PARENT_FOLDER_ID = -1;
 
 	public BookmarksFolderImpl() {
 	}
 
 	public boolean isRoot() {
-		return Validator.equals(getParentFolderId(), DEFAULT_PARENT_FOLDER_ID);
+		if (getParentFolderId() == DEFAULT_PARENT_FOLDER_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

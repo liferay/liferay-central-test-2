@@ -41,14 +41,7 @@ import java.util.List;
 public class BookmarksEntryJSONSerializer {
 	public static JSONObject toJSONObject(BookmarksEntry model) {
 		JSONObject jsonObj = new JSONObject();
-		String entryId = model.getEntryId();
-
-		if (entryId == null) {
-			jsonObj.put("entryId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("entryId", entryId.toString());
-		}
+		jsonObj.put("entryId", model.getEntryId());
 
 		String companyId = model.getCompanyId();
 
@@ -86,14 +79,7 @@ public class BookmarksEntryJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String folderId = model.getFolderId();
-
-		if (folderId == null) {
-			jsonObj.put("folderId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("folderId", folderId.toString());
-		}
+		jsonObj.put("folderId", model.getFolderId());
 
 		String name = model.getName();
 

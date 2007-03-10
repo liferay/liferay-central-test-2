@@ -27,7 +27,7 @@
 <%
 BookmarksFolder folder = (BookmarksFolder)request.getAttribute(WebKeys.BOOKMARKS_FOLDER);
 
-String folderId = BeanParamUtil.getString(folder, request, "folderId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long folderId = BeanParamUtil.getLong(folder, request, "folderId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 %>
 
 <form method="post" name="<portlet:namespace />fm">
@@ -69,14 +69,14 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	BookmarksFolder curFolder = (BookmarksFolder)results.get(i);
 
-	ResultRow row = new ResultRow(curFolder, curFolder.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(curFolder, String.valueOf(curFolder.getPrimaryKey()), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(LiferayWindowState.POP_UP);
 
 	rowURL.setParameter("struts_action", "/bookmarks/select_folder");
-	rowURL.setParameter("folderId", curFolder.getFolderId());
+	rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 	// Name
 
@@ -86,7 +86,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	List subfolderIds = new ArrayList();
 
-	subfolderIds.add(curFolder.getFolderId());
+	subfolderIds.add(new Long(curFolder.getFolderId()));
 
 	BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId.longValue(), curFolder.getFolderId());
 

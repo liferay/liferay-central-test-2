@@ -42,7 +42,7 @@ public class BookmarksEntryServiceImpl
 	extends PrincipalBean implements BookmarksEntryService {
 
 	public BookmarksEntry addEntry(
-			String folderId, String name, String url, String comments,
+			long folderId, String name, String url, String comments,
 			String[] tagsEntries, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -56,7 +56,7 @@ public class BookmarksEntryServiceImpl
 	}
 
 	public BookmarksEntry addEntry(
-			String folderId, String name, String url, String comments,
+			long folderId, String name, String url, String comments,
 			String[] tagsEntries, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -69,7 +69,7 @@ public class BookmarksEntryServiceImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteEntry(String entryId)
+	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
 		BookmarksEntryPermission.check(
@@ -78,7 +78,7 @@ public class BookmarksEntryServiceImpl
 		BookmarksEntryLocalServiceUtil.deleteEntry(entryId);
 	}
 
-	public BookmarksEntry getEntry(String entryId)
+	public BookmarksEntry getEntry(long entryId)
 		throws PortalException, SystemException {
 
 		BookmarksEntryPermission.check(
@@ -87,7 +87,7 @@ public class BookmarksEntryServiceImpl
 		return BookmarksEntryLocalServiceUtil.getEntry(entryId);
 	}
 
-	public BookmarksEntry openEntry(String entryId)
+	public BookmarksEntry openEntry(long entryId)
 		throws PortalException, SystemException {
 
 		BookmarksEntryPermission.check(
@@ -97,7 +97,7 @@ public class BookmarksEntryServiceImpl
 	}
 
 	public BookmarksEntry updateEntry(
-			String entryId, String folderId, String name, String url,
+			long entryId, long folderId, String name, String url,
 			String comments, String[] tagsEntries)
 		throws PortalException, SystemException {
 

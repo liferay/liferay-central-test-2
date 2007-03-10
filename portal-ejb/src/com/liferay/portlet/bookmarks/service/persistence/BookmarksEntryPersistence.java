@@ -53,7 +53,7 @@ import java.util.List;
  *
  */
 public class BookmarksEntryPersistence extends BasePersistence {
-	public BookmarksEntry create(String entryId) {
+	public BookmarksEntry create(long entryId) {
 		BookmarksEntry bookmarksEntry = new BookmarksEntryImpl();
 		bookmarksEntry.setNew(true);
 		bookmarksEntry.setPrimaryKey(entryId);
@@ -61,7 +61,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		return bookmarksEntry;
 	}
 
-	public BookmarksEntry remove(String entryId)
+	public BookmarksEntry remove(long entryId)
 		throws NoSuchEntryException, SystemException {
 		Session session = null;
 
@@ -69,7 +69,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			session = openSession();
 
 			BookmarksEntry bookmarksEntry = (BookmarksEntry)session.get(BookmarksEntryImpl.class,
-					entryId);
+					new Long(entryId));
 
 			if (bookmarksEntry == null) {
 				if (_log.isWarnEnabled()) {
@@ -146,7 +146,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksEntry findByPrimaryKey(String entryId)
+	public BookmarksEntry findByPrimaryKey(long entryId)
 		throws NoSuchEntryException, SystemException {
 		BookmarksEntry bookmarksEntry = fetchByPrimaryKey(entryId);
 
@@ -163,14 +163,15 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		return bookmarksEntry;
 	}
 
-	public BookmarksEntry fetchByPrimaryKey(String entryId)
+	public BookmarksEntry fetchByPrimaryKey(long entryId)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (BookmarksEntry)session.get(BookmarksEntryImpl.class, entryId);
+			return (BookmarksEntry)session.get(BookmarksEntryImpl.class,
+				new Long(entryId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -180,7 +181,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByFolderId(String folderId) throws SystemException {
+	public List findByFolderId(long folderId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -189,14 +190,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("folderId ASC").append(", ");
@@ -206,10 +200,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			return q.list();
 		}
@@ -221,12 +212,12 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByFolderId(String folderId, int begin, int end)
+	public List findByFolderId(long folderId, int begin, int end)
 		throws SystemException {
 		return findByFolderId(folderId, begin, end, null);
 	}
 
-	public List findByFolderId(String folderId, int begin, int end,
+	public List findByFolderId(long folderId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -236,14 +227,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -260,10 +244,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -275,7 +256,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksEntry findByFolderId_First(String folderId,
+	public BookmarksEntry findByFolderId_First(long folderId,
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		List list = findByFolderId(folderId, 0, 1, obc);
 
@@ -293,7 +274,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksEntry findByFolderId_Last(String folderId,
+	public BookmarksEntry findByFolderId_Last(long folderId,
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		int count = countByFolderId(folderId);
 		List list = findByFolderId(folderId, count - 1, count, obc);
@@ -312,8 +293,8 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksEntry[] findByFolderId_PrevAndNext(String entryId,
-		String folderId, OrderByComparator obc)
+	public BookmarksEntry[] findByFolderId_PrevAndNext(long entryId,
+		long folderId, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
 		BookmarksEntry bookmarksEntry = findByPrimaryKey(entryId);
 		int count = countByFolderId(folderId);
@@ -325,14 +306,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -349,10 +323,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					bookmarksEntry);
@@ -452,7 +423,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByFolderId(String folderId) throws SystemException {
+	public void removeByFolderId(long folderId) throws SystemException {
 		Iterator itr = findByFolderId(folderId).iterator();
 
 		while (itr.hasNext()) {
@@ -469,7 +440,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByFolderId(String folderId) throws SystemException {
+	public int countByFolderId(long folderId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -479,24 +450,14 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			Iterator itr = q.list().iterator();
 

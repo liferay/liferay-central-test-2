@@ -478,12 +478,12 @@
 		<field name="displayDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.bookmarks.model.BookmarksEntry">
-		<field name="entryId" type="String" />
+		<field name="entryId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="folderId" type="String" />
+		<field name="folderId" type="long" />
 		<field name="name" type="String" />
 		<field name="url" type="String">
 			<hint name="max-length">4000</hint>
@@ -494,13 +494,13 @@
 		<field name="visits" type="int" />
 	</model>
 	<model name="com.liferay.portlet.bookmarks.model.BookmarksFolder">
-		<field name="folderId" type="String" />
+		<field name="folderId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="parentFolderId" type="String" />
+		<field name="parentFolderId" type="long" />
 		<field name="name" type="String" />
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />

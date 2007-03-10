@@ -37,10 +37,9 @@ import java.rmi.RemoteException;
  */
 public class BookmarksFolderServiceSoap {
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolderSoap addFolder(
-		java.lang.String plid, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws RemoteException {
+		java.lang.String plid, long parentFolderId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.addFolder(plid,
 					parentFolderId, name, description, addCommunityPermissions,
@@ -55,9 +54,8 @@ public class BookmarksFolderServiceSoap {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolderSoap addFolder(
-		java.lang.String plid, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+		java.lang.String plid, long parentFolderId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.addFolder(plid,
@@ -72,8 +70,7 @@ public class BookmarksFolderServiceSoap {
 		}
 	}
 
-	public static void deleteFolder(java.lang.String folderId)
-		throws RemoteException {
+	public static void deleteFolder(long folderId) throws RemoteException {
 		try {
 			BookmarksFolderServiceUtil.deleteFolder(folderId);
 		}
@@ -84,7 +81,7 @@ public class BookmarksFolderServiceSoap {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolderSoap getFolder(
-		java.lang.String folderId) throws RemoteException {
+		long folderId) throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.getFolder(folderId);
 
@@ -97,9 +94,9 @@ public class BookmarksFolderServiceSoap {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolderSoap updateFolder(
-		java.lang.String folderId, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentFolder) throws RemoteException {
+		long folderId, long parentFolderId, java.lang.String name,
+		java.lang.String description, boolean mergeWithParentFolder)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.updateFolder(folderId,
 					parentFolderId, name, description, mergeWithParentFolder);

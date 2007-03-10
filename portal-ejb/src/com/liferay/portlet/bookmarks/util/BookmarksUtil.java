@@ -29,7 +29,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -47,11 +46,11 @@ import javax.servlet.jsp.PageContext;
 public class BookmarksUtil {
 
 	public static String getBreadcrumbs(
-			String folderId, String entryId, PageContext pageContext,
+			long folderId, long entryId, PageContext pageContext,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		if (Validator.isNotNull(entryId)) {
+		if (entryId > 0) {
 			BookmarksEntry entry =
 				BookmarksEntryLocalServiceUtil.getEntry(entryId);
 
@@ -114,13 +113,15 @@ public class BookmarksUtil {
 
 					portletURL.setParameter(
 						"struts_action", "/bookmarks/select_folder");
-					portletURL.setParameter("folderId", folder.getFolderId());
+					portletURL.setParameter(
+						"folderId", String.valueOf(folder.getFolderId()));
 				}
 				else {
 					portletURL.setWindowState(WindowState.MAXIMIZED);
 
 					portletURL.setParameter("struts_action", "/bookmarks/view");
-					portletURL.setParameter("folderId", folder.getFolderId());
+					portletURL.setParameter(
+						"folderId", String.valueOf(folder.getFolderId()));
 				}
 
 				String folderLink =
@@ -151,7 +152,8 @@ public class BookmarksUtil {
 			entryURL.setWindowState(WindowState.MAXIMIZED);
 
 			entryURL.setParameter("struts_action", "/bookmarks/edit_entry");
-			entryURL.setParameter("entryId", entry.getEntryId());
+			entryURL.setParameter("entryId",
+				String.valueOf(entry.getEntryId()));
 
 			String entryLink =
 				"<a href=\"" + entryURL.toString() + "\">" +

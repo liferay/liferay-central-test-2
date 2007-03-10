@@ -26,11 +26,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -58,13 +56,11 @@ public class ActionUtil {
 	}
 
 	public static void getFolder(HttpServletRequest req) throws Exception {
-		String folderId = ParamUtil.getString(req, "folderId");
+		long folderId = ParamUtil.getLong(req, "folderId");
 
 		BookmarksFolder folder = null;
 
-		if (Validator.isNotNull(folderId) &&
-			!folderId.equals(BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
-
+		if (folderId > 0) {
 			folder = BookmarksFolderServiceUtil.getFolder(folderId);
 		}
 
@@ -84,11 +80,11 @@ public class ActionUtil {
 	}
 
 	public static void getEntry(HttpServletRequest req) throws Exception {
-		String entryId = ParamUtil.getString(req, "entryId");
+		long entryId = ParamUtil.getLong(req, "entryId");
 
 		BookmarksEntry entry = null;
 
-		if (Validator.isNotNull(entryId)) {
+		if (entryId > 0) {
 			entry = BookmarksEntryServiceUtil.getEntry(entryId);
 		}
 

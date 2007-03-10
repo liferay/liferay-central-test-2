@@ -497,14 +497,14 @@
 	</class>
 	<class name="com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl" table="BookmarksEntry">
 		<cache usage="read-write" />
-		<id name="entryId" type="java.lang.String">
+		<id name="entryId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="folderId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="folderId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="url" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="comments" type="com.liferay.util.dao.hibernate.StringType" />
@@ -512,7 +512,7 @@
 	</class>
 	<class name="com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl" table="BookmarksFolder">
 		<cache usage="read-write" />
-		<id name="folderId" type="java.lang.String">
+		<id name="folderId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
@@ -520,7 +520,7 @@
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="parentFolderId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="parentFolderId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>

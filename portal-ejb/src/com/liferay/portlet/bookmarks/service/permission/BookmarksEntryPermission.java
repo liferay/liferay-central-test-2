@@ -39,7 +39,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 public class BookmarksEntryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String entryId,
+			PermissionChecker permissionChecker, long entryId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -59,7 +59,7 @@ public class BookmarksEntryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String entryId,
+			PermissionChecker permissionChecker, long entryId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -77,7 +77,7 @@ public class BookmarksEntryPermission {
 
 		return permissionChecker.hasPermission(
 			folder.getGroupId(), BookmarksEntry.class.getName(),
-			entry.getPrimaryKey().toString(), actionId);
+			String.valueOf(entry.getPrimaryKey()), actionId);
 	}
 
 }

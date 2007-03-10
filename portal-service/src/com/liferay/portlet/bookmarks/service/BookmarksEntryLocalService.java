@@ -38,16 +38,16 @@ public interface BookmarksEntryLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String userId, long folderId, java.lang.String name,
+		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String userId, long folderId, java.lang.String name,
+		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -55,8 +55,8 @@ public interface BookmarksEntryLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String userId, long folderId, java.lang.String name,
+		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
@@ -65,9 +65,8 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addEntryResources(java.lang.String folderId,
-		java.lang.String entryId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public void addEntryResources(long folderId, long entryId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -78,8 +77,8 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addEntryResources(java.lang.String folderId,
-		java.lang.String entryId, java.lang.String[] communityPermissions,
+	public void addEntryResources(long folderId, long entryId,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -92,11 +91,11 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteEntries(java.lang.String folderId)
+	public void deleteEntries(long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteEntry(java.lang.String entryId)
+	public void deleteEntry(long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -105,14 +104,14 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getEntries(java.lang.String folderId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List getEntries(long folderId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public int getEntriesCount(java.lang.String folderId)
+	public int getEntriesCount(long folderId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry getEntry(
-		java.lang.String entryId)
+		long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -133,14 +132,14 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
-		java.lang.String entryId)
+		long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
-		java.lang.String companyId, java.lang.String entryId,
-		java.lang.String folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments, java.lang.String[] tagsEntries)
+		java.lang.String companyId, long entryId, long folderId,
+		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

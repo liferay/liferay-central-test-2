@@ -53,7 +53,7 @@ import java.util.List;
  *
  */
 public class BookmarksFolderPersistence extends BasePersistence {
-	public BookmarksFolder create(String folderId) {
+	public BookmarksFolder create(long folderId) {
 		BookmarksFolder bookmarksFolder = new BookmarksFolderImpl();
 		bookmarksFolder.setNew(true);
 		bookmarksFolder.setPrimaryKey(folderId);
@@ -61,7 +61,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		return bookmarksFolder;
 	}
 
-	public BookmarksFolder remove(String folderId)
+	public BookmarksFolder remove(long folderId)
 		throws NoSuchFolderException, SystemException {
 		Session session = null;
 
@@ -69,7 +69,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			session = openSession();
 
 			BookmarksFolder bookmarksFolder = (BookmarksFolder)session.get(BookmarksFolderImpl.class,
-					folderId);
+					new Long(folderId));
 
 			if (bookmarksFolder == null) {
 				if (_log.isWarnEnabled()) {
@@ -147,7 +147,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksFolder findByPrimaryKey(String folderId)
+	public BookmarksFolder findByPrimaryKey(long folderId)
 		throws NoSuchFolderException, SystemException {
 		BookmarksFolder bookmarksFolder = fetchByPrimaryKey(folderId);
 
@@ -164,7 +164,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		return bookmarksFolder;
 	}
 
-	public BookmarksFolder fetchByPrimaryKey(String folderId)
+	public BookmarksFolder fetchByPrimaryKey(long folderId)
 		throws SystemException {
 		Session session = null;
 
@@ -172,7 +172,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			session = openSession();
 
 			return (BookmarksFolder)session.get(BookmarksFolderImpl.class,
-				folderId);
+				new Long(folderId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -294,7 +294,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksFolder[] findByGroupId_PrevAndNext(String folderId,
+	public BookmarksFolder[] findByGroupId_PrevAndNext(long folderId,
 		long groupId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		BookmarksFolder bookmarksFolder = findByPrimaryKey(folderId);
@@ -343,7 +343,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_P(long groupId, String parentFolderId)
+	public List findByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		Session session = null;
 
@@ -355,14 +355,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentFolderId ASC").append(", ");
@@ -373,10 +366,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			return q.list();
 		}
@@ -388,12 +378,12 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_P(long groupId, String parentFolderId, int begin,
-		int end) throws SystemException {
+	public List findByG_P(long groupId, long parentFolderId, int begin, int end)
+		throws SystemException {
 		return findByG_P(groupId, parentFolderId, begin, end, null);
 	}
 
-	public List findByG_P(long groupId, String parentFolderId, int begin,
+	public List findByG_P(long groupId, long parentFolderId, int begin,
 		int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -405,14 +395,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -430,10 +413,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -445,7 +425,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksFolder findByG_P_First(long groupId, String parentFolderId,
+	public BookmarksFolder findByG_P_First(long groupId, long parentFolderId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
@@ -466,7 +446,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksFolder findByG_P_Last(long groupId, String parentFolderId,
+	public BookmarksFolder findByG_P_Last(long groupId, long parentFolderId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		int count = countByG_P(groupId, parentFolderId);
 		List list = findByG_P(groupId, parentFolderId, count - 1, count, obc);
@@ -488,8 +468,8 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksFolder[] findByG_P_PrevAndNext(String folderId,
-		long groupId, String parentFolderId, OrderByComparator obc)
+	public BookmarksFolder[] findByG_P_PrevAndNext(long folderId, long groupId,
+		long parentFolderId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		BookmarksFolder bookmarksFolder = findByPrimaryKey(folderId);
 		int count = countByG_P(groupId, parentFolderId);
@@ -503,14 +483,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -528,10 +501,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					bookmarksFolder);
@@ -640,7 +610,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByG_P(long groupId, String parentFolderId)
+	public void removeByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		Iterator itr = findByG_P(groupId, parentFolderId).iterator();
 
@@ -697,7 +667,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByG_P(long groupId, String parentFolderId)
+	public int countByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		Session session = null;
 
@@ -710,14 +680,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -725,10 +688,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			Iterator itr = q.list().iterator();
 

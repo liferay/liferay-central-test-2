@@ -31,7 +31,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
-import com.liferay.util.Validator;
 
 /**
  * <a href="BookmarksFolderPermission.java.html"><b><i>View Source</i></b></a>
@@ -42,7 +41,7 @@ import com.liferay.util.Validator;
 public class BookmarksFolderPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String plid, String folderId,
+			PermissionChecker permissionChecker, String plid, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -52,7 +51,7 @@ public class BookmarksFolderPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, String folderId,
+			PermissionChecker permissionChecker, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -72,13 +71,11 @@ public class BookmarksFolderPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String plid, String folderId,
+			PermissionChecker permissionChecker, String plid, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (Validator.equals(
-				folderId, BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
-
+		if (folderId == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			return PortletPermission.contains(
 				permissionChecker, plid, PortletKeys.BOOKMARKS, actionId);
 		}
@@ -88,7 +85,7 @@ public class BookmarksFolderPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String folderId,
+			PermissionChecker permissionChecker, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -105,7 +102,7 @@ public class BookmarksFolderPermission {
 
 		return permissionChecker.hasPermission(
 			folder.getGroupId(), BookmarksFolder.class.getName(),
-			folder.getPrimaryKey().toString(), actionId);
+			String.valueOf(folder.getPrimaryKey()), actionId);
 	}
 
 }

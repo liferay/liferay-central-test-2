@@ -33,13 +33,13 @@ import java.util.Date;
  *
  */
 public interface BookmarksEntryModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getEntryId();
+	public long getEntryId();
 
-	public void setEntryId(String entryId);
+	public void setEntryId(long entryId);
 
 	public String getCompanyId();
 
@@ -57,9 +57,9 @@ public interface BookmarksEntryModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public String getFolderId();
+	public long getFolderId();
 
-	public void setFolderId(String folderId);
+	public void setFolderId(long folderId);
 
 	public String getName();
 

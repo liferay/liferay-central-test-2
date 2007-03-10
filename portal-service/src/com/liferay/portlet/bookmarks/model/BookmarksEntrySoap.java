@@ -65,19 +65,19 @@ public class BookmarksEntrySoap implements Serializable {
 	public BookmarksEntrySoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _entryId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setEntryId(pk);
 	}
 
-	public String getEntryId() {
+	public long getEntryId() {
 		return _entryId;
 	}
 
-	public void setEntryId(String entryId) {
+	public void setEntryId(long entryId) {
 		_entryId = entryId;
 	}
 
@@ -113,11 +113,11 @@ public class BookmarksEntrySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getFolderId() {
+	public long getFolderId() {
 		return _folderId;
 	}
 
-	public void setFolderId(String folderId) {
+	public void setFolderId(long folderId) {
 		_folderId = folderId;
 	}
 
@@ -153,12 +153,12 @@ public class BookmarksEntrySoap implements Serializable {
 		_visits = visits;
 	}
 
-	private String _entryId;
+	private long _entryId;
 	private String _companyId;
 	private String _userId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _folderId;
+	private long _folderId;
 	private String _name;
 	private String _url;
 	private String _comments;

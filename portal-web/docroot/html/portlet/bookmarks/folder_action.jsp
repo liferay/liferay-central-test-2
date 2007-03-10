@@ -34,7 +34,7 @@ BookmarksFolder folder = (BookmarksFolder)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/bookmarks/edit_folder" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="folderId" value="<%= folder.getFolderId() %>" />
+		<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -44,7 +44,7 @@ BookmarksFolder folder = (BookmarksFolder)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= BookmarksFolder.class.getName() %>"
 		modelResourceDescription="<%= folder.getName() %>"
-		resourcePrimKey="<%= folder.getPrimaryKey().toString() %>"
+		resourcePrimKey="<%= String.valueOf(folder.getPrimaryKey()) %>"
 		var="permissionsURL"
 	/>
 
@@ -56,7 +56,7 @@ BookmarksFolder folder = (BookmarksFolder)row.getObject();
 		<portlet:param name="struts_action" value="/bookmarks/edit_folder" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="folderId" value="<%= folder.getFolderId() %>" />
+		<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />

@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class BookmarksEntryUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry create(
-		java.lang.String entryId) {
+		long entryId) {
 		return getPersistence().create(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry remove(
-		java.lang.String entryId)
+		long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.bookmarks.NoSuchEntryException {
 		ModelListener listener = _getListener();
@@ -140,51 +140,49 @@ public class BookmarksEntryUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByPrimaryKey(
-		java.lang.String entryId)
+		long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.bookmarks.NoSuchEntryException {
 		return getPersistence().findByPrimaryKey(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry fetchByPrimaryKey(
-		java.lang.String entryId) throws com.liferay.portal.SystemException {
+		long entryId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(entryId);
 	}
 
-	public static java.util.List findByFolderId(java.lang.String folderId)
+	public static java.util.List findByFolderId(long folderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId);
 	}
 
-	public static java.util.List findByFolderId(java.lang.String folderId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByFolderId(long folderId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId, begin, end);
 	}
 
-	public static java.util.List findByFolderId(java.lang.String folderId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByFolderId(long folderId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByFolderId_First(
-		java.lang.String folderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.bookmarks.NoSuchEntryException {
 		return getPersistence().findByFolderId_First(folderId, obc);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByFolderId_Last(
-		java.lang.String folderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.bookmarks.NoSuchEntryException {
 		return getPersistence().findByFolderId_Last(folderId, obc);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry[] findByFolderId_PrevAndNext(
-		java.lang.String entryId, java.lang.String folderId,
+		long entryId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.bookmarks.NoSuchEntryException {
@@ -221,7 +219,7 @@ public class BookmarksEntryUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByFolderId(java.lang.String folderId)
+	public static void removeByFolderId(long folderId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByFolderId(folderId);
 	}
@@ -230,7 +228,7 @@ public class BookmarksEntryUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByFolderId(java.lang.String folderId)
+	public static int countByFolderId(long folderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByFolderId(folderId);
 	}

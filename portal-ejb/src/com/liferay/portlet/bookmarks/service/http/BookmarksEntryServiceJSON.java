@@ -33,8 +33,8 @@ import org.json.JSONObject;
  *
  */
 public class BookmarksEntryServiceJSON {
-	public static JSONObject addEntry(java.lang.String folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
+	public static JSONObject addEntry(long folderId, java.lang.String name,
+		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -46,8 +46,8 @@ public class BookmarksEntryServiceJSON {
 		return BookmarksEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addEntry(java.lang.String folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
+	public static JSONObject addEntry(long folderId, java.lang.String name,
+		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -60,13 +60,13 @@ public class BookmarksEntryServiceJSON {
 		return BookmarksEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteEntry(java.lang.String entryId)
+	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		BookmarksEntryServiceUtil.deleteEntry(entryId);
 	}
 
-	public static JSONObject getEntry(java.lang.String entryId)
+	public static JSONObject getEntry(long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.getEntry(entryId);
@@ -74,7 +74,7 @@ public class BookmarksEntryServiceJSON {
 		return BookmarksEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject openEntry(java.lang.String entryId)
+	public static JSONObject openEntry(long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.openEntry(entryId);
@@ -82,9 +82,9 @@ public class BookmarksEntryServiceJSON {
 		return BookmarksEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateEntry(java.lang.String entryId,
-		java.lang.String folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments, java.lang.String[] tagsEntries)
+	public static JSONObject updateEntry(long entryId, long folderId,
+		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.updateEntry(entryId,

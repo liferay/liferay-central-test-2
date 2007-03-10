@@ -57,7 +57,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 		}
 	}
 
-	private void _upgradeEntry(String folderId) throws Exception {
+	private void _upgradeEntry(long folderId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -67,12 +67,12 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_ENTRY);
 
-			ps.setString(1, folderId);
+			ps.setLong(1, folderId);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String entryId = rs.getString("entryId");
+				long entryId = rs.getLong("entryId");
 
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
@@ -104,7 +104,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String folderId = rs.getString("folderId");
+				long folderId = rs.getLong("folderId");
 
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;

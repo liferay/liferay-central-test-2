@@ -65,12 +65,12 @@ create table BlogsEntry (
 );
 
 create table BookmarksEntry (
-	entryId VARCHAR(75) not null primary key,
+	entryId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	folderId VARCHAR(75) null,
+	folderId LONG,
 	name VARCHAR(75) null,
 	url STRING null,
 	comments STRING null,
@@ -78,13 +78,13 @@ create table BookmarksEntry (
 );
 
 create table BookmarksFolder (
-	folderId VARCHAR(75) not null primary key,
+	folderId LONG not null primary key,
 	groupId LONG not null,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	parentFolderId VARCHAR(75) null,
+	parentFolderId LONG,
 	name VARCHAR(75) null,
 	description STRING null
 );

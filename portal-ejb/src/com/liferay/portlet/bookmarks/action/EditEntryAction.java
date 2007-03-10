@@ -31,7 +31,6 @@ import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -113,15 +112,15 @@ public class EditEntryAction extends PortletAction {
 	}
 
 	protected void deleteEntry(ActionRequest req) throws Exception {
-		String entryId = ParamUtil.getString(req, "entryId");
+		long entryId = ParamUtil.getLong(req, "entryId");
 
 		BookmarksEntryServiceUtil.deleteEntry(entryId);
 	}
 
 	protected void updateEntry(ActionRequest req) throws Exception {
-		String entryId = ParamUtil.getString(req, "entryId");
+		long entryId = ParamUtil.getLong(req, "entryId");
 
-		String folderId = ParamUtil.getString(req, "folderId");
+		long folderId = ParamUtil.getLong(req, "folderId");
 		String name = ParamUtil.getString(req, "name");
 		String url = ParamUtil.getString(req, "url");
 		String comments = ParamUtil.getString(req, "comments");
@@ -134,7 +133,7 @@ public class EditEntryAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (Validator.isNull(entryId)) {
+		if (entryId <= 0) {
 
 			// Add entry
 

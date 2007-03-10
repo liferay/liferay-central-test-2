@@ -29,9 +29,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 BookmarksFolder folder = (BookmarksFolder)request.getAttribute(WebKeys.BOOKMARKS_FOLDER);
 
-String folderId = BeanParamUtil.getString(folder, request, "folderId");
+long folderId = BeanParamUtil.getLong(folder, request, "folderId");
 
-String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 %>
 
 <script type="text/javascript">
@@ -69,8 +69,8 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
-<c:if test="<%= !parentFolderId.equals(BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) %>">
-	<%= BookmarksUtil.getBreadcrumbs(parentFolderId, null, pageContext, renderRequest, renderResponse) %>
+<c:if test="<%= parentFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID %>">
+	<%= BookmarksUtil.getBreadcrumbs(parentFolderId, -1, pageContext, renderRequest, renderResponse) %>
 
 	<br><br>
 </c:if>
@@ -100,11 +100,11 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 					}
 					%>
 
-					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/view" /><portlet:param name="folderId" value="<%= parentFolderId %>" /></portlet:renderURL>" id="<portlet:namespace />parentFolderName">
+					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/view" /><portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" /></portlet:renderURL>" id="<portlet:namespace />parentFolderName">
 					<%= parentFolderName %>
 					</a>
 
-					<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/bookmarks/select_folder" /><portlet:param name="folderId" value="<%= parentFolderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
+					<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/bookmarks/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
 
 					<input id="<portlet:namespace />removeFolderButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeFolder();">
 				</td>
