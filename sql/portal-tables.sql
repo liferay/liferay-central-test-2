@@ -941,7 +941,7 @@ create table ShoppingOrderItem (
 );
 
 create table Subscription (
-	subscriptionId VARCHAR(75) not null primary key,
+	subscriptionId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,

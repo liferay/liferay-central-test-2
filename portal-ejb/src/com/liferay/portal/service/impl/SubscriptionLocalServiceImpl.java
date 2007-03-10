@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.PortalException;
@@ -61,8 +62,8 @@ public class SubscriptionLocalServiceImpl
 		User user = UserUtil.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		String subscriptionId = String.valueOf(
-			CounterLocalServiceUtil.increment(Subscription.class.getName()));
+		long subscriptionId = CounterLocalServiceUtil.increment(
+			Counter.class.getName());
 
 		Subscription subscription = SubscriptionUtil.create(subscriptionId);
 

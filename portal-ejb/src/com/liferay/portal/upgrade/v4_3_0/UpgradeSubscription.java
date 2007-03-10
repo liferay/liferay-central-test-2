@@ -20,56 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.impl.SubscriptionImpl;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
 
-import java.util.Date;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="SubscriptionModel.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeSubscription.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public interface SubscriptionModel extends BaseModel {
-	public long getPrimaryKey();
+public class UpgradeSubscription extends UpgradeProcess {
 
-	public void setPrimaryKey(long pk);
+	public void upgrade() throws UpgradeException {
+		_log.info("Upgrading");
 
-	public long getSubscriptionId();
+		try {
+			_upgradeSubscription();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
+	}
 
-	public void setSubscriptionId(long subscriptionId);
+	private void _upgradeSubscription() throws Exception {
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			SubscriptionImpl.TABLE_NAME, SubscriptionImpl.TABLE_COLUMNS,
+			new PKUpgradeColumnImpl());
 
-	public String getCompanyId();
+		upgradeTable.updateTable();
+	}
 
-	public void setCompanyId(String companyId);
+	private static Log _log = LogFactory.getLog(UpgradeSubscription.class);
 
-	public String getUserId();
-
-	public void setUserId(String userId);
-
-	public String getUserName();
-
-	public void setUserName(String userName);
-
-	public Date getCreateDate();
-
-	public void setCreateDate(Date createDate);
-
-	public Date getModifiedDate();
-
-	public void setModifiedDate(Date modifiedDate);
-
-	public String getClassName();
-
-	public void setClassName(String className);
-
-	public String getClassPK();
-
-	public void setClassPK(String classPK);
-
-	public String getFrequency();
-
-	public void setFrequency(String frequency);
 }

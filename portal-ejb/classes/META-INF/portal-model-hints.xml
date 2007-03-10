@@ -357,7 +357,7 @@
 		<field name="type" type="int" />
 	</model>
 	<model name="com.liferay.portal.model.Subscription">
-		<field name="subscriptionId" type="String" />
+		<field name="subscriptionId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />

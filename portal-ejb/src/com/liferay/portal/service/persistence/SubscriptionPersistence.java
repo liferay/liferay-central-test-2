@@ -52,7 +52,7 @@ import java.util.List;
  *
  */
 public class SubscriptionPersistence extends BasePersistence {
-	public Subscription create(String subscriptionId) {
+	public Subscription create(long subscriptionId) {
 		Subscription subscription = new SubscriptionImpl();
 		subscription.setNew(true);
 		subscription.setPrimaryKey(subscriptionId);
@@ -60,7 +60,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		return subscription;
 	}
 
-	public Subscription remove(String subscriptionId)
+	public Subscription remove(long subscriptionId)
 		throws NoSuchSubscriptionException, SystemException {
 		Session session = null;
 
@@ -68,7 +68,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			Subscription subscription = (Subscription)session.get(SubscriptionImpl.class,
-					subscriptionId);
+					new Long(subscriptionId));
 
 			if (subscription == null) {
 				if (_log.isWarnEnabled()) {
@@ -146,7 +146,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public Subscription findByPrimaryKey(String subscriptionId)
+	public Subscription findByPrimaryKey(long subscriptionId)
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = fetchByPrimaryKey(subscriptionId);
 
@@ -164,7 +164,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		return subscription;
 	}
 
-	public Subscription fetchByPrimaryKey(String subscriptionId)
+	public Subscription fetchByPrimaryKey(long subscriptionId)
 		throws SystemException {
 		Session session = null;
 
@@ -172,7 +172,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			return (Subscription)session.get(SubscriptionImpl.class,
-				subscriptionId);
+				new Long(subscriptionId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -304,7 +304,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public Subscription[] findByUserId_PrevAndNext(String subscriptionId,
+	public Subscription[] findByUserId_PrevAndNext(long subscriptionId,
 		String userId, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
@@ -547,7 +547,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public Subscription[] findByC_C_C_PrevAndNext(String subscriptionId,
+	public Subscription[] findByC_C_C_PrevAndNext(long subscriptionId,
 		String companyId, String className, String classPK,
 		OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {

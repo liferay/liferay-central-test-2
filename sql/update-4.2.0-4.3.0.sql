@@ -212,6 +212,8 @@ alter_column_type ShoppingCoupon groupId LONG;
 
 alter_column_type ShoppingOrder groupId LONG;
 
+alter_column_type Subscription subscriptionId LONG;
+
 create table TagsAsset (
 	assetId LONG not null primary key,
 	companyId VARCHAR(75) not null,

@@ -64,19 +64,19 @@ public class SubscriptionSoap implements Serializable {
 	public SubscriptionSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _subscriptionId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setSubscriptionId(pk);
 	}
 
-	public String getSubscriptionId() {
+	public long getSubscriptionId() {
 		return _subscriptionId;
 	}
 
-	public void setSubscriptionId(String subscriptionId) {
+	public void setSubscriptionId(long subscriptionId) {
 		_subscriptionId = subscriptionId;
 	}
 
@@ -144,7 +144,7 @@ public class SubscriptionSoap implements Serializable {
 		_frequency = frequency;
 	}
 
-	private String _subscriptionId;
+	private long _subscriptionId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

@@ -894,7 +894,7 @@
 
 		<!-- PK fields -->
 
-		<column name="subscriptionId" type="String" primary="true" />
+		<column name="subscriptionId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 

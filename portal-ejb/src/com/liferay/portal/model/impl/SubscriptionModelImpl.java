@@ -41,7 +41,7 @@ import java.util.Date;
 public class SubscriptionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Subscription";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "subscriptionId", new Integer(Types.VARCHAR) },
+			{ "subscriptionId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "userName", new Integer(Types.VARCHAR) },
@@ -53,9 +53,6 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Subscription"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_SUBSCRIPTIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Subscription.subscriptionId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Subscription.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -80,27 +77,20 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 	public SubscriptionModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _subscriptionId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setSubscriptionId(pk);
 	}
 
-	public String getSubscriptionId() {
-		return GetterUtil.getString(_subscriptionId);
+	public long getSubscriptionId() {
+		return _subscriptionId;
 	}
 
-	public void setSubscriptionId(String subscriptionId) {
-		if (((subscriptionId == null) && (_subscriptionId != null)) ||
-				((subscriptionId != null) && (_subscriptionId == null)) ||
-				((subscriptionId != null) && (_subscriptionId != null) &&
-				!subscriptionId.equals(_subscriptionId))) {
-			if (!XSS_ALLOW_SUBSCRIPTIONID) {
-				subscriptionId = XSSUtil.strip(subscriptionId);
-			}
-
+	public void setSubscriptionId(long subscriptionId) {
+		if (subscriptionId != _subscriptionId) {
 			_subscriptionId = subscriptionId;
 		}
 	}
@@ -254,9 +244,17 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 		}
 
 		SubscriptionImpl subscription = (SubscriptionImpl)obj;
-		String pk = subscription.getPrimaryKey();
+		long pk = subscription.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -273,9 +271,9 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = subscription.getPrimaryKey();
+		long pk = subscription.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -284,10 +282,10 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _subscriptionId;
+	private long _subscriptionId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

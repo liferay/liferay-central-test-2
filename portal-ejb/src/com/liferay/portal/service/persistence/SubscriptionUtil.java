@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SubscriptionUtil {
 	public static com.liferay.portal.model.Subscription create(
-		java.lang.String subscriptionId) {
+		long subscriptionId) {
 		return getPersistence().create(subscriptionId);
 	}
 
 	public static com.liferay.portal.model.Subscription remove(
-		java.lang.String subscriptionId)
+		long subscriptionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchSubscriptionException {
 		ModelListener listener = _getListener();
@@ -140,15 +140,14 @@ public class SubscriptionUtil {
 	}
 
 	public static com.liferay.portal.model.Subscription findByPrimaryKey(
-		java.lang.String subscriptionId)
+		long subscriptionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchSubscriptionException {
 		return getPersistence().findByPrimaryKey(subscriptionId);
 	}
 
 	public static com.liferay.portal.model.Subscription fetchByPrimaryKey(
-		java.lang.String subscriptionId)
-		throws com.liferay.portal.SystemException {
+		long subscriptionId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(subscriptionId);
 	}
 
@@ -185,7 +184,7 @@ public class SubscriptionUtil {
 	}
 
 	public static com.liferay.portal.model.Subscription[] findByUserId_PrevAndNext(
-		java.lang.String subscriptionId, java.lang.String userId,
+		long subscriptionId, java.lang.String userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchSubscriptionException {
@@ -235,7 +234,7 @@ public class SubscriptionUtil {
 	}
 
 	public static com.liferay.portal.model.Subscription[] findByC_C_C_PrevAndNext(
-		java.lang.String subscriptionId, java.lang.String companyId,
+		long subscriptionId, java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 

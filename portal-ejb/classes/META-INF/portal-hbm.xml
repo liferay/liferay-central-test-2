@@ -361,7 +361,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.SubscriptionImpl" table="Subscription">
 		<cache usage="read-write" />
-		<id name="subscriptionId" type="java.lang.String">
+		<id name="subscriptionId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
