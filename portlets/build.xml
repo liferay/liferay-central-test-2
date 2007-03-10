@@ -150,30 +150,30 @@
 	</target>
 
 	<target name="deploy" depends="compile">
-		<antcall target="loop-modules">
-			<param name="loop.modules.cmd" value="deploy-module" />
-		</antcall>
-	</target>
-
-	<target name="deploy-module">
 		<if>
 			<available file="${auto.deploy.dir}" />
 			<then>
-				<tstamp>
-					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-				</tstamp>
-
-				<jar
-					basedir="${module.name}.war"
-					destfile="${tstamp.value}"
-				/>
-
-				<move file="${tstamp.value}" tofile="${auto.deploy.dir}/${module.name}.war" />
+				<antcall target="loop-modules">
+					<param name="loop.modules.cmd" value="deploy-module" />
+				</antcall>
 			</then>
 			<else>
 				<echo message="Please create ${auto.deploy.dir}" />
 			</else>
 		</if>
+	</target>
+
+	<target name="deploy-module">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<jar
+			basedir="${module.name}.war"
+			destfile="${tstamp.value}"
+		/>
+
+		<move file="${tstamp.value}" tofile="${auto.deploy.dir}/${module.name}.war" />
 	</target>
 
 	<target name="build-lang">
