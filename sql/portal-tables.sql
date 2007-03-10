@@ -560,7 +560,7 @@ create table OrgLabor (
 );
 
 create table PasswordTracker (
-	passwordTrackerId VARCHAR(75) not null primary key,
+	passwordTrackerId LONG not null primary key,
 	userId VARCHAR(75) not null,
 	createDate DATE null,
 	password_ VARCHAR(75) null

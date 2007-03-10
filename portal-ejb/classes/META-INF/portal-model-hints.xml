@@ -257,7 +257,7 @@
 		<field name="satClose" type="int" />
 	</model>
 	<model name="com.liferay.portal.model.PasswordTracker">
-		<field name="passwordTrackerId" type="String" />
+		<field name="passwordTrackerId" type="long" />
 		<field name="userId" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="password" type="String" />

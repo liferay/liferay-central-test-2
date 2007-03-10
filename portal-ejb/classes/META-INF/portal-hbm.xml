@@ -253,7 +253,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.PasswordTrackerImpl" table="PasswordTracker">
 		<cache usage="read-write" />
-		<id name="passwordTrackerId" type="java.lang.String">
+		<id name="passwordTrackerId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />

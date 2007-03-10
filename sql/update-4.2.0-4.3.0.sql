@@ -73,6 +73,8 @@ alter_column_type OrgGroupRole groupId LONG;
 
 alter_column_type OrgLabor typeId INTEGER;
 
+alter_column_type PasswordTracker passwordTrackerId LONG;
+
 alter_column_type Permission_ permissionId LONG;
 alter_column_type Permission_ resourceId LONG;
 

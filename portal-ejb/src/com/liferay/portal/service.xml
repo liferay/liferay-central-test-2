@@ -568,7 +568,7 @@
 
 		<!-- PK fields -->
 
-		<column name="passwordTrackerId" type="String" primary="true" />
+		<column name="passwordTrackerId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 

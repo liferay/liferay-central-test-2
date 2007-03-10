@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PasswordTrackerUtil {
 	public static com.liferay.portal.model.PasswordTracker create(
-		java.lang.String passwordTrackerId) {
+		long passwordTrackerId) {
 		return getPersistence().create(passwordTrackerId);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker remove(
-		java.lang.String passwordTrackerId)
+		long passwordTrackerId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordTrackerException {
 		ModelListener listener = _getListener();
@@ -140,15 +140,14 @@ public class PasswordTrackerUtil {
 	}
 
 	public static com.liferay.portal.model.PasswordTracker findByPrimaryKey(
-		java.lang.String passwordTrackerId)
+		long passwordTrackerId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordTrackerException {
 		return getPersistence().findByPrimaryKey(passwordTrackerId);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker fetchByPrimaryKey(
-		java.lang.String passwordTrackerId)
-		throws com.liferay.portal.SystemException {
+		long passwordTrackerId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(passwordTrackerId);
 	}
 
@@ -185,7 +184,7 @@ public class PasswordTrackerUtil {
 	}
 
 	public static com.liferay.portal.model.PasswordTracker[] findByUserId_PrevAndNext(
-		java.lang.String passwordTrackerId, java.lang.String userId,
+		long passwordTrackerId, java.lang.String userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordTrackerException {

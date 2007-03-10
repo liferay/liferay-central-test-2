@@ -59,19 +59,19 @@ public class PasswordTrackerSoap implements Serializable {
 	public PasswordTrackerSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _passwordTrackerId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setPasswordTrackerId(pk);
 	}
 
-	public String getPasswordTrackerId() {
+	public long getPasswordTrackerId() {
 		return _passwordTrackerId;
 	}
 
-	public void setPasswordTrackerId(String passwordTrackerId) {
+	public void setPasswordTrackerId(long passwordTrackerId) {
 		_passwordTrackerId = passwordTrackerId;
 	}
 
@@ -99,7 +99,7 @@ public class PasswordTrackerSoap implements Serializable {
 		_password = password;
 	}
 
-	private String _passwordTrackerId;
+	private long _passwordTrackerId;
 	private String _userId;
 	private Date _createDate;
 	private String _password;

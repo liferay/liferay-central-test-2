@@ -42,16 +42,13 @@ import java.util.Date;
 public class PasswordTrackerModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PasswordTracker";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "passwordTrackerId", new Integer(Types.VARCHAR) },
+			{ "passwordTrackerId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "password_", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordTracker"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_PASSWORDTRACKERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PasswordTracker.passwordTrackerId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordTracker.userId"),
 			XSS_ALLOW_BY_MODEL);
@@ -64,27 +61,20 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 	public PasswordTrackerModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _passwordTrackerId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setPasswordTrackerId(pk);
 	}
 
-	public String getPasswordTrackerId() {
-		return GetterUtil.getString(_passwordTrackerId);
+	public long getPasswordTrackerId() {
+		return _passwordTrackerId;
 	}
 
-	public void setPasswordTrackerId(String passwordTrackerId) {
-		if (((passwordTrackerId == null) && (_passwordTrackerId != null)) ||
-				((passwordTrackerId != null) && (_passwordTrackerId == null)) ||
-				((passwordTrackerId != null) && (_passwordTrackerId != null) &&
-				!passwordTrackerId.equals(_passwordTrackerId))) {
-			if (!XSS_ALLOW_PASSWORDTRACKERID) {
-				passwordTrackerId = XSSUtil.strip(passwordTrackerId);
-			}
-
+	public void setPasswordTrackerId(long passwordTrackerId) {
+		if (passwordTrackerId != _passwordTrackerId) {
 			_passwordTrackerId = passwordTrackerId;
 		}
 	}
@@ -185,9 +175,9 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = passwordTracker.getPrimaryKey();
+		long pk = passwordTracker.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -196,10 +186,10 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _passwordTrackerId;
+	private long _passwordTrackerId;
 	private String _userId;
 	private Date _createDate;
 	private String _password;

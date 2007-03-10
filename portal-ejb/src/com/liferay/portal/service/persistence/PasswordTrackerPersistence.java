@@ -52,7 +52,7 @@ import java.util.List;
  *
  */
 public class PasswordTrackerPersistence extends BasePersistence {
-	public PasswordTracker create(String passwordTrackerId) {
+	public PasswordTracker create(long passwordTrackerId) {
 		PasswordTracker passwordTracker = new PasswordTrackerImpl();
 		passwordTracker.setNew(true);
 		passwordTracker.setPrimaryKey(passwordTrackerId);
@@ -60,7 +60,7 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		return passwordTracker;
 	}
 
-	public PasswordTracker remove(String passwordTrackerId)
+	public PasswordTracker remove(long passwordTrackerId)
 		throws NoSuchPasswordTrackerException, SystemException {
 		Session session = null;
 
@@ -68,7 +68,7 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			PasswordTracker passwordTracker = (PasswordTracker)session.get(PasswordTrackerImpl.class,
-					passwordTrackerId);
+					new Long(passwordTrackerId));
 
 			if (passwordTracker == null) {
 				if (_log.isWarnEnabled()) {
@@ -146,7 +146,7 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		}
 	}
 
-	public PasswordTracker findByPrimaryKey(String passwordTrackerId)
+	public PasswordTracker findByPrimaryKey(long passwordTrackerId)
 		throws NoSuchPasswordTrackerException, SystemException {
 		PasswordTracker passwordTracker = fetchByPrimaryKey(passwordTrackerId);
 
@@ -164,7 +164,7 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		return passwordTracker;
 	}
 
-	public PasswordTracker fetchByPrimaryKey(String passwordTrackerId)
+	public PasswordTracker fetchByPrimaryKey(long passwordTrackerId)
 		throws SystemException {
 		Session session = null;
 
@@ -172,7 +172,7 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			return (PasswordTracker)session.get(PasswordTrackerImpl.class,
-				passwordTrackerId);
+				new Long(passwordTrackerId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -314,8 +314,8 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		}
 	}
 
-	public PasswordTracker[] findByUserId_PrevAndNext(
-		String passwordTrackerId, String userId, OrderByComparator obc)
+	public PasswordTracker[] findByUserId_PrevAndNext(long passwordTrackerId,
+		String userId, OrderByComparator obc)
 		throws NoSuchPasswordTrackerException, SystemException {
 		PasswordTracker passwordTracker = findByPrimaryKey(passwordTrackerId);
 		int count = countByUserId(userId);

@@ -97,8 +97,8 @@ public class PasswordTrackerLocalServiceImpl
 	public void trackPassword(String userId, String encPwd)
 		throws PortalException, SystemException {
 
-		String passwordTrackerId = String.valueOf(
-			CounterLocalServiceUtil.increment(PasswordTracker.class.getName()));
+		long passwordTrackerId = CounterLocalServiceUtil.increment(
+			PasswordTracker.class.getName());
 
 		PasswordTracker passwordTracker =
 			PasswordTrackerUtil.create(passwordTrackerId);

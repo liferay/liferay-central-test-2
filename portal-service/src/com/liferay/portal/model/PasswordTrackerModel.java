@@ -33,13 +33,13 @@ import java.util.Date;
  *
  */
 public interface PasswordTrackerModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getPasswordTrackerId();
+	public long getPasswordTrackerId();
 
-	public void setPasswordTrackerId(String passwordTrackerId);
+	public void setPasswordTrackerId(long passwordTrackerId);
 
 	public String getUserId();
 
