@@ -62,7 +62,8 @@ public class AutoLoginFilter implements Filter {
 
 		_companyId = ctx.getInitParameter("company_id");
 
-		_rootPath = ctx.getInitParameter("root_path");
+		_rootPath = GetterUtil.getString(
+			ctx.getInitParameter("root_path"), StringPool.SLASH);
 
 		if (_rootPath.equals(StringPool.SLASH)) {
 			_rootPath = StringPool.BLANK;

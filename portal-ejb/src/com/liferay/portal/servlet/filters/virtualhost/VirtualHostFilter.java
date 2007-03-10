@@ -109,7 +109,8 @@ public class VirtualHostFilter implements Filter {
 
 		String friendlyURL = httpReq.getRequestURI().toLowerCase();
 
-		String rootPath = _ctx.getInitParameter("root_path");
+		String rootPath = GetterUtil.getString(
+			_ctx.getInitParameter("root_path"), StringPool.SLASH);
 
 		if ((!rootPath.equals(StringPool.SLASH)) &&
 			(friendlyURL.indexOf(rootPath) != -1)) {

@@ -530,7 +530,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected String getFriendlyURL(String className, String friendlyURL) {
-		if (className.equals(User.class.getName())) {
+		if (Validator.isNotNull(className) &&
+			className.equals(User.class.getName())) {
+
 			return StringPool.BLANK;
 		}
 		else {
