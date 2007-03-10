@@ -54,8 +54,8 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		upgrade(new UpgradeAddress());
-		upgrade(new UpgradeBookmarks());
 		upgrade(new UpgradeBlogs());
+		upgrade(new UpgradeBookmarks());
 		upgrade(new UpgradeCalendar());
 		upgrade(new UpgradeEmailAddress());
 		upgrade(new UpgradeGroup());

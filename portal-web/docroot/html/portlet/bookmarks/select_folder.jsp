@@ -69,7 +69,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	BookmarksFolder curFolder = (BookmarksFolder)results.get(i);
 
-	ResultRow row = new ResultRow(curFolder, String.valueOf(curFolder.getPrimaryKey()), i);
+	ResultRow row = new ResultRow(curFolder, curFolder.getPrimaryKey(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 

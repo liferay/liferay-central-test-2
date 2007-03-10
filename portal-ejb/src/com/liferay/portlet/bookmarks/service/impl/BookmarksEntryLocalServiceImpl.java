@@ -158,8 +158,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		ResourceLocalServiceUtil.addResources(
 			entry.getCompanyId(), folder.getGroupId(), entry.getUserId(),
-			BookmarksEntry.class.getName(),
-			String.valueOf(entry.getPrimaryKey()), false,
+			BookmarksEntry.class.getName(), entry.getPrimaryKey(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -182,9 +181,8 @@ public class BookmarksEntryLocalServiceImpl
 
 		ResourceLocalServiceUtil.addModelResources(
 			entry.getCompanyId(), folder.getGroupId(), entry.getUserId(),
-			BookmarksEntry.class.getName(),
-			String.valueOf(entry.getPrimaryKey()), communityPermissions,
-			guestPermissions);
+			BookmarksEntry.class.getName(), entry.getPrimaryKey(),
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteEntries(long folderId)
@@ -221,7 +219,7 @@ public class BookmarksEntryLocalServiceImpl
 		ResourceLocalServiceUtil.deleteResource(
 			entry.getCompanyId(), BookmarksEntry.class.getName(),
 			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			String.valueOf(entry.getPrimaryKey()));
+			entry.getPrimaryKey());
 
 		// Entry
 

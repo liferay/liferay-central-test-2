@@ -77,7 +77,7 @@ public class BookmarksEntryPermission {
 
 		return permissionChecker.hasPermission(
 			folder.getGroupId(), BookmarksEntry.class.getName(),
-			String.valueOf(entry.getPrimaryKey()), actionId);
+			entry.getPrimaryKey(), actionId);
 	}
 
 }

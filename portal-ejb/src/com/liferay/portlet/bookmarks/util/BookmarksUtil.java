@@ -152,8 +152,8 @@ public class BookmarksUtil {
 			entryURL.setWindowState(WindowState.MAXIMIZED);
 
 			entryURL.setParameter("struts_action", "/bookmarks/edit_entry");
-			entryURL.setParameter("entryId",
-				String.valueOf(entry.getEntryId()));
+			entryURL.setParameter(
+				"entryId", String.valueOf(entry.getEntryId()));
 
 			String entryLink =
 				"<a href=\"" + entryURL.toString() + "\">" +
