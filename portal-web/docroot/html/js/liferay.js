@@ -133,7 +133,7 @@ Liferay.Dock = {
 				instance._togglePlaces
 			);
 
-			myPlaces.find('.my-places-toggle').click(
+			myPlaces.find('.my-places-toggle, a[@href=javascript: ;]').click(
 				function() {
 					return false;					
 				}
