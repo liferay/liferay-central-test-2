@@ -103,6 +103,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			validateName(0, user.getActualCompanyId(), name);
 		}
 
+		friendlyURL = getFriendlyURL(className, friendlyURL);
+
 		validateFriendlyURL(0, user.getActualCompanyId(), friendlyURL);
 
 		long groupId = CounterLocalServiceUtil.increment(
@@ -462,6 +464,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		String className = group.getClassName();
 		String classPK = group.getClassPK();
+		friendlyURL = getFriendlyURL(className, friendlyURL);
 
 		if (Validator.isNull(className) || Validator.isNull(classPK)) {
 			validateName(group.getGroupId(), group.getCompanyId(), name);
@@ -524,6 +527,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		LayoutLocalServiceUtil.updateLayout(
 			layout.getLayoutId(), layout.getOwnerId(),
 			layout.getTypeSettings());
+	}
+
+	protected String getFriendlyURL(String className, String friendlyURL) {
+		if (className.equals(User.class.getName())) {
+			return StringPool.BLANK;
+		}
+		else {
+			return friendlyURL;
+		}
 	}
 
 	protected void validateFriendlyURL(

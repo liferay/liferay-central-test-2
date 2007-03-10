@@ -41,6 +41,7 @@ public class UserSoap implements Serializable {
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setDisplayUserId(model.getDisplayUserId());
 		soapModel.setContactId(model.getContactId());
 		soapModel.setPassword(model.getPassword());
 		soapModel.setPasswordEncrypted(model.getPasswordEncrypted());
@@ -115,6 +116,14 @@ public class UserSoap implements Serializable {
 
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
+	}
+
+	public String getDisplayUserId() {
+		return _displayUserId;
+	}
+
+	public void setDisplayUserId(String displayUserId) {
+		_displayUserId = displayUserId;
 	}
 
 	public String getContactId() {
@@ -281,6 +290,7 @@ public class UserSoap implements Serializable {
 	private String _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _displayUserId;
 	private String _contactId;
 	private String _password;
 	private boolean _passwordEncrypted;

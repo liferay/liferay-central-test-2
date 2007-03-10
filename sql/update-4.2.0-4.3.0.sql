@@ -27,6 +27,7 @@ alter_column_type Group_ groupId LONG;
 alter_column_type Group_ parentGroupId LONG;
 alter table Group_ add creatorUserId VARCHAR(75) null;
 alter table Group_ add active_ BOOLEAN null;
+update Group_ set friendlyURL = '' where className = 'com.liferay.portal.model.User';
 update Group_ set active_ = TRUE;
 
 alter_column_type Groups_Orgs groupId LONG;
@@ -261,6 +262,9 @@ create table TagsSource (
 	name VARCHAR(75) null,
 	acronym VARCHAR(75) null
 );
+
+alter table User_ add displayUserId VARCHAR(75) null;
+update User_ set displayUserId = userId;
 
 create table UserGroupRole (
 	userId VARCHAR(75) not null,

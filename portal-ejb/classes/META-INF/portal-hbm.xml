@@ -381,6 +381,7 @@
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
+		<property name="displayUserId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="contactId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="password" column="password_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="passwordEncrypted" type="com.liferay.util.dao.hibernate.BooleanType" />

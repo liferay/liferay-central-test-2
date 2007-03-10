@@ -101,17 +101,17 @@ insert into Role_ (roleId, companyId, name, type_) values ('4', 'liferay.com', '
 ## User (default)
 ##
 
-insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.default', 'default', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'password', FALSE, FALSE, 'default@liferay.com', 'Welcome!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+insert into User_ (userId, companyId, createDate, modifiedDate, displayUserId, password_, passwordEncrypted, passwordReset, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.default', 'default', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com.default', 'password', FALSE, FALSE, 'default@liferay.com', 'Welcome!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
 insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.default', 'default', 'liferay.com.default', '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'default', '-1', '', '', '', '', TRUE, '01/01/1970');
 
 ##
 ## User (test@liferay.com)
 ##
 
-insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.1', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'test@liferay.com', 'Welcome Joe Bloggs!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+insert into User_ (userId, companyId, createDate, modifiedDate, displayUserId, password_, passwordEncrypted, passwordReset, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.1', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'joebloggs', 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'test@liferay.com', 'Welcome Joe Bloggs!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
 insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.1', 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', '-1', 'Joe', '', 'Bloggs', 'Duke', TRUE, '01/01/1970');
 
-insert into Group_ (groupId, companyId, className, classPK, parentGroupId, name, friendlyURL, active_) values (15, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.1', -1, '15', '/joebloggs', TRUE);
+insert into Group_ (groupId, companyId, className, classPK, parentGroupId, name, friendlyURL, active_) values (15, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.1', -1, '15', '', TRUE);
 insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.15', 'liferay.com', 15, '15', TRUE, 'classic', '01', 1.0);
 insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.15', 'liferay.com', 15, '15', FALSE, 'classic', '01', 0.0);
 insert into Layout (layoutId, ownerId, companyId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, priority) values ('1', 'PRI.15', 'liferay.com', '-1', '<?xml version="1.0"?>\n\n<root>\n  <name>Home A1</name>\n</root>', 'portlet', 'column-1=71_INSTANCE_OY0d,61,65,\ncolumn-2=9,29,79,8,\nlayout-template-id=2_columns_ii\n', FALSE, '', 0.0);
@@ -130,7 +130,7 @@ insert into Users_Roles values ('liferay.com.1', '4');
 ## User (test.mail@liferay.com)
 ##
 
-insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.35', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, TRUE, 'test.mail@liferay.com', 'Welcome Test Mail!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+insert into User_ (userId, companyId, createDate, modifiedDate, displayUserId, password_, passwordEncrypted, passwordReset, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.35', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'testmail', 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, TRUE, 'test.mail@liferay.com', 'Welcome Test Mail!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
 insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.35', 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', '-1', 'Test', '', 'Mail', '', TRUE, '01/01/1970');
 
 insert into Group_ (groupId, companyId, className, classPK, parentGroupId, name, friendlyURL, active_) values (16, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.35', -1, '16', '', TRUE);

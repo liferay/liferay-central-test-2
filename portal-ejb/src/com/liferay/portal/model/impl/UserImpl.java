@@ -177,13 +177,6 @@ public class UserImpl extends UserModelImpl implements User {
 		return login;
 	}
 
-	public String getDisplayUserId() {
-
-		// Placeholder implementation until displayUserId is added to the model
-
-		return getUserId();
-	}
-
 	public String getPasswordUnencrypted() {
 		return _passwordUnencrypted;
 	}

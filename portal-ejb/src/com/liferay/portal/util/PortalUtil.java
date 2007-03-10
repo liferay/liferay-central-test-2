@@ -506,16 +506,8 @@ public class PortalUtil {
 		String parentFriendlyURL = group.getFriendlyURL();
 
 		if (Validator.isNull(parentFriendlyURL)) {
-			if (layout.isPrivateLayout() && group.isUser()) {
-				String userId = group.getClassPK();
-
-				User user = UserLocalServiceUtil.getUserById(userId);
-
-				parentFriendlyURL = StringPool.SLASH + user.getDisplayUserId();
-			}
-			else {
-				parentFriendlyURL = group.getDefaultFriendlyURL();
-			}
+			parentFriendlyURL = group.getDefaultFriendlyURL(
+				layout.isPrivateLayout());
 		}
 
 		String friendlyURL = null;

@@ -941,6 +941,7 @@
 
 		<!-- Other fields -->
 
+		<column name="displayUserId" type="String" />
 		<column name="contactId" type="String" />
 		<column name="password" type="String" />
 		<column name="passwordEncrypted" type="boolean" />

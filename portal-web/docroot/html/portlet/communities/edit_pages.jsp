@@ -527,11 +527,11 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 									String parentFriendlyURL = group.getFriendlyURL();
 
 									if (Validator.isNull(parentFriendlyURL)) {
-										parentFriendlyURL = group.getDefaultFriendlyURL();
+										parentFriendlyURL = group.getDefaultFriendlyURL(privateLayout);
 									}
 									%>
 
-									<%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= privateLayout ? group.getPathFriendlyURLPrivate(themeDisplay) : themeDisplay.getPathFriendlyURLPublic() %><%= parentFriendlyURL %>
+									<%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= group.getPathFriendlyURL(privateLayout, themeDisplay) %><%= parentFriendlyURL %>
 
 									<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>"> <%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
 								</td>
@@ -979,30 +979,32 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 				</tr>
 				</table>
 
-				<br>
+				<c:if test="<%= group.isCommunity() %>">
+					<br>
 
-				<%= LanguageUtil.get(pageContext, "enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages") %>
+					<%= LanguageUtil.get(pageContext, "enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages") %>
 
-				<%= LanguageUtil.format(pageContext, "the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages", new Object[] {Http.getProtocol(request) + "://" + company.getPortalURL() + themeDisplay.getPathFriendlyURLPublic(), Http.getProtocol(request) + "://" + company.getPortalURL() + group.getPathFriendlyURLPrivate(themeDisplay)}) %>
+					<%= LanguageUtil.format(pageContext, "the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages", new Object[] {Http.getProtocol(request) + "://" + company.getPortalURL() + themeDisplay.getPathFriendlyURLPublic(), Http.getProtocol(request) + "://" + company.getPortalURL() + group.getPathFriendlyURL(false, themeDisplay)}) %>
 
-				<br><br>
+					<br><br>
 
-				<table border="0" cellpadding="0" cellspacing="0">
-				<tr>
-					<td>
-						<%= LanguageUtil.get(pageContext, "friendly-url") %>
-					</td>
-					<td style="padding-left: 10px;"></td>
-					<td nowrap>
+					<table border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>
+							<%= LanguageUtil.get(pageContext, "friendly-url") %>
+						</td>
+						<td style="padding-left: 10px;"></td>
+						<td nowrap>
 
-						<%
-						String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
-						%>
+							<%
+							String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
+							%>
 
-						<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
-					</td>
-				</tr>
-				</table>
+							<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
+						</td>
+					</tr>
+					</table>
+				</c:if>
 
 				<br>
 

@@ -45,8 +45,6 @@ public interface User extends UserModel {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.lang.String getDisplayUserId();
-
 	public java.lang.String getPasswordUnencrypted();
 
 	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted);

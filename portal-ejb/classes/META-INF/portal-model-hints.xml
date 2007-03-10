@@ -375,6 +375,7 @@
 		<field name="companyId" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="displayUserId" type="String" />
 		<field name="contactId" type="String" />
 		<field name="password" type="String" />
 		<field name="passwordEncrypted" type="boolean" />

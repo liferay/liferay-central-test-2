@@ -22,12 +22,15 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.GroupNames;
 import com.liferay.util.Validator;
@@ -96,17 +99,35 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		}
 	}
 
-	public String getPathFriendlyURLPrivate(ThemeDisplay themeDisplay) {
-		if (isUser()) {
-			return themeDisplay.getPathFriendlyURLPrivateUser();
+	public String getPathFriendlyURL(
+		boolean privateLayout, ThemeDisplay themeDisplay) {
+
+		if (privateLayout) {
+			if (isUser()) {
+				return themeDisplay.getPathFriendlyURLPrivateUser();
+			}
+			else {
+				return themeDisplay.getPathFriendlyURLPrivateGroup();
+			}
 		}
 		else {
-			return themeDisplay.getPathFriendlyURLPrivateGroup();
+			return themeDisplay.getPathFriendlyURLPublic();
 		}
 	}
 
-	public String getDefaultFriendlyURL() {
-		return StringPool.SLASH + String.valueOf(getGroupId());
+	public String getDefaultFriendlyURL(boolean privateLayout)
+		throws PortalException, SystemException {
+
+		if (privateLayout && isUser()) {
+			String userId = getClassPK();
+
+			User user = UserLocalServiceUtil.getUserById(userId);
+
+			return StringPool.SLASH + user.getDisplayUserId();
+		}
+		else {
+			return StringPool.SLASH + String.valueOf(getGroupId());
+		}
 	}
 
 	public int getPrivateLayoutsPageCount() {

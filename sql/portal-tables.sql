@@ -1007,19 +1007,12 @@ create table TagsSource (
 	acronym VARCHAR(75) null
 );
 
-create table UserGroup (
-	userGroupId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
-	parentUserGroupId VARCHAR(75) null,
-	name VARCHAR(75) null,
-	description STRING null
-);
-
 create table User_ (
 	userId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	displayUserId VARCHAR(75) null,
 	contactId VARCHAR(75) null,
 	password_ VARCHAR(75) null,
 	passwordEncrypted BOOLEAN,
@@ -1038,6 +1031,14 @@ create table User_ (
 	failedLoginAttempts INTEGER,
 	agreedToTermsOfUse BOOLEAN,
 	active_ BOOLEAN
+);
+
+create table UserGroup (
+	userGroupId VARCHAR(75) not null primary key,
+	companyId VARCHAR(75) not null,
+	parentUserGroupId VARCHAR(75) null,
+	name VARCHAR(75) null,
+	description STRING null
 );
 
 create table UserGroupRole (

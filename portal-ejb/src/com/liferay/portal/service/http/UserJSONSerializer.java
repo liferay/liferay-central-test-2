@@ -76,6 +76,15 @@ public class UserJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
+		String displayUserId = model.getDisplayUserId();
+
+		if (displayUserId == null) {
+			jsonObj.put("displayUserId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("displayUserId", displayUserId.toString());
+		}
+
 		String contactId = model.getContactId();
 
 		if (contactId == null) {

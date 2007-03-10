@@ -53,6 +53,10 @@ public interface UserModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	public String getDisplayUserId();
+
+	public void setDisplayUserId(String displayUserId);
+
 	public String getContactId();
 
 	public void setContactId(String contactId);

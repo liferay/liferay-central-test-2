@@ -45,6 +45,7 @@ public class UserModelImpl extends BaseModelImpl {
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "displayUserId", new Integer(Types.VARCHAR) },
 			{ "contactId", new Integer(Types.VARCHAR) },
 			{ "password_", new Integer(Types.VARCHAR) },
 			{ "passwordEncrypted", new Integer(Types.BOOLEAN) },
@@ -71,6 +72,9 @@ public class UserModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.companyId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_DISPLAYUSERID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.User.displayUserId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CONTACTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.contactId"),
@@ -173,6 +177,23 @@ public class UserModelImpl extends BaseModelImpl {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
+		}
+	}
+
+	public String getDisplayUserId() {
+		return GetterUtil.getString(_displayUserId);
+	}
+
+	public void setDisplayUserId(String displayUserId) {
+		if (((displayUserId == null) && (_displayUserId != null)) ||
+				((displayUserId != null) && (_displayUserId == null)) ||
+				((displayUserId != null) && (_displayUserId != null) &&
+				!displayUserId.equals(_displayUserId))) {
+			if (!XSS_ALLOW_DISPLAYUSERID) {
+				displayUserId = XSSUtil.strip(displayUserId);
+			}
+
+			_displayUserId = displayUserId;
 		}
 	}
 
@@ -460,6 +481,7 @@ public class UserModelImpl extends BaseModelImpl {
 		clone.setCompanyId(getCompanyId());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setDisplayUserId(getDisplayUserId());
 		clone.setContactId(getContactId());
 		clone.setPassword(getPassword());
 		clone.setPasswordEncrypted(getPasswordEncrypted());
@@ -525,6 +547,7 @@ public class UserModelImpl extends BaseModelImpl {
 	private String _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _displayUserId;
 	private String _contactId;
 	private String _password;
 	private boolean _passwordEncrypted;
