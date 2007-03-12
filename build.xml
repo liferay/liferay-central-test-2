@@ -476,20 +476,20 @@
 
 				<!--
 				JBoss 4.0.5 defaults to different versions of dom4j, Commons
-				Collections, and Hibernate.
+				Collections, Commons HttpClient, and Hibernate.
 				-->
 
 				<copy todir="${app.server.dir}/lib">
 					<fileset
 						dir="lib/portal"
-						includes="dom4j.jar,jaxen.jar"
+						includes="commons-httpclient.jar,dom4j.jar,jaxen.jar"
 					/>
 				</copy>
 
 				<copy todir="${app.server.dir}/server/default/lib">
 					<fileset
 						dir="lib/portal"
-						includes="commons-collections.jar"
+						includes="commons-collections.jar,commons-httpclient.jar"
 					/>
 				</copy>
 
