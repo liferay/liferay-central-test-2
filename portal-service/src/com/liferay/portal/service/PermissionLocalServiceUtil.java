@@ -96,12 +96,12 @@ public class PermissionLocalServiceUtil {
 			groupId, resourceId);
 	}
 
-	public static long getLastPermissionId()
+	public static long getLatestPermissionId()
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
-		return permissionLocalService.getLastPermissionId();
+		return permissionLocalService.getLatestPermissionId();
 	}
 
 	public static java.util.List getPermissions(java.lang.String companyId,

@@ -62,7 +62,7 @@ public interface PermissionLocalService {
 		java.lang.String organizationId, long groupId, long resourceId)
 		throws com.liferay.portal.SystemException;
 
-	public long getLastPermissionId()
+	public long getLatestPermissionId()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

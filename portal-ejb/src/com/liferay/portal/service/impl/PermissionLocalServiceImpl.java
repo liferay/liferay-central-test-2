@@ -164,14 +164,19 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			organizationId, groupId, resourceId);
 	}
 
-	public long getLastPermissionId()
+	public long getLatestPermissionId()
 		throws PortalException, SystemException {
 
 		List list = PermissionUtil.findAll(0, 1, new PermissionComparator());
 
-		Permission perm = (Permission)list.get(0);
+		if (list.size() == 0) {
+			return 0;
+		}
+		else {
+			Permission permission = (Permission)list.get(0);
 
-		return perm.getPermissionId();
+			return permission.getPermissionId();
+		}
 	}
 
 	public List getPermissions(

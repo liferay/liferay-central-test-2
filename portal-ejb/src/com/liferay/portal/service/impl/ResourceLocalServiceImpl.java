@@ -366,14 +366,19 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 	}
 
-	public long getLastResourceId()
+	public long getLatestResourceId()
 		throws PortalException, SystemException {
 
 		List list = ResourceUtil.findAll(0, 1, new ResourceComparator());
 
-		Resource rsrc = (Resource)list.get(0);
+		if (list.size() == 0) {
+			return 0;
+		}
+		else {
+			Resource resource = (Resource)list.get(0);
 
-		return rsrc.getResourceId();
+			return resource.getResourceId();
+		}
 	}
 
 	public Resource getResource(long resourceId)
