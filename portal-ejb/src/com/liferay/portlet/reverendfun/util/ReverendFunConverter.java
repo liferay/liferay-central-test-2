@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.reverendfun.util;
 
+import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
-import com.liferay.util.StringComparator;
 import com.liferay.util.Time;
 
 import java.text.DateFormat;

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
@@ -47,16 +47,17 @@ public class StringComparator implements Comparator, Serializable {
 		String s1 = (String)obj1;
 		String s2 = (String)obj2;
 
-		if (Validator.isNull(s1)) {
-			s1 = "";
+		if (s1 == null) {
+			s1 = StringPool.BLANK;
 		}
 
-		if (Validator.isNull(s2)) {
-			s2 = "";
+		if (s2 == null) {
+			s2 = StringPool.BLANK;
 		}
 
 		if (!_asc) {
 			String temp = s1;
+
 			s1 = s2;
 			s2 = temp;
 		}
