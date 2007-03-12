@@ -38,9 +38,9 @@ import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.GroupPrimKeyUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.OwnerIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.PreferencesUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.PrimKeyUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.TempScopeUpgradeColumnImpl;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
@@ -62,9 +62,6 @@ import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -351,14 +348,9 @@ public class UpgradeGroup extends UpgradeProcess {
 		TempScopeUpgradeColumnImpl upgradeScopeColumn =
 			new TempScopeUpgradeColumnImpl();
 
-		List keyMapperList = new ArrayList();
-
-		keyMapperList.add(new Object[] { "groupId", _groupIdMapper });
-		keyMapperList.add(new Object[] { "ownerId", _ownerIdMapper });
-
 		UpgradeColumn upgradePrimKeyColumn =
-			new GroupPrimKeyUpgradeColumnImpl(
-				upgradeScopeColumn, keyMapperList, _groupIdMapper);
+			new PrimKeyUpgradeColumnImpl(
+				upgradeScopeColumn, _groupIdMapper, _ownerIdMapper);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			ResourceImpl.TABLE_NAME, ResourceImpl.TABLE_COLUMNS,

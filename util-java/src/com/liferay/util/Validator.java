@@ -100,6 +100,22 @@ public class Validator {
 		return false;
 	}
 
+	public static boolean isDigit(String s) {
+		if (isNull(s)) {
+			return false;
+		}
+
+		char[] c = s.toCharArray();
+
+		for (int i = 0; i < c.length; i++) {
+			if (!isDigit(c[i])) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	public static boolean isHex(String s) {
 		if (isNull(s)) {
 			return false;
@@ -329,13 +345,7 @@ public class Validator {
 
 		char[] c = number.toCharArray();
 
-		if (c.length > 0) {
-			if (!isDigit(c[0]) && c[0] != '-') {
-				return false;
-			}
-		}
-
-		for (int i = 1; i < c.length; i++) {
+		for (int i = 0; i < c.length; i++) {
 			if (!isDigit(c[i])) {
 				return false;
 			}

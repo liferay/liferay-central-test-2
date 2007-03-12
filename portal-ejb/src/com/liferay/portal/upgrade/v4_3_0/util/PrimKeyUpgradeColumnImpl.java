@@ -23,13 +23,10 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
-
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * <a href="PrimKeyUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -39,70 +36,83 @@ import java.util.List;
  */
 public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public PrimKeyUpgradeColumnImpl(TempScopeUpgradeColumnImpl scopeColumn,
-									List keyMapperList) {
+	public PrimKeyUpgradeColumnImpl(TempScopeUpgradeColumnImpl upgradeColumn,
+									ValueMapper groupIdMapper,
+									ValueMapper ownerIdMapper) {
 
 		super("primKey");
 
-		_scopeColumn = scopeColumn;
-		_keyMapperList = keyMapperList;
+		_upgradeColumn = upgradeColumn;
+		_groupIdMapper = groupIdMapper;
+		_ownerIdMapper = ownerIdMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		String primKey = (String)oldValue;
+		Object newValue = oldValue;
 
-		// {layoutId=1234, ownerId=PRI.5678}
+		if (_upgradeColumn.isScopeGroup()) {
+			newValue = _groupIdMapper.getNewValue(new Long((String)oldValue));
+		}
+		else if (_upgradeColumn.isScopeIndividual()) {
+			String primKey = (String)oldValue;
 
-		if (_scopeColumn.isScopeIndividual() &&
-			primKey.startsWith(StringPool.OPEN_CURLY_BRACE) &&
-			primKey.endsWith(StringPool.CLOSE_CURLY_BRACE)) {
+			if (primKey.startsWith(LayoutImpl.PUBLIC) ||
+				primKey.startsWith(LayoutImpl.PRIVATE)) {
 
-			String[] parts = StringUtil.split(
-				primKey.substring(1, primKey.length() - 1),
-				StringPool.COMMA + StringPool.SPACE);
+				// PRI.1234.1_LAYOUT_56
 
-			for (int i = 0; i < parts.length; i++) {
-				String[] kvp = StringUtil.split(parts[i], StringPool.EQUAL);
+				String[] keyParts =
+					StringUtil.split(primKey, StringPool.PERIOD);
 
-				Iterator itr = _keyMapperList.iterator();
+				Long groupId =
+					(Long)_groupIdMapper.getNewValue(new Long(keyParts[1]));
 
-				while (itr.hasNext()) {
-					Object[] keyMapper = (Object[])itr.next();
+				keyParts[1] = String.valueOf(groupId);
 
-					if (kvp[0].equals(keyMapper[0])) {
-						ValueMapper vm = (ValueMapper)keyMapper[1];
+				newValue = StringUtil.merge(keyParts, StringPool.PERIOD);
+			}
+			else if (primKey.indexOf("groupId=") != -1 ||
+					 primKey.indexOf("ownerId=") != -1) {
 
-						Object value = null;
+				// {layoutId=1234, ownerId=PRI.5678}
 
-						if (Validator.isNumber(kvp[1])) {
-							value = new Long(kvp[1]);
-						}
-						else {
-							value = (String)kvp[1];
-						}
+				String[] keyParts = StringUtil.split(
+					primKey.substring(1, primKey.length() - 1),
+					StringPool.COMMA + StringPool.SPACE);
 
-						kvp[1] = String.valueOf(vm.getNewValue(value));
+				for (int i = 0; i < keyParts.length; i++) {
+					String[] kvp =
+						StringUtil.split(keyParts[i], StringPool.EQUAL);
 
-						parts[i] =
+					if (kvp[0].equals("groupId")) {
+						kvp[1] =
+							String.valueOf(
+								_groupIdMapper.getNewValue(new Long(kvp[1])));
+
+						keyParts[i] =
+							StringUtil.merge(kvp, StringPool.EQUAL);
+					}
+					else if (kvp[0].equals("ownerId")) {
+						kvp[1] = (String)_ownerIdMapper.getNewValue(kvp[1]);
+
+						keyParts[i] =
 							StringUtil.merge(kvp, StringPool.EQUAL);
 					}
 				}
-			}
 
-			primKey =
-				StringPool.OPEN_CURLY_BRACE +
-				StringUtil.merge(parts, StringPool.COMMA + StringPool.SPACE) +
-				StringPool.CLOSE_CURLY_BRACE;
+				newValue =
+					StringPool.OPEN_CURLY_BRACE +
+					StringUtil.merge(
+						keyParts, StringPool.COMMA + StringPool.SPACE) +
+					StringPool.CLOSE_CURLY_BRACE;
+			}
 		}
 
-		return primKey;
+		return newValue;
 	}
 
-	protected TempScopeUpgradeColumnImpl getScopeColumn() {
-		return _scopeColumn;
-	}
-
-	private TempScopeUpgradeColumnImpl _scopeColumn;
-	private List _keyMapperList;
+	private TempScopeUpgradeColumnImpl _upgradeColumn;
+	private ValueMapper _groupIdMapper;
+	private ValueMapper _ownerIdMapper;
 
 }
