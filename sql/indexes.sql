@@ -233,6 +233,7 @@ create index IX_3A1E834E on User_ (companyId);
 create index IX_615E9F7A on User_ (companyId, emailAddress);
 create index IX_765A87C6 on User_ (companyId, password_);
 create index IX_9782AD88 on User_ (companyId, userId);
+create index IX_480DC765 on User_ (screenName);
 
 create index LIFERAY_003 on Users_Permissions (permissionId);
 

@@ -365,6 +365,73 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
+	public User findByScreenName(String screenName)
+		throws NoSuchUserException, SystemException {
+		User user = fetchByScreenName(screenName);
+
+		if (user == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No User exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("screenName=");
+			msg.append(screenName);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchUserException(msg.toString());
+		}
+
+		return user;
+	}
+
+	public User fetchByScreenName(String screenName) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.User WHERE ");
+
+			if (screenName == null) {
+				query.append("screenName IS NULL");
+			}
+			else {
+				query.append("screenName = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (screenName != null) {
+				q.setString(queryPos++, screenName);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			User user = (User)list.get(0);
+
+			return user;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public User findByC_U(String companyId, String userId)
 		throws NoSuchUserException, SystemException {
 		User user = fetchByC_U(companyId, userId);
@@ -837,6 +904,12 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByScreenName(String screenName)
+		throws NoSuchUserException, SystemException {
+		User user = findByScreenName(screenName);
+		remove(user);
+	}
+
 	public void removeByC_U(String companyId, String userId)
 		throws NoSuchUserException, SystemException {
 		User user = findByC_U(companyId, userId);
@@ -893,6 +966,54 @@ public class UserPersistence extends BasePersistence {
 
 			if (companyId != null) {
 				q.setString(queryPos++, companyId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByScreenName(String screenName) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.User WHERE ");
+
+			if (screenName == null) {
+				query.append("screenName IS NULL");
+			}
+			else {
+				query.append("screenName = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (screenName != null) {
+				q.setString(queryPos++, screenName);
 			}
 
 			Iterator itr = q.list().iterator();

@@ -169,10 +169,10 @@ public class WebXMLBuilder {
 	private static final String[] _FILES = new String[] {
 		"liferay-display.xml", "liferay-layout-templates.xml",
 		"liferay-layout-templates-ext.xml", "liferay-look-and-feel.xml",
-		"liferay-look-and-feel-ext.xml", "liferay-portlet.xml",
-		"liferay-portlet-ext.xml", "portlet.xml", "portlet-ext.xml",
-		"struts-config.xml", "struts-config-ext.xml", "tiles-defs.xml",
-		"tiles-defs-ext.xml"
+		"liferay-look-and-feel-ext.xml", "liferay-plugin-package.xml",
+		"liferay-portlet.xml", "liferay-portlet-ext.xml", "portlet.xml",
+		"portlet-ext.xml", "struts-config.xml", "struts-config-ext.xml",
+		"tiles-defs.xml", "tiles-defs-ext.xml"
 	};
 
 }

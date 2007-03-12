@@ -94,6 +94,10 @@ public class LayoutAction extends Action {
 
 			String redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
 
+			if (_log.isDebugEnabled()) {
+				_log.debug("Redirect default layout to " + redirect);
+			}
+
 			res.sendRedirect(redirect);
 
 			return null;
@@ -211,6 +215,10 @@ public class LayoutAction extends Action {
 				forwardURL = Http.addParameter(
 					forwardURL, "doAsUserId", themeDisplay.getDoAsUserId());
 			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Forward layout to " + forwardURL);
 		}
 
 		req.setAttribute(WebKeys.FORWARD_URL, forwardURL);

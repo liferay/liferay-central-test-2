@@ -721,7 +721,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		screenName = screenName.trim().toLowerCase();
 
-		return UserUtil.findByPrimaryKey(screenName);
+		return UserUtil.findByScreenName(screenName);
 	}
 
 	public String getUserId(String companyId, String emailAddress)

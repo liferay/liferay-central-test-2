@@ -122,7 +122,9 @@ public class FriendlyURLServlet extends HttpServlet {
 				PropsUtil.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND);
 		}
 		catch (Exception e) {
-			_log.warn(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 
 		if (Validator.isNull(redirect)) {
@@ -203,6 +205,9 @@ public class FriendlyURLServlet extends HttpServlet {
 				}
 			}
 			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e);
+				}
 			}
 		}
 

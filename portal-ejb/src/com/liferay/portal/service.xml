@@ -974,6 +974,9 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
+		<finder name="ScreenName" return-type="User">
+			<finder-column name="screenName" />
+		</finder>
 		<finder name="C_U" return-type="User">
 			<finder-column name="companyId" />
 			<finder-column name="userId" />
