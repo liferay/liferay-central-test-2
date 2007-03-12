@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -98,7 +99,7 @@ public class PasswordTrackerLocalServiceImpl
 		throws PortalException, SystemException {
 
 		long passwordTrackerId = CounterLocalServiceUtil.increment(
-			PasswordTracker.class.getName());
+			Counter.class.getName());
 
 		PasswordTracker passwordTracker =
 			PasswordTrackerUtil.create(passwordTrackerId);
