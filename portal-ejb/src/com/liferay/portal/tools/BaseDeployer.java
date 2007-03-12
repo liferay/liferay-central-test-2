@@ -213,10 +213,11 @@ public class BaseDeployer {
 
 					// File names starting with DEPLOY_TO_PREFIX should
 					// use the filename after the prefix as the deployment
-					//  context
+					// context
 
 					if (srcFile.getName().startsWith(
-						Constants.DEPLOY_TO_PREFIX)) {
+							Constants.DEPLOY_TO_PREFIX)) {
+
 						displayName = srcFile.getName().substring(
 							Constants.DEPLOY_TO_PREFIX.length(),
 								srcFile.getName().length() - 4);
@@ -231,7 +232,6 @@ public class BaseDeployer {
 					}
 
 					if (pluginPackage != null) {
-
 						if (!PluginPackageUtil.isCurrentVersionSupported(
 								pluginPackage.getLiferayVersions())) {
 
@@ -244,21 +244,23 @@ public class BaseDeployer {
 							displayName =
 								pluginPackage.getRecommendedDeploymentContext();
 						}
+
 						if (Validator.isNull(displayName)) {
 							displayName = getDisplayName(srcFile);
 						}
 
 						pluginPackage.setContext(displayName);
+
 						PluginPackageUtil.updateInstallingPluginPackage(
 							preliminaryContext, pluginPackage);
-
 					}
 
-					if (displayName != null) {
+					if (Validator.isNotNull(displayName)) {
 						deployDir = displayName + ".war";
 					}
 					else {
 						deployDir = srcFile.getName();
+						displayName = getDisplayName(srcFile);
 					}
 
 					if (appServerType.equals("jetty") ||
@@ -277,15 +279,15 @@ public class BaseDeployer {
 
 					try {
 						PluginPackage previousPluginPackage =
-							_readPreviousPluginPackage(deployDir);
+							_readPluginPackage(new File(deployDir));
 
 						if (previousPluginPackage != null) {
 							System.out.println(
-								"Updating " + pluginPackage.getName() + " from "
-									+ "version " +
-										previousPluginPackage.getVersion()
-											+ " to version " +
-													pluginPackage.getVersion());
+								"Updating " + pluginPackage.getName() +
+									" from " + "version " +
+										previousPluginPackage.getVersion() +
+											" to version " +
+												pluginPackage.getVersion());
 
 							if (pluginPackage.isLaterVersionThan(
 								previousPluginPackage)) {
@@ -303,17 +305,20 @@ public class BaseDeployer {
 							boolean deployed = deployFile(
 								srcFile, new File(deployDir), displayName,
 								overwrite);
+
 							if (!deployed) {
 								PluginPackageUtil.endPluginPackageInstallation(
 									pluginPackage.getContext());
 							}
 						}
 
-					} catch (Exception e) {
+					}
+					catch (Exception e) {
 						if (pluginPackage != null) {
 							PluginPackageUtil.endPluginPackageInstallation(
 								pluginPackage.getContext());
 						}
+
 						throw e;
 					}
 				}
@@ -325,7 +330,7 @@ public class BaseDeployer {
 	}
 
 	protected void deployDirectory(
-		File srcFile, String displayName, boolean override)
+			File srcFile, String displayName, boolean override)
 		throws Exception {
 
 		deployDirectory(srcFile, null, displayName, override);
@@ -393,11 +398,13 @@ public class BaseDeployer {
 	}
 
 	protected boolean deployFile(
-		File srcFile, File deployDir, String displayName, boolean overwrite)
+			File srcFile, File deployDir, String displayName, boolean overwrite)
 		throws Exception {
+
 		if (!overwrite && UpToDateTask.isUpToDate(srcFile, deployDir)) {
-			System.out.println(deployDir + " is up to date. No deployment " +
-				"is necessary");
+			System.out.println(
+				deployDir + " is up to date. No deployment is necessary");
+
 			return false;
 		}
 
@@ -612,49 +619,41 @@ public class BaseDeployer {
 			"  Modifying Servlet " + webXmlVersion + " " + webXML);
 	}
 
-	private PluginPackage _readPreviousPluginPackage(String deployDir)
-		throws DocumentException {
-		PluginPackage pluginPackage = null;
-
-		if (new File(deployDir).exists()) {
-
-			File previousPluginPackageXml =
-				new File(deployDir + "/WEB-INF/liferay-plugin-package.xml");
-
-			if (previousPluginPackageXml.exists()) {
-				try {
-
-					InputStream is =
-						new FileInputStream(previousPluginPackageXml);
-
-					String xml = StringUtil.read(is);
-
-					pluginPackage = PluginPackageUtil.readPluginPackageXml(xml);
-				} catch (IOException ioe) {
-				}
-			}
-		}
-
-		return pluginPackage;
-	}
-
 	private PluginPackage _readPluginPackage(File file) {
 		ZipFile zipFile = null;
 
 		try {
-			zipFile = new ZipFile(file);
+			InputStream is = null;
 
-			ZipEntry zipEntry =
-				zipFile.getEntry("WEB-INF/liferay-plugin-package.xml");
-			if (zipEntry == null) {
+			if (file.isDirectory()) {
+				File pluginPackageXMLFile = new File(
+					file.getPath() + "/WEB-INF/liferay-plugin-package.xml");
+
+				if (pluginPackageXMLFile.exists()) {
+					is = new FileInputStream(pluginPackageXMLFile);
+				}
+			}
+			else {
+				zipFile = new ZipFile(file);
+
+				ZipEntry zipEntry = zipFile.getEntry(
+					"WEB-INF/liferay-plugin-package.xml");
+
+				if (zipEntry != null) {
+					is = zipFile.getInputStream(zipEntry);
+				}
+			}
+
+			if (is == null) {
 				System.out.println(
 					file.getPath() + " does not have " +
 						"WEB-INF/liferay-plugin-package.xml");
+
 				return null;
 			}
 
-			InputStream is = zipFile.getInputStream(zipEntry);
 			String xml = StringUtil.read(is);
+
 			xml = XMLFormatter.fixProlog(xml);
 
 			return PluginPackageUtil.readPluginPackageXml(xml);
@@ -674,6 +673,7 @@ public class BaseDeployer {
 				}
 			}
 		}
+
 		return null;
 	}
 
