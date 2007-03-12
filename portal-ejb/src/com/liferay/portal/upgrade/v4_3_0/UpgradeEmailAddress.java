@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -45,6 +47,7 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 
 		try {
 			_upgradeEmailAddress();
+			_upgradeCounter();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -57,6 +60,10 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 			new PKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
+	}
+
+	private void _upgradeCounter() throws Exception {
+		CounterLocalServiceUtil.reset(EmailAddress.class.getName());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeEmailAddress.class);

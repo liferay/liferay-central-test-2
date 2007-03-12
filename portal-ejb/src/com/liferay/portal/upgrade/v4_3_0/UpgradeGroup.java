@@ -22,7 +22,9 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.LayoutSetImpl;
@@ -82,6 +84,7 @@ public class UpgradeGroup extends UpgradeProcess {
 			_upgradeOwnerIds();
 			_upgradeResources();
 			_upgradeLucene();
+			_upgradeCounter();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -357,6 +360,10 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradeScopeColumn, upgradePrimKeyColumn);
 
 		upgradeTable.updateTable();
+	}
+
+	private void _upgradeCounter() throws Exception {
+		CounterLocalServiceUtil.reset(Group.class.getName());
 	}
 
 	private ValueMapper _groupIdMapper;

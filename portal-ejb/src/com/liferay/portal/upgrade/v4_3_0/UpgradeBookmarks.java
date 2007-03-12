@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -52,6 +53,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 		try {
 			_upgradeBookmarks();
 			_upgradeResource();
+			_upgradeCounter();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -101,6 +103,11 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		ResourceUtil.upgradePrimKey(
 			_entryIdMapper, BookmarksEntry.class.getName());
+	}
+
+	private void _upgradeCounter() throws Exception {
+		CounterLocalServiceUtil.reset(BookmarksFolder.class.getName());
+		CounterLocalServiceUtil.reset(BookmarksEntry.class.getName());
 	}
 
 	private ValueMapper _folderIdMapper;

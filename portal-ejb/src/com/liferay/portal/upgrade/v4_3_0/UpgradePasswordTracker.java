@@ -47,8 +47,7 @@ public class UpgradePasswordTracker extends UpgradeProcess {
 
 		try {
 			_upgradePasswordTracker();
-
-			CounterLocalServiceUtil.reset(PasswordTracker.class.getName());
+			_upgradeCounter();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -61,6 +60,10 @@ public class UpgradePasswordTracker extends UpgradeProcess {
 			new PKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
+	}
+
+	private void _upgradeCounter() throws Exception {
+		CounterLocalServiceUtil.reset(PasswordTracker.class.getName());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradePasswordTracker.class);

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -52,6 +53,7 @@ public class UpgradeBlogs extends UpgradeProcess {
 		try {
 			_upgradeBlogs();
 			_upgradeResource();
+			_upgradeCounter();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -100,6 +102,11 @@ public class UpgradeBlogs extends UpgradeProcess {
 			_categoryIdMapper, BlogsCategory.class.getName());
 
 		ResourceUtil.upgradePrimKey(_entryIdMapper, BlogsEntry.class.getName());
+	}
+
+	private void _upgradeCounter() throws Exception {
+		CounterLocalServiceUtil.reset(BlogsCategory.class.getName());
+		CounterLocalServiceUtil.reset(BlogsEntry.class.getName());
 	}
 
 	private ValueMapper _categoryIdMapper;
