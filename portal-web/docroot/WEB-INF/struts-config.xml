@@ -1364,11 +1364,11 @@
 
 		<!-- Update Manager -->
 
-		<action path="/update_manager/view" forward="portlet.update_manager.view" />
-
 		<action path="/update_manager/edit_server" type="com.liferay.portlet.admin.action.EditServerAction">
 			<forward name="portlet.admin.error" path="portlet.admin.error" />
 		</action>
+
+		<action path="/update_manager/view" forward="portlet.update_manager.view" />
 
 		<!-- Weather -->
 

@@ -25,12 +25,14 @@ package com.liferay.portal.kernel.plugin;
 import java.util.Comparator;
 
 /**
- * <a href="PluginPackageNameAndContextComparator.java.html"><b>
- * <i>View Source</i></b></a>
+ * <a href="PluginPackageNameAndContextComparator.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class PluginPackageNameAndContextComparator implements Comparator {
+
 	public int compare(Object obj1, Object obj2) {
 		if (!(obj1 instanceof PluginPackage)) {
 			return -1;
@@ -39,8 +41,9 @@ public class PluginPackageNameAndContextComparator implements Comparator {
 		if (!(obj2 instanceof PluginPackage)) {
 			return 1;
 		}
-		PluginPackage package1 = (PluginPackage) obj1;
-		PluginPackage package2 = (PluginPackage) obj2;
+
+		PluginPackage package1 = (PluginPackage)obj1;
+		PluginPackage package2 = (PluginPackage)obj2;
 
 		int result = package1.getName().compareTo(package2.getName());
 

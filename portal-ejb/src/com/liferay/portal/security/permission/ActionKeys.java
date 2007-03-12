@@ -61,6 +61,8 @@ public class ActionKeys {
 
 	public static final String ADD_INSTANCE = "ADD_INSTANCE";
 
+	public static final String ADD_LICENSE = "ADD_LICENSE";
+
 	public static final String ADD_LOCATION = "ADD_LOCATION";
 
 	public static final String ADD_MESSAGE = "ADD_MESSAGE";
@@ -120,8 +122,6 @@ public class ActionKeys {
 	public static final String HELP = "HELP";
 
 	public static final String IMPERSONATE = "IMPERSONATE";
-
-	public static final String ADD_LICENSE = "ADD_LICENSE";
 
 	public static final String MANAGE = "MANAGE";
 

@@ -43,18 +43,22 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 
 	public static final String STATUS_ALL = "all";
 
-	public static final String STATUS_OLDER_VERSION_INSTALLED =
-		"olderVersionInstalled";
-	public static final String STATUS_SAME_VERSION_INSTALLED =
-		"sameVersionInstalled";
-	public static final String STATUS_NEWER_VERSION_INSTALLED =
-		"newerVersionInstalled";
-	public static final String STATUS_NOT_INSTALLED = "notInstalled";
-
-	public static final String STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED
-		= "notInstalledOrOlderVersionInstalled";
 	public static final String STATUS_INSTALLATION_IN_PROCESS =
 		"installationInProcess";
+
+	public static final String STATUS_NEWER_VERSION_INSTALLED =
+		"newerVersionInstalled";
+
+	public static final String STATUS_NOT_INSTALLED = "notInstalled";
+
+	public static final String STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED =
+		"notInstalledOrOlderVersionInstalled";
+
+	public static final String STATUS_OLDER_VERSION_INSTALLED =
+		"olderVersionInstalled";
+
+	public static final String STATUS_SAME_VERSION_INSTALLED =
+		"sameVersionInstalled";
 
 	public PluginPackageImpl(String moduleId) {
 		_moduleId = ModuleId.getInstance(moduleId);
@@ -62,21 +66,6 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 
 	public String getModuleId() {
 		return _moduleId.toString();
-	}
-
-	public String getRecommendedDeploymentContext() {
-		String context = _recommendedDeploymentContext;
-
-		if (Validator.isNull(context)) {
-			context = _moduleId.getArtifactId();
-		}
-
-		return context;
-	}
-
-	public void setRecommendedDeploymentContext(
-		String recommendedDeploymentContext) {
-		_recommendedDeploymentContext = recommendedDeploymentContext;
 	}
 
 	public String getName() {
@@ -101,6 +90,22 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 
 	public boolean isSameVersionAs(PluginPackage pluginPackage) {
 		return _moduleId.isSameVersionAs(pluginPackage.getVersion());
+	}
+
+	public String getRecommendedDeploymentContext() {
+		String context = _recommendedDeploymentContext;
+
+		if (Validator.isNull(context)) {
+			context = _moduleId.getArtifactId();
+		}
+
+		return context;
+	}
+
+	public void setRecommendedDeploymentContext(
+		String recommendedDeploymentContext) {
+
+		_recommendedDeploymentContext = recommendedDeploymentContext;
 	}
 
 	public String getAuthor() {

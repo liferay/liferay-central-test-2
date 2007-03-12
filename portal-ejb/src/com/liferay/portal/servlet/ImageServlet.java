@@ -240,7 +240,6 @@ public class ImageServlet extends HttpServlet {
 
 		else if (path.startsWith("/software_catalog")) {
 			if (!imageId.equals(StringPool.BLANK)) {
-
 				if (ParamUtil.get(req, "small", false)) {
 					imageId += ".small";
 				}

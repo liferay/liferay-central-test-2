@@ -187,16 +187,16 @@
 		</finder>
 	</entity>
 	<exceptions>
-		<exception>ProductEntryName</exception>
-		<exception>ProductEntryType</exception>
-		<exception>ProductEntryShortDescription</exception>
-		<exception>ProductEntryLicense</exception>
-		<exception>ProductEntryImages</exception>
-		<exception>ProductVersionName</exception>
-		<exception>ProductVersionChangeLog</exception>
-		<exception>ProductVersionFrameworkVersion</exception>
-		<exception>ProductVersionDownloadURL</exception>
-		<exception>FrameworkVersionName</exception>
 		<exception>LicenseName</exception>
-	</exceptions>	
+		<exception>FrameworkVersionName</exception>
+		<exception>ProductEntryImages</exception>
+		<exception>ProductEntryLicense</exception>
+		<exception>ProductEntryName</exception>
+		<exception>ProductEntryShortDescription</exception>
+		<exception>ProductEntryType</exception>
+		<exception>ProductVersionChangeLog</exception>
+		<exception>ProductVersionDownloadURL</exception>
+		<exception>ProductVersionFrameworkVersion</exception>
+		<exception>ProductVersionName</exception>
+	</exceptions>
 </service-builder>

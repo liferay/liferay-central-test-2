@@ -238,22 +238,24 @@ public class EditServerAction extends PortletAction {
 		UploadPortletRequest uploadReq =
 			PortalUtil.getUploadPortletRequest(req);
 
-		File file = uploadReq.getFile("file");
-		String deploymentContext =
-			ParamUtil.getString(req, "deploymentContext");
-
 		String fileName = null;
 
+		String deploymentContext = ParamUtil.getString(
+			req, "deploymentContext");
+
 		if (Validator.isNotNull(deploymentContext)) {
-			fileName = Constants.DEPLOY_TO_PREFIX + deploymentContext
-				+ ".war";
+			fileName =
+				Constants.DEPLOY_TO_PREFIX + deploymentContext + ".war";
 		}
 		else {
 			fileName = uploadReq.getFileName("file");
+
 			deploymentContext = fileName.substring(0, fileName.length() - 4);
 		}
 
 		PluginPackageUtil.registerInstallingPluginPackage(deploymentContext);
+
+		File file = uploadReq.getFile("file");
 
 		byte[] bytes = FileUtil.getBytes(file);
 
@@ -412,20 +414,21 @@ public class EditServerAction extends PortletAction {
 		GetMethod getMethod = null;
 
 		try {
-			String url = ParamUtil.getString(req, "url");
-			String deploymentContext =
-				ParamUtil.getString(req, "deploymentContext");
+			String fileName = null;
 
-			String fileName;
+			String url = ParamUtil.getString(req, "url");
+			String deploymentContext = ParamUtil.getString(
+				req, "deploymentContext");
 
 			if (Validator.isNotNull(deploymentContext)) {
-				fileName = Constants.DEPLOY_TO_PREFIX + deploymentContext
-					+ ".war";
+				fileName =
+					Constants.DEPLOY_TO_PREFIX + deploymentContext + ".war";
 			}
 			else {
 				fileName = url.substring(url.lastIndexOf(StringPool.SLASH) + 1);
-				deploymentContext =
-					fileName.substring(0, fileName.length() - 4);
+
+				deploymentContext = fileName.substring(
+					0, fileName.length() - 4);
 			}
 
 			PluginPackageUtil.registerInstallingPluginPackage(
@@ -488,8 +491,7 @@ public class EditServerAction extends PortletAction {
 			getMethod.releaseConnection();
 
 			if (pis.getTotalRead() > 0) {
-				String destination =
-					deployDir + StringPool.SLASH + fileName;
+				String destination = deployDir + StringPool.SLASH + fileName;
 
 				File destinationFile = new File(destination);
 

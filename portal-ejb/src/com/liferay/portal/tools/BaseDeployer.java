@@ -53,7 +53,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
@@ -202,125 +201,7 @@ public class BaseDeployer {
 				}
 
 				if (deploy) {
-					PluginPackage pluginPackage = _readPluginPackage(srcFile);
-
-					System.out.println("\nDeploying " + srcFile.getName());
-
-					String deployDir = null;
-					String displayName = null;
-					boolean overwrite = false;
-					String preliminaryContext = null;
-
-					// File names starting with DEPLOY_TO_PREFIX should
-					// use the filename after the prefix as the deployment
-					// context
-
-					if (srcFile.getName().startsWith(
-							Constants.DEPLOY_TO_PREFIX)) {
-
-						displayName = srcFile.getName().substring(
-							Constants.DEPLOY_TO_PREFIX.length(),
-								srcFile.getName().length() - 4);
-
-						preliminaryContext = displayName;
-
-						overwrite = true;
-					}
-
-					if (preliminaryContext == null) {
-						preliminaryContext = getDisplayName(srcFile);
-					}
-
-					if (pluginPackage != null) {
-						if (!PluginPackageUtil.isCurrentVersionSupported(
-								pluginPackage.getLiferayVersions())) {
-
-							throw new AutoDeployException(
-								srcFile.getName() + " does not support this " +
-									"version of Liferay");
-						}
-
-						if (displayName == null) {
-							displayName =
-								pluginPackage.getRecommendedDeploymentContext();
-						}
-
-						if (Validator.isNull(displayName)) {
-							displayName = getDisplayName(srcFile);
-						}
-
-						pluginPackage.setContext(displayName);
-
-						PluginPackageUtil.updateInstallingPluginPackage(
-							preliminaryContext, pluginPackage);
-					}
-
-					if (Validator.isNotNull(displayName)) {
-						deployDir = displayName + ".war";
-					}
-					else {
-						deployDir = srcFile.getName();
-						displayName = getDisplayName(srcFile);
-					}
-
-					if (appServerType.equals("jetty") ||
-						appServerType.equals("oc4j") ||
-						appServerType.equals("orion") ||
-						appServerType.equals("resin") ||
-						appServerType.equals("tomcat")) {
-
-						if (unpackWar) {
-							deployDir =
-								deployDir.substring(0, deployDir.length() - 4);
-						}
-					}
-
-					deployDir = destDir + "/" + deployDir;
-
-					try {
-						PluginPackage previousPluginPackage =
-							_readPluginPackage(new File(deployDir));
-
-						if (previousPluginPackage != null) {
-							System.out.println(
-								"Updating " + pluginPackage.getName() +
-									" from " + "version " +
-										previousPluginPackage.getVersion() +
-											" to version " +
-												pluginPackage.getVersion());
-
-							if (pluginPackage.isLaterVersionThan(
-								previousPluginPackage)) {
-
-								overwrite = true;
-							}
-						}
-
-						if (srcFile.isDirectory()) {
-							deployDirectory(
-								srcFile, new File(deployDir),
-								displayName, overwrite);
-						}
-						else {
-							boolean deployed = deployFile(
-								srcFile, new File(deployDir), displayName,
-								overwrite);
-
-							if (!deployed) {
-								PluginPackageUtil.endPluginPackageInstallation(
-									pluginPackage.getContext());
-							}
-						}
-
-					}
-					catch (Exception e) {
-						if (pluginPackage != null) {
-							PluginPackageUtil.endPluginPackageInstallation(
-								pluginPackage.getContext());
-						}
-
-						throw e;
-					}
+					deployFile(srcFile);
 				}
 			}
 		}
@@ -397,13 +278,122 @@ public class BaseDeployer {
 		}
 	}
 
+	protected void deployFile(File srcFile) throws Exception {
+		PluginPackage pluginPackage = _readPluginPackage(srcFile);
+
+		System.out.println("\nDeploying " + srcFile.getName());
+
+		String deployDir = null;
+		String displayName = null;
+		boolean overwrite = false;
+		String preliminaryContext = null;
+
+		// File names starting with DEPLOY_TO_PREFIX should use the filename
+		// after the prefix as the deployment context
+
+		if (srcFile.getName().startsWith(Constants.DEPLOY_TO_PREFIX)) {
+			displayName = srcFile.getName().substring(
+				Constants.DEPLOY_TO_PREFIX.length(),
+				srcFile.getName().length() - 4);
+
+			overwrite = true;
+			preliminaryContext = displayName;
+		}
+
+		if (preliminaryContext == null) {
+			preliminaryContext = getDisplayName(srcFile);
+		}
+
+		if (pluginPackage != null) {
+			if (!PluginPackageUtil.isCurrentVersionSupported(
+					pluginPackage.getLiferayVersions())) {
+
+				throw new AutoDeployException(
+					srcFile.getName() +
+						" does not support this version of Liferay");
+			}
+
+			if (displayName == null) {
+				displayName = pluginPackage.getRecommendedDeploymentContext();
+			}
+
+			if (Validator.isNull(displayName)) {
+				displayName = getDisplayName(srcFile);
+			}
+
+			pluginPackage.setContext(displayName);
+
+			PluginPackageUtil.updateInstallingPluginPackage(
+				preliminaryContext, pluginPackage);
+		}
+
+		if (Validator.isNotNull(displayName)) {
+			deployDir = displayName + ".war";
+		}
+		else {
+			deployDir = srcFile.getName();
+			displayName = getDisplayName(srcFile);
+		}
+
+		if (appServerType.equals("jetty") || appServerType.equals("oc4j") ||
+			appServerType.equals("orion") || appServerType.equals("resin") ||
+			appServerType.equals("tomcat")) {
+
+			if (unpackWar) {
+				deployDir = deployDir.substring(0, deployDir.length() - 4);
+			}
+		}
+
+		deployDir = destDir + "/" + deployDir;
+
+		File deployDirFile = new File(deployDir);
+
+		try {
+			PluginPackage previousPluginPackage = _readPluginPackage(
+				deployDirFile);
+
+			if (previousPluginPackage != null) {
+				System.out.println(
+					"Updating " + pluginPackage.getName() + "from version " +
+						previousPluginPackage.getVersion() + " to version " +
+							pluginPackage.getVersion());
+
+				if (pluginPackage.isLaterVersionThan(
+					previousPluginPackage)) {
+
+					overwrite = true;
+				}
+			}
+
+			if (srcFile.isDirectory()) {
+				deployDirectory(srcFile, deployDirFile, displayName, overwrite);
+			}
+			else {
+				boolean deployed = deployFile(
+					srcFile, deployDirFile, displayName, overwrite);
+
+				if (!deployed) {
+					PluginPackageUtil.endPluginPackageInstallation(
+						pluginPackage.getContext());
+				}
+			}
+		}
+		catch (Exception e) {
+			if (pluginPackage != null) {
+				PluginPackageUtil.endPluginPackageInstallation(
+					pluginPackage.getContext());
+			}
+
+			throw e;
+		}
+	}
+
 	protected boolean deployFile(
 			File srcFile, File deployDir, String displayName, boolean overwrite)
 		throws Exception {
 
 		if (!overwrite && UpToDateTask.isUpToDate(srcFile, deployDir)) {
-			System.out.println(
-				deployDir + " is up to date. No deployment is necessary");
+			System.out.println(deployDir + " is already up to date");
 
 			return false;
 		}
@@ -620,10 +610,10 @@ public class BaseDeployer {
 	}
 
 	private PluginPackage _readPluginPackage(File file) {
+		InputStream is = null;
 		ZipFile zipFile = null;
 
 		try {
-			InputStream is = null;
 
 			if (file.isDirectory()) {
 				File pluginPackageXMLFile = new File(
@@ -658,13 +648,18 @@ public class BaseDeployer {
 
 			return PluginPackageUtil.readPluginPackageXml(xml);
 		}
-		catch (IOException ioe) {
-			System.err.println(file.getPath() + ": " + ioe.toString());
-		}
-		catch (DocumentException de) {
-			System.err.println(file.getPath() + ": " + de.toString());
+		catch (Exception e) {
+			System.err.println(file.getPath() + ": " + e.toString());
 		}
 		finally {
+			if (is != null) {
+				try {
+					is.close();
+				}
+				catch (IOException ioe) {
+				}
+			}
+
 			if (zipFile != null) {
 				try {
 					zipFile.close();

@@ -473,6 +473,11 @@
 		<struts-path>tags_compiler</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>104</portlet-name>
+		<struts-path>update_manager</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

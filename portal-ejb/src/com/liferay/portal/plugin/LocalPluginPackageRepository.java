@@ -28,12 +28,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Version;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeSet;
 
 /**
  * <a href="LocalPluginPackageRepository.java.html"><b><i>View Source</i></b>
@@ -47,23 +46,12 @@ public class LocalPluginPackageRepository {
 	public LocalPluginPackageRepository() {
 	}
 
-	public List getPluginPackages() {
-		return new ArrayList(_pluginPackages.values());
-	}
-
-	public List getSortedPluginPackages() {
-		Collection sortedSet =
-			new TreeSet(new PluginPackageNameAndContextComparator());
-		sortedSet.addAll(_pluginPackages.values());
-		return new ArrayList(sortedSet);
-	}
-
 	public void addPluginPackage(PluginPackage pluginPackage) {
-
 		if (pluginPackage.getContext() == null) {
 			System.out.println(
 				"Plugin package cannot be registered because it does not have" +
 					"an installation context");
+
 			return;
 		}
 
@@ -74,19 +62,25 @@ public class LocalPluginPackageRepository {
 		_pluginPackages.put(pluginPackage.getContext(), pluginPackage);
 	}
 
+	public PluginPackage getInstallingPluginPackage(String context) {
+		return (PluginPackage)_pendingPackages.get(context);
+	}
+
 	public PluginPackage getLatestPluginPackage(
 		String groupId, String artifactId) {
 
 		PluginPackage result = null;
 
-		Iterator iterator = _pluginPackages.values().iterator();
-		while (iterator.hasNext()) {
-			PluginPackage pluginPackage = (PluginPackage) iterator.next();
+		Iterator itr = _pluginPackages.values().iterator();
+
+		while (itr.hasNext()) {
+			PluginPackage pluginPackage = (PluginPackage)itr.next();
 
 			if (pluginPackage.getGroupId().equals(groupId) &&
 				pluginPackage.getArtifactId().equals(artifactId) &&
 				(result == null ||
 					pluginPackage.isLaterVersionThan(result))) {
+
 				result = pluginPackage;
 			}
 		}
@@ -95,17 +89,25 @@ public class LocalPluginPackageRepository {
 
 	}
 
-	public List getPluginPackages(String groupId, String artifactId) {
+	public PluginPackage getPluginPackage(String context) {
+		return (PluginPackage)_pluginPackages.get(context);
+	}
 
+	public List getPluginPackages() {
+		return new ArrayList(_pluginPackages.values());
+	}
+
+	public List getPluginPackages(String groupId, String artifactId) {
 		List result = new ArrayList();
 
-		Iterator iterator = _pluginPackages.values().iterator();
+		Iterator itr = _pluginPackages.values().iterator();
 
-		while (iterator.hasNext()) {
-			PluginPackage pluginPackage = (PluginPackage) iterator.next();
+		while (itr.hasNext()) {
+			PluginPackage pluginPackage = (PluginPackage)itr.next();
 
 			if (pluginPackage.getGroupId().equals(groupId) &&
 				pluginPackage.getArtifactId().equals(artifactId)) {
+
 				result.add(pluginPackage);
 			}
 		}
@@ -113,9 +115,14 @@ public class LocalPluginPackageRepository {
 		return result;
 	}
 
-	public PluginPackage getPluginPackage(String context) {
+	public List getSortedPluginPackages() {
+		List list = new ArrayList();
 
-		return (PluginPackage) _pluginPackages.get(context);
+		list.addAll(_pluginPackages.values());
+
+		Collections.sort(list, new PluginPackageNameAndContextComparator());
+
+		return list;
 	}
 
 	public void removePluginPackage(PluginPackage pluginPackage) {
@@ -126,21 +133,18 @@ public class LocalPluginPackageRepository {
 		_pluginPackages.remove(context);
 	}
 
-	public PluginPackage getInstallingPluginPackage(String context) {
-		return (PluginPackage) _pendingPackages.get(context);
-	}
-
 	public void registerPluginPackageInstallation(PluginPackage pluginPackage) {
 		if (pluginPackage.getContext() != null) {
 			PluginPackage previousPluginPackage =
-				(PluginPackage) _pluginPackages.get(pluginPackage.getContext());
+				(PluginPackage)_pluginPackages.get(pluginPackage.getContext());
+
 			if (previousPluginPackage == null) {
 				addPluginPackage(pluginPackage);
 			}
 		}
 
-		String key =
-			pluginPackage.getContext();
+		String key = pluginPackage.getContext();
+
 		if (key == null) {
 			key = pluginPackage.getModuleId();
 		}
@@ -149,7 +153,6 @@ public class LocalPluginPackageRepository {
 	}
 
 	public void registerPluginPackageInstallation(String deploymentContext) {
-
 		PluginPackage pluginPackage = getPluginPackage(deploymentContext);
 
 		if (pluginPackage == null) {

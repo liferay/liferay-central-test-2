@@ -121,29 +121,6 @@ public class Version implements Comparable {
 		return false;
 	}
 
-	public String toString() {
-		StringMaker sm = new StringMaker();
-
-		sm.append(_major);
-
-		if (Validator.isNotNull(_minor)) {
-			sm.append(_SEPARATOR);
-			sm.append(_minor);
-
-			if (Validator.isNotNull(_bugFix)) {
-				sm.append(_SEPARATOR);
-				sm.append(_bugFix);
-
-				if (Validator.isNotNull(_buildNumber)) {
-					sm.append(_SEPARATOR);
-					sm.append(_buildNumber);
-				}
-			}
-		}
-
-		return sm.toString();
-	}
-
 	public int compareTo(Object obj) {
 		if ((obj == null) || (!(obj instanceof Version))) {
 			return 1;
@@ -189,16 +166,41 @@ public class Version implements Comparable {
 
 		Version version = (Version)obj;
 
-		if (version.toString().equals(UNKNOWN) ||
-			(toString().equals(UNKNOWN))) {
+		String versionString1 = toString();
+		String versionString2 = version.toString();
+
+		if (versionString1.equals(UNKNOWN) || versionString2.equals(UNKNOWN)) {
 			return false;
 		}
 
-		return toString().equals(version.toString());
+		return versionString1.equals(versionString2);
 	}
 
 	public int hashCode() {
 		return toString().hashCode();
+	}
+
+	public String toString() {
+		StringMaker sm = new StringMaker();
+
+		sm.append(_major);
+
+		if (Validator.isNotNull(_minor)) {
+			sm.append(_SEPARATOR);
+			sm.append(_minor);
+
+			if (Validator.isNotNull(_bugFix)) {
+				sm.append(_SEPARATOR);
+				sm.append(_bugFix);
+
+				if (Validator.isNotNull(_buildNumber)) {
+					sm.append(_SEPARATOR);
+					sm.append(_buildNumber);
+				}
+			}
+		}
+
+		return sm.toString();
 	}
 
 	protected Version(String version) {

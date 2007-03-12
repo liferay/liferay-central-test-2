@@ -235,6 +235,7 @@ if (portlet.isStatic()) {
 }
 
 // Deny access
+
 if (denyAccess) {
 	access = false;
 

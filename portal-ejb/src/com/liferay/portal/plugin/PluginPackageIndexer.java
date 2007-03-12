@@ -69,10 +69,10 @@ public class PluginPackageIndexer implements Indexer {
 		throws IOException {
 
 		synchronized (IndexWriter.class) {
+			ModuleId moduleIdObj = ModuleId.getInstance(moduleId);
+
 			shortDescription = Html.stripHtml(shortDescription);
 			longDescription = Html.stripHtml(longDescription);
-
-			ModuleId moduleIdObj = ModuleId.getInstance(moduleId);
 
 			String content =
 				name + " " + author + " " + shortDescription + " " +
@@ -107,8 +107,7 @@ public class PluginPackageIndexer implements Indexer {
 			doc.add(LuceneFields.getKeyword("version", version));
 			doc.add(LuceneFields.getKeyword(
 				"shortDescription", shortDescription));
-			doc.add(LuceneFields.getKeyword(
-				"changeLog", changeLog));
+			doc.add(LuceneFields.getKeyword("changeLog", changeLog));
 			doc.add(LuceneFields.getKeyword("repositoryURL", repositoryURL));
 
 			StringMaker sm = new StringMaker();

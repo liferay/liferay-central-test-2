@@ -16,9 +16,9 @@ variable.
 <!--
 The plugin-package element contains the declarative data of a plugin.
 -->
-<!ELEMENT plugin-package (name, module-id, recommended-deployment-context?, types,
-tags?, short-description, long-description?, change-log, page-url?, screenshots?, author,
-licenses, liferay-versions)>
+<!ELEMENT plugin-package (name, module-id, recommended-deployment-context?,
+types, tags?, short-description, long-description?, change-log, page-url?,
+screenshots?, author, licenses, liferay-versions)>
 
 <!--
 The name element contains the name of the plugin package that will be shown to

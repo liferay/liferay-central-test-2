@@ -34,14 +34,17 @@ import org.quartz.JobExecutionException;
  * <a href="CheckRemoteRepositoriesJob.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class CheckRemoteRepositoriesJob implements IntervalJob {
+
 	public long getInterval() {
 		return Time.DAY;
 	}
 
 	public void execute(JobExecutionContext jobExecutionContext)
 		throws JobExecutionException {
+
 		try {
 			PluginPackageUtil.reloadRepositories();
 		}

@@ -561,8 +561,6 @@ public class ServicePreAction extends Action {
 			themeDisplay.setURLSignIn(mainPath + "/portal/login");
 			themeDisplay.setURLSignOut(mainPath + "/portal/logout");
 
-			// Update Manager URL
-
 			PortletURL updateManagerURL = new PortletURLImpl(
 				req, PortletKeys.UPDATE_MANAGER, plid, false);
 

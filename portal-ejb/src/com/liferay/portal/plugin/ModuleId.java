@@ -41,7 +41,7 @@ public class ModuleId {
 		ModuleId moduleIdObj = (ModuleId)_moduleIds.get(moduleId);
 
 		if (moduleIdObj == null) {
-				moduleIdObj =  new ModuleId(moduleId);
+			moduleIdObj =  new ModuleId(moduleId);
 
 			_moduleIds.put(moduleId, moduleIdObj);
 		}
@@ -49,27 +49,11 @@ public class ModuleId {
 		return moduleIdObj;
 	}
 
-	private ModuleId(
-		String groupId, String artifactId, Version pluginVersion, String type) {
+	public static String toString(
+		String groupId, String artifactId, String version, String type) {
 
-		_groupId = groupId;
-		_artifactId = artifactId;
-		_pluginVersion = pluginVersion;
-		_type = type;
-	}
-
-	private ModuleId(String moduleId) {
-		StringTokenizer st = new StringTokenizer(moduleId, StringPool.SLASH);
-
-		if (st.countTokens() < 4) {
-			throw new RuntimeException(
-				"The moduleId " + moduleId + " is not correct");
-		}
-
-		_groupId = st.nextToken();
-		_artifactId = st.nextToken();
-		_pluginVersion = Version.getInstance(st.nextToken());
-		_type = st.nextToken();
+		return groupId + StringPool.SLASH + artifactId + StringPool.SLASH +
+			version + StringPool.SLASH + type;
 	}
 
 	public String getGroupId() {
@@ -130,10 +114,27 @@ public class ModuleId {
 			_groupId, _artifactId, _pluginVersion.toString(), _type);
 	}
 
-	public static String toString(
-		String groupId, String artifactId, String version, String type) {
-		return groupId + StringPool.SLASH + artifactId + StringPool.SLASH +
-			version + StringPool.SLASH + type;
+	protected ModuleId(
+		String groupId, String artifactId, Version pluginVersion, String type) {
+
+		_groupId = groupId;
+		_artifactId = artifactId;
+		_pluginVersion = pluginVersion;
+		_type = type;
+	}
+
+	protected ModuleId(String moduleId) {
+		StringTokenizer st = new StringTokenizer(moduleId, StringPool.SLASH);
+
+		if (st.countTokens() < 4) {
+			throw new RuntimeException(
+				"The moduleId " + moduleId + " is not correct");
+		}
+
+		_groupId = st.nextToken();
+		_artifactId = st.nextToken();
+		_pluginVersion = Version.getInstance(st.nextToken());
+		_type = st.nextToken();
 	}
 
 	private static Map _moduleIds = CollectionFactory.getSyncHashMap();

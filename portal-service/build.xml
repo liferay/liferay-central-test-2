@@ -31,5 +31,4 @@
 
 		<antcall target="build-common-java.deploy" />
 	</target>
-
 </project>

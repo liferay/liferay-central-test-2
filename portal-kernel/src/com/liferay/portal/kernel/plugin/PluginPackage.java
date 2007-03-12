@@ -34,13 +34,13 @@ public interface PluginPackage {
 
 	public String getModuleId();
 
-	public String getRecommendedDeploymentContext();
-
-	public void setRecommendedDeploymentContext(String deploymentContext);
-
 	public String getName();
 
 	public void setName(String name);
+
+	public String getRecommendedDeploymentContext();
+
+	public void setRecommendedDeploymentContext(String deploymentContext);
 
 	public String getAuthor();
 

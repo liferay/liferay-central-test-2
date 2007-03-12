@@ -74,23 +74,19 @@ public class RemotePluginPackageRepository {
 
 		// Avoid duplicates
 
-		PluginPackage existingPackage =
-			(PluginPackage) _moduleIdIndex.get(pluginPackage.getModuleId());
+		PluginPackage existingPackage = (PluginPackage)_moduleIdIndex.get(
+			pluginPackage.getModuleId());
 
 		if (existingPackage != null) {
 		   return;
 		}
 
 		_artifactURLIndex.put(pluginPackage.getArtifactURL(), pluginPackage);
-
 		_moduleIdIndex.put(pluginPackage.getModuleId(), pluginPackage);
-
 		_addToGroupAndArtifactIndex(
 			pluginPackage.getGroupId(), pluginPackage.getArtifactId(),
 			pluginPackage);
-
 		_pluginPackages.add(pluginPackage);
-
 		_tags.addAll(pluginPackage.getTags());
 	}
 

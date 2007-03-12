@@ -80,9 +80,12 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Reading plugin package for " +
-				((servletContextName == null)?" root context":
-					servletContextName));
+			if (servletContextName == null) {
+				_log.info("Reading plugin package for the root context");
+			}
+			else {
+				_log.info("Reading plugin package for " + servletContextName);
+			}
 		}
 
 		pluginPackage = PluginPackageUtil.readPluginPackageXml(xml);
@@ -106,6 +109,7 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 
 			if (pluginPackage != null) {
 				pluginPackage.setContext(servletContextName);
+
 				event.setPluginPackage(pluginPackage);
 
 				PluginPackageUtil.registerInstalledPluginPackage(pluginPackage);

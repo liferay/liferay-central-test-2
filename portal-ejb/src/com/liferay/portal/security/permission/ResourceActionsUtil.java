@@ -388,10 +388,10 @@ public class ResourceActionsUtil {
 
 				if (name.equals(PortletKeys.PORTAL)) {
 					actions.add(ActionKeys.ADD_COMMUNITY);
+					actions.add(ActionKeys.ADD_LICENSE);
 					actions.add(ActionKeys.ADD_ORGANIZATION);
 					actions.add(ActionKeys.ADD_ROLE);
 					actions.add(ActionKeys.ADD_USER_GROUP);
-					actions.add(ActionKeys.ADD_LICENSE);
 				}
 				else {
 					Portlet portlet = PortletLocalServiceUtil.getPortletById(
