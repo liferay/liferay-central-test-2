@@ -6,6 +6,12 @@
 	<property name="jar.file" value="${ant.project.name}" />
 	<property name="service.file" value="service.xml" />
 
+	<target name="clean">
+		<delete dir="classes/com" />
+
+		<antcall target="build-common-java.clean" />
+	</target>
+
 	<target name="compile">
 		<if>
 			<and>
@@ -149,6 +155,7 @@
 	</target>
 
 	<target name="deploy">
+		<ant dir="../portal-kernel" target="deploy" inheritAll="false" />
 		<ant dir="../portal-service" target="deploy" inheritAll="false" />
 
 		<antcall target="deploy-properties" />

@@ -36,7 +36,7 @@ public class KeyValueMapperPair {
 		this(key, valueMapper, true);
 	}
 
-	public KeyValueMapperPair(String key, ValueMapper valueMapper, 
+	public KeyValueMapperPair(String key, ValueMapper valueMapper,
 							  boolean isLong) {
 
 		_key = key;

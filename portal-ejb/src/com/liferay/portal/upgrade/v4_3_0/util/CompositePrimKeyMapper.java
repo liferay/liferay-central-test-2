@@ -85,10 +85,12 @@ public class CompositePrimKeyMapper implements ValueMapper {
 				}
 			}
 
+			String partsString = StringUtil.merge(
+				parts, StringPool.COMMA + StringPool.SPACE);
+
 			primKey =
-				StringPool.OPEN_CURLY_BRACE +
-				StringUtil.merge(parts, StringPool.COMMA + StringPool.SPACE) +
-				StringPool.CLOSE_CURLY_BRACE;
+				StringPool.OPEN_CURLY_BRACE + partsString +
+					StringPool.CLOSE_CURLY_BRACE;
 		}
 
 		return primKey;
