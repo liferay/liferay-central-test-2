@@ -537,8 +537,16 @@ public class MainServlet extends ActionServlet {
 		ServletContext portalCtx = null;
 
 		try {
-			portalCtx = ctx.getContext(
-				PrefsPropsUtil.getString(_companyId, PropsUtil.PORTAL_CTX));
+			String portalContextName = PrefsPropsUtil.getString(
+				_companyId, PropsUtil.PORTAL_CTX);
+
+			portalCtx = ctx.getContext(portalContextName);
+
+			if (portalCtx != null) {
+				if (!VelocityContextPool.containsKey(portalContextName)) {
+					VelocityContextPool.put(portalContextName, portalCtx);
+				}
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);

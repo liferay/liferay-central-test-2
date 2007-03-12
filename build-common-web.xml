@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="build-common-web">
+<project name="build-common-web" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-common.xml" />
 
 	<target name="clean">
@@ -75,15 +75,6 @@
 							<then>
 								<property name="war.file.dest" value="${app.server.deploy.dir}/root" />
 							</then>
-							<elseif>
-								<or>
-									<equals arg1="${app.server.type}" arg2="resin" />
-									<equals arg1="${app.server.type}" arg2="tomcat" />
-								</or>
-								<then>
-									<property name="war.file.dest" value="${app.server.deploy.dir}/ROOT" />
-								</then>
-							</elseif>
 							<else>
 								<property name="war.file.dest" value="${app.server.portal.dir}" />
 							</else>
@@ -148,6 +139,15 @@
 							<copy file="${war.file}.war" todir="${app.server.portal.dir}" />
 						</else>
 					</if>
+				</then>
+			</elseif>
+			<elseif>
+				<and>
+					<equals arg1="${war.file}" arg2="portal-web" />
+					<equals arg1="${app.server.type}" arg2="tomcat" />
+					<antelope:endswith string="${app.server.portal.dir}" with="web-sites/liferay.com-web/docroot" />
+				</and>
+				<then>
 				</then>
 			</elseif>
 			<else>

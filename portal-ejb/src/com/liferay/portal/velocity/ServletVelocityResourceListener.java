@@ -22,6 +22,9 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.Validator;
+
 import java.io.InputStream;
 
 import javax.servlet.ServletContext;
@@ -48,6 +51,10 @@ public class ServletVelocityResourceListener extends VelocityResourceListener {
 
 		if (pos != -1) {
 			String ctxName = source.substring(0, pos);
+
+			if (Validator.isNull(ctxName)) {
+				ctxName = PropsUtil.get(PropsUtil.PORTAL_CTX);
+			}
 
 			ServletContext ctx = null;
 

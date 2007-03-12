@@ -22,18 +22,31 @@
 
 package com.liferay.support.tomcat.loader;
 
-import org.apache.catalina.loader.WebappClassLoader;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 /**
- * <a href="PortalClassLoader.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalClassLoaderFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalClassLoader extends WebappClassLoader {
+public class PortalClassLoaderFactory {
 
-	public PortalClassLoader(ClassLoader parent) {
-		super(PortalClassLoaderFactory.getClassLoader());
+	public static ClassLoader getClassLoader() {
+		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+		if (classLoader == null) {
+			_log.error(
+				"Portal class loader is not available to override the " +
+					"default Catalina web class loader");
+		}
+
+		return classLoader;
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(PortalClassLoaderFactory.class);
 
 }

@@ -308,7 +308,7 @@
 						<then>
 							<antcall target="compile-resin" />
 
-							<copy todir="${app.server.deploy.dir}/ROOT/WEB-INF/work">
+							<copy todir="${app.server.portal.dir}/WEB-INF/work">
 								<fileset dir="classes/${app.server.type}">
 									<exclude name="**/*.jspc_error" />
 									<exclude name="**/*.java" />
@@ -338,7 +338,7 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>
-				<copy todir="${app.server.deploy.dir}/ROOT">
+				<copy todir="${app.server.portal.dir}">
 					<fileset dir="docroot">
 						<include name="**/*.css" />
 						<include name="**/*.gif" />

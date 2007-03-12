@@ -1,41 +1,72 @@
 <?xml version="1.0"?>
 
-<project name="portal-ejb" basedir="." default="compile">
+<project name="portal-ejb" basedir="." default="compile" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="../build-common-ejb.xml" />
 
 	<property name="jar.file" value="${ant.project.name}" />
 	<property name="service.file" value="service.xml" />
 
 	<target name="compile">
-		<copy todir="classes/com/liferay/portal/definitions">
-			<fileset dir="${project.dir}/definitions" />
-		</copy>
+		<if>
+			<and>
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<antelope:endswith string="${app.server.portal.dir}" with="web-sites/liferay.com-web/docroot" />
+			</and>
+			<then>
+				<delete file="${app.server.lib.portal.dir}/portal-ejb.jar" />
 
-		<copy todir="classes">
-			<fileset dir="src">
-				<include name="**/dependencies/**" />
-			</fileset>
-		</copy>
+				<copy todir="${app.server.classes.portal.dir}/com/liferay/portal/definitions">
+					<fileset dir="${project.dir}/definitions" />
+				</copy>
 
-		<copy todir="classes">
-			<fileset dir="src">
-				<include name="**/service.xml" />
-			</fileset>
-		</copy>
+				<copy todir="${app.server.classes.portal.dir}">
+					<fileset dir="src" includes="**/dependencies/**,**/service.xml" />
+				</copy>
 
-		<antcall target="compile-common" />
-        <antcall target="build-common-java.compile" />
+				<copy todir="${app.server.classes.portal.dir}">
+					<fileset dir="classes" />
+				</copy>
+
+				<antcall target="compile-common" />
+				<antcall target="compile-fast" />
+			</then>
+			<else>
+				<copy todir="classes/com/liferay/portal/definitions">
+					<fileset dir="${project.dir}/definitions" />
+				</copy>
+
+				<copy todir="classes">
+					<fileset dir="src" includes="**/dependencies/**,**/service.xml" />
+				</copy>
+
+				<antcall target="compile-common" />
+				<antcall target="build-common-java.compile" />
+			</else>
+		</if>
 	</target>
 
 	<target name="compile-common">
-		<mkdir dir="classes" />
+		<if>
+			<and>
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<antelope:endswith string="${app.server.portal.dir}" with="web-sites/liferay.com-web/docroot" />
+			</and>
+			<then>
+				<property name="classes.dir" value="${app.server.classes.portal.dir}" />
+			</then>
+			<else>
+				<property name="classes.dir" value="classes" />
+			</else>
+		</if>
+
+		<mkdir dir="${classes.dir}" />
 
 		<javac
 			classpathref="project.classpath"
 			compiler="${javac.compiler}"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
-			destdir="classes"
+			destdir="${classes.dir}"
 			includes="**/portal/jcr/*.java,**/portal/lucene/*.java,**/portal/service/persistence/BasePersistence.java,**/portal/spring/util/SpringUtil.java,**/portal/util/PropsUtil.java"
 			fork="${javac.fork}"
 			memoryMaximumSize="${javac.memoryMaximumSize}"
@@ -48,12 +79,34 @@
 			compiler="modern"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
-			destdir="classes"
+			destdir="${classes.dir}"
 			includes="**/portal/smtp/SMTPServerUtil.java"
 			fork="${javac.fork}"
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>
+	</target>
+
+	<target name="compile-fast">
+		<if>
+			<and>
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<antelope:endswith string="${app.server.portal.dir}" with="web-sites/liferay.com-web/docroot" />
+			</and>
+			<then>
+				<javac
+					classpathref="project.classpath"
+					compiler="${javac.compiler}"
+					debug="${javac.debug}"
+					deprecation="${javac.deprecation}"
+					destdir="${app.server.classes.portal.dir}"
+					fork="${javac.fork}"
+					memoryMaximumSize="${javac.memoryMaximumSize}"
+					nowarn="${javac.nowarn}"
+					srcdir="src"
+				/>
+			</then>
+		</if>
 	</target>
 
 	<target name="compile-tools">
@@ -98,7 +151,34 @@
 	<target name="deploy">
 		<ant dir="../portal-service" target="deploy" inheritAll="false" />
 
-		<antcall target="build-common-ejb.deploy" />
+		<antcall target="deploy-properties" />
+
+		<if>
+			<and>
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<antelope:endswith string="${app.server.portal.dir}" with="web-sites/liferay.com-web/docroot" />
+			</and>
+			<then>
+				<delete file="${app.server.lib.portal.dir}/portal-ejb.jar" />
+
+				<copy todir="${app.server.classes.portal.dir}/com/liferay/portal/definitions">
+					<fileset dir="${project.dir}/definitions" />
+				</copy>
+
+				<copy todir="${app.server.classes.portal.dir}">
+					<fileset dir="src" includes="**/dependencies/**,**/service.xml" />
+				</copy>
+
+				<copy todir="${app.server.classes.portal.dir}">
+					<fileset dir="classes" />
+				</copy>
+
+				<antcall target="compile" />
+			</then>
+			<else>
+				<antcall target="build-common-ejb.deploy" />
+			</else>
+		</if>
 	</target>
 
 	<target name="deploy-properties">

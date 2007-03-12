@@ -33,9 +33,9 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>
-				<copy file="${jar.file}.jar" todir="${app.server.deploy.dir}/ROOT/WEB-INF/lib" />
+				<copy file="${jar.file}.jar" todir="${app.server.portal.dir}/WEB-INF/lib" />
 
-				<copy todir="${app.server.deploy.dir}/ROOT/WEB-INF/tld">
+				<copy todir="${app.server.portal.dir}/WEB-INF/tld">
 					<fileset dir="classes/META-INF" />
 				</copy>
 			</then>
