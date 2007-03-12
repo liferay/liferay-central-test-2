@@ -148,6 +148,12 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 		ResourceLocalServiceFactory.getTxImpl().deleteResources(name);
 	}
 
+	public long getLastResourceId()
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return ResourceLocalServiceFactory.getTxImpl().getLastResourceId();
+	}
+
 	public com.liferay.portal.model.Resource getResource(long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
@@ -42,6 +41,7 @@ import com.liferay.portal.service.persistence.OrgGroupPermissionUtil;
 import com.liferay.portal.service.persistence.PermissionUtil;
 import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.comparator.ResourceComparator;
 
 import java.util.Iterator;
 import java.util.List;
@@ -154,7 +154,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		if (resource == null) {
 			long resourceId = CounterLocalServiceUtil.increment(
-				Counter.class.getName());
+				Resource.class.getName());
 
 			resource = ResourceUtil.create(resourceId);
 			resource.setCompanyId(companyId);
@@ -364,6 +364,16 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			deleteResource(resource);
 		}
+	}
+
+	public long getLastResourceId()
+		throws PortalException, SystemException {
+
+		List list = ResourceUtil.findAll(0, 1, new ResourceComparator());
+
+		Resource rsrc = (Resource)list.get(0);
+
+		return rsrc.getResourceId();
 	}
 
 	public Resource getResource(long resourceId)

@@ -92,6 +92,12 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 			groupId, resourceId);
 	}
 
+	public long getLastPermissionId()
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return PermissionLocalServiceFactory.getTxImpl().getLastPermissionId();
+	}
+
 	public java.util.List getPermissions(java.lang.String companyId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 

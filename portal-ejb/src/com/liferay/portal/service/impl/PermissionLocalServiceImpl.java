@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.NoSuchResourceException;
@@ -52,6 +51,7 @@ import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.comparator.PermissionComparator;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
@@ -79,7 +79,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		if (permission == null) {
 			long permissionId =	CounterLocalServiceUtil.increment(
-				Counter.class.getName());
+				Permission.class.getName());
 
 			permission = PermissionUtil.create(permissionId);
 
@@ -162,6 +162,16 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		return PermissionFinder.findByO_G_R(
 			organizationId, groupId, resourceId);
+	}
+
+	public long getLastPermissionId()
+		throws PortalException, SystemException {
+
+		List list = PermissionUtil.findAll(0, 1, new PermissionComparator());
+
+		Permission perm = (Permission)list.get(0);
+
+		return perm.getPermissionId();
 	}
 
 	public List getPermissions(
@@ -485,7 +495,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		}
 		catch (NoSuchPermissionException nspe) {
 			long permissionId =	CounterLocalServiceUtil.increment(
-				Counter.class.getName());
+				Permission.class.getName());
 
 			permission = PermissionUtil.create(permissionId);
 

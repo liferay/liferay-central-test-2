@@ -49,4 +49,7 @@ public interface CounterService {
 
 	public void reset(String name) throws RemoteException, SystemException;
 
+	public void reset(String name, long size)
+		throws RemoteException, SystemException;
+
 }

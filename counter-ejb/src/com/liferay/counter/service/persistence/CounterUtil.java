@@ -59,6 +59,10 @@ public class CounterUtil {
 		getPersistence().reset(name);
 	}
 
+	public static void reset(String name, long size) throws SystemException {
+		getPersistence().reset(name, size);
+	}
+
 	public static CounterPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

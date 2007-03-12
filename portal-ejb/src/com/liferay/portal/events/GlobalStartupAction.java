@@ -189,6 +189,7 @@ public class GlobalStartupAction extends SimpleAction {
 
 		runEvent(FixOracleAction.class.getName(), ids);
 		runEvent(FixImageAction.class.getName(), ids);
+		runEvent(FixCounterAction.class.getName(), ids);
 	}
 
 	protected void runEvent(String className, String[] ids)

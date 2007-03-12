@@ -154,6 +154,14 @@ public class ResourceLocalServiceUtil {
 		resourceLocalService.deleteResources(name);
 	}
 
+	public static long getLastResourceId()
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getLastResourceId();
+	}
+
 	public static com.liferay.portal.model.Resource getResource(long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -44,4 +44,6 @@ public interface CounterLocalService {
 
 	public void reset(String name) throws SystemException;
 
+	public void reset(String name, long size) throws SystemException;
+
 }

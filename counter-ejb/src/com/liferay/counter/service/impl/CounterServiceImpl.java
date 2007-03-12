@@ -56,4 +56,8 @@ public class CounterServiceImpl implements CounterService {
 		CounterUtil.reset(name);
 	}
 
+	public void reset(String name, long size) throws SystemException {
+		CounterUtil.reset(name, size);
+	}
+
 }

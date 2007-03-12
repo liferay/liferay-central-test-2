@@ -63,6 +63,10 @@ public class CounterLocalServiceEJBImpl
 		CounterLocalServiceFactory.getTxImpl().reset(name);
 	}
 
+	public void reset(String name, long size) throws SystemException {
+		CounterLocalServiceFactory.getTxImpl().reset(name, size);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

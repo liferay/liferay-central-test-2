@@ -71,4 +71,11 @@ public class CounterLocalServiceUtil {
 		counterService.reset(name);
 	}
 
+	public static void reset(String name, long size) throws SystemException {
+		CounterLocalService counterService =
+			CounterLocalServiceFactory.getService();
+
+		counterService.reset(name, size);
+	}
+
 }

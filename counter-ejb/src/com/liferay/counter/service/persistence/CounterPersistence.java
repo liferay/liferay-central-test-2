@@ -212,6 +212,14 @@ public class CounterPersistence extends BasePersistence {
 		}
 	}
 
+	public void reset(String name, long size) throws SystemException {
+		CounterRegister register = createCounterRegister(name, size);
+
+		synchronized (register) {
+			registerLookup.put(name, register);
+		}
+	}
+
 	protected synchronized CounterRegister getCounterRegister(String name)
 		throws SystemException {
 
@@ -229,6 +237,13 @@ public class CounterPersistence extends BasePersistence {
 	protected synchronized CounterRegister createCounterRegister(String name)
 		throws SystemException {
 
+		return createCounterRegister(name, -1);
+	}
+
+	protected synchronized CounterRegister createCounterRegister(
+			String name, long size)
+		throws SystemException {
+
 		long rangeMin = 0;
 		long rangeMax = 0;
 
@@ -242,7 +257,6 @@ public class CounterPersistence extends BasePersistence {
 
 			if (counter == null) {
 				rangeMin = _DEFAULT_CURRENT_ID;
-				rangeMax = rangeMin + _COUNTER_INCREMENT;
 
 				counter = new Counter();
 
@@ -250,8 +264,13 @@ public class CounterPersistence extends BasePersistence {
 			}
 			else {
 				rangeMin = counter.getCurrentId();
-				rangeMax = rangeMin + _COUNTER_INCREMENT;
 			}
+
+			if (size >= _DEFAULT_CURRENT_ID) {
+				rangeMin = size;
+			}
+
+			rangeMax = rangeMin + _COUNTER_INCREMENT;
 
 			counter.setCurrentId(rangeMax);
 

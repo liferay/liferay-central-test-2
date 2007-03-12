@@ -66,6 +66,12 @@ public class CounterServiceEJBImpl implements CounterService, SessionBean {
 		CounterServiceFactory.getTxImpl().reset(name);
 	}
 
+	public void reset(String name, long size)
+		throws RemoteException, SystemException {
+
+		CounterServiceFactory.getTxImpl().reset(name, size);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

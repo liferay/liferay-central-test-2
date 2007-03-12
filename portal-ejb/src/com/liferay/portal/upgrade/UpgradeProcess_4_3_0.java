@@ -28,7 +28,6 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradeBookmarks;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeCalendar;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeGroup;
-import com.liferay.portal.upgrade.v4_3_0.UpgradePermission;
 import com.liferay.portal.upgrade.v4_3_0.UpgradePhone;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeSubscription;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
@@ -60,7 +59,6 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradeCalendar());
 		upgrade(new UpgradeEmailAddress());
 		upgrade(new UpgradeGroup());
-		upgrade(new UpgradePermission());
 		upgrade(new UpgradePhone());
 		upgrade(new UpgradeSubscription());
 		upgrade(new UpgradeWebsite());

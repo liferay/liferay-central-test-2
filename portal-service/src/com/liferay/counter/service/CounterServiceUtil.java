@@ -74,4 +74,12 @@ public class CounterServiceUtil {
 		counterService.reset(name);
 	}
 
+	public static void reset(String name, long size)
+		throws RemoteException, SystemException {
+
+		CounterService counterService = CounterServiceFactory.getService();
+
+		counterService.reset(name, size);
+	}
+
 }
