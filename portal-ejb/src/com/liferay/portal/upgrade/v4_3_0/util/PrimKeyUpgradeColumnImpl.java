@@ -45,6 +45,11 @@ public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		_upgradeColumn = upgradeColumn;
 		_groupIdMapper = groupIdMapper;
 		_ownerIdMapper = ownerIdMapper;
+
+		_compositeMapper = new CompositePrimKeyMapper(new KeyValueMapperPair[] {
+				new KeyValueMapperPair("groupId", _groupIdMapper, true),
+				new KeyValueMapperPair("ownerId", _ownerIdMapper, false)
+			});
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
@@ -71,40 +76,8 @@ public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 				newValue = StringUtil.merge(keyParts, StringPool.PERIOD);
 			}
-			else if (primKey.indexOf("groupId=") != -1 ||
-					 primKey.indexOf("ownerId=") != -1) {
-
-				// {layoutId=1234, ownerId=PRI.5678}
-
-				String[] keyParts = StringUtil.split(
-					primKey.substring(1, primKey.length() - 1),
-					StringPool.COMMA + StringPool.SPACE);
-
-				for (int i = 0; i < keyParts.length; i++) {
-					String[] kvp =
-						StringUtil.split(keyParts[i], StringPool.EQUAL);
-
-					if (kvp[0].equals("groupId")) {
-						kvp[1] =
-							String.valueOf(
-								_groupIdMapper.getNewValue(new Long(kvp[1])));
-
-						keyParts[i] =
-							StringUtil.merge(kvp, StringPool.EQUAL);
-					}
-					else if (kvp[0].equals("ownerId")) {
-						kvp[1] = (String)_ownerIdMapper.getNewValue(kvp[1]);
-
-						keyParts[i] =
-							StringUtil.merge(kvp, StringPool.EQUAL);
-					}
-				}
-
-				newValue =
-					StringPool.OPEN_CURLY_BRACE +
-					StringUtil.merge(
-						keyParts, StringPool.COMMA + StringPool.SPACE) +
-					StringPool.CLOSE_CURLY_BRACE;
+			else {
+				newValue = _compositeMapper.getNewValue(oldValue);
 			}
 		}
 
@@ -114,5 +87,6 @@ public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	private TempScopeUpgradeColumnImpl _upgradeColumn;
 	private ValueMapper _groupIdMapper;
 	private ValueMapper _ownerIdMapper;
+	private CompositePrimKeyMapper _compositeMapper;
 
 }
