@@ -47,7 +47,7 @@
 	</style>
 </head>
 
-<body id="body-bg">
+<body id="body-bg" class="$css_class">
 
 $taglibLiferay.include("/html/common/themes/top_messages.jsp")
 

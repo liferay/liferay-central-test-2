@@ -22,20 +22,11 @@
  */
 *#
 
-
 /******************************************************************************/
 /* Liferay                                                                    */
 /******************************************************************************/
 
 /* Global */
-
-a {
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
 
 body {
 	border: 0;
@@ -64,9 +55,13 @@ body * { font-size: 1em; }
 	z-index: 1;
 }
 
-.freeform #layout-desktop-icons-spacer {
+#layout-desktop-icons-spacer {
 	font-size: 0;
 	height: 70px;
+}
+
+.freeform #layout-desktop-icons-spacer {
+	display: none;
 }
 
 #layout-desktop-icons div.reflected {
@@ -160,7 +155,7 @@ body * { font-size: 1em; }
 }
 
 .layout-tab-text {
-	padding: 12px 20px 0 20px;
+	padding: 10px 20px 0 20px;
 }
 
 .layout-tab-text * {
@@ -354,6 +349,7 @@ body * { font-size: 1em; }
 
 .portlet-container {
 	background-color: #ffffff;
+	padding: 10px;
 }
 
 .portlet-borderless-container { position: relative; }
@@ -368,6 +364,7 @@ body * { font-size: 1em; }
 	background-image: none;
 	color: #FFFFFF;
 	font-weight: bold;
+	padding: 0 0 0 5px;
 	position: absolute;
 	top: 13px;
 	left: 15px;

@@ -41,11 +41,12 @@ input[type="submit"], input[type="button"], input[type="reset"] {
 	color: #333;
 	font-weight: bold;
 	padding: 0.25em;
+	border: 3px solid red;
 }
 
-/* ---------- IE6 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
+/* ---------- IE6 & IE7 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
 
-.ie6 input.text, .ie6 input.password, .ie6 input.submit, .ie6 input.file, .ie6 input.button {
+input.text, input.password, input.submit, input.file, input.button {
 	background: #fff url(../images/forms/input_shadow.gif) no-repeat;
 	border: 1px solid #aaa;
 	border-left-color: #777;
@@ -54,7 +55,7 @@ input[type="submit"], input[type="button"], input[type="reset"] {
 	padding: 0.3em;
 }
 
-.ie6 input.submit, .ie6 input.button {
+input.submit, input.button {
 	background: #FAFAFA url(../images/forms/button.gif) repeat-x;
 	border: 3px double #999;
 	border-left-color: #ccc;
