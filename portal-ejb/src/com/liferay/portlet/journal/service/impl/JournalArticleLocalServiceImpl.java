@@ -504,7 +504,7 @@ public class JournalArticleLocalServiceImpl
 
 			ResourceLocalServiceUtil.deleteResource(
 				article.getCompanyId(), JournalArticle.class.getName(),
-				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+				ResourceImpl.SCOPE_INDIVIDUAL,
 				article.getResourcePK().toString());
 		}
 

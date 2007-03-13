@@ -1068,6 +1068,38 @@
 			<ref bean="com.liferay.portal.service.persistence.ResourcePersistence" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ResourceCodeLocalService.professional" class="com.liferay.portal.service.impl.ResourceCodeLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.ResourceCodeLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ResourceCodeLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ResourceCodeLocalServiceFactory" class="com.liferay.portal.service.ResourceCodeLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ResourceCodeLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ResourceCodePersistence" class="com.liferay.portal.service.persistence.ResourceCodePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ResourceCodeUtil" class="com.liferay.portal.service.persistence.ResourceCodeUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.ResourceCodePersistence" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.RoleLocalService.professional" class="com.liferay.portal.service.impl.RoleLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.RoleLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

@@ -31,8 +31,7 @@ package com.liferay.portal.service;
 public interface ResourceService {
 	public com.liferay.portal.model.Resource getResource(
 		java.lang.String companyId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey)
+		java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

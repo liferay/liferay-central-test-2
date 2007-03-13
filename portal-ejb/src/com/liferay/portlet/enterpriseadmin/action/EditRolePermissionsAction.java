@@ -179,14 +179,12 @@ public class EditRolePermissionsAction extends PortletAction {
 			if (scope.equals(ResourceImpl.SCOPE_COMPANY)) {
 				PermissionServiceUtil.setRolePermission(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
-					ResourceImpl.TYPE_CLASS, scope, themeDisplay.getCompanyId(),
-					actionId);
+					scope, themeDisplay.getCompanyId(), actionId);
 			}
 			else if (scope.equals(ResourceImpl.SCOPE_GROUP)) {
 				if (role.getType() == RoleImpl.TYPE_COMMUNITY) {
 					PermissionServiceUtil.setRolePermission(
 						roleId, themeDisplay.getPortletGroupId(), selResource,
-						ResourceImpl.TYPE_CLASS,
 						ResourceImpl.SCOPE_GROUP_TEMPLATE,
 						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
 						actionId);
@@ -201,18 +199,15 @@ public class EditRolePermissionsAction extends PortletAction {
 
 				PermissionServiceUtil.unsetRolePermissions(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
-					ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY,
-					actionId);
+					ResourceImpl.SCOPE_COMPANY, actionId);
 
 				PermissionServiceUtil.unsetRolePermissions(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
-					ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE,
-					actionId);
+					ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
 
 				PermissionServiceUtil.unsetRolePermissions(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
-					ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
-					actionId);
+					ResourceImpl.SCOPE_GROUP, actionId);
 			}
 		}
 
@@ -264,15 +259,13 @@ public class EditRolePermissionsAction extends PortletAction {
 		for (int i = 0; i < addGroupIds.length; i++) {
 			PermissionServiceUtil.setRolePermission(
 				roleId, themeDisplay.getPortletGroupId(), selResource,
-				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
-				addGroupIds[i], actionId);
+				ResourceImpl.SCOPE_GROUP, addGroupIds[i], actionId);
 		}
 
 		for (int i = 0; i < removeGroupIds.length; i++) {
 			PermissionServiceUtil.unsetRolePermission(
 				roleId, themeDisplay.getPortletGroupId(), selResource,
-				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
-				removeGroupIds[i], actionId);
+				ResourceImpl.SCOPE_GROUP, removeGroupIds[i], actionId);
 		}
 
 		String redirect = ParamUtil.getString(req, "redirect");

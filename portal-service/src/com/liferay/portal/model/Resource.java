@@ -29,4 +29,5 @@ package com.liferay.portal.model;
  *
  */
 public interface Resource extends ResourceModel {
+	public java.lang.String getName() throws com.liferay.portal.SystemException;
 }

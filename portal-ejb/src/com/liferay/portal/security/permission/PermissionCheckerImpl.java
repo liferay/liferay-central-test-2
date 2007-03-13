@@ -322,8 +322,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		try {
 			Resource resource = ResourceServiceUtil.getResource(
-				companyId, name, ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
+				companyId, name, ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 
 			long resourceId = resource.getResourceId();
 
@@ -361,8 +360,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		try {
 			Resource resource = ResourceServiceUtil.getResource(
-				companyId, name, ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
+				companyId, name, ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 
 			resourceIds[0] = resource.getResourceId();
 		}
@@ -370,9 +368,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
-						ResourceImpl.TYPE_CLASS  + " " +
-							ResourceImpl.SCOPE_INDIVIDUAL + " " + primKey +
-								" does not exist");
+						ResourceImpl.SCOPE_INDIVIDUAL + " " + primKey +
+							" does not exist");
 			}
 		}
 
@@ -383,8 +380,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		try {
 			if (groupId > 0) {
 				Resource resource = ResourceServiceUtil.getResource(
-					companyId, name, ResourceImpl.TYPE_CLASS,
-					ResourceImpl.SCOPE_GROUP, String.valueOf(groupId));
+					companyId, name, ResourceImpl.SCOPE_GROUP,
+					String.valueOf(groupId));
 
 				resourceIds[1] = resource.getResourceId();
 			}
@@ -393,9 +390,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
-						ResourceImpl.TYPE_CLASS  + " " +
-							ResourceImpl.SCOPE_GROUP + " " + groupId +
-								" does not exist");
+						ResourceImpl.SCOPE_GROUP + " " + groupId +
+							" does not exist");
 			}
 		}
 
@@ -406,8 +402,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		try {
 			if (groupId > 0) {
 				Resource resource = ResourceServiceUtil.getResource(
-					companyId, name, ResourceImpl.TYPE_CLASS,
-					ResourceImpl.SCOPE_GROUP_TEMPLATE,
+					companyId, name, ResourceImpl.SCOPE_GROUP_TEMPLATE,
 					String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID));
 
 				resourceIds[2] = resource.getResourceId();
@@ -417,10 +412,9 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
-						ResourceImpl.TYPE_CLASS  + " " +
-							ResourceImpl.SCOPE_GROUP_TEMPLATE + " " +
-								GroupImpl.DEFAULT_PARENT_GROUP_ID +
-									" does not exist");
+						ResourceImpl.SCOPE_GROUP_TEMPLATE + " " +
+							GroupImpl.DEFAULT_PARENT_GROUP_ID +
+								" does not exist");
 			}
 		}
 
@@ -430,8 +424,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		try {
 			Resource resource = ResourceServiceUtil.getResource(
-				companyId, name, ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_COMPANY, companyId);
+				companyId, name, ResourceImpl.SCOPE_COMPANY, companyId);
 
 			resourceIds[3] = resource.getResourceId();
 		}
@@ -439,9 +432,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
-						ResourceImpl.TYPE_CLASS  + " " +
-							ResourceImpl.SCOPE_COMPANY + " " + companyId +
-								" does not exist");
+						ResourceImpl.SCOPE_COMPANY + " " + companyId +
+							" does not exist");
 			}
 		}
 

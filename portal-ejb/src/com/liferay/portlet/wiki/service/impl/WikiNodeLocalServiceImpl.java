@@ -208,8 +208,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			node.getCompanyId(), WikiNode.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			node.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, node.getPrimaryKey().toString());
 
 		// Node
 

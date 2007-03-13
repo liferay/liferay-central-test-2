@@ -31,13 +31,11 @@ package com.liferay.portal.service;
 public class ResourceServiceUtil {
 	public static com.liferay.portal.model.Resource getResource(
 		java.lang.String companyId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey)
+		java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ResourceService resourceService = ResourceServiceFactory.getService();
 
-		return resourceService.getResource(companyId, name, typeId, scope,
-			primKey);
+		return resourceService.getResource(companyId, name, scope, primKey);
 	}
 }

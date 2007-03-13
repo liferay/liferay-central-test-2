@@ -79,14 +79,14 @@ if (modelResource.equals(Layout.class.getName())) {
 Resource resource = null;
 
 try {
-	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey);
+	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey);
 }
 catch (NoSuchResourceException nsre) {
 	boolean portletActions = Validator.isNull(modelResource);
 
 	ResourceLocalServiceUtil.addResources(company.getCompanyId(), groupId, null, selResource, resourcePrimKey, portletActions, true, true);
 
-	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey);
+	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey);
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();

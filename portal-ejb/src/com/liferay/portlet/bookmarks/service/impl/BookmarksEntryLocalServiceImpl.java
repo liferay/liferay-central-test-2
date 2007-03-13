@@ -218,8 +218,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			entry.getCompanyId(), BookmarksEntry.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			entry.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, entry.getPrimaryKey());
 
 		// Entry
 

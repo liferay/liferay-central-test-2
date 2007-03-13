@@ -156,11 +156,11 @@ create index IX_2D9A426F on Region (active_);
 create index IX_16D87CA7 on Region (countryId);
 create index IX_11FB3E42 on Region (countryId, active_);
 
-create index IX_722B1A51 on Resource_ (companyId);
-create index IX_FF2D206B on Resource_ (companyId, name, typeId, scope);
-create index IX_982DFEBE on Resource_ (companyId, name, typeId, scope, primKey);
-create index IX_9F23BCBF on Resource_ (companyId, typeId, scope, primKey);
-create index IX_8CDC43F6 on Resource_ (name);
+create index IX_98C6E222 on ResourceCode (code);
+create index IX_AACAFF40 on ResourceCode (name);
+
+create index IX_7AD826D8 on Resource_ (code);
+create index IX_C8CEE2F1 on Resource_ (code, primKey);
 
 create index IX_449A10B9 on Role_ (companyId);
 create index IX_ED284C69 on Role_ (companyId, className, classPK);

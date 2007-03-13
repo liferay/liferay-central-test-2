@@ -57,7 +57,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
-import com.liferay.portal.service.persistence.ResourceUtil;
+import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -292,9 +292,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Resources
 
-		Iterator itr = ResourceUtil.findByC_T_S_P(
-			group.getCompanyId(), ResourceImpl.TYPE_CLASS,
-			ResourceImpl.SCOPE_GROUP, String.valueOf(groupId)).iterator();
+		Iterator itr = ResourceFinder.findByC_P(
+			group.getCompanyId(), String.valueOf(groupId)).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();
@@ -307,8 +306,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			ResourceLocalServiceUtil.deleteResource(
 				group.getCompanyId(), Group.class.getName(),
-				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-				group.getPrimaryKey());
+				ResourceImpl.SCOPE_INDIVIDUAL, group.getPrimaryKey());
 		}
 
 		// Group

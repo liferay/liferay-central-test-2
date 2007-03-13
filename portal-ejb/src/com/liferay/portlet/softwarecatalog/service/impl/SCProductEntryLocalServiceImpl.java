@@ -279,8 +279,7 @@ public class SCProductEntryLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			productEntry.getCompanyId(), SCProductEntry.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			productEntry.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, productEntry.getPrimaryKey());
 
 		// Product entry
 

@@ -297,8 +297,7 @@ public class JournalTemplateLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			template.getCompanyId(), JournalTemplate.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			template.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, template.getPrimaryKey().toString());
 
 		// Template
 

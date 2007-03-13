@@ -88,8 +88,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 					Resource resource = ResourceLocalServiceUtil.addResource(
 						companyId, Group.class.getName(),
-						ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-						String.valueOf(groupId));
+						ResourceImpl.SCOPE_INDIVIDUAL, String.valueOf(groupId));
 
 					PermissionLocalServiceUtil.addUserPermissions(
 						user.getUserId(),

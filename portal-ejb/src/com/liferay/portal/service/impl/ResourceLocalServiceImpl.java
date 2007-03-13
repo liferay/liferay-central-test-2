@@ -35,10 +35,12 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
+import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrgGroupPermissionUtil;
 import com.liferay.portal.service.persistence.PermissionUtil;
+import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.comparator.ResourceComparator;
@@ -80,9 +82,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		// Company
 
-		addResource(
-			companyId, name, ResourceImpl.TYPE_CLASS,
-			ResourceImpl.SCOPE_COMPANY, companyId);
+		addResource(companyId, name, ResourceImpl.SCOPE_COMPANY, companyId);
 
 		// Guest
 
@@ -90,15 +90,15 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			companyId, GroupImpl.GUEST);
 
 		addResource(
-			companyId, name, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
+			companyId, name, ResourceImpl.SCOPE_GROUP,
 			String.valueOf(guestGroup.getGroupId()));
 
 		// Group
 
 		if ((groupId > 0) && (guestGroup.getGroupId() != groupId)) {
 			addResource(
-				companyId, name, ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_GROUP, String.valueOf(groupId));
+				companyId, name, ResourceImpl.SCOPE_GROUP,
+				String.valueOf(groupId));
 		}
 
 		if (primKey != null) {
@@ -106,8 +106,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			// Individual
 
 			Resource resource = addResource(
-				companyId, name, ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
+				companyId, name, ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 
 			// Permissions
 
@@ -145,22 +144,20 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public Resource addResource(
-			String companyId, String name, String typeId, String scope,
-			String primKey)
+			String companyId, String name, String scope, String primKey)
 		throws PortalException, SystemException {
 
-		Resource resource = ResourceUtil.fetchByC_N_T_S_P(
-			companyId, name, typeId, scope, primKey);
+		long code =
+			ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+
+		Resource resource = ResourceUtil.fetchByC_P(code, primKey);
 
 		if (resource == null) {
 			long resourceId = CounterLocalServiceUtil.increment(
 				Resource.class.getName());
 
 			resource = ResourceUtil.create(resourceId);
-			resource.setCompanyId(companyId);
-			resource.setName(name);
-			resource.setTypeId(typeId);
-			resource.setScope(scope);
+			resource.setCode(code);
 			resource.setPrimKey(primKey);
 
 			ResourceUtil.update(resource);
@@ -210,8 +207,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		// Company
 
 		addResource(
-			companyId, name, ResourceImpl.TYPE_CLASS,
-			ResourceImpl.SCOPE_COMPANY, companyId);
+			companyId, name, ResourceImpl.SCOPE_COMPANY, companyId);
 
 		logAddResources(name, primKey, stopWatch, 2);
 
@@ -221,7 +217,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			companyId, GroupImpl.GUEST);
 
 		addResource(
-			companyId, name, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
+			companyId, name, ResourceImpl.SCOPE_GROUP,
 			String.valueOf(guestGroup.getGroupId()));
 
 		logAddResources(name, primKey, stopWatch, 3);
@@ -230,8 +226,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		if ((groupId > 0) && (guestGroup.getGroupId() != groupId)) {
 			addResource(
-				companyId, name, ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_GROUP, String.valueOf(groupId));
+				companyId, name, ResourceImpl.SCOPE_GROUP,
+				String.valueOf(groupId));
 		}
 
 		logAddResources(name, primKey, stopWatch, 4);
@@ -241,8 +237,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			// Individual
 
 			Resource resource = addResource(
-				companyId, name, ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
+				companyId, name, ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 
 			logAddResources(name, primKey, stopWatch, 5);
 
@@ -331,21 +326,18 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void deleteResource(
-			String companyId, String name, String typeId, String scope,
-			long primKey)
+			String companyId, String name, String scope, long primKey)
 		throws PortalException, SystemException {
 
-		deleteResource(companyId, name, typeId, scope, String.valueOf(primKey));
+		deleteResource(companyId, name, scope, String.valueOf(primKey));
 	}
 
 	public void deleteResource(
-			String companyId, String name, String typeId, String scope,
-			String primKey)
+			String companyId, String name, String scope, String primKey)
 		throws PortalException, SystemException {
 
 		try {
-			Resource resource =
-				getResource(companyId, name, typeId, scope, primKey);
+			Resource resource = getResource(companyId, name, scope, primKey);
 
 			deleteResource(resource.getResourceId());
 		}
@@ -357,7 +349,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	public void deleteResources(String name)
 		throws PortalException, SystemException {
 
-		Iterator itr = ResourceUtil.findByName(name).iterator();
+		Iterator itr = ResourceFinder.findByName(name).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();
@@ -392,12 +384,13 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public Resource getResource(
-			String companyId, String name, String typeId, String scope,
-			String primKey)
+			String companyId, String name, String scope, String primKey)
 		throws PortalException, SystemException {
 
-		return ResourceUtil.findByC_N_T_S_P(
-			companyId, name, typeId, scope, primKey);
+		long code =
+			ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+
+		return ResourceUtil.findByC_P(code, primKey);
 	}
 
 	protected void addCommunityPermissions(

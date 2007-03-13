@@ -221,8 +221,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			layout.getCompanyId(), Layout.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			layout.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, layout.getPrimaryKey().toString());
 
 		// Layout
 
@@ -828,7 +827,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		try {
 			Resource resource = ResourceLocalServiceUtil.getResource(
 				layout.getCompanyId(), Layout.class.getName(),
-				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+				ResourceImpl.SCOPE_INDIVIDUAL,
 				layout.getPrimaryKey().toString());
 
 			List permissions = PermissionLocalServiceUtil.getGroupPermissions(
@@ -931,8 +930,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				layout.getPlid(), portletId);
 
 			Resource resource = ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), name, ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
+				layout.getCompanyId(), name, ResourceImpl.SCOPE_INDIVIDUAL,
+				primKey);
 
 			List permissions = PermissionLocalServiceUtil.getGroupPermissions(
 				groupId, resource.getResourceId());
@@ -1084,7 +1083,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		try {
 			resource = ResourceLocalServiceUtil.getResource(
 				layout.getCompanyId(), Layout.class.getName(),
-				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+				ResourceImpl.SCOPE_INDIVIDUAL,
 				layout.getPrimaryKey().toString());
 		}
 		catch (NoSuchResourceException nsre) {
@@ -1095,7 +1094,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			resource = ResourceLocalServiceUtil.getResource(
 				layout.getCompanyId(), Layout.class.getName(),
-				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+				ResourceImpl.SCOPE_INDIVIDUAL,
 				layout.getPrimaryKey().toString());
 		}
 
@@ -1219,8 +1218,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		try {
 			resource = ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), name, ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
+				layout.getCompanyId(), name, ResourceImpl.SCOPE_INDIVIDUAL,
+				primKey);
 		}
 		catch (NoSuchResourceException nsre) {
 			ResourceLocalServiceUtil.addResources(
@@ -1228,8 +1227,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				true, true, true);
 
 			resource = ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), name, ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
+				layout.getCompanyId(), name,  ResourceImpl.SCOPE_INDIVIDUAL,
+				primKey);
 		}
 
 		List actions = new ArrayList();

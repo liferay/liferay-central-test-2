@@ -200,8 +200,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			folder.getCompanyId(), BookmarksFolder.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			folder.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, folder.getPrimaryKey());
 
 		// Folder
 

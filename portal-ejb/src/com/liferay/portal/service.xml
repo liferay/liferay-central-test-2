@@ -808,42 +808,41 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
-
 		<!-- Other fields -->
 
-		<column name="name" type="String" />
-		<column name="typeId" type="String" />
-		<column name="scope" type="String" />
+		<column name="code" type="long" />
 		<column name="primKey" type="String" />
 
 		<!-- Finder methods -->
 
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="Code" return-type="Collection">
+			<finder-column name="code" />
 		</finder>
+		<finder name="C_P" return-type="Resource">
+			<finder-column name="code" />
+			<finder-column name="primKey" />
+		</finder>
+	</entity>
+	<entity name="ResourceCode" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="companyId" type="String" primary="true" />
+		<column name="name" type="String" primary="true" />
+		<column name="scope" type="String" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="code" type="long" />
+
+		<!-- Finder methods -->
+		
+		<finder name="Code" return-type="Collection">
+			<finder-column name="code" />
+		</finder>		
 		<finder name="Name" return-type="Collection">
 			<finder-column name="name" />
-		</finder>
-		<finder name="C_N_T_S" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="name" />
-			<finder-column name="typeId" />
-			<finder-column name="scope" />
-		</finder>
-		<finder name="C_T_S_P" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="typeId" />
-			<finder-column name="scope" />
-			<finder-column name="primKey" />
-		</finder>
-		<finder name="C_N_T_S_P" return-type="Resource">
-			<finder-column name="companyId" />
-			<finder-column name="name" />
-			<finder-column name="typeId" />
-			<finder-column name="scope" />
-			<finder-column name="primKey" />
-		</finder>
+		</finder>		
 	</entity>
 	<entity name="Role" local-service="true" remote-service="true">
 

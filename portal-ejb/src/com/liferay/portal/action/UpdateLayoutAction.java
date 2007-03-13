@@ -164,7 +164,7 @@ public class UpdateLayoutAction extends Action {
 
 				ResourceLocalServiceUtil.deleteResource(
 					layout.getCompanyId(), rootPortletId,
-					ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+					ResourceImpl.SCOPE_INDIVIDUAL,
 					PortletPermission.getPrimaryKey(
 						layout.getPlid(), portletId));
 			}

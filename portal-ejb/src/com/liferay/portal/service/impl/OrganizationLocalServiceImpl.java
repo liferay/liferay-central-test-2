@@ -192,8 +192,7 @@ public class OrganizationLocalServiceImpl
 		}
 
 		ResourceLocalServiceUtil.deleteResource(
-			organization.getCompanyId(), name, ResourceImpl.TYPE_CLASS,
-			ResourceImpl.SCOPE_INDIVIDUAL,
+			organization.getCompanyId(), name, ResourceImpl.SCOPE_INDIVIDUAL,
 			organization.getPrimaryKey().toString());
 
 		// Organization

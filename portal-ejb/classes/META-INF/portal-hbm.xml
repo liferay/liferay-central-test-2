@@ -341,11 +341,17 @@
 		<id name="resourceId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="typeId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="scope" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="code" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="primKey" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portal.model.impl.ResourceCodeImpl" table="ResourceCode">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.ResourceCodePK">
+			<key-property name="companyId" />
+			<key-property name="name" />
+			<key-property name="scope" />
+		</composite-id>
+		<property name="code" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.RoleImpl" table="Role_">
 		<cache usage="read-write" />

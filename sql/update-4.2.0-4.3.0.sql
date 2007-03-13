@@ -92,10 +92,20 @@ create table PluginSetting (
 
 alter_column_type PollsQuestion groupId LONG;
 
-alter_column_type Relase_ releaseId LONG;
+alter_column_type Release_ releaseId LONG;
 alter table Release_ add verified BOOLEAN;
 
 alter_column_type Resource_ resourceId LONG;
+alter table Resource_ add code LONG;
+alter table Resource_ drop typeId;
+
+create table ResourceCode (
+	companyId VARCHAR(75) not null,
+	name VARCHAR(75) not null,
+	scope VARCHAR(75) not null,
+	code LONG,
+	primary key (companyId, name, scope)
+);
 
 alter table Role_ add type_ INTEGER;
 update Role_ SET type_ = 1;

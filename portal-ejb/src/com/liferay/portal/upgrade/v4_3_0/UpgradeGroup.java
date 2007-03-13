@@ -37,13 +37,13 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.OwnerIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.PreferencesUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.PrimKeyUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.TempScopeUpgradeColumnImpl;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
@@ -348,16 +348,15 @@ public class UpgradeGroup extends UpgradeProcess {
 	}
 
 	private void _upgradeResources() throws Exception {
-		TempScopeUpgradeColumnImpl upgradeScopeColumn =
-			new TempScopeUpgradeColumnImpl();
+		TempUpgradeColumnImpl codeColumn = new TempUpgradeColumnImpl("code");
 
 		UpgradeColumn upgradePrimKeyColumn =
 			new PrimKeyUpgradeColumnImpl(
-				upgradeScopeColumn, _groupIdMapper, _ownerIdMapper);
+				codeColumn, _groupIdMapper, _ownerIdMapper);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ResourceImpl.TABLE_NAME, ResourceImpl.TABLE_COLUMNS,
-			upgradeScopeColumn, upgradePrimKeyColumn);
+			ResourceImpl.TABLE_NAME, ResourceImpl.TABLE_COLUMNS, codeColumn,
+			upgradePrimKeyColumn);
 
 		upgradeTable.updateTable();
 	}

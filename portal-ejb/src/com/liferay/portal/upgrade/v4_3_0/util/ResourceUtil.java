@@ -60,7 +60,7 @@ public class ResourceUtil {
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Upgrading Resource_.primKey with name " + name);
+			_log.info("Upgrading Resource_.primKey with name: " + name);
 		}
 
 		Connection con = null;
@@ -82,7 +82,7 @@ public class ResourceUtil {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				oldPks.add(rs.getString("primKey"));
+				oldPks.add(rs.getString(1));
 			}
 		}
 		finally {
@@ -133,8 +133,7 @@ public class ResourceUtil {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
 							"Resource_.primKey has stagnant data where " +
-								"Resource_.name like '" + name + "': " +
-									sre.getMessage());
+								"name = '" + name + "': " + sre.getMessage());
 					}
 
 					badPks.add(oldPk);
@@ -238,14 +237,16 @@ public class ResourceUtil {
 		PropsUtil.get("hibernate.jdbc.batch_size"));
 
 	private static final String _SELECT_PRIMKEY =
-		"SELECT * FROM Resource_ WHERE name = ? AND scope = ?";
+		"SELECT R.primKey FROM Resource_ R, ResourceCode RC WHERE " +
+			"R.code = RC.code AND RC.name = ? AND RC.scope = ?";
 
 	private static final String _UPDATE_PRIMKEY =
-		"UPDATE Resource_ SET primKey = ? WHERE name = ? AND scope = ? AND " +
-			"primKey = ?";
+		"UPDATE Resource_ R, ResourceCode RC SET R.primKey = ? WHERE " +
+			"R.code = RC.code AND RC.name = ? AND RC.scope = ? AND R.primKey = ?";
 
 	private static final String _CLEAN_PRIMKEY =
-		"DELETE FROM Resource_ WHERE name = ? AND scope = ? AND primKey = ?";
+		"DELETE FROM Resource_ R, ResourceCode RC WHERE" +
+			"R.code = RC.code AND RC.name = ? AND RC.scope = ? AND R.primKey = ?";
 
 	private static Log _log = LogFactory.getLog(ResourceUtil.class.getName());
 

@@ -74,12 +74,11 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 
 	public com.liferay.portal.model.Resource addResource(
 		java.lang.String companyId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey)
+		java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return ResourceLocalServiceFactory.getTxImpl().addResource(companyId,
-			name, typeId, scope, primKey);
+			name, scope, primKey);
 	}
 
 	public void addResources(java.lang.String companyId, long groupId,
@@ -125,21 +124,19 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 	}
 
 	public void deleteResource(java.lang.String companyId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
-		long primKey)
+		java.lang.String name, java.lang.String scope, long primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ResourceLocalServiceFactory.getTxImpl().deleteResource(companyId, name,
-			typeId, scope, primKey);
+			scope, primKey);
 	}
 
 	public void deleteResource(java.lang.String companyId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey)
+		java.lang.String name, java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ResourceLocalServiceFactory.getTxImpl().deleteResource(companyId, name,
-			typeId, scope, primKey);
+			scope, primKey);
 	}
 
 	public void deleteResources(java.lang.String name)
@@ -167,12 +164,11 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 
 	public com.liferay.portal.model.Resource getResource(
 		java.lang.String companyId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey)
+		java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return ResourceLocalServiceFactory.getTxImpl().getResource(companyId,
-			name, typeId, scope, primKey);
+			name, scope, primKey);
 	}
 
 	public void ejbCreate() throws CreateException {

@@ -37,11 +37,11 @@ import java.rmi.RemoteException;
 public class ResourceServiceSoap {
 	public static com.liferay.portal.model.ResourceSoap getResource(
 		java.lang.String companyId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey) throws RemoteException {
+		java.lang.String scope, java.lang.String primKey)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.Resource returnValue = ResourceServiceUtil.getResource(companyId,
-					name, typeId, scope, primKey);
+					name, scope, primKey);
 
 			return com.liferay.portal.model.ResourceSoap.toSoapModel(returnValue);
 		}

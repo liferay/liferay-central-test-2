@@ -39,21 +39,9 @@ public interface ResourceModel extends BaseModel {
 
 	public void setResourceId(long resourceId);
 
-	public String getCompanyId();
+	public long getCode();
 
-	public void setCompanyId(String companyId);
-
-	public String getName();
-
-	public void setName(String name);
-
-	public String getTypeId();
-
-	public void setTypeId(String typeId);
-
-	public String getScope();
-
-	public void setScope(String scope);
+	public void setCode(long code);
 
 	public String getPrimKey();
 

@@ -268,8 +268,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			entry.getCompanyId(), BlogsEntry.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			entry.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, entry.getPrimaryKey());
 
 		// Entry
 

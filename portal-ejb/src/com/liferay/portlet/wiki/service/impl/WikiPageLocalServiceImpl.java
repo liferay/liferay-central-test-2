@@ -177,8 +177,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			page.getCompanyId(), WikiPage.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			page.getResourcePK().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, page.getResourcePK().toString());
 
 		// All versions
 

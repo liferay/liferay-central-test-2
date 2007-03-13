@@ -40,26 +40,11 @@ public class ResourceModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Resource_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "resourceId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.VARCHAR) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "typeId", new Integer(Types.VARCHAR) },
-			{ "scope", new Integer(Types.VARCHAR) },
+			{ "code", new Integer(Types.BIGINT) },
 			{ "primKey", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Resource"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Resource.companyId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Resource.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Resource.typeId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SCOPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Resource.scope"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PRIMKEY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Resource.primKey"),
 			XSS_ALLOW_BY_MODEL);
@@ -87,69 +72,13 @@ public class ResourceModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCode() {
+		return _code;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
-			_companyId = companyId;
-		}
-	}
-
-	public String getName() {
-		return GetterUtil.getString(_name);
-	}
-
-	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
-			_name = name;
-		}
-	}
-
-	public String getTypeId() {
-		return GetterUtil.getString(_typeId);
-	}
-
-	public void setTypeId(String typeId) {
-		if (((typeId == null) && (_typeId != null)) ||
-				((typeId != null) && (_typeId == null)) ||
-				((typeId != null) && (_typeId != null) &&
-				!typeId.equals(_typeId))) {
-			if (!XSS_ALLOW_TYPEID) {
-				typeId = XSSUtil.strip(typeId);
-			}
-
-			_typeId = typeId;
-		}
-	}
-
-	public String getScope() {
-		return GetterUtil.getString(_scope);
-	}
-
-	public void setScope(String scope) {
-		if (((scope == null) && (_scope != null)) ||
-				((scope != null) && (_scope == null)) ||
-				((scope != null) && (_scope != null) && !scope.equals(_scope))) {
-			if (!XSS_ALLOW_SCOPE) {
-				scope = XSSUtil.strip(scope);
-			}
-
-			_scope = scope;
+	public void setCode(long code) {
+		if (code != _code) {
+			_code = code;
 		}
 	}
 
@@ -173,10 +102,7 @@ public class ResourceModelImpl extends BaseModelImpl {
 	public Object clone() {
 		ResourceImpl clone = new ResourceImpl();
 		clone.setResourceId(getResourceId());
-		clone.setCompanyId(getCompanyId());
-		clone.setName(getName());
-		clone.setTypeId(getTypeId());
-		clone.setScope(getScope());
+		clone.setCode(getCode());
 		clone.setPrimKey(getPrimKey());
 
 		return clone;
@@ -230,9 +156,6 @@ public class ResourceModelImpl extends BaseModelImpl {
 	}
 
 	private long _resourceId;
-	private String _companyId;
-	private String _name;
-	private String _typeId;
-	private String _scope;
+	private long _code;
 	private String _primKey;
 }

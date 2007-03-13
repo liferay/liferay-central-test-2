@@ -270,7 +270,7 @@ public class JournalStructureLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			structure.getCompanyId(), JournalStructure.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+			ResourceImpl.SCOPE_INDIVIDUAL,
 			structure.getPrimaryKey().toString());
 
 		// Structure

@@ -345,8 +345,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			event.getCompanyId(), CalEvent.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			event.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, event.getPrimaryKey());
 
 		// Event
 

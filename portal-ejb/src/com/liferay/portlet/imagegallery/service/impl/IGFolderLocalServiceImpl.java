@@ -197,8 +197,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			folder.getCompanyId(), IGFolder.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			folder.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, folder.getPrimaryKey().toString());
 
 		// Folder
 

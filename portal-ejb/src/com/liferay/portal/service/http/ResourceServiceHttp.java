@@ -39,8 +39,7 @@ import com.liferay.portal.service.http.TunnelUtil;
 public class ResourceServiceHttp {
 	public static com.liferay.portal.model.Resource getResource(
 		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey)
+		java.lang.String name, java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -56,29 +55,21 @@ public class ResourceServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = typeId;
+			Object paramObj2 = scope;
 
-			if (typeId == null) {
+			if (scope == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = scope;
-
-			if (scope == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = primKey;
+			Object paramObj3 = primKey;
 
 			if (primKey == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(ResourceServiceUtil.class.getName(),
 					"getResource",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 
 			try {

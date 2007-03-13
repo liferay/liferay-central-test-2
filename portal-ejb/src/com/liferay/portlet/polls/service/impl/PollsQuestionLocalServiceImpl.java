@@ -227,8 +227,7 @@ public class PollsQuestionLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			question.getCompanyId(), PollsQuestion.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			question.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, question.getPrimaryKey().toString());
 
 		// Question
 

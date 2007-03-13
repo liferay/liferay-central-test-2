@@ -680,12 +680,17 @@ create table Release_ (
 	verified BOOLEAN
 );
 
+create table ResourceCode (
+	companyId VARCHAR(75) not null,
+	name VARCHAR(75) not null,
+	scope VARCHAR(75) not null,
+	code LONG,
+	primary key (companyId, name, scope)
+);
+
 create table Resource_ (
 	resourceId LONG not null primary key,
-	companyId VARCHAR(25) not null,
-	name VARCHAR(75) null,
-	typeId VARCHAR(15) null,
-	scope VARCHAR(15) null,
+	code LONG,
 	primKey VARCHAR(200) null
 );
 

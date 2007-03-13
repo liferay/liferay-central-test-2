@@ -40,42 +40,7 @@ public class ResourceJSONSerializer {
 	public static JSONObject toJSONObject(Resource model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("resourceId", model.getResourceId());
-
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String typeId = model.getTypeId();
-
-		if (typeId == null) {
-			jsonObj.put("typeId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("typeId", typeId.toString());
-		}
-
-		String scope = model.getScope();
-
-		if (scope == null) {
-			jsonObj.put("scope", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("scope", scope.toString());
-		}
+		jsonObj.put("code", model.getCode());
 
 		String primKey = model.getPrimKey();
 

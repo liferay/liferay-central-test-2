@@ -24,7 +24,10 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.util.StringUtil;
 
@@ -36,7 +39,7 @@ import com.liferay.util.StringUtil;
  */
 public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public PrimKeyUpgradeColumnImpl(TempScopeUpgradeColumnImpl upgradeColumn,
+	public PrimKeyUpgradeColumnImpl(TempUpgradeColumnImpl upgradeColumn,
 									ValueMapper groupIdMapper,
 									ValueMapper ownerIdMapper) {
 
@@ -55,10 +58,14 @@ public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		Object newValue = oldValue;
 
-		if (_upgradeColumn.isScopeGroup()) {
+		Long code = (Long)_upgradeColumn.getTemp();
+
+		String scope = ResourceCodeLocalServiceUtil.getScope(code.longValue());
+
+		if (scope.equals(ResourceImpl.SCOPE_GROUP)) {
 			newValue = _groupIdMapper.getNewValue(new Long((String)oldValue));
 		}
-		else if (_upgradeColumn.isScopeIndividual()) {
+		else if (scope.equals(ResourceImpl.SCOPE_INDIVIDUAL)) {
 			String primKey = (String)oldValue;
 
 			if (primKey.startsWith(LayoutImpl.PUBLIC) ||
@@ -84,7 +91,7 @@ public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		return newValue;
 	}
 
-	private TempScopeUpgradeColumnImpl _upgradeColumn;
+	private TempUpgradeColumnImpl _upgradeColumn;
 	private ValueMapper _groupIdMapper;
 	private ValueMapper _ownerIdMapper;
 	private CompositePrimKeyMapper _compositeMapper;

@@ -38,6 +38,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.base.PermissionLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupUtil;
@@ -229,12 +230,14 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public boolean hasRolePermission(
-			String roleId, String companyId, String name, String typeId,
-			String scope, String actionId)
+			String roleId, String companyId, String name, String scope,
+			String actionId)
 		throws PortalException, SystemException {
 
-		Iterator itr = ResourceUtil.findByC_N_T_S(
-			companyId, name, typeId, scope).iterator();
+		long code =
+			ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+
+		Iterator itr = ResourceUtil.findByCode(code).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();
@@ -257,13 +260,15 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public boolean hasRolePermission(
-			String roleId, String companyId, String name, String typeId,
-			String scope, String primKey, String actionId)
+			String roleId, String companyId, String name, String scope,
+			String primKey, String actionId)
 		throws PortalException, SystemException {
 
 		try {
-			Resource resource = ResourceUtil.findByC_N_T_S_P(
-				companyId, name, typeId, scope, primKey);
+			long code =
+				ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+
+			Resource resource = ResourceUtil.findByC_P(code, primKey);
 
 			Permission permission = PermissionUtil.findByA_R(
 				actionId, resource.getResourceId());
@@ -465,8 +470,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void setRolePermission(
-			String roleId, String companyId, String name, String typeId,
-			String scope, String primKey, String actionId)
+			String roleId, String companyId, String name, String scope,
+			String primKey, String actionId)
 		throws PortalException, SystemException {
 
 		if (scope.equals(ResourceImpl.SCOPE_COMPANY)) {
@@ -474,23 +479,21 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			// Remove group permission
 
 			unsetRolePermissions(
-				roleId, companyId, name, typeId, ResourceImpl.SCOPE_GROUP,
-				actionId);
+				roleId, companyId, name, ResourceImpl.SCOPE_GROUP, actionId);
 		}
 		else if (scope.equals(ResourceImpl.SCOPE_GROUP)) {
 
 			// Remove company permission
 
 			unsetRolePermissions(
-				roleId, companyId, name, typeId, ResourceImpl.SCOPE_COMPANY,
-				actionId);
+				roleId, companyId, name, ResourceImpl.SCOPE_COMPANY, actionId);
 		}
 		else if (scope.equals(ResourceImpl.SCOPE_INDIVIDUAL)) {
 			throw new NoSuchPermissionException();
 		}
 
 		Resource resource = ResourceLocalServiceUtil.addResource(
-			companyId, name, typeId, scope, primKey);
+			companyId, name, scope, primKey);
 
 		Permission permission = null;
 
@@ -515,15 +518,15 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void setRolePermissions(
-			String roleId, String companyId, String name, String typeId,
-			String scope, String primKey, String[] actionIds)
+			String roleId, String companyId, String name, String scope,
+			String primKey, String[] actionIds)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < actionIds.length; i++) {
 			String actionId = actionIds[i];
 
 			setRolePermission(
-				roleId, companyId, name, typeId, scope, primKey, actionId);
+				roleId, companyId, name, scope, primKey, actionId);
 		}
 	}
 
@@ -557,13 +560,15 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void unsetRolePermission(
-			String roleId, String companyId, String name, String typeId,
-			String scope, String primKey, String actionId)
+			String roleId, String companyId, String name, String scope,
+			String primKey, String actionId)
 		throws PortalException, SystemException {
 
 		try {
-			Resource resource = ResourceUtil.findByC_N_T_S_P(
-				companyId, name, typeId, scope, primKey);
+			long code =
+				ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+
+			Resource resource = ResourceUtil.findByC_P(code, primKey);
 
 			Permission permission = PermissionUtil.findByA_R(
 				actionId, resource.getResourceId());
@@ -577,12 +582,14 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void unsetRolePermissions(
-			String roleId, String companyId, String name, String typeId,
-			String scope, String actionId)
+			String roleId, String companyId, String name, String scope,
+			String actionId)
 		throws PortalException, SystemException {
 
-		Iterator itr = ResourceUtil.findByC_N_T_S(
-			companyId, name, typeId, scope).iterator();
+		long code =
+			ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+
+		Iterator itr = ResourceUtil.findByCode(code).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();

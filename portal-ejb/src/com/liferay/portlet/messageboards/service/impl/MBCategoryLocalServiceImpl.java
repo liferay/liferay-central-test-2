@@ -247,8 +247,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			category.getCompanyId(), MBCategory.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			category.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, category.getPrimaryKey().toString());
 
 		// Category
 

@@ -132,8 +132,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 					PermissionLocalServiceUtil.setRolePermissions(
 						role.getRoleId(), role.getCompanyId(),
-						Group.class.getName(), ResourceImpl.TYPE_CLASS,
-						ResourceImpl.SCOPE_GROUP_TEMPLATE,
+						Group.class.getName(), ResourceImpl.SCOPE_GROUP_TEMPLATE,
 						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
 						(String[])actions.toArray(new String[0]));
 				}
@@ -147,7 +146,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 					PermissionLocalServiceUtil.setRolePermissions(
 						role.getRoleId(), role.getCompanyId(),
-						Group.class.getName(), ResourceImpl.TYPE_CLASS,
+						Group.class.getName(),
 						ResourceImpl.SCOPE_GROUP_TEMPLATE,
 						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
 						actionIds);
@@ -172,8 +171,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 			ResourceLocalServiceUtil.deleteResource(
 				role.getCompanyId(), Role.class.getName(),
-				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-				role.getPrimaryKey().toString());
+				ResourceImpl.SCOPE_INDIVIDUAL, role.getPrimaryKey().toString());
 		}
 
 		if (role.getType() == RoleImpl.TYPE_COMMUNITY) {

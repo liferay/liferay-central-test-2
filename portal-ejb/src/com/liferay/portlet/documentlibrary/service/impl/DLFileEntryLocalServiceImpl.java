@@ -423,7 +423,7 @@ public class DLFileEntryLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			fileEntry.getCompanyId(), DLFileEntry.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+			ResourceImpl.SCOPE_INDIVIDUAL,
 			fileEntry.getPrimaryKey().toString());
 
 		// File entry

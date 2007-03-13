@@ -588,7 +588,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Resources
 
 		ResourceLocalServiceUtil.deleteResource(
-			user.getCompanyId(), User.class.getName(), ResourceImpl.TYPE_CLASS,
+			user.getCompanyId(), User.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, user.getPrimaryKey().toString());
 
 		// Group roles

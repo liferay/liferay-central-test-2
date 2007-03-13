@@ -64,6 +64,22 @@ public class DefaultUpgradeTableImpl
 		prepareUpgradeColumns(upgradeColumn3);
 	}
 
+	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
+								   UpgradeColumn upgradeColumn1,
+								   UpgradeColumn upgradeColumn2,
+								   UpgradeColumn upgradeColumn3,
+								   UpgradeColumn upgradeColumn4) {
+
+		super(tableName, columns);
+
+		_upgradeColumns = new UpgradeColumn[columns.length];
+
+		prepareUpgradeColumns(upgradeColumn1);
+		prepareUpgradeColumns(upgradeColumn2);
+		prepareUpgradeColumns(upgradeColumn3);
+		prepareUpgradeColumns(upgradeColumn4);
+	}
+
 	public String getExportedData(ResultSet rs) throws Exception {
 		StringMaker sm = new StringMaker();
 

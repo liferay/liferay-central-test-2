@@ -160,6 +160,10 @@
 			<bean-home-name>com_liferay_portal_service_ejb_ResourceServiceEJB</bean-home-name>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portal_service_ejb_ResourceCodeLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/ResourceCodeLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-name>
 			<bean-local-home-name>ejb/liferay/RoleLocalServiceHome</bean-local-home-name>
 		</session>

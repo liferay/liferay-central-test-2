@@ -109,16 +109,15 @@ public class PermissionServiceImpl
 	}
 
 	public void setRolePermission(
-			String roleId, long groupId, String name, String typeId,
-			String scope, String primKey, String actionId)
+			String roleId, long groupId, String name, String scope,
+			String primKey, String actionId)
 		throws PortalException, SystemException {
 
 		checkPermission(
 			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
 		PermissionLocalServiceUtil.setRolePermission(
-			roleId, getUser().getCompanyId(), name, typeId, scope, primKey,
-			actionId);
+			roleId, getUser().getCompanyId(), name, scope, primKey, actionId);
 	}
 
 	public void setUserPermissions(
@@ -143,28 +142,27 @@ public class PermissionServiceImpl
 	}
 
 	public void unsetRolePermission(
-			String roleId, long groupId, String name, String typeId,
-			String scope, String primKey, String actionId)
+			String roleId, long groupId, String name, String scope,
+			String primKey, String actionId)
 		throws PortalException, SystemException {
 
 		checkPermission(
 			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
 		PermissionLocalServiceUtil.unsetRolePermission(
-			roleId, getUser().getCompanyId(), name, typeId, scope, primKey,
-			actionId);
+			roleId, getUser().getCompanyId(), name, scope, primKey, actionId);
 	}
 
 	public void unsetRolePermissions(
-			String roleId, long groupId, String name, String typeId,
-			String scope, String actionId)
+			String roleId, long groupId, String name, String scope,
+			String actionId)
 		throws PortalException, SystemException {
 
 		checkPermission(
 			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
 		PermissionLocalServiceUtil.unsetRolePermissions(
-			roleId, getUser().getCompanyId(), name, typeId, scope, actionId);
+			roleId, getUser().getCompanyId(), name, scope, actionId);
 	}
 
 	public void unsetUserPermissions(

@@ -226,8 +226,7 @@ public class BlogsCategoryLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			category.getCompanyId(), BlogsCategory.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			category.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, category.getPrimaryKey());
 
 		// Category
 

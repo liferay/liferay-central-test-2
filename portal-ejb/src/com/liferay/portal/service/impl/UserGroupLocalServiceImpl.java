@@ -115,7 +115,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			userGroup.getCompanyId(), UserGroup.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+			ResourceImpl.SCOPE_INDIVIDUAL,
 			userGroup.getPrimaryKey().toString());
 
 		// User Group

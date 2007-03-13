@@ -100,7 +100,7 @@ public class LayoutPermission {
 		try {
 			ResourceLocalServiceUtil.getResource(
 				layout.getCompanyId(), Layout.class.getName(),
-				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+				ResourceImpl.SCOPE_INDIVIDUAL,
 				layout.getPrimaryKey().toString());
 		}
 		catch (NoSuchResourceException nsre) {

@@ -207,8 +207,7 @@ public class ShoppingCategoryLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			category.getCompanyId(), ShoppingCategory.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			category.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, category.getPrimaryKey().toString());
 
 		// Category
 

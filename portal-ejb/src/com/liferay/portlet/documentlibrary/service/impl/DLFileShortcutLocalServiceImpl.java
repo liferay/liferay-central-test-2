@@ -191,8 +191,7 @@ public class DLFileShortcutLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			fileShortcut.getCompanyId(), DLFileShortcut.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			fileShortcut.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, fileShortcut.getPrimaryKey());
 
 		// File shortcut
 

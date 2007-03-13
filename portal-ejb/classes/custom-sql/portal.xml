@@ -504,10 +504,22 @@
 			SELECT
 				{Resource_.*}
 			FROM
-				Resource_
+				Resource_, ResourceCode
 			WHERE
-				(Resource_.companyId = ?) AND
+				(Resource_.code = ResourceCode.code) AND
+				(ResourceCode.companyId = ?) AND
 				(Resource_.primKey LIKE ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.ResourceFinder.findByName">
+		<![CDATA[
+			SELECT
+				{Resource_.*}
+			FROM
+				Resource_, ResourceCode
+			WHERE
+				(Resource_.code = ResourceCode.code) AND
+				(ResourceCode.name = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByC_N_D_T">

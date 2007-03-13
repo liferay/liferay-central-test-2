@@ -30,6 +30,7 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeGroup;
 import com.liferay.portal.upgrade.v4_3_0.UpgradePasswordTracker;
 import com.liferay.portal.upgrade.v4_3_0.UpgradePhone;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeResource;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeSubscription;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
 
@@ -53,6 +54,12 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
+
+		// Upgrade Resource_
+
+		upgrade(new UpgradeResource());
+
+		// Upgrade all other tables
 
 		upgrade(new UpgradeAddress());
 		upgrade(new UpgradeBlogs());

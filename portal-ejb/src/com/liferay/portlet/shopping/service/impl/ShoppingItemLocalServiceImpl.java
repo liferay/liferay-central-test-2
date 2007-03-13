@@ -488,8 +488,7 @@ public class ShoppingItemLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			item.getCompanyId(), ShoppingItem.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			item.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, item.getPrimaryKey().toString());
 
 		// Item
 

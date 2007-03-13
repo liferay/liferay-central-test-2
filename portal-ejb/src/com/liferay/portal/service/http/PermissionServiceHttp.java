@@ -323,8 +323,8 @@ public class PermissionServiceHttp {
 
 	public static void setRolePermission(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, long groupId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey, java.lang.String actionId)
+		java.lang.String scope, java.lang.String primKey,
+		java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -341,35 +341,29 @@ public class PermissionServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = typeId;
+			Object paramObj3 = scope;
 
-			if (typeId == null) {
+			if (scope == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = scope;
+			Object paramObj4 = primKey;
 
-			if (scope == null) {
+			if (primKey == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = primKey;
-
-			if (primKey == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = actionId;
+			Object paramObj5 = actionId;
 
 			if (actionId == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
+				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"setRolePermission",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5
 					});
 
 			try {
@@ -478,8 +472,8 @@ public class PermissionServiceHttp {
 
 	public static void unsetRolePermission(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, long groupId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey, java.lang.String actionId)
+		java.lang.String scope, java.lang.String primKey,
+		java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -496,35 +490,29 @@ public class PermissionServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = typeId;
+			Object paramObj3 = scope;
 
-			if (typeId == null) {
+			if (scope == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = scope;
+			Object paramObj4 = primKey;
 
-			if (scope == null) {
+			if (primKey == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = primKey;
-
-			if (primKey == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = actionId;
+			Object paramObj5 = actionId;
 
 			if (actionId == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
+				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"unsetRolePermission",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5
 					});
 
 			try {
@@ -550,8 +538,7 @@ public class PermissionServiceHttp {
 
 	public static void unsetRolePermissions(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, long groupId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
-		java.lang.String actionId)
+		java.lang.String scope, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -568,29 +555,22 @@ public class PermissionServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = typeId;
+			Object paramObj3 = scope;
 
-			if (typeId == null) {
+			if (scope == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = scope;
-
-			if (scope == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = actionId;
+			Object paramObj4 = actionId;
 
 			if (actionId == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"unsetRolePermissions",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});
 
 			try {

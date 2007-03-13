@@ -141,8 +141,8 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 
 		try {
 			Resource resource = ResourceLocalServiceUtil.getResource(
-				companyId, Group.class.getName(), ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_INDIVIDUAL, String.valueOf(groupId));
+				companyId, Group.class.getName(), ResourceImpl.SCOPE_INDIVIDUAL,
+				String.valueOf(groupId));
 
 			if (PermissionLocalServiceUtil.hasUserPermission(
 					_userId, ActionKeys.ADMINISTRATE,

@@ -178,7 +178,7 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId) throws SystemException {
+	public List findByCode(long code) throws SystemException {
 		Session session = null;
 
 		try {
@@ -186,24 +186,14 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("code = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, code);
 
 			return q.list();
 		}
@@ -215,13 +205,13 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end)
+	public List findByCode(long code, int begin, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCode(code, begin, end, null);
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List findByCode(long code, int begin, int end, OrderByComparator obc)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -229,14 +219,7 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("code = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -248,10 +231,7 @@ public class ResourcePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, code);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -263,48 +243,47 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public Resource findByCompanyId_First(String companyId,
+	public Resource findByCode_First(long code, OrderByComparator obc)
+		throws NoSuchResourceException, SystemException {
+		List list = findByCode(code, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No Resource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("code=");
+			msg.append(code);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchResourceException(msg.toString());
+		}
+		else {
+			return (Resource)list.get(0);
+		}
+	}
+
+	public Resource findByCode_Last(long code, OrderByComparator obc)
+		throws NoSuchResourceException, SystemException {
+		int count = countByCode(code);
+		List list = findByCode(code, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No Resource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("code=");
+			msg.append(code);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchResourceException(msg.toString());
+		}
+		else {
+			return (Resource)list.get(0);
+		}
+	}
+
+	public Resource[] findByCode_PrevAndNext(long resourceId, long code,
 		OrderByComparator obc) throws NoSuchResourceException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No Resource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchResourceException(msg.toString());
-		}
-		else {
-			return (Resource)list.get(0);
-		}
-	}
-
-	public Resource findByCompanyId_Last(String companyId, OrderByComparator obc)
-		throws NoSuchResourceException, SystemException {
-		int count = countByCompanyId(companyId);
-		List list = findByCompanyId(companyId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No Resource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchResourceException(msg.toString());
-		}
-		else {
-			return (Resource)list.get(0);
-		}
-	}
-
-	public Resource[] findByCompanyId_PrevAndNext(long resourceId,
-		String companyId, OrderByComparator obc)
-		throws NoSuchResourceException, SystemException {
 		Resource resource = findByPrimaryKey(resourceId);
-		int count = countByCompanyId(companyId);
+		int count = countByCode(code);
 		Session session = null;
 
 		try {
@@ -312,14 +291,7 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("code = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -331,10 +303,7 @@ public class ResourcePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, code);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
 			Resource[] array = new ResourceImpl[3];
@@ -352,828 +321,16 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByName(String name) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			return q.list();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByName(String name, int begin, int end)
-		throws SystemException {
-		return findByName(name, begin, end, null);
-	}
-
-	public List findByName(String name, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public Resource findByName_First(String name, OrderByComparator obc)
+	public Resource findByC_P(long code, String primKey)
 		throws NoSuchResourceException, SystemException {
-		List list = findByName(name, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No Resource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("name=");
-			msg.append(name);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchResourceException(msg.toString());
-		}
-		else {
-			return (Resource)list.get(0);
-		}
-	}
-
-	public Resource findByName_Last(String name, OrderByComparator obc)
-		throws NoSuchResourceException, SystemException {
-		int count = countByName(name);
-		List list = findByName(name, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No Resource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("name=");
-			msg.append(name);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchResourceException(msg.toString());
-		}
-		else {
-			return (Resource)list.get(0);
-		}
-	}
-
-	public Resource[] findByName_PrevAndNext(long resourceId, String name,
-		OrderByComparator obc) throws NoSuchResourceException, SystemException {
-		Resource resource = findByPrimaryKey(resourceId);
-		int count = countByName(name);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
-			Resource[] array = new ResourceImpl[3];
-			array[0] = (Resource)objArray[0];
-			array[1] = (Resource)objArray[1];
-			array[2] = (Resource)objArray[2];
-
-			return array;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByC_N_T_S(String companyId, String name, String typeId,
-		String scope) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" AND ");
-
-			if (typeId == null) {
-				query.append("typeId IS NULL");
-			}
-			else {
-				query.append("typeId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (scope == null) {
-				query.append("scope IS NULL");
-			}
-			else {
-				query.append("scope = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			if (typeId != null) {
-				q.setString(queryPos++, typeId);
-			}
-
-			if (scope != null) {
-				q.setString(queryPos++, scope);
-			}
-
-			return q.list();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByC_N_T_S(String companyId, String name, String typeId,
-		String scope, int begin, int end) throws SystemException {
-		return findByC_N_T_S(companyId, name, typeId, scope, begin, end, null);
-	}
-
-	public List findByC_N_T_S(String companyId, String name, String typeId,
-		String scope, int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" AND ");
-
-			if (typeId == null) {
-				query.append("typeId IS NULL");
-			}
-			else {
-				query.append("typeId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (scope == null) {
-				query.append("scope IS NULL");
-			}
-			else {
-				query.append("scope = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			if (typeId != null) {
-				q.setString(queryPos++, typeId);
-			}
-
-			if (scope != null) {
-				q.setString(queryPos++, scope);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public Resource findByC_N_T_S_First(String companyId, String name,
-		String typeId, String scope, OrderByComparator obc)
-		throws NoSuchResourceException, SystemException {
-		List list = findByC_N_T_S(companyId, name, typeId, scope, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No Resource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
-			msg.append(", ");
-			msg.append("typeId=");
-			msg.append(typeId);
-			msg.append(", ");
-			msg.append("scope=");
-			msg.append(scope);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchResourceException(msg.toString());
-		}
-		else {
-			return (Resource)list.get(0);
-		}
-	}
-
-	public Resource findByC_N_T_S_Last(String companyId, String name,
-		String typeId, String scope, OrderByComparator obc)
-		throws NoSuchResourceException, SystemException {
-		int count = countByC_N_T_S(companyId, name, typeId, scope);
-		List list = findByC_N_T_S(companyId, name, typeId, scope, count - 1,
-				count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No Resource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
-			msg.append(", ");
-			msg.append("typeId=");
-			msg.append(typeId);
-			msg.append(", ");
-			msg.append("scope=");
-			msg.append(scope);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchResourceException(msg.toString());
-		}
-		else {
-			return (Resource)list.get(0);
-		}
-	}
-
-	public Resource[] findByC_N_T_S_PrevAndNext(long resourceId,
-		String companyId, String name, String typeId, String scope,
-		OrderByComparator obc) throws NoSuchResourceException, SystemException {
-		Resource resource = findByPrimaryKey(resourceId);
-		int count = countByC_N_T_S(companyId, name, typeId, scope);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" AND ");
-
-			if (typeId == null) {
-				query.append("typeId IS NULL");
-			}
-			else {
-				query.append("typeId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (scope == null) {
-				query.append("scope IS NULL");
-			}
-			else {
-				query.append("scope = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			if (typeId != null) {
-				q.setString(queryPos++, typeId);
-			}
-
-			if (scope != null) {
-				q.setString(queryPos++, scope);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
-			Resource[] array = new ResourceImpl[3];
-			array[0] = (Resource)objArray[0];
-			array[1] = (Resource)objArray[1];
-			array[2] = (Resource)objArray[2];
-
-			return array;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByC_T_S_P(String companyId, String typeId, String scope,
-		String primKey) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (typeId == null) {
-				query.append("typeId IS NULL");
-			}
-			else {
-				query.append("typeId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (scope == null) {
-				query.append("scope IS NULL");
-			}
-			else {
-				query.append("scope = ?");
-			}
-
-			query.append(" AND ");
-
-			if (primKey == null) {
-				query.append("primKey IS NULL");
-			}
-			else {
-				query.append("primKey = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (typeId != null) {
-				q.setString(queryPos++, typeId);
-			}
-
-			if (scope != null) {
-				q.setString(queryPos++, scope);
-			}
-
-			if (primKey != null) {
-				q.setString(queryPos++, primKey);
-			}
-
-			return q.list();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByC_T_S_P(String companyId, String typeId, String scope,
-		String primKey, int begin, int end) throws SystemException {
-		return findByC_T_S_P(companyId, typeId, scope, primKey, begin, end, null);
-	}
-
-	public List findByC_T_S_P(String companyId, String typeId, String scope,
-		String primKey, int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (typeId == null) {
-				query.append("typeId IS NULL");
-			}
-			else {
-				query.append("typeId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (scope == null) {
-				query.append("scope IS NULL");
-			}
-			else {
-				query.append("scope = ?");
-			}
-
-			query.append(" AND ");
-
-			if (primKey == null) {
-				query.append("primKey IS NULL");
-			}
-			else {
-				query.append("primKey = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (typeId != null) {
-				q.setString(queryPos++, typeId);
-			}
-
-			if (scope != null) {
-				q.setString(queryPos++, scope);
-			}
-
-			if (primKey != null) {
-				q.setString(queryPos++, primKey);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public Resource findByC_T_S_P_First(String companyId, String typeId,
-		String scope, String primKey, OrderByComparator obc)
-		throws NoSuchResourceException, SystemException {
-		List list = findByC_T_S_P(companyId, typeId, scope, primKey, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No Resource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(", ");
-			msg.append("typeId=");
-			msg.append(typeId);
-			msg.append(", ");
-			msg.append("scope=");
-			msg.append(scope);
-			msg.append(", ");
-			msg.append("primKey=");
-			msg.append(primKey);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchResourceException(msg.toString());
-		}
-		else {
-			return (Resource)list.get(0);
-		}
-	}
-
-	public Resource findByC_T_S_P_Last(String companyId, String typeId,
-		String scope, String primKey, OrderByComparator obc)
-		throws NoSuchResourceException, SystemException {
-		int count = countByC_T_S_P(companyId, typeId, scope, primKey);
-		List list = findByC_T_S_P(companyId, typeId, scope, primKey, count - 1,
-				count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No Resource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(", ");
-			msg.append("typeId=");
-			msg.append(typeId);
-			msg.append(", ");
-			msg.append("scope=");
-			msg.append(scope);
-			msg.append(", ");
-			msg.append("primKey=");
-			msg.append(primKey);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchResourceException(msg.toString());
-		}
-		else {
-			return (Resource)list.get(0);
-		}
-	}
-
-	public Resource[] findByC_T_S_P_PrevAndNext(long resourceId,
-		String companyId, String typeId, String scope, String primKey,
-		OrderByComparator obc) throws NoSuchResourceException, SystemException {
-		Resource resource = findByPrimaryKey(resourceId);
-		int count = countByC_T_S_P(companyId, typeId, scope, primKey);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (typeId == null) {
-				query.append("typeId IS NULL");
-			}
-			else {
-				query.append("typeId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (scope == null) {
-				query.append("scope IS NULL");
-			}
-			else {
-				query.append("scope = ?");
-			}
-
-			query.append(" AND ");
-
-			if (primKey == null) {
-				query.append("primKey IS NULL");
-			}
-			else {
-				query.append("primKey = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (typeId != null) {
-				q.setString(queryPos++, typeId);
-			}
-
-			if (scope != null) {
-				q.setString(queryPos++, scope);
-			}
-
-			if (primKey != null) {
-				q.setString(queryPos++, primKey);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
-			Resource[] array = new ResourceImpl[3];
-			array[0] = (Resource)objArray[0];
-			array[1] = (Resource)objArray[1];
-			array[2] = (Resource)objArray[2];
-
-			return array;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public Resource findByC_N_T_S_P(String companyId, String name,
-		String typeId, String scope, String primKey)
-		throws NoSuchResourceException, SystemException {
-		Resource resource = fetchByC_N_T_S_P(companyId, name, typeId, scope,
-				primKey);
+		Resource resource = fetchByC_P(code, primKey);
 
 		if (resource == null) {
 			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
-			msg.append(", ");
-			msg.append("typeId=");
-			msg.append(typeId);
-			msg.append(", ");
-			msg.append("scope=");
-			msg.append(scope);
+			msg.append("code=");
+			msg.append(code);
 			msg.append(", ");
 			msg.append("primKey=");
 			msg.append(primKey);
@@ -1189,8 +346,8 @@ public class ResourcePersistence extends BasePersistence {
 		return resource;
 	}
 
-	public Resource fetchByC_N_T_S_P(String companyId, String name,
-		String typeId, String scope, String primKey) throws SystemException {
+	public Resource fetchByC_P(long code, String primKey)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1198,41 +355,7 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" AND ");
-
-			if (typeId == null) {
-				query.append("typeId IS NULL");
-			}
-			else {
-				query.append("typeId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (scope == null) {
-				query.append("scope IS NULL");
-			}
-			else {
-				query.append("scope = ?");
-			}
-
+			query.append("code = ?");
 			query.append(" AND ");
 
 			if (primKey == null) {
@@ -1248,22 +371,7 @@ public class ResourcePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			if (typeId != null) {
-				q.setString(queryPos++, typeId);
-			}
-
-			if (scope != null) {
-				q.setString(queryPos++, scope);
-			}
+			q.setLong(queryPos++, code);
 
 			if (primKey != null) {
 				q.setString(queryPos++, primKey);
@@ -1362,8 +470,8 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCompanyId(String companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+	public void removeByCode(long code) throws SystemException {
+		Iterator itr = findByCode(code).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();
@@ -1371,41 +479,9 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByName(String name) throws SystemException {
-		Iterator itr = findByName(name).iterator();
-
-		while (itr.hasNext()) {
-			Resource resource = (Resource)itr.next();
-			remove(resource);
-		}
-	}
-
-	public void removeByC_N_T_S(String companyId, String name, String typeId,
-		String scope) throws SystemException {
-		Iterator itr = findByC_N_T_S(companyId, name, typeId, scope).iterator();
-
-		while (itr.hasNext()) {
-			Resource resource = (Resource)itr.next();
-			remove(resource);
-		}
-	}
-
-	public void removeByC_T_S_P(String companyId, String typeId, String scope,
-		String primKey) throws SystemException {
-		Iterator itr = findByC_T_S_P(companyId, typeId, scope, primKey)
-						   .iterator();
-
-		while (itr.hasNext()) {
-			Resource resource = (Resource)itr.next();
-			remove(resource);
-		}
-	}
-
-	public void removeByC_N_T_S_P(String companyId, String name, String typeId,
-		String scope, String primKey)
+	public void removeByC_P(long code, String primKey)
 		throws NoSuchResourceException, SystemException {
-		Resource resource = findByC_N_T_S_P(companyId, name, typeId, scope,
-				primKey);
+		Resource resource = findByC_P(code, primKey);
 		remove(resource);
 	}
 
@@ -1417,7 +493,7 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCompanyId(String companyId) throws SystemException {
+	public int countByCode(long code) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1426,24 +502,14 @@ public class ResourcePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("code = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, code);
 
 			Iterator itr = q.list().iterator();
 
@@ -1465,7 +531,7 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByName(String name) throws SystemException {
+	public int countByC_P(long code, String primKey) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1474,169 +540,7 @@ public class ResourcePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByC_N_T_S(String companyId, String name, String typeId,
-		String scope) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" AND ");
-
-			if (typeId == null) {
-				query.append("typeId IS NULL");
-			}
-			else {
-				query.append("typeId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (scope == null) {
-				query.append("scope IS NULL");
-			}
-			else {
-				query.append("scope = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			if (typeId != null) {
-				q.setString(queryPos++, typeId);
-			}
-
-			if (scope != null) {
-				q.setString(queryPos++, scope);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByC_T_S_P(String companyId, String typeId, String scope,
-		String primKey) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (typeId == null) {
-				query.append("typeId IS NULL");
-			}
-			else {
-				query.append("typeId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (scope == null) {
-				query.append("scope IS NULL");
-			}
-			else {
-				query.append("scope = ?");
-			}
-
+			query.append("code = ?");
 			query.append(" AND ");
 
 			if (primKey == null) {
@@ -1652,119 +556,7 @@ public class ResourcePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (typeId != null) {
-				q.setString(queryPos++, typeId);
-			}
-
-			if (scope != null) {
-				q.setString(queryPos++, scope);
-			}
-
-			if (primKey != null) {
-				q.setString(queryPos++, primKey);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByC_N_T_S_P(String companyId, String name, String typeId,
-		String scope, String primKey) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" AND ");
-
-			if (typeId == null) {
-				query.append("typeId IS NULL");
-			}
-			else {
-				query.append("typeId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (scope == null) {
-				query.append("scope IS NULL");
-			}
-			else {
-				query.append("scope = ?");
-			}
-
-			query.append(" AND ");
-
-			if (primKey == null) {
-				query.append("primKey IS NULL");
-			}
-			else {
-				query.append("primKey = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			if (typeId != null) {
-				q.setString(queryPos++, typeId);
-			}
-
-			if (scope != null) {
-				q.setString(queryPos++, scope);
-			}
+			q.setLong(queryPos++, code);
 
 			if (primKey != null) {
 				q.setString(queryPos++, primKey);

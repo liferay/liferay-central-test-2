@@ -232,8 +232,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			image.getCompanyId(), IGImage.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			image.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, image.getPrimaryKey().toString());
 
 		// Images
 

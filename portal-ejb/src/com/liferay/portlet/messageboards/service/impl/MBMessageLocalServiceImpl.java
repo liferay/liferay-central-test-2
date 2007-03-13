@@ -669,7 +669,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (!message.isDiscussion()) {
 			ResourceLocalServiceUtil.deleteResource(
 				message.getCompanyId(), MBMessage.class.getName(),
-				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+				ResourceImpl.SCOPE_INDIVIDUAL,
 				message.getPrimaryKey().toString());
 		}
 

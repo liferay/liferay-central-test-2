@@ -198,8 +198,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			folder.getCompanyId(), DLFolder.class.getName(),
-			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			folder.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, folder.getPrimaryKey().toString());
 
 		// Folder
 

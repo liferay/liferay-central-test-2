@@ -22,7 +22,9 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 
 /**
  * <a href="ResourceImpl.java.html"><b><i>View Source</i></b></a>
@@ -31,12 +33,6 @@ import com.liferay.portal.model.Resource;
  *
  */
 public class ResourceImpl extends ResourceModelImpl implements Resource {
-
-	public static final String TYPE_CLASS = "class";
-
-	public static final String TYPE_FILE = "file";
-
-	public static final String TYPE_URL = "url";
 
 	public static final String SCOPE_INDIVIDUAL = "individual";
 
@@ -49,4 +45,7 @@ public class ResourceImpl extends ResourceModelImpl implements Resource {
 	public ResourceImpl() {
 	}
 
+	public String getName() throws SystemException {
+		return ResourceCodeLocalServiceUtil.getName(getCode());
+	}
 }

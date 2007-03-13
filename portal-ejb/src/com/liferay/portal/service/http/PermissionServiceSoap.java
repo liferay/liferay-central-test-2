@@ -116,12 +116,12 @@ public class PermissionServiceSoap {
 	}
 
 	public static void setRolePermission(java.lang.String roleId, long groupId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String name, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws RemoteException {
 		try {
 			PermissionServiceUtil.setRolePermission(roleId, groupId, name,
-				typeId, scope, primKey, actionId);
+				scope, primKey, actionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -155,12 +155,12 @@ public class PermissionServiceSoap {
 	}
 
 	public static void unsetRolePermission(java.lang.String roleId,
-		long groupId, java.lang.String name, java.lang.String typeId,
-		java.lang.String scope, java.lang.String primKey,
-		java.lang.String actionId) throws RemoteException {
+		long groupId, java.lang.String name, java.lang.String scope,
+		java.lang.String primKey, java.lang.String actionId)
+		throws RemoteException {
 		try {
 			PermissionServiceUtil.unsetRolePermission(roleId, groupId, name,
-				typeId, scope, primKey, actionId);
+				scope, primKey, actionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -169,12 +169,11 @@ public class PermissionServiceSoap {
 	}
 
 	public static void unsetRolePermissions(java.lang.String roleId,
-		long groupId, java.lang.String name, java.lang.String typeId,
-		java.lang.String scope, java.lang.String actionId)
-		throws RemoteException {
+		long groupId, java.lang.String name, java.lang.String scope,
+		java.lang.String actionId) throws RemoteException {
 		try {
 			PermissionServiceUtil.unsetRolePermissions(roleId, groupId, name,
-				typeId, scope, actionId);
+				scope, actionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

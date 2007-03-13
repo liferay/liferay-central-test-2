@@ -20,47 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_0.util;
-
-import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+package com.liferay.portal.service;
 
 /**
- * <a href="TempScopeUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResourceCodeLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class TempScopeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
-
-	public TempScopeUpgradeColumnImpl() {
-		super("scope");
+public class ResourceCodeLocalServiceFactory {
+	public static ResourceCodeLocalService getService() {
+		return _getFactory()._service;
 	}
 
-	public Object getNewValue(Object oldValue) throws Exception {
-		_temp = oldValue;
+	public static ResourceCodeLocalService getTxImpl() {
+		if (_txImpl == null) {
+			_txImpl = (ResourceCodeLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+		}
 
-		return oldValue;
+		return _txImpl;
 	}
 
-	public boolean isScopeGroup() {
-		if (_temp.equals(ResourceImpl.SCOPE_GROUP)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	public void setService(ResourceCodeLocalService service) {
+		_service = service;
 	}
 
-	public boolean isScopeIndividual() {
-		if (_temp.equals(ResourceImpl.SCOPE_INDIVIDUAL)) {
-			return true;
+	private static ResourceCodeLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			_factory = (ResourceCodeLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
-		else {
-			return false;
-		}
+
+		return _factory;
 	}
 
-	private Object _temp;
-
+	private static final String _FACTORY = ResourceCodeLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = ResourceCodeLocalService.class.getName() +
+		".transaction";
+	private static ResourceCodeLocalServiceFactory _factory;
+	private static ResourceCodeLocalService _txImpl;
+	private ResourceCodeLocalService _service;
 }
