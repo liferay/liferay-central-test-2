@@ -55,6 +55,8 @@ public class ThemeAutoDeployer
 			utilTaglibDTD = DeployUtil.getResourcePath("liferay-util.tld");
 			unpackWar = PrefsPropsUtil.getBoolean(
 				PropsUtil.AUTO_DEPLOY_UNPACK_WAR);
+			jbossPrefix = PrefsPropsUtil.getString(
+				PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX);
 			tomcatLibDir = PrefsPropsUtil.getString(
 				PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR);
 

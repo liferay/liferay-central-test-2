@@ -174,6 +174,7 @@ public class EditServerAction extends PortletAction {
 		String destDir = ParamUtil.getString(req, "destDir");
 		long interval = ParamUtil.getLong(req, "interval");
 		boolean unpackWar = ParamUtil.getBoolean(req, "unpackWar");
+		String jbossPrefix = ParamUtil.getString(req, "jbossPrefix");
 		String tomcatLibDir = ParamUtil.getString(req, "tomcatLibDir");
 		String pluginRepositories = ParamUtil.getString(
 			req, "pluginRepositories");
@@ -187,10 +188,8 @@ public class EditServerAction extends PortletAction {
 			PropsUtil.AUTO_DEPLOY_INTERVAL, String.valueOf(interval));
 		prefs.setValue(
 			PropsUtil.AUTO_DEPLOY_UNPACK_WAR, String.valueOf(unpackWar));
-
-		if (Validator.isNotNull(tomcatLibDir)) {
-			prefs.setValue(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR, tomcatLibDir);
-		}
+		prefs.setValue(PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX, jbossPrefix);
+		prefs.setValue(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR, tomcatLibDir);
 
 		String oldPluginRepositories = PrefsPropsUtil.getString(
 			PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);

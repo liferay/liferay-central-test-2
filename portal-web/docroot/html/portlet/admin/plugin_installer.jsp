@@ -213,22 +213,70 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 			</td>
 		</tr>
 
-		<c:if test="<%= ServerDetector.isTomcat() %>">
-			<tr>
-				<td colspan="3">
-					<br>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<%= LanguageUtil.get(pageContext, "tomcat-lib-dir") %>
-				</td>
-				<td style="padding-left: 10px;"></td>
-				<td>
-					<input name="<portlet:namespace />tomcatLibDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR) %>">
-				</td>
-			</tr>
-		</c:if>
+		<%
+		int jbossPrefix = GetterUtil.getInteger(PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX));
+		%>
+
+		<c:choose>
+			<c:when test="<%= ServerDetector.isJBoss() %>">
+				<tr>
+					<td colspan="3">
+						<br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "jboss-prefix") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<select name="<portlet:namespace />jbossPrefix">
+							<option></option>
+
+							<%
+							for (int i = 1; i < 9; i++) {
+							%>
+
+								<option <%= jbossPrefix == i ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+
+							<%
+							}
+							%>
+
+						</select>
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<input name="<portlet:namespace />jbossPrefix" type="hidden" value="<%= jbossPrefix %>">
+			</c:otherwise>
+		</c:choose>
+
+		<%
+		String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR);
+		%>
+
+		<c:choose>
+			<c:when test="<%= ServerDetector.isTomcat() %>">
+				<tr>
+					<td colspan="3">
+						<br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "tomcat-lib-dir") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<input name="<portlet:namespace />tomcatLibDir" size="75" type="text" value="<%= tomcatLibDir %>">
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<input name="<portlet:namespace />tomcatLibDir" type="hidden" value="<%= tomcatLibDir %>">
+			</c:otherwise>
+		</c:choose>
 
 		<tr>
 			<td colspan="3">

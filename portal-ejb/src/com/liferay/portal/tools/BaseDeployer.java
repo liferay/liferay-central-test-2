@@ -96,6 +96,7 @@ public class BaseDeployer {
 		utilTaglibDTD = System.getProperty("deployer.util.taglib.dtd");
 		unpackWar = GetterUtil.getBoolean(
 			System.getProperty("deployer.unpack.war"), true);
+		jbossPrefix = System.getProperty("deployer.jboss.prefix");
 		tomcatLibDir = System.getProperty("deployer.tomcat.lib.dir");
 		this.wars = wars;
 		this.jars = jars;
@@ -141,6 +142,12 @@ public class BaseDeployer {
 
 			throw new IllegalArgumentException(
 				appServerType + " is not a valid application server type");
+		}
+
+		if (Validator.isNotNull(jbossPrefix) &&
+			!Validator.isNumber(jbossPrefix)) {
+
+			jbossPrefix = "1";
 		}
 	}
 
@@ -335,9 +342,13 @@ public class BaseDeployer {
 			displayName = getDisplayName(srcFile);
 		}
 
-		if (appServerType.equals("jetty") || appServerType.equals("oc4j") ||
-			appServerType.equals("orion") || appServerType.equals("resin") ||
-			appServerType.equals("tomcat")) {
+		if (appServerType.startsWith("jboss")) {
+			deployDir = jbossPrefix + deployDir;
+		}
+		else if (appServerType.equals("jetty") || appServerType.equals("oc4j") ||
+				 appServerType.equals("orion") ||
+				 appServerType.equals("resin") ||
+				 appServerType.equals("tomcat")) {
 
 			if (unpackWar) {
 				deployDir = deployDir.substring(0, deployDir.length() - 4);
@@ -419,7 +430,15 @@ public class BaseDeployer {
 	protected String getDisplayName(File srcFile) {
 		String displayName = srcFile.getName();
 
-		return displayName.substring(0, displayName.length() - 4);
+		displayName = displayName.substring(0, displayName.length() - 4);
+
+		if (appServerType.startsWith("jboss") &&
+			displayName.startsWith(jbossPrefix)) {
+
+			displayName = displayName.substring(1, displayName.length());
+		}
+
+		return displayName;
 	}
 
 	protected String getExtraContent(
@@ -682,6 +701,7 @@ public class BaseDeployer {
 	protected String uiTaglibDTD;
 	protected String utilTaglibDTD;
 	protected boolean unpackWar;
+	protected String jbossPrefix;
 	protected String tomcatLibDir;
 	protected List wars;
 	protected List jars;
