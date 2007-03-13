@@ -24,6 +24,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+
 if (Validator.isNull(redirect)) {
 	redirect = currentURL;
 }
@@ -40,7 +41,6 @@ installPluginsURL.setParameter("struts_action", "/admin/plugin_installer");
 installPluginsURL.setParameter("referer", currentURL);
 installPluginsURL.setParameter("tabs1", tabs1);
 installPluginsURL.setParameter("tabs2", tabs2);
-
 %>
 
 <liferay-ui:tabs
@@ -50,10 +50,10 @@ installPluginsURL.setParameter("tabs2", tabs2);
 />
 
 <c:choose>
-	<c:when test='<%= tabs2.equals("themes")%>'>
+	<c:when test='<%= tabs2.equals("themes") %>'>
 		<%@ include file="/html/portlet/admin/themes.jsp" %>
 	</c:when>
-	<c:when test='<%= tabs2.equals("layout-templates")%>'>
+	<c:when test='<%= tabs2.equals("layout-templates") %>'>
 		<%@ include file="/html/portlet/admin/layout_templates.jsp" %>
 	</c:when>
 	<c:otherwise>

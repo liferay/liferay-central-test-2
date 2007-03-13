@@ -131,10 +131,10 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 	<c:when test='<%=tabs1.equals("upload-file") %>'>
 		<%@ include file="/html/portlet/admin/upload_file.jsp" %>
 	</c:when>
-	<c:when test='<%=tabs1.equals("download-file")%>'>
+	<c:when test='<%=tabs1.equals("download-file") %>'>
 		<%@ include file="/html/portlet/admin/download_file.jsp" %>
 	</c:when>
-	<c:when test='<%=tabs1.equals("configuration")%>'>
+	<c:when test='<%=tabs1.equals("configuration") %>'>
 		<table border="0" cellpadding="0" cellspacing="0">
 		<% if (!PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)) { %>
 		<tr>
