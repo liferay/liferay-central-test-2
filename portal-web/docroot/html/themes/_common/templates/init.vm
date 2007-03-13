@@ -94,7 +94,7 @@
 #if ( $navItems )
 	#set ( $nav_items = $navItems )
 	#set ( $has_navigation = ($nav_items && $nav_items.size() > 0) )
-#
+#end
 
 ## ---------- Includes ---------- ##
 
