@@ -88,12 +88,12 @@
 						<div class="layout-tab-text"><a href="$tabHREF" $target>$tabName</a></div>
 					</div>
 				#end
-				
+
 				#set ($count = $count + 1)
 			#end
-			
+
 		#end
-		
+
 		<div class="layout-tab-seperator"></div>
 
 		<div id="layout-nav-divider"></div>

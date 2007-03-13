@@ -22,7 +22,7 @@
  */
 *#
 
-#parse("$fullTemplatesPath/portal_init.vm")
+#parse($init)
 
 <html dir="$languageUtil.get($pageContext, "lang.dir")">
 
