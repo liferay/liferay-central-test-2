@@ -38,4 +38,7 @@
 	<theme id="genesis" name="Genesis">
 		<root-path>/html/themes/${theme-id}</root-path>
 	</theme>
+	<theme id="desktop" name="Desktop">
+		<root-path>/html/themes/${theme-id}</root-path>
+	</theme>
 </look-and-feel>
