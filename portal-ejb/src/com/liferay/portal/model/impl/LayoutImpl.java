@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
@@ -34,10 +35,12 @@ import com.liferay.portal.model.LayoutType;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.service.permission.LayoutPermission;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
@@ -331,6 +334,28 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 	public List getChildren() throws PortalException, SystemException {
 		return LayoutLocalServiceUtil.getLayouts(getOwnerId(), getLayoutId());
+	}
+
+	public List getChildren(PermissionChecker permissionChecker)
+		throws PortalException, SystemException {
+
+		List layouts = getChildren();
+
+		Iterator itr = layouts.iterator();
+
+		while (itr.hasNext()) {
+			Layout layout = (Layout)itr.next();
+
+			if (layout.isHidden() ||
+				!LayoutPermission.contains(
+					permissionChecker, layout.getLayoutId(),
+					layout.getOwnerId(), ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return layouts;
 	}
 
 	public String getName(Locale locale) {

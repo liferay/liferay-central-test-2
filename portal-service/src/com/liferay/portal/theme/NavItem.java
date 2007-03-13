@@ -92,7 +92,10 @@ public class NavItem implements Serializable {
 
 	public List getChildren() throws Exception {
 		if (_children == null) {
-			List layouts = _layout.getChildren();
+			ThemeDisplay themeDisplay = _vars.getThemeDisplay();
+
+			List layouts = _layout.getChildren(
+				themeDisplay.getPermissionChecker());
 
 			_children = fromLayouts(_vars, layouts);
 		}

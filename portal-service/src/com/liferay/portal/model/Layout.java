@@ -55,6 +55,11 @@ public interface Layout extends LayoutModel {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getChildren(
+		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.lang.String getName(java.util.Locale locale);
 
 	public java.lang.String getName(java.lang.String localeLanguageId);
