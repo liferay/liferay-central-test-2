@@ -77,7 +77,7 @@ public class UpgradeResource extends UpgradeProcess {
 		{"companyId", new Integer(Types.VARCHAR)},
 		{"name", new Integer(Types.VARCHAR)},
 		{"scope", new Integer(Types.VARCHAR)},
-		{"code", new Integer(Types.BIGINT)},
+		{"codeId", new Integer(Types.BIGINT)},
 		{"primKey", new Integer(Types.VARCHAR)}
 	};
 
