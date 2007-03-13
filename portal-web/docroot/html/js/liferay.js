@@ -213,18 +213,25 @@ Liferay.Draggables = {
 				 }
 			);
 			
-			drags.Sortable(
-				{
-					accept: 'portlet-boundary',
-					handle: '.portlet-title',
-					helperclass: 'portlet-placeholder',
-					hoverclass: 'portlet-dragging',
-					activeclass: 'portlet-hover',
-					onStop: instance._onStop,
-					opacity: 0.7,
-					tolerance: 'intersect'
-				}
-			);
+			if (themeDisplay.isFreeformLayout()) {
+				drags.find(".portlet-boundary").each(function() {
+					instance.addItem(this);
+				});
+			}
+			else {
+				drags.Sortable(
+					{
+						accept: 'portlet-boundary',
+						handle: '.portlet-title',
+						helperclass: 'portlet-placeholder',
+						hoverclass: 'portlet-dragging',
+						activeclass: 'portlet-hover',
+						onStop: instance._onStop,
+						opacity: 0.7,
+						tolerance: 'intersect'
+					}
+				);
+			}
 		}
 
 		instance.drags = drags;
@@ -235,9 +242,15 @@ Liferay.Draggables = {
 	addItem: function(el) {
 		var instance = this;
 			
-		jQuery(el).find('.portlet-title').css('cursor', 'move');
+		var element = jQuery(el);
+		element.find('.portlet-title').css('cursor', 'move');
 			
-		instance.drags.SortableAddItem(el);
+		if (themeDisplay.isFreeformLayout()) {
+			LayoutColumns.initPortlet(el);
+		}
+		else {
+			instance.drags.SortableAddItem(el);
+		}
 	},
 
 	_onStop: function() {
@@ -263,7 +276,7 @@ Liferay.Draggables = {
 
 		movePortlet(themeDisplay.getPlid(), portletId, currentColumnId, newPosition, themeDisplay.getDoAsUserIdEncoded());
 	},
-
+	
 	_dragList: '#content-wrapper div[@id^=layout-column_]'
 };
 

@@ -587,7 +587,8 @@ var LayoutColumns = {
 		var newPosition = this.findPosition(portlet);
 		
 		if (newPosition != portlet.oldPosition) {
-			movePortlet(LayoutColumns.plid, portlet.portletId, portlet.parentNode.columnId, newPosition, LayoutColumns.doAsUserId);
+			var currentColumnId = portlet.parentNode.id.replace(/^layout-column_/, '');
+			movePortlet(themeDisplay.getPlid(), portlet.portletId, currentColumnId, newPosition, themeDisplay.getDoAsUserIdEncoded());
 		}
 		
 		if (resizeBox) {
@@ -597,7 +598,7 @@ var LayoutColumns = {
 				"&top=" + portlet.style.top +
 				"&left=" + portlet.style.left +
 				"&p_p_id=" + portlet.portletId +
-				"&doAsUserId=" + LayoutColumns.doAsUserId +
+				"&doAsUserId=" + themeDisplay.getDoAsUserIdEncoded() +
 				"&cmd=drag");
 		}
 	}

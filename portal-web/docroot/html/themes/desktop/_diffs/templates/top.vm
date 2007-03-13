@@ -24,68 +24,51 @@
 
 <div id="layout-desktop-icons"></div>
 
-#if ($themeDisplay.isSignedIn())
-	<div style="position: relative; z-index: 4;">
-			<span id="portal-dock-text">$user.getGreeting()</span>
+<div class="lfr-dock">
+	<h2 class="user-greeting">
+		<span>$user_greeting</span>
+	</h2>
 
-			<div id="portal-dock" style="position: absolute; z-index: 2;">
+	<ul class="lfr-dock-list">
+		#if ( $show_home )
+			<li class="home">
+				<a href="$home_url">$home_text</a>
+			</li>
+		#end
 
-				<div class="portal-dock-box"
-					 onmouseover="LiferayDock.showText('$unicodeFormatter.toString($user.getGreeting())')">
-					 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_main.png" />
-				</div>
+		#if ( $show_sign_in )
+			<li class="sign-in">
+				<a href="$sign_in_url">$sign_in_text</a>
+			</li>
+		#end
 
-				<div class="portal-dock-box"
-					 onclick="window.location='$themeDisplay.getURLSignOut()'"
-					 onmouseover="LiferayDock.showText('$unicodeLanguageUtil.get($pageContext, "sign-out")')">
-					 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_logout.png" />
-				</div>
+		#if ( $show_my_account )
+			<li class="my-account">
+				<a href="$my_account_url">$my_account_text</a>
+			</li>
+		#end
 
-				<div class="portal-dock-box"
-					 onclick="window.location='$themeDisplay.getURLHome()'"
-					 onmouseover="LiferayDock.showText('$unicodeLanguageUtil.get($pageContext, "home")')">
-					 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_home.png" />
-				</div>
+		#if ( $show_sign_out )
+			<li class="sign-out">
+				<a href="$sign_out_url">$sign_out_text</a>
+			</li>
+		#end
 
-				#if ($themeDisplay.isShowLayoutTemplatesIcon())
-					<div class="portal-dock-box"
-						 onclick="showLayoutTemplates()"
-						 onmouseover="LiferayDock.showText('$unicodeLanguageUtil.get($pageContext, "layout")')">
-						 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_layout.png" />
-					</div>
-				#end
+		#if ( $show_add_content )
+			<li class="add-content">
+				<a href="javascript: void(0);" onclick="$add_content_url">$add_content_text</a>
+			</li>
+			<li class="layout">
+				<a href="javascript: void(0);" onclick="$layout_url">$layout_text</a>
+			</li>
+		#end
 
-				#if ($themeDisplay.isShowMyAccountIcon())
-					<div class="portal-dock-box"
-						 onclick="window.location='$themeDisplay.getURLMyAccount()'"
-						 onmouseover="LiferayDock.showText('$unicodeLanguageUtil.get($pageContext, "my-account")')">
-						 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_myAccount.png" />
-					</div>
-				#end
+		#if ( $show_page_settings )
+			<li class="page-settings">
+				<a href="$page_settings_url">$page_settings_text</a>
+			</li>
+		#end
 
-				#if ($themeDisplay.isShowAddContentIcon())
-					<div class="portal-dock-box"
-						 onclick="$themeDisplay.getURLAddContent()"
-						 onmouseover="LiferayDock.showText('$unicodeLanguageUtil.get($pageContext, "add-content")')">
-						 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_addContent.png" />
-					</div>
-				#end
-
-				#if ($themeDisplay.isShowPageSettingsIcon())
-					<div class="portal-dock-box"
-						 onclick="showPageSettings()"
-						 onmouseover="LiferayDock.showText('$unicodeLanguageUtil.get($pageContext, "page-settings")')">
-						 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_pageSettings.png" />
-					</div>
-				#end
-			</div>
-	</div>
-
-	<script type="text/javascript">
-		LiferayDock.ICON = {HEIGHT: 26, WIDTH: 26};
-		LiferayDock.GRID = {HEIGHT: 16, WIDTH: 1};
-		LiferayDock.ORDER = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
-		LiferayDock.initialize("$unicodeFormatter.toString($user.getGreeting())");
-		LiferayDock.cached = null;
-	</script>
-#end
+		$theme.myPlaces()
+	</ul>
+</div>

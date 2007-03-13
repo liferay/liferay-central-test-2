@@ -88,60 +88,14 @@
 						<div class="layout-tab-text"><a href="$tabHREF" $target>$tabName</a></div>
 					</div>
 				#end
-
+				
 				#set ($count = $count + 1)
 			#end
-
+			
 		#end
-
-		<div class="layout-tab-seperator"></div>
-
-		#*
-		#if ($themeDisplay.isShowPageSettingsIcon())
-			<div id="layout-tab-add">
-				<div class="layout-tab-text"><a href="javascript: Navigation.addPage()">$languageUtil.get($pageContext, "add-page")</a></div>
-			</div>
-		#end
-		*#
-
-		#if (!$themeDisplay.isSignedIn())
-			<div class="layout-tab">
-				<div class="layout-tab-text"><a href="$themeDisplay.getURLSignIn()">$languageUtil.get($pageContext, "sign-in")</a></div>
-			</div>
-
-			<div class="layout-tab">
-				<div id="layout-global-search">
-					$taglibLiferay.journalContentSearch()
-				</div>
-			</div>
-		#else
-			<div class="layout-tab">
-				<div id="layout-my-places">
-					#set($myPlacesPortlet = $staticFieldGetter.getFieldValue("com.liferay.portal.util.PortletKeys", "MY_PLACES"))
-					$taglibLiferay.runtime($myPlacesPortlet)
-				</div>
-			</div>
-		#end
-
+		
 		<div class="layout-tab-seperator"></div>
 
 		<div id="layout-nav-divider"></div>
 	</div>
-
-	#if ($tilesSelectable.equals("true") && $themeDisplay.isShowAddContentIcon())
-	#*
-	<script type="text/javascript">
-		Navigation.init({
-				groupId: "$layout.getGroupId()",
-				language: "$languageUtil.getLanguageId($request)",
-				layoutId: "$layout.getLayoutId()",
-				ownerId: "layoutImpl.getOwnerId(plid)",
-				isPrivate: $layout.isPrivateLayout(),
-				parent: "$layout.getParentLayoutId()",
-				layoutIds: "$layoutIds".split(','),
-				hiddenIds: "$hiddenIds".split(',')
-		});
-	</script>
-	*#
-	#end
 #end

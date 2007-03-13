@@ -49,6 +49,9 @@
 		},
 		getURLHome : function() {
 			return "<%= themeDisplay.getURLHome() %>";
+		},
+		isFreeformLayout : function() {
+			return <%= themeDisplay.isFreeformLayout() %>;
 		}
 	};
 
