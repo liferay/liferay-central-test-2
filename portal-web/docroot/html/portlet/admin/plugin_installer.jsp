@@ -253,6 +253,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 		</c:choose>
 
 		<%
+		String tomcatConfDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_CONF_DIR);
 		String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR);
 		%>
 
@@ -261,6 +262,15 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 				<tr>
 					<td colspan="3">
 						<br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "tomcat-conf-dir") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<input name="<portlet:namespace />tomcatConfDir" size="75" type="text" value="<%= tomcatConfDir %>">
 					</td>
 				</tr>
 				<tr>
@@ -274,6 +284,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 				</tr>
 			</c:when>
 			<c:otherwise>
+				<input name="<portlet:namespace />tomcatConfDir" type="hidden" value="<%= tomcatConfDir %>">
 				<input name="<portlet:namespace />tomcatLibDir" type="hidden" value="<%= tomcatLibDir %>">
 			</c:otherwise>
 		</c:choose>
