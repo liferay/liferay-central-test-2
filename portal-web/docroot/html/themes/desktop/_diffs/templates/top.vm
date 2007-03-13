@@ -1,0 +1,93 @@
+#*
+/**
+ * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+*#
+
+<div id="layout-desktop-icons"></div>
+		
+#if ($themeDisplay.isSignedIn())
+	<div style="position: relative; z-index: 4;">
+			<span id="portal-dock-text">$user.getGreeting()</span>
+
+			<div id="portal-dock" style="position: absolute; z-index: 2;">
+
+				<div class="portal-dock-box"
+					 onmouseover="LiferayDock.showText('$unicodeFormatter.toString($user.getGreeting())')">
+					 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_main.png" />
+				</div>
+
+				<div class="portal-dock-box"
+					 onclick="window.location='$themeDisplay.getURLSignOut()'"
+					 onmouseover="LiferayDock.showText('$unicodeLanguageUtil.get($pageContext, "sign-out")')">
+					 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_logout.png" />
+				</div>
+
+				<div class="portal-dock-box"
+					 onclick="window.location='$themeDisplay.getURLHome()'"
+					 onmouseover="LiferayDock.showText('$unicodeLanguageUtil.get($pageContext, "home")')">
+					 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_home.png" />
+				</div>
+
+				#if ($themeDisplay.isShowLayoutTemplatesIcon())
+					<div class="portal-dock-box"
+						 onclick="showLayoutTemplates()"
+						 onmouseover="LiferayDock.showText('$unicodeLanguageUtil.get($pageContext, "layout")')">
+						 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_layout.png" />
+					</div>
+				#end
+
+				#if ($themeDisplay.isShowMyAccountIcon())
+					<div class="portal-dock-box"
+						 onclick="window.location='$themeDisplay.getURLMyAccount()'"
+						 onmouseover="LiferayDock.showText('$unicodeLanguageUtil.get($pageContext, "my-account")')">
+						 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_myAccount.png" />
+					</div>
+				#end
+
+				#if ($themeDisplay.isShowAddContentIcon())
+					<div class="portal-dock-box"
+						 onclick="$themeDisplay.getURLAddContent()"
+						 onmouseover="LiferayDock.showText('$unicodeLanguageUtil.get($pageContext, "add-content")')">
+						 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_addContent.png" />
+					</div>
+				#end
+
+				#if ($themeDisplay.isShowPageSettingsIcon())
+					<div class="portal-dock-box"
+						 onclick="showPageSettings()"
+						 onmouseover="LiferayDock.showText('$unicodeLanguageUtil.get($pageContext, "page-settings")')">
+						 <img src="$themeDisplay.getPathThemeImage()/dock/icons_nav_pageSettings.png" />
+					</div>
+				#end
+			</div>
+	</div>
+
+	<script type="text/javascript">
+		LiferayDock.ICON = {HEIGHT: 26, WIDTH: 26};
+		LiferayDock.GRID = {HEIGHT: 16, WIDTH: 1};
+		LiferayDock.ORDER = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+		LiferayDock.initialize("$unicodeFormatter.toString($user.getGreeting())");
+		LiferayDock.cached = null;
+	</script>
+#end
+
+	

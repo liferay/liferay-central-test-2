@@ -1,0 +1,74 @@
+#*
+/**
+ * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+*#
+
+#parse($init)
+
+#set ($htmlClass = "")
+#if ($themeDisplay.isFreeformLayout())
+	#set ($htmlClass = "freeform")
+#end
+
+<html dir="$languageUtil.get($pageContext, "lang.dir")" class="$htmlClass">
+
+<head>
+	<title>$company.getName() - $tilesTitle</title>
+	$taglibLiferay.include("/html/common/themes/top_head.jsp")
+
+	#css($css_main_file)
+	#js($js_main_file)
+
+	<script src="$themeDisplay.getPathThemeRoot()/javascript/soundmanager2.js" type="text/javascript"></script>	
+	<script src="$themeDisplay.getPathThemeRoot()/javascript/jreflection.js" type="text/javascript"></script>	
+	<script src="$themeDisplay.getPathThemeRoot()/javascript/liferaydesktop.js" type="text/javascript"></script>	
+	
+	<style type="text/css">
+		#parse("$fullTemplatesPath/css.vm")
+	</style>
+</head>
+
+<body id="body-bg">
+
+$taglibLiferay.include("/html/common/themes/top_messages.jsp")
+
+#if (!$layoutTypePortlet.hasStateMax())
+	#parse("$fullTemplatesPath/top.vm")
+	#parse("$fullTemplatesPath/navigation.vm")
+#end
+
+#if ($tilesSelectable.equals("true"))
+	$taglibLiferay.include("/html$tilesContent")
+#else
+	$portletDisplay.recycle()
+	$portletDisplay.setTitle($tilesTitle)
+	$taglibLiferay.wrapPortlet("portlet.vm", "/html$tilesContent")
+#end
+
+#parse("$fullTemplatesPath/bottom.vm")
+
+$taglibLiferay.include("/html/common/themes/bottom-ext.jsp")
+$taglibLiferay.include("/html/common/themes/session_timeout.jsp")
+
+</body>
+
+</html>
