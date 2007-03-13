@@ -132,7 +132,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 					PermissionLocalServiceUtil.setRolePermissions(
 						role.getRoleId(), role.getCompanyId(),
-						Group.class.getName(), ResourceImpl.SCOPE_GROUP_TEMPLATE,
+						Group.class.getName(),
+						ResourceImpl.SCOPE_GROUP_TEMPLATE,
 						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
 						(String[])actions.toArray(new String[0]));
 				}

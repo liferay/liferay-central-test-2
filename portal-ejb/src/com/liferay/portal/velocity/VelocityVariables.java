@@ -280,7 +280,8 @@ public class VelocityVariables {
 		vc.put("groupPermission", GroupPermission_IW.getInstance());
 		vc.put("layoutPermission", LayoutPermission_IW.getInstance());
 		vc.put("locationPermission", LocationPermission_IW.getInstance());
-		vc.put("organizationPermission", OrganizationPermission_IW.getInstance());
+		vc.put(
+			"organizationPermission", OrganizationPermission_IW.getInstance());
 		vc.put("portalPermission", PortalPermission_IW.getInstance());
 		vc.put("portletPermission", PortletPermission_IW.getInstance());
 		vc.put("rolePermission", RolePermission_IW.getInstance());

@@ -680,18 +680,17 @@ create table Release_ (
 	verified BOOLEAN
 );
 
-create table ResourceCode (
-	companyId VARCHAR(75) not null,
-	name VARCHAR(75) not null,
-	scope VARCHAR(75) not null,
-	code LONG,
-	primary key (companyId, name, scope)
-);
-
 create table Resource_ (
 	resourceId LONG not null primary key,
-	code LONG,
+	codeId LONG,
 	primKey VARCHAR(200) null
+);
+
+create table ResourceCode (
+	codeId LONG not null primary key,
+	companyId VARCHAR(75) not null,
+	name VARCHAR(75) null,
+	scope VARCHAR(75) null
 );
 
 create table Role_ (
@@ -709,7 +708,6 @@ create table Roles_Permissions (
 	permissionId LONG not null,
 	primary key (roleId, permissionId)
 );
-
 
 create table SCFrameworkVersion (
 	frameworkVersionId LONG not null primary key,

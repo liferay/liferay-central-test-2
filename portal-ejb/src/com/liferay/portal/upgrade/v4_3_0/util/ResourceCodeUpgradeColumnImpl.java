@@ -19,14 +19,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 
 /**
- * <a href="ResourceCodeUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResourceCodeUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Alexander Chow
  *
@@ -37,7 +40,7 @@ public class ResourceCodeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 										 TempUpgradeColumnImpl nameColumn,
 										 TempUpgradeColumnImpl scopeColumn) {
 
-		super("code");
+		super("codeId");
 
 		_companyIdColumn = companyIdColumn;
 		_nameColumn = nameColumn;
@@ -49,10 +52,11 @@ public class ResourceCodeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		String name = (String)_nameColumn.getTemp();
 		String scope = (String)_scopeColumn.getTemp();
 
-		long code =
-			ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+		ResourceCode resourceCode =
+			ResourceCodeLocalServiceUtil.getResourceCode(
+				companyId, name, scope);
 
-		return new Long(code);
+		return new Long(resourceCode.getCodeId());
 	}
 
 	private TempUpgradeColumnImpl _companyIdColumn;

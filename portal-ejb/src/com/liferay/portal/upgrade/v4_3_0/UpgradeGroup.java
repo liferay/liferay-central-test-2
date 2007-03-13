@@ -348,14 +348,15 @@ public class UpgradeGroup extends UpgradeProcess {
 	}
 
 	private void _upgradeResources() throws Exception {
-		TempUpgradeColumnImpl codeColumn = new TempUpgradeColumnImpl("code");
+		TempUpgradeColumnImpl codeIdColumn =
+			new TempUpgradeColumnImpl("codeId");
 
 		UpgradeColumn upgradePrimKeyColumn =
 			new PrimKeyUpgradeColumnImpl(
-				codeColumn, _groupIdMapper, _ownerIdMapper);
+				codeIdColumn, _groupIdMapper, _ownerIdMapper);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ResourceImpl.TABLE_NAME, ResourceImpl.TABLE_COLUMNS, codeColumn,
+			ResourceImpl.TABLE_NAME, ResourceImpl.TABLE_COLUMNS, codeIdColumn,
 			upgradePrimKeyColumn);
 
 		upgradeTable.updateTable();

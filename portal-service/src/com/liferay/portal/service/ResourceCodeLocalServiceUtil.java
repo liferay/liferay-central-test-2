@@ -46,25 +46,22 @@ public class ResourceCodeLocalServiceUtil {
 			end);
 	}
 
-	public static long getCode(java.lang.String companyId,
-		java.lang.String name, java.lang.String scope)
-		throws com.liferay.portal.SystemException {
+	public static com.liferay.portal.model.ResourceCode getResourceCode(
+		long codeId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
 		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
 
-		return resourceCodeLocalService.getCode(companyId, name, scope);
+		return resourceCodeLocalService.getResourceCode(codeId);
 	}
 
-	public static java.lang.String getName(long code)
-		throws com.liferay.portal.SystemException {
+	public static com.liferay.portal.model.ResourceCode getResourceCode(
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String scope)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
 		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
 
-		return resourceCodeLocalService.getName(code);
-	}
-
-	public static java.lang.String getScope(long code)
-		throws com.liferay.portal.SystemException {
-		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
-
-		return resourceCodeLocalService.getScope(code);
+		return resourceCodeLocalService.getResourceCode(companyId, name, scope);
 	}
 }

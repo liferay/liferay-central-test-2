@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
@@ -58,9 +59,12 @@ public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		Object newValue = oldValue;
 
-		Long code = (Long)_upgradeColumn.getTemp();
+		Long codeId = (Long)_upgradeColumn.getTemp();
 
-		String scope = ResourceCodeLocalServiceUtil.getScope(code.longValue());
+		ResourceCode resourceCode =
+			ResourceCodeLocalServiceUtil.getResourceCode(codeId.longValue());
+
+		String scope = resourceCode.getScope();
 
 		if (scope.equals(ResourceImpl.SCOPE_GROUP)) {
 			newValue = _groupIdMapper.getNewValue(new Long((String)oldValue));

@@ -96,15 +96,14 @@ alter_column_type Release_ releaseId LONG;
 alter table Release_ add verified BOOLEAN;
 
 alter_column_type Resource_ resourceId LONG;
-alter table Resource_ add code LONG;
+alter table Resource_ add codeId LONG;
 alter table Resource_ drop typeId;
 
 create table ResourceCode (
+	codeId LONG not null primary key,
 	companyId VARCHAR(75) not null,
-	name VARCHAR(75) not null,
-	scope VARCHAR(75) not null,
-	code LONG,
-	primary key (companyId, name, scope)
+	name VARCHAR(75) null,
+	scope VARCHAR(75) null
 );
 
 alter table Role_ add type_ INTEGER;

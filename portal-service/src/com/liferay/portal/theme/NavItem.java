@@ -42,6 +42,10 @@ public class NavItem implements Serializable {
 	}
 
 	public static List fromLayouts(RequestVars vars, List layouts) {
+		if (layouts == null) {
+			return null;
+		}
+
 		List navItems = new ArrayList(layouts.size());
 
 		for (int i = 0; i < layouts.size(); i++) {

@@ -62,10 +62,12 @@ public class EditConfigurationAction extends PortletAction {
 			String uuid = ParamUtil.getString(req, "uuid");
 			boolean maximizeLinks = ParamUtil.getBoolean(req, "maximizeLinks");
 
-			String portletResource = ParamUtil.getString(req, "portletResource");
+			String portletResource = ParamUtil.getString(
+				req, "portletResource");
 
-			PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
-				req, portletResource, true, true);
+			PortletPreferences prefs =
+				PortletPreferencesFactory.getPortletSetup(
+					req, portletResource, true, true);
 
 			prefs.setValue("user-id", userId);
 			prefs.setValue("password", password);

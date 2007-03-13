@@ -148,54 +148,54 @@ public class ResourceUtil {
 		return getPersistence().fetchByPrimaryKey(resourceId);
 	}
 
-	public static java.util.List findByCode(long code)
+	public static java.util.List findByCodeId(long codeId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCode(code);
+		return getPersistence().findByCodeId(codeId);
 	}
 
-	public static java.util.List findByCode(long code, int begin, int end)
+	public static java.util.List findByCodeId(long codeId, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCode(code, begin, end);
+		return getPersistence().findByCodeId(codeId, begin, end);
 	}
 
-	public static java.util.List findByCode(long code, int begin, int end,
+	public static java.util.List findByCodeId(long codeId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCode(code, begin, end, obc);
+		return getPersistence().findByCodeId(codeId, begin, end, obc);
 	}
 
-	public static com.liferay.portal.model.Resource findByCode_First(
-		long code, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static com.liferay.portal.model.Resource findByCodeId_First(
+		long codeId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceException {
-		return getPersistence().findByCode_First(code, obc);
+		return getPersistence().findByCodeId_First(codeId, obc);
 	}
 
-	public static com.liferay.portal.model.Resource findByCode_Last(long code,
+	public static com.liferay.portal.model.Resource findByCodeId_Last(
+		long codeId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceException {
+		return getPersistence().findByCodeId_Last(codeId, obc);
+	}
+
+	public static com.liferay.portal.model.Resource[] findByCodeId_PrevAndNext(
+		long resourceId, long codeId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceException {
-		return getPersistence().findByCode_Last(code, obc);
+		return getPersistence().findByCodeId_PrevAndNext(resourceId, codeId, obc);
 	}
 
-	public static com.liferay.portal.model.Resource[] findByCode_PrevAndNext(
-		long resourceId, long code,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchResourceException {
-		return getPersistence().findByCode_PrevAndNext(resourceId, code, obc);
-	}
-
-	public static com.liferay.portal.model.Resource findByC_P(long code,
+	public static com.liferay.portal.model.Resource findByC_P(long codeId,
 		java.lang.String primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceException {
-		return getPersistence().findByC_P(code, primKey);
+		return getPersistence().findByC_P(codeId, primKey);
 	}
 
-	public static com.liferay.portal.model.Resource fetchByC_P(long code,
+	public static com.liferay.portal.model.Resource fetchByC_P(long codeId,
 		java.lang.String primKey) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByC_P(code, primKey);
+		return getPersistence().fetchByC_P(codeId, primKey);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -227,29 +227,29 @@ public class ResourceUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByCode(long code)
+	public static void removeByCodeId(long codeId)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByCode(code);
+		getPersistence().removeByCodeId(codeId);
 	}
 
-	public static void removeByC_P(long code, java.lang.String primKey)
+	public static void removeByC_P(long codeId, java.lang.String primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceException {
-		getPersistence().removeByC_P(code, primKey);
+		getPersistence().removeByC_P(codeId, primKey);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
 
-	public static int countByCode(long code)
+	public static int countByCodeId(long codeId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByCode(code);
+		return getPersistence().countByCodeId(codeId);
 	}
 
-	public static int countByC_P(long code, java.lang.String primKey)
+	public static int countByC_P(long codeId, java.lang.String primKey)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_P(code, primKey);
+		return getPersistence().countByC_P(codeId, primKey);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

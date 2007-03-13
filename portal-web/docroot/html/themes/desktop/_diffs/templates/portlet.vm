@@ -41,7 +41,7 @@
 				onmouseout="PortletHeaderBar.hide('$portletDisplay.getId()')"
 			#end
 		 >
-			
+
 			<div class="portlet-shadow-tl"><div></div></div>
 			<div class="portlet-shadow-tr"><div></div></div>
 			<div class="portlet-shadow-tc">

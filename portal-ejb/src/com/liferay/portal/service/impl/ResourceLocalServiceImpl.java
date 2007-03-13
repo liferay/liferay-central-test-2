@@ -30,6 +30,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -147,17 +148,20 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			String companyId, String name, String scope, String primKey)
 		throws PortalException, SystemException {
 
-		long code =
-			ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+		ResourceCode resourceCode =
+			ResourceCodeLocalServiceUtil.getResourceCode(
+				companyId, name, scope);
 
-		Resource resource = ResourceUtil.fetchByC_P(code, primKey);
+		Resource resource = ResourceUtil.fetchByC_P(
+			resourceCode.getCodeId(), primKey);
 
 		if (resource == null) {
 			long resourceId = CounterLocalServiceUtil.increment(
 				Resource.class.getName());
 
 			resource = ResourceUtil.create(resourceId);
-			resource.setCode(code);
+
+			resource.setCodeId(resourceCode.getCodeId());
 			resource.setPrimKey(primKey);
 
 			ResourceUtil.update(resource);
@@ -387,10 +391,11 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			String companyId, String name, String scope, String primKey)
 		throws PortalException, SystemException {
 
-		long code =
-			ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+		ResourceCode resourceCode =
+			ResourceCodeLocalServiceUtil.getResourceCode(
+				companyId, name, scope);
 
-		return ResourceUtil.findByC_P(code, primKey);
+		return ResourceUtil.findByC_P(resourceCode.getCodeId(), primKey);
 	}
 
 	protected void addCommunityPermissions(

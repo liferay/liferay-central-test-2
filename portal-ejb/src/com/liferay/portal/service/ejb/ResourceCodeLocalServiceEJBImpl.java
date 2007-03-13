@@ -50,20 +50,19 @@ public class ResourceCodeLocalServiceEJBImpl implements ResourceCodeLocalService
 			begin, end);
 	}
 
-	public long getCode(java.lang.String companyId, java.lang.String name,
-		java.lang.String scope) throws com.liferay.portal.SystemException {
-		return ResourceCodeLocalServiceFactory.getTxImpl().getCode(companyId,
+	public com.liferay.portal.model.ResourceCode getResourceCode(long codeId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return ResourceCodeLocalServiceFactory.getTxImpl().getResourceCode(codeId);
+	}
+
+	public com.liferay.portal.model.ResourceCode getResourceCode(
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String scope)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return ResourceCodeLocalServiceFactory.getTxImpl().getResourceCode(companyId,
 			name, scope);
-	}
-
-	public java.lang.String getName(long code)
-		throws com.liferay.portal.SystemException {
-		return ResourceCodeLocalServiceFactory.getTxImpl().getName(code);
-	}
-
-	public java.lang.String getScope(long code)
-		throws com.liferay.portal.SystemException {
-		return ResourceCodeLocalServiceFactory.getTxImpl().getScope(code);
 	}
 
 	public void ejbCreate() throws CreateException {

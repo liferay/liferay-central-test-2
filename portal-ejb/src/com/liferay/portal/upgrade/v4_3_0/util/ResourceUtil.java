@@ -60,7 +60,7 @@ public class ResourceUtil {
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Upgrading Resource_.primKey with name: " + name);
+			_log.info("Upgrading Resource_.primKey with name " + name);
 		}
 
 		Connection con = null;
@@ -132,8 +132,9 @@ public class ResourceUtil {
 				catch (StagnantRowException sre) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Resource_.primKey has stagnant data where " +
-								"name = '" + name + "': " + sre.getMessage());
+							"Resource_.primKey has stagnant data for name " +
+								name,
+							sre);
 					}
 
 					badPks.add(oldPk);
@@ -242,11 +243,13 @@ public class ResourceUtil {
 
 	private static final String _UPDATE_PRIMKEY =
 		"UPDATE Resource_ R, ResourceCode RC SET R.primKey = ? WHERE " +
-			"R.code = RC.code AND RC.name = ? AND RC.scope = ? AND R.primKey = ?";
+			"R.code = RC.code AND RC.name = ? AND RC.scope = ? AND " +
+				"R.primKey = ?";
 
 	private static final String _CLEAN_PRIMKEY =
-		"DELETE FROM Resource_ R, ResourceCode RC WHERE" +
-			"R.code = RC.code AND RC.name = ? AND RC.scope = ? AND R.primKey = ?";
+		"DELETE FROM Resource_ R, ResourceCode RC WHERE " +
+			"R.code = RC.code AND RC.name = ? AND RC.scope = ? AND " +
+				"R.primKey = ?";
 
 	private static Log _log = LogFactory.getLog(ResourceUtil.class.getName());
 

@@ -23,7 +23,7 @@
 *#
 
 <div id="layout-desktop-icons"></div>
-		
+
 #if ($themeDisplay.isSignedIn())
 	<div style="position: relative; z-index: 4;">
 			<span id="portal-dock-text">$user.getGreeting()</span>
@@ -89,5 +89,3 @@
 		LiferayDock.cached = null;
 	</script>
 #end
-
-	

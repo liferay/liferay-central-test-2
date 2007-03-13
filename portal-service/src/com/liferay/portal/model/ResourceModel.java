@@ -39,9 +39,9 @@ public interface ResourceModel extends BaseModel {
 
 	public void setResourceId(long resourceId);
 
-	public long getCode();
+	public long getCodeId();
 
-	public void setCode(long code);
+	public void setCodeId(long codeId);
 
 	public String getPrimKey();
 

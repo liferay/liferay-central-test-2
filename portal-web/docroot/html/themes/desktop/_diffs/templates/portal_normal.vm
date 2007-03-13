@@ -38,10 +38,10 @@
 	#css($css_main_file)
 	#js($js_main_file)
 
-	<script src="$themeDisplay.getPathThemeRoot()/javascript/soundmanager2.js" type="text/javascript"></script>	
-	<script src="$themeDisplay.getPathThemeRoot()/javascript/jreflection.js" type="text/javascript"></script>	
-	<script src="$themeDisplay.getPathThemeRoot()/javascript/liferaydesktop.js" type="text/javascript"></script>	
-	
+	<script src="$themeDisplay.getPathThemeRoot()/javascript/soundmanager2.js" type="text/javascript"></script>
+	<script src="$themeDisplay.getPathThemeRoot()/javascript/jreflection.js" type="text/javascript"></script>
+	<script src="$themeDisplay.getPathThemeRoot()/javascript/liferaydesktop.js" type="text/javascript"></script>
+
 	<style type="text/css">
 		#parse("$fullTemplatesPath/css.vm")
 	</style>

@@ -40,7 +40,7 @@ public class ResourceJSONSerializer {
 	public static JSONObject toJSONObject(Resource model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("resourceId", model.getResourceId());
-		jsonObj.put("code", model.getCode());
+		jsonObj.put("codeId", model.getCodeId());
 
 		String primKey = model.getPrimKey();
 

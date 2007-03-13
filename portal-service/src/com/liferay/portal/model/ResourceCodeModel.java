@@ -23,7 +23,6 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.service.persistence.ResourceCodePK;
 
 /**
  * <a href="ResourceCodeModel.java.html"><b><i>View Source</i></b></a>
@@ -32,9 +31,13 @@ import com.liferay.portal.service.persistence.ResourceCodePK;
  *
  */
 public interface ResourceCodeModel extends BaseModel {
-	public ResourceCodePK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(ResourceCodePK pk);
+	public void setPrimaryKey(long pk);
+
+	public long getCodeId();
+
+	public void setCodeId(long codeId);
 
 	public String getCompanyId();
 
@@ -47,8 +50,4 @@ public interface ResourceCodeModel extends BaseModel {
 	public String getScope();
 
 	public void setScope(String scope);
-
-	public long getCode();
-
-	public void setCode(long code);
 }

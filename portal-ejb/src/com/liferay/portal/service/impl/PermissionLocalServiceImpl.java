@@ -33,6 +33,7 @@ import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.ResourceImpl;
@@ -234,10 +235,12 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			String actionId)
 		throws PortalException, SystemException {
 
-		long code =
-			ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+		ResourceCode resourceCode =
+			ResourceCodeLocalServiceUtil.getResourceCode(
+				companyId, name, scope);
 
-		Iterator itr = ResourceUtil.findByCode(code).iterator();
+		Iterator itr = ResourceUtil.findByCodeId(
+			resourceCode.getCodeId()).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();
@@ -265,10 +268,12 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		try {
-			long code =
-				ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+			ResourceCode resourceCode =
+				ResourceCodeLocalServiceUtil.getResourceCode(
+					companyId, name, scope);
 
-			Resource resource = ResourceUtil.findByC_P(code, primKey);
+			Resource resource = ResourceUtil.findByC_P(
+				resourceCode.getCodeId(), primKey);
 
 			Permission permission = PermissionUtil.findByA_R(
 				actionId, resource.getResourceId());
@@ -565,10 +570,12 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		try {
-			long code =
-				ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+			ResourceCode resourceCode =
+				ResourceCodeLocalServiceUtil.getResourceCode(
+					companyId, name, scope);
 
-			Resource resource = ResourceUtil.findByC_P(code, primKey);
+			Resource resource = ResourceUtil.findByC_P(
+				resourceCode.getCodeId(), primKey);
 
 			Permission permission = PermissionUtil.findByA_R(
 				actionId, resource.getResourceId());
@@ -586,10 +593,12 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			String actionId)
 		throws PortalException, SystemException {
 
-		long code =
-			ResourceCodeLocalServiceUtil.getCode(companyId, name, scope);
+		ResourceCode resourceCode =
+			ResourceCodeLocalServiceUtil.getResourceCode(
+				companyId, name, scope);
 
-		Iterator itr = ResourceUtil.findByCode(code).iterator();
+		Iterator itr = ResourceUtil.findByCodeId(
+			resourceCode.getCodeId()).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();

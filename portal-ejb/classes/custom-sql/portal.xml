@@ -499,27 +499,31 @@
 				portletId LIKE ?
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.ResourceFinder.findByC_P">
-		<![CDATA[
-			SELECT
-				{Resource_.*}
-			FROM
-				Resource_, ResourceCode
-			WHERE
-				(Resource_.code = ResourceCode.code) AND
-				(ResourceCode.companyId = ?) AND
-				(Resource_.primKey LIKE ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portal.service.persistence.ResourceFinder.findByName">
 		<![CDATA[
 			SELECT
 				{Resource_.*}
 			FROM
-				Resource_, ResourceCode
+				Resource_
+			INNER JOIN
+				ResourceCode ON
+					(ResourceCode.codeId = Resource_.codeId)
 			WHERE
-				(Resource_.code = ResourceCode.code) AND
 				(ResourceCode.name = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.ResourceFinder.findByC_P">
+		<![CDATA[
+			SELECT
+				{Resource_.*}
+			FROM
+				Resource_
+			INNER JOIN
+				ResourceCode ON
+					(ResourceCode.codeId = Resource_.codeId)
+			WHERE
+				(ResourceCode.companyId = ?) AND
+				(Resource_.primKey LIKE ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByC_N_D_T">

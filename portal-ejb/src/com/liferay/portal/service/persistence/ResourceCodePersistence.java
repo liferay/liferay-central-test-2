@@ -52,15 +52,15 @@ import java.util.List;
  *
  */
 public class ResourceCodePersistence extends BasePersistence {
-	public ResourceCode create(ResourceCodePK resourceCodePK) {
+	public ResourceCode create(long codeId) {
 		ResourceCode resourceCode = new ResourceCodeImpl();
 		resourceCode.setNew(true);
-		resourceCode.setPrimaryKey(resourceCodePK);
+		resourceCode.setPrimaryKey(codeId);
 
 		return resourceCode;
 	}
 
-	public ResourceCode remove(ResourceCodePK resourceCodePK)
+	public ResourceCode remove(long codeId)
 		throws NoSuchResourceCodeException, SystemException {
 		Session session = null;
 
@@ -68,17 +68,16 @@ public class ResourceCodePersistence extends BasePersistence {
 			session = openSession();
 
 			ResourceCode resourceCode = (ResourceCode)session.get(ResourceCodeImpl.class,
-					resourceCodePK);
+					new Long(codeId));
 
 			if (resourceCode == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No ResourceCode exists with the primary key " +
-						resourceCodePK);
+						codeId);
 				}
 
 				throw new NoSuchResourceCodeException(
-					"No ResourceCode exists with the primary key " +
-					resourceCodePK);
+					"No ResourceCode exists with the primary key " + codeId);
 			}
 
 			return remove(resourceCode);
@@ -146,25 +145,24 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public ResourceCode findByPrimaryKey(ResourceCodePK resourceCodePK)
+	public ResourceCode findByPrimaryKey(long codeId)
 		throws NoSuchResourceCodeException, SystemException {
-		ResourceCode resourceCode = fetchByPrimaryKey(resourceCodePK);
+		ResourceCode resourceCode = fetchByPrimaryKey(codeId);
 
 		if (resourceCode == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No ResourceCode exists with the primary key " +
-					resourceCodePK);
+					codeId);
 			}
 
 			throw new NoSuchResourceCodeException(
-				"No ResourceCode exists with the primary key " +
-				resourceCodePK);
+				"No ResourceCode exists with the primary key " + codeId);
 		}
 
 		return resourceCode;
 	}
 
-	public ResourceCode fetchByPrimaryKey(ResourceCodePK resourceCodePK)
+	public ResourceCode fetchByPrimaryKey(long codeId)
 		throws SystemException {
 		Session session = null;
 
@@ -172,7 +170,7 @@ public class ResourceCodePersistence extends BasePersistence {
 			session = openSession();
 
 			return (ResourceCode)session.get(ResourceCodeImpl.class,
-				resourceCodePK);
+				new Long(codeId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -182,7 +180,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCode(long code) throws SystemException {
+	public List findByCompanyId(String companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -190,14 +188,24 @@ public class ResourceCodePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-			query.append("code = ?");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, code);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			return q.list();
 		}
@@ -209,13 +217,13 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCode(long code, int begin, int end)
+	public List findByCompanyId(String companyId, int begin, int end)
 		throws SystemException {
-		return findByCode(code, begin, end, null);
+		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCode(long code, int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List findByCompanyId(String companyId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
 		try {
@@ -223,7 +231,14 @@ public class ResourceCodePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-			query.append("code = ?");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -235,7 +250,10 @@ public class ResourceCodePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, code);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -247,16 +265,17 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public ResourceCode findByCode_First(long code, OrderByComparator obc)
+	public ResourceCode findByCompanyId_First(String companyId,
+		OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
-		List list = findByCode(code, 0, 1, obc);
+		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No ResourceCode exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("code=");
-			msg.append(code);
+			msg.append("companyId=");
+			msg.append(companyId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchResourceCodeException(msg.toString());
 		}
@@ -265,17 +284,18 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public ResourceCode findByCode_Last(long code, OrderByComparator obc)
+	public ResourceCode findByCompanyId_Last(String companyId,
+		OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
-		int count = countByCode(code);
-		List list = findByCode(code, count - 1, count, obc);
+		int count = countByCompanyId(companyId);
+		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No ResourceCode exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("code=");
-			msg.append(code);
+			msg.append("companyId=");
+			msg.append(companyId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchResourceCodeException(msg.toString());
 		}
@@ -284,11 +304,11 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public ResourceCode[] findByCode_PrevAndNext(
-		ResourceCodePK resourceCodePK, long code, OrderByComparator obc)
+	public ResourceCode[] findByCompanyId_PrevAndNext(long codeId,
+		String companyId, OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
-		ResourceCode resourceCode = findByPrimaryKey(resourceCodePK);
-		int count = countByCode(code);
+		ResourceCode resourceCode = findByPrimaryKey(codeId);
+		int count = countByCompanyId(companyId);
 		Session session = null;
 
 		try {
@@ -296,7 +316,14 @@ public class ResourceCodePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-			query.append("code = ?");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -308,7 +335,10 @@ public class ResourceCodePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, code);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					resourceCode);
@@ -449,10 +479,10 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public ResourceCode[] findByName_PrevAndNext(
-		ResourceCodePK resourceCodePK, String name, OrderByComparator obc)
+	public ResourceCode[] findByName_PrevAndNext(long codeId, String name,
+		OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
-		ResourceCode resourceCode = findByPrimaryKey(resourceCodePK);
+		ResourceCode resourceCode = findByPrimaryKey(codeId);
 		int count = countByName(name);
 		Session session = null;
 
@@ -493,6 +523,106 @@ public class ResourceCodePersistence extends BasePersistence {
 			array[2] = (ResourceCode)objArray[2];
 
 			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ResourceCode findByC_N_S(String companyId, String name, String scope)
+		throws NoSuchResourceCodeException, SystemException {
+		ResourceCode resourceCode = fetchByC_N_S(companyId, name, scope);
+
+		if (resourceCode == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No ResourceCode exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(", ");
+			msg.append("scope=");
+			msg.append(scope);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchResourceCodeException(msg.toString());
+		}
+
+		return resourceCode;
+	}
+
+	public ResourceCode fetchByC_N_S(String companyId, String name, String scope)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" AND ");
+
+			if (scope == null) {
+				query.append("scope IS NULL");
+			}
+			else {
+				query.append("scope = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			if (scope != null) {
+				q.setString(queryPos++, scope);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			ResourceCode resourceCode = (ResourceCode)list.get(0);
+
+			return resourceCode;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -577,8 +707,8 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCode(long code) throws SystemException {
-		Iterator itr = findByCode(code).iterator();
+	public void removeByCompanyId(String companyId) throws SystemException {
+		Iterator itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
 			ResourceCode resourceCode = (ResourceCode)itr.next();
@@ -595,6 +725,12 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByC_N_S(String companyId, String name, String scope)
+		throws NoSuchResourceCodeException, SystemException {
+		ResourceCode resourceCode = findByC_N_S(companyId, name, scope);
+		remove(resourceCode);
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -603,7 +739,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCode(long code) throws SystemException {
+	public int countByCompanyId(String companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -612,14 +748,24 @@ public class ResourceCodePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-			query.append("code = ?");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, code);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -667,6 +813,81 @@ public class ResourceCodePersistence extends BasePersistence {
 
 			if (name != null) {
 				q.setString(queryPos++, name);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByC_N_S(String companyId, String name, String scope)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" AND ");
+
+			if (scope == null) {
+				query.append("scope IS NULL");
+			}
+			else {
+				query.append("scope = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			if (scope != null) {
+				q.setString(queryPos++, scope);
 			}
 
 			Iterator itr = q.list().iterator();

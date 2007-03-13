@@ -23,7 +23,6 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.impl.BaseModelImpl;
-import com.liferay.portal.service.persistence.ResourceCodePK;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
@@ -40,10 +39,10 @@ import java.sql.Types;
 public class ResourceCodeModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ResourceCode";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "codeId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "name", new Integer(Types.VARCHAR) },
-			{ "scope", new Integer(Types.VARCHAR) },
-			{ "code", new Integer(Types.BIGINT) }
+			{ "scope", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.ResourceCode"), XSS_ALLOW);
@@ -62,14 +61,22 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 	public ResourceCodeModelImpl() {
 	}
 
-	public ResourceCodePK getPrimaryKey() {
-		return new ResourceCodePK(_companyId, _name, _scope);
+	public long getPrimaryKey() {
+		return _codeId;
 	}
 
-	public void setPrimaryKey(ResourceCodePK pk) {
-		setCompanyId(pk.companyId);
-		setName(pk.name);
-		setScope(pk.scope);
+	public void setPrimaryKey(long pk) {
+		setCodeId(pk);
+	}
+
+	public long getCodeId() {
+		return _codeId;
+	}
+
+	public void setCodeId(long codeId) {
+		if (codeId != _codeId) {
+			_codeId = codeId;
+		}
 	}
 
 	public String getCompanyId() {
@@ -121,22 +128,12 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getCode() {
-		return _code;
-	}
-
-	public void setCode(long code) {
-		if (code != _code) {
-			_code = code;
-		}
-	}
-
 	public Object clone() {
 		ResourceCodeImpl clone = new ResourceCodeImpl();
+		clone.setCodeId(getCodeId());
 		clone.setCompanyId(getCompanyId());
 		clone.setName(getName());
 		clone.setScope(getScope());
-		clone.setCode(getCode());
 
 		return clone;
 	}
@@ -147,9 +144,17 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 		}
 
 		ResourceCodeImpl resourceCode = (ResourceCodeImpl)obj;
-		ResourceCodePK pk = resourceCode.getPrimaryKey();
+		long pk = resourceCode.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -166,9 +171,9 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ResourceCodePK pk = resourceCode.getPrimaryKey();
+		long pk = resourceCode.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -177,11 +182,11 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
+	private long _codeId;
 	private String _companyId;
 	private String _name;
 	private String _scope;
-	private long _code;
 }

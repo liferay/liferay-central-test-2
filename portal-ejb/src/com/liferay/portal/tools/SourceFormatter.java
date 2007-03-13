@@ -71,6 +71,7 @@ public class SourceFormatter {
 					"**\\classes\\*", "**\\jsp\\*", "**\\tmp\\**",
 					"**\\EARXMLBuilder.java", "**\\EJBXMLBuilder.java",
 					"**\\JSMin.java", "**\\PropsUtil.java",
+					"**\\InstanceWrapperBuilder.java",
 					"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
 					"**\\UserAttributes.java", "**\\WebKeys.java",
 					"**\\*_IW.java", "**\\XHTMLComplianceFormatter.java",

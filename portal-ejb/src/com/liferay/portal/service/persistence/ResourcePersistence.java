@@ -178,7 +178,7 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCode(long code) throws SystemException {
+	public List findByCodeId(long codeId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -186,14 +186,14 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-			query.append("code = ?");
+			query.append("codeId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, code);
+			q.setLong(queryPos++, codeId);
 
 			return q.list();
 		}
@@ -205,13 +205,13 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCode(long code, int begin, int end)
+	public List findByCodeId(long codeId, int begin, int end)
 		throws SystemException {
-		return findByCode(code, begin, end, null);
+		return findByCodeId(codeId, begin, end, null);
 	}
 
-	public List findByCode(long code, int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List findByCodeId(long codeId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
 		try {
@@ -219,7 +219,7 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-			query.append("code = ?");
+			query.append("codeId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -231,7 +231,7 @@ public class ResourcePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, code);
+			q.setLong(queryPos++, codeId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -243,16 +243,16 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public Resource findByCode_First(long code, OrderByComparator obc)
+	public Resource findByCodeId_First(long codeId, OrderByComparator obc)
 		throws NoSuchResourceException, SystemException {
-		List list = findByCode(code, 0, 1, obc);
+		List list = findByCodeId(codeId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("code=");
-			msg.append(code);
+			msg.append("codeId=");
+			msg.append(codeId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchResourceException(msg.toString());
 		}
@@ -261,17 +261,17 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public Resource findByCode_Last(long code, OrderByComparator obc)
+	public Resource findByCodeId_Last(long codeId, OrderByComparator obc)
 		throws NoSuchResourceException, SystemException {
-		int count = countByCode(code);
-		List list = findByCode(code, count - 1, count, obc);
+		int count = countByCodeId(codeId);
+		List list = findByCodeId(codeId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("code=");
-			msg.append(code);
+			msg.append("codeId=");
+			msg.append(codeId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchResourceException(msg.toString());
 		}
@@ -280,10 +280,10 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public Resource[] findByCode_PrevAndNext(long resourceId, long code,
+	public Resource[] findByCodeId_PrevAndNext(long resourceId, long codeId,
 		OrderByComparator obc) throws NoSuchResourceException, SystemException {
 		Resource resource = findByPrimaryKey(resourceId);
-		int count = countByCode(code);
+		int count = countByCodeId(codeId);
 		Session session = null;
 
 		try {
@@ -291,7 +291,7 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-			query.append("code = ?");
+			query.append("codeId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -303,7 +303,7 @@ public class ResourcePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, code);
+			q.setLong(queryPos++, codeId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
 			Resource[] array = new ResourceImpl[3];
@@ -321,16 +321,16 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public Resource findByC_P(long code, String primKey)
+	public Resource findByC_P(long codeId, String primKey)
 		throws NoSuchResourceException, SystemException {
-		Resource resource = fetchByC_P(code, primKey);
+		Resource resource = fetchByC_P(codeId, primKey);
 
 		if (resource == null) {
 			StringMaker msg = new StringMaker();
 			msg.append("No Resource exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("code=");
-			msg.append(code);
+			msg.append("codeId=");
+			msg.append(codeId);
 			msg.append(", ");
 			msg.append("primKey=");
 			msg.append(primKey);
@@ -346,7 +346,7 @@ public class ResourcePersistence extends BasePersistence {
 		return resource;
 	}
 
-	public Resource fetchByC_P(long code, String primKey)
+	public Resource fetchByC_P(long codeId, String primKey)
 		throws SystemException {
 		Session session = null;
 
@@ -355,7 +355,7 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-			query.append("code = ?");
+			query.append("codeId = ?");
 			query.append(" AND ");
 
 			if (primKey == null) {
@@ -371,7 +371,7 @@ public class ResourcePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, code);
+			q.setLong(queryPos++, codeId);
 
 			if (primKey != null) {
 				q.setString(queryPos++, primKey);
@@ -470,8 +470,8 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCode(long code) throws SystemException {
-		Iterator itr = findByCode(code).iterator();
+	public void removeByCodeId(long codeId) throws SystemException {
+		Iterator itr = findByCodeId(codeId).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();
@@ -479,9 +479,9 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_P(long code, String primKey)
+	public void removeByC_P(long codeId, String primKey)
 		throws NoSuchResourceException, SystemException {
-		Resource resource = findByC_P(code, primKey);
+		Resource resource = findByC_P(codeId, primKey);
 		remove(resource);
 	}
 
@@ -493,7 +493,7 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCode(long code) throws SystemException {
+	public int countByCodeId(long codeId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -502,14 +502,14 @@ public class ResourcePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-			query.append("code = ?");
+			query.append("codeId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, code);
+			q.setLong(queryPos++, codeId);
 
 			Iterator itr = q.list().iterator();
 
@@ -531,7 +531,8 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_P(long code, String primKey) throws SystemException {
+	public int countByC_P(long codeId, String primKey)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -540,7 +541,7 @@ public class ResourcePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-			query.append("code = ?");
+			query.append("codeId = ?");
 			query.append(" AND ");
 
 			if (primKey == null) {
@@ -556,7 +557,7 @@ public class ResourcePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, code);
+			q.setLong(queryPos++, codeId);
 
 			if (primKey != null) {
 				q.setString(queryPos++, primKey);

@@ -23,15 +23,19 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.NoSuchResourceCodeException;
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.base.ResourceCodeLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.ResourceCodePK;
 import com.liferay.portal.service.persistence.ResourceCodeUtil;
+import com.liferay.util.CollectionFactory;
+
+import java.util.Map;
 
 /**
- * <a href="ResourceCodeLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResourceCodeLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
@@ -39,40 +43,56 @@ import com.liferay.portal.service.persistence.ResourceCodeUtil;
 public class ResourceCodeLocalServiceImpl
 	extends ResourceCodeLocalServiceBaseImpl {
 
-	public long getCode(String companyId, String name, String scope)
-		throws SystemException {
+	public ResourceCode getResourceCode(long codeId)
+		throws PortalException, SystemException {
 
-		ResourceCode rsrcCode = null;
+		return ResourceCodeUtil.findByPrimaryKey(codeId);
+	}
 
-		ResourceCodePK pk = new ResourceCodePK(companyId, name, scope);
-		try {
-			rsrcCode = ResourceCodeUtil.findByPrimaryKey(pk);
+	public ResourceCode getResourceCode(
+			String companyId, String name, String scope)
+		throws PortalException, SystemException {
+
+		// Always cache the resource code. This table exists to improve
+		// performance. Create the resource code if one does not exist.
+
+		String key = encodeKey(companyId, name, scope);
+
+		ResourceCode resourceCode = (ResourceCode)_resourceCodes.get(key);
+
+		if (resourceCode == null) {
+			resourceCode = ResourceCodeUtil.fetchByC_N_S(
+				companyId, name, scope);
+
+			if (resourceCode == null) {
+				long codeId = CounterLocalServiceUtil.increment(
+					ResourceCode.class.getName());
+
+				resourceCode = ResourceCodeUtil.create(codeId);
+
+				resourceCode.setCompanyId(companyId);
+				resourceCode.setName(name);
+				resourceCode.setScope(scope);
+
+				ResourceCodeUtil.update(resourceCode);
+			}
+
+			_resourceCodes.put(key, resourceCode);
 		}
-		catch (NoSuchResourceCodeException e) {
-			rsrcCode = ResourceCodeUtil.create(pk);
 
-			long code =
-				CounterLocalServiceUtil.increment(ResourceCode.class.getName());
-
-			rsrcCode.setCode(code);
-
-			ResourceCodeUtil.update(rsrcCode);
-		}
-
-		return rsrcCode.getCode();
+		return resourceCode;
 	}
 
-	public String getName(long code) throws SystemException {
-		ResourceCode rsrcCode =
-			(ResourceCode)ResourceCodeUtil.findByCode(code).get(0);
+	protected String encodeKey(String companyId, String name, String scope) {
+		StringMaker sm = new StringMaker();
 
-		return rsrcCode.getName();
+		sm.append(companyId);
+		sm.append(name);
+		sm.append(scope);
+
+		return sm.toString();
 	}
 
-	public String getScope(long code) throws SystemException {
-		ResourceCode rsrcCode =
-			(ResourceCode)ResourceCodeUtil.findByCode(code).get(0);
+	private static Map _resourceCodes = CollectionFactory.getSyncHashMap();
 
-		return rsrcCode.getScope();
-	}
 }

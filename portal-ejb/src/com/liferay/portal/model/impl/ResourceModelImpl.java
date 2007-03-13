@@ -40,7 +40,7 @@ public class ResourceModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Resource_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "resourceId", new Integer(Types.BIGINT) },
-			{ "code", new Integer(Types.BIGINT) },
+			{ "codeId", new Integer(Types.BIGINT) },
 			{ "primKey", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
@@ -72,13 +72,13 @@ public class ResourceModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getCode() {
-		return _code;
+	public long getCodeId() {
+		return _codeId;
 	}
 
-	public void setCode(long code) {
-		if (code != _code) {
-			_code = code;
+	public void setCodeId(long codeId) {
+		if (codeId != _codeId) {
+			_codeId = codeId;
 		}
 	}
 
@@ -102,7 +102,7 @@ public class ResourceModelImpl extends BaseModelImpl {
 	public Object clone() {
 		ResourceImpl clone = new ResourceImpl();
 		clone.setResourceId(getResourceId());
-		clone.setCode(getCode());
+		clone.setCodeId(getCodeId());
 		clone.setPrimKey(getPrimKey());
 
 		return clone;
@@ -156,6 +156,6 @@ public class ResourceModelImpl extends BaseModelImpl {
 	}
 
 	private long _resourceId;
-	private long _code;
+	private long _codeId;
 	private String _primKey;
 }

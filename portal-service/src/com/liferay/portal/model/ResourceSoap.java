@@ -37,7 +37,7 @@ public class ResourceSoap implements Serializable {
 	public static ResourceSoap toSoapModel(Resource model) {
 		ResourceSoap soapModel = new ResourceSoap();
 		soapModel.setResourceId(model.getResourceId());
-		soapModel.setCode(model.getCode());
+		soapModel.setCodeId(model.getCodeId());
 		soapModel.setPrimKey(model.getPrimKey());
 
 		return soapModel;
@@ -73,12 +73,12 @@ public class ResourceSoap implements Serializable {
 		_resourceId = resourceId;
 	}
 
-	public long getCode() {
-		return _code;
+	public long getCodeId() {
+		return _codeId;
 	}
 
-	public void setCode(long code) {
-		_code = code;
+	public void setCodeId(long codeId) {
+		_codeId = codeId;
 	}
 
 	public String getPrimKey() {
@@ -90,6 +90,6 @@ public class ResourceSoap implements Serializable {
 	}
 
 	private long _resourceId;
-	private long _code;
+	private long _codeId;
 	private String _primKey;
 }

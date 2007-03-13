@@ -42,11 +42,39 @@ import org.hibernate.Session;
  */
 public class ResourceFinder {
 
+	public static String FIND_BY_NAME =
+		ResourceFinder.class.getName() + ".findByName";
+
 	public static String FIND_BY_C_P =
 		ResourceFinder.class.getName() + ".findByC_P";
 
-	public static String FIND_BY_NAME =
-		ResourceFinder.class.getName() + ".findByName";
+	public static List findByName(String name) throws SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NAME);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addEntity("Resource_", ResourceImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(name);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
 
 	public static List findByC_P(String companyId, String primKey)
 		throws SystemException {
@@ -79,31 +107,4 @@ public class ResourceFinder {
 		}
 	}
 
-	public static List findByName(String name) throws SystemException {
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_NAME);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
-
-			q.addEntity("Resource_", ResourceImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(name);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
 }

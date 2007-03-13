@@ -88,12 +88,12 @@
 						<div class="layout-tab-text"><a href="$tabHREF" $target>$tabName</a></div>
 					</div>
 				#end
-				
+
 				#set ($count = $count + 1)
 			#end
-			
+
 		#end
-		
+
 		<div class="layout-tab-seperator"></div>
 
 		#*
@@ -103,7 +103,7 @@
 			</div>
 		#end
 		*#
-		
+
 		#if (!$themeDisplay.isSignedIn())
 			<div class="layout-tab">
 				<div class="layout-tab-text"><a href="$themeDisplay.getURLSignIn()">$languageUtil.get($pageContext, "sign-in")</a></div>

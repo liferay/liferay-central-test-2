@@ -15,9 +15,7 @@
 			<fileset dir="docroot" includes="**/Thumbs.db" />
 		</delete>
 
-		<antcall target="clean-themes">
-			<param name="theme.name" value="velocity" />
-		</antcall>
+		<antcall target="clean-themes" />
 	</target>
 
 	<target name="clean-themes">

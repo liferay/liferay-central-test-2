@@ -38,23 +38,21 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ResourceCodeUtil {
-	public static com.liferay.portal.model.ResourceCode create(
-		com.liferay.portal.service.persistence.ResourceCodePK resourceCodePK) {
-		return getPersistence().create(resourceCodePK);
+	public static com.liferay.portal.model.ResourceCode create(long codeId) {
+		return getPersistence().create(codeId);
 	}
 
-	public static com.liferay.portal.model.ResourceCode remove(
-		com.liferay.portal.service.persistence.ResourceCodePK resourceCodePK)
+	public static com.liferay.portal.model.ResourceCode remove(long codeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(resourceCodePK));
+			listener.onBeforeRemove(findByPrimaryKey(codeId));
 		}
 
 		com.liferay.portal.model.ResourceCode resourceCode = getPersistence()
-																 .remove(resourceCodePK);
+																 .remove(codeId);
 
 		if (listener != null) {
 			listener.onAfterRemove(resourceCode);
@@ -140,54 +138,56 @@ public class ResourceCodeUtil {
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByPrimaryKey(
-		com.liferay.portal.service.persistence.ResourceCodePK resourceCodePK)
+		long codeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
-		return getPersistence().findByPrimaryKey(resourceCodePK);
+		return getPersistence().findByPrimaryKey(codeId);
 	}
 
 	public static com.liferay.portal.model.ResourceCode fetchByPrimaryKey(
-		com.liferay.portal.service.persistence.ResourceCodePK resourceCodePK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(resourceCodePK);
+		long codeId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(codeId);
 	}
 
-	public static java.util.List findByCode(long code)
+	public static java.util.List findByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCode(code);
+		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCode(long code, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCode(code, begin, end);
+	public static java.util.List findByCompanyId(java.lang.String companyId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCode(long code, int begin, int end,
+	public static java.util.List findByCompanyId(java.lang.String companyId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.ResourceCode findByCompanyId_First(
+		java.lang.String companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCode(code, begin, end, obc);
-	}
-
-	public static com.liferay.portal.model.ResourceCode findByCode_First(
-		long code, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
-		return getPersistence().findByCode_First(code, obc);
+		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
-	public static com.liferay.portal.model.ResourceCode findByCode_Last(
-		long code, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static com.liferay.portal.model.ResourceCode findByCompanyId_Last(
+		java.lang.String companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
-		return getPersistence().findByCode_Last(code, obc);
+		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
-	public static com.liferay.portal.model.ResourceCode[] findByCode_PrevAndNext(
-		com.liferay.portal.service.persistence.ResourceCodePK resourceCodePK,
-		long code, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static com.liferay.portal.model.ResourceCode[] findByCompanyId_PrevAndNext(
+		long codeId, java.lang.String companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
-		return getPersistence().findByCode_PrevAndNext(resourceCodePK, code, obc);
+		return getPersistence().findByCompanyId_PrevAndNext(codeId, companyId,
+			obc);
 	}
 
 	public static java.util.List findByName(java.lang.String name)
@@ -223,12 +223,25 @@ public class ResourceCodeUtil {
 	}
 
 	public static com.liferay.portal.model.ResourceCode[] findByName_PrevAndNext(
-		com.liferay.portal.service.persistence.ResourceCodePK resourceCodePK,
-		java.lang.String name,
+		long codeId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
-		return getPersistence().findByName_PrevAndNext(resourceCodePK, name, obc);
+		return getPersistence().findByName_PrevAndNext(codeId, name, obc);
+	}
+
+	public static com.liferay.portal.model.ResourceCode findByC_N_S(
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String scope)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceCodeException {
+		return getPersistence().findByC_N_S(companyId, name, scope);
+	}
+
+	public static com.liferay.portal.model.ResourceCode fetchByC_N_S(
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String scope) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_N_S(companyId, name, scope);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -260,9 +273,9 @@ public class ResourceCodeUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByCode(long code)
+	public static void removeByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByCode(code);
+		getPersistence().removeByCompanyId(companyId);
 	}
 
 	public static void removeByName(java.lang.String name)
@@ -270,18 +283,31 @@ public class ResourceCodeUtil {
 		getPersistence().removeByName(name);
 	}
 
+	public static void removeByC_N_S(java.lang.String companyId,
+		java.lang.String name, java.lang.String scope)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceCodeException {
+		getPersistence().removeByC_N_S(companyId, name, scope);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
 
-	public static int countByCode(long code)
+	public static int countByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByCode(code);
+		return getPersistence().countByCompanyId(companyId);
 	}
 
 	public static int countByName(java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByName(name);
+	}
+
+	public static int countByC_N_S(java.lang.String companyId,
+		java.lang.String name, java.lang.String scope)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_N_S(companyId, name, scope);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

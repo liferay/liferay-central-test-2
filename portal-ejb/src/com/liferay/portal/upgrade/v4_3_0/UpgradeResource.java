@@ -26,6 +26,7 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceCodeUpgradeColumnImpl;
 
@@ -47,7 +48,8 @@ public class UpgradeResource extends UpgradeProcess {
 
 		try {
 			_upgradeResource();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
@@ -58,23 +60,26 @@ public class UpgradeResource extends UpgradeProcess {
 		TempUpgradeColumnImpl nameColumn = new TempUpgradeColumnImpl("name");
 		TempUpgradeColumnImpl scopeColumn = new TempUpgradeColumnImpl("scope");
 
+		UpgradeColumn codeColumn = new ResourceCodeUpgradeColumnImpl(
+			companyIdColumn, nameColumn, scopeColumn);
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_NAME, _TABLE_COLUMNS, companyIdColumn, nameColumn,
-			scopeColumn, new ResourceCodeUpgradeColumnImpl(
-				companyIdColumn, nameColumn, scopeColumn));
+			scopeColumn, codeColumn);
 
 		upgradeTable.updateTable();
 	}
 
 	public static String _TABLE_NAME = "Resource_";
+
 	public static Object[][] _TABLE_COLUMNS = {
-			{ "resourceId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.VARCHAR) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "scope", new Integer(Types.VARCHAR) },
-			{ "code", new Integer(Types.BIGINT) },
-			{ "primKey", new Integer(Types.VARCHAR) }
-		};
+		{"resourceId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.VARCHAR)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"scope", new Integer(Types.VARCHAR)},
+		{"code", new Integer(Types.BIGINT)},
+		{"primKey", new Integer(Types.VARCHAR)}
+	};
 
 	private static Log _log = LogFactory.getLog(UpgradeResource.class);
 

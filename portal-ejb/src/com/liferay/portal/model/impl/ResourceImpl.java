@@ -22,8 +22,10 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 
 /**
@@ -45,7 +47,11 @@ public class ResourceImpl extends ResourceModelImpl implements Resource {
 	public ResourceImpl() {
 	}
 
-	public String getName() throws SystemException {
-		return ResourceCodeLocalServiceUtil.getName(getCode());
+	public String getName() throws PortalException, SystemException {
+		ResourceCode resourceCode =
+			ResourceCodeLocalServiceUtil.getResourceCode(getCodeId());
+
+		return resourceCode.getName();
 	}
+
 }

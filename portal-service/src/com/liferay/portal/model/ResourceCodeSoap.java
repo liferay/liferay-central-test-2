@@ -22,8 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.service.persistence.ResourceCodePK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -38,10 +36,10 @@ import java.util.List;
 public class ResourceCodeSoap implements Serializable {
 	public static ResourceCodeSoap toSoapModel(ResourceCode model) {
 		ResourceCodeSoap soapModel = new ResourceCodeSoap();
+		soapModel.setCodeId(model.getCodeId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setName(model.getName());
 		soapModel.setScope(model.getScope());
-		soapModel.setCode(model.getCode());
 
 		return soapModel;
 	}
@@ -60,14 +58,20 @@ public class ResourceCodeSoap implements Serializable {
 	public ResourceCodeSoap() {
 	}
 
-	public ResourceCodePK getPrimaryKey() {
-		return new ResourceCodePK(_companyId, _name, _scope);
+	public long getPrimaryKey() {
+		return _codeId;
 	}
 
-	public void setPrimaryKey(ResourceCodePK pk) {
-		setCompanyId(pk.companyId);
-		setName(pk.name);
-		setScope(pk.scope);
+	public void setPrimaryKey(long pk) {
+		setCodeId(pk);
+	}
+
+	public long getCodeId() {
+		return _codeId;
+	}
+
+	public void setCodeId(long codeId) {
+		_codeId = codeId;
 	}
 
 	public String getCompanyId() {
@@ -94,16 +98,8 @@ public class ResourceCodeSoap implements Serializable {
 		_scope = scope;
 	}
 
-	public long getCode() {
-		return _code;
-	}
-
-	public void setCode(long code) {
-		_code = code;
-	}
-
+	private long _codeId;
 	private String _companyId;
 	private String _name;
 	private String _scope;
-	private long _code;
 }

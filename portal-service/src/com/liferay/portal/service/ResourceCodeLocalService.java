@@ -37,12 +37,13 @@ public interface ResourceCodeLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public long getCode(java.lang.String companyId, java.lang.String name,
-		java.lang.String scope) throws com.liferay.portal.SystemException;
+	public com.liferay.portal.model.ResourceCode getResourceCode(long codeId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
-	public java.lang.String getName(long code)
-		throws com.liferay.portal.SystemException;
-
-	public java.lang.String getScope(long code)
-		throws com.liferay.portal.SystemException;
+	public com.liferay.portal.model.ResourceCode getResourceCode(
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String scope)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }
