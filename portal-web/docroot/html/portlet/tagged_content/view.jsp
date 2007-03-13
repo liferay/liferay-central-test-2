@@ -61,7 +61,7 @@ for (int i = 0; i < results.size(); i++) {
 			<c:when test="<%= className.equals(BookmarksEntry.class.getName()) %>">
 
 				<%
-				String entryId = classPK;
+				long entryId = GetterUtil.getLong(classPK);
 
 				BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(entryId);
 				%>
