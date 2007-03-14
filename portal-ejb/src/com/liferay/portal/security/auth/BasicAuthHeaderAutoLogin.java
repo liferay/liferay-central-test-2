@@ -45,11 +45,17 @@ import org.apache.commons.logging.LogFactory;
  * </p>
  *
  * <p>
- * 2. Install the Modify Headers 0.5.4 Add-on. Tools > Add Ons. Click the get extensions link at the bottom of the window. Type in Modify Headers in the Search box. Find Modify Headers in the results page and click on it. Then click the install now link.
+ * 2. Install the Modify Headers 0.5.4 Add-on. Tools > Add Ons. Click the get
+ * extensions link at the bottom of the window. Type in "Modify Headers" in the
+ * Search box. Find Modify Headers in the results page and click on it. Then
+ * click the install now link.
  * </p>
  *
  * <p>
- * 3. Configure Modify Headers to add a basic authentication header. Tools Modify Headers. In the Modify Headers window select the Add drop down. Type in Authorization in the next box. Type in Basic bGlmZXJheS5jb20uMTp0ZXN0 in the next box. Click the Add button.
+ * 3. Configure Modify Headers to add a basic authentication header. Tools >
+ * Modify Headers. In the Modify Headers window select the Add drop down. Type
+ * in "Authorization" in the next box. Type in "Basic bGlmZXJheS5jb20uMTp0ZXN0"
+ * in the next box. Click the Add button.
  * </p>
  *
  * <p>
