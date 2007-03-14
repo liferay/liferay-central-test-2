@@ -478,6 +478,16 @@
 		<struts-path>update_manager</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>105</portlet-name>
+		<struts-path>my_global_tags</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>106</portlet-name>
+		<struts-path>my_community_tags</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

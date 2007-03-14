@@ -22,13 +22,11 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portlet.randombibleverse.model.Bible" %>
 <%@ page import="com.liferay.portlet.randombibleverse.model.Verse" %>
 <%@ page import="com.liferay.portlet.randombibleverse.util.RBVUtil" %>
-
-<portlet:defineObjects />
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();

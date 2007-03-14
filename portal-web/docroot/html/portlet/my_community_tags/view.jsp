@@ -22,15 +22,24 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/html/portlet/my_community_tags/init.jsp" %>
 
-<%@ page import="com.liferay.portal.NoSuchResourceException" %>
-<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
-<%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
-<%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
+<c:choose>
+	<c:when test="<%= themeDisplay.isSignedIn() %>">
+		<%= LanguageUtil.get(pageContext, "community-tags-are-injected-to-all-pages-of-this-community") %>
+
+		<br><br>
+
+		<c:choose>
+			<c:when test="<%= entries.length > 0 %>">
+				<%= LanguageUtil.format(pageContext, "you-have-the-following-tags-configured-x", "<b>" + StringUtil.merge(entries, ", ") + "</b>") %>
+			</c:when>
+			<c:otherwise>
+				<%= LanguageUtil.get(pageContext, "you-have-not-configured-any-community-tags") %>
+			</c:otherwise>
+		</c:choose>
+	</c:when>
+	<c:otherwise>
+		<%= LanguageUtil.get(pageContext, "you-must-be-authenticated-to-use-this-portlet") %>
+	</c:otherwise>
+</c:choose>

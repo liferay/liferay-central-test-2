@@ -22,8 +22,6 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.plugin.PluginUtil" %>
-
-<portlet:defineObjects />

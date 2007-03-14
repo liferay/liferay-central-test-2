@@ -27,7 +27,7 @@
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-Content with the following tags will be displayed.
+<%= LanguageUtil.get(pageContext, "content-with-the-following-tags-will-be-displayed") %>
 
 <br><br>
 
@@ -42,7 +42,7 @@ Content with the following tags will be displayed.
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		Search Operator
+		<%= LanguageUtil.get(pageContext, "search-operator") %>
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>

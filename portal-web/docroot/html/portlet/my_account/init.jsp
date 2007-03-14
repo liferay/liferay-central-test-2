@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.ContactFirstNameException" %>
 <%@ page import="com.liferay.portal.ContactLastNameException" %>
@@ -32,5 +32,3 @@
 <%@ page import="com.liferay.portal.ReservedUserIdException" %>
 <%@ page import="com.liferay.portal.UserEmailAddressException" %>
 <%@ page import="com.liferay.portal.UserIdException" %>
-
-<portlet:defineObjects />

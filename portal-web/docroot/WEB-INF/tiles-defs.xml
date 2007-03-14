@@ -822,6 +822,30 @@
 		<put name="portlet_content" value="/portlet/my_account/view.jsp" />
 	</definition>
 
+	<!-- My Community Tags -->
+
+	<definition name="portlet.my_community_tags" extends="portlet" />
+
+	<definition name="portlet.my_community_tags.edit" extends="portlet.my_community_tags">
+		<put name="portlet_content" value="/portlet/my_community_tags/edit.jsp" />
+	</definition>
+
+	<definition name="portlet.my_community_tags.view" extends="portlet.my_community_tags">
+		<put name="portlet_content" value="/portlet/my_community_tags/view.jsp" />
+	</definition>
+
+	<!-- My Global Tags -->
+
+	<definition name="portlet.my_global_tags" extends="portlet" />
+
+	<definition name="portlet.my_global_tags.edit" extends="portlet.my_global_tags">
+		<put name="portlet_content" value="/portlet/my_global_tags/edit.jsp" />
+	</definition>
+
+	<definition name="portlet.my_global_tags.view" extends="portlet.my_global_tags">
+		<put name="portlet_content" value="/portlet/my_global_tags/view.jsp" />
+	</definition>
+
 	<!-- My Places -->
 
 	<definition name="portlet.my_places.view" path="/portlet/my_places/view.jsp" />

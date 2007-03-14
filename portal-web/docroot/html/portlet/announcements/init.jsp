@@ -22,11 +22,9 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portlet.announcements.AnnouncementsContentException" %>
-
-<portlet:defineObjects />
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();

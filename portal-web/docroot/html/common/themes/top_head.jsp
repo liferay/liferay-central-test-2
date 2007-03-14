@@ -61,6 +61,9 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				if (Validator.isNotNull(portlet.getServletContextName())) {
 					headerCssPath = StringPool.SLASH + portlet.getServletContextName() + headerCssPath;
 				}
+				else {
+					headerCssPath = themeDisplay.getPathContext() + headerCssPath;
+				}
 	%>
 
 				<link href="<%= headerCssPath %>" rel="stylesheet" type="text/css" />
@@ -96,6 +99,9 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 
 				if (Validator.isNotNull(portlet.getServletContextName())) {
 					headerJavaScriptPath = StringPool.SLASH + portlet.getServletContextName() + headerJavaScriptPath;
+				}
+				else {
+					headerJavaScriptPath = themeDisplay.getPathContext() + headerJavaScriptPath;
 				}
 	%>
 

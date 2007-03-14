@@ -945,6 +945,28 @@
 		<render-weight>1</render-weight>
 		<header-css>/html/portlet/update_manager/update_manager.css</header-css>
 	</portlet>
+	<portlet>
+		<portlet-name>105</portlet-name>
+		<struts-path>my_global_tags</struts-path>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<maximize-edit>true</maximize-edit>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+	</portlet>
+	<portlet>
+		<portlet-name>106</portlet-name>
+		<struts-path>my_community_tags</struts-path>
+		<preferences-unique-per-layout>false</preferences-unique-per-layout>
+		<preferences-owned-by-group>false</preferences-owned-by-group>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<maximize-edit>true</maximize-edit>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

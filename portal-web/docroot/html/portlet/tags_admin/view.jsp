@@ -27,9 +27,9 @@
 <form id="<portlet:namespace />fm">
 
 <fieldset id="<portlet:namespace />searchEntriesFields">
-	<legend>Search Tag</legend>
+	<legend><%= LanguageUtil.get(pageContext, "search-tag") %></legend>
 
-	Enter text below to refine the list of tags.
+	<%= LanguageUtil.get(pageContext, "enter-text-below-to-refine-the-list-of-tags") %>
 
 	<br /><br />
 
@@ -39,45 +39,45 @@
 
 	<br /><br />
 
-	Click on any tag to edit it.
+	<%= LanguageUtil.get(pageContext, "click-on-any-tag-to-edit-it") %>
 
 	<div id="<portlet:namespace />searchResultsDiv" /></div>
 </fieldset>
 
 <fieldset id="<portlet:namespace />editEntryFields">
-	<legend>Edit Tag</legend>
+	<legend><%= LanguageUtil.get(pageContext, "edit-tag") %></legend>
 
-	Tag Value
+	<%= LanguageUtil.get(pageContext, "tag-value") %>
 
 	<br />
 
 	<input id="<portlet:namespace />editEntryNameInput" type="text" value="" />
 
-	<%--<input id="<portlet:namespace />updateEntryButton" type="button" value="Copy" />--%>
+	<%--<input id="<portlet:namespace />updateEntryButton" type="button" value='<%= LanguageUtil.get(pageContext, "copy") %>' />--%>
 
 	<br /><br />
 
-	Properties
+	<%= LanguageUtil.get(pageContext, "properties") %>
 
 	<table border="0" cellpadding="0" cellspacing="0" id="<portlet:namespace />propertiesTable"></table>
 
-	<input id="<portlet:namespace />addPropertyButton" type="button" value="Add Property" />
+	<input id="<portlet:namespace />addPropertyButton" type="button" value='<%= LanguageUtil.get(pageContext, "add-property") %>' />
 
 	<hr />
 
-	<input id="<portlet:namespace />updateEntryButton" type="button" value="Save" />
+	<input id="<portlet:namespace />updateEntryButton" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' />
 
-	<input id="<portlet:namespace />deleteEntryButton" type="button" value="Delete" />
+	<input id="<portlet:namespace />deleteEntryButton" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' />
 
-	<input id="<portlet:namespace />cancelEditEntryButton" type="button" value="Cancel" />
+	<input id="<portlet:namespace />cancelEditEntryButton" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' />
 </fieldset>
 
 <fieldset id="<portlet:namespace />addEntryFields">
-	<legend>Add Tag</legend>
+	<legend><%= LanguageUtil.get(pageContext, "add-tag") %></legend>
 
 	<input id="<portlet:namespace />addEntryNameInput" type="text" />
 
-	<input id="<portlet:namespace />addEntryButton" type="button" value="Save" />
+	<input id="<portlet:namespace />addEntryButton" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' />
 </fieldset>
 
 </form>

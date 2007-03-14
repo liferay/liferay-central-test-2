@@ -47,10 +47,22 @@ public class PortalPreferences {
 		return getValue(namespace, key, null);
 	}
 
-	public String getValue(String namespace, String key, String def) {
+	public String getValue(String namespace, String key, String defaultValue) {
 		key = _encodeKey(namespace, key);
 
-		return _prefs.getValue(key, def);
+		return _prefs.getValue(key, defaultValue);
+	}
+
+	public String[] getValues(String namespace, String key) {
+		return getValues(namespace, key, null);
+	}
+
+	public String[] getValues(
+		String namespace, String key, String[] defaultValue) {
+
+		key = _encodeKey(namespace, key);
+
+		return _prefs.getValues(key, defaultValue);
 	}
 
 	public void setValue(String namespace, String key, String value) {
@@ -63,6 +75,30 @@ public class PortalPreferences {
 		try {
 			if (value != null) {
 				_prefs.setValue(key, value);
+			}
+			else {
+				_prefs.reset(key);
+			}
+
+			if (_signedIn) {
+				_prefs.store();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public void setValues(String namespace, String key, String[] values) {
+		if (Validator.isNull(key) || (key.equals(RANDOM_KEY))) {
+			return;
+		}
+
+		key = _encodeKey(namespace, key);
+
+		try {
+			if (values != null) {
+				_prefs.setValues(key, values);
 			}
 			else {
 				_prefs.reset(key);

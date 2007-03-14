@@ -24,6 +24,8 @@
 			<portlet id="77" />
 			<portlet id="101" />
 			<portlet id="102" />
+			<portlet id="105" />
+			<portlet id="106" />
 		</category>
 		<portlet id="71" />
 		<portlet id="73" />

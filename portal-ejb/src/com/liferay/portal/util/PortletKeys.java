@@ -78,6 +78,10 @@ public class PortletKeys {
 
 	public static final String MY_ACCOUNT = "2";
 
+	public static final String MY_COMMUNITY_TAGS = "106";
+
+	public static final String MY_GLOBAL_TAGS = "105";
+
 	public static final String MY_PLACES = "49";
 
 	public static final String ORGANIZATION_ADMIN = "80";

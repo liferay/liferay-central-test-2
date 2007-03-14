@@ -1072,6 +1072,7 @@ you-have-successfully-updated-this-search-index-for-this-portlet=Başarıyla bu 
 you-have-successfully-updated-your-shopping-cart=Alışveriş sepetiniz değiştirdiniz.
 you-have-successfully-updated={0} değiştirildi.
 you-have-successfully-uploaded-a-new-version-of-this-document=Bu dökümanın yeni değişimini karşı sisteme yüklediniz.
+you-have-the-following-tags-configured-x=You have the following tags configured: {0}.
 you-may-only-vote-once=Birkez oy kullanmalısınız.
 you-now-have-a-lock-on-this-document=You now have a lock on this document. No one else can edit this document until you unlock it. This lock will automatically expire in {0}.
 you-now-have-a-lock-on-this-page=You now have a lock on this page. No one else can edit this page until you unlock it by hitting cancel. This lock will automatically expire in {0}.

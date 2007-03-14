@@ -22,15 +22,13 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portlet.rss.util.RSSUtil" %>
 
 <%@ page import="com.sun.syndication.feed.synd.SyndContent" %>
 <%@ page import="com.sun.syndication.feed.synd.SyndEntry" %>
 <%@ page import="com.sun.syndication.feed.synd.SyndFeed" %>
-
-<portlet:defineObjects />
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();

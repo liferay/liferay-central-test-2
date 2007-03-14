@@ -22,15 +22,23 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/html/portlet/my_global_tags/init.jsp" %>
 
-<%@ page import="com.liferay.portal.NoSuchResourceException" %>
-<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
-<%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
-<%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/my_global_tags/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+
+<%= LanguageUtil.get(pageContext, "set-your-global-tags") %>
+
+<br><br>
+
+<liferay-ui:tags-selector
+	hiddenInput="entries"
+	curTags="<%= StringUtil.merge(entries) %>"
+	focus="<%= true %>"
+/>
+
+<br>
+
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+
+</form>
