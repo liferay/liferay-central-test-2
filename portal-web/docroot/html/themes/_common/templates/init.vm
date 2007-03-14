@@ -5,13 +5,14 @@
 
 #set ( $css_class = $theme_display.getColorScheme().getCssClass() )
 #set ( $css_folder = "$theme_display.getPathThemeRoot()/css" )
-#set ( $images_folder = "$theme_display.getPathThemeRoot()/images" )
+#set ( $images_folder = "$theme_display.getPathThemeImage()" )
 #set ( $javascript_folder = "$theme_display.getPathThemeRoot()/javascript" )
 #set ( $templates_folder = "$theme_display.getPathThemeRoot()/templates" )
 
+#set ( $full_css_path = $fullTemplatesPath + "/../css" )
 #set ( $full_templates_path = $fullTemplatesPath )
 
-#set ( $css_main_file = "$css_folder/main.css" )
+#set ( $css_main_file = "$css_folder/main.css?themeId=$theme_display.getThemeId()&colorSchemeId=$theme_display.getColorSchemeId()" )
 #set ( $js_main_file = "$javascript_folder/javascript.js" )
 
 #set ( $company_name = $company.getName() )

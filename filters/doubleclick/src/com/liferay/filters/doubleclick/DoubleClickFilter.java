@@ -78,6 +78,8 @@ public class DoubleClickFilter implements Filter {
 			HttpServletRequest httpReq = (HttpServletRequest)req;
 			HttpServletResponse httpRes = (HttpServletResponse)res;
 
+			httpReq.setCharacterEncoding(ENCODING);
+
 			StopWatch stopWatch = null;
 
 			if (_log.isDebugEnabled()) {

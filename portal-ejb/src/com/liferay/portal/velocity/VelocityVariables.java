@@ -65,7 +65,6 @@ import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
@@ -82,8 +81,13 @@ import org.apache.velocity.VelocityContext;
 public class VelocityVariables {
 
 	public static void insertVariables(
-		VelocityContext vc, ServletContext ctx, HttpServletRequest req,
-		PageContext pageContext) {
+		VelocityContext vc, HttpServletRequest req) {
+
+		insertVariables(vc, req, null);
+	}
+
+	public static void insertVariables(
+		VelocityContext vc, HttpServletRequest req, PageContext pageContext) {
 
 		// Request
 
@@ -91,7 +95,9 @@ public class VelocityVariables {
 
 		// Page context
 
-		vc.put("pageContext", pageContext);
+		if (pageContext != null) {
+			vc.put("pageContext", pageContext);
+		}
 
 		// Portlet config
 
@@ -184,11 +190,11 @@ public class VelocityVariables {
 		// Tiles attributes
 
 		String tilesTitle = _insertTilesVariables(
-			vc, pageContext, "tilesTitle", "title");
+			vc, req, "tilesTitle", "title");
 		String tilesContent = _insertTilesVariables(
-			vc, pageContext, "tilesContent", "content");
+			vc, req, "tilesContent", "content");
 		boolean tilesSelectable = GetterUtil.getBoolean(_insertTilesVariables(
-			vc, pageContext, "tilesSelectable", "selectable"));
+			vc, req, "tilesSelectable", "selectable"));
 
 		if (themeDisplay != null) {
 			themeDisplay.setTilesTitle(tilesTitle);
@@ -290,13 +296,11 @@ public class VelocityVariables {
 	}
 
 	private static String _insertTilesVariables(
-		VelocityContext vc, PageContext pageContext, String attributeId,
+		VelocityContext vc, HttpServletRequest req, String attributeId,
 		String attributeName) {
 
-		ComponentContext componentContext =
-			(ComponentContext)pageContext.getAttribute(
-				ComponentConstants.COMPONENT_CONTEXT,
-				PageContext.REQUEST_SCOPE);
+		ComponentContext componentContext = (ComponentContext)req.getAttribute(
+			ComponentConstants.COMPONENT_CONTEXT);
 
 		String value = null;
 

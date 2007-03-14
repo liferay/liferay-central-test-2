@@ -171,7 +171,7 @@ public class ThemeUtil {
 
 		// Velocity variables
 
-		VelocityVariables.insertVariables(vc, ctx, req, pageContext);
+		VelocityVariables.insertVariables(vc, req, pageContext);
 
 		// liferay:include tag library
 

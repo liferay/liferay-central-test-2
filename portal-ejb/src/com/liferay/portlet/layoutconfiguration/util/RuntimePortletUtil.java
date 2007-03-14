@@ -188,7 +188,7 @@ public class RuntimePortletUtil {
 
 		vc.put("processor", processor);
 
-		VelocityVariables.insertVariables(vc, ctx, req, pageContext);
+		VelocityVariables.insertVariables(vc, req, pageContext);
 
 		StringWriter sw = new StringWriter();
 
