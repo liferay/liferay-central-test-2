@@ -23,12 +23,12 @@
 package com.liferay.portal.security.auth;
 
 /**
- * <a href="BasicPrincipalFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultPrincipalFinder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BasicPrincipalFinder implements PrincipalFinder {
+public class DefaultPrincipalFinder implements PrincipalFinder {
 
 	public String fromLiferay(String name) throws PrincipalFinderException {
 		return name;
