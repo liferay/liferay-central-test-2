@@ -227,5 +227,4 @@
 			Liferay.Dock.init();
 		}
 	);
-
 </script>
