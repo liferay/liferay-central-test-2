@@ -239,16 +239,16 @@ public class ResourceUtil {
 
 	private static final String _SELECT_PRIMKEY =
 		"SELECT R.primKey FROM Resource_ R, ResourceCode RC WHERE " +
-			"R.code = RC.code AND RC.name = ? AND RC.scope = ?";
+			"R.codeId = RC.codeId AND RC.name = ? AND RC.scope = ?";
 
 	private static final String _UPDATE_PRIMKEY =
 		"UPDATE Resource_ R, ResourceCode RC SET R.primKey = ? WHERE " +
-			"R.code = RC.code AND RC.name = ? AND RC.scope = ? AND " +
+			"R.codeId = RC.codeId AND RC.name = ? AND RC.scope = ? AND " +
 				"R.primKey = ?";
 
 	private static final String _CLEAN_PRIMKEY =
 		"DELETE FROM Resource_ R, ResourceCode RC WHERE " +
-			"R.code = RC.code AND RC.name = ? AND RC.scope = ? AND " +
+			"R.codeId = RC.codeId AND RC.name = ? AND RC.scope = ? AND " +
 				"R.primKey = ?";
 
 	private static Log _log = LogFactory.getLog(ResourceUtil.class.getName());
