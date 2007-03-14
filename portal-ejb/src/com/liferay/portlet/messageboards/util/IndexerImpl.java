@@ -45,6 +45,7 @@ import org.apache.lucene.search.Searcher;
  * <a href="IndexerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Harry Mark
  *
  */
 public class IndexerImpl {
@@ -55,74 +56,74 @@ public class IndexerImpl {
 			String companyId, Long groupId, String userName,
 			String categoryId, String threadId, String messageId, String title,
 			String content)
-		throws IOException {
+	throws IOException {
 
-		synchronized (IndexWriter.class) {
-			content = Html.stripHtml(content);
+		content = Html.stripHtml(content);
 
-			IndexWriter writer = LuceneUtil.getWriter(companyId);
+		Document doc = new Document();
 
-			Document doc = new Document();
+		doc.add(
+			LuceneFields.getKeyword(
+				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, messageId)));
 
-			doc.add(
-				LuceneFields.getKeyword(
-					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, messageId)));
+		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
+		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
+		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
 
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+		doc.add(LuceneFields.getText(LuceneFields.USER_NAME, userName));
+		doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
+		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
 
-			doc.add(LuceneFields.getText(LuceneFields.USER_NAME, userName));
-			doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
-			doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
 
-			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+		doc.add(LuceneFields.getKeyword("categoryId", categoryId));
+		doc.add(LuceneFields.getKeyword("threadId", threadId));
+		doc.add(LuceneFields.getKeyword("messageId", messageId));
 
-			doc.add(LuceneFields.getKeyword("categoryId", categoryId));
-			doc.add(LuceneFields.getKeyword("threadId", threadId));
-			doc.add(LuceneFields.getKeyword("messageId", messageId));
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
 
 			writer.addDocument(doc);
-
-			LuceneUtil.write(writer);
+		}
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
+			}
 		}
 	}
 
 	public static void deleteMessage(String companyId, String messageId)
 		throws IOException {
 
-		synchronized (IndexWriter.class) {
-			IndexReader reader = LuceneUtil.getReader(companyId);
-
-			reader.deleteDocuments(
-				new Term(
-					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, messageId)));
-
-			reader.close();
-		}
+		LuceneUtil.deleteDocuments(
+			companyId,
+			new Term(
+				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, messageId)));
 	}
 
 	public static void deleteMessages(String companyId, String threadId)
 		throws IOException, ParseException {
 
-		synchronized (IndexWriter.class) {
-			BooleanQuery booleanQuery = new BooleanQuery();
+		BooleanQuery booleanQuery = new BooleanQuery();
 
-			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.PORTLET_ID, PORTLET_ID);
+		LuceneUtil.addRequiredTerm(
+			booleanQuery, LuceneFields.PORTLET_ID, PORTLET_ID);
 
-			LuceneUtil.addRequiredTerm(booleanQuery, "threadId", threadId);
+		LuceneUtil.addRequiredTerm(booleanQuery, "threadId", threadId);
 
-			Searcher searcher = LuceneUtil.getSearcher(companyId);
+		Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			Hits hits = searcher.search(booleanQuery);
+		Hits hits = searcher.search(booleanQuery);
 
-			if (hits.length() > 0) {
-				IndexReader reader = LuceneUtil.getReader(companyId);
+		if (hits.length() > 0) {
+			IndexReader reader = null;
+
+			try {
+				LuceneUtil.acquireLock(companyId);
+
+				reader = LuceneUtil.getReader(companyId);
 
 				for (int i = 0; i < hits.length(); i++) {
 					Document doc = hits.doc(i);
@@ -132,8 +133,13 @@ public class IndexerImpl {
 					reader.deleteDocuments(
 						new Term(LuceneFields.UID, field.stringValue()));
 				}
+			}
+			finally {
+				if (reader != null) {
+					reader.close();
+				}
 
-				reader.close();
+				LuceneUtil.releaseLock(companyId);
 			}
 		}
 	}

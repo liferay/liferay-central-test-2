@@ -54,6 +54,7 @@ import org.apache.lucene.store.Directory;
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
+ * @author Harry Mark
  *
  */
 public class PluginPackageIndexer implements Indexer {
@@ -68,131 +69,141 @@ public class PluginPackageIndexer implements Indexer {
 			String repositoryURL, String status, String installedVersion)
 		throws IOException {
 
-		synchronized (IndexWriter.class) {
-			ModuleId moduleIdObj = ModuleId.getInstance(moduleId);
+		ModuleId moduleIdObj = ModuleId.getInstance(moduleId);
 
-			shortDescription = Html.stripHtml(shortDescription);
-			longDescription = Html.stripHtml(longDescription);
+		shortDescription = Html.stripHtml(shortDescription);
+		longDescription = Html.stripHtml(longDescription);
 
-			String content =
-				name + " " + author + " " + shortDescription + " " +
-					longDescription;
+		String content =
+			name + " " + author + " " + shortDescription + " " +
+				longDescription;
 
-			String pluginId = repositoryURL + StringPool.SLASH + moduleId;
+		String pluginId = repositoryURL + StringPool.SLASH + moduleId;
 
-			IndexWriter writer = _getWriter();
+		Document doc = new Document();
 
-			Document doc = new Document();
+		doc.add(
+			LuceneFields.getKeyword(
+				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, pluginId)));
 
+		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
+
+		doc.add(LuceneFields.getText(LuceneFields.TITLE, name));
+		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+
+		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+
+		doc.add(LuceneFields.getKeyword("moduleId", moduleId));
+		doc.add(LuceneFields.getKeyword("groupId", moduleIdObj.getGroupId()));
+		doc.add(
+			LuceneFields.getKeyword("artifactId", moduleIdObj.getArtifactId()));
+		doc.add(LuceneFields.getKeyword("moduleId", moduleId));
+		doc.add(LuceneFields.getKeyword("version", version));
+		doc.add(LuceneFields.getKeyword("shortDescription", shortDescription));
+		doc.add(LuceneFields.getKeyword("changeLog", changeLog));
+		doc.add(LuceneFields.getKeyword("repositoryURL", repositoryURL));
+
+		StringMaker sm = new StringMaker();
+
+		Iterator itr = types.iterator();
+
+		while (itr.hasNext()) {
+			String type = (String)itr.next();
+
+			doc.add(LuceneFields.getKeyword("type", type));
+
+			sm.append(type);
+
+			if (itr.hasNext()) {
+				sm.append(StringPool.COMMA);
+				sm.append(StringPool.SPACE);
+			}
+		}
+
+		doc.add(LuceneFields.getKeyword("types", sm.toString()));
+
+		sm = new StringMaker();
+
+		itr = tags.iterator();
+
+		while (itr.hasNext()) {
+			String tag = (String)itr.next();
+
+			doc.add(LuceneFields.getKeyword("tag", tag));
+
+			sm.append(tag);
+
+			if (itr.hasNext()) {
+				sm.append(StringPool.COMMA);
+				sm.append(StringPool.SPACE);
+			}
+		}
+
+		doc.add(LuceneFields.getKeyword("tags", sm.toString()));
+
+		boolean osiLicense = false;
+
+		itr = licenses.iterator();
+
+		while (itr.hasNext()) {
+			License license = (License)itr.next();
+
+			doc.add(LuceneFields.getKeyword("license", license.getName()));
+
+			if (license.isOsiApproved()) {
+				osiLicense = true;
+			}
+		}
+
+		doc.add(
+			LuceneFields.getKeyword(
+				"osi-approved-license", String.valueOf(osiLicense)));
+
+		doc.add(LuceneFields.getKeyword("status", status));
+
+		if (installedVersion != null) {
 			doc.add(
-				LuceneFields.getKeyword(
-					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, pluginId)));
+				LuceneFields.getKeyword("installedVersion", installedVersion));
+		}
 
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
+		synchronized (PluginPackageIndexer.class) {
+			IndexWriter writer = null;
 
-			doc.add(LuceneFields.getText(LuceneFields.TITLE, name));
-			doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+			try {
+				writer = _getWriter();
 
-			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
-
-			doc.add(LuceneFields.getKeyword("moduleId", moduleId));
-			doc.add(
-				LuceneFields.getKeyword("groupId", moduleIdObj.getGroupId()));
-			doc.add(
-				LuceneFields.getKeyword(
-					"artifactId", moduleIdObj.getArtifactId()));
-			doc.add(LuceneFields.getKeyword("moduleId", moduleId));
-			doc.add(LuceneFields.getKeyword("version", version));
-			doc.add(LuceneFields.getKeyword(
-				"shortDescription", shortDescription));
-			doc.add(LuceneFields.getKeyword("changeLog", changeLog));
-			doc.add(LuceneFields.getKeyword("repositoryURL", repositoryURL));
-
-			StringMaker sm = new StringMaker();
-
-			Iterator itr = types.iterator();
-
-			while (itr.hasNext()) {
-				String type = (String)itr.next();
-
-				doc.add(LuceneFields.getKeyword("type", type));
-
-				sm.append(type);
-
-				if (itr.hasNext()) {
-					sm.append(StringPool.COMMA + StringPool.SPACE);
+				writer.addDocument(doc);
+			}
+			finally {
+				if (writer != null) {
+					LuceneUtil.write(writer);
 				}
 			}
-
-			doc.add(LuceneFields.getKeyword("types", sm.toString()));
-
-			sm = new StringMaker();
-
-			itr = tags.iterator();
-
-			while (itr.hasNext()) {
-				String tag = (String)itr.next();
-
-				doc.add(LuceneFields.getKeyword("tag", tag));
-
-				sm.append(tag);
-
-				if (itr.hasNext()) {
-					sm.append(StringPool.COMMA + StringPool.SPACE);
-				}
-			}
-
-			doc.add(LuceneFields.getKeyword("tags", sm.toString()));
-
-			boolean osiLicense = false;
-
-			itr = licenses.iterator();
-
-			while (itr.hasNext()) {
-				License license = (License)itr.next();
-
-				doc.add(LuceneFields.getKeyword("license", license.getName()));
-
-				if (license.isOsiApproved()) {
-					osiLicense = true;
-				}
-			}
-
-			doc.add(
-				LuceneFields.getKeyword(
-					"osi-approved-license", String.valueOf(osiLicense)));
-
-			doc.add(LuceneFields.getKeyword("status", status));
-
-			if (installedVersion != null) {
-				doc.add(
-					LuceneFields.getKeyword(
-						"installedVersion", installedVersion));
-			}
-
-			writer.addDocument(doc);
-
-			LuceneUtil.write(writer);
 		}
 	}
 
 	public static void removePluginPackage(
-		String moduleId, String repositoryURL)
+			String moduleId, String repositoryURL)
 		throws IOException {
 
 		String pluginId = repositoryURL + StringPool.SLASH + moduleId;
 
-		synchronized (IndexWriter.class) {
-			IndexReader reader = LuceneUtil.getReader(CompanyImpl.SYSTEM);
+		synchronized (PluginPackageIndexer.class) {
+			IndexReader reader = null;
 
-			reader.deleteDocuments(
-				new Term(
-					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, pluginId)));
+			try {
+				reader = LuceneUtil.getReader(CompanyImpl.SYSTEM);
 
-			reader.close();
+				reader.deleteDocuments(
+					new Term(
+						LuceneFields.UID,
+						LuceneFields.getUID(PORTLET_ID, pluginId)));
+			}
+			finally {
+				if (reader != null) {
+					reader.close();
+				}
+			}
 		}
 	}
 

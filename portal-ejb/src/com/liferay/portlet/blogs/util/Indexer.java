@@ -36,7 +36,6 @@ import java.io.IOException;
 import javax.portlet.PortletURL;
 
 import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 
@@ -44,6 +43,7 @@ import org.apache.lucene.index.Term;
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Harry Mark
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -55,52 +55,48 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			long entryId, String title, String content)
 		throws IOException {
 
-		synchronized (IndexWriter.class) {
-			content = Html.stripHtml(content);
+		content = Html.stripHtml(content);
 
-			IndexWriter writer = LuceneUtil.getWriter(companyId);
+		Document doc = new Document();
 
-			Document doc = new Document();
+		doc.add(
+			LuceneFields.getKeyword(
+				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, entryId)));
 
-			doc.add(
-				LuceneFields.getKeyword(
-					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, entryId)));
+		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
+		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
+		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+		doc.add(LuceneFields.getKeyword(LuceneFields.USER_ID, userId));
 
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
-			doc.add(LuceneFields.getKeyword(LuceneFields.USER_ID, userId));
+		doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
+		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
 
-			doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
-			doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
 
-			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+		doc.add(LuceneFields.getKeyword("categoryId", categoryId));
+		doc.add(LuceneFields.getKeyword("entryId", entryId));
 
-			doc.add(LuceneFields.getKeyword("categoryId", categoryId));
-			doc.add(LuceneFields.getKeyword("entryId", entryId));
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
 
 			writer.addDocument(doc);
-
-			LuceneUtil.write(writer);
+		}
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
+			}
 		}
 	}
 
 	public static void deleteEntry(String companyId, long entryId)
 		throws IOException {
 
-		synchronized (IndexWriter.class) {
-			IndexReader reader = LuceneUtil.getReader(companyId);
-
-			reader.deleteDocuments(
-				new Term(
-					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, entryId)));
-
-			reader.close();
-		}
+		LuceneUtil.deleteDocuments(
+			companyId,
+			new Term(
+				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, entryId)));
 	}
 
 	public static void updateEntry(

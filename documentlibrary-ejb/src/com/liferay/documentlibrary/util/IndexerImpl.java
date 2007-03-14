@@ -52,7 +52,6 @@ import javax.jcr.Session;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 
@@ -60,6 +59,7 @@ import org.apache.lucene.index.Term;
  * <a href="IndexerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Harry Mark
  *
  */
 public class IndexerImpl {
@@ -69,155 +69,157 @@ public class IndexerImpl {
 			String repositoryId, String fileName)
 		throws IOException {
 
-		synchronized (IndexWriter.class) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Indexing document " + companyId + " " + portletId + " " +
-						groupId + " " + repositoryId + " " + fileName);
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Indexing document " + companyId + " " + portletId + " " +
+					groupId + " " + repositoryId + " " + fileName);
+		}
+
+		String fileExt = StringPool.BLANK;
+
+		int fileExtVersionPos = fileName.indexOf(DLServiceImpl.VERSION);
+
+		if (fileExtVersionPos != -1) {
+			int fileExtPos = fileName.lastIndexOf(
+				StringPool.PERIOD, fileExtVersionPos);
+
+			if (fileExtPos != -1) {
+				fileExt = fileName.substring(fileExtPos, fileExtVersionPos);
 			}
+		}
+		else {
+			int fileExtPos = fileName.lastIndexOf(StringPool.PERIOD);
 
-			String fileExt = StringPool.BLANK;
-
-			int fileExtVersionPos = fileName.indexOf(DLServiceImpl.VERSION);
-
-			if (fileExtVersionPos != -1) {
-				int fileExtPos = fileName.lastIndexOf(
-					StringPool.PERIOD, fileExtVersionPos);
-
-				if (fileExtPos != -1) {
-					fileExt = fileName.substring(fileExtPos, fileExtVersionPos);
-				}
+			if (fileExtPos != -1) {
+				fileExt = fileName.substring(fileExtPos, fileName.length());
 			}
-			else {
-				int fileExtPos = fileName.lastIndexOf(StringPool.PERIOD);
+		}
 
-				if (fileExtPos != -1) {
-					fileExt = fileName.substring(fileExtPos, fileName.length());
-				}
+		InputStream is = null;
+
+		Session session = null;
+
+		try {
+			session = JCRFactoryUtil.createSession();
+
+			Node contentNode = DLUtil.getFileContentNode(
+				session, companyId, repositoryId, fileName, 0);
+
+			is = contentNode.getProperty(JCRConstants.JCR_DATA).getStream();
+		}
+		catch (Exception e) {
+		}
+		finally {
+			if (session != null) {
+				session.logout();
 			}
+		}
 
-			InputStream is = null;
-
-			Session session = null;
-
-			try {
-				session = JCRFactoryUtil.createSession();
-
-				Node contentNode = DLUtil.getFileContentNode(
-					session, companyId, repositoryId, fileName, 0);
-
-				is = contentNode.getProperty(JCRConstants.JCR_DATA).getStream();
-			}
-			catch (Exception e) {
-			}
-			finally {
-				if (session != null) {
-					session.logout();
-				}
-			}
-
-			if (is == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Document " + companyId + " " + portletId + " " +
-							groupId + " " + repositoryId + " " + fileName +
-								" does not have any content");
-				}
-
-				return;
-			}
-
-			IndexWriter writer = LuceneUtil.getWriter(companyId);
-
-			Document doc = new Document();
-
-			doc.add(
-				LuceneFields.getKeyword(
-					LuceneFields.UID,
-					LuceneFields.getUID(portletId, repositoryId, fileName)));
-
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, portletId));
-			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
-
-			doc.add(LuceneFields.getFile(LuceneFields.CONTENT, is, fileExt));
-
-			if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
-				try {
-					DLFileEntry fileEntry = null;
-
-					for (int i = 0; i < 5; i++) {
-						try {
-							fileEntry =
-								DLFileEntryLocalServiceUtil.getFileEntry(
-									repositoryId, fileName);
-
-							break;
-						}
-						catch (NoSuchFileEntryException nsfe) {
-
-							// Indexing is spawned off to a queue. Try to get
-							// the file entry object after waiting for 1 second
-							// to fix a possible race condition.
-
-							try {
-								Thread.sleep(1000);
-							}
-							catch (InterruptedException ie) {
-								throw nsfe;
-							}
-						}
-					}
-
-					StringMaker sm = new StringMaker();
-
-					sm.append(fileEntry.getTitle());
-					sm.append(StringPool.SPACE);
-					sm.append(fileEntry.getDescription());
-					sm.append(StringPool.SPACE);
-
-					Properties extraSettingsProps =
-						fileEntry.getExtraSettingsProperties();
-
-					Iterator itr =
-						(Iterator)extraSettingsProps.entrySet().iterator();
-
-					while (itr.hasNext()) {
-						Map.Entry entry = (Map.Entry)itr.next();
-
-						String value = GetterUtil.getString(
-							(String)entry.getValue());
-
-						sm.append(value);
-					}
-
-					doc.add(LuceneFields.getText(LuceneFields.PROPERTIES, sm));
-				}
-				catch (PortalException pe) {
-					throw new IOException(pe.getMessage());
-				}
-				catch (SystemException se) {
-					throw new IOException(se.getMessage());
-				}
-			}
-
-			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
-
-			doc.add(LuceneFields.getKeyword("repositoryId", repositoryId));
-			doc.add(LuceneFields.getKeyword("path", fileName));
-
-			writer.addDocument(doc);
-
-			LuceneUtil.write(writer);
-
+		if (is == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Document " + companyId + " " + portletId + " " + groupId +
 						" " + repositoryId + " " + fileName +
-							" indexed successfully");
+							" does not have any content");
 			}
+
+			return;
+		}
+
+		Document doc = new Document();
+
+		doc.add(
+			LuceneFields.getKeyword(
+				LuceneFields.UID,
+				LuceneFields.getUID(portletId, repositoryId, fileName)));
+
+		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
+		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, portletId));
+		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+
+		doc.add(LuceneFields.getFile(LuceneFields.CONTENT, is, fileExt));
+
+		if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+			try {
+				DLFileEntry fileEntry = null;
+
+				for (int i = 0; i < 5; i++) {
+					try {
+						fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+							repositoryId, fileName);
+
+						break;
+					}
+					catch (NoSuchFileEntryException nsfe) {
+
+						// Indexing is spawned off to a queue. Try to get
+						// the file entry object after waiting for 1 second
+						// to fix a possible race condition.
+
+						try {
+							Thread.sleep(1000);
+						}
+						catch (InterruptedException ie) {
+							throw nsfe;
+						}
+					}
+				}
+
+				StringMaker sm = new StringMaker();
+
+				sm.append(fileEntry.getTitle());
+				sm.append(StringPool.SPACE);
+				sm.append(fileEntry.getDescription());
+				sm.append(StringPool.SPACE);
+
+				Properties extraSettingsProps =
+					fileEntry.getExtraSettingsProperties();
+
+				Iterator itr =
+					(Iterator)extraSettingsProps.entrySet().iterator();
+
+				while (itr.hasNext()) {
+					Map.Entry entry = (Map.Entry)itr.next();
+
+					String value = GetterUtil.getString(
+						(String)entry.getValue());
+
+					sm.append(value);
+				}
+
+				doc.add(LuceneFields.getText(LuceneFields.PROPERTIES, sm));
+			}
+			catch (PortalException pe) {
+				throw new IOException(pe.getMessage());
+			}
+			catch (SystemException se) {
+				throw new IOException(se.getMessage());
+			}
+		}
+
+		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+
+		doc.add(LuceneFields.getKeyword("repositoryId", repositoryId));
+		doc.add(LuceneFields.getKeyword("path", fileName));
+
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
+
+			writer.addDocument(doc);
+		}
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Document " + companyId + " " + portletId + " " + groupId +
+					" " + repositoryId + " " + fileName +
+						" indexed successfully");
 		}
 	}
 
@@ -226,16 +228,11 @@ public class IndexerImpl {
 			String fileName)
 		throws IOException {
 
-		synchronized (IndexWriter.class) {
-			IndexReader reader = LuceneUtil.getReader(companyId);
-
-			reader.deleteDocuments(
-				new Term(
-					LuceneFields.UID,
-					LuceneFields.getUID(portletId, repositoryId, fileName)));
-
-			reader.close();
-		}
+		LuceneUtil.deleteDocuments(
+			companyId,
+			new Term(
+				LuceneFields.UID,
+				LuceneFields.getUID(portletId, repositoryId, fileName)));
 	}
 
 	public static void reIndex(String[] ids) throws SearchException {

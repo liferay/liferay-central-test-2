@@ -49,6 +49,7 @@ import org.apache.lucene.search.Searcher;
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Harry Mark
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -58,54 +59,52 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addPage(
 			String companyId, long groupId, String nodeId, String title,
 			String content)
-		throws IOException {
+	throws IOException {
 
-		synchronized (IndexWriter.class) {
-			content = Html.stripHtml(content);
+		content = Html.stripHtml(content);
 
-			deletePage(companyId, nodeId, title);
+		deletePage(companyId, nodeId, title);
 
-			IndexWriter writer = LuceneUtil.getWriter(companyId);
+		Document doc = new Document();
 
-			Document doc = new Document();
+		doc.add(
+			LuceneFields.getKeyword(
+				LuceneFields.UID,
+				LuceneFields.getUID(PORTLET_ID, nodeId, title)));
 
-			doc.add(
-				LuceneFields.getKeyword(
-					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, nodeId, title)));
+		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
+		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
+		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
 
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+		doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
+		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
 
-			doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
-			doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
 
-			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+		doc.add(LuceneFields.getKeyword("nodeId", nodeId));
 
-			doc.add(LuceneFields.getKeyword("nodeId", nodeId));
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
 
 			writer.addDocument(doc);
-
-			LuceneUtil.write(writer);
+		}
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
+			}
 		}
 	}
 
 	public static void deletePage(String companyId, String nodeId, String title)
 		throws IOException {
 
-		synchronized (IndexWriter.class) {
-			IndexReader reader = LuceneUtil.getReader(companyId);
-
-			reader.deleteDocuments(
-				new Term(
-					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, nodeId, title)));
-
-			reader.close();
-		}
+		LuceneUtil.deleteDocuments(
+			companyId,
+			new Term(
+				LuceneFields.UID,
+				LuceneFields.getUID(PORTLET_ID, nodeId, title)));
 	}
 
 	public static void deletePages(String companyId, String nodeId)
@@ -124,18 +123,29 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			Hits hits = searcher.search(booleanQuery);
 
 			if (hits.length() > 0) {
-				IndexReader reader = LuceneUtil.getReader(companyId);
+				IndexReader reader = null;
 
-				for (int i = 0; i < hits.length(); i++) {
-					Document doc = hits.doc(i);
+				try {
+					LuceneUtil.acquireLock(companyId);
 
-					Field field = doc.getField(LuceneFields.UID);
+					reader = LuceneUtil.getReader(companyId);
 
-					reader.deleteDocuments(
-						new Term(LuceneFields.UID, field.stringValue()));
+					for (int i = 0; i < hits.length(); i++) {
+						Document doc = hits.doc(i);
+
+						Field field = doc.getField(LuceneFields.UID);
+
+						reader.deleteDocuments(
+							new Term(LuceneFields.UID, field.stringValue()));
+					}
 				}
+				finally {
+					if (reader != null) {
+						reader.close();
+					}
 
-				reader.close();
+					LuceneUtil.releaseLock(companyId);
+				}
 			}
 		}
 	}
@@ -143,7 +153,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void updatePage(
 			String companyId, long groupId, String nodeId, String title,
 			String content)
-		throws IOException {
+	throws IOException {
 
 		try {
 			deletePage(companyId, nodeId, title);

@@ -72,6 +72,15 @@ public class LuceneUtil {
 	public static final Pattern TERM_END_PATTERN =
 		Pattern.compile("(\\w{4,}?)\\b");
 
+	public static void acquireLock(String companyId) {
+		try {
+			_instance._sharedWriter.acquireLock(companyId, true);
+		}
+		catch (InterruptedException ie) {
+			_log.error(ie);
+		}
+	}
+
 	public static void addExactTerm(
 			BooleanQuery booleanQuery, String field, String text)
 		throws ParseException {
@@ -146,6 +155,21 @@ public class LuceneUtil {
 		booleanQuery.add(termQuery, BooleanClause.Occur.MUST);
 	}
 
+	public static void delete(String companyId) {
+		_instance._delete(companyId);
+	}
+
+	public static void deleteDocuments(String companyId, Term term)
+		throws IOException {
+
+		try {
+			_instance._sharedWriter.deleteDocuments(companyId, term);
+		}
+		catch (InterruptedException ie) {
+			_log.error(ie);
+		}
+	}
+
 	public static Analyzer getAnalyzer() {
 		return _instance._getAnalyzer();
 	}
@@ -174,12 +198,16 @@ public class LuceneUtil {
 		return _instance._sharedWriter.getWriter(companyId, create);
 	}
 
-	public static void write(IndexWriter writer) throws IOException {
-		_instance._sharedWriter.write(writer);
+	public static void releaseLock(String companyId) {
+		_instance._sharedWriter.releaseLock(companyId);
 	}
 
-	public static void delete(String companyId) {
-		_instance._delete(companyId);
+	public static void write(String companyId) throws IOException {
+		_instance._sharedWriter.write(companyId);
+	}
+
+	public static void write(IndexWriter writer) throws IOException {
+		_instance._sharedWriter.write(writer);
 	}
 
 	private LuceneUtil() {

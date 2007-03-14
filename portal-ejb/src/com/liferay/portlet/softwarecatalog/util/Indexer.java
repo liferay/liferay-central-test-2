@@ -36,7 +36,6 @@ import java.io.IOException;
 import javax.portlet.PortletURL;
 
 import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 
@@ -45,6 +44,7 @@ import org.apache.lucene.index.Term;
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
+ * @author Harry Mark
  *
  */
 public class Indexer
@@ -59,60 +59,59 @@ public class Indexer
 			String repoGroupId, String repoArtifactId)
 		throws IOException {
 
-		synchronized (IndexWriter.class) {
-			shortDescription = Html.stripHtml(shortDescription);
-			longDescription = Html.stripHtml(longDescription);
+		shortDescription = Html.stripHtml(shortDescription);
+		longDescription = Html.stripHtml(longDescription);
 
-			String content =
-				userId + " " + userName + " " + type + " " + shortDescription +
-					" " + longDescription + " " + pageURL + repoGroupId + " " +
-						repoArtifactId;
+		String content =
+			userId + " " + userName + " " + type + " " + shortDescription +
+				" " + longDescription + " " + pageURL + repoGroupId + " " +
+					repoArtifactId;
 
-			IndexWriter writer = LuceneUtil.getWriter(companyId);
+		Document doc = new Document();
 
-			Document doc = new Document();
+		doc.add(
+			LuceneFields.getKeyword(
+				LuceneFields.UID,
+				LuceneFields.getUID(PORTLET_ID, productEntryId)));
 
-			doc.add(
-				LuceneFields.getKeyword(
-					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, productEntryId)));
+		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
+		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
+		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+		doc.add(LuceneFields.getKeyword(LuceneFields.USER_ID, userId));
 
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
-			doc.add(LuceneFields.getKeyword(LuceneFields.USER_ID, userId));
+		doc.add(LuceneFields.getText(LuceneFields.TITLE, name));
+		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
 
-			doc.add(LuceneFields.getText(LuceneFields.TITLE, name));
-			doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
 
-			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+		doc.add(LuceneFields.getKeyword("productEntryId", productEntryId));
+		doc.add(LuceneFields.getKeyword("type", type));
+		doc.add(LuceneFields.getKeyword("repoGroupId", repoGroupId));
+		doc.add(LuceneFields.getKeyword("repoArtifactId", repoArtifactId));
 
-			doc.add(LuceneFields.getKeyword("productEntryId", productEntryId));
-			doc.add(LuceneFields.getKeyword("type", type));
-			doc.add(LuceneFields.getKeyword("repoGroupId", repoGroupId));
-			doc.add(LuceneFields.getKeyword("repoArtifactId", repoArtifactId));
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
 
 			writer.addDocument(doc);
-
-			LuceneUtil.write(writer);
 		}
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
+			}
+		}
+
 	}
 
 	public static void deleteProductEntry(String companyId, long productEntryId)
 		throws IOException {
 
-		synchronized (IndexWriter.class) {
-			IndexReader reader = LuceneUtil.getReader(companyId);
-
-			reader.deleteDocuments(
-				new Term(
-					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, productEntryId)));
-
-			reader.close();
-		}
+		LuceneUtil.deleteDocuments(
+			companyId,
+			new Term(
+				LuceneFields.UID,
+				LuceneFields.getUID(PORTLET_ID, productEntryId)));
 	}
 
 	public static void updateProductEntry(
