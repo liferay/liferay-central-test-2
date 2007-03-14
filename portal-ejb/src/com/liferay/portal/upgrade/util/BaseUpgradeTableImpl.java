@@ -336,7 +336,7 @@ public abstract class BaseUpgradeTableImpl {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
 							"Skipping stagnant data in " + _tableName + ": " + 
-							sre.getMessage());
+								sre.getMessage());
 					}
 				}
 			}
