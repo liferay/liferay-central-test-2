@@ -264,22 +264,28 @@ boolean runtimePortlet = (renderPortletResource != null) && renderPortletResourc
 
 boolean freeformPortlet = themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax();
 
-String freeformStyles = StringPool.BLANK;
+String containerStyles = StringPool.BLANK;
+
+StringMaker sm = new StringMaker();
+
+sm.append("style=\"");
 
 if (freeformPortlet) {
-	StringMaker sm = new StringMaker();
-
 	Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
-
-	sm.append("style=\"");
+	
 	sm.append("height: ");
 	sm.append(GetterUtil.getString(freeformStyleProps.getProperty("height"), "300px"));
 	sm.append(";");
 	sm.append("overflow: auto;");
-	sm.append("\"");
-
-	freeformStyles = sm.toString();
 }
+	
+if (portletDisplay.isStateMin()) {
+	sm.append("display: none;");
+}
+	
+sm.append("\"");
+
+containerStyles = sm.toString();
 %>
 
 <c:choose>
@@ -305,7 +311,7 @@ if (freeformPortlet) {
 		<c:choose>
 			<c:when test="<%= portletDecorate %>">
 				<liferay-theme:wrap-portlet page="portlet.jsp">
-					<div class="portlet-content-container" <%= freeformStyles %>>
+					<div class="portlet-content-container" <%= containerStyles %>>
 						<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
 					</div>
 				</liferay-theme:wrap-portlet>
@@ -317,7 +323,7 @@ if (freeformPortlet) {
 				</c:if>
 			</c:when>
 			<c:otherwise>
-				<div class="portlet-borderless-container" <%= freeformStyles %>>
+				<div class="portlet-borderless-container" <%= containerStyles %>>
 					<c:if test="<%= (tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon()) || portletDisplay.isShowBackIcon() %>">
 						<div class="portlet-borderless-bar">
 							<c:if test="<%= tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon() %>">

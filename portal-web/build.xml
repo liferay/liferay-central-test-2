@@ -493,11 +493,6 @@
 		</for>
 
 		<antcall target="build-javascript-cmd">
-			<param name="js.from.file" value="docroot/html/js/log/log4javascript.js" />
-			<param name="js.to.file" value="docroot/html/js/log.js" />
-		</antcall>
-
-		<antcall target="build-javascript-cmd">
 			<param name="js.from.file" value="docroot/html/portlet/tags_admin/unpacked.js" />
 			<param name="js.to.file" value="docroot/html/portlet/tags_admin/packed.js" />
 		</antcall>

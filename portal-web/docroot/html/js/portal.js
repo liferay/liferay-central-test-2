@@ -366,7 +366,7 @@ var LayoutColumns = {
 	initPortlet: function(portlet) {
 		portlet = _$J.getOne(portlet);
 
-		var handle = _$J(".portlet-header-bar, .portlet-title-default", portlet).get(0);
+		var handle = _$J(".portlet-header-bar, .portlet-title-default, .portlet-topper", portlet).get(0);
 
 		handle.style.cursor = "move";
 
@@ -590,7 +590,7 @@ var LayoutColumns = {
 			var currentColumnId = portlet.parentNode.id.replace(/^layout-column_/, '');
 			movePortlet(themeDisplay.getPlid(), portlet.portletId, currentColumnId, newPosition, themeDisplay.getDoAsUserIdEncoded());
 		}
-		
+
 		if (resizeBox) {
 			AjaxUtil.request(themeDisplay.getPathMain() + "/portal/update_layout?plid=" + LayoutColumns.plid +
 				"&height=" + resizeBox.style.height +

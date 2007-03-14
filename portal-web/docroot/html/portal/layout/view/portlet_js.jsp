@@ -156,46 +156,33 @@ function minimizePortlet(plid, portletId, restore, doAsUserId) {
 		self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&doAsUserId=" + doAsUserId) + "&refresh=1";
 	}
 	else {
-		if (restore) {
-			var portletEl = document.getElementById("p_p_body_" + portletId);
-
-			portletEl.style.display = "block";
-			portletEl.style.overflow = "hidden";
-			portletEl.style.height = "1px";
-
-			var buttonsEl = document.getElementById("p_p_body_" + portletId + "_min_buttons");
-
-			var html = buttonsEl.innerHTML;
-
+		var portlet = jQuery('#p_p_id_' + portletId + '_');
+		var portletContentContainer = portlet.find('.portlet-content-container');
+		
+		var buttonsEl = jQuery("#p_p_body_" + portletId + "_min_buttons");
+		
+		var html = buttonsEl.html();
+		
+		if (restore) { 
+			portletContentContainer.slideDown('fast');
+			
 			html = html.replace(", true", ", false");
 			html = html.replace("restore.png", "minimize.png");
 			html = html.replace("<%= LanguageUtil.get(pageContext, "restore") %>", "<%= LanguageUtil.get(pageContext, "minimize") %>");
 
-			buttonsEl.innerHTML = html;
-
-			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");
-
-			Liferay.Util.slideMaximize("p_p_body_" + portletId, 1, 20);
+			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");			
 		}
 		else {
-			var portletEl = document.getElementById("p_p_body_" + portletId);
-
-			portletEl.style.overflow = "hidden";
-
-			Liferay.Util.slideMinimize("p_p_body_" + portletId, portletEl.offsetHeight, 20);
-
-			var buttonsEl = document.getElementById("p_p_body_" + portletId + "_min_buttons");
-
-			var html = buttonsEl.innerHTML;
+			portletContentContainer.slideUp('fast');
 
 			html = html.replace(", false", ", true");
 			html = html.replace("minimize.png", "restore.png");
 			html = html.replace("<%= LanguageUtil.get(pageContext, "minimize") %>", "<%= LanguageUtil.get(pageContext, "restore") %>");
 
-			buttonsEl.innerHTML = html;
-
 			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");
 		}
+		
+		buttonsEl.html(html);
 	}
 }
 
