@@ -96,7 +96,7 @@ TextMining 0.4
 TinyMCE 2.0.8
 Tomcat 5.5.17
 Trove 1.1b5
-Velocity 1.4
+Velocity 1.5
 WebDAV Servlet 1.2
 WSDL4J 1.5.1
 WSRP4J 0.3
