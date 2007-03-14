@@ -69,7 +69,7 @@ public class MBMessageLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String userId, java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -77,65 +77,66 @@ public class MBMessageLocalServiceUtil {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.addMessage(userId, categoryId, subject,
-			body, files, anonymous, priority, prefs, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String userId, java.lang.String categoryId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
-		javax.portlet.PortletPreferences prefs,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addMessage(userId, categoryId, subject,
-			body, files, anonymous, priority, prefs, communityPermissions,
-			guestPermissions);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String userId, java.lang.String categoryId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
-		javax.portlet.PortletPreferences prefs,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addMessage(userId, categoryId, subject,
-			body, files, anonymous, priority, prefs, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String userId, java.lang.String categoryId,
-		java.lang.String threadId, java.lang.String parentMessageId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
-		javax.portlet.PortletPreferences prefs,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addMessage(userId, categoryId, threadId,
-			parentMessageId, subject, body, files, anonymous, priority, prefs,
+			body, files, anonymous, priority, tagsEntries, prefs,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String userId, java.lang.String categoryId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.addMessage(userId, categoryId, subject,
+			body, files, anonymous, priority, tagsEntries, prefs,
+			communityPermissions, guestPermissions);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String userId, java.lang.String categoryId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.addMessage(userId, categoryId, subject,
+			body, files, anonymous, priority, tagsEntries, prefs,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String userId, java.lang.String categoryId,
 		java.lang.String threadId, java.lang.String parentMessageId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.addMessage(userId, categoryId, threadId,
+			parentMessageId, subject, body, files, anonymous, priority,
+			tagsEntries, prefs, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String userId, java.lang.String categoryId,
+		java.lang.String threadId, java.lang.String parentMessageId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -144,15 +145,15 @@ public class MBMessageLocalServiceUtil {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.addMessage(userId, categoryId, threadId,
-			parentMessageId, subject, body, files, anonymous, priority, prefs,
-			communityPermissions, guestPermissions);
+			parentMessageId, subject, body, files, anonymous, priority,
+			tagsEntries, prefs, communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String userId, java.lang.String categoryId,
 		java.lang.String threadId, java.lang.String parentMessageId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
@@ -163,9 +164,9 @@ public class MBMessageLocalServiceUtil {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.addMessage(userId, categoryId, threadId,
-			parentMessageId, subject, body, files, anonymous, priority, prefs,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+			parentMessageId, subject, body, files, anonymous, priority,
+			tagsEntries, prefs, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void addMessageResources(java.lang.String categoryId,
@@ -412,13 +413,14 @@ public class MBMessageLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		java.lang.String messageId, java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		double priority, javax.portlet.PortletPreferences prefs)
+		double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.updateMessage(messageId, categoryId,
-			subject, body, files, priority, prefs);
+			subject, body, files, priority, tagsEntries, prefs);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(

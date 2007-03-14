@@ -52,7 +52,7 @@ public interface MBMessageLocalService {
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String userId, java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -61,7 +61,7 @@ public interface MBMessageLocalService {
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String userId, java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -71,7 +71,7 @@ public interface MBMessageLocalService {
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String userId, java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
@@ -84,7 +84,7 @@ public interface MBMessageLocalService {
 		java.lang.String userId, java.lang.String categoryId,
 		java.lang.String threadId, java.lang.String parentMessageId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -94,7 +94,7 @@ public interface MBMessageLocalService {
 		java.lang.String userId, java.lang.String categoryId,
 		java.lang.String threadId, java.lang.String parentMessageId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -105,7 +105,7 @@ public interface MBMessageLocalService {
 		java.lang.String userId, java.lang.String categoryId,
 		java.lang.String threadId, java.lang.String parentMessageId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
@@ -250,7 +250,8 @@ public interface MBMessageLocalService {
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		java.lang.String messageId, java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		double priority, javax.portlet.PortletPreferences prefs)
+		double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

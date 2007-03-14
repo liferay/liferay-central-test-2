@@ -47,12 +47,12 @@ public class MBMessageServiceJSON {
 
 	public static JSONObject addMessage(java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
-				subject, body, files, anonymous, priority,
+				subject, body, files, anonymous, priority, tagsEntries,
 				addCommunityPermissions, addGuestPermissions);
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
@@ -61,26 +61,27 @@ public class MBMessageServiceJSON {
 	public static JSONObject addMessage(java.lang.String categoryId,
 		java.lang.String threadId, java.lang.String parentMessageId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 				threadId, parentMessageId, subject, body, files, anonymous,
-				priority, addCommunityPermissions, addGuestPermissions);
+				priority, tagsEntries, addCommunityPermissions,
+				addGuestPermissions);
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject addMessage(java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
-				subject, body, files, anonymous, priority,
+				subject, body, files, anonymous, priority, tagsEntries,
 				communityPermissions, guestPermissions);
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
@@ -89,14 +90,14 @@ public class MBMessageServiceJSON {
 	public static JSONObject addMessage(java.lang.String categoryId,
 		java.lang.String threadId, java.lang.String parentMessageId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 				threadId, parentMessageId, subject, body, files, anonymous,
-				priority, communityPermissions, guestPermissions);
+				priority, tagsEntries, communityPermissions, guestPermissions);
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
 	}
@@ -160,11 +161,12 @@ public class MBMessageServiceJSON {
 
 	public static JSONObject updateMessage(java.lang.String messageId,
 		java.lang.String categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files, double priority)
+		java.lang.String body, java.util.List files, double priority,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
-				categoryId, subject, body, files, priority);
+				categoryId, subject, body, files, priority, tagsEntries);
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
 	}

@@ -109,11 +109,11 @@ public class WikiPageServiceSoap {
 
 	public static com.liferay.portlet.wiki.model.WikiPageSoap updatePage(
 		java.lang.String nodeId, java.lang.String title,
-		java.lang.String content, java.lang.String format)
-		throws RemoteException {
+		java.lang.String content, java.lang.String format,
+		java.lang.String[] tagsEntries) throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.updatePage(nodeId,
-					title, content, format);
+					title, content, format, tagsEntries);
 
 			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
 		}

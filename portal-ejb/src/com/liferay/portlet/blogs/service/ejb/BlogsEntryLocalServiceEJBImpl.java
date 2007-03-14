@@ -54,13 +54,13 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 		java.lang.String userId, java.lang.String plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		int displayDateMinute, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return BlogsEntryLocalServiceFactory.getTxImpl().addEntry(userId, plid,
 			categoryId, title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+			displayDateYear, displayDateHour, displayDateMinute, tagsEntries,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -68,13 +68,14 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 		java.lang.String userId, java.lang.String plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, java.lang.String[] communityPermissions,
+		int displayDateMinute, java.lang.String[] tagsEntries,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return BlogsEntryLocalServiceFactory.getTxImpl().addEntry(userId, plid,
 			categoryId, title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+			displayDateYear, displayDateHour, displayDateMinute, tagsEntries,
 			communityPermissions, guestPermissions);
 	}
 
@@ -82,7 +83,8 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 		java.lang.String userId, java.lang.String plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, java.lang.Boolean addCommunityPermissions,
+		int displayDateMinute, java.lang.String[] tagsEntries,
+		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -90,7 +92,7 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 			com.liferay.portal.SystemException {
 		return BlogsEntryLocalServiceFactory.getTxImpl().addEntry(userId, plid,
 			categoryId, title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+			displayDateYear, displayDateHour, displayDateMinute, tagsEntries,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions);
 	}
@@ -208,12 +210,13 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 		java.lang.String userId, long entryId, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute)
+		int displayDateMinute, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return BlogsEntryLocalServiceFactory.getTxImpl().updateEntry(userId,
 			entryId, categoryId, title, content, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute);
+			displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, tagsEntries);
 	}
 
 	public void ejbCreate() throws CreateException {

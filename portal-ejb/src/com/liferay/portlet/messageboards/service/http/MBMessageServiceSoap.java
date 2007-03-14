@@ -56,11 +56,12 @@ public class MBMessageServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
 		java.lang.String categoryId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
-		double priority, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		double priority, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
-					subject, body, files, anonymous, priority,
+					subject, body, files, anonymous, priority, tagsEntries,
 					addCommunityPermissions, addGuestPermissions);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
@@ -75,12 +76,14 @@ public class MBMessageServiceSoap {
 		java.lang.String categoryId, java.lang.String threadId,
 		java.lang.String parentMessageId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
-		double priority, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		double priority, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 					threadId, parentMessageId, subject, body, files, anonymous,
-					priority, addCommunityPermissions, addGuestPermissions);
+					priority, tagsEntries, addCommunityPermissions,
+					addGuestPermissions);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
@@ -93,11 +96,12 @@ public class MBMessageServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
 		java.lang.String categoryId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
-		double priority, java.lang.String[] communityPermissions,
+		double priority, java.lang.String[] tagsEntries,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
-					subject, body, files, anonymous, priority,
+					subject, body, files, anonymous, priority, tagsEntries,
 					communityPermissions, guestPermissions);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
@@ -112,12 +116,14 @@ public class MBMessageServiceSoap {
 		java.lang.String categoryId, java.lang.String threadId,
 		java.lang.String parentMessageId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
-		double priority, java.lang.String[] communityPermissions,
+		double priority, java.lang.String[] tagsEntries,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 					threadId, parentMessageId, subject, body, files, anonymous,
-					priority, communityPermissions, guestPermissions);
+					priority, tagsEntries, communityPermissions,
+					guestPermissions);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
@@ -220,10 +226,11 @@ public class MBMessageServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap updateMessage(
 		java.lang.String messageId, java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		double priority) throws RemoteException {
+		double priority, java.lang.String[] tagsEntries)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
-					categoryId, subject, body, files, priority);
+					categoryId, subject, body, files, priority, tagsEntries);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}

@@ -31,6 +31,7 @@ import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -133,7 +134,6 @@ public class EditPageAction extends PortletAction {
 		double version = ParamUtil.getDouble(req, "version");
 
 		WikiPageServiceUtil.revertPage(nodeId, title, version);
-
 	}
 
 	protected void updatePage(ActionRequest req) throws Exception {
@@ -143,7 +143,11 @@ public class EditPageAction extends PortletAction {
 		String content = ParamUtil.getString(req, "content");
 		String format = ParamUtil.getString(req, "format");
 
-		WikiPageServiceUtil.updatePage(nodeId, title, content, format);
+		String[] tagsEntries = StringUtil.split(
+			ParamUtil.getString(req, "tagsEntries"));
+
+		WikiPageServiceUtil.updatePage(
+			nodeId, title, content, format, tagsEntries);
 	}
 
 }

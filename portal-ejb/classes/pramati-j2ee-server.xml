@@ -8826,6 +8826,10 @@
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/BlogsEntryLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -8874,6 +8878,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/BlogsCategoryLocalServiceHome</ejb-ref-name>
@@ -10717,6 +10725,10 @@
 				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -10785,6 +10797,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
@@ -13361,6 +13377,10 @@
 				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
 			</ejb-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/WikiNodeLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -13406,6 +13426,10 @@
 				<ejb-ref-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-ref-name>
 				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
 			</ejb-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/WikiNodeLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB__PRAMATI_LOCAL</ejb-link>

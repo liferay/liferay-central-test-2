@@ -51,6 +51,7 @@ import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.StringUtil;
@@ -95,13 +96,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			String userId, String plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String[] tagsEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addEntry(
 			userId, plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			new Boolean(addCommunityPermissions),
+			tagsEntries, new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
 
@@ -109,21 +111,23 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			String userId, String plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] tagsEntries, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addEntry(
 			userId, plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			null, null, communityPermissions, guestPermissions);
+			tagsEntries, null, null, communityPermissions, guestPermissions);
 	}
 
 	public BlogsEntry addEntry(
 			String userId, String plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] tagsEntries, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -170,6 +174,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		else {
 			addEntryResources(entry, communityPermissions, guestPermissions);
 		}
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			userId, BlogsEntry.class.getName(),
+			String.valueOf(entry.getEntryId()), tagsEntries);
 
 		// Lucene
 
@@ -258,6 +268,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			_log.error("Deleting index " + entry.getEntryId(), ioe);
 		}
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.deleteAsset(
+			BlogsEntry.class.getName(), String.valueOf(entry.getEntryId()));
 
 		// Message boards
 
@@ -472,7 +487,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public BlogsEntry updateEntry(
 			String userId, long entryId, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute)
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -496,6 +512,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setDisplayDate(displayDate);
 
 		BlogsEntryUtil.update(entry);
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			userId, BlogsEntry.class.getName(),
+			String.valueOf(entry.getEntryId()), tagsEntries);
 
 		// Lucene
 

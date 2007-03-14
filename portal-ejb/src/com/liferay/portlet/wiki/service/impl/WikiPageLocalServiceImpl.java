@@ -28,6 +28,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
@@ -172,6 +173,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			_log.error("Deleting index " + page.getPrimaryKey(), ioe);
 		}
+
+		// Tags
+
+		TagsAssetLocalServiceUtil.deleteAsset(
+			WikiPage.class.getName(), page.getResourcePK().toString());
 
 		// Resources
 
@@ -385,12 +391,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		WikiPage oldPage = getPage(nodeId, title, version);
 
 		return updatePage(
-			userId, nodeId, title, oldPage.getContent(), oldPage.getFormat());
+			userId, nodeId, title, oldPage.getContent(), oldPage.getFormat(),
+			null);
 	}
 
 	public WikiPage updatePage(
 			String userId, String nodeId, String title, String content,
-			String format)
+			String format, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		// Page
@@ -430,6 +437,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		node.setLastPostDate(now);
 
 		WikiNodeUtil.update(node);
+
+		// Tags
+
+		if (tagsEntries != null) {
+			TagsAssetLocalServiceUtil.updateAsset(
+				userId, WikiPage.class.getName(),
+				page.getResourcePK().toString(), tagsEntries);
+		}
 
 		// Lucene
 

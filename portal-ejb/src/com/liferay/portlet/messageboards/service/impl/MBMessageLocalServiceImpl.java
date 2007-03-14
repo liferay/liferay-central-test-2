@@ -76,6 +76,7 @@ import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
@@ -135,6 +136,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		List files = new ArrayList();
 		boolean anonymous = false;
 		double priority = 0.0;
+		String[] tagsEntries = null;
 		PortletPreferences prefs = null;
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -143,41 +145,42 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		return addMessage(
 			userId, categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, priority, prefs, addCommunityPermissions,
+			anonymous, priority, tagsEntries, prefs, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public MBMessage addMessage(
 			String userId, String categoryId, String subject, String body,
 			List files, boolean anonymous, double priority,
-			PortletPreferences prefs, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String[] tagsEntries, PortletPreferences prefs,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addMessage(
 			userId, categoryId, subject, body, files, anonymous, priority,
-			prefs, new Boolean(addCommunityPermissions),
+			tagsEntries, prefs, new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
 
 	public MBMessage addMessage(
 			String userId, String categoryId, String subject, String body,
 			List files, boolean anonymous, double priority,
-			PortletPreferences prefs, String[] communityPermissions,
-			String[] guestPermissions)
+			String[] tagsEntries, PortletPreferences prefs,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addMessage(
 			userId, categoryId, subject, body, files, anonymous, priority,
-			prefs, null, null, communityPermissions, guestPermissions);
+			tagsEntries, prefs, null, null, communityPermissions,
+			guestPermissions);
 	}
 
 	public MBMessage addMessage(
 			String userId, String categoryId, String subject, String body,
 			List files, boolean anonymous, double priority,
-			PortletPreferences prefs, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			String[] tagsEntries, PortletPreferences prefs,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		String threadId = null;
@@ -185,42 +188,46 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		return addMessage(
 			userId, categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, priority, prefs, addCommunityPermissions,
+			anonymous, priority, tagsEntries, prefs, addCommunityPermissions,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public MBMessage addMessage(
 			String userId, String categoryId, String threadId,
 			String parentMessageId, String subject, String body, List files,
-			boolean anonymous, double priority, PortletPreferences prefs,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			boolean anonymous, double priority, String[] tagsEntries,
+			PortletPreferences prefs, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addMessage(
 			userId, categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, priority, prefs, new Boolean(addCommunityPermissions),
+			anonymous, priority, tagsEntries, prefs,
+			new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
 
 	public MBMessage addMessage(
 			String userId, String categoryId, String threadId,
 			String parentMessageId, String subject, String body, List files,
-			boolean anonymous, double priority, PortletPreferences prefs,
-			String[] communityPermissions, String[] guestPermissions)
+			boolean anonymous, double priority, String[] tagsEntries,
+			PortletPreferences prefs, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addMessage(
 			userId, categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, priority, prefs, null, null, communityPermissions,
-			guestPermissions);
+			anonymous, priority, tagsEntries, prefs, null, null,
+			communityPermissions, guestPermissions);
 	}
 
 	public MBMessage addMessage(
 			String userId, String categoryId, String threadId,
 			String parentMessageId, String subject, String body, List files,
-			boolean anonymous, double priority, PortletPreferences prefs,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			boolean anonymous, double priority, String[] tagsEntries,
+			PortletPreferences prefs, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -398,6 +405,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBCategoryUtil.update(category);
 
 		logAddMessage(messageId, stopWatch, 8);
+
+		// Tags
+
+		if (tagsEntries != null) {
+			TagsAssetLocalServiceUtil.updateAsset(
+				userId, MBMessage.class.getName(),
+				message.getPrimaryKey().toString(), tagsEntries);
+		}
+
+		logAddMessage(messageId, stopWatch, 9);
 
 		// Testing roll back
 
@@ -659,6 +676,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBThreadUtil.update(thread);
 		}
 
+		// Tags
+
+		TagsAssetLocalServiceUtil.deleteAsset(
+			MBMessage.class.getName(), message.getPrimaryKey().toString());
+
 		// Message flags
 
 		MBMessageFlagUtil.removeByT_M(
@@ -899,15 +921,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String categoryId = CompanyImpl.SYSTEM;
 		List files = new ArrayList();
 		double priority = 0.0;
+		String[] tagsEntries = null;
 		PortletPreferences prefs = null;
 
 		return updateMessage(
-			messageId, categoryId, subject, body, files, priority, prefs);
+			messageId, categoryId, subject, body, files, priority, tagsEntries,
+			prefs);
 	}
 
 	public MBMessage updateMessage(
 			String messageId, String categoryId, String subject, String body,
-			List files, double priority, PortletPreferences prefs)
+			List files, double priority, String[] tagsEntries,
+			PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		// Message
@@ -1027,6 +1052,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setCategoryId(category.getCategoryId());
 
 			MBThreadUtil.update(thread);
+		}
+
+		// Tags
+
+		if (tagsEntries != null) {
+			TagsAssetLocalServiceUtil.updateAsset(
+				message.getUserId(), MBMessage.class.getName(),
+				message.getPrimaryKey().toString(), tagsEntries);
 		}
 
 		// Lucene
@@ -1176,15 +1209,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	protected void logAddMessage(
 		String messageId, StopWatch stopWatch, int block) {
 
-		int messageIdInt = GetterUtil.getInteger(messageId);
+		if (_log.isDebugEnabled()) {
+			int messageIdInt = GetterUtil.getInteger(messageId);
 
-		if ((messageIdInt != 1) && ((messageIdInt % 10) != 0)) {
-			return;
+			if ((messageIdInt != 1) && ((messageIdInt % 10) != 0)) {
+				return;
+			}
+
+			_log.debug(
+				"Adding message block " + block + " for " + messageId +
+					" takes " + stopWatch.getTime() + " ms");
 		}
-
-		_log.debug(
-			"Adding message block " + block + " for " + messageId + " takes " +
-				stopWatch.getTime() + " ms");
 	}
 
 	protected void notifySubscribers(

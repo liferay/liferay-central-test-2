@@ -82,11 +82,11 @@ public class WikiPageServiceJSON {
 
 	public static JSONObject updatePage(java.lang.String nodeId,
 		java.lang.String title, java.lang.String content,
-		java.lang.String format)
+		java.lang.String format, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.updatePage(nodeId,
-				title, content, format);
+				title, content, format, tagsEntries);
 
 		return WikiPageJSONSerializer.toJSONObject(returnValue);
 	}

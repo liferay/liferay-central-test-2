@@ -104,6 +104,29 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <br><br>
 
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "tags") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+
+		<%
+		String classPK = wikiPage.getResourcePK().toString();
+		%>
+
+		<liferay-ui:tags-selector
+			className="<%= WikiPage.class.getName() %>"
+			classPK="<%= classPK %>"
+			hiddenInput="tagsEntries"
+		/>
+	</td>
+</tr>
+</table>
+
+<br>
+
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">

@@ -334,6 +334,34 @@ if (message != null) {
 	</tr>
 </c:if>
 
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "tags") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+
+		<%
+		String classPK = StringPool.BLANK;
+
+		if (message != null) {
+			classPK = message.getPrimaryKey().toString();
+		}
+		%>
+
+		<liferay-ui:tags-selector
+			className="<%= MBMessage.class.getName() %>"
+			classPK="<%= classPK %>"
+			hiddenInput="tagsEntries"
+		/>
+	</td>
+</tr>
+
 <c:if test="<%= message == null %>">
 	<tr>
 		<td colspan="3">

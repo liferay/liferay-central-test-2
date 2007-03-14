@@ -46,7 +46,7 @@ public class BlogsEntryServiceHttp {
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean addGuestPermissions, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -76,12 +76,18 @@ public class BlogsEntryServiceHttp {
 			Object paramObj8 = new IntegerWrapper(displayDateMinute);
 			Object paramObj9 = new BooleanWrapper(addCommunityPermissions);
 			Object paramObj10 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj11 = tagsEntries;
+
+			if (tagsEntries == null) {
+				paramObj11 = new NullWrapper("[Ljava.lang.String;");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"addEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
+						paramObj10, paramObj11
 					});
 			Object returnObj = null;
 
@@ -112,7 +118,8 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, java.lang.String[] communityPermissions,
+		int displayDateMinute, java.lang.String[] tagsEntries,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -141,16 +148,22 @@ public class BlogsEntryServiceHttp {
 			Object paramObj6 = new IntegerWrapper(displayDateYear);
 			Object paramObj7 = new IntegerWrapper(displayDateHour);
 			Object paramObj8 = new IntegerWrapper(displayDateMinute);
-			Object paramObj9 = communityPermissions;
+			Object paramObj9 = tagsEntries;
 
-			if (communityPermissions == null) {
+			if (tagsEntries == null) {
 				paramObj9 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj10 = guestPermissions;
+			Object paramObj10 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj10 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj11 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj10 = new NullWrapper("[Ljava.lang.String;");
+				paramObj11 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
@@ -158,7 +171,7 @@ public class BlogsEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
+						paramObj10, paramObj11
 					});
 			Object returnObj = null;
 
@@ -251,7 +264,7 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long entryId, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute)
+		int displayDateMinute, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -274,11 +287,17 @@ public class BlogsEntryServiceHttp {
 			Object paramObj6 = new IntegerWrapper(displayDateYear);
 			Object paramObj7 = new IntegerWrapper(displayDateHour);
 			Object paramObj8 = new IntegerWrapper(displayDateMinute);
+			Object paramObj9 = tagsEntries;
+
+			if (tagsEntries == null) {
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"updateEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 			Object returnObj = null;
 

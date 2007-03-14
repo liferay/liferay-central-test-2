@@ -88,14 +88,15 @@ public class WikiPageServiceImpl
 	}
 
 	public WikiPage updatePage(
-			String nodeId, String title, String content, String format)
+			String nodeId, String title, String content, String format,
+			String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		return WikiPageLocalServiceUtil.updatePage(
-			getUserId(), nodeId, title, content, format);
+			getUserId(), nodeId, title, content, format, tagsEntries);
 	}
 
 }

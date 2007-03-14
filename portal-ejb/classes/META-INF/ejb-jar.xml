@@ -14371,6 +14371,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceHome</local-home>
+				<local>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/BlogsEntryLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.blogs.service.ejb.BlogsEntryLocalServiceHome</local-home>
@@ -14438,6 +14445,13 @@
 				<local-home>com.liferay.portal.service.ejb.ResourceLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.ResourceLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceHome</local-home>
+				<local>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/BlogsCategoryLocalServiceHome</ejb-ref-name>
@@ -17077,6 +17091,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceHome</local-home>
+				<local>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
@@ -17179,6 +17200,13 @@
 				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceHome</local-home>
+				<local>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
@@ -20863,6 +20891,13 @@
 				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
 			</ejb-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceHome</local-home>
+				<local>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/WikiNodeLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.wiki.service.ejb.WikiNodeLocalServiceHome</local-home>
@@ -20924,6 +20959,13 @@
 				<remote>com.liferay.mail.service.ejb.MailServiceEJB</remote>
 				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
 			</ejb-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceHome</local-home>
+				<local>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/WikiNodeLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>

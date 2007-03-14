@@ -37,13 +37,13 @@ public class BlogsEntryServiceJSON {
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean addGuestPermissions, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.addEntry(plid,
 				categoryId, title, content, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
-				addCommunityPermissions, addGuestPermissions);
+				addCommunityPermissions, addGuestPermissions, tagsEntries);
 
 		return BlogsEntryJSONSerializer.toJSONObject(returnValue);
 	}
@@ -51,14 +51,15 @@ public class BlogsEntryServiceJSON {
 	public static JSONObject addEntry(java.lang.String plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, java.lang.String[] communityPermissions,
+		int displayDateMinute, java.lang.String[] tagsEntries,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.addEntry(plid,
 				categoryId, title, content, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
-				communityPermissions, guestPermissions);
+				tagsEntries, communityPermissions, guestPermissions);
 
 		return BlogsEntryJSONSerializer.toJSONObject(returnValue);
 	}
@@ -80,12 +81,12 @@ public class BlogsEntryServiceJSON {
 	public static JSONObject updateEntry(long entryId, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute)
+		int displayDateMinute, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.updateEntry(entryId,
 				categoryId, title, content, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute);
+				displayDateYear, displayDateHour, displayDateMinute, tagsEntries);
 
 		return BlogsEntryJSONSerializer.toJSONObject(returnValue);
 	}

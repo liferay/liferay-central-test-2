@@ -210,11 +210,11 @@ public class WikiPageLocalServiceEJBImpl implements WikiPageLocalService,
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(
 		java.lang.String userId, java.lang.String nodeId,
 		java.lang.String title, java.lang.String content,
-		java.lang.String format)
+		java.lang.String format, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().updatePage(userId,
-			nodeId, title, content, format);
+			nodeId, title, content, format, tagsEntries);
 	}
 
 	public void ejbCreate() throws CreateException {

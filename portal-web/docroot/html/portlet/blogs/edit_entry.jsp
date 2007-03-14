@@ -35,7 +35,7 @@ long categoryId = BeanParamUtil.getLong(entry, request, "categoryId", BlogsCateg
 
 String categoryName = StringPool.BLANK;
 
-if (Validator.isNotNull(categoryId)) {
+if (categoryId > 0) {
 	try {
 		BlogsCategory category = BlogsCategoryLocalServiceUtil.getCategory(categoryId);
 
@@ -139,6 +139,33 @@ if (entry != null) {
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
 		<input name="<portlet:namespace />content" type="hidden" value="">
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "tags") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+
+		<%
+		String classPK = StringPool.BLANK;
+
+		if (entry != null) {
+			classPK = String.valueOf(entry.getPrimaryKey());
+		}
+		%>
+
+		<liferay-ui:tags-selector
+			className="<%= BlogsEntry.class.getName() %>"
+			classPK="<%= classPK %>"
+			hiddenInput="tagsEntries"
+		/>
 	</td>
 </tr>
 

@@ -93,6 +93,10 @@
 			<finder-column name="title" />
 			<finder-column name="head" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<exceptions>
 		<exception>NodeName</exception>

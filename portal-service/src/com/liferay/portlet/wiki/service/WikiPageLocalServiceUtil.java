@@ -238,12 +238,12 @@ public class WikiPageLocalServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		java.lang.String userId, java.lang.String nodeId,
 		java.lang.String title, java.lang.String content,
-		java.lang.String format)
+		java.lang.String format, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		return wikiPageLocalService.updatePage(userId, nodeId, title, content,
-			format);
+			format, tagsEntries);
 	}
 }

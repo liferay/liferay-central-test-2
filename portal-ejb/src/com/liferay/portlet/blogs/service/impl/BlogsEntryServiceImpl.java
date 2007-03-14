@@ -46,7 +46,8 @@ public class BlogsEntryServiceImpl
 			String plid, long categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			boolean addCommunityPermissions, boolean addGuestPermissions,
+			String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -56,13 +57,13 @@ public class BlogsEntryServiceImpl
 		return BlogsEntryLocalServiceUtil.addEntry(
 			getUserId(), plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			addCommunityPermissions, addGuestPermissions);
+			tagsEntries, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public BlogsEntry addEntry(
 			String plid, long categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute,
+			int displayDateHour, int displayDateMinute, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -73,7 +74,7 @@ public class BlogsEntryServiceImpl
 		return BlogsEntryLocalServiceUtil.addEntry(
 			getUserId(), plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			communityPermissions, guestPermissions);
+			tagsEntries, communityPermissions, guestPermissions);
 	}
 
 	public void deleteEntry(long entryId)
@@ -97,7 +98,7 @@ public class BlogsEntryServiceImpl
 	public BlogsEntry updateEntry(
 			long entryId, long categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute)
+			int displayDateHour, int displayDateMinute, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		BlogsEntryPermission.check(
@@ -106,7 +107,7 @@ public class BlogsEntryServiceImpl
 		return BlogsEntryLocalServiceUtil.updateEntry(
 			getUserId(), entryId, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute);
+			displayDateMinute, tagsEntries);
 	}
 
 }

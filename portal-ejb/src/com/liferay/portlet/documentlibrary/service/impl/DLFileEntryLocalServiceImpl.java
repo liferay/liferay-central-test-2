@@ -409,14 +409,14 @@ public class DLFileEntryLocalServiceImpl
 			DLFileVersionUtil.remove(fileVersion.getPrimaryKey());
 		}
 
-		// Ratings
-
-		RatingsStatsLocalServiceUtil.deleteStats(
-			DLFileEntry.class.getName(), fileEntry.getPrimaryKey().toString());
-
 		// Tags
 
 		TagsAssetLocalServiceUtil.deleteAsset(
+			DLFileEntry.class.getName(), fileEntry.getPrimaryKey().toString());
+
+		// Ratings
+
+		RatingsStatsLocalServiceUtil.deleteStats(
 			DLFileEntry.class.getName(), fileEntry.getPrimaryKey().toString());
 
 		// Resources

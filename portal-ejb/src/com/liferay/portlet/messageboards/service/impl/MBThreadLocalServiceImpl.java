@@ -40,6 +40,7 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
@@ -113,6 +114,11 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		while (itr.hasNext()) {
 			MBMessage message = (MBMessage)itr.next();
+
+			// Tags
+
+			TagsAssetLocalServiceUtil.deleteAsset(
+				MBMessage.class.getName(), message.getPrimaryKey().toString());
 
 			// Message flags
 

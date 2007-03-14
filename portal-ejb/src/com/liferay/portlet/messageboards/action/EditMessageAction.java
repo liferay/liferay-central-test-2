@@ -40,6 +40,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
@@ -52,6 +53,7 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -165,6 +167,8 @@ public class EditMessageAction extends PortletAction {
 	protected void updateMessage(ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		PortletPreferences prefs = req.getPreferences();
+
 		String messageId = ParamUtil.getString(req, "messageId");
 
 		String categoryId = ParamUtil.getString(req, "categoryId");
@@ -196,6 +200,9 @@ public class EditMessageAction extends PortletAction {
 		boolean anonymous = ParamUtil.getBoolean(req, "anonymous");
 		double priority = ParamUtil.getDouble(req, "priority");
 
+		String[] tagsEntries = StringUtil.split(
+			ParamUtil.getString(req, "tagsEntries"));
+
 		String[] communityPermissions = req.getParameterValues(
 			"communityPermissions");
 		String[] guestPermissions = req.getParameterValues(
@@ -212,8 +219,7 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, subject, body, files, anonymous, priority,
-					req.getPreferences(), communityPermissions,
-					guestPermissions);
+					tagsEntries, prefs, communityPermissions, guestPermissions);
 			}
 			else {
 
@@ -221,7 +227,7 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, threadId, parentMessageId, subject, body, files,
-					anonymous, priority, req.getPreferences(),
+					anonymous, priority, tagsEntries, prefs,
 					communityPermissions, guestPermissions);
 			}
 		}
@@ -231,7 +237,7 @@ public class EditMessageAction extends PortletAction {
 
 			message = MBMessageServiceUtil.updateMessage(
 				messageId, categoryId, subject, body, files, priority,
-				req.getPreferences());
+				tagsEntries, prefs);
 		}
 
 		PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();

@@ -40,14 +40,14 @@ public class BlogsEntryServiceSoap {
 		java.lang.String plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws RemoteException {
+		boolean addCommunityPermissions, boolean addGuestPermissions,
+		java.lang.String[] tagsEntries) throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.addEntry(plid,
 					categoryId, title, content, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, addCommunityPermissions,
-					addGuestPermissions);
+					addGuestPermissions, tagsEntries);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
 		}
@@ -61,13 +61,15 @@ public class BlogsEntryServiceSoap {
 		java.lang.String plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
+		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.addEntry(plid,
 					categoryId, title, content, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute, communityPermissions, guestPermissions);
+					displayDateMinute, tagsEntries, communityPermissions,
+					guestPermissions);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
 		}
@@ -103,13 +105,13 @@ public class BlogsEntryServiceSoap {
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap updateEntry(
 		long entryId, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute)
-		throws RemoteException {
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		java.lang.String[] tagsEntries) throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.updateEntry(entryId,
 					categoryId, title, content, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute);
+					displayDateMinute, tagsEntries);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
 		}

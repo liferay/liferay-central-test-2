@@ -34,6 +34,7 @@ import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.NoSuchEntryException;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.Calendar;
@@ -145,6 +146,9 @@ public class EditEntryAction extends PortletAction {
 			displayDateHour += 12;
 		}
 
+		String[] tagsEntries = StringUtil.split(
+			ParamUtil.getString(req, "tagsEntries"));
+
 		String[] communityPermissions = req.getParameterValues(
 			"communityPermissions");
 		String[] guestPermissions = req.getParameterValues(
@@ -157,7 +161,8 @@ public class EditEntryAction extends PortletAction {
 			BlogsEntryServiceUtil.addEntry(
 				layout.getPlid(), categoryId, title, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, communityPermissions, guestPermissions);
+				displayDateMinute, tagsEntries, communityPermissions,
+				guestPermissions);
 		}
 		else {
 
@@ -166,7 +171,7 @@ public class EditEntryAction extends PortletAction {
 			BlogsEntryServiceUtil.updateEntry(
 				entryId, categoryId, title, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute);
+				displayDateMinute, tagsEntries);
 		}
 	}
 

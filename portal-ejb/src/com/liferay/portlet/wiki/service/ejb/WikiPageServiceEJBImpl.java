@@ -84,13 +84,14 @@ public class WikiPageServiceEJBImpl implements WikiPageService, SessionBean {
 
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(
 		java.lang.String nodeId, java.lang.String title,
-		java.lang.String content, java.lang.String format)
+		java.lang.String content, java.lang.String format,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WikiPageServiceFactory.getTxImpl().updatePage(nodeId, title,
-			content, format);
+			content, format, tagsEntries);
 	}
 
 	public void ejbCreate() throws CreateException {

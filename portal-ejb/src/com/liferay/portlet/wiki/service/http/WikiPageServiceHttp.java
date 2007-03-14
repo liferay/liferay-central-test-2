@@ -266,7 +266,7 @@ public class WikiPageServiceHttp {
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		HttpPrincipal httpPrincipal, java.lang.String nodeId,
 		java.lang.String title, java.lang.String content,
-		java.lang.String format)
+		java.lang.String format, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -294,9 +294,17 @@ public class WikiPageServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj4 = tagsEntries;
+
+			if (tagsEntries == null) {
+				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
 					"updatePage",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 			Object returnObj = null;
 
 			try {

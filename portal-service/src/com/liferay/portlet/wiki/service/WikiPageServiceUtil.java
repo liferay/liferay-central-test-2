@@ -75,11 +75,13 @@ public class WikiPageServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		java.lang.String nodeId, java.lang.String title,
-		java.lang.String content, java.lang.String format)
+		java.lang.String content, java.lang.String format,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
-		return wikiPageService.updatePage(nodeId, title, content, format);
+		return wikiPageService.updatePage(nodeId, title, content, format,
+			tagsEntries);
 	}
 }
