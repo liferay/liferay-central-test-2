@@ -334,7 +334,9 @@ public abstract class BaseUpgradeTableImpl {
 				}
 				catch (StagnantRowException sre) {
 					if (_log.isWarnEnabled()) {
-						_log.warn(_tableName + " has stagnant data", sre);
+						_log.warn(
+							"Skipping stagnant data in " + _tableName + ": " + 
+							sre.getMessage());
 					}
 				}
 			}

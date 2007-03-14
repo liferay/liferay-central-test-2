@@ -32,20 +32,12 @@ import com.liferay.portal.PortalException;
  */
 public class StagnantRowException extends PortalException {
 
-	public StagnantRowException() {
-		super();
-	}
-
 	public StagnantRowException(String msg) {
 		super(msg);
 	}
 
 	public StagnantRowException(String msg, Throwable cause) {
 		super(msg, cause);
-	}
-
-	public StagnantRowException(Throwable cause) {
-		super(cause);
 	}
 
 }
