@@ -148,6 +148,26 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 </form>
 
+<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
+	<br>
+
+	<liferay-ui:tabs names="comments" />
+
+	<portlet:actionURL var="discussionURL">
+		<portlet:param name="struts_action" value="/wiki/edit_page_discussion" />
+	</portlet:actionURL>
+
+	<liferay-ui:discussion
+		formName="fm2"
+		formAction="<%= discussionURL %>"
+		className="<%= WikiPage.class.getName() %>"
+		classPK="<%= wikiPage.getResourcePK().toString() %>"
+		userId="<%= wikiPage.getUserId() %>"
+		subject="<%= wikiPage.getTitle() %>"
+		redirect="<%= currentURL %>"
+	/>
+</c:if>
+
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();
 </script>

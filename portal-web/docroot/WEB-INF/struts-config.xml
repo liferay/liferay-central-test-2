@@ -1416,6 +1416,10 @@
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 		</action>
 
+		<action path="/wiki/edit_page_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.error" path="portlet.wiki.error" />
+		</action>
+
 		<action path="/wiki/search" type="com.liferay.portlet.wiki.action.EditNodeAction">
 			<forward name="portlet.wiki.edit_node" path="portlet.wiki.search" />
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />

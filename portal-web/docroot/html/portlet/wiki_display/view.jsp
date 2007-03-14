@@ -79,3 +79,45 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 </c:if>
+
+<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
+
+	<%
+	WindowState windowState = renderRequest.getWindowState();
+	%>
+
+	<c:choose>
+		<c:when test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+
+			<br><br>
+
+			<liferay-ui:tabs names="comments" />
+
+			<portlet:actionURL var="discussionURL">
+				<portlet:param name="struts_action" value="/wiki/edit_page_discussion" />
+			</portlet:actionURL>
+
+			<liferay-ui:discussion
+				formName="fm"
+				formAction="<%= discussionURL %>"
+				className="<%= WikiPage.class.getName() %>"
+				classPK="<%= wikiPage.getResourcePK().toString() %>"
+				userId="<%= wikiPage.getUserId() %>"
+				subject="<%= wikiPage.getTitle() %>"
+				redirect="<%= currentURL %>"
+			/>
+		</c:when>
+		<c:otherwise>
+
+			<%
+			currentURLObj.setWindowState(WindowState.MAXIMIZED);
+			%>
+
+			<liferay-ui:icon
+				image="reply"
+				message="comments"
+				url="<%= currentURLObj.toString() %>"
+			/>
+		</c:otherwise>
+	</c:choose>
+</c:if>
