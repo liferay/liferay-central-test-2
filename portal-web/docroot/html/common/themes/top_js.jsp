@@ -101,7 +101,7 @@
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/messaging.js" type="text/javascript"></script>
 
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
-			<script src="<%= themeDisplay.getPathJavaScript() %>/log/log4javascript.js" type="text/javascript"></script>
+			<script src="<%= themeDisplay.getPathJavaScript() %>/firebug/firebug.js" type="text/javascript"></script>
 		</c:if>
 	</c:otherwise>
 </c:choose>
@@ -228,5 +228,4 @@
 		}
 	);
 
-	<%@ include file="/html/js/log/log.jsp" %>
 </script>
