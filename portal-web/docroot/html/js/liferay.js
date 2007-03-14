@@ -610,7 +610,7 @@ Liferay.Util = {
 	        }
 	    }
 	},
-	
+
 	addInputType: function(el) {
 		var item;
 

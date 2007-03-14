@@ -112,10 +112,10 @@
 		#if ($portletDisplay.isStateMax())
 			<script type="text/javascript">
 				_$J(window).load(function() {
-					jQuery("#p_p_id_$portletDisplay.getId()_ .portlet-content-container").css({"height": (Viewport.page().y - 75) + "px"});;
+					jQuery("#p_p_id_$portletDisplay.getId()_ .portlet-content-container").css({"height": (Viewport.page().y - 95) + "px"});;
 				});
 				_$J(window).resize(function() {
-					jQuery("#p_p_id_$portletDisplay.getId()_ .portlet-content-container").css({"height": (Viewport.frame().y - 75) + "px"});;
+					jQuery("#p_p_id_$portletDisplay.getId()_ .portlet-content-container").css({"height": (Viewport.frame().y - 95) + "px"});;
 				});
 			</script>
 		#end

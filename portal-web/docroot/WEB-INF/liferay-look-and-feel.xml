@@ -40,5 +40,14 @@
 	</theme>
 	<theme id="desktop" name="Desktop">
 		<root-path>/html/themes/${theme-id}</root-path>
+		<color-scheme id="01" name="Aqua">
+			<css-class>aqua</css-class>
+		</color-scheme>
+		<color-scheme id="02" name="Vista">
+			<css-class>vista</css-class>
+		</color-scheme>
+		<color-scheme id="03" name="Linux">
+			<css-class>linux</css-class>
+		</color-scheme>
 	</theme>
 </look-and-feel>

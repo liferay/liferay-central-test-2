@@ -12,40 +12,45 @@ var LiferayDesktop = {
 		Liferay.Portlet.last(function() {
 			LiferayDesktop.moveBar();
 			_$J(window).resize(LiferayDesktop.moveBar);
+			_$J(window).scroll(LiferayDesktop.moveBar);
+
+			jQuery("#layout-desktop-icons").mouseout(function() {
+				Fisheye.reset = true;
+				Fisheye.resetMenu();
+			});
+			jQuery("#layout-desktop-icons").mouseover(function() {
+				Fisheye.reset = false;
+			});
 		});
 	},
 
 	addIcon: function(plid, portletId, doAsUserId, minimized, titleText) {
 		var iconDock = document.getElementById("layout-desktop-icons");
-		var iconDiv = document.createElement("div");
-		var iconImageDiv = document.createElement("div");
-		var title = document.createElement("div");
+		var title = document.createElement("span");
 		var icon = new Image(50,50);
 		
-		iconDiv.className = "desktop-icon";
-		iconImageDiv.className = "desktop-icon-image";
-		
-		title.style.display = "none";
 		title.className = "desktop-icon-title";
-		title.innerHTML = titleText + "&not;";
+		title.alt = "desktop-icon-title";
+		title.innerHTML = titleText;
 		
-		icon.src = themeDisplay.getPathThemeImage() + "/custom/application.png";
+		if (jQuery.browser.msie && jQuery.browser.version.number() < 7) {
+			icon.src = themeDisplay.getPathThemeImage() + "/spacer.png";
+			icon.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + themeDisplay.getPathThemeImage() + "/custom/application.png', sizingMethod='scale')"
+		}
+		else {
+			icon.src = themeDisplay.getPathThemeImage() + "/custom/application.png";
+		}
+		icon.alt = titleText;
+		icon.onmousemove = function(event) {
+			Fisheye.resizeIcon(this, event);
+		}
 		icon.id = "liferay-desktop-icon_" + portletId;
-		icon.onmouseover = function() {
-			LiferayDesktop.jiggleIcon(portletId, true);
-			_$J(".desktop-icon-title", this.iconDiv).css("display", "");
-		};
-		
-		icon.onmouseout = function() {
-			_$J(".desktop-icon-title", this.iconDiv).css("display", "none");
-		};
 		
 		if (minimized) {
 			icon.onclick = function() {
 				LiferayDesktop.maximize(plid, portletId, doAsUserId);
 			};
 			_$J("#p_p_id_" + portletId + "_").css("display", "none");
-
 		}
 		else {
 			icon.onclick = function() {
@@ -53,38 +58,26 @@ var LiferayDesktop = {
 			};
 		}
 		
-		iconImageDiv.appendChild(icon);
-		iconDiv.appendChild(title);
-		iconDiv.appendChild(iconImageDiv);
-		iconDock.appendChild(iconDiv);
-		
-		icon.iconDiv = iconDiv;
-		
-		if (_$J.browser.firefox) {
-			setTimeout("_$J(\"#liferay-desktop-icon_" + portletId + "\").Reflection({height : 0.4, opacity : 0.5})", 0)
-		}
-		else {
-			_$J(icon).Reflection({height : 0.4, opacity : 0.5});
-		}
+		iconDock.appendChild(icon);
 		
 		if (minimized) {
-			_$J(iconImageDiv).fadeTo("fast", 0.5);
+			_$J(icon).fadeTo("fast", 0.5);
 		}
 	},
-	
+
 	remove: function(plid, portletId, doAsUserId) {
-		var iconDiv = document.getElementById("liferay-desktop-icon_" + portletId).iconDiv;
+		var icon = document.getElementById("liferay-desktop-icon_" + portletId);
 		var portlet = _$J("#p_p_id_" + portletId + "_");
 		
 		portlet.DropOutDown("normal", function() {
 			closePortlet(plid, portletId, doAsUserId, true);
 		});
 	
-		_$J("#layout-desktop-icons").css({overflow: "hidden"});
-		iconDiv.style.overflow = "hidden";
-		_$J(iconDiv).Shrink("normal", function() {
-			iconDiv.parentNode.removeChild(iconDiv);
+		/*
+		_$J(icon).Shrink("normal", function() {
+			icon.parentNode.removeChild(icon);
 		});
+		*/
 	},
 	
 	toTop: function(portletId) {
@@ -98,7 +91,7 @@ var LiferayDesktop = {
 			LiferayDesktop.jiggleAnimate,
 			{
 				count: 0,
-				element: _$J("#liferay-desktop-icon_" + portletId).parent(),
+				element: _$J("#liferay-desktop-icon_" + portletId),
 				sound: sound
 			}
 		);
@@ -172,7 +165,7 @@ var LiferayDesktop = {
 				LiferayDesktop.toTop(portletId);
 			};
 
-			_$J(".desktop-icon-image", icon.iconDiv).fadeTo("normal", 1);
+			_$J(icon).fadeTo("normal", 1);
 		}
 
 	},
@@ -198,7 +191,7 @@ var LiferayDesktop = {
 			LiferayDesktop.maximize(plid, portletId, doAsUserId);
 		};
 		
-		_$J(".desktop-icon-image", icon.iconDiv).fadeTo("normal", 0.5);
+		_$J(icon).fadeTo("normal", 0.5);
 	},
 	
 	toggle: function(plid, portletId, doAsUserId, restore) {
@@ -216,8 +209,134 @@ var LiferayDesktop = {
 	},
 	
 	moveBar: function() {
-		_$J("#layout-desktop-icons").css("top",(Viewport.page().y - 75) + "px");
+		_$J("#layout-desktop-icons-box").css("bottom",(Viewport.page().y - Viewport.frame().y - Viewport.scroll().y) + "px");
 	}
 };
 
 LiferayDesktop.init();
+
+var Fisheye = {
+	iconList: null,
+	maxZoom: 24,
+	iconHeight: 50,
+	navTitleWidth: 100,
+	navIconTitle: "",
+	navWidth: 0,
+	navArrowPos: 0,
+	navTimer: 0,
+	reset: false,
+	
+	resetMenu: function() {
+		var instance = this;
+		
+		jQuery("#desktop-icon-title").css("display", "none");
+		
+		Liferay.Animate("fisheye_dock",
+			Fisheye.shrinkMenu,
+			{
+				count: 0,
+				container: jQuery("#layout-desktop-icons"),
+				iconHeight: instance.iconHeight,
+				speed: 5
+			}
+		);
+	},
+
+	resizeIcon: function(obj, event) {
+		var instance = this;
+		
+		var midPoint = obj.offsetHeight/2;
+		var tempWidth = obj.offsetHeight;
+		var tempNavWidth = instance.navWidth;
+		var newHeight = 0;
+		var nextHeight = 0;
+		var prevHeight = 0;
+		var midDiff = 0;
+		var heightDiff = 0;
+		var nwOffset = Coordinates.northwestOffset(obj, true);
+		
+		var maxZoom = instance.maxZoom;
+		var iconHeight = instance.iconHeight;
+		
+		var current = jQuery(obj);
+		var previous = current.prev(obj.nodeName).get(0);
+		var next = current.next(obj.nodeName).get(0);
+
+		mousePos.update(event);
+		var tempX = mousePos.x - nwOffset.x;
+	
+		if (tempX < 0){tempX = 0;}
+	
+		// Previous icon size
+		if (previous != null) {
+			heightDiff = maxZoom - (tempX * maxZoom)/tempWidth;
+			prevHeight = iconHeight + heightDiff;
+			tempNavWidth += heightDiff;
+			previous.style.height = prevHeight + "px";
+			previous.style.width = prevHeight + "px";
+		}
+	
+		// Next icon size
+		if (next != null) {
+			heightDiff = (tempX * maxZoom)/tempWidth;
+			nextHeight = iconHeight + heightDiff;
+			tempNavWidth += heightDiff;
+			next.style.height = nextHeight + "px";
+			next.style.width = nextHeight + "px";
+		}
+		
+		// Rest uneffected icons
+		current.siblings(obj.nodeName).each(function(){
+			if (this != previous && this != next) {
+				this.style.height = iconHeight + "px";
+				this.style.width = iconHeight + "px";
+			}
+		});
+	
+		// Middle (active) icon size
+		newHeight = iconHeight + maxZoom;
+		tempNavWidth += maxZoom;
+		obj.style.height = newHeight + "px";
+		obj.style.width = newHeight + "px";
+	
+		var navIconTitle = jQuery("#desktop-icon-title")[0];
+		
+		if (!navIconTitle) {
+			navIconTitle = document.createElement("span");
+			navIconTitle.id = "desktop-icon-title";
+			document.body.appendChild(navIconTitle);
+		}
+		nwOffset = Coordinates.northwestOffset(obj, true);
+		navIconTitle.innerHTML = obj.alt;
+		navIconTitle.style.display =  "";
+		navIconTitle.style.left = (nwOffset.x + (newHeight - navIconTitle.offsetWidth)/2) + "px";
+		navIconTitle.style.top =  nwOffset.y + 5 - maxZoom + "px";
+	},
+	
+	shrinkMenu: function(data) {
+		var modified = false;
+		
+		if (Fisheye.reset) {
+			var iconHeight = data.iconHeight;
+			var speed = data.speed;
+			
+			data.container.children().each(function(){
+				var icon = this;
+				var curHeight = parseInt(icon.style.height);
+				
+				if (curHeight > iconHeight) {
+					if (curHeight - speed < iconHeight) {
+						icon.style.height = iconHeight + "px";
+						icon.style.width = iconHeight + "px";
+					}
+					else {
+						icon.style.height = (curHeight - speed) + "px";
+						icon.style.width = (curHeight - speed) + "px";
+					}
+					modified = true;
+				}
+			});
+		}
+		return modified;
+	}
+};

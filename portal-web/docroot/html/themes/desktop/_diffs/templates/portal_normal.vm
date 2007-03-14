@@ -29,6 +29,8 @@
 	#set ($htmlClass = "freeform")
 #end
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html dir="$languageUtil.get($pageContext, "lang.dir")" class="$htmlClass">
 
 <head>
@@ -47,7 +49,7 @@
 	</style>
 </head>
 
-<body id="body-bg" class="$css_class">
+<body class="$css_class">
 
 $taglibLiferay.include("/html/common/themes/top_messages.jsp")
 

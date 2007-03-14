@@ -24,16 +24,22 @@
 
 #parse($init)
 
-<html dir="$languageUtil.get($pageContext, "lang.dir")">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html dir="#language("lang.dir")">
 
 <head>
-	<title>$company.getName() - $tilesTitle</title>
-	$taglibLiferay.include("/html/common/themes/top_head.jsp")
+	<title>$the_title</title>
+
+	$theme.include($top_head_include)
+
+	#css($css_main_file)
+	#js($js_main_file)
 </head>
 
-<body>
+<body class="portal-popup $css_class">
 
-$taglibLiferay.include("/html$tilesContent")
+$theme.include($content_include)
 
 </body>
 

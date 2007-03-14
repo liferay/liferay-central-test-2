@@ -22,7 +22,9 @@
  */
 *#
 
-<div id="layout-desktop-icons"></div>
+<div id="layout-desktop-icons-box">
+<span id="layout-desktop-icons"></span>
+</div>
 
 <div class="lfr-dock">
 	<h2 class="user-greeting">

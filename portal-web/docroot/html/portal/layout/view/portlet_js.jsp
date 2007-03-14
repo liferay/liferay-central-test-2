@@ -113,7 +113,12 @@ function addPortletHTML(html, container, placeHolder) {
 		}
 	}
 
-	Liferay.Portlet.process(portletId);
+	if (_$J.browser.firefox) {
+		setTimeout("Liferay.Portlet.process(\"" + portletId + "\")", 0);
+	}
+	else {
+		Liferay.Portlet.process(portletId);
+	}
 
 	Liferay.Util.addInputType(portletBound.id);
 

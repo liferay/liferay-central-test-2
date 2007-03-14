@@ -35,11 +35,23 @@ body {
 	text-align: left;
 	font-family: Tahoma, Arial;
 	font-size: 76%;
+	height: 100%;
 }
 
-#body-bg {
+body.liferay {
 	background: #000000 url(../images/custom/ripples.jpg) scroll no-repeat bottom left;
-	height: 100%;
+}
+
+body.linux {
+	background: #cccccc url(../images/custom/linux_wall.jpg) scroll no-repeat bottom left;
+}
+
+body.aqua {
+	background: #0a59a5 url(../images/custom/aqua_wall.jpg) scroll no-repeat bottom left;
+}
+
+body.vista {
+	background: #000000 url(../images/custom/vista_wall.jpg) scroll no-repeat bottom left;
 }
 
 body * { font-size: 1em; }
@@ -48,38 +60,28 @@ body * { font-size: 1em; }
 /* Liferay Layout CSS                                                         */
 /******************************************************************************/
 
-#layout-desktop-icons {
+#layout-desktop-icons-box {
+	bottom: 0;
 	position: absolute;
-	right: 3px;
-	bottom: 25px;
+	text-align: center;
+	width: 100%;
 	z-index: 1;
 }
 
-#layout-desktop-icons-spacer {
-	font-size: 0;
-	height: 70px;
-}
-
-.freeform #layout-desktop-icons-spacer {
-	display: none;
-}
-
-#layout-desktop-icons div.reflected {
-	position: relative;
-	height: 70px;
-	overflow: hidden;
-}
-
-.desktop-icon {
-	float: left;
-	position: relative;
-	width: 55px;
+#layout-desktop-icons {
 	text-align: left;
 }
 
-.desktop-icon-image {
-	position: relative;
-	width: 50px;
+#desktop-icon-title {
+	color: #d0d0d0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	white-space: nowrap;
+}
+
+body.linux #desktop-icon-title {
+	color: #000000;
 }
 
 .desktop-icon-transfer {
@@ -87,13 +89,6 @@ body * { font-size: 1em; }
 	z-index: 100;
 }
 
-.desktop-icon-title {
-	color: #ffffff;
-	position: absolute;
-	right: 28;
-	top: -16px;
-	white-space: nowrap;
-}
 
 .js .lfr-dock, .lfr-dock {
 	top: 4px;
@@ -368,6 +363,7 @@ body * { font-size: 1em; }
 	position: absolute;
 	top: 13px;
 	left: 15px;
+	white-space: nowrap;
 }
 
 .portlet-small-icon-bar {
