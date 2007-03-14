@@ -24,8 +24,6 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.tags.NoSuchEntryException" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
 
 <%

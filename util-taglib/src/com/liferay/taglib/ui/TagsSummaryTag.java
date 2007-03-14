@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,40 +19,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td>
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.HTML_FORMAT) %>">
-			<%= wikiPage.getContent() %>
-		</c:if>
+package com.liferay.taglib.ui;
 
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) %>">
+import com.liferay.taglib.util.IncludeTag;
 
-			<%
-			PortletURL pageURL = renderResponse.createRenderURL();
+import javax.servlet.ServletRequest;
 
-			pageURL.setParameter("struts_action", "/wiki/view_page");
-			%>
+/**
+ * <a href="TagsSummaryTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class TagsSummaryTag extends IncludeTag {
 
-			<%= WikiUtil.convert(WikiUtil.getFilter(pageURL, node.getNodeId()), wikiPage.getContent()) %>
-		</c:if>
+	public int doStartTag() {
+		ServletRequest req = pageContext.getRequest();
 
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.PLAIN_TEXT_FORMAT) %>">
-<pre>
-<%= wikiPage.getContent() %>
-</pre>
-		</c:if>
-	</td>
-</tr>
-</table>
+		req.setAttribute("liferay-ui:tags_summary:className", _className);
+		req.setAttribute("liferay-ui:tags_summary:classPK", _classPK);
+		req.setAttribute("liferay-ui:tags_summary:message", _message);
 
-<br>
+		return EVAL_BODY_BUFFERED;
+	}
 
-<div>
-	<liferay-ui:tags-summary
-		className="<%= WikiPage.class.getName() %>"
-		classPK="<%= wikiPage.getResourcePK().toString() %>"
-	/>
-</div>
+	public void setClassName(String className) {
+		_className = className;
+	}
+
+	public void setClassPK(String classPK) {
+		_classPK = classPK;
+	}
+
+	public void setMessage(String message) {
+		_message = message;
+	}
+
+	protected String getDefaultPage() {
+		return _PAGE;
+	}
+
+	private static final String _PAGE = "/html/taglib/ui/tags_summary/page.jsp";
+
+	private String _className;
+	private String _classPK;
+	private String _message;
+
+}

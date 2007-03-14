@@ -43,7 +43,12 @@
 		</portlet:renderURL>
 
 		<span style="font-size: small;"><b><a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a></b></span><br>
-		<span style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "by") %> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>, <%= LanguageUtil.get(pageContext, "on") %> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span>
+		<span style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "by") %> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>, <%= LanguageUtil.get(pageContext, "on") %> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span><br>
+
+		<liferay-ui:tags-summary
+			className="<%= BlogsEntry.class.getName() %>"
+			classPK="<%= String.valueOf(entry.getPrimaryKey()) %>"
+		/>
 	</td>
 </tr>
 <tr>

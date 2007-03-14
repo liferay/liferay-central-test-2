@@ -1285,6 +1285,31 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>tags-summary</name>
+		<tagclass>com.liferay.taglib.ui.TagsSummaryTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>className</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>classPK</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>message</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>toggle</name>
 		<tagclass>com.liferay.taglib.ui.ToggleTag</tagclass>
 		<bodycontent>JSP</bodycontent>

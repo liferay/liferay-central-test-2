@@ -22,38 +22,22 @@
  */
 %>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td>
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.HTML_FORMAT) %>">
-			<%= wikiPage.getContent() %>
-		</c:if>
+<%@ include file="/html/taglib/init.jsp" %>
 
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) %>">
+<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
 
-			<%
-			PortletURL pageURL = renderResponse.createRenderURL();
+<%
+String className = (String)request.getAttribute("liferay-ui:tags_summary:className");
+String classPK = (String)request.getAttribute("liferay-ui:tags_summary:classPK");
+String message = (String)request.getAttribute("liferay-ui:tags_summary:message");
 
-			pageURL.setParameter("struts_action", "/wiki/view_page");
-			%>
+if (message == null) {
+	message = "tags";
+}
 
-			<%= WikiUtil.convert(WikiUtil.getFilter(pageURL, node.getNodeId()), wikiPage.getContent()) %>
-		</c:if>
+List entries = TagsEntryLocalServiceUtil.getEntries(className, classPK);
 
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.PLAIN_TEXT_FORMAT) %>">
-<pre>
-<%= wikiPage.getContent() %>
-</pre>
-		</c:if>
-	</td>
-</tr>
-</table>
+String curTags = ListUtil.toString(entries, "name", ", ");
+%>
 
-<br>
-
-<div>
-	<liferay-ui:tags-summary
-		className="<%= WikiPage.class.getName() %>"
-		classPK="<%= wikiPage.getResourcePK().toString() %>"
-	/>
-</div>
+<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %><%= curTags %>
