@@ -14,7 +14,7 @@ Commons Codec 1.3
 Commons Collections 3.2
 Commons Configuration 1.3
 Commons DBCP 1.2.1
-Commons Discovery 0.2
+Commons Discovery 0.4
 Commons Digester 1.6
 Commons Email 1.0
 Commons FileUpload 1.1dev (July 15, 2005, 1.1 makes all file names lower case)
