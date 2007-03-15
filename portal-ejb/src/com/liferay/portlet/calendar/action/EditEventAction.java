@@ -304,17 +304,9 @@ public class EditEventAction extends PortletAction {
 					int yearlyMonth = ParamUtil.getInteger(req, "yearlyMonth0");
 					int yearlyDay = ParamUtil.getInteger(req, "yearlyDay0");
 
-					Calendar yearlyCal = (Calendar)recStartCal.clone();
-
-					yearlyCal.set(Calendar.MONTH, yearlyMonth);
-					yearlyCal.set(Calendar.DATE, yearlyDay);
-
-					if (yearlyCal.before(recStartCal)) {
-						yearlyCal.add(Calendar.YEAR, 1);
-					}
-
-					recurrence.setDtStart(yearlyCal);
-
+					recurrence.setByMonth(new int[] {yearlyMonth});
+					recurrence.setByMonthDay(new int[] {yearlyDay});
+					
 					int yearlyInterval = ParamUtil.getInteger(
 						req, "yearlyInterval0");
 

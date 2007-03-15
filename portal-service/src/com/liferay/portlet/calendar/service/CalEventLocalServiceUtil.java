@@ -185,6 +185,14 @@ public class CalEventLocalServiceUtil {
 		calEventLocalService.deleteEvents(groupId);
 	}
 
+	public static java.io.File export(long eventId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.export(eventId);
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
 		long eventId)
 		throws com.liferay.portal.PortalException, 

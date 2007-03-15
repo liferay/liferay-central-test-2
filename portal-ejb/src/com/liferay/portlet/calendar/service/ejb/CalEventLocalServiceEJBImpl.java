@@ -177,6 +177,12 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 		CalEventLocalServiceFactory.getTxImpl().deleteEvents(groupId);
 	}
 
+	public java.io.File export(long eventId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return CalEventLocalServiceFactory.getTxImpl().export(eventId);
+	}
+
 	public com.liferay.portlet.calendar.model.CalEvent getEvent(long eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

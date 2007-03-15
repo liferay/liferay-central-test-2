@@ -31,6 +31,7 @@ import com.liferay.portal.im.AIMConnector;
 import com.liferay.portal.im.ICQConnector;
 import com.liferay.portal.im.MSNConnector;
 import com.liferay.portal.im.YMConnector;
+import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.Base64;
@@ -47,6 +48,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portlet.calendar.EventDurationException;
 import com.liferay.portlet.calendar.EventEndDateException;
 import com.liferay.portlet.calendar.EventStartDateException;
@@ -62,6 +64,10 @@ import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.cal.CalendarUtil;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.text.DateFormat;
 
 import java.util.ArrayList;
@@ -79,6 +85,25 @@ import javax.mail.internet.InternetAddress;
 
 import javax.portlet.PortletPreferences;
 
+import net.fortuna.ical4j.data.CalendarOutputter;
+import net.fortuna.ical4j.model.DateTime;
+import net.fortuna.ical4j.model.PropertyList;
+import net.fortuna.ical4j.model.Recur;
+import net.fortuna.ical4j.model.WeekDay;
+import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.property.CalScale;
+import net.fortuna.ical4j.model.property.Comment;
+import net.fortuna.ical4j.model.property.Description;
+import net.fortuna.ical4j.model.property.DtEnd;
+import net.fortuna.ical4j.model.property.DtStart;
+import net.fortuna.ical4j.model.property.Duration;
+import net.fortuna.ical4j.model.property.ProdId;
+import net.fortuna.ical4j.model.property.RRule;
+import net.fortuna.ical4j.model.property.Summary;
+import net.fortuna.ical4j.model.property.Uid;
+import net.fortuna.ical4j.model.property.Version;
+
+import org.apache.commons.id.uuid.UUID;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -363,7 +388,32 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			deleteEvent(event);
 		}
 	}
-
+	
+	public File export(long eventId) throws PortalException, SystemException {
+		net.fortuna.ical4j.model.Calendar calendar = _export(eventId);
+		
+		File file = null;
+		
+		try {
+			file = File.createTempFile("CalEvent." + eventId, ".ics");
+			
+			OutputStream os = 
+				new BufferedOutputStream(new FileOutputStream(file.getPath()));
+			
+			CalendarOutputter calOutput = new CalendarOutputter();
+			
+			calOutput.output(calendar, os);
+			
+			os.close();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new PortalException(e);
+		}
+		
+		return file;
+	}
+	
 	public CalEvent getEvent(long eventId)
 		throws PortalException, SystemException {
 
@@ -786,6 +836,218 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
+	private net.fortuna.ical4j.model.Calendar _export(long eventId) 
+		throws PortalException, SystemException {
+
+		net.fortuna.ical4j.model.Calendar iCal = 
+			new net.fortuna.ical4j.model.Calendar();
+		
+		ProdId prodId = new ProdId(
+			"-//Liferay Inc//Liferay Portal " + ReleaseInfo.getVersion() + 
+			"//EN");
+		
+		PropertyList props = iCal.getProperties();
+		
+		props.add(prodId);
+		props.add(Version.VERSION_2_0);
+		props.add(CalScale.GREGORIAN);
+
+		CalEvent event = CalEventUtil.findByPrimaryKey(eventId);
+						
+		VEvent vEvent = new VEvent();
+
+		PropertyList eventProps = vEvent.getProperties();
+		
+		// UID
+
+		Uid uid = new Uid(UUID.timeUUID().toString());
+		
+		eventProps.add(uid);
+		
+		iCal.getComponents().add(vEvent);
+
+		// Start Date
+
+		DateTime dateTime = new DateTime(event.getStartDate());
+
+		DtStart dtStart = new DtStart(dateTime);
+
+		eventProps.add(dtStart);
+
+		// Duration
+
+		Calendar cal = Calendar.getInstance();
+
+		Date start = cal.getTime();
+		
+		cal.add(Calendar.HOUR, event.getDurationHour());
+		cal.add(Calendar.MINUTE, event.getDurationHour());
+		
+		Date end = cal.getTime();
+		
+		Duration duration = new Duration(start, end);
+		
+		eventProps.add(duration);
+
+		// Summary
+		
+		Summary summary = new Summary(event.getTitle());
+		
+		eventProps.add(summary);
+		
+		// Description 
+		
+		Description description = new Description(event.getDescription());
+		
+		eventProps.add(description);
+		
+		// Comment
+		
+		Comment comment = new Comment(event.getType());
+		
+		eventProps.add(comment);
+		
+		// Rrule (Recurrence Rule)
+		
+		if (event.isRepeating()) {
+			Recur recur = _toRecur(event.getRecurrenceObj());
+			
+			RRule rRule = new RRule(recur);
+			
+			eventProps.add(rRule);
+		}
+				
+		return iCal;
+	}
+
+	private static Recur _toRecur(Recurrence recurrence) {
+		Recur recur = null;
+		
+		int recurrenceType = recurrence.getFrequency();
+		
+		int interval = recurrence.getInterval();
+		
+		if (recurrenceType == Recurrence.DAILY) {
+			recur = new Recur(Recur.DAILY, -1);
+						
+			if (interval >= 0) {
+				recur.setInterval(interval);
+			}
+			else {
+				DayAndPosition[] byDay = recurrence.getByDay();
+
+				for (int i = 0; i < byDay.length; i++) {
+					WeekDay weekDay = _toWeekDay(byDay[i].getDayOfWeek());
+
+					recur.getDayList().add(weekDay);					
+				}
+			}
+		}
+		else if (recurrenceType == Recurrence.WEEKLY) {
+			recur = new Recur(Recur.WEEKLY, -1);
+
+			recur.setInterval(interval);
+			
+			DayAndPosition[] byDay = recurrence.getByDay();
+
+			for (int i = 0; i < byDay.length; i++) {
+				WeekDay weekDay = _toWeekDay(byDay[i].getDayOfWeek());
+
+				recur.getDayList().add(weekDay);					
+			}
+		}
+		else if (recurrenceType == Recurrence.MONTHLY) {
+			recur = new Recur(Recur.MONTHLY, -1);
+			
+			recur.setInterval(interval);
+			
+			int[] byMonthDay = recurrence.getByMonthDay();
+			
+			if (byMonthDay != null) {
+				Integer monthDay = new Integer(byMonthDay[0]);
+				
+				recur.getMonthDayList().add(monthDay);					
+			}
+			else {
+				DayAndPosition[] byDay = recurrence.getByDay();
+				
+				WeekDay weekDay = _toWeekDay(byDay[0].getDayOfWeek());
+
+				recur.getDayList().add(weekDay);
+				
+				Integer position = new Integer(byDay[0].getDayPosition());
+				
+				recur.getSetPosList().add(position);
+			}
+		}
+		else if (recurrenceType == Recurrence.YEARLY) {
+			recur = new Recur(Recur.YEARLY, -1);
+
+			recur.setInterval(interval);
+
+			int[] byMonthDay = recurrence.getByMonthDay();
+
+			Integer month = new Integer(recurrence.getByMonth()[0]);
+			
+			recur.getMonthList().add(month);					
+
+			if (byMonthDay != null) {
+				Integer monthDay = new Integer(byMonthDay[0]);
+				
+				recur.getMonthDayList().add(monthDay);					
+			}
+			else {
+				DayAndPosition[] byDay = recurrence.getByDay();
+				
+				WeekDay weekDay = _toWeekDay(byDay[0].getDayOfWeek());
+
+				recur.getDayList().add(weekDay);
+				
+				Integer position = new Integer(byDay[0].getDayPosition());
+				
+				recur.getSetPosList().add(position);
+			}
+		}
+
+		Calendar until = recurrence.getUntil();
+		
+		if (until != null) {
+			DateTime dateTime = 
+				new DateTime(until.getTime());
+
+			recur.setUntil(dateTime);
+		}
+		
+		return recur;
+	}
+	
+	private static WeekDay _toWeekDay(int dayOfWeek) {
+		WeekDay weekDay = null;
+		
+		if (dayOfWeek == Calendar.SUNDAY) {
+			weekDay = WeekDay.SU;
+		}
+		else if(dayOfWeek == Calendar.MONDAY){
+			weekDay = WeekDay.MO;
+		}
+		else if(dayOfWeek == Calendar.TUESDAY){
+			weekDay = WeekDay.TU;
+		}
+		else if(dayOfWeek == Calendar.WEDNESDAY){
+			weekDay = WeekDay.WE;
+		}
+		else if(dayOfWeek == Calendar.THURSDAY){
+			weekDay = WeekDay.TH;
+		}
+		else if(dayOfWeek == Calendar.FRIDAY){
+			weekDay = WeekDay.FR;
+		}
+		else if(dayOfWeek == Calendar.SATURDAY){
+			weekDay = WeekDay.SA;			
+		}
+		
+		return weekDay;
+	}
 	private static Log _log = LogFactory.getLog(CalEventLocalServiceImpl.class);
 
 }
