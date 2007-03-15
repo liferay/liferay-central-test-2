@@ -10548,6 +10548,135 @@
 			</resource-mapping>
 		</ejb>
 		<ejb>
+			<name>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</name>
+			<max-pool-size>40</max-pool-size>
+			<min-pool-size>20</min-pool-size>
+			<enable-freepool>false</enable-freepool>
+			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<pk-waittimeout-millis/>
+			<low-activity-interval>20</low-activity-interval>
+			<is-secure>false</is-secure>
+			<is-clustered>true</is-clustered>
+			<jndi-name>ejb/liferay/MBBanLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
+				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-ref-name>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_lock_service_ejb_LockServiceEJB</ejb-ref-name>
+				<ejb-link>com_liferay_lock_service_ejb_LockServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-ref-name>
+				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<resource-mapping>
+				<resource-name>jdbc/LiferayPool</resource-name>
+				<resource-type>javax.sql.DataSource</resource-type>
+				<resource-link>LiferayPool</resource-link>
+			</resource-mapping>
+			<resource-mapping>
+				<resource-name>mail/MailSession</resource-name>
+				<resource-type>javax.mail.Session</resource-type>
+				<resource-link>mail/MailSession</resource-link>
+			</resource-mapping>
+		</ejb>
+		<ejb>
+			<name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</name>
+			<max-pool-size>40</max-pool-size>
+			<min-pool-size>20</min-pool-size>
+			<enable-freepool>false</enable-freepool>
+			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<pk-waittimeout-millis/>
+			<low-activity-interval>20</low-activity-interval>
+			<is-secure>false</is-secure>
+			<is-clustered>true</is-clustered>
+			<jndi-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</jndi-name>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
+				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-ref-name>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_lock_service_ejb_LockServiceEJB</ejb-ref-name>
+				<ejb-link>com_liferay_lock_service_ejb_LockServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-ref-name>
+				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<resource-mapping>
+				<resource-name>jdbc/LiferayPool</resource-name>
+				<resource-type>javax.sql.DataSource</resource-type>
+				<resource-link>LiferayPool</resource-link>
+			</resource-mapping>
+			<resource-mapping>
+				<resource-name>mail/MailSession</resource-name>
+				<resource-type>javax.mail.Session</resource-type>
+				<resource-link>mail/MailSession</resource-link>
+			</resource-mapping>
+		</ejb>
+		<ejb>
 			<name>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
@@ -10582,6 +10711,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
@@ -10648,6 +10781,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
@@ -10729,6 +10866,10 @@
 				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -10803,6 +10944,10 @@
 				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -10866,6 +11011,10 @@
 				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
 			</ejb-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -10925,6 +11074,10 @@
 				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
 			</ejb-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -10983,6 +11136,10 @@
 				<ejb-ref-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-ref-name>
 				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
 			</ejb-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>

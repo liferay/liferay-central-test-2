@@ -916,6 +916,28 @@
 		<jndi-name>com_liferay_portlet_journal_service_ejb_JournalTemplateServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-name>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
+		<enable-call-by-reference>true</enable-call-by-reference>
+		<local-jndi-name>ejb/liferay/MBBanLocalServiceHome</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</ejb-name>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
+		<enable-call-by-reference>true</enable-call-by-reference>
+		<jndi-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-name>
 		<reference-descriptor>
 			<resource-description>

@@ -26,10 +26,13 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.util.Validator;
 
@@ -103,9 +106,19 @@ public class MBCategoryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		return permissionChecker.hasPermission(
-			category.getGroupId(), MBCategory.class.getName(),
-			category.getPrimaryKey().toString(), actionId);
+		long groupId = category.getGroupId();
+		
+		MBBan ban = MBBanLocalServiceUtil.getBan(
+			groupId, PrincipalThreadLocal.getName());
+		
+		if (ban != null) {
+			return false;
+		}
+		else {
+			return permissionChecker.hasPermission(
+				category.getGroupId(), MBCategory.class.getName(),
+				category.getPrimaryKey().toString(), actionId);
+		}
 	}
 
 }

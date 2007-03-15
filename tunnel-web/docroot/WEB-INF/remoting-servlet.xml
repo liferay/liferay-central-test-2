@@ -446,6 +446,18 @@
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalTemplateService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.journal.service.JournalTemplateService" />
 	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBBanService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.MBBanService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.MBBanService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBBanService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.MBBanService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.MBBanService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBBanService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.MBBanService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.MBBanService" />
+	</bean>
 	<bean name="/com_liferay_portlet_messageboards_service_spring_MBCategoryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBCategoryService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.MBCategoryService" />

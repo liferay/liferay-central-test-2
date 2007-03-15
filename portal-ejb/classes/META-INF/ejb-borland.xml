@@ -336,6 +336,14 @@
 			<bean-home-name>com_liferay_portlet_journal_service_ejb_JournalTemplateServiceEJB</bean-home-name>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/MBBanLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</bean-home-name>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-name>
 			<bean-local-home-name>ejb/liferay/MBCategoryLocalServiceHome</bean-local-home-name>
 		</session>

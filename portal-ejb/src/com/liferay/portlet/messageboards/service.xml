@@ -3,6 +3,38 @@
 
 <service-builder root-dir=".." package-path="com.liferay.portlet">
 	<portlet name="Message Boards" short-name="MB" />
+	<entity name="MBBan" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="banId" type="String" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="String" />
+		<column name="userId" type="String" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="banUserId" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_B" return-type="MBBan">
+			<finder-column name="groupId" />
+			<finder-column name="banUserId" />
+		</finder>
+	</entity>
 	<entity name="MBCategory" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

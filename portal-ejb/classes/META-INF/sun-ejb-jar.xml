@@ -834,6 +834,26 @@
 			</bean-pool>
 		</ejb>
 		<ejb>
+			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-name>
+			<jndi-name>ejb/liferay/MBBanLocalServiceHome</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
+			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
 			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-name>
 			<jndi-name>ejb/liferay/MBCategoryLocalServiceHome</jndi-name>
 			<bean-pool>

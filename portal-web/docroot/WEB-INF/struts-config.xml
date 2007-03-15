@@ -347,6 +347,8 @@
 			<forward name="portlet.calendar.error" path="portlet.calendar.error" />
 		</action>
 
+		<action path="/calendar/export" type="com.liferay.portlet.calendar.action.ExportAction" />
+
 		<action path="/calendar/view" forward="portlet.calendar.view" />
 
 		<action path="/calendar/view_event" type="com.liferay.portlet.calendar.action.EditEventAction">
@@ -926,6 +928,11 @@
 
 		<action path="/message_boards/edit" type="com.liferay.portlet.messageboards.action.EditPreferencesAction">
 			<forward name="portlet.message_boards.edit" path="portlet.message_boards.edit" />
+		</action>
+
+		<action path="/message_boards/ban_user" type="com.liferay.portlet.messageboards.action.BanUserAction">
+			<forward name="portlet.message_boards.edit_message" path="portlet.message_boards.edit_message" />
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 		</action>
 
 		<action path="/message_boards/edit_category" type="com.liferay.portlet.messageboards.action.EditCategoryAction">

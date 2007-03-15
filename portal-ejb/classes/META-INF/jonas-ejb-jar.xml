@@ -999,6 +999,30 @@
 		</jonas-resource>
 	</jonas-session>
 	<jonas-session>
+		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-name>
+		<jndi-name>ejb/liferay/MBBanLocalServiceHome</jndi-name>
+		<jonas-resource>
+			<res-ref-name>jdbc/LiferayPool</res-ref-name>
+			<jndi-name>jdbc/LiferayPool</jndi-name>
+		</jonas-resource>
+		<jonas-resource>
+			<res-ref-name>mail/MailSession</res-ref-name>
+			<jndi-name>mail/MailSession</jndi-name>
+		</jonas-resource>
+	</jonas-session>
+	<jonas-session>
+		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</ejb-name>
+		<jndi-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</jndi-name>
+		<jonas-resource>
+			<res-ref-name>jdbc/LiferayPool</res-ref-name>
+			<jndi-name>jdbc/LiferayPool</jndi-name>
+		</jonas-resource>
+		<jonas-resource>
+			<res-ref-name>mail/MailSession</res-ref-name>
+			<jndi-name>mail/MailSession</jndi-name>
+		</jonas-resource>
+	</jonas-session>
+	<jonas-session>
 		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-name>
 		<jndi-name>ejb/liferay/MBCategoryLocalServiceHome</jndi-name>
 		<jonas-resource>

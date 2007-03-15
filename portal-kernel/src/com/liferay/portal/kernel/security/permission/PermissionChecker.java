@@ -35,5 +35,4 @@ public interface PermissionChecker {
 
 	public boolean hasPermission(
 		long groupId, String name, String primKey, String actionId);
-
 }

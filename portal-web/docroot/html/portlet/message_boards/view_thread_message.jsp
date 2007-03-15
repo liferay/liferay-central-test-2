@@ -37,8 +37,10 @@
 						<span style="font-size: xx-small;">
 
 							<%
+							User user2 = null;
+
 							try {
-								User user2 = UserLocalServiceUtil.getUserById(message.getUserId());
+								user2 = UserLocalServiceUtil.getUserById(message.getUserId());
 								Organization organization = user2.getOrganization();
 								int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId.longValue(), message.getUserId()).getMessageCount();
 								String rank = MBUtil.getUserRank(portletSetup, LocaleUtil.toLanguageId(locale), posts);
@@ -69,7 +71,33 @@
 							catch (NoSuchUserException nsue) {
 							}
 							%>
-
+							
+							<c:if test="<%= PortletPermission.contains(permissionChecker, themeDisplay.getLayout().getPlid(), ActionKeys.BAN_USER) %>">
+								<hr>
+								<%
+								MBBan ban = MBBanLocalServiceUtil.getBan(themeDisplay.getLayout().getPlid(), user2.getUserId());	
+								%>			
+								<c:choose>
+									<c:when test="<%= ban == null %>">
+										<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banURL">
+											<portlet:param name="struts_action" value="/message_boards/ban_user" />
+											<portlet:param name="cmd" value="ban" />									
+											<portlet:param name="redirect" value="<%= currentURL %>" />
+											<portlet:param name="ban_user_id" value="<%= user2.getUserId() %>" />
+										</portlet:actionURL>
+										<a href="<%= banURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImage() %>/message_boards/ban_user.png"></a>&nbsp;<a href="<%= banURL.toString() %>"><%= LanguageUtil.get(pageContext, "ban-this-user") %></a>
+									</c:when>
+									<c:otherwise>
+										<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banURL">
+											<portlet:param name="struts_action" value="/message_boards/ban_user" />
+											<portlet:param name="cmd" value="unban" />									
+											<portlet:param name="redirect" value="<%= currentURL %>" />
+											<portlet:param name="ban_id" value="<%= ban.getBanId() %>" />
+										</portlet:actionURL>
+										<a href="<%= banURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImage() %>/message_boards/unban_user.png"></a>&nbsp;<a href="<%= banURL.toString() %>"><%= LanguageUtil.get(pageContext, "unban-this-user") %></a>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
 						</span>
 					</c:otherwise>
 				</c:choose>

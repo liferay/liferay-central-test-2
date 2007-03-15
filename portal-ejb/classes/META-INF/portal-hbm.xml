@@ -730,6 +730,19 @@
 		<property name="smallImage" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="smallImageURL" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
+	<class name="com.liferay.portlet.messageboards.model.impl.MBBanImpl" table="MBBan">
+		<cache usage="read-write" />
+		<id name="banId" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="banUserId" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBCategoryImpl" table="MBCategory">
 		<cache usage="read-write" />
 		<id name="categoryId" type="java.lang.String">

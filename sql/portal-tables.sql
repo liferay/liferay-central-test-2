@@ -446,6 +446,17 @@ create table ListType (
 	type_ VARCHAR(75) null
 );
 
+create table MBBan (
+	banId VARCHAR(75) not null primary key,
+	groupId LONG not null,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	banUserId VARCHAR(75) null
+);
+
 create table MBStatsUser (
 	groupId LONG not null,
 	userId VARCHAR(75) not null,

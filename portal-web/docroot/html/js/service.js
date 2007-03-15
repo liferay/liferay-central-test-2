@@ -1558,6 +1558,26 @@ Liferay.Service.MB = {
 	servicePackage: "com.liferay.portlet.messageboards.service.http."
 };
 
+Liferay.Service.MB.MBBan = {
+	serviceClassName: Liferay.Service.MB.servicePackage + "MBBan" + Liferay.Service.classNameSuffix,
+
+	addBan: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addBan";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	},
+
+	deleteBan: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteBan";
+
+		_$J.getJSON(Liferay.Service.url, params, callback);
+	}
+};
+
 Liferay.Service.MB.MBCategory = {
 	serviceClassName: Liferay.Service.MB.servicePackage + "MBCategory" + Liferay.Service.classNameSuffix,
 

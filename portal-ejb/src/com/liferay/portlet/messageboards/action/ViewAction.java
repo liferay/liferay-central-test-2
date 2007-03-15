@@ -22,9 +22,15 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.messageboards.BanUserException;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
+import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.PortletConfig;
@@ -52,7 +58,8 @@ public class ViewAction extends PortletAction {
 			ActionUtil.getCategory(req);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchCategoryException ||
+			if (e instanceof BanUserException ||
+				e instanceof NoSuchCategoryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

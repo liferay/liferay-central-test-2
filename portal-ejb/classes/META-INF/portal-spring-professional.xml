@@ -2242,6 +2242,57 @@
 			<ref bean="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalService.professional" class="com.liferay.portlet.messageboards.service.impl.MBBanLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBBanLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBBanLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBBanService.professional" class="com.liferay.portlet.messageboards.service.impl.MBBanServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.MBBanService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBBanService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBBanServiceFactory" class="com.liferay.portlet.messageboards.service.MBBanServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBBanService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBBanUtil" class="com.liferay.portlet.messageboards.service.persistence.MBBanUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryLocalService.professional" class="com.liferay.portlet.messageboards.service.impl.MBCategoryLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

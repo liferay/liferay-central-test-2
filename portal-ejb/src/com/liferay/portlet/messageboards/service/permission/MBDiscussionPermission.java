@@ -26,6 +26,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portlet.messageboards.model.MBBan;
+import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 
 /**
  * <a href="MBDiscussionPermission.java.html"><b><i>View Source</i></b></a>
@@ -51,9 +54,17 @@ public class MBDiscussionPermission {
 			PermissionChecker permissionChecker, long groupId,
 			String className, String classPK, String actionId)
 		throws PortalException, SystemException {
-
-		return permissionChecker.hasPermission(
-			groupId, className, classPK, actionId);
+		
+		MBBan ban = MBBanLocalServiceUtil.getBan(
+			groupId, PrincipalThreadLocal.getName());
+		
+		if (ban != null) {
+			return false;
+		}
+		else {
+			return permissionChecker.hasPermission(
+				groupId, className, classPK, actionId);
+		}
 	}
 
 }

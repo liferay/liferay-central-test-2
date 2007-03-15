@@ -5,6 +5,7 @@
 		<portlet-name>19</portlet-name>
 		<supports>
 			<action-key>ADD_CATEGORY</action-key>
+			<action-key>BAN_USER</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>

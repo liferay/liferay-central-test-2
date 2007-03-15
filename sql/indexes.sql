@@ -85,6 +85,9 @@ create index IX_A40B8BEC on LayoutSet (groupId);
 
 create index IX_2932DD37 on ListType (type_);
 
+create index IX_5C3FF12A on MBBan (groupId);
+create index IX_8ABC4E3B on MBBan (groupId, banUserId);
+
 create index IX_BC735DCF on MBCategory (companyId);
 create index IX_BB870C11 on MBCategory (groupId);
 create index IX_ED292508 on MBCategory (groupId, parentCategoryId);

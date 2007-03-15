@@ -16833,6 +16833,193 @@
 			</resource-ref>
 		</session>
 		<session>
+			<display-name>MBBanLocalServiceEJB</display-name>
+			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-name>
+			<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+			<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+			<ejb-class>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJBImpl</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.counter.service.ejb.CounterServiceHome</home>
+				<remote>com.liferay.counter.service.ejb.CounterServiceEJB</remote>
+				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.documentlibrary.service.ejb.DLServiceHome</home>
+				<remote>com.liferay.documentlibrary.service.ejb.DLServiceEJB</remote>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_lock_service_ejb_LockServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.lock.service.ejb.LockServiceHome</home>
+				<remote>com.liferay.lock.service.ejb.LockServiceEJB</remote>
+				<ejb-link>com_liferay_lock_service_ejb_LockServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.mail.service.ejb.MailServiceHome</home>
+				<remote>com.liferay.mail.service.ejb.MailServiceEJB</remote>
+				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<resource-ref>
+				<res-ref-name>jdbc/LiferayPool</res-ref-name>
+				<res-type>javax.sql.DataSource</res-type>
+				<res-auth>Container</res-auth>
+				<res-sharing-scope>Shareable</res-sharing-scope>
+			</resource-ref>
+			<resource-ref>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<res-type>javax.mail.Session</res-type>
+				<res-auth>Container</res-auth>
+			</resource-ref>
+		</session>
+		<session>
+			<display-name>MBBanServiceEJB</display-name>
+			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</ejb-name>
+			<home>com.liferay.portlet.messageboards.service.ejb.MBBanServiceHome</home>
+			<remote>com.liferay.portlet.messageboards.service.ejb.MBBanServiceEJB</remote>
+			<ejb-class>com.liferay.portlet.messageboards.service.ejb.MBBanServiceEJBImpl</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.counter.service.ejb.CounterServiceHome</home>
+				<remote>com.liferay.counter.service.ejb.CounterServiceEJB</remote>
+				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.documentlibrary.service.ejb.DLServiceHome</home>
+				<remote>com.liferay.documentlibrary.service.ejb.DLServiceEJB</remote>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_lock_service_ejb_LockServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.lock.service.ejb.LockServiceHome</home>
+				<remote>com.liferay.lock.service.ejb.LockServiceEJB</remote>
+				<ejb-link>com_liferay_lock_service_ejb_LockServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.mail.service.ejb.MailServiceHome</home>
+				<remote>com.liferay.mail.service.ejb.MailServiceEJB</remote>
+				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<resource-ref>
+				<res-ref-name>jdbc/LiferayPool</res-ref-name>
+				<res-type>javax.sql.DataSource</res-type>
+				<res-auth>Container</res-auth>
+				<res-sharing-scope>Shareable</res-sharing-scope>
+			</resource-ref>
+			<resource-ref>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<res-type>javax.mail.Session</res-type>
+				<res-auth>Container</res-auth>
+			</resource-ref>
+		</session>
+		<session>
 			<display-name>MBCategoryLocalServiceEJB</display-name>
 			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-name>
 			<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
@@ -16881,6 +17068,13 @@
 				<local-home>com.liferay.portal.service.ejb.ResourceLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.ResourceLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
@@ -16978,6 +17172,13 @@
 				<local-home>com.liferay.portal.service.ejb.ResourceLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.ResourceLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
@@ -17098,6 +17299,13 @@
 				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
@@ -17209,6 +17417,13 @@
 				<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
@@ -17299,6 +17514,13 @@
 				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
 			</ejb-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
@@ -17382,6 +17604,13 @@
 				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
 			</ejb-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
@@ -17464,6 +17693,13 @@
 				<remote>com.liferay.mail.service.ejb.MailServiceEJB</remote>
 				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
 			</ejb-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
@@ -21553,6 +21789,14 @@
 			</method>
 			<method>
 				<ejb-name>com_liferay_portlet_journal_service_ejb_JournalTemplateServiceEJB</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<method>
+				<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<method>
+				<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
 			<method>

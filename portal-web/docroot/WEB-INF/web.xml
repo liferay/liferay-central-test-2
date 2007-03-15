@@ -347,6 +347,13 @@
 		<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.messageboards.service.ejb.MBBanServiceHome</home>
+		<remote>com.liferay.portlet.messageboards.service.ejb.MBBanServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
 		<ejb-ref-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryServiceEJB</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<home>com.liferay.portlet.messageboards.service.ejb.MBCategoryServiceHome</home>
@@ -856,6 +863,13 @@
 		<local-home>com.liferay.portlet.journal.service.ejb.JournalTemplateLocalServiceHome</local-home>
 		<local>com.liferay.portlet.journal.service.ejb.JournalTemplateLocalServiceEJB</local>
 		<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+		<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>

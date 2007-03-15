@@ -707,6 +707,16 @@
 		<field name="smallImage" type="boolean" />
 		<field name="smallImageURL" type="String" />
 	</model>
+	<model name="com.liferay.portlet.messageboards.model.MBBan">
+		<field name="banId" type="String" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="String" />
+		<field name="userId" type="String" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="banUserId" type="String" />
+	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBCategory">
 		<field name="categoryId" type="String" />
 		<field name="groupId" type="long" />
