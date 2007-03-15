@@ -272,17 +272,17 @@ sm.append("style=\"");
 
 if (freeformPortlet) {
 	Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
-	
+
 	sm.append("height: ");
 	sm.append(GetterUtil.getString(freeformStyleProps.getProperty("height"), "300px"));
 	sm.append(";");
 	sm.append("overflow: auto;");
 }
-	
+
 if (portletDisplay.isStateMin()) {
 	sm.append("display: none;");
 }
-	
+
 sm.append("\"");
 
 containerStyles = sm.toString();

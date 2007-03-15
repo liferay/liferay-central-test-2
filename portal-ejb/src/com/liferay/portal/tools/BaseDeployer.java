@@ -24,6 +24,7 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.util.Constants;
@@ -345,7 +346,8 @@ public class BaseDeployer {
 		if (appServerType.startsWith("jboss")) {
 			deployDir = jbossPrefix + deployDir;
 		}
-		else if (appServerType.equals("jetty") || appServerType.equals("oc4j") ||
+		else if (appServerType.equals("jetty") ||
+				 appServerType.equals("oc4j") ||
 				 appServerType.equals("orion") ||
 				 appServerType.equals("resin") ||
 				 appServerType.equals("tomcat")) {
@@ -360,12 +362,12 @@ public class BaseDeployer {
 		File deployDirFile = new File(deployDir);
 
 		try {
-			PluginPackage previousPluginPackage = _readPluginPackage(
-				deployDirFile);
+			PluginPackage previousPluginPackage =
+				_readPluginPackage(deployDirFile);
 
 			if (previousPluginPackage != null) {
 				System.out.println(
-					"Updating " + pluginPackage.getName() + "from version " +
+					"Updating " + pluginPackage.getName() + " from version " +
 						previousPluginPackage.getVersion() + " to version " +
 							pluginPackage.getVersion());
 
@@ -445,8 +447,11 @@ public class BaseDeployer {
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
-		String extraContent =
-			"<display-name>" + displayName + "</display-name>";
+		StringMaker sm = new StringMaker();
+
+		sm.append("<display-name>");
+		sm.append(displayName);
+		sm.append("</display-name>");
 
 		boolean hasTaglib = false;
 
@@ -461,74 +466,72 @@ public class BaseDeployer {
 		}
 
 		if (hasTaglib && (webXmlVersion > 2.3)) {
-			extraContent += "<jsp-config>";
+			sm.append("<jsp-config>");
 		}
 
 		if (Validator.isNotNull(portletTaglibDTD)) {
-			extraContent +=
-				"<taglib>" +
-				"<taglib-uri>http://java.sun.com/portlet</taglib-uri>" +
-				"<taglib-location>" +
-				"/WEB-INF/tld/liferay-portlet.tld" +
-				"</taglib-location>" +
-				"</taglib>";
+			sm.append("<taglib>");
+			sm.append("<taglib-uri>http://java.sun.com/portlet</taglib-uri>");
+			sm.append("<taglib-location>");
+			sm.append("/WEB-INF/tld/liferay-portlet.tld");
+			sm.append("</taglib-location>");
+			sm.append("</taglib>");
 		}
 
 		if (Validator.isNotNull(portletExtTaglibDTD)) {
-			extraContent +=
-				"<taglib>" +
-				"<taglib-uri>http://liferay.com/tld/portlet</taglib-uri>" +
-				"<taglib-location>" +
-				"/WEB-INF/tld/liferay-portlet-ext.tld" +
-				"</taglib-location>" +
-				"</taglib>";
+			sm.append("<taglib>");
+			sm.append("<taglib-uri>");
+			sm.append("http://liferay.com/tld/portlet");
+			sm.append("</taglib-uri>");
+			sm.append("<taglib-location>");
+			sm.append("/WEB-INF/tld/liferay-portlet-ext.tld");
+			sm.append("</taglib-location>");
+			sm.append("</taglib>");
 		}
 
 		if (Validator.isNotNull(securityTaglibDTD)) {
-			extraContent +=
-				"<taglib>" +
-				"<taglib-uri>http://liferay.com/tld/security</taglib-uri>" +
-				"<taglib-location>" +
-				"/WEB-INF/tld/liferay-security.tld" +
-				"</taglib-location>" +
-				"</taglib>";
+			sm.append("<taglib>");
+			sm.append("<taglib-uri>");
+			sm.append("http://liferay.com/tld/security");
+			sm.append("</taglib-uri>");
+			sm.append("<taglib-location>");
+			sm.append("/WEB-INF/tld/liferay-security.tld");
+			sm.append("</taglib-location>");
+			sm.append("</taglib>");
 		}
 
 		if (Validator.isNotNull(themeTaglibDTD)) {
-			extraContent +=
-				"<taglib>" +
-				"<taglib-uri>http://liferay.com/tld/theme</taglib-uri>" +
-				"<taglib-location>" +
-				"/WEB-INF/tld/liferay-theme.tld" +
-				"</taglib-location>" +
-				"</taglib>";
+			sm.append("<taglib>");
+			sm.append("<taglib-uri>http://liferay.com/tld/theme</taglib-uri>");
+			sm.append("<taglib-location>");
+			sm.append("/WEB-INF/tld/liferay-theme.tld");
+			sm.append("</taglib-location>");
+			sm.append("</taglib>");
 		}
 
 		if (Validator.isNotNull(uiTaglibDTD)) {
-			extraContent +=
-				"<taglib>" +
-				"<taglib-uri>http://liferay.com/tld/ui</taglib-uri>" +
-				"<taglib-location>" +
-				"/WEB-INF/tld/liferay-ui.tld" +
-				"</taglib-location>" +
-				"</taglib>";
+			sm.append("<taglib>");
+			sm.append("<taglib-uri>http://liferay.com/tld/ui</taglib-uri>");
+			sm.append("<taglib-location>");
+			sm.append("/WEB-INF/tld/liferay-ui.tld");
+			sm.append("</taglib-location>");
+			sm.append("</taglib>");
 		}
 
 		if (Validator.isNotNull(utilTaglibDTD)) {
-			extraContent +=
-				"<taglib>" +
-				"<taglib-uri>http://liferay.com/tld/util</taglib-uri>" +
-				"<taglib-location>" +
-				"/WEB-INF/tld/liferay-util.tld" +
-				"</taglib-location>" +
-				"</taglib>";
+			sm.append("<taglib>");
+			sm.append("<taglib-uri>http://liferay.com/tld/util</taglib-uri>");
+			sm.append("<taglib-location>");
+			sm.append("/WEB-INF/tld/liferay-util.tld");
+			sm.append("</taglib-location>");
+			sm.append("</taglib>");
 		}
 
 		if (hasTaglib && (webXmlVersion > 2.3)) {
-			extraContent += "</jsp-config>";
+			sm.append("</jsp-config>");
 		}
 
-		return extraContent;
+		return sm.toString();
 	}
 
 	protected void updateGeronimoWebXML(File srcFile, String displayName)
@@ -613,10 +616,6 @@ public class BaseDeployer {
 		// Replace old package names
 
 		newContent = StringUtil.replace(
-			newContent, "com.liferay.portal.servlet.",
-			"com.liferay.portal.kernel.servlet.");
-
-		newContent = StringUtil.replace(
 			newContent, "com.liferay.portal.shared.",
 			"com.liferay.portal.kernel.");
 
@@ -629,11 +628,14 @@ public class BaseDeployer {
 	}
 
 	private PluginPackage _readPluginPackage(File file) {
+		if (!file.exists()) {
+			return null;
+		}
+
 		InputStream is = null;
 		ZipFile zipFile = null;
 
 		try {
-
 			if (file.isDirectory()) {
 				File pluginPackageXMLFile = new File(
 					file.getPath() + "/WEB-INF/liferay-plugin-package.xml");

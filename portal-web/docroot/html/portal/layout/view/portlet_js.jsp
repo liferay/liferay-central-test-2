@@ -163,19 +163,19 @@ function minimizePortlet(plid, portletId, restore, doAsUserId) {
 	else {
 		var portlet = jQuery('#p_p_id_' + portletId + '_');
 		var portletContentContainer = portlet.find('.portlet-content-container');
-		
+
 		var buttonsEl = jQuery("#p_p_body_" + portletId + "_min_buttons");
-		
+
 		var html = buttonsEl.html();
-		
-		if (restore) { 
+
+		if (restore) {
 			portletContentContainer.slideDown('fast');
-			
+
 			html = html.replace(", true", ", false");
 			html = html.replace("restore.png", "minimize.png");
 			html = html.replace("<%= LanguageUtil.get(pageContext, "restore") %>", "<%= LanguageUtil.get(pageContext, "minimize") %>");
 
-			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");			
+			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");
 		}
 		else {
 			portletContentContainer.slideUp('fast');
@@ -186,7 +186,7 @@ function minimizePortlet(plid, portletId, restore, doAsUserId) {
 
 			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");
 		}
-		
+
 		buttonsEl.html(html);
 	}
 }

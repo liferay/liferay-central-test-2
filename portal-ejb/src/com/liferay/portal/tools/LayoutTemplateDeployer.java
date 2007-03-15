@@ -22,6 +22,8 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 import java.io.File;
 
 import java.util.ArrayList;
@@ -62,17 +64,21 @@ public class LayoutTemplateDeployer extends BaseDeployer {
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
+		StringMaker sm = new StringMaker();
+
 		String extraContent = super.getExtraContent(
 			webXmlVersion, srcFile, displayName);
 
-		extraContent +=
-			"<listener>" +
-			"<listener-class>" +
-			"com.liferay.portal.kernel.servlet.LayoutTemplateContextListener" +
-			"</listener-class>" +
-			"</listener>";
+		sm.append(extraContent);
 
-		return extraContent;
+		sm.append("<listener>");
+		sm.append("<listener-class>");
+		sm.append("com.liferay.portal.kernel.servlet.");
+		sm.append("LayoutTemplateContextListener");
+		sm.append("</listener-class>");
+		sm.append("</listener>");
+
+		return sm.toString();
 	}
 
 }
