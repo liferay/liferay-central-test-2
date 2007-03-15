@@ -21,7 +21,7 @@ Commons FileUpload 1.1dev (July 15, 2005, 1.1 makes all file names lower case)
 Commons HttpClient 3.0
 Commons Id 0.1 (January 12, 2007, patched config loading)
 Commons IO 1.0
-Commons Lang 2.1
+Commons Lang 2.3
 Commons Logging 1.1
 Commons Pool 1.3
 Commons Validator 1.1.4
