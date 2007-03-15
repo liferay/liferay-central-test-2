@@ -42,8 +42,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class ThemeAutoDeployer
-	extends LayoutTemplateDeployer implements AutoDeployer {
+public class ThemeAutoDeployer extends ThemeDeployer implements AutoDeployer {
 
 	public ThemeAutoDeployer() {
 		try {
