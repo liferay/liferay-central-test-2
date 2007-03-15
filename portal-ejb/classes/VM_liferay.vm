@@ -7,4 +7,4 @@
 #end
 
 #macro(language $lang_key)
-$languageUtil.get($pageContext, $lang_key)#end
+$languageUtil.get($user, $lang_key)#end

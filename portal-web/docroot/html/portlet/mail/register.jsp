@@ -82,7 +82,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td colspan="5"><img border="0" height="8" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
+		<td colspan="5"><img border="0" height="8" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1"></td>
 	</tr>
 	</table>
 </c:if>
@@ -94,7 +94,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td colspan="5"><img border="0" height="8" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
+		<td colspan="5"><img border="0" height="8" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1"></td>
 	</tr>
 </c:if>
 --%>

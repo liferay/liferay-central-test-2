@@ -38,8 +38,8 @@
 		getPathMain : function() {
 			return "<%= themeDisplay.getPathMain() %>";
 		},
-		getPathThemeImage : function() {
-			return "<%= themeDisplay.getPathThemeImage() %>";
+		getPathThemeImages : function() {
+			return "<%= themeDisplay.getPathThemeImages() %>";
 		},
 		getPathThemeRoot : function() {
 			return "<%= themeDisplay.getPathThemeRoot() %>";

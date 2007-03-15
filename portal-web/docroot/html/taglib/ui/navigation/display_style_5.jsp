@@ -46,7 +46,7 @@ _buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sm);
 		NavFlyout.initialize("p_p_id<portlet:namespace />");
 	}
 
-	NavFlyout.initToggle("p_p_id<portlet:namespace />", "<%= themeDisplay.getPathThemeImage() %>/arrows/02_plus.png");
+	NavFlyout.initToggle("p_p_id<portlet:namespace />", "<%= themeDisplay.getPathThemeImages() %>/arrows/02_plus.png");
 </script>
 
 <%!

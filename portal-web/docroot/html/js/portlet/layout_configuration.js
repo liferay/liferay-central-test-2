@@ -11,8 +11,8 @@ var LayoutConfiguration = {
 	init : function () {
 		var arrow1 = new Image();
 		var arrow2 = new Image();
-		arrow1.src = themeDisplay.getPathThemeImage() + "/arrows/01_down.png";
-		arrow2.src = themeDisplay.getPathThemeImage() + "/arrows/01_right.png";
+		arrow1.src = themeDisplay.getPathThemeImages() + "/arrows/01_down.png";
+		arrow2.src = themeDisplay.getPathThemeImages() + "/arrows/01_right.png";
 		
 		var menu = document.getElementById("portal_add_content");
 		LayoutConfiguration.menu = menu;
@@ -148,7 +148,7 @@ var LayoutConfiguration = {
 		var data = parent.rows[1].cells[0];
 		var pane = _$J(".layout_configuration_category_pane:first", data).get(0);
 		var image = obj.getElementsByTagName("img")[0];
-		var imagePath = themeDisplay.getPathThemeImage();
+		var imagePath = themeDisplay.getPathThemeImages();
 		
 		if (display) {
 			pane.style.display = display;

@@ -100,7 +100,7 @@ for (int i = 0; i < locales.length; i++) {
 			for (int i = 0; i < locales.length; i++) {
 			%>
 
-				document.<%= formName %>.<%= name %>.options[<%= i %>].style.backgroundImage = "url(<%= themeDisplay.getPathThemeImage() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png)";
+				document.<%= formName %>.<%= name %>.options[<%= i %>].style.backgroundImage = "url(<%= themeDisplay.getPathThemeImages() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png)";
 				document.<%= formName %>.<%= name %>.options[<%= i %>].style.backgroundRepeat = "no-repeat";
 				document.<%= formName %>.<%= name %>.options[<%= i %>].style.backgroundPosition = "center left";
 
@@ -142,7 +142,7 @@ for (int i = 0; i < locales.length; i++) {
 				</c:when>
 				<c:otherwise>
 					<a href="<%= formAction %>&<%= name %>=<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>">
-					<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png" alt="<%= locales[i].getDisplayName(locales[i]) %>" title="<%= locales[i].getDisplayName(locales[i]) %>"></a>
+					<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png" alt="<%= locales[i].getDisplayName(locales[i]) %>" title="<%= locales[i].getDisplayName(locales[i]) %>"></a>
 				</c:otherwise>
 			</c:choose>
 

@@ -30,8 +30,8 @@ Code:
 
 <pre>&lt;liferay-ui:toggle
     id="toggle_id_sample_ui_taglibs_test"
-    onImage='&lt;%= themeDisplay.getPathThemeImage() + "/arrows/01_down.gif" %&gt;'
-    offImage='&lt;%= themeDisplay.getPathThemeImage() + "/arrows/01_right.gif" %&gt;'
+    onImage='&lt;%= themeDisplay.getPathThemeImages() + "/arrows/01_down.gif" %&gt;'
+    offImage='&lt;%= themeDisplay.getPathThemeImages() + "/arrows/01_right.gif" %&gt;'
     defaultOn="true"
 /&gt;</pre>
 
@@ -44,8 +44,8 @@ Result:
 <div>
 	<liferay-ui:toggle
 		id="toggle_id_sample_ui_taglibs_test"
-		onImage='<%= themeDisplay.getPathThemeImage() + "/arrows/01_down.gif" %>'
-		offImage='<%= themeDisplay.getPathThemeImage() + "/arrows/01_right.gif" %>'
+		onImage='<%= themeDisplay.getPathThemeImages() + "/arrows/01_down.gif" %>'
+		offImage='<%= themeDisplay.getPathThemeImages() + "/arrows/01_right.gif" %>'
 		defaultOn="true"
 	/>
 </div>

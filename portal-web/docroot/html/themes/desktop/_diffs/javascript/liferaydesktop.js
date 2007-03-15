@@ -34,11 +34,11 @@ var LiferayDesktop = {
 		title.innerHTML = titleText;
 		
 		if (jQuery.browser.msie && jQuery.browser.version.number() < 7) {
-			icon.src = themeDisplay.getPathThemeImage() + "/spacer.png";
-			icon.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + themeDisplay.getPathThemeImage() + "/custom/application.png', sizingMethod='scale')"
+			icon.src = themeDisplay.getPathThemeImages() + "/spacer.png";
+			icon.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + themeDisplay.getPathThemeImages() + "/custom/application.png', sizingMethod='scale')"
 		}
 		else {
-			icon.src = themeDisplay.getPathThemeImage() + "/custom/application.png";
+			icon.src = themeDisplay.getPathThemeImages() + "/custom/application.png";
 		}
 		icon.alt = titleText;
 		icon.onmousemove = function(event) {

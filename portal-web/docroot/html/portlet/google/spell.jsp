@@ -48,7 +48,7 @@ String suggestion = (String)request.getAttribute(WebKeys.GOOGLE_SPELLING_SUGGEST
 	<option selected value="spell"><%= LanguageUtil.get(pageContext, "spell") %></option>
 </select>
 
-<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.png" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
+<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
 
 </form>
 

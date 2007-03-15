@@ -27,20 +27,20 @@
 <script type="text/javascript">
 	var layoutsIcons = new Array();
 
-	layoutsIcons[0] = "<%= themeDisplay.getPathThemeImage() %>/trees/root.png";
-	layoutsIcons[1] = "<%= themeDisplay.getPathThemeImage() %>/trees/spacer.png";
-	layoutsIcons[2] = "<%= themeDisplay.getPathThemeImage() %>/trees/line.png";
-	layoutsIcons[3] = "<%= themeDisplay.getPathThemeImage() %>/trees/join.png";
-	layoutsIcons[4] = "<%= themeDisplay.getPathThemeImage() %>/trees/join_bottom.png";
-	layoutsIcons[5] = "<%= themeDisplay.getPathThemeImage() %>/trees/minus.png";
-	layoutsIcons[6] = "<%= themeDisplay.getPathThemeImage() %>/trees/minus_bottom.png";
-	layoutsIcons[7] = "<%= themeDisplay.getPathThemeImage() %>/trees/plus.png";
-	layoutsIcons[8] = "<%= themeDisplay.getPathThemeImage() %>/trees/plus_bottom.png";
-	//layoutsIcons[9] = "<%= themeDisplay.getPathThemeImage() %>/trees/folder.png";
-	//layoutsIcons[10] = "<%= themeDisplay.getPathThemeImage() %>/trees/folder_open.png";
-	layoutsIcons[9] = "<%= themeDisplay.getPathThemeImage() %>/trees/page.png";
-	layoutsIcons[10] = "<%= themeDisplay.getPathThemeImage() %>/trees/page.png";
-	layoutsIcons[11] = "<%= themeDisplay.getPathThemeImage() %>/trees/page.png";
+	layoutsIcons[0] = "<%= themeDisplay.getPathThemeImages() %>/trees/root.png";
+	layoutsIcons[1] = "<%= themeDisplay.getPathThemeImages() %>/trees/spacer.png";
+	layoutsIcons[2] = "<%= themeDisplay.getPathThemeImages() %>/trees/line.png";
+	layoutsIcons[3] = "<%= themeDisplay.getPathThemeImages() %>/trees/join.png";
+	layoutsIcons[4] = "<%= themeDisplay.getPathThemeImages() %>/trees/join_bottom.png";
+	layoutsIcons[5] = "<%= themeDisplay.getPathThemeImages() %>/trees/minus.png";
+	layoutsIcons[6] = "<%= themeDisplay.getPathThemeImages() %>/trees/minus_bottom.png";
+	layoutsIcons[7] = "<%= themeDisplay.getPathThemeImages() %>/trees/plus.png";
+	layoutsIcons[8] = "<%= themeDisplay.getPathThemeImages() %>/trees/plus_bottom.png";
+	//layoutsIcons[9] = "<%= themeDisplay.getPathThemeImages() %>/trees/folder.png";
+	//layoutsIcons[10] = "<%= themeDisplay.getPathThemeImages() %>/trees/folder_open.png";
+	layoutsIcons[9] = "<%= themeDisplay.getPathThemeImages() %>/trees/page.png";
+	layoutsIcons[10] = "<%= themeDisplay.getPathThemeImages() %>/trees/page.png";
+	layoutsIcons[11] = "<%= themeDisplay.getPathThemeImages() %>/trees/page.png";
 
 	// id | parentId | ls | obj id | name | img | href
 

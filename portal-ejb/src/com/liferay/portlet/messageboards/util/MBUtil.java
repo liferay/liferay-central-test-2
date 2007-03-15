@@ -376,7 +376,7 @@ public class MBUtil {
 				if (value == priorityValue) {
 					if (!priorityImage.startsWith(Http.HTTP)) {
 						priorityImage =
-							themeDisplay.getPathThemeImage() + priorityImage;
+							themeDisplay.getPathThemeImages() + priorityImage;
 					}
 
 					return new String[] {priorityName, priorityImage};

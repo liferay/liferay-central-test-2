@@ -87,7 +87,7 @@
 	<td>
 		<input type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />showPrevious();"> <input type="button" value="<bean:message key="play" />" onClick="<portlet:namespace />play();"> <input type="button" value="<bean:message key="pause" />" onClick="<portlet:namespace />pause();"> <input type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />showNext();">
 	</td>
-	<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="100"></td>
+	<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="100"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "speed") %>
 	</td>

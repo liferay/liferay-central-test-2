@@ -504,6 +504,13 @@ public class ThemeLocalUtil {
 
 			themeContextReplace.addValue("templates-path", templatesPath);
 
+			String cssPath = GetterUtil.getString(
+				theme.elementText("css-path"), themeModel.getCssPath());
+
+			cssPath = themeContextReplace.replace(cssPath);
+
+			themeContextReplace.addValue("css-path", cssPath);
+
 			String imagesPath = GetterUtil.getString(
 				theme.elementText("images-path"),
 				themeModel.getImagesPath());
@@ -512,6 +519,14 @@ public class ThemeLocalUtil {
 
 			themeContextReplace.addValue("images-path", imagesPath);
 
+			String javaScriptPath = GetterUtil.getString(
+				theme.elementText("javascript-path"),
+				themeModel.getJavaScriptPath());
+
+			javaScriptPath = themeContextReplace.replace(javaScriptPath);
+
+			themeContextReplace.addValue("javascript-path", javaScriptPath);
+
 			String templateExtension = GetterUtil.getString(
 				theme.elementText("template-extension"),
 				themeModel.getTemplateExtension());
@@ -519,7 +534,9 @@ public class ThemeLocalUtil {
 			themeModel.setName(name);
 			themeModel.setRootPath(rootPath);
 			themeModel.setTemplatesPath(templatesPath);
+			themeModel.setCssPath(cssPath);
 			themeModel.setImagesPath(imagesPath);
+			themeModel.setJavaScriptPath(javaScriptPath);
 			themeModel.setTemplateExtension(templateExtension);
 
 			Element settingsEl = theme.element("settings");

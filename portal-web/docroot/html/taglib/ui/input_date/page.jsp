@@ -243,7 +243,7 @@ else {
 	</c:otherwise>
 </c:choose>
 
-<img align="absmiddle" border="0" hspace="0" id="<%= imageInputId %>" name="<%= imageInputId %>" src="<%= themeDisplay.getPathThemeImage() %>/common/calendar.png"" vspace="0"
+<img align="absmiddle" border="0" hspace="0" id="<%= imageInputId %>" name="<%= imageInputId %>" src="<%= themeDisplay.getPathThemeImages() %>/common/calendar.png"" vspace="0"
 	onClick="
 		<c:if test="<%= !disabled %>">
 			<%= randomNamespace %>jsOnClick('<%= randomNamespace %>jsCalendarObj');

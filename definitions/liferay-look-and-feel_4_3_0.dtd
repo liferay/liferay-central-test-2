@@ -71,8 +71,9 @@ See the comments in the company-id element.
 <!--
 The theme element contains the declarative data of a theme.
 -->
-<!ELEMENT theme (root-path?, templates-path?, images-path?, template-extension?,
-settings?, roles?, color-scheme*, layout-templates?)>
+<!ELEMENT theme (root-path?, templates-path?, css-path?, images-path?,
+javascript-path?, template-extension?, settings?, roles?, color-scheme*,
+layout-templates?)>
 
 <!--
 The id attribute specifies the unique key for a theme. For convenience, the id
@@ -113,9 +114,21 @@ The default value is "${root-path}/templates".
 <!ELEMENT templates-path (#PCDATA)>
 
 <!--
+The css-path value sets the location of the css path for the theme. For example,
+the css path for the Classic theme is "/html/themes/classic/css". This means you
+can find css for the Classic theme in /docroot/html/themes/classic/css.
+
+For convenience, the css-path attribute can be referenced in the rest of the
+theme element as ${css-path}.
+
+The default value is "${root-path}/css".
+-->
+<!ELEMENT css-path (#PCDATA)>
+
+<!--
 The images-path value sets the location of the images path for the theme. For
 example, the images path for the Classic theme is "/html/themes/classic/images".
-This means you can find the images for the Classic theme in
+This means you can find images for the Classic theme in
 /docroot/html/themes/classic/images.
 
 For convenience, the images-path attribute can be referenced in the rest of the
@@ -124,6 +137,19 @@ theme element as ${images-path}.
 The default value is "${root-path}/images".
 -->
 <!ELEMENT images-path (#PCDATA)>
+
+<!--
+The javascript-path value sets the location of the JavaScript path for the
+theme. For example, the JavaScript path for the Classic theme is
+"/html/themes/classic/javascript". This means you can find JavaScript for the
+Classic theme in /docroot/html/themes/classic/javascript.
+
+For convenience, the javascript-path attribute can be referenced in the rest of
+the theme element as ${javascript-path}.
+
+The default value is "${root-path}/javascript".
+-->
+<!ELEMENT javascript-path (#PCDATA)>
 
 <!--
 The templates-extension value sets the file extension of the files located in

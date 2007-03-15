@@ -48,7 +48,7 @@
 
 								<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
 									<div>
-										<a href="javascript: Messaging.chat({toId:'<%= message.getUserId() %>', toName:'<%= message.getUserName() %>'});"><img src="<%= themeDisplay.getPathThemeImage() %>/chat/user_offline.png"></a>
+										<a href="javascript: Messaging.chat({toId:'<%= message.getUserId() %>', toName:'<%= message.getUserName() %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png"></a>
 									</div>
 								</c:if>
 
@@ -311,7 +311,7 @@
 					_log.error("Could not parse message " + message.getMessageId() + " " + e.getMessage());
 				}
 
-				msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImage() + "/emoticons");
+				msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
 				%>
 
 				<%= msgBody %>

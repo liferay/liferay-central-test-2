@@ -27,7 +27,7 @@
 <%@ include file="/html/common/themes/top_meta.jsp" %>
 <%@ include file="/html/common/themes/top_meta-ext.jsp" %>
 
-<link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImage() %>/liferay.ico" />
+<link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/liferay.ico" />
 
 <link href="<%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" type="text/css" rel="stylesheet" />
 <link href="<%= themeDisplay.getPathJavaScript() %>/calendar/skins/aqua/theme.css" rel="stylesheet" type="text/css" />

@@ -42,4 +42,4 @@ portletURL.setParameter("struts_action", "/journal_content_search/search");
 
 <input name="<%= namespace %>keywords" size="30" type="text" value="<%= keywords %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }">
 
-<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.png" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
+<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">

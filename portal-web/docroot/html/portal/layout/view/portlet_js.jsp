@@ -24,7 +24,7 @@
 
 var loadingAnimation = new Image();
 
-loadingAnimation.src =  "<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif";
+loadingAnimation.src =  "<%= themeDisplay.getPathThemeImages() %>/progress_bar/loading_animation.gif";
 
 function addPortlet(plid, portletId, doAsUserId) {
 	var refreshPortletList = ",";

@@ -74,7 +74,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 			<td>
 				<div style="padding: 2px; font-weight: bold;">
 					<a href="javascript: void(0);" onClick="LayoutConfiguration.toggleCategory(this);">
-					<img src="<%= themeDisplay.getPathThemeImage() + "/arrows/01_right.png" %>" /> <%= LanguageUtil.get(pageContext, portletCategory.getName()) %>
+					<img src="<%= themeDisplay.getPathThemeImages() + "/arrows/01_right.png" %>" /> <%= LanguageUtil.get(pageContext, portletCategory.getName()) %>
 					</a>
 				</div>
 			</td>

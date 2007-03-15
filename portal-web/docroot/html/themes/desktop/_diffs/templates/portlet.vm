@@ -62,11 +62,11 @@
 						$taglibLiferay.iconHelp()
 						$taglibLiferay.iconPrint()
 						#if ($portletDisplay.isShowMinIcon())
-							<a href="javascript: LiferayDesktop.minimize('$plid', '$portletDisplay.getId()', '$themeDisplay.getDoAsUserId()')"><img align="absmiddle" border="0" src="$themeDisplay.getPathThemeImage()/portlet/minimize.png" title="$languageUtil.get($pageContext, "minimize")"></a>
+							<a href="javascript: LiferayDesktop.minimize('$plid', '$portletDisplay.getId()', '$themeDisplay.getDoAsUserId()')"><img align="absmiddle" border="0" src="$themeDisplay.getPathThemeImages()/portlet/minimize.png" title="$languageUtil.get($pageContext, "minimize")"></a>
 						#end
  						$taglibLiferay.iconMaximize()
 						#if ($portletDisplay.isShowCloseIcon())
-							<a href="javascript: LiferayDesktop.remove('$plid', '$portletDisplay.getId()', '$themeDisplay.getDoAsUserId()')"><img align="absmiddle" border="0" src="$themeDisplay.getPathThemeImage()/portlet/close.png" title="$languageUtil.get($pageContext, "close")"></a>
+							<a href="javascript: LiferayDesktop.remove('$plid', '$portletDisplay.getId()', '$themeDisplay.getDoAsUserId()')"><img align="absmiddle" border="0" src="$themeDisplay.getPathThemeImages()/portlet/close.png" title="$languageUtil.get($pageContext, "close")"></a>
 						#end
 					#end
 				</div>

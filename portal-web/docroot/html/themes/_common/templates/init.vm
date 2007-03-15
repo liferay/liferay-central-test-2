@@ -4,10 +4,10 @@
 #set ( $portlet_display = $portletDisplay )
 
 #set ( $css_class = $theme_display.getColorScheme().getCssClass() )
-#set ( $css_folder = "$theme_display.getPathThemeRoot()/css" )
-#set ( $images_folder = "$theme_display.getPathThemeImage()" )
-#set ( $javascript_folder = "$theme_display.getPathThemeRoot()/javascript" )
-#set ( $templates_folder = "$theme_display.getPathThemeRoot()/templates" )
+#set ( $css_folder = "$theme_display.getPathThemeCss()" )
+#set ( $images_folder = "$theme_display.getPathThemeImages()" )
+#set ( $javascript_folder = "$theme_display.getPathThemeJavaScript()" )
+#set ( $templates_folder = "$theme_display.getPathThemeTemplates()" )
 
 #set ( $full_css_path = $fullTemplatesPath + "/../css" )
 #set ( $full_templates_path = $fullTemplatesPath )

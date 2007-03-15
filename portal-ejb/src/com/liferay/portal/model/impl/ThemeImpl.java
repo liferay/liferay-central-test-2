@@ -98,12 +98,28 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_templatesPath = templatesPath;
 	}
 
+	public String getCssPath() {
+		return _cssPath;
+	}
+
+	public void setCssPath(String cssPath) {
+		_cssPath = cssPath;
+	}
+
 	public String getImagesPath() {
 		return _imagesPath;
 	}
 
 	public void setImagesPath(String imagesPath) {
 		_imagesPath = imagesPath;
+	}
+
+	public String getJavaScriptPath() {
+		return _javaScriptPath;
+	}
+
+	public void setJavaScriptPath(String javaScriptPath) {
+		_javaScriptPath = javaScriptPath;
 	}
 
 	public String getTemplateExtension() {
@@ -214,7 +230,9 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private String _name;
 	private String _rootPath = "/";
 	private String _templatesPath = "${root-path}/templates";
+	private String _cssPath = "${root-path}/css";
 	private String _imagesPath = "${root-path}/images";
+	private String _javaScriptPath = "${root-path}/javascript";
 	private String _templateExtension = "vm";
 	private Properties _settings = new Properties();
 	private Map _colorSchemesMap = new HashMap();

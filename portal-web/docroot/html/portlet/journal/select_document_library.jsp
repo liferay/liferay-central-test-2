@@ -92,7 +92,7 @@ for (int i = 0; i < results.size(); i++) {
 	StringMaker sm = new StringMaker();
 
 	sm.append("<img align=\"left\" border=\"0\" src=\"");
-	sm.append(themeDisplay.getPathThemeImage());
+	sm.append(themeDisplay.getPathThemeImages());
 	sm.append("/trees/folder.png\">");
 	sm.append(curFolder.getName());
 
@@ -168,7 +168,7 @@ for (int i = 0; i < results.size(); i++) {
 		sm = new StringMaker();
 
 		sm.append("<img align=\"left\" border=\"0\" src=\"");
-		sm.append(themeDisplay.getPathThemeImage());
+		sm.append(themeDisplay.getPathThemeImages());
 		sm.append("/document_library/");
 		sm.append(DLUtil.getFileExtension(fileEntry.getName()));
 		sm.append(".png\">");

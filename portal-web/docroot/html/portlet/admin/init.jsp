@@ -57,7 +57,7 @@ public String getNoteIcon(ThemeDisplay themeDisplay, String message) {
 	StringMaker sm = new StringMaker();
 
 	sm.append("&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
-	sm.append(themeDisplay.getPathThemeImage());
+	sm.append(themeDisplay.getPathThemeImages());
 	sm.append("/document_library/page.png");
 	sm.append("' onmousemove='ToolTip.show(event, this, \"");
 	sm.append(message);

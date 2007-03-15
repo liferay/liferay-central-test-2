@@ -44,7 +44,7 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 		<tr>
 			<td>
 				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) - 1 %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=<%= eventType %>">
-				<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_left.png">
+				<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_left.png">
 				</a>
 			</td>
 			<td style="padding-left: 10px;"></td>
@@ -54,7 +54,7 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 			<td style="padding-left: 10px;"></td>
 			<td>
 				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) + 1 %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=<%= eventType %>">
-				<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_right.png">
+				<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_right.png">
 				</a>
 			</td>
 		</tr>
@@ -177,7 +177,7 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 						<td align="right">
 							<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
 								<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= Integer.toString(tempCal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= Integer.toString(tempCal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= Integer.toString(tempCal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
-								<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_plus.png" title="<%= LanguageUtil.get(pageContext, "add") %>">
+								<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<%= LanguageUtil.get(pageContext, "add") %>">
 								</a>
 							</c:if>
 						</td>
@@ -248,14 +248,14 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 	for (int i = 7; i >= dayOfWeek; i--) {
 	%>
 
-		<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
+		<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1"></td>
 		<td height="100"></td>
 
 	<%
 	}
 	%>
 
-	<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="1"></td>
+	<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1"></td>
 </tr>
 <tr>
 	<td class="portlet-section-header" colspan="15"></td>

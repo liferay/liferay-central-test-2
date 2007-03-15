@@ -43,7 +43,7 @@ int left = ParamUtil.getInteger(request, "left");
 					Chat with <span class="msg-to-name" style="font-weight: bold"><%= toName %></span>
 				</td>
 				<td align="right">
-					<a style="cursor: pointer" href="javascript: Messaging.removeChat('msg-chat-box_<%= toId.replace('.', '_') %>')"><img src="<%= themeDisplay.getPathThemeImage() %>/portlet/close.png" /></a>
+					<a style="cursor: pointer" href="javascript: Messaging.removeChat('msg-chat-box_<%= toId.replace('.', '_') %>')"><img src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" /></a>
 				</td>
 			</tr>
 			</table>
@@ -58,7 +58,7 @@ int left = ParamUtil.getInteger(request, "left");
 		<input class="msg-type-area" style="width: 100%" tabIndex=1 onKeyPress="Messaging.sendChat(this, event)" />
 
 		<c:if test="<%= addUser %>">
-			<img src="<%= themeDisplay.getPathThemeImage() %>/chat/add_user.png" style="cursor: pointer; margin-top: 2px" onclick="MessagingRoster.addEntry('<%= toId %>'); Element.remove(this)" />
+			<img src="<%= themeDisplay.getPathThemeImages() %>/chat/add_user.png" style="cursor: pointer; margin-top: 2px" onclick="MessagingRoster.addEntry('<%= toId %>'); Element.remove(this)" />
 		</c:if>
 	</div>
 </div>

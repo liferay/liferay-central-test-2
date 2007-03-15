@@ -86,8 +86,8 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 					<td>
 						<table border="0" cellpadding="0" cellspacing="0">
 						<tr>
-							<td class="alpha"><img border="0" height="5" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="<%= votesPercentWidth %>"></td>
-							<td class="beta"><img border="0" height="5" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.png" vspace="0" width="<%= votesPixelWidth - votesPercentWidth %>"></td>
+							<td class="alpha"><img border="0" height="5" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="<%= votesPercentWidth %>"></td>
+							<td class="beta"><img border="0" height="5" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="<%= votesPixelWidth - votesPercentWidth %>"></td>
 						</tr>
 						</table>
 					</td>

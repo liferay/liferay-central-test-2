@@ -543,7 +543,7 @@ public class JournalUtil {
 		tokens.put("portal_ctx", themeDisplay.getPathContext());
 		tokens.put("portal_url", company.getPortalURL());
 		tokens.put("root_path", themeDisplay.getPathRoot());
-		tokens.put("theme_image_path", themeDisplay.getPathThemeImage());
+		tokens.put("theme_image_path", themeDisplay.getPathThemeImages());
 
 		// Deprecated tokens
 

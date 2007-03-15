@@ -267,7 +267,7 @@ for (int i = 0; i < childNodes.length; i++) {
 	sm = new StringMaker();
 
 	sm.append("<img align=\"left\" border=\"0\" src=\"");
-	sm.append(themeDisplay.getPathThemeImage());
+	sm.append(themeDisplay.getPathThemeImages());
 	sm.append("/trees/");
 
 	if (propContent == null) {

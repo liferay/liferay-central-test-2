@@ -417,20 +417,20 @@ var Mail = {
 				var manageIcon = document.createElement("a");
 				manageIcon.href = "javascript:void(0)";
 				manageIcon.onclick = Mail.onFolderAdd;
-				manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/add_folder.png" + "\" />";
+				manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImages() + "/mail/add_folder.png" + "\" />";
 				manageItem.appendChild(manageIcon);
 				
 				if (Mail.DEFAULT_FOLDERS.length != folders.length) {
 					manageIcon = document.createElement("a");
 					manageIcon.href = "javascript:void(0)";
 					manageIcon.onclick = Mail.onFolderRename;
-					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/rename_folder.png" + "\" />";
+					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImages() + "/mail/rename_folder.png" + "\" />";
 					manageItem.appendChild(manageIcon);
 
 					manageIcon = document.createElement("a");
 					manageIcon.href = "javascript:void(0)";
 					manageIcon.onclick = Mail.onFolderDelete;
-					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/delete_folder.png" + "\" />";
+					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImages() + "/mail/delete_folder.png" + "\" />";
 					manageItem.appendChild(manageIcon);
 				}
 				
@@ -469,7 +469,7 @@ var Mail = {
 			Mail.decrementCount();
 
 			var stateImg = Mail.lastSelected.state.getElementsByTagName("img")[0];
-			stateImg.src = themeDisplay.getPathThemeImage() + "/mail/read.png";
+			stateImg.src = themeDisplay.getPathThemeImages() + "/mail/read.png";
 
 			var row = Mail.lastSelected.row;
 
@@ -1075,7 +1075,7 @@ var Mail = {
 			var size = document.createElement("div");
 			var msObj = new MailSummaryObject(state, sender, subject, date, size, header.id, header.read, header.folderId, i);
 
-			stateImg.src = themeDisplay.getPathThemeImage() + "/mail/read.png";
+			stateImg.src = themeDisplay.getPathThemeImages() + "/mail/read.png";
 			sender.innerHTML = header.email;
 			date.innerHTML = header.date;
 			size.innerHTML = header.size;
@@ -1086,7 +1086,7 @@ var Mail = {
 			}
 			
 			if (!header.read) {
-				stateImg.src = themeDisplay.getPathThemeImage() + "/mail/unread.png";
+				stateImg.src = themeDisplay.getPathThemeImages() + "/mail/unread.png";
 
 				sender.style.fontWeight = "bold";
 				subject.style.fontWeight = "bold";
@@ -1094,7 +1094,7 @@ var Mail = {
 				size.style.fontWeight = "bold";
 			}
 			else if (header.replied) {
-				stateImg.src = themeDisplay.getPathThemeImage() + "/mail/replied.png";
+				stateImg.src = themeDisplay.getPathThemeImages() + "/mail/replied.png";
 			}
 			
 			if (summaryList.head == null) {
@@ -1358,10 +1358,10 @@ var Mail = {
 				image = document.createElement("img");
 				
 				if (title.asc) {
-					image.src = themeDisplay.getPathThemeImage() + "/arrows/01_up.png";
+					image.src = themeDisplay.getPathThemeImages() + "/arrows/01_up.png";
 				}
 				else {
-					image.src = themeDisplay.getPathThemeImage() + "/arrows/01_down.png";
+					image.src = themeDisplay.getPathThemeImages() + "/arrows/01_down.png";
 				}
 				
 				titleDiv.appendChild(image);

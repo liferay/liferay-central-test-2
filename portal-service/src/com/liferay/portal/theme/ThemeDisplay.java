@@ -263,7 +263,10 @@ public class ThemeDisplay implements Serializable {
 			setPathColorSchemeImage(
 				themeContextPath + colorScheme.getColorSchemeImagesPath());
 
-			setPathThemeImage(themeContextPath + theme.getImagesPath());
+			setPathThemeCss(themeContextPath + theme.getCssPath());
+			setPathThemeImages(themeContextPath + theme.getImagesPath());
+			setPathThemeJavaScript(
+				themeContextPath + theme.getJavaScriptPath());
 			setPathThemeRoot(themeContextPath + theme.getRootPath());
 		}
 	}
@@ -424,12 +427,35 @@ public class ThemeDisplay implements Serializable {
 		_pathSound = pathSound;
 	}
 
-	public String getPathThemeImage() {
-		return _pathThemeImage;
+	public String getPathThemeCss() {
+		return _pathThemeCss;
 	}
 
-	public void setPathThemeImage(String pathThemeImage) {
-		_pathThemeImage = pathThemeImage;
+	public void setPathThemeCss(String pathThemeCss) {
+		_pathThemeCss = pathThemeCss;
+	}
+
+	/**
+	 * @deprecated Use <code>getPathThemeImagess</code>.
+	 */
+	public String getPathThemeImages() {
+		return getPathThemeImagess();
+	}
+
+	public String getPathThemeImagess() {
+		return _pathThemeImages;
+	}
+
+	public void setPathThemeImages(String pathThemeImages) {
+		_pathThemeImages = pathThemeImages;
+	}
+
+	public String getPathThemeJavaScript() {
+		return _pathThemeJavaScript;
+	}
+
+	public void setPathThemeJavaScript(String pathThemeJavaScript) {
+		_pathThemeJavaScript = pathThemeJavaScript;
 	}
 
 	public String getPathThemeRoot() {
@@ -658,7 +684,9 @@ public class ThemeDisplay implements Serializable {
 		_pathMain = StringPool.BLANK;
 		_pathRoot = StringPool.BLANK;
 		_pathSound = StringPool.BLANK;
-		_pathThemeImage = StringPool.BLANK;
+		_pathThemeCss = StringPool.BLANK;
+		_pathThemeImages = StringPool.BLANK;
+		_pathThemeJavaScript = StringPool.BLANK;
 		_pathThemeRoot = StringPool.BLANK;
 		_showAddContentIcon = false;
 		_showHomeIcon = false;
@@ -725,7 +753,9 @@ public class ThemeDisplay implements Serializable {
 	private String _pathMain = StringPool.BLANK;
 	private String _pathRoot = StringPool.BLANK;
 	private String _pathSound = StringPool.BLANK;
-	private String _pathThemeImage = StringPool.BLANK;
+	private String _pathThemeCss = StringPool.BLANK;
+	private String _pathThemeImages = StringPool.BLANK;
+	private String _pathThemeJavaScript = StringPool.BLANK;
 	private String _pathThemeRoot = StringPool.BLANK;
 	private boolean _showAddContentIcon;
 	private boolean _showHomeIcon;

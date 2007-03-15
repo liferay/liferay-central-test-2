@@ -340,10 +340,10 @@ var MessagingRoster = {
 			tempImg.style.marginRight = "5px";
 
 			if (online) {
-				tempImg.src = themeDisplay.getPathThemeImage() + "/chat/user_online.png";
+				tempImg.src = themeDisplay.getPathThemeImages() + "/chat/user_online.png";
 			}
 			else {
-				tempImg.src = themeDisplay.getPathThemeImage() + "/chat/user_offline.png";
+				tempImg.src = themeDisplay.getPathThemeImages() + "/chat/user_offline.png";
 			}
 
 			tempLink.innerHTML = userName;
