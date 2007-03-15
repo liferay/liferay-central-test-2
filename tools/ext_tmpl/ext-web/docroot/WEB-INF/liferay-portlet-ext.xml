@@ -488,6 +488,16 @@
 		<struts-path>my_community_tags</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>107</portlet-name>
+		<struts-path>page_comments</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>108</portlet-name>
+		<struts-path>page_ratings</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

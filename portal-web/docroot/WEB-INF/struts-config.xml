@@ -1158,6 +1158,20 @@
 
 		<action path="/organization_admin/view" forward="portlet.enterprise_admin.view" />
 
+		<!-- Page Comments -->
+
+		<action path="/page_comments/edit_page_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.error" path="portlet.page_comments.error" />
+		</action>
+
+		<action path="/page_comments/view" forward="portlet.page_comments.view" />
+
+		<!-- Page Ratings -->
+
+		<action path="/page_ratings/rate_page" type="com.liferay.portlet.pageratings.action.RateLayoutAction" />
+
+		<action path="/page_ratings/view" forward="portlet.page_ratings.view" />
+
 		<!-- Polls -->
 
 		<action path="/polls/edit_question" type="com.liferay.portlet.polls.action.EditQuestionAction">
