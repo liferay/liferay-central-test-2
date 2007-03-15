@@ -105,6 +105,8 @@ public class ActionKeys {
 
 	public static final String ASSIGN_USERS = "ASSIGN_USERS";
 
+	public static final String BAN_USER = "BAN_USER";
+
 	public static final String CONFIGURATION = "CONFIGURATION";
 
 	public static final String DELEGATE = "DELEGATE";

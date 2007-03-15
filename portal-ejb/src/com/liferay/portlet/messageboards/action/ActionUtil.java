@@ -22,11 +22,13 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.ParamUtil;
@@ -58,6 +60,14 @@ public class ActionUtil {
 	}
 
 	public static void getCategory(HttpServletRequest req) throws Exception {
+		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+
+		// Add redundant check here because the jsp does not check permissions
+		// on the initial search container
+		
+		MBBanLocalServiceUtil.checkBan(
+			layout.getPlid(), PortalUtil.getUserId(req));
+
 		String categoryId = ParamUtil.getString(req, "categoryId");
 
 		MBCategory category = null;
