@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="JournalContentSearchLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.journal.service.JournalContentSearchLocalService
+ * @see com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil
+ * @see com.liferay.portlet.journal.service.ejb.JournalContentSearchLocalServiceEJBImpl
+ * @see com.liferay.portlet.journal.service.ejb.JournalContentSearchLocalServiceHome
+ * @see com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl
  *
  */
 public interface JournalContentSearchLocalServiceEJB extends EJBLocalObject,

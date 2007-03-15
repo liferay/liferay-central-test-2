@@ -33,7 +33,20 @@ import java.sql.Types;
 /**
  * <a href="CountryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>Country</code> table in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.Country
+ * @see com.liferay.portal.service.model.CountryModel
+ * @see com.liferay.portal.service.model.impl.CountryImpl
  *
  */
 public class CountryModelImpl extends BaseModelImpl {

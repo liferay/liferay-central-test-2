@@ -25,7 +25,26 @@ package com.liferay.portal.model;
 /**
  * <a href="Image.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>Image</code> table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize <code>com.liferay.portal.service.model.impl.ImageImpl</code> and rerun
+ * the ServiceBuilder to generate the new methods.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.ImageModel
+ * @see com.liferay.portal.service.model.impl.ImageImpl
+ * @see com.liferay.portal.service.model.impl.ImageModelImpl
  *
  */
 public interface Image extends ImageModel {

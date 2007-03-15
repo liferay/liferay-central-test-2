@@ -36,7 +36,20 @@ import java.util.Date;
 /**
  * <a href="WebsiteModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>Website</code> table in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.Website
+ * @see com.liferay.portal.service.model.WebsiteModel
+ * @see com.liferay.portal.service.model.impl.WebsiteImpl
  *
  */
 public class WebsiteModelImpl extends BaseModelImpl {

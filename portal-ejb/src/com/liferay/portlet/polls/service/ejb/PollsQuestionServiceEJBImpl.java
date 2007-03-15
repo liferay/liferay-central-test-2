@@ -34,7 +34,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="PollsQuestionServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.polls.service.PollsQuestionService
+ * @see com.liferay.portlet.polls.service.PollsQuestionServiceUtil
+ * @see com.liferay.portlet.polls.service.ejb.PollsQuestionServiceEJB
+ * @see com.liferay.portlet.polls.service.ejb.PollsQuestionServiceHome
+ * @see com.liferay.portlet.polls.service.impl.PollsQuestionServiceImpl
  *
  */
 public class PollsQuestionServiceEJBImpl implements PollsQuestionService,

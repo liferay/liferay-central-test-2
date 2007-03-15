@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="TagsSourceLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.tags.service.TagsSourceLocalService
+ * @see com.liferay.portlet.tags.service.TagsSourceLocalServiceUtil
+ * @see com.liferay.portlet.tags.service.ejb.TagsSourceLocalServiceEJBImpl
+ * @see com.liferay.portlet.tags.service.ejb.TagsSourceLocalServiceHome
+ * @see com.liferay.portlet.tags.service.impl.TagsSourceLocalServiceImpl
  *
  */
 public interface TagsSourceLocalServiceEJB extends EJBLocalObject,

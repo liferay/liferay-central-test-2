@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="BlogsCategoryLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.blogs.service.BlogsCategoryLocalService
+ * @see com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil
+ * @see com.liferay.portlet.blogs.service.ejb.BlogsCategoryLocalServiceEJBImpl
+ * @see com.liferay.portlet.blogs.service.ejb.BlogsCategoryLocalServiceHome
+ * @see com.liferay.portlet.blogs.service.impl.BlogsCategoryLocalServiceImpl
  *
  */
 public interface BlogsCategoryLocalServiceEJB extends EJBLocalObject,

@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="PortletPreferencesLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.PortletPreferencesLocalService
+ * @see com.liferay.portal.service.PortletPreferencesLocalServiceUtil
+ * @see com.liferay.portal.service.ejb.PortletPreferencesLocalServiceEJBImpl
+ * @see com.liferay.portal.service.ejb.PortletPreferencesLocalServiceHome
+ * @see com.liferay.portal.service.impl.PortletPreferencesLocalServiceImpl
  *
  */
 public interface PortletPreferencesLocalServiceEJB extends EJBLocalObject,

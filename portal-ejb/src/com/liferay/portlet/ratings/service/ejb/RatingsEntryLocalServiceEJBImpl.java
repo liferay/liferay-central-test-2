@@ -32,7 +32,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="RatingsEntryLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.ratings.service.RatingsEntryLocalService
+ * @see com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil
+ * @see com.liferay.portlet.ratings.service.ejb.RatingsEntryLocalServiceEJB
+ * @see com.liferay.portlet.ratings.service.ejb.RatingsEntryLocalServiceHome
+ * @see com.liferay.portlet.ratings.service.impl.RatingsEntryLocalServiceImpl
  *
  */
 public class RatingsEntryLocalServiceEJBImpl implements RatingsEntryLocalService,

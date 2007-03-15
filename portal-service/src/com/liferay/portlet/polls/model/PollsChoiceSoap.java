@@ -32,7 +32,18 @@ import java.util.List;
 /**
  * <a href="PollsChoiceSoap.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by <code>com.liferay.portlet.polls.service.http.PollsChoiceServiceSoap</code>.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.polls.service.http.PollsChoiceServiceSoap
  *
  */
 public class PollsChoiceSoap implements Serializable {

@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="PollsQuestionLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.polls.service.PollsQuestionLocalService
+ * @see com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil
+ * @see com.liferay.portlet.polls.service.ejb.PollsQuestionLocalServiceEJBImpl
+ * @see com.liferay.portlet.polls.service.ejb.PollsQuestionLocalServiceHome
+ * @see com.liferay.portlet.polls.service.impl.PollsQuestionLocalServiceImpl
  *
  */
 public interface PollsQuestionLocalServiceEJB extends EJBLocalObject,

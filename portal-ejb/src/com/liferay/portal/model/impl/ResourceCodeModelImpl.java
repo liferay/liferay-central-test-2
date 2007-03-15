@@ -33,7 +33,21 @@ import java.sql.Types;
 /**
  * <a href="ResourceCodeModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>ResourceCode</code> table in
+ * the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.ResourceCode
+ * @see com.liferay.portal.service.model.ResourceCodeModel
+ * @see com.liferay.portal.service.model.impl.ResourceCodeImpl
  *
  */
 public class ResourceCodeModelImpl extends BaseModelImpl {

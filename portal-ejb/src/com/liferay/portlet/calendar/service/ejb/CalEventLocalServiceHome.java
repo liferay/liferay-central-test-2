@@ -28,7 +28,23 @@ import javax.ejb.EJBLocalHome;
 /**
  * <a href="CalEventLocalServiceHome.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.calendar.service.CalEventLocalService
+ * @see com.liferay.portlet.calendar.service.CalEventLocalServiceUtil
+ * @see com.liferay.portlet.calendar.service.ejb.CalEventLocalServiceEJB
+ * @see com.liferay.portlet.calendar.service.ejb.CalEventLocalServiceEJBImpl
+ * @see com.liferay.portlet.calendar.service.impl.CalEventLocalServiceImpl
  *
  */
 public interface CalEventLocalServiceHome extends EJBLocalHome {

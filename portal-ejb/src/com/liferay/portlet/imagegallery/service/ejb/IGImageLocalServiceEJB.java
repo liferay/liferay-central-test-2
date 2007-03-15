@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="IGImageLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.imagegallery.service.IGImageLocalService
+ * @see com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil
+ * @see com.liferay.portlet.imagegallery.service.ejb.IGImageLocalServiceEJBImpl
+ * @see com.liferay.portlet.imagegallery.service.ejb.IGImageLocalServiceHome
+ * @see com.liferay.portlet.imagegallery.service.impl.IGImageLocalServiceImpl
  *
  */
 public interface IGImageLocalServiceEJB extends EJBLocalObject,

@@ -27,7 +27,21 @@ import com.liferay.portal.model.BaseModel;
 /**
  * <a href="ListTypeModel.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>ListType</code> table in
+ * the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.ListType
+ * @see com.liferay.portal.service.model.impl.ListTypeImpl
+ * @see com.liferay.portal.service.model.impl.ListTypeModelImpl
  *
  */
 public interface ListTypeModel extends BaseModel {

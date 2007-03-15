@@ -30,7 +30,23 @@ import javax.ejb.EJBHome;
 /**
  * <a href="BlogsCategoryServiceHome.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.blogs.service.BlogsCategoryService
+ * @see com.liferay.portlet.blogs.service.BlogsCategoryServiceUtil
+ * @see com.liferay.portlet.blogs.service.ejb.BlogsCategoryServiceEJB
+ * @see com.liferay.portlet.blogs.service.ejb.BlogsCategoryServiceEJBImpl
+ * @see com.liferay.portlet.blogs.service.impl.BlogsCategoryServiceImpl
  *
  */
 public interface BlogsCategoryServiceHome extends EJBHome {

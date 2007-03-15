@@ -35,7 +35,21 @@ import java.util.Date;
 /**
  * <a href="ShoppingItemModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>ShoppingItem</code> table in
+ * the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.shopping.service.model.ShoppingItem
+ * @see com.liferay.portlet.shopping.service.model.ShoppingItemModel
+ * @see com.liferay.portlet.shopping.service.model.impl.ShoppingItemImpl
  *
  */
 public class ShoppingItemModelImpl extends BaseModelImpl {

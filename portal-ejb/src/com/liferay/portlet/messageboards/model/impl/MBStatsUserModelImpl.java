@@ -37,7 +37,21 @@ import java.util.Date;
 /**
  * <a href="MBStatsUserModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>MBStatsUser</code> table in the
+ * database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.messageboards.service.model.MBStatsUser
+ * @see com.liferay.portlet.messageboards.service.model.MBStatsUserModel
+ * @see com.liferay.portlet.messageboards.service.model.impl.MBStatsUserImpl
  *
  */
 public class MBStatsUserModelImpl extends BaseModelImpl {

@@ -34,7 +34,20 @@ import java.sql.Types;
 /**
  * <a href="LayoutModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>Layout</code> table in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.Layout
+ * @see com.liferay.portal.service.model.LayoutModel
+ * @see com.liferay.portal.service.model.impl.LayoutImpl
  *
  */
 public class LayoutModelImpl extends BaseModelImpl {

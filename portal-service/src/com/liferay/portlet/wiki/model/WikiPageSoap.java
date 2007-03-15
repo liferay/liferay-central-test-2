@@ -33,7 +33,18 @@ import java.util.List;
 /**
  * <a href="WikiPageSoap.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by <code>com.liferay.portlet.wiki.service.http.WikiPageServiceSoap</code>.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.wiki.service.http.WikiPageServiceSoap
  *
  */
 public class WikiPageSoap implements Serializable {

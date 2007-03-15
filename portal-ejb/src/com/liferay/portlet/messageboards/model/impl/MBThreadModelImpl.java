@@ -36,7 +36,21 @@ import java.util.Date;
 /**
  * <a href="MBThreadModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>MBThread</code> table in the
+ * database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.messageboards.service.model.MBThread
+ * @see com.liferay.portlet.messageboards.service.model.MBThreadModel
+ * @see com.liferay.portlet.messageboards.service.model.impl.MBThreadImpl
  *
  */
 public class MBThreadModelImpl extends BaseModelImpl {

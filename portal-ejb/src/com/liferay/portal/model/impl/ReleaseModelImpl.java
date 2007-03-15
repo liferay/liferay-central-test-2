@@ -35,7 +35,21 @@ import java.util.Date;
 /**
  * <a href="ReleaseModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>Release_</code> table in the
+ * database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.Release
+ * @see com.liferay.portal.service.model.ReleaseModel
+ * @see com.liferay.portal.service.model.impl.ReleaseImpl
  *
  */
 public class ReleaseModelImpl extends BaseModelImpl {

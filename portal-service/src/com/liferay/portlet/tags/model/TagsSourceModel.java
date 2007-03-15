@@ -27,7 +27,21 @@ import com.liferay.portal.model.BaseModel;
 /**
  * <a href="TagsSourceModel.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>TagsSource</code> table in
+ * the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.tags.service.model.TagsSource
+ * @see com.liferay.portlet.tags.service.model.impl.TagsSourceImpl
+ * @see com.liferay.portlet.tags.service.model.impl.TagsSourceModelImpl
  *
  */
 public interface TagsSourceModel extends BaseModel {

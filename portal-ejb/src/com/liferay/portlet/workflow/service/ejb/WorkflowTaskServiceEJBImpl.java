@@ -34,7 +34,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="WorkflowTaskServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.workflow.service.WorkflowTaskService
+ * @see com.liferay.portlet.workflow.service.WorkflowTaskServiceUtil
+ * @see com.liferay.portlet.workflow.service.ejb.WorkflowTaskServiceEJB
+ * @see com.liferay.portlet.workflow.service.ejb.WorkflowTaskServiceHome
+ * @see com.liferay.portlet.workflow.service.impl.WorkflowTaskServiceImpl
  *
  */
 public class WorkflowTaskServiceEJBImpl implements WorkflowTaskService,

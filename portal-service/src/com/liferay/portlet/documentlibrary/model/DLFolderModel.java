@@ -29,7 +29,21 @@ import java.util.Date;
 /**
  * <a href="DLFolderModel.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>DLFolder</code> table in
+ * the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.documentlibrary.service.model.DLFolder
+ * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFolderImpl
+ * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFolderModelImpl
  *
  */
 public interface DLFolderModel extends BaseModel {

@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="RatingsStatsLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.ratings.service.RatingsStatsLocalService
+ * @see com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil
+ * @see com.liferay.portlet.ratings.service.ejb.RatingsStatsLocalServiceEJBImpl
+ * @see com.liferay.portlet.ratings.service.ejb.RatingsStatsLocalServiceHome
+ * @see com.liferay.portlet.ratings.service.impl.RatingsStatsLocalServiceImpl
  *
  */
 public interface RatingsStatsLocalServiceEJB extends EJBLocalObject,

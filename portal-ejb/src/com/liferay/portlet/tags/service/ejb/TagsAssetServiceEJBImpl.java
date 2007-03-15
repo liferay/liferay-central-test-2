@@ -34,7 +34,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="TagsAssetServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.tags.service.TagsAssetService
+ * @see com.liferay.portlet.tags.service.TagsAssetServiceUtil
+ * @see com.liferay.portlet.tags.service.ejb.TagsAssetServiceEJB
+ * @see com.liferay.portlet.tags.service.ejb.TagsAssetServiceHome
+ * @see com.liferay.portlet.tags.service.impl.TagsAssetServiceImpl
  *
  */
 public class TagsAssetServiceEJBImpl implements TagsAssetService, SessionBean {

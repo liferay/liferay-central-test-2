@@ -36,7 +36,21 @@ import java.util.Date;
 /**
  * <a href="SCProductVersionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>SCProductVersion</code> table
+ * in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.softwarecatalog.service.model.SCProductVersion
+ * @see com.liferay.portlet.softwarecatalog.service.model.SCProductVersionModel
+ * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCProductVersionImpl
  *
  */
 public class SCProductVersionModelImpl extends BaseModelImpl {

@@ -35,7 +35,21 @@ import java.util.Date;
 /**
  * <a href="BookmarksFolderModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>BookmarksFolder</code> table
+ * in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.bookmarks.service.model.BookmarksFolder
+ * @see com.liferay.portlet.bookmarks.service.model.BookmarksFolderModel
+ * @see com.liferay.portlet.bookmarks.service.model.impl.BookmarksFolderImpl
  *
  */
 public class BookmarksFolderModelImpl extends BaseModelImpl {

@@ -28,7 +28,21 @@ import com.liferay.portal.service.persistence.UserIdMapperPK;
 /**
  * <a href="UserIdMapperModel.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>UserIdMapper</code> table
+ * in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.UserIdMapper
+ * @see com.liferay.portal.service.model.impl.UserIdMapperImpl
+ * @see com.liferay.portal.service.model.impl.UserIdMapperModelImpl
  *
  */
 public interface UserIdMapperModel extends BaseModel {

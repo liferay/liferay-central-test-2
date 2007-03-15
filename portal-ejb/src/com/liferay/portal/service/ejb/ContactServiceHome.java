@@ -30,7 +30,23 @@ import javax.ejb.EJBHome;
 /**
  * <a href="ContactServiceHome.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.ContactService
+ * @see com.liferay.portal.service.ContactServiceUtil
+ * @see com.liferay.portal.service.ejb.ContactServiceEJB
+ * @see com.liferay.portal.service.ejb.ContactServiceEJBImpl
+ * @see com.liferay.portal.service.impl.ContactServiceImpl
  *
  */
 public interface ContactServiceHome extends EJBHome {

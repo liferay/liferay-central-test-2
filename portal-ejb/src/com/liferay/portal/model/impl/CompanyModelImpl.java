@@ -33,7 +33,20 @@ import java.sql.Types;
 /**
  * <a href="CompanyModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>Company</code> table in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.Company
+ * @see com.liferay.portal.service.model.CompanyModel
+ * @see com.liferay.portal.service.model.impl.CompanyImpl
  *
  */
 public class CompanyModelImpl extends BaseModelImpl {

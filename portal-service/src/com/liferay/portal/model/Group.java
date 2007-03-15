@@ -25,7 +25,26 @@ package com.liferay.portal.model;
 /**
  * <a href="Group.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>Group_</code> table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize <code>com.liferay.portal.service.model.impl.GroupImpl</code> and rerun
+ * the ServiceBuilder to generate the new methods.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.GroupModel
+ * @see com.liferay.portal.service.model.impl.GroupImpl
+ * @see com.liferay.portal.service.model.impl.GroupModelImpl
  *
  */
 public interface Group extends GroupModel {

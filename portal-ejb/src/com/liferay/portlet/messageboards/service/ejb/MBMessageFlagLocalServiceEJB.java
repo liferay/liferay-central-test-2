@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="MBMessageFlagLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.messageboards.service.MBMessageFlagLocalService
+ * @see com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil
+ * @see com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceEJBImpl
+ * @see com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceHome
+ * @see com.liferay.portlet.messageboards.service.impl.MBMessageFlagLocalServiceImpl
  *
  */
 public interface MBMessageFlagLocalServiceEJB extends EJBLocalObject,

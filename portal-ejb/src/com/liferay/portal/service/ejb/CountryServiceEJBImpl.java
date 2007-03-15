@@ -33,7 +33,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="CountryServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.CountryService
+ * @see com.liferay.portal.service.CountryServiceUtil
+ * @see com.liferay.portal.service.ejb.CountryServiceEJB
+ * @see com.liferay.portal.service.ejb.CountryServiceHome
+ * @see com.liferay.portal.service.impl.CountryServiceImpl
  *
  */
 public class CountryServiceEJBImpl implements CountryService, SessionBean {

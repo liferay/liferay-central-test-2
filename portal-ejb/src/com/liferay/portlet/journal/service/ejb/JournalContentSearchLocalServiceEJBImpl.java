@@ -32,7 +32,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="JournalContentSearchLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.journal.service.JournalContentSearchLocalService
+ * @see com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil
+ * @see com.liferay.portlet.journal.service.ejb.JournalContentSearchLocalServiceEJB
+ * @see com.liferay.portlet.journal.service.ejb.JournalContentSearchLocalServiceHome
+ * @see com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl
  *
  */
 public class JournalContentSearchLocalServiceEJBImpl

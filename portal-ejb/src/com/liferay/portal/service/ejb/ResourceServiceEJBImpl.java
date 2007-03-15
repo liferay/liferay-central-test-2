@@ -33,7 +33,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="ResourceServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.ResourceService
+ * @see com.liferay.portal.service.ResourceServiceUtil
+ * @see com.liferay.portal.service.ejb.ResourceServiceEJB
+ * @see com.liferay.portal.service.ejb.ResourceServiceHome
+ * @see com.liferay.portal.service.impl.ResourceServiceImpl
  *
  */
 public class ResourceServiceEJBImpl implements ResourceService, SessionBean {

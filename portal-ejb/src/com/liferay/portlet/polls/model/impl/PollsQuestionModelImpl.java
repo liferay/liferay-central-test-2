@@ -36,7 +36,21 @@ import java.util.Date;
 /**
  * <a href="PollsQuestionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>PollsQuestion</code> table in
+ * the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.polls.service.model.PollsQuestion
+ * @see com.liferay.portlet.polls.service.model.PollsQuestionModel
+ * @see com.liferay.portlet.polls.service.model.impl.PollsQuestionImpl
  *
  */
 public class PollsQuestionModelImpl extends BaseModelImpl {

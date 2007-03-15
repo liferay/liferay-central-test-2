@@ -34,7 +34,21 @@ import java.sql.Types;
 /**
  * <a href="OrgGroupRoleModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>OrgGroupRole</code> table in
+ * the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.OrgGroupRole
+ * @see com.liferay.portal.service.model.OrgGroupRoleModel
+ * @see com.liferay.portal.service.model.impl.OrgGroupRoleImpl
  *
  */
 public class OrgGroupRoleModelImpl extends BaseModelImpl {

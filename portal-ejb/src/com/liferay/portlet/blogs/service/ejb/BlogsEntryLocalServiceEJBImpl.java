@@ -32,7 +32,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="BlogsEntryLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.blogs.service.BlogsEntryLocalService
+ * @see com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil
+ * @see com.liferay.portlet.blogs.service.ejb.BlogsEntryLocalServiceEJB
+ * @see com.liferay.portlet.blogs.service.ejb.BlogsEntryLocalServiceHome
+ * @see com.liferay.portlet.blogs.service.impl.BlogsEntryLocalServiceImpl
  *
  */
 public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,

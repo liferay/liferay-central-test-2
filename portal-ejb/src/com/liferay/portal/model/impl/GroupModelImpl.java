@@ -33,7 +33,20 @@ import java.sql.Types;
 /**
  * <a href="GroupModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>Group_</code> table in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.Group
+ * @see com.liferay.portal.service.model.GroupModel
+ * @see com.liferay.portal.service.model.impl.GroupImpl
  *
  */
 public class GroupModelImpl extends BaseModelImpl {

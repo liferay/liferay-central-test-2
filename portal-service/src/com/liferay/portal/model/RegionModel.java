@@ -27,7 +27,21 @@ import com.liferay.portal.model.BaseModel;
 /**
  * <a href="RegionModel.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>Region</code> table in the
+ * database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.Region
+ * @see com.liferay.portal.service.model.impl.RegionImpl
+ * @see com.liferay.portal.service.model.impl.RegionModelImpl
  *
  */
 public interface RegionModel extends BaseModel {

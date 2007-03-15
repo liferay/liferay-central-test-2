@@ -33,7 +33,21 @@ import java.sql.Types;
 /**
  * <a href="PluginSettingModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>PluginSetting</code> table in
+ * the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.PluginSetting
+ * @see com.liferay.portal.service.model.PluginSettingModel
+ * @see com.liferay.portal.service.model.impl.PluginSettingImpl
  *
  */
 public class PluginSettingModelImpl extends BaseModelImpl {

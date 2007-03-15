@@ -37,7 +37,20 @@ import java.util.Date;
 /**
  * <a href="IGImageModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>IGImage</code> table in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.imagegallery.service.model.IGImage
+ * @see com.liferay.portlet.imagegallery.service.model.IGImageModel
+ * @see com.liferay.portlet.imagegallery.service.model.impl.IGImageImpl
  *
  */
 public class IGImageModelImpl extends BaseModelImpl {

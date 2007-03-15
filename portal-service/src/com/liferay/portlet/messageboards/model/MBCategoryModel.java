@@ -29,7 +29,21 @@ import java.util.Date;
 /**
  * <a href="MBCategoryModel.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>MBCategory</code> table in
+ * the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.messageboards.service.model.MBCategory
+ * @see com.liferay.portlet.messageboards.service.model.impl.MBCategoryImpl
+ * @see com.liferay.portlet.messageboards.service.model.impl.MBCategoryModelImpl
  *
  */
 public interface MBCategoryModel extends BaseModel {

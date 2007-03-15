@@ -32,7 +32,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="MBBanLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.messageboards.service.MBBanLocalService
+ * @see com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil
+ * @see com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB
+ * @see com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome
+ * @see com.liferay.portlet.messageboards.service.impl.MBBanLocalServiceImpl
  *
  */
 public class MBBanLocalServiceEJBImpl implements MBBanLocalService, SessionBean {

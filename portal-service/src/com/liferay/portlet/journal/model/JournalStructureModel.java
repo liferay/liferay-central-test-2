@@ -31,7 +31,21 @@ import java.util.Date;
 /**
  * <a href="JournalStructureModel.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>JournalStructure</code> table
+ * in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.journal.service.model.JournalStructure
+ * @see com.liferay.portlet.journal.service.model.impl.JournalStructureImpl
+ * @see com.liferay.portlet.journal.service.model.impl.JournalStructureModelImpl
  *
  */
 public interface JournalStructureModel extends BaseModel {

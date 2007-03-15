@@ -29,7 +29,23 @@ import javax.ejb.EJBObject;
 /**
  * <a href="ContactServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.ContactService
+ * @see com.liferay.portal.service.ContactServiceUtil
+ * @see com.liferay.portal.service.ejb.ContactServiceEJBImpl
+ * @see com.liferay.portal.service.ejb.ContactServiceHome
+ * @see com.liferay.portal.service.impl.ContactServiceImpl
  *
  */
 public interface ContactServiceEJB extends EJBObject, ContactService {

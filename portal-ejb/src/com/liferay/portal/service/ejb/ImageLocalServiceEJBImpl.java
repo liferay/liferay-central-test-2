@@ -32,7 +32,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="ImageLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.ImageLocalService
+ * @see com.liferay.portal.service.ImageLocalServiceUtil
+ * @see com.liferay.portal.service.ejb.ImageLocalServiceEJB
+ * @see com.liferay.portal.service.ejb.ImageLocalServiceHome
+ * @see com.liferay.portal.service.impl.ImageLocalServiceImpl
  *
  */
 public class ImageLocalServiceEJBImpl implements ImageLocalService, SessionBean {

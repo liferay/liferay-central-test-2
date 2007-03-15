@@ -33,7 +33,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="AddressServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.AddressService
+ * @see com.liferay.portal.service.AddressServiceUtil
+ * @see com.liferay.portal.service.ejb.AddressServiceEJB
+ * @see com.liferay.portal.service.ejb.AddressServiceHome
+ * @see com.liferay.portal.service.impl.AddressServiceImpl
  *
  */
 public class AddressServiceEJBImpl implements AddressService, SessionBean {

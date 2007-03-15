@@ -29,7 +29,23 @@ import javax.ejb.EJBObject;
 /**
  * <a href="ShoppingItemServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.shopping.service.ShoppingItemService
+ * @see com.liferay.portlet.shopping.service.ShoppingItemServiceUtil
+ * @see com.liferay.portlet.shopping.service.ejb.ShoppingItemServiceEJBImpl
+ * @see com.liferay.portlet.shopping.service.ejb.ShoppingItemServiceHome
+ * @see com.liferay.portlet.shopping.service.impl.ShoppingItemServiceImpl
  *
  */
 public interface ShoppingItemServiceEJB extends EJBObject, ShoppingItemService {

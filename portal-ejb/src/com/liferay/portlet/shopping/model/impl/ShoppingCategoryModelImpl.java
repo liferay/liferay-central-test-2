@@ -35,7 +35,21 @@ import java.util.Date;
 /**
  * <a href="ShoppingCategoryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>ShoppingCategory</code> table
+ * in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.shopping.service.model.ShoppingCategory
+ * @see com.liferay.portlet.shopping.service.model.ShoppingCategoryModel
+ * @see com.liferay.portlet.shopping.service.model.impl.ShoppingCategoryImpl
  *
  */
 public class ShoppingCategoryModelImpl extends BaseModelImpl {

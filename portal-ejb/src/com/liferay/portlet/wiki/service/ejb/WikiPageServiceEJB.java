@@ -29,7 +29,23 @@ import javax.ejb.EJBObject;
 /**
  * <a href="WikiPageServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.wiki.service.WikiPageService
+ * @see com.liferay.portlet.wiki.service.WikiPageServiceUtil
+ * @see com.liferay.portlet.wiki.service.ejb.WikiPageServiceEJBImpl
+ * @see com.liferay.portlet.wiki.service.ejb.WikiPageServiceHome
+ * @see com.liferay.portlet.wiki.service.impl.WikiPageServiceImpl
  *
  */
 public interface WikiPageServiceEJB extends EJBObject, WikiPageService {

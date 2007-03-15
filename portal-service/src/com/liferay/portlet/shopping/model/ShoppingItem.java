@@ -25,7 +25,26 @@ package com.liferay.portlet.shopping.model;
 /**
  * <a href="ShoppingItem.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>ShoppingItem</code> table
+ * in the database.
+ * </p>
+ *
+ * <p>
+ * Customize <code>com.liferay.portlet.shopping.service.model.impl.ShoppingItemImpl</code>
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.shopping.service.model.ShoppingItemModel
+ * @see com.liferay.portlet.shopping.service.model.impl.ShoppingItemImpl
+ * @see com.liferay.portlet.shopping.service.model.impl.ShoppingItemModelImpl
  *
  */
 public interface ShoppingItem extends ShoppingItemModel {

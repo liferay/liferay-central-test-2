@@ -25,7 +25,26 @@ package com.liferay.portlet.tags.model;
 /**
  * <a href="TagsEntry.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>TagsEntry</code> table in
+ * the database.
+ * </p>
+ *
+ * <p>
+ * Customize <code>com.liferay.portlet.tags.service.model.impl.TagsEntryImpl</code>
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.tags.service.model.TagsEntryModel
+ * @see com.liferay.portlet.tags.service.model.impl.TagsEntryImpl
+ * @see com.liferay.portlet.tags.service.model.impl.TagsEntryModelImpl
  *
  */
 public interface TagsEntry extends TagsEntryModel {

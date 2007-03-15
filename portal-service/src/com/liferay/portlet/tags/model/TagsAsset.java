@@ -25,7 +25,26 @@ package com.liferay.portlet.tags.model;
 /**
  * <a href="TagsAsset.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>TagsAsset</code> table in
+ * the database.
+ * </p>
+ *
+ * <p>
+ * Customize <code>com.liferay.portlet.tags.service.model.impl.TagsAssetImpl</code>
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.tags.service.model.TagsAssetModel
+ * @see com.liferay.portlet.tags.service.model.impl.TagsAssetImpl
+ * @see com.liferay.portlet.tags.service.model.impl.TagsAssetModelImpl
  *
  */
 public interface TagsAsset extends TagsAssetModel {

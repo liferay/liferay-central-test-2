@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="BookmarksEntryLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService
+ * @see com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil
+ * @see com.liferay.portlet.bookmarks.service.ejb.BookmarksEntryLocalServiceEJBImpl
+ * @see com.liferay.portlet.bookmarks.service.ejb.BookmarksEntryLocalServiceHome
+ * @see com.liferay.portlet.bookmarks.service.impl.BookmarksEntryLocalServiceImpl
  *
  */
 public interface BookmarksEntryLocalServiceEJB extends EJBLocalObject,

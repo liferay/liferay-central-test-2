@@ -34,7 +34,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="MBMessageServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.messageboards.service.MBMessageService
+ * @see com.liferay.portlet.messageboards.service.MBMessageServiceUtil
+ * @see com.liferay.portlet.messageboards.service.ejb.MBMessageServiceEJB
+ * @see com.liferay.portlet.messageboards.service.ejb.MBMessageServiceHome
+ * @see com.liferay.portlet.messageboards.service.impl.MBMessageServiceImpl
  *
  */
 public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {

@@ -36,7 +36,20 @@ import java.util.Date;
 /**
  * <a href="PhoneModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>Phone</code> table in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.Phone
+ * @see com.liferay.portal.service.model.PhoneModel
+ * @see com.liferay.portal.service.model.impl.PhoneImpl
  *
  */
 public class PhoneModelImpl extends BaseModelImpl {

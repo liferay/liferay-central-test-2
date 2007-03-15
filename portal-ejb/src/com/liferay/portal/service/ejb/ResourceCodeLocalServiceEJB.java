@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="ResourceCodeLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.ResourceCodeLocalService
+ * @see com.liferay.portal.service.ResourceCodeLocalServiceUtil
+ * @see com.liferay.portal.service.ejb.ResourceCodeLocalServiceEJBImpl
+ * @see com.liferay.portal.service.ejb.ResourceCodeLocalServiceHome
+ * @see com.liferay.portal.service.impl.ResourceCodeLocalServiceImpl
  *
  */
 public interface ResourceCodeLocalServiceEJB extends EJBLocalObject,

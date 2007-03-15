@@ -35,7 +35,21 @@ import java.util.Date;
 /**
  * <a href="UserTrackerPathModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>UserTrackerPath</code> table
+ * in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.UserTrackerPath
+ * @see com.liferay.portal.service.model.UserTrackerPathModel
+ * @see com.liferay.portal.service.model.impl.UserTrackerPathImpl
  *
  */
 public class UserTrackerPathModelImpl extends BaseModelImpl {

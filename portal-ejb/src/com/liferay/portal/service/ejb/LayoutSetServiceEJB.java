@@ -29,7 +29,23 @@ import javax.ejb.EJBObject;
 /**
  * <a href="LayoutSetServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.LayoutSetService
+ * @see com.liferay.portal.service.LayoutSetServiceUtil
+ * @see com.liferay.portal.service.ejb.LayoutSetServiceEJBImpl
+ * @see com.liferay.portal.service.ejb.LayoutSetServiceHome
+ * @see com.liferay.portal.service.impl.LayoutSetServiceImpl
  *
  */
 public interface LayoutSetServiceEJB extends EJBObject, LayoutSetService {

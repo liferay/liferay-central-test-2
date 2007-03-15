@@ -33,7 +33,21 @@ import java.sql.Types;
 /**
  * <a href="TagsSourceModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>TagsSource</code> table in the
+ * database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.tags.service.model.TagsSource
+ * @see com.liferay.portlet.tags.service.model.TagsSourceModel
+ * @see com.liferay.portlet.tags.service.model.impl.TagsSourceImpl
  *
  */
 public class TagsSourceModelImpl extends BaseModelImpl {

@@ -29,7 +29,23 @@ import javax.ejb.EJBObject;
 /**
  * <a href="SCFrameworkVersionServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService
+ * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil
+ * @see com.liferay.portlet.softwarecatalog.service.ejb.SCFrameworkVersionServiceEJBImpl
+ * @see com.liferay.portlet.softwarecatalog.service.ejb.SCFrameworkVersionServiceHome
+ * @see com.liferay.portlet.softwarecatalog.service.impl.SCFrameworkVersionServiceImpl
  *
  */
 public interface SCFrameworkVersionServiceEJB extends EJBObject,

@@ -35,7 +35,21 @@ import java.sql.Types;
 /**
  * <a href="PollsChoiceModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>PollsChoice</code> table in the
+ * database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.polls.service.model.PollsChoice
+ * @see com.liferay.portlet.polls.service.model.PollsChoiceModel
+ * @see com.liferay.portlet.polls.service.model.impl.PollsChoiceImpl
  *
  */
 public class PollsChoiceModelImpl extends BaseModelImpl {

@@ -32,7 +32,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="DLFileEntryLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService
+ * @see com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil
+ * @see com.liferay.portlet.documentlibrary.service.ejb.DLFileEntryLocalServiceEJB
+ * @see com.liferay.portlet.documentlibrary.service.ejb.DLFileEntryLocalServiceHome
+ * @see com.liferay.portlet.documentlibrary.service.impl.DLFileEntryLocalServiceImpl
  *
  */
 public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,

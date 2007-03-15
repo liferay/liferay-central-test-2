@@ -32,7 +32,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="UserTrackerPathLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.UserTrackerPathLocalService
+ * @see com.liferay.portal.service.UserTrackerPathLocalServiceUtil
+ * @see com.liferay.portal.service.ejb.UserTrackerPathLocalServiceEJB
+ * @see com.liferay.portal.service.ejb.UserTrackerPathLocalServiceHome
+ * @see com.liferay.portal.service.impl.UserTrackerPathLocalServiceImpl
  *
  */
 public class UserTrackerPathLocalServiceEJBImpl

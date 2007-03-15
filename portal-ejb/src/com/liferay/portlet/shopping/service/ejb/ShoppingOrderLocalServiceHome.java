@@ -28,7 +28,23 @@ import javax.ejb.EJBLocalHome;
 /**
  * <a href="ShoppingOrderLocalServiceHome.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.shopping.service.ShoppingOrderLocalService
+ * @see com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil
+ * @see com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJB
+ * @see com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJBImpl
+ * @see com.liferay.portlet.shopping.service.impl.ShoppingOrderLocalServiceImpl
  *
  */
 public interface ShoppingOrderLocalServiceHome extends EJBLocalHome {

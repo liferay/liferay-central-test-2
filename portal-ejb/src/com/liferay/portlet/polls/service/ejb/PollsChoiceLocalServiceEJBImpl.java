@@ -32,7 +32,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="PollsChoiceLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.polls.service.PollsChoiceLocalService
+ * @see com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil
+ * @see com.liferay.portlet.polls.service.ejb.PollsChoiceLocalServiceEJB
+ * @see com.liferay.portlet.polls.service.ejb.PollsChoiceLocalServiceHome
+ * @see com.liferay.portlet.polls.service.impl.PollsChoiceLocalServiceImpl
  *
  */
 public class PollsChoiceLocalServiceEJBImpl implements PollsChoiceLocalService,

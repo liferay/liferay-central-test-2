@@ -36,7 +36,21 @@ import java.util.Date;
 /**
  * <a href="CalEventModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>CalEvent</code> table in the
+ * database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.calendar.service.model.CalEvent
+ * @see com.liferay.portlet.calendar.service.model.CalEventModel
+ * @see com.liferay.portlet.calendar.service.model.impl.CalEventImpl
  *
  */
 public class CalEventModelImpl extends BaseModelImpl {

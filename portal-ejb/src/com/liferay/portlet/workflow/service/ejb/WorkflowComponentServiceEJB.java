@@ -29,7 +29,23 @@ import javax.ejb.EJBObject;
 /**
  * <a href="WorkflowComponentServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.workflow.service.WorkflowComponentService
+ * @see com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil
+ * @see com.liferay.portlet.workflow.service.ejb.WorkflowComponentServiceEJBImpl
+ * @see com.liferay.portlet.workflow.service.ejb.WorkflowComponentServiceHome
+ * @see com.liferay.portlet.workflow.service.impl.WorkflowComponentServiceImpl
  *
  */
 public interface WorkflowComponentServiceEJB extends EJBObject,

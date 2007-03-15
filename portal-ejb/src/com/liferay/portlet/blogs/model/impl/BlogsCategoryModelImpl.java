@@ -35,7 +35,21 @@ import java.util.Date;
 /**
  * <a href="BlogsCategoryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>BlogsCategory</code> table in
+ * the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.blogs.service.model.BlogsCategory
+ * @see com.liferay.portlet.blogs.service.model.BlogsCategoryModel
+ * @see com.liferay.portlet.blogs.service.model.impl.BlogsCategoryImpl
  *
  */
 public class BlogsCategoryModelImpl extends BaseModelImpl {

@@ -32,7 +32,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="WebsiteLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.WebsiteLocalService
+ * @see com.liferay.portal.service.WebsiteLocalServiceUtil
+ * @see com.liferay.portal.service.ejb.WebsiteLocalServiceEJB
+ * @see com.liferay.portal.service.ejb.WebsiteLocalServiceHome
+ * @see com.liferay.portal.service.impl.WebsiteLocalServiceImpl
  *
  */
 public class WebsiteLocalServiceEJBImpl implements WebsiteLocalService,

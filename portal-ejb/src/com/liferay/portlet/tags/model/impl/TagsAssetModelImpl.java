@@ -35,7 +35,21 @@ import java.util.Date;
 /**
  * <a href="TagsAssetModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>TagsAsset</code> table in the
+ * database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.tags.service.model.TagsAsset
+ * @see com.liferay.portlet.tags.service.model.TagsAssetModel
+ * @see com.liferay.portlet.tags.service.model.impl.TagsAssetImpl
  *
  */
 public class TagsAssetModelImpl extends BaseModelImpl {

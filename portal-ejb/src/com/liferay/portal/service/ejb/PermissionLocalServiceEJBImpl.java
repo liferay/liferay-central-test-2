@@ -32,7 +32,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="PermissionLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.PermissionLocalService
+ * @see com.liferay.portal.service.PermissionLocalServiceUtil
+ * @see com.liferay.portal.service.ejb.PermissionLocalServiceEJB
+ * @see com.liferay.portal.service.ejb.PermissionLocalServiceHome
+ * @see com.liferay.portal.service.impl.PermissionLocalServiceImpl
  *
  */
 public class PermissionLocalServiceEJBImpl implements PermissionLocalService,

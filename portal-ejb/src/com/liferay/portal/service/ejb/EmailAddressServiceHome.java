@@ -30,7 +30,23 @@ import javax.ejb.EJBHome;
 /**
  * <a href="EmailAddressServiceHome.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.EmailAddressService
+ * @see com.liferay.portal.service.EmailAddressServiceUtil
+ * @see com.liferay.portal.service.ejb.EmailAddressServiceEJB
+ * @see com.liferay.portal.service.ejb.EmailAddressServiceEJBImpl
+ * @see com.liferay.portal.service.impl.EmailAddressServiceImpl
  *
  */
 public interface EmailAddressServiceHome extends EJBHome {

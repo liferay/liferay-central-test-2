@@ -29,7 +29,23 @@ import javax.ejb.EJBObject;
 /**
  * <a href="MBMessageServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.messageboards.service.MBMessageService
+ * @see com.liferay.portlet.messageboards.service.MBMessageServiceUtil
+ * @see com.liferay.portlet.messageboards.service.ejb.MBMessageServiceEJBImpl
+ * @see com.liferay.portlet.messageboards.service.ejb.MBMessageServiceHome
+ * @see com.liferay.portlet.messageboards.service.impl.MBMessageServiceImpl
  *
  */
 public interface MBMessageServiceEJB extends EJBObject, MBMessageService {

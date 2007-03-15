@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="PhoneLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.PhoneLocalService
+ * @see com.liferay.portal.service.PhoneLocalServiceUtil
+ * @see com.liferay.portal.service.ejb.PhoneLocalServiceEJBImpl
+ * @see com.liferay.portal.service.ejb.PhoneLocalServiceHome
+ * @see com.liferay.portal.service.impl.PhoneLocalServiceImpl
  *
  */
 public interface PhoneLocalServiceEJB extends EJBLocalObject, PhoneLocalService {

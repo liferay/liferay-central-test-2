@@ -33,7 +33,18 @@ import java.util.List;
 /**
  * <a href="JournalArticleSoap.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by <code>com.liferay.portlet.journal.service.http.JournalArticleServiceSoap</code>.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.journal.service.http.JournalArticleServiceSoap
  *
  */
 public class JournalArticleSoap implements Serializable {

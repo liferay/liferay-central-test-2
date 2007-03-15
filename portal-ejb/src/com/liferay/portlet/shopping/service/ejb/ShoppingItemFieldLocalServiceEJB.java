@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="ShoppingItemFieldLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService
+ * @see com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceUtil
+ * @see com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJBImpl
+ * @see com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome
+ * @see com.liferay.portlet.shopping.service.impl.ShoppingItemFieldLocalServiceImpl
  *
  */
 public interface ShoppingItemFieldLocalServiceEJB extends EJBLocalObject,

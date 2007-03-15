@@ -29,7 +29,23 @@ import javax.ejb.EJBObject;
 /**
  * <a href="TagsPropertyServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.tags.service.TagsPropertyService
+ * @see com.liferay.portlet.tags.service.TagsPropertyServiceUtil
+ * @see com.liferay.portlet.tags.service.ejb.TagsPropertyServiceEJBImpl
+ * @see com.liferay.portlet.tags.service.ejb.TagsPropertyServiceHome
+ * @see com.liferay.portlet.tags.service.impl.TagsPropertyServiceImpl
  *
  */
 public interface TagsPropertyServiceEJB extends EJBObject, TagsPropertyService {

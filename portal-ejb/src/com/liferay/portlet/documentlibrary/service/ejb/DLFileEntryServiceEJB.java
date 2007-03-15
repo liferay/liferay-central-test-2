@@ -29,7 +29,23 @@ import javax.ejb.EJBObject;
 /**
  * <a href="DLFileEntryServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.documentlibrary.service.DLFileEntryService
+ * @see com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil
+ * @see com.liferay.portlet.documentlibrary.service.ejb.DLFileEntryServiceEJBImpl
+ * @see com.liferay.portlet.documentlibrary.service.ejb.DLFileEntryServiceHome
+ * @see com.liferay.portlet.documentlibrary.service.impl.DLFileEntryServiceImpl
  *
  */
 public interface DLFileEntryServiceEJB extends EJBObject, DLFileEntryService {

@@ -31,7 +31,21 @@ import java.util.Date;
 /**
  * <a href="DLFileEntryModel.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>DLFileEntry</code> table
+ * in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.documentlibrary.service.model.DLFileEntry
+ * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileEntryImpl
+ * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileEntryModelImpl
  *
  */
 public interface DLFileEntryModel extends BaseModel {

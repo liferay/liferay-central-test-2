@@ -33,7 +33,18 @@ import java.util.List;
 /**
  * <a href="DLFileRankSoap.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by <code>com.liferay.portlet.documentlibrary.service.http.DLFileRankServiceSoap</code>.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.documentlibrary.service.http.DLFileRankServiceSoap
  *
  */
 public class DLFileRankSoap implements Serializable {

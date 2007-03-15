@@ -29,7 +29,21 @@ import java.util.Date;
 /**
  * <a href="RatingsEntryModel.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>RatingsEntry</code> table
+ * in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.ratings.service.model.RatingsEntry
+ * @see com.liferay.portlet.ratings.service.model.impl.RatingsEntryImpl
+ * @see com.liferay.portlet.ratings.service.model.impl.RatingsEntryModelImpl
  *
  */
 public interface RatingsEntryModel extends BaseModel {

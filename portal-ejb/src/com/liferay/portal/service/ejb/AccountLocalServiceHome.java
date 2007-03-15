@@ -28,7 +28,23 @@ import javax.ejb.EJBLocalHome;
 /**
  * <a href="AccountLocalServiceHome.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.AccountLocalService
+ * @see com.liferay.portal.service.AccountLocalServiceUtil
+ * @see com.liferay.portal.service.ejb.AccountLocalServiceEJB
+ * @see com.liferay.portal.service.ejb.AccountLocalServiceEJBImpl
+ * @see com.liferay.portal.service.impl.AccountLocalServiceImpl
  *
  */
 public interface AccountLocalServiceHome extends EJBLocalHome {

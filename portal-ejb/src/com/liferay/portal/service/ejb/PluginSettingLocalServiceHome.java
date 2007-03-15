@@ -28,7 +28,23 @@ import javax.ejb.EJBLocalHome;
 /**
  * <a href="PluginSettingLocalServiceHome.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.PluginSettingLocalService
+ * @see com.liferay.portal.service.PluginSettingLocalServiceUtil
+ * @see com.liferay.portal.service.ejb.PluginSettingLocalServiceEJB
+ * @see com.liferay.portal.service.ejb.PluginSettingLocalServiceEJBImpl
+ * @see com.liferay.portal.service.impl.PluginSettingLocalServiceImpl
  *
  */
 public interface PluginSettingLocalServiceHome extends EJBLocalHome {

@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="MBStatsUserLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.messageboards.service.MBStatsUserLocalService
+ * @see com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil
+ * @see com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJBImpl
+ * @see com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome
+ * @see com.liferay.portlet.messageboards.service.impl.MBStatsUserLocalServiceImpl
  *
  */
 public interface MBStatsUserLocalServiceEJB extends EJBLocalObject,

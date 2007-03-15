@@ -29,7 +29,21 @@ import java.util.Date;
 /**
  * <a href="DataTrackerModel.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>DataTracker</code> table
+ * in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.DataTracker
+ * @see com.liferay.portal.service.model.impl.DataTrackerImpl
+ * @see com.liferay.portal.service.model.impl.DataTrackerModelImpl
  *
  */
 public interface DataTrackerModel extends BaseModel {

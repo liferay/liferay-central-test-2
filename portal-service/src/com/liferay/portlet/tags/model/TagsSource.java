@@ -25,7 +25,26 @@ package com.liferay.portlet.tags.model;
 /**
  * <a href="TagsSource.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>TagsSource</code> table in
+ * the database.
+ * </p>
+ *
+ * <p>
+ * Customize <code>com.liferay.portlet.tags.service.model.impl.TagsSourceImpl</code>
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.tags.service.model.TagsSourceModel
+ * @see com.liferay.portlet.tags.service.model.impl.TagsSourceImpl
+ * @see com.liferay.portlet.tags.service.model.impl.TagsSourceModelImpl
  *
  */
 public interface TagsSource extends TagsSourceModel {

@@ -34,7 +34,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="BlogsEntryServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.blogs.service.BlogsEntryService
+ * @see com.liferay.portlet.blogs.service.BlogsEntryServiceUtil
+ * @see com.liferay.portlet.blogs.service.ejb.BlogsEntryServiceEJB
+ * @see com.liferay.portlet.blogs.service.ejb.BlogsEntryServiceHome
+ * @see com.liferay.portlet.blogs.service.impl.BlogsEntryServiceImpl
  *
  */
 public class BlogsEntryServiceEJBImpl implements BlogsEntryService, SessionBean {

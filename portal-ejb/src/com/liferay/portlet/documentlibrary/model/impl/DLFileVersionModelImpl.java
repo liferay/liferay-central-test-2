@@ -37,7 +37,21 @@ import java.util.Date;
 /**
  * <a href="DLFileVersionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>DLFileVersion</code> table in
+ * the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.documentlibrary.service.model.DLFileVersion
+ * @see com.liferay.portlet.documentlibrary.service.model.DLFileVersionModel
+ * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileVersionImpl
  *
  */
 public class DLFileVersionModelImpl extends BaseModelImpl {

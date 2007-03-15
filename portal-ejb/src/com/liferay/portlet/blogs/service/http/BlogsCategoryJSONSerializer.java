@@ -35,7 +35,19 @@ import java.util.List;
 /**
  * <a href="BlogsCategoryJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by <code>com.liferay.portlet.blogs.service.http.BlogsCategoryServiceJSON</code>
+ * to translate objects.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.blogs.service.http.BlogsCategoryServiceJSON
  *
  */
 public class BlogsCategoryJSONSerializer {

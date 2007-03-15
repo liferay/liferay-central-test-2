@@ -38,7 +38,21 @@ import java.util.Date;
 /**
  * <a href="MBMessageModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>MBMessage</code> table in the
+ * database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.messageboards.service.model.MBMessage
+ * @see com.liferay.portlet.messageboards.service.model.MBMessageModel
+ * @see com.liferay.portlet.messageboards.service.model.impl.MBMessageImpl
  *
  */
 public class MBMessageModelImpl extends BaseModelImpl {

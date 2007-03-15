@@ -28,7 +28,21 @@ import com.liferay.portal.service.persistence.PortletPK;
 /**
  * <a href="PortletModel.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>Portlet</code> table in the
+ * database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.Portlet
+ * @see com.liferay.portal.service.model.impl.PortletImpl
+ * @see com.liferay.portal.service.model.impl.PortletModelImpl
  *
  */
 public interface PortletModel extends BaseModel {

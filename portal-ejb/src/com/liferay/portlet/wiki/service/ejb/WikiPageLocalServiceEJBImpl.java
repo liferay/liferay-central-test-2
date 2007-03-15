@@ -32,7 +32,23 @@ import javax.ejb.SessionContext;
 /**
  * <a href="WikiPageLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB implementation of the service that is used when Liferay
+ * is run inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.wiki.service.WikiPageLocalService
+ * @see com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil
+ * @see com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceEJB
+ * @see com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceHome
+ * @see com.liferay.portlet.wiki.service.impl.WikiPageLocalServiceImpl
  *
  */
 public class WikiPageLocalServiceEJBImpl implements WikiPageLocalService,

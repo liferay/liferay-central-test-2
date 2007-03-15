@@ -33,7 +33,19 @@ import java.util.List;
 /**
  * <a href="OrganizationJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by <code>com.liferay.portal.service.http.OrganizationServiceJSON</code>
+ * to translate objects.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.http.OrganizationServiceJSON
  *
  */
 public class OrganizationJSONSerializer {

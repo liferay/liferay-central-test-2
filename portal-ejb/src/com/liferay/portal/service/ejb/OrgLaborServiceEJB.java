@@ -29,7 +29,23 @@ import javax.ejb.EJBObject;
 /**
  * <a href="OrgLaborServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.OrgLaborService
+ * @see com.liferay.portal.service.OrgLaborServiceUtil
+ * @see com.liferay.portal.service.ejb.OrgLaborServiceEJBImpl
+ * @see com.liferay.portal.service.ejb.OrgLaborServiceHome
+ * @see com.liferay.portal.service.impl.OrgLaborServiceImpl
  *
  */
 public interface OrgLaborServiceEJB extends EJBObject, OrgLaborService {

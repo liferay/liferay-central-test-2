@@ -33,7 +33,21 @@ import java.sql.Types;
 /**
  * <a href="ShoppingItemPriceModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>ShoppingItemPrice</code> table
+ * in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.shopping.service.model.ShoppingItemPrice
+ * @see com.liferay.portlet.shopping.service.model.ShoppingItemPriceModel
+ * @see com.liferay.portlet.shopping.service.model.impl.ShoppingItemPriceImpl
  *
  */
 public class ShoppingItemPriceModelImpl extends BaseModelImpl {

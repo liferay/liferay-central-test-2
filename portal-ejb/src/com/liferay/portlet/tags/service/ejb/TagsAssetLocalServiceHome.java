@@ -28,7 +28,23 @@ import javax.ejb.EJBLocalHome;
 /**
  * <a href="TagsAssetLocalServiceHome.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.tags.service.TagsAssetLocalService
+ * @see com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil
+ * @see com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceEJB
+ * @see com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceEJBImpl
+ * @see com.liferay.portlet.tags.service.impl.TagsAssetLocalServiceImpl
  *
  */
 public interface TagsAssetLocalServiceHome extends EJBLocalHome {

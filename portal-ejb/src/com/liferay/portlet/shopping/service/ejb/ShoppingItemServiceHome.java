@@ -30,7 +30,23 @@ import javax.ejb.EJBHome;
 /**
  * <a href="ShoppingItemServiceHome.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.shopping.service.ShoppingItemService
+ * @see com.liferay.portlet.shopping.service.ShoppingItemServiceUtil
+ * @see com.liferay.portlet.shopping.service.ejb.ShoppingItemServiceEJB
+ * @see com.liferay.portlet.shopping.service.ejb.ShoppingItemServiceEJBImpl
+ * @see com.liferay.portlet.shopping.service.impl.ShoppingItemServiceImpl
  *
  */
 public interface ShoppingItemServiceHome extends EJBHome {

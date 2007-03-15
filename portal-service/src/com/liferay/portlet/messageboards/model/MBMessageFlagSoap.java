@@ -32,7 +32,18 @@ import java.util.List;
 /**
  * <a href="MBMessageFlagSoap.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by <code>com.liferay.portlet.messageboards.service.http.MBMessageFlagServiceSoap</code>.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.messageboards.service.http.MBMessageFlagServiceSoap
  *
  */
 public class MBMessageFlagSoap implements Serializable {

@@ -37,7 +37,21 @@ import java.util.Date;
 /**
  * <a href="JournalTemplateModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>JournalTemplate</code> table
+ * in the database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.journal.service.model.JournalTemplate
+ * @see com.liferay.portlet.journal.service.model.JournalTemplateModel
+ * @see com.liferay.portlet.journal.service.model.impl.JournalTemplateImpl
  *
  */
 public class JournalTemplateModelImpl extends BaseModelImpl {

@@ -28,7 +28,23 @@ import javax.ejb.EJBLocalHome;
 /**
  * <a href="SCFrameworkVersionLocalServiceHome.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService
+ * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil
+ * @see com.liferay.portlet.softwarecatalog.service.ejb.SCFrameworkVersionLocalServiceEJB
+ * @see com.liferay.portlet.softwarecatalog.service.ejb.SCFrameworkVersionLocalServiceEJBImpl
+ * @see com.liferay.portlet.softwarecatalog.service.impl.SCFrameworkVersionLocalServiceImpl
  *
  */
 public interface SCFrameworkVersionLocalServiceHome extends EJBLocalHome {

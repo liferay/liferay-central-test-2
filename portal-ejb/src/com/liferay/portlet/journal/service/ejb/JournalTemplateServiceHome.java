@@ -30,7 +30,23 @@ import javax.ejb.EJBHome;
 /**
  * <a href="JournalTemplateServiceHome.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.journal.service.JournalTemplateService
+ * @see com.liferay.portlet.journal.service.JournalTemplateServiceUtil
+ * @see com.liferay.portlet.journal.service.ejb.JournalTemplateServiceEJB
+ * @see com.liferay.portlet.journal.service.ejb.JournalTemplateServiceEJBImpl
+ * @see com.liferay.portlet.journal.service.impl.JournalTemplateServiceImpl
  *
  */
 public interface JournalTemplateServiceHome extends EJBHome {

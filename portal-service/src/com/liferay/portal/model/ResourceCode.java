@@ -25,7 +25,26 @@ package com.liferay.portal.model;
 /**
  * <a href="ResourceCode.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>ResourceCode</code> table
+ * in the database.
+ * </p>
+ *
+ * <p>
+ * Customize <code>com.liferay.portal.service.model.impl.ResourceCodeImpl</code>
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.ResourceCodeModel
+ * @see com.liferay.portal.service.model.impl.ResourceCodeImpl
+ * @see com.liferay.portal.service.model.impl.ResourceCodeModelImpl
  *
  */
 public interface ResourceCode extends ResourceCodeModel {

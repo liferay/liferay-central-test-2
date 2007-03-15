@@ -33,7 +33,21 @@ import java.sql.Types;
 /**
  * <a href="PermissionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>Permission_</code> table in the
+ * database.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.model.Permission
+ * @see com.liferay.portal.service.model.PermissionModel
+ * @see com.liferay.portal.service.model.impl.PermissionImpl
  *
  */
 public class PermissionModelImpl extends BaseModelImpl {

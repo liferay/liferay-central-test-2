@@ -28,7 +28,23 @@ import javax.ejb.EJBLocalHome;
 /**
  * <a href="UserGroupLocalServiceHome.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.service.UserGroupLocalService
+ * @see com.liferay.portal.service.UserGroupLocalServiceUtil
+ * @see com.liferay.portal.service.ejb.UserGroupLocalServiceEJB
+ * @see com.liferay.portal.service.ejb.UserGroupLocalServiceEJBImpl
+ * @see com.liferay.portal.service.impl.UserGroupLocalServiceImpl
  *
  */
 public interface UserGroupLocalServiceHome extends EJBLocalHome {

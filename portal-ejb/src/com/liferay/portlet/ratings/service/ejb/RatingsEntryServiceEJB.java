@@ -29,7 +29,23 @@ import javax.ejb.EJBObject;
 /**
  * <a href="RatingsEntryServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.ratings.service.RatingsEntryService
+ * @see com.liferay.portlet.ratings.service.RatingsEntryServiceUtil
+ * @see com.liferay.portlet.ratings.service.ejb.RatingsEntryServiceEJBImpl
+ * @see com.liferay.portlet.ratings.service.ejb.RatingsEntryServiceHome
+ * @see com.liferay.portlet.ratings.service.impl.RatingsEntryServiceImpl
  *
  */
 public interface RatingsEntryServiceEJB extends EJBObject, RatingsEntryService {

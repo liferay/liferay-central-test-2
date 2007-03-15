@@ -29,7 +29,23 @@ import javax.ejb.EJBLocalObject;
 /**
  * <a href="SCProductVersionLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be overwritten
+ * the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService
+ * @see com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil
+ * @see com.liferay.portlet.softwarecatalog.service.ejb.SCProductVersionLocalServiceEJBImpl
+ * @see com.liferay.portlet.softwarecatalog.service.ejb.SCProductVersionLocalServiceHome
+ * @see com.liferay.portlet.softwarecatalog.service.impl.SCProductVersionLocalServiceImpl
  *
  */
 public interface SCProductVersionLocalServiceEJB extends EJBLocalObject,
