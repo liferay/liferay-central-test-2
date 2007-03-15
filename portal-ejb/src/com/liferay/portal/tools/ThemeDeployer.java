@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.Validator;
 
 import java.io.File;
@@ -78,17 +79,49 @@ public class ThemeDeployer extends BaseDeployer {
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
+		StringMaker sm = new StringMaker();
+
 		String extraContent = super.getExtraContent(
 			webXmlVersion, srcFile, displayName);
 
-		extraContent +=
-			"<listener>" +
-			"<listener-class>" +
-			"com.liferay.portal.kernel.servlet.ThemeContextListener" +
-			"</listener-class>" +
-			"</listener>";
+		sm.append(extraContent);
 
-		return extraContent;
+		sm.append("<filter>");
+		sm.append("<filter-name>Velocity Filter</filter-name>");
+		sm.append("<filter-class>");
+		sm.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
+		sm.append("</filter-class>");
+		sm.append("<init-param>");
+		sm.append("<param-name>filter-class</param-name>");
+		sm.append("<param-value>");
+		sm.append("com.liferay.portal.servlet.filters.velocity.VelocityFilter");
+		sm.append("</param-value>");
+		sm.append("</init-param>");
+		sm.append("<init-param>");
+		sm.append("<param-name>pattern</param-name>");
+		sm.append("<param-value>(.+)/css/main.css(.+)</param-value>");
+		sm.append("</init-param>");
+		sm.append("</filter>");
+
+		sm.append("<filter-mapping>");
+		sm.append("<filter-name>Velocity Filter</filter-name>");
+		sm.append("<url-pattern>*.css</url-pattern>");
+
+		if (webXmlVersion > 2.3) {
+			sm.append("<dispatcher>FORWARD</dispatcher>");
+			sm.append("<dispatcher>INCLUDE</dispatcher>");
+			sm.append("<dispatcher>REQUEST</dispatcher>");
+		}
+
+		sm.append("</filter-mapping>");
+
+		sm.append("<listener>");
+		sm.append("<listener-class>");
+		sm.append("com.liferay.portal.kernel.servlet.ThemeContextListener");
+		sm.append("</listener-class>");
+		sm.append("</listener>");
+
+		return sm.toString();
 	}
 
 }

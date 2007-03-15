@@ -22,11 +22,22 @@
 
 package com.liferay.portal.servlet.filters.velocity;
 
-import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.model.ColorScheme;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Theme;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.theme.ThemeDisplayFactory;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
+import com.liferay.util.ParamUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
@@ -36,6 +47,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -110,16 +122,57 @@ public class VelocityFilter implements Filter {
 				new String(cacheResponse.getData()));
 			StringWriter writer = new StringWriter();
 
-			try {
-				EventsProcessor.process(PropsUtil.getArray(
-					PropsUtil.SERVLET_SERVICE_EVENTS_PRE), httpReq, httpRes);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
+			ThemeDisplay themeDisplay = null;
 
 			try {
+
+				// Company
+
+				String companyId = ParamUtil.getString(req, "companyId");
+
+				Company company = CompanyLocalServiceUtil.getCompany(companyId);
+
+				// Paths
+
+				String contextPath = PrefsPropsUtil.getString(
+					companyId, PropsUtil.PORTAL_CTX);
+
+				if (contextPath.equals(StringPool.SLASH)) {
+					contextPath = StringPool.BLANK;
+				}
+
+				// Locale
+
+				String languageId = ParamUtil.getString(req, "languageId");
+
+				Locale locale = LanguageUtil.getLocale(languageId);
+
+				// Theme and color scheme
+
+				String themeId = ParamUtil.getString(req, "themeId");
+				String colorSchemeId = ParamUtil.getString(
+					req, "colorSchemeId");
+
+				Theme theme = ThemeLocalUtil.getTheme(companyId, themeId);
+				ColorScheme colorScheme = ThemeLocalUtil.getColorScheme(
+					companyId, theme.getThemeId(), colorSchemeId);
+
+				// Theme display
+
+				themeDisplay = ThemeDisplayFactory.create();
+
+				themeDisplay.setCompany(company);
+				themeDisplay.setLocale(locale);
+				themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
+				themeDisplay.setPathContext(contextPath);
+
+				req.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
+
+				// Velocity variables
+
 				VelocityVariables.insertVariables(context, httpReq);
+
+				// Evaluate template
 
 				Velocity.evaluate(
 					context, writer, VelocityFilter.class.getName(), reader);
@@ -127,13 +180,14 @@ public class VelocityFilter implements Filter {
 			catch (Exception e) {
 				_log.error(e, e);
 			}
-
-			try {
-				EventsProcessor.process(PropsUtil.getArray(
-					PropsUtil.SERVLET_SERVICE_EVENTS_POST), httpReq, httpRes);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
+			finally {
+				try {
+					if (themeDisplay != null) {
+						ThemeDisplayFactory.recycle(themeDisplay);
+					}
+				}
+				catch (Exception e) {
+				}
 			}
 
 			CacheResponseData data = new CacheResponseData(

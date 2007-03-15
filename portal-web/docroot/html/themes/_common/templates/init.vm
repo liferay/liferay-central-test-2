@@ -9,12 +9,13 @@
 #set ( $javascript_folder = "$theme_display.getPathThemeJavaScript()" )
 #set ( $templates_folder = "$theme_display.getPathThemeTemplates()" )
 
-#set ( $full_css_path = $fullTemplatesPath + "/../css" )
+#set ( $full_css_path = $fullCssPath )
 #set ( $full_templates_path = $fullTemplatesPath )
 
-#set ( $css_main_file = "$css_folder/main.css?themeId=$theme_display.getThemeId()&colorSchemeId=$theme_display.getColorSchemeId()" )
+#set ( $css_main_file = "$css_folder/main.css?companyId=$theme_display.getCompanyId()&languageId=$languageUtil.getLanguageId($locale)&themeId=$theme_display.getThemeId()&colorSchemeId=$theme_display.getColorSchemeId()" )
 #set ( $js_main_file = "$javascript_folder/javascript.js" )
 
+#set ( $company_id = $company.getCompanyId() )
 #set ( $company_name = $company.getName() )
 #set ( $company_logo = $theme_display.getCompanyLogo() )
 #set ( $company_url = $theme_display.getURLHome() )
@@ -26,45 +27,45 @@
 #set ( $show_add_content = $theme_display.isShowAddContentIcon() )
 
 #if ( $show_add_content )
-	#set ( $add_content_text = $languageUtil.get($pageContext, "add-content") )
+	#set ( $add_content_text = $languageUtil.get($company_id, $locale, "add-content") )
 	#set ( $add_content_url = $theme_display.getURLAddContent() )
 
-	#set ( $layout_text = $languageUtil.get($pageContext, "layout") )
+	#set ( $layout_text = $languageUtil.get($company_id, $locale, "layout") )
 	#set ( $layout_url = $theme_display.getURLLayoutTemplates() )
 #end
 
 #set ( $show_home = $theme_display.isShowHomeIcon() )
 
 #if ( $show_home )
-	#set ( $home_text = $languageUtil.get($pageContext, "home") )
+	#set ( $home_text = $languageUtil.get($company_id, $locale, "home") )
 	#set ( $home_url = $theme_display.getURLHome() )
 #end
 
 #set ( $show_my_account = $theme_display.isShowMyAccountIcon() )
 
 #if ( $show_my_account )
-	#set ( $my_account_text = $languageUtil.get($pageContext, "my-account") )
+	#set ( $my_account_text = $languageUtil.get($company_id, $locale, "my-account") )
 	#set ( $my_account_url = $theme_display.getURLMyAccount() )
 #end
 
 #set ( $show_page_settings = $theme_display.isShowPageSettingsIcon() )
 
 #if ( $show_page_settings )
-	#set ( $page_settings_text = $languageUtil.get($pageContext, "page-settings") )
+	#set ( $page_settings_text = $languageUtil.get($company_id, $locale, "page-settings") )
 	#set ( $page_settings_url = $theme_display.getURLPageSettings().toString() )
 #end
 
 #set ( $show_sign_in = $theme_display.isShowSignInIcon() )
 
 #if ( $show_sign_in )
-	#set ( $sign_in_text = $languageUtil.get($pageContext, "sign-in") )
+	#set ( $sign_in_text = $languageUtil.get($company_id, $locale, "sign-in") )
 	#set ( $sign_in_url = $theme_display.getURLSignIn() )
 #end
 
 #set ( $show_sign_out = $theme_display.isShowSignOutIcon() )
 
 #if ( $show_sign_out )
-	#set ( $sign_out_text = $languageUtil.get($pageContext, "sign-out") )
+	#set ( $sign_out_text = $languageUtil.get($company_id, $locale, "sign-out") )
 	#set ( $sign_out_url = $theme_display.getURLSignOut() )
 #end
 
@@ -74,7 +75,7 @@
 
 ## ---------- Page ---------- ##
 
-#set ( $the_title = $languageUtil.get($pageContext, $tilesTitle) )
+#set ( $the_title = $languageUtil.get($company_id, $locale, $tilesTitle) )
 #set ( $selectable = $theme_display.isTilesSelectable() )
 
 #if ( $layout )
@@ -83,7 +84,7 @@
 	#set ( $is_first_child = $page.isFirstChild() )
 	#set ( $is_first_parent = $page.isFirstParent() )
 
-	#set ( $the_title = $languageUtil.get($pageContext, $the_title, $page.getName($locale)) )
+	#set ( $the_title = $languageUtil.get($company_id, $locale, $the_title, $page.getName($locale)) )
 #end
 
 #if ( $layouts )

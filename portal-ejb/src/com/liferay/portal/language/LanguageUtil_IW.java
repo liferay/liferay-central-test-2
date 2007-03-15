@@ -155,6 +155,10 @@ public class LanguageUtil_IW {
 		return LanguageUtil.getLanguageId(req);
 	}
 
+	public java.lang.String getLanguageId(java.util.Locale locale) {
+		return LanguageUtil.getLanguageId(locale);
+	}
+
 	public java.util.Locale getLocale(java.lang.String languageCode) {
 		return LanguageUtil.getLocale(languageCode);
 	}

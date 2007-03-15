@@ -7,4 +7,4 @@
 #end
 
 #macro(language $lang_key)
-$languageUtil.get($user, $lang_key)#end
+$languageUtil.get($company.getCompanyId(), $locale, $lang_key)#end

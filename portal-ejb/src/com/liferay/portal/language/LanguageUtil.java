@@ -307,6 +307,10 @@ public class LanguageUtil {
 			}
 		}
 
+		return getLanguageId(locale);
+	}
+
+	public static String getLanguageId(Locale locale) {
 		return LocaleUtil.toLanguageId(locale);
 	}
 

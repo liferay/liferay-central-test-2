@@ -66,13 +66,10 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.taglib.tiles.ComponentConstants;
 import org.apache.struts.tiles.ComponentContext;
 import org.apache.velocity.VelocityContext;
-
-import org.springframework.mock.web.MockPageContext;
 
 /**
  * <a href="VelocityVariables.java.html"><b><i>View Source</i></b></a>
@@ -85,27 +82,9 @@ public class VelocityVariables {
 	public static void insertVariables(
 		VelocityContext vc, HttpServletRequest req) {
 
-		insertVariables(vc, req, null);
-	}
-
-	public static void insertVariables(
-		VelocityContext vc, HttpServletRequest req, PageContext pageContext) {
-
 		// Request
 
 		vc.put("request", req);
-
-		// Page context
-
-		if (pageContext == null) {
-
-			// Velocity needs an instantiated pageContext or it cannot
-			// correctly introspect languageUtil.
-
-			pageContext = new MockPageContext();
-		}
-
-		vc.put("pageContext", pageContext);
 
 		// Portlet config
 
@@ -176,10 +155,15 @@ public class VelocityVariables {
 				vc.put("navItems", navItems);
 			}
 
-			// Full templates path
+			// Full css and templates path
 
 			String ctxName = GetterUtil.getString(
 				theme.getServletContextName());
+
+			vc.put(
+				"fullCssPath",
+				ctxName + VelocityResourceListener.SERVLET_SEPARATOR +
+					theme.getCssPath());
 
 			vc.put(
 				"fullTemplatesPath",
