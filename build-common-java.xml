@@ -64,6 +64,7 @@
 
 		<javadoc
 			additionalparam="-J-Xmx128m"
+			breakiterator="yes"
 			classpathref="project.classpath"
 			destdir="${javadoc.dir}"
 			packagenames="*.*"

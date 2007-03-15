@@ -1004,7 +1004,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Returns true to allow the portlet to be cached within the layout.
 	 *
-	 * @return		layout-cacheable parameter of the portlet
+	 * @return		true if the portlet can be cached within the layout
 	 */
 	public boolean getLayoutCacheable() {
 		return _layoutCacheable;
@@ -1013,7 +1013,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Returns true to allow the portlet to be cached within the layout.
 	 *
-	 * @return		layout-cacheable parameter of the portlet
+	 * @return		true if the portlet can be cached within the layout
 	 */
 	public boolean isLayoutCacheable() {
 		return _layoutCacheable;
@@ -1022,7 +1022,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Sets to true to allow the portlet to be cached within the layout.
 	 *
-	 * @layoutCacheable	layout-cacheable parameter of the portlet
+	 * @param	layoutCacheable boolean value for whether the portlet can be
+	 *			cached within the layout
 	 */
 	public void setLayoutCacheable(boolean layoutCacheable) {
 		_layoutCacheable = layoutCacheable;

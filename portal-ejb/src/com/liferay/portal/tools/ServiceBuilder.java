@@ -55,6 +55,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -154,10 +155,10 @@ public class ServiceBuilder {
 	}
 
 	public static void writeFile(File file, String content) throws IOException {
-		writeFile(file, content, "Brian Wing Shun Chan");
+		writeFile(file, content, null);
 	}
 
-	public static void writeFile(File file, String content, String author)
+	public static void writeFile(File file, String content, Map jalopySettings)
 		throws IOException {
 
 		File tempFile = new File("ServiceBuilder.temp");
@@ -254,22 +255,73 @@ public class ServiceBuilder {
 		catch (FileNotFoundException fnne) {
 		}
 
+		if (jalopySettings == null) {
+			jalopySettings = new HashMap();
+		}
+
 		Environment env = Environment.getInstance();
 
+		// Author
+
+		String author = GetterUtil.getString(
+			(String)jalopySettings.get("author"), "Brian Wing Shun Chan");
+
 		env.set("author", author);
+
+		// File name
+
 		env.set("fileName", file.getName());
 
 		Convention convention = Convention.getInstance();
 
+		String classMask =
+			"/**\n" +
+			" * <a href=\"$fileName$.html\"><b><i>View Source</i></b></a>\n" +
+			" *\n";
+
+		String[] classCommentsArray = (String[])jalopySettings.get("classComments");
+
+		if ((classCommentsArray != null) && (classCommentsArray.length > 0)) {
+			for (int i = 0; i < classCommentsArray.length; i++) {
+				String classComments = classCommentsArray[i];
+
+				//classComments = "The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.";
+				classComments = StringUtil.wrap(classComments, 76, "\n * ");
+
+				if (classComments.startsWith("\n")) {
+					classComments = classComments.substring(
+						1, classComments.length());
+				}
+
+				classMask += " * <p>\n" + classComments + "\n * </p>\n *\n";
+			}
+		}
+
+		classMask +=
+			" * @author $author$\n" +
+			" *\n";
+
+		String[] seeArray = (String[])jalopySettings.get("see");
+
+		if ((classCommentsArray != null) && (classCommentsArray.length > 0)) {
+			for (int i = 0; i < seeArray.length; i++) {
+				String see = seeArray[i];
+
+				classMask += " * @see " + see + "\n";
+			}
+
+			classMask += " *\n";
+		}
+
+		classMask += " */";
+
 		convention.put(
 			ConventionKeys.COMMENT_JAVADOC_TEMPLATE_CLASS,
-			env.interpolate(convention.get(
-				ConventionKeys.COMMENT_JAVADOC_TEMPLATE_CLASS, "")));
+			env.interpolate(classMask));
 
 		convention.put(
 			ConventionKeys.COMMENT_JAVADOC_TEMPLATE_INTERFACE,
-			env.interpolate(convention.get(
-				ConventionKeys.COMMENT_JAVADOC_TEMPLATE_INTERFACE, "")));
+			env.interpolate(classMask));
 
 		jalopy.format();
 
@@ -1369,7 +1421,24 @@ public class ServiceBuilder {
 
 		File modelFile = new File(_serviceOutputPath + "/model/" + entity.getName() + ".java");
 
-		writeFile(modelFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This interface is a model that represents the <code>" + entity.getTable() + "</code> table in the database.",
+			"Customize <code>" + _packagePath + ".service.model.impl." + entity.getName() + "Impl</code> and rerun the ServiceBuilder to generate the new methods."
+		};
+
+		String[] see = {
+			_packagePath + ".service.model." + entity.getName() + "Model",
+			_packagePath + ".service.model.impl." + entity.getName() + "Impl",
+			_packagePath + ".service.model.impl." + entity.getName() + "ModelImpl"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(modelFile, sm.toString(), jalopySettings);
 
 		if (Validator.isNotNull(_serviceDir)) {
 			modelFile = new File(_outputPath + "/model/" + entity.getName() + ".java");
@@ -1721,7 +1790,23 @@ public class ServiceBuilder {
 
 		File modelFile = new File(_serviceOutputPath + "/model/" + entity.getName() + "Model.java");
 
-		writeFile(modelFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This interface is a model that represents the <code>" + entity.getTable() + "</code> table in the database."
+		};
+
+		String[] see = {
+			_packagePath + ".service.model." + entity.getName(),
+			_packagePath + ".service.model.impl." + entity.getName() + "Impl",
+			_packagePath + ".service.model.impl." + entity.getName() + "ModelImpl"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(modelFile, sm.toString(), jalopySettings);
 
 		if (Validator.isNotNull(_serviceDir)) {
 			modelFile = new File(_outputPath + "/model/" + entity.getName() + "Model.java");
@@ -2172,7 +2257,23 @@ public class ServiceBuilder {
 
 		File modelFile = new File(_outputPath + "/model/impl/" + entity.getName() + "ModelImpl.java");
 
-		writeFile(modelFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This class is a model that represents the <code>" + entity.getTable() + "</code> table in the database."
+		};
+
+		String[] see = {
+			_packagePath + ".service.model." + entity.getName(),
+			_packagePath + ".service.model." + entity.getName() + "Model",
+			_packagePath + ".service.model.impl." + entity.getName() + "Impl"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(modelFile, sm.toString(), jalopySettings);
 	}
 
 	private void _createModelSoap(Entity entity) throws IOException {
@@ -2310,7 +2411,21 @@ public class ServiceBuilder {
 
 		File modelFile = new File(_serviceOutputPath + "/model/" + entity.getName() + "Soap.java");
 
-		writeFile(modelFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This class is used by <code>" + _packagePath + ".service.http." + entity.getName() + "ServiceSoap</code>."
+		};
+
+		String[] see = {
+			_packagePath + ".service.http." + entity.getName() + "ServiceSoap"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(modelFile, sm.toString(), jalopySettings);
 	}
 
 	private void _createPersistence(Entity entity) throws IOException {
@@ -4315,7 +4430,32 @@ public class ServiceBuilder {
 
 		File ejbFile = new File(_serviceOutputPath + "/service/" + entity.getName() + _getSessionTypeName(sessionType) + "Service.java");
 
-		writeFile(ejbFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String serviceComments = null;
+
+		if (sessionType == _REMOTE) {
+			serviceComments = "This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.";
+		}
+		else {
+			serviceComments = "This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.";
+		}
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This interface defines the service. The default implementation is <code>" + _packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl</code>. Modify methods in that class and rerun ServiceBuilder to populate this class and all other generated classes.",
+			serviceComments
+		};
+
+		String[] see = {
+			_packagePath + ".service." + entity.getName() + "ServiceFactory",
+			_packagePath + ".service." + entity.getName() + "ServiceUtil"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(ejbFile, sm.toString(), jalopySettings);
 
 		ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "Service.java");
 
@@ -4398,7 +4538,25 @@ public class ServiceBuilder {
 
 		File ejbFile = new File(_outputPath + "/service/ejb/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB.java");
 
-		writeFile(ejbFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This class is the EJB interface of the service that is used when Liferay is run inside a full J2EE container."
+		};
+
+		String[] see = {
+			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service",
+			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil",
+			_packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl",
+			_packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome",
+			_packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(ejbFile, sm.toString(), jalopySettings);
 	}
 
 	private void _createServiceEJBImpl(Entity entity, int sessionType) throws IOException {
@@ -4539,7 +4697,25 @@ public class ServiceBuilder {
 
 		File ejbFile = new File(_outputPath + "/service/ejb/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl.java");
 
-		writeFile(ejbFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This class is the EJB implementation of the service that is used when Liferay is run inside a full J2EE container."
+		};
+
+		String[] see = {
+			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service",
+			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil",
+			_packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB",
+			_packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome",
+			_packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(ejbFile, sm.toString(), jalopySettings);
 	}
 
 	private void _createServiceFactory(Entity entity, int sessionType) throws IOException {
@@ -4595,7 +4771,23 @@ public class ServiceBuilder {
 
 		File ejbFile = new File(_serviceOutputPath + "/service/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.java");
 
-		writeFile(ejbFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This class is responsible for the lookup of the implementation for <code>" + _packagePath + ".service." + entity.getName() + "Service</code>. Spring manages the lookup and lifecycle of the beans. This means you can modify the Spring configuration files to return a different implementation or to inject additional behavior.",
+			"See the <code>spring.configs</code> property in portal.properties for additional information on how to customize the Spring XML files."
+		};
+
+		String[] see = {
+			_packagePath + ".service." + entity.getName() + "Service",
+			_packagePath + ".service." + entity.getName() + "ServiceUtil"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(ejbFile, sm.toString(), jalopySettings);
 
 		ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.java");
 
@@ -4647,7 +4839,25 @@ public class ServiceBuilder {
 
 		File ejbFile = new File(_outputPath + "/service/ejb/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome.java");
 
-		writeFile(ejbFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This class is the EJB home of the service that is used when Liferay is run inside a full J2EE container."
+		};
+
+		String[] see = {
+			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service",
+			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil",
+			_packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB",
+			_packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl",
+			_packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(ejbFile, sm.toString(), jalopySettings);
 	}
 
 	private void _createServiceHttp(Entity entity) throws IOException {
@@ -4875,7 +5085,26 @@ public class ServiceBuilder {
 
 		File ejbFile = new File(_outputPath + "/service/http/" + entity.getName() + "ServiceHttp.java");
 
-		writeFile(ejbFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This class provides a HTTP utility for the <code>" + _packagePath + ".service." + entity.getName() + "ServiceUtil</code> service utility. The static methods of this class calls the same methods of the service utility. However, the signatures are different because it requires an additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.",
+			"The benefits of using the HTTP utility is that it is fast and allows for tunneling without the cost of serializing to text. The drawback is that it only works with Java.",
+			"Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties to configure security.",
+			"The HTTP utility is only generated for remote services."
+		};
+
+		String[] see = {
+			"com.liferay.portal.security.auth.HttpPrincipal",
+			_packagePath + ".service." + entity.getName() + "ServiceUtil",
+			_packagePath + ".service.http." + entity.getName() + "ServiceSoap"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(ejbFile, sm.toString(), jalopySettings);
 	}
 
 	private void _createServiceImpl(Entity entity, int sessionType) throws IOException {
@@ -5083,7 +5312,25 @@ public class ServiceBuilder {
 
 		File ejbFile = new File(_outputPath + "/service/http/" + entity.getName() + "ServiceJSON.java");
 
-		writeFile(ejbFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This class provides a JSON utility for the <code>" + _packagePath + ".service." + entity.getName() + "ServiceUtil</code> service utility. The static methods of this class calls the same methods of the service utility. However, the signatures are different because it is difficult for JSON to support certain types.",
+			"ServiceBuilder follows certain rules in translating the methods. For example, if the method in the service utility returns a <code>java.util.List</code>, that is translated to a <code>org.json.JSONArray</code>. If the method in the service utility returns a <code>" + _packagePath + ".model." + entity.getName() + "</code>, that is translated to a <code>org.json.JSONObject</code>. Methods that JSON cannot safely use are skipped. The logic for the translation is encapsulated in <code>" + _packagePath + ".service.http." + entity.getName() + "JSONSerializer</code>.",
+			"This allows you to call the the backend services directly from JavaScript. See <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a reference of how that portlet uses the generated JavaScript in <code>portal-web/docroot/html/js/service.js</code> to call the backend services directly from JavaScript.",
+			"The JSON utility is only generated for remote services."
+		};
+
+		String[] see = {
+			_packagePath + ".service." + entity.getName() + "ServiceUtil",
+			_packagePath + ".service.http." + entity.getName() + "JSONSerializer"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(ejbFile, sm.toString(), jalopySettings);
 	}
 
 	private void _createServiceJSONSerializer(Entity entity) throws IOException {
@@ -5150,7 +5397,21 @@ public class ServiceBuilder {
 
 		File ejbFile = new File(_outputPath + "/service/http/" + entity.getName() + "JSONSerializer.java");
 
-		writeFile(ejbFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This class is used by <code>" + _packagePath + ".service.http." + entity.getName() + "ServiceJSON</code> to translate objects."
+		};
+
+		String[] see = {
+			_packagePath + ".service.http." + entity.getName() + "ServiceJSON"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(ejbFile, sm.toString(), jalopySettings);
 	}
 
 	private void _createServiceSoap(Entity entity) throws IOException {
@@ -5298,7 +5559,27 @@ public class ServiceBuilder {
 
 		File ejbFile = new File(_outputPath + "/service/http/" + entity.getName() + "ServiceSoap.java");
 
-		writeFile(ejbFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This class provides a SOAP utility for the <code>" + _packagePath + ".service." + entity.getName() + "ServiceUtil</code> service utility. The static methods of this class calls the same methods of the service utility. However, the signatures are different because it is difficult for SOAP to support certain types.",
+			"ServiceBuilder follows certain rules in translating the methods. For example, if the method in the service utility returns a <code>java.util.List</code>, that is translated to an array of <code>" + _packagePath + ".model." + entity.getName() + "Soap</code>. If the method in the service utility returns a <code>" + _packagePath + ".model." + entity.getName() + "</code>, that is translated to a <code>" + _packagePath + ".model." + entity.getName() + "Soap</code>. Methods that SOAP cannot safely wire are skipped.",
+			"The benefits of using the SOAP utility is that it is cross platform compatible. SOAP allows different languages like Java, .NET, C++, PHP, and even Perl, to call the generated services. One drawback of SOAP is that it is slow because it needs to serialize all calls into a text format (XML).",
+			"You can see a list of services at http://localhost:8080/tunnel-web/secure/axis. Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties to configure security.",
+			"The SOAP utility is only generated for remote services."
+		};
+
+		String[] see = {
+			_packagePath + ".service." + entity.getName() + "ServiceUtil",
+			_packagePath + ".service.http." + entity.getName() + "ServiceHttp",
+			_packagePath + ".service.model." + entity.getName() + "Soap"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(ejbFile, sm.toString(), jalopySettings);
 	}
 
 	private void _createServiceUtil(Entity entity, int sessionType) throws IOException {
@@ -5396,7 +5677,23 @@ public class ServiceBuilder {
 
 		File ejbFile = new File(_serviceOutputPath + "/service/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil.java");
 
-		writeFile(ejbFile, sm.toString());
+		Map jalopySettings = new HashMap();
+
+		String[] classComments = {
+			_DEFAULT_CLASS_COMMENTS,
+			"This class provides static methods for the <code>" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service</code> bean. The static methods of this class calls the same methods of the bean instance. It's convenient to be able to just write one line to call a method on a bean instead of writing a lookup call and a method call.",
+			"<code>" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory</code> is responsible for the lookup of the bean."
+		};
+
+		String[] see = {
+			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service",
+			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory"
+		};
+
+		jalopySettings.put("classComments", classComments);
+		jalopySettings.put("see", see);
+
+		writeFile(ejbFile, sm.toString(), jalopySettings);
 
 		ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil.java");
 
@@ -6275,6 +6572,8 @@ public class ServiceBuilder {
 	private static final int _LOCAL = 1;
 
 	private static final String _CREATE_TABLE = "create table ";
+
+	private static final String _DEFAULT_CLASS_COMMENTS = "ServiceBuilder generated this class. Modifications in this class will be overwritten the next time is generated.";
 
 	private Set _badTableNames;
 	private Set _badCmpFields;

@@ -79,7 +79,7 @@ public class ContentTransformerListener extends TransformerListener {
 	 * Fill one article with content from another approved article. See the
 	 * article DOCUMENTATION-INSTALLATION-BORLAND for a sample use case.
 	 *
-	 * @param		s the given string
+	 * @param		xml the given string
 	 * @return		the processed string
 	 */
 	protected String replaceContent(String xml) {

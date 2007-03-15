@@ -150,10 +150,13 @@
 		<mkdir dir="${javadoc.dir}" />
 
 		<javadoc
+			additionalparam="-J-Xmx128m"
+			breakiterator="yes"
 			classpathref="project.classpath"
-			destdir="${project.dir}/api/ext-ejb"
+			destdir="${javadoc.dir}"
 			packagenames="*.*"
 			sourcepath="src"
+			stylesheetfile="${project.dir}/tools/javadoc.css"
 		/>
 	</target>
 
