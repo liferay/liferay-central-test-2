@@ -234,7 +234,8 @@ public class PortletHotDeployListener implements HotDeployListener {
 					while (itr2.hasNext()) {
 						String supportedLocale = (String)itr2.next();
 
-						Locale locale = new Locale(supportedLocale);
+						Locale locale = LocaleUtil.fromLanguageId(
+							supportedLocale);
 
 						try {
 							ResourceBundle resourceBundle =

@@ -334,7 +334,7 @@ public class LanguageUtil {
 		String value = null;
 
 		try {
-			int pos = desc.indexOf(" ");
+			int pos = desc.indexOf(StringPool.SPACE);
 
 			int x = GetterUtil.getInteger(desc.substring(0, pos));
 
@@ -357,7 +357,7 @@ public class LanguageUtil {
 		Cookie languageIdCookie = new Cookie(
 			CookieKeys.GUEST_LANGUAGE_ID, languageId);
 
-		languageIdCookie.setPath("/");
+		languageIdCookie.setPath(StringPool.SLASH);
 		languageIdCookie.setMaxAge(CookieKeys.MAX_AGE);
 
 		CookieKeys.addCookie(res, languageIdCookie);
@@ -372,12 +372,14 @@ public class LanguageUtil {
 		_charEncodings = CollectionFactory.getHashMap();
 
 		for (int i = 0; i < array.length; i++) {
-			int x = array[i].indexOf(StringPool.UNDERLINE);
+			String languageId = array[i];
+
+			int x = languageId.indexOf(StringPool.UNDERLINE);
 
 			String language = array[i].substring(0, x);
 			String country = array[i].substring(x + 1, array[i].length());
 
-			Locale locale = new Locale(language, country);
+			Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 			_locales[i] = locale;
 			_localesByLanguageCode.put(language, locale);

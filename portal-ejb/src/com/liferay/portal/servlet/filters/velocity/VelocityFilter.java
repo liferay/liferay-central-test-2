@@ -36,6 +36,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
+import com.liferay.util.LocaleUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.filters.CacheResponse;
@@ -144,7 +145,7 @@ public class VelocityFilter implements Filter {
 
 				String languageId = ParamUtil.getString(req, "languageId");
 
-				Locale locale = new Locale(languageId);
+				Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 				// Theme and color scheme
 

@@ -22,9 +22,11 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,16 +43,24 @@ public class LocaleUtil {
 		Locale locale = null;
 
 		try {
-			int pos = languageId.indexOf(StringPool.UNDERLINE);
+			locale = (Locale)_locales.get(languageId);
 
-			String languageCode = languageId.substring(0, pos);
-			String countryCode = languageId.substring(
-				pos + 1, languageId.length());
+			if (locale == null) {
+				int pos = languageId.indexOf(StringPool.UNDERLINE);
 
-			locale = new Locale(languageCode, countryCode);
+				String languageCode = languageId.substring(0, pos);
+				String countryCode = languageId.substring(
+					pos + 1, languageId.length());
+
+				locale = new Locale(languageCode, countryCode);
+
+				_locales.put(languageId, locale);
+			}
 		}
 		catch (Exception e) {
-			_log.warn(languageId + " is not a valid language id");
+			if (_log.isWarnEnabled()) {
+				_log.warn(languageId + " is not a valid language id");
+			}
 		}
 
 		if (locale == null) {
@@ -65,12 +75,17 @@ public class LocaleUtil {
 			locale = Locale.getDefault();
 		}
 
-		String languageId =
-			locale.getLanguage() + StringPool.UNDERLINE + locale.getCountry();
+		StringMaker sm = new StringMaker();
 
-		return languageId;
+		sm.append(locale.getLanguage());
+		sm.append(StringPool.UNDERLINE);
+		sm.append(locale.getCountry());
+
+		return sm.toString();
 	}
 
 	private static Log _log = LogFactory.getLog(LocaleUtil.class);
+
+	private static Map _locales = CollectionFactory.getHashMap();
 
 }
