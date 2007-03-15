@@ -84,13 +84,23 @@ public class ExtPropertiesLoader {
 	public String[] getArray(String key) {
 		String[] array = getComponentProperties().getStringArray(key);
 
-		if ((array == null) ||
-			((array.length == 1) && Validator.isNull(array[0]))) {
+		if (array == null) {
+			return new String[0];
+		}
+		else if (array.length > 0) {
 
 			// Commons Configuration parses an empty property into a String
-			// array with one String containing one space
+			// array with one String containing one space. It also leaves a
+			// trailing array member if you set a property in more than one
+			// line.
 
-			array = new String[0];
+			if (Validator.isNull(array[array.length - 1])) {
+				String[] subArray = new String[array.length - 1];
+
+				System.arraycopy(array, 0, subArray, 0, subArray.length);
+
+				array = subArray;
+			}
 		}
 
 		return array;

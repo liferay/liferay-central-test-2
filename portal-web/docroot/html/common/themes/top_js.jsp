@@ -106,7 +106,7 @@
 	</c:otherwise>
 </c:choose>
 
-<script type="text/javascript" src="<%= themeDisplay.getPathMain() %>/portal/javascript_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&languageId=<%= themeDisplay.getLocale().toString() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>"></script>
+<script type="text/javascript" src="<%= themeDisplay.getPathMain() %>/portal/javascript_cached?languageId=<%= themeDisplay.getLocale().toString() %>&themeId=<%= themeDisplay.getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorSchemeId() %>"></script>
 
 <script type="text/javascript">
 	function showLayoutTemplates() {

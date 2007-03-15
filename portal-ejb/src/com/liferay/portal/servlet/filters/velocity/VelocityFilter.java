@@ -23,7 +23,6 @@
 package com.liferay.portal.servlet.filters.velocity;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Theme;
@@ -145,7 +144,7 @@ public class VelocityFilter implements Filter {
 
 				String languageId = ParamUtil.getString(req, "languageId");
 
-				Locale locale = LanguageUtil.getLocale(languageId);
+				Locale locale = new Locale(languageId);
 
 				// Theme and color scheme
 
