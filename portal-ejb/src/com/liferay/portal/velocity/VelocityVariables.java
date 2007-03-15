@@ -72,6 +72,8 @@ import org.apache.struts.taglib.tiles.ComponentConstants;
 import org.apache.struts.tiles.ComponentContext;
 import org.apache.velocity.VelocityContext;
 
+import org.springframework.mock.web.MockPageContext;
+
 /**
  * <a href="VelocityVariables.java.html"><b><i>View Source</i></b></a>
  *
@@ -95,9 +97,15 @@ public class VelocityVariables {
 
 		// Page context
 
-		if (pageContext != null) {
-			vc.put("pageContext", pageContext);
+		if (pageContext == null) {
+
+			// Velocity needs an instantiated pageContext or it cannot
+			// correctly introspect languageUtil.
+
+			pageContext = new MockPageContext();
 		}
+
+		vc.put("pageContext", pageContext);
 
 		// Portlet config
 
@@ -241,7 +249,7 @@ public class VelocityVariables {
 
 		vc.put("getterUtil", GetterUtil_IW.getInstance());
 
-		// Language
+		// Language util
 
 		vc.put("languageUtil", LanguageUtil_IW.getInstance());
 		vc.put("unicodeLanguageUtil", UnicodeLanguageUtil_IW.getInstance());
