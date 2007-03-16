@@ -22,8 +22,7 @@
 
 package com.liferay.portlet.calendar.action;
 
-import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portal.util.Constants;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -33,13 +32,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -48,25 +47,34 @@ import org.apache.struts.action.ActionMapping;
  * @author  Michael Young
  *
  */
-public class ExportAction extends PortletAction {
+public class ExportAction extends Action {
 
-	public void processAction(ActionMapping mapping, ActionForm form,
-			PortletConfig config, ActionRequest req, ActionResponse res)
+	public ActionForward execute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
 		throws Exception {
 
-		long eventId = ParamUtil.getLong(req, "eventId");
+		InputStream is = null;
 
-		File file = CalEventLocalServiceUtil.export(eventId);
+		try {
+			long eventId = ParamUtil.getLong(req, "eventId");
 
-		InputStream is =
-			new BufferedInputStream(new FileInputStream(file.getPath()));
+			File file = CalEventLocalServiceUtil.export(eventId);
 
-		HttpServletResponse httpRes =
-			((ActionResponseImpl)res).getHttpServletResponse();
+			is = new BufferedInputStream(new FileInputStream(file));
 
-		ServletResponseUtil.sendFile(httpRes, file.getName(), is);
+			ServletResponseUtil.sendFile(res, file.getName(), is);
 
-		is.close();
+			return null;
+		}
+		catch (Exception e) {
+			req.setAttribute(PageContext.EXCEPTION, e);
+
+			return mapping.findForward(Constants.COMMON_ERROR);
+		}
+		finally {
+			ServletResponseUtil.cleanUp(is);
+		}
 	}
 
 }
