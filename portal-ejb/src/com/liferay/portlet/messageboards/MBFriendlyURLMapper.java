@@ -96,16 +96,16 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(String friendlyURLPath, Map params) {
-		setParams(params);
-
 		params.put("p_p_id", _PORTLET_ID);
 
 		int x = friendlyURLPath.indexOf("/", 1);
 		int y = friendlyURLPath.indexOf("/", x + 1);
 
 		if (y == -1) {
-			addParam("struts_action", "/message_boards/view");
-			addParam("categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+			addParam(params, "struts_action", "/message_boards/view");
+			addParam(
+				params, "categoryId",
+				MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 			return;
 		}
@@ -116,15 +116,15 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 			String categoryId =
 				friendlyURLPath.substring(y + 1, friendlyURLPath.length());
 
-			addParam("struts_action", "/message_boards/view");
-			addParam("categoryId", categoryId);
+			addParam(params, "struts_action", "/message_boards/view");
+			addParam(params, "categoryId", categoryId);
 		}
 		else if (type.equals("message")) {
 			String messageId =
 				friendlyURLPath.substring(y + 1, friendlyURLPath.length());
 
-			addParam("struts_action", "/message_boards/view_message");
-			addParam("messageId", messageId);
+			addParam(params, "struts_action", "/message_boards/view_message");
+			addParam(params, "messageId", messageId);
 		}
 	}
 

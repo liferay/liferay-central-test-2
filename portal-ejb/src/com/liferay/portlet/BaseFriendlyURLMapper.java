@@ -42,14 +42,8 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 		return PortalUtil.getPortletNamespace(getPortletId());
 	}
 
-	protected void addParam(String name, String value) {
-		_params.put(getNamespace() + name, value);
+	protected void addParam(Map params, String name, String value) {
+		params.put(getNamespace() + name, value);
 	}
-
-	protected void setParams(Map params) {
-		_params = params;
-	}
-
-	private Map _params;
 
 }

@@ -53,8 +53,6 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(String friendlyURLPath, Map params) {
-		setParams(params);
-
 		params.put("p_p_id", _PORTLET_ID);
 		params.put("p_p_action", "0");
 
@@ -78,7 +76,7 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 				sb.append(entry);
 			}
 
-			addParam("entries", sb.toString());
+			addParam(params, "entries", sb.toString());
 		}
 	}
 
