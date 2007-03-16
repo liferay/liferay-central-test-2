@@ -40,6 +40,8 @@ import com.liferay.util.Validator;
 
 import java.io.IOException;
 
+import java.util.Map;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -108,7 +110,8 @@ public class FriendlyURLServlet extends HttpServlet {
 		String redirect = mainPath;
 
 		try {
-			redirect = getRedirect(req.getPathInfo(), mainPath);
+			redirect = getRedirect(
+				req.getPathInfo(), mainPath, req.getParameterMap());
 
 			LastPath lastPath = new LastPath(
 				friendlyURLPath, req.getPathInfo(), req.getParameterMap());
@@ -147,7 +150,7 @@ public class FriendlyURLServlet extends HttpServlet {
 		return _companyId;
 	}
 
-	protected String getRedirect(String path, String mainPath)
+	protected String getRedirect(String path, String mainPath, Map params)
 		throws Exception {
 
 		if (Validator.isNull(path)) {
@@ -230,7 +233,8 @@ public class FriendlyURLServlet extends HttpServlet {
 			friendlyURL = path.substring(pos, path.length());
 		}
 
-		return PortalUtil.getLayoutActualURL(ownerId, mainPath, friendlyURL);
+		return PortalUtil.getLayoutActualURL(
+			ownerId, mainPath, friendlyURL, params);
 	}
 
 	private static Log _log = LogFactory.getLog(FriendlyURLServlet.class);

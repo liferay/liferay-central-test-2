@@ -45,6 +45,7 @@ SCProductVersion productVersion = (SCProductVersion) row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/software_catalog/edit_product_version" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="productEntryId" value="<%= String.valueOf(productVersion.getProductEntryId()) %>" />
 		<portlet:param name="productVersionId" value="<%= String.valueOf(productVersion.getProductVersionId()) %>" />
 	</portlet:renderURL>
 
@@ -56,6 +57,7 @@ SCProductVersion productVersion = (SCProductVersion) row.getObject();
 		<portlet:param name="struts_action" value="/software_catalog/edit_product_version" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="productEntryId" value="<%= String.valueOf(productVersion.getProductEntryId()) %>" />
 		<portlet:param name="productVersionId" value="<%= String.valueOf(productVersion.getProductVersionId()) %>" />
 	</portlet:actionURL>
 

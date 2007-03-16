@@ -23,12 +23,22 @@
 package com.liferay.portlet.messageboards;
 
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.Validator;
+
+import java.util.Map;
+
+import javax.portlet.PortletURL;
 
 /**
  * <a href="MBFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class MBFriendlyURLMapper implements FriendlyURLMapper {
@@ -37,42 +47,89 @@ public class MBFriendlyURLMapper implements FriendlyURLMapper {
 		return _MAPPING;
 	}
 
-	public String[] getValues(String url, int pos) {
-		String friendlyURL = url.substring(0, pos);
+	public String buildPath(PortletURL portletURL) {
+		if (!(portletURL instanceof PortletURLImpl)) {
+			return null;
+		}
 
-		String queryString = "&p_p_id=19&p_p_action=0&p_p_state=maximized";
+		PortletURLImpl url = (PortletURLImpl) portletURL;
 
-		int x = url.indexOf("/", pos + 1);
-		int y = url.indexOf("/", x + 1);
+		String friendlyURLPath = null;
+
+		String tabs2 = url.getParameter("tabs2");
+
+		if (Validator.isNotNull(tabs2)) {
+			return null;
+		}
+
+		String strutsAction = GetterUtil.getString(
+			url.getParameter("struts_action"));
+
+		if (strutsAction.equals("/message_boards/view")) {
+			String categoryId = url.getParameter("categoryId");
+
+			if (Validator.isNotNull(categoryId)) {
+				friendlyURLPath = "/message_boards/category/" + categoryId;
+
+				url.addParameterIncludedInPath("categoryId");
+			}
+		}
+		else if (strutsAction.equals("/message_boards/view_message")) {
+			String messageId = url.getParameter("messageId");
+
+			if (Validator.isNotNull(messageId)) {
+				friendlyURLPath = "/message_boards/message/" + messageId;
+				url.addParameterIncludedInPath("messageId");
+			}
+		}
+
+		if (Validator.isNotNull(friendlyURLPath)) {
+			url.addParameterIncludedInPath("p_p_id");
+			url.addParameterIncludedInPath("struts_action");
+		}
+
+		return friendlyURLPath;
+	}
+
+	public void populateParams(String friendlyURLPath, Map params) {
+
+		params.put("p_p_id", _PORTLET_ID);
+
+		int x = friendlyURLPath.indexOf("/", 1);
+		int y = friendlyURLPath.indexOf("/", x + 1);
 
 		if (y == -1) {
-			queryString +=
-				"&_19_struts_action=%2Fmessage_boards%2Fview&_19_categoryId=" +
-					MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
-
-			return new String[] {friendlyURL, queryString};
+			addParam(params, "struts_action", "/message_boards/view");
+			addParam(
+				params, "categoryId",
+				MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+			return;
 		}
 
-		String type = url.substring(x + 1, y);
+		String type = friendlyURLPath.substring(x + 1, y);
 
 		if (type.equals("category")) {
-			String categoryId = url.substring(y + 1, url.length());
+			String categoryId =
+				friendlyURLPath.substring(y + 1, friendlyURLPath.length());
 
-			queryString +=
-				"&_19_struts_action=%2Fmessage_boards%2Fview&_19_categoryId=" +
-					categoryId;
+			addParam(params, "struts_action", "/message_boards/view");
+			addParam(params, "categoryId", categoryId);
 		}
 		else if (type.equals("message")) {
-			String messageId = url.substring(y + 1, url.length());
-
-			queryString +=
-				"&_19_struts_action=%2Fmessage_boards%2Fview_message" +
-					"&_19_messageId=" + messageId;
+			String messageId =
+				friendlyURLPath.substring(y + 1, friendlyURLPath.length());
+			addParam(params, "struts_action", "/message_boards/view_message");
+			addParam(params, "messageId", messageId);
 		}
 
-		return new String[] {friendlyURL, queryString};
+	}
+
+	protected void addParam(Map params, String name, String value) {
+		params.put(
+			PortalUtil.getPortletNamespace(_PORTLET_ID) + name, value);
 	}
 
 	private static final String _MAPPING = "message_boards";
+	private static final String _PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
 
 }

@@ -70,11 +70,15 @@ public String _buildFrameworkVersions(List frameworkVersions) {
 	while (itr.hasNext()) {
 		SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) itr.next();
 
-		sm.append("<a href='");
-		sm.append(frameworkVersion.getUrl());
-		sm.append("'>");
-		sm.append(frameworkVersion.getName());
-		sm.append("</a>");
+		if (Validator.isNotNull(frameworkVersion.getUrl())) {
+			sm.append("<a href='");
+			sm.append(frameworkVersion.getUrl());
+			sm.append("'>");
+			sm.append(frameworkVersion.getName());
+			sm.append("</a>");
+		} else {
+			sm.append(frameworkVersion.getName());
+		}
 		if (itr.hasNext()) {
 			sm.append(", ");
 		}

@@ -27,7 +27,7 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String tabs1 = ParamUtil.getString(request, "tabs1", "comments");
+String tabs2 = ParamUtil.getString(request, "tabs2", "comments");
 
 SCProductEntry productEntry = (SCProductEntry) request.getAttribute(WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY);
 SCProductVersion lastProductVersion = productEntry.getLastVersion();
@@ -39,7 +39,7 @@ PortletURL viewProductEntryURL = renderResponse.createRenderURL();
 viewProductEntryURL.setWindowState(WindowState.MAXIMIZED);
 
 viewProductEntryURL.setParameter("struts_action", "/software_catalog/view_product_entry");
-viewProductEntryURL.setParameter("tabs1", tabs1);
+viewProductEntryURL.setParameter("tabs2", tabs2);
 viewProductEntryURL.setParameter("redirect", redirect);
 viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId));
 
@@ -48,7 +48,7 @@ PortletURL editProductEntryURL = renderResponse.createRenderURL();
 editProductEntryURL.setWindowState(WindowState.MAXIMIZED);
 
 editProductEntryURL.setParameter("struts_action", "/software_catalog/edit_product_entry");
-editProductEntryURL.setParameter("tabs1", tabs1);
+editProductEntryURL.setParameter("tabs2", tabs2);
 editProductEntryURL.setParameter("redirect", currentURL);
 editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId));
 
@@ -58,7 +58,7 @@ addProductVersionURL.setWindowState(WindowState.MAXIMIZED);
 
 addProductVersionURL.setParameter("struts_action", "/software_catalog/edit_product_version");
 addProductVersionURL.setParameter(Constants.CMD, Constants.ADD);
-addProductVersionURL.setParameter("tabs1", tabs1);
+addProductVersionURL.setParameter("tabs2", tabs2);
 addProductVersionURL.setParameter("redirect", currentURL);
 addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryId));
 
@@ -255,12 +255,13 @@ else {
 </c:if>
 
 <liferay-ui:tabs
+	param="tabs2"
 	names="comments,version-history"
-	url="<%= viewProductEntryURL.toString() %>"
+	portletURL="<%= viewProductEntryURL %>"
 />
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("comments") %>'>
+	<c:when test='<%= tabs2.equals("comments") %>'>
 		<portlet:actionURL var="discussionURL">
 			<portlet:param name="struts_action" value="/software_catalog/edit_product_entry_discussion" />
 		</portlet:actionURL>
@@ -274,7 +275,7 @@ else {
 			redirect="<%= currentURL %>"
 		/>
 	</c:when>
-	<c:when test='<%= tabs1.equals("version-history") %>'>
+	<c:when test='<%= tabs2.equals("version-history") %>'>
 		<div class="version-history">
 			<%
 			PortletURL viewProductVersionURL = renderResponse.createRenderURL();

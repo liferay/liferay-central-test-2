@@ -95,6 +95,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -441,6 +442,13 @@ public class PortalUtil {
 	public static String getLayoutActualURL(
 			String ownerId, String mainPath, String friendlyURL)
 		throws PortalException, SystemException {
+		return getLayoutActualURL(
+			ownerId, mainPath, friendlyURL, new HashMap());
+	}
+
+	public static String getLayoutActualURL(
+			String ownerId, String mainPath, String friendlyURL, Map params)
+		throws PortalException, SystemException {
 
 		Layout layout = null;
 		String queryString = StringPool.BLANK;
@@ -459,7 +467,7 @@ public class PortalUtil {
 		}
 		else {
 			Object[] friendlyURLMapper =
-				getPortletFriendlyURLPlugin(ownerId, friendlyURL);
+				getPortletFriendlyURLPlugin(ownerId, friendlyURL, params);
 
 			layout = (Layout)friendlyURLMapper[0];
 			queryString = (String)friendlyURLMapper[1];
@@ -651,7 +659,13 @@ public class PortalUtil {
 	}
 
 	public static Object[] getPortletFriendlyURLPlugin(
-			String ownerId, String url)
+		String ownerId, String url)
+		throws PortalException, SystemException {
+		return getPortletFriendlyURLPlugin(ownerId, url, new HashMap());
+	}
+
+	public static Object[] getPortletFriendlyURLPlugin(
+			String ownerId, String url, Map params)
 		throws PortalException, SystemException {
 
 		String friendlyURL = url;
@@ -681,10 +695,23 @@ public class PortalUtil {
 					StringPool.SLASH);
 
 			if (pos != -1) {
-				String[] values = friendlyURLMapper.getValues(url, pos);
+				friendlyURL = url.substring(0, pos);
+				Map actualParams = new HashMap(params);
 
-				friendlyURL = values[0];
-				queryString = values[1];
+				Object action = actualParams.get("p_p_action");
+				if ((action == null) || (((String[])action).length == 0)) {
+					actualParams.put("p_p_action", "0");
+				}
+
+				Object state = actualParams.get("p_p_state");
+				if ((state == null) || (((String[])state).length == 0)) {
+					actualParams.put("p_p_state", "maximized");
+				}
+
+				friendlyURLMapper.populateParams(
+					url.substring(pos), actualParams);
+				queryString = "&" + Http.parameterMapToString(
+					actualParams, false);
 
 				break;
 			}

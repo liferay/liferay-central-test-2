@@ -28,43 +28,47 @@
 
 // URL
 
+PortletURL portletURL = (PortletURL)request.getAttribute("liferay-ui:tabs:portletURL");
+
 String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:tabs:url"));
-
-// Strip existing tab parameter and value from the URL
-
-int x = url.indexOf(param + "=");
-
-if (x != -1) {
-	x = url.lastIndexOf("&", x);
-
-	if (x == -1) {
-		x = url.lastIndexOf("?", x);
-	}
-
-	int y = url.indexOf("&", x + 1);
-
-	if (y == -1) {
-		y = url.length();
-	}
-
-	url = url.substring(0, x) + url.substring(y, url.length());
-}
-
-// Strip training &
-
-if (url.endsWith("&")) {
-	url = url.substring(0, url.length() - 1);
-}
-
-// Strip anchor
-
 String anchor = StringPool.BLANK;
 
-x = url.indexOf("&#");
 
-if (x != -1) {
-	anchor = url.substring(x, url.length());
-	url = url.substring(0, x);
+if (url != null) {
+	// Strip existing tab parameter and value from the URL
+
+	int x = url.indexOf(param + "=");
+
+	if (x != -1) {
+		x = url.lastIndexOf("&", x);
+
+		if (x == -1) {
+			x = url.lastIndexOf("?", x);
+		}
+
+		int y = url.indexOf("&", x + 1);
+
+		if (y == -1) {
+			y = url.length();
+		}
+
+		url = url.substring(0, x) + url.substring(y, url.length());
+	}
+
+	// Strip training &
+
+	if (url.endsWith("&")) {
+		url = url.substring(0, url.length() - 1);
+	}
+
+	// Strip anchor
+
+	x = url.indexOf("&#");
+
+	if (x != -1) {
+		anchor = url.substring(x, url.length());
+		url = url.substring(0, x);
+	}
 }
 
 // Back url
@@ -87,7 +91,12 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 
 			if (Validator.isNull(curURL)) {
 				if (refresh) {
-					curURL = url + "&" + param + "=" + values[i] + anchor;
+					if (portletURL != null) {
+						portletURL.setParameter(param, values[i]);
+						curURL = portletURL.toString();
+					} else {
+						curURL = url + "&" + param + "=" + values[i] + anchor;
+					}
 				}
 				else {
 					curURL = "javascript: Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "');";

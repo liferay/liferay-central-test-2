@@ -32,7 +32,6 @@ PortletURL tabs1URL = renderResponse.createRenderURL();
 tabs1URL.setWindowState(WindowState.MAXIMIZED);
 
 tabs1URL.setParameter("struts_action", "/software_catalog/view");
-tabs1URL.setParameter("tabs1", tabs1);
 
 String tabs1Names = "products,my-products";
 
@@ -47,5 +46,5 @@ if (SCFrameworkVersionPermission.contains(permissionChecker, plid, ActionKeys.AD
 
 <liferay-ui:tabs
 	names="<%=tabs1Names%>"
-	url="<%= tabs1URL.toString() %>"
+	portletURL="<%= tabs1URL %>"
 />

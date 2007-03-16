@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,8 +49,10 @@ import java.io.Serializable;
 
 import java.security.Key;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletMode;
@@ -69,6 +72,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="PortletURLImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class PortletURLImpl implements PortletURL, Serializable {
@@ -344,7 +348,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		return _namespace;
 	}
 
-	protected String getParameter(String name) {
+	public String getParameter(String name) {
 		String[] values = (String[])_params.get(name);
 
 		if ((values != null) && (values.length > 0)) {
@@ -353,6 +357,14 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		else {
 			return null;
 		}
+	}
+
+	public List getParametersIncludedInPath() {
+		return _parametersIncludedInPath;
+	}
+
+	public void addParameterIncludedInPath(String name) {
+		_parametersIncludedInPath.add(name);
 	}
 
 	protected Portlet getPortlet() {
@@ -377,7 +389,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		return _req;
 	}
 
-	protected boolean isAction() {
+	public boolean isAction() {
 		return _action;
 	}
 
@@ -391,6 +403,14 @@ public class PortletURLImpl implements PortletURL, Serializable {
 
 	protected boolean isSecure() {
 		return _secure;
+	}
+
+	protected boolean isParameterIncludedInPath(String name) {
+		if (_parametersIncludedInPath.contains(name)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	protected String generateToString() {
@@ -451,47 +471,84 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		}
 		else {
 			sm.append(_layoutFriendlyURL);
+
+			String friendlyURLPath = getPortletFriendlyURLPath();
+
+			if (Validator.isNotNull(friendlyURLPath)) {
+				sm.append(friendlyURLPath);
+
+				if (!isAction()) {
+					addParameterIncludedInPath("p_p_action");
+				}
+
+				if ((_windowState != null) &&
+					_windowState.equals(WindowState.MAXIMIZED)) {
+					addParameterIncludedInPath("p_p_state");
+				}
+
+				if ((_portletMode != null) &&
+					_portletMode.equals(PortletMode.VIEW)) {
+					addParameterIncludedInPath("p_p_mode");
+				}
+
+				addParameterIncludedInPath("p_p_col_id");
+				addParameterIncludedInPath("p_p_col_pos");
+				addParameterIncludedInPath("p_p_col_count");
+			}
+
 			sm.append(StringPool.QUESTION);
+
 		}
 
-		sm.append("p_p_id");
-		sm.append(StringPool.EQUAL);
-		sm.append(_processValue(key, _portletName));
-		sm.append(StringPool.AMPERSAND);
+		if (!isParameterIncludedInPath("p_p_id")) {
+			sm.append("p_p_id");
+			sm.append(StringPool.EQUAL);
+			sm.append(_processValue(key, _portletName));
+			sm.append(StringPool.AMPERSAND);
+		}
 
-		sm.append("p_p_action");
-		sm.append(StringPool.EQUAL);
-		sm.append(_action ? _processValue(key, "1") : _processValue(key, "0"));
-		sm.append(StringPool.AMPERSAND);
+		if (!isParameterIncludedInPath("p_p_action")) {
+			sm.append("p_p_action");
+			sm.append(StringPool.EQUAL);
+			sm.append(
+				_action ? _processValue(key, "1") : _processValue(key, "0"));
+			sm.append(StringPool.AMPERSAND);
+		}
 
-		if (_windowState != null) {
+		if (_windowState != null && !isParameterIncludedInPath("p_p_state")) {
 			sm.append("p_p_state");
 			sm.append(StringPool.EQUAL);
 			sm.append(_processValue(key, _windowState.toString()));
 			sm.append(StringPool.AMPERSAND);
 		}
 
-		if (_portletMode != null) {
+		if (_portletMode != null && !isParameterIncludedInPath("p_p_mode")) {
 			sm.append("p_p_mode");
 			sm.append(StringPool.EQUAL);
 			sm.append(_processValue(key, _portletMode.toString()));
 			sm.append(StringPool.AMPERSAND);
 		}
 
-		sm.append("p_p_col_id");
-		sm.append(StringPool.EQUAL);
-		sm.append(_processValue(key, portletDisplay.getColumnId()));
-		sm.append(StringPool.AMPERSAND);
+		if (!isParameterIncludedInPath("p_p_col_id")) {
+			sm.append("p_p_col_id");
+			sm.append(StringPool.EQUAL);
+			sm.append(_processValue(key, portletDisplay.getColumnId()));
+			sm.append(StringPool.AMPERSAND);
+		}
 
-		sm.append("p_p_col_pos");
-		sm.append(StringPool.EQUAL);
-		sm.append(_processValue(key, portletDisplay.getColumnPos()));
-		sm.append(StringPool.AMPERSAND);
+		if (!isParameterIncludedInPath("p_p_col_pos")) {
+			sm.append("p_p_col_pos");
+			sm.append(StringPool.EQUAL);
+			sm.append(_processValue(key, portletDisplay.getColumnPos()));
+			sm.append(StringPool.AMPERSAND);
+		}
 
-		sm.append("p_p_col_count");
-		sm.append(StringPool.EQUAL);
-		sm.append(_processValue(key, portletDisplay.getColumnCount()));
-		sm.append(StringPool.AMPERSAND);
+		if (!isParameterIncludedInPath("p_p_col_count")) {
+			sm.append("p_p_col_count");
+			sm.append(StringPool.EQUAL);
+			sm.append(_processValue(key, portletDisplay.getColumnCount()));
+			sm.append(StringPool.AMPERSAND);
+		}
 
 		if (Validator.isNotNull(_doAsUserId)) {
 			try {
@@ -526,6 +583,10 @@ public class PortletURLImpl implements PortletURL, Serializable {
 			String[] values = (String[])entry.getValue();
 
 			for (int i = 0; i < values.length; i++) {
+				if (isParameterIncludedInPath(name)) {
+					continue;
+				}
+
 				if (!PortalUtil.isReservedParameter(name)) {
 					sm.append(getNamespace());
 				}
@@ -560,7 +621,25 @@ public class PortletURLImpl implements PortletURL, Serializable {
 			}
 		}
 
-		return sm.toString();
+		// Remove trailing question mark
+
+		String result = sm.toString();
+		if (result.endsWith(StringPool.QUESTION)) {
+			result = result.substring(0, result.length() - 1);
+		}
+
+		return result;
+	}
+
+	protected String getPortletFriendlyURLPath() {
+		String portletFriendlyURLPath = null;
+		if (_portlet != null) {
+			FriendlyURLMapper mapper = _portlet.getFriendlyURLMapper();
+			if (mapper != null) {
+				portletFriendlyURLPath = mapper.buildPath(this);
+			}
+		}
+		return portletFriendlyURLPath;
 	}
 
 	private String _processValue(Key key, int value) {
@@ -595,6 +674,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 	private WindowState _windowState;
 	private PortletMode _portletMode;
 	private Map _params;
+	private List _parametersIncludedInPath = new ArrayList();
 	private boolean _secure;
 	private boolean _anchor = true;
 	private boolean _encrypt = false;

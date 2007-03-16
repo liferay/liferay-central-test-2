@@ -24,6 +24,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.model.PluginSetting;
@@ -458,6 +459,19 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setPortletURLClass(String portletURLClass) {
 		_portletURLClass = portletURLClass;
+	}
+
+	/**
+	 * Gets the friendly URL mapper of the portlet.
+	 *
+	 * @return		the name of the friendly URL mapper class of the portlet
+	 */
+	public FriendlyURLMapper getFriendlyURLMapper() {
+		if (Validator.isNull(getFriendlyURLMapperClass())) {
+			return null;
+		}
+
+		return (FriendlyURLMapper)InstancePool.get(getFriendlyURLMapperClass());
 	}
 
 	/**

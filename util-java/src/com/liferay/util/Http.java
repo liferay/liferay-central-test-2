@@ -374,7 +374,19 @@ public class Http {
 				Map.Entry entry = (Map.Entry)itr.next();
 
 				String name = (String)entry.getKey();
-				String[] values = (String[])entry.getValue();
+				Object valueObj = entry.getValue();
+
+				String[] values;
+				if (valueObj instanceof String[]) {
+					values = (String[])entry.getValue();
+				}
+				else if (valueObj instanceof String) {
+				    values = new String[]{(String)valueObj};
+				} else {
+					throw new IllegalArgumentException(
+						"Values of type " + valueObj.getClass() + " are not" +
+							" supported");
+				}
 
 				for (int i = 0; i < values.length; i++) {
 					sm.append(name);

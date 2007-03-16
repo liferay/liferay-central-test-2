@@ -28,6 +28,8 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
+import javax.portlet.PortletURL;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
 
@@ -87,6 +89,7 @@ public class TabsTag extends ParamAncestorTagImpl {
 
 			req.setAttribute("liferay-ui:tabs:value", _value);
 
+			req.setAttribute("liferay-ui:tabs:portletURL", _portletURL);
 			req.setAttribute("liferay-ui:tabs:url", _url);
 			req.setAttribute("liferay-ui:tabs:url0", _url0);
 			req.setAttribute("liferay-ui:tabs:url1", _url1);
@@ -190,6 +193,10 @@ public class TabsTag extends ParamAncestorTagImpl {
 		_value = value;
 	}
 
+	public void setPortletURL(PortletURL portletURL) {
+		_portletURL = portletURL;
+	}
+
 	public void setUrl(String url) {
 		_url = url;
 	}
@@ -282,6 +289,7 @@ public class TabsTag extends ParamAncestorTagImpl {
 	private String[] _tabsValues;
 	private String _param = "tabs1";
 	private String _value;
+	private PortletURL _portletURL;
 	private String _url;
 	private String _url0;
 	private String _url1;

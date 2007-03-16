@@ -199,7 +199,6 @@
 		<struts-path>message_boards</struts-path>
 		<configuration-path>/message_boards/edit_configuration</configuration-path>
 		<indexer-class>com.liferay.portlet.messageboards.util.Indexer</indexer-class>
-		<portlet-url-class>com.liferay.portlet.messageboards.MBFriendlyPortletURL</portlet-url-class>
 		<friendly-url-mapper-class>com.liferay.portlet.messageboards.MBFriendlyURLMapper</friendly-url-mapper-class>
 		<smtp-message-listener-class>com.liferay.portlet.messageboards.smtp.MessageListenerImpl</smtp-message-listener-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
@@ -869,9 +868,9 @@
 		<portlet-name>98</portlet-name>
 		<struts-path>software_catalog</struts-path>
 		<indexer-class>com.liferay.portlet.softwarecatalog.util.Indexer</indexer-class>
+		<friendly-url-mapper-class>com.liferay.portlet.softwarecatalog.SCFriendlyURLMapper</friendly-url-mapper-class>
 		<use-default-template>true</use-default-template>
 		<restore-current-view>false</restore-current-view>
-		<layout-cacheable>true</layout-cacheable>
 		<instanceable>false</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>1</render-weight>

@@ -28,6 +28,10 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.StringUtil;
 
+import java.util.Map;
+
+import javax.portlet.PortletURL;
+
 /**
  * <a href="TagsCompilerFriendlyURLMapper.java.html"><b><i>View Source</i></b>
  * </a>
@@ -41,25 +45,22 @@ public class TagsCompilerFriendlyURLMapper implements FriendlyURLMapper {
 		return _MAPPING;
 	}
 
-	public String[] getValues(String url, int pos) {
-		String friendlyURL = url.substring(0, pos);
+	public String buildPath(PortletURL portletURL) {
+		return null;
+	}
 
-		String queryString = _QUERY_STRING;
+	public void populateParams(String friendlyURLPath, Map params) {
+		params.put("p_p_id", _PORTLET_ID);
+		params.put("p_p_action", "0");
 
-		int x = url.indexOf(StringPool.SLASH, pos + 1);
-		int y = url.length();
+		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
+		int y = friendlyURLPath.length();
 
 		String[] entries = StringUtil.split(
-			url.substring(x + 1, y), StringPool.SLASH);
+			friendlyURLPath.substring(x + 1, y), StringPool.SLASH);
 
 		if (entries.length > 0) {
 			StringBuffer sb = new StringBuffer();
-
-			sb.append(queryString);
-			sb.append(StringPool.AMPERSAND);
-			sb.append(
-				PortalUtil.getPortletNamespace(PortletKeys.TAGS_COMPILER));
-			sb.append("entries=");
 
 			for (int i = 0; i < entries.length; i++) {
 				String entry = StringUtil.replace(
@@ -72,14 +73,17 @@ public class TagsCompilerFriendlyURLMapper implements FriendlyURLMapper {
 				sb.append(entry);
 			}
 
-			queryString = sb.toString();
+			addParam(params, "entries", sb.toString());
 		}
 
-		return new String[] {friendlyURL, queryString};
+	}
+
+	protected void addParam(Map params, String name, String value) {
+		params.put(PortalUtil.getPortletNamespace(_PORTLET_ID) + name, value);
 	}
 
 	private static final String _MAPPING = "tags";
 
-	private static final String _QUERY_STRING = "&p_p_id=103&p_p_action=0";
+	private static final String _PORTLET_ID = PortletKeys.TAGS_COMPILER;
 
 }
