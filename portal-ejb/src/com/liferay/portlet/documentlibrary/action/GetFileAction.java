@@ -110,6 +110,8 @@ public class GetFileAction extends PortletAction {
 			ThemeDisplay themeDisplay, HttpServletResponse res)
 		throws Exception {
 
+		InputStream is = null;
+
 		try {
 			String companyId = themeDisplay.getCompanyId();
 			String userId = themeDisplay.getUserId();
@@ -130,8 +132,6 @@ public class GetFileAction extends PortletAction {
 			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 				folderId, name);
 
-			InputStream is = null;
-
 			if (version > 0) {
 				is = DLFileEntryLocalServiceUtil.getFileAsStream(
 					companyId, userId, folderId, name, version);
@@ -146,6 +146,9 @@ public class GetFileAction extends PortletAction {
 		}
 		catch (PortalException pe) {
 			res.sendError(HttpServletResponse.SC_NOT_FOUND, pe.getMessage());
+		}
+		finally {
+			ServletResponseUtil.cleanUp(is);
 		}
 	}
 

@@ -45,14 +45,14 @@ import org.apache.commons.logging.LogFactory;
 public class GetMethodImpl implements Method {
 
 	public void process(WebDAVRequest webDavReq) throws WebDAVException {
+		InputStream is = null;
+
 		try {
 			WebDAVStorage storage = webDavReq.getWebDAVStorage();
 			HttpServletRequest req = webDavReq.getHttpServletRequest();
 			HttpServletResponse res = webDavReq.getHttpServletResponse();
 
 			Resource resource = storage.getResource(webDavReq);
-
-			InputStream is = null;
 
 			if (resource != null) {
 				try {
@@ -83,6 +83,9 @@ public class GetMethodImpl implements Method {
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);
+		}
+		finally {
+			ServletResponseUtil.cleanUp(is);
 		}
 	}
 

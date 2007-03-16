@@ -92,13 +92,20 @@ public class GetMessageAttachmentAction extends PortletAction {
 			String messageId, String fileName, HttpServletResponse res)
 		throws Exception {
 
-		MBMessage message = MBMessageServiceUtil.getMessage(messageId);
+		InputStream is = null;
 
-		InputStream is = DLLocalServiceUtil.getFileAsStream(
-			message.getCompanyId(), CompanyImpl.SYSTEM,
-			message.getAttachmentsDir() + "/" + fileName);
+		try {
+			MBMessage message = MBMessageServiceUtil.getMessage(messageId);
 
-		ServletResponseUtil.sendFile(res, fileName, is);
+			is = DLLocalServiceUtil.getFileAsStream(
+				message.getCompanyId(), CompanyImpl.SYSTEM,
+				message.getAttachmentsDir() + "/" + fileName);
+
+			ServletResponseUtil.sendFile(res, fileName, is);
+		}
+		finally {
+			ServletResponseUtil.cleanUp(is);
+		}
 	}
 
 }

@@ -45,11 +45,7 @@ public class ServletResponseUtil {
 	public static final String DEFAULT_CONTENT_TYPE =
 		"application/octet-stream";
 
-	public static void cleanUp(OutputStream os) {
-		cleanUp(os, null);
-	}
-
-	public static void cleanUp(OutputStream os, InputStream is) {
+	public static void cleanUp(InputStream is) {
 		try {
 			if (is != null) {
 				is.close();
@@ -60,7 +56,9 @@ public class ServletResponseUtil {
 				_log.warn(e);
 			}
 		}
+	}
 
+	public static void cleanUp(OutputStream os) {
 		try {
 			if (os != null) {
 				os.flush();
@@ -82,6 +80,11 @@ public class ServletResponseUtil {
 				_log.warn(e);
 			}
 		}
+	}
+
+	public static void cleanUp(OutputStream os, InputStream is) {
+		cleanUp(os);
+		cleanUp(is);
 	}
 
 	public static void sendFile(
