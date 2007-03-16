@@ -80,10 +80,10 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 					String[] values = request.getParameterValues(name);
 
 					for (int i = 0; i < values.length; i++) {
-						url.append("&");
+						url.append(StringPool.AMPERSAND);
 						url.append(name);
-						url.append("=");
-						url.append(values[i]);
+						url.append(StringPool.EQUAL);
+						url.append(Http.encodeURL(values[i]));
 					}
 				}
 			}
