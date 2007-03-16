@@ -14,7 +14,7 @@
 	<path id="test-ejb.classpath">
 		<path refid="project.classpath" />
 		<fileset dir="${app.server.dir}/lib" includes="*.jar" />
-		<fileset dir="${app.server.dir}/server/default/lib" includes="*.jar" />
+		<fileset dir="${app.server.instance.dir}/lib" includes="*.jar" />
 	</path>
 
 	<path id="test-http.classpath">

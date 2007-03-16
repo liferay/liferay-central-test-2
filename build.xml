@@ -486,7 +486,7 @@
 					/>
 				</copy>
 
-				<copy todir="${app.server.dir}/server/default/lib">
+				<copy todir="${app.server.instance.dir}/lib">
 					<fileset
 						dir="lib/portal"
 						includes="commons-collections.jar,commons-httpclient.jar"
@@ -495,7 +495,7 @@
 
 				<delete>
 					<fileset
-						dir="${app.server.dir}/server/default/lib"
+						dir="${app.server.instance.dir}/lib"
 						includes="hibernate3.jar,jboss-hibernate.jar"
 					/>
 				</delete>

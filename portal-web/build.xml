@@ -108,8 +108,8 @@
 
 		<antcall target="compile-common-lib" />
 
-		<unjar src="${app.server.dir}/server/default/lib/javax.servlet.jar" dest="${classpath.jsp}" />
-		<unjar src="${app.server.dir}/server/default/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.instance.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.instance.dir}/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
 		<unjar src="${app.server.deploy.dir}/jbossweb-jetty.sar/commons-el.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
@@ -123,8 +123,8 @@
 
 		<antcall target="compile-common-lib" />
 
-		<unjar src="${app.server.dir}/server/default/lib/javax.servlet.jar" dest="${classpath.jsp}" />
-		<unjar src="${app.server.dir}/server/default/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.instance.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.instance.dir}/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
 		<unjar src="${app.server.deploy.dir}/jbossweb-tomcat55.sar/commons-el.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
@@ -245,7 +245,7 @@
 					<then>
 						<antcall target="compile-jboss-jetty" />
 
-						<copy todir="${app.server.dir}/server/default/work">
+						<copy todir="${app.server.instance.dir}/work">
 							<fileset dir="classes/${app.server.type}">
 								<exclude name="**/*.jspc_error" />
 								<exclude name="**/*.java" />
@@ -257,7 +257,7 @@
 						<then>
 							<antcall target="compile-jboss-tomcat" />
 
-							<copy todir="${app.server.dir}/server/default/work/jboss.web/localhost/_">
+							<copy todir="${app.server.instance.dir}/work/jboss.web/localhost/_">
 								<fileset dir="classes/${app.server.type}">
 									<exclude name="**/*.jspc_error" />
 									<exclude name="**/*.java" />
