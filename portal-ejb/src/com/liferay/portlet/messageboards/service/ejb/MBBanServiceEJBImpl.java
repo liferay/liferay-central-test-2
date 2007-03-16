@@ -63,11 +63,11 @@ public class MBBanServiceEJBImpl implements MBBanService, SessionBean {
 		return MBBanServiceFactory.getTxImpl().addBan(plid, banUserId);
 	}
 
-	public void deleteBan(java.lang.String banId)
+	public void deleteBan(java.lang.String plid, java.lang.String banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		MBBanServiceFactory.getTxImpl().deleteBan(banId);
+		MBBanServiceFactory.getTxImpl().deleteBan(plid, banUserId);
 	}
 
 	public void ejbCreate() throws CreateException {

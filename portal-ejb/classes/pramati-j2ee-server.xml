@@ -1986,6 +1986,10 @@
 				<ejb-link>com_liferay_portlet_journal_service_ejb_JournalArticleLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2186,6 +2190,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/JournalArticleLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_journal_service_ejb_JournalArticleLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
@@ -7033,6 +7041,10 @@
 				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileRankLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -7205,6 +7217,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileRankLocalServiceHome</ejb-ref-name>
 				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileRankLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>

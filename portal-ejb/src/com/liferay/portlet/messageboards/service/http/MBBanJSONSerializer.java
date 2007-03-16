@@ -53,15 +53,7 @@ import java.util.List;
 public class MBBanJSONSerializer {
 	public static JSONObject toJSONObject(MBBan model) {
 		JSONObject jsonObj = new JSONObject();
-		String banId = model.getBanId();
-
-		if (banId == null) {
-			jsonObj.put("banId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("banId", banId.toString());
-		}
-
+		jsonObj.put("banId", model.getBanId());
 		jsonObj.put("groupId", model.getGroupId());
 
 		String companyId = model.getCompanyId();

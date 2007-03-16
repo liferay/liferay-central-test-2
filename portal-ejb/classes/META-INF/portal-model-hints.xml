@@ -708,7 +708,7 @@
 		<field name="smallImageURL" type="String" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBBan">
-		<field name="banId" type="String" />
+		<field name="banId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />

@@ -74,33 +74,31 @@ public class MBBanLocalServiceEJBImpl implements MBBanLocalService, SessionBean 
 			banUserId);
 	}
 
-	public void checkBan(java.lang.String plid, java.lang.String banUserId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		MBBanLocalServiceFactory.getTxImpl().checkBan(plid, banUserId);
-	}
-
 	public void checkBan(long groupId, java.lang.String banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBBanLocalServiceFactory.getTxImpl().checkBan(groupId, banUserId);
 	}
 
-	public void deleteBan(java.lang.String banId)
+	public void deleteBan(java.lang.String plid, java.lang.String banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		MBBanLocalServiceFactory.getTxImpl().deleteBan(banId);
+		MBBanLocalServiceFactory.getTxImpl().deleteBan(plid, banUserId);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBBan getBan(
-		java.lang.String plid, java.lang.String banUserId)
+	public void deleteBans(long groupId)
 		throws com.liferay.portal.SystemException {
-		return MBBanLocalServiceFactory.getTxImpl().getBan(plid, banUserId);
+		MBBanLocalServiceFactory.getTxImpl().deleteBans(groupId);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBBan getBan(long groupId,
-		java.lang.String banUserId) throws com.liferay.portal.SystemException {
-		return MBBanLocalServiceFactory.getTxImpl().getBan(groupId, banUserId);
+	public void deleteBans(java.lang.String userId)
+		throws com.liferay.portal.SystemException {
+		MBBanLocalServiceFactory.getTxImpl().deleteBans(userId);
+	}
+
+	public boolean hasBan(long groupId, java.lang.String banUserId)
+		throws com.liferay.portal.SystemException {
+		return MBBanLocalServiceFactory.getTxImpl().hasBan(groupId, banUserId);
 	}
 
 	public void ejbCreate() throws CreateException {

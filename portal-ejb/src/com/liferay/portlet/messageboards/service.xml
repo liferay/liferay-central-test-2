@@ -7,7 +7,7 @@
 
 		<!-- PK fields -->
 
-		<column name="banId" type="String" primary="true" />
+		<column name="banId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -29,6 +29,12 @@
 
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
+		</finder>
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="BanUserId" return-type="Collection">
+			<finder-column name="banUserId" />
 		</finder>
 		<finder name="G_B" return-type="MBBan">
 			<finder-column name="groupId" />
@@ -251,6 +257,7 @@
 		</finder>
 	</entity>
 	<exceptions>
+		<exception>BannedUser</exception>
 		<exception>CategoryName</exception>
 		<exception>MessageBody</exception>
 		<exception>MessageSubject</exception>

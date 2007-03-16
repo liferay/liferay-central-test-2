@@ -3220,6 +3220,13 @@
 				<ejb-link>com_liferay_portlet_journal_service_ejb_JournalArticleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
@@ -3553,6 +3560,13 @@
 				<local-home>com.liferay.portlet.journal.service.ejb.JournalArticleLocalServiceHome</local-home>
 				<local>com.liferay.portlet.journal.service.ejb.JournalArticleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_journal_service_ejb_JournalArticleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
@@ -11449,6 +11463,13 @@
 				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileRankLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceHome</local-home>
@@ -11733,6 +11754,13 @@
 				<local-home>com.liferay.portlet.documentlibrary.service.ejb.DLFileRankLocalServiceHome</local-home>
 				<local>com.liferay.portlet.documentlibrary.service.ejb.DLFileRankLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileRankLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBBanLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBBanLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>

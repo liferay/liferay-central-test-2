@@ -54,7 +54,7 @@ import java.util.Date;
 public class MBBanModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBBan";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "banId", new Integer(Types.VARCHAR) },
+			{ "banId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
@@ -66,9 +66,6 @@ public class MBBanModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBBan"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_BANID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBBan.banId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBBan.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -87,26 +84,20 @@ public class MBBanModelImpl extends BaseModelImpl {
 	public MBBanModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _banId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setBanId(pk);
 	}
 
-	public String getBanId() {
-		return GetterUtil.getString(_banId);
+	public long getBanId() {
+		return _banId;
 	}
 
-	public void setBanId(String banId) {
-		if (((banId == null) && (_banId != null)) ||
-				((banId != null) && (_banId == null)) ||
-				((banId != null) && (_banId != null) && !banId.equals(_banId))) {
-			if (!XSS_ALLOW_BANID) {
-				banId = XSSUtil.strip(banId);
-			}
-
+	public void setBanId(long banId) {
+		if (banId != _banId) {
 			_banId = banId;
 		}
 	}
@@ -235,9 +226,17 @@ public class MBBanModelImpl extends BaseModelImpl {
 		}
 
 		MBBanImpl mbBan = (MBBanImpl)obj;
-		String pk = mbBan.getPrimaryKey();
+		long pk = mbBan.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -254,9 +253,9 @@ public class MBBanModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = mbBan.getPrimaryKey();
+		long pk = mbBan.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -265,10 +264,10 @@ public class MBBanModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _banId;
+	private long _banId;
 	private long _groupId;
 	private String _companyId;
 	private String _userId;

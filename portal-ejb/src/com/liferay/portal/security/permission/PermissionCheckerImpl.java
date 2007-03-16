@@ -108,6 +108,10 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		this.user = user;
 	}
 
+	public String getUserId() {
+		return user.getUserId();
+	}
+
 	public boolean isSignedIn() {
 		return signedIn;
 	}

@@ -93,10 +93,10 @@ public class MBBanServiceSoap {
 		}
 	}
 
-	public static void deleteBan(java.lang.String banId)
-		throws RemoteException {
+	public static void deleteBan(java.lang.String plid,
+		java.lang.String banUserId) throws RemoteException {
 		try {
-			MBBanServiceUtil.deleteBan(banId);
+			MBBanServiceUtil.deleteBan(plid, banUserId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

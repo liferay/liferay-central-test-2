@@ -36,6 +36,7 @@ import java.io.InputStream;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
@@ -54,15 +55,15 @@ public class ExportAction extends PortletAction {
 		throws Exception {
 
 		long eventId = ParamUtil.getLong(req, "eventId");
-		
+
 		File file = CalEventLocalServiceUtil.export(eventId);
-		
-		InputStream is = 
+
+		InputStream is =
 			new BufferedInputStream(new FileInputStream(file.getPath()));
 
 		HttpServletResponse httpRes =
 			((ActionResponseImpl)res).getHttpServletResponse();
-		
+
 		ServletResponseUtil.sendFile(httpRes, file.getName(), is);
 
 		is.close();

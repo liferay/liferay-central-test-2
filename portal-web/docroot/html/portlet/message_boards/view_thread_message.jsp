@@ -71,30 +71,30 @@
 							catch (NoSuchUserException nsue) {
 							}
 							%>
-							
-							<c:if test="<%= PortletPermission.contains(permissionChecker, themeDisplay.getLayout().getPlid(), ActionKeys.BAN_USER) %>">
+
+							<c:if test="<%= !user.getUserId().equals(user2.getUserId()) && PortletPermission.contains(permissionChecker, themeDisplay.getLayout().getPlid(), ActionKeys.BAN_USER) %>">
 								<hr>
-								<%
-								MBBan ban = MBBanLocalServiceUtil.getBan(themeDisplay.getLayout().getPlid(), user2.getUserId());	
-								%>			
+
 								<c:choose>
-									<c:when test="<%= ban == null %>">
-										<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banURL">
+									<c:when test="<%= MBBanLocalServiceUtil.hasBan(portletGroupId.longValue(), user2.getUserId()) %>">
+										<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
 											<portlet:param name="struts_action" value="/message_boards/ban_user" />
-											<portlet:param name="cmd" value="ban" />									
+											<portlet:param name="<%= Constants.CMD %>" value="unban" />
 											<portlet:param name="redirect" value="<%= currentURL %>" />
-											<portlet:param name="ban_user_id" value="<%= user2.getUserId() %>" />
+											<portlet:param name="banUserId" value="<%= user2.getUserId() %>" />
 										</portlet:actionURL>
-										<a href="<%= banURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImage() %>/message_boards/ban_user.png"></a>&nbsp;<a href="<%= banURL.toString() %>"><%= LanguageUtil.get(pageContext, "ban-this-user") %></a>
+
+										<a href="<%= unbanUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unban_user.png"></a> <a href="<%= unbanUserURL.toString() %>"><%= LanguageUtil.get(pageContext, "unban-this-user") %></a>
 									</c:when>
 									<c:otherwise>
-										<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banURL">
+										<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banUserURL">
 											<portlet:param name="struts_action" value="/message_boards/ban_user" />
-											<portlet:param name="cmd" value="unban" />									
+											<portlet:param name="<%= Constants.CMD %>" value="ban" />
 											<portlet:param name="redirect" value="<%= currentURL %>" />
-											<portlet:param name="ban_id" value="<%= ban.getBanId() %>" />
+											<portlet:param name="banUserId" value="<%= user2.getUserId() %>" />
 										</portlet:actionURL>
-										<a href="<%= banURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImage() %>/message_boards/unban_user.png"></a>&nbsp;<a href="<%= banURL.toString() %>"><%= LanguageUtil.get(pageContext, "unban-this-user") %></a>
+
+										<a href="<%= banUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ban_user.png"></a> <a href="<%= banUserURL.toString() %>"><%= LanguageUtil.get(pageContext, "ban-this-user") %></a>
 									</c:otherwise>
 								</c:choose>
 							</c:if>

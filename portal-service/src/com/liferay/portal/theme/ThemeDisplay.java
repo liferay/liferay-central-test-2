@@ -436,13 +436,13 @@ public class ThemeDisplay implements Serializable {
 	}
 
 	/**
-	 * @deprecated Use <code>getPathThemeImagess</code>.
+	 * @deprecated Use <code>getPathThemeImages</code>.
 	 */
-	public String getPathThemeImages() {
-		return getPathThemeImagess();
+	public String getPathThemeImage() {
+		return getPathThemeImages();
 	}
 
-	public String getPathThemeImagess() {
+	public String getPathThemeImages() {
 		return _pathThemeImages;
 	}
 

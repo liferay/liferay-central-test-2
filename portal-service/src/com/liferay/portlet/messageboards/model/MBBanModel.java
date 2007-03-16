@@ -47,13 +47,13 @@ import java.util.Date;
  *
  */
 public interface MBBanModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getBanId();
+	public long getBanId();
 
-	public void setBanId(String banId);
+	public void setBanId(long banId);
 
 	public long getGroupId();
 

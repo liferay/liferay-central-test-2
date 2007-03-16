@@ -447,7 +447,7 @@ create table ListType (
 );
 
 create table MBBan (
-	banId VARCHAR(75) not null primary key,
+	banId LONG not null primary key,
 	groupId LONG not null,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
@@ -455,14 +455,6 @@ create table MBBan (
 	createDate DATE null,
 	modifiedDate DATE null,
 	banUserId VARCHAR(75) null
-);
-
-create table MBStatsUser (
-	groupId LONG not null,
-	userId VARCHAR(75) not null,
-	messageCount INTEGER,
-	lastPostDate DATE null,
-	primary key (groupId, userId)
 );
 
 create table MBCategory (
@@ -510,6 +502,14 @@ create table MBMessageFlag (
 	userId VARCHAR(75) not null,
 	flag VARCHAR(75) null,
 	primary key (topicId, messageId, userId)
+);
+
+create table MBStatsUser (
+	groupId LONG not null,
+	userId VARCHAR(75) not null,
+	messageCount INTEGER,
+	lastPostDate DATE null,
+	primary key (groupId, userId)
 );
 
 create table MBThread (

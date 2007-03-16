@@ -25,10 +25,27 @@ package com.liferay.portlet.messageboards;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="BanUserException.java.html"><b><i>View Source</i></b></a>
+ * <a href="BannedUserException.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Michael Young
+ * @author Brian Wing Shun Chan
  *
  */
-public class BanUserException extends PortalException {
+public class BannedUserException extends PortalException {
+
+	public BannedUserException() {
+		super();
+	}
+
+	public BannedUserException(String msg) {
+		super(msg);
+	}
+
+	public BannedUserException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public BannedUserException(Throwable cause) {
+		super(cause);
+	}
+
 }

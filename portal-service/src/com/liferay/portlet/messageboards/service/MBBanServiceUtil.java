@@ -58,10 +58,11 @@ public class MBBanServiceUtil {
 		return mbBanService.addBan(plid, banUserId);
 	}
 
-	public static void deleteBan(java.lang.String banId)
+	public static void deleteBan(java.lang.String plid,
+		java.lang.String banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBBanService mbBanService = MBBanServiceFactory.getService();
-		mbBanService.deleteBan(banId);
+		mbBanService.deleteBan(plid, banUserId);
 	}
 }

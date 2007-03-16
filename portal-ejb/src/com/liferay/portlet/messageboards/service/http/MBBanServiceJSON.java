@@ -78,9 +78,10 @@ public class MBBanServiceJSON {
 		return MBBanJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteBan(java.lang.String banId)
+	public static void deleteBan(java.lang.String plid,
+		java.lang.String banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		MBBanServiceUtil.deleteBan(banId);
+		MBBanServiceUtil.deleteBan(plid, banUserId);
 	}
 }

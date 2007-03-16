@@ -30,9 +30,12 @@ package com.liferay.portal.kernel.security.permission;
  */
 public interface PermissionChecker {
 
+	public String getUserId();
+
 	public boolean hasPermission(
 		long groupId, String name, long primKey, String actionId);
 
 	public boolean hasPermission(
 		long groupId, String name, String primKey, String actionId);
+
 }

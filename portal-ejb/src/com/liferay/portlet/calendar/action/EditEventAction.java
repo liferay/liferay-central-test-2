@@ -306,7 +306,7 @@ public class EditEventAction extends PortletAction {
 
 					recurrence.setByMonth(new int[] {yearlyMonth});
 					recurrence.setByMonthDay(new int[] {yearlyDay});
-					
+
 					int yearlyInterval = ParamUtil.getInteger(
 						req, "yearlyInterval0");
 

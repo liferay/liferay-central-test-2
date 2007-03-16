@@ -68,6 +68,7 @@ import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
 import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
@@ -275,6 +276,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Message boards
 
+		MBBanLocalServiceUtil.deleteBans(groupId);
 		MBCategoryLocalServiceUtil.deleteCategories(groupId);
 		MBStatsUserLocalServiceUtil.deleteStatsUserByGroupId(groupId);
 

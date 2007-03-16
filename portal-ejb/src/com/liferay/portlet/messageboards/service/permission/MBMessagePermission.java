@@ -26,8 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
@@ -78,12 +76,9 @@ public class MBMessagePermission {
 
 		MBCategory category = message.getCategory();
 
-		long groupId = category.getGroupId();
-		
-		MBBan ban = MBBanLocalServiceUtil.getBan(
-			groupId, PrincipalThreadLocal.getName());
-		
-		if (ban != null) {
+		if (MBBanLocalServiceUtil.hasBan(
+				category.getGroupId(), permissionChecker.getUserId())) {
+
 			return false;
 		}
 		else {

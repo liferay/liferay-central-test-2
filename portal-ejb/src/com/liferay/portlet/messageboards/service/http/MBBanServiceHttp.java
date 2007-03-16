@@ -115,18 +115,24 @@ public class MBBanServiceHttp {
 	}
 
 	public static void deleteBan(HttpPrincipal httpPrincipal,
-		java.lang.String banId)
+		java.lang.String plid, java.lang.String banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = banId;
+			Object paramObj0 = plid;
 
-			if (banId == null) {
+			if (plid == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj1 = banUserId;
+
+			if (banUserId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBBanServiceUtil.class.getName(),
-					"deleteBan", new Object[] { paramObj0 });
+					"deleteBan", new Object[] { paramObj0, paramObj1 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

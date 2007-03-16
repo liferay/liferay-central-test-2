@@ -54,7 +54,7 @@ public interface MBBanService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteBan(java.lang.String banId)
+	public void deleteBan(java.lang.String plid, java.lang.String banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

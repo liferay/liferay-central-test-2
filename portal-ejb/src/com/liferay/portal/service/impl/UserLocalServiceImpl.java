@@ -95,6 +95,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil;
@@ -565,6 +566,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Message boards
 
+		MBBanLocalServiceUtil.deleteBans(userId);
 		MBMessageFlagLocalServiceUtil.deleteFlags(userId);
 		MBStatsUserLocalServiceUtil.deleteStatsUserByUserId(userId);
 

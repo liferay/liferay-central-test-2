@@ -31,6 +31,8 @@ import com.liferay.portlet.messageboards.model.MBBan;
  *
  */
 public class MBBanImpl extends MBBanModelImpl implements MBBan {
+
 	public MBBanImpl() {
 	}
+
 }

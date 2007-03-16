@@ -63,22 +63,20 @@ public interface MBBanLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void checkBan(java.lang.String plid, java.lang.String banUserId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public void checkBan(long groupId, java.lang.String banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteBan(java.lang.String banId)
+	public void deleteBan(java.lang.String plid, java.lang.String banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.messageboards.model.MBBan getBan(
-		java.lang.String plid, java.lang.String banUserId)
+	public void deleteBans(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.messageboards.model.MBBan getBan(long groupId,
-		java.lang.String banUserId) throws com.liferay.portal.SystemException;
+	public void deleteBans(java.lang.String userId)
+		throws com.liferay.portal.SystemException;
+
+	public boolean hasBan(long groupId, java.lang.String banUserId)
+		throws com.liferay.portal.SystemException;
 }

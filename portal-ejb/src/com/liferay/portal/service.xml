@@ -313,6 +313,7 @@
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFolder" />
 		<reference package-path="com.liferay.portlet.imagegallery" entity="IGFolder" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalArticle" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBBan" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBCategory" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBStatsUser" />
 		<reference package-path="com.liferay.portlet.polls" entity="PollsQuestion" />
@@ -998,6 +999,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileRank" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBBan" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessageFlag" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBStatsUser" />
 		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />

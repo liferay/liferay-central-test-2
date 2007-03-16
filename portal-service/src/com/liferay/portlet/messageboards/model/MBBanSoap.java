@@ -74,19 +74,19 @@ public class MBBanSoap implements Serializable {
 	public MBBanSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _banId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setBanId(pk);
 	}
 
-	public String getBanId() {
+	public long getBanId() {
 		return _banId;
 	}
 
-	public void setBanId(String banId) {
+	public void setBanId(long banId) {
 		_banId = banId;
 	}
 
@@ -146,7 +146,7 @@ public class MBBanSoap implements Serializable {
 		_banUserId = banUserId;
 	}
 
-	private String _banId;
+	private long _banId;
 	private long _groupId;
 	private String _companyId;
 	private String _userId;

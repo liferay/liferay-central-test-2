@@ -23,11 +23,13 @@
 package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.service.MBBanServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -48,34 +50,45 @@ public class BanUserAction extends PortletAction {
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
-		
+
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		if (cmd.equals(Constants.BAN_USER)) {
-			banUser(req);
-		}
-		else if (cmd.equals(Constants.UNBAN_USER)) {
-			unbanUser(req);
-		}
+		try {
+			if (cmd.equals("ban")) {
+				banUser(req);
+			}
+			else if (cmd.equals("unban")) {
+				unbanUser(req);
+			}
 
-		sendRedirect(req, res);
+			sendRedirect(req, res);
+		}
+		catch (Exception e) {
+			if (e instanceof PrincipalException) {
+				SessionErrors.add(req, e.getClass().getName());
+
+				setForward(req, "portlet.message_boards.error");
+			}
+			else {
+				throw e;
+			}
+		}
 	}
-		
-	protected void banUser(ActionRequest req) 
-		throws Exception {
-		
+
+	protected void banUser(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
-		String banUserId = ParamUtil.getString(req, "ban_user_id");
-		
-		MBBanServiceUtil.addBan(layout.getPlid(), banUserId);		
+
+		String banUserId = ParamUtil.getString(req, "banUserId");
+
+		MBBanServiceUtil.addBan(layout.getPlid(), banUserId);
 	}
-		
-	protected void unbanUser(ActionRequest req) 
-		throws Exception {
-	
-		String banId = ParamUtil.getString(req, "ban_id");
-		
-		MBBanServiceUtil.deleteBan(banId);		
+
+	protected void unbanUser(ActionRequest req) throws Exception {
+		String banUserId = ParamUtil.getString(req, "banUserId");
+
+		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+
+		MBBanServiceUtil.deleteBan(layout.getPlid(), banUserId);
 	}
 
 }

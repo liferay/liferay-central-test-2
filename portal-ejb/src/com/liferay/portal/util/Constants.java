@@ -38,8 +38,6 @@ public interface Constants {
 
 	public static final String APPROVE = "approve";
 
-	public static final String BAN_USER = "ban_user";
-
 	public static final String CANCEL = "cancel";
 
 	public static final String CHECKOUT = "checkout";
@@ -79,8 +77,6 @@ public interface Constants {
 	public static final String SIGNAL = "signal";
 
 	public static final String SUBSCRIBE = "subscribe";
-
-	public static final String UNBAN_USER = "unban_user";
 
 	public static final String UNLOCK = "unlock";
 

@@ -510,6 +510,30 @@
 					</resource-ref>
 				</session>
 				<session>
+					<ejb-name>com_liferay_portal_service_ejb_PluginSettingLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/PluginSettingLocalServiceHome</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
+					<ejb-name>com_liferay_portal_service_ejb_PluginSettingServiceEJB</ejb-name>
+					<jndi-name>com_liferay_portal_service_ejb_PluginSettingServiceEJB</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
 					<ejb-name>com_liferay_portal_service_ejb_PortletLocalServiceEJB</ejb-name>
 					<jndi-name>ejb/liferay/PortletLocalServiceHome</jndi-name>
 					<resource-ref>
@@ -584,6 +608,18 @@
 				<session>
 					<ejb-name>com_liferay_portal_service_ejb_ResourceServiceEJB</ejb-name>
 					<jndi-name>com_liferay_portal_service_ejb_ResourceServiceEJB</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
+					<ejb-name>com_liferay_portal_service_ejb_ResourceCodeLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/ResourceCodeLocalServiceHome</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>
@@ -1100,6 +1136,30 @@
 				<session>
 					<ejb-name>com_liferay_portlet_journal_service_ejb_JournalTemplateServiceEJB</ejb-name>
 					<jndi-name>com_liferay_portlet_journal_service_ejb_JournalTemplateServiceEJB</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
+					<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/MBBanLocalServiceHome</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
+					<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</ejb-name>
+					<jndi-name>com_liferay_portlet_messageboards_service_ejb_MBBanServiceEJB</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>

@@ -732,7 +732,7 @@
 	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBBanImpl" table="MBBan">
 		<cache usage="read-write" />
-		<id name="banId" type="java.lang.String">
+		<id name="banId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />

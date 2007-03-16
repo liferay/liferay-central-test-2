@@ -60,13 +60,14 @@ public class ActionUtil {
 	}
 
 	public static void getCategory(HttpServletRequest req) throws Exception {
+
+		// Add redundant check here because the JSP does not check permissions
+		// on the initial search container
+
+		String userId = PortalUtil.getUserId(req);
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		// Add redundant check here because the jsp does not check permissions
-		// on the initial search container
-		
-		MBBanLocalServiceUtil.checkBan(
-			layout.getPlid(), PortalUtil.getUserId(req));
+		MBBanLocalServiceUtil.checkBan(layout.getGroupId(), userId);
 
 		String categoryId = ParamUtil.getString(req, "categoryId");
 

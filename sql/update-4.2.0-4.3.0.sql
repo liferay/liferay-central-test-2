@@ -60,9 +60,20 @@ alter table LayoutSet add logo BOOLEAN;
 
 alter_column_type ListType listTypeId INTEGER;
 
-alter_column_type MBStatsUser groupId LONG;
+create table MBBan (
+	banId LONG not null primary key,
+	groupId LONG not null,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	banUserId VARCHAR(75) null
+);
 
 alter_column_type MBCategory groupId LONG;
+
+alter_column_type MBStatsUser groupId LONG;
 
 alter_column_type Organization_ statusId INTEGER;
 
