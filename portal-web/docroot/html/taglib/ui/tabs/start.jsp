@@ -33,8 +33,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("liferay-ui:tabs:portle
 String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:tabs:url"));
 String anchor = StringPool.BLANK;
 
-
 if (url != null) {
+
 	// Strip existing tab parameter and value from the URL
 
 	int x = url.indexOf(param + "=");
@@ -66,8 +66,8 @@ if (url != null) {
 	x = url.indexOf("&#");
 
 	if (x != -1) {
-		anchor = url.substring(x, url.length());
 		url = url.substring(0, x);
+		anchor = url.substring(x, url.length());
 	}
 }
 
@@ -93,8 +93,10 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 				if (refresh) {
 					if (portletURL != null) {
 						portletURL.setParameter(param, values[i]);
+
 						curURL = portletURL.toString();
-					} else {
+					}
+					else {
 						curURL = url + "&" + param + "=" + values[i] + anchor;
 					}
 				}

@@ -88,7 +88,6 @@ public class TabsTag extends ParamAncestorTagImpl {
 			}
 
 			req.setAttribute("liferay-ui:tabs:value", _value);
-
 			req.setAttribute("liferay-ui:tabs:portletURL", _portletURL);
 			req.setAttribute("liferay-ui:tabs:url", _url);
 			req.setAttribute("liferay-ui:tabs:url0", _url0);
@@ -131,6 +130,7 @@ public class TabsTag extends ParamAncestorTagImpl {
 			_tabsValues = null;
 			_param = "tabs1";
 			_value = null;
+			_portletURL = null;
 			_url = null;
 			_url0 = null;
 			_url1 = null;

@@ -22,9 +22,8 @@
 
 package com.liferay.portlet.messageboards;
 
-import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.BaseFriendlyURLMapper;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.util.GetterUtil;
@@ -41,10 +40,14 @@ import javax.portlet.PortletURL;
  * @author Jorge Ferrer
  *
  */
-public class MBFriendlyURLMapper implements FriendlyURLMapper {
+public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public String getMapping() {
 		return _MAPPING;
+	}
+
+	public String getPortletId() {
+		return _PORTLET_ID;
 	}
 
 	public String buildPath(PortletURL portletURL) {
@@ -52,7 +55,7 @@ public class MBFriendlyURLMapper implements FriendlyURLMapper {
 			return null;
 		}
 
-		PortletURLImpl url = (PortletURLImpl) portletURL;
+		PortletURLImpl url = (PortletURLImpl)portletURL;
 
 		String friendlyURLPath = null;
 
@@ -79,6 +82,7 @@ public class MBFriendlyURLMapper implements FriendlyURLMapper {
 
 			if (Validator.isNotNull(messageId)) {
 				friendlyURLPath = "/message_boards/message/" + messageId;
+
 				url.addParameterIncludedInPath("messageId");
 			}
 		}
@@ -92,6 +96,7 @@ public class MBFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	public void populateParams(String friendlyURLPath, Map params) {
+		setParams(params);
 
 		params.put("p_p_id", _PORTLET_ID);
 
@@ -99,10 +104,9 @@ public class MBFriendlyURLMapper implements FriendlyURLMapper {
 		int y = friendlyURLPath.indexOf("/", x + 1);
 
 		if (y == -1) {
-			addParam(params, "struts_action", "/message_boards/view");
-			addParam(
-				params, "categoryId",
-				MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+			addParam("struts_action", "/message_boards/view");
+			addParam("categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+
 			return;
 		}
 
@@ -112,24 +116,20 @@ public class MBFriendlyURLMapper implements FriendlyURLMapper {
 			String categoryId =
 				friendlyURLPath.substring(y + 1, friendlyURLPath.length());
 
-			addParam(params, "struts_action", "/message_boards/view");
-			addParam(params, "categoryId", categoryId);
+			addParam("struts_action", "/message_boards/view");
+			addParam("categoryId", categoryId);
 		}
 		else if (type.equals("message")) {
 			String messageId =
 				friendlyURLPath.substring(y + 1, friendlyURLPath.length());
-			addParam(params, "struts_action", "/message_boards/view_message");
-			addParam(params, "messageId", messageId);
+
+			addParam("struts_action", "/message_boards/view_message");
+			addParam("messageId", messageId);
 		}
-
-	}
-
-	protected void addParam(Map params, String name, String value) {
-		params.put(
-			PortalUtil.getPortletNamespace(_PORTLET_ID) + name, value);
 	}
 
 	private static final String _MAPPING = "message_boards";
+
 	private static final String _PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
 
 }

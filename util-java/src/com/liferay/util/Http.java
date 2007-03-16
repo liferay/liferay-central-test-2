@@ -374,18 +374,20 @@ public class Http {
 				Map.Entry entry = (Map.Entry)itr.next();
 
 				String name = (String)entry.getKey();
-				Object valueObj = entry.getValue();
+				Object value = entry.getValue();
 
-				String[] values;
-				if (valueObj instanceof String[]) {
+				String[] values = null;
+
+				if (value instanceof String[]) {
 					values = (String[])entry.getValue();
 				}
-				else if (valueObj instanceof String) {
-				    values = new String[]{(String)valueObj};
-				} else {
+				else if (value instanceof String) {
+				    values = new String[] {(String)value};
+				}
+				else {
 					throw new IllegalArgumentException(
-						"Values of type " + valueObj.getClass() + " are not" +
-							" supported");
+						"Values of type " + value.getClass() + " are not " +
+							"supported");
 				}
 
 				for (int i = 0; i < values.length; i++) {

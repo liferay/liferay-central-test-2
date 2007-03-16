@@ -49,11 +49,11 @@ import java.io.Serializable;
 
 import java.security.Key;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
@@ -105,6 +105,99 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		_secure = req.isSecure();
 		_action = action;
 		_params = new LinkedHashMap();
+		_parametersIncludedInPath = new LinkedHashSet();
+	}
+
+	public HttpServletRequest getReq() {
+		return _req;
+	}
+
+	public PortletRequest getPortletReq() {
+		return _portletReq;
+	}
+
+	public String getPortletName() {
+		return _portletName;
+	}
+
+	public void setPortletName(String portletName) {
+		_portletName = portletName;
+
+		// Clear cache
+
+		_toString = null;
+	}
+
+	public Portlet getPortlet() {
+		if (_portlet == null) {
+			try {
+				_portlet = PortletLocalServiceUtil.getPortletById(
+					PortalUtil.getCompanyId(_req), _portletName);
+			}
+			catch (SystemException se) {
+				_log.error(se.getMessage());
+			}
+		}
+
+		return _portlet;
+	}
+
+	public String getPortletFriendlyURLPath() {
+		String portletFriendlyURLPath = null;
+
+		if (_portlet != null) {
+			FriendlyURLMapper mapper = _portlet.getFriendlyURLMapper();
+
+			if (mapper != null) {
+				portletFriendlyURLPath = mapper.buildPath(this);
+			}
+		}
+
+		return portletFriendlyURLPath;
+	}
+
+	public String getNamespace() {
+		if (_namespace == null) {
+			_namespace = PortalUtil.getPortletNamespace(_portletName);
+		}
+
+		return _namespace;
+	}
+
+	public String getPlid() {
+		return _plid;
+	}
+
+	public Layout getLayout() {
+		if (_layout == null) {
+			try {
+				String layoutId = LayoutImpl.getLayoutId(_plid);
+				String ownerId = LayoutImpl.getOwnerId(_plid);
+
+				_layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+			}
+			catch (Exception e) {
+				_log.warn("Layout cannot be found for " + _plid);
+			}
+		}
+
+		return _layout;
+	}
+
+	public String getLayoutFriendlyURL() {
+		return _layoutFriendlyURL;
+	}
+
+	public boolean isAction() {
+		return _action;
+	}
+
+	public void setAction(boolean action) {
+		_action = action;
+
+		// Clear cache
+
+		_toString = null;
 	}
 
 	public WindowState getWindowState() {
@@ -165,6 +258,17 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		throws PortletModeException {
 
 		setPortletMode(new PortletMode(portletMode));
+	}
+
+	public String getParameter(String name) {
+		String[] values = (String[])_params.get(name);
+
+		if ((values != null) && (values.length > 0)) {
+			return values[0];
+		}
+		else {
+			return null;
+		}
 	}
 
 	public void setParameter(String name, String value) {
@@ -254,6 +358,27 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		return _params;
 	}
 
+	public Set getParametersIncludedInPath() {
+		return _parametersIncludedInPath;
+	}
+
+	public void addParameterIncludedInPath(String name) {
+		_parametersIncludedInPath.add(name);
+	}
+
+	public boolean isParameterIncludedInPath(String name) {
+		if (_parametersIncludedInPath.contains(name)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isSecure() {
+		return _secure;
+	}
+
 	public void setSecure(boolean secure) throws PortletSecurityException {
 		_secure = secure;
 
@@ -262,24 +387,8 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		_toString = null;
 	}
 
-	public String getPortletName() {
-		return _portletName;
-	}
-
-	public void setPortletName(String portletName) {
-		_portletName = portletName;
-
-		// Clear cache
-
-		_toString = null;
-	}
-
-	public void setAction(boolean action) {
-		_action = action;
-
-		// Clear cache
-
-		_toString = null;
+	public boolean isAnchor() {
+		return _anchor;
 	}
 
 	public void setAnchor(boolean anchor) {
@@ -288,6 +397,10 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		// Clear cache
 
 		_toString = null;
+	}
+
+	public boolean isEncrypt() {
+		return _encrypt;
 	}
 
 	public void setEncrypt(boolean encrypt) {
@@ -314,103 +427,6 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		_toString = generateToString();
 
 		return _toString;
-	}
-
-	protected String getPlid() {
-		return _plid;
-	}
-
-	protected Layout getLayout() {
-		if (_layout == null) {
-			try {
-				String layoutId = LayoutImpl.getLayoutId(_plid);
-				String ownerId = LayoutImpl.getOwnerId(_plid);
-
-				_layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
-			}
-			catch (Exception e) {
-				_log.warn("Layout cannot be found for " + _plid);
-			}
-		}
-
-		return _layout;
-	}
-
-	protected String getLayoutFriendlyURL() {
-		return _layoutFriendlyURL;
-	}
-
-	protected String getNamespace() {
-		if (_namespace == null) {
-			_namespace = PortalUtil.getPortletNamespace(_portletName);
-		}
-
-		return _namespace;
-	}
-
-	public String getParameter(String name) {
-		String[] values = (String[])_params.get(name);
-
-		if ((values != null) && (values.length > 0)) {
-			return values[0];
-		}
-		else {
-			return null;
-		}
-	}
-
-	public List getParametersIncludedInPath() {
-		return _parametersIncludedInPath;
-	}
-
-	public void addParameterIncludedInPath(String name) {
-		_parametersIncludedInPath.add(name);
-	}
-
-	protected Portlet getPortlet() {
-		if (_portlet == null) {
-			try {
-				_portlet = PortletLocalServiceUtil.getPortletById(
-					PortalUtil.getCompanyId(_req), _portletName);
-			}
-			catch (SystemException se) {
-				_log.error(se.getMessage());
-			}
-		}
-
-		return _portlet;
-	}
-
-	protected PortletRequest getPortletReq() {
-		return _portletReq;
-	}
-
-	protected HttpServletRequest getReq() {
-		return _req;
-	}
-
-	public boolean isAction() {
-		return _action;
-	}
-
-	protected boolean isAnchor() {
-		return _anchor;
-	}
-
-	protected boolean isEncrypt() {
-		return _encrypt;
-	}
-
-	protected boolean isSecure() {
-		return _secure;
-	}
-
-	protected boolean isParameterIncludedInPath(String name) {
-		if (_parametersIncludedInPath.contains(name)) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	protected String generateToString() {
@@ -466,7 +482,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 
 			sm.append("p_l_id");
 			sm.append(StringPool.EQUAL);
-			sm.append(_processValue(key, _plid));
+			sm.append(processValue(key, _plid));
 			sm.append(StringPool.AMPERSAND);
 		}
 		else {
@@ -483,11 +499,13 @@ public class PortletURLImpl implements PortletURL, Serializable {
 
 				if ((_windowState != null) &&
 					_windowState.equals(WindowState.MAXIMIZED)) {
+
 					addParameterIncludedInPath("p_p_state");
 				}
 
 				if ((_portletMode != null) &&
 					_portletMode.equals(PortletMode.VIEW)) {
+
 					addParameterIncludedInPath("p_p_mode");
 				}
 
@@ -497,56 +515,61 @@ public class PortletURLImpl implements PortletURL, Serializable {
 			}
 
 			sm.append(StringPool.QUESTION);
-
 		}
 
 		if (!isParameterIncludedInPath("p_p_id")) {
 			sm.append("p_p_id");
 			sm.append(StringPool.EQUAL);
-			sm.append(_processValue(key, _portletName));
+			sm.append(processValue(key, _portletName));
 			sm.append(StringPool.AMPERSAND);
 		}
 
 		if (!isParameterIncludedInPath("p_p_action")) {
 			sm.append("p_p_action");
 			sm.append(StringPool.EQUAL);
-			sm.append(
-				_action ? _processValue(key, "1") : _processValue(key, "0"));
+
+			if (_action) {
+				sm.append(processValue(key, "1"));
+			}
+			else {
+				sm.append(processValue(key, "0"));
+			}
+
 			sm.append(StringPool.AMPERSAND);
 		}
 
 		if (_windowState != null && !isParameterIncludedInPath("p_p_state")) {
 			sm.append("p_p_state");
 			sm.append(StringPool.EQUAL);
-			sm.append(_processValue(key, _windowState.toString()));
+			sm.append(processValue(key, _windowState.toString()));
 			sm.append(StringPool.AMPERSAND);
 		}
 
 		if (_portletMode != null && !isParameterIncludedInPath("p_p_mode")) {
 			sm.append("p_p_mode");
 			sm.append(StringPool.EQUAL);
-			sm.append(_processValue(key, _portletMode.toString()));
+			sm.append(processValue(key, _portletMode.toString()));
 			sm.append(StringPool.AMPERSAND);
 		}
 
 		if (!isParameterIncludedInPath("p_p_col_id")) {
 			sm.append("p_p_col_id");
 			sm.append(StringPool.EQUAL);
-			sm.append(_processValue(key, portletDisplay.getColumnId()));
+			sm.append(processValue(key, portletDisplay.getColumnId()));
 			sm.append(StringPool.AMPERSAND);
 		}
 
 		if (!isParameterIncludedInPath("p_p_col_pos")) {
 			sm.append("p_p_col_pos");
 			sm.append(StringPool.EQUAL);
-			sm.append(_processValue(key, portletDisplay.getColumnPos()));
+			sm.append(processValue(key, portletDisplay.getColumnPos()));
 			sm.append(StringPool.AMPERSAND);
 		}
 
 		if (!isParameterIncludedInPath("p_p_col_count")) {
 			sm.append("p_p_col_count");
 			sm.append(StringPool.EQUAL);
-			sm.append(_processValue(key, portletDisplay.getColumnCount()));
+			sm.append(processValue(key, portletDisplay.getColumnCount()));
 			sm.append(StringPool.AMPERSAND);
 		}
 
@@ -556,7 +579,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 
 				sm.append("doAsUserId");
 				sm.append(StringPool.EQUAL);
-				sm.append(_processValue(company.getKeyObj(), _doAsUserId));
+				sm.append(processValue(company.getKeyObj(), _doAsUserId));
 				sm.append(StringPool.AMPERSAND);
 			}
 			catch (Exception e) {
@@ -569,7 +592,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 			if (Validator.isNotNull(doAsUserId)) {
 				sm.append("doAsUserId");
 				sm.append(StringPool.EQUAL);
-				sm.append(_processValue(key, doAsUserId));
+				sm.append(processValue(key, doAsUserId));
 				sm.append(StringPool.AMPERSAND);
 			}
 		}
@@ -593,7 +616,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 
 				sm.append(name);
 				sm.append(StringPool.EQUAL);
-				sm.append(_processValue(key, values[i]));
+				sm.append(processValue(key, values[i]));
 
 				if ((i + 1 < values.length) || itr.hasNext()) {
 					sm.append(StringPool.AMPERSAND);
@@ -624,6 +647,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		// Remove trailing question mark
 
 		String result = sm.toString();
+
 		if (result.endsWith(StringPool.QUESTION)) {
 			result = result.substring(0, result.length() - 1);
 		}
@@ -631,22 +655,11 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		return result;
 	}
 
-	protected String getPortletFriendlyURLPath() {
-		String portletFriendlyURLPath = null;
-		if (_portlet != null) {
-			FriendlyURLMapper mapper = _portlet.getFriendlyURLMapper();
-			if (mapper != null) {
-				portletFriendlyURLPath = mapper.buildPath(this);
-			}
-		}
-		return portletFriendlyURLPath;
+	protected String processValue(Key key, int value) {
+		return processValue(key, Integer.toString(value));
 	}
 
-	private String _processValue(Key key, int value) {
-		return _processValue(key, Integer.toString(value));
-	}
-
-	private String _processValue(Key key, String value) {
+	protected String processValue(Key key, String value) {
 		if (key == null) {
 			return Http.encodeURL(value);
 		}
@@ -674,7 +687,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 	private WindowState _windowState;
 	private PortletMode _portletMode;
 	private Map _params;
-	private List _parametersIncludedInPath = new ArrayList();
+	private Set _parametersIncludedInPath;
 	private boolean _secure;
 	private boolean _anchor = true;
 	private boolean _encrypt = false;

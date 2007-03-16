@@ -442,8 +442,8 @@ public class PortalUtil {
 	public static String getLayoutActualURL(
 			String ownerId, String mainPath, String friendlyURL)
 		throws PortalException, SystemException {
-		return getLayoutActualURL(
-			ownerId, mainPath, friendlyURL, new HashMap());
+
+		return getLayoutActualURL(ownerId, mainPath, friendlyURL, null);
 	}
 
 	public static String getLayoutActualURL(
@@ -467,7 +467,7 @@ public class PortalUtil {
 		}
 		else {
 			Object[] friendlyURLMapper =
-				getPortletFriendlyURLPlugin(ownerId, friendlyURL, params);
+				getPortletFriendlyURLMapper(ownerId, friendlyURL, params);
 
 			layout = (Layout)friendlyURLMapper[0];
 			queryString = (String)friendlyURLMapper[1];
@@ -658,13 +658,14 @@ public class PortalUtil {
 		return sm.toString();
 	}
 
-	public static Object[] getPortletFriendlyURLPlugin(
-		String ownerId, String url)
+	public static Object[] getPortletFriendlyURLMapper(
+			String ownerId, String url)
 		throws PortalException, SystemException {
-		return getPortletFriendlyURLPlugin(ownerId, url, new HashMap());
+
+		return getPortletFriendlyURLMapper(ownerId, url, null);
 	}
 
-	public static Object[] getPortletFriendlyURLPlugin(
+	public static Object[] getPortletFriendlyURLMapper(
 			String ownerId, String url, Map params)
 		throws PortalException, SystemException {
 
@@ -696,22 +697,34 @@ public class PortalUtil {
 
 			if (pos != -1) {
 				friendlyURL = url.substring(0, pos);
-				Map actualParams = new HashMap(params);
+
+				Map actualParams = null;
+
+				if (params != null) {
+					actualParams = new HashMap(params);
+				}
+				else {
+					actualParams = new HashMap();
+				}
 
 				Object action = actualParams.get("p_p_action");
+
 				if ((action == null) || (((String[])action).length == 0)) {
 					actualParams.put("p_p_action", "0");
 				}
 
 				Object state = actualParams.get("p_p_state");
+
 				if ((state == null) || (((String[])state).length == 0)) {
 					actualParams.put("p_p_state", "maximized");
 				}
 
 				friendlyURLMapper.populateParams(
 					url.substring(pos), actualParams);
-				queryString = "&" + Http.parameterMapToString(
-					actualParams, false);
+
+				queryString =
+					StringPool.AMPERSAND +
+						Http.parameterMapToString(actualParams, false);
 
 				break;
 			}

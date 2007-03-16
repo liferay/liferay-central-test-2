@@ -22,10 +22,9 @@
 
 package com.liferay.portlet.tagscompiler;
 
-import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.BaseFriendlyURLMapper;
 import com.liferay.util.StringUtil;
 
 import java.util.Map;
@@ -39,10 +38,14 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsCompilerFriendlyURLMapper implements FriendlyURLMapper {
+public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public String getMapping() {
 		return _MAPPING;
+	}
+
+	public String getPortletId() {
+		return _PORTLET_ID;
 	}
 
 	public String buildPath(PortletURL portletURL) {
@@ -50,6 +53,8 @@ public class TagsCompilerFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	public void populateParams(String friendlyURLPath, Map params) {
+		setParams(params);
+
 		params.put("p_p_id", _PORTLET_ID);
 		params.put("p_p_action", "0");
 
@@ -73,13 +78,8 @@ public class TagsCompilerFriendlyURLMapper implements FriendlyURLMapper {
 				sb.append(entry);
 			}
 
-			addParam(params, "entries", sb.toString());
+			addParam("entries", sb.toString());
 		}
-
-	}
-
-	protected void addParam(Map params, String name, String value) {
-		params.put(PortalUtil.getPortletNamespace(_PORTLET_ID) + name, value);
 	}
 
 	private static final String _MAPPING = "tags";

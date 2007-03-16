@@ -22,10 +22,9 @@
 
 package com.liferay.portlet.softwarecatalog;
 
-import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.BaseFriendlyURLMapper;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
@@ -41,10 +40,14 @@ import javax.portlet.PortletURL;
  * @author Jorge Ferrer
  *
  */
-public class SCFriendlyURLMapper implements FriendlyURLMapper {
+public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public String getMapping() {
 		return _MAPPING;
+	}
+
+	public String getPortletId() {
+		return _PORTLET_ID;
 	}
 
 	public String buildPath(PortletURL portletURL) {
@@ -52,7 +55,7 @@ public class SCFriendlyURLMapper implements FriendlyURLMapper {
 			return null;
 		}
 
-		PortletURLImpl url = (PortletURLImpl) portletURL;
+		PortletURLImpl url = (PortletURLImpl)portletURL;
 
 		String friendlyURL = null;
 
@@ -67,6 +70,7 @@ public class SCFriendlyURLMapper implements FriendlyURLMapper {
 		}
 		else if (action.equals("/software_catalog/view_product_entry")) {
 			String productEntryId = url.getParameter("productEntryId");
+
 			friendlyURL = "/software_catalog/products/" + productEntryId;
 
 			url.addParameterIncludedInPath("productEntryId");
@@ -91,6 +95,7 @@ public class SCFriendlyURLMapper implements FriendlyURLMapper {
 			if (Validator.isNotNull(productVersionId)) {
 				friendlyURL = "/software_catalog/products/" +
 					productEntryId + "/versions/" + productVersionId + "/edit";
+
 				url.addParameterIncludedInPath("productEntryId");
 				url.addParameterIncludedInPath("productVersionId");
 			}
@@ -100,13 +105,15 @@ public class SCFriendlyURLMapper implements FriendlyURLMapper {
 			}
 		}
 		else if (action.equals(
-			"/software_catalog/edit_framework_version")) {
+					"/software_catalog/edit_framework_version")) {
+
 			String frameworkVersionId = url.getParameter(
 				"frameworkVersionId");
 
 			if (Validator.isNotNull(frameworkVersionId)) {
 				friendlyURL = "/software_catalog/framework-versions/" +
 					frameworkVersionId + "/edit";
+
 				url.addParameterIncludedInPath("frameworkVersionId");
 			}
 			else {
@@ -114,12 +121,14 @@ public class SCFriendlyURLMapper implements FriendlyURLMapper {
 			}
 		}
 		else if (action.equals(
-			"/software_catalog/edit_license")) {
+					"/software_catalog/edit_license")) {
+
 			String licenseId = url.getParameter("licenseId");
 
 			if (Validator.isNotNull(licenseId)) {
 				friendlyURL = "/software_catalog/licenses/" +
 					licenseId + "/edit";
+
 				url.addParameterIncludedInPath("licenseId");
 			}
 			else {
@@ -127,7 +136,7 @@ public class SCFriendlyURLMapper implements FriendlyURLMapper {
 			}
 		}
 		else if (action.equals(
-			"/software_catalog/search")) {
+					"/software_catalog/search")) {
 
 			friendlyURL = "/software_catalog/search";
 		}
@@ -142,71 +151,62 @@ public class SCFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	public void populateParams(String friendlyURLPath, Map params) {
+		setParams(params);
+
 		params.put("p_p_id", _PORTLET_ID);
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
+
 		String[] urlFragments = StringUtil.split(
 			friendlyURLPath.substring(x + 1), StringPool.SLASH);
 
 		String resourceIdParam = getResourceIdParam(urlFragments[0]);
 
 		if (urlFragments.length == 1) {
-			addParam(params, "struts_action", "/software_catalog/view");
-			addParam(params, "tabs1", urlFragments[0]);
+			addParam("struts_action", "/software_catalog/view");
+			addParam("tabs1", urlFragments[0]);
 		}
 		else if (urlFragments.length == 2) {
-
 			if (urlFragments[1].equals("new")) {
-				addParam(
-					params, "struts_action", getEditAction(urlFragments[0]));
-				addParam(params, "tabs1", urlFragments[0]);
-
-			} else if (urlFragments[0].equals("products")) {
-				addParam(
-					params, "struts_action",
-					"/software_catalog/view_product_entry");
-				addParam(params, "tabs1", urlFragments[0]);
-				addParam(params, resourceIdParam, urlFragments[1]);
+				addParam("struts_action", getEditAction(urlFragments[0]));
+				addParam("tabs1", urlFragments[0]);
 			}
-
+			else if (urlFragments[0].equals("products")) {
+				addParam(
+					"struts_action", "/software_catalog/view_product_entry");
+				addParam("tabs1", urlFragments[0]);
+				addParam(resourceIdParam, urlFragments[1]);
+			}
 		}
 		else if (urlFragments.length == 3) {
-
 			if (urlFragments[2].equals("edit")) {
-				addParam(
-					params, "struts_action", getEditAction(urlFragments[0]));
-				addParam(params, "tabs1", urlFragments[0]);
-				addParam(params, resourceIdParam, urlFragments[1]);
+				addParam("struts_action", getEditAction(urlFragments[0]));
+				addParam("tabs1", urlFragments[0]);
+				addParam(resourceIdParam, urlFragments[1]);
 			}
-
 		}
 		else if (urlFragments.length == 4) {
-
 			if (urlFragments[3].equals("new")) {
-				addParam(
-					params, "struts_action", getEditAction(urlFragments[2]));
-				addParam(params, "tabs1", urlFragments[0]);
-				addParam(params, resourceIdParam, urlFragments[1]);
+				addParam("struts_action", getEditAction(urlFragments[2]));
+				addParam("tabs1", urlFragments[0]);
+				addParam(resourceIdParam, urlFragments[1]);
 			}
 		}
 		else if (urlFragments.length == 5) {
-
 			if (urlFragments[0].equals("products") &&
 				urlFragments[4].equals("edit")) {
-				addParam(
-					params, "struts_action", getEditAction(urlFragments[2]));
-				addParam(params, "tabs1", urlFragments[0]);
-				addParam(params, resourceIdParam, urlFragments[1]);
-				addParam(
-					params, getResourceIdParam(urlFragments[2]),
-					urlFragments[3]);
+
+				addParam("struts_action", getEditAction(urlFragments[2]));
+				addParam("tabs1", urlFragments[0]);
+				addParam(resourceIdParam, urlFragments[1]);
+				addParam(getResourceIdParam(urlFragments[2]), urlFragments[3]);
 			}
 		}
-
 	}
 
 	protected String getEditAction(String resource) {
-		String action;
+		String action = null;
+
 		if (resource.equals("my-products") || resource.equals("products")) {
 			action = "edit_product_entry";
 		}
@@ -247,11 +247,8 @@ public class SCFriendlyURLMapper implements FriendlyURLMapper {
 		}
 	}
 
-	protected void addParam(Map params, String name, String value) {
-		params.put(PortalUtil.getPortletNamespace(_PORTLET_ID) + name, value);
-	}
-
 	private static final String _MAPPING = "software_catalog";
+
 	private static final String _PORTLET_ID = PortletKeys.SOFTWARE_CATALOG;
 
 }
