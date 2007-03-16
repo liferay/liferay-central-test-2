@@ -315,6 +315,13 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				1, path.lastIndexOf(StringPool.SLASH));
 
 			if (!strutsPath.equals(portlet.getStrutsPath())) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"The struts path " + strutsPath + " does not belong " +
+							"to portlet " + portlet.getPortletId() + ". " +
+								"Check the definition in liferay-portlet.xml");
+				}
+
 				throw new PrincipalException();
 			}
 			else if (portlet.isActive()) {
@@ -345,7 +352,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
+				_log.warn(e.getMessage());
 			}
 
 			ForwardConfig forwardConfig =
