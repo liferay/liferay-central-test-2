@@ -193,7 +193,7 @@ var LiferayDesktop = {
 		
 		_$J(icon).fadeTo("normal", 0.5);
 	},
-	
+
 	toggle: function(plid, portletId, doAsUserId, restore) {
 		_$J.ajax({
 			url: themeDisplay.getPathMain() + "/portal/update_layout",
@@ -207,9 +207,9 @@ var LiferayDesktop = {
 			}
 		});
 	},
-	
+
 	moveBar: function() {
-		_$J("#layout-desktop-icons-box").css("bottom",(Viewport.page().y - Viewport.frame().y - Viewport.scroll().y) + "px");
+		_$J("#layout-desktop-icons-box").css("top",(Viewport.frame().y + Viewport.scroll().y) + "px");
 	}
 };
 

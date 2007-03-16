@@ -23,7 +23,11 @@
 *#
 
 <div id="layout-desktop-icons-box">
-<span id="layout-desktop-icons"></span>
+	<div id="layout-desktop-icons-outer-decoration">
+		<div id="layout-desktop-icons-inner-decoration">
+			<span id="layout-desktop-icons"></span>
+		</div>
+	</div>
 </div>
 
 <div class="lfr-dock">

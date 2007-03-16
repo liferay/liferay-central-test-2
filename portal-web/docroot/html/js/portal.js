@@ -271,7 +271,6 @@ var LayoutColumns = {
 	arrow: null,
 	current: null,
 	doAsUserId: "",
-	freeform: false,
 	highlight: "transparent",
 	layoutMaximized: "",
 	plid: "",
@@ -337,7 +336,7 @@ var LayoutColumns = {
 			if (column) {
 				column.columnId = colArray[i];
 
-				if (this.freeform) {
+				if (themeDisplay.isFreeformLayout()) {
 					var boxes = _$J(".portlet-boundary", column).each(function() {
 						LayoutColumns.initPortlet(this);
 					});
@@ -370,7 +369,7 @@ var LayoutColumns = {
 
 		handle.style.cursor = "move";
 
-		if (this.freeform) {
+		if (themeDisplay.isFreeformLayout()) {
 			portlet.style.position = "absolute";
 			Drag.makeDraggable(portlet, handle);
 			portlet.threshold = 5;

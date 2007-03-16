@@ -28,20 +28,6 @@
 
 /* Global */
 
-body {
-	border: 0;
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	font-family: Tahoma, Arial;
-	font-size: 76%;
-	height: 100%;
-}
-
-body.liferay {
-	background: #000000 url(../images/custom/ripples.jpg) scroll no-repeat bottom left;
-}
-
 body.linux {
 	background: #cccccc url(../images/custom/linux_wall.jpg) scroll no-repeat bottom left;
 }
@@ -54,8 +40,6 @@ body.vista {
 	background: #000000 url(../images/custom/vista_wall.jpg) scroll no-repeat bottom left;
 }
 
-body * { font-size: 1em; }
-
 /******************************************************************************/
 /* Liferay Layout CSS                                                         */
 /******************************************************************************/
@@ -63,13 +47,22 @@ body * { font-size: 1em; }
 #layout-desktop-icons-box {
 	bottom: 0;
 	position: absolute;
-	text-align: center;
 	width: 100%;
 	z-index: 1;
 }
 
-#layout-desktop-icons {
-	text-align: left;
+#layout-desktop-icons-outer-decoration {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+}
+
+#layout-desktop-icons-inner-decoration {
+	text-align: center;
+}
+
+#layout-desktop-icons img {
+	cursor: pointer;
 }
 
 #desktop-icon-title {

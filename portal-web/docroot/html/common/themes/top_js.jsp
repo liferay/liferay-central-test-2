@@ -68,9 +68,6 @@
 
 		<script src="<%= themeDisplay.getPathJavaScript() %>/everything.js" type="text/javascript"></script>
 
-		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
-			<script src="<%= themeDisplay.getPathJavaScript() %>/log.js" type="text/javascript"></script>
-		</c:if>
 	</c:when>
 	<c:otherwise>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/jquery.js" type="text/javascript"></script>
@@ -188,7 +185,6 @@
 
 	<c:choose>
 		<c:when test="<%= portletIds.size() > 0 && !layoutTypePortlet.hasStateMax() %>">
-			Liferay.Portlet.count = <%= portletIds.size() %>;
 			Liferay.Portlet.list = {<%
 				for (int i = 0; i < portletIds.size(); i++) {
 					out.print("\"" + portletIds.get(i) + "\":1");
@@ -207,10 +203,6 @@
 			);
 		</c:otherwise>
 	</c:choose>
-
-	<c:if test="<%= themeDisplay.isFreeformLayout() %>">
-		LayoutColumns.freeform = true;
-	</c:if>
 
 	//TODO: Check to see if user has permissions
 

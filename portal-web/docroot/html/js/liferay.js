@@ -249,7 +249,9 @@ Liferay.Draggables = {
 			LayoutColumns.initPortlet(el);
 		}
 		else {
-			instance.drags.SortableAddItem(el);
+			if (instance.drags) {
+				instance.drags.SortableAddItem(el);
+			}
 		}
 	},
 
@@ -489,7 +491,6 @@ Liferay.TagsSelector = new Class({
 });
 
 Liferay.Portlet = {
-	count: 0,
 	fn: new Object(),
 	fnAll: new Array(),
 	fnLast: new Array(),
@@ -505,23 +506,22 @@ Liferay.Portlet = {
 	},
 
 	process: function(id) {
-
-		if (this.list[id] == 1) {
-			this.list[id] = 0;
-
+		var status = this.list[id];
+		var count = 0;
+		
+		this.list[id] = 0;
+		
+		if (status == 1) {
 			this.processPortlet(id);
 			this.processAll(id);
 		}
-		else if (this.list[id] == 0) {
+		else if (status == 0) {
 			// Already processed. Do nothing.
 		}
 		else {
 			// New portlet. Process and mark.
-			this.list[id] = 0;
 			this.processPortlet(id);
 		}
-
-		var count = 0;
 
 		for (var i in this.list) {
 			count += this.list[i];
