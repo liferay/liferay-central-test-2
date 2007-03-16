@@ -94,6 +94,7 @@
 	<classpathentry kind="lib" path="lib/portal/ical4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/icq.jar"/>
 	<classpathentry kind="lib" path="lib/portal/j2ee-management.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jackrabbit-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-core.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-index-filters.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-jcr-commons.jar"/>
