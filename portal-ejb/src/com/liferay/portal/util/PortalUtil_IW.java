@@ -175,6 +175,15 @@ public class PortalUtil_IW {
 		return PortalUtil.getLayoutActualURL(ownerId, mainPath, friendlyURL);
 	}
 
+	public java.lang.String getLayoutActualURL(java.lang.String ownerId,
+		java.lang.String mainPath, java.lang.String friendlyURL,
+		java.util.Map params)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		return PortalUtil.getLayoutActualURL(ownerId, mainPath, friendlyURL,
+			params);
+	}
+
 	public java.lang.String getLayoutFriendlyURL(
 		com.liferay.portal.model.Layout layout,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -229,11 +238,18 @@ public class PortalUtil_IW {
 		return PortalUtil.getPortalURL(serverName, serverPort, secure);
 	}
 
-	public java.lang.Object[] getPortletFriendlyURLPlugin(
+	public java.lang.Object[] getPortletFriendlyURLMapper(
 		java.lang.String ownerId, java.lang.String url)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
-		return PortalUtil.getPortletFriendlyURLPlugin(ownerId, url);
+		return PortalUtil.getPortletFriendlyURLMapper(ownerId, url);
+	}
+
+	public java.lang.Object[] getPortletFriendlyURLMapper(
+		java.lang.String ownerId, java.lang.String url, java.util.Map params)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		return PortalUtil.getPortletFriendlyURLMapper(ownerId, url, params);
 	}
 
 	public long getPortletGroupId(java.lang.String plid) {
