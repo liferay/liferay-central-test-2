@@ -132,16 +132,77 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 		rowURL.setParameter("struts_action", "/communities/page");
 		rowURL.setParameter("redirect", currentURL);
-		rowURL.setParameter("ownerId", LayoutImpl.PRIVATE + group.getGroupId());
 
 		// Name
+		StringMaker sm = new StringMaker();
 
-		if (tabs1.equals("communities-owned") || tabs1.equals("communities-joined")) {
-			row.addText(group.getName(), rowURL);
+		sm.append("<b>");
+		sm.append(group.getName());
+		sm.append("</b>");
+
+		if ((tabs1.equals("communities-owned") || tabs1.equals("communities-joined")) &&
+		   (group.getPrivateLayoutsPageCount() > 0 || group.getPublicLayoutsPageCount() > 0)) {
+			sm.append("<br>");
+			sm.append("<span style=\"font-size: xx-small;\">");
+
+			if (group.getPrivateLayoutsPageCount() > 0) {
+				rowURL.setParameter("ownerId", LayoutImpl.PRIVATE + group.getGroupId());
+				sm.append("<a href='");
+				sm.append(rowURL.toString());
+				sm.append("'>");
+				sm.append(LanguageUtil.get(pageContext, "private-pages"));
+				sm.append(" ");
+				sm.append(LanguageUtil.get(pageContext, "live"));
+				sm.append("</a>");
+			} else {
+				sm.append(LanguageUtil.get(pageContext, "private-pages"));
+				sm.append(" (0)");
+			}
+
+			if (group.hasStagingGroup() && GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+				rowURL.setParameter("ownerId", LayoutImpl.PRIVATE + group.getStagingGroup().getGroupId());
+				if (group.getStagingGroup().getPrivateLayoutsPageCount() > 0) {
+					sm.append(" / ");
+					sm.append("<a href='");
+					sm.append(rowURL.toString());
+					sm.append("'>");
+					sm.append(LanguageUtil.get(pageContext, "staging"));
+					sm.append("</a>");
+				}
+			}
+
+			sm.append("<br>");
+
+			if (group.getPublicLayoutsPageCount() > 0) {
+				rowURL.setParameter("ownerId", LayoutImpl.PUBLIC + group.getGroupId());
+				sm.append("<a href='");
+				sm.append(rowURL.toString());
+				sm.append("'>");
+				sm.append(LanguageUtil.get(pageContext, "public-pages"));
+				sm.append(" ");
+				sm.append(LanguageUtil.get(pageContext, "live"));
+				sm.append("</a>");
+			} else {
+				sm.append(LanguageUtil.get(pageContext, "public-pages"));
+				sm.append(" (0)");
+			}
+
+			if (group.hasStagingGroup() && GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+				rowURL.setParameter("ownerId", LayoutImpl.PUBLIC + group.getStagingGroup().getGroupId());
+				if (group.getStagingGroup().getPublicLayoutsPageCount() > 0) {
+					sm.append(" / ");
+					sm.append("<a href='");
+					sm.append(rowURL.toString());
+					sm.append("'>");
+					sm.append(LanguageUtil.get(pageContext, "staging"));
+					sm.append("</a>");
+				}
+			}
+
+			sm.append("</span>");
 		}
-		else {
-			row.addText(group.getName());
-		}
+
+		row.addText(sm.toString());
 
 		// Members
 

@@ -64,6 +64,14 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.Group addGroup(java.lang.String userId,
+		java.lang.String className, java.lang.String classPK,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String friendlyURL, boolean active,
+		long liveGroupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void addRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -120,6 +128,10 @@ public interface GroupLocalService {
 	public java.util.List getUserGroupsGroups(java.util.List userGroups)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.Group getStagingGroup(long liveGroupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchGroupException;
 
 	public boolean hasRoleGroup(java.lang.String roleId, long groupId)
 		throws com.liferay.portal.SystemException, 

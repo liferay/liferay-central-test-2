@@ -150,6 +150,19 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		if (signedIn && (bag == null)) {
 			try {
 
+				Group group = null;
+
+				// If the current group is staging, the live group should be
+				// checked for permissions instead
+
+				if (groupId > 0) {
+					group = GroupServiceUtil.getGroup(groupId);
+					if (group.isStagingGroup()) {
+						groupId = group.getLiveGroupId();
+						group = group.getLiveGroup();
+					}
+				}
+
 				// If we are checking permissions an object that belongs to a
 				// community, then it's only necessary to check the group that
 				// represents the community and not all the groups that the user
@@ -163,7 +176,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 					if (GroupServiceUtil.hasUserGroup(
 						user.getUserId(), groupId)) {
 
-						userGroups.add(GroupServiceUtil.getGroup(groupId));
+						userGroups.add(group);
 					}
 				}
 

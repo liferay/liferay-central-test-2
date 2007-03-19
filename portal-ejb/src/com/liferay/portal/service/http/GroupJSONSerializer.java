@@ -90,6 +90,7 @@ public class GroupJSONSerializer {
 		}
 
 		jsonObj.put("parentGroupId", model.getParentGroupId());
+		jsonObj.put("liveGroupId", model.getLiveGroupId());
 
 		String name = model.getName();
 

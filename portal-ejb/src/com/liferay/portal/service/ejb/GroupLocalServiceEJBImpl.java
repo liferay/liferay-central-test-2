@@ -75,6 +75,17 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 			classPK, name, description, type, friendlyURL, active);
 	}
 
+	public com.liferay.portal.model.Group addGroup(java.lang.String userId,
+		java.lang.String className, java.lang.String classPK,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String friendlyURL, boolean active,
+		long liveGroupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return GroupLocalServiceFactory.getTxImpl().addGroup(userId, className,
+			classPK, name, description, type, friendlyURL, active, liveGroupId);
+	}
+
 	public void addRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -160,6 +171,12 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return GroupLocalServiceFactory.getTxImpl().getUserGroupsGroups(userGroups);
+	}
+
+	public com.liferay.portal.model.Group getStagingGroup(long liveGroupId)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return GroupLocalServiceFactory.getTxImpl().getStagingGroup(liveGroupId);
 	}
 
 	public boolean hasRoleGroup(java.lang.String roleId, long groupId)

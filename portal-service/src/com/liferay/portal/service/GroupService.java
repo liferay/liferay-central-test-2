@@ -55,6 +55,12 @@ public interface GroupService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public com.liferay.portal.model.Group addGroup(java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String friendlyURL, boolean active, long liveGroupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public void addRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

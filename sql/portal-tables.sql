@@ -277,6 +277,7 @@ create table Group_ (
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null,
 	parentGroupId LONG,
+	liveGroupId LONG,
 	name VARCHAR(75) null,
 	description STRING null,
 	type_ VARCHAR(75) null,

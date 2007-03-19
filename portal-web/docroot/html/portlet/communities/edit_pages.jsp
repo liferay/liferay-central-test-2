@@ -25,14 +25,48 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "");
 String tabs2 = ParamUtil.getString(request, "tabs2", "public");
 String tabs3 = ParamUtil.getString(request, "tabs3", "page");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
-Group group = (Group)request.getAttribute(WebKeys.GROUP);
+Group currentGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
-long groupId = group.getGroupId();
+Group liveGroup = null;
+Group stagingGroup = null;
+int pagesCount = 0;
+
+if (currentGroup.isStagingGroup()) {
+	liveGroup = currentGroup.getLiveGroup();
+	stagingGroup = currentGroup;
+}
+else {
+	liveGroup = currentGroup;
+	stagingGroup = currentGroup.getStagingGroup();
+}
+
+if (Validator.isNull(tabs1)) {
+	if (currentGroup.isStagingGroup()) {
+		tabs1 = "staging";
+	}
+	else {
+		tabs1 = "live";
+	}
+}
+
+Group group = null;
+
+if (tabs1.equals("staging")) {
+	group = stagingGroup;
+}
+else {
+	group = liveGroup;
+}
+
+long groupId = (group == null)?liveGroup.getGroupId():group.getGroupId();
+long liveGroupId = liveGroup.getGroupId();
+long stagingGroupId = (stagingGroup == null)?0: stagingGroup.getGroupId();
 
 String selPlid = ParamUtil.getString(request, "selPlid", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 String layoutId = LayoutImpl.getLayoutId(selPlid);
@@ -43,9 +77,11 @@ boolean privateLayout = tabs2.equals("private");
 if (Validator.isNull(ownerId)) {
 	if (privateLayout) {
 		ownerId = LayoutImpl.PRIVATE + groupId;
+		pagesCount = (group == null)?0:group.getPrivateLayoutsPageCount();
 	}
 	else {
 		ownerId = LayoutImpl.PUBLIC + groupId;
+		pagesCount = (group == null)?0:group.getPublicLayoutsPageCount();
 	}
 }
 
@@ -79,7 +115,7 @@ String parentLayoutId = BeanParamUtil.getString(selLayout, request,  "parentLayo
 
 LayoutLister layoutLister = new LayoutLister();
 
-String rootNodeName = group.isUser() ? contact.getFullName() : group.getName();
+String rootNodeName = liveGroup.isUser() ? contact.getFullName() : liveGroup.getName();
 LayoutView layoutView = layoutLister.getLayoutView(ownerId, rootNodeName, locale);
 
 List layoutList = layoutView.getList();
@@ -96,10 +132,20 @@ else {
 }
 
 portletURL.setParameter("struts_action", "/communities/edit_pages");
+portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("groupId", String.valueOf(groupId));
+portletURL.setParameter("groupId", String.valueOf(liveGroupId));
+
+PortletURL viewPagesURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, true);
+
+viewPagesURL.setWindowState(WindowState.NORMAL);
+viewPagesURL.setPortletMode(PortletMode.VIEW);
+
+viewPagesURL.setParameter("struts_action", "/my_places/view");
+viewPagesURL.setParameter("ownerId", ownerId);
+
 %>
 
 <script type="text/javascript">
@@ -151,6 +197,33 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 		submitForm(document.<portlet:namespace />fm);
 	}
 
+	function <portlet:namespace />updateStagingState() {
+		var active = document.<portlet:namespace />fm.<portlet:namespace />activateStaging.checked;
+		var accept = true;
+		if (active || (accept = confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-staging-public-and-private-pages") %>'))) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "update_staging_state";
+			submitForm(document.<portlet:namespace />fm);
+		}
+
+		if (!accept) {
+			document.<portlet:namespace />fm.<portlet:namespace />activateStaging.checked = true;
+		}
+	}
+
+	function <portlet:namespace />publishToLive() {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-to-live-and-overwrite-the-existing-configuration") %>')) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "publish_to_live";
+			submitForm(document.<portlet:namespace />fm);
+		}
+	}
+
+	function <portlet:namespace />copyFromLive() {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-copy-from-live-and-overwrite-the-existing-staging-configuration") %>')) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "copy_from_live";
+			submitForm(document.<portlet:namespace />fm);
+		}
+	}
+
 	function <portlet:namespace />updateLogo() {
 		document.<portlet:namespace />fm.encoding = "multipart/form-data";
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "logo";
@@ -185,11 +258,14 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= selPlid %>">
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
+<input name="<portlet:namespace />liveGroupId" type="hidden" value="<%= liveGroupId %>">
+<input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 <input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>">
 <input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>">
 <input name="<portlet:namespace />ownerId" type="hidden" value="<%= ownerId %>">
@@ -200,7 +276,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "edit-pages-for-community") %>: <%= group.getName() %>
+				<%= LanguageUtil.get(pageContext, "edit-pages-for-community") %>: <%= liveGroup.getName() %>
 			</td>
 			<td align="right">
 				&laquo; <a href="<%= redirect %>"><%= LanguageUtil.get(pageContext, "back") %></a>
@@ -210,18 +286,63 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 		<br>
 	</c:if>
+</c:if>
 
+<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
 		<liferay-util:param name="tabs1" value="pages" />
 	</liferay-util:include>
+</c:if>
+<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
+	<liferay-ui:tabs
+		names="live,staging"
+		param="tabs1"
+		value="<%= tabs1 %>"
+		url="<%= currentURL %>"
+	/>
+</c:if>
+<c:if test='<%= tabs1.equals("staging") %>'>
+  <table border="0" cellpadding="5" cellspacing="5">
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "activate-staging") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input <%= (stagingGroup != null) ? "checked" : "" %> name="<portlet:namespace />activateStaging" value="1" type="checkbox" onChange="<portlet:namespace />updateStagingState();">
+		</td>
+	</tr>
+	</table>
+	<br />
+</c:if>
 
+<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.MY_ACCOUNT)) && (group != null) %>">
 	<liferay-ui:tabs
 		names="public,private"
 		param="tabs2"
 		url="<%= portletURL.toString() %>"
 	/>
+
 </c:if>
 
+<c:if test="<%= (group != null) %>">
+<c:if test='<%= tabs1.equals("staging") %>'>
+	<div style="margin-top: -14px; margin-bottom: 10px; padding: 3px">
+		<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || !currentGroup.isStagingGroup()) && (pagesCount > 0)  %>">
+			<input type="button" value='<%= LanguageUtil.get(pageContext, "view-pages") %>'  onClick="var newWindow = window.open('<%= viewPagesURL%>', 'stagingGroup', 'directories=no,height=640,location=yes,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=800'); void(''); newWindow.focus();">
+		</c:if>
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "publish-to-live") %>'  onClick="<portlet:namespace />publishToLive();">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "copy-from-live") %>'  onClick="<portlet:namespace />copyFromLive();">
+	</div>
+</c:if>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<c:if test='<%= !tabs1.equals("staging") %>'>
+	<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || currentGroup.isStagingGroup()) && (pagesCount > 0) %>">
+		<div style="margin-top: -14px; margin-bottom: 10px; padding: 3px">
+			<input type="button" value='<%= LanguageUtil.get(pageContext, "view-pages") %>'  onClick="var newWindow = window.open('<%= viewPagesURL%>', 'liveGroupç', 'directories=no,height=640,location=yes,menubar=no,resizable=yes,scrollbars=yes,status=yes,toolbar=no,width=800'); void(''); newWindow.focus();">
+		</div>
+	</c:if>
+</c:if>
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td valign="top">
@@ -265,15 +386,19 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 		if (selLayout == null) {
 			tabs3Names = StringUtil.replace(tabs3Names, "page,", StringPool.BLANK);
 
-			if (GroupPermission.contains(permissionChecker, groupId, ActionKeys.UPDATE)) {
-				if (company.isCommunityLogo()) {
+			if (GroupPermission.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)) {
+				if (company.isCommunityLogo() && (!tabs1.equals("staging"))) {
 					tabs3Names += ",logo";
 				}
 
-				tabs3Names += ",import-export,virtual-host";
+				tabs3Names += ",import-export";
 
-				if (ownerId.startsWith(LayoutImpl.PUBLIC)) {
-					tabs3Names += ",sitemap";
+				if (!tabs1.equals("staging")) {
+					tabs3Names += ",virtual-host";
+
+					if (ownerId.startsWith(LayoutImpl.PUBLIC)) {
+						tabs3Names += ",sitemap";
+					}
 				}
 			}
 		}
@@ -1041,5 +1166,6 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 	</td>
 </tr>
 </table>
+</c:if>
 
 </form>

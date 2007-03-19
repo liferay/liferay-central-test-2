@@ -33,6 +33,8 @@ alter table Group_ add creatorUserId VARCHAR(75) null;
 alter table Group_ add active_ BOOLEAN null;
 update Group_ set friendlyURL = '' where className = 'com.liferay.portal.model.User';
 update Group_ set active_ = TRUE;
+alter table Group_ add liveGroupId LONG;
+update Group_ set liveGroupId = -1;
 
 alter_column_type Groups_Orgs groupId LONG;
 

@@ -58,6 +58,7 @@ public class GroupModelImpl extends BaseModelImpl {
 			{ "className", new Integer(Types.VARCHAR) },
 			{ "classPK", new Integer(Types.VARCHAR) },
 			{ "parentGroupId", new Integer(Types.BIGINT) },
+			{ "liveGroupId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "type_", new Integer(Types.VARCHAR) },
@@ -192,6 +193,16 @@ public class GroupModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getLiveGroupId() {
+		return _liveGroupId;
+	}
+
+	public void setLiveGroupId(long liveGroupId) {
+		if (liveGroupId != _liveGroupId) {
+			_liveGroupId = liveGroupId;
+		}
+	}
+
 	public String getName() {
 		return GetterUtil.getString(_name);
 	}
@@ -280,6 +291,7 @@ public class GroupModelImpl extends BaseModelImpl {
 		clone.setClassName(getClassName());
 		clone.setClassPK(getClassPK());
 		clone.setParentGroupId(getParentGroupId());
+		clone.setLiveGroupId(getLiveGroupId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setType(getType());
@@ -339,6 +351,7 @@ public class GroupModelImpl extends BaseModelImpl {
 	private String _className;
 	private String _classPK;
 	private long _parentGroupId;
+	private long _liveGroupId;
 	private String _name;
 	private String _description;
 	private String _type;

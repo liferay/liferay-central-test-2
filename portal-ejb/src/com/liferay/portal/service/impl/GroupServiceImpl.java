@@ -57,6 +57,19 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 			active);
 	}
 
+	public Group addGroup(
+			String name, String description, String type, String friendlyURL,
+			boolean active, long liveGroupId)
+		throws PortalException, SystemException {
+
+		GroupPermission.check(
+			getPermissionChecker(), liveGroupId, ActionKeys.UPDATE);
+
+		return GroupLocalServiceUtil.addGroup(
+			getUserId(), null, null, name, description, type, friendlyURL,
+			active, liveGroupId);
+	}
+
 	public void addRoleGroups(String roleId, long[] groupIds)
 		throws PortalException, SystemException {
 

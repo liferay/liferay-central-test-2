@@ -133,6 +133,70 @@ public class GroupServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.model.Group addGroup(
+		HttpPrincipal httpPrincipal, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String friendlyURL, boolean active, long liveGroupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = name;
+
+			if (name == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = description;
+
+			if (description == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = type;
+
+			if (type == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = friendlyURL;
+
+			if (friendlyURL == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new BooleanWrapper(active);
+			Object paramObj5 = new LongWrapper(liveGroupId);
+			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
+					"addGroup",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Group)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static void addRoleGroups(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 

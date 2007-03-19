@@ -269,6 +269,7 @@
 		<column name="className" type="String" />
 		<column name="classPK" type="String" />
 		<column name="parentGroupId" type="long" />
+		<column name="liveGroupId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="type" type="String" />
@@ -303,6 +304,9 @@
 			<finder-column name="companyId" />
 			<finder-column name="className" />
 			<finder-column name="classPK" />
+		</finder>
+		<finder name="LiveGroupId" return-type="Group">
+			<finder-column name="liveGroupId" />
 		</finder>
 
 		<!-- References -->

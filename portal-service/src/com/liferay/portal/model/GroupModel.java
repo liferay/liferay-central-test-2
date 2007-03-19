@@ -73,6 +73,10 @@ public interface GroupModel extends BaseModel {
 
 	public void setParentGroupId(long parentGroupId);
 
+	public long getLiveGroupId();
+
+	public void setLiveGroupId(long liveGroupId);
+
 	public String getName();
 
 	public void setName(String name);

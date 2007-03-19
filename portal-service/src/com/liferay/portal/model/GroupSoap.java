@@ -53,6 +53,7 @@ public class GroupSoap implements Serializable {
 		soapModel.setClassName(model.getClassName());
 		soapModel.setClassPK(model.getClassPK());
 		soapModel.setParentGroupId(model.getParentGroupId());
+		soapModel.setLiveGroupId(model.getLiveGroupId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setType(model.getType());
@@ -132,6 +133,14 @@ public class GroupSoap implements Serializable {
 		_parentGroupId = parentGroupId;
 	}
 
+	public long getLiveGroupId() {
+		return _liveGroupId;
+	}
+
+	public void setLiveGroupId(long liveGroupId) {
+		_liveGroupId = liveGroupId;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -182,6 +191,7 @@ public class GroupSoap implements Serializable {
 	private String _className;
 	private String _classPK;
 	private long _parentGroupId;
+	private long _liveGroupId;
 	private String _name;
 	private String _description;
 	private String _type;

@@ -29,6 +29,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -47,6 +48,8 @@ import org.apache.commons.logging.LogFactory;
 public class GroupImpl extends GroupModelImpl implements Group {
 
 	public static final long DEFAULT_PARENT_GROUP_ID = -1;
+
+	public static final long DEFAULT_LIVE_GROUP_ID = -1;
 
 	public static final String GUEST = GroupNames.GUEST;
 
@@ -175,6 +178,65 @@ public class GroupImpl extends GroupModelImpl implements Group {
 			return false;
 		}
 	}
+
+	public boolean isStagingGroup() {
+		if (getLiveGroupId() == DEFAULT_LIVE_GROUP_ID) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	public Group getLiveGroup() {
+		if (!isStagingGroup()) {
+			return null;
+		}
+
+		try {
+			if (_liveGroup == null) {
+				_liveGroup =
+					GroupLocalServiceUtil.getGroup(getLiveGroupId());
+			}
+
+			return _liveGroup;
+		}
+		catch (Exception e) {
+			_log.error("Error getting staging group for " + getGroupId(), e);
+			return null;
+		}
+	}
+
+	public boolean hasStagingGroup() {
+		if (getStagingGroup() == null) {
+			return false;
+		}
+		else {
+		    return true;
+		}
+	}
+
+	public Group getStagingGroup() {
+		if (isStagingGroup()) {
+			return null;
+		}
+
+		try {
+			if (_stagingGroup == null) {
+				_stagingGroup =
+					GroupLocalServiceUtil.getStagingGroup(getGroupId());
+			}
+
+			return _stagingGroup;
+		}
+		catch (Exception e) {
+			_log.error("Error getting staging group for " + getGroupId(), e);
+			return null;
+		}
+	}
+
+	private Group _stagingGroup = null;
+	private Group _liveGroup = null;
 
 	private static Log _log = LogFactory.getLog(GroupImpl.class);
 

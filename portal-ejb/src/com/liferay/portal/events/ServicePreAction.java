@@ -923,6 +923,13 @@ public class ServicePreAction extends Action {
 			}
 		}
 
+		// If the current group is staging, the live group should be checked
+		// for membership instead
+
+		if (group.isStagingGroup()) {
+			groupId = group.getLiveGroupId();
+		}
+
 		// Authenticated users can only see group layouts if they belong to the
 		// group
 

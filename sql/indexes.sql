@@ -48,6 +48,7 @@ create index IX_7B43CD8 on EmailAddress (userId);
 create index IX_5849ABF2 on Group_ (companyId, className, classPK);
 create index IX_5BDDB872 on Group_ (companyId, friendlyURL);
 create index IX_5AA68501 on Group_ (companyId, name);
+create index IX_16218A38 on Group_ (liveGroupId);
 
 create index LIFERAY_001 on Groups_Permissions (permissionId);
 

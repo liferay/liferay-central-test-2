@@ -95,6 +95,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			String userId, String className, String classPK, String name,
 			String description, String type, String friendlyURL, boolean active)
 		throws PortalException, SystemException {
+		return addGroup(
+			userId, className, classPK, name, description, type, friendlyURL,
+			active, GroupImpl.DEFAULT_LIVE_GROUP_ID);
+	}
+
+	public Group addGroup(
+			String userId, String className, String classPK, String name,
+			String description, String type, String friendlyURL, boolean active,
+			long liveGroupId)
+		throws PortalException, SystemException {
 
 		// Group
 
@@ -122,6 +132,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setClassName(className);
 		group.setClassPK(classPK);
 		group.setParentGroupId(GroupImpl.DEFAULT_PARENT_GROUP_ID);
+		group.setLiveGroupId(liveGroupId);
 		group.setName(name);
 		group.setDescription(description);
 		group.setType(type);
@@ -395,6 +406,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return userGroupGroups;
+	}
+
+	public Group getStagingGroup(long liveGroupId)
+		throws SystemException, NoSuchGroupException {
+		return GroupUtil.fetchByLiveGroupId(liveGroupId);
 	}
 
 	public boolean hasRoleGroup(String roleId, long groupId)
