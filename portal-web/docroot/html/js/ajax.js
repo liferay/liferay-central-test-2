@@ -41,6 +41,7 @@ function AjaxRequest(url, options) {
 							ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
 						}
 						catch (e) {
+							ajaxId = "";
 						}
 						
 						if (onComplete) {
