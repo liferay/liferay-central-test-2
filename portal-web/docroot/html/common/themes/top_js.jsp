@@ -67,7 +67,6 @@
 		--%>
 
 		<script src="<%= themeDisplay.getPathJavaScript() %>/everything.js" type="text/javascript"></script>
-
 	</c:when>
 	<c:otherwise>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/jquery.js" type="text/javascript"></script>
