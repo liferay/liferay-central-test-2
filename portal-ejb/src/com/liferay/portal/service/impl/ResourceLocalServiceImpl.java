@@ -171,8 +171,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void addResources(
-			String companyId, long groupId, String name,
-			boolean portletActions)
+			String companyId, long groupId, String name, boolean portletActions)
 		throws PortalException, SystemException {
 
 		addResources(
@@ -399,8 +398,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	protected void addCommunityPermissions(
-			long groupId, String name, long resourceId,
-			boolean portletActions)
+			long groupId, String name, long resourceId, boolean portletActions)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -443,8 +441,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	protected void addGuestPermissions(
-			long groupId, String name, long resourceId,
-			boolean portletActions)
+			long groupId, String name, long resourceId, boolean portletActions)
 		throws PortalException, SystemException {
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);

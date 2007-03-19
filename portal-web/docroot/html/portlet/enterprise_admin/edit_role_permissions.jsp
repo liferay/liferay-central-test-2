@@ -138,7 +138,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		var redirect = "";
 
-		if (cmd == "<%= Constants.VIEW %>") {
+		if (<%= cmd.equals(Constants.VIEW) %>) {
 			redirect = "<%= portletURL.toString() %>";
 		}
 		else if (groupScopePos == <%= groupScopeActionIdsArray.length %>) {

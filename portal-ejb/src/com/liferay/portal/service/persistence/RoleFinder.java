@@ -34,8 +34,11 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
@@ -51,6 +54,9 @@ public class RoleFinder {
 
 	public static String COUNT_BY_C_N_D_T =
 		RoleFinder.class.getName() + ".countByC_N_D_T";
+
+	public static String FIND_BY_RESOURCE_ID =
+		RoleFinder.class.getName() + ".findByResourceId";
 
 	public static String FIND_BY_USER_GROUP_ROLE =
 		RoleFinder.class.getName() + ".findByUserGroupRole";
@@ -111,6 +117,58 @@ public class RoleFinder {
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static Map findByResourceId(long resourceId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_RESOURCE_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addScalar("roleName", Hibernate.STRING);
+			q.addScalar("actionId", Hibernate.STRING);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(resourceId);
+
+			Map roleMap = new HashMap();
+
+			Iterator itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				Object[] array = (Object[])itr.next();
+
+				String roleName = (String)array[0];
+				String actionId = (String)array[1];
+
+				List roleList = (List)roleMap.get(roleName);
+
+				if (roleList == null) {
+					roleList = new ArrayList();
+				}
+
+				roleList.add(actionId);
+
+				roleMap.put(roleName, roleList);
+			}
+
+			return roleMap;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -192,7 +250,13 @@ public class RoleFinder {
 				name + "}");
 	}
 
-	public static List findByU_G(String userId, List groups)
+	public static List findByU_G(String userId, long groupId)
+		throws SystemException {
+
+		return findByU_G(userId, new long[] {groupId});
+	}
+
+	public static List findByU_G(String userId, long[] groupIds)
 		throws SystemException {
 
 		Session session = null;
@@ -203,7 +267,7 @@ public class RoleFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_U_G);
 
 			sql = StringUtil.replace(
-				sql, "[$GROUP_IDS$]", _getGroupIds(groups, "Groups_Roles"));
+				sql, "[$GROUP_IDS$]", _getGroupIds(groupIds, "Groups_Roles"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -214,7 +278,7 @@ public class RoleFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(userId);
-			_setGroupIds(qPos, groups);
+			_setGroupIds(qPos, groupIds);
 
 			return q.list();
 		}
@@ -224,6 +288,20 @@ public class RoleFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
+	}
+
+	public static List findByU_G(String userId, List groups)
+		throws SystemException {
+
+		long[] groupIds = new long[groups.size()];
+
+		for (int i = 0; i < groups.size(); i++) {
+			Group group = (Group)groups.get(i);
+
+			groupIds[i] = group.getGroupId();
+		}
+
+		return findByU_G(userId, groupIds);
 	}
 
 	public static List findByC_N_D_T(
@@ -273,14 +351,14 @@ public class RoleFinder {
 		}
 	}
 
-	private static String _getGroupIds(List groups, String table) {
+	private static String _getGroupIds(long[] groupIds, String table) {
 		StringMaker sm = new StringMaker();
 
-		for (int i = 0; i < groups.size(); i++) {
+		for (int i = 0; i < groupIds.length; i++) {
 			sm.append(table);
 			sm.append(".groupId = ?");
 
-			if ((i + 1) < groups.size()) {
+			if ((i + 1) < groupIds.length) {
 				sm.append(" OR ");
 			}
 		}
@@ -288,11 +366,9 @@ public class RoleFinder {
 		return sm.toString();
 	}
 
-	private static void _setGroupIds(QueryPos qPos, List groups) {
-		for (int i = 0; i < groups.size(); i++) {
-			Group group = (Group)groups.get(i);
-
-			qPos.add(group.getGroupId());
+	private static void _setGroupIds(QueryPos qPos, long[] groupIds) {
+		for (int i = 0; i < groupIds.length; i++) {
+			qPos.add(groupIds[i]);
 		}
 	}
 

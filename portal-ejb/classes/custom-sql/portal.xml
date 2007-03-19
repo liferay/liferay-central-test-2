@@ -540,6 +540,24 @@
 				(lower(Role_.description) LIKE ? OR ? IS NULL) AND (Role_.type_ = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.RoleFinder.findByResourceId">
+		<![CDATA[
+			SELECT
+				Role_.name AS roleName, Permission_.actionId As actionId
+			FROM
+				Permission_
+			INNER JOIN
+				Roles_Permissions ON
+					(Roles_Permissions.permissionId = Permission_.permissionId)
+			INNER JOIN
+				Role_ ON
+					(Role_.roleId = Roles_Permissions.roleId)
+			WHERE
+				Permission_.resourceId = ?
+			ORDER BY 
+				Role_.name	ASC
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.findByUserGroupRole">
 		<![CDATA[
 			(

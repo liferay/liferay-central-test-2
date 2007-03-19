@@ -31,6 +31,7 @@ import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.NoSuchResourceException;
+import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
@@ -43,22 +44,30 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserGroupLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.LayoutFinder;
@@ -81,6 +90,7 @@ import com.liferay.util.InstancePool;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
+import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.xml.XMLFormatter;
 import com.liferay.util.zip.ZipReader;
 import com.liferay.util.zip.ZipWriter;
@@ -93,7 +103,9 @@ import java.io.InputStream;
 import java.io.StringReader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -114,6 +126,7 @@ import org.dom4j.io.SAXReader;
  *
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
+ * @author Charles May
  *
  */
 public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
@@ -262,20 +275,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
+		String companyId = layoutSet.getCompanyId();
+		long groupId = layoutSet.getGroupId();
+
 		PortletDataContext context = new PortletDataContext(
-			layoutSet.getCompanyId(), layoutSet.getGroupId(),
-			CollectionFactory.getHashSet());
+			companyId, groupId, CollectionFactory.getHashSet());
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			layoutSet.getCompanyId(), GroupImpl.GUEST);
+			companyId, GroupImpl.GUEST);
 
 		String guestPrefsOwnerId = null;
 
 		if (!layoutSet.isPrivateLayout()) {
 			guestPrefsOwnerId =
 				ownerId + StringPool.PERIOD + PortletKeys.PREFS_OWNER_ID_USER +
-					StringPool.PERIOD +
-						UserImpl.getDefaultUserId(layoutSet.getCompanyId());
+					StringPool.PERIOD + UserImpl.getDefaultUserId(companyId);
 		}
 
 		// Build compatibility
@@ -294,6 +308,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		header.addAttribute("color-scheme-id", layoutSet.getColorSchemeId());
 
 		// Layouts
+
+		Set portletIds = new LinkedHashSet();
 
 		Iterator itr1 = getLayouts(ownerId).iterator();
 
@@ -322,17 +338,36 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			// Layout permissions
 
+			String resourceName = Layout.class.getName();
+			String resourcePrimKey = layout.getPrimaryKey().toString();
+
 			Element permissionsEl = layoutEl.addElement("permissions");
 
-			exportLayoutPermissions(
-				layout, layout.getGroupId(), permissionsEl,
-				"community-actions");
+			exportGroupPermissions(
+				companyId, groupId, resourceName, resourcePrimKey,
+				permissionsEl, "community-actions");
 
-			if (layout.getGroupId() != guestGroup.getGroupId()) {
-				exportLayoutPermissions(
-					layout, guestGroup.getGroupId(), permissionsEl,
-					"guest-actions");
+			if (groupId != guestGroup.getGroupId()) {
+				exportGroupPermissions(
+					companyId, guestGroup.getGroupId(), resourceName,
+					resourcePrimKey, permissionsEl, "guest-actions");
 			}
+
+			exportUserPermissions(
+				companyId, groupId, resourceName, resourcePrimKey,
+				permissionsEl);
+
+			exportInheritedPermissions(
+				companyId, resourceName, resourcePrimKey, permissionsEl,
+				"organization");
+
+			exportInheritedPermissions(
+				companyId, resourceName, resourcePrimKey, permissionsEl,
+				"location");
+
+			exportInheritedPermissions(
+				companyId, resourceName, resourcePrimKey, permissionsEl,
+				"user-group");
 
 			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				LayoutTypePortlet layoutTypePortlet =
@@ -345,20 +380,45 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				while (itr2.hasNext()) {
 					String portletId = (String)itr2.next();
 
+					if (!portletIds.contains(portletId)) {
+						portletIds.add(portletId);
+					}
+
 					if (layoutTypePortlet.hasPortletId(portletId)) {
+						resourceName = PortletImpl.getRootPortletId(portletId);
+						resourcePrimKey = PortletPermission.getPrimaryKey(
+							layout.getPlid(), portletId);
+
 						Element portletEl = permissionsEl.addElement("portlet");
 
 						portletEl.addAttribute("portlet-id", portletId);
 
-						exportPortletPermissions(
-							portletId, layout, layout.getGroupId(), portletEl,
-							"community-actions");
+						exportGroupPermissions(
+							companyId, groupId, resourceName, resourcePrimKey,
+							portletEl, "community-actions");
 
-						if (layout.getGroupId() != guestGroup.getGroupId()) {
-							exportPortletPermissions(
-								portletId, layout, guestGroup.getGroupId(),
-								portletEl, "guest-actions");
+						if (groupId != guestGroup.getGroupId()) {
+							exportGroupPermissions(
+								companyId, guestGroup.getGroupId(),
+								resourceName, resourcePrimKey, portletEl,
+								"guest-actions");
 						}
+
+						exportUserPermissions(
+							companyId, groupId, resourceName, resourcePrimKey,
+							portletEl);
+
+						exportInheritedPermissions(
+							companyId, resourceName, resourcePrimKey, portletEl,
+							"organization");
+
+						exportInheritedPermissions(
+							companyId, resourceName, resourcePrimKey, portletEl,
+							"location");
+
+						exportInheritedPermissions(
+							companyId, resourceName, resourcePrimKey, portletEl,
+							"user-group");
 					}
 				}
 
@@ -379,11 +439,66 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
+		// Layout roles
+
+		Element rolesEl = root.addElement("roles");
+
+		String resourceName = Layout.class.getName();
+
+		exportGroupRoles(
+			companyId, groupId, resourceName, "community", rolesEl);
+
+		exportUserRoles(companyId, groupId, resourceName, rolesEl);
+
+		exportInheritedRoles(
+			companyId, groupId, resourceName, "organization", rolesEl);
+
+		exportInheritedRoles(
+			companyId, groupId, resourceName, "location", rolesEl);
+
+		exportInheritedRoles(
+			companyId, groupId, resourceName, "user-group", rolesEl);
+
+		// Portlet roles
+
+		itr1 = portletIds.iterator();
+
+		while (itr1.hasNext()) {
+			String portletId = (String)itr1.next();
+
+			resourceName = PortletImpl.getRootPortletId(portletId);
+
+			Element portletEl = rolesEl.addElement("portlet");
+
+			portletEl.addAttribute("portlet-id", portletId);
+
+			exportGroupRoles(
+				companyId, groupId, resourceName, "community", portletEl);
+
+			exportUserRoles(companyId, groupId, resourceName, portletEl);
+
+			exportInheritedRoles(
+				companyId, groupId, resourceName, "organization", portletEl);
+
+			exportInheritedRoles(
+				companyId, groupId, resourceName, "location", portletEl);
+
+			exportInheritedRoles(
+				companyId, groupId, resourceName, "user-group", portletEl);
+
+			if (portletEl.elements().isEmpty()) {
+				rolesEl.remove(portletEl);
+			}
+		}
+
+		if (rolesEl.elements().isEmpty()) {
+			root.remove(rolesEl);
+		}
+
 		// Portlet preferences
 
 		String groupPrefsOwnerId =
-			PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
-				layoutSet.getGroupId();
+			PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD + groupId;
 
 		exportPortletPreferences(
 			PortletKeys.PREFS_LAYOUT_ID_SHARED, groupPrefsOwnerId, root);
@@ -464,12 +579,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
+		String companyId = layoutSet.getCompanyId();
+		long groupId = layoutSet.getGroupId();
+
 		PortletDataContext context = new PortletDataContext(
-			layoutSet.getCompanyId(), layoutSet.getGroupId(),
-			CollectionFactory.getHashSet());
+			companyId, groupId, CollectionFactory.getHashSet());
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			layoutSet.getCompanyId(), GroupImpl.GUEST);
+			companyId, GroupImpl.GUEST);
 
 		// XML
 
@@ -567,17 +684,36 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			// Layout permissions
 
+			String resourceName = Layout.class.getName();
+			String resourcePrimKey = layout.getPrimaryKey().toString();
+
 			Element permissionsEl = layoutEl.element("permissions");
 
-			importLayoutPermissions(
-				layout, layout.getGroupId(), permissionsEl,
-				"community-actions");
+			importGroupPermissions(
+				companyId, groupId, resourceName, resourcePrimKey,
+				permissionsEl, "community-actions", false);
 
-			if (layout.getGroupId() != guestGroup.getGroupId()) {
-				importLayoutPermissions(
-					layout, guestGroup.getGroupId(), permissionsEl,
-					"guest-actions");
+			if (groupId != guestGroup.getGroupId()) {
+				importGroupPermissions(
+					companyId, guestGroup.getGroupId(), resourceName,
+					resourcePrimKey, permissionsEl, "guest-actions", false);
 			}
+
+			importUserPermissions(
+				companyId, groupId, resourceName, resourcePrimKey,
+				permissionsEl, false);
+
+			importInheritedPermissions(
+				companyId, resourceName, resourcePrimKey, permissionsEl,
+				"organization", false);
+
+			importInheritedPermissions(
+				companyId, resourceName, resourcePrimKey, permissionsEl,
+				"location", false);
+
+			importInheritedPermissions(
+				companyId, resourceName, resourcePrimKey, permissionsEl,
+				"user-group", false);
 
 			// Portlet permissions
 
@@ -588,14 +724,47 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 				String portletId = portletEl.attributeValue("portlet-id");
 
-				importPortletPermissions(
-					portletId, layout, layout.getGroupId(), portletEl,
-					"community-actions");
+				resourceName = PortletImpl.getRootPortletId(portletId);
+				resourcePrimKey = PortletPermission.getPrimaryKey(
+					layout.getPlid(), portletId);
 
-				if (layout.getGroupId() != guestGroup.getGroupId()) {
-					importPortletPermissions(
-						portletId, layout, guestGroup.getGroupId(),
-						portletEl, "guest-actions");
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
+					companyId, resourceName);
+
+				if (portlet == null) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Do not import portlet permissions for " +
+								portletId +
+									" because the portlet does not exist");
+					}
+				}
+				else {
+					importGroupPermissions(
+						companyId, groupId, resourceName, resourcePrimKey,
+						portletEl, "community-actions", true);
+
+					if (groupId != guestGroup.getGroupId()) {
+						importGroupPermissions(
+							companyId, guestGroup.getGroupId(), resourceName,
+							resourcePrimKey, portletEl, "guest-actions", true);
+					}
+
+					importUserPermissions(
+						companyId, groupId, resourceName, resourcePrimKey,
+						portletEl, true);
+
+					importInheritedPermissions(
+						companyId, resourceName, resourcePrimKey, portletEl,
+						"organization", true);
+
+					importInheritedPermissions(
+						companyId, resourceName, resourcePrimKey, portletEl,
+						"location", true);
+
+					importInheritedPermissions(
+						companyId, resourceName, resourcePrimKey, portletEl,
+						"user-group", true);
 				}
 			}
 
@@ -606,6 +775,66 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			// Portlet data
 
 			importPortletData(context, layout, layoutEl);
+		}
+
+		// Layout roles
+
+		Element rolesEl = (Element)root.element("roles");
+
+		String resourceName = Layout.class.getName();
+
+		importGroupRoles(
+			companyId, groupId, resourceName, "community", rolesEl);
+
+		importUserRoles(
+			companyId, groupId, resourceName, rolesEl);
+
+		importInheritedRoles(
+			companyId, groupId, resourceName, "organization", rolesEl);
+
+		importInheritedRoles(
+			companyId, groupId, resourceName, "location", rolesEl);
+
+		importInheritedRoles(
+			companyId, groupId, resourceName, "user-group", rolesEl);
+
+		// Portlet roles
+
+		itr1 = rolesEl.elements("portlet").iterator();
+
+		while (itr1.hasNext()) {
+			Element portletEl = (Element)itr1.next();
+
+			String portletId = portletEl.attributeValue("portlet-id");
+
+			resourceName = PortletImpl.getRootPortletId(portletId);
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				companyId, resourceName);
+
+			if (portlet == null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Do not import portlet roles for " + portletId +
+							" because the portlet does not exist");
+				}
+			}
+			else {
+				importGroupRoles(
+					companyId, groupId, resourceName, "community", portletEl);
+
+				importUserRoles(companyId, groupId, resourceName, portletEl);
+
+				importInheritedRoles(
+					companyId, groupId, resourceName, "organization",
+					portletEl);
+
+				importInheritedRoles(
+					companyId, groupId, resourceName, "location", portletEl);
+
+				importInheritedRoles(
+					companyId, groupId, resourceName, "user-group", portletEl);
+			}
 		}
 
 		// Portlet preferences
@@ -794,7 +1023,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void deleteMissingLayouts(String ownerId, List newLayoutPKs)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		// Layouts
 
@@ -818,17 +1047,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 	}
 
-	protected void exportLayoutPermissions(
-			Layout layout, long groupId, Element parentEl, String elName)
+	protected Element exportGroupPermissions(
+			String companyId, long groupId, String resourceName,
+			String resourcePrimKey, Element parentEl, String elName)
 		throws PortalException, SystemException {
 
 		Element el = parentEl.addElement(elName);
 
 		try {
 			Resource resource = ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), Layout.class.getName(),
-				ResourceImpl.SCOPE_INDIVIDUAL,
-				layout.getPrimaryKey().toString());
+				companyId, resourceName, ResourceImpl.SCOPE_INDIVIDUAL,
+				resourcePrimKey);
 
 			List permissions = PermissionLocalServiceUtil.getGroupPermissions(
 				groupId, resource.getResourceId());
@@ -838,11 +1067,110 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			for (int i = 0; i < actions.size(); i++) {
 				String action = (String)actions.get(i);
 
-				el.addElement("action-key").addText(action);
+				Element actionKeyEl = el.addElement("action-key");
+
+				actionKeyEl.addText(action);
 			}
 		}
 		catch (NoSuchResourceException nsre) {
-			_log.warn(nsre);
+			if (_log.isWarnEnabled()) {
+				_log.warn(nsre);
+			}
+		}
+
+		return el;
+	}
+
+	protected void exportGroupRoles(
+			String companyId, long groupId, String resourceName,
+			String entityName, Element parentEl)
+		throws PortalException, SystemException {
+
+		List roles = RoleLocalServiceUtil.getGroupRoles(groupId);
+
+		Element groupEl = exportRoles(
+			companyId, resourceName, ResourceImpl.SCOPE_GROUP,
+			String.valueOf(groupId), parentEl, entityName + "-roles",
+			roles);
+
+		if (groupEl.elements().isEmpty()) {
+			parentEl.remove(groupEl);
+		}
+	}
+
+	protected void exportInheritedPermissions(
+			String companyId, String resourceName, String resourcePrimKey,
+			Element parentEl, String entityName)
+		throws PortalException, SystemException {
+
+		Element entityPermissionsEl = DocumentHelper.createElement(
+			entityName + "-permissions");
+
+		Map entityMap = getEntityMap(companyId, entityName);
+
+		Iterator itr = entityMap.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String name = entry.getKey().toString();
+
+			long entityGroupId = ((Long)entry.getValue()).longValue();
+
+			Element entityEl = exportGroupPermissions(
+				companyId, entityGroupId, resourceName, resourcePrimKey,
+				entityPermissionsEl, entityName + "-actions");
+
+			if (entityEl.elements().isEmpty()) {
+				entityPermissionsEl.remove(entityEl);
+			}
+			else {
+				entityEl.addAttribute("name", name);
+			}
+		}
+
+		if (!entityPermissionsEl.elements().isEmpty()) {
+			parentEl.add(entityPermissionsEl);
+		}
+	}
+
+	protected void exportInheritedRoles(
+			String companyId, long groupId, String resourceName,
+			String entityName, Element parentEl)
+		throws PortalException, SystemException {
+
+		Element entityRolesEl = DocumentHelper.createElement(
+			entityName + "-roles");
+
+		Map entityMap = getEntityMap(companyId, entityName);
+
+		Iterator itr = entityMap.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String name = entry.getKey().toString();
+
+			long entityGroupId = ((Long)entry.getValue()).longValue();
+
+			List entityRoles = RoleLocalServiceUtil.getGroupRoles(
+				entityGroupId);
+
+			Element entityEl = exportRoles(
+				companyId, resourceName, ResourceImpl.SCOPE_GROUP,
+				String.valueOf(groupId), entityRolesEl, entityName,
+				entityRoles);
+
+			if (entityEl.elements().isEmpty()) {
+				entityRolesEl.remove(entityEl);
+			}
+			else {
+				entityEl.addAttribute("name", name);
+			}
+		}
+
+		if (!entityRolesEl.elements().isEmpty()) {
+			parentEl.add(entityRolesEl);
 		}
 	}
 
@@ -917,38 +1245,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		el.addCDATA(data);
 	}
 
-	protected void exportPortletPermissions(
-			String portletId, Layout layout, long groupId, Element parentEl,
-			String elName)
-		throws PortalException, SystemException {
-
-		Element el = parentEl.addElement(elName);
-
-		try {
-			String name = PortletImpl.getRootPortletId(portletId);
-			String primKey = PortletPermission.getPrimaryKey(
-				layout.getPlid(), portletId);
-
-			Resource resource = ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), name, ResourceImpl.SCOPE_INDIVIDUAL,
-				primKey);
-
-			List permissions = PermissionLocalServiceUtil.getGroupPermissions(
-				groupId, resource.getResourceId());
-
-			List actions = ResourceActionsUtil.getActions(permissions);
-
-			for (int i = 0; i < actions.size(); i++) {
-				String action = (String)actions.get(i);
-
-				el.addElement("action-key").addText(action);
-			}
-		}
-		catch (NoSuchResourceException nsre) {
-			_log.warn(nsre);
-		}
-	}
-
 	protected void exportPortletPreferences(
 			String layoutId, String ownerId, Element parentEl)
 		throws PortalException, SystemException {
@@ -980,6 +1276,147 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				el.addAttribute("owner-id", ownerId);
 				el.addElement("preferences").addCDATA(prefs.getPreferences());
 			}
+		}
+	}
+
+	protected Element exportRoles(
+			String companyId, String resourceName, String scope,
+			String resourcePrimKey, Element parentEl, String elName,
+			List roles)
+		throws PortalException, SystemException {
+
+		Element el = parentEl.addElement(elName);
+
+		try {
+			Resource resource = ResourceLocalServiceUtil.getResource(
+				companyId, resourceName, scope, resourcePrimKey);
+
+			Map resourceRoles = RoleLocalServiceUtil.getResourceRoles(
+				resource.getResourceId());
+
+			Iterator itr = resourceRoles.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry entry = (Map.Entry)itr.next();
+
+				String roleName = entry.getKey().toString();
+
+				if (hasRole(roles, roleName)) {
+					Element roleEl = el.addElement("role");
+
+					roleEl.addAttribute("name", roleName);
+
+					List actions = (List)entry.getValue();
+
+					for (int i = 0; i < actions.size(); i++) {
+						String action = (String)actions.get(i);
+
+						Element actionKeyEl = roleEl.addElement(
+							"action-key");
+
+						actionKeyEl.addText(action);
+						actionKeyEl.addAttribute("scope", scope);
+					}
+				}
+			}
+		}
+		catch (NoSuchResourceException nsre) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(nsre);
+			}
+		}
+
+		return el;
+	}
+
+	protected void exportUserPermissions(
+			String companyId, long groupId, String resourceName,
+			String resourcePrimKey, Element parentEl)
+		throws PortalException, SystemException {
+
+		Element userPermissionsEl = DocumentHelper.createElement(
+			"user-permissions");
+
+		List users = UserLocalServiceUtil.getGroupUsers(groupId);
+
+		for (int i = 0; i < users.size(); i++) {
+			User user = (User)users.get(i);
+
+			String emailAddress = user.getEmailAddress();
+
+			Element userActionsEl =
+				userPermissionsEl.addElement("user-actions");
+
+			try {
+				Resource resource = ResourceLocalServiceUtil.getResource(
+					companyId, resourceName, ResourceImpl.SCOPE_INDIVIDUAL,
+					resourcePrimKey);
+
+				List permissions =
+					PermissionLocalServiceUtil.getUserPermissions(
+						user.getUserId(), resource.getResourceId());
+
+				List actions = ResourceActionsUtil.getActions(permissions);
+
+				for (int j = 0; j < actions.size(); j++) {
+					String action = (String)actions.get(j);
+
+					Element actionKeyEl = userActionsEl.addElement(
+						"action-key");
+
+					actionKeyEl.addText(action);
+				}
+			}
+			catch (NoSuchResourceException nsre) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsre.getMessage());
+				}
+			}
+
+			if (userActionsEl.elements().isEmpty()) {
+				userPermissionsEl.remove(userActionsEl);
+			}
+			else {
+				userActionsEl.addAttribute("email-address", emailAddress);
+			}
+		}
+
+		if (!userPermissionsEl.elements().isEmpty()) {
+			parentEl.add(userPermissionsEl);
+		}
+	}
+
+	protected void exportUserRoles(
+			String companyId, long groupId, String resourceName,
+			Element parentEl)
+		throws PortalException, SystemException {
+
+		Element userRolesEl = DocumentHelper.createElement("user-roles");
+
+		List users = UserLocalServiceUtil.getGroupUsers(groupId);
+
+		for (int i = 0; i < users.size(); i++) {
+			User user = (User)users.get(i);
+
+			String emailAddress = user.getEmailAddress();
+
+			List userRoles = RoleLocalServiceUtil.getUserRoles(
+				user.getUserId());
+
+			Element userEl = exportRoles(
+				companyId, resourceName, ResourceImpl.SCOPE_GROUP,
+				String.valueOf(groupId), userRolesEl, "user", userRoles);
+
+			if (userEl.elements().isEmpty()) {
+				userRolesEl.remove(userEl);
+			}
+			else {
+				userEl.addAttribute("email-address", emailAddress);
+			}
+		}
+
+		if (!userRolesEl.elements().isEmpty()) {
+			parentEl.add(userRolesEl);
 		}
 	}
 
@@ -1017,6 +1454,70 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				}
 			}
 		}
+	}
+
+	protected List getActions(Element el) {
+		List actions = new ArrayList();
+
+		Iterator itr = el.elements("action-key").iterator();
+
+		while (itr.hasNext()) {
+			Element actionEl = (Element)itr.next();
+
+			actions.add(actionEl.getText());
+		}
+
+		return actions;
+	}
+
+	protected Map getEntityMap(String companyId, String entityName)
+		throws PortalException, SystemException {
+
+		Map entityList = new HashMap();
+
+		if (entityName.equals("user-group")) {
+			List userGroups = UserGroupLocalServiceUtil.search(
+				companyId, null, null, null, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
+
+			for (int i = 0; i < userGroups.size(); i++) {
+				UserGroup userGroup = (UserGroup)userGroups.get(i);
+
+				Group group = userGroup.getGroup();
+
+				entityList.put(
+					userGroup.getName(), new Long(group.getGroupId()));
+			}
+		}
+		else if (entityName.equals("organization") ||
+				 entityName.equals("location")) {
+
+			List organizations = null;
+
+			if (entityName.equals("organization")) {
+				organizations = OrganizationLocalServiceUtil.search(
+					companyId, OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID,
+					StringPool.EQUAL, null, null, null, null, null, null, null,
+					true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			}
+			else if (entityName.equals("location")) {
+				organizations = OrganizationLocalServiceUtil.search(
+					companyId, OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID,
+					StringPool.NOT_EQUAL, null, null, null, null, null, null,
+					null, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			}
+
+			for (int i = 0; i < organizations.size(); i++) {
+				Organization organization = (Organization)organizations.get(i);
+
+				Group group = organization.getGroup();
+
+				entityList.put(
+					organization.getName(), new Long(group.getGroupId()));
+			}
+		}
+
+		return entityList;
 	}
 
 	protected String getNextLayoutId(String ownerId) throws SystemException {
@@ -1072,45 +1573,155 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return parentLayoutId;
 	}
 
-	protected void importLayoutPermissions(
-			Layout layout, long groupId, Element parentEl, String elName)
+	protected Resource getResource(
+			String companyId, long groupId, String resourceName, String scope,
+			String resourcePrimKey, boolean portletActions)
 		throws PortalException, SystemException {
-
-		Element el = parentEl.element(elName);
 
 		Resource resource = null;
 
 		try {
 			resource = ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), Layout.class.getName(),
-				ResourceImpl.SCOPE_INDIVIDUAL,
-				layout.getPrimaryKey().toString());
+				companyId, resourceName, scope, resourcePrimKey);
 		}
 		catch (NoSuchResourceException nsre) {
 			ResourceLocalServiceUtil.addResources(
-				layout.getCompanyId(), layout.getGroupId(), null,
-				Layout.class.getName(), layout.getPrimaryKey().toString(),
-				false, true, true);
+				companyId, groupId, null, resourceName, resourcePrimKey,
+				portletActions, true, true);
 
 			resource = ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), Layout.class.getName(),
-				ResourceImpl.SCOPE_INDIVIDUAL,
-				layout.getPrimaryKey().toString());
+				companyId, resourceName, scope, resourcePrimKey);
 		}
 
-		List actions = new ArrayList();
+		return resource;
+	}
 
-		Iterator itr = el.elements("action-key").iterator();
-
-		while (itr.hasNext()) {
-			Element actionEl = (Element)itr.next();
-
-			actions.add(actionEl.getText());
+	protected boolean hasRole(List roles, String roleName) {
+		if ((roles == null) || (roles.size() == 0)) {
+			return false;
 		}
+
+		for (int i = 0; i < roles.size(); i++) {
+			Role role = (Role)roles.get(i);
+
+			if (role.getName().equals(roleName)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	protected void importGroupPermissions(
+			String companyId, long groupId, String resourceName,
+			String resourcePrimKey, Element parentEl, String elName,
+			boolean portletActions)
+		throws PortalException, SystemException {
+
+		Element actionEl = parentEl.element(elName);
+
+		if (actionEl == null) {
+			return;
+		}
+
+		List actions = getActions(actionEl);
+
+		Resource resource = getResource(
+			companyId, groupId, resourceName, ResourceImpl.SCOPE_INDIVIDUAL,
+			resourcePrimKey, portletActions);
 
 		PermissionLocalServiceUtil.setGroupPermissions(
 			groupId, (String[])actions.toArray(new String[0]),
 			resource.getResourceId());
+	}
+
+	protected void importGroupRoles(
+			String companyId, long groupId,
+			String resourceName, String entityName,
+			Element parentEl)
+		throws PortalException, SystemException {
+
+		Element entityRolesEl = parentEl.element(entityName + "-roles");
+
+		if (entityRolesEl == null) {
+			return;
+		}
+
+		importRolePermissions(
+			companyId, resourceName, ResourceImpl.SCOPE_GROUP,
+			String.valueOf(groupId), entityRolesEl, true);
+	}
+
+	protected void importInheritedPermissions(
+			String companyId, String resourceName, String resourcePrimKey,
+			Element permissionsEl, String entityName, boolean portletActions)
+		throws PortalException, SystemException {
+
+		Element entityPermissionsEl = permissionsEl.element(
+			entityName + "-permissions");
+
+		if (entityPermissionsEl == null) {
+			return;
+		}
+
+		List actionsEls = entityPermissionsEl.elements(
+			entityName + "-actions");
+
+		for (int i = 0; i < actionsEls.size(); i++) {
+			Element actionEl = (Element)actionsEls.get(i);
+
+			String name = actionEl.attributeValue("name");
+
+			long entityGroupId = searchGroupId(companyId, entityName, name);
+
+			if (entityGroupId == 0) {
+				_log.warn(
+					"Ignore inherited permissions for entity " + entityName +
+						" with name " + name);
+			}
+			else {
+				Element parentEl = DocumentHelper.createElement("parent");
+
+				parentEl.add(actionEl.createCopy());
+
+				importGroupPermissions(
+					companyId, entityGroupId, resourceName, resourcePrimKey,
+					parentEl, entityName + "-actions", portletActions);
+			}
+		}
+	}
+
+	protected void importInheritedRoles(
+			String companyId, long groupId, String resourceName,
+			String entityName, Element parentEl)
+		throws PortalException, SystemException {
+
+		Element entityRolesEl = parentEl.element(entityName + "-roles");
+
+		if (entityRolesEl == null) {
+			return;
+		}
+
+		List entityEls = entityRolesEl.elements(entityName);
+
+		for (int i = 0; i < entityEls.size(); i++) {
+			Element entityEl = (Element)entityEls.get(i);
+
+			String name = entityEl.attributeValue("name");
+
+			long entityGroupId = searchGroupId(companyId, entityName, name);
+
+			if (entityGroupId == 0) {
+				_log.warn(
+					"Ignore inherited roles for entity " + entityName +
+						" with name " + name);
+			}
+			else {
+				importRolePermissions(
+					companyId, resourceName, ResourceImpl.SCOPE_GROUP,
+					String.valueOf(groupId), entityEl, false);
+			}
+		}
 	}
 
 	protected void importPortletData(
@@ -1190,62 +1801,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return PortletPreferencesSerializer.toXML(prefsImpl);
 	}
 
-	protected void importPortletPermissions(
-			String portletId, Layout layout, long groupId, Element parentEl,
-			String elName)
-		throws PortalException, SystemException {
-
-		Element el = parentEl.element(elName);
-
-		String name = PortletImpl.getRootPortletId(portletId);
-		String primKey = PortletPermission.getPrimaryKey(
-			layout.getPlid(), portletId);
-
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-			layout.getCompanyId(), name);
-
-		if (portlet == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Do not import portlet permissions for " + portletId +
-						" because the portlet does not exist");
-			}
-
-			return;
-		}
-
-		Resource resource = null;
-
-		try {
-			resource = ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), name, ResourceImpl.SCOPE_INDIVIDUAL,
-				primKey);
-		}
-		catch (NoSuchResourceException nsre) {
-			ResourceLocalServiceUtil.addResources(
-				layout.getCompanyId(), layout.getGroupId(), null, name, primKey,
-				true, true, true);
-
-			resource = ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), name,  ResourceImpl.SCOPE_INDIVIDUAL,
-				primKey);
-		}
-
-		List actions = new ArrayList();
-
-		Iterator itr = el.elements("action-key").iterator();
-
-		while (itr.hasNext()) {
-			Element actionEl = (Element)itr.next();
-
-			actions.add(actionEl.getText());
-		}
-
-		PermissionLocalServiceUtil.setGroupPermissions(
-			groupId, (String[])actions.toArray(new String[0]),
-			resource.getResourceId());
-	}
-
 	protected void importPortletPreferences(
 			LayoutSet layoutSet, Element parentEl)
 		throws PortalException, SystemException {
@@ -1295,6 +1850,122 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
+	protected void importRolePermissions(
+			String companyId, String resourceName, String scope,
+			String resourcePrimKey, Element parentEl, boolean communityRole)
+		throws PortalException, SystemException {
+
+		List roleEls = parentEl.elements("role");
+
+		for (int i = 0; i < roleEls.size(); i++) {
+			Element roleEl = (Element)roleEls.get(i);
+
+			String roleName = roleEl.attributeValue("name");
+
+			Role role = searchRole(companyId, roleName);
+
+			if (role == null) {
+				_log.warn(
+					"Ignoring permissions for role with name " + roleName);
+			}
+			else {
+				List actions = getActions(roleEl);
+
+				PermissionLocalServiceUtil.setRolePermissions(
+					role.getRoleId(), companyId, resourceName, scope,
+					resourcePrimKey, (String[])actions.toArray(new String[0]));
+
+				if (communityRole) {
+					long[] groupIds = {GetterUtil.getLong(resourcePrimKey)};
+
+					GroupLocalServiceUtil.addRoleGroups(
+						role.getRoleId(), groupIds);
+				}
+			}
+		}
+	}
+
+	protected void importUserPermissions(
+			String companyId, long groupId, String resourceName,
+			String resourcePrimKey, Element parentEl, boolean portletActions)
+		throws PortalException, SystemException {
+
+		Element userPermissionsEl = parentEl.element("user-permissions");
+
+		if (userPermissionsEl == null) {
+			return;
+		}
+
+		List userActionsEls = userPermissionsEl.elements("user-actions");
+
+		for (int i = 0; i < userActionsEls.size(); i++) {
+			Element userActionsEl = (Element)userActionsEls.get(i);
+
+			String emailAddress = userActionsEl.attributeValue("email-address");
+
+			User user = searchUser(companyId, emailAddress, groupId);
+
+			if (user == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Ignoring permissions for user with email address " +
+							emailAddress);
+				}
+			}
+			else {
+				List actions = getActions(userActionsEl);
+
+				Resource resource = getResource(
+					companyId, groupId, resourceName,
+					ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey,
+					portletActions);
+
+				PermissionLocalServiceUtil.setUserPermissions(
+					user.getUserId(), (String[])actions.toArray(new String[0]),
+					resource.getResourceId());
+			}
+		}
+	}
+
+	protected void importUserRoles(
+			String companyId, long groupId, String resourceName,
+			Element parentEl)
+		throws PortalException, SystemException {
+
+		Element userRolesEl = parentEl.element("user-roles");
+
+		if (userRolesEl == null) {
+			return;
+		}
+
+		LinkedHashMap params = new LinkedHashMap();
+
+		params.put("usersGroups", new Long(groupId));
+
+		List userEls = userRolesEl.elements("user");
+
+		for (int i = 0; i < userEls.size(); i++) {
+			Element userEl = (Element)userEls.get(i);
+
+			String emailAddress = userEl.attributeValue("email-address");
+
+			User user = searchUser(companyId, emailAddress, groupId);
+
+			if (user == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Ignoring roles for user with email address " +
+							emailAddress);
+				}
+			}
+			else {
+				importRolePermissions(
+					companyId, resourceName, ResourceImpl.SCOPE_GROUP,
+					String.valueOf(groupId), userEl, false);
+			}
+		}
+	}
+
 	protected boolean isDescendant(Layout layout, String layoutId)
 		throws PortalException, SystemException {
 
@@ -1313,6 +1984,84 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 
 			return false;
+		}
+	}
+
+	protected long searchGroupId(
+			String companyId, String entityName, String name)
+		throws PortalException, SystemException {
+
+		if (entityName.equals("user-group")) {
+			List userGroups = UserGroupLocalServiceUtil.search(
+				companyId, name, null, null, 0, 1);
+
+			if (userGroups.size() > 0) {
+				UserGroup userGroup = (UserGroup)userGroups.get(0);
+
+				Group group = userGroup.getGroup();
+
+				return group.getGroupId();
+			}
+		}
+		else if (entityName.equals("organization") ||
+				 entityName.equals("location")) {
+
+			List organizations = null;
+
+			if (entityName.equals("organization")) {
+				organizations = OrganizationLocalServiceUtil.search(
+					companyId, OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID,
+					StringPool.EQUAL, name, null, null, null, null, null, null,
+					true, 0, 1);
+
+			}
+			else if (entityName.equals("location")) {
+				organizations = OrganizationLocalServiceUtil.search(
+					companyId, OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID,
+					StringPool.NOT_EQUAL, null, null, null, null, null, null,
+					null, true, 0, 1);
+			}
+
+			if (organizations.size() > 0) {
+				Organization organization = (Organization)organizations.get(0);
+
+				Group group = organization.getGroup();
+
+				return group.getGroupId();
+			}
+		}
+
+		return 0;
+	}
+
+	protected Role searchRole(String companyId, String name)
+		throws PortalException, SystemException {
+
+		try {
+			return RoleLocalServiceUtil.getRole(companyId, name);
+		}
+		catch (NoSuchRoleException nsre) {
+			return null;
+		}
+	}
+
+	protected User searchUser(
+			String companyId, String emailAddress, long groupId)
+		throws SystemException {
+
+		LinkedHashMap params = new LinkedHashMap();
+
+		params.put("usersGroups", new Long(groupId));
+
+		List users = UserLocalServiceUtil.search(
+			companyId, null, null, null, emailAddress, true, params, true, 0, 1,
+			null);
+
+		if (users.size() == 0) {
+			return null;
+		}
+		else {
+			return (User)users.get(0);
 		}
 	}
 

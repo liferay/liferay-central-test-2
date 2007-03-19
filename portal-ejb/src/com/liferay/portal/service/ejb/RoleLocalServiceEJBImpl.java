@@ -102,6 +102,17 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 			groupId);
 	}
 
+	public java.util.List getGroupRoles(long groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return RoleLocalServiceFactory.getTxImpl().getGroupRoles(groupId);
+	}
+
+	public java.util.Map getResourceRoles(long resourceId)
+		throws com.liferay.portal.SystemException {
+		return RoleLocalServiceFactory.getTxImpl().getResourceRoles(resourceId);
+	}
+
 	public com.liferay.portal.model.Role getRole(java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -119,6 +130,18 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 		long groupId) throws com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().getUserGroupRoles(userId,
 			groupId);
+	}
+
+	public java.util.List getUserRelatedRoles(java.lang.String userId,
+		long groupId) throws com.liferay.portal.SystemException {
+		return RoleLocalServiceFactory.getTxImpl().getUserRelatedRoles(userId,
+			groupId);
+	}
+
+	public java.util.List getUserRelatedRoles(java.lang.String userId,
+		long[] groupIds) throws com.liferay.portal.SystemException {
+		return RoleLocalServiceFactory.getTxImpl().getUserRelatedRoles(userId,
+			groupIds);
 	}
 
 	public java.util.List getUserRelatedRoles(java.lang.String userId,

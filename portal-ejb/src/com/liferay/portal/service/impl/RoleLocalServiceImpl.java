@@ -41,6 +41,7 @@ import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
+import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -48,6 +49,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Validator;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="RoleLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -192,6 +194,16 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			companyId, Group.class.getName(), String.valueOf(groupId));
 	}
 
+	public List getGroupRoles(long groupId)
+		throws PortalException, SystemException {
+
+		return GroupUtil.getRoles(groupId);
+	}
+
+	public Map getResourceRoles(long resourceId) throws SystemException {
+		return RoleFinder.findByResourceId(resourceId);
+	}
+
 	public Role getRole(String roleId) throws PortalException, SystemException {
 		return RoleUtil.findByPrimaryKey(roleId);
 	}
@@ -206,6 +218,18 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws SystemException {
 
 		return RoleFinder.findByUserGroupRole(userId, groupId);
+	}
+
+	public List getUserRelatedRoles(String userId, long groupId)
+		throws SystemException {
+
+		return RoleFinder.findByU_G(userId, groupId);
+	}
+
+	public List getUserRelatedRoles(String userId, long[] groupIds)
+		throws SystemException {
+
+		return RoleFinder.findByU_G(userId, groupIds);
 	}
 
 	public List getUserRelatedRoles(String userId, List groups)
