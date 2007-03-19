@@ -161,7 +161,8 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String resourceIdParam = getResourceIdParam(urlFragments[0]);
 
 		if (urlFragments.length == 1) {
-			addParam(params, "struts_action", "/software_catalog/view");
+			addParam(
+				params, "struts_action", "/software_catalog/view");
 			addParam(params, "tabs1", urlFragments[0]);
 		}
 		else if (urlFragments.length == 2) {
@@ -171,7 +172,8 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 				addParam(params, "tabs1", urlFragments[0]);
 			}
 			else if (urlFragments[0].equals("products")) {
-				addParam(params, 
+				addParam(
+					params,
 					"struts_action", "/software_catalog/view_product_entry");
 				addParam(params, "tabs1", urlFragments[0]);
 				addParam(params, resourceIdParam, urlFragments[1]);
