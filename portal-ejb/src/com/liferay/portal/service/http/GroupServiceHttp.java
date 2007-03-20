@@ -134,38 +134,38 @@ public class GroupServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Group addGroup(
-		HttpPrincipal httpPrincipal, java.lang.String name,
+		HttpPrincipal httpPrincipal, long liveGroupId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active, long liveGroupId)
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = name;
+			Object paramObj0 = new LongWrapper(liveGroupId);
+			Object paramObj1 = name;
 
 			if (name == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = description;
-
-			if (description == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = type;
+			Object paramObj2 = description;
 
-			if (type == null) {
+			if (description == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = friendlyURL;
+			Object paramObj3 = type;
 
-			if (friendlyURL == null) {
+			if (type == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = new BooleanWrapper(active);
-			Object paramObj5 = new LongWrapper(liveGroupId);
+			Object paramObj4 = friendlyURL;
+
+			if (friendlyURL == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = new BooleanWrapper(active);
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"addGroup",
 					new Object[] {

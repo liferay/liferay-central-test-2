@@ -28,13 +28,13 @@ alter_column_type EmailAddress emailAddressId LONG;
 alter_column_type EmailAddress typeId INTEGER;
 
 alter_column_type Group_ groupId LONG;
-alter_column_type Group_ parentGroupId LONG;
 alter table Group_ add creatorUserId VARCHAR(75) null;
+alter_column_type Group_ parentGroupId LONG;
+alter table Group_ add liveGroupId LONG;
 alter table Group_ add active_ BOOLEAN null;
+update Group_ set liveGroupId = -1;
 update Group_ set friendlyURL = '' where className = 'com.liferay.portal.model.User';
 update Group_ set active_ = TRUE;
-alter table Group_ add liveGroupId LONG;
-update Group_ set liveGroupId = -1;
 
 alter_column_type Groups_Orgs groupId LONG;
 

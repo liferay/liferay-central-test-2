@@ -157,6 +157,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 				if (groupId > 0) {
 					group = GroupServiceUtil.getGroup(groupId);
+
 					if (group.isStagingGroup()) {
 						groupId = group.getLiveGroupId();
 						group = group.getLiveGroup();
@@ -174,7 +175,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 				if (groupId > 0) {
 					if (GroupServiceUtil.hasUserGroup(
-						user.getUserId(), groupId)) {
+							user.getUserId(), groupId)) {
 
 						userGroups.add(group);
 					}

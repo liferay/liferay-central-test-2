@@ -147,6 +147,18 @@ public class GroupUtil {
 		return getPersistence().fetchByPrimaryKey(groupId);
 	}
 
+	public static com.liferay.portal.model.Group findByLiveGroupId(
+		long liveGroupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchGroupException {
+		return getPersistence().findByLiveGroupId(liveGroupId);
+	}
+
+	public static com.liferay.portal.model.Group fetchByLiveGroupId(
+		long liveGroupId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByLiveGroupId(liveGroupId);
+	}
+
 	public static com.liferay.portal.model.Group findByC_N(
 		java.lang.String companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
@@ -187,18 +199,6 @@ public class GroupUtil {
 		return getPersistence().fetchByC_C_C(companyId, className, classPK);
 	}
 
-	public static com.liferay.portal.model.Group findByLiveGroupId(
-		long liveGroupId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchGroupException {
-		return getPersistence().findByLiveGroupId(liveGroupId);
-	}
-
-	public static com.liferay.portal.model.Group fetchByLiveGroupId(
-		long liveGroupId) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByLiveGroupId(liveGroupId);
-	}
-
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -228,6 +228,12 @@ public class GroupUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByLiveGroupId(long liveGroupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchGroupException {
+		getPersistence().removeByLiveGroupId(liveGroupId);
+	}
+
 	public static void removeByC_N(java.lang.String companyId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
@@ -249,14 +255,13 @@ public class GroupUtil {
 		getPersistence().removeByC_C_C(companyId, className, classPK);
 	}
 
-	public static void removeByLiveGroupId(long liveGroupId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchGroupException {
-		getPersistence().removeByLiveGroupId(liveGroupId);
-	}
-
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByLiveGroupId(long liveGroupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByLiveGroupId(liveGroupId);
 	}
 
 	public static int countByC_N(java.lang.String companyId,
@@ -273,11 +278,6 @@ public class GroupUtil {
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_C_C(companyId, className, classPK);
-	}
-
-	public static int countByLiveGroupId(long liveGroupId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByLiveGroupId(liveGroupId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

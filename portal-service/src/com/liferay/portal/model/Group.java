@@ -54,6 +54,14 @@ public interface Group extends GroupModel {
 
 	public boolean isUser();
 
+	public com.liferay.portal.model.Group getLiveGroup();
+
+	public com.liferay.portal.model.Group getStagingGroup();
+
+	public boolean hasStagingGroup();
+
+	public boolean isStagingGroup();
+
 	public java.lang.String getPathFriendlyURL(boolean privateLayout,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay);
 
@@ -68,12 +76,4 @@ public interface Group extends GroupModel {
 	public int getPublicLayoutsPageCount();
 
 	public boolean hasPublicLayouts();
-
-	public boolean isStagingGroup();
-
-	public com.liferay.portal.model.Group getLiveGroup();
-
-	public boolean hasStagingGroup();
-
-	public com.liferay.portal.model.Group getStagingGroup();
 }

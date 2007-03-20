@@ -122,4 +122,3 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 	%>
 
 </c:if>
-

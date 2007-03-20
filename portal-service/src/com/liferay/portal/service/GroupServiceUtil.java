@@ -60,16 +60,15 @@ public class GroupServiceUtil {
 			active);
 	}
 
-	public static com.liferay.portal.model.Group addGroup(
+	public static com.liferay.portal.model.Group addGroup(long liveGroupId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active,
-		long liveGroupId)
+		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
-		return groupService.addGroup(name, description, type, friendlyURL,
-			active, liveGroupId);
+		return groupService.addGroup(liveGroupId, name, description, type,
+			friendlyURL, active);
 	}
 
 	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)

@@ -193,6 +193,65 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
+	public Group findByLiveGroupId(long liveGroupId)
+		throws NoSuchGroupException, SystemException {
+		Group group = fetchByLiveGroupId(liveGroupId);
+
+		if (group == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No Group exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("liveGroupId=");
+			msg.append(liveGroupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchGroupException(msg.toString());
+		}
+
+		return group;
+	}
+
+	public Group fetchByLiveGroupId(long liveGroupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.Group WHERE ");
+			query.append("liveGroupId = ?");
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, liveGroupId);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			Group group = (Group)list.get(0);
+
+			return group;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public Group findByC_N(String companyId, String name)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByC_N(companyId, name);
@@ -467,65 +526,6 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public Group findByLiveGroupId(long liveGroupId)
-		throws NoSuchGroupException, SystemException {
-		Group group = fetchByLiveGroupId(liveGroupId);
-
-		if (group == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No Group exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("liveGroupId=");
-			msg.append(liveGroupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchGroupException(msg.toString());
-		}
-
-		return group;
-	}
-
-	public Group fetchByLiveGroupId(long liveGroupId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-			query.append("liveGroupId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, liveGroupId);
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			Group group = (Group)list.get(0);
-
-			return group;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		Session session = null;
@@ -605,6 +605,12 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByLiveGroupId(long liveGroupId)
+		throws NoSuchGroupException, SystemException {
+		Group group = findByLiveGroupId(liveGroupId);
+		remove(group);
+	}
+
 	public void removeByC_N(String companyId, String name)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_N(companyId, name);
@@ -623,17 +629,49 @@ public class GroupPersistence extends BasePersistence {
 		remove(group);
 	}
 
-	public void removeByLiveGroupId(long liveGroupId)
-		throws NoSuchGroupException, SystemException {
-		Group group = findByLiveGroupId(liveGroupId);
-		remove(group);
-	}
-
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
 		while (itr.hasNext()) {
 			remove((Group)itr.next());
+		}
+	}
+
+	public int countByLiveGroupId(long liveGroupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.Group WHERE ");
+			query.append("liveGroupId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, liveGroupId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -815,44 +853,6 @@ public class GroupPersistence extends BasePersistence {
 			if (classPK != null) {
 				q.setString(queryPos++, classPK);
 			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByLiveGroupId(long liveGroupId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-			query.append("liveGroupId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, liveGroupId);
 
 			Iterator itr = q.list().iterator();
 

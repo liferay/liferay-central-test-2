@@ -10,8 +10,8 @@
 			[$JOIN$]
 			WHERE
 				[$WHERE$]
-				(Group_.liveGroupId = -1) AND
-				(Group_.groupId = ?)
+				(Group_.groupId = ?) AND
+				(Group_.liveGroupId = -1)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.countByC_N_D">
@@ -23,10 +23,10 @@
 			[$JOIN$]
 			WHERE
 				[$WHERE$]
-				(Group_.liveGroupId = -1) AND
 				(Group_.companyId = ?) AND
 				(Group_.className IS NULL OR Group_.className = '') AND
 				(Group_.classPK IS NULL OR Group_.classPK = '') AND
+				(Group_.liveGroupId = -1) AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
 		]]>
@@ -38,8 +38,8 @@
 			FROM
 				Group_
 			WHERE
-				(Group_.liveGroupId = -1) AND
 				(Group_.companyId = ?) AND
+				(Group_.liveGroupId = -1) AND
 				(lower(Group_.name) = ?)
 		]]>
 	</sql>
@@ -52,10 +52,10 @@
 			[$JOIN$]
 			WHERE
 				[$WHERE$]
-				(Group_.liveGroupId = -1) AND
 				(Group_.companyId = ?) AND
 				(Group_.className IS NULL OR Group_.className = '') AND
 				(Group_.classPK IS NULL OR Group_.classPK = '') AND
+				(Group_.liveGroupId = -1) AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
 		]]>
@@ -70,8 +70,8 @@
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByCreatorUserId">
 		<![CDATA[
 			WHERE
-				(Group_.liveGroupId = -1) AND
-				(Group_.creatorUserId = ?)
+				(Group_.creatorUserId = ?) AND
+				(Group_.liveGroupId = -1)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByGroupsOrgs">

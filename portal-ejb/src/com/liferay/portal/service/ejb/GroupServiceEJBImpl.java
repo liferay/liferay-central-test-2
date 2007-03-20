@@ -64,15 +64,15 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 			type, friendlyURL, active);
 	}
 
-	public com.liferay.portal.model.Group addGroup(java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active, long liveGroupId)
+	public com.liferay.portal.model.Group addGroup(long liveGroupId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return GroupServiceFactory.getTxImpl().addGroup(name, description,
-			type, friendlyURL, active, liveGroupId);
+		return GroupServiceFactory.getTxImpl().addGroup(liveGroupId, name,
+			description, type, friendlyURL, active);
 	}
 
 	public void addRoleGroups(java.lang.String roleId, long[] groupIds)

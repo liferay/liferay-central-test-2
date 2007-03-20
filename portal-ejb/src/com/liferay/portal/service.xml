@@ -292,6 +292,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="LiveGroupId" return-type="Group">
+			<finder-column name="liveGroupId" />
+		</finder>
 		<finder name="C_N" return-type="Group">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
@@ -304,9 +307,6 @@
 			<finder-column name="companyId" />
 			<finder-column name="className" />
 			<finder-column name="classPK" />
-		</finder>
-		<finder name="LiveGroupId" return-type="Group">
-			<finder-column name="liveGroupId" />
 		</finder>
 
 		<!-- References -->

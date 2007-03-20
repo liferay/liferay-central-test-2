@@ -80,13 +80,13 @@ public class GroupServiceJSON {
 		return GroupJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addGroup(java.lang.String name,
+	public static JSONObject addGroup(long liveGroupId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active, long liveGroupId)
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
-				description, type, friendlyURL, active, liveGroupId);
+		com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(liveGroupId,
+				name, description, type, friendlyURL, active);
 
 		return GroupJSONSerializer.toJSONObject(returnValue);
 	}

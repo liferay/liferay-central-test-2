@@ -95,15 +95,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			String userId, String className, String classPK, String name,
 			String description, String type, String friendlyURL, boolean active)
 		throws PortalException, SystemException {
+
 		return addGroup(
-			userId, className, classPK, name, description, type, friendlyURL,
-			active, GroupImpl.DEFAULT_LIVE_GROUP_ID);
+			userId, className, classPK, GroupImpl.DEFAULT_LIVE_GROUP_ID, name,
+			description, type, friendlyURL, active);
 	}
 
 	public Group addGroup(
-			String userId, String className, String classPK, String name,
-			String description, String type, String friendlyURL, boolean active,
-			long liveGroupId)
+			String userId, String className, String classPK, long liveGroupId,
+			String name, String description, String type, String friendlyURL,
+			boolean active)
 		throws PortalException, SystemException {
 
 		// Group
@@ -378,6 +379,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return RoleUtil.getGroups(roleId);
 	}
 
+	public Group getStagingGroup(long liveGroupId)
+		throws PortalException, SystemException {
+
+		return GroupUtil.findByLiveGroupId(liveGroupId);
+	}
+
 	public Group getUserGroup(String companyId, String userId)
 		throws PortalException, SystemException {
 
@@ -406,11 +413,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return userGroupGroups;
-	}
-
-	public Group getStagingGroup(long liveGroupId)
-		throws SystemException, NoSuchGroupException {
-		return GroupUtil.fetchByLiveGroupId(liveGroupId);
 	}
 
 	public boolean hasRoleGroup(String roleId, long groupId)
@@ -570,7 +572,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			try {
 				Group group = GroupUtil.findByC_F(companyId, friendlyURL);
 
-				if ((groupId <= 0) || group.getGroupId() != groupId) {
+				if ((groupId <= 0) || (group.getGroupId() != groupId)) {
 					throw new GroupFriendlyURLException(
 						GroupFriendlyURLException.DUPLICATE);
 				}

@@ -102,6 +102,64 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		}
 	}
 
+	public Group getLiveGroup() {
+		if (!isStagingGroup()) {
+			return null;
+		}
+
+		try {
+			if (_liveGroup == null) {
+				_liveGroup = GroupLocalServiceUtil.getGroup(
+					getLiveGroupId());
+			}
+
+			return _liveGroup;
+		}
+		catch (Exception e) {
+			_log.error("Error getting live group for " + getLiveGroupId(), e);
+
+			return null;
+		}
+	}
+
+	public Group getStagingGroup() {
+		if (isStagingGroup()) {
+			return null;
+		}
+
+		try {
+			if (_stagingGroup == null) {
+				_stagingGroup =
+					GroupLocalServiceUtil.getStagingGroup(getGroupId());
+			}
+
+			return _stagingGroup;
+		}
+		catch (Exception e) {
+			_log.error("Error getting staging group for " + getGroupId(), e);
+
+			return null;
+		}
+	}
+
+	public boolean hasStagingGroup() {
+		if (getStagingGroup() == null) {
+			return false;
+		}
+		else {
+		    return true;
+		}
+	}
+
+	public boolean isStagingGroup() {
+		if (getLiveGroupId() == DEFAULT_LIVE_GROUP_ID) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
 	public String getPathFriendlyURL(
 		boolean privateLayout, ThemeDisplay themeDisplay) {
 
@@ -179,65 +237,9 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		}
 	}
 
-	public boolean isStagingGroup() {
-		if (getLiveGroupId() == DEFAULT_LIVE_GROUP_ID) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	public Group getLiveGroup() {
-		if (!isStagingGroup()) {
-			return null;
-		}
-
-		try {
-			if (_liveGroup == null) {
-				_liveGroup =
-					GroupLocalServiceUtil.getGroup(getLiveGroupId());
-			}
-
-			return _liveGroup;
-		}
-		catch (Exception e) {
-			_log.error("Error getting staging group for " + getGroupId(), e);
-			return null;
-		}
-	}
-
-	public boolean hasStagingGroup() {
-		if (getStagingGroup() == null) {
-			return false;
-		}
-		else {
-		    return true;
-		}
-	}
-
-	public Group getStagingGroup() {
-		if (isStagingGroup()) {
-			return null;
-		}
-
-		try {
-			if (_stagingGroup == null) {
-				_stagingGroup =
-					GroupLocalServiceUtil.getStagingGroup(getGroupId());
-			}
-
-			return _stagingGroup;
-		}
-		catch (Exception e) {
-			_log.error("Error getting staging group for " + getGroupId(), e);
-			return null;
-		}
-	}
-
-	private Group _stagingGroup = null;
-	private Group _liveGroup = null;
-
 	private static Log _log = LogFactory.getLog(GroupImpl.class);
+
+	private Group _stagingGroup;
+	private Group _liveGroup;
 
 }

@@ -80,15 +80,15 @@ public class GroupLocalServiceUtil {
 
 	public static com.liferay.portal.model.Group addGroup(
 		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK, java.lang.String name,
+		java.lang.String classPK, long liveGroupId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active, long liveGroupId)
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-		return groupLocalService.addGroup(userId, className, classPK, name,
-			description, type, friendlyURL, active, liveGroupId);
+		return groupLocalService.addGroup(userId, className, classPK,
+			liveGroupId, name, description, type, friendlyURL, active);
 	}
 
 	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
@@ -171,6 +171,15 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getRoleGroups(roleId);
 	}
 
+	public static com.liferay.portal.model.Group getStagingGroup(
+		long liveGroupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getStagingGroup(liveGroupId);
+	}
+
 	public static com.liferay.portal.model.Group getUserGroup(
 		java.lang.String companyId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
@@ -195,15 +204,6 @@ public class GroupLocalServiceUtil {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.getUserGroupsGroups(userGroups);
-	}
-
-	public static com.liferay.portal.model.Group getStagingGroup(
-		long liveGroupId)
-		throws com.liferay.portal.NoSuchGroupException, 
-			com.liferay.portal.SystemException {
-		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-
-		return groupLocalService.getStagingGroup(liveGroupId);
 	}
 
 	public static boolean hasRoleGroup(java.lang.String roleId, long groupId)

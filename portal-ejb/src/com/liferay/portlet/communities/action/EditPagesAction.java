@@ -30,9 +30,7 @@ import com.liferay.portal.LayoutSetVirtualHostException;
 import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -71,8 +69,6 @@ import com.liferay.util.servlet.UploadPortletRequest;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 
-
-import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Properties;
 
@@ -123,6 +119,9 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteLayout(req);
 			}
+			else if (cmd.equals("copy_from_live")) {
+				copyFromLive(req);
+			}
 			else if (cmd.equals("display_order")) {
 				updateDisplayOrder(req);
 			}
@@ -132,17 +131,14 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("look_and_feel")) {
 				updateLookAndFeel(req);
 			}
-			else if (cmd.equals("virtual_host")) {
-				updateVirtualHost(req);
+			else if (cmd.equals("publish_to_live")) {
+				publishToLive(req);
 			}
 			else if (cmd.equals("update_staging_state")) {
 				updateStagingState(req);
 			}
-			else if (cmd.equals("publish_to_live")) {
-				publishToLive(req);
-			}
-			else if (cmd.equals("copy_from_live")) {
-				copyFromLive(req);
+			else if (cmd.equals("virtual_host")) {
+				updateVirtualHost(req);
 			}
 
 			String redirect = ParamUtil.getString(req, "pagesRedirect");
@@ -238,6 +234,47 @@ public class EditPagesAction extends PortletAction {
 		}
 	}
 
+	protected void copyFromLive(ActionRequest req) throws Exception{
+		User user = PortalUtil.getUser(req);
+
+		String tabs2 = ParamUtil.getString(req, "tabs2");
+
+		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+
+		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
+
+		String prefix = null;
+
+		if (tabs2.equals("public")) {
+			prefix = LayoutImpl.PUBLIC;
+		}
+		else {
+			prefix = LayoutImpl.PRIVATE;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Copying staging to live for group " +
+					stagingGroup.getLiveGroupId());
+		}
+
+		copyLayouts(
+			user.getUserId(), prefix + stagingGroup.getLiveGroupId(),
+			prefix + stagingGroup.getGroupId());
+	}
+
+	protected void copyLayouts(
+			String creatorUserId, String sourceOwnerId, String targetOwnerId)
+		throws Exception{
+
+		byte[] data = LayoutLocalServiceUtil.exportLayouts(sourceOwnerId);
+
+		ByteArrayInputStream bais = new ByteArrayInputStream(data);
+
+		LayoutLocalServiceUtil.importLayouts(
+			creatorUserId, targetOwnerId, bais);
+	}
+
 	protected void copyPreferences(
 			ActionRequest req, Layout layout, Layout copyLayout)
 		throws Exception {
@@ -303,6 +340,35 @@ public class EditPagesAction extends PortletAction {
 		String ownerId = ParamUtil.getString(req, "ownerId");
 
 		LayoutServiceUtil.deleteLayout(layoutId, ownerId);
+	}
+
+	protected void publishToLive(ActionRequest req) throws Exception{
+		User user = PortalUtil.getUser(req);
+
+		String tabs2 = ParamUtil.getString(req, "tabs2");
+
+		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+
+		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
+
+		String prefix = null;
+
+		if (tabs2.equals("public")) {
+			prefix = LayoutImpl.PUBLIC;
+		}
+		else {
+			prefix = LayoutImpl.PRIVATE;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Copying live to staging for group " +
+					stagingGroup.getLiveGroupId());
+		}
+
+		copyLayouts(
+			user.getUserId(), prefix + stagingGroup.getGroupId(),
+			prefix + stagingGroup.getLiveGroupId());
 	}
 
 	protected void updateDisplayOrder(ActionRequest req) throws Exception {
@@ -494,6 +560,38 @@ public class EditPagesAction extends PortletAction {
 		}
 	}
 
+	protected void updateStagingState(ActionRequest req) throws Exception {
+		User user = PortalUtil.getUser(req);
+
+		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
+		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+		boolean activateStaging = ParamUtil.getBoolean(req, "activateStaging");
+
+		if ((stagingGroupId > 0) && !activateStaging) {
+			GroupServiceUtil.deleteGroup(stagingGroupId);
+		}
+		else if ((stagingGroupId == 0) && activateStaging) {
+			Group group = GroupServiceUtil.getGroup(liveGroupId);
+
+			Group stagingGroup = GroupServiceUtil.addGroup(
+				group.getGroupId(), group.getName() + " (Staging)",
+				group.getDescription(), GroupImpl.TYPE_COMMUNITY_CLOSED, null,
+				group.isActive());
+
+			if (group.hasPrivateLayouts()) {
+				copyLayouts(
+					user.getUserId(), LayoutImpl.PRIVATE + group.getGroupId(),
+					LayoutImpl.PRIVATE + stagingGroup.getGroupId());
+			}
+
+			if (group.hasPublicLayouts()) {
+				copyLayouts(
+					user.getUserId(), LayoutImpl.PUBLIC + group.getGroupId(),
+					LayoutImpl.PUBLIC + stagingGroup.getGroupId());
+			}
+		}
+	}
+
 	protected void updateVirtualHost(ActionRequest req) throws Exception {
 
 		// Public virtual host
@@ -527,103 +625,6 @@ public class EditPagesAction extends PortletAction {
 		GroupServiceUtil.updateGroup(
 			groupId, group.getName(), group.getDescription(), group.getType(),
 			friendlyURL, group.isActive());
-	}
-
-	private void publishToLive(ActionRequest req) throws Exception{
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
-		String pages = ParamUtil.getString(req, "tabs2");
-		User user = PortalUtil.getUser(req);
-
-		Group stagingGroup =
-			GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-		String prefix;
-		if (pages.equals("public")) {
-			prefix = LayoutImpl.PUBLIC;
-		} else {
-			prefix = LayoutImpl.PRIVATE;
-		}
-
-		_log.debug(
-			"Copying live to staging for group " +
-				stagingGroup.getLiveGroupId());
-
-		_copyLayouts(
-			user.getUserId(),
-			prefix + stagingGroup.getGroupId(),
-			prefix + stagingGroup.getLiveGroupId());
-
-	}
-
-	private void copyFromLive(ActionRequest req) throws Exception{
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
-		String pages = ParamUtil.getString(req, "tabs2");
-		User user = PortalUtil.getUser(req);
-
-		Group stagingGroup =
-			GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-		String prefix;
-		if (pages.equals("public")) {
-			prefix = LayoutImpl.PUBLIC;
-		} else {
-			prefix = LayoutImpl.PRIVATE;
-		}
-
-		_log.debug(
-			"Copying staging to live for group " +
-				stagingGroup.getLiveGroupId());
-
-		_copyLayouts(
-			user.getUserId(),
-			prefix + stagingGroup.getLiveGroupId(),
-			prefix + stagingGroup.getGroupId());
-
-	}
-
-	private void updateStagingState(ActionRequest req)
-		throws SystemException, PortalException, RemoteException {
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
-		boolean activateStaging = ParamUtil.getBoolean(req, "activateStaging");
-		User user = PortalUtil.getUser(req);
-
-		if (stagingGroupId > 0 && !activateStaging) {
-			GroupServiceUtil.deleteGroup(stagingGroupId);
-		}
-		else if (stagingGroupId == 0 && activateStaging) {
-			Group group = GroupServiceUtil.getGroup(liveGroupId);
-
-			Group stagingGroup = GroupServiceUtil.addGroup(
-				group.getName() + " (Staging)", group.getDescription(),
-				GroupImpl.TYPE_COMMUNITY_CLOSED, null, group.isActive(),
-				group.getGroupId());
-
-			if (group.hasPrivateLayouts()) {
-				_copyLayouts(
-					user.getUserId(),
-					LayoutImpl.PRIVATE + group.getGroupId(),
-					LayoutImpl.PRIVATE + stagingGroup.getGroupId());
-			}
-
-			if (group.hasPublicLayouts()) {
-				_copyLayouts(
-					user.getUserId(),
-					LayoutImpl.PUBLIC + group.getGroupId(),
-					LayoutImpl.PUBLIC + stagingGroup.getGroupId());
-			}
-		}
-	}
-
-	private void _copyLayouts(
-		String creatorUserId, String sourceOwnerId, String targetOwnerId)
-		throws PortalException, SystemException{
-		byte[] data = LayoutLocalServiceUtil.exportLayouts(sourceOwnerId);
-
-		ByteArrayInputStream bais = new ByteArrayInputStream(data);
-
-		LayoutLocalServiceUtil.importLayouts(
-			creatorUserId, targetOwnerId, bais);
 	}
 
 	private static Log _log = LogFactory.getLog(EditPagesAction.class);

@@ -76,14 +76,13 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 	}
 
 	public com.liferay.portal.model.Group addGroup(java.lang.String userId,
-		java.lang.String className, java.lang.String classPK,
+		java.lang.String className, java.lang.String classPK, long liveGroupId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active,
-		long liveGroupId)
+		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return GroupLocalServiceFactory.getTxImpl().addGroup(userId, className,
-			classPK, name, description, type, friendlyURL, active, liveGroupId);
+			classPK, liveGroupId, name, description, type, friendlyURL, active);
 	}
 
 	public void addRoleGroups(java.lang.String roleId, long[] groupIds)
@@ -151,6 +150,12 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		return GroupLocalServiceFactory.getTxImpl().getRoleGroups(roleId);
 	}
 
+	public com.liferay.portal.model.Group getStagingGroup(long liveGroupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return GroupLocalServiceFactory.getTxImpl().getStagingGroup(liveGroupId);
+	}
+
 	public com.liferay.portal.model.Group getUserGroup(
 		java.lang.String companyId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
@@ -171,12 +176,6 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return GroupLocalServiceFactory.getTxImpl().getUserGroupsGroups(userGroups);
-	}
-
-	public com.liferay.portal.model.Group getStagingGroup(long liveGroupId)
-		throws com.liferay.portal.NoSuchGroupException, 
-			com.liferay.portal.SystemException {
-		return GroupLocalServiceFactory.getTxImpl().getStagingGroup(liveGroupId);
 	}
 
 	public boolean hasRoleGroup(java.lang.String roleId, long groupId)

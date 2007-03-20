@@ -94,12 +94,12 @@ public class GroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.GroupSoap addGroup(
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active,
-		long liveGroupId) throws RemoteException {
+		long liveGroupId, java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String friendlyURL, boolean active)
+		throws RemoteException {
 		try {
-			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
-					description, type, friendlyURL, active, liveGroupId);
+			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(liveGroupId,
+					name, description, type, friendlyURL, active);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}
