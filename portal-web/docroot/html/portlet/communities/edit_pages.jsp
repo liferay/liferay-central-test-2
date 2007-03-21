@@ -263,12 +263,20 @@ viewPagesURL.setParameter("ownerId", ownerId);
 	}
 
 	function <portlet:namespace />updateStagingState() {
-		if (document.<portlet:namespace />fm.<portlet:namespace />activateStaging.checked) {
-			if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-staging-public-and-private-pages") %>')) {
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "update_staging_state";
-				submitForm(document.<portlet:namespace />fm);
-			}
+		var checked = document.<portlet:namespace />fm.<portlet:namespace />activateStaging.checked;
+
+		var ok = true;
+
+		if (!checked) {
+			ok = confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-staging-public-and-private-pages") %>');
 		}
+
+		if (ok) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "update_staging_state";
+			submitForm(document.<portlet:namespace />fm);
+		}
+
+		document.<portlet:namespace />fm.<portlet:namespace />activateStaging.checked = !checked;
 	}
 </script>
 
@@ -326,7 +334,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input <%= (stagingGroup != null) ? "checked" : "" %> name="<portlet:namespace />activateStaging" value="1" type="checkbox" onChange="<portlet:namespace />updateStagingState();">
+			<input <%= (stagingGroup != null) ? "checked" : "" %> name="<portlet:namespace />activateStaging" type="checkbox" onClick="<portlet:namespace />updateStagingState();">
 		</td>
 	</tr>
 	</table>
