@@ -99,6 +99,12 @@ code, pre {
 	font-weight: bold;
 }
 
+/* ---------- Staging area ---------- */
+
+body.staging {
+	border: 10px solid #c00;
+}
+
 /* ---------- Main content body ---------- */
 
 #wrapper {

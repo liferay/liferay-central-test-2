@@ -4,6 +4,11 @@
 #set ( $portlet_display = $portletDisplay )
 
 #set ( $css_class = $theme_display.getColorScheme().getCssClass() )
+#if ( $layout )
+	#if ( $layout.getGroup().isStagingGroup() )
+		#set ( $css_class = $css_class + " staging" )
+	#end
+#end
 #set ( $css_folder = "$theme_display.getPathThemeCss()" )
 #set ( $images_folder = "$theme_display.getPathThemeImages()" )
 #set ( $javascript_folder = "$theme_display.getPathThemeJavaScript()" )

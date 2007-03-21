@@ -29,14 +29,6 @@
 
 <link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/liferay.ico" />
 
-<c:if test="<%= themeDisplay.getLayout().getGroup().isStagingGroup() %>">
-	<style type="text/css">
-		body {
-			border: solid 10px red
-		}
-	</style>
-</c:if>
-
 <link href="<%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" type="text/css" rel="stylesheet" />
 <link href="<%= themeDisplay.getPathJavaScript() %>/calendar/skins/aqua/theme.css" rel="stylesheet" type="text/css" />
 
