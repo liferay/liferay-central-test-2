@@ -114,7 +114,8 @@ public class LayoutSetServiceHttp {
 
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		HttpPrincipal httpPrincipal, java.lang.String ownerId,
-		java.lang.String themeId, java.lang.String colorSchemeId)
+		java.lang.String themeId, java.lang.String colorSchemeId,
+		java.lang.String css)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -136,9 +137,15 @@ public class LayoutSetServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj3 = css;
+
+			if (css == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutSetServiceUtil.class.getName(),
 					"updateLookAndFeel",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 
 			try {

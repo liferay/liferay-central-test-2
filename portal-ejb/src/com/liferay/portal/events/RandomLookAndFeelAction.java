@@ -102,7 +102,8 @@ public class RandomLookAndFeelAction extends Action {
 
 				LayoutServiceUtil.updateLookAndFeel(
 					layout.getLayoutId(), layout.getOwnerId(),
-					theme.getThemeId(), colorScheme.getColorSchemeId());
+					theme.getThemeId(), colorScheme.getColorSchemeId(),
+					layout.getCss());
 
 				themeDisplay.setLookAndFeel(theme, colorScheme);
 

@@ -118,6 +118,10 @@ public interface Layout extends LayoutModel {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.lang.String getCssText()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.ColorScheme getColorScheme()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

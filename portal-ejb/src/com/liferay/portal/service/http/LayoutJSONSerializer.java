@@ -154,6 +154,15 @@ public class LayoutJSONSerializer {
 			jsonObj.put("colorSchemeId", colorSchemeId.toString());
 		}
 
+		String css = model.getCss();
+
+		if (css == null) {
+			jsonObj.put("css", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("css", css.toString());
+		}
+
 		jsonObj.put("priority", model.getPriority());
 
 		return jsonObj;

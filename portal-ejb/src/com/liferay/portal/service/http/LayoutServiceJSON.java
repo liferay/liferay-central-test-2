@@ -164,11 +164,11 @@ public class LayoutServiceJSON {
 
 	public static JSONObject updateLookAndFeel(java.lang.String layoutId,
 		java.lang.String ownerId, java.lang.String themeId,
-		java.lang.String colorSchemeId)
+		java.lang.String colorSchemeId, java.lang.String css)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLookAndFeel(layoutId,
-				ownerId, themeId, colorSchemeId);
+				ownerId, themeId, colorSchemeId, css);
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}

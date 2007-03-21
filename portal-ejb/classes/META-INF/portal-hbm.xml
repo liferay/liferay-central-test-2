@@ -175,6 +175,7 @@
 		<property name="iconImage" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="themeId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="colorSchemeId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="css" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="priority" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.LayoutSetImpl" table="LayoutSet">
@@ -189,6 +190,7 @@
 		<property name="logo" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="themeId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="colorSchemeId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="css" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="pageCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="virtualHost" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>

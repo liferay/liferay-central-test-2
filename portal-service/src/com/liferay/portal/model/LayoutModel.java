@@ -106,6 +106,10 @@ public interface LayoutModel extends BaseModel {
 
 	public void setColorSchemeId(String colorSchemeId);
 
+	public String getCss();
+
+	public void setCss(String css);
+
 	public int getPriority();
 
 	public void setPriority(int priority);

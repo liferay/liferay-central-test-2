@@ -109,13 +109,13 @@ public class LayoutSetLocalServiceUtil {
 
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
-		java.lang.String colorSchemeId)
+		java.lang.String colorSchemeId, java.lang.String css)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
 		return layoutSetLocalService.updateLookAndFeel(ownerId, themeId,
-			colorSchemeId);
+			colorSchemeId, css);
 	}
 
 	public static com.liferay.portal.model.LayoutSet updatePageCount(

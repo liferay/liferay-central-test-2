@@ -275,14 +275,14 @@ public class UpgradeLayout extends UpgradeProcess {
 
 						LayoutSetLocalServiceUtil.updateLookAndFeel(
 							LayoutImpl.PRIVATE + groupId, lookAndFeel[0],
-							lookAndFeel[1]);
+							lookAndFeel[1], StringPool.BLANK);
 
 						LayoutSetLocalServiceUtil.addLayoutSet(
 							LayoutImpl.PUBLIC + groupId, companyId);
 
 						LayoutSetLocalServiceUtil.updateLookAndFeel(
 							LayoutImpl.PUBLIC + groupId, lookAndFeel[0],
-							lookAndFeel[1]);
+							lookAndFeel[1], StringPool.BLANK);
 					}
 
 					groupIds.add(groupId);
@@ -320,11 +320,11 @@ public class UpgradeLayout extends UpgradeProcess {
 
 						LayoutSetLocalServiceUtil.updateLookAndFeel(
 							LayoutImpl.PRIVATE + groupId, lookAndFeel[0],
-							lookAndFeel[1]);
+							lookAndFeel[1], StringPool.BLANK);
 
 						LayoutSetLocalServiceUtil.updateLookAndFeel(
 							LayoutImpl.PUBLIC + groupId, lookAndFeel[0],
-							lookAndFeel[1]);
+							lookAndFeel[1], StringPool.BLANK);
 					}
 
 					newOwnerId = LayoutImpl.PRIVATE + group.getGroupId();

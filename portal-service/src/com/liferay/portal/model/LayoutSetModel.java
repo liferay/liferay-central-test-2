@@ -85,6 +85,10 @@ public interface LayoutSetModel extends BaseModel {
 
 	public void setColorSchemeId(String colorSchemeId);
 
+	public String getCss();
+
+	public void setCss(String css);
+
 	public int getPageCount();
 
 	public void setPageCount(int pageCount);

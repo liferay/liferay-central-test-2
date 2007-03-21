@@ -108,7 +108,8 @@ public interface LayoutService {
 
 	public com.liferay.portal.model.Layout updateLookAndFeel(
 		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String themeId, java.lang.String colorSchemeId)
+		java.lang.String themeId, java.lang.String colorSchemeId,
+		java.lang.String css)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

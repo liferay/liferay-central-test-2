@@ -101,6 +101,15 @@ public class LayoutSetJSONSerializer {
 			jsonObj.put("colorSchemeId", colorSchemeId.toString());
 		}
 
+		String css = model.getCss();
+
+		if (css == null) {
+			jsonObj.put("css", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("css", css.toString());
+		}
+
 		jsonObj.put("pageCount", model.getPageCount());
 
 		String virtualHost = model.getVirtualHost();

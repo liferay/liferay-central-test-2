@@ -79,10 +79,11 @@ import java.rmi.RemoteException;
 public class LayoutSetServiceSoap {
 	public static com.liferay.portal.model.LayoutSetSoap updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
-		java.lang.String colorSchemeId) throws RemoteException {
+		java.lang.String colorSchemeId, java.lang.String css)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateLookAndFeel(ownerId,
-					themeId, colorSchemeId);
+					themeId, colorSchemeId, css);
 
 			return com.liferay.portal.model.LayoutSetSoap.toSoapModel(returnValue);
 		}
