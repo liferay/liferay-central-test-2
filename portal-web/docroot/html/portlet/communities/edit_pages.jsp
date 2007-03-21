@@ -1024,8 +1024,10 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<%
 						String cssText = "";
-						if (selLayout != null && Validator.isNotNull(selLayout.getCssText())) {
-							cssText = selLayout.getCssText();
+						if (selLayout != null && !selLayout.isInheritLookAndFeel()) {
+							if (Validator.isNotNull(selLayout.getCssText())) {
+								cssText = selLayout.getCssText();
+							}
 						}
 						else {
 							LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
