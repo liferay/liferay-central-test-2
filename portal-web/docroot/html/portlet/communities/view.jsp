@@ -134,38 +134,55 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		rowURL.setParameter("redirect", currentURL);
 
 		// Name
+
 		StringMaker sm = new StringMaker();
 
 		sm.append("<b>");
 		sm.append(group.getName());
 		sm.append("</b>");
 
+		int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
+		int privateLayoutsPageCount = group.getPrivateLayoutsPageCount();
+
+		Group stagingGroup = null;
+
+		if (group.hasStagingGroup()) {
+			stagingGroup = group.getStagingGroup();
+		}
+
 		if ((tabs1.equals("communities-owned") || tabs1.equals("communities-joined")) &&
-		   (group.getPrivateLayoutsPageCount() > 0 || group.getPublicLayoutsPageCount() > 0)) {
+			((publicLayoutsPageCount > 0) || (privateLayoutsPageCount > 0))) {
+
 			sm.append("<br>");
 			sm.append("<span style=\"font-size: xx-small;\">");
 
-			if (group.getPrivateLayoutsPageCount() > 0) {
-				rowURL.setParameter("ownerId", LayoutImpl.PRIVATE + group.getGroupId());
-				sm.append("<a href='");
+			if (publicLayoutsPageCount > 0) {
+				rowURL.setParameter("ownerId", LayoutImpl.PUBLIC + group.getGroupId());
+
+				sm.append("<a href=\"");
 				sm.append(rowURL.toString());
-				sm.append("'>");
-				sm.append(LanguageUtil.get(pageContext, "private-pages"));
-				sm.append(" ");
+				sm.append("\">");
+				sm.append(LanguageUtil.get(pageContext, "public-pages"));
+				sm.append(" - ");
 				sm.append(LanguageUtil.get(pageContext, "live"));
+				sm.append(" (");
+				sm.append(group.getPublicLayoutsPageCount());
+				sm.append(")");
 				sm.append("</a>");
-			} else {
-				sm.append(LanguageUtil.get(pageContext, "private-pages"));
+			}
+			else {
+				sm.append(LanguageUtil.get(pageContext, "public-pages"));
 				sm.append(" (0)");
 			}
 
-			if (group.hasStagingGroup() && GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
-				rowURL.setParameter("ownerId", LayoutImpl.PRIVATE + group.getStagingGroup().getGroupId());
-				if (group.getStagingGroup().getPrivateLayoutsPageCount() > 0) {
+			if ((stagingGroup != null) && GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+				rowURL.setParameter("ownerId", LayoutImpl.PUBLIC + stagingGroup.getGroupId());
+
+				if (stagingGroup.getPublicLayoutsPageCount() > 0) {
 					sm.append(" / ");
-					sm.append("<a href='");
+					sm.append("<a href=\"");
 					sm.append(rowURL.toString());
-					sm.append("'>");
+					sm.append("\">");
 					sm.append(LanguageUtil.get(pageContext, "staging"));
 					sm.append("</a>");
 				}
@@ -173,27 +190,33 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 			sm.append("<br>");
 
-			if (group.getPublicLayoutsPageCount() > 0) {
-				rowURL.setParameter("ownerId", LayoutImpl.PUBLIC + group.getGroupId());
-				sm.append("<a href='");
+			if (privateLayoutsPageCount > 0) {
+				rowURL.setParameter("ownerId", LayoutImpl.PRIVATE + group.getGroupId());
+
+				sm.append("<a href=\"");
 				sm.append(rowURL.toString());
-				sm.append("'>");
-				sm.append(LanguageUtil.get(pageContext, "public-pages"));
-				sm.append(" ");
+				sm.append("\">");
+				sm.append(LanguageUtil.get(pageContext, "private-pages"));
+				sm.append(" - ");
 				sm.append(LanguageUtil.get(pageContext, "live"));
+				sm.append(" (");
+				sm.append(group.getPrivateLayoutsPageCount());
+				sm.append(")");
 				sm.append("</a>");
-			} else {
-				sm.append(LanguageUtil.get(pageContext, "public-pages"));
+			}
+			else {
+				sm.append(LanguageUtil.get(pageContext, "private-pages"));
 				sm.append(" (0)");
 			}
 
-			if (group.hasStagingGroup() && GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
-				rowURL.setParameter("ownerId", LayoutImpl.PUBLIC + group.getStagingGroup().getGroupId());
-				if (group.getStagingGroup().getPublicLayoutsPageCount() > 0) {
+			if ((stagingGroup != null) && GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+				rowURL.setParameter("ownerId", LayoutImpl.PRIVATE + stagingGroup.getGroupId());
+
+				if (stagingGroup.getPrivateLayoutsPageCount() > 0) {
 					sm.append(" / ");
-					sm.append("<a href='");
+					sm.append("<a href=\"");
 					sm.append(rowURL.toString());
-					sm.append("'>");
+					sm.append("\">");
 					sm.append(LanguageUtil.get(pageContext, "staging"));
 					sm.append("</a>");
 				}

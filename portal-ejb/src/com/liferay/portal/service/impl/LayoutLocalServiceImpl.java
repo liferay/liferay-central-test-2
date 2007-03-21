@@ -491,10 +491,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		if (rolesEl.elements().isEmpty()) {
-			root.remove(rolesEl);
-		}
-
 		// Portlet preferences
 
 		String groupPrefsOwnerId =

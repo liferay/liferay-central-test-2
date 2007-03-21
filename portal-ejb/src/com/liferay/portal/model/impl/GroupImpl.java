@@ -30,6 +30,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -143,11 +144,23 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	public boolean hasStagingGroup() {
-		if (getStagingGroup() == null) {
+		if (isStagingGroup()) {
 			return false;
 		}
+
+		if (_stagingGroup != null) {
+			return true;
+		}
 		else {
-		    return true;
+			try {
+				_stagingGroup =
+					GroupLocalServiceUtil.getStagingGroup(getGroupId());
+
+				return true;
+			}
+			catch (Exception e) {
+				return false;
+			}
 		}
 	}
 
