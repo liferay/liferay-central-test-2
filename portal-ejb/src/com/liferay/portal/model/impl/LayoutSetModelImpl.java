@@ -61,6 +61,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 			{ "logo", new Integer(Types.BOOLEAN) },
 			{ "themeId", new Integer(Types.VARCHAR) },
 			{ "colorSchemeId", new Integer(Types.VARCHAR) },
+			{ "css", new Integer(Types.VARCHAR) },
 			{ "pageCount", new Integer(Types.INTEGER) },
 			{ "virtualHost", new Integer(Types.VARCHAR) }
 		};
@@ -80,6 +81,9 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COLORSCHEMEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.LayoutSet.colorSchemeId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_CSS = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.LayoutSet.css"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_VIRTUALHOST = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.LayoutSet.virtualHost"),
@@ -221,6 +225,22 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getCss() {
+		return GetterUtil.getString(_css);
+	}
+
+	public void setCss(String css) {
+		if (((css == null) && (_css != null)) ||
+				((css != null) && (_css == null)) ||
+				((css != null) && (_css != null) && !css.equals(_css))) {
+			if (!XSS_ALLOW_CSS) {
+				css = XSSUtil.strip(css);
+			}
+
+			_css = css;
+		}
+	}
+
 	public int getPageCount() {
 		return _pageCount;
 	}
@@ -258,6 +278,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		clone.setLogo(getLogo());
 		clone.setThemeId(getThemeId());
 		clone.setColorSchemeId(getColorSchemeId());
+		clone.setCss(getCss());
 		clone.setPageCount(getPageCount());
 		clone.setVirtualHost(getVirtualHost());
 
@@ -311,6 +332,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	private boolean _logo;
 	private String _themeId;
 	private String _colorSchemeId;
+	private String _css;
 	private int _pageCount;
 	private String _virtualHost;
 }

@@ -1013,6 +1013,22 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						</c:if>
 					</tr>
 					</table>
+
+					<%
+						String cssText = "";
+						if (selLayout != null && Validator.isNotNull(selLayout.getCssText())) {
+							cssText = selLayout.getCssText();
+						}
+						else {
+							LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
+							cssText = layoutSet.getCss();
+						}
+					%>
+
+					<liferay-ui:tabs names="css" />
+						<textarea name="<portlet:namespace />themeCss" style="height: 200px; width: 400px"><%= cssText %></textarea><br />
+					<input type="button" value="<%= LanguageUtil.get(pageContext, "save") %>" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '');"/>
+
 				</c:when>
 				<c:when test='<%= tabs3.equals("logo") %>'>
 					<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />

@@ -368,6 +368,7 @@
 		<column name="iconImage" type="boolean" />
 		<column name="themeId" type="String" />
 		<column name="colorSchemeId" type="String" />
+		<column name="css" type="String" />
 		<column name="priority" type="int" />
 
 		<!-- Order -->
@@ -413,6 +414,7 @@
 		<column name="logo" type="boolean" />
 		<column name="themeId" type="String" />
 		<column name="colorSchemeId" type="String" />
+		<column name="css" type="String" />
 		<column name="pageCount" type="int" />
 		<column name="virtualHost" type="String" />
 

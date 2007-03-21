@@ -28,6 +28,7 @@ import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
@@ -76,6 +77,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		layoutSet.setPrivateLayout(privateLayout);
 		layoutSet.setThemeId(ThemeImpl.getDefaultThemeId());
 		layoutSet.setColorSchemeId(ColorSchemeImpl.getDefaultColorSchemeId());
+		layoutSet.setCss(StringPool.BLANK);
 
 		LayoutSetUtil.update(layoutSet);
 
@@ -181,13 +183,14 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 	}
 
 	public LayoutSet updateLookAndFeel(
-			String ownerId, String themeId, String colorSchemeId)
+			String ownerId, String themeId, String colorSchemeId, String css)
 		throws PortalException, SystemException {
 
 		LayoutSet layoutSet = LayoutSetUtil.findByPrimaryKey(ownerId);
 
 		layoutSet.setThemeId(themeId);
 		layoutSet.setColorSchemeId(colorSchemeId);
+		layoutSet.setCss(css);
 
 		LayoutSetUtil.update(layoutSet);
 

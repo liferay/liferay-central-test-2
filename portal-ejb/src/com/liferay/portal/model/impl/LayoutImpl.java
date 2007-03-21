@@ -496,6 +496,15 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
+	public String getCssText() throws PortalException, SystemException {
+		if (isInheritLookAndFeel()) {
+			return getLayoutSet().getCss();
+		}
+		else {
+			return getCss();
+		}
+	}
+
 	public ColorScheme getColorScheme()
 		throws PortalException, SystemException {
 

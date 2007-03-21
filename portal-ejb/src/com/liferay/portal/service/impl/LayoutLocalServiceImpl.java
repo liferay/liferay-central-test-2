@@ -624,7 +624,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String colorSchemeId = header.attributeValue("color-scheme-id");
 
 		LayoutSetLocalServiceUtil.updateLookAndFeel(
-			ownerId, themeId, colorSchemeId);
+			ownerId, themeId, colorSchemeId, StringPool.BLANK);
 
 		// Layouts
 
@@ -990,7 +990,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public Layout updateLookAndFeel(
 			String layoutId, String ownerId, String themeId,
-			String colorSchemeId)
+			String colorSchemeId, String css)
 		throws PortalException, SystemException {
 
 		Layout layout = LayoutUtil.findByPrimaryKey(
@@ -998,6 +998,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layout.setThemeId(themeId);
 		layout.setColorSchemeId(colorSchemeId);
+		layout.setCss(css);
 
 		LayoutUtil.update(layout);
 

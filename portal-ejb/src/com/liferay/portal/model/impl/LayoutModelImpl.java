@@ -66,6 +66,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 			{ "iconImage", new Integer(Types.BOOLEAN) },
 			{ "themeId", new Integer(Types.VARCHAR) },
 			{ "colorSchemeId", new Integer(Types.VARCHAR) },
+			{ "css", new Integer(Types.VARCHAR) },
 			{ "priority", new Integer(Types.INTEGER) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
@@ -102,6 +103,9 @@ public class LayoutModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COLORSCHEMEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.colorSchemeId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_CSS = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Layout.css"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.LayoutModel"));
@@ -330,6 +334,22 @@ public class LayoutModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getCss() {
+		return GetterUtil.getString(_css);
+	}
+
+	public void setCss(String css) {
+		if (((css == null) && (_css != null)) ||
+				((css != null) && (_css == null)) ||
+				((css != null) && (_css != null) && !css.equals(_css))) {
+			if (!XSS_ALLOW_CSS) {
+				css = XSSUtil.strip(css);
+			}
+
+			_css = css;
+		}
+	}
+
 	public int getPriority() {
 		return _priority;
 	}
@@ -355,6 +375,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 		clone.setIconImage(getIconImage());
 		clone.setThemeId(getThemeId());
 		clone.setColorSchemeId(getColorSchemeId());
+		clone.setCss(getCss());
 		clone.setPriority(getPriority());
 
 		return clone;
@@ -431,5 +452,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 	private boolean _iconImage;
 	private String _themeId;
 	private String _colorSchemeId;
+	private String _css;
 	private int _priority;
 }

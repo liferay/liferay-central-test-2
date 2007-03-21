@@ -32,6 +32,12 @@
 <link href="<%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" type="text/css" rel="stylesheet" />
 <link href="<%= themeDisplay.getPathJavaScript() %>/calendar/skins/aqua/theme.css" rel="stylesheet" type="text/css" />
 
+<c:if test="<%= layout != null && Validator.isNotNull(layout.getCssText()) %>">
+	<style type="text/css">
+		<%= layout.getCssText() %>
+	</style>
+</c:if>
+
 <%
 List portlets = null;
 
