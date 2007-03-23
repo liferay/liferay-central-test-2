@@ -236,7 +236,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />updateLookAndFeel(themeId, colorSchemeId) {
+	function <portlet:namespace />updateLookAndFeel(themeId, colorSchemeId, sectionParam, sectionName) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "look_and_feel";
 
 		var themeRadio = document.<portlet:namespace />fm.<portlet:namespace />themeId;
@@ -257,6 +257,10 @@ viewPagesURL.setParameter("ownerId", ownerId);
 			else {
 				colorSchemeRadio.value = colorSchemeId;
 			}
+		}
+
+		if ((sectionParam != null) && (sectionName != null)) {
+			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value += "&" + sectionParam + "=" + sectionName;
 		}
 
 		submitForm(document.<portlet:namespace />fm);
@@ -965,10 +969,8 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						<br>
 					</c:if>
 
-					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-					<tr>
-						<td valign="top">
-							<liferay-ui:tabs names="themes" />
+					<liferay-ui:tabs names="themes,color-schemes,css" refresh="<%= false %>">
+						<liferay-ui:section>
 
 							<%
 							List themes = ThemeLocalUtil.getThemes(company.getCompanyId());
@@ -979,66 +981,78 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							<liferay-ui:table-iterator
 								list="<%= themes %>"
 								listType="com.liferay.portal.model.Theme"
-								rowLength="2">
-
+								rowLength="2"
+								rowPadding="30"
+								rowValign="top"
+							>
 								<table border="0" cellpadding="0" cellspacing="0">
 								<tr>
 									<td align="center">
-										<%= tableIteratorObj.getName() %> <input <%= selTheme.getThemeId().equals(tableIteratorObj.getThemeId()) ? "checked" : "" %> name="<portlet:namespace />themeId" type="radio" value="<%= tableIteratorObj.getThemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= tableIteratorObj.getThemeId() %>', '');"><br>
+										<%= tableIteratorObj.getName() %> <input <%= selTheme.getThemeId().equals(tableIteratorObj.getThemeId()) ? "checked" : "" %> name="<portlet:namespace />themeId" type="radio" value="<%= tableIteratorObj.getThemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= tableIteratorObj.getThemeId() %>', '', '<%= sectionParam %>', '<%= sectionName %>');"><br>
 
 										<img border="0" hspace="0" src="<%= tableIteratorObj.getContextPath() %><%= tableIteratorObj.getImagesPath() %>/thumbnail.png" vspace="0">
 									</td>
 								</tr>
 								</table>
 							</liferay-ui:table-iterator>
-						</td>
+						</liferay-ui:section>
+						<liferay-ui:section>
 
-						<%
-						List colorSchemes = selTheme.getColorSchemes();
-						%>
+							<%
+							List colorSchemes = selTheme.getColorSchemes();
+							%>
 
-						<c:if test="<%= colorSchemes.size() > 0 %>">
-							<td style="padding-left: 30px;"></td>
-							<td valign="top">
-								<liferay-ui:tabs names="color-schemes" />
+							<c:choose>
+								<c:when test="<%= colorSchemes.size() > 0 %>">
+									<liferay-ui:table-iterator
+										list="<%= colorSchemes %>"
+										listType="com.liferay.portal.model.ColorScheme"
+										rowLength="2"
+										rowPadding="30"
+										rowValign="top"
+									>
+										<table border="0" cellpadding="0" cellspacing="0">
+										<tr>
+											<td align="center">
+												<%= tableIteratorObj.getName() %> <input <%= selColorScheme.getColorSchemeId().equals(tableIteratorObj.getColorSchemeId()) ? "checked" : "" %> name="<portlet:namespace />colorSchemeId" type="radio" value="<%= tableIteratorObj.getColorSchemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= tableIteratorObj.getColorSchemeId() %>', '<%= sectionParam %>', '<%= sectionName %>')"><br>
 
-								<liferay-ui:table-iterator
-									list="<%= colorSchemes %>"
-									listType="com.liferay.portal.model.ColorScheme"
-									rowLength="1">
+												<img border="0" hspace="0" src="<%= selTheme.getContextPath() %><%= tableIteratorObj.getColorSchemeImagesPath() %>/thumbnail.png" vspace="0">
+											</td>
+										</tr>
+										</table>
+									</liferay-ui:table-iterator>
+								</c:when>
+								<c:otherwise>
+									<%= LanguageUtil.get(pageContext, "this-theme-does-not-have-any-color-schemes") %>
+								</c:otherwise>
+							</c:choose>
+						</liferay-ui:section>
+						<liferay-ui:section>
 
-									<table border="0" cellpadding="0" cellspacing="0">
-									<tr>
-										<td align="center">
-											<%= tableIteratorObj.getName() %> <input <%= selColorScheme.getColorSchemeId().equals(tableIteratorObj.getColorSchemeId()) ? "checked" : "" %> name="<portlet:namespace />colorSchemeId" type="radio" value="<%= tableIteratorObj.getColorSchemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= tableIteratorObj.getColorSchemeId() %>')"><br>
+							<%
+							String cssText = null;
 
-											<img border="0" hspace="0" src="<%= selTheme.getContextPath() %><%= tableIteratorObj.getColorSchemeImagesPath() %>/thumbnail.png" vspace="0">
-										</td>
-									</tr>
-									</table>
-								</liferay-ui:table-iterator>
-							</td>
-						</c:if>
-					</tr>
-					</table>
-
-					<%
-						String cssText = "";
-						if (selLayout != null && !selLayout.isInheritLookAndFeel()) {
-							if (Validator.isNotNull(selLayout.getCssText())) {
+							if ((selLayout != null) && !selLayout.isInheritLookAndFeel()) {
 								cssText = selLayout.getCssText();
 							}
-						}
-						else {
-							LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
-							cssText = layoutSet.getCss();
-						}
-					%>
+							else {
+								LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
-					<liferay-ui:tabs names="css" />
-						<textarea name="<portlet:namespace />themeCss" style="height: 200px; width: 400px"><%= cssText %></textarea><br />
-					<input type="button" value="<%= LanguageUtil.get(pageContext, "save") %>" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '');"/>
+								cssText = layoutSet.getCss();
+							}
+							%>
 
+							<%= LanguageUtil.get(pageContext, "insert-custom-css-that-will-loaded-after-the-theme") %>
+
+							<br><br>
+
+							<textarea name="<portlet:namespace />css" style="height: 200px; width: 400px"><%= cssText %></textarea>
+
+							<br><br>
+
+							<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '', '<%= sectionParam %>', '<%= sectionName %>');"/>
+						</liferay-ui:section>
+					</liferay-ui:tabs>
 				</c:when>
 				<c:when test='<%= tabs3.equals("logo") %>'>
 					<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />

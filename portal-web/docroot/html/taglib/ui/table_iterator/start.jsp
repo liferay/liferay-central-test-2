@@ -28,6 +28,6 @@
 String rowValign = (String)request.getAttribute("liferay-ui:table-iterator:rowValign");
 %>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td valign="<%= rowValign %>">

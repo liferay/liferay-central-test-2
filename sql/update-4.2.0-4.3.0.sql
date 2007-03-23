@@ -56,6 +56,7 @@ alter_column_type JournalStructure groupId LONG;
 alter_column_type JournalTemplate groupId LONG;
 
 alter table Layout add iconImage BOOLEAN;
+alter table Layout add css VARCHAR(75) null;
 
 alter_column_type LayoutSet groupId LONG;
 alter table LayoutSet add logo BOOLEAN;

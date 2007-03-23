@@ -536,7 +536,7 @@ public class EditPagesAction extends PortletAction {
 
 		String themeId = ParamUtil.getString(req, "themeId");
 		String colorSchemeId = ParamUtil.getString(req, "colorSchemeId");
-		String css = ParamUtil.getString(req, "themeCss");
+		String css = ParamUtil.getString(req, "css");
 
 		if (Validator.isNotNull(themeId) && Validator.isNull(colorSchemeId)) {
 			ColorScheme colorScheme = ThemeLocalUtil.getColorScheme(
@@ -545,7 +545,6 @@ public class EditPagesAction extends PortletAction {
 			colorSchemeId = colorScheme.getColorSchemeId();
 		}
 
-		System.out.println("updating look and fee");
 		if (Validator.isNull(layoutId)) {
 
 			// Update layout set

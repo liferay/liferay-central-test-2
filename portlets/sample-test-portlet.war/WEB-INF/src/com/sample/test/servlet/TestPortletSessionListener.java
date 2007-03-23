@@ -55,6 +55,7 @@ public class TestPortletSessionListener implements HttpSessionListener {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(TestPortletSessionListener.class);
+	private static Log _log =
+		LogFactory.getLog(TestPortletSessionListener.class);
 
 }

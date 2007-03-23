@@ -957,7 +957,8 @@ String[] availableLocales = null;
 					list="<%= templates %>"
 					listType="com.liferay.portlet.journal.model.JournalTemplate"
 					rowLength="3"
-					rowPadding="30">
+					rowPadding="30"
+				>
 
 					<%
 					boolean templateChecked = false;
