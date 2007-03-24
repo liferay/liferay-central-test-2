@@ -68,52 +68,67 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 
 <c:choose>
 	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
-		<table border="0" cellpadding="2" cellspacing="2" class="portlet-mail-toolbar font-small" id="portlet-mail-main-toolbar">
-		<tr>
-			<td nowrap onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />';">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/check_mail.png" /> <%= LanguageUtil.get(pageContext, "check-mail") %>
-			</td>
-			<td nowrap onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>';">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/compose.png" /> <%= LanguageUtil.get(pageContext, "new") %>
-			</td>
-		</tr>
-		</table>
 
 		<%
-		MailUtil.setFolder(request, MailUtil.MAIL_INBOX_NAME);
+		boolean mailServerExists = true;
+		MailFolder folder = null;
 
-		MailFolder folder = MailUtil.getFolder(request);
-		%>
-
-		<%= LanguageUtil.get(pageContext, "unread-messages") %>: <%= folder.getUnreadMessageCount() %>
-
-		<br><br>
-
-		<%
-		int count = 0;
-
-		Set envelopes = MailUtil.getEnvelopes(request, new DateComparator(false));
-
-		Iterator itr = envelopes.iterator();
-
-		while (itr.hasNext() && (count < 10)) {
-			MailEnvelope mailEnvelope = (MailEnvelope)itr.next();
-
-			String recipient = GetterUtil.getString(mailEnvelope.getRecipient(), StringPool.NBSP);
-			String subject = GetterUtil.getString(mailEnvelope.getSubject(), StringPool.NBSP);
-
-			if (!mailEnvelope.isRead()) {
-		%>
-
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="messageId" value="<%= String.valueOf(mailEnvelope.getMessageId()) %>" /><portlet:param name="folderId" value="<%= MailUtil.MAIL_INBOX_NAME %>" /></portlet:renderURL>">
-				<span style="font-weight: bold"><%= recipient %></span> - <%= subject %><br />
-				</a>
-
-		<%
-				count++;
-			}
+		try {
+			MailUtil.setFolder(request, MailUtil.MAIL_INBOX_NAME);
+			folder = MailUtil.getFolder(request);
+		}
+		catch (MailServerException mse) {
+			mailServerExists = false;
 		}
 		%>
+
+		<c:choose>
+			<c:when test="<%= mailServerExists %>">
+				<table border="0" cellpadding="2" cellspacing="2" class="portlet-mail-toolbar font-small" id="portlet-mail-main-toolbar">
+				<tr>
+					<td nowrap onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />';">
+						<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/check_mail.png" /> <%= LanguageUtil.get(pageContext, "check-mail") %>
+					</td>
+					<td nowrap onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>';">
+						<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/compose.png" /> <%= LanguageUtil.get(pageContext, "new") %>
+					</td>
+				</tr>
+				</table>
+
+				<%= LanguageUtil.get(pageContext, "unread-messages") %>: <%= folder.getUnreadMessageCount() %>
+
+				<br><br>
+
+				<%
+				int count = 0;
+
+				Set envelopes = MailUtil.getEnvelopes(request, new DateComparator(false));
+
+				Iterator itr = envelopes.iterator();
+
+				while (itr.hasNext() && (count < 10)) {
+					MailEnvelope mailEnvelope = (MailEnvelope)itr.next();
+
+					String recipient = GetterUtil.getString(mailEnvelope.getRecipient(), StringPool.NBSP);
+					String subject = GetterUtil.getString(mailEnvelope.getSubject(), StringPool.NBSP);
+
+					if (!mailEnvelope.isRead()) {
+				%>
+
+						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="messageId" value="<%= String.valueOf(mailEnvelope.getMessageId()) %>" /><portlet:param name="folderId" value="<%= MailUtil.MAIL_INBOX_NAME %>" /></portlet:renderURL>">
+						<span style="font-weight: bold"><%= recipient %></span> - <%= subject %><br />
+						</a>
+
+				<%
+						count++;
+					}
+				}
+				%>
+			</c:when>
+			<c:otherwise>
+				<%= LanguageUtil.get(pageContext, "please-contact-the-administrator-to-configure-a-valid-mail-server") %>
+			</c:otherwise>
+		</c:choose>
 
 	</c:when>
 	<c:otherwise>

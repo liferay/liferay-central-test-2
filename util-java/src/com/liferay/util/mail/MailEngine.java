@@ -29,6 +29,8 @@ import com.liferay.util.Validator;
 
 import java.io.ByteArrayInputStream;
 
+import java.net.SocketException;
+
 import java.util.Date;
 
 import javax.mail.Message;
@@ -270,23 +272,37 @@ public class MailEngine {
 	private static void _send(Session session, Message msg)
 		throws MessagingException {
 
-		boolean smtpAuth = GetterUtil.getBoolean(
-			session.getProperty("mail.smtp.auth"), false);
-		String smtpHost = session.getProperty("mail.smtp.host");
-		String user = session.getProperty("mail.smtp.user");
-		String password = session.getProperty("mail.smtp.password");
+		try {
+			boolean smtpAuth = GetterUtil.getBoolean(
+				session.getProperty("mail.smtp.auth"), false);
+			String smtpHost = session.getProperty("mail.smtp.host");
+			String user = session.getProperty("mail.smtp.user");
+			String password = session.getProperty("mail.smtp.password");
 
-		if (smtpAuth && Validator.isNotNull(user) &&
-			Validator.isNotNull(password)) {
+			if (smtpAuth && Validator.isNotNull(user) &&
+				Validator.isNotNull(password)) {
 
-			Transport transport = session.getTransport("smtp");
+				Transport transport = session.getTransport("smtp");
 
-			transport.connect(smtpHost, user, password);
-			transport.sendMessage(msg, msg.getAllRecipients());
-			transport.close();
+				transport.connect(smtpHost, user, password);
+				transport.sendMessage(msg, msg.getAllRecipients());
+				transport.close();
+			}
+			else {
+				Transport.send(msg);
+			}
 		}
-		else {
-			Transport.send(msg);
+		catch (MessagingException me) {
+			if (me.getNextException() instanceof SocketException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Failed to connect to a valid mail server.  " +
+							"Please make sure one is properly configured.");
+				}
+			}
+			else {
+				throw me;
+			}
 		}
 	}
 

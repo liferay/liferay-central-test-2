@@ -35,6 +35,7 @@
 <%@ page import="com.liferay.portlet.mail.search.MailDisplayTerms" %>
 <%@ page import="com.liferay.portlet.mail.util.MailUtil" %>
 <%@ page import="com.liferay.portlet.mail.util.comparator.DateComparator" %>
+<%@ page import="com.liferay.util.mail.MailServerException" %>
 
 <%@ page import="javax.mail.Address" %>
 

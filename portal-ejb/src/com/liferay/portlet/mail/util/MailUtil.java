@@ -55,10 +55,13 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.mail.JavaMailUtil;
 import com.liferay.util.mail.MailEngine;
+import com.liferay.util.mail.MailServerException;
 
 import com.sun.mail.imap.IMAPFolder;
 
 import java.io.IOException;
+
+import java.net.SocketException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -153,7 +156,7 @@ public class MailUtil {
 			HttpServletRequest req, MailMessage mailMessage, boolean send,
 			String originalId, boolean wasDraft)
 		throws ContentException, ContentPathException, FolderException,
-			   RecipientException, StoreException {
+			   MailServerException, RecipientException, StoreException {
 
 		HttpSession ses = req.getSession();
 
@@ -326,7 +329,7 @@ public class MailUtil {
 	}
 
 	public static void createFolder(HttpServletRequest req, String folderName)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		Folder folder = null;
 
@@ -370,14 +373,14 @@ public class MailUtil {
 
 	public static void deleteMessages(
 			HttpServletRequest req, MultiHashMap msgMap)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		deleteMessages(req, msgMap, false);
 	}
 
 	public static void deleteMessages(
 			HttpServletRequest req, MultiHashMap msgMap, boolean permanently)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		try {
 			MailSessionLock.lock(req);
@@ -417,7 +420,7 @@ public class MailUtil {
 	}
 
 	public static void emptyFolder(HttpServletRequest req, String folderName)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		try {
 			MailSessionLock.lock(req);
@@ -464,7 +467,7 @@ public class MailUtil {
 	public static Object[] getAttachment(
 			HttpServletRequest req, String contentPath)
 		throws ContentException, ContentPathException, FolderException,
-			   StoreException {
+			   MailServerException, StoreException {
 
 		Object[] parts = null;
 
@@ -536,7 +539,8 @@ public class MailUtil {
 	}
 
 	public static MailFolder getFolder(HttpServletRequest req)
-		throws FolderException, MessagingException, StoreException {
+		throws FolderException, MailServerException, MessagingException,
+			   StoreException {
 
 		try {
 
@@ -575,7 +579,7 @@ public class MailUtil {
 	}
 
 	public static List getFolders(HttpServletRequest req)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		List list = new ArrayList();
 
@@ -757,7 +761,7 @@ public class MailUtil {
 
 	public static void moveMessages(
 			HttpServletRequest req, MultiHashMap msgMap, String toFolderName)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		IMAPFolder toFolder = null;
 
@@ -820,7 +824,7 @@ public class MailUtil {
 	}
 
 	public static void removeFolder(HttpServletRequest req, String folderName)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		try {
 			folderName = _getResolvedFolderName(folderName);
@@ -867,7 +871,7 @@ public class MailUtil {
 
 	public static void renameFolder(
 			HttpServletRequest req, String oldFolderName, String newFolderName)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		try {
 			oldFolderName = _getResolvedFolderName(oldFolderName);
@@ -935,7 +939,7 @@ public class MailUtil {
 	public static Set search(
 			HttpServletRequest req, MailDisplayTerms displayTerms,
 			Comparator comparator)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		Set results = new TreeSet(comparator);
 
@@ -984,7 +988,7 @@ public class MailUtil {
 	}
 
 	public static void setFolder(HttpServletRequest req, String folderName)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		try {
 			MailSessionLock.lock(req);
@@ -1118,8 +1122,8 @@ public class MailUtil {
 
 	private static Store _createStore(
 			HttpServletRequest req, MailAccount account)
-		throws FolderException, MessagingException, NamingException,
-			   StoreException {
+		throws FolderException, MailServerException, MessagingException,
+			   NamingException, StoreException {
 
 		HttpSession ses = req.getSession();
 
@@ -1318,7 +1322,7 @@ public class MailUtil {
 
 	private static IMAPFolder _getFolder(
 			HttpServletRequest req, String folderName)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		HttpSession ses = req.getSession();
 
@@ -1467,7 +1471,7 @@ public class MailUtil {
 	}
 
 	private static Store _getStore(HttpServletRequest req)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		HttpSession ses = req.getSession();
 
@@ -1500,7 +1504,20 @@ public class MailUtil {
 			throw new StoreException(afe);
 		}
 		catch (MessagingException me) {
-			throw new StoreException(me);
+			Exception ne = me.getNextException();
+
+			if (ne instanceof SocketException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Failed to connect to a valid mail server.  " +
+							"Please make sure one is properly configured.");
+				}
+
+				throw new MailServerException(ne);
+			}
+			else {
+				throw new StoreException(me);
+			}
 		}
 		catch (NamingException ne) {
 			throw new StoreException(ne);
@@ -1546,7 +1563,7 @@ public class MailUtil {
 	private static void _replaceEmbeddedImages(
 			HttpServletRequest req, MailMessage mailMessage, String url)
 		throws ContentException, ContentPathException, FolderException,
-			   StoreException {
+			   MailServerException, StoreException {
 
 		HttpSession ses = req.getSession();
 
@@ -1653,7 +1670,7 @@ public class MailUtil {
 
 	private static void _search(
 			HttpServletRequest req, MailDisplayTerms displayTerms, Set results)
-		throws FolderException, StoreException {
+		throws FolderException, MailServerException, StoreException {
 
 		Store store = _getStore(req);
 

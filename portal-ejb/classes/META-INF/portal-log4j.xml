@@ -353,7 +353,7 @@
 	</category>
 
 	<category name="com.liferay.portlet.mail">
-		<priority value="ERROR" />
+		<priority value="WARN" />
 	</category>
 
 	<category name="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl">
@@ -385,7 +385,7 @@
 	</category>
 
 	<category name="com.liferay.util.mail">
-		<priority value="ERROR" />
+		<priority value="WARN" />
 	</category>
 
 	<category name="com.liferay.util.servlet.ServletResponseUtil">
