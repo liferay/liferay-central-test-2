@@ -193,11 +193,11 @@ public interface Portlet extends PortletModel {
 
 	public void setMaximizeHelp(boolean maximizeHelp);
 
-	public boolean getMaximizePrint();
+	public boolean getPopUpPrint();
 
-	public boolean isMaximizePrint();
+	public boolean isPopUpPrint();
 
-	public void setMaximizePrint(boolean maximizePrint);
+	public void setPopUpPrint(boolean popUpPrint);
 
 	public boolean getLayoutCacheable();
 

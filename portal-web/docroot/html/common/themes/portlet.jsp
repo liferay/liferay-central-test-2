@@ -214,8 +214,8 @@ if (portletDisplay.isModePrint()) {
 	urlPrint.setPortletMode(PortletMode.VIEW);
 }
 else {
-	if (portlet.isMaximizePrint()) {
-		urlPrint.setWindowState(WindowState.MAXIMIZED);
+	if (portlet.isPopUpPrint()) {
+		urlPrint.setWindowState(LiferayWindowState.POP_UP);
 	}
 	else {
 		urlPrint.setWindowState(WindowState.NORMAL);

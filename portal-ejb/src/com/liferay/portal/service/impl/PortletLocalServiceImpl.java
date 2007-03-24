@@ -1014,9 +1014,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setMaximizeHelp(GetterUtil.getBoolean(
 					portlet.elementText("maximize-help"),
 					portletModel.isMaximizeHelp()));
-				portletModel.setMaximizePrint(GetterUtil.getBoolean(
-					portlet.elementText("maximize-print"),
-					portletModel.isMaximizePrint()));
+				portletModel.setPopUpPrint(GetterUtil.getBoolean(
+					portlet.elementText("pop-up-print"),
+					portletModel.isPopUpPrint()));
 				portletModel.setLayoutCacheable(GetterUtil.getBoolean(
 					portlet.elementText("layout-cacheable"),
 					portletModel.isLayoutCacheable()));

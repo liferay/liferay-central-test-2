@@ -23,7 +23,7 @@ smtp-message-listener-class?, preferences-company-wide?,
 preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
 action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
-maximize-print?, layout-cacheable?, instanceable?, private-request-attributes?,
+pop-up-print?, layout-cacheable?, instanceable?, private-request-attributes?,
 private-session-attributes?, render-weight?, ajaxable?, header-css*,
 header-javascript*, add-default-resource?, system?, active?, include?)>
 
@@ -267,19 +267,19 @@ The default value is false.
 
 <!--
 Set the maximize-help value to true if the portlet goes into the maximized state
-when the user goes into the edit mode. This only affects the default portal
+when the user goes into the help mode. This only affects the default portal
 icons and not what may be programmatically set by the portlet developer.
 The default value is false.
 -->
 <!ELEMENT maximize-help (#PCDATA)>
 
 <!--
-Set the maximize-print value to true if the portlet goes into the maximized state
-when the user goes into the edit mode. This only affects the default portal
+Set the pop-up-print value to true if the portlet goes into the pop up state
+when the user goes into the print mode. This only affects the default portal
 icons and not what may be programmatically set by the portlet developer.
-The default value is false.
+The default value is true.
 -->
-<!ELEMENT maximize-print (#PCDATA)>
+<!ELEMENT pop-up-print (#PCDATA)>
 
 <!--
 Set the layout-cacheable flag to true if the data contained in this portlet can

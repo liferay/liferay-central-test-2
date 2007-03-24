@@ -169,7 +169,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 					   boolean showPortletAccessDenied,
 					   boolean showPortletInactive, boolean actionURLRedirect,
 					   boolean restoreCurrentView, boolean maximizeEdit,
-					   boolean maximizeHelp, boolean maximizePrint,
+					   boolean maximizeHelp, boolean popUpPrint,
 					   boolean layoutCacheable, boolean instanceable,
 					   boolean privateRequestAttributes,
 					   boolean privateSessionAttributes, int renderWeight,
@@ -210,7 +210,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_restoreCurrentView = restoreCurrentView;
 		_maximizeEdit = maximizeEdit;
 		_maximizeHelp = maximizeHelp;
-		_maximizePrint = maximizePrint;
+		_popUpPrint = popUpPrint;
 		_layoutCacheable = layoutCacheable;
 		_instanceable = instanceable;
 		_privateRequestAttributes = privateRequestAttributes;
@@ -983,36 +983,36 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Returns true if the portlet goes into the maximized state when the user
-	 * goes into the print mode.
+	 * Returns true if the portlet goes into the pop up state when the user goes
+	 * into the print mode.
 	 *
-	 * @return		true if the portlet goes into the maximized state when the
-	 *				user goes into the print mode
+	 * @return		true if the portlet goes into the pop up state when the user
+	 *				goes into the print mode
 	 */
-	public boolean getMaximizePrint() {
-		return _maximizePrint;
+	public boolean getPopUpPrint() {
+		return _popUpPrint;
 	}
 
 	/**
-	 * Returns true if the portlet goes into the maximized state when the user
-	 * goes into the print mode.
+	 * Returns true if the portlet goes into the pop up state when the user goes
+	 * into the print mode.
 	 *
-	 * @return		true if the portlet goes into the maximized state when the
-	 *				user goes into the print mode
+	 * @return		true if the portlet goes into the pop up state when the user
+	 *				goes into the print mode
 	 */
-	public boolean isMaximizePrint() {
-		return _maximizePrint;
+	public boolean isPopUpPrint() {
+		return _popUpPrint;
 	}
 
 	/**
-	 * Sets to true if the portlet goes into the maximized state when the user
-	 * goes into the print mode.
+	 * Sets to true if the portlet goes into the pop up state when the user goes
+	 * into the print mode.
 	 *
-	 * @param		maximizePrint boolean value for whether the portlet goes into
-	 *				the maximized state when the user goes into the print mode
+	 * @param		popUpPrint boolean value for whether the portlet goes into
+	 *				the pop up state when the user goes into the print mode
 	 */
-	public void setMaximizePrint(boolean maximizePrint) {
-		_maximizePrint = maximizePrint;
+	public void setPopUpPrint(boolean popUpPrint) {
+		_popUpPrint = popUpPrint;
 	}
 
 	/**
@@ -1857,7 +1857,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
 			isShowPortletAccessDenied(), isShowPortletInactive(),
 			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
-			isMaximizeHelp(), isMaximizePrint(), isLayoutCacheable(),
+			isMaximizeHelp(), isPopUpPrint(), isLayoutCacheable(),
 			isInstanceable(), isPrivateRequestAttributes(),
 			isPrivateSessionAttributes(), getRenderWeight(), isAjaxable(),
 			getHeaderCss(), getHeaderJavaScript(), isAddDefaultResource(),
@@ -2025,10 +2025,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private boolean _maximizeHelp;
 
 	/**
-	 * True if the portlet goes into the maximized state when the user goes into
+	 * True if the portlet goes into the pop up state when the user goes into
 	 * the print mode.
 	 */
-	private boolean _maximizePrint;
+	private boolean _popUpPrint = true;
 
 	/**
 	 * True if the portlet can be cached within the layout.
