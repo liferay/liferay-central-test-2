@@ -59,6 +59,7 @@ alter table Layout add iconImage BOOLEAN;
 alter table Layout add css VARCHAR(75) null;
 
 alter_column_type LayoutSet groupId LONG;
+alter table LayoutSet add css VARCHAR(75) null;
 alter table LayoutSet add logo BOOLEAN;
 
 alter_column_type ListType listTypeId INTEGER;
