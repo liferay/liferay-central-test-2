@@ -16,98 +16,102 @@
 /* ---------- Banner ---------- */
 
 .green #banner {
-	background: url(../../images/color_schemes/green/common/banner_bg.png) no-repeat 100% 100%;
+	background-image: url(../../images/color_schemes/green/common/banner_bg.png);
 }
 
 .green #banner .logo {
-	background: url(../../images/color_schemes/green/common/banner_bg.png) no-repeat 0 100%;
+	background-image: url(../../images/color_schemes/green/common/banner_bg.png);
 }
 
 /* ---------- Alerts and popups ---------- */
 
 .green .popup {
-	border: 2px solid #8df78c;
+	border-color: #8df78c;
 }
 
 .green .popup-header {
-	background: #eff1ee none repeat scroll 0%;
-	border-bottom: 2px solid #777;
+	background: #eff1ee;
+	border-bottom-color: #777;
 }
 
 /* ---------- Portal tool tips ---------- */
 
 .green .portal-tool-tip {
 	background: #DCDCDC;
-	border: 1px solid #BFBFBF;
+	border-color: #BFBFBF;
 }
 
 /* ---------- Autocomplete styles ---------- */
 
 .green .autocomplete-box {
 	background: #e6f2e2;
-	border: 1px solid #b5d7ab;
+	border-color: #b5d7ab;
 }
 
 .green .autocomplete-selected {
 	background: #c8e3c0;
-	border-bottom: 1px solid #b5d7ab;
-	border-top: 1px solid #b5d7ab;
+	border-bottom-color: #b5d7ab;
+	border-top-color: #b5d7ab;
 }
 
 /* ---------- Separator ---------- */
 
 .green .separator {
-	border: 1px dotted #CCC;
+	border-color: #CCC;
 }
 
 /* This CSS sets the default styles for the main navigation. */
 
 /* ---------- Main navigation ---------- */
 
-.green #navigation {
-	background: url(../../images/color_schemes/green/navigation/bg.gif) no-repeat 100% 100%;
-}
-
-.green #navigation ul {
-	background: url(../../images/color_schemes/green/navigation/bg.gif) no-repeat 0 100%;
+.green #navigation li {
+	background-image: url(../../images/color_schemes/green/navigation/bg.gif);
 }
 
 .green #navigation li a {
-	background: url(../../images/color_schemes/green/navigation/bullet.gif) no-repeat 0 50%;
+	background-image: url(../../images/color_schemes/green/navigation/bg.gif);
 }
 
-.green #navigation li a:hover {
-	background: url(../../images/color_schemes/green/navigation/bullet_over.gif) no-repeat 0 50%;
+.green #navigation li a span {
+	background-image: url(../../images/color_schemes/green/navigation/bullet.gif);
+}
+
+.green #navigation li.selected a span {
+	background-image: url(../../images/color_schemes/green/navigation/bullet_selected.gif);
+	font-weight: bold;
+}
+
+.green #navigation li a:hover span {
+	background-image: url(../../images/color_schemes/green/navigation/bullet_over.gif);
 }
 
 /* ---------- Dock with Javascript ---------- */
 
 .js .green .lfr-dock h2 {
-	background: url(../../images/color_schemes/green/dock/menu_bar.png) no-repeat 100% -30px;
+	background-image: url(../../images/color_schemes/green/dock/menu_bar.png);
 }
 
 .js .green .lfr-dock h2 span {
-	background: url(../../images/color_schemes/green/dock/menu_bar.png) no-repeat 0 0;
+	background-image: url(../../images/color_schemes/green/dock/menu_bar.png);
 	color: #333;
 }
 
 .js .green .lfr-dock.expanded .lfr-dock-list-container {
-	background: #628c60;
-	border: 1px solid #a0c695;
-	border-top: none;
+	background-color: #628c60;
+	border-color: #a0c695;
 }
 
 .js .green .lfr-dock ul {
-	border-left: 20px solid #dbefda;
+	border-left-color: #dbefda;
 }
 
 .js .green .lfr-dock li a {
-	border-top: 1px solid #ccc;
+	border-top-color: #ccc;
 }
 
 .js .green .lfr-dock li a:hover {
 	background-color: #FFF5BA;
-	border-top: 1px solid #E0D79F;
+	border-top-color: #E0D79F;
 }
 
 .js .green .lfr-dock li.my-places li ul li.current a, .js .green .lfr-dock li.my-places li ul li.current a:hover {
@@ -116,11 +120,11 @@
 
 .js .green .my-places .show-my-places {
 	background: #fff;
-	border: 1px solid #ccc;
+	border-color: #ccc;
 }
 
 .js .green .my-places .show-my-places li .my-places-toggle {
-	border-bottom: 1px solid #999;
+	border-bottom-color: #999;
 	color: #333;
 }
 
@@ -129,36 +133,43 @@
 	border: none;
 }
 
+/*------ Drag/drop menu items ------*/
+
+.green #navigation ul .sort-helper {
+	background-image: url(../../images/color_schemes/green/portlet/placeholder_bg.gif);
+	border-color: #69b450;
+}
+
 /* This CSS sets the default styles for portlets. */
 
 /* ---------- Portlet wrapper and icons ---------- */
 
 .green .portlet-topper {
-	background: url(../../images/color_schemes/green/portlet/header_bg.gif) no-repeat 100% 0;
+	background-image: url(../../images/color_schemes/green/portlet/header_bg.gif);
 }
 
 .green .portlet-title {
-	background: url(../../images/color_schemes/green/portlet/header_bg.gif) no-repeat 0 -50px;
+	background-image: url(../../images/color_schemes/green/portlet/header_bg.gif);
 }
 
 .green .portlet-content {
-	border: 1px solid #63d07c;
+	border-color: #63d07c;
 }
 
 /* ---------- Drag and drop ---------- */
 
 .green .portlet-dragging {
-	background: #FFFFE3 !important;
-	border: 3px solid #666;
+	background-color: #FFFFE3 !important;
+	border-color: #666;
 }
 
 .green .portlet-hover {
-	background: #ddd;
+	background-color: #ddd;
 }
 
 .green .portlet-placeholder {
-	background: url(../../images/color_schemes/green/portlet/placeholder_bg.gif);
-	border: 1px dashed #69b450;
+	background-image: url(../../images/color_schemes/green/portlet/placeholder_bg.gif);
+	border-color: #69b450;
 }
 
 /* ---------- Standard styles defined in the JSR 168 ---------- */
@@ -185,27 +196,27 @@
 /* ---------- Help messages, general additional information, etc. ---------- */
 
 .green .portlet-msg-info {
-	background: #FAFAFA;
-	border: 1px solid #53B2F8;
+	background-color: #FAFAFA;
+	border-color: #53B2F8;
 	color: #777;
 }
 
 /* ---------- Error messages ---------- */
 
 .green .portlet-msg-error {
-	border: 1px solid #900;
+	border-color: #900;
 }
 
 /* ---------- Warning messages ---------- */
 
 .green .portlet-msg-alert {
-	border: 1px solid #EFEFEF;
+	border-color: #EFEFEF;
 }
 
 /* ---------- Success messages ---------- */
 
 .green .portlet-msg-success {
-	border: 1px solid #3F9305;
+	border-color: #3F9305;
 }
 
 /* ---------- Sections ---------- */
@@ -216,7 +227,7 @@
 }
 
 .green .portlet-section-header th {
-	border-bottom: 1px solid #ccc;
+	border-bottom-color: #ccc;
 	color: #333;
 }
 
@@ -226,8 +237,8 @@
 }
 
 .green .portlet-section-body td {
-	background: #DCDCDC;
-	border-top: 1px solid #BFBFBF;
+	background-color: #DCDCDC;
+	border-top-color: #BFBFBF;
 }
 
 /* ---------- Text in every other row in the cell ---------- */
@@ -236,14 +247,14 @@
 }
 
 .green .portlet-section-alternate td {
-	background: #fff;
-	border-top: 1px solid #BFBFBF;
+	background-color: #fff;
+	border-top-color: #BFBFBF;
 }
 
 .green .portlet-section-alternate.hover td, .green .portlet-section-body.hover td {
-	background: #FFF5BA;
-	border-bottom: 1px solid #E0D79F;
-	border-top: 1px solid #E0D79F;
+	background-color: #FFF5BA;
+	border-bottom-color: #E0D79F;
+	border-top-color: #E0D79F;
 }
 
 /* ---------- Text in a selected cell range ---------- */
@@ -353,35 +364,35 @@
 /* This CSS sets the default styles for tabs. */
 
 .green .tabs {
-	border-bottom: 1px solid #91e38d;
+	border-bottom-color: #91e38d;
 }
 
 .green .tabs li {
-	background: url(../../images/color_schemes/green/common/tabs_bg.gif) 100% -50px;
+	background-image: url(../../images/color_schemes/green/common/tabs_bg.gif);
 }
 
 .green .tabs li a, .green .tabs li span {
-	background: url(../../images/color_schemes/green/common/tabs_bg.gif) 0 -150px;
+	background-image: url(../../images/color_schemes/green/common/tabs_bg.gif);
 }
 
 .green .tabs li.current {
-	background: url(../../images/color_schemes/green/common/tabs_bg.gif) 100% 0;
+	background-image: url(../../images/color_schemes/green/common/tabs_bg.gif);
 }
 
 .green .tabs li.current a, .green .tabs li.current span {
-	background: url(../../images/color_schemes/green/common/tabs_bg.gif) 0 -100px;
+	background-image: url(../../images/color_schemes/green/common/tabs_bg.gif);
 	color: #333;
 }
 
 /* This CSS sets the default styles for forms. */
 
 .green fieldset {
-	border: 1px solid #ccc;
+	border-color: #ccc;
 }
 
 .green input[type="text"], .green input[type="password"], .green input[type="file"], .green input[type="submit"], .green input[type="button"], .green input[type="reset"], .green select, .green textarea {
-	background: #fff url(../../images/color_schemes/green/forms/input_shadow.gif) no-repeat;
-	border: 1px solid #aaa;
+	background-image: url(../../images/color_schemes/green/forms/input_shadow.gif);
+	border-color: #aaa;
 	border-left-color: #777;
 	border-top-color: #777;
 }
@@ -393,7 +404,7 @@
 
 .green input[type="submit"], .green input[type="button"], .green input[type="reset"] {
 	background: #FAFAFA url(../../images/color_schemes/green/forms/button.gif) repeat-x;
-	border: 3px double #999;
+	border-color: #999;
 	border-left-color: #ccc;
 	border-top-color: #ccc;
 	color: #333;
@@ -402,15 +413,15 @@
 /* ---------- IE6 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
 
 .ie6 .green input.text, .ie6 .green input.password, .ie6 .green input.submit, .ie6 .green input.file, .ie6 .green input.button {
-	background: #fff url(../../images/color_schemes/green/forms/input_shadow.gif) no-repeat;
-	border: 1px solid #aaa;
+	background-image: url(../../images/color_schemes/green/forms/input_shadow.gif);
+	border-color: #aaa;
 	border-left-color: #777;
 	border-top-color: #777;
 }
 
 .ie6 .green input.submit, .ie6 .green input.button {
 	background: #FAFAFA url(../../images/color_schemes/green/forms/button.gif) repeat-x;
-	border: 3px double #999;
+	border-color: #999;
 	border-left-color: #ccc;
 	border-top-color: #ccc;
 	color: #333;

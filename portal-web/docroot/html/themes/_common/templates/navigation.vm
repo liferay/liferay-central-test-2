@@ -1,4 +1,4 @@
-<div id="navigation">
+<div id="navigation" class="sort-pages modify-pages">
 	<ul>
 		#foreach ( $nav_item in $nav_items )
 			#if ( $nav_item.isSelected() )

@@ -104,6 +104,7 @@ font {
 }
 
 #navigation li {
+	background: none;
 	display: inline;
 	float: left;
 	margin: 0 0.89em;
@@ -121,6 +122,15 @@ font {
 	text-decoration: none;
 }
 
+#navigation li a span {
+	background: none;
+	padding: 0;
+}
+
+#navigation li a:hover span {
+	background: none;
+}
+
 #navigation li a:hover {
 	background: url(../images/navigation/bg_hover.png) repeat-x;
 	border-left: 1px solid #1D4A81;
@@ -133,6 +143,11 @@ font {
 	background: url(../images/navigation/bg_selected.png) repeat-x;
 	border-left: 1px solid #1D4A81;
 	border-right: 1px solid #1D4A81;
+}
+
+#navigation li.selected a span {
+	background: none;
+	font-size: 1em;
 }
 
 #navigation li.selected a:hover {

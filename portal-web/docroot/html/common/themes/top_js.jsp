@@ -35,6 +35,9 @@
 
 			return "<%= Http.encodeURL(themeDisplay.getDoAsUserId()) %>";
 		},
+		getLanguageId : function() {
+			return "<%= LanguageUtil.getLanguageId(request) %>";
+		},
 		getPathMain : function() {
 			return "<%= themeDisplay.getPathMain() %>";
 		},
@@ -209,6 +212,15 @@
 		jQuery(document).ready(
 			function() {
 				Liferay.Draggables.init();
+				
+				new Liferay.Navigation({
+					groupId: "<%= layout.getGroupId() %>",
+					layoutId: "<%= layout.getLayoutId() %>",
+					ownerId: "<%= LayoutImpl.getOwnerId(plid) %>",
+					isPrivate: <%= layout.isPrivateLayout() %>,
+					parent: "<%= layout.getParentLayoutId() %>",
+					layoutIds: [<%=ListUtil.toString(layouts, "layoutId")%>],
+				});
 			}
 		);
 	</c:if>

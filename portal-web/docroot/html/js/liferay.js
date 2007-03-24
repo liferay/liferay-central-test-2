@@ -374,6 +374,413 @@ Liferay.DynamicSelect = new Class({
 	}
 });
 
+Liferay.Navigation = new Class({
+							   
+	/* REQUIRED PARAMETERS
+	* groupId: (String) layout.getGroupId()
+	* isPrivate: (boolean) layout.isPrivateLayout()
+	* layoutId: (String) layout.getLayoutId()
+	* layoutIds: (Array) List of displayable layout IDs
+	* ownerId: (String) Layout.getOwnerId(plid)
+	* parent: (String) layout.getParentLayoutId()
+	OPTIONAL PARAMETERS
+	* navBlock: (String) jQuery selector for the navigation block to use
+	* useHandle: (Boolean) Use a handle for dragging
+	*/
+	initialize: function(params) {
+		var instance = this;
+		
+		params.navBlock = params.navBlock || '#navigation';
+		
+		instance.params = params;
+		
+		instance._navBlock = jQuery(instance.params.navBlock);
+		
+		instance._isModifiable = instance._navBlock.is('.modify-pages');
+		instance._isSortable = instance._navBlock.is('.sort-pages');
+		instance._useHandle = instance.params.useHandle || instance._navBlock.is('.use-handle') || instance._useHandle;
+		
+		instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
+		
+		instance._makeAddable();
+		
+		instance._makeDeletable();
+		
+		instance._makeSortable();
+		
+		instance._makeEditable();
+		
+	 },
+	 
+	 _addPage: function(event, obj) {
+		var instance = this;
+		var navItem = instance._navBlock;
+		var addBlock = jQuery('<li>' + instance._enterPage + '</li>');
+		
+		var blockInput = addBlock.find('input');
+							
+		addBlock.find('.cancel-page').click(instance._cancelPage);
+		
+		addBlock.find('.save-page').click(
+			function(event){
+				instance._savePage(event, this, instance);	
+			}
+		);
+		
+		addBlock.find('.enter-page input').keyup(
+			function(event){
+				instance._savePage(event, this, instance);	
+			}
+		);
+		
+		navItem.find('ul').append(addBlock);
+		blockInput[0].focus();
+				 
+	 },
+	 	 	 
+	 _cancelPage: function(event, obj, oldTitle) {
+		var navItem;
+		 
+		if (oldTitle){
+			navItem = jQuery(obj).parents('li');
+			var enterPage = navItem.find('.enter-page');
+
+			enterPage.prev().show();
+			enterPage.remove();
+		}
+		else {
+			navItem = jQuery(this).parents('li');
+			
+			navItem.remove();
+		}
+	 },
+	 
+	 _deleteButton: function(obj) {
+	 	var instance = this;
+		obj.append('<span class="delete-tab">X</span>');
+		
+		obj.find('.delete-tab').click(
+			function(event) {
+				instance._removePage(this, instance);
+				
+			}
+		);
+		
+	},
+	 
+	 _makeAddable: function() {
+		 
+	 	var instance = this;
+		
+		if (instance._isModifiable) {
+			var navList = instance._navBlock.find('ul');
+			
+			instance._enterPage = '<div class="enter-page">' +
+									'<input type="text" name="new_page" value="" class="text" />' +
+									'<a href="javascript:;" class="cancel-page">X</a>' +
+									'<a href="javascript:;" class="save-page">Save</a>' +
+								  '</div>';
+			
+			navList.after('<div id="add-page">' +
+								'<a href="javascript:;">' +
+									'<span>Add page</span>' +
+								'</a>' +
+						   '</div>');
+			
+			var addPage = navList.parent().find('#add-page a');
+			
+			addPage.click(
+				function(event){
+					instance._addPage(event, this);	
+				}
+			);
+		}
+	},
+	 	 	
+	_makeDeletable: function() {
+		var instance = this;
+		
+		if (instance._isModifiable) {
+			var navItems = instance._navBlock.find('li');
+			
+			instance._deleteButton(navItems);	
+		}
+		
+
+	},
+	 	
+	_makeEditable: function() {
+		var instance = this;
+		
+		if (instance._isModifiable) {
+			
+			var currentItem = instance._navBlock.find('li.selected');
+			
+			var currentLink = currentItem.find('a');
+			
+			var currentSpan = currentLink.find('span');
+			
+			currentSpan.css('cursor', 'text');
+			
+			currentLink.click(
+				function() {
+					return false;	
+				}
+			);
+			
+			currentSpan.click(
+				function() {
+					var span = jQuery(this);
+					var text = span.text();
+					span.parent().hide();
+					span.parent().after(instance._enterPage);
+					
+					var enterPage = span.parent().next();
+					
+					enterPage.find('input').val(text);
+					
+					var savePage = enterPage.find('.save-page');
+					var cancelPage = enterPage.find('.cancel-page');
+					
+					savePage.click(
+						function(event) {
+							instance._savePage(event, this, instance, text);	
+						}
+					);
+					
+					enterPage.find('input').keyup(
+						function(event) {
+							instance._savePage(event, this, instance, text);	
+						}
+					);
+					
+					cancelPage.click(
+						function(event) {
+							instance._cancelPage(event, this, text);	
+						}
+					);
+					
+				}
+			);
+		}
+	},
+	
+	 _makeSortable: function() {
+	 	var instance = this;
+		
+		var navBlock = instance._navBlock;
+		var navList = navBlock.find('ul');
+		
+		if (instance._isSortable) {
+			var float = navList.find('> li').css('float');
+			
+			var items = navList.find('li');
+			var anchors = items.find('a');
+			
+			items.each(
+				function(i) {
+					this._LFR_layoutId = instance.params.layoutIds[i];
+				}
+			);
+			
+			if (instance._useHandle) {
+				items.append('<span class="sort-handle">+</span>');
+			}
+			else {
+				anchors.css('cursor', 'move');
+				anchors.find('span').css('cursor', 'pointer');
+			}
+			
+			items.addClass('sortable-item');
+			
+			instance.sortable = navList.Sortable(
+				{
+					accept: 'sortable-item',
+					helperclass: 'sort-helper',
+					activeclass: 'sortableactive',
+					hoverclass: 'sortablehover',
+					handle: (instance._useHandle ? '.sort-handle' : 'a'),
+					opacity: 0.8,
+					revert:	true,
+					floats:	(float == 'left' || float == 'right'),
+					tolerance: 'pointer',
+					onStop: function() {
+						instance._saveSortables(this);	
+					}
+				}
+			);
+		}
+	},
+		 
+	 _removePage: function(obj, instance) {
+		var tab = jQuery(obj).parents('li');
+		var tabText = tab.find('a span').html();
+		var params = instance.params;
+		var url = instance._updateURL;
+		
+		var confirmRemove = confirm('Are you sure you want to remove "' + tabText + '"?');
+
+		if (confirmRemove) {
+			var data = {
+				cmd: 'delete',
+				ownerId: params.ownerId,
+				layoutId: tab[0]._LFR_layoutId
+			};
+			
+			jQuery.ajax(
+				{
+					data: data,
+					success: function() {
+						tab.remove();	
+					},
+					url: url
+				}
+			);
+		}
+	},
+	
+	 _savePage: function(event, obj, instance, oldTitle) {
+		
+		if (event.type == 'keyup' && event.keyCode !== 13) {
+			return;
+		}
+		
+			var newNavItem = jQuery(obj).parents('li');
+			var params = instance.params;
+			var url = instance._updateURL;
+			var data, onSuccess;
+					
+			var title = newNavItem.find('input').val();
+			
+			var enterPage = newNavItem.find('.enter-page');
+		
+		if (oldTitle) {	
+		// Editing an existing page
+		
+			if (title !== oldTitle) {
+				
+				data = {
+					cmd: 'title',
+					title: title,
+					ownerId: params.ownerId,
+					languageId: themeDisplay.getLanguageId(),
+					layoutId: params.layoutId
+				};
+				
+				onSuccess = function(data) {
+					data = $J(data);
+					var currentTab = enterPage.prev();
+					var currentSpan = currentTab.find('span');
+					
+					currentSpan.text(title);
+					currentTab.show();
+					
+					enterPage.remove();
+				}
+			}
+			else { 
+			// The new title is the same as the old one
+				var currentTab = enterPage.prev();
+				
+				currentTab.show();
+				enterPage.remove();
+				return false;
+			}
+		} 
+		else { 
+		// Adding a new page
+			
+			if (title == '') {
+				title = 'New Page';
+			}
+			
+			data = {
+				cmd: 'add',
+				title: title,
+				groupId: params.groupId,
+				private: params.isPrivate,
+				parent: params.parent,
+				mainPath: themeDisplay.getPathMain(),
+				doAsUserId: themeDisplay.getDoAsUserIdEncoded()
+			};
+
+			onSuccess = function(data) {
+				data = $J(data);
+				
+				var newTab = jQuery('<a href="' + data.url + '"><span>' + title + '</span></a>');
+				
+				if (instance._useHandle) {
+					enterPage.before('<span class="sort-handle">+</span>');
+				} else {
+					newTab.css('cursor', 'move');
+				}
+									
+				newNavItem[0]._LFR_layoutId = data.layoutId;
+									
+				enterPage.before(newTab);
+				enterPage.remove();
+				instance.sortable.SortableAddItem(newNavItem[0]);
+				instance._deleteButton(newNavItem);	
+			}
+		}
+		
+		jQuery.ajax(
+			{
+				data: data,
+				success: onSuccess,
+				url: url
+			}
+		);
+	 },
+	
+	 _saveSortables: function(obj) {
+	 	var instance = this;
+		
+		var url = instance._updateURL;
+		
+		tabs = jQuery('li', instance._navBlock);
+		var reordered = [];
+		
+		tabs.each(
+			function(i) {
+				reordered[i] = this._LFR_layoutId;
+			}
+		);
+		
+		position = tabs.index(obj) + 1;
+		
+		instance.params.layoutIds = reordered;
+		
+			var params = instance.params;
+			
+			var layoutId = obj._LFR_layoutId;
+			
+			reordered = reordered.join(','); 
+			
+			var data = {
+				cmd: 'reorder',
+				ownerId: params.ownerId,
+				parent: params.parent,
+				layoutIds: reordered,
+				position: position,
+				plid: layoutId
+				
+			}
+			jQuery.ajax(
+				{
+					data: data,
+					url: url
+				}
+			);	
+	},
+	 
+	 _enterPage: '',
+	 _isSortable: false,
+	 _isModifiable: false,
+	 _updateURL: '',
+	 _useHandle: false
+});
+
 Liferay.TagsSelector = new Class({
 
 	/*
@@ -1081,7 +1488,7 @@ Liferay.Util = {
 		if (a[1].toLowerCase() > b[1].toLowerCase()) {
 			return 1;
 		}
-		else if(a[1].toLowerCase() < b[1].toLowerCase()) {
+		else if (a[1].toLowerCase() < b[1].toLowerCase()) {
 			return -1;
 		}
 		else {
@@ -1391,3 +1798,9 @@ var ZINDEX = {
 	DRAG_ITEM: 10,
 	DRAG_ARROW: 9
 };
+
+//0-100: Theme Developer
+//100-200: Portlet Developer
+//200-300: Liferay
+
+//var Liferay.zIndex = {};

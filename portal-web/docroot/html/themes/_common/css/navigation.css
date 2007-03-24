@@ -3,47 +3,63 @@
 /* ---------- Main navigation ---------- */
 
 #navigation {
-	background: transparent url(../images/navigation/bg.gif) no-repeat 100% 100%;
-	margin: 0 auto 2em;
-	min-height: 2em;
-	padding: 0.5em 2em;
-	position: relative;
+	margin: 0 auto 0.5em;
+	min-height: 2.2em;
+	overflow: hidden;
+	padding-right:1em;
 	width: 93%;
 }
 
 #navigation ul {
-	background: transparent url(../images/navigation/bg.gif) no-repeat 0 100%;
 	float: left;
-	left: 0;
 	min-height: 2em;
-	padding: 0.5em 2em;
-	position: absolute;
-	top: 0;
+	width: auto;
 }
 
 .ie6 #navigation, .ie6 #navigation ul {
 	height: 2em;
+	overflow: visible;
 }
 
 #navigation li {
+	background: transparent url(../images/navigation/bg.gif) no-repeat 100% 100%;
 	display: inline;
 	float: left;
-	margin-right: 1.5em;
+	margin-right: 0.5em;
+	padding: 0 0.5em 0 0;
+	position: relative;
 }
 
+
 #navigation li a {
-	background: url(../images/navigation/bullet.gif) no-repeat 0 50%;
+	background: transparent url(../images/navigation/bg.gif) no-repeat 0 100%;
 	display: block;
-	padding-left: 17px;
+	padding: 0 2em 0.5em 1.5em;
 	text-decoration: none;
 }
 
 #navigation li a:hover {
-	background: url(../images/navigation/bullet_over.gif) no-repeat 0 50%;
+	padding-top: 0.5em;	
 }
 
-.ie #navigation li a {
-	padding-top: 0.2em;
+#navigation li a span {
+	background: url(../images/navigation/bullet.gif) no-repeat 0 50%;
+	padding-left: 17px;
+	text-decoration: none;
+}
+
+#navigation li.selected a {
+	padding-top: 0.5em;
+}
+
+#navigation li.selected a span {
+	background: url(../images/navigation/bullet_selected.gif) no-repeat 0 50%;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+#navigation li a:hover span {
+	background: url(../images/navigation/bullet_over.gif) no-repeat 0 50%;
 }
 
 #navigation .child-menu {
@@ -230,10 +246,6 @@
 .js .my-places .show-my-places li {
 	background: url() no-repeat 5px 50%;
 	margin: 0;
-	pasdding: 0.5em;
-}
-
-li.my-places ul li ul {
 }
 
 .js .my-places .show-my-places li .my-places-toggle {
@@ -295,4 +307,64 @@ li.my-places ul li ul {
 
 .ie6.js .lfr-dock li a {
 	height: 1%;
+}
+
+/* ---------- Add/Sort/Remove page ---------- */
+
+.js	#navigation .enter-page {
+	background: transparent url(../images/navigation/bg.gif) no-repeat 0 100%;
+	padding: 0.5em 2em 0.7em 1.5em;
+}
+
+.js	#navigation .enter-page.editing {
+	background: none;
+	padding: 0.5em 2em 0.7em 1.5em;
+}
+
+.js	#navigation .enter-page a {
+	background: none;
+	display: inline;
+	font-weight: bold;
+	margin-left: 1em;
+	padding: 0;
+}
+
+.js #add-page {
+	float: left;
+	font-weight: bold;
+	padding-top: 0.3em;
+}
+
+.js #add-page a {
+	text-decoration: none;
+}
+
+.js #add-page a span {
+	background: url(../images/navigation/add_page.png) no-repeat 0 50%;
+	padding:5px 20px;
+}
+
+.js #add-page a:hover span {
+	background-image: url(../images/navigation/add_page.png);
+}
+
+.js .delete-tab {
+	background: url(../images/navigation/delete_page.png) no-repeat 42%;
+	cursor: pointer;
+	display: block;
+	height: 7px;
+	position: absolute;
+	right: 5px;
+	text-indent: -9999em;
+	top: 2px;
+	width: 8px;
+}
+
+/*------ Drag/drop menu items ------*/
+
+#navigation ul .sort-helper {
+	background: url(../images/portlet/placeholder_bg.gif);
+	border: 1px dashed #508FB4;
+	float: left;
+	padding: 0.5em;
 }

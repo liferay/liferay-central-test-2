@@ -42,6 +42,8 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -80,12 +82,14 @@ public class UpdatePageAction extends JSONAction {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
+
 		JSONObject jsonObj = new JSONObject();
 
 		if (cmd.equals("add")) {
-			String url = addPage(req);
+			HashMap addPageObject = addPage(req);
 
-			jsonObj.put("url", url);
+			jsonObj.put("url", addPageObject.get("layoutURL"));
+			jsonObj.put("layoutId", addPageObject.get("layoutId"));
 		}
 		else if (cmd.equals("delete")) {
 			deletePage(req);
@@ -100,18 +104,24 @@ public class UpdatePageAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	protected String addPage(HttpServletRequest req) throws Exception {
+	protected HashMap addPage(HttpServletRequest req) throws Exception {
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "private");
 		String parentLayoutId = ParamUtil.getString(req, "parent");
 		String mainPath = ParamUtil.getString(req, "mainPath");
 		String doAsUserId = ParamUtil.getString(req, "doAsUserId");
+		String pageTitle = ParamUtil.getString(req, "title");
 
 		String name = "New Page";
 		String title = StringPool.BLANK;
 		String type = LayoutImpl.TYPE_PORTLET;
 		boolean hidden = false;
 		String friendlyURL = StringPool.BLANK;
+		HashMap hash = new HashMap();
+		
+		if(pageTitle.length() > 0) {
+				name = pageTitle;
+		}
 
 		Layout layout = LayoutServiceUtil.addLayout(
 			groupId, privateLayout, parentLayoutId, name, title, type, hidden,
@@ -132,8 +142,10 @@ public class UpdatePageAction extends JSONAction {
 		if (Validator.isNotNull(doAsUserId)) {
 			layoutURL = Http.addParameter(layoutURL, "doAsUserId", doAsUserId);
 		}
-
-		return layoutURL;
+		hash.put("layoutURL", layoutURL);
+		hash.put("layoutId", layout.getLayoutId());
+		
+		return hash;
 	}
 
 	protected void deletePage(HttpServletRequest req) throws Exception {

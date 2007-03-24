@@ -16,98 +16,102 @@
 /* ---------- Banner ---------- */
 
 .orange #banner {
-	background: url(../../images/color_schemes/orange/common/banner_bg.png) no-repeat 100% 100%;
+	background-image: url(../../images/color_schemes/orange/common/banner_bg.png);
 }
 
 .orange #banner .logo {
-	background: url(../../images/color_schemes/orange/common/banner_bg.png) no-repeat 0 100%;
+	background-image: url(../../images/color_schemes/orange/common/banner_bg.png);
 }
 
 /* ---------- Alerts and popups ---------- */
 
 .orange .popup {
-	border: 2px solid #ffc684;
+	border-color: #ffc684;
 }
 
 .orange .popup-header {
-	background: #ffe7e0 none repeat scroll 0%;
-	border-bottom: 2px solid #777;
+	background: #ffe7e0;
+	border-bottom-color: #777;
 }
 
 /* ---------- Portal tool tips ---------- */
 
 .orange .portal-tool-tip {
-	background: #DCDCDC;
-	border: 1px solid #BFBFBF;
+	background-color: #DCDCDC;
+	border-color: #BFBFBF;
 }
 
 /* ---------- Autocomplete styles ---------- */
 
 .orange .autocomplete-box {
-	background: #ffe1d5;
-	border: 1px solid #ffab83;
+	background-color: #ffe1d5;
+	border-color: #ffab83;
 }
 
 .orange .autocomplete-selected {
-	background: #ffc1a4;
-	border-bottom: 1px solid #ffab83;
-	border-top: 1px solid #ffab83;
+	background-color: #ffc1a4;
+	border-bottom-color: #ffab83;
+	border-top-color: #ffab83;
 }
 
 /* ---------- Separator ---------- */
 
 .orange .separator {
-	border: 1px dotted #CCC;
+	border-color: #CCC;
 }
 
 /* This CSS sets the default styles for the main navigation. */
 
 /* ---------- Main navigation ---------- */
 
-.orange #navigation {
-	background: url(../../images/color_schemes/orange/navigation/bg.gif) no-repeat 100% 100%;
-}
-
-.orange #navigation ul {
-	background: url(../../images/color_schemes/orange/navigation/bg.gif) no-repeat 0 100%;
+.orange #navigation li {
+	background-image: url(../../images/color_schemes/orange/navigation/bg.gif);
 }
 
 .orange #navigation li a {
-	background: url(../../images/color_schemes/orange/navigation/bullet.gif) no-repeat 0 50%;
+	background-image: url(../../images/color_schemes/orange/navigation/bg.gif);
 }
 
-.orange #navigation li a:hover {
-	background: url(../../images/color_schemes/orange/navigation/bullet_over.gif) no-repeat 0 50%;
+.orange #navigation li a span {
+	background-image: url(../../images/color_schemes/orange/navigation/bullet.gif);
+}
+
+.orange #navigation li.selected a span {
+	background-image: url(../../images/color_schemes/orange/navigation/bullet_selected.gif);
+	font-weight: bold;
+}
+
+.orange #navigation li a:hover span {
+	background-image: url(../../images/color_schemes/orange/navigation/bullet_over.gif);
 }
 
 /* ---------- Dock with Javascript ---------- */
 
 .js .orange .lfr-dock h2 {
-	background: url(../../images/color_schemes/orange/dock/menu_bar.png) no-repeat 100% -30px;
+	background-image: url(../../images/color_schemes/orange/dock/menu_bar.png);
 }
 
 .js .orange .lfr-dock h2 span {
-	background: url(../../images/color_schemes/orange/dock/menu_bar.png) no-repeat 0 0;
+	background-image: url(../../images/color_schemes/orange/dock/menu_bar.png);
 	color: #333;
 }
 
 .js .orange .lfr-dock.expanded .lfr-dock-list-container {
-	background: #ec7600;
-	border: 1px solid #ff9071;
-	border-top: none;
+	background-color: #ec7600;
+	border-color: #ff9071;
 }
 
 .js .orange .lfr-dock ul {
-	border-left: 20px solid #ffe4ca;
+	border-left-color: #ffe4ca;
 }
 
 .js .orange .lfr-dock li a {
-	border-top: 1px solid #ccc;
+	border-top-color: #ccc;
 }
 
 .js .orange .lfr-dock li a:hover {
 	background-color: #FFF5BA;
-	border-top: 1px solid #E0D79F;
+	border-top-color: #E0D79F;
 }
 
 .js .orange .lfr-dock li.my-places li ul li.current a, .js .orange .lfr-dock li.my-places li ul li.current a:hover {
@@ -116,11 +120,11 @@
 
 .js .orange .my-places .show-my-places {
 	background: #fff;
-	border: 1px solid #ccc;
+	border-color: #ccc;
 }
 
 .js .orange .my-places .show-my-places li .my-places-toggle {
-	border-bottom: 1px solid #999;
+	border-bottom-color: #999;
 	color: #333;
 }
 
@@ -129,36 +133,57 @@
 	border: none;
 }
 
+/* ---------- Add page ---------- */
+
+.js .orange	#navigation .enter-page {
+	background-image: url(../../images/color_schemes/orange/navigation/bg.gif);
+}
+
+.js .orange #add-page a span {
+	background-image: url(../../images/color_schemes/orange/navigation/add_page.png);
+}
+
+.js .orange #add-page a:hover span {
+	background-image: url(../../images/color_schemes/orange/navigation/add_page.png);
+}
+
+/*------ Drag/drop menu items ------*/
+
+.orange #navigation ul .sort-helper {
+	background-image: url(../../images/color_schemes/orange/portlet/placeholder_bg.gif);
+	border-color: #ff4f05;
+}
+
 /* This CSS sets the default styles for portlets. */
 
 /* ---------- Portlet wrapper and icons ---------- */
 
 .orange .portlet-topper {
-	background: url(../../images/color_schemes/orange/portlet/header_bg.gif) no-repeat 100% 0;
+	background-image: url(../../images/color_schemes/orange/portlet/header_bg.gif);
 }
 
 .orange .portlet-title {
-	background: url(../../images/color_schemes/orange/portlet/header_bg.gif) no-repeat 0 -50px;
+	background-image: url(../../images/color_schemes/orange/portlet/header_bg.gif);
 }
 
 .orange .portlet-content {
-	border: 1px solid #ff9733;
+	border-color: #ff9733;
 }
 
 /* ---------- Drag and drop ---------- */
 
 .orange .portlet-dragging {
-	background: #FFFFE3 !important;
-	border: 3px solid #666;
+	background-color: #FFFFE3 !important;
+	border-color: #666;
 }
 
 .orange .portlet-hover {
-	background: #ddd;
+	background-color: #ddd;
 }
 
 .orange .portlet-placeholder {
-	background: url(../../images/color_schemes/orange/portlet/placeholder_bg.gif);
-	border: 1px dashed #ff4f05;
+	background-image: url(../../images/color_schemes/orange/portlet/placeholder_bg.gif);
+	border-color: #ff4f05;
 }
 
 /* ---------- Standard styles defined in the JSR 168 ---------- */
@@ -185,27 +210,27 @@
 /* ---------- Help messages, general additional information, etc. ---------- */
 
 .orange .portlet-msg-info {
-	background: #FAFAFA;
-	border: 1px solid #53B2F8;
+	background-color: #FAFAFA;
+	border-color: #53B2F8;
 	color: #777;
 }
 
 /* ---------- Error messages ---------- */
 
 .orange .portlet-msg-error {
-	border: 1px solid #900;
+	border-color: #900;
 }
 
 /* ---------- Warning messages ---------- */
 
 .orange .portlet-msg-alert {
-	border: 1px solid #EFEFEF;
+	border-color: #EFEFEF;
 }
 
 /* ---------- Success messages ---------- */
 
 .orange .portlet-msg-success {
-	border: 1px solid #3F9305;
+	border-color: #3F9305;
 }
 
 /* ---------- Sections ---------- */
@@ -216,7 +241,7 @@
 }
 
 .orange .portlet-section-header th {
-	border-bottom: 1px solid #ccc;
+	border-bottom-color: #ccc;
 	color: #333;
 }
 
@@ -226,8 +251,8 @@
 }
 
 .orange .portlet-section-body td {
-	background: #DCDCDC;
-	border-top: 1px solid #BFBFBF;
+	background-color: #DCDCDC;
+	border-top-color: #BFBFBF;
 }
 
 /* ---------- Text in every other row in the cell ---------- */
@@ -236,14 +261,14 @@
 }
 
 .orange .portlet-section-alternate td {
-	background: #fff;
-	border-top: 1px solid #BFBFBF;
+	background-color: #fff;
+	border-top-color: #BFBFBF;
 }
 
 .orange .portlet-section-alternate.hover td, .orange .portlet-section-body.hover td {
-	background: #FFF5BA;
-	border-bottom: 1px solid #E0D79F;
-	border-top: 1px solid #E0D79F;
+	background-color: #FFF5BA;
+	border-bottom-color: #E0D79F;
+	border-top-color: #E0D79F;
 }
 
 /* ---------- Text in a selected cell range ---------- */
@@ -353,35 +378,35 @@
 /* This CSS sets the default styles for tabs. */
 
 .orange .tabs {
-	border-bottom: 1px solid #ffb871;
+	border-bottom-color: #ffb871;
 }
 
 .orange .tabs li {
-	background: url(../../images/color_schemes/orange/common/tabs_bg.gif) 100% -50px;
+	background-image: url(../../images/color_schemes/orange/common/tabs_bg.gif);
 }
 
 .orange .tabs li a, .orange .tabs li span {
-	background: url(../../images/color_schemes/orange/common/tabs_bg.gif) 0 -150px;
+	background-image: url(../../images/color_schemes/orange/common/tabs_bg.gif);
 }
 
 .orange .tabs li.current {
-	background: url(../../images/color_schemes/orange/common/tabs_bg.gif) 100% 0;
+	background-image: url(../../images/color_schemes/orange/common/tabs_bg.gif);
 }
 
 .orange .tabs li.current a, .orange .tabs li.current span {
-	background: url(../../images/color_schemes/orange/common/tabs_bg.gif) 0 -100px;
+	background-image: url(../../images/color_schemes/orange/common/tabs_bg.gif);
 	color: #333;
 }
 
 /* This CSS sets the default styles for forms. */
 
 .orange fieldset {
-	border: 1px solid #ccc;
+	border-color: #ccc;
 }
 
 .orange input[type="text"], .orange input[type="password"], .orange input[type="file"], .orange input[type="submit"], .orange input[type="button"], .orange input[type="reset"], .orange select, .orange textarea {
-	background: #fff url(../../images/color_schemes/orange/forms/input_shadow.gif) no-repeat;
-	border: 1px solid #aaa;
+	background-image: url(../../images/color_schemes/orange/forms/input_shadow.gif);
+	border-color: #aaa;
 	border-left-color: #777;
 	border-top-color: #777;
 }
@@ -393,7 +418,7 @@
 
 .orange input[type="submit"], .orange input[type="button"], .orange input[type="reset"] {
 	background: #FAFAFA url(../../images/color_schemes/orange/forms/button.gif) repeat-x;
-	border: 3px double #999;
+	border-color: #999;
 	border-left-color: #ccc;
 	border-top-color: #ccc;
 	color: #333;
@@ -402,15 +427,15 @@
 /* ---------- IE6 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
 
 .ie6 .orange input.text, .ie6 .orange input.password, .ie6 .orange input.submit, .ie6 .orange input.file, .ie6 .orange input.button {
-	background: #fff url(../../images/color_schemes/orange/forms/input_shadow.gif) no-repeat;
-	border: 1px solid #aaa;
+	background-image: url(../../images/color_schemes/orange/forms/input_shadow.gif);
+	border-color: #aaa;
 	border-left-color: #777;
 	border-top-color: #777;
 }
 
 .ie6 .orange input.submit, .ie6 .orange input.button {
 	background: #FAFAFA url(../../images/color_schemes/orange/forms/button.gif) repeat-x;
-	border: 3px double #999;
+	border-color: #999;
 	border-left-color: #ccc;
 	border-top-color: #ccc;
 	color: #333;
