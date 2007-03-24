@@ -30,11 +30,13 @@ RenderRequest renderRequest = (RenderRequest)request.getAttribute(WebKeys.JAVAX_
 RenderResponse renderResponse = (RenderResponse)request.getAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
 
 String namespace = StringPool.BLANK;
+PortletURL currentURLObj = null;
 String currentURL = StringPool.BLANK;
 
 if (renderRequest != null) {
 	namespace = renderResponse.getNamespace();
-	currentURL = PortletURLUtil.getCurrent(renderRequest, renderResponse).toString();
+	currentURLObj = PortletURLUtil.getCurrent(renderRequest, renderResponse);
+	currentURL = currentURLObj.toString();
 }
 %>
 
