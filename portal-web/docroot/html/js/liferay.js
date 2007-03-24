@@ -739,29 +739,17 @@ Liferay.Navigation = new Class({
 		var url = instance._updateURL;
 		
 		tabs = jQuery('li', instance._navBlock);
-		var reordered = [];
-		
-		tabs.each(
-			function(i) {
-				reordered[i] = this._LFR_layoutId;
-			}
-		);
-		
-		position = tabs.index(obj) + 1;
-		
-		instance.params.layoutIds = reordered;
 		
 			var params = instance.params;
 			
 			var layoutId = obj._LFR_layoutId;
 			
-			reordered = reordered.join(','); 
+			var position = tabs.index(obj);
 			
 			var data = {
 				cmd: 'reorder',
 				ownerId: params.ownerId,
 				parent: params.parent,
-				layoutIds: reordered,
 				position: position,
 				plid: layoutId
 				
