@@ -6,7 +6,7 @@
 	margin: 0 auto 0.5em;
 	min-height: 2.2em;
 	overflow: hidden;
-	padding-right:1em;
+	padding-right: 1em;
 	width: 93%;
 }
 
@@ -30,7 +30,6 @@
 	position: relative;
 }
 
-
 #navigation li a {
 	background: transparent url(../images/navigation/bg.gif) no-repeat 0 100%;
 	display: block;
@@ -39,7 +38,7 @@
 }
 
 #navigation li a:hover {
-	padding-top: 0.5em;	
+	padding-top: 0.5em;
 }
 
 #navigation li a span {
@@ -311,17 +310,17 @@
 
 /* ---------- Add/Sort/Remove page ---------- */
 
-.js	#navigation .enter-page {
+.js #navigation .enter-page {
 	background: transparent url(../images/navigation/bg.gif) no-repeat 0 100%;
 	padding: 0.5em 2em 0.7em 1.5em;
 }
 
-.js	#navigation .enter-page.editing {
+.js #navigation .enter-page.editing {
 	background: none;
 	padding: 0.5em 2em 0.7em 1.5em;
 }
 
-.js	#navigation .enter-page a {
+.js #navigation .enter-page a {
 	background: none;
 	display: inline;
 	font-weight: bold;
@@ -341,7 +340,7 @@
 
 .js #add-page a span {
 	background: url(../images/navigation/add_page.png) no-repeat 0 50%;
-	padding:5px 20px;
+	padding: 5px 20px;
 }
 
 .js #add-page a:hover span {

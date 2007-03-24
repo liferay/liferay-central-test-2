@@ -385,6 +385,7 @@
 				/>
 				<fileset
 					dir="docroot/html/themes"
+					excludes="**/classic/_diffs/css/custom.css"
 					includes="**/_diffs/css/*.css"
 				/>
 			</path>

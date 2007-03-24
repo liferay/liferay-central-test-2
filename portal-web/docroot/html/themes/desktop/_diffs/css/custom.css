@@ -1,48 +1,18 @@
-#*
-/**
- * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-*#
-
-/******************************************************************************/
-/* Liferay                                                                    */
-/******************************************************************************/
-
 /* Global */
 
 body.linux {
-	background: #cccccc url(../images/custom/linux_wall.jpg) scroll no-repeat bottom left;
+	background: #CCC url(../images/custom/linux_wall.jpg) scroll no-repeat bottom left;
 }
 
 body.aqua {
-	background: #0a59a5 url(../images/custom/aqua_wall.jpg) scroll no-repeat bottom left;
+	background: #0A59A5 url(../images/custom/aqua_wall.jpg) scroll no-repeat bottom left;
 }
 
 body.vista {
-	background: #000000 url(../images/custom/vista_wall.jpg) scroll no-repeat bottom left;
+	background: #000 url(../images/custom/vista_wall.jpg) scroll no-repeat bottom left;
 }
 
-/******************************************************************************/
-/* Liferay Layout CSS                                                         */
-/******************************************************************************/
+/******************************************************************************/  /* Liferay Layout CSS */  /******************************************************************************/
 
 #layout-desktop-icons-box {
 	bottom: 0;
@@ -52,9 +22,9 @@ body.vista {
 }
 
 #layout-desktop-icons-outer-decoration {
+	bottom: 0;
 	position: absolute;
 	width: 100%;
-	bottom: 0;
 }
 
 #layout-desktop-icons-inner-decoration {
@@ -66,22 +36,21 @@ body.vista {
 }
 
 #desktop-icon-title {
-	color: #d0d0d0;
+	color: #D0D0D0;
+	left: 0;
 	position: absolute;
 	top: 0;
-	left: 0;
 	white-space: nowrap;
 }
 
 body.linux #desktop-icon-title {
-	color: #000000;
+	color: #000;
 }
 
 .desktop-icon-transfer {
 	border: 1px solid #909090;
 	z-index: 100;
 }
-
 
 .js .lfr-dock, .lfr-dock {
 	top: 4px;
@@ -125,7 +94,7 @@ body.linux #desktop-icon-title {
 }
 
 .layout-tab a {
-	color: #ffffff;
+	color: #FFF;
 }
 
 #layout-tab-add, #layout-tab-add a {
@@ -134,12 +103,12 @@ body.linux #desktop-icon-title {
 
 #layout-tab-selected {
 	background: url(../images/custom/header-on.png) scroll repeat-x;
-	color: #ffffff;
+	color: #FFF;
 	font-weight: bold;
 }
 
 #layout-tab-selected a {
-	color: #ffffff;
+	color: #FFF;
 }
 
 .layout-tab-text {
@@ -151,7 +120,7 @@ body.linux #desktop-icon-title {
 }
 
 .layout-tab-text-editing {
-	padding: 0 0 0 0;
+	padding: 0;
 }
 
 .layout-tab-close {
@@ -202,24 +171,24 @@ body.linux #desktop-icon-title {
 }
 
 .portal-tool-tip {
-	background-color: #FFFFCC;
-	border: 1px solid #000000;
+	background-color: #FFC;
+	border: 1px solid #000;
 	padding: 2px;
 }
 
 .layout-column-arrow-up {
 	background-image: url(../images/arrows/arrow-up.png);
 	font-size: 0;
-	position: absolute;
 	height: 48px;
+	position: absolute;
 	width: 40px;
 }
 
 .layout-column-arrow-down {
 	background-image: url(../images/arrows/arrow-down.png);
 	font-size: 0;
-	position: absolute;
 	height: 48px;
+	position: absolute;
 	width: 40px;
 }
 
@@ -227,9 +196,7 @@ body.linux #desktop-icon-title {
 	background: url(../images/common/diagonal-lines.gif) scroll repeat;
 }
 
-/******************************************************************************/
-/* Portlet CSS                                                                */
-/******************************************************************************/
+/******************************************************************************/  /* Portlet CSS */  /******************************************************************************/
 
 /* Liferay Portlet */
 
@@ -248,8 +215,8 @@ body.linux #desktop-icon-title {
 
 .freeform .loading-animation {
 	position: absolute;
-	top: 0;
 	right: 0;
+	top: 0;
 }
 
 .portlet-header-bar {
@@ -257,13 +224,13 @@ body.linux #desktop-icon-title {
 	position: relative;
 }
 
-.portlet-shadow-tl, .portlet-shadow-tr,
-.portlet-shadow-bl, .portlet-shadow-br  {
+.portlet-shadow-tl, .portlet-shadow-tr,  .portlet-shadow-bl, .portlet-shadow-br {
 	left: 0;
 	position: absolute;
 	top: 0;
 	width: 100%;
 }
+
 .portlet-shadow-tl div {
 	background-image: url(../images/custom/box-tl.png);
 	float: left;
@@ -275,7 +242,7 @@ body.linux #desktop-icon-title {
 .portlet-shadow-tc {
 	background-image: url(../images/custom/box-tc.png);
 	height: 38px;
-	margin: 0 18px 0 18px;
+	margin: 0 18px;
 }
 
 .portlet-wrap-title {
@@ -295,15 +262,16 @@ body.linux #desktop-icon-title {
 	width: 10px;
 }
 
-.portlet-shadow-ml  {
+.portlet-shadow-ml {
 	background-image: url(../images/custom/box-ml.png);
 	width: 10px;
 }
 
-.portlet-shadow-mr  div {
+.portlet-shadow-mr div {
 	width: 10px;
 }
-.portlet-shadow-mr  {
+
+.portlet-shadow-mr {
 	background-image: url(../images/custom/box-mr.png);
 	width: 10px;
 }
@@ -312,6 +280,7 @@ body.linux #desktop-icon-title {
 	height: 21px;
 	position: relative;
 }
+
 .portlet-shadow-bl div {
 	background-image: url(../images/custom/box-bl.png);
 	float: left;
@@ -324,7 +293,7 @@ body.linux #desktop-icon-title {
 	background-image: url(../images/custom/box-bc.png);
 	font-size: 0;
 	height: 21px;
-	margin: 0 21px 0 21px;
+	margin: 0 21px;
 }
 
 .portlet-shadow-br div {
@@ -336,12 +305,18 @@ body.linux #desktop-icon-title {
 }
 
 .portlet-container {
-	background-color: #ffffff;
+	background-color: #FFF;
 	padding: 10px;
 }
 
-.portlet-borderless-container { position: relative; }
-.portlet-borderless-bar { text-align: left; font-size: 0.8em; }
+.portlet-borderless-container {
+	position: relative;
+}
+
+.portlet-borderless-bar {
+	font-size: 0.8em;
+	text-align: left;
+}
 
 .portlet-wrap-title {
 	height: 20px;
@@ -350,28 +325,27 @@ body.linux #desktop-icon-title {
 
 .portlet-title {
 	background-image: none;
-	color: #FFFFFF;
+	color: #FFF;
 	font-weight: bold;
+	left: 15px;
 	padding: 0 0 0 5px;
 	position: absolute;
 	top: 13px;
-	left: 15px;
 	white-space: nowrap;
 }
 
 .portlet-small-icon-bar {
 	padding-left: 2px;
 	position: absolute;
-	top: 11px;
 	right: 12px;
+	top: 11px;
 }
 
 .ie .portlet-small-icon-bar {
 	top: 13px;
 }
 
-.portlet-resize-container,
-.portlet-decorate-resize-container {
+.portlet-resize-container,  .portlet-decorate-resize-container {
 	position: relative;
 }
 
@@ -379,14 +353,14 @@ body.linux #desktop-icon-title {
 	background: url(../images/custom/box-resize.png) scroll no-repeat;
 	cursor: se-resize;
 	font-size: 0;
-	position: absolute;
-	top: -20px;
-	right: 7px;
 	height: 10px;
+	position: absolute;
+	right: 7px;
+	top: -20px;
 	width: 10px;
 }
 
 .portlet-resize-container .portlet-resize-handle {
+	right: 0;
 	top: -8px;
-	right: 0
 }
