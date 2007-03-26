@@ -212,7 +212,7 @@
 		jQuery(document).ready(
 			function() {
 				Liferay.Draggables.init();
-				
+
 				new Liferay.Navigation({
 					groupId: "<%= layout.getGroupId() %>",
 					layoutId: "<%= layout.getLayoutId() %>",

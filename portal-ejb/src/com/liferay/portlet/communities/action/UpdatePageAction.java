@@ -82,7 +82,6 @@ public class UpdatePageAction extends JSONAction {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-
 		JSONObject jsonObj = new JSONObject();
 
 		if (cmd.equals("add")) {
@@ -118,8 +117,8 @@ public class UpdatePageAction extends JSONAction {
 		boolean hidden = false;
 		String friendlyURL = StringPool.BLANK;
 		HashMap hash = new HashMap();
-		
-		if(pageTitle.length() > 0) {
+
+		if (pageTitle.length() > 0) {
 				name = pageTitle;
 		}
 
@@ -144,7 +143,7 @@ public class UpdatePageAction extends JSONAction {
 		}
 		hash.put("layoutURL", layoutURL);
 		hash.put("layoutId", layout.getLayoutId());
-		
+
 		return hash;
 	}
 
