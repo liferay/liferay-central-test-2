@@ -1504,16 +1504,16 @@ public class MailUtil {
 			throw new StoreException(afe);
 		}
 		catch (MessagingException me) {
-			Exception ne = me.getNextException();
+			Exception e = me.getNextException();
 
-			if (ne instanceof SocketException) {
+			if (e instanceof SocketException) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Failed to connect to a valid mail server.  " +
-							"Please make sure one is properly configured.");
+						"Failed to connect to a valid mail server. Please " +
+							"make sure one is properly configured.");
 				}
 
-				throw new MailServerException(ne);
+				throw new MailServerException(e);
 			}
 			else {
 				throw new StoreException(me);
