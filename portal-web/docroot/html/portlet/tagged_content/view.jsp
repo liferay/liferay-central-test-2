@@ -76,12 +76,13 @@ PortletURL portletURL = renderResponse.createRenderURL();
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
 long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), entries);
+long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
 
-int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, andOperator);
+int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, notEntryIds, andOperator);
 
 searchContainer.setTotal(total);
 
-List results = TagsAssetLocalServiceUtil.getAssets(entryIds, andOperator, searchContainer.getStart(), searchContainer.getEnd());
+List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 

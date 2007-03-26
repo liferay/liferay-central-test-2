@@ -106,19 +106,21 @@ public class TagsAssetLocalServiceUtil {
 		return tagsAssetLocalService.getAsset(className, classPK);
 	}
 
-	public static java.util.List getAssets(long[] entryIds,
+	public static java.util.List getAssets(long[] entryIds, long[] notEntryIds,
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 
-		return tagsAssetLocalService.getAssets(entryIds, andOperator, begin, end);
+		return tagsAssetLocalService.getAssets(entryIds, notEntryIds,
+			andOperator, begin, end);
 	}
 
-	public static int getAssetsCount(long[] entryIds, boolean andOperator)
-		throws com.liferay.portal.SystemException {
+	public static int getAssetsCount(long[] entryIds, long[] notEntryIds,
+		boolean andOperator) throws com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 
-		return tagsAssetLocalService.getAssetsCount(entryIds, andOperator);
+		return tagsAssetLocalService.getAssetsCount(entryIds, notEntryIds,
+			andOperator);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(

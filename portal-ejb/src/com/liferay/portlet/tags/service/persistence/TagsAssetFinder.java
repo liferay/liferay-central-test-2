@@ -60,7 +60,7 @@ public class TagsAssetFinder {
 	public static String FIND_BY_OR_ENTRY_IDS =
 		TagsAssetFinder.class.getName() + ".findByOrEntryIds";
 
-	public static int countByAndEntryIds(long[] entryIds)
+	public static int countByAndEntryIds(long[] entryIds, long[] notEntryIds)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -75,27 +75,37 @@ public class TagsAssetFinder {
 			StringMaker sm = new StringMaker();
 
 			sm.append("SELECT COUNT(DISTINCT assetId) AS COUNT_VALUE ");
-			sm.append("FROM TagsAssets_TagsEntries WHERE entryId = ?");
+			sm.append("FROM TagsAsset WHERE TagsAsset.assetId IN (");
 
-			if (entryIds.length > 1) {
-				sm.append(" AND assetId IN (");
-			}
-
-			for (int i = 1; i < entryIds.length; i++) {
+			for (int i = 0; i < entryIds.length; i++) {
 				sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
 
 				if ((i + 1) < entryIds.length) {
-					sm.append(" AND assetId IN (");
+					sm.append(" AND TagsAsset.assetId IN (");
 				}
 			}
 
-			for (int i = 1; i < entryIds.length; i++) {
+			for (int i = 0; i < entryIds.length; i++) {
 				if ((i + 1) < entryIds.length) {
 					sm.append(StringPool.CLOSE_PARENTHESIS);
 				}
 			}
 
-			if (entryIds.length > 1) {
+			sm.append(StringPool.CLOSE_PARENTHESIS);
+
+			if (notEntryIds.length > 0) {
+				sm.append(" AND (");
+
+				for (int i = 0; i < notEntryIds.length; i++) {
+					sm.append("TagsAsset.assetId NOT IN (");
+					sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+					sm.append(StringPool.CLOSE_PARENTHESIS);
+
+					if ((i + 1) < notEntryIds.length) {
+						sm.append(" OR ");
+					}
+				}
+
 				sm.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
@@ -110,6 +120,7 @@ public class TagsAssetFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			_setEntryIds(qPos, entryIds);
+			_setEntryIds(qPos, notEntryIds);
 
 			Iterator itr = q.list().iterator();
 
@@ -131,7 +142,7 @@ public class TagsAssetFinder {
 		}
 	}
 
-	public static int countByOrEntryIds(long[] entryIds)
+	public static int countByOrEntryIds(long[] entryIds, long[] notEntryIds)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -146,7 +157,32 @@ public class TagsAssetFinder {
 			String sql = CustomSQLUtil.get(COUNT_BY_OR_ENTRY_IDS);
 
 			sql = StringUtil.replace(
-				sql, "[$ENTRY_ID$]", _getEntryIds(entryIds));
+				sql, "[$ENTRY_ID$]", _getEntryIds(entryIds, StringPool.EQUAL));
+
+			if (notEntryIds.length > 0) {
+				StringMaker sm = new StringMaker();
+
+				sm.append(" AND (");
+
+				for (int i = 0; i < notEntryIds.length; i++) {
+					sm.append("TagsAsset.assetId NOT IN (");
+					sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+					sm.append(StringPool.CLOSE_PARENTHESIS);
+
+					if ((i + 1) < notEntryIds.length) {
+						sm.append(" AND ");
+					}
+				}
+
+				sm.append(StringPool.CLOSE_PARENTHESIS);
+
+				sql = StringUtil.replace(
+					sql, "[$NOT_ENTRY_ID$]", sm.toString());
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -157,6 +193,7 @@ public class TagsAssetFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			_setEntryIds(qPos, entryIds);
+			_setEntryIds(qPos, notEntryIds);
 
 			Iterator itr = q.list().iterator();
 
@@ -178,7 +215,8 @@ public class TagsAssetFinder {
 		}
 	}
 
-	public static List findByAndEntryIds(long[] entryIds, int begin, int end)
+	public static List findByAndEntryIds(
+			long[] entryIds, long[] notEntryIds, int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -193,13 +231,13 @@ public class TagsAssetFinder {
 			StringMaker sm = new StringMaker();
 
 			sm.append("SELECT DISTINCT {TagsAsset.*} ");
-			sm.append("FROM TagsAsset WHERE assetId IN (");
+			sm.append("FROM TagsAsset WHERE TagsAsset.assetId IN (");
 
 			for (int i = 0; i < entryIds.length; i++) {
 				sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
 
 				if ((i + 1) < entryIds.length) {
-					sm.append(" AND assetId IN (");
+					sm.append(" AND TagsAsset.assetId IN (");
 				}
 			}
 
@@ -209,7 +247,25 @@ public class TagsAssetFinder {
 				}
 			}
 
-			sm.append(") ORDER BY TagsAsset.modifiedDate DESC");
+			sm.append(StringPool.CLOSE_PARENTHESIS);
+
+			if (notEntryIds.length > 0) {
+				sm.append(" AND (");
+
+				for (int i = 0; i < notEntryIds.length; i++) {
+					sm.append("TagsAsset.assetId NOT IN (");
+					sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+					sm.append(StringPool.CLOSE_PARENTHESIS);
+
+					if ((i + 1) < notEntryIds.length) {
+						sm.append(" OR ");
+					}
+				}
+
+				sm.append(StringPool.CLOSE_PARENTHESIS);
+			}
+
+			sm.append(" ORDER BY TagsAsset.modifiedDate DESC");
 
 			String sql = sm.toString();
 
@@ -222,6 +278,7 @@ public class TagsAssetFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			_setEntryIds(qPos, entryIds);
+			_setEntryIds(qPos, notEntryIds);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
@@ -233,13 +290,15 @@ public class TagsAssetFinder {
 		}
 	}
 
-	public static List findByOrEntryIds(long[] entryIds)
+	public static List findByOrEntryIds(long[] entryIds, long[] notEntryIds)
 		throws SystemException {
 
-		return findByOrEntryIds(entryIds, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		return findByOrEntryIds(
+			entryIds, notEntryIds, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public static List findByOrEntryIds(long[] entryIds, int begin, int end)
+	public static List findByOrEntryIds(
+			long[] entryIds, long[] notEntryIds, int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -254,7 +313,32 @@ public class TagsAssetFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_OR_ENTRY_IDS);
 
 			sql = StringUtil.replace(
-				sql, "[$ENTRY_ID$]", _getEntryIds(entryIds));
+				sql, "[$ENTRY_ID$]", _getEntryIds(entryIds, StringPool.EQUAL));
+
+			if (notEntryIds.length > 0) {
+				StringMaker sm = new StringMaker();
+
+				sm.append(" AND (");
+
+				for (int i = 0; i < notEntryIds.length; i++) {
+					sm.append("TagsAsset.assetId NOT IN (");
+					sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+					sm.append(StringPool.CLOSE_PARENTHESIS);
+
+					if ((i + 1) < notEntryIds.length) {
+						sm.append(" AND ");
+					}
+				}
+
+				sm.append(StringPool.CLOSE_PARENTHESIS);
+
+				sql = StringUtil.replace(
+					sql, "[$NOT_ENTRY_ID$]", sm.toString());
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -265,6 +349,7 @@ public class TagsAssetFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			_setEntryIds(qPos, entryIds);
+			_setEntryIds(qPos, notEntryIds);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
@@ -276,11 +361,13 @@ public class TagsAssetFinder {
 		}
 	}
 
-	private static String _getEntryIds(long[] entryIds) {
+	private static String _getEntryIds(long[] entryIds, String operator) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < entryIds.length; i++) {
-			sm.append("TagsEntry.entryId = ? ");
+			sm.append("TagsEntry.entryId ");
+			sm.append(operator);
+			sm.append(" ? ");
 
 			if ((i + 1) != entryIds.length) {
 				sm.append("OR ");

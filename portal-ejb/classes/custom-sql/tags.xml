@@ -24,7 +24,7 @@
 				TagsEntry ON
 					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId)
 			WHERE
-				[$ENTRY_ID$]
+				([$ENTRY_ID$]) [$NOT_ENTRY_ID$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.findByAndEntryIds">
@@ -50,7 +50,7 @@
 				TagsEntry ON
 					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId)
 			WHERE
-				[$ENTRY_ID$]
+				([$ENTRY_ID$]) [$NOT_ENTRY_ID$]
 			ORDER BY
 				TagsAsset.modifiedDate DESC
 		]]>

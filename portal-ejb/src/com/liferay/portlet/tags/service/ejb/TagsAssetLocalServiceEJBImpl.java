@@ -98,16 +98,17 @@ public class TagsAssetLocalServiceEJBImpl implements TagsAssetLocalService,
 			classPK);
 	}
 
-	public java.util.List getAssets(long[] entryIds, boolean andOperator,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public java.util.List getAssets(long[] entryIds, long[] notEntryIds,
+		boolean andOperator, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return TagsAssetLocalServiceFactory.getTxImpl().getAssets(entryIds,
-			andOperator, begin, end);
+			notEntryIds, andOperator, begin, end);
 	}
 
-	public int getAssetsCount(long[] entryIds, boolean andOperator)
-		throws com.liferay.portal.SystemException {
+	public int getAssetsCount(long[] entryIds, long[] notEntryIds,
+		boolean andOperator) throws com.liferay.portal.SystemException {
 		return TagsAssetLocalServiceFactory.getTxImpl().getAssetsCount(entryIds,
-			andOperator);
+			notEntryIds, andOperator);
 	}
 
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(

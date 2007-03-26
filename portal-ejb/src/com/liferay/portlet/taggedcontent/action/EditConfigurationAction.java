@@ -61,6 +61,8 @@ public class EditConfigurationAction extends PortletAction {
 
 		String[] entries = StringUtil.split(
 			ParamUtil.getString(req, "entries"));
+		String[] notEntries = StringUtil.split(
+			ParamUtil.getString(req, "notEntries"));
 		boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
 
 		String portletResource = ParamUtil.getString(
@@ -71,6 +73,7 @@ public class EditConfigurationAction extends PortletAction {
 				req, portletResource, true, true);
 
 		prefs.setValues("entries", entries);
+		prefs.setValues("not-entries", notEntries);
 		prefs.setValue("and-operator", String.valueOf(andOperator));
 
 		prefs.store();

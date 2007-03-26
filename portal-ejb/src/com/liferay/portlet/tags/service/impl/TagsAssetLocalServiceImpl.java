@@ -84,25 +84,29 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	}
 
 	public List getAssets(
-			long[] entryIds, boolean andOperator, int begin, int end)
+			long[] entryIds, long[] notEntryIds, boolean andOperator, int begin,
+			int end)
 		throws SystemException {
 
 		if (andOperator) {
-			return TagsAssetFinder.findByAndEntryIds(entryIds, begin, end);
+			return TagsAssetFinder.findByAndEntryIds(
+				entryIds, notEntryIds, begin, end);
 		}
 		else {
-			return TagsAssetFinder.findByOrEntryIds(entryIds, begin, end);
+			return TagsAssetFinder.findByOrEntryIds(
+				entryIds, notEntryIds, begin, end);
 		}
 	}
 
-	public int getAssetsCount(long[] entryIds, boolean andOperator)
+	public int getAssetsCount(
+			long[] entryIds, long[] notEntryIds, boolean andOperator)
 		throws SystemException {
 
 		if (andOperator) {
-			return TagsAssetFinder.countByAndEntryIds(entryIds);
+			return TagsAssetFinder.countByAndEntryIds(entryIds, notEntryIds);
 		}
 		else {
-			return TagsAssetFinder.countByOrEntryIds(entryIds);
+			return TagsAssetFinder.countByOrEntryIds(entryIds, notEntryIds);
 		}
 	}
 

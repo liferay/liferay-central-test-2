@@ -27,13 +27,25 @@
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<%= LanguageUtil.get(pageContext, "content-with-the-following-tags-will-be-displayed") %>
+<%= LanguageUtil.get(pageContext, "displayed-content-must-contain-the-following-tags.") %>
 
 <br><br>
 
 <liferay-ui:tags-selector
 	hiddenInput="entries"
 	curTags="<%= StringUtil.merge(entries) %>"
+	focus="<%= true %>"
+/>
+
+<br>
+
+<%= LanguageUtil.get(pageContext, "displayed-content-must-not-contain-the-following-tags") %>
+
+<br><br>
+
+<liferay-ui:tags-selector
+	hiddenInput="notEntries"
+	curTags="<%= StringUtil.merge(notEntries) %>"
 	focus="<%= true %>"
 />
 
