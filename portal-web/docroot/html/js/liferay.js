@@ -69,7 +69,7 @@ Liferay.Animate.extendNativeFunctionObject({
 				processed = true;
 			}
 		}
-		
+
 		if (!processed) {
 			this.stop();
 		}
@@ -82,7 +82,7 @@ Liferay.Animate.extendNativeFunctionObject({
 			Liferay.Animate.timer = setInterval("Liferay.Animate.process()", 30);
 		}
 	},
-	
+
 	stop: function() {
 		clearInterval(Liferay.Animate.timer);
 		Liferay.Animate.timer = 0;
@@ -135,7 +135,7 @@ Liferay.Dock = {
 
 			myPlaces.find('.my-places-toggle, a[@href=javascript: ;]').click(
 				function() {
-					return false;					
+					return false;
 				}
 			);
 
@@ -157,24 +157,24 @@ Liferay.Dock = {
 		var communityList = communities.find('ul');
 		var currentCommunity = communityList.find('li.current');
 		var heading = communities.find('h3');
-		
+
 		heading.wrap('<div class="my-places-toggle"></div>');
 
 		heading = heading.parent();
-		
+
 		communityList.hide();
 		currentCommunity.parent().show();
-		
+
 		var currentCommunityHeading = currentCommunity.parent().prev();
 
 		currentCommunityHeading.addClass('hide');
-		
+
 		heading.click(
 			function() {
 				var heading = jQuery(this);
 
 				heading.toggleClass('hide');
-				heading.next('ul').slideToggle('fast');					
+				heading.next('ul').slideToggle('fast');
 			}
 		);
 	},
@@ -206,13 +206,13 @@ Liferay.Draggables = {
 		var drags = jQuery(instance._dragList);
 
 		if (drags.length > 0){
-			
+
 			jQuery('.portlet-title').css(
 				 {
-					cursor: 'move'	 
+					cursor: 'move'
 				 }
 			);
-			
+
 			if (themeDisplay.isFreeformLayout()) {
 				drags.find(".portlet-boundary").each(function() {
 					instance.addItem(this);
@@ -235,16 +235,16 @@ Liferay.Draggables = {
 		}
 
 		instance.drags = drags;
-		
+
 		return instance;
 	},
-	
+
 	addItem: function(el) {
 		var instance = this;
-			
+
 		var element = jQuery(el);
 		element.find('.portlet-title').css('cursor', 'move');
-			
+
 		if (themeDisplay.isFreeformLayout()) {
 			LayoutColumns.initPortlet(el);
 		}
@@ -278,7 +278,7 @@ Liferay.Draggables = {
 
 		movePortlet(themeDisplay.getPlid(), portletId, currentColumnId, newPosition, themeDisplay.getDoAsUserIdEncoded());
 	},
-	
+
 	_dragList: '#content-wrapper div[@id^=layout-column_]'
 };
 
@@ -375,7 +375,7 @@ Liferay.DynamicSelect = new Class({
 });
 
 Liferay.Navigation = new Class({
-							   
+
 	/* REQUIRED PARAMETERS
 	* groupId: (String) layout.getGroupId()
 	* isPrivate: (boolean) layout.isPrivateLayout()
@@ -389,59 +389,56 @@ Liferay.Navigation = new Class({
 	*/
 	initialize: function(params) {
 		var instance = this;
-		
+
 		params.navBlock = params.navBlock || '#navigation';
-		
+
 		instance.params = params;
-		
+
 		instance._navBlock = jQuery(instance.params.navBlock);
-		
+
 		instance._isModifiable = instance._navBlock.is('.modify-pages');
 		instance._isSortable = instance._navBlock.is('.sort-pages');
 		instance._useHandle = instance.params.useHandle || instance._navBlock.is('.use-handle') || instance._useHandle;
-		
+
 		instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
-		
+
 		instance._makeAddable();
-		
+
 		instance._makeDeletable();
-		
 		instance._makeSortable();
-		
 		instance._makeEditable();
-		
 	 },
-	 
-	 _addPage: function(event, obj) {
+
+	_addPage: function(event, obj) {
 		var instance = this;
 		var navItem = instance._navBlock;
 		var addBlock = jQuery('<li>' + instance._enterPage + '</li>');
-		
+
 		var blockInput = addBlock.find('input');
-							
+
 		addBlock.find('.cancel-page').click(instance._cancelPage);
-		
+
 		addBlock.find('.save-page').click(
 			function(event){
-				instance._savePage(event, this, instance);	
+				instance._savePage(event, this, instance);
 			}
 		);
-		
+
 		addBlock.find('.enter-page input').keyup(
 			function(event){
-				instance._savePage(event, this, instance);	
+				instance._savePage(event, this, instance);
 			}
 		);
-		
+
 		navItem.find('ul').append(addBlock);
 		blockInput[0].focus();
-				 
+
 	 },
-	 	 	 
-	 _cancelPage: function(event, obj, oldTitle) {
+	 	 
+	_cancelPage: function(event, obj, oldName) {
 		var navItem;
-		 
-		if (oldTitle){
+
+		if (oldName){
 			navItem = jQuery(obj).parents('li');
 			var enterPage = navItem.find('.enter-page');
 
@@ -450,139 +447,135 @@ Liferay.Navigation = new Class({
 		}
 		else {
 			navItem = jQuery(this).parents('li');
-			
+
 			navItem.remove();
 		}
 	 },
-	 
-	 _deleteButton: function(obj) {
+
+	_deleteButton: function(obj) {
 	 	var instance = this;
 		obj.append('<span class="delete-tab">X</span>');
-		
+
 		obj.find('.delete-tab').click(
 			function(event) {
 				instance._removePage(this, instance);
-				
+
 			}
 		);
-		
 	},
-	 
-	 _makeAddable: function() {
-		 
+
+	_makeAddable: function() {
 	 	var instance = this;
-		
+
 		if (instance._isModifiable) {
 			var navList = instance._navBlock.find('ul');
-			
-			instance._enterPage = '<div class="enter-page">' +
-									'<input type="text" name="new_page" value="" class="text" />' +
-									'<a href="javascript:;" class="cancel-page">X</a>' +
-									'<a href="javascript:;" class="save-page">Save</a>' +
-								  '</div>';
-			
-			navList.after('<div id="add-page">' +
-								'<a href="javascript:;">' +
-									'<span>Add page</span>' +
-								'</a>' +
-						   '</div>');
-			
+
+			instance._enterPage =
+				'<div class="enter-page">' +
+				'<input type="text" name="new_page" value="" class="text" />' +
+				'<a href="javascript:;" class="cancel-page">X</a>' +
+				'<a href="javascript:;" class="save-page">Save</a>' +
+				'</div>';
+
+			navList.after(
+				'<div id="add-page">' +
+				'<a href="javascript:;">' +
+				'<span>Add page</span>' +
+				'</a>' +
+				'</div>');
+
 			var addPage = navList.parent().find('#add-page a');
-			
+
 			addPage.click(
 				function(event){
-					instance._addPage(event, this);	
+					instance._addPage(event, this);
 				}
 			);
 		}
 	},
-	 	 	
+	 
 	_makeDeletable: function() {
 		var instance = this;
-		
+
 		if (instance._isModifiable) {
 			var navItems = instance._navBlock.find('li');
-			
-			instance._deleteButton(navItems);	
-		}
-		
 
+			instance._deleteButton(navItems);
+		}
 	},
-	 	
+
 	_makeEditable: function() {
 		var instance = this;
-		
+
 		if (instance._isModifiable) {
-			
 			var currentItem = instance._navBlock.find('li.selected');
-			
+
 			var currentLink = currentItem.find('a');
-			
 			var currentSpan = currentLink.find('span');
-			
+
 			currentSpan.css('cursor', 'text');
-			
+
 			currentLink.click(
 				function() {
-					return false;	
+					return false;
 				}
 			);
-			
+
 			currentSpan.click(
 				function() {
 					var span = jQuery(this);
 					var text = span.text();
+
 					span.parent().hide();
 					span.parent().after(instance._enterPage);
-					
+
 					var enterPage = span.parent().next();
-					
+
 					enterPage.find('input').val(text);
-					
+
 					var savePage = enterPage.find('.save-page');
 					var cancelPage = enterPage.find('.cancel-page');
-					
+
 					savePage.click(
 						function(event) {
-							instance._savePage(event, this, instance, text);	
+							instance._savePage(event, this, instance, text);
 						}
 					);
-					
+
 					enterPage.find('input').keyup(
 						function(event) {
-							instance._savePage(event, this, instance, text);	
+							instance._savePage(event, this, instance, text);
 						}
 					);
-					
+
 					cancelPage.click(
 						function(event) {
-							instance._cancelPage(event, this, text);	
+							instance._cancelPage(event, this, text);
 						}
 					);
-					
 				}
 			);
 		}
 	},
-	
-	 _makeSortable: function() {
+
+	_makeSortable: function() {
 	 	var instance = this;
-		
+
 		var navBlock = instance._navBlock;
 		var navList = navBlock.find('ul');
-		
+
 		if (instance._isSortable) {
 			var float = navList.find('> li').css('float');
-			
+
 			var items = navList.find('li');
 			var anchors = items.find('a');
-			
+
 			items.each(
 				function(i) {
 					this._LFR_layoutId = instance.params.layoutIds[i];
 				}
 			);
-			
+
 			if (instance._useHandle) {
 				items.append('<span class="sort-handle">+</span>');
 			}
@@ -590,9 +583,9 @@ Liferay.Navigation = new Class({
 				anchors.css('cursor', 'move');
 				anchors.find('span').css('cursor', 'pointer');
 			}
-			
+
 			items.addClass('sortable-item');
-			
+
 			instance.sortable = navList.Sortable(
 				{
 					accept: 'sortable-item',
@@ -605,19 +598,19 @@ Liferay.Navigation = new Class({
 					floats:	(float == 'left' || float == 'right'),
 					tolerance: 'pointer',
 					onStop: function() {
-						instance._saveSortables(this);	
+						instance._saveSortables(this);
 					}
 				}
 			);
 		}
 	},
-		 
-	 _removePage: function(obj, instance) {
+
+	_removePage: function(obj, instance) {
 		var tab = jQuery(obj).parents('li');
 		var tabText = tab.find('a span').html();
 		var params = instance.params;
 		var url = instance._updateURL;
-		
+
 		var confirmRemove = confirm('Are you sure you want to remove "' + tabText + '"?');
 
 		if (confirmRemove) {
@@ -626,77 +619,82 @@ Liferay.Navigation = new Class({
 				ownerId: params.ownerId,
 				layoutId: tab[0]._LFR_layoutId
 			};
-			
+
 			jQuery.ajax(
 				{
 					data: data,
 					success: function() {
-						tab.remove();	
+						tab.remove();
 					},
 					url: url
 				}
 			);
 		}
 	},
-	
-	 _savePage: function(event, obj, instance, oldTitle) {
-		
+
+	_savePage: function(event, obj, instance, oldName) {
 		if (event.type == 'keyup' && event.keyCode !== 13) {
 			return;
 		}
-		
-			var newNavItem = jQuery(obj).parents('li');
-			var params = instance.params;
-			var url = instance._updateURL;
-			var data, onSuccess;
-					
-			var title = newNavItem.find('input').val();
-			
-			var enterPage = newNavItem.find('.enter-page');
-		
-		if (oldTitle) {	
-		// Editing an existing page
-		
-			if (title !== oldTitle) {
-				
+
+		var newNavItem = jQuery(obj).parents('li');
+		var params = instance.params;
+		var url = instance._updateURL;
+		var data, onSuccess;
+
+		var name = newNavItem.find('input').val();
+
+		var enterPage = newNavItem.find('.enter-page');
+
+		if (oldName) {
+
+			// Updating an existing page
+
+			if (name !== oldName) {
+
 				data = {
-					cmd: 'title',
-					title: title,
+					cmd: 'name',
+					name: name,
 					ownerId: params.ownerId,
 					languageId: themeDisplay.getLanguageId(),
 					layoutId: params.layoutId
 				};
-				
+
 				onSuccess = function(data) {
 					data = $J(data);
+
 					var currentTab = enterPage.prev();
 					var currentSpan = currentTab.find('span');
-					
-					currentSpan.text(title);
+
+					currentSpan.text(name);
 					currentTab.show();
-					
+
 					enterPage.remove();
 				}
 			}
-			else { 
-			// The new title is the same as the old one
+			else {
+
+				// The new name is the same as the old one
+
 				var currentTab = enterPage.prev();
-				
+
 				currentTab.show();
 				enterPage.remove();
+
 				return false;
 			}
-		} 
-		else { 
-		// Adding a new page
-			
-			if (title == '') {
-				title = 'New Page';
+		}
+		else {
+
+			// Adding a new page
+
+			if (name == '') {
+				name = 'New Page';
 			}
-			
+
 			data = {
 				cmd: 'add',
-				title: title,
+				name: name,
 				groupId: params.groupId,
 				private: params.isPrivate,
 				parent: params.parent,
@@ -706,24 +704,24 @@ Liferay.Navigation = new Class({
 
 			onSuccess = function(data) {
 				data = $J(data);
-				
-				var newTab = jQuery('<a href="' + data.url + '"><span>' + title + '</span></a>');
-				
+
+				var newTab = jQuery('<a href="' + data.url + '"><span>' + name + '</span></a>');
+
 				if (instance._useHandle) {
 					enterPage.before('<span class="sort-handle">+</span>');
 				} else {
 					newTab.css('cursor', 'move');
 				}
-									
+
 				newNavItem[0]._LFR_layoutId = data.layoutId;
-									
+
 				enterPage.before(newTab);
 				enterPage.remove();
 				instance.sortable.SortableAddItem(newNavItem[0]);
-				instance._deleteButton(newNavItem);	
+				instance._deleteButton(newNavItem);
 			}
 		}
-		
+
 		jQuery.ajax(
 			{
 				data: data,
@@ -732,41 +730,41 @@ Liferay.Navigation = new Class({
 			}
 		);
 	 },
-	
-	 _saveSortables: function(obj) {
+
+	_saveSortables: function(obj) {
 	 	var instance = this;
-		
+
 		var url = instance._updateURL;
-		
+
 		tabs = jQuery('li', instance._navBlock);
-		
-			var params = instance.params;
-			
-			var layoutId = obj._LFR_layoutId;
-			
-			var position = tabs.index(obj);
-			
-			var data = {
-				cmd: 'reorder',
-				ownerId: params.ownerId,
-				parent: params.parent,
-				position: position,
-				plid: layoutId
-				
+
+		var params = instance.params;
+
+		var layoutId = obj._LFR_layoutId;
+
+		var position = tabs.index(obj);
+
+		var data = {
+			cmd: 'reorder',
+			ownerId: params.ownerId,
+			parent: params.parent,
+			position: position,
+			plid: layoutId
+		}
+
+		jQuery.ajax(
+			{
+				data: data,
+				url: url
 			}
-			jQuery.ajax(
-				{
-					data: data,
-					url: url
-				}
-			);	
+		);
 	},
-	 
-	 _enterPage: '',
-	 _isSortable: false,
-	 _isModifiable: false,
-	 _updateURL: '',
-	 _useHandle: false
+
+	_enterPage: '',
+	_isSortable: false,
+	_isModifiable: false,
+	_updateURL: '',
+	_useHandle: false
 });
 
 Liferay.TagsSelector = new Class({
@@ -833,7 +831,7 @@ Liferay.TagsSelector = new Class({
 			instance._update(instance);
 		}
 	},
-	
+
 	deleteTag: function(instance, id) {
 		var params = instance.params;
 		var curTags = instance._curTags;
@@ -903,9 +901,9 @@ Liferay.Portlet = {
 	process: function(id) {
 		var status = this.list[id];
 		var count = 0;
-		
+
 		this.list[id] = 0;
-		
+
 		if (status == 1) {
 			this.processPortlet(id);
 			this.processAll(id);
@@ -926,7 +924,7 @@ Liferay.Portlet = {
 			this.processLast(id);
 		}
 	},
-	
+
 	processAll: function(id) {
 		for (var i = 0; i < this.fnAll.length; i++) {
 			this.fnAll[i](id, _$J("#p_p_id_" + id + "_"));
@@ -961,7 +959,7 @@ Liferay.Portlet = {
 			this.fn[arg1].push(arg2);
 		}
 	},
-	
+
 	remove: function(id) {
 		this.ajaxList[id] = 0;
 		this.list[id] = 1;
@@ -981,7 +979,7 @@ jQuery.fn.last = function(fn) {
 /**************************
  * Liferay Util Library
  **************************/
- 
+
 Liferay.Util = {
 	submitCountdown: 0,
 
@@ -1000,7 +998,7 @@ Liferay.Util = {
 	        	if (temp) {
 		            temp();
 	        	}
-	
+
 				func();
 	        }
 	    }
@@ -1130,7 +1128,7 @@ Liferay.Util = {
 			var entry = document.createElement("input");
 			entry.name = name;
 		}
-	
+
 		return entry;
 	},
 
@@ -1733,10 +1731,10 @@ var Viewport = {
 			x = document.body.clientWidth;
 			y = document.body.clientHeight;
 		}
-		
+
 		return (new Coordinate(x,y));
 	},
-	
+
 	scroll: function() {
 		var x,y;
 		if (self.pageYOffset) {
@@ -1754,10 +1752,10 @@ var Viewport = {
 			x = document.body.scrollLeft;
 			y = document.body.scrollTop;
 		}
-		
+
 		return (new Coordinate(x,y));
 	},
-	
+
 	page: function() {
 		var x,y;
 		var test1 = document.body.scrollHeight;

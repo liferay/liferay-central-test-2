@@ -85,10 +85,10 @@ public class UpdatePageAction extends JSONAction {
 		JSONObject jsonObj = new JSONObject();
 
 		if (cmd.equals("add")) {
-			HashMap addPageObject = addPage(req);
+			String[] array = addPage(req);
 
-			jsonObj.put("url", addPageObject.get("layoutURL"));
-			jsonObj.put("layoutId", addPageObject.get("layoutId"));
+			jsonObj.put("layoutId", array[0]);
+			jsonObj.put("url", array[1]);
 		}
 		else if (cmd.equals("delete")) {
 			deletePage(req);
@@ -103,24 +103,18 @@ public class UpdatePageAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	protected HashMap addPage(HttpServletRequest req) throws Exception {
+	protected String[] addPage(HttpServletRequest req) throws Exception {
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "private");
 		String parentLayoutId = ParamUtil.getString(req, "parent");
 		String mainPath = ParamUtil.getString(req, "mainPath");
 		String doAsUserId = ParamUtil.getString(req, "doAsUserId");
-		String pageTitle = ParamUtil.getString(req, "title");
 
-		String name = "New Page";
+		String name = ParamUtil.getString(req, "name", "New Page");
 		String title = StringPool.BLANK;
 		String type = LayoutImpl.TYPE_PORTLET;
 		boolean hidden = false;
 		String friendlyURL = StringPool.BLANK;
-		HashMap hash = new HashMap();
-
-		if (pageTitle.length() > 0) {
-				name = pageTitle;
-		}
 
 		Layout layout = LayoutServiceUtil.addLayout(
 			groupId, privateLayout, parentLayoutId, name, title, type, hidden,
@@ -141,10 +135,8 @@ public class UpdatePageAction extends JSONAction {
 		if (Validator.isNotNull(doAsUserId)) {
 			layoutURL = Http.addParameter(layoutURL, "doAsUserId", doAsUserId);
 		}
-		hash.put("layoutURL", layoutURL);
-		hash.put("layoutId", layout.getLayoutId());
 
-		return hash;
+		return new String[] {layout.getLayoutId(), layoutURL};
 	}
 
 	protected void deletePage(HttpServletRequest req) throws Exception {
