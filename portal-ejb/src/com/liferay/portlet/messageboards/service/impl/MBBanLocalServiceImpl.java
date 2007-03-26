@@ -36,6 +36,7 @@ import com.liferay.portlet.messageboards.service.base.MBBanLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="MBBanLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -102,6 +103,16 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		MBBanUtil.removeByBanUserId(banUserId);
 	}
 
+	public int getBanCount(long groupId) throws SystemException {
+		return MBBanUtil.countByGroupId(groupId);
+	}
+
+	public List getBans(long groupId, int start, int end) 
+		throws SystemException {
+		
+		return MBBanUtil.findByGroupId(groupId, start, end);
+	}
+		
 	public boolean hasBan(long groupId, String banUserId)
 		throws SystemException {
 

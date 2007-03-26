@@ -91,9 +91,19 @@ public class MBBanLocalServiceEJBImpl implements MBBanLocalService, SessionBean 
 		MBBanLocalServiceFactory.getTxImpl().deleteBans(groupId);
 	}
 
-	public void deleteBans(java.lang.String userId)
+	public void deleteBans(java.lang.String banUserId)
 		throws com.liferay.portal.SystemException {
-		MBBanLocalServiceFactory.getTxImpl().deleteBans(userId);
+		MBBanLocalServiceFactory.getTxImpl().deleteBans(banUserId);
+	}
+
+	public int getBanCount(long groupId)
+		throws com.liferay.portal.SystemException {
+		return MBBanLocalServiceFactory.getTxImpl().getBanCount(groupId);
+	}
+
+	public java.util.List getBans(long groupId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return MBBanLocalServiceFactory.getTxImpl().getBans(groupId, start, end);
 	}
 
 	public boolean hasBan(long groupId, java.lang.String banUserId)

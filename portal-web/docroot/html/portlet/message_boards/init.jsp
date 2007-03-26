@@ -70,4 +70,6 @@ DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
+
+boolean hasBanUserPermission = PortletPermission.contains(permissionChecker, themeDisplay.getLayout().getPlid(), ActionKeys.BAN_USER);
 %>

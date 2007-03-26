@@ -96,10 +96,24 @@ public class MBBanLocalServiceUtil {
 		mbBanLocalService.deleteBans(groupId);
 	}
 
-	public static void deleteBans(java.lang.String userId)
+	public static void deleteBans(java.lang.String banUserId)
 		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-		mbBanLocalService.deleteBans(userId);
+		mbBanLocalService.deleteBans(banUserId);
+	}
+
+	public static int getBanCount(long groupId)
+		throws com.liferay.portal.SystemException {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getBanCount(groupId);
+	}
+
+	public static java.util.List getBans(long groupId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getBans(groupId, start, end);
 	}
 
 	public static boolean hasBan(long groupId, java.lang.String banUserId)

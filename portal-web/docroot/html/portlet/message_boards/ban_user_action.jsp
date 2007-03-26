@@ -22,34 +22,21 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
-String image = (String)request.getAttribute("liferay-ui:icon:image");
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-String message = (String)request.getAttribute("liferay-ui:icon:message");
-
-if (message == null) {
-	message = StringUtil.replace(image, StringPool.UNDERLINE, StringPool.DASH);
-}
-
-String src = (String)request.getAttribute("liferay-ui:icon:src");
-
-if (Validator.isNull(src)) {
-	src = themeDisplay.getPathThemeImages() + "/common/" + image + ".png";
-}
-
-String url = (String)request.getAttribute("liferay-ui:icon:url");
-
-String target = (String)request.getAttribute("liferay-ui:icon:target");
-boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:toolTip"));
-
-String details = null;
-
-if (toolTip) {
-	details = "onmousemove=\"ToolTip.show(event, this, '" + UnicodeLanguageUtil.get(pageContext, message) + "')\"";
-}
-else {
-	details = "title=\"" + LanguageUtil.get(pageContext, message) + "\"";
-}
+MBBan ban = (MBBan)row.getObject();
 %>
+
+<c:if test="<%= hasBanUserPermission %>">
+	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
+		<portlet:param name="struts_action" value="/message_boards/ban_user" />
+		<portlet:param name="<%= Constants.CMD %>" value="unban" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="banUserId" value="<%= ban.getBanUserId() %>" />
+	</portlet:actionURL>
+
+	<liferay-ui:icon src="<%= themeDisplay.getPathThemeImages() + "/message_boards/unban_user.png" %>" url="<%= unbanUserURL %>" message="unban-this-user" />
+</c:if>

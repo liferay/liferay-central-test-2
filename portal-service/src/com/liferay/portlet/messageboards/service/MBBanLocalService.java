@@ -74,7 +74,13 @@ public interface MBBanLocalService {
 	public void deleteBans(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteBans(java.lang.String userId)
+	public void deleteBans(java.lang.String banUserId)
+		throws com.liferay.portal.SystemException;
+
+	public int getBanCount(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List getBans(long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasBan(long groupId, java.lang.String banUserId)

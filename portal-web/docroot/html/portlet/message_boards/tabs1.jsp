@@ -35,6 +35,10 @@ String tabs1Names = "categories,recent-posts,statistics";
 
 if (themeDisplay.isSignedIn()) {
 	tabs1Names = "categories,my-posts,recent-posts,statistics";
+	
+	if (hasBanUserPermission) {
+		tabs1Names += ",banned-users";
+	}
 }
 
 String url0HREF = tabs1URL.toString();
