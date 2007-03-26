@@ -38,7 +38,7 @@
 }
 
 #navigation li a:hover {
-	padding-top: 0.5em;
+	padding-bottom: 1em;
 }
 
 #navigation li a span {
@@ -55,6 +55,10 @@
 	background: url(../images/navigation/bullet_selected.gif) no-repeat 0 50%;
 	font-size: 1.3em;
 	font-weight: bold;
+}
+
+#navigation li.selected a:hover {
+	padding-bottom: 0.5em;
 }
 
 #navigation li a:hover span {
