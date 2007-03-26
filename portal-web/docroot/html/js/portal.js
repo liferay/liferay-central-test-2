@@ -1245,7 +1245,7 @@ var ToolTip = {
 	opacity: 100,
 
 	show: function(event, obj, text) {
-		mousePos.update(event);
+		var position = jQuery(obj).offset();
 		var target = obj;
 		var tip = ToolTip.current;
 
@@ -1263,8 +1263,8 @@ var ToolTip = {
 		tip.innerHTML = text;
 		tip.style.display = "";
 
-		tip.style.top = (mousePos.y - 15) + "px";
-		tip.style.left = (mousePos.x + 15) + "px";
+		tip.style.top = (position.top - 15) + "px";
+		tip.style.left = (position.left + 20) + "px";
 	},
 
 	hide: function(event) {

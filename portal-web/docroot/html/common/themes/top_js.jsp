@@ -76,6 +76,7 @@
 		<script src="<%= themeDisplay.getPathJavaScript() %>/cookie.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/interface.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/j2browse.js" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/dimensions.js" type="text/javascript"></script>
 
 		<script src="<%= themeDisplay.getPathJavaScript() %>/class.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/sniffer.js" type="text/javascript"></script>
