@@ -376,21 +376,12 @@ Liferay.DynamicSelect = new Class({
 
 Liferay.Navigation = new Class({
 
-	/* REQUIRED PARAMETERS
-	* groupId: (String) layout.getGroupId()
-	* isPrivate: (boolean) layout.isPrivateLayout()
-	* layoutId: (String) layout.getLayoutId()
-	* layoutIds: (Array) List of displayable layout IDs
-	* ownerId: (String) Layout.getOwnerId(plid)
-	* parent: (String) layout.getParentLayoutId()
-	OPTIONAL PARAMETERS
-	* navBlock: (String) jQuery selector for the navigation block to use
-	* useHandle: (Boolean) Use a handle for dragging
+	/*
+	params.layoutIds: an array of displayable layout ids
+	params.navBlock: the selector for the navigation block
 	*/
 	initialize: function(params) {
 		var instance = this;
-
-		params.navBlock = params.navBlock || '#navigation';
 
 		instance.params = params;
 
@@ -398,19 +389,19 @@ Liferay.Navigation = new Class({
 
 		instance._isModifiable = instance._navBlock.is('.modify-pages');
 		instance._isSortable = instance._navBlock.is('.sort-pages');
-		instance._useHandle = instance.params.useHandle || instance._navBlock.is('.use-handle') || instance._useHandle;
+		instance._isUseHandle = instance._navBlock.is('.use-handle');
 
 		instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
 
 		instance._makeAddable();
-
 		instance._makeDeletable();
 		instance._makeSortable();
 		instance._makeEditable();
-	 },
+	},
 
 	_addPage: function(event, obj) {
 		var instance = this;
+
 		var navItem = instance._navBlock;
 		var addBlock = jQuery('<li>' + instance._enterPage + '</li>');
 
@@ -431,15 +422,16 @@ Liferay.Navigation = new Class({
 		);
 
 		navItem.find('ul').append(addBlock);
-		blockInput[0].focus();
 
-	 },
-	 	 
+		blockInput[0].focus();
+	},
+		
 	_cancelPage: function(event, obj, oldName) {
-		var navItem;
+		var navItem = null;
 
 		if (oldName){
 			navItem = jQuery(obj).parents('li');
+
 			var enterPage = navItem.find('.enter-page');
 
 			enterPage.prev().show();
@@ -450,10 +442,11 @@ Liferay.Navigation = new Class({
 
 			navItem.remove();
 		}
-	 },
+	},
 
 	_deleteButton: function(obj) {
-	 	var instance = this;
+		var instance = this;
+
 		obj.append('<span class="delete-tab">X</span>');
 
 		obj.find('.delete-tab').click(
@@ -465,7 +458,7 @@ Liferay.Navigation = new Class({
 	},
 
 	_makeAddable: function() {
-	 	var instance = this;
+		var instance = this;
 
 		if (instance._isModifiable) {
 			var navList = instance._navBlock.find('ul');
@@ -493,7 +486,7 @@ Liferay.Navigation = new Class({
 			);
 		}
 	},
-	 
+	
 	_makeDeletable: function() {
 		var instance = this;
 
@@ -509,7 +502,6 @@ Liferay.Navigation = new Class({
 
 		if (instance._isModifiable) {
 			var currentItem = instance._navBlock.find('li.selected');
-
 			var currentLink = currentItem.find('a');
 			var currentSpan = currentLink.find('span');
 
@@ -533,24 +525,25 @@ Liferay.Navigation = new Class({
 
 					enterPage.find('input').val(text);
 
-					var savePage = enterPage.find('.save-page');
-					var cancelPage = enterPage.find('.cancel-page');
-
-					savePage.click(
-						function(event) {
-							instance._savePage(event, this, instance, text);
-						}
-					);
-
 					enterPage.find('input').keyup(
 						function(event) {
 							instance._savePage(event, this, instance, text);
 						}
 					);
 
+					var cancelPage = enterPage.find('.cancel-page');
+
 					cancelPage.click(
 						function(event) {
 							instance._cancelPage(event, this, text);
+						}
+					);
+
+					var savePage = enterPage.find('.save-page');
+
+					savePage.click(
+						function(event) {
+							instance._savePage(event, this, instance, text);
 						}
 					);
 				}
@@ -559,7 +552,7 @@ Liferay.Navigation = new Class({
 	},
 
 	_makeSortable: function() {
-	 	var instance = this;
+		var instance = this;
 
 		var navBlock = instance._navBlock;
 		var navList = navBlock.find('ul');
@@ -576,7 +569,7 @@ Liferay.Navigation = new Class({
 				}
 			);
 
-			if (instance._useHandle) {
+			if (instance._isUseHandle) {
 				items.append('<span class="sort-handle">+</span>');
 			}
 			else {
@@ -592,7 +585,7 @@ Liferay.Navigation = new Class({
 					helperclass: 'sort-helper',
 					activeclass: 'sortableactive',
 					hoverclass: 'sortablehover',
-					handle: (instance._useHandle ? '.sort-handle' : 'a'),
+					handle: (instance._isUseHandle ? '.sort-handle' : 'a'),
 					opacity: 0.8,
 					revert:	true,
 					floats:	(float == 'left' || float == 'right'),
@@ -608,16 +601,12 @@ Liferay.Navigation = new Class({
 	_removePage: function(obj, instance) {
 		var tab = jQuery(obj).parents('li');
 		var tabText = tab.find('a span').html();
-		var params = instance.params;
-		var url = instance._updateURL;
 
-		var confirmRemove = confirm('Are you sure you want to remove "' + tabText + '"?');
-
-		if (confirmRemove) {
+		if (confirm('Are you sure you want to remove "' + tabText + '"?')) {
 			var data = {
 				cmd: 'delete',
-				ownerId: params.ownerId,
-				layoutId: tab[0]._LFR_layoutId
+				layoutId: tab[0]._LFR_layoutId,
+				ownerId: themeDisplay.getOwnerId()
 			};
 
 			jQuery.ajax(
@@ -626,38 +615,36 @@ Liferay.Navigation = new Class({
 					success: function() {
 						tab.remove();
 					},
-					url: url
+					url: instance._updateURL
 				}
 			);
 		}
 	},
 
 	_savePage: function(event, obj, instance, oldName) {
-		if (event.type == 'keyup' && event.keyCode !== 13) {
+		if ((event.type == 'keyup') && (event.keyCode !== 13)) {
 			return;
 		}
 
+		var data = null;
+		var onSuccess = null;
+
 		var newNavItem = jQuery(obj).parents('li');
-		var params = instance.params;
-		var url = instance._updateURL;
-		var data, onSuccess;
-
 		var name = newNavItem.find('input').val();
-
 		var enterPage = newNavItem.find('.enter-page');
 
 		if (oldName) {
 
 			// Updating an existing page
 
-			if (name !== oldName) {
+			if (name != oldName) {
 
 				data = {
 					cmd: 'name',
+					layoutId: themeDisplay.getLayoutId(),
+					ownerId: themeDisplay.getOwnerId(),
 					name: name,
-					ownerId: params.ownerId,
-					languageId: themeDisplay.getLanguageId(),
-					layoutId: params.layoutId
+					languageId: themeDisplay.getLanguageId()
 				};
 
 				onSuccess = function(data) {
@@ -688,18 +675,14 @@ Liferay.Navigation = new Class({
 
 			// Adding a new page
 
-			if (name == '') {
-				name = 'New Page';
-			}
-
 			data = {
 				cmd: 'add',
-				name: name,
-				groupId: params.groupId,
-				private: params.isPrivate,
-				parent: params.parent,
 				mainPath: themeDisplay.getPathMain(),
-				doAsUserId: themeDisplay.getDoAsUserIdEncoded()
+				doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+				groupId: themeDisplay.getGroupId(),
+				privateLayout: themeDisplay.isPrivateLayout(),
+				parentLayoutId: themeDisplay.getParentLayoutId(),
+				name: name
 			};
 
 			onSuccess = function(data) {
@@ -707,7 +690,7 @@ Liferay.Navigation = new Class({
 
 				var newTab = jQuery('<a href="' + data.url + '"><span>' + name + '</span></a>');
 
-				if (instance._useHandle) {
+				if (instance._isUseHandle) {
 					enterPage.before('<span class="sort-handle">+</span>');
 				} else {
 					newTab.css('cursor', 'move');
@@ -726,45 +709,37 @@ Liferay.Navigation = new Class({
 			{
 				data: data,
 				success: onSuccess,
-				url: url
+				url: instance._updateURL
 			}
 		);
-	 },
+	},
 
 	_saveSortables: function(obj) {
-	 	var instance = this;
-
-		var url = instance._updateURL;
+		var instance = this;
 
 		tabs = jQuery('li', instance._navBlock);
 
-		var params = instance.params;
-
-		var layoutId = obj._LFR_layoutId;
-
-		var position = tabs.index(obj);
-
 		var data = {
-			cmd: 'reorder',
-			ownerId: params.ownerId,
-			parent: params.parent,
-			position: position,
-			plid: layoutId
+			cmd: 'priority',
+			layoutId: obj._LFR_layoutId,
+			ownerId: themeDisplay.getOwnerId(),
+			parentLayoutId: themeDisplay.getParentLayoutId(),
+			priority: tabs.index(obj)
 		}
 
 		jQuery.ajax(
 			{
 				data: data,
-				url: url
+				url: instance._updateURL
 			}
 		);
 	},
 
-	_enterPage: '',
 	_isSortable: false,
 	_isModifiable: false,
-	_updateURL: '',
-	_useHandle: false
+	_isUseHandle: false,
+	_enterPage: '',
+	_updateURL: ''
 });
 
 Liferay.TagsSelector = new Class({
@@ -988,20 +963,20 @@ Liferay.Util = {
 			type = "on" + type;
 		}
 
-	    var temp = obj[type];
+	   var temp = obj[type];
 
 		if (typeof obj[type] != "function") {
-	        obj[type] = func;
-	    }
+	       obj[type] = func;
+	   }
 		else {
-	        obj[type] = function() {
-	        	if (temp) {
-		            temp();
-	        	}
+	       obj[type] = function() {
+	       	if (temp) {
+		           temp();
+	       	}
 
 				func();
-	        }
-	    }
+	       }
+	   }
 	},
 
 	addInputType: function(el) {
@@ -1766,7 +1741,7 @@ var Viewport = {
 			y = document.body.scrollHeight;
 		}
 		else // Explorer Mac;
-		     //would also work in Explorer 6 Strict, Mozilla and Safari
+		    //would also work in Explorer 6 Strict, Mozilla and Safari
 		{
 			x = document.body.offsetWidth;
 			y = document.body.offsetHeight;

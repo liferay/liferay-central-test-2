@@ -221,6 +221,14 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 			ownerId, name, languageId);
 	}
 
+	public com.liferay.portal.model.Layout updatePriority(
+		java.lang.String layoutId, java.lang.String ownerId, int priority)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return LayoutLocalServiceFactory.getTxImpl().updatePriority(layoutId,
+			ownerId, priority);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

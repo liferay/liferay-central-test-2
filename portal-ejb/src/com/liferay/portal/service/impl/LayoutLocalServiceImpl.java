@@ -81,6 +81,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
+import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
@@ -103,6 +104,7 @@ import java.io.InputStream;
 import java.io.StringReader;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -1015,6 +1017,51 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setName(name, LocaleUtil.fromLanguageId(languageId));
 
 		LayoutUtil.update(layout);
+
+		return layout;
+	}
+
+	public Layout updatePriority(String layoutId, String ownerId, int priority)
+		throws PortalException, SystemException {
+
+		Layout layout = LayoutUtil.findByPrimaryKey(
+			new LayoutPK(layoutId, ownerId));
+
+		if (layout.getPriority() == priority) {
+			return layout;
+		}
+
+		boolean lessThan = false;
+
+		if (layout.getPriority() < priority) {
+			lessThan = true;
+		}
+
+		layout.setPriority(priority);
+
+		LayoutUtil.update(layout);
+
+		priority = 0;
+
+		List layouts = LayoutUtil.findByO_P(
+			ownerId, layout.getParentLayoutId());
+
+		Collections.sort(
+			layouts, new LayoutPriorityComparator(layout, lessThan));
+
+		Iterator itr = layouts.iterator();
+
+		while (itr.hasNext()) {
+			Layout curLayout = (Layout)itr.next();
+
+			curLayout.setPriority(priority++);
+
+			LayoutUtil.update(curLayout);
+
+			if (curLayout.equals(layout)) {
+				layout = curLayout;
+			}
+		}
 
 		return layout;
 	}

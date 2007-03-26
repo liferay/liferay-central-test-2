@@ -42,8 +42,6 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -93,22 +91,26 @@ public class UpdatePageAction extends JSONAction {
 		else if (cmd.equals("delete")) {
 			deletePage(req);
 		}
-		else if (cmd.equals("reorder")) {
+		else if (cmd.equals("display_order")) {
 			updateDisplayOrder(req);
 		}
-		else if (cmd.equals("title")) {
-			updateTitle(req);
+		else if (cmd.equals("name")) {
+			updateName(req);
+		}
+		else if (cmd.equals("priority")) {
+			updatePriority(req);
 		}
 
 		return jsonObj.toString();
 	}
 
 	protected String[] addPage(HttpServletRequest req) throws Exception {
-		long groupId = ParamUtil.getLong(req, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(req, "private");
-		String parentLayoutId = ParamUtil.getString(req, "parent");
 		String mainPath = ParamUtil.getString(req, "mainPath");
 		String doAsUserId = ParamUtil.getString(req, "doAsUserId");
+
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		String parentLayoutId = ParamUtil.getString(req, "parentLayoutId");
 
 		String name = ParamUtil.getString(req, "name", "New Page");
 		String title = StringPool.BLANK;
@@ -149,20 +151,28 @@ public class UpdatePageAction extends JSONAction {
 	protected void updateDisplayOrder(HttpServletRequest req) throws Exception {
 		String ownerId = ParamUtil.getString(req, "ownerId");
 
-		String parentLayoutId = ParamUtil.getString(req, "parent");
+		String parentLayoutId = ParamUtil.getString(req, "parentLayoutId");
 		String[] layoutIds = StringUtil.split(
 			ParamUtil.getString(req, "layoutIds"));
 
 		LayoutServiceUtil.setLayouts(ownerId, parentLayoutId, layoutIds);
 	}
 
-	protected void updateTitle(HttpServletRequest req) throws Exception {
-		String language = ParamUtil.getString(req, "language");
-		String ownerId = ParamUtil.getString(req, "ownerId");
+	protected void updateName(HttpServletRequest req) throws Exception {
 		String layoutId = ParamUtil.getString(req, "layoutId");
-		String title = ParamUtil.getString(req, "title");
+		String ownerId = ParamUtil.getString(req, "ownerId");
+		String name = ParamUtil.getString(req, "name");
+		String languageId = ParamUtil.getString(req, "languageId");
 
-		LayoutLocalServiceUtil.updateName(layoutId, ownerId, title, language);
+		LayoutLocalServiceUtil.updateName(layoutId, ownerId, name, languageId);
+	}
+
+	protected void updatePriority(HttpServletRequest req) throws Exception {
+		String layoutId = ParamUtil.getString(req, "layoutId");
+		String ownerId = ParamUtil.getString(req, "ownerId");
+		int priority = ParamUtil.getInteger(req, "priority");
+
+		LayoutLocalServiceUtil.updatePriority(layoutId, ownerId, priority);
 	}
 
 }

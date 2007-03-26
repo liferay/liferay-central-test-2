@@ -35,6 +35,28 @@
 
 			return "<%= Http.encodeURL(themeDisplay.getDoAsUserId()) %>";
 		},
+		getPlid : function() {
+			return "<%= themeDisplay.getPlid() %>";
+		},
+		getGroupId : function() {
+			return "<%= themeDisplay.getPortletGroupId() %>";
+		},
+
+		<c:if test="<%= layout != null %>">
+			getLayoutId : function() {
+				return "<%= layout.getLayoutId() %>";
+			},
+			getOwnerId : function() {
+				return "<%= layout.getOwnerId() %>";
+			},
+			isPrivateLayout : function() {
+				return "<%= layout.isPrivateLayout() %>";
+			},
+			getParentLayoutId : function() {
+				return "<%= layout.getParentLayoutId() %>";
+			},
+		</c:if>
+
 		getLanguageId : function() {
 			return "<%= LanguageUtil.getLanguageId(request) %>";
 		},
@@ -209,19 +231,17 @@
 
 	//TODO: Check to see if user has permissions
 
-	<c:if test="true">
+	<c:if test="<%= (layout != null) && true %>">
 		jQuery(document).ready(
 			function() {
 				Liferay.Draggables.init();
 
-				new Liferay.Navigation({
-					groupId: "<%= layout.getGroupId() %>",
-					layoutId: "<%= layout.getLayoutId() %>",
-					ownerId: "<%= LayoutImpl.getOwnerId(plid) %>",
-					isPrivate: <%= layout.isPrivateLayout() %>,
-					parent: "<%= layout.getParentLayoutId() %>",
-					layoutIds: [<%=ListUtil.toString(layouts, "layoutId")%>]
-				});
+				new Liferay.Navigation(
+					{
+						layoutIds: [<%= ListUtil.toString(layouts, "layoutId") %>],
+						navBlock: '#navigation'
+					}
+				);
 			}
 		);
 	</c:if>

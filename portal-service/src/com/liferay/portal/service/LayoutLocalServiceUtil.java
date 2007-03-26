@@ -244,4 +244,13 @@ public class LayoutLocalServiceUtil {
 
 		return layoutLocalService.updateName(layoutId, ownerId, name, languageId);
 	}
+
+	public static com.liferay.portal.model.Layout updatePriority(
+		java.lang.String layoutId, java.lang.String ownerId, int priority)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.updatePriority(layoutId, ownerId, priority);
+	}
 }
