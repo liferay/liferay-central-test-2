@@ -219,7 +219,7 @@
 					ownerId: "<%= LayoutImpl.getOwnerId(plid) %>",
 					isPrivate: <%= layout.isPrivateLayout() %>,
 					parent: "<%= layout.getParentLayoutId() %>",
-					layoutIds: [<%=ListUtil.toString(layouts, "layoutId")%>],
+					layoutIds: [<%=ListUtil.toString(layouts, "layoutId")%>]
 				});
 			}
 		);
