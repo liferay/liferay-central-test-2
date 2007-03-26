@@ -165,7 +165,7 @@ if (rowChecker != null) {
 
 		<tr class="<%= row.getClassName() %>" style="font-weight: <%= row.isBold() ? "bold" : "normal" %>;"
 			<c:if test="<%= searchContainer.isHover() %>">
-				onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';"
+				onmouseover="this.className = '<%= classHoverName %>';" onmouseout="this.className = '<%= className %>';"
 			</c:if>
 		>
 

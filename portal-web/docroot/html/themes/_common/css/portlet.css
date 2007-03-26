@@ -170,7 +170,7 @@
 	padding: 0.3em 1em;
 }
 
-.portlet-section-alternate.hover td, .portlet-section-body.hover td {
+.portlet-section-alternate-hover td, .portlet-section-body-hover td {
 	background: #FFF5BA;
 	border-bottom: 1px solid #E0D79F;
 	border-top: 1px solid #E0D79F;

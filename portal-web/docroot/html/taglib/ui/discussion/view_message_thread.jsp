@@ -41,7 +41,7 @@ if (treeWalker.isOdd()) {
 }
 %>
 
-<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+<tr class="<%= className %>" style="font-size: x-small;" onmouseover="this.className = '<%= classHoverName %>';" onmouseout="this.className = '<%= className %>';">
 	<td width="90%">
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
