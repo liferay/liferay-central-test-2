@@ -308,11 +308,16 @@
 		</attribute>
 		<attribute>
 			<name>image</name>
-			<required>true</required>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
 			<name>message</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>src</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

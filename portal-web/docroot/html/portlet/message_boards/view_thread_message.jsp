@@ -72,7 +72,7 @@
 							}
 							%>
 
-							<c:if test="<%= !user.getUserId().equals(user2.getUserId()) && hasBanUserPermission %>">
+							<c:if test="<%= !user.getUserId().equals(user2.getUserId()) && PortletPermission.contains(permissionChecker, themeDisplay.getPlid(), ActionKeys.BAN_USER) %>">
 								<hr>
 
 								<c:choose>

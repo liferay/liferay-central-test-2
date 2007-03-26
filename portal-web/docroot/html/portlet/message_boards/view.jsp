@@ -605,6 +605,7 @@ portletURL.setParameter("categoryId", categoryId);
 		</c:choose>
 	</c:when>
 	<c:when test='<%= tabs1.equals("banned-users") %>'>
+
 		<%
 		List headerNames = new ArrayList();
 
@@ -615,7 +616,7 @@ portletURL.setParameter("categoryId", categoryId);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = MBBanLocalServiceUtil.getBanCount(portletGroupId.longValue());
+		int total = MBBanLocalServiceUtil.getBansCount(portletGroupId.longValue());
 
 		searchContainer.setTotal(total);
 
@@ -629,30 +630,18 @@ portletURL.setParameter("categoryId", categoryId);
 			MBBan ban = (MBBan)results.get(i);
 
 			ResultRow row = new ResultRow(ban, Long.toString(ban.getPrimaryKey()), i);
-		
-			String fullName = null;
-			Date banDate = null;
-
-			try {
-				User user2 = UserLocalServiceUtil.getUserById(ban.getBanUserId());
-
-				fullName = user2.getFullName();
-				banDate = user2.getCreateDate();
-			}
-			catch (NoSuchUserException nsue) {
-			}
 
 			// Name
-			
-			row.addText(fullName);
+
+			row.addText(PortalUtil.getUserName(ban.getUserId(), ban.getUserName()));
 
 			// Ban Date
 
-			row.addText(dateFormatDateTime.format(banDate));
+			row.addText(dateFormatDateTime.format(ban.getCreateDate()));
 
 			// Unban Date
 
-			row.addText(dateFormatDateTime.format(banDate));
+			row.addText(dateFormatDateTime.format(ban.getCreateDate()));
 
 			// Action
 
@@ -663,6 +652,7 @@ portletURL.setParameter("categoryId", categoryId);
 			resultRows.add(row);
 		}
 		%>
+
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />

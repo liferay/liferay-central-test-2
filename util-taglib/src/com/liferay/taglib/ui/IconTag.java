@@ -55,12 +55,12 @@ public class IconTag extends IncludeTag {
 		_message = message;
 	}
 
-	public void setUrl(String url) {
-		_url = url;
-	}
-
 	public void setSrc(String src) {
 		_src = src;
+	}
+
+	public void setUrl(String url) {
+		_url = url;
 	}
 
 	public void setTarget(String target) {

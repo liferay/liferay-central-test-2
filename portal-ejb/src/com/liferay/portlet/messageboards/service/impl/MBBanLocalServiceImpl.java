@@ -103,16 +103,16 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		MBBanUtil.removeByBanUserId(banUserId);
 	}
 
-	public int getBanCount(long groupId) throws SystemException {
+	public List getBans(long groupId, int start, int end)
+		throws SystemException {
+
+		return MBBanUtil.findByGroupId(groupId, start, end);
+	}
+
+	public int getBansCount(long groupId) throws SystemException {
 		return MBBanUtil.countByGroupId(groupId);
 	}
 
-	public List getBans(long groupId, int start, int end) 
-		throws SystemException {
-		
-		return MBBanUtil.findByGroupId(groupId, start, end);
-	}
-		
 	public boolean hasBan(long groupId, String banUserId)
 		throws SystemException {
 

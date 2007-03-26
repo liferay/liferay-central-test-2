@@ -30,7 +30,7 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 MBBan ban = (MBBan)row.getObject();
 %>
 
-<c:if test="<%= hasBanUserPermission %>">
+<c:if test="<%= PortletPermission.contains(permissionChecker, themeDisplay.getPlid(), ActionKeys.BAN_USER) %>">
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
 		<portlet:param name="struts_action" value="/message_boards/ban_user" />
 		<portlet:param name="<%= Constants.CMD %>" value="unban" />
@@ -38,5 +38,9 @@ MBBan ban = (MBBan)row.getObject();
 		<portlet:param name="banUserId" value="<%= ban.getBanUserId() %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon src="<%= themeDisplay.getPathThemeImages() + "/message_boards/unban_user.png" %>" url="<%= unbanUserURL %>" message="unban-this-user" />
+	<liferay-ui:icon
+		image="../message_boards/unban_user"
+		message="unban-this-user"
+		url="<%= unbanUserURL %>"
+	/>
 </c:if>
