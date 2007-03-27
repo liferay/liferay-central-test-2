@@ -449,12 +449,26 @@ Liferay.Navigation = new Class({
 
 		obj.append('<span class="delete-tab">X</span>');
 
-		obj.find('.delete-tab').click(
+		var deleteTab = obj.find('.delete-tab');
+		
+		deleteTab.click(
 			function(event) {
 				instance._removePage(this, instance);
 
 			}
 		);
+		
+		deleteTab.hide();
+		
+		obj.hover(
+			function() {
+				jQuery(this).find('.delete-tab').fadeIn('fast');
+			}, 
+			function() {
+				jQuery(this).find('.delete-tab').fadeOut('fast');
+			}
+		);
+		
 	},
 
 	_makeAddable: function() {
@@ -466,7 +480,7 @@ Liferay.Navigation = new Class({
 			instance._enterPage =
 				'<div class="enter-page">' +
 				'<input type="text" name="new_page" value="" class="text" />' +
-				'<a href="javascript:;" class="cancel-page">X</a>' +
+				'<a href="javascript:;" class="cancel-page"></a>' +
 				'<a href="javascript:;" class="save-page">Save</a>' +
 				'</div>';
 
@@ -491,7 +505,7 @@ Liferay.Navigation = new Class({
 		var instance = this;
 
 		if (instance._isModifiable) {
-			var navItems = instance._navBlock.find('li');
+			var navItems = instance._navBlock.find('li').not('.selected');
 
 			instance._deleteButton(navItems);
 		}
@@ -522,30 +536,60 @@ Liferay.Navigation = new Class({
 					span.parent().after(instance._enterPage);
 
 					var enterPage = span.parent().next();
+					
+					var pageParents = enterPage.parents();
 
-					enterPage.find('input').val(text);
+					var enterPageInput = enterPage.find('input');
+					
+					var pageBlur = function(event) {
+							event.stopPropagation();
+							if(!jQuery(this).is('li')) {
+								cancelPage.trigger('click');
+							}
+							
+							return false;
+					};
+					
+					enterPageInput.val(text);
 
-					enterPage.find('input').keyup(
-						function(event) {
-							instance._savePage(event, this, instance, text);
-						}
-					);
-
-					var cancelPage = enterPage.find('.cancel-page');
-
-					cancelPage.click(
-						function(event) {
-							instance._cancelPage(event, this, text);
-						}
-					);
-
+					enterPageInput.trigger('select');
+					
 					var savePage = enterPage.find('.save-page');
 
 					savePage.click(
 						function(event) {
 							instance._savePage(event, this, instance, text);
+							pageParents.unbind('blur',pageBlur);
 						}
 					);
+					
+					var cancelPage = enterPage.find('.cancel-page');
+					
+					cancelPage.hide();
+
+					cancelPage.click(
+						function(event) {
+							instance._cancelPage(event, this, text);
+							pageParents.unbind('blur',pageBlur);
+						}
+					);
+					
+					enterPageInput.keyup(
+						function(event) {
+							if (event.keyCode == 13){
+								savePage.trigger('click');
+								pageParents.unbind('blur',pageBlur);
+							}
+							else if (event.keyCode == 27){
+								cancelPage.trigger('click');
+								pageParents.unbind('blur',pageBlur);
+							}
+						}
+					);
+					
+					pageParents.click(pageBlur);
+
+					
 				}
 			);
 		}
