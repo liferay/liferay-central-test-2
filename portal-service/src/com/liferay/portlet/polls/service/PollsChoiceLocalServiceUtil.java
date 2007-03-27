@@ -65,6 +65,15 @@ public class PollsChoiceLocalServiceUtil {
 		return pollsChoiceLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.polls.model.PollsChoice getChoice(
+		java.lang.String questionId, java.lang.String choiceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
+		return pollsChoiceLocalService.getChoice(questionId, choiceId);
+	}
+
 	public static java.util.List getChoices(java.lang.String questionId)
 		throws com.liferay.portal.SystemException {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();

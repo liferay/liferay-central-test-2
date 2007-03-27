@@ -57,6 +57,11 @@ public interface PollsChoiceLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.polls.model.PollsChoice getChoice(
+		java.lang.String questionId, java.lang.String choiceId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getChoices(java.lang.String questionId)
 		throws com.liferay.portal.SystemException;
 }

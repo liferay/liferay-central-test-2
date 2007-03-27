@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/polls_display/init.jsp" %>
 
 <%
+String redirect = StringPool.BLANK;
+
 PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUESTION);
 
 List choices = PollsChoiceLocalServiceUtil.getChoices(question.getQuestionId());

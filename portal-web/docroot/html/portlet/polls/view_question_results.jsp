@@ -113,23 +113,89 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 <br>
 
-<b><%= LanguageUtil.get(pageContext, "total-votes") %>:</b> <%= numberFormat.format(totalVotes) %>
+<div>
+	<b><%= LanguageUtil.get(pageContext, "total-votes") %>:</b> <%= numberFormat.format(totalVotes) %>
+</div>
 
 <c:if test="<%= portletName.equals(PortletKeys.POLLS) %>">
-	<br><br>
+	<br>
 
-	<b><%= LanguageUtil.get(pageContext, "charts") %>:</b>
-	<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=area', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "area") %></a>,
-	<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=horizontal_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "horizontal-bar") %></a>,
-	<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=line', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "line") %></a>,
-	<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=pie', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "pie") %></a>,
-	<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=vertical_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "vertical-bar") %></a>
+	<div>
+		<b><%= LanguageUtil.get(pageContext, "charts") %>:</b>
+		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=area', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "area") %></a>,
+		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=horizontal_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "horizontal-bar") %></a>,
+		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=line', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "line") %></a>,
+		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=pie', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "pie") %></a>,
+		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=vertical_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "vertical-bar") %></a>
+	</div>
+
+	<c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
+		<br>
+
+		<liferay-ui:tabs names="actual-votes" />
+
+		<%
+		PortletURL portletURL = renderResponse.createRenderURL();
+
+		portletURL.setWindowState(WindowState.MAXIMIZED);
+
+		portletURL.setParameter("struts_action", "/polls/view_question");
+		portletURL.setParameter("redirect", redirect);
+		portletURL.setParameter("questionId", question.getQuestionId());
+
+		List headerNames = new ArrayList();
+
+		headerNames.add("user");
+		headerNames.add("choice");
+		headerNames.add("vote-date");
+
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+
+		int total = PollsVoteLocalServiceUtil.getVotesCount(question.getQuestionId());
+
+		searchContainer.setTotal(total);
+
+		List results = PollsVoteLocalServiceUtil.getVotes(question.getQuestionId(), searchContainer.getStart(), searchContainer.getEnd());
+
+		searchContainer.setResults(results);
+
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			PollsVote vote = (PollsVote)results.get(i);
+
+			ResultRow row = new ResultRow(vote, vote.getPrimaryKey().toString(), i);
+
+			// User
+
+			row.addText(PortalUtil.getUserName(vote.getUserId(), vote.getUserId(), request));
+
+			// Choice
+
+			PollsChoice choice = vote.getChoice();
+
+			row.addText(choice.getChoiceId() + ". " + choice.getDescription());
+
+			// Vote date
+
+			row.addText(dateFormatDateTime.format(vote.getVoteDate()));
+
+			// Add result row
+
+			resultRows.add(row);
+		}
+		%>
+
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	</c:if>
 </c:if>
 
 <c:if test="<%= question.isExpired() %>">
-	<br><br>
+	<br>
 
-	<span style="font-size: xx-small;">
+	<div style="font-size: xx-small;">
 	<%= LanguageUtil.format(pageContext, "voting-is-disabled-because-this-poll-expired-on-x", dateFormatDateTime.format(question.getExpirationDate())) %>.
-	</span>
+	</div>
 </c:if>

@@ -36,6 +36,7 @@ import com.liferay.portlet.polls.service.persistence.PollsVotePK;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="PollsVoteLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -92,6 +93,18 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 		PollsVotePK pk = new PollsVotePK(questionId, userId);
 
 		return PollsVoteUtil.findByPrimaryKey(pk);
+	}
+
+	public List getVotes(String questionId, int begin, int end)
+		throws SystemException {
+
+		return PollsVoteUtil.findByQuestionId(questionId, begin, end);
+	}
+
+	public List getVotes(String questionId, String choiceId, int begin, int end)
+		throws SystemException {
+
+		return PollsVoteUtil.findByQ_C(questionId, choiceId,  begin, end);
 	}
 
 	public int getVotesCount(String questionId) throws SystemException {

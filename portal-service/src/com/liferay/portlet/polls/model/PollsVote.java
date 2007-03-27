@@ -48,4 +48,7 @@ package com.liferay.portlet.polls.model;
  *
  */
 public interface PollsVote extends PollsVoteModel {
+	public com.liferay.portlet.polls.model.PollsChoice getChoice()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

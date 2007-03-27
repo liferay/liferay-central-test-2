@@ -68,6 +68,13 @@ public interface PollsVoteLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getVotes(java.lang.String questionId, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List getVotes(java.lang.String questionId,
+		java.lang.String choiceId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
 	public int getVotesCount(java.lang.String questionId)
 		throws com.liferay.portal.SystemException;
 

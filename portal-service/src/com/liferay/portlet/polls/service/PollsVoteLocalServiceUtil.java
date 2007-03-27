@@ -84,6 +84,21 @@ public class PollsVoteLocalServiceUtil {
 		return pollsVoteLocalService.getVote(questionId, userId);
 	}
 
+	public static java.util.List getVotes(java.lang.String questionId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+
+		return pollsVoteLocalService.getVotes(questionId, begin, end);
+	}
+
+	public static java.util.List getVotes(java.lang.String questionId,
+		java.lang.String choiceId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+
+		return pollsVoteLocalService.getVotes(questionId, choiceId, begin, end);
+	}
+
 	public static int getVotesCount(java.lang.String questionId)
 		throws com.liferay.portal.SystemException {
 		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();

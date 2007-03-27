@@ -30,6 +30,7 @@
 <%@ page import="com.liferay.portlet.polls.QuestionExpiredException" %>
 <%@ page import="com.liferay.portlet.polls.model.PollsChoice" %>
 <%@ page import="com.liferay.portlet.polls.model.PollsQuestion" %>
+<%@ page import="com.liferay.portlet.polls.model.PollsVote" %>
 <%@ page import="com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil" %>

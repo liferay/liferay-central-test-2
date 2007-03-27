@@ -66,6 +66,14 @@ public class PollsChoiceLocalServiceEJBImpl implements PollsChoiceLocalService,
 			begin, end);
 	}
 
+	public com.liferay.portlet.polls.model.PollsChoice getChoice(
+		java.lang.String questionId, java.lang.String choiceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return PollsChoiceLocalServiceFactory.getTxImpl().getChoice(questionId,
+			choiceId);
+	}
+
 	public java.util.List getChoices(java.lang.String questionId)
 		throws com.liferay.portal.SystemException {
 		return PollsChoiceLocalServiceFactory.getTxImpl().getChoices(questionId);

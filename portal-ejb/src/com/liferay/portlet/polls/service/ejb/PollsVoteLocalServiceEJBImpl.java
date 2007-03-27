@@ -83,6 +83,19 @@ public class PollsVoteLocalServiceEJBImpl implements PollsVoteLocalService,
 			userId);
 	}
 
+	public java.util.List getVotes(java.lang.String questionId, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return PollsVoteLocalServiceFactory.getTxImpl().getVotes(questionId,
+			begin, end);
+	}
+
+	public java.util.List getVotes(java.lang.String questionId,
+		java.lang.String choiceId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return PollsVoteLocalServiceFactory.getTxImpl().getVotes(questionId,
+			choiceId, begin, end);
+	}
+
 	public int getVotesCount(java.lang.String questionId)
 		throws com.liferay.portal.SystemException {
 		return PollsVoteLocalServiceFactory.getTxImpl().getVotesCount(questionId);

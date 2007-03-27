@@ -96,12 +96,12 @@ boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 
 		<c:choose>
 			<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
-				<br><br>
+				<br>
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "back-to-vote") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="questionId" value="<%= question.getQuestionId() %>" /></portlet:renderURL>';">
 			</c:when>
 			<c:when test="<%= Validator.isNotNull(redirect) %>">
-				<br><br>
+				<br>
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "back") %>' onClick="self.location = '<%= redirect %>';">
 			</c:when>
