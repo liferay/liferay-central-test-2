@@ -43,16 +43,27 @@ import java.io.StringReader;
 public abstract class DBUtil {
 
 	public static final int DB_TYPE_DB2 = 1;
+
 	public static final int DB_TYPE_DERBY = 2;
+
 	public static final int DB_TYPE_FIREBIRD = 3;
+
 	public static final int DB_TYPE_INTERBASE = 4;
+
 	public static final int DB_TYPE_JDATASTORE = 5;
+
 	public static final int DB_TYPE_HYPERSONIC = 6;
+
 	public static final int DB_TYPE_MYSQL = 7;
+
 	public static final int DB_TYPE_ORACLE = 8;
+
 	public static final int DB_TYPE_POSTGRESQL = 9;
+
 	public static final int DB_TYPE_SAP = 10;
+
 	public static final int DB_TYPE_SQLSERVER = 11;
+
 	public static final int DB_TYPE_SYBASE = 12;
 
 	public static DBUtil getInstance(int dbType) {
@@ -106,9 +117,6 @@ public abstract class DBUtil {
 	public abstract String buildSQL(String template) throws IOException;
 
 	public void buildSQLFile(String fileName) throws IOException {
-
-		// Note: any modifications here are overridden in the OracleUtil
-
 		String template = buildTemplate(fileName);
 
 		template = buildSQL(template);
@@ -123,11 +131,45 @@ public abstract class DBUtil {
 			String databaseName, boolean minimal)
 		throws IOException;
 
-	protected abstract String[] getTemplate();
+	protected String[] buildColumnNameTokens(String line) {
+		String[] words = StringUtil.split(line, " ");
 
-	protected abstract String getServerName();
+		if (words.length == 7) {
+			words[5] = "not null;";
+		}
 
-	protected abstract String reword(String data) throws IOException;
+		String[] template = {
+			words[1], words[2], words[3], words[4], words[5]
+		};
+
+		return template;
+	}
+
+	protected String[] buildColumnTypeTokens(String line) {
+		String[] words = StringUtil.split(line, " ");
+
+		String nullable = "";
+
+		if (words.length == 6) {
+			nullable = "not null;";
+		}
+		else if (words.length == 5) {
+			nullable = words[4];
+		}
+		else if (words.length == 4) {
+			nullable = "not null;";
+
+			if (words[3].endsWith(";")) {
+				words[3] = words[3].substring(0, words[3].length() - 1);
+			}
+		}
+
+		String[] template = {
+			words[1], words[2], "", words[3], nullable
+		};
+
+		return template;
+	}
 
 	protected String buildTemplate(String fileName)
 		throws IOException {
@@ -156,7 +198,7 @@ public abstract class DBUtil {
 
 					if (includeFileName.endsWith(".vm")) {
 						try {
-							include = _evaluateVM(include);
+							include = evaluateVM(include);
 						}
 						catch (Exception e) {
 							e.printStackTrace();
@@ -188,46 +230,6 @@ public abstract class DBUtil {
 		return template;
 	}
 
-	protected static String[] buildColumnNameTokens(String line) {
-		String[] words = StringUtil.split(line, " ");
-
-		if (words.length == 7) {
-			words[5] = "not null;";
-		}
-
-		String[] template = {
-			words[1], words[2], words[3], words[4], words[5]
-		};
-
-		return template;
-	}
-
-	protected static String[] buildColumnTypeTokens(String line) {
-		String[] words = StringUtil.split(line, " ");
-
-		String nullable = "";
-
-		if (words.length == 6) {
-			nullable = "not null;";
-		}
-		else if (words.length == 5) {
-			nullable = words[4];
-		}
-		else if (words.length == 4) {
-			nullable = "not null;";
-
-			if (words[3].endsWith(";")) {
-				words[3] = words[3].substring(0, words[3].length() - 1);
-			}
-		}
-
-		String[] template = {
-			words[1], words[2], "", words[3], nullable
-		};
-
-		return template;
-	}
-
 	protected String convertTimestamp(String data) {
 		String s = null;
 
@@ -242,6 +244,32 @@ public abstract class DBUtil {
 		return s;
 	}
 
+	protected String evaluateVM(String template) throws Exception {
+		template = VelocityUtil.evaluate(template);
+
+		// Trim insert statements because it breaks MySQL Query Browser
+
+		BufferedReader br = new BufferedReader(new StringReader(template));
+
+		StringMaker sm = new StringMaker();
+
+		String line = null;
+
+		while ((line = br.readLine()) != null) {
+			line = line.trim();
+
+			sm.append(line);
+			sm.append("\n");
+		}
+
+		br.close();
+
+		template = sm.toString();
+		template = StringUtil.replace(template, "\n\n\n", "\n\n");
+
+		return template;
+	}
+
 	protected String getMinimalSuffix(boolean minimal) {
 		if (minimal) {
 			return "-minimal";
@@ -250,6 +278,10 @@ public abstract class DBUtil {
 			return StringPool.BLANK;
 		}
 	}
+
+	protected abstract String getServerName();
+
+	protected abstract String[] getTemplate();
 
 	protected String readSQL(String fileName, String comments, String eol)
 		throws IOException {
@@ -387,35 +419,11 @@ public abstract class DBUtil {
 		return content;
 	}
 
-	private String _evaluateVM(String template) throws Exception {
-		template = VelocityUtil.evaluate(template);
-
-		// Trim insert statements because it breaks MySQL Query Browser
-
-		BufferedReader br = new BufferedReader(new StringReader(template));
-
-		StringMaker sm = new StringMaker();
-
-		String line = null;
-
-		while ((line = br.readLine()) != null) {
-			line = line.trim();
-
-			sm.append(line);
-			sm.append("\n");
-		}
-
-		br.close();
-
-		template = sm.toString();
-		template = StringUtil.replace(template, "\n\n\n", "\n\n");
-
-		return template;
-	}
+	protected abstract String reword(String data) throws IOException;
 
 	protected static String ALTER_COLUMN_TYPE = "alter_column_type ";
 
-	protected  static String ALTER_COLUMN_NAME = "alter_column_name ";
+	protected static String ALTER_COLUMN_NAME = "alter_column_name ";
 
 	protected static String[] REWORD_TEMPLATE = {
 		"@table@", "@old-column@", "@new-column@", "@type@", "@nullable@"

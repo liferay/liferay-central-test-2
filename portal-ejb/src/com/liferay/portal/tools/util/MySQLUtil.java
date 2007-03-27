@@ -108,7 +108,8 @@ public class MySQLUtil extends DBUtil {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ change column @old-column@ @new-column@ @type@;",
+					"alter table @table@ change column @old-column@ " +
+						"@new-column@ @type@;",
 					REWORD_TEMPLATE, template);
 			}
 
@@ -121,10 +122,8 @@ public class MySQLUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	protected MySQLUtil() {
+	private MySQLUtil() {
 	}
-
-	private static MySQLUtil _instance = new MySQLUtil();
 
 	private static String[] _MYSQL = {
 		"##", "1", "0",
@@ -134,5 +133,7 @@ public class MySQLUtil extends DBUtil {
 		" longtext", " longtext", " varchar",
 		"  auto_increment", "commit"
 	};
+
+	private static MySQLUtil _instance = new MySQLUtil();
 
 }

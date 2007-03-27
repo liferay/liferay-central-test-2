@@ -113,7 +113,8 @@ public class SQLServerUtil extends DBUtil {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
-					"exec sp_rename '@table@.@old-column@', '@new-column@', 'column';",
+					"exec sp_rename '@table@.@old-column@', '@new-column@', " +
+						"'column';",
 					REWORD_TEMPLATE, template);
 			}
 
@@ -126,10 +127,8 @@ public class SQLServerUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	protected SQLServerUtil() {
+	private SQLServerUtil() {
 	}
-
-	private static SQLServerUtil _instance = new SQLServerUtil();
 
 	private static String[] _SQL_SERVER = {
 		"--", "1", "0",
@@ -139,5 +138,7 @@ public class SQLServerUtil extends DBUtil {
 		" varchar(1000)", " text", " varchar",
 		"  identity(1,1)", "go"
 	};
+
+	private static SQLServerUtil _instance = new SQLServerUtil();
 
 }

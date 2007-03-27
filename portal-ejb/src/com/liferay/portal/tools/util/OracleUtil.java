@@ -183,7 +183,8 @@ public class OracleUtil extends DBUtil {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ rename column @old-column@ to @new-column@;",
+					"alter table @table@ rename column @old-column@ to " +
+						"@new-column@;",
 					REWORD_TEMPLATE, template);
 			}
 
@@ -196,7 +197,7 @@ public class OracleUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	protected OracleUtil() {
+	private OracleUtil() {
 	}
 
 	private void _convertToOracleCSV(String line, StringMaker sm) {
@@ -231,8 +232,6 @@ public class OracleUtil extends DBUtil {
 		return template;
 	}
 
-	private static OracleUtil _instance = new OracleUtil();
-
 	private static String[] _ORACLE = {
 		"--", "1", "0",
 		"to_date('1970-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS')", "sysdate",
@@ -241,5 +240,7 @@ public class OracleUtil extends DBUtil {
 		" varchar2(4000)", " clob", " varchar2",
 		"", "commit"
 	};
+
+	private static OracleUtil _instance = new OracleUtil();
 
 }

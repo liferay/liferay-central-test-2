@@ -119,10 +119,8 @@ public class PostgreSQLUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	protected PostgreSQLUtil() {
+	private PostgreSQLUtil() {
 	}
-
-	private static PostgreSQLUtil _instance = new PostgreSQLUtil();
 
 	private static String[] _POSTGRESQL = {
 		"--", "true", "false",
@@ -132,5 +130,7 @@ public class PostgreSQLUtil extends DBUtil {
 		" text", " text", " varchar",
 		"", "commit"
 	};
+
+	private static PostgreSQLUtil _instance = new PostgreSQLUtil();
 
 }

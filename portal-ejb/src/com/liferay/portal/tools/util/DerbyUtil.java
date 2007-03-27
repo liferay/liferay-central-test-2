@@ -112,10 +112,8 @@ public class DerbyUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	protected DerbyUtil() {
+	private DerbyUtil() {
 	}
-
-	private static DerbyUtil _instance = new DerbyUtil();
 
 	private static String[] _DERBY = {
 		"--", "1", "0",
@@ -125,5 +123,7 @@ public class DerbyUtil extends DBUtil {
 		" long varchar", " clob", " varchar",
 		" generated always as identity", "commit"
 	};
+
+	private static DerbyUtil _instance = new DerbyUtil();
 
 }

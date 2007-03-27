@@ -38,7 +38,7 @@ public class InterBaseUtil extends FirebirdUtil {
 		return "interbase";
 	}
 
-	protected InterBaseUtil() {
+	private InterBaseUtil() {
 	}
 
 	private static InterBaseUtil _instance = new InterBaseUtil();

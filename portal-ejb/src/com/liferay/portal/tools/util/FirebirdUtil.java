@@ -100,14 +100,16 @@ public class FirebirdUtil extends DBUtil {
 				String[] template = buildColumnTypeTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ alter column \"@old-column@\" type @type@;",
+					"alter table @table@ alter column \"@old-column@\" " +
+						"type @type@;",
 					REWORD_TEMPLATE, template);
 			}
 			else if (line.startsWith(ALTER_COLUMN_NAME)) {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ alter column \"@old-column@\" to \"@new-column@\";",
+					"alter table @table@ alter column \"@old-column@\" to " +
+						"\"@new-column@\";",
 					REWORD_TEMPLATE, template);
 			}
 
@@ -120,10 +122,8 @@ public class FirebirdUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	protected FirebirdUtil() {
+	private FirebirdUtil() {
 	}
-
-	private static FirebirdUtil _instance = new FirebirdUtil();
 
 	private static String[] _FIREBIRD = {
 		"--", "1", "0",
@@ -133,5 +133,7 @@ public class FirebirdUtil extends DBUtil {
 		" varchar(4000)", " blob", " varchar",
 		"", "commit"
 	};
+
+	private static FirebirdUtil _instance = new FirebirdUtil();
 
 }

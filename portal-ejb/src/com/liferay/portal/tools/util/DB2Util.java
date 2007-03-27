@@ -79,6 +79,7 @@ public class DB2Util extends DBUtil {
 
 		FileUtil.write(file, sm.toString());
 	}
+
 	protected String getServerName() {
 		return "db2";
 	}
@@ -110,10 +111,8 @@ public class DB2Util extends DBUtil {
 		return sm.toString();
 	}
 
-	protected DB2Util() {
+	private DB2Util() {
 	}
-
-	private static DB2Util _instance = new DB2Util();
 
 	private static String[] _DB2 = {
 		"--", "1", "0",
@@ -123,5 +122,7 @@ public class DB2Util extends DBUtil {
 		" varchar(500)", " clob", " varchar",
 		" generated always as identity", "commit"
 	};
+
+	private static DB2Util _instance = new DB2Util();
 
 }

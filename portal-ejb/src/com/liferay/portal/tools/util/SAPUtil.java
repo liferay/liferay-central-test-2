@@ -94,10 +94,8 @@ public class SAPUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	protected SAPUtil() {
+	private SAPUtil() {
 	}
-
-	private static SAPUtil _instance = new SAPUtil();
 
 	private static String[] _SAP = {
 		"##", "TRUE", "FALSE",
@@ -107,5 +105,7 @@ public class SAPUtil extends DBUtil {
 		" varchar", " varchar", " varchar",
 		"", "commit"
 	};
+
+	private static SAPUtil _instance = new SAPUtil();
 
 }

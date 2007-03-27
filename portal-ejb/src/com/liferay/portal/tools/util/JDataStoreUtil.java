@@ -59,10 +59,8 @@ public class JDataStoreUtil extends FirebirdUtil {
 		return _JDATASTORE;
 	}
 
-	protected JDataStoreUtil() {
+	private JDataStoreUtil() {
 	}
-
-	private static JDataStoreUtil _instance = new JDataStoreUtil();
 
 	private static String[] _JDATASTORE = {
 		"--", "TRUE", "FALSE",
@@ -72,5 +70,7 @@ public class JDataStoreUtil extends FirebirdUtil {
 		" long varchar", " long varchar", " varchar",
 		"", "commit"
 	};
+
+	private static JDataStoreUtil _instance = new JDataStoreUtil();
 
 }

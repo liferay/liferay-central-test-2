@@ -82,7 +82,8 @@ public class HypersonicUtil extends DBUtil {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ alter column @old-column@ rename to @new-column@;",
+					"alter table @table@ alter column @old-column@ rename to " +
+						"@new-column@;",
 					REWORD_TEMPLATE, template);
 			}
 
@@ -95,10 +96,8 @@ public class HypersonicUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	protected HypersonicUtil() {
+	private HypersonicUtil() {
 	}
-
-	private static HypersonicUtil _instance = new HypersonicUtil();
 
 	private static String[] _HYPERSONIC = {
 		"//", "true", "false",
@@ -108,5 +107,7 @@ public class HypersonicUtil extends DBUtil {
 		" longvarchar", " longvarchar", " varchar",
 		"", "commit"
 	};
+
+	private static HypersonicUtil _instance = new HypersonicUtil();
 
 }

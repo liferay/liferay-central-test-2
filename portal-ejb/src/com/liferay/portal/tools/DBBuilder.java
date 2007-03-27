@@ -76,14 +76,14 @@ public class DBBuilder {
 	}
 
 	private void _buildCreateFile() throws IOException {
-		DBUtil.getInstance(DBUtil.DB_TYPE_DB2).buildCreateFile(_databaseName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_DERBY).buildCreateFile(_databaseName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_FIREBIRD).buildCreateFile(_databaseName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_MYSQL).buildCreateFile(_databaseName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_ORACLE).buildCreateFile(_databaseName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_POSTGRESQL).buildCreateFile(_databaseName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_SQLSERVER).buildCreateFile(_databaseName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_SYBASE).buildCreateFile(_databaseName);
+		_getDBUtil(DBUtil.DB_TYPE_DB2).buildCreateFile(_databaseName);
+		_getDBUtil(DBUtil.DB_TYPE_DERBY).buildCreateFile(_databaseName);
+		_getDBUtil(DBUtil.DB_TYPE_FIREBIRD).buildCreateFile(_databaseName);
+		_getDBUtil(DBUtil.DB_TYPE_MYSQL).buildCreateFile(_databaseName);
+		_getDBUtil(DBUtil.DB_TYPE_ORACLE).buildCreateFile(_databaseName);
+		_getDBUtil(DBUtil.DB_TYPE_POSTGRESQL).buildCreateFile(_databaseName);
+		_getDBUtil(DBUtil.DB_TYPE_SQLSERVER).buildCreateFile(_databaseName);
+		_getDBUtil(DBUtil.DB_TYPE_SYBASE).buildCreateFile(_databaseName);
 	}
 
 	private void _buildSQLFile(String fileName) throws IOException {
@@ -91,18 +91,22 @@ public class DBBuilder {
 			return;
 		}
 
-		DBUtil.getInstance(DBUtil.DB_TYPE_DB2).buildSQLFile(fileName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_DERBY).buildSQLFile(fileName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_FIREBIRD).buildSQLFile(fileName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_INTERBASE).buildSQLFile(fileName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_JDATASTORE).buildSQLFile(fileName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_HYPERSONIC).buildSQLFile(fileName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_MYSQL).buildSQLFile(fileName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_ORACLE).buildSQLFile(fileName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_POSTGRESQL).buildSQLFile(fileName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_SQLSERVER).buildSQLFile(fileName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_SYBASE).buildSQLFile(fileName);
-		DBUtil.getInstance(DBUtil.DB_TYPE_SAP).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_DB2).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_DERBY).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_FIREBIRD).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_HYPERSONIC).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_INTERBASE).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_JDATASTORE).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_MYSQL).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_ORACLE).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_POSTGRESQL).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_SAP).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_SQLSERVER).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_SYBASE).buildSQLFile(fileName);
+	}
+
+	private DBUtil _getDBUtil(int dbType) throws IOException {
+		return DBUtil.getInstance(dbType);
 	}
 
 	private String _databaseName;

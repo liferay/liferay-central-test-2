@@ -124,10 +124,8 @@ public class SybaseUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	protected SybaseUtil() {
+	private SybaseUtil() {
 	}
-
-	private static SybaseUtil _instance = new SybaseUtil();
 
 	private static String[] _SYBASE = {
 		"--", "1", "0",
@@ -137,5 +135,7 @@ public class SybaseUtil extends DBUtil {
 		" varchar(1000)", " text", " varchar",
 		"  identity(1,1)", "go"
 	};
+
+	private static SybaseUtil _instance = new SybaseUtil();
 
 }
