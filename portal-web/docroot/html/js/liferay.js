@@ -425,7 +425,7 @@ Liferay.Navigation = new Class({
 
 		blockInput[0].focus();
 	},
-		
+
 	_cancelPage: function(event, obj, oldName) {
 		var navItem = null;
 
@@ -450,16 +450,16 @@ Liferay.Navigation = new Class({
 		obj.append('<span class="delete-tab">X</span>');
 
 		var deleteTab = obj.find('.delete-tab');
-		
+
 		deleteTab.click(
 			function(event) {
 				instance._removePage(this, instance);
 
 			}
 		);
-		
+
 		deleteTab.hide();
-		
+
 		obj.hover(
 			function() {
 				jQuery(this).find('.delete-tab').fadeIn('fast');
@@ -468,7 +468,6 @@ Liferay.Navigation = new Class({
 				jQuery(this).find('.delete-tab').fadeOut('fast');
 			}
 		);
-		
 	},
 
 	_makeAddable: function() {
@@ -500,7 +499,7 @@ Liferay.Navigation = new Class({
 			);
 		}
 	},
-	
+
 	_makeDeletable: function() {
 		var instance = this;
 
@@ -536,60 +535,59 @@ Liferay.Navigation = new Class({
 					span.parent().after(instance._enterPage);
 
 					var enterPage = span.parent().next();
-					
+
 					var pageParents = enterPage.parents();
 
 					var enterPageInput = enterPage.find('input');
-					
+
 					var pageBlur = function(event) {
-							event.stopPropagation();
-							if(!jQuery(this).is('li')) {
-								cancelPage.trigger('click');
-							}
-							
-							return false;
+						event.stopPropagation();
+
+						if (!jQuery(this).is('li')) {
+							cancelPage.trigger('click');
+						}
+
+						return false;
 					};
-					
+
 					enterPageInput.val(text);
 
 					enterPageInput.trigger('select');
-					
+
 					var savePage = enterPage.find('.save-page');
 
 					savePage.click(
 						function(event) {
 							instance._savePage(event, this, instance, text);
-							pageParents.unbind('blur',pageBlur);
+							pageParents.unbind('blur', pageBlur);
 						}
 					);
-					
+
 					var cancelPage = enterPage.find('.cancel-page');
-					
+
 					cancelPage.hide();
 
 					cancelPage.click(
 						function(event) {
 							instance._cancelPage(event, this, text);
-							pageParents.unbind('blur',pageBlur);
+							pageParents.unbind('blur', pageBlur);
 						}
 					);
-					
+
 					enterPageInput.keyup(
 						function(event) {
 							if (event.keyCode == 13){
 								savePage.trigger('click');
-								pageParents.unbind('blur',pageBlur);
+								pageParents.unbind('blur', pageBlur);
 							}
 							else if (event.keyCode == 27){
 								cancelPage.trigger('click');
-								pageParents.unbind('blur',pageBlur);
+								pageParents.unbind('blur', pageBlur);
 							}
 						}
 					);
-					
-					pageParents.click(pageBlur);
 
-					
+					pageParents.click(pageBlur);
 				}
 			);
 		}

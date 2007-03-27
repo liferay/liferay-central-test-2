@@ -34,6 +34,7 @@
 			<then>
 				<path id="web-lib.classpath">
 					<path refid="project.classpath" />
+					<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
 				</path>
 			</then>
 			<else>

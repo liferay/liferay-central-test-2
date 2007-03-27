@@ -20,15 +20,6 @@
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>sample_struts_portlet</servlet-name>
-		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
-		<init-param>
-			<param-name>portlet-class</param-name>
-			<param-value>com.liferay.portlet.samplestrutsportlet.SampleStrutsPortlet</param-value>
-		</init-param>
-		<load-on-startup>0</load-on-startup>
-	</servlet>
-	<servlet>
 		<servlet-name>PortletActionServlet</servlet-name>
 		<servlet-class>com.liferay.portal.struts.PortletActionServlet</servlet-class>
 		<init-param>
@@ -45,10 +36,6 @@
 	<servlet-mapping>
 		<servlet-name>sample_struts_liferay_portlet</servlet-name>
 		<url-pattern>/sample_struts_liferay_portlet/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>sample_struts_portlet</servlet-name>
-		<url-pattern>/sample_struts_portlet/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>PortletActionServlet</servlet-name>
