@@ -50,6 +50,9 @@ public class SAPUtil extends DBUtil {
 		return template;
 	}
 
+	protected SAPUtil() {
+	}
+
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
 	}
@@ -92,9 +95,6 @@ public class SAPUtil extends DBUtil {
 		br.close();
 
 		return sm.toString();
-	}
-
-	private SAPUtil() {
 	}
 
 	private static String[] _SAP = {

@@ -55,6 +55,9 @@ public class DB2Util extends DBUtil {
 		return template;
 	}
 
+	protected DB2Util() {
+	}
+
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
 
@@ -109,9 +112,6 @@ public class DB2Util extends DBUtil {
 		br.close();
 
 		return sm.toString();
-	}
-
-	private DB2Util() {
 	}
 
 	private static String[] _DB2 = {

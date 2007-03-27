@@ -55,6 +55,9 @@ public class DerbyUtil extends DBUtil {
 		return template;
 	}
 
+	protected DerbyUtil() {
+	}
+
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
 
@@ -110,9 +113,6 @@ public class DerbyUtil extends DBUtil {
 		br.close();
 
 		return sm.toString();
-	}
-
-	private DerbyUtil() {
 	}
 
 	private static String[] _DERBY = {

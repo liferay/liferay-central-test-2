@@ -34,11 +34,11 @@ public class InterBaseUtil extends FirebirdUtil {
 		return _instance;
 	}
 
-	protected String getServerName() {
-		return "interbase";
+	protected InterBaseUtil() {
 	}
 
-	private InterBaseUtil() {
+	protected String getServerName() {
+		return "interbase";
 	}
 
 	private static InterBaseUtil _instance = new InterBaseUtil();

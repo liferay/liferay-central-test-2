@@ -51,6 +51,9 @@ public class HypersonicUtil extends DBUtil {
 		return template;
 	}
 
+	protected HypersonicUtil() {
+	}
+
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
 	}
@@ -94,9 +97,6 @@ public class HypersonicUtil extends DBUtil {
 		br.close();
 
 		return sm.toString();
-	}
-
-	private HypersonicUtil() {
 	}
 
 	private static String[] _HYPERSONIC = {

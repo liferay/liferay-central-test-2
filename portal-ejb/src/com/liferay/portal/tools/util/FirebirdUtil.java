@@ -54,6 +54,9 @@ public class FirebirdUtil extends DBUtil {
 		return template;
 	}
 
+	protected FirebirdUtil() {
+	}
+
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
 
@@ -120,9 +123,6 @@ public class FirebirdUtil extends DBUtil {
 		br.close();
 
 		return sm.toString();
-	}
-
-	private FirebirdUtil() {
 	}
 
 	private static String[] _FIREBIRD = {

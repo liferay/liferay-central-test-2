@@ -58,6 +58,9 @@ public class SybaseUtil extends DBUtil {
 		return template;
 	}
 
+	protected SybaseUtil() {
+	}
+
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
 
@@ -122,9 +125,6 @@ public class SybaseUtil extends DBUtil {
 		br.close();
 
 		return sm.toString();
-	}
-
-	private SybaseUtil() {
 	}
 
 	private static String[] _SYBASE = {

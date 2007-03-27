@@ -52,6 +52,9 @@ public class PostgreSQLUtil extends DBUtil {
 		return template;
 	}
 
+	protected PostgreSQLUtil() {
+	}
+
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
 
@@ -117,9 +120,6 @@ public class PostgreSQLUtil extends DBUtil {
 		br.close();
 
 		return sm.toString();
-	}
-
-	private PostgreSQLUtil() {
 	}
 
 	private static String[] _POSTGRESQL = {

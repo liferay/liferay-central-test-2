@@ -57,6 +57,9 @@ public class SQLServerUtil extends DBUtil {
 		return template;
 	}
 
+	protected SQLServerUtil() {
+	}
+
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
 
@@ -125,9 +128,6 @@ public class SQLServerUtil extends DBUtil {
 		br.close();
 
 		return sm.toString();
-	}
-
-	private SQLServerUtil() {
 	}
 
 	private static String[] _SQL_SERVER = {

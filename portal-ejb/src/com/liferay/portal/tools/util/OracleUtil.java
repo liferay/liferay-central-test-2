@@ -125,6 +125,9 @@ public class OracleUtil extends DBUtil {
 			"../sql/" + fileName + "/" + fileName + "-oracle.sql", oracle);
 	}
 
+	protected OracleUtil() {
+	}
+
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
 
@@ -195,9 +198,6 @@ public class OracleUtil extends DBUtil {
 		br.close();
 
 		return sm.toString();
-	}
-
-	private OracleUtil() {
 	}
 
 	private void _convertToOracleCSV(String line, StringMaker sm) {

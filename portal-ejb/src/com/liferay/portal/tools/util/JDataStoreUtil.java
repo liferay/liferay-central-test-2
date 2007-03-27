@@ -51,15 +51,15 @@ public class JDataStoreUtil extends FirebirdUtil {
 		return template;
 	}
 
+	protected JDataStoreUtil() {
+	}
+
 	protected String getServerName() {
 		return "jdatastore";
 	}
 
 	protected String[] getTemplate() {
 		return _JDATASTORE;
-	}
-
-	private JDataStoreUtil() {
 	}
 
 	private static String[] _JDATASTORE = {

@@ -53,6 +53,9 @@ public class MySQLUtil extends DBUtil {
 		return template;
 	}
 
+	protected MySQLUtil() {
+	}
+
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
 
@@ -120,9 +123,6 @@ public class MySQLUtil extends DBUtil {
 		br.close();
 
 		return sm.toString();
-	}
-
-	private MySQLUtil() {
 	}
 
 	private static String[] _MYSQL = {
