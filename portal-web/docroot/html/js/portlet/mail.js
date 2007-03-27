@@ -29,7 +29,6 @@ function MailSummaryObject(state, sender, subject, date, size, id, read, folderI
 
 
 var Mail = {
-	logger : LogFactory.getLog("mail.js"),
 	INBOX_NAME : null,
 	DRAFTS_NAME : null,
 	SENT_NAME : null,
@@ -505,6 +504,7 @@ var Mail = {
 
 		if (mailObject.folderId == Mail.currentFolderId &&
 			mailObject.headers.length > 0) {
+			Mail.previewLast = -1;
 			Mail.mailObject = mailObject;
 			Mail.renderPreviewSection();
 		}
@@ -1042,7 +1042,7 @@ var Mail = {
 	renderPreviewSection : function() {
 		var mailObject = Mail.mailObject;
 		var totalMsgs = mailObject.headers.length;
-		
+
 		var msgsState = document.getElementById("portlet-mail-msgs-state");
 		var msgsSender = document.getElementById("portlet-mail-msgs-from");
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
