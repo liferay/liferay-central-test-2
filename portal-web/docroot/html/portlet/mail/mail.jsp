@@ -365,7 +365,6 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				height: 16px;
 				overflow: hidden;
 				padding-left: 5px;
-				position: relative;
 				width: 24px;
 			}
 
@@ -378,7 +377,6 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				height: 16px;
 				overflow: hidden;
 				padding-left: 5px;
-				position: relative;
 				width: 800px;
 			}
 
@@ -391,7 +389,6 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				height: 16px;
 				overflow: hidden;
 				padding-left: 5px;
-				position: relative;
 				width: 800px;
 			}
 
@@ -404,7 +401,6 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				height: 16px;
 				overflow: hidden;
 				padding-left: 5px;
-				position: relative;
 				width: 800px;
 			}
 
@@ -417,7 +413,6 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				height: 16px;
 				overflow: hidden;
 				padding-left: 5px;
-				position: relative;
 				<c:choose>
 					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
 						width: 100%;
