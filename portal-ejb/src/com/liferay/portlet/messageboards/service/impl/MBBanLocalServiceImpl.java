@@ -113,7 +113,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 			GetterUtil.get(PropsUtil.get(
 				PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL), 0);
 		
-		if (expireInterval >= 0) {
+		if (expireInterval <= 0) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Message boards ban auto-expire disabled.");
 			}
