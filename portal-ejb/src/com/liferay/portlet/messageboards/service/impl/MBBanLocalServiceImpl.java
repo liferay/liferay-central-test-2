@@ -37,6 +37,7 @@ import com.liferay.portlet.messageboards.NoSuchBanException;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.service.base.MBBanLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
+import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.util.GetterUtil;
 
 import java.util.Calendar;
@@ -122,21 +123,13 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		}
 		
 		long now = System.currentTimeMillis();
-
-		Calendar cal = Calendar.getInstance(); 
 		
 		List bans = MBBanUtil.findAll();
 		
 		for (int i = 0; i < bans.size(); i++) {
 			MBBan ban = (MBBan)bans.get(i);
 			
-			Date banDate = ban.getCreateDate();
-			
-			cal.setTime(banDate);
-			
-			cal.add(Calendar.DATE, expireInterval);
-			
-			long unbanDate = cal.getTimeInMillis();
+			long unbanDate = MBUtil.getUnbanDate(ban, expireInterval).getTime();
 			
 			if (now >= unbanDate) {
 				if (_log.isDebugEnabled()) {

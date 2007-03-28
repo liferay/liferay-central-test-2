@@ -28,6 +28,7 @@ import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
@@ -41,6 +42,8 @@ import com.liferay.util.Validator;
 
 import java.io.IOException;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.portlet.PortletPreferences;
@@ -359,6 +362,18 @@ public class MBUtil {
 		return ranksKey;
 	}
 
+	public static Date getUnbanDate(MBBan ban, int expireInterval) {
+		Date banDate = ban.getCreateDate();
+
+		Calendar cal = Calendar.getInstance(); 
+
+		cal.setTime(banDate);
+		
+		cal.add(Calendar.DATE, expireInterval);
+		
+		return cal.getTime();
+	}
+	
 	public static String[] getThreadPriority(
 			PortletPreferences prefs, double value, ThemeDisplay themeDisplay)
 		throws Exception {
