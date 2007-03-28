@@ -26,6 +26,9 @@ import com.liferay.portal.job.JobScheduler;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.quartz.SchedulerException;
 
 /**
@@ -37,13 +40,20 @@ import org.quartz.SchedulerException;
 public class Scheduler implements com.liferay.portal.job.Scheduler {
 
 	public void schedule() throws SchedulerException {
-		int expireInterval = 
-			GetterUtil.get(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL), 0);
-		
-		if (expireInterval > 0) {
+		int expireInterval = GetterUtil.getInteger(PropsUtil.get(
+			PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL));
+
+		if (expireInterval <= 0) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Auto expire of banned message board users is disabled");
+			}
+		}
+		else {
 			JobScheduler.schedule(new ExpireBanJob());
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(Scheduler.class);
 
 }

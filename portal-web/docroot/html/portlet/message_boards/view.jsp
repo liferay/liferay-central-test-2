@@ -607,15 +607,17 @@ portletURL.setParameter("categoryId", categoryId);
 	<c:when test='<%= tabs1.equals("banned-users") %>'>
 
 		<%
-		int expireInterval = 
-			GetterUtil.get(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL), 0);
+		int expireInterval = GetterUtil.getInteger(PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL));
 
 		List headerNames = new ArrayList();
 
 		headerNames.add("name");
 		headerNames.add("ban-date");
-		headerNames.add("unban-date");
+
+		if (expireInterval > 0) {
+			headerNames.add("unban-date");
+		}
+
 		headerNames.add(StringPool.BLANK);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
@@ -648,9 +650,6 @@ portletURL.setParameter("categoryId", categoryId);
 			if (expireInterval > 0) {
 				row.addText(dateFormatDateTime.format(MBUtil.getUnbanDate(ban, expireInterval)));
 			}
-			else {
-				row.addText(LanguageUtil.get(pageContext, "not-available"));		
-			} 
 
 			// Action
 

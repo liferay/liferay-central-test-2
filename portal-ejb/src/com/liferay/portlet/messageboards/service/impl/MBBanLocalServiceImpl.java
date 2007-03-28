@@ -26,8 +26,6 @@ import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -40,9 +38,11 @@ import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.util.GetterUtil;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBBanLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -110,38 +110,30 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 	}
 
 	public void expireBans() throws SystemException {
-		int expireInterval = 
-			GetterUtil.get(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL), 0);
-		
-		if (expireInterval <= 0) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Message boards ban auto-expire disabled.");
-			}
-			
-			return;
-		}
-		
 		long now = System.currentTimeMillis();
-		
+
+		int expireInterval = GetterUtil.getInteger(PropsUtil.get(
+			PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL));
+
 		List bans = MBBanUtil.findAll();
-		
+
 		for (int i = 0; i < bans.size(); i++) {
 			MBBan ban = (MBBan)bans.get(i);
-			
+
 			long unbanDate = MBUtil.getUnbanDate(ban, expireInterval).getTime();
-			
+
 			if (now >= unbanDate) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Auto-expiring ban " + ban.getBanId() + 
-						" on user " + ban.getBanUserId());
+					_log.debug(
+						"Auto expiring ban " + ban.getBanId() + " on user " +
+							ban.getBanUserId());
 				}
-				
+
 				MBBanUtil.remove(ban);
 			}
 		}
 	}
-	
+
 	public List getBans(long groupId, int start, int end)
 		throws SystemException {
 
@@ -163,7 +155,6 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		}
 	}
 
-	private static Log _log = 
-		LogFactoryUtil.getLog(MBBanLocalServiceImpl.class);
+	private static Log _log = LogFactory.getLog(MBBanLocalServiceImpl.class);
 
 }

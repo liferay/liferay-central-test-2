@@ -362,18 +362,6 @@ public class MBUtil {
 		return ranksKey;
 	}
 
-	public static Date getUnbanDate(MBBan ban, int expireInterval) {
-		Date banDate = ban.getCreateDate();
-
-		Calendar cal = Calendar.getInstance(); 
-
-		cal.setTime(banDate);
-		
-		cal.add(Calendar.DATE, expireInterval);
-		
-		return cal.getTime();
-	}
-	
 	public static String[] getThreadPriority(
 			PortletPreferences prefs, double value, ThemeDisplay themeDisplay)
 		throws Exception {
@@ -402,6 +390,18 @@ public class MBUtil {
 		}
 
 		return null;
+	}
+
+	public static Date getUnbanDate(MBBan ban, int expireInterval) {
+		Date banDate = ban.getCreateDate();
+
+		Calendar cal = Calendar.getInstance();
+
+		cal.setTime(banDate);
+
+		cal.add(Calendar.DATE, expireInterval);
+
+		return cal.getTime();
 	}
 
 	public static String getUserRank(
