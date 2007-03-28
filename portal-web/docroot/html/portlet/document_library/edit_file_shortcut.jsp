@@ -290,7 +290,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<liferay-ui:ratings
 		className="<%= DLFileEntry.class.getName() %>"
 		classPK="<%= toFileEntry.getPrimaryKey().toString() %>"
-		url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry?folderId=" + toFileEntry.getFolderId() + "&name=" + Http.encodeURL(toFileEntry.getName()) %>'
+		url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry" %>'
 	/>
 
 	<br>

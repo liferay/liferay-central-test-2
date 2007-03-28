@@ -461,7 +461,7 @@
 
 		<action path="/document_library/get_file" type="com.liferay.portlet.documentlibrary.action.GetFileAction" />
 
-		<action path="/document_library/rate_file_entry" type="com.liferay.portlet.documentlibrary.action.RateFileEntryAction" />
+		<action path="/document_library/rate_file_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/document_library/search" forward="portlet.document_library.search" />
 
@@ -711,6 +711,8 @@
 			<forward name="portlet.journal.error" path="portlet.journal.error" />
 		</action>
 
+		<action path="/journal/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction" />
+
 		<action path="/journal/edit_configuration" type="com.liferay.portlet.journal.action.EditConfigurationAction">
 			<forward name="portlet.journal.edit_configuration" path="portlet.journal.edit_configuration" />
 			<forward name="portlet.journal.error" path="portlet.journal.error" />
@@ -741,6 +743,8 @@
 		<action path="/journal/get_structure" type="com.liferay.portlet.journal.action.GetStructureAction" />
 
 		<action path="/journal/get_template" type="com.liferay.portlet.journal.action.GetTemplateAction" />
+
+		<action path="/journal/rate_article" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/journal/select_document_library" type="com.liferay.portlet.documentlibrary.action.ViewAction">
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
@@ -778,9 +782,13 @@
 
 		<!-- Journal Content -->
 
+		<action path="/journal_content/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction" />
+
 		<action path="/journal_content/edit_configuration" type="com.liferay.portlet.journalcontent.action.EditConfigurationAction">
 			<forward name="portlet.journal_content.edit_configuration" path="portlet.journal_content.edit_configuration" />
 		</action>
+
+		<action path="/journal_content/rate_article" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/journal_content/view" type="com.liferay.portlet.journalcontent.action.ViewAction">
 			<forward name="portlet.journal_content.view" path="portlet.journal_content.view" />
@@ -1174,7 +1182,7 @@
 
 		<!-- Page Ratings -->
 
-		<action path="/page_ratings/rate_page" type="com.liferay.portlet.pageratings.action.RateLayoutAction" />
+		<action path="/page_ratings/rate_page" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/page_ratings/view" forward="portlet.page_ratings.view" />
 
@@ -1254,7 +1262,7 @@
 			<forward name="portlet.software_catalog.error" path="portlet.software_catalog.error" />
 		</action>
 
-		<action path="/software_catalog/rate_product_entry" type="com.liferay.portlet.softwarecatalog.action.RateProductEntryAction" />
+		<action path="/software_catalog/rate_product_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/software_catalog/search" forward="portlet.software_catalog.search" />
 

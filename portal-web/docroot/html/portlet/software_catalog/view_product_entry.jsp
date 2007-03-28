@@ -240,7 +240,7 @@ else {
 <liferay-ui:ratings
 	className="<%= SCProductEntry.class.getName() %>"
 	classPK="<%= String.valueOf(productEntry.getPrimaryKey()) %>"
-	url='<%= themeDisplay.getPathMain() + "/software_catalog/rate_product_entry?productEntryId=" + productEntryId %>'
+	url='<%= themeDisplay.getPathMain() + "/software_catalog/rate_product_entry" %>'
 />
 
 <c:if test="<%= SCProductEntryPermission.contains(permissionChecker, productEntryId, ActionKeys.UPDATE) %>">

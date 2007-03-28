@@ -127,7 +127,9 @@ type = ParamUtil.getString(request, "type", type);
 
 <br>
 
-<liferay-ui:input-checkbox param="paginate" defaultValue="<%= paginate %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <%= LanguageUtil.get(pageContext, "paginate-if-there-are-two-or-more-articles") %>
+<liferay-ui:input-checkbox param="paginate" defaultValue="<%= paginate %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <%= LanguageUtil.get(pageContext, "paginate-if-there-are-two-or-more-articles") %><br>
+<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <%= LanguageUtil.get(pageContext, "enable-ratings") %><br>
+<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <%= LanguageUtil.get(pageContext, "enable-comments") %>
 
 </form>
 

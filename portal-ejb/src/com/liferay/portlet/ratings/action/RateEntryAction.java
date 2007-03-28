@@ -42,14 +42,14 @@ import org.json.JSONObject;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class RateEntryAction extends JSONAction {
+public class RateEntryAction extends JSONAction {
 
 	public String getJSON(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
 
-		String className = getClassName();
+		String className = getClassName(req);
 		String classPK = getClassPK(req);
 		double score = ParamUtil.getDouble(req, "score");
 
@@ -67,8 +67,12 @@ public abstract class RateEntryAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	public abstract String getClassName();
+	protected String getClassName(HttpServletRequest req) {
+		return ParamUtil.getString(req, "className");
+	}
 
-	public abstract String getClassPK(HttpServletRequest req);
+	protected String getClassPK(HttpServletRequest req) {
+		return ParamUtil.getString(req, "classPK");
+	}
 
 }

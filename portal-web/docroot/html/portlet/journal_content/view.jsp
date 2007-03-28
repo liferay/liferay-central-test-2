@@ -143,10 +143,6 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 <c:if test="<%= themeDisplay.isSignedIn() %>">
 	<br>
 
-	<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
-		<liferay-ui:icon image="configuration" message="select-article" url="<%= portletDisplay.getURLConfiguration() %>" />
-	</c:if>
-
 	<%
 	JournalArticle article = null;
 
@@ -154,6 +150,33 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 		try {
 			article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), groupId, articleIds[i]);
 	%>
+
+			<c:if test="<%= enableRatings %>">
+				<liferay-ui:ratings
+					className="<%= JournalArticle.class.getName() %>"
+					classPK="<%= article.getResourcePK().toString() %>"
+					url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
+				/>
+
+				<br>
+			</c:if>
+
+			<c:if test="<%= enableComments %>">
+				<portlet:actionURL var="discussionURL">
+					<portlet:param name="struts_action" value="/journal_content/edit_article_discussion" />
+				</portlet:actionURL>
+
+				<liferay-ui:discussion
+					formAction="<%= discussionURL %>"
+					className="<%= JournalArticle.class.getName() %>"
+					classPK="<%= article.getResourcePK().toString() %>"
+					userId="<%= article.getUserId() %>"
+					subject="<%= article.getTitle() %>"
+					redirect="<%= currentURL %>"
+				/>
+
+				<br>
+			</c:if>
 
 			<span id="<portlet:namespace />editArticle<%= i %>" >
 				<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE) %>">
@@ -175,6 +198,10 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 		}
 	}
 	%>
+
+	<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
+		<liferay-ui:icon image="configuration" message="select-article" url="<%= portletDisplay.getURLConfiguration() %>" />
+	</c:if>
 
 	<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
 		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL" portletName="<%= PortletKeys.JOURNAL %>">

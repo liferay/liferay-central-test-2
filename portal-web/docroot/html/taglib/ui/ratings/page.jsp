@@ -80,7 +80,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 		{
 			rating: <%= yourScore %>,
 			onComplete: function(rating) {
-				var url = "<%= url %>&score=" + rating;
+				var url = "<%= url %>?className=<%= className %>&classPK=<%= classPK %>&score=" + rating;
 
 				AjaxUtil.request(url, {
 					onComplete: function(xmlHttpReq) {

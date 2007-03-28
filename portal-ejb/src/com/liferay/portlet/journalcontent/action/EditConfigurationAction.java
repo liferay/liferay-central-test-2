@@ -109,6 +109,9 @@ public class EditConfigurationAction extends PortletAction {
 				(String[])articleIdsMap.values().toArray(new String[0]);
 
 			boolean paginate = ParamUtil.getBoolean(req, "paginate");
+			boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
+			boolean enableComments = ParamUtil.getBoolean(
+				req, "enableComments");
 
 			String portletResource = ParamUtil.getString(
 				req, "portletResource");
@@ -120,6 +123,8 @@ public class EditConfigurationAction extends PortletAction {
 			prefs.setValue("group-id", String.valueOf(groupId));
 			prefs.setValues("article-id", articleIds);
 			prefs.setValue("paginate", String.valueOf(paginate));
+			prefs.setValue("enable-ratings", String.valueOf(enableRatings));
+			prefs.setValue("enable-comments", String.valueOf(enableComments));
 
 			prefs.store();
 
