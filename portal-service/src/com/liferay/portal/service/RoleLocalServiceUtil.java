@@ -118,11 +118,12 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.getGroupRoles(groupId);
 	}
 
-	public static java.util.Map getResourceRoles(long resourceId)
+	public static java.util.Map getResourceRoles(java.lang.String companyId,
+		java.lang.String name, java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-		return roleLocalService.getResourceRoles(resourceId);
+		return roleLocalService.getResourceRoles(companyId, name, scope, primKey);
 	}
 
 	public static com.liferay.portal.model.Role getRole(java.lang.String roleId)

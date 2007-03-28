@@ -101,6 +101,14 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 			resourceId);
 	}
 
+	public java.util.List getGroupPermissions(long groupId,
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String scope, java.lang.String primKey)
+		throws com.liferay.portal.SystemException {
+		return PermissionLocalServiceFactory.getTxImpl().getGroupPermissions(groupId,
+			companyId, name, scope, primKey);
+	}
+
 	public java.util.List getOrgGroupPermissions(
 		java.lang.String organizationId, long groupId, long resourceId)
 		throws com.liferay.portal.SystemException {
@@ -132,6 +140,14 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 		long resourceId) throws com.liferay.portal.SystemException {
 		return PermissionLocalServiceFactory.getTxImpl().getUserPermissions(userId,
 			resourceId);
+	}
+
+	public java.util.List getUserPermissions(java.lang.String userId,
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String scope, java.lang.String primKey)
+		throws com.liferay.portal.SystemException {
+		return PermissionLocalServiceFactory.getTxImpl().getUserPermissions(userId,
+			companyId, name, scope, primKey);
 	}
 
 	public boolean hasGroupPermission(long groupId, java.lang.String actionId,

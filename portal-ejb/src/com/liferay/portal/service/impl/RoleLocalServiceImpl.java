@@ -200,8 +200,11 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return GroupUtil.getRoles(groupId);
 	}
 
-	public Map getResourceRoles(long resourceId) throws SystemException {
-		return RoleFinder.findByResourceId(resourceId);
+	public Map getResourceRoles(
+			String companyId, String name, String scope, String primKey)
+		throws SystemException {
+
+		return RoleFinder.findByC_N_S_P(companyId, name, scope, primKey);
 	}
 
 	public Role getRole(String roleId) throws PortalException, SystemException {

@@ -30,8 +30,6 @@ import com.liferay.portal.LayoutParentLayoutIdException;
 import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchPortletPreferencesException;
-import com.liferay.portal.NoSuchResourceException;
-import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
@@ -44,30 +42,24 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
-import com.liferay.portal.service.UserGroupLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.LayoutFinder;
@@ -91,7 +83,6 @@ import com.liferay.util.InstancePool;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
-import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.xml.XMLFormatter;
 import com.liferay.util.zip.ZipReader;
 import com.liferay.util.zip.ZipWriter;
@@ -105,7 +96,6 @@ import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -115,6 +105,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -275,6 +266,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public byte[] exportLayouts(String ownerId)
 		throws PortalException, SystemException {
 
+		StopWatch stopWatch = null;
+
+		if (_log.isDebugEnabled()) {
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
+
+		LayoutCache layoutCache = new LayoutCache();
+
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
 		String companyId = layoutSet.getCompanyId();
@@ -356,20 +357,20 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 
 			exportUserPermissions(
-				companyId, groupId, resourceName, resourcePrimKey,
+				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
 				permissionsEl);
 
 			exportInheritedPermissions(
-				companyId, resourceName, resourcePrimKey, permissionsEl,
-				"organization");
+				layoutCache, companyId, resourceName, resourcePrimKey,
+				permissionsEl, "organization");
 
 			exportInheritedPermissions(
-				companyId, resourceName, resourcePrimKey, permissionsEl,
-				"location");
+				layoutCache, companyId, resourceName, resourcePrimKey,
+				permissionsEl, "location");
 
 			exportInheritedPermissions(
-				companyId, resourceName, resourcePrimKey, permissionsEl,
-				"user-group");
+				layoutCache, companyId, resourceName, resourcePrimKey,
+				permissionsEl, "user-group");
 
 			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				LayoutTypePortlet layoutTypePortlet =
@@ -407,20 +408,20 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 						}
 
 						exportUserPermissions(
-							companyId, groupId, resourceName, resourcePrimKey,
-							portletEl);
+							layoutCache, companyId, groupId, resourceName,
+							resourcePrimKey, portletEl);
 
 						exportInheritedPermissions(
-							companyId, resourceName, resourcePrimKey, portletEl,
-							"organization");
+							layoutCache, companyId, resourceName,
+							resourcePrimKey, portletEl, "organization");
 
 						exportInheritedPermissions(
-							companyId, resourceName, resourcePrimKey, portletEl,
-							"location");
+							layoutCache, companyId, resourceName,
+							resourcePrimKey, portletEl, "location");
 
 						exportInheritedPermissions(
-							companyId, resourceName, resourcePrimKey, portletEl,
-							"user-group");
+							layoutCache, companyId, resourceName,
+							resourcePrimKey, portletEl, "user-group");
 					}
 				}
 
@@ -448,18 +449,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String resourceName = Layout.class.getName();
 
 		exportGroupRoles(
-			companyId, groupId, resourceName, "community", rolesEl);
+			layoutCache, companyId, groupId, resourceName, "community",
+			rolesEl);
 
-		exportUserRoles(companyId, groupId, resourceName, rolesEl);
-
-		exportInheritedRoles(
-			companyId, groupId, resourceName, "organization", rolesEl);
+		exportUserRoles(layoutCache, companyId, groupId, resourceName, rolesEl);
 
 		exportInheritedRoles(
-			companyId, groupId, resourceName, "location", rolesEl);
+			layoutCache, companyId, groupId, resourceName, "organization",
+			rolesEl);
 
 		exportInheritedRoles(
-			companyId, groupId, resourceName, "user-group", rolesEl);
+			layoutCache, companyId, groupId, resourceName, "location", rolesEl);
+
+		exportInheritedRoles(
+			layoutCache, companyId, groupId, resourceName, "user-group",
+			rolesEl);
 
 		// Portlet roles
 
@@ -475,18 +479,23 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			portletEl.addAttribute("portlet-id", portletId);
 
 			exportGroupRoles(
-				companyId, groupId, resourceName, "community", portletEl);
+            	layoutCache, companyId, groupId, resourceName, "community",
+				portletEl);
 
-			exportUserRoles(companyId, groupId, resourceName, portletEl);
-
-			exportInheritedRoles(
-				companyId, groupId, resourceName, "organization", portletEl);
-
-			exportInheritedRoles(
-				companyId, groupId, resourceName, "location", portletEl);
+			exportUserRoles(
+				layoutCache, companyId, groupId, resourceName, portletEl);
 
 			exportInheritedRoles(
-				companyId, groupId, resourceName, "user-group", portletEl);
+				layoutCache, companyId, groupId, resourceName, "organization",
+				portletEl);
+
+			exportInheritedRoles(
+				layoutCache, companyId, groupId, resourceName, "location",
+				portletEl);
+
+			exportInheritedRoles(
+				layoutCache, companyId, groupId, resourceName, "user-group",
+				portletEl);
 
 			if (portletEl.elements().isEmpty()) {
 				rolesEl.remove(portletEl);
@@ -502,6 +511,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			PortletKeys.PREFS_LAYOUT_ID_SHARED, groupPrefsOwnerId, root);
 
 		// XML file
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Exporting layouts takes " + stopWatch.getTime() + " ms");
+		}
 
 		try {
 			ZipWriter zipWriter = new ZipWriter();
@@ -574,6 +588,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public void importLayouts(String userId, String ownerId, InputStream is)
 		throws PortalException, SystemException {
+
+		// TEST CODE
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        System.out.println("Starting import of layouts at " + stopWatch.getTime());
+
+        LayoutCache layoutCache = new LayoutCache();
 
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
@@ -688,29 +709,29 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Element permissionsEl = layoutEl.element("permissions");
 
 			importGroupPermissions(
-				companyId, groupId, resourceName, resourcePrimKey,
+				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
 				permissionsEl, "community-actions", false);
 
 			if (groupId != guestGroup.getGroupId()) {
 				importGroupPermissions(
-					companyId, guestGroup.getGroupId(), resourceName,
+					layoutCache, companyId, guestGroup.getGroupId(), resourceName,
 					resourcePrimKey, permissionsEl, "guest-actions", false);
 			}
 
 			importUserPermissions(
-				companyId, groupId, resourceName, resourcePrimKey,
+				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
 				permissionsEl, false);
 
 			importInheritedPermissions(
-				companyId, resourceName, resourcePrimKey, permissionsEl,
+				layoutCache, companyId, resourceName, resourcePrimKey, permissionsEl,
 				"organization", false);
 
 			importInheritedPermissions(
-				companyId, resourceName, resourcePrimKey, permissionsEl,
+				layoutCache, companyId, resourceName, resourcePrimKey, permissionsEl,
 				"location", false);
 
 			importInheritedPermissions(
-				companyId, resourceName, resourcePrimKey, permissionsEl,
+				layoutCache, companyId, resourceName, resourcePrimKey, permissionsEl,
 				"user-group", false);
 
 			// Portlet permissions
@@ -739,29 +760,29 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				}
 				else {
 					importGroupPermissions(
-						companyId, groupId, resourceName, resourcePrimKey,
+						layoutCache, companyId, groupId, resourceName, resourcePrimKey,
 						portletEl, "community-actions", true);
 
 					if (groupId != guestGroup.getGroupId()) {
 						importGroupPermissions(
-							companyId, guestGroup.getGroupId(), resourceName,
+							layoutCache, companyId, guestGroup.getGroupId(), resourceName,
 							resourcePrimKey, portletEl, "guest-actions", true);
 					}
 
 					importUserPermissions(
-						companyId, groupId, resourceName, resourcePrimKey,
+						layoutCache, companyId, groupId, resourceName, resourcePrimKey,
 						portletEl, true);
 
 					importInheritedPermissions(
-						companyId, resourceName, resourcePrimKey, portletEl,
+						layoutCache, companyId, resourceName, resourcePrimKey, portletEl,
 						"organization", true);
 
 					importInheritedPermissions(
-						companyId, resourceName, resourcePrimKey, portletEl,
+						layoutCache, companyId, resourceName, resourcePrimKey, portletEl,
 						"location", true);
 
 					importInheritedPermissions(
-						companyId, resourceName, resourcePrimKey, portletEl,
+						layoutCache, companyId, resourceName, resourcePrimKey, portletEl,
 						"user-group", true);
 				}
 			}
@@ -782,19 +803,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String resourceName = Layout.class.getName();
 
 		importGroupRoles(
-			companyId, groupId, resourceName, "community", rolesEl);
+			layoutCache, companyId, groupId, resourceName, "community", rolesEl);
 
 		importUserRoles(
-			companyId, groupId, resourceName, rolesEl);
+			layoutCache, companyId, groupId, resourceName, rolesEl);
 
 		importInheritedRoles(
-			companyId, groupId, resourceName, "organization", rolesEl);
+			layoutCache, companyId, groupId, resourceName, "organization", rolesEl);
 
 		importInheritedRoles(
-			companyId, groupId, resourceName, "location", rolesEl);
+			layoutCache, companyId, groupId, resourceName, "location", rolesEl);
 
 		importInheritedRoles(
-			companyId, groupId, resourceName, "user-group", rolesEl);
+			layoutCache, companyId, groupId, resourceName, "user-group", rolesEl);
 
 		// Portlet roles
 
@@ -819,19 +840,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 			else {
 				importGroupRoles(
-					companyId, groupId, resourceName, "community", portletEl);
+					layoutCache, companyId, groupId, resourceName, "community", portletEl);
 
-				importUserRoles(companyId, groupId, resourceName, portletEl);
+				importUserRoles(layoutCache, companyId, groupId, resourceName, portletEl);
 
 				importInheritedRoles(
-					companyId, groupId, resourceName, "organization",
+					layoutCache, companyId, groupId, resourceName, "organization",
 					portletEl);
 
 				importInheritedRoles(
-					companyId, groupId, resourceName, "location", portletEl);
+					layoutCache, companyId, groupId, resourceName, "location", portletEl);
 
 				importInheritedRoles(
-					companyId, groupId, resourceName, "user-group", portletEl);
+					layoutCache, companyId, groupId, resourceName, "user-group", portletEl);
 			}
 		}
 
@@ -846,6 +867,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Page count
 
 		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
+
+		System.out.println("Ending import of layouts at " + stopWatch.getTime());
 	}
 
 	public void setLayouts(
@@ -1098,44 +1121,33 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Element el = parentEl.addElement(elName);
 
-		try {
-			Resource resource = ResourceLocalServiceUtil.getResource(
-				companyId, resourceName, ResourceImpl.SCOPE_INDIVIDUAL,
-				resourcePrimKey);
+		List permissions = PermissionLocalServiceUtil.getGroupPermissions(
+			groupId, companyId, resourceName, ResourceImpl.SCOPE_INDIVIDUAL,
+			resourcePrimKey);
 
-			List permissions = PermissionLocalServiceUtil.getGroupPermissions(
-				groupId, resource.getResourceId());
+		List actions = ResourceActionsUtil.getActions(permissions);
 
-			List actions = ResourceActionsUtil.getActions(permissions);
+		for (int i = 0; i < actions.size(); i++) {
+			String action = (String)actions.get(i);
 
-			for (int i = 0; i < actions.size(); i++) {
-				String action = (String)actions.get(i);
+			Element actionKeyEl = el.addElement("action-key");
 
-				Element actionKeyEl = el.addElement("action-key");
-
-				actionKeyEl.addText(action);
-			}
-		}
-		catch (NoSuchResourceException nsre) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(nsre);
-			}
+			actionKeyEl.addText(action);
 		}
 
 		return el;
 	}
 
 	protected void exportGroupRoles(
-			String companyId, long groupId, String resourceName,
-			String entityName, Element parentEl)
+			LayoutCache layoutCache, String companyId, long groupId,
+			String resourceName, String entityName, Element parentEl)
 		throws PortalException, SystemException {
 
-		List roles = RoleLocalServiceUtil.getGroupRoles(groupId);
+		List roles = layoutCache.getGroupRoles(groupId);
 
 		Element groupEl = exportRoles(
 			companyId, resourceName, ResourceImpl.SCOPE_GROUP,
-			String.valueOf(groupId), parentEl, entityName + "-roles",
-			roles);
+			String.valueOf(groupId), parentEl, entityName + "-roles", roles);
 
 		if (groupEl.elements().isEmpty()) {
 			parentEl.remove(groupEl);
@@ -1143,14 +1155,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportInheritedPermissions(
-			String companyId, String resourceName, String resourcePrimKey,
-			Element parentEl, String entityName)
+			LayoutCache layoutCache, String companyId, String resourceName,
+			String resourcePrimKey, Element parentEl, String entityName)
 		throws PortalException, SystemException {
 
 		Element entityPermissionsEl = DocumentHelper.createElement(
 			entityName + "-permissions");
 
-		Map entityMap = getEntityMap(companyId, entityName);
+		Map entityMap = layoutCache.getEntityMap(companyId, entityName);
 
 		Iterator itr = entityMap.entrySet().iterator();
 
@@ -1179,14 +1191,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportInheritedRoles(
-			String companyId, long groupId, String resourceName,
-			String entityName, Element parentEl)
+			LayoutCache layoutCache, String companyId, long groupId,
+			String resourceName, String entityName, Element parentEl)
 		throws PortalException, SystemException {
 
 		Element entityRolesEl = DocumentHelper.createElement(
 			entityName + "-roles");
 
-		Map entityMap = getEntityMap(companyId, entityName);
+		Map entityMap = layoutCache.getEntityMap(companyId, entityName);
 
 		Iterator itr = entityMap.entrySet().iterator();
 
@@ -1197,8 +1209,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			long entityGroupId = ((Long)entry.getValue()).longValue();
 
-			List entityRoles = RoleLocalServiceUtil.getGroupRoles(
-				entityGroupId);
+			List entityRoles = layoutCache.getGroupRoles(entityGroupId);
 
 			Element entityEl = exportRoles(
 				companyId, resourceName, ResourceImpl.SCOPE_GROUP,
@@ -1331,42 +1342,31 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Element el = parentEl.addElement(elName);
 
-		try {
-			Resource resource = ResourceLocalServiceUtil.getResource(
-				companyId, resourceName, scope, resourcePrimKey);
+		Map resourceRoles = RoleLocalServiceUtil.getResourceRoles(
+			companyId, resourceName, scope, resourcePrimKey);
 
-			Map resourceRoles = RoleLocalServiceUtil.getResourceRoles(
-				resource.getResourceId());
+		Iterator itr = resourceRoles.entrySet().iterator();
 
-			Iterator itr = resourceRoles.entrySet().iterator();
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
 
-			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+			String roleName = entry.getKey().toString();
 
-				String roleName = entry.getKey().toString();
+			if (hasRole(roles, roleName)) {
+				Element roleEl = el.addElement("role");
 
-				if (hasRole(roles, roleName)) {
-					Element roleEl = el.addElement("role");
+				roleEl.addAttribute("name", roleName);
 
-					roleEl.addAttribute("name", roleName);
+				List actions = (List)entry.getValue();
 
-					List actions = (List)entry.getValue();
+				for (int i = 0; i < actions.size(); i++) {
+					String action = (String)actions.get(i);
 
-					for (int i = 0; i < actions.size(); i++) {
-						String action = (String)actions.get(i);
+					Element actionKeyEl = roleEl.addElement("action-key");
 
-						Element actionKeyEl = roleEl.addElement(
-							"action-key");
-
-						actionKeyEl.addText(action);
-						actionKeyEl.addAttribute("scope", scope);
-					}
+					actionKeyEl.addText(action);
+					actionKeyEl.addAttribute("scope", scope);
 				}
-			}
-		}
-		catch (NoSuchResourceException nsre) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(nsre);
 			}
 		}
 
@@ -1374,14 +1374,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportUserPermissions(
-			String companyId, long groupId, String resourceName,
-			String resourcePrimKey, Element parentEl)
+			LayoutCache layoutCache, String companyId, long groupId,
+			String resourceName, String resourcePrimKey, Element parentEl)
 		throws PortalException, SystemException {
 
 		Element userPermissionsEl = DocumentHelper.createElement(
 			"user-permissions");
 
-		List users = UserLocalServiceUtil.getGroupUsers(groupId);
+		List users = layoutCache.getGroupUsers(groupId);
 
 		for (int i = 0; i < users.size(); i++) {
 			User user = (User)users.get(i);
@@ -1391,30 +1391,18 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Element userActionsEl =
 				userPermissionsEl.addElement("user-actions");
 
-			try {
-				Resource resource = ResourceLocalServiceUtil.getResource(
-					companyId, resourceName, ResourceImpl.SCOPE_INDIVIDUAL,
-					resourcePrimKey);
+			List permissions = PermissionLocalServiceUtil.getUserPermissions(
+				user.getUserId(), companyId, resourceName,
+				ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey);
 
-				List permissions =
-					PermissionLocalServiceUtil.getUserPermissions(
-						user.getUserId(), resource.getResourceId());
+			List actions = ResourceActionsUtil.getActions(permissions);
 
-				List actions = ResourceActionsUtil.getActions(permissions);
+			for (int j = 0; j < actions.size(); j++) {
+				String action = (String)actions.get(j);
 
-				for (int j = 0; j < actions.size(); j++) {
-					String action = (String)actions.get(j);
+				Element actionKeyEl = userActionsEl.addElement("action-key");
 
-					Element actionKeyEl = userActionsEl.addElement(
-						"action-key");
-
-					actionKeyEl.addText(action);
-				}
-			}
-			catch (NoSuchResourceException nsre) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsre.getMessage());
-				}
+				actionKeyEl.addText(action);
 			}
 
 			if (userActionsEl.elements().isEmpty()) {
@@ -1431,21 +1419,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportUserRoles(
-			String companyId, long groupId, String resourceName,
-			Element parentEl)
+			LayoutCache layoutCache, String companyId, long groupId,
+			String resourceName, Element parentEl)
 		throws PortalException, SystemException {
 
 		Element userRolesEl = DocumentHelper.createElement("user-roles");
 
-		List users = UserLocalServiceUtil.getGroupUsers(groupId);
+		List users = layoutCache.getGroupUsers(groupId);
 
 		for (int i = 0; i < users.size(); i++) {
 			User user = (User)users.get(i);
 
+			String userId = user.getUserId();
 			String emailAddress = user.getEmailAddress();
 
-			List userRoles = RoleLocalServiceUtil.getUserRoles(
-				user.getUserId());
+			List userRoles = layoutCache.getUserRoles(userId);
 
 			Element userEl = exportRoles(
 				companyId, resourceName, ResourceImpl.SCOPE_GROUP,
@@ -1514,56 +1502,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return actions;
 	}
 
-	protected Map getEntityMap(String companyId, String entityName)
-		throws PortalException, SystemException {
-
-		Map entityList = new HashMap();
-
-		if (entityName.equals("user-group")) {
-			List userGroups = UserGroupLocalServiceUtil.search(
-				companyId, null, null, null, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS);
-
-			for (int i = 0; i < userGroups.size(); i++) {
-				UserGroup userGroup = (UserGroup)userGroups.get(i);
-
-				Group group = userGroup.getGroup();
-
-				entityList.put(
-					userGroup.getName(), new Long(group.getGroupId()));
-			}
-		}
-		else if (entityName.equals("organization") ||
-				 entityName.equals("location")) {
-
-			List organizations = null;
-
-			if (entityName.equals("organization")) {
-				organizations = OrganizationLocalServiceUtil.search(
-					companyId, OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID,
-					StringPool.EQUAL, null, null, null, null, null, null, null,
-					true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-			}
-			else if (entityName.equals("location")) {
-				organizations = OrganizationLocalServiceUtil.search(
-					companyId, OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID,
-					StringPool.NOT_EQUAL, null, null, null, null, null, null,
-					null, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-			}
-
-			for (int i = 0; i < organizations.size(); i++) {
-				Organization organization = (Organization)organizations.get(i);
-
-				Group group = organization.getGroup();
-
-				entityList.put(
-					organization.getName(), new Long(group.getGroupId()));
-			}
-		}
-
-		return entityList;
-	}
-
 	protected String getNextLayoutId(String ownerId) throws SystemException {
 		int layoutId = 0;
 
@@ -1617,29 +1555,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return parentLayoutId;
 	}
 
-	protected Resource getResource(
-			String companyId, long groupId, String resourceName, String scope,
-			String resourcePrimKey, boolean portletActions)
-		throws PortalException, SystemException {
-
-		Resource resource = null;
-
-		try {
-			resource = ResourceLocalServiceUtil.getResource(
-				companyId, resourceName, scope, resourcePrimKey);
-		}
-		catch (NoSuchResourceException nsre) {
-			ResourceLocalServiceUtil.addResources(
-				companyId, groupId, null, resourceName, resourcePrimKey,
-				portletActions, true, true);
-
-			resource = ResourceLocalServiceUtil.getResource(
-				companyId, resourceName, scope, resourcePrimKey);
-		}
-
-		return resource;
-	}
-
 	protected boolean hasRole(List roles, String roleName) {
 		if ((roles == null) || (roles.size() == 0)) {
 			return false;
@@ -1657,9 +1572,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importGroupPermissions(
-			String companyId, long groupId, String resourceName,
-			String resourcePrimKey, Element parentEl, String elName,
-			boolean portletActions)
+			LayoutCache layoutCache, String companyId, long groupId,
+			String resourceName, String resourcePrimKey, Element parentEl,
+			String elName, boolean portletActions)
 		throws PortalException, SystemException {
 
 		Element actionEl = parentEl.element(elName);
@@ -1670,7 +1585,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		List actions = getActions(actionEl);
 
-		Resource resource = getResource(
+		Resource resource = layoutCache.getResource(
 			companyId, groupId, resourceName, ResourceImpl.SCOPE_INDIVIDUAL,
 			resourcePrimKey, portletActions);
 
@@ -1680,7 +1595,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importGroupRoles(
-			String companyId, long groupId,
+			LayoutCache layoutCache, String companyId, long groupId,
 			String resourceName, String entityName,
 			Element parentEl)
 		throws PortalException, SystemException {
@@ -1692,13 +1607,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		importRolePermissions(
-			companyId, resourceName, ResourceImpl.SCOPE_GROUP,
+			layoutCache, companyId, resourceName, ResourceImpl.SCOPE_GROUP,
 			String.valueOf(groupId), entityRolesEl, true);
 	}
 
 	protected void importInheritedPermissions(
-			String companyId, String resourceName, String resourcePrimKey,
-			Element permissionsEl, String entityName, boolean portletActions)
+			LayoutCache layoutCache, String companyId, String resourceName,
+			String resourcePrimKey, Element permissionsEl, String entityName,
+			boolean portletActions)
 		throws PortalException, SystemException {
 
 		Element entityPermissionsEl = permissionsEl.element(
@@ -1716,7 +1632,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String name = actionEl.attributeValue("name");
 
-			long entityGroupId = searchGroupId(companyId, entityName, name);
+			long entityGroupId = layoutCache.getEntityGroupId(
+				companyId, entityName, name);
 
 			if (entityGroupId == 0) {
 				_log.warn(
@@ -1729,15 +1646,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				parentEl.add(actionEl.createCopy());
 
 				importGroupPermissions(
-					companyId, entityGroupId, resourceName, resourcePrimKey,
-					parentEl, entityName + "-actions", portletActions);
+					layoutCache, companyId, entityGroupId, resourceName,
+					resourcePrimKey, parentEl, entityName + "-actions",
+					portletActions);
 			}
 		}
 	}
 
 	protected void importInheritedRoles(
-			String companyId, long groupId, String resourceName,
-			String entityName, Element parentEl)
+			LayoutCache layoutCache, String companyId, long groupId,
+			String resourceName, String entityName, Element parentEl)
 		throws PortalException, SystemException {
 
 		Element entityRolesEl = parentEl.element(entityName + "-roles");
@@ -1753,7 +1671,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String name = entityEl.attributeValue("name");
 
-			long entityGroupId = searchGroupId(companyId, entityName, name);
+			long entityGroupId = layoutCache.getEntityGroupId(
+				companyId, entityName, name);
 
 			if (entityGroupId == 0) {
 				_log.warn(
@@ -1762,8 +1681,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 			else {
 				importRolePermissions(
-					companyId, resourceName, ResourceImpl.SCOPE_GROUP,
-					String.valueOf(groupId), entityEl, false);
+					layoutCache, companyId, resourceName,
+					ResourceImpl.SCOPE_GROUP, String.valueOf(groupId), entityEl,
+					false);
 			}
 		}
 	}
@@ -1782,16 +1702,20 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			PortletPreferencesPK pk = new PortletPreferencesPK(
 				portletId, layout.getLayoutId(), layout.getOwnerId());
 
-			PortletPreferences prefs =
-				PortletPreferencesUtil.findByPrimaryKey(pk);
+			try {
+				PortletPreferences prefs =
+					PortletPreferencesUtil.findByPrimaryKey(pk);
 
-			String preferences =
-				importPortletData(context, portletId, prefs, el);
+				String preferences =
+					importPortletData(context, portletId, prefs, el);
 
-			if (preferences != null) {
-				prefs.setPreferences(preferences);
+				if (preferences != null) {
+					prefs.setPreferences(preferences);
 
-				PortletPreferencesUtil.update(prefs);
+					PortletPreferencesUtil.update(prefs);
+				}
+			}
+			catch (NoSuchPortletPreferencesException nsppe) {
 			}
 		}
 	}
@@ -1895,8 +1819,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importRolePermissions(
-			String companyId, String resourceName, String scope,
-			String resourcePrimKey, Element parentEl, boolean communityRole)
+			LayoutCache layoutCache, String companyId, String resourceName,
+			String scope, String resourcePrimKey, Element parentEl,
+			boolean communityRole)
 		throws PortalException, SystemException {
 
 		List roleEls = parentEl.elements("role");
@@ -1906,7 +1831,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String roleName = roleEl.attributeValue("name");
 
-			Role role = searchRole(companyId, roleName);
+			Role role = layoutCache.getRole(companyId, roleName);
 
 			if (role == null) {
 				_log.warn(
@@ -1930,8 +1855,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importUserPermissions(
-			String companyId, long groupId, String resourceName,
-			String resourcePrimKey, Element parentEl, boolean portletActions)
+			LayoutCache layoutCache, String companyId, long groupId,
+			String resourceName, String resourcePrimKey, Element parentEl,
+			boolean portletActions)
 		throws PortalException, SystemException {
 
 		Element userPermissionsEl = parentEl.element("user-permissions");
@@ -1947,7 +1873,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String emailAddress = userActionsEl.attributeValue("email-address");
 
-			User user = searchUser(companyId, emailAddress, groupId);
+			User user = layoutCache.getUser(companyId, groupId, emailAddress);
 
 			if (user == null) {
 				if (_log.isWarnEnabled()) {
@@ -1959,7 +1885,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			else {
 				List actions = getActions(userActionsEl);
 
-				Resource resource = getResource(
+				Resource resource = layoutCache.getResource(
 					companyId, groupId, resourceName,
 					ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey,
 					portletActions);
@@ -1972,8 +1898,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importUserRoles(
-			String companyId, long groupId, String resourceName,
-			Element parentEl)
+			LayoutCache layoutCache, String companyId, long groupId,
+			String resourceName, Element parentEl)
 		throws PortalException, SystemException {
 
 		Element userRolesEl = parentEl.element("user-roles");
@@ -1993,7 +1919,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String emailAddress = userEl.attributeValue("email-address");
 
-			User user = searchUser(companyId, emailAddress, groupId);
+			User user = layoutCache.getUser(companyId, groupId, emailAddress);
 
 			if (user == null) {
 				if (_log.isWarnEnabled()) {
@@ -2004,8 +1930,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 			else {
 				importRolePermissions(
-					companyId, resourceName, ResourceImpl.SCOPE_GROUP,
-					String.valueOf(groupId), userEl, false);
+					layoutCache, companyId, resourceName,
+					ResourceImpl.SCOPE_GROUP, String.valueOf(groupId), userEl,
+					false);
 			}
 		}
 	}
@@ -2028,84 +1955,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 
 			return false;
-		}
-	}
-
-	protected long searchGroupId(
-			String companyId, String entityName, String name)
-		throws PortalException, SystemException {
-
-		if (entityName.equals("user-group")) {
-			List userGroups = UserGroupLocalServiceUtil.search(
-				companyId, name, null, null, 0, 1);
-
-			if (userGroups.size() > 0) {
-				UserGroup userGroup = (UserGroup)userGroups.get(0);
-
-				Group group = userGroup.getGroup();
-
-				return group.getGroupId();
-			}
-		}
-		else if (entityName.equals("organization") ||
-				 entityName.equals("location")) {
-
-			List organizations = null;
-
-			if (entityName.equals("organization")) {
-				organizations = OrganizationLocalServiceUtil.search(
-					companyId, OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID,
-					StringPool.EQUAL, name, null, null, null, null, null, null,
-					true, 0, 1);
-
-			}
-			else if (entityName.equals("location")) {
-				organizations = OrganizationLocalServiceUtil.search(
-					companyId, OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID,
-					StringPool.NOT_EQUAL, null, null, null, null, null, null,
-					null, true, 0, 1);
-			}
-
-			if (organizations.size() > 0) {
-				Organization organization = (Organization)organizations.get(0);
-
-				Group group = organization.getGroup();
-
-				return group.getGroupId();
-			}
-		}
-
-		return 0;
-	}
-
-	protected Role searchRole(String companyId, String name)
-		throws PortalException, SystemException {
-
-		try {
-			return RoleLocalServiceUtil.getRole(companyId, name);
-		}
-		catch (NoSuchRoleException nsre) {
-			return null;
-		}
-	}
-
-	protected User searchUser(
-			String companyId, String emailAddress, long groupId)
-		throws SystemException {
-
-		LinkedHashMap params = new LinkedHashMap();
-
-		params.put("usersGroups", new Long(groupId));
-
-		List users = UserLocalServiceUtil.search(
-			companyId, null, null, null, emailAddress, true, params, true, 0, 1,
-			null);
-
-		if (users.size() == 0) {
-			return null;
-		}
-		else {
-			return (User)users.get(0);
 		}
 	}
 

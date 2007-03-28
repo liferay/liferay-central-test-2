@@ -55,9 +55,6 @@ public class RoleFinder {
 	public static String COUNT_BY_C_N_D_T =
 		RoleFinder.class.getName() + ".countByC_N_D_T";
 
-	public static String FIND_BY_RESOURCE_ID =
-		RoleFinder.class.getName() + ".findByResourceId";
-
 	public static String FIND_BY_USER_GROUP_ROLE =
 		RoleFinder.class.getName() + ".findByUserGroupRole";
 
@@ -69,6 +66,9 @@ public class RoleFinder {
 
 	public static String FIND_BY_C_N_D_T =
 		RoleFinder.class.getName() + ".findByC_N_D_T";
+
+	public static String FIND_BY_C_N_S_P =
+		RoleFinder.class.getName() + ".findByC_N_S_P";
 
 	public static int countByC_N_D_T(
 			String companyId, String name, String description, Integer type)
@@ -117,58 +117,6 @@ public class RoleFinder {
 			}
 
 			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
-
-	public static Map findByResourceId(long resourceId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_RESOURCE_ID);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
-
-			q.addScalar("roleName", Hibernate.STRING);
-			q.addScalar("actionId", Hibernate.STRING);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(resourceId);
-
-			Map roleMap = new HashMap();
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Object[] array = (Object[])itr.next();
-
-				String roleName = (String)array[0];
-				String actionId = (String)array[1];
-
-				List roleList = (List)roleMap.get(roleName);
-
-				if (roleList == null) {
-					roleList = new ArrayList();
-				}
-
-				roleList.add(actionId);
-
-				roleMap.put(roleName, roleList);
-			}
-
-			return roleMap;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -342,6 +290,62 @@ public class RoleFinder {
 			}
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static Map findByC_N_S_P(
+			String companyId, String name, String scope, String primKey)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_C_N_S_P);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addScalar("roleName", Hibernate.STRING);
+			q.addScalar("actionId", Hibernate.STRING);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(name);
+			qPos.add(scope);
+			qPos.add(primKey);
+
+			Map roleMap = new HashMap();
+
+			Iterator itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				Object[] array = (Object[])itr.next();
+
+				String roleName = (String)array[0];
+				String actionId = (String)array[1];
+
+				List roleList = (List)roleMap.get(roleName);
+
+				if (roleList == null) {
+					roleList = new ArrayList();
+				}
+
+				roleList.add(actionId);
+
+				roleMap.put(roleName, roleList);
+			}
+
+			return roleMap;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

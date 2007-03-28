@@ -108,9 +108,11 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 		return RoleLocalServiceFactory.getTxImpl().getGroupRoles(groupId);
 	}
 
-	public java.util.Map getResourceRoles(long resourceId)
+	public java.util.Map getResourceRoles(java.lang.String companyId,
+		java.lang.String name, java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException {
-		return RoleLocalServiceFactory.getTxImpl().getResourceRoles(resourceId);
+		return RoleLocalServiceFactory.getTxImpl().getResourceRoles(companyId,
+			name, scope, primKey);
 	}
 
 	public com.liferay.portal.model.Role getRole(java.lang.String roleId)

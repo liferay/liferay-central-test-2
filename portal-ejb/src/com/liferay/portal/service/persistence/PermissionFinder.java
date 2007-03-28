@@ -81,6 +81,12 @@ public class PermissionFinder {
 	public static String FIND_BY_U_A_R =
 		PermissionFinder.class.getName() + ".findByU_A_R";
 
+	public static String FIND_BY_G_C_N_S_P =
+		PermissionFinder.class.getName() + ".findByG_C_N_S_P";
+
+	public static String FIND_BY_U_C_N_S_P =
+		PermissionFinder.class.getName() + ".findByU_C_N_S_P";
+
 	public static boolean containsPermissions_2(
 			List permissions, String userId, List groups, long groupId)
 		throws SystemException {
@@ -752,6 +758,78 @@ public class PermissionFinder {
 
 			qPos.add(userId);
 			qPos.add(resourceId);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByG_C_N_S_P(
+			long groupId, String companyId, String name, String scope,
+			String primKey)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_C_N_S_P);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addEntity("Permission_", PermissionImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(companyId);
+			qPos.add(name);
+			qPos.add(scope);
+			qPos.add(primKey);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByU_C_N_S_P(
+			String userId, String companyId, String name, String scope,
+			String primKey)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_U_C_N_S_P);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addEntity("Permission_", PermissionImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+			qPos.add(companyId);
+			qPos.add(name);
+			qPos.add(scope);
+			qPos.add(primKey);
 
 			return q.list();
 		}

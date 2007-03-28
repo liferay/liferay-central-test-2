@@ -158,6 +158,15 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		return PermissionFinder.findByG_R(groupId, resourceId);
 	}
 
+	public List getGroupPermissions(
+			long groupId, String companyId, String name, String scope,
+			String primKey)
+		throws SystemException {
+
+		return PermissionFinder.findByG_C_N_S_P(
+			groupId, companyId, name, scope, primKey);
+	}
+
 	public List getOrgGroupPermissions(
 			String organizationId, long groupId, long resourceId)
 		throws SystemException {
@@ -207,6 +216,15 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		throws SystemException {
 
 		return PermissionFinder.findByU_R(userId, resourceId);
+	}
+
+	public List getUserPermissions(
+			String userId, String companyId, String name, String scope,
+			String primKey)
+		throws SystemException {
+
+		return PermissionFinder.findByU_C_N_S_P(
+			userId, companyId, name, scope, primKey);
 	}
 
 	public boolean hasGroupPermission(
