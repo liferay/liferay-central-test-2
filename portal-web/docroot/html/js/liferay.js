@@ -103,6 +103,11 @@ Liferay.Dock = {
 
 			dockList.hide();
 			dockList.wrap('<div class="lfr-dock-list-container"></div>');
+			
+			var dockData = {
+				dock: dock,
+				dockList: dockList
+			};
 
 			dock.css(
 				{
@@ -114,23 +119,39 @@ Liferay.Dock = {
 
 			dock.bind(
 				'click',
-				{
-					dock: dock,
-					dockList: dockList
-				},
+				dockData,
 				instance._toggle
 			);
 
-			myPlaces.bind(
-				'mouseout',
-				myPlaces,
-				instance._togglePlaces
+			var dockToggle = function(event) {
+					if (dockList.is(':visible') && event.type == 'mouseover') {
+						return;
+					}
+					event.data = dockData;
+					instance._toggle(event);	
+			};
+
+			var myPlacesToggle = function(event) {
+					event.data = myPlaces;
+					instance._togglePlaces(event);	
+			};
+
+			dock.hoverIntent(
+				{
+					interval: 250,
+					out: dockToggle,
+					over: dockToggle,
+					timeout: 500
+				}	
 			);
 
-			myPlaces.bind(
-				'mouseover',
-				myPlaces,
-				instance._togglePlaces
+			myPlaces.hoverIntent(
+				{
+					interval: 0,
+					out: myPlacesToggle,
+					over: myPlacesToggle,
+					timeout: 250
+				}	
 			);
 
 			myPlaces.find('.my-places-toggle, a[@href=javascript: ;]').click(
@@ -429,7 +450,7 @@ Liferay.Navigation = new Class({
 	_cancelPage: function(event, obj, oldName) {
 		var navItem = null;
 
-		if (oldName){
+		if (oldName) {
 			navItem = jQuery(obj).parents('li');
 
 			var enterPage = navItem.find('.enter-page');
@@ -576,11 +597,11 @@ Liferay.Navigation = new Class({
 
 					enterPageInput.keyup(
 						function(event) {
-							if (event.keyCode == 13){
+							if (event.keyCode == 13) {
 								savePage.trigger('click');
 								pageParents.unbind('blur', pageBlur);
 							}
-							else if (event.keyCode == 27){
+							else if (event.keyCode == 27) {
 								cancelPage.trigger('click');
 								pageParents.unbind('blur', pageBlur);
 							}
