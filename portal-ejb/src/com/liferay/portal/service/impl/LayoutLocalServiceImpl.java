@@ -512,9 +512,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// XML file
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Exporting layouts takes " + stopWatch.getTime() + " ms");
+		if (_log.isInfoEnabled()) {
+			_log.info("Exporting layouts takes " + stopWatch.getTime() + " ms");
 		}
 
 		try {
@@ -589,10 +588,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public void importLayouts(String userId, String ownerId, InputStream is)
 		throws PortalException, SystemException {
 
-		// TEST CODE
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
-        System.out.println("Starting import of layouts at " + stopWatch.getTime());
+		StopWatch stopWatch = null;
+
+		if (_log.isDebugEnabled()) {
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
 
         LayoutCache layoutCache = new LayoutCache();
 
@@ -714,8 +716,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			if (groupId != guestGroup.getGroupId()) {
 				importGroupPermissions(
-					layoutCache, companyId, guestGroup.getGroupId(), resourceName,
-					resourcePrimKey, permissionsEl, "guest-actions", false);
+					layoutCache, companyId, guestGroup.getGroupId(),
+					resourceName, resourcePrimKey, permissionsEl,
+					"guest-actions", false);
 			}
 
 			importUserPermissions(
@@ -723,16 +726,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				permissionsEl, false);
 
 			importInheritedPermissions(
-				layoutCache, companyId, resourceName, resourcePrimKey, permissionsEl,
-				"organization", false);
+				layoutCache, companyId, resourceName, resourcePrimKey,
+				permissionsEl, "organization", false);
 
 			importInheritedPermissions(
-				layoutCache, companyId, resourceName, resourcePrimKey, permissionsEl,
-				"location", false);
+				layoutCache, companyId, resourceName, resourcePrimKey,
+				permissionsEl, "location", false);
 
 			importInheritedPermissions(
-				layoutCache, companyId, resourceName, resourcePrimKey, permissionsEl,
-				"user-group", false);
+				layoutCache, companyId, resourceName, resourcePrimKey,
+				permissionsEl, "user-group", false);
 
 			// Portlet permissions
 
@@ -760,30 +763,31 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				}
 				else {
 					importGroupPermissions(
-						layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-						portletEl, "community-actions", true);
+						layoutCache, companyId, groupId, resourceName,
+						resourcePrimKey, portletEl, "community-actions", true);
 
 					if (groupId != guestGroup.getGroupId()) {
 						importGroupPermissions(
-							layoutCache, companyId, guestGroup.getGroupId(), resourceName,
-							resourcePrimKey, portletEl, "guest-actions", true);
+							layoutCache, companyId, guestGroup.getGroupId(),
+							resourceName, resourcePrimKey, portletEl,
+							"guest-actions", true);
 					}
 
 					importUserPermissions(
-						layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-						portletEl, true);
+						layoutCache, companyId, groupId, resourceName,
+						resourcePrimKey, portletEl, true);
 
 					importInheritedPermissions(
-						layoutCache, companyId, resourceName, resourcePrimKey, portletEl,
-						"organization", true);
+						layoutCache, companyId, resourceName, resourcePrimKey,
+						portletEl, "organization", true);
 
 					importInheritedPermissions(
-						layoutCache, companyId, resourceName, resourcePrimKey, portletEl,
-						"location", true);
+						layoutCache, companyId, resourceName, resourcePrimKey,
+						portletEl, "location", true);
 
 					importInheritedPermissions(
-						layoutCache, companyId, resourceName, resourcePrimKey, portletEl,
-						"user-group", true);
+						layoutCache, companyId, resourceName, resourcePrimKey,
+						portletEl, "user-group", true);
 				}
 			}
 
@@ -803,19 +807,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String resourceName = Layout.class.getName();
 
 		importGroupRoles(
-			layoutCache, companyId, groupId, resourceName, "community", rolesEl);
+			layoutCache, companyId, groupId, resourceName, "community",
+			rolesEl);
 
-		importUserRoles(
-			layoutCache, companyId, groupId, resourceName, rolesEl);
+		importUserRoles(layoutCache, companyId, groupId, resourceName, rolesEl);
 
 		importInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "organization", rolesEl);
+			layoutCache, companyId, groupId, resourceName, "organization",
+			rolesEl);
 
 		importInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "location", rolesEl);
 
 		importInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "user-group", rolesEl);
+			layoutCache, companyId, groupId, resourceName, "user-group",
+			rolesEl);
 
 		// Portlet roles
 
@@ -840,19 +846,23 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 			else {
 				importGroupRoles(
-					layoutCache, companyId, groupId, resourceName, "community", portletEl);
+					layoutCache, companyId, groupId, resourceName, "community",
+					portletEl);
 
-				importUserRoles(layoutCache, companyId, groupId, resourceName, portletEl);
+				importUserRoles(
+					layoutCache, companyId, groupId, resourceName, portletEl);
 
 				importInheritedRoles(
-					layoutCache, companyId, groupId, resourceName, "organization",
+					layoutCache, companyId, groupId, resourceName,
+					"organization", portletEl);
+
+				importInheritedRoles(
+					layoutCache, companyId, groupId, resourceName, "location",
 					portletEl);
 
 				importInheritedRoles(
-					layoutCache, companyId, groupId, resourceName, "location", portletEl);
-
-				importInheritedRoles(
-					layoutCache, companyId, groupId, resourceName, "user-group", portletEl);
+					layoutCache, companyId, groupId, resourceName, "user-group",
+					portletEl);
 			}
 		}
 
@@ -868,7 +878,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 
-		System.out.println("Ending import of layouts at " + stopWatch.getTime());
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing layouts takes " + stopWatch.getTime() + " ms");
+		}
 	}
 
 	public void setLayouts(
