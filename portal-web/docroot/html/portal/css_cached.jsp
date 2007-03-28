@@ -27,3 +27,9 @@
 <%
 response.setContentType(Constants.TEXT_CSS);
 %>
+
+/* ---------- TagLib Discussion Thread ---------- */
+
+.taglib-discussion td img {
+	vertical-align: middle;	
+}

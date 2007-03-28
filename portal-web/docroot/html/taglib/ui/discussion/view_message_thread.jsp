@@ -41,57 +41,47 @@ if (treeWalker.isOdd()) {
 }
 %>
 
-<tr class="<%= className %>" style="font-size: x-small;" onmouseover="this.className = '<%= classHoverName %>';" onmouseout="this.className = '<%= className %>';">
-	<td width="90%">
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td style="padding-left: <%= depth * 10 %>px;"></td>
-			<td>
-				<c:if test="<%= !message.isRoot() %>">
-					<c:choose>
-						<c:when test="<%= !lastNode %>">
-							<img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/t.png">
-						</c:when>
-						<c:otherwise>
-							<img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/l.png">
-						</c:otherwise>
-					</c:choose>
-				</c:if>
-			</td>
-			<td style="padding-left: 5px;"></td>
-			<td>
+<tr class="<%= className %>" onmouseover="this.className = '<%= classHoverName %>';" onmouseout="this.className = '<%= className %>';">
+	<td style="padding-left: <%= depth * 10 %>px;" width="90%">
+		<c:if test="<%= !message.isRoot() %>">
+			<c:choose>
+				<c:when test="<%= !lastNode %>">
+					<img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/t.png" />
+				</c:when>
+				<c:otherwise>
+					<img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/l.png" />
+				</c:otherwise>
+			</c:choose>
+		</c:if>
 
-				<%
-				String rowHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + message.getMessageId() + ");";
-				%>
+		<%
+		String rowHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + message.getMessageId() + ");";
+		%>
 
-				<a href="<%= rowHREF %>">
+		<a href="<%= rowHREF %>">
 
-				<%
-				boolean readFlag = false;
+		<%
+		boolean readFlag = false;
 
-				if (themeDisplay.isSignedIn()) {
-					readFlag = MBMessageFlagLocalServiceUtil.hasReadFlag(message.getMessageId(), request.getRemoteUser());
-				}
-				%>
+		if (themeDisplay.isSignedIn()) {
+			readFlag = MBMessageFlagLocalServiceUtil.hasReadFlag(message.getMessageId(), request.getRemoteUser());
+		}
+		%>
 
-				<c:if test="<%= !readFlag %>">
-					<b>
-				</c:if>
+		<c:if test="<%= !readFlag %>">
+			<b>
+		</c:if>
 
-				<%= message.getSubject() %>
+		<%= message.getSubject() %>
 
-				<c:if test="<%= !readFlag %>">
-					</b>
-				</c:if>
+		<c:if test="<%= !readFlag %>">
+			</b>
+		</c:if>
 
-				</a>
-			</td>
-		</tr>
-		</table>
+		</a>
 	</td>
 	<td></td>
-	<td nowrap>
+	<td nowrap="nowrap">
 		<a href="<%= rowHREF %>">
 
 		<c:choose>
@@ -106,7 +96,7 @@ if (treeWalker.isOdd()) {
 		</a>
 	</td>
 	<td></td>
-	<td nowrap>
+	<td nowrap="nowrap">
 		<a href="<%= rowHREF %>">
 		<%= dateFormatDateTime.format(message.getModifiedDate()) %>
 		</a>

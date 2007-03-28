@@ -126,7 +126,7 @@ List messages = treeWalker.getMessages();
 <c:if test="<%= messages.size() > 1 %>">
 	<br>
 
-	<table border="0" cellpadding="4" cellspacing="0" width="100%">
+	<table border="0" cellpadding="4" cellspacing="0" class="taglib-discussion" width="100%">
 	<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
 		<td>
 			<%= LanguageUtil.get(pageContext, "threaded-replies") %>
