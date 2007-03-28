@@ -102,6 +102,11 @@ public class MBBanLocalServiceUtil {
 		mbBanLocalService.deleteBans(banUserId);
 	}
 
+	public static void expireBans() throws com.liferay.portal.SystemException {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.expireBans();
+	}
+
 	public static java.util.List getBans(long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
