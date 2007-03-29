@@ -475,23 +475,24 @@
 
 		<delete file="docroot/html/js/everything.js" />
 
+		<taskdef classpathref="project.classpath" classname="com.liferay.portal.util.PropsUtilTask" name="propsutil" />
+
+		<propsutil key="javascript.files" result="javascript.files" />
+
 		<for list="${javascript.files}" param="js.file">
 			<sequential>
-				<if>
-					<equals arg1="@{js.file}" arg2="interface.js" />
-					<then>
-						<concat destfile="docroot/html/js/everything.js" append="yes">
-							<fileset dir="docroot/html/js/" includes="@{js.file}" />
-						</concat>
-					</then>
-					<else>
-						<exec executable="cmd">
-							<arg line="/c CScript /nologo ${project.dir}/tools/pack.wsf docroot/html/js/@{js.file} >> docroot/html/js/everything.js" />
-						</exec>
-					</else>
-				</if>
+				<concat destfile="docroot/html/js/everything_unpacked.js" append="yes">
+					<fileset dir="docroot/html/js/" includes="@{js.file}" />
+				</concat>
 			</sequential>
 		</for>
+
+		<antcall target="build-javascript-cmd">
+			<param name="js.from.file" value="docroot/html/js/everything_unpacked.js" />
+			<param name="js.to.file" value="docroot/html/js/everything.js" />
+		</antcall>
+
+		<delete file="docroot/html/js/everything_unpacked.js" />
 
 		<antcall target="build-javascript-cmd">
 			<param name="js.from.file" value="docroot/html/portlet/tags_admin/unpacked.js" />
