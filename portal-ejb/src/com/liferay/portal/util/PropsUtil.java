@@ -146,6 +146,8 @@ public class PropsUtil {
 
 	// JavaScript
 
+	public static final String JAVASCRIPT_FILES = "javascript.files";
+
 	public static final String JAVASCRIPT_FAST_LOAD = "javascript.fast.load";
 
 	public static final String JAVASCRIPT_LOG_ENABLED = "javascript.log.enabled";
