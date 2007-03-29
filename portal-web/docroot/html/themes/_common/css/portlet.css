@@ -177,6 +177,14 @@
 	padding: 0.3em 1em;
 }
 
+.portlet-section-body td td, .portlet-section-body-hover td td {
+	border: none;
+}
+
+.portlet-section-alternate td td, .portlet-section-alternate-hover td td {
+	border: none;
+}
+
 /* ---------- Text in a selected cell range ---------- */
 
 .portlet-section-selected {
