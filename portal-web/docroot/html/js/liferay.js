@@ -103,7 +103,7 @@ Liferay.Dock = {
 
 			dockList.hide();
 			dockList.wrap('<div class="lfr-dock-list-container"></div>');
-			
+
 			var dockData = {
 				dock: dock,
 				dockList: dockList
@@ -124,16 +124,17 @@ Liferay.Dock = {
 			);
 
 			var dockToggle = function(event) {
-					if (dockList.is(':visible') && event.type == 'mouseover') {
-						return;
-					}
-					event.data = dockData;
-					instance._toggle(event);	
+				if (dockList.is(':visible') && (event.type == 'mouseover')) {
+					return;
+				}
+
+				event.data = dockData;
+				instance._toggle(event);
 			};
 
 			var myPlacesToggle = function(event) {
-					event.data = myPlaces;
-					instance._togglePlaces(event);	
+				event.data = myPlaces;
+				instance._togglePlaces(event);
 			};
 
 			dock.hoverIntent(
@@ -142,7 +143,7 @@ Liferay.Dock = {
 					out: dockToggle,
 					over: dockToggle,
 					timeout: 500
-				}	
+				}
 			);
 
 			myPlaces.hoverIntent(
@@ -151,7 +152,7 @@ Liferay.Dock = {
 					out: myPlacesToggle,
 					over: myPlacesToggle,
 					timeout: 250
-				}	
+				}
 			);
 
 			myPlaces.find('.my-places-toggle, a[@href=javascript: ;]').click(
