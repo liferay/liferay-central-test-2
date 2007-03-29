@@ -133,14 +133,18 @@ public class CachePortlet implements Portlet {
 
 		ClassLoader portletClassLoader = _getPortletClassLoader();
 
-		if (portletClassLoader != null) {
-			Thread.currentThread().setContextClassLoader(portletClassLoader);
+		try {
+			if (portletClassLoader != null) {
+				Thread.currentThread().setContextClassLoader(portletClassLoader);
+			}
+
+			_portlet.init(config);
 		}
-
-		_portlet.init(config);
-
-		if (portletClassLoader != null) {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		finally {
+			if (portletClassLoader != null) {
+				Thread.currentThread().setContextClassLoader(
+					contextClassLoader);
+			}
 		}
 
 		_destroyable = true;
@@ -243,16 +247,19 @@ public class CachePortlet implements Portlet {
 
 			ClassLoader portletClassLoader = _getPortletClassLoader();
 
-			if (portletClassLoader != null) {
-				Thread.currentThread().setContextClassLoader(
-					portletClassLoader);
+			try {
+				if (portletClassLoader != null) {
+					Thread.currentThread().setContextClassLoader(
+						portletClassLoader);
+				}
+
+				_portlet.destroy();
 			}
-
-			_portlet.destroy();
-
-			if (portletClassLoader != null) {
-				Thread.currentThread().setContextClassLoader(
-					contextClassLoader);
+			finally {
+				if (portletClassLoader != null) {
+					Thread.currentThread().setContextClassLoader(
+						contextClassLoader);
+				}
 			}
 		}
 
