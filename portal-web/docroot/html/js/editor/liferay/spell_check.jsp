@@ -235,7 +235,7 @@ List invalidWords = WordsUtil.checkSpelling(text);
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<iframe height="300" id="textArea" name="textArea" src="../../common/null.html" width="640"></iframe>
+		<iframe height="300" id="textArea" name="textArea" src="../../../common/null.html" width="640"></iframe>
 	</td>
 </tr>
 </table>

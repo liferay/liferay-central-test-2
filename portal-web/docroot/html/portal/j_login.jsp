@@ -44,7 +44,7 @@ String jPassword = (String)session.getAttribute("j_password");
 			<meta content="no-cache" http-equiv="Cache-Control">
 			<meta content="no-cache" http-equiv="Pragma">
 			<meta content="0" http-equiv="Expires">
-			<script src="<%= themeDisplay.getPathJavaScript() %>/xp_progress.js" type="text/javascript"></script>
+			<script src="<%= themeDisplay.getPathJavaScript() %>/misc/xp_progress.js" type="text/javascript"></script>
 		</head>
 
 		<body onLoad="setTimeout('document.fm.submit()', 100);">

@@ -132,8 +132,6 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 
 	</c:when>
 	<c:otherwise>
-		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/mail.js" type="text/javascript"></script>
-
 		<script type="text/javascript">
 			function changeRange(range) {
 				var input = document.getElementById("portlet-mail-toolbar-advanced-search-dates-input");

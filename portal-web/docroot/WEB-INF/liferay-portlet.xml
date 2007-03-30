@@ -13,6 +13,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
+		<header-javascript>/html/portlet/mail/packed.js</header-javascript>
 	</portlet>
 	<portlet>
 		<portlet-name>2</portlet-name>

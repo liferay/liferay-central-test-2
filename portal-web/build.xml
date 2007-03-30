@@ -481,6 +481,14 @@
 
 		<for list="${javascript.files}" param="js.file">
 			<sequential>
+				<exec executable="cmd">
+					<arg line="/c CScript /nologo ${project.dir}/tools/pack.wsf docroot/html/js/@{js.file} >> docroot/html/js/everything.js" />
+				</exec>
+			</sequential>
+		</for>
+
+		<!--<for list="${javascript.files}" param="js.file">
+			<sequential>
 				<concat destfile="docroot/html/js/everything_unpacked.js" append="yes">
 					<fileset dir="docroot/html/js/" includes="@{js.file}" />
 				</concat>
@@ -492,11 +500,14 @@
 			<param name="js.to.file" value="docroot/html/js/everything.js" />
 		</antcall>
 
-		<delete file="docroot/html/js/everything_unpacked.js" />
+		<delete file="docroot/html/js/everything_unpacked.js" />-->
 
-		<antcall target="build-javascript-cmd">
-			<param name="js.from.file" value="docroot/html/portlet/tags_admin/unpacked.js" />
-			<param name="js.to.file" value="docroot/html/portlet/tags_admin/packed.js" />
+		<antcall target="build-javascript-portlet-cmd">
+			<param name="portlet.name" value="mail" />
+		</antcall>
+
+		<antcall target="build-javascript-portlet-cmd">
+			<param name="portlet.name" value="tags_admin" />
 		</antcall>
 	</target>
 
@@ -504,6 +515,13 @@
 		<exec executable="cmd">
 			<arg line="/c CScript /nologo ${project.dir}/tools/pack.wsf ${js.from.file} > ${js.to.file}" />
 		</exec>
+	</target>
+
+	<target name="build-javascript-portlet-cmd">
+		<antcall target="build-javascript-cmd">
+			<param name="js.from.file" value="docroot/html/portlet/${portlet.name}/unpacked.js" />
+			<param name="js.to.file" value="docroot/html/portlet/${portlet.name}/packed.js" />
+		</antcall>
 	</target>
 
 	<target name="build-themes">
@@ -555,5 +573,9 @@
 			fork="true"
 			newenvironment="true"
 		/>
+	</target>
+
+	<target name="deploy-properties">
+		<ant dir=".." target="deploy-properties" inheritAll="false" />
 	</target>
 </project>

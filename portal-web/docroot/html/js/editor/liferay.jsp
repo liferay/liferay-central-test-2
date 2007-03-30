@@ -684,7 +684,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 </tr>
 <tr>
 	<td bgcolor="#FFFFFF" height="100%">
-		<iframe height="100%" id="textArea" name="textArea" src="../../common/null.html" width="100%"></iframe>
+		<iframe height="100%" id="textArea" name="textArea" src="../../../common/null.html" width="100%"></iframe>
 	</td>
 </tr>
 </table>
