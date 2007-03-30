@@ -12,7 +12,11 @@ body.vista {
 	background: #000 url(../images/custom/vista_wall.jpg) scroll no-repeat bottom left;
 }
 
-/******************************************************************************/  /* Liferay Layout CSS */  /******************************************************************************/
+/******************************************************************************/
+
+/* Liferay Layout CSS */
+
+/******************************************************************************/
 
 #layout-desktop-icons-box {
 	bottom: 0;
@@ -196,7 +200,11 @@ body.linux #desktop-icon-title {
 	background: url(../images/common/diagonal-lines.gif) scroll repeat;
 }
 
-/******************************************************************************/  /* Portlet CSS */  /******************************************************************************/
+/******************************************************************************/
+
+/* Portlet CSS */
+
+/******************************************************************************/
 
 /* Liferay Portlet */
 
@@ -224,7 +232,7 @@ body.linux #desktop-icon-title {
 	position: relative;
 }
 
-.portlet-shadow-tl, .portlet-shadow-tr,  .portlet-shadow-bl, .portlet-shadow-br {
+.portlet-shadow-tl, .portlet-shadow-tr, .portlet-shadow-bl, .portlet-shadow-br {
 	left: 0;
 	position: absolute;
 	top: 0;
@@ -345,7 +353,7 @@ body.linux #desktop-icon-title {
 	top: 13px;
 }
 
-.portlet-resize-container,  .portlet-decorate-resize-container {
+.portlet-resize-container, .portlet-decorate-resize-container {
 	position: relative;
 }
 
