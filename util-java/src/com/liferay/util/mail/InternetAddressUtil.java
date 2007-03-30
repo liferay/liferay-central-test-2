@@ -74,16 +74,37 @@ public class InternetAddressUtil {
 		return (InternetAddress[])list.toArray(new InternetAddress[0]);
 	}
 
-	public static String toString(Address[] addresses) {
-		InternetAddress[] internetAddresses = (InternetAddress[])addresses;
+	public static String toString(Address address) {
+		InternetAddress internetAddress = (InternetAddress)address;
 
 		StringMaker sm = new StringMaker();
 
-		if (internetAddresses != null) {
-			for (int i = 0; i < internetAddresses.length; i++) {
-				sm.append(internetAddresses[i].toUnicodeString());
+		if (internetAddress != null) {
+			String personal = internetAddress.getPersonal();
+			String emailAddress = internetAddress.getAddress();
 
-				if (i < internetAddresses.length - 1) {
+			if (Validator.isNotNull(personal)) {
+				sm.append(personal + StringPool.SPACE);
+				sm.append(StringPool.LESS_THAN);
+				sm.append(emailAddress);
+				sm.append(StringPool.GREATER_THAN);
+			}
+			else {
+				sm.append(emailAddress);
+			}
+		}
+
+		return sm.toString();
+	}
+
+	public static String toString(Address[] addresses) {
+		StringMaker sm = new StringMaker();
+
+		if (addresses != null) {
+			for (int i = 0; i < addresses.length; i++) {
+				sm.append(toString(addresses[i]));
+
+				if (i < addresses.length - 1) {
 					sm.append(StringPool.COMMA + StringPool.NBSP);
 				}
 			}

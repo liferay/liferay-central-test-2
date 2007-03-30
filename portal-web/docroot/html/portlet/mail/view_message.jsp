@@ -52,7 +52,7 @@ boolean header = ParamUtil.getBoolean(request, "header");
 				<%= LanguageUtil.get(pageContext, "from") %>:&nbsp;
 			</td>
 			<td>
-				<%= Html.escape(from.toString(), false) %>
+				<%= Html.escape(InternetAddressUtil.toString(from), false) %>
 			</td>
 		</tr>
 
