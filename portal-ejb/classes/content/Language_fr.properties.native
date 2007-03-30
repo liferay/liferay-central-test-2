@@ -1617,6 +1617,7 @@ please-complete-your-order=Veuillez {0}compléter{1} votre commande.
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=Veuillez contacter l'administrateur pour lui signaler qu'aucune de vos pages ne sont configurées.
 please-contact-the-administrator-because-you-do-not-have-any-roles=Veuillez contacter l'administrateur parce que vous n'avez aucun rôle.
 please-contact-the-administrator-to-configure-a-google-license=Veuillez contacter l'administrateur pour configurer un permis de Google.
+please-contact-the-administrator-to-configure-a-valid-mail-server=Veuillez contacter l'administrateur pour configurer un mail server valide.
 please-contact-the-administrator-to-setup-this-portlet=Veuillez contacter l'administrateur pour installer ce portlet. Si vous êtes l'administrateur, éditez les préférences du portlet pour installer ce portlet.
 please-email-all-questions-to=Veuillez envoyer toutes vos questions par email à {0}.
 please-ensure-the-administrator-has-configured-a-proper-google-license=Veuillez vous assurer que l'administrateur a bien configuré la licence Google.

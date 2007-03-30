@@ -1617,6 +1617,7 @@ please-complete-your-order=請 {0}完成{1}您的訂單.
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=請與管理員聯繫, 因為您沒有被配置到任何頁。
 please-contact-the-administrator-because-you-do-not-have-any-roles=請與管理員聯繫因為您沒有任何角色。
 please-contact-the-administrator-to-configure-a-google-license=請與管理員聯繫配置Google 執照。
+please-contact-the-administrator-to-configure-a-valid-mail-server=請與管理員聯繫配置合法的郵件伺服器。
 please-contact-the-administrator-to-setup-this-portlet=請與管理員聯繫設定此portlet 。如果您是管理員, 編輯portlet 的偏好設定這portlet 。
 please-email-all-questions-to=請email所有的問題到 {0}.
 please-ensure-the-administrator-has-configured-a-proper-google-license=請保證管理員配置了一個適當的Google 執照。
