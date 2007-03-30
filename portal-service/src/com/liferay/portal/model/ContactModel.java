@@ -47,13 +47,13 @@ import java.util.Date;
  *
  */
 public interface ContactModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getContactId();
+	public long getContactId();
 
-	public void setContactId(String contactId);
+	public void setContactId(long contactId);
 
 	public String getCompanyId();
 
@@ -79,9 +79,9 @@ public interface ContactModel extends BaseModel {
 
 	public void setAccountId(String accountId);
 
-	public String getParentContactId();
+	public long getParentContactId();
 
-	public void setParentContactId(String parentContactId);
+	public void setParentContactId(long parentContactId);
 
 	public String getFirstName();
 

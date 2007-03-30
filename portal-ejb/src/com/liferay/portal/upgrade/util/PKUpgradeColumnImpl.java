@@ -25,6 +25,8 @@ package com.liferay.portal.upgrade.util;
 import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="PKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,20 +41,19 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public PKUpgradeColumnImpl(String name, boolean trackValues) {
-		this(name, null, null, trackValues);
+		this(name, null, trackValues);
 	}
 
 	public PKUpgradeColumnImpl(int pos, boolean trackValues) {
-		this(pos, null, null, trackValues);
+		this(pos, null, trackValues);
 	}
 
 	public PKUpgradeColumnImpl(String name, Integer oldColumnType,
-							   Integer newColumnType, boolean trackValues) {
+							   boolean trackValues) {
 
 		super(name);
 
 		_oldColumnType = oldColumnType;
-		_newColumnType = newColumnType;
 		_trackValues = trackValues;
 
 		if (_trackValues) {
@@ -61,12 +62,11 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public PKUpgradeColumnImpl(int pos, Integer oldColumnType,
-							   Integer newColumnType, boolean trackValues) {
+							   boolean trackValues) {
 
 		super(pos);
 
 		_oldColumnType = oldColumnType;
-		_newColumnType = newColumnType;
 		_trackValues = trackValues;
 
 		if (_trackValues) {
@@ -84,12 +84,7 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Integer getNewColumnType(Integer defaultType) {
-		if (_newColumnType == null) {
-			return defaultType;
-		}
-		else {
-			return _newColumnType;
-		}
+		return new Integer(Types.BIGINT);
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
@@ -108,7 +103,6 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	private Integer _oldColumnType;
-	private Integer _newColumnType;
 	private boolean _trackValues;
 	private ValueMapper _valueMapper;
 

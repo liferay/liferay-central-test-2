@@ -233,7 +233,7 @@ public class UserImpl extends UserModelImpl implements User {
 		Contact contact = null;
 
 		try {
-			contact = ContactLocalServiceUtil.getContact(getUserId());
+			contact = ContactLocalServiceUtil.getContact(getContactId());
 		}
 		catch (Exception e) {
 			contact = new ContactImpl();

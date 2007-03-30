@@ -106,7 +106,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
-				<liferay-util:param name="classPK" value="<%= contact2.getContactId() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
 			</liferay-util:include>
 		</liferay-ui:section>
 		<liferay-ui:section>
@@ -114,7 +114,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
-				<liferay-util:param name="classPK" value="<%= contact2.getContactId() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
 				<liferay-util:param name="organizationId" value="<%= organizationId %>" />
 				<liferay-util:param name="locationId" value="<%= locationId %>" />
 			</liferay-util:include>
@@ -124,7 +124,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
-				<liferay-util:param name="classPK" value="<%= contact2.getContactId() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
 			</liferay-util:include>
 		</liferay-ui:section>
 	</liferay-ui:tabs>
@@ -139,7 +139,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
-				<liferay-util:param name="classPK" value="<%= contact2.getContactId() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
 				<liferay-util:param name="organizationId" value="<%= organizationId %>" />
 				<liferay-util:param name="locationId" value="<%= locationId %>" />
 			</liferay-util:include>

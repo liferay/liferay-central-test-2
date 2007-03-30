@@ -129,11 +129,11 @@ public class UserSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getContactId() {
+	public long getContactId() {
 		return _contactId;
 	}
 
-	public void setContactId(String contactId) {
+	public void setContactId(long contactId) {
 		_contactId = contactId;
 	}
 
@@ -301,7 +301,7 @@ public class UserSoap implements Serializable {
 	private String _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _contactId;
+	private long _contactId;
 	private String _password;
 	private boolean _passwordEncrypted;
 	private Date _passwordExpirationDate;

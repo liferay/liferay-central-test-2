@@ -55,14 +55,14 @@ import java.util.Date;
 public class ContactModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Contact_";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "contactId", new Integer(Types.VARCHAR) },
+			{ "contactId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "accountId", new Integer(Types.VARCHAR) },
-			{ "parentContactId", new Integer(Types.VARCHAR) },
+			{ "parentContactId", new Integer(Types.BIGINT) },
 			{ "firstName", new Integer(Types.VARCHAR) },
 			{ "middleName", new Integer(Types.VARCHAR) },
 			{ "lastName", new Integer(Types.VARCHAR) },
@@ -86,9 +86,6 @@ public class ContactModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_CONTACTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.contactId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -100,9 +97,6 @@ public class ContactModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ACCOUNTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.accountId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTCONTACTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.parentContactId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_FIRSTNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.firstName"),
@@ -158,27 +152,20 @@ public class ContactModelImpl extends BaseModelImpl {
 	public ContactModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _contactId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setContactId(pk);
 	}
 
-	public String getContactId() {
-		return GetterUtil.getString(_contactId);
+	public long getContactId() {
+		return _contactId;
 	}
 
-	public void setContactId(String contactId) {
-		if (((contactId == null) && (_contactId != null)) ||
-				((contactId != null) && (_contactId == null)) ||
-				((contactId != null) && (_contactId != null) &&
-				!contactId.equals(_contactId))) {
-			if (!XSS_ALLOW_CONTACTID) {
-				contactId = XSSUtil.strip(contactId);
-			}
-
+	public void setContactId(long contactId) {
+		if (contactId != _contactId) {
 			_contactId = contactId;
 		}
 	}
@@ -277,19 +264,12 @@ public class ContactModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getParentContactId() {
-		return GetterUtil.getString(_parentContactId);
+	public long getParentContactId() {
+		return _parentContactId;
 	}
 
-	public void setParentContactId(String parentContactId) {
-		if (((parentContactId == null) && (_parentContactId != null)) ||
-				((parentContactId != null) && (_parentContactId == null)) ||
-				((parentContactId != null) && (_parentContactId != null) &&
-				!parentContactId.equals(_parentContactId))) {
-			if (!XSS_ALLOW_PARENTCONTACTID) {
-				parentContactId = XSSUtil.strip(parentContactId);
-			}
-
+	public void setParentContactId(long parentContactId) {
+		if (parentContactId != _parentContactId) {
 			_parentContactId = parentContactId;
 		}
 	}
@@ -648,9 +628,17 @@ public class ContactModelImpl extends BaseModelImpl {
 		}
 
 		ContactImpl contact = (ContactImpl)obj;
-		String pk = contact.getPrimaryKey();
+		long pk = contact.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -667,9 +655,9 @@ public class ContactModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = contact.getPrimaryKey();
+		long pk = contact.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -678,17 +666,17 @@ public class ContactModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _contactId;
+	private long _contactId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _accountId;
-	private String _parentContactId;
+	private long _parentContactId;
 	private String _firstName;
 	private String _middleName;
 	private String _lastName;

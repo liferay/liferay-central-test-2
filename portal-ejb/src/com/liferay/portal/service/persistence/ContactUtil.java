@@ -38,13 +38,11 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ContactUtil {
-	public static com.liferay.portal.model.Contact create(
-		java.lang.String contactId) {
+	public static com.liferay.portal.model.Contact create(long contactId) {
 		return getPersistence().create(contactId);
 	}
 
-	public static com.liferay.portal.model.Contact remove(
-		java.lang.String contactId)
+	public static com.liferay.portal.model.Contact remove(long contactId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchContactException {
 		ModelListener listener = _getListener();
@@ -139,14 +137,14 @@ public class ContactUtil {
 	}
 
 	public static com.liferay.portal.model.Contact findByPrimaryKey(
-		java.lang.String contactId)
+		long contactId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchContactException {
 		return getPersistence().findByPrimaryKey(contactId);
 	}
 
 	public static com.liferay.portal.model.Contact fetchByPrimaryKey(
-		java.lang.String contactId) throws com.liferay.portal.SystemException {
+		long contactId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(contactId);
 	}
 
@@ -183,7 +181,7 @@ public class ContactUtil {
 	}
 
 	public static com.liferay.portal.model.Contact[] findByCompanyId_PrevAndNext(
-		java.lang.String contactId, java.lang.String companyId,
+		long contactId, java.lang.String companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchContactException {

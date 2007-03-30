@@ -58,7 +58,8 @@ public class CommonPermission {
 			}
 		}
 		else if (className.equals(Contact.class.getName())) {
-			User user = UserLocalServiceUtil.getUserById(classPK);
+			User user = UserLocalServiceUtil.getUserByContactId(
+				Long.parseLong(classPK));
 
 			UserPermission.check(
 				permissionChecker, classPK,

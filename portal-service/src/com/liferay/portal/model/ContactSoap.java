@@ -94,19 +94,19 @@ public class ContactSoap implements Serializable {
 	public ContactSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _contactId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setContactId(pk);
 	}
 
-	public String getContactId() {
+	public long getContactId() {
 		return _contactId;
 	}
 
-	public void setContactId(String contactId) {
+	public void setContactId(long contactId) {
 		_contactId = contactId;
 	}
 
@@ -158,11 +158,11 @@ public class ContactSoap implements Serializable {
 		_accountId = accountId;
 	}
 
-	public String getParentContactId() {
+	public long getParentContactId() {
 		return _parentContactId;
 	}
 
-	public void setParentContactId(String parentContactId) {
+	public void setParentContactId(long parentContactId) {
 		_parentContactId = parentContactId;
 	}
 
@@ -330,14 +330,14 @@ public class ContactSoap implements Serializable {
 		_hoursOfOperation = hoursOfOperation;
 	}
 
-	private String _contactId;
+	private long _contactId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _accountId;
-	private String _parentContactId;
+	private long _parentContactId;
 	private String _firstName;
 	private String _middleName;
 	private String _lastName;

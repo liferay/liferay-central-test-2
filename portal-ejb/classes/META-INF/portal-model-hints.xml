@@ -78,14 +78,14 @@
 		<default-hints>
 			<hint name="display-width">150</hint>
 		</default-hints>
-		<field name="contactId" type="String" />
+		<field name="contactId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="accountId" type="String" />
-		<field name="parentContactId" type="String" />
+		<field name="parentContactId" type="long" />
 		<field name="firstName" type="String" />
 		<field name="middleName" type="String" />
 		<field name="lastName" type="String" />
@@ -373,7 +373,7 @@
 		<field name="companyId" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="contactId" type="String" />
+		<field name="contactId" type="long" />
 		<field name="password" type="String" />
 		<field name="passwordEncrypted" type="boolean" />
 		<field name="passwordExpirationDate" type="Date" />

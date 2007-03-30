@@ -24,15 +24,36 @@ package com.liferay.portal.tools.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.spring.hibernate.DynamicDialect;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.velocity.VelocityUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
+import com.liferay.util.dao.DataAccess;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import org.hibernate.dialect.DB2Dialect;
+import org.hibernate.dialect.DerbyDialect;
+import org.hibernate.dialect.Dialect;
+import org.hibernate.dialect.FirebirdDialect;
+import org.hibernate.dialect.HSQLDialect;
+import org.hibernate.dialect.InterbaseDialect;
+import org.hibernate.dialect.JDataStoreDialect;
+import org.hibernate.dialect.MySQLDialect;
+import org.hibernate.dialect.OracleDialect;
+import org.hibernate.dialect.PostgreSQLDialect;
+import org.hibernate.dialect.SAPDBDialect;
+import org.hibernate.dialect.SQLServerDialect;
+import org.hibernate.dialect.SybaseDialect;
 
 /**
  * <a href="DBUtil.java.html"><b><i>View Source</i></b></a>
@@ -65,6 +86,58 @@ public abstract class DBUtil {
 	public static final int DB_TYPE_SQLSERVER = 11;
 
 	public static final int DB_TYPE_SYBASE = 12;
+
+	public static DBUtil getInstance() {
+		DBUtil dbUtil = null;
+
+		Dialect dialect =
+			((DynamicDialect)HibernateUtil.getDialect()).getWrappedDialect();
+
+		if (dialect instanceof DB2Dialect) {
+			if (dialect instanceof DerbyDialect) {
+				dbUtil = DerbyUtil.getInstance();
+			}
+			else {
+				dbUtil = DB2Util.getInstance();
+			}
+		}
+		else if (dialect instanceof InterbaseDialect) {
+			if (dialect instanceof FirebirdDialect) {
+				dbUtil = FirebirdUtil.getInstance();
+			}
+			else {
+				dbUtil = InterBaseUtil.getInstance();
+			}
+		}
+		else if (dialect instanceof JDataStoreDialect) {
+			dbUtil = JDataStoreUtil.getInstance();
+		}
+		else if (dialect instanceof HSQLDialect) {
+			dbUtil = HypersonicUtil.getInstance();
+		}
+		else if (dialect instanceof MySQLDialect) {
+			dbUtil = MySQLUtil.getInstance();
+		}
+		else if (dialect instanceof OracleDialect) {
+			dbUtil = OracleUtil.getInstance();
+		}
+		else if (dialect instanceof PostgreSQLDialect) {
+			dbUtil = PostgreSQLUtil.getInstance();
+		}
+		else if (dialect instanceof SAPDBDialect) {
+			dbUtil = SAPUtil.getInstance();
+		}
+		else if (dialect instanceof SybaseDialect) {
+			if (dialect instanceof SQLServerDialect) {
+				dbUtil = SQLServerUtil.getInstance();
+			}
+			else {
+				dbUtil = SybaseUtil.getInstance();
+			}
+		}
+
+		return dbUtil;
+	}
 
 	public static DBUtil getInstance(int dbType) {
 		DBUtil dbUtil = null;
@@ -125,6 +198,30 @@ public abstract class DBUtil {
 			"../sql/" + fileName + "/" + fileName + "-" + getServerName() +
 				".sql",
 			template);
+	}
+
+	public void executeSQL(String template) throws IOException, SQLException {
+		executeSQL(new String[] {template});
+	}
+
+	public void executeSQL(String[] templates)
+		throws IOException, SQLException {
+
+		Connection con = null;
+		Statement stmt = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			stmt = con.createStatement();
+
+			for (int i = 0; i < templates.length; i++) {
+				stmt.executeUpdate(buildSQL(templates[i]));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, stmt);
+		}
 	}
 
 	protected abstract void buildCreateFile(

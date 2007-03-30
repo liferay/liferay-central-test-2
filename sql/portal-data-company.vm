@@ -1,9 +1,10 @@
 #foreach($userId in [100..199])
+	#set($contactId = $userId + 1000)
 	#set($count = $userId - 99)
 	#set($groupId = $userId)
 
-	insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'lax${count}', 'test.lax.${count}@liferay.com', 'Welcome Test LAX ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
-	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.${userId}', 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', '-1', 'Test', '', 'LAX ${count}', '', TRUE, '01/01/1970');
+	insert into User_ (userId, companyId, createDate, modifiedDate, contactId, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ${contactId}, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'lax${count}', 'test.lax.${count}@liferay.com', 'Welcome Test LAX ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'LAX ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
 	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
@@ -18,11 +19,12 @@
 #end
 
 #foreach($userId in [200..209])
+	#set($contactId = $userId + 1000)
 	#set($count = $userId - 199)
 	#set($groupId = $userId)
 
-	insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'sfo${count}', 'test.sfo.${count}@liferay.com', 'Welcome Test SFO ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
-	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.${userId}', 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', '-1', 'Test', '', 'SFO ${count}', '', TRUE, '01/01/1970');
+	insert into User_ (userId, companyId, createDate, modifiedDate, contactId, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ${contactId}, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'sfo${count}', 'test.sfo.${count}@liferay.com', 'Welcome Test SFO ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'SFO ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
 	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
@@ -37,11 +39,12 @@
 #end
 
 #foreach($userId in [300..309])
+	#set($contactId = $userId + 1000)
 	#set($count = $userId - 299)
 	#set($groupId = $userId)
 
-	insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'ord${count}', 'test.ord.${count}@liferay.com', 'Welcome Test ORD ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
-	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.${userId}', 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', '-1', 'Test', '', 'ORD ${count}', '', TRUE, '01/01/1970');
+	insert into User_ (userId, companyId, createDate, modifiedDate, contactId, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ${contactId}, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'ord${count}', 'test.ord.${count}@liferay.com', 'Welcome Test ORD ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'ORD ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
 	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
@@ -56,11 +59,12 @@
 #end
 
 #foreach($userId in [400..409])
+	#set($contactId = $userId + 1000)
 	#set($count = $userId - 399)
 	#set($groupId = $userId)
 
-	insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'nyc${count}', 'test.nyc.${count}@liferay.com', 'Welcome Test NYC ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
-	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.${userId}', 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', '-1', 'Test', '', 'NYC ${count}', '', TRUE, '01/01/1970');
+	insert into User_ (userId, companyId, createDate, modifiedDate, contactId, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ${contactId}, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'nyc${count}', 'test.nyc.${count}@liferay.com', 'Welcome Test NYC ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'NYC ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
 	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
@@ -75,11 +79,12 @@
 #end
 
 #foreach($userId in [500..509])
+	#set($contactId = $userId + 1000)
 	#set($count = $userId - 499)
 	#set($groupId = $userId)
 
-	insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'lon${count}', 'test.lon.${count}@liferay.com', 'Welcome Test LON ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
-	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.${userId}', 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', '-1', 'Test', '', 'LON ${count}', '', TRUE, '01/01/1970');
+	insert into User_ (userId, companyId, createDate, modifiedDate, contactId, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ${contactId}, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'lon${count}', 'test.lon.${count}@liferay.com', 'Welcome Test LON ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'LON ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
 	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
@@ -94,11 +99,12 @@
 #end
 
 #foreach($userId in [600..609])
+	#set($contactId = $userId + 1000)
 	#set($count = $userId - 599)
 	#set($groupId = $userId)
 
-	insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'mad${count}', 'test.mad.${count}@liferay.com', 'Welcome Test MAD ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
-	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.${userId}', 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', '-1', 'Test', '', 'MAD ${count}', '', TRUE, '01/01/1970');
+	insert into User_ (userId, companyId, createDate, modifiedDate, contactId, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ${contactId}, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'mad${count}', 'test.mad.${count}@liferay.com', 'Welcome Test MAD ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'MAD ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
 	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
@@ -113,11 +119,12 @@
 #end
 
 #foreach($userId in [700..709])
+	#set($contactId = $userId + 1000)
 	#set($count = $userId - 699)
 	#set($groupId = $userId)
 
-	insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'hkg${count}', 'test.hkg.${count}@liferay.com', 'Welcome Test HKG ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
-	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.${userId}', 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', '-1', 'Test', '', 'HKG ${count}', '', TRUE, '01/01/1970');
+	insert into User_ (userId, companyId, createDate, modifiedDate, contactId, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ${contactId}, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'hkg${count}', 'test.hkg.${count}@liferay.com', 'Welcome Test HKG ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'HKG ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
 	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
@@ -132,11 +139,12 @@
 #end
 
 #foreach($userId in [800..809])
+	#set($contactId = $userId + 1000)
 	#set($count = $userId - 799)
 	#set($groupId = $userId)
 
-	insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'pvg$count', 'test.pvg.${count}@liferay.com', 'Welcome Test PVG ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
-	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.${userId}', 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', '-1', 'Test', '', 'PVG ${count}', '', TRUE, '01/01/1970');
+	insert into User_ (userId, companyId, createDate, modifiedDate, contactId, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.${userId}', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ${contactId}, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'pvg$count', 'test.pvg.${count}@liferay.com', 'Welcome Test PVG ${count}!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'PVG ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
 	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);

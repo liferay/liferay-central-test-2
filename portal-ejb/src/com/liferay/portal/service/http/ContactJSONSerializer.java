@@ -52,14 +52,7 @@ import java.util.List;
 public class ContactJSONSerializer {
 	public static JSONObject toJSONObject(Contact model) {
 		JSONObject jsonObj = new JSONObject();
-		String contactId = model.getContactId();
-
-		if (contactId == null) {
-			jsonObj.put("contactId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("contactId", contactId.toString());
-		}
+		jsonObj.put("contactId", model.getContactId());
 
 		String companyId = model.getCompanyId();
 
@@ -115,14 +108,7 @@ public class ContactJSONSerializer {
 			jsonObj.put("accountId", accountId.toString());
 		}
 
-		String parentContactId = model.getParentContactId();
-
-		if (parentContactId == null) {
-			jsonObj.put("parentContactId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("parentContactId", parentContactId.toString());
-		}
+		jsonObj.put("parentContactId", model.getParentContactId());
 
 		String firstName = model.getFirstName();
 

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.AccountNameException;
 import com.liferay.portal.CompanyHomeURLException;
 import com.liferay.portal.CompanyPortalURLException;
@@ -197,6 +199,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			defaultUser.setCompanyId(UserImpl.DEFAULT);
 			defaultUser.setCreateDate(now);
 			defaultUser.setModifiedDate(now);
+			defaultUser.setContactId(
+				CounterLocalServiceUtil.increment(Counter.class.getName()));
 			defaultUser.setPassword("password");
 			defaultUser.setScreenName(defaultUser.getUserId());
 			defaultUser.setEmailAddress(UserImpl.DEFAULT + "@" + companyMx);
@@ -215,7 +219,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			// Contact
 
 			Contact defaultContact = ContactUtil.create(
-				defaultUser.getUserId());
+				defaultUser.getContactId());
 
 			defaultContact.setCompanyId(defaultUser.getCompanyId());
 			defaultContact.setUserId(defaultUser.getUserId());

@@ -19,6 +19,7 @@ alter_column_type CalEvent groupId LONG;
 
 alter_column_type Contact_ prefixId INTEGER;
 alter_column_type Contact_ suffixId INTEGER;
+alter_column_type Contact_ parentContactId LONG;
 
 alter_column_type Counter currentId LONG;
 
@@ -298,6 +299,7 @@ create table TagsSource (
 
 alter table User_ add screenName VARCHAR(75) null;
 update User_ set screenName = userId;
+alter_column_type User_ contactId LONG;
 
 create table UserGroupRole (
 	userId VARCHAR(75) not null,

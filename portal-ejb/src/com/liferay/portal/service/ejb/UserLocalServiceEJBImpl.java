@@ -222,6 +222,12 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		return UserLocalServiceFactory.getTxImpl().getRoleUsers(roleId);
 	}
 
+	public com.liferay.portal.model.User getUserByContactId(long contactId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return UserLocalServiceFactory.getTxImpl().getUserByContactId(contactId);
+	}
+
 	public com.liferay.portal.model.User getUserByEmailAddress(
 		java.lang.String companyId, java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException, 

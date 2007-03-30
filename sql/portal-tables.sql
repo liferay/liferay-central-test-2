@@ -122,14 +122,14 @@ create table Company (
 );
 
 create table Contact_ (
-	contactId VARCHAR(75) not null primary key,
+	contactId LONG not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	accountId VARCHAR(75) null,
-	parentContactId VARCHAR(75) null,
+	parentContactId LONG,
 	firstName VARCHAR(75) null,
 	middleName VARCHAR(75) null,
 	lastName VARCHAR(75) null,
@@ -1029,7 +1029,7 @@ create table User_ (
 	companyId VARCHAR(75) not null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	contactId VARCHAR(75) null,
+	contactId LONG,
 	password_ VARCHAR(75) null,
 	passwordEncrypted BOOLEAN,
 	passwordExpirationDate DATE null,

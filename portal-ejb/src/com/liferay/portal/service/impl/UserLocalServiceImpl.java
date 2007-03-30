@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.ContactBirthdayException;
 import com.liferay.portal.ContactFirstNameException;
@@ -262,6 +264,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setCompanyId(companyId);
 		user.setCreateDate(now);
 		user.setModifiedDate(now);
+		user.setContactId(
+			CounterLocalServiceUtil.increment(Counter.class.getName()));
 		user.setPassword(PwdEncryptor.encrypt(password1));
 		user.setPasswordUnencrypted(password1);
 		user.setPasswordEncrypted(true);
@@ -318,9 +322,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			birthdayMonth, birthdayDay, birthdayYear,
 			new ContactBirthdayException());
 
-		String contactId = userId;
-
-		Contact contact = ContactUtil.create(contactId);
+		Contact contact = ContactUtil.create(user.getContactId());
 
 		contact.setCompanyId(user.getCompanyId());
 		contact.setUserId(creatorUserId);
@@ -585,7 +587,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Contact
 
-		ContactLocalServiceUtil.deleteContact(userId);
+		if (user.getContactId() > 0) {
+			ContactLocalServiceUtil.deleteContact(user.getContactId());
+		}
 
 		// Resources
 
@@ -691,6 +695,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return RoleUtil.getUsers(roleId);
+	}
+
+	public User getUserByContactId(long contactId)
+		throws PortalException, SystemException {
+
+		return UserUtil.findByContactId(contactId);
 	}
 
 	public User getUserByEmailAddress(
@@ -1070,6 +1080,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setModifiedDate(now);
 
+		if (user.getContactId() <= 0) {
+			user.setContactId(
+				CounterLocalServiceUtil.increment(Counter.class.getName()));
+		}
+
 		if (!emailAddress.equals(user.getEmailAddress())) {
 
 			// test@test.com -> test@liferay.com
@@ -1118,7 +1133,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			birthdayMonth, birthdayDay, birthdayYear,
 			new ContactBirthdayException());
 
-		String contactId = userId;
+		long contactId = user.getContactId();
 
 		Contact contact = null;
 

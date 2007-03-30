@@ -250,6 +250,15 @@ public class UserLocalServiceUtil {
 		return userLocalService.getRoleUsers(roleId);
 	}
 
+	public static com.liferay.portal.model.User getUserByContactId(
+		long contactId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getUserByContactId(contactId);
+	}
+
 	public static com.liferay.portal.model.User getUserByEmailAddress(
 		java.lang.String companyId, java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException, 

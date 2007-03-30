@@ -20,49 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Contact;
-import com.liferay.util.Validator;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.ValueMapper;
 
 /**
- * <a href="ContactImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ContactIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public class ContactImpl extends ContactModelImpl implements Contact {
+public class ContactIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public static final long DEFAULT_PARENT_CONTACT_ID = -1;
+	public ContactIdUpgradeColumnImpl(String name,
+									  TempUpgradeColumnImpl upgradeColumn,
+									  ValueMapper contactIdMapper) {
 
-	public static String getFullName(
-		String firstName, String middleName, String lastName) {
+		super(name);
 
-		StringMaker sm = new StringMaker();
+		_isContactId = name.equals("contactId");
+		_upgradeColumn = upgradeColumn;
+		_contactIdMapper = contactIdMapper;
+	}
 
-		if (Validator.isNull(middleName)) {
-			sm.append(firstName);
-			sm.append(StringPool.SPACE);
-			sm.append(lastName);
+	public Object getNewValue(Object oldValue) throws Exception {
+		Object newValue = oldValue;
+
+		if (_isContactId) {
+			String userId = (String)_upgradeColumn.getTemp();
+
+			newValue = _contactIdMapper.getNewValue(userId);
 		}
-		else {
-			sm.append(firstName);
-			sm.append(StringPool.SPACE);
-			sm.append(middleName);
-			sm.append(StringPool.SPACE);
-			sm.append(lastName);
+		else if (_upgradeColumn.getTemp().equals(Contact.class.getName())){
+			newValue = _contactIdMapper.getNewValue(oldValue);
 		}
 
-		return sm.toString();
+		return newValue;
 	}
 
-	public ContactImpl() {
-	}
-
-	public String getFullName() {
-		return getFullName(getFirstName(), getMiddleName(), getLastName());
-	}
+	private boolean _isContactId;
+	private TempUpgradeColumnImpl _upgradeColumn;
+	private ValueMapper _contactIdMapper;
 
 }

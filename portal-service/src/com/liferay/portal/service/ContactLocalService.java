@@ -57,12 +57,11 @@ public interface ContactLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Contact getContact(
-		java.lang.String contactId)
+	public com.liferay.portal.model.Contact getContact(long contactId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteContact(java.lang.String contactId)
+	public void deleteContact(long contactId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

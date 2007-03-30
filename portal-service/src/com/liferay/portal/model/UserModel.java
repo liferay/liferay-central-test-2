@@ -67,9 +67,9 @@ public interface UserModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public String getContactId();
+	public long getContactId();
 
-	public void setContactId(String contactId);
+	public void setContactId(long contactId);
 
 	public String getPassword();
 

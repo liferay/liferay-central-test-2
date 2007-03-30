@@ -52,7 +52,7 @@ import java.util.List;
  *
  */
 public class ContactPersistence extends BasePersistence {
-	public Contact create(String contactId) {
+	public Contact create(long contactId) {
 		Contact contact = new ContactImpl();
 		contact.setNew(true);
 		contact.setPrimaryKey(contactId);
@@ -60,14 +60,15 @@ public class ContactPersistence extends BasePersistence {
 		return contact;
 	}
 
-	public Contact remove(String contactId)
+	public Contact remove(long contactId)
 		throws NoSuchContactException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Contact contact = (Contact)session.get(ContactImpl.class, contactId);
+			Contact contact = (Contact)session.get(ContactImpl.class,
+					new Long(contactId));
 
 			if (contact == null) {
 				if (_log.isWarnEnabled()) {
@@ -142,7 +143,7 @@ public class ContactPersistence extends BasePersistence {
 		}
 	}
 
-	public Contact findByPrimaryKey(String contactId)
+	public Contact findByPrimaryKey(long contactId)
 		throws NoSuchContactException, SystemException {
 		Contact contact = fetchByPrimaryKey(contactId);
 
@@ -159,14 +160,13 @@ public class ContactPersistence extends BasePersistence {
 		return contact;
 	}
 
-	public Contact fetchByPrimaryKey(String contactId)
-		throws SystemException {
+	public Contact fetchByPrimaryKey(long contactId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (Contact)session.get(ContactImpl.class, contactId);
+			return (Contact)session.get(ContactImpl.class, new Long(contactId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -298,7 +298,7 @@ public class ContactPersistence extends BasePersistence {
 		}
 	}
 
-	public Contact[] findByCompanyId_PrevAndNext(String contactId,
+	public Contact[] findByCompanyId_PrevAndNext(long contactId,
 		String companyId, OrderByComparator obc)
 		throws NoSuchContactException, SystemException {
 		Contact contact = findByPrimaryKey(contactId);

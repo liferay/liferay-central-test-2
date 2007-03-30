@@ -112,7 +112,7 @@
 
 		<!-- PK fields -->
 
-		<column name="contactId" type="String" primary="true" />
+		<column name="contactId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -125,7 +125,7 @@
 		<!-- Other fields -->
 
 		<column name="accountId" type="String" />
-		<column name="parentContactId" type="String" />
+		<column name="parentContactId" type="long" />
 		<column name="firstName" type="String" />
 		<column name="middleName" type="String" />
 		<column name="lastName" type="String" />
@@ -953,7 +953,7 @@
 
 		<!-- Other fields -->
 
-		<column name="contactId" type="String" />
+		<column name="contactId" type="long" />
 		<column name="password" type="String" />
 		<column name="passwordEncrypted" type="boolean" />
 		<column name="passwordExpirationDate" type="Date" />
@@ -985,6 +985,9 @@
 
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
+		</finder>
+		<finder name="ContactId" return-type="User">
+			<finder-column name="contactId" />
 		</finder>
 		<finder name="ScreenName" return-type="User">
 			<finder-column name="screenName" />

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -48,6 +49,7 @@ public class UpgradeResource extends UpgradeProcess {
 
 		try {
 			_upgradeResource();
+			_upgradeTable();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -69,6 +71,16 @@ public class UpgradeResource extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 	}
+
+	private void _upgradeTable() throws Exception {
+		DBUtil.getInstance().executeSQL(_DROP_COLUMNS);
+	}
+
+	private static final String[] _DROP_COLUMNS = {
+		"alter table Resource_ drop companyId;",
+		"alter table Resource_ drop name;",
+		"alter table Resource_ drop scope;"
+	};
 
 	public static String _TABLE_NAME = "Resource_";
 

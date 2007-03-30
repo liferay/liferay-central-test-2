@@ -66,14 +66,13 @@ public class ContactLocalServiceEJBImpl implements ContactLocalService,
 			begin, end);
 	}
 
-	public com.liferay.portal.model.Contact getContact(
-		java.lang.String contactId)
+	public com.liferay.portal.model.Contact getContact(long contactId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return ContactLocalServiceFactory.getTxImpl().getContact(contactId);
 	}
 
-	public void deleteContact(java.lang.String contactId)
+	public void deleteContact(long contactId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ContactLocalServiceFactory.getTxImpl().deleteContact(contactId);

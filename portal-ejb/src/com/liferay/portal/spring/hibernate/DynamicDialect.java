@@ -108,6 +108,10 @@ public class DynamicDialect extends Dialect {
 		}
 	}
 
+	public Dialect getWrappedDialect() {
+		return _dialect;
+	}
+
 	public String appendIdentitySelectToInsert(String insertSQL) {
 		return _dialect.appendIdentitySelectToInsert(insertSQL);
 	}

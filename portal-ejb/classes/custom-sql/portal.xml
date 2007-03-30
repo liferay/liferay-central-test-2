@@ -705,7 +705,7 @@
 				User_
 			INNER JOIN
 				Contact_ ON
-					(Contact_.contactId = User_.userId)
+					(Contact_.contactId = User_.contactId)
 			[$JOIN$]
 			WHERE
 				[$WHERE$]
@@ -727,7 +727,7 @@
 				User_
 			INNER JOIN
 				Contact_ ON
-					(Contact_.contactId = User_.userId)
+					(Contact_.contactId = User_.contactId)
 			[$JOIN$]
 			WHERE
 				[$WHERE$]

@@ -58,7 +58,7 @@ public class UserModelImpl extends BaseModelImpl {
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "contactId", new Integer(Types.VARCHAR) },
+			{ "contactId", new Integer(Types.BIGINT) },
 			{ "password_", new Integer(Types.VARCHAR) },
 			{ "passwordEncrypted", new Integer(Types.BOOLEAN) },
 			{ "passwordExpirationDate", new Integer(Types.TIMESTAMP) },
@@ -85,9 +85,6 @@ public class UserModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.companyId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CONTACTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.contactId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.password"),
@@ -193,19 +190,12 @@ public class UserModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getContactId() {
-		return GetterUtil.getString(_contactId);
+	public long getContactId() {
+		return _contactId;
 	}
 
-	public void setContactId(String contactId) {
-		if (((contactId == null) && (_contactId != null)) ||
-				((contactId != null) && (_contactId == null)) ||
-				((contactId != null) && (_contactId != null) &&
-				!contactId.equals(_contactId))) {
-			if (!XSS_ALLOW_CONTACTID) {
-				contactId = XSSUtil.strip(contactId);
-			}
-
+	public void setContactId(long contactId) {
+		if (contactId != _contactId) {
 			_contactId = contactId;
 		}
 	}
@@ -560,7 +550,7 @@ public class UserModelImpl extends BaseModelImpl {
 	private String _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _contactId;
+	private long _contactId;
 	private String _password;
 	private boolean _passwordEncrypted;
 	private Date _passwordExpirationDate;

@@ -145,7 +145,8 @@ public class UpgradeUser extends UpgradeProcess {
 					Address address = (Address)addresses.get(i);
 
 					AddressLocalServiceUtil.addAddress(
-						userId, Contact.class.getName(), contact.getContactId(),
+						userId, Contact.class.getName(),
+						String.valueOf(contact.getContactId()),
 						address.getStreet1(), address.getStreet2(),
 						address.getStreet3(), address.getCity(),
 						address.getZip(), address.getRegionId(),

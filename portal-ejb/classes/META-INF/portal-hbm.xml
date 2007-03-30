@@ -58,7 +58,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.ContactImpl" table="Contact_">
 		<cache usage="read-write" />
-		<id name="contactId" type="java.lang.String">
+		<id name="contactId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
@@ -67,7 +67,7 @@
 		<property name="createDate" />
 		<property name="modifiedDate" />
 		<property name="accountId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="parentContactId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="parentContactId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="firstName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="middleName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="lastName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -390,7 +390,7 @@
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="contactId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="contactId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="password" column="password_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="passwordEncrypted" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="passwordExpirationDate" />

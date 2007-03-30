@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Contact;
@@ -40,18 +41,22 @@ import com.liferay.portal.service.persistence.ContactUtil;
  */
 public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 
-	public Contact getContact(String contactId)
+	public Contact getContact(long contactId)
 		throws PortalException, SystemException {
 
 		return ContactUtil.findByPrimaryKey(contactId);
 	}
 
-	public void deleteContact(String contactId)
+	public void deleteContact(long contactId)
 		throws PortalException, SystemException {
 
-		Contact contact = ContactUtil.findByPrimaryKey(contactId);
+		try {
+			Contact contact = ContactUtil.findByPrimaryKey(contactId);
 
-		deleteContact(contact);
+			deleteContact(contact);
+		}
+		catch (NoSuchContactException nsce) {
+		}
 	}
 
 	public void deleteContact(Contact contact)
@@ -61,25 +66,25 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 
 		AddressLocalServiceUtil.deleteAddresses(
 			contact.getCompanyId(), Contact.class.getName(),
-			contact.getContactId());
+			String.valueOf(contact.getContactId()));
 
 		// Email addresses
 
 		EmailAddressLocalServiceUtil.deleteEmailAddresses(
 			contact.getCompanyId(), Contact.class.getName(),
-			contact.getContactId());
+			String.valueOf(contact.getContactId()));
 
 		// Phone
 
 		PhoneLocalServiceUtil.deletePhones(
 			contact.getCompanyId(), Contact.class.getName(),
-			contact.getContactId());
+			String.valueOf(contact.getContactId()));
 
 		// Website
 
 		WebsiteLocalServiceUtil.deleteWebsites(
 			contact.getCompanyId(), Contact.class.getName(),
-			contact.getContactId());
+			String.valueOf(contact.getContactId()));
 
 		// Contact
 
