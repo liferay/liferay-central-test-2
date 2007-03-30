@@ -10,7 +10,7 @@ jQuery.getOne = function(s, context) {
 		rt = s;
 	}
 	else if (typeof s == 'string') {
-		if (s.search('/^[#.]/') == -1) {
+		if (s.search(/^[#.]/) == -1) {
 			s = '#' + s;
 		}
 
