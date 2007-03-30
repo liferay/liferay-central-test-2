@@ -77,9 +77,9 @@ public class InternetAddressUtil {
 	public static String toString(Address address) {
 		InternetAddress internetAddress = (InternetAddress)address;
 
-		StringMaker sm = new StringMaker();
-
 		if (internetAddress != null) {
+			StringMaker sm = new StringMaker();
+
 			String personal = internetAddress.getPersonal();
 			String emailAddress = internetAddress.getAddress();
 
@@ -92,9 +92,11 @@ public class InternetAddressUtil {
 			else {
 				sm.append(emailAddress);
 			}
+
+			return sm.toString();
 		}
 
-		return sm.toString();
+		return StringPool.BLANK;
 	}
 
 	public static String toString(Address[] addresses) {
@@ -105,7 +107,8 @@ public class InternetAddressUtil {
 				sm.append(toString(addresses[i]));
 
 				if (i < addresses.length - 1) {
-					sm.append(StringPool.COMMA + StringPool.NBSP);
+					sm.append(StringPool.COMMA);
+					sm.append(StringPool.NBSP);
 				}
 			}
 		}

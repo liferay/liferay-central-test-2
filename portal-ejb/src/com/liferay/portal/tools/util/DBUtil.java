@@ -24,7 +24,6 @@ package com.liferay.portal.tools.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.spring.hibernate.DynamicDialect;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.velocity.VelocityUtil;
 import com.liferay.util.FileUtil;
@@ -90,8 +89,7 @@ public abstract class DBUtil {
 	public static DBUtil getInstance() {
 		DBUtil dbUtil = null;
 
-		Dialect dialect =
-			((DynamicDialect)HibernateUtil.getDialect()).getWrappedDialect();
+		Dialect dialect = HibernateUtil.getWrappedDialect();
 
 		if (dialect instanceof DB2Dialect) {
 			if (dialect instanceof DerbyDialect) {

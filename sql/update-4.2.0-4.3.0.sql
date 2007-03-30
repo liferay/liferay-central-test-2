@@ -297,9 +297,9 @@ create table TagsSource (
 	acronym VARCHAR(75) null
 );
 
+alter_column_type User_ contactId LONG;
 alter table User_ add screenName VARCHAR(75) null;
 update User_ set screenName = userId;
-alter_column_type User_ contactId LONG;
 
 create table UserGroupRole (
 	userId VARCHAR(75) not null,

@@ -587,9 +587,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Contact
 
-		if (user.getContactId() > 0) {
-			ContactLocalServiceUtil.deleteContact(user.getContactId());
-		}
+		ContactLocalServiceUtil.deleteContact(user.getContactId());
 
 		// Resources
 

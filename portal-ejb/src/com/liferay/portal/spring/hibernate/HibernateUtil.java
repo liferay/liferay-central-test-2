@@ -119,6 +119,23 @@ public class HibernateUtil {
 		return getSessionFactory(sessionFactoryName).getDialect();
 	}
 
+	public static Dialect getWrappedDialect() {
+		return getWrappedDialect(SPRING_HIBERNATE_SESSION_FACTORY);
+	}
+
+	public static Dialect getWrappedDialect(String sessionFactoryName) {
+		Dialect dialect = getSessionFactory(sessionFactoryName).getDialect();
+
+		if (dialect instanceof DynamicDialect) {
+			DynamicDialect dynamicDialect = (DynamicDialect)dialect;
+
+			return dynamicDialect.getWrappedDialect();
+		}
+		else {
+			return dialect;
+		}
+	}
+
 	public static void closeSession(Session session) {
 		try {
 			if (session != null) {

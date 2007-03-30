@@ -33,6 +33,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.AccountLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 
 /**
  * <a href="CommonPermission.java.html"><b><i>View Source</i></b></a>
@@ -59,7 +60,7 @@ public class CommonPermission {
 		}
 		else if (className.equals(Contact.class.getName())) {
 			User user = UserLocalServiceUtil.getUserByContactId(
-				Long.parseLong(classPK));
+				GetterUtil.getLong(classPK));
 
 			UserPermission.check(
 				permissionChecker, classPK,
