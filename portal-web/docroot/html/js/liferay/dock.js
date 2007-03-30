@@ -26,21 +26,22 @@ Liferay.Dock = {
 				}
 			);
 
-			dock.bind(
-				'click',
-				dockData,
-				instance._toggle
-			);
-
-			var dockToggle = function(event) {
-				if (dockList.is(':visible') && (event.type == 'mouseover')) {
-					return;
-				}
-
+			var dockOver = function(event) {
 				event.data = dockData;
-				instance._toggle(event);
+				
+				jQuery(document).one('click', 
+					function() {
+						instance._toggle(event, 'hide');
+					}
+				);
+				instance._toggle(event, 'show');
+			}
+			
+			var dockOut = function(event) {
+				event.data = dockData;
+				instance._toggle(event, 'hide');
 			};
-
+			
 			var myPlacesToggle = function(event) {
 				event.data = myPlaces;
 				instance._togglePlaces(event);
@@ -48,9 +49,9 @@ Liferay.Dock = {
 
 			dock.hoverIntent(
 				{
-					interval: 250,
-					out: dockToggle,
-					over: dockToggle,
+					interval: 0,
+					out: dockOut,
+					over: dockOver,
 					timeout: 500
 				}
 			);
@@ -110,15 +111,28 @@ Liferay.Dock = {
 		);
 	},
 
-	_toggle: function(event) {
+	_toggle: function(event, state) {
 		var params = event.data;
 
 		var dock = params.dock;
 		var dockList = params.dockList;
+		
+		if (state) {
+			switch (state) {
+				case 'hide':
+					dockList.hide();
+					dock.removeClass('expanded');
+				break;
+				case 'show':
+					dockList.show();
+					dock.addClass('expanded');
+				break;
+			}
+		} else {
+			dockList.toggle();
+			dock.toggleClass('expanded');
+		}
 
-		dockList.toggle();
-
-		dock.toggleClass('expanded');
 	},
 
 	_togglePlaces: function(event) {
