@@ -20,36 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.servlet;
-
-import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
-import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+package com.liferay.portal.theme;
 
 /**
- * <a href="LayoutTemplateContextListener.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ThemeGroupLimit.java.html"><b><i>View Source</i></b></a>
  *
- * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  *
  */
-public class LayoutTemplateContextListener implements ServletContextListener {
+public class ThemeGroupLimit extends ThemeCompanyLimit {
 
-	public void contextInitialized(ServletContextEvent event) {
-		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(
-				event.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
-	}
-
-	public void contextDestroyed(ServletContextEvent event) {
-		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				event.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public ThemeGroupLimit() {
+		super();
 	}
 
 }

@@ -34,6 +34,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="LocalPluginPackageRepository.java.html"><b><i>View Source</i></b>
  * </a>
@@ -48,9 +51,11 @@ public class LocalPluginPackageRepository {
 
 	public void addPluginPackage(PluginPackage pluginPackage) {
 		if (pluginPackage.getContext() == null) {
-			System.out.println(
-				"Plugin package cannot be registered because it does not have" +
-					"an installation context");
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Plugin package cannot be registered because it does not " +
+						"have an installation context");
+			}
 
 			return;
 		}
@@ -173,6 +178,9 @@ public class LocalPluginPackageRepository {
 	public void unregisterPluginPackageInstallation(String context) {
 		_pendingPackages.remove(context);
 	}
+
+	private static Log _log =
+		LogFactory.getLog(LocalPluginPackageRepository.class);
 
 	private Map _pluginPackages = new HashMap();
 	private Map _pendingPackages = new HashMap();

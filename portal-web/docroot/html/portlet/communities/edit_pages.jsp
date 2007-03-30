@@ -976,6 +976,16 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							List themes = ThemeLocalUtil.getThemes(company.getCompanyId());
 
 							themes = PluginUtil.restrictPlugins(themes, user);
+
+							Iterator itr = themes.iterator();
+
+							while (itr.hasNext()) {
+								Theme curTheme = (Theme)itr.next();
+
+								if (!curTheme.isGroupAvailable(liveGroupId)) {
+									itr.remove();
+								}
+							}
 							%>
 
 							<liferay-ui:table-iterator

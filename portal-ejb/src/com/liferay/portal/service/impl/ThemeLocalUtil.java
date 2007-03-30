@@ -29,12 +29,14 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.model.ThemeCompanyId;
-import com.liferay.portal.model.ThemeCompanyLimit;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
+import com.liferay.portal.theme.ThemeCompanyId;
+import com.liferay.portal.theme.ThemeCompanyLimit;
+import com.liferay.portal.theme.ThemeGroupId;
+import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -43,9 +45,9 @@ import com.liferay.util.ContextReplace;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.xml.XMLSafeReader;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -210,6 +212,40 @@ public class ThemeLocalUtil {
 		return _getCompanyLimitExcludes(el);
 	}
 
+	private static List _getGroupLimitExcludes(Element el) {
+		List includes = new ArrayList();
+
+		if (el != null) {
+			List groupIds = el.elements("group-id");
+
+			for (int i = 0; i < groupIds.size(); i++) {
+				Element groupIdEl = (Element)groupIds.get(i);
+
+				String name = groupIdEl.attributeValue("name");
+				String pattern = groupIdEl.attributeValue("pattern");
+
+				ThemeGroupId themeGroupId = null;
+
+				if (Validator.isNotNull(name)) {
+					themeGroupId = new ThemeGroupId(name, false);
+				}
+				else if (Validator.isNotNull(pattern)) {
+					themeGroupId = new ThemeGroupId(pattern, true);
+				}
+
+				if (themeGroupId != null) {
+					includes.add(themeGroupId);
+				}
+			}
+		}
+
+		return includes;
+	}
+
+	private static List _getGroupLimitIncludes(Element el) {
+		return _getGroupLimitExcludes(el);
+	}
+
 	private static Map _getThemes(String companyId) {
 		Map themes = (Map)_themesPool.get(companyId);
 
@@ -224,80 +260,7 @@ public class ThemeLocalUtil {
 				String themeId = (String)entry.getKey();
 				Theme theme = (Theme)entry.getValue();
 
-				boolean available = true;
-
-				ThemeCompanyLimit companyLimit =
-					(ThemeCompanyLimit)_themeCompanyLimits.get(themeId);
-
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Check if theme " + themeId + " is available for " +
-							companyId);
-				}
-
-				if (companyLimit != null) {
-					List includes = companyLimit.getIncludes();
-					List excludes = companyLimit.getExcludes();
-
-					if ((includes.size() != 0) && (excludes.size() != 0)) {
-
-						// Since includes and excludes are specified, check to
-						// make sure the current company id is included and also
-						// not excluded
-
-						if (_log.isDebugEnabled()) {
-							_log.debug("Check includes and excludes");
-						}
-
-						available = companyLimit.isIncluded(companyId);
-
-						if (available) {
-							available = !companyLimit.isExcluded(companyId);
-						}
-					}
-					else if ((includes.size() == 0) && (excludes.size() != 0)) {
-
-						// Since no includes are specified, check to make sure
-						// the current company id is not excluded
-
-						if (_log.isDebugEnabled()) {
-							_log.debug("Check excludes");
-						}
-
-						available = !companyLimit.isExcluded(companyId);
-					}
-					else if ((includes.size() != 0) && (excludes.size() == 0)) {
-
-						// Since no excludes are specified, check to make sure
-						// the current company id is included
-
-						if (_log.isDebugEnabled()) {
-							_log.debug("Check includes");
-						}
-
-						available = companyLimit.isIncluded(companyId);
-					}
-					else {
-
-						// Since no includes or excludes are specified, this
-						// theme is available for every company
-
-						if (_log.isDebugEnabled()) {
-							_log.debug("No includes or excludes set");
-						}
-
-						available = true;
-					}
-				}
-
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Theme " + themeId + " is " +
-							(!available ? "NOT " : "") + "available for " +
-								companyId);
-				}
-
-				if (available) {
+				if (theme.isCompanyAvailable(companyId)) {
 					themes.put(themeId, theme);
 				}
 			}
@@ -388,7 +351,7 @@ public class ThemeLocalUtil {
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = reader.read(new XMLSafeReader(xml));
 
 		Element root = doc.getRootElement();
 
@@ -444,6 +407,27 @@ public class ThemeLocalUtil {
 			}
 		}
 
+		ThemeGroupLimit groupLimit = null;
+
+		Element groupLimitEl = root.element("group-limit");
+
+		if (groupLimitEl != null) {
+			groupLimit = new ThemeGroupLimit();
+
+			Element groupIncludesEl = groupLimitEl.element("group-includes");
+
+			if (groupIncludesEl != null) {
+				groupLimit.setIncludes(_getGroupLimitIncludes(groupIncludesEl));
+			}
+
+			Element groupExcludesEl =
+				groupLimitEl.element("group-excludes");
+
+			if (groupExcludesEl != null) {
+				groupLimit.setExcludes(_getGroupLimitExcludes(groupExcludesEl));
+			}
+		}
+
 		Iterator itr1 = root.elements("theme").iterator();
 
 		while (itr1.hasNext()) {
@@ -478,9 +462,8 @@ public class ThemeLocalUtil {
 			themeModel.setPluginPackage(pluginPackage);
 			themeModel.setDefaultPluginSetting(pluginSetting);
 
-			if (companyLimit != null) {
-				_themeCompanyLimits.put(themeId, companyLimit);
-			}
+			themeModel.setThemeCompanyLimit(companyLimit);
+			themeModel.setThemeGroupLimit(groupLimit);
 
 			if (servletContextName != null) {
 				themeModel.setServletContextName(servletContextName);
@@ -599,6 +582,5 @@ public class ThemeLocalUtil {
 
 	private static Map _themes = CollectionFactory.getSyncHashMap();
 	private static Map _themesPool = CollectionFactory.getSyncHashMap();
-	private static Map _themeCompanyLimits = CollectionFactory.getSyncHashMap();
 
 }

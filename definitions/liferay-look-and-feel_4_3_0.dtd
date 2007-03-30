@@ -2,8 +2,8 @@
 This is the DTD for the Look and Feel parameters for Liferay Portal.
 
 <!DOCTYPE look-and-feel PUBLIC
-	"-//Liferay//DTD Look and Feel 4.0.0//EN"
-	"http://www.liferay.com/dtd/liferay-look-and-feel_4_0_0.dtd">
+	"-//Liferay//DTD Look and Feel 4.3.0//EN"
+	"http://www.liferay.com/dtd/liferay-look-and-feel_4_3_0.dtd">
 -->
 
 <!--
@@ -11,7 +11,7 @@ The look-and-feel element is the root of the deployment descriptor for
 a Liferay look and feel archive. The look and feel archive will hereafter
 be referred to as a LAF archive.
 -->
-<!ELEMENT look-and-feel (compatibility, company-limit?, theme*)>
+<!ELEMENT look-and-feel (compatibility, company-limit?, group-limit?, theme*)>
 
 <!--
 The compatibility element specifies a list of Liferay Portal versions that will
@@ -64,6 +64,46 @@ pattern which will determine whether a company id is included or excluded.
 See the comments in the company-id element.
 -->
 <!ATTLIST company-id
+	name CDATA #IMPLIED
+	pattern CDATA #IMPLIED
+>
+
+<!--
+The group-limit element specifies a list of group ids that can access the themes
+in this LAF archive. If group-limit is not set, then every group in the portal
+has access to all of the themes in this LAF archive. If group-limit is set, then
+the group ids will be included or excluded based on the group-includes and
+group-excludes elements. If there is a disagreement between group-includes and
+group-excludes, group-excludes takes precedence.
+-->
+<!ELEMENT group-limit (group-includes?, group-excludes?)>
+
+<!--
+The group-includes element specifies a list of group ids that will have access
+to the themes in this LAF archive.
+-->
+<!ELEMENT group-includes (group-id*)>
+
+<!--
+The group-excludes element specifies a list of group ids that will not have
+access to the themes in this LAF archive.
+-->
+<!ELEMENT group-excludes (group-id*)>
+
+<!--
+The group-id element must have either the name or pattern attributes specified.
+If the name attribute is specified, then the exact group id is either included
+or excluded, depending on whether the group-id element is inside the
+group-includes element or group-excludes element. If the pattern attribute is
+specified, then a regular expression match is applied to the pattern which will
+determine whether a group id is included or excluded.
+-->
+<!ELEMENT group-id (#PCDATA)>
+
+<!--
+See the comments in the group-id element.
+-->
+<!ATTLIST group-id
 	name CDATA #IMPLIED
 	pattern CDATA #IMPLIED
 >

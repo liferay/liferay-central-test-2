@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.theme;
 
 import java.io.Serializable;
 

@@ -20,32 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
-
-import java.io.Serializable;
+package com.liferay.portal.theme;
 
 /**
- * <a href="ThemeCompanyId.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThemeGroupId.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ThemeCompanyId implements Serializable {
+public class ThemeGroupId extends ThemeCompanyId {
 
-	public ThemeCompanyId(String value, boolean pattern) {
-		_value = value;
-		_pattern = pattern;
+	public ThemeGroupId(String value, boolean pattern) {
+		super(value, pattern);
 	}
-
-	public String getValue() {
-		return _value;
-	}
-
-	public boolean isPattern() {
-		return _pattern;
-	}
-
-	private String _value;
-	private boolean _pattern;
 
 }

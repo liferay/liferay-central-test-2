@@ -54,7 +54,7 @@ public abstract class PortalClassLoaderServletContextListener
 
 			_servletContextListener = getInstance();
 
-			_servletContextListener.contextInitialized(_sce);
+			_servletContextListener.contextInitialized(_event);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -65,13 +65,13 @@ public abstract class PortalClassLoaderServletContextListener
 		}
 	}
 
-	public void contextInitialized(ServletContextEvent sce) {
-		_sce = sce;
+	public void contextInitialized(ServletContextEvent event) {
+		_event = event;
 
 		PortalInitableUtil.init(this);
 	}
 
-	public void contextDestroyed(ServletContextEvent sce) {
+	public void contextDestroyed(ServletContextEvent event) {
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
 
@@ -79,7 +79,7 @@ public abstract class PortalClassLoaderServletContextListener
 			Thread.currentThread().setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			_servletContextListener.contextDestroyed(sce);
+			_servletContextListener.contextDestroyed(event);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);
@@ -92,6 +92,6 @@ public abstract class PortalClassLoaderServletContextListener
 		LogFactoryUtil.getLog(PortalClassLoaderServletContextListener.class);
 
 	private ServletContextListener _servletContextListener;
-	private ServletContextEvent _sce;
+	private ServletContextEvent _event;
 
 }

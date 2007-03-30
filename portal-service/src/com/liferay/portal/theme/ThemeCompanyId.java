@@ -20,36 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.servlet;
+package com.liferay.portal.theme;
 
-import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
-import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import java.io.Serializable;
 
 /**
- * <a href="LayoutTemplateContextListener.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ThemeCompanyId.java.html"><b><i>View Source</i></b></a>
  *
- * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  *
  */
-public class LayoutTemplateContextListener implements ServletContextListener {
+public class ThemeCompanyId implements Serializable {
 
-	public void contextInitialized(ServletContextEvent event) {
-		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(
-				event.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public ThemeCompanyId(String value, boolean pattern) {
+		_value = value;
+		_pattern = pattern;
 	}
 
-	public void contextDestroyed(ServletContextEvent event) {
-		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				event.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+	public String getValue() {
+		return _value;
 	}
+
+	public boolean isPattern() {
+		return _pattern;
+	}
+
+	private String _value;
+	private boolean _pattern;
 
 }

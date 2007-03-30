@@ -24,6 +24,8 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.theme.ThemeCompanyLimit;
+import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ListUtil;
@@ -34,6 +36,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ThemeImpl.java.html"><b><i>View Source</i></b></a>
@@ -72,6 +77,30 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 
 	public String getPluginType() {
 		return PLUGIN_TYPE;
+	}
+
+	public ThemeCompanyLimit getThemeCompanyLimit() {
+		return _themeCompanyLimit;
+	}
+
+	public void setThemeCompanyLimit(ThemeCompanyLimit themeCompanyLimit) {
+		_themeCompanyLimit = themeCompanyLimit;
+	}
+
+	public boolean isCompanyAvailable(String companyId) {
+		return isAvailable(getThemeCompanyLimit(), companyId);
+	}
+
+	public ThemeGroupLimit getThemeGroupLimit() {
+		return _themeGroupLimit;
+	}
+
+	public void setThemeGroupLimit(ThemeGroupLimit themeGroupLimit) {
+		_themeGroupLimit = themeGroupLimit;
+	}
+
+	public boolean isGroupAvailable(long groupId) {
+		return isAvailable(getThemeGroupLimit(), String.valueOf(groupId));
 	}
 
 	public String getName() {
@@ -226,7 +255,83 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
+	protected boolean isAvailable(ThemeCompanyLimit limit, String id) {
+		boolean available = true;
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Check if theme " + getThemeId() + " is available for " + id);
+		}
+
+		if (limit != null) {
+			List includes = limit.getIncludes();
+			List excludes = limit.getExcludes();
+
+			if ((includes.size() != 0) && (excludes.size() != 0)) {
+
+				// Since includes and excludes are specified, check to
+				// make sure the current company id is included and also
+				// not excluded
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Check includes and excludes");
+				}
+
+				available = limit.isIncluded(id);
+
+				if (available) {
+					available = !limit.isExcluded(id);
+				}
+			}
+			else if ((includes.size() == 0) && (excludes.size() != 0)) {
+
+				// Since no includes are specified, check to make sure
+				// the current company id is not excluded
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Check excludes");
+				}
+
+				available = !limit.isExcluded(id);
+			}
+			else if ((includes.size() != 0) && (excludes.size() == 0)) {
+
+				// Since no excludes are specified, check to make sure
+				// the current company id is included
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Check includes");
+				}
+
+				available = limit.isIncluded(id);
+			}
+			else {
+
+				// Since no includes or excludes are specified, this
+				// theme is available for every company
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("No includes or excludes set");
+				}
+
+				available = true;
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Theme " + getThemeId() + " is " +
+					(!available ? "NOT " : "") + "available for " + id);
+		}
+
+		return available;
+	}
+
+	private static Log _log = LogFactory.getLog(ThemeImpl.class);
+
 	private String _themeId;
+	private ThemeCompanyLimit _themeCompanyLimit;
+	private ThemeGroupLimit _themeGroupLimit;
 	private String _name;
 	private String _rootPath = "/";
 	private String _templatesPath = "${root-path}/templates";

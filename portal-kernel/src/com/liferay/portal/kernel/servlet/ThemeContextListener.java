@@ -37,17 +37,17 @@ import javax.servlet.ServletContextListener;
  */
 public class ThemeContextListener implements ServletContextListener {
 
-	public void contextInitialized(ServletContextEvent sce) {
+	public void contextInitialized(ServletContextEvent event) {
 		HotDeployUtil.fireDeployEvent(
 			new HotDeployEvent(
-				sce.getServletContext(),
+				event.getServletContext(),
 				Thread.currentThread().getContextClassLoader()));
 	}
 
-	public void contextDestroyed(ServletContextEvent sce) {
+	public void contextDestroyed(ServletContextEvent event) {
 		HotDeployUtil.fireUndeployEvent(
 			new HotDeployEvent(
-				sce.getServletContext(),
+				event.getServletContext(),
 				Thread.currentThread().getContextClassLoader()));
 	}
 

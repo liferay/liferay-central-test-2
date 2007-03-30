@@ -22,6 +22,9 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.theme.ThemeCompanyLimit;
+import com.liferay.portal.theme.ThemeGroupLimit;
+
 import java.io.Serializable;
 
 import java.util.List;
@@ -37,6 +40,18 @@ import java.util.Properties;
 public interface Theme extends Comparable, Plugin, Serializable {
 
 	public String getThemeId();
+
+	public ThemeCompanyLimit getThemeCompanyLimit();
+
+	public void setThemeCompanyLimit(ThemeCompanyLimit themeCompanyLimit);
+
+	public boolean isCompanyAvailable(String companyId);
+
+	public ThemeGroupLimit getThemeGroupLimit();
+
+	public void setThemeGroupLimit(ThemeGroupLimit themeGroupLimit);
+
+	public boolean isGroupAvailable(long groupId);
 
 	public String getName();
 
