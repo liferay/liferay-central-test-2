@@ -3,10 +3,11 @@ Liferay.Draggables = {
 		var instance = this;
 
 		var drags = jQuery(instance._dragList);
+		var handles = instance._handles;
 
 		if (drags.length > 0){
 
-			jQuery('.portlet-title').css(
+			jQuery(handles).css(
 				 {
 					cursor: 'move'
 				 }
@@ -21,7 +22,7 @@ Liferay.Draggables = {
 				drags.Sortable(
 					{
 						accept: 'portlet-boundary',
-						handle: '.portlet-title',
+						handle: handles,
 						helperclass: 'portlet-placeholder',
 						hoverclass: 'portlet-dragging',
 						activeclass: 'portlet-hover',
@@ -42,7 +43,7 @@ Liferay.Draggables = {
 		var instance = this;
 
 		var element = jQuery(el);
-		element.find('.portlet-title').css('cursor', 'move');
+		element.find(instance._handles).css('cursor', 'move');
 
 		if (themeDisplay.isFreeformLayout()) {
 			LayoutColumns.initPortlet(el);
@@ -78,5 +79,6 @@ Liferay.Draggables = {
 		movePortlet(themeDisplay.getPlid(), portletId, currentColumnId, newPosition, themeDisplay.getDoAsUserIdEncoded());
 	},
 
-	_dragList: '#content-wrapper div[@id^=layout-column_]'
+	_dragList: '#content-wrapper div[@id^=layout-column_]',
+	_handles: '.portlet-title, .portlet-title-default'
 };
