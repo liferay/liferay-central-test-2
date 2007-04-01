@@ -16,6 +16,14 @@ Liferay.Navigation = new Class({
 		instance._isUseHandle = instance._navBlock.is('.use-handle');
 
 		instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
+		
+		var items = instance._navBlock.find('li');
+		
+		items.each(
+			function(i) {
+				this._LFR_layoutId = instance.params.layoutIds[i];
+			}
+		);
 
 		instance._makeAddable();
 		instance._makeDeletable();
@@ -45,7 +53,7 @@ Liferay.Navigation = new Class({
 			}
 		);
 
-		navItem.find('ul').append(addBlock);
+		navItem.find('ul:first').append(addBlock);
 
 		blockInput[0].focus();
 	},
@@ -221,19 +229,13 @@ Liferay.Navigation = new Class({
 		var instance = this;
 
 		var navBlock = instance._navBlock;
-		var navList = navBlock.find('ul');
+		var navList = navBlock.find('ul:first');
 
 		if (instance._isSortable) {
 			var float = navList.find('> li').css('float');
 
 			var items = navList.find('li');
 			var anchors = items.find('a');
-
-			items.each(
-				function(i) {
-					this._LFR_layoutId = instance.params.layoutIds[i];
-				}
-			);
 
 			if (instance._isUseHandle) {
 				items.append('<span class="sort-handle">+</span>');
