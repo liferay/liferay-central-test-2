@@ -44,6 +44,7 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 
 	<%
 	Set headerCssPortlets = CollectionFactory.getHashSet();
+	Set headerCssPaths = CollectionFactory.getHashSet();
 
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
@@ -64,11 +65,15 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				else {
 					headerCssPath = themeDisplay.getPathContext() + headerCssPath;
 				}
+
+				if (!headerCssPaths.contains(headerCssPath)) {
+					headerCssPaths.add(headerCssPath);
 	%>
 
-				<link href="<%= headerCssPath %>" rel="stylesheet" type="text/css" />
+					<link href="<%= headerCssPath %>" rel="stylesheet" type="text/css" />
 
 	<%
+				}
 			}
 		}
 	}
@@ -89,6 +94,7 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 
 	<%
 	Set headerJavaScriptPortlets = CollectionFactory.getHashSet();
+	Set headerJavaScriptPaths = CollectionFactory.getHashSet();
 
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
@@ -109,11 +115,15 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				else {
 					headerJavaScriptPath = themeDisplay.getPathContext() + headerJavaScriptPath;
 				}
+
+				if (!headerJavaScriptPaths.contains(headerJavaScriptPath)) {
+					headerJavaScriptPaths.add(headerJavaScriptPath);
 	%>
 
-				<script src="<%= headerJavaScriptPath %>" type="text/javascript"></script>
+					<script src="<%= headerJavaScriptPath %>" type="text/javascript"></script>
 
 	<%
+				}
 			}
 		}
 	}
