@@ -61,7 +61,8 @@ public class ImportPagesAction extends EditPagesAction {
 			String ownerId = ParamUtil.getString(uploadReq, "ownerId");
 			File file = uploadReq.getFile("importFileName");
 
-			LayoutServiceUtil.importLayouts(ownerId, file);
+			LayoutServiceUtil.importLayouts(
+				ownerId, true, true, true, true, file);
 
 			SessionMessages.add(req, "request_processed");
 		}

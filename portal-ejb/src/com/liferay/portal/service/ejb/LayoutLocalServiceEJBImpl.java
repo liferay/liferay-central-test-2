@@ -98,10 +98,14 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 		LayoutLocalServiceFactory.getTxImpl().deleteLayouts(ownerId);
 	}
 
-	public byte[] exportLayouts(java.lang.String ownerId)
+	public byte[] exportLayouts(java.lang.String ownerId,
+		boolean exportPortletPreferences, boolean exportPortletData,
+		boolean exportPermissions, boolean exportTheme)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return LayoutLocalServiceFactory.getTxImpl().exportLayouts(ownerId);
+		return LayoutLocalServiceFactory.getTxImpl().exportLayouts(ownerId,
+			exportPortletPreferences, exportPortletData, exportPermissions,
+			exportTheme);
 	}
 
 	public com.liferay.portal.model.Layout getFriendlyURLLayout(
@@ -146,18 +150,25 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 	}
 
 	public void importLayouts(java.lang.String userId,
-		java.lang.String ownerId, java.io.File file)
+		java.lang.String ownerId, boolean importPortletPreferences,
+		boolean importPortletData, boolean importPermissions,
+		boolean importTheme, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalServiceFactory.getTxImpl().importLayouts(userId, ownerId,
-			file);
+			importPortletPreferences, importPortletData, importPermissions,
+			importTheme, file);
 	}
 
 	public void importLayouts(java.lang.String userId,
-		java.lang.String ownerId, java.io.InputStream is)
+		java.lang.String ownerId, boolean importPortletPreferences,
+		boolean importPortletData, boolean importPermissions,
+		boolean importTheme, java.io.InputStream is)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		LayoutLocalServiceFactory.getTxImpl().importLayouts(userId, ownerId, is);
+		LayoutLocalServiceFactory.getTxImpl().importLayouts(userId, ownerId,
+			importPortletPreferences, importPortletData, importPermissions,
+			importTheme, is);
 	}
 
 	public void setLayouts(java.lang.String ownerId,

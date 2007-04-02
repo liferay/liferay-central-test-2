@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
@@ -46,7 +47,9 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
@@ -69,24 +72,30 @@ import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.theme.ThemeLoader;
+import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
+import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.InstancePool;
 import com.liferay.util.LocaleUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLFormatter;
 import com.liferay.util.zip.ZipReader;
 import com.liferay.util.zip.ZipWriter;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -96,6 +105,7 @@ import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -104,6 +114,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+
+import javax.servlet.ServletContext;
 
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
@@ -263,7 +275,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 	}
 
-	public byte[] exportLayouts(String ownerId)
+	public byte[] exportLayouts(
+			String ownerId, boolean exportPortletPreferences,
+			boolean exportPortletData, boolean exportPermissions,
+			boolean exportTheme)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -314,10 +329,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Set portletIds = new LinkedHashSet();
 
-		Iterator itr1 = getLayouts(ownerId).iterator();
+		Iterator itr = getLayouts(ownerId).iterator();
 
-		while (itr1.hasNext()) {
-			Layout layout = (Layout)itr1.next();
+		while (itr.hasNext()) {
+			Layout layout = (Layout)itr.next();
 
 			Element layoutEl = root.addElement("layout");
 
@@ -339,187 +354,105 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			layoutEl.addElement("priority").addText(
 				String.valueOf(layout.getPriority()));
 
-			// Layout permissions
-
-			String resourceName = Layout.class.getName();
-			String resourcePrimKey = layout.getPrimaryKey().toString();
-
 			Element permissionsEl = layoutEl.addElement("permissions");
 
-			exportGroupPermissions(
-				companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl, "community-actions");
+			// Layout permissions
 
-			if (groupId != guestGroup.getGroupId()) {
-				exportGroupPermissions(
-					companyId, guestGroup.getGroupId(), resourceName,
-					resourcePrimKey, permissionsEl, "guest-actions");
+			if (exportPermissions) {
+				exportLayoutPermissions(
+					layoutCache, companyId, groupId, guestGroup, layout,
+					permissionsEl);
 			}
-
-			exportUserPermissions(
-				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl);
-
-			exportInheritedPermissions(
-				layoutCache, companyId, resourceName, resourcePrimKey,
-				permissionsEl, "organization");
-
-			exportInheritedPermissions(
-				layoutCache, companyId, resourceName, resourcePrimKey,
-				permissionsEl, "location");
-
-			exportInheritedPermissions(
-				layoutCache, companyId, resourceName, resourcePrimKey,
-				permissionsEl, "user-group");
 
 			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
-				// Portlet permissions
-
-				Iterator itr2 = layoutTypePortlet.getPortletIds().iterator();
-
-				while (itr2.hasNext()) {
-					String portletId = (String)itr2.next();
-
-					if (!portletIds.contains(portletId)) {
-						portletIds.add(portletId);
-					}
-
-					if (layoutTypePortlet.hasPortletId(portletId)) {
-						resourceName = PortletImpl.getRootPortletId(portletId);
-						resourcePrimKey = PortletPermission.getPrimaryKey(
-							layout.getPlid(), portletId);
-
-						Element portletEl = permissionsEl.addElement("portlet");
-
-						portletEl.addAttribute("portlet-id", portletId);
-
-						exportGroupPermissions(
-							companyId, groupId, resourceName, resourcePrimKey,
-							portletEl, "community-actions");
-
-						if (groupId != guestGroup.getGroupId()) {
-							exportGroupPermissions(
-								companyId, guestGroup.getGroupId(),
-								resourceName, resourcePrimKey, portletEl,
-								"guest-actions");
-						}
-
-						exportUserPermissions(
-							layoutCache, companyId, groupId, resourceName,
-							resourcePrimKey, portletEl);
-
-						exportInheritedPermissions(
-							layoutCache, companyId, resourceName,
-							resourcePrimKey, portletEl, "organization");
-
-						exportInheritedPermissions(
-							layoutCache, companyId, resourceName,
-							resourcePrimKey, portletEl, "location");
-
-						exportInheritedPermissions(
-							layoutCache, companyId, resourceName,
-							resourcePrimKey, portletEl, "user-group");
-					}
-				}
-
 				// Portlet preferences
 
-				exportPortletPreferences(
-					layout.getLayoutId(), ownerId, layoutTypePortlet, layoutEl);
-
-				if (guestPrefsOwnerId != null) {
+				if (exportPortletPreferences) {
 					exportPortletPreferences(
-						layout.getLayoutId(), guestPrefsOwnerId,
-						layoutTypePortlet, layoutEl);
+						layout.getLayoutId(), ownerId, layoutTypePortlet,
+						layoutEl);
+
+					if (guestPrefsOwnerId != null) {
+						exportPortletPreferences(
+							layout.getLayoutId(), guestPrefsOwnerId,
+							layoutTypePortlet, layoutEl);
+					}
 				}
 
 				// Portlet data
 
-				exportPortletData(context, layout, layoutTypePortlet, layoutEl);
-			}
-		}
+				if (exportPortletData) {
+					exportPortletData(
+						context, layout, layoutTypePortlet, layoutEl);
+				}
 
-		// Layout roles
+				// Portlet permissions
 
-		Element rolesEl = root.addElement("roles");
-
-		String resourceName = Layout.class.getName();
-
-		exportGroupRoles(
-			layoutCache, companyId, groupId, resourceName, "community",
-			rolesEl);
-
-		exportUserRoles(layoutCache, companyId, groupId, resourceName, rolesEl);
-
-		exportInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "organization",
-			rolesEl);
-
-		exportInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "location", rolesEl);
-
-		exportInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "user-group",
-			rolesEl);
-
-		// Portlet roles
-
-		itr1 = portletIds.iterator();
-
-		while (itr1.hasNext()) {
-			String portletId = (String)itr1.next();
-
-			resourceName = PortletImpl.getRootPortletId(portletId);
-
-			Element portletEl = rolesEl.addElement("portlet");
-
-			portletEl.addAttribute("portlet-id", portletId);
-
-			exportGroupRoles(
-            	layoutCache, companyId, groupId, resourceName, "community",
-				portletEl);
-
-			exportUserRoles(
-				layoutCache, companyId, groupId, resourceName, portletEl);
-
-			exportInheritedRoles(
-				layoutCache, companyId, groupId, resourceName, "organization",
-				portletEl);
-
-			exportInheritedRoles(
-				layoutCache, companyId, groupId, resourceName, "location",
-				portletEl);
-
-			exportInheritedRoles(
-				layoutCache, companyId, groupId, resourceName, "user-group",
-				portletEl);
-
-			if (portletEl.elements().isEmpty()) {
-				rolesEl.remove(portletEl);
+				if (exportPermissions) {
+					exportPortletPermissions(
+						layoutCache, companyId, groupId, guestGroup,
+						layout, layoutTypePortlet, portletIds, permissionsEl);
+				}
 			}
 		}
 
 		// Portlet preferences
 
-		String groupPrefsOwnerId =
-			PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD + groupId;
+		if (exportPortletPreferences) {
+			String groupPrefsOwnerId =
+				PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD + groupId;
 
-		exportPortletPreferences(
-			PortletKeys.PREFS_LAYOUT_ID_SHARED, groupPrefsOwnerId, root);
+			exportPortletPreferences(
+				PortletKeys.PREFS_LAYOUT_ID_SHARED, groupPrefsOwnerId, root);
+		}
 
-		// XML file
+		Element rolesEl = root.addElement("roles");
+
+		// Layout roles
+
+		if (exportPermissions) {
+			exportLayoutRoles(layoutCache, companyId, groupId, rolesEl);
+		}
+
+		// Portlet roles
+
+		if (exportPermissions) {
+			exportPortletRoles(
+				layoutCache, companyId, groupId, portletIds, rolesEl);
+		}
+
+		// Look and feel
+
+		byte[] themeZip = null;
+
+		try {
+			if (exportTheme) {
+				themeZip = exportTheme(layoutSet);
+			}
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+
+		// XML
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Exporting layouts takes " + stopWatch.getTime() + " ms");
 		}
 
+		// Zip
+
 		try {
 			ZipWriter zipWriter = new ZipWriter();
 
 			zipWriter.addEntry("layouts.xml", XMLFormatter.toString(doc));
+
+			if (themeZip != null) {
+				zipWriter.addEntry("theme.zip", themeZip);
+			}
 
 			return zipWriter.finish();
 		}
@@ -574,18 +507,26 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return (LayoutReference[])list.toArray(new LayoutReference[0]);
 	}
 
-	public void importLayouts(String userId, String ownerId, File file)
+	public void importLayouts(
+			String userId, String ownerId, boolean importPortletPreferences,
+			boolean importPortletData, boolean importPermissions,
+			boolean importTheme, File file)
 		throws PortalException, SystemException {
 
 		try {
-			importLayouts(userId, ownerId, new FileInputStream(file));
+			importLayouts(
+				userId, ownerId, importPortletPreferences, importPortletData,
+				importPermissions, importTheme, new FileInputStream(file));
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new SystemException(fnfe);
 		}
 	}
 
-	public void importLayouts(String userId, String ownerId, InputStream is)
+	public void importLayouts(
+			String userId, String ownerId, boolean importPortletPreferences,
+			boolean importPortletData, boolean importPermissions,
+			boolean importTheme, InputStream is)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -609,11 +550,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			companyId, GroupImpl.GUEST);
 
-		// XML
+		// Zip
 
 		Element root = null;
+		byte[] themeZip = null;
 
 		try {
+
+			// XML
+
 			ZipReader zipReader = new ZipReader(is);
 
 			String xml = zipReader.getEntryAsString("layouts.xml");
@@ -623,6 +568,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Document doc = reader.read(new StringReader(xml));
 
 			root = doc.getRootElement();
+
+			// Look and feel
+
+			if (importTheme) {
+				themeZip = zipReader.getEntryAsByteArray("theme.zip");
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -648,6 +599,24 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String themeId = header.attributeValue("theme-id");
 		String colorSchemeId = header.attributeValue("color-scheme-id");
 
+		boolean useThemeZip = false;
+
+		if (themeZip != null) {
+			try {
+				String importThemeId = importTheme(layoutSet, themeZip);
+
+				if (importThemeId != null) {
+					themeId = importThemeId;
+					colorSchemeId = ColorSchemeImpl.getDefaultColorSchemeId();
+
+					useThemeZip = true;
+				}
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+		}
+
 		LayoutSetLocalServiceUtil.updateLookAndFeel(
 			ownerId, themeId, colorSchemeId, StringPool.BLANK);
 
@@ -657,10 +626,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		List newLayoutPKs = new ArrayList();
 
-		Iterator itr1 = root.elements("layout").iterator();
+		Iterator itr = root.elements("layout").iterator();
 
-		while (itr1.hasNext()) {
-			Element layoutEl = (Element)itr1.next();
+		while (itr.hasNext()) {
+			Element layoutEl = (Element)itr.next();
 
 			String layoutId = layoutEl.attributeValue("layout-id");
 			String parentLayoutId = layoutEl.elementText(
@@ -672,8 +641,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			boolean hidden = GetterUtil.getBoolean(
 				layoutEl.elementText("hidden"));
 			String friendlyURL = layoutEl.elementText("friendly-url");
-			themeId = layoutEl.elementText("theme-id");
-			colorSchemeId = layoutEl.elementText("color-scheme-id");
+
+			if (useThemeZip) {
+				themeId = StringPool.BLANK;
+				colorSchemeId = StringPool.BLANK;
+			}
+			else {
+				themeId = layoutEl.elementText("theme-id");
+				colorSchemeId = layoutEl.elementText("color-scheme-id");
+			}
+
 			int priority = GetterUtil.getInteger(
 				layoutEl.elementText("priority"));
 
@@ -703,172 +680,56 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			LayoutUtil.update(layout);
 
-			// Layout permissions
-
-			String resourceName = Layout.class.getName();
-			String resourcePrimKey = layout.getPrimaryKey().toString();
-
 			Element permissionsEl = layoutEl.element("permissions");
 
-			importGroupPermissions(
-				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl, "community-actions", false);
+			// Layout permissions
 
-			if (groupId != guestGroup.getGroupId()) {
-				importGroupPermissions(
-					layoutCache, companyId, guestGroup.getGroupId(),
-					resourceName, resourcePrimKey, permissionsEl,
-					"guest-actions", false);
-			}
-
-			importUserPermissions(
-				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl, false);
-
-			importInheritedPermissions(
-				layoutCache, companyId, resourceName, resourcePrimKey,
-				permissionsEl, "organization", false);
-
-			importInheritedPermissions(
-				layoutCache, companyId, resourceName, resourcePrimKey,
-				permissionsEl, "location", false);
-
-			importInheritedPermissions(
-				layoutCache, companyId, resourceName, resourcePrimKey,
-				permissionsEl, "user-group", false);
-
-			// Portlet permissions
-
-			Iterator itr2 = permissionsEl.elements("portlet").iterator();
-
-			while (itr2.hasNext()) {
-				Element portletEl = (Element)itr2.next();
-
-				String portletId = portletEl.attributeValue("portlet-id");
-
-				resourceName = PortletImpl.getRootPortletId(portletId);
-				resourcePrimKey = PortletPermission.getPrimaryKey(
-					layout.getPlid(), portletId);
-
-				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-					companyId, resourceName);
-
-				if (portlet == null) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Do not import portlet permissions for " +
-								portletId +
-									" because the portlet does not exist");
-					}
-				}
-				else {
-					importGroupPermissions(
-						layoutCache, companyId, groupId, resourceName,
-						resourcePrimKey, portletEl, "community-actions", true);
-
-					if (groupId != guestGroup.getGroupId()) {
-						importGroupPermissions(
-							layoutCache, companyId, guestGroup.getGroupId(),
-							resourceName, resourcePrimKey, portletEl,
-							"guest-actions", true);
-					}
-
-					importUserPermissions(
-						layoutCache, companyId, groupId, resourceName,
-						resourcePrimKey, portletEl, true);
-
-					importInheritedPermissions(
-						layoutCache, companyId, resourceName, resourcePrimKey,
-						portletEl, "organization", true);
-
-					importInheritedPermissions(
-						layoutCache, companyId, resourceName, resourcePrimKey,
-						portletEl, "location", true);
-
-					importInheritedPermissions(
-						layoutCache, companyId, resourceName, resourcePrimKey,
-						portletEl, "user-group", true);
-				}
+			if (importPermissions) {
+				importLayoutPermissions(
+					layoutCache, companyId, groupId, guestGroup, layout,
+					permissionsEl);
 			}
 
 			// Portlet preferences
 
-			importPortletPreferences(layoutSet, layoutEl);
+			if (importPortletPreferences) {
+				importPortletPreferences(layoutSet, layoutEl);
+			}
 
 			// Portlet data
 
-			importPortletData(context, layout, layoutEl);
-		}
-
-		// Layout roles
-
-		Element rolesEl = (Element)root.element("roles");
-
-		String resourceName = Layout.class.getName();
-
-		importGroupRoles(
-			layoutCache, companyId, groupId, resourceName, "community",
-			rolesEl);
-
-		importUserRoles(layoutCache, companyId, groupId, resourceName, rolesEl);
-
-		importInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "organization",
-			rolesEl);
-
-		importInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "location", rolesEl);
-
-		importInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "user-group",
-			rolesEl);
-
-		// Portlet roles
-
-		itr1 = rolesEl.elements("portlet").iterator();
-
-		while (itr1.hasNext()) {
-			Element portletEl = (Element)itr1.next();
-
-			String portletId = portletEl.attributeValue("portlet-id");
-
-			resourceName = PortletImpl.getRootPortletId(portletId);
-
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				companyId, resourceName);
-
-			if (portlet == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Do not import portlet roles for " + portletId +
-							" because the portlet does not exist");
-				}
+			if (importPortletData) {
+				importPortletData(context, layout, layoutEl);
 			}
-			else {
-				importGroupRoles(
-					layoutCache, companyId, groupId, resourceName, "community",
-					portletEl);
 
-				importUserRoles(
-					layoutCache, companyId, groupId, resourceName, portletEl);
+			// Portlet permissions
 
-				importInheritedRoles(
-					layoutCache, companyId, groupId, resourceName,
-					"organization", portletEl);
-
-				importInheritedRoles(
-					layoutCache, companyId, groupId, resourceName, "location",
-					portletEl);
-
-				importInheritedRoles(
-					layoutCache, companyId, groupId, resourceName, "user-group",
-					portletEl);
+			if (importPermissions) {
+				importPortletPermissions(
+					layoutCache, companyId, groupId, guestGroup, layout,
+					permissionsEl);
 			}
 		}
 
 		// Portlet preferences
 
-		importPortletPreferences(layoutSet, root);
+		if (importPortletPreferences) {
+			importPortletPreferences(layoutSet, root);
+		}
+
+		Element rolesEl = (Element)root.element("roles");
+
+		// Layout roles
+
+		if (importPermissions) {
+			importLayoutRoles(layoutCache, companyId, groupId, rolesEl);
+		}
+
+		// Portlet roles
+
+		if (importPermissions) {
+			importPortletRoles(layoutCache, companyId, groupId, rolesEl);
+		}
 
 		// Delete missing layouts
 
@@ -1241,6 +1102,66 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
+	protected void exportLayoutPermissions(
+			LayoutCache layoutCache, String companyId, long groupId,
+			Group guestGroup, Layout layout, Element permissionsEl)
+		throws PortalException, SystemException {
+
+		String resourceName = Layout.class.getName();
+		String resourcePrimKey = layout.getPrimaryKey().toString();
+
+		exportGroupPermissions(
+			companyId, groupId, resourceName, resourcePrimKey, permissionsEl,
+			"community-actions");
+
+		if (groupId != guestGroup.getGroupId()) {
+			exportGroupPermissions(
+				companyId, guestGroup.getGroupId(), resourceName,
+				resourcePrimKey, permissionsEl, "guest-actions");
+		}
+
+		exportUserPermissions(
+			layoutCache, companyId, groupId, resourceName, resourcePrimKey,
+			permissionsEl);
+
+		exportInheritedPermissions(
+			layoutCache, companyId, resourceName, resourcePrimKey,
+			permissionsEl, "organization");
+
+		exportInheritedPermissions(
+			layoutCache, companyId, resourceName, resourcePrimKey,
+			permissionsEl, "location");
+
+		exportInheritedPermissions(
+			layoutCache, companyId, resourceName, resourcePrimKey,
+			permissionsEl, "user-group");
+	}
+
+	protected void exportLayoutRoles(
+			LayoutCache layoutCache, String companyId, long groupId,
+			Element rolesEl)
+		throws PortalException, SystemException {
+
+		String resourceName = Layout.class.getName();
+
+		exportGroupRoles(
+			layoutCache, companyId, groupId, resourceName, "community",
+			rolesEl);
+
+		exportUserRoles(layoutCache, companyId, groupId, resourceName, rolesEl);
+
+		exportInheritedRoles(
+			layoutCache, companyId, groupId, resourceName, "organization",
+			rolesEl);
+
+		exportInheritedRoles(
+			layoutCache, companyId, groupId, resourceName, "location", rolesEl);
+
+		exportInheritedRoles(
+			layoutCache, companyId, groupId, resourceName, "user-group",
+			rolesEl);
+	}
+
 	protected void exportPortletData(
 			PortletDataContext context, Layout layout,
 			LayoutTypePortlet layoutTypePortlet, Element parentEl)
@@ -1312,6 +1233,60 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		el.addCDATA(data);
 	}
 
+	protected void exportPortletPermissions(
+			LayoutCache layoutCache, String companyId, long groupId,
+			Group guestGroup, Layout layout,
+			LayoutTypePortlet layoutTypePortlet, Set portletIds,
+			Element permissionsEl)
+		throws PortalException, SystemException {
+
+		Iterator itr = layoutTypePortlet.getPortletIds().iterator();
+
+		while (itr.hasNext()) {
+			String portletId = (String)itr.next();
+
+			if (!portletIds.contains(portletId)) {
+				portletIds.add(portletId);
+			}
+
+			if (layoutTypePortlet.hasPortletId(portletId)) {
+				String resourceName = PortletImpl.getRootPortletId(portletId);
+				String resourcePrimKey = PortletPermission.getPrimaryKey(
+					layout.getPlid(), portletId);
+
+				Element portletEl = permissionsEl.addElement("portlet");
+
+				portletEl.addAttribute("portlet-id", portletId);
+
+				exportGroupPermissions(
+					companyId, groupId, resourceName, resourcePrimKey,
+					portletEl, "community-actions");
+
+				if (groupId != guestGroup.getGroupId()) {
+					exportGroupPermissions(
+						companyId, guestGroup.getGroupId(), resourceName,
+						resourcePrimKey, portletEl, "guest-actions");
+				}
+
+				exportUserPermissions(
+					layoutCache, companyId, groupId, resourceName,
+					resourcePrimKey, portletEl);
+
+				exportInheritedPermissions(
+					layoutCache, companyId, resourceName, resourcePrimKey,
+					portletEl, "organization");
+
+				exportInheritedPermissions(
+					layoutCache, companyId, resourceName, resourcePrimKey,
+					portletEl, "location");
+
+				exportInheritedPermissions(
+					layoutCache, companyId, resourceName, resourcePrimKey,
+					portletEl, "user-group");
+			}
+		}
+	}
+
 	protected void exportPortletPreferences(
 			String layoutId, String ownerId, Element parentEl)
 		throws PortalException, SystemException {
@@ -1342,6 +1317,47 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				el.addAttribute("layout-id", layoutId);
 				el.addAttribute("owner-id", ownerId);
 				el.addElement("preferences").addCDATA(prefs.getPreferences());
+			}
+		}
+	}
+
+	protected void exportPortletRoles(
+			LayoutCache layoutCache, String companyId, long groupId,
+			Set portletIds, Element rolesEl)
+		throws PortalException, SystemException {
+
+		Iterator itr = portletIds.iterator();
+
+		while (itr.hasNext()) {
+			String portletId = (String)itr.next();
+
+			String resourceName = PortletImpl.getRootPortletId(portletId);
+
+			Element portletEl = rolesEl.addElement("portlet");
+
+			portletEl.addAttribute("portlet-id", portletId);
+
+			exportGroupRoles(
+				layoutCache, companyId, groupId, resourceName, "community",
+				portletEl);
+
+			exportUserRoles(
+				layoutCache, companyId, groupId, resourceName, portletEl);
+
+			exportInheritedRoles(
+				layoutCache, companyId, groupId, resourceName, "organization",
+				portletEl);
+
+			exportInheritedRoles(
+				layoutCache, companyId, groupId, resourceName, "location",
+				portletEl);
+
+			exportInheritedRoles(
+				layoutCache, companyId, groupId, resourceName, "user-group",
+				portletEl);
+
+			if (portletEl.elements().isEmpty()) {
+				rolesEl.remove(portletEl);
 			}
 		}
 	}
@@ -1383,6 +1399,76 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return el;
+	}
+
+	protected byte[] exportTheme(LayoutSet layoutSet)
+		throws IOException, PortalException, SystemException {
+
+		Theme theme = layoutSet.getTheme();
+		ColorScheme colorScheme = layoutSet.getColorScheme();
+
+		ZipWriter zipWriter = new ZipWriter();
+
+		String lookAndFeelXML = ContentUtil.get(
+			"com/liferay/portal/dependencies/liferay-look-and-feel.xml.tmpl");
+
+		zipWriter.addEntry("liferay-look-and-feel.xml", lookAndFeelXML);
+
+		String servletContextName = theme.getServletContextName();
+
+		ServletContext ctx = VelocityContextPool.get(servletContextName);
+
+		if (ctx == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Servlet context not found for theme " +
+						theme.getThemeId());
+			}
+
+			return null;
+		}
+
+		File cssPath = new File(ctx.getRealPath(theme.getCssPath()));
+
+		exportThemeFiles("css", cssPath, zipWriter);
+
+		File imagesPath = new File(ctx.getRealPath(theme.getImagesPath()));
+
+		exportThemeFiles("images", imagesPath, zipWriter);
+
+		File javaScriptPath = new File(
+			ctx.getRealPath(theme.getJavaScriptPath()));
+
+		exportThemeFiles("javascript", javaScriptPath, zipWriter);
+
+		File templatesPath = new File(
+			ctx.getRealPath(theme.getTemplatesPath()));
+
+		exportThemeFiles("templates", templatesPath, zipWriter);
+
+		return zipWriter.finish();
+	}
+
+	protected void exportThemeFiles(String path, File dir, ZipWriter zipWriter)
+		throws IOException {
+
+		if (!dir.exists()) {
+			return;
+		}
+
+		File[] files = dir.listFiles();
+
+		for (int i = 0; i < files.length; i++) {
+			File file = files[i];
+
+			if (file.isDirectory()) {
+				exportThemeFiles(path + "/" + file.getName(), file, zipWriter);
+			}
+			else {
+				zipWriter.addEntry(
+					path + "/" + file.getName(), FileUtil.getBytes(file));
+			}
+		}
 	}
 
 	protected void exportUserPermissions(
@@ -1700,6 +1786,66 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
+	protected void importLayoutPermissions(
+			LayoutCache layoutCache, String companyId, long groupId,
+			Group guestGroup, Layout layout, Element permissionsEl)
+		throws PortalException, SystemException {
+
+		String resourceName = Layout.class.getName();
+		String resourcePrimKey = layout.getPrimaryKey().toString();
+
+		importGroupPermissions(
+			layoutCache, companyId, groupId, resourceName, resourcePrimKey,
+			permissionsEl, "community-actions", false);
+
+		if (groupId != guestGroup.getGroupId()) {
+			importGroupPermissions(
+				layoutCache, companyId, guestGroup.getGroupId(), resourceName,
+				resourcePrimKey, permissionsEl, "guest-actions", false);
+		}
+
+		importUserPermissions(
+			layoutCache, companyId, groupId, resourceName, resourcePrimKey,
+			permissionsEl, false);
+
+		importInheritedPermissions(
+			layoutCache, companyId, resourceName, resourcePrimKey,
+			permissionsEl, "organization", false);
+
+		importInheritedPermissions(
+			layoutCache, companyId, resourceName, resourcePrimKey,
+			permissionsEl, "location", false);
+
+		importInheritedPermissions(
+			layoutCache, companyId, resourceName, resourcePrimKey,
+			permissionsEl, "user-group", false);
+	}
+
+	protected void importLayoutRoles(
+			LayoutCache layoutCache, String companyId, long groupId,
+			Element rolesEl)
+		throws PortalException, SystemException {
+
+		String resourceName = Layout.class.getName();
+
+		importGroupRoles(
+			layoutCache, companyId, groupId, resourceName, "community",
+			rolesEl);
+
+		importUserRoles(layoutCache, companyId, groupId, resourceName, rolesEl);
+
+		importInheritedRoles(
+			layoutCache, companyId, groupId, resourceName, "organization",
+			rolesEl);
+
+		importInheritedRoles(
+			layoutCache, companyId, groupId, resourceName, "location", rolesEl);
+
+		importInheritedRoles(
+			layoutCache, companyId, groupId, resourceName, "user-group",
+			rolesEl);
+	}
+
 	protected void importPortletData(
 			PortletDataContext context, Layout layout, Element parentEl)
 		throws PortalException, SystemException {
@@ -1781,6 +1927,63 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return PortletPreferencesSerializer.toXML(prefsImpl);
 	}
 
+	protected void importPortletPermissions(
+			LayoutCache layoutCache, String companyId, long groupId,
+			Group guestGroup, Layout layout, Element permissionsEl)
+		throws PortalException, SystemException {
+
+		Iterator itr = permissionsEl.elements("portlet").iterator();
+
+		while (itr.hasNext()) {
+			Element portletEl = (Element)itr.next();
+
+			String portletId = portletEl.attributeValue("portlet-id");
+
+			String resourceName = PortletImpl.getRootPortletId(portletId);
+			String resourcePrimKey = PortletPermission.getPrimaryKey(
+				layout.getPlid(), portletId);
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				companyId, resourceName);
+
+			if (portlet == null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Do not import portlet permissions for " + portletId +
+							" because the portlet does not exist");
+				}
+			}
+			else {
+				importGroupPermissions(
+					layoutCache, companyId, groupId, resourceName,
+					resourcePrimKey, portletEl, "community-actions", true);
+
+				if (groupId != guestGroup.getGroupId()) {
+					importGroupPermissions(
+						layoutCache, companyId, guestGroup.getGroupId(),
+						resourceName, resourcePrimKey, portletEl,
+						"guest-actions", true);
+				}
+
+				importUserPermissions(
+					layoutCache, companyId, groupId, resourceName,
+					resourcePrimKey, portletEl, true);
+
+				importInheritedPermissions(
+					layoutCache, companyId, resourceName, resourcePrimKey,
+					portletEl, "organization", true);
+
+				importInheritedPermissions(
+					layoutCache, companyId, resourceName, resourcePrimKey,
+					portletEl, "location", true);
+
+				importInheritedPermissions(
+					layoutCache, companyId, resourceName, resourcePrimKey,
+					portletEl, "user-group", true);
+			}
+		}
+	}
+
 	protected void importPortletPreferences(
 			LayoutSet layoutSet, Element parentEl)
 		throws PortalException, SystemException {
@@ -1830,6 +2033,53 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
+	protected void importPortletRoles(
+			LayoutCache layoutCache, String companyId, long groupId,
+			Element rolesEl)
+		throws PortalException, SystemException {
+
+		Iterator itr = rolesEl.elements("portlet").iterator();
+
+		while (itr.hasNext()) {
+			Element portletEl = (Element)itr.next();
+
+			String portletId = portletEl.attributeValue("portlet-id");
+
+			String resourceName = PortletImpl.getRootPortletId(portletId);
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				companyId, resourceName);
+
+			if (portlet == null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Do not import portlet roles for " + portletId +
+							" because the portlet does not exist");
+				}
+			}
+			else {
+				importGroupRoles(
+					layoutCache, companyId, groupId, resourceName, "community",
+					portletEl);
+
+				importUserRoles(
+					layoutCache, companyId, groupId, resourceName, portletEl);
+
+				importInheritedRoles(
+					layoutCache, companyId, groupId, resourceName,
+					"organization", portletEl);
+
+				importInheritedRoles(
+					layoutCache, companyId, groupId, resourceName, "location",
+					portletEl);
+
+				importInheritedRoles(
+					layoutCache, companyId, groupId, resourceName, "user-group",
+					portletEl);
+			}
+		}
+	}
+
 	protected void importRolePermissions(
 			LayoutCache layoutCache, String companyId, String resourceName,
 			String scope, String resourcePrimKey, Element parentEl,
@@ -1864,6 +2114,62 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				}
 			}
 		}
+	}
+
+	protected String importTheme(LayoutSet layoutSet, byte[] themeZip)
+		throws IOException {
+
+		ThemeLoader themeLoader = ThemeLoader.getInstance();
+
+		if (themeLoader == null) {
+			_log.error("No theme loaders are deployed");
+
+			return null;
+		}
+
+		ZipReader zipReader = new ZipReader(new ByteArrayInputStream(themeZip));
+
+		Map entries = zipReader.getEntries();
+
+		String lookAndFeelXML = new String(
+			(byte[])entries.get("liferay-look-and-feel.xml"));
+
+		Date now = new Date();
+
+		String themeId =
+			layoutSet.getGroupId() + "-" + Time.getShortTimestamp(now);
+		String themeName = themeId;
+
+		lookAndFeelXML = StringUtil.replace(
+			lookAndFeelXML,
+			new String[] {
+				"[$GROUP_ID$]", "[$THEME_ID$]", "[$THEME_NAME$]"
+			},
+			new String[] {
+				String.valueOf(layoutSet.getGroupId()), themeId, themeName
+			}
+		);
+
+		Iterator itr = entries.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String key = (String)entry.getKey();
+			byte[] value = (byte[])entry.getValue();
+
+			if (key.equals("liferay-look-and-feel.xml")) {
+				value = lookAndFeelXML.getBytes();
+			}
+
+			FileUtil.write(
+				themeLoader.getRoot() + "/" + themeId + "/" + key, value);
+		}
+
+		themeLoader.loadThemes();
+
+		return themeId + PortletImpl.WAR_SEPARATOR +
+			themeLoader.getServletContextName();
 	}
 
 	protected void importUserPermissions(

@@ -7,8 +7,8 @@
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'LAX ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ('liferay.com.${userId}', 3);
 
@@ -27,8 +27,8 @@
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'SFO ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ('liferay.com.${userId}', 3);
 
@@ -47,8 +47,8 @@
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'ORD ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ('liferay.com.${userId}', 3);
 
@@ -67,8 +67,8 @@
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'NYC ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ('liferay.com.${userId}', 3);
 
@@ -87,8 +87,8 @@
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'LON ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ('liferay.com.${userId}', 3);
 
@@ -107,8 +107,8 @@
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'MAD ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ('liferay.com.${userId}', 3);
 
@@ -127,8 +127,8 @@
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'HKG ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ('liferay.com.${userId}', 3);
 
@@ -147,8 +147,8 @@
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values (${contactId}, 'liferay.com', 'liferay.com.1', 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', -1, 'Test', '', 'PVG ${count}', '', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, className, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.${userId}', -1, -1, '${groupId}', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.${groupId}', 'liferay.com', ${groupId}, '${groupId}', TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.${groupId}', 'liferay.com', ${groupId}, '${groupId}', FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ('liferay.com.${userId}', 3);
 

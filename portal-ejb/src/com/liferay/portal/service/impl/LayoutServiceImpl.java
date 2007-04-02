@@ -88,7 +88,10 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			companyId, portletId, prefsKey, prefsValue);
 	}
 
-	public byte[] exportLayouts(String ownerId)
+	public byte[] exportLayouts(
+			String ownerId, boolean exportPortletPreferences,
+			boolean exportPortletData, boolean exportPermissions,
+			boolean exportTheme)
 		throws PortalException, SystemException {
 
 		long groupId = LayoutImpl.getGroupId(ownerId);
@@ -96,10 +99,15 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
-		return LayoutLocalServiceUtil.exportLayouts(ownerId);
+		return LayoutLocalServiceUtil.exportLayouts(
+			ownerId, exportPortletPreferences, exportPortletData,
+			exportPermissions, exportTheme);
 	}
 
-	public void importLayouts(String ownerId, File file)
+	public void importLayouts(
+			String ownerId, boolean importPortletPreferences,
+			boolean importPortletData, boolean importPermissions,
+			boolean importTheme, File file)
 		throws PortalException, SystemException {
 
 		long groupId = LayoutImpl.getGroupId(ownerId);
@@ -107,7 +115,9 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
-		LayoutLocalServiceUtil.importLayouts(getUserId(), ownerId, file);
+		LayoutLocalServiceUtil.importLayouts(
+			getUserId(), ownerId, importPortletPreferences, importPortletData,
+			importPermissions, importTheme, file);
 	}
 
 	public void setLayouts(

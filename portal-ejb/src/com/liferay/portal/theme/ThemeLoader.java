@@ -29,6 +29,7 @@ import com.liferay.util.FileUtil;
 
 import java.io.File;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,20 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ThemeLoader {
+
+	public static ThemeLoader getInstance() {
+		ThemeLoader themeLoader = null;
+
+		Iterator itr = _themeLoaders.entrySet().iterator();
+
+		if (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			themeLoader = (ThemeLoader)entry.getValue();
+		}
+
+		return themeLoader;
+	}
 
 	public static void init(String servletContextName, ServletContext ctx) {
 		VelocityContextPool.put(servletContextName, ctx);
@@ -69,11 +84,15 @@ public class ThemeLoader {
 		}
 	}
 
-	private ThemeLoader(String servletContextName, ServletContext ctx) {
-		_servletContextName = servletContextName;
-		_ctx = ctx;
-		_root = new File(ctx.getRealPath("/themes"));
+	public String getServletContextName() {
+		return _servletContextName;
+	}
 
+	public File getRoot() {
+		return _root;
+	}
+
+	public synchronized void loadThemes() {
 		if (_log.isInfoEnabled()) {
 			_log.info("Loading themes in " + _root);
 		}
@@ -89,7 +108,28 @@ public class ThemeLoader {
 				files[i] + "/liferay-look-and-feel.xml");
 
 			if (liferayLookAndFeelXML.exists()) {
-				registerTheme(liferayLookAndFeelXML);
+				String lastModifiedKey = liferayLookAndFeelXML.toString();
+
+				Long prevLastModified =
+					(Long)_lastModifiedMap.get(lastModifiedKey);
+
+				long lastModified = liferayLookAndFeelXML.lastModified();
+
+				if ((prevLastModified == null) ||
+					(prevLastModified.longValue() < lastModified)) {
+
+					registerTheme(liferayLookAndFeelXML);
+
+					_lastModifiedMap.put(
+						lastModifiedKey, new Long(lastModified));
+				}
+				else {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Do not refresh " + liferayLookAndFeelXML +
+								" because it is has not been modified");
+					}
+				}
 			}
 			else {
 				if (_log.isWarnEnabled()) {
@@ -97,6 +137,14 @@ public class ThemeLoader {
 				}
 			}
 		}
+	}
+
+	private ThemeLoader(String servletContextName, ServletContext ctx) {
+		_servletContextName = servletContextName;
+		_ctx = ctx;
+		_root = new File(ctx.getRealPath("/themes"));
+
+		loadThemes();
 	}
 
 	private void destroy() {
@@ -127,5 +175,6 @@ public class ThemeLoader {
 	private String _servletContextName;
 	private ServletContext _ctx;
 	private File _root;
+	private Map _lastModifiedMap = CollectionFactory.getHashMap();
 
 }

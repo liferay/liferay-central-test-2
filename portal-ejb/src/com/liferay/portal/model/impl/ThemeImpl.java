@@ -183,6 +183,15 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return _colorSchemesMap;
 	}
 
+	public boolean hasColorSchemes() {
+		if (_colorSchemesMap.size() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public String getServletContextName() {
 		return _servletContextName;
 	}
@@ -341,7 +350,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private String _templateExtension = "vm";
 	private Properties _settings = new Properties();
 	private Map _colorSchemesMap = new HashMap();
-	private String _servletContextName;
+	private String _servletContextName = StringPool.BLANK;
 	private boolean _warFile;
 
 }

@@ -49,7 +49,7 @@
 	</category>
 
 	<category name="com.liferay.portal.deploy.hot.ThemeLoaderHotDeployListener">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.editor">

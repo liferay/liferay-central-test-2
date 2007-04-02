@@ -136,10 +136,14 @@ public class LayoutServiceSoap {
 		}
 	}
 
-	public static byte[] exportLayouts(java.lang.String ownerId)
+	public static byte[] exportLayouts(java.lang.String ownerId,
+		boolean exportPortletPreferences, boolean exportPortletData,
+		boolean exportPermissions, boolean exportTheme)
 		throws RemoteException {
 		try {
-			byte[] returnValue = LayoutServiceUtil.exportLayouts(ownerId);
+			byte[] returnValue = LayoutServiceUtil.exportLayouts(ownerId,
+					exportPortletPreferences, exportPortletData,
+					exportPermissions, exportTheme);
 
 			return returnValue;
 		}

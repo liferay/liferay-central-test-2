@@ -26,17 +26,23 @@ import com.liferay.portal.kernel.util.ByteArrayMaker;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ZipReader.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
 public class ZipReader implements Serializable {
@@ -46,10 +52,55 @@ public class ZipReader implements Serializable {
 	}
 
 	public ZipReader(InputStream stream) {
-		_zis = new ZipInputStream(stream);
+		try {
+			_zis = new ZipInputStream(stream);
+
+			while (true) {
+				ZipEntry entry = _zis.getNextEntry();
+
+				if (entry == null) {
+					break;
+				}
+
+				String currentName = entry.getName();
+
+				ByteArrayMaker bam = new ByteArrayMaker();
+
+				while (true) {
+					int count = _zis.read(_data, 0, _BUFFER);
+
+					if (count == -1) {
+						break;
+					}
+
+					bam.write(_data, 0, count);
+				}
+
+				byte[] byteArray = bam.toByteArray();
+
+				_entries.put(currentName, byteArray);
+			}
+		}
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
+		}
+		finally {
+			try {
+				_zis.close();
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e);
+				}
+			}
+		}
 	}
 
-	public String getEntryAsString(String name) throws Exception {
+	public Map getEntries() {
+		return _entries;
+	}
+
+	public String getEntryAsString(String name) {
 		byte[] byteArray = getEntryAsByteArray(name);
 
 		if (byteArray != null) {
@@ -59,41 +110,16 @@ public class ZipReader implements Serializable {
 		return null;
 	}
 
-	public byte[] getEntryAsByteArray(String name) throws Exception {
-		if (_entries.containsKey(name)) {
-			return (byte[])_entries.get(name);
-		}
-		else {
-			ZipEntry entry = null;
-
-			while ((entry = _zis.getNextEntry()) != null) {
-				String currentName = entry.getName();
-
-				ByteArrayMaker bam = new ByteArrayMaker();
-
-				int count;
-
-				while ((count = _zis.read(_data, 0, _BUFFER)) != -1) {
-					bam.write(_data, 0, count);
-				}
-
-				byte[] byteArray = bam.toByteArray();
-
-				_entries.put(currentName, byteArray);
-
-				if (currentName.equals(name)) {
-					return byteArray;
-				}
-			}
-		}
-
-		return null;
+	public byte[] getEntryAsByteArray(String name) {
+		return (byte[])_entries.get(name);
 	}
 
 	private static final int _BUFFER = 2048;
 
+	private static Log _log = LogFactory.getLog(ZipReader.class);
+
 	private ZipInputStream _zis;
-	private HashMap _entries = new HashMap();
+	private Map _entries = new LinkedHashMap();
 	private byte[] _data = new byte[_BUFFER];
 
 }

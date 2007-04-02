@@ -62,6 +62,7 @@ alter table Layout add css VARCHAR(75) null;
 alter_column_type LayoutSet groupId LONG;
 alter table LayoutSet add logo BOOLEAN;
 alter table LayoutSet add css VARCHAR(75) null;
+update LayoutSet set logo = FALSE;
 
 alter_column_type ListType listTypeId INTEGER;
 

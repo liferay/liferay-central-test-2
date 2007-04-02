@@ -108,10 +108,14 @@ public class LayoutServiceJSON {
 		return returnValue;
 	}
 
-	public static byte[] exportLayouts(java.lang.String ownerId)
+	public static byte[] exportLayouts(java.lang.String ownerId,
+		boolean exportPortletPreferences, boolean exportPortletData,
+		boolean exportPermissions, boolean exportTheme)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		byte[] returnValue = LayoutServiceUtil.exportLayouts(ownerId);
+		byte[] returnValue = LayoutServiceUtil.exportLayouts(ownerId,
+				exportPortletPreferences, exportPortletData, exportPermissions,
+				exportTheme);
 
 		return returnValue;
 	}

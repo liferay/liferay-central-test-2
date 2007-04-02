@@ -101,12 +101,16 @@ public class LayoutLocalServiceUtil {
 		layoutLocalService.deleteLayouts(ownerId);
 	}
 
-	public static byte[] exportLayouts(java.lang.String ownerId)
+	public static byte[] exportLayouts(java.lang.String ownerId,
+		boolean exportPortletPreferences, boolean exportPortletData,
+		boolean exportPermissions, boolean exportTheme)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-		return layoutLocalService.exportLayouts(ownerId);
+		return layoutLocalService.exportLayouts(ownerId,
+			exportPortletPreferences, exportPortletData, exportPermissions,
+			exportTheme);
 	}
 
 	public static com.liferay.portal.model.Layout getFriendlyURLLayout(
@@ -162,19 +166,27 @@ public class LayoutLocalServiceUtil {
 	}
 
 	public static void importLayouts(java.lang.String userId,
-		java.lang.String ownerId, java.io.File file)
+		java.lang.String ownerId, boolean importPortletPreferences,
+		boolean importPortletData, boolean importPermissions,
+		boolean importTheme, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-		layoutLocalService.importLayouts(userId, ownerId, file);
+		layoutLocalService.importLayouts(userId, ownerId,
+			importPortletPreferences, importPortletData, importPermissions,
+			importTheme, file);
 	}
 
 	public static void importLayouts(java.lang.String userId,
-		java.lang.String ownerId, java.io.InputStream is)
+		java.lang.String ownerId, boolean importPortletPreferences,
+		boolean importPortletData, boolean importPermissions,
+		boolean importTheme, java.io.InputStream is)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-		layoutLocalService.importLayouts(userId, ownerId, is);
+		layoutLocalService.importLayouts(userId, ownerId,
+			importPortletPreferences, importPortletData, importPermissions,
+			importTheme, is);
 	}
 
 	public static void setLayouts(java.lang.String ownerId,

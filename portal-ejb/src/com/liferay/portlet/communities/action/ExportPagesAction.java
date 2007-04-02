@@ -55,7 +55,17 @@ public class ExportPagesAction extends PortletAction {
 		try {
 			String ownerId = ParamUtil.getString(req, "ownerId");
 			String fileName = ParamUtil.getString(req, "exportFileName");
-			byte[] byteArray = LayoutServiceUtil.exportLayouts(ownerId);
+			boolean exportPortletPreferences = ParamUtil.getBoolean(
+				req, "exportPortletPreferences");
+			boolean exportPortletData = ParamUtil.getBoolean(
+				req, "exportPortletData");
+			boolean exportPermissions = ParamUtil.getBoolean(
+				req, "exportPermissions");
+			boolean exportTheme = ParamUtil.getBoolean(req, "exportTheme");
+
+			byte[] byteArray = LayoutServiceUtil.exportLayouts(
+				ownerId, exportPortletPreferences, exportPortletData,
+				exportPermissions, exportTheme);
 
 			HttpServletResponse httpRes =
 				((ActionResponseImpl)res).getHttpServletResponse();

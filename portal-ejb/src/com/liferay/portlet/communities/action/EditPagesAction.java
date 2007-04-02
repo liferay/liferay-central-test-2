@@ -267,12 +267,13 @@ public class EditPagesAction extends PortletAction {
 			String creatorUserId, String sourceOwnerId, String targetOwnerId)
 		throws Exception{
 
-		byte[] data = LayoutLocalServiceUtil.exportLayouts(sourceOwnerId);
+		byte[] data = LayoutLocalServiceUtil.exportLayouts(
+			sourceOwnerId, true, false, true, false);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
 		LayoutLocalServiceUtil.importLayouts(
-			creatorUserId, targetOwnerId, bais);
+			creatorUserId, targetOwnerId, true, false, true, false, bais);
 	}
 
 	protected void copyPreferences(

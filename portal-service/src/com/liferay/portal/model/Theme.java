@@ -91,6 +91,8 @@ public interface Theme extends Comparable, Plugin, Serializable {
 
 	public Map getColorSchemesMap();
 
+	public boolean hasColorSchemes();
+
 	public String getServletContextName();
 
 	public void setServletContextName(String servletContextName);
