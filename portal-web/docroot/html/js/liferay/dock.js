@@ -36,7 +36,7 @@ Liferay.Dock = {
 				);
 
 				instance._toggle(event, 'show');
-			}
+			};
 			
 			var dockOut = function(event) {
 				event.data = dockData;
