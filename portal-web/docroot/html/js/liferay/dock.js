@@ -34,16 +34,19 @@ Liferay.Dock = {
 						instance._toggle(event, 'hide');
 					}
 				);
+
 				instance._toggle(event, 'show');
 			}
 			
 			var dockOut = function(event) {
 				event.data = dockData;
+
 				instance._toggle(event, 'hide');
 			};
 			
 			var myPlacesToggle = function(event) {
 				event.data = myPlaces;
+
 				instance._togglePlaces(event);
 			};
 
@@ -116,23 +119,19 @@ Liferay.Dock = {
 
 		var dock = params.dock;
 		var dockList = params.dockList;
-		
-		if (state) {
-			switch (state) {
-				case 'hide':
-					dockList.hide();
-					dock.removeClass('expanded');
-				break;
-				case 'show':
-					dockList.show();
-					dock.addClass('expanded');
-				break;
-			}
-		} else {
+
+		if (state == 'hide') {
+			dockList.hide();
+			dock.removeClass('expanded');
+		}
+		else if (state == 'show') {
+			dockList.show();
+			dock.addClass('expanded');
+		}
+		else {
 			dockList.toggle();
 			dock.toggleClass('expanded');
 		}
-
 	},
 
 	_togglePlaces: function(event) {

@@ -16,9 +16,9 @@ Liferay.Navigation = new Class({
 		instance._isUseHandle = instance._navBlock.is('.use-handle');
 
 		instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
-		
+
 		var items = instance._navBlock.find('li');
-		
+
 		items.each(
 			function(i) {
 				this._LFR_layoutId = instance.params.layoutIds[i];
