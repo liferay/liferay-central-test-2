@@ -260,7 +260,7 @@ public class ThemeDisplay implements Serializable {
 					StringPool.SLASH + theme.getServletContextName();
 			}
 
-			setPathColorSchemeImage(
+			setPathColorSchemeImages(
 				themeContextPath + colorScheme.getColorSchemeImagesPath());
 
 			setPathThemeCss(themeContextPath + theme.getCssPath());
@@ -335,12 +335,12 @@ public class ThemeDisplay implements Serializable {
 		_pathCms = pathCms;
 	}
 
-	public String getPathColorSchemeImage() {
-		return _pathColorSchemeImage;
+	public String getPathColorSchemeImages() {
+		return _pathColorSchemeImages;
 	}
 
-	public void setPathColorSchemeImage(String pathColorSchemeImage) {
-		_pathColorSchemeImage = pathColorSchemeImage;
+	public void setPathColorSchemeImages(String pathColorSchemeImages) {
+		_pathColorSchemeImages = pathColorSchemeImages;
 	}
 
 	public String getPathContext() {
@@ -673,7 +673,7 @@ public class ThemeDisplay implements Serializable {
 		_statePopUp = false;
 		_pathApplet = StringPool.BLANK;
 		_pathCms = StringPool.BLANK;
-		_pathColorSchemeImage = StringPool.BLANK;
+		_pathColorSchemeImages = StringPool.BLANK;
 		_pathContext = StringPool.BLANK;
 		_pathFlash = StringPool.BLANK;
 		_pathFriendlyURLPrivateGroup = StringPool.BLANK;
@@ -742,7 +742,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _statePopUp;
 	private String _pathApplet = StringPool.BLANK;
 	private String _pathCms = StringPool.BLANK;
-	private String _pathColorSchemeImage = StringPool.BLANK;
+	private String _pathColorSchemeImages = StringPool.BLANK;
 	private String _pathContext = StringPool.BLANK;
 	private String _pathFlash = StringPool.BLANK;
 	private String _pathFriendlyURLPrivateGroup = StringPool.BLANK;
