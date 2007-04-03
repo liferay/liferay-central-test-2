@@ -105,8 +105,7 @@ public class PluginPackageUtil {
 				plugins.addAll(repository.getPluginPackages());
 			}
 			catch(PluginPackageException pe) {
-				_log.error(
-					"Unable to load repository " + repositoryURLs[i], pe);
+				_log.error(pe.getMessage());
 			}
 		}
 

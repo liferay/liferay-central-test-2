@@ -22,6 +22,7 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.comm.CommLink;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
@@ -184,6 +185,10 @@ public class GlobalStartupAction extends SimpleAction {
 
 			SMTPServerUtil.start();
 		}
+
+		// JGroups
+
+		CommLink.getInstance();
 
 		// Other required events
 

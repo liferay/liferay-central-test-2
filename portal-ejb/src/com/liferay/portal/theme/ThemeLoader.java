@@ -23,13 +23,11 @@
 package com.liferay.portal.theme;
 
 import com.liferay.portal.service.impl.ThemeLocalUtil;
-import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 
 import java.io.File;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -45,44 +43,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ThemeLoader {
-
-	public static ThemeLoader getInstance() {
-		ThemeLoader themeLoader = null;
-
-		Iterator itr = _themeLoaders.entrySet().iterator();
-
-		if (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			themeLoader = (ThemeLoader)entry.getValue();
-		}
-
-		return themeLoader;
-	}
-
-	public static void init(String servletContextName, ServletContext ctx) {
-		VelocityContextPool.put(servletContextName, ctx);
-
-		ThemeLoader themeLoader = new ThemeLoader(servletContextName, ctx);
-
-		_themeLoaders.put(servletContextName, themeLoader);
-	}
-
-	public static boolean destroy(String servletContextName) {
-		ThemeLoader themeLoader =
-			(ThemeLoader)_themeLoaders.remove(servletContextName);
-
-		if (themeLoader == null) {
-			return false;
-		}
-		else {
-			VelocityContextPool.remove(servletContextName);
-
-			themeLoader.destroy();
-
-			return true;
-		}
-	}
 
 	public String getServletContextName() {
 		return _servletContextName;
@@ -139,7 +99,7 @@ public class ThemeLoader {
 		}
 	}
 
-	private ThemeLoader(String servletContextName, ServletContext ctx) {
+	protected ThemeLoader(String servletContextName, ServletContext ctx) {
 		_servletContextName = servletContextName;
 		_ctx = ctx;
 		_root = new File(ctx.getRealPath("/themes"));
@@ -147,10 +107,10 @@ public class ThemeLoader {
 		loadThemes();
 	}
 
-	private void destroy() {
+	protected void destroy() {
 	}
 
-	private void registerTheme(File liferayLookAndFeelXML) {
+	protected void registerTheme(File liferayLookAndFeelXML) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Registering " + liferayLookAndFeelXML);
 		}

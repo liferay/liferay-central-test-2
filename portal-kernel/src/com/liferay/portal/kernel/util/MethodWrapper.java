@@ -32,6 +32,10 @@ import java.io.Serializable;
  */
 public class MethodWrapper implements Serializable {
 
+	public MethodWrapper(String className, String methodName) {
+		this(className, methodName, new Object[] {});
+	}
+
 	public MethodWrapper(String className, String methodName, Object[] args) {
 		_className = className;
 		_methodName = methodName;

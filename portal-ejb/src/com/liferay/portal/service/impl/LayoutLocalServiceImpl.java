@@ -33,9 +33,11 @@ import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.comm.CommLink;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
@@ -73,6 +75,7 @@ import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.theme.ThemeLoader;
+import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -2119,7 +2122,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	protected String importTheme(LayoutSet layoutSet, byte[] themeZip)
 		throws IOException {
 
-		ThemeLoader themeLoader = ThemeLoader.getInstance();
+		ThemeLoader themeLoader = ThemeLoaderFactory.getDefaultThemeLoader();
 
 		if (themeLoader == null) {
 			_log.error("No theme loaders are deployed");
@@ -2167,6 +2170,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		themeLoader.loadThemes();
+
+		CommLink commLink = CommLink.getInstance();
+
+		MethodWrapper methodWrapper = new MethodWrapper(
+			ThemeLoaderFactory.class.getName(), "loadThemes");
+
+		commLink.send(methodWrapper);
 
 		return themeId + PortletImpl.WAR_SEPARATOR +
 			themeLoader.getServletContextName();

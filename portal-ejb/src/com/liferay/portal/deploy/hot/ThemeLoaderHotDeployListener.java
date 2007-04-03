@@ -25,7 +25,7 @@ package com.liferay.portal.deploy.hot;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
-import com.liferay.portal.theme.ThemeLoader;
+import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.util.Http;
 
@@ -68,7 +68,7 @@ public class ThemeLoaderHotDeployListener implements HotDeployListener {
 				_log.info("Registering theme loader for " + servletContextName);
 			}
 
-			ThemeLoader.init(servletContextName, ctx);
+			ThemeLoaderFactory.init(servletContextName, ctx);
 		}
 		catch (Exception e) {
 			throw new HotDeployException(
@@ -88,7 +88,7 @@ public class ThemeLoaderHotDeployListener implements HotDeployListener {
 				_log.debug("Invoking undeploy for " + servletContextName);
 			}
 
-			boolean value = ThemeLoader.destroy(servletContextName);
+			boolean value = ThemeLoaderFactory.destroy(servletContextName);
 
 			if (value) {
 				if (_log.isInfoEnabled()) {

@@ -44,12 +44,16 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portal.comm.CommLink">
+		<priority value="DEBUG" />
+	</category>
+
 	<category name="com.liferay.portal.deploy">
 		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.deploy.hot.ThemeLoaderHotDeployListener">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.editor">
@@ -265,7 +269,7 @@
 	</category>
 
 	<category name="com.liferay.portal.theme.ThemeLoader">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.upgrade">

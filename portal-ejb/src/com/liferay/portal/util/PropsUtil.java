@@ -576,6 +576,10 @@ public class PropsUtil {
 
 	public static final String XSS_ALLOW = "xss.allow";
 
+	// Communication Link
+
+	public static final String COMM_LINK_PROPERTIES = "comm.link.properties";
+
 	// Counter
 
 	public static final String COUNTER_INCREMENT = "counter.increment";
