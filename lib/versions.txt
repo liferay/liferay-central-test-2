@@ -53,7 +53,7 @@ JCommon 1.0.6
 JCR 1.0
 JDOM 1.0
 JFreeChart 1.0.3
-JGroups 2.2.8
+JGroups 2.4.1sp1
 JMS 1.1
 JMX 1.0.1.04
 JMX Remote 1.2.1
@@ -73,7 +73,7 @@ NekoHTML 0.9.5
 OGNL 2.6.7
 OpenSAML 1.0.1
 ORO 2.0.8
-OSCache 2.3
+OSCache 2.3.2
 QDox 1.6.1
 PDFBox 0.7.1
 POI 2.5.1
