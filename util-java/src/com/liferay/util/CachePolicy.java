@@ -72,6 +72,6 @@ public class CachePolicy implements EntryRefreshPolicy {
 
 	private static Log _log = LogFactory.getLog(CachePolicy.class);
 
-	private static long _refresh;
+	private long _refresh;
 
 }
