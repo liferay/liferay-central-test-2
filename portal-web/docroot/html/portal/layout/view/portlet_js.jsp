@@ -100,10 +100,11 @@ function addPortletHTML(html, container, placeHolder) {
 
 	container.replaceChild(portletBound, placeHolder);
 
-	executeLoadedScript(addDiv);
+	jQuery(addDiv).evalScripts();
+	
 
-	if (!_$J.browser.firefox) {
-		executeLoadedScript(portletBound);
+	if (!jQuery.browser.firefox) {
+		jQuery(portletBound).evalScripts();
 	}
 
 	//TODO: Check to see if user has permissions
