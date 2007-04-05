@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -39,7 +40,6 @@ import com.liferay.util.dao.hibernate.QueryUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -84,8 +84,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return remove(journalTemplate);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -103,8 +103,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return journalTemplate;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -139,8 +139,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return journalTemplate;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -175,8 +175,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 			return (JournalTemplate)session.get(JournalTemplateImpl.class,
 				journalTemplatePK);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -205,8 +205,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return q.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -248,8 +248,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -333,8 +333,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return array;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -387,8 +387,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return q.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -453,8 +453,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -568,8 +568,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return array;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -626,8 +626,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return q.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -696,8 +696,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -824,8 +824,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return array;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -843,8 +843,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return query.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -863,8 +863,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return query.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -904,8 +904,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -980,8 +980,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1043,8 +1043,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1110,8 +1110,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1144,8 +1144,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);

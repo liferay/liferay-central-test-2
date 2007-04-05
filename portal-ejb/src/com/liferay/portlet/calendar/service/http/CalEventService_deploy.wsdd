@@ -60,13 +60,13 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.calendar.portlet.liferay.com" name="deleteEvent" qname="operNS:deleteEvent" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="eventId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="eventId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.calendar.portlet.liferay.com" xmlns:rtns="http://model.calendar.portlet.liferay.com" name="getEvent" qname="operNS:getEvent" returnQName="getEventReturn" returnType="rtns:CalEventSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="eventId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="eventId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.calendar.portlet.liferay.com" xmlns:rtns="http://model.calendar.portlet.liferay.com" name="updateEvent" qname="operNS:updateEvent" returnQName="updateEventReturn" returnType="rtns:CalEventSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="eventId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="eventId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startDateMonth" type="tns:int"></parameter>

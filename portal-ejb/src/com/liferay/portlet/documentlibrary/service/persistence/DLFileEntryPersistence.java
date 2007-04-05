@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -39,7 +40,6 @@ import com.liferay.util.dao.hibernate.QueryUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -84,8 +84,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return remove(dlFileEntry);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -103,8 +103,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return dlFileEntry;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -139,8 +139,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return dlFileEntry;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -173,8 +173,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return (DLFileEntry)session.get(DLFileEntryImpl.class, dlFileEntryPK);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -214,8 +214,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return q.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -268,8 +268,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -364,8 +364,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return array;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -383,8 +383,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return query.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -403,8 +403,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return query.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -445,8 +445,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -511,8 +511,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -545,8 +545,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);

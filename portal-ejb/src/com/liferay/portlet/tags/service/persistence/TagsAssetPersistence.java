@@ -42,7 +42,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -97,8 +96,8 @@ public class TagsAssetPersistence extends BasePersistence {
 
 			return remove(tagsAsset);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -116,8 +115,8 @@ public class TagsAssetPersistence extends BasePersistence {
 
 			return tagsAsset;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -152,8 +151,8 @@ public class TagsAssetPersistence extends BasePersistence {
 
 			return tagsAsset;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -185,8 +184,8 @@ public class TagsAssetPersistence extends BasePersistence {
 
 			return (TagsAsset)session.get(TagsAssetImpl.class, new Long(assetId));
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -269,8 +268,8 @@ public class TagsAssetPersistence extends BasePersistence {
 
 			return tagsAsset;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -288,8 +287,8 @@ public class TagsAssetPersistence extends BasePersistence {
 
 			return query.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -308,8 +307,8 @@ public class TagsAssetPersistence extends BasePersistence {
 
 			return query.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -344,8 +343,8 @@ public class TagsAssetPersistence extends BasePersistence {
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -420,8 +419,8 @@ public class TagsAssetPersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -453,8 +452,8 @@ public class TagsAssetPersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -534,8 +533,8 @@ public class TagsAssetPersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);

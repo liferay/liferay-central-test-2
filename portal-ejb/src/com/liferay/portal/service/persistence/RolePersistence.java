@@ -41,7 +41,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -94,8 +93,8 @@ public class RolePersistence extends BasePersistence {
 
 			return remove(role);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -115,8 +114,8 @@ public class RolePersistence extends BasePersistence {
 
 			return role;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -150,8 +149,8 @@ public class RolePersistence extends BasePersistence {
 
 			return role;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -182,8 +181,8 @@ public class RolePersistence extends BasePersistence {
 
 			return (Role)session.get(RoleImpl.class, roleId);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -221,8 +220,8 @@ public class RolePersistence extends BasePersistence {
 
 			return q.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -273,8 +272,8 @@ public class RolePersistence extends BasePersistence {
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -365,8 +364,8 @@ public class RolePersistence extends BasePersistence {
 
 			return array;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -451,8 +450,8 @@ public class RolePersistence extends BasePersistence {
 
 			return role;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -553,8 +552,8 @@ public class RolePersistence extends BasePersistence {
 
 			return role;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -572,8 +571,8 @@ public class RolePersistence extends BasePersistence {
 
 			return query.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -592,8 +591,8 @@ public class RolePersistence extends BasePersistence {
 
 			return query.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -632,8 +631,8 @@ public class RolePersistence extends BasePersistence {
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -709,8 +708,8 @@ public class RolePersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -771,8 +770,8 @@ public class RolePersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -846,8 +845,8 @@ public class RolePersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -879,8 +878,8 @@ public class RolePersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -959,8 +958,8 @@ public class RolePersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1194,8 +1193,8 @@ public class RolePersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1429,8 +1428,8 @@ public class RolePersistence extends BasePersistence {
 
 			return 0;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
