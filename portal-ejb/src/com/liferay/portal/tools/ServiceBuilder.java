@@ -2471,7 +2471,6 @@ public class ServiceBuilder {
 		sm.append("import org.apache.commons.logging.Log;");
 		sm.append("import org.apache.commons.logging.LogFactory;");
 		sm.append("import org.hibernate.Hibernate;");
-		sm.append("import org.hibernate.HibernateException;");
 		sm.append("import org.hibernate.ObjectNotFoundException;");
 		sm.append("import org.hibernate.Query;");
 		sm.append("import org.hibernate.Session;");
@@ -2523,8 +2522,8 @@ public class ServiceBuilder {
 		sm.append("}");
 		sm.append("return remove(" + entity.getVarName() + ");");
 		sm.append("}");
-		sm.append("catch (HibernateException he) {");
-		sm.append("throw new SystemException(he);");
+		sm.append("catch (Exception e) {");
+		sm.append("throw HibernateUtil.processException(e);");
 		sm.append("}");
 		sm.append("finally {");
 		sm.append("closeSession(session);");
@@ -2552,8 +2551,8 @@ public class ServiceBuilder {
 
 		sm.append("return " + entity.getVarName() + ";");
 		sm.append("}");
-		sm.append("catch (HibernateException he) {");
-		sm.append("throw new SystemException(he);");
+		sm.append("catch (Exception e) {");
+		sm.append("throw HibernateUtil.processException(e);");
 		sm.append("}");
 		sm.append("finally {");
 		sm.append("closeSession(session);");
@@ -2582,8 +2581,8 @@ public class ServiceBuilder {
 		sm.append(entity.getVarName() + ".setNew(false);");
 		sm.append("return " + entity.getVarName() + ";");
 		sm.append("}");
-		sm.append("catch (HibernateException he) {");
-		sm.append("throw new SystemException(he);");
+		sm.append("catch (Exception e) {");
+		sm.append("throw HibernateUtil.processException(e);");
 		sm.append("}");
 		sm.append("finally {");
 		sm.append("closeSession(session);");
@@ -2623,8 +2622,8 @@ public class ServiceBuilder {
 
 		sm.append(");");
 		sm.append("}");
-		sm.append("catch (HibernateException he) {");
-		sm.append("throw new SystemException(he);");
+		sm.append("catch (Exception e) {");
+		sm.append("throw HibernateUtil.processException(e);");
 		sm.append("}");
 		sm.append("finally {");
 		sm.append("closeSession(session);");
@@ -2811,8 +2810,8 @@ public class ServiceBuilder {
 				sm.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")list.get(0);");
 				sm.append("return " + entity.getVarName() + ";");
 				sm.append("}");
-				sm.append("catch (HibernateException he) {");
-				sm.append("throw new SystemException(he);");
+				sm.append("catch (Exception e) {");
+				sm.append("throw HibernateUtil.processException(e);");
 				sm.append("}");
 				sm.append("finally {");
 				sm.append("closeSession(session);");
@@ -2932,8 +2931,8 @@ public class ServiceBuilder {
 
 				sm.append("return q.list();");
 				sm.append("}");
-				sm.append("catch (HibernateException he) {");
-				sm.append("throw new SystemException(he);");
+				sm.append("catch (Exception e) {");
+				sm.append("throw HibernateUtil.processException(e);");
 				sm.append("}");
 				sm.append("finally {");
 				sm.append("closeSession(session);");
@@ -3074,8 +3073,8 @@ public class ServiceBuilder {
 
 				sm.append("return QueryUtil.list(q, getDialect(), begin, end);");
 				sm.append("}");
-				sm.append("catch (HibernateException he) {");
-				sm.append("throw new SystemException(he);");
+				sm.append("catch (Exception e) {");
+				sm.append("throw HibernateUtil.processException(e);");
 				sm.append("}");
 				sm.append("finally {");
 				sm.append("closeSession(session);");
@@ -3333,8 +3332,8 @@ public class ServiceBuilder {
 
 				sm.append("return array;");
 				sm.append("}");
-				sm.append("catch (HibernateException he) {");
-				sm.append("throw new SystemException(he);");
+				sm.append("catch (Exception e) {");
+				sm.append("throw HibernateUtil.processException(e);");
 				sm.append("}");
 				sm.append("finally {");
 				sm.append("closeSession(session);");
@@ -3350,8 +3349,8 @@ public class ServiceBuilder {
 		sm.append("DynamicQuery query = queryInitializer.initialize(session);");
 		sm.append("return query.list();");
 		sm.append("}");
-		sm.append("catch (HibernateException he) {");
-		sm.append("throw new SystemException(he);");
+		sm.append("catch (Exception e) {");
+		sm.append("throw HibernateUtil.processException(e);");
 		sm.append("}");
 		sm.append("finally {");
 		sm.append("closeSession(session);");
@@ -3366,8 +3365,8 @@ public class ServiceBuilder {
 		sm.append("query.setLimit(begin, end);");
 		sm.append("return query.list();");
 		sm.append("}");
-		sm.append("catch (HibernateException he) {");
-		sm.append("throw new SystemException(he);");
+		sm.append("catch (Exception e) {");
+		sm.append("throw HibernateUtil.processException(e);");
 		sm.append("}");
 		sm.append("finally {");
 		sm.append("closeSession(session);");
@@ -3422,8 +3421,8 @@ public class ServiceBuilder {
 		sm.append("q.setCacheable(true);");
 		sm.append("return QueryUtil.list(q, getDialect(), begin, end);");
 		sm.append("}");
-		sm.append("catch (HibernateException he) {");
-		sm.append("throw new SystemException(he);");
+		sm.append("catch (Exception e) {");
+		sm.append("throw HibernateUtil.processException(e);");
 		sm.append("}");
 		sm.append("finally {");
 		sm.append("closeSession(session);");
@@ -3614,8 +3613,8 @@ public class ServiceBuilder {
 			sm.append("}");
 			sm.append("return 0;");
 			sm.append("}");
-			sm.append("catch (HibernateException he) {");
-			sm.append("throw new SystemException(he);");
+			sm.append("catch (Exception e) {");
+			sm.append("throw HibernateUtil.processException(e);");
 			sm.append("}");
 			sm.append("finally {");
 			sm.append("closeSession(session);");
@@ -3641,8 +3640,8 @@ public class ServiceBuilder {
 		sm.append("}");
 		sm.append("return 0;");
 		sm.append("}");
-		sm.append("catch (HibernateException he) {");
-		sm.append("throw new SystemException(he);");
+		sm.append("catch (Exception e) {");
+		sm.append("throw HibernateUtil.processException(e);");
 		sm.append("}");
 		sm.append("finally {");
 		sm.append("closeSession(session);");
@@ -3741,8 +3740,8 @@ public class ServiceBuilder {
 				sm.append("}");
 				sm.append("return 0;");
 				sm.append("}");
-				sm.append("catch (HibernateException he) {");
-				sm.append("throw new SystemException(he);");
+				sm.append("catch (Exception e) {");
+				sm.append("throw HibernateUtil.processException(e);");
 				sm.append("}");
 				sm.append("finally {");
 				sm.append("closeSession(session);");

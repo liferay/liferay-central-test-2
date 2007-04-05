@@ -26,6 +26,7 @@ import com.liferay.counter.model.Counter;
 import com.liferay.counter.model.CounterRegister;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 
@@ -36,7 +37,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
@@ -76,8 +76,8 @@ public class CounterPersistence extends BasePersistence {
 
 			return list;
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -122,8 +122,8 @@ public class CounterPersistence extends BasePersistence {
 					register.setCurrentValue(newValue);
 					register.setRangeMax(rangeMax);
 				}
-				catch (HibernateException he) {
-					throw new SystemException(he);
+				catch (Exception e) {
+					throw HibernateUtil.processException(e);
 				}
 				finally {
 					closeSession(session);
@@ -170,8 +170,8 @@ public class CounterPersistence extends BasePersistence {
 			}
 			catch (ObjectNotFoundException onfe) {
 			}
-			catch (HibernateException he) {
-				throw new SystemException(he);
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -201,8 +201,8 @@ public class CounterPersistence extends BasePersistence {
 			}
 			catch (ObjectNotFoundException onfe) {
 			}
-			catch (HibernateException he) {
-				throw new SystemException(he);
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
 			finally {
 				closeSession(session);

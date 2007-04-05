@@ -22,6 +22,7 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
@@ -53,16 +54,34 @@ import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
  */
 public class HibernateUtil {
 
+	public static final String COUNT_COLUMN_NAME = "COUNT_VALUE";
+
 	public static final String SPRING_HIBERNATE_DATA_SOURCE =
 		PropsUtil.get(PropsUtil.SPRING_HIBERNATE_DATA_SOURCE);
 
 	public static final String SPRING_HIBERNATE_SESSION_FACTORY =
 		PropsUtil.get(PropsUtil.SPRING_HIBERNATE_SESSION_FACTORY);
 
-	public static final String COUNT_COLUMN_NAME = "COUNT_VALUE";
+	public static void closeSession(Session session) {
+		try {
+			if (session != null) {
+
+				// Let Spring manage sessions
+
+				//session.close();
+			}
+		}
+		catch (HibernateException he) {
+			_log.error(he.getMessage());
+		}
+	}
 
 	public static Connection getConnection() throws SQLException {
 		return getDataSource().getConnection();
+	}
+
+	public static String getCountColumnName() {
+		return COUNT_COLUMN_NAME;
 	}
 
 	public static DataSource getDataSource() {
@@ -72,6 +91,14 @@ public class HibernateUtil {
 		}
 
 		return _dataSource;
+	}
+
+	public static Dialect getDialect() {
+		return getDialect(SPRING_HIBERNATE_SESSION_FACTORY);
+	}
+
+	public static Dialect getDialect(String sessionFactoryName) {
+		return getSessionFactory(sessionFactoryName).getDialect();
 	}
 
 	public static SessionFactoryImplementor getSessionFactory() {
@@ -111,14 +138,6 @@ public class HibernateUtil {
 		}
 	}
 
-	public static Dialect getDialect() {
-		return getDialect(SPRING_HIBERNATE_SESSION_FACTORY);
-	}
-
-	public static Dialect getDialect(String sessionFactoryName) {
-		return getSessionFactory(sessionFactoryName).getDialect();
-	}
-
 	public static Dialect getWrappedDialect() {
 		return getWrappedDialect(SPRING_HIBERNATE_SESSION_FACTORY);
 	}
@@ -133,20 +152,6 @@ public class HibernateUtil {
 		}
 		else {
 			return dialect;
-		}
-	}
-
-	public static void closeSession(Session session) {
-		try {
-			if (session != null) {
-
-				// Let Spring manage sessions
-
-				//session.close();
-			}
-		}
-		catch (HibernateException he) {
-			_log.error(he.getMessage());
 		}
 	}
 
@@ -181,8 +186,17 @@ public class HibernateUtil {
 		return session;
 	}
 
-	public static String getCountColumnName() {
-		return COUNT_COLUMN_NAME;
+	public static SystemException processException(Exception e) {
+		if (e instanceof HibernateException) {
+			_log.error("Caught HibernateException. " + e.getMessage());
+		}
+		else {
+			_log.error(
+				"Caught unexpected Exception " + e.getClass().getName() +
+					". " + e.getMessage());
+		}
+
+		return new SystemException(e);
 	}
 
 	private static Log _log = LogFactory.getLog(HibernateUtil.class);

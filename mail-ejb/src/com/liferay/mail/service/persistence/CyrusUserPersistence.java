@@ -26,8 +26,8 @@ import com.liferay.mail.NoSuchCyrusUserException;
 import com.liferay.mail.model.CyrusUser;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 
-import org.hibernate.HibernateException;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 
@@ -53,13 +53,11 @@ public class CyrusUserPersistence extends BasePersistence {
 
 			session.flush();
 		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				throw new NoSuchCyrusUserException();
-			}
-			else {
-				throw new SystemException(he);
-			}
+		catch (ObjectNotFoundException onfe) {
+			throw new NoSuchCyrusUserException();
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			session.close();
@@ -89,8 +87,8 @@ public class CyrusUserPersistence extends BasePersistence {
 				session.flush();
 			}
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			session.close();
@@ -107,13 +105,11 @@ public class CyrusUserPersistence extends BasePersistence {
 
 			return (CyrusUser)session.load(CyrusUser.class, userId);
 		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				throw new NoSuchCyrusUserException();
-			}
-			else {
-				throw new SystemException(he);
-			}
+		catch (ObjectNotFoundException onfe) {
+			throw new NoSuchCyrusUserException();
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			session.close();

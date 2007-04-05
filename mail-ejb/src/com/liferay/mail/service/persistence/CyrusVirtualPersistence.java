@@ -26,11 +26,11 @@ import com.liferay.mail.NoSuchCyrusVirtualException;
 import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -61,13 +61,11 @@ public class CyrusVirtualPersistence extends BasePersistence {
 
 			session.flush();
 		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				throw new NoSuchCyrusVirtualException();
-			}
-			else {
-				throw new SystemException(he);
-			}
+		catch (ObjectNotFoundException onfe) {
+			throw new NoSuchCyrusVirtualException();
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			session.close();
@@ -97,8 +95,8 @@ public class CyrusVirtualPersistence extends BasePersistence {
 				session.flush();
 			}
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			session.close();
@@ -115,13 +113,11 @@ public class CyrusVirtualPersistence extends BasePersistence {
 
 			return (CyrusVirtual)session.load(CyrusVirtual.class, emailAddress);
 		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				throw new NoSuchCyrusVirtualException();
-			}
-			else {
-				throw new SystemException(he);
-			}
+		catch (ObjectNotFoundException onfe) {
+			throw new NoSuchCyrusVirtualException();
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			session.close();
@@ -140,8 +136,8 @@ public class CyrusVirtualPersistence extends BasePersistence {
 
 			return q.list();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			session.close();
@@ -168,8 +164,8 @@ public class CyrusVirtualPersistence extends BasePersistence {
 
 			session.flush();
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
 		}
 		finally {
 			session.close();
