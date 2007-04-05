@@ -2503,6 +2503,7 @@ voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because thi
 waiting-on-sibling-tokens-to-complete=Αναμονή στα σημεία αμφιθαλών που ολοκληρώνουν
 warning-due-to-inactivity-your-session-has-expired=Προειδοποίηση! Λόγω μη δραστηριότητας, η συνεδρία σας έχει λήξει.
 warning-due-to-inactivity-your-session-will-expire=Προειδοποίηση! Λόγω μη δραστηριότητας, η συνεδρία σας θα λήξει σε {0} λεπτά σε {1} {2}. Θέλετε να επεκτείνετε την συνεδρία σας ακόμα {3} λεπτά;
+webdav-url=WebDAV URL
 website=Δικτυακός Τόπος
 websites=Ιστοχώροι
 wedding=Γάμος

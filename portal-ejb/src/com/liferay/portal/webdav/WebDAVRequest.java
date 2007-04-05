@@ -44,6 +44,7 @@ public class WebDAVRequest {
 		_req = req;
 		_res = res;
 		_path = WebDAVUtil.fixPath(_req.getPathInfo());
+		_groupPath = WebDAVUtil.isGroupPath(_path);
 		_companyId = WebDAVUtil.getCompanyId(_path);
 		_groupId = WebDAVUtil.getGroupId(_path);
 		_userId = _req.getRemoteUser();
@@ -74,6 +75,10 @@ public class WebDAVRequest {
 		return WebDAVUtil.getPathArray(_path);
 	}
 
+	public boolean isGroupPath() {
+		return _groupPath;
+	}
+
 	public String getCompanyId() {
 		return _companyId;
 	}
@@ -94,6 +99,7 @@ public class WebDAVRequest {
 	private HttpServletRequest _req;
 	private HttpServletResponse _res;
 	private String _path = StringPool.BLANK;
+	private boolean _groupPath;
 	private String _companyId = StringPool.BLANK;
 	private long _groupId;
 	private String _userId;

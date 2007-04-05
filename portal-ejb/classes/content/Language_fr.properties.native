@@ -2505,6 +2505,7 @@ voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because thi
 waiting-on-sibling-tokens-to-complete=Attente sur la marque d'enfant de mêmes parents à accomplir
 warning-due-to-inactivity-your-session-has-expired=Avertissement ! En raison de l'inactivité, votre session a expiré.
 warning-due-to-inactivity-your-session-will-expire=Attention ! En raison de votre inactivitée sur le portail, votre session sera fermée dans {0} minutes le {1} {2}. Voulez-vous prolonger votre session de {3} minutes ?
+webdav-url=URL De WebDAV
 website=site Web
 websites=Sites Web
 wedding=Mariage

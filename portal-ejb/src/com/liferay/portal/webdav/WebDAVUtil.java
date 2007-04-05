@@ -104,6 +104,17 @@ public class WebDAVUtil {
 		return xml;
 	}
 
+	public static boolean isGroupPath(String path) {
+		String[] pathArray = getPathArray(path);
+
+		if (pathArray.length == 2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	private static Log _log = LogFactory.getLog(WebDAVUtil.class);
 
 }

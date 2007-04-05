@@ -132,6 +132,45 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 	</td>
 </tr>
 
+<c:if test="<%= folder != null %>">
+	<tr>
+		<td colspan="3">
+			<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "webdav-url") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+
+			<%
+			StringBuffer sb = new StringBuffer();
+
+			DLFolder curFolder = folder;
+
+			while (true) {
+				sb.insert(0, curFolder.getFolderId());
+				sb.insert(0, StringPool.SLASH);
+
+				if (curFolder.getParentFolderId().equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+					break;
+				}
+				else {
+					curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+				}
+			}
+
+			sb.insert(0, curFolder.getGroupId());
+			sb.insert(0, StringPool.SLASH);
+			%>
+
+			<input class="form-text" readonly="true" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= PortalUtil.getPortalURL(request) %>/tunnel-web/secure/webdav/document_library/<%= company.getCompanyId() %><%= sb.toString() %>" onClick="javascript: this.focus(); this.select();">
+		</td>
+	</tr>
+</c:if>
+
 <c:if test="<%= folder == null %>">
 	<tr>
 		<td colspan="3">

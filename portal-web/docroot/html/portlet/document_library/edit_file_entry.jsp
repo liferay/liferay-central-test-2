@@ -147,9 +147,7 @@ portletURL.setParameter("name", name);
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<a href="<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>" target="_blank">
-			<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>
-			</a>
+			<input class="form-text" readonly="true" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>" onClick="javascript: this.focus(); this.select();">
 		</td>
 	</tr>
 	</table>

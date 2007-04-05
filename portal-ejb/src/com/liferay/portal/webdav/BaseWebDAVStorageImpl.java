@@ -24,8 +24,10 @@ package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
@@ -74,6 +76,13 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 				communities.add(resource);
 			}
 
+			Group group = GroupLocalServiceUtil.getUserGroup(
+				webDavReq.getCompanyId(), webDavReq.getUserId());
+
+			Resource resource = getResource(group);
+
+			communities.add(resource);
+
 			return communities;
 		}
 		catch (Exception e) {
@@ -93,11 +102,25 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 	}
 
 	protected Resource getResource(Group group) throws WebDAVException {
-		String href =
-			getRootPath() + StringPool.SLASH + group.getCompanyId() +
-				StringPool.SLASH + group.getGroupId();
+		try {
+			String href =
+				getRootPath() + StringPool.SLASH + group.getCompanyId() +
+					StringPool.SLASH + group.getGroupId();
 
-		return new BaseResourceImpl(href, group.getName(), true);
+			String name = group.getName();
+
+			if (group.isUser()) {
+				User user = UserLocalServiceUtil.getUserById(
+					group.getClassPK());
+
+				name = user.getFullName();
+			}
+
+			return new BaseResourceImpl(href, name, true);
+		}
+		catch (Exception e) {
+			throw new WebDAVException(e);
+		}
 	}
 
 	protected String getPlid(long groupId) {

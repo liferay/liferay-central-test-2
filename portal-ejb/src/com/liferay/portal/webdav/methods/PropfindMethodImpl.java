@@ -22,7 +22,10 @@
 
 package com.liferay.portal.webdav.methods;
 
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.WebDAVException;
@@ -169,6 +172,18 @@ public class PropfindMethodImpl implements Method {
 		}
 	}
 
+	protected void addResponse(String href, Element multistatus)
+		throws Exception {
+
+		Element response = multistatus.addElement("D:response");
+
+		DocUtil.add(response, "D:href", href);
+
+		Element propstat = response.addElement("D:propstat");
+
+		DocUtil.add(propstat, "D:status", "HTTP/1.1 404 Not Found");
+	}
+
 	protected int getDepth(WebDAVRequest webDavReq) {
 		HttpServletRequest req = webDavReq.getHttpServletRequest();
 
@@ -237,28 +252,19 @@ public class PropfindMethodImpl implements Method {
 
 		doc.setRootElement(multistatus);
 
-		if (Validator.isNotNull(companyId)) {
-			if (groupId == 0) {
-				addResponse(
-					new BaseResourceImpl(
-						storage.getRootPath() + StringPool.SLASH + companyId,
-						companyId, true),
-					props, multistatus, createDateFormat, modifiedDateFormat);
+		if (Validator.isNull(companyId)) {
+			return getResponseXML(doc);
+		}
 
-				if (props.size() > 0) {
-					Iterator itr = storage.getCommunities(webDavReq).iterator();
+		if (groupId == 0) {
+			addResponse(
+				new BaseResourceImpl(
+					storage.getRootPath() + StringPool.SLASH + companyId,
+					companyId, true),
+				props, multistatus, createDateFormat, modifiedDateFormat);
 
-					while (itr.hasNext()) {
-						Resource resource = (Resource)itr.next();
-
-						addResponse(
-							resource, props, multistatus, createDateFormat,
-							modifiedDateFormat);
-					}
-				}
-			}
-			else {
-				Iterator itr = storage.getResources(webDavReq).iterator();
+			if (props.size() > 0) {
+				Iterator itr = storage.getCommunities(webDavReq).iterator();
 
 				while (itr.hasNext()) {
 					Resource resource = (Resource)itr.next();
@@ -268,8 +274,65 @@ public class PropfindMethodImpl implements Method {
 						modifiedDateFormat);
 				}
 			}
+
+			return getResponseXML(doc);
 		}
 
+		Resource resource = storage.getResource(webDavReq);
+
+		if ((resource == null) && !webDavReq.isGroupPath()) {
+			String href = storage.getRootPath() + webDavReq.getPath();
+
+			if (_log.isWarnEnabled()) {
+				_log.warn("No resource found for " + webDavReq.getPath());
+			}
+
+			addResponse(href, multistatus);
+
+			return getResponseXML(doc);
+		}
+
+		if (resource != null) {
+			addResponse(
+				resource, props, multistatus, createDateFormat,
+				modifiedDateFormat);
+		}
+		else if (webDavReq.isGroupPath()) {
+			try {
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				addResponse(
+					new BaseResourceImpl(
+						storage.getRootPath() + StringPool.SLASH + companyId +
+							StringPool.SLASH + groupId,
+						group.getName(), true),
+					props, multistatus, createDateFormat, modifiedDateFormat);
+			}
+			catch (NoSuchGroupException nsge) {
+				String href = storage.getRootPath() + webDavReq.getPath();
+
+				if (_log.isWarnEnabled()) {
+					_log.warn("No group found for " + href);
+				}
+
+				addResponse(href, multistatus);
+			}
+		}
+
+		Iterator itr = storage.getResources(webDavReq).iterator();
+
+		while (itr.hasNext()) {
+			resource = (Resource)itr.next();
+
+			addResponse(
+				resource, props, multistatus, createDateFormat,
+				modifiedDateFormat);
+		}
+
+		return getResponseXML(doc);
+	}
+
+	protected String getResponseXML(Document doc) throws Exception {
 		String xml = XMLFormatter.toString(doc, "    ");
 
 		if (_log.isDebugEnabled()) {

@@ -2501,6 +2501,7 @@ voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because thi
 waiting-on-sibling-tokens-to-complete=完了するべき兄弟トークンで待っていること
 warning-due-to-inactivity-your-session-has-expired=警告! 不活動のために、あなたの会議は切れた。
 warning-due-to-inactivity-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0} minutes on {1} {2}. Would you like to extend your session another {3} minutes?
+webdav-url=WebDAV のURL
 website=Website
 websites=ウェブサイト
 wedding=結婚式

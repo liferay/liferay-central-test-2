@@ -43,6 +43,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 		super(
 			href, fileEntry.getTitle(), false, fileEntry.getCreateDate(),
+			//href, fileEntry.getName(), false, fileEntry.getCreateDate(),
 			fileEntry.getModifiedDate(), fileEntry.getSize());
 
 		setModel(fileEntry);

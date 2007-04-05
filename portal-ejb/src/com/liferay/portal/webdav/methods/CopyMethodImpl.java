@@ -22,46 +22,36 @@
 
 package com.liferay.portal.webdav.methods;
 
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.webdav.Status;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
-import com.liferay.util.HttpHeaders;
-import com.liferay.util.Validator;
+import com.liferay.portal.webdav.WebDAVUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="MkcolMethodImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="CopyMethodImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MkcolMethodImpl implements Method {
+public class CopyMethodImpl implements Method {
 
 	public void process(WebDAVRequest webDavReq) throws WebDAVException {
 		WebDAVStorage storage = webDavReq.getWebDAVStorage();
 		HttpServletRequest req = webDavReq.getHttpServletRequest();
 		HttpServletResponse res = webDavReq.getHttpServletResponse();
-		long groupId = webDavReq.getGroupId();
 
-		if (groupId == 0) {
+		String destination = WebDAVUtil.getDestination(req);
+
+		if (destination.equals(webDavReq.getPath())) {
 			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 		else {
-			Status status = storage.addFolder(webDavReq);
+			int status = storage.copyResource(webDavReq, destination);
 
-			if (Validator.isNotNull(status.getLocation())) {
-				res.setHeader(
-					HttpHeaders.LOCATION,
-					PortalUtil.getPortalURL(req) + webDavReq.getRootPath() +
-						StringPool.SLASH + status.getLocation());
-			}
-
-			res.setStatus(status.getCode());
+			res.setStatus(status);
 		}
 	}
 

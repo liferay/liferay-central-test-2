@@ -2505,6 +2505,7 @@ voting-is-disabled-because-this-poll-expired-on-x=Ya no es posible votar, esta e
 waiting-on-sibling-tokens-to-complete=Esperando a que terminen otros símbolos en el mismo nivel
 warning-due-to-inactivity-your-session-has-expired=¡Advertencia! Debido a la falta de actividad, su sesión ha expirado.
 warning-due-to-inactivity-your-session-will-expire=¡Atención! Debido a la falta de actividad, la sesión expirará en {0} minutos el {1} {2}. ¿Desea extenderla {3} minutos más?
+webdav-url=URL De WebDAV
 website=Sitio web
 websites=Sitios web
 wedding=Boda

@@ -56,6 +56,7 @@ public class MethodFactory {
 			_log.debug("Delete method implementation " + _DELETE_METHOD_IMPL);
 		}
 
+		_methods.put("COPY", InstancePool.get(_COPY_METHOD_IMPL));
 		_methods.put("DELETE", InstancePool.get(_DELETE_METHOD_IMPL));
 		_methods.put("GET", InstancePool.get(_GET_METHOD_IMPL));
 		_methods.put("HEAD", InstancePool.get(_HEAD_METHOD_IMPL));
@@ -89,6 +90,10 @@ public class MethodFactory {
 
 		return methodImpl;
 	}
+
+	private static final String _COPY_METHOD_IMPL = GetterUtil.getString(
+		PropsUtil.get(MethodFactory.class.getName() + ".COPY"),
+		CopyMethodImpl.class.getName());
 
 	private static final String _DELETE_METHOD_IMPL = GetterUtil.getString(
 		PropsUtil.get(MethodFactory.class.getName() + ".DELETE"),

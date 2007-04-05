@@ -2505,6 +2505,7 @@ voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because thi
 waiting-on-sibling-tokens-to-complete=Het wachten op sibling te voltooien tekenen
 warning-due-to-inactivity-your-session-has-expired=Waarschuwing! Wegens inactiviteit is uw sessie verlopen.
 warning-due-to-inactivity-your-session-will-expire=Waarschuwing! Wegens inactiviteit zal uw sessie verlopen over {0} minute(n) op {1} {2}. Zou u uw sessie willen verlengen met {3} minuten?
+webdav-url=WebDAV URL
 website=Website
 websites=Websites
 wedding=Huwelijk

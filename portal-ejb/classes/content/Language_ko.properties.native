@@ -2503,6 +2503,7 @@ voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because thi
 waiting-on-sibling-tokens-to-complete=완료할 것이다 형제자매 토큰에 기다림
 warning-due-to-inactivity-your-session-has-expired=경고! 비활동에 만기가 되는, 너의 회의는 만료되었다.
 warning-due-to-inactivity-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0} minutes on {1} {2}. Would you like to extend your session another {3} minutes?
+webdav-url=WebDAVURL
 website=Website
 websites=웹사이트
 wedding=결혼식

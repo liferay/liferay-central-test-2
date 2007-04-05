@@ -2505,6 +2505,7 @@ voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because thi
 waiting-on-sibling-tokens-to-complete=等待在兄弟姐妹象徵完成
 warning-due-to-inactivity-your-session-has-expired=警告! 由於您的空閒時間過長, 您的連線期逾時了。
 warning-due-to-inactivity-your-session-will-expire=警告! 由於您的空閒時間過長, 您的連線期將於 {0} 分鐘後在 {1} {2} 逾時. 您要再延長 {3} 分鐘嗎?
+webdav-url=WebDAV URL
 website=網站
 websites=網站
 wedding=婚禮

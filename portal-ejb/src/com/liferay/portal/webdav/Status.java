@@ -22,39 +22,32 @@
 
 package com.liferay.portal.webdav;
 
-import java.util.List;
-
 /**
- * <a href="WebDAVStorage.java.html"><b><i>View Source</i></b></a>
+ * <a href="Status.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface WebDAVStorage {
+public class Status {
 
-	public String getRootPath();
+	public Status(int code) {
+		this(null, code);
+	}
 
-	public void setRootPath(String rootPath);
+	public Status(String location, int code) {
+		_location = location;
+		_code = code;
+	}
 
-	public Status addFolder(WebDAVRequest webDavReq) throws WebDAVException;
+	public String getLocation() {
+		return _location;
+	}
 
-	public int copyResource(WebDAVRequest webDavReq, String destination)
-		throws WebDAVException;
+	public int getCode() {
+		return _code;
+	}
 
-	public int deleteResource(WebDAVRequest webDavReq) throws WebDAVException;
-
-	public List getCommunities(WebDAVRequest webDavReq) throws WebDAVException;
-
-	public Resource getResource(WebDAVRequest webDavReq) throws WebDAVException;
-
-	public List getResources(WebDAVRequest webDavReq) throws WebDAVException;
-
-	public boolean isAvailable(WebDAVRequest webDavReq) throws WebDAVException;
-
-	public int moveResource(WebDAVRequest webDavReq, String destination)
-		throws WebDAVException;
-
-	public int putResource(WebDAVRequest webDavReq, String destination)
-		throws WebDAVException;
+	private String _location;
+	private int _code;
 
 }
