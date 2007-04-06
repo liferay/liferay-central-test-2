@@ -58,6 +58,15 @@ public class TagsEntryServiceUtil {
 		return tagsEntryService.addEntry(name);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
+		java.lang.String name, java.lang.String[] properties)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
+
+		return tagsEntryService.addEntry(name, properties);
+	}
+
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

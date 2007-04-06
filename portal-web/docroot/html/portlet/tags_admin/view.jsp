@@ -77,6 +77,10 @@
 
 	<input id="<portlet:namespace />addEntryNameInput" type="text" />
 
+	<span id="<portlet:namespace />addToCategorySpan" style="padding-left: 10px;"></span>
+
+	<input id="<portlet:namespace />addCategoryNameInput" type="text" value="" />
+
 	<input id="<portlet:namespace />addEntryButton" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' />
 </fieldset>
 
@@ -86,9 +90,11 @@
 	var <portlet:namespace />tagsAdmin = new Liferay.Portlet.TagsAdmin(
 		{
 			instanceVar: "<portlet:namespace />tagsAdmin",
+			addCategoryNameInput: "<portlet:namespace />addCategoryNameInput",
 			addEntryButton: "<portlet:namespace />addEntryButton",
 			addEntryNameInput: "<portlet:namespace />addEntryNameInput",
 			addPropertyButton: "<portlet:namespace />addPropertyButton",
+			addToCategorySpan: "<portlet:namespace />addToCategorySpan",
 			cancelEditEntryButton: "<portlet:namespace />cancelEditEntryButton",
 			deleteEntryButton: "<portlet:namespace />deleteEntryButton",
 			editEntryFields: "<portlet:namespace />editEntryFields",

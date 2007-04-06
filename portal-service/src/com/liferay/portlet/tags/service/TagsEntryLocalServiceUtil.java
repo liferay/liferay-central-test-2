@@ -74,6 +74,16 @@ public class TagsEntryLocalServiceUtil {
 		return tagsEntryLocalService.addEntry(userId, name);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
+		java.lang.String userId, java.lang.String name,
+		java.lang.String[] properties)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.addEntry(userId, name, properties);
+	}
+
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -73,6 +73,15 @@ public class TagsEntryLocalServiceEJBImpl implements TagsEntryLocalService,
 		return TagsEntryLocalServiceFactory.getTxImpl().addEntry(userId, name);
 	}
 
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(
+		java.lang.String userId, java.lang.String name,
+		java.lang.String[] properties)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return TagsEntryLocalServiceFactory.getTxImpl().addEntry(userId, name,
+			properties);
+	}
+
 	public void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

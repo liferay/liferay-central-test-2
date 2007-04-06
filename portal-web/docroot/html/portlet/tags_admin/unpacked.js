@@ -6,9 +6,11 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		instance.params = params;
 
+		var addCategoryNameInput = jQuery('#' + params.addCategoryNameInput);
 		var addEntryButton = jQuery('#' + params.addEntryButton);
 		var addEntryNameInput = jQuery('#' + params.addEntryNameInput);
 		var addPropertyButton = jQuery('#' + params.addPropertyButton);
+		var addToCategorySpan = jQuery('#' + params.addToCategorySpan);
 		var cancelEditEntryButton = jQuery('#' + params.cancelEditEntryButton);
 		var deleteEntryButton = jQuery('#' + params.deleteEntryButton);
 		var editEntryFields = jQuery('#' + params.editEntryFields);
@@ -34,6 +36,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		// Inputs
 
+		addCategoryNameInput.val('');
+
 		addEntryNameInput.keypress(
 			function(event) {
 				if (event.keyCode == 13) {
@@ -48,6 +52,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
+		keywordsInput.val('');
 		keywordsInput.focus();
 
 		// Buttons
@@ -113,18 +118,30 @@ Liferay.Portlet.TagsAdmin = new Class({
 	_addEntry: function(instance) {
 		var params = instance.params;
 
+		var instanceVar = params.instanceVar;
 		var addEntryNameInput = jQuery('#' + params.addEntryNameInput);
+
+		var category = jQuery('#' + instanceVar + 'CategorySel').val();
+
+		if (category == '[new]') {
+			var addCategoryNameInput = jQuery('#' + params.addCategoryNameInput);
+
+			category = addCategoryNameInput.val();
+		}
+
+		var properties = new Array('0:category:' + category);
 
 		Liferay.Service.Tags.TagsEntry.addEntry(
 			{
-				name: addEntryNameInput.val()
+				name: addEntryNameInput.val(),
+				properties: properties
 			},
 			function() {
 				instance._getEntries(instance);
 			}
 		);
 
-		addEntryNameInput.val('');
+		instance._resetFields(instance);
 	},
 
 	_addProperties: function(instance, html) {
@@ -153,9 +170,19 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		html += '<tr><td>';
 		html += '<input name="' + instanceVar + 'propertyId" type="hidden" value="' + propertyId + '" />\n';
-		html += '<input name="' + instanceVar + 'propertyKey" type="text" value="' + key + '" />\n';
+		html += '<input';
+
+		if (key == 'category') {
+			html += ' disabled';
+		}
+
+		html += ' name="' + instanceVar + 'propertyKey" type="text" value="' + key + '" />\n';
 		html += '<input name="' + instanceVar + 'propertyValue" type="text" value="' + value + '" />\n';
-		html += '<input name="' + instanceVar + 'deletePropertyButton" type="button" value="Delete" />\n';
+
+		if (key != 'category') {
+			html += '<input name="' + instanceVar + 'deletePropertyButton" type="button" value="Delete" />\n';
+		}
+
 		html += '</td></tr>';
 
 		return html;
@@ -183,7 +210,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		jQuery(this).parents('tr').eq(0).remove();
 	},
 
-	_displayEntries: function(instance, entries) {
+	_displayEntries: function(instance, properties, keywords) {
 		var params = instance.params;
 
 		var instanceVar = params.instanceVar;
@@ -192,23 +219,59 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var html = '<br />';
 
 		jQuery.each(
-			entries,
-			function(i, entry) {
-				var hrefJS = instanceVar + '.editEntry(' + instanceVar + ', ' + entry.entryId + ', \'' + encodeURIComponent(entry.name) + '\');';
+			properties,
+			function(i,category) {
+				if (instance._searchFilters['Category'] == null || 
+					instance._searchFilters['Category'] == 'All' || 
+					instance._searchFilters['Category'] == category.value) {
 
-				html += '<a href="javascript: ' + hrefJS + '">' + entry.name + '</a>';
+					Liferay.Service.Tags.TagsEntry.search(
+						{
+							companyId: themeDisplay.getCompanyId(),
+							name: keywords,
+							properties: 'category:' + category.value
+						},
+						function(entries) {
+							if (category.value != '') {
+								html += '<div style="clear: both;"></div><b>' + category.value + '</b><br />';
+							}
 
-				if ((i + 1) < entries.length) {
-					html += ', ';
+							html += '<div style="float: left; width: 25%;">';
+
+							jQuery.each(
+								entries,
+								function(i, entry) {
+									var hrefJS = instanceVar + '.editEntry(' + instanceVar + ', ' + entry.entryId + ', \'' + encodeURIComponent(entry.name) + '\');';
+
+									var numEntries = entries.length;
+
+									var modulo = i % (Math.floor(numEntries / 4));
+
+									if (modulo == 0) {
+										html += '</div><div style="float: left; width: 25%;">';
+									}
+
+									html += '<a href="javascript: ' + hrefJS + '">' + entry.name + '</a>';
+
+									if ((i + 1) < entries.length) {
+										html += '<br />';
+									}
+
+								}
+							);
+
+							html += '</div>';
+
+							if (entries.length == 0) {
+								html += 'no-tags-found';
+							}
+
+							searchResultsDiv.html(html);
+						}
+					);
 				}
 			}
 		);
-
-		if (entries.length == 0) {
-			html += 'no-tags-found';
-		}
-
-		searchResultsDiv.html(html);
 	},
 
 	_displayFilters: function(instance, propertyKey, properties) {
@@ -216,21 +279,26 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		var instanceVar = params.instanceVar;
 		var searchPropertiesSpan = jQuery('#' + params.searchPropertiesSpan);
+		var addToCategorySpan = jQuery('#' + params.addToCategorySpan);
 
-		var html = '';
+		var filterHtml = '';
 
 		jQuery.each(
 			properties,
 			function(i, property) {
-				html += '<option value="' + property.value + '">' + property.value + '</option>';
+				filterHtml += '<option value="' + property.value + '">' + property.value + '</option>';
 			}
 		);
 
+		var selectHtml = filterHtml;
+
 		if (properties.length > 0) {
-			html = '<select id="' + instanceVar + propertyKey + 'FilterSel"><option></option>' + html + '</select>';
+			filterHtml = '<select id="' + instanceVar + propertyKey + 'FilterSel"><option>All</option>' + filterHtml + '</select>';
+			selectHtml = '<select id="' + instanceVar + propertyKey + 'Sel"><option value="[new]">(New)</option>' + selectHtml + '</select>';
 
 			searchPropertiesSpan.append('<span style="padding: 0px 5px 0px 10px;">' + propertyKey + '</span>');
-			searchPropertiesSpan.append(html);
+			searchPropertiesSpan.append(filterHtml);
+			addToCategorySpan.append('<span style="padding: 0px 5px 0px 10px;">' + selectHtml + '</span>');
 
 			var filterSel = jQuery('#' + instanceVar + propertyKey + 'FilterSel');
 
@@ -239,6 +307,23 @@ Liferay.Portlet.TagsAdmin = new Class({
 					instance._searchFilters[propertyKey] = this.value;
 
 					instance._searchEntries(instance);
+				}
+			);
+
+			var categorySel = jQuery('#' + instanceVar + 'CategorySel');
+
+			categorySel.change(
+				function() {
+					var addCategoryNameInput = jQuery('#' + params.addCategoryNameInput);
+
+					if (this.value == '[new]') {
+						addCategoryNameInput.css('display', '')
+					}
+					else {
+						addCategoryNameInput.css('display', 'none')
+					}
+
+					instance._searchFilters[propertyKey] = this.value;
 				}
 			);
 		}
@@ -262,14 +347,15 @@ Liferay.Portlet.TagsAdmin = new Class({
 	},
 
 	_getEntries: function(instance) {
-		Liferay.Service.Tags.TagsEntry.search(
+		instance._resetFields(instance);
+
+		Liferay.Service.Tags.TagsProperty.getPropertyValues(
 			{
 				companyId: themeDisplay.getCompanyId(),
-				name: '%',
-				properties: ''
+				key: "category"
 			},
-			function(entries) {
-				instance._displayEntries(instance, entries);
+			function(properties) {
+				instance._displayEntries(instance, properties, '%');
 			}
 		);
 
@@ -280,12 +366,15 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var params = instance.params;
 
 		var instanceVar = params.instanceVar;
-		var searchPropertiesSpan = jQuery('#' + params.searchPropertiesSpan);
 
-		var propertyKeys = new Array('Category', 'Country');
+		var searchPropertiesSpan = jQuery('#' + params.searchPropertiesSpan);
+		var addToCategorySpan = jQuery('#' + params.addToCategorySpan);
+
+		var propertyKeys = new Array('Category');
 
 		if (propertyKeys.length > 0) {
 			searchPropertiesSpan.html('Filter By: ');
+			addToCategorySpan.html('Add To: ');
 		}
 
 		jQuery.each(
@@ -304,37 +393,35 @@ Liferay.Portlet.TagsAdmin = new Class({
 		);
 	},
 
+	_resetFields: function(instance) {
+		var params = instance.params;
+
+		var addCategoryNameInput = jQuery('#' + params.addCategoryNameInput);
+		var addEntryNameInput = jQuery('#' + params.addEntryNameInput);
+		var keywordsInput = jQuery('#' + params.keywordsInput);
+
+		addCategoryNameInput.val('');
+		addEntryNameInput.val('');
+		keywordsInput.val('');
+	},
+
 	_searchEntries: function(instance) {
 		var params = instance.params;
 
 		var keywordsInput = jQuery('#' + params.keywordsInput);
-
 		var keywords = '%' + keywordsInput.val() + '%';
 
-		var properties = '';
+		var searchResultsDiv = jQuery('#' + params.searchResultsDiv);
 
-		jQuery.each(
-			instance._searchFilters,
-			function(propertyKey, propertyValue) {
+		searchResultsDiv.html('');
 
-				if (propertyValue != '') {
-					if (properties != '') {
-						properties += ',';
-					}
-
-					properties += propertyKey + ':' + propertyValue;
-				}
-			}
-		);
-
-		Liferay.Service.Tags.TagsEntry.search(
+		Liferay.Service.Tags.TagsProperty.getPropertyValues(
 			{
 				companyId: themeDisplay.getCompanyId(),
-				name: keywords,
-				properties: properties
+				key: "category"
 			},
-			function(entries) {
-				instance._displayEntries(instance, entries);
+			function(properties) {
+				instance._displayEntries(instance, properties, keywords);
 			}
 		);
 	},

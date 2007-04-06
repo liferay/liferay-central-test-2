@@ -91,6 +91,21 @@ public class TagsEntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.tags.model.TagsEntrySoap addEntry(
+		java.lang.String name, java.lang.String[] properties)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(name,
+					properties);
+
+			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteEntry(long entryId) throws RemoteException {
 		try {
 			TagsEntryServiceUtil.deleteEntry(entryId);

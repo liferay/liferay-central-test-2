@@ -46,6 +46,13 @@ public class TagsEntryServiceImpl
 		return TagsEntryLocalServiceUtil.addEntry(getUserId(), name);
 	}
 
+	public TagsEntry addEntry(String name, String[] properties)
+		throws PortalException, SystemException {
+
+		return TagsEntryLocalServiceUtil.addEntry(
+			getUserId(), name, properties);
+	}
+
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 

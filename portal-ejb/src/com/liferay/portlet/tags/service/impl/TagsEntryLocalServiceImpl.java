@@ -63,6 +63,12 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public TagsEntry addEntry(String userId, String name)
 		throws PortalException, SystemException {
 
+		return addEntry(userId, name, new String[0]);
+	}
+
+	public TagsEntry addEntry(String userId, String name, String[] properties)
+		throws PortalException, SystemException {
+
 		User user = UserUtil.findByPrimaryKey(userId);
 		Date now = new Date();
 		name = name.trim().toLowerCase();
@@ -87,9 +93,38 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		TagsEntryUtil.update(entry);
 
-		return entry;
-	}
+		for (int i = 0; i < properties.length; i++) {
+			String[] property = StringUtil.split(
+				properties[i], StringPool.COLON);
 
+			Long propertyId = new Long(0);
+
+			if (property.length > 0) {
+				propertyId = new Long(GetterUtil.getLong(property[0]));
+			}
+
+			String key = StringPool.BLANK;
+
+			if (property.length > 1) {
+				key = GetterUtil.getString(property[1]);
+			}
+
+			String value = StringPool.BLANK;
+
+			if (property.length > 2) {
+				value = GetterUtil.getString(property[2]);
+			}
+
+			if (Validator.isNotNull(key)) {
+				TagsPropertyLocalServiceUtil.addProperty(
+					userId, entryId, key, value);
+			}
+		}
+
+		return entry;
+		
+	}
+	
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 

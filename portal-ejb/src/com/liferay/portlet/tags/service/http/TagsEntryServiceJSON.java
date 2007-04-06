@@ -77,6 +77,16 @@ public class TagsEntryServiceJSON {
 		return TagsEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONObject addEntry(java.lang.String name,
+		java.lang.String[] properties)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(name,
+				properties);
+
+		return TagsEntryJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
