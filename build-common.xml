@@ -4,6 +4,7 @@
 	<property name="project.dir" value=".." />
 
 	<property environment="env" />
+	<property name="env.COMPUTERNAME" value="${env.HOST}"/>
 	<property name="env.COMPUTERNAME" value="${env.HOSTNAME}"/>
 
 	<property file="${project.dir}/app.server.${user.name}.properties" />
