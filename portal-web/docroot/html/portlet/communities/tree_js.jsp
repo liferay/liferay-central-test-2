@@ -26,16 +26,9 @@
 
 <script type="text/javascript">
 	layoutIcons = {
-		folder: '<%= themeDisplay.getPathThemeImages() %>/trees/page.png',
-		folderOpen: '<%= themeDisplay.getPathThemeImages() %>/trees/page.png',
-		join: '<%= themeDisplay.getPathThemeImages() %>/trees/join.png',
-		joinBottom: '<%= themeDisplay.getPathThemeImages() %>/trees/join_bottom.png',
-		line: '<%= themeDisplay.getPathThemeImages() %>/trees/line.png',
 		minus: '<%= themeDisplay.getPathThemeImages() %>/trees/minus.png',
-		minusBottom: '<%= themeDisplay.getPathThemeImages() %>/trees/minus_bottom.png',
 		page: '<%= themeDisplay.getPathThemeImages() %>/trees/page.png',
 		plus: '<%= themeDisplay.getPathThemeImages() %>/trees/plus.png',
-		plusBottom: '<%= themeDisplay.getPathThemeImages() %>/trees/plus_bottom.png',
 		root: '<%= themeDisplay.getPathThemeImages() %>/trees/root.png',
 		spacer: '<%= themeDisplay.getPathThemeImages() %>/trees/spacer.png'
 	};

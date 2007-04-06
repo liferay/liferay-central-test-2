@@ -32,17 +32,7 @@ var Tree = new Class({
 
 				instance.treeHTML += '<a href="' + node.href + '">';
 
-				if (hasChildNode) {
-					if (isNodeOpen) {
-						src = icons.folderOpen;
-					} else {
-						src = icons.folder;
-					}
-				} else {
-					src = icons.page;
-				}
-
-				instance.treeHTML += instance.generateImage(src);
+				instance.treeHTML += instance.generateImage(icons.page);
 
 				instance.treeHTML += '<span>' + node.name + '</span>';
 				instance.treeHTML += '</a>';
@@ -88,12 +78,11 @@ var Tree = new Class({
 			var treeEl = tree.get(0);
 
 			var mainLi  = jQuery('<li>' +
-							'<a href="' + node.href + '">' + 
-								instance.generateImage(icons.root) + 
-								'<span>&nbsp;' + node.name + '</span>' +
-							'</a>' +
-						'</li>');
-
+									'<a href="' + node.href + '">' + 
+										instance.generateImage(icons.root) + 
+										'<span>&nbsp;' + node.name + '</span>' +
+									'</a>' +
+								'</li>');
 
 			instance.addNode(1, recursedNodes);
 
@@ -245,7 +234,6 @@ var Tree = new Class({
 				return true;
 			}
 		}
-
 		return false;
 	},
 
