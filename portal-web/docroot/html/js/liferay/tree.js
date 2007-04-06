@@ -1,248 +1,384 @@
-function Tree(treeId, nodes, icons, className) {
-    this.nodes = nodes;
-    this.treeId = treeId;
-    this.icons = icons;
-	this.className = className;
-	this.openNodes = new Array();
-	this.treeHTML = "";
+var Tree = new Class({
+	initialize: function(params) {
+		var instance = this;
+		
+		instance.className = params.className;
+		instance.icons = params.icons;
+		instance.nodes = params.nodes;
+		instance.openNodes = params.openNodes || '';
+		instance.outputId = params.outputId || '';
+		instance.tree = null;
+		instance.treeHTML = '';
+		instance.treeId = params.treeId;
+		
+		instance.create();
+	},
 
-    this.addNode = Tree_addNode;
-    this.create = Tree_create;
-    this.getHTML = Tree_getHTML;
-    this.hasChildNode = Tree_hasChildNode;
-    this.isNodeOpen = Tree_isNodeOpen;
-    this.setOpenNodes = Tree_setOpenNodes;
-    this.toggle = Tree_toggle;
-}
+	addNode: function(parentNode, recursedNodes) {
+		var instance = this;
+		var icons = instance.icons;
+		var src, leafNode, hidden, li;
+		var tree = instance.tree;
 
-function Tree_addNode(parentNode, recursedNodes) {
-	for (var i = parentNode; i < this.nodes.length; i++) {
-		var nodeValues = this.nodes[i].split("|");
+		for (var i = parentNode; i < instance.nodes.length; i++) {
+			var node = instance.nodes[i];
 
-		if (nodeValues[1] == parentNode) {
-			var ls = false;
-			if (nodeValues[2] == "1") {
-				ls = true;
-			}
+			if (node.parentId == parentNode) {
+				var ls = (node.ls == 1) ? true : false;
+				var hasChildNode = instance.hasChildNode(node.id);
+				var isNodeOpen = instance.isNodeOpen(node.id);
 
-			var hcn = this.hasChildNode(nodeValues[0]);
-			var ino = this.isNodeOpen(nodeValues[0]);
+				instance.treeHTML += '<li class="tree-item" id="_branchId_' + node.id + '">';
 
-			for (var j = 0; j < recursedNodes.length; j++) {
-				if (recursedNodes[j] != 1) {
-					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[1] + "\" vspace=\"0\" width=\"19\">");
-				}
-				else {
-					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[2] + "\" vspace=\"0\" width=\"19\">");
-				}
-			}
+				instance.treeHTML += '<a href="' + node.href + '">';
 
-			// Line and empty icons
-
-			if (ls) {
-				recursedNodes.push(0);
-			}
-			else {
-				recursedNodes.push(1);
-			}
-
-			// Write out join icons
-
-			if (hcn) {
-				if (ls) {
-					this.treeHTML += ("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"javascript: " + this.treeId + ".toggle('" + this.treeId + "', " + nodeValues[0] + ", 1);\" style=\"text-decoration: none;\">");
-					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "join" + nodeValues[0] + "\" src=\"");
-
-					if (ino) {
-						this.treeHTML += (this.icons[6]);	// minus_bottom.png
+				if (hasChildNode) {
+					if (isNodeOpen) {
+						src = icons.folderOpen;
+					} else {
+						src = icons.folder;
 					}
-					else {
-						this.treeHTML += (this.icons[8]);	// plus_bottom.png
+				} else {
+					src = icons.page;
+				}
+
+				instance.treeHTML += instance.generateImage(src);
+
+				instance.treeHTML += '<span>' + node.name + '</span>';
+				instance.treeHTML += '</a>';
+
+				// Recurse if node has children
+				if (hasChildNode) {
+					if (!isNodeOpen) {
+						hidden = ' style="display: none;" ';
+					} else {
+						hidden = '';	
 					}
 
-					this.treeHTML += ("\" vspace=\"0\" width=\"19\"></a>");
-				}
-				else {
-					this.treeHTML += ("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"javascript: " + this.treeId + ".toggle('" + this.treeId + "', " + nodeValues[0] + ", 0);\" style=\"text-decoration: none;\">");
-					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "join" + nodeValues[0] + "\" src=\"");
+					instance.treeHTML += '<ul ' + hidden + 'id="' + instance.treeId + "div" + node.id + '">';
 
-					if (ino) {
-						this.treeHTML += (this.icons[5]);	// minus.png
+					instance.addNode(node.id, recursedNodes);
+
+					instance.treeHTML += '</ul>';
+				}
+
+				instance.treeHTML += '</li>';
+			} // End if parentId == parentNode
+
+		} // End loop on instance.nodes
+
+	},
+
+	create: function() {
+		var instance = this;
+		var icons = instance.icons;
+		var openNodes = instance.openNodes;
+		var outputEl = jQuery(instance.outputId);
+
+		var recursedNodes = [];
+
+		if (instance.nodes.length > 0) {
+			if (openNodes != null) {
+				instance.setOpenNodes();
+			}
+
+			var node = instance.nodes[0];
+
+			var tree = jQuery('<ul class="' + instance.className + '"></ul>');
+			var treeEl = tree.get(0);
+
+			var mainLi  = jQuery('<li>' +
+							'<a href="' + node.href + '">' + 
+								instance.generateImage(icons.root) + 
+								'<span>&nbsp;' + node.name + '</span>' +
+							'</a>' +
+						'</li>');
+
+
+			instance.addNode(1, recursedNodes);
+
+			mainLi.append('<ul>' + instance.treeHTML + '</ul>');
+			tree.append(mainLi);
+
+			var treeBranches = jQuery('li.tree-item', treeEl);
+
+			tree.prepend('<li><a href="javascript:;" id="lfr-expand">Expand All</a> | <a href="javascript:;" id="lfr-collapse">Collapse All</a></li>');
+
+			tree.find('#lfr-expand').click(
+				function() {
+					tree.find('.tree-item ul').show();
+					tree.find('.tree-item img').each(
+						function() {
+								this.src = this.src.replace(/plus.png$/, 'minus.png');
+						}
+					);
+				}
+			);
+
+			tree.find('#lfr-collapse').click(
+				function() {
+					tree.find('.tree-item ul').hide();	
+					tree.find('.tree-item img').each(
+						function() {
+							this.src = this.src.replace(/minus.png$/, 'plus.png');
+						}
+					);
+				}
+			);
+
+			//Prepend images
+			treeBranches.each(
+				function() {
+					var subBranch = jQuery('ul', this);
+					var currentLi = jQuery(this);
+					var src;
+
+					if (subBranch.size() > 0) {
+						if (subBranch.eq(0).css('display') == 'none') {
+							src = icons.plus;
+						} else {
+							src = icons.minus;
+						}
+					} else {
+						src = icons.spacer;
 					}
-					else {
-						this.treeHTML += (this.icons[7]);	// plus.png
+
+					var image = instance.generateImage(
+						{
+							src: src,
+							className: 'expand-image'
+						}
+					);
+					currentLi.prepend(image);
+				}
+			);
+
+			//Set toggling
+			jQuery('img.expand-image', treeEl).click(
+				function() {	
+					instance.toggle(this);
+				}
+			);
+
+			//Set drop zones
+			jQuery('li a', treeEl).Droppable(
+				{
+					accept: 'tree-item',
+					activeclass: '',
+					hoverclass: 'tree-item-hover',
+					tolerance: 'pointer',
+
+					ondrop: function(item) {
+						instance._onDrop(item, this);
+					},
+
+					onhover: function(item) {
+						instance._onHover(item, this);	
+					},
+
+					onout: function() {
+						instance._onOut(this);
 					}
-
-					this.treeHTML += ("\" vspace=\"0\" width=\"19\"></a>");
 				}
-			}
-			else {
-				if (ls) {
-					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[3] + "\" vspace=\"0\" width=\"19\">");
+			);
+
+			//Set draggable items
+			jQuery('li.tree-item', treeEl).Draggable(
+				{
+					autoSize: true,
+					ghosting: true,
+					handle: 'a',
+					revert: true
 				}
-				else {
-					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[4] + "\" vspace=\"0\" width=\"19\">");
-				}
-			}
+			);
 
-			// Link
+			instance.tree = tree;
 
-			this.treeHTML += ("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"" + nodeValues[6] + "\" style=\"text-decoration: none;\">");
-
-			if (hcn) {
-				this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "icon" + nodeValues[0] + "\" src=\"")
-
-				if (ino) {
-					this.treeHTML += (this.icons[10]); // folder_open.png
-				}
-				else {
-					this.treeHTML += (this.icons[9]);	// folder.png
-				}
-
-				this.treeHTML += ("\" vspace=\"0\" width=\"19\">");
-			}
-			else {
-				this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "icon" + nodeValues[0] + "\" src=\"" + this.icons[nodeValues[5]] + "\" vspace=\"0\" width=\"19\">");
-			}
-
-			this.treeHTML += ("<font class=\"" + this.className + "\" size=\"1\">&nbsp;");
-			this.treeHTML += (nodeValues[4]);
-			this.treeHTML += ("</font></a><br>");
-
-			// Recurse if node has children
-
-			if (hcn) {
-				this.treeHTML += ("<div id=\"" + this.treeId + "div" + nodeValues[0] + "\"");
-
-				if (!ino) {
-					this.treeHTML += (" style=\"display: none;\"");
-				}
-
-				this.treeHTML += (">");
-
-				this.addNode(nodeValues[0], recursedNodes);
-
-				this.treeHTML += ("</div>");
-			}
-
-			// Pop last line or empty icon
-
-			recursedNodes.pop();
+			//Output the tree
+			outputEl.append(instance.tree);
 		}
-	}
-}
+	},
 
-function Tree_create(openNodes) {
-	if (this.nodes.length > 0) {
-		if (openNodes != null) {
-			this.setOpenNodes(openNodes);
+	generateImage: function(params) {
+		var instance = this;
+
+			var border = params.border || '0';
+			var className = params.className || '';
+			var height = params.height || '20';
+			var hspace = params.hspace || '0';
+			var id = params.id || '';
+			var src = params.src || params;
+			var vspace =  params.vspace || '0';
+			var width = params.width || '19';
+
+			border = ' border="' + border + '"';
+			className = ' class="' + className + '"';
+			height = ' height="' + height + '"';
+			hspace = ' hspace="' + hspace + '"';
+			id = ' id="' + id + '"';
+			src = ' src="' + src + '"';
+			vspace = ' vspace="' + vspace + '"';
+			width = ' width="' + width + '"';
+
+		return '<img' + border + className + height + hspace + id + src + vspace + width + ' />';
+	},
+
+	getHTML: function() {
+		var instance = this;
+
+		return instance.treeHTML;
+	},	
+
+	hasChildNode: function(parentNode) {
+		var instance = this;
+		var node = instance.nodes[parentNode];
+
+		return (parentNode < instance.nodes.length &&
+				node.parentId == parentNode);
+	},
+
+	isNodeOpen: function(node) {
+		var instance = this;
+
+		for (i = 0; i < instance.openNodes.length; i++) {
+			if (instance.openNodes[i] == node) {
+				return true;
+			}
 		}
 
-		var nodeValues = this.nodes[0].split("|");
-
-		this.treeHTML += ("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"" + nodeValues[6] + "\" style=\"text-decoration: none;\">");
-		this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[nodeValues[5]] + "\" vspace=\"0\" width=\"19\">");
-		this.treeHTML += ("<font class=\"" + this.className + "\" size=\"1\">&nbsp;" + nodeValues[4] + "</font>");
-		this.treeHTML += ("</a><br>");
-
-		var recursedNodes = new Array();
-		//this.addNode(0, recursedNodes);
-		this.addNode(1, recursedNodes);
-	}
-}
-
-function Tree_getHTML() {
-	return this.treeHTML;
-}
-
-function Tree_hasChildNode(parentNode) {
-	if (parentNode >= this.nodes.length) {
 		return false;
-	}
+	},
 
-	var nodeValues = this.nodes[parentNode].split("|");
-
-	if (nodeValues[1] == parentNode) {
-		return true;
-	}
-
-	return false;
-}
-
-function Tree_isNodeOpen(node) {
-	for (i = 0; i < this.openNodes.length; i++) {
-		if (this.openNodes[i] == node) {
-			return true;
+	setOpenNodes: function() {
+		var instance = this;
+		var openNodes = instance.openNodes;
+		
+		if (openNodes != null) {
+			instance.openNodes = openNodes.split(',');
 		}
-	}
+	},
 
-	return false;
-}
+	toggle: function(obj) {
+		var instance = this;
 
-function Tree_setOpenNodes(openNodes) {
-	if (openNodes != null) {
-		this.openNodes = openNodes.split(",");
-	}
-}
+		if (obj.src.indexOf('spacer') < 0) {
+			var icons = instance.icons;
+			var treeId = instance.treeId;
+			
+			var openNode = false;
+			
+			var currentLi = obj.parentNode;
+			
+			var nodeId = currentLi.id.replace(/_branchId_/, '');
+						
+			var subBranch = jQuery('ul', currentLi).eq(0);
+			
+			if (subBranch.is(':hidden')) {
+				subBranch.show();
+				obj.src = icons.minus;
+				openNode = true;
+			} else {
+				subBranch.hide();
+				obj.src = icons.plus;
+			}
 
-function Tree_toggle(treeId, node, bottom) {
-	var divEl = document.getElementById(treeId + "div" + node);
-	var joinEl	= document.getElementById(treeId + "join" + node);
-	var iconEl = document.getElementById(treeId + "icon" + node);
-
-	var openNode = false;
-
-	if (divEl.style.display == "none") {
-		if (bottom == 1) {
-			joinEl.src = this.icons[6];	// minus_bottom.png
+			jQuery.ajax(
+				{
+					url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
+					data: {
+						tree_js_id: treeId,
+						tree_js_node_id: nodeId,
+						tree_js_open: openNode
+						
+					}
+				}
+			);
 		}
-		else {
-			joinEl.src = this.icons[5]; // minus.png
-		}
+	},
+	
+	_onDrop: function(item, obj) {
+		var instance = this;
 
-		iconEl.src = this.icons[10];	// folder_open.png
-		divEl.style.display = "";
+		var icons = instance.icons;
+		var isChild = false;
 
-		openNode = true;
-	}
-	else {
-		if (bottom == 1) {
-			joinEl.src = this.icons[8];	// plus_bottom.png
-		}
-		else {
-			joinEl.src = this.icons[7]; // plus.png
-		}
+		//Look to see if the dropped item is being dropped on one of it's own descendents
+		jQuery(obj).parents('li.tree-item').each(
+			function () {
+				if (this == item) {
+					isChild = true;
+					return false;
+				}
+			}
+		);
 
-		iconEl.src = this.icons[9];		// folder.png
-		divEl.style.display = "none";
-	}
-
-	if (!is_ns_4) {
-		loadPage(mainPath + "/portal/session_tree_js_click", "tree_js_id=" + treeId + "&tree_js_node_id=" + node + "&tree_js_open=" + openNode);
-	}
-
-	self.focus();
-}
-
-if (!Array.prototype.push) {
-	function array_push() {
-		for(var i = 0; i < arguments.length; i++) {
-			this[this.length] = arguments[i];
+		if (isChild == true) {
+			return;
 		}
 
-		return this.length;
+		if (obj.expanderTime) {
+			window.clearTimeout(obj.expanderTime);
+			obj.expanded = false;
+		}
+
+		var subBranch = jQuery('ul', obj.parentNode);
+
+		if (subBranch.length == 0) {
+			jQuery(obj).after('<ul></ul>');
+			subBranch = jQuery('ul', obj.parentNode);
+		}
+		
+		var oldParent = item.parentNode;
+		subBranch.eq(0).append(item);
+		var oldBranches = jQuery('li', oldParent);
+
+		if (oldBranches.length == 0) {
+			jQuery('img.expand-image', oldParent.parentNode).attr('src', icons.spacer);
+			jQuery(oldParent).remove();
+			
+		}
+
+		var expander = jQuery('img.expand-image', obj.parentNode).filter(':first');
+		var expanderSrc = expander.attr('src');
+
+		if (expanderSrc.indexOf('spacer') > -1) {
+			expander.attr('src', icons.minus);
+		}
+	},
+	
+	_onHover: function(item, obj) {
+		var instance = this;
+
+		var icons = instance.icons;
+		
+		if (!obj.expanded) {
+			var subBranches = jQuery('ul', obj.parentNode);
+			
+			if (subBranches.length > 0) {
+				var subBranch = subBranches.eq(0);
+				obj.expanded = true;
+				
+				if (subBranch.is(':hidden')) {
+					var targetBranch = subBranch.get(0);
+					obj.expanderTime = window.setTimeout(
+						function() {
+							jQuery(targetBranch).show();
+							jQuery('img.expand-image', targetBranch.parentNode).eq(0).attr('src', icons.minus);
+							jQuery.recallDroppables();
+						},
+						500
+					);
+				}
+			}
+		}
+	},
+
+	_onOut: function(obj) {
+		var instance = this;
+
+		if (obj.expanderTime) {
+			window.clearTimeout(obj.expanderTime);
+			obj.expanded = false;
+		}
 	}
-
-	Array.prototype.push = array_push;
-}
-
-if (!Array.prototype.pop) {
-	function array_pop(){
-		lastElement = this[this.length - 1];
-		this.length = Math.max(this.length - 1, 0);
-
-		return lastElement;
-	}
-
-	Array.prototype.pop = array_pop;
-}
+});

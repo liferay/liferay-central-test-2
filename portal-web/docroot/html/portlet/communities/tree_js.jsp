@@ -25,26 +25,22 @@
 <script src="<%= themeDisplay.getPathJavaScript() %>/liferay/tree.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-	var layoutsIcons = new Array();
+	layoutIcons = {
+		folder: '<%= themeDisplay.getPathThemeImages() %>/trees/page.png',
+		folderOpen: '<%= themeDisplay.getPathThemeImages() %>/trees/page.png',
+		join: '<%= themeDisplay.getPathThemeImages() %>/trees/join.png',
+		joinBottom: '<%= themeDisplay.getPathThemeImages() %>/trees/join_bottom.png',
+		line: '<%= themeDisplay.getPathThemeImages() %>/trees/line.png',
+		minus: '<%= themeDisplay.getPathThemeImages() %>/trees/minus.png',
+		minusBottom: '<%= themeDisplay.getPathThemeImages() %>/trees/minus_bottom.png',
+		page: '<%= themeDisplay.getPathThemeImages() %>/trees/page.png',
+		plus: '<%= themeDisplay.getPathThemeImages() %>/trees/plus.png',
+		plusBottom: '<%= themeDisplay.getPathThemeImages() %>/trees/plus_bottom.png',
+		root: '<%= themeDisplay.getPathThemeImages() %>/trees/root.png',
+		spacer: '<%= themeDisplay.getPathThemeImages() %>/trees/spacer.png'
+	};
 
-	layoutsIcons[0] = "<%= themeDisplay.getPathThemeImages() %>/trees/root.png";
-	layoutsIcons[1] = "<%= themeDisplay.getPathThemeImages() %>/trees/spacer.png";
-	layoutsIcons[2] = "<%= themeDisplay.getPathThemeImages() %>/trees/line.png";
-	layoutsIcons[3] = "<%= themeDisplay.getPathThemeImages() %>/trees/join.png";
-	layoutsIcons[4] = "<%= themeDisplay.getPathThemeImages() %>/trees/join_bottom.png";
-	layoutsIcons[5] = "<%= themeDisplay.getPathThemeImages() %>/trees/minus.png";
-	layoutsIcons[6] = "<%= themeDisplay.getPathThemeImages() %>/trees/minus_bottom.png";
-	layoutsIcons[7] = "<%= themeDisplay.getPathThemeImages() %>/trees/plus.png";
-	layoutsIcons[8] = "<%= themeDisplay.getPathThemeImages() %>/trees/plus_bottom.png";
-	//layoutsIcons[9] = "<%= themeDisplay.getPathThemeImages() %>/trees/folder.png";
-	//layoutsIcons[10] = "<%= themeDisplay.getPathThemeImages() %>/trees/folder_open.png";
-	layoutsIcons[9] = "<%= themeDisplay.getPathThemeImages() %>/trees/page.png";
-	layoutsIcons[10] = "<%= themeDisplay.getPathThemeImages() %>/trees/page.png";
-	layoutsIcons[11] = "<%= themeDisplay.getPathThemeImages() %>/trees/page.png";
-
-	// id | parentId | ls | obj id | name | img | href
-
-	var layoutsArray = new Array();
+	var layoutArray = [];
 
 	<%
 	for (int i = 0; i < layoutList.size(); i++) {
@@ -58,10 +54,8 @@
 		// Set a better name and remove depth because href should be in the 5th
 		// position
 
-		name = "<nobr>" + name + "</nobr>";
-
 		if (selPlid.equals(objId)) {
-			name = "<b>" + name + "</b>";
+			name = "<strong>" + name + "</strong>";
 		}
 
 		nodeValues[4] = name;
@@ -79,8 +73,17 @@
 			layoutDesc = layoutDesc.substring(0, layoutDesc.length() - 1);
 		}
 	%>
-
-		layoutsArray[<%= i %>] = "<%= UnicodeFormatter.toString(layoutDesc) %>|javascript: self.location = '<%= Http.encodeURL(portletURL.toString()) %>&<portlet:namespace />selPlid=<%= objId %>';|<%= depth %>";
+	
+		layoutArray[<%= i %>] = {
+			depth: '<%= depth %>',
+			id: '<%= nodeValues[0]  %>',
+			img: '<%= name %>',
+			ls: '<%= nodeValues[2] %>',
+			href: 'javascript: self.location = \'<%= Http.encodeURL(portletURL.toString()) %>&<portlet:namespace />selPlid=<%= objId %>\';',
+			parentId: '<%= nodeValues[1] %>',
+			objId: '<%= nodeValues[3] %>',
+			name: '<%= nodeValues[4] %>'
+		};
 
 	<%
 	}

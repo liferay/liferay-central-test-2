@@ -384,13 +384,18 @@ viewPagesURL.setParameter("ownerId", ownerId);
 			<%@ include file="/html/portlet/communities/tree_js.jsp" %>
 
 			<script type="text/javascript">
-				var layoutsTree = new Tree("layoutsTree", layoutsArray, layoutsIcons, "gamma");
-
-				layoutsTree.create("<%= SessionTreeJSClicks.getOpenNodes(request, "layoutsTree") %>");
-
 				jQuery(
 					function() {
-						document.getElementById("<%= renderResponse.getNamespace() %>tree-output").innerHTML = layoutsTree.getHTML();
+						new Tree(
+							{
+								className: "gamma",
+								icons: layoutIcons,
+								nodes: layoutArray,
+								openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, "layoutsTree") %>',
+								outputId: '#<%= renderResponse.getNamespace() %>tree-output',
+								treeId: "layoutsTree"
+							}
+						);
 					}
 				);
 			</script>
@@ -980,16 +985,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							List themes = ThemeLocalUtil.getThemes(company.getCompanyId());
 
 							themes = PluginUtil.restrictPlugins(themes, user);
-
-							Iterator itr = themes.iterator();
-
-							while (itr.hasNext()) {
-								Theme curTheme = (Theme)itr.next();
-
-								if (!curTheme.isGroupAvailable(liveGroupId)) {
-									itr.remove();
-								}
-							}
 							%>
 
 							<liferay-ui:table-iterator
@@ -1242,5 +1237,4 @@ viewPagesURL.setParameter("ownerId", ownerId);
 	</tr>
 	</table>
 </c:if>
-
 </form>

@@ -33,3 +33,56 @@ response.setContentType(Constants.TEXT_CSS);
 .taglib-discussion td img {
 	vertical-align: middle;
 }
+
+/* ---------- Default tree formatting ---------- */
+ul.gamma {
+}
+
+ul.gamma .expand-image {
+}
+
+ul.gamma a {
+	text-decoration: none;
+}
+
+ul.gamma li {
+	margin-bottom: 2px;
+	padding-left: 0;
+}
+
+ul.gamma li ul {
+}
+
+ul.gamma li ul li, ul.gamma li.tree-item {
+	padding-left: 0;
+}
+
+ul.gamma img {
+	vertical-align: middle;
+}
+
+ul.gamma li.tree-item {
+	padding-left: 5px;
+}
+
+ul.gamma li.tree-item a img {
+	cursor: move;
+}
+
+ul.gamma li.tree-item li {
+	padding-left: 20px;
+}
+
+ul.gamma li.tree-item ul {
+	margin-left: 0;
+	margin-top: 5px;
+}
+
+ul.gamma li.tree-item a, ul.gamma li.tree-item .expand-image {
+	cursor: pointer;
+}
+
+ul.gamma .tree-item-hover {
+	background: #7D93C1;
+	padding: 5px;
+}
