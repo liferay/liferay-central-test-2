@@ -34,8 +34,8 @@
 <liferay-theme:defineObjects />
 
 <%
-String groupId = themeDisplay.getPortletGroupId();
-String name = portletConfig.getPortletName();
+long groupId = themeDisplay.getPortletGroupId();
+String name = portletDisplay.getRootPortletId();
 String primKey = portletDisplay.getResourcePK();
 String actionId = "VIEW";
 %>
@@ -90,4 +90,4 @@ Does you have the DELETE permission for the model <%= name %> with the primary k
 	var="permissionsURL"
 />
 
-Click <a href="<%= permissionsURL %>">here</a> to edit the permissions for the above model.
+Click <a href="<%= permissionsURL %>">here</a> to edit the permissions for the <%= name %> model.

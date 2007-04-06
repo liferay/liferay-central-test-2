@@ -50,12 +50,36 @@ public class PortletDisplay implements Serializable {
 		_id = id;
 	}
 
+	public String getRootPortletId() {
+		return _rootPortletId;
+	}
+
+	public void setRootPortletId(String rootPortletId) {
+		_rootPortletId = rootPortletId;
+	}
+
+	public String getInstanceId() {
+		return _instanceId;
+	}
+
+	public void setInstanceId(String instanceId) {
+		_instanceId = instanceId;
+	}
+
 	public String getResourcePK() {
 		return _resourcePK;
 	}
 
 	public void setResourcePK(String resourcePK) {
 		_resourcePK = resourcePK;
+	}
+
+	public String getPortletName() {
+		return _portletName;
+	}
+
+	public void setPortletName(String portletName) {
+		_portletName = portletName;
 	}
 
 	public String getNamespace() {
@@ -384,7 +408,10 @@ public class PortletDisplay implements Serializable {
 		}
 
 		_id = StringPool.BLANK;
+		_rootPortletId = StringPool.BLANK;
+		_instanceId = StringPool.BLANK;
 		_resourcePK = StringPool.BLANK;
+		_portletName = StringPool.BLANK;
 		_namespace = StringPool.BLANK;
 		_title = StringPool.BLANK;
 		_access = false;
@@ -427,7 +454,10 @@ public class PortletDisplay implements Serializable {
 
 	public void copyFrom(PortletDisplay master) {
 		_id = master.getId();
+		_rootPortletId = master.getRootPortletId();
+		_instanceId = master.getInstanceId();
 		_resourcePK = master.getResourcePK();
+		_portletName = master.getPortletName();
 		_namespace = master.getNamespace();
 		_title = master.getTitle();
 		_access = master.isAccess();
@@ -470,7 +500,10 @@ public class PortletDisplay implements Serializable {
 
 	public void copyTo(PortletDisplay slave) {
 		slave.setId(_id);
+		slave.setRootPortletId(_rootPortletId);
+		slave.setInstanceId(_instanceId);
 		slave.setResourcePK(_resourcePK);
+		slave.setPortletName(_portletName);
 		slave.setNamespace(_namespace);
 		slave.setTitle(_title);
 		slave.setAccess(_access);
@@ -514,7 +547,10 @@ public class PortletDisplay implements Serializable {
 	private static Log _log = LogFactoryUtil.getLog(PortletDisplay.class);
 
 	private String _id = StringPool.BLANK;
+	private String _rootPortletId = StringPool.BLANK;
+	private String _instanceId = StringPool.BLANK;
 	private String _resourcePK = StringPool.BLANK;
+	private String _portletName = StringPool.BLANK;
 	private String _namespace = StringPool.BLANK;
 	private String _title = StringPool.BLANK;
 	private boolean _access;

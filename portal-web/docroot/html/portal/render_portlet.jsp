@@ -29,6 +29,7 @@ Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 
 String portletId = portlet.getPortletId();
 String rootPortletId = portlet.getRootPortletId();
+String instanceId = portlet.getInstanceId();
 
 String portletPrimaryKey = PortletPermission.getPrimaryKey(plid, portletId);
 
@@ -253,7 +254,10 @@ if (denyAccess) {
 portletDisplay.recycle();
 
 portletDisplay.setId(portletId);
+portletDisplay.setRootPortletId(rootPortletId);
+portletDisplay.setInstanceId(instanceId);
 portletDisplay.setResourcePK(portletPrimaryKey);
+portletDisplay.setPortletName(portletConfig.getPortletName());
 portletDisplay.setNamespace(PortalUtil.getPortletNamespace(portletId));
 
 portletDisplay.setAccess(access);
