@@ -101,7 +101,6 @@ function addPortletHTML(html, container, placeHolder) {
 	container.replaceChild(portletBound, placeHolder);
 
 	jQuery(addDiv).evalScripts();
-	
 
 	if (!jQuery.browser.firefox) {
 		jQuery(portletBound).evalScripts();
