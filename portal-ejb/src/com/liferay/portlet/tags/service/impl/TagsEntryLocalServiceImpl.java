@@ -122,9 +122,9 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 
 		return entry;
-		
+
 	}
-	
+
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
