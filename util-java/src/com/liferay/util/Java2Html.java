@@ -50,13 +50,14 @@ public class Java2Html {
 		String outDir = args[2];
 		//String projectName = args[3];
 
-		batchFile = StringUtil.replace(batchFile, "/", "\\");
+		//batchFile = StringUtil.replace(batchFile, "/", "\\");
 
 		try {
 			Runtime rt = Runtime.getRuntime();
 
 			String javaHome = System.getProperty("java.home");
-			if (javaHome.endsWith("\\jre")) {
+
+			if (javaHome.endsWith("\\jre") || javaHome.endsWith("/jre")) {
 				javaHome = javaHome.substring(0, javaHome.length() - 4);
 			}
 
@@ -82,8 +83,10 @@ public class Java2Html {
 			br.close();
 
 			DirectoryScanner ds = new DirectoryScanner();
+
 			ds.setIncludes(new String[] {"**\\*.java.html"});
 			ds.setBasedir(outDir);
+
 			ds.scan();
 
 			String[] files = ds.getIncludedFiles();

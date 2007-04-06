@@ -40,10 +40,11 @@
 		<java
 			classname="com.liferay.util.Java2Html"
 			classpathref="project.classpath"
-			fork="true">
-				<arg value="${project.dir}/tools/java2html.bat" />
-				<arg value="src" />
-				<arg value="${java2html.dir}" />
+			fork="true"
+		>
+			<arg value="java -classpath ${project.dir}/lib/development/j2h.jar j2h" />
+			<arg value="src" />
+			<arg value="${java2html.dir}" />
 		</java>
 
 		<move file="${java2html.dir}/stylesheet.css" tofile="${java2html.dir}/java2html.css" />
