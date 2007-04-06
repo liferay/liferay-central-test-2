@@ -43,6 +43,7 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -191,7 +192,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 			Property data = contentNode.getProperty(JCRConstants.JCR_DATA);
 
-			is = data.getStream();
+			is = new BufferedInputStream(data.getStream());
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);

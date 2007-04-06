@@ -25,6 +25,7 @@ package com.liferay.util.servlet;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.Validator;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -184,7 +185,7 @@ public class ServletResponseUtil {
 
 				res.setContentLength(contentLength);
 
-				os = res.getOutputStream();
+				os = new BufferedOutputStream(res.getOutputStream());
 
 				os.write(byteArray, 0, contentLength);
 			}
@@ -201,7 +202,7 @@ public class ServletResponseUtil {
 
 		try {
 			if (!res.isCommitted()) {
-				os = res.getOutputStream();
+				os = new BufferedOutputStream(res.getOutputStream());
 
 				int c = is.read();
 
