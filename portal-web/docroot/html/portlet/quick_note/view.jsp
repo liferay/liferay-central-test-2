@@ -24,28 +24,20 @@
 
 <%@ include file="/html/portlet/quick_note/init.jsp" %>
 
-<div id="<portlet:namespace />pad" style="background: <%= color %>; padding: 2px; margin: 2px;">
+<div id="<portlet:namespace />pad" class="portlet-quick-note" style="background: <%= color %>;">
 	<c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
 		<div class="portlet-title-default">
 			<table border="0" cellpadding="2" cellspacing="0" width="100%">
 			<tr>
 				<td>
-					<img height="5" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" width="5" style="background-color: #FFFFCC; border: thin solid #FFCC00; cursor: pointer;" onClick="<portlet:namespace />changeColor(this)" />
+					<span class="note-color yellow"></span>
+					<span class="note-color green"></span>
+					<span class="note-color blue"></span>
+					<span class="note-color red"></span>
 				</td>
-				<td>
-					<img height="5" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" width="5" style="background-color: #CCFFCC; border: thin solid #00CC00; cursor: pointer;" onClick="<portlet:namespace />changeColor(this)" />
-				</td>
-				<td>
-					<img height="5" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" width="5" style="background-color: #CCCCFF; border: thin solid #330099; cursor: pointer;" onClick="<portlet:namespace />changeColor(this)" />
-				</td>
-				<td>
-					<img height="5" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" width="5" style="background-color: #FFCCCC; border: thin solid #FF0000; cursor: pointer;" onClick="<portlet:namespace />changeColor(this)" />
-				</td>
-				<td style="padding-left: 0px; padding-right: 0px;" width="90%" />
-
 				<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
 					<td>
-						<a border="0" href="<%= portletDisplay.getURLClose() %>"><img height="7" src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" width="7" /></a>
+						<a border="0" href="<%= portletDisplay.getURLClose() %>" class="close-note"><img height="7" src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" width="7" /></a>
 					</td>
 				</c:if>
 			</tr>
@@ -58,49 +50,61 @@
 
 <c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
 	<script type="text/javascript">
-		function <portlet:namespace />changeColor(elem) {
-			var color = elem.style.backgroundColor;
-
-			_$J("#<portlet:namespace />pad").get(0).style.backgroundColor = color;
-
-			var url =
-				"<%= themeDisplay.getPathMain() %>/quick_note/save?" +
-				"&plid=<%= plid %>" +
-				"&portletId=<%= portletDisplay.getId() %>" +
-				"&color=" + color;
-			AjaxUtil.request(url);
-		}
-
-		QuickEdit.create(
-			"<portlet:namespace />note",
-			{
-				inputType: "textarea",
-				onEdit:
-					function(input, textWidth, textHeight) {
-						textHeight += 5;
-
-						if (textHeight < 100) {
-							textHeight = 100;
+		jQuery(
+			function() {
+				jQuery('#<portlet:namespace />pad .note-color').click(
+					function() {
+						var box = jQuery(this);
+						
+						var bgColor = box.css('background-color');
+						
+						jQuery('#<portlet:namespace />pad').css('background-color', bgColor);
+						
+						jQuery.ajax(
+							{
+								type: 'POST',
+								url: '<%= themeDisplay.getPathMain() %>/quick_note/save',
+								data: {
+									color: bgColor,
+									plid: '<%= plid %>',
+									portletId: '<%= portletDisplay.getId() %>'
+								}
+							}
+						);
+					}
+				);
+				jQuery('#<portlet:namespace />note').editable(
+					function(value, settings) {
+						var newValue = value.replace(/\n/gi, '<br />');
+						
+						if (value != settings._LFR_.oldText) {
+							jQuery.ajax(
+								{
+									url: '<%= themeDisplay.getPathMain() %>/quick_note/save',
+									data: {
+										data: newValue,
+										plid: '<%= plid %>',
+										portletId: '<%= portletDisplay.getId() %>'
+									}
+								}
+							);
 						}
-
-						input.style.height = (textHeight) + "px";
-						input.style.width = "100%";
-						input.style.padding = "2px";
+						return newValue;
 					},
-				onComplete:
-					function(newTextObj, oldText) {
-						var newText = newTextObj.innerHTML;
-
-						if (oldText != newText) {
-							var url =
-								"<%= themeDisplay.getPathMain() %>/quick_note/save?" +
-								"&plid=<%= plid %>" +
-								"&portletId=<%= portletDisplay.getId() %>" +
-								"&data=" + encodeURIComponent(newText);
-
-							AjaxUtil.request(url);
-						}
-				}
-			});
+					{
+						data: function(value, settings) {
+							var newValue = value.replace(/<br[\s\/]?>/gi, '\n');
+							settings._LFR_ = {};
+							settings._LFR_.oldText = newValue;
+							return newValue;
+						},
+						onblur: 'submit',
+						type: 'textarea',
+						select: true,
+						submit: ''
+					}
+				);
+			}
+		);
 	</script>
 </c:if>

@@ -86,3 +86,55 @@ ul.gamma .tree-item-hover {
 	background: #7D93C1;
 	padding: 5px;
 }
+
+/* ---------- Quick Note portlet formatting ---------- */
+
+.portlet-quick-note {
+	margin: 2px;
+	padding: 5px;
+}
+
+.portlet-quick-note textarea {
+	min-height: 100px;
+	padding: 3px;
+	width: 95%;
+}
+
+.ie6 .portlet-quick-note textarea {
+	height: expression(this.height < 100 ? '100px' : this.height);
+}
+
+.portlet-quick-note .note-color {
+	border: 1px solid;
+	cursor: pointer;
+	float: left;
+	font-size: 0;
+	height: 10px;
+	margin: 3px 5px;
+	width: 10px;
+}
+
+.portlet-quick-note .note-color.yellow {
+	background-color: #ffc;
+	border-color: #fc0;
+	margin-left: 0;
+}
+
+.portlet-quick-note .note-color.green {
+	background-color: #cfc;
+	border-color: #0c0;
+}
+
+.portlet-quick-note .note-color.blue {
+	background-color: #ccf;
+	border-color: #309;
+}
+
+.portlet-quick-note .note-color.red {
+	background-color: #fcc;
+	border-color: #f00;
+}
+
+.portlet-quick-note a.close-note {
+	float: right;
+}
