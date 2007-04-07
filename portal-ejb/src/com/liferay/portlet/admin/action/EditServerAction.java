@@ -173,6 +173,8 @@ public class EditServerAction extends PortletAction {
 		String deployDir = ParamUtil.getString(req, "deployDir");
 		String destDir = ParamUtil.getString(req, "destDir");
 		long interval = ParamUtil.getLong(req, "interval");
+		int blacklistThreshold = ParamUtil.getInteger(
+			req, "blacklistThreshold");
 		boolean unpackWar = ParamUtil.getBoolean(req, "unpackWar");
 		String jbossPrefix = ParamUtil.getString(req, "jbossPrefix");
 		String tomcatConfDir = ParamUtil.getString(req, "tomcatConfDir");
@@ -187,6 +189,9 @@ public class EditServerAction extends PortletAction {
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_DEST_DIR, destDir);
 		prefs.setValue(
 			PropsUtil.AUTO_DEPLOY_INTERVAL, String.valueOf(interval));
+		prefs.setValue(
+			PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD,
+			String.valueOf(blacklistThreshold));
 		prefs.setValue(
 			PropsUtil.AUTO_DEPLOY_UNPACK_WAR, String.valueOf(unpackWar));
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX, jbossPrefix);
@@ -220,7 +225,7 @@ public class EditServerAction extends PortletAction {
 
 			AutoDeployDir autoDeployDir = new AutoDeployDir(
 				"defaultAutoDeployDir", new File(deployDir), new File(destDir),
-				interval, autoDeployListeners);
+				interval, blacklistThreshold, autoDeployListeners);
 
 			AutoDeployUtil.registerDir(autoDeployDir);
 		}

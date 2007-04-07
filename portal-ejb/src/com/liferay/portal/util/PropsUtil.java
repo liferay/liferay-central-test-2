@@ -90,6 +90,8 @@ public class PropsUtil {
 
 	public static final String AUTO_DEPLOY_INTERVAL = "auto.deploy.interval";
 
+	public static final String AUTO_DEPLOY_BLACKLIST_THRESHOLD = "auto.deploy.blacklist.threshold";
+
 	public static final String AUTO_DEPLOY_UNPACK_WAR = "auto.deploy.unpack.war";
 
 	public static final String AUTO_DEPLOY_JBOSS_PREFIX = "auto.deploy.jboss.prefix";

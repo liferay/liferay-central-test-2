@@ -154,12 +154,14 @@ public class GlobalStartupAction extends SimpleAction {
 					PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR));
 				long interval = PrefsPropsUtil.getLong(
 					PropsUtil.AUTO_DEPLOY_INTERVAL);
+				int blacklistThreshold = PrefsPropsUtil.getInteger(
+					PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD);
 
 				List autoDeployListeners = getAutoDeployListeners();
 
 				AutoDeployDir autoDeployDir = new AutoDeployDir(
 					"defaultAutoDeployDir", deployDir, destDir, interval,
-					autoDeployListeners);
+					blacklistThreshold, autoDeployListeners);
 
 				AutoDeployUtil.registerDir(autoDeployDir);
 			}

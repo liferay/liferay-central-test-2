@@ -68,7 +68,7 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 			}
 		}
 		catch (IOException ioe) {
-			throw new AutoDeployException(ioe.getMessage());
+			throw new AutoDeployException(ioe);
 		}
 		finally {
 			if (zipFile != null) {

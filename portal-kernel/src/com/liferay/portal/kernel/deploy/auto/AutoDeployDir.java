@@ -24,13 +24,15 @@ package com.liferay.portal.kernel.deploy.auto;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 
 import java.io.File;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -43,14 +45,17 @@ import java.util.Set;
 public class AutoDeployDir {
 
 	public AutoDeployDir(String name, File deployDir, File destDir,
-						 long interval, List listeners) {
+						 long interval, int blacklistThreshold,
+						 List listeners) {
 
 		_name = name;
 		_deployDir = deployDir;
 		_destDir = destDir;
 		_interval = interval;
+		_blacklistThreshold = blacklistThreshold;
 		_listeners = listeners;
-		_inProcessFiles = Collections.synchronizedSet(new HashSet());
+		_inProcessFiles = new HashMap();
+		_blacklistFiles = new HashSet();
 	}
 
 	public String getName() {
@@ -67,6 +72,10 @@ public class AutoDeployDir {
 
 	public long getInterval() {
 		return _interval;
+	}
+
+	public int getBlacklistThreshold() {
+		return _blacklistThreshold;
 	}
 
 	public List getListeners() {
@@ -130,33 +139,89 @@ public class AutoDeployDir {
 			if (file.isFile() && fileName.endsWith(".war") ||
 				fileName.endsWith(".xml")) {
 
-				if (!_inProcessFiles.contains(file.getName())) {
-					_inProcessFiles.add(file.getName());
+				processFile(file);
+			}
+		}
+	}
 
-					try {
-						Iterator itr = _listeners.iterator();
+	protected void processFile(File file) {
+		String fileName = file.getName();
 
-						while (itr.hasNext()) {
-							AutoDeployListener listener =
-								(AutoDeployListener)itr.next();
+		if (!file.canRead()) {
+			_log.error("Unable to read " + fileName);
 
-							listener.deploy(file);
-						}
-					}
-					catch (Exception e) {
-						_log.error(e, e);
-					}
-					finally {
-						if (file.delete()) {
-							_inProcessFiles.remove(file.getName());
-						}
-						else {
-							_log.error(
-								"Auto deploy failed to remove " +
-									file.getName());
-						}
-					}
+			return;
+		}
+
+		if (!file.canWrite()) {
+			_log.error("Unable to write " + fileName);
+
+			return;
+		}
+
+		if (_blacklistFiles.contains(fileName)) {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Skip processing of " + fileName + " because it is " +
+						"blacklisted. You must restart the server to remove " +
+							"the file from the blacklist.");
+			}
+
+			return;
+		}
+
+		IntegerWrapper attempt = (IntegerWrapper)_inProcessFiles.get(fileName);
+
+		if (attempt == null) {
+			attempt = new IntegerWrapper(1);
+
+			_inProcessFiles.put(fileName, attempt);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Processing " + fileName);
+			}
+		}
+		else {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Processing " + fileName + ". This is attempt " +
+						attempt.getValue() + ".");
+			}
+		}
+
+		try {
+			Iterator itr = _listeners.iterator();
+
+			while (itr.hasNext()) {
+				AutoDeployListener listener = (AutoDeployListener)itr.next();
+
+				listener.deploy(file);
+			}
+
+			if (file.delete()) {
+				_inProcessFiles.remove(fileName);
+			}
+			else {
+				_log.error("Auto deploy failed to remove " + fileName);
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Add " + fileName + " to the blacklist");
 				}
+
+				_blacklistFiles.add(fileName);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			attempt.increment();
+
+			if (attempt.getValue() >= _blacklistThreshold) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Add " + fileName + " to the blacklist");
+				}
+
+				_blacklistFiles.add(fileName);
 			}
 		}
 	}
@@ -167,8 +232,10 @@ public class AutoDeployDir {
 	private File _deployDir;
 	private File _destDir;
 	private long _interval;
+	private int _blacklistThreshold;
 	private List _listeners;
-	private Set _inProcessFiles;
+	private Map _inProcessFiles;
+	private Set _blacklistFiles;
 	private AutoDeployScanner _scanner;
 
 }

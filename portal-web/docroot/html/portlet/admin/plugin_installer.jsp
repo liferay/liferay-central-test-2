@@ -180,9 +180,41 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 					<option value="0"><%= LanguageUtil.get(pageContext, "disable") %></option>
 
 					<%
-					long interval = PrefsPropsUtil.getInteger(PropsUtil.AUTO_DEPLOY_INTERVAL);
+					long interval = PrefsPropsUtil.getLong(PropsUtil.AUTO_DEPLOY_INTERVAL);
 
 					for (int i = 0;;) {
+						if (i < Time.MINUTE) {
+							i += Time.SECOND * 5;
+						}
+						else {
+							i += Time.MINUTE;
+						}
+					%>
+
+						<option <%= (interval == i) ? "selected" : "" %> value="<%= i %>"><%= LanguageUtil.getTimeDescription(pageContext, i) %></option>
+
+					<%
+						if (i >= (Time.MINUTE * 5)) {
+							break;
+						}
+					}
+					%>
+
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<%= LanguageUtil.get(pageContext, "blacklist-threshold") %>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				<select name="<portlet:namespace />blacklistThreshold">
+
+					<%
+					int blacklistThreshold = PrefsPropsUtil.getInteger(PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD);
+
+					for (int i = 0; i < blacklistThreshold; i++) {
 						if (i < Time.MINUTE) {
 							i += Time.SECOND * 5;
 						}
