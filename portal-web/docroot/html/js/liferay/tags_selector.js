@@ -30,6 +30,7 @@ Liferay.TagsSelector = new Class({
 					duration: 400
 				},
 				autofill: true,
+				dataSourceType: 'json',
 				helperClass: 'autocomplete-box',
 				selectClass: 'autocomplete-selected',
 				minchars: 1,
