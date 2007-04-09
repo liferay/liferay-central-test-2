@@ -1,7 +1,7 @@
 var Tree = new Class({
 	initialize: function(params) {
 		var instance = this;
-		
+
 		instance.className = params.className;
 		instance.icons = params.icons;
 		instance.nodes = params.nodes;
@@ -10,7 +10,7 @@ var Tree = new Class({
 		instance.tree = null;
 		instance.treeHTML = '';
 		instance.treeId = params.treeId;
-		
+
 		instance.create();
 	},
 
@@ -38,11 +38,13 @@ var Tree = new Class({
 				instance.treeHTML += '</a>';
 
 				// Recurse if node has children
+
 				if (hasChildNode) {
 					if (!isNodeOpen) {
 						hidden = ' style="display: none;" ';
-					} else {
-						hidden = '';	
+					}
+					else {
+						hidden = '';
 					}
 
 					instance.treeHTML += '<ul ' + hidden + 'id="' + instance.treeId + "div" + node.id + '">';
@@ -53,10 +55,8 @@ var Tree = new Class({
 				}
 
 				instance.treeHTML += '</li>';
-			} // End if parentId == parentNode
-
-		} // End loop on instance.nodes
-
+			}
+		}
 	},
 
 	create: function() {
@@ -77,16 +77,19 @@ var Tree = new Class({
 			var tree = jQuery('<ul class="' + instance.className + '"></ul>');
 			var treeEl = tree.get(0);
 
-			var mainLi  = jQuery('<li>' +
-									'<a href="' + node.href + '">' + 
-										instance.generateImage(icons.root) + 
-										'<span>&nbsp;' + node.name + '</span>' +
-									'</a>' +
-								'</li>');
+			var mainLi  = jQuery(
+				'<li>' +
+					'<a href="' + node.href + '">' + 
+						instance.generateImage(icons.root) + 
+						'<span>&nbsp;' + node.name + '</span>' +
+					'</a>' +
+				'</li>'
+			);
 
 			instance.addNode(1, recursedNodes);
 
 			mainLi.append('<ul>' + instance.treeHTML + '</ul>');
+
 			tree.append(mainLi);
 
 			var treeBranches = jQuery('li.tree-item', treeEl);
@@ -106,7 +109,7 @@ var Tree = new Class({
 
 			tree.find('#lfr-collapse').click(
 				function() {
-					tree.find('.tree-item ul').hide();	
+					tree.find('.tree-item ul').hide();
 					tree.find('.tree-item img').each(
 						function() {
 							this.src = this.src.replace(/minus.png$/, 'plus.png');
@@ -116,6 +119,7 @@ var Tree = new Class({
 			);
 
 			//Prepend images
+
 			treeBranches.each(
 				function() {
 					var subBranch = jQuery('ul', this);
@@ -143,13 +147,15 @@ var Tree = new Class({
 			);
 
 			//Set toggling
+
 			jQuery('img.expand-image', treeEl).click(
-				function() {	
+				function() {
 					instance.toggle(this);
 				}
 			);
 
 			//Set drop zones
+
 			jQuery('li a', treeEl).Droppable(
 				{
 					accept: 'tree-item',
@@ -162,7 +168,7 @@ var Tree = new Class({
 					},
 
 					onhover: function(item) {
-						instance._onHover(item, this);	
+						instance._onHover(item, this);
 					},
 
 					onout: function() {
@@ -172,6 +178,7 @@ var Tree = new Class({
 			);
 
 			//Set draggable items
+
 			jQuery('li.tree-item', treeEl).Draggable(
 				{
 					autoSize: true,
@@ -184,6 +191,7 @@ var Tree = new Class({
 			instance.tree = tree;
 
 			//Output the tree
+
 			outputEl.append(instance.tree);
 		}
 	},
@@ -191,23 +199,23 @@ var Tree = new Class({
 	generateImage: function(params) {
 		var instance = this;
 
-			var border = params.border || '0';
-			var className = params.className || '';
-			var height = params.height || '20';
-			var hspace = params.hspace || '0';
-			var id = params.id || '';
-			var src = params.src || params;
-			var vspace =  params.vspace || '0';
-			var width = params.width || '19';
+		var border = params.border || '0';
+		var className = params.className || '';
+		var height = params.height || '20';
+		var hspace = params.hspace || '0';
+		var id = params.id || '';
+		var src = params.src || params;
+		var vspace =  params.vspace || '0';
+		var width = params.width || '19';
 
-			border = ' border="' + border + '"';
-			className = ' class="' + className + '"';
-			height = ' height="' + height + '"';
-			hspace = ' hspace="' + hspace + '"';
-			id = ' id="' + id + '"';
-			src = ' src="' + src + '"';
-			vspace = ' vspace="' + vspace + '"';
-			width = ' width="' + width + '"';
+		border = ' border="' + border + '"';
+		className = ' class="' + className + '"';
+		height = ' height="' + height + '"';
+		hspace = ' hspace="' + hspace + '"';
+		id = ' id="' + id + '"';
+		src = ' src="' + src + '"';
+		vspace = ' vspace="' + vspace + '"';
+		width = ' width="' + width + '"';
 
 		return '<img' + border + className + height + hspace + id + src + vspace + width + ' />';
 	},
@@ -216,7 +224,7 @@ var Tree = new Class({
 		var instance = this;
 
 		return instance.treeHTML;
-	},	
+	},
 
 	hasChildNode: function(parentNode) {
 		var instance = this;
@@ -234,13 +242,14 @@ var Tree = new Class({
 				return true;
 			}
 		}
+
 		return false;
 	},
 
 	setOpenNodes: function() {
 		var instance = this;
 		var openNodes = instance.openNodes;
-		
+
 		if (openNodes != null) {
 			instance.openNodes = openNodes.split(',');
 		}
@@ -252,20 +261,21 @@ var Tree = new Class({
 		if (obj.src.indexOf('spacer') < 0) {
 			var icons = instance.icons;
 			var treeId = instance.treeId;
-			
+
 			var openNode = false;
-			
+
 			var currentLi = obj.parentNode;
-			
+
 			var nodeId = currentLi.id.replace(/_branchId_/, '');
-						
+
 			var subBranch = jQuery('ul', currentLi).eq(0);
-			
+
 			if (subBranch.is(':hidden')) {
 				subBranch.show();
 				obj.src = icons.minus;
 				openNode = true;
-			} else {
+			}
+			else {
 				subBranch.hide();
 				obj.src = icons.plus;
 			}
@@ -277,20 +287,22 @@ var Tree = new Class({
 						tree_js_id: treeId,
 						tree_js_node_id: nodeId,
 						tree_js_open: openNode
-						
+
 					}
 				}
 			);
 		}
 	},
-	
+
 	_onDrop: function(item, obj) {
 		var instance = this;
 
 		var icons = instance.icons;
 		var isChild = false;
 
-		//Look to see if the dropped item is being dropped on one of it's own descendents
+		// Look to see if the dropped item is being dropped on one of its own
+		// descendents
+
 		jQuery(obj).parents('li.tree-item').each(
 			function () {
 				if (this == item) {
@@ -315,15 +327,16 @@ var Tree = new Class({
 			jQuery(obj).after('<ul></ul>');
 			subBranch = jQuery('ul', obj.parentNode);
 		}
-		
+
 		var oldParent = item.parentNode;
+
 		subBranch.eq(0).append(item);
+
 		var oldBranches = jQuery('li', oldParent);
 
 		if (oldBranches.length == 0) {
 			jQuery('img.expand-image', oldParent.parentNode).attr('src', icons.spacer);
 			jQuery(oldParent).remove();
-			
 		}
 
 		var expander = jQuery('img.expand-image', obj.parentNode).filter(':first');
@@ -333,21 +346,23 @@ var Tree = new Class({
 			expander.attr('src', icons.minus);
 		}
 	},
-	
+
 	_onHover: function(item, obj) {
 		var instance = this;
 
 		var icons = instance.icons;
-		
+
 		if (!obj.expanded) {
 			var subBranches = jQuery('ul', obj.parentNode);
-			
+
 			if (subBranches.length > 0) {
 				var subBranch = subBranches.eq(0);
+
 				obj.expanded = true;
-				
+
 				if (subBranch.is(':hidden')) {
 					var targetBranch = subBranch.get(0);
+
 					obj.expanderTime = window.setTimeout(
 						function() {
 							jQuery(targetBranch).show();

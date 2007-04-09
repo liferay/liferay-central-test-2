@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/quick_note/init.jsp" %>
 
-<div id="<portlet:namespace />pad" class="portlet-quick-note" style="background: <%= color %>;">
+<div class="portlet-quick-note" id="<portlet:namespace />pad" style="background: <%= color %>;">
 	<c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
 		<div class="portlet-title-default">
 			<table border="0" cellpadding="2" cellspacing="0" width="100%">
@@ -37,7 +37,7 @@
 				</td>
 				<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
 					<td>
-						<a border="0" href="<%= portletDisplay.getURLClose() %>" class="close-note"><img src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" /></a>
+						<a border="0" class="close-note" href="<%= portletDisplay.getURLClose() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" /></a>
 					</td>
 				</c:if>
 			</tr>
@@ -55,11 +55,11 @@
 				jQuery('#<portlet:namespace />pad .note-color').click(
 					function() {
 						var box = jQuery(this);
-						
+
 						var bgColor = box.css('background-color');
-						
+
 						jQuery('#<portlet:namespace />pad').css('background-color', bgColor);
-						
+
 						jQuery.ajax(
 							{
 								type: 'POST',
@@ -73,10 +73,11 @@
 						);
 					}
 				);
+
 				jQuery('#<portlet:namespace />note').editable(
 					function(value, settings) {
 						var newValue = value.replace(/\n/gi, '<br />');
-						
+
 						if (value != settings._LFR_.oldText) {
 							jQuery.ajax(
 								{
@@ -94,8 +95,10 @@
 					{
 						data: function(value, settings) {
 							var newValue = value.replace(/<br[\s\/]?>/gi, '\n');
+
 							settings._LFR_ = {};
 							settings._LFR_.oldText = newValue;
+
 							return newValue;
 						},
 						onblur: 'submit',

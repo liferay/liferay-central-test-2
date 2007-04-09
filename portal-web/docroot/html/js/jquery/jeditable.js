@@ -294,7 +294,7 @@ jQuery.fn.editable = function(target, options, callback) {
                             o = document.createElement('option'); 	 
                             o.value = key;
                             var text = document.createTextNode(json[key]);
-                            o.appendChild(text)
+                            o.appendChild(text);
                             if (key == json['selected']) {
                                 o.selected = true;
                             }

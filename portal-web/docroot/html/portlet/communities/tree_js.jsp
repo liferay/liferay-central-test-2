@@ -66,7 +66,7 @@
 			layoutDesc = layoutDesc.substring(0, layoutDesc.length() - 1);
 		}
 	%>
-	
+
 		layoutArray[<%= i %>] = {
 			depth: '<%= depth %>',
 			id: '<%= nodeValues[0]  %>',

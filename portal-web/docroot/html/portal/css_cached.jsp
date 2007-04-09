@@ -34,7 +34,8 @@ response.setContentType(Constants.TEXT_CSS);
 	vertical-align: middle;
 }
 
-/* ---------- Default tree formatting ---------- */
+/* ---------- Tree ---------- */
+
 ul.gamma {
 }
 
@@ -87,7 +88,7 @@ ul.gamma .tree-item-hover {
 	padding: 5px;
 }
 
-/* ---------- Quick Note portlet formatting ---------- */
+/* ---------- Quick note ---------- */
 
 .portlet-quick-note {
 	margin: 2px;
