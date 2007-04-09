@@ -75,6 +75,10 @@
 	/>
 	<instance-wrapper
 		parent-dir="../util-java/src"
+		src-file="com/liferay/util/Randomizer.java"
+	/>
+	<instance-wrapper
+		parent-dir="../util-java/src"
 		src-file="com/liferay/util/StringUtil.java"
 	/>
 	<instance-wrapper

@@ -51,6 +51,7 @@ import com.liferay.util.ArrayUtil_IW;
 import com.liferay.util.BrowserSniffer_IW;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.GetterUtil_IW;
+import com.liferay.util.Randomizer_IW;
 import com.liferay.util.StaticFieldGetter;
 import com.liferay.util.StringUtil_IW;
 import com.liferay.util.UnicodeFormatter_IW;
@@ -250,6 +251,10 @@ public class VelocityVariables {
 		// Portlet URL factory
 
 		vc.put("portletURLFactory", PortletURLFactory.getInstance());
+
+		// Randomizer
+
+		vc.put("randomizer", Randomizer_IW.getInstance().getInstance());
 
 		// Service locator
 
