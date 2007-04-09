@@ -45,6 +45,7 @@ public class MessageBoardsSoapTest extends BaseSoapTest {
 			String name = "Test Category";
 			String description = "This is a test category.";
 
+			String[] tagEntries = new String[0];
 			String[] communityPermissions = new String[0];
 			String[] guestPermissions = new String[0];
 
@@ -68,7 +69,7 @@ public class MessageBoardsSoapTest extends BaseSoapTest {
 
 			MBMessageSoap message = getMBMessageService().addMessage(
 				categoryId, subject, body, files, anonymous, priority,
-				communityPermissions, guestPermissions);
+				tagEntries, communityPermissions, guestPermissions);
 
 			getMBMessageService().deleteMessage(message.getMessageId());
 
