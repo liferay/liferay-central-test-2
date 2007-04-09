@@ -70,6 +70,43 @@ public class LanguageUtil {
 	public static final String DEFAULT_ENCODING = "UTF-8";
 
 	public static String format(
+			String companyId, Locale locale, String pattern, Object argument)
+		throws LanguageException {
+
+		return format(companyId, locale, pattern, new Object[] {argument});
+	}
+
+	public static String format(
+			String companyId, Locale locale, String pattern, Object[] arguments)
+		throws LanguageException {
+
+		String value = null;
+
+		try {
+			pattern = get(companyId, locale, pattern);
+
+			if (arguments != null) {
+				Object[] formattedArguments = new Object[arguments.length];
+
+				for (int i = 0; i < arguments.length; i++) {
+					formattedArguments[i] = get(
+						companyId, locale, arguments[i].toString());
+				}
+
+				value = MessageFormat.format(pattern, formattedArguments);
+			}
+			else {
+				value = pattern;
+			}
+		}
+		catch (Exception e) {
+			throw new LanguageException(e);
+		}
+
+		return value;
+	}
+
+	public static String format(
 			PageContext pageContext, String pattern, Object argument)
 		throws LanguageException {
 

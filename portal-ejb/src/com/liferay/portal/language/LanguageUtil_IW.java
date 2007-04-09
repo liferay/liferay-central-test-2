@@ -33,6 +33,20 @@ public class LanguageUtil_IW {
 		return _instance;
 	}
 
+	public java.lang.String format(java.lang.String companyId,
+		java.util.Locale locale, java.lang.String pattern,
+		java.lang.Object argument)
+		throws com.liferay.portal.language.LanguageException {
+		return LanguageUtil.format(companyId, locale, pattern, argument);
+	}
+
+	public java.lang.String format(java.lang.String companyId,
+		java.util.Locale locale, java.lang.String pattern,
+		java.lang.Object[] arguments)
+		throws com.liferay.portal.language.LanguageException {
+		return LanguageUtil.format(companyId, locale, pattern, arguments);
+	}
+
 	public java.lang.String format(javax.servlet.jsp.PageContext pageContext,
 		java.lang.String pattern, java.lang.Object argument)
 		throws com.liferay.portal.language.LanguageException {

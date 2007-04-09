@@ -48,10 +48,13 @@ import org.json.JSONObject;
  */
 public class RosterAction extends JSONAction {
 
-	public String getJSON(ActionMapping mapping, ActionForm form,
-		HttpServletRequest req, HttpServletResponse res) throws Exception {
+	public String getJSON(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
+
 		JSONObject jo = new JSONObject();
 
 		if ("addEntry".equals(cmd)) {
@@ -67,7 +70,7 @@ public class RosterAction extends JSONAction {
 		return jo.toString();
 	}
 
-	JSONObject addEntry(HttpServletRequest req) {
+	protected JSONObject addEntry(HttpServletRequest req) {
 		JSONObject jo = new JSONObject();
 
 		try {
