@@ -29,13 +29,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UserListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="ContactListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Scott Lee
  * @author Brian Wing Shun Chan
  *
  */
-public class UserListener implements ModelListener {
+public class ContactListener implements ModelListener {
 
 	public void onBeforeCreate(BaseModel model) throws ModelListenerException {
 		if (_log.isDebugEnabled()) {
@@ -45,9 +45,9 @@ public class UserListener implements ModelListener {
 
 	public void onAfterCreate(BaseModel model) throws ModelListenerException {
 		try {
-			User user = (User)model;
+			Contact contact = (Contact)model;
 
-			PortalLDAPUtil.exportToLDAP(user);
+			PortalLDAPUtil.exportToLDAP(contact);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("onAfterCreate");
@@ -78,9 +78,9 @@ public class UserListener implements ModelListener {
 
 	public void onAfterUpdate(BaseModel model) throws ModelListenerException {
 		try {
-			User user = (User)model;
+			Contact contact = (Contact)model;
 
-			PortalLDAPUtil.exportToLDAP(user);
+			PortalLDAPUtil.exportToLDAP(contact);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("onAfterUpdate");
@@ -91,6 +91,6 @@ public class UserListener implements ModelListener {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(UserListener.class);
+	private static Log _log = LogFactory.getLog(ContactListener.class);
 
 }

@@ -207,6 +207,28 @@
 		<ant dir=".." target="deploy-properties" inheritAll="false" />
 	</target>
 
+	<!--<target name="build-copy-interface">
+		<java
+			classname="com.liferay.portal.tools.CopyInterfaceBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg value="E:/Temp/SRC/jdk-1.4.2" />
+			<arg value="javax/naming/Context.java" />
+		</java>
+
+		<java
+			classname="com.liferay.portal.tools.CopyInterfaceBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg value="E:/Temp/SRC/jdk-1.4.2" />
+			<arg value="javax/naming/directory/DirContext.java" />
+		</java>
+	</target>-->
+
 	<target name="build-css">
 		<ant dir="../portal-web" target="build-css" />
 	</target>

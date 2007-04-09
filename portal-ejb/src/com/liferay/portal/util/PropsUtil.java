@@ -260,7 +260,41 @@ public class PropsUtil {
 
 	public static final String PORTAL_IMPERSONATION_ENABLE = "portal.impersonation.enable";
 
-	// LDAP Import
+	// LDAP
+
+	public static final String LDAP_FACTORY_INITIAL = "ldap.factory.initial";
+
+	public static final String LDAP_BASE_PROVIDER_URL = "ldap.base.provider.url";
+
+	public static final String LDAP_BASE_DN = "ldap.base.dn";
+
+	public static final String LDAP_SECURITY_PRINCIPAL = "ldap.security.principal";
+
+	public static final String LDAP_SECURITY_CREDENTIALS = "ldap.security.credentials";
+
+	public static final String LDAP_AUTH_ENABLED = "ldap.auth.enabled";
+
+	public static final String LDAP_AUTH_REQUIRED = "ldap.auth.required";
+
+	public static final String LDAP_AUTH_METHOD = "ldap.auth.method";
+
+	public static final String LDAP_AUTH_SEARCH_FILTER = "ldap.auth.search.filter";
+
+	public static final String LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM = "ldap.auth.password.encryption.algorithm";
+
+	public static final String LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM_TYPES = "ldap.auth.password.encryption.algorithm.types";
+
+	public static final String LDAP_USERS_DN = "ldap.users.dn";
+
+	public static final String LDAP_USER_MAPPINGS = "ldap.user.mappings";
+
+	public static final String LDAP_USER_IMPL = "ldap.user.impl";
+
+	public static final String LDAP_USER_DEFAULT_OBJECT_CLASSES = "ldap.user.default.object.classes";
+
+	public static final String LDAP_GROUPS_DN = "ldap.groups.dn";
+
+	public static final String LDAP_GROUP_MAPPINGS = "ldap.group.mappings";
 
 	public static final String LDAP_IMPORT_ENABLED = "ldap.import.enabled";
 
@@ -268,21 +302,7 @@ public class PropsUtil {
 
 	public static final String LDAP_IMPORT_INTERVAL = "ldap.import.interval";
 
-	public static final String LDAP_IMPORT_FACTORY_INITIAL = "ldap.import.factory.initial";
-
-	public static final String LDAP_IMPORT_BASE_PROVIDER_URL = "ldap.import.base.provider.url";
-
-	public static final String LDAP_IMPORT_BASE_DN = "ldap.import.base.dn";
-
-	public static final String LDAP_IMPORT_SECURITY_PRINCIPAL = "ldap.import.security.principal";
-
-	public static final String LDAP_IMPORT_SECURITY_CREDENTIALS = "ldap.import.security.credentials";
-
 	public static final String LDAP_IMPORT_SEARCH_FILTER = "ldap.import.search.filter";
-
-	public static final String LDAP_IMPORT_USER_MAPPINGS = "ldap.import.user.mappings";
-
-	public static final String LDAP_IMPORT_GROUP_MAPPINGS = "ldap.import.group.mappings";
 
 	// Authentication Pipeline
 
@@ -291,30 +311,6 @@ public class PropsUtil {
 	public static final String AUTH_PIPELINE_POST = "auth.pipeline.post";
 
 	public static final String AUTH_PIPELINE_ENABLE_LIFERAY_CHECK = "auth.pipeline.enable.liferay.check";
-
-	public static final String AUTH_IMPL_LDAP_ENABLED = "auth.impl.ldap.enabled";
-
-	public static final String AUTH_IMPL_LDAP_REQUIRED = "auth.impl.ldap.required";
-
-	public static final String AUTH_IMPL_LDAP_AUTH_METHOD = "auth.impl.ldap.method";
-
-	public static final String AUTH_IMPL_LDAP_FACTORY_INITIAL = "auth.impl.ldap.factory.initial";
-
-	public static final String AUTH_IMPL_LDAP_BASE_PROVIDER_URL = "auth.impl.ldap.base.provider.url";
-
-	public static final String AUTH_IMPL_LDAP_BASE_DN = "auth.impl.ldap.base.dn";
-
-	public static final String AUTH_IMPL_LDAP_SECURITY_PRINCIPAL = "auth.impl.ldap.security.principal";
-
-	public static final String AUTH_IMPL_LDAP_SECURITY_CREDENTIALS = "auth.impl.ldap.security.credentials";
-
-	public static final String AUTH_IMPL_LDAP_SEARCH_FILTER = "auth.impl.ldap.search.filter";
-
-	public static final String AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM = "auth.impl.ldap.password.encryption.algorithm";
-
-	public static final String AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM_TYPES = "auth.impl.ldap.password.encryption.algorithm.types";
-
-	public static final String AUTH_IMPL_LDAP_USER_MAPPINGS = "auth.impl.ldap.user.mappings";
 
 	public static final String AUTH_FAILURE = "auth.failure";
 

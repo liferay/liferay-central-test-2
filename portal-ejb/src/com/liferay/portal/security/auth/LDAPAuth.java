@@ -28,17 +28,16 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.ldap.LDAPImportUtil;
+import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.LDAPUtil;
-import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.ldap.LDAPUtil;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -103,10 +102,7 @@ public class LDAPAuth implements Authenticator {
 			String password)
 		throws Exception {
 
-		boolean enabled = PrefsPropsUtil.getBoolean(
-			companyId, PropsUtil.AUTH_IMPL_LDAP_ENABLED);
-
-		if (!enabled) {
+		if (!PortalLDAPUtil.isAuthEnabled(companyId)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Authenticator is not enabled");
 			}
@@ -128,26 +124,26 @@ public class LDAPAuth implements Authenticator {
 		Properties env = new Properties();
 
 		String baseProviderURL = PrefsPropsUtil.getString(
-			companyId, PropsUtil.AUTH_IMPL_LDAP_BASE_PROVIDER_URL);
+			companyId, PropsUtil.LDAP_BASE_PROVIDER_URL);
 
 		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsUtil.AUTH_IMPL_LDAP_BASE_DN);
+			companyId, PropsUtil.LDAP_BASE_DN);
 
 		env.put(
 			Context.INITIAL_CONTEXT_FACTORY,
 			PrefsPropsUtil.getString(
-				companyId, PropsUtil.AUTH_IMPL_LDAP_FACTORY_INITIAL));
+				companyId, PropsUtil.LDAP_FACTORY_INITIAL));
 		env.put(
 			Context.PROVIDER_URL,
 			LDAPUtil.getFullProviderURL(baseProviderURL, baseDN));
 		env.put(
 			Context.SECURITY_PRINCIPAL,
 			PrefsPropsUtil.getString(
-				companyId, PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL));
+				companyId, PropsUtil.LDAP_SECURITY_PRINCIPAL));
 		env.put(
 			Context.SECURITY_CREDENTIALS,
 			PrefsPropsUtil.getString(
-				companyId, PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS));
+				companyId, PropsUtil.LDAP_SECURITY_CREDENTIALS));
 
 		LogUtil.debug(_log, env);
 
@@ -165,7 +161,7 @@ public class LDAPAuth implements Authenticator {
 		}
 
 		String filter = PrefsPropsUtil.getString(
-			companyId, PropsUtil.AUTH_IMPL_LDAP_SEARCH_FILTER);
+			companyId, PropsUtil.LDAP_AUTH_SEARCH_FILTER);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Search filter before transformation " + filter);
@@ -199,9 +195,8 @@ public class LDAPAuth implements Authenticator {
 
 				Attributes attrs = ctx.getAttributes(binding.getName());
 
-				Properties userMappings = PropertiesUtil.load(
-					PrefsPropsUtil.getString(
-						companyId, PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS));
+				Properties userMappings =
+					PortalLDAPUtil.getUserMappings(companyId);
 
 				LogUtil.debug(_log, userMappings);
 
@@ -251,7 +246,7 @@ public class LDAPAuth implements Authenticator {
 		// by binding to the LDAP server
 
 		String authMethod = PrefsPropsUtil.getString(
-			companyId, PropsUtil.AUTH_IMPL_LDAP_AUTH_METHOD);
+			companyId, PropsUtil.LDAP_AUTH_METHOD);
 
 		if (authMethod.equals(AUTH_METHOD_BIND)) {
 			try {
@@ -280,7 +275,7 @@ public class LDAPAuth implements Authenticator {
 
 				String algorithm = PrefsPropsUtil.getString(
 					companyId,
-					PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM);
+					PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
 
 				if (Validator.isNotNull(algorithm)) {
 					encryptedPassword =
@@ -342,7 +337,7 @@ public class LDAPAuth implements Authenticator {
 		throws Exception {
 
 		if (PrefsPropsUtil.getBoolean(
-			companyId, PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) {
+				companyId, PropsUtil.LDAP_AUTH_REQUIRED)) {
 
 			return failureCode;
 		}
@@ -405,13 +400,15 @@ public class LDAPAuth implements Authenticator {
 		String organizationId = null;
 		String locationId = null;
 		boolean sendEmail = false;
+		boolean checkExists = true;
+		boolean updatePassword = true;
 
-		LDAPImportUtil.addOrUpdateUser(
+		PortalLDAPUtil.importFromLDAP(
 			creatorUserId, companyId, autoUserId, userId, autoPassword,
 			password1, password2, passwordReset, emailAddress, locale,
 			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
-			locationId, sendEmail, true, true);
+			locationId, sendEmail, checkExists, updatePassword);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LDAPAuth.class);

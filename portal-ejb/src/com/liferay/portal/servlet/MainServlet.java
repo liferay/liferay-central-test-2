@@ -38,7 +38,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalFinder;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.ldap.LDAPImportUtil;
+import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -415,12 +415,8 @@ public class MainServlet extends ActionServlet {
 			// LDAP Import
 
 			try {
-				if (PrefsPropsUtil.getBoolean(
-						_companyId, PropsUtil.LDAP_IMPORT_ENABLED) &&
-					PrefsPropsUtil.getBoolean(
-						_companyId, PropsUtil.LDAP_IMPORT_ON_STARTUP)) {
-
-					LDAPImportUtil.importLDAP(_companyId);
+				if (PortalLDAPUtil.isImportOnStartup(_companyId)) {
+					PortalLDAPUtil.importFromLDAP(_companyId);
 				}
 			}
 			catch (Exception e){

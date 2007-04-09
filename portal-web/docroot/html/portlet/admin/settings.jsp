@@ -47,7 +47,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= ParamUtil.getBoolean(request, "enabled", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_ENABLED)) %>' />
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= ParamUtil.getBoolean(request, "enabled", PortalLDAPUtil.isAuthEnabled(company.getCompanyId())) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -56,7 +56,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<liferay-ui:input-checkbox param="required" defaultValue='<%= ParamUtil.getBoolean(request, "required", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) %>' />
+						<liferay-ui:input-checkbox param="required" defaultValue='<%= ParamUtil.getBoolean(request, "required", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_AUTH_REQUIRED)) %>' />
 					</td>
 				</tr>
 				</table>
@@ -74,7 +74,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input name="<portlet:namespace />baseProviderURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_BASE_PROVIDER_URL)) %>'>
+						<input name="<portlet:namespace />baseProviderURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_PROVIDER_URL)) %>'>
 					</td>
 				</tr>
 				<tr>
@@ -83,7 +83,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input name="<portlet:namespace />baseDN" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_BASE_DN)) %>'>
+						<input name="<portlet:namespace />baseDN" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_DN)) %>'>
 					</td>
 				</tr>
 				<tr>
@@ -92,7 +92,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input name="<portlet:namespace />principal" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL)) %>'>
+						<input name="<portlet:namespace />principal" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_PRINCIPAL)) %>'>
 					</td>
 				</tr>
 				<tr>
@@ -101,7 +101,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input name="<portlet:namespace />credentials" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS)) %>'>
+						<input name="<portlet:namespace />credentials" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_CREDENTIALS)) %>'>
 					</td>
 				</tr>
 				</table>
@@ -112,7 +112,7 @@
 
 				<br><br>
 
-				<textarea name="<portlet:namespace />searchFilter" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_SEARCH_FILTER)) %></textarea>
+				<textarea name="<portlet:namespace />searchFilter" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_SEARCH_FILTER)) %></textarea>
 
 				<br><br>
 
@@ -124,9 +124,9 @@
 					<option value=""></option>
 
 					<%
-					String passwordEncryptionAlgorithm = PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM);
+					String passwordEncryptionAlgorithm = PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
 
-					String[] algorithmTypes = PropsUtil.getArray(PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM_TYPES);
+					String[] algorithmTypes = PropsUtil.getArray(PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM_TYPES);
 
 					for (int i = 0; i < algorithmTypes.length; i++) {
 					%>
@@ -145,7 +145,7 @@
 
 				<br><br>
 
-				<textarea name="<portlet:namespace />userMappings" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS)) %></textarea>
+				<textarea name="<portlet:namespace />userMappings" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_MAPPINGS)) %></textarea>
 
 				<br><br>
 

@@ -20,9 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.util.ldap;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
@@ -32,6 +35,7 @@ import javax.naming.directory.Attributes;
  * <a href="LDAPUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Toma Bedolla
+ * @author Michael Young
  *
  */
 public class LDAPUtil {

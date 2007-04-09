@@ -63,7 +63,7 @@ public class CommonPermission {
 				GetterUtil.getLong(classPK));
 
 			UserPermission.check(
-				permissionChecker, classPK,
+				permissionChecker, user.getUserId(),
 				user.getOrganization().getOrganizationId(),
 				user.getLocation().getOrganizationId(), actionId);
 		}

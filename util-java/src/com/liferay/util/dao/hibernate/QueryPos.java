@@ -111,12 +111,12 @@ public class QueryPos {
 		_query.setTimestamp(_pos++, value);
 	}
 
-	private void addNull() {
-		_query.setSerializable(_pos++, null);
-	}
-
 	private QueryPos(Query query) {
 		_query = query;
+	}
+
+	private void addNull() {
+		_query.setSerializable(_pos++, null);
 	}
 
 	private Query _query;

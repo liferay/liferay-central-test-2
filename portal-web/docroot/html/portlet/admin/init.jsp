@@ -35,6 +35,7 @@
 <%@ page import="com.liferay.portal.plugin.PluginPackageImpl" %>
 <%@ page import="com.liferay.portal.plugin.PluginPackageUtil" %>
 <%@ page import="com.liferay.portal.plugin.RepositoryReport" %>
+<%@ page import="com.liferay.portal.security.ldap.PortalLDAPUtil" %>
 <%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
 <%@ page import="com.liferay.portal.util.LiveUsers" %>

@@ -20,71 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.util.ldap;
 
-import com.liferay.util.GetterUtil;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.text.DateFormat;
-
-import java.util.Date;
+import javax.naming.directory.BasicAttribute;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.ModificationItem;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="Modifications.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class Modifications {
 
-	static String name = "Liferay Portal";
-
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
-		}
-		else {
-			name += " Professional";
-		}
+	public static Modifications getInstance() {
+		return new Modifications();
 	}
 
-	static String version = "4.2.0";
-
-	static String codeName = "Machen";
-
-	static String build = "3908";
-
-	static String date = "April 8, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+	public ModificationItem addItem(String id, String value) {
+		return addItem(DirContext.REPLACE_ATTRIBUTE, id, value);
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public ModificationItem addItem(
+		int modificationOp, String id, String value) {
+
+		ModificationItem item = new ModificationItem(
+			DirContext.REPLACE_ATTRIBUTE, new BasicAttribute(id, value));
+
+		_items.add(item);
+
+		return item;
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	public ModificationItem[] getItems() {
+		return (ModificationItem[])_items.toArray(new ModificationItem[0]);
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
+	private Modifications() {
 	}
 
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private List _items = new ArrayList();
 
 }

@@ -32,9 +32,9 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.LDAPUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.ldap.LDAPUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.io.PrintWriter;
@@ -227,8 +227,7 @@ public class EditUsersAction extends PortletAction {
 
 				env.put(
 					Context.INITIAL_CONTEXT_FACTORY,
-					PrefsPropsUtil.getString(
-						PropsUtil.AUTH_IMPL_LDAP_FACTORY_INITIAL));
+					PrefsPropsUtil.getString(PropsUtil.LDAP_FACTORY_INITIAL));
 				env.put(
 					Context.PROVIDER_URL,
 					LDAPUtil.getFullProviderURL(baseProviderURL, baseDN));
@@ -252,21 +251,18 @@ public class EditUsersAction extends PortletAction {
 			return;
 		}
 
+		prefs.setValue(PropsUtil.LDAP_AUTH_ENABLED, Boolean.toString(enabled));
 		prefs.setValue(
-			PropsUtil.AUTH_IMPL_LDAP_ENABLED, Boolean.toString(enabled));
+			PropsUtil.LDAP_AUTH_REQUIRED, Boolean.toString(required));
+		prefs.setValue(PropsUtil.LDAP_BASE_PROVIDER_URL, baseProviderURL);
+		prefs.setValue(PropsUtil.LDAP_BASE_DN, baseDN);
+		prefs.setValue(PropsUtil.LDAP_SECURITY_PRINCIPAL, principal);
+		prefs.setValue(PropsUtil.LDAP_SECURITY_CREDENTIALS, credentials);
+		prefs.setValue(PropsUtil.LDAP_AUTH_SEARCH_FILTER, searchFilter);
 		prefs.setValue(
-			PropsUtil.AUTH_IMPL_LDAP_REQUIRED, Boolean.toString(required));
-		prefs.setValue(
-			PropsUtil.AUTH_IMPL_LDAP_BASE_PROVIDER_URL, baseProviderURL);
-		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_BASE_DN, baseDN);
-		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL, principal);
-		prefs.setValue(
-			PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS, credentials);
-		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_SEARCH_FILTER, searchFilter);
-		prefs.setValue(
-			PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM,
+			PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM,
 			passwordEncryptionAlgorithm);
-		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS, userMappings);
+		prefs.setValue(PropsUtil.LDAP_USER_MAPPINGS, userMappings);
 
 		prefs.store();
 	}

@@ -135,7 +135,8 @@ public class CachePortlet implements Portlet {
 
 		try {
 			if (portletClassLoader != null) {
-				Thread.currentThread().setContextClassLoader(portletClassLoader);
+				Thread.currentThread().setContextClassLoader(
+					portletClassLoader);
 			}
 
 			_portlet.init(config);
