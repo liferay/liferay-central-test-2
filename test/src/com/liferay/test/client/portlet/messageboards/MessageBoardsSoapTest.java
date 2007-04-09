@@ -44,8 +44,8 @@ public class MessageBoardsSoapTest extends BaseSoapTest {
 			String parentCategoryId = "-1";
 			String name = "Test Category";
 			String description = "This is a test category.";
-
 			String[] tagEntries = new String[0];
+
 			String[] communityPermissions = new String[0];
 			String[] guestPermissions = new String[0];
 

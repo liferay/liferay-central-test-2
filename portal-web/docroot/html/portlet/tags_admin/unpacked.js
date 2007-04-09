@@ -24,7 +24,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		// Divs
 
-		editEntryFields.css('display', 'none');
+		editEntryFields.hide();
 
 		// Form
 
@@ -73,7 +73,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		cancelEditEntryButton.click(
 			function() {
-				editEntryFields.css('display', 'none');
+				editEntryFields.hide();
 			}
 		);
 
@@ -112,7 +112,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
-		editEntryFields.css('display', '');
+		editEntryFields.show();
 	},
 
 	_addEntry: function(instance) {
@@ -121,15 +121,25 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var instanceVar = params.instanceVar;
 		var addEntryNameInput = jQuery('#' + params.addEntryNameInput);
 
-		var category = jQuery('#' + instanceVar + 'CategorySel').val();
+		var categorySel = jQuery('#' + instanceVar + 'CategorySel');
+		var filterSel = jQuery('#' + instanceVar + 'CategoryFilterSel');
+		var category = categorySel.val();
 
 		if (category == '[new]') {
 			var addCategoryNameInput = jQuery('#' + params.addCategoryNameInput);
 
 			category = addCategoryNameInput.val();
+
+			instance._searchFilters['Category'] = category;
+
+			addCategoryNameInput.hide();
 		}
 
 		var properties = new Array('0:category:' + category);
+		
+		if (category == '[none]') {
+			properties = null;
+		}
 
 		Liferay.Service.Tags.TagsEntry.addEntry(
 			{
@@ -203,7 +213,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
-		editEntryFields.css('display', 'none');
+		editEntryFields.hide();
 	},
 
 	_deleteProperty: function() {
@@ -282,51 +292,80 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var addToCategorySpan = jQuery('#' + params.addToCategorySpan);
 
 		var filterHtml = '';
+		var selectHtml = '';
 
 		jQuery.each(
 			properties,
 			function(i, property) {
-				filterHtml += '<option value="' + property.value + '">' + property.value + '</option>';
+				var selected = '';
+
+				if (property.value == instance._searchFilters['Category']) {
+					selected = ' selected';
+				}
+
+				var html = '<option value="' + property.value + '"' + selected + '>' + property.value + '</option>';
+
+				filterHtml += html;
+
+				if (property.value != 'No Category') {
+					selectHtml += html;
+				}
 			}
 		);
 
-		var selectHtml = filterHtml;
 
-		if (properties.length > 0) {
-			filterHtml = '<select id="' + instanceVar + propertyKey + 'FilterSel"><option>All</option>' + filterHtml + '</select>';
-			selectHtml = '<select id="' + instanceVar + propertyKey + 'Sel"><option value="[new]">(New)</option>' + selectHtml + '</select>';
+		filterHtml = '<select id="' + instanceVar + propertyKey + 'FilterSel"><option>All</option>' + filterHtml + '</select>';
+		
+		var selected = '';
 
-			searchPropertiesSpan.append('<span style="padding: 0px 5px 0px 10px;">' + propertyKey + '</span>');
-			searchPropertiesSpan.append(filterHtml);
-			addToCategorySpan.append('<span style="padding: 0px 5px 0px 10px;">' + selectHtml + '</span>');
-
-			var filterSel = jQuery('#' + instanceVar + propertyKey + 'FilterSel');
-
-			filterSel.change(
-				function() {
-					instance._searchFilters[propertyKey] = this.value;
-
-					instance._searchEntries(instance);
-				}
-			);
-
-			var categorySel = jQuery('#' + instanceVar + 'CategorySel');
-
-			categorySel.change(
-				function() {
-					var addCategoryNameInput = jQuery('#' + params.addCategoryNameInput);
-
-					if (this.value == '[new]') {
-						addCategoryNameInput.css('display', '')
-					}
-					else {
-						addCategoryNameInput.css('display', 'none')
-					}
-
-					instance._searchFilters[propertyKey] = this.value;
-				}
-			);
+		if (instance._searchFilters['Category'] == 'No Category') {
+			selected = 'selected';
 		}
+
+		selectHtml = '<select id="' + instanceVar + propertyKey + 'Sel"><option value="[new]">(New)</option><option value="No Category"' + selected + '>(None)</option>' + selectHtml + '</select>';
+
+		searchPropertiesSpan.append('<span style="padding: 0px 5px 0px 10px;">' + propertyKey + '</span>');
+		searchPropertiesSpan.append(filterHtml);
+
+		addToCategorySpan.append('<span style="padding: 0px 5px 0px 10px;">' + selectHtml + '</span>');
+
+		var addCategoryNameInput = jQuery('#' + params.addCategoryNameInput);
+		var filterSel = jQuery('#' + instanceVar + propertyKey + 'FilterSel');
+		var categorySel = jQuery('#' + instanceVar + 'CategorySel');
+
+		filterSel.change(
+			function() {
+				instance._searchFilters[propertyKey] = this.value;
+				
+				if (this.value == 'All') {
+					categorySel.val('[new]');
+					addCategoryNameInput.show();
+				}
+				else {
+					categorySel.val(this.value);
+					addCategoryNameInput.hide();
+				}
+
+				instance._searchEntries(instance);
+			}
+		);
+
+		categorySel.change(
+			function() {
+				instance._searchFilters[propertyKey] = this.value;
+
+				if (this.value == '[new]') {
+					filterSel.val('[All]');
+					addCategoryNameInput.show();
+				}
+				else {
+					filterSel.val(this.value);
+					addCategoryNameInput.hide();
+				}
+				
+				instance._searchEntries(instance);
+			}
+		);
 	},
 
 	_editProperties: function(instance, properties) {
@@ -463,6 +502,6 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
-		editEntryFields.css('display', 'none');
+		editEntryFields.hide();
 	}
 });
