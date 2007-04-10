@@ -486,6 +486,8 @@ public class PropsUtil {
 
 	public static final String LAYOUT_CLONE_IMPL = "layout.clone.impl";
 
+	public static final String LAYOUT_TEMPLATE_CACHE_ENABLED = "layout.template.cache.enabled";
+
 	// Portlet URL
 
 	public static final String PORTLET_URL_APPEND_PARAMETERS = "portlet.url.append.parameters";

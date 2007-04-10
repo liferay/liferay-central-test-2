@@ -22,9 +22,12 @@
 
 package com.liferay.portal.model;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 /**
  * <a href="LayoutTemplate.java.html"><b><i>View Source</i></b></a>
@@ -60,9 +63,13 @@ public interface LayoutTemplate extends Comparable, Plugin, Serializable {
 
 	public boolean hasSetContent();
 
+	public String getUncachedContent() throws IOException;
+
 	public List getColumns();
 
 	public void setColumns(List columns);
+
+	public void setServletContext(ServletContext ctx);
 
 	public String getServletContextName();
 

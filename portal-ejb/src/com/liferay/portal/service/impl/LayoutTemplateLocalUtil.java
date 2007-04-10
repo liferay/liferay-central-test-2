@@ -25,12 +25,14 @@ package com.liferay.portal.service.impl;
 import EDU.oswego.cs.dl.util.concurrent.SyncMap;
 import EDU.oswego.cs.dl.util.concurrent.WriterPreferenceReadWriteLock;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.impl.LayoutTemplateImpl;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.layoutconfiguration.util.velocity.InitColumnProcessor;
 import com.liferay.util.CollectionFactory;
@@ -75,7 +77,8 @@ import org.dom4j.io.SAXReader;
 public class LayoutTemplateLocalUtil {
 
 	public static String getContent(
-		String layoutTemplateId, boolean standard, String themeId) {
+			String layoutTemplateId, boolean standard, String themeId)
+		throws SystemException {
 
 		LayoutTemplate layoutTemplate =
 			getLayoutTemplate(layoutTemplateId, standard, themeId);
@@ -87,7 +90,19 @@ public class LayoutTemplateLocalUtil {
 			return null;
 		}
 		else {
-			return layoutTemplate.getContent();
+			if (GetterUtil.getBoolean(PropsUtil.get(
+					PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED))) {
+
+				return layoutTemplate.getContent();
+			}
+			else {
+				try {
+					return layoutTemplate.getUncachedContent();
+				}
+				catch (IOException ioe) {
+					throw new SystemException(ioe);
+				}
+			}
 		}
 	}
 
@@ -241,6 +256,7 @@ public class LayoutTemplateLocalUtil {
 				PluginSettingLocalServiceUtil.getDefaultPluginSetting();
 
 			layoutTemplateModel.setPluginPackage(pluginPackage);
+			layoutTemplateModel.setServletContext(ctx);
 
 			if (servletContextName != null) {
 				layoutTemplateModel.setServletContextName(servletContextName);

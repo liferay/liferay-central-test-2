@@ -25,10 +25,18 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.Http;
 import com.liferay.util.Validator;
+
+import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletContext;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LayoutTemplateImpl.java.html"><b><i>View Source</i></b></a>
@@ -121,12 +129,41 @@ public class LayoutTemplateImpl
 		return _setContent;
 	}
 
+	public String getUncachedContent() throws IOException {
+		if (_ctx == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Cannot get latest content for " + _servletContextName +
+						" " + getTemplatePath() +
+							" because servlet context is null");
+			}
+
+			return _content;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Getting latest content for " + _servletContextName + " " +
+					getTemplatePath());
+		}
+
+		String content = Http.URLtoString(_ctx.getResource(getTemplatePath()));
+
+		setContent(content);
+
+		return content;
+	}
+
 	public List getColumns() {
 		return _columns;
 	}
 
 	public void setColumns(List columns) {
 		_columns = columns;
+	}
+
+	public void setServletContext(ServletContext ctx) {
+		_ctx = ctx;
 	}
 
 	public String getServletContextName() {
@@ -201,6 +238,8 @@ public class LayoutTemplateImpl
 		}
 	}
 
+	private static Log _log = LogFactory.getLog(LayoutTemplateImpl.class);
+
 	private String _layoutTemplateId;
 	private boolean _standard;
 	private String _name;
@@ -209,6 +248,7 @@ public class LayoutTemplateImpl
 	private String _content;
 	private boolean _setContent;
 	private List _columns = new ArrayList();
+	private transient ServletContext _ctx;
 	private String _servletContextName;
 	private boolean _warFile;
 
