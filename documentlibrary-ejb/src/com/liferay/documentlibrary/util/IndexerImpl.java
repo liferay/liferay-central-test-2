@@ -165,6 +165,17 @@ public class IndexerImpl {
 					}
 				}
 
+				if (fileEntry == null) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"File " + fileName + " in repository " +
+								repositoryId + " exists in the JCR but does " +
+									"not exist in the database");
+					}
+
+					return;
+				}
+
 				StringMaker sm = new StringMaker();
 
 				sm.append(fileEntry.getTitle());
