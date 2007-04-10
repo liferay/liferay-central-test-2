@@ -1,22 +1,22 @@
 Liferay.Language = {
-
 	get: function(key, extraParams) {
 		var instance = this;
 
 		var url = '/language/' + themeDisplay.getLanguageId() + '/' + key + '/';
-		
-		var theKey = '';
 
 		if (extraParams) {
 			if (typeof extraParams == 'string') {
 				url += extraParams;
-			} else if (Liferay.Util.isArray(extraParams)) {
+			}
+			else if (Liferay.Util.isArray(extraParams)) {
 				url += extraParams.join('/');
 			}
 		}
 
-		if (instance._cache[url] != null) {
-			return instance._cache[url];
+		var value = instance._cache[url];
+
+		if (value != null) {
+			return value;
 		}
 
 		var xHR = jQuery.ajax(
@@ -26,13 +26,12 @@ Liferay.Language = {
 			}
 		);
 
-		theKey = xHR.responseText;
+		value = xHR.responseText;
 
-		instance._cache[url] = theKey;
+		instance._cache[url] = value;
 
-		return theKey;
+		return value;
 	},
 
 	_cache: {}
-
 };
