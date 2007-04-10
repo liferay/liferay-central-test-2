@@ -25,6 +25,13 @@
 		<path refid="test-junit.classpath" />
 	</path>
 
+	<path id="test-service.classpath">
+		<pathelement path="${classpath}" />
+		<fileset dir="${project.dir}/lib/development" includes="*.jar" />
+		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
+		<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="xalan.jar,xercesImpl.jar" />
+	</path>
+
 	<path id="test-soap.classpath">
 		<path refid="web.classpath" />
 		<path refid="test-junit.classpath" />
@@ -103,7 +110,7 @@
 	<target name="test-service" depends="compile">
 		<java
 			classname="com.liferay.test.service.ServiceTests"
-			classpathref="project.classpath"
+			classpathref="test-service.classpath"
 			fork="true"
 			newenvironment="true"
 		>
