@@ -94,7 +94,10 @@ var Tree = new Class({
 
 			var treeBranches = jQuery('li.tree-item', treeEl);
 
-			tree.prepend('<li><a href="javascript:;" id="lfr-expand">Expand All</a> | <a href="javascript:;" id="lfr-collapse">Collapse All</a></li>');
+			var expandAll = Liferay.Language.get('expand-all');
+			var collapseAll = Liferay.Language.get('collapse-all');
+
+			tree.prepend('<li><a href="javascript:;" id="lfr-expand">' + expandAll + '</a> | <a href="javascript:;" id="lfr-collapse">' + collapseAll + '</a></li>');
 
 			tree.find('#lfr-expand').click(
 				function() {
