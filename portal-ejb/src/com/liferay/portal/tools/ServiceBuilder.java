@@ -2522,6 +2522,9 @@ public class ServiceBuilder {
 		sm.append("}");
 		sm.append("return remove(" + entity.getVarName() + ");");
 		sm.append("}");
+		sm.append("catch (" + _getNoSuchEntityException(entity) + "Exception nsee) {");
+		sm.append("throw nsee;");
+		sm.append("}");
 		sm.append("catch (Exception e) {");
 		sm.append("throw HibernateUtil.processException(e);");
 		sm.append("}");
