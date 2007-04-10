@@ -80,6 +80,9 @@ public class MBBanPersistence extends BasePersistence {
 
 			return remove(mbBan);
 		}
+		catch (NoSuchBanException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

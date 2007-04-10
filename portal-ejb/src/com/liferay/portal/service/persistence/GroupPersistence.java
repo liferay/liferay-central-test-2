@@ -94,6 +94,9 @@ public class GroupPersistence extends BasePersistence {
 
 			return remove(group);
 		}
+		catch (NoSuchGroupException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

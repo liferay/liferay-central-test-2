@@ -83,6 +83,9 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			return remove(subscription);
 		}
+		catch (NoSuchSubscriptionException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

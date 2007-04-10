@@ -81,6 +81,9 @@ public class PortletPersistence extends BasePersistence {
 
 			return remove(portlet);
 		}
+		catch (NoSuchPortletException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

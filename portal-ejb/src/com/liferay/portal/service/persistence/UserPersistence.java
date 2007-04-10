@@ -93,6 +93,9 @@ public class UserPersistence extends BasePersistence {
 
 			return remove(user);
 		}
+		catch (NoSuchUserException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

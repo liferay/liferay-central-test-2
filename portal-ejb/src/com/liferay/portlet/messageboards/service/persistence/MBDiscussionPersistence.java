@@ -84,6 +84,9 @@ public class MBDiscussionPersistence extends BasePersistence {
 
 			return remove(mbDiscussion);
 		}
+		catch (NoSuchDiscussionException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

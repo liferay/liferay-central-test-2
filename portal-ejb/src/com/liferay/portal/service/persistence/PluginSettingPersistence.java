@@ -83,6 +83,9 @@ public class PluginSettingPersistence extends BasePersistence {
 
 			return remove(pluginSetting);
 		}
+		catch (NoSuchPluginSettingException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

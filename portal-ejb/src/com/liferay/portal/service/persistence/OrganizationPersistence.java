@@ -96,6 +96,9 @@ public class OrganizationPersistence extends BasePersistence {
 
 			return remove(organization);
 		}
+		catch (NoSuchOrganizationException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

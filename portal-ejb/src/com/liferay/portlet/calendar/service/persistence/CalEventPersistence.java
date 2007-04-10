@@ -83,6 +83,9 @@ public class CalEventPersistence extends BasePersistence {
 
 			return remove(calEvent);
 		}
+		catch (NoSuchEventException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

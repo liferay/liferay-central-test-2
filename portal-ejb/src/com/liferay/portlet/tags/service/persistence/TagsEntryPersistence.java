@@ -96,6 +96,9 @@ public class TagsEntryPersistence extends BasePersistence {
 
 			return remove(tagsEntry);
 		}
+		catch (NoSuchEntryException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

@@ -83,6 +83,9 @@ public class OrgGroupRolePersistence extends BasePersistence {
 
 			return remove(orgGroupRole);
 		}
+		catch (NoSuchOrgGroupRoleException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

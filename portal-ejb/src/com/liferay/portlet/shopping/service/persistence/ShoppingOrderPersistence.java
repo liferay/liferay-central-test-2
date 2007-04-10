@@ -83,6 +83,9 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			return remove(shoppingOrder);
 		}
+		catch (NoSuchOrderException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

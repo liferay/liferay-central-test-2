@@ -95,6 +95,9 @@ public class UserGroupPersistence extends BasePersistence {
 
 			return remove(userGroup);
 		}
+		catch (NoSuchUserGroupException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

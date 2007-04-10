@@ -80,6 +80,9 @@ public class CompanyPersistence extends BasePersistence {
 
 			return remove(company);
 		}
+		catch (NoSuchCompanyException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

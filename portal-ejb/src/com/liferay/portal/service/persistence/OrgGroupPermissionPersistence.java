@@ -84,6 +84,9 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 
 			return remove(orgGroupPermission);
 		}
+		catch (NoSuchOrgGroupPermissionException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

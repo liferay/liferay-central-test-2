@@ -81,6 +81,9 @@ public class LayoutPersistence extends BasePersistence {
 
 			return remove(layout);
 		}
+		catch (NoSuchLayoutException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

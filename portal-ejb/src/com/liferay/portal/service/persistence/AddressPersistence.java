@@ -82,6 +82,9 @@ public class AddressPersistence extends BasePersistence {
 
 			return remove(address);
 		}
+		catch (NoSuchAddressException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

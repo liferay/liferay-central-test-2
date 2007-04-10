@@ -84,6 +84,9 @@ public class DLFileRankPersistence extends BasePersistence {
 
 			return remove(dlFileRank);
 		}
+		catch (NoSuchFileRankException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

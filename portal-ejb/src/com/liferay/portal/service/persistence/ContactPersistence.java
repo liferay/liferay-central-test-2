@@ -82,6 +82,9 @@ public class ContactPersistence extends BasePersistence {
 
 			return remove(contact);
 		}
+		catch (NoSuchContactException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

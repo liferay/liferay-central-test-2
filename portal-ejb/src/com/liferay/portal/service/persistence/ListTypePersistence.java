@@ -82,6 +82,9 @@ public class ListTypePersistence extends BasePersistence {
 
 			return remove(listType);
 		}
+		catch (NoSuchListTypeException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

@@ -83,6 +83,9 @@ public class UserIdMapperPersistence extends BasePersistence {
 
 			return remove(userIdMapper);
 		}
+		catch (NoSuchUserIdMapperException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

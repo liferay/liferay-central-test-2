@@ -83,6 +83,9 @@ public class BlogsEntryPersistence extends BasePersistence {
 
 			return remove(blogsEntry);
 		}
+		catch (NoSuchEntryException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

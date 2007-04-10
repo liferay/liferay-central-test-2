@@ -82,6 +82,9 @@ public class ResourcePersistence extends BasePersistence {
 
 			return remove(resource);
 		}
+		catch (NoSuchResourceException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

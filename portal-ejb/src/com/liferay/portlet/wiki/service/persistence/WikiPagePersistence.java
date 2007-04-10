@@ -83,6 +83,9 @@ public class WikiPagePersistence extends BasePersistence {
 
 			return remove(wikiPage);
 		}
+		catch (NoSuchPageException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

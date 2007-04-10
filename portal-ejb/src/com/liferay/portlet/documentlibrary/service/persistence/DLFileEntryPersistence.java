@@ -84,6 +84,9 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			return remove(dlFileEntry);
 		}
+		catch (NoSuchFileEntryException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

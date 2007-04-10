@@ -84,6 +84,9 @@ public class JournalArticlePersistence extends BasePersistence {
 
 			return remove(journalArticle);
 		}
+		catch (NoSuchArticleException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

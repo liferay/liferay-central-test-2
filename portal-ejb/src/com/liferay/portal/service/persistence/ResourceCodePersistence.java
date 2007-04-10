@@ -82,6 +82,9 @@ public class ResourceCodePersistence extends BasePersistence {
 
 			return remove(resourceCode);
 		}
+		catch (NoSuchResourceCodeException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

@@ -83,6 +83,9 @@ public class UserGroupRolePersistence extends BasePersistence {
 
 			return remove(userGroupRole);
 		}
+		catch (NoSuchUserGroupRoleException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

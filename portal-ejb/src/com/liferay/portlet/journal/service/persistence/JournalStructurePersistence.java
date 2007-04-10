@@ -85,6 +85,9 @@ public class JournalStructurePersistence extends BasePersistence {
 
 			return remove(journalStructure);
 		}
+		catch (NoSuchStructureException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

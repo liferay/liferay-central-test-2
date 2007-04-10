@@ -84,6 +84,9 @@ public class BookmarksFolderPersistence extends BasePersistence {
 
 			return remove(bookmarksFolder);
 		}
+		catch (NoSuchFolderException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

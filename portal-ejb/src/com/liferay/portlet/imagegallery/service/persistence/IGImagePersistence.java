@@ -82,6 +82,9 @@ public class IGImagePersistence extends BasePersistence {
 
 			return remove(igImage);
 		}
+		catch (NoSuchImageException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

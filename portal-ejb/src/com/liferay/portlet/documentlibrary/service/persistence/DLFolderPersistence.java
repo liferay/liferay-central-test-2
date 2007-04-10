@@ -83,6 +83,9 @@ public class DLFolderPersistence extends BasePersistence {
 
 			return remove(dlFolder);
 		}
+		catch (NoSuchFolderException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

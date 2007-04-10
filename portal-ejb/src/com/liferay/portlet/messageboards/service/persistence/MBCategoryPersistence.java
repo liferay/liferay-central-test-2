@@ -83,6 +83,9 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			return remove(mbCategory);
 		}
+		catch (NoSuchCategoryException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

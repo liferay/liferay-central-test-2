@@ -81,6 +81,9 @@ public class PhonePersistence extends BasePersistence {
 
 			return remove(phone);
 		}
+		catch (NoSuchPhoneException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

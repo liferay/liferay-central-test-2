@@ -85,6 +85,9 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 
 			return remove(shoppingItemField);
 		}
+		catch (NoSuchItemFieldException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

@@ -83,6 +83,9 @@ public class UserTrackerPersistence extends BasePersistence {
 
 			return remove(userTracker);
 		}
+		catch (NoSuchUserTrackerException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

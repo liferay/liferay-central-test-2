@@ -83,6 +83,9 @@ public class PollsVotePersistence extends BasePersistence {
 
 			return remove(pollsVote);
 		}
+		catch (NoSuchVoteException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

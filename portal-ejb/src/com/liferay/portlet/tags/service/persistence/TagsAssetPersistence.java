@@ -96,6 +96,9 @@ public class TagsAssetPersistence extends BasePersistence {
 
 			return remove(tagsAsset);
 		}
+		catch (NoSuchAssetException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

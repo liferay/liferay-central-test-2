@@ -82,6 +82,9 @@ public class WebsitePersistence extends BasePersistence {
 
 			return remove(website);
 		}
+		catch (NoSuchWebsiteException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

@@ -85,6 +85,9 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 
 			return remove(shoppingItemPrice);
 		}
+		catch (NoSuchItemPriceException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

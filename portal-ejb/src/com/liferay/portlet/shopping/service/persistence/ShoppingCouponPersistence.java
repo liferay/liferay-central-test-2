@@ -84,6 +84,9 @@ public class ShoppingCouponPersistence extends BasePersistence {
 
 			return remove(shoppingCoupon);
 		}
+		catch (NoSuchCouponException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

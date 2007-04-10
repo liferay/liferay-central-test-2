@@ -85,6 +85,9 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 
 			return remove(shoppingCategory);
 		}
+		catch (NoSuchCategoryException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

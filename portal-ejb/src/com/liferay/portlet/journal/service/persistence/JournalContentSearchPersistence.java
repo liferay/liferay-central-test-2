@@ -87,6 +87,9 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			return remove(journalContentSearch);
 		}
+		catch (NoSuchContentSearchException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

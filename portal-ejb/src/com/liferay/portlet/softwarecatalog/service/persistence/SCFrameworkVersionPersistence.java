@@ -85,6 +85,9 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 
 			return remove(scFrameworkVersion);
 		}
+		catch (NoSuchFrameworkVersionException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

@@ -83,6 +83,9 @@ public class BookmarksEntryPersistence extends BasePersistence {
 
 			return remove(bookmarksEntry);
 		}
+		catch (NoSuchEntryException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

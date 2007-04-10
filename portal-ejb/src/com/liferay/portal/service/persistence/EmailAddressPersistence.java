@@ -83,6 +83,9 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			return remove(emailAddress);
 		}
+		catch (NoSuchEmailAddressException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

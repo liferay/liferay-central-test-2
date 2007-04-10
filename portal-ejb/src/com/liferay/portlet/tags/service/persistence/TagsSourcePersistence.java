@@ -82,6 +82,9 @@ public class TagsSourcePersistence extends BasePersistence {
 
 			return remove(tagsSource);
 		}
+		catch (NoSuchSourceException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

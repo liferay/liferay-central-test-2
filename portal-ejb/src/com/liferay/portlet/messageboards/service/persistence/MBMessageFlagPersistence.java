@@ -84,6 +84,9 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			return remove(mbMessageFlag);
 		}
+		catch (NoSuchMessageFlagException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

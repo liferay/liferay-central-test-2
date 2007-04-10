@@ -83,6 +83,9 @@ public class SCLicensePersistence extends BasePersistence {
 
 			return remove(scLicense);
 		}
+		catch (NoSuchLicenseException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

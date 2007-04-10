@@ -81,6 +81,9 @@ public class ReleasePersistence extends BasePersistence {
 
 			return remove(release);
 		}
+		catch (NoSuchReleaseException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

@@ -84,6 +84,9 @@ public class TagsPropertyPersistence extends BasePersistence {
 
 			return remove(tagsProperty);
 		}
+		catch (NoSuchPropertyException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

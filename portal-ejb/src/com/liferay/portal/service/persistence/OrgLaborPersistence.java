@@ -82,6 +82,9 @@ public class OrgLaborPersistence extends BasePersistence {
 
 			return remove(orgLabor);
 		}
+		catch (NoSuchOrgLaborException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

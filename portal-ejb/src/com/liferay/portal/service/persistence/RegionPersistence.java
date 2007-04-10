@@ -81,6 +81,9 @@ public class RegionPersistence extends BasePersistence {
 
 			return remove(region);
 		}
+		catch (NoSuchRegionException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

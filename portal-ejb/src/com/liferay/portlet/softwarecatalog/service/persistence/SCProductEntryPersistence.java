@@ -97,6 +97,9 @@ public class SCProductEntryPersistence extends BasePersistence {
 
 			return remove(scProductEntry);
 		}
+		catch (NoSuchProductEntryException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

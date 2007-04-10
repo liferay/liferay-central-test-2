@@ -83,6 +83,9 @@ public class IGFolderPersistence extends BasePersistence {
 
 			return remove(igFolder);
 		}
+		catch (NoSuchFolderException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

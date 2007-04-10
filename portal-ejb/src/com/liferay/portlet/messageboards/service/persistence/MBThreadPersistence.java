@@ -83,6 +83,9 @@ public class MBThreadPersistence extends BasePersistence {
 
 			return remove(mbThread);
 		}
+		catch (NoSuchThreadException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

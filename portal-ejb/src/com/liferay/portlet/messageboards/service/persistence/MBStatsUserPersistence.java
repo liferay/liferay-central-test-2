@@ -84,6 +84,9 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			return remove(mbStatsUser);
 		}
+		catch (NoSuchStatsUserException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

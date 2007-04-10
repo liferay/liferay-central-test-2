@@ -83,6 +83,9 @@ public class MBMessagePersistence extends BasePersistence {
 
 			return remove(mbMessage);
 		}
+		catch (NoSuchMessageException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

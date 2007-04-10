@@ -83,6 +83,9 @@ public class RatingsStatsPersistence extends BasePersistence {
 
 			return remove(ratingsStats);
 		}
+		catch (NoSuchStatsException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

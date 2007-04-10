@@ -98,6 +98,9 @@ public class SCProductVersionPersistence extends BasePersistence {
 
 			return remove(scProductVersion);
 		}
+		catch (NoSuchProductVersionException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

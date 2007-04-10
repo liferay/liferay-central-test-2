@@ -80,6 +80,9 @@ public class AccountPersistence extends BasePersistence {
 
 			return remove(account);
 		}
+		catch (NoSuchAccountException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

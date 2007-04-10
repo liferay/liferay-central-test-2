@@ -84,6 +84,9 @@ public class DLFileShortcutPersistence extends BasePersistence {
 
 			return remove(dlFileShortcut);
 		}
+		catch (NoSuchFileShortcutException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

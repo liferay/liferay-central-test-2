@@ -84,6 +84,9 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			return remove(journalTemplate);
 		}
+		catch (NoSuchTemplateException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

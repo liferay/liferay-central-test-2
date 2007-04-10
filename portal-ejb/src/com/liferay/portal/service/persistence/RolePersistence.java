@@ -93,6 +93,9 @@ public class RolePersistence extends BasePersistence {
 
 			return remove(role);
 		}
+		catch (NoSuchRoleException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

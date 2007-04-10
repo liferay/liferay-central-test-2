@@ -84,6 +84,9 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 			return remove(dlFileVersion);
 		}
+		catch (NoSuchFileVersionException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

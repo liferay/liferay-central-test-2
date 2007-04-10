@@ -83,6 +83,9 @@ public class ShoppingCartPersistence extends BasePersistence {
 
 			return remove(shoppingCart);
 		}
+		catch (NoSuchCartException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

@@ -82,6 +82,9 @@ public class DataTrackerPersistence extends BasePersistence {
 
 			return remove(dataTracker);
 		}
+		catch (NoSuchDataTrackerException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

@@ -82,6 +82,9 @@ public class WikiNodePersistence extends BasePersistence {
 
 			return remove(wikiNode);
 		}
+		catch (NoSuchNodeException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

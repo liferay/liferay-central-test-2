@@ -83,6 +83,9 @@ public class PasswordTrackerPersistence extends BasePersistence {
 
 			return remove(passwordTracker);
 		}
+		catch (NoSuchPasswordTrackerException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

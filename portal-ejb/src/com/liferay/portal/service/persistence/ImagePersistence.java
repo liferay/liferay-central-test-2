@@ -80,6 +80,9 @@ public class ImagePersistence extends BasePersistence {
 
 			return remove(image);
 		}
+		catch (NoSuchImageException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

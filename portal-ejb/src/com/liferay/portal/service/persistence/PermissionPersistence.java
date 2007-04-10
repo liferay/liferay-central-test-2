@@ -96,6 +96,9 @@ public class PermissionPersistence extends BasePersistence {
 
 			return remove(permission);
 		}
+		catch (NoSuchPermissionException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

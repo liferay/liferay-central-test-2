@@ -84,6 +84,9 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 			return remove(blogsCategory);
 		}
+		catch (NoSuchCategoryException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}

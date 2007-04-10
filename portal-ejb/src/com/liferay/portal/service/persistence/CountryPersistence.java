@@ -81,6 +81,9 @@ public class CountryPersistence extends BasePersistence {
 
 			return remove(country);
 		}
+		catch (NoSuchCountryException nsee) {
+			throw nsee;
+		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
 		}
