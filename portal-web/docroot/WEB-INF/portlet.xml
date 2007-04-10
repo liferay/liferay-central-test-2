@@ -1614,11 +1614,11 @@
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
 
-			<!-- IBM Producer -->
+			<!-- Oracle Producer -->
 
 			<preference>
 				<name>wsrp-service-url</name>
-				<value>http://wsrp.dyndns.org:9081/wsrp</value>
+				<value>http://portalstandards.oracle.com:80/portletapp/portlets</value>
 			</preference>			
 			<preference>
 				<name>markup-endpoint</name>
@@ -1638,35 +1638,8 @@
 			</preference>
 			<preference>
 				<name>portlet-handle</name>
-				<value>_5_0O0EKGSUSD0SHNS1_J6</value>
+				<value>E:9:default</value>
 			</preference>
-
-			<!-- Sun Producer -->
-
-			<!--<preference>
-				<name>wsrp-service-url</name>
-				<value>http://sunwsrp.dyndns.org:80/portal/wsrp/router</value>
-			</preference>			
-			<preference>
-				<name>markup-endpoint</name>
-				<value>markup/default</value>
-			</preference>
-			<preference>
-				<name>service-description-endpoint</name>
-				<value>servicedescription/default</value>
-			</preference>
-			<preference>
-				<name>registration-endpoint</name>
-				<value>registration/default</value>
-			</preference>
-			<preference>
-				<name>portlet-management-endpoint</name>
-				<value>portletmanagement/default</value>
-			</preference>
-			<preference>
-				<name>portlet-handle</name>
-				<value>BookmarkPortlet</value>
-			</preference>-->
 
 			<!-- Liferay Producer -->
 
