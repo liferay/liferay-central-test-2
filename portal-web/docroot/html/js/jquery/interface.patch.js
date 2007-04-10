@@ -202,7 +202,7 @@ jQuery.iAuto = {
 				{
 					var value, text, testValue;
 					if (isXML) {
-						value = jQuery('value', this).text()
+						value = jQuery('value', this).text();
 						text = jQuery('text', this).text();
 					} else {
 						value = this.value;
