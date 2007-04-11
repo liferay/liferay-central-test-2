@@ -95,6 +95,38 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 </tr>
 <tr>
 	<td>
+		<%= LanguageUtil.get(pageContext, "display-style") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<select name="<portlet:namespace />displayStyle">
+			<option <%= displayStyle.equals("table") ? "selected" : "" %> value="table"><%= LanguageUtil.get(pageContext, "table") %></option>
+			<option <%= displayStyle.equals("list") ? "selected" : "" %> value="list"><%= LanguageUtil.get(pageContext, "list") %></option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%=LanguageUtil.get(pageContext, "fields")%>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input type="checkbox" value='1' name='<portlet:namespace />showName' <%= showName?"checked":""%> >
+		<label for="<portlet:namespace />showName"><%=LanguageUtil.get(pageContext, "name")%></label>
+		&nbsp; &nbsp;
+		<input type="checkbox" value='1' name='<portlet:namespace />showDescription' <%= showDescription?"checked":""%> >
+		<label for="<portlet:namespace />showDescription"><%=LanguageUtil.get(pageContext, "description")%></label>
+		&nbsp; &nbsp;
+		<input type="checkbox" value='1' name='<portlet:namespace />showDisplayDate' <%= showDisplayDate?"checked":""%> >
+		<label for="<portlet:namespace />showDisplayDate"><%=LanguageUtil.get(pageContext, "display-date")%></label>
+		&nbsp; &nbsp;
+		<input type="checkbox" value='1' name='<portlet:namespace />showAuthor' <%= showAuthor?"checked":""%> >
+		<label for="<portlet:namespace />showAuthor"><%=LanguageUtil.get(pageContext, "author")%></label>
+		&nbsp; &nbsp;
+	</td>
+</tr>
+<tr>
+	<td>
 		<%= LanguageUtil.get(pageContext, "display-per-page") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -114,6 +146,15 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 			%>
 
 		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "show-pagination") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input type="checkbox" value='1' name='showPagination' <%= showPagination?"checked":""%> >
 	</td>
 </tr>
 <tr>

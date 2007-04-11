@@ -50,6 +50,13 @@ if (Validator.isNotNull(portletResource)) {
 long groupId = GetterUtil.getLong(prefs.getValue("group-id", StringPool.BLANK));
 String type = prefs.getValue("type", StringPool.BLANK);
 String pageURL = prefs.getValue("page-url", "maximized");
+boolean showPagination = GetterUtil.getBoolean(prefs.getValue("show-pagination", "0"));
+boolean showName = ParamUtil.getBoolean(request, "showName", GetterUtil.getBoolean(prefs.getValue("show-name", "true")));
+boolean showDescription = ParamUtil.getBoolean(request, "showDescription", GetterUtil.getBoolean(prefs.getValue("show-description", "false")));
+boolean showDisplayDate = ParamUtil.getBoolean(request, "showDisplayDate", GetterUtil.getBoolean(prefs.getValue("show-display-date", "true")));
+boolean showAuthor = ParamUtil.getBoolean(request, "showAuthor", GetterUtil.getBoolean(prefs.getValue("show-author", "true")));
+
+String displayStyle = prefs.getValue("display-style", "table");
 int pageDelta = GetterUtil.getInteger(prefs.getValue("page-delta", StringPool.BLANK));
 
 String orderByCol = prefs.getValue("order-by-col", StringPool.BLANK);
@@ -58,4 +65,5 @@ String orderByType = prefs.getValue("order-by-type", StringPool.BLANK);
 OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(orderByCol, orderByType);
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

@@ -55,9 +55,15 @@ double version = ParamUtil.getDouble(request, "version");
 
 		headerNames.clear();
 
-		headerNames.add("name");
-		headerNames.add("display-date");
-		headerNames.add("author");
+		if (showName) {
+			headerNames.add("name");
+		}
+		if (showDisplayDate) {
+			headerNames.add("display-date");
+		}
+		if (showAuthor) {
+			headerNames.add("author");
+		}
 
 		searchContainer.setOrderableHeaders(null);
 
@@ -107,51 +113,99 @@ double version = ParamUtil.getDouble(request, "version");
 				target = "_blank";;
 			}
 
-			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, article.getArticleId(), rowHREF, target, null);
+			if (displayStyle.equals("list")) {
+				if (showName) {
+				%>
+					<h2 class="journal-article-title"><a href="<%= rowHREF%>"><%=article.getTitle()%></a></h2>
+				<%
+				}
+				if (showAuthor) {
+				%>
+					<p class="journal-article-author"><%= LanguageUtil.get(pageContext, "by") %> <%= PortalUtil.getUserName(article.getUserId(), article.getUserName()) %></p>
+				<%
+				}
+				if (showDescription) {
+				%>
+					<p class="journal-article-description"><%=article.getDescription()%>
+				<%
+				}
+				if (showDisplayDate) {
+				%>
+					(<span  class="journal-article-date"><%= dateFormatDate.format(article.getDisplayDate()) %></span>)</p>
+				<%
+				}
+			}
+			else {
+				TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, article.getArticleId(), rowHREF, target, null);
 
-			/*// Article id
+				/*// Article id
 
-			row.addText(rowTextEntry);
+				row.addText(rowTextEntry);
 
-			// Version
+				// Version
 
-			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+				rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-			rowTextEntry.setName(String.valueOf(article.getVersion()));
+				rowTextEntry.setName(String.valueOf(article.getVersion()));
 
-			row.addText(rowTextEntry);*/
+				row.addText(rowTextEntry);*/
 
-			// Title
+				// Title and description
 
-			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+				StringMaker nameAndDescription = new StringMaker();
+				if (showName) {
+					nameAndDescription.append(article.getTitle());
+				}
 
-			rowTextEntry.setName(article.getTitle());
+				if (showDescription) {
+					nameAndDescription.append("<br>");
+					nameAndDescription.append("<span style=\"font-size: xx-small;\">");
+					nameAndDescription.append(article.getDescription());
+					nameAndDescription.append("</span>");
+				}
 
-			row.addText(rowTextEntry);
+				if (nameAndDescription.length() > 0) {
+					rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-			// Display date
+					rowTextEntry.setName(nameAndDescription.toString());
 
-			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+					row.addText(rowTextEntry);
+				}
 
-			rowTextEntry.setName(dateFormatDateTime.format(article.getDisplayDate()));
+				// Display date
 
-			row.addText(rowTextEntry);
+				if (showDisplayDate) {
+					rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-			// Author
+					rowTextEntry.setName(dateFormatDateTime.format(article.getDisplayDate()));
 
-			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+					row.addText(rowTextEntry);
+				}
 
-			rowTextEntry.setName(PortalUtil.getUserName(article.getUserId(), article.getUserName()));
+				// Author
 
-			row.addText(rowTextEntry);
+				if (showAuthor) {
+					rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-			// Add result row
+					rowTextEntry.setName(PortalUtil.getUserName(article.getUserId(), article.getUserName()));
 
-			resultRows.add(row);
+					row.addText(rowTextEntry);
+				}
+
+				// Add result row
+
+				resultRows.add(row);
+			}
 		}
 		%>
+		<c:if test='<%= displayStyle.equals("table") %>' >
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		</c:if>
+		<c:if test="<%= showPagination %>" >
+			<% portletURL.setParameter("articleId", ""); %>
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+		</c:if>
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:otherwise>
 
