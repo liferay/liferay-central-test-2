@@ -61,8 +61,34 @@ public class ContactImpl extends ContactModelImpl implements Contact {
 	public ContactImpl() {
 	}
 
+	public boolean isDefaultUser() {
+		return _defaultUser;
+	}
+
+	public void setCompanyId(String companyId) {
+		if (companyId.equalsIgnoreCase(UserImpl.DEFAULT)) {
+			_defaultUser = true;
+		}
+		else {
+			_defaultUser = false;
+		}
+
+		super.setCompanyId(companyId);
+	}
+
+	public String getActualCompanyId() {
+		if (isDefaultUser()) {
+			return UserImpl.getActualCompanyId(getUserId());
+		}
+		else {
+			return getCompanyId();
+		}
+	}
+
 	public String getFullName() {
 		return getFullName(getFirstName(), getMiddleName(), getLastName());
 	}
+
+	private boolean _defaultUser;
 
 }

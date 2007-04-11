@@ -72,7 +72,7 @@ import javax.naming.ldap.LdapContext;
 public class PortalLDAPUtil {
 
 	public static void exportToLDAP(Contact contact) throws Exception {
-		String companyId = contact.getCompanyId();
+		String companyId = contact.getActualCompanyId();
 
 		if (!isAuthEnabled(companyId)) {
 			return;
@@ -115,7 +115,7 @@ public class PortalLDAPUtil {
 	}
 
 	public static void exportToLDAP(User user) throws Exception {
-		String companyId = user.getCompanyId();
+		String companyId = user.getActualCompanyId();
 
 		if (!isAuthEnabled(companyId)) {
 			return;

@@ -60,7 +60,7 @@ public class LDAPUser extends DummyDirContext {
 		_user = user;
 
 		Properties userMappings = PortalLDAPUtil.getUserMappings(
-			_user.getCompanyId());
+			_user.getActualCompanyId());
 
 		_attrs = new BasicAttributes(true);
 
