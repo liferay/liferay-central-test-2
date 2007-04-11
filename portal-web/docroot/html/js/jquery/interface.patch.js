@@ -81,12 +81,8 @@ jQuery.iAuto = {
 					}
 				);
 			} else if(typeof dataSource == 'function') {
-				var returnedData = dataSource();
+				var returnedData = dataSource(data);
 				jQuery.iAuto.handleData(returnedData, subject, subjectValue, isXML);
-			} else if (dataSource.constructor == Array) {
-				if (dataSource[0].text != null && dataSource[0].value != null) {
-					jQuery.iAuto.handleData(dataSource, subject, subjectValue, isXML);
-				}
 			}
 		}
 	},
