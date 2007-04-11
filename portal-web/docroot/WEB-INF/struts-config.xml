@@ -439,6 +439,11 @@
 
 		<!-- Document Library -->
 
+		<action path="/document_library/edit_configuration" type="com.liferay.portlet.documentlibrary.action.EditConfigurationAction">
+			<forward name="portlet.document_library.edit_configuration" path="portlet.document_library.edit_configuration" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
 		<action path="/document_library/edit_file_entry" type="com.liferay.portlet.documentlibrary.action.EditFileEntryAction" name="documentLibraryFileEntryForm">
 			<forward name="portlet.document_library.edit_file_entry" path="portlet.document_library.edit_file_entry" />
 			<forward name="portlet.document_library.edit_file_entry_form" path="portlet.document_library.edit_file_entry_form" />
@@ -492,6 +497,25 @@
 			<forward name="portlet.document_library.edit_file_shortcut" path="portlet.document_library.edit_file_shortcut" />
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
+
+		<!-- Document Library Display -->
+
+		<action path="/document_library_display/edit_configuration" type="com.liferay.portlet.documentlibrary.action.EditConfigurationAction">
+			<forward name="portlet.document_library.edit_configuration" path="portlet.document_library_display.edit_configuration" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
+		<action path="/document_library_display/view" type="com.liferay.portlet.documentlibrary.action.ViewAction">
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+			<forward name="portlet.document_library.view" path="portlet.document_library_display.view" />
+		</action>
+
+		<action path="/document_library_display/select_folder" type="com.liferay.portlet.documentlibrary.action.EditFolderAction">
+			<forward name="portlet.document_library.edit_folder" path="portlet.document_library.select_folder" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
+		<action path="/document_library_display/search" forward="portlet.document_library_display.search" />
 
 		<!-- Enterprise Admin -->
 
@@ -1432,6 +1456,19 @@
 
 		<action path="/westminster_catechism/view" forward="portlet.westminster_catechism.view" />
 
+		<!-- Web Form -->
+
+		<action path="/webform/view" forward="portlet.webform.view" />
+
+		<action path="/webform/send" type="com.liferay.portlet.webform.action.SendAction">
+			<forward name="portlet.webform.error" path="portlet.webform.error" />
+		</action>
+
+		<action path="/webform/edit_configuration" type="com.liferay.portlet.webform.action.EditConfigurationAction">
+			<forward name="portlet.webform.edit_configuration" path="portlet.webform.edit_configuration" />
+			<forward name="portlet.webform.error" path="portlet.webform.error" />
+		</action>
+		
 		<!-- Wiki -->
 
 		<action path="/wiki/edit_node" type="com.liferay.portlet.wiki.action.EditNodeAction">

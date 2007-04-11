@@ -55,6 +55,16 @@ public class DLUtil {
 			String folderId, String name, PageContext pageContext,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
+		return getBreadcrumbs(
+			folderId, name, pageContext, req, res, "/document_library/view",
+			true); 
+	}
+
+	public static String getBreadcrumbs(
+			String folderId, String name, PageContext pageContext,
+			RenderRequest req, RenderResponse res, String action,
+			boolean maximize)
+		throws Exception {
 
 		if (Validator.isNotNull(folderId) && Validator.isNotNull(name)) {
 			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
@@ -72,13 +82,24 @@ public class DLUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(folder, null, pageContext, req, res);
+			return getBreadcrumbs(
+				folder, null, pageContext, req, res, action, maximize);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			DLFolder folder, DLFileEntry fileEntry, PageContext pageContext,
 			RenderRequest req, RenderResponse res)
+		throws Exception {
+		return getBreadcrumbs(
+			folder, fileEntry, pageContext, req, res, "/document_library/view",
+			true); 
+	}
+
+	public static String getBreadcrumbs(
+			DLFolder folder, DLFileEntry fileEntry, PageContext pageContext,
+			RenderRequest req, RenderResponse res, String action,
+			boolean maximize)
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(req, "groupId");
@@ -100,9 +121,11 @@ public class DLUtil {
 			foldersURL.setParameter("groupId", String.valueOf(groupId));
 		}
 		else {
-			foldersURL.setWindowState(WindowState.MAXIMIZED);
-
-			foldersURL.setParameter("struts_action", "/document_library/view");
+			if (maximize) {
+				foldersURL.setWindowState(WindowState.MAXIMIZED);
+			}
+			
+			foldersURL.setParameter("struts_action", action);
 		}
 
 		String foldersLink =

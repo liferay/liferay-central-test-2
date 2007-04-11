@@ -29,13 +29,23 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
-String folderId = BeanParamUtil.getString(folder, request, "folderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+String defaultFolderId = prefs.getValue("rootFolderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+String folderId = BeanParamUtil.getString(folder, request, "folderId", defaultFolderId);
+
+if ((folder == null) && (!defaultFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID))) {
+	folder = DLFolderLocalServiceUtil.getFolder(folderId);
+}
 
 List folderIds = new ArrayList();
 
 folderIds.add(folderId);
 
 DLFolderLocalServiceUtil.getSubfolderIds(folderIds, portletGroupId.longValue(), folderId);
+
+String tabsNames = "folders,my-documents,recent-documents";
+if (defaultFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+	tabsNames = "folders";
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -51,13 +61,13 @@ portletURL.setParameter("folderId", folderId);
 <input name="<portlet:namespace />folderIds" type="hidden" value="<%= StringUtil.merge(folderIds) %>">
 
 <liferay-ui:tabs
-	names="folders,my-documents,recent-documents"
+	names="<%= tabsNames %>"
 	url="<%= portletURL.toString() %>"
 />
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
-		<c:if test="<%= folder != null %>">
+		<c:if test="<%= showBreadcrumbs && (folder != null) %>">
 			<%= DLUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
 
 			<br><br>

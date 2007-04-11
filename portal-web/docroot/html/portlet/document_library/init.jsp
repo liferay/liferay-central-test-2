@@ -56,4 +56,30 @@
 
 <%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+if (portletResource.length() == 0) {
+	portletResource = portletDisplay.getId();
+}
+PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
+
+boolean showSearch = ParamUtil.getBoolean(request, "showSearch", GetterUtil.getBoolean(prefs.getValue("showSearch", "true")));
+boolean showBreadcrumbs = ParamUtil.getBoolean(request, "showBreadcrumbs", GetterUtil.getBoolean(prefs.getValue("showBreadcrumbs", "true")));
+boolean showSubfolders = ParamUtil.getBoolean(request, "showSubfolders", GetterUtil.getBoolean(prefs.getValue("showSubfolders", "true")));
+
+boolean showColumnDownloads = ParamUtil.getBoolean(request, "showColumnDownloads", GetterUtil.getBoolean(prefs.getValue("showColumnDownloads", "false")));
+boolean showColumnLocked = ParamUtil.getBoolean(request, "showColumnLocked", GetterUtil.getBoolean(prefs.getValue("showColumnLocked", "false")));
+boolean showColumnDate = ParamUtil.getBoolean(request, "showColumnDate", GetterUtil.getBoolean(prefs.getValue("showColumnDate", "true")));
+boolean showColumnSize = ParamUtil.getBoolean(request, "showColumnSize", GetterUtil.getBoolean(prefs.getValue("showColumnSize", "true")));
+
+int numberOfDocumentsPerPage = ParamUtil.getInteger(request, "numberOfDocumentsPerPage", GetterUtil.getInteger(prefs.getValue("numberOfDocumentsPerPage", Integer.toString(SearchContainer.DEFAULT_DELTA))));
+
+Portlet portlet = PortletLocalServiceUtil.getPortletById(themeDisplay.getCompanyId(), portletResource);
+String strutsPath = "/" + portlet.getStrutsPath();
+
+String rootFolderId = ParamUtil.getString(request, "rootFolderId", prefs.getValue("rootFolderId",  DLFolderImpl.DEFAULT_PARENT_FOLDER_ID));
+String rootFolderName = "";
+if (!rootFolderId.equals( DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+	rootFolderName = DLFolderLocalServiceUtil.getFolder(rootFolderId).getName();
+}
 %>

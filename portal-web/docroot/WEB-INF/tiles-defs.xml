@@ -334,6 +334,10 @@
 
 	<definition name="portlet.document_library" extends="portlet" />
 
+	<definition name="portlet.document_library.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/document_library/edit_configuration.jsp" />
+	</definition>
+
 	<definition name="portlet.document_library.edit_file_entry" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/edit_file_entry.jsp" />
 	</definition>
@@ -377,6 +381,22 @@
 
 	<definition name="portlet.document_library.view" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/view.jsp" />
+	</definition>
+
+	<!-- Document Library Display -->
+
+	<definition name="portlet.document_library_display" extends="portlet" />
+
+	<definition name="portlet.document_library_display.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/document_library/edit_configuration.jsp" />
+	</definition>
+
+	<definition name="portlet.document_library_display.view" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/view.jsp" />
+	</definition>
+
+	<definition name="portlet.document_library_display.search" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/search.jsp" />
 	</definition>
 
 	<!-- Enterprise Admin -->
@@ -1176,6 +1196,22 @@
 
 	<definition name="portlet.weather.view" extends="portlet.weather">
 		<put name="portlet_content" value="/portlet/weather/view.jsp" />
+	</definition>
+
+	<!-- Web Form -->
+
+	<definition name="portlet.webform" extends="portlet" />
+
+	<definition name="portlet.webform.view" extends="portlet.webform">
+		<put name="portlet_content" value="/portlet/webform/view.jsp" />
+	</definition>
+
+	<definition name="portlet.webform.error" extends="portlet.webform">
+		<put name="portlet_content" value="/portlet/webform/error.jsp" />
+	</definition>
+
+	<definition name="portlet.webform.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/webform/edit_configuration.jsp" />
 	</definition>
 
 	<!-- Web Proxy -->

@@ -2414,6 +2414,90 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>109</portlet-name>
+		<display-name>Web form</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<init-param>
+			<name>view-action</name>
+			<value>/webform/view</value>
+		</init-param>
+		<init-param>
+			<name>max-num-of-fields</name>
+			<value>10</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<portlet-preferences>
+			<preference>
+				<name>title</name>
+				<value>Suggestions</value>
+			</preference>
+			<preference>
+				<name>description</name>
+				<value>Send your suggestions filling the following fields</value>
+			</preference>
+			<preference>
+				<name>subject</name>
+				<value>Suggestions sent from the website</value>
+			</preference>
+			<preference>
+				<name>email</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>fieldLabel1</name>
+				<value>Name</value>
+			</preference>
+			<preference>
+				<name>fieldType1</name>
+				<value>text</value>
+			</preference>
+			<preference>
+				<name>fieldLabel2</name>
+				<value>Rate us</value>
+			</preference>
+			<preference>
+				<name>fieldType2</name>
+				<value>options</value>
+			</preference>
+			<preference>
+				<name>fieldOptions2</name>
+				<value>Good,Ok,Bad</value>
+			</preference>
+			<preference>
+				<name>fieldLabel3</name>
+				<value>Comments</value>
+			</preference>
+			<preference>
+				<name>fieldType3</name>
+				<value>textarea</value>
+			</preference>
+		</portlet-preferences>
+	</portlet>
+	<portlet>
+		<portlet-name>110</portlet-name>
+		<display-name>Document Library Display</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<init-param>
+			<name>view-action</name>
+			<value>/document_library_display/view</value>
+		</init-param>
+		<init-param>
+			<name>max-num-of-fields</name>
+			<value>10</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+	</portlet>
 	<custom-window-state>
 		<window-state>exclusive</window-state>
 	</custom-window-state>
