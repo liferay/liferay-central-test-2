@@ -56,13 +56,16 @@ boolean showTitle = ParamUtil.getBoolean(request, "showTitle");
 if (layoutFamilySet.size() >= depth) {
 	Layout[] layoutFamilyArray = (Layout[])layoutFamilySet.toArray(new Layout[0]);
 
-	Layout depthLevelLayout = layoutFamilyArray[layoutFamilyArray.length - depth];
-
-	long groupId = depthLevelLayout.getGroupId();
+	Layout depthLevelLayout = null;
+	if (depth > 0) {
+		depthLevelLayout = layoutFamilyArray[layoutFamilyArray.length - depth];
+	}
 
 	StringMaker sm = new StringMaker();
 
+	sm.append("<div class='navmenu'>");
 	_buildNavigation(depthLevelLayout, layout, layoutFamilySet, themeDisplay, 1, bulletStyle, showTitle, sm);
+	sm.append("</div>");
 %>
 
 	<%= sm.toString() %>
@@ -73,12 +76,22 @@ if (layoutFamilySet.size() >= depth) {
 
 <%!
 private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilySet, ThemeDisplay themeDisplay, int layoutLevel, int bulletStyle, boolean showTitle, StringMaker sm) throws Exception {
-	List layoutChildren = layout.getChildren();
+	List layoutChildren;
+	if (layout != null) {
+		layoutChildren = layout.getChildren();
+	}
+	else {
+		layoutChildren = LayoutLocalServiceUtil.getLayouts(selLayout.getOwnerId(), LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+	}
 
 	if (layoutChildren.size() > 0) {
 		if (layoutLevel == 1) {
-			String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
-			String target = PortalUtil.getLayoutTarget(layout);
+			String layoutURL = "";
+			String target = "";
+			if (layout != null) {
+				layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
+				target = PortalUtil.getLayoutTarget(layout);
+			}
 
 			if (showTitle) {
 				PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
@@ -94,11 +107,16 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 				sm.append("<a href=\"");
 			}
 
+			String layoutName = "";
+			if(layout != null){
+				layoutName = layout.getName(themeDisplay.getLocale());
+			}
+
 			sm.append(layoutURL);
 			sm.append("\" ");
 			sm.append(target);
 			sm.append("> ");
-			sm.append(layout.getName(themeDisplay.getLocale()));
+			sm.append(layoutName);
 			sm.append("</a>");
 
 			if (!showTitle) {
@@ -120,19 +138,40 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 					String layoutURL = PortalUtil.getLayoutURL(layoutChild, themeDisplay);
 					String target = PortalUtil.getLayoutTarget(layoutChild);
 
-					sm.append("<li>");
+					sm.append("<li ");
+					StringMaker classes = new StringMaker();
+					if (layoutFamilySet.contains(layoutChild) && layoutChild.getChildren().size() > 0) {
+						classes.append("open");
+					}
+					if (selLayout.getLayoutId().equals(layoutChild.getLayoutId())) {
+						classes.append(" selected'");
+					}
+					if (classes.length() > 0) {
+						sm.append("class='");
+						sm.append(classes.toString());
+						sm.append("'");
+					}
+
+					sm.append(">");
 					sm.append("<a href=\"");
 					sm.append(layoutURL);
 					sm.append("\" ");
+					if (classes.length() > 0) {
+						sm.append(" class='");
+						sm.append(classes.toString());
+						sm.append("' ");
+					}
 					sm.append(target);
 					sm.append("> ");
 					sm.append(layoutChild.getName(themeDisplay.getLocale()));
 					sm.append("</a>");
-					sm.append("</li>");
 
 					if (layoutFamilySet.contains(layoutChild)) {
 						_buildNavigation(layoutChild, selLayout, layoutFamilySet, themeDisplay, layoutLevel + 1, bulletStyle, showTitle, sm);
 					}
+
+					sm.append("</li>");
+
 				}
 			}
 
