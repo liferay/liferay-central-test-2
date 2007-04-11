@@ -1681,10 +1681,9 @@ public class ServiceBuilder {
 						String methodName = (String)itr.next();
 
 						sm.append("\t" + methodName + ": function(params, callback) {\n");
-						sm.append("\t\tparams.serviceParameters = Liferay.Service.getParameters(params);\n");
 						sm.append("\t\tparams.serviceClassName = this.serviceClassName;\n");
 						sm.append("\t\tparams.serviceMethodName = \"" + methodName + "\";\n\n");
-						sm.append("\t\t_$J.getJSON(Liferay.Service.url, params, callback);\n");
+						sm.append("\t\treturn Liferay.Service.ajax(params, callback);\n");
 						sm.append("\t}");
 
 						if (itr.hasNext()) {
@@ -5200,6 +5199,12 @@ public class ServiceBuilder {
 						sm.append("java.util.List");
 					}
 				}
+				else if (returnValueName.equals("com.liferay.portal.kernel.json.JSONArrayWrapper")) {
+					sm.append("JSONArray");
+				}
+				else if (returnValueName.equals("com.liferay.portal.kernel.json.JSONObjectWrapper")) {
+					sm.append("JSONObject");
+				}
 				else {
 					sm.append(returnValueName + returnValueDimension);
 				}
@@ -5290,6 +5295,12 @@ public class ServiceBuilder {
 					}
 					else if (entity.hasColumns() && returnValueName.equals("java.util.List")) {
 						sm.append("return " + entity.getName() + "JSONSerializer.toJSONArray(returnValue);");
+					}
+					else if (returnValueName.equals("com.liferay.portal.kernel.json.JSONArrayWrapper")) {
+						sm.append("return (JSONArray)returnValue.getValue();");
+					}
+					else if (returnValueName.equals("com.liferay.portal.kernel.json.JSONObjectWrapper")) {
+						sm.append("return (JSONObject)returnValue.getValue();");
 					}
 					else {
 						sm.append("return returnValue;");

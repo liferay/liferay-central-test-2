@@ -27,7 +27,7 @@
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<%= LanguageUtil.get(pageContext, "displayed-content-must-contain-the-following-tags.") %>
+<%= LanguageUtil.get(pageContext, "displayed-content-must-contain-the-following-tags") %>
 
 <br><br>
 

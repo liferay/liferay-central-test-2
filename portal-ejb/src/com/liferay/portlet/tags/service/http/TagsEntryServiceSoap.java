@@ -162,12 +162,12 @@ public class TagsEntryServiceSoap {
 		}
 	}
 
-	public static java.lang.String searchAutocomplete(
+	public static com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String[] properties, int begin, int end)
 		throws RemoteException {
 		try {
-			java.lang.String returnValue = TagsEntryServiceUtil.searchAutocomplete(companyId,
+			com.liferay.portal.kernel.json.JSONArrayWrapper returnValue = TagsEntryServiceUtil.searchAutocomplete(companyId,
 					name, properties, begin, end);
 
 			return returnValue;

@@ -103,8 +103,6 @@
 
 		<!-- Portal -->
 
-		<action path="/portal/autocomplete_tags_entries" type="com.liferay.portal.action.AutocompleteTagsEntriesAction" />
-
 		<action path="/portal/change_password" type="com.liferay.portal.action.ChangePasswordAction">
 			<forward name="portal.change_password" path="portal.change_password" />
 		</action>

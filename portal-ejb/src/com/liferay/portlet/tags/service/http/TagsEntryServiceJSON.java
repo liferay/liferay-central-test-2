@@ -121,14 +121,13 @@ public class TagsEntryServiceJSON {
 		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static java.lang.String searchAutocomplete(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String[] properties, int begin, int end)
+	public static JSONArray searchAutocomplete(java.lang.String companyId,
+		java.lang.String name, java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		java.lang.String returnValue = TagsEntryServiceUtil.searchAutocomplete(companyId,
+		com.liferay.portal.kernel.json.JSONArrayWrapper returnValue = TagsEntryServiceUtil.searchAutocomplete(companyId,
 				name, properties, begin, end);
 
-		return returnValue;
+		return (JSONArray)returnValue.getValue();
 	}
 
 	public static int searchCount(java.lang.String companyId,

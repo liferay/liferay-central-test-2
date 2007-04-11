@@ -106,8 +106,9 @@ public class TagsEntryServiceEJBImpl implements TagsEntryService, SessionBean {
 			properties, begin, end);
 	}
 
-	public java.lang.String searchAutocomplete(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties, int begin, int end)
+	public com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 

@@ -168,7 +168,7 @@ public class TagsEntryLocalServiceUtil {
 			end);
 	}
 
-	public static java.lang.String searchAutocomplete(
+	public static com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException {

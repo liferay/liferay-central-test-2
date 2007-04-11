@@ -28,7 +28,7 @@ import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsEntryService;
-
+import com.liferay.portal.kernel.json.JSONArrayWrapper;
 import java.util.List;
 
 /**
@@ -79,7 +79,7 @@ public class TagsEntryServiceImpl
 			companyId, name, properties, begin, end);
 	}
 
-	public String searchAutocomplete(
+	public JSONArrayWrapper searchAutocomplete(
 			String companyId, String name, String[] properties, int begin,
 			int end)
 		throws SystemException {

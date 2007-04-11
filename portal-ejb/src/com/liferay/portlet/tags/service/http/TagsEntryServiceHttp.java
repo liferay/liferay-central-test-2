@@ -324,7 +324,7 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
-	public static java.lang.String searchAutocomplete(
+	public static com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
 		HttpPrincipal httpPrincipal, java.lang.String companyId,
 		java.lang.String name, java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException {
@@ -367,7 +367,7 @@ public class TagsEntryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.lang.String)returnObj;
+			return (com.liferay.portal.kernel.json.JSONArrayWrapper)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

@@ -27,6 +27,9 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * <a href="Autocomplete.java.html"><b><i>View Source</i></b></a>
  *
@@ -34,6 +37,24 @@ import java.util.List;
  *
  */
 public class Autocomplete {
+
+	public static JSONArray arrayToJson(String[][] array) {
+		JSONArray jsonArray = new JSONArray();
+
+		for (int i = 0; i < array.length; i++) {
+			String text = array[i][0];
+			String value = array[i][1];
+
+			JSONObject jsonObj = new JSONObject();
+
+			jsonObj.put("text", text);
+			jsonObj.put("value", value);
+
+			jsonArray.put(jsonObj);
+		}
+
+		return jsonArray;
+	}
 
 	public static String arrayToXml(String[][] array) {
 		StringMaker sm = new StringMaker();
@@ -86,6 +107,12 @@ public class Autocomplete {
 		}
 
 		return array;
+	}
+
+	public static JSONArray listToJson(
+		List list, String textParam, String valueParam) {
+
+		return arrayToJson(listToArray(list, textParam, valueParam));
 	}
 
 	public static String listToXml(

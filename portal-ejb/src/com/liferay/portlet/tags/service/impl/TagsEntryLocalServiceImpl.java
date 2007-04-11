@@ -45,6 +45,8 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+import org.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONArrayWrapper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -226,7 +228,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			companyId, name, properties, begin, end);
 	}
 
-	public String searchAutocomplete(
+	public JSONArrayWrapper searchAutocomplete(
 			String companyId, String name, String[] properties, int begin,
 			int end)
 		throws SystemException {
@@ -234,7 +236,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		List list = TagsEntryFinder.findByC_N_P(
 			companyId, name, properties, begin, end);
 
-		return Autocomplete.listToXml(list, "name", "name");
+		return new JSONArrayWrapper(
+			Autocomplete.listToJson(list, "name", "name"));
 	}
 
 	public int searchCount(String companyId, String name, String[] properties)

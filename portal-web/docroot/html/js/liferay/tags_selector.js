@@ -23,7 +23,7 @@ Liferay.TagsSelector = new Class({
 
 		textInput.Autocomplete(
 			{
-				source: mainPath + '/portal/autocomplete_tags_entries',
+				source: instance._getTags,
 				delay: 0,
 				fx: {
 					type: 'slide',
@@ -73,6 +73,18 @@ Liferay.TagsSelector = new Class({
 		curTags.splice(id, 1);
 
 		instance._update(instance);
+	},
+
+	_getTags: function(data) {
+		return Liferay.Service.Tags.TagsEntry.searchAutocomplete(
+			{
+				companyId: themeDisplay.getCompanyId(),
+				name: "%" + data.value + "%",
+				properties: "",
+				begin: 0,
+				end: 20
+			}
+		);
 	},
 
 	_update: function(instance) {
