@@ -55,7 +55,8 @@ jQuery.iAuto = {
 	{
 		var subject = jQuery.iAuto.subject;
 		var subjectValue = jQuery.iAuto.getFieldValues(subject);
-		
+
+		var dataSource = subject.autoCFG.source;
 		var dataSourceType = subject.autoCFG.dataSourceType;
 		var isXML = subject.autoCFG.isXML;
 		
@@ -67,72 +68,26 @@ jQuery.iAuto = {
 				field: jQuery(subject).attr('name')||'field',
 				value: subjectValue.item
 			};
-
-			jQuery.ajax(
-				{
-					type: 'POST',
-					data: jQuery.param(data),
-					dataType: (isXML) ? 'xml' : 'json',
-					success: function(response)
+			if (typeof dataSource == 'string') {
+				jQuery.ajax(
 					{
-					
-					if (isXML) {
-						subject.autoCFG.lastSuggestion = jQuery('item',response);
-					} else {
-						subject.autoCFG.lastSuggestion = response;
+						type: 'POST',
+						data: jQuery.param(data),
+						dataType: (isXML) ? 'xml' : 'json',
+						success: function(response) {
+							jQuery.iAuto.handleData(response, subject, subjectValue, isXML);	
+						},
+						url : dataSource
 					}
-
-					size = subject.autoCFG.lastSuggestion.length;
-					if (size > 0) {
-						var toWrite = '';
-						
-						var iterator = function(nr)
-							{
-								var text, value;
-								if (isXML) {
-									text = jQuery('text', this).text();
-									value = jQuery('value', this).text();
-								} else {
-									text = this.text;
-									value = this.value;
-								}
-								toWrite += '<li rel="' + value + '" dir="' + nr + '" style="cursor: default;">' + text + '</li>';
-						};
-						
-						if (isXML) {
-							subject.autoCFG.lastSuggestion.each(iterator);
-						} else {
-							jQuery.each(response,iterator);
-						}
-						
-						if (subject.autoCFG.autofill) {
-							var valueToAdd;
-							
-							if (isXML) {
-								valueToAdd = jQuery('value', subject.autoCFG.lastSuggestion[0]).text();
-							} else {
-								valueToAdd = subject.autoCFG.lastSuggestion[0].value;
-							}
-							subject.value = subjectValue.pre + valueToAdd + subject.autoCFG.multipleSeparator + subjectValue.post;
-							jQuery.iAuto.selection(
-								subject, 
-								subjectValue.item.length != valueToAdd.length ? (subjectValue.pre.length + subjectValue.item.length) : valueToAdd.length,
-								subjectValue.item.length != valueToAdd.length ? (subjectValue.pre.length + valueToAdd.length) : valueToAdd.length
-							);
-						}
-
-						if (size > 0) {
-							jQuery.iAuto.writeItems(subject, toWrite);
-						} else {
-							jQuery.iAuto.clear();
-						}
-					} else {
-						jQuery.iAuto.clear();
-					}
-				},
-					url : subject.autoCFG.source
+				);
+			} else if(typeof dataSource == 'function') {
+				var returnedData = dataSource();
+				jQuery.iAuto.handleData(returnedData, subject, subjectValue, isXML);
+			} else if (dataSource.constructor == Array) {
+				if (dataSource[0].text != null && dataSource[0].value != null) {
+					jQuery.iAuto.handleData(dataSource, subject, subjectValue, isXML);
 				}
-			);
+			}
 		}
 	},
 	
@@ -411,14 +366,20 @@ jQuery.iAuto = {
 	},
 
 	applyOn: function(field, item, type)
-	{
+	{	
+		var dataSource = field.autoCFG.source;
+		
 		if (field.autoCFG[type]) {
 			var data = {};
-			childs = item.getElementsByTagName('*');
-			for(i=0; i<childs.length; i++){
-				data[childs[i].tagName] = childs[i].firstChild.nodeValue;
+			if (field.autoCFG.isXML) {
+				childs = item.getElementsByTagName('*');
+				for(i=0; i<childs.length; i++){
+					data[childs[i].tagName] = childs[i].firstChild.nodeValue;
+				}
+			} else {
+				data = item;
 			}
-			field.autoCFG[type].apply(field,[data]);
+			field.autoCFG[type].apply(field, [data]);
 		}
 	},
 	
@@ -552,17 +513,59 @@ jQuery.iAuto = {
 	}
 };
 
-jQuery.iAuto.dataSource = function() {
-	var subject = jQuery.iAuto.subject;
-	var subjectValue = jQuery.iAuto.getFieldValues(subject);
-	
-	var source = subject.autoCFG.source;
-	
-	if (typeof source == 'function') {
+jQuery.iAuto.handleData = function(response, subject, subjectValue, isXML) {
+	if (isXML) {
+		subject.autoCFG.lastSuggestion = jQuery('item',response);
+	} else {
+		subject.autoCFG.lastSuggestion = response;
+	}
+	size = subject.autoCFG.lastSuggestion.length;
+	if (size > 0) {
+		var toWrite = '';
+		
+		var iterator = function(nr)
+			{
+				var text, value;
+				if (isXML) {
+					text = jQuery('text', this).text();
+					value = jQuery('value', this).text();
+				} else {
+					text = this.text;
+					value = this.value;
+				}
+				toWrite += '<li rel="' + value + '" dir="' + nr + '" style="cursor: default;">' + text + '</li>';
+		};
+		
+		if (isXML) {
+			subject.autoCFG.lastSuggestion.each(iterator);
+		} else {
+			jQuery.each(response, iterator);
+		}
+
+		if (subject.autoCFG.autofill) {
+			var valueToAdd;
 			
-	} else if (typeof source == 'string') {
-			
-	
+			if (isXML) {
+				valueToAdd = jQuery('value', subject.autoCFG.lastSuggestion[0]).text();
+			} else {
+				valueToAdd = subject.autoCFG.lastSuggestion[0].value;
+			}
+			subject.value = subjectValue.pre + valueToAdd + subject.autoCFG.multipleSeparator + subjectValue.post;
+			jQuery.iAuto.selection(
+				subject, 
+				subjectValue.item.length != valueToAdd.length ? (subjectValue.pre.length + subjectValue.item.length) : valueToAdd.length,
+				subjectValue.item.length != valueToAdd.length ? (subjectValue.pre.length + valueToAdd.length) : valueToAdd.length
+			);
+		}
+
+		if (size > 0) {
+			jQuery.iAuto.writeItems(subject, toWrite);
+		} else {
+			jQuery.iAuto.clear();
+		}
+	} else {
+		jQuery.iAuto.clear();
 	}
 };
+
 jQuery.fn.Autocomplete = jQuery.iAuto.build;
