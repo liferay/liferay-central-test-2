@@ -116,7 +116,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		portletId = PortalUtil.getJsSafePortletName(portletId);
 
 		if (companyId.equals(UserImpl.DEFAULT)) {
-			throw new SystemException();
+			throw new SystemException(
+				"Company id should never be " + UserImpl.DEFAULT);
 		}
 
 		Portlet portlet = null;
