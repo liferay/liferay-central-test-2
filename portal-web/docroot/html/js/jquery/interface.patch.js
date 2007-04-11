@@ -510,6 +510,11 @@ jQuery.iAuto = {
 };
 
 jQuery.iAuto.handleData = function(response, subject, subjectValue, isXML) {
+	
+	if (response.length == 0) {
+		return;
+	}
+	
 	if (isXML) {
 		subject.autoCFG.lastSuggestion = jQuery('item',response);
 	} else {
