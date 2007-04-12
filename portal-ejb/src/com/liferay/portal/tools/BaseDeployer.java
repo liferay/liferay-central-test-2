@@ -435,6 +435,7 @@ public class BaseDeployer {
 		displayName = displayName.substring(0, displayName.length() - 4);
 
 		if (appServerType.startsWith("jboss") &&
+			Validator.isNotNull(jbossPrefix) &&
 			displayName.startsWith(jbossPrefix)) {
 
 			displayName = displayName.substring(1, displayName.length());
