@@ -520,6 +520,8 @@ public abstract class DBUtil {
 
 	protected static String ALTER_COLUMN_NAME = "alter_column_name ";
 
+	protected static String DROP_PRIMARY_KEY = "drop primary key";
+
 	protected static String[] REWORD_TEMPLATE = {
 		"@table@", "@old-column@", "@new-column@", "@type@", "@nullable@"
 	};
