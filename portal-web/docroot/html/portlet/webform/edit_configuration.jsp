@@ -130,9 +130,9 @@ int maxNumOfFields = GetterUtil.getInteger(webformPortletConfig.getInitParameter
 			</td>
 			<td>
 				<select name="<portlet:namespace/>fieldType<%=i%>" onchange="<portlet:namespace/>showOptions(this, this.form.<portlet:namespace/>fieldOptions<%=i%>)">
-					<option <%= (fieldType.equals("text"))?"selected":"" %> value="text">Texto</option>
-					<option <%= (fieldType.equals("textarea"))?"selected":"" %> value="textarea">Area de texto</option>
-					<option <%= (fieldType.equals("options"))?"selected":"" %> value="options">Opciones</option>
+					<option <%= (fieldType.equals("text"))?"selected":"" %> value="text"><%=LanguageUtil.get(pageContext, "text")%></option>
+					<option <%= (fieldType.equals("textarea"))?"selected":"" %> value="textarea"><%=LanguageUtil.get(pageContext, "text-box")%></option>
+					<option <%= (fieldType.equals("options"))?"selected":"" %> value="options"><%=LanguageUtil.get(pageContext, "options")%></option>
 				</select>
 			</td>
 		</tr>

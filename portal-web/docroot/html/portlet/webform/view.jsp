@@ -81,6 +81,6 @@ for (int i = 1; i <= 10; i++) {
 }
 %>
 
-<input type="submit" value="Enviar"/>
+<input type="submit" value="<%=LanguageUtil.get(pageContext, "send")%>"/>
 
 </form>
