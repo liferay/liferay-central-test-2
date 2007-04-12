@@ -60,8 +60,8 @@ portletURL.setParameter("folderId", folderId);
 <input name="<portlet:namespace />folderIds" type="hidden" value="<%= StringUtil.merge(folderIds) %>">
 
 <c:if test="<%= showBreadcrumbs && (folder != null) %>">
-	<%= StringUtil.replace(DLUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse, "/document_library_display/view", false)) %>
-
+	<%= DLUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse, "/document_library_display/view", false) %>
+	
 	<br><br>
 </c:if>
 
