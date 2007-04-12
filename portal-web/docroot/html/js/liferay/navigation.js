@@ -325,6 +325,8 @@ Liferay.Navigation = new Class({
 					currentTab.show();
 
 					enterPage.remove();
+					
+					jQuery(document).attr('title', name);
 				}
 			}
 			else {
