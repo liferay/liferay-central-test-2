@@ -35,6 +35,7 @@
 					<span class="note-color blue"></span>
 					<span class="note-color red"></span>
 				</td>
+
 				<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
 					<td>
 						<a border="0" class="close-note" href="<%= portletDisplay.getURLClose() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" /></a>
@@ -65,9 +66,9 @@
 								type: 'POST',
 								url: '<%= themeDisplay.getPathMain() %>/quick_note/save',
 								data: {
-									color: bgColor,
-									plid: '<%= plid %>',
-									portletId: '<%= portletDisplay.getId() %>'
+									p_l_id: '<%= plid %>',
+									portletId: '<%= portletDisplay.getId() %>',
+									color: bgColor
 								}
 							}
 						);
@@ -83,9 +84,9 @@
 								{
 									url: '<%= themeDisplay.getPathMain() %>/quick_note/save',
 									data: {
-										data: newValue,
-										plid: '<%= plid %>',
-										portletId: '<%= portletDisplay.getId() %>'
+										p_l_id: '<%= plid %>',
+										portletId: '<%= portletDisplay.getId() %>',
+										data: newValue
 									}
 								}
 							);
