@@ -88,6 +88,30 @@ ul.gamma .tree-item-hover {
 	padding: 5px;
 }
 
+.toggle-expand {
+	padding-bottom: 10px;
+}
+
+.toggle-expand a {
+	padding: 2px 0 2px 20px;
+}
+
+#lfr-expand {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/trees/expand_all.png) no-repeat 0 50%;
+}
+
+#lfr-collapse {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/trees/collapse_all.png) no-repeat 0 50%;
+}
+
+/* ---------- Portlets ---------- */
+
+/* ---------- Alfresco content ---------- */
+.portlet-alfresco-content.preview {
+	border: 2px solid #FF0000; 
+	padding: 8px;
+}
+
 /* ---------- Quick note ---------- */
 
 .portlet-quick-note {

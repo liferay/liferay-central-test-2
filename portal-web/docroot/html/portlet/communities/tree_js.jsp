@@ -48,7 +48,7 @@
 		// position
 
 		if (selPlid.equals(objId)) {
-			name = "<strong>" + name + "</strong>";
+			name = "<strong>" + UnicodeFormatter.toString(name) + "</strong>";
 		}
 
 		nodeValues[4] = name;
@@ -70,7 +70,7 @@
 		layoutArray[<%= i %>] = {
 			depth: '<%= depth %>',
 			id: '<%= nodeValues[0]  %>',
-			img: '<%= name %>',
+			img: '<%= nodeValues[4] %>',
 			ls: '<%= nodeValues[2] %>',
 			href: 'javascript: self.location = \'<%= Http.encodeURL(portletURL.toString()) %>&<portlet:namespace />selPlid=<%= objId %>\';',
 			parentId: '<%= nodeValues[1] %>',
