@@ -57,7 +57,7 @@ public class DLUtil {
 		throws Exception {
 		return getBreadcrumbs(
 			folderId, name, pageContext, req, res, "/document_library/view",
-			true); 
+			true);
 	}
 
 	public static String getBreadcrumbs(
@@ -93,7 +93,7 @@ public class DLUtil {
 		throws Exception {
 		return getBreadcrumbs(
 			folder, fileEntry, pageContext, req, res, "/document_library/view",
-			true); 
+			true);
 	}
 
 	public static String getBreadcrumbs(
@@ -124,7 +124,7 @@ public class DLUtil {
 			if (maximize) {
 				foldersURL.setWindowState(WindowState.MAXIMIZED);
 			}
-			
+
 			foldersURL.setParameter("struts_action", action);
 		}
 

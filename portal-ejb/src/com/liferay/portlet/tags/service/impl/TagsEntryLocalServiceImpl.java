@@ -26,6 +26,7 @@ import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.json.JSONArrayWrapper;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -45,8 +46,6 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import org.json.JSONArray;
-import com.liferay.portal.kernel.json.JSONArrayWrapper;
 
 import java.util.ArrayList;
 import java.util.Date;

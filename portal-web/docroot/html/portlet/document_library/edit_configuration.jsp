@@ -116,4 +116,3 @@ String redirect = ParamUtil.getString(request, "redirect");
 <input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';" class="button">
 
 </form>
-

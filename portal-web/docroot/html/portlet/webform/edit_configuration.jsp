@@ -160,4 +160,3 @@ int maxNumOfFields = GetterUtil.getInteger(webformPortletConfig.getInitParameter
 <input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';" class="portlet-form-button">
 
 </form>
-
