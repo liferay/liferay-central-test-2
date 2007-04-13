@@ -334,7 +334,7 @@ var Mail = {
 			for (var i = sArray.length - 1; i >= 0; i--) {
 				var msObj = sArray[i];
 				if (msObj != null && msObj.selected) {
-					foundLast = msObj
+					foundLast = msObj;
 					break;
 				}
 			}
