@@ -78,7 +78,7 @@ var Tree = new Class({
 			var treeEl = tree.get(0);
 
 			var mainLi  = jQuery(
-				'<li>' +
+				'<li class="root-container">' +
 					'<a href="' + node.href + '">' + 
 						instance.generateImage(icons.root) + 
 						'<span>&nbsp;' + node.name + '</span>' +
@@ -94,7 +94,10 @@ var Tree = new Class({
 
 			var treeBranches = jQuery('li.tree-item', treeEl);
 
-			tree.prepend('<li class="toggle-expand"><a href="javascript: ;" id="lfr-expand">' + Liferay.Language.get('expand-all') + '</a> | <a href="javascript:;" id="lfr-collapse">' + Liferay.Language.get('collapse-all') + '</a></li>');
+			var expandAll = Liferay.Language.get('expand-all');
+			var collapseAll = Liferay.Language.get('collapse-all');
+
+			tree.prepend('<li class="toggle-expand"><a href="javascript:;" id="lfr-expand">' + expandAll + '</a> | <a href="javascript:;" id="lfr-collapse">' + collapseAll + '</a></li>');
 
 			tree.find('#lfr-expand').click(
 				function() {
@@ -155,8 +158,9 @@ var Tree = new Class({
 			);
 
 			//Set drop zones
+			var droppableLinks = jQuery('li a', treeEl).not('#lfr-collapse, #lfr-expand');
 
-			jQuery('li a', treeEl).Droppable(
+			droppableLinks.Droppable(
 				{
 					accept: 'tree-item',
 					activeclass: '',
@@ -299,11 +303,13 @@ var Tree = new Class({
 
 		var icons = instance.icons;
 		var isChild = false;
+		
+		var droppedLink = jQuery(obj);
 
 		// Look to see if the dropped item is being dropped on one of its own
 		// descendents
 
-		jQuery(obj).parents('li.tree-item').each(
+		droppedLink.parents('li.tree-item').each(
 			function () {
 				if (this == item) {
 					isChild = true;
@@ -320,6 +326,8 @@ var Tree = new Class({
 			window.clearTimeout(obj.expanderTime);
 			obj.expanded = false;
 		}
+		
+		var currentBranch = droppedLink.parent();
 
 		var subBranch = jQuery('ul', obj.parentNode);
 
@@ -339,12 +347,15 @@ var Tree = new Class({
 			jQuery(oldParent).remove();
 		}
 
-		var expander = jQuery('img.expand-image', obj.parentNode).filter(':first');
-		var expanderSrc = expander.attr('src');
+		if (currentBranch.is('.tree-item')) {
+			var expander = jQuery('img.expand-image', obj.parentNode).filter(':first');
+			var expanderSrc = expander.attr('src');
 
-		if (expanderSrc.indexOf('spacer') > -1) {
-			expander.attr('src', icons.minus);
+			if (expanderSrc.indexOf('spacer') > -1) {
+				expander.attr('src', icons.minus);
+			}
 		}
+		instance._updateNavigation(item, obj);
 	},
 
 	_onHover: function(item, obj) {
@@ -382,6 +393,47 @@ var Tree = new Class({
 		if (obj.expanderTime) {
 			window.clearTimeout(obj.expanderTime);
 			obj.expanded = false;
+		}
+	},
+	
+	_updateNavigation: function(item, obj) {
+		var navigation = jQuery('#navigation > ul');
+		
+		if (navigation.length && navigation.parent().is('.sort-pages')) {
+			
+			var liItems = navigation.find('> li');
+			
+			var droppedItem = jQuery(item);			
+			var tree = droppedItem.parent();
+			var droppedName = droppedItem.find('span:first').text();
+			var newParent = jQuery(obj).parents('li:first');
+			
+			var liChild = liItems.find('span').not('.delete-tab');
+
+			liChild = liChild.filter(
+				function() {
+					var currentItem = jQuery(this);
+					return (currentItem.text() == droppedName);
+				}
+			);
+			
+			var treeItems = tree.find('> li');
+			
+			var newIndex = treeItems.index(item);
+			
+			if (liChild.length > 0) {
+				var newSibling = liItems.eq(newIndex);
+				var parentLi = liChild.parents('li:first');
+				
+				if (!newParent.is('.tree-item')) {
+					newSibling.after(parentLi);
+				} else {
+					//TODO: add parsing to move child elementes around
+				}
+			}
+			
+			
+			
 		}
 	}
 });

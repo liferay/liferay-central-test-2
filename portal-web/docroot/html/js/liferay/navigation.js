@@ -17,7 +17,7 @@ Liferay.Navigation = new Class({
 
 		instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
 
-		var items = instance._navBlock.find('li');
+		var items = instance._navBlock.find('> ul > li');
 
 		items.each(
 			function(i) {
@@ -260,6 +260,7 @@ Liferay.Navigation = new Class({
 					tolerance: 'pointer',
 					onStop: function() {
 						instance._saveSortables(this);
+						instance._updateTree(this);
 					}
 				}
 			);
@@ -326,7 +327,13 @@ Liferay.Navigation = new Class({
 
 					enterPage.remove();
 
-					jQuery(document).attr('title', name);
+					var oldTitle = jQuery(document).attr('title');
+					
+					var regex = new RegExp(oldName, 'g');
+					
+					newTitle = oldTitle.replace(regex, name);
+					
+					jQuery(document).attr('title', newTitle);
 				}
 			}
 			else {
@@ -403,6 +410,39 @@ Liferay.Navigation = new Class({
 				url: instance._updateURL
 			}
 		);
+	},
+
+	_updateTree: function(obj) {
+		var instance = this;
+		
+		//TODO: add ability to update tree on ADD and DELETE
+		
+		var tree = jQuery('div[@id$=tree-output]');
+		
+		if (tree.length > 0) {
+				var droppedName = jQuery('span:eq(0)', obj).text();
+				var li = tree.find('> ul > li > ul > li');
+
+				var liChild = li.find('span:first').filter(
+					function() {
+						return (jQuery(this).text() == droppedName);
+					}
+				);
+
+				liChild = liChild.parents('li:first');
+
+				var droppedIndex = jQuery(obj).parent().find('> li').index(obj);
+
+				var newSibling = li.eq(droppedIndex);
+				newSibling.after(liChild);
+
+				var newIndex = li.index(liChild[0]);
+
+				if (newIndex > droppedIndex || droppedIndex == 0) {
+					newSibling = li.eq(droppedIndex);
+					newSibling.before(liChild);
+				}
+		}
 	},
 
 	_isSortable: false,
