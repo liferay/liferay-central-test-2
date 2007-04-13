@@ -25,7 +25,7 @@
 <script src="<%= themeDisplay.getPathJavaScript() %>/liferay/tree.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-	layoutIcons = {
+	var <portlet:namespace />layoutIcons = {
 		minus: '<%= themeDisplay.getPathThemeImages() %>/trees/minus.png',
 		page: '<%= themeDisplay.getPathThemeImages() %>/trees/page.png',
 		plus: '<%= themeDisplay.getPathThemeImages() %>/trees/plus.png',
@@ -33,7 +33,7 @@
 		spacer: '<%= themeDisplay.getPathThemeImages() %>/trees/spacer.png'
 	};
 
-	var layoutArray = [];
+	var <portlet:namespace />layoutArray = [];
 
 	<%
 	for (int i = 0; i < layoutList.size(); i++) {
@@ -42,13 +42,13 @@
 		String[] nodeValues = StringUtil.split(layoutDesc, "|");
 
 		String objId = nodeValues[3];
-		String name = nodeValues[4];
+		String name = UnicodeFormatter.toString(nodeValues[4]);
 
 		// Set a better name and remove depth because href should be in the 5th
 		// position
 
 		if (selPlid.equals(objId)) {
-			name = "<strong>" + UnicodeFormatter.toString(name) + "</strong>";
+			name = "<strong>" + name + "</strong>";
 		}
 
 		nodeValues[4] = name;
@@ -67,7 +67,7 @@
 		}
 	%>
 
-		layoutArray[<%= i %>] = {
+		<portlet:namespace />layoutArray[<%= i %>] = {
 			depth: '<%= depth %>',
 			id: '<%= nodeValues[0]  %>',
 			img: '<%= nodeValues[4] %>',

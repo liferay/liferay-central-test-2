@@ -389,8 +389,8 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						new Tree(
 							{
 								className: "gamma",
-								icons: layoutIcons,
-								nodes: layoutArray,
+								icons: <portlet:namespace />layoutIcons,
+								nodes: <portlet:namespace />layoutArray,
 								openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, "layoutsTree") %>',
 								outputId: '#<%= renderResponse.getNamespace() %>tree-output',
 								treeId: "layoutsTree"

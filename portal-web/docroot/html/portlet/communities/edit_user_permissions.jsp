@@ -327,8 +327,8 @@ Assign permissions to users.
 				%>
 
 				<liferay-ui:input-move-boxes
-					leftTitle='<%= LanguageUtil.get(pageContext, "current") %>'
-					rightTitle='<%= LanguageUtil.get(pageContext, "available") %>'
+					leftTitle="current"
+					rightTitle="available"
 					leftBoxName="current_actions"
 					rightBoxName="available_actions"
 					leftList="<%= leftList %>"
