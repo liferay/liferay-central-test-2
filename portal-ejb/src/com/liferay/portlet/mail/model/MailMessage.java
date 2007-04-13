@@ -216,7 +216,7 @@ public class MailMessage {
 	}
 
 	private static final String[] _LINK_REGEXP = {
-		"([^>]_a-z0-9-=\"'/])" +
+		"([^]_a-z0-9-=\"'/])" +
 			"((https?|ftp|gopher|news|telnet)://|www\\.)" +
 			"([^\\s\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]*)" +
 			"((\\.[^\\s\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]+)*)",
