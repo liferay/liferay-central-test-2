@@ -251,5 +251,35 @@ public class LayoutServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.LayoutSoap updateParentLayoutId(
+		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String parentLayoutId) throws RemoteException {
+		try {
+			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateParentLayoutId(layoutId,
+					ownerId, parentLayoutId);
+
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutSoap updatePriority(
+		java.lang.String layoutId, java.lang.String ownerId, int priority)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updatePriority(layoutId,
+					ownerId, priority);
+
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(LayoutServiceSoap.class);
 }

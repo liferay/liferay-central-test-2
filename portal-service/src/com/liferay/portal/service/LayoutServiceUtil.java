@@ -176,4 +176,24 @@ public class LayoutServiceUtil {
 
 		return layoutService.updateName(layoutId, ownerId, name, languageId);
 	}
+
+	public static com.liferay.portal.model.Layout updateParentLayoutId(
+		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String parentLayoutId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		return layoutService.updateParentLayoutId(layoutId, ownerId,
+			parentLayoutId);
+	}
+
+	public static com.liferay.portal.model.Layout updatePriority(
+		java.lang.String layoutId, java.lang.String ownerId, int priority)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		return layoutService.updatePriority(layoutId, ownerId, priority);
+	}
 }

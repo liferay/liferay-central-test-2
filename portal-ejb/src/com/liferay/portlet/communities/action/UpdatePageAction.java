@@ -97,6 +97,9 @@ public class UpdatePageAction extends JSONAction {
 		else if (cmd.equals("name")) {
 			updateName(req);
 		}
+		else if (cmd.equals("parent_layout_id")) {
+			updateParentLayoutId(req);
+		}
 		else if (cmd.equals("priority")) {
 			updatePriority(req);
 		}
@@ -164,7 +167,18 @@ public class UpdatePageAction extends JSONAction {
 		String name = ParamUtil.getString(req, "name");
 		String languageId = ParamUtil.getString(req, "languageId");
 
-		LayoutLocalServiceUtil.updateName(layoutId, ownerId, name, languageId);
+		LayoutServiceUtil.updateName(layoutId, ownerId, name, languageId);
+	}
+
+	protected void updateParentLayoutId(HttpServletRequest req)
+		throws Exception {
+
+		String layoutId = ParamUtil.getString(req, "layoutId");
+		String ownerId = ParamUtil.getString(req, "ownerId");
+		String parentLayoutId = ParamUtil.getString(req, "parentLayoutId");
+
+		LayoutServiceUtil.updateParentLayoutId(
+			layoutId, ownerId, parentLayoutId);
 	}
 
 	protected void updatePriority(HttpServletRequest req) throws Exception {
@@ -172,7 +186,7 @@ public class UpdatePageAction extends JSONAction {
 		String ownerId = ParamUtil.getString(req, "ownerId");
 		int priority = ParamUtil.getInteger(req, "priority");
 
-		LayoutLocalServiceUtil.updatePriority(layoutId, ownerId, priority);
+		LayoutServiceUtil.updatePriority(layoutId, ownerId, priority);
 	}
 
 }

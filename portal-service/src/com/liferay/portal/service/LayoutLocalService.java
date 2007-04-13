@@ -165,6 +165,12 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.Layout updateParentLayoutId(
+		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String parentLayoutId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.Layout updatePriority(
 		java.lang.String layoutId, java.lang.String ownerId, int priority)
 		throws com.liferay.portal.SystemException, 

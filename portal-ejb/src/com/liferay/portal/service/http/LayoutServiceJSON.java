@@ -187,4 +187,24 @@ public class LayoutServiceJSON {
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
+
+	public static JSONObject updateParentLayoutId(java.lang.String layoutId,
+		java.lang.String ownerId, java.lang.String parentLayoutId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateParentLayoutId(layoutId,
+				ownerId, parentLayoutId);
+
+		return LayoutJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject updatePriority(java.lang.String layoutId,
+		java.lang.String ownerId, int priority)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updatePriority(layoutId,
+				ownerId, priority);
+
+		return LayoutJSONSerializer.toJSONObject(returnValue);
+	}
 }

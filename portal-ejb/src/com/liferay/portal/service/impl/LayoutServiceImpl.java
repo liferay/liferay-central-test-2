@@ -197,4 +197,25 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			layoutId, ownerId, name, languageId);
 	}
 
+	public Layout updateParentLayoutId(
+			String layoutId, String ownerId, String parentLayoutId)
+		throws PortalException, SystemException {
+
+		LayoutPermission.check(
+			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
+
+		return LayoutLocalServiceUtil.updateParentLayoutId(
+			layoutId, ownerId, parentLayoutId);
+	}
+
+	public Layout updatePriority(String layoutId, String ownerId, int priority)
+		throws PortalException, SystemException {
+
+		LayoutPermission.check(
+			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
+
+		return LayoutLocalServiceUtil.updatePriority(
+			layoutId, ownerId, priority);
+	}
+
 }

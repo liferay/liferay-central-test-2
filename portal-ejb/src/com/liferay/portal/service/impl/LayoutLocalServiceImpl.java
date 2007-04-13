@@ -920,6 +920,28 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layout;
 	}
 
+	public Layout updateParentLayoutId(
+			String layoutId, String ownerId, String parentLayoutId)
+		throws PortalException, SystemException {
+
+		parentLayoutId = getParentLayoutId(ownerId, parentLayoutId);
+
+		validateParentLayoutId(layoutId, ownerId, parentLayoutId);
+
+		Layout layout = LayoutUtil.findByPrimaryKey(
+			new LayoutPK(layoutId, ownerId));
+
+		if (!parentLayoutId.equals(layout.getParentLayoutId())) {
+			layout.setPriority(getNextPriority(ownerId, parentLayoutId));
+		}
+
+		layout.setParentLayoutId(parentLayoutId);
+
+		LayoutUtil.update(layout);
+
+		return layout;
+	}
+
 	public Layout updatePriority(String layoutId, String ownerId, int priority)
 		throws PortalException, SystemException {
 
