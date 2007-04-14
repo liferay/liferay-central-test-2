@@ -184,11 +184,11 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			}
 
 			#portlet-mail-drag-indicator {
-				color: <%= colorScheme.getLayoutBg() %>;
+				background: #fff;
+				border: 1px solid #000;
 				font-weight: bold;
 				padding: 2px 5px 2px 15px;
 				position: absolute;
-				background-color: <%= colorScheme.getLayoutTabSelectedBg() %>;
 				cursor: pointer;
 			}
 
@@ -336,7 +336,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			}
 
 			.portlet-mail-msgs-title {
-				background-color: <%= colorScheme.getLayoutTabBg() %>;
+				background: #DCDCDC;
 			}
 
 			#portlet-mail-msgs-from-handle {

@@ -536,6 +536,38 @@ Liferay.Util = {
 		if (returnState) {
 			return hidden;
 		}
+	},
+
+	toJSONObject: function(s) {
+		return eval("(" + s + ")");
+	},
+
+	toJSONString: function (s) {
+		var rt = s;
+		var m = {
+			'\b': '\\b',
+			'\t': '\\t',
+			'\n': '\\n',
+			'\f': '\\f',
+			'\r': '\\r',
+			'"' : '\\"',
+			'\\': '\\\\'
+		};
+
+		if (/["\\\x00-\x1f]/.test(s)) {
+			rt = s.replace(/([\x00-\x1f\\"])/g, function(a, b) {
+				var c = m[b];
+				if (c) {
+					return c;
+				}
+				c = b.charCodeAt();
+				return '\\u00' +
+					Math.floor(c / 16).toString(16) +
+					(c % 16).toString(16);
+			});
+		}
+
+        return rt;
 	}
 };
 
@@ -619,10 +651,12 @@ LinkedList.prototype.add = function(obj) {
 		obj.listInfo.prev = this.tail;
 		this.tail = obj;
 	}
+	
+	obj.listInfo.listObj = this;
 };
 
 LinkedList.prototype.remove = function(obj) {
-	if (this.head) {
+	if (obj.listInfo.listObj == this && this.head) {
 		var next = obj.listInfo.next;
 		var prev = obj.listInfo.prev;
 
@@ -632,10 +666,10 @@ LinkedList.prototype.remove = function(obj) {
 		if (prev) {
 			prev.listInfo.next = next;
 		}
-		if (this.head = obj) {
+		if (this.head == obj) {
 			this.head = next;
 		}
-		if (this.tail = obj) {
+		if (this.tail == obj) {
 			this.tail = prev;
 		}
 	}

@@ -188,6 +188,7 @@
 /* ---------- Text in a selected cell range ---------- */
 
 .portlet-section-selected {
+	background: #EEE;
 }
 
 /* ---------- Text of a subheading ---------- */

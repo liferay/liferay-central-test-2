@@ -118,7 +118,7 @@
 
 <script type="text/javascript">
 	function showLayoutTemplates() {
-		var message = Alerts.fireMessageBox(
+		var message = Liferay.Popup(
 			{
 				width: 700,
 				modal: true,

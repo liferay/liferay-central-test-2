@@ -48,7 +48,7 @@
 	}
 
 	function openSessionWarning() {
-		var message = Alerts.fireMessageBox({
+		var message = Liferay.Popup({
 				modal: true,
 				width: 300
 			});
@@ -65,7 +65,7 @@
 
 		if (warningText) {
 			warningText.innerHTML = "<%= UnicodeLanguageUtil.get(pageContext, "warning-due-to-inactivity-your-session-has-expired") %>";
-			document.getElementById("ok_btn").onclick = function() { Alerts.killAlert(this); window.location = "<%= themeDisplay.getURLHome() %>";};
+			document.getElementById("ok_btn").onclick = function() { Liferay.Popup.close(this); window.location = "<%= themeDisplay.getURLHome() %>";};
 			document.getElementById("cancel_btn").style.display = "none";
 
 			loadPage("<%= themeDisplay.getPathMain() %>/portal/expire_session");

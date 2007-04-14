@@ -6,6 +6,13 @@
 	};
 	
 	$.fn.lResizeBind = $.fn.lDragBind;
+	
+	$.fn.lResizeHandleRule = function(options) {
+		this.each(function() {
+			options.handle = this;
+			$.lResize.handleRule(options);
+		});
+	}
 
 	$.lResize = function(container, options) {
 		/* OPTIONS
@@ -36,26 +43,49 @@
 			this.mode = mode;
 		},
 		
+		handleRule: function(options) {
+			var handle = options.handle;
+			
+			if (typeof handle == "string") {
+				handle = $(handle);
+			}
+			
+			var settings = handle.resizeSettings;
+
+			if (!settings) {
+				$.lResize.create(settings.container, settings)
+			}
+			else {
+				settings.resizeRules.push(new $.lResize.resizeRule(
+					settings.container, settings.direction, settings.mode));
+			}
+		},
+
 		bind: function(container, type, fn) {
 			$.lDrag.bind(container, type, fn);
 		},
 
 		create: function(container, options) {
 			if (options.handle && options.direction && options.mode) {
+    			if (typeof options.handle == "string") {
+    				options.handle = $(options.handle)[0];
+    			}
+    			
 				var handle = options.handle;
 				
 				if (!handle.resizeSettings) {
-					handle.resizeSettings = new Object();
+					handle.resizeSettings = options;
 				}
 				
 				var settings = handle.resizeSettings;
 			
-				if (!handle.dragSettings) {
+				if (!handle.dragSettings || !handle.dragSettings.isResizeHandle) {
 					$.lDrag.create(handle, {
 						onStart: $.lResize.onMouseDown,
 						onMove: $.lResize.onResize,
 						onComplete: $.lResize.onMouseUp,
-						noDrag: !options.drag
+						noDrag: !options.drag,
+						isResizeHandle: true
 					});
 				}
 				

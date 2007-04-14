@@ -378,11 +378,11 @@ var Mail = {
 			if (folder.newCount > 0) {
 				newCount.innerHTML = "&nbsp;(" + folder.newCount + ")";
 			}
-			newCount.className = "font-small"
+			newCount.className = "font-small";
 			
 			folderName.innerHTML = folder.name;
 			folderName.appendChild(newCount);
-			folderName.href = "javascript:void(0)"
+			folderName.href = "javascript:void(0)";
 			folderName.onclick = Mail.onFolderSelect;
 			
 			folderItem.folder = folder;
@@ -555,6 +555,7 @@ var Mail = {
 		Mail.TRASH_NAME = trash;
 		Mail.DEFAULT_FOLDERS = new Array(inbox, drafts, sent, spam, trash);
 
+/*
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderHandle = document.getElementById("portlet-mail-handle");
 		var msgsPane = document.getElementById("portlet-mail-msgs-pane");
@@ -581,37 +582,143 @@ var Mail = {
 		var msgsSize = document.getElementById("portlet-mail-msgs-size");
 		
 		var mailBottomHandle = document.getElementById("portlet-mail-bottom-handle");
+		*/
 		
-		var mainMailGroup = Resize.createHandle(folderHandle, null, Mail.updateFolderWidth);
-		mainMailGroup.addRule(new ResizeRule(folderPane, Resize.HORIZONTAL, Resize.ADD));
-		mainMailGroup.addRule(new ResizeRule(previewBox, Resize.HORIZONTAL, Resize.SUBTRACT));
-		mainMailGroup.addRule(new ResizeRule(detailedPane, Resize.HORIZONTAL, Resize.SUBTRACT));
-		mainMailGroup.addRule(new ResizeRule(msgHeader, Resize.HORIZONTAL, Resize.SUBTRACT));
+		/* Vertical main folder bar */
+		_$J("#portlet-mail-folder-pane").lResize({
+			handle: "#portlet-mail-handle",
+			direction: "horizontal",
+			mode: "add",
+			onComplete: Mail.updateFolderWidth
+		});
+
+		_$J("#portlet-mail-msgs-preview").lResize({
+			handle: "#portlet-mail-handle",
+			direction: "horizontal",
+			mode: "subtract"
+		});
 		
-		var msgsGroup = Resize.createHandle(previewHandle, null, Mail.updatePreviewHeight);
-		msgsGroup.addRule(new ResizeRule(previewPane, Resize.VERTICAL, Resize.ADD));
-		msgsGroup.addRule(new ResizeRule(detailedFrame, Resize.VERTICAL, Resize.SUBTRACT));
+		_$J("#portlet-mail-msg-detailed-pane").lResize({
+			handle: "#portlet-mail-handle",
+			direction: "horizontal",
+			mode: "subtract"
+		});
+
+		_$J("#portlet-mail-msg-header").lResize({
+			handle: "#portlet-mail-handle",
+			direction: "horizontal",
+			mode: "subtract"
+		});
 		
-		var fromGroup = Resize.createHandle(msgsTitleFromHandle, null, Mail.updateFromWidth);
-		fromGroup.addRule(new ResizeRule(msgsTitleFrom, Resize.HORIZONTAL, Resize.ADD));
-		fromGroup.addRule(new ResizeRule(msgsFrom, Resize.HORIZONTAL, Resize.ADD));
-		fromGroup.addRule(new ResizeRule(msgsTitleSubject, Resize.HORIZONTAL, Resize.SUBTRACT));
-		fromGroup.addRule(new ResizeRule(msgsSubject, Resize.HORIZONTAL, Resize.SUBTRACT));
+		/* Horizontal message bar */
+		_$J("#portlet-mail-msgs-preview-pane").lResize({
+			handle: "#portlet-mail-msgs-handle",
+			direction: "vertical",
+			mode: "add",
+			onComplete: Mail.updatePreviewHeight
+		});
+
+		_$J("#portlet-mail-msg-detailed-frame").lResize({
+			handle: "#portlet-mail-msgs-handle",
+			direction: "vertical",
+			mode: "subtract"
+		});
+
+		/* Preview headers - From */
+		_$J("#portlet-mail-msgs-title-from").lResize({
+			handle: "#portlet-mail-msgs-from-handle",
+			direction: "horizontal",
+			mode: "add",
+			onComplete: Mail.updateFromWidth
+		});
 		
-		var subjectGroup = Resize.createHandle(msgsTitleSubjectHandle, null, Mail.updateSubjectWidth);
-		subjectGroup.addRule(new ResizeRule(msgsTitleSubject, Resize.HORIZONTAL, Resize.ADD));
-		subjectGroup.addRule(new ResizeRule(msgsSubject, Resize.HORIZONTAL, Resize.ADD));
-		subjectGroup.addRule(new ResizeRule(msgsTitleReceived, Resize.HORIZONTAL, Resize.SUBTRACT));
-		subjectGroup.addRule(new ResizeRule(msgsReceived, Resize.HORIZONTAL, Resize.SUBTRACT));
+		_$J("#portlet-mail-msgs-from").lResize({
+			handle: "#portlet-mail-msgs-from-handle",
+			direction: "horizontal",
+			mode: "add"
+		});
 		
-		var receivedGroup = Resize.createHandle(msgsTitleReceivedHandle, null, Mail.updateReceivedWidth);
-		receivedGroup.addRule(new ResizeRule(msgsTitleReceived, Resize.HORIZONTAL, Resize.ADD));
-		receivedGroup.addRule(new ResizeRule(msgsReceived, Resize.HORIZONTAL, Resize.ADD));
-		receivedGroup.addRule(new ResizeRule(msgsTitleSize, Resize.HORIZONTAL, Resize.SUBTRACT));
-		receivedGroup.addRule(new ResizeRule(msgsSize, Resize.HORIZONTAL, Resize.SUBTRACT));
+		_$J("#portlet-mail-msgs-title-subject").lResize({
+			handle: "#portlet-mail-msgs-from-handle",
+			direction: "horizontal",
+			mode: "subtract"
+		});
 		
-		var bottomGroup = Resize.createHandle(mailBottomHandle, null, Mail.updateDetailedHeight);
-		bottomGroup.addRule(new ResizeRule(detailedFrame, Resize.VERTICAL, Resize.ADD));
+		_$J("#portlet-mail-msgs-subject").lResize({
+			handle: "#portlet-mail-msgs-from-handle",
+			direction: "horizontal",
+			mode: "subtract"
+		});
+
+		/* Preview headers - Subject */
+		_$J("#portlet-mail-msgs-title-subject").lResize({
+			handle: "#portlet-mail-msgs-subject-handle",
+			direction: "horizontal",
+			mode: "add",
+			onComplete: Mail.updateSubjectWidth
+		});
+		
+		_$J("#portlet-mail-msgs-subject").lResize({
+			handle: "#portlet-mail-msgs-subject-handle",
+			direction: "horizontal",
+			mode: "add"
+		});
+
+		_$J("#portlet-mail-msgs-title-received").lResize({
+			handle: "#portlet-mail-msgs-subject-handle",
+			direction: "horizontal",
+			mode: "subtract"
+		});
+		
+		_$J("#portlet-mail-msgs-received").lResize({
+			handle: "#portlet-mail-msgs-subject-handle",
+			direction: "horizontal",
+			mode: "subtract"
+		});
+		
+		/* Preview headers - Received */
+		_$J("#portlet-mail-msgs-title-received").lResize({
+			handle: "#portlet-mail-msgs-received-handle",
+			direction: "horizontal",
+			mode: "add",
+			onComplete: Mail.updateReceivedWidth
+		});
+		
+		_$J("#portlet-mail-msgs-received").lResize({
+			handle: "#portlet-mail-msgs-received-handle",
+			direction: "horizontal",
+			mode: "add"
+		});
+		
+		_$J("#portlet-mail-msgs-title-size").lResize({
+			handle: "#portlet-mail-msgs-received-handle",
+			direction: "horizontal",
+			mode: "subtract"
+		});
+
+		_$J("#portlet-mail-msgs-size").lResize({
+			handle: "#portlet-mail-msgs-received-handle",
+			direction: "horizontal",
+			mode: "subtract"
+		});
+		
+		/* Bottom handle */
+		_$J("#portlet-mail-msg-detailed-frame").lResize({
+			handle: "#portlet-mail-bottom-handle",
+			direction: "vertical",
+			mode: "add",
+			onComplete: Mail.updateDetailedHeight
+		});
+		
+				
+		var msgsTitleState = document.getElementById("portlet-mail-msgs-title-state");
+		var msgsTitleFrom = document.getElementById("portlet-mail-msgs-title-from");
+		var msgsTitleFromHandle = document.getElementById("portlet-mail-msgs-from-handle");
+		var msgsTitleSubject = document.getElementById("portlet-mail-msgs-title-subject");
+		var msgsTitleSubjectHandle = document.getElementById("portlet-mail-msgs-subject-handle");
+		var msgsTitleReceived = document.getElementById("portlet-mail-msgs-title-received");
+		var msgsTitleReceivedHandle = document.getElementById("portlet-mail-msgs-received-handle");
+		var msgsTitleSize = document.getElementById("portlet-mail-msgs-title-size");
 		
 		msgsTitleState.asc = true;
 		msgsTitleState.value = "state";
@@ -627,11 +734,12 @@ var Mail = {
 		Mail.sortBy = msgsTitleReceived;
 		Mail.updateSortArrow();
 		
-		document.onkeydown = Mail.onMailKeyPress;
+		_$J(document).keydown(Mail.onMailKeyPress);
 		
-		previewPane.onselectstart = function() {return false;} // ie
-		previewPane.onmousedown = function() {this.focus(); return false;} // mozilla
-		previewPane.onscroll = Mail.onPreviewScroll;
+		var previewPane = _$J("#portlet-mail-msgs-preview-pane");
+		previewPane[0].onselectstart = function() {return false;}; // ie
+		previewPane.mousedown(function() {this.focus(); return false;}); // mozilla
+		previewPane.scroll(Mail.onPreviewScroll);
 
 		/* Memory cleanup */
 		_$J(window).unload(Mail.clearPreview);
@@ -659,7 +767,7 @@ var Mail = {
 	moveToFolder : function(folderId) {
 		var moveList = Mail.getSelectedMessages();
 		
-		if (moveList.length <- 0) {
+		if (moveList.length <= 0) {
 			alert("Please select messages to move");
 		}
 		else if (!Mail.isMoveAllowed(folderId)) {
@@ -757,7 +865,7 @@ var Mail = {
 			DELETE	: 46,
 			A		: 65,
 			D		: 68
-		}
+		};
 		
 		if (!event) {
 			event = window.event;

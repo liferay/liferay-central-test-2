@@ -62,8 +62,8 @@
 				"<div class='popup " + (modal ? "modal" : "") + "' style='position:absolute; top:0; left:0;'>" +
 					"<div class='popup-inner'>" +
 						"<div class='popup-header'>" +
-							"<img class='popup-close' src='" + themeDisplay.getPathThemeImages() + "/portlet/close.png'/>" +
 							"<span class='popup-title'>" + (title || "") + "</span>" +
+							"<span class='popup-close'><img src='" + themeDisplay.getPathThemeImages() + "/portlet/close.png'/></span>" +
 						"</div>" +
 						"<div class='popup-message'></div>" +
 					"</div>" +

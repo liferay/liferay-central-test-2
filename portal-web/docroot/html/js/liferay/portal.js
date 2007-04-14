@@ -371,8 +371,35 @@ var LayoutColumns = {
 
 		if (themeDisplay.isFreeformLayout()) {
 			portlet.style.position = "absolute";
-			Drag.makeDraggable(portlet, handle);
-			portlet.threshold = 5;
+			_$J(portlet).lDrag({
+				handle: handle,
+				portlet: portlet,
+				onStart: function(settings) {
+					settings.wasClicked = true;
+					settings.container.style.zIndex = 99;
+				},
+				onMove: function(settings) {
+					settings.wasClicked = false;
+				},
+				onComplete: function(settings) {
+					var portlet = settings.portlet;
+					
+					if (!settings.wasClicked) {
+						var left = parseInt(portlet.style.left);
+						var top = parseInt(portlet.style.top);
+		
+						left = Math.round(left/10) * 10;
+						top = Math.round(top/10) * 10;
+		
+						portlet.style.left = left + "px";
+						portlet.style.top = top + "px";
+						
+						LayoutColumns.moveToTop(portlet);
+						LayoutColumns.savePosition(portlet);
+					}
+					portlet.style.zIndex = "";
+				}
+			});
 			
 			_$J(portlet).click(function() {
 				if (LayoutColumns.current != this) {
@@ -382,59 +409,38 @@ var LayoutColumns = {
 				}
 			});
 
-			portlet.onDragStart = function() {
-				this.wasClicked = true;
-				this.style.zIndex = 99;
-			};
-			portlet.onDrag = function() {
-				this.wasClicked = false;
-			};
-			portlet.onDragEnd = function() {
-				if (!this.wasClicked) {
-					var left = parseInt(this.style.left);
-					var top = parseInt(this.style.top);
-	
-					left = Math.round(left/10) * 10;
-					top = Math.round(top/10) * 10;
-	
-					this.style.left = left + "px";
-					this.style.top = top + "px";
-					
-					LayoutColumns.moveToTop(this);
-					LayoutColumns.savePosition(this);
-				}
-				this.style.zIndex = "";
-			};
-
 			var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
 			var resizeHandle = _$J(portlet).getOne(".portlet-resize-handle");
 
 			if (resizeBox && resizeHandle) {
-				var portletResize = Resize.createHandle(resizeHandle, null, function() {});
+				_$J(portlet).lResize({
+					handle: resizeHandle,
+					direction: "horizontal",
+					mode: "add",
+					portlet: portlet,
+					onStart: function(settings) {
+						LayoutColumns.moveToTop(settings.container.resizeSettings.portlet);
+					},
+					onComplete: function(settings) {
+						var portlet = settings.container.resizeSettings.portlet;
+						var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
+						var height = parseInt(resizeBox.style.height);
+						var width = parseInt(portlet.style.width);
+		
+						height = Math.round(height/10) * 10;
+						width = Math.round(width/10) * 10;
+		
+						resizeBox.style.height = height + "px";
+						portlet.style.width = width + "px";
+						LayoutColumns.savePosition(portlet);
+					}
+				});
 				
-				portletResize.addRule(new ResizeRule(portlet, Resize.HORIZONTAL, Resize.ADD));
-				portletResize.addRule(new ResizeRule(resizeBox, Resize.VERTICAL, Resize.ADD));
-	
-				resizeHandle.container = portlet;
-				resizeBox.container = portlet;
-
-				resizeHandle.onResizeStart = function() {
-					LayoutColumns.moveToTop(this.container);
-				};
-	
-				resizeHandle.onResizeEnd = function() {
-					var portlet = this.container;
-					var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
-					var height = parseInt(resizeBox.style.height);
-					var width = parseInt(portlet.style.width);
-	
-					height = Math.round(height/10) * 10;
-					width = Math.round(width/10) * 10;
-	
-					resizeBox.style.height = height + "px";
-					portlet.style.width = width + "px";
-					LayoutColumns.savePosition(portlet);
-				};
+				_$J(resizeBox).lResize({
+					handle: resizeHandle,
+					direction: "vertical",
+					mode: "add"
+				});
 			}
 
 			if ((parseInt(portlet.style.top) + parseInt(portlet.style.left)) == 0) {

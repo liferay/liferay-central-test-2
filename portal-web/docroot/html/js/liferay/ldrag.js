@@ -81,6 +81,9 @@
 	    		options.handle = container;
     		}
     		else {
+    			if (typeof options.handle == "string") {
+    				options.handle = $(options.handle)[0];
+    			}
 				options.handle.dragSettings = options;
     		}
 			container.dragSettings = options;
@@ -320,7 +323,7 @@
 			}
 
 			for (var i = 0; i < settings[prop].length; i++) {
-				settings[prop][i](settings.container);
+				settings[prop][i](settings);
 			}
 		}
 	});
