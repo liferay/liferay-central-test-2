@@ -175,7 +175,8 @@ public class UpdatePageAction extends JSONAction {
 
 		String layoutId = ParamUtil.getString(req, "layoutId");
 		String ownerId = ParamUtil.getString(req, "ownerId");
-		String parentLayoutId = ParamUtil.getString(req, "parentLayoutId");
+		String parentLayoutId = ParamUtil.getString(
+			req, "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 		LayoutServiceUtil.updateParentLayoutId(
 			layoutId, ownerId, parentLayoutId);
