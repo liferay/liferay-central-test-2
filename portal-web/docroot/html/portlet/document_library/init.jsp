@@ -55,31 +55,46 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %>
 
 <%
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+PortletPreferences prefs = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
-if (portletResource.length() == 0) {
-	portletResource = portletDisplay.getId();
+
+if (Validator.isNotNull(portletResource)) {
+	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
-PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 
-boolean showSearch = ParamUtil.getBoolean(request, "showSearch", GetterUtil.getBoolean(prefs.getValue("showSearch", "true")));
-boolean showBreadcrumbs = ParamUtil.getBoolean(request, "showBreadcrumbs", GetterUtil.getBoolean(prefs.getValue("showBreadcrumbs", "true")));
-boolean showSubfolders = ParamUtil.getBoolean(request, "showSubfolders", GetterUtil.getBoolean(prefs.getValue("showSubfolders", "true")));
+DLFolder rootFolder = null;
 
-boolean showColumnDownloads = ParamUtil.getBoolean(request, "showColumnDownloads", GetterUtil.getBoolean(prefs.getValue("showColumnDownloads", "false")));
-boolean showColumnLocked = ParamUtil.getBoolean(request, "showColumnLocked", GetterUtil.getBoolean(prefs.getValue("showColumnLocked", "false")));
-boolean showColumnDate = ParamUtil.getBoolean(request, "showColumnDate", GetterUtil.getBoolean(prefs.getValue("showColumnDate", "true")));
-boolean showColumnSize = ParamUtil.getBoolean(request, "showColumnSize", GetterUtil.getBoolean(prefs.getValue("showColumnSize", "true")));
+String rootFolderId = PrefsParamUtil.getString(prefs, request, "rootFolderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+String rootFolderName = StringPool.BLANK;
 
-int numberOfDocumentsPerPage = ParamUtil.getInteger(request, "numberOfDocumentsPerPage", GetterUtil.getInteger(prefs.getValue("numberOfDocumentsPerPage", Integer.toString(SearchContainer.DEFAULT_DELTA))));
+if (!rootFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+	try {
+		rootFolder = DLFolderLocalServiceUtil.getFolder(rootFolderId);
 
-Portlet portlet = PortletLocalServiceUtil.getPortletById(themeDisplay.getCompanyId(), portletResource);
-String strutsPath = "/" + portlet.getStrutsPath();
-
-String rootFolderId = ParamUtil.getString(request, "rootFolderId", prefs.getValue("rootFolderId",  DLFolderImpl.DEFAULT_PARENT_FOLDER_ID));
-String rootFolderName = "";
-if (!rootFolderId.equals( DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
-	rootFolderName = DLFolderLocalServiceUtil.getFolder(rootFolderId).getName();
+		rootFolderName = rootFolder.getName();
+	}
+	catch (NoSuchFolderException nsfe) {
+	}
 }
+
+boolean showBreadcrumbs = PrefsParamUtil.getBoolean(prefs, request, "showBreadcrumbs", true);
+boolean showFoldersSearch = PrefsParamUtil.getBoolean(prefs, request, "showFoldersSearch", true);
+boolean showSubfolders = PrefsParamUtil.getBoolean(prefs, request, "showSubfolders", true);
+int foldersPerPage = PrefsParamUtil.getInteger(prefs, request, "foldersPerPage", SearchContainer.DEFAULT_DELTA);
+
+String defaultFolderColumns = "folder,num-of-folders,num-of-documents,action";
+String allFolderColumns = defaultFolderColumns;
+
+String[] folderColumns = StringUtil.split(PrefsParamUtil.getString(prefs, request, "folderColumns", defaultFolderColumns));
+
+boolean showFileEntriesSearch = PrefsParamUtil.getBoolean(prefs, request, "showFileEntriesSearch", true);
+int fileEntriesPerPage = PrefsParamUtil.getInteger(prefs, request, "fileEntriesPerPage", SearchContainer.DEFAULT_DELTA);
+
+String defaultFileEntryColumns = "document,size,downloads,locked,action";
+String allFileEntryColumns = defaultFileEntryColumns;
+
+String[] fileEntryColumns = StringUtil.split(PrefsParamUtil.getString(prefs, request, "fileEntryColumns", defaultFileEntryColumns));
+
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

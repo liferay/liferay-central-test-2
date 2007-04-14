@@ -65,16 +65,7 @@ public class EditConfigurationAction extends PortletAction {
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String type = ParamUtil.getString(req, "type");
 			String pageURL = ParamUtil.getString(req, "pageURL");
-			String displayStyle = ParamUtil.getString(req, "displayStyle");
-			String showName = ParamUtil.getString(req, "showName");
-			String showDescription =
-				ParamUtil.getString(req, "showDescription");
-			String showDisplayDate =
-				ParamUtil.getString(req, "showDisplayDate");
-			String showAuthor = ParamUtil.getString(req, "showAuthor");
-
 			int pageDelta = ParamUtil.getInteger(req, "pageDelta");
-			String showPagination = ParamUtil.getString(req, "showPagination");
 			String orderByCol = ParamUtil.getString(req, "orderByCol");
 			String orderByType = ParamUtil.getString(req, "orderByType");
 
@@ -90,14 +81,7 @@ public class EditConfigurationAction extends PortletAction {
 			prefs.setValue("group-id", String.valueOf(groupId));
 			prefs.setValue("type", type);
 			prefs.setValue("page-url", pageURL);
-			prefs.setValue("display-style", displayStyle);
-			prefs.setValue("show-name", showName);
-			prefs.setValue("show-description", showDescription);
-			prefs.setValue("show-display-date", showDisplayDate);
-			prefs.setValue("show-author", showAuthor);
-
 			prefs.setValue("page-delta", String.valueOf(pageDelta));
-			prefs.setValue("show-pagination", String.valueOf(showPagination));
 			prefs.setValue("order-by-col", orderByCol);
 			prefs.setValue("order-by-type", orderByType);
 

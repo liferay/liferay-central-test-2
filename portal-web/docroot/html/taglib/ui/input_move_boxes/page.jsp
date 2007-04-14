@@ -27,8 +27,8 @@
 <%
 String formName = namespace + request.getAttribute("liferay-ui:input-move-boxes:formName");
 
-String leftTitle = (String)request.getAttribute("liferay-ui:input-move-boxes:leftTitle");
-String rightTitle = (String)request.getAttribute("liferay-ui:input-move-boxes:rightTitle");
+String leftTitle = LanguageUtil.get(pageContext, (String)request.getAttribute("liferay-ui:input-move-boxes:leftTitle"));
+String rightTitle = LanguageUtil.get(pageContext, (String)request.getAttribute("liferay-ui:input-move-boxes:rightTitle"));
 
 String leftBoxName = namespace + request.getAttribute("liferay-ui:input-move-boxes:leftBoxName");
 String rightBoxName = namespace + request.getAttribute("liferay-ui:input-move-boxes:rightBoxName");

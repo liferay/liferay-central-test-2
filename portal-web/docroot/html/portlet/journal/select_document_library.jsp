@@ -93,7 +93,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	sm.append("<img align=\"left\" border=\"0\" src=\"");
 	sm.append(themeDisplay.getPathThemeImages());
-	sm.append("/trees/folder.png\">");
+	sm.append("/common/folder.png\">");
 	sm.append(curFolder.getName());
 
 	row.addText(sm.toString(), rowURL);

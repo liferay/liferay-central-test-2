@@ -22,9 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
@@ -38,7 +37,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
-import javax.portlet.ReadOnlyException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -59,13 +57,60 @@ public class EditConfigurationAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		String cmd = ParamUtil.getString(req, Constants.CMD);
+
+		if (!cmd.equals(Constants.UPDATE)) {
+			return;
+		}
+
+		String rootFolderId = ParamUtil.getString(req, "rootFolderId");
+
+		boolean showBreadcrumbs = ParamUtil.getBoolean(req, "showBreadcrumbs");
+		boolean showFoldersSearch = ParamUtil.getBoolean(
+			req, "showFoldersSearch");
+		boolean showSubfolders = ParamUtil.getBoolean(req, "showSubfolders");
+		int foldersPerPage = ParamUtil.getInteger(req, "foldersPerPage");
+		String folderColumns = ParamUtil.getString(req, "folderColumns");
+
+		boolean showFileEntriesSearch = ParamUtil.getBoolean(
+			req, "showFileEntriesSearch");
+		int fileEntriesPerPage = ParamUtil.getInteger(
+			req, "fileEntriesPerPage");
+		String fileEntryColumns = ParamUtil.getString(req, "fileEntryColumns");
+
 		String portletResource = ParamUtil.getString(
 			req, "portletResource");
 
 		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
 			req, portletResource, true, true);
 
-		update(req, prefs);
+		if (Validator.isNull(rootFolderId)) {
+			SessionErrors.add(req, "rootFolderIdInvalid");
+
+			return;
+		}
+		else if (!rootFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+			try {
+				DLFolderLocalServiceUtil.getFolder(rootFolderId);
+			}
+			catch (NoSuchFolderException e) {
+				SessionErrors.add(req, "rootFolderIdInvalid");
+			}
+		}
+
+		prefs.setValue("rootFolderId", rootFolderId);
+
+		prefs.setValue("showBreadcrumbs", String.valueOf(showBreadcrumbs));
+		prefs.setValue("showFoldersSearch", String.valueOf(showFoldersSearch));
+		prefs.setValue("showSubfolders", String.valueOf(showSubfolders));
+		prefs.setValue("foldersPerPage", String.valueOf(foldersPerPage));
+		prefs.setValue("folderColumns", folderColumns);
+
+		prefs.setValue(
+			"showFileEntriesSearch", String.valueOf(showFileEntriesSearch));
+		prefs.setValue(
+			"fileEntriesPerPage", String.valueOf(fileEntriesPerPage));
+		prefs.setValue("fileEntryColumns", fileEntryColumns);
 
 		if (SessionErrors.isEmpty(req)) {
 			prefs.store();
@@ -81,52 +126,6 @@ public class EditConfigurationAction extends PortletAction {
 
 		return mapping.findForward(
 			"portlet.document_library.edit_configuration");
-	}
-
-	protected void update(ActionRequest req, PortletPreferences prefs)
-		throws PortalException, ReadOnlyException, SystemException {
-
-		String rootFolderId = ParamUtil.getString(req, "rootFolderId");
-		String showSearch = ParamUtil.getString(req, "showSearch");
-		String showBreadcrumbs = ParamUtil.getString(req, "showBreadcrumbs");
-		String showSubfolders = ParamUtil.getString(req, "showSubfolders");
-
-		String showColumnDownloads =
-			ParamUtil.getString(req, "showColumnDownloads");
-		String showColumnLocked = ParamUtil.getString(req, "showColumnLocked");
-		String showColumnDate = ParamUtil.getString(req, "showColumnDate");
-		String showColumnSize = ParamUtil.getString(req, "showColumnSize");
-
-		String numberOfDocumentsPerPage =
-			ParamUtil.getString(req, "numberOfDocumentsPerPage");
-
-		if (Validator.isNull(rootFolderId)) {
-			SessionErrors.add(req, "rootFolderIdInvalid");
-			return;
-		}
-
-		try {
-			if (!rootFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
-				DLFolderLocalServiceUtil.getFolder(rootFolderId);
-			}
-
-			prefs.setValue("rootFolderId", rootFolderId);
-			prefs.setValue("showSearch", showSearch);
-			prefs.setValue("showBreadcrumbs", showBreadcrumbs);
-			prefs.setValue("showSubfolders", showSubfolders);
-
-			prefs.setValue("showColumnDownloads", showColumnDownloads);
-			prefs.setValue("showColumnLocked", showColumnLocked);
-			prefs.setValue("showColumnDate", showColumnDate);
-			prefs.setValue("showColumnSize", showColumnSize);
-
-			prefs.setValue(
-				"numberOfDocumentsPerPage", numberOfDocumentsPerPage);
-		}
-		catch (NoSuchFolderException e) {
-			SessionErrors.add(req, "rootFolderIdInvalid");
-		}
-
 	}
 
 }

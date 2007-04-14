@@ -45,7 +45,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-portletURL.setParameter("struts_action", strutsPath + "/select_folder");
+portletURL.setParameter("struts_action", "/document_library/select_folder");
 
 List headerNames = new ArrayList();
 
@@ -75,7 +75,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	rowURL.setWindowState(LiferayWindowState.POP_UP);
 
-	rowURL.setParameter("struts_action", strutsPath + "/select_folder");
+	rowURL.setParameter("struts_action", "/document_library/select_folder");
 	rowURL.setParameter("folderId", curFolder.getFolderId());
 
 	// Name
@@ -84,7 +84,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	sm.append("<img align=\"left\" border=\"0\" src=\"");
 	sm.append(themeDisplay.getPathThemeImages());
-	sm.append("/trees/folder.png\">");
+	sm.append("/common/folder.png\">");
 	sm.append(curFolder.getName());
 
 	row.addText(sm.toString(), rowURL);

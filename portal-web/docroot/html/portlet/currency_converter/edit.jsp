@@ -40,6 +40,8 @@ for (int i = 0; i < symbols.length; i++) {
 
 //Collections.sort(leftList, new KeyValuePairComparator(false, true));
 
+// Right list
+
 List rightList = new ArrayList();
 
 Arrays.sort(symbols);
@@ -62,8 +64,8 @@ Collections.sort(rightList, new KeyValuePairComparator(false, true));
 
 <liferay-ui:input-move-boxes
 	formName="fm"
-	leftTitle='<%= LanguageUtil.get(pageContext, "current") %>'
-	rightTitle='<%= LanguageUtil.get(pageContext, "available") %>'
+	leftTitle="current"
+	rightTitle="available"
 	leftBoxName="current_actions"
 	rightBoxName="available_actions"
 	leftReorder="true"

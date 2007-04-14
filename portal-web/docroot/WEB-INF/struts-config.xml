@@ -496,25 +496,6 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
-		<!-- Document Library Display -->
-
-		<action path="/document_library_display/edit_configuration" type="com.liferay.portlet.documentlibrary.action.EditConfigurationAction">
-			<forward name="portlet.document_library.edit_configuration" path="portlet.document_library_display.edit_configuration" />
-			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
-		</action>
-
-		<action path="/document_library_display/view" type="com.liferay.portlet.documentlibrary.action.ViewAction">
-			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
-			<forward name="portlet.document_library.view" path="portlet.document_library_display.view" />
-		</action>
-
-		<action path="/document_library_display/select_folder" type="com.liferay.portlet.documentlibrary.action.EditFolderAction">
-			<forward name="portlet.document_library.edit_folder" path="portlet.document_library.select_folder" />
-			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
-		</action>
-
-		<action path="/document_library_display/search" forward="portlet.document_library_display.search" />
-
 		<!-- Enterprise Admin -->
 
 		<action path="/enterprise_admin/edit_address" type="com.liferay.portlet.enterpriseadmin.action.EditAddressAction">
@@ -1444,6 +1425,16 @@
 
 		<action path="/weather/view" forward="portlet.weather.view" />
 
+		<!-- Web Form -->
+
+		<action path="/web_form/edit_configuration" type="com.liferay.portlet.webform.action.EditConfigurationAction">
+			<forward name="portlet.web_form.edit_configuration" path="portlet.web_form.edit_configuration" />
+		</action>
+
+		<action path="/web_form/view" type="com.liferay.portlet.webform.action.ViewAction">
+			<forward name="portlet.web_form.view" path="portlet.web_form.view" />
+		</action>
+
 		<!-- Web Proxy -->
 
 		<action path="/web_proxy/edit_configuration" type="com.liferay.portlet.webproxy.action.EditConfigurationAction">
@@ -1453,19 +1444,6 @@
 		<!-- Westminster Catechism -->
 
 		<action path="/westminster_catechism/view" forward="portlet.westminster_catechism.view" />
-
-		<!-- Web Form -->
-
-		<action path="/webform/view" forward="portlet.webform.view" />
-
-		<action path="/webform/send" type="com.liferay.portlet.webform.action.SendAction">
-			<forward name="portlet.webform.error" path="portlet.webform.error" />
-		</action>
-
-		<action path="/webform/edit_configuration" type="com.liferay.portlet.webform.action.EditConfigurationAction">
-			<forward name="portlet.webform.edit_configuration" path="portlet.webform.edit_configuration" />
-			<forward name="portlet.webform.error" path="portlet.webform.error" />
-		</action>
 		
 		<!-- Wiki -->
 

@@ -23,8 +23,8 @@
 package com.liferay.portlet.webform.action;
 
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
@@ -54,16 +54,55 @@ public class EditConfigurationAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String portletResource = ParamUtil.getString(
-			req, "portletResource");
+		String cmd = ParamUtil.getString(req, Constants.CMD);
+
+		if (!cmd.equals(Constants.UPDATE)) {
+			return;
+		}
+
+		String title = ParamUtil.getString(req, "title");
+		String description = ParamUtil.getString(req, "description");
+		String subject = ParamUtil.getString(req, "subject");
+		String emailAddress = ParamUtil.getString(req, "emailAddress");
+
+		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
 			req, portletResource, true, true);
 
-		int maxNumOfFields = GetterUtil.getInteger(
-			config.getInitParameter("max-num-of-fields"), 10);
+		if (Validator.isNull(title)) {
+			SessionErrors.add(req, "titleRequired");
+		}
 
-		updateForm(req, prefs, maxNumOfFields);
+		if (Validator.isNull(subject)) {
+			SessionErrors.add(req, "subjectRequired");
+		}
+
+		if (Validator.isNull(emailAddress)) {
+			SessionErrors.add(req, "emailAddressRequired");
+		}
+		else if (!Validator.isEmailAddress(emailAddress)) {
+			SessionErrors.add(req, "emailAddressInvalid");
+		}
+
+		if (!SessionErrors.isEmpty(req)) {
+			return;
+		}
+
+		prefs.setValue("title", title);
+		prefs.setValue("description", description);
+		prefs.setValue("subject", subject);
+		prefs.setValue("emailAddress", emailAddress);
+
+		for (int i = 1; i <= 10; i++) {
+			String fieldLabel = ParamUtil.getString(req, "fieldLabel" + i);
+			String fieldType = ParamUtil.getString(req, "fieldType" + i);
+			String fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
+
+			prefs.setValue("fieldLabel" + i, fieldLabel);
+			prefs.setValue("fieldType" + i, fieldType);
+			prefs.setValue("fieldOptions" + i, fieldOptions);
+		}
 
 		if (SessionErrors.isEmpty(req)) {
 			prefs.store();
@@ -77,54 +116,7 @@ public class EditConfigurationAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward("portlet.webform.edit_configuration");
-	}
-
-	protected void updateForm(
-		ActionRequest req, PortletPreferences prefs, int maxNumOfFields)
-		throws Exception {
-
-		String title = ParamUtil.getString(req, "title");
-		String description = ParamUtil.getString(req, "description");
-		String subject = ParamUtil.getString(req, "subject");
-		String email = ParamUtil.getString(req, "email");
-
-		if (Validator.isNull(title)) {
-			SessionErrors.add(req, "titleRequired");
-		}
-
-		if (Validator.isNull(subject)) {
-			SessionErrors.add(req, "subjectRequired");
-		}
-
-		if (Validator.isNull(email)) {
-			SessionErrors.add(req, "emailRequired");
-		}
-
-		if (Validator.isNotNull(email) && !Validator.isEmailAddress(email)) {
-			SessionErrors.add(req, "invalidEmail");
-		}
-
-		if (!SessionErrors.isEmpty(req)) {
-			return;
-		}
-
-		prefs.setValue("title", title);
-		prefs.setValue("description", description);
-		prefs.setValue("email", email);
-		prefs.setValue("subject", subject);
-
-		for (int i = 1; i <= maxNumOfFields; i++) {
-			String fieldLabel = ParamUtil.getString(req, "fieldLabel" + i, "");
-			String fieldType = ParamUtil.getString(req, "fieldType" + i, "");
-			String fieldOptions =
-				ParamUtil.getString(req, "fieldOptions" + i, "");
-
-			prefs.setValue("fieldLabel" + i, fieldLabel);
-			prefs.setValue("fieldType" + i, fieldType);
-			prefs.setValue("fieldOptions" + i, fieldOptions);
-
-		}
+		return mapping.findForward("portlet.web_form.edit_configuration");
 	}
 
 }

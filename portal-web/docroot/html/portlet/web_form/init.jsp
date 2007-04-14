@@ -24,13 +24,14 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.webform.util.WebformUtil" %>
+<%@ page import="com.liferay.portlet.webform.util.WebFormUtil" %>
 
 <%
-String portletResource = ParamUtil.getString(request, "portletResource");
-if (portletResource.length() == 0) {
-	portletResource = portletDisplay.getId();
-}
-PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
+PortletPreferences prefs = renderRequest.getPreferences();
 
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
+}
 %>

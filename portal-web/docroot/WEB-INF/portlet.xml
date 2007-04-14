@@ -2416,15 +2416,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>109</portlet-name>
-		<display-name>Web form</display-name>
+		<display-name>Web Form</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/webform/view</value>
-		</init-param>
-		<init-param>
-			<name>max-num-of-fields</name>
-			<value>10</value>
+			<value>/web_form/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2439,14 +2435,14 @@
 			</preference>
 			<preference>
 				<name>description</name>
-				<value>Send your suggestions filling the following fields</value>
+				<value>Your input is valuable to us. Please send us your suggestions.</value>
 			</preference>
 			<preference>
 				<name>subject</name>
-				<value>Suggestions sent from the website</value>
+				<value>Suggestions</value>
 			</preference>
 			<preference>
-				<name>email</name>
+				<name>emailAddress</name>
 				<value></value>
 			</preference>
 			<preference>
@@ -2459,7 +2455,7 @@
 			</preference>
 			<preference>
 				<name>fieldLabel2</name>
-				<value>Rate us</value>
+				<value>Rating</value>
 			</preference>
 			<preference>
 				<name>fieldType2</name>
@@ -2467,7 +2463,7 @@
 			</preference>
 			<preference>
 				<name>fieldOptions2</name>
-				<value>Good,Ok,Bad</value>
+				<value>Excellent,Good,Satisfactory,Poor</value>
 			</preference>
 			<preference>
 				<name>fieldLabel3</name>
@@ -2478,25 +2474,6 @@
 				<value>textarea</value>
 			</preference>
 		</portlet-preferences>
-	</portlet>
-	<portlet>
-		<portlet-name>110</portlet-name>
-		<display-name>Document Library Display</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<init-param>
-			<name>view-action</name>
-			<value>/document_library_display/view</value>
-		</init-param>
-		<init-param>
-			<name>max-num-of-fields</name>
-			<value>10</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>view</portlet-mode>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 	</portlet>
 	<custom-window-state>
 		<window-state>exclusive</window-state>

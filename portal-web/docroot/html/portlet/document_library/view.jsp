@@ -30,10 +30,16 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 String defaultFolderId = prefs.getValue("rootFolderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+
 String folderId = BeanParamUtil.getString(folder, request, "folderId", defaultFolderId);
 
 if ((folder == null) && (!defaultFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID))) {
-	folder = DLFolderLocalServiceUtil.getFolder(folderId);
+	try {
+		folder = DLFolderLocalServiceUtil.getFolder(folderId);
+	}
+	catch (NoSuchFolderException nsfe) {
+		folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+	}
 }
 
 List folderIds = new ArrayList();
@@ -41,11 +47,6 @@ List folderIds = new ArrayList();
 folderIds.add(folderId);
 
 DLFolderLocalServiceUtil.getSubfolderIds(folderIds, portletGroupId.longValue(), folderId);
-
-String tabsNames = "folders,my-documents,recent-documents";
-if (defaultFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-	tabsNames = "folders";
-}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -60,199 +61,160 @@ portletURL.setParameter("folderId", folderId);
 <input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>">
 <input name="<portlet:namespace />folderIds" type="hidden" value="<%= StringUtil.merge(folderIds) %>">
 
-<liferay-ui:tabs
-	names="<%= tabsNames %>"
-	url="<%= portletURL.toString() %>"
-/>
+<c:choose>
+	<c:when test="<%= rootFolder == null %>">
+		<liferay-ui:tabs
+			names="folders,my-documents,recent-documents"
+			url="<%= portletURL.toString() %>"
+		/>
+	</c:when>
+	<c:when test="<%= showSubfolders %>">
+		<liferay-ui:tabs names="folders" />
+	</c:when>
+</c:choose>
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
-		<c:if test="<%= showBreadcrumbs && (folder != null) %>">
-			<%= DLUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
+		<c:if test="<%= showSubfolders %>">
+			<c:if test="<%= showBreadcrumbs && (folder != null) %>">
+				<%= DLUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
 
-			<br><br>
-		</c:if>
+				<br><br>
+			</c:if>
 
-		<%
-		List headerNames = new ArrayList();
+			<%
+			List headerNames = new ArrayList();
 
-		headerNames.add("folder");
-		headerNames.add("num-of-folders");
-		headerNames.add("num-of-documents");
-		headerNames.add(StringPool.BLANK);
+			for (int i = 0; i < folderColumns.length; i++) {
+				String folderColumn = folderColumns[i];
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
-
-		int total = DLFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), folderId);
-
-		searchContainer.setTotal(total);
-
-		List results = DLFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), folderId, searchContainer.getStart(), searchContainer.getEnd());
-
-		searchContainer.setResults(results);
-
-		List resultRows = searchContainer.getResultRows();
-
-		for (int i = 0; i < results.size(); i++) {
-			DLFolder curFolder = (DLFolder)results.get(i);
-
-			ResultRow row = new ResultRow(curFolder, curFolder.getPrimaryKey().toString(), i);
-
-			PortletURL rowURL = renderResponse.createRenderURL();
-
-			rowURL.setWindowState(WindowState.MAXIMIZED);
-
-			rowURL.setParameter("struts_action", "/document_library/view");
-			rowURL.setParameter("folderId", curFolder.getFolderId());
-
-			// Name and description
-
-			StringMaker sm = new StringMaker();
-
-			sm.append("<a href=\"");
-			sm.append(rowURL);
-			sm.append("\">");
-			sm.append("<img align=\"left\" border=\"0\" src=\"");
-			sm.append(themeDisplay.getPathThemeImages());
-			sm.append("/trees/folder.png\">");
-			sm.append("<b>");
-			sm.append(curFolder.getName());
-			sm.append("</b>");
-
-			if (Validator.isNotNull(curFolder.getDescription())) {
-				sm.append("<br>");
-				sm.append("<span style=\"font-size: xx-small;\">");
-				sm.append(curFolder.getDescription());
-				sm.append("</span>");
-			}
-
-			sm.append("</a>");
-
-			List subfolders = DLFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), curFolder.getFolderId(), 0, 5);
-
-			if (subfolders.size() > 0) {
-				sm.append("<br>");
-				sm.append("<span style=\"font-size: xx-small; font-weight: bold;\"><u>");
-				sm.append(LanguageUtil.get(pageContext, "subfolders"));
-				sm.append("</u>: ");
-
-				for (int j = 0; j < subfolders.size(); j++) {
-					DLFolder subfolder = (DLFolder)subfolders.get(j);
-
-					rowURL.setParameter("folderId", subfolder.getFolderId());
-
-					sm.append("<a href=\"");
-					sm.append(rowURL);
-					sm.append("\">");
-					sm.append(subfolder.getName());
-					sm.append("</a>");
-
-					if ((j + 1) < subfolders.size()) {
-						sm.append(", ");
-					}
+				if (folderColumn.equals("action")) {
+					folderColumn = StringPool.BLANK;
 				}
 
+				headerNames.add(folderColumn);
+			}
+
+			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+
+			int total = DLFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), folderId);
+
+			searchContainer.setTotal(total);
+
+			List results = DLFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), folderId, searchContainer.getStart(), searchContainer.getEnd());
+
+			searchContainer.setResults(results);
+
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				DLFolder curFolder = (DLFolder)results.get(i);
+
+				ResultRow row = new ResultRow(curFolder, curFolder.getPrimaryKey().toString(), i);
+
+				PortletURL rowURL = renderResponse.createRenderURL();
+
+				rowURL.setWindowState(WindowState.MAXIMIZED);
+
+				rowURL.setParameter("struts_action", "/document_library/view");
 				rowURL.setParameter("folderId", curFolder.getFolderId());
 
-				sm.append("</span>");
+				List subfolderIds = new ArrayList();
+
+				subfolderIds.add(curFolder.getFolderId());
+
+				DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId.longValue(), curFolder.getFolderId());
+
+				int foldersCount = subfolderIds.size() - 1;
+				int fileEntriesCount = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(subfolderIds);
+			%>
+
+				<%@ include file="/html/portlet/document_library/folder_columns.jsp" %>
+
+			<%
+
+				// Add result row
+
+				resultRows.add(row);
 			}
 
-			row.addText(sm.toString());
+			boolean showAddFolderButton = DLFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
+			boolean showCurFolderSearch = showFoldersSearch && (results.size() > 0);
+			%>
 
-			// Statistics
+			<c:if test="<%= showAddFolderButton || showCurFolderSearch %>">
+				<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<c:if test="<%= showAddFolderButton %>">
+						<td>
+							<input type="button" value='<%= LanguageUtil.get(pageContext, "add-folder") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= folderId %>" /></portlet:renderURL>';">
+						</td>
+						<td style="padding-left: 30px;"></td>
+					</c:if>
 
-			List subfolderIds = new ArrayList();
+					<c:if test="<%= showCurFolderSearch %>">
+						<td>
+							<input name="<portlet:namespace />keywords" size="30" type="text">
 
-			subfolderIds.add(curFolder.getFolderId());
+							<input type="submit" value="<%= LanguageUtil.get(pageContext, "search-folders") %>">
+						</td>
+					</c:if>
+				</tr>
+				</table>
 
-			DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId.longValue(), curFolder.getFolderId());
-
-			int foldersCount = subfolderIds.size() - 1;
-			int fileEntriesCount = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(subfolderIds);
-
-			row.addText(Integer.toString(foldersCount), rowURL);
-			row.addText(Integer.toString(fileEntriesCount), rowURL);
-
-			// Action
-
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/folder_action.jsp");
-
-			// Add result row
-
-			resultRows.add(row);
-		}
-
-		boolean showAddFolderButton = DLFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
-		%>
-
-		<c:if test="<%= showAddFolderButton || (results.size() > 0) %>">
-			<table border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<c:if test="<%= showAddFolderButton %>">
-					<td>
-						<input type="button" value='<%= LanguageUtil.get(pageContext, "add-folder") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= folderId %>" /></portlet:renderURL>';">
-					</td>
-					<td style="padding-left: 30px;"></td>
-				</c:if>
-
-				<c:if test="<%= results.size() > 0 %>">
-					<td>
-						<input name="<portlet:namespace />keywords" size="30" type="text">
-
-						<input type="submit" value="<%= LanguageUtil.get(pageContext, "search-folders") %>">
-					</td>
-				</c:if>
-			</tr>
-			</table>
-
-			<c:if test="<%= results.size() > 0 %>">
 				<br>
 			</c:if>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
+			<c:if test="<%= folder != null %>">
+				<br>
+			</c:if>
+
+			</form>
+
+			<script type="text/javascript">
+				if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
+					document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
+				}
+			</script>
 		</c:if>
-
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
-		<c:if test="<%= folder != null %>">
-			<br>
-		</c:if>
-
-		</form>
-
-		<script type="text/javascript">
-			if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
-				document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
-			}
-		</script>
 
 		<c:if test="<%= folder != null %>">
 			<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
 			<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>">
 			<input name="<portlet:namespace />folderIds" type="hidden" value="<%= folderId %>">
 
-			<liferay-ui:tabs names="documents" />
+			<c:if test="<%= showSubfolders %>">
+				<liferay-ui:tabs names="documents" />
+			</c:if>
 
 			<%
-			headerNames.clear();
+			List headerNames = new ArrayList();
 
-			headerNames.add("document");
-			headerNames.add("size");
-			headerNames.add("downloads");
-			headerNames.add("locked");
-			headerNames.add(StringPool.BLANK);
+			for (int i = 0; i < fileEntryColumns.length; i++) {
+				String fileEntryColumn = fileEntryColumns[i];
 
-			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+				if (fileEntryColumn.equals("action")) {
+					fileEntryColumn = StringPool.BLANK;
+				}
 
-			total = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(folder.getFolderId());
+				headerNames.add(fileEntryColumn);
+			}
+
+			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", fileEntriesPerPage, portletURL, headerNames, null);
+
+			int total = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(folder.getFolderId());
 
 			searchContainer.setTotal(total);
 
-			results = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcuts(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
+			List results = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcuts(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 
-			resultRows = searchContainer.getResultRows();
+			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
 				Object result = results.get(i);
@@ -284,41 +246,11 @@ portletURL.setParameter("folderId", folderId);
 				else {
 					rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?fileShortcutId=" + fileShortcut.getFileShortcutId();
 				}
+			%>
 
-				// Title and description
+				<%@ include file="/html/portlet/document_library/file_entry_columns.jsp" %>
 
-				StringMaker sm = new StringMaker();
-
-				sm.append("<img align=\"left\" border=\"0\" src=\"");
-				sm.append(themeDisplay.getPathThemeImages());
-				sm.append("/document_library/");
-				sm.append(DLUtil.getFileExtension(fileEntry.getName()));
-				sm.append(".png\">");
-				sm.append(fileEntry.getTitle());
-
-				if (Validator.isNotNull(fileEntry.getDescription())) {
-					sm.append("<br>");
-					sm.append("<span style=\"font-size: xx-small;\">");
-					sm.append(fileEntry.getDescription());
-					sm.append("</span>");
-				}
-
-				row.addText(sm.toString(), rowHREF);
-
-				// Statistics
-
-				row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
-				row.addText(Integer.toString(fileEntry.getReadCount()), rowHREF);
-
-				// Locked
-
-				boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
-
-				row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
-
-				// Action
-
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_entry_action.jsp");
+			<%
 
 				// Add result row
 
@@ -327,9 +259,10 @@ portletURL.setParameter("folderId", folderId);
 
 			boolean showAddFileEntryButton = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_DOCUMENT);
 			boolean showAddFileShortcutButton = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_SHORTCUT);
+			boolean showCurDocumentSearch = showFileEntriesSearch && (results.size() > 0);
 			%>
 
-			<c:if test="<%= showAddFileEntryButton || showAddFileShortcutButton || (results.size() > 0) %>">
+			<c:if test="<%= showAddFileEntryButton || showAddFileShortcutButton || showCurDocumentSearch %>">
 				<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<c:if test="<%= showAddFileEntryButton || showAddFileShortcutButton %>">
@@ -345,7 +278,7 @@ portletURL.setParameter("folderId", folderId);
 						<td style="padding-left: 30px;"></td>
 					</c:if>
 
-					<c:if test="<%= results.size() > 0 %>">
+					<c:if test="<%= showCurDocumentSearch %>">
 						<td>
 							<input name="<portlet:namespace />keywords" size="30" type="text">
 
@@ -355,9 +288,7 @@ portletURL.setParameter("folderId", folderId);
 				</tr>
 				</table>
 
-				<c:if test="<%= results.size() > 0 %>">
-					<br>
-				</c:if>
+				<br>
 			</c:if>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
@@ -387,13 +318,17 @@ portletURL.setParameter("folderId", folderId);
 
 		List headerNames = new ArrayList();
 
-		headerNames.add("document");
-		headerNames.add("size");
-		headerNames.add("downloads");
-		headerNames.add("locked");
-		headerNames.add(StringPool.BLANK);
+		for (int i = 0; i < fileEntryColumns.length; i++) {
+			String fileEntryColumn = fileEntryColumns[i];
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+			if (fileEntryColumn.equals("action")) {
+				fileEntryColumn = StringPool.BLANK;
+			}
+
+			headerNames.add(fileEntryColumn);
+		}
+
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, fileEntriesPerPage, portletURL, headerNames, null);
 
 		int total = DLFileEntryLocalServiceUtil.getGroupFileEntriesCount(portletGroupId.longValue(), groupFileEntriesUserId);
 
@@ -410,49 +345,12 @@ portletURL.setParameter("folderId", folderId);
 
 			ResultRow row = new ResultRow(fileEntry, fileEntry.getPrimaryKey().toString(), i);
 
-			PortletURL rowURL = renderResponse.createRenderURL();
+			String rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + fileEntry.getFolderId() + "&name=" + Http.encodeURL(fileEntry.getName());
+		%>
 
-			rowURL.setWindowState(WindowState.MAXIMIZED);
+			<%@ include file="/html/portlet/document_library/file_entry_columns.jsp" %>
 
-			rowURL.setParameter("struts_action", "/document_library/edit_file_entry");
-			rowURL.setParameter("redirect", currentURL);
-			rowURL.setParameter("folderId", fileEntry.getFolderId());
-			rowURL.setParameter("name", fileEntry.getName());
-
-			// Title and description
-
-			StringMaker sm = new StringMaker();
-
-			sm.append("<img align=\"left\" border=\"0\" src=\"");
-			sm.append(themeDisplay.getPathThemeImages());
-			sm.append("/document_library/");
-			sm.append(DLUtil.getFileExtension(fileEntry.getName()));
-			sm.append(".png\">");
-			sm.append(fileEntry.getTitle());
-
-			if (Validator.isNotNull(fileEntry.getDescription())) {
-				sm.append("<br>");
-				sm.append("<span style=\"font-size: xx-small;\">");
-				sm.append(fileEntry.getDescription());
-				sm.append("</span>");
-			}
-
-			row.addText(sm.toString(), rowURL);
-
-			// Statistics
-
-			row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowURL);
-			row.addText(Integer.toString(fileEntry.getReadCount()), rowURL);
-
-			// Locked
-
-			boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
-
-			row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowURL);
-
-			// Action
-
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_entry_action.jsp");
+		<%
 
 			// Add result row
 

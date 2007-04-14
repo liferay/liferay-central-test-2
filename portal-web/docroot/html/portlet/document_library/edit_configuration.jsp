@@ -43,76 +43,222 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		var nameEl = document.getElementById("<portlet:namespace />rootFolderName");
 
-		nameEl.href = "<liferay-portlet:renderURL portletName='<%= portletResource %>' windowState="<%= WindowState.MAXIMIZED.toString() %>"><liferay-portlet:param name="struts_action" value="<%= strutsPath + "/view" %>" /></liferay-portlet:renderURL>&<portlet:namespace />folderId=" + rootFolderId;
+		nameEl.href = "<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= WindowState.MAXIMIZED.toString() %>"><liferay-portlet:param name="struts_action" value="/document_library/view" /></liferay-portlet:renderURL>&<portlet:namespace />folderId=" + rootFolderId;
 		nameEl.innerHTML = rootFolderName + "&nbsp;";
 	}
 </script>
 
-<form action='<liferay-portlet:actionURL portletConfiguration="true" />' method="post" name="<portlet:namespace />fm">
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 <input name="<portlet:namespace />rootFolderId" type="hidden" value="<%= rootFolderId %>">
+<input name="<portlet:namespace />folderColumns" type="hidden" value="">
+<input name="<portlet:namespace />fileEntryColumns" type="hidden" value="">
 
-<liferay-ui:error key="rootFolderIdInvalid" message="please-enter-a-valid-root-folder" />
+<liferay-ui:error key="rootFolderId" message="please-enter-a-valid-root-folder" />
 
-<table>
-	<tr><td>
-		<%=LanguageUtil.get(pageContext, "root-folder")%>
-	</td><td>
-		<a href="<liferay-portlet:renderURL portletName='<%= portletResource %>' windowState="<%= WindowState.MAXIMIZED.toString() %>"><liferay-portlet:param name="struts_action" value="<%= strutsPath + "/view" %>" /><liferay-portlet:param name="folderId" value="<%= rootFolderId %>" /></liferay-portlet:renderURL>" id="<portlet:namespace />rootFolderName">
+<liferay-ui:tabs names="folders-listing" />
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "root-folder") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<a href="<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= WindowState.MAXIMIZED.toString() %>"><liferay-portlet:param name="struts_action" value="/document_library/view" /><liferay-portlet:param name="folderId" value="<%= rootFolderId %>" /></liferay-portlet:renderURL>" id="<portlet:namespace />rootFolderName">
 		<%= rootFolderName %>
 		</a>
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var folderWindow = window.open('<liferay-portlet:renderURL portletName='<%= portletResource %>' windowState="<%= LiferayWindowState.POP_UP.toString() %>"><liferay-portlet:param name="struts_action" value="<%= strutsPath + "/select_folder" %>" /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();"  class="button">
-		<input id="<portlet:namespace />removeFolderButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeFolder();" class="button">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var folderWindow = window.open('<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><liferay-portlet:param name="struts_action" value="/document_library/select_folder" /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
 
-	</td></tr>
-	<tr><td>
-		<%=LanguageUtil.get(pageContext, "number-of-documents-per-page")%>
-	</td><td>
-		<input name='<portlet:namespace />numberOfDocumentsPerPage' value="<%= numberOfDocumentsPerPage %>" size="2" type="text">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeFolder();">
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "show-breadcrumbs") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-checkbox param="showBreadcrumbs" defaultValue="<%= showBreadcrumbs %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "show-search") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-checkbox param="showFoldersSearch" defaultValue="<%= showFoldersSearch %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "show-subfolders") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-checkbox param="showSubfolders" defaultValue="<%= showSubfolders %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "folders-per-page") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input name="<portlet:namespace />foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>">
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "show-columns") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
 
-	</td></tr>
-	<tr><td>
-		<%=LanguageUtil.get(pageContext, "show-breadcrumbs")%>
-	</td><td>
-		<input type="checkbox" value='1' name='<portlet:namespace />showBreadcrumbs' <%= showBreadcrumbs?"checked":""%> >
-	</td></tr>
-	<c:if test="<%= !portletResource.equals(PortletKeys.DOCUMENT_LIBRARY) %>">
-		<tr><td>
-			<%=LanguageUtil.get(pageContext, "show-search-box")%>
-		</td><td>
-			<input type="checkbox" value='1' name='<portlet:namespace />showSearch' <%= showSearch?"checked":""%> >
-		</td></tr>
-		<tr><td>
-			<%=LanguageUtil.get(pageContext, "columns")%>
-		</td><td>
-			<input type="checkbox" value='1' name='<portlet:namespace />showColumnDownloads' <%= showColumnDownloads?"checked":""%> >
-			<label for="<portlet:namespace />showColumnDownloads"><%=LanguageUtil.get(pageContext, "downloads")%></label>
-			&nbsp; &nbsp;
-			<input type="checkbox" value='1' name='<portlet:namespace />showColumnLocked' <%= showColumnLocked?"checked":""%> >
-			<label for="<portlet:namespace />showColumnLocked"><%=LanguageUtil.get(pageContext, "locked")%></label>
-			&nbsp; &nbsp;
-			<input type="checkbox" value='1' name='<portlet:namespace />showColumnDate' <%= showColumnDate?"checked":""%> >
-			<label for="<portlet:namespace />showColumnDate"><%=LanguageUtil.get(pageContext, "date")%></label>
-			&nbsp; &nbsp;
-			<input type="checkbox" value='1' name='<portlet:namespace />showColumnSize' <%= showColumnSize?"checked":""%> >
-			<label for="<portlet:namespace />showColumnSize"><%=LanguageUtil.get(pageContext, "size")%></label>
-			&nbsp; &nbsp;
-		</td></tr>
-		<tr><td>
-			<%=LanguageUtil.get(pageContext, "show-subfolders")%>
-		</td><td>
-			<input type="checkbox" value='1' name='<portlet:namespace />showSubfolders' <%= showSubfolders?"checked":""%> >
+		<%
+		Set availableFolderColumns = SetUtil.fromArray(StringUtil.split(allFolderColumns));
 
-		</td></tr>
-	</c:if>
+		// Left list
 
+		List leftList = new ArrayList();
+
+		for (int i = 0; i < folderColumns.length; i++) {
+			String folderColumn = folderColumns[i];
+
+			leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+		}
+
+		// Right list
+
+		List rightList = new ArrayList();
+
+		Arrays.sort(folderColumns);
+
+		Iterator itr = availableFolderColumns.iterator();
+
+		while (itr.hasNext()) {
+			String folderColumn = (String)itr.next();
+
+			if (Arrays.binarySearch(folderColumns, folderColumn) < 0) {
+				rightList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+			}
+		}
+
+		Collections.sort(rightList, new KeyValuePairComparator(false, true));
+		%>
+
+		<liferay-ui:input-move-boxes
+			formName="fm"
+			leftTitle="current"
+			rightTitle="available"
+			leftBoxName="currentFolderColumns"
+			rightBoxName="availableFolderColumns"
+			leftReorder="true"
+			leftList="<%= leftList %>"
+			rightList="<%= rightList %>"
+		/>
+	</td>
+</tr>
 </table>
 
-<br/>
+<br>
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>' class="button">
+<liferay-ui:tabs names="documents-listing" />
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';" class="button">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "show-search") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-checkbox param="showFileEntriesSearch" defaultValue="<%= showFileEntriesSearch %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "documents-per-page") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input name="<portlet:namespace />fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>">
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "show-columns") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+
+		<%
+		Set availableFileEntryColumns = SetUtil.fromArray(StringUtil.split(allFileEntryColumns));
+
+		// Left list
+
+		leftList = new ArrayList();
+
+		for (int i = 0; i < fileEntryColumns.length; i++) {
+			String fileEntryColumn = fileEntryColumns[i];
+
+			leftList.add(new KeyValuePair(fileEntryColumn, LanguageUtil.get(pageContext, fileEntryColumn)));
+		}
+
+		// Right list
+
+		rightList = new ArrayList();
+
+		Arrays.sort(fileEntryColumns);
+
+		itr = availableFileEntryColumns.iterator();
+
+		while (itr.hasNext()) {
+			String fileEntryColumn = (String)itr.next();
+
+			if (Arrays.binarySearch(fileEntryColumns, fileEntryColumn) < 0) {
+				rightList.add(new KeyValuePair(fileEntryColumn, LanguageUtil.get(pageContext, fileEntryColumn)));
+			}
+		}
+
+		Collections.sort(rightList, new KeyValuePairComparator(false, true));
+		%>
+
+		<liferay-ui:input-move-boxes
+			formName="fm"
+			leftTitle="current"
+			rightTitle="available"
+			leftBoxName="currentFileEntryColumns"
+			rightBoxName="availableFileEntryColumns"
+			leftReorder="true"
+			leftList="<%= leftList %>"
+			rightList="<%= rightList %>"
+		/>
+	</td>
+</tr>
+</table>
+
+<br>
+
+<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />folderColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFolderColumns); document.<portlet:namespace />fm.<portlet:namespace />fileEntryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFileEntryColumns); submitForm(document.<portlet:namespace />fm);">
+
+<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 </form>

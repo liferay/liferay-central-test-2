@@ -126,9 +126,15 @@ public class ResultRow {
 
 	public void addText(int index, String name) {
 		addText(
-			index,
-			new TextSearchEntry(
-				SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, name));
+			index, SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, name);
+	}
+
+	public void addText(String align, String valign, String name) {
+		addText(_entries.size(), align, valign, name);
+	}
+
+	public void addText(int index, String align, String valign, String name) {
+		_entries.add(index, new TextSearchEntry(align, valign, name));
 	}
 
 	// Text with name and href
@@ -139,10 +145,20 @@ public class ResultRow {
 
 	public void addText(int index, String name, String href) {
 		addText(
-			index,
-			new TextSearchEntry(
-				SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, name,
-				href));
+			index, SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, name,
+			href);
+	}
+
+	public void addText(
+		String align, String valign, String name, String href) {
+
+		addText(_entries.size(), align, valign, name, href);
+	}
+
+	public void addText(
+		int index, String align, String valign, String name, String href) {
+
+		_entries.add(index, new TextSearchEntry(align, valign, name, href));
 	}
 
 	// Text with name and portlet URL
@@ -162,6 +178,29 @@ public class ResultRow {
 		}
 		else {
 			addText(index, name, portletURL.toString());
+		}
+	}
+
+	public void addText(
+		String align, String valign, String name, PortletURL portletURL) {
+
+		if (portletURL == null) {
+			addText(align, valign, name);
+		}
+		else {
+			addText(align, valign, name, portletURL.toString());
+		}
+	}
+
+	public void addText(
+		int index, String align, String valign, String name,
+		PortletURL portletURL) {
+
+		if (portletURL == null) {
+			addText(index, align, valign, name);
+		}
+		else {
+			addText(index, align, valign, name, portletURL.toString());
 		}
 	}
 
@@ -196,8 +235,7 @@ public class ResultRow {
 	public void addButton(
 		int index, String align, String valign, String name, String href) {
 
-		_entries.add(
-			index, new ButtonSearchEntry(align, valign, name, href));
+		_entries.add(index, new ButtonSearchEntry(align, valign, name, href));
 	}
 
 	// JSP
@@ -206,8 +244,8 @@ public class ResultRow {
 		addJSP(_entries.size(), path);
 	}
 
-	public void addJSP(String path, String align, String valign) {
-		addJSP(_entries.size(), path, align, valign);
+	public void addJSP(String align, String valign, String path) {
+		addJSP(_entries.size(), align, valign, path);
 	}
 
 	public void addJSP(int index, String path) {

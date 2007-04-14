@@ -152,8 +152,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 				%>
 
 				<liferay-ui:input-move-boxes
-					leftTitle='<%= LanguageUtil.get(pageContext, "current") %>'
-					rightTitle='<%= LanguageUtil.get(pageContext, "available") %>'
+					leftTitle="current"
+					rightTitle="available"
 					leftBoxName="current_cc_types"
 					rightBoxName="available_cc_types"
 					leftReorder="true"

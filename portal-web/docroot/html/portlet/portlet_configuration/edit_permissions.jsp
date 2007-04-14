@@ -411,8 +411,8 @@ else if (modelResource.equals(Layout.class.getName())) {
 				%>
 
 				<liferay-ui:input-move-boxes
-					leftTitle='<%= LanguageUtil.get(pageContext, "current") %>'
-					rightTitle='<%= LanguageUtil.get(pageContext, "available") %>'
+					leftTitle="current"
+					rightTitle="available"
 					leftBoxName="current_actions"
 					rightBoxName="available_actions"
 					leftList="<%= leftList %>"
@@ -627,8 +627,8 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				<liferay-ui:input-move-boxes
 					formName="fm"
-					leftTitle='<%= LanguageUtil.get(pageContext, "current") %>'
-					rightTitle='<%= LanguageUtil.get(pageContext, "available") %>'
+					leftTitle="current"
+					rightTitle="available"
 					leftBoxName="current_actions"
 					rightBoxName="available_actions"
 					leftList="<%= leftList %>"
@@ -813,8 +813,8 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				<liferay-ui:input-move-boxes
 					formName="fm"
-					leftTitle='<%= LanguageUtil.get(pageContext, "current") %>'
-					rightTitle='<%= LanguageUtil.get(pageContext, "available") %>'
+					leftTitle="current"
+					rightTitle="available"
 					leftBoxName="current_actions"
 					rightBoxName="available_actions"
 					leftList="<%= leftList %>"
@@ -895,8 +895,8 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 		<liferay-ui:input-move-boxes
 			formName="fm"
-			leftTitle='<%= LanguageUtil.get(pageContext, "current") %>'
-			rightTitle='<%= LanguageUtil.get(pageContext, "available") %>'
+			leftTitle="current"
+			rightTitle="available"
 			leftBoxName="current_actions"
 			rightBoxName="available_actions"
 			leftList="<%= leftList %>"

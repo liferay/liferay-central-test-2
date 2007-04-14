@@ -107,8 +107,9 @@ ul.gamma .tree-item-hover {
 /* ---------- Portlets ---------- */
 
 /* ---------- Alfresco content ---------- */
+
 .portlet-alfresco-content.preview {
-	border: 2px solid #FF0000; 
+	border: 2px solid #FF0000;
 	padding: 8px;
 }
 
