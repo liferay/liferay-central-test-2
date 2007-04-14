@@ -352,7 +352,7 @@
 }
 
 .js .delete-tab {
-	background: url(../images/navigation/delete_page.png) no-repeat 42%;
+	background: url(../images/common/remove.png) no-repeat 42%;
 	cursor: pointer;
 	display: block;
 	height: 7px;
