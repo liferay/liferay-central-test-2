@@ -25,6 +25,7 @@ package com.liferay.portal.action;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.SessionTreeJSClicks;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,15 +50,29 @@ public class SessionTreeJSClickAction extends Action {
 		throws Exception {
 
 		try {
-			String treeId = ParamUtil.getString(req, "tree_js_id");
-			String nodeId = ParamUtil.getString(req, "tree_js_node_id");
-			boolean openNode = ParamUtil.getBoolean(req, "tree_js_open");
+			String cmd = ParamUtil.getString(req, Constants.CMD);
 
-			if (openNode) {
-				SessionTreeJSClicks.openNode(req, treeId, nodeId);
+			String treeId = ParamUtil.getString(req, "treeId");
+
+			if (cmd.equals("expand")) {
+				String[] nodeIds = StringUtil.split(
+					ParamUtil.getString(req, "nodeIds"));
+
+				SessionTreeJSClicks.openNodes(req, treeId, nodeIds);
+			}
+			else if (cmd.equals("collapse")) {
+				SessionTreeJSClicks.closeNodes(req, treeId);
 			}
 			else {
-				SessionTreeJSClicks.closeNode(req, treeId, nodeId);
+				String nodeId = ParamUtil.getString(req, "nodeId");
+				boolean openNode = ParamUtil.getBoolean(req, "openNode");
+
+				if (openNode) {
+					SessionTreeJSClicks.openNode(req, treeId, nodeId);
+				}
+				else {
+					SessionTreeJSClicks.closeNode(req, treeId, nodeId);
+				}
 			}
 
 			return null;

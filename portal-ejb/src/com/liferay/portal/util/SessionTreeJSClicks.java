@@ -22,6 +22,7 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.StringUtil;
@@ -59,6 +60,20 @@ public class SessionTreeJSClicks {
 		}
 	}
 
+	public static void closeNodes(HttpServletRequest req, String treeId) {
+		try {
+			PortalPreferences prefs =
+				PortletPreferencesFactory.getPortalPreferences(req);
+
+			String openNodesString = StringPool.BLANK;
+
+			prefs.setValue(CLASS_NAME, treeId, openNodesString);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
 	public static String getOpenNodes(HttpServletRequest req, String treeId) {
 		try {
 			PortalPreferences prefs =
@@ -83,6 +98,26 @@ public class SessionTreeJSClicks {
 			String openNodesString = prefs.getValue(CLASS_NAME, treeId);
 
 			openNodesString = StringUtil.add(openNodesString, nodeId);
+
+			prefs.setValue(CLASS_NAME, treeId, openNodesString);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public static void openNodes(
+		HttpServletRequest req, String treeId, String[] nodeIds) {
+
+		try {
+			PortalPreferences prefs =
+				PortletPreferencesFactory.getPortalPreferences(req);
+
+			String openNodesString = prefs.getValue(CLASS_NAME, treeId);
+
+			for (int i = 0; i < nodeIds.length; i++) {
+				openNodesString = StringUtil.add(openNodesString, nodeIds[i]);
+			}
 
 			prefs.setValue(CLASS_NAME, treeId, openNodesString);
 		}
