@@ -317,6 +317,20 @@ Liferay.Service.Portal.Layout = {
 		params.serviceMethodName = "updateName";
 
 		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateParentLayoutId: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateParentLayoutId";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updatePriority: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updatePriority";
+
+		return Liferay.Service.ajax(params, callback);
 	}
 };
 
