@@ -12,7 +12,7 @@
 			options.handle = this;
 			$.lResize.handleRule(options);
 		});
-	}
+	};
 
 	$.lResize = function(container, options) {
 		/* OPTIONS
