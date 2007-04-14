@@ -57,14 +57,17 @@ if (layoutFamilySet.size() >= depth) {
 	Layout[] layoutFamilyArray = (Layout[])layoutFamilySet.toArray(new Layout[0]);
 
 	Layout depthLevelLayout = null;
+
 	if (depth > 0) {
 		depthLevelLayout = layoutFamilyArray[layoutFamilyArray.length - depth];
 	}
 
 	StringMaker sm = new StringMaker();
 
-	sm.append("<div class='navmenu'>");
+	sm.append("<div class=\"navmenu\">");
+
 	_buildNavigation(depthLevelLayout, layout, layoutFamilySet, themeDisplay, 1, bulletStyle, showTitle, sm);
+
 	sm.append("</div>");
 %>
 
@@ -76,7 +79,8 @@ if (layoutFamilySet.size() >= depth) {
 
 <%!
 private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilySet, ThemeDisplay themeDisplay, int layoutLevel, int bulletStyle, boolean showTitle, StringMaker sm) throws Exception {
-	List layoutChildren;
+	List layoutChildren = null;
+
 	if (layout != null) {
 		layoutChildren = layout.getChildren();
 	}
@@ -86,8 +90,9 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 
 	if (layoutChildren.size() > 0) {
 		if (layoutLevel == 1) {
-			String layoutURL = "";
-			String target = "";
+			String layoutURL = StringPool.BLANK;
+			String target = StringPool.BLANK;
+
 			if (layout != null) {
 				layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 				target = PortalUtil.getLayoutTarget(layout);
@@ -107,8 +112,9 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 				sm.append("<a href=\"");
 			}
 
-			String layoutName = "";
-			if(layout != null){
+			String layoutName = StringPool.BLANK;
+
+			if (layout != null){
 				layoutName = layout.getName(themeDisplay.getLocale());
 			}
 
@@ -138,29 +144,36 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 					String layoutURL = PortalUtil.getLayoutURL(layoutChild, themeDisplay);
 					String target = PortalUtil.getLayoutTarget(layoutChild);
 
-					sm.append("<li ");
-					StringMaker classes = new StringMaker();
-					if (layoutFamilySet.contains(layoutChild) && layoutChild.getChildren().size() > 0) {
-						classes.append("open");
+					String className = StringPool.BLANK;
+
+					if (layoutFamilySet.contains(layoutChild) && (layoutChild.getChildren().size() > 0)) {
+						className = "open";
 					}
+
 					if (selLayout.getLayoutId().equals(layoutChild.getLayoutId())) {
-						classes.append(" selected'");
+						className = "selected";
 					}
-					if (classes.length() > 0) {
-						sm.append("class='");
-						sm.append(classes.toString());
-						sm.append("'");
+
+					sm.append("<li ");
+
+					if (Validator.isNotNull(className)) {
+						sm.append("class=\"");
+						sm.append(className);
+						sm.append("\" ");
 					}
 
 					sm.append(">");
-					sm.append("<a href=\"");
+					sm.append("<a ");
+
+					if (Validator.isNotNull(className)) {
+						sm.append("class=\"");
+						sm.append(className);
+						sm.append("\" ");
+					}
+
+					sm.append("href=\"");
 					sm.append(layoutURL);
 					sm.append("\" ");
-					if (classes.length() > 0) {
-						sm.append(" class='");
-						sm.append(classes.toString());
-						sm.append("' ");
-					}
 					sm.append(target);
 					sm.append("> ");
 					sm.append(layoutChild.getName(themeDisplay.getLocale()));
@@ -171,7 +184,6 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 					}
 
 					sm.append("</li>");
-
 				}
 			}
 
