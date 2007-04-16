@@ -154,8 +154,8 @@ body.staging {
 	color: #333;
 	cursor: move;
 	margin-bottom: 20px;
-	position: relative;
 	padding: 5px;
+	position: relative;
 }
 
 .popup-title {

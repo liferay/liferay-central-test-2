@@ -10,8 +10,7 @@ legend {
 	padding: 0.5em;
 }
 
-input[type="text"], input[type="password"], input[type="file"],input[type="submit"], input[type="button"], input[type="reset"], select, textarea,
-input.text, input.password, input.submit, input.file, input.button, .textarea {
+input[type="text"], input[type="password"], input[type="file"],input[type="submit"], input[type="button"], input[type="reset"], select, textarea,  input.text, input.password, input.submit, input.file, input.button, .textarea {
 	background: #fff url(../images/forms/input_shadow.gif) no-repeat;
 	border: 1px solid #aaa;
 	border-left-color: #777;
@@ -34,8 +33,7 @@ input[type="image"] {
 	padding: 0;
 }
 
-input[type="submit"], input[type="button"], input[type="reset"],
-input.submit, input.button, input.reset {
+input[type="submit"], input[type="button"], input[type="reset"],  input.submit, input.button, input.reset {
 	background: #FAFAFA url(../images/forms/button.gif) repeat-x;
 	border: 3px double #999;
 	border-left-color: #ccc;
