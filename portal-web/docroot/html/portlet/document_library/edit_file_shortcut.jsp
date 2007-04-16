@@ -35,7 +35,7 @@ DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute(WebKeys.DOCUM
 
 long fileShortcutId = BeanParamUtil.getLong(fileShortcut, request, "fileShortcutId");
 String folderId = BeanParamUtil.getString(fileShortcut, request, "folderId");
-String toGroupId = ParamUtil.getString(request, "toGroupId");
+long toGroupId = ParamUtil.getLong(request, "toGroupId");
 String toFolderId = BeanParamUtil.getString(fileShortcut, request, "toFolderId");
 String toName = BeanParamUtil.getString(fileShortcut, request, "toName");
 
@@ -61,7 +61,7 @@ else if (Validator.isNotNull(toFolderId)) {
 	}
 }
 
-if ((toGroup == null) && Validator.isNotNull(toGroupId)) {
+if ((toGroup == null) && (toGroupId > 0)) {
 	try {
 		toGroup = GroupLocalServiceUtil.getGroup(toGroupId);
 	}
@@ -195,9 +195,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<a href="<%= Http.getProtocol(request) %>://<%= request.getServerName() %><%= themeDisplay.getPathMain() %>/document_library/get_file?fileShortcutId=<%= fileShortcutId %>" target="_blank">
-			<%= Http.getProtocol(request) %>://<%= request.getServerName() %><%= themeDisplay.getPathMain() %>/document_library/get_file?fileShortcutId=<%= fileShortcutId %>
-			</a>
+			<input class="form-text" readonly="true" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathMain() %>/document_library/get_file?fileShortcutId=<%= fileShortcutId %>" onClick="javascript: this.focus(); this.select();">
 		</td>
 	</tr>
 	</table>
