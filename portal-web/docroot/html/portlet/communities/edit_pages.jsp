@@ -985,6 +985,16 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							List themes = ThemeLocalUtil.getThemes(company.getCompanyId());
 
 							themes = PluginUtil.restrictPlugins(themes, user);
+
+							Iterator itr = themes.iterator();
+
+							while (itr.hasNext()) {
+								Theme curTheme = (Theme)itr.next();
+
+								if (!curTheme.isGroupAvailable(liveGroupId)) {
+									itr.remove();
+								}
+							}
 							%>
 
 							<liferay-ui:table-iterator
@@ -1109,7 +1119,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
 
 					<c:if test="<%= !layout.getOwnerId().equals(ownerId) %>">
-						<%= LanguageUtil.get(pageContext, "import-a-lar-file-to-overwrite-the-current-pages-and-preferences") %>
+						<%= LanguageUtil.get(pageContext, "import-a-lar-file-to-overwrite-the-current-pages") %>
 
 						<br><br>
 
@@ -1120,13 +1130,39 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						<br><br>
 					</c:if>
 
-					<%= LanguageUtil.get(pageContext, "export-the-current-pages-and-preferences-to-the-given-lar-file-name") %>
+					<%= LanguageUtil.get(pageContext, "export-the-current-pages-to-the-given-lar-file-name") %>
 
 					<br><br>
 
 					<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar">
 
-					<input type="button" value='<%= LanguageUtil.get(pageContext, "export") %>' onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value;">
+					<br><br>
+
+					<%= LanguageUtil.get(pageContext, "do-you-want-to-export-portlet-preferences") %>
+
+					<liferay-ui:input-checkbox param="exportPortletPreferences" defaultValue="<%= false %>" />
+
+					<br><br>
+
+					<%= LanguageUtil.get(pageContext, "do-you-want-to-export-portlet-data") %>
+
+					<liferay-ui:input-checkbox param="exportPortletData" defaultValue="<%= false %>" />
+
+					<br><br>
+
+					<%= LanguageUtil.get(pageContext, "do-you-want-to-export-permissions") %>
+
+					<liferay-ui:input-checkbox param="exportPermissions" defaultValue="<%= false %>" />
+
+					<br><br>
+
+					<%= LanguageUtil.get(pageContext, "do-you-want-to-export-the-root-theme") %>
+
+					<liferay-ui:input-checkbox param="exportTheme" defaultValue="<%= false %>" />
+
+					<br><br>
+
+					<input type="button" value='<%= LanguageUtil.get(pageContext, "export") %>' onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value + '&<portlet:namespace />exportPortletPreferences=' + document.<portlet:namespace />fm.<portlet:namespace />exportPortletPreferences.value + '&<portlet:namespace />exportPortletData=' + document.<portlet:namespace />fm.<portlet:namespace />exportPortletData.value + '&<portlet:namespace />exportPermissions=' + document.<portlet:namespace />fm.<portlet:namespace />exportPermissions.value + '&<portlet:namespace />exportTheme=' + document.<portlet:namespace />fm.<portlet:namespace />exportTheme.value;">
 				</c:when>
 				<c:when test='<%= tabs3.equals("virtual-host") %>'>
 					<%= LanguageUtil.get(pageContext, "enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url") %>
@@ -1237,4 +1273,5 @@ viewPagesURL.setParameter("ownerId", ownerId);
 	</tr>
 	</table>
 </c:if>
+
 </form>
