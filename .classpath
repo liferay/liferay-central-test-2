@@ -7,6 +7,7 @@
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="counter-ejb/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="documentlibrary-ejb/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/compression/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/doubleclick/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/secure/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/sso/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/strip/src"/>
