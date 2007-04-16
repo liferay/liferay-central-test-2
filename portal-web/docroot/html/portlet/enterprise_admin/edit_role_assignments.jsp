@@ -110,6 +110,13 @@ portletURL.setParameter("roleId", role.getRoleId());
 
 		LinkedHashMap userParams = new LinkedHashMap();
 
+		if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+			userParams.put("usersOrgs", user.getOrganization().getOrganizationId());
+		}
+		else if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
+			userParams.put("usersOrgs", user.getLocation().getOrganizationId());
+		}
+
 		if (tabs3.equals("current")) {
 			userParams.put("usersRoles", role.getRoleId());
 		}

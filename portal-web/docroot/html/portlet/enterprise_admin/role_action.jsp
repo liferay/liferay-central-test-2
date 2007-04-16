@@ -70,6 +70,24 @@ Role role = (Role)row.getObject();
 	<liferay-ui:icon image="assign" message="assign-members" url="<%= assignUsersURL %>" />
 </c:if>
 
+<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/view" />
+	<portlet:param name="tabs1" value="users" />
+
+	<c:choose>
+		<c:when test="<%= portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+			<portlet:param name="organizationId" value="<%= user.getOrganization().getOrganizationId() %>" />
+		</c:when>
+		<c:when test="<%= portletName.equals(PortletKeys.LOCATION_ADMIN) %>">
+			<portlet:param name="organizationId" value="<%= user.getLocation().getOrganizationId() %>" />
+		</c:when>
+	</c:choose>
+
+	<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
+</portlet:renderURL>
+
+<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
+
 <c:if test="<%= !PortalUtil.isSystemRole(role.getName()) && RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.DELETE) %>">
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />

@@ -112,6 +112,8 @@ portletURL.setParameter("tabs1", tabs1);
 			UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
 			String organizationId = DAOParamUtil.getString(request, "organizationId");
+			String roleId = DAOParamUtil.getString(request, "roleId");
+			String userGroupId = DAOParamUtil.getString(request, "userGroupId");
 
 			if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				String locationId = user.getLocation().getOrganizationId();
@@ -142,6 +144,14 @@ portletURL.setParameter("tabs1", tabs1);
 
 			userParams.put("usersOrgs", organizationId);
 
+			if (Validator.isNotNull(roleId)) {
+				userParams.put("usersRoles", roleId);
+			}
+
+			if (Validator.isNotNull(userGroupId)) {
+				userParams.put("usersUserGroups", userGroupId);
+			}
+
 			int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
 
 			searchContainer.setTotal(total);
@@ -149,7 +159,59 @@ portletURL.setParameter("tabs1", tabs1);
 			List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
 
 			searchContainer.setResults(results);
+
+			Organization organization = null;
+
+			if (Validator.isNotNull(organizationId)) {
+				try {
+					organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+				}
+				catch (NoSuchOrganizationException nsoe) {
+				}
+			}
+
+			Role role = null;
+
+			if (Validator.isNotNull(roleId)) {
+				try {
+					role = RoleLocalServiceUtil.getRole(roleId);
+				}
+				catch (NoSuchRoleException nsre) {
+				}
+			}
+
+			UserGroup userGroup = null;
+
+			if (Validator.isNotNull(userGroupId)) {
+				try {
+					userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
+				}
+				catch (NoSuchUserGroupException nsuge) {
+				}
+			}
 			%>
+
+			<c:if test="<%= (organization != null) || (role != null) || (userGroup != null) %>">
+				<br>
+			</c:if>
+
+			<c:if test="<%= organization != null %>">
+				<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>">
+
+				<%= LanguageUtil.get(pageContext, "filter-by-" + (organization.isRoot() ? "organization" : "location")) %>: <%= organization.getName() %><br>
+			</c:if>
+
+			<c:if test="<%= role != null %>">
+				<input name="<portlet:namespace /><%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>">
+
+				<%= LanguageUtil.get(pageContext, "filter-by-role") %>: <%= role.getName() %><br>
+			</c:if>
+
+			<c:if test="<%= userGroup != null %>">
+				<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>">
+
+				<%= LanguageUtil.get(pageContext, "filter-by-user-group") %>: <%= userGroup.getName() %><br>
+			</c:if>
 
 			<br><div class="separator"></div><br>
 
@@ -471,9 +533,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 		headerNames.add(StringPool.BLANK);
 
-		RowChecker rowChecker = new RowChecker(renderResponse);
+		if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_USER_GROUP)) {
+			RowChecker rowChecker = new RowChecker(renderResponse);
 
-		searchContainer.setRowChecker(rowChecker);
+			searchContainer.setRowChecker(rowChecker);
+		}
 		%>
 
 		<liferay-ui:search-form
@@ -499,9 +563,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
-			</c:if>
 
-			<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteUserGroups();">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteUserGroups();">
+			</c:if>
 
 			<br><br>
 

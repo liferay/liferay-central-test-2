@@ -47,6 +47,10 @@ public class UserDisplayTerms extends DisplayTerms {
 
 	public static final String ORGANIZATION_ID = "organizationId";
 
+	public static final String ROLE_ID = "roleId";
+
+	public static final String USER_GROUP_ID = "userGroupId";
+
 	public UserDisplayTerms(RenderRequest req) {
 		super(req);
 
@@ -56,6 +60,8 @@ public class UserDisplayTerms extends DisplayTerms {
 		emailAddress = ParamUtil.getString(req, EMAIL_ADDRESS);
 		active = ParamUtil.getBoolean(req, ACTIVE, true);
 		organizationId = ParamUtil.getString(req, ORGANIZATION_ID);
+		roleId = ParamUtil.getString(req, ROLE_ID);
+		userGroupId = ParamUtil.getString(req, USER_GROUP_ID);
 	}
 
 	public String getFirstName() {
@@ -86,11 +92,21 @@ public class UserDisplayTerms extends DisplayTerms {
 		return organizationId;
 	}
 
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public String getUserGroupId() {
+		return userGroupId;
+	}
+
 	protected String firstName;
 	protected String middleName;
 	protected String lastName;
 	protected String emailAddress;
 	protected boolean active;
 	protected String organizationId;
+	protected String roleId;
+	protected String userGroupId;
 
 }

@@ -44,6 +44,8 @@ public class UserSearchTerms extends UserDisplayTerms {
 		emailAddress = DAOParamUtil.getLike(req, EMAIL_ADDRESS);
 		active = ParamUtil.getBoolean(req, ACTIVE, true);
 		organizationId = DAOParamUtil.getString(req, ORGANIZATION_ID);
+		roleId = DAOParamUtil.getString(req, ROLE_ID);
+		userGroupId = DAOParamUtil.getString(req, USER_GROUP_ID);
 	}
 
 }

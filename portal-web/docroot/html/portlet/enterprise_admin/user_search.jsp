@@ -74,23 +74,3 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	</td>
 </tr>
 </table>
-
-<%
-Organization organization = null;
-
-if (Validator.isNotNull(displayTerms.getOrganizationId())) {
-	try {
-		organization = OrganizationLocalServiceUtil.getOrganization(displayTerms.getOrganizationId());
-	}
-	catch (NoSuchOrganizationException nsoe) {
-	}
-}
-%>
-
-<c:if test="<%= organization != null %>">
-	<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>">
-
-	<br>
-
-	<%= LanguageUtil.get(pageContext, "filter-by-" + (organization.isRoot() ? "organization" : "location")) %>: <%= organization.getName() %><br>
-</c:if>
