@@ -28,7 +28,9 @@ var Tree = new Class({
 				var hasChildNode = instance.hasChildNode(node.id);
 				var isNodeOpen = instance.isNodeOpen(node.id);
 
-				instance.treeHTML += '<li class="tree-item" id="_branchId_' + node.id + '">';
+				var layoutId = Liferay.Layout.getLayoutId(node.objId);
+
+				instance.treeHTML += '<li class="tree-item" id="_branchId_' + layoutId + '" rel="_nodeId_' + node.id + '">';
 
 				instance.treeHTML += '<a href="' + node.href + '">';
 
@@ -96,12 +98,34 @@ var Tree = new Class({
 
 			tree.prepend('<li class="toggle-expand"><a href="javascript: ;" id="lfr-expand">' + Liferay.Language.get('expand-all') + '</a> | <a href="javascript: ;" id="lfr-collapse">' + Liferay.Language.get('collapse-all') + '</a></li>');
 
+			var branches = tree.find('li[@rel^=_nodeId_]');
+			var nodeIdList = [];
+
+			branches.each(
+				function(i) {
+					nodeIdList[i] = this.getAttribute('rel').replace(/_nodeId_/, '');
+				}
+			);
+			
+			nodeIdList = nodeIdList.join(',');
+
 			tree.find('#lfr-expand').click(
 				function() {
 					tree.find('.tree-item ul').show();
 					tree.find('.tree-item img').each(
 						function() {
 								this.src = this.src.replace(/plus.png$/, 'minus.png');
+						}
+					);
+
+					jQuery.ajax(
+						{
+							url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
+							data: {
+								cmd: 'expand',
+								nodeIds: nodeIdList,
+								treeId: instance.treeId
+							}
 						}
 					);
 				}
@@ -113,6 +137,16 @@ var Tree = new Class({
 					tree.find('.tree-item img').each(
 						function() {
 							this.src = this.src.replace(/minus.png$/, 'plus.png');
+						}
+					);
+
+					jQuery.ajax(
+						{
+							url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
+							data: {
+								cmd: 'collapse',
+								treeId: instance.treeId,
+							}
 						}
 					);
 				}
@@ -269,7 +303,7 @@ var Tree = new Class({
 
 			var currentLi = obj.parentNode;
 
-			var nodeId = currentLi.id.replace(/_branchId_/, '');
+			var nodeId = currentLi.getAttribute('rel').replace(/_nodeId_/, '');
 
 			var subBranch = jQuery('ul', currentLi).eq(0);
 
@@ -277,8 +311,7 @@ var Tree = new Class({
 				subBranch.show();
 				obj.src = icons.minus;
 				openNode = true;
-			}
-			else {
+			} else {
 				subBranch.hide();
 				obj.src = icons.plus;
 			}
@@ -287,9 +320,9 @@ var Tree = new Class({
 				{
 					url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
 					data: {
-						treeId: treeId,
 						nodeId: nodeId,
-						openNode: openNode
+						openNode: openNode,
+						treeId: treeId
 					}
 				}
 			);
@@ -353,6 +386,24 @@ var Tree = new Class({
 				expander.attr('src', icons.minus);
 			}
 		}
+
+		var idRegEx = /_branchId_/;
+
+		var newParentId = obj.parentNode.id.replace(idRegEx, '');
+
+		var currentId = item.id.replace(idRegEx, '');
+
+		jQuery.ajax(
+			{
+				url: themeDisplay.getPathMain() + '/layout_management/update_page',
+				data: {
+					cmd: 'parent_layout_id',
+					layoutId: currentId,
+					ownerId: themeDisplay.getOwnerId(),
+					parentLayoutId: newParentId
+				}
+			}			
+		);
 
 		instance._updateNavigation(item, obj);
 	},
@@ -425,9 +476,13 @@ var Tree = new Class({
 
 				if (!newParent.is('.tree-item')) {
 					newSibling.after(parentLi);
+					if (parentLi.is(':hidden')) {
+						parentLi.show();
+					}
 				}
 				else {
-					//TODO: add parsing to move child elementes around
+					//TODO: add parsing to move child elements around by their layoutId
+					parentLi.hide();
 				}
 			}
 		}
