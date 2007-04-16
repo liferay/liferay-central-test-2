@@ -286,7 +286,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		StopWatch stopWatch = null;
 
-		if (_log.isDebugEnabled()) {
+		if (_log.isInfoEnabled()) {
 			stopWatch = new StopWatch();
 
 			stopWatch.start();
@@ -534,7 +534,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		StopWatch stopWatch = null;
 
-		if (_log.isDebugEnabled()) {
+		if (_log.isInfoEnabled()) {
 			stopWatch = new StopWatch();
 
 			stopWatch.start();
