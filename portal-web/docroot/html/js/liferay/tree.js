@@ -106,7 +106,7 @@ var Tree = new Class({
 					nodeIdList[i] = this.getAttribute('rel').replace(/_nodeId_/, '');
 				}
 			);
-			
+
 			nodeIdList = nodeIdList.join(',');
 
 			tree.find('#lfr-expand').click(
@@ -402,7 +402,7 @@ var Tree = new Class({
 					ownerId: themeDisplay.getOwnerId(),
 					parentLayoutId: newParentId
 				}
-			}			
+			}
 		);
 
 		instance._updateNavigation(item, obj);
