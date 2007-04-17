@@ -31,11 +31,8 @@ var Tree = new Class({
 				var layoutId = Liferay.Layout.getLayoutId(node.objId);
 
 				instance.treeHTML += '<li class="tree-item" id="_branchId_' + layoutId + '" rel="_nodeId_' + node.id + '">';
-
 				instance.treeHTML += '<a href="' + node.href + '">';
-
 				instance.treeHTML += instance.generateImage(icons.page);
-
 				instance.treeHTML += '<span>' + node.name + '</span>';
 				instance.treeHTML += '</a>';
 
@@ -163,10 +160,12 @@ var Tree = new Class({
 					if (subBranch.size() > 0) {
 						if (subBranch.eq(0).css('display') == 'none') {
 							src = icons.plus;
-						} else {
+						}
+						else {
 							src = icons.minus;
 						}
-					} else {
+					}
+					else {
 						src = icons.spacer;
 					}
 
@@ -476,6 +475,7 @@ var Tree = new Class({
 
 				if (!newParent.is('.tree-item')) {
 					newSibling.after(parentLi);
+
 					if (parentLi.is(':hidden')) {
 						parentLi.show();
 					}

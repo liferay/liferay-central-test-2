@@ -7,7 +7,8 @@ Liferay.Layout = {
 
 			return objId.split(instance._separator)[1];
 		}
-			return 0;
+
+		return 0;
 	},
 
 	getLayoutId: function(objId) {
@@ -18,7 +19,8 @@ Liferay.Layout = {
 
 			return objId.split(instance._separator)[2];
 		}
-			return 0;
+
+		return 0;
 	},
 
 	getOwnerId: function(objId) {
@@ -36,8 +38,8 @@ Liferay.Layout = {
 			return null;
 		}
 	},
+
 	_private: 'PRI.',
 	_public: 'PUB.',
 	_separator: '.'
-
 };
