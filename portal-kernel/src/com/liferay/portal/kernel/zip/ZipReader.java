@@ -20,8 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.zip;
+package com.liferay.portal.kernel.zip;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 
 import java.io.File;
@@ -34,9 +36,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ZipReader.java.html"><b><i>View Source</i></b></a>
@@ -116,7 +115,7 @@ public class ZipReader implements Serializable {
 
 	private static final int _BUFFER = 2048;
 
-	private static Log _log = LogFactory.getLog(ZipReader.class);
+	private static Log _log = LogFactoryUtil.getLog(ZipReader.class);
 
 	private ZipInputStream _zis;
 	private Map _entries = new LinkedHashMap();

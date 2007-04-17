@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -58,7 +59,6 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.ServletResponseUtil;
-import com.liferay.util.zip.ZipWriter;
 
 import java.util.ArrayList;
 import java.util.Collections;

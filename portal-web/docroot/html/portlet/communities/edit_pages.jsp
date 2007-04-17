@@ -561,51 +561,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							<table border="0" cellpadding="0" cellspacing="0">
 							<tr>
 								<td>
-									<%= LanguageUtil.get(pageContext, "parent") %>
-								</td>
-								<td style="padding-left: 10px;"></td>
-								<td>
-									<select name="<portlet:namespace />parentLayoutId">
-
-										<%
-										for (int i = 0; i < layoutList.size(); i++) {
-
-											// id | parentId | ls | obj id | name | img | depth
-
-											String layoutDesc = (String)layoutList.get(i);
-
-											String[] nodeValues = StringUtil.split(layoutDesc, "|");
-
-											String objId = LayoutImpl.getLayoutId(nodeValues[3]);
-											String layoutName = nodeValues[4];
-
-											int depth = 0;
-
-											if (i != 0) {
-												depth = GetterUtil.getInteger(nodeValues[6]);
-											}
-
-											for (int j = 0; j < depth; j++) {
-												layoutName = "-&nbsp;" + layoutName;
-											}
-										%>
-
-											<option <%= parentLayoutId.equals(objId) ? "selected" : "" %> value="<%= objId %>"><%= layoutName %></option>
-
-										<%
-										}
-										%>
-
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="3">
-									<br>
-								</td>
-							</tr>
-							<tr>
-								<td>
 									<%= LanguageUtil.get(pageContext, "name") %>
 								</td>
 								<td style="padding-left: 10px;"></td>

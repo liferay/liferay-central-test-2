@@ -39,6 +39,8 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.zip.ZipReader;
+import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -95,8 +97,6 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLFormatter;
-import com.liferay.util.zip.ZipReader;
-import com.liferay.util.zip.ZipWriter;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

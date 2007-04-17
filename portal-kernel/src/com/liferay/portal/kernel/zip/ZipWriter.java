@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.zip;
+package com.liferay.portal.kernel.zip;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringMaker;
