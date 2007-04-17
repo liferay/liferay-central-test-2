@@ -142,7 +142,7 @@ var Tree = new Class({
 							url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
 							data: {
 								cmd: 'collapse',
-								treeId: instance.treeId,
+								treeId: instance.treeId
 							}
 						}
 					);
