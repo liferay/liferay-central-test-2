@@ -172,11 +172,11 @@ public class PropsUtil {
 
 	public static final String USERS_DELETE = "users.delete";
 
-	public static final String USERS_ID_ALWAYS_AUTOGENERATE = "users.id.always.autogenerate";
+	public static final String USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE = "users.screen.name.always.autogenerate";
 
-	public static final String USERS_ID_GENERATOR = "users.id.generator";
+	public static final String USERS_SCREEN_NAME_GENERATOR = "users.screen.name.generator";
 
-	public static final String USERS_ID_VALIDATOR = "users.id.validator";
+	public static final String USERS_SCREEN_NAME_VALIDATOR = "users.screen.name.validator";
 
 	public static final String USERS_IMAGE_MAX_SIZE = "users.image.max.size";
 
@@ -672,9 +672,9 @@ public class PropsUtil {
 
 	public static final String ADMIN_MAIL_HOST_NAMES = "admin.mail.host.names";
 
-	public static final String ADMIN_RESERVED_EMAIL_ADDRESSES = "admin.reserved.email.addresses";
+	public static final String ADMIN_RESERVED_SCREEN_NAMES = "admin.reserved.screen.names";
 
-	public static final String ADMIN_RESERVED_USER_IDS = "admin.reserved.user.ids";
+	public static final String ADMIN_RESERVED_EMAIL_ADDRESSES = "admin.reserved.email.addresses";
 
 	public static final String ADMIN_EMAIL_FROM_NAME = "admin.email.from.name";
 

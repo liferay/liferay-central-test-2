@@ -170,7 +170,10 @@ public class UserImpl extends UserModelImpl implements User {
 		if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA)) {
 			login = getEmailAddress();
 		}
-		else {
+		else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_SN)) {
+			login = getScreenName();
+		}
+		else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
 			login = getUserId();
 		}
 

@@ -20,23 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.security.auth;
-
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.model.User;
+package com.liferay.portal;
 
 /**
- * <a href="UserIdGenerator.java.html"><b><i>View Source</i></b></a>
+ * <a href="DuplicateUserScreenNameException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UserIdGenerator {
+public class DuplicateUserScreenNameException extends PortalException {
 
-	public String generate(String companyId) throws Exception {
-		return companyId + "." + String.valueOf(
-			CounterLocalServiceUtil.increment(
-				User.class.getName() + "." + companyId));
+	public DuplicateUserScreenNameException() {
+		super();
+	}
+
+	public DuplicateUserScreenNameException(String msg) {
+		super(msg);
+	}
+
+	public DuplicateUserScreenNameException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public DuplicateUserScreenNameException(Throwable cause) {
+		super(cause);
 	}
 
 }

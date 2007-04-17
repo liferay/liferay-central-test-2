@@ -33,6 +33,7 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradePasswordTracker;
 import com.liferay.portal.upgrade.v4_3_0.UpgradePhone;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeResource;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeSubscription;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeUser;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
 
 import org.apache.commons.logging.Log;
@@ -72,6 +73,7 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradePasswordTracker());
 		upgrade(new UpgradePhone());
 		upgrade(new UpgradeSubscription());
+		upgrade(new UpgradeUser());
 		upgrade(new UpgradeWebsite());
 	}
 

@@ -280,11 +280,12 @@ public class EditUsersAction extends PortletAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String reservedUserIds = ParamUtil.getString(req, "reservedUserIds");
+		String reservedScreenNames = ParamUtil.getString(
+			req, "reservedScreenNames");
 		String reservedEmailAddresses = ParamUtil.getString(
 			req, "reservedEmailAddresses");
 
-		prefs.setValue(PropsUtil.ADMIN_RESERVED_USER_IDS, reservedUserIds);
+		prefs.setValue(PropsUtil.ADMIN_RESERVED_SCREEN_NAMES, reservedScreenNames);
 		prefs.setValue(
 			PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES, reservedEmailAddresses);
 	}

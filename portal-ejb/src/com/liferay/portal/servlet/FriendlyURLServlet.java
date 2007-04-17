@@ -197,7 +197,7 @@ public class FriendlyURLServlet extends HttpServlet {
 					String screenName = friendlyURL.substring(1);
 
 					User user = UserLocalServiceUtil.getUserByScreenName(
-						screenName);
+						_companyId, screenName);
 
 					group = user.getGroup();
 				}

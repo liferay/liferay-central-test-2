@@ -29,7 +29,7 @@ import com.liferay.portal.ContactBirthdayException;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
-import com.liferay.portal.DuplicateUserIdException;
+import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchRoleException;
@@ -39,12 +39,13 @@ import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
-import com.liferay.portal.ReservedUserIdException;
+import com.liferay.portal.ReservedUserScreenNameException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserPortraitException;
+import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.Base64;
@@ -60,6 +61,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
@@ -68,8 +70,8 @@ import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalFinder;
-import com.liferay.portal.security.auth.UserIdGenerator;
-import com.liferay.portal.security.auth.UserIdValidator;
+import com.liferay.portal.security.auth.ScreenNameGenerator;
+import com.liferay.portal.security.auth.ScreenNameValidator;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
@@ -171,27 +173,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public User addUser(
-			String creatorUserId, String companyId, boolean autoUserId,
-			String userId, boolean autoPassword, String password1,
-			String password2, boolean passwordReset, String emailAddress,
-			Locale locale, String firstName, String middleName, String lastName,
-			String nickName, int prefixId, int suffixId, boolean male,
-			int birthdayMonth, int birthdayDay, int birthdayYear,
-			String jobTitle, String organizationId, String locationId)
-		throws PortalException, SystemException {
-
-		return addUser(
-			creatorUserId, companyId, autoUserId, userId, autoPassword,
-			password1, password2, passwordReset, emailAddress, locale,
-			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
-			locationId, true);
-	}
-
-	public User addUser(
-			String creatorUserId, String companyId, boolean autoUserId,
-			String userId, boolean autoPassword, String password1,
-			String password2, boolean passwordReset, String emailAddress,
+			String creatorUserId, String companyId, boolean autoPassword,
+			String password1, String password2, boolean passwordReset,
+			boolean autoScreenName, String screenName, String emailAddress,
 			Locale locale, String firstName, String middleName, String lastName,
 			String nickName, int prefixId, int suffixId, boolean male,
 			int birthdayMonth, int birthdayDay, int birthdayYear,
@@ -201,34 +185,23 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// User
 
-		userId = userId.trim().toLowerCase();
+		screenName = screenName.trim().toLowerCase();
 		emailAddress = emailAddress.trim().toLowerCase();
 		Date now = new Date();
 
-		boolean alwaysAutoUserId = GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.USERS_ID_ALWAYS_AUTOGENERATE));
+		boolean alwaysAutoScreenName = GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));
 
-		if (alwaysAutoUserId) {
-			autoUserId = true;
+		if (alwaysAutoScreenName) {
+			autoScreenName = true;
 		}
 
 		validate(
-			companyId, autoUserId, userId, autoPassword, password1, password2,
-			emailAddress, firstName, lastName, organizationId, locationId);
+			companyId, autoPassword, password1, password2, autoScreenName,
+			screenName, emailAddress, firstName, lastName, organizationId,
+			locationId);
 
 		validateOrganizations(companyId, organizationId, locationId);
-
-		if (autoUserId) {
-			UserIdGenerator userIdGenerator = (UserIdGenerator)InstancePool.get(
-				PropsUtil.get(PropsUtil.USERS_ID_GENERATOR));
-
-			try {
-				userId = userIdGenerator.generate(companyId);
-			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
-		}
 
 		if (autoPassword) {
 			password1 = PwdToolkitUtil.generate();
@@ -242,6 +215,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (passwordsLifespan > 0) {
 			expirationDate = new Date(
 				System.currentTimeMillis() + Time.DAY * passwordsLifespan);
+		}
+
+		if (autoScreenName) {
+			ScreenNameGenerator screenNameGenerator =
+				(ScreenNameGenerator)InstancePool.get(
+					PropsUtil.get(PropsUtil.USERS_SCREEN_NAME_GENERATOR));
+
+			try {
+				screenName = screenNameGenerator.generate(companyId);
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
 		}
 
 		User defaultUser = getDefaultUser(companyId);
@@ -259,6 +245,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			greeting = "Welcome, " + fullName + "!";
 		}
 
+		String userId = String.valueOf(CounterLocalServiceUtil.increment(
+			Counter.class.getName()));
+
 		User user = UserUtil.create(userId);
 
 		user.setCompanyId(companyId);
@@ -271,7 +260,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordEncrypted(true);
 		user.setPasswordExpirationDate(expirationDate);
 		user.setPasswordReset(passwordReset);
-		user.setScreenName(user.getUserId());
+		user.setScreenName(screenName);
 		user.setEmailAddress(emailAddress);
 		user.setLanguageId(locale.toString());
 		user.setTimeZoneId(defaultUser.getTimeZoneId());
@@ -436,7 +425,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return authenticate(
-			companyId, emailAddress, password, true, headerMap, parameterMap);
+			companyId, emailAddress, password, CompanyImpl.AUTH_TYPE_EA,
+			headerMap, parameterMap);
+	}
+
+	public int authenticateByScreenName(
+			String companyId, String screenName, String password, Map headerMap,
+			Map parameterMap)
+		throws PortalException, SystemException {
+
+		return authenticate(
+			companyId, screenName, password, CompanyImpl.AUTH_TYPE_SN,
+			headerMap, parameterMap);
 	}
 
 	public int authenticateByUserId(
@@ -445,7 +445,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return authenticate(
-			companyId, userId, password, false, headerMap, parameterMap);
+			companyId, userId, password, CompanyImpl.AUTH_TYPE_ID, headerMap,
+			parameterMap);
 	}
 
 	public boolean authenticateForJAAS(String userId, String encPwd)
@@ -726,20 +727,30 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return UserUtil.findByC_U(companyId, userId);
 	}
 
-	public User getUserByScreenName(String screenName)
+	public User getUserByScreenName(String companyId, String screenName)
 		throws PortalException, SystemException {
 
 		screenName = screenName.trim().toLowerCase();
 
-		return UserUtil.findByScreenName(screenName);
+		return UserUtil.findByC_SN(companyId, screenName);
 	}
 
-	public String getUserId(String companyId, String emailAddress)
+	public String getUserIdByEmailAddress(String companyId, String emailAddress)
 		throws PortalException, SystemException {
 
 		emailAddress = emailAddress.trim().toLowerCase();
 
 		User user = UserUtil.findByC_EA(companyId, emailAddress);
+
+		return user.getUserId();
+	}
+
+	public String getUserIdByScreenName(String companyId, String screenName)
+		throws PortalException, SystemException {
+
+		screenName = screenName.trim().toLowerCase();
+
+		User user = UserUtil.findByC_SN(companyId, screenName);
 
 		return user.getUserId();
 	}
@@ -1053,24 +1064,25 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public User updateUser(
-			String userId, String password, String emailAddress,
-			String languageId, String timeZoneId, String greeting,
-			String resolution, String comments, String firstName,
-			String middleName, String lastName, String nickName,
-			int prefixId, int suffixId, boolean male, int birthdayMonth,
-			int birthdayDay, int birthdayYear, String smsSn, String aimSn,
-			String icqSn, String jabberSn, String msnSn, String skypeSn,
-			String ymSn, String jobTitle, String organizationId,
+			String userId, String password, String screenName,
+			String emailAddress, String languageId, String timeZoneId,
+			String greeting, String resolution, String comments,
+			String firstName, String middleName, String lastName,
+			String nickName, int prefixId, int suffixId, boolean male,
+			int birthdayMonth, int birthdayDay, int birthdayYear, String smsSn,
+			String aimSn, String icqSn, String jabberSn, String msnSn,
+			String skypeSn, String ymSn, String jobTitle, String organizationId,
 			String locationId)
 		throws PortalException, SystemException {
 
 		// User
 
 		userId = userId.trim().toLowerCase();
+		screenName = screenName.trim().toLowerCase();
 		emailAddress = emailAddress.trim().toLowerCase();
 		Date now = new Date();
 
-		validate(userId, emailAddress, firstName, lastName, smsSn);
+		validate(userId, screenName, emailAddress, firstName, lastName, smsSn);
 
 		User user = UserUtil.findByPrimaryKey(userId);
 
@@ -1082,6 +1094,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setContactId(
 				CounterLocalServiceUtil.increment(Counter.class.getName()));
 		}
+
+		user.setScreenName(screenName);
 
 		if (!emailAddress.equals(user.getEmailAddress())) {
 
@@ -1185,18 +1199,23 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected int authenticate(
-			String companyId, String login, String password,
-			boolean byEmailAddress, Map headerMap, Map parameterMap)
+			String companyId, String login, String password, String authType,
+			Map headerMap, Map parameterMap)
 		throws PortalException, SystemException {
 
 		login = login.trim().toLowerCase();
 
-		if (byEmailAddress) {
+		if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
 			if (!Validator.isEmailAddress(login)) {
 				throw new UserEmailAddressException();
 			}
 		}
-		else {
+		else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+			if (Validator.isNull(login)) {
+				throw new UserScreenNameException();
+			}
+		}
+		else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
 			if (Validator.isNull(login)) {
 				throw new UserIdException();
 			}
@@ -1209,24 +1228,35 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		int authResult = Authenticator.FAILURE;
 
-		if (byEmailAddress) {
+		String[] authPipelinePre =
+			PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_PRE);
+
+		if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
 			authResult = AuthPipeline.authenticateByEmailAddress(
-				PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_PRE), companyId,
-				login, password, headerMap, parameterMap);
+				authPipelinePre, companyId, login, password, headerMap,
+				parameterMap);
 		}
-		else {
+		else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+			authResult = AuthPipeline.authenticateByScreenName(
+				authPipelinePre, companyId, login, password, headerMap,
+				parameterMap);
+		}
+		else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
 			authResult = AuthPipeline.authenticateByUserId(
-				PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_PRE), companyId,
-				login, password, headerMap, parameterMap);
+				authPipelinePre, companyId, login, password, headerMap,
+				parameterMap);
 		}
 
 		User user = null;
 
 		try {
-			if (byEmailAddress) {
+			if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
 				user = UserUtil.findByC_EA(companyId, login);
 			}
-			else {
+			else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+				user = UserUtil.findByC_SN(companyId, login);
+			}
+			else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
 				user = UserUtil.findByC_U(companyId, login);
 			}
 		}
@@ -1293,29 +1323,42 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		if (authResult == Authenticator.SUCCESS) {
-			if (byEmailAddress) {
+			String[] authPipelinePost =
+				PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_POST);
+
+			if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
 				authResult = AuthPipeline.authenticateByEmailAddress(
-					PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_POST), companyId,
-					login, password, headerMap, parameterMap);
+					authPipelinePost, companyId, login, password, headerMap,
+					parameterMap);
 			}
-			else {
+			else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+				authResult = AuthPipeline.authenticateByScreenName(
+					authPipelinePost, companyId, login, password, headerMap,
+					parameterMap);
+			}
+			else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
 				authResult = AuthPipeline.authenticateByUserId(
-					PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_POST), companyId,
-					login, password, headerMap, parameterMap);
+					authPipelinePost, companyId, login, password, headerMap,
+					parameterMap);
 			}
 		}
 
 		if (authResult == Authenticator.FAILURE) {
 			try {
-				if (byEmailAddress) {
+				String[] authFailure =
+					PropsUtil.getArray(PropsUtil.AUTH_FAILURE);
+
+				if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
 					AuthPipeline.onFailureByEmailAddress(
-						PropsUtil.getArray(PropsUtil.AUTH_FAILURE), companyId,
-						login, headerMap, parameterMap);
+						authFailure, companyId, login, headerMap, parameterMap);
 				}
-				else {
+				else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+					AuthPipeline.onFailureByScreenName(
+						authFailure, companyId, login, headerMap, parameterMap);
+				}
+				else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
 					AuthPipeline.onFailureByUserId(
-						PropsUtil.getArray(PropsUtil.AUTH_FAILURE), companyId,
-						login, headerMap, parameterMap);
+						authFailure, companyId, login, headerMap, parameterMap);
 				}
 
 				int failedLoginAttempts = user.getFailedLoginAttempts();
@@ -1330,22 +1373,28 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				if ((failedLoginAttempts >= maxFailures) &&
 					(maxFailures != 0)) {
 
-					if (byEmailAddress) {
+					String[] authMaxFailures =
+						PropsUtil.getArray(PropsUtil.AUTH_MAX_FAILURES);
+
+					if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
 						AuthPipeline.onMaxFailuresByEmailAddress(
-							PropsUtil.getArray(
-								PropsUtil.AUTH_MAX_FAILURES),
-							companyId, login, headerMap, parameterMap);
+							authMaxFailures, companyId, login, headerMap,
+							parameterMap);
 					}
-					else {
+					else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+						AuthPipeline.onMaxFailuresByScreenName(
+							authMaxFailures, companyId, login, headerMap,
+							parameterMap);
+					}
+					else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
 						AuthPipeline.onMaxFailuresByUserId(
-							PropsUtil.getArray(
-								PropsUtil.AUTH_MAX_FAILURES),
-							companyId, login, headerMap, parameterMap);
+							authMaxFailures, companyId, login, headerMap,
+							parameterMap);
 					}
 				}
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e, e);
 			}
 		}
 
@@ -1437,11 +1486,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			String userId, String emailAddress, String firstName,
-			String lastName, String smsSn)
+			String userId, String screenName, String emailAddress,
+			String firstName, String lastName, String smsSn)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
+
+		if (!user.getScreenName().equals(screenName)) {
+			validateScreenName(user.getActualCompanyId(), screenName);
+		}
 
 		if (!Validator.isEmailAddress(emailAddress)) {
 			throw new UserEmailAddressException();
@@ -1484,60 +1537,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			String companyId, boolean autoUserId, String userId,
-			boolean autoPassword, String password1, String password2,
+			String companyId, boolean autoPassword, String password1,
+			String password2, boolean autoScreenName, String screenName,
 			String emailAddress, String firstName, String lastName,
 			String organizationId, String locationId)
 		throws PortalException, SystemException {
 
-		if (!autoUserId) {
-			if (Validator.isNull(userId)) {
-				throw new UserIdException();
-			}
-
-			UserIdValidator userIdValidator = (UserIdValidator)InstancePool.get(
-				PropsUtil.get(PropsUtil.USERS_ID_VALIDATOR));
-
-			if (userIdValidator != null) {
-				if (!userIdValidator.validate(userId, companyId)) {
-					throw new UserIdException();
-				}
-			}
-
-			String[] anonymousNames = PrincipalSessionBean.ANONYMOUS_NAMES;
-
-			for (int i = 0; i < anonymousNames.length; i++) {
-				if (userId.equalsIgnoreCase(anonymousNames[i])) {
-					throw new UserIdException();
-				}
-			}
-
-			String[] companyIds = PortalInstances.getCompanyIds();
-
-			for (int i = 0; i < companyIds.length; i++) {
-				if (userId.indexOf(companyIds[i]) != -1) {
-					throw new UserIdException();
-				}
-			}
-
-			try {
-				User user = UserUtil.findByPrimaryKey(userId);
-
-				if (user != null) {
-					throw new DuplicateUserIdException();
-				}
-			}
-			catch (NoSuchUserException nsue) {
-			}
-
-			String[] reservedUserIds = PrefsPropsUtil.getStringArray(
-				companyId, PropsUtil.ADMIN_RESERVED_USER_IDS);
-
-			for (int i = 0; i < reservedUserIds.length; i++) {
-				if (userId.equalsIgnoreCase(reservedUserIds[i])) {
-					throw new ReservedUserIdException();
-				}
-			}
+		if (!autoScreenName) {
+			validateScreenName(companyId, screenName);
 		}
 
 		if (!autoPassword) {
@@ -1639,6 +1646,63 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			throw new UserPasswordException(
 				UserPasswordException.PASSWORD_ALREADY_USED);
+		}
+	}
+
+	protected void validateScreenName(String companyId, String screenName)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(screenName)) {
+			throw new UserScreenNameException();
+		}
+
+		ScreenNameValidator screenNameValidator =
+			(ScreenNameValidator)InstancePool.get(
+				PropsUtil.get(PropsUtil.USERS_SCREEN_NAME_VALIDATOR));
+
+		if (screenNameValidator != null) {
+			if (!screenNameValidator.validate(screenName, companyId)) {
+				throw new UserScreenNameException();
+			}
+		}
+
+		String[] anonymousNames = PrincipalSessionBean.ANONYMOUS_NAMES;
+
+		for (int i = 0; i < anonymousNames.length; i++) {
+			if (screenName.equalsIgnoreCase(anonymousNames[i])) {
+				throw new UserScreenNameException();
+			}
+		}
+
+		String[] companyIds = PortalInstances.getCompanyIds();
+
+		for (int i = 0; i < companyIds.length; i++) {
+			if (screenName.indexOf(companyIds[i]) != -1) {
+				throw new UserScreenNameException();
+			}
+		}
+
+		User user = UserUtil.fetchByC_SN(companyId, screenName);
+
+		if (user != null) {
+			throw new DuplicateUserScreenNameException();
+		}
+
+		String friendlyURL = StringPool.SLASH + screenName;
+
+		Group group = GroupUtil.fetchByC_F(companyId, friendlyURL);
+
+		if (group != null) {
+			throw new DuplicateUserScreenNameException();
+		}
+
+		String[] reservedScreenNames = PrefsPropsUtil.getStringArray(
+			companyId, PropsUtil.ADMIN_RESERVED_SCREEN_NAMES);
+
+		for (int i = 0; i < reservedScreenNames.length; i++) {
+			if (screenName.equalsIgnoreCase(reservedScreenNames[i])) {
+				throw new ReservedUserScreenNameException();
+			}
 		}
 	}
 

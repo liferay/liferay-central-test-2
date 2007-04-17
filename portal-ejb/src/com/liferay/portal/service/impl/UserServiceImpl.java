@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -81,27 +82,9 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	}
 
 	public User addUser(
-			String companyId, boolean autoUserId, String userId,
-			boolean autoPassword, String password1, String password2,
-			boolean passwordReset, String emailAddress, Locale locale,
-			String firstName, String middleName, String lastName,
-			String nickName, int prefixId, int suffixId, boolean male,
-			int birthdayMonth, int birthdayDay, int birthdayYear,
-			String jobTitle, String organizationId, String locationId)
-		throws PortalException, SystemException {
-
-		return addUser(
-			companyId, autoUserId, userId, autoPassword, password1, password2,
-			passwordReset, emailAddress, locale, firstName, middleName,
-			lastName, nickName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
-			true);
-	}
-
-	public User addUser(
-			String companyId, boolean autoUserId, String userId,
-			boolean autoPassword, String password1, String password2,
-			boolean passwordReset, String emailAddress, Locale locale,
+			String companyId, boolean autoPassword, String password1,
+			String password2, boolean passwordReset, boolean autoScreenName,
+			String screenName, String emailAddress, Locale locale,
 			String firstName, String middleName, String lastName,
 			String nickName, int prefixId, int suffixId, boolean male,
 			int birthdayMonth, int birthdayDay, int birthdayYear,
@@ -113,7 +96,8 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 
 		if (!company.isStrangers()) {
 			checkPermission(
-				userId, organizationId, locationId, ActionKeys.ADD_USER);
+				StringPool.BLANK, organizationId, locationId,
+				ActionKeys.ADD_USER);
 		}
 
 		String creatorUserId = null;
@@ -125,8 +109,8 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		}
 
 		return UserLocalServiceUtil.addUser(
-			creatorUserId, companyId, autoUserId, userId, autoPassword,
-			password1, password2, passwordReset, emailAddress, locale,
+			creatorUserId, companyId, autoPassword, password1, password2,
+			passwordReset, autoScreenName, screenName, emailAddress, locale,
 			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
 			locationId, sendEmail);
@@ -185,10 +169,11 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return user;
 	}
 
-	public User getUserByScreenName(String screenName)
+	public User getUserByScreenName(String companyId, String screenName)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getUserByScreenName(screenName);
+		User user = UserLocalServiceUtil.getUserByScreenName(
+			companyId, screenName);
 
 		checkPermission(user.getUserId(), ActionKeys.VIEW);
 
@@ -302,25 +287,25 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	}
 
 	public User updateUser(
-			String userId, String password, String emailAddress,
-			String languageId, String timeZoneId, String greeting,
-			String resolution, String comments, String firstName,
-			String middleName, String lastName, String nickName,
-			int prefixId, int suffixId, boolean male, int birthdayMonth,
-			int birthdayDay, int birthdayYear, String smsSn, String aimSn,
-			String icqSn, String jabberSn, String msnSn, String skypeSn,
-			String ymSn, String jobTitle, String organizationId,
+			String userId, String password, String screenName,
+			String emailAddress, String languageId, String timeZoneId,
+			String greeting, String resolution, String comments,
+			String firstName, String middleName, String lastName,
+			String nickName, int prefixId, int suffixId, boolean male,
+			int birthdayMonth, int birthdayDay, int birthdayYear, String smsSn,
+			String aimSn, String icqSn, String jabberSn, String msnSn,
+			String skypeSn, String ymSn, String jobTitle, String organizationId,
 			String locationId)
 		throws PortalException, SystemException {
 
 		checkPermission(userId, organizationId, locationId, ActionKeys.UPDATE);
 
 		return UserLocalServiceUtil.updateUser(
-			userId, password, emailAddress, languageId, timeZoneId, greeting,
-			resolution, comments, firstName, middleName, lastName, nickName,
-			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-			smsSn, aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
-			organizationId, locationId);
+			userId, password, screenName, emailAddress, languageId, timeZoneId,
+			greeting, resolution, comments, firstName, middleName, lastName,
+			nickName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
+			birthdayYear, smsSn, aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn,
+			jobTitle, organizationId, locationId);
 	}
 
 	protected void checkPermission(String userId, String actionId)

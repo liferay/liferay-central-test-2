@@ -146,10 +146,18 @@ public class LoginAction extends Action {
 				company.getCompanyId(), login, password, headerMap,
 				parameterMap);
 
-			userId = UserLocalServiceUtil.getUserId(
+			userId = UserLocalServiceUtil.getUserIdByEmailAddress(
 				company.getCompanyId(), login);
 		}
-		else {
+		else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_SN)) {
+			authResult = UserLocalServiceUtil.authenticateByScreenName(
+				company.getCompanyId(), login, password, headerMap,
+				parameterMap);
+
+			userId = UserLocalServiceUtil.getUserIdByScreenName(
+				company.getCompanyId(), login);
+		}
+		else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
 			authResult = UserLocalServiceUtil.authenticateByUserId(
 				company.getCompanyId(), login, password, headerMap,
 				parameterMap);

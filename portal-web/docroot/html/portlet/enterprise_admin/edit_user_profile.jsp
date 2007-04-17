@@ -147,17 +147,56 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 <liferay-ui:error exception="<%= ContactLastNameException.class %>" message="please-enter-a-valid-last-name" />
 <liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-you-requested-is-already-taken" />
 <liferay-ui:error exception="<%= DuplicateUserIdException.class %>" message="the-user-id-you-requested-is-already-taken" />
+<liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
 <liferay-ui:error exception="<%= NoSuchOrganizationException.class %>" message="please-select-an-organization-and-location" />
 <liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-organization-for-the-selected-location" />
 <liferay-ui:error exception="<%= ReservedUserEmailAddressException.class %>" message="the-email-address-you-requested-is-reserved" />
 <liferay-ui:error exception="<%= ReservedUserIdException.class %>" message="the-user-id-you-requested-is-reserved" />
+<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
 <liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
+<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td valign="top">
 		<table border="0" cellpadding="0" cellspacing="0">
+
+		<c:if test="<%= user2 != null %>">
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "user-id") %>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					<%= user2.getUserId() %>
+				</td>
+			</tr>
+		</c:if>
+
+		<tr>
+			<td>
+				<%= LanguageUtil.get(pageContext, "screen-name") %>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<%= LanguageUtil.get(pageContext, "email-address") %>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<br>
+			</td>
+		</tr>
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "prefix") %>
@@ -244,43 +283,18 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="nickName" />
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "email-address") %>
-			</td>
-			<td style="padding-left: 10px;"></td>
-			<td>
-				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
-			</td>
-		</tr>
 		</table>
 	</td>
 	<td style="padding-left: 30px;"></td>
 	<td valign="top">
 		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "user-id") %>
-			</td>
-			<td style="padding-left: 10px;"></td>
-			<td>
-				<c:choose>
-					<c:when test="<%= user2 == null %>">
-						<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="userId" />
 
-						<liferay-ui:input-checkbox param="autoUserId" defaultValue="<%= true %>" />
-
-						<%= LanguageUtil.get(pageContext, "autogenerate-id") %>
-					</c:when>
-					<c:otherwise>
-						<%= user2.getUserId() %>
-					</c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
+		<%
+		boolean fieldEnableContactBirthday = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY));
+		%>
 
 		<c:choose>
-			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY)) %>">
+			<c:when test="<%= fieldEnableContactBirthday %>">
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "birthday") %>
@@ -298,7 +312,11 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			</c:otherwise>
 		</c:choose>
 
-		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE)) %>">
+		<%
+		boolean fieldEnableContactMale = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE));
+		%>
+
+		<c:if test="<%= fieldEnableContactMale %>">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "gender") %>
@@ -309,6 +327,14 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 						<option value="1"><%= LanguageUtil.get(pageContext, "male") %></option>
 						<option <%= !male? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "female") %></option>
 					</select>
+				</td>
+			</tr>
+		</c:if>
+
+		<c:if test="<%= fieldEnableContactBirthday || fieldEnableContactMale %>">
+			<tr>
+				<td colspan="3">
+					<br>
 				</td>
 			</tr>
 		</c:if>

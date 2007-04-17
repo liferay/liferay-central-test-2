@@ -76,42 +76,22 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 	}
 
 	public com.liferay.portal.model.User addUser(java.lang.String companyId,
-		boolean autoUserId, java.lang.String userId, boolean autoPassword,
-		java.lang.String password1, java.lang.String password2,
-		boolean passwordReset, java.lang.String emailAddress,
-		java.util.Locale locale, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String nickName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, java.lang.String organizationId,
-		java.lang.String locationId)
+		boolean autoPassword, java.lang.String password1,
+		java.lang.String password2, boolean passwordReset,
+		boolean autoScreenName, java.lang.String screenName,
+		java.lang.String emailAddress, java.util.Locale locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String nickName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String jobTitle,
+		java.lang.String organizationId, java.lang.String locationId,
+		boolean sendEmail)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return UserServiceFactory.getTxImpl().addUser(companyId, autoUserId,
-			userId, autoPassword, password1, password2, passwordReset,
-			emailAddress, locale, firstName, middleName, lastName, nickName,
-			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-			jobTitle, organizationId, locationId);
-	}
-
-	public com.liferay.portal.model.User addUser(java.lang.String companyId,
-		boolean autoUserId, java.lang.String userId, boolean autoPassword,
-		java.lang.String password1, java.lang.String password2,
-		boolean passwordReset, java.lang.String emailAddress,
-		java.util.Locale locale, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String nickName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, java.lang.String organizationId,
-		java.lang.String locationId, boolean sendEmail)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return UserServiceFactory.getTxImpl().addUser(companyId, autoUserId,
-			userId, autoPassword, password1, password2, passwordReset,
+		return UserServiceFactory.getTxImpl().addUser(companyId, autoPassword,
+			password1, password2, passwordReset, autoScreenName, screenName,
 			emailAddress, locale, firstName, middleName, lastName, nickName,
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 			jobTitle, organizationId, locationId, sendEmail);
@@ -166,12 +146,13 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 	}
 
 	public com.liferay.portal.model.User getUserByScreenName(
-		java.lang.String screenName)
+		java.lang.String companyId, java.lang.String screenName)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return UserServiceFactory.getTxImpl().getUserByScreenName(screenName);
+		return UserServiceFactory.getTxImpl().getUserByScreenName(companyId,
+			screenName);
 	}
 
 	public boolean hasGroupUser(long groupId, java.lang.String userId)
@@ -273,27 +254,27 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 	}
 
 	public com.liferay.portal.model.User updateUser(java.lang.String userId,
-		java.lang.String password, java.lang.String emailAddress,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String greeting, java.lang.String resolution,
-		java.lang.String comments, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String nickName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
-		java.lang.String jabberSn, java.lang.String msnSn,
-		java.lang.String skypeSn, java.lang.String ymSn,
-		java.lang.String jobTitle, java.lang.String organizationId,
-		java.lang.String locationId)
+		java.lang.String password, java.lang.String screenName,
+		java.lang.String emailAddress, java.lang.String languageId,
+		java.lang.String timeZoneId, java.lang.String greeting,
+		java.lang.String resolution, java.lang.String comments,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String nickName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String icqSn, java.lang.String jabberSn,
+		java.lang.String msnSn, java.lang.String skypeSn,
+		java.lang.String ymSn, java.lang.String jobTitle,
+		java.lang.String organizationId, java.lang.String locationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return UserServiceFactory.getTxImpl().updateUser(userId, password,
-			emailAddress, languageId, timeZoneId, greeting, resolution,
-			comments, firstName, middleName, lastName, nickName, prefixId,
-			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
-			aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
+			screenName, emailAddress, languageId, timeZoneId, greeting,
+			resolution, comments, firstName, middleName, lastName, nickName,
+			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+			smsSn, aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
 			organizationId, locationId);
 	}
 

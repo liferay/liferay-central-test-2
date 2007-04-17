@@ -319,9 +319,9 @@ public class PortalLDAPUtil {
 	}
 
 	public static User importFromLDAP(
-			String creatorUserId, String companyId, boolean autoUserId,
-			String userId, boolean autoPassword, String password1,
-			String password2, boolean passwordReset, String emailAddress,
+			String creatorUserId, String companyId, boolean autoPassword,
+			String password1, String password2, boolean passwordReset,
+			boolean autoScreenName, String screenName, String emailAddress,
 			Locale locale, String firstName, String middleName, String lastName,
 			String nickName, int prefixId, int suffixId, boolean male,
 			int birthdayMonth, int birthdayDay, int birthdayYear,
@@ -333,14 +333,15 @@ public class PortalLDAPUtil {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"User Id " + userId + " and email address " + emailAddress);
+				"Screen name " + screenName + " and email address " +
+					emailAddress);
 		}
 
-		if (Validator.isNull(userId) || Validator.isNull(emailAddress)) {
+		if (Validator.isNull(screenName) || Validator.isNull(emailAddress)) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Cannot add user because user id and email address are " +
-						"required");
+					"Cannot add user because screen name and email address " +
+						"are required");
 			}
 
 			return user;
@@ -370,14 +371,18 @@ public class PortalLDAPUtil {
 		if (create) {
 			try {
 				user = UserLocalServiceUtil.addUser(
-					creatorUserId, companyId, autoUserId, userId, autoPassword,
-					password1, password2, passwordReset, emailAddress, locale,
-					firstName, middleName, lastName, nickName, prefixId,
-					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-					jobTitle, organizationId, locationId, sendEmail);
+					creatorUserId, companyId, autoPassword, password1,
+					password2, passwordReset, autoScreenName, screenName,
+					emailAddress, locale, firstName, middleName, lastName,
+					nickName, prefixId, suffixId, male, birthdayMonth,
+					birthdayDay, birthdayYear, jobTitle, organizationId,
+					locationId, sendEmail);
 			}
 			catch (Exception e){
-				_log.error("Problem adding user " + userId, e);
+				_log.error(
+					"Problem adding user with screen name " + screenName +
+						" and email address " + emailAddress,
+					e);
 			}
 		}
 
@@ -429,13 +434,13 @@ public class PortalLDAPUtil {
 		Attributes attrs = result.getAttributes();
 
 		String creatorUserId = null;
-		boolean autoUserId = false;
-		String userId = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("userId")).toLowerCase();
 		boolean autoPassword = true;
 		String password1 = StringPool.BLANK;
 		String password2 = StringPool.BLANK;
 		boolean passwordReset = false;
+		boolean autoScreenName = false;
+		String screenName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("screenName")).toLowerCase();
 		String emailAddress = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("emailAddress"));
 		Locale locale = Locale.US;
@@ -471,8 +476,8 @@ public class PortalLDAPUtil {
 		boolean sendEmail = false;
 
 		User user = importFromLDAP(
-			creatorUserId, companyId, autoUserId, userId, autoPassword,
-			password1, password2, passwordReset, emailAddress, locale,
+			creatorUserId, companyId, autoPassword, password1, password2,
+			passwordReset, autoScreenName, screenName, emailAddress, locale,
 			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
 			locationId, sendEmail, true, false);
@@ -481,7 +486,8 @@ public class PortalLDAPUtil {
 			Attribute attr = attrs.get(userMappings.getProperty("group"));
 
 			if (attr != null){
-				_importToLDAPGroup(companyId, ctx, groupMappings, userId, attr);
+				_importToLDAPGroup(
+					companyId, ctx, groupMappings, user.getUserId(), attr);
 			}
 		}
 	}

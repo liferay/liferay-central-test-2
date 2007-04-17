@@ -35,7 +35,6 @@ import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
@@ -137,19 +136,13 @@ public class AddUserAction extends PortletAction {
 
 		Company company = themeDisplay.getCompany();
 
-		boolean autoUserId = true;
-		String userId = StringPool.BLANK;
-
-		if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
-			autoUserId = false;
-			userId = ParamUtil.getString(req, "userId");
-		}
-
 		boolean autoPassword = true;
 		String password1 = null;
 		String password2 = null;
 		boolean passwordReset = GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.PASSWORDS_CHANGE_ON_FIRST_USE));
+		boolean autoScreenName = false;
+		String screenName = ParamUtil.getString(req, "screenName");
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
 		String firstName = ParamUtil.getString(req, "firstName");
 		String middleName = ParamUtil.getString(req, "middleName");
@@ -164,15 +157,16 @@ public class AddUserAction extends PortletAction {
 		String jobTitle = ParamUtil.getString(req, "jobTitle");
 		String organizationId = ParamUtil.getString(req, "organizationId");
 		String locationId = ParamUtil.getString(req, "locationId");
+		boolean sendEmail = true;
 
 		CaptchaUtil.check(req);
 
 		User user = UserServiceUtil.addUser(
-			company.getCompanyId(), autoUserId, userId, autoPassword,
-			password1, password2, passwordReset, emailAddress,
+			company.getCompanyId(), autoPassword, password1, password2,
+			passwordReset, autoScreenName, screenName, emailAddress,
 			themeDisplay.getLocale(), firstName, middleName, lastName,
 			nickName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
-			birthdayYear, jobTitle, organizationId, locationId);
+			birthdayYear, jobTitle, organizationId, locationId, sendEmail);
 
 		// Session messages
 

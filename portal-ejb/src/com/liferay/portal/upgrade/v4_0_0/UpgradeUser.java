@@ -88,6 +88,7 @@ public class UpgradeUser extends UpgradeProcess {
 				String nickName = rs.getString("nickName");
 				boolean male = rs.getBoolean("male");
 				Timestamp birthday = rs.getTimestamp("birthday");
+				String screenName = userId;
 				String emailAddress = rs.getString("emailAddress");
 				String smsId = rs.getString("smsId");
 				String aimId = rs.getString("aimId");
@@ -127,11 +128,12 @@ public class UpgradeUser extends UpgradeProcess {
 				User user = UserLocalServiceUtil.getUserById(userId);
 
 				user = UserLocalServiceUtil.updateUser(
-					userId, password, emailAddress, languageId, timeZoneId,
-					greeting, resolution, comments, firstName, middleName,
-					lastName, nickName, prefixId, suffixId, male, birthdayMonth,
-					birthdayDay, birthdayYear, smsSn, aimSn, icqSn, jabberSn,
-					msnSn, skypeSn, ymSn, jobTitle, organizationId, locationId);
+					userId, password, screenName, emailAddress, languageId,
+					timeZoneId, greeting, resolution, comments, firstName,
+					middleName, lastName, nickName, prefixId, suffixId, male,
+					birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
+					icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
+					organizationId, locationId);
 
 				Contact contact = user.getContact();
 

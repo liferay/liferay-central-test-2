@@ -89,11 +89,11 @@ public class RegisterAction extends PortletAction {
 		String emailAddress = userName + "@" + user.getCompanyMx();
 
 		AdminUtil.updateUser(
-			req, user.getUserId(), emailAddress, user.getLanguageId(),
-			user.getTimeZoneId(), user.getGreeting(), user.getResolution(),
-			user.getComments(), contact.getSmsSn(), contact.getAimSn(),
-			contact.getIcqSn(), contact.getJabberSn(), contact.getMsnSn(),
-			contact.getSkypeSn(), contact.getYmSn());
+			req, user.getUserId(), user.getScreenName(), emailAddress,
+			user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
+			user.getResolution(), user.getComments(), contact.getSmsSn(),
+			contact.getAimSn(), contact.getIcqSn(), contact.getJabberSn(),
+			contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn());
 
 		SessionMessages.add(req, "user_name_registered");
 	}

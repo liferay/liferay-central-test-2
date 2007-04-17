@@ -25,15 +25,15 @@ package com.liferay.portal.security.auth;
 import com.liferay.util.Validator;
 
 /**
- * <a href="LiberalUserIdValidator.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiberalScreenNameValidator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LiberalUserIdValidator extends UserIdValidator {
+public class LiberalScreenNameValidator extends ScreenNameValidator {
 
-	public boolean validate(String userId, String companyId) {
-		if (Validator.isNull(userId)) {
+	public boolean validate(String screenName, String companyId) {
+		if (Validator.isNull(screenName)) {
 			return false;
 		}
 		else {

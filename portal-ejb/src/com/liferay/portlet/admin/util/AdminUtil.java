@@ -70,11 +70,11 @@ public class AdminUtil {
 	}
 
 	public static User updateUser(
-			HttpServletRequest req, String userId, String emailAddress,
-			String languageId, String timeZoneId, String greeting,
-			String resolution, String comments, String smsSn, String aimSn,
-			String icqSn, String jabberSn, String msnSn, String skypeSn,
-			String ymSn)
+			HttpServletRequest req, String userId, String screenName,
+			String emailAddress, String languageId, String timeZoneId,
+			String greeting, String resolution, String comments, String smsSn,
+			String aimSn, String icqSn, String jabberSn, String msnSn,
+			String skypeSn, String ymSn)
 		throws PortalException, RemoteException, SystemException {
 
 		String password = getUpdateUserPassword(req, userId);
@@ -92,8 +92,8 @@ public class AdminUtil {
 		int birthdayYear = birthdayCal.get(Calendar.YEAR);
 
 		return UserServiceUtil.updateUser(
-			userId, password, emailAddress, languageId, timeZoneId, greeting,
-			resolution, comments, contact.getFirstName(),
+			userId, password, screenName, emailAddress, languageId, timeZoneId,
+			greeting, resolution, comments, contact.getFirstName(),
 			contact.getMiddleName(), contact.getLastName(),
 			contact.getNickName(), contact.getPrefixId(), contact.getSuffixId(),
 			contact.isMale(), birthdayMonth, birthdayDay, birthdayYear, smsSn,
@@ -103,19 +103,19 @@ public class AdminUtil {
 	}
 
 	public static User updateUser(
-			ActionRequest req, String userId, String emailAddress,
-			String languageId, String timeZoneId, String greeting,
-			String resolution, String comments, String smsSn, String aimSn,
-			String icqSn, String jabberSn, String msnSn, String skypeSn,
-			String ymSn)
+			ActionRequest req, String userId, String screenName,
+			String emailAddress, String languageId, String timeZoneId,
+			String greeting, String resolution, String comments, String smsSn,
+			String aimSn, String icqSn, String jabberSn, String msnSn,
+			String skypeSn, String ymSn)
 		throws PortalException, RemoteException, SystemException {
 
 		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
 
 		return updateUser(
-			reqImpl.getHttpServletRequest(), userId, emailAddress, languageId,
-			timeZoneId, greeting, resolution, comments, smsSn, aimSn, icqSn,
-			jabberSn, msnSn, skypeSn, ymSn);
+			reqImpl.getHttpServletRequest(), userId, screenName, emailAddress,
+			languageId, timeZoneId, greeting, resolution, comments, smsSn,
+			aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn);
 	}
 
 }

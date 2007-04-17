@@ -23,27 +23,26 @@
 package com.liferay.portal;
 
 /**
- * <a href="UserIdMapperExternalUserIdException.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="ReservedUserScreenNameException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UserIdMapperExternalUserIdException extends PortalException {
+public class ReservedUserScreenNameException extends PortalException {
 
-	public UserIdMapperExternalUserIdException() {
+	public ReservedUserScreenNameException() {
 		super();
 	}
 
-	public UserIdMapperExternalUserIdException(String msg) {
+	public ReservedUserScreenNameException(String msg) {
 		super(msg);
 	}
 
-	public UserIdMapperExternalUserIdException(String msg, Throwable cause) {
+	public ReservedUserScreenNameException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public UserIdMapperExternalUserIdException(Throwable cause) {
+	public ReservedUserScreenNameException(Throwable cause) {
 		super(cause);
 	}
 

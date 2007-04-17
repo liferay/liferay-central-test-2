@@ -22,32 +22,21 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.model.impl.UserImpl;
-import com.liferay.util.Validator;
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.model.User;
 
 /**
- * <a href="UserIdValidator.java.html"><b><i>View Source</i></b></a>
+ * <a href="ScreenNameGenerator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UserIdValidator {
+public class ScreenNameGenerator {
 
-	public boolean validate(String userId, String companyId) {
-		if (Validator.isNull(userId) ||
-			Validator.isNumber(userId) ||
-			Validator.isEmailAddress(userId) ||
-			(userId.equalsIgnoreCase("cyrus")) ||
-			(userId.equalsIgnoreCase("postfix")) ||
-			(userId.indexOf(UserImpl.DEFAULT) != -1) ||
-			(userId.indexOf(companyId) != -1) ||
-			(userId.indexOf("_") != -1)) {
-
-			return false;
-		}
-		else {
-			return true;
-		}
+	public String generate(String companyId) throws Exception {
+		return companyId + "." + String.valueOf(
+			CounterLocalServiceUtil.increment(
+				User.class.getName() + "." + companyId));
 	}
 
 }

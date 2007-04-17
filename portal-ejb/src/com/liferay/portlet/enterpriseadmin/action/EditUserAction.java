@@ -25,16 +25,22 @@ package com.liferay.portlet.enterpriseadmin.action;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
+import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
+import com.liferay.portal.ReservedUserScreenNameException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
@@ -48,6 +54,7 @@ import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -82,9 +89,13 @@ public class EditUserAction extends PortletAction {
 
 		try {
 			User user = null;
+			String oldScreenName = StringPool.BLANK;
 
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				user = updateUser(req);
+				Object[] returnValue = updateUser(req);
+
+				user = (User)returnValue[0];
+				oldScreenName = ((String)returnValue[1]);
 			}
 			else if (cmd.equals("comments")) {
 				user = updateComments(req);
@@ -114,8 +125,37 @@ public class EditUserAction extends PortletAction {
 			String redirect = null;
 
 			if (user != null) {
-				redirect =
-					ParamUtil.getString(req, "redirect") + user.getUserId();
+				redirect = ParamUtil.getString(req, "redirect");
+
+				if (Validator.isNotNull(oldScreenName)) {
+
+					// This will fix the redirect if the user is on his personal
+					// my account page and changes his screen name. A redirect
+					// that references the old screen name no longer points to a
+					// valid screen name and therefore needs to be updated.
+
+					ThemeDisplay themeDisplay =
+						(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+					Group group = user.getGroup();
+
+					if (group.getGroupId() ==
+							themeDisplay.getPortletGroupId()) {
+
+						Layout layout = themeDisplay.getLayout();
+
+						String friendlyURLPath = group.getPathFriendlyURL(
+							layout.isPrivateLayout(), themeDisplay);
+
+						redirect = StringUtil.replace(
+							redirect,
+							friendlyURLPath + StringPool.SLASH + oldScreenName,
+							friendlyURLPath + StringPool.SLASH +
+								user.getScreenName());
+					}
+				}
+
+				redirect += user.getUserId();
 			}
 
 			sendRedirect(req, res, redirect);
@@ -131,13 +171,16 @@ public class EditUserAction extends PortletAction {
 			else if (e instanceof ContactFirstNameException ||
 					 e instanceof ContactLastNameException ||
 					 e instanceof DuplicateUserEmailAddressException ||
+					 e instanceof DuplicateUserScreenNameException ||
 					 e instanceof NoSuchOrganizationException ||
 					 e instanceof OrganizationParentException ||
 					 e instanceof RequiredUserException ||
 					 e instanceof ReservedUserEmailAddressException ||
+					 e instanceof ReservedUserScreenNameException ||
 					 e instanceof UserEmailAddressException ||
 					 e instanceof UserIdException ||
 					 e instanceof UserPasswordException ||
+					 e instanceof UserScreenNameException ||
 					 e instanceof UserSmsException) {
 
 				SessionErrors.add(req, e.getClass().getName(), e);
@@ -211,11 +254,11 @@ public class EditUserAction extends PortletAction {
 		Contact contact = user.getContact();
 
 		AdminUtil.updateUser(
-			req, user.getUserId(), user.getEmailAddress(), user.getLanguageId(),
-			user.getTimeZoneId(), user.getGreeting(), user.getResolution(),
-			comments, contact.getSmsSn(), contact.getAimSn(),
-			contact.getIcqSn(), contact.getJabberSn(), contact.getMsnSn(),
-			contact.getSkypeSn(), contact.getYmSn());
+			req, user.getUserId(), user.getScreenName(), user.getEmailAddress(),
+			user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
+			user.getResolution(), comments, contact.getSmsSn(),
+			contact.getAimSn(), contact.getIcqSn(), contact.getJabberSn(),
+			contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn());
 
 		return user;
 	}
@@ -233,8 +276,8 @@ public class EditUserAction extends PortletAction {
 		Contact contact = user.getContact();
 
 		AdminUtil.updateUser(
-			req, user.getUserId(), user.getEmailAddress(), languageId,
-			timeZoneId, greeting, resolution, user.getComments(),
+			req, user.getUserId(), user.getScreenName(), user.getEmailAddress(),
+			languageId, timeZoneId, greeting, resolution, user.getComments(),
 			contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
 			contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
 			contact.getYmSn());
@@ -268,10 +311,10 @@ public class EditUserAction extends PortletAction {
 		Contact contact = user.getContact();
 
 		AdminUtil.updateUser(
-			req, user.getUserId(), user.getEmailAddress(), user.getLanguageId(),
-			user.getTimeZoneId(), user.getGreeting(), user.getResolution(),
-			user.getComments(), contact.getSmsSn(), aimSn, icqSn, jabberSn,
-			msnSn, skypeSn, ymSn);
+			req, user.getUserId(), user.getScreenName(), user.getEmailAddress(),
+			user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
+			user.getResolution(), user.getComments(), contact.getSmsSn(), aimSn,
+			icqSn, jabberSn, msnSn, skypeSn, ymSn);
 
 		return user;
 	}
@@ -305,27 +348,27 @@ public class EditUserAction extends PortletAction {
 		Contact contact = user.getContact();
 
 		AdminUtil.updateUser(
-			req, user.getUserId(), user.getEmailAddress(), user.getLanguageId(),
-			user.getTimeZoneId(), user.getGreeting(), user.getResolution(),
-			user.getComments(), smsSn, contact.getAimSn(), contact.getIcqSn(),
-			contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
-			contact.getYmSn());
+			req, user.getUserId(), user.getScreenName(), user.getEmailAddress(),
+			user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
+			user.getResolution(), user.getComments(), smsSn, contact.getAimSn(),
+			contact.getIcqSn(), contact.getJabberSn(), contact.getMsnSn(),
+			contact.getSkypeSn(), contact.getYmSn());
 
 		return user;
 	}
 
-	protected User updateUser(ActionRequest req) throws Exception {
+	protected Object[] updateUser(ActionRequest req) throws Exception {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		boolean autoUserId = ParamUtil.getBoolean(req, "autoUserId");
-		String userId = ParamUtil.getString(req, "userId");
 		boolean autoPassword = true;
 		String password1 = null;
 		String password2 = null;
 		boolean passwordReset = true;
+		boolean autoScreenName = false;
+		String screenName = ParamUtil.getString(req, "screenName");
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
 		String firstName = ParamUtil.getString(req, "firstName");
 		String middleName = ParamUtil.getString(req, "middleName");
@@ -340,19 +383,21 @@ public class EditUserAction extends PortletAction {
 		String jobTitle = ParamUtil.getString(req, "jobTitle");
 		String organizationId = ParamUtil.getString(req, "organizationId");
 		String locationId = ParamUtil.getString(req, "locationId");
+		boolean sendEmail = true;
 
 		User user = null;
+		String oldScreenName = StringPool.BLANK;
 
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add user
 
 			user = UserServiceUtil.addUser(
-				themeDisplay.getCompanyId(), autoUserId, userId, autoPassword,
-				password1, password2, passwordReset, emailAddress,
+				themeDisplay.getCompanyId(), autoPassword, password1, password2,
+				passwordReset, autoScreenName, screenName, emailAddress,
 				themeDisplay.getLocale(), firstName, middleName, lastName,
 				nickName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, organizationId, locationId);
+				birthdayYear, jobTitle, organizationId, locationId, sendEmail);
 		}
 		else {
 
@@ -365,18 +410,24 @@ public class EditUserAction extends PortletAction {
 
 			Contact contact = user.getContact();
 
+			String tempOldScreenName = user.getScreenName();
+
 			user = UserServiceUtil.updateUser(
-				user.getUserId(), password, emailAddress, user.getLanguageId(),
-				user.getTimeZoneId(), user.getGreeting(), user.getResolution(),
-				user.getComments(), firstName, middleName, lastName, nickName,
-				prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, contact.getSmsSn(), contact.getAimSn(),
-				contact.getIcqSn(), contact.getJabberSn(), contact.getMsnSn(),
-				contact.getSkypeSn(), contact.getYmSn(), jobTitle,
-				organizationId, locationId);
+				user.getUserId(), password, screenName, emailAddress,
+				user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
+				user.getResolution(), user.getComments(), firstName, middleName,
+				lastName, nickName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, contact.getSmsSn(),
+				contact.getAimSn(), contact.getIcqSn(), contact.getJabberSn(),
+				contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn(),
+				jobTitle, organizationId, locationId);
+
+			if (!tempOldScreenName.equals(user.getScreenName())) {
+				oldScreenName = tempOldScreenName;
+			}
 		}
 
-		return user;
+		return new Object[] {user, oldScreenName};
 	}
 
 }

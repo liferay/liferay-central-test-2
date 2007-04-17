@@ -29,7 +29,10 @@ Boolean staleSession = (Boolean)session.getAttribute(WebKeys.STALE_SESSION);
 
 String userLogin = user.getEmailAddress();
 
-if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
+if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_SN)) {
+	userLogin = user.getScreenName();
+}
+else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
 	userLogin = user.getUserId();
 }
 %>

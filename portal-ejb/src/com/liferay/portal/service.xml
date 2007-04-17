@@ -989,9 +989,6 @@
 		<finder name="ContactId" return-type="User">
 			<finder-column name="contactId" />
 		</finder>
-		<finder name="ScreenName" return-type="User">
-			<finder-column name="screenName" />
-		</finder>
 		<finder name="C_U" return-type="User">
 			<finder-column name="companyId" />
 			<finder-column name="userId" />
@@ -999,6 +996,10 @@
 		<finder name="C_P" return-type="Collection">
 			<finder-column name="companyId" />
 			<finder-column name="password" />
+		</finder>
+		<finder name="C_SN" return-type="User">
+			<finder-column name="companyId" />
+			<finder-column name="screenName" />
 		</finder>
 		<finder name="C_EA" return-type="User">
 			<finder-column name="companyId" />
@@ -1208,6 +1209,7 @@
 		<exception>DuplicateUserEmailAddress</exception>
 		<exception>DuplicateUserGroup</exception>
 		<exception>DuplicateUserId</exception>
+		<exception>DuplicateUserScreenName</exception>
 		<exception>GroupFriendlyURL</exception>
 		<exception>GroupName</exception>
 		<exception>EmailAddress</exception>
@@ -1235,15 +1237,16 @@
 		<exception>RequiredUserGroup</exception>
 		<exception>ReservedUserEmailAddress</exception>
 		<exception>ReservedUserId</exception>
+		<exception>ReservedUserScreenName</exception>
 		<exception>RoleName</exception>
 		<exception>SendPassword</exception>
 		<exception>UserActive</exception>
 		<exception>UserEmailAddress</exception>
 		<exception>UserGroupName</exception>
 		<exception>UserId</exception>
-		<exception>UserIdMapperExternalUserId</exception>
 		<exception>UserPassword</exception>
 		<exception>UserPortrait</exception>
+		<exception>UserScreenName</exception>
 		<exception>UserSms</exception>
 		<exception>WebsiteURL</exception>
 	</exceptions>

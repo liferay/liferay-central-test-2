@@ -71,7 +71,7 @@ portletURL.setParameter("tabs3", tabs3);
 			principal = "uid=admin,ou=system";
 			credentials = "secret";
 			searchFilter = "(mail=@email_address@)";
-			userMappings = "userId=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
+			userMappings = "screenName=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
 		}
 		else if (ldapType == 2) {
 			baseProviderURL = "ldap://localhost:389";
@@ -79,7 +79,7 @@ portletURL.setParameter("tabs3", tabs3);
 			principal = "admin";
 			credentials = "secret";
 			searchFilter = "(&(objectCategory=person)(sAMAccountName=@user_id@))";
-			userMappings = "fullName=cn\nuserId=sAMAccountName\nemailAddress=userprincipalname";
+			userMappings = "fullName=cn\nscreenName=sAMAccountName\nemailAddress=userprincipalname";
 		}
 		else if (ldapType == 3) {
 			url = "ldap://localhost:389";
@@ -87,7 +87,7 @@ portletURL.setParameter("tabs3", tabs3);
 			principal = "cn=admin,ou=test";
 			credentials = "secret";
 			searchFilter = "(mail=@email_address@)";
-			userMappings = "userId=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
+			userMappings = "screenName=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
 		}
 
 		if ((ldapType >= 1) && (ldapType <= 3)) {

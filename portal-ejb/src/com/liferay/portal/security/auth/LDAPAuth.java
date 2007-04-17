@@ -73,7 +73,25 @@ public class LDAPAuth implements Authenticator {
 
 		try {
 			return authenticate(
-				companyId, emailAddress, StringPool.BLANK, password);
+				companyId, emailAddress, StringPool.BLANK, StringPool.BLANK,
+				password);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new AuthException(e);
+		}
+	}
+
+	public int authenticateByScreenName(
+			String companyId, String screenName, String password, Map headerMap,
+			Map parameterMap)
+		throws AuthException {
+
+		try {
+			return authenticate(
+				companyId, StringPool.BLANK, screenName, StringPool.BLANK,
+				password);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -88,7 +106,9 @@ public class LDAPAuth implements Authenticator {
 		throws AuthException {
 
 		try {
-			return authenticate(companyId, StringPool.BLANK, userId, password);
+			return authenticate(
+				companyId, StringPool.BLANK, StringPool.BLANK, userId,
+				password);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -98,8 +118,8 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected int authenticate(
-			String companyId, String emailAddress, String userId,
-			String password)
+			String companyId, String emailAddress, String screenName,
+			String userId, String password)
 		throws Exception {
 
 		if (!PortalLDAPUtil.isAuthEnabled(companyId)) {
@@ -170,10 +190,10 @@ public class LDAPAuth implements Authenticator {
 		filter = StringUtil.replace(
 			filter,
 			new String[] {
-				"@company_id@", "@email_address@", "@user_id@"
+				"@company_id@", "@email_address@", "@screen_name@", "@user_id@"
 			},
 			new String[] {
-				companyId, emailAddress, userId
+				companyId, emailAddress, screenName, userId
 			});
 
 		if (_log.isDebugEnabled()) {
@@ -203,8 +223,8 @@ public class LDAPAuth implements Authenticator {
 				Attribute userPassword = attrs.get("userPassword");
 
 				boolean authenticated = authenticate(
-					ctx, env, binding, baseDN, userPassword,  password,
-					companyId, userId, emailAddress);
+					ctx, env, binding, baseDN, userPassword, companyId,
+					emailAddress, screenName, userId, password);
 
 				if (!authenticated) {
 					return authenticateRequired(
@@ -212,8 +232,8 @@ public class LDAPAuth implements Authenticator {
 				}
 
 				processUser(
-					attrs, userMappings, companyId, emailAddress,  userId,
-					password);
+					attrs, userMappings, companyId, emailAddress, screenName,
+					userId, password);
 			}
 			else {
 				if (_log.isDebugEnabled()) {
@@ -236,8 +256,8 @@ public class LDAPAuth implements Authenticator {
 
 	protected boolean authenticate(
 			LdapContext ctx, Properties env, Binding binding, String baseDN,
-			Attribute userPassword, String password, String companyId,
-			String userId, String emailAddress)
+			Attribute userPassword, String companyId, String emailAddress,
+			String screenName, String userId, String password)
 		throws Exception {
 
 		boolean authenticated = false;
@@ -348,21 +368,23 @@ public class LDAPAuth implements Authenticator {
 
 	protected void processUser(
 			Attributes attrs, Properties userMappings, String companyId,
-			String emailAddress, String userId, String password)
+			String emailAddress, String screenName, String userId,
+			String password)
 		throws Exception {
 
 		String creatorUserId = null;
-		boolean autoUserId = false;
-
-		if (Validator.isNull(userId)) {
-			userId = LDAPUtil.getAttributeValue(
-				attrs, userMappings.getProperty("userId")).toLowerCase();
-		}
 
 		boolean autoPassword = false;
 		String password1 = password;
 		String password2 = password;
 		boolean passwordReset = false;
+
+		boolean autoScreenName = false;
+
+		if (Validator.isNull(screenName)) {
+			screenName = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("screenName")).toLowerCase();
+		}
 
 		if (Validator.isNull(emailAddress)) {
 			emailAddress = LDAPUtil.getAttributeValue(
@@ -404,8 +426,8 @@ public class LDAPAuth implements Authenticator {
 		boolean updatePassword = true;
 
 		PortalLDAPUtil.importFromLDAP(
-			creatorUserId, companyId, autoUserId, userId, autoPassword,
-			password1, password2, passwordReset, emailAddress, locale,
+			creatorUserId, companyId, autoPassword, password1, password2,
+			passwordReset, autoScreenName, screenName, emailAddress, locale,
 			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
 			locationId, sendEmail, checkExists, updatePassword);

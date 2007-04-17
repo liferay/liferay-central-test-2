@@ -250,12 +250,12 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		if (UserUtil.countByCompanyId(companyId) == 0) {
 			String creatorUserId = null;
-			boolean autoUserId = true;
-			String userId = StringPool.BLANK;
 			boolean autoPassword = false;
 			String password1 = PropsUtil.get(PropsUtil.DEFAULT_ADMIN_PASSWORD);
 			String password2 = password1;
 			boolean passwordReset = false;
+			boolean autoScreenName = true;
+			String screenName = StringPool.BLANK;
 			String emailAddress =
 				PropsUtil.get(
 					PropsUtil.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX) +
@@ -278,8 +278,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String locationId = null;
 
 			User user = UserLocalServiceUtil.addUser(
-				creatorUserId, companyId, autoUserId, userId, autoPassword,
-				password1, password2, passwordReset, emailAddress, locale,
+				creatorUserId, companyId, autoPassword, password1, password2,
+				passwordReset, autoScreenName, screenName, emailAddress, locale,
 				firstName, middleName, lastName, nickName, prefixId, suffixId,
 				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
 				organizationId, locationId, false);

@@ -38,6 +38,12 @@ public class LoginFailure implements AuthFailure {
 		throws AuthException {
 	}
 
+	public void onFailureByScreenName(
+			String companyId, String screenName, Map headerMap,
+			Map parameterMap)
+		throws AuthException {
+	}
+
 	public void onFailureByUserId(
 			String companyId, String userId, Map headerMap, Map parameterMap)
 		throws AuthException {

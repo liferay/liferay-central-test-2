@@ -200,18 +200,6 @@ public class UserUtil {
 		return getPersistence().fetchByContactId(contactId);
 	}
 
-	public static com.liferay.portal.model.User findByScreenName(
-		java.lang.String screenName)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchUserException {
-		return getPersistence().findByScreenName(screenName);
-	}
-
-	public static com.liferay.portal.model.User fetchByScreenName(
-		java.lang.String screenName) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByScreenName(screenName);
-	}
-
 	public static com.liferay.portal.model.User findByC_U(
 		java.lang.String companyId, java.lang.String userId)
 		throws com.liferay.portal.SystemException, 
@@ -269,6 +257,19 @@ public class UserUtil {
 			password, obc);
 	}
 
+	public static com.liferay.portal.model.User findByC_SN(
+		java.lang.String companyId, java.lang.String screenName)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserException {
+		return getPersistence().findByC_SN(companyId, screenName);
+	}
+
+	public static com.liferay.portal.model.User fetchByC_SN(
+		java.lang.String companyId, java.lang.String screenName)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_SN(companyId, screenName);
+	}
+
 	public static com.liferay.portal.model.User findByC_EA(
 		java.lang.String companyId, java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException, 
@@ -322,12 +323,6 @@ public class UserUtil {
 		getPersistence().removeByContactId(contactId);
 	}
 
-	public static void removeByScreenName(java.lang.String screenName)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchUserException {
-		getPersistence().removeByScreenName(screenName);
-	}
-
 	public static void removeByC_U(java.lang.String companyId,
 		java.lang.String userId)
 		throws com.liferay.portal.SystemException, 
@@ -338,6 +333,13 @@ public class UserUtil {
 	public static void removeByC_P(java.lang.String companyId,
 		java.lang.String password) throws com.liferay.portal.SystemException {
 		getPersistence().removeByC_P(companyId, password);
+	}
+
+	public static void removeByC_SN(java.lang.String companyId,
+		java.lang.String screenName)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserException {
+		getPersistence().removeByC_SN(companyId, screenName);
 	}
 
 	public static void removeByC_EA(java.lang.String companyId,
@@ -361,11 +363,6 @@ public class UserUtil {
 		return getPersistence().countByContactId(contactId);
 	}
 
-	public static int countByScreenName(java.lang.String screenName)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByScreenName(screenName);
-	}
-
 	public static int countByC_U(java.lang.String companyId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_U(companyId, userId);
@@ -374,6 +371,11 @@ public class UserUtil {
 	public static int countByC_P(java.lang.String companyId,
 		java.lang.String password) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_P(companyId, password);
+	}
+
+	public static int countByC_SN(java.lang.String companyId,
+		java.lang.String screenName) throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_SN(companyId, screenName);
 	}
 
 	public static int countByC_EA(java.lang.String companyId,

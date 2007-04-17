@@ -22,35 +22,33 @@
 
 package com.liferay.portal.security.auth;
 
-import java.util.Map;
+import com.liferay.portal.model.impl.UserImpl;
+import com.liferay.util.Validator;
 
 /**
- * <a href="Authenticator.java.html"><b><i>View Source</i></b></a>
+ * <a href="ScreenNameValidator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Authenticator {
+public class ScreenNameValidator {
 
-	public static final int SUCCESS = 1;
+	public boolean validate(String screenName, String companyId) {
+		if (Validator.isNull(screenName) ||
+			Validator.isNumber(screenName) ||
+			Validator.isEmailAddress(screenName) ||
+			(screenName.equalsIgnoreCase("cyrus")) ||
+			(screenName.equalsIgnoreCase("postfix")) ||
+			(screenName.indexOf(UserImpl.DEFAULT) != -1) ||
+			(screenName.indexOf(companyId) != -1) ||
+			(screenName.indexOf("_") != -1) ||
+			(screenName.indexOf("/") != -1)) {
 
-	public static final int FAILURE = -1;
-
-	public static final int DNE = 0;
-
-	public int authenticateByEmailAddress(
-			String companyId, String emailAddress, String password,
-			Map headerMap, Map parameterMap)
-		throws AuthException;
-
-	public int authenticateByScreenName(
-			String companyId, String screenName, String password, Map headerMap,
-			Map parameterMap)
-		throws AuthException;
-
-	public int authenticateByUserId(
-			String companyId, String userId, String password, Map headerMap,
-			Map parameterMap)
-		throws AuthException;
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 
 }

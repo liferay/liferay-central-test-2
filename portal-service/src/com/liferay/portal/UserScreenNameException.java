@@ -20,37 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.security.auth;
-
-import java.util.Map;
+package com.liferay.portal;
 
 /**
- * <a href="Authenticator.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserScreenNameException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Authenticator {
+public class UserScreenNameException extends PortalException {
 
-	public static final int SUCCESS = 1;
+	public UserScreenNameException() {
+		super();
+	}
 
-	public static final int FAILURE = -1;
+	public UserScreenNameException(String msg) {
+		super(msg);
+	}
 
-	public static final int DNE = 0;
+	public UserScreenNameException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-	public int authenticateByEmailAddress(
-			String companyId, String emailAddress, String password,
-			Map headerMap, Map parameterMap)
-		throws AuthException;
-
-	public int authenticateByScreenName(
-			String companyId, String screenName, String password, Map headerMap,
-			Map parameterMap)
-		throws AuthException;
-
-	public int authenticateByUserId(
-			String companyId, String userId, String password, Map headerMap,
-			Map parameterMap)
-		throws AuthException;
+	public UserScreenNameException(Throwable cause) {
+		super(cause);
+	}
 
 }

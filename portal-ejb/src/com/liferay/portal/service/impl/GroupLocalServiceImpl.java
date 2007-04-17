@@ -579,6 +579,19 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 			catch (NoSuchGroupException nsge) {
 			}
+
+			String screenName = friendlyURL;
+
+			if (screenName.startsWith(StringPool.SLASH)) {
+				screenName = friendlyURL.substring(1, friendlyURL.length());
+			}
+
+			User user = UserUtil.fetchByC_SN(companyId, screenName);
+
+			if (user != null) {
+				throw new GroupFriendlyURLException(
+					GroupFriendlyURLException.DUPLICATE);
+			}
 		}
 	}
 

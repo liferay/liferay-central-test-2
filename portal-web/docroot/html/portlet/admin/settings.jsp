@@ -180,6 +180,7 @@
 					<td>
 						<select name="<portlet:namespace />authType">
 							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_EA %>"><%= LanguageUtil.get(pageContext, "by-email-address") %></option>
+							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_SN) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_SN %>"><%= LanguageUtil.get(pageContext, "by-screen-name") %></option>
 							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_ID %>"><%= LanguageUtil.get(pageContext, "by-user-id") %></option>
 						</select>
 					</td>
@@ -246,12 +247,12 @@
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateDefaultGroupsAndRoles');">
 	</c:when>
-	<c:when test='<%= tabs2.equals("reserved-user-ids") %>'>
-		<%= LanguageUtil.get(pageContext, "enter-one-user-id-per-line-to-reserve-the-user-id") %>
+	<c:when test='<%= tabs2.equals("reserved-screen-names") %>'>
+		<%= LanguageUtil.get(pageContext, "enter-one-screen-name-per-line-to-reserve-the-screen-name") %>
 
 		<br><br>
 
-		<textarea name="<portlet:namespace />reservedUserIds" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_USER_IDS) %></textarea>
+		<textarea name="<portlet:namespace />reservedScreenNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_SCREEN_NAMES) %></textarea>
 
 		<br><br>
 
