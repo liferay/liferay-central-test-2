@@ -45,12 +45,12 @@ public class PortalEJBTest extends BaseEJBTest {
 		try {
 			getPortalService().test();
 
-			boolean autoUserId = true;
-			String userId = "";
 			boolean autoPassword = true;
 			String password1 = null;
 			String password2 = null;
 			boolean passwordReset = false;
+			boolean autoScreenName = true;
+			String screenName = "";
 			String emailAddress = "UserServiceEJBTest@liferay.com";
 			Locale locale = Locale.getDefault();
 			String firstName = "UserServiceEJBTest";
@@ -66,13 +66,14 @@ public class PortalEJBTest extends BaseEJBTest {
 			String jobTitle = null;
 			String organizationId = null;
 			String locationId = null;
+			boolean sendMail = false;
 
 			User user = getUserService().addUser(
-				TestConstants.COMPANY_ID, autoUserId, userId, autoPassword,
-				password1, password2, passwordReset, emailAddress, locale,
+				TestConstants.COMPANY_ID, autoPassword, password1, password2,
+				passwordReset, autoScreenName, screenName, emailAddress, locale,
 				firstName, middleName, lastName, nickName, prefixId, suffixId,
 				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-				organizationId, locationId);
+				organizationId, locationId, sendMail);
 
 			getUserService().deleteUser(user.getUserId());
 		}

@@ -43,12 +43,12 @@ public class PortalHttpTest extends BaseHttpTest {
 		try {
 			PortalServiceHttp.test(getHttpPrincipal());
 
-			boolean autoUserId = true;
-			String userId = "";
 			boolean autoPassword = true;
 			String password1 = null;
 			String password2 = null;
 			boolean passwordReset = false;
+			boolean autoScreenName = true;
+			String screenName = "";
 			String emailAddress = "UserServiceHttpTest@liferay.com";
 			Locale locale = Locale.getDefault();
 			String firstName = "UserServiceHttpTest";
@@ -64,13 +64,14 @@ public class PortalHttpTest extends BaseHttpTest {
 			String jobTitle = null;
 			String organizationId = null;
 			String locationId = null;
+			boolean sendMail = false;
 
 			User user = UserServiceHttp.addUser(
-				getHttpPrincipal(), TestConstants.COMPANY_ID, autoUserId,
-				userId, autoPassword, password1, password2, passwordReset,
+				getHttpPrincipal(), TestConstants.COMPANY_ID, autoPassword,
+				password1, password2, passwordReset, autoScreenName, screenName,
 				emailAddress, locale, firstName, middleName, lastName, nickName,
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, organizationId, locationId);
+				birthdayYear, jobTitle, organizationId, locationId, sendMail);
 
 			user = UserServiceHttp.getUserByEmailAddress(
 				getHttpPrincipal(), TestConstants.COMPANY_ID, emailAddress);
