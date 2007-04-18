@@ -29,6 +29,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalFinder;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -74,8 +75,15 @@ public class PrincipalBean {
 		return name;
 	}
 
-	public PermissionChecker getPermissionChecker() {
-		return PermissionThreadLocal.getPermissionChecker();
+	public PermissionChecker getPermissionChecker()
+		throws PrincipalException {
+		PermissionCheckerImpl permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+		if (permissionChecker == null) {
+			throw new PrincipalException("PermissionChecker not initialized");
+		}
+
+		return permissionChecker;
 	}
 
 }

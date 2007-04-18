@@ -46,11 +46,63 @@
 		<pathelement path="${project.dir}/portal-client/portal-client.jar" />
 	</path>
 
+	<path id="test-spring-remoting.http.classpath">
+		<path refid="web.classpath" />
+		<path refid="test-junit.classpath" />
+		<pathelement path="${project.dir}/test/classes" />
+		<pathelement path="${project.dir}/lib/portal/commons-beanutils.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-configuration.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-collections.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-digester.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-discovery.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-lang.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-logging.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-codec.jar" />
+		<pathelement path="${project.dir}/lib/portal/concurrent.jar" />
+		<pathelement path="${project.dir}/lib/portal/easyconf.jar" />
+		<pathelement path="${project.dir}/lib/portal/hibernate3.jar" />
+		<pathelement path="${project.dir}/lib/portal/jcr.jar" />
+		<pathelement path="${project.dir}/lib/portal/log4j.jar" />
+		<pathelement path="${project.dir}/lib/portal/oscache.jar" />
+		<pathelement path="${project.dir}/lib/portal/spring.jar" />
+		<pathelement path="${project.dir}/lib/portal/velocity.jar" />
+		<pathelement path="${project.dir}/lib/portal/xstream.jar" />
+		<pathelement path="${project.dir}/util-java/util-java.jar" />
+		<pathelement path="${project.dir}/portal-ejb/portal-ejb.jar" />
+	</path>
+
+	<path id="test-spring-remoting.hessian.classpath">
+		<path refid="web.classpath" />
+		<path refid="test-junit.classpath" />
+		<pathelement path="${project.dir}/test/classes" />
+		<pathelement path="${project.dir}/lib/portal/commons-beanutils.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-configuration.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-collections.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-digester.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-discovery.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-lang.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-logging.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-codec.jar" />
+		<pathelement path="${project.dir}/lib/portal/concurrent.jar" />
+		<pathelement path="${project.dir}/lib/portal/easyconf.jar" />
+		<pathelement path="${project.dir}/lib/portal/hessian.jar" />
+		<pathelement path="${project.dir}/lib/portal/hibernate3.jar" />
+		<pathelement path="${project.dir}/lib/portal/jcr.jar" />
+		<pathelement path="${project.dir}/lib/portal/log4j.jar" />
+		<pathelement path="${project.dir}/lib/portal/oscache.jar" />
+		<pathelement path="${project.dir}/lib/portal/spring.jar" />
+		<pathelement path="${project.dir}/lib/portal/velocity.jar" />
+		<pathelement path="${project.dir}/lib/portal/xstream.jar" />
+		<pathelement path="${project.dir}/util-java/util-java.jar" />
+		<pathelement path="${project.dir}/portal-ejb/portal-ejb.jar" />
+	</path>
+
 	<target name="compile">
 		<mkdir dir="classes" />
 
 		<path id="test-compile.classpath">
 			<path refid="test-soap.classpath" />
+			<path refid="test-spring-remoting.http.classpath" />
 			<pathelement path="${project.dir}/portal-ejb/classes" />
 		</path>
 
@@ -76,6 +128,8 @@
 		<antcall target="test-http" />
 		<antcall target="test-service" />
 		<antcall target="test-soap" />
+		<antcall target="test-spring-remoting-http" />
+		<!--<antcall target="test-spring-remoting-hessian" />-->
 	</target>
 
 	<target name="test-ejb" depends="compile">
@@ -124,6 +178,26 @@
 			classpathref="test-soap.classpath"
 			fork="true"
 			newenvironment="true"
+		/>
+	</target>
+
+	<target name="test-spring-remoting-http" depends="compile">
+		<java
+			classname="com.liferay.test.spring.remoting.SpringRemotingTests"
+			classpathref="test-spring-remoting.http.classpath"
+			fork="true"
+			newenvironment="true"
+			args="Http"
+		/>
+	</target>
+
+	<target name="test-spring-remoting-hessian" depends="compile">
+		<java
+			classname="com.liferay.test.spring.remoting.SpringRemotingTests"
+			classpathref="test-spring-remoting.hessian.classpath"
+			fork="true"
+			newenvironment="true"
+			args="Hessian"
 		/>
 	</target>
 </project>

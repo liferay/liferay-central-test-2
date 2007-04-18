@@ -22,11 +22,18 @@
 
 package com.liferay.portal.spring.servlet;
 
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.spring.context.LazyWebApplicationContext;
 
 import java.io.IOException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,6 +57,12 @@ public class RemotingServlet extends DispatcherServlet {
 	public static final String CONTEXT_CONFIG_LOCATION =
 		"/WEB-INF/remoting-servlet.xml,/WEB-INF/remoting-servlet-ext.xml";
 
+	public void init(ServletConfig servletConfig)
+		throws ServletException {
+		super.init(servletConfig);
+		_companyId = getServletContext().getInitParameter("company_id");
+	}
+
 	public Class getContextClass() {
 		try {
 			return Class.forName(CONTEXT_CLASS);
@@ -67,20 +80,47 @@ public class RemotingServlet extends DispatcherServlet {
 
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
-
+		PermissionCheckerImpl permissionChecker = null;
 		String remoteUser = req.getRemoteUser();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Remote user " + remoteUser);
 		}
 
-		if (remoteUser != null) {
-			PrincipalThreadLocal.setName(remoteUser);
-		}
+		CompanyThreadLocal.setCompanyId(_companyId);
 
-		super.service(req, res);
+		try {
+			if (remoteUser != null) {
+				PrincipalThreadLocal.setName(remoteUser);
+
+				User user = UserLocalServiceUtil.getUserById(remoteUser);
+
+				permissionChecker =
+					PermissionCheckerFactory.create(user, true, true);
+
+				PermissionThreadLocal.setPermissionChecker(permissionChecker);
+			}
+			else {
+				_log.warn(
+					"User id not provided. An exception will be thrown if " +
+					"a protected service is accessed");
+			}
+
+			super.service(req, res);
+		}
+		catch (Exception e) {
+			throw new ServletException(e);
+		}
+		finally {
+			try {
+				PermissionCheckerFactory.recycle(permissionChecker);
+			} catch (Exception e) {
+			}
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(RemotingServlet.class);
+
+	private String _companyId;
 
 }

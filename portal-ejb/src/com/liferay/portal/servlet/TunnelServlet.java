@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
@@ -41,6 +42,7 @@ import java.io.ObjectOutputStream;
 
 import java.lang.reflect.InvocationTargetException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -58,6 +60,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class TunnelServlet extends HttpServlet {
 
+	public void init(ServletConfig servletConfig)
+		throws ServletException {
+		super.init(servletConfig);
+		_companyId = getServletContext().getInitParameter("company_id");
+	}
+
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
@@ -67,6 +75,8 @@ public class TunnelServlet extends HttpServlet {
 			ObjectInputStream ois = new ObjectInputStream(req.getInputStream());
 
 			Object returnObj = null;
+
+			CompanyThreadLocal.setCompanyId(_companyId);
 
 			try {
 				ObjectValuePair ovp = (ObjectValuePair)ois.readObject();
@@ -124,5 +134,7 @@ public class TunnelServlet extends HttpServlet {
 	}
 
 	private static Log _log = LogFactory.getLog(TunnelServlet.class);
+
+	private String _companyId;
 
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="userServiceHttpSecureProxyExecutor" class="com.liferay.util.spring.remoting.AuthenticatingHttpInvokerRequestExecutor">
+		<property name="userId">
+			<value>liferay.com.1</value>
+		</property>
+		<property name="password">
+			<value>test</value>
+		</property>
+	</bean>
+	<bean id="userServiceHttpSecureProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="http://localhost:8080/tunnel-web/secure/spring/com_liferay_portal_service_spring_UserService-http"/>
+		<property name="serviceInterface" value="com.liferay.portal.service.UserService"/>
+		<property name="httpInvokerRequestExecutor">
+			<ref bean="userServiceHttpSecureProxyExecutor"/>
+		</property>
+	</bean>
+	<bean id="userServiceHessianSecureProxy" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="http://localhost:8080/tunnel-web/secure/spring/com_liferay_portal_service_spring_UserService-hessian"/>
+		<property name="serviceInterface" value="com.liferay.portal.service.UserService"/>
+		<property name="username" value="liferay.com.1"/>
+		<property name="password" value="qUqP5cyxm6YcTAhz05Hph5gvu9M="/>
+	</bean>
+</beans>
