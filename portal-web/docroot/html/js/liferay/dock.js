@@ -34,7 +34,7 @@ Liferay.Dock = {
 						var currentEl = jQuery(internalEvent.target);
 						var dockParent = currentEl.parents('.lfr-dock');
 
-						if (dockParent.length == 0 && !currentEl.is('.lfr-dock')) {
+						if ((dockParent.length == 0) && !currentEl.is('.lfr-dock')) {
 							instance._toggle(event, 'hide');
 						}
 					}
