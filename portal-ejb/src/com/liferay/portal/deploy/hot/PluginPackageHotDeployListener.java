@@ -29,11 +29,13 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.plugin.PluginPackageImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
-import com.liferay.util.Version;
 import com.liferay.util.Validator;
+import com.liferay.util.Version;
 
 import java.io.IOException;
+
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
@@ -64,34 +66,26 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 			"/WEB-INF/liferay-plugin-package.xml"));
 
 		if (xml == null) {
-			String version;
-			String artifactGroupId;
-			String artifactId;
-			Manifest manifest =
-				new Manifest(ctx.getResourceAsStream("/META-INF/MANIFEST.MF"));
+			Manifest manifest = new Manifest(
+				ctx.getResourceAsStream("/META-INF/MANIFEST.MF"));
+
 			Attributes attributes = manifest.getMainAttributes();
 
-			artifactGroupId = attributes.getValue("Implementation-Vendor-Id");
+			String artifactGroupId = attributes.getValue(
+				"Implementation-Vendor-Id");
 
 			if (Validator.isNull(artifactGroupId)) {
-				artifactGroupId = attributes.getValue("Implementation-Vendor");
+				artifactGroupId = GetterUtil.getString(
+					attributes.getValue("Implementation-Vendor"),
+					servletContextName);
 			}
 
-			if (Validator.isNull(artifactGroupId)) {
-				artifactGroupId = servletContextName;
-			}
+			String artifactId = GetterUtil.getString(
+				attributes.getValue("Implementation-Title"),
+				servletContextName);
 
-			artifactId = attributes.getValue("Implementation-Title");
-
-			if (Validator.isNull(artifactId)) {
-				artifactId = servletContextName;
-			}
-
-			version = attributes.getValue("Implementation-Version");
-
-			if (Validator.isNull(version)) {
-				version = Version.UNKNOWN;
-			}
+			String version = GetterUtil.getString(
+				attributes.getValue("Implementation-Version"), Version.UNKNOWN);
 
 			if (_log.isWarnEnabled()) {
 				_log.warn(
