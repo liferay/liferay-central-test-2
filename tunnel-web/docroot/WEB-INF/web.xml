@@ -3,6 +3,10 @@
 
 <web-app>
 	<context-param>
+		<param-name>company_id</param-name>
+		<param-value>liferay.com</param-value>
+	</context-param>
+	<context-param>
 		<param-name>axis.servicesPath</param-name>
 		<param-value>/axis/</param-value>
 	</context-param>
