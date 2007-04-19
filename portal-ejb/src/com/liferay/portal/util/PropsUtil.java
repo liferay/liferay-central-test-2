@@ -862,6 +862,8 @@ public class PropsUtil {
 
 	public static final String MAIL_ACCOUNT_FINDER_PASSWORD = "mail.account.finder.password";
 
+	public static final String MAIL_RECIPIENT_FINDER = "mail.recipient.finder";
+
 	// Message Boards Portlet
 
 	public static final String MESSAGE_BOARDS_EMAIL_FROM_NAME = "message.boards.email.from.name";

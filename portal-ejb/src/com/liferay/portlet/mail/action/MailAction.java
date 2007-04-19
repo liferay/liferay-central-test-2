@@ -39,14 +39,21 @@ import com.liferay.portlet.mail.util.comparator.RecipientComparator;
 import com.liferay.portlet.mail.util.comparator.SizeComparator;
 import com.liferay.portlet.mail.util.comparator.StateComparator;
 import com.liferay.portlet.mail.util.comparator.SubjectComparator;
+import com.liferay.portlet.mail.util.recipient.RecipientFinder;
+import com.liferay.portlet.mail.util.recipient.RecipientFinderLocator;
+import com.liferay.util.Autocomplete;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.ListUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.TextFormatter;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.portlet.PortletPreferences;
@@ -97,10 +104,13 @@ public class MailAction extends JSONAction {
 				return getFolders(req);
 			}
 			else if (cmd.equals("getMessage")) {
-				return getMessage(req, res);
+				return getMessage(req);
 			}
 			else if (cmd.equals("getPreview")) {
 				return getPreview(req);
+			}
+			else if (cmd.equals("getRecipients")) {
+				return getRecipients(req);
 			}
 			else if (cmd.equals("getSearch")) {
 				return getSearch(req);
@@ -190,9 +200,7 @@ public class MailAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	protected String getMessage(HttpServletRequest req, HttpServletResponse res)
-		throws Exception {
-
+	protected String getMessage(HttpServletRequest req) throws Exception {
 		JSONObject jsonObj = new JSONObject();
 
 		String folderId = ParamUtil.getString(req, "folderId");
@@ -239,6 +247,27 @@ public class MailAction extends JSONAction {
 		}
 
 		return jsonObj.toString();
+	}
+
+	protected String getRecipients(HttpServletRequest req) throws Exception {
+		String userId = PortalUtil.getUserId(req);
+		String data = ParamUtil.getString(req, "data");
+
+		List finders = RecipientFinderLocator.getInstances();
+
+		SortedSet recipients = new TreeSet();
+
+		for (int i = 0; i < finders.size(); i++) {
+			RecipientFinder finder = (RecipientFinder)finders.get(i);
+
+			recipients.addAll(
+				finder.getRecipients(userId, data, new HashMap()));
+		}
+
+		JSONArray jsonArray = Autocomplete.arrayToJson((String[])
+			ListUtil.fromCollection(recipients).toArray(new String[0]), 50);
+
+		return jsonArray.toString();
 	}
 
 	protected String getSearch(HttpServletRequest req) throws Exception {

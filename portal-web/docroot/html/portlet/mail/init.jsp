@@ -35,7 +35,10 @@
 <%@ page import="com.liferay.portlet.mail.search.MailDisplayTerms" %>
 <%@ page import="com.liferay.portlet.mail.util.MailUtil" %>
 <%@ page import="com.liferay.portlet.mail.util.comparator.DateComparator" %>
+<%@ page import="com.liferay.portlet.mail.util.recipient.RecipientFinder" %>
+<%@ page import="com.liferay.portlet.mail.util.recipient.RecipientFinderLocator" %>
 <%@ page import="com.liferay.util.mail.MailServerException" %>
+<%@ page import="org.apache.commons.collections.map.MultiValueMap" %>
 
 <%@ page import="javax.mail.Address" %>
 

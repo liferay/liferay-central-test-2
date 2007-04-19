@@ -38,10 +38,18 @@ import org.json.JSONObject;
  */
 public class Autocomplete {
 
-	public static JSONArray arrayToJson(String[][] array) {
+	public static JSONArray arrayToJson(String[] array, int max) {
+		return arrayToJson(_singleToPairArray(array), max);
+	}
+
+	public static JSONArray arrayToJson(String[][] array, int max) {
+		if (max <= 0) {
+			max = array.length;
+		}
+
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < array.length; i++) {
+		for (int i = 0; i < array.length && i < max; i++) {
 			String text = array[i][0];
 			String value = array[i][1];
 
@@ -56,14 +64,22 @@ public class Autocomplete {
 		return jsonArray;
 	}
 
-	public static String arrayToXml(String[][] array) {
+	public static String arrayToXml(String[] array, int max) {
+		return arrayToXml(_singleToPairArray(array), max);
+	}
+
+	public static String arrayToXml(String[][] array, int max) {
+		if (max <= 0) {
+			max = array.length;
+		}
+
 		StringMaker sm = new StringMaker();
 
 		sm.append("<?xml version=\"1.0\"?>");
 
 		sm.append("<ajaxresponse>");
 
-		for (int i = 0; i < array.length; i++) {
+		for (int i = 0; i < array.length && i < max; i++) {
 			String text = array[i][0];
 			String value = array[i][1];
 
@@ -112,13 +128,24 @@ public class Autocomplete {
 	public static JSONArray listToJson(
 		List list, String textParam, String valueParam) {
 
-		return arrayToJson(listToArray(list, textParam, valueParam));
+		return arrayToJson(listToArray(list, textParam, valueParam), -1);
 	}
 
 	public static String listToXml(
 		List list, String textParam, String valueParam) {
 
-		return arrayToXml(listToArray(list, textParam, valueParam));
+		return arrayToXml(listToArray(list, textParam, valueParam), -1);
+	}
+
+	private static String[][] _singleToPairArray(String[] array) {
+		String[][] pairArray = new String[array.length][2];
+
+		for (int i = 0; i < array.length; i++) {
+			pairArray[i][0] = Html.escape(array[i]);
+			pairArray[i][1] = array[i];
+		}
+
+		return pairArray;
 	}
 
 }

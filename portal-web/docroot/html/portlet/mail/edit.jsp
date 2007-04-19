@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/mail/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "filters");
+String tabs1 = ParamUtil.getString(request, "tabs1", "recipients");
 
 signature = ParamUtil.getString(request, "signature", signature);
 vacationMessage = ParamUtil.getString(request, "vacationMessage", vacationMessage);
@@ -72,11 +72,87 @@ portletURL.setParameter("tabs1", tabs1);
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
 
 <liferay-ui:tabs
-	names="filters,forward-address,signature,vacation-message"
+	names="recipients,filters,forward-address,signature,vacation-message"
 	url="<%= portletURL.toString() %>"
 />
 
 <c:choose>
+	<c:when test='<%= tabs1.equals("recipients") %>'>
+		<%= LanguageUtil.get(pageContext, "find-potential-recipients-from-the-following") %>
+
+		<br><br>
+
+		<%
+		List recipientFinders = RecipientFinderLocator.getInstances();
+
+		for (int i = 0; i < recipientFinders.size(); i++) {
+			RecipientFinder recipientFinder = (RecipientFinder)recipientFinders.get(i);
+
+			String rfName = recipientFinder.getClass().getName();
+
+			boolean enabled = GetterUtil.getBoolean(prefs.getValue(rfName, Boolean.TRUE.toString()));
+
+			MultiValueMap options = recipientFinder.getOptions(user.getUserId());
+
+			if (options.size() > 0) {
+				Iterator iterator1 = new TreeSet(options.keySet()).iterator();
+		%>
+
+			<b><%= LanguageUtil.get(pageContext, recipientFinder.getName()) %></b>
+
+			<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "enabled") %>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					<select name="<portlet:namespace /><%= rfName %>">
+						<option value="<%= Boolean.TRUE.toString() %>" <%= enabled ? "selected='selected'" : "" %>><%= LanguageUtil.get(pageContext, "yes") %></option>
+						<option value="<%= Boolean.FALSE.toString() %>" <%= !enabled ? "selected='selected'" : "" %>><%= LanguageUtil.get(pageContext, "no") %></option>
+					</select>
+				</td>
+			</tr>
+			<%
+			while (iterator1.hasNext()) {
+				String option = (String)iterator1.next();
+
+				String optionPref = prefs.getValue(rfName + StringPool.PERIOD + option, StringPool.BLANK);
+			%>
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, option) %>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					<select name="<portlet:namespace /><%= rfName + StringPool.PERIOD + option %>">
+						<%
+						Iterator iterator2 = options.iterator(option);
+
+						while (iterator2.hasNext()) {
+							String choice = (String)iterator2.next();
+						%>
+
+							<option value="<%= choice %>" <%= choice.equals(optionPref) ? "selected='selected'" : "" %>><%= LanguageUtil.get(pageContext, choice) %></option>
+
+						<%
+						}
+						%>
+					</select>
+				</td>
+			</tr>
+			<%
+			}
+			%>
+			</table>
+
+			<br><br>
+
+		<%
+			}
+		}
+		%>
+	</c:when>
 	<c:when test='<%= tabs1.equals("filters") %>'>
 		<%= LanguageUtil.get(pageContext, "set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder") %>
 

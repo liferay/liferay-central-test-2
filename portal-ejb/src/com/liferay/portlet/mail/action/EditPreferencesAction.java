@@ -30,6 +30,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.mail.util.recipient.RecipientFinder;
+import com.liferay.portlet.mail.util.recipient.RecipientFinderLocator;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
@@ -39,6 +41,7 @@ import com.liferay.util.servlet.SessionMessages;
 import java.rmi.RemoteException;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -49,6 +52,7 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.apache.commons.collections.map.MultiValueMap;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -72,11 +76,42 @@ public class EditPreferencesAction extends PortletAction {
 			return;
 		}
 
+		String userId = PortalUtil.getUserId(req);
+
 		PortletPreferences prefs = req.getPreferences();
 
 		String tabs1 = ParamUtil.getString(req, "tabs1");
 
-		if (tabs1.equals("filters")) {
+		if (tabs1.equals("recipients")) {
+			List recipientFinders = RecipientFinderLocator.getInstances();
+
+			for (int i = 0; i < recipientFinders.size(); i++) {
+				RecipientFinder recipientFinder =
+					(RecipientFinder)recipientFinders.get(i);
+
+				String rfName = recipientFinder.getClass().getName();
+
+				boolean isEnabled = ParamUtil.getBoolean(req, rfName, true);
+
+				prefs.setValue(rfName, Boolean.toString(isEnabled));
+
+				MultiValueMap options = recipientFinder.getOptions(userId);
+
+				Iterator iterator = options.keySet().iterator();
+
+				while (iterator.hasNext()) {
+					String key =
+						rfName + StringPool.PERIOD + (String)iterator.next();
+
+					String value = ParamUtil.getString(req, key);
+
+					if (Validator.isNotNull(key)) {
+						prefs.setValue(key, value);
+					}
+				}
+			}
+		}
+		else if (tabs1.equals("filters")) {
 			List filters = new ArrayList();
 			List filterObjects = new ArrayList();
 

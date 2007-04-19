@@ -1,3 +1,45 @@
+RecipientSelector = new Class({
+
+	initialize: function(inputId) {
+		var instance = this;
+
+		var textInput = jQuery('#' + inputId);
+
+		textInput.Autocomplete(
+			{
+				source: function(data) {
+					var xHR = jQuery.ajax (
+						{
+							url: themeDisplay.getPathMain() + "/mail/action",
+							data: {cmd: "getRecipients", data: data.value},
+							dataType: 'json',
+							async: false
+						}
+					);
+
+					return eval(xHR.responseText);
+				},
+				delay: 0,
+				fx: {
+					type: 'slide',
+					duration: 400
+				},
+				autofill: false,
+				dataSourceType: 'json',
+				helperClass: 'autocomplete-box',
+				selectClass: 'autocomplete-selected',
+				minchars: 1,
+				multiple: true,
+				multipleSeparator: ",",
+				onSelect: function() {},
+				onShow: function() {},
+				onHide: function() {}
+			}
+		);
+	}
+
+});
+
 function MailSummaryObject(state, sender, subject, date, size, id, read, folderId, index) {
 	this.next = null;
 	this.prev = null;
@@ -412,7 +454,7 @@ var Mail = {
 			if (i == Mail.DEFAULT_FOLDERS.length - 1) {
 				var manageItem = document.createElement("li");
 				manageItem.id = "folder_management";
-				
+
 				var manageIcon = document.createElement("a");
 				manageIcon.href = "javascript:void(0)";
 				manageIcon.onclick = Mail.onFolderAdd;

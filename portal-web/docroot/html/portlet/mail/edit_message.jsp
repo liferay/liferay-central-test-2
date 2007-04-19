@@ -72,18 +72,13 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 			browser.type = "file";
 			browser.size = "30";
 
-			var spacer = document.createElement("span");
-
-			spacer.innerHTML = "&nbsp;&nbsp;&nbsp;";
-
 			var del = document.createElement("a");
 
 			del.href = "javascript: <portlet:namespace />removeAttachment('" + newRow.id + "');";
-			del.innerHTML = "[<%= LanguageUtil.get(pageContext, "remove") %>]";
+			del.innerHTML = "<img src='<%= themeDisplay.getPathMain() %>/common/remove.png'/>";
 
 			newRow.insertCell(0).appendChild(browser);
-			newRow.insertCell(1).appendChild(spacer);
-			newRow.insertCell(2).appendChild(del);
+			newRow.insertCell(1).appendChild(del);
 		}
 		else {
 			var checkbox = Liferay.Util.createInputElement("<portlet:namespace />remoteAttachment" + remoteFile);
@@ -135,7 +130,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
+<form autocomplete="off" action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_render" value="/mail/view" /></portlet:renderURL>">
 <input name="<portlet:namespace />originalId" type="hidden" value="<%= originalId %>" />
@@ -153,7 +148,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input name="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= to %>">
+		<input name="<portlet:namespace />to" id="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text">
 	</td>
 </tr>
 <tr>
@@ -162,7 +157,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input name="<portlet:namespace />cc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= cc %>">
+		<input name="<portlet:namespace />cc" id="<portlet:namespace />cc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= cc %>">
 	</td>
 </tr>
 <tr>
@@ -171,7 +166,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input name="<portlet:namespace />bcc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= bcc %>">
+		<input name="<portlet:namespace />bcc" id="<portlet:namespace />bcc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= bcc %>">
 	</td>
 </tr>
 <tr>
@@ -236,6 +231,18 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		%>
 
 	</c:if>
+
+	var toFinder = null;
+	var ccFinder = null;
+	var bccFinder = null;
+
+	jQuery(
+		function() {
+			toFinder = new RecipientSelector("<portlet:namespace />to");
+			ccFinder = new RecipientSelector("<portlet:namespace />cc");
+			bccFinder = new RecipientSelector("<portlet:namespace />bcc");
+		}
+	);
 </script>
 
 <%!
