@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
-import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
@@ -1430,7 +1429,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws IOException, PortalException, SystemException {
 
 		Theme theme = layoutSet.getTheme();
-		ColorScheme colorScheme = layoutSet.getColorScheme();
 
 		ZipWriter zipWriter = new ZipWriter();
 

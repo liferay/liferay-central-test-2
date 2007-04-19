@@ -22,8 +22,6 @@
 
 package com.liferay.portal.security.ldap;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Validator;
@@ -129,8 +127,6 @@ public class LDAPUser extends DummyDirContext {
 
 		return getAttributes(name.toString(), ids);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(LDAPUser.class);
 
 	private User _user;
 	private Attributes _attrs;

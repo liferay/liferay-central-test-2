@@ -101,6 +101,4 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 
 	private static Log _log = LogFactory.getLog(BaseAutoDeployListener.class);
 
-	private AutoDeployer _deployer;
-
 }

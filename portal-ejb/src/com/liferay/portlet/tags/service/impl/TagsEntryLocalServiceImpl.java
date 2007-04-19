@@ -98,12 +98,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			String[] property = StringUtil.split(
 				properties[i], StringPool.COLON);
 
-			Long propertyId = new Long(0);
-
-			if (property.length > 0) {
-				propertyId = new Long(GetterUtil.getLong(property[0]));
-			}
-
 			String key = StringPool.BLANK;
 
 			if (property.length > 1) {

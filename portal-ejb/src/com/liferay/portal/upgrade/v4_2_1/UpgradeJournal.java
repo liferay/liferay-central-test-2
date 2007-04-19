@@ -184,7 +184,7 @@ public class UpgradeJournal extends UpgradeProcess {
 							content.substring(0, x) + groupId + "." +
 								content.substring(x, content.length());
 
-						dynamicContent.setAttributeValue("id", newId);
+						dynamicContent.addAttribute("id", newId);
 						dynamicContent.setText(newContent);
 					}
 				}

@@ -35,9 +35,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="BaseWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -126,8 +123,6 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 	protected String getPlid(long groupId) {
 		return LayoutImpl.getUnknownPlid(groupId);
 	}
-
-	private static Log _log = LogFactory.getLog(BaseWebDAVStorageImpl.class);
 
 	private String _rootPath;
 

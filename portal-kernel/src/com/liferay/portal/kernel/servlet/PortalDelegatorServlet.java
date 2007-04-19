@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
@@ -107,11 +105,6 @@ public class PortalDelegatorServlet extends HttpServlet {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortalDelegateServlet.class);
-
 	private static Map _delegates = new HashMap();
-
-	private String _subContext;
 
 }

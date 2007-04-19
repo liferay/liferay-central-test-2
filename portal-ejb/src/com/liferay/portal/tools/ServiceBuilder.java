@@ -196,6 +196,7 @@ public class ServiceBuilder {
 			"com.liferay.util.DateUtil",
 			"com.liferay.util.GetterUtil",
 			"com.liferay.util.InstancePool",
+			"com.liferay.util.XSSUtil",
 			"com.liferay.util.dao.hibernate.QueryPos",
 			"com.liferay.util.dao.hibernate.QueryUtil",
 			"java.rmi.RemoteException",

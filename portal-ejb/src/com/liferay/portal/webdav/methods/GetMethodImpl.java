@@ -30,7 +30,6 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.InputStream;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +48,6 @@ public class GetMethodImpl implements Method {
 
 		try {
 			WebDAVStorage storage = webDavReq.getWebDAVStorage();
-			HttpServletRequest req = webDavReq.getHttpServletRequest();
 			HttpServletResponse res = webDavReq.getHttpServletResponse();
 
 			Resource resource = storage.getResource(webDavReq);

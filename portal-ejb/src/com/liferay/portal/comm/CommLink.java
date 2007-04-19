@@ -109,7 +109,7 @@ public class CommLink implements MessageListener {
 
 				_channel.connect("PortalMessageListener");
 
-				PullPushAdapter adapter = new PullPushAdapter(_channel, this);
+				new PullPushAdapter(_channel, this);
 			}
 		}
 		catch (Exception e) {

@@ -214,9 +214,6 @@ public class VirtualHostFilter implements Filter {
 	private static String _DEPENDENCIES =
 		"com/liferay/portal/servlet/filters/virtualhost/dependencies/";
 
-	private static String _DEPENDENCIES_IGNORE_HOSTS =
-		_DEPENDENCIES + "ignore_hosts.txt";
-
 	private static String _DEPENDENCIES_IGNORE_PATHS =
 		_DEPENDENCIES + "ignore_paths.txt";
 

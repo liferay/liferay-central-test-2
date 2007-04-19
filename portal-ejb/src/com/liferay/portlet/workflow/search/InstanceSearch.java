@@ -30,9 +30,6 @@ import java.util.List;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="InstanceSearch.java.html"><b><i>View Source</i></b></a>
  *
@@ -79,7 +76,5 @@ public class InstanceSearch extends SearchContainer {
 			InstanceDisplayTerms.HIDE_ENDED_TASKS,
 			String.valueOf(displayTerms.isHideEndedTasks()));
 	}
-
-	private static Log _log = LogFactory.getLog(InstanceSearch.class);
 
 }

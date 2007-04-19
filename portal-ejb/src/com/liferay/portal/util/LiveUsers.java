@@ -178,7 +178,7 @@ public class LiveUsers {
 	private List _getUserTrackers(String userId) {
 		Map userTrackersMap = _getUserTrackersMap();
 
-		return (List)_getUserTrackersMap().get(userId);
+		return (List)userTrackersMap.get(userId);
 	}
 
 	private Map _getUserTrackersMap() {

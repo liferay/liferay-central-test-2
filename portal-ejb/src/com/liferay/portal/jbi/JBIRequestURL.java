@@ -33,9 +33,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="JBIRequestURL.java.html"><b><i>View Source</i></b></a>
  *
@@ -106,8 +103,6 @@ public abstract class JBIRequestURL {
 
 	public void setParameter(String name, String value) {
 		_params.put(name, value);
-
-		_toString = null;
 	}
 
 	public String getContent() throws IOException {
@@ -116,10 +111,7 @@ public abstract class JBIRequestURL {
 
 	protected abstract String getURL();
 
-	private static Log _log = LogFactory.getLog(JBIRequestURL.class);
-
 	private User _user;
 	private Map _params;
-	private String _toString;
 
 }

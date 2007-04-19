@@ -30,9 +30,6 @@ import java.util.List;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="DefinitionSearch.java.html"><b><i>View Source</i></b></a>
  *
@@ -66,7 +63,5 @@ public class DefinitionSearch extends SearchContainer {
 		iteratorURL.setParameter(
 			DefinitionDisplayTerms.NAME, displayTerms.getName());
 	}
-
-	private static Log _log = LogFactory.getLog(DefinitionSearch.class);
 
 }

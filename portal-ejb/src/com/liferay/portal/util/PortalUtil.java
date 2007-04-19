@@ -157,9 +157,6 @@ public class PortalUtil {
 		ActionRequest req, ActionResponse res) {
 
 		try {
-			HttpServletRequest originalReq = getOriginalServletRequest(
-				getHttpServletRequest(req));
-
 			ActionResponseImpl resImpl = (ActionResponseImpl)res;
 
 			Map renderParameters = resImpl.getRenderParameters();

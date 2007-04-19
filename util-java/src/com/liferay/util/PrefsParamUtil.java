@@ -26,9 +26,6 @@ import javax.portlet.PortletPreferences;
 
 import javax.servlet.ServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PrefsParamUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -126,7 +123,5 @@ public class PrefsParamUtil {
 
 		return ParamUtil.get(req, param, getterUtilValue);
 	}
-
-	private static Log _log = LogFactory.getLog(PrefsParamUtil.class);
 
 }

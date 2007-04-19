@@ -103,11 +103,10 @@ public class CachePortlet implements Portlet {
 	}
 
 	public CachePortlet(Portlet portlet, PortletContext portletCtx,
-						boolean privateRequestAttributes, Integer expCache) {
+						Integer expCache) {
 
 		_portlet = portlet;
 		_portletCtx = (PortletContextImpl)portletCtx;
-		_privateRequestAttributes = privateRequestAttributes;
 		_expCache = expCache;
 
 		if (ClassUtil.isSubclass(_portlet.getClass(), Constants.JSF_MYFACES) ||
@@ -398,7 +397,6 @@ public class CachePortlet implements Portlet {
 	private Portlet _portlet;
 	private PortletConfigImpl _portletConfig;
 	private PortletContextImpl _portletCtx;
-	private boolean _privateRequestAttributes;
 	private Integer _expCache;
 	private boolean _destroyable;
 	private boolean _facesPortlet;

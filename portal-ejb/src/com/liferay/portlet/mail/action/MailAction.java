@@ -55,7 +55,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections.MultiHashMap;
+import org.apache.commons.collections.map.MultiValueMap;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -138,7 +138,7 @@ public class MailAction extends JSONAction {
 	}
 
 	protected void deleteMessages(HttpServletRequest req) throws Exception {
-		MultiHashMap messages = _convertMessages(req);
+		MultiValueMap messages = _convertMessages(req);
 
 		MailUtil.deleteMessages(req, messages);
 	}
@@ -284,7 +284,7 @@ public class MailAction extends JSONAction {
 	}
 
 	protected void moveMessages(HttpServletRequest req) throws Exception {
-		MultiHashMap messages = _convertMessages(req);
+		MultiValueMap messages = _convertMessages(req);
 
 		String folderId = ParamUtil.getString(req, "folderId");
 
@@ -353,11 +353,11 @@ public class MailAction extends JSONAction {
 		return jsonEnvelopes;
 	}
 
-	private MultiHashMap _convertMessages(HttpServletRequest req) {
+	private MultiValueMap _convertMessages(HttpServletRequest req) {
 		String[] messagesArray = StringUtil.split(
 			ParamUtil.getString(req, "messages"), ",");
 
-		MultiHashMap messages = new MultiHashMap();
+		MultiValueMap messages = new MultiValueMap();
 
 		for (int i = 0; i < messagesArray.length; i += 2) {
 			messages.put(messagesArray[i], messagesArray[i+1]);

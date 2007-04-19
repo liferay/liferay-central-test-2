@@ -213,7 +213,7 @@ public class Http {
 
 		HostConfiguration hostConfig = new HostConfiguration();
 
-		hostConfig.setHost(new URI(location));
+		hostConfig.setHost(new URI(location, false));
 
 		if (isProxyHost(hostConfig.getHost())) {
 			hostConfig.setProxy(PROXY_HOST, PROXY_PORT);

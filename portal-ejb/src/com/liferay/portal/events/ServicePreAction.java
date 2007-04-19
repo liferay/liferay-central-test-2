@@ -627,7 +627,7 @@ public class ServicePreAction extends Action {
 			String[] portletIdsArray = StringUtil.split(portletIds);
 
 			layoutTypePortlet.addPortletIds(
-				null, StringUtil.split(portletIds), columnId, false);
+				null, portletIdsArray, columnId, false);
 		}
 
 		LayoutLocalServiceUtil.updateLayout(

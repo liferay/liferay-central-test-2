@@ -26,7 +26,6 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
-import com.liferay.util.XSSUtil;
 
 import java.sql.Types;
 

@@ -26,6 +26,9 @@ import com.liferay.util.Randomizer;
 
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="CustomUserAttributes.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,9 +49,15 @@ public class CustomUserAttributes implements Cloneable {
 			return null;
 		}
 
-		String companyId = (String)userInfo.get(
-			UserAttributes.LIFERAY_COMPANY_ID);
-		String userId = (String)userInfo.get(UserAttributes.LIFERAY_USER_ID);
+		if (_log.isDebugEnabled()) {
+			String companyId = (String)userInfo.get(
+				UserAttributes.LIFERAY_COMPANY_ID);
+			String userId = (String)userInfo.get(
+				UserAttributes.LIFERAY_USER_ID);
+
+			_log.debug("Company id " + companyId);
+			_log.debug("User id " + userId);
+		}
 
 		if (name.equals("user.name.random")) {
 			String[] names = new String[] {"Aaa", "Bbb", "Ccc"};
@@ -63,5 +72,7 @@ public class CustomUserAttributes implements Cloneable {
 	public Object clone() {
 		return new CustomUserAttributes();
 	}
+
+	private static Log _log = LogFactory.getLog(CustomUserAttributes.class);
 
 }

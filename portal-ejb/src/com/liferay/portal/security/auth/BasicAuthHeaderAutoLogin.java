@@ -25,7 +25,6 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.StringTokenizer;
@@ -121,7 +120,7 @@ public class BasicAuthHeaderAutoLogin implements AutoLogin {
 				String password = decodedCredentials.substring(p + 1);
 
 				try {
-					User user = UserLocalServiceUtil.getUserById(userId);
+					UserLocalServiceUtil.getUserById(userId);
 
 					credentials = new String[3];
 

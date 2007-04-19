@@ -160,7 +160,7 @@ public class DLFileEntryAndShortcutFinder {
 
 				String folderId = (String)array[0];
 				String name = (String)array[1];
-				String title = (String)array[2];
+				//String title = (String)array[2];
 				long fileShortcutId = ((Long)array[3]).longValue();
 
 				Object obj = null;

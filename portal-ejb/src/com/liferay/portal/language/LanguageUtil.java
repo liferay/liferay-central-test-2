@@ -414,7 +414,7 @@ public class LanguageUtil {
 			int x = languageId.indexOf(StringPool.UNDERLINE);
 
 			String language = array[i].substring(0, x);
-			String country = array[i].substring(x + 1, array[i].length());
+			//String country = array[i].substring(x + 1, array[i].length());
 
 			Locale locale = LocaleUtil.fromLanguageId(languageId);
 

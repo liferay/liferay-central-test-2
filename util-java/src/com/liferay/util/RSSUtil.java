@@ -29,9 +29,6 @@ import com.sun.syndication.io.SyndFeedOutput;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="RSSUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -65,7 +62,5 @@ public class RSSUtil {
 
 		return writer.getBuffer().toString();
 	}
-
-	private static Log _log = LogFactory.getLog(RSSUtil.class);
 
 }

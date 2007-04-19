@@ -28,7 +28,6 @@ import com.liferay.util.FileUtil;
 
 import java.io.File;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -118,7 +117,7 @@ public class ThemeLoader {
 		try {
 			String content = FileUtil.read(liferayLookAndFeelXML);
 
-			List themeIds = ThemeLocalUtil.init(
+			ThemeLocalUtil.init(
 				_servletContextName, _ctx, new String[] {content}, null);
 		}
 		catch (Exception e) {
@@ -129,8 +128,6 @@ public class ThemeLoader {
 	}
 
 	private static Log _log = LogFactory.getLog(ThemeLoader.class);
-
-	private static Map _themeLoaders = CollectionFactory.getHashMap();
 
 	private String _servletContextName;
 	private ServletContext _ctx;

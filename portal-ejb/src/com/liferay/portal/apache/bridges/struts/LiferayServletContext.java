@@ -27,6 +27,8 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Set;
 
@@ -127,7 +129,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public Servlet getServlet(String name) throws ServletException {
-		return _ctx.getServlet(name);
+		return null;
 	}
 
 	public String getServletContextName() {
@@ -135,15 +137,15 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public Enumeration getServletNames() {
-		return _ctx.getServletNames();
+		return Collections.enumeration(new ArrayList());
 	}
 
 	public Enumeration getServlets() {
-		return _ctx.getServlets();
+		return Collections.enumeration(new ArrayList());
 	}
 
 	public void log(Exception exception, String message) {
-		_ctx.log(exception, message);
+		_ctx.log(message, exception);
 	}
 
 	public void log(String message) {

@@ -114,7 +114,7 @@ import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections.MultiHashMap;
+import org.apache.commons.collections.map.MultiValueMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -372,14 +372,14 @@ public class MailUtil {
 	}
 
 	public static void deleteMessages(
-			HttpServletRequest req, MultiHashMap msgMap)
+			HttpServletRequest req, MultiValueMap msgMap)
 		throws FolderException, MailServerException, StoreException {
 
 		deleteMessages(req, msgMap, false);
 	}
 
 	public static void deleteMessages(
-			HttpServletRequest req, MultiHashMap msgMap, boolean permanently)
+			HttpServletRequest req, MultiValueMap msgMap, boolean permanently)
 		throws FolderException, MailServerException, StoreException {
 
 		try {
@@ -760,7 +760,7 @@ public class MailUtil {
 	}
 
 	public static void moveMessages(
-			HttpServletRequest req, MultiHashMap msgMap, String toFolderName)
+			HttpServletRequest req, MultiValueMap msgMap, String toFolderName)
 		throws FolderException, MailServerException, StoreException {
 
 		IMAPFolder toFolder = null;
@@ -1412,7 +1412,7 @@ public class MailUtil {
 	}
 
 	private static long[] _getMessageIds(
-			MultiHashMap msgMap, String folderName) {
+			MultiValueMap msgMap, String folderName) {
 
 		Collection messages = msgMap.getCollection(folderName);
 
