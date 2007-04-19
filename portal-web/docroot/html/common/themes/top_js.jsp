@@ -215,9 +215,7 @@
 		</c:otherwise>
 	</c:choose>
 
-	//TODO: Check to see if user has permissions
-
-	<c:if test="<%= (layout != null) && true %>">
+	<c:if test="<%= (layout != null) && (LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
 		jQuery(document).ready(
 			function() {
 				Liferay.Draggables.init();
