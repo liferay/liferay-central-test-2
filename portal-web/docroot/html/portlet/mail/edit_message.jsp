@@ -215,8 +215,6 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />to.focus();
-
 	<c:if test="<%= attachments != null %>">
 
 		<%
@@ -241,6 +239,8 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 			toFinder = new RecipientSelector("<portlet:namespace />to");
 			ccFinder = new RecipientSelector("<portlet:namespace />cc");
 			bccFinder = new RecipientSelector("<portlet:namespace />bcc");
+
+			document.<portlet:namespace />fm.<portlet:namespace />to.focus();
 		}
 	);
 </script>
