@@ -24,7 +24,7 @@ RecipientSelector = new Class({
 					type: 'slide',
 					duration: 400
 				},
-				autofill: false,
+				autofill: true,
 				dataSourceType: 'json',
 				helperClass: 'autocomplete-box',
 				selectClass: 'autocomplete-selected',
