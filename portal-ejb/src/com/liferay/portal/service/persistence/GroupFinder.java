@@ -467,7 +467,7 @@ public class GroupFinder {
 			String key = (String)entry.getKey();
 			Object value = entry.getValue();
 
-			if (value != null) {
+			if (Validator.isNotNull(value)) {
 				sm.append(_getJoin(key));
 			}
 		}
@@ -526,7 +526,7 @@ public class GroupFinder {
 			String key = (String)entry.getKey();
 			Object value = entry.getValue();
 
-			if (value != null) {
+			if (Validator.isNotNull(value)) {
 				sm.append(_getWhere(key));
 			}
 		}

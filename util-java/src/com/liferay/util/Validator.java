@@ -354,6 +354,21 @@ public class Validator {
 		return true;
 	}
 
+	public static boolean isNull(Object obj) {
+		if (obj instanceof Long) {
+			return isNull((Long)obj);
+		}
+		else if (obj instanceof String) {
+			return isNull((String)obj);
+		}
+		else if (obj == null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static boolean isNull(Long l) {
 		if ((l == null) || l.longValue() == 0) {
 			return true;
@@ -386,12 +401,16 @@ public class Validator {
 		}
 	}
 
-	public static boolean isNotNull(String s) {
-		return !isNull(s);
+	public static boolean isNotNull(Object obj) {
+		return !isNull(obj);
 	}
 
 	public static boolean isNotNull(Long l) {
 		return !isNull(l);
+	}
+
+	public static boolean isNotNull(String s) {
+		return !isNull(s);
 	}
 
 	public static boolean isNotNull(Object[] array) {
