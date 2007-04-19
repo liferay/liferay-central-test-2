@@ -128,6 +128,12 @@ update Role_ SET type_ = 1;
 
 alter_column_type Roles_Permissions permissionId LONG;
 
+create table SCFrameworkVersi_SCProductVers (
+	productVersionId LONG,
+	frameworkVersionId LONG,
+	primary key (productVersionId, frameworkVersionId)
+);
+
 create table SCFrameworkVersion (
 	frameworkVersionId LONG not null primary key,
 	groupId LONG not null,
@@ -140,12 +146,6 @@ create table SCFrameworkVersion (
 	url VARCHAR(1024) null,
 	active_ BOOLEAN,
 	priority INTEGER
-);
-
-create table SCFrameworkVersions_SCProductVersions (
-	productVersionId LONG,
-	frameworkVersionId LONG,
-	primary key (productVersionId, frameworkVersionId)
 );
 
 create table SCLicense (

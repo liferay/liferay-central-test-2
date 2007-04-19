@@ -172,7 +172,7 @@
 
 		<!-- Relationships -->
 
-		<column name="scFrameworkVersions" type="Collection" entity="SCFrameworkVersion" mapping-table="SCFrameworkVersions_SCProductVersions" />
+		<column name="scFrameworkVersions" type="Collection" entity="SCFrameworkVersion" mapping-table="SCFrameworkVersi_SCProductVers" />
 
 		<!-- Order -->
 

@@ -841,7 +841,7 @@ public class SCProductVersionPersistence extends BasePersistence {
 	protected class AddSCFrameworkVersion extends SqlUpdate {
 		protected AddSCFrameworkVersion(SCProductVersionPersistence persistence) {
 			super(persistence.getDataSource(),
-				"INSERT INTO SCFrameworkVersions_SCProductVersions (productVersionId, frameworkVersionId) VALUES (?, ?)");
+				"INSERT INTO SCFrameworkVersi_SCProductVers (productVersionId, frameworkVersionId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
@@ -864,7 +864,7 @@ public class SCProductVersionPersistence extends BasePersistence {
 		protected ClearSCFrameworkVersions(
 			SCProductVersionPersistence persistence) {
 			super(persistence.getDataSource(),
-				"DELETE FROM SCFrameworkVersions_SCProductVersions WHERE productVersionId = ?");
+				"DELETE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ?");
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
@@ -878,7 +878,7 @@ public class SCProductVersionPersistence extends BasePersistence {
 		protected RemoveSCFrameworkVersion(
 			SCProductVersionPersistence persistence) {
 			super(persistence.getDataSource(),
-				"DELETE FROM SCFrameworkVersions_SCProductVersions WHERE productVersionId = ? AND frameworkVersionId = ?");
+				"DELETE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ? AND frameworkVersionId = ?");
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
@@ -891,8 +891,8 @@ public class SCProductVersionPersistence extends BasePersistence {
 		}
 	}
 
-	private static final String _SQL_GETSCFRAMEWORKVERSIONS = "SELECT {SCFrameworkVersion.*} FROM SCFrameworkVersion INNER JOIN SCFrameworkVersions_SCProductVersions ON (SCFrameworkVersions_SCProductVersions.frameworkVersionId = SCFrameworkVersion.frameworkVersionId) WHERE (SCFrameworkVersions_SCProductVersions.productVersionId = ?)";
-	private static final String _SQL_GETSCFRAMEWORKVERSIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersions_SCProductVersions WHERE productVersionId = ?";
-	private static final String _SQL_CONTAINSSCFRAMEWORKVERSION = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersions_SCProductVersions WHERE productVersionId = ? AND frameworkVersionId = ?";
+	private static final String _SQL_GETSCFRAMEWORKVERSIONS = "SELECT {SCFrameworkVersion.*} FROM SCFrameworkVersion INNER JOIN SCFrameworkVersi_SCProductVers ON (SCFrameworkVersi_SCProductVers.frameworkVersionId = SCFrameworkVersion.frameworkVersionId) WHERE (SCFrameworkVersi_SCProductVers.productVersionId = ?)";
+	private static final String _SQL_GETSCFRAMEWORKVERSIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ?";
+	private static final String _SQL_CONTAINSSCFRAMEWORKVERSION = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ? AND frameworkVersionId = ?";
 	private static Log _log = LogFactory.getLog(SCProductVersionPersistence.class);
 }
