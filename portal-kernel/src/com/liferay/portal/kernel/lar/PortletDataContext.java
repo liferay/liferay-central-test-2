@@ -22,7 +22,10 @@
 
 package com.liferay.portal.kernel.lar;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.zip.ZipReader;
+import com.liferay.portal.kernel.zip.ZipWriter;
 
 import java.io.Serializable;
 
@@ -37,16 +40,29 @@ import java.util.Set;
  * </p>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Auge
  *
  */
 public class PortletDataContext implements Serializable {
 
 	public PortletDataContext(String companyId, long groupId,
-							  Set primaryKeys) {
+							  Set primaryKeys, ZipReader zipReader) {
 
 		_companyId = companyId;
 		_groupId = groupId;
 		_primaryKeys = primaryKeys;
+		_zipReader = zipReader;
+		_zipWriter = null;
+	}
+
+	public PortletDataContext(String companyId, long groupId,
+							  Set primaryKeys, ZipWriter zipWriter) {
+
+		_companyId = companyId;
+		_groupId = groupId;
+		_primaryKeys = primaryKeys;
+		_zipReader = null;
+		_zipWriter = zipWriter;
 	}
 
 	public String getCompanyId() {
@@ -61,28 +77,42 @@ public class PortletDataContext implements Serializable {
 		return _primaryKeys;
 	}
 
-	public void addPrimaryKey(Class classObj, Object primaryKey) {
-		_primaryKeys.add(
-			classObj.getName() + StringPool.POUND + primaryKey);
-	}
-
-	public boolean checkPrimaryKey(Class classObj, Object primaryKey) {
+	public boolean addPrimaryKey(Class classObj, Object primaryKey) {
 		boolean value = hasPrimaryKey(classObj, primaryKey);
 
 		if (!value) {
-			addPrimaryKey(classObj, primaryKey);
+			_primaryKeys.add(getPrimaryKeyString(classObj, primaryKey));
 		}
 
 		return value;
 	}
 
 	public boolean hasPrimaryKey(Class classObj, Object primaryKey) {
-		return _primaryKeys.contains(
-			classObj.getName() + StringPool.POUND + primaryKey);
+		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
+	}
+
+	public ZipReader getZipReader() {
+		return _zipReader;
+	}
+
+	public ZipWriter getZipWriter() {
+		return _zipWriter;
+	}
+
+	protected String getPrimaryKeyString(Class classObj, Object primaryKey) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(classObj.getName());
+		sm.append(StringPool.POUND);
+		sm.append(primaryKey);
+
+		return sm.toString();
 	}
 
 	private String _companyId;
 	private long _groupId;
 	private Set _primaryKeys;
+	private ZipReader _zipReader;
+	private ZipWriter _zipWriter;
 
 }

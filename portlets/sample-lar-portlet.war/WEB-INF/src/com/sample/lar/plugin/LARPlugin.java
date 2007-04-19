@@ -25,6 +25,8 @@ package com.sample.lar.plugin;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.zip.ZipReader;
+import com.liferay.portal.kernel.zip.ZipWriter;
 
 import java.util.Date;
 
@@ -64,6 +66,16 @@ public class LARPlugin implements PortletDataHandler {
 				_log.info("Exporting data " + data);
 			}
 
+			// Access the ZipWriter from the PortletDataContext
+
+			ZipWriter zipWriter = context.getZipWriter();
+			if (zipWriter != null) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Writing to zip.");
+				}
+				zipWriter.addEntry(portletId + "/README.txt", "test writing to zip");
+			}
+
 			return data;
 		}
 		catch (Exception e) {
@@ -84,10 +96,13 @@ public class LARPlugin implements PortletDataHandler {
 
 			prefs.setValue("last-import-date", String.valueOf(importDate));
 
-			prefs.store();
-
 			if (_log.isInfoEnabled()) {
 				_log.info("Importing data " + data);
+			}
+
+			ZipReader zipReader = context.getZipReader();
+			if (zipReader != null) {
+				_log.info("From README file: \n" + zipReader.getEntryAsString(portletId + "/README.txt"));
 			}
 
 			return prefs;

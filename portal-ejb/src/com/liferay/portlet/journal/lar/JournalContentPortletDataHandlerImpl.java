@@ -146,7 +146,7 @@ public class JournalContentPortletDataHandlerImpl
 			}
 
 			if ((article.getGroupId() == context.getGroupId()) &&
-				!context.checkPrimaryKey(
+				!context.addPrimaryKey(
 					JournalArticle.class, article.getPrimaryKey())) {
 
 				SAXReader reader = SAXReaderFactory.getInstance();
@@ -172,7 +172,7 @@ public class JournalContentPortletDataHandlerImpl
 						context.getCompanyId(), article.getGroupId(),
 						structureId);
 
-					if (!context.checkPrimaryKey(
+					if (!context.addPrimaryKey(
 							JournalStructure.class, structurePK)) {
 
 						JournalStructure structure =
@@ -193,7 +193,7 @@ public class JournalContentPortletDataHandlerImpl
 						context.getCompanyId(), article.getGroupId(),
 						templateId);
 
-					if (!context.checkPrimaryKey(
+					if (!context.addPrimaryKey(
 							JournalTemplate.class, templatePK)) {
 
 						JournalTemplate template =

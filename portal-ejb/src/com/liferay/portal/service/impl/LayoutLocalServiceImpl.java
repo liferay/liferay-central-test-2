@@ -134,6 +134,7 @@ import org.dom4j.io.SAXReader;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
+ * @author Raymond Auge
  *
  */
 public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
@@ -298,8 +299,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String companyId = layoutSet.getCompanyId();
 		long groupId = layoutSet.getGroupId();
 
+		ZipWriter zipWriter = new ZipWriter();
+
 		PortletDataContext context = new PortletDataContext(
-			companyId, groupId, CollectionFactory.getHashSet());
+			companyId, groupId, CollectionFactory.getHashSet(), zipWriter);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			companyId, GroupImpl.GUEST);
@@ -370,6 +373,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
+				// The order of the export is important. You must always export
+				// the portlet data first, then the portlet preferences, then
+				// the portlet permissions. The export of the portlet data
+				// process may modify the portlet preferences, and those changes
+				// should be included in the exported LAR.
+
+				// Portlet data
+
+				if (exportPortletData) {
+					exportPortletData(
+						context, layout, layoutTypePortlet, layoutEl);
+				}
+
 				// Portlet preferences
 
 				if (exportPortletPreferences) {
@@ -382,13 +398,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 							layout.getLayoutId(), guestPrefsOwnerId,
 							layoutTypePortlet, layoutEl);
 					}
-				}
-
-				// Portlet data
-
-				if (exportPortletData) {
-					exportPortletData(
-						context, layout, layoutTypePortlet, layoutEl);
 				}
 
 				// Portlet permissions
@@ -448,8 +457,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Zip
 
 		try {
-			ZipWriter zipWriter = new ZipWriter();
-
 			zipWriter.addEntry("layouts.xml", XMLFormatter.toString(doc));
 
 			if (themeZip != null) {
@@ -546,8 +553,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String companyId = layoutSet.getCompanyId();
 		long groupId = layoutSet.getGroupId();
 
+		ZipReader zipReader = new ZipReader(is);
+
 		PortletDataContext context = new PortletDataContext(
-			companyId, groupId, CollectionFactory.getHashSet());
+			companyId, groupId, CollectionFactory.getHashSet(), zipReader);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			companyId, GroupImpl.GUEST);
@@ -560,8 +569,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		try {
 
 			// XML
-
-			ZipReader zipReader = new ZipReader(is);
 
 			String xml = zipReader.getEntryAsString("layouts.xml");
 
@@ -691,6 +698,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					layoutCache, companyId, groupId, guestGroup, layout,
 					permissionsEl);
 			}
+
+			// The order of the import is important. You must always import
+			// the portlet preferences first, then the portlet data, then
+			// the portlet permissions. The import of the portlet data
+			// assumes that portlet preferences already exist.
 
 			// Portlet preferences
 

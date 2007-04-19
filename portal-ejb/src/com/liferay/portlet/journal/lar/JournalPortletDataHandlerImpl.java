@@ -106,7 +106,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				JournalArticle article = (JournalArticle)itr.next();
 
-				if (context.checkPrimaryKey(
+				if (context.addPrimaryKey(
 						JournalArticle.class, article.getPrimaryKey())) {
 
 					itr.remove();
@@ -130,7 +130,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				JournalStructure structure = (JournalStructure)itr.next();
 
-				if (context.checkPrimaryKey(
+				if (context.addPrimaryKey(
 						JournalStructure.class, structure.getPrimaryKey())) {
 
 					itr.remove();
@@ -154,7 +154,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				JournalTemplate template = (JournalTemplate)itr.next();
 
-				if (context.checkPrimaryKey(
+				if (context.addPrimaryKey(
 						JournalTemplate.class, template.getPrimaryKey())) {
 
 					itr.remove();
