@@ -75,7 +75,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 			var del = document.createElement("a");
 
 			del.href = "javascript: <portlet:namespace />removeAttachment('" + newRow.id + "');";
-			del.innerHTML = "<img src='<%= themeDisplay.getPathMain() %>/common/remove.png'/>";
+			del.innerHTML = "<img src='<%= themeDisplay.getPathThemeImages() %>/common/remove.png'/>";
 
 			newRow.insertCell(0).appendChild(browser);
 			newRow.insertCell(1).appendChild(del);
