@@ -34,6 +34,7 @@ import com.liferay.util.Http;
 import com.liferay.util.Validator;
 import com.liferay.util.Version;
 
+import java.io.InputStream;
 import java.io.IOException;
 
 import java.util.jar.Attributes;
@@ -66,10 +67,18 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 			"/WEB-INF/liferay-plugin-package.xml"));
 
 		if (xml == null) {
-			Manifest manifest = new Manifest(
-				ctx.getResourceAsStream("/META-INF/MANIFEST.MF"));
+			Attributes attributes = null;
 
-			Attributes attributes = manifest.getMainAttributes();
+			InputStream is = ctx.getResourceAsStream("/META-INF/MANIFEST.MF");
+
+			if (is != null) {
+				Manifest manifest = new Manifest(is);
+
+				attributes = manifest.getMainAttributes();
+			}
+			else {
+				attributes = new Attributes();
+			}
 
 			String artifactGroupId = attributes.getValue(
 				"Implementation-Vendor-Id");
