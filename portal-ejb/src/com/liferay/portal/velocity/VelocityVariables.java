@@ -254,7 +254,7 @@ public class VelocityVariables {
 
 		// Randomizer
 
-		vc.put("randomizer", Randomizer_IW.getInstance().getInstance());
+		vc.put("randomizer", Randomizer_IW.getInstance().getWrappedInstance());
 
 		// Service locator
 

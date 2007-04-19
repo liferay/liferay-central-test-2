@@ -121,7 +121,11 @@ public class InstanceWrapperBuilder {
 
 			String methodName = javaMethod.getName();
 
-			if (javaMethod.isPublic() && javaMethod.isStatic() && !methodName.equals("getInstance")) {
+			if (javaMethod.isPublic() && javaMethod.isStatic()) {
+				if (methodName.equals("getInstance")) {
+					methodName = "getWrappedInstance";
+				}
+
 				sm.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
@@ -168,7 +172,7 @@ public class InstanceWrapperBuilder {
 					sm.append("return ");
 				}
 
-				sm.append(javaClass.getName() + "." + methodName + "(");
+				sm.append(javaClass.getName() + "." + javaMethod.getName() + "(");
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];

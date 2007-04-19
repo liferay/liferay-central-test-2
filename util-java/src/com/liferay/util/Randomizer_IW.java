@@ -33,6 +33,10 @@ public class Randomizer_IW {
 		return _instance;
 	}
 
+	public com.liferay.util.Randomizer getWrappedInstance() {
+		return Randomizer.getInstance();
+	}
+
 	private Randomizer_IW() {
 	}
 
