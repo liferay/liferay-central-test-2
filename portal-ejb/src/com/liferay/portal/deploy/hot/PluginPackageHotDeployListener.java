@@ -31,8 +31,11 @@ import com.liferay.portal.plugin.PluginPackageImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.util.Http;
 import com.liferay.util.Version;
+import com.liferay.util.Validator;
 
 import java.io.IOException;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
 
 import javax.servlet.ServletContext;
 
@@ -61,6 +64,35 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 			"/WEB-INF/liferay-plugin-package.xml"));
 
 		if (xml == null) {
+			String version;
+			String artifactGroupId;
+			String artifactId;
+			Manifest manifest =
+				new Manifest(ctx.getResourceAsStream("/META-INF/MANIFEST.MF"));
+			Attributes attributes = manifest.getMainAttributes();
+
+			artifactGroupId = attributes.getValue("Implementation-Vendor-Id");
+
+			if (Validator.isNull(artifactGroupId)) {
+				artifactGroupId = attributes.getValue("Implementation-Vendor");
+			}
+
+			if (Validator.isNull(artifactGroupId)) {
+				artifactGroupId = servletContextName;
+			}
+
+			artifactId = attributes.getValue("Implementation-Title");
+
+			if (Validator.isNull(artifactId)) {
+				artifactId = servletContextName;
+			}
+
+			version = attributes.getValue("Implementation-Version");
+
+			if (Validator.isNull(version)) {
+				version = Version.UNKNOWN;
+			}
+
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Plugin package on context " + servletContextName +
@@ -70,11 +102,11 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 
 			pluginPackage =
 				new PluginPackageImpl(
-					servletContextName + StringPool.SLASH + servletContextName +
-						StringPool.SLASH + Version.UNKNOWN + StringPool.SLASH +
+					artifactGroupId + StringPool.SLASH + artifactId +
+						StringPool.SLASH + version + StringPool.SLASH +
 							"war");
 
-			pluginPackage.setName(servletContextName);
+			pluginPackage.setName(artifactId);
 
 			return pluginPackage;
 		}
