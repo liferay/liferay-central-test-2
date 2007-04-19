@@ -253,6 +253,8 @@ public class MailAction extends JSONAction {
 		String userId = PortalUtil.getUserId(req);
 		String data = ParamUtil.getString(req, "data");
 
+		PortletPreferences prefs = PortalUtil.getPreferences(req);
+
 		List finders = RecipientFinderLocator.getInstances();
 
 		SortedSet recipients = new TreeSet();
@@ -260,8 +262,15 @@ public class MailAction extends JSONAction {
 		for (int i = 0; i < finders.size(); i++) {
 			RecipientFinder finder = (RecipientFinder)finders.get(i);
 
-			recipients.addAll(
-				finder.getRecipients(userId, data, new HashMap()));
+			boolean enabled =
+				GetterUtil.getBoolean(
+					prefs.getValue(
+						finder.getClass().getName(), Boolean.TRUE.toString()));
+
+			if (enabled) {
+				recipients.addAll(
+					finder.getRecipients(userId, data, new HashMap()));
+			}
 		}
 
 		JSONArray jsonArray = Autocomplete.arrayToJson((String[])
