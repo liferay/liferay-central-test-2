@@ -43,6 +43,7 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -60,10 +61,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class TunnelServlet extends HttpServlet {
 
-	public void init(ServletConfig servletConfig)
-		throws ServletException {
-		super.init(servletConfig);
-		_companyId = getServletContext().getInitParameter("company_id");
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+
+		ServletContext ctx = getServletContext();
+
+		_companyId = ctx.getInitParameter("company_id");
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
@@ -76,13 +79,13 @@ public class TunnelServlet extends HttpServlet {
 
 			Object returnObj = null;
 
-			CompanyThreadLocal.setCompanyId(_companyId);
-
 			try {
 				ObjectValuePair ovp = (ObjectValuePair)ois.readObject();
 
 				HttpPrincipal httpPrincipal = (HttpPrincipal)ovp.getKey();
 				MethodWrapper methodWrapper = (MethodWrapper)ovp.getValue();
+
+				CompanyThreadLocal.setCompanyId(_companyId);
 
 				if (httpPrincipal.getUserId() != null) {
 					PrincipalThreadLocal.setName(httpPrincipal.getUserId());

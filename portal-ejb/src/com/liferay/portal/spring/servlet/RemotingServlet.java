@@ -34,6 +34,7 @@ import com.liferay.portal.spring.context.LazyWebApplicationContext;
 import java.io.IOException;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -57,10 +58,12 @@ public class RemotingServlet extends DispatcherServlet {
 	public static final String CONTEXT_CONFIG_LOCATION =
 		"/WEB-INF/remoting-servlet.xml,/WEB-INF/remoting-servlet-ext.xml";
 
-	public void init(ServletConfig servletConfig)
-		throws ServletException {
-		super.init(servletConfig);
-		_companyId = getServletContext().getInitParameter("company_id");
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+
+		ServletContext ctx = getServletContext();
+
+		_companyId = ctx.getInitParameter("company_id");
 	}
 
 	public Class getContextClass() {
@@ -80,16 +83,18 @@ public class RemotingServlet extends DispatcherServlet {
 
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
+
 		PermissionCheckerImpl permissionChecker = null;
-		String remoteUser = req.getRemoteUser();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Remote user " + remoteUser);
-		}
-
-		CompanyThreadLocal.setCompanyId(_companyId);
 
 		try {
+			String remoteUser = req.getRemoteUser();
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Remote user " + remoteUser);
+			}
+
+			CompanyThreadLocal.setCompanyId(_companyId);
+
 			if (remoteUser != null) {
 				PrincipalThreadLocal.setName(remoteUser);
 
@@ -101,9 +106,11 @@ public class RemotingServlet extends DispatcherServlet {
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}
 			else {
-				_log.warn(
-					"User id not provided. An exception will be thrown if " +
-					"a protected service is accessed");
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"User id is not provided. An exception will be " +
+							"thrown  if a protected method is accessed.");
+				}
 			}
 
 			super.service(req, res);
@@ -114,7 +121,8 @@ public class RemotingServlet extends DispatcherServlet {
 		finally {
 			try {
 				PermissionCheckerFactory.recycle(permissionChecker);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 			}
 		}
 	}

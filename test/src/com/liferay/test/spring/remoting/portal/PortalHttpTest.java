@@ -22,15 +22,11 @@
 
 package com.liferay.test.spring.remoting.portal;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserService;
 import com.liferay.test.TestCase;
 import com.liferay.test.TestConstants;
 import com.liferay.test.spring.remoting.SpringRemotingTests;
-
-import java.rmi.RemoteException;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -46,30 +42,38 @@ import org.springframework.core.io.ClassPathResource;
  */
 public class PortalHttpTest extends TestCase {
 
-	public void testUserRetrieval()
-		throws SystemException, PortalException, RemoteException {
-		String address = null;
-		User user = null;
-
+	public void testUserCreationAndDeletion() throws Exception {
 		UserService userService = getUserService();
 
-		address = "test@" + TestConstants.COMPANY_ID;
+		boolean autoPassword = true;
+		String password1 = null;
+		String password2 = null;
+		boolean passwordReset = false;
+		boolean autoScreenName = true;
+		String screenName = "UserServiceSpringRemotingTest";
+		String emailAddress = "UserServiceSpringRemotingTest@liferay.com";
+		Locale locale = Locale.getDefault();
+		String firstName = "UserServiceSpringRemotingTest";
+		String middleName = "";
+		String lastName = "UserServiceSpringRemotingTest";
+		String nickName = null;
+		int prefixId = 0;
+		int suffixId = 0;
+		boolean male = true;
+		int birthdayMonth = Calendar.JANUARY;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = null;
+		String organizationId = null;
+		String locationId = null;
+		boolean sendMail = false;
 
-		user = userService.getUserByEmailAddress(
-			TestConstants.COMPANY_ID, address);
-
-		assertEquals(address, user.getEmailAddress());
-	}
-
-	public void testUserCreationAndDeletion()
-		throws SystemException, PortalException, RemoteException {
-		UserService userService = getUserService();
 		User user = userService.addUser(
 			TestConstants.COMPANY_ID, autoPassword, password1, password2,
 			passwordReset, autoScreenName, screenName, emailAddress, locale,
 			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
-			locationId, false);
+			locationId, sendMail);
 
 		user = userService.getUserByEmailAddress(
 			TestConstants.COMPANY_ID, emailAddress);
@@ -77,37 +81,25 @@ public class PortalHttpTest extends TestCase {
 		userService.deleteUser(user.getUserId());
 	}
 
-	private UserService getUserService() {
-		return (UserService) getBeanFactory().getBean(
+	public void testUserRetrieval() throws Exception {
+		UserService userService = getUserService();
+
+		String emailAddress = "test@" + TestConstants.COMPANY_ID;
+
+		User user = userService.getUserByEmailAddress(
+			TestConstants.COMPANY_ID, emailAddress);
+
+		assertEquals(emailAddress, user.getEmailAddress());
+	}
+
+	protected XmlBeanFactory getBeanFactory() {
+		return new XmlBeanFactory(new ClassPathResource(
+			"/portal-services.xml", PortalHttpTest.class));
+	}
+
+	protected UserService getUserService() {
+		return (UserService)getBeanFactory().getBean(
 			"userService" + SpringRemotingTests.getProtocol() + "SecureProxy");
 	}
-
-	private XmlBeanFactory getBeanFactory() {
-		return new XmlBeanFactory(new ClassPathResource(
-			"/portal-services.xml",
-			PortalHttpTest.class));
-	}
-
-	private boolean autoScreenName = true;
-	private String screenName = "UserServiceSpringRemotingTest";
-	private boolean autoPassword = true;
-	private String password1 = null;
-	private String password2 = null;
-	private boolean passwordReset = false;
-	private String emailAddress = "UserServiceSpringRemotingTest@liferay.com";
-	private Locale locale = Locale.getDefault();
-	private String firstName = "UserServiceSpringRemotingTest";
-	private String middleName = "";
-	private String lastName = "UserServiceSpringRemotingTest";
-	private String nickName = null;
-	private int prefixId = 0;
-	private int suffixId = 0;
-	private boolean male = true;
-	private int birthdayMonth = Calendar.JANUARY;
-	private int birthdayDay = 1;
-	private int birthdayYear = 1970;
-	private String jobTitle = null;
-	private String organizationId = null;
-	private String locationId = null;
 
 }

@@ -23,6 +23,8 @@
 package com.liferay.util.spring.remoting;
 
 import com.liferay.portal.kernel.util.Digester;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.GetterUtil;
 
 import java.io.IOException;
 
@@ -36,60 +38,59 @@ import org.springframework.remoting.httpinvoker.SimpleHttpInvokerRequestExecutor
  * <a href="AuthenticatingHttpInvokerRequestExecutor.java.html"><b><i>
  * View Source</i></b></a>
  *
- * An HttpInvoker "request executor" for Spring Remoting that provides
- * HTTP BASIC authentication information for service invocations.
+ * <p>
+ * An HttpInvoker request executor for Spring Remoting that provides HTTP BASIC
+ * authentication information for service invocations.
+ * </p>
  *
  * @author Joel Kozikowski
+ *
  */
-public class AuthenticatingHttpInvokerRequestExecutor extends
-	SimpleHttpInvokerRequestExecutor {
-
-	private String userId;
-	private String encryptedPassword;
+public class AuthenticatingHttpInvokerRequestExecutor
+	extends SimpleHttpInvokerRequestExecutor {
 
 	public AuthenticatingHttpInvokerRequestExecutor() {
 		super();
 	}
 
 	public String getPassword() {
-		return encryptedPassword;
+		return _password;
 	}
 
-	public void setPassword(String unencryptedPassword) {
-		this.encryptedPassword = Digester.digest(unencryptedPassword);
+	public void setPassword(String password) {
+		_password = Digester.digest(password);
 	}
 
 	public String getUserId() {
-		return userId;
+		return _userId;
 	}
 
 	public void setUserId(String userId) {
-		this.userId = userId;
+		_userId = userId;
 	}
 
 	/**
-	 * Called every time a HTTP invocation is made.
-	 * This implementation allows the parent to setup the connection, and
-	 * then adds an <code>Authorization</code> HTTP header property for
-	 * BASIC authentication.
+	 * Called every time a HTTP invocation is made. This implementation allows
+	 * the parent to setup the connection, and then adds an
+	 * <code>Authorization</code> HTTP header property for BASIC authentication.
 	 */
 	protected void prepareConnection(HttpURLConnection con, int contentLength)
 		throws IOException {
 
-		super.prepareConnection(con, contentLength);
+		prepareConnection(con, contentLength);
 
-		if (this.getUserId() != null) {
+		if (getUserId() != null) {
+			String password = GetterUtil.getString(getPassword());
 
-			String pw = this.getPassword();
-			if (pw == null) {
-				pw = "";
-			}
+			String base64 = getUserId() + StringPool.COLON + password;
 
-			String base64 = this.getUserId() + ":" + pw;
 			con.setRequestProperty(
 				"Authorization",
 				"Basic " + new String(Base64.encodeBase64(base64.getBytes())));
 		}
 	}
+
+	private String _userId;
+	private String _password;
 
 }

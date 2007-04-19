@@ -24,6 +24,7 @@ package com.liferay.test.spring.remoting;
 
 import com.liferay.test.ResultPrinter;
 import com.liferay.test.spring.remoting.portal.PortalHttpTest;
+import com.liferay.util.Validator;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -41,6 +42,13 @@ public class SpringRemotingTests {
 	public static void main(String[] args) {
 		if (args.length > 0) {
 			_protocol = args[0];
+
+			if (Validator.isNotNull(_protocol)) {
+				_protocol =
+					_protocol.substring(0, 1).toUpperCase() +
+						_protocol.substring(
+							1, _protocol.length()).toLowerCase();
+			}
 		}
 
 		TestRunner runner = new TestRunner(new ResultPrinter(System.out));

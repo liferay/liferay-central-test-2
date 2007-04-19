@@ -602,7 +602,6 @@ public class EJBXMLBuilder {
 				serviceName = StringUtil.replace(
 					serviceName, ".service.ejb.", ".service.");
 
-				System.out.println("writing transaction spring remoting for " + serviceName);
 				sm.append("\t<bean name=\"/").append(serviceMapping).append("-burlap\" class=\"org.springframework.remoting.caucho.BurlapServiceExporter\">\n");
 				sm.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".transaction\" />\n");
 				sm.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
@@ -646,7 +645,6 @@ public class EJBXMLBuilder {
 					content.substring(x, content.length());
 		}
 
-		System.out.println("writing transaction spring remoting");
 		if (!content.equals(newContent)) {
 			FileUtil.write(outputFile, newContent);
 

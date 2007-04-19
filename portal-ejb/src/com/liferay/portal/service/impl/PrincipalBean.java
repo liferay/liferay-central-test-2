@@ -75,10 +75,10 @@ public class PrincipalBean {
 		return name;
 	}
 
-	public PermissionChecker getPermissionChecker()
-		throws PrincipalException {
+	public PermissionChecker getPermissionChecker() throws PrincipalException {
 		PermissionCheckerImpl permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
+
 		if (permissionChecker == null) {
 			throw new PrincipalException("PermissionChecker not initialized");
 		}
