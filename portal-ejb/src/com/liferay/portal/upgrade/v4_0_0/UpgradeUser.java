@@ -156,7 +156,7 @@ public class UpgradeUser extends UpgradeProcess {
 						address.isMailing(), address.isPrimary());
 				}
 
-				if (!UserImpl.isDefaultUser(userId)) {
+				if (!user.isDefaultUser()) {
 					GroupLocalServiceUtil.addGroup(
 						user.getUserId(), User.class.getName(),
 						user.getPrimaryKey().toString(), null, null, null,

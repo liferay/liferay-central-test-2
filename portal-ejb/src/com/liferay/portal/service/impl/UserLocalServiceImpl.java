@@ -1499,7 +1499,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (!Validator.isEmailAddress(emailAddress)) {
 			throw new UserEmailAddressException();
 		}
-		else if (!UserImpl.isDefaultUser(userId)) {
+		else if (!user.isDefaultUser()) {
 			try {
 				if (!user.getEmailAddress().equals(emailAddress)) {
 					if (UserUtil.findByC_EA(
@@ -1522,7 +1522,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		if (!UserImpl.isDefaultUser(userId)) {
+		if (!user.isDefaultUser()) {
 			if (Validator.isNull(firstName)) {
 				throw new ContactFirstNameException();
 			}

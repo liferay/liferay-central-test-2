@@ -151,7 +151,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			LayoutImpl.PUBLIC + groupId, group.getCompanyId());
 
 		if (Validator.isNull(className) && Validator.isNull(classPK) &&
-			!UserImpl.isDefaultUser(userId)) {
+			!user.isDefaultUser()) {
 
 			// Resources
 
