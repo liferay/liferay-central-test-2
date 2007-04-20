@@ -302,6 +302,19 @@
 				(Groups_Orgs.groupId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrganizationsPasswordPolicies">
+		<![CDATA[
+			INNER JOIN
+				Group_ ON
+					(Group_.classPK = Organization_.organizationId)
+			INNER JOIN
+				PasswordPolicyRel ON
+					(PasswordPolicyRel.classPK = Group_.groupId)
+			WHERE
+				(Group_.className = 'com.liferay.portal.model.Organization') AND
+				(PasswordPolicyRel.passwordPolicyId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrganizationsRoles">
 		<![CDATA[
 			INNER JOIN
@@ -781,6 +794,15 @@
 					(Users_Orgs.userId = User_.userId)
 			WHERE
 				(Users_Orgs.organizationId = ?)
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUsersPasswordPolicies">
+		<![CDATA[
+			INNER JOIN
+				PasswordPolicyRel ON
+					(PasswordPolicyRel.classPK = User_.userId)
+			WHERE
+				(PasswordPolicyRel.passwordPolicyId = ?)
+		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUsersRoles">
 		<![CDATA[

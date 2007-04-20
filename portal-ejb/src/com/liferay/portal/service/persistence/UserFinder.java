@@ -70,6 +70,9 @@ public class UserFinder {
 	public static String JOIN_BY_USERS_ORGS =
 		UserFinder.class.getName() + ".joinByUsersOrgs";
 
+	public static String JOIN_BY_USERS_PASSWORD_POLICIES =
+		UserFinder.class.getName() + ".joinByUsersPasswordPolicies";
+
 	public static String JOIN_BY_USERS_ROLES =
 		UserFinder.class.getName() + ".joinByUsersRoles";
 
@@ -230,6 +233,9 @@ public class UserFinder {
 		else if (key.equals("usersOrgs")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_ORGS);
 		}
+		else if (key.equals("usersPasswordPolicies")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_PASSWORD_POLICIES);
+		}
 		else if (key.equals("usersRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_ROLES);
 		}
@@ -285,6 +291,9 @@ public class UserFinder {
 		}
 		else if (key.equals("usersOrgs")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_ORGS);
+		}
+		else if (key.equals("usersPasswordPolicies")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_PASSWORD_POLICIES);
 		}
 		else if (key.equals("usersRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_ROLES);

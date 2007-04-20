@@ -111,7 +111,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		LinkedHashMap userParams = new LinkedHashMap();
 
 		if (tabs3.equals("current")) {
-			//userParams.put("usersPasswordPolicies", passwordPolicy.getPasswordPolicyId());
+			userParams.put("usersPasswordPolicies", passwordPolicy.getPasswordPolicyId());
 		}
 
 		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
@@ -195,7 +195,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		LinkedHashMap organizationParams = new LinkedHashMap();
 
 		if (tabs3.equals("current")) {
-			//organizationParams.put("organizationsPasswordPolicies", passwordPolicy.getPasswordPolicyId());
+			organizationParams.put("organizationsPasswordPolicies", passwordPolicy.getPasswordPolicyId());
 		}
 
 		int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionId(), searchTerms.getCountryId(), organizationParams, searchTerms.isAndOperator());
