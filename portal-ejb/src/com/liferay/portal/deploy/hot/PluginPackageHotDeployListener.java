@@ -84,19 +84,31 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 				"Implementation-Vendor-Id");
 
 			if (Validator.isNull(artifactGroupId)) {
+				artifactGroupId = attributes.getValue("Implementation-Vendor");
+			}
+
+			if (Validator.isNull(artifactGroupId)) {
 				artifactGroupId = GetterUtil.getString(
-					attributes.getValue("Implementation-Vendor"),
+					attributes.getValue("Bundle-Vendor"),
 					servletContextName);
 			}
 
-			String artifactId = GetterUtil.getString(
-				attributes.getValue("Implementation-Title"),
-				servletContextName);
+			String artifactId = attributes.getValue("Implementation-Title");
 
-			String version = GetterUtil.getString(
-				attributes.getValue("Implementation-Version"), Version.UNKNOWN);
+			if (Validator.isNull(artifactId)) {
+				artifactId = GetterUtil.getString(
+					attributes.getValue("Bundle-Name"),
+					servletContextName);
+			}
 
-			if (_log.isWarnEnabled()) {
+			String version = attributes.getValue("Implementation-Version");
+
+			if (Validator.isNull(version)) {
+				version =GetterUtil.getString(
+					attributes.getValue("Bundle-Version"), Version.UNKNOWN);
+			}
+
+			if (version == Version.UNKNOWN && _log.isWarnEnabled()) {
 				_log.warn(
 					"Plugin package on context " + servletContextName +
 						" cannot be tracked because this WAR does not " +
@@ -110,6 +122,18 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 							"war");
 
 			pluginPackage.setName(artifactId);
+
+			String shortDescription = attributes.getValue("Bundle-Description");
+
+			String pageURL = attributes.getValue("Bundle-DocURL");
+
+			if (Validator.isNotNull(shortDescription)) {
+				pluginPackage.setShortDescription(shortDescription);
+			}
+
+			if (Validator.isNotNull(pageURL)) {
+				pluginPackage.setPageURL(pageURL);
+			}
 
 			return pluginPackage;
 		}
