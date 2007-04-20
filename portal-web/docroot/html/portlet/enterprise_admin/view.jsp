@@ -682,6 +682,80 @@ portletURL.setParameter("tabs1", tabs1);
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</c:if>
 	</c:when>
+	<c:when test='<%= tabs1.equals("password-policy") %>'>
+
+		<%
+		PasswordPolicySearch searchContainer = new PasswordPolicySearch(renderRequest, portletURL);
+
+		List headerNames = searchContainer.getHeaderNames();
+
+		headerNames.add("description");
+		headerNames.add(StringPool.BLANK);
+
+		RowChecker rowChecker = new RowChecker(renderResponse);
+
+		searchContainer.setRowChecker(rowChecker);
+		%>
+
+		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+
+			<%
+			int total = PasswordPolicyLocalServiceUtil.getPoliciesCount();
+
+			searchContainer.setTotal(total);
+
+			List results = PasswordPolicyLocalServiceUtil.getPolicies(searchContainer.getStart(), searchContainer.getEnd());
+
+			searchContainer.setResults(results);
+			%>
+
+			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+
+				<c:if test="<%= results.size() > 0 %>">
+					<br><br>
+				</c:if>
+			</c:if>
+
+			<%
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				PasswordPolicy policy = (PasswordPolicy)results.get(i);
+
+				ResultRow row = new ResultRow(policy, String.valueOf(policy.getPrimaryKey()), i);
+
+				PortletURL rowURL = renderResponse.createRenderURL();
+
+				rowURL.setWindowState(WindowState.MAXIMIZED);
+
+				rowURL.setParameter("struts_action", "/enterprise_admin/edit_password_policy");
+				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("passwordPolicyId", String.valueOf(policy.getPasswordPolicyId()));
+
+				// Name
+
+				row.addText(policy.getName(), rowURL);
+
+				// Description
+
+				row.addText(policy.getDescription(), rowURL);
+
+				// Action
+
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/password_policy_action.jsp");
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+		</c:if>
+	</c:when>
 </c:choose>
 
 </form>

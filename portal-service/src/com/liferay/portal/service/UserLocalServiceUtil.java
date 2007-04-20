@@ -72,6 +72,14 @@ public class UserLocalServiceUtil {
 		userLocalService.addGroupUsers(groupId, userIds);
 	}
 
+	public static void addPasswordPolicyUsers(long passwordPolicyId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.addPasswordPolicyUsers(passwordPolicyId, userIds);
+	}
+
 	public static void addRoleUsers(java.lang.String roleId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
@@ -161,6 +169,14 @@ public class UserLocalServiceUtil {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.decryptUserId(companyId, userId, password);
+	}
+
+	public static void deletePasswordPolicyUser(long passwordPolicyId,
+		java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.deletePasswordPolicyUser(passwordPolicyId, userId);
 	}
 
 	public static void deleteRoleUser(java.lang.String roleId,
@@ -311,6 +327,15 @@ public class UserLocalServiceUtil {
 		return userLocalService.hasGroupUser(groupId, userId);
 	}
 
+	public static boolean hasPasswordPolicyUser(long passwordPolicyId,
+		java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.hasPasswordPolicyUser(passwordPolicyId, userId);
+	}
+
 	public static boolean hasRoleUser(java.lang.String roleId,
 		java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
@@ -390,6 +415,14 @@ public class UserLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 		userLocalService.unsetGroupUsers(groupId, userIds);
+	}
+
+	public static void unsetPasswordPolicyUsers(long passwordPolicyId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
 	public static void unsetRoleUsers(java.lang.String roleId,

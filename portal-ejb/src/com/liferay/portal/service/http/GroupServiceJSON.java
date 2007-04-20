@@ -91,6 +91,13 @@ public class GroupServiceJSON {
 		return GroupJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static void addPasswordPolicyGroups(long passwordPolicyId,
+		long[] groupIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		GroupServiceUtil.addPasswordPolicyGroups(passwordPolicyId, groupIds);
+	}
+
 	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
@@ -168,6 +175,13 @@ public class GroupServiceJSON {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		GroupServiceUtil.setRoleGroups(roleId, groupIds);
+	}
+
+	public static void unsetPasswordPolicyGroups(long passwordPolicyId,
+		long[] groupIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		GroupServiceUtil.unsetPasswordPolicyGroups(passwordPolicyId, groupIds);
 	}
 
 	public static void unsetRoleGroups(java.lang.String roleId, long[] groupIds)

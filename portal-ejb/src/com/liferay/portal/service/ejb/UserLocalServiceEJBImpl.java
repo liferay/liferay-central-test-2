@@ -71,6 +71,14 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		UserLocalServiceFactory.getTxImpl().addGroupUsers(groupId, userIds);
 	}
 
+	public void addPasswordPolicyUsers(long passwordPolicyId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalServiceFactory.getTxImpl().addPasswordPolicyUsers(passwordPolicyId,
+			userIds);
+	}
+
 	public void addRoleUsers(java.lang.String roleId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -149,6 +157,14 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().decryptUserId(companyId,
 			userId, password);
+	}
+
+	public void deletePasswordPolicyUser(long passwordPolicyId,
+		java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalServiceFactory.getTxImpl().deletePasswordPolicyUser(passwordPolicyId,
+			userId);
 	}
 
 	public void deleteRoleUser(java.lang.String roleId, java.lang.String userId)
@@ -269,6 +285,14 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		return UserLocalServiceFactory.getTxImpl().hasGroupUser(groupId, userId);
 	}
 
+	public boolean hasPasswordPolicyUser(long passwordPolicyId,
+		java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return UserLocalServiceFactory.getTxImpl().hasPasswordPolicyUser(passwordPolicyId,
+			userId);
+	}
+
 	public boolean hasRoleUser(java.lang.String roleId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -337,6 +361,14 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().unsetGroupUsers(groupId, userIds);
+	}
+
+	public void unsetPasswordPolicyUsers(long passwordPolicyId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalServiceFactory.getTxImpl().unsetPasswordPolicyUsers(passwordPolicyId,
+			userIds);
 	}
 
 	public void unsetRoleUsers(java.lang.String roleId,

@@ -75,6 +75,13 @@ public class UserServiceJSON {
 		UserServiceUtil.addGroupUsers(groupId, userIds);
 	}
 
+	public static void addPasswordPolicyUsers(long passwordPolicyId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		UserServiceUtil.addPasswordPolicyUsers(passwordPolicyId, userIds);
+	}
+
 	public static void addRoleUsers(java.lang.String roleId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.SystemException, 
@@ -210,6 +217,13 @@ public class UserServiceJSON {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.unsetGroupUsers(groupId, userIds);
+	}
+
+	public static void unsetPasswordPolicyUsers(long passwordPolicyId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		UserServiceUtil.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
 	public static void unsetRoleUsers(java.lang.String roleId,

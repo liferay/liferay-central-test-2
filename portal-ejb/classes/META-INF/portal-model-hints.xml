@@ -259,6 +259,42 @@
 		<field name="satOpen" type="int" />
 		<field name="satClose" type="int" />
 	</model>
+	<model name="com.liferay.portal.model.PasswordPolicy">
+		<field name="passwordPolicyId" type="long" />
+		<field name="companyId" type="String" />
+		<field name="userId" type="String" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="changeable" type="boolean" />
+		<field name="changeRequired" type="boolean" />
+		<field name="minAge" type="int" />
+		<field name="storageScheme" type="String" />
+		<field name="checkSyntax" type="boolean" />
+		<field name="allowDictionaryWords" type="boolean" />
+		<field name="minLength" type="int" />
+		<field name="history" type="boolean" />
+		<field name="historyCount" type="int" />
+		<field name="expireable" type="boolean" />
+		<field name="maxAge" type="int" />
+		<field name="warningTime" type="int" />
+		<field name="graceLimit" type="int" />
+		<field name="lockout" type="boolean" />
+		<field name="maxFailure" type="int" />
+		<field name="requireUnlock" type="boolean" />
+		<field name="lockoutDuration" type="int" />
+		<field name="resetFailureCount" type="int" />
+	</model>
+	<model name="com.liferay.portal.model.PasswordPolicyRel">
+		<field name="passwordPolicyRelId" type="long" />
+		<field name="passwordPolicyId" type="long" />
+		<field name="className" type="String" />
+		<field name="classPK" type="String" />
+	</model>
 	<model name="com.liferay.portal.model.PasswordTracker">
 		<field name="passwordTrackerId" type="long" />
 		<field name="userId" type="String" />

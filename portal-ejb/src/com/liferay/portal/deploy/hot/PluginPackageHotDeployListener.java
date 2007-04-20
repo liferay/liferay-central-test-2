@@ -34,8 +34,8 @@ import com.liferay.util.Http;
 import com.liferay.util.Validator;
 import com.liferay.util.Version;
 
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;

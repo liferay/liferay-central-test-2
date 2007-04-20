@@ -523,6 +523,16 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
+		<action path="/enterprise_admin/edit_password_policy" type="com.liferay.portlet.enterpriseadmin.action.EditPasswordPolicyAction">
+			<forward name="portlet.enterprise_admin.edit_password_policy" path="portlet.enterprise_admin.edit_password_policy" />
+			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
+		</action>
+
+		<action path="/enterprise_admin/edit_password_policy_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditPasswordPolicyAssignmentsAction">
+			<forward name="portlet.enterprise_admin.edit_password_policy_assignments" path="portlet.enterprise_admin.edit_password_policy_assignments" />
+			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
+		</action>
+
 		<action path="/enterprise_admin/edit_permission" type="com.liferay.portlet.enterpriseadmin.action.EditPermissionAction">
 			<forward name="portlet.enterprise_admin.edit_permission_action" path="portlet.enterprise_admin.edit_permission_action" />
 			<forward name="portlet.enterprise_admin.edit_permission_communities" path="portlet.enterprise_admin.edit_permission_communities" />

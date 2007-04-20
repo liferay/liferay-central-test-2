@@ -175,6 +175,13 @@ Liferay.Service.Portal.Group = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	addPasswordPolicyGroups: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addPasswordPolicyGroups";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	addRoleGroups: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "addRoleGroups";
@@ -234,6 +241,13 @@ Liferay.Service.Portal.Group = {
 	setRoleGroups: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "setRoleGroups";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	unsetPasswordPolicyGroups: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "unsetPasswordPolicyGroups";
 
 		return Liferay.Service.ajax(params, callback);
 	},
@@ -478,6 +492,52 @@ Liferay.Service.Portal.OrgLabor = {
 	updateOrgLabor: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateOrgLabor";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
+Liferay.Service.Portal.PasswordPolicy = {
+	serviceClassName: Liferay.Service.Portal.servicePackage + "PasswordPolicy" + Liferay.Service.classNameSuffix,
+
+	addPolicy: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addPolicy";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deletePolicy: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deletePolicy";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getPolicy: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getPolicy";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getPolicies: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getPolicies";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getPoliciesCount: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getPoliciesCount";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updatePolicy: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updatePolicy";
 
 		return Liferay.Service.ajax(params, callback);
 	}
@@ -728,6 +788,13 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	addPasswordPolicyUsers: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addPasswordPolicyUsers";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	addRoleUsers: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "addRoleUsers";
@@ -836,6 +903,13 @@ Liferay.Service.Portal.User = {
 	unsetGroupUsers: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "unsetGroupUsers";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	unsetPasswordPolicyUsers: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "unsetPasswordPolicyUsers";
 
 		return Liferay.Service.ajax(params, callback);
 	},

@@ -267,6 +267,39 @@
 		<jndi-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portal_service_ejb_PasswordPolicyLocalServiceEJB</ejb-name>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
+		<enable-call-by-reference>true</enable-call-by-reference>
+		<local-jndi-name>ejb/liferay/PasswordPolicyLocalServiceHome</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portal_service_ejb_PasswordPolicyServiceEJB</ejb-name>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
+		<enable-call-by-reference>true</enable-call-by-reference>
+		<jndi-name>com_liferay_portal_service_ejb_PasswordPolicyServiceEJB</jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portal_service_ejb_PasswordPolicyRelLocalServiceEJB</ejb-name>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
+		<enable-call-by-reference>true</enable-call-by-reference>
+		<local-jndi-name>ejb/liferay/PasswordPolicyRelLocalServiceHome</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_PasswordTrackerLocalServiceEJB</ejb-name>
 		<reference-descriptor>
 			<resource-description>

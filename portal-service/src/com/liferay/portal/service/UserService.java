@@ -53,6 +53,11 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public void addPasswordPolicyUsers(long passwordPolicyId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public void addRoleUsers(java.lang.String roleId, java.lang.String[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
@@ -128,6 +133,11 @@ public interface UserService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public void unsetGroupUsers(long groupId, java.lang.String[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public void unsetPasswordPolicyUsers(long passwordPolicyId,
+		java.lang.String[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

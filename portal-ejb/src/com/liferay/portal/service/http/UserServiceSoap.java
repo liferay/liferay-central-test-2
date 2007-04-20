@@ -88,6 +88,17 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static void addPasswordPolicyUsers(long passwordPolicyId,
+		java.lang.String[] userIds) throws RemoteException {
+		try {
+			UserServiceUtil.addPasswordPolicyUsers(passwordPolicyId, userIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void addRoleUsers(java.lang.String roleId,
 		java.lang.String[] userIds) throws RemoteException {
 		try {
@@ -292,6 +303,17 @@ public class UserServiceSoap {
 		throws RemoteException {
 		try {
 			UserServiceUtil.unsetGroupUsers(groupId, userIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unsetPasswordPolicyUsers(long passwordPolicyId,
+		java.lang.String[] userIds) throws RemoteException {
+		try {
+			UserServiceUtil.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

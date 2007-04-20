@@ -107,6 +107,43 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static void addPasswordPolicyUsers(HttpPrincipal httpPrincipal,
+		long passwordPolicyId, java.lang.String[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(passwordPolicyId);
+			Object paramObj1 = userIds;
+
+			if (userIds == null) {
+				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"addPasswordPolicyUsers",
+					new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static void addRoleUsers(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, java.lang.String[] userIds)
 		throws com.liferay.portal.SystemException, 
@@ -818,6 +855,43 @@ public class UserServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"unsetGroupUsers", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static void unsetPasswordPolicyUsers(HttpPrincipal httpPrincipal,
+		long passwordPolicyId, java.lang.String[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(passwordPolicyId);
+			Object paramObj1 = userIds;
+
+			if (userIds == null) {
+				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"unsetPasswordPolicyUsers",
+					new Object[] { paramObj0, paramObj1 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

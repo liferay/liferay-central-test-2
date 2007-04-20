@@ -254,6 +254,46 @@
 		<property name="satOpen" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="satClose" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
+	<class name="com.liferay.portal.model.impl.PasswordPolicyImpl" table="PasswordPolicy">
+		<cache usage="read-write" />
+		<id name="passwordPolicyId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="changeable" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="changeRequired" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="minAge" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="storageScheme" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="checkSyntax" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="allowDictionaryWords" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="minLength" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="history" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="historyCount" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="expireable" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="maxAge" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="warningTime" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="graceLimit" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="lockout" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="maxFailure" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="requireUnlock" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="lockoutDuration" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="resetFailureCount" type="com.liferay.util.dao.hibernate.IntegerType" />
+	</class>
+	<class name="com.liferay.portal.model.impl.PasswordPolicyRelImpl" table="PasswordPolicyRel">
+		<cache usage="read-write" />
+		<id name="passwordPolicyRelId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="passwordPolicyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
 	<class name="com.liferay.portal.model.impl.PasswordTrackerImpl" table="PasswordTracker">
 		<cache usage="read-write" />
 		<id name="passwordTrackerId" type="long">

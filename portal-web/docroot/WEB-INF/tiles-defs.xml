@@ -407,6 +407,14 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_organization.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.edit_password_policy" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/edit_password_policy.jsp" />
+	</definition>
+
+	<definition name="portlet.enterprise_admin.edit_password_policy_assignments" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/edit_password_policy_assignments.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.edit_phone" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_phone.jsp" />
 	</definition>

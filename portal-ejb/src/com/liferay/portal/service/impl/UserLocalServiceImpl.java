@@ -76,6 +76,7 @@ import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
 import com.liferay.portal.service.PasswordTrackerLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -158,6 +159,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userId, groupId, new String[] {role.getRoleId()});
 		}
 
+	}
+
+	public void addPasswordPolicyUsers(long passwordPolicyId, String[] userIds)
+		throws PortalException, SystemException {
+
+		PasswordPolicyRelLocalServiceUtil.addPasswordPolicyRel(passwordPolicyId,
+			User.class.getName(), userIds);
 	}
 
 	public void addRoleUsers(String roleId, String[] userIds)
@@ -528,6 +536,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
+	public void deletePasswordPolicyUser(long passwordPolicyId, String userId)
+		throws PortalException, SystemException {
+
+		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRel(
+			passwordPolicyId, User.class.getName(), userId);
+	}
+
 	public void deleteRoleUser(String roleId, String userId)
 		throws PortalException, SystemException {
 
@@ -761,6 +776,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return GroupUtil.containsUser(groupId, userId);
 	}
 
+	public boolean hasPasswordPolicyUser(long passwordPolicyId, String userId)
+		throws PortalException, SystemException {
+
+		return PasswordPolicyRelLocalServiceUtil.hasPasswordPolicy(
+			passwordPolicyId, User.class.getName(), userId);
+	}
+
 	public boolean hasRoleUser(String roleId, String userId)
 		throws PortalException, SystemException {
 
@@ -938,6 +960,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userIds, groupId);
 
 		GroupUtil.removeUsers(groupId, userIds);
+	}
+
+	public void unsetPasswordPolicyUsers(
+			long passwordPolicyId, String[] userIds)
+		throws PortalException, SystemException {
+
+		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRel(
+			passwordPolicyId, User.class.getName(), userIds);
 	}
 
 	public void unsetRoleUsers(String roleId, String[] userIds)

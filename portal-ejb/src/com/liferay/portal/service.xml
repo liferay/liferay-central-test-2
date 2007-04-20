@@ -571,6 +571,79 @@
 			<finder-column name="organizationId" />
 		</finder>
 	</entity>
+	<entity name="PasswordPolicy" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="passwordPolicyId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="String" />
+		<column name="userId" type="String" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+		<column name="changeable" type="boolean" />
+		<column name="changeRequired" type="boolean" />
+		<column name="minAge" type="int" />
+		<column name="storageScheme" type="String" />
+		<column name="checkSyntax" type="boolean" />
+		<column name="allowDictionaryWords" type="boolean" />
+		<column name="minLength" type="int" />
+		<column name="history" type="boolean" />
+		<column name="historyCount" type="int" />
+		<column name="expireable" type="boolean" />
+		<column name="maxAge" type="int" />
+		<column name="warningTime" type="int" />
+		<column name="graceLimit" type="int" />
+		<column name="lockout" type="boolean" />
+		<column name="maxFailure" type="int" />
+		<column name="requireUnlock" type="boolean" />
+		<column name="lockoutDuration" type="int" />
+		<column name="resetFailureCount" type="int" />
+
+		<!-- Finder methods -->
+
+		<finder name="N_D" return-type="Collection">
+			<finder-column name="name" />
+			<finder-column name="description" />
+		</finder>
+	</entity>
+	<entity name="PasswordPolicyRel" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="passwordPolicyRelId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="passwordPolicyId" type="long" />
+		<column name="className" type="String" />
+		<column name="classPK" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="P" return-type="Collection">
+			<finder-column name="passwordPolicyId" />
+		</finder>
+
+		<finder name="C_C" return-type="PasswordPolicyRel">
+			<finder-column name="className" />
+			<finder-column name="classPK" />
+		</finder>
+
+		<finder name="P_C_C" return-type="PasswordPolicyRel">
+			<finder-column name="passwordPolicyId" />
+			<finder-column name="className" />
+			<finder-column name="classPK" />
+		</finder>
+	</entity>
 	<entity name="PasswordTracker" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -1231,6 +1304,7 @@
 		<exception>RequiredGroup</exception>
 		<exception>RequiredLayout</exception>
 		<exception>RequiredOrganization</exception>
+		<exception>RequiredPasswordPolicy</exception>
 		<exception>RequiredRole</exception>
 		<exception>RequiredUser</exception>
 		<exception>RequiredUser</exception>

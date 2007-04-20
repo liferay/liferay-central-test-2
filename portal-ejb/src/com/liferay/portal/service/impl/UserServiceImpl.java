@@ -64,6 +64,14 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		}
 	}
 
+	public void addPasswordPolicyUsers(long passwordPolicyId, String[] userIds)
+		throws PortalException, SystemException {
+
+		//PasswordPolicyPermission.check(getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+
+		UserLocalServiceUtil.addPasswordPolicyUsers(passwordPolicyId, userIds);
+	}
+
 	public void addRoleUsers(String roleId, String[] userIds)
 		throws PortalException, SystemException {
 
@@ -226,6 +234,14 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 
 			UserLocalServiceUtil.unsetGroupUsers(groupId, userIds);
 		}
+	}
+
+	public void unsetPasswordPolicyUsers(long passwordPolicyId, String[] userIds)
+		throws PortalException, SystemException {
+
+		//PasswordPolicyPermission.check(getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+
+		UserLocalServiceUtil.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
 	public void unsetRoleUsers(String roleId, String[] userIds)

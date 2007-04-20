@@ -75,6 +75,14 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 			description, type, friendlyURL, active);
 	}
 
+	public void addPasswordPolicyGroups(long passwordPolicyId, long[] groupIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		GroupServiceFactory.getTxImpl().addPasswordPolicyGroups(passwordPolicyId,
+			groupIds);
+	}
+
 	public void addRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -153,6 +161,14 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		GroupServiceFactory.getTxImpl().setRoleGroups(roleId, groupIds);
+	}
+
+	public void unsetPasswordPolicyGroups(long passwordPolicyId, long[] groupIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		GroupServiceFactory.getTxImpl().unsetPasswordPolicyGroups(passwordPolicyId,
+			groupIds);
 	}
 
 	public void unsetRoleGroups(java.lang.String roleId, long[] groupIds)

@@ -61,6 +61,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void addPasswordPolicyUsers(long passwordPolicyId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void addRoleUsers(java.lang.String roleId, java.lang.String[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -111,6 +116,11 @@ public interface UserLocalService {
 	public com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		java.lang.String companyId, java.lang.String userId,
 		java.lang.String password)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void deletePasswordPolicyUser(long passwordPolicyId,
+		java.lang.String userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -192,6 +202,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean hasPasswordPolicyUser(long passwordPolicyId,
+		java.lang.String userId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public boolean hasRoleUser(java.lang.String roleId, java.lang.String userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -234,6 +249,11 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public void unsetGroupUsers(long groupId, java.lang.String[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void unsetPasswordPolicyUsers(long passwordPolicyId,
+		java.lang.String[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

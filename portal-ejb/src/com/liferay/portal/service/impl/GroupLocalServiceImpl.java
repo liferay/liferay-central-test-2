@@ -50,6 +50,7 @@ import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
@@ -174,6 +175,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return group;
+	}
+
+	public void addPasswordPolicyGroups(
+			long passwordPolicyId, long[] groupIds)
+		throws PortalException, SystemException {
+
+		PasswordPolicyRelLocalServiceUtil.addPasswordPolicyRel(
+			passwordPolicyId, Group.class.getName(), groupIds);
 	}
 
 	public void addRoleGroups(String roleId, long[] groupIds)
@@ -415,6 +424,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return userGroupGroups;
 	}
 
+	public boolean hasPasswordPolicyGroup(
+			long passwordPolicyId, long groupId)
+		throws PortalException, SystemException {
+
+		return PasswordPolicyRelLocalServiceUtil.hasPasswordPolicy(
+			passwordPolicyId, Group.class.getName(), String.valueOf(groupId));
+	}
+
 	public boolean hasRoleGroup(String roleId, long groupId)
 		throws PortalException, SystemException {
 
@@ -459,6 +476,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		UserUtil.setGroups(userId, groupIds);
+	}
+
+	public void unsetPasswordPolicyGroups(
+			long passwordPolicyId, long[] groupIds)
+		throws PortalException, SystemException {
+
+		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRel(
+			passwordPolicyId, Group.class.getName(), groupIds);
 	}
 
 	public void unsetRoleGroups(String roleId, long[] groupIds)

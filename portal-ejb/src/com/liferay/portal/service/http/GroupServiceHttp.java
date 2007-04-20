@@ -197,6 +197,43 @@ public class GroupServiceHttp {
 		}
 	}
 
+	public static void addPasswordPolicyGroups(HttpPrincipal httpPrincipal,
+		long passwordPolicyId, long[] groupIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(passwordPolicyId);
+			Object paramObj1 = groupIds;
+
+			if (groupIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
+					"addPasswordPolicyGroups",
+					new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static void addRoleGroups(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
@@ -585,6 +622,43 @@ public class GroupServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"setRoleGroups", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static void unsetPasswordPolicyGroups(HttpPrincipal httpPrincipal,
+		long passwordPolicyId, long[] groupIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(passwordPolicyId);
+			Object paramObj1 = groupIds;
+
+			if (groupIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
+					"unsetPasswordPolicyGroups",
+					new Object[] { paramObj0, paramObj1 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

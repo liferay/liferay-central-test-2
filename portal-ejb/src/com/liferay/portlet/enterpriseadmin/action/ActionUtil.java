@@ -26,6 +26,7 @@ import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
@@ -34,6 +35,7 @@ import com.liferay.portal.service.AddressServiceUtil;
 import com.liferay.portal.service.EmailAddressServiceUtil;
 import com.liferay.portal.service.OrgLaborServiceUtil;
 import com.liferay.portal.service.OrganizationServiceUtil;
+import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
@@ -181,6 +183,32 @@ public class ActionUtil {
 		}
 
 		req.setAttribute(WebKeys.ORG_LABOR, orgLabor);
+	}
+
+	public static void getPasswordPolicy(ActionRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getPasswordPolicy(httpReq);
+	}
+
+	public static void getPasswordPolicy(RenderRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getPasswordPolicy(httpReq);
+	}
+
+	public static void getPasswordPolicy(HttpServletRequest req)
+		throws Exception {
+
+		String passwordPolicyId = ParamUtil.getString(req, "passwordPolicyId");
+
+		PasswordPolicy passwordPolicy = null;
+
+		if (Validator.isNotNull(passwordPolicyId)) {
+			passwordPolicy = PasswordPolicyLocalServiceUtil.getPolicy(Long.valueOf(passwordPolicyId).longValue());
+		}
+
+		req.setAttribute(WebKeys.PASSWORD_POLICY, passwordPolicy);
 	}
 
 	public static void getRole(ActionRequest req) throws Exception {

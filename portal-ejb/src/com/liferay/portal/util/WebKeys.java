@@ -217,6 +217,8 @@ public class WebKeys {
 
 	public static final String ORGANIZATION = "ORGANIZATION";
 
+	public static final String PASSWORD_POLICY = "PASSWORD_POLICY";
+
 	public static final String PHONE = "PHONE";
 
 	public static final String PLUGIN_REPOSITORY_REPORT = "PLUGIN_REPOSITORY_REPORT";

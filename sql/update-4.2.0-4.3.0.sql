@@ -90,6 +90,43 @@ alter_column_type OrgGroupRole groupId LONG;
 
 alter_column_type OrgLabor typeId INTEGER;
 
+create table PasswordPolicy (
+	passwordPolicyId LONG not null primary key,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	description STRING null,
+	changeable BOOLEAN,
+	changeRequired BOOLEAN,
+	minAge INTEGER,
+	storageScheme VARCHAR(75) null,
+	checkSyntax BOOLEAN,
+	allowDictionaryWords BOOLEAN,
+	minLength INTEGER,
+	history BOOLEAN,
+	historyCount INTEGER,
+	expireable BOOLEAN,
+	maxAge INTEGER,
+	warningTime INTEGER,
+	graceLimit INTEGER,
+	lockout BOOLEAN,
+	maxFailure INTEGER,
+	requireUnlock BOOLEAN,
+	lockoutDuration INTEGER,
+	resetFailureCount INTEGER
+);
+
+create table PasswordPolicyRel (
+	passwordPolicyRelId LONG not null primary key,
+	passwordPolicyId LONG,
+	className VARCHAR(75) null,
+	classPK VARCHAR(75) null
+);
+
+
 alter_column_type PasswordTracker passwordTrackerId LONG;
 
 alter_column_type Permission_ permissionId LONG;
