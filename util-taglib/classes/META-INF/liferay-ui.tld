@@ -368,6 +368,21 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>icon-help</name>
+		<tagclass>com.liferay.taglib.ui.IconHelpTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>message</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>png-image</name>
 		<tagclass>com.liferay.taglib.ui.PngImageTag</tagclass>
 		<bodycontent>JSP</bodycontent>
