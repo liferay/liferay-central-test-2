@@ -336,6 +336,7 @@ var Tree = new Class({
 		var instance = this;
 
 		type = (!type) ? 'update' : type;
+
 		var tree = instance.tree;
 
 		if (tree.length > 0) {
@@ -364,9 +365,8 @@ var Tree = new Class({
 					newSibling = li.eq(droppedIndex);
 					newSibling.before(liChild);
 				}
-
-
-			} else if (type == 'delete') {
+			}
+			else if (type == 'delete') {
 				var tabLayoutId = obj[0]._LFR_layoutId;
 				var treeBranch = tree.find('li[@id=_branchId_' + tabLayoutId + ']');
 

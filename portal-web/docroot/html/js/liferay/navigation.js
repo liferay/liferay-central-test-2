@@ -264,7 +264,8 @@ Liferay.Navigation = new Class({
 					tolerance: 'pointer',
 					onStop: function() {
 						instance._saveSortables(this);
-						Liferay.Publisher.deliver('navigation',this);
+
+						Liferay.Publisher.deliver('navigation', this);
 					}
 				}
 			);
@@ -287,6 +288,7 @@ Liferay.Navigation = new Class({
 					data: data,
 					success: function() {
 						Liferay.Publisher.deliver('navigation', tab, 'delete');
+
 						tab.remove();
 					},
 					url: instance._updateURL
@@ -374,7 +376,8 @@ Liferay.Navigation = new Class({
 
 				if (instance._isUseHandle) {
 					enterPage.before('<span class="sort-handle">+</span>');
-				} else {
+				}
+				else {
 					newTab.css('cursor', 'move');
 				}
 
@@ -382,8 +385,10 @@ Liferay.Navigation = new Class({
 
 				enterPage.before(newTab);
 				enterPage.remove();
+
 				instance.sortable.SortableAddItem(newNavItem[0]);
 				instance._deleteButton(newNavItem);
+
 				Liferay.Publisher.deliver('navigation', newNavItem);
 			}
 		}
@@ -436,7 +441,13 @@ Liferay.Navigation = new Class({
 			liChild = liChild.filter(
 				function() {
 					var currentItem = jQuery(this);
-					return (currentItem.text() == droppedName);
+
+					if (currentItem.text() == droppedName) {
+						return true;
+					}
+					else {
+						return false;
+					}
 				}
 			);
 
@@ -454,20 +465,23 @@ Liferay.Navigation = new Class({
 					if (parentLi.is(':hidden')) {
 						parentLi.show();
 					}
-				} else {
+				}
+				else {
+
 					//TODO: add parsing to move child elements around by their layoutId
+
 					parentLi.hide();
 				}
-			} else if (!newParent.is('.tree-item')) {
+			}
+			else if (!newParent.is('.tree-item')) {
 				var newTab = liItems.lt(1).clone();
 
 				newTab.removeClass('selected');
-
 				newTab.find('.child-menu').remove();
 
 				var newTabLink = newTab.find('a span');
-				newTabLink.text(droppedName);
 
+				newTabLink.text(droppedName);
 				newTabLink.css('cursor', 'pointer');
 
 				liItems.parent().append(newTab);
