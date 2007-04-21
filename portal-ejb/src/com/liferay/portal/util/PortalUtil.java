@@ -68,6 +68,7 @@ import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesWrapper;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
+import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.portlet.wsrp.URLGeneratorImpl;
 import com.liferay.util.ArrayUtil;
@@ -81,6 +82,7 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.portlet.PortletRequestWrapper;
+import com.liferay.util.portlet.PortletResponseWrapper;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.StringServletResponse;
 import com.liferay.util.servlet.UploadPortletRequest;
@@ -111,6 +113,7 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.RenderRequest;
@@ -368,6 +371,31 @@ public class PortalUtil {
 			throw new RuntimeException(
 				"Unable to get the HTTP servlet request from " +
 					req.getClass().getName());
+		}
+	}
+
+	public static HttpServletResponse getHttpServletResponse(
+		PortletResponse res) {
+
+		if (res instanceof ActionResponseImpl) {
+			ActionResponseImpl resImpl = (ActionResponseImpl)res;
+
+			return resImpl.getHttpServletResponse();
+		}
+		else if (res instanceof RenderResponseImpl) {
+			RenderResponseImpl resImpl = (RenderResponseImpl)res;
+
+			return resImpl.getHttpServletResponse();
+		}
+		else if (res instanceof PortletResponseWrapper) {
+			PortletResponseWrapper resWrapper = (PortletResponseWrapper)res;
+
+			return getHttpServletResponse(resWrapper.getPortletResponse());
+		}
+		else {
+			throw new RuntimeException(
+				"Unable to get the HTTP servlet resuest from " +
+					res.getClass().getName());
 		}
 	}
 
