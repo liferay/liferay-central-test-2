@@ -265,7 +265,8 @@ public class MailAction extends JSONAction {
 			boolean enabled =
 				GetterUtil.getBoolean(
 					prefs.getValue(
-						finder.getClass().getName(), Boolean.TRUE.toString()));
+						finder.getClass().getName(), StringPool.BLANK),
+					true);
 
 			if (enabled) {
 				recipients.addAll(
@@ -273,8 +274,10 @@ public class MailAction extends JSONAction {
 			}
 		}
 
-		JSONArray jsonArray = Autocomplete.arrayToJson((String[])
-			ListUtil.fromCollection(recipients).toArray(new String[0]), 50);
+		String[] recipientsArray = (String[])ListUtil.fromCollection(
+			recipients).toArray(new String[0]);
+
+		JSONArray jsonArray = Autocomplete.arrayToJson(recipientsArray, 50);
 
 		return jsonArray.toString();
 	}

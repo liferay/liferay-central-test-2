@@ -38,9 +38,10 @@
 <%@ page import="com.liferay.portlet.mail.util.recipient.RecipientFinder" %>
 <%@ page import="com.liferay.portlet.mail.util.recipient.RecipientFinderLocator" %>
 <%@ page import="com.liferay.util.mail.MailServerException" %>
-<%@ page import="org.apache.commons.collections.map.MultiValueMap" %>
 
 <%@ page import="javax.mail.Address" %>
+
+<%@ page import="org.apache.commons.collections.map.MultiValueMap" %>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();

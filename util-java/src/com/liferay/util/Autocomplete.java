@@ -49,7 +49,7 @@ public class Autocomplete {
 
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < array.length && i < max; i++) {
+		for (int i = 0; (i < array.length) && (i < max); i++) {
 			String text = array[i][0];
 			String value = array[i][1];
 
@@ -79,7 +79,7 @@ public class Autocomplete {
 
 		sm.append("<ajaxresponse>");
 
-		for (int i = 0; i < array.length && i < max; i++) {
+		for (int i = 0; (i < array.length) && (i < max); i++) {
 			String text = array[i][0];
 			String value = array[i][1];
 

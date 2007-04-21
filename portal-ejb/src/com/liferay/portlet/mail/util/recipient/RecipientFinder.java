@@ -32,7 +32,9 @@ import org.apache.commons.collections.map.MultiValueMap;
 /**
  * <a href="RecipientFinder.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
  * Used to support the search for valid recipients for the mail portlet.
+ * </p>
  *
  * @author Alexander Chow
  *

@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.mail.util.recipient;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -64,20 +63,20 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		return new MultiValueMap();
 	}
 
 	public SortedSet getRecipients(String userId, String data, Map options) {
-
 		SortedSet recipients = new TreeSet();
 
 		data = data.toLowerCase();
 
 		try {
-			String org = (String)options.get(_OPTION_ORGANIZATION);
+			String optionOrganization =
+				(String)options.get(_OPTION_ORGANIZATION);
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 
@@ -86,25 +85,25 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 			LinkedHashMap params = null;
 
 			if (Validator.isNotNull(organization.getOrganizationId()) &&
-				(Validator.isNull(org) || org.equals("my-organization"))) {
+				(Validator.isNull(optionOrganization) ||
+				 optionOrganization.equals("my-organization"))) {
 
 				params = new LinkedHashMap();
 
 				params.put("usersOrgs", organization.getOrganizationId());
 			}
 
-			List results =
-				UserLocalServiceUtil.search(
-					user.getCompanyId(), null, null, null, null, true,
-					params, true, 0, 50, null);
+			List results = UserLocalServiceUtil.search(
+				user.getCompanyId(), null, null, null, null, true, params, true,
+				0, 50, null);
 
 			for (int i = 0; i < results.size(); i++) {
 				User recipient = (User)results.get(i);
 
 				String str =
-					recipient.getFullName() +
-						StringPool.SPACE + StringPool.LESS_THAN +
-						recipient.getEmailAddress() + StringPool.GREATER_THAN;
+					recipient.getFullName() + StringPool.SPACE +
+						StringPool.LESS_THAN + recipient.getEmailAddress() +
+							StringPool.GREATER_THAN;
 
 				if (str.toLowerCase().indexOf(data) != -1) {
 					recipients.add(str);
@@ -112,7 +111,7 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		return recipients;

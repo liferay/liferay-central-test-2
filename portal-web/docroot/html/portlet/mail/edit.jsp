@@ -95,55 +95,61 @@ portletURL.setParameter("tabs1", tabs1);
 			MultiValueMap options = recipientFinder.getOptions(user.getUserId());
 
 			if (options.size() > 0) {
-				Iterator iterator1 = new TreeSet(options.keySet()).iterator();
+				Iterator itr1 = new TreeSet(options.keySet()).iterator();
 		%>
 
-			<b><%= LanguageUtil.get(pageContext, recipientFinder.getName()) %></b>
+				<b><%= LanguageUtil.get(pageContext, recipientFinder.getName()) %></b>
 
-			<table border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td>
-					<%= LanguageUtil.get(pageContext, "enabled") %>
-				</td>
-				<td style="padding-left: 10px;"></td>
-				<td>
-					<select name="<portlet:namespace /><%= rfName %>">
-						<option value="<%= Boolean.TRUE.toString() %>" <%= enabled ? "selected='selected'" : "" %>><%= LanguageUtil.get(pageContext, "yes") %></option>
-						<option value="<%= Boolean.FALSE.toString() %>" <%= !enabled ? "selected='selected'" : "" %>><%= LanguageUtil.get(pageContext, "no") %></option>
-					</select>
-				</td>
-			</tr>
+				<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "enabled") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<select name="<portlet:namespace /><%= rfName %>">
+							<option value="<%= Boolean.TRUE.toString() %>" <%= enabled ? "selected='selected'" : "" %>><%= LanguageUtil.get(pageContext, "yes") %></option>
+							<option value="<%= Boolean.FALSE.toString() %>" <%= !enabled ? "selected='selected'" : "" %>><%= LanguageUtil.get(pageContext, "no") %></option>
+						</select>
+					</td>
+				</tr>
+
 			<%
-			while (iterator1.hasNext()) {
-				String option = (String)iterator1.next();
+			while (itr1.hasNext()) {
+				String option = (String)itr1.next();
 
 				String optionPref = prefs.getValue(rfName + StringPool.PERIOD + option, StringPool.BLANK);
 			%>
-			<tr>
-				<td>
-					<%= LanguageUtil.get(pageContext, option) %>
-				</td>
-				<td style="padding-left: 10px;"></td>
-				<td>
-					<select name="<portlet:namespace /><%= rfName + StringPool.PERIOD + option %>">
-						<%
-						Iterator iterator2 = options.iterator(option);
 
-						while (iterator2.hasNext()) {
-							String choice = (String)iterator2.next();
-						%>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, option) %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<select name="<portlet:namespace /><%= rfName + StringPool.PERIOD + option %>">
 
-							<option value="<%= choice %>" <%= choice.equals(optionPref) ? "selected='selected'" : "" %>><%= LanguageUtil.get(pageContext, choice) %></option>
+							<%
+							Iterator itr2 = options.iterator(option);
 
-						<%
-						}
-						%>
-					</select>
-				</td>
-			</tr>
+							while (itr2.hasNext()) {
+								String choice = (String)itr2.next();
+							%>
+
+								<option value="<%= choice %>" <%= choice.equals(optionPref) ? "selected='selected'" : "" %>><%= LanguageUtil.get(pageContext, choice) %></option>
+
+							<%
+							}
+							%>
+
+						</select>
+					</td>
+				</tr>
+
 			<%
 			}
 			%>
+
 			</table>
 
 			<br><br>
@@ -152,6 +158,7 @@ portletURL.setParameter("tabs1", tabs1);
 			}
 		}
 		%>
+
 	</c:when>
 	<c:when test='<%= tabs1.equals("filters") %>'>
 		<%= LanguageUtil.get(pageContext, "set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder") %>

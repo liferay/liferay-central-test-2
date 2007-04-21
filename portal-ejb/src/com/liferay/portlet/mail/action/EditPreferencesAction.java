@@ -91,17 +91,17 @@ public class EditPreferencesAction extends PortletAction {
 
 				String rfName = recipientFinder.getClass().getName();
 
-				boolean isEnabled = ParamUtil.getBoolean(req, rfName, true);
+				boolean enabled = ParamUtil.getBoolean(req, rfName, true);
 
-				prefs.setValue(rfName, Boolean.toString(isEnabled));
+				prefs.setValue(rfName, String.valueOf(enabled));
 
 				MultiValueMap options = recipientFinder.getOptions(userId);
 
-				Iterator iterator = options.keySet().iterator();
+				Iterator itr = options.keySet().iterator();
 
-				while (iterator.hasNext()) {
+				while (itr.hasNext()) {
 					String key =
-						rfName + StringPool.PERIOD + (String)iterator.next();
+						rfName + StringPool.PERIOD + (String)itr.next();
 
 					String value = ParamUtil.getString(req, key);
 
@@ -165,7 +165,7 @@ public class EditPreferencesAction extends PortletAction {
 			boolean leaveCopy = ParamUtil.getBoolean(req, "leaveCopy");
 
 			prefs.setValue("forward-address", forwardAddress);
-			prefs.setValue("leave-copy", Boolean.toString(leaveCopy));
+			prefs.setValue("leave-copy", String.valueOf(leaveCopy));
 
 			List filterObjects = new ArrayList();
 

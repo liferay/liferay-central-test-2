@@ -89,22 +89,20 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 
 			if (Validator.isNull(artifactGroupId)) {
 				artifactGroupId = GetterUtil.getString(
-					attributes.getValue("Bundle-Vendor"),
-					servletContextName);
+					attributes.getValue("Bundle-Vendor"), servletContextName);
 			}
 
 			String artifactId = attributes.getValue("Implementation-Title");
 
 			if (Validator.isNull(artifactId)) {
 				artifactId = GetterUtil.getString(
-					attributes.getValue("Bundle-Name"),
-					servletContextName);
+					attributes.getValue("Bundle-Name"), servletContextName);
 			}
 
 			String version = attributes.getValue("Implementation-Version");
 
 			if (Validator.isNull(version)) {
-				version =GetterUtil.getString(
+				version = GetterUtil.getString(
 					attributes.getValue("Bundle-Version"), Version.UNKNOWN);
 			}
 
@@ -125,11 +123,11 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 
 			String shortDescription = attributes.getValue("Bundle-Description");
 
-			String pageURL = attributes.getValue("Bundle-DocURL");
-
 			if (Validator.isNotNull(shortDescription)) {
 				pluginPackage.setShortDescription(shortDescription);
 			}
+
+			String pageURL = attributes.getValue("Bundle-DocURL");
 
 			if (Validator.isNotNull(pageURL)) {
 				pluginPackage.setPageURL(pageURL);

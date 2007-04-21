@@ -130,7 +130,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 	}
 </script>
 
-<form autocomplete="off" action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:actionURL>" autocomplete="off" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_render" value="/mail/view" /></portlet:renderURL>">
 <input name="<portlet:namespace />originalId" type="hidden" value="<%= originalId %>" />
@@ -148,7 +148,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input name="<portlet:namespace />to" id="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text">
+		<input id="<portlet:namespace />to" name="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text">
 	</td>
 </tr>
 <tr>
@@ -157,7 +157,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input name="<portlet:namespace />cc" id="<portlet:namespace />cc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= cc %>">
+		<input id="<portlet:namespace />cc" name="<portlet:namespace />cc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= cc %>">
 	</td>
 </tr>
 <tr>
@@ -166,7 +166,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input name="<portlet:namespace />bcc" id="<portlet:namespace />bcc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= bcc %>">
+		<input id="<portlet:namespace />bcc" name="<portlet:namespace />bcc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= bcc %>">
 	</td>
 </tr>
 <tr>
