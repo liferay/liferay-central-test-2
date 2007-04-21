@@ -344,6 +344,7 @@ public class WebSiteBuilder {
 					"\"http://www.orionserver.com/dtds/orion-web.dtd\">\n" +
 				"\n" +
 				"<orion-web-app>\n" +
+				"\t<web-app-class-loader search-local-classes-first=\"true\" include-war-manifest-class-path=\"true\" />\n" +
 				"</orion-web-app>";
 
 			File orionWebXMLFile = new File(

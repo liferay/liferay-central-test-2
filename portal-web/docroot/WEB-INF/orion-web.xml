@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-
-<orion-web-app>
-	<web-app-class-loader search-local-classes-first="true"  include-war-manifest-class-path="true" />
-</orion-web-app>

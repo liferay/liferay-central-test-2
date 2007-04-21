@@ -510,6 +510,7 @@ auto.deploy.dest.dir=../webapps</echo>
 							<equals arg1="${app.server.deploy.archive.type}" arg2="war" />
 						</and>
 						<equals arg1="${app.server.type}" arg2="jetty" />
+						<equals arg1="${app.server.type}" arg2="oc4j" />
 						<equals arg1="${app.server.type}" arg2="resin" />
 						<equals arg1="${app.server.type}" arg2="tomcat" />
 					</or>
