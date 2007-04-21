@@ -29,6 +29,10 @@ Liferay.Navigation = new Class({
 		instance._makeDeletable();
 		instance._makeSortable();
 		instance._makeEditable();
+
+		Liferay.Publisher.register('navigation');
+
+		Liferay.Publisher.subscribe('tree', instance._treeCallback, instance);
 	},
 
 	_addPage: function(event, obj) {
@@ -260,7 +264,7 @@ Liferay.Navigation = new Class({
 					tolerance: 'pointer',
 					onStop: function() {
 						instance._saveSortables(this);
-						instance._updateTree(this);
+						Liferay.Publisher.deliver('navigation',this);
 					}
 				}
 			);
@@ -282,6 +286,7 @@ Liferay.Navigation = new Class({
 				{
 					data: data,
 					success: function() {
+						Liferay.Publisher.deliver('navigation', tab, 'delete');
 						tab.remove();
 					},
 					url: instance._updateURL
@@ -379,6 +384,7 @@ Liferay.Navigation = new Class({
 				enterPage.remove();
 				instance.sortable.SortableAddItem(newNavItem[0]);
 				instance._deleteButton(newNavItem);
+				Liferay.Publisher.deliver('navigation', newNavItem);
 			}
 		}
 
@@ -412,36 +418,59 @@ Liferay.Navigation = new Class({
 		);
 	},
 
-	_updateTree: function(obj) {
+	_treeCallback: function(item, obj) {
 		var instance = this;
 
-		//TODO: add ability to update tree on ADD and DELETE
+		var navigation = instance._navBlock.find('> ul');
 
-		var tree = jQuery('div[@id$=tree-output]');
+		if (instance._isSortable) {
+			var liItems = navigation.find('> li');
 
-		if (tree.length > 0) {
-			var droppedName = jQuery('span:eq(0)', obj).text();
-			var li = tree.find('> ul > li > ul > li');
+			var droppedItem = jQuery(item);
+			var tree = droppedItem.parent();
+			var droppedName = droppedItem.find('span:first').text();
+			var newParent = jQuery(obj).parents('li:first');
 
-			var liChild = li.find('span:first').filter(
+			var liChild = liItems.find('span').not('.delete-tab');
+
+			liChild = liChild.filter(
 				function() {
-					return (jQuery(this).text() == droppedName);
+					var currentItem = jQuery(this);
+					return (currentItem.text() == droppedName);
 				}
 			);
 
-			liChild = liChild.parents('li:first');
+			var treeItems = tree.find('> li');
 
-			var droppedIndex = jQuery(obj).parent().find('> li').index(obj);
+			var newIndex = treeItems.index(item);
 
-			var newSibling = li.eq(droppedIndex);
+			if (liChild.length > 0) {
+				var newSibling = liItems.eq(newIndex);
+				var parentLi = liChild.parents('li:first');
 
-			newSibling.after(liChild);
+				if (!newParent.is('.tree-item')) {
+					newSibling.after(parentLi);
 
-			var newIndex = li.index(liChild[0]);
+					if (parentLi.is(':hidden')) {
+						parentLi.show();
+					}
+				} else {
+					//TODO: add parsing to move child elements around by their layoutId
+					parentLi.hide();
+				}
+			} else if (!newParent.is('.tree-item')) {
+				var newTab = liItems.lt(1).clone();
 
-			if (newIndex > droppedIndex || droppedIndex == 0) {
-				newSibling = li.eq(droppedIndex);
-				newSibling.before(liChild);
+				newTab.removeClass('selected');
+
+				newTab.find('.child-menu').remove();
+
+				var newTabLink = newTab.find('a span');
+				newTabLink.text(droppedName);
+
+				newTabLink.css('cursor', 'pointer');
+
+				liItems.parent().append(newTab);
 			}
 		}
 	},

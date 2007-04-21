@@ -11,6 +11,10 @@ var Tree = new Class({
 		instance.treeHTML = '';
 		instance.treeId = params.treeId;
 
+		Liferay.Publisher.register('tree');
+
+		Liferay.Publisher.subscribe('navigation', instance._navigationCallback, instance);
+
 		instance.create();
 	},
 
@@ -328,6 +332,49 @@ var Tree = new Class({
 		}
 	},
 
+	_navigationCallback: function(obj, type) {
+		var instance = this;
+
+		type = (!type) ? 'update' : type;
+		var tree = instance.tree;
+
+		if (tree.length > 0) {
+			if (type == 'update') {
+
+				var droppedName = jQuery('span:eq(0)', obj).text();
+				var li = tree.find('> li > ul > li');
+
+				var liChild = li.find('span:first').filter(
+					function() {
+						return (jQuery(this).text() == droppedName);
+					}
+				);
+
+				liChild = liChild.parents('li:first');
+
+				var droppedIndex = jQuery(obj).parent().find('> li').index(obj);
+
+				var newSibling = li.eq(droppedIndex);
+
+				newSibling.after(liChild);
+
+				var newIndex = li.index(liChild[0]);
+
+				if (newIndex > droppedIndex || droppedIndex == 0) {
+					newSibling = li.eq(droppedIndex);
+					newSibling.before(liChild);
+				}
+
+
+			} else if (type == 'delete') {
+				var tabLayoutId = obj[0]._LFR_layoutId;
+				var treeBranch = tree.find('li[@id=_branchId_' + tabLayoutId + ']');
+
+				treeBranch.remove();
+			}
+		}
+	},
+
 	_onDrop: function(item, obj) {
 		var instance = this;
 
@@ -404,7 +451,7 @@ var Tree = new Class({
 			}
 		);
 
-		instance._updateNavigation(item, obj);
+		Liferay.Publisher.deliver('tree', item, obj);
 	},
 
 	_onHover: function(item, obj) {
@@ -442,49 +489,6 @@ var Tree = new Class({
 		if (obj.expanderTime) {
 			window.clearTimeout(obj.expanderTime);
 			obj.expanded = false;
-		}
-	},
-
-	_updateNavigation: function(item, obj) {
-		var navigation = jQuery('#navigation > ul');
-
-		if (navigation.length && navigation.parent().is('.sort-pages')) {
-			var liItems = navigation.find('> li');
-
-			var droppedItem = jQuery(item);
-			var tree = droppedItem.parent();
-			var droppedName = droppedItem.find('span:first').text();
-			var newParent = jQuery(obj).parents('li:first');
-
-			var liChild = liItems.find('span').not('.delete-tab');
-
-			liChild = liChild.filter(
-				function() {
-					var currentItem = jQuery(this);
-					return (currentItem.text() == droppedName);
-				}
-			);
-
-			var treeItems = tree.find('> li');
-
-			var newIndex = treeItems.index(item);
-
-			if (liChild.length > 0) {
-				var newSibling = liItems.eq(newIndex);
-				var parentLi = liChild.parents('li:first');
-
-				if (!newParent.is('.tree-item')) {
-					newSibling.after(parentLi);
-
-					if (parentLi.is(':hidden')) {
-						parentLi.show();
-					}
-				}
-				else {
-					//TODO: add parsing to move child elements around by their layoutId
-					parentLi.hide();
-				}
-			}
 		}
 	}
 });
