@@ -103,8 +103,8 @@ WSDL4J 1.5.1
 WSRP4J 0.3
 WSS4J 1.0.0
 Xalan 2.6.0
-Xerces 2.7.1
 XBean 2.8
+Xerces 2.7.1
 XML Security 1.2.1
 XPP3 Min 1.1.3.4.O
 XStream 1.2
