@@ -484,6 +484,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="org.apache.xbean">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="org.hibernate">
 		<priority value="ERROR" />
 	</category>
