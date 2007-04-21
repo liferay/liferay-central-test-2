@@ -862,11 +862,14 @@ auto.deploy.dest.dir=../webapps</echo>
 		</copy>
 
 		<copy
-			file="web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
 			todir="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF"
-			overwrite="yes"
-		/>
+			overwrite="yes">
 
+			<fileset
+				dir="web-sites/liferay.com-web/docroot/WEB-INF"
+				includes="orion-web.xml,web.xml"
+			/>
+		</copy>
 		<replace file="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml">
 			<replacefilter
 				token="/WEB-INF/struts-config.xml"
