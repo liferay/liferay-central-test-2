@@ -199,6 +199,7 @@ action.ADD_MESSAGE=メッセージを加えなさい
 action.ADD_NODE=ノードを加えなさい
 action.ADD_ORGANIZATION=構成を加えなさい
 action.ADD_PAGE=ページを加えなさい
+action.ADD_PASSWORD_POLICY=パスワード方針を加えなさい
 action.ADD_PERMISSIONS=許可を加えなさい
 action.ADD_PRODUCT_ENTRY=プロダクト記入項目を加えなさい
 action.ADD_PRODUCT_VERSION=プロダクト版を加えなさい

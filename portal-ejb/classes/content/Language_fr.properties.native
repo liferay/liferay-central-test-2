@@ -199,6 +199,7 @@ action.ADD_MESSAGE=Ajoutez Le Message
 action.ADD_NODE=Ajoutez Le Noeud
 action.ADD_ORGANIZATION=Ajoutez L'Organisation
 action.ADD_PAGE=Ajoutez La Page
+action.ADD_PASSWORD_POLICY=Ajoutez La Politique De Mot de passe
 action.ADD_PERMISSIONS=Ajoutez Les Permissions
 action.ADD_PRODUCT_ENTRY=Ajoutez L'Entrée De Produit
 action.ADD_PRODUCT_VERSION=Ajoutez La Version De Produit

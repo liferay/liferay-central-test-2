@@ -199,6 +199,7 @@ action.ADD_MESSAGE=增加消息
 action.ADD_NODE=增加結
 action.ADD_ORGANIZATION=增加組織
 action.ADD_PAGE=增加頁
+action.ADD_PASSWORD_POLICY=增加密碼政策
 action.ADD_PERMISSIONS=增加允許
 action.ADD_PRODUCT_ENTRY=增加產品詞條
 action.ADD_PRODUCT_VERSION=增加產品版本

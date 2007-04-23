@@ -199,6 +199,7 @@ action.ADD_MESSAGE=메시지를 추가하십시요
 action.ADD_NODE=마디를 추가하십시요
 action.ADD_ORGANIZATION=조직을 추가하십시요
 action.ADD_PAGE=페이지를 추가하십시요
+action.ADD_PASSWORD_POLICY=암호 방침을 추가하십시요
 action.ADD_PERMISSIONS=허가를 추가하십시요
 action.ADD_PRODUCT_ENTRY=제품 입장을 추가하십시요
 action.ADD_PRODUCT_VERSION=제품 버전을 추가하십시요

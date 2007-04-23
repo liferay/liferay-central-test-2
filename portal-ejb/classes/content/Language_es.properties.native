@@ -199,6 +199,7 @@ action.ADD_MESSAGE=Añadir un mensaje
 action.ADD_NODE=Añadir un nodo
 action.ADD_ORGANIZATION=Añadir una organización
 action.ADD_PAGE=Añadir una página
+action.ADD_PASSWORD_POLICY=Agregue La Política De la Contraseña
 action.ADD_PERMISSIONS=Añadir permisos
 action.ADD_PRODUCT_ENTRY=Añadir un producto
 action.ADD_PRODUCT_VERSION=Añadir una versión de un producto

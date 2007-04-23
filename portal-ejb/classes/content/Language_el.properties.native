@@ -199,6 +199,7 @@ action.ADD_MESSAGE=Προσθέστε το μήνυμα
 action.ADD_NODE=Προσθέστε τον κόμβο
 action.ADD_ORGANIZATION=Προσθέστε την οργάνωση
 action.ADD_PAGE=Προσθέστε τη σελίδα
+action.ADD_PASSWORD_POLICY=Προσθέστε την πολιτική κωδικού πρόσβασης
 action.ADD_PERMISSIONS=Προσθέστε τις άδειες
 action.ADD_PRODUCT_ENTRY=Προσθέστε το λήμμα προϊόντων
 action.ADD_PRODUCT_VERSION=Προσθέστε την έκδοση προϊόντων

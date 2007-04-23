@@ -199,6 +199,7 @@ action.ADD_MESSAGE=Nachricht hinzufügen
 action.ADD_NODE=Knoten hinzufügen
 action.ADD_ORGANIZATION=Organisation hinzufügen
 action.ADD_PAGE=Seite hinzufügen
+action.ADD_PASSWORD_POLICY=Addieren Sie Kennwort-Politik
 action.ADD_PERMISSIONS=Erlaubnis hinzufügen
 action.ADD_PRODUCT_ENTRY=Addieren Sie Produkt-Eintragung
 action.ADD_PRODUCT_VERSION=Addieren Sie Produkt-Version

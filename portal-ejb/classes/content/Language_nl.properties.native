@@ -199,6 +199,7 @@ action.ADD_MESSAGE=Bericht toevoegen
 action.ADD_NODE=Knooppunt toevoegen
 action.ADD_ORGANIZATION=Organisatie toevoegen
 action.ADD_PAGE=pagina toevoegen
+action.ADD_PASSWORD_POLICY=Voeg het Beleid van het Wachtwoord toe
 action.ADD_PERMISSIONS=Toestemmingen toevoegen
 action.ADD_PRODUCT_ENTRY=Voeg de Ingang van het Product toe
 action.ADD_PRODUCT_VERSION=Voeg de Versie van het Product toe
