@@ -32,37 +32,37 @@ boolean preview = ParamUtil.getBoolean(renderRequest, "preview");
 uuid = (String)renderRequest.getAttribute("uuid");
 %>
 
-<div
-	<c:if test="<%= preview %>">
-		style="border: 2px solid #FF0000; padding: 8px"
+<div class="portlet-alfresco-content">
+	<div class="
+		<c:if test="<%= preview %>">
+			 preview
+		</c:if>"
+	>
+		<c:choose>
+			<c:when test="<%= Validator.isNotNull(content) %>">
+				<%= content %>
+			</c:when>
+			<c:otherwise>
+				<bean:message key="please-contact-the-administrator-to-setup-this-portlet" />
+			</c:otherwise>
+		</c:choose>
+	</div>
+
+	<c:if test="<%= themeDisplay.isSignedIn() && !preview %>">
+		<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
+			<liferay-ui:icon image="configuration" message="select-content" url="<%= portletDisplay.getURLConfiguration() %>" />
+		</c:if>
+
+		<%
+		String ssoSimulateParam = StringPool.BLANK;
+
+		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ALFRESCO_CONTENT_ONE_STEP_EDIT_SSO_SIMULATE))) {
+			ssoSimulateParam = "user=" + user.getLogin() + "&";
+		}
+		%>
+
+		<c:if test="<%= Validator.isNotNull(uuid) && AlfrescoContentUtil.hasPermission(user.getLogin(), PortalUtil.getUserPassword(renderRequest), uuid, org.alfresco.webservice.util.Constants.WRITE) %>">
+			<liferay-ui:icon image="edit" message="edit-content" url='<%= "javascript: window.open(\'" + AlfrescoContentUtil.getEndpointAddress() + "/alfresco/integration/ice?nodeid=workspace://SpacesStore/" + uuid + "&p_p_id=" + renderResponse.getNamespace() + "&" + ssoSimulateParam + "\'); void(\'\');" %>' />
+		</c:if>
 	</c:if>
->
-	<c:choose>
-		<c:when test="<%= Validator.isNotNull(content) %>">
-			<%= content %>
-		</c:when>
-		<c:otherwise>
-			<%= LanguageUtil.get(pageContext, "please-contact-the-administrator-to-setup-this-portlet") %>
-		</c:otherwise>
-	</c:choose>
 </div>
-
-<c:if test="<%= themeDisplay.isSignedIn() && !preview %>">
-	<br>
-
-	<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
-		<liferay-ui:icon image="configuration" message="select-content" url="<%= portletDisplay.getURLConfiguration() %>" />
-	</c:if>
-
-	<%
-	String ssoSimulateParam = StringPool.BLANK;
-
-	if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ALFRESCO_CONTENT_ONE_STEP_EDIT_SSO_SIMULATE))) {
-		ssoSimulateParam = "user=" + user.getLogin() + "&";
-	}
-	%>
-
-	<c:if test="<%= Validator.isNotNull(uuid) && AlfrescoContentUtil.hasPermission(user.getLogin(), PortalUtil.getUserPassword(renderRequest), uuid, org.alfresco.webservice.util.Constants.WRITE) %>">
-		<liferay-ui:icon image="edit" message="edit-content" url='<%= "javascript: window.open(\'" + AlfrescoContentUtil.getEndpointAddress() + "/alfresco/integration/ice?nodeid=workspace://SpacesStore/" + uuid + "&p_p_id=" + renderResponse.getNamespace() + "&" + ssoSimulateParam + "\'); void(\'\');" %>' />
-	</c:if>
-</c:if>

@@ -1,0 +1,8 @@
+.portlet-alfresco-content .preview {
+	border: 2px solid #FF0000;
+	padding: 8px;
+}
+
+.portlet-alfresco-content .uni-form .text-input {
+	width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;
+}

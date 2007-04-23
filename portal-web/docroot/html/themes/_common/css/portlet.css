@@ -94,10 +94,9 @@
 	border: 1px solid #53B2F8;
 	color: #777;
 	font-size: 90%;
-	margin: 0.15em auto;
+	margin: 0.15em auto 1em;
 	padding: 0.5em;
 	text-align: left;
-	width: 30%;
 }
 
 /* ---------- Error messages ---------- */
@@ -106,9 +105,9 @@
 	background: #FFF1ED url(../images/messages/error.gif) no-repeat 0.5em 50%;
 	border: 1px solid #900;
 	display: block;
-	margin: 0.15em auto;
-	padding: 0.5em 0.5em 0.5em 2.5em;
-	text-align: center;
+	margin: 0.15em auto 1em;
+	padding: 0.5em 0.5em 0.5em 2.8em;
+	text-align: left;
 }
 
 /* ---------- Warning messages ---------- */
@@ -116,10 +115,9 @@
 .portlet-msg-alert {
 	background: #FEFFDF url(../images/messages/alert.gif) no-repeat 0.5em 10%;
 	border: 1px solid #EFEFEF;
-	margin: 0.15em auto;
-	padding: 0.5em 0.5em 0.5em 2.2em;
-	text-align: center;
-	width: 30%;
+	margin: 0.15em auto 1em;
+	padding: 0.5em 0.5em 0.5em 2.8em;
+	text-align: left;
 }
 
 /* ---------- Success messages ---------- */
@@ -128,10 +126,9 @@
 	background: #F4FDEF url(../images/messages/success.gif) no-repeat 0.5em 50%;
 	border: 1px solid #3F9305;
 	display: block;
-	margin: 0.15em auto;
-	padding: 0.5em 0.5em 0.5em 2.2em;
-	text-align: center;
-	width: 30%;
+	margin: 0.15em auto 1.2em;
+	padding: 0.5em 0.5em 0.5em 2.8em;
+	text-align: left;
 }
 
 /* ---------- Sections ---------- */

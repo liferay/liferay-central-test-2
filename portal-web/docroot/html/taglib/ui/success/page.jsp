@@ -31,18 +31,14 @@ boolean translateMessage = GetterUtil.getBoolean((String)request.getAttribute("l
 %>
 
 <c:if test="<%= SessionMessages.contains(renderRequest, key) %>">
-	<span class="portlet-msg-success">
-
-	<c:choose>
-		<c:when test="<%= translateMessage %>">
-			<%= LanguageUtil.get(pageContext, message) %>
-		</c:when>
-		<c:otherwise>
-			<%= message %>
-		</c:otherwise>
-	</c:choose>
-
-	</span>
-
-	<br><br>
+	<div class="portlet-msg-success">
+		<c:choose>
+			<c:when test="<%= translateMessage %>">
+				<%= LanguageUtil.get(pageContext, message) %>
+			</c:when>
+			<c:otherwise>
+				<%= message %>
+			</c:otherwise>
+		</c:choose>
+	</div>
 </c:if>

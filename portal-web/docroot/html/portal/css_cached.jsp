@@ -28,6 +28,8 @@
 response.setContentType(Constants.TEXT_CSS);
 %>
 
+<%@ include file="/html/portal/css_cached_uniform.jsp" %>
+
 /* ---------- Taglib discussion thread ---------- */
 
 .taglib-discussion td img {
@@ -104,13 +106,17 @@ ul.gamma .tree-item-hover {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/trees/collapse_all.png) no-repeat 0 50%;
 }
 
+/* ---------- Separator ---------- */
+
+.separator {
+	margin: 15px auto;
+}
+
 /* ---------- Portlets ---------- */
 
-/* ---------- Alfresco content ---------- */
-
-.portlet-alfresco-content.preview {
-	border: 2px solid #FF0000;
-	padding: 8px;
+.breadcrumbs {
+	margin-bottom: 10px;
+	margin-left: 5px;
 }
 
 /* ---------- Quick note ---------- */

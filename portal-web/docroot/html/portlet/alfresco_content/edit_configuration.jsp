@@ -41,273 +41,286 @@ catch (Exception e) {
 }
 %>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm1">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />uuid" type="hidden" value="<%= uuid %>">
+<div class="portlet-alfresco-content">
+	<form action="<liferay-portlet:actionURL portletConfiguration="true" />" class="uni-form" id="<portlet:namespace />fm1" method="post" name="<portlet:namespace />fm1">
+	<input id="<portlet:namespace /><%= Constants.CMD %>" name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+	<input id="<portlet:namespace />uuid"  name="<portlet:namespace />uuid" type="hidden" value="<%= uuid %>">
 
-<table border="0" cellpadding="0" cellspacing="0">
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "user-id") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input name="<portlet:namespace />userId" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= userId %>">
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "password") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input name="<portlet:namespace />password" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value="<%= password %>">
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "maximize-links") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<liferay-ui:input-checkbox param="maximizeLinks" defaultValue="<%= maximizeLinks %>" />
-	</td>
-</tr>
-</table>
+	<fieldset class="block-labels">
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />userId"><bean:message key="user-id" /></label>
+			
+			<input class="text-input" id="<portlet:namespace />userId" name="<portlet:namespace />userId" type="text" value="<%= userId %>" />
+		</div>
 
-</form>
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />password"><bean:message key="password" /></label>
+			
+			<input class="text-input" id="<portlet:namespace />password" name="<portlet:namespace />password" type="password" value="<%= password %>">
+		</div>
 
-<br>
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />maximizeLinksCheckbox"><bean:message key="maximize-links" />
+			
+			<liferay-ui:input-checkbox param="maximizeLinks" defaultValue="<%= maximizeLinks %>" /></label>
+		</div>
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm1);">
+		<div class="button-holder">
+			<input type="button" id="<portlet:namespace />saveFormButton" value="<bean:message key="save" />" />
+			
+			<input type="button" id="<portlet:namespace />clearCacheButton" value="<bean:message key="clear-cache" />" />
+		 </div>
+	</fieldset>
 
-<input type="button" value="<bean:message key="clear-cache" />" onClick="document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = 'clearCache'; submitForm(document.<portlet:namespace />fm1);"><br>
+	</form>
 
-<%
-String cmd = ParamUtil.getString(request, Constants.CMD);
+	<script type="text/javascript">
+		jQuery(
+			function() {
+				var form = jQuery('#<portlet:namespace />fm1');
 
-String selUuid = request.getParameter("uuid");
+				form.find('#<portlet:namespace />saveFormButton').click(
+					function() {
+						submitForm(document.<portlet:namespace />fm1);
+					}
+				);
 
-if (Validator.isNotNull(cmd)) {
-	selUuid = null;
-}
+				form.find('#<portlet:namespace />clearCacheButton').click(
+					function() {
+						jQuery('#<portlet:namespace /><%= Constants.CMD %>').val('clearCacheButton');
+						submitForm(document.<portlet:namespace />fm1);
+					}
+				);
 
-try {
-	Node node = AlfrescoContentUtil.getNode(userId, password, uuid);
-
-	if (node != null) {
-		NamedValue[] nodeNamedValues = node.getProperties();
-
-		String nodeUuid = AlfrescoContentUtil.getNamedValue(nodeNamedValues, "node-uuid");
-		String nodeName = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
-
-		if (selUuid == null) {
-			ResultSetRow[] parentNodes = AlfrescoContentUtil.getParentNodes(userId, password, uuid);
-
-			if (parentNodes != null) {
-				selUuid = parentNodes[0].getNode().getId();
+				jQuery('#<portlet:namespace />userId').trigger('focus');
 			}
-		}
+		);
+	</script>
 
-		if (!nodeUuid.equals(nodeName)) {
-%>
+	<%
+	String cmd = ParamUtil.getString(request, Constants.CMD);
 
-			<br>
+	String selUuid = request.getParameter("uuid");
 
-			<%= LanguageUtil.get(pageContext, "displaying-content") %>: <%= nodeName %><br>
+	if (Validator.isNotNull(cmd)) {
+		selUuid = null;
+	}
+	%>
 
-<%
+	<div class="separator"></div>
+
+	<liferay-portlet:actionURL portletConfiguration="true" varImpl="portletURL" />
+
+	<%
+
+	try {
+		Node node = AlfrescoContentUtil.getNode(userId, password, uuid);
+
+		if (node != null) {
+			NamedValue[] nodeNamedValues = node.getProperties();
+
+			String nodeUuid = AlfrescoContentUtil.getNamedValue(nodeNamedValues, "node-uuid");
+			String nodeName = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
+
+			if (selUuid == null) {
+				ResultSetRow[] parentNodes = AlfrescoContentUtil.getParentNodes(userId, password, uuid);
+
+				if (parentNodes != null) {
+					selUuid = parentNodes[0].getNode().getId();
+				}
+			}
+
+			if (!nodeUuid.equals(nodeName)) {
+	%>
+
+				<div class="portlet-msg-info"><bean:message key="displaying-content" />: <%= nodeName %></div>
+
+	<%
+			}
 		}
 	}
-}
-catch (Exception e) {
-	_log.error(e);
-}
-%>
+	catch (Exception e) {
+		_log.error(e);
+	}
 
-<br><div class="separator"></div><br>
+	String breadcrumbs = StringPool.BLANK;
 
-<liferay-portlet:actionURL portletConfiguration="true" varImpl="portletURL" />
+	try {
+		Node curNode = AlfrescoContentUtil.getNode(userId, password, selUuid);
 
-<%
-String breadcrumbs = StringPool.BLANK;
+		if (curNode != null) {
+			NamedValue[] curNamedValues = curNode.getProperties();
 
-try {
-	Node curNode = AlfrescoContentUtil.getNode(userId, password, selUuid);
-
-	if (curNode != null) {
-		NamedValue[] curNamedValues = curNode.getProperties();
-
-		String curUuid = AlfrescoContentUtil.getNamedValue(curNamedValues, "node-uuid");
-		String curName = AlfrescoContentUtil.getNamedValue(curNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
-
-		if (!curUuid.equals(curName)) {
-			portletURL.setParameter("uuid", curUuid);
-
-			breadcrumbs = "<a href='" + portletURL.toString() + "'>" + curName + "</a>";
-		}
-
-		curUuid = selUuid;
-
-		ResultSetRow[] parentNodes = null;
-
-		for (int i = 0;; i++) {
-			parentNodes = AlfrescoContentUtil.getParentNodes(userId, password, curUuid);
-
-			if (parentNodes == null) {
-				break;
-			}
-
-			ResultSetRow resultSetRow = parentNodes[0];
-
-			ResultSetRowNode node = resultSetRow.getNode();
-
-			curNamedValues = resultSetRow.getColumns();
-
-			curUuid = AlfrescoContentUtil.getNamedValue(curNamedValues, "node-uuid");
-			curName = AlfrescoContentUtil.getNamedValue(curNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
+			String curUuid = AlfrescoContentUtil.getNamedValue(curNamedValues, "node-uuid");
+			String curName = AlfrescoContentUtil.getNamedValue(curNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
 
 			if (!curUuid.equals(curName)) {
 				portletURL.setParameter("uuid", curUuid);
 
-				breadcrumbs = "<a href='" + portletURL.toString() + "'>" + curName + "</a>" + " &raquo; " + breadcrumbs;
+				breadcrumbs = "<a href='" + portletURL.toString() + "'>" + curName + "</a>";
 			}
+
+			curUuid = selUuid;
+
+			ResultSetRow[] parentNodes = null;
+
+			for (int i = 0;; i++) {
+				parentNodes = AlfrescoContentUtil.getParentNodes(userId, password, curUuid);
+
+				if (parentNodes == null) {
+					break;
+				}
+
+				ResultSetRow resultSetRow = parentNodes[0];
+
+				ResultSetRowNode node = resultSetRow.getNode();
+
+				curNamedValues = resultSetRow.getColumns();
+
+				curUuid = AlfrescoContentUtil.getNamedValue(curNamedValues, "node-uuid");
+				curName = AlfrescoContentUtil.getNamedValue(curNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
+
+				if (!curUuid.equals(curName)) {
+					portletURL.setParameter("uuid", curUuid);
+
+					breadcrumbs = "<a href='" + portletURL.toString() + "'>" + curName + "</a>" + " &raquo; " + breadcrumbs;
+				}
+			}
+
+			portletURL.setParameter("uuid", "");
+
+			breadcrumbs = "<a href='" + portletURL.toString() + "'>Alfresco</a>" + " &raquo; " + breadcrumbs;
+		}
+	}
+	catch (Exception e) {
+		_log.error(e);
+	}
+	%>
+
+	<c:if test="<%= (searchResults != null) && (searchResults.length == 0) %>">
+		<c:if test="<%= Validator.isNotNull(breadcrumbs) %>">
+			<div class="breadcrumbs">
+				<%= breadcrumbs %>
+			</div>
+		</c:if>
+	</c:if>
+
+	<%
+	SearchContainer searchContainer = new SearchContainer();
+
+	List headerNames = new ArrayList();
+
+	headerNames.add("name");
+
+	searchContainer.setHeaderNames(headerNames);
+	searchContainer.setEmptyResultsMessage("no-alfresco-content-was-found");
+
+	ResultSetRow[] childNodes = new ResultSetRow[0];
+
+	try {
+		childNodes = AlfrescoContentUtil.getChildNodes(userId, password, selUuid);
+
+		if (childNodes == null) {
+			childNodes = new ResultSetRow[0];
 		}
 
-		portletURL.setParameter("uuid", "");
-
-		breadcrumbs = "<a href='" + portletURL.toString() + "'>Alfresco</a>" + " &raquo; " + breadcrumbs;
+		if ((searchResults != null) && (searchResults.length > 0)) {
+			childNodes = searchResults;
+		}
 	}
-}
-catch (Exception e) {
-	_log.error(e);
-}
-%>
-
-<c:if test="<%= (searchResults != null) && (searchResults.length == 0) %>">
-	<%= breadcrumbs %>
-
-	<c:if test="<%= Validator.isNotNull(breadcrumbs) %>">
-		<br><br>
-	</c:if>
-</c:if>
-
-<%
-SearchContainer searchContainer = new SearchContainer();
-
-List headerNames = new ArrayList();
-
-headerNames.add("name");
-
-searchContainer.setHeaderNames(headerNames);
-searchContainer.setEmptyResultsMessage("no-alfresco-content-was-found");
-
-ResultSetRow[] childNodes = new ResultSetRow[0];
-
-try {
-	childNodes = AlfrescoContentUtil.getChildNodes(userId, password, selUuid);
-
-	if (childNodes == null) {
-		childNodes = new ResultSetRow[0];
+	catch (Exception e) {
+		_log.error(e);
 	}
 
-	if ((searchResults != null) && (searchResults.length > 0)) {
-		childNodes = searchResults;
-	}
-}
-catch (Exception e) {
-	_log.error(e);
-}
+	int total = childNodes.length;
 
-int total = childNodes.length;
+	searchContainer.setTotal(total);
 
-searchContainer.setTotal(total);
+	List resultRows = searchContainer.getResultRows();
 
-List resultRows = searchContainer.getResultRows();
+	for (int i = 0; i < childNodes.length; i++) {
+		ResultSetRow resultSetRow = childNodes[i];
 
-for (int i = 0; i < childNodes.length; i++) {
-	ResultSetRow resultSetRow = childNodes[i];
+		ResultSetRowNode node = resultSetRow.getNode();
 
-	ResultSetRowNode node = resultSetRow.getNode();
+		ResultRow row = new ResultRow(node, node.getId(), i);
 
-	ResultRow row = new ResultRow(node, node.getId(), i);
+		NamedValue[] nodeNamedValues = resultSetRow.getColumns();
 
-	NamedValue[] nodeNamedValues = resultSetRow.getColumns();
+		StringMaker sm = new StringMaker();
 
-	StringMaker sm = new StringMaker();
+		sm.append("javascript: ");
 
-	sm.append("javascript: ");
+		String propContent = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_CONTENT);
 
-	String propContent = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_CONTENT);
+		if (propContent == null) {
+			sm.append("document.");
+			sm.append(renderResponse.getNamespace());
+			sm.append("fm1.");
+			sm.append(renderResponse.getNamespace());
+			sm.append(Constants.CMD);
+			sm.append(".value = ''; ");
+		}
 
-	if (propContent == null) {
 		sm.append("document.");
 		sm.append(renderResponse.getNamespace());
 		sm.append("fm1.");
 		sm.append(renderResponse.getNamespace());
-		sm.append(Constants.CMD);
-		sm.append(".value = ''; ");
+		sm.append("uuid.value = '");
+		sm.append(node.getId());
+		sm.append("'; ");
+		sm.append("submitForm(document.");
+		sm.append(renderResponse.getNamespace());
+		sm.append("fm1);");
+
+		String rowHREF = sm.toString();
+
+		// Name
+
+		sm = new StringMaker();
+
+		sm.append("<img align=\"left\" border=\"0\" src=\"");
+		sm.append(themeDisplay.getPathThemeImages());
+
+		if (propContent == null) {
+			sm.append("/common/folder.png");
+		}
+		else {
+			sm.append("/trees/page.png");
+		}
+
+		sm.append("\">");
+
+		String nodeName = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
+
+		sm.append(nodeName);
+
+		row.addText(sm.toString(), rowHREF);
+
+		// Add result row
+
+		if (!node.getId().equals(nodeName)) {
+			resultRows.add(row);
+		}
 	}
+	%>
 
-	sm.append("document.");
-	sm.append(renderResponse.getNamespace());
-	sm.append("fm1.");
-	sm.append(renderResponse.getNamespace());
-	sm.append("uuid.value = '");
-	sm.append(node.getId());
-	sm.append("'; ");
-	sm.append("submitForm(document.");
-	sm.append(renderResponse.getNamespace());
-	sm.append("fm1);");
+	<form action="<liferay-portlet:actionURL portletConfiguration="true" />" class="uni-form block-labels" id="<portlet:namespace />fm2" method="post" name="<portlet:namespace />fm2">
 
-	String rowHREF = sm.toString();
+	<fieldset class="block-labels">
+		<div class="ctrl-holder">
+			<input class="text-input" id="<portlet:namespace />userId" name="<portlet:namespace />userId" type="text" value="<%= userId %>" />
 
-	// Name
+			<div class="button-holder">
+				<input type="submit" value="<bean:message key="search" />">
+			</div>
+		</div>
+	</fieldset>
 
-	sm = new StringMaker();
+	</form>
 
-	sm.append("<img align=\"left\" border=\"0\" src=\"");
-	sm.append(themeDisplay.getPathThemeImages());
-	sm.append("/trees/");
-
-	if (propContent == null) {
-		sm.append("folder");
-	}
-	else {
-		sm.append("page");
-	}
-
-	sm.append(".png\">");
-
-	String nodeName = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
-
-	sm.append(nodeName);
-
-	row.addText(sm.toString(), rowHREF);
-
-	// Add result row
-
-	if (!node.getId().equals(nodeName)) {
-		resultRows.add(row);
-	}
-}
-%>
-
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm2">
-
-<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
-
-<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
-
-</form>
-
-<br>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-<script type="text/javascript">
-	document.<portlet:namespace />fm1.<portlet:namespace />userId.focus();
-</script>
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</div>
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.alfresco_content.edit_configuration.jsp");

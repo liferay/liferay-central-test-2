@@ -798,6 +798,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-css>/html/portlet/alfresco_content/portlet.css</header-css>
 	</portlet>
 	<portlet>
 		<portlet-name>92</portlet-name>
