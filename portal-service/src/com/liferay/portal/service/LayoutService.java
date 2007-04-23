@@ -71,14 +71,12 @@ public interface LayoutService {
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public byte[] exportLayouts(java.lang.String ownerId,
-		boolean exportPortletPreferences, boolean exportPortletData,
-		boolean exportPermissions, boolean exportTheme)
+		java.util.Map parameterMap)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public void importLayouts(java.lang.String ownerId,
-		boolean importPortletPreferences, boolean importPortletData,
-		boolean importPermissions, boolean importTheme, java.io.File file)
+		java.util.Map parameterMap, java.io.File file)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

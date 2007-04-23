@@ -290,9 +290,7 @@ public class LayoutServiceHttp {
 	}
 
 	public static byte[] exportLayouts(HttpPrincipal httpPrincipal,
-		java.lang.String ownerId, boolean exportPortletPreferences,
-		boolean exportPortletData, boolean exportPermissions,
-		boolean exportTheme)
+		java.lang.String ownerId, java.util.Map parameterMap)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -302,15 +300,14 @@ public class LayoutServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new BooleanWrapper(exportPortletPreferences);
-			Object paramObj2 = new BooleanWrapper(exportPortletData);
-			Object paramObj3 = new BooleanWrapper(exportPermissions);
-			Object paramObj4 = new BooleanWrapper(exportTheme);
+			Object paramObj1 = parameterMap;
+
+			if (parameterMap == null) {
+				paramObj1 = new NullWrapper("java.util.Map");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"exportLayouts",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+					"exportLayouts", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
 
 			try {
@@ -337,9 +334,7 @@ public class LayoutServiceHttp {
 	}
 
 	public static void importLayouts(HttpPrincipal httpPrincipal,
-		java.lang.String ownerId, boolean importPortletPreferences,
-		boolean importPortletData, boolean importPermissions,
-		boolean importTheme, java.io.File file)
+		java.lang.String ownerId, java.util.Map parameterMap, java.io.File file)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -349,22 +344,21 @@ public class LayoutServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new BooleanWrapper(importPortletPreferences);
-			Object paramObj2 = new BooleanWrapper(importPortletData);
-			Object paramObj3 = new BooleanWrapper(importPermissions);
-			Object paramObj4 = new BooleanWrapper(importTheme);
-			Object paramObj5 = file;
+			Object paramObj1 = parameterMap;
+
+			if (parameterMap == null) {
+				paramObj1 = new NullWrapper("java.util.Map");
+			}
+
+			Object paramObj2 = file;
 
 			if (file == null) {
-				paramObj5 = new NullWrapper("java.io.File");
+				paramObj2 = new NullWrapper("java.io.File");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"importLayouts",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

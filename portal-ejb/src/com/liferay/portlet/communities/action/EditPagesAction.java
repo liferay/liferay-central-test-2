@@ -31,6 +31,7 @@ import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.RequiredLayoutException;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -69,7 +70,9 @@ import com.liferay.util.servlet.UploadPortletRequest;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.portlet.ActionRequest;
@@ -267,13 +270,36 @@ public class EditPagesAction extends PortletAction {
 			String creatorUserId, String sourceOwnerId, String targetOwnerId)
 		throws Exception{
 
+		Map parameterMap = new HashMap();
+
+		parameterMap.put(
+			PortletDataHandlerKeys.EXPORT_PERMISSIONS, Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.EXPORT_PORTLET_DATA,
+			Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES,
+			Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.EXPORT_THEME, Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_PERMISSIONS, Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_PORTLET_DATA,
+			Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES,
+			Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_THEME, Boolean.FALSE.toString());
+
 		byte[] data = LayoutLocalServiceUtil.exportLayouts(
-			sourceOwnerId, true, false, true, false);
+			sourceOwnerId, parameterMap);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
 		LayoutLocalServiceUtil.importLayouts(
-			creatorUserId, targetOwnerId, true, false, true, false, bais);
+			creatorUserId, targetOwnerId, parameterMap, bais);
 	}
 
 	protected void copyPreferences(

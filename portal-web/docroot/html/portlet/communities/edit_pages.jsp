@@ -1095,29 +1095,29 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<%= LanguageUtil.get(pageContext, "do-you-want-to-export-portlet-preferences") %>
 
-					<liferay-ui:input-checkbox param="exportPortletPreferences" defaultValue="<%= false %>" />
+					<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
 
 					<br><br>
 
 					<%= LanguageUtil.get(pageContext, "do-you-want-to-export-portlet-data") %>
 
-					<liferay-ui:input-checkbox param="exportPortletData" defaultValue="<%= false %>" />
+					<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
 
 					<br><br>
 
 					<%= LanguageUtil.get(pageContext, "do-you-want-to-export-permissions") %>
 
-					<liferay-ui:input-checkbox param="exportPermissions" defaultValue="<%= false %>" />
+					<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
 
 					<br><br>
 
 					<%= LanguageUtil.get(pageContext, "do-you-want-to-export-the-root-theme") %>
 
-					<liferay-ui:input-checkbox param="exportTheme" defaultValue="<%= false %>" />
+					<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_THEME %>" defaultValue="<%= false %>" />
 
 					<br><br>
 
-					<input type="button" value='<%= LanguageUtil.get(pageContext, "export") %>' onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value + '&<portlet:namespace />exportPortletPreferences=' + document.<portlet:namespace />fm.<portlet:namespace />exportPortletPreferences.value + '&<portlet:namespace />exportPortletData=' + document.<portlet:namespace />fm.<portlet:namespace />exportPortletData.value + '&<portlet:namespace />exportPermissions=' + document.<portlet:namespace />fm.<portlet:namespace />exportPermissions.value + '&<portlet:namespace />exportTheme=' + document.<portlet:namespace />fm.<portlet:namespace />exportTheme.value;">
+					<input type="button" value='<%= LanguageUtil.get(pageContext, "export") %>' onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>.value;">
 				</c:when>
 				<c:when test='<%= tabs3.equals("virtual-host") %>'>
 					<%= LanguageUtil.get(pageContext, "enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url") %>

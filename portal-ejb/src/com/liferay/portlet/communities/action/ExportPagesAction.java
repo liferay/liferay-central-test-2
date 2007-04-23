@@ -43,6 +43,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="ExportPagesAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Raymond Auge
  *
  */
 public class ExportPagesAction extends PortletAction {
@@ -55,17 +56,9 @@ public class ExportPagesAction extends PortletAction {
 		try {
 			String ownerId = ParamUtil.getString(req, "ownerId");
 			String fileName = ParamUtil.getString(req, "exportFileName");
-			boolean exportPortletPreferences = ParamUtil.getBoolean(
-				req, "exportPortletPreferences");
-			boolean exportPortletData = ParamUtil.getBoolean(
-				req, "exportPortletData");
-			boolean exportPermissions = ParamUtil.getBoolean(
-				req, "exportPermissions");
-			boolean exportTheme = ParamUtil.getBoolean(req, "exportTheme");
 
 			byte[] byteArray = LayoutServiceUtil.exportLayouts(
-				ownerId, exportPortletPreferences, exportPortletData,
-				exportPermissions, exportTheme);
+				ownerId, req.getParameterMap());
 
 			HttpServletResponse httpRes =
 				((ActionResponseImpl)res).getHttpServletResponse();
@@ -73,7 +66,7 @@ public class ExportPagesAction extends PortletAction {
 			ServletResponseUtil.sendFile(httpRes, fileName, byteArray);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 

@@ -94,26 +94,22 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 	}
 
 	public byte[] exportLayouts(java.lang.String ownerId,
-		boolean exportPortletPreferences, boolean exportPortletData,
-		boolean exportPermissions, boolean exportTheme)
+		java.util.Map parameterMap)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return LayoutServiceFactory.getTxImpl().exportLayouts(ownerId,
-			exportPortletPreferences, exportPortletData, exportPermissions,
-			exportTheme);
+			parameterMap);
 	}
 
 	public void importLayouts(java.lang.String ownerId,
-		boolean importPortletPreferences, boolean importPortletData,
-		boolean importPermissions, boolean importTheme, java.io.File file)
+		java.util.Map parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		LayoutServiceFactory.getTxImpl().importLayouts(ownerId,
-			importPortletPreferences, importPortletData, importPermissions,
-			importTheme, file);
+		LayoutServiceFactory.getTxImpl().importLayouts(ownerId, parameterMap,
+			file);
 	}
 
 	public void setLayouts(java.lang.String ownerId,

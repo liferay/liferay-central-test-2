@@ -36,6 +36,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.comm.CommLink;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StringPool;
@@ -92,6 +93,7 @@ import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.InstancePool;
 import com.liferay.util.LocaleUtil;
+import com.liferay.util.MapUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
@@ -278,11 +280,25 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 	}
 
-	public byte[] exportLayouts(
-			String ownerId, boolean exportPortletPreferences,
-			boolean exportPortletData, boolean exportPermissions,
-			boolean exportTheme)
+	public byte[] exportLayouts(String ownerId, Map parameterMap)
 		throws PortalException, SystemException {
+
+		boolean exportPermissions = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.EXPORT_PERMISSIONS);
+		boolean exportPortletData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.EXPORT_PORTLET_DATA);
+		boolean exportPortletPreferences = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES);
+		boolean exportTheme = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.EXPORT_THEME);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Export permissions " + exportPermissions);
+			_log.debug("Export portlet data " + exportPortletData);
+			_log.debug(
+				"Export portlet preferences " + exportPortletPreferences);
+			_log.debug("Export theme " + exportTheme);
+		}
 
 		StopWatch stopWatch = null;
 
@@ -302,7 +318,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		ZipWriter zipWriter = new ZipWriter();
 
 		PortletDataContext context = new PortletDataContext(
-			companyId, groupId, CollectionFactory.getHashSet(), zipWriter);
+			companyId, groupId, parameterMap, CollectionFactory.getHashSet(),
+			zipWriter);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			companyId, GroupImpl.GUEST);
@@ -517,15 +534,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public void importLayouts(
-			String userId, String ownerId, boolean importPortletPreferences,
-			boolean importPortletData, boolean importPermissions,
-			boolean importTheme, File file)
+			String userId, String ownerId, Map parameterMap, File file)
 		throws PortalException, SystemException {
 
 		try {
 			importLayouts(
-				userId, ownerId, importPortletPreferences, importPortletData,
-				importPermissions, importTheme, new FileInputStream(file));
+				userId, ownerId, parameterMap, new FileInputStream(file));
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new SystemException(fnfe);
@@ -533,10 +547,25 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public void importLayouts(
-			String userId, String ownerId, boolean importPortletPreferences,
-			boolean importPortletData, boolean importPermissions,
-			boolean importTheme, InputStream is)
+			String userId, String ownerId, Map parameterMap, InputStream is)
 		throws PortalException, SystemException {
+
+		boolean importPermissions = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.IMPORT_PERMISSIONS);
+		boolean importPortletData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.IMPORT_PORTLET_DATA);
+		boolean importPortletPreferences = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES);
+		boolean importTheme = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.IMPORT_THEME);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Import permissions " + importPermissions);
+			_log.debug("Import portlet data " + importPortletData);
+			_log.debug(
+				"Import portlet preferences " + importPortletPreferences);
+			_log.debug("Import theme " + importTheme);
+		}
 
 		StopWatch stopWatch = null;
 
@@ -556,7 +585,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		ZipReader zipReader = new ZipReader(is);
 
 		PortletDataContext context = new PortletDataContext(
-			companyId, groupId, CollectionFactory.getHashSet(), zipReader);
+			companyId, groupId, parameterMap, CollectionFactory.getHashSet(),
+			zipReader);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			companyId, GroupImpl.GUEST);
@@ -620,6 +650,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 					useThemeZip = true;
 				}
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Importing theme takes " + stopWatch.getTime() + " ms");
+				}
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
@@ -637,12 +672,25 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Iterator itr = root.elements("layout").iterator();
 
+		if (_log.isDebugEnabled()) {
+			if (itr.hasNext()) {
+				_log.debug("Importing layouts");
+			}
+		}
+
 		while (itr.hasNext()) {
 			Element layoutEl = (Element)itr.next();
 
 			String layoutId = layoutEl.attributeValue("layout-id");
 			String parentLayoutId = layoutEl.elementText(
 				"parent-layout-id");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Importing layout with layout id " + layoutId +
+						" and parent layout id " + parentLayoutId);
+			}
+
 			String name = layoutEl.elementText("name");
 			String title = layoutEl.elementText("title");
 			String type = layoutEl.elementText("type");
@@ -668,6 +716,18 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			newLayoutPKs.add(layoutPK);
 
 			Layout layout = LayoutUtil.fetchByPrimaryKey(layoutPK);
+
+			if (_log.isDebugEnabled()) {
+				if (layout == null) {
+					_log.debug(
+						"Layout with primary key " + layoutPK +
+							" does not exist");
+				}
+				else {
+					_log.debug(
+						"Layout with primary key " + layoutPK + " exists");
+				}
+			}
 
 			if (layout == null) {
 				layout = LayoutUtil.create(layoutPK);
@@ -1002,6 +1062,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		// Layouts
+
+		if (_log.isDebugEnabled()) {
+			if (newLayoutPKs.size() > 0) {
+				_log.debug("Delete missing layouts");
+			}
+		}
 
 		Iterator itr = LayoutUtil.findByO_P(
 			ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID).iterator();

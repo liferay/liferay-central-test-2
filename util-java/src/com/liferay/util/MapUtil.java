@@ -32,6 +32,7 @@ import java.util.Map;
  * <a href="MapUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Auge
  *
  */
 public class MapUtil {
@@ -40,6 +41,42 @@ public class MapUtil {
 		copy.clear();
 
 		merge(master, copy);
+	}
+
+	public static boolean getBoolean(Map map, String key) {
+		return getBoolean(map, key, GetterUtil.DEFAULT_BOOLEAN);
+	}
+
+	public static boolean getBoolean(
+		Map map, String key, boolean defaultValue) {
+
+		return GetterUtil.getBoolean(getString(map, key), defaultValue);
+	}
+
+	public static String getString(Map map, String key) {
+		return getString(map, key, GetterUtil.DEFAULT_STRING);
+	}
+
+	public static String getString(Map map, String key, String defaultValue) {
+		if (map.containsKey(key)) {
+			Object value = map.get(key);
+
+			if (value instanceof String[]) {
+				String[] array = (String[])value;
+
+				if (array.length > 0) {
+					return GetterUtil.getString(array[0], defaultValue);
+				}
+			}
+			else if (value instanceof String) {
+				return GetterUtil.getString((String)value, defaultValue);
+			}
+			else {
+				return defaultValue;
+			}
+		}
+
+		return defaultValue;
 	}
 
 	public static void merge(Map master, Map copy) {

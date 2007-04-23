@@ -37,6 +37,8 @@ import com.liferay.portal.service.permission.LayoutPermission;
 
 import java.io.File;
 
+import java.util.Map;
+
 /**
  * <a href="LayoutServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -88,10 +90,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			companyId, portletId, prefsKey, prefsValue);
 	}
 
-	public byte[] exportLayouts(
-			String ownerId, boolean exportPortletPreferences,
-			boolean exportPortletData, boolean exportPermissions,
-			boolean exportTheme)
+	public byte[] exportLayouts(String ownerId, Map parameterMap)
 		throws PortalException, SystemException {
 
 		long groupId = LayoutImpl.getGroupId(ownerId);
@@ -99,15 +98,10 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
-		return LayoutLocalServiceUtil.exportLayouts(
-			ownerId, exportPortletPreferences, exportPortletData,
-			exportPermissions, exportTheme);
+		return LayoutLocalServiceUtil.exportLayouts(ownerId, parameterMap);
 	}
 
-	public void importLayouts(
-			String ownerId, boolean importPortletPreferences,
-			boolean importPortletData, boolean importPermissions,
-			boolean importTheme, File file)
+	public void importLayouts(String ownerId, Map parameterMap, File file)
 		throws PortalException, SystemException {
 
 		long groupId = LayoutImpl.getGroupId(ownerId);
@@ -116,8 +110,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		LayoutLocalServiceUtil.importLayouts(
-			getUserId(), ownerId, importPortletPreferences, importPortletData,
-			importPermissions, importTheme, file);
+			getUserId(), ownerId, parameterMap, file);
 	}
 
 	public void setLayouts(

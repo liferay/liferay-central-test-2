@@ -208,6 +208,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.servlet.LanguageServlet">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portal.servlet.MainServlet">
 		<priority value="ERROR" />
 	</category>
@@ -477,6 +481,10 @@
 	</category>
 
 	<category name="org.apache.wsrp4j">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="org.apache.xbean">
 		<priority value="ERROR" />
 	</category>
 

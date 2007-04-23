@@ -89,24 +89,20 @@ public class LayoutServiceUtil {
 	}
 
 	public static byte[] exportLayouts(java.lang.String ownerId,
-		boolean exportPortletPreferences, boolean exportPortletData,
-		boolean exportPermissions, boolean exportTheme)
+		java.util.Map parameterMap)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		return layoutService.exportLayouts(ownerId, exportPortletPreferences,
-			exportPortletData, exportPermissions, exportTheme);
+		return layoutService.exportLayouts(ownerId, parameterMap);
 	}
 
 	public static void importLayouts(java.lang.String ownerId,
-		boolean importPortletPreferences, boolean importPortletData,
-		boolean importPermissions, boolean importTheme, java.io.File file)
+		java.util.Map parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
-		layoutService.importLayouts(ownerId, importPortletPreferences,
-			importPortletData, importPermissions, importTheme, file);
+		layoutService.importLayouts(ownerId, parameterMap, file);
 	}
 
 	public static void setLayouts(java.lang.String ownerId,

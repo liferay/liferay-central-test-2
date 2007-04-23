@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.zip.ZipWriter;
 
 import java.io.Serializable;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -45,21 +46,23 @@ import java.util.Set;
  */
 public class PortletDataContext implements Serializable {
 
-	public PortletDataContext(String companyId, long groupId,
+	public PortletDataContext(String companyId, long groupId, Map parameterMap,
 							  Set primaryKeys, ZipReader zipReader) {
 
 		_companyId = companyId;
 		_groupId = groupId;
+		_parameterMap = parameterMap;
 		_primaryKeys = primaryKeys;
 		_zipReader = zipReader;
 		_zipWriter = null;
 	}
 
-	public PortletDataContext(String companyId, long groupId,
+	public PortletDataContext(String companyId, long groupId, Map parameterMap,
 							  Set primaryKeys, ZipWriter zipWriter) {
 
 		_companyId = companyId;
 		_groupId = groupId;
+		_parameterMap = parameterMap;
 		_primaryKeys = primaryKeys;
 		_zipReader = null;
 		_zipWriter = zipWriter;
@@ -71,6 +74,10 @@ public class PortletDataContext implements Serializable {
 
 	public long getGroupId() {
 		return _groupId;
+	}
+
+	public Map getParameterMap() {
+		return _parameterMap;
 	}
 
 	public Set getPrimaryKeys() {
@@ -111,6 +118,7 @@ public class PortletDataContext implements Serializable {
 
 	private String _companyId;
 	private long _groupId;
+	private Map _parameterMap;
 	private Set _primaryKeys;
 	private ZipReader _zipReader;
 	private ZipWriter _zipWriter;

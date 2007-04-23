@@ -102,15 +102,12 @@ public class LayoutLocalServiceUtil {
 	}
 
 	public static byte[] exportLayouts(java.lang.String ownerId,
-		boolean exportPortletPreferences, boolean exportPortletData,
-		boolean exportPermissions, boolean exportTheme)
+		java.util.Map parameterMap)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-		return layoutLocalService.exportLayouts(ownerId,
-			exportPortletPreferences, exportPortletData, exportPermissions,
-			exportTheme);
+		return layoutLocalService.exportLayouts(ownerId, parameterMap);
 	}
 
 	public static com.liferay.portal.model.Layout getFriendlyURLLayout(
@@ -166,27 +163,20 @@ public class LayoutLocalServiceUtil {
 	}
 
 	public static void importLayouts(java.lang.String userId,
-		java.lang.String ownerId, boolean importPortletPreferences,
-		boolean importPortletData, boolean importPermissions,
-		boolean importTheme, java.io.File file)
+		java.lang.String ownerId, java.util.Map parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-		layoutLocalService.importLayouts(userId, ownerId,
-			importPortletPreferences, importPortletData, importPermissions,
-			importTheme, file);
+		layoutLocalService.importLayouts(userId, ownerId, parameterMap, file);
 	}
 
 	public static void importLayouts(java.lang.String userId,
-		java.lang.String ownerId, boolean importPortletPreferences,
-		boolean importPortletData, boolean importPermissions,
-		boolean importTheme, java.io.InputStream is)
+		java.lang.String ownerId, java.util.Map parameterMap,
+		java.io.InputStream is)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-		layoutLocalService.importLayouts(userId, ownerId,
-			importPortletPreferences, importPortletData, importPermissions,
-			importTheme, is);
+		layoutLocalService.importLayouts(userId, ownerId, parameterMap, is);
 	}
 
 	public static void setLayouts(java.lang.String ownerId,

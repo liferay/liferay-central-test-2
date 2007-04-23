@@ -45,6 +45,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="ImportPagesAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Raymond Auge
  *
  */
 public class ImportPagesAction extends EditPagesAction {
@@ -62,12 +63,12 @@ public class ImportPagesAction extends EditPagesAction {
 			File file = uploadReq.getFile("importFileName");
 
 			LayoutServiceUtil.importLayouts(
-				ownerId, true, true, true, true, file);
+				ownerId, req.getParameterMap(), file);
 
 			SessionMessages.add(req, "request_processed");
 		}
 		catch (Exception e) {
-			_log.error(e.getMessage(), e);
+			_log.error(e, e);
 
 			SessionErrors.add(req, LayoutImportException.class.getName());
 		}

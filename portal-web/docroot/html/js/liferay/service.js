@@ -284,13 +284,6 @@ Liferay.Service.Portal.Layout = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	exportLayouts: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "exportLayouts";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	setLayouts: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "setLayouts";
