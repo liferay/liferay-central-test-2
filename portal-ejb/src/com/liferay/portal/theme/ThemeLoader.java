@@ -58,6 +58,14 @@ public class ThemeLoader {
 
 		File[] files = _root.listFiles();
 
+		if (files == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("There are no directories to process for  " + _root);
+			}
+
+			return;
+		}
+
 		for (int i = 0; i < files.length; i++) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Process directory " + files[i]);
