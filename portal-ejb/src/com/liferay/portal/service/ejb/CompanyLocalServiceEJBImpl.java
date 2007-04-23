@@ -90,6 +90,12 @@ public class CompanyLocalServiceEJBImpl implements CompanyLocalService,
 		return CompanyLocalServiceFactory.getTxImpl().getCompany(companyId);
 	}
 
+	public com.liferay.portal.model.Company getCompanyByMx(java.lang.String mx)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return CompanyLocalServiceFactory.getTxImpl().getCompanyByMx(mx);
+	}
+
 	public com.liferay.portal.kernel.search.Hits search(
 		java.lang.String companyId, java.lang.String keywords)
 		throws com.liferay.portal.SystemException {

@@ -22,9 +22,12 @@
 
 package com.liferay.portlet.messageboards.smtp;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.smtp.MessageListenerException;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -68,15 +71,13 @@ public class MessageListenerImpl implements MessageListener {
 				return false;
 			}
 
-			String companyId = _getCompanyId(recipient);
+			Company company = _getCompany(recipient);
 			String categoryId = _getCategoryId(recipient);
-
-			CompanyLocalServiceUtil.getCompany(companyId);
 
 			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
 				categoryId);
 
-			if (!category.getCompanyId().equals(companyId)) {
+			if (!category.getCompanyId().equals(company.getCompanyId())) {
 				return false;
 			}
 
@@ -84,7 +85,8 @@ public class MessageListenerImpl implements MessageListener {
 				_log.debug("Check to see if user " + from + " exists");
 			}
 
-			UserLocalServiceUtil.getUserByEmailAddress(companyId, from);
+			UserLocalServiceUtil.getUserByEmailAddress(
+				company.getCompanyId(), from);
 
 			return true;
 		}
@@ -101,7 +103,7 @@ public class MessageListenerImpl implements MessageListener {
 		throws MessageListenerException {
 
 		try {
-			String companyId = _getCompanyId(recipient);
+			Company company = _getCompany(recipient);
 			String categoryId = _getCategoryId(recipient);
 
 			if (_log.isDebugEnabled()) {
@@ -110,10 +112,8 @@ public class MessageListenerImpl implements MessageListener {
 						categoryId);
 			}
 
-			CompanyLocalServiceUtil.getCompany(companyId);
-
 			User user = UserLocalServiceUtil.getUserByEmailAddress(
-				companyId, from);
+				company.getCompanyId(), from);
 
 			MimeMessage message = new MimeMessage(
 				MailEngine.getSession(), data);
@@ -185,16 +185,18 @@ public class MessageListenerImpl implements MessageListener {
 		return categoryId;
 	}
 
-	private String _getCompanyId(String recipient) {
+	private Company _getCompany(String recipient)
+		throws PortalException, SystemException {
+
 		int pos = recipient.indexOf(StringPool.AT);
 
 		String smtpServerSubdomain = PropsUtil.get(
 			PropsUtil.SMTP_SERVER_SUBDOMAIN);
 
-		String companyId = recipient.substring(
+		String mx = recipient.substring(
 			pos + smtpServerSubdomain.length() + 2);
 
-		return companyId;
+		return CompanyLocalServiceUtil.getCompanyByMx(mx);
 	}
 
 	private void _collectMultipartContent(

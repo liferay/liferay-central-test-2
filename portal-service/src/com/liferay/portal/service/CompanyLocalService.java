@@ -73,6 +73,10 @@ public interface CompanyLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.Company getCompanyByMx(java.lang.String mx)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.kernel.search.Hits search(
 		java.lang.String companyId, java.lang.String keywords)
 		throws com.liferay.portal.SystemException;

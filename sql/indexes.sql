@@ -20,6 +20,8 @@ create index IX_12EE4898 on CalEvent (groupId);
 create index IX_4FDDD2BF on CalEvent (groupId, repeating);
 create index IX_FCD7C63D on CalEvent (groupId, type_);
 
+create index IX_12566EC2 on Company (mx);
+
 create index IX_66D496A3 on Contact_ (companyId);
 
 create index IX_25D734CD on Country (active_);

@@ -107,6 +107,12 @@
 		<column name="portalURL" type="String" />
 		<column name="homeURL" type="String" />
 		<column name="mx" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="Mx" return-type="Company">
+			<finder-column name="mx" />
+		</finder>
 	</entity>
 	<entity name="Contact" local-service="true" remote-service="true">
 

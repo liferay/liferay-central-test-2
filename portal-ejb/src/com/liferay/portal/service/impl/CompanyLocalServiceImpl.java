@@ -332,6 +332,12 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return CompanyUtil.findByPrimaryKey(companyId);
 	}
 
+	public Company getCompanyByMx(String mx)
+		throws PortalException, SystemException {
+
+		return CompanyUtil.findByMx(mx);
+	}
+
 	public Hits search(String companyId, String keywords)
 		throws SystemException {
 

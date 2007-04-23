@@ -95,6 +95,15 @@ public class CompanyLocalServiceUtil {
 		return companyLocalService.getCompany(companyId);
 	}
 
+	public static com.liferay.portal.model.Company getCompanyByMx(
+		java.lang.String mx)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+
+		return companyLocalService.getCompanyByMx(mx);
+	}
+
 	public static com.liferay.portal.kernel.search.Hits search(
 		java.lang.String companyId, java.lang.String keywords)
 		throws com.liferay.portal.SystemException {

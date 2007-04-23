@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
@@ -178,6 +179,73 @@ public class CompanyPersistence extends BasePersistence {
 		}
 	}
 
+	public Company findByMx(String mx)
+		throws NoSuchCompanyException, SystemException {
+		Company company = fetchByMx(mx);
+
+		if (company == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No Company exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("mx=");
+			msg.append(mx);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchCompanyException(msg.toString());
+		}
+
+		return company;
+	}
+
+	public Company fetchByMx(String mx) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+			if (mx == null) {
+				query.append("mx IS NULL");
+			}
+			else {
+				query.append("mx = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (mx != null) {
+				q.setString(queryPos++, mx);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			Company company = (Company)list.get(0);
+
+			return company;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		Session session = null;
@@ -253,11 +321,65 @@ public class CompanyPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByMx(String mx)
+		throws NoSuchCompanyException, SystemException {
+		Company company = findByMx(mx);
+		remove(company);
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
 		while (itr.hasNext()) {
 			remove((Company)itr.next());
+		}
+	}
+
+	public int countByMx(String mx) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+			if (mx == null) {
+				query.append("mx IS NULL");
+			}
+			else {
+				query.append("mx = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (mx != null) {
+				q.setString(queryPos++, mx);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
