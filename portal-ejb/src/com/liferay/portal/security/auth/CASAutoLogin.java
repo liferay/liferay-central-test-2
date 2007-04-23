@@ -22,8 +22,13 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 
 import edu.yale.its.tp.cas.client.filter.CASFilter;
 
@@ -47,14 +52,26 @@ public class CASAutoLogin implements AutoLogin {
 
 			HttpSession ses = req.getSession();
 
-			String userId = (String)ses.getAttribute(CASFilter.CAS_FILTER_USER);
+			String screenName =
+				(String)ses.getAttribute(CASFilter.CAS_FILTER_USER);
 
-			if (userId != null) {
-				User user = UserLocalServiceUtil.getUserById(userId);
+			if (screenName != null) {
+				User user = null;
+				Company company = PortalUtil.getCompany(req);
+
+				try {
+					user = UserLocalServiceUtil.getUserByScreenName(
+						company.getCompanyId(), screenName);
+				}
+				catch (NoSuchUserException e) {
+
+					user = processNoSuchUser(
+						company.getCompanyId(), screenName, e);
+				}
 
 				credentials = new String[3];
 
-				credentials[0] = userId;
+				credentials[0] = user.getUserId();
 				credentials[1] = user.getPassword();
 				credentials[2] = Boolean.TRUE.toString();
 			}
@@ -64,6 +81,12 @@ public class CASAutoLogin implements AutoLogin {
 		catch (Exception e) {
 			throw new AutoLoginException(e);
 		}
+	}
+
+	protected User processNoSuchUser(
+		String companyId, String screenName, NoSuchUserException nsue)
+		throws PortalException, SystemException {
+		throw nsue;
 	}
 
 }
