@@ -41,6 +41,7 @@ public class UserSearchTerms extends UserDisplayTerms {
 		firstName = DAOParamUtil.getLike(req, FIRST_NAME);
 		middleName = DAOParamUtil.getLike(req, MIDDLE_NAME);
 		lastName = DAOParamUtil.getLike(req, LAST_NAME);
+		screenName = DAOParamUtil.getLike(req, SCREEN_NAME);
 		emailAddress = DAOParamUtil.getLike(req, EMAIL_ADDRESS);
 		active = ParamUtil.getBoolean(req, ACTIVE, true);
 		organizationId = DAOParamUtil.getString(req, ORGANIZATION_ID);

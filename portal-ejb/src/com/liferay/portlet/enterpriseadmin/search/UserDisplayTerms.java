@@ -41,6 +41,8 @@ public class UserDisplayTerms extends DisplayTerms {
 
 	public static final String LAST_NAME = "lastName";
 
+	public static final String SCREEN_NAME = "screenName";
+
 	public static final String EMAIL_ADDRESS = "emailAddress";
 
 	public static final String ACTIVE = "active";
@@ -57,6 +59,7 @@ public class UserDisplayTerms extends DisplayTerms {
 		firstName = ParamUtil.getString(req, FIRST_NAME);
 		middleName = ParamUtil.getString(req, MIDDLE_NAME);
 		lastName = ParamUtil.getString(req, LAST_NAME);
+		screenName = ParamUtil.getString(req, SCREEN_NAME);
 		emailAddress = ParamUtil.getString(req, EMAIL_ADDRESS);
 		active = ParamUtil.getBoolean(req, ACTIVE, true);
 		organizationId = ParamUtil.getString(req, ORGANIZATION_ID);
@@ -74,6 +77,10 @@ public class UserDisplayTerms extends DisplayTerms {
 
 	public String getLastName() {
 		return lastName;
+	}
+
+	public String getScreenName() {
+		return screenName;
 	}
 
 	public String getEmailAddress() {
@@ -103,6 +110,7 @@ public class UserDisplayTerms extends DisplayTerms {
 	protected String firstName;
 	protected String middleName;
 	protected String lastName;
+	protected String screenName;
 	protected String emailAddress;
 	protected boolean active;
 	protected String organizationId;

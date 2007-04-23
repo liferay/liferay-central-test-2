@@ -45,11 +45,13 @@ public class UserSearch extends SearchContainer {
 
 	static {
 		headerNames.add("name");
+		headerNames.add("screen-name");
+		headerNames.add("email-address");
 		headerNames.add("job-title");
 		headerNames.add("location");
-		headerNames.add("city");
+		//headerNames.add("city");
 		headerNames.add("region");
-		headerNames.add("country");
+		//headerNames.add("country");
 	}
 
 	public static final String EMPTY_RESULTS_MESSAGE = "no-users-were-found";
@@ -78,6 +80,8 @@ public class UserSearch extends SearchContainer {
 			UserDisplayTerms.MIDDLE_NAME, displayTerms.getMiddleName());
 		iteratorURL.setParameter(
 			UserDisplayTerms.LAST_NAME, displayTerms.getLastName());
+		iteratorURL.setParameter(
+			UserDisplayTerms.SCREEN_NAME, displayTerms.getScreenName());
 		iteratorURL.setParameter(
 			UserDisplayTerms.EMAIL_ADDRESS, displayTerms.getEmailAddress());
 		iteratorURL.setParameter(

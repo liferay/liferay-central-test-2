@@ -30,37 +30,83 @@ UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search
 UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<div style="float: left; padding-right: 5px;">
-	<%= LanguageUtil.get(pageContext, "first-name") %><br />
-	<input name="<portlet:namespace /><%= UserDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>">
-</div>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "first-name") %>
+	</td>
+	<td style="padding-left: 5px;"></td>
+	<td>
+		<%= LanguageUtil.get(pageContext, "middle-name") %>
+	</td>
+	<td style="padding-left: 5px;"></td>
+	<td>
+		<%= LanguageUtil.get(pageContext, "last-name") %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<input name="<portlet:namespace /><%= UserDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>">
+	</td>
+	<td style="padding-left: 5px;"></td>
+	<td>
+		<input name="<portlet:namespace /><%= UserDisplayTerms.MIDDLE_NAME %>" size="20" type="text" value="<%= displayTerms.getMiddleName() %>">
+	</td>
+	<td style="padding-left: 5px;"></td>
+	<td>
+		<input name="<portlet:namespace /><%= UserDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>">
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "screen-name") %>
+	</td>
+	<td style="padding-left: 5px;"></td>
+	<td>
+		<%= LanguageUtil.get(pageContext, "email-address") %>
+	</td>
 
-<div style="float: left; padding-right: 5px;">
-	<%= LanguageUtil.get(pageContext, "middle-name") %><br />
-	<input name="<portlet:namespace /><%= UserDisplayTerms.MIDDLE_NAME %>" size="20" type="text" value="<%= displayTerms.getMiddleName() %>">
-</div>
+	<c:choose>
+		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+			<td style="padding-left: 5px;"></td>
+			<td>
+				<%= LanguageUtil.get(pageContext, "active") %>
+			</td>
+		</c:when>
+		<c:otherwise>
+			<td colspan="2"></td>
+		</c:otherwise>
+	</c:choose>
+</tr>
+<tr>
+	<td>
+		<input name="<portlet:namespace /><%= UserDisplayTerms.SCREEN_NAME %>" size="20" type="text" value="<%= displayTerms.getScreenName() %>">
+	</td>
+	<td style="padding-left: 5px;"></td>
+	<td>
+		<input name="<portlet:namespace /><%= UserDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>">
+	</td>
 
-<div style="float: left; padding-right: 5px;">
-	<%= LanguageUtil.get(pageContext, "last-name") %><br />
-	<input name="<portlet:namespace /><%= UserDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>">
-</div>
+	<c:choose>
+		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+			<td style="padding-left: 5px;"></td>
+			<td>
+				<select name="<portlet:namespace /><%= UserDisplayTerms.ACTIVE %>">
+					<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
+					<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
+				</select>
+			</td>
+		</c:when>
+		<c:otherwise>
+			<td colspan="2"></td>
+		</c:otherwise>
+	</c:choose>
+</tr>
+</table>
 
-<div style="float: left; padding-right: 5px;">
-	<%= LanguageUtil.get(pageContext, "email-address") %><br />
-	<input name="<portlet:namespace /><%= UserDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>">
-</div>
+<br>
 
-<div style="float: left;">
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-		<%= LanguageUtil.get(pageContext, "active") %><br />
-		<select name="<portlet:namespace /><%= UserDisplayTerms.ACTIVE %>">
-			<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-			<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
-		</select>
-	</c:if>
-</div>
-
-<table border="0" cellpadding="0" cellspacing="0" style="clear: both; margin-top: 5px;">
+<table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= UserDisplayTerms.AND_OPERATOR %>">
