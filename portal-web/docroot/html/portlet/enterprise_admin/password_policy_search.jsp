@@ -35,18 +35,10 @@ PasswordPolicyDisplayTerms displayTerms = (PasswordPolicyDisplayTerms)searchCont
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
-	<td>
-		<%= LanguageUtil.get(pageContext, "description") %>
-	</td>
 </tr>
 <tr>
 	<td>
 		<input name="<portlet:namespace /><%= PasswordPolicyDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
-	</td>
-	<td style="padding-left: 5px;"></td>
-	<td>
-		<input name="<portlet:namespace /><%= PasswordPolicyDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
 	</td>
 </tr>
 </table>

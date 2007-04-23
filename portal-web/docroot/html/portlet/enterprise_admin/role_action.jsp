@@ -62,12 +62,12 @@ Role role = (Role)row.getObject();
 </c:if>
 
 <c:if test="<%= (role.getType() == RoleImpl.TYPE_REGULAR) && RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_USERS) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUsersURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role_assignments" />
 		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="assign" message="assign-members" url="<%= assignUsersURL %>" />
+	<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
 </c:if>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">

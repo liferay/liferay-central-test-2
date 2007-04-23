@@ -151,48 +151,45 @@ public class PasswordPolicyUtil {
 		return getPersistence().fetchByPrimaryKey(passwordPolicyId);
 	}
 
-	public static java.util.List findByN_D(java.lang.String name,
-		java.lang.String description) throws com.liferay.portal.SystemException {
-		return getPersistence().findByN_D(name, description);
-	}
-
-	public static java.util.List findByN_D(java.lang.String name,
-		java.lang.String description, int begin, int end)
+	public static java.util.List findByName(java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByN_D(name, description, begin, end);
+		return getPersistence().findByName(name);
 	}
 
-	public static java.util.List findByN_D(java.lang.String name,
-		java.lang.String description, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByName(java.lang.String name, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByName(name, begin, end);
+	}
+
+	public static java.util.List findByName(java.lang.String name, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByN_D(name, description, begin, end, obc);
+		return getPersistence().findByName(name, begin, end, obc);
 	}
 
-	public static com.liferay.portal.model.PasswordPolicy findByN_D_First(
-		java.lang.String name, java.lang.String description,
+	public static com.liferay.portal.model.PasswordPolicy findByName_First(
+		java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordPolicyException {
-		return getPersistence().findByN_D_First(name, description, obc);
+		return getPersistence().findByName_First(name, obc);
 	}
 
-	public static com.liferay.portal.model.PasswordPolicy findByN_D_Last(
-		java.lang.String name, java.lang.String description,
+	public static com.liferay.portal.model.PasswordPolicy findByName_Last(
+		java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordPolicyException {
-		return getPersistence().findByN_D_Last(name, description, obc);
+		return getPersistence().findByName_Last(name, obc);
 	}
 
-	public static com.liferay.portal.model.PasswordPolicy[] findByN_D_PrevAndNext(
+	public static com.liferay.portal.model.PasswordPolicy[] findByName_PrevAndNext(
 		long passwordPolicyId, java.lang.String name,
-		java.lang.String description,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordPolicyException {
-		return getPersistence().findByN_D_PrevAndNext(passwordPolicyId, name,
-			description, obc);
+		return getPersistence().findByName_PrevAndNext(passwordPolicyId, name,
+			obc);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -224,18 +221,18 @@ public class PasswordPolicyUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByN_D(java.lang.String name,
-		java.lang.String description) throws com.liferay.portal.SystemException {
-		getPersistence().removeByN_D(name, description);
+	public static void removeByName(java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByName(name);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
 
-	public static int countByN_D(java.lang.String name,
-		java.lang.String description) throws com.liferay.portal.SystemException {
-		return getPersistence().countByN_D(name, description);
+	public static int countByName(java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByName(name);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

@@ -112,58 +112,6 @@ public class PasswordPolicyServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.PasswordPolicySoap getPolicy(
-		long passwordPolicyId) throws RemoteException {
-		try {
-			com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.getPolicy(passwordPolicyId);
-
-			return com.liferay.portal.model.PasswordPolicySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portal.model.PasswordPolicySoap[] getPolicies()
-		throws RemoteException {
-		try {
-			java.util.List returnValue = PasswordPolicyServiceUtil.getPolicies();
-
-			return com.liferay.portal.model.PasswordPolicySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portal.model.PasswordPolicySoap[] getPolicies(
-		int begin, int end) throws RemoteException {
-		try {
-			java.util.List returnValue = PasswordPolicyServiceUtil.getPolicies(begin,
-					end);
-
-			return com.liferay.portal.model.PasswordPolicySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getPoliciesCount() throws RemoteException {
-		try {
-			int returnValue = PasswordPolicyServiceUtil.getPoliciesCount();
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portal.model.PasswordPolicySoap updatePolicy(
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, boolean changeable,

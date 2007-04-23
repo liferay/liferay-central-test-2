@@ -185,8 +185,7 @@ public class PasswordPolicyPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByN_D(String name, String description)
-		throws SystemException {
+	public List findByName(String name) throws SystemException {
 		Session session = null;
 
 		try {
@@ -202,15 +201,6 @@ public class PasswordPolicyPersistence extends BasePersistence {
 				query.append("name = ?");
 			}
 
-			query.append(" AND ");
-
-			if (description == null) {
-				query.append("description IS NULL");
-			}
-			else {
-				query.append("description = ?");
-			}
-
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -220,10 +210,6 @@ public class PasswordPolicyPersistence extends BasePersistence {
 
 			if (name != null) {
 				q.setString(queryPos++, name);
-			}
-
-			if (description != null) {
-				q.setString(queryPos++, description);
 			}
 
 			return q.list();
@@ -236,12 +222,12 @@ public class PasswordPolicyPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByN_D(String name, String description, int begin, int end)
+	public List findByName(String name, int begin, int end)
 		throws SystemException {
-		return findByN_D(name, description, begin, end, null);
+		return findByName(name, begin, end, null);
 	}
 
-	public List findByN_D(String name, String description, int begin, int end,
+	public List findByName(String name, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -258,15 +244,6 @@ public class PasswordPolicyPersistence extends BasePersistence {
 				query.append("name = ?");
 			}
 
-			query.append(" AND ");
-
-			if (description == null) {
-				query.append("description IS NULL");
-			}
-			else {
-				query.append("description = ?");
-			}
-
 			query.append(" ");
 
 			if (obc != null) {
@@ -283,10 +260,6 @@ public class PasswordPolicyPersistence extends BasePersistence {
 				q.setString(queryPos++, name);
 			}
 
-			if (description != null) {
-				q.setString(queryPos++, description);
-			}
-
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (Exception e) {
@@ -297,10 +270,9 @@ public class PasswordPolicyPersistence extends BasePersistence {
 		}
 	}
 
-	public PasswordPolicy findByN_D_First(String name, String description,
-		OrderByComparator obc)
+	public PasswordPolicy findByName_First(String name, OrderByComparator obc)
 		throws NoSuchPasswordPolicyException, SystemException {
-		List list = findByN_D(name, description, 0, 1, obc);
+		List list = findByName(name, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -308,9 +280,6 @@ public class PasswordPolicyPersistence extends BasePersistence {
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("name=");
 			msg.append(name);
-			msg.append(", ");
-			msg.append("description=");
-			msg.append(description);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchPasswordPolicyException(msg.toString());
 		}
@@ -319,11 +288,10 @@ public class PasswordPolicyPersistence extends BasePersistence {
 		}
 	}
 
-	public PasswordPolicy findByN_D_Last(String name, String description,
-		OrderByComparator obc)
+	public PasswordPolicy findByName_Last(String name, OrderByComparator obc)
 		throws NoSuchPasswordPolicyException, SystemException {
-		int count = countByN_D(name, description);
-		List list = findByN_D(name, description, count - 1, count, obc);
+		int count = countByName(name);
+		List list = findByName(name, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -331,9 +299,6 @@ public class PasswordPolicyPersistence extends BasePersistence {
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("name=");
 			msg.append(name);
-			msg.append(", ");
-			msg.append("description=");
-			msg.append(description);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchPasswordPolicyException(msg.toString());
 		}
@@ -342,11 +307,11 @@ public class PasswordPolicyPersistence extends BasePersistence {
 		}
 	}
 
-	public PasswordPolicy[] findByN_D_PrevAndNext(long passwordPolicyId,
-		String name, String description, OrderByComparator obc)
+	public PasswordPolicy[] findByName_PrevAndNext(long passwordPolicyId,
+		String name, OrderByComparator obc)
 		throws NoSuchPasswordPolicyException, SystemException {
 		PasswordPolicy passwordPolicy = findByPrimaryKey(passwordPolicyId);
-		int count = countByN_D(name, description);
+		int count = countByName(name);
 		Session session = null;
 
 		try {
@@ -362,15 +327,6 @@ public class PasswordPolicyPersistence extends BasePersistence {
 				query.append("name = ?");
 			}
 
-			query.append(" AND ");
-
-			if (description == null) {
-				query.append("description IS NULL");
-			}
-			else {
-				query.append("description = ?");
-			}
-
 			query.append(" ");
 
 			if (obc != null) {
@@ -385,10 +341,6 @@ public class PasswordPolicyPersistence extends BasePersistence {
 
 			if (name != null) {
 				q.setString(queryPos++, name);
-			}
-
-			if (description != null) {
-				q.setString(queryPos++, description);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -483,9 +435,8 @@ public class PasswordPolicyPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByN_D(String name, String description)
-		throws SystemException {
-		Iterator itr = findByN_D(name, description).iterator();
+	public void removeByName(String name) throws SystemException {
+		Iterator itr = findByName(name).iterator();
 
 		while (itr.hasNext()) {
 			PasswordPolicy passwordPolicy = (PasswordPolicy)itr.next();
@@ -501,8 +452,7 @@ public class PasswordPolicyPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByN_D(String name, String description)
-		throws SystemException {
+	public int countByName(String name) throws SystemException {
 		Session session = null;
 
 		try {
@@ -519,15 +469,6 @@ public class PasswordPolicyPersistence extends BasePersistence {
 				query.append("name = ?");
 			}
 
-			query.append(" AND ");
-
-			if (description == null) {
-				query.append("description IS NULL");
-			}
-			else {
-				query.append("description = ?");
-			}
-
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -537,10 +478,6 @@ public class PasswordPolicyPersistence extends BasePersistence {
 
 			if (name != null) {
 				q.setString(queryPos++, name);
-			}
-
-			if (description != null) {
-				q.setString(queryPos++, description);
 			}
 
 			Iterator itr = q.list().iterator();

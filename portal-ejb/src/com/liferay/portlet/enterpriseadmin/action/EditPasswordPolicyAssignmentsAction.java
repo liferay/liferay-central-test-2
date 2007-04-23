@@ -24,7 +24,7 @@ package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.NoSuchPasswordPolicyException;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
@@ -60,8 +60,8 @@ public class EditPasswordPolicyAssignmentsAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
-			if (cmd.equals("password_policy_groups")) {
-				updatePasswordPolicyGroups(req);
+			if (cmd.equals("password_policy_organizations")) {
+				updatePasswordPolicyOrganizations(req);
 			}
 			else if (cmd.equals("password_policy_users")) {
 				updatePasswordPolicyUsers(req);
@@ -110,19 +110,20 @@ public class EditPasswordPolicyAssignmentsAction extends PortletAction {
 			req, "portlet.enterprise_admin.edit_password_policy_assignments"));
 	}
 
-	protected void updatePasswordPolicyGroups(ActionRequest req)
+	protected void updatePasswordPolicyOrganizations(ActionRequest req)
 		throws Exception {
 
 		long passwordPolicyId = ParamUtil.getLong(req, "passwordPolicyId");
 
-		long[] addGroupIds = StringUtil.split(
-			ParamUtil.getString(req, "addGroupIds"), 0L);
-		long[] removeGroupIds = StringUtil.split(
-			ParamUtil.getString(req, "removeGroupIds"), 0L);
+		long[] addOrganizationIds = StringUtil.split(
+			ParamUtil.getString(req, "addOrganizationIds"), 0L);
+		long[] removeOrganizationIds = StringUtil.split(
+			ParamUtil.getString(req, "removeOrganizationIds"), 0L);
 
-		GroupServiceUtil.addPasswordPolicyGroups(passwordPolicyId, addGroupIds);
-		GroupServiceUtil.unsetPasswordPolicyGroups(
-			passwordPolicyId, removeGroupIds);
+		OrganizationServiceUtil.addPasswordPolicyOrganizations(
+			passwordPolicyId, addOrganizationIds);
+		OrganizationServiceUtil.unsetPasswordPolicyOrganizations(
+			passwordPolicyId, removeOrganizationIds);
 	}
 
 	protected void updatePasswordPolicyUsers(ActionRequest req)

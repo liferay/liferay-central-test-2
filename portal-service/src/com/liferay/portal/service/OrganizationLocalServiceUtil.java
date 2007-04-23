@@ -94,6 +94,15 @@ public class OrganizationLocalServiceUtil {
 		organizationLocalService.addOrganizationResources(userId, organization);
 	}
 
+	public static void addPasswordPolicyOrganizations(long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+		organizationLocalService.addPasswordPolicyOrganizations(passwordPolicyId,
+			organizationIds);
+	}
+
 	public static void deleteOrganization(java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -153,6 +162,16 @@ public class OrganizationLocalServiceUtil {
 			organizationId);
 	}
 
+	public static boolean hasPasswordPolicyOrganization(long passwordPolicyId,
+		java.lang.String organizationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.hasPasswordPolicyOrganization(passwordPolicyId,
+			organizationId);
+	}
+
 	public static java.util.List search(java.lang.String companyId,
 		java.lang.String parentOrganizationId,
 		java.lang.String parentOrganizationComparator, java.lang.String name,
@@ -195,6 +214,15 @@ public class OrganizationLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 		organizationLocalService.unsetGroupOrganizations(groupId,
+			organizationIds);
+	}
+
+	public static void unsetPasswordPolicyOrganizations(long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+		organizationLocalService.unsetPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}
 

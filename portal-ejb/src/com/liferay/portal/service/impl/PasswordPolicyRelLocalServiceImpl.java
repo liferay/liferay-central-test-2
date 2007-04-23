@@ -52,6 +52,15 @@ public class PasswordPolicyRelLocalServiceImpl
 			return null;
 		}
 
+		try {
+
+			// Ensure that models only have one password policy
+
+			PasswordPolicyRelUtil.removeByC_C(className, classPK);
+		}
+		catch (NoSuchPasswordPolicyRelException nsppre) {
+		}
+
 		long passwordPolicyRelId = CounterLocalServiceUtil.increment(
 			Counter.class.getName());
 
@@ -66,7 +75,7 @@ public class PasswordPolicyRelLocalServiceImpl
 		return passwordPolicyRel;
 	}
 
-	public void addPasswordPolicyRel(
+	public void addPasswordPolicyRels(
 			long passwordPolicyId, String className, String[] classPKs)
 		throws PortalException, SystemException {
 
@@ -75,13 +84,23 @@ public class PasswordPolicyRelLocalServiceImpl
 		}
 	}
 
-	public void addPasswordPolicyRel(
+	public void addPasswordPolicyRels(
 			long passwordPolicyId, String className, long[] classPKs)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < classPKs.length; i++) {
 			addPasswordPolicyRel(
 				passwordPolicyId, className, String.valueOf(classPKs[i]));
+		}
+	}
+
+	public void deletePasswordPolicyRel(String className, String classPK)
+		throws PortalException, SystemException {
+
+		try {
+			PasswordPolicyRelUtil.removeByC_C(className, classPK);
+		}
+		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
 	}
 
@@ -97,7 +116,7 @@ public class PasswordPolicyRelLocalServiceImpl
 		}
 	}
 
-	public void deletePasswordPolicyRel(
+	public void deletePasswordPolicyRels(
 			long passwordPolicyId, String className, String[] classPKs)
 		throws PortalException, SystemException {
 
@@ -106,7 +125,7 @@ public class PasswordPolicyRelLocalServiceImpl
 		}
 	}
 
-	public void deletePasswordPolicyRel(
+	public void deletePasswordPolicyRels(
 			long passwordPolicyId, String className, long[] classPKs)
 		throws PortalException, SystemException {
 
@@ -131,7 +150,7 @@ public class PasswordPolicyRelLocalServiceImpl
 			passwordPolicyId, className, classPK);
 	}
 
-	public boolean hasPasswordPolicy(
+	public boolean hasPasswordPolicyRel(
 			long passwordPolicyId, String className, String classPK)
 		throws PortalException, SystemException {
 

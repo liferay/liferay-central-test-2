@@ -72,18 +72,17 @@ public interface PasswordPolicyLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getPolicies()
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List getPolicies(int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public int getPoliciesCount() throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.PasswordPolicy getPolicy(
 		long passwordPolicyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public java.util.List search(java.lang.String companyId,
+		java.lang.String name, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int searchCount(java.lang.String companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy updatePolicy(
 		long passwordPolicyId, java.lang.String name,

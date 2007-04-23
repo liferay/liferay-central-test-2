@@ -67,6 +67,7 @@
 <%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %>
 <%@ page import="com.liferay.portal.service.permission.LocationPermission" %>
 <%@ page import="com.liferay.portal.service.permission.OrganizationPermission" %>
+<%@ page import="com.liferay.portal.service.permission.PasswordPolicyPermission" %>
 <%@ page import="com.liferay.portal.service.permission.PortalPermission" %>
 <%@ page import="com.liferay.portal.service.permission.RolePermission" %>
 <%@ page import="com.liferay.portal.service.permission.UserGroupPermission" %>

@@ -44,18 +44,19 @@ public class PasswordPolicySearch extends SearchContainer {
 		headerNames.add("name");
 	}
 
-	public static final String EMPTY_RESULTS_MESSAGE = "no-password-policies-were-found";
+	public static final String EMPTY_RESULTS_MESSAGE =
+		"no-password-policies-were-found";
 
 	public PasswordPolicySearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new PasswordPolicyDisplayTerms(req), new PasswordPolicySearchTerms(req),
-			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			  EMPTY_RESULTS_MESSAGE);
+		super(req, new PasswordPolicyDisplayTerms(req),
+			  new PasswordPolicySearchTerms(req), DEFAULT_CUR_PARAM,
+			  DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
-		PasswordPolicyDisplayTerms displayTerms = (PasswordPolicyDisplayTerms)getDisplayTerms();
+		PasswordPolicyDisplayTerms displayTerms =
+			(PasswordPolicyDisplayTerms)getDisplayTerms();
 
-		iteratorURL.setParameter(PasswordPolicyDisplayTerms.NAME, displayTerms.getName());
 		iteratorURL.setParameter(
-			PasswordPolicyDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+			PasswordPolicyDisplayTerms.NAME, displayTerms.getName());
 	}
 
 }

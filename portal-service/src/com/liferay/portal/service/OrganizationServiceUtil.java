@@ -57,6 +57,15 @@ public class OrganizationServiceUtil {
 		organizationService.addGroupOrganizations(groupId, organizationIds);
 	}
 
+	public static void addPasswordPolicyOrganizations(long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrganizationService organizationService = OrganizationServiceFactory.getService();
+		organizationService.addPasswordPolicyOrganizations(passwordPolicyId,
+			organizationIds);
+	}
+
 	public static com.liferay.portal.model.Organization addOrganization(
 		java.lang.String parentOrganizationId, java.lang.String name,
 		java.lang.String regionId, java.lang.String countryId, int statusId,
@@ -116,6 +125,15 @@ public class OrganizationServiceUtil {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 		organizationService.unsetGroupOrganizations(groupId, organizationIds);
+	}
+
+	public static void unsetPasswordPolicyOrganizations(long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrganizationService organizationService = OrganizationServiceFactory.getService();
+		organizationService.unsetPasswordPolicyOrganizations(passwordPolicyId,
+			organizationIds);
 	}
 
 	public static com.liferay.portal.model.Organization updateOrganization(

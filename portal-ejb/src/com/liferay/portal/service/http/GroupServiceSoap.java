@@ -109,17 +109,6 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static void addPasswordPolicyGroups(long passwordPolicyId,
-		long[] groupIds) throws RemoteException {
-		try {
-			GroupServiceUtil.addPasswordPolicyGroups(passwordPolicyId, groupIds);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws RemoteException {
 		try {
@@ -243,18 +232,6 @@ public class GroupServiceSoap {
 		throws RemoteException {
 		try {
 			GroupServiceUtil.setRoleGroups(roleId, groupIds);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void unsetPasswordPolicyGroups(long passwordPolicyId,
-		long[] groupIds) throws RemoteException {
-		try {
-			GroupServiceUtil.unsetPasswordPolicyGroups(passwordPolicyId,
-				groupIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

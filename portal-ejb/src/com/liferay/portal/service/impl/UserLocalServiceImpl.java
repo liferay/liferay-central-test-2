@@ -158,14 +158,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			UserGroupRoleLocalServiceUtil.addUserGroupRoles(
 				userId, groupId, new String[] {role.getRoleId()});
 		}
-
 	}
 
 	public void addPasswordPolicyUsers(long passwordPolicyId, String[] userIds)
 		throws PortalException, SystemException {
 
-		PasswordPolicyRelLocalServiceUtil.addPasswordPolicyRel(passwordPolicyId,
-			User.class.getName(), userIds);
+		PasswordPolicyRelLocalServiceUtil.addPasswordPolicyRels(
+			passwordPolicyId, User.class.getName(), userIds);
 	}
 
 	public void addRoleUsers(String roleId, String[] userIds)
@@ -570,6 +569,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		ImageLocalUtil.remove(userId);
 
+		// Password policy relation
+
+		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRel(
+			User.class.getName(), userId);
+
 		// Old passwords
 
 		PasswordTrackerLocalServiceUtil.deletePasswordTrackers(userId);
@@ -779,7 +783,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public boolean hasPasswordPolicyUser(long passwordPolicyId, String userId)
 		throws PortalException, SystemException {
 
-		return PasswordPolicyRelLocalServiceUtil.hasPasswordPolicy(
+		return PasswordPolicyRelLocalServiceUtil.hasPasswordPolicyRel(
 			passwordPolicyId, User.class.getName(), userId);
 	}
 
@@ -966,7 +970,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long passwordPolicyId, String[] userIds)
 		throws PortalException, SystemException {
 
-		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRel(
+		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRels(
 			passwordPolicyId, User.class.getName(), userIds);
 	}
 

@@ -127,6 +127,11 @@ public class PortalUtil_IW {
 		return PortalUtil.getHttpServletRequest(req);
 	}
 
+	public javax.servlet.http.HttpServletResponse getHttpServletResponse(
+		javax.portlet.PortletResponse res) {
+		return PortalUtil.getHttpServletResponse(res);
+	}
+
 	public java.lang.String getLayoutEditPage(
 		com.liferay.portal.model.Layout layout) {
 		return PortalUtil.getLayoutEditPage(layout);

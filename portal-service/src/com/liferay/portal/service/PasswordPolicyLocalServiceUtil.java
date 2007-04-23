@@ -92,27 +92,6 @@ public class PasswordPolicyLocalServiceUtil {
 		passwordPolicyLocalService.deletePolicy(passwordPolicyId);
 	}
 
-	public static java.util.List getPolicies()
-		throws com.liferay.portal.SystemException {
-		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
-
-		return passwordPolicyLocalService.getPolicies();
-	}
-
-	public static java.util.List getPolicies(int begin, int end)
-		throws com.liferay.portal.SystemException {
-		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
-
-		return passwordPolicyLocalService.getPolicies(begin, end);
-	}
-
-	public static int getPoliciesCount()
-		throws com.liferay.portal.SystemException {
-		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
-
-		return passwordPolicyLocalService.getPoliciesCount();
-	}
-
 	public static com.liferay.portal.model.PasswordPolicy getPolicy(
 		long passwordPolicyId)
 		throws com.liferay.portal.PortalException, 
@@ -120,6 +99,21 @@ public class PasswordPolicyLocalServiceUtil {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
 		return passwordPolicyLocalService.getPolicy(passwordPolicyId);
+	}
+
+	public static java.util.List search(java.lang.String companyId,
+		java.lang.String name, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		return passwordPolicyLocalService.search(companyId, name, begin, end);
+	}
+
+	public static int searchCount(java.lang.String companyId,
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		return passwordPolicyLocalService.searchCount(companyId, name);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy updatePolicy(

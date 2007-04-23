@@ -64,20 +64,6 @@ public interface PasswordPolicyService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.PasswordPolicy getPolicy(
-		long passwordPolicyId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException;
-
-	public java.util.List getPolicies()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public java.util.List getPolicies(int begin, int end)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public int getPoliciesCount()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
 	public com.liferay.portal.model.PasswordPolicy updatePolicy(
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, boolean changeable,

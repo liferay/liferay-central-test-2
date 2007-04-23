@@ -67,7 +67,8 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void addPasswordPolicyUsers(long passwordPolicyId, String[] userIds)
 		throws PortalException, SystemException {
 
-		//PasswordPolicyPermission.check(getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+		//PasswordPolicyPermission.check(
+		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.addPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
@@ -236,12 +237,15 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		}
 	}
 
-	public void unsetPasswordPolicyUsers(long passwordPolicyId, String[] userIds)
+	public void unsetPasswordPolicyUsers(
+			long passwordPolicyId, String[] userIds)
 		throws PortalException, SystemException {
 
-		//PasswordPolicyPermission.check(getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+		//PasswordPolicyPermission.check(
+		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
-		UserLocalServiceUtil.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
+		UserLocalServiceUtil.unsetPasswordPolicyUsers(
+			passwordPolicyId, userIds);
 	}
 
 	public void unsetRoleUsers(String roleId, String[] userIds)

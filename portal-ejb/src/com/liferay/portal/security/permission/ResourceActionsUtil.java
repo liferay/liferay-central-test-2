@@ -390,6 +390,7 @@ public class ResourceActionsUtil {
 					actions.add(ActionKeys.ADD_COMMUNITY);
 					actions.add(ActionKeys.ADD_LICENSE);
 					actions.add(ActionKeys.ADD_ORGANIZATION);
+					actions.add(ActionKeys.ADD_PASSWORD_POLICY);
 					actions.add(ActionKeys.ADD_ROLE);
 					actions.add(ActionKeys.ADD_USER_GROUP);
 				}

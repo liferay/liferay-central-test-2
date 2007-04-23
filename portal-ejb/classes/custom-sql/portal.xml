@@ -305,14 +305,11 @@
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrganizationsPasswordPolicies">
 		<![CDATA[
 			INNER JOIN
-				Group_ ON
-					(Group_.classPK = Organization_.organizationId)
-			INNER JOIN
 				PasswordPolicyRel ON
-					(PasswordPolicyRel.classPK = Group_.groupId)
+					(PasswordPolicyRel.classPK = Organization_.organizationId)
 			WHERE
-				(Group_.className = 'com.liferay.portal.model.Organization') AND
-				(PasswordPolicyRel.passwordPolicyId = ?)
+				(PasswordPolicyRel.passwordPolicyId = ?) AND
+				(PasswordPolicyRel.className = 'com.liferay.portal.model.Organization')
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrganizationsRoles">
@@ -353,6 +350,28 @@
 				(Permission_.resourceId = ?) AND
 				(OrgGroupPermission.organizationId = ?) AND
 				(OrgGroupPermission.groupId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.PasswordPolicyFinder.countByC_N">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				PasswordPolicy
+			WHERE
+				(PasswordPolicy.companyId = ?) AND
+				(lower(PasswordPolicy.name) LIKE ? OR ? IS NULL)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.PasswordPolicyFinder.findByC_N">
+		<![CDATA[
+			SELECT
+				{PasswordPolicy.*}
+			FROM
+				PasswordPolicy
+			WHERE
+				(PasswordPolicy.companyId = ?) AND
+				(lower(PasswordPolicy.name) LIKE ? OR ? IS NULL)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.countByGroupsPermissions">
@@ -603,7 +622,7 @@
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByC_N_D_T">
 		<![CDATA[
 			SELECT
-				COUNT(DISTINCT roleId) AS COUNT_VALUE
+				COUNT(*) AS COUNT_VALUE
 			FROM
 				Role_
 			WHERE
@@ -801,7 +820,8 @@
 				PasswordPolicyRel ON
 					(PasswordPolicyRel.classPK = User_.userId)
 			WHERE
-				(PasswordPolicyRel.passwordPolicyId = ?)
+				(PasswordPolicyRel.passwordPolicyId = ?) AND
+				(PasswordPolicyRel.className = 'com.liferay.portal.model.User')
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUsersRoles">

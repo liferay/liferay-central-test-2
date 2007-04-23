@@ -33,7 +33,7 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 %>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="password-policy" />
+	<liferay-util:param name="tabs1" value="password-policies" />
 	<liferay-util:param name="backURL" value="<%= redirect %>" />
 </liferay-util:include>
 

@@ -41,6 +41,7 @@ import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.EmailAddressLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ListTypeServiceUtil;
+import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
@@ -132,6 +133,14 @@ public class OrganizationLocalServiceImpl
 			organization.getPrimaryKey().toString(), false, false, false);
 	}
 
+	public void addPasswordPolicyOrganizations(
+			long passwordPolicyId, long[] organizationIds)
+		throws PortalException, SystemException {
+
+		PasswordPolicyRelLocalServiceUtil.addPasswordPolicyRels(
+			passwordPolicyId, Organization.class.getName(), organizationIds);
+	}
+
 	public void deleteOrganization(String organizationId)
 		throws PortalException, SystemException {
 
@@ -164,6 +173,11 @@ public class OrganizationLocalServiceImpl
 		EmailAddressLocalServiceUtil.deleteEmailAddresses(
 			organization.getCompanyId(), Organization.class.getName(),
 			organization.getOrganizationId());
+
+		// Password policy relation
+
+		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRel(
+			Organization.class.getName(), organization.getOrganizationId());
 
 		// Phone
 
@@ -238,6 +252,14 @@ public class OrganizationLocalServiceImpl
 		return GroupUtil.containsOrganization(groupId, organizationId);
 	}
 
+	public boolean hasPasswordPolicyOrganization(
+			long passwordPolicyId, String organizationId)
+		throws PortalException, SystemException {
+
+		return PasswordPolicyRelLocalServiceUtil.hasPasswordPolicyRel(
+			passwordPolicyId, Organization.class.getName(), organizationId);
+	}
+
 	public List search(
 			String companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
@@ -274,6 +296,14 @@ public class OrganizationLocalServiceImpl
 		throws PortalException, SystemException {
 
 		GroupUtil.removeOrganizations(groupId, organizationIds);
+	}
+
+	public void unsetPasswordPolicyOrganizations(
+			long passwordPolicyId, long[] organizationIds)
+		throws PortalException, SystemException {
+
+		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRels(
+			passwordPolicyId, Organization.class.getName(), organizationIds);
 	}
 
 	public Organization updateOrganization(

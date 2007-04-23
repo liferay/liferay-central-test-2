@@ -76,6 +76,14 @@ public class OrganizationServiceJSON {
 		OrganizationServiceUtil.addGroupOrganizations(groupId, organizationIds);
 	}
 
+	public static void addPasswordPolicyOrganizations(long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		OrganizationServiceUtil.addPasswordPolicyOrganizations(passwordPolicyId,
+			organizationIds);
+	}
+
 	public static JSONObject addOrganization(
 		java.lang.String parentOrganizationId, java.lang.String name,
 		java.lang.String regionId, java.lang.String countryId, int statusId,
@@ -132,6 +140,14 @@ public class OrganizationServiceJSON {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		OrganizationServiceUtil.unsetGroupOrganizations(groupId, organizationIds);
+	}
+
+	public static void unsetPasswordPolicyOrganizations(long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		OrganizationServiceUtil.unsetPasswordPolicyOrganizations(passwordPolicyId,
+			organizationIds);
 	}
 
 	public static JSONObject updateOrganization(

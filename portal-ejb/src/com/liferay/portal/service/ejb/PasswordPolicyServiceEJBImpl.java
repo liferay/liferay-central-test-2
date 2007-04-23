@@ -80,36 +80,6 @@ public class PasswordPolicyServiceEJBImpl implements PasswordPolicyService,
 		PasswordPolicyServiceFactory.getTxImpl().deletePolicy(passwordPolicyId);
 	}
 
-	public com.liferay.portal.model.PasswordPolicy getPolicy(
-		long passwordPolicyId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return PasswordPolicyServiceFactory.getTxImpl().getPolicy(passwordPolicyId);
-	}
-
-	public java.util.List getPolicies()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return PasswordPolicyServiceFactory.getTxImpl().getPolicies();
-	}
-
-	public java.util.List getPolicies(int begin, int end)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return PasswordPolicyServiceFactory.getTxImpl().getPolicies(begin, end);
-	}
-
-	public int getPoliciesCount()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return PasswordPolicyServiceFactory.getTxImpl().getPoliciesCount();
-	}
-
 	public com.liferay.portal.model.PasswordPolicy updatePolicy(
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, boolean changeable,

@@ -108,6 +108,44 @@ public class OrganizationServiceHttp {
 		}
 	}
 
+	public static void addPasswordPolicyOrganizations(
+		HttpPrincipal httpPrincipal, long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(passwordPolicyId);
+			Object paramObj1 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"addPasswordPolicyOrganizations",
+					new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.Organization addOrganization(
 		HttpPrincipal httpPrincipal, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,
@@ -379,6 +417,44 @@ public class OrganizationServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"unsetGroupOrganizations",
+					new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static void unsetPasswordPolicyOrganizations(
+		HttpPrincipal httpPrincipal, long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(passwordPolicyId);
+			Object paramObj1 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"unsetPasswordPolicyOrganizations",
 					new Object[] { paramObj0, paramObj1 });
 
 			try {

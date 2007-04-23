@@ -71,14 +71,6 @@ public class GroupServiceUtil {
 			friendlyURL, active);
 	}
 
-	public static void addPasswordPolicyGroups(long passwordPolicyId,
-		long[] groupIds)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		GroupService groupService = GroupServiceFactory.getService();
-		groupService.addPasswordPolicyGroups(passwordPolicyId, groupIds);
-	}
-
 	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -158,14 +150,6 @@ public class GroupServiceUtil {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 		groupService.setRoleGroups(roleId, groupIds);
-	}
-
-	public static void unsetPasswordPolicyGroups(long passwordPolicyId,
-		long[] groupIds)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		GroupService groupService = GroupServiceFactory.getService();
-		groupService.unsetPasswordPolicyGroups(passwordPolicyId, groupIds);
 	}
 
 	public static void unsetRoleGroups(java.lang.String roleId, long[] groupIds)

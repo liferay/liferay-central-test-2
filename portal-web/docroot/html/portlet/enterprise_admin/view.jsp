@@ -682,7 +682,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</c:if>
 	</c:when>
-	<c:when test='<%= tabs1.equals("password-policy") %>'>
+	<c:when test='<%= tabs1.equals("password-policies") %>'>
 
 		<%
 		PasswordPolicySearch searchContainer = new PasswordPolicySearch(renderRequest, portletURL);
@@ -697,33 +697,40 @@ portletURL.setParameter("tabs1", tabs1);
 		searchContainer.setRowChecker(rowChecker);
 		%>
 
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/password_policy_search.jsp"
+			searchContainer="<%= searchContainer %>"
+		/>
+
 		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 
 			<%
-			int total = PasswordPolicyLocalServiceUtil.getPoliciesCount();
+			PasswordPolicySearchTerms searchTerms = (PasswordPolicySearchTerms)searchContainer.getSearchTerms();
+
+			int total = PasswordPolicyLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName());
 
 			searchContainer.setTotal(total);
 
-			List results = PasswordPolicyLocalServiceUtil.getPolicies(searchContainer.getStart(), searchContainer.getEnd());
+			List results = PasswordPolicyLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 			%>
 
+			<br><div class="separator"></div><br>
+
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 
-				<c:if test="<%= results.size() > 0 %>">
-					<br><br>
-				</c:if>
+				<br><br>
 			</c:if>
 
 			<%
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
-				PasswordPolicy policy = (PasswordPolicy)results.get(i);
+				PasswordPolicy passwordPolicy = (PasswordPolicy)results.get(i);
 
-				ResultRow row = new ResultRow(policy, String.valueOf(policy.getPrimaryKey()), i);
+				ResultRow row = new ResultRow(passwordPolicy, String.valueOf(passwordPolicy.getPrimaryKey()), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -731,15 +738,15 @@ portletURL.setParameter("tabs1", tabs1);
 
 				rowURL.setParameter("struts_action", "/enterprise_admin/edit_password_policy");
 				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("passwordPolicyId", String.valueOf(policy.getPasswordPolicyId()));
+				rowURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPasswordPolicyId()));
 
 				// Name
 
-				row.addText(policy.getName(), rowURL);
+				row.addText(passwordPolicy.getName(), rowURL);
 
 				// Description
 
-				row.addText(policy.getDescription(), rowURL);
+				row.addText(passwordPolicy.getDescription(), rowURL);
 
 				// Action
 

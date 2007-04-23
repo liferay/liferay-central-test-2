@@ -610,9 +610,8 @@
 
 		<!-- Finder methods -->
 
-		<finder name="N_D" return-type="Collection">
+		<finder name="Name" return-type="Collection">
 			<finder-column name="name" />
-			<finder-column name="description" />
 		</finder>
 	</entity>
 	<entity name="PasswordPolicyRel" local-service="true" remote-service="false">
@@ -629,15 +628,10 @@
 
 		<!-- Finder methods -->
 
-		<finder name="P" return-type="Collection">
-			<finder-column name="passwordPolicyId" />
-		</finder>
-
 		<finder name="C_C" return-type="PasswordPolicyRel">
 			<finder-column name="className" />
 			<finder-column name="classPK" />
 		</finder>
-
 		<finder name="P_C_C" return-type="PasswordPolicyRel">
 			<finder-column name="passwordPolicyId" />
 			<finder-column name="className" />

@@ -74,6 +74,11 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void addPasswordPolicyOrganizations(long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void deleteOrganization(java.lang.String organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -106,6 +111,11 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
+		java.lang.String organizationId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String parentOrganizationId,
 		java.lang.String parentOrganizationComparator, java.lang.String name,
@@ -129,6 +139,11 @@ public interface OrganizationLocalService {
 
 	public void unsetGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void unsetPasswordPolicyOrganizations(long passwordPolicyId,
+		long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

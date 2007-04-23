@@ -24,7 +24,6 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.service.PasswordPolicyServiceUtil;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -92,36 +91,6 @@ public class PasswordPolicyServiceJSON {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		PasswordPolicyServiceUtil.deletePolicy(passwordPolicyId);
-	}
-
-	public static JSONObject getPolicy(long passwordPolicyId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.getPolicy(passwordPolicyId);
-
-		return PasswordPolicyJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONArray getPolicies()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		java.util.List returnValue = PasswordPolicyServiceUtil.getPolicies();
-
-		return PasswordPolicyJSONSerializer.toJSONArray(returnValue);
-	}
-
-	public static JSONArray getPolicies(int begin, int end)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		java.util.List returnValue = PasswordPolicyServiceUtil.getPolicies(begin,
-				end);
-
-		return PasswordPolicyJSONSerializer.toJSONArray(returnValue);
-	}
-
-	public static int getPoliciesCount()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		int returnValue = PasswordPolicyServiceUtil.getPoliciesCount();
-
-		return returnValue;
 	}
 
 	public static JSONObject updatePolicy(long passwordPolicyId,

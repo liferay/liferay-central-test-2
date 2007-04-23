@@ -56,6 +56,17 @@ public class OrganizationServiceImpl extends PrincipalBean
 			groupId, organizationIds);
 	}
 
+	public void addPasswordPolicyOrganizations(
+			long passwordPolicyId, long[] organizationIds)
+		throws PortalException, SystemException {
+
+		//PasswordPolicyPermission.check(
+		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+
+		OrganizationLocalServiceUtil.addPasswordPolicyOrganizations(
+			passwordPolicyId, organizationIds);
+	}
+
 	public Organization addOrganization(
 			String parentOrganizationId, String name, String regionId,
 			String countryId, int statusId, boolean location)
@@ -123,6 +134,17 @@ public class OrganizationServiceImpl extends PrincipalBean
 
 		OrganizationLocalServiceUtil.unsetGroupOrganizations(
 			groupId, organizationIds);
+	}
+
+	public void unsetPasswordPolicyOrganizations(
+			long passwordPolicyId, long[] organizationIds)
+		throws PortalException, SystemException {
+
+		//PasswordPolicyPermission.check(
+		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+
+		OrganizationLocalServiceUtil.unsetPasswordPolicyOrganizations(
+			passwordPolicyId, organizationIds);
 	}
 
 	public Organization updateOrganization(

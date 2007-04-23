@@ -67,7 +67,8 @@ public class OrganizationFinder {
 		OrganizationFinder.class.getName() + ".joinByOrganizationsGroups";
 
 	public static String JOIN_BY_ORGANIZATIONS_PASSWORD_POLICIES =
-		OrganizationFinder.class.getName() + ".joinByOrganizationsPasswordPolicies";
+		OrganizationFinder.class.getName() +
+			".joinByOrganizationsPasswordPolicies";
 
 	public static String JOIN_BY_ORGANIZATIONS_ROLES =
 		OrganizationFinder.class.getName() + ".joinByOrganizationsRoles";

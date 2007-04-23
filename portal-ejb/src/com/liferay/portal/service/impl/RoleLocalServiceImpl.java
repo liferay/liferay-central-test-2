@@ -272,8 +272,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			int begin, int end)
 		throws SystemException {
 
-		return RoleFinder.findByC_N_D_T(companyId, name, description, type,
-			begin, end);
+		return RoleFinder.findByC_N_D_T(
+			companyId, name, description, type, begin, end);
 	}
 
 	public int searchCount(

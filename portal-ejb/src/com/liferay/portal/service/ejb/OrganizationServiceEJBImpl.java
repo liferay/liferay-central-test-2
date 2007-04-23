@@ -63,6 +63,15 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 			organizationIds);
 	}
 
+	public void addPasswordPolicyOrganizations(long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		OrganizationServiceFactory.getTxImpl().addPasswordPolicyOrganizations(passwordPolicyId,
+			organizationIds);
+	}
+
 	public com.liferay.portal.model.Organization addOrganization(
 		java.lang.String parentOrganizationId, java.lang.String name,
 		java.lang.String regionId, java.lang.String countryId, int statusId,
@@ -124,6 +133,15 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		OrganizationServiceFactory.getTxImpl().unsetGroupOrganizations(groupId,
+			organizationIds);
+	}
+
+	public void unsetPasswordPolicyOrganizations(long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		OrganizationServiceFactory.getTxImpl().unsetPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}
 

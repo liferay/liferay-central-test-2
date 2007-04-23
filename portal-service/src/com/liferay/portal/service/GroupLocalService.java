@@ -71,10 +71,6 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addPasswordPolicyGroups(long passwordPolicyId, long[] groupIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public void addRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -136,10 +132,6 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasPasswordPolicyGroup(long passwordPolicyId, long groupId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public boolean hasRoleGroup(java.lang.String roleId, long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -161,10 +153,6 @@ public interface GroupLocalService {
 			com.liferay.portal.PortalException;
 
 	public void setUserGroups(java.lang.String userId, long[] groupIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public void unsetPasswordPolicyGroups(long passwordPolicyId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

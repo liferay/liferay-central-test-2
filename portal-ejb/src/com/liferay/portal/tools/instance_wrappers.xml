@@ -35,6 +35,10 @@
 	/>
 	<instance-wrapper
 		parent-dir="../portal-ejb/src"
+		src-file="com/liferay/portal/service/permission/PasswordPolicyPermission.java"
+	/>
+	<instance-wrapper
+		parent-dir="../portal-ejb/src"
 		src-file="com/liferay/portal/service/permission/PortalPermission.java"
 	/>
 	<instance-wrapper

@@ -44,11 +44,11 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />updatePasswordPolicyGroups(redirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "password_policy_groups";
+	function <portlet:namespace />updatePasswordPolicyOrganizations(redirect) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "password_policy_organizations";
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-		document.<portlet:namespace />fm.<portlet:namespace />addGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		document.<portlet:namespace />fm.<portlet:namespace />removeGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />addOrganizationIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />removeOrganizationIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -70,7 +70,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 <input name="<portlet:namespace />passwordPolicyId" type="hidden" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>">
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="password-policy" />
+	<liferay-util:param name="tabs1" value="password-policies" />
 </liferay-util:include>
 
 <%= LanguageUtil.get(pageContext, "edit-assignments-for-password-policy") %>: <%= passwordPolicy.getName() %>
@@ -111,7 +111,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		LinkedHashMap userParams = new LinkedHashMap();
 
 		if (tabs3.equals("current")) {
-			userParams.put("usersPasswordPolicies", passwordPolicy.getPasswordPolicyId());
+			userParams.put("usersPasswordPolicies", new Long(passwordPolicy.getPasswordPolicyId()));
 		}
 
 		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
@@ -160,8 +160,8 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("organizations") || tabs2.equals("locations") %>'>
-		<input name="<portlet:namespace />addGroupIds" type="hidden" value="">
-		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="">
+		<input name="<portlet:namespace />addOrganizationIds" type="hidden" value="">
+		<input name="<portlet:namespace />removeOrganizationIds" type="hidden" value="">
 
 		<liferay-ui:tabs
 			names="current,available"
@@ -195,7 +195,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		LinkedHashMap organizationParams = new LinkedHashMap();
 
 		if (tabs3.equals("current")) {
-			organizationParams.put("organizationsPasswordPolicies", passwordPolicy.getPasswordPolicyId());
+			organizationParams.put("organizationsPasswordPolicies", new Long(passwordPolicy.getPasswordPolicyId()));
 		}
 
 		int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionId(), searchTerms.getCountryId(), organizationParams, searchTerms.isAndOperator());
@@ -209,7 +209,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 		<br><div class="separator"></div><br>
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updatePasswordPolicyGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updatePasswordPolicyOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
 		<br><br>
 
@@ -230,7 +230,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		for (int i = 0; i < results.size(); i++) {
 			Organization organization = (Organization)results.get(i);
 
-			ResultRow row = new ResultRow(organization, String.valueOf(organization.getGroup().getPrimaryKey()), i);
+			ResultRow row = new ResultRow(organization, organization.getPrimaryKey().toString(), i);
 
 			// Name
 

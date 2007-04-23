@@ -90,26 +90,24 @@ public class PasswordPolicyLocalServiceEJBImpl
 		PasswordPolicyLocalServiceFactory.getTxImpl().deletePolicy(passwordPolicyId);
 	}
 
-	public java.util.List getPolicies()
-		throws com.liferay.portal.SystemException {
-		return PasswordPolicyLocalServiceFactory.getTxImpl().getPolicies();
-	}
-
-	public java.util.List getPolicies(int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return PasswordPolicyLocalServiceFactory.getTxImpl().getPolicies(begin,
-			end);
-	}
-
-	public int getPoliciesCount() throws com.liferay.portal.SystemException {
-		return PasswordPolicyLocalServiceFactory.getTxImpl().getPoliciesCount();
-	}
-
 	public com.liferay.portal.model.PasswordPolicy getPolicy(
 		long passwordPolicyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PasswordPolicyLocalServiceFactory.getTxImpl().getPolicy(passwordPolicyId);
+	}
+
+	public java.util.List search(java.lang.String companyId,
+		java.lang.String name, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return PasswordPolicyLocalServiceFactory.getTxImpl().search(companyId,
+			name, begin, end);
+	}
+
+	public int searchCount(java.lang.String companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return PasswordPolicyLocalServiceFactory.getTxImpl().searchCount(companyId,
+			name);
 	}
 
 	public com.liferay.portal.model.PasswordPolicy updatePolicy(

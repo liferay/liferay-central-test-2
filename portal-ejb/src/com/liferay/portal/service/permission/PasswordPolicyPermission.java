@@ -20,24 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.enterpriseadmin.search;
+package com.liferay.portal.service.permission;
 
-import com.liferay.util.dao.DAOParamUtil;
-
-import javax.portlet.RenderRequest;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.security.auth.PrincipalException;
 
 /**
- * <a href="PasswordPolicySearchTerms.java.html"><b><i>View Source</i></b></a>
+ * <a href="PasswordPolicyPermission.java.html"><b><i>View Source</i></b></a>
  *
- * @author Scott Lee
+ * @author Brian Wing Shun Chan
  *
  */
-public class PasswordPolicySearchTerms extends PasswordPolicyDisplayTerms {
+public class PasswordPolicyPermission {
 
-	public PasswordPolicySearchTerms(RenderRequest req) {
-		super(req);
+	public static void check(
+			PermissionChecker permissionChecker, long passwordPolicyId,
+			String actionId)
+		throws PrincipalException {
 
-		name = DAOParamUtil.getLike(req, NAME);
+		if (!contains(permissionChecker, passwordPolicyId, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static boolean contains(
+		PermissionChecker permissionChecker, long passwordPolicyId,
+		String actionId) {
+
+		return permissionChecker.hasPermission(
+			0, PasswordPolicy.class.getName(), passwordPolicyId, actionId);
 	}
 
 }

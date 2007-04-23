@@ -152,47 +152,6 @@ public class PasswordPolicyRelUtil {
 		return getPersistence().fetchByPrimaryKey(passwordPolicyRelId);
 	}
 
-	public static java.util.List findByP(long passwordPolicyId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByP(passwordPolicyId);
-	}
-
-	public static java.util.List findByP(long passwordPolicyId, int begin,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByP(passwordPolicyId, begin, end);
-	}
-
-	public static java.util.List findByP(long passwordPolicyId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByP(passwordPolicyId, begin, end, obc);
-	}
-
-	public static com.liferay.portal.model.PasswordPolicyRel findByP_First(
-		long passwordPolicyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchPasswordPolicyRelException {
-		return getPersistence().findByP_First(passwordPolicyId, obc);
-	}
-
-	public static com.liferay.portal.model.PasswordPolicyRel findByP_Last(
-		long passwordPolicyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchPasswordPolicyRelException {
-		return getPersistence().findByP_Last(passwordPolicyId, obc);
-	}
-
-	public static com.liferay.portal.model.PasswordPolicyRel[] findByP_PrevAndNext(
-		long passwordPolicyRelId, long passwordPolicyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchPasswordPolicyRelException {
-		return getPersistence().findByP_PrevAndNext(passwordPolicyRelId,
-			passwordPolicyId, obc);
-	}
-
 	public static com.liferay.portal.model.PasswordPolicyRel findByC_C(
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException, 
@@ -250,11 +209,6 @@ public class PasswordPolicyRelUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByP(long passwordPolicyId)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByP(passwordPolicyId);
-	}
-
 	public static void removeByC_C(java.lang.String className,
 		java.lang.String classPK)
 		throws com.liferay.portal.SystemException, 
@@ -271,11 +225,6 @@ public class PasswordPolicyRelUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
-	}
-
-	public static int countByP(long passwordPolicyId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByP(passwordPolicyId);
 	}
 
 	public static int countByC_C(java.lang.String className,

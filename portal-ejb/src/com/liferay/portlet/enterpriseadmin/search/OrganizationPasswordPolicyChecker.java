@@ -24,7 +24,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
-import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.util.dao.search.RowChecker;
 
 import javax.portlet.RenderResponse;
@@ -53,9 +53,9 @@ public class OrganizationPasswordPolicyChecker extends RowChecker {
 		Organization organization = (Organization)obj;
 
 		try {
-			return GroupLocalServiceUtil.hasPasswordPolicyGroup(
+			return OrganizationLocalServiceUtil.hasPasswordPolicyOrganization(
 				_passwordPolicy.getPasswordPolicyId(),
-				organization.getGroup().getGroupId());
+				organization.getOrganizationId());
 		}
 		catch (Exception e){
 			_log.error(e);

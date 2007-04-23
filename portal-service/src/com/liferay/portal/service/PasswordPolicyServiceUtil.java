@@ -75,36 +75,6 @@ public class PasswordPolicyServiceUtil {
 		passwordPolicyService.deletePolicy(passwordPolicyId);
 	}
 
-	public static com.liferay.portal.model.PasswordPolicy getPolicy(
-		long passwordPolicyId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
-
-		return passwordPolicyService.getPolicy(passwordPolicyId);
-	}
-
-	public static java.util.List getPolicies()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
-
-		return passwordPolicyService.getPolicies();
-	}
-
-	public static java.util.List getPolicies(int begin, int end)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
-
-		return passwordPolicyService.getPolicies(begin, end);
-	}
-
-	public static int getPoliciesCount()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
-
-		return passwordPolicyService.getPoliciesCount();
-	}
-
 	public static com.liferay.portal.model.PasswordPolicy updatePolicy(
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, boolean changeable,

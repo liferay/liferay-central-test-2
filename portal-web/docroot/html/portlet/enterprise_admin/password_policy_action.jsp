@@ -30,7 +30,7 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 %>
 
-<c:if test="<%= true %>">
+<c:if test="<%= PasswordPolicyPermission.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.UPDATE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL ">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -40,7 +40,7 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 </c:if>
 
-<c:if test="<%= false %>">
+<c:if test="<%= PasswordPolicyPermission.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.PERMISSIONS) %>">
 	<liferay-security:permissionsURL
 		modelResource="<%= PasswordPolicy.class.getName() %>"
 		modelResourceDescription="<%= passwordPolicy.getName() %>"
@@ -52,15 +52,15 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 </c:if>
 
 <c:if test="<%= true %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUsersURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy_assignments" />
 		<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="assign" message="assign-members" url="<%= assignUsersURL %>" />
+	<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
 </c:if>
 
-<c:if test="<%= true %>">
+<c:if test="<%= PasswordPolicyPermission.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.DELETE) %>">
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />

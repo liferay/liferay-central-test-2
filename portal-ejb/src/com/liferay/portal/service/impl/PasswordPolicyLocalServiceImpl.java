@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.base.PasswordPolicyLocalServiceBaseImpl;
+import com.liferay.portal.service.persistence.PasswordPolicyFinder;
 import com.liferay.portal.service.persistence.PasswordPolicyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 
@@ -95,12 +96,6 @@ public class PasswordPolicyLocalServiceImpl
 
 		// Resources
 
-//		if (userId != null) {
-//			ResourceLocalServiceUtil.addResources(
-//				user.getCompanyId(), 0, userId, PasswordPolicy.class.getName(),
-//				passwordPolicy.getPrimaryKey(), false, false, false);
-//		}
-
 		return passwordPolicy;
 	}
 
@@ -114,22 +109,22 @@ public class PasswordPolicyLocalServiceImpl
 		PasswordPolicyUtil.remove(passwordPolicyId);
 	}
 
-	public List getPolicies() throws SystemException {
-		return PasswordPolicyUtil.findAll();
-	}
-
-	public List getPolicies(int begin, int end) throws SystemException {
-		return PasswordPolicyUtil.findAll(begin, end);
-	}
-
-	public int getPoliciesCount() throws SystemException {
-		return PasswordPolicyUtil.countAll();
-	}
-
 	public PasswordPolicy getPolicy(long passwordPolicyId)
 		throws PortalException, SystemException {
 
 		return PasswordPolicyUtil.findByPrimaryKey(passwordPolicyId);
+	}
+
+	public List search(String companyId, String name, int begin, int end)
+		throws SystemException {
+
+		return PasswordPolicyFinder.findByC_N(companyId, name, begin, end);
+	}
+
+	public int searchCount(String companyId, String name)
+		throws SystemException {
+
+		return PasswordPolicyFinder.countByC_N(companyId, name);
 	}
 
 	public PasswordPolicy updatePolicy(

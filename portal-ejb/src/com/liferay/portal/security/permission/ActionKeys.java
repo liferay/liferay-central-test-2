@@ -73,6 +73,8 @@ public class ActionKeys {
 
 	public static final String ADD_PAGE = "ADD_PAGE";
 
+	public static final String ADD_PASSWORD_POLICY = "ADD_PASSWORD_POLICY";
+
 	public static final String ADD_PERMISSIONS = "ADD_PERMISSIONS";
 
 	public static final String ADD_PRODUCT_ENTRY = "ADD_PRODUCT_ENTRY";

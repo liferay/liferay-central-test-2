@@ -32,6 +32,7 @@ import com.liferay.portal.service.permission.GroupPermission_IW;
 import com.liferay.portal.service.permission.LayoutPermission_IW;
 import com.liferay.portal.service.permission.LocationPermission_IW;
 import com.liferay.portal.service.permission.OrganizationPermission_IW;
+import com.liferay.portal.service.permission.PasswordPolicyPermission_IW;
 import com.liferay.portal.service.permission.PortalPermission_IW;
 import com.liferay.portal.service.permission.PortletPermission_IW;
 import com.liferay.portal.service.permission.RolePermission_IW;
@@ -285,6 +286,9 @@ public class VelocityVariables {
 		vc.put("locationPermission", LocationPermission_IW.getInstance());
 		vc.put(
 			"organizationPermission", OrganizationPermission_IW.getInstance());
+		vc.put(
+			"passwordPolicyPermission",
+			PasswordPolicyPermission_IW.getInstance());
 		vc.put("portalPermission", PortalPermission_IW.getInstance());
 		vc.put("portletPermission", PortletPermission_IW.getInstance());
 		vc.put("rolePermission", RolePermission_IW.getInstance());

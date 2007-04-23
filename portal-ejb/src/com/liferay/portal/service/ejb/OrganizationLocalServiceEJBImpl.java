@@ -92,6 +92,15 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 			organization);
 	}
 
+	public void addPasswordPolicyOrganizations(long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalServiceFactory.getTxImpl()
+									   .addPasswordPolicyOrganizations(passwordPolicyId,
+			organizationIds);
+	}
+
 	public void deleteOrganization(java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -141,6 +150,15 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 			organizationId);
 	}
 
+	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
+		java.lang.String organizationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return OrganizationLocalServiceFactory.getTxImpl()
+											  .hasPasswordPolicyOrganization(passwordPolicyId,
+			organizationId);
+	}
+
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String parentOrganizationId,
 		java.lang.String parentOrganizationComparator, java.lang.String name,
@@ -178,6 +196,15 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalServiceFactory.getTxImpl().unsetGroupOrganizations(groupId,
+			organizationIds);
+	}
+
+	public void unsetPasswordPolicyOrganizations(long passwordPolicyId,
+		long[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalServiceFactory.getTxImpl()
+									   .unsetPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}
 

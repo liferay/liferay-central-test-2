@@ -76,20 +76,29 @@ public class PasswordPolicyRelLocalServiceEJBImpl
 			className, classPK);
 	}
 
-	public void addPasswordPolicyRel(long passwordPolicyId,
+	public void addPasswordPolicyRels(long passwordPolicyId,
 		java.lang.String className, java.lang.String[] classPKs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalServiceFactory.getTxImpl().addPasswordPolicyRel(passwordPolicyId,
+		PasswordPolicyRelLocalServiceFactory.getTxImpl().addPasswordPolicyRels(passwordPolicyId,
 			className, classPKs);
 	}
 
-	public void addPasswordPolicyRel(long passwordPolicyId,
+	public void addPasswordPolicyRels(long passwordPolicyId,
 		java.lang.String className, long[] classPKs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalServiceFactory.getTxImpl().addPasswordPolicyRel(passwordPolicyId,
+		PasswordPolicyRelLocalServiceFactory.getTxImpl().addPasswordPolicyRels(passwordPolicyId,
 			className, classPKs);
+	}
+
+	public void deletePasswordPolicyRel(java.lang.String className,
+		java.lang.String classPK)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PasswordPolicyRelLocalServiceFactory.getTxImpl()
+											.deletePasswordPolicyRel(className,
+			classPK);
 	}
 
 	public void deletePasswordPolicyRel(long passwordPolicyId,
@@ -101,21 +110,21 @@ public class PasswordPolicyRelLocalServiceEJBImpl
 			className, classPK);
 	}
 
-	public void deletePasswordPolicyRel(long passwordPolicyId,
+	public void deletePasswordPolicyRels(long passwordPolicyId,
 		java.lang.String className, java.lang.String[] classPKs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PasswordPolicyRelLocalServiceFactory.getTxImpl()
-											.deletePasswordPolicyRel(passwordPolicyId,
+											.deletePasswordPolicyRels(passwordPolicyId,
 			className, classPKs);
 	}
 
-	public void deletePasswordPolicyRel(long passwordPolicyId,
+	public void deletePasswordPolicyRels(long passwordPolicyId,
 		java.lang.String className, long[] classPKs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PasswordPolicyRelLocalServiceFactory.getTxImpl()
-											.deletePasswordPolicyRel(passwordPolicyId,
+											.deletePasswordPolicyRels(passwordPolicyId,
 			className, classPKs);
 	}
 
@@ -138,12 +147,12 @@ public class PasswordPolicyRelLocalServiceEJBImpl
 			className, classPK);
 	}
 
-	public boolean hasPasswordPolicy(long passwordPolicyId,
+	public boolean hasPasswordPolicyRel(long passwordPolicyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PasswordPolicyRelLocalServiceFactory.getTxImpl()
-												   .hasPasswordPolicy(passwordPolicyId,
+												   .hasPasswordPolicyRel(passwordPolicyId,
 			className, classPK);
 	}
 

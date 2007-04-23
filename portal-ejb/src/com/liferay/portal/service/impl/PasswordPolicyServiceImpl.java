@@ -25,10 +25,11 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyService;
-
-import java.util.List;
+import com.liferay.portal.service.permission.PasswordPolicyPermission;
+import com.liferay.portal.service.permission.PortalPermission;
 
 /**
  * <a href="PasswordPolicyServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -48,9 +49,8 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 			boolean requireUnlock, int lockoutDuration, int resetFailureCount)
 		throws PortalException, SystemException {
 
-//		PasswordPolicyPermission.check(
-//			getPermissionChecker(), plid, parentFolderId,
-//			ActionKeys.ADD_FOLDER);
+		PortalPermission.check(
+			getPermissionChecker(), ActionKeys.ADD_PASSWORD_POLICY);
 
 		return PasswordPolicyLocalServiceUtil.addPolicy(
 			getUserId(), name, description, changeable, changeRequired, minAge,
@@ -63,35 +63,10 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 	public void deletePolicy(long passwordPolicyId)
 		throws PortalException, SystemException {
 
-//		PasswordPolicyPermission.check(
-//		getPermissionChecker(), plid, parentFolderId,
-//		ActionKeys.ADD_FOLDER);
+		PasswordPolicyPermission.check(
+			getPermissionChecker(), passwordPolicyId, ActionKeys.DELETE);
 
 		PasswordPolicyLocalServiceUtil.deletePolicy(passwordPolicyId);
-	}
-
-	public PasswordPolicy getPolicy(long passwordPolicyId)
-		throws PortalException, SystemException {
-
-//		PasswordPolicyPermission.check(
-//		getPermissionChecker(), plid, parentFolderId,
-//		ActionKeys.ADD_FOLDER);
-
-		return PasswordPolicyLocalServiceUtil.getPolicy(passwordPolicyId);
-	}
-
-	public List getPolicies() throws SystemException {
-		return PasswordPolicyLocalServiceUtil.getPolicies();
-	}
-
-	public List getPolicies(int begin, int end)
-		throws SystemException {
-
-		return PasswordPolicyLocalServiceUtil.getPolicies(begin, end);
-	}
-
-	public int getPoliciesCount() throws SystemException {
-		return PasswordPolicyLocalServiceUtil.getPoliciesCount();
 	}
 
 	public PasswordPolicy updatePolicy(
@@ -104,9 +79,8 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 			boolean requireUnlock, int lockoutDuration, int resetFailureCount)
 		throws PortalException, SystemException {
 
-//		PasswordPolicyPermission.check(
-//		getPermissionChecker(), plid, parentFolderId,
-//		ActionKeys.ADD_FOLDER);
+		PasswordPolicyPermission.check(
+			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
 		return PasswordPolicyLocalServiceUtil.updatePolicy(passwordPolicyId,
 			name, description, changeable, changeRequired, minAge,

@@ -125,11 +125,9 @@ create index IX_834BCEB6 on Organization_ (companyId);
 create index IX_E301BDF5 on Organization_ (companyId, name);
 create index IX_418E4522 on Organization_ (companyId, parentOrganizationId);
 
-create index IX_3D9ABA5 on PasswordPolicy (companyId, className, classPK);
-create index IX_5FBA389A on PasswordPolicy (name, description);
+create index IX_61941D2 on PasswordPolicy (name);
 
 create index IX_44D3DF82 on PasswordPolicyRel (className, classPK);
-create index IX_CD25266E on PasswordPolicyRel (passwordPolicyId);
 create index IX_367C759E on PasswordPolicyRel (passwordPolicyId, className, classPK);
 
 create index IX_326F75BD on PasswordTracker (userId);
