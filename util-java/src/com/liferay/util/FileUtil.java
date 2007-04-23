@@ -382,6 +382,10 @@ public class FileUtil {
 	}
 
 	public static String read(File file) throws IOException {
+		return read(file, false);
+	}
+
+	public static String read(File file, boolean raw) throws IOException {
 		FileInputStream fis = new FileInputStream(file);
 
 		byte[] bytes = new byte[fis.available()];
@@ -392,8 +396,13 @@ public class FileUtil {
 
 		String s = new String(bytes);
 
-		return StringUtil.replace(
-			s, StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
+		if (raw) {
+			return s;
+		}
+		else {
+			return StringUtil.replace(
+				s, StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
+		}
 	}
 
 	public static File[] sortFiles(File[] files) {
@@ -511,7 +520,7 @@ public class FileUtil {
 			mkdirs(file.getParent());
 		}
 
-		if (file.exists()) {
+		if (lazy && file.exists()) {
 			String content = read(file);
 
 			if (content.equals(s)) {

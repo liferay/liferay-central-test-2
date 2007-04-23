@@ -32,7 +32,8 @@ import com.liferay.portal.service.base.PasswordPolicyRelLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PasswordPolicyRelUtil;
 
 /**
- * <a href="PasswordPolicyRelLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PasswordPolicyRelLocalServiceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Scott Lee
  *

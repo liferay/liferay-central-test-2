@@ -328,7 +328,7 @@ public class SourceFormatter {
 			for (int i = 0; i < files.length; i++) {
 				File file = new File(basedir + files[i]);
 
-				String content = FileUtil.read(file);
+				String content = FileUtil.read(file, true);
 				String newContent = _formatJSPContent(files[i], content);
 
 				if (files[i].endsWith(".jsp")) {
