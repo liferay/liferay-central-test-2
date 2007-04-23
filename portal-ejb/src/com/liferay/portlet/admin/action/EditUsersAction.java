@@ -137,7 +137,7 @@ public class EditUsersAction extends PortletAction {
 
 		String tabs3 = ParamUtil.getString(req, "tabs3");
 
-		if (tabs3.equals("user-added-email")) {
+		if (tabs3.equals("account-created-notification")) {
 			String emailUserAddedEnabled = ParamUtil.getString(
 				req, "emailUserAddedEnabled");
 			String emailUserAddedSubject = ParamUtil.getString(
@@ -162,7 +162,7 @@ public class EditUsersAction extends PortletAction {
 					PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY, emailUserAddedBody);
 			}
 		}
-		else if (tabs3.equals("password-sent-email")) {
+		else if (tabs3.equals("password-changed-notification")) {
 			String emailPasswordSentEnabled = ParamUtil.getString(
 				req, "emailPasswordSentEnabled");
 			String emailPasswordSentSubject = ParamUtil.getString(
