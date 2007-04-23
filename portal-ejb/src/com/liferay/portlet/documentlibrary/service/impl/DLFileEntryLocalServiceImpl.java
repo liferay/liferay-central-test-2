@@ -382,7 +382,9 @@ public class DLFileEntryLocalServiceImpl
 				fileEntry.getFolderId(), fileEntry.getName());
 		}
 		catch (NoSuchFileException nsfe) {
-			_log.warn(nsfe);
+			if (_log.isWarnEnabled()) {
+				_log.warn(nsfe);
+			}
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);

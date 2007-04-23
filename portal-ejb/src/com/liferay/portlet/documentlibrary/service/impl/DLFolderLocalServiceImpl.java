@@ -27,18 +27,23 @@ import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.documentlibrary.FolderNameException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
@@ -120,6 +125,45 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 		else {
 			addFolderResources(folder, communityPermissions, guestPermissions);
+		}
+
+		// Layout
+
+		boolean layoutsSyncEnabled = GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_ENABLED));
+
+		if (layoutsSyncEnabled &&
+			!parentFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+
+			DLFolder parentFolder = DLFolderUtil.findByPrimaryKey(
+				parentFolderId);
+
+			String parentFolderName = parentFolder.getName();
+
+			String layoutsSyncPrivateFolder = GetterUtil.getString(
+				PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_PRIVATE_FOLDER));
+			String layoutsSyncPublicFolder = GetterUtil.getString(
+				PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_PUBLIC_FOLDER));
+
+			if (parentFolderName.equals(layoutsSyncPrivateFolder) ||
+				parentFolderName.equals(layoutsSyncPublicFolder)) {
+
+				boolean privateLayout = true;
+
+				if (parentFolderName.equals(layoutsSyncPublicFolder)) {
+					privateLayout = false;
+				}
+
+				String parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
+				String title = StringPool.BLANK;
+				String type = LayoutImpl.TYPE_PORTLET;
+				boolean hidden = false;
+				String friendlyURL = StringPool.BLANK;
+
+				LayoutLocalServiceUtil.addLayout(
+					groupId, userId, privateLayout, parentLayoutId, name, title,
+					type, hidden, friendlyURL);
+			}
 		}
 
 		return folder;

@@ -742,6 +742,12 @@ public class PropsUtil {
 
 	public static final String DL_VERSION_CACHE_DIRECTORY_VIEWS = "dl.version.cache.directory.views";
 
+	public static final String DL_LAYOUTS_SYNC_ENABLED = "dl.layouts.sync.enabled";
+
+	public static final String DL_LAYOUTS_SYNC_PRIVATE_FOLDER = "dl.layouts.sync.private.folder";
+
+	public static final String DL_LAYOUTS_SYNC_PUBLIC_FOLDER = "dl.layouts.sync.public.folder";
+
 	// Image Gallery Portlet
 
 	public static final String IG_IMAGE_MAX_SIZE = "ig.image.max.size";
