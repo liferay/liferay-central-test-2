@@ -22,33 +22,33 @@
 
 package com.liferay.portal.security.auth;
 
-import javax.naming.directory.SearchControls;
-import javax.naming.directory.Attributes;
-import javax.naming.directory.Attribute;
-import javax.naming.NamingEnumeration;
-import javax.naming.Binding;
-import javax.naming.Context;
-import javax.naming.ldap.LdapContext;
-import javax.naming.ldap.InitialLdapContext;
-
-import com.liferay.portal.model.User;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.security.ldap.PortalLDAPUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.ldap.LDAPUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
+import com.liferay.util.ldap.LDAPUtil;
+
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.Properties;
+
+import javax.naming.Binding;
+import javax.naming.Context;
+import javax.naming.NamingEnumeration;
+import javax.naming.directory.Attribute;
+import javax.naming.directory.Attributes;
+import javax.naming.directory.SearchControls;
+import javax.naming.ldap.InitialLdapContext;
+import javax.naming.ldap.LdapContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import java.util.Properties;
-import java.util.Locale;
-import java.util.Calendar;
 
 /**
  * <a href="CASLDAPAutoLogin.java.html"><b><i>View Source</i></b></a>
@@ -58,8 +58,8 @@ import java.util.Calendar;
  */
 public class CASLDAPAutoLogin extends CASAutoLogin {
 
-	protected User processNoSuchUser(
-		String companyId, String screenName, NoSuchUserException nsuse)
+	protected User processNoSuchUserException(
+			String companyId, String screenName, NoSuchUserException nsuse)
 		throws PortalException, SystemException {
 
 		try {
@@ -138,14 +138,16 @@ public class CASLDAPAutoLogin extends CASAutoLogin {
 					PortalLDAPUtil.getUserMappings(companyId);
 
 				Attribute emailAddressAttr = attrs.get("mail");
+
 				String emailAddress = StringPool.BLANK;
+
 				if (emailAddressAttr != null) {
 					emailAddress = emailAddressAttr.get().toString();
 				}
 
 				return processUser(
 					attrs, userMappings, companyId, emailAddress,
-					StringPool.BLANK, screenName, PASSWORD);
+					StringPool.BLANK, screenName, _PASSWORD);
 			}
 			else {
 				throw new NoSuchUserException(
@@ -229,6 +231,6 @@ public class CASLDAPAutoLogin extends CASAutoLogin {
 
 	private static Log _log = LogFactory.getLog(CASLDAPAutoLogin.class);
 
-	private static final String PASSWORD = "password";
-	
+	private static final String _PASSWORD = "password";
+
 }
