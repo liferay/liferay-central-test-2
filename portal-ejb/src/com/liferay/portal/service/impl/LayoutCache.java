@@ -272,8 +272,8 @@ public class LayoutCache  {
 			params.put("usersGroups", new Long(groupId));
 
 			users = UserLocalServiceUtil.search(
-				companyId, null, null, null, emailAddress, true, params, true,
-				0, 1, null);
+				companyId, null, null, null, null, null, emailAddress, true,
+				params, true, 0, 1, null);
 
 			usersMap.put(emailAddress, users);
 		}

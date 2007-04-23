@@ -38,6 +38,7 @@ public class UserSearchTerms extends UserDisplayTerms {
 	public UserSearchTerms(RenderRequest req) {
 		super(req);
 
+		userId = DAOParamUtil.getLike(req, USER_ID);
 		firstName = DAOParamUtil.getLike(req, FIRST_NAME);
 		middleName = DAOParamUtil.getLike(req, MIDDLE_NAME);
 		lastName = DAOParamUtil.getLike(req, LAST_NAME);

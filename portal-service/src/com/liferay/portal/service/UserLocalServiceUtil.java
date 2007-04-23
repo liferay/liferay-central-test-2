@@ -355,29 +355,30 @@ public class UserLocalServiceUtil {
 	}
 
 	public static java.util.List search(java.lang.String companyId,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String screenName,
-		java.lang.String emailAddress, boolean active,
-		java.util.LinkedHashMap params, boolean andSearch, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.lang.String userId, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		boolean active, java.util.LinkedHashMap params, boolean andSearch,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.search(companyId, firstName, middleName,
-			lastName, screenName, emailAddress, active, params, andSearch,
-			begin, end, obc);
+		return userLocalService.search(companyId, userId, firstName,
+			middleName, lastName, screenName, emailAddress, active, params,
+			andSearch, begin, end, obc);
 	}
 
 	public static int searchCount(java.lang.String companyId,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String screenName,
-		java.lang.String emailAddress, boolean active,
-		java.util.LinkedHashMap params, boolean andSearch)
+		java.lang.String userId, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		boolean active, java.util.LinkedHashMap params, boolean andSearch)
 		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.searchCount(companyId, firstName, middleName,
-			lastName, screenName, emailAddress, active, params, andSearch);
+		return userLocalService.searchCount(companyId, userId, firstName,
+			middleName, lastName, screenName, emailAddress, active, params,
+			andSearch);
 	}
 
 	public static void sendPassword(java.lang.String companyId,

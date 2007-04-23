@@ -35,6 +35,8 @@ import javax.portlet.RenderRequest;
  */
 public class UserDisplayTerms extends DisplayTerms {
 
+	public static final String USER_ID = "userId";
+
 	public static final String FIRST_NAME = "firstName";
 
 	public static final String MIDDLE_NAME = "middleName";
@@ -56,6 +58,7 @@ public class UserDisplayTerms extends DisplayTerms {
 	public UserDisplayTerms(RenderRequest req) {
 		super(req);
 
+		userId = ParamUtil.getString(req, USER_ID);
 		firstName = ParamUtil.getString(req, FIRST_NAME);
 		middleName = ParamUtil.getString(req, MIDDLE_NAME);
 		lastName = ParamUtil.getString(req, LAST_NAME);
@@ -65,6 +68,10 @@ public class UserDisplayTerms extends DisplayTerms {
 		organizationId = ParamUtil.getString(req, ORGANIZATION_ID);
 		roleId = ParamUtil.getString(req, ROLE_ID);
 		userGroupId = ParamUtil.getString(req, USER_GROUP_ID);
+	}
+
+	public String getUserId() {
+		return userId;
 	}
 
 	public String getFirstName() {
@@ -107,6 +114,7 @@ public class UserDisplayTerms extends DisplayTerms {
 		return userGroupId;
 	}
 
+	protected String userId;
 	protected String firstName;
 	protected String middleName;
 	protected String lastName;

@@ -114,11 +114,11 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 			userParams.put("usersPasswordPolicies", new Long(passwordPolicy.getPasswordPolicyId()));
 		}
 
-		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
+		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getUserId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
 
 		searchContainer.setTotal(total);
 
-		List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
+		List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getUserId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
 
 		searchContainer.setResults(results);
 		%>
@@ -133,6 +133,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		List headerNames = new ArrayList();
 
 		headerNames.add("name");
+		headerNames.add("screen-name");
 		headerNames.add("email-address");
 
 		searchContainer.setHeaderNames(headerNames);
@@ -144,9 +145,10 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 			ResultRow row = new ResultRow(user2, user2.getPrimaryKey().toString(), i);
 
-			// Name and email address
+			// Name, screen name, and email address
 
 			row.addText(user2.getFullName());
+			row.addText(user2.getScreenName());
 			row.addText(user2.getEmailAddress());
 
 			// Add result row

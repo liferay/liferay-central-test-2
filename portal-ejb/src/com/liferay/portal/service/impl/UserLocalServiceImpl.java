@@ -800,25 +800,26 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public List search(
-			String companyId, String firstName, String middleName,
-			String lastName, String screenName, String emailAddress,
-			boolean active, LinkedHashMap params, boolean andSearch, int begin,
-			int end, OrderByComparator obc)
+			String companyId, String userId, String firstName,
+			String middleName, String lastName, String screenName,
+			String emailAddress, boolean active, LinkedHashMap params,
+			boolean andSearch, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return UserFinder.findByC_FN_MN_LN_SN_EA_A(
-			companyId, firstName, middleName, lastName, screenName,
+		return UserFinder.findByC_U_FN_MN_LN_SN_EA_A(
+			companyId, userId, firstName, middleName, lastName, screenName,
 			emailAddress, active, params, andSearch, begin, end, obc);
 	}
 
 	public int searchCount(
-			String companyId, String firstName, String middleName,
-			String lastName, String screenName, String emailAddress,
-			boolean active, LinkedHashMap params, boolean andSearch)
+			String companyId, String userId, String firstName,
+			String middleName, String lastName, String screenName,
+			String emailAddress, boolean active, LinkedHashMap params,
+			boolean andSearch)
 		throws SystemException {
 
-		return UserFinder.countByC_FN_MN_LN_SN_EA_A(
-			companyId, firstName, middleName, lastName, screenName,
+		return UserFinder.countByC_U_FN_MN_LN_SN_EA_A(
+			companyId, userId, firstName, middleName, lastName, screenName,
 			emailAddress, active, params, andSearch);
 	}
 

@@ -152,11 +152,11 @@ portletURL.setParameter("tabs1", tabs1);
 				userParams.put("usersUserGroups", userGroupId);
 			}
 
-			int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
+			int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getUserId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
 
 			searchContainer.setTotal(total);
 
-			List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
+			List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getUserId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
 
 			searchContainer.setResults(results);
 
@@ -248,6 +248,10 @@ portletURL.setParameter("tabs1", tabs1);
 
 				row.addText(user2.getFullName(), rowURL);
 
+				// User id
+
+				row.addText(user2.getUserId(), rowURL);
+
 				// Screen name
 
 				row.addText(user2.getScreenName(), rowURL);
@@ -258,9 +262,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Job title
 
-				Contact contact2 = user2.getContact();
+				//Contact contact2 = user2.getContact();
 
-				row.addText(contact2.getJobTitle(), rowURL);
+				//row.addText(contact2.getJobTitle(), rowURL);
 
 				// Organization or location
 

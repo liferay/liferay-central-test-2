@@ -308,26 +308,26 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 	}
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String screenName,
-		java.lang.String emailAddress, boolean active,
-		java.util.LinkedHashMap params, boolean andSearch, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.lang.String userId, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		boolean active, java.util.LinkedHashMap params, boolean andSearch,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return UserLocalServiceFactory.getTxImpl().search(companyId, firstName,
-			middleName, lastName, screenName, emailAddress, active, params,
-			andSearch, begin, end, obc);
+		return UserLocalServiceFactory.getTxImpl().search(companyId, userId,
+			firstName, middleName, lastName, screenName, emailAddress, active,
+			params, andSearch, begin, end, obc);
 	}
 
-	public int searchCount(java.lang.String companyId,
+	public int searchCount(java.lang.String companyId, java.lang.String userId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String screenName,
 		java.lang.String emailAddress, boolean active,
 		java.util.LinkedHashMap params, boolean andSearch)
 		throws com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().searchCount(companyId,
-			firstName, middleName, lastName, screenName, emailAddress, active,
-			params, andSearch);
+			userId, firstName, middleName, lastName, screenName, emailAddress,
+			active, params, andSearch);
 	}
 
 	public void sendPassword(java.lang.String companyId,

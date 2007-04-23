@@ -59,6 +59,10 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 <tr>
 	<td>
+		<%= LanguageUtil.get(pageContext, "user-id") %>
+	</td>
+	<td style="padding-left: 5px;"></td>
+	<td>
 		<%= LanguageUtil.get(pageContext, "screen-name") %>
 	</td>
 	<td style="padding-left: 5px;"></td>
@@ -66,19 +70,18 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		<%= LanguageUtil.get(pageContext, "email-address") %>
 	</td>
 
-	<c:choose>
-		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-			<td style="padding-left: 5px;"></td>
-			<td>
-				<%= LanguageUtil.get(pageContext, "active") %>
-			</td>
-		</c:when>
-		<c:otherwise>
-			<td colspan="2"></td>
-		</c:otherwise>
-	</c:choose>
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+		<td style="padding-left: 5px;"></td>
+		<td>
+			<%= LanguageUtil.get(pageContext, "active") %>
+		</td>
+	</c:if>
 </tr>
 <tr>
+	<td>
+		<input name="<portlet:namespace /><%= UserDisplayTerms.USER_ID %>" size="20" type="text" value="<%= displayTerms.getUserId() %>">
+	</td>
+	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= UserDisplayTerms.SCREEN_NAME %>" size="20" type="text" value="<%= displayTerms.getScreenName() %>">
 	</td>
@@ -87,20 +90,15 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		<input name="<portlet:namespace /><%= UserDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>">
 	</td>
 
-	<c:choose>
-		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-			<td style="padding-left: 5px;"></td>
-			<td>
-				<select name="<portlet:namespace /><%= UserDisplayTerms.ACTIVE %>">
-					<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-					<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
-				</select>
-			</td>
-		</c:when>
-		<c:otherwise>
-			<td colspan="2"></td>
-		</c:otherwise>
-	</c:choose>
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+		<td style="padding-left: 5px;"></td>
+		<td>
+			<select name="<portlet:namespace /><%= UserDisplayTerms.ACTIVE %>">
+				<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
+				<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
+			</select>
+		</td>
+	</c:if>
 </tr>
 </table>
 

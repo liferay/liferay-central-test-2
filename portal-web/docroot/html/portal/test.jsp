@@ -25,7 +25,7 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-List users = UserLocalServiceUtil.search("liferay.com", null, null, null, null, true, null, true, 0, 10, null);
+List users = UserLocalServiceUtil.search("liferay.com", null, null, null, null, null, null, true, null, true, 0, 10, null);
 
 request.setAttribute("users", users);
 %>
