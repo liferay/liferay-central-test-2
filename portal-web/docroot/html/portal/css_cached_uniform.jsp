@@ -23,7 +23,7 @@
 %>
 
 /*
- ---------- Uni-Form form controls ---------- 
+ ---------- Uni-Form form controls ----------
 Uni-Form (v1.1) by Dragan Babic  - http://dnevnikeklektika.com/uni-form/
 
 Modified to use the Liferay/JSR-168 classname convention
@@ -86,8 +86,8 @@ Distributed under http://creativecommons.org/licenses/by-sa/2.5/
 .uni-form .focused {
 }
 
-/* ########################################################################## */     
-/* Styles for form controls where labels are in line with the input elements */   
+/* ########################################################################## */
+/* Styles for form controls where labels are in line with the input elements */
 /* Set the class of the parent (preferably to a fieldset) to .inline-labels */
 .uni-form .inline-labels .ctrl-holder {
 }
@@ -123,8 +123,8 @@ Distributed under http://creativecommons.org/licenses/by-sa/2.5/
 .uni-form .inline-labels .form-hint strong {
 }
 
-/* ########################################################################## */     
-/* Styles for form controls where labels are above the input elements */   
+/* ########################################################################## */
+/* Styles for form controls where labels are above the input elements */
 /* Set the class of the parent (preferably to a fieldset) to .block-labels */
 .uni-form .block-labels .ctrl-holder {
 }
@@ -177,7 +177,7 @@ Distributed under http://creativecommons.org/licenses/by-sa/2.5/
 .uni-form .block-labels .focused {
 }
 
-/* ########################################################################## */     
+/* ########################################################################## */
 /* Focus pseudoclasses */
 .uni-form .ctrl-holder .text-input:focus {
 }
@@ -202,7 +202,7 @@ Distributed under http://creativecommons.org/licenses/by-sa/2.5/
 	position: static;
 }
 
-/* ########################################################################## */     
+/* ########################################################################## */
 /* Messages */
 .uni-form #error-msg,   .uni-form .error {
 }
@@ -222,7 +222,7 @@ Distributed under http://creativecommons.org/licenses/by-sa/2.5/
 .uni-form .error-field {
 }
 
-/* ########################################################################## */     
+/* ########################################################################## */
 /* Add the following classes to your fieldsets (preferably) if you want columns */
 .uni-form .col {
 	float: left;
@@ -248,8 +248,8 @@ Distributed under http://creativecommons.org/licenses/by-sa/2.5/
 }
 
 /* ---------- Uni-Form custom rules ---------- */
-/* Your styles below */  
-/* Keep in mind that wherever you see "Required property" it means that the property must exist, adjust it's value to your liking */    
+/* Your styles below */
+/* Keep in mind that wherever you see "Required property" it means that the property must exist, adjust it's value to your liking */
 /* Generals */
 .uni-form fieldset {
 	margin: 0;

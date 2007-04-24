@@ -49,25 +49,25 @@ catch (Exception e) {
 	<fieldset class="block-labels">
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />userId"><bean:message key="user-id" /></label>
-			
+
 			<input class="text-input" id="<portlet:namespace />userId" name="<portlet:namespace />userId" type="text" value="<%= userId %>" />
 		</div>
 
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />password"><bean:message key="password" /></label>
-			
+
 			<input class="text-input" id="<portlet:namespace />password" name="<portlet:namespace />password" type="password" value="<%= password %>">
 		</div>
 
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />maximizeLinksCheckbox"><bean:message key="maximize-links" />
-			
+
 			<liferay-ui:input-checkbox param="maximizeLinks" defaultValue="<%= maximizeLinks %>" /></label>
 		</div>
 
 		<div class="button-holder">
 			<input type="button" id="<portlet:namespace />saveFormButton" value="<bean:message key="save" />" />
-			
+
 			<input type="button" id="<portlet:namespace />clearCacheButton" value="<bean:message key="clear-cache" />" />
 		 </div>
 	</fieldset>
