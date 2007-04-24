@@ -33,7 +33,7 @@
 			/*
 			 * OPTIONS:
 			 * modal (boolean) - show shaded background
-			 * message (string) - default HTML to display
+			 * message (string|object) - default HTML/object to display
 			 * noCenter (boolean) - prevent re-centering
 			 * height (int) - starting height of message box
 			 * width (int) - starting width of message box
@@ -82,6 +82,10 @@
 			}
 
 			jPopup[0].alertOptions = options;
+			
+			if (myMessage != null && (typeof myMessage == "object")) {
+				myMessage = jQuery(myMessage);
+			}
 
 			jMessage.append(myMessage || "<div class=\"loading-animation\"></div>");
 
