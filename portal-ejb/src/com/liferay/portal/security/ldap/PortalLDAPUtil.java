@@ -86,13 +86,13 @@ public class PortalLDAPUtil {
 
 		Properties userMappings = getUserMappings(companyId);
 
+		User user = UserLocalServiceUtil.getUserById(contact.getUserId());
+
 		String name =
-			userMappings.getProperty("userId") + StringPool.EQUAL +
-				contact.getUserId() + StringPool.COMMA + getUsersDN(companyId);
+			userMappings.getProperty("screenName") + StringPool.EQUAL +
+				user.getScreenName() + StringPool.COMMA + getUsersDN(companyId);
 
-		if (!hasUser(companyId, contact.getUserId())) {
-			User user = UserLocalServiceUtil.getUserById(contact.getUserId());
-
+		if (!hasUser(companyId, user.getScreenName())) {
 			LDAPUser ldapUser = (LDAPUser)Class.forName(
 				PropsUtil.get(PropsUtil.LDAP_USER_IMPL)).newInstance();
 
@@ -130,10 +130,10 @@ public class PortalLDAPUtil {
 		Properties userMappings = getUserMappings(companyId);
 
 		String name =
-			userMappings.getProperty("userId") + StringPool.EQUAL +
-				user.getUserId() + StringPool.COMMA + getUsersDN(companyId);
+			userMappings.getProperty("screenName") + StringPool.EQUAL +
+				user.getScreenName() + StringPool.COMMA + getUsersDN(companyId);
 
-		if (!hasUser(companyId, user.getUserId())) {
+		if (!hasUser(companyId, user.getScreenName())) {
 			LDAPUser ldapUser = (LDAPUser)Class.forName(
 				PropsUtil.get(PropsUtil.LDAP_USER_IMPL)).newInstance();
 
@@ -211,7 +211,7 @@ public class PortalLDAPUtil {
 		return groupMappings;
 	}
 
-	public static Binding getUser(String companyId, String userId)
+	public static Binding getUser(String companyId, String screenName)
 		throws Exception {
 
 		LdapContext ctx = getContext(companyId);
@@ -224,7 +224,8 @@ public class PortalLDAPUtil {
 
 		String name = getUsersDN(companyId);
 		String filter =
-			"(" + userMappings.getProperty("userId") + "=" + userId + ")";
+			"(" + userMappings.getProperty("screenName") + "=" +
+				screenName + ")";
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
@@ -255,10 +256,10 @@ public class PortalLDAPUtil {
 		return PrefsPropsUtil.getString(companyId, PropsUtil.LDAP_USERS_DN);
 	}
 
-	public static boolean hasUser(String companyId, String userId)
+	public static boolean hasUser(String companyId, String screenName)
 		throws Exception {
 
-		if (getUser(companyId, userId) != null) {
+		if (getUser(companyId, screenName) != null) {
 			return true;
 		}
 		else {
