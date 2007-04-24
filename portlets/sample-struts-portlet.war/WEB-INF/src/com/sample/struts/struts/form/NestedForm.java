@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,22 +19,54 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/sample_struts_liferay_portlet/init.jsp" %>
+package com.sample.struts.struts.form;
 
-<tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
+import com.sample.struts.model.Book;
 
-<div>
-	<jsp:include page='<%= "/html" + tilesPortletContent %>' flush="true" />
-</div>
+import java.util.ArrayList;
+import java.util.Collection;
 
-<br><div class="separator"></div><br>
+import javax.servlet.http.HttpServletRequest;
 
-<div>
-	<jsp:include page="/html/portlet/sample_struts_liferay_portlet/nav.jsp" flush="true" />
-</div>
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
 
-<br>
+/**
+ * <a href="NestedForm.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Scott Lee
+ *
+ */
+public class NestedForm extends ActionForm {
 
-<img hspace="0" src="<%= request.getContextPath() %>/html/image/struts-power.gif" vspace="0">
+	public Collection getBooks() {
+		return _books;
+	}
+
+	public void reset(ActionMapping mapping, HttpServletRequest req) {
+		_books = new ArrayList();
+
+		_books.add(new Book("1", "Genesis"));
+		_books.add(new Book("2", "Exodus"));
+		_books.add(new Book("3", "Leviticus"));
+		_books.add(new Book("4", "Numbers"));
+		_books.add(new Book("5", "Deuteronomy"));
+	}
+
+	public ActionErrors validate(
+		ActionMapping mapping, HttpServletRequest req) {
+
+		ActionErrors errors = new ActionErrors();
+
+		return errors;
+	}
+
+	public String toString() {
+		return _books.toString();
+	}
+
+	private Collection _books;
+
+}

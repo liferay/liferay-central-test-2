@@ -28,9 +28,11 @@
 <bean:define id="lastName" name="unsubscribeForm" property="lastName" type="java.lang.String" />
 <bean:define id="emailAddress" name="unsubscribeForm" property="emailAddress" type="java.lang.String" />
 
-<span class="portlet-msg-error">
-<html:errors />
-</span>
+<logic:messagesPresent>
+	<span class="portlet-msg-error">
+	<html:errors />
+	</span>
+</logic:messagesPresent>
 
 <html:form action="/sample_struts_portlet/unsubscribe/action" method="post" focus="firstName">
 

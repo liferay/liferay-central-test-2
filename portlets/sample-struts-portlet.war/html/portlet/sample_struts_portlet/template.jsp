@@ -30,7 +30,7 @@
 	<jsp:include page='<%= "/html" + tilesPortletContent %>' flush="true" />
 </div>
 
-<br><div class="beta-separator"></div><br>
+<br><div class="separator"></div><br>
 
 <div>
 	<jsp:include page="/html/portlet/sample_struts_portlet/nav.jsp" flush="true" />

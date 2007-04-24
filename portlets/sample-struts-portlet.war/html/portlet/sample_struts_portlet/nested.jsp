@@ -22,20 +22,43 @@
  */
 %>
 
-<%@ include file="/html/portlet/sample_struts_liferay_portlet/init.jsp" %>
+<%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
 
-<tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
+<logic:messagesPresent>
+	<span class="portlet-msg-error">
+	<html:errors />
+	</span>
+</logic:messagesPresent>
 
-<div>
-	<jsp:include page='<%= "/html" + tilesPortletContent %>' flush="true" />
-</div>
+<html:form action="/sample_struts_portlet/nested/action" method="post">
 
-<br><div class="separator"></div><br>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		Book Title
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		Book Cover
+	</td>
+</tr>
 
-<div>
-	<jsp:include page="/html/portlet/sample_struts_liferay_portlet/nav.jsp" flush="true" />
-</div>
+<nested:iterate property="books">
+	<tr>
+		<td>
+			<nested:text property="title" />
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<nested:file property="cover" />
+		</td>
+	</tr>
+</nested:iterate>
+
+</table>
 
 <br>
 
-<img hspace="0" src="<%= request.getContextPath() %>/html/image/struts-power.gif" vspace="0">
+<html:submit>Nested Submit</html:submit>
+
+</html:form>

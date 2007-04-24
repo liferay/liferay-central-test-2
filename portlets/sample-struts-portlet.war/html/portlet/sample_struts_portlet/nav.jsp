@@ -85,6 +85,10 @@ Chart:
 
 Struts Form:
 
+<html:link page="/portlet_action/sample_struts_portlet/nested/render">Nested</html:link>
+
+|
+
 <html:link page="/portlet_action/sample_struts_portlet/subscribe/render?firstName=John&lastName=Wayne&emailAddress=test@liferay.com">Subscribe</html:link>
 
 |

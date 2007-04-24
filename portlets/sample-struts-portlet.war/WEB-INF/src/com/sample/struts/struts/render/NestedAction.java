@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,22 +19,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/sample_struts_liferay_portlet/init.jsp" %>
+package com.sample.struts.struts.render;
 
-<tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
+import com.sample.struts.struts.form.NestedForm;
 
-<div>
-	<jsp:include page='<%= "/html" + tilesPortletContent %>' flush="true" />
-</div>
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-<br><div class="separator"></div><br>
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
-<div>
-	<jsp:include page="/html/portlet/sample_struts_liferay_portlet/nav.jsp" flush="true" />
-</div>
+/**
+ * <a href="NestedAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Scott Lee
+ *
+ */
+public class NestedAction extends Action {
 
-<br>
+	public ActionForward execute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
 
-<img hspace="0" src="<%= request.getContextPath() %>/html/image/struts-power.gif" vspace="0">
+		NestedForm nestedForm = (NestedForm)form;
+
+		if (_log.isInfoEnabled()) {
+			_log.info(nestedForm.toString());
+		}
+
+		return mapping.findForward("portlet.sample_struts_portlet.nested");
+	}
+
+	private static Log _log = LogFactory.getLog(NestedAction.class);
+
+}

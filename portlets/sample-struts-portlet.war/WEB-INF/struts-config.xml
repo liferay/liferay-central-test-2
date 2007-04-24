@@ -6,6 +6,7 @@
 	<!-- Forms Beans -->
 
 	<form-beans>
+		<form-bean name="nestedForm" type="com.sample.struts.struts.form.NestedForm" />
 		<form-bean name="subscribeForm" type="com.sample.struts.struts.form.SubscribeForm" />
 		<form-bean name="unsubscribeForm" type="com.sample.struts.struts.form.UnsubscribeForm" />
 		<form-bean name="uploadForm" type="com.sample.struts.struts.form.UploadForm" />
@@ -20,6 +21,14 @@
 		<action path="/sample_struts_portlet/edit" forward="portlet.sample_struts_portlet.edit" />
 
 		<action path="/sample_struts_portlet/help" forward="portlet.sample_struts_portlet.help" />
+
+		<action path="/sample_struts_portlet/nested/action" type="com.sample.struts.struts.action.NestedAction" name="nestedForm" scope="session" validate="true" input="portlet.sample_struts_portlet.nested">
+			<forward name="/sample_struts_portlet/nested_success" path="/portlet_action/sample_struts_portlet/nested_success" redirect="true" />
+		</action>
+
+		<action path="/sample_struts_portlet/nested/render" type="com.sample.struts.struts.render.NestedAction" name="nestedForm" scope="session" validate="true" input="portlet.sample_struts_portlet.nested">
+			<forward name="portlet.sample_struts_portlet.nested" path="portlet.sample_struts_portlet.nested" />
+		</action>
 
 		<action path="/sample_struts_portlet/subscribe/action" type="com.sample.struts.struts.action.SubscribeAction" name="subscribeForm" scope="session" validate="true" input="portlet.sample_struts_portlet.subscribe">
 			<forward name="/sample_struts_portlet/subscribe_success" path="/portlet_action/sample_struts_portlet/subscribe_success" redirect="true" />
@@ -44,6 +53,8 @@
 		<action path="/sample_struts_portlet/upload/render" type="com.sample.struts.struts.render.UploadAction">
 			<forward name="portlet.sample_struts_portlet.upload" path="portlet.sample_struts_portlet.upload" />
 		</action>
+
+		<action path="/sample_struts_portlet/nested_success" forward="portlet.sample_struts_portlet.nested_success" />
 
 		<action path="/sample_struts_portlet/subscribe_success" forward="portlet.sample_struts_portlet.subscribe_success" />
 

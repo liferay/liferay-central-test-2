@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,22 +19,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/sample_struts_liferay_portlet/init.jsp" %>
+package com.sample.struts.model;
 
-<tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
+import java.io.File;
+import java.io.Serializable;
 
-<div>
-	<jsp:include page='<%= "/html" + tilesPortletContent %>' flush="true" />
-</div>
+/**
+ * <a href="Book.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Scott Lee
+ *
+ */
+public class Book implements Serializable {
 
-<br><div class="separator"></div><br>
+	public Book() {
+		super();
+	}
 
-<div>
-	<jsp:include page="/html/portlet/sample_struts_liferay_portlet/nav.jsp" flush="true" />
-</div>
+	public Book(String isbn, String title) {
+		_isbn = isbn;
+		_title = title;
+	}
 
-<br>
+	public String getIsbn() {
+		return _isbn;
+	}
 
-<img hspace="0" src="<%= request.getContextPath() %>/html/image/struts-power.gif" vspace="0">
+	public void setIsbn(String isbn) {
+		_isbn = isbn;
+	}
+
+	public String getTitle() {
+		return _title;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	public File getCover() {
+		return _cover;
+	}
+
+	public void setCover(File cover) {
+		_cover = cover;
+	}
+
+	private String _isbn;
+	private String _title;
+	private File _cover;
+
+}

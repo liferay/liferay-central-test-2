@@ -28,9 +28,11 @@
 <bean:define id="lastName" name="subscribeForm" property="lastName" type="java.lang.String" />
 <bean:define id="emailAddress" name="subscribeForm" property="emailAddress" type="java.lang.String" />
 
-<span class="portlet-msg-error">
-<html:errors />
-</span>
+<logic:messagesPresent>
+	<span class="portlet-msg-error">
+	<html:errors />
+	</span>
+</logic:messagesPresent>
 
 <html:form action="/sample_struts_portlet/subscribe/action" method="post" focus="firstName">
 

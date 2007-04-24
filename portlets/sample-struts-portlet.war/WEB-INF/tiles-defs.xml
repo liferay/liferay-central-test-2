@@ -15,6 +15,14 @@
 		<put name="portlet_content" value="/portlet/sample_struts_portlet/help.jsp" />
 	</definition>
 
+	<definition name="portlet.sample_struts_portlet.nested" extends="portlet.sample_struts_portlet">
+		<put name="portlet_content" value="/portlet/sample_struts_portlet/nested.jsp" />
+	</definition>
+
+	<definition name="portlet.sample_struts_portlet.nested_success" extends="portlet.sample_struts_portlet">
+		<put name="portlet_content" value="/portlet/sample_struts_portlet/nested_success.jsp" />
+	</definition>
+
 	<definition name="portlet.sample_struts_portlet.sample_exception" extends="portlet.sample_struts_portlet">
 		<put name="portlet_content" value="/portlet/sample_struts_portlet/sample_exception.jsp" />
 	</definition>
