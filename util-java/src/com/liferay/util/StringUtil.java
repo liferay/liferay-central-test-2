@@ -170,7 +170,7 @@ public class StringUtil {
 	}
 
 	public static boolean endsWith(String s, char end) {
-		return startsWith(s, (new Character(end)).toString());
+		return endsWith(s, (new Character(end)).toString());
 	}
 
 	public static boolean endsWith(String s, String end) {
