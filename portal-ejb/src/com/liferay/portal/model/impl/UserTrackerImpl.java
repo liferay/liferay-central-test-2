@@ -33,6 +33,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="UserTrackerImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -100,7 +103,14 @@ public class UserTrackerImpl
 	}
 
 	public void addPath(UserTrackerPath path) {
-		_paths.add(path);
+		try {
+			_paths.add(path);
+		}
+		catch (ArrayIndexOutOfBoundsException aioobe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(aioobe);
+			}
+		}
 
 		setModifiedDate(path.getPathDate());
 	}
@@ -123,6 +133,8 @@ public class UserTrackerImpl
 
 		return value;
 	}
+
+	private static Log _log = LogFactory.getLog(UserTrackerImpl.class);
 
 	private HttpSession _ses;
 	private User _user;
