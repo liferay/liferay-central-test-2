@@ -1146,7 +1146,7 @@ create table UserTracker (
 	modifiedDate DATE null,
 	remoteAddr VARCHAR(75) null,
 	remoteHost VARCHAR(75) null,
-	userAgent VARCHAR(75) null
+	userAgent VARCHAR(200) null
 );
 
 create table UserTrackerPath (
