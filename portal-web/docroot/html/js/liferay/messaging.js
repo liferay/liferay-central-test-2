@@ -23,7 +23,7 @@ var Messaging = {
 					"<div class='msg-chat-area textarea' style='overflow: auto; height: 100px'>" +
 						(msg.messages || "") +
 					"</div>" +
-					"<input class='msg-type-area text' style='width: 90%; margin-top: 5px' tabIndex=1 onKeyPress='Messaging.sendChat(this, event)' />" +
+					"<input type='text' class='msg-type-area' style='width: 90%; margin-top: 5px' tabIndex=1 onKeyPress='Messaging.sendChat(this, event)' />" +
 				"</div>";
 				
 			chatBox = Liferay.Popup({

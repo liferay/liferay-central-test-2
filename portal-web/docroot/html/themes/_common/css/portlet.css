@@ -5,6 +5,7 @@
 .portlet {
 	background: #fff;
 	margin-bottom: 10px;
+	text-align: left;
 }
 
 .portlet-topper {

@@ -78,6 +78,10 @@ public class NavItem implements Serializable {
 		return _layout.getTarget();
 	}
 
+	public String getTitle() {
+		return _layout.getTitle(_vars.getThemeDisplay().getLocale());
+	}
+
 	public String getURL() throws Exception {
 		return getResetLayoutURL();
 	}

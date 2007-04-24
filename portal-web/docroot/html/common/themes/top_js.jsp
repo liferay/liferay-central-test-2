@@ -127,7 +127,7 @@
 
 		url = "<%= themeDisplay.getPathMain() %>/layout_configuration/templates?p_l_id=<%= plid %>&doAsUserId=<%= themeDisplay.getDoAsUserId() %>";
 
-		AjaxUtil.update(url, message);
+		AjaxUtil.update(url, message, {onComplete: function(){Liferay.Popup.center()}});
 	}
 
 	_$J(document).ready(

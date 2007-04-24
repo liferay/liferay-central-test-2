@@ -159,13 +159,15 @@ body.staging {
 }
 
 .popup-title {
+	float: left;
 	font-size: 1.8em;
 	font-weight: bold;
-	width: 90%;
 }
 
 .popup-close {
 	cursor: pointer;
+	float: right;
+	text-align: right;
 }
 
 .popup-message {

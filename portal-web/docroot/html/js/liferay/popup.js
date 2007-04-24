@@ -63,7 +63,8 @@
 					"<div class='popup-inner'>" +
 						"<div class='popup-header'>" +
 							"<span class='popup-title'>" + (title || "") + "</span>" +
-							"<span class='popup-close'><img src='" + themeDisplay.getPathThemeImages() + "/portlet/close.png'/></span>" +
+							"<img class='popup-close' src='" + themeDisplay.getPathThemeImages() + "/portlet/close.png'/>" +
+							"<div style='clear:both'></div>" +
 						"</div>" +
 						"<div class='popup-message'></div>" +
 					"</div>" +
