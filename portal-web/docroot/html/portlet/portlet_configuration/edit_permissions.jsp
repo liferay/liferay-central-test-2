@@ -104,15 +104,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 %>
 
 <script type="text/javascript">
-	<c:if test="<%= themeDisplay.isStatePopUp() %>">
-		function <portlet:namespace />resizeParent() {
-			var box = document.getElementById("p_p_id_<%= portletDisplay.getId() %>_");
-			parent.Alerts.resizeIframe({height: box.scrollHeight});
-		}
-
-		_$J(document).ready(<portlet:namespace />resizeParent);
-		_$J(document).click(<portlet:namespace />resizeParent);
-	</c:if>
 
 	function <portlet:namespace />saveGroupPermissions() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_permissions";

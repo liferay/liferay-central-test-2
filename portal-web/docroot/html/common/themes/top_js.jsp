@@ -138,26 +138,6 @@
 
 	Liferay.Portlet.ready(Liferay.Util.addInputType);
 
-	<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
-		function showPageSettings() {
-			var url = "<%= themeDisplay.getURLPageSettings().toString() %>";
-
-			url = url.replace(/\b=<%= WindowState.MAXIMIZED %>\b/,"=<%= LiferayWindowState.POP_UP %>");
-
-			var message = Alerts.popupIframe(
-				url,
-				{
-					width: 700,
-					modal: true,
-					title: '<%= UnicodeLanguageUtil.get(pageContext, "page-settings") %>',
-					onClose:
-						function() {
-							window.location.reload(false);
-						}
-				});
-		}
-	</c:if>
-
 	<c:if test="<%= !themeDisplay.isStatePopUp() %>">
 		<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
 			_$J(document).ready(
