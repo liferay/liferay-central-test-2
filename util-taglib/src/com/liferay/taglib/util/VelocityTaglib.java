@@ -77,7 +77,7 @@ public class VelocityTaglib {
 	public String actionURL(
 			String windowState, String portletMode, Boolean secure,
 			String portletName, Boolean anchor, Boolean encrypt,
-			String doAsUserId, Boolean portletConfiguration, String queryString)
+			long doAsUserId, Boolean portletConfiguration, String queryString)
 		throws Exception {
 
 		Map params = Http.getParameterMap(queryString);
@@ -88,7 +88,7 @@ public class VelocityTaglib {
 			_pageContext);
 	}
 
-	public String doAsURL(String doAsUserId) throws Exception {
+	public String doAsURL(long doAsUserId) throws Exception {
 		return DoAsURLTag.doTag(doAsUserId, null, false, _pageContext);
 	}
 
@@ -350,7 +350,7 @@ public class VelocityTaglib {
 	public String renderURL(
 			String windowState, String portletMode, Boolean secure,
 			String portletName, Boolean anchor, Boolean encrypt,
-			String doAsUserId, Boolean portletConfiguration, String queryString)
+			long doAsUserId, Boolean portletConfiguration, String queryString)
 		throws Exception {
 
 		Map params = Http.getParameterMap(queryString);

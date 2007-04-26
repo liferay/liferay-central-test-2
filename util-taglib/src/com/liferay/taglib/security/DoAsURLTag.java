@@ -23,6 +23,7 @@
 package com.liferay.taglib.security;
 
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -45,7 +46,7 @@ import org.apache.commons.logging.LogFactory;
 public class DoAsURLTag extends TagSupport {
 
 	public static String doTag(
-			String doAsUserId, String var, boolean writeOutput,
+			long doAsUserId, String var, boolean writeOutput,
 			PageContext pageContext)
 		throws Exception {
 
@@ -58,12 +59,6 @@ public class DoAsURLTag extends TagSupport {
 			Thread.currentThread().setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			Object doAsUserIdWrapper = doAsUserId;
-
-			if (doAsUserIdWrapper == null) {
-				doAsUserIdWrapper = new NullWrapper(String.class.getName());
-			}
-
 			Object varWrapper = var;
 
 			if (varWrapper == null) {
@@ -73,7 +68,7 @@ public class DoAsURLTag extends TagSupport {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				_TAG_CLASS, _TAG_DO_END_METHOD,
 				new Object[] {
-					doAsUserIdWrapper, varWrapper,
+					new LongWrapper(doAsUserId), varWrapper,
 					new BooleanWrapper(writeOutput), pageContext
 				});
 
@@ -110,7 +105,7 @@ public class DoAsURLTag extends TagSupport {
 		return EVAL_PAGE;
 	}
 
-	public void setDoAsUserId(String doAsUserId) {
+	public void setDoAsUserId(long doAsUserId) {
 		_doAsUserId = doAsUserId;
 	}
 
@@ -125,7 +120,7 @@ public class DoAsURLTag extends TagSupport {
 
 	private static Log _log = LogFactory.getLog(DoAsURLTag.class);
 
-	private String _doAsUserId;
+	private long _doAsUserId;
 	private String _var;
 
 }

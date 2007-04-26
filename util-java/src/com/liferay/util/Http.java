@@ -135,6 +135,26 @@ public class Http {
 	public static final int TIMEOUT = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".timeout"), 5000);
 
+	public static String addParameter(String url, String name, boolean value) {
+		return addParameter(url, name, String.valueOf(value));
+	}
+
+	public static String addParameter(String url, String name, double value) {
+		return addParameter(url, name, String.valueOf(value));
+	}
+
+	public static String addParameter(String url, String name, int value) {
+		return addParameter(url, name, String.valueOf(value));
+	}
+
+	public static String addParameter(String url, String name, long value) {
+		return addParameter(url, name, String.valueOf(value));
+	}
+
+	public static String addParameter(String url, String name, short value) {
+		return addParameter(url, name, String.valueOf(value));
+	}
+
 	public static String addParameter(String url, String name, String value) {
 		if (url == null) {
 			return null;

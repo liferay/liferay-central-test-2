@@ -41,7 +41,8 @@ public class DiscussionTag extends IncludeTag {
 		req.setAttribute("liferay-ui:discussion:formAction", _formAction);
 		req.setAttribute("liferay-ui:discussion:className", _className);
 		req.setAttribute("liferay-ui:discussion:classPK", _classPK);
-		req.setAttribute("liferay-ui:discussion:userId", _userId);
+		req.setAttribute(
+			"liferay-ui:discussion:userId", String.valueOf(_userId));
 		req.setAttribute("liferay-ui:discussion:subject", _subject);
 		req.setAttribute("liferay-ui:discussion:redirect", _redirect);
 
@@ -64,7 +65,7 @@ public class DiscussionTag extends IncludeTag {
 		_classPK = classPK;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -86,7 +87,7 @@ public class DiscussionTag extends IncludeTag {
 	private String _formAction;
 	private String _className;
 	private String _classPK;
-	private String _userId;
+	private long _userId;
 	private String _subject;
 	private String _redirect;
 

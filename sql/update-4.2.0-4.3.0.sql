@@ -32,7 +32,7 @@ alter_column_type Group_ groupId LONG;
 alter table Group_ add creatorUserId VARCHAR(75) null;
 alter_column_type Group_ parentGroupId LONG;
 alter table Group_ add liveGroupId LONG;
-alter table Group_ add active_ BOOLEAN null;
+alter table Group_ add active_ BOOLEAN;
 update Group_ set liveGroupId = -1;
 update Group_ set friendlyURL = '' where className = 'com.liferay.portal.model.User';
 update Group_ set active_ = TRUE;
@@ -70,11 +70,11 @@ create table MBBan (
 	banId LONG not null primary key,
 	groupId LONG not null,
 	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
+	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	banUserId VARCHAR(75) null
+	banUserId LONG
 );
 
 alter_column_type MBCategory groupId LONG;
@@ -93,7 +93,7 @@ alter_column_type OrgLabor typeId INTEGER;
 create table PasswordPolicy (
 	passwordPolicyId LONG not null primary key,
 	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
+	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
@@ -175,7 +175,7 @@ create table SCFrameworkVersion (
 	frameworkVersionId LONG not null primary key,
 	groupId LONG not null,
 	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
+	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
@@ -204,7 +204,7 @@ create table SCProductEntry (
 	productEntryId LONG not null primary key,
 	groupId LONG not null,
 	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
+	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
@@ -220,7 +220,7 @@ create table SCProductEntry (
 create table SCProductVersion (
 	productVersionId LONG not null primary key,
 	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
+	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
@@ -283,7 +283,7 @@ alter_column_type Subscription subscriptionId LONG;
 create table TagsAsset (
 	assetId LONG not null primary key,
 	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
+	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
@@ -309,7 +309,7 @@ create table TagsAssets_TagsEntries (
 create table TagsEntry (
 	entryId LONG not null primary key,
 	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
+	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
@@ -319,7 +319,7 @@ create table TagsEntry (
 create table TagsProperty (
 	propertyId LONG not null primary key,
 	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
+	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
@@ -335,12 +335,14 @@ create table TagsSource (
 	acronym VARCHAR(75) null
 );
 
+alter table User_ add defaultUser BOOLEAN;
 alter_column_type User_ contactId LONG;
 alter table User_ add screenName VARCHAR(75) null;
+update User_ set defaultUser = FALSE;
 update User_ set screenName = userId;
 
 create table UserGroupRole (
-	userId VARCHAR(75) not null,
+	userId LONG not null,
 	groupId LONG not null,
 	roleId VARCHAR(75) not null,
 	primary key (userId, groupId, roleId)

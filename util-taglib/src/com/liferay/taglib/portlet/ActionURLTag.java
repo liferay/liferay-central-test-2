@@ -23,6 +23,7 @@
 package com.liferay.taglib.portlet;
 
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -49,7 +50,7 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 	public static String doTag(
 			boolean action, String windowState, String portletMode, String var,
 			String varImpl, Boolean secure, String portletName, Boolean anchor,
-			Boolean encrypt, String doAsUserId, Boolean portletConfiguration,
+			Boolean encrypt, long doAsUserId, Boolean portletConfiguration,
 			Map params, boolean writeOutput, PageContext pageContext)
 		throws Exception {
 
@@ -110,12 +111,6 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 				encryptWrapper = new NullWrapper(Boolean.class.getName());
 			}
 
-			Object doAsUserIdWrapper = doAsUserId;
-
-			if (doAsUserIdWrapper == null) {
-				doAsUserIdWrapper = new NullWrapper(String.class.getName());
-			}
-
 			Object portletConfigurationWrapper = portletConfiguration;
 
 			if (portletConfigurationWrapper == null) {
@@ -135,7 +130,7 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 					new BooleanWrapper(action), windowStateWrapper,
 					portletModeWrapper, varWrapper, varImplWrapper,
 					secureWrapper, portletNameWrapper, anchorWrapper,
-					encryptWrapper, doAsUserIdWrapper,
+					encryptWrapper, new LongWrapper(doAsUserId),
 					portletConfigurationWrapper, paramsWrapper,
 					new BooleanWrapper(writeOutput), pageContext
 				});
@@ -217,7 +212,7 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 		_encrypt = new Boolean(encrypt);
 	}
 
-	public void setDoAsUserId(String doAsUserId) {
+	public void setDoAsUserId(long doAsUserId) {
 		_doAsUserId = doAsUserId;
 	}
 
@@ -242,7 +237,7 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 	private String _portletName;
 	private Boolean _anchor;
 	private Boolean _encrypt;
-	private String _doAsUserId;
+	private long _doAsUserId;
 	private Boolean _portletConfiguration;
 
 }

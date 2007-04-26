@@ -53,20 +53,20 @@ public class AuthenticatingHttpInvokerRequestExecutor
 		super();
 	}
 
+	public long getUserId() {
+		return _userId;
+	}
+
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
 	public String getPassword() {
 		return _password;
 	}
 
 	public void setPassword(String password) {
 		_password = Digester.digest(password);
-	}
-
-	public String getUserId() {
-		return _userId;
-	}
-
-	public void setUserId(String userId) {
-		_userId = userId;
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class AuthenticatingHttpInvokerRequestExecutor
 
 		prepareConnection(con, contentLength);
 
-		if (getUserId() != null) {
+		if (getUserId() > 0) {
 			String password = GetterUtil.getString(getPassword());
 
 			String base64 = getUserId() + StringPool.COLON + password;
@@ -90,7 +90,7 @@ public class AuthenticatingHttpInvokerRequestExecutor
 		}
 	}
 
-	private String _userId;
+	private long _userId;
 	private String _password;
 
 }

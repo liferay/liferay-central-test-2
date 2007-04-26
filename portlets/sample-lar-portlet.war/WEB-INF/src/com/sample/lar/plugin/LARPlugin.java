@@ -69,11 +69,14 @@ public class LARPlugin implements PortletDataHandler {
 			// Access the ZipWriter from the PortletDataContext
 
 			ZipWriter zipWriter = context.getZipWriter();
+
 			if (zipWriter != null) {
 				if (_log.isInfoEnabled()) {
-					_log.info("Writing to zip.");
+					_log.info("Writing to zip");
 				}
-				zipWriter.addEntry(portletId + "/README.txt", "test writing to zip");
+
+				zipWriter.addEntry(
+					portletId + "/README.txt", "test writing to zip");
 			}
 
 			return data;
@@ -101,8 +104,11 @@ public class LARPlugin implements PortletDataHandler {
 			}
 
 			ZipReader zipReader = context.getZipReader();
+
 			if (zipReader != null) {
-				_log.info("From README file: \n" + zipReader.getEntryAsString(portletId + "/README.txt"));
+				_log.info(
+					"From README file:\n\n" +
+						zipReader.getEntryAsString(portletId + "/README.txt"));
 			}
 
 			return prefs;
