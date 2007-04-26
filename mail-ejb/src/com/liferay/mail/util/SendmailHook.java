@@ -46,7 +46,7 @@ import org.apache.commons.logging.LogFactory;
 public class SendmailHook implements Hook {
 
 	public void addForward(
-		String userId, List filters, List emailAddresses, boolean leaveCopy) {
+		long userId, List filters, List emailAddresses, boolean leaveCopy) {
 
 		try {
 			if (emailAddresses != null) {
@@ -77,7 +77,7 @@ public class SendmailHook implements Hook {
 	}
 
 	public void addUser(
-		String userId, String password, String firstName, String middleName,
+		long userId, String password, String firstName, String middleName,
 		String lastName, String emailAddress) {
 
 		// Get add user command
@@ -87,7 +87,8 @@ public class SendmailHook implements Hook {
 
 		// Replace userId
 
-		addUserCmd = StringUtil.replace(addUserCmd, "%1%", userId);
+		addUserCmd = StringUtil.replace(
+			addUserCmd, "%1%", String.valueOf(userId));
 
 		Runtime rt = Runtime.getRuntime();
 
@@ -105,14 +106,14 @@ public class SendmailHook implements Hook {
 	}
 
 	public void addVacationMessage(
-		String userId, String emailAddress, String vacationMessage) {
+		long userId, String emailAddress, String vacationMessage) {
 	}
 
-	public void deleteEmailAddress(String userId) {
+	public void deleteEmailAddress(long userId) {
 		updateEmailAddress(userId, "");
 	}
 
-	public void deleteUser(String userId) {
+	public void deleteUser(long userId) {
 		deleteEmailAddress(userId);
 
 		// Get delete user command
@@ -122,7 +123,8 @@ public class SendmailHook implements Hook {
 
 		// Replace userId
 
-		deleteUserCmd = StringUtil.replace(deleteUserCmd, "%1%", userId);
+		deleteUserCmd = StringUtil.replace(
+			deleteUserCmd, "%1%", String.valueOf(userId));
 
 		Runtime rt = Runtime.getRuntime();
 
@@ -136,7 +138,7 @@ public class SendmailHook implements Hook {
 		}
 	}
 
-	public void updateBlocked(String userId, List blocked) {
+	public void updateBlocked(long userId, List blocked) {
 		String home = PropsUtil.get(PropsUtil.MAIL_HOOK_SENDMAIL_HOME);
 
 		File file = new File(home + "/" + userId + "/.procmailrc");
@@ -175,7 +177,7 @@ public class SendmailHook implements Hook {
 		}
 	}
 
-	public void updateEmailAddress(String userId, String emailAddress) {
+	public void updateEmailAddress(long userId, String emailAddress) {
 		try {
 			String virtusertable =
 				PropsUtil.get(PropsUtil.MAIL_HOOK_SENDMAIL_VIRTUSERTABLE);
@@ -219,7 +221,7 @@ public class SendmailHook implements Hook {
 		}
 	}
 
-	public void updatePassword(String userId, String password) {
+	public void updatePassword(long userId, String password) {
 
 		// Get change password command
 
@@ -228,13 +230,13 @@ public class SendmailHook implements Hook {
 
 		// Replace userId
 
-		changePasswordCmd =
-			StringUtil.replace(changePasswordCmd, "%1%", userId);
+		changePasswordCmd = StringUtil.replace(
+			changePasswordCmd, "%1%", String.valueOf(userId));
 
 		// Replace password
 
-		changePasswordCmd =
-			StringUtil.replace(changePasswordCmd, "%2%", password);
+		changePasswordCmd = StringUtil.replace(
+			changePasswordCmd, "%2%", password);
 
 		Runtime rt = Runtime.getRuntime();
 

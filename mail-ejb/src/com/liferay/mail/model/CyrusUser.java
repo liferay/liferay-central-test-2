@@ -35,16 +35,16 @@ public class CyrusUser implements Serializable {
 	public CyrusUser() {
 	}
 
-	public CyrusUser(String userId, String password) {
+	public CyrusUser(long userId, String password) {
 		_userId = userId;
 		_password = password;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -56,7 +56,7 @@ public class CyrusUser implements Serializable {
 		_password = password;
 	}
 
-	private String _userId;
+	private long _userId;
 	private String _password;
 
 }

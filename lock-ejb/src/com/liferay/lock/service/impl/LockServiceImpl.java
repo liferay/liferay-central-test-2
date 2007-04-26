@@ -51,11 +51,11 @@ public class LockServiceImpl implements LockService {
 		return LockPool.getLocksByCompanyId(companyId);
 	}
 
-	public Set getLocksByUserId(String userId) {
+	public Set getLocksByUserId(long userId) {
 		return LockPool.getLocksByUserId(userId);
 	}
 
-	public boolean hasLock(String className, Comparable pk, String userId) {
+	public boolean hasLock(String className, Comparable pk, long userId) {
 		return LockPool.hasLock(className, pk, userId);
 	}
 
@@ -64,7 +64,7 @@ public class LockServiceImpl implements LockService {
 	}
 
 	public void lock(
-			String className, Comparable pk, String companyId, String userId,
+			String className, Comparable pk, String companyId, long userId,
 			long expirationTime)
 		throws PortalException {
 

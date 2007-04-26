@@ -35,7 +35,7 @@ import java.util.Date;
 public class LockImpl implements Lock {
 
 	public LockImpl(String className, Comparable pk, String companyId,
-					String userId, long expirationTime) {
+					long userId, long expirationTime) {
 
 		_className = className;
 		_pk = pk;
@@ -57,7 +57,7 @@ public class LockImpl implements Lock {
 		return _companyId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
@@ -138,7 +138,7 @@ public class LockImpl implements Lock {
 	private String _className;
 	private Comparable _pk;
 	private String _companyId;
-	private String _userId;
+	private long _userId;
 	private long _expirationTime;
 	private Date _date;
 

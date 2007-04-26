@@ -27,10 +27,9 @@ import com.liferay.mail.service.jms.MailProducer;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
 
 import java.util.List;
 
@@ -43,90 +42,68 @@ import java.util.List;
 public class MailServiceImpl implements MailService {
 
 	public void addForward(
-			String userId, List filters, List emailAddresses, boolean leaveCopy)
+			long userId, List filters, List emailAddresses, boolean leaveCopy)
 		throws SystemException {
 
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
-		if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
-			userId = StringUtil.replace(userId, ".", "_");
-		}
-
 		MethodWrapper methodWrapper = new MethodWrapper(
 			hookImpl, "addForward",
 			new Object[] {
-				userId, filters, emailAddresses, new BooleanWrapper(leaveCopy)
+				new LongWrapper(userId), filters, emailAddresses,
+				new BooleanWrapper(leaveCopy)
 			});
 
 		MailProducer.produce(methodWrapper);
 	}
 
 	public void addUser(
-			String userId, String password, String firstName, String middleName,
+			long userId, String password, String firstName, String middleName,
 			String lastName, String emailAddress)
 		throws SystemException {
 
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
-		if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
-			userId = StringUtil.replace(userId, ".", "_");
-		}
-
 		MethodWrapper methodWrapper = new MethodWrapper(
 			hookImpl, "addUser",
 			new Object[] {
-				userId, password, firstName, middleName, lastName, emailAddress
+				new LongWrapper(userId), password, firstName, middleName,
+				lastName, emailAddress
 			});
 
 		MailProducer.produce(methodWrapper);
 	}
 
 	public void addVacationMessage(
-			String userId, String emailAddress, String vacationMessage)
+			long userId, String emailAddress, String vacationMessage)
 		throws SystemException {
 
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
-		if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
-			userId = StringUtil.replace(userId, ".", "_");
-		}
-
 		MethodWrapper methodWrapper = new MethodWrapper(
 			hookImpl, "addVacationMessage",
 			new Object[] {
-				userId, emailAddress, vacationMessage
+				new LongWrapper(userId), emailAddress, vacationMessage
 			});
 
 		MailProducer.produce(methodWrapper);
 	}
 
-	public void deleteEmailAddress(String userId) throws SystemException {
+	public void deleteEmailAddress(long userId) throws SystemException {
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
-		if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
-			userId = StringUtil.replace(userId, ".", "_");
-		}
-
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "deleteEmailAddress", new Object[] {userId});
+			hookImpl, "deleteEmailAddress",
+			new Object[] {new LongWrapper(userId)});
 
 		MailProducer.produce(methodWrapper);
 	}
 
-	public void deleteUser(String userId) throws SystemException {
+	public void deleteUser(long userId) throws SystemException {
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
-		if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
-			userId = StringUtil.replace(userId, ".", "_");
-		}
-
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "deleteUser", new Object[] {userId});
+			hookImpl, "deleteUser", new Object[] {new LongWrapper(userId)});
 
 		MailProducer.produce(methodWrapper);
 	}
@@ -135,51 +112,38 @@ public class MailServiceImpl implements MailService {
 		MailProducer.produce(mailMessage);
 	}
 
-	public void updateBlocked(String userId, List blocked)
+	public void updateBlocked(long userId, List blocked)
 		throws SystemException {
 
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
-		if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
-			userId = StringUtil.replace(userId, ".", "_");
-		}
-
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "updateBlocked", new Object[] {userId, blocked});
+			hookImpl, "updateBlocked",
+			new Object[] {new LongWrapper(userId), blocked});
 
 		MailProducer.produce(methodWrapper);
 	}
 
-	public void updateEmailAddress(String userId, String emailAddress)
+	public void updateEmailAddress(long userId, String emailAddress)
 		throws SystemException {
 
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
-
-		if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
-			userId = StringUtil.replace(userId, ".", "_");
-		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
 			hookImpl, "updateEmailAddress",
-			new Object[] {userId, emailAddress});
+			new Object[] {new LongWrapper(userId), emailAddress});
 
 		MailProducer.produce(methodWrapper);
 	}
 
-	public void updatePassword(String userId, String password)
+	public void updatePassword(long userId, String password)
 		throws SystemException {
 
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
-		if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
-			userId = StringUtil.replace(userId, ".", "_");
-		}
-
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "updatePassword", new Object[] {userId, password});
+			hookImpl, "updatePassword",
+			new Object[] {new LongWrapper(userId), password});
 
 		MailProducer.produce(methodWrapper);
 	}

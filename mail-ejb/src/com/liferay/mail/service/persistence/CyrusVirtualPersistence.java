@@ -124,7 +124,7 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByUserId(String userId) throws SystemException {
+	public List findByUserId(long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -132,7 +132,7 @@ public class CyrusVirtualPersistence extends BasePersistence {
 
 			Query q = session.createQuery(FIND_BY_USER_ID);
 
-			q.setString(0, userId);
+			q.setLong(0, userId);
 
 			return q.list();
 		}
@@ -144,7 +144,7 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByUserId(String userId) throws SystemException {
+	public void removeByUserId(long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -152,7 +152,7 @@ public class CyrusVirtualPersistence extends BasePersistence {
 
 			Query q = session.createQuery(FIND_BY_USER_ID);
 
-			q.setString(0, userId);
+			q.setLong(0, userId);
 
 			Iterator itr = q.iterate();
 

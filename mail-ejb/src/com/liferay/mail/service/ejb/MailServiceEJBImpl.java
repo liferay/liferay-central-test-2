@@ -44,7 +44,7 @@ import javax.ejb.SessionContext;
 public class MailServiceEJBImpl implements MailService, SessionBean {
 
 	public void addForward(
-			String userId, List filters, List emailAddresses, boolean leaveCopy)
+			long userId, List filters, List emailAddresses, boolean leaveCopy)
 		throws RemoteException, SystemException {
 
 		MailServiceFactory.getTxImpl().addForward(
@@ -52,7 +52,7 @@ public class MailServiceEJBImpl implements MailService, SessionBean {
 	}
 
 	public void addUser(
-			String userId, String password, String firstName, String middleName,
+			long userId, String password, String firstName, String middleName,
 			String lastName, String emailAddress)
 		throws RemoteException, SystemException {
 
@@ -61,20 +61,20 @@ public class MailServiceEJBImpl implements MailService, SessionBean {
 	}
 
 	public void addVacationMessage(
-			String userId, String emailAddress, String vacationMessage)
+			long userId, String emailAddress, String vacationMessage)
 		throws RemoteException, SystemException {
 
 		MailServiceFactory.getTxImpl().addVacationMessage(
 			userId, emailAddress, vacationMessage);
 	}
 
-	public void deleteEmailAddress(String userId)
+	public void deleteEmailAddress(long userId)
 		throws RemoteException, SystemException {
 
 		MailServiceFactory.getTxImpl().deleteEmailAddress(userId);
 	}
 
-	public void deleteUser(String userId)
+	public void deleteUser(long userId)
 		throws RemoteException, SystemException {
 
 		MailServiceFactory.getTxImpl().deleteUser(userId);
@@ -86,19 +86,19 @@ public class MailServiceEJBImpl implements MailService, SessionBean {
 		MailServiceFactory.getTxImpl().sendEmail(mailMessage);
 	}
 
-	public void updateBlocked(String userId, List blocked)
+	public void updateBlocked(long userId, List blocked)
 		throws RemoteException, SystemException {
 
 		MailServiceFactory.getTxImpl().updateBlocked(userId, blocked);
 	}
 
-	public void updateEmailAddress(String userId, String emailAddress)
+	public void updateEmailAddress(long userId, String emailAddress)
 		throws RemoteException, SystemException {
 
 		MailServiceFactory.getTxImpl().updateEmailAddress(userId, emailAddress);
 	}
 
-	public void updatePassword(String userId, String password)
+	public void updatePassword(long userId, String password)
 		throws RemoteException, SystemException {
 
 		MailServiceFactory.getTxImpl().updatePassword(userId, password);

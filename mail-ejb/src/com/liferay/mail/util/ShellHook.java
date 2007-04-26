@@ -44,79 +44,81 @@ public class ShellHook implements Hook {
 	public static String SHELL_SCRIPT =
 		PropsUtil.get(PropsUtil.MAIL_HOOK_SHELL_SCRIPT);
 
-	public void addFilters(String userId, List filters) {
+	public void addFilters(long userId, List filters) {
 	}
 
 	public void addForward(
-		String userId, List filters, List emailAddresses, boolean leaveCopy) {
+		long userId, List filters, List emailAddresses, boolean leaveCopy) {
 
 		_execute(
 			new String[] {
-				SHELL_SCRIPT, "addForward", userId,
+				SHELL_SCRIPT, "addForward", String.valueOf(userId),
 				StringUtil.merge(emailAddresses)
 			}
 		);
 	}
 
 	public void addUser(
-		String userId, String password, String firstName, String middleName,
+		long userId, String password, String firstName, String middleName,
 		String lastName, String emailAddress) {
 
 		_execute(
 			new String[] {
-				SHELL_SCRIPT, "addUser", userId, password, firstName,
-				middleName, lastName, emailAddress
+				SHELL_SCRIPT, "addUser", String.valueOf(userId), password,
+				firstName, middleName, lastName, emailAddress
 			}
 		);
 	}
 
 	public void addVacationMessage(
-		String userId, String emailAddress, String vacationMessage) {
+		long userId, String emailAddress, String vacationMessage) {
 
 		_execute(
 			new String[] {
-				SHELL_SCRIPT, "addVacationMessage", userId, emailAddress,
-				vacationMessage
+				SHELL_SCRIPT, "addVacationMessage", String.valueOf(userId),
+				emailAddress, vacationMessage
 			}
 		);
 	}
 
-	public void deleteEmailAddress(String userId) {
+	public void deleteEmailAddress(long userId) {
 		_execute(
 			new String[] {
-				SHELL_SCRIPT, "deleteEmailAddress", userId
+				SHELL_SCRIPT, "deleteEmailAddress", String.valueOf(userId)
 			}
 		);
 	}
 
-	public void deleteUser(String userId) {
+	public void deleteUser(long userId) {
 		_execute(
 			new String[] {
-				SHELL_SCRIPT, "deleteUser", userId
+				SHELL_SCRIPT, "deleteUser", String.valueOf(userId)
 			}
 		);
 	}
 
-	public void updateBlocked(String userId, List blocked) {
+	public void updateBlocked(long userId, List blocked) {
 		_execute(
 			new String[] {
-				SHELL_SCRIPT, "updateBlocked", userId, StringUtil.merge(blocked)
+				SHELL_SCRIPT, "updateBlocked", String.valueOf(userId),
+				StringUtil.merge(blocked)
 			}
 		);
 	}
 
-	public void updateEmailAddress(String userId, String emailAddress) {
+	public void updateEmailAddress(long userId, String emailAddress) {
 		_execute(
 			new String[] {
-				SHELL_SCRIPT, "updateEmailAddress", userId, emailAddress
+				SHELL_SCRIPT, "updateEmailAddress", String.valueOf(userId),
+				emailAddress
 			}
 		);
 	}
 
-	public void updatePassword(String userId, String password) {
+	public void updatePassword(long userId, String password) {
 		_execute(
 			new String[] {
-				SHELL_SCRIPT, "updatePassword", userId, password
+				SHELL_SCRIPT, "updatePassword", String.valueOf(userId), password
 		});
 	}
 

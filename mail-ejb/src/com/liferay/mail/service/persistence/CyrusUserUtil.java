@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.bean.BeanLocatorUtil;
  */
 public class CyrusUserUtil {
 
-	public static void remove(String userId)
+	public static void remove(long userId)
 		throws NoSuchCyrusUserException, SystemException {
 
 		getPersistence().remove(userId);
@@ -45,7 +45,7 @@ public class CyrusUserUtil {
 		getPersistence().update(user);
 	}
 
-	public static CyrusUser findByPrimaryKey(String userId)
+	public static CyrusUser findByPrimaryKey(long userId)
 		throws NoSuchCyrusUserException, SystemException {
 
 		return getPersistence().findByPrimaryKey(userId);

@@ -53,11 +53,11 @@ public class CyrusVirtualUtil {
 		return getPersistence().findByPrimaryKey(emailAddress);
 	}
 
-	public static List findByUserId(String userId) throws SystemException {
+	public static List findByUserId(long userId) throws SystemException {
 		return getPersistence().findByUserId(userId);
 	}
 
-	public static void removeByUserId(String userId) throws SystemException {
+	public static void removeByUserId(long userId) throws SystemException {
 		getPersistence().removeByUserId(userId);
 	}
 

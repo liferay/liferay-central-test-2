@@ -39,7 +39,7 @@ import org.hibernate.Session;
  */
 public class CyrusUserPersistence extends BasePersistence {
 
-	public void remove(String userId)
+	public void remove(long userId)
 		throws NoSuchCyrusUserException, SystemException {
 
 		Session session = null;
@@ -47,7 +47,8 @@ public class CyrusUserPersistence extends BasePersistence {
 		try {
 			session = getSessionFactory().openSession();
 
-			CyrusUser user = (CyrusUser)session.load(CyrusUser.class, userId);
+			CyrusUser user = (CyrusUser)session.load(
+				CyrusUser.class, new Long(userId));
 
 			session.delete(user);
 
@@ -72,7 +73,7 @@ public class CyrusUserPersistence extends BasePersistence {
 
 			try {
 				CyrusUser userModel = (CyrusUser)session.load(
-					CyrusUser.class, user.getUserId());
+					CyrusUser.class, new Long(user.getUserId()));
 
 				userModel.setPassword(user.getPassword());
 
@@ -95,7 +96,7 @@ public class CyrusUserPersistence extends BasePersistence {
 		}
 	}
 
-	public CyrusUser findByPrimaryKey(String userId)
+	public CyrusUser findByPrimaryKey(long userId)
 		throws NoSuchCyrusUserException, SystemException {
 
 		Session session = null;
@@ -103,7 +104,8 @@ public class CyrusUserPersistence extends BasePersistence {
 		try {
 			session = getSessionFactory().openSession();
 
-			return (CyrusUser)session.load(CyrusUser.class, userId);
+			return (CyrusUser)session.load(
+				CyrusUser.class, new Long(userId));
 		}
 		catch (ObjectNotFoundException onfe) {
 			throw new NoSuchCyrusUserException();

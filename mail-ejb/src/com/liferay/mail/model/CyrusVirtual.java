@@ -35,7 +35,7 @@ public class CyrusVirtual implements Serializable {
 	public CyrusVirtual() {
 	}
 
-	public CyrusVirtual(String emailAddress, String userId) {
+	public CyrusVirtual(String emailAddress, long userId) {
 		_emailAddress = emailAddress;
 		_userId = userId;
 	}
@@ -48,15 +48,15 @@ public class CyrusVirtual implements Serializable {
 		_emailAddress = emailAddress;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
 	private String _emailAddress;
-	private String _userId;
+	private long _userId;
 
 }

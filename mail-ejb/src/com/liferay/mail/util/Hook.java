@@ -33,23 +33,23 @@ import java.util.List;
 public interface Hook {
 
 	public void addForward(
-		String userId, List filters, List emailAddresses, boolean leaveCopy);
+		long userId, List filters, List emailAddresses, boolean leaveCopy);
 
 	public void addUser(
-		String userId, String password, String firstName, String middleName,
+		long userId, String password, String firstName, String middleName,
 		String lastName, String emailAddress);
 
 	public void addVacationMessage(
-		String userId, String emailAddress, String vacationMessage);
+		long userId, String emailAddress, String vacationMessage);
 
-	public void deleteEmailAddress(String userId);
+	public void deleteEmailAddress(long userId);
 
-	public void deleteUser(String userId);
+	public void deleteUser(long userId);
 
-	public void updateBlocked(String userId, List blocked);
+	public void updateBlocked(long userId, List blocked);
 
-	public void updateEmailAddress(String userId, String emailAddress);
+	public void updateEmailAddress(long userId, String emailAddress);
 
-	public void updatePassword(String userId, String password);
+	public void updatePassword(long userId, String password);
 
 }

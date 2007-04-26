@@ -73,7 +73,7 @@ public class LockPool {
 		return locksByCompanyId;
 	}
 
-	public static Set getLocksByUserId(String userId) {
+	public static Set getLocksByUserId(long userId) {
 		Set locksByUserId = _instance._getLocksByUserId(userId);
 
 		Iterator itr = locksByUserId.iterator();
@@ -95,7 +95,7 @@ public class LockPool {
 	}
 
 	public static boolean hasLock(
-		String className, Comparable pk, String userId) {
+		String className, Comparable pk, long userId) {
 
 		return _instance._hasLock(className, pk, userId);
 	}
@@ -105,7 +105,7 @@ public class LockPool {
 	}
 
 	public static void lock(
-			String className, Comparable pk, String companyId, String userId,
+			String className, Comparable pk, String companyId, long userId,
 			long expirationTime)
 		throws DuplicateLockException {
 
@@ -152,6 +152,7 @@ public class LockPool {
 
 		if (locksByPK == null) {
 			locksByPK =	CollectionFactory.getSyncHashMap();
+
 			_locksByClassName.put(className, locksByPK);
 		}
 
@@ -163,28 +164,32 @@ public class LockPool {
 
 		if (set == null) {
 			set = Collections.synchronizedSet(new TreeSet());
+
 			_locksByCompanyId.put(companyId, set);
 		}
 
 		return set;
 	}
 
-	private Set _getLocksByUserId(String userId) {
-		Set set = (Set)_locksByUserId.get(userId);
+	private Set _getLocksByUserId(long userId) {
+		Long userIdObj = new Long(userId);
+
+		Set set = (Set)_locksByUserId.get(userIdObj);
 
 		if (set == null) {
 			set = Collections.synchronizedSet(new TreeSet());
-			_locksByUserId.put(userId, set);
+
+			_locksByUserId.put(userIdObj, set);
 		}
 
 		return set;
 	}
 
-	private boolean _hasLock(String className, Comparable pk, String userId) {
+	private boolean _hasLock(String className, Comparable pk, long userId) {
 		try {
 			Lock lock = _getLock(className, pk);
 
-			if (lock.getUserId().equals(userId)) {
+			if (lock.getUserId() == userId) {
 				return true;
 			}
 		}
@@ -211,7 +216,7 @@ public class LockPool {
 	}
 
 	private void _lock(
-			String className, Comparable pk, String companyId, String userId,
+			String className, Comparable pk, String companyId, long userId,
 			long expirationTime)
 		throws DuplicateLockException {
 
@@ -224,7 +229,7 @@ public class LockPool {
 
 			lock = null;
 		}
-		else if (lock != null && !lock.getUserId().equals(userId)) {
+		else if ((lock != null) && (lock.getUserId() != userId)) {
 			throw new DuplicateLockException(lock);
 		}
 
@@ -233,6 +238,7 @@ public class LockPool {
 				className, pk, companyId, userId, expirationTime);
 
 			locksByPK.put(pk, lock);
+
 			_getLocksByCompanyId(companyId).add(lock);
 			_getLocksByUserId(userId).add(lock);
 		}

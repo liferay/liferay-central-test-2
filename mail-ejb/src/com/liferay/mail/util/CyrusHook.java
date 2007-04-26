@@ -51,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
 public class CyrusHook implements Hook {
 
 	public void addForward(
-		String userId, List filters, List emailAddresses, boolean leaveCopy) {
+		long userId, List filters, List emailAddresses, boolean leaveCopy) {
 
 		try {
 			if (emailAddresses != null) {
@@ -110,7 +110,7 @@ public class CyrusHook implements Hook {
 	}
 
 	public void addUser(
-		String userId, String password, String firstName, String middleName,
+		long userId, String password, String firstName, String middleName,
 		String lastName, String emailAddress) {
 
 		try {
@@ -132,7 +132,8 @@ public class CyrusHook implements Hook {
 			String addUserCmd =
 				PropsUtil.get(PropsUtil.MAIL_HOOK_CYRUS_ADD_USER);
 
-			addUserCmd = StringUtil.replace(addUserCmd, "%1%", userId);
+			addUserCmd = StringUtil.replace(
+				addUserCmd, "%1%", String.valueOf(userId));
 
 			Runtime rt = Runtime.getRuntime();
 
@@ -146,7 +147,7 @@ public class CyrusHook implements Hook {
 	}
 
 	public void addVacationMessage(
-		String userId, String emailAddress, String vacationMessage) {
+		long userId, String emailAddress, String vacationMessage) {
 
 		try {
 			String home = PropsUtil.get(PropsUtil.MAIL_HOOK_CYRUS_HOME);
@@ -171,7 +172,7 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	public void deleteEmailAddress(String userId) {
+	public void deleteEmailAddress(long userId) {
 		try {
 			CyrusVirtualUtil.removeByUserId(userId);
 		}
@@ -180,7 +181,7 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	public void deleteUser(String userId) {
+	public void deleteUser(long userId) {
 		try {
 
 			// User
@@ -200,7 +201,8 @@ public class CyrusHook implements Hook {
 			String deleteUserCmd =
 				PropsUtil.get(PropsUtil.MAIL_HOOK_CYRUS_DELETE_USER);
 
-			deleteUserCmd = StringUtil.replace(deleteUserCmd, "%1%", userId);
+			deleteUserCmd = StringUtil.replace(
+				deleteUserCmd, "%1%", String.valueOf(userId));
 
 			Runtime rt = Runtime.getRuntime();
 
@@ -241,7 +243,7 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	public void updateBlocked(String userId, List blocked) {
+	public void updateBlocked(long userId, List blocked) {
 		String home = PropsUtil.get(PropsUtil.MAIL_HOOK_CYRUS_HOME);
 
 		File file = new File(home + "/" + userId + ".procmail.blocked");
@@ -274,7 +276,7 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	public void updateEmailAddress(String userId, String emailAddress) {
+	public void updateEmailAddress(long userId, String emailAddress) {
 		try {
 			CyrusVirtualUtil.removeByUserId(userId);
 
@@ -287,7 +289,7 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	public void updatePassword(String userId, String password) {
+	public void updatePassword(long userId, String password) {
 		CyrusUser user = null;
 
 		try {
