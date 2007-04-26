@@ -131,11 +131,11 @@ public class MBThreadSoap implements Serializable {
 		_viewCount = viewCount;
 	}
 
-	public String getLastPostByUserId() {
+	public long getLastPostByUserId() {
 		return _lastPostByUserId;
 	}
 
-	public void setLastPostByUserId(String lastPostByUserId) {
+	public void setLastPostByUserId(long lastPostByUserId) {
 		_lastPostByUserId = lastPostByUserId;
 	}
 
@@ -161,7 +161,7 @@ public class MBThreadSoap implements Serializable {
 	private String _rootMessageId;
 	private int _messageCount;
 	private int _viewCount;
-	private String _lastPostByUserId;
+	private long _lastPostByUserId;
 	private Date _lastPostDate;
 	private double _priority;
 }

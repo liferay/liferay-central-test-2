@@ -66,14 +66,14 @@ public class UserIdMapperLocalServiceUtil {
 			end);
 	}
 
-	public static void deleteUserIdMappers(java.lang.String userId)
+	public static void deleteUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 		userIdMapperLocalService.deleteUserIdMappers(userId);
 	}
 
 	public static com.liferay.portal.model.UserIdMapper getUserIdMapper(
-		java.lang.String userId, java.lang.String type)
+		long userId, java.lang.String type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
@@ -81,7 +81,7 @@ public class UserIdMapperLocalServiceUtil {
 		return userIdMapperLocalService.getUserIdMapper(userId, type);
 	}
 
-	public static java.util.List getUserIdMappers(java.lang.String userId)
+	public static java.util.List getUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 
@@ -89,8 +89,8 @@ public class UserIdMapperLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.UserIdMapper updateUserIdMapper(
-		java.lang.String userId, java.lang.String type,
-		java.lang.String description, java.lang.String externalUserId)
+		long userId, java.lang.String type, java.lang.String description,
+		java.lang.String externalUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();

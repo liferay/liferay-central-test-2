@@ -34,24 +34,24 @@ import java.io.Serializable;
  *
  */
 public class UserGroupRolePK implements Comparable, Serializable {
-	public String userId;
+	public long userId;
 	public long groupId;
 	public String roleId;
 
 	public UserGroupRolePK() {
 	}
 
-	public UserGroupRolePK(String userId, long groupId, String roleId) {
+	public UserGroupRolePK(long userId, long groupId, String roleId) {
 		this.userId = userId;
 		this.groupId = groupId;
 		this.roleId = roleId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -78,7 +78,16 @@ public class UserGroupRolePK implements Comparable, Serializable {
 
 		UserGroupRolePK pk = (UserGroupRolePK)obj;
 		int value = 0;
-		value = userId.compareTo(pk.userId);
+
+		if (userId < pk.userId) {
+			value = -1;
+		}
+		else if (userId > pk.userId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -121,7 +130,7 @@ public class UserGroupRolePK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((userId.equals(pk.userId)) && (groupId == pk.groupId) &&
+		if ((userId == pk.userId) && (groupId == pk.groupId) &&
 				(roleId.equals(pk.roleId))) {
 			return true;
 		}
@@ -131,7 +140,8 @@ public class UserGroupRolePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (userId + groupId + roleId).hashCode();
+		return (String.valueOf(userId) + String.valueOf(groupId) +
+		String.valueOf(roleId)).hashCode();
 	}
 
 	public String toString() {

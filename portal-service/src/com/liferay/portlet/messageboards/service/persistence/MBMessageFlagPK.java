@@ -36,12 +36,12 @@ import java.io.Serializable;
 public class MBMessageFlagPK implements Comparable, Serializable {
 	public String topicId;
 	public String messageId;
-	public String userId;
+	public long userId;
 
 	public MBMessageFlagPK() {
 	}
 
-	public MBMessageFlagPK(String topicId, String messageId, String userId) {
+	public MBMessageFlagPK(String topicId, String messageId, long userId) {
 		this.topicId = topicId;
 		this.messageId = messageId;
 		this.userId = userId;
@@ -63,11 +63,11 @@ public class MBMessageFlagPK implements Comparable, Serializable {
 		this.messageId = messageId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -90,7 +90,15 @@ public class MBMessageFlagPK implements Comparable, Serializable {
 			return value;
 		}
 
-		value = userId.compareTo(pk.userId);
+		if (userId < pk.userId) {
+			value = -1;
+		}
+		else if (userId > pk.userId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -114,7 +122,7 @@ public class MBMessageFlagPK implements Comparable, Serializable {
 		}
 
 		if ((topicId.equals(pk.topicId)) && (messageId.equals(pk.messageId)) &&
-				(userId.equals(pk.userId))) {
+				(userId == pk.userId)) {
 			return true;
 		}
 		else {
@@ -123,7 +131,8 @@ public class MBMessageFlagPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (topicId + messageId + userId).hashCode();
+		return (String.valueOf(topicId) + String.valueOf(messageId) +
+		String.valueOf(userId)).hashCode();
 	}
 
 	public String toString() {

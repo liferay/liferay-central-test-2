@@ -66,8 +66,7 @@ public class MBBanLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String banUserId)
+		long userId, java.lang.String plid, long banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
@@ -75,31 +74,30 @@ public class MBBanLocalServiceUtil {
 		return mbBanLocalService.addBan(userId, plid, banUserId);
 	}
 
-	public static void checkBan(long groupId, java.lang.String banUserId)
+	public static void checkBan(long groupId, long banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 		mbBanLocalService.checkBan(groupId, banUserId);
 	}
 
-	public static void deleteBan(java.lang.String plid,
-		java.lang.String banUserId)
+	public static void deleteBan(java.lang.String plid, long banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 		mbBanLocalService.deleteBan(plid, banUserId);
 	}
 
-	public static void deleteBans(long groupId)
+	public static void deleteBansByBanUserId(long banUserId)
 		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-		mbBanLocalService.deleteBans(groupId);
+		mbBanLocalService.deleteBansByBanUserId(banUserId);
 	}
 
-	public static void deleteBans(java.lang.String banUserId)
+	public static void deleteBansByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-		mbBanLocalService.deleteBans(banUserId);
+		mbBanLocalService.deleteBansByGroupId(groupId);
 	}
 
 	public static void expireBans() throws com.liferay.portal.SystemException {
@@ -121,7 +119,7 @@ public class MBBanLocalServiceUtil {
 		return mbBanLocalService.getBansCount(groupId);
 	}
 
-	public static boolean hasBan(long groupId, java.lang.String banUserId)
+	public static boolean hasBan(long groupId, long banUserId)
 		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 

@@ -106,7 +106,7 @@ public class LayoutPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (layoutId + ownerId).hashCode();
+		return (String.valueOf(layoutId) + String.valueOf(ownerId)).hashCode();
 	}
 
 	public String toString() {

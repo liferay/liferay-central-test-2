@@ -107,7 +107,7 @@ public class PortletPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (portletId + companyId).hashCode();
+		return (String.valueOf(portletId) + String.valueOf(companyId)).hashCode();
 	}
 
 	public String toString() {

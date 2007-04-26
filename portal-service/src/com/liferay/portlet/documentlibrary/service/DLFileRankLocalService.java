@@ -57,17 +57,17 @@ public interface DLFileRankLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void deleteFileRanks(java.lang.String userId)
+	public void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException;
 
 	public void deleteFileRanks(java.lang.String folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getFileRanks(long groupId, java.lang.String userId)
+	public java.util.List getFileRanks(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
-		long groupId, java.lang.String companyId, java.lang.String userId,
+		long groupId, java.lang.String companyId, long userId,
 		java.lang.String folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

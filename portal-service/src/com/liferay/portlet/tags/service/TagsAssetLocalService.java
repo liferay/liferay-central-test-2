@@ -85,9 +85,9 @@ public interface TagsAssetLocalService {
 	public int getAssetsCount(long[] entryIds, long[] notEntryIds,
 		boolean andOperator) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.model.TagsAsset updateAsset(
-		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK, java.lang.String[] entryNames)
+	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
+		java.lang.String className, java.lang.String classPK,
+		java.lang.String[] entryNames)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

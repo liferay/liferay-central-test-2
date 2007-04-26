@@ -73,9 +73,9 @@ public class UserGroupLocalServiceUtil {
 		userGroupLocalService.addGroupUserGroups(groupId, userGroupIds);
 	}
 
-	public static com.liferay.portal.model.UserGroup addUserGroup(
-		java.lang.String userId, java.lang.String companyId,
-		java.lang.String name, java.lang.String description)
+	public static com.liferay.portal.model.UserGroup addUserGroup(long userId,
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
@@ -109,7 +109,7 @@ public class UserGroupLocalServiceUtil {
 		return userGroupLocalService.getUserGroup(companyId, name);
 	}
 
-	public static java.util.List getUserUserGroups(java.lang.String userId)
+	public static java.util.List getUserUserGroups(long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();

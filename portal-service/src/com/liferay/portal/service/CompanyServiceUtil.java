@@ -66,13 +66,11 @@ public class CompanyServiceUtil {
 	}
 
 	public static void updateDisplay(java.lang.String companyId,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String resolution)
+		java.lang.String languageId, java.lang.String timeZoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CompanyService companyService = CompanyServiceFactory.getService();
-		companyService.updateDisplay(companyId, languageId, timeZoneId,
-			resolution);
+		companyService.updateDisplay(companyId, languageId, timeZoneId);
 	}
 
 	public static void updateLogo(java.lang.String companyId, java.io.File file)

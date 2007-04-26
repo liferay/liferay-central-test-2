@@ -50,9 +50,9 @@ public interface UserIdMapperModel extends BaseModel {
 
 	public void setPrimaryKey(UserIdMapperPK pk);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public String getType();
 

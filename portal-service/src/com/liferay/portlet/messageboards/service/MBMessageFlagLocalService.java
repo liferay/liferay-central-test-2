@@ -57,12 +57,12 @@ public interface MBMessageFlagLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void addReadFlags(java.util.List messages, java.lang.String userId)
+	public void addReadFlags(java.util.List messages, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteFlags(java.lang.String userId)
+	public void deleteFlags(long userId)
 		throws com.liferay.portal.SystemException;
 
-	public boolean hasReadFlag(java.lang.String messageId,
-		java.lang.String userId) throws com.liferay.portal.SystemException;
+	public boolean hasReadFlag(java.lang.String messageId, long userId)
+		throws com.liferay.portal.SystemException;
 }

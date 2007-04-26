@@ -66,10 +66,9 @@ public class LayoutLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Layout addLayout(long groupId,
-		java.lang.String userId, boolean privateLayout,
-		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String title, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		long userId, boolean privateLayout, java.lang.String parentLayoutId,
+		java.lang.String name, java.lang.String title, java.lang.String type,
+		boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
@@ -162,17 +161,16 @@ public class LayoutLocalServiceUtil {
 			prefsValue);
 	}
 
-	public static void importLayouts(java.lang.String userId,
-		java.lang.String ownerId, java.util.Map parameterMap, java.io.File file)
+	public static void importLayouts(long userId, java.lang.String ownerId,
+		java.util.Map parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 		layoutLocalService.importLayouts(userId, ownerId, parameterMap, file);
 	}
 
-	public static void importLayouts(java.lang.String userId,
-		java.lang.String ownerId, java.util.Map parameterMap,
-		java.io.InputStream is)
+	public static void importLayouts(long userId, java.lang.String ownerId,
+		java.util.Map parameterMap, java.io.InputStream is)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();

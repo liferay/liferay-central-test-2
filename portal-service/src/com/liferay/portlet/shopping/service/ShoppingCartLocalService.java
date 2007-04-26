@@ -60,7 +60,7 @@ public interface ShoppingCartLocalService {
 	public void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteUserCarts(java.lang.String userId)
+	public void deleteUserCarts(long userId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCart getCart(
@@ -72,7 +72,7 @@ public interface ShoppingCartLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCart updateCart(
-		java.lang.String userId, long groupId, java.lang.String cartId,
+		long userId, long groupId, java.lang.String cartId,
 		java.lang.String itemIds, java.lang.String couponIds, int altShipping,
 		boolean insure)
 		throws com.liferay.portal.SystemException, 

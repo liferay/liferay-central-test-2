@@ -67,7 +67,7 @@ public interface UserGroupService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.util.List getUserUserGroups(java.lang.String userId)
+	public java.util.List getUserUserGroups(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

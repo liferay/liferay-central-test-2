@@ -106,11 +106,11 @@ public class MBBanSoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -138,20 +138,20 @@ public class MBBanSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getBanUserId() {
+	public long getBanUserId() {
 		return _banUserId;
 	}
 
-	public void setBanUserId(String banUserId) {
+	public void setBanUserId(long banUserId) {
 		_banUserId = banUserId;
 	}
 
 	private long _banId;
 	private long _groupId;
 	private String _companyId;
-	private String _userId;
+	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _banUserId;
+	private long _banUserId;
 }

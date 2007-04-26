@@ -106,7 +106,7 @@ public class IGImagePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (companyId + imageId).hashCode();
+		return (String.valueOf(companyId) + String.valueOf(imageId)).hashCode();
 	}
 
 	public String toString() {

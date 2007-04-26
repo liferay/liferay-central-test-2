@@ -45,16 +45,16 @@ public interface LockService {
 	public Set getLocksByCompanyId(String companyId)
 		throws RemoteException;
 
-	public Set getLocksByUserId(String userId) throws RemoteException;
+	public Set getLocksByUserId(long userId) throws RemoteException;
 
-	public boolean hasLock(String className, Comparable pk, String userId)
+	public boolean hasLock(String className, Comparable pk, long userId)
 		throws RemoteException;
 
 	public boolean isLocked(String className, Comparable pk)
 		throws RemoteException;
 
 	public void lock(
-			String className, Comparable pk, String companyId, String userId,
+			String className, Comparable pk, String companyId, long userId,
 			long expirationTime)
 		throws PortalException, RemoteException;
 

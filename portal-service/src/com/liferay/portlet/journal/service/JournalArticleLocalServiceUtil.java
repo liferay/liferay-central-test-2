@@ -67,8 +67,8 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String userId, java.lang.String articleId,
-		boolean autoArticleId, java.lang.String plid, java.lang.String title,
+		long userId, java.lang.String articleId, boolean autoArticleId,
+		java.lang.String plid, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -96,8 +96,8 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String userId, java.lang.String articleId,
-		boolean autoArticleId, java.lang.String plid, java.lang.String title,
+		long userId, java.lang.String articleId, boolean autoArticleId,
+		java.lang.String plid, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -126,8 +126,8 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String userId, java.lang.String articleId,
-		boolean autoArticleId, java.lang.String plid, java.lang.String title,
+		long userId, java.lang.String articleId, boolean autoArticleId,
+		java.lang.String plid, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -201,9 +201,8 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle approveArticle(
-		java.lang.String userId, long groupId, java.lang.String articleId,
-		double version, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs)
+		long userId, long groupId, java.lang.String articleId, double version,
+		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
@@ -535,8 +534,8 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
-		java.lang.String userId, long groupId, java.lang.String articleId,
-		double version, boolean incrementVersion, java.lang.String title,
+		long userId, long groupId, java.lang.String articleId, double version,
+		boolean incrementVersion, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,

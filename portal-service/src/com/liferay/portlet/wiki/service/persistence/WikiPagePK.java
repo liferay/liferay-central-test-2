@@ -131,7 +131,8 @@ public class WikiPagePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (nodeId + title + version).hashCode();
+		return (String.valueOf(nodeId) + String.valueOf(title) +
+		String.valueOf(version)).hashCode();
 	}
 
 	public String toString() {

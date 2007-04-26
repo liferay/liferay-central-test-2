@@ -67,7 +67,7 @@ public class SCProductEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
-		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		long userId, java.lang.String plid, java.lang.String name,
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
@@ -84,7 +84,7 @@ public class SCProductEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
-		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		long userId, java.lang.String plid, java.lang.String name,
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
@@ -102,7 +102,7 @@ public class SCProductEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
-		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		long userId, java.lang.String plid, java.lang.String name,
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
@@ -203,9 +203,8 @@ public class SCProductEntryLocalServiceUtil {
 		return scProductEntryLocalService.getProductEntries(groupId, begin, end);
 	}
 
-	public static java.util.List getProductEntries(long groupId,
-		java.lang.String userId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List getProductEntries(long groupId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
 		return scProductEntryLocalService.getProductEntries(groupId, userId,
@@ -219,8 +218,8 @@ public class SCProductEntryLocalServiceUtil {
 		return scProductEntryLocalService.getProductEntriesCount(groupId);
 	}
 
-	public static int getProductEntriesCount(long groupId,
-		java.lang.String userId) throws com.liferay.portal.SystemException {
+	public static int getProductEntriesCount(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
 		return scProductEntryLocalService.getProductEntriesCount(groupId, userId);

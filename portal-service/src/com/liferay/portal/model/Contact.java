@@ -48,11 +48,5 @@ package com.liferay.portal.model;
  *
  */
 public interface Contact extends ContactModel {
-	public boolean isDefaultUser();
-
-	public void setCompanyId(java.lang.String companyId);
-
-	public java.lang.String getActualCompanyId();
-
 	public java.lang.String getFullName();
 }

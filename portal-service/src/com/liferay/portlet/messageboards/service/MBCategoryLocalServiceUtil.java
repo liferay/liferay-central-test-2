@@ -66,10 +66,9 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
@@ -80,9 +79,9 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
+		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -94,9 +93,8 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description,
+		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -250,7 +248,7 @@ public class MBCategoryLocalServiceUtil {
 			parentCategoryId, name, description, mergeWithParentCategory);
 	}
 
-	public static void subscribeCategory(java.lang.String userId,
+	public static void subscribeCategory(long userId,
 		java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -258,7 +256,7 @@ public class MBCategoryLocalServiceUtil {
 		mbCategoryLocalService.subscribeCategory(userId, categoryId);
 	}
 
-	public static void unsubscribeCategory(java.lang.String userId,
+	public static void unsubscribeCategory(long userId,
 		java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

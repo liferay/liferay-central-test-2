@@ -60,11 +60,11 @@ public interface MBStatsUserLocalService {
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteStatsUserByUserId(java.lang.String userId)
+	public void deleteStatsUserByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
-		long groupId, java.lang.String userId)
+		long groupId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -74,7 +74,7 @@ public interface MBStatsUserLocalService {
 	public int getStatsUsersCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void updateStatsUser(long groupId, java.lang.String userId)
+	public void updateStatsUser(long groupId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

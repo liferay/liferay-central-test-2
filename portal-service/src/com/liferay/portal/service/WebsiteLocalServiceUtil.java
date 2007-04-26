@@ -65,10 +65,9 @@ public class WebsiteLocalServiceUtil {
 		return websiteLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static com.liferay.portal.model.Website addWebsite(
-		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK, java.lang.String url, int typeId,
-		boolean primary)
+	public static com.liferay.portal.model.Website addWebsite(long userId,
+		java.lang.String className, java.lang.String classPK,
+		java.lang.String url, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();

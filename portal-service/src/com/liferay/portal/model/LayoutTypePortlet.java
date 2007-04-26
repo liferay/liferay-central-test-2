@@ -38,10 +38,10 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public String getLayoutTemplateId();
 
-	public void setLayoutTemplateId(String userId, String newLayoutTemplateId);
+	public void setLayoutTemplateId(long userId, String newLayoutTemplateId);
 
 	public void setLayoutTemplateId(
-		String userId, String newLayoutTemplateId, boolean checkPermission);
+		long userId, String newLayoutTemplateId, boolean checkPermission);
 
 	public int getNumOfColumns();
 
@@ -51,23 +51,23 @@ public interface LayoutTypePortlet extends LayoutType {
 			List portlets, List startPortlets, List endPortlets)
 		throws SystemException;
 
-	public String addPortletId(String userId, String portletId);
+	public String addPortletId(long userId, String portletId);
 
 	public String addPortletId(
-		String userId, String portletId, boolean checkPermission);
+		long userId, String portletId, boolean checkPermission);
 
 	public String addPortletId(
-		String userId, String portletId, String columnId, int columnPos);
+		long userId, String portletId, String columnId, int columnPos);
 
 	public String addPortletId(
-		String userId, String portletId, String columnId, int columnPos,
+		long userId, String portletId, String columnId, int columnPos,
 		boolean checkPermission);
 
 	public void addPortletIds(
-		String userId, String[] portletIds, boolean checkPermission);
+		long userId, String[] portletIds, boolean checkPermission);
 
 	public void addPortletIds(
-		String userId, String[] portletIds, String columnId,
+		long userId, String[] portletIds, String columnId,
 		boolean checkPermission);
 
 	public List getPortlets() throws SystemException;
@@ -77,7 +77,7 @@ public interface LayoutTypePortlet extends LayoutType {
 	public boolean hasPortletId(String portletId);
 
 	public void movePortletId(
-		String userId, String portletId, String columnId, int columnPos);
+		long userId, String portletId, String columnId, int columnPos);
 
 	public void removePortletId(String portletId);
 

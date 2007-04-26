@@ -72,7 +72,7 @@ public class ShoppingCartLocalServiceUtil {
 		shoppingCartLocalService.deleteGroupCarts(groupId);
 	}
 
-	public static void deleteUserCarts(java.lang.String userId)
+	public static void deleteUserCarts(long userId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
 		shoppingCartLocalService.deleteUserCarts(userId);
@@ -95,7 +95,7 @@ public class ShoppingCartLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart updateCart(
-		java.lang.String userId, long groupId, java.lang.String cartId,
+		long userId, long groupId, java.lang.String cartId,
 		java.lang.String itemIds, java.lang.String couponIds, int altShipping,
 		boolean insure)
 		throws com.liferay.portal.PortalException, 

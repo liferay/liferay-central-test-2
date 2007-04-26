@@ -50,9 +50,9 @@ public interface UserGroupRoleModel extends BaseModel {
 
 	public void setPrimaryKey(UserGroupRolePK pk);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public long getGroupId();
 

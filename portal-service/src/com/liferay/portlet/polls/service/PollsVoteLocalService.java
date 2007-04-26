@@ -57,14 +57,13 @@ public interface PollsVoteLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.polls.model.PollsVote addVote(
-		java.lang.String userId, java.lang.String questionId,
-		java.lang.String choiceId)
+	public com.liferay.portlet.polls.model.PollsVote addVote(long userId,
+		java.lang.String questionId, java.lang.String choiceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.polls.model.PollsVote getVote(
-		java.lang.String questionId, java.lang.String userId)
+		java.lang.String questionId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

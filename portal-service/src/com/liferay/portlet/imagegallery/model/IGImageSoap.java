@@ -103,11 +103,11 @@ public class IGImageSoap implements Serializable {
 		_imageId = imageId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -169,7 +169,7 @@ public class IGImageSoap implements Serializable {
 
 	private String _companyId;
 	private String _imageId;
-	private String _userId;
+	private long _userId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _folderId;

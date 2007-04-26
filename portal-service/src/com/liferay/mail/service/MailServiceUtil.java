@@ -38,7 +38,7 @@ import java.util.List;
 public class MailServiceUtil {
 
 	public static void addForward(
-			String userId, List filters, List emailAddresses, boolean leaveCopy)
+			long userId, List filters, List emailAddresses, boolean leaveCopy)
 		throws RemoteException, SystemException {
 
 		MailService mailService = MailServiceFactory.getService();
@@ -47,7 +47,7 @@ public class MailServiceUtil {
 	}
 
 	public static void addUser(
-			String userId, String password, String firstName, String middleName,
+			long userId, String password, String firstName, String middleName,
 			String lastName, String emailAddress)
 		throws RemoteException, SystemException {
 
@@ -58,7 +58,7 @@ public class MailServiceUtil {
 	}
 
 	public static void addVacationMessage(
-			String userId, String emailAddress, String vacationMessage)
+			long userId, String emailAddress, String vacationMessage)
 		throws RemoteException, SystemException {
 
 		MailService mailService = MailServiceFactory.getService();
@@ -66,7 +66,7 @@ public class MailServiceUtil {
 		mailService.addVacationMessage(userId, emailAddress, vacationMessage);
 	}
 
-	public static void deleteEmailAddress(String userId)
+	public static void deleteEmailAddress(long userId)
 		throws RemoteException, SystemException {
 
 		MailService mailService = MailServiceFactory.getService();
@@ -74,7 +74,7 @@ public class MailServiceUtil {
 		mailService.deleteEmailAddress(userId);
 	}
 
-	public static void deleteUser(String userId)
+	public static void deleteUser(long userId)
 		throws RemoteException, SystemException {
 
 		MailService mailService = MailServiceFactory.getService();
@@ -90,7 +90,7 @@ public class MailServiceUtil {
 		mailService.sendEmail(mailMessage);
 	}
 
-	public static void updateBlocked(String userId, List blocked)
+	public static void updateBlocked(long userId, List blocked)
 		throws RemoteException, SystemException {
 
 		MailService mailService = MailServiceFactory.getService();
@@ -98,7 +98,7 @@ public class MailServiceUtil {
 		mailService.updateBlocked(userId, blocked);
 	}
 
-	public static void updateEmailAddress(String userId, String emailAddress)
+	public static void updateEmailAddress(long userId, String emailAddress)
 		throws RemoteException, SystemException {
 
 		MailService mailService = MailServiceFactory.getService();
@@ -106,7 +106,7 @@ public class MailServiceUtil {
 		mailService.updateEmailAddress(userId, emailAddress);
 	}
 
-	public static void updatePassword(String userId, String password)
+	public static void updatePassword(long userId, String password)
 		throws RemoteException, SystemException {
 
 		MailService mailService = MailServiceFactory.getService();

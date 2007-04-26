@@ -59,7 +59,6 @@ public class ContactSoap implements Serializable {
 		soapModel.setFirstName(model.getFirstName());
 		soapModel.setMiddleName(model.getMiddleName());
 		soapModel.setLastName(model.getLastName());
-		soapModel.setNickName(model.getNickName());
 		soapModel.setPrefixId(model.getPrefixId());
 		soapModel.setSuffixId(model.getSuffixId());
 		soapModel.setMale(model.getMale());
@@ -118,11 +117,11 @@ public class ContactSoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -188,14 +187,6 @@ public class ContactSoap implements Serializable {
 
 	public void setLastName(String lastName) {
 		_lastName = lastName;
-	}
-
-	public String getNickName() {
-		return _nickName;
-	}
-
-	public void setNickName(String nickName) {
-		_nickName = nickName;
 	}
 
 	public int getPrefixId() {
@@ -332,7 +323,7 @@ public class ContactSoap implements Serializable {
 
 	private long _contactId;
 	private String _companyId;
-	private String _userId;
+	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
@@ -341,7 +332,6 @@ public class ContactSoap implements Serializable {
 	private String _firstName;
 	private String _middleName;
 	private String _lastName;
-	private String _nickName;
 	private int _prefixId;
 	private int _suffixId;
 	private boolean _male;

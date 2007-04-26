@@ -80,11 +80,11 @@ public class UserIdMapperSoap implements Serializable {
 		setType(pk.type);
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -112,7 +112,7 @@ public class UserIdMapperSoap implements Serializable {
 		_externalUserId = externalUserId;
 	}
 
-	private String _userId;
+	private long _userId;
 	private String _type;
 	private String _description;
 	private String _externalUserId;

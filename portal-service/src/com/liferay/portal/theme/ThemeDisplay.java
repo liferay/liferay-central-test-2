@@ -105,7 +105,7 @@ public class ThemeDisplay implements Serializable {
 		setContact(user.getContact());
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _user.getUserId();
 	}
 
@@ -117,20 +117,20 @@ public class ThemeDisplay implements Serializable {
 		_realUser = realUser;
 	}
 
-	public String getRealUserId() {
+	public long getRealUserId() {
 		return _realUser.getUserId();
 	}
 
-	public String getDoAsUserId() {
+	public long getDoAsUserId() {
 		return _doAsUserId;
 	}
 
-	public void setDoAsUserId(String doAsUserId) {
+	public void setDoAsUserId(long doAsUserId) {
 		_doAsUserId = doAsUserId;
 	}
 
 	public boolean isImpersonated() {
-		if (getUserId().equals(getRealUserId())) {
+		if (getUserId() == getRealUserId()) {
 			return false;
 		}
 		else {
@@ -293,14 +293,6 @@ public class ThemeDisplay implements Serializable {
 
 	public void setSecure(boolean secure) {
 		_secure = secure;
-	}
-
-	public int getResolution() {
-		return _resolution;
-	}
-
-	public void setResolution(int resolution) {
-		_resolution = resolution;
 	}
 
 	public boolean isStateExclusive() {
@@ -652,7 +644,7 @@ public class ThemeDisplay implements Serializable {
 		_realCompanyLogo = StringPool.BLANK;
 		_user = null;
 		_realUser = null;
-		_doAsUserId = StringPool.BLANK;
+		_doAsUserId = 0;
 		_layoutSetLogo = StringPool.BLANK;
 		_layout = null;
 		_layouts = null;
@@ -668,7 +660,6 @@ public class ThemeDisplay implements Serializable {
 		_freeformLayout = false;
 		_serverPort = 0;
 		_secure = false;
-		_resolution = 0;
 		_stateExclusive = false;
 		_statePopUp = false;
 		_pathApplet = StringPool.BLANK;
@@ -720,7 +711,7 @@ public class ThemeDisplay implements Serializable {
 	private Account _account;
 	private User _user;
 	private User _realUser;
-	private String _doAsUserId = StringPool.BLANK;
+	private long _doAsUserId = 0;
 	private Contact _contact;
 	private String _layoutSetLogo = StringPool.BLANK;
 	private Layout _layout;
@@ -737,7 +728,6 @@ public class ThemeDisplay implements Serializable {
 	private boolean _freeformLayout;
 	private int _serverPort;
 	private boolean _secure;
-	private int _resolution;
 	private boolean _stateExclusive;
 	private boolean _statePopUp;
 	private String _pathApplet = StringPool.BLANK;

@@ -35,14 +35,14 @@ import java.io.Serializable;
  */
 public class DLFileRankPK implements Comparable, Serializable {
 	public String companyId;
-	public String userId;
+	public long userId;
 	public String folderId;
 	public String name;
 
 	public DLFileRankPK() {
 	}
 
-	public DLFileRankPK(String companyId, String userId, String folderId,
+	public DLFileRankPK(String companyId, long userId, String folderId,
 		String name) {
 		this.companyId = companyId;
 		this.userId = userId;
@@ -58,11 +58,11 @@ public class DLFileRankPK implements Comparable, Serializable {
 		this.companyId = companyId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -95,7 +95,15 @@ public class DLFileRankPK implements Comparable, Serializable {
 			return value;
 		}
 
-		value = userId.compareTo(pk.userId);
+		if (userId < pk.userId) {
+			value = -1;
+		}
+		else if (userId > pk.userId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -130,7 +138,7 @@ public class DLFileRankPK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((companyId.equals(pk.companyId)) && (userId.equals(pk.userId)) &&
+		if ((companyId.equals(pk.companyId)) && (userId == pk.userId) &&
 				(folderId.equals(pk.folderId)) && (name.equals(pk.name))) {
 			return true;
 		}
@@ -140,7 +148,8 @@ public class DLFileRankPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (companyId + userId + folderId + name).hashCode();
+		return (String.valueOf(companyId) + String.valueOf(userId) +
+		String.valueOf(folderId) + String.valueOf(name)).hashCode();
 	}
 
 	public String toString() {

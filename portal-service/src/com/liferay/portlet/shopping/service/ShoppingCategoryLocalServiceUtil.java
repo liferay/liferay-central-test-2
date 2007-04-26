@@ -67,10 +67,9 @@ public class ShoppingCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
@@ -81,9 +80,9 @@ public class ShoppingCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
+		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -95,9 +94,8 @@ public class ShoppingCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description,
+		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,

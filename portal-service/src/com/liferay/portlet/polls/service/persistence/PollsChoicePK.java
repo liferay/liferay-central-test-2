@@ -107,7 +107,7 @@ public class PollsChoicePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (questionId + choiceId).hashCode();
+		return (String.valueOf(questionId) + String.valueOf(choiceId)).hashCode();
 	}
 
 	public String toString() {

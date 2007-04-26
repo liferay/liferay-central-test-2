@@ -67,9 +67,8 @@ public class EmailAddressLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
-		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK, java.lang.String address, int typeId,
-		boolean primary)
+		long userId, java.lang.String className, java.lang.String classPK,
+		java.lang.String address, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();

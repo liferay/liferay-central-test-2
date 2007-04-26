@@ -38,34 +38,34 @@ import java.util.List;
 public interface MailService {
 
 	public void addForward(
-			String userId, List filters, List emailAddresses, boolean leaveCopy)
+			long userId, List filters, List emailAddresses, boolean leaveCopy)
 		throws RemoteException, SystemException;
 
 	public void addUser(
-			String userId, String password, String firstName, String middleName,
+			long userId, String password, String firstName, String middleName,
 			String lastName, String emailAddress)
 		throws RemoteException, SystemException;
 
 	public void addVacationMessage(
-			String userId, String emailAddress, String vacationMessage)
+			long userId, String emailAddress, String vacationMessage)
 		throws RemoteException, SystemException;
 
-	public void deleteEmailAddress(String userId)
+	public void deleteEmailAddress(long userId)
 		throws RemoteException, SystemException;
 
-	public void deleteUser(String userId)
+	public void deleteUser(long userId)
 		throws RemoteException, SystemException;
 
 	public void sendEmail(MailMessage mailMessage)
 		throws RemoteException, SystemException;
 
-	public void updateBlocked(String userId, List blocked)
+	public void updateBlocked(long userId, List blocked)
 		throws RemoteException, SystemException;
 
-	public void updateEmailAddress(String userId, String emailAddress)
+	public void updateEmailAddress(long userId, String emailAddress)
 		throws RemoteException, SystemException;
 
-	public void updatePassword(String userId, String password)
+	public void updatePassword(long userId, String password)
 		throws RemoteException, SystemException;
 
 }

@@ -57,14 +57,14 @@ public interface PasswordPolicyLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.PasswordPolicy addPolicy(
-		java.lang.String userId, java.lang.String name,
-		java.lang.String description, boolean changeable,
-		boolean changeRequired, int minAge, java.lang.String storageScheme,
-		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
-		boolean history, int historyCount, boolean expireable, int maxAge,
-		int warningTime, int graceLimit, boolean lockout, int maxFailure,
-		boolean requireUnlock, int lockoutDuration, int resetFailureCount)
+	public com.liferay.portal.model.PasswordPolicy addPolicy(long userId,
+		java.lang.String name, java.lang.String description,
+		boolean changeable, boolean changeRequired, int minAge,
+		java.lang.String storageScheme, boolean checkSyntax,
+		boolean allowDictionaryWords, int minLength, boolean history,
+		int historyCount, boolean expireable, int maxAge, int warningTime,
+		int graceLimit, boolean lockout, int maxFailure, boolean requireUnlock,
+		int lockoutDuration, int resetFailureCount)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

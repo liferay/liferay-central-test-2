@@ -140,7 +140,8 @@ public class OrgGroupPermissionPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (organizationId + groupId + permissionId).hashCode();
+		return (String.valueOf(organizationId) + String.valueOf(groupId) +
+		String.valueOf(permissionId)).hashCode();
 	}
 
 	public String toString() {

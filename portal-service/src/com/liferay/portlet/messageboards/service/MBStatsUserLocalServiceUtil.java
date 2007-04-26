@@ -71,14 +71,14 @@ public class MBStatsUserLocalServiceUtil {
 		mbStatsUserLocalService.deleteStatsUserByGroupId(groupId);
 	}
 
-	public static void deleteStatsUserByUserId(java.lang.String userId)
+	public static void deleteStatsUserByUserId(long userId)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 		mbStatsUserLocalService.deleteStatsUserByUserId(userId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
-		long groupId, java.lang.String userId)
+		long groupId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
@@ -100,7 +100,7 @@ public class MBStatsUserLocalServiceUtil {
 		return mbStatsUserLocalService.getStatsUsersCount(groupId);
 	}
 
-	public static void updateStatsUser(long groupId, java.lang.String userId)
+	public static void updateStatsUser(long groupId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();

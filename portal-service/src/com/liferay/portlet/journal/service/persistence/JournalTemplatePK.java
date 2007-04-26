@@ -131,7 +131,8 @@ public class JournalTemplatePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (companyId + groupId + templateId).hashCode();
+		return (String.valueOf(companyId) + String.valueOf(groupId) +
+		String.valueOf(templateId)).hashCode();
 	}
 
 	public String toString() {

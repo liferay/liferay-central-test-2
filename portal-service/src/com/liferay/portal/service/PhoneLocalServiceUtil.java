@@ -65,10 +65,10 @@ public class PhoneLocalServiceUtil {
 		return phoneLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static com.liferay.portal.model.Phone addPhone(
-		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK, java.lang.String number,
-		java.lang.String extension, int typeId, boolean primary)
+	public static com.liferay.portal.model.Phone addPhone(long userId,
+		java.lang.String className, java.lang.String classPK,
+		java.lang.String number, java.lang.String extension, int typeId,
+		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();

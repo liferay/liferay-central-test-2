@@ -34,22 +34,22 @@ import java.io.Serializable;
  *
  */
 public class UserIdMapperPK implements Comparable, Serializable {
-	public String userId;
+	public long userId;
 	public String type;
 
 	public UserIdMapperPK() {
 	}
 
-	public UserIdMapperPK(String userId, String type) {
+	public UserIdMapperPK(long userId, String type) {
 		this.userId = userId;
 		this.type = type;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -68,7 +68,16 @@ public class UserIdMapperPK implements Comparable, Serializable {
 
 		UserIdMapperPK pk = (UserIdMapperPK)obj;
 		int value = 0;
-		value = userId.compareTo(pk.userId);
+
+		if (userId < pk.userId) {
+			value = -1;
+		}
+		else if (userId > pk.userId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -97,7 +106,7 @@ public class UserIdMapperPK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((userId.equals(pk.userId)) && (type.equals(pk.type))) {
+		if ((userId == pk.userId) && (type.equals(pk.type))) {
 			return true;
 		}
 		else {
@@ -106,7 +115,7 @@ public class UserIdMapperPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (userId + type).hashCode();
+		return (String.valueOf(userId) + String.valueOf(type)).hashCode();
 	}
 
 	public String toString() {

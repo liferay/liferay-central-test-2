@@ -65,17 +65,17 @@ public interface DLFileEntryModel extends BaseModel {
 
 	public void setCompanyId(String companyId);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public String getUserName();
 
 	public void setUserName(String userName);
 
-	public String getVersionUserId();
+	public long getVersionUserId();
 
-	public void setVersionUserId(String versionUserId);
+	public void setVersionUserId(long versionUserId);
 
 	public String getVersionUserName();
 

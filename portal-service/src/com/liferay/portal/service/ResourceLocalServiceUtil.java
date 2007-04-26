@@ -66,8 +66,8 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static void addModelResources(java.lang.String companyId,
-		long groupId, java.lang.String userId, java.lang.String name,
-		long primKey, java.lang.String[] communityPermissions,
+		long groupId, long userId, java.lang.String name, long primKey,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -77,7 +77,7 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static void addModelResources(java.lang.String companyId,
-		long groupId, java.lang.String userId, java.lang.String name,
+		long groupId, long userId, java.lang.String name,
 		java.lang.String primKey, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -107,7 +107,7 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static void addResources(java.lang.String companyId, long groupId,
-		java.lang.String userId, java.lang.String name, long primKey,
+		long userId, java.lang.String name, long primKey,
 		boolean portletActions, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -119,9 +119,9 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static void addResources(java.lang.String companyId, long groupId,
-		java.lang.String userId, java.lang.String name,
-		java.lang.String primKey, boolean portletActions,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long userId, java.lang.String name, java.lang.String primKey,
+		boolean portletActions, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();

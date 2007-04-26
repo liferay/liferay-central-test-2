@@ -57,27 +57,27 @@ public interface UserGroupRoleLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void addUserGroupRoles(java.lang.String userId, long groupId,
+	public void addUserGroupRoles(long userId, long groupId,
 		java.lang.String[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addUserGroupRoles(java.lang.String[] userIds, long groupId,
+	public void addUserGroupRoles(long[] userIds, long groupId,
 		java.lang.String roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteUserGroupRoles(java.lang.String userId, long groupId,
+	public void deleteUserGroupRoles(long userId, long groupId,
 		java.lang.String[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteUserGroupRoles(java.lang.String[] userIds, long groupId,
+	public void deleteUserGroupRoles(long[] userIds, long groupId,
 		java.lang.String roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteUserGroupRoles(java.lang.String[] userIds, long groupId)
+	public void deleteUserGroupRoles(long[] userIds, long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public void deleteUserGroupRolesByGroupId(long groupId)
@@ -86,15 +86,14 @@ public interface UserGroupRoleLocalService {
 	public void deleteUserGroupRolesByRoleId(java.lang.String roleId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteUserGroupRolesByUserId(java.lang.String userId)
+	public void deleteUserGroupRolesByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getUserGroupRoles(java.lang.String userId,
-		long groupId)
+	public java.util.List getUserGroupRoles(long userId, long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasUserGroupRole(java.lang.String userId, long groupId,
+	public boolean hasUserGroupRole(long userId, long groupId,
 		java.lang.String roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

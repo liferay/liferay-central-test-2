@@ -57,9 +57,9 @@ public interface MBStatsUserModel extends BaseModel {
 
 	public void setGroupId(long groupId);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public int getMessageCount();
 

@@ -112,11 +112,11 @@ public class JournalStructureSoap implements Serializable {
 		_structureId = structureId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -171,7 +171,7 @@ public class JournalStructureSoap implements Serializable {
 	private String _companyId;
 	private long _groupId;
 	private String _structureId;
-	private String _userId;
+	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;

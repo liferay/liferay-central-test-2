@@ -97,11 +97,11 @@ public class UserTrackerSoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -139,7 +139,7 @@ public class UserTrackerSoap implements Serializable {
 
 	private String _userTrackerId;
 	private String _companyId;
-	private String _userId;
+	private long _userId;
 	private Date _modifiedDate;
 	private String _remoteAddr;
 	private String _remoteHost;

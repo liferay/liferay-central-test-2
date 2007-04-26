@@ -63,9 +63,9 @@ public interface MBBanModel extends BaseModel {
 
 	public void setCompanyId(String companyId);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public String getUserName();
 
@@ -79,7 +79,7 @@ public interface MBBanModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public String getBanUserId();
+	public long getBanUserId();
 
-	public void setBanUserId(String banUserId);
+	public void setBanUserId(long banUserId);
 }

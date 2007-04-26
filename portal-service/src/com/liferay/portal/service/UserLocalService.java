@@ -57,32 +57,29 @@ public interface UserLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void addGroupUsers(long groupId, java.lang.String[] userIds)
+	public void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addPasswordPolicyUsers(long passwordPolicyId,
-		java.lang.String[] userIds)
+	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addRoleUsers(java.lang.String roleId, java.lang.String[] userIds)
+	public void addRoleUsers(java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds)
+	public void addUserGroupUsers(java.lang.String userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.User addUser(
-		java.lang.String creatorUserId, java.lang.String companyId,
-		boolean autoPassword, java.lang.String password1,
-		java.lang.String password2, boolean passwordReset,
-		boolean autoScreenName, java.lang.String screenName,
-		java.lang.String emailAddress, java.util.Locale locale,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName, int prefixId,
+	public com.liferay.portal.model.User addUser(long creatorUserId,
+		java.lang.String companyId, boolean autoPassword,
+		java.lang.String password1, java.lang.String password2,
+		boolean passwordReset, boolean autoScreenName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.util.Locale locale, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String jobTitle,
 		java.lang.String organizationId, java.lang.String locationId,
@@ -102,42 +99,44 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public int authenticateByUserId(java.lang.String companyId,
-		java.lang.String userId, java.lang.String password,
-		java.util.Map headerMap, java.util.Map parameterMap)
+	public int authenticateByUserId(java.lang.String companyId, long userId,
+		java.lang.String password, java.util.Map headerMap,
+		java.util.Map parameterMap)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean authenticateForJAAS(java.lang.String userId,
-		java.lang.String encPwd)
+	public boolean authenticateForJAAS(long userId, java.lang.String encPwd)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
-		java.lang.String companyId, java.lang.String userId,
+		java.lang.String companyId, java.lang.String name,
 		java.lang.String password)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deletePasswordPolicyUser(long passwordPolicyId,
-		java.lang.String userId)
+	public void deletePasswordPolicyUser(long passwordPolicyId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteRoleUser(java.lang.String roleId, java.lang.String userId)
+	public void deleteRoleUser(java.lang.String roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteUser(java.lang.String userId)
+	public void deleteUser(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.lang.String encryptUserId(java.lang.String userId)
+	public java.lang.String encryptUserId(java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User getDefaultUser(
 		java.lang.String companyId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public long getDefaultUserId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -174,12 +173,12 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.User getUserById(java.lang.String userId)
+	public com.liferay.portal.model.User getUserById(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User getUserById(
-		java.lang.String companyId, java.lang.String userId)
+		java.lang.String companyId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -188,43 +187,41 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.lang.String getUserIdByEmailAddress(
-		java.lang.String companyId, java.lang.String emailAddress)
+	public long getUserIdByEmailAddress(java.lang.String companyId,
+		java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.lang.String getUserIdByScreenName(java.lang.String companyId,
+	public long getUserIdByScreenName(java.lang.String companyId,
 		java.lang.String screenName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasGroupUser(long groupId, java.lang.String userId)
+	public boolean hasGroupUser(long groupId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasPasswordPolicyUser(long passwordPolicyId,
-		java.lang.String userId)
+	public boolean hasPasswordPolicyUser(long passwordPolicyId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasRoleUser(java.lang.String roleId, java.lang.String userId)
+	public boolean hasRoleUser(java.lang.String roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasUserGroupUser(java.lang.String userGroupId,
-		java.lang.String userId)
+	public boolean hasUserGroupUser(java.lang.String userGroupId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String userId, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String screenName, java.lang.String emailAddress,
-		boolean active, java.util.LinkedHashMap params, boolean andSearch,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String screenName,
+		java.lang.String emailAddress, boolean active,
+		java.util.LinkedHashMap params, boolean andSearch, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public int searchCount(java.lang.String companyId, java.lang.String userId,
+	public int searchCount(java.lang.String companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String screenName,
 		java.lang.String emailAddress, boolean active,
@@ -237,70 +234,65 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void setGroupUsers(long groupId, java.lang.String[] userIds)
+	public void setGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void setRoleUsers(java.lang.String roleId, java.lang.String[] userIds)
+	public void setRoleUsers(java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void setUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds)
+	public void setUserGroupUsers(java.lang.String userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetGroupUsers(long groupId, java.lang.String[] userIds)
+	public void unsetGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetPasswordPolicyUsers(long passwordPolicyId,
-		java.lang.String[] userIds)
+	public void unsetPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetRoleUsers(java.lang.String roleId,
-		java.lang.String[] userIds)
+	public void unsetRoleUsers(java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds)
+	public void unsetUserGroupUsers(java.lang.String userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.User updateActive(java.lang.String userId,
+	public com.liferay.portal.model.User updateActive(long userId,
 		boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.User updateAgreedToTermsOfUse(
-		java.lang.String userId, boolean agreedToTermsOfUse)
+	public com.liferay.portal.model.User updateAgreedToTermsOfUse(long userId,
+		boolean agreedToTermsOfUse)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.User updateLastLogin(
-		java.lang.String userId, java.lang.String loginIP)
+	public com.liferay.portal.model.User updateLastLogin(long userId,
+		java.lang.String loginIP)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.User updatePassword(
-		java.lang.String userId, java.lang.String password1,
-		java.lang.String password2, boolean passwordReset)
+	public com.liferay.portal.model.User updatePassword(long userId,
+		java.lang.String password1, java.lang.String password2,
+		boolean passwordReset)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updatePortrait(java.lang.String userId, byte[] bytes)
+	public void updatePortrait(long userId, byte[] bytes)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.User updateUser(java.lang.String userId,
+	public com.liferay.portal.model.User updateUser(long userId,
 		java.lang.String password, java.lang.String screenName,
 		java.lang.String emailAddress, java.lang.String languageId,
 		java.lang.String timeZoneId, java.lang.String greeting,
-		java.lang.String resolution, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName, int prefixId,
+		java.lang.String comments, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String icqSn, java.lang.String jabberSn,

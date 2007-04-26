@@ -106,7 +106,7 @@ public class DLFileEntryPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (folderId + name).hashCode();
+		return (String.valueOf(folderId) + String.valueOf(name)).hashCode();
 	}
 
 	public String toString() {

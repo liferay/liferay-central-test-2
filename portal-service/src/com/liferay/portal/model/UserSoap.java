@@ -52,6 +52,7 @@ public class UserSoap implements Serializable {
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setDefaultUser(model.getDefaultUser());
 		soapModel.setContactId(model.getContactId());
 		soapModel.setPassword(model.getPassword());
 		soapModel.setPasswordEncrypted(model.getPasswordEncrypted());
@@ -62,7 +63,6 @@ public class UserSoap implements Serializable {
 		soapModel.setLanguageId(model.getLanguageId());
 		soapModel.setTimeZoneId(model.getTimeZoneId());
 		soapModel.setGreeting(model.getGreeting());
-		soapModel.setResolution(model.getResolution());
 		soapModel.setComments(model.getComments());
 		soapModel.setLoginDate(model.getLoginDate());
 		soapModel.setLoginIP(model.getLoginIP());
@@ -89,19 +89,19 @@ public class UserSoap implements Serializable {
 	public UserSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _userId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setUserId(pk);
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -127,6 +127,18 @@ public class UserSoap implements Serializable {
 
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
+	}
+
+	public boolean getDefaultUser() {
+		return _defaultUser;
+	}
+
+	public boolean isDefaultUser() {
+		return _defaultUser;
+	}
+
+	public void setDefaultUser(boolean defaultUser) {
+		_defaultUser = defaultUser;
 	}
 
 	public long getContactId() {
@@ -217,14 +229,6 @@ public class UserSoap implements Serializable {
 		_greeting = greeting;
 	}
 
-	public String getResolution() {
-		return _resolution;
-	}
-
-	public void setResolution(String resolution) {
-		_resolution = resolution;
-	}
-
 	public String getComments() {
 		return _comments;
 	}
@@ -297,10 +301,11 @@ public class UserSoap implements Serializable {
 		_active = active;
 	}
 
-	private String _userId;
+	private long _userId;
 	private String _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private boolean _defaultUser;
 	private long _contactId;
 	private String _password;
 	private boolean _passwordEncrypted;
@@ -311,7 +316,6 @@ public class UserSoap implements Serializable {
 	private String _languageId;
 	private String _timeZoneId;
 	private String _greeting;
-	private String _resolution;
 	private String _comments;
 	private Date _loginDate;
 	private String _loginIP;

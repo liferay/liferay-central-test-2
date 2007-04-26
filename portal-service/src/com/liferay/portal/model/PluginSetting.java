@@ -58,5 +58,5 @@ public interface PluginSetting extends PluginSettingModel {
 
 	public boolean hasRoleWithName(java.lang.String roleName);
 
-	public boolean hasPermission(java.lang.String userId);
+	public boolean hasPermission(long userId);
 }

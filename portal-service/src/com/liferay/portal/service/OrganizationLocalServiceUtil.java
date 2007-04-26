@@ -75,7 +75,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Organization addOrganization(
-		java.lang.String userId, java.lang.String parentOrganizationId,
+		long userId, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,
 		java.lang.String countryId, int statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
@@ -86,7 +86,7 @@ public class OrganizationLocalServiceUtil {
 			parentOrganizationId, name, regionId, countryId, statusId, location);
 	}
 
-	public static void addOrganizationResources(java.lang.String userId,
+	public static void addOrganizationResources(long userId,
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -144,7 +144,7 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.getOrganizationId(companyId, name);
 	}
 
-	public static java.util.List getUserOrganizations(java.lang.String userId)
+	public static java.util.List getUserOrganizations(long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();

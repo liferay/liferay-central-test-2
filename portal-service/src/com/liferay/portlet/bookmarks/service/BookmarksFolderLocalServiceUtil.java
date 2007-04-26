@@ -67,7 +67,7 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
-		java.lang.String userId, java.lang.String plid, long parentFolderId,
+		long userId, java.lang.String plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -80,7 +80,7 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
-		java.lang.String userId, java.lang.String plid, long parentFolderId,
+		long userId, java.lang.String plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -94,7 +94,7 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
-		java.lang.String userId, java.lang.String plid, long parentFolderId,
+		long userId, java.lang.String plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,

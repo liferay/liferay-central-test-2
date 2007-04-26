@@ -131,7 +131,8 @@ public class DLFileVersionPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (folderId + name + version).hashCode();
+		return (String.valueOf(folderId) + String.valueOf(name) +
+		String.valueOf(version)).hashCode();
 	}
 
 	public String toString() {

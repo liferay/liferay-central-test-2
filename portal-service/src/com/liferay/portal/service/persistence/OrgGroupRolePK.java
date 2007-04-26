@@ -131,7 +131,8 @@ public class OrgGroupRolePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (organizationId + groupId + roleId).hashCode();
+		return (String.valueOf(organizationId) + String.valueOf(groupId) +
+		String.valueOf(roleId)).hashCode();
 	}
 
 	public String toString() {

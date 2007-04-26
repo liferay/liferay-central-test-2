@@ -61,9 +61,9 @@ public interface IGImageModel extends BaseModel {
 
 	public void setImageId(String imageId);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public Date getCreateDate();
 

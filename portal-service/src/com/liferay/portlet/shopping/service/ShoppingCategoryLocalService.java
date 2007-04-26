@@ -58,25 +58,23 @@ public interface ShoppingCategoryLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
+		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description,
+		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,

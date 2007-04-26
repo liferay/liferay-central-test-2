@@ -139,13 +139,11 @@ public class CompanyLocalServiceUtil {
 	}
 
 	public static void updateDisplay(java.lang.String companyId,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String resolution)
+		java.lang.String languageId, java.lang.String timeZoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-		companyLocalService.updateDisplay(companyId, languageId, timeZoneId,
-			resolution);
+		companyLocalService.updateDisplay(companyId, languageId, timeZoneId);
 	}
 
 	public static void updateLogo(java.lang.String companyId, java.io.File file)

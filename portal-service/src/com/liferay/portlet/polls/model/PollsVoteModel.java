@@ -57,9 +57,9 @@ public interface PollsVoteModel extends BaseModel {
 
 	public void setQuestionId(String questionId);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public String getChoiceId();
 

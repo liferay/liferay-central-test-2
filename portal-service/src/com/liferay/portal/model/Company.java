@@ -68,8 +68,6 @@ public interface Company extends CompanyModel {
 
 	public java.util.TimeZone getTimeZone();
 
-	public java.lang.String getResolution();
-
 	public java.lang.String getAdminName();
 
 	public java.lang.String getAuthType()

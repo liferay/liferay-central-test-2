@@ -101,11 +101,11 @@ public class GroupSoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getCreatorUserId() {
+	public long getCreatorUserId() {
 		return _creatorUserId;
 	}
 
-	public void setCreatorUserId(String creatorUserId) {
+	public void setCreatorUserId(long creatorUserId) {
 		_creatorUserId = creatorUserId;
 	}
 
@@ -187,7 +187,7 @@ public class GroupSoap implements Serializable {
 
 	private long _groupId;
 	private String _companyId;
-	private String _creatorUserId;
+	private long _creatorUserId;
 	private String _className;
 	private String _classPK;
 	private long _parentGroupId;

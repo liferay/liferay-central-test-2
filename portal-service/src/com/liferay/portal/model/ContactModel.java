@@ -59,9 +59,9 @@ public interface ContactModel extends BaseModel {
 
 	public void setCompanyId(String companyId);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public String getUserName();
 
@@ -94,10 +94,6 @@ public interface ContactModel extends BaseModel {
 	public String getLastName();
 
 	public void setLastName(String lastName);
-
-	public String getNickName();
-
-	public void setNickName(String nickName);
 
 	public int getPrefixId();
 

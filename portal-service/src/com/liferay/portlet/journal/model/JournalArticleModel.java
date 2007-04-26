@@ -69,9 +69,9 @@ public interface JournalArticleModel extends BaseModel {
 
 	public void setVersion(double version);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public String getUserName();
 
@@ -119,9 +119,9 @@ public interface JournalArticleModel extends BaseModel {
 
 	public void setApproved(boolean approved);
 
-	public String getApprovedByUserId();
+	public long getApprovedByUserId();
 
-	public void setApprovedByUserId(String approvedByUserId);
+	public void setApprovedByUserId(long approvedByUserId);
 
 	public String getApprovedByUserName();
 

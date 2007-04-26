@@ -58,7 +58,7 @@ public interface SCProductVersionLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
-		java.lang.String userId, long productEntryId, java.lang.String version,
+		long userId, long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
 		java.lang.String directDownloadURL, boolean repoStoreArtifact,
 		long[] frameworkVersionIds, boolean addCommunityPermissions,
@@ -67,7 +67,7 @@ public interface SCProductVersionLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
-		java.lang.String userId, long productEntryId, java.lang.String version,
+		long userId, long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
 		java.lang.String directDownloadURL, boolean repoStoreArtifact,
 		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
@@ -76,7 +76,7 @@ public interface SCProductVersionLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
-		java.lang.String userId, long productEntryId, java.lang.String version,
+		long userId, long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
 		java.lang.String directDownloadURL, boolean repoStoreArtifact,
 		long[] frameworkVersionIds, java.lang.Boolean addCommunityPermissions,

@@ -57,10 +57,9 @@ public interface WebsiteLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Website addWebsite(
-		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK, java.lang.String url, int typeId,
-		boolean primary)
+	public com.liferay.portal.model.Website addWebsite(long userId,
+		java.lang.String className, java.lang.String classPK,
+		java.lang.String url, int typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

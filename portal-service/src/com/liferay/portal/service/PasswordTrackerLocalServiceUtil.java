@@ -66,14 +66,13 @@ public class PasswordTrackerLocalServiceUtil {
 			begin, end);
 	}
 
-	public static void deletePasswordTrackers(java.lang.String userId)
+	public static void deletePasswordTrackers(long userId)
 		throws com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
 		passwordTrackerLocalService.deletePasswordTrackers(userId);
 	}
 
-	public static boolean isValidPassword(java.lang.String userId,
-		java.lang.String password)
+	public static boolean isValidPassword(long userId, java.lang.String password)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
@@ -81,8 +80,7 @@ public class PasswordTrackerLocalServiceUtil {
 		return passwordTrackerLocalService.isValidPassword(userId, password);
 	}
 
-	public static void trackPassword(java.lang.String userId,
-		java.lang.String encPwd)
+	public static void trackPassword(long userId, java.lang.String encPwd)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();

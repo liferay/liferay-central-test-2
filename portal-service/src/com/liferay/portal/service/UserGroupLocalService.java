@@ -61,9 +61,9 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.UserGroup addUserGroup(
-		java.lang.String userId, java.lang.String companyId,
-		java.lang.String name, java.lang.String description)
+	public com.liferay.portal.model.UserGroup addUserGroup(long userId,
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -81,7 +81,7 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getUserUserGroups(java.lang.String userId)
+	public java.util.List getUserUserGroups(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

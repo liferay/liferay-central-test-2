@@ -49,21 +49,19 @@ package com.liferay.portal.service;
  *
  */
 public interface UserService {
-	public void addGroupUsers(long groupId, java.lang.String[] userIds)
+	public void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void addPasswordPolicyUsers(long passwordPolicyId,
-		java.lang.String[] userIds)
+	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void addRoleUsers(java.lang.String roleId, java.lang.String[] userIds)
+	public void addRoleUsers(java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void addUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds)
+	public void addUserGroupUsers(java.lang.String userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -73,19 +71,18 @@ public interface UserService {
 		boolean autoScreenName, java.lang.String screenName,
 		java.lang.String emailAddress, java.util.Locale locale,
 		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String jobTitle,
-		java.lang.String organizationId, java.lang.String locationId,
-		boolean sendEmail)
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, java.lang.String organizationId,
+		java.lang.String locationId, boolean sendEmail)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteRoleUser(java.lang.String roleId, java.lang.String userId)
+	public void deleteRoleUser(java.lang.String roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteUser(java.lang.String userId)
+	public void deleteUser(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -102,7 +99,7 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.User getUserById(java.lang.String userId)
+	public com.liferay.portal.model.User getUserById(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -111,73 +108,68 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public boolean hasGroupUser(long groupId, java.lang.String userId)
+	public boolean hasGroupUser(long groupId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public boolean hasRoleUser(java.lang.String roleId, java.lang.String userId)
+	public boolean hasRoleUser(java.lang.String roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void setGroupUsers(long groupId, java.lang.String[] userIds)
+	public void setGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void setRoleUsers(java.lang.String roleId, java.lang.String[] userIds)
+	public void setRoleUsers(java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void setUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds)
+	public void setUserGroupUsers(java.lang.String userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void unsetGroupUsers(long groupId, java.lang.String[] userIds)
+	public void unsetGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void unsetPasswordPolicyUsers(long passwordPolicyId,
-		java.lang.String[] userIds)
+	public void unsetPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void unsetRoleUsers(java.lang.String roleId,
-		java.lang.String[] userIds)
+	public void unsetRoleUsers(java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void unsetUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds)
+	public void unsetUserGroupUsers(java.lang.String userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.User updateActive(java.lang.String userId,
+	public com.liferay.portal.model.User updateActive(long userId,
 		boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.User updateAgreedToTermsOfUse(
-		java.lang.String userId, boolean agreedToTermsOfUse)
+	public com.liferay.portal.model.User updateAgreedToTermsOfUse(long userId,
+		boolean agreedToTermsOfUse)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.User updatePassword(
-		java.lang.String userId, java.lang.String password1,
-		java.lang.String password2, boolean passwordReset)
+	public com.liferay.portal.model.User updatePassword(long userId,
+		java.lang.String password1, java.lang.String password2,
+		boolean passwordReset)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void updatePortrait(java.lang.String userId, byte[] bytes)
+	public void updatePortrait(long userId, byte[] bytes)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.User updateUser(java.lang.String userId,
+	public com.liferay.portal.model.User updateUser(long userId,
 		java.lang.String password, java.lang.String screenName,
 		java.lang.String emailAddress, java.lang.String languageId,
 		java.lang.String timeZoneId, java.lang.String greeting,
-		java.lang.String resolution, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName, int prefixId,
+		java.lang.String comments, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String icqSn, java.lang.String jabberSn,

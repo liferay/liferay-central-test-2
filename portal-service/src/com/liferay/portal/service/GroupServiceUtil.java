@@ -119,7 +119,7 @@ public class GroupServiceUtil {
 		return groupService.getUserGroupsGroups(userGroups);
 	}
 
-	public static boolean hasUserGroup(java.lang.String userId, long groupId)
+	public static boolean hasUserGroup(long userId, long groupId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 

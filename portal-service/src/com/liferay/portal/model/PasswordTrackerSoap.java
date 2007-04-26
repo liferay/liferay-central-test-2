@@ -86,11 +86,11 @@ public class PasswordTrackerSoap implements Serializable {
 		_passwordTrackerId = passwordTrackerId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -111,7 +111,7 @@ public class PasswordTrackerSoap implements Serializable {
 	}
 
 	private long _passwordTrackerId;
-	private String _userId;
+	private long _userId;
 	private Date _createDate;
 	private String _password;
 }

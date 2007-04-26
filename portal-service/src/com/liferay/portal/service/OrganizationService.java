@@ -80,7 +80,7 @@ public interface OrganizationService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.util.List getUserOrganizations(java.lang.String userId)
+	public java.util.List getUserOrganizations(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

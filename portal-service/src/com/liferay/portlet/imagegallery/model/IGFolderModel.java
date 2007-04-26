@@ -63,9 +63,9 @@ public interface IGFolderModel extends BaseModel {
 
 	public void setCompanyId(String companyId);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public Date getCreateDate();
 

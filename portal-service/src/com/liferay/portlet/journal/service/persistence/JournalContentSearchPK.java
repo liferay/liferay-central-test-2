@@ -141,7 +141,8 @@ public class JournalContentSearchPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (portletId + layoutId + ownerId + articleId).hashCode();
+		return (String.valueOf(portletId) + String.valueOf(layoutId) +
+		String.valueOf(ownerId) + String.valueOf(articleId)).hashCode();
 	}
 
 	public String toString() {

@@ -65,9 +65,9 @@ public interface JournalStructureModel extends BaseModel {
 
 	public void setStructureId(String structureId);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public String getUserName();
 

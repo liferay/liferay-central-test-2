@@ -35,12 +35,12 @@ import java.io.Serializable;
  */
 public class PollsVotePK implements Comparable, Serializable {
 	public String questionId;
-	public String userId;
+	public long userId;
 
 	public PollsVotePK() {
 	}
 
-	public PollsVotePK(String questionId, String userId) {
+	public PollsVotePK(String questionId, long userId) {
 		this.questionId = questionId;
 		this.userId = userId;
 	}
@@ -53,11 +53,11 @@ public class PollsVotePK implements Comparable, Serializable {
 		this.questionId = questionId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -74,7 +74,15 @@ public class PollsVotePK implements Comparable, Serializable {
 			return value;
 		}
 
-		value = userId.compareTo(pk.userId);
+		if (userId < pk.userId) {
+			value = -1;
+		}
+		else if (userId > pk.userId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -97,7 +105,7 @@ public class PollsVotePK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((questionId.equals(pk.questionId)) && (userId.equals(pk.userId))) {
+		if ((questionId.equals(pk.questionId)) && (userId == pk.userId)) {
 			return true;
 		}
 		else {
@@ -106,7 +114,7 @@ public class PollsVotePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (questionId + userId).hashCode();
+		return (String.valueOf(questionId) + String.valueOf(userId)).hashCode();
 	}
 
 	public String toString() {

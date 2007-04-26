@@ -66,7 +66,7 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String userId, java.lang.String plid, long categoryId,
+		long userId, java.lang.String plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, java.lang.String[] tagsEntries,
@@ -82,7 +82,7 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String userId, java.lang.String plid, long categoryId,
+		long userId, java.lang.String plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, java.lang.String[] tagsEntries,
@@ -99,7 +99,7 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String userId, java.lang.String plid, long categoryId,
+		long userId, java.lang.String plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, java.lang.String[] tagsEntries,
@@ -241,7 +241,7 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, long groupId, java.lang.String userId,
+		java.lang.String companyId, long groupId, long userId,
 		java.lang.String[] categoryIds, java.lang.String keywords)
 		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
@@ -251,10 +251,10 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
-		java.lang.String userId, long entryId, long categoryId,
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, java.lang.String[] tagsEntries)
+		long userId, long entryId, long categoryId, java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();

@@ -101,9 +101,8 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.getGroupThreads(groupId, begin, end);
 	}
 
-	public static java.util.List getGroupThreads(long groupId,
-		java.lang.String userId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List getGroupThreads(long groupId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
 		return mbThreadLocalService.getGroupThreads(groupId, userId, begin, end);
@@ -116,7 +115,7 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.getGroupThreadsCount(groupId);
 	}
 
-	public static int getGroupThreadsCount(long groupId, java.lang.String userId)
+	public static int getGroupThreadsCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
@@ -146,8 +145,8 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.getThreadsCount(categoryId);
 	}
 
-	public static boolean hasReadThread(java.lang.String userId,
-		java.lang.String threadId) throws com.liferay.portal.SystemException {
+	public static boolean hasReadThread(long userId, java.lang.String threadId)
+		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
 		return mbThreadLocalService.hasReadThread(userId, threadId);

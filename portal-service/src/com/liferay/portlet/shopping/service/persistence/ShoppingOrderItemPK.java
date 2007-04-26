@@ -106,7 +106,7 @@ public class ShoppingOrderItemPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (orderId + itemId).hashCode();
+		return (String.valueOf(orderId) + String.valueOf(itemId)).hashCode();
 	}
 
 	public String toString() {

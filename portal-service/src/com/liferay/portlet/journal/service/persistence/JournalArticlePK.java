@@ -156,7 +156,8 @@ public class JournalArticlePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (companyId + groupId + articleId + version).hashCode();
+		return (String.valueOf(companyId) + String.valueOf(groupId) +
+		String.valueOf(articleId) + String.valueOf(version)).hashCode();
 	}
 
 	public String toString() {

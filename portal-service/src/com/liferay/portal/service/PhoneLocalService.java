@@ -57,7 +57,7 @@ public interface PhoneLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Phone addPhone(java.lang.String userId,
+	public com.liferay.portal.model.Phone addPhone(long userId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String number, java.lang.String extension, int typeId,
 		boolean primary)

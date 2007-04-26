@@ -133,11 +133,11 @@ public class JournalArticleSoap implements Serializable {
 		_version = version;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -233,11 +233,11 @@ public class JournalArticleSoap implements Serializable {
 		_approved = approved;
 	}
 
-	public String getApprovedByUserId() {
+	public long getApprovedByUserId() {
 		return _approvedByUserId;
 	}
 
-	public void setApprovedByUserId(String approvedByUserId) {
+	public void setApprovedByUserId(long approvedByUserId) {
 		_approvedByUserId = approvedByUserId;
 	}
 
@@ -289,7 +289,7 @@ public class JournalArticleSoap implements Serializable {
 	private long _groupId;
 	private String _articleId;
 	private double _version;
-	private String _userId;
+	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
@@ -301,7 +301,7 @@ public class JournalArticleSoap implements Serializable {
 	private String _templateId;
 	private Date _displayDate;
 	private boolean _approved;
-	private String _approvedByUserId;
+	private long _approvedByUserId;
 	private String _approvedByUserName;
 	private Date _approvedDate;
 	private boolean _expired;

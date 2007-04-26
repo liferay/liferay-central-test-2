@@ -65,9 +65,9 @@ public interface MBMessageModel extends BaseModel {
 
 	public void setCompanyId(String companyId);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public String getUserName();
 

@@ -48,12 +48,6 @@ package com.liferay.portal.model;
  *
  */
 public interface User extends UserModel {
-	public boolean isDefaultUser();
-
-	public void setCompanyId(java.lang.String companyId);
-
-	public java.lang.String getActualCompanyId();
-
 	public java.lang.String getCompanyMx();
 
 	public boolean hasCompanyMx();
@@ -78,8 +72,6 @@ public interface User extends UserModel {
 
 	public void setTimeZoneId(java.lang.String timeZoneId);
 
-	public void setResolution(java.lang.String resolution);
-
 	public com.liferay.portal.model.Contact getContact();
 
 	public java.lang.String getFirstName();
@@ -87,8 +79,6 @@ public interface User extends UserModel {
 	public java.lang.String getMiddleName();
 
 	public java.lang.String getLastName();
-
-	public java.lang.String getNickName();
 
 	public java.lang.String getFullName();
 

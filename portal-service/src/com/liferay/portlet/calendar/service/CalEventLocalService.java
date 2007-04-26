@@ -57,8 +57,8 @@ public interface CalEventLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.calendar.model.CalEvent addEvent(
-		java.lang.String userId, java.lang.String plid, java.lang.String title,
+	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
+		java.lang.String plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
@@ -70,8 +70,8 @@ public interface CalEventLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.calendar.model.CalEvent addEvent(
-		java.lang.String userId, java.lang.String plid, java.lang.String title,
+	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
+		java.lang.String plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
@@ -84,8 +84,8 @@ public interface CalEventLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.calendar.model.CalEvent addEvent(
-		java.lang.String userId, java.lang.String plid, java.lang.String title,
+	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
+		java.lang.String plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
@@ -170,7 +170,7 @@ public interface CalEventLocalService {
 		java.lang.String type) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
-		java.lang.String userId, long eventId, java.lang.String title,
+		long userId, long eventId, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,

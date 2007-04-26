@@ -65,9 +65,9 @@ public interface JournalTemplateModel extends BaseModel {
 
 	public void setTemplateId(String templateId);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public String getUserName();
 

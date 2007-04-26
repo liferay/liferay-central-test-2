@@ -116,11 +116,11 @@ public class DLFileEntrySoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -132,11 +132,11 @@ public class DLFileEntrySoap implements Serializable {
 		_userName = userName;
 	}
 
-	public String getVersionUserId() {
+	public long getVersionUserId() {
 		return _versionUserId;
 	}
 
-	public void setVersionUserId(String versionUserId) {
+	public void setVersionUserId(long versionUserId) {
 		_versionUserId = versionUserId;
 	}
 
@@ -215,9 +215,9 @@ public class DLFileEntrySoap implements Serializable {
 	private String _folderId;
 	private String _name;
 	private String _companyId;
-	private String _userId;
+	private long _userId;
 	private String _userName;
-	private String _versionUserId;
+	private long _versionUserId;
 	private String _versionUserName;
 	private Date _createDate;
 	private Date _modifiedDate;

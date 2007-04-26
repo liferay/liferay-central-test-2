@@ -89,11 +89,11 @@ public class PollsVoteSoap implements Serializable {
 		_questionId = questionId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -114,7 +114,7 @@ public class PollsVoteSoap implements Serializable {
 	}
 
 	private String _questionId;
-	private String _userId;
+	private long _userId;
 	private String _choiceId;
 	private Date _voteDate;
 }

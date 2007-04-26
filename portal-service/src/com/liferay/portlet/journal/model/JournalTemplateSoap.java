@@ -116,11 +116,11 @@ public class JournalTemplateSoap implements Serializable {
 		_templateId = templateId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -211,7 +211,7 @@ public class JournalTemplateSoap implements Serializable {
 	private String _companyId;
 	private long _groupId;
 	private String _templateId;
-	private String _userId;
+	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;

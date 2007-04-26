@@ -89,11 +89,11 @@ public class MBStatsUserSoap implements Serializable {
 		_groupId = groupId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -114,7 +114,7 @@ public class MBStatsUserSoap implements Serializable {
 	}
 
 	private long _groupId;
-	private String _userId;
+	private long _userId;
 	private int _messageCount;
 	private Date _lastPostDate;
 }

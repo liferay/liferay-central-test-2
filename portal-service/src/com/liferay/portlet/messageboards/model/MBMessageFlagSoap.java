@@ -97,11 +97,11 @@ public class MBMessageFlagSoap implements Serializable {
 		_messageId = messageId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -115,6 +115,6 @@ public class MBMessageFlagSoap implements Serializable {
 
 	private String _topicId;
 	private String _messageId;
-	private String _userId;
+	private long _userId;
 	private String _flag;
 }

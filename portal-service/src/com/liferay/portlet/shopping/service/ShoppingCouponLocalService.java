@@ -58,8 +58,8 @@ public interface ShoppingCouponLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String couponId, boolean autoCouponId, java.lang.String name,
+		long userId, java.lang.String plid, java.lang.String couponId,
+		boolean autoCouponId, java.lang.String name,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
@@ -92,14 +92,13 @@ public interface ShoppingCouponLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(
-		java.lang.String userId, java.lang.String couponId,
-		java.lang.String name, java.lang.String description,
-		int startDateMonth, int startDateDay, int startDateYear,
-		int startDateHour, int startDateMinute, int endDateMonth,
-		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
-		boolean neverExpire, boolean active, java.lang.String limitCategories,
-		java.lang.String limitSkus, double minOrder, double discount,
-		java.lang.String discountType)
+		long userId, java.lang.String couponId, java.lang.String name,
+		java.lang.String description, int startDateMonth, int startDateDay,
+		int startDateYear, int startDateHour, int startDateMinute,
+		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
+		int endDateMinute, boolean neverExpire, boolean active,
+		java.lang.String limitCategories, java.lang.String limitSkus,
+		double minOrder, double discount, java.lang.String discountType)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

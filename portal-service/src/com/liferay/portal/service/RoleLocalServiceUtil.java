@@ -65,9 +65,8 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static com.liferay.portal.model.Role addRole(
-		java.lang.String userId, java.lang.String companyId,
-		java.lang.String name, int type)
+	public static com.liferay.portal.model.Role addRole(long userId,
+		java.lang.String companyId, java.lang.String name, int type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
@@ -75,10 +74,9 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.addRole(userId, companyId, name, type);
 	}
 
-	public static com.liferay.portal.model.Role addRole(
-		java.lang.String userId, java.lang.String companyId,
-		java.lang.String name, int type, java.lang.String className,
-		java.lang.String classPK)
+	public static com.liferay.portal.model.Role addRole(long userId,
+		java.lang.String companyId, java.lang.String name, int type,
+		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
@@ -143,35 +141,35 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.getRole(companyId, name);
 	}
 
-	public static java.util.List getUserGroupRoles(java.lang.String userId,
-		long groupId) throws com.liferay.portal.SystemException {
+	public static java.util.List getUserGroupRoles(long userId, long groupId)
+		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.getUserGroupRoles(userId, groupId);
 	}
 
-	public static java.util.List getUserRelatedRoles(java.lang.String userId,
-		long groupId) throws com.liferay.portal.SystemException {
+	public static java.util.List getUserRelatedRoles(long userId, long groupId)
+		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.getUserRelatedRoles(userId, groupId);
 	}
 
-	public static java.util.List getUserRelatedRoles(java.lang.String userId,
+	public static java.util.List getUserRelatedRoles(long userId,
 		long[] groupIds) throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.getUserRelatedRoles(userId, groupIds);
 	}
 
-	public static java.util.List getUserRelatedRoles(java.lang.String userId,
+	public static java.util.List getUserRelatedRoles(long userId,
 		java.util.List groups) throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.getUserRelatedRoles(userId, groups);
 	}
 
-	public static java.util.List getUserRoles(java.lang.String userId)
+	public static java.util.List getUserRoles(long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
@@ -179,8 +177,8 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.getUserRoles(userId);
 	}
 
-	public static boolean hasUserRole(java.lang.String userId,
-		java.lang.String companyId, java.lang.String name)
+	public static boolean hasUserRole(long userId, java.lang.String companyId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
@@ -188,8 +186,8 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.hasUserRole(userId, companyId, name);
 	}
 
-	public static boolean hasUserRoles(java.lang.String userId,
-		java.lang.String companyId, java.lang.String[] names)
+	public static boolean hasUserRoles(long userId, java.lang.String companyId,
+		java.lang.String[] names)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
@@ -215,8 +213,7 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.searchCount(companyId, name, description, type);
 	}
 
-	public static void setUserRoles(java.lang.String userId,
-		java.lang.String[] roleIds)
+	public static void setUserRoles(long userId, java.lang.String[] roleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();

@@ -55,9 +55,9 @@ public interface PasswordTrackerModel extends BaseModel {
 
 	public void setPasswordTrackerId(long passwordTrackerId);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public Date getCreateDate();
 

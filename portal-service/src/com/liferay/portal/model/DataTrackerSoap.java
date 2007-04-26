@@ -108,11 +108,11 @@ public class DataTrackerSoap implements Serializable {
 		_createdOn = createdOn;
 	}
 
-	public String getCreatedByUserId() {
+	public long getCreatedByUserId() {
 		return _createdByUserId;
 	}
 
-	public void setCreatedByUserId(String createdByUserId) {
+	public void setCreatedByUserId(long createdByUserId) {
 		_createdByUserId = createdByUserId;
 	}
 
@@ -171,7 +171,7 @@ public class DataTrackerSoap implements Serializable {
 	private String _dataTrackerId;
 	private String _companyId;
 	private Date _createdOn;
-	private String _createdByUserId;
+	private long _createdByUserId;
 	private String _createdByUserName;
 	private Date _updatedOn;
 	private String _updatedBy;

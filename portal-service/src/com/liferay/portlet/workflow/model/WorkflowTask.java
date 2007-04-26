@@ -61,11 +61,11 @@ public class WorkflowTask implements Serializable {
 		_instance = instance;
 	}
 
-	public String getAssignedUserId() {
+	public long getAssignedUserId() {
 		return _assignedUserId;
 	}
 
-	public void setAssignedUserId(String assignedUserId) {
+	public void setAssignedUserId(long assignedUserId) {
 		_assignedUserId = assignedUserId;
 	}
 
@@ -96,7 +96,7 @@ public class WorkflowTask implements Serializable {
 	private long _taskId;
 	private String _name;
 	private WorkflowInstance _instance;
-	private String _assignedUserId;
+	private long _assignedUserId;
 	private Date _createDate;
 	private Date _startDate;
 	private Date _endDate;

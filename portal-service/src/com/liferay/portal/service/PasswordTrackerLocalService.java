@@ -57,15 +57,14 @@ public interface PasswordTrackerLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void deletePasswordTrackers(java.lang.String userId)
+	public void deletePasswordTrackers(long userId)
 		throws com.liferay.portal.SystemException;
 
-	public boolean isValidPassword(java.lang.String userId,
-		java.lang.String password)
+	public boolean isValidPassword(long userId, java.lang.String password)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void trackPassword(java.lang.String userId, java.lang.String encPwd)
+	public void trackPassword(long userId, java.lang.String encPwd)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

@@ -57,24 +57,23 @@ public interface MBBanLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.messageboards.model.MBBan addBan(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String banUserId)
+	public com.liferay.portlet.messageboards.model.MBBan addBan(long userId,
+		java.lang.String plid, long banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void checkBan(long groupId, java.lang.String banUserId)
+	public void checkBan(long groupId, long banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteBan(java.lang.String plid, java.lang.String banUserId)
+	public void deleteBan(java.lang.String plid, long banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteBans(long groupId)
+	public void deleteBansByBanUserId(long banUserId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteBans(java.lang.String banUserId)
+	public void deleteBansByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public void expireBans() throws com.liferay.portal.SystemException;
@@ -85,6 +84,6 @@ public interface MBBanLocalService {
 	public int getBansCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public boolean hasBan(long groupId, java.lang.String banUserId)
+	public boolean hasBan(long groupId, long banUserId)
 		throws com.liferay.portal.SystemException;
 }

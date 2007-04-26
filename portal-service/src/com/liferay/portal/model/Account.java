@@ -48,5 +48,4 @@ package com.liferay.portal.model;
  *
  */
 public interface Account extends AccountModel {
-	public boolean isDefaultAccount();
 }

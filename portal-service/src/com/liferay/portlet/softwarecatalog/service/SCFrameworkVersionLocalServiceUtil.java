@@ -67,7 +67,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		long userId, java.lang.String plid, java.lang.String name,
 		java.lang.String url, boolean active, int priority,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -80,7 +80,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		long userId, java.lang.String plid, java.lang.String name,
 		java.lang.String url, boolean active, int priority,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -93,7 +93,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		long userId, java.lang.String plid, java.lang.String name,
 		java.lang.String url, boolean active, int priority,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,

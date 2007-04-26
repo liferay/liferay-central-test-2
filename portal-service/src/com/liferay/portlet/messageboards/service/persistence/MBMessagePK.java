@@ -106,7 +106,7 @@ public class MBMessagePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (topicId + messageId).hashCode();
+		return (String.valueOf(topicId) + String.valueOf(messageId)).hashCode();
 	}
 
 	public String toString() {

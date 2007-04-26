@@ -80,11 +80,11 @@ public class UserGroupRoleSoap implements Serializable {
 		setRoleId(pk.roleId);
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -104,7 +104,7 @@ public class UserGroupRoleSoap implements Serializable {
 		_roleId = roleId;
 	}
 
-	private String _userId;
+	private long _userId;
 	private long _groupId;
 	private String _roleId;
 }

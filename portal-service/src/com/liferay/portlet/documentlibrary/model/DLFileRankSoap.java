@@ -92,11 +92,11 @@ public class DLFileRankSoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -125,7 +125,7 @@ public class DLFileRankSoap implements Serializable {
 	}
 
 	private String _companyId;
-	private String _userId;
+	private long _userId;
 	private String _folderId;
 	private String _name;
 	private Date _createDate;

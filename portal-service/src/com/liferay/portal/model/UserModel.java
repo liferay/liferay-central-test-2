@@ -47,13 +47,13 @@ import java.util.Date;
  *
  */
 public interface UserModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public String getCompanyId();
 
@@ -66,6 +66,12 @@ public interface UserModel extends BaseModel {
 	public Date getModifiedDate();
 
 	public void setModifiedDate(Date modifiedDate);
+
+	public boolean getDefaultUser();
+
+	public boolean isDefaultUser();
+
+	public void setDefaultUser(boolean defaultUser);
 
 	public long getContactId();
 
@@ -110,10 +116,6 @@ public interface UserModel extends BaseModel {
 	public String getGreeting();
 
 	public void setGreeting(String greeting);
-
-	public String getResolution();
-
-	public void setResolution(String resolution);
 
 	public String getComments();
 

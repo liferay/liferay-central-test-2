@@ -86,7 +86,7 @@ public interface GroupService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public boolean hasUserGroup(java.lang.String userId, long groupId)
+	public boolean hasUserGroup(long userId, long groupId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public java.util.List search(java.lang.String companyId,

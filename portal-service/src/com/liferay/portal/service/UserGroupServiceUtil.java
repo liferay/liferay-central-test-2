@@ -82,7 +82,7 @@ public class UserGroupServiceUtil {
 		return userGroupService.getUserGroup(userGroupId);
 	}
 
-	public static java.util.List getUserUserGroups(java.lang.String userId)
+	public static java.util.List getUserUserGroups(long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();

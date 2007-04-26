@@ -59,9 +59,9 @@ public interface MBMessageFlagModel extends BaseModel {
 
 	public void setMessageId(String messageId);
 
-	public String getUserId();
+	public long getUserId();
 
-	public void setUserId(String userId);
+	public void setUserId(long userId);
 
 	public String getFlag();
 

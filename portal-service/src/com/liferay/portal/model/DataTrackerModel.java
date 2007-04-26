@@ -63,9 +63,9 @@ public interface DataTrackerModel extends BaseModel {
 
 	public void setCreatedOn(Date createdOn);
 
-	public String getCreatedByUserId();
+	public long getCreatedByUserId();
 
-	public void setCreatedByUserId(String createdByUserId);
+	public void setCreatedByUserId(long createdByUserId);
 
 	public String getCreatedByUserName();
 

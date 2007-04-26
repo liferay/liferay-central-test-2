@@ -35,12 +35,12 @@ import java.io.Serializable;
  */
 public class MBStatsUserPK implements Comparable, Serializable {
 	public long groupId;
-	public String userId;
+	public long userId;
 
 	public MBStatsUserPK() {
 	}
 
-	public MBStatsUserPK(long groupId, String userId) {
+	public MBStatsUserPK(long groupId, long userId) {
 		this.groupId = groupId;
 		this.userId = userId;
 	}
@@ -53,11 +53,11 @@ public class MBStatsUserPK implements Comparable, Serializable {
 		this.groupId = groupId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -83,7 +83,15 @@ public class MBStatsUserPK implements Comparable, Serializable {
 			return value;
 		}
 
-		value = userId.compareTo(pk.userId);
+		if (userId < pk.userId) {
+			value = -1;
+		}
+		else if (userId > pk.userId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -106,7 +114,7 @@ public class MBStatsUserPK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((groupId == pk.groupId) && (userId.equals(pk.userId))) {
+		if ((groupId == pk.groupId) && (userId == pk.userId)) {
 			return true;
 		}
 		else {
@@ -115,7 +123,7 @@ public class MBStatsUserPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (groupId + userId).hashCode();
+		return (String.valueOf(groupId) + String.valueOf(userId)).hashCode();
 	}
 
 	public String toString() {

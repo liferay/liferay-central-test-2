@@ -85,7 +85,7 @@ public class PermissionLocalServiceUtil {
 			resourceId, portletActions);
 	}
 
-	public static void addUserPermissions(java.lang.String userId,
+	public static void addUserPermissions(long userId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -152,14 +152,14 @@ public class PermissionLocalServiceUtil {
 		return permissionLocalService.getRolePermissions(roleId);
 	}
 
-	public static java.util.List getUserPermissions(java.lang.String userId,
-		long resourceId) throws com.liferay.portal.SystemException {
+	public static java.util.List getUserPermissions(long userId, long resourceId)
+		throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
 		return permissionLocalService.getUserPermissions(userId, resourceId);
 	}
 
-	public static java.util.List getUserPermissions(java.lang.String userId,
+	public static java.util.List getUserPermissions(long userId,
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException {
@@ -202,7 +202,7 @@ public class PermissionLocalServiceUtil {
 			name, scope, primKey, actionId);
 	}
 
-	public static boolean hasUserPermission(java.lang.String userId,
+	public static boolean hasUserPermission(long userId,
 		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -212,8 +212,8 @@ public class PermissionLocalServiceUtil {
 			resourceId);
 	}
 
-	public static boolean hasUserPermissions(java.lang.String userId,
-		long groupId, java.lang.String actionId, long[] resourceIds,
+	public static boolean hasUserPermissions(long userId, long groupId,
+		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -273,7 +273,7 @@ public class PermissionLocalServiceUtil {
 			scope, primKey, actionIds);
 	}
 
-	public static void setUserPermissions(java.lang.String userId,
+	public static void setUserPermissions(long userId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -310,7 +310,7 @@ public class PermissionLocalServiceUtil {
 			scope, actionId);
 	}
 
-	public static void unsetUserPermissions(java.lang.String userId,
+	public static void unsetUserPermissions(long userId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

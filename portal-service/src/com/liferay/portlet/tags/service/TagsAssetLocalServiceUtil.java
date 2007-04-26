@@ -124,8 +124,8 @@ public class TagsAssetLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
-		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK, java.lang.String[] entryNames)
+		long userId, java.lang.String className, java.lang.String classPK,
+		java.lang.String[] entryNames)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();

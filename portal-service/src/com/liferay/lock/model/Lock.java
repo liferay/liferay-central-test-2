@@ -40,7 +40,7 @@ public interface Lock extends Comparable, Serializable {
 
 	public String getCompanyId();
 
-	public String getUserId();
+	public long getUserId();
 
 	public long getExpirationTime();
 

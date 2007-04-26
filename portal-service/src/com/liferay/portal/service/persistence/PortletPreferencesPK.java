@@ -124,7 +124,8 @@ public class PortletPreferencesPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (portletId + layoutId + ownerId).hashCode();
+		return (String.valueOf(portletId) + String.valueOf(layoutId) +
+		String.valueOf(ownerId)).hashCode();
 	}
 
 	public String toString() {

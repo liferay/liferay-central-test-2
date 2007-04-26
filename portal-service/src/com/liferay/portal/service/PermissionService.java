@@ -59,7 +59,7 @@ public interface PermissionService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public boolean hasUserPermissions(java.lang.String userId, long groupId,
+	public boolean hasUserPermissions(long userId, long groupId,
 		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.SystemException, 
@@ -87,7 +87,7 @@ public interface PermissionService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void setUserPermissions(java.lang.String userId, long groupId,
+	public void setUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
@@ -108,7 +108,7 @@ public interface PermissionService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void unsetUserPermissions(java.lang.String userId, long groupId,
+	public void unsetUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

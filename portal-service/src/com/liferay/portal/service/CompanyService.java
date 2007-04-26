@@ -60,8 +60,7 @@ public interface CompanyService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public void updateDisplay(java.lang.String companyId,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String resolution)
+		java.lang.String languageId, java.lang.String timeZoneId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

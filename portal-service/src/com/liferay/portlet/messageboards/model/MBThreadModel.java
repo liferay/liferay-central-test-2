@@ -75,9 +75,9 @@ public interface MBThreadModel extends BaseModel {
 
 	public void setViewCount(int viewCount);
 
-	public String getLastPostByUserId();
+	public long getLastPostByUserId();
 
-	public void setLastPostByUserId(String lastPostByUserId);
+	public void setLastPostByUserId(long lastPostByUserId);
 
 	public Date getLastPostDate();
 

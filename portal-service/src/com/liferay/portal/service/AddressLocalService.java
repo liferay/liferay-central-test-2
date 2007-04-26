@@ -57,12 +57,12 @@ public interface AddressLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Address addAddress(
-		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK, java.lang.String street1,
-		java.lang.String street2, java.lang.String street3,
-		java.lang.String city, java.lang.String zip, java.lang.String regionId,
-		java.lang.String countryId, int typeId, boolean mailing, boolean primary)
+	public com.liferay.portal.model.Address addAddress(long userId,
+		java.lang.String className, java.lang.String classPK,
+		java.lang.String street1, java.lang.String street2,
+		java.lang.String street3, java.lang.String city, java.lang.String zip,
+		java.lang.String regionId, java.lang.String countryId, int typeId,
+		boolean mailing, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

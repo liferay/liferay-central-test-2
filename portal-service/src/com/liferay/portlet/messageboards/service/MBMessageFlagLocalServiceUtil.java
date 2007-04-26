@@ -66,20 +66,20 @@ public class MBMessageFlagLocalServiceUtil {
 			end);
 	}
 
-	public static void addReadFlags(java.util.List messages,
-		java.lang.String userId) throws com.liferay.portal.SystemException {
+	public static void addReadFlags(java.util.List messages, long userId)
+		throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
 		mbMessageFlagLocalService.addReadFlags(messages, userId);
 	}
 
-	public static void deleteFlags(java.lang.String userId)
+	public static void deleteFlags(long userId)
 		throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
 		mbMessageFlagLocalService.deleteFlags(userId);
 	}
 
-	public static boolean hasReadFlag(java.lang.String messageId,
-		java.lang.String userId) throws com.liferay.portal.SystemException {
+	public static boolean hasReadFlag(java.lang.String messageId, long userId)
+		throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
 
 		return mbMessageFlagLocalService.hasReadFlag(messageId, userId);

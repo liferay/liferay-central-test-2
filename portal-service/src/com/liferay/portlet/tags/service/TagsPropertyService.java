@@ -55,8 +55,7 @@ public interface TagsPropertyService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
-		java.lang.String userId, java.lang.String entryName,
-		java.lang.String key, java.lang.String value)
+		java.lang.String entryName, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

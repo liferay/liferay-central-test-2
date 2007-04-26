@@ -67,7 +67,7 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String userId, long folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -80,7 +80,7 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String userId, long folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
@@ -94,7 +94,7 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String userId, long folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
@@ -211,9 +211,8 @@ public class BookmarksEntryLocalServiceUtil {
 		return bookmarksEntryLocalService.getGroupEntries(groupId, begin, end);
 	}
 
-	public static java.util.List getGroupEntries(long groupId,
-		java.lang.String userId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List getGroupEntries(long groupId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
 		return bookmarksEntryLocalService.getGroupEntries(groupId, userId,
@@ -227,7 +226,7 @@ public class BookmarksEntryLocalServiceUtil {
 		return bookmarksEntryLocalService.getGroupEntriesCount(groupId);
 	}
 
-	public static int getGroupEntriesCount(long groupId, java.lang.String userId)
+	public static int getGroupEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
