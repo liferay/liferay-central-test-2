@@ -270,7 +270,7 @@ else {
 </form>
 
 <%
-MBMessageFlagLocalServiceUtil.addReadFlags(messages, request.getRemoteUser());
+MBMessageFlagLocalServiceUtil.addReadFlags(messages, themeDisplay.getUserId());
 %>
 
 <%!
