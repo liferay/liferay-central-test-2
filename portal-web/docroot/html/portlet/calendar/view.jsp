@@ -43,7 +43,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("summary") %>'>
-		<%@ include file="/html/portlet/calendar/summary.jsp" %>
+		<%@ include file="/html/portlet/calendar/summary.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("day") %>'>
 		<%@ include file="/html/portlet/calendar/day.jspf" %>
