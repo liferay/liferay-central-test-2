@@ -84,7 +84,7 @@ public class UserGroupServiceImpl
 		return UserGroupLocalServiceUtil.getUserGroup(userGroupId);
 	}
 
-	public List getUserUserGroups(String userId)
+	public List getUserUserGroups(long userId)
 		throws PortalException, SystemException {
 
 		return UserGroupLocalServiceUtil.getUserUserGroups(userId);

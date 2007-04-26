@@ -36,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
 public class PortalServiceImpl extends PrincipalBean implements PortalService {
 
 	public void test() {
-		String userId = null;
+		long userId = 0;
 
 		try {
 			userId = getUserId();
@@ -46,7 +46,7 @@ public class PortalServiceImpl extends PrincipalBean implements PortalService {
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info(userId);
+			_log.info("User id " + userId);
 		}
 	}
 

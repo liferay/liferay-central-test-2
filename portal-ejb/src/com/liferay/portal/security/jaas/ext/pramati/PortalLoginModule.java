@@ -36,8 +36,8 @@ import java.security.Principal;
  */
 public class PortalLoginModule extends BasicLoginModule {
 
-	protected Principal getPortalPrincipal(String userId) {
-		return new User(userId);
+	protected Principal getPortalPrincipal(String name) {
+		return new User(name);
 	}
 
 }

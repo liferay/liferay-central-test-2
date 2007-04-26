@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
  * <a href="CommandArgument.java.html"><b><i>View Source</i></b></a>
  *
  * @author Ivica Cardic
+ * @author Brian Wing Shun Chan
  *
  */
 public class CommandArgument {
@@ -88,7 +89,7 @@ public class CommandArgument {
 		}
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _themeDisplay.getUserId();
 	}
 

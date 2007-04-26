@@ -44,10 +44,10 @@ import java.util.List;
 public class MBMessageFlagLocalServiceImpl
 	extends MBMessageFlagLocalServiceBaseImpl {
 
-	public void addReadFlags(List messages, String userId)
+	public void addReadFlags(List messages, long userId)
 		throws SystemException {
 
-		if (userId != null) {
+		if (userId > 0) {
 			Iterator itr = messages.iterator();
 
 			while (itr.hasNext()) {
@@ -70,14 +70,14 @@ public class MBMessageFlagLocalServiceImpl
 		}
 	}
 
-	public void deleteFlags(String userId) throws SystemException {
+	public void deleteFlags(long userId) throws SystemException {
 		MBMessageFlagUtil.removeByUserId(userId);
 	}
 
-	public boolean hasReadFlag(String messageId, String userId)
+	public boolean hasReadFlag(String messageId, long userId)
 		throws SystemException {
 
-		if (userId == null) {
+		if (userId > 0) {
 
 			// Unauthenticated users do not have a record of read messages
 

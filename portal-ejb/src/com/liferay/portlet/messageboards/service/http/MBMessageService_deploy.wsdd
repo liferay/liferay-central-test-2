@@ -80,7 +80,7 @@
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getMessageDisplay" qname="operNS:getMessageDisplay" returnQName="getMessageDisplayReturn" returnType="rtns:anyType" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" name="subscribeMessage" qname="operNS:subscribeMessage" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:string"></parameter>

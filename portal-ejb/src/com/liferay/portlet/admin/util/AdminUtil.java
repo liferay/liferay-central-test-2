@@ -50,31 +50,29 @@ import javax.servlet.http.HttpServletRequest;
 public class AdminUtil {
 
 	public static String getUpdateUserPassword(
-		HttpServletRequest req, String userId) {
+		HttpServletRequest req, long userId) {
 
 		String password = PortalUtil.getUserPassword(req);
 
-		if (!userId.equals(PortalUtil.getUserId(req))) {
+		if (userId != PortalUtil.getUserId(req)) {
 			password = StringPool.BLANK;
 		}
 
 		return password;
 	}
 
-	public static String getUpdateUserPassword(
-		ActionRequest req, String userId) {
-
+	public static String getUpdateUserPassword(ActionRequest req, long userId) {
 		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
 
 		return getUpdateUserPassword(reqImpl.getHttpServletRequest(), userId);
 	}
 
 	public static User updateUser(
-			HttpServletRequest req, String userId, String screenName,
+			HttpServletRequest req, long userId, String screenName,
 			String emailAddress, String languageId, String timeZoneId,
-			String greeting, String resolution, String comments, String smsSn,
-			String aimSn, String icqSn, String jabberSn, String msnSn,
-			String skypeSn, String ymSn)
+			String greeting, String comments, String smsSn, String aimSn,
+			String icqSn, String jabberSn, String msnSn, String skypeSn,
+			String ymSn)
 		throws PortalException, RemoteException, SystemException {
 
 		String password = getUpdateUserPassword(req, userId);
@@ -93,9 +91,8 @@ public class AdminUtil {
 
 		return UserServiceUtil.updateUser(
 			userId, password, screenName, emailAddress, languageId, timeZoneId,
-			greeting, resolution, comments, contact.getFirstName(),
-			contact.getMiddleName(), contact.getLastName(),
-			contact.getNickName(), contact.getPrefixId(), contact.getSuffixId(),
+			greeting, comments, contact.getFirstName(), contact.getMiddleName(),
+			contact.getLastName(), contact.getPrefixId(), contact.getSuffixId(),
 			contact.isMale(), birthdayMonth, birthdayDay, birthdayYear, smsSn,
 			aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, contact.getJobTitle(),
 			user.getOrganization().getOrganizationId(),
@@ -103,19 +100,19 @@ public class AdminUtil {
 	}
 
 	public static User updateUser(
-			ActionRequest req, String userId, String screenName,
+			ActionRequest req, long userId, String screenName,
 			String emailAddress, String languageId, String timeZoneId,
-			String greeting, String resolution, String comments, String smsSn,
-			String aimSn, String icqSn, String jabberSn, String msnSn,
-			String skypeSn, String ymSn)
+			String greeting, String comments, String smsSn, String aimSn,
+			String icqSn, String jabberSn, String msnSn, String skypeSn,
+			String ymSn)
 		throws PortalException, RemoteException, SystemException {
 
 		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
 
 		return updateUser(
 			reqImpl.getHttpServletRequest(), userId, screenName, emailAddress,
-			languageId, timeZoneId, greeting, resolution, comments, smsSn,
-			aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn);
+			languageId, timeZoneId, greeting, comments, smsSn, aimSn, icqSn,
+			jabberSn, msnSn, skypeSn, ymSn);
 	}
 
 }

@@ -69,28 +69,27 @@ import org.json.JSONObject;
  *
  */
 public class UserServiceJSON {
-	public static void addGroupUsers(long groupId, java.lang.String[] userIds)
+	public static void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.addGroupUsers(groupId, userIds);
 	}
 
 	public static void addPasswordPolicyUsers(long passwordPolicyId,
-		java.lang.String[] userIds)
+		long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.addPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
-	public static void addRoleUsers(java.lang.String roleId,
-		java.lang.String[] userIds)
+	public static void addRoleUsers(java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.addRoleUsers(roleId, userIds);
 	}
 
 	public static void addUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds)
+		long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.addUserGroupUsers(userGroupId, userIds);
@@ -102,31 +101,29 @@ public class UserServiceJSON {
 		boolean autoScreenName, java.lang.String screenName,
 		java.lang.String emailAddress, String locale,
 		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String jobTitle,
-		java.lang.String organizationId, java.lang.String locationId,
-		boolean sendEmail)
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, java.lang.String organizationId,
+		java.lang.String locationId, boolean sendEmail)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
 				autoPassword, password1, password2, passwordReset,
 				autoScreenName, screenName, emailAddress,
 				new java.util.Locale(locale), firstName, middleName, lastName,
-				nickName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
+				prefixId, suffixId, male, birthdayMonth, birthdayDay,
 				birthdayYear, jobTitle, organizationId, locationId, sendEmail);
 
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteRoleUser(java.lang.String roleId,
-		java.lang.String userId)
+	public static void deleteRoleUser(java.lang.String roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.deleteRoleUser(roleId, userId);
 	}
 
-	public static void deleteUser(java.lang.String userId)
+	public static void deleteUser(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.deleteUser(userId);
@@ -158,7 +155,7 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject getUserById(java.lang.String userId)
+	public static JSONObject getUserById(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.getUserById(userId);
@@ -176,7 +173,7 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static boolean hasGroupUser(long groupId, java.lang.String userId)
+	public static boolean hasGroupUser(long groupId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		boolean returnValue = UserServiceUtil.hasGroupUser(groupId, userId);
@@ -184,8 +181,7 @@ public class UserServiceJSON {
 		return returnValue;
 	}
 
-	public static boolean hasRoleUser(java.lang.String roleId,
-		java.lang.String userId)
+	public static boolean hasRoleUser(java.lang.String roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		boolean returnValue = UserServiceUtil.hasRoleUser(roleId, userId);
@@ -193,55 +189,52 @@ public class UserServiceJSON {
 		return returnValue;
 	}
 
-	public static void setGroupUsers(long groupId, java.lang.String[] userIds)
+	public static void setGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.setGroupUsers(groupId, userIds);
 	}
 
-	public static void setRoleUsers(java.lang.String roleId,
-		java.lang.String[] userIds)
+	public static void setRoleUsers(java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.setRoleUsers(roleId, userIds);
 	}
 
 	public static void setUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds)
+		long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.setUserGroupUsers(userGroupId, userIds);
 	}
 
-	public static void unsetGroupUsers(long groupId, java.lang.String[] userIds)
+	public static void unsetGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.unsetGroupUsers(groupId, userIds);
 	}
 
 	public static void unsetPasswordPolicyUsers(long passwordPolicyId,
-		java.lang.String[] userIds)
+		long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
-	public static void unsetRoleUsers(java.lang.String roleId,
-		java.lang.String[] userIds)
+	public static void unsetRoleUsers(java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.unsetRoleUsers(roleId, userIds);
 	}
 
 	public static void unsetUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds)
+		long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.unsetUserGroupUsers(userGroupId, userIds);
 	}
 
-	public static JSONObject updateActive(java.lang.String userId,
-		boolean active)
+	public static JSONObject updateActive(long userId, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.updateActive(userId,
@@ -250,7 +243,7 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateAgreedToTermsOfUse(java.lang.String userId,
+	public static JSONObject updateAgreedToTermsOfUse(long userId,
 		boolean agreedToTermsOfUse)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
@@ -260,7 +253,7 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updatePassword(java.lang.String userId,
+	public static JSONObject updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset)
 		throws com.liferay.portal.SystemException, 
@@ -271,33 +264,32 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void updatePortrait(java.lang.String userId, byte[] bytes)
+	public static void updatePortrait(long userId, byte[] bytes)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.updatePortrait(userId, bytes);
 	}
 
-	public static JSONObject updateUser(java.lang.String userId,
-		java.lang.String password, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String languageId,
-		java.lang.String timeZoneId, java.lang.String greeting,
-		java.lang.String resolution, java.lang.String comments,
+	public static JSONObject updateUser(long userId, java.lang.String password,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.lang.String languageId, java.lang.String timeZoneId,
+		java.lang.String greeting, java.lang.String comments,
 		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
-		java.lang.String icqSn, java.lang.String jabberSn,
-		java.lang.String msnSn, java.lang.String skypeSn,
-		java.lang.String ymSn, java.lang.String jobTitle,
-		java.lang.String organizationId, java.lang.String locationId)
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
+		java.lang.String jabberSn, java.lang.String msnSn,
+		java.lang.String skypeSn, java.lang.String ymSn,
+		java.lang.String jobTitle, java.lang.String organizationId,
+		java.lang.String locationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
 				password, screenName, emailAddress, languageId, timeZoneId,
-				greeting, resolution, comments, firstName, middleName,
-				lastName, nickName, prefixId, suffixId, male, birthdayMonth,
-				birthdayDay, birthdayYear, smsSn, aimSn, icqSn, jabberSn,
-				msnSn, skypeSn, ymSn, jobTitle, organizationId, locationId);
+				greeting, comments, firstName, middleName, lastName, prefixId,
+				suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+				smsSn, aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
+				organizationId, locationId);
 
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}

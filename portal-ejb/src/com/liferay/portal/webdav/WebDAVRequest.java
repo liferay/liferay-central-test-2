@@ -24,6 +24,7 @@ package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.GetterUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,7 +48,7 @@ public class WebDAVRequest {
 		_groupPath = WebDAVUtil.isGroupPath(_path);
 		_companyId = WebDAVUtil.getCompanyId(_path);
 		_groupId = WebDAVUtil.getGroupId(_path);
-		_userId = _req.getRemoteUser();
+		_userId = GetterUtil.getLong(_req.getRemoteUser());
 		_permissionChecker = permissionChecker;
 	}
 
@@ -87,7 +88,7 @@ public class WebDAVRequest {
 		return _groupId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
@@ -102,7 +103,7 @@ public class WebDAVRequest {
 	private boolean _groupPath;
 	private String _companyId = StringPool.BLANK;
 	private long _groupId;
-	private String _userId;
+	private long _userId;
 	private PermissionChecker _permissionChecker;
 
 }

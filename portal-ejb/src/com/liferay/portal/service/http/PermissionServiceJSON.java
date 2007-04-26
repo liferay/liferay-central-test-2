@@ -83,8 +83,8 @@ public class PermissionServiceJSON {
 		return returnValue;
 	}
 
-	public static boolean hasUserPermissions(java.lang.String userId,
-		long groupId, java.lang.String actionId, long[] resourceIds,
+	public static boolean hasUserPermissions(long userId, long groupId,
+		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
@@ -127,8 +127,8 @@ public class PermissionServiceJSON {
 			primKey, actionId);
 	}
 
-	public static void setUserPermissions(java.lang.String userId,
-		long groupId, java.lang.String[] actionIds, long resourceId)
+	public static void setUserPermissions(long userId, long groupId,
+		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		PermissionServiceUtil.setUserPermissions(userId, groupId, actionIds,
@@ -160,8 +160,8 @@ public class PermissionServiceJSON {
 			scope, actionId);
 	}
 
-	public static void unsetUserPermissions(java.lang.String userId,
-		long groupId, java.lang.String[] actionIds, long resourceId)
+	public static void unsetUserPermissions(long userId, long groupId,
+		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		PermissionServiceUtil.unsetUserPermissions(userId, groupId, actionIds,

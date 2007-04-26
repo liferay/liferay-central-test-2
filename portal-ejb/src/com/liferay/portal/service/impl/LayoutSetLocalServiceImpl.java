@@ -66,7 +66,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		long groupId = LayoutImpl.getGroupId(ownerId);
-		String userId = String.valueOf(LayoutImpl.getGroupId(ownerId));
+		long userId = groupId;
 		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
 
 		LayoutSet layoutSet = LayoutSetUtil.create(ownerId);

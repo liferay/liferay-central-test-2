@@ -41,7 +41,7 @@ import java.util.List;
 public class UserGroupRoleLocalServiceImpl
 	extends UserGroupRoleLocalServiceBaseImpl {
 
-	public void addUserGroupRoles(String userId, long groupId, String[] roleIds)
+	public void addUserGroupRoles(long userId, long groupId, String[] roleIds)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < roleIds.length; i++) {
@@ -55,11 +55,11 @@ public class UserGroupRoleLocalServiceImpl
 		}
 	}
 
-	public void addUserGroupRoles(String[] userIds, long groupId, String roleId)
+	public void addUserGroupRoles(long[] userIds, long groupId, String roleId)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < userIds.length; i++) {
-			String userId = userIds[i];
+			long userId = userIds[i];
 
 			UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);
 
@@ -70,7 +70,7 @@ public class UserGroupRoleLocalServiceImpl
 	}
 
 	public void deleteUserGroupRoles(
-			String userId, long groupId, String[] roleIds)
+			long userId, long groupId, String[] roleIds)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < roleIds.length; i++) {
@@ -86,11 +86,11 @@ public class UserGroupRoleLocalServiceImpl
 	}
 
 	public void deleteUserGroupRoles(
-			String[] userIds, long groupId, String roleId)
+			long[] userIds, long groupId, String roleId)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < userIds.length; i++) {
-			String userId = userIds[i];
+			long userId = userIds[i];
 
 			try {
 				UserGroupRoleUtil.remove(
@@ -101,11 +101,11 @@ public class UserGroupRoleLocalServiceImpl
 		}
 	}
 
-	public void deleteUserGroupRoles(String[] userIds, long groupId)
+	public void deleteUserGroupRoles(long[] userIds, long groupId)
 		throws SystemException {
 
 		for (int i = 0; i < userIds.length; i++) {
-			String userId = userIds[i];
+			long userId = userIds[i];
 
 			UserGroupRoleUtil.removeByU_G(userId, groupId);
 		}
@@ -123,19 +123,19 @@ public class UserGroupRoleLocalServiceImpl
 		UserGroupRoleUtil.removeByRoleId(roleId);
 	}
 
-	public void deleteUserGroupRolesByUserId(String userId)
+	public void deleteUserGroupRolesByUserId(long userId)
 		throws SystemException {
 
 		UserGroupRoleUtil.removeByUserId(userId);
 	}
 
-	public List getUserGroupRoles(String userId, long groupId)
+	public List getUserGroupRoles(long userId, long groupId)
 		throws PortalException, SystemException {
 
 		return UserGroupRoleUtil.findByU_G(userId, groupId);
 	}
 
-	public boolean hasUserGroupRole(String userId, long groupId, String roleId)
+	public boolean hasUserGroupRole(long userId, long groupId, String roleId)
 		throws PortalException, SystemException {
 
 		UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);

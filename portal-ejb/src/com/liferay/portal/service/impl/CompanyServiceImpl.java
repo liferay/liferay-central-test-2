@@ -61,8 +61,7 @@ public class CompanyServiceImpl
 	}
 
 	public void updateDisplay(
-			String companyId, String languageId, String timeZoneId,
-			String resolution)
+			String companyId, String languageId, String timeZoneId)
 		throws PortalException, SystemException {
 
 		if (!RoleLocalServiceUtil.hasUserRole(
@@ -72,7 +71,7 @@ public class CompanyServiceImpl
 		}
 
 		CompanyLocalServiceUtil.updateDisplay(
-			companyId, languageId, timeZoneId, resolution);
+			companyId, languageId, timeZoneId);
 	}
 
 	public void updateLogo(String companyId, File file)

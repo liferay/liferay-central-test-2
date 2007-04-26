@@ -156,7 +156,7 @@ public class ViewArticleContentAction extends Action {
 				JournalUtil.addReservedEl(
 					root, tokens,
 					JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_ID,
-					user.getUserId());
+					String.valueOf(user.getUserId()));
 
 				JournalUtil.addReservedEl(
 					root, tokens,

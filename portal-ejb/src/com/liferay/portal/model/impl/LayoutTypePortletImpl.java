@@ -129,12 +129,12 @@ public class LayoutTypePortletImpl
 		return layoutTemplateId;
 	}
 
-	public void setLayoutTemplateId(String userId, String newLayoutTemplateId) {
+	public void setLayoutTemplateId(long userId, String newLayoutTemplateId) {
 		setLayoutTemplateId(userId, newLayoutTemplateId, true);
 	}
 
 	public void setLayoutTemplateId(
-		String userId, String newLayoutTemplateId, boolean checkPermission) {
+		long userId, String newLayoutTemplateId, boolean checkPermission) {
 
 		if (checkPermission &&
 			!PluginSettingLocalServiceUtil.hasPermission(
@@ -270,24 +270,24 @@ public class LayoutTypePortletImpl
 
 	// Modify portlets
 
-	public String addPortletId(String userId, String portletId) {
+	public String addPortletId(long userId, String portletId) {
 		return addPortletId(userId, portletId, true);
 	}
 
 	public String addPortletId(
-		String userId, String portletId, boolean checkPermission) {
+		long userId, String portletId, boolean checkPermission) {
 
 		return addPortletId(userId, portletId, null, -1, checkPermission);
 	}
 
 	public String addPortletId(
-		String userId, String portletId, String columnId, int columnPos) {
+		long userId, String portletId, String columnId, int columnPos) {
 
 		return addPortletId(userId, portletId, columnId, columnPos, true);
 	}
 
 	public String addPortletId(
-		String userId, String portletId, String columnId, int columnPos,
+		long userId, String portletId, String columnId, int columnPos,
 		boolean checkPermission) {
 
 		Portlet portlet = null;
@@ -354,7 +354,7 @@ public class LayoutTypePortletImpl
 	}
 
 	public void addPortletIds(
-		String userId, String[] portletIds, boolean checkPermission) {
+		long userId, String[] portletIds, boolean checkPermission) {
 
 		for (int i = 0; i < portletIds.length; i++) {
 			String portletId = portletIds[i];
@@ -364,7 +364,7 @@ public class LayoutTypePortletImpl
 	}
 
 	public void addPortletIds(
-		String userId, String[] portletIds, String columnId,
+		long userId, String[] portletIds, String columnId,
 		boolean checkPermission) {
 
 		for (int i = 0; i < portletIds.length; i++) {
@@ -434,7 +434,7 @@ public class LayoutTypePortletImpl
 	}
 
 	public void movePortletId(
-		String userId, String portletId, String columnId, int columnPos) {
+		long userId, String portletId, String columnId, int columnPos) {
 
 		removePortletId(portletId, false);
 		addPortletId(userId, portletId, columnId, columnPos);

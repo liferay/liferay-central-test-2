@@ -65,14 +65,7 @@ public class CalEventJSONSerializer {
 			jsonObj.put("companyId", companyId.toString());
 		}
 
-		String userId = model.getUserId();
-
-		if (userId == null) {
-			jsonObj.put("userId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userId", userId.toString());
-		}
+		jsonObj.put("userId", model.getUserId());
 
 		String userName = model.getUserName();
 

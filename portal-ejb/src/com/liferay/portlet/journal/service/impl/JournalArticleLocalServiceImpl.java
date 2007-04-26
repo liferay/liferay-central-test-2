@@ -121,11 +121,11 @@ public class JournalArticleLocalServiceImpl
 	extends JournalArticleLocalServiceBaseImpl {
 
 	public JournalArticle addArticle(
-			String userId, String articleId, boolean autoArticleId,
-			String plid, String title, String description, String content,
-			String type, String structureId, String templateId,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			long userId, String articleId, boolean autoArticleId, String plid,
+			String title, String description, String content, String type,
+			String structureId, String templateId, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
@@ -148,11 +148,11 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle addArticle(
-			String userId, String articleId, boolean autoArticleId,
-			String plid, String title, String description, String content,
-			String type, String structureId, String templateId,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			long userId, String articleId, boolean autoArticleId, String plid,
+			String title, String description, String content, String type,
+			String structureId, String templateId, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
@@ -174,11 +174,11 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle addArticle(
-			String userId, String articleId, boolean autoArticleId,
-			String plid, String title, String description, String content,
-			String type, String structureId, String templateId,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			long userId, String articleId, boolean autoArticleId, String plid,
+			String title, String description, String content, String type,
+			String structureId, String templateId, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
@@ -332,7 +332,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle approveArticle(
-			String userId, long groupId, String articleId, double version,
+			long userId, long groupId, String articleId, double version,
 			String articleURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
@@ -663,7 +663,7 @@ public class JournalArticleLocalServiceImpl
 
 			JournalUtil.addReservedEl(
 				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_ID,
-				article.getUserId());
+				String.valueOf(article.getUserId()));
 
 			String userName = StringPool.BLANK;
 			String userEmailAddress = StringPool.BLANK;
@@ -1029,7 +1029,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle updateArticle(
-			String userId, long groupId, String articleId, double version,
+			long userId, long groupId, String articleId, double version,
 			boolean incrementVersion, String title, String description,
 			String content, String type, String structureId, String templateId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,

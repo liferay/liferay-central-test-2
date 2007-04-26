@@ -79,10 +79,10 @@ public class AutoLoginFilter implements Filter {
 
 		HttpSession ses = httpReq.getSession();
 
-		String userId = httpReq.getRemoteUser();
+		String remoteUser = httpReq.getRemoteUser();
 		String jUserName = (String)ses.getAttribute("j_username");
 
-		if ((userId == null) && (jUserName == null)) {
+		if ((remoteUser == null) && (jUserName == null)) {
 			req.setAttribute(WebKeys.COMPANY_ID, _companyId);
 
 			String[] autoLogins = PropsUtil.getArray(
@@ -93,11 +93,12 @@ public class AutoLoginFilter implements Filter {
 					(AutoLogin)InstancePool.get(autoLogins[i]);
 
 				try {
-					String loginUserId =
+					String loginRemoteUser =
 						login(httpReq, httpRes, ses, autoLogin);
 
-					if (loginUserId != null) {
-						req = new ProtectedServletRequest(httpReq, loginUserId);
+					if (loginRemoteUser != null) {
+						req = new ProtectedServletRequest(
+							httpReq, loginRemoteUser);
 
 						if (GetterUtil.getBoolean(
 								PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE))) {

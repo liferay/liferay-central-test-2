@@ -73,9 +73,9 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 			userGroupIds);
 	}
 
-	public com.liferay.portal.model.UserGroup addUserGroup(
-		java.lang.String userId, java.lang.String companyId,
-		java.lang.String name, java.lang.String description)
+	public com.liferay.portal.model.UserGroup addUserGroup(long userId,
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserGroupLocalServiceFactory.getTxImpl().addUserGroup(userId,
@@ -103,7 +103,7 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 			name);
 	}
 
-	public java.util.List getUserUserGroups(java.lang.String userId)
+	public java.util.List getUserUserGroups(long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserGroupLocalServiceFactory.getTxImpl().getUserUserGroups(userId);

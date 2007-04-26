@@ -45,7 +45,7 @@ public class LoginFailure implements AuthFailure {
 	}
 
 	public void onFailureByUserId(
-			String companyId, String userId, Map headerMap, Map parameterMap)
+			String companyId, long userId, Map headerMap, Map parameterMap)
 		throws AuthException {
 	}
 

@@ -147,7 +147,6 @@ public class AddUserAction extends PortletAction {
 		String firstName = ParamUtil.getString(req, "firstName");
 		String middleName = ParamUtil.getString(req, "middleName");
 		String lastName = ParamUtil.getString(req, "lastName");
-		String nickName = ParamUtil.getString(req, "nickName");
 		int prefixId = ParamUtil.getInteger(req, "prefixId");
 		int suffixId = ParamUtil.getInteger(req, "suffixId");
 		boolean male = ParamUtil.get(req, "male", true);
@@ -165,8 +164,8 @@ public class AddUserAction extends PortletAction {
 			company.getCompanyId(), autoPassword, password1, password2,
 			passwordReset, autoScreenName, screenName, emailAddress,
 			themeDisplay.getLocale(), firstName, middleName, lastName,
-			nickName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
-			birthdayYear, jobTitle, organizationId, locationId, sendEmail);
+			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+			jobTitle, organizationId, locationId, sendEmail);
 
 		// Session messages
 

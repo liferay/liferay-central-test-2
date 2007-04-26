@@ -57,7 +57,7 @@ public class ContactModelImpl extends BaseModelImpl {
 	public static Object[][] TABLE_COLUMNS = {
 			{ "contactId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
-			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
@@ -66,7 +66,6 @@ public class ContactModelImpl extends BaseModelImpl {
 			{ "firstName", new Integer(Types.VARCHAR) },
 			{ "middleName", new Integer(Types.VARCHAR) },
 			{ "lastName", new Integer(Types.VARCHAR) },
-			{ "nickName", new Integer(Types.VARCHAR) },
 			{ "prefixId", new Integer(Types.INTEGER) },
 			{ "suffixId", new Integer(Types.INTEGER) },
 			{ "male", new Integer(Types.BOOLEAN) },
@@ -89,9 +88,6 @@ public class ContactModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.userId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -106,9 +102,6 @@ public class ContactModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_LASTNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.lastName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NICKNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.nickName"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_SMSSN = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.smsSn"),
@@ -187,19 +180,12 @@ public class ContactModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getUserId() {
-		return GetterUtil.getString(_userId);
+	public long getUserId() {
+		return _userId;
 	}
 
-	public void setUserId(String userId) {
-		if (((userId == null) && (_userId != null)) ||
-				((userId != null) && (_userId == null)) ||
-				((userId != null) && (_userId != null) &&
-				!userId.equals(_userId))) {
-			if (!XSS_ALLOW_USERID) {
-				userId = XSSUtil.strip(userId);
-			}
-
+	public void setUserId(long userId) {
+		if (userId != _userId) {
 			_userId = userId;
 		}
 	}
@@ -322,23 +308,6 @@ public class ContactModelImpl extends BaseModelImpl {
 			}
 
 			_lastName = lastName;
-		}
-	}
-
-	public String getNickName() {
-		return GetterUtil.getString(_nickName);
-	}
-
-	public void setNickName(String nickName) {
-		if (((nickName == null) && (_nickName != null)) ||
-				((nickName != null) && (_nickName == null)) ||
-				((nickName != null) && (_nickName != null) &&
-				!nickName.equals(_nickName))) {
-			if (!XSS_ALLOW_NICKNAME) {
-				nickName = XSSUtil.strip(nickName);
-			}
-
-			_nickName = nickName;
 		}
 	}
 
@@ -601,7 +570,6 @@ public class ContactModelImpl extends BaseModelImpl {
 		clone.setFirstName(getFirstName());
 		clone.setMiddleName(getMiddleName());
 		clone.setLastName(getLastName());
-		clone.setNickName(getNickName());
 		clone.setPrefixId(getPrefixId());
 		clone.setSuffixId(getSuffixId());
 		clone.setMale(getMale());
@@ -671,7 +639,7 @@ public class ContactModelImpl extends BaseModelImpl {
 
 	private long _contactId;
 	private String _companyId;
-	private String _userId;
+	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
@@ -680,7 +648,6 @@ public class ContactModelImpl extends BaseModelImpl {
 	private String _firstName;
 	private String _middleName;
 	private String _lastName;
-	private String _nickName;
 	private int _prefixId;
 	private int _suffixId;
 	private boolean _male;

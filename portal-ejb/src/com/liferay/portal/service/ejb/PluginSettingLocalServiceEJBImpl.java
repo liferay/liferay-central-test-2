@@ -66,9 +66,8 @@ public class PluginSettingLocalServiceEJBImpl
 			begin, end);
 	}
 
-	public void checkPermission(java.lang.String userId,
-		java.lang.String pluginId, java.lang.String pluginType)
-		throws com.liferay.portal.PortalException {
+	public void checkPermission(long userId, java.lang.String pluginId,
+		java.lang.String pluginType) throws com.liferay.portal.PortalException {
 		PluginSettingLocalServiceFactory.getTxImpl().checkPermission(userId,
 			pluginId, pluginType);
 	}
@@ -87,8 +86,8 @@ public class PluginSettingLocalServiceEJBImpl
 			pluginId, pluginType);
 	}
 
-	public boolean hasPermission(java.lang.String userId,
-		java.lang.String pluginId, java.lang.String pluginType) {
+	public boolean hasPermission(long userId, java.lang.String pluginId,
+		java.lang.String pluginType) {
 		return PluginSettingLocalServiceFactory.getTxImpl().hasPermission(userId,
 			pluginId, pluginType);
 	}

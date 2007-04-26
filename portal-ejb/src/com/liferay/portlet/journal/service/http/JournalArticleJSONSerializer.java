@@ -74,15 +74,7 @@ public class JournalArticleJSONSerializer {
 		}
 
 		jsonObj.put("version", model.getVersion());
-
-		String userId = model.getUserId();
-
-		if (userId == null) {
-			jsonObj.put("userId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userId", userId.toString());
-		}
+		jsonObj.put("userId", model.getUserId());
 
 		String userName = model.getUserName();
 
@@ -175,15 +167,7 @@ public class JournalArticleJSONSerializer {
 		}
 
 		jsonObj.put("approved", model.getApproved());
-
-		String approvedByUserId = model.getApprovedByUserId();
-
-		if (approvedByUserId == null) {
-			jsonObj.put("approvedByUserId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("approvedByUserId", approvedByUserId.toString());
-		}
+		jsonObj.put("approvedByUserId", model.getApprovedByUserId());
 
 		String approvedByUserName = model.getApprovedByUserName();
 

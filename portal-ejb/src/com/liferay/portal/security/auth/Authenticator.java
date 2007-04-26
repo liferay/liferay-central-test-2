@@ -49,7 +49,7 @@ public interface Authenticator {
 		throws AuthException;
 
 	public int authenticateByUserId(
-			String companyId, String userId, String password, Map headerMap,
+			String companyId, long userId, String password, Map headerMap,
 			Map parameterMap)
 		throws AuthException;
 

@@ -54,7 +54,7 @@ public class GroupModelImpl extends BaseModelImpl {
 	public static Object[][] TABLE_COLUMNS = {
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
-			{ "creatorUserId", new Integer(Types.VARCHAR) },
+			{ "creatorUserId", new Integer(Types.BIGINT) },
 			{ "className", new Integer(Types.VARCHAR) },
 			{ "classPK", new Integer(Types.VARCHAR) },
 			{ "parentGroupId", new Integer(Types.BIGINT) },
@@ -69,9 +69,6 @@ public class GroupModelImpl extends BaseModelImpl {
 				"xss.allow.com.liferay.portal.model.Group"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group.companyId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CREATORUSERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Group.creatorUserId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group.className"),
@@ -132,19 +129,12 @@ public class GroupModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCreatorUserId() {
-		return GetterUtil.getString(_creatorUserId);
+	public long getCreatorUserId() {
+		return _creatorUserId;
 	}
 
-	public void setCreatorUserId(String creatorUserId) {
-		if (((creatorUserId == null) && (_creatorUserId != null)) ||
-				((creatorUserId != null) && (_creatorUserId == null)) ||
-				((creatorUserId != null) && (_creatorUserId != null) &&
-				!creatorUserId.equals(_creatorUserId))) {
-			if (!XSS_ALLOW_CREATORUSERID) {
-				creatorUserId = XSSUtil.strip(creatorUserId);
-			}
-
+	public void setCreatorUserId(long creatorUserId) {
+		if (creatorUserId != _creatorUserId) {
 			_creatorUserId = creatorUserId;
 		}
 	}
@@ -347,7 +337,7 @@ public class GroupModelImpl extends BaseModelImpl {
 
 	private long _groupId;
 	private String _companyId;
-	private String _creatorUserId;
+	private long _creatorUserId;
 	private String _className;
 	private String _classPK;
 	private long _parentGroupId;

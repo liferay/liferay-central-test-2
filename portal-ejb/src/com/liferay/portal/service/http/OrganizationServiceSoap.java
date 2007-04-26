@@ -157,7 +157,7 @@ public class OrganizationServiceSoap {
 	}
 
 	public static com.liferay.portal.model.OrganizationSoap[] getUserOrganizations(
-		java.lang.String userId) throws RemoteException {
+		long userId) throws RemoteException {
 		try {
 			java.util.List returnValue = OrganizationServiceUtil.getUserOrganizations(userId);
 

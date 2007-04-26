@@ -67,7 +67,7 @@ public class ShoppingCouponLocalServiceImpl
 	extends ShoppingCouponLocalServiceBaseImpl {
 
 	public ShoppingCoupon addCoupon(
-			String userId, String plid, String couponId, boolean autoCouponId,
+			long userId, String plid, String couponId, boolean autoCouponId,
 			String name, String description, int startDateMonth,
 			int startDateDay, int startDateYear, int startDateHour,
 			int startDateMinute, int endDateMonth, int endDateDay,
@@ -178,7 +178,7 @@ public class ShoppingCouponLocalServiceImpl
 	}
 
 	public ShoppingCoupon updateCoupon(
-			String userId, String couponId, String name, String description,
+			long userId, String couponId, String name, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int endDateHour, int endDateMinute,

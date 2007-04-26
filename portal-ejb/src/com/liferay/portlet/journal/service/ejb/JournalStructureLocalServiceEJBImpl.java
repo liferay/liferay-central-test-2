@@ -67,8 +67,8 @@ public class JournalStructureLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
-		java.lang.String userId, java.lang.String structureId,
-		boolean autoStructureId, java.lang.String plid, java.lang.String name,
+		long userId, java.lang.String structureId, boolean autoStructureId,
+		java.lang.String plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -79,8 +79,8 @@ public class JournalStructureLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
-		java.lang.String userId, java.lang.String structureId,
-		boolean autoStructureId, java.lang.String plid, java.lang.String name,
+		long userId, java.lang.String structureId, boolean autoStructureId,
+		java.lang.String plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -92,8 +92,8 @@ public class JournalStructureLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
-		java.lang.String userId, java.lang.String structureId,
-		boolean autoStructureId, java.lang.String plid, java.lang.String name,
+		long userId, java.lang.String structureId, boolean autoStructureId,
+		java.lang.String plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,

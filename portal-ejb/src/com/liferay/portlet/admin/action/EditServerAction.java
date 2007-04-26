@@ -107,7 +107,9 @@ public class EditServerAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		if (!OmniadminUtil.isOmniadmin(req.getRemoteUser())) {
+		long userId = PortalUtil.getUserId(req);
+
+		if (!OmniadminUtil.isOmniadmin(userId)) {
 			SessionErrors.add(req, PrincipalException.class.getName());
 
 			setForward(req, "portlet.admin.error");

@@ -80,14 +80,7 @@ public class DLFileEntryJSONSerializer {
 			jsonObj.put("companyId", companyId.toString());
 		}
 
-		String userId = model.getUserId();
-
-		if (userId == null) {
-			jsonObj.put("userId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userId", userId.toString());
-		}
+		jsonObj.put("userId", model.getUserId());
 
 		String userName = model.getUserName();
 
@@ -98,14 +91,7 @@ public class DLFileEntryJSONSerializer {
 			jsonObj.put("userName", userName.toString());
 		}
 
-		String versionUserId = model.getVersionUserId();
-
-		if (versionUserId == null) {
-			jsonObj.put("versionUserId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("versionUserId", versionUserId.toString());
-		}
+		jsonObj.put("versionUserId", model.getVersionUserId());
 
 		String versionUserName = model.getVersionUserName();
 

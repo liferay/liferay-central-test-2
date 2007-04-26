@@ -67,7 +67,7 @@ public class LoginPostAction extends Action {
 			HttpSession ses = req.getSession();
 
 			String companyId = PortalUtil.getCompanyId(req);
-			String userId = PortalUtil.getUserId(req);
+			long userId = PortalUtil.getUserId(req);
 
 			if (GetterUtil.getBoolean(
 					PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED))) {

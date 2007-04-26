@@ -49,9 +49,8 @@ public class UserTrackerLocalServiceImpl
 	// Business methods
 
 	public UserTracker addUserTracker(
-			String companyId, String userId, Date modifiedDate,
-			String remoteAddr, String remoteHost, String userAgent,
-			List userTrackerPaths)
+			String companyId, long userId, Date modifiedDate, String remoteAddr,
+			String remoteHost, String userAgent, List userTrackerPaths)
 		throws SystemException {
 
 		if (GetterUtil.getBoolean(PropsUtil.get(

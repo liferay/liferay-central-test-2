@@ -729,7 +729,7 @@
 				Role_.name	ASC
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserFinder.countByC_U_FN_MN_LN_SN_EA_A">
+	<sql id="com.liferay.portal.service.persistence.UserFinder.countByC_FN_MN_LN_SN_EA_A">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT User_.userId) AS COUNT_VALUE
@@ -742,8 +742,8 @@
 			WHERE
 				[$WHERE$]
 				(User_.companyId = ?) AND
+				(User_.defaultUser = ?) AND
 				(
-					(lower(User_.userId) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Contact_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
@@ -753,7 +753,7 @@
 				(User_.active_ = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserFinder.findByC_U_FN_MN_LN_SN_EA_A">
+	<sql id="com.liferay.portal.service.persistence.UserFinder.findByC_FN_MN_LN_SN_EA_A">
 		<![CDATA[
 			SELECT
 				DISTINCT {User_.*}, Contact_.firstName, Contact_.middleName, Contact_.lastName
@@ -766,8 +766,8 @@
 			WHERE
 				[$WHERE$]
 				(User_.companyId = ?) AND
+				(User_.defaultUser = ?) AND
 				(
-					(lower(User_.userId) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Contact_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]

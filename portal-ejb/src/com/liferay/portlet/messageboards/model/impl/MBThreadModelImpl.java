@@ -62,7 +62,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 			{ "rootMessageId", new Integer(Types.VARCHAR) },
 			{ "messageCount", new Integer(Types.INTEGER) },
 			{ "viewCount", new Integer(Types.INTEGER) },
-			{ "lastPostByUserId", new Integer(Types.VARCHAR) },
+			{ "lastPostByUserId", new Integer(Types.BIGINT) },
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) },
 			{ "priority", new Integer(Types.DOUBLE) }
 		};
@@ -80,9 +80,6 @@ public class MBThreadModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ROOTMESSAGEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBThread.rootMessageId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LASTPOSTBYUSERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBThread.lastPostByUserId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBThreadModel"));
@@ -186,19 +183,12 @@ public class MBThreadModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getLastPostByUserId() {
-		return GetterUtil.getString(_lastPostByUserId);
+	public long getLastPostByUserId() {
+		return _lastPostByUserId;
 	}
 
-	public void setLastPostByUserId(String lastPostByUserId) {
-		if (((lastPostByUserId == null) && (_lastPostByUserId != null)) ||
-				((lastPostByUserId != null) && (_lastPostByUserId == null)) ||
-				((lastPostByUserId != null) && (_lastPostByUserId != null) &&
-				!lastPostByUserId.equals(_lastPostByUserId))) {
-			if (!XSS_ALLOW_LASTPOSTBYUSERID) {
-				lastPostByUserId = XSSUtil.strip(lastPostByUserId);
-			}
-
+	public void setLastPostByUserId(long lastPostByUserId) {
+		if (lastPostByUserId != _lastPostByUserId) {
 			_lastPostByUserId = lastPostByUserId;
 		}
 	}
@@ -309,7 +299,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 	private String _rootMessageId;
 	private int _messageCount;
 	private int _viewCount;
-	private String _lastPostByUserId;
+	private long _lastPostByUserId;
 	private Date _lastPostDate;
 	private double _priority;
 }

@@ -27,6 +27,7 @@ import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.StringUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -39,16 +40,17 @@ import org.apache.commons.logging.LogFactory;
  */
 public class OmniadminUtil {
 
-	public static boolean isOmniadmin(String userId) {
-		if (userId == null) {
+	public static boolean isOmniadmin(long userId) {
+		if (userId <= 0) {
 			return false;
 		}
 
-		String[] omniAdminUsers = PropsUtil.getArray(PropsUtil.OMNIADMIN_USERS);
+		long[] omniAdminUsers = StringUtil.split(
+			PropsUtil.get(PropsUtil.OMNIADMIN_USERS), 0L);
 
 		if (omniAdminUsers.length > 0) {
 			for (int i = 0; i < omniAdminUsers.length; i++) {
-				if (omniAdminUsers[i].equals(userId)) {
+				if (omniAdminUsers[i] == userId) {
 					return true;
 				}
 			}

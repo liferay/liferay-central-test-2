@@ -36,7 +36,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auth.Authenticator;
-import com.liferay.portal.security.auth.PrincipalFinder;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -49,7 +48,6 @@ import com.liferay.util.CookieUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.HttpHeaders;
-import com.liferay.util.InstancePool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.XSSUtil;
@@ -113,7 +111,7 @@ public class LoginAction extends Action {
 
 		HttpSession ses = req.getSession();
 
-		String userId = login;
+		long userId = GetterUtil.getLong(login);
 
 		int authResult = Authenticator.FAILURE;
 
@@ -159,18 +157,8 @@ public class LoginAction extends Action {
 		}
 		else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
 			authResult = UserLocalServiceUtil.authenticateByUserId(
-				company.getCompanyId(), login, password, headerMap,
+				company.getCompanyId(), userId, password, headerMap,
 				parameterMap);
-		}
-
-		try {
-			PrincipalFinder principalFinder =
-				(PrincipalFinder)InstancePool.get(
-					PropsUtil.get(PropsUtil.PRINCIPAL_FINDER));
-
-			userId = principalFinder.fromLiferay(userId);
-		}
-		catch (Exception e) {
 		}
 
 		if (authResult == Authenticator.SUCCESS) {
@@ -195,15 +183,17 @@ public class LoginAction extends Action {
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 
-			ses.setAttribute("j_username", userId);
+			String userIdString = String.valueOf(userId);
+
+			ses.setAttribute("j_username", userIdString);
 			ses.setAttribute("j_password", user.getPassword());
-			ses.setAttribute("j_remoteuser", userId);
+			ses.setAttribute("j_remoteuser", userIdString);
 
 			ses.setAttribute(WebKeys.USER_PASSWORD, password);
 
 			Cookie idCookie = new Cookie(
 				CookieKeys.ID,
-				UserLocalServiceUtil.encryptUserId(userId));
+				UserLocalServiceUtil.encryptUserId(userIdString));
 
 			idCookie.setPath(StringPool.SLASH);
 

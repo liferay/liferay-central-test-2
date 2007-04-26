@@ -58,7 +58,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 			{ "folderId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
-			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.BIGINT) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "parentFolderId", new Integer(Types.BIGINT) },
@@ -70,9 +70,6 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 			XSS_ALLOW);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksFolder.companyId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksFolder.userId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksFolder.name"),
@@ -131,19 +128,12 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getUserId() {
-		return GetterUtil.getString(_userId);
+	public long getUserId() {
+		return _userId;
 	}
 
-	public void setUserId(String userId) {
-		if (((userId == null) && (_userId != null)) ||
-				((userId != null) && (_userId == null)) ||
-				((userId != null) && (_userId != null) &&
-				!userId.equals(_userId))) {
-			if (!XSS_ALLOW_USERID) {
-				userId = XSSUtil.strip(userId);
-			}
-
+	public void setUserId(long userId) {
+		if (userId != _userId) {
 			_userId = userId;
 		}
 	}
@@ -295,7 +285,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 	private long _folderId;
 	private long _groupId;
 	private String _companyId;
-	private String _userId;
+	private long _userId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _parentFolderId;

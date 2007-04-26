@@ -72,17 +72,18 @@ public class TCKAction extends Action {
 					nameAndWar[1] + PortletImpl.WAR_SEPARATOR + nameAndWar[0]);
 			}
 
+			long userId = 2003;
+
 			Layout layout = LayoutLocalServiceUtil.addLayout(
-				1, "liferay.com.1", false,
-				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, "TCKAction",
-				StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false,
+				1, userId, false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID,
+				"TCKAction", StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false,
 				StringPool.BLANK);
 
 			LayoutTypePortlet layoutType =
 				(LayoutTypePortlet)layout.getLayoutType();
 
 			for (int i = 0; i < portletNames.length; i++) {
-				layoutType.addPortletId("liferay.com.1", portletNames[i]);
+				layoutType.addPortletId(userId, portletNames[i]);
 			}
 
 			LayoutLocalServiceUtil.updateLayout(

@@ -55,8 +55,8 @@ public class SCProductVersionLocalServiceImpl
 	extends SCProductVersionLocalServiceBaseImpl {
 
 	public SCProductVersion addProductVersion(
-			String userId, long productEntryId, String version,
-			String changeLog, String downloadPageURL, String directDownloadURL,
+			long userId, long productEntryId, String version, String changeLog,
+			String downloadPageURL, String directDownloadURL,
 			boolean repoStoreArtifact, long[] frameworkVersionIds,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -69,8 +69,8 @@ public class SCProductVersionLocalServiceImpl
 	}
 
 	public SCProductVersion addProductVersion(
-			String userId, long productEntryId, String version,
-			String changeLog, String downloadPageURL, String directDownloadURL,
+			long userId, long productEntryId, String version, String changeLog,
+			String downloadPageURL, String directDownloadURL,
 			boolean repoStoreArtifact, long[] frameworkVersionIds,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -82,8 +82,8 @@ public class SCProductVersionLocalServiceImpl
 	}
 
 	public SCProductVersion addProductVersion(
-			String userId, long productEntryId, String version,
-			String changeLog, String downloadPageURL, String directDownloadURL,
+			long userId, long productEntryId, String version, String changeLog,
+			String downloadPageURL, String directDownloadURL,
 			boolean repoStoreArtifact, long[] frameworkVersionIds,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)

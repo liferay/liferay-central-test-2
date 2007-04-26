@@ -120,7 +120,7 @@ public class OrganizationServiceJSON {
 		return returnValue;
 	}
 
-	public static JSONArray getUserOrganizations(java.lang.String userId)
+	public static JSONArray getUserOrganizations(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		java.util.List returnValue = OrganizationServiceUtil.getUserOrganizations(userId);

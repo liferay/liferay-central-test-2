@@ -31,6 +31,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 
 import java.util.List;
@@ -94,7 +95,7 @@ public class MBMessageConsumer implements MessageListener {
 
 	private void _onMessage(String[] array) throws Exception {
 		String companyId = array[0];
-		String userId = array[1];
+		long userId = GetterUtil.getLong(array[1]);
 		String[] categoryIds = StringUtil.split(array[2]);
 		String threadId = array[3];
 		String fromName = array[4];
@@ -129,23 +130,25 @@ public class MBMessageConsumer implements MessageListener {
 	}
 
 	private void _sendEmail(
-			String userId, String fromName, String fromAddress, String subject,
+			long userId, String fromName, String fromAddress, String subject,
 			String body, List subscriptions, Set sent, String replyToAddress,
 			String messageId, String inReplyTo)
 		throws Exception {
 
+		Long userIdObj = new Long(userId);
+
 		for (int i = 0; i < subscriptions.size(); i++) {
 			Subscription subscription = (Subscription)subscriptions.get(i);
 
-			if (subscription.getUserId().equals(userId)) {
+			if (subscription.getUserId() == userId) {
 				continue;
 			}
 
-			if (sent.contains(userId)) {
+			if (sent.contains(userIdObj)) {
 				continue;
 			}
 			else {
-				sent.add(userId);
+				sent.add(userIdObj);
 			}
 
 			User user = UserLocalServiceUtil.getUserById(

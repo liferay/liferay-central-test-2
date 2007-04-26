@@ -405,10 +405,10 @@ public class LayoutCacheFilter implements Filter {
 	}
 
 	protected boolean isSignedIn(HttpServletRequest req) {
-		String userId = PortalUtil.getUserId(req);
+		long userId = PortalUtil.getUserId(req);
 		String remoteUser = req.getRemoteUser();
 
-		if ((userId == null) && (remoteUser == null)) {
+		if ((userId <= 0) && (remoteUser == null)) {
 			return false;
 		}
 		else {

@@ -218,7 +218,7 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		java.lang.String messageId, java.lang.String userId)
+		java.lang.String messageId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

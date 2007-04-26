@@ -20,7 +20,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="resourceId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="hasUserPermissions" qname="operNS:hasUserPermissions" returnQName="hasUserPermissionsReturn" returnType="rtns:boolean" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="actionId" type="tns:string"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="resourceIds" type="tns:ArrayOf_xsd_long"></parameter>
@@ -53,7 +53,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="actionId" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="setUserPermissions" qname="operNS:setUserPermissions" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="actionIds" type="tns:ArrayOf_xsd_string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="resourceId" type="tns:long"></parameter>
@@ -79,7 +79,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="actionId" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetUserPermissions" qname="operNS:unsetUserPermissions" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="actionIds" type="tns:ArrayOf_xsd_string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="resourceId" type="tns:long"></parameter>

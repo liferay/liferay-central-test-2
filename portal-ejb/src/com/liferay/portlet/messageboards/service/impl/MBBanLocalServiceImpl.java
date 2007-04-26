@@ -52,7 +52,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 
-	public MBBan addBan(String userId, String plid, String banUserId)
+	public MBBan addBan(long userId, String plid, long banUserId)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -81,7 +81,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		return ban;
 	}
 
-	public void checkBan(long groupId, String banUserId)
+	public void checkBan(long groupId, long banUserId)
 		throws PortalException, SystemException {
 
 		if (hasBan(groupId, banUserId)) {
@@ -89,7 +89,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteBan(String plid, String banUserId)
+	public void deleteBan(String plid, long banUserId)
 		throws PortalException, SystemException {
 
 		long groupId = PortalUtil.getPortletGroupId(plid);
@@ -101,12 +101,12 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteBans(long groupId) throws SystemException {
-		MBBanUtil.removeByGroupId(groupId);
+	public void deleteBansByBanUserId(long banUserId) throws SystemException {
+		MBBanUtil.removeByBanUserId(banUserId);
 	}
 
-	public void deleteBans(String banUserId) throws SystemException {
-		MBBanUtil.removeByBanUserId(banUserId);
+	public void deleteBansByGroupId(long groupId) throws SystemException {
+		MBBanUtil.removeByGroupId(groupId);
 	}
 
 	public void expireBans() throws SystemException {
@@ -144,7 +144,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		return MBBanUtil.countByGroupId(groupId);
 	}
 
-	public boolean hasBan(long groupId, String banUserId)
+	public boolean hasBan(long groupId, long banUserId)
 		throws SystemException {
 
 		if (MBBanUtil.fetchByG_B(groupId, banUserId) == null) {

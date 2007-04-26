@@ -57,7 +57,7 @@ public class ShoppingCategoryLocalServiceImpl
 	extends ShoppingCategoryLocalServiceBaseImpl {
 
 	public ShoppingCategory addCategory(
-			String userId, String plid, String parentCategoryId, String name,
+			long userId, String plid, String parentCategoryId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -69,7 +69,7 @@ public class ShoppingCategoryLocalServiceImpl
 	}
 
 	public ShoppingCategory addCategory(
-			String userId, String plid, String parentCategoryId, String name,
+			long userId, String plid, String parentCategoryId, String name,
 			String description, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -80,7 +80,7 @@ public class ShoppingCategoryLocalServiceImpl
 	}
 
 	public ShoppingCategory addCategory(
-			String userId, String plid, String parentCategoryId, String name,
+			long userId, String plid, String parentCategoryId, String name,
 			String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)

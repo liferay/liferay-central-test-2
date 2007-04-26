@@ -66,16 +66,15 @@ public class TagsEntryLocalServiceEJBImpl implements TagsEntryLocalService,
 			begin, end);
 	}
 
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(
-		java.lang.String userId, java.lang.String name)
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return TagsEntryLocalServiceFactory.getTxImpl().addEntry(userId, name);
 	}
 
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(
-		java.lang.String userId, java.lang.String name,
-		java.lang.String[] properties)
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
+		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return TagsEntryLocalServiceFactory.getTxImpl().addEntry(userId, name,
@@ -171,9 +170,8 @@ public class TagsEntryLocalServiceEJBImpl implements TagsEntryLocalService,
 			name);
 	}
 
-	public com.liferay.portlet.tags.model.TagsEntry updateEntry(
-		java.lang.String userId, long entryId, java.lang.String name,
-		java.lang.String[] properties)
+	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long userId,
+		long entryId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return TagsEntryLocalServiceFactory.getTxImpl().updateEntry(userId,

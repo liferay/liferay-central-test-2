@@ -91,7 +91,7 @@ public class ShoppingOrderLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder getLatestOrder(
-		java.lang.String userId, long groupId)
+		long userId, long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return ShoppingOrderLocalServiceFactory.getTxImpl().getLatestOrder(userId,
@@ -113,7 +113,7 @@ public class ShoppingOrderLocalServiceEJBImpl
 	}
 
 	public java.util.List search(java.lang.String orderId, long groupId,
-		java.lang.String companyId, java.lang.String userId,
+		java.lang.String companyId, long userId,
 		java.lang.String billingFirstName, java.lang.String billingLastName,
 		java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
@@ -129,7 +129,7 @@ public class ShoppingOrderLocalServiceEJBImpl
 	}
 
 	public int searchCount(java.lang.String orderId, long groupId,
-		java.lang.String companyId, java.lang.String userId,
+		java.lang.String companyId, long userId,
 		java.lang.String billingFirstName, java.lang.String billingLastName,
 		java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
@@ -159,14 +159,13 @@ public class ShoppingOrderLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateLatestOrder(
-		java.lang.String userId, long groupId,
-		java.lang.String billingFirstName, java.lang.String billingLastName,
-		java.lang.String billingEmailAddress, java.lang.String billingCompany,
-		java.lang.String billingStreet, java.lang.String billingCity,
-		java.lang.String billingState, java.lang.String billingZip,
-		java.lang.String billingCountry, java.lang.String billingPhone,
-		boolean shipToBilling, java.lang.String shippingFirstName,
-		java.lang.String shippingLastName,
+		long userId, long groupId, java.lang.String billingFirstName,
+		java.lang.String billingLastName, java.lang.String billingEmailAddress,
+		java.lang.String billingCompany, java.lang.String billingStreet,
+		java.lang.String billingCity, java.lang.String billingState,
+		java.lang.String billingZip, java.lang.String billingCountry,
+		java.lang.String billingPhone, boolean shipToBilling,
+		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String shippingCompany, java.lang.String shippingStreet,
 		java.lang.String shippingCity, java.lang.String shippingState,

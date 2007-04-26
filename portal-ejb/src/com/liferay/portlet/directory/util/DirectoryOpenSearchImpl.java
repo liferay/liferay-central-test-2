@@ -88,13 +88,12 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 
 		List results = UserLocalServiceUtil.search(
 			themeDisplay.getCompanyId(), keywordsLike, keywordsLike,
-			keywordsLike, keywordsLike, keywordsLike, keywordsLike, true, null,
-			false, begin, end, new ContactLastNameComparator(true));
+			keywordsLike, keywordsLike, keywordsLike, true, null, false, begin,
+			end, new ContactLastNameComparator(true));
 
 		int total = UserLocalServiceUtil.searchCount(
 			themeDisplay.getCompanyId(), keywordsLike, keywordsLike,
-			keywordsLike, keywordsLike, keywordsLike, keywordsLike, true, null,
-			false);
+			keywordsLike, keywordsLike, keywordsLike, true, null, false);
 
 		Object[] values = addSearchResults(
 			keywords, startPage, itemsPerPage, total, null,

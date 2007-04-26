@@ -95,7 +95,7 @@ public class SCProductEntryLocalServiceImpl
 	extends SCProductEntryLocalServiceBaseImpl {
 
 	public SCProductEntry addProductEntry(
-			String userId, String plid, String name, String type,
+			long userId, String plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
 			Map images, boolean addCommunityPermissions,
@@ -110,7 +110,7 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public SCProductEntry addProductEntry(
-			String userId, String plid, String name, String type,
+			long userId, String plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
 			Map images, String[] communityPermissions,
@@ -124,7 +124,7 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public SCProductEntry addProductEntry(
-			String userId, String plid, String name, String type,
+			long userId, String plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
 			Map images, Boolean addCommunityPermissions,
@@ -354,8 +354,7 @@ public class SCProductEntryLocalServiceImpl
 		return SCProductEntryUtil.findByGroupId(groupId, begin, end);
 	}
 
-	public List getProductEntries(
-			long groupId, String userId, int begin, int end)
+	public List getProductEntries(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		return SCProductEntryUtil.findByG_U(groupId, userId, begin, end);
@@ -367,7 +366,7 @@ public class SCProductEntryLocalServiceImpl
 		return SCProductEntryUtil.countByGroupId(groupId);
 	}
 
-	public int getProductEntriesCount(long groupId, String userId)
+	public int getProductEntriesCount(long groupId, long userId)
 		throws SystemException {
 
 		return SCProductEntryUtil.countByG_U(groupId, userId);

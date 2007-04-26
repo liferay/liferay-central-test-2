@@ -61,13 +61,13 @@ import java.util.Set;
  */
 public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
-	public TagsEntry addEntry(String userId, String name)
+	public TagsEntry addEntry(long userId, String name)
 		throws PortalException, SystemException {
 
 		return addEntry(userId, name, new String[0]);
 	}
 
-	public TagsEntry addEntry(String userId, String name, String[] properties)
+	public TagsEntry addEntry(long userId, String name, String[] properties)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -263,7 +263,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public TagsEntry updateEntry(
-			String userId, long entryId, String name, String[] properties)
+			long userId, long entryId, String name, String[] properties)
 		throws PortalException, SystemException {
 
 		TagsEntry entry = updateEntry(entryId, name);

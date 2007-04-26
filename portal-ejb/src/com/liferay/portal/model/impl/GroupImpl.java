@@ -34,6 +34,7 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.GroupNames;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import org.apache.commons.logging.Log;
@@ -192,7 +193,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		throws PortalException, SystemException {
 
 		if (privateLayout && isUser()) {
-			String userId = getClassPK();
+			long userId = GetterUtil.getLong(getClassPK());
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 

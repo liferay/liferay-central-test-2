@@ -49,11 +49,11 @@ import java.util.Iterator;
 public class PasswordTrackerLocalServiceImpl
 	extends PasswordTrackerLocalServiceBaseImpl {
 
-	public void deletePasswordTrackers(String userId) throws SystemException {
+	public void deletePasswordTrackers(long userId) throws SystemException {
 		PasswordTrackerUtil.removeByUserId(userId);
 	}
 
-	public boolean isValidPassword(String userId, String password)
+	public boolean isValidPassword(long userId, String password)
 		throws PortalException, SystemException {
 
 		int passwordsRecycle = GetterUtil.getInteger(
@@ -65,6 +65,7 @@ public class PasswordTrackerLocalServiceImpl
 			User user = UserUtil.findByPrimaryKey(userId);
 
 			String oldEncPwd = user.getPassword();
+
 			if (!user.isPasswordEncrypted()) {
 				oldEncPwd = PwdEncryptor.encrypt(user.getPassword());
 			}
@@ -95,7 +96,7 @@ public class PasswordTrackerLocalServiceImpl
 		return true;
 	}
 
-	public void trackPassword(String userId, String encPwd)
+	public void trackPassword(long userId, String encPwd)
 		throws PortalException, SystemException {
 
 		long passwordTrackerId = CounterLocalServiceUtil.increment(

@@ -58,33 +58,32 @@ public class MailCache {
 		ses.removeAttribute(WebKeys.MAIL_STORE + accountPrefix);
 	}
 
-	public static Collection getUserAccounts(String userId) {
+	public static Collection getUserAccounts(long userId) {
 		String userAccountsId = _MAIL_ACCOUNTS + userId;
 
 		return (Collection)SimpleCachePool.get(userAccountsId);
 	}
 
-	public static void putUserAccounts(String userId, Collection accounts) {
+	public static void putUserAccounts(long userId, Collection accounts) {
 		String userAccountsId = _MAIL_ACCOUNTS + userId;
 
 		SimpleCachePool.put(userAccountsId, accounts);
 	}
 
-	public static void removeUserAccounts(String userId) {
+	public static void removeUserAccounts(long userId) {
 		String userAccountsId = _MAIL_ACCOUNTS + userId;
 
 		SimpleCachePool.remove(userAccountsId);
 	}
 
 	public static void clearCache(HttpSession ses) throws MessagingException {
-
-		String userId = (String) ses.getAttribute(WebKeys.USER_ID);
+		Long userIdObj = (Long)ses.getAttribute(WebKeys.USER_ID);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Clearing the mail cache for user " + userId);
+			_log.debug("Clearing the mail cache for user " + userIdObj);
 		}
 
-		Collection accounts = getUserAccounts(userId);
+		Collection accounts = getUserAccounts(userIdObj.longValue());
 
 		if (accounts != null) {
 			if (_log.isDebugEnabled()) {
@@ -109,7 +108,7 @@ public class MailCache {
 				removeStore(ses, accountPrefix);
 			}
 
-			removeUserAccounts(userId);
+			removeUserAccounts(userIdObj.longValue());
 		}
 	}
 

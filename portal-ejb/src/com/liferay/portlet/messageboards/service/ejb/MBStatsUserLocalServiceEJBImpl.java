@@ -71,13 +71,13 @@ public class MBStatsUserLocalServiceEJBImpl implements MBStatsUserLocalService,
 		MBStatsUserLocalServiceFactory.getTxImpl().deleteStatsUserByGroupId(groupId);
 	}
 
-	public void deleteStatsUserByUserId(java.lang.String userId)
+	public void deleteStatsUserByUserId(long userId)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalServiceFactory.getTxImpl().deleteStatsUserByUserId(userId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
-		long groupId, java.lang.String userId)
+		long groupId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return MBStatsUserLocalServiceFactory.getTxImpl().getStatsUser(groupId,
@@ -95,7 +95,7 @@ public class MBStatsUserLocalServiceEJBImpl implements MBStatsUserLocalService,
 		return MBStatsUserLocalServiceFactory.getTxImpl().getStatsUsersCount(groupId);
 	}
 
-	public void updateStatsUser(long groupId, java.lang.String userId)
+	public void updateStatsUser(long groupId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBStatsUserLocalServiceFactory.getTxImpl().updateStatsUser(groupId,

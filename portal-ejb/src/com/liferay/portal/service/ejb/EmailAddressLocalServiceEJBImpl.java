@@ -66,10 +66,9 @@ public class EmailAddressLocalServiceEJBImpl implements EmailAddressLocalService
 			begin, end);
 	}
 
-	public com.liferay.portal.model.EmailAddress addEmailAddress(
-		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK, java.lang.String address, int typeId,
-		boolean primary)
+	public com.liferay.portal.model.EmailAddress addEmailAddress(long userId,
+		java.lang.String className, java.lang.String classPK,
+		java.lang.String address, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return EmailAddressLocalServiceFactory.getTxImpl().addEmailAddress(userId,

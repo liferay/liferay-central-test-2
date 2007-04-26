@@ -119,30 +119,32 @@ public class MessagingAction extends Action {
 		try {
 			String bodyText = ParamUtil.getString(req, "text");
 			String tempId = ParamUtil.getString(req, "tempId", null);
-			String toId = ParamUtil.getString(req, "toId");
+			long toId = ParamUtil.getLong(req, "toId");
 			String toAddr = ParamUtil.getString(req, "toAddr", null);
 			String companyId = PortalUtil.getCompanyId(req);
 			User fromUser = PortalUtil.getUser(req);
 			User toUser;
 
 			if (toAddr != null) {
-				toUser = UserLocalServiceUtil.getUserByEmailAddress(companyId,
-					toAddr);
+				toUser = UserLocalServiceUtil.getUserByEmailAddress(
+					companyId, toAddr);
+
 				toId = toUser.getUserId();
 			}
 			else {
 				toUser = UserLocalServiceUtil.getUserById(toId);
 			}
 
-			MessagingUtil.sendMessage(req.getSession(), PortalUtil
-				.getUserId(req), fromUser.getFullName(), toId, toUser
-				.getFullName(), bodyText);
+			MessagingUtil.sendMessage(
+				req.getSession(), req.getRemoteUser(), fromUser.getFullName(),
+				String.valueOf(toId), toUser.getFullName(), bodyText);
 
 			jo.put("status", "success");
 			jo.put("toId", toId);
 			jo.put("toName", toUser.getFullName());
 			jo.put("fromId", PortalUtil.getUserId(req));
 			jo.put("fromName", fromUser.getFullName());
+
 			if (tempId != null) {
 				jo.put("tempId", tempId);
 			}

@@ -318,7 +318,7 @@ public class MBMessageServiceImpl
 		return MBMessageLocalServiceUtil.getMessage(messageId);
 	}
 
-	public MBMessageDisplay getMessageDisplay(String messageId, String userId)
+	public MBMessageDisplay getMessageDisplay(String messageId, long userId)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(

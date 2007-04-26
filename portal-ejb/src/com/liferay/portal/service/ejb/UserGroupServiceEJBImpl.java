@@ -87,7 +87,7 @@ public class UserGroupServiceEJBImpl implements UserGroupService, SessionBean {
 		return UserGroupServiceFactory.getTxImpl().getUserGroup(userGroupId);
 	}
 
-	public java.util.List getUserUserGroups(java.lang.String userId)
+	public java.util.List getUserUserGroups(long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

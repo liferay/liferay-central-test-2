@@ -30,7 +30,6 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.PortletImpl;
-import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.service.persistence.PortletUtil;
@@ -115,11 +114,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		portletId = PortalUtil.getJsSafePortletName(portletId);
 
-		if (companyId.equals(UserImpl.DEFAULT)) {
-			throw new SystemException(
-				"Company id should never be " + UserImpl.DEFAULT);
-		}
-
 		Portlet portlet = null;
 
 		Map companyPortletsPool = _getPortletsPool(companyId);
@@ -195,10 +189,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		throws SystemException {
 
 		portletId = PortalUtil.getJsSafePortletName(portletId);
-
-		if (companyId.equals(UserImpl.DEFAULT)) {
-			throw new SystemException();
-		}
 
 		Portlet portlet = null;
 

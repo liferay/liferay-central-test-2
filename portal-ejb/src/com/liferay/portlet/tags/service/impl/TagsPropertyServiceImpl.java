@@ -47,8 +47,7 @@ public class TagsPropertyServiceImpl
 			getUserId(), entryId, key, value);
 	}
 
-	public TagsProperty addProperty(
-			String userId, String entryName, String key, String value)
+	public TagsProperty addProperty(String entryName, String key, String value)
 		throws PortalException, SystemException {
 
 		return TagsPropertyLocalServiceUtil.addProperty(

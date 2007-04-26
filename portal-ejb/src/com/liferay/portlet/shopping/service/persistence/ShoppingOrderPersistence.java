@@ -183,8 +183,8 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_U_PPPS(long groupId, String userId,
-		String ppPaymentStatus) throws SystemException {
+	public List findByG_U_PPPS(long groupId, long userId, String ppPaymentStatus)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -195,14 +195,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" AND ");
 
 			if (ppPaymentStatus == null) {
@@ -221,10 +214,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			if (ppPaymentStatus != null) {
 				q.setString(queryPos++, ppPaymentStatus);
@@ -240,12 +230,12 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_U_PPPS(long groupId, String userId,
+	public List findByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus, int begin, int end) throws SystemException {
 		return findByG_U_PPPS(groupId, userId, ppPaymentStatus, begin, end, null);
 	}
 
-	public List findByG_U_PPPS(long groupId, String userId,
+	public List findByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		Session session = null;
@@ -258,14 +248,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" AND ");
 
 			if (ppPaymentStatus == null) {
@@ -291,10 +274,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			if (ppPaymentStatus != null) {
 				q.setString(queryPos++, ppPaymentStatus);
@@ -310,7 +290,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		}
 	}
 
-	public ShoppingOrder findByG_U_PPPS_First(long groupId, String userId,
+	public ShoppingOrder findByG_U_PPPS_First(long groupId, long userId,
 		String ppPaymentStatus, OrderByComparator obc)
 		throws NoSuchOrderException, SystemException {
 		List list = findByG_U_PPPS(groupId, userId, ppPaymentStatus, 0, 1, obc);
@@ -335,7 +315,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		}
 	}
 
-	public ShoppingOrder findByG_U_PPPS_Last(long groupId, String userId,
+	public ShoppingOrder findByG_U_PPPS_Last(long groupId, long userId,
 		String ppPaymentStatus, OrderByComparator obc)
 		throws NoSuchOrderException, SystemException {
 		int count = countByG_U_PPPS(groupId, userId, ppPaymentStatus);
@@ -363,8 +343,8 @@ public class ShoppingOrderPersistence extends BasePersistence {
 	}
 
 	public ShoppingOrder[] findByG_U_PPPS_PrevAndNext(String orderId,
-		long groupId, String userId, String ppPaymentStatus,
-		OrderByComparator obc) throws NoSuchOrderException, SystemException {
+		long groupId, long userId, String ppPaymentStatus, OrderByComparator obc)
+		throws NoSuchOrderException, SystemException {
 		ShoppingOrder shoppingOrder = findByPrimaryKey(orderId);
 		int count = countByG_U_PPPS(groupId, userId, ppPaymentStatus);
 		Session session = null;
@@ -377,14 +357,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" AND ");
 
 			if (ppPaymentStatus == null) {
@@ -410,10 +383,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			if (ppPaymentStatus != null) {
 				q.setString(queryPos++, ppPaymentStatus);
@@ -516,7 +486,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByG_U_PPPS(long groupId, String userId,
+	public void removeByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus) throws SystemException {
 		Iterator itr = findByG_U_PPPS(groupId, userId, ppPaymentStatus)
 						   .iterator();
@@ -535,8 +505,8 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByG_U_PPPS(long groupId, String userId,
-		String ppPaymentStatus) throws SystemException {
+	public int countByG_U_PPPS(long groupId, long userId, String ppPaymentStatus)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -548,14 +518,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" AND ");
 
 			if (ppPaymentStatus == null) {
@@ -572,10 +535,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			if (ppPaymentStatus != null) {
 				q.setString(queryPos++, ppPaymentStatus);

@@ -107,10 +107,10 @@ public class EditUserGroupAssignmentsAction extends PortletAction {
 	protected void updateUserGroupUsers(ActionRequest req) throws Exception {
 		String userGroupId = ParamUtil.getString(req, "userGroupId");
 
-		String[] addUserIds = StringUtil.split(
-			ParamUtil.getString(req, "addUserIds"));
-		String[] removeUserIds = StringUtil.split(
-			ParamUtil.getString(req, "removeUserIds"));
+		long[] addUserIds = StringUtil.split(
+			ParamUtil.getString(req, "addUserIds"), 0L);
+		long[] removeUserIds = StringUtil.split(
+			ParamUtil.getString(req, "removeUserIds"), 0L);
 
 		UserServiceUtil.addUserGroupUsers(userGroupId, addUserIds);
 		UserServiceUtil.unsetUserGroupUsers(userGroupId, removeUserIds);

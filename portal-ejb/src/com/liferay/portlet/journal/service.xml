@@ -14,7 +14,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="userId" type="String" />
+		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
@@ -29,7 +29,7 @@
 		<column name="templateId" type="String" />
 		<column name="displayDate" type="Date" />
 		<column name="approved" type="boolean" />
-		<column name="approvedByUserId" type="String" />
+		<column name="approvedByUserId" type="long" />
 		<column name="approvedByUserName" type="String" />
 		<column name="approvedDate" type="Date" />
 		<column name="expired" type="boolean" />
@@ -126,7 +126,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="userId" type="String" />
+		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
@@ -167,7 +167,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="userId" type="String" />
+		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />

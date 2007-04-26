@@ -36,8 +36,8 @@ import weblogic.security.principal.WLSUserImpl;
  */
 public class PortalLoginModule extends BasicLoginModule {
 
-	protected Principal getPortalPrincipal(String userId) {
-		return new WLSUserImpl(userId);
+	protected Principal getPortalPrincipal(String name) {
+		return new WLSUserImpl(name);
 	}
 
 }

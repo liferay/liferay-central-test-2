@@ -54,7 +54,7 @@ import java.util.List;
 public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 
 	public Website addWebsite(
-			String userId, String className, String classPK, String url,
+			long userId, String className, String classPK, String url,
 			int typeId, boolean primary)
 		throws PortalException, SystemException {
 

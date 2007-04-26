@@ -65,7 +65,7 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 			begin, end);
 	}
 
-	public com.liferay.portal.model.Role addRole(java.lang.String userId,
+	public com.liferay.portal.model.Role addRole(long userId,
 		java.lang.String companyId, java.lang.String name, int type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -73,7 +73,7 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 			name, type);
 	}
 
-	public com.liferay.portal.model.Role addRole(java.lang.String userId,
+	public com.liferay.portal.model.Role addRole(long userId,
 		java.lang.String companyId, java.lang.String name, int type,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
@@ -128,46 +128,46 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 		return RoleLocalServiceFactory.getTxImpl().getRole(companyId, name);
 	}
 
-	public java.util.List getUserGroupRoles(java.lang.String userId,
-		long groupId) throws com.liferay.portal.SystemException {
+	public java.util.List getUserGroupRoles(long userId, long groupId)
+		throws com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().getUserGroupRoles(userId,
 			groupId);
 	}
 
-	public java.util.List getUserRelatedRoles(java.lang.String userId,
-		long groupId) throws com.liferay.portal.SystemException {
+	public java.util.List getUserRelatedRoles(long userId, long groupId)
+		throws com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().getUserRelatedRoles(userId,
 			groupId);
 	}
 
-	public java.util.List getUserRelatedRoles(java.lang.String userId,
-		long[] groupIds) throws com.liferay.portal.SystemException {
+	public java.util.List getUserRelatedRoles(long userId, long[] groupIds)
+		throws com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().getUserRelatedRoles(userId,
 			groupIds);
 	}
 
-	public java.util.List getUserRelatedRoles(java.lang.String userId,
-		java.util.List groups) throws com.liferay.portal.SystemException {
+	public java.util.List getUserRelatedRoles(long userId, java.util.List groups)
+		throws com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().getUserRelatedRoles(userId,
 			groups);
 	}
 
-	public java.util.List getUserRoles(java.lang.String userId)
+	public java.util.List getUserRoles(long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().getUserRoles(userId);
 	}
 
-	public boolean hasUserRole(java.lang.String userId,
-		java.lang.String companyId, java.lang.String name)
+	public boolean hasUserRole(long userId, java.lang.String companyId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().hasUserRole(userId,
 			companyId, name);
 	}
 
-	public boolean hasUserRoles(java.lang.String userId,
-		java.lang.String companyId, java.lang.String[] names)
+	public boolean hasUserRoles(long userId, java.lang.String companyId,
+		java.lang.String[] names)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().hasUserRoles(userId,
@@ -189,7 +189,7 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 			description, type);
 	}
 
-	public void setUserRoles(java.lang.String userId, java.lang.String[] roleIds)
+	public void setUserRoles(long userId, java.lang.String[] roleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalServiceFactory.getTxImpl().setUserRoles(userId, roleIds);

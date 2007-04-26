@@ -97,8 +97,8 @@ public class TunnelUtil {
 
 		URL url = null;
 
-		if (httpPrincipal.getUserId() == null ||
-			httpPrincipal.getPassword() == null) {
+		if ((httpPrincipal.getUserId() <= 0) ||
+			(httpPrincipal.getPassword() == null)) {
 
 			url = new URL(httpPrincipal.getUrl() + "/tunnel-web/liferay/do");
 		}
@@ -115,8 +115,8 @@ public class TunnelUtil {
 
 		urlc.setRequestMethod("POST");
 
-		if (httpPrincipal.getUserId() != null &&
-			httpPrincipal.getPassword() != null) {
+		if ((httpPrincipal.getUserId() > 0) &&
+			(httpPrincipal.getPassword() != null)) {
 
 			String userNameAndPassword =
 				httpPrincipal.getUserId() + ":" + httpPrincipal.getPassword();

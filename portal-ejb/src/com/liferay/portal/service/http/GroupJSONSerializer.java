@@ -62,14 +62,7 @@ public class GroupJSONSerializer {
 			jsonObj.put("companyId", companyId.toString());
 		}
 
-		String creatorUserId = model.getCreatorUserId();
-
-		if (creatorUserId == null) {
-			jsonObj.put("creatorUserId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("creatorUserId", creatorUserId.toString());
-		}
+		jsonObj.put("creatorUserId", model.getCreatorUserId());
 
 		String className = model.getClassName();
 

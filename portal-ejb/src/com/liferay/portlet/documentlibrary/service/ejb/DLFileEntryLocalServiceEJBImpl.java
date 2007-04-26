@@ -67,11 +67,11 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, java.io.File file,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long userId, java.lang.String folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		java.io.File file, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl().addFileEntry(userId,
@@ -80,11 +80,11 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long userId, java.lang.String folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		byte[] byteArray, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl().addFileEntry(userId,
@@ -93,11 +93,10 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, java.io.File file,
-		java.lang.String[] communityPermissions,
+		long userId, java.lang.String folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		java.io.File file, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -107,11 +106,10 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray,
-		java.lang.String[] communityPermissions,
+		long userId, java.lang.String folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		byte[] byteArray, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -121,11 +119,10 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, java.io.File file,
-		java.lang.Boolean addCommunityPermissions,
+		long userId, java.lang.String folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		java.io.File file, java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -138,11 +135,10 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray,
-		java.lang.Boolean addCommunityPermissions,
+		long userId, java.lang.String folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		byte[] byteArray, java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -155,10 +151,10 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, java.io.InputStream is, long size,
+		long userId, java.lang.String folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		java.io.InputStream is, long size,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -239,8 +235,7 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public java.io.InputStream getFileAsStream(java.lang.String companyId,
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name)
+		long userId, java.lang.String folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl().getFileAsStream(companyId,
@@ -248,8 +243,8 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public java.io.InputStream getFileAsStream(java.lang.String companyId,
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, double version)
+		long userId, java.lang.String folderId, java.lang.String name,
+		double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl().getFileAsStream(companyId,
@@ -319,9 +314,8 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 			begin, end);
 	}
 
-	public java.util.List getGroupFileEntries(long groupId,
-		java.lang.String userId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public java.util.List getGroupFileEntries(long groupId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl().getGroupFileEntries(groupId,
 			userId, begin, end);
 	}
@@ -332,7 +326,7 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 											 .getGroupFileEntriesCount(groupId);
 	}
 
-	public int getGroupFileEntriesCount(long groupId, java.lang.String userId)
+	public int getGroupFileEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl()
 											 .getGroupFileEntriesCount(groupId,
@@ -340,11 +334,11 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String newFolderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, java.io.File file)
+		long userId, java.lang.String folderId, java.lang.String newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl().updateFileEntry(userId,
@@ -353,11 +347,11 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String newFolderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray)
+		long userId, java.lang.String folderId, java.lang.String newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		byte[] byteArray)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl().updateFileEntry(userId,
@@ -366,11 +360,11 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String newFolderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, java.io.InputStream is, long size)
+		long userId, java.lang.String folderId, java.lang.String newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		java.io.InputStream is, long size)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl().updateFileEntry(userId,

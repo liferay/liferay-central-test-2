@@ -67,9 +67,9 @@ public class DLFileShortcutLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String toFolderId, java.lang.String toName,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long userId, java.lang.String folderId, java.lang.String toFolderId,
+		java.lang.String toName, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFileShortcutLocalServiceFactory.getTxImpl().addFileShortcut(userId,
@@ -78,9 +78,8 @@ public class DLFileShortcutLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String toFolderId, java.lang.String toName,
-		java.lang.String[] communityPermissions,
+		long userId, java.lang.String folderId, java.lang.String toFolderId,
+		java.lang.String toName, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -89,9 +88,8 @@ public class DLFileShortcutLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String toFolderId, java.lang.String toName,
-		java.lang.Boolean addCommunityPermissions,
+		long userId, java.lang.String folderId, java.lang.String toFolderId,
+		java.lang.String toName, java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -169,9 +167,8 @@ public class DLFileShortcutLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
-		java.lang.String userId, long fileShortcutId,
-		java.lang.String folderId, java.lang.String toFolderId,
-		java.lang.String toName)
+		long userId, long fileShortcutId, java.lang.String folderId,
+		java.lang.String toFolderId, java.lang.String toName)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFileShortcutLocalServiceFactory.getTxImpl().updateFileShortcut(userId,

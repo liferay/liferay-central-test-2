@@ -117,7 +117,7 @@ import org.apache.commons.logging.LogFactory;
 public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
-			String userId, String subject, String body)
+			long userId, String subject, String body)
 		throws PortalException, SystemException {
 
 		String threadId = null;
@@ -128,7 +128,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage addDiscussionMessage(
-			String userId, String threadId, String parentMessageId,
+			long userId, String threadId, String parentMessageId,
 			String subject, String body)
 		throws PortalException, SystemException {
 
@@ -150,7 +150,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			String userId, String categoryId, String subject, String body,
+			long userId, String categoryId, String subject, String body,
 			List files, boolean anonymous, double priority,
 			String[] tagsEntries, PortletPreferences prefs,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -163,7 +163,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			String userId, String categoryId, String subject, String body,
+			long userId, String categoryId, String subject, String body,
 			List files, boolean anonymous, double priority,
 			String[] tagsEntries, PortletPreferences prefs,
 			String[] communityPermissions, String[] guestPermissions)
@@ -176,7 +176,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			String userId, String categoryId, String subject, String body,
+			long userId, String categoryId, String subject, String body,
 			List files, boolean anonymous, double priority,
 			String[] tagsEntries, PortletPreferences prefs,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
@@ -193,7 +193,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			String userId, String categoryId, String threadId,
+			long userId, String categoryId, String threadId,
 			String parentMessageId, String subject, String body, List files,
 			boolean anonymous, double priority, String[] tagsEntries,
 			PortletPreferences prefs, boolean addCommunityPermissions,
@@ -208,7 +208,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			String userId, String categoryId, String threadId,
+			long userId, String categoryId, String threadId,
 			String parentMessageId, String subject, String body, List files,
 			boolean anonymous, double priority, String[] tagsEntries,
 			PortletPreferences prefs, String[] communityPermissions,
@@ -222,7 +222,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			String userId, String categoryId, String threadId,
+			long userId, String categoryId, String threadId,
 			String parentMessageId, String subject, String body, List files,
 			boolean anonymous, double priority, String[] tagsEntries,
 			PortletPreferences prefs, Boolean addCommunityPermissions,
@@ -293,7 +293,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		thread.setMessageCount(thread.getMessageCount() + 1);
 
 		if (anonymous) {
-			thread.setLastPostByUserId(null);
+			thread.setLastPostByUserId(0);
 		}
 		else {
 			thread.setLastPostByUserId(userId);
@@ -734,7 +734,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessageDisplay getDiscussionMessageDisplay(
-			String userId, String className, String classPK)
+			long userId, String className, String classPK)
 		throws PortalException, SystemException {
 
 		MBMessage message = null;
@@ -789,7 +789,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID, messageId));
 	}
 
-	public MBMessageDisplay getMessageDisplay(String messageId, String userId)
+	public MBMessageDisplay getMessageDisplay(String messageId, long userId)
 		throws PortalException, SystemException {
 
 		MBMessage message = getMessage(messageId);
@@ -797,7 +797,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return getMessageDisplay(message, userId);
 	}
 
-	public MBMessageDisplay getMessageDisplay(MBMessage message, String userId)
+	public MBMessageDisplay getMessageDisplay(MBMessage message, long userId)
 		throws PortalException, SystemException {
 
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(
@@ -851,7 +851,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			previousThread, nextThread, firstThread, lastThread, userId);
 	}
 
-	public List getThreadMessages(String threadId, String userId)
+	public List getThreadMessages(String threadId, long userId)
 		throws SystemException {
 
 		return getThreadMessages(
@@ -859,7 +859,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public List getThreadMessages(
-			String threadId, String userId, Comparator comparator)
+			String threadId, long userId, Comparator comparator)
 		throws SystemException {
 
 		List messages = MBMessageUtil.findByThreadId(threadId);
@@ -894,7 +894,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			name, description, type, version, feedURL, entryURL, messages);
 	}
 
-	public void subscribeMessage(String userId, String messageId)
+	public void subscribeMessage(long userId, String messageId)
 		throws PortalException, SystemException {
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
@@ -904,7 +904,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			userId, MBThread.class.getName(), message.getThreadId());
 	}
 
-	public void unsubscribeMessage(String userId, String messageId)
+	public void unsubscribeMessage(long userId, String messageId)
 		throws PortalException, SystemException {
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
@@ -1098,7 +1098,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread thread = MBThreadUtil.findByPrimaryKey(message.getThreadId());
 
 		if (message.isAnonymous()) {
-			thread.setLastPostByUserId(null);
+			thread.setLastPostByUserId(0);
 		}
 		else {
 			thread.setLastPostByUserId(message.getUserId());
@@ -1393,7 +1393,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			MBMessageProducer.produce(
 				new String[] {
-					message.getCompanyId(), message.getUserId(),
+					message.getCompanyId(), String.valueOf(message.getUserId()),
 					StringUtil.merge(categoryIds), message.getThreadId(),
 					fromName, fromAddress, subject, body, replyToAddress,
 					messageId, inReplyTo

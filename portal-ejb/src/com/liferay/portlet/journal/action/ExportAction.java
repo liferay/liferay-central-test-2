@@ -36,6 +36,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
@@ -97,7 +98,9 @@ public class ExportAction extends Action {
 		throws Exception {
 
 		try {
-			if (OmniadminUtil.isOmniadmin(req.getRemoteUser())) {
+			long userId = PortalUtil.getUserId(req);
+
+			if (OmniadminUtil.isOmniadmin(userId)) {
 				long siteGroupId = ParamUtil.getLong(
 					req, "siteGroupId", DEFAULT_SITE_GROUP_ID);
 

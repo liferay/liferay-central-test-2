@@ -1582,7 +1582,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsUser(String pk, String userPK)
+	public boolean containsUser(String pk, long userPK)
 		throws SystemException {
 		try {
 			return containsUser.contains(pk, userPK);
@@ -1601,7 +1601,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUser(String pk, String userPK)
+	public void addUser(String pk, long userPK)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1623,7 +1623,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUsers(String pk, String[] userPKs)
+	public void addUsers(String pk, long[] userPKs)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1660,7 +1660,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUser(String pk, String userPK)
+	public void removeUser(String pk, long userPK)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1682,7 +1682,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUsers(String pk, String[] userPKs)
+	public void removeUsers(String pk, long[] userPKs)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1709,7 +1709,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void setUsers(String pk, String[] userPKs)
+	public void setUsers(String pk, long[] userPKs)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1840,7 +1840,7 @@ public class OrganizationPersistence extends BasePersistence {
 		protected ContainsUser(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSER);
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1849,8 +1849,9 @@ public class OrganizationPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(String organizationId, String userId) {
-			List results = execute(new Object[] { organizationId, userId });
+		protected boolean contains(String organizationId, long userId) {
+			List results = execute(new Object[] { organizationId, new Long(
+							userId) });
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -1870,13 +1871,13 @@ public class OrganizationPersistence extends BasePersistence {
 				"INSERT INTO Users_Orgs (organizationId, userId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void add(String organizationId, String userId) {
+		protected void add(String organizationId, long userId) {
 			if (!_persistence.containsUser.contains(organizationId, userId)) {
-				update(new Object[] { organizationId, userId });
+				update(new Object[] { organizationId, new Long(userId) });
 			}
 		}
 
@@ -1901,12 +1902,12 @@ public class OrganizationPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Orgs WHERE organizationId = ? AND userId = ?");
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void remove(String organizationId, String userId) {
-			update(new Object[] { organizationId, userId });
+		protected void remove(String organizationId, long userId) {
+			update(new Object[] { organizationId, new Long(userId) });
 		}
 	}
 

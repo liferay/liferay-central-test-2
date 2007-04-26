@@ -543,8 +543,8 @@ public class RoleUtil {
 		return getPersistence().getUsersSize(pk);
 	}
 
-	public static boolean containsUser(java.lang.String pk,
-		java.lang.String userPK) throws com.liferay.portal.SystemException {
+	public static boolean containsUser(java.lang.String pk, long userPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsUser(pk, userPK);
 	}
 
@@ -553,7 +553,7 @@ public class RoleUtil {
 		return getPersistence().containsUsers(pk);
 	}
 
-	public static void addUser(java.lang.String pk, java.lang.String userPK)
+	public static void addUser(java.lang.String pk, long userPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException, 
 			com.liferay.portal.NoSuchUserException {
@@ -568,7 +568,7 @@ public class RoleUtil {
 		getPersistence().addUser(pk, user);
 	}
 
-	public static void addUsers(java.lang.String pk, java.lang.String[] userPKs)
+	public static void addUsers(java.lang.String pk, long[] userPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException, 
 			com.liferay.portal.NoSuchUserException {
@@ -588,7 +588,7 @@ public class RoleUtil {
 		getPersistence().clearUsers(pk);
 	}
 
-	public static void removeUser(java.lang.String pk, java.lang.String userPK)
+	public static void removeUser(java.lang.String pk, long userPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException, 
 			com.liferay.portal.NoSuchUserException {
@@ -603,8 +603,7 @@ public class RoleUtil {
 		getPersistence().removeUser(pk, user);
 	}
 
-	public static void removeUsers(java.lang.String pk,
-		java.lang.String[] userPKs)
+	public static void removeUsers(java.lang.String pk, long[] userPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException, 
 			com.liferay.portal.NoSuchUserException {
@@ -618,7 +617,7 @@ public class RoleUtil {
 		getPersistence().removeUsers(pk, users);
 	}
 
-	public static void setUsers(java.lang.String pk, java.lang.String[] userPKs)
+	public static void setUsers(java.lang.String pk, long[] userPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException, 
 			com.liferay.portal.NoSuchUserException {

@@ -30,7 +30,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messaging.util.MessagingUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -76,14 +75,13 @@ public class RosterAction extends JSONAction {
 		try {
 			String companyId = PortalUtil.getCompanyId(req);
 
-			String userId = ParamUtil.getString(req, "userId");
+			long userId = ParamUtil.getLong(req, "userId");
 			String email = ParamUtil.getString(req, "email");
 
 			User user = null;
 
-			if (Validator.isNotNull(userId)) {
-				user = UserLocalServiceUtil.getUserById(
-					companyId, userId);
+			if (userId > 0) {
+				user = UserLocalServiceUtil.getUserById(companyId, userId);
 			}
 			else {
 				user = UserLocalServiceUtil.getUserByEmailAddress(

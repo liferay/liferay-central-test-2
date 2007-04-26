@@ -47,9 +47,9 @@ public interface JournalCreationStrategy {
 	 * @param		groupId the group id of the layout
 	 * @param		journalObj the new object must be an instance of
 	 *				JournalArticle, JournalStructure or JournalTemplate
-	 * @return		the author's user id, or null to use the original author
+	 * @return		the author's user id, or 0 to use the original author
 	 */
-	public String getAuthorUserId(
+	public long getAuthorUserId(
 			String companyId, long groupId, Object journalObj)
 		throws Exception;
 
@@ -76,10 +76,10 @@ public interface JournalCreationStrategy {
 	 * @param		groupId the group id of the layout
 	 * @param		journalObj the new object must be an instance of
 	 *				JournalArticle, JournalStructure or JournalTemplate
-	 * @return		the approver's user id, or null if the article should not be
+	 * @return		the approver's user id, or 0 if the article should not be
 	 *				approved
 	 */
-	public String getApprovalUserId(
+	public long getApprovalUserId(
 			String companyId, long groupId, Object journalObj)
 		throws Exception;
 

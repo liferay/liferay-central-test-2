@@ -231,26 +231,24 @@ public class SCProductEntryUtil {
 			companyId, obc);
 	}
 
-	public static java.util.List findByG_U(long groupId, java.lang.String userId)
+	public static java.util.List findByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_U(groupId, userId);
 	}
 
-	public static java.util.List findByG_U(long groupId,
-		java.lang.String userId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List findByG_U(long groupId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_U(groupId, userId, begin, end);
 	}
 
-	public static java.util.List findByG_U(long groupId,
-		java.lang.String userId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByG_U(long groupId, long userId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_U(groupId, userId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry findByG_U_First(
-		long groupId, java.lang.String userId,
+		long groupId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException {
@@ -258,7 +256,7 @@ public class SCProductEntryUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry findByG_U_Last(
-		long groupId, java.lang.String userId,
+		long groupId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException {
@@ -266,7 +264,7 @@ public class SCProductEntryUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry[] findByG_U_PrevAndNext(
-		long productEntryId, long groupId, java.lang.String userId,
+		long productEntryId, long groupId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException {
@@ -313,7 +311,7 @@ public class SCProductEntryUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
-	public static void removeByG_U(long groupId, java.lang.String userId)
+	public static void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_U(groupId, userId);
 	}
@@ -332,7 +330,7 @@ public class SCProductEntryUtil {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
-	public static int countByG_U(long groupId, java.lang.String userId)
+	public static int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_U(groupId, userId);
 	}

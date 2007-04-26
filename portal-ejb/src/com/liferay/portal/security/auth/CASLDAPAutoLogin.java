@@ -146,8 +146,8 @@ public class CASLDAPAutoLogin extends CASAutoLogin {
 				}
 
 				return processUser(
-					attrs, userMappings, companyId, emailAddress,
-					StringPool.BLANK, screenName, _PASSWORD);
+					attrs, userMappings, companyId, emailAddress, screenName, 0,
+					_PASSWORD);
 			}
 			else {
 				throw new NoSuchUserException(
@@ -164,11 +164,11 @@ public class CASLDAPAutoLogin extends CASAutoLogin {
 
 	protected User processUser(
 			Attributes attrs, Properties userMappings, String companyId,
-			String emailAddress, String screenName, String userId,
+			String emailAddress, String screenName, long userId,
 			String password)
 		throws Exception {
 
-		String creatorUserId = null;
+		long creatorUserId = 0;
 
 		boolean autoPassword = false;
 		String password1 = password;
@@ -206,7 +206,6 @@ public class CASLDAPAutoLogin extends CASAutoLogin {
 			lastName = names[2];
 		}
 
-		String nickName = null;
 		int prefixId = 0;
 		int suffixId = 0;
 		boolean male = true;
@@ -224,7 +223,7 @@ public class CASLDAPAutoLogin extends CASAutoLogin {
 		return PortalLDAPUtil.importFromLDAP(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			passwordReset, autoScreenName, screenName, emailAddress, locale,
-			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
+			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
 			locationId, sendEmail, checkExists, updatePassword);
 	}

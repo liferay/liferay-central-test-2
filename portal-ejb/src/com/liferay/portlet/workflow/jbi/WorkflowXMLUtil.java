@@ -267,7 +267,7 @@ public class WorkflowXMLUtil {
 			}
 		}
 		catch (DocumentException de) {
-			_log.error("Error parsing " + name + " from:\n" + xml);
+			_log.error("Error parsing " + name + " from:\n\n" + xml);
 
 			throw de;
 		}
@@ -336,7 +336,8 @@ public class WorkflowXMLUtil {
 			}
 
 			String name = el.elementText("name");
-			String assignedUserId = el.elementText("assignedUserId");
+			long assignedUserId = GetterUtil.getLong(
+				el.elementText("assignedUserId"));
 			Date createDate = parseDateTime(el.elementText("createDate"));
 			Date startDate = parseDateTime(el.elementText("startDate"));
 			Date endDate = parseDateTime(el.elementText("endDate"));

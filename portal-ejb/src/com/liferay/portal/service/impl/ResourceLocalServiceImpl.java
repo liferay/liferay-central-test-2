@@ -63,7 +63,7 @@ import org.apache.commons.logging.LogFactory;
 public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 	public void addModelResources(
-			String companyId, long groupId, String userId, String name,
+			String companyId, long groupId, long userId, String name,
 			long primKey, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -74,7 +74,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void addModelResources(
-			String companyId, long groupId, String userId, String name,
+			String companyId, long groupId, long userId, String name,
 			String primKey, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -116,7 +116,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			// User permissions
 
-			if (userId != null) {
+			if (userId > 0) {
 				UserUtil.addPermissions(userId, permissions);
 			}
 
@@ -175,11 +175,11 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		addResources(
-			companyId, groupId, null, name, null, portletActions, false, false);
+			companyId, groupId, 0, name, null, portletActions, false, false);
 	}
 
 	public void addResources(
-			String companyId, long groupId, String userId, String name,
+			String companyId, long groupId, long userId, String name,
 			long primKey, boolean portletActions,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -190,7 +190,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void addResources(
-			String companyId, long groupId, String userId, String name,
+			String companyId, long groupId, long userId, String name,
 			String primKey, boolean portletActions,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -253,7 +253,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			// User permissions
 
-			if (userId != null) {
+			if (userId > 0) {
 				UserUtil.addPermissions(userId, permissions);
 			}
 

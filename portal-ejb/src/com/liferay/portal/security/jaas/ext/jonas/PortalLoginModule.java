@@ -55,8 +55,8 @@ public class PortalLoginModule extends BasicLoginModule {
 		return commitValue;
 	}
 
-	protected Principal getPortalPrincipal(String userId) {
-		return new JPrincipal(userId);
+	protected Principal getPortalPrincipal(String name) {
+		return new JPrincipal(name);
 	}
 
 }

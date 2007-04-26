@@ -24,6 +24,10 @@
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://model.tags.portlet.liferay.com" name="addEntry" qname="operNS:addEntry" returnQName="addEntryReturn" returnType="rtns:TagsEntrySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://model.tags.portlet.liferay.com" name="addEntry" qname="operNS:addEntry" returnQName="addEntryReturn" returnType="rtns:TagsEntrySoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+			<parameter xmlns:tns="urn:http.service.tags.portlet.liferay.com" qname="properties" type="tns:ArrayOf_xsd_string"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" name="deleteEntry" qname="operNS:deleteEntry" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
 		</operation>
@@ -31,7 +35,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:string"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="searchAutocomplete" qname="operNS:searchAutocomplete" returnQName="searchAutocompleteReturn" returnType="rtns:string" soapAction="">
+		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="searchAutocomplete" qname="operNS:searchAutocomplete" returnQName="searchAutocompleteReturn" returnType="rtns:anyType" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="urn:http.service.tags.portlet.liferay.com" qname="properties" type="tns:ArrayOf_xsd_string"></parameter>

@@ -363,7 +363,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByUserId(String userId) throws SystemException {
+	public List findByUserId(long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -371,14 +371,7 @@ public class AddressPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Address WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC");
@@ -387,10 +380,7 @@ public class AddressPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			return q.list();
 		}
@@ -402,12 +392,12 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByUserId(String userId, int begin, int end)
+	public List findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(String userId, int begin, int end,
+	public List findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -416,14 +406,7 @@ public class AddressPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Address WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -439,10 +422,7 @@ public class AddressPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -454,7 +434,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public Address findByUserId_First(String userId, OrderByComparator obc)
+	public Address findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchAddressException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
@@ -472,7 +452,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public Address findByUserId_Last(String userId, OrderByComparator obc)
+	public Address findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchAddressException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
@@ -491,7 +471,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public Address[] findByUserId_PrevAndNext(long addressId, String userId,
+	public Address[] findByUserId_PrevAndNext(long addressId, long userId,
 		OrderByComparator obc) throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
 		int count = countByUserId(userId);
@@ -502,14 +482,7 @@ public class AddressPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Address WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -525,10 +498,7 @@ public class AddressPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
 			Address[] array = new AddressImpl[3];
@@ -1742,7 +1712,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByUserId(String userId) throws SystemException {
+	public void removeByUserId(long userId) throws SystemException {
 		Iterator itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
@@ -1849,7 +1819,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByUserId(String userId) throws SystemException {
+	public int countByUserId(long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1858,24 +1828,14 @@ public class AddressPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Address WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			Iterator itr = q.list().iterator();
 

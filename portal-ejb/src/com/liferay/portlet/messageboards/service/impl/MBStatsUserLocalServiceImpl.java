@@ -48,11 +48,11 @@ public class MBStatsUserLocalServiceImpl
 		MBStatsUserUtil.removeByGroupId(groupId);
 	}
 
-	public void deleteStatsUserByUserId(String userId) throws SystemException {
+	public void deleteStatsUserByUserId(long userId) throws SystemException {
 		MBStatsUserUtil.removeByUserId(userId);
 	}
 
-	public MBStatsUser getStatsUser(long groupId, String userId)
+	public MBStatsUser getStatsUser(long groupId, long userId)
 		throws PortalException, SystemException {
 
 		MBStatsUserPK statsUserPK = new MBStatsUserPK(groupId, userId);
@@ -80,14 +80,14 @@ public class MBStatsUserLocalServiceImpl
 		return MBStatsUserUtil.countByG_M(groupId, 0);
 	}
 
-	public void updateStatsUser(long groupId, String userId)
+	public void updateStatsUser(long groupId, long userId)
 		throws PortalException, SystemException {
 
 		update(groupId, userId);
 		update(GroupImpl.DEFAULT_PARENT_GROUP_ID, userId);
 	}
 
-	protected void update(long groupId, String userId)
+	protected void update(long groupId, long userId)
 		throws PortalException, SystemException {
 
 		MBStatsUserPK statsUserPK = new MBStatsUserPK(groupId, userId);

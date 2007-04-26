@@ -60,7 +60,7 @@ import java.util.List;
 public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 	public DLFolder addFolder(
-			String userId, String plid, String parentFolderId, String name,
+			long userId, String plid, String parentFolderId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -72,7 +72,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public DLFolder addFolder(
-			String userId, String plid, String parentFolderId, String name,
+			long userId, String plid, String parentFolderId, String name,
 			String description, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -83,7 +83,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public DLFolder addFolder(
-			String userId, String plid, String parentFolderId, String name,
+			long userId, String plid, String parentFolderId, String name,
 			String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)

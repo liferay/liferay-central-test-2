@@ -63,14 +63,7 @@ public class ContactJSONSerializer {
 			jsonObj.put("companyId", companyId.toString());
 		}
 
-		String userId = model.getUserId();
-
-		if (userId == null) {
-			jsonObj.put("userId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userId", userId.toString());
-		}
+		jsonObj.put("userId", model.getUserId());
 
 		String userName = model.getUserName();
 
@@ -135,15 +128,6 @@ public class ContactJSONSerializer {
 		}
 		else {
 			jsonObj.put("lastName", lastName.toString());
-		}
-
-		String nickName = model.getNickName();
-
-		if (nickName == null) {
-			jsonObj.put("nickName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("nickName", nickName.toString());
 		}
 
 		jsonObj.put("prefixId", model.getPrefixId());

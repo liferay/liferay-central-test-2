@@ -408,7 +408,7 @@ public class RatingsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public RatingsEntry findByU_C_C(String userId, String className,
+	public RatingsEntry findByU_C_C(long userId, String className,
 		String classPK) throws NoSuchEntryException, SystemException {
 		RatingsEntry ratingsEntry = fetchByU_C_C(userId, className, classPK);
 
@@ -436,7 +436,7 @@ public class RatingsEntryPersistence extends BasePersistence {
 		return ratingsEntry;
 	}
 
-	public RatingsEntry fetchByU_C_C(String userId, String className,
+	public RatingsEntry fetchByU_C_C(long userId, String className,
 		String classPK) throws SystemException {
 		Session session = null;
 
@@ -446,14 +446,7 @@ public class RatingsEntryPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" AND ");
 
 			if (className == null) {
@@ -478,10 +471,7 @@ public class RatingsEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			if (className != null) {
 				q.setString(queryPos++, className);
@@ -594,7 +584,7 @@ public class RatingsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByU_C_C(String userId, String className, String classPK)
+	public void removeByU_C_C(long userId, String className, String classPK)
 		throws NoSuchEntryException, SystemException {
 		RatingsEntry ratingsEntry = findByU_C_C(userId, className, classPK);
 		remove(ratingsEntry);
@@ -671,7 +661,7 @@ public class RatingsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByU_C_C(String userId, String className, String classPK)
+	public int countByU_C_C(long userId, String className, String classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -682,14 +672,7 @@ public class RatingsEntryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" AND ");
 
 			if (className == null) {
@@ -714,10 +697,7 @@ public class RatingsEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			if (className != null) {
 				q.setString(queryPos++, className);

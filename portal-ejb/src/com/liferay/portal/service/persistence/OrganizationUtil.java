@@ -515,8 +515,8 @@ public class OrganizationUtil {
 		return getPersistence().getUsersSize(pk);
 	}
 
-	public static boolean containsUser(java.lang.String pk,
-		java.lang.String userPK) throws com.liferay.portal.SystemException {
+	public static boolean containsUser(java.lang.String pk, long userPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsUser(pk, userPK);
 	}
 
@@ -525,7 +525,7 @@ public class OrganizationUtil {
 		return getPersistence().containsUsers(pk);
 	}
 
-	public static void addUser(java.lang.String pk, java.lang.String userPK)
+	public static void addUser(java.lang.String pk, long userPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException {
@@ -540,7 +540,7 @@ public class OrganizationUtil {
 		getPersistence().addUser(pk, user);
 	}
 
-	public static void addUsers(java.lang.String pk, java.lang.String[] userPKs)
+	public static void addUsers(java.lang.String pk, long[] userPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException {
@@ -560,7 +560,7 @@ public class OrganizationUtil {
 		getPersistence().clearUsers(pk);
 	}
 
-	public static void removeUser(java.lang.String pk, java.lang.String userPK)
+	public static void removeUser(java.lang.String pk, long userPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException {
@@ -575,8 +575,7 @@ public class OrganizationUtil {
 		getPersistence().removeUser(pk, user);
 	}
 
-	public static void removeUsers(java.lang.String pk,
-		java.lang.String[] userPKs)
+	public static void removeUsers(java.lang.String pk, long[] userPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException {
@@ -590,7 +589,7 @@ public class OrganizationUtil {
 		getPersistence().removeUsers(pk, users);
 	}
 
-	public static void setUsers(java.lang.String pk, java.lang.String[] userPKs)
+	public static void setUsers(java.lang.String pk, long[] userPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException {

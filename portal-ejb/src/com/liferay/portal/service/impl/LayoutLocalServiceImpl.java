@@ -58,7 +58,6 @@ import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
@@ -67,6 +66,7 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.LayoutFinder;
@@ -142,7 +142,7 @@ import org.dom4j.io.SAXReader;
 public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public Layout addLayout(
-			long groupId, String userId, boolean privateLayout,
+			long groupId, long userId, boolean privateLayout,
 			String parentLayoutId, String name, String title, String type,
 			boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
@@ -168,7 +168,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Layout layout = LayoutUtil.create(new LayoutPK(layoutId, ownerId));
 
-		layout.setCompanyId(user.getActualCompanyId());
+		layout.setCompanyId(user.getCompanyId());
 		layout.setParentLayoutId(parentLayoutId);
 		layout.setName(name, null);
 		layout.setTitle(title, null);
@@ -182,7 +182,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Resources
 
 		ResourceLocalServiceUtil.addResources(
-			user.getActualCompanyId(), groupId, user.getUserId(),
+			user.getCompanyId(), groupId, user.getUserId(),
 			Layout.class.getName(), layout.getPrimaryKey().toString(), false,
 			true, true);
 
@@ -327,9 +327,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String guestPrefsOwnerId = null;
 
 		if (!layoutSet.isPrivateLayout()) {
+			long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
+				companyId);
+
 			guestPrefsOwnerId =
 				ownerId + StringPool.PERIOD + PortletKeys.PREFS_OWNER_ID_USER +
-					StringPool.PERIOD + UserImpl.getDefaultUserId(companyId);
+					StringPool.PERIOD + defaultUserId;
 		}
 
 		// Build compatibility
@@ -534,7 +537,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public void importLayouts(
-			String userId, String ownerId, Map parameterMap, File file)
+			long userId, String ownerId, Map parameterMap, File file)
 		throws PortalException, SystemException {
 
 		try {
@@ -547,7 +550,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public void importLayouts(
-			String userId, String ownerId, Map parameterMap, InputStream is)
+			long userId, String ownerId, Map parameterMap, InputStream is)
 		throws PortalException, SystemException {
 
 		boolean importPermissions = MapUtil.getBoolean(
@@ -733,7 +736,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				layout = LayoutUtil.create(layoutPK);
 			}
 
-			layout.setCompanyId(user.getActualCompanyId());
+			layout.setCompanyId(user.getCompanyId());
 			layout.setParentLayoutId(parentLayoutId);
 			layout.setName(name);
 			layout.setTitle(title);
@@ -1629,7 +1632,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		for (int i = 0; i < users.size(); i++) {
 			User user = (User)users.get(i);
 
-			String userId = user.getUserId();
+			long userId = user.getUserId();
 			String emailAddress = user.getEmailAddress();
 
 			List userRoles = layoutCache.getUserRoles(userId);
@@ -2089,6 +2092,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			LayoutSet layoutSet, Element parentEl)
 		throws PortalException, SystemException {
 
+		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
+			layoutSet.getCompanyId());
+
 		Iterator itr = parentEl.elements("portlet-preferences").iterator();
 
 		while (itr.hasNext()) {
@@ -2108,7 +2114,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				ownerId =
 					layoutSet.getOwnerId() + StringPool.PERIOD +
 						PortletKeys.PREFS_OWNER_ID_USER + StringPool.PERIOD +
-							UserImpl.getDefaultUserId(layoutSet.getCompanyId());
+							defaultUserId;
 			}
 			else if (ownerId.startsWith(LayoutImpl.PUBLIC)) {
 				ownerId = LayoutImpl.PUBLIC + layoutSet.getGroupId();
@@ -2276,8 +2282,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		commLink.send(methodWrapper);
 
-		return themeId + PortletImpl.WAR_SEPARATOR +
-			themeLoader.getServletContextName();
+		themeId +=
+			PortletImpl.WAR_SEPARATOR + themeLoader.getServletContextName();
+
+		return PortalUtil.getJsSafePortletName(themeId);
 	}
 
 	protected void importUserPermissions(

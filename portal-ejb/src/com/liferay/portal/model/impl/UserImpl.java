@@ -58,31 +58,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserImpl extends UserModelImpl implements User {
 
-	public static final String DEFAULT = "default";
-
-	public static String getActualCompanyId(String defaultUserId) {
-		if (isDefaultUser(defaultUserId)) {
-			return defaultUserId.substring(
-				0, defaultUserId.indexOf(DEFAULT) - 1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	public static String getDefaultUserId(String companyId) {
-		return companyId + StringPool.PERIOD + DEFAULT;
-	}
-
-	public static boolean isDefaultUser(String userId) {
-		if ((userId != null) && userId.endsWith(StringPool.PERIOD + DEFAULT)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	public static String getFullName(
 		String firstName, String middleName, String lastName) {
 
@@ -90,30 +65,6 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public UserImpl() {
-	}
-
-	public boolean isDefaultUser() {
-		return _defaultUser;
-	}
-
-	public void setCompanyId(String companyId) {
-		if (companyId.equalsIgnoreCase(DEFAULT)) {
-			_defaultUser = true;
-		}
-		else {
-			_defaultUser = false;
-		}
-
-		super.setCompanyId(companyId);
-	}
-
-	public String getActualCompanyId() {
-		if (isDefaultUser()) {
-			return getActualCompanyId(getUserId());
-		}
-		else {
-			return getCompanyId();
-		}
 	}
 
 	public String getCompanyMx() {
@@ -174,7 +125,7 @@ public class UserImpl extends UserModelImpl implements User {
 			login = getScreenName();
 		}
 		else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
-			login = getUserId();
+			login = String.valueOf(getUserId());
 		}
 
 		return login;
@@ -223,15 +174,6 @@ public class UserImpl extends UserModelImpl implements User {
 		super.setTimeZoneId(timeZoneId);
 	}
 
-	public void setResolution(String resolution) {
-		if (Validator.isNull(resolution)) {
-			resolution = PropsUtil.get(
-				PropsUtil.DEFAULT_USER_LAYOUT_RESOLUTION);
-		}
-
-		super.setResolution(resolution);
-	}
-
 	public Contact getContact() {
 		Contact contact = null;
 
@@ -257,10 +199,6 @@ public class UserImpl extends UserModelImpl implements User {
 
 	public String getLastName() {
 		return getContact().getLastName();
-	}
-
-	public String getNickName() {
-		return getContact().getNickName();
 	}
 
 	public String getFullName() {
@@ -413,7 +351,6 @@ public class UserImpl extends UserModelImpl implements User {
 
 	private static Log _log = LogFactory.getLog(UserImpl.class);
 
-	private boolean _defaultUser;
 	private String _passwordUnencrypted;
 	private Locale _locale;
 	private TimeZone _timeZone;

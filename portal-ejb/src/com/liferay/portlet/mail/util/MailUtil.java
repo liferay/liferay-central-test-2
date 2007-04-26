@@ -1354,15 +1354,9 @@ public class MailUtil {
 			}
 
 			if (folder == null) {
-				String userId = (String)ses.getAttribute(WebKeys.USER_ID);
+				Long userIdObj = (Long)ses.getAttribute(WebKeys.USER_ID);
 
-				if (GetterUtil.getBoolean(
-						PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
-
-					userId = StringUtil.replace(userId, ".", "_");
-				}
-
-				String serviceName = userId + StringPool.COLON +
+				String serviceName = userIdObj + StringPool.COLON +
 					WebKeys.MAIL_FOLDER + StringPool.PERIOD + folderName;
 
 				Store store = _getStore(req);

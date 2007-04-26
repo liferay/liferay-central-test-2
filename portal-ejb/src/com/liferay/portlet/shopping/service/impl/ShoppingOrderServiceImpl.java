@@ -70,7 +70,7 @@ public class ShoppingOrderServiceImpl
 
 		ShoppingOrder order = ShoppingOrderLocalServiceUtil.getOrder(orderId);
 
-		if (order.getUserId().equals(getUserId())) {
+		if (order.getUserId() == getUserId()) {
 			return order;
 		}
 		else {

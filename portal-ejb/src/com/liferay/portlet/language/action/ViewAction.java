@@ -97,11 +97,10 @@ public class ViewAction extends PortletAction {
 				AdminUtil.updateUser(
 					req, user.getUserId(), user.getScreenName(),
 					user.getEmailAddress(), languageId, user.getTimeZoneId(),
-					user.getGreeting(), user.getResolution(),
-					user.getComments(), contact.getSmsSn(), contact.getAimSn(),
-					contact.getIcqSn(), contact.getJabberSn(),
-					contact.getMsnSn(), contact.getSkypeSn(),
-					contact.getYmSn());
+					user.getGreeting(), user.getComments(), contact.getSmsSn(),
+					contact.getAimSn(), contact.getIcqSn(),
+					contact.getJabberSn(), contact.getMsnSn(),
+					contact.getSkypeSn(), contact.getYmSn());
 			}
 
 			httpSes.setAttribute(Globals.LOCALE_KEY, locale);

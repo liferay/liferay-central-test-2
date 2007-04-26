@@ -136,7 +136,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				DLFileEntry fileEntry = (DLFileEntry)model;
 
 				String[] pathArray = webDavReq.getPathArray();
-				String userId = webDavReq.getUserId();
+				long userId = webDavReq.getUserId();
 
 				String folderId = destinationArray[destinationArray.length - 2];
 				String name = pathArray[pathArray.length - 1];
@@ -367,7 +367,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		try {
 			HttpServletRequest req = webDavReq.getHttpServletRequest();
 			String[] pathArray = webDavReq.getPathArray();
-			String userId = webDavReq.getUserId();
+			long userId = webDavReq.getUserId();
 
 			String folderId = getParentFolderId(webDavReq, true);
 			String name = pathArray[pathArray.length - 1];

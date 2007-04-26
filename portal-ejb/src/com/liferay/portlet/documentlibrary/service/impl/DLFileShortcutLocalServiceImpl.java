@@ -54,7 +54,7 @@ public class DLFileShortcutLocalServiceImpl
 	extends DLFileShortcutLocalServiceBaseImpl {
 
 	public DLFileShortcut addFileShortcut(
-			String userId, String folderId, String toFolderId, String toName,
+			long userId, String folderId, String toFolderId, String toName,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -65,7 +65,7 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public DLFileShortcut addFileShortcut(
-			String userId, String folderId, String toFolderId, String toName,
+			long userId, String folderId, String toFolderId, String toName,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -75,7 +75,7 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public DLFileShortcut addFileShortcut(
-			String userId, String folderId, String toFolderId, String toName,
+			long userId, String folderId, String toFolderId, String toName,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -218,7 +218,7 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public DLFileShortcut updateFileShortcut(
-			String userId, long fileShortcutId, String folderId,
+			long userId, long fileShortcutId, String folderId,
 			String toFolderId, String toName)
 		throws PortalException, SystemException {
 

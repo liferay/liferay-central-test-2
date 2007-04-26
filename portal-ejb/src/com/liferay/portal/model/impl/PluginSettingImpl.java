@@ -23,7 +23,9 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.PluginSetting;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.util.ArrayUtil;
 import com.liferay.util.StringUtil;
 
@@ -108,10 +110,10 @@ public class PluginSettingImpl
 	/**
 	 * Returns true if the user has permission to use this plugin
 	 *
+	 * @param		userId the id of the user
 	 * @return		true if the user has permission to use this plugin
-	 * @param userId the id of the user
 	 */
-	public boolean hasPermission(String userId) {
+	public boolean hasPermission(long userId) {
 		try {
 			if (_rolesArray.length == 0) {
 				return true;
@@ -126,8 +128,10 @@ public class PluginSettingImpl
 
 				return true;
 			}
-			else if (UserImpl.isDefaultUser(userId)) {
-				if (hasRoleWithName(RoleImpl.GUEST)) {
+			else {
+				User user = UserLocalServiceUtil.getUserById(userId);
+
+				if (user.isDefaultUser() && hasRoleWithName(RoleImpl.GUEST)) {
 					return true;
 				}
 			}

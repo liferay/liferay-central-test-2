@@ -33,6 +33,7 @@ import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.LiveUsers;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -130,6 +131,8 @@ public class EditGroupAction extends PortletAction {
 	}
 
 	protected void updateGroup(ActionRequest req) throws Exception {
+		long userId = PortalUtil.getUserId(req);
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String name = ParamUtil.getString(req, "name");
@@ -145,7 +148,7 @@ public class EditGroupAction extends PortletAction {
 			Group group = GroupServiceUtil.addGroup(
 				name, description, type, friendlyURL, active);
 
-			LiveUsers.joinGroup(req.getRemoteUser(), group.getGroupId());
+			LiveUsers.joinGroup(userId, group.getGroupId());
 		}
 		else {
 

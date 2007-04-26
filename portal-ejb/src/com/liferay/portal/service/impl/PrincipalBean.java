@@ -27,13 +27,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.auth.PrincipalFinder;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.InstancePool;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 /**
@@ -50,29 +48,18 @@ public class PrincipalBean {
 		return UserUtil.findByPrimaryKey(getUserId());
 	}
 
-	public String getUserId() throws PrincipalException {
+	public long getUserId() throws PrincipalException {
 		String name = PrincipalThreadLocal.getName();
 
 		if (name == null) {
 			throw new PrincipalException();
 		}
 
-		PrincipalFinder principalFinder = null;
-
-		try {
-			principalFinder = (PrincipalFinder)InstancePool.get(
-				PropsUtil.get(PropsUtil.PRINCIPAL_FINDER));
-
-			name = principalFinder.toLiferay(name);
-		}
-		catch (Exception e) {
-		}
-
 		if (Validator.isNull(name)) {
 			throw new PrincipalException("Principal cannot be null");
 		}
 
-		return name;
+		return GetterUtil.getLong(name);
 	}
 
 	public PermissionChecker getPermissionChecker() throws PrincipalException {

@@ -136,10 +136,6 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 		return getDefaultUser().getTimeZone();
 	}
 
-	public String getResolution() {
-		return getDefaultUser().getResolution();
-	}
-
 	public String getAdminName() {
 		return "Administrator";
 	}

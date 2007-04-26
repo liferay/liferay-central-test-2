@@ -61,7 +61,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public UserGroup addUserGroup(
-			String userId, String companyId, String name, String description)
+			long userId, String companyId, String name, String description)
 		throws PortalException, SystemException {
 
 		// User Group
@@ -135,7 +135,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return UserGroupFinder.findByC_N(companyId, name);
 	}
 
-	public List getUserUserGroups(String userId)
+	public List getUserUserGroups(long userId)
 		throws PortalException, SystemException {
 
 		return UserUtil.getUserGroups(userId);

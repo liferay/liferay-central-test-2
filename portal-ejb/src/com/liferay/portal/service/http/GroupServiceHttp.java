@@ -422,15 +422,9 @@ public class GroupServiceHttp {
 	}
 
 	public static boolean hasUserGroup(HttpPrincipal httpPrincipal,
-		java.lang.String userId, long groupId)
-		throws com.liferay.portal.SystemException {
+		long userId, long groupId) throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			Object paramObj1 = new LongWrapper(groupId);
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"hasUserGroup", new Object[] { paramObj0, paramObj1 });

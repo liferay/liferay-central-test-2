@@ -46,7 +46,7 @@ import java.util.List;
  */
 public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 
-	public PollsVote addVote(String userId, String questionId, String choiceId)
+	public PollsVote addVote(long userId, String questionId, String choiceId)
 		throws PortalException, SystemException {
 
 		// Question
@@ -87,7 +87,7 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 		return vote;
 	}
 
-	public PollsVote getVote(String questionId, String userId)
+	public PollsVote getVote(String questionId, long userId)
 		throws PortalException, SystemException {
 
 		PollsVotePK pk = new PollsVotePK(questionId, userId);

@@ -54,16 +54,13 @@ import java.sql.Types;
 public class UserIdMapperModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "UserIdMapper";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.BIGINT) },
 			{ "type_", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "externalUserId", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserIdMapper"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserIdMapper.userId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserIdMapper.type"),
 			XSS_ALLOW_BY_MODEL);
@@ -88,19 +85,12 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 		setType(pk.type);
 	}
 
-	public String getUserId() {
-		return GetterUtil.getString(_userId);
+	public long getUserId() {
+		return _userId;
 	}
 
-	public void setUserId(String userId) {
-		if (((userId == null) && (_userId != null)) ||
-				((userId != null) && (_userId == null)) ||
-				((userId != null) && (_userId != null) &&
-				!userId.equals(_userId))) {
-			if (!XSS_ALLOW_USERID) {
-				userId = XSSUtil.strip(userId);
-			}
-
+	public void setUserId(long userId) {
+		if (userId != _userId) {
 			_userId = userId;
 		}
 	}
@@ -204,7 +194,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 		return getPrimaryKey().hashCode();
 	}
 
-	private String _userId;
+	private long _userId;
 	private String _type;
 	private String _description;
 	private String _externalUserId;

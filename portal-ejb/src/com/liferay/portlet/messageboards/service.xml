@@ -16,14 +16,14 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
-		<column name="userId" type="String" />
+		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
 		<!-- Other fields -->
 
-		<column name="banUserId" type="String" />
+		<column name="banUserId" type="long" />
 
 		<!-- Finder methods -->
 
@@ -54,7 +54,7 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
-		<column name="userId" type="String" />
+		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
@@ -120,7 +120,7 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
-		<column name="userId" type="String" />
+		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
@@ -172,7 +172,7 @@
 
 		<column name="topicId" type="String" primary="true" />
 		<column name="messageId" type="String" primary="true" />
-		<column name="userId" type="String" primary="true" />
+		<column name="userId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
@@ -200,7 +200,7 @@
 		<!-- PK fields -->
 
 		<column name="groupId" type="long" primary="true" />
-		<column name="userId" type="String" primary="true" />
+		<column name="userId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
@@ -239,7 +239,7 @@
 		<column name="rootMessageId" type="String" />
 		<column name="messageCount" type="int" />
 		<column name="viewCount" type="int" />
-		<column name="lastPostByUserId" type="String" />
+		<column name="lastPostByUserId" type="long" />
 		<column name="lastPostDate" type="Date" />
 		<column name="priority" type="double" />
 

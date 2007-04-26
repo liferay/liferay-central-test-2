@@ -145,7 +145,7 @@ public class RoleServiceSoap {
 	}
 
 	public static com.liferay.portal.model.RoleSoap[] getUserGroupRoles(
-		java.lang.String userId, long groupId) throws RemoteException {
+		long userId, long groupId) throws RemoteException {
 		try {
 			java.util.List returnValue = RoleServiceUtil.getUserGroupRoles(userId,
 					groupId);
@@ -159,8 +159,7 @@ public class RoleServiceSoap {
 	}
 
 	public static com.liferay.portal.model.RoleSoap[] getUserRelatedRoles(
-		java.lang.String userId, java.util.List groups)
-		throws RemoteException {
+		long userId, java.util.List groups) throws RemoteException {
 		try {
 			java.util.List returnValue = RoleServiceUtil.getUserRelatedRoles(userId,
 					groups);
@@ -173,8 +172,8 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RoleSoap[] getUserRoles(
-		java.lang.String userId) throws RemoteException {
+	public static com.liferay.portal.model.RoleSoap[] getUserRoles(long userId)
+		throws RemoteException {
 		try {
 			java.util.List returnValue = RoleServiceUtil.getUserRoles(userId);
 

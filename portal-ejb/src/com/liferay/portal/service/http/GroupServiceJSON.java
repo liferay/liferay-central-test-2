@@ -137,7 +137,7 @@ public class GroupServiceJSON {
 		return GroupJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static boolean hasUserGroup(java.lang.String userId, long groupId)
+	public static boolean hasUserGroup(long userId, long groupId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		boolean returnValue = GroupServiceUtil.hasUserGroup(userId, groupId);
 

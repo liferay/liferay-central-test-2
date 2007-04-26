@@ -122,7 +122,7 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		return GroupServiceFactory.getTxImpl().getUserGroupsGroups(userGroups);
 	}
 
-	public boolean hasUserGroup(java.lang.String userId, long groupId)
+	public boolean hasUserGroup(long userId, long groupId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 

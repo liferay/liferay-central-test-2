@@ -224,16 +224,11 @@ public class UserGroupServiceHttp {
 	}
 
 	public static java.util.List getUserUserGroups(
-		HttpPrincipal httpPrincipal, java.lang.String userId)
+		HttpPrincipal httpPrincipal, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserGroupServiceUtil.class.getName(),
 					"getUserUserGroups", new Object[] { paramObj0 });
 			Object returnObj = null;

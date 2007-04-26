@@ -146,7 +146,7 @@ public class IGImageFinder {
 		}
 	}
 
-	public static int countByG_U(long groupId, String userId)
+	public static int countByG_U(long groupId, long userId)
 		throws SystemException {
 
 		Session session = null;
@@ -217,8 +217,7 @@ public class IGImageFinder {
 		}
 	}
 
-	public static List findByG_U(
-			long groupId, String userId, int begin, int end)
+	public static List findByG_U(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;

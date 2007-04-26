@@ -88,7 +88,7 @@ public class PermissionFinder {
 		PermissionFinder.class.getName() + ".findByU_C_N_S_P";
 
 	public static boolean containsPermissions_2(
-			List permissions, String userId, List groups, long groupId)
+			List permissions, long userId, List groups, long groupId)
 		throws SystemException {
 
 		Session session = null;
@@ -221,7 +221,7 @@ public class PermissionFinder {
 	}
 
 	public static boolean containsPermissions_4(
-			List permissions, String userId, List groups, List roles)
+			List permissions, long userId, List groups, List roles)
 		throws SystemException {
 
 		Session session = null;
@@ -469,7 +469,7 @@ public class PermissionFinder {
 	}
 
 	public static int countByUserGroupRole(
-			List permissions, String userId, long groupId)
+			List permissions, long userId, long groupId)
 		throws SystemException {
 
 		Session session = null;
@@ -515,7 +515,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static int countByUsersPermissions(List permissions, String userId)
+	public static int countByUsersPermissions(List permissions, long userId)
 		throws SystemException {
 
 		Session session = null;
@@ -560,7 +560,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static int countByUsersRoles(List permissions, String userId)
+	public static int countByUsersRoles(List permissions, long userId)
 		throws SystemException {
 
 		Session session = null;
@@ -670,7 +670,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByU_R(String userId, long resourceId)
+	public static List findByU_R(long userId, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -735,7 +735,7 @@ public class PermissionFinder {
 	}
 
 	public static List findByU_A_R(
-			String userId, String[] actionIds, long resourceId)
+			long userId, String[] actionIds, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -806,7 +806,7 @@ public class PermissionFinder {
 	}
 
 	public static List findByU_C_N_S_P(
-			String userId, String companyId, String name, String scope,
+			long userId, String companyId, String name, String scope,
 			String primKey)
 		throws SystemException {
 

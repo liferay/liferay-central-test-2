@@ -27,6 +27,7 @@ import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -95,12 +96,13 @@ public class ChangePasswordAction extends Action {
 
 		HttpSession ses = req.getSession();
 
+		long userId = PortalUtil.getUserId(req);
 		String password1 = ParamUtil.getString(req, "password1");
 		String password2 = ParamUtil.getString(req, "password2");
 		boolean passwordReset = ParamUtil.getBoolean(req, "passwordReset");
 
 		UserServiceUtil.updatePassword(
-			req.getRemoteUser(), password1, password2, passwordReset);
+			userId, password1, password2, passwordReset);
 
 		ses.setAttribute(WebKeys.USER_PASSWORD, password1);
 	}

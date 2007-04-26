@@ -67,7 +67,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.Resolution;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.CookieUtil;
@@ -173,15 +172,16 @@ public class ServicePreAction extends Action {
 
 			User realUser = user;
 
-			String realUserId = (String)ses.getAttribute(WebKeys.USER_ID);
+			Long realUserId = (Long)ses.getAttribute(WebKeys.USER_ID);
 
 			if (realUserId != null) {
-				if (!user.getUserId().equals(realUserId)) {
-					realUser = UserLocalServiceUtil.getUserById(realUserId);
+				if (user.getUserId() != realUserId.longValue()) {
+					realUser = UserLocalServiceUtil.getUserById(
+						realUserId.longValue());
 				}
 			}
 
-			String doAsUserId = ParamUtil.getString(req, "doAsUserId");
+			long doAsUserId = ParamUtil.getLong(req, "doAsUserId");
 
 			// Permission checker
 
@@ -398,19 +398,6 @@ public class ServicePreAction extends Action {
 			req.setAttribute(WebKeys.THEME, theme);
 			req.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
 
-			// Resolution
-
-			int resolution = Resolution.FULL_RESOLUTION;
-
-			String resolutionKey = user.getResolution();
-
-			if (resolutionKey.equals(Resolution.S1024X768_KEY)) {
-				resolution = Resolution.S1024X768_RESOLUTION;
-			}
-			else if (resolutionKey.equals(Resolution.S800X600_KEY)) {
-				resolution = Resolution.S800X600_RESOLUTION;
-			}
-
 			// Theme display
 
 			String protocol = Http.getProtocol(req) + "://";
@@ -436,7 +423,6 @@ public class ServicePreAction extends Action {
 			themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
 			themeDisplay.setServerPort(req.getServerPort());
 			themeDisplay.setSecure(req.isSecure());
-			themeDisplay.setResolution(resolution);
 			themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(req));
 			themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(req));
 			themeDisplay.setPathApplet(contextPath + "/applets");
@@ -617,7 +603,7 @@ public class ServicePreAction extends Action {
 		String layoutTemplateId = PropsUtil.get(
 			PropsUtil.DEFAULT_USER_LAYOUT_TEMPLATE_ID);
 
-		layoutTypePortlet.setLayoutTemplateId(null, layoutTemplateId, false);
+		layoutTypePortlet.setLayoutTemplateId(0, layoutTemplateId, false);
 
 		for (int i = 0; i < 10; i++) {
 			String columnId = "column-" + i;
@@ -627,7 +613,7 @@ public class ServicePreAction extends Action {
 			String[] portletIdsArray = StringUtil.split(portletIds);
 
 			layoutTypePortlet.addPortletIds(
-				null, portletIdsArray, columnId, false);
+				0, portletIdsArray, columnId, false);
 		}
 
 		LayoutLocalServiceUtil.updateLayout(
@@ -748,9 +734,9 @@ public class ServicePreAction extends Action {
 		String host = PortalUtil.getHost(req);
 
 		try {
-			if (isValidHost(user.getActualCompanyId(), host)) {
+			if (isValidHost(user.getCompanyId(), host)) {
 				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-					user.getActualCompanyId(), host);
+					user.getCompanyId(), host);
 
 				List layouts = LayoutLocalServiceUtil.getLayouts(
 					layoutSet.getOwnerId(),
@@ -794,7 +780,7 @@ public class ServicePreAction extends Action {
 			if (layout == null) {
 				LinkedHashMap groupParams = new LinkedHashMap();
 
-				groupParams.put("usersGroups", user.getUserId());
+				groupParams.put("usersGroups", new Long(user.getUserId()));
 
 				List groups = GroupLocalServiceUtil.search(
 					user.getCompanyId(), null, null, groupParams,
@@ -826,7 +812,7 @@ public class ServicePreAction extends Action {
 			// Check the guest community
 
 			Group guestGroup = GroupLocalServiceUtil.getGroup(
-				user.getActualCompanyId(), GroupImpl.GUEST);
+				user.getCompanyId(), GroupImpl.GUEST);
 
 			layouts = LayoutLocalServiceUtil.getLayouts(
 				LayoutImpl.PUBLIC + guestGroup.getGroupId(),
@@ -915,7 +901,9 @@ public class ServicePreAction extends Action {
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		if (group.isUser()) {
-			if (group.getClassPK().equals(user.getUserId())) {
+			long groupUserId = GetterUtil.getLong(group.getClassPK());
+
+			if (groupUserId == user.getUserId()) {
 				return true;
 			}
 			else {

@@ -161,7 +161,7 @@ public class MBMessageServiceJSON {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		java.lang.String messageId, java.lang.String userId)
+		java.lang.String messageId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.messageboards.model.MBMessageDisplay returnValue = MBMessageServiceUtil.getMessageDisplay(messageId,

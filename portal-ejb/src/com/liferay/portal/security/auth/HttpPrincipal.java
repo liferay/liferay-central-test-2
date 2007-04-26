@@ -38,11 +38,11 @@ public class HttpPrincipal implements Serializable {
 		_url = url;
 	}
 
-	public HttpPrincipal(String url, String userId, String password) {
+	public HttpPrincipal(String url, long userId, String password) {
 		this(url, userId, password, false);
 	}
 
-	public HttpPrincipal(String url, String userId, String password,
+	public HttpPrincipal(String url, long userId, String password,
 						 boolean digested) {
 
 		_url = url;
@@ -68,7 +68,7 @@ public class HttpPrincipal implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
@@ -78,7 +78,7 @@ public class HttpPrincipal implements Serializable {
 
 	private String _url;
 	private String _companyId;
-	private String _userId;
+	private long _userId;
 	private String _password;
 
 }

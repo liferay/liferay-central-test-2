@@ -66,8 +66,8 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 			begin, end);
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent addEvent(
-		java.lang.String userId, java.lang.String plid, java.lang.String title,
+	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
+		java.lang.String plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
@@ -87,8 +87,8 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 			addGuestPermissions);
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent addEvent(
-		java.lang.String userId, java.lang.String plid, java.lang.String title,
+	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
+		java.lang.String plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
@@ -109,8 +109,8 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 			guestPermissions);
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent addEvent(
-		java.lang.String userId, java.lang.String plid, java.lang.String title,
+	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
+		java.lang.String plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
@@ -245,7 +245,7 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 	}
 
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
-		java.lang.String userId, long eventId, java.lang.String title,
+		long userId, long eventId, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,

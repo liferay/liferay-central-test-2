@@ -12,7 +12,7 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
-		<column name="userId" type="String" />
+		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
@@ -53,7 +53,7 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
-		<column name="userId" type="String" />
+		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />

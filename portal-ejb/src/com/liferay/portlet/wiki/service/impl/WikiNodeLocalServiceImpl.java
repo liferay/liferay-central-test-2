@@ -69,7 +69,7 @@ import org.apache.lucene.search.TermQuery;
 public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 	public WikiNode addNode(
-			String userId, String plid, String name, String description,
+			long userId, String plid, String name, String description,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -80,7 +80,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	}
 
 	public WikiNode addNode(
-			String userId, String plid, String name, String description,
+			long userId, String plid, String name, String description,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -90,7 +90,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	}
 
 	public WikiNode addNode(
-			String userId, String plid, String name, String description,
+			long userId, String plid, String name, String description,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {

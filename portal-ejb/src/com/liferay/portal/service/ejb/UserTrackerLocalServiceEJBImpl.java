@@ -67,10 +67,9 @@ public class UserTrackerLocalServiceEJBImpl implements UserTrackerLocalService,
 	}
 
 	public com.liferay.portal.model.UserTracker addUserTracker(
-		java.lang.String companyId, java.lang.String userId,
-		java.util.Date modifiedDate, java.lang.String remoteAddr,
-		java.lang.String remoteHost, java.lang.String userAgent,
-		java.util.List userTrackerPaths)
+		java.lang.String companyId, long userId, java.util.Date modifiedDate,
+		java.lang.String remoteAddr, java.lang.String remoteHost,
+		java.lang.String userAgent, java.util.List userTrackerPaths)
 		throws com.liferay.portal.SystemException {
 		return UserTrackerLocalServiceFactory.getTxImpl().addUserTracker(companyId,
 			userId, modifiedDate, remoteAddr, remoteHost, userAgent,

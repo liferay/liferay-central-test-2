@@ -411,7 +411,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		_toString = null;
 	}
 
-	public void setDoAsUserId(String doAsUserId) {
+	public void setDoAsUserId(long doAsUserId) {
 		_doAsUserId = doAsUserId;
 
 		// Clear cache
@@ -573,7 +573,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 			sm.append(StringPool.AMPERSAND);
 		}
 
-		if (Validator.isNotNull(_doAsUserId)) {
+		if (_doAsUserId > 0) {
 			try {
 				Company company = PortalUtil.getCompany(_req);
 
@@ -587,9 +587,9 @@ public class PortletURLImpl implements PortletURL, Serializable {
 			}
 		}
 		else {
-			String doAsUserId = themeDisplay.getDoAsUserId();
+			long doAsUserId = themeDisplay.getDoAsUserId();
 
-			if (Validator.isNotNull(doAsUserId)) {
+			if (doAsUserId > 0) {
 				sm.append("doAsUserId");
 				sm.append(StringPool.EQUAL);
 				sm.append(processValue(key, doAsUserId));
@@ -656,7 +656,11 @@ public class PortletURLImpl implements PortletURL, Serializable {
 	}
 
 	protected String processValue(Key key, int value) {
-		return processValue(key, Integer.toString(value));
+		return processValue(key, String.valueOf(value));
+	}
+
+	protected String processValue(Key key, long value) {
+		return processValue(key, String.valueOf(value));
 	}
 
 	protected String processValue(Key key, String value) {
@@ -691,7 +695,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 	private boolean _secure;
 	private boolean _anchor = true;
 	private boolean _encrypt = false;
-	private String _doAsUserId;
+	private long _doAsUserId;
 	private String _toString;
 
 }

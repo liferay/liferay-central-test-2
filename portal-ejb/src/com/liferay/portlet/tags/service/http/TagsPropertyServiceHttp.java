@@ -118,38 +118,32 @@ public class TagsPropertyServiceHttp {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
-		HttpPrincipal httpPrincipal, java.lang.String userId,
-		java.lang.String entryName, java.lang.String key, java.lang.String value)
+		HttpPrincipal httpPrincipal, java.lang.String entryName,
+		java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
+			Object paramObj0 = entryName;
 
-			if (userId == null) {
+			if (entryName == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = entryName;
+			Object paramObj1 = key;
 
-			if (entryName == null) {
+			if (key == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = key;
-
-			if (key == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = value;
+			Object paramObj2 = value;
 
 			if (value == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(TagsPropertyServiceUtil.class.getName(),
 					"addProperty",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 			Object returnObj = null;
 
 			try {

@@ -102,8 +102,8 @@ public class PermissionServiceSoap {
 		}
 	}
 
-	public static boolean hasUserPermissions(java.lang.String userId,
-		long groupId, java.lang.String actionId, long[] resourceIds,
+	public static boolean hasUserPermissions(long userId, long groupId,
+		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws RemoteException {
 		try {
@@ -171,8 +171,8 @@ public class PermissionServiceSoap {
 		}
 	}
 
-	public static void setUserPermissions(java.lang.String userId,
-		long groupId, java.lang.String[] actionIds, long resourceId)
+	public static void setUserPermissions(long userId, long groupId,
+		java.lang.String[] actionIds, long resourceId)
 		throws RemoteException {
 		try {
 			PermissionServiceUtil.setUserPermissions(userId, groupId,
@@ -223,8 +223,8 @@ public class PermissionServiceSoap {
 		}
 	}
 
-	public static void unsetUserPermissions(java.lang.String userId,
-		long groupId, java.lang.String[] actionIds, long resourceId)
+	public static void unsetUserPermissions(long userId, long groupId,
+		java.lang.String[] actionIds, long resourceId)
 		throws RemoteException {
 		try {
 			PermissionServiceUtil.unsetUserPermissions(userId, groupId,

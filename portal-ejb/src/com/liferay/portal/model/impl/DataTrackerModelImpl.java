@@ -58,7 +58,7 @@ public class DataTrackerModelImpl extends BaseModelImpl {
 			{ "dataTrackerId", new Integer(Types.VARCHAR) },
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "createdOn", new Integer(Types.TIMESTAMP) },
-			{ "createdByUserId", new Integer(Types.VARCHAR) },
+			{ "createdByUserId", new Integer(Types.BIGINT) },
 			{ "createdByUserName", new Integer(Types.VARCHAR) },
 			{ "updatedOn", new Integer(Types.TIMESTAMP) },
 			{ "updatedBy", new Integer(Types.VARCHAR) },
@@ -73,9 +73,6 @@ public class DataTrackerModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker.companyId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CREATEDBYUSERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.DataTracker.createdByUserId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CREATEDBYUSERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker.createdByUserName"),
@@ -150,19 +147,12 @@ public class DataTrackerModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCreatedByUserId() {
-		return GetterUtil.getString(_createdByUserId);
+	public long getCreatedByUserId() {
+		return _createdByUserId;
 	}
 
-	public void setCreatedByUserId(String createdByUserId) {
-		if (((createdByUserId == null) && (_createdByUserId != null)) ||
-				((createdByUserId != null) && (_createdByUserId == null)) ||
-				((createdByUserId != null) && (_createdByUserId != null) &&
-				!createdByUserId.equals(_createdByUserId))) {
-			if (!XSS_ALLOW_CREATEDBYUSERID) {
-				createdByUserId = XSSUtil.strip(createdByUserId);
-			}
-
+	public void setCreatedByUserId(long createdByUserId) {
+		if (createdByUserId != _createdByUserId) {
 			_createdByUserId = createdByUserId;
 		}
 	}
@@ -320,7 +310,7 @@ public class DataTrackerModelImpl extends BaseModelImpl {
 	private String _dataTrackerId;
 	private String _companyId;
 	private Date _createdOn;
-	private String _createdByUserId;
+	private long _createdByUserId;
 	private String _createdByUserName;
 	private Date _updatedOn;
 	private String _updatedBy;

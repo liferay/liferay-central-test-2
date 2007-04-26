@@ -54,10 +54,11 @@ import java.util.Date;
 public class UserModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "User_";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "defaultUser", new Integer(Types.BOOLEAN) },
 			{ "contactId", new Integer(Types.BIGINT) },
 			{ "password_", new Integer(Types.VARCHAR) },
 			{ "passwordEncrypted", new Integer(Types.BOOLEAN) },
@@ -68,7 +69,6 @@ public class UserModelImpl extends BaseModelImpl {
 			{ "languageId", new Integer(Types.VARCHAR) },
 			{ "timeZoneId", new Integer(Types.VARCHAR) },
 			{ "greeting", new Integer(Types.VARCHAR) },
-			{ "resolution", new Integer(Types.VARCHAR) },
 			{ "comments", new Integer(Types.VARCHAR) },
 			{ "loginDate", new Integer(Types.TIMESTAMP) },
 			{ "loginIP", new Integer(Types.VARCHAR) },
@@ -80,9 +80,6 @@ public class UserModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.userId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -104,9 +101,6 @@ public class UserModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_GREETING = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.greeting"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_RESOLUTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.resolution"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.comments"),
 			XSS_ALLOW_BY_MODEL);
@@ -122,27 +116,20 @@ public class UserModelImpl extends BaseModelImpl {
 	public UserModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _userId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setUserId(pk);
 	}
 
-	public String getUserId() {
-		return GetterUtil.getString(_userId);
+	public long getUserId() {
+		return _userId;
 	}
 
-	public void setUserId(String userId) {
-		if (((userId == null) && (_userId != null)) ||
-				((userId != null) && (_userId == null)) ||
-				((userId != null) && (_userId != null) &&
-				!userId.equals(_userId))) {
-			if (!XSS_ALLOW_USERID) {
-				userId = XSSUtil.strip(userId);
-			}
-
+	public void setUserId(long userId) {
+		if (userId != _userId) {
 			_userId = userId;
 		}
 	}
@@ -187,6 +174,20 @@ public class UserModelImpl extends BaseModelImpl {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
+		}
+	}
+
+	public boolean getDefaultUser() {
+		return _defaultUser;
+	}
+
+	public boolean isDefaultUser() {
+		return _defaultUser;
+	}
+
+	public void setDefaultUser(boolean defaultUser) {
+		if (defaultUser != _defaultUser) {
+			_defaultUser = defaultUser;
 		}
 	}
 
@@ -346,23 +347,6 @@ public class UserModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getResolution() {
-		return GetterUtil.getString(_resolution);
-	}
-
-	public void setResolution(String resolution) {
-		if (((resolution == null) && (_resolution != null)) ||
-				((resolution != null) && (_resolution == null)) ||
-				((resolution != null) && (_resolution != null) &&
-				!resolution.equals(_resolution))) {
-			if (!XSS_ALLOW_RESOLUTION) {
-				resolution = XSSUtil.strip(resolution);
-			}
-
-			_resolution = resolution;
-		}
-	}
-
 	public String getComments() {
 		return GetterUtil.getString(_comments);
 	}
@@ -484,6 +468,7 @@ public class UserModelImpl extends BaseModelImpl {
 		clone.setCompanyId(getCompanyId());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setDefaultUser(getDefaultUser());
 		clone.setContactId(getContactId());
 		clone.setPassword(getPassword());
 		clone.setPasswordEncrypted(getPasswordEncrypted());
@@ -494,7 +479,6 @@ public class UserModelImpl extends BaseModelImpl {
 		clone.setLanguageId(getLanguageId());
 		clone.setTimeZoneId(getTimeZoneId());
 		clone.setGreeting(getGreeting());
-		clone.setResolution(getResolution());
 		clone.setComments(getComments());
 		clone.setLoginDate(getLoginDate());
 		clone.setLoginIP(getLoginIP());
@@ -513,9 +497,17 @@ public class UserModelImpl extends BaseModelImpl {
 		}
 
 		UserImpl user = (UserImpl)obj;
-		String pk = user.getPrimaryKey();
+		long pk = user.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -532,9 +524,9 @@ public class UserModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = user.getPrimaryKey();
+		long pk = user.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -543,13 +535,14 @@ public class UserModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _userId;
+	private long _userId;
 	private String _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private boolean _defaultUser;
 	private long _contactId;
 	private String _password;
 	private boolean _passwordEncrypted;
@@ -560,7 +553,6 @@ public class UserModelImpl extends BaseModelImpl {
 	private String _languageId;
 	private String _timeZoneId;
 	private String _greeting;
-	private String _resolution;
 	private String _comments;
 	private Date _loginDate;
 	private String _loginIP;

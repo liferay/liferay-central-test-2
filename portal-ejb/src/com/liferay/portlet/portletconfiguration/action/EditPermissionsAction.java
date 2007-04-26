@@ -216,7 +216,7 @@ public class EditPermissionsAction extends PortletAction {
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		long resourceId = ParamUtil.getLong(req, "resourceId");
-		String userId = ParamUtil.getString(req, "userIdsPosValue");
+		long userId = ParamUtil.getLong(req, "userIdsPosValue");
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "userIdActionIds"));
 

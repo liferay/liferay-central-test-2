@@ -65,42 +65,39 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			begin, end);
 	}
 
-	public void addGroupUsers(long groupId, java.lang.String[] userIds)
+	public void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().addGroupUsers(groupId, userIds);
 	}
 
-	public void addPasswordPolicyUsers(long passwordPolicyId,
-		java.lang.String[] userIds)
+	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().addPasswordPolicyUsers(passwordPolicyId,
 			userIds);
 	}
 
-	public void addRoleUsers(java.lang.String roleId, java.lang.String[] userIds)
+	public void addRoleUsers(java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().addRoleUsers(roleId, userIds);
 	}
 
-	public void addUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds)
+	public void addUserGroupUsers(java.lang.String userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().addUserGroupUsers(userGroupId,
 			userIds);
 	}
 
-	public com.liferay.portal.model.User addUser(
-		java.lang.String creatorUserId, java.lang.String companyId,
-		boolean autoPassword, java.lang.String password1,
-		java.lang.String password2, boolean passwordReset,
-		boolean autoScreenName, java.lang.String screenName,
-		java.lang.String emailAddress, java.util.Locale locale,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName, int prefixId,
+	public com.liferay.portal.model.User addUser(long creatorUserId,
+		java.lang.String companyId, boolean autoPassword,
+		java.lang.String password1, java.lang.String password2,
+		boolean passwordReset, boolean autoScreenName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.util.Locale locale, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String jobTitle,
 		java.lang.String organizationId, java.lang.String locationId,
@@ -110,9 +107,9 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		return UserLocalServiceFactory.getTxImpl().addUser(creatorUserId,
 			companyId, autoPassword, password1, password2, passwordReset,
 			autoScreenName, screenName, emailAddress, locale, firstName,
-			middleName, lastName, nickName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
-			locationId, sendEmail);
+			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+			birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
+			sendEmail);
 	}
 
 	public int authenticateByEmailAddress(java.lang.String companyId,
@@ -133,17 +130,16 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			screenName, password, headerMap, parameterMap);
 	}
 
-	public int authenticateByUserId(java.lang.String companyId,
-		java.lang.String userId, java.lang.String password,
-		java.util.Map headerMap, java.util.Map parameterMap)
+	public int authenticateByUserId(java.lang.String companyId, long userId,
+		java.lang.String password, java.util.Map headerMap,
+		java.util.Map parameterMap)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().authenticateByUserId(companyId,
 			userId, password, headerMap, parameterMap);
 	}
 
-	public boolean authenticateForJAAS(java.lang.String userId,
-		java.lang.String encPwd)
+	public boolean authenticateForJAAS(long userId, java.lang.String encPwd)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().authenticateForJAAS(userId,
@@ -151,38 +147,37 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 	}
 
 	public com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
-		java.lang.String companyId, java.lang.String userId,
+		java.lang.String companyId, java.lang.String name,
 		java.lang.String password)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().decryptUserId(companyId,
-			userId, password);
+			name, password);
 	}
 
-	public void deletePasswordPolicyUser(long passwordPolicyId,
-		java.lang.String userId)
+	public void deletePasswordPolicyUser(long passwordPolicyId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().deletePasswordPolicyUser(passwordPolicyId,
 			userId);
 	}
 
-	public void deleteRoleUser(java.lang.String roleId, java.lang.String userId)
+	public void deleteRoleUser(java.lang.String roleId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().deleteRoleUser(roleId, userId);
 	}
 
-	public void deleteUser(java.lang.String userId)
+	public void deleteUser(long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().deleteUser(userId);
 	}
 
-	public java.lang.String encryptUserId(java.lang.String userId)
+	public java.lang.String encryptUserId(java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return UserLocalServiceFactory.getTxImpl().encryptUserId(userId);
+		return UserLocalServiceFactory.getTxImpl().encryptUserId(name);
 	}
 
 	public com.liferay.portal.model.User getDefaultUser(
@@ -190,6 +185,12 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().getDefaultUser(companyId);
+	}
+
+	public long getDefaultUserId(java.lang.String companyId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return UserLocalServiceFactory.getTxImpl().getDefaultUserId(companyId);
 	}
 
 	public java.util.List getGroupUsers(long groupId)
@@ -242,14 +243,14 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			emailAddress);
 	}
 
-	public com.liferay.portal.model.User getUserById(java.lang.String userId)
+	public com.liferay.portal.model.User getUserById(long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().getUserById(userId);
 	}
 
 	public com.liferay.portal.model.User getUserById(
-		java.lang.String companyId, java.lang.String userId)
+		java.lang.String companyId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().getUserById(companyId, userId);
@@ -263,15 +264,15 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			screenName);
 	}
 
-	public java.lang.String getUserIdByEmailAddress(
-		java.lang.String companyId, java.lang.String emailAddress)
+	public long getUserIdByEmailAddress(java.lang.String companyId,
+		java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().getUserIdByEmailAddress(companyId,
 			emailAddress);
 	}
 
-	public java.lang.String getUserIdByScreenName(java.lang.String companyId,
+	public long getUserIdByScreenName(java.lang.String companyId,
 		java.lang.String screenName)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -279,28 +280,26 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			screenName);
 	}
 
-	public boolean hasGroupUser(long groupId, java.lang.String userId)
+	public boolean hasGroupUser(long groupId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().hasGroupUser(groupId, userId);
 	}
 
-	public boolean hasPasswordPolicyUser(long passwordPolicyId,
-		java.lang.String userId)
+	public boolean hasPasswordPolicyUser(long passwordPolicyId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().hasPasswordPolicyUser(passwordPolicyId,
 			userId);
 	}
 
-	public boolean hasRoleUser(java.lang.String roleId, java.lang.String userId)
+	public boolean hasRoleUser(java.lang.String roleId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().hasRoleUser(roleId, userId);
 	}
 
-	public boolean hasUserGroupUser(java.lang.String userGroupId,
-		java.lang.String userId)
+	public boolean hasUserGroupUser(java.lang.String userGroupId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().hasUserGroupUser(userGroupId,
@@ -308,26 +307,26 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 	}
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String userId, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String screenName, java.lang.String emailAddress,
-		boolean active, java.util.LinkedHashMap params, boolean andSearch,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String screenName,
+		java.lang.String emailAddress, boolean active,
+		java.util.LinkedHashMap params, boolean andSearch, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return UserLocalServiceFactory.getTxImpl().search(companyId, userId,
-			firstName, middleName, lastName, screenName, emailAddress, active,
-			params, andSearch, begin, end, obc);
+		return UserLocalServiceFactory.getTxImpl().search(companyId, firstName,
+			middleName, lastName, screenName, emailAddress, active, params,
+			andSearch, begin, end, obc);
 	}
 
-	public int searchCount(java.lang.String companyId, java.lang.String userId,
+	public int searchCount(java.lang.String companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String screenName,
 		java.lang.String emailAddress, boolean active,
 		java.util.LinkedHashMap params, boolean andSearch)
 		throws com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().searchCount(companyId,
-			userId, firstName, middleName, lastName, screenName, emailAddress,
-			active, params, andSearch);
+			firstName, middleName, lastName, screenName, emailAddress, active,
+			params, andSearch);
 	}
 
 	public void sendPassword(java.lang.String companyId,
@@ -339,100 +338,95 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			emailAddress, remoteAddr, remoteHost, userAgent);
 	}
 
-	public void setGroupUsers(long groupId, java.lang.String[] userIds)
+	public void setGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().setGroupUsers(groupId, userIds);
 	}
 
-	public void setRoleUsers(java.lang.String roleId, java.lang.String[] userIds)
+	public void setRoleUsers(java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().setRoleUsers(roleId, userIds);
 	}
 
-	public void setUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds)
+	public void setUserGroupUsers(java.lang.String userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().setUserGroupUsers(userGroupId,
 			userIds);
 	}
 
-	public void unsetGroupUsers(long groupId, java.lang.String[] userIds)
+	public void unsetGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().unsetGroupUsers(groupId, userIds);
 	}
 
-	public void unsetPasswordPolicyUsers(long passwordPolicyId,
-		java.lang.String[] userIds)
+	public void unsetPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().unsetPasswordPolicyUsers(passwordPolicyId,
 			userIds);
 	}
 
-	public void unsetRoleUsers(java.lang.String roleId,
-		java.lang.String[] userIds)
+	public void unsetRoleUsers(java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().unsetRoleUsers(roleId, userIds);
 	}
 
-	public void unsetUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds)
+	public void unsetUserGroupUsers(java.lang.String userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().unsetUserGroupUsers(userGroupId,
 			userIds);
 	}
 
-	public com.liferay.portal.model.User updateActive(java.lang.String userId,
+	public com.liferay.portal.model.User updateActive(long userId,
 		boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().updateActive(userId, active);
 	}
 
-	public com.liferay.portal.model.User updateAgreedToTermsOfUse(
-		java.lang.String userId, boolean agreedToTermsOfUse)
+	public com.liferay.portal.model.User updateAgreedToTermsOfUse(long userId,
+		boolean agreedToTermsOfUse)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().updateAgreedToTermsOfUse(userId,
 			agreedToTermsOfUse);
 	}
 
-	public com.liferay.portal.model.User updateLastLogin(
-		java.lang.String userId, java.lang.String loginIP)
+	public com.liferay.portal.model.User updateLastLogin(long userId,
+		java.lang.String loginIP)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().updateLastLogin(userId,
 			loginIP);
 	}
 
-	public com.liferay.portal.model.User updatePassword(
-		java.lang.String userId, java.lang.String password1,
-		java.lang.String password2, boolean passwordReset)
+	public com.liferay.portal.model.User updatePassword(long userId,
+		java.lang.String password1, java.lang.String password2,
+		boolean passwordReset)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().updatePassword(userId,
 			password1, password2, passwordReset);
 	}
 
-	public void updatePortrait(java.lang.String userId, byte[] bytes)
+	public void updatePortrait(long userId, byte[] bytes)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().updatePortrait(userId, bytes);
 	}
 
-	public com.liferay.portal.model.User updateUser(java.lang.String userId,
+	public com.liferay.portal.model.User updateUser(long userId,
 		java.lang.String password, java.lang.String screenName,
 		java.lang.String emailAddress, java.lang.String languageId,
 		java.lang.String timeZoneId, java.lang.String greeting,
-		java.lang.String resolution, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName, int prefixId,
+		java.lang.String comments, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String icqSn, java.lang.String jabberSn,
@@ -443,10 +437,10 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().updateUser(userId, password,
 			screenName, emailAddress, languageId, timeZoneId, greeting,
-			resolution, comments, firstName, middleName, lastName, nickName,
-			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-			smsSn, aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
-			organizationId, locationId);
+			comments, firstName, middleName, lastName, prefixId, suffixId,
+			male, birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
+			icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle, organizationId,
+			locationId);
 	}
 
 	public void ejbCreate() throws CreateException {

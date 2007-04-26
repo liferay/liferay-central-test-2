@@ -23,6 +23,7 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.InstancePool;
 import com.liferay.util.Validator;
 
@@ -57,13 +58,13 @@ public class AuthPipeline {
 	}
 
 	public static int authenticateByUserId(
-			String[] classes, String companyId, String userId, String password,
+			String[] classes, String companyId, long userId, String password,
 			Map headerMap, Map parameterMap)
 		throws AuthException {
 
 		return _authenticate(
-			classes, companyId, userId, password, CompanyImpl.AUTH_TYPE_ID,
-			headerMap, parameterMap);
+			classes, companyId, String.valueOf(userId), password,
+			CompanyImpl.AUTH_TYPE_ID, headerMap, parameterMap);
 	}
 
 	public static void onFailureByEmailAddress(
@@ -87,13 +88,13 @@ public class AuthPipeline {
 	}
 
 	public static void onFailureByUserId(
-			String[] classes, String companyId, String userId, Map headerMap,
+			String[] classes, String companyId, long userId, Map headerMap,
 			Map parameterMap)
 		throws AuthException {
 
 		_onFailure(
-			classes, companyId, userId, CompanyImpl.AUTH_TYPE_ID, headerMap,
-			parameterMap);
+			classes, companyId, String.valueOf(userId),
+			CompanyImpl.AUTH_TYPE_ID, headerMap, parameterMap);
 	}
 
 	public static void onMaxFailuresByEmailAddress(
@@ -115,7 +116,7 @@ public class AuthPipeline {
 	}
 
 	public static void onMaxFailuresByUserId(
-			String[] classes, String companyId, String userId, Map headerMap,
+			String[] classes, String companyId, long userId, Map headerMap,
 			Map parameterMap)
 		throws AuthException {
 
@@ -152,8 +153,10 @@ public class AuthPipeline {
 							parameterMap);
 					}
 					else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+						long userId = GetterUtil.getLong(login);
+
 						authResult = auth.authenticateByUserId(
-							companyId, login, password, headerMap,
+							companyId, userId, password, headerMap,
 							parameterMap);
 					}
 
@@ -199,8 +202,10 @@ public class AuthPipeline {
 							companyId, login, headerMap, parameterMap);
 					}
 					else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+						long userId = GetterUtil.getLong(login);
+
 						authFailure.onFailureByUserId(
-							companyId, login, headerMap, parameterMap);
+							companyId, userId, headerMap, parameterMap);
 					}
 				}
 				catch (AuthException ae) {

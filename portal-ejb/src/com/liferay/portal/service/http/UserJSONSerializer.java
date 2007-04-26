@@ -52,14 +52,7 @@ import java.util.List;
 public class UserJSONSerializer {
 	public static JSONObject toJSONObject(User model) {
 		JSONObject jsonObj = new JSONObject();
-		String userId = model.getUserId();
-
-		if (userId == null) {
-			jsonObj.put("userId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userId", userId.toString());
-		}
+		jsonObj.put("userId", model.getUserId());
 
 		String companyId = model.getCompanyId();
 
@@ -88,6 +81,7 @@ public class UserJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
+		jsonObj.put("defaultUser", model.getDefaultUser());
 		jsonObj.put("contactId", model.getContactId());
 
 		String password = model.getPassword();
@@ -156,15 +150,6 @@ public class UserJSONSerializer {
 		}
 		else {
 			jsonObj.put("greeting", greeting.toString());
-		}
-
-		String resolution = model.getResolution();
-
-		if (resolution == null) {
-			jsonObj.put("resolution", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("resolution", resolution.toString());
 		}
 
 		String comments = model.getComments();

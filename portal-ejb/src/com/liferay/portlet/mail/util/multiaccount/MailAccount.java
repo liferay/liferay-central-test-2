@@ -23,9 +23,6 @@
 package com.liferay.portlet.mail.util.multiaccount;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
 
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -49,17 +46,16 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MailAccount {
 
+	public MailAccount(String accountName, long userId, String password,
+					   String emailAddress) {
+
+		this(accountName, String.valueOf(userId), password, emailAddress);
+	}
+
 	public MailAccount(String accountName, String userId, String password,
 					   String emailAddress) {
 
 		_name = accountName;
-
-		if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
-
-			userId = StringUtil.replace(userId, ".", "_");
-		}
-
 		_userId = userId;
 		_password = password;
 		_emailAddress = emailAddress;

@@ -30,6 +30,7 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.spring.context.LazyWebApplicationContext;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
 
@@ -98,7 +99,9 @@ public class RemotingServlet extends DispatcherServlet {
 			if (remoteUser != null) {
 				PrincipalThreadLocal.setName(remoteUser);
 
-				User user = UserLocalServiceUtil.getUserById(remoteUser);
+				long userId = PortalUtil.getUserId(req);
+
+				User user = UserLocalServiceUtil.getUserById(userId);
 
 				permissionChecker =
 					PermissionCheckerFactory.create(user, true, true);

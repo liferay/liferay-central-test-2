@@ -52,7 +52,7 @@ import java.util.List;
 public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 	public Phone addPhone(
-			String userId, String className, String classPK, String number,
+			long userId, String className, String classPK, String number,
 			String extension, int typeId, boolean primary)
 		throws PortalException, SystemException {
 

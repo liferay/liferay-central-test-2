@@ -34,7 +34,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -72,7 +71,7 @@ import javax.naming.ldap.LdapContext;
 public class PortalLDAPUtil {
 
 	public static void exportToLDAP(Contact contact) throws Exception {
-		String companyId = contact.getActualCompanyId();
+		String companyId = contact.getCompanyId();
 
 		if (!isAuthEnabled(companyId)) {
 			return;
@@ -115,7 +114,7 @@ public class PortalLDAPUtil {
 	}
 
 	public static void exportToLDAP(User user) throws Exception {
-		String companyId = user.getActualCompanyId();
+		String companyId = user.getCompanyId();
 
 		if (!isAuthEnabled(companyId)) {
 			return;
@@ -320,14 +319,14 @@ public class PortalLDAPUtil {
 	}
 
 	public static User importFromLDAP(
-			String creatorUserId, String companyId, boolean autoPassword,
+			long creatorUserId, String companyId, boolean autoPassword,
 			String password1, String password2, boolean passwordReset,
 			boolean autoScreenName, String screenName, String emailAddress,
 			Locale locale, String firstName, String middleName, String lastName,
-			String nickName, int prefixId, int suffixId, boolean male,
-			int birthdayMonth, int birthdayDay, int birthdayYear,
-			String jobTitle, String organizationId, String locationId,
-			boolean sendEmail, boolean checkExists, boolean updatePassword)
+			int prefixId, int suffixId, boolean male, int birthdayMonth,
+			int birthdayDay, int birthdayYear, String jobTitle,
+			String organizationId, String locationId, boolean sendEmail,
+			boolean checkExists, boolean updatePassword)
 		throws PortalException, SystemException {
 
 		User user = null;
@@ -375,9 +374,9 @@ public class PortalLDAPUtil {
 					creatorUserId, companyId, autoPassword, password1,
 					password2, passwordReset, autoScreenName, screenName,
 					emailAddress, locale, firstName, middleName, lastName,
-					nickName, prefixId, suffixId, male, birthdayMonth,
-					birthdayDay, birthdayYear, jobTitle, organizationId,
-					locationId, sendEmail);
+					prefixId, suffixId, male, birthdayMonth, birthdayDay,
+					birthdayYear, jobTitle, organizationId, locationId,
+					sendEmail);
 			}
 			catch (Exception e){
 				_log.error(
@@ -434,7 +433,7 @@ public class PortalLDAPUtil {
 
 		Attributes attrs = result.getAttributes();
 
-		String creatorUserId = null;
+		long creatorUserId = 0;
 		boolean autoPassword = true;
 		String password1 = StringPool.BLANK;
 		String password2 = StringPool.BLANK;
@@ -463,7 +462,6 @@ public class PortalLDAPUtil {
 			lastName = names[2];
 		}
 
-		String nickName = null;
 		int prefixId = 0;
 		int suffixId = 0;
 		boolean male = true;
@@ -479,7 +477,7 @@ public class PortalLDAPUtil {
 		User user = importFromLDAP(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			passwordReset, autoScreenName, screenName, emailAddress, locale,
-			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
+			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
 			locationId, sendEmail, true, false);
 
@@ -495,8 +493,11 @@ public class PortalLDAPUtil {
 
 	private static void _importToLDAPGroup(
 			String companyId, LdapContext ctx, Properties groupMappings,
-			String userId, Attribute attr)
+			long userId, Attribute attr)
 		throws Exception {
+
+		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
+			companyId);
 
 		for (int i = 0; i < attr.size(); i++) {
 			String groupDN = (String)attr.get(i);
@@ -522,8 +523,7 @@ public class PortalLDAPUtil {
 					}
 
 					userGroup = UserGroupLocalServiceUtil.addUserGroup(
-						UserImpl.getDefaultUserId(companyId), companyId,
-						groupName, description);
+						defaultUserId, companyId, groupName, description);
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
@@ -542,7 +542,7 @@ public class PortalLDAPUtil {
 				}
 
 				UserLocalServiceUtil.addUserGroupUsers(
-					userGroup.getUserGroupId(), new String[] {userId});
+					userGroup.getUserGroupId(), new long[] {userId});
 			}
 		}
 	}

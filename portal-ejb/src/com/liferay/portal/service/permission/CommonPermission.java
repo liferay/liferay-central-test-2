@@ -51,12 +51,12 @@ public class CommonPermission {
 		if (className.equals(Account.class.getName())) {
 			Account account = AccountLocalServiceUtil.getAccount(classPK);
 
-			if (account.isDefaultAccount()) {
+			/*if (account.isDefaultAccount()) {
 				AccountPermission.check(permissionChecker, classPK, actionId);
 			}
 			else {
 				throw new PrincipalException();
-			}
+			}*/
 		}
 		else if (className.equals(Contact.class.getName())) {
 			User user = UserLocalServiceUtil.getUserByContactId(

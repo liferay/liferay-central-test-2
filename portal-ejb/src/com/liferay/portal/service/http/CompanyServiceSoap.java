@@ -98,11 +98,10 @@ public class CompanyServiceSoap {
 	}
 
 	public static void updateDisplay(java.lang.String companyId,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String resolution) throws RemoteException {
+		java.lang.String languageId, java.lang.String timeZoneId)
+		throws RemoteException {
 		try {
-			CompanyServiceUtil.updateDisplay(companyId, languageId, timeZoneId,
-				resolution);
+			CompanyServiceUtil.updateDisplay(companyId, languageId, timeZoneId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

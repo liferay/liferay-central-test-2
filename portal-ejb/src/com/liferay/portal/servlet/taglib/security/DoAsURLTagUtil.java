@@ -45,7 +45,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class DoAsURLTagUtil extends TagSupport {
 
 	public static String doEndTag(
-			String doAsUserId, String var, boolean writeOutput,
+			long doAsUserId, String var, boolean writeOutput,
 			PageContext pageContext)
 		throws JspException {
 
@@ -62,13 +62,14 @@ public class DoAsURLTagUtil extends TagSupport {
 			String doAsURL = PortalUtil.getLayoutURL(
 				layout, themeDisplay, false);
 
-			if (Validator.isNull(doAsUserId)) {
+			if (doAsUserId <= 0) {
 				doAsUserId = company.getDefaultUser().getUserId();
 			}
 
-			doAsURL = Http.addParameter(
-				doAsURL, "doAsUserId",
-				Encryptor.encrypt(company.getKeyObj(), doAsUserId));
+			String encDoAsUserId = Encryptor.encrypt(
+				company.getKeyObj(), String.valueOf(doAsUserId));
+
+			doAsURL = Http.addParameter(doAsURL, "doAsUserId", encDoAsUserId);
 
 			if (Validator.isNotNull(var)) {
 				pageContext.setAttribute(var, doAsURL);

@@ -422,7 +422,7 @@ public class PortalUtil {
 		String layoutFriendlyURL = getLayoutFriendlyURL(layout, themeDisplay);
 
 		if (Validator.isNotNull(layoutFriendlyURL)) {
-			if (doAsUser && Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+			if (doAsUser && (themeDisplay.getDoAsUserId() > 0)) {
 				layoutFriendlyURL = Http.addParameter(
 					layoutFriendlyURL, "doAsUserId",
 					themeDisplay.getDoAsUserId());
@@ -433,7 +433,7 @@ public class PortalUtil {
 
 		String layoutURL = getLayoutActualURL(layout, themeDisplay);
 
-		if (doAsUser && Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+		if (doAsUser && (themeDisplay.getDoAsUserId() > 0)) {
 			layoutURL = Http.addParameter(
 				layoutURL, "doAsUserId", themeDisplay.getDoAsUserId());
 		}
@@ -864,7 +864,7 @@ public class PortalUtil {
 	public static User getSelectedUser(HttpServletRequest req)
 		throws PortalException, RemoteException, SystemException {
 
-		String userId = ParamUtil.getString(req, "p_u_i_d");
+		long userId = ParamUtil.getLong(req, "p_u_i_d");
 
 		User user = null;
 
@@ -956,20 +956,22 @@ public class PortalUtil {
 	public static User getUser(HttpServletRequest req)
 		throws PortalException, SystemException {
 
-		String userId = getUserId(req);
+		long userId = getUserId(req);
 
-		if (userId == null) {
+		if (userId <= 0) {
 
 			// Portlet WARs may have the correct remote user and not have the
 			// correct user id because the user id is saved in the session
 			// and may not be accessible by the portlet WAR's session. This
 			// behavior is inconsistent across different application servers.
 
-			userId = req.getRemoteUser();
+			String remoteUser = req.getRemoteUser();
 
-			if (userId == null) {
+			if (remoteUser == null) {
 				return null;
 			}
+
+			userId = GetterUtil.getLong(remoteUser);
 		}
 
 		User user = (User)req.getAttribute(WebKeys.USER);
@@ -995,11 +997,11 @@ public class PortalUtil {
 		return getUser(getHttpServletRequest(req));
 	}
 
-	public static String getUserId(HttpServletRequest req) {
-		String userId = (String)req.getAttribute(WebKeys.USER_ID);
+	public static long getUserId(HttpServletRequest req) {
+		Long userIdObj = (Long)req.getAttribute(WebKeys.USER_ID);
 
-		if (userId != null) {
-			return userId;
+		if (userIdObj != null) {
+			return userIdObj.longValue();
 		}
 
 		if (!GetterUtil.getBoolean(
@@ -1007,12 +1009,12 @@ public class PortalUtil {
 			GetterUtil.getBoolean(
 				PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE))) {
 
-			String doAsUserId = ParamUtil.getString(req, "doAsUserId");
+			long doAsUserId = ParamUtil.getLong(req, "doAsUserId");
 
 			try {
 				doAsUserId = _getDoAsUserId(req, doAsUserId);
 
-				if (doAsUserId != null) {
+				if (doAsUserId > 0) {
 					if (_log.isDebugEnabled()) {
 						_log.debug("Impersonating user " + doAsUserId);
 					}
@@ -1027,29 +1029,32 @@ public class PortalUtil {
 
 		HttpSession ses = req.getSession();
 
-		userId = (String)ses.getAttribute(WebKeys.USER_ID);
+		userIdObj = (Long)ses.getAttribute(WebKeys.USER_ID);
 
-		if (userId != null) {
-			req.setAttribute(WebKeys.USER_ID, userId);
+		if (userIdObj != null) {
+			req.setAttribute(WebKeys.USER_ID, userIdObj);
+
+			return userIdObj.longValue();
 		}
-
-		return userId;
+		else {
+			return 0;
+		}
 	}
 
-	public static String getUserId(ActionRequest req) {
+	public static long getUserId(ActionRequest req) {
 		return getUserId(getHttpServletRequest(req));
 	}
 
-	public static String getUserId(RenderRequest req) {
+	public static long getUserId(RenderRequest req) {
 		return getUserId(getHttpServletRequest(req));
 	}
 
-	public static String getUserName(String userId, String defaultUserName) {
+	public static String getUserName(long userId, String defaultUserName) {
 		return getUserName(userId, defaultUserName, null);
 	}
 
 	public static String getUserName(
-		String userId, String defaultUserName, HttpServletRequest req) {
+		long userId, String defaultUserName, HttpServletRequest req) {
 
 		String userName = defaultUserName;
 
@@ -1068,7 +1073,8 @@ public class PortalUtil {
 				portletURL.setPortletMode(PortletMode.VIEW);
 
 				portletURL.setParameter("struts_action", "/directory/edit_user");
-				portletURL.setParameter("p_u_i_d", user.getUserId());
+				portletURL.setParameter(
+					"p_u_i_d", String.valueOf(user.getUserId()));
 
 				userName =
 					"<a href=\"" + portletURL.toString() + "\">" + userName +
@@ -1121,7 +1127,7 @@ public class PortalUtil {
 			PropsUtil.LAYOUT_SITEMAPABLE, Filter.by(layout.getType()), true);
 	}
 
-	public static boolean isOmniadmin(String userId) {
+	public static boolean isOmniadmin(long userId) {
 		return OmniadminUtil.isOmniadmin(userId);
 	}
 
@@ -1476,32 +1482,33 @@ public class PortalUtil {
 		}
 	}
 
-	private static String _getDoAsUserId(
-			HttpServletRequest req, String doAsUserId)
+	private static long _getDoAsUserId(HttpServletRequest req, long doAsUserId)
 		throws Exception {
 
-		if (Validator.isNull(doAsUserId)) {
-			return null;
+		if (doAsUserId <= 0) {
+			return 0;
 		}
 
 		HttpSession ses = req.getSession();
 
-		String realUserId = (String)ses.getAttribute(WebKeys.USER_ID);
+		Long realUserIdObj = (Long)ses.getAttribute(WebKeys.USER_ID);
 
-		if (realUserId == null) {
-			return null;
+		if (realUserIdObj == null) {
+			return 0;
 		}
 
 		Company company = getCompany(req);
 
-		doAsUserId = Encryptor.decrypt(company.getKeyObj(), doAsUserId);
+		doAsUserId = GetterUtil.getLong(
+			Encryptor.decrypt(company.getKeyObj(), String.valueOf(doAsUserId)));
 
 		User doAsUser = UserLocalServiceUtil.getUserById(doAsUserId);
 
 		String organizationId = doAsUser.getOrganization().getOrganizationId();
 		String locationId = doAsUser.getLocation().getOrganizationId();
 
-		User realUser = UserLocalServiceUtil.getUserById(realUserId);
+		User realUser = UserLocalServiceUtil.getUserById(
+			realUserIdObj.longValue());
 		boolean signedIn = true;
 		boolean checkGuest = true;
 
@@ -1516,16 +1523,16 @@ public class PortalUtil {
 					permissionChecker, doAsUserId, organizationId, locationId,
 					ActionKeys.IMPERSONATE)) {
 
-				req.setAttribute(WebKeys.USER_ID, doAsUserId);
+				req.setAttribute(WebKeys.USER_ID, new Long(doAsUserId));
 
 				return doAsUserId;
 			}
 			else {
 				_log.error(
-					"User " + realUserId + " does not have the permission to " +
-						"impersonate " + doAsUserId);
+					"User " + realUserIdObj + " does not have the permission " +
+						"to impersonate " + doAsUserId);
 
-				return null;
+				return 0;
 			}
 		}
 		finally {

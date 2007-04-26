@@ -22,9 +22,6 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.model.User;
-
 /**
  * <a href="ScreenNameGenerator.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,10 +30,8 @@ import com.liferay.portal.model.User;
  */
 public class ScreenNameGenerator {
 
-	public String generate(String companyId) throws Exception {
-		return companyId + "." + String.valueOf(
-			CounterLocalServiceUtil.increment(
-				User.class.getName() + "." + companyId));
+	public String generate(String companyId, long userId) throws Exception {
+		return String.valueOf(userId);
 	}
 
 }

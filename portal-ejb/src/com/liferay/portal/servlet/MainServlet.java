@@ -36,7 +36,6 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
-import com.liferay.portal.security.auth.PrincipalFinder;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -820,7 +819,7 @@ public class MainServlet extends ActionServlet {
 
 		// Login
 
-		String userId = PortalUtil.getUserId(req);
+		long userId = PortalUtil.getUserId(req);
 		String remoteUser = req.getRemoteUser();
 
 		// Is JAAS enabled?
@@ -837,8 +836,8 @@ public class MainServlet extends ActionServlet {
 			}
 		}
 
-		if ((userId != null) && (remoteUser == null)) {
-			remoteUser = userId;
+		if ((userId > 0) && (remoteUser == null)) {
+			remoteUser = String.valueOf(userId);
 		}
 
 		// WebSphere will not return the remote user unless you are
@@ -849,11 +848,11 @@ public class MainServlet extends ActionServlet {
 
 		req = new ProtectedServletRequest(req, remoteUser);
 
-		if ((userId != null) || (remoteUser != null)) {
+		if ((userId > 0) || (remoteUser != null)) {
 
 			// Set the principal associated with this thread
 
-			String name = userId;
+			String name = String.valueOf(userId);
 
 			if (remoteUser != null) {
 				name = remoteUser;
@@ -862,22 +861,12 @@ public class MainServlet extends ActionServlet {
 			PrincipalThreadLocal.setName(name);
 		}
 
-		if ((userId == null) && (remoteUser != null)) {
+		if ((userId <= 0) && (remoteUser != null)) {
 			try {
 
 				// User id
 
-				userId = remoteUser;
-
-				try {
-					PrincipalFinder principalFinder =
-						(PrincipalFinder)InstancePool.get(
-							PropsUtil.get(PropsUtil.PRINCIPAL_FINDER));
-
-					userId = principalFinder.toLiferay(userId);
-				}
-				catch (Exception e) {
-				}
+				userId = GetterUtil.getLong(remoteUser);
 
 				// Pre login events
 
@@ -893,7 +882,7 @@ public class MainServlet extends ActionServlet {
 
 				// User id
 
-				ses.setAttribute(WebKeys.USER_ID, userId);
+				ses.setAttribute(WebKeys.USER_ID, new Long(userId));
 
 				// User locale
 

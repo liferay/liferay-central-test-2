@@ -24,6 +24,7 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +47,9 @@ public class UpdateTermsOfUseAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		UserServiceUtil.updateAgreedToTermsOfUse(req.getRemoteUser(), true);
+		long userId = PortalUtil.getUserId(req);
+
+		UserServiceUtil.updateAgreedToTermsOfUse(userId, true);
 
 		return mapping.findForward(Constants.COMMON_REFERER);
 	}

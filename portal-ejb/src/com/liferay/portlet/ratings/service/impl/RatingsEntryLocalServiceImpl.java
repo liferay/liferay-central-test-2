@@ -47,15 +47,14 @@ import java.util.Date;
 public class RatingsEntryLocalServiceImpl
 	extends RatingsEntryLocalServiceBaseImpl {
 
-	public RatingsEntry getEntry(
-			String userId, String className, String classPK)
+	public RatingsEntry getEntry(long userId, String className, String classPK)
 		throws PortalException, SystemException {
 
 		return RatingsEntryUtil.findByU_C_C(userId, className, classPK);
 	}
 
 	public RatingsEntry updateEntry(
-			String userId, String className, String classPK, double score)
+			long userId, String className, String classPK, double score)
 		throws PortalException, SystemException {
 
 		Date now = new Date();

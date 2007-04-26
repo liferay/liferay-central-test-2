@@ -51,7 +51,7 @@ public class SCFrameworkVersionLocalServiceImpl
 	extends SCFrameworkVersionLocalServiceBaseImpl {
 
 	public SCFrameworkVersion addFrameworkVersion(
-			String userId, String plid, String name, String url, boolean active,
+			long userId, String plid, String name, String url, boolean active,
 			int priority, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -63,7 +63,7 @@ public class SCFrameworkVersionLocalServiceImpl
 	}
 
 	public SCFrameworkVersion addFrameworkVersion(
-			String userId, String plid, String name, String url, boolean active,
+			long userId, String plid, String name, String url, boolean active,
 			int priority, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -74,7 +74,7 @@ public class SCFrameworkVersionLocalServiceImpl
 	}
 
 	public SCFrameworkVersion addFrameworkVersion(
-			String userId, String plid, String name, String url, boolean active,
+			long userId, String plid, String name, String url, boolean active,
 			int priority, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)

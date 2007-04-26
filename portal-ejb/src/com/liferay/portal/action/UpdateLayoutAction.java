@@ -71,6 +71,7 @@ public class UpdateLayoutAction extends Action {
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		long userId = themeDisplay.getUserId();
 		Layout layout = themeDisplay.getLayout();
 		LayoutTypePortlet layoutTypePortlet =
 			themeDisplay.getLayoutTypePortlet();
@@ -85,8 +86,7 @@ public class UpdateLayoutAction extends Action {
 		boolean deletePortlet = false;
 
 		if (cmd.equals(Constants.ADD)) {
-			portletId = layoutTypePortlet.addPortletId(
-				req.getRemoteUser(), portletId);
+			portletId = layoutTypePortlet.addPortletId(userId, portletId);
 		}
 		else if (cmd.equals(Constants.DELETE)) {
 			if (layoutTypePortlet.hasPortletId(portletId)) {
@@ -141,14 +141,13 @@ public class UpdateLayoutAction extends Action {
 			int columnPos = ParamUtil.getInteger(req, "p_p_col_pos");
 
 			layoutTypePortlet.movePortletId(
-				req.getRemoteUser(), portletId, columnId, columnPos);
+				userId, portletId, columnId, columnPos);
 		}
 		else if (cmd.equals("template")) {
 			String layoutTemplateId = ParamUtil.getString(
 				req, "layoutTemplateId");
 
-			layoutTypePortlet.setLayoutTemplateId(
-				req.getRemoteUser(), layoutTemplateId);
+			layoutTypePortlet.setLayoutTemplateId(userId, layoutTemplateId);
 		}
 
 		if (updateLayout) {

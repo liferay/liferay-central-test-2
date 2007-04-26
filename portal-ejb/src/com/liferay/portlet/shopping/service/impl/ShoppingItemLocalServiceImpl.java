@@ -84,8 +84,7 @@ import java.util.List;
 public class ShoppingItemLocalServiceImpl
 	extends ShoppingItemLocalServiceBaseImpl {
 
-	public void addBookItems(
-			String userId, String categoryId, String[] isbns)
+	public void addBookItems(long userId, String categoryId, String[] isbns)
 		throws PortalException, SystemException {
 
 		try {
@@ -222,7 +221,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public ShoppingItem addItem(
-			String userId, String categoryId, String sku, String name,
+			long userId, String categoryId, String sku, String name,
 			String description, String properties, String fieldsQuantities,
 			boolean requiresShipping, int stockQuantity, boolean featured,
 			Boolean sale, boolean smallImage, String smallImageURL,
@@ -242,7 +241,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public ShoppingItem addItem(
-			String userId, String categoryId, String sku, String name,
+			long userId, String categoryId, String sku, String name,
 			String description, String properties, String fieldsQuantities,
 			boolean requiresShipping, int stockQuantity, boolean featured,
 			Boolean sale, boolean smallImage, String smallImageURL,
@@ -261,7 +260,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public ShoppingItem addItem(
-			String userId, String categoryId, String sku, String name,
+			long userId, String categoryId, String sku, String name,
 			String description, String properties, String fieldsQuantities,
 			boolean requiresShipping, int stockQuantity, boolean featured,
 			Boolean sale, boolean smallImage, String smallImageURL,
@@ -626,7 +625,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public ShoppingItem updateItem(
-			String userId, String itemId, String categoryId, String sku,
+			long userId, String itemId, String categoryId, String sku,
 			String name, String description, String properties,
 			String fieldsQuantities, boolean requiresShipping,
 			int stockQuantity, boolean featured, Boolean sale,

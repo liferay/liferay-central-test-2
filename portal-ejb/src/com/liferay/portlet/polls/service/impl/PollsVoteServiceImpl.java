@@ -48,14 +48,14 @@ public class PollsVoteServiceImpl extends PrincipalBean
 	public PollsVote addVote(String questionId, String choiceId)
 		throws PortalException, SystemException {
 
-		String userId = null;
+		long userId = 0;
 
 		try {
 			userId = getUserId();
 		}
 		catch (PrincipalException pe) {
-			userId = String.valueOf(CounterLocalServiceUtil.increment(
-				PollsQuestion.class.getName() + ".anonymous"));
+			userId = CounterLocalServiceUtil.increment(
+				PollsQuestion.class.getName() + ".anonymous");
 		}
 
 		PollsQuestion question = PollsQuestionUtil.findByPrimaryKey(questionId);

@@ -65,7 +65,7 @@ import java.util.List;
  *
  */
 public class UserPersistence extends BasePersistence {
-	public User create(String userId) {
+	public User create(long userId) {
 		User user = new UserImpl();
 		user.setNew(true);
 		user.setPrimaryKey(userId);
@@ -73,14 +73,13 @@ public class UserPersistence extends BasePersistence {
 		return user;
 	}
 
-	public User remove(String userId)
-		throws NoSuchUserException, SystemException {
+	public User remove(long userId) throws NoSuchUserException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			User user = (User)session.get(UserImpl.class, userId);
+			User user = (User)session.get(UserImpl.class, new Long(userId));
 
 			if (user == null) {
 				if (_log.isWarnEnabled()) {
@@ -162,7 +161,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User findByPrimaryKey(String userId)
+	public User findByPrimaryKey(long userId)
 		throws NoSuchUserException, SystemException {
 		User user = fetchByPrimaryKey(userId);
 
@@ -178,13 +177,13 @@ public class UserPersistence extends BasePersistence {
 		return user;
 	}
 
-	public User fetchByPrimaryKey(String userId) throws SystemException {
+	public User fetchByPrimaryKey(long userId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (User)session.get(UserImpl.class, userId);
+			return (User)session.get(UserImpl.class, new Long(userId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -316,7 +315,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User[] findByCompanyId_PrevAndNext(String userId, String companyId,
+	public User[] findByCompanyId_PrevAndNext(long userId, String companyId,
 		OrderByComparator obc) throws NoSuchUserException, SystemException {
 		User user = findByPrimaryKey(userId);
 		int count = countByCompanyId(companyId);
@@ -424,7 +423,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User findByC_U(String companyId, String userId)
+	public User findByC_U(String companyId, long userId)
 		throws NoSuchUserException, SystemException {
 		User user = fetchByC_U(companyId, userId);
 
@@ -449,7 +448,7 @@ public class UserPersistence extends BasePersistence {
 		return user;
 	}
 
-	public User fetchByC_U(String companyId, String userId)
+	public User fetchByC_U(String companyId, long userId)
 		throws SystemException {
 		Session session = null;
 
@@ -467,14 +466,7 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -486,9 +478,82 @@ public class UserPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			if (userId != null) {
-				q.setString(queryPos++, userId);
+			q.setLong(queryPos++, userId);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
+
+			User user = (User)list.get(0);
+
+			return user;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public User findByC_DU(String companyId, boolean defaultUser)
+		throws NoSuchUserException, SystemException {
+		User user = fetchByC_DU(companyId, defaultUser);
+
+		if (user == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No User exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("defaultUser=");
+			msg.append(defaultUser);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchUserException(msg.toString());
+		}
+
+		return user;
+	}
+
+	public User fetchByC_DU(String companyId, boolean defaultUser)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.User WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+			query.append("defaultUser = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			q.setBoolean(queryPos++, defaultUser);
 
 			List list = q.list();
 
@@ -663,7 +728,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User[] findByC_P_PrevAndNext(String userId, String companyId,
+	public User[] findByC_P_PrevAndNext(long userId, String companyId,
 		String password, OrderByComparator obc)
 		throws NoSuchUserException, SystemException {
 		User user = findByPrimaryKey(userId);
@@ -986,9 +1051,15 @@ public class UserPersistence extends BasePersistence {
 		remove(user);
 	}
 
-	public void removeByC_U(String companyId, String userId)
+	public void removeByC_U(String companyId, long userId)
 		throws NoSuchUserException, SystemException {
 		User user = findByC_U(companyId, userId);
+		remove(user);
+	}
+
+	public void removeByC_DU(String companyId, boolean defaultUser)
+		throws NoSuchUserException, SystemException {
+		User user = findByC_DU(companyId, defaultUser);
 		remove(user);
 	}
 
@@ -1108,7 +1179,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_U(String companyId, String userId)
+	public int countByC_U(String companyId, long userId)
 		throws SystemException {
 		Session session = null;
 
@@ -1127,14 +1198,7 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -1146,9 +1210,60 @@ public class UserPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			if (userId != null) {
-				q.setString(queryPos++, userId);
+			q.setLong(queryPos++, userId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
 			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByC_DU(String companyId, boolean defaultUser)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.User WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+			query.append("defaultUser = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			q.setBoolean(queryPos++, defaultUser);
 
 			Iterator itr = q.list().iterator();
 
@@ -1389,17 +1504,16 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public List getGroups(String pk)
-		throws NoSuchUserException, SystemException {
+	public List getGroups(long pk) throws NoSuchUserException, SystemException {
 		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getGroups(String pk, int begin, int end)
+	public List getGroups(long pk, int begin, int end)
 		throws NoSuchUserException, SystemException {
 		return getGroups(pk, begin, end, null);
 	}
 
-	public List getGroups(String pk, int begin, int end, OrderByComparator obc)
+	public List getGroups(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchUserException, SystemException {
 		Session session = null;
 
@@ -1436,7 +1550,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public int getGroupsSize(String pk) throws SystemException {
+	public int getGroupsSize(long pk) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1469,7 +1583,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsGroup(String pk, long groupPK)
+	public boolean containsGroup(long pk, long groupPK)
 		throws SystemException {
 		try {
 			return containsGroup.contains(pk, groupPK);
@@ -1479,7 +1593,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsGroups(String pk) throws SystemException {
+	public boolean containsGroups(long pk) throws SystemException {
 		if (getGroupsSize(pk) > 0) {
 			return true;
 		}
@@ -1488,7 +1602,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addGroup(String pk, long groupPK)
+	public void addGroup(long pk, long groupPK)
 		throws NoSuchUserException, com.liferay.portal.NoSuchGroupException, 
 			SystemException {
 		try {
@@ -1499,7 +1613,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addGroup(String pk, com.liferay.portal.model.Group group)
+	public void addGroup(long pk, com.liferay.portal.model.Group group)
 		throws NoSuchUserException, com.liferay.portal.NoSuchGroupException, 
 			SystemException {
 		try {
@@ -1510,7 +1624,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addGroups(String pk, long[] groupPKs)
+	public void addGroups(long pk, long[] groupPKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchGroupException, 
 			SystemException {
 		try {
@@ -1523,7 +1637,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addGroups(String pk, List groups)
+	public void addGroups(long pk, List groups)
 		throws NoSuchUserException, com.liferay.portal.NoSuchGroupException, 
 			SystemException {
 		try {
@@ -1537,7 +1651,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void clearGroups(String pk)
+	public void clearGroups(long pk)
 		throws NoSuchUserException, SystemException {
 		try {
 			clearGroups.clear(pk);
@@ -1547,7 +1661,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeGroup(String pk, long groupPK)
+	public void removeGroup(long pk, long groupPK)
 		throws NoSuchUserException, com.liferay.portal.NoSuchGroupException, 
 			SystemException {
 		try {
@@ -1558,7 +1672,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeGroup(String pk, com.liferay.portal.model.Group group)
+	public void removeGroup(long pk, com.liferay.portal.model.Group group)
 		throws NoSuchUserException, com.liferay.portal.NoSuchGroupException, 
 			SystemException {
 		try {
@@ -1569,7 +1683,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeGroups(String pk, long[] groupPKs)
+	public void removeGroups(long pk, long[] groupPKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchGroupException, 
 			SystemException {
 		try {
@@ -1582,7 +1696,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeGroups(String pk, List groups)
+	public void removeGroups(long pk, List groups)
 		throws NoSuchUserException, com.liferay.portal.NoSuchGroupException, 
 			SystemException {
 		try {
@@ -1596,7 +1710,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setGroups(String pk, long[] groupPKs)
+	public void setGroups(long pk, long[] groupPKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchGroupException, 
 			SystemException {
 		try {
@@ -1611,7 +1725,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setGroups(String pk, List groups)
+	public void setGroups(long pk, List groups)
 		throws NoSuchUserException, com.liferay.portal.NoSuchGroupException, 
 			SystemException {
 		try {
@@ -1627,17 +1741,17 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public List getOrganizations(String pk)
+	public List getOrganizations(long pk)
 		throws NoSuchUserException, SystemException {
 		return getOrganizations(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getOrganizations(String pk, int begin, int end)
+	public List getOrganizations(long pk, int begin, int end)
 		throws NoSuchUserException, SystemException {
 		return getOrganizations(pk, begin, end, null);
 	}
 
-	public List getOrganizations(String pk, int begin, int end,
+	public List getOrganizations(long pk, int begin, int end,
 		OrderByComparator obc) throws NoSuchUserException, SystemException {
 		Session session = null;
 
@@ -1675,7 +1789,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public int getOrganizationsSize(String pk) throws SystemException {
+	public int getOrganizationsSize(long pk) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1708,7 +1822,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsOrganization(String pk, String organizationPK)
+	public boolean containsOrganization(long pk, String organizationPK)
 		throws SystemException {
 		try {
 			return containsOrganization.contains(pk, organizationPK);
@@ -1718,7 +1832,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsOrganizations(String pk) throws SystemException {
+	public boolean containsOrganizations(long pk) throws SystemException {
 		if (getOrganizationsSize(pk) > 0) {
 			return true;
 		}
@@ -1727,7 +1841,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addOrganization(String pk, String organizationPK)
+	public void addOrganization(long pk, String organizationPK)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1738,7 +1852,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addOrganization(String pk,
+	public void addOrganization(long pk,
 		com.liferay.portal.model.Organization organization)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
@@ -1750,7 +1864,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addOrganizations(String pk, String[] organizationPKs)
+	public void addOrganizations(long pk, String[] organizationPKs)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1763,7 +1877,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addOrganizations(String pk, List organizations)
+	public void addOrganizations(long pk, List organizations)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1777,7 +1891,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void clearOrganizations(String pk)
+	public void clearOrganizations(long pk)
 		throws NoSuchUserException, SystemException {
 		try {
 			clearOrganizations.clear(pk);
@@ -1787,7 +1901,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeOrganization(String pk, String organizationPK)
+	public void removeOrganization(long pk, String organizationPK)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1798,7 +1912,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeOrganization(String pk,
+	public void removeOrganization(long pk,
 		com.liferay.portal.model.Organization organization)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
@@ -1810,7 +1924,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeOrganizations(String pk, String[] organizationPKs)
+	public void removeOrganizations(long pk, String[] organizationPKs)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1823,7 +1937,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeOrganizations(String pk, List organizations)
+	public void removeOrganizations(long pk, List organizations)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1837,7 +1951,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setOrganizations(String pk, String[] organizationPKs)
+	public void setOrganizations(long pk, String[] organizationPKs)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1852,7 +1966,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setOrganizations(String pk, List organizations)
+	public void setOrganizations(long pk, List organizations)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1868,17 +1982,17 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public List getPermissions(String pk)
+	public List getPermissions(long pk)
 		throws NoSuchUserException, SystemException {
 		return getPermissions(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getPermissions(String pk, int begin, int end)
+	public List getPermissions(long pk, int begin, int end)
 		throws NoSuchUserException, SystemException {
 		return getPermissions(pk, begin, end, null);
 	}
 
-	public List getPermissions(String pk, int begin, int end,
+	public List getPermissions(long pk, int begin, int end,
 		OrderByComparator obc) throws NoSuchUserException, SystemException {
 		Session session = null;
 
@@ -1912,7 +2026,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public int getPermissionsSize(String pk) throws SystemException {
+	public int getPermissionsSize(long pk) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1945,7 +2059,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsPermission(String pk, long permissionPK)
+	public boolean containsPermission(long pk, long permissionPK)
 		throws SystemException {
 		try {
 			return containsPermission.contains(pk, permissionPK);
@@ -1955,7 +2069,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsPermissions(String pk) throws SystemException {
+	public boolean containsPermissions(long pk) throws SystemException {
 		if (getPermissionsSize(pk) > 0) {
 			return true;
 		}
@@ -1964,7 +2078,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addPermission(String pk, long permissionPK)
+	public void addPermission(long pk, long permissionPK)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -1975,7 +2089,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addPermission(String pk,
+	public void addPermission(long pk,
 		com.liferay.portal.model.Permission permission)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
@@ -1987,7 +2101,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addPermissions(String pk, long[] permissionPKs)
+	public void addPermissions(long pk, long[] permissionPKs)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -2000,7 +2114,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addPermissions(String pk, List permissions)
+	public void addPermissions(long pk, List permissions)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -2014,7 +2128,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void clearPermissions(String pk)
+	public void clearPermissions(long pk)
 		throws NoSuchUserException, SystemException {
 		try {
 			clearPermissions.clear(pk);
@@ -2024,7 +2138,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removePermission(String pk, long permissionPK)
+	public void removePermission(long pk, long permissionPK)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -2035,7 +2149,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removePermission(String pk,
+	public void removePermission(long pk,
 		com.liferay.portal.model.Permission permission)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
@@ -2047,7 +2161,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removePermissions(String pk, long[] permissionPKs)
+	public void removePermissions(long pk, long[] permissionPKs)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -2060,7 +2174,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removePermissions(String pk, List permissions)
+	public void removePermissions(long pk, List permissions)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -2074,7 +2188,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setPermissions(String pk, long[] permissionPKs)
+	public void setPermissions(long pk, long[] permissionPKs)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -2089,7 +2203,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setPermissions(String pk, List permissions)
+	public void setPermissions(long pk, List permissions)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -2105,16 +2219,16 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public List getRoles(String pk) throws NoSuchUserException, SystemException {
+	public List getRoles(long pk) throws NoSuchUserException, SystemException {
 		return getRoles(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getRoles(String pk, int begin, int end)
+	public List getRoles(long pk, int begin, int end)
 		throws NoSuchUserException, SystemException {
 		return getRoles(pk, begin, end, null);
 	}
 
-	public List getRoles(String pk, int begin, int end, OrderByComparator obc)
+	public List getRoles(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchUserException, SystemException {
 		Session session = null;
 
@@ -2151,7 +2265,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public int getRolesSize(String pk) throws SystemException {
+	public int getRolesSize(long pk) throws SystemException {
 		Session session = null;
 
 		try {
@@ -2184,7 +2298,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsRole(String pk, String rolePK)
+	public boolean containsRole(long pk, String rolePK)
 		throws SystemException {
 		try {
 			return containsRole.contains(pk, rolePK);
@@ -2194,7 +2308,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsRoles(String pk) throws SystemException {
+	public boolean containsRoles(long pk) throws SystemException {
 		if (getRolesSize(pk) > 0) {
 			return true;
 		}
@@ -2203,7 +2317,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addRole(String pk, String rolePK)
+	public void addRole(long pk, String rolePK)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2214,7 +2328,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addRole(String pk, com.liferay.portal.model.Role role)
+	public void addRole(long pk, com.liferay.portal.model.Role role)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2225,7 +2339,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addRoles(String pk, String[] rolePKs)
+	public void addRoles(long pk, String[] rolePKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2238,7 +2352,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addRoles(String pk, List roles)
+	public void addRoles(long pk, List roles)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2252,8 +2366,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void clearRoles(String pk)
-		throws NoSuchUserException, SystemException {
+	public void clearRoles(long pk) throws NoSuchUserException, SystemException {
 		try {
 			clearRoles.clear(pk);
 		}
@@ -2262,7 +2375,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeRole(String pk, String rolePK)
+	public void removeRole(long pk, String rolePK)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2273,7 +2386,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeRole(String pk, com.liferay.portal.model.Role role)
+	public void removeRole(long pk, com.liferay.portal.model.Role role)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2284,7 +2397,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeRoles(String pk, String[] rolePKs)
+	public void removeRoles(long pk, String[] rolePKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2297,7 +2410,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeRoles(String pk, List roles)
+	public void removeRoles(long pk, List roles)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2311,7 +2424,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setRoles(String pk, String[] rolePKs)
+	public void setRoles(long pk, String[] rolePKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2326,7 +2439,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setRoles(String pk, List roles)
+	public void setRoles(long pk, List roles)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2342,18 +2455,18 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public List getUserGroups(String pk)
+	public List getUserGroups(long pk)
 		throws NoSuchUserException, SystemException {
 		return getUserGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getUserGroups(String pk, int begin, int end)
+	public List getUserGroups(long pk, int begin, int end)
 		throws NoSuchUserException, SystemException {
 		return getUserGroups(pk, begin, end, null);
 	}
 
-	public List getUserGroups(String pk, int begin, int end,
-		OrderByComparator obc) throws NoSuchUserException, SystemException {
+	public List getUserGroups(long pk, int begin, int end, OrderByComparator obc)
+		throws NoSuchUserException, SystemException {
 		Session session = null;
 
 		try {
@@ -2390,7 +2503,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public int getUserGroupsSize(String pk) throws SystemException {
+	public int getUserGroupsSize(long pk) throws SystemException {
 		Session session = null;
 
 		try {
@@ -2423,7 +2536,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsUserGroup(String pk, String userGroupPK)
+	public boolean containsUserGroup(long pk, String userGroupPK)
 		throws SystemException {
 		try {
 			return containsUserGroup.contains(pk, userGroupPK);
@@ -2433,7 +2546,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsUserGroups(String pk) throws SystemException {
+	public boolean containsUserGroups(long pk) throws SystemException {
 		if (getUserGroupsSize(pk) > 0) {
 			return true;
 		}
@@ -2442,7 +2555,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUserGroup(String pk, String userGroupPK)
+	public void addUserGroup(long pk, String userGroupPK)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2453,7 +2566,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUserGroup(String pk,
+	public void addUserGroup(long pk,
 		com.liferay.portal.model.UserGroup userGroup)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
@@ -2465,7 +2578,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUserGroups(String pk, String[] userGroupPKs)
+	public void addUserGroups(long pk, String[] userGroupPKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2478,7 +2591,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUserGroups(String pk, List userGroups)
+	public void addUserGroups(long pk, List userGroups)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2492,7 +2605,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void clearUserGroups(String pk)
+	public void clearUserGroups(long pk)
 		throws NoSuchUserException, SystemException {
 		try {
 			clearUserGroups.clear(pk);
@@ -2502,7 +2615,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUserGroup(String pk, String userGroupPK)
+	public void removeUserGroup(long pk, String userGroupPK)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2513,7 +2626,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUserGroup(String pk,
+	public void removeUserGroup(long pk,
 		com.liferay.portal.model.UserGroup userGroup)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
@@ -2525,7 +2638,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUserGroups(String pk, String[] userGroupPKs)
+	public void removeUserGroups(long pk, String[] userGroupPKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2538,7 +2651,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUserGroups(String pk, List userGroups)
+	public void removeUserGroups(long pk, List userGroups)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2552,7 +2665,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setUserGroups(String pk, String[] userGroupPKs)
+	public void setUserGroups(long pk, String[] userGroupPKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2567,7 +2680,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setUserGroups(String pk, List userGroups)
+	public void setUserGroups(long pk, List userGroups)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2630,7 +2743,7 @@ public class UserPersistence extends BasePersistence {
 	protected class ContainsGroup extends MappingSqlQuery {
 		protected ContainsGroup(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSGROUP);
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
@@ -2640,8 +2753,10 @@ public class UserPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(String userId, long groupId) {
-			List results = execute(new Object[] { userId, new Long(groupId) });
+		protected boolean contains(long userId, long groupId) {
+			List results = execute(new Object[] {
+						new Long(userId), new Long(groupId)
+					});
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -2660,14 +2775,14 @@ public class UserPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Users_Groups (userId, groupId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void add(String userId, long groupId) {
+		protected void add(long userId, long groupId) {
 			if (!_persistence.containsGroup.contains(userId, groupId)) {
-				update(new Object[] { userId, new Long(groupId) });
+				update(new Object[] { new Long(userId), new Long(groupId) });
 			}
 		}
 
@@ -2678,12 +2793,12 @@ public class UserPersistence extends BasePersistence {
 		protected ClearGroups(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Groups WHERE userId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void clear(String userId) {
-			update(new Object[] { userId });
+		protected void clear(long userId) {
+			update(new Object[] { new Long(userId) });
 		}
 	}
 
@@ -2691,20 +2806,20 @@ public class UserPersistence extends BasePersistence {
 		protected RemoveGroup(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Groups WHERE userId = ? AND groupId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void remove(String userId, long groupId) {
-			update(new Object[] { userId, new Long(groupId) });
+		protected void remove(long userId, long groupId) {
+			update(new Object[] { new Long(userId), new Long(groupId) });
 		}
 	}
 
 	protected class ContainsOrganization extends MappingSqlQuery {
 		protected ContainsOrganization(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSORGANIZATION);
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2714,8 +2829,8 @@ public class UserPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(String userId, String organizationId) {
-			List results = execute(new Object[] { userId, organizationId });
+		protected boolean contains(long userId, String organizationId) {
+			List results = execute(new Object[] { new Long(userId), organizationId });
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -2734,15 +2849,15 @@ public class UserPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Users_Orgs (userId, organizationId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
 
-		protected void add(String userId, String organizationId) {
+		protected void add(long userId, String organizationId) {
 			if (!_persistence.containsOrganization.contains(userId,
 						organizationId)) {
-				update(new Object[] { userId, organizationId });
+				update(new Object[] { new Long(userId), organizationId });
 			}
 		}
 
@@ -2753,12 +2868,12 @@ public class UserPersistence extends BasePersistence {
 		protected ClearOrganizations(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Orgs WHERE userId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void clear(String userId) {
-			update(new Object[] { userId });
+		protected void clear(long userId) {
+			update(new Object[] { new Long(userId) });
 		}
 	}
 
@@ -2766,20 +2881,20 @@ public class UserPersistence extends BasePersistence {
 		protected RemoveOrganization(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Orgs WHERE userId = ? AND organizationId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
 
-		protected void remove(String userId, String organizationId) {
-			update(new Object[] { userId, organizationId });
+		protected void remove(long userId, String organizationId) {
+			update(new Object[] { new Long(userId), organizationId });
 		}
 	}
 
 	protected class ContainsPermission extends MappingSqlQuery {
 		protected ContainsPermission(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSPERMISSION);
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
@@ -2789,8 +2904,10 @@ public class UserPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(String userId, long permissionId) {
-			List results = execute(new Object[] { userId, new Long(permissionId) });
+		protected boolean contains(long userId, long permissionId) {
+			List results = execute(new Object[] {
+						new Long(userId), new Long(permissionId)
+					});
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -2809,14 +2926,14 @@ public class UserPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Users_Permissions (userId, permissionId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void add(String userId, long permissionId) {
+		protected void add(long userId, long permissionId) {
 			if (!_persistence.containsPermission.contains(userId, permissionId)) {
-				update(new Object[] { userId, new Long(permissionId) });
+				update(new Object[] { new Long(userId), new Long(permissionId) });
 			}
 		}
 
@@ -2827,12 +2944,12 @@ public class UserPersistence extends BasePersistence {
 		protected ClearPermissions(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Permissions WHERE userId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void clear(String userId) {
-			update(new Object[] { userId });
+		protected void clear(long userId) {
+			update(new Object[] { new Long(userId) });
 		}
 	}
 
@@ -2840,20 +2957,20 @@ public class UserPersistence extends BasePersistence {
 		protected RemovePermission(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Permissions WHERE userId = ? AND permissionId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void remove(String userId, long permissionId) {
-			update(new Object[] { userId, new Long(permissionId) });
+		protected void remove(long userId, long permissionId) {
+			update(new Object[] { new Long(userId), new Long(permissionId) });
 		}
 	}
 
 	protected class ContainsRole extends MappingSqlQuery {
 		protected ContainsRole(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSROLE);
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2863,8 +2980,8 @@ public class UserPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(String userId, String roleId) {
-			List results = execute(new Object[] { userId, roleId });
+		protected boolean contains(long userId, String roleId) {
+			List results = execute(new Object[] { new Long(userId), roleId });
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -2883,14 +3000,14 @@ public class UserPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Users_Roles (userId, roleId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
 
-		protected void add(String userId, String roleId) {
+		protected void add(long userId, String roleId) {
 			if (!_persistence.containsRole.contains(userId, roleId)) {
-				update(new Object[] { userId, roleId });
+				update(new Object[] { new Long(userId), roleId });
 			}
 		}
 
@@ -2901,12 +3018,12 @@ public class UserPersistence extends BasePersistence {
 		protected ClearRoles(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Roles WHERE userId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void clear(String userId) {
-			update(new Object[] { userId });
+		protected void clear(long userId) {
+			update(new Object[] { new Long(userId) });
 		}
 	}
 
@@ -2914,20 +3031,20 @@ public class UserPersistence extends BasePersistence {
 		protected RemoveRole(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Roles WHERE userId = ? AND roleId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
 
-		protected void remove(String userId, String roleId) {
-			update(new Object[] { userId, roleId });
+		protected void remove(long userId, String roleId) {
+			update(new Object[] { new Long(userId), roleId });
 		}
 	}
 
 	protected class ContainsUserGroup extends MappingSqlQuery {
 		protected ContainsUserGroup(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSERGROUP);
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2937,8 +3054,8 @@ public class UserPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(String userId, String userGroupId) {
-			List results = execute(new Object[] { userId, userGroupId });
+		protected boolean contains(long userId, String userGroupId) {
+			List results = execute(new Object[] { new Long(userId), userGroupId });
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -2957,14 +3074,14 @@ public class UserPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Users_UserGroups (userId, userGroupId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
 
-		protected void add(String userId, String userGroupId) {
+		protected void add(long userId, String userGroupId) {
 			if (!_persistence.containsUserGroup.contains(userId, userGroupId)) {
-				update(new Object[] { userId, userGroupId });
+				update(new Object[] { new Long(userId), userGroupId });
 			}
 		}
 
@@ -2975,12 +3092,12 @@ public class UserPersistence extends BasePersistence {
 		protected ClearUserGroups(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_UserGroups WHERE userId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void clear(String userId) {
-			update(new Object[] { userId });
+		protected void clear(long userId) {
+			update(new Object[] { new Long(userId) });
 		}
 	}
 
@@ -2988,13 +3105,13 @@ public class UserPersistence extends BasePersistence {
 		protected RemoveUserGroup(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_UserGroups WHERE userId = ? AND userGroupId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
 
-		protected void remove(String userId, String userGroupId) {
-			update(new Object[] { userId, userGroupId });
+		protected void remove(long userId, String userGroupId) {
+			update(new Object[] { new Long(userId), userGroupId });
 		}
 	}
 

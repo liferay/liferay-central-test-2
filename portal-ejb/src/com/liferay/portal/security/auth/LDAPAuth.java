@@ -73,8 +73,7 @@ public class LDAPAuth implements Authenticator {
 
 		try {
 			return authenticate(
-				companyId, emailAddress, StringPool.BLANK, StringPool.BLANK,
-				password);
+				companyId, emailAddress, StringPool.BLANK, 0, password);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -90,8 +89,7 @@ public class LDAPAuth implements Authenticator {
 
 		try {
 			return authenticate(
-				companyId, StringPool.BLANK, screenName, StringPool.BLANK,
-				password);
+				companyId, StringPool.BLANK, screenName, 0, password);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -101,7 +99,7 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	public int authenticateByUserId(
-			String companyId, String userId, String password, Map headerMap,
+			String companyId, long userId, String password, Map headerMap,
 			Map parameterMap)
 		throws AuthException {
 
@@ -119,7 +117,7 @@ public class LDAPAuth implements Authenticator {
 
 	protected int authenticate(
 			String companyId, String emailAddress, String screenName,
-			String userId, String password)
+			long userId, String password)
 		throws Exception {
 
 		if (!PortalLDAPUtil.isAuthEnabled(companyId)) {
@@ -193,7 +191,7 @@ public class LDAPAuth implements Authenticator {
 				"@company_id@", "@email_address@", "@screen_name@", "@user_id@"
 			},
 			new String[] {
-				companyId, emailAddress, screenName, userId
+				companyId, emailAddress, screenName, String.valueOf(userId)
 			});
 
 		if (_log.isDebugEnabled()) {
@@ -257,7 +255,7 @@ public class LDAPAuth implements Authenticator {
 	protected boolean authenticate(
 			LdapContext ctx, Properties env, Binding binding, String baseDN,
 			Attribute userPassword, String companyId, String emailAddress,
-			String screenName, String userId, String password)
+			String screenName, long userId, String password)
 		throws Exception {
 
 		boolean authenticated = false;
@@ -321,7 +319,7 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected int authenticateOmniadmin(
-			String companyId, String emailAddress, String userId)
+			String companyId, String emailAddress, long userId)
 		throws Exception {
 
 		// Only allow omniadmin if Liferay password checking is enabled
@@ -329,7 +327,7 @@ public class LDAPAuth implements Authenticator {
 		if (GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK))) {
 
-			if (Validator.isNotNull(userId)) {
+			if (userId > 0) {
 				if (OmniadminUtil.isOmniadmin(userId)) {
 					return SUCCESS;
 				}
@@ -352,8 +350,7 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected int authenticateRequired(
-			String companyId, String userId, String emailAddress,
-			int failureCode)
+			String companyId, long userId, String emailAddress, int failureCode)
 		throws Exception {
 
 		if (PrefsPropsUtil.getBoolean(
@@ -368,11 +365,11 @@ public class LDAPAuth implements Authenticator {
 
 	protected void processUser(
 			Attributes attrs, Properties userMappings, String companyId,
-			String emailAddress, String screenName, String userId,
+			String emailAddress, String screenName, long userId,
 			String password)
 		throws Exception {
 
-		String creatorUserId = null;
+		long creatorUserId = 0;
 
 		boolean autoPassword = false;
 		String password1 = password;
@@ -410,7 +407,6 @@ public class LDAPAuth implements Authenticator {
 			lastName = names[2];
 		}
 
-		String nickName = null;
 		int prefixId = 0;
 		int suffixId = 0;
 		boolean male = true;
@@ -428,7 +424,7 @@ public class LDAPAuth implements Authenticator {
 		PortalLDAPUtil.importFromLDAP(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			passwordReset, autoScreenName, screenName, emailAddress, locale,
-			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
+			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
 			locationId, sendEmail, checkExists, updatePassword);
 	}

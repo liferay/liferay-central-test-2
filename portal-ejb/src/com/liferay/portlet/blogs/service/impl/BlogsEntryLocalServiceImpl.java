@@ -52,6 +52,7 @@ import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.StringUtil;
@@ -93,7 +94,7 @@ import org.apache.lucene.search.TermQuery;
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			String userId, String plid, long categoryId, String title,
+			long userId, String plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			String[] tagsEntries, boolean addCommunityPermissions,
@@ -108,7 +109,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry addEntry(
-			String userId, String plid, long categoryId, String title,
+			long userId, String plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			String[] tagsEntries, String[] communityPermissions,
@@ -122,7 +123,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry addEntry(
-			String userId, String plid, long categoryId, String title,
+			long userId, String plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			String[] tagsEntries, Boolean addCommunityPermissions,
@@ -332,7 +333,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String name = group.getName();
 
 		if (group.isUser()) {
-			User user = UserUtil.findByPrimaryKey(group.getClassPK());
+			long userId = GetterUtil.getLong(group.getClassPK());
+
+			User user = UserUtil.findByPrimaryKey(userId);
 
 			name = user.getFullName();
 		}
@@ -395,7 +398,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				BlogsEntry entry = (BlogsEntry)itr.next();
 
 				long groupId = entry.getGroupId();
-				String userId = entry.getUserId();
+				long userId = entry.getUserId();
 				long categoryId = entry.getCategoryId();
 				long entryId = entry.getEntryId();
 				String title = entry.getTitle();
@@ -420,8 +423,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			String companyId, long groupId, String userId,
-			String[] categoryIds, String keywords)
+			String companyId, long groupId, long userId, String[] categoryIds,
+			String keywords)
 		throws SystemException {
 
 		try {
@@ -441,7 +444,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 					contextQuery, LuceneFields.GROUP_ID, groupId);
 			}
 
-			if (Validator.isNotNull(userId)) {
+			if (userId > 0) {
 				LuceneUtil.addRequiredTerm(
 					contextQuery, LuceneFields.USER_ID, userId);
 			}
@@ -485,7 +488,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry updateEntry(
-			String userId, long entryId, long categoryId, String title,
+			long userId, long entryId, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			String[] tagsEntries)

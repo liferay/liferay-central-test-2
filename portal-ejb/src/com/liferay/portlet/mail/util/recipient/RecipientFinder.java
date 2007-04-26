@@ -43,13 +43,13 @@ public interface RecipientFinder {
 
 	public String getName();
 
-	public MultiValueMap getOptions(String userId);
+	public MultiValueMap getOptions(long userId);
 
-	public SortedSet getRecipients(String userId, String data, Map options);
+	public SortedSet getRecipients(long userId, String data, Map options);
 
-	public boolean isReadOnly(String userId);
+	public boolean isReadOnly(long userId);
 
-	public void save(String userId, InternetAddress ia)
+	public void save(long userId, InternetAddress ia)
 		throws UnsupportedOperationException;
 
 }

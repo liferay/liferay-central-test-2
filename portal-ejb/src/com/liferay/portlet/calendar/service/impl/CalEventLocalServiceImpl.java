@@ -117,7 +117,7 @@ import org.apache.commons.logging.LogFactory;
 public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	public CalEvent addEvent(
-			String userId, String plid, String title, String description,
+			long userId, String plid, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,
@@ -137,7 +137,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public CalEvent addEvent(
-			String userId, String plid, String title, String description,
+			long userId, String plid, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,
@@ -157,7 +157,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public CalEvent addEvent(
-			String userId, String plid, String title, String description,
+			long userId, String plid, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,
@@ -557,7 +557,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public CalEvent updateEvent(
-			String userId, long eventId, String title, String description,
+			long userId, long eventId, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,

@@ -215,7 +215,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		if (arg.getCurrentFolder().equals("/")) {
 			LinkedHashMap groupParams = new LinkedHashMap();
 
-			groupParams.put("usersGroups", arg.getUserId());
+			groupParams.put("usersGroups", new Long(arg.getUserId()));
 			groupParams.put("layoutSet", Boolean.FALSE);
 
 			List groups = GroupLocalServiceUtil.search(

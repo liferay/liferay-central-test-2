@@ -51,11 +51,11 @@ public abstract class JBIRequestURL {
 		if (user != null) {
 			_user = user;
 
-			_params.put("userId", _user.getUserId());
+			_params.put("userId", String.valueOf(_user.getUserId()));
 			_params.put("timeZoneId", _user.getTimeZone().getID());
 		}
 		else {
-			_params.put("userId", "unknown");
+			_params.put("userId", "0");
 			_params.put("timeZoneId", TimeZone.getDefault().getID());
 		}
 	}

@@ -248,8 +248,6 @@ public class PropsUtil {
 
 	// JAAS
 
-	public static final String PRINCIPAL_FINDER = "principal.finder";
-
 	public static final String PORTAL_CONFIGURATION = "portal.configuration";
 
 	public static final String PORTAL_JAAS_ENABLE = "portal.jaas.enable";
@@ -408,8 +406,6 @@ public class PropsUtil {
 
 	public static final String DEFAULT_GUEST_FRIENDLY_URL = "default.guest.friendly.url";
 
-	public static final String DEFAULT_GUEST_LAYOUT_RESOLUTION = "default.guest.layout.resolution";
-
 	// Default User
 
 	public static final String DEFAULT_USER_LAYOUT_NAME = "default.user.layout.name";
@@ -417,8 +413,6 @@ public class PropsUtil {
 	public static final String DEFAULT_USER_LAYOUT_TEMPLATE_ID = "default.user.layout.template.id";
 
 	public static final String DEFAULT_USER_LAYOUT_COLUMN = "default.user.layout.column-";
-
-	public static final String DEFAULT_USER_LAYOUT_RESOLUTION = "default.user.layout.resolution";
 
 	// Default Admin
 
@@ -855,8 +849,6 @@ public class PropsUtil {
 	public static final String MAIL_JUNK_MAIL_WARNING_SIZE = "mail.junk-mail.warning.size";
 
 	public static final String MAIL_TRASH_WARNING_SIZE = "mail.trash.warning.size";
-
-	public static final String MAIL_USERNAME_REPLACE = "mail.username.replace";
 
 	public static final String MAIL_SMTP_DEBUG = "mail.smtp.debug";
 

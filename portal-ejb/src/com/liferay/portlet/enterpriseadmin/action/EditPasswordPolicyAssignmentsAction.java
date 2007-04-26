@@ -131,10 +131,10 @@ public class EditPasswordPolicyAssignmentsAction extends PortletAction {
 
 		long passwordPolicyId = ParamUtil.getLong(req, "passwordPolicyId");
 
-		String[] addUserIds = StringUtil.split(
-			ParamUtil.getString(req, "addUserIds"));
-		String[] removeUserIds = StringUtil.split(
-			ParamUtil.getString(req, "removeUserIds"));
+		long[] addUserIds = StringUtil.split(
+			ParamUtil.getString(req, "addUserIds"), 0L);
+		long[] removeUserIds = StringUtil.split(
+			ParamUtil.getString(req, "removeUserIds"), 0L);
 
 		UserServiceUtil.addPasswordPolicyUsers(passwordPolicyId, addUserIds);
 		UserServiceUtil.unsetPasswordPolicyUsers(

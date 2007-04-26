@@ -94,11 +94,11 @@ public class TagsPropertyServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsPropertySoap addProperty(
-		java.lang.String userId, java.lang.String entryName,
-		java.lang.String key, java.lang.String value) throws RemoteException {
+		java.lang.String entryName, java.lang.String key, java.lang.String value)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.addProperty(userId,
-					entryName, key, value);
+			com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.addProperty(entryName,
+					key, value);
 
 			return com.liferay.portlet.tags.model.TagsPropertySoap.toSoapModel(returnValue);
 		}

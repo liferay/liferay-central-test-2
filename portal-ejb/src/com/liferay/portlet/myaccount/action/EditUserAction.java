@@ -69,7 +69,7 @@ public class EditUserAction
 		DynamicServletRequest dynamicReq =
 			(DynamicServletRequest)renderReqImpl.getHttpServletRequest();
 
-		dynamicReq.setParameter("p_u_i_d", user.getUserId());
+		dynamicReq.setParameter("p_u_i_d", String.valueOf(user.getUserId()));
 
 		return super.render(mapping, form, config, req, res);
 	}

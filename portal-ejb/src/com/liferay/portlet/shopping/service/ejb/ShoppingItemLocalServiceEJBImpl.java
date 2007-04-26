@@ -66,8 +66,8 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 			begin, end);
 	}
 
-	public void addBookItems(java.lang.String userId,
-		java.lang.String categoryId, java.lang.String[] isbns)
+	public void addBookItems(long userId, java.lang.String categoryId,
+		java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingItemLocalServiceFactory.getTxImpl().addBookItems(userId,
@@ -75,18 +75,17 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		java.lang.String userId, java.lang.String categoryId,
-		java.lang.String sku, java.lang.String name,
-		java.lang.String description, java.lang.String properties,
-		java.lang.String fieldsQuantities, boolean requiresShipping,
-		int stockQuantity, boolean featured, java.lang.Boolean sale,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, boolean mediumImage,
-		java.lang.String mediumImageURL, java.io.File mediumFile,
-		boolean largeImage, java.lang.String largeImageURL,
-		java.io.File largeFile, java.util.List itemFields,
-		java.util.List itemPrices, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long userId, java.lang.String categoryId, java.lang.String sku,
+		java.lang.String name, java.lang.String description,
+		java.lang.String properties, java.lang.String fieldsQuantities,
+		boolean requiresShipping, int stockQuantity, boolean featured,
+		java.lang.Boolean sale, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean mediumImage, java.lang.String mediumImageURL,
+		java.io.File mediumFile, boolean largeImage,
+		java.lang.String largeImageURL, java.io.File largeFile,
+		java.util.List itemFields, java.util.List itemPrices,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return ShoppingItemLocalServiceFactory.getTxImpl().addItem(userId,
@@ -98,17 +97,17 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		java.lang.String userId, java.lang.String categoryId,
-		java.lang.String sku, java.lang.String name,
-		java.lang.String description, java.lang.String properties,
-		java.lang.String fieldsQuantities, boolean requiresShipping,
-		int stockQuantity, boolean featured, java.lang.Boolean sale,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, boolean mediumImage,
-		java.lang.String mediumImageURL, java.io.File mediumFile,
-		boolean largeImage, java.lang.String largeImageURL,
-		java.io.File largeFile, java.util.List itemFields,
-		java.util.List itemPrices, java.lang.String[] communityPermissions,
+		long userId, java.lang.String categoryId, java.lang.String sku,
+		java.lang.String name, java.lang.String description,
+		java.lang.String properties, java.lang.String fieldsQuantities,
+		boolean requiresShipping, int stockQuantity, boolean featured,
+		java.lang.Boolean sale, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean mediumImage, java.lang.String mediumImageURL,
+		java.io.File mediumFile, boolean largeImage,
+		java.lang.String largeImageURL, java.io.File largeFile,
+		java.util.List itemFields, java.util.List itemPrices,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -121,17 +120,17 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		java.lang.String userId, java.lang.String categoryId,
-		java.lang.String sku, java.lang.String name,
-		java.lang.String description, java.lang.String properties,
-		java.lang.String fieldsQuantities, boolean requiresShipping,
-		int stockQuantity, boolean featured, java.lang.Boolean sale,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, boolean mediumImage,
-		java.lang.String mediumImageURL, java.io.File mediumFile,
-		boolean largeImage, java.lang.String largeImageURL,
-		java.io.File largeFile, java.util.List itemFields,
-		java.util.List itemPrices, java.lang.Boolean addCommunityPermissions,
+		long userId, java.lang.String categoryId, java.lang.String sku,
+		java.lang.String name, java.lang.String description,
+		java.lang.String properties, java.lang.String fieldsQuantities,
+		boolean requiresShipping, int stockQuantity, boolean featured,
+		java.lang.Boolean sale, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean mediumImage, java.lang.String mediumImageURL,
+		java.io.File mediumFile, boolean largeImage,
+		java.lang.String largeImageURL, java.io.File largeFile,
+		java.util.List itemFields, java.util.List itemPrices,
+		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -277,17 +276,17 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem updateItem(
-		java.lang.String userId, java.lang.String itemId,
-		java.lang.String categoryId, java.lang.String sku,
-		java.lang.String name, java.lang.String description,
-		java.lang.String properties, java.lang.String fieldsQuantities,
-		boolean requiresShipping, int stockQuantity, boolean featured,
-		java.lang.Boolean sale, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		boolean mediumImage, java.lang.String mediumImageURL,
-		java.io.File mediumFile, boolean largeImage,
-		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List itemFields, java.util.List itemPrices)
+		long userId, java.lang.String itemId, java.lang.String categoryId,
+		java.lang.String sku, java.lang.String name,
+		java.lang.String description, java.lang.String properties,
+		java.lang.String fieldsQuantities, boolean requiresShipping,
+		int stockQuantity, boolean featured, java.lang.Boolean sale,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, boolean mediumImage,
+		java.lang.String mediumImageURL, java.io.File mediumFile,
+		boolean largeImage, java.lang.String largeImageURL,
+		java.io.File largeFile, java.util.List itemFields,
+		java.util.List itemPrices)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return ShoppingItemLocalServiceFactory.getTxImpl().updateItem(userId,

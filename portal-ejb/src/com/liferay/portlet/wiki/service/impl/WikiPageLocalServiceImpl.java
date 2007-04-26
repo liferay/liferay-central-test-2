@@ -73,7 +73,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
-	public WikiPage addPage(String userId, String nodeId, String title)
+	public WikiPage addPage(long userId, String nodeId, String title)
 		throws PortalException, SystemException {
 
 		// Page
@@ -385,7 +385,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public WikiPage revertPage(
-			String userId, String nodeId, String title, double version)
+			long userId, String nodeId, String title, double version)
 		throws PortalException, SystemException {
 
 		WikiPage oldPage = getPage(nodeId, title, version);
@@ -396,7 +396,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public WikiPage updatePage(
-			String userId, String nodeId, String title, String content,
+			long userId, String nodeId, String title, String content,
 			String format, String[] tagsEntries)
 		throws PortalException, SystemException {
 

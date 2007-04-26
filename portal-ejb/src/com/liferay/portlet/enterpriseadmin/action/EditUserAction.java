@@ -229,8 +229,8 @@ public class EditUserAction extends PortletAction {
 	protected void deleteUsers(ActionRequest req) throws Exception {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		String[] deleteUserIds = StringUtil.split(
-			ParamUtil.getString(req, "deleteUserIds"));
+		long[] deleteUserIds = StringUtil.split(
+			ParamUtil.getString(req, "deleteUserIds"), 0L);
 
 		for (int i = 0; i < deleteUserIds.length; i++) {
 			if (cmd.equals(Constants.DEACTIVATE) ||
@@ -256,9 +256,9 @@ public class EditUserAction extends PortletAction {
 		AdminUtil.updateUser(
 			req, user.getUserId(), user.getScreenName(), user.getEmailAddress(),
 			user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
-			user.getResolution(), comments, contact.getSmsSn(),
-			contact.getAimSn(), contact.getIcqSn(), contact.getJabberSn(),
-			contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn());
+			comments, contact.getSmsSn(), contact.getAimSn(),
+			contact.getIcqSn(), contact.getJabberSn(), contact.getMsnSn(),
+			contact.getSkypeSn(), contact.getYmSn());
 
 		return user;
 	}
@@ -269,7 +269,6 @@ public class EditUserAction extends PortletAction {
 		String languageId = ParamUtil.getString(req, "languageId");
 		String timeZoneId = ParamUtil.getString(req, "timeZoneId");
 		String greeting = ParamUtil.getString(req, "greeting");
-		String resolution = ParamUtil.getString(req, "resolution");
 
 		User user = PortalUtil.getSelectedUser(req);
 
@@ -277,7 +276,7 @@ public class EditUserAction extends PortletAction {
 
 		AdminUtil.updateUser(
 			req, user.getUserId(), user.getScreenName(), user.getEmailAddress(),
-			languageId, timeZoneId, greeting, resolution, user.getComments(),
+			languageId, timeZoneId, greeting, user.getComments(),
 			contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
 			contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
 			contact.getYmSn());
@@ -313,8 +312,8 @@ public class EditUserAction extends PortletAction {
 		AdminUtil.updateUser(
 			req, user.getUserId(), user.getScreenName(), user.getEmailAddress(),
 			user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
-			user.getResolution(), user.getComments(), contact.getSmsSn(), aimSn,
-			icqSn, jabberSn, msnSn, skypeSn, ymSn);
+			user.getComments(), contact.getSmsSn(), aimSn, icqSn, jabberSn,
+			msnSn, skypeSn, ymSn);
 
 		return user;
 	}
@@ -331,7 +330,7 @@ public class EditUserAction extends PortletAction {
 		UserServiceUtil.updatePassword(
 			user.getUserId(), password1, password2, passwordReset);
 
-		if (user.getUserId().equals(req.getRemoteUser())) {
+		if (user.getUserId() == PortalUtil.getUserId(req)) {
 			ses.setAttribute(
 				WebKeys.USER_PASSWORD, password1,
 				PortletSession.APPLICATION_SCOPE);
@@ -350,9 +349,9 @@ public class EditUserAction extends PortletAction {
 		AdminUtil.updateUser(
 			req, user.getUserId(), user.getScreenName(), user.getEmailAddress(),
 			user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
-			user.getResolution(), user.getComments(), smsSn, contact.getAimSn(),
-			contact.getIcqSn(), contact.getJabberSn(), contact.getMsnSn(),
-			contact.getSkypeSn(), contact.getYmSn());
+			user.getComments(), smsSn, contact.getAimSn(), contact.getIcqSn(),
+			contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
+			contact.getYmSn());
 
 		return user;
 	}
@@ -373,7 +372,6 @@ public class EditUserAction extends PortletAction {
 		String firstName = ParamUtil.getString(req, "firstName");
 		String middleName = ParamUtil.getString(req, "middleName");
 		String lastName = ParamUtil.getString(req, "lastName");
-		String nickName = ParamUtil.getString(req, "nickName");
 		int prefixId = ParamUtil.getInteger(req, "prefixId");
 		int suffixId = ParamUtil.getInteger(req, "suffixId");
 		boolean male = ParamUtil.get(req, "male", true);
@@ -396,7 +394,7 @@ public class EditUserAction extends PortletAction {
 				themeDisplay.getCompanyId(), autoPassword, password1, password2,
 				passwordReset, autoScreenName, screenName, emailAddress,
 				themeDisplay.getLocale(), firstName, middleName, lastName,
-				nickName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
+				prefixId, suffixId, male, birthdayMonth, birthdayDay,
 				birthdayYear, jobTitle, organizationId, locationId, sendEmail);
 		}
 		else {
@@ -415,12 +413,11 @@ public class EditUserAction extends PortletAction {
 			user = UserServiceUtil.updateUser(
 				user.getUserId(), password, screenName, emailAddress,
 				user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
-				user.getResolution(), user.getComments(), firstName, middleName,
-				lastName, nickName, prefixId, suffixId, male, birthdayMonth,
-				birthdayDay, birthdayYear, contact.getSmsSn(),
-				contact.getAimSn(), contact.getIcqSn(), contact.getJabberSn(),
-				contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn(),
-				jobTitle, organizationId, locationId);
+				user.getComments(), firstName, middleName, lastName, prefixId,
+				suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+				contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
+				contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
+				contact.getYmSn(), jobTitle, organizationId, locationId);
 
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;

@@ -52,7 +52,7 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 		return "directory";
 	}
 
-	public MultiValueMap getOptions(String userId) {
+	public MultiValueMap getOptions(long userId) {
 		try {
 			User user = UserLocalServiceUtil.getUserById(userId);
 
@@ -69,7 +69,7 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 		return new MultiValueMap();
 	}
 
-	public SortedSet getRecipients(String userId, String data, Map options) {
+	public SortedSet getRecipients(long userId, String data, Map options) {
 		SortedSet recipients = new TreeSet();
 
 		data = data.toLowerCase();
@@ -94,8 +94,8 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 			}
 
 			List results = UserLocalServiceUtil.search(
-				user.getCompanyId(), null, null, null, null, null, null, true,
-				params, true, 0, 50, null);
+				user.getCompanyId(), null, null, null, null, null, true, params,
+				true, 0, 50, null);
 
 			for (int i = 0; i < results.size(); i++) {
 				User recipient = (User)results.get(i);
@@ -117,11 +117,11 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 		return recipients;
 	}
 
-	public boolean isReadOnly(String userId) {
+	public boolean isReadOnly(long userId) {
 		return true;
 	}
 
-	public void save(String userId, InternetAddress ia)
+	public void save(long userId, InternetAddress ia)
 		throws UnsupportedOperationException {
 
 		throw new UnsupportedOperationException();

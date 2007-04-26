@@ -96,20 +96,22 @@ public class GroupFinder {
 	public static String JOIN_BY_USERS_GROUPS =
 		GroupFinder.class.getName() + ".joinByUsersGroups";
 
-	public static int countByG_U(long groupId, String userId)
+	public static int countByG_U(long groupId, long userId)
 		throws SystemException {
+
+		Long userIdObj = new Long(userId);
 
 		LinkedHashMap params1 = new LinkedHashMap();
 
-		params1.put("usersGroups", userId);
+		params1.put("usersGroups", userIdObj);
 
 		LinkedHashMap params2 = new LinkedHashMap();
 
-		params2.put("groupsOrgs", userId);
+		params2.put("groupsOrgs", userIdObj);
 
 		LinkedHashMap params3 = new LinkedHashMap();
 
-		params3.put("groupsUserGroups", userId);
+		params3.put("groupsUserGroups", userIdObj);
 
 		Session session = null;
 
@@ -142,7 +144,7 @@ public class GroupFinder {
 			params = new LinkedHashMap();
 		}
 
-		String userId = (String)params.get("usersGroups");
+		Long userId = (Long)params.get("usersGroups");
 
 		LinkedHashMap params1 = params;
 
@@ -150,7 +152,7 @@ public class GroupFinder {
 
 		params2.putAll(params1);
 
-		if (Validator.isNotNull(userId)) {
+		if (userId != null) {
 			params2.remove("usersGroups");
 			params2.put("groupsOrgs", userId);
 		}
@@ -159,7 +161,7 @@ public class GroupFinder {
 
 		params3.putAll(params1);
 
-		if (Validator.isNotNull(userId)) {
+		if (userId != null) {
 			params3.remove("usersGroups");
 			params3.put("groupsUserGroups", userId);
 		}
@@ -249,7 +251,7 @@ public class GroupFinder {
 			params = new LinkedHashMap();
 		}
 
-		String userId = (String)params.get("usersGroups");
+		Long userId = (Long)params.get("usersGroups");
 
 		LinkedHashMap params1 = params;
 
@@ -257,7 +259,7 @@ public class GroupFinder {
 
 		params2.putAll(params1);
 
-		if (Validator.isNotNull(userId)) {
+		if (userId != null) {
 			params2.remove("usersGroups");
 			params2.put("groupsOrgs", userId);
 		}
@@ -266,7 +268,7 @@ public class GroupFinder {
 
 		params3.putAll(params1);
 
-		if (Validator.isNotNull(userId)) {
+		if (userId != null) {
 			params3.remove("usersGroups");
 			params3.put("groupsUserGroups", userId);
 		}

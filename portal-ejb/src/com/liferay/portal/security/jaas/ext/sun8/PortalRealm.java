@@ -61,8 +61,8 @@ public class PortalRealm extends IASRealm {
 		return Constants.REALM_NAME;
 	}
 
-	public Enumeration getGroupNames(String userId) throws NoSuchUserException {
-		List list = (List)_groups.get(userId);
+	public Enumeration getGroupNames(String name) throws NoSuchUserException {
+		List list = (List)_groups.get(name);
 
 		if (list == null) {
 			return Collections.enumeration(new ArrayList());
@@ -72,14 +72,14 @@ public class PortalRealm extends IASRealm {
 		}
 	}
 
-	public void setGroupNames(String userId, String[] groups) {
+	public void setGroupNames(String name, String[] groups) {
 		List list = new ArrayList(groups.length + 1);
 
 		for (int i = 0; i < groups.length; i++) {
 			list.add(groups[i]);
 		}
 
-		_groups.put(userId, list);
+		_groups.put(name, list);
 	}
 
 	private Map _groups;

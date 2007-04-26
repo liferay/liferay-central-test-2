@@ -46,7 +46,7 @@ public class PasswordPolicyLocalServiceImpl
 	extends PasswordPolicyLocalServiceBaseImpl {
 
 	public PasswordPolicy addPolicy(
-			String userId, String name, String description, boolean changeable,
+			long userId, String name, String description, boolean changeable,
 			boolean changeRequired, int minAge, String storageScheme,
 			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
 			boolean history, int historyCount, boolean expireable, int maxAge,

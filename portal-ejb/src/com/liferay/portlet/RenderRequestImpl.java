@@ -35,6 +35,7 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.DynamicServletRequest;
@@ -198,8 +199,10 @@ public class RenderRequestImpl implements RenderRequest {
 			String companyId = PortalUtil.getCompanyId(_req);
 
 			try {
+				long userId = GetterUtil.getLong(remoteUser);
+
 				return RoleLocalServiceUtil.hasUserRole(
-					remoteUser, companyId, role);
+					userId, companyId, role);
 			}
 			catch (Exception e) {
 				_log.warn(e);
@@ -612,12 +615,12 @@ public class RenderRequestImpl implements RenderRequest {
 		_ses = new PortletSessionImpl(
 			_req, _portletName, _portletCtx, _portalSessionId, plid);
 
-		String userId = PortalUtil.getUserId(req);
+		long userId = PortalUtil.getUserId(req);
 		String remoteUser = req.getRemoteUser();
 
-		if ((userId != null) && (remoteUser == null)) {
-			_remoteUser = userId;
-			_userPrincipal = new ProtectedPrincipal(userId);
+		if ((userId > 0) && (remoteUser == null)) {
+			_remoteUser = String.valueOf(userId);
+			_userPrincipal = new ProtectedPrincipal(_remoteUser);
 		}
 		else {
 			_remoteUser = remoteUser;

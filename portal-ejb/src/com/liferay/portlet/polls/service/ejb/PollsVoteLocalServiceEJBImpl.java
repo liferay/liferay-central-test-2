@@ -66,9 +66,8 @@ public class PollsVoteLocalServiceEJBImpl implements PollsVoteLocalService,
 			begin, end);
 	}
 
-	public com.liferay.portlet.polls.model.PollsVote addVote(
-		java.lang.String userId, java.lang.String questionId,
-		java.lang.String choiceId)
+	public com.liferay.portlet.polls.model.PollsVote addVote(long userId,
+		java.lang.String questionId, java.lang.String choiceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PollsVoteLocalServiceFactory.getTxImpl().addVote(userId,
@@ -76,7 +75,7 @@ public class PollsVoteLocalServiceEJBImpl implements PollsVoteLocalService,
 	}
 
 	public com.liferay.portlet.polls.model.PollsVote getVote(
-		java.lang.String questionId, java.lang.String userId)
+		java.lang.String questionId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PollsVoteLocalServiceFactory.getTxImpl().getVote(questionId,

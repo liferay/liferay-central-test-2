@@ -66,7 +66,7 @@ public class DLFileRankLocalServiceEJBImpl implements DLFileRankLocalService,
 			begin, end);
 	}
 
-	public void deleteFileRanks(java.lang.String userId)
+	public void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException {
 		DLFileRankLocalServiceFactory.getTxImpl().deleteFileRanks(userId);
 	}
@@ -76,14 +76,14 @@ public class DLFileRankLocalServiceEJBImpl implements DLFileRankLocalService,
 		DLFileRankLocalServiceFactory.getTxImpl().deleteFileRanks(folderId, name);
 	}
 
-	public java.util.List getFileRanks(long groupId, java.lang.String userId)
+	public java.util.List getFileRanks(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		return DLFileRankLocalServiceFactory.getTxImpl().getFileRanks(groupId,
 			userId);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
-		long groupId, java.lang.String companyId, java.lang.String userId,
+		long groupId, java.lang.String companyId, long userId,
 		java.lang.String folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

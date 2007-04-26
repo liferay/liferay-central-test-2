@@ -24,14 +24,13 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.auth.PrincipalFinder;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.InstancePool;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import java.security.Principal;
@@ -61,7 +60,7 @@ public class PrincipalSessionBean {
 		JRUN_ANONYMOUS, ORACLE_ANONYMOUS, SUN_ANONYMOUS, WEBLOGIC_ANONYMOUS
 	};
 
-	public static String getUserId(SessionContext sc)
+	public static long getUserId(SessionContext sc)
 		throws PrincipalException {
 
 		Principal principal = null;
@@ -79,17 +78,6 @@ public class PrincipalSessionBean {
 
 		String name = principal.getName();
 
-		PrincipalFinder principalFinder = null;
-
-		try {
-			principalFinder = (PrincipalFinder)InstancePool.get(
-				PropsUtil.get(PropsUtil.PRINCIPAL_FINDER));
-
-			name = principalFinder.toLiferay(name);
-		}
-		catch (Exception e) {
-		}
-
 		if (Validator.isNull(name)) {
 			throw new PrincipalException("Principal cannot be null");
 		}
@@ -102,19 +90,21 @@ public class PrincipalSessionBean {
 			}
 		}
 
-		return name;
+		return GetterUtil.getLong(name);
 	}
 
 	public static void setThreadValues(SessionContext sc) {
-		String userId = null;
+		long userId = 0;
 
 		try {
-			userId = PrincipalThreadLocal.getName();
+			String name = PrincipalThreadLocal.getName();
 
-			if (userId == null) {
+			if (name == null) {
 				userId = getUserId(sc);
 
-				PrincipalThreadLocal.setName(userId);
+				name = String.valueOf(userId);
+
+				PrincipalThreadLocal.setName(name);
 			}
 		}
 		catch (PrincipalException pe) {
@@ -132,7 +122,7 @@ public class PrincipalSessionBean {
 				boolean signedIn = false;
 				boolean checkGuest = true;
 
-				if (userId != null) {
+				if (userId > 0) {
 					UserLocalService userLocalService =
 						UserLocalServiceFactory.getTxImpl();
 
@@ -151,9 +141,11 @@ public class PrincipalSessionBean {
 	}
 
 	public static void setThreadValues(User user) {
-		String userId = user.getUserId();
+		long userId = user.getUserId();
 
-		PrincipalThreadLocal.setName(userId);
+		String name = String.valueOf(userId);
+
+		PrincipalThreadLocal.setName(name);
 
 		try {
 			PermissionCheckerImpl permissionChecker =

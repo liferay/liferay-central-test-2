@@ -49,7 +49,7 @@ public class DLFileRankFinder {
 	public static String FIND_BY_G_U =
 		DLFileRankFinder.class.getName() + ".findByG_U";
 
-	public static int countByG_U(long groupId, String userId)
+	public static int countByG_U(long groupId, long userId)
 		throws SystemException {
 
 		Session session = null;
@@ -90,7 +90,7 @@ public class DLFileRankFinder {
 		}
 	}
 
-	public static List findByG_U(long groupId, String userId)
+	public static List findByG_U(long groupId, long userId)
 		throws SystemException {
 
 		Session session = null;

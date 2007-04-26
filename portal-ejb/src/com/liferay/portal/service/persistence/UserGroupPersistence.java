@@ -1091,7 +1091,7 @@ public class UserGroupPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsUser(String pk, String userPK)
+	public boolean containsUser(String pk, long userPK)
 		throws SystemException {
 		try {
 			return containsUser.contains(pk, userPK);
@@ -1110,7 +1110,7 @@ public class UserGroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUser(String pk, String userPK)
+	public void addUser(String pk, long userPK)
 		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
 			SystemException {
 		try {
@@ -1132,7 +1132,7 @@ public class UserGroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUsers(String pk, String[] userPKs)
+	public void addUsers(String pk, long[] userPKs)
 		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
 			SystemException {
 		try {
@@ -1169,7 +1169,7 @@ public class UserGroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUser(String pk, String userPK)
+	public void removeUser(String pk, long userPK)
 		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
 			SystemException {
 		try {
@@ -1191,7 +1191,7 @@ public class UserGroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUsers(String pk, String[] userPKs)
+	public void removeUsers(String pk, long[] userPKs)
 		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
 			SystemException {
 		try {
@@ -1218,7 +1218,7 @@ public class UserGroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void setUsers(String pk, String[] userPKs)
+	public void setUsers(String pk, long[] userPKs)
 		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
 			SystemException {
 		try {
@@ -1265,7 +1265,7 @@ public class UserGroupPersistence extends BasePersistence {
 		protected ContainsUser(UserGroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSER);
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1274,8 +1274,8 @@ public class UserGroupPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(String userGroupId, String userId) {
-			List results = execute(new Object[] { userGroupId, userId });
+		protected boolean contains(String userGroupId, long userId) {
+			List results = execute(new Object[] { userGroupId, new Long(userId) });
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -1295,13 +1295,13 @@ public class UserGroupPersistence extends BasePersistence {
 				"INSERT INTO Users_UserGroups (userGroupId, userId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void add(String userGroupId, String userId) {
+		protected void add(String userGroupId, long userId) {
 			if (!_persistence.containsUser.contains(userGroupId, userId)) {
-				update(new Object[] { userGroupId, userId });
+				update(new Object[] { userGroupId, new Long(userId) });
 			}
 		}
 
@@ -1326,12 +1326,12 @@ public class UserGroupPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_UserGroups WHERE userGroupId = ? AND userId = ?");
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void remove(String userGroupId, String userId) {
-			update(new Object[] { userGroupId, userId });
+		protected void remove(String userGroupId, long userId) {
+			update(new Object[] { userGroupId, new Long(userId) });
 		}
 	}
 

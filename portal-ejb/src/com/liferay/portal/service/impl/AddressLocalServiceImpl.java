@@ -54,7 +54,7 @@ import java.util.List;
 public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 	public Address addAddress(
-			String userId, String className, String classPK, String street1,
+			long userId, String className, String classPK, String street1,
 			String street2, String street3, String city, String zip,
 			String regionId, String countryId, int typeId, boolean mailing,
 			boolean primary)

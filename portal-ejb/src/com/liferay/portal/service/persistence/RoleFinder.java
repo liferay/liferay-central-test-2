@@ -126,7 +126,7 @@ public class RoleFinder {
 		}
 	}
 
-	public static List findByUserGroupRole(String userId, long groupId)
+	public static List findByUserGroupRole(long userId, long groupId)
 		throws SystemException {
 
 		Session session = null;
@@ -198,13 +198,13 @@ public class RoleFinder {
 				name + "}");
 	}
 
-	public static List findByU_G(String userId, long groupId)
+	public static List findByU_G(long userId, long groupId)
 		throws SystemException {
 
 		return findByU_G(userId, new long[] {groupId});
 	}
 
-	public static List findByU_G(String userId, long[] groupIds)
+	public static List findByU_G(long userId, long[] groupIds)
 		throws SystemException {
 
 		Session session = null;
@@ -238,7 +238,7 @@ public class RoleFinder {
 		}
 	}
 
-	public static List findByU_G(String userId, List groups)
+	public static List findByU_G(long userId, List groups)
 		throws SystemException {
 
 		long[] groupIds = new long[groups.size()];

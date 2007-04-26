@@ -503,7 +503,7 @@ public class PermissionUtil {
 		return getPersistence().getUsersSize(pk);
 	}
 
-	public static boolean containsUser(long pk, java.lang.String userPK)
+	public static boolean containsUser(long pk, long userPK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().containsUser(pk, userPK);
 	}
@@ -513,7 +513,7 @@ public class PermissionUtil {
 		return getPersistence().containsUsers(pk);
 	}
 
-	public static void addUser(long pk, java.lang.String userPK)
+	public static void addUser(long pk, long userPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPermissionException, 
 			com.liferay.portal.NoSuchUserException {
@@ -527,7 +527,7 @@ public class PermissionUtil {
 		getPersistence().addUser(pk, user);
 	}
 
-	public static void addUsers(long pk, java.lang.String[] userPKs)
+	public static void addUsers(long pk, long[] userPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPermissionException, 
 			com.liferay.portal.NoSuchUserException {
@@ -547,7 +547,7 @@ public class PermissionUtil {
 		getPersistence().clearUsers(pk);
 	}
 
-	public static void removeUser(long pk, java.lang.String userPK)
+	public static void removeUser(long pk, long userPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPermissionException, 
 			com.liferay.portal.NoSuchUserException {
@@ -561,7 +561,7 @@ public class PermissionUtil {
 		getPersistence().removeUser(pk, user);
 	}
 
-	public static void removeUsers(long pk, java.lang.String[] userPKs)
+	public static void removeUsers(long pk, long[] userPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPermissionException, 
 			com.liferay.portal.NoSuchUserException {
@@ -575,7 +575,7 @@ public class PermissionUtil {
 		getPersistence().removeUsers(pk, users);
 	}
 
-	public static void setUsers(long pk, java.lang.String[] userPKs)
+	public static void setUsers(long pk, long[] userPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPermissionException, 
 			com.liferay.portal.NoSuchUserException {

@@ -60,6 +60,7 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.communities.form.PageForm;
 import com.liferay.util.FileUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -230,10 +231,14 @@ public class EditPagesAction extends PortletAction {
 			themeDisplay.getPermissionChecker(), group.getGroupId(),
 			ActionKeys.MANAGE_LAYOUTS);
 
-		if (group.isUser() && group.getClassPK().equals(user.getUserId()) &&
-			!user.isLayoutsRequired()) {
+		if (group.isUser()) {
+			long groupUserId = GetterUtil.getLong(group.getClassPK());
 
-			throw new PrincipalException();
+			if ((groupUserId == user.getUserId()) &&
+				!user.isLayoutsRequired()) {
+
+				throw new PrincipalException();
+			}
 		}
 	}
 
@@ -267,7 +272,7 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void copyLayouts(
-			String creatorUserId, String sourceOwnerId, String targetOwnerId)
+			long creatorUserId, String sourceOwnerId, String targetOwnerId)
 		throws Exception{
 
 		Map parameterMap = new HashMap();
@@ -450,7 +455,7 @@ public class EditPagesAction extends PortletAction {
 					(LayoutTypePortlet)layout.getLayoutType();
 
 				layoutTypePortlet.setLayoutTemplateId(
-					null, PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_TEMPLATE_ID),
+					0, PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_TEMPLATE_ID),
 					false);
 
 				LayoutServiceUtil.updateLayout(

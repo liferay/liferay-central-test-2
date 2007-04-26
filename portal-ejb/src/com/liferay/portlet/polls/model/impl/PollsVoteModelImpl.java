@@ -58,7 +58,7 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PollsVote";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "questionId", new Integer(Types.VARCHAR) },
-			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.BIGINT) },
 			{ "choiceId", new Integer(Types.VARCHAR) },
 			{ "voteDate", new Integer(Types.TIMESTAMP) }
 		};
@@ -67,9 +67,6 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 			XSS_ALLOW);
 	public static boolean XSS_ALLOW_QUESTIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsVote.questionId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.polls.model.PollsVote.userId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CHOICEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsVote.choiceId"),
@@ -106,19 +103,12 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getUserId() {
-		return GetterUtil.getString(_userId);
+	public long getUserId() {
+		return _userId;
 	}
 
-	public void setUserId(String userId) {
-		if (((userId == null) && (_userId != null)) ||
-				((userId != null) && (_userId == null)) ||
-				((userId != null) && (_userId != null) &&
-				!userId.equals(_userId))) {
-			if (!XSS_ALLOW_USERID) {
-				userId = XSSUtil.strip(userId);
-			}
-
+	public void setUserId(long userId) {
+		if (userId != _userId) {
 			_userId = userId;
 		}
 	}
@@ -203,7 +193,7 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 	}
 
 	private String _questionId;
-	private String _userId;
+	private long _userId;
 	private String _choiceId;
 	private Date _voteDate;
 }

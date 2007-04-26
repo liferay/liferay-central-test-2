@@ -28,6 +28,7 @@ import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 
 import java.io.IOException;
 
@@ -61,7 +62,9 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 			if (remoteUser != null) {
 				PrincipalThreadLocal.setName(remoteUser);
 
-				User user = UserLocalServiceUtil.getUserById(remoteUser);
+				long userId = GetterUtil.getLong(remoteUser);
+
+				User user = UserLocalServiceUtil.getUserById(userId);
 
 				permissionChecker = PermissionCheckerFactory.create(
 					user, true, true);

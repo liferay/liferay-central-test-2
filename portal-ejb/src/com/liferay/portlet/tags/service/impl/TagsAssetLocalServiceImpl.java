@@ -111,8 +111,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	}
 
 	public TagsAsset updateAsset(
-			String userId, String className, String classPK,
-			String[] entryNames)
+			long userId, String className, String classPK, String[] entryNames)
 		throws PortalException, SystemException {
 
 		// Asset

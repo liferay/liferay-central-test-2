@@ -52,7 +52,7 @@ public class PluginSettingLocalServiceImpl
 	extends PluginSettingLocalServiceBaseImpl {
 
 	public void checkPermission(
-			String userId, String pluginId, String pluginType)
+			long userId, String pluginId, String pluginType)
 		throws PortalException {
 
 		if (!hasPermission(userId, pluginId, pluginType)) {
@@ -103,7 +103,7 @@ public class PluginSettingLocalServiceImpl
 	}
 
 	public boolean hasPermission(
-		String userId, String pluginId, String pluginType) {
+		long userId, String pluginId, String pluginType) {
 
 		try {
 			User user = UserUtil.findByPrimaryKey(userId);

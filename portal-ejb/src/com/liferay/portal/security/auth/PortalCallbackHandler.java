@@ -37,8 +37,8 @@ import javax.security.auth.callback.PasswordCallback;
  */
 public class PortalCallbackHandler implements CallbackHandler, Serializable {
 
-	public PortalCallbackHandler(String userId, String password) {
-		_userId = userId;
+	public PortalCallbackHandler(String name, String password) {
+		_name = name;
 		_password = password;
 	}
 
@@ -46,7 +46,7 @@ public class PortalCallbackHandler implements CallbackHandler, Serializable {
 		for (int i = 0; i < callbacks.length; i++) {
 			if (callbacks[i] instanceof NameCallback) {
 				NameCallback nameCallback = (NameCallback)callbacks[i];
-				nameCallback.setName(_userId);
+				nameCallback.setName(_name);
 			}
 			else if (callbacks[i] instanceof PasswordCallback) {
 				PasswordCallback passCallback = (PasswordCallback)callbacks[i];
@@ -55,7 +55,7 @@ public class PortalCallbackHandler implements CallbackHandler, Serializable {
 		}
 	}
 
-	private String _userId;
+	private String _name;
 	private String _password;
 
 }

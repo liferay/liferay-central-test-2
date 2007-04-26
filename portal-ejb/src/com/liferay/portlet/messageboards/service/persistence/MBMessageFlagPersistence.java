@@ -366,7 +366,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByUserId(String userId) throws SystemException {
+	public List findByUserId(long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -375,24 +375,14 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			return q.list();
 		}
@@ -404,12 +394,12 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByUserId(String userId, int begin, int end)
+	public List findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(String userId, int begin, int end,
+	public List findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -419,14 +409,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -438,10 +421,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -453,7 +433,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessageFlag findByUserId_First(String userId, OrderByComparator obc)
+	public MBMessageFlag findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
@@ -471,7 +451,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessageFlag findByUserId_Last(String userId, OrderByComparator obc)
+	public MBMessageFlag findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
@@ -491,7 +471,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 	}
 
 	public MBMessageFlag[] findByUserId_PrevAndNext(
-		MBMessageFlagPK mbMessageFlagPK, String userId, OrderByComparator obc)
+		MBMessageFlagPK mbMessageFlagPK, long userId, OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
 		int count = countByUserId(userId);
@@ -503,14 +483,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -522,10 +495,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessageFlag);
@@ -771,7 +741,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByT_U(String topicId, String userId)
+	public List findByT_U(String topicId, long userId)
 		throws SystemException {
 		Session session = null;
 
@@ -790,14 +760,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -809,9 +772,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, topicId);
 			}
 
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			return q.list();
 		}
@@ -823,12 +784,12 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByT_U(String topicId, String userId, int begin, int end)
+	public List findByT_U(String topicId, long userId, int begin, int end)
 		throws SystemException {
 		return findByT_U(topicId, userId, begin, end, null);
 	}
 
-	public List findByT_U(String topicId, String userId, int begin, int end,
+	public List findByT_U(String topicId, long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -847,14 +808,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -871,9 +825,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, topicId);
 			}
 
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -885,7 +837,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessageFlag findByT_U_First(String topicId, String userId,
+	public MBMessageFlag findByT_U_First(String topicId, long userId,
 		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		List list = findByT_U(topicId, userId, 0, 1, obc);
@@ -907,7 +859,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessageFlag findByT_U_Last(String topicId, String userId,
+	public MBMessageFlag findByT_U_Last(String topicId, long userId,
 		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		int count = countByT_U(topicId, userId);
@@ -931,7 +883,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 	}
 
 	public MBMessageFlag[] findByT_U_PrevAndNext(
-		MBMessageFlagPK mbMessageFlagPK, String topicId, String userId,
+		MBMessageFlagPK mbMessageFlagPK, String topicId, long userId,
 		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
@@ -953,14 +905,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -977,9 +922,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, topicId);
 			}
 
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessageFlag);
@@ -1083,7 +1026,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByUserId(String userId) throws SystemException {
+	public void removeByUserId(long userId) throws SystemException {
 		Iterator itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
@@ -1102,7 +1045,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByT_U(String topicId, String userId)
+	public void removeByT_U(String topicId, long userId)
 		throws SystemException {
 		Iterator itr = findByT_U(topicId, userId).iterator();
 
@@ -1169,7 +1112,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByUserId(String userId) throws SystemException {
+	public int countByUserId(long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1179,24 +1122,14 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1281,7 +1214,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByT_U(String topicId, String userId)
+	public int countByT_U(String topicId, long userId)
 		throws SystemException {
 		Session session = null;
 
@@ -1301,14 +1234,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -1320,9 +1246,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, topicId);
 			}
 
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			Iterator itr = q.list().iterator();
 

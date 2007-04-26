@@ -47,7 +47,6 @@ import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.RoleImpl;
-import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -194,21 +193,23 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 		}
 		catch (NoSuchUserException nsue) {
-			defaultUser = UserUtil.create(UserImpl.getDefaultUserId(companyId));
+			long userId = CounterLocalServiceUtil.increment(
+				Counter.class.getName());
 
-			defaultUser.setCompanyId(UserImpl.DEFAULT);
+			defaultUser = UserUtil.create(userId);
+
+			defaultUser.setCompanyId(companyId);
 			defaultUser.setCreateDate(now);
 			defaultUser.setModifiedDate(now);
+			defaultUser.setDefaultUser(true);
 			defaultUser.setContactId(
 				CounterLocalServiceUtil.increment(Counter.class.getName()));
 			defaultUser.setPassword("password");
-			defaultUser.setScreenName(defaultUser.getUserId());
-			defaultUser.setEmailAddress(UserImpl.DEFAULT + "@" + companyMx);
+			defaultUser.setScreenName(String.valueOf(defaultUser.getUserId()));
+			defaultUser.setEmailAddress("default@" + companyMx);
 			defaultUser.setLanguageId(null);
 			defaultUser.setTimeZoneId(null);
 			defaultUser.setGreeting("Welcome!");
-			defaultUser.setResolution(
-				PropsUtil.get(PropsUtil.DEFAULT_GUEST_LAYOUT_RESOLUTION));
 			defaultUser.setLoginDate(now);
 			defaultUser.setFailedLoginAttempts(0);
 			defaultUser.setAgreedToTermsOfUse(true);
@@ -248,8 +249,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Default admin
 
-		if (UserUtil.countByCompanyId(companyId) == 0) {
-			String creatorUserId = null;
+		if (UserUtil.countByCompanyId(companyId) == 1) {
+			long creatorUserId = 0;
 			boolean autoPassword = false;
 			String password1 = PropsUtil.get(PropsUtil.DEFAULT_ADMIN_PASSWORD);
 			String password2 = password1;
@@ -266,7 +267,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String middleName = PropsUtil.get(
 				PropsUtil.DEFAULT_ADMIN_MIDDLE_NAME);
 			String lastName = PropsUtil.get(PropsUtil.DEFAULT_ADMIN_LAST_NAME);
-			String nickName = StringPool.BLANK;
 			int prefixId = 0;
 			int suffixId = 0;
 			boolean male = true;
@@ -280,8 +280,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			User user = UserLocalServiceUtil.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,
 				passwordReset, autoScreenName, screenName, emailAddress, locale,
-				firstName, middleName, lastName, nickName, prefixId, suffixId,
-				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+				firstName, middleName, lastName, prefixId, suffixId, male,
+				birthdayMonth, birthdayDay, birthdayYear, jobTitle,
 				organizationId, locationId, false);
 
 			Group guestGroup = GroupLocalServiceUtil.getGroup(
@@ -446,8 +446,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			account = AccountUtil.create(accountId);
 
 			account.setCreateDate(now);
-			account.setCompanyId(UserImpl.DEFAULT);
-			account.setUserId(UserImpl.getDefaultUserId(companyId));
+			account.setCompanyId(companyId);
+			account.setUserId(0);
 			account.setUserName(StringPool.BLANK);
 		}
 
@@ -468,15 +468,13 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public void updateDisplay(
-			String companyId, String languageId, String timeZoneId,
-			String resolution)
+			String companyId, String languageId, String timeZoneId)
 		throws PortalException, SystemException {
 
 		User user = UserLocalServiceUtil.getDefaultUser(companyId);
 
 		user.setLanguageId(languageId);
 		user.setTimeZoneId(timeZoneId);
-		user.setResolution(resolution);
 
 		UserUtil.update(user);
 	}

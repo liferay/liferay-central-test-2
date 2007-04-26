@@ -28,6 +28,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		try {
 			LinkedHashMap groupParams = new LinkedHashMap();
 
-			groupParams.put("usersGroups", webDavReq.getUserId());
+			groupParams.put("usersGroups", new Long(webDavReq.getUserId()));
 
 			List communities = new ArrayList();
 
@@ -107,8 +108,9 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 			String name = group.getName();
 
 			if (group.isUser()) {
-				User user = UserLocalServiceUtil.getUserById(
-					group.getClassPK());
+				long groupUserId = GetterUtil.getLong(group.getClassPK());
+
+				User user = UserLocalServiceUtil.getUserById(groupUserId);
 
 				name = user.getFullName();
 			}

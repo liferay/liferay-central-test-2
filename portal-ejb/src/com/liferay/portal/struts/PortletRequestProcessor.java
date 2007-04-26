@@ -305,7 +305,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 					WebKeys.JAVAX_PORTLET_CONFIG);
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				user.getActualCompanyId(), portletConfig.getPortletId());
+				user.getCompanyId(), portletConfig.getPortletId());
 
 			if (portlet == null) {
 				return false;

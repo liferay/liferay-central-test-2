@@ -66,27 +66,27 @@ public class UserIdMapperLocalServiceEJBImpl implements UserIdMapperLocalService
 			begin, end);
 	}
 
-	public void deleteUserIdMappers(java.lang.String userId)
+	public void deleteUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException {
 		UserIdMapperLocalServiceFactory.getTxImpl().deleteUserIdMappers(userId);
 	}
 
-	public com.liferay.portal.model.UserIdMapper getUserIdMapper(
-		java.lang.String userId, java.lang.String type)
+	public com.liferay.portal.model.UserIdMapper getUserIdMapper(long userId,
+		java.lang.String type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserIdMapperLocalServiceFactory.getTxImpl().getUserIdMapper(userId,
 			type);
 	}
 
-	public java.util.List getUserIdMappers(java.lang.String userId)
+	public java.util.List getUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException {
 		return UserIdMapperLocalServiceFactory.getTxImpl().getUserIdMappers(userId);
 	}
 
 	public com.liferay.portal.model.UserIdMapper updateUserIdMapper(
-		java.lang.String userId, java.lang.String type,
-		java.lang.String description, java.lang.String externalUserId)
+		long userId, java.lang.String type, java.lang.String description,
+		java.lang.String externalUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserIdMapperLocalServiceFactory.getTxImpl().updateUserIdMapper(userId,

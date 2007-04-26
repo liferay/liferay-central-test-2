@@ -79,19 +79,19 @@ public class RoleServiceImpl extends PrincipalBean implements RoleService {
 		return RoleLocalServiceUtil.getRole(companyId, name);
 	}
 
-	public List getUserGroupRoles(String userId, long groupId)
+	public List getUserGroupRoles(long userId, long groupId)
 		throws PortalException, SystemException {
 
 		return RoleLocalServiceUtil.getUserGroupRoles(userId, groupId);
 	}
 
-	public List getUserRelatedRoles(String userId, List groups)
+	public List getUserRelatedRoles(long userId, List groups)
 		throws PortalException, SystemException {
 
 		return RoleLocalServiceUtil.getUserRelatedRoles(userId, groups);
 	}
 
-	public List getUserRoles(String userId)
+	public List getUserRoles(long userId)
 		throws PortalException, SystemException {
 
 		return RoleLocalServiceUtil.getUserRoles(userId);

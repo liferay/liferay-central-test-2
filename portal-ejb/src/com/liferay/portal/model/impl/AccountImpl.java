@@ -37,13 +37,4 @@ public class AccountImpl extends AccountModelImpl implements Account {
 	public AccountImpl() {
 	}
 
-	public boolean isDefaultAccount() {
-		if (getCompanyId().equals(UserImpl.DEFAULT)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 }

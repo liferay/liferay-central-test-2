@@ -77,7 +77,7 @@ import java.rmi.RemoteException;
  *
  */
 public class UserServiceSoap {
-	public static void addGroupUsers(long groupId, java.lang.String[] userIds)
+	public static void addGroupUsers(long groupId, long[] userIds)
 		throws RemoteException {
 		try {
 			UserServiceUtil.addGroupUsers(groupId, userIds);
@@ -89,7 +89,7 @@ public class UserServiceSoap {
 	}
 
 	public static void addPasswordPolicyUsers(long passwordPolicyId,
-		java.lang.String[] userIds) throws RemoteException {
+		long[] userIds) throws RemoteException {
 		try {
 			UserServiceUtil.addPasswordPolicyUsers(passwordPolicyId, userIds);
 		}
@@ -99,8 +99,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void addRoleUsers(java.lang.String roleId,
-		java.lang.String[] userIds) throws RemoteException {
+	public static void addRoleUsers(java.lang.String roleId, long[] userIds)
+		throws RemoteException {
 		try {
 			UserServiceUtil.addRoleUsers(roleId, userIds);
 		}
@@ -111,7 +111,7 @@ public class UserServiceSoap {
 	}
 
 	public static void addUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds) throws RemoteException {
+		long[] userIds) throws RemoteException {
 		try {
 			UserServiceUtil.addUserGroupUsers(userGroupId, userIds);
 		}
@@ -127,19 +127,19 @@ public class UserServiceSoap {
 		boolean passwordReset, boolean autoScreenName,
 		java.lang.String screenName, java.lang.String emailAddress,
 		String locale, java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String jobTitle,
-		java.lang.String organizationId, java.lang.String locationId,
-		boolean sendEmail) throws RemoteException {
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, java.lang.String organizationId,
+		java.lang.String locationId, boolean sendEmail)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
 					autoPassword, password1, password2, passwordReset,
 					autoScreenName, screenName, emailAddress,
 					new java.util.Locale(locale), firstName, middleName,
-					lastName, nickName, prefixId, suffixId, male,
-					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-					organizationId, locationId, sendEmail);
+					lastName, prefixId, suffixId, male, birthdayMonth,
+					birthdayDay, birthdayYear, jobTitle, organizationId,
+					locationId, sendEmail);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
@@ -149,8 +149,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void deleteRoleUser(java.lang.String roleId,
-		java.lang.String userId) throws RemoteException {
+	public static void deleteRoleUser(java.lang.String roleId, long userId)
+		throws RemoteException {
 		try {
 			UserServiceUtil.deleteRoleUser(roleId, userId);
 		}
@@ -160,8 +160,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void deleteUser(java.lang.String userId)
-		throws RemoteException {
+	public static void deleteUser(long userId) throws RemoteException {
 		try {
 			UserServiceUtil.deleteUser(userId);
 		}
@@ -212,8 +211,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserSoap getUserById(
-		java.lang.String userId) throws RemoteException {
+	public static com.liferay.portal.model.UserSoap getUserById(long userId)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.getUserById(userId);
 
@@ -240,7 +239,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static boolean hasGroupUser(long groupId, java.lang.String userId)
+	public static boolean hasGroupUser(long groupId, long userId)
 		throws RemoteException {
 		try {
 			boolean returnValue = UserServiceUtil.hasGroupUser(groupId, userId);
@@ -253,8 +252,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static boolean hasRoleUser(java.lang.String roleId,
-		java.lang.String userId) throws RemoteException {
+	public static boolean hasRoleUser(java.lang.String roleId, long userId)
+		throws RemoteException {
 		try {
 			boolean returnValue = UserServiceUtil.hasRoleUser(roleId, userId);
 
@@ -266,7 +265,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void setGroupUsers(long groupId, java.lang.String[] userIds)
+	public static void setGroupUsers(long groupId, long[] userIds)
 		throws RemoteException {
 		try {
 			UserServiceUtil.setGroupUsers(groupId, userIds);
@@ -277,8 +276,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void setRoleUsers(java.lang.String roleId,
-		java.lang.String[] userIds) throws RemoteException {
+	public static void setRoleUsers(java.lang.String roleId, long[] userIds)
+		throws RemoteException {
 		try {
 			UserServiceUtil.setRoleUsers(roleId, userIds);
 		}
@@ -289,7 +288,7 @@ public class UserServiceSoap {
 	}
 
 	public static void setUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds) throws RemoteException {
+		long[] userIds) throws RemoteException {
 		try {
 			UserServiceUtil.setUserGroupUsers(userGroupId, userIds);
 		}
@@ -299,7 +298,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void unsetGroupUsers(long groupId, java.lang.String[] userIds)
+	public static void unsetGroupUsers(long groupId, long[] userIds)
 		throws RemoteException {
 		try {
 			UserServiceUtil.unsetGroupUsers(groupId, userIds);
@@ -311,7 +310,7 @@ public class UserServiceSoap {
 	}
 
 	public static void unsetPasswordPolicyUsers(long passwordPolicyId,
-		java.lang.String[] userIds) throws RemoteException {
+		long[] userIds) throws RemoteException {
 		try {
 			UserServiceUtil.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 		}
@@ -321,8 +320,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void unsetRoleUsers(java.lang.String roleId,
-		java.lang.String[] userIds) throws RemoteException {
+	public static void unsetRoleUsers(java.lang.String roleId, long[] userIds)
+		throws RemoteException {
 		try {
 			UserServiceUtil.unsetRoleUsers(roleId, userIds);
 		}
@@ -333,7 +332,7 @@ public class UserServiceSoap {
 	}
 
 	public static void unsetUserGroupUsers(java.lang.String userGroupId,
-		java.lang.String[] userIds) throws RemoteException {
+		long[] userIds) throws RemoteException {
 		try {
 			UserServiceUtil.unsetUserGroupUsers(userGroupId, userIds);
 		}
@@ -343,8 +342,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserSoap updateActive(
-		java.lang.String userId, boolean active) throws RemoteException {
+	public static com.liferay.portal.model.UserSoap updateActive(long userId,
+		boolean active) throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateActive(userId,
 					active);
@@ -358,8 +357,7 @@ public class UserServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserSoap updateAgreedToTermsOfUse(
-		java.lang.String userId, boolean agreedToTermsOfUse)
-		throws RemoteException {
+		long userId, boolean agreedToTermsOfUse) throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateAgreedToTermsOfUse(userId,
 					agreedToTermsOfUse);
@@ -373,9 +371,8 @@ public class UserServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserSoap updatePassword(
-		java.lang.String userId, java.lang.String password1,
-		java.lang.String password2, boolean passwordReset)
-		throws RemoteException {
+		long userId, java.lang.String password1, java.lang.String password2,
+		boolean passwordReset) throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updatePassword(userId,
 					password1, password2, passwordReset);
@@ -388,7 +385,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void updatePortrait(java.lang.String userId, byte[] bytes)
+	public static void updatePortrait(long userId, byte[] bytes)
 		throws RemoteException {
 		try {
 			UserServiceUtil.updatePortrait(userId, bytes);
@@ -399,28 +396,26 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserSoap updateUser(
-		java.lang.String userId, java.lang.String password,
-		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String greeting, java.lang.String resolution,
+	public static com.liferay.portal.model.UserSoap updateUser(long userId,
+		java.lang.String password, java.lang.String screenName,
+		java.lang.String emailAddress, java.lang.String languageId,
+		java.lang.String timeZoneId, java.lang.String greeting,
 		java.lang.String comments, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String nickName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
-		java.lang.String jabberSn, java.lang.String msnSn,
-		java.lang.String skypeSn, java.lang.String ymSn,
-		java.lang.String jobTitle, java.lang.String organizationId,
-		java.lang.String locationId) throws RemoteException {
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String icqSn, java.lang.String jabberSn,
+		java.lang.String msnSn, java.lang.String skypeSn,
+		java.lang.String ymSn, java.lang.String jobTitle,
+		java.lang.String organizationId, java.lang.String locationId)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
 					password, screenName, emailAddress, languageId, timeZoneId,
-					greeting, resolution, comments, firstName, middleName,
-					lastName, nickName, prefixId, suffixId, male,
-					birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
-					icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
-					organizationId, locationId);
+					greeting, comments, firstName, middleName, lastName,
+					prefixId, suffixId, male, birthdayMonth, birthdayDay,
+					birthdayYear, smsSn, aimSn, icqSn, jabberSn, msnSn,
+					skypeSn, ymSn, jobTitle, organizationId, locationId);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}

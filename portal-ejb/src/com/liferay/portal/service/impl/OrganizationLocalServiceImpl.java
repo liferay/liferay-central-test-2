@@ -67,17 +67,15 @@ import java.util.List;
 public class OrganizationLocalServiceImpl
 	extends OrganizationLocalServiceBaseImpl {
 
-	public void addGroupOrganizations(
-			long groupId, String[] organizationIds)
+	public void addGroupOrganizations(long groupId, String[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.addOrganizations(groupId, organizationIds);
 	}
 
 	public Organization addOrganization(
-			String userId, String parentOrganizationId, String name,
-			String regionId, String countryId, int statusId,
-			boolean location)
+			long userId, String parentOrganizationId, String name,
+			String regionId, String countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		// Organization
@@ -118,8 +116,7 @@ public class OrganizationLocalServiceImpl
 		return organization;
 	}
 
-	public void addOrganizationResources(
-			String userId, Organization organization)
+	public void addOrganizationResources(long userId, Organization organization)
 		throws PortalException, SystemException {
 
 		String name = Organization.class.getName();
@@ -240,7 +237,7 @@ public class OrganizationLocalServiceImpl
 		}
 	}
 
-	public List getUserOrganizations(String userId)
+	public List getUserOrganizations(long userId)
 		throws PortalException, SystemException {
 
 		return UserUtil.getOrganizations(userId);

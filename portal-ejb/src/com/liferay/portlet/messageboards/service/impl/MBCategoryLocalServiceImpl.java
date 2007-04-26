@@ -75,7 +75,7 @@ import org.apache.lucene.search.TermQuery;
 public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 	public MBCategory addCategory(
-			String userId, String plid, String parentCategoryId, String name,
+			long userId, String plid, String parentCategoryId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -87,7 +87,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public MBCategory addCategory(
-			String userId, String plid, String parentCategoryId, String name,
+			long userId, String plid, String parentCategoryId, String name,
 			String description, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -98,7 +98,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public MBCategory addCategory(
-			String userId, String plid, String parentCategoryId, String name,
+			long userId, String plid, String parentCategoryId, String name,
 			String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
@@ -304,7 +304,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			category = MBCategoryUtil.create(categoryId);
 
 			category.setCompanyId(categoryId);
-			category.setUserId(categoryId);
+			//category.setUserId(categoryId);
 
 			MBCategoryUtil.update(category);
 		}
@@ -569,14 +569,14 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		MBCategoryUtil.remove(fromCategory.getCategoryId());
 	}
 
-	public void subscribeCategory(String userId, String categoryId)
+	public void subscribeCategory(long userId, String categoryId)
 		throws PortalException, SystemException {
 
 		SubscriptionLocalServiceUtil.addSubscription(
 			userId, MBCategory.class.getName(), categoryId);
 	}
 
-	public void unsubscribeCategory(String userId, String categoryId)
+	public void unsubscribeCategory(long userId, String categoryId)
 		throws PortalException, SystemException {
 
 		SubscriptionLocalServiceUtil.deleteSubscription(

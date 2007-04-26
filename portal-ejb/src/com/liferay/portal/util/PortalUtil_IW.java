@@ -363,24 +363,24 @@ public class PortalUtil_IW {
 		return PortalUtil.getUser(req);
 	}
 
-	public java.lang.String getUserId(javax.servlet.http.HttpServletRequest req) {
+	public long getUserId(javax.servlet.http.HttpServletRequest req) {
 		return PortalUtil.getUserId(req);
 	}
 
-	public java.lang.String getUserId(javax.portlet.ActionRequest req) {
+	public long getUserId(javax.portlet.ActionRequest req) {
 		return PortalUtil.getUserId(req);
 	}
 
-	public java.lang.String getUserId(javax.portlet.RenderRequest req) {
+	public long getUserId(javax.portlet.RenderRequest req) {
 		return PortalUtil.getUserId(req);
 	}
 
-	public java.lang.String getUserName(java.lang.String userId,
+	public java.lang.String getUserName(long userId,
 		java.lang.String defaultUserName) {
 		return PortalUtil.getUserName(userId, defaultUserName);
 	}
 
-	public java.lang.String getUserName(java.lang.String userId,
+	public java.lang.String getUserName(long userId,
 		java.lang.String defaultUserName,
 		javax.servlet.http.HttpServletRequest req) {
 		return PortalUtil.getUserName(userId, defaultUserName, req);
@@ -419,7 +419,7 @@ public class PortalUtil_IW {
 		return PortalUtil.isLayoutSitemapable(layout);
 	}
 
-	public boolean isOmniadmin(java.lang.String userId) {
+	public boolean isOmniadmin(long userId) {
 		return PortalUtil.isOmniadmin(userId);
 	}
 

@@ -54,7 +54,7 @@ public class TagsPropertyLocalServiceImpl
 	extends TagsPropertyLocalServiceBaseImpl {
 
 	public TagsProperty addProperty(
-			String userId, long entryId, String key, String value)
+			long userId, long entryId, String key, String value)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -82,7 +82,7 @@ public class TagsPropertyLocalServiceImpl
 	}
 
 	public TagsProperty addProperty(
-			String userId, String entryName, String key, String value)
+			long userId, String entryName, String key, String value)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);

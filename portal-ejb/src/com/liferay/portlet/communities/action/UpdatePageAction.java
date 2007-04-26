@@ -128,7 +128,7 @@ public class UpdatePageAction extends JSONAction {
 			(LayoutTypePortlet)layout.getLayoutType();
 
 		layoutTypePortlet.setLayoutTemplateId(
-			null, PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_TEMPLATE_ID), false);
+			0, PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_TEMPLATE_ID), false);
 
 		LayoutServiceUtil.updateLayout(
 			layout.getLayoutId(), layout.getOwnerId(),

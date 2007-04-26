@@ -45,10 +45,9 @@ public class UserSearch extends SearchContainer {
 
 	static {
 		headerNames.add("name");
-		headerNames.add("user-id");
 		headerNames.add("screen-name");
 		headerNames.add("email-address");
-		//headerNames.add("job-title");
+		headerNames.add("job-title");
 		headerNames.add("location");
 		//headerNames.add("city");
 		headerNames.add("region");
@@ -75,8 +74,6 @@ public class UserSearch extends SearchContainer {
 			searchTerms.setActive(true);
 		}
 
-		iteratorURL.setParameter(
-			UserDisplayTerms.USER_ID, displayTerms.getUserId());
 		iteratorURL.setParameter(
 			UserDisplayTerms.FIRST_NAME, displayTerms.getFirstName());
 		iteratorURL.setParameter(

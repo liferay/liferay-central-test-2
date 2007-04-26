@@ -34,17 +34,15 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="prefsKey" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="prefsValue" type="tns:string"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="exportLayouts" qname="operNS:exportLayouts" returnQName="exportLayoutsReturn" returnType="rtns:base64Binary" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="ownerId" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="exportPortletPreferences" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="exportPortletData" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="exportPermissions" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="exportTheme" type="tns:boolean"></parameter>
-		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="setLayouts" qname="operNS:setLayouts" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="ownerId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentLayoutId" type="tns:string"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="layoutIds" type="tns:ArrayOf_xsd_string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateLayout" qname="operNS:updateLayout" returnQName="updateLayoutReturn" returnType="rtns:LayoutSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="layoutId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="ownerId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="typeSettings" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateLayout" qname="operNS:updateLayout" returnQName="updateLayoutReturn" returnType="rtns:LayoutSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="layoutId" type="tns:string"></parameter>
@@ -58,11 +56,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="friendlyURL" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="iconImage" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="iconBytes" type="tns:base64Binary"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateLayout" qname="operNS:updateLayout" returnQName="updateLayoutReturn" returnType="rtns:LayoutSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="layoutId" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="ownerId" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="typeSettings" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateLayout" qname="operNS:updateLayout" returnQName="updateLayoutReturn" returnType="rtns:LayoutSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="layoutId" type="tns:string"></parameter>
@@ -88,7 +81,17 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="languageId" type="tns:string"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="updateLayout addLayout updateName updateLookAndFeel exportLayouts getLayoutName setLayouts getLayoutReferences deleteLayout"/>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateParentLayoutId" qname="operNS:updateParentLayoutId" returnQName="updateParentLayoutIdReturn" returnType="rtns:LayoutSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="layoutId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="ownerId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentLayoutId" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updatePriority" qname="operNS:updatePriority" returnQName="updatePriorityReturn" returnType="rtns:LayoutSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="layoutId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="ownerId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:int"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="updateLayout addLayout updateName updateLookAndFeel updateParentLayoutId updatePriority getLayoutName setLayouts getLayoutReferences deleteLayout"/>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_LayoutReference" type="java:com.liferay.portal.model.LayoutReference[]" innerType="cmp-ns:LayoutReference" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:LayoutSoap" type="java:com.liferay.portal.model.LayoutSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>

@@ -48,7 +48,6 @@ import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ImageUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 import java.awt.image.BufferedImage;
 
@@ -70,7 +69,7 @@ import javax.imageio.ImageIO;
 public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public IGImage addImage(
-			String userId, String folderId, String description, File file,
+			long userId, String folderId, String description, File file,
 			String contentType, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -82,7 +81,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage addImage(
-			String userId, String folderId, String description, File file,
+			long userId, String folderId, String description, File file,
 			String contentType, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -93,7 +92,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage addImage(
-			String userId, String folderId, String description, File file,
+			long userId, String folderId, String description, File file,
 			String contentType, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
@@ -268,11 +267,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return IGImageFinder.findByGroupId(groupId, begin, end);
 	}
 
-	public List getGroupImages(
-			long groupId, String userId, int begin, int end)
+	public List getGroupImages(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
-		if (Validator.isNull(userId)) {
+		if (userId <= 0) {
 			return IGImageFinder.findByGroupId(groupId, begin, end);
 		}
 		else {
@@ -284,10 +282,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return IGImageFinder.countByGroupId(groupId);
 	}
 
-	public int getGroupImagesCount(long groupId, String userId)
+	public int getGroupImagesCount(long groupId, long userId)
 		throws SystemException {
 
-		if (Validator.isNull(userId)) {
+		if (userId <= 0) {
 			return IGImageFinder.countByGroupId(groupId);
 		}
 		else {

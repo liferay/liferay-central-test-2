@@ -67,7 +67,7 @@ public class BookmarksEntryLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String userId, long folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -79,7 +79,7 @@ public class BookmarksEntryLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String userId, long folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
@@ -92,7 +92,7 @@ public class BookmarksEntryLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String userId, long folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
@@ -194,9 +194,8 @@ public class BookmarksEntryLocalServiceEJBImpl
 			begin, end);
 	}
 
-	public java.util.List getGroupEntries(long groupId,
-		java.lang.String userId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public java.util.List getGroupEntries(long groupId, long userId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		return BookmarksEntryLocalServiceFactory.getTxImpl().getGroupEntries(groupId,
 			userId, begin, end);
 	}
@@ -207,7 +206,7 @@ public class BookmarksEntryLocalServiceEJBImpl
 												.getGroupEntriesCount(groupId);
 	}
 
-	public int getGroupEntriesCount(long groupId, java.lang.String userId)
+	public int getGroupEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		return BookmarksEntryLocalServiceFactory.getTxImpl()
 												.getGroupEntriesCount(groupId,

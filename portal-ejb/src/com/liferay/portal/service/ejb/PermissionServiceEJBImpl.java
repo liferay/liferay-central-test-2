@@ -72,7 +72,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			actionId, resourceId);
 	}
 
-	public boolean hasUserPermissions(java.lang.String userId, long groupId,
+	public boolean hasUserPermissions(long userId, long groupId,
 		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.PortalException, 
@@ -121,7 +121,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			name, scope, primKey, actionId);
 	}
 
-	public void setUserPermissions(java.lang.String userId, long groupId,
+	public void setUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -158,7 +158,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			groupId, name, scope, actionId);
 	}
 
-	public void unsetUserPermissions(java.lang.String userId, long groupId,
+	public void unsetUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

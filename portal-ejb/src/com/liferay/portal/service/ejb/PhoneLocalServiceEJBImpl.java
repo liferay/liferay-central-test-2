@@ -65,7 +65,7 @@ public class PhoneLocalServiceEJBImpl implements PhoneLocalService, SessionBean 
 			begin, end);
 	}
 
-	public com.liferay.portal.model.Phone addPhone(java.lang.String userId,
+	public com.liferay.portal.model.Phone addPhone(long userId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String number, java.lang.String extension, int typeId,
 		boolean primary)

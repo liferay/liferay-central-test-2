@@ -76,7 +76,7 @@ public class EditPreferencesAction extends PortletAction {
 			return;
 		}
 
-		String userId = PortalUtil.getUserId(req);
+		long userId = PortalUtil.getUserId(req);
 
 		PortletPreferences prefs = req.getPreferences();
 
@@ -142,8 +142,7 @@ public class EditPreferencesAction extends PortletAction {
 
 			try {
 				MailServiceUtil.addForward(
-					req.getRemoteUser(), filterObjects, emailAddresses,
-					leaveCopy);
+					userId, filterObjects, emailAddresses, leaveCopy);
 			}
 			catch (SystemException se) {
 				throw new PortletException(se);
@@ -189,8 +188,7 @@ public class EditPreferencesAction extends PortletAction {
 
 			try {
 				MailServiceUtil.addForward(
-					req.getRemoteUser(), filterObjects, emailAddresses,
-					leaveCopy);
+					userId, filterObjects, emailAddresses, leaveCopy);
 			}
 			catch (SystemException se) {
 				throw new PortletException(se);

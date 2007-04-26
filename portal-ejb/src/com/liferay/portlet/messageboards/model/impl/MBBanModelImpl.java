@@ -57,11 +57,11 @@ public class MBBanModelImpl extends BaseModelImpl {
 			{ "banId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.VARCHAR) },
-			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "banUserId", new Integer(Types.VARCHAR) }
+			{ "banUserId", new Integer(Types.BIGINT) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBBan"),
@@ -69,14 +69,8 @@ public class MBBanModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBBan.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBBan.userId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBBan.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BANUSERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBBan.banUserId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBBanModel"));
@@ -129,19 +123,12 @@ public class MBBanModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getUserId() {
-		return GetterUtil.getString(_userId);
+	public long getUserId() {
+		return _userId;
 	}
 
-	public void setUserId(String userId) {
-		if (((userId == null) && (_userId != null)) ||
-				((userId != null) && (_userId == null)) ||
-				((userId != null) && (_userId != null) &&
-				!userId.equals(_userId))) {
-			if (!XSS_ALLOW_USERID) {
-				userId = XSSUtil.strip(userId);
-			}
-
+	public void setUserId(long userId) {
+		if (userId != _userId) {
 			_userId = userId;
 		}
 	}
@@ -189,19 +176,12 @@ public class MBBanModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getBanUserId() {
-		return GetterUtil.getString(_banUserId);
+	public long getBanUserId() {
+		return _banUserId;
 	}
 
-	public void setBanUserId(String banUserId) {
-		if (((banUserId == null) && (_banUserId != null)) ||
-				((banUserId != null) && (_banUserId == null)) ||
-				((banUserId != null) && (_banUserId != null) &&
-				!banUserId.equals(_banUserId))) {
-			if (!XSS_ALLOW_BANUSERID) {
-				banUserId = XSSUtil.strip(banUserId);
-			}
-
+	public void setBanUserId(long banUserId) {
+		if (banUserId != _banUserId) {
 			_banUserId = banUserId;
 		}
 	}
@@ -270,9 +250,9 @@ public class MBBanModelImpl extends BaseModelImpl {
 	private long _banId;
 	private long _groupId;
 	private String _companyId;
-	private String _userId;
+	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _banUserId;
+	private long _banUserId;
 }

@@ -109,10 +109,10 @@ public class EditUserRolesAction extends PortletAction {
 		long groupId = ParamUtil.getLong(req, "groupId");
 		String roleId = ParamUtil.getString(req, "roleId");
 
-		String[] addUserIds = StringUtil.split(
-			ParamUtil.getString(req, "addUserIds"));
-		String[] removeUserIds = StringUtil.split(
-			ParamUtil.getString(req, "removeUserIds"));
+		long[] addUserIds = StringUtil.split(
+			ParamUtil.getString(req, "addUserIds"), 0L);
+		long[] removeUserIds = StringUtil.split(
+			ParamUtil.getString(req, "removeUserIds"), 0L);
 
 		UserGroupRoleServiceUtil.addUserGroupRoles(addUserIds, groupId, roleId);
 		UserGroupRoleServiceUtil.deleteUserGroupRoles(

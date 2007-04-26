@@ -28,7 +28,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK;
 
 import com.liferay.util.GetterUtil;
-import com.liferay.util.XSSUtil;
 
 import java.sql.Types;
 
@@ -58,16 +57,13 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBStatsUser";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "groupId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.BIGINT) },
 			{ "messageCount", new Integer(Types.INTEGER) },
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBStatsUser"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBStatsUser.userId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBStatsUserModel"));
 
@@ -93,19 +89,12 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getUserId() {
-		return GetterUtil.getString(_userId);
+	public long getUserId() {
+		return _userId;
 	}
 
-	public void setUserId(String userId) {
-		if (((userId == null) && (_userId != null)) ||
-				((userId != null) && (_userId == null)) ||
-				((userId != null) && (_userId != null) &&
-				!userId.equals(_userId))) {
-			if (!XSS_ALLOW_USERID) {
-				userId = XSSUtil.strip(userId);
-			}
-
+	public void setUserId(long userId) {
+		if (userId != _userId) {
 			_userId = userId;
 		}
 	}
@@ -199,7 +188,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 	}
 
 	private long _groupId;
-	private String _userId;
+	private long _userId;
 	private int _messageCount;
 	private Date _lastPostDate;
 }

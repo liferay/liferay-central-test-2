@@ -84,12 +84,10 @@ public class CompanyServiceJSON {
 	}
 
 	public static void updateDisplay(java.lang.String companyId,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String resolution)
+		java.lang.String languageId, java.lang.String timeZoneId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		CompanyServiceUtil.updateDisplay(companyId, languageId, timeZoneId,
-			resolution);
+		CompanyServiceUtil.updateDisplay(companyId, languageId, timeZoneId);
 	}
 
 	public static void updateSecurity(java.lang.String companyId,

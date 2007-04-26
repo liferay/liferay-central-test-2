@@ -51,15 +51,7 @@ import java.util.List;
 public class UserGroupRoleJSONSerializer {
 	public static JSONObject toJSONObject(UserGroupRole model) {
 		JSONObject jsonObj = new JSONObject();
-		String userId = model.getUserId();
-
-		if (userId == null) {
-			jsonObj.put("userId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userId", userId.toString());
-		}
-
+		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("groupId", model.getGroupId());
 
 		String roleId = model.getRoleId();

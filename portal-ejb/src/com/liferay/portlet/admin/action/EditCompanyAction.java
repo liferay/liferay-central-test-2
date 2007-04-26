@@ -112,11 +112,10 @@ public class EditCompanyAction extends PortletAction {
 
 		String languageId = ParamUtil.getString(req, "languageId");
 		String timeZoneId = ParamUtil.getString(req, "timeZoneId");
-		String resolution = ParamUtil.getString(req, "resolution");
 		boolean communityLogo = ParamUtil.getBoolean(req, "communityLogo");
 
 		CompanyServiceUtil.updateDisplay(
-			company.getCompanyId(), languageId, timeZoneId, resolution);
+			company.getCompanyId(), languageId, timeZoneId);
 
 		CompanyServiceUtil.updateSecurity(
 			company.getCompanyId(), company.getAuthType(),

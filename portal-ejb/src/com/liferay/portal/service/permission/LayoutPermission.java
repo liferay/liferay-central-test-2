@@ -112,7 +112,7 @@ public class LayoutPermission {
 			}
 
 			ResourceLocalServiceUtil.addResources(
-				layout.getCompanyId(), layout.getGroupId(), null,
+				layout.getCompanyId(), layout.getGroupId(), 0,
 				Layout.class.getName(), layout.getPrimaryKey().toString(),
 				false, addCommunityPermission, addGuestPermission);
 		}

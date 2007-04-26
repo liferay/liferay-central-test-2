@@ -62,14 +62,7 @@ public class PollsVoteJSONSerializer {
 			jsonObj.put("questionId", questionId.toString());
 		}
 
-		String userId = model.getUserId();
-
-		if (userId == null) {
-			jsonObj.put("userId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userId", userId.toString());
-		}
+		jsonObj.put("userId", model.getUserId());
 
 		String choiceId = model.getChoiceId();
 

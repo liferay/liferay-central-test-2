@@ -230,7 +230,7 @@ public class LayoutCache  {
 			}
 			catch (NoSuchResourceException nsre) {
 				ResourceLocalServiceUtil.addResources(
-					companyId, groupId, null, resourceName, resourcePrimKey,
+					companyId, groupId, 0, resourceName, resourcePrimKey,
 					portletActions, true, true);
 
 				resource = ResourceLocalServiceUtil.getResource(
@@ -272,8 +272,8 @@ public class LayoutCache  {
 			params.put("usersGroups", new Long(groupId));
 
 			users = UserLocalServiceUtil.search(
-				companyId, null, null, null, null, null, emailAddress, true,
-				params, true, 0, 1, null);
+				companyId, null, null, null, null, emailAddress, true, params,
+				true, 0, 1, null);
 
 			usersMap.put(emailAddress, users);
 		}
@@ -286,15 +286,17 @@ public class LayoutCache  {
 		}
 	}
 
-	protected List getUserRoles(String userId)
+	protected List getUserRoles(long userId)
 		throws PortalException, SystemException {
 
-		List userRoles = (List)userRolesMap.get(userId);
+		Long userIdObj = new Long(userId);
+
+		List userRoles = (List)userRolesMap.get(userIdObj);
 
 		if (userRoles == null) {
 			userRoles = RoleLocalServiceUtil.getUserRoles(userId);
 
-			userRolesMap.put(userId, userRoles);
+			userRolesMap.put(userIdObj, userRoles);
 		}
 
 		return userRoles;

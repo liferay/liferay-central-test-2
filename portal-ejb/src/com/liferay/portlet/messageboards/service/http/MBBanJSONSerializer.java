@@ -65,14 +65,7 @@ public class MBBanJSONSerializer {
 			jsonObj.put("companyId", companyId.toString());
 		}
 
-		String userId = model.getUserId();
-
-		if (userId == null) {
-			jsonObj.put("userId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userId", userId.toString());
-		}
+		jsonObj.put("userId", model.getUserId());
 
 		String userName = model.getUserName();
 
@@ -101,14 +94,7 @@ public class MBBanJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String banUserId = model.getBanUserId();
-
-		if (banUserId == null) {
-			jsonObj.put("banUserId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("banUserId", banUserId.toString());
-		}
+		jsonObj.put("banUserId", model.getBanUserId());
 
 		return jsonObj;
 	}

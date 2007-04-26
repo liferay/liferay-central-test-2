@@ -24,7 +24,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userGroupId" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getUserUserGroups" qname="operNS:getUserUserGroups" returnQName="getUserUserGroupsReturn" returnType="rtns:ArrayOf_tns2_UserGroupSoap" returnItemType="tns2:UserGroupSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetGroupUserGroups" qname="operNS:unsetGroupUserGroups" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>

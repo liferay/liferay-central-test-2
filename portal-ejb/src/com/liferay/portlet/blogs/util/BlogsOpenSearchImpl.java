@@ -85,7 +85,7 @@ public class BlogsOpenSearchImpl extends BaseOpenSearchImpl {
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		Hits hits = BlogsEntryLocalServiceUtil.search(
-			themeDisplay.getCompanyId(), 0, null, null, keywords);
+			themeDisplay.getCompanyId(), 0, 0, null, keywords);
 
 		Object[] values = addSearchResults(
 			keywords, startPage, itemsPerPage, hits,

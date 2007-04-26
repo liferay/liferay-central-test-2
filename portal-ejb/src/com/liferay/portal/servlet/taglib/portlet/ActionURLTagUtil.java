@@ -54,7 +54,7 @@ public class ActionURLTagUtil {
 	public static String doEndTag(
 			boolean action, String windowState, String portletMode, String var,
 			String varImpl, Boolean secure, String portletName, Boolean anchor,
-			Boolean encrypt, String doAsUserId, Boolean portletConfiguration,
+			Boolean encrypt, long doAsUserId, Boolean portletConfiguration,
 			Map params, boolean writeOutput, PageContext pageContext)
 		throws JspException {
 
@@ -116,7 +116,7 @@ public class ActionURLTagUtil {
 				portletURL.setEncrypt(encrypt.booleanValue());
 			}
 
-			if (Validator.isNotNull(doAsUserId)) {
+			if (doAsUserId > 0) {
 				portletURL.setDoAsUserId(doAsUserId);
 			}
 

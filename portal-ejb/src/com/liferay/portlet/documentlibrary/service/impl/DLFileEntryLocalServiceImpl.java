@@ -87,7 +87,7 @@ public class DLFileEntryLocalServiceImpl
 	extends DLFileEntryLocalServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
-			String userId, String folderId, String name, String title,
+			long userId, String folderId, String name, String title,
 			String description, String[] tagsEntries, String extraSettings,
 			File file, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
@@ -100,7 +100,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry addFileEntry(
-			String userId, String folderId, String name, String title,
+			long userId, String folderId, String name, String title,
 			String description, String[] tagsEntries, String extraSettings,
 			byte[] byteArray, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
@@ -113,7 +113,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry addFileEntry(
-			String userId, String folderId, String name, String title,
+			long userId, String folderId, String name, String title,
 			String description, String[] tagsEntries, String extraSettings,
 			File file, String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -125,7 +125,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry addFileEntry(
-			String userId, String folderId, String name, String title,
+			long userId, String folderId, String name, String title,
 			String description, String[] tagsEntries, String extraSettings,
 			byte[] byteArray, String[] communityPermissions,
 			String[] guestPermissions)
@@ -138,7 +138,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry addFileEntry(
-			String userId, String folderId, String name, String title,
+			long userId, String folderId, String name, String title,
 			String description,	String[] tagsEntries, String extraSettings,
 			File file, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
@@ -175,7 +175,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry addFileEntry(
-			String userId, String folderId, String name, String title,
+			long userId, String folderId, String name, String title,
 			String description,	String[] tagsEntries, String extraSettings,
 			byte[] byteArray, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
@@ -195,7 +195,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry addFileEntry(
-			String userId, String folderId, String name, String title,
+			long userId, String folderId, String name, String title,
 			String description,	String[] tagsEntries, String extraSettings,
 			InputStream is, long size, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
@@ -434,18 +434,18 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public InputStream getFileAsStream(
-			String companyId, String userId, String folderId, String name)
+			String companyId, long userId, String folderId, String name)
 		throws PortalException, SystemException {
 
 		return getFileAsStream(companyId, userId, folderId, name, -1);
 	}
 
 	public InputStream getFileAsStream(
-			String companyId, String userId, String folderId, String name,
+			String companyId, long userId, String folderId, String name,
 			double version)
 		throws PortalException, SystemException {
 
-		if (Validator.isNotNull(userId)) {
+		if (userId > 0) {
 			DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 
 			DLFileRankLocalServiceUtil.updateFileRank(
@@ -537,10 +537,10 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public List getGroupFileEntries(
-			long groupId, String userId, int begin, int end)
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
-		if (Validator.isNull(userId)) {
+		if (userId <= 0) {
 			return DLFileEntryFinder.findByGroupId(groupId, begin, end);
 		}
 		else {
@@ -552,10 +552,10 @@ public class DLFileEntryLocalServiceImpl
 		return DLFileEntryFinder.countByGroupId(groupId);
 	}
 
-	public int getGroupFileEntriesCount(long groupId, String userId)
+	public int getGroupFileEntriesCount(long groupId, long userId)
 		throws SystemException {
 
-		if (Validator.isNull(userId)) {
+		if (userId <= 0) {
 			return DLFileEntryFinder.countByGroupId(groupId);
 		}
 		else {
@@ -564,7 +564,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry updateFileEntry(
-			String userId, String folderId, String newFolderId, String name,
+			long userId, String folderId, String newFolderId, String name,
 			String sourceFileName, String title, String description,
 			String[] tagsEntries, String extraSettings, File file)
 		throws PortalException, SystemException {
@@ -599,7 +599,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry updateFileEntry(
-			String userId, String folderId, String newFolderId, String name,
+			long userId, String folderId, String newFolderId, String name,
 			String sourceFileName, String title, String description,
 			String[] tagsEntries, String extraSettings, byte[] byteArray)
 		throws PortalException, SystemException {
@@ -618,7 +618,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry updateFileEntry(
-			String userId, String folderId, String newFolderId, String name,
+			long userId, String folderId, String newFolderId, String name,
 			String sourceFileName, String title, String description,
 			String[] tagsEntries, String extraSettings, InputStream is,
 			long size)
@@ -735,8 +735,11 @@ public class DLFileEntryLocalServiceImpl
 		DLFileVersion fileVersion = DLFileVersionUtil.create(
 			new DLFileVersionPK(folderId, name, oldVersion));
 
-		String versionUserId = GetterUtil.getString(
-			fileEntry.getVersionUserId(), fileEntry.getUserId());
+		long versionUserId = fileEntry.getVersionUserId();
+
+		if (versionUserId <= 0) {
+			versionUserId = fileEntry.getUserId();
+		}
 
 		String versionUserName = GetterUtil.getString(
 			fileEntry.getVersionUserName(), fileEntry.getUserName());

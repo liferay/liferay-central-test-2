@@ -41,7 +41,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
-import com.liferay.util.Validator;
 
 import java.io.IOException;
 
@@ -168,11 +167,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		return MBThreadFinder.findByGroupId(groupId, begin, end);
 	}
 
-	public List getGroupThreads(
-			long groupId, String userId, int begin, int end)
+	public List getGroupThreads(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
-		if (Validator.isNull(userId)) {
+		if (userId <= 0) {
 			return MBThreadFinder.findByGroupId(groupId, begin, end);
 		}
 		else {
@@ -184,10 +182,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		return MBThreadFinder.countByGroupId(groupId);
 	}
 
-	public int getGroupThreadsCount(long groupId, String userId)
+	public int getGroupThreadsCount(long groupId, long userId)
 		throws SystemException {
 
-		if (Validator.isNull(userId)) {
+		if (userId <= 0) {
 			return MBThreadFinder.countByGroupId(groupId);
 		}
 		else {
@@ -211,10 +209,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		return MBThreadUtil.countByCategoryId(categoryId);
 	}
 
-	public boolean hasReadThread(String userId, String threadId)
+	public boolean hasReadThread(long userId, String threadId)
 		throws SystemException {
 
-		if (userId == null) {
+		if (userId <= 0) {
 
 			// Unauthenticated users do not have a record of read messages
 

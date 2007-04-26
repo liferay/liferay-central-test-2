@@ -1029,7 +1029,7 @@ public class ServiceBuilder {
 				sm.append(col.getName() + ".toString()");
 			}
 			else {
-				sm.append(col.getName());
+				sm.append("String.valueOf(" + col.getName() + ")");
 			}
 		}
 

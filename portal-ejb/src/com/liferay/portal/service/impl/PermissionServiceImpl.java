@@ -68,7 +68,7 @@ public class PermissionServiceImpl
 	}
 
 	public boolean hasUserPermissions(
-			String userId, long groupId, String actionId, long[] resourceIds,
+			long userId, long groupId, String actionId, long[] resourceIds,
 			PermissionCheckerBag permissionCheckerBag)
 		throws PortalException, SystemException {
 
@@ -121,7 +121,7 @@ public class PermissionServiceImpl
 	}
 
 	public void setUserPermissions(
-			String userId, long groupId, String[] actionIds,
+			long userId, long groupId, String[] actionIds,
 			long resourceId)
 		throws PortalException, SystemException {
 
@@ -166,8 +166,7 @@ public class PermissionServiceImpl
 	}
 
 	public void unsetUserPermissions(
-			String userId, long groupId, String[] actionIds,
-			long resourceId)
+			long userId, long groupId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
@@ -208,10 +207,12 @@ public class PermissionServiceImpl
 				permissionChecker, layoutGroupId, ActionKeys.MANAGE_LAYOUTS);
 		}
 		else if (name.equals(User.class.getName())) {
-			User user = UserLocalServiceUtil.getUserById(primKey);
+			long userId = GetterUtil.getLong(primKey);
+
+			User user = UserLocalServiceUtil.getUserById(userId);
 
 			UserPermission.check(
-				permissionChecker, primKey,
+				permissionChecker, userId,
 				user.getOrganization().getOrganizationId(),
 				user.getLocation().getOrganizationId(), ActionKeys.PERMISSIONS);
 		}

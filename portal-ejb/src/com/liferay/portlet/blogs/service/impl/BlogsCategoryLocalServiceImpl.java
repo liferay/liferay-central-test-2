@@ -60,9 +60,8 @@ public class BlogsCategoryLocalServiceImpl
 	extends BlogsCategoryLocalServiceBaseImpl {
 
 	public BlogsCategory addCategory(
-			String userId, long parentCategoryId, String name,
-			String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			long userId, long parentCategoryId, String name, String description,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addCategory(
@@ -72,9 +71,8 @@ public class BlogsCategoryLocalServiceImpl
 	}
 
 	public BlogsCategory addCategory(
-			String userId, long parentCategoryId, String name,
-			String description, String[] communityPermissions,
-			String[] guestPermissions)
+			long userId, long parentCategoryId, String name, String description,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addCategory(
@@ -83,10 +81,9 @@ public class BlogsCategoryLocalServiceImpl
 	}
 
 	public BlogsCategory addCategory(
-			String userId, long parentCategoryId, String name,
-			String description, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			long userId, long parentCategoryId, String name, String description,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Category

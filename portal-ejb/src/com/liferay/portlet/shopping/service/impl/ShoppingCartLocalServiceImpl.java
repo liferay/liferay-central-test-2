@@ -67,7 +67,7 @@ public class ShoppingCartLocalServiceImpl
 		ShoppingCartUtil.removeByGroupId(groupId);
 	}
 
-	public void deleteUserCarts(String userId) throws SystemException {
+	public void deleteUserCarts(long userId) throws SystemException {
 		ShoppingCartUtil.removeByUserId(userId);
 	}
 
@@ -118,7 +118,7 @@ public class ShoppingCartLocalServiceImpl
 	}
 
 	public ShoppingCart updateCart(
-			String userId, long groupId, String cartId, String itemIds,
+			long userId, long groupId, String cartId, String itemIds,
 			String couponIds, int altShipping, boolean insure)
 		throws PortalException, SystemException {
 
@@ -188,7 +188,7 @@ public class ShoppingCartLocalServiceImpl
 			cart = ShoppingCartUtil.create(cartId);
 
 			cart.setGroupId(groupId);
-			cart.setCompanyId(user.getActualCompanyId());
+			cart.setCompanyId(user.getCompanyId());
 			cart.setUserId(userId);
 			cart.setUserName(user.getFullName());
 			cart.setCreateDate(now);
@@ -201,7 +201,7 @@ public class ShoppingCartLocalServiceImpl
 				cart = ShoppingCartUtil.create(cartId);
 
 				cart.setGroupId(groupId);
-				cart.setCompanyId(user.getActualCompanyId());
+				cart.setCompanyId(user.getCompanyId());
 				cart.setUserId(userId);
 				cart.setUserName(user.getFullName());
 				cart.setCreateDate(now);

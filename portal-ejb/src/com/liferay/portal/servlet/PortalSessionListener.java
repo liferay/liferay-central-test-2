@@ -73,23 +73,23 @@ public class PortalSessionListener implements HttpSessionListener {
 
 		try {
 			String companyId = (String)ses.getAttribute(WebKeys.COMPANY_ID);
-			String userId = (String)ses.getAttribute(WebKeys.USER_ID);
+			Long userIdObj = (Long)ses.getAttribute(WebKeys.USER_ID);
 
 			if (companyId == null) {
 				_log.warn("Company id is not in the session");
 			}
 
-			if (userId == null) {
+			if (userIdObj == null) {
 				_log.warn("User id is not in the session");
 			}
 
-			if ((companyId == null) || (userId == null)) {
+			if ((companyId == null) || (userIdObj == null)) {
 				return;
 			}
 
 			MailSessionLock.cleanUp(ses);
 
-			LiveUsers.signOut(ses.getId(), userId);
+			LiveUsers.signOut(ses.getId(), userIdObj.longValue());
 		}
 		catch (IllegalStateException ise) {
 			_log.warn("Please upgrade to a servlet 2.4 compliant container");

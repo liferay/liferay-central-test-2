@@ -70,16 +70,11 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class UserGroupRoleServiceHttp {
 	public static void addUserGroupRoles(HttpPrincipal httpPrincipal,
-		java.lang.String userId, long groupId, java.lang.String[] roleIds)
+		long userId, long groupId, java.lang.String[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = roleIds;
 
@@ -113,14 +108,14 @@ public class UserGroupRoleServiceHttp {
 	}
 
 	public static void addUserGroupRoles(HttpPrincipal httpPrincipal,
-		java.lang.String[] userIds, long groupId, java.lang.String roleId)
+		long[] userIds, long groupId, java.lang.String roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = userIds;
 
 			if (userIds == null) {
-				paramObj0 = new NullWrapper("[Ljava.lang.String;");
+				paramObj0 = new NullWrapper("[J");
 			}
 
 			Object paramObj1 = new LongWrapper(groupId);
@@ -156,16 +151,11 @@ public class UserGroupRoleServiceHttp {
 	}
 
 	public static void deleteUserGroupRoles(HttpPrincipal httpPrincipal,
-		java.lang.String userId, long groupId, java.lang.String[] roleIds)
+		long userId, long groupId, java.lang.String[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = roleIds;
 
@@ -199,14 +189,14 @@ public class UserGroupRoleServiceHttp {
 	}
 
 	public static void deleteUserGroupRoles(HttpPrincipal httpPrincipal,
-		java.lang.String[] userIds, long groupId, java.lang.String roleId)
+		long[] userIds, long groupId, java.lang.String roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = userIds;
 
 			if (userIds == null) {
-				paramObj0 = new NullWrapper("[Ljava.lang.String;");
+				paramObj0 = new NullWrapper("[J");
 			}
 
 			Object paramObj1 = new LongWrapper(groupId);

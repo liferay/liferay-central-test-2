@@ -233,7 +233,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			userTracker.addPath(userTrackerPath);
 		}
 
-		String userId = req.getRemoteUser();
+		String remoteUser = req.getRemoteUser();
 
 		User user = null;
 
@@ -298,7 +298,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users can always log out
 
-		if ((userId != null || user != null) && (path != null) &&
+		if ((remoteUser != null || user != null) && (path != null) &&
 			(path.equals(_PATH_PORTAL_LOGOUT))) {
 
 			return _PATH_PORTAL_LOGOUT;
@@ -306,7 +306,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users can retrieve CSS and JavaScript
 
-		if ((userId != null || user != null) && (path != null) &&
+		if ((remoteUser != null || user != null) && (path != null) &&
 			(path.equals(_PATH_PORTAL_CSS) ||
 			 path.equals(_PATH_PORTAL_CSS_CACHED) ||
 			 path.equals(_PATH_PORTAL_JAVASCRIPT) ||
@@ -317,7 +317,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users can always agree to terms of use
 
-		if ((userId != null || user != null) && (path != null) &&
+		if ((remoteUser != null || user != null) && (path != null) &&
 			(path.equals(_PATH_PORTAL_UPDATE_TERMS_OF_USE))) {
 
 			return _PATH_PORTAL_UPDATE_TERMS_OF_USE;
@@ -325,7 +325,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users must still exist in the system
 
-		if ((userId != null) && (user == null)) {
+		if ((remoteUser != null) && (user == null)) {
 			return _PATH_PORTAL_LOGOUT;
 		}
 
@@ -513,7 +513,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 				if (Validator.isNotNull(portletId)) {
 					portlet = PortletLocalServiceUtil.getPortletById(
-						user.getActualCompanyId(), portletId);
+						user.getCompanyId(), portletId);
 				}
 
 				String strutsPath = path.substring(
@@ -526,7 +526,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				}
 				else {
 					portlet = PortletLocalServiceUtil.getPortletByStrutsPath(
-						user.getActualCompanyId(), strutsPath);
+						user.getCompanyId(), strutsPath);
 				}
 
 				if ((portlet != null) && portlet.isActive()) {

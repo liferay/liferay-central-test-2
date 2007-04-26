@@ -134,7 +134,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 
 			// this gets the default layout of the general guest
 			User user = UserLocalServiceUtil.getDefaultUser(companyId);
-			Layout layout = _getDefaultUserLayout(user.getActualCompanyId());
+			Layout layout = _getDefaultUserLayout(user.getCompanyId());
 
 			RenderRequestImpl renderRequest = RenderRequestFactory.create(httpReq,
 					portlet, cachePortlet, portletCtx, windowState, mode,
@@ -212,7 +212,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 
 			// this gets the default layout of the general guest
 			User user = UserLocalServiceUtil.getDefaultUser(companyId);
-			Layout layout = _getDefaultUserLayout(user.getActualCompanyId());
+			Layout layout = _getDefaultUserLayout(user.getCompanyId());
 
 			ActionRequestImpl actionRequest = ActionRequestFactory.create(httpReq,
 					portlet, cachePortlet, portletCtx, windowState, mode,

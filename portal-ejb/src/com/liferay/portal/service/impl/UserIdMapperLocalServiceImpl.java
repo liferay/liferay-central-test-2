@@ -42,24 +42,23 @@ import java.util.List;
 public class UserIdMapperLocalServiceImpl
 	extends UserIdMapperLocalServiceBaseImpl {
 
-	public void deleteUserIdMappers(String userId) throws SystemException {
+	public void deleteUserIdMappers(long userId) throws SystemException {
 		UserIdMapperUtil.removeByUserId(userId);
 	}
 
-	public UserIdMapper getUserIdMapper(String userId, String type)
+	public UserIdMapper getUserIdMapper(long userId, String type)
 		throws PortalException, SystemException {
 
 		return UserIdMapperUtil.findByPrimaryKey(
 			new UserIdMapperPK(userId, type));
 	}
 
-	public List getUserIdMappers(String userId) throws SystemException {
+	public List getUserIdMappers(long userId) throws SystemException {
 		return UserIdMapperUtil.findByUserId(userId);
 	}
 
 	public UserIdMapper updateUserIdMapper(
-			String userId, String type, String description,
-			String externalUserId)
+			long userId, String type, String description, String externalUserId)
 		throws PortalException, SystemException {
 
 		UserIdMapperPK pk = new UserIdMapperPK(userId, type);

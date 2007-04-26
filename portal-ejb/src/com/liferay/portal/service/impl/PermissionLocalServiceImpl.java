@@ -125,7 +125,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void addUserPermissions(
-			String userId, String[] actionIds, long resourceId)
+			long userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -212,14 +212,14 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		return RoleUtil.getPermissions(roleId);
 	}
 
-	public List getUserPermissions(String userId, long resourceId)
+	public List getUserPermissions(long userId, long resourceId)
 		throws SystemException {
 
 		return PermissionFinder.findByU_R(userId, resourceId);
 	}
 
 	public List getUserPermissions(
-			String userId, String companyId, String name, String scope,
+			long userId, String companyId, String name, String scope,
 			String primKey)
 		throws SystemException {
 
@@ -308,7 +308,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public boolean hasUserPermission(
-			String userId, String actionId, long resourceId)
+			long userId, String actionId, long resourceId)
 		throws PortalException, SystemException {
 
 		Permission permission = null;
@@ -329,8 +329,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public boolean hasUserPermissions(
-			String userId, long groupId, String actionId,
-			long[] resourceIds, PermissionCheckerBag permissionCheckerBag)
+			long userId, long groupId, String actionId, long[] resourceIds,
+			PermissionCheckerBag permissionCheckerBag)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -554,7 +554,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void setUserPermissions(
-			String userId, String[] actionIds, long resourceId)
+			long userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -633,7 +633,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void unsetUserPermissions(
-			String userId, String[] actionIds, long resourceId)
+			long userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		List permissions = PermissionFinder.findByU_A_R(
@@ -700,7 +700,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	protected boolean hasUserPermissions_1(
-			String userId, String actionId, long resourceId, List permissions,
+			long userId, String actionId, long resourceId, List permissions,
 			List groups, long groupId, StopWatch stopWatch, int block)
 		throws PortalException, SystemException {
 
@@ -758,7 +758,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	protected boolean hasUserPermissions_2(
-			String userId, String actionId, long resourceId, List permissions,
+			long userId, String actionId, long resourceId, List permissions,
 			List groups, long groupId, StopWatch stopWatch, int block)
 		throws PortalException, SystemException {
 
@@ -777,7 +777,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	protected boolean hasUserPermissions_3(
-			String userId, String actionId, long resourceId, List permissions,
+			long userId, String actionId, long resourceId, List permissions,
 			List groups, List roles, StopWatch stopWatch, int block)
 		throws PortalException, SystemException {
 
@@ -819,7 +819,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	protected boolean hasUserPermissions_4(
-			String userId, String actionId, long resourceId, List permissions,
+			long userId, String actionId, long resourceId, List permissions,
 			List groups, List roles, StopWatch stopWatch, int block)
 		throws PortalException, SystemException {
 
@@ -838,7 +838,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	protected void logHasUserPermissions(
-		String userId, String actionId, long resourceId, StopWatch stopWatch,
+		long userId, String actionId, long resourceId, StopWatch stopWatch,
 		int block) {
 
 		if (!_log.isDebugEnabled()) {

@@ -61,7 +61,7 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "articleId", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.DOUBLE) },
-			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
@@ -73,7 +73,7 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			{ "templateId", new Integer(Types.VARCHAR) },
 			{ "displayDate", new Integer(Types.TIMESTAMP) },
 			{ "approved", new Integer(Types.BOOLEAN) },
-			{ "approvedByUserId", new Integer(Types.VARCHAR) },
+			{ "approvedByUserId", new Integer(Types.BIGINT) },
 			{ "approvedByUserName", new Integer(Types.VARCHAR) },
 			{ "approvedDate", new Integer(Types.TIMESTAMP) },
 			{ "expired", new Integer(Types.BOOLEAN) },
@@ -88,9 +88,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ARTICLEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.articleId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.userId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.userName"),
@@ -112,9 +109,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TEMPLATEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.templateId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_APPROVEDBYUSERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.approvedByUserId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_APPROVEDBYUSERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.approvedByUserName"),
@@ -190,19 +184,12 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getUserId() {
-		return GetterUtil.getString(_userId);
+	public long getUserId() {
+		return _userId;
 	}
 
-	public void setUserId(String userId) {
-		if (((userId == null) && (_userId != null)) ||
-				((userId != null) && (_userId == null)) ||
-				((userId != null) && (_userId != null) &&
-				!userId.equals(_userId))) {
-			if (!XSS_ALLOW_USERID) {
-				userId = XSSUtil.strip(userId);
-			}
-
+	public void setUserId(long userId) {
+		if (userId != _userId) {
 			_userId = userId;
 		}
 	}
@@ -377,19 +364,12 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getApprovedByUserId() {
-		return GetterUtil.getString(_approvedByUserId);
+	public long getApprovedByUserId() {
+		return _approvedByUserId;
 	}
 
-	public void setApprovedByUserId(String approvedByUserId) {
-		if (((approvedByUserId == null) && (_approvedByUserId != null)) ||
-				((approvedByUserId != null) && (_approvedByUserId == null)) ||
-				((approvedByUserId != null) && (_approvedByUserId != null) &&
-				!approvedByUserId.equals(_approvedByUserId))) {
-			if (!XSS_ALLOW_APPROVEDBYUSERID) {
-				approvedByUserId = XSSUtil.strip(approvedByUserId);
-			}
-
+	public void setApprovedByUserId(long approvedByUserId) {
+		if (approvedByUserId != _approvedByUserId) {
 			_approvedByUserId = approvedByUserId;
 		}
 	}
@@ -556,7 +536,7 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	private long _groupId;
 	private String _articleId;
 	private double _version;
-	private String _userId;
+	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
@@ -568,7 +548,7 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	private String _templateId;
 	private Date _displayDate;
 	private boolean _approved;
-	private String _approvedByUserId;
+	private long _approvedByUserId;
 	private String _approvedByUserName;
 	private Date _approvedDate;
 	private boolean _expired;

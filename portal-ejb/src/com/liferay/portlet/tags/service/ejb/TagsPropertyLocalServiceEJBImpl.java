@@ -67,8 +67,7 @@ public class TagsPropertyLocalServiceEJBImpl implements TagsPropertyLocalService
 	}
 
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
-		java.lang.String userId, long entryId, java.lang.String key,
-		java.lang.String value)
+		long userId, long entryId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return TagsPropertyLocalServiceFactory.getTxImpl().addProperty(userId,
@@ -76,8 +75,8 @@ public class TagsPropertyLocalServiceEJBImpl implements TagsPropertyLocalService
 	}
 
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
-		java.lang.String userId, java.lang.String entryName,
-		java.lang.String key, java.lang.String value)
+		long userId, java.lang.String entryName, java.lang.String key,
+		java.lang.String value)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return TagsPropertyLocalServiceFactory.getTxImpl().addProperty(userId,

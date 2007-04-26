@@ -42,7 +42,7 @@ import java.util.List;
  */
 public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
-	public void deleteFileRanks(String userId) throws SystemException {
+	public void deleteFileRanks(long userId) throws SystemException {
 		DLFileRankUtil.removeByUserId(userId);
 	}
 
@@ -52,15 +52,15 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		DLFileRankUtil.removeByF_N(folderId, name);
 	}
 
-	public List getFileRanks(long groupId, String userId)
+	public List getFileRanks(long groupId, long userId)
 		throws SystemException {
 
 		return DLFileRankFinder.findByG_U(groupId, userId);
 	}
 
 	public DLFileRank updateFileRank(
-			long groupId, String companyId, String userId,
-			String folderId, String name)
+			long groupId, String companyId, long userId, String folderId,
+			String name)
 		throws PortalException, SystemException{
 
 		DLFileRankPK pk = new DLFileRankPK(companyId, userId, folderId, name);

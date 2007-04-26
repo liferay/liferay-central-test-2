@@ -18,7 +18,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="value" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://model.tags.portlet.liferay.com" name="addProperty" qname="operNS:addProperty" returnQName="addPropertyReturn" returnType="rtns:TagsPropertySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="key" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="value" type="tns:string"></parameter>

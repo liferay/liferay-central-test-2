@@ -209,7 +209,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		if (arg.getCurrentFolder().equals("/")) {
 			LinkedHashMap groupParams = new LinkedHashMap();
 
-			groupParams.put("usersGroups", arg.getUserId());
+			groupParams.put("usersGroups", new Long(arg.getUserId()));
 
 			List groups = GroupLocalServiceUtil.search(
 				arg.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,

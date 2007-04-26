@@ -70,7 +70,7 @@ public class CASAutoLogin implements AutoLogin {
 
 				credentials = new String[3];
 
-				credentials[0] = user.getUserId();
+				credentials[0] = String.valueOf(user.getUserId());
 				credentials[1] = user.getPassword();
 				credentials[2] = Boolean.TRUE.toString();
 			}

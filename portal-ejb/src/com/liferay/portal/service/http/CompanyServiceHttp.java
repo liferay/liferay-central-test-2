@@ -191,7 +191,7 @@ public class CompanyServiceHttp {
 
 	public static void updateDisplay(HttpPrincipal httpPrincipal,
 		java.lang.String companyId, java.lang.String languageId,
-		java.lang.String timeZoneId, java.lang.String resolution)
+		java.lang.String timeZoneId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -213,15 +213,9 @@ public class CompanyServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = resolution;
-
-			if (resolution == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
 			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
 					"updateDisplay",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

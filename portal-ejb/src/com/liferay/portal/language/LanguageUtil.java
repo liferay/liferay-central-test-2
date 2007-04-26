@@ -239,8 +239,7 @@ public class LanguageUtil {
 	public static String get(User user, String key, String defaultValue)
 		throws LanguageException {
 
-		return get(
-			user.getActualCompanyId(), user.getLocale(), key, defaultValue);
+		return get(user.getCompanyId(), user.getLocale(), key, defaultValue);
 	}
 
 	public static String get(String companyId, Locale locale, String key)

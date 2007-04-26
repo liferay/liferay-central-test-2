@@ -44,7 +44,7 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 								MBTreeWalker treeWalker,
 								MBThread previousThread, MBThread nextThread,
 								MBThread firstThread, MBThread lastThread,
-								String userId) {
+								long userId) {
 
 		_message = message;
 		_parentMessage = parentMessage;

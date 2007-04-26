@@ -92,7 +92,8 @@ public class MessagingUtil {
 			AccountManager accountManager = con.getAccountManager();
 
 			try {
-				accountManager.createAccount(user.getUserId(), USER_PASSWORD);
+				accountManager.createAccount(
+					String.valueOf(user.getUserId()), USER_PASSWORD);
 			}
 			catch (XMPPException xmppe) {
 			}
@@ -130,6 +131,12 @@ public class MessagingUtil {
 				ses.removeAttribute(WebKeys.JABBER_XMPP_SESSION);
 			}
 		}
+	}
+
+	public static void createXMPPConnection(HttpSession ses, long userId)
+		throws XMPPException {
+
+		createXMPPConnection(ses, String.valueOf(userId));
 	}
 
 	public static void createXMPPConnection(HttpSession ses, String userId)
@@ -327,7 +334,7 @@ public class MessagingUtil {
 	}
 
 	public static String getXmppId(User user) {
-		String xmppId = getXmppId(user.getUserId());
+		String xmppId = getXmppId(String.valueOf(user.getUserId()));
 
 		return xmppId;
 	}

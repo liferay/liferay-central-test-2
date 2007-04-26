@@ -73,19 +73,19 @@ public class LiveUsers {
 		return _instance._getUserTracker(sesId);
 	}
 
-	public static void joinGroup(String userId, long groupId) {
+	public static void joinGroup(long userId, long groupId) {
 		_instance._joinGroup(userId, groupId);
 	}
 
-	public static void joinGroup(String[] userIds, long groupId) {
+	public static void joinGroup(long[] userIds, long groupId) {
 		_instance._joinGroup(userIds, groupId);
 	}
 
-	public static void leaveGroup(String userId, long groupId) {
+	public static void leaveGroup(long userId, long groupId) {
 		_instance._leaveGroup(userId, groupId);
 	}
 
-	public static void leaveGroup(String[] userIds, long groupId) {
+	public static void leaveGroup(long[] userIds, long groupId) {
 		_instance._leaveGroup(userIds, groupId);
 	}
 
@@ -93,7 +93,7 @@ public class LiveUsers {
 		_instance._signIn(req);
 	}
 
-	public static void signOut(String sesId, String userId)
+	public static void signOut(String sesId, long userId)
 		throws SystemException {
 
 		_instance._signOut(sesId, userId);
@@ -102,7 +102,7 @@ public class LiveUsers {
 	private LiveUsers() {
 	}
 
-	private void _addUserTracker(String userId, UserTracker userTracker) {
+	private void _addUserTracker(long userId, UserTracker userTracker) {
 		List userTrackers = _getUserTrackers(userId);
 
 		if (userTrackers != null) {
@@ -115,7 +115,7 @@ public class LiveUsers {
 
 			Map userTrackersMap = _getUserTrackersMap();
 
-			userTrackersMap.put(userId, userTrackers);
+			userTrackersMap.put(new Long(userId), userTrackers);
 		}
 	}
 
@@ -175,10 +175,10 @@ public class LiveUsers {
 		return (UserTracker)sessionUsers.get(sesId);
 	}
 
-	private List _getUserTrackers(String userId) {
+	private List _getUserTrackers(long userId) {
 		Map userTrackersMap = _getUserTrackersMap();
 
-		return (List)userTrackersMap.get(userId);
+		return (List)userTrackersMap.get(new Long(userId));
 	}
 
 	private Map _getUserTrackersMap() {
@@ -197,51 +197,51 @@ public class LiveUsers {
 		return userTrackersMap;
 	}
 
-	private void _joinGroup(String userId, long groupId) {
+	private void _joinGroup(long userId, long groupId) {
 		Map liveUsers = _getLiveUsers();
 
 		Set groupUsers = _getGroupUsers(liveUsers, groupId);
 
 		if (_getUserTrackers(userId) != null) {
-			groupUsers.add(userId);
+			groupUsers.add(new Long(userId));
 		}
 	}
 
-	private void _joinGroup(String[] userIds, long groupId) {
+	private void _joinGroup(long[] userIds, long groupId) {
 		Map liveUsers = _getLiveUsers();
 
 		Set groupUsers = _getGroupUsers(liveUsers, groupId);
 
 		for (int i = 0; i < userIds.length; i++) {
-			String userId = userIds[i];
+			long userId = userIds[i];
 
 			if (_getUserTrackers(userId) != null) {
-				groupUsers.add(userId);
+				groupUsers.add(new Long(userId));
 			}
 		}
 	}
 
-	private void _leaveGroup(String userId, long groupId) {
+	private void _leaveGroup(long userId, long groupId) {
 		Map liveUsers = _getLiveUsers();
 
 		Set groupUsers = _getGroupUsers(liveUsers, groupId);
 
-		groupUsers.remove(userId);
+		groupUsers.remove(new Long(userId));
 	}
 
-	private void _leaveGroup(String[] userIds, long groupId) {
+	private void _leaveGroup(long[] userIds, long groupId) {
 		Map liveUsers = _getLiveUsers();
 
 		Set groupUsers = _getGroupUsers(liveUsers, groupId);
 
 		for (int i = 0; i < userIds.length; i++) {
-			String userId = userIds[i];
+			long userId = userIds[i];
 
-			groupUsers.remove(userId);
+			groupUsers.remove(new Long(userId));
 		}
 	}
 
-	private void _removeUserTracker(String userId, UserTracker userTracker) {
+	private void _removeUserTracker(long userId, UserTracker userTracker) {
 		List userTrackers = _getUserTrackers(userId);
 
 		if (userTrackers != null) {
@@ -258,7 +258,7 @@ public class LiveUsers {
 			if (userTrackers.size() == 0) {
 				Map userTrackersMap = _getUserTrackersMap();
 
-				userTrackersMap.remove(userId);
+				userTrackersMap.remove(new Long(userId));
 			}
 		}
 	}
@@ -267,9 +267,9 @@ public class LiveUsers {
 		HttpSession ses = req.getSession();
 
 		String companyId = CompanyThreadLocal.getCompanyId();
-		String userId = req.getRemoteUser();
+		long userId = GetterUtil.getLong(req.getRemoteUser());
 
-		Map liveUsers = _updateGroupStatus(req.getRemoteUser(), true);
+		Map liveUsers = _updateGroupStatus(userId, true);
 
 		Map sessionUsers = _getSessionUsers(liveUsers);
 
@@ -313,7 +313,7 @@ public class LiveUsers {
 		}
 	}
 
-	private void _signOut(String sesId, String userId) throws SystemException {
+	private void _signOut(String sesId, long userId) throws SystemException {
 		List userTrackers = _getUserTrackers(userId);
 
 		Map liveUsers = null;
@@ -348,8 +348,10 @@ public class LiveUsers {
 		}
 	}
 
-	private Map _updateGroupStatus(String userId, boolean signedIn)
+	private Map _updateGroupStatus(long userId, boolean signedIn)
 		throws SystemException {
+
+		Long userIdObj = new Long(userId);
 
 		String companyId = CompanyThreadLocal.getCompanyId();
 
@@ -357,7 +359,7 @@ public class LiveUsers {
 
 		LinkedHashMap groupParams = new LinkedHashMap();
 
-		groupParams.put("usersGroups", userId);
+		groupParams.put("usersGroups", userIdObj);
 
 		List communities = GroupLocalServiceUtil.search(
 			companyId, null, null, groupParams, QueryUtil.ALL_POS,
@@ -369,10 +371,10 @@ public class LiveUsers {
 			Set groupUsers = _getGroupUsers(liveUsers, community.getGroupId());
 
 			if (signedIn) {
-				groupUsers.add(userId);
+				groupUsers.add(userIdObj);
 			}
 			else {
-				groupUsers.remove(userId);
+				groupUsers.remove(userIdObj);
 			}
 		}
 

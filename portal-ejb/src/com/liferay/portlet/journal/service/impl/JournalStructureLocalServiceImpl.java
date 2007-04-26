@@ -79,7 +79,7 @@ public class JournalStructureLocalServiceImpl
 	extends JournalStructureLocalServiceBaseImpl {
 
 	public JournalStructure addStructure(
-			String userId, String structureId, boolean autoStructureId,
+			long userId, String structureId, boolean autoStructureId,
 			String plid, String name, String description, String xsd,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -91,7 +91,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public JournalStructure addStructure(
-			String userId, String structureId, boolean autoStructureId,
+			long userId, String structureId, boolean autoStructureId,
 			String plid, String name, String description, String xsd,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -102,7 +102,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public JournalStructure addStructure(
-			String userId, String structureId, boolean autoStructureId,
+			long userId, String structureId, boolean autoStructureId,
 			String plid, String name, String description, String xsd,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)

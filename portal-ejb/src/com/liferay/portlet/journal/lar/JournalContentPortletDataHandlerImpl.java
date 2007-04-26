@@ -273,20 +273,20 @@ public class JournalContentPortletDataHandlerImpl
 
 			article.setNew(true);
 
-			String authorId = creationStrategy.getAuthorUserId(
+			long authorId = creationStrategy.getAuthorUserId(
 				context.getCompanyId(), context.getGroupId(), article);
 
-			if (authorId != null) {
+			if (authorId > 0) {
 				article.setUserId(authorId);
 				article.setUserName(
 					creationStrategy.getAuthorUserName(
 						context.getCompanyId(), context.getGroupId(), article));
 			}
 
-			String approvedById = creationStrategy.getApprovalUserId(
+			long approvedById = creationStrategy.getApprovalUserId(
 				context.getCompanyId(), context.getGroupId(), article);
 
-			if (approvedById != null) {
+			if (approvedById > 0) {
 				article.setApprovedByUserId(approvedById);
 				article.setApprovedByUserName(
 					creationStrategy.getApprovalUserName(
@@ -294,14 +294,15 @@ public class JournalContentPortletDataHandlerImpl
 				article.setApproved(true);
 			}
 			else {
-				article.setApprovedByUserId(null);
+				article.setApprovedByUserId(0);
 				article.setApprovedByUserName(null);
 				article.setApproved(false);
 			}
 
             String newContent = creationStrategy.getTransformedContent(
-                    context.getCompanyId(), context.getGroupId(), article);
-            if (newContent != null) {
+				context.getCompanyId(), context.getGroupId(), article);
+
+			if (newContent != null) {
                 article.setContent(newContent);
             }
 
@@ -343,10 +344,10 @@ public class JournalContentPortletDataHandlerImpl
 
 				structure.setNew(true);
 
-				String authorId = creationStrategy.getAuthorUserId(
+				long authorId = creationStrategy.getAuthorUserId(
 					context.getCompanyId(), context.getGroupId(), structure);
 
-				if (authorId != null) {
+				if (authorId > 0) {
 					structure.setUserId(authorId);
 					structure.setUserName(
 						creationStrategy.getAuthorUserName(
@@ -395,10 +396,10 @@ public class JournalContentPortletDataHandlerImpl
 
 				template.setNew(true);
 
-				String authorId = creationStrategy.getAuthorUserId(
+				long authorId = creationStrategy.getAuthorUserId(
 					context.getCompanyId(), context.getGroupId(), template);
 
-				if (authorId != null) {
+				if (authorId > 0) {
 					template.setUserId(authorId);
 					template.setUserName(
 						creationStrategy.getAuthorUserName(

@@ -181,9 +181,9 @@ public class CachePortlet implements Portlet {
 			stopWatch.start();
 		}
 
-		String userId = req.getRemoteUser();
+		String remoteUser = req.getRemoteUser();
 
-		if ((userId == null) || (_expCache == null) ||
+		if ((remoteUser == null) || (_expCache == null) ||
 			(_expCache.intValue() == 0)) {
 
 			_invoke(req, res, false);

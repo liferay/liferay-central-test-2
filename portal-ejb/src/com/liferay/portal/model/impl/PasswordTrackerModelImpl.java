@@ -57,15 +57,12 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PasswordTracker";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "passwordTrackerId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.BIGINT) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "password_", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordTracker"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PasswordTracker.userId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordTracker.password"),
 			XSS_ALLOW_BY_MODEL);
@@ -93,19 +90,12 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getUserId() {
-		return GetterUtil.getString(_userId);
+	public long getUserId() {
+		return _userId;
 	}
 
-	public void setUserId(String userId) {
-		if (((userId == null) && (_userId != null)) ||
-				((userId != null) && (_userId == null)) ||
-				((userId != null) && (_userId != null) &&
-				!userId.equals(_userId))) {
-			if (!XSS_ALLOW_USERID) {
-				userId = XSSUtil.strip(userId);
-			}
-
+	public void setUserId(long userId) {
+		if (userId != _userId) {
 			_userId = userId;
 		}
 	}
@@ -157,7 +147,17 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 
 		PasswordTrackerImpl passwordTracker = (PasswordTrackerImpl)obj;
 		int value = 0;
-		value = getUserId().compareTo(passwordTracker.getUserId());
+
+		if (getUserId() < passwordTracker.getUserId()) {
+			value = -1;
+		}
+		else if (getUserId() > passwordTracker.getUserId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
+
 		value = value * -1;
 
 		if (value != 0) {
@@ -204,7 +204,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 	}
 
 	private long _passwordTrackerId;
-	private String _userId;
+	private long _userId;
 	private Date _createDate;
 	private String _password;
 }

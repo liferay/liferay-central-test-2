@@ -60,9 +60,9 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 			{ "folderId", new Integer(Types.VARCHAR) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "companyId", new Integer(Types.VARCHAR) },
-			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
-			{ "versionUserId", new Integer(Types.VARCHAR) },
+			{ "versionUserId", new Integer(Types.BIGINT) },
 			{ "versionUserName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
@@ -85,14 +85,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.userId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_VERSIONUSERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.versionUserId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_VERSIONUSERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.versionUserName"),
@@ -171,19 +165,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getUserId() {
-		return GetterUtil.getString(_userId);
+	public long getUserId() {
+		return _userId;
 	}
 
-	public void setUserId(String userId) {
-		if (((userId == null) && (_userId != null)) ||
-				((userId != null) && (_userId == null)) ||
-				((userId != null) && (_userId != null) &&
-				!userId.equals(_userId))) {
-			if (!XSS_ALLOW_USERID) {
-				userId = XSSUtil.strip(userId);
-			}
-
+	public void setUserId(long userId) {
+		if (userId != _userId) {
 			_userId = userId;
 		}
 	}
@@ -205,19 +192,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getVersionUserId() {
-		return GetterUtil.getString(_versionUserId);
+	public long getVersionUserId() {
+		return _versionUserId;
 	}
 
-	public void setVersionUserId(String versionUserId) {
-		if (((versionUserId == null) && (_versionUserId != null)) ||
-				((versionUserId != null) && (_versionUserId == null)) ||
-				((versionUserId != null) && (_versionUserId != null) &&
-				!versionUserId.equals(_versionUserId))) {
-			if (!XSS_ALLOW_VERSIONUSERID) {
-				versionUserId = XSSUtil.strip(versionUserId);
-			}
-
+	public void setVersionUserId(long versionUserId) {
+		if (versionUserId != _versionUserId) {
 			_versionUserId = versionUserId;
 		}
 	}
@@ -419,9 +399,9 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 	private String _folderId;
 	private String _name;
 	private String _companyId;
-	private String _userId;
+	private long _userId;
 	private String _userName;
-	private String _versionUserId;
+	private long _versionUserId;
 	private String _versionUserName;
 	private Date _createDate;
 	private Date _modifiedDate;

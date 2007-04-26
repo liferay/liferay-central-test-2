@@ -25,7 +25,6 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -54,7 +53,7 @@ import java.util.Locale;
  */
 public class UserServiceImpl extends PrincipalBean implements UserService {
 
-	public void addGroupUsers(long groupId, String[] userIds)
+	public void addGroupUsers(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		if ((userIds != null) && (userIds.length > 0)) {
@@ -64,7 +63,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		}
 	}
 
-	public void addPasswordPolicyUsers(long passwordPolicyId, String[] userIds)
+	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws PortalException, SystemException {
 
 		//PasswordPolicyPermission.check(
@@ -73,7 +72,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.addPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
-	public void addRoleUsers(String roleId, String[] userIds)
+	public void addRoleUsers(String roleId, long[] userIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
@@ -81,7 +80,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.addRoleUsers(roleId, userIds);
 	}
 
-	public void addUserGroupUsers(String userGroupId, String[] userIds)
+	public void addUserGroupUsers(String userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(
@@ -95,21 +94,18 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			String password2, boolean passwordReset, boolean autoScreenName,
 			String screenName, String emailAddress, Locale locale,
 			String firstName, String middleName, String lastName,
-			String nickName, int prefixId, int suffixId, boolean male,
-			int birthdayMonth, int birthdayDay, int birthdayYear,
-			String jobTitle, String organizationId, String locationId,
-			boolean sendEmail)
+			int prefixId, int suffixId, boolean male, int birthdayMonth,
+			int birthdayDay, int birthdayYear, String jobTitle,
+			String organizationId, String locationId, boolean sendEmail)
 		throws PortalException, SystemException {
 
 		Company company = CompanyUtil.findByPrimaryKey(companyId);
 
 		if (!company.isStrangers()) {
-			checkPermission(
-				StringPool.BLANK, organizationId, locationId,
-				ActionKeys.ADD_USER);
+			checkPermission(0, organizationId, locationId, ActionKeys.ADD_USER);
 		}
 
-		String creatorUserId = null;
+		long creatorUserId = 0;
 
 		try {
 			creatorUserId = getUserId();
@@ -120,12 +116,12 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return UserLocalServiceUtil.addUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			passwordReset, autoScreenName, screenName, emailAddress, locale,
-			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
+			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
 			locationId, sendEmail);
 	}
 
-	public void deleteRoleUser(String roleId, String userId)
+	public void deleteRoleUser(String roleId, long userId)
 		throws PortalException, SystemException {
 
 		checkPermission(userId, ActionKeys.UPDATE);
@@ -133,10 +129,10 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.deleteRoleUser(roleId, userId);
 	}
 
-	public void deleteUser(String userId)
+	public void deleteUser(long userId)
 		throws PortalException, SystemException {
 
-		if (getUserId().equals(userId)) {
+		if (getUserId() == userId) {
 			throw new RequiredUserException();
 		}
 
@@ -168,7 +164,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return user;
 	}
 
-	public User getUserById(String userId)
+	public User getUserById(long userId)
 		throws PortalException, SystemException {
 
 		User user = UserLocalServiceUtil.getUserById(userId);
@@ -189,19 +185,19 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return user;
 	}
 
-	public boolean hasGroupUser(long groupId, String userId)
+	public boolean hasGroupUser(long groupId, long userId)
 		throws PortalException, SystemException {
 
 		return UserLocalServiceUtil.hasGroupUser(groupId, userId);
 	}
 
-	public boolean hasRoleUser(String roleId, String userId)
+	public boolean hasRoleUser(String roleId, long userId)
 		throws PortalException, SystemException {
 
 		return UserLocalServiceUtil.hasRoleUser(roleId, userId);
 	}
 
-	public void setGroupUsers(long groupId, String[] userIds)
+	public void setGroupUsers(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -210,7 +206,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.setGroupUsers(groupId, userIds);
 	}
 
-	public void setRoleUsers(String roleId, String[] userIds)
+	public void setRoleUsers(String roleId, long[] userIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
@@ -218,7 +214,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.setRoleUsers(roleId, userIds);
 	}
 
-	public void setUserGroupUsers(String userGroupId, String[] userIds)
+	public void setUserGroupUsers(String userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(
@@ -227,7 +223,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.setUserGroupUsers(userGroupId, userIds);
 	}
 
-	public void unsetGroupUsers(long groupId, String[] userIds)
+	public void unsetGroupUsers(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		if ((userIds != null) && (userIds.length > 0)) {
@@ -237,8 +233,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		}
 	}
 
-	public void unsetPasswordPolicyUsers(
-			long passwordPolicyId, String[] userIds)
+	public void unsetPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws PortalException, SystemException {
 
 		//PasswordPolicyPermission.check(
@@ -248,7 +243,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			passwordPolicyId, userIds);
 	}
 
-	public void unsetRoleUsers(String roleId, String[] userIds)
+	public void unsetRoleUsers(String roleId, long[] userIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
@@ -256,7 +251,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.unsetRoleUsers(roleId, userIds);
 	}
 
-	public void unsetUserGroupUsers(String userGroupId, String[] userIds)
+	public void unsetUserGroupUsers(String userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(
@@ -265,10 +260,10 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.unsetUserGroupUsers(userGroupId, userIds);
 	}
 
-	public User updateActive(String userId, boolean active)
+	public User updateActive(long userId, boolean active)
 		throws PortalException, SystemException {
 
-		if (getUserId().equals(userId) && !active) {
+		if ((getUserId() == userId) && !active) {
 			throw new RequiredUserException();
 		}
 
@@ -278,7 +273,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	}
 
 	public User updateAgreedToTermsOfUse(
-			String userId, boolean agreedToTermsOfUse)
+			long userId, boolean agreedToTermsOfUse)
 		throws PortalException, SystemException {
 
 		checkPermission(userId, ActionKeys.UPDATE);
@@ -288,7 +283,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	}
 
 	public User updatePassword(
-			String userId, String password1, String password2,
+			long userId, String password1, String password2,
 			boolean passwordReset)
 		throws PortalException, SystemException {
 
@@ -298,7 +293,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			userId, password1, password2, passwordReset);
 	}
 
-	public void updatePortrait(String userId, byte[] bytes)
+	public void updatePortrait(long userId, byte[] bytes)
 		throws PortalException, SystemException {
 
 		checkPermission(userId, ActionKeys.UPDATE);
@@ -307,28 +302,27 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	}
 
 	public User updateUser(
-			String userId, String password, String screenName,
+			long userId, String password, String screenName,
 			String emailAddress, String languageId, String timeZoneId,
-			String greeting, String resolution, String comments,
-			String firstName, String middleName, String lastName,
-			String nickName, int prefixId, int suffixId, boolean male,
-			int birthdayMonth, int birthdayDay, int birthdayYear, String smsSn,
-			String aimSn, String icqSn, String jabberSn, String msnSn,
-			String skypeSn, String ymSn, String jobTitle, String organizationId,
-			String locationId)
+			String greeting, String comments, String firstName,
+			String middleName, String lastName, int prefixId, int suffixId,
+			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
+			String smsSn, String aimSn, String icqSn, String jabberSn,
+			String msnSn, String skypeSn, String ymSn, String jobTitle,
+			String organizationId, String locationId)
 		throws PortalException, SystemException {
 
 		checkPermission(userId, organizationId, locationId, ActionKeys.UPDATE);
 
 		return UserLocalServiceUtil.updateUser(
 			userId, password, screenName, emailAddress, languageId, timeZoneId,
-			greeting, resolution, comments, firstName, middleName, lastName,
-			nickName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
-			birthdayYear, smsSn, aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn,
-			jobTitle, organizationId, locationId);
+			greeting, comments, firstName, middleName, lastName, prefixId,
+			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
+			aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
+			organizationId, locationId);
 	}
 
-	protected void checkPermission(String userId, String actionId)
+	protected void checkPermission(long userId, String actionId)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -339,7 +333,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	}
 
 	protected void checkPermission(
-			String userId, String organizationId, String locationId,
+			long userId, String organizationId, String locationId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -348,7 +342,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			actionId);
 	}
 
-	protected void checkPermission(long groupId, String[] userIds)
+	protected void checkPermission(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		try {
@@ -363,9 +357,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 
 			User user = getUser();
 
-			if ((userIds.length == 1) &&
-				(user.getUserId().equals(userIds[0]))) {
-
+			if ((userIds.length == 1) && (user.getUserId() == userIds[0])) {
 				Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 				if (group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN)) {

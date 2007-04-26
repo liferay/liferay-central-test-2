@@ -211,7 +211,7 @@ public class LayoutAction extends Action {
 			forwardURL =
 				themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid;
 
-			if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+			if (themeDisplay.getDoAsUserId() > 0) {
 				forwardURL = Http.addParameter(
 					forwardURL, "doAsUserId", themeDisplay.getDoAsUserId());
 			}

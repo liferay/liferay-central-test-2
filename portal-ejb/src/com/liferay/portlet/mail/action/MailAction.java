@@ -250,7 +250,8 @@ public class MailAction extends JSONAction {
 	}
 
 	protected String getRecipients(HttpServletRequest req) throws Exception {
-		String userId = PortalUtil.getUserId(req);
+		long userId = PortalUtil.getUserId(req);
+
 		String data = ParamUtil.getString(req, "data");
 
 		PortletPreferences prefs = PortalUtil.getPreferences(req);

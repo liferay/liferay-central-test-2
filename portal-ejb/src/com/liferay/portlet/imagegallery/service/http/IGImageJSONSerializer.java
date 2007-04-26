@@ -71,14 +71,7 @@ public class IGImageJSONSerializer {
 			jsonObj.put("imageId", imageId.toString());
 		}
 
-		String userId = model.getUserId();
-
-		if (userId == null) {
-			jsonObj.put("userId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userId", userId.toString());
-		}
+		jsonObj.put("userId", model.getUserId());
 
 		Date createDate = model.getCreateDate();
 

@@ -72,7 +72,7 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class UserServiceHttp {
 	public static void addGroupUsers(HttpPrincipal httpPrincipal, long groupId,
-		java.lang.String[] userIds)
+		long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -80,7 +80,7 @@ public class UserServiceHttp {
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -108,7 +108,7 @@ public class UserServiceHttp {
 	}
 
 	public static void addPasswordPolicyUsers(HttpPrincipal httpPrincipal,
-		long passwordPolicyId, java.lang.String[] userIds)
+		long passwordPolicyId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -116,7 +116,7 @@ public class UserServiceHttp {
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -145,7 +145,7 @@ public class UserServiceHttp {
 	}
 
 	public static void addRoleUsers(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String[] userIds)
+		java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -158,7 +158,7 @@ public class UserServiceHttp {
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -186,7 +186,7 @@ public class UserServiceHttp {
 	}
 
 	public static void addUserGroupUsers(HttpPrincipal httpPrincipal,
-		java.lang.String userGroupId, java.lang.String[] userIds)
+		java.lang.String userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -199,7 +199,7 @@ public class UserServiceHttp {
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -233,11 +233,10 @@ public class UserServiceHttp {
 		boolean autoScreenName, java.lang.String screenName,
 		java.lang.String emailAddress, java.util.Locale locale,
 		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String jobTitle,
-		java.lang.String organizationId, java.lang.String locationId,
-		boolean sendEmail)
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, java.lang.String organizationId,
+		java.lang.String locationId, boolean sendEmail)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -298,37 +297,31 @@ public class UserServiceHttp {
 				paramObj11 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj12 = nickName;
-
-			if (nickName == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj13 = new IntegerWrapper(prefixId);
-			Object paramObj14 = new IntegerWrapper(suffixId);
-			Object paramObj15 = new BooleanWrapper(male);
-			Object paramObj16 = new IntegerWrapper(birthdayMonth);
-			Object paramObj17 = new IntegerWrapper(birthdayDay);
-			Object paramObj18 = new IntegerWrapper(birthdayYear);
-			Object paramObj19 = jobTitle;
+			Object paramObj12 = new IntegerWrapper(prefixId);
+			Object paramObj13 = new IntegerWrapper(suffixId);
+			Object paramObj14 = new BooleanWrapper(male);
+			Object paramObj15 = new IntegerWrapper(birthdayMonth);
+			Object paramObj16 = new IntegerWrapper(birthdayDay);
+			Object paramObj17 = new IntegerWrapper(birthdayYear);
+			Object paramObj18 = jobTitle;
 
 			if (jobTitle == null) {
+				paramObj18 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj19 = organizationId;
+
+			if (organizationId == null) {
 				paramObj19 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj20 = organizationId;
+			Object paramObj20 = locationId;
 
-			if (organizationId == null) {
+			if (locationId == null) {
 				paramObj20 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj21 = locationId;
-
-			if (locationId == null) {
-				paramObj21 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj22 = new BooleanWrapper(sendEmail);
+			Object paramObj21 = new BooleanWrapper(sendEmail);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"addUser",
 					new Object[] {
@@ -336,8 +329,7 @@ public class UserServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20, paramObj21,
-						paramObj22
+						paramObj18, paramObj19, paramObj20, paramObj21
 					});
 			Object returnObj = null;
 
@@ -365,7 +357,7 @@ public class UserServiceHttp {
 	}
 
 	public static void deleteRoleUser(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String userId)
+		java.lang.String roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -375,12 +367,7 @@ public class UserServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = userId;
-
-			if (userId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(userId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"deleteRoleUser", new Object[] { paramObj0, paramObj1 });
 
@@ -405,17 +392,11 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void deleteUser(HttpPrincipal httpPrincipal,
-		java.lang.String userId)
+	public static void deleteUser(HttpPrincipal httpPrincipal, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"deleteUser", new Object[] { paramObj0 });
 
@@ -558,16 +539,11 @@ public class UserServiceHttp {
 	}
 
 	public static com.liferay.portal.model.User getUserById(
-		HttpPrincipal httpPrincipal, java.lang.String userId)
+		HttpPrincipal httpPrincipal, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"getUserById", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -641,17 +617,12 @@ public class UserServiceHttp {
 	}
 
 	public static boolean hasGroupUser(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String userId)
+		long groupId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
-			Object paramObj1 = userId;
-
-			if (userId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(userId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"hasGroupUser", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
@@ -680,7 +651,7 @@ public class UserServiceHttp {
 	}
 
 	public static boolean hasRoleUser(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String userId)
+		java.lang.String roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -690,12 +661,7 @@ public class UserServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = userId;
-
-			if (userId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(userId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"hasRoleUser", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
@@ -724,7 +690,7 @@ public class UserServiceHttp {
 	}
 
 	public static void setGroupUsers(HttpPrincipal httpPrincipal, long groupId,
-		java.lang.String[] userIds)
+		long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -732,7 +698,7 @@ public class UserServiceHttp {
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -760,7 +726,7 @@ public class UserServiceHttp {
 	}
 
 	public static void setRoleUsers(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String[] userIds)
+		java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -773,7 +739,7 @@ public class UserServiceHttp {
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -801,7 +767,7 @@ public class UserServiceHttp {
 	}
 
 	public static void setUserGroupUsers(HttpPrincipal httpPrincipal,
-		java.lang.String userGroupId, java.lang.String[] userIds)
+		java.lang.String userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -814,7 +780,7 @@ public class UserServiceHttp {
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -842,7 +808,7 @@ public class UserServiceHttp {
 	}
 
 	public static void unsetGroupUsers(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String[] userIds)
+		long groupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -850,7 +816,7 @@ public class UserServiceHttp {
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -878,7 +844,7 @@ public class UserServiceHttp {
 	}
 
 	public static void unsetPasswordPolicyUsers(HttpPrincipal httpPrincipal,
-		long passwordPolicyId, java.lang.String[] userIds)
+		long passwordPolicyId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -886,7 +852,7 @@ public class UserServiceHttp {
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -915,7 +881,7 @@ public class UserServiceHttp {
 	}
 
 	public static void unsetRoleUsers(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String[] userIds)
+		java.lang.String roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -928,7 +894,7 @@ public class UserServiceHttp {
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -956,7 +922,7 @@ public class UserServiceHttp {
 	}
 
 	public static void unsetUserGroupUsers(HttpPrincipal httpPrincipal,
-		java.lang.String userGroupId, java.lang.String[] userIds)
+		java.lang.String userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -969,7 +935,7 @@ public class UserServiceHttp {
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -997,16 +963,11 @@ public class UserServiceHttp {
 	}
 
 	public static com.liferay.portal.model.User updateActive(
-		HttpPrincipal httpPrincipal, java.lang.String userId, boolean active)
+		HttpPrincipal httpPrincipal, long userId, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			Object paramObj1 = new BooleanWrapper(active);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"updateActive", new Object[] { paramObj0, paramObj1 });
@@ -1036,17 +997,11 @@ public class UserServiceHttp {
 	}
 
 	public static com.liferay.portal.model.User updateAgreedToTermsOfUse(
-		HttpPrincipal httpPrincipal, java.lang.String userId,
-		boolean agreedToTermsOfUse)
+		HttpPrincipal httpPrincipal, long userId, boolean agreedToTermsOfUse)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			Object paramObj1 = new BooleanWrapper(agreedToTermsOfUse);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"updateAgreedToTermsOfUse",
@@ -1077,18 +1032,12 @@ public class UserServiceHttp {
 	}
 
 	public static com.liferay.portal.model.User updatePassword(
-		HttpPrincipal httpPrincipal, java.lang.String userId,
-		java.lang.String password1, java.lang.String password2,
-		boolean passwordReset)
+		HttpPrincipal httpPrincipal, long userId, java.lang.String password1,
+		java.lang.String password2, boolean passwordReset)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			Object paramObj1 = password1;
 
 			if (password1 == null) {
@@ -1130,17 +1079,12 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void updatePortrait(HttpPrincipal httpPrincipal,
-		java.lang.String userId, byte[] bytes)
+	public static void updatePortrait(HttpPrincipal httpPrincipal, long userId,
+		byte[] bytes)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			Object paramObj1 = bytes;
 
 			if (bytes == null) {
@@ -1172,28 +1116,22 @@ public class UserServiceHttp {
 	}
 
 	public static com.liferay.portal.model.User updateUser(
-		HttpPrincipal httpPrincipal, java.lang.String userId,
-		java.lang.String password, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String languageId,
-		java.lang.String timeZoneId, java.lang.String greeting,
-		java.lang.String resolution, java.lang.String comments,
+		HttpPrincipal httpPrincipal, long userId, java.lang.String password,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.lang.String languageId, java.lang.String timeZoneId,
+		java.lang.String greeting, java.lang.String comments,
 		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
-		java.lang.String icqSn, java.lang.String jabberSn,
-		java.lang.String msnSn, java.lang.String skypeSn,
-		java.lang.String ymSn, java.lang.String jobTitle,
-		java.lang.String organizationId, java.lang.String locationId)
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
+		java.lang.String jabberSn, java.lang.String msnSn,
+		java.lang.String skypeSn, java.lang.String ymSn,
+		java.lang.String jobTitle, java.lang.String organizationId,
+		java.lang.String locationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			Object paramObj1 = password;
 
 			if (password == null) {
@@ -1230,106 +1168,94 @@ public class UserServiceHttp {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = resolution;
+			Object paramObj7 = comments;
 
-			if (resolution == null) {
+			if (comments == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = comments;
+			Object paramObj8 = firstName;
 
-			if (comments == null) {
+			if (firstName == null) {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = firstName;
+			Object paramObj9 = middleName;
 
-			if (firstName == null) {
+			if (middleName == null) {
 				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj10 = middleName;
+			Object paramObj10 = lastName;
 
-			if (middleName == null) {
+			if (lastName == null) {
 				paramObj10 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = lastName;
-
-			if (lastName == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj12 = nickName;
-
-			if (nickName == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj13 = new IntegerWrapper(prefixId);
-			Object paramObj14 = new IntegerWrapper(suffixId);
-			Object paramObj15 = new BooleanWrapper(male);
-			Object paramObj16 = new IntegerWrapper(birthdayMonth);
-			Object paramObj17 = new IntegerWrapper(birthdayDay);
-			Object paramObj18 = new IntegerWrapper(birthdayYear);
-			Object paramObj19 = smsSn;
+			Object paramObj11 = new IntegerWrapper(prefixId);
+			Object paramObj12 = new IntegerWrapper(suffixId);
+			Object paramObj13 = new BooleanWrapper(male);
+			Object paramObj14 = new IntegerWrapper(birthdayMonth);
+			Object paramObj15 = new IntegerWrapper(birthdayDay);
+			Object paramObj16 = new IntegerWrapper(birthdayYear);
+			Object paramObj17 = smsSn;
 
 			if (smsSn == null) {
+				paramObj17 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj18 = aimSn;
+
+			if (aimSn == null) {
+				paramObj18 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj19 = icqSn;
+
+			if (icqSn == null) {
 				paramObj19 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj20 = aimSn;
+			Object paramObj20 = jabberSn;
 
-			if (aimSn == null) {
+			if (jabberSn == null) {
 				paramObj20 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj21 = icqSn;
+			Object paramObj21 = msnSn;
 
-			if (icqSn == null) {
+			if (msnSn == null) {
 				paramObj21 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj22 = jabberSn;
+			Object paramObj22 = skypeSn;
 
-			if (jabberSn == null) {
+			if (skypeSn == null) {
 				paramObj22 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj23 = msnSn;
+			Object paramObj23 = ymSn;
 
-			if (msnSn == null) {
+			if (ymSn == null) {
 				paramObj23 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj24 = skypeSn;
+			Object paramObj24 = jobTitle;
 
-			if (skypeSn == null) {
+			if (jobTitle == null) {
 				paramObj24 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj25 = ymSn;
+			Object paramObj25 = organizationId;
 
-			if (ymSn == null) {
+			if (organizationId == null) {
 				paramObj25 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj26 = jobTitle;
-
-			if (jobTitle == null) {
-				paramObj26 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj27 = organizationId;
-
-			if (organizationId == null) {
-				paramObj27 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj28 = locationId;
+			Object paramObj26 = locationId;
 
 			if (locationId == null) {
-				paramObj28 = new NullWrapper("java.lang.String");
+				paramObj26 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -1341,7 +1267,7 @@ public class UserServiceHttp {
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26, paramObj27, paramObj28
+						paramObj26
 					});
 			Object returnObj = null;
 

@@ -44,7 +44,7 @@ public class MBMessageFlagFinder {
 	public static String COUNT_BY_T_U =
 		MBMessageFlagFinder.class.getName() + ".countByT_U";
 
-	public static int countByT_U(String threadId, String userId)
+	public static int countByT_U(String threadId, long userId)
 		throws SystemException {
 
 		Session session = null;

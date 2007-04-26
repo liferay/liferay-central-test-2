@@ -69,9 +69,10 @@ public class EditUsersAction extends PortletAction {
 		throws Exception {
 
 		String companyId = PortalUtil.getCompanyId(req);
+		long userId = PortalUtil.getUserId(req);
 
 		if (!RoleLocalServiceUtil.hasUserRole(
-				req.getRemoteUser(), companyId, RoleImpl.ADMINISTRATOR)) {
+				userId, companyId, RoleImpl.ADMINISTRATOR)) {
 
 			SessionErrors.add(req, PrincipalException.class.getName());
 

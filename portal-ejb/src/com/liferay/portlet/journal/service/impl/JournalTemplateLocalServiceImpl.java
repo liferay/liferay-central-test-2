@@ -78,9 +78,9 @@ public class JournalTemplateLocalServiceImpl
 	extends JournalTemplateLocalServiceBaseImpl {
 
 	public JournalTemplate addTemplate(
-			String userId, String templateId, boolean autoTemplateId,
-			String plid, String structureId, String name, String description,
-			String xsl, boolean formatXsl, String langType, boolean smallImage,
+			long userId, String templateId, boolean autoTemplateId, String plid,
+			String structureId, String name, String description, String xsl,
+			boolean formatXsl, String langType, boolean smallImage,
 			String smallImageURL, File smallFile,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -93,9 +93,9 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public JournalTemplate addTemplate(
-			String userId, String templateId, boolean autoTemplateId,
-			String plid, String structureId, String name, String description,
-			String xsl, boolean formatXsl, String langType, boolean smallImage,
+			long userId, String templateId, boolean autoTemplateId, String plid,
+			String structureId, String name, String description, String xsl,
+			boolean formatXsl, String langType, boolean smallImage,
 			String smallImageURL, File smallFile, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -107,9 +107,9 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public JournalTemplate addTemplate(
-			String userId, String templateId, boolean autoTemplateId,
-			String plid, String structureId, String name, String description,
-			String xsl, boolean formatXsl, String langType, boolean smallImage,
+			long userId, String templateId, boolean autoTemplateId, String plid,
+			String structureId, String name, String description, String xsl,
+			boolean formatXsl, String langType, boolean smallImage,
 			String smallImageURL, File smallFile,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)

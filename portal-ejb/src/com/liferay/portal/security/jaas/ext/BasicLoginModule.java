@@ -25,6 +25,7 @@ package com.liferay.portal.security.jaas.ext;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.jaas.PortalPrincipal;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 
 import java.io.IOException;
 
@@ -116,8 +117,8 @@ public class BasicLoginModule implements LoginModule {
 		_principal = principal;
 	}
 
-	protected Principal getPortalPrincipal(String userId) {
-		return new PortalPrincipal(userId);
+	protected Principal getPortalPrincipal(String name) {
+		return new PortalPrincipal(name);
 	}
 
 	protected String getPassword() {
@@ -131,7 +132,7 @@ public class BasicLoginModule implements LoginModule {
 	protected String[] authenticate()
 		throws IOException, UnsupportedCallbackException {
 
-		NameCallback nameCallback = new NameCallback("userId: ");
+		NameCallback nameCallback = new NameCallback("name: ");
 		PasswordCallback passwordCallback =
 			new PasswordCallback("password: ", false);
 
@@ -140,7 +141,7 @@ public class BasicLoginModule implements LoginModule {
 				nameCallback, passwordCallback
 			});
 
-		String userId = nameCallback.getName();
+		String name = nameCallback.getName();
 
 		String password = null;
 		char[] passwordChar = passwordCallback.getPassword();
@@ -149,13 +150,15 @@ public class BasicLoginModule implements LoginModule {
 			password = new String(passwordChar);
 		}
 
-		if (userId == null) {
+		if (name == null) {
 			return new String[] {StringPool.BLANK, StringPool.BLANK};
 		}
 
 		try {
+			long userId = GetterUtil.getLong(name);
+
 			if (UserLocalServiceUtil.authenticateForJAAS(userId, password)) {
-				return new String[] {userId, password};
+				return new String[] {name, password};
 			}
 		}
 		catch (Exception e) {

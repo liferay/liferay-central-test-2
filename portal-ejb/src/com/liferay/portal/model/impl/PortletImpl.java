@@ -30,7 +30,9 @@ import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletInfo;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
@@ -1384,7 +1386,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		true if the user has the permission to add the portlet to a
 	 *				layout
 	 */
-	public boolean hasAddPortletPermission(String userId) {
+	public boolean hasAddPortletPermission(long userId) {
 		try {
 			if (_rolesArray.length == 0) {
 				return true;
@@ -1399,8 +1401,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 
 				return true;
 			}
-			else if (UserImpl.isDefaultUser(userId)) {
-				if (hasRoleWithName(RoleImpl.GUEST)) {
+			else {
+				User user = UserLocalServiceUtil.getUserById(userId);
+
+				if (user.isDefaultUser() && hasRoleWithName(RoleImpl.GUEST)) {
 					return true;
 				}
 			}

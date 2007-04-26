@@ -57,7 +57,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	public PermissionCheckerBagImpl() {
 	}
 
-	public PermissionCheckerBagImpl(String userId, List userGroups,
+	public PermissionCheckerBagImpl(long userId, List userGroups,
 									List userOrgs, List userOrgGroups,
 									List userUserGroupGroups, List groups,
 									List roles) {
@@ -158,7 +158,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 			Group group = GroupServiceUtil.getGroup(groupId);
 
 			if (group.getClassName().equals(User.class.getName()) &&
-				group.getClassPK().equals(_userId)) {
+				group.getClassPK().equals(String.valueOf(_userId))) {
 
 				return true;
 			}
@@ -169,7 +169,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		return false;
 	}
 
-	private String _userId;
+	private long _userId;
 	private List _userGroups;
 	private List _userOrgs;
 	private List _userOrgGroups;

@@ -55,7 +55,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 
-	public String getAuthorUserId(
+	public long getAuthorUserId(
 			String companyId, long groupId, Object journalObj)
 		throws Exception {
 
@@ -65,7 +65,7 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 			 return user.getUserId();
 		}
 		else {
-			 return null;
+			 return 0;
 		}
 	}
 
@@ -97,7 +97,7 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 		}
 	}
 
-	public String getApprovalUserId(
+	public long getApprovalUserId(
 			String companyId, long groupId, Object journalObj)
 		throws Exception {
 
@@ -107,7 +107,7 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 			 return user.getUserId();
 		}
 		else {
-			 return null;
+			 return 0;
 		}
 	}
 

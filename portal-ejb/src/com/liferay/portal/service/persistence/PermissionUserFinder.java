@@ -337,7 +337,7 @@ public class PermissionUserFinder {
 
 			q.setCacheable(false);
 
-			q.addScalar("userId", Hibernate.STRING);
+			q.addScalar("userId", Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -374,9 +374,9 @@ public class PermissionUserFinder {
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
-				String userId = (String)itr.next();
+				Long userIdObj = (Long)itr.next();
 
-				User user = UserUtil.findByPrimaryKey(userId);
+				User user = UserUtil.findByPrimaryKey(userIdObj.longValue());
 
 				list.add(user);
 			}
@@ -421,7 +421,7 @@ public class PermissionUserFinder {
 
 			q.setCacheable(false);
 
-			q.addScalar("userId", Hibernate.STRING);
+			q.addScalar("userId", Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -450,9 +450,9 @@ public class PermissionUserFinder {
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
-				String userId = (String)itr.next();
+				Long userIdObj = (Long)itr.next();
 
-				User user = UserUtil.findByPrimaryKey(userId);
+				User user = UserUtil.findByPrimaryKey(userIdObj.longValue());
 
 				list.add(user);
 			}

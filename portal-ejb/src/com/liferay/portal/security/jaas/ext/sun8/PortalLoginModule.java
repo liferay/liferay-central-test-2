@@ -23,6 +23,7 @@
 package com.liferay.portal.security.jaas.ext.sun8;
 
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 
 import com.sun.enterprise.security.auth.login.PasswordLoginModule;
 
@@ -44,7 +45,9 @@ public class PortalLoginModule extends PasswordLoginModule {
 			throw new LoginException(PortalRealm.class.getName());
 		}
 
-		String[] groups = _getGroups(_username, _password);
+		long userId = GetterUtil.getLong(_username);
+
+		String[] groups = _getGroups(userId, _password);
 
 		if (groups == null) {
 			throw new LoginException(_username);
@@ -57,7 +60,7 @@ public class PortalLoginModule extends PasswordLoginModule {
 		commitAuthentication(_username, _password, _currentRealm, groups);
 	}
 
-	private String[] _getGroups(String userId, String password) {
+	private String[] _getGroups(long userId, String password) {
 		try {
 			if (UserLocalServiceUtil.authenticateForJAAS(userId, password)) {
 				return new String[] {"users"};

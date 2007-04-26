@@ -154,18 +154,13 @@ public class PermissionServiceHttp {
 	}
 
 	public static boolean hasUserPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String userId, long groupId, java.lang.String actionId,
+		long userId, long groupId, java.lang.String actionId,
 		long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = actionId;
 
@@ -419,17 +414,11 @@ public class PermissionServiceHttp {
 	}
 
 	public static void setUserPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String userId, long groupId, java.lang.String[] actionIds,
-		long resourceId)
+		long userId, long groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = actionIds;
 
@@ -626,17 +615,11 @@ public class PermissionServiceHttp {
 	}
 
 	public static void unsetUserPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String userId, long groupId, java.lang.String[] actionIds,
-		long resourceId)
+		long userId, long groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
-
-			if (userId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = actionIds;
 

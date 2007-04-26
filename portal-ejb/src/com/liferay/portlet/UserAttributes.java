@@ -208,7 +208,7 @@ public class UserAttributes {
 			return _user.getCompanyId();
 		}
 		else if (name.equals(LIFERAY_USER_ID)) {
-			return _user.getUserId();
+			return String.valueOf(_user.getUserId());
 		}
 		else if (name.equals(USER_BDATE)) {
 			return _user.getBirthday().toString();

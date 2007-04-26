@@ -70,16 +70,7 @@ public class LayoutSetJSONSerializer {
 		}
 
 		jsonObj.put("groupId", model.getGroupId());
-
-		String userId = model.getUserId();
-
-		if (userId == null) {
-			jsonObj.put("userId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userId", userId.toString());
-		}
-
+		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("privateLayout", model.getPrivateLayout());
 		jsonObj.put("logo", model.getLogo());
 

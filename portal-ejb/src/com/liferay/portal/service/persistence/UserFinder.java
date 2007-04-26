@@ -52,11 +52,11 @@ import org.hibernate.Session;
  */
 public class UserFinder {
 
-	public static String COUNT_BY_C_U_FN_MN_LN_SN_EA_A =
-		UserFinder.class.getName() + ".countByC_U_FN_MN_LN_SN_EA_A";
+	public static String COUNT_BY_C_FN_MN_LN_SN_EA_A =
+		UserFinder.class.getName() + ".countByC_FN_MN_LN_SN_EA_A";
 
-	public static String FIND_BY_C_U_FN_MN_LN_SN_EA_A =
-		UserFinder.class.getName() + ".findByC_U_FN_MN_LN_SN_EA_A";
+	public static String FIND_BY_C_FN_MN_LN_SN_EA_A =
+		UserFinder.class.getName() + ".findByC_FN_MN_LN_SN_EA_A";
 
 	public static String JOIN_BY_PERMISSION =
 		UserFinder.class.getName() + ".joinByPermission";
@@ -79,14 +79,12 @@ public class UserFinder {
 	public static String JOIN_BY_USERS_USER_GROUPS =
 		UserFinder.class.getName() + ".joinByUsersUserGroups";
 
-	public static int countByC_U_FN_MN_LN_SN_EA_A(
-			String companyId, String userId, String firstName,
-			String middleName, String lastName, String screenName,
-			String emailAddress, boolean active, LinkedHashMap params,
-			boolean andOperator)
+	public static int countByC_FN_MN_LN_SN_EA_A(
+			String companyId, String firstName, String middleName,
+			String lastName, String screenName, String emailAddress,
+			boolean active, LinkedHashMap params, boolean andOperator)
 		throws SystemException {
 
-		userId = StringUtil.lowerCase(userId);
 		firstName = StringUtil.lowerCase(firstName);
 		middleName = StringUtil.lowerCase(middleName);
 		lastName = StringUtil.lowerCase(lastName);
@@ -98,7 +96,7 @@ public class UserFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_U_FN_MN_LN_SN_EA_A);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_FN_MN_LN_SN_EA_A);
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
 			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
@@ -114,8 +112,7 @@ public class UserFinder {
 
 			_setJoin(qPos, params);
 			qPos.add(companyId);
-			qPos.add(userId);
-			qPos.add(userId);
+			qPos.add(false);
 			qPos.add(firstName);
 			qPos.add(firstName);
 			qPos.add(middleName);
@@ -148,14 +145,13 @@ public class UserFinder {
 		}
 	}
 
-	public static List findByC_U_FN_MN_LN_SN_EA_A(
-			String companyId, String userId, String firstName,
-			String middleName, String lastName, String screenName,
-			String emailAddress, boolean active, LinkedHashMap params,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
+	public static List findByC_FN_MN_LN_SN_EA_A(
+			String companyId, String firstName, String middleName,
+			String lastName, String screenName, String emailAddress,
+			boolean active, LinkedHashMap params, boolean andOperator,
+			int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		userId = StringUtil.lowerCase(userId);
 		firstName = StringUtil.lowerCase(firstName);
 		middleName = StringUtil.lowerCase(middleName);
 		lastName = StringUtil.lowerCase(lastName);
@@ -167,7 +163,7 @@ public class UserFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_U_FN_MN_LN_SN_EA_A);
+			String sql = CustomSQLUtil.get(FIND_BY_C_FN_MN_LN_SN_EA_A);
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
 			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
@@ -184,8 +180,7 @@ public class UserFinder {
 
 			_setJoin(qPos, params);
 			qPos.add(companyId);
-			qPos.add(userId);
-			qPos.add(userId);
+			qPos.add(false);
 			qPos.add(firstName);
 			qPos.add(firstName);
 			qPos.add(middleName);

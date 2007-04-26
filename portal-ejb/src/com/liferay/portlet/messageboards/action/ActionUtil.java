@@ -64,7 +64,7 @@ public class ActionUtil {
 		// Add redundant check here because the JSP does not check permissions
 		// on the initial search container
 
-		String userId = PortalUtil.getUserId(req);
+		long userId = PortalUtil.getUserId(req);
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
 		MBBanLocalServiceUtil.checkBan(layout.getGroupId(), userId);

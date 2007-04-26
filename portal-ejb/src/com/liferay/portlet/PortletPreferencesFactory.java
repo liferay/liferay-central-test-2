@@ -30,11 +30,11 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
@@ -75,7 +75,7 @@ public class PortletPreferencesFactory {
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		PortletPreferencesPK pk = new PortletPreferencesPK(
-			portletId, layoutId, themeDisplay.getUserId());
+			portletId, layoutId, String.valueOf(themeDisplay.getUserId()));
 
 		if (themeDisplay.isSignedIn()) {
 			PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)
@@ -232,10 +232,10 @@ public class PortletPreferencesFactory {
 				if (portlet.isPreferencesOwnedByGroup()) {
 				}
 				else {
-					String userId = PortalUtil.getUserId(req);
+					long userId = PortalUtil.getUserId(req);
 
-					if ((userId == null) || modeEditGuest) {
-						userId = UserImpl.getDefaultUserId(
+					if ((userId <= 0) || modeEditGuest) {
+						userId = UserLocalServiceUtil.getDefaultUserId(
 							themeDisplay.getCompanyId());
 					}
 
@@ -254,10 +254,10 @@ public class PortletPreferencesFactory {
 							LayoutImpl.getGroupId(ownerId);
 				}
 				else {
-					String userId = PortalUtil.getUserId(req);
+					long userId = PortalUtil.getUserId(req);
 
-					if ((userId == null) || modeEditGuest) {
-						userId = UserImpl.getDefaultUserId(
+					if ((userId <= 0) || modeEditGuest) {
+						userId = UserLocalServiceUtil.getDefaultUserId(
 							themeDisplay.getCompanyId());
 					}
 

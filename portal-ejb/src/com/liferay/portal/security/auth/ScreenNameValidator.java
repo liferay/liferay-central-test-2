@@ -22,7 +22,6 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.util.Validator;
 
 /**
@@ -33,13 +32,12 @@ import com.liferay.util.Validator;
  */
 public class ScreenNameValidator {
 
-	public boolean validate(String screenName, String companyId) {
+	public boolean validate(String companyId, String screenName) {
 		if (Validator.isNull(screenName) ||
 			Validator.isNumber(screenName) ||
 			Validator.isEmailAddress(screenName) ||
 			(screenName.equalsIgnoreCase("cyrus")) ||
 			(screenName.equalsIgnoreCase("postfix")) ||
-			(screenName.indexOf(UserImpl.DEFAULT) != -1) ||
 			(screenName.indexOf(companyId) != -1) ||
 			(screenName.indexOf("_") != -1) ||
 			(screenName.indexOf("/") != -1)) {

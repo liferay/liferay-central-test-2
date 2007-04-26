@@ -108,7 +108,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		this.user = user;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return user.getUserId();
 	}
 
@@ -333,7 +333,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			}
 		}
 
-		String companyId = user.getActualCompanyId();
+		String companyId = user.getCompanyId();
 
 		Group guestGroup = GroupServiceUtil.getGroup(
 			companyId, GroupImpl.GUEST);
@@ -364,7 +364,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			stopWatch.start();
 		}
 
-		String companyId = user.getActualCompanyId();
+		String companyId = user.getCompanyId();
 
 		if (isAdmin(companyId, groupId, name)) {
 			return true;

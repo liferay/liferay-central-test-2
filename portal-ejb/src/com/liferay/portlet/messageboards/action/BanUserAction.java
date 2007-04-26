@@ -78,13 +78,13 @@ public class BanUserAction extends PortletAction {
 	protected void banUser(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String banUserId = ParamUtil.getString(req, "banUserId");
+		long banUserId = ParamUtil.getLong(req, "banUserId");
 
 		MBBanServiceUtil.addBan(layout.getPlid(), banUserId);
 	}
 
 	protected void unbanUser(ActionRequest req) throws Exception {
-		String banUserId = ParamUtil.getString(req, "banUserId");
+		long banUserId = ParamUtil.getLong(req, "banUserId");
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 

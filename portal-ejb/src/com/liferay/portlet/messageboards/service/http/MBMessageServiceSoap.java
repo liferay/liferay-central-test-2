@@ -213,8 +213,7 @@ public class MBMessageServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		java.lang.String messageId, java.lang.String userId)
-		throws RemoteException {
+		java.lang.String messageId, long userId) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessageDisplay returnValue =
 				MBMessageServiceUtil.getMessageDisplay(messageId, userId);

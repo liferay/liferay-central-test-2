@@ -184,7 +184,7 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static boolean hasUserGroup(java.lang.String userId, long groupId)
+	public static boolean hasUserGroup(long userId, long groupId)
 		throws RemoteException {
 		try {
 			boolean returnValue = GroupServiceUtil.hasUserGroup(userId, groupId);

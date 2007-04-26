@@ -57,7 +57,7 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 	public static Object[][] TABLE_COLUMNS = {
 			{ "userTrackerId", new Integer(Types.VARCHAR) },
 			{ "companyId", new Integer(Types.VARCHAR) },
-			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.BIGINT) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "remoteAddr", new Integer(Types.VARCHAR) },
 			{ "remoteHost", new Integer(Types.VARCHAR) },
@@ -70,9 +70,6 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTracker.companyId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserTracker.userId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_REMOTEADDR = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTracker.remoteAddr"),
@@ -131,19 +128,12 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getUserId() {
-		return GetterUtil.getString(_userId);
+	public long getUserId() {
+		return _userId;
 	}
 
-	public void setUserId(String userId) {
-		if (((userId == null) && (_userId != null)) ||
-				((userId != null) && (_userId == null)) ||
-				((userId != null) && (_userId != null) &&
-				!userId.equals(_userId))) {
-			if (!XSS_ALLOW_USERID) {
-				userId = XSSUtil.strip(userId);
-			}
-
+	public void setUserId(long userId) {
+		if (userId != _userId) {
 			_userId = userId;
 		}
 	}
@@ -266,7 +256,7 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 
 	private String _userTrackerId;
 	private String _companyId;
-	private String _userId;
+	private long _userId;
 	private Date _modifiedDate;
 	private String _remoteAddr;
 	private String _remoteHost;

@@ -323,7 +323,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByUserId(String userId) throws SystemException {
+	public List findByUserId(long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -332,24 +332,14 @@ public class MBBanPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			return q.list();
 		}
@@ -361,12 +351,12 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByUserId(String userId, int begin, int end)
+	public List findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(String userId, int begin, int end,
+	public List findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -376,14 +366,7 @@ public class MBBanPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -395,10 +378,7 @@ public class MBBanPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -410,7 +390,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public MBBan findByUserId_First(String userId, OrderByComparator obc)
+	public MBBan findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchBanException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
@@ -428,7 +408,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public MBBan findByUserId_Last(String userId, OrderByComparator obc)
+	public MBBan findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchBanException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
@@ -447,7 +427,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public MBBan[] findByUserId_PrevAndNext(long banId, String userId,
+	public MBBan[] findByUserId_PrevAndNext(long banId, long userId,
 		OrderByComparator obc) throws NoSuchBanException, SystemException {
 		MBBan mbBan = findByPrimaryKey(banId);
 		int count = countByUserId(userId);
@@ -459,14 +439,7 @@ public class MBBanPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -478,10 +451,7 @@ public class MBBanPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbBan);
 			MBBan[] array = new MBBanImpl[3];
@@ -499,7 +469,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByBanUserId(String banUserId) throws SystemException {
+	public List findByBanUserId(long banUserId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -508,24 +478,14 @@ public class MBBanPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-
-			if (banUserId == null) {
-				query.append("banUserId IS NULL");
-			}
-			else {
-				query.append("banUserId = ?");
-			}
-
+			query.append("banUserId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (banUserId != null) {
-				q.setString(queryPos++, banUserId);
-			}
+			q.setLong(queryPos++, banUserId);
 
 			return q.list();
 		}
@@ -537,12 +497,12 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByBanUserId(String banUserId, int begin, int end)
+	public List findByBanUserId(long banUserId, int begin, int end)
 		throws SystemException {
 		return findByBanUserId(banUserId, begin, end, null);
 	}
 
-	public List findByBanUserId(String banUserId, int begin, int end,
+	public List findByBanUserId(long banUserId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -552,14 +512,7 @@ public class MBBanPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-
-			if (banUserId == null) {
-				query.append("banUserId IS NULL");
-			}
-			else {
-				query.append("banUserId = ?");
-			}
-
+			query.append("banUserId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -571,10 +524,7 @@ public class MBBanPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (banUserId != null) {
-				q.setString(queryPos++, banUserId);
-			}
+			q.setLong(queryPos++, banUserId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -586,7 +536,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public MBBan findByBanUserId_First(String banUserId, OrderByComparator obc)
+	public MBBan findByBanUserId_First(long banUserId, OrderByComparator obc)
 		throws NoSuchBanException, SystemException {
 		List list = findByBanUserId(banUserId, 0, 1, obc);
 
@@ -604,7 +554,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public MBBan findByBanUserId_Last(String banUserId, OrderByComparator obc)
+	public MBBan findByBanUserId_Last(long banUserId, OrderByComparator obc)
 		throws NoSuchBanException, SystemException {
 		int count = countByBanUserId(banUserId);
 		List list = findByBanUserId(banUserId, count - 1, count, obc);
@@ -623,7 +573,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public MBBan[] findByBanUserId_PrevAndNext(long banId, String banUserId,
+	public MBBan[] findByBanUserId_PrevAndNext(long banId, long banUserId,
 		OrderByComparator obc) throws NoSuchBanException, SystemException {
 		MBBan mbBan = findByPrimaryKey(banId);
 		int count = countByBanUserId(banUserId);
@@ -635,14 +585,7 @@ public class MBBanPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-
-			if (banUserId == null) {
-				query.append("banUserId IS NULL");
-			}
-			else {
-				query.append("banUserId = ?");
-			}
-
+			query.append("banUserId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -654,10 +597,7 @@ public class MBBanPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (banUserId != null) {
-				q.setString(queryPos++, banUserId);
-			}
+			q.setLong(queryPos++, banUserId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbBan);
 			MBBan[] array = new MBBanImpl[3];
@@ -675,7 +615,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public MBBan findByG_B(long groupId, String banUserId)
+	public MBBan findByG_B(long groupId, long banUserId)
 		throws NoSuchBanException, SystemException {
 		MBBan mbBan = fetchByG_B(groupId, banUserId);
 
@@ -700,7 +640,7 @@ public class MBBanPersistence extends BasePersistence {
 		return mbBan;
 	}
 
-	public MBBan fetchByG_B(long groupId, String banUserId)
+	public MBBan fetchByG_B(long groupId, long banUserId)
 		throws SystemException {
 		Session session = null;
 
@@ -712,14 +652,7 @@ public class MBBanPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (banUserId == null) {
-				query.append("banUserId IS NULL");
-			}
-			else {
-				query.append("banUserId = ?");
-			}
-
+			query.append("banUserId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -727,10 +660,7 @@ public class MBBanPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (banUserId != null) {
-				q.setString(queryPos++, banUserId);
-			}
+			q.setLong(queryPos++, banUserId);
 
 			List list = q.list();
 
@@ -834,7 +764,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByUserId(String userId) throws SystemException {
+	public void removeByUserId(long userId) throws SystemException {
 		Iterator itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
@@ -843,7 +773,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByBanUserId(String banUserId) throws SystemException {
+	public void removeByBanUserId(long banUserId) throws SystemException {
 		Iterator itr = findByBanUserId(banUserId).iterator();
 
 		while (itr.hasNext()) {
@@ -852,7 +782,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByG_B(long groupId, String banUserId)
+	public void removeByG_B(long groupId, long banUserId)
 		throws NoSuchBanException, SystemException {
 		MBBan mbBan = findByG_B(groupId, banUserId);
 		remove(mbBan);
@@ -905,7 +835,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByUserId(String userId) throws SystemException {
+	public int countByUserId(long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -915,24 +845,14 @@ public class MBBanPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
+			q.setLong(queryPos++, userId);
 
 			Iterator itr = q.list().iterator();
 
@@ -954,7 +874,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByBanUserId(String banUserId) throws SystemException {
+	public int countByBanUserId(long banUserId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -964,24 +884,14 @@ public class MBBanPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-
-			if (banUserId == null) {
-				query.append("banUserId IS NULL");
-			}
-			else {
-				query.append("banUserId = ?");
-			}
-
+			query.append("banUserId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (banUserId != null) {
-				q.setString(queryPos++, banUserId);
-			}
+			q.setLong(queryPos++, banUserId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1003,7 +913,7 @@ public class MBBanPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByG_B(long groupId, String banUserId)
+	public int countByG_B(long groupId, long banUserId)
 		throws SystemException {
 		Session session = null;
 
@@ -1016,14 +926,7 @@ public class MBBanPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (banUserId == null) {
-				query.append("banUserId IS NULL");
-			}
-			else {
-				query.append("banUserId = ?");
-			}
-
+			query.append("banUserId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -1031,10 +934,7 @@ public class MBBanPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (banUserId != null) {
-				q.setString(queryPos++, banUserId);
-			}
+			q.setLong(queryPos++, banUserId);
 
 			Iterator itr = q.list().iterator();
 

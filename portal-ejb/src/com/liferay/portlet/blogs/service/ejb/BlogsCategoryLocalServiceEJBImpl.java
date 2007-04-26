@@ -67,7 +67,7 @@ public class BlogsCategoryLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		java.lang.String userId, long parentCategoryId, java.lang.String name,
+		long userId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -78,7 +78,7 @@ public class BlogsCategoryLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		java.lang.String userId, long parentCategoryId, java.lang.String name,
+		long userId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -89,7 +89,7 @@ public class BlogsCategoryLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsCategory addCategory(
-		java.lang.String userId, long parentCategoryId, java.lang.String name,
+		long userId, long parentCategoryId, java.lang.String name,
 		java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,

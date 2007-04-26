@@ -54,8 +54,8 @@ public class EmailAddressLocalServiceImpl
 	extends EmailAddressLocalServiceBaseImpl {
 
 	public EmailAddress addEmailAddress(
-			String userId, String className, String classPK,
-			String address, int typeId, boolean primary)
+			long userId, String className, String classPK, String address,
+			int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);

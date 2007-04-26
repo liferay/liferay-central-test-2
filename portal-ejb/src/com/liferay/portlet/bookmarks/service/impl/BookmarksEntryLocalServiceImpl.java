@@ -58,7 +58,7 @@ public class BookmarksEntryLocalServiceImpl
 	extends BookmarksEntryLocalServiceBaseImpl {
 
 	public BookmarksEntry addEntry(
-			String userId, long folderId, String name, String url,
+			long userId, long folderId, String name, String url,
 			String comments, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -70,7 +70,7 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	public BookmarksEntry addEntry(
-			String userId, long folderId, String name, String url,
+			long userId, long folderId, String name, String url,
 			String comments, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -81,7 +81,7 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	public BookmarksEntry addEntry(
-			String userId, long folderId, String name, String url,
+			long userId, long folderId, String name, String url,
 			String comments, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
@@ -252,11 +252,10 @@ public class BookmarksEntryLocalServiceImpl
 		return BookmarksEntryFinder.findByGroupId(groupId, begin, end);
 	}
 
-	public List getGroupEntries(
-			long groupId, String userId, int begin, int end)
+	public List getGroupEntries(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
-		if (Validator.isNull(userId)) {
+		if (userId <= 0) {
 			return BookmarksEntryFinder.findByGroupId(groupId, begin, end);
 		}
 		else {
@@ -268,10 +267,10 @@ public class BookmarksEntryLocalServiceImpl
 		return BookmarksEntryFinder.countByGroupId(groupId);
 	}
 
-	public int getGroupEntriesCount(long groupId, String userId)
+	public int getGroupEntriesCount(long groupId, long userId)
 		throws SystemException {
 
-		if (Validator.isNull(userId)) {
+		if (userId <= 0) {
 			return BookmarksEntryFinder.countByGroupId(groupId);
 		}
 		else {

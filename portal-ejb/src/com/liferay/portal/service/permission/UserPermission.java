@@ -39,7 +39,7 @@ import com.liferay.util.Validator;
 public class UserPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String userId,
+			PermissionChecker permissionChecker, long userId,
 			String organizationId, String locationId, String actionId)
 		throws PrincipalException {
 
@@ -52,8 +52,8 @@ public class UserPermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, String userId,
-		String organizationId, String locationId, String actionId) {
+		PermissionChecker permissionChecker, long userId, String organizationId,
+		String locationId, String actionId) {
 
 		PermissionCheckerImpl permissionCheckerImpl =
 			(PermissionCheckerImpl)permissionChecker;
@@ -64,7 +64,7 @@ public class UserPermission {
 			organizationActionId = actionId;
 		}
 
-		if (permissionCheckerImpl.getUser().getUserId().equals(userId)) {
+		if (permissionCheckerImpl.getUserId() == userId) {
 			return true;
 		}
 		else if (permissionChecker.hasPermission(

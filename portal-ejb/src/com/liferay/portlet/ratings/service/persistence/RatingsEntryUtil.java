@@ -195,16 +195,15 @@ public class RatingsEntryUtil {
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry findByU_C_C(
-		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK)
+		long userId, java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.ratings.NoSuchEntryException {
 		return getPersistence().findByU_C_C(userId, className, classPK);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry fetchByU_C_C(
-		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK) throws com.liferay.portal.SystemException {
+		long userId, java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByU_C_C(userId, className, classPK);
 	}
 
@@ -242,8 +241,8 @@ public class RatingsEntryUtil {
 		getPersistence().removeByC_C(className, classPK);
 	}
 
-	public static void removeByU_C_C(java.lang.String userId,
-		java.lang.String className, java.lang.String classPK)
+	public static void removeByU_C_C(long userId, java.lang.String className,
+		java.lang.String classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.ratings.NoSuchEntryException {
 		getPersistence().removeByU_C_C(userId, className, classPK);
@@ -258,9 +257,8 @@ public class RatingsEntryUtil {
 		return getPersistence().countByC_C(className, classPK);
 	}
 
-	public static int countByU_C_C(java.lang.String userId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException {
+	public static int countByU_C_C(long userId, java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException {
 		return getPersistence().countByU_C_C(userId, className, classPK);
 	}
 
