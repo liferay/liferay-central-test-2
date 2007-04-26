@@ -19,7 +19,7 @@ Liferay.Service = {
 				}
 			);
 
-			return eval(xHR.responseText);
+			return eval("(" + xHR.responseText + ")");
 		}
 	},
 

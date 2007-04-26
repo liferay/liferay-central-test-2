@@ -168,7 +168,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 			// User
 
-			row.addText(PortalUtil.getUserName(vote.getUserId(), vote.getUserId(), request));
+			row.addText(PortalUtil.getUserName(vote.getUserId(), String.valueOf(vote.getUserId()), request));
 
 			// Choice
 

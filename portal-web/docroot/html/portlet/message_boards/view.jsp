@@ -247,7 +247,7 @@ portletURL.setParameter("categoryId", categoryId);
 				MBThread thread = (MBThread)results.get(i);
 
 				MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
-				boolean readThread = MBThreadLocalServiceUtil.hasReadThread(request.getRemoteUser(), thread.getThreadId());
+				boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
 
 				ResultRow row = new ResultRow(message, thread.getPrimaryKey().toString(), i, !readThread);
 
@@ -381,7 +381,7 @@ portletURL.setParameter("categoryId", categoryId);
 	<c:when test='<%= tabs1.equals("my-posts") || tabs1.equals("recent-posts") %>'>
 
 		<%
-		String groupThreadsUserId = null;
+		long groupThreadsUserId = 0;
 
 		if (tabs1.equals("my-posts") && themeDisplay.isSignedIn()) {
 			groupThreadsUserId = user.getUserId();
@@ -412,7 +412,7 @@ portletURL.setParameter("categoryId", categoryId);
 			MBThread thread = (MBThread)results.get(i);
 
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
-			boolean readThread = MBThreadLocalServiceUtil.hasReadThread(request.getRemoteUser(), thread.getThreadId());
+			boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
 
 			ResultRow row = new ResultRow(message, thread.getPrimaryKey().toString(), i, !readThread);
 
@@ -558,7 +558,7 @@ portletURL.setParameter("categoryId", categoryId);
 						rowURL.setPortletMode(PortletMode.VIEW);
 
 						rowURL.setParameter("struts_action", "/directory/edit_user");
-						rowURL.setParameter("p_u_i_d", user2.getUserId());
+						rowURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
 
 						fullName = user2.getFullName();
 						createDate = user2.getCreateDate();

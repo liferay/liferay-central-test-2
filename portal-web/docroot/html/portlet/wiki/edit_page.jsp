@@ -69,7 +69,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>">
 <input name="<portlet:namespace />title" type="hidden" value="<%= title %>">
 
-<%@ include file="/html/portlet/wiki/breadcrumb.jsp" %>
+<%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
 
 <br><br>
 

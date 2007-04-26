@@ -27,7 +27,7 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String userId = request.getParameter("p_u_i_d");
+long userId = ParamUtil.getLong(request, "p_u_i_d");
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">

@@ -101,7 +101,6 @@
 <%@ page import="com.liferay.portal.util.PropsUtil" %>
 <%@ page import="com.liferay.portal.util.Recipient" %>
 <%@ page import="com.liferay.portal.util.ReleaseInfo" %>
-<%@ page import="com.liferay.portal.util.Resolution" %>
 <%@ page import="com.liferay.portal.util.SessionClicks" %>
 <%@ page import="com.liferay.portal.util.SessionTreeJSClicks" %>
 <%@ page import="com.liferay.portal.util.ShutdownUtil" %>

@@ -32,11 +32,11 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>">
 
-<%@ include file="/html/portlet/wiki/breadcrumb.jsp" %>
+<%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
 
 <br><br>
 
-<%@ include file="/html/portlet/wiki/view_page_content.jsp" %>
+<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 
 <br>
 

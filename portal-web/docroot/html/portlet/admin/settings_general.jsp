@@ -194,19 +194,6 @@ User user2 = company.getDefaultUser();
 				<liferay-ui:input-time-zone name="timeZoneId" value="<%= user2.getTimeZone().getID() %>" />
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "resolution") %>
-			</td>
-			<td style="padding-left: 10px;"></td>
-			<td>
-				<select name="<portlet:namespace />resolution">
-					<option <%= (user2.getResolution().equals(Resolution.S800X600_KEY)) ? "selected" : "" %> value="<%= Resolution.S800X600_KEY %>"><%= LanguageUtil.get(pageContext, "800-by-600-pixels") %></option>
-					<option <%= (user2.getResolution().equals(Resolution.S1024X768_KEY)) ? "selected" : "" %> value="<%= Resolution.S1024X768_KEY %>"><%= LanguageUtil.get(pageContext, "1024-by-768-pixels") %></option>
-					<option <%= (user2.getResolution().equals(Resolution.FULL_KEY)) ? "selected" : "" %> value="<%= Resolution.FULL_KEY %>"><%= LanguageUtil.get(pageContext, "full-screen") %></option>
-				</select>
-			</td>
-		</tr>
 		</table>
 	</td>
 	<td style="padding-left: 30px;"></td>

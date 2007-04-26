@@ -40,7 +40,7 @@
 
 			LinkedHashMap groupParams = new LinkedHashMap();
 
-			groupParams.put("usersGroups", user.getUserId());
+			groupParams.put("usersGroups", new Long(user.getUserId()));
 			//groupParams.put("pageCount", StringPool.BLANK);
 
 			List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);

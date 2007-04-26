@@ -84,7 +84,7 @@ try {
 catch (NoSuchResourceException nsre) {
 	boolean portletActions = Validator.isNull(modelResource);
 
-	ResourceLocalServiceUtil.addResources(company.getCompanyId(), groupId, null, selResource, resourcePrimKey, portletActions, true, true);
+	ResourceLocalServiceUtil.addResources(company.getCompanyId(), groupId, 0, selResource, resourcePrimKey, portletActions, true, true);
 
 	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey);
 }
@@ -104,7 +104,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 %>
 
 <script type="text/javascript">
-
 	function <portlet:namespace />saveGroupPermissions() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_permissions";
 		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= portletURL.toString() %>";
@@ -261,7 +260,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 		<%
 		String userIds = ParamUtil.getString(request, "userIds");
-		String[] userIdsArray = StringUtil.split(userIds);
+		long[] userIdsArray = StringUtil.split(userIds, 0L);
 		int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 		%>
 
@@ -305,11 +304,11 @@ else if (modelResource.equals(Layout.class.getName())) {
 					userParams.put("usersGroups", new Long(GetterUtil.getLong(layoutGroupId)));
 				}
 
-				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getUserId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
+				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
 
 				searchContainer.setTotal(total);
 
-				List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getUserId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
+				List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
 
 				searchContainer.setResults(results);
 				%>
@@ -335,7 +334,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				for (int i = 0; i < results.size(); i++) {
 					User user2 = (User)results.get(i);
 
-					ResultRow row = new ResultRow(user2, user2.getPrimaryKey().toString(), i);
+					ResultRow row = new ResultRow(user2, user2.getPrimaryKey(), i);
 
 					// Name, screen name, and email address
 
@@ -984,7 +983,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		for (int i = 0; i < results.size(); i++) {
 			User user2 = (User)results.get(i);
 
-			ResultRow row = new ResultRow(user2, user2.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(user2, user2.getPrimaryKey(), i);
 
 			// Name and email address
 

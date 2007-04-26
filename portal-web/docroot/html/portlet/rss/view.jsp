@@ -40,7 +40,7 @@ WindowState windowState = renderRequest.getWindowState();
 		entriesPerFeed = 20;
 		%>
 
-		<%@ include file="/html/portlet/rss/feed.jsp" %>
+		<%@ include file="/html/portlet/rss/feed.jspf" %>
 	</c:when>
 	<c:otherwise>
 
@@ -63,7 +63,7 @@ WindowState windowState = renderRequest.getWindowState();
 			}
 		%>
 
-			<%@ include file="/html/portlet/rss/feed.jsp" %>
+			<%@ include file="/html/portlet/rss/feed.jspf" %>
 
 		<%
 		}

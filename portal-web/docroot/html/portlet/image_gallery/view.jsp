@@ -253,7 +253,7 @@ portletURL.setParameter("folderId", folderId);
 	<c:when test='<%= tabs1.equals("my-images") || tabs1.equals("recent-images") %>'>
 
 		<%
-		String groupImagesUserId = null;
+		long groupImagesUserId = 0;
 
 		if (tabs1.equals("my-images") && themeDisplay.isSignedIn()) {
 			groupImagesUserId = user.getUserId();

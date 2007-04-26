@@ -39,7 +39,7 @@ String formName = namespace + request.getAttribute("liferay-ui:discussion:formNa
 String formAction = (String)request.getAttribute("liferay-ui:discussion:formAction");
 String className = (String)request.getAttribute("liferay-ui:discussion:className");
 String classPK = (String)request.getAttribute("liferay-ui:discussion:classPK");
-String userId = (String)request.getAttribute("liferay-ui:discussion:userId");
+long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:userId"));
 String subject = (String)request.getAttribute("liferay-ui:discussion:subject");
 String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect");
 
@@ -115,7 +115,7 @@ String editHREF = null;
 String deleteHREF = null;
 %>
 
-<%@ include file="/html/taglib/ui/discussion/post_reply_form.jsp" %>
+<%@ include file="/html/taglib/ui/discussion/post_reply_form.jspf" %>
 
 </table>
 
@@ -194,7 +194,7 @@ List messages = treeWalker.getMessages();
 			</td>
 		</tr>
 
-		<%@ include file="/html/taglib/ui/discussion/post_reply_form.jsp" %>
+		<%@ include file="/html/taglib/ui/discussion/post_reply_form.jspf" %>
 
 		<c:if test="<%= i + 1 < messages.size() %>">
 			<tr>

@@ -35,7 +35,7 @@
 
 	User user2 = (User)row.getObject();
 
-	String userId = user2.getUserId();
+	long userId = user2.getUserId();
 
 	String organizationId = user2.getOrganization().getOrganizationId();
 	String locationId = user2.getLocation().getOrganizationId();
@@ -44,7 +44,7 @@
 	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editUserURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-			<portlet:param name="p_u_i_d" value="<%= user2.getUserId() %>" />
+			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="edit" url="<%= editUserURL %>" />
@@ -54,7 +54,7 @@
 		<liferay-security:permissionsURL
 			modelResource="<%= User.class.getName() %>"
 			modelResourceDescription="<%= user2.getFullName() %>"
-			resourcePrimKey="<%= user2.getPrimaryKey().toString() %>"
+			resourcePrimKey="<%= String.valueOf(user2.getPrimaryKey()) %>"
 			var="permissionsUserURL"
 		/>
 
@@ -62,7 +62,7 @@
 	</c:if>
 
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-		<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE)) && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE)) && !user.getUserId().equals(user2.getUserId()) && !themeDisplay.isImpersonated() && UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.IMPERSONATE) %>">
+		<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE)) && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE)) && (user.getUserId() != user2.getUserId()) && !themeDisplay.isImpersonated() && UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.IMPERSONATE) %>">
 			<liferay-security:doAsURL
 				doAsUserId="<%= user2.getUserId() %>"
 				var="impersonateUserURL"
@@ -81,7 +81,7 @@
 						<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="deleteUserIds" value="<%= userId %>" />
+						<portlet:param name="deleteUserIds" value="<%= String.valueOf(userId) %>" />
 					</portlet:actionURL>
 
 					<liferay-ui:icon image="activate" url="<%= restoreUserURL %>" />
@@ -91,7 +91,7 @@
 					<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="deleteUserIds" value="<%= userId %>" />
+					<portlet:param name="deleteUserIds" value="<%= String.valueOf(userId) %>" />
 				</portlet:actionURL>
 
 				<c:choose>

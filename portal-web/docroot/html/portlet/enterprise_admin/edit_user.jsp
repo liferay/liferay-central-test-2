@@ -65,7 +65,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
 <input name="<portlet:namespace />tabs4" type="hidden" value="<%= tabs4 %>">
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /><portlet:param name="tabs4" value="<%= tabs4 %>" /></portlet:renderURL>&<portlet:namespace />p_u_i_d=">
-<input name="<portlet:namespace />p_u_i_d" type="hidden" value='<%= (user2 != null) ? user2.getUserId() : "" %>'>
+<input name="<portlet:namespace />p_u_i_d" type="hidden" value='<%= (user2 != null) ? user2.getUserId() : 0 %>'>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="users" />
@@ -75,7 +75,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 	<liferay-util:param name="tabs1" value="profile" />
 </liferay-util:include>
 
-<%@ include file="/html/portlet/enterprise_admin/edit_user_profile.jsp" %>
+<%@ include file="/html/portlet/enterprise_admin/edit_user_profile.jspf" %>
 
 <c:if test="<%= user2 != null %>">
 	<c:if test="<%= editable %>">
@@ -85,13 +85,13 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 			refresh="<%= false %>"
 		>
 			<liferay-ui:section>
-				<%@ include file="/html/portlet/enterprise_admin/edit_user_display.jsp" %>
+				<%@ include file="/html/portlet/enterprise_admin/edit_user_display.jspf" %>
 			</liferay-ui:section>
 			<liferay-ui:section>
-				<%@ include file="/html/portlet/enterprise_admin/edit_user_password.jsp" %>
+				<%@ include file="/html/portlet/enterprise_admin/edit_user_password.jspf" %>
 			</liferay-ui:section>
 			<liferay-ui:section>
-				<%@ include file="/html/portlet/enterprise_admin/user_role_iterator.jsp" %>
+				<%@ include file="/html/portlet/enterprise_admin/user_role_iterator.jspf" %>
 			</liferay-ui:section>
 		</liferay-ui:tabs>
 	</c:if>
@@ -145,14 +145,14 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 			</liferay-util:include>
 		</liferay-ui:section>
 		<liferay-ui:section>
-			<%@ include file="/html/portlet/enterprise_admin/edit_user_sms.jsp" %>
+			<%@ include file="/html/portlet/enterprise_admin/edit_user_sms.jspf" %>
 		</liferay-ui:section>
 		<liferay-ui:section>
-			<%@ include file="/html/portlet/enterprise_admin/edit_user_im.jsp" %>
+			<%@ include file="/html/portlet/enterprise_admin/edit_user_im.jspf" %>
 		</liferay-ui:section>
 	</liferay-ui:tabs>
 
-	<%@ include file="/html/portlet/enterprise_admin/edit_user_comments.jsp" %>
+	<%@ include file="/html/portlet/enterprise_admin/edit_user_comments.jspf" %>
 </c:if>
 
 </form>

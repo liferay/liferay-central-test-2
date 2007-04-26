@@ -24,11 +24,11 @@
 				jQuery(window).unbind("scroll", $.Popup.center);
 			}
 		},
-		
+
 		count: function() {
 			return jQuery(".popup").length;
 		},
-		
+
 		open: function(options) {
 			/*
 			 * OPTIONS:
@@ -76,14 +76,14 @@
 			jPopup.find(".popup-close").click(function() {
 				$.Popup.close(this);
 			});
-			
+
 			if (onClose != null) {
 				jPopup.find(".popup-close").click(onClose);
 			}
 
 			jPopup[0].alertOptions = options;
-			
-			if (myMessage != null && (typeof myMessage == "object")) {
+
+			if ((myMessage != null) && (typeof myMessage == "object")) {
 				myMessage = jQuery(myMessage);
 			}
 
@@ -96,7 +96,7 @@
 			if (msgWidth) {
 				jPopup.css("width", msgWidth + "px");
 			}
-			
+
 			jPopup.mousedown(function() {
 				if (this != jQuery("#alert-messages .popup:last")[0]) {
 					jQuery("#alert-messages").append(this);
@@ -126,7 +126,7 @@
 
 			$.Popup.resize();
 			jBg.fadeTo("normal", 0.5);
-			
+
 			if (false) {
 				jPopup.Draggable({
 					handle: jPopup.find(".popup-header")[0],

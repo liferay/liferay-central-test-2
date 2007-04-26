@@ -28,4 +28,4 @@
 boolean rootOrganization = true;
 %>
 
-<%@ include file="/html/portlet/enterprise_admin/select_organization_common.jsp" %>
+<%@ include file="/html/portlet/enterprise_admin/select_organization_common.jspf" %>

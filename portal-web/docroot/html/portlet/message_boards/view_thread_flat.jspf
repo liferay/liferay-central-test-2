@@ -39,7 +39,7 @@ for (int i = 0; i < messages.size(); i++) {
 	}
 %>
 
-	<%@ include file="/html/portlet/message_boards/view_thread_message.jsp" %>
+	<%@ include file="/html/portlet/message_boards/view_thread_message.jspf" %>
 
 <%
 }

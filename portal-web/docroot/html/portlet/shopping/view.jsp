@@ -32,12 +32,12 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "categories");
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("categories") %>'>
-		<%@ include file="/html/portlet/shopping/categories.jsp" %>
+		<%@ include file="/html/portlet/shopping/categories.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("orders") && !user.isDefaultUser() %>'>
-		<%@ include file="/html/portlet/shopping/orders.jsp" %>
+		<%@ include file="/html/portlet/shopping/orders.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("coupons") %>'>
-		<%@ include file="/html/portlet/shopping/coupons.jsp" %>
+		<%@ include file="/html/portlet/shopping/coupons.jspf" %>
 	</c:when>
 </c:choose>

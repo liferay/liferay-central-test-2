@@ -70,7 +70,9 @@ catch (NoSuchResourceException nsre) {
 				}
 			}
 			else if (group.isUser()) {
-				if (group.getClassPK().equals(user.getUserId())) {
+				long groupUserId = GetterUtil.getLong(group.getClassPK());
+
+				if (groupUserId == user.getUserId()) {
 					addDefaultResource = true;
 				}
 			}
@@ -82,7 +84,7 @@ catch (NoSuchResourceException nsre) {
 	}
 
 	if (addDefaultResource) {
-		ResourceLocalServiceUtil.addResources(company.getCompanyId(), layout.getGroupId(), null, rootPortletId, portletPrimaryKey, true, true, true);
+		ResourceLocalServiceUtil.addResources(company.getCompanyId(), layout.getGroupId(), 0, rootPortletId, portletPrimaryKey, true, true, true);
 	}
 	else {
 		denyAccess = true;

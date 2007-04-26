@@ -300,7 +300,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Assigned to
 
-				row.addText(PortalUtil.getUserName(task.getAssignedUserId(), task.getAssignedUserId(), request), rowURL);
+				row.addText(PortalUtil.getUserName(task.getAssignedUserId(), String.valueOf(task.getAssignedUserId()), request), rowURL);
 
 				// Create date
 

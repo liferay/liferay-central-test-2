@@ -65,10 +65,10 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 	<%
 	OrderSearchTerms searchTerms = (OrderSearchTerms)searchContainer.getSearchTerms();
 
-	String searchUserId = user.getUserId();
+	long searchUserId = user.getUserId();
 
 	if (PortletPermission.contains(permissionChecker, plid, PortletKeys.SHOPPING, ActionKeys.MANAGE_ORDERS)) {
-		searchUserId = null;
+		searchUserId = 0;
 	}
 
 	int total = ShoppingOrderLocalServiceUtil.searchCount(searchTerms.getOrderId(), portletGroupId.longValue(), company.getCompanyId(), searchUserId, searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator());

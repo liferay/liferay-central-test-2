@@ -264,7 +264,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 	<c:when test='<%= tabs1.equals("my-entries") || tabs1.equals("recent-entries") %>'>
 
 		<%
-		String groupEntriesUserId = null;
+		long groupEntriesUserId = 0;
 
 		if (tabs1.equals("my-entries") && themeDisplay.isSignedIn()) {
 			groupEntriesUserId = user.getUserId();

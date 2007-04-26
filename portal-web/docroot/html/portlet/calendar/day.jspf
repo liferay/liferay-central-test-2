@@ -85,4 +85,4 @@ Calendar cal = (Calendar)selCal.clone();
 
 <br>
 
-<%@ include file="/html/portlet/calendar/event_iterator.jsp" %>
+<%@ include file="/html/portlet/calendar/event_iterator.jspf" %>

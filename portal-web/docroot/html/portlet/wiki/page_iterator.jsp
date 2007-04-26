@@ -31,7 +31,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 String type = ParamUtil.getString(request, "type");
 %>
 
-<%@ include file="/html/portlet/wiki/breadcrumb.jsp" %>
+<%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
 
 <%
 String strutsAction = "";

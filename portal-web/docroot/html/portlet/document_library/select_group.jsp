@@ -50,7 +50,7 @@ GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms(
 
 LinkedHashMap groupParams = new LinkedHashMap();
 
-groupParams.put("usersGroups", user.getUserId());
+groupParams.put("usersGroups", new Long(user.getUserId()));
 
 int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
 

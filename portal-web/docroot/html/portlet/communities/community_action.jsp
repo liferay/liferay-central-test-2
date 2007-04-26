@@ -100,7 +100,7 @@ String tabs1 = (String)objArray[1];
 				<portlet:param name="<%= Constants.CMD %>" value="group_users" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-				<portlet:param name="removeUserIds" value="<%= user.getUserId() %>" />
+				<portlet:param name="removeUserIds" value="<%= String.valueOf(user.getUserId()) %>" />
 			</portlet:actionURL>
 
 			<liferay-ui:icon image="leave" url="<%= leaveURL %>" />
@@ -113,7 +113,7 @@ String tabs1 = (String)objArray[1];
 				<portlet:param name="<%= Constants.CMD %>" value="group_users" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-				<portlet:param name="addUserIds" value="<%= user.getUserId() %>" />
+				<portlet:param name="addUserIds" value="<%= String.valueOf(user.getUserId()) %>" />
 			</portlet:actionURL>
 
 			<liferay-ui:icon image="join" url="<%= joinURL %>" />

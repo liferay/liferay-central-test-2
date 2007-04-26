@@ -72,7 +72,7 @@
 							}
 							%>
 
-							<c:if test="<%= !user.getUserId().equals(user2.getUserId()) && PortletPermission.contains(permissionChecker, themeDisplay.getPlid(), ActionKeys.BAN_USER) %>">
+							<c:if test="<%= (user.getUserId() != user2.getUserId()) && PortletPermission.contains(permissionChecker, themeDisplay.getPlid(), ActionKeys.BAN_USER) %>">
 								<hr>
 
 								<c:choose>
@@ -81,7 +81,7 @@
 											<portlet:param name="struts_action" value="/message_boards/ban_user" />
 											<portlet:param name="<%= Constants.CMD %>" value="unban" />
 											<portlet:param name="redirect" value="<%= currentURL %>" />
-											<portlet:param name="banUserId" value="<%= user2.getUserId() %>" />
+											<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
 										</portlet:actionURL>
 
 										<a href="<%= unbanUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unban_user.png"></a> <a href="<%= unbanUserURL.toString() %>"><%= LanguageUtil.get(pageContext, "unban-this-user") %></a>
@@ -91,7 +91,7 @@
 											<portlet:param name="struts_action" value="/message_boards/ban_user" />
 											<portlet:param name="<%= Constants.CMD %>" value="ban" />
 											<portlet:param name="redirect" value="<%= currentURL %>" />
-											<portlet:param name="banUserId" value="<%= user2.getUserId() %>" />
+											<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
 										</portlet:actionURL>
 
 										<a href="<%= banUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ban_user.png"></a> <a href="<%= banUserURL.toString() %>"><%= LanguageUtil.get(pageContext, "ban-this-user") %></a>

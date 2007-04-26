@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
-<%@ include file="/html/portlet/message_boards/css.jsp" %>
+<%@ include file="/html/portlet/message_boards/css.jspf" %>
 
 <%
 MBMessageDisplay messageDisplay = (MBMessageDisplay)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
@@ -262,7 +262,7 @@ else {
 			<liferay-util:include page="/html/portlet/message_boards/view_thread_tree.jsp" />
 		</c:when>
 		<c:otherwise>
-			<%@ include file="/html/portlet/message_boards/view_thread_flat.jsp" %>
+			<%@ include file="/html/portlet/message_boards/view_thread_flat.jspf" %>
 		</c:otherwise>
 	</c:choose>
 </div>

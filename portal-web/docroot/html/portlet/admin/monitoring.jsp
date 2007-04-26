@@ -85,7 +85,7 @@
 
 			// User ID
 
-			row.addText(userTracker.getUserId(), rowURL);
+			row.addText(String.valueOf(userTracker.getUserId()), rowURL);
 
 			// Name
 

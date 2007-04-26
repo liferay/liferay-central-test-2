@@ -40,7 +40,7 @@ String url = (String)request.getAttribute("liferay-ui:ratings:url");
 double yourScore = 0.0;
 
 try {
-	RatingsEntry entry = RatingsEntryLocalServiceUtil.getEntry(request.getRemoteUser(), className, classPK);
+	RatingsEntry entry = RatingsEntryLocalServiceUtil.getEntry(themeDisplay.getUserId(), className, classPK);
 
 	yourScore = entry.getScore();
 }

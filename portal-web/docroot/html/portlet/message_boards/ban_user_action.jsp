@@ -35,7 +35,7 @@ MBBan ban = (MBBan)row.getObject();
 		<portlet:param name="struts_action" value="/message_boards/ban_user" />
 		<portlet:param name="<%= Constants.CMD %>" value="unban" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="banUserId" value="<%= ban.getBanUserId() %>" />
+		<portlet:param name="banUserId" value="<%= String.valueOf(ban.getBanUserId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon

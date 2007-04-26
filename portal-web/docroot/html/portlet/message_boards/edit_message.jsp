@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
-<%@ include file="/html/portlet/message_boards/css.jsp" %>
+<%@ include file="/html/portlet/message_boards/css.jspf" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -127,7 +127,7 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 	String classHoverName = "portlet-section-body-hover";
 	%>
 
-	<%@ include file="/html/portlet/message_boards/view_thread_message.jsp" %>
+	<%@ include file="/html/portlet/message_boards/view_thread_message.jspf" %>
 
 	<%
 	message = temp;
@@ -227,7 +227,7 @@ if (message != null) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<%@ include file="/html/portlet/message_boards/bbcode_editor.jsp" %>
+		<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
 
 		<input name="<portlet:namespace />body" type="hidden" value="">
 	</td>

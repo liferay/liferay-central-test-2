@@ -46,19 +46,19 @@ portletURL.setParameter("tabs1", tabs1);
 		<%@ include file="/html/portlet/calendar/summary.jsp" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("day") %>'>
-		<%@ include file="/html/portlet/calendar/day.jsp" %>
+		<%@ include file="/html/portlet/calendar/day.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("week") %>'>
-		<%@ include file="/html/portlet/calendar/week.jsp" %>
+		<%@ include file="/html/portlet/calendar/week.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("month") %>'>
-		<%@ include file="/html/portlet/calendar/month.jsp" %>
+		<%@ include file="/html/portlet/calendar/month.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("year") %>'>
-		<%@ include file="/html/portlet/calendar/year.jsp" %>
+		<%@ include file="/html/portlet/calendar/year.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("events") %>'>
-		<%@ include file="/html/portlet/calendar/events.jsp" %>
+		<%@ include file="/html/portlet/calendar/events.jspf" %>
 	</c:when>
 </c:choose>
 

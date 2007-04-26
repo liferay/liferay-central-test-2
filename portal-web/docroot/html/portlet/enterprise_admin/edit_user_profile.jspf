@@ -274,15 +274,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				</select>
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "nickname") %>
-			</td>
-			<td style="padding-left: 10px;"></td>
-			<td>
-				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="nickName" />
-			</td>
-		</tr>
 		</table>
 	</td>
 	<td style="padding-left: 30px;"></td>
@@ -399,7 +390,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getUserId() %>"><br>
 
 			<c:if test="<%= editable %>">
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="p_u_i_d" value="<%= user2.getUserId() %>" /></portlet:renderURL>" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "change") %></a>
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" /></portlet:renderURL>" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "change") %></a>
 			</c:if>
 		</td>
 	</c:if>

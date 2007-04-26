@@ -42,7 +42,7 @@ List newsList = NewsUtil.getNews(prefs);
 		News news = NewsUtil.getNews(url);
 		%>
 
-		<%@ include file="/html/portlet/news/feed.jsp" %>
+		<%@ include file="/html/portlet/news/feed.jspf" %>
 	</c:when>
 	<c:otherwise>
 
@@ -51,7 +51,7 @@ List newsList = NewsUtil.getNews(prefs);
 			News news = (News)newsList.get(i);
 		%>
 
-			<%@ include file="/html/portlet/news/feed.jsp" %>
+			<%@ include file="/html/portlet/news/feed.jspf" %>
 
 		<%
 		}

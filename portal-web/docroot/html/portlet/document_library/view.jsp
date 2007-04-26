@@ -129,7 +129,7 @@ portletURL.setParameter("folderId", folderId);
 				int fileEntriesCount = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(subfolderIds);
 			%>
 
-				<%@ include file="/html/portlet/document_library/folder_columns.jsp" %>
+				<%@ include file="/html/portlet/document_library/folder_columns.jspf" %>
 
 			<%
 
@@ -248,7 +248,7 @@ portletURL.setParameter("folderId", folderId);
 				}
 			%>
 
-				<%@ include file="/html/portlet/document_library/file_entry_columns.jsp" %>
+				<%@ include file="/html/portlet/document_library/file_entry_columns.jspf" %>
 
 			<%
 
@@ -310,7 +310,7 @@ portletURL.setParameter("folderId", folderId);
 	<c:when test='<%= tabs1.equals("my-documents") || tabs1.equals("recent-documents") %>'>
 
 		<%
-		String groupFileEntriesUserId = null;
+		long groupFileEntriesUserId = 0;
 
 		if (tabs1.equals("my-documents") && themeDisplay.isSignedIn()) {
 			groupFileEntriesUserId = user.getUserId();
@@ -348,7 +348,7 @@ portletURL.setParameter("folderId", folderId);
 			String rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + fileEntry.getFolderId() + "&name=" + Http.encodeURL(fileEntry.getName());
 		%>
 
-			<%@ include file="/html/portlet/document_library/file_entry_columns.jsp" %>
+			<%@ include file="/html/portlet/document_library/file_entry_columns.jspf" %>
 
 		<%
 

@@ -46,7 +46,7 @@ if (fileEntry != null) {
 
 		isLocked = Boolean.TRUE;
 
-		if (lock.getUserId().equals(user.getUserId())) {
+		if (lock.getUserId() == user.getUserId()) {
 			hasLock = Boolean.TRUE;
 		}
 	}
@@ -79,7 +79,7 @@ portletURL.setParameter("name", name);
 		</c:when>
 		<c:otherwise>
 			<span class="portlet-msg-error" style="font-size: xx-small;">
-			<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {PortalUtil.getUserName(lock.getUserId(), lock.getUserId()), dateFormatDateTime.format(lock.getDate())}, false) %>
+			<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId())), dateFormatDateTime.format(lock.getDate())}, false) %>
 			</span>
 		</c:otherwise>
 	</c:choose>

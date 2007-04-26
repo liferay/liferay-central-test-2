@@ -92,7 +92,7 @@ boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/html/portlet/polls/view_question_results.jsp" %>
+		<%@ include file="/html/portlet/polls/view_question_results.jspf" %>
 
 		<c:choose>
 			<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">

@@ -93,7 +93,7 @@ if (!rootOrganization) {
 	<liferay-ui:tabs names='<%= rootOrganization ? "organization" : "location" %>' />
 </c:if>
 
-<%@ include file="/html/portlet/enterprise_admin/edit_organization_profile.jsp" %>
+<%@ include file="/html/portlet/enterprise_admin/edit_organization_profile.jspf" %>
 
 <c:if test="<%= organization != null %>">
 	<liferay-ui:tabs
@@ -147,7 +147,7 @@ if (!rootOrganization) {
 		</liferay-ui:section>
 	</liferay-ui:tabs>
 
-	<%@ include file="/html/portlet/enterprise_admin/edit_organization_comments.jsp" %>
+	<%@ include file="/html/portlet/enterprise_admin/edit_organization_comments.jspf" %>
 </c:if>
 
 </form>

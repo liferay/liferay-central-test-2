@@ -59,10 +59,10 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	LinkedHashMap groupParams = new LinkedHashMap();
 
 	if (tabs1.equals("communities-owned")) {
-		groupParams.put("creatorUserId", user.getUserId());
+		groupParams.put("creatorUserId", new Long(user.getUserId()));
 	}
 	else if (tabs1.equals("communities-joined")) {
-		groupParams.put("usersGroups", user.getUserId());
+		groupParams.put("usersGroups", new Long(user.getUserId()));
 		groupParams.put("active", Boolean.TRUE);
 	}
 	else if (tabs1.equals("communities-open")) {
@@ -124,7 +124,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	for (int i = 0; i < results.size(); i++) {
 		Group group = (Group)results.get(i);
 
-		ResultRow row = new ResultRow(new Object[] {group, tabs1}, String.valueOf(group.getPrimaryKey()), i);
+		ResultRow row = new ResultRow(new Object[] {group, tabs1}, group.getPrimaryKey(), i);
 
 		PortletURL rowURL = renderResponse.createActionURL();
 
@@ -233,7 +233,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 		userParams.put("usersGroups", new Long(group.getGroupId()));
 
-		int membersCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, null, null, null, null, null, true, userParams, true);
+		int membersCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, null, null, null, null, true, userParams, true);
 
 		row.addText(String.valueOf(membersCount));
 

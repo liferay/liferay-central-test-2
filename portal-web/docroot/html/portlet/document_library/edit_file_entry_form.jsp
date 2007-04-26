@@ -46,7 +46,7 @@ if (fileEntry != null) {
 
 		isLocked = Boolean.TRUE;
 
-		if (lock.getUserId().equals(user.getUserId())) {
+		if (lock.getUserId() == user.getUserId()) {
 			hasLock = Boolean.TRUE;
 		}
 	}

@@ -1,4 +1,4 @@
-</%
+<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -371,7 +371,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 		<td valign="top">
 			<div id="<%= renderResponse.getNamespace() %>tree-output"></div>
 
-			<%@ include file="/html/portlet/communities/tree_js.jsp" %>
+			<%@ include file="/html/portlet/communities/tree_js.jspf" %>
 
 			<script type="text/javascript">
 				jQuery(
@@ -1067,91 +1067,82 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						<%= LanguageUtil.get(pageContext, "import-a-lar-file-to-overwrite-the-current-pages") %>
 
 						<br /><br />
-						
+
 						<div>
 							<input name="<portlet:namespace />importFileName" size="50" type="file">
 						</div>
-						
+
 						<br />
 
 						<%= LanguageUtil.get(pageContext, "what-would-you-like-to-import") %>
-						
+
 						<div>
 							<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
-							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES %>Checkbox">
-								<%= LanguageUtil.get(pageContext, "portlet-preferences") %>
-							</label>
+
+							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES %>Checkbox"><bean:message key="portlet-preferences" /></label>
 						</div>
-						
+
 						<div>
 							<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
-							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PORTLET_DATA %>Checkbox">
-								<%= LanguageUtil.get(pageContext, "portlet-data") %>
-							</label>
+
+							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PORTLET_DATA %>Checkbox"><bean:message key="portlet-data" /></label>
 						</div>
-						
+
 						<div>
 							<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
-							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>Checkbox">
-								<%= LanguageUtil.get(pageContext, "permissions") %>
-							</label>
+
+							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>Checkbox"><bean:message key="permissions" /></label>
 						</div>
-						
+
 						<div>
 							<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_THEME %>" defaultValue="<%= false %>" />
-							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_THEME %>Checkbox">
-								<%= LanguageUtil.get(pageContext, "root-theme") %>
-							</label>
+
+							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_THEME %>Checkbox"><bean:message key="root-theme" /></label>
 						</div>
-						
+
 						<br />
 
-						<input type="button" value='<%= LanguageUtil.get(pageContext, "import") %>' onClick="<portlet:namespace />importPages();">
+						<input type="button" value="<bean:message key="import" />" onClick="<portlet:namespace />importPages();">
 
 						<div class="separator"></div>
 					</c:if>
 
-
-					<%= LanguageUtil.get(pageContext, "export-the-current-pages-to-the-given-lar-file-name") %>
+					<bean:message key="export-the-current-pages-to-the-given-lar-file-name" />
 
 					<br /><br />
-					
+
 					<div>
 						<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar">
 					</div>
 
 					<br />
 
-					<%= LanguageUtil.get(pageContext, "what-would-you-like-to-export") %>
-					
+					<bean:message key="what-would-you-like-to-export" />
+
 					<div>
 						<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
-						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>Checkbox">
-							<%= LanguageUtil.get(pageContext, "portlet-preferences") %>
-						</label>
+
+						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>Checkbox"><bean:message key="portlet-preferences" /></label>
 					</div>
 
 					<div>
 						<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
-						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>Checkbox">
-							<%= LanguageUtil.get(pageContext, "portlet-data") %>
-						</label>
+
+						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>Checkbox"><bean:message key="portlet-data" /></label>
 					</div>
 
 					<div>
 						<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
-						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>Checkbox">
-							<%= LanguageUtil.get(pageContext, "permissions") %>
-						</label>
+
+						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>Checkbox"><bean:message key="permissions" /></label>
 					</div>
 
 					<div>
 						<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_THEME %>" defaultValue="<%= false %>" />
-						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>Checkbox">
-							<%= LanguageUtil.get(pageContext, "root-theme") %> (<%= LanguageUtil.get(pageContext, "all-pages-will-use-the-exported-theme") %>)
-						</label>
+
+						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>Checkbox"><bean:message key="root-theme" /> (<%= LanguageUtil.get(pageContext, "all-pages-will-use-the-exported-theme") %>)</label>
 					</div>
-					
+
 					<br />
 
 					<input type="button" value='<%= LanguageUtil.get(pageContext, "export") %>' onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>.value;">

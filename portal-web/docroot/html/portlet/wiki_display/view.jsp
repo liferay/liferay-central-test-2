@@ -49,7 +49,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 <br>
 
-<%@ include file="/html/portlet/wiki/view_page_content.jsp" %>
+<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 
 <br>
 

@@ -121,11 +121,11 @@ portletURL.setParameter("roleId", role.getRoleId());
 			userParams.put("usersRoles", role.getRoleId());
 		}
 
-		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getUserId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
+		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
 
 		searchContainer.setTotal(total);
 
-		List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getUserId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
+		List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
 
 		searchContainer.setResults(results);
 		%>
@@ -150,7 +150,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		for (int i = 0; i < results.size(); i++) {
 			User user2 = (User)results.get(i);
 
-			ResultRow row = new ResultRow(user2, user2.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(user2, user2.getPrimaryKey(), i);
 
 			// Name, screen name, and email address
 

@@ -152,11 +152,11 @@ portletURL.setParameter("tabs1", tabs1);
 				userParams.put("usersUserGroups", userGroupId);
 			}
 
-			int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getUserId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
+			int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
 
 			searchContainer.setTotal(total);
 
-			List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getUserId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
+			List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
 
 			searchContainer.setResults(results);
 
@@ -235,22 +235,18 @@ portletURL.setParameter("tabs1", tabs1);
 			for (int i = 0; i < results.size(); i++) {
 				User user2 = (User)results.get(i);
 
-				ResultRow row = new ResultRow(user2, user2.getPrimaryKey().toString(), i);
+				ResultRow row = new ResultRow(user2, user2.getPrimaryKey(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/enterprise_admin/edit_user");
-				rowURL.setParameter("p_u_i_d", user2.getUserId());
+				rowURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
 
 				// Name
 
 				row.addText(user2.getFullName(), rowURL);
-
-				// User id
-
-				row.addText(user2.getUserId(), rowURL);
 
 				// Screen name
 
@@ -262,9 +258,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Job title
 
-				//Contact contact2 = user2.getContact();
+				Contact contact2 = user2.getContact();
 
-				//row.addText(contact2.getJobTitle(), rowURL);
+				row.addText(contact2.getJobTitle(), rowURL);
 
 				// Organization or location
 
