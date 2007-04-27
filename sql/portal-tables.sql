@@ -1,11 +1,11 @@
 create table Account_ (
-	accountId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
+	accountId LONG not null primary key,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	parentAccountId VARCHAR(75) null,
+	parentAccountId LONG,
 	name VARCHAR(75) null,
 	legalName VARCHAR(75) null,
 	legalId VARCHAR(75) null,
@@ -19,7 +19,7 @@ create table Account_ (
 
 create table Address (
 	addressId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -40,7 +40,7 @@ create table Address (
 
 create table BlogsCategory (
 	categoryId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -53,7 +53,7 @@ create table BlogsCategory (
 create table BlogsEntry (
 	entryId LONG not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -66,7 +66,7 @@ create table BlogsEntry (
 
 create table BookmarksEntry (
 	entryId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	createDate DATE null,
 	modifiedDate DATE null,
@@ -80,7 +80,7 @@ create table BookmarksEntry (
 create table BookmarksFolder (
 	folderId LONG not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	createDate DATE null,
 	modifiedDate DATE null,
@@ -92,7 +92,7 @@ create table BookmarksFolder (
 create table CalEvent (
 	eventId LONG not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -114,7 +114,9 @@ create table CalEvent (
 );
 
 create table Company (
-	companyId VARCHAR(75) not null primary key,
+	companyId LONG not null primary key,
+	accountId LONG,
+	webId VARCHAR(75) null,
 	key_ TEXT null,
 	portalURL VARCHAR(75) null,
 	homeURL VARCHAR(75) null,
@@ -123,12 +125,12 @@ create table Company (
 
 create table Contact_ (
 	contactId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	accountId VARCHAR(75) null,
+	accountId LONG,
 	parentContactId LONG,
 	firstName VARCHAR(75) null,
 	middleName VARCHAR(75) null,
@@ -178,7 +180,7 @@ create table CyrusVirtual (
 
 create table DataTracker (
 	dataTrackerId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	createdOn DATE null,
 	createdByUserId LONG,
 	createdByUserName VARCHAR(75) null,
@@ -192,7 +194,7 @@ create table DataTracker (
 create table DLFileEntry (
 	folderId VARCHAR(75) not null,
 	name VARCHAR(100) not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	versionUserId LONG,
@@ -209,7 +211,7 @@ create table DLFileEntry (
 );
 
 create table DLFileRank (
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	folderId VARCHAR(75) not null,
 	name VARCHAR(100) not null,
@@ -219,7 +221,7 @@ create table DLFileRank (
 
 create table DLFileShortcut (
 	fileShortcutId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -233,7 +235,7 @@ create table DLFileVersion (
 	folderId VARCHAR(75) not null,
 	name VARCHAR(100) not null,
 	version DOUBLE not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -244,7 +246,7 @@ create table DLFileVersion (
 create table DLFolder (
 	folderId VARCHAR(75) not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -257,7 +259,7 @@ create table DLFolder (
 
 create table EmailAddress (
 	emailAddressId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -271,7 +273,7 @@ create table EmailAddress (
 
 create table Group_ (
 	groupId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	creatorUserId LONG,
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null,
@@ -311,7 +313,7 @@ create table Groups_UserGroups (
 create table IGFolder (
 	folderId VARCHAR(75) not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	createDate DATE null,
 	modifiedDate DATE null,
@@ -321,7 +323,7 @@ create table IGFolder (
 );
 
 create table IGImage (
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	imageId VARCHAR(75) not null,
 	userId LONG not null,
 	createDate DATE null,
@@ -342,7 +344,7 @@ create table Image (
 );
 
 create table JournalArticle (
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	groupId LONG not null,
 	articleId VARCHAR(75) not null,
 	version DOUBLE not null,
@@ -372,13 +374,13 @@ create table JournalContentSearch (
 	layoutId VARCHAR(75) not null,
 	ownerId VARCHAR(75) not null,
 	articleId VARCHAR(75) not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	groupId LONG not null,
 	primary key (portletId, layoutId, ownerId, articleId)
 );
 
 create table JournalStructure (
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	groupId LONG not null,
 	structureId VARCHAR(75) not null,
 	userId LONG not null,
@@ -392,7 +394,7 @@ create table JournalStructure (
 );
 
 create table JournalTemplate (
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	groupId LONG not null,
 	templateId VARCHAR(75) not null,
 	userId LONG not null,
@@ -412,7 +414,7 @@ create table JournalTemplate (
 create table Layout (
 	layoutId VARCHAR(75) not null,
 	ownerId VARCHAR(75) not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	parentLayoutId VARCHAR(75) null,
 	name STRING null,
 	title STRING null,
@@ -430,7 +432,7 @@ create table Layout (
 
 create table LayoutSet (
 	ownerId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	groupId LONG not null,
 	userId LONG not null,
 	privateLayout BOOLEAN,
@@ -451,7 +453,7 @@ create table ListType (
 create table MBBan (
 	banId LONG not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -462,7 +464,7 @@ create table MBBan (
 create table MBCategory (
 	categoryId VARCHAR(75) not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -483,7 +485,7 @@ create table MBDiscussion (
 create table MBMessage (
 	topicId VARCHAR(75) not null,
 	messageId VARCHAR(75) not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -528,7 +530,7 @@ create table MBThread (
 
 create table Organization_ (
 	organizationId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	parentOrganizationId VARCHAR(75) null,
 	name VARCHAR(75) null,
 	recursable BOOLEAN,
@@ -574,7 +576,7 @@ create table OrgLabor (
 
 create table PasswordPolicy (
 	passwordPolicyId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -617,14 +619,14 @@ create table PasswordTracker (
 
 create table Permission_ (
 	permissionId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	actionId VARCHAR(75) null,
 	resourceId LONG
 );
 
 create table Phone (
 	phoneId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -639,7 +641,7 @@ create table Phone (
 
 create table PluginSetting (
 	pluginSettingId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	pluginId VARCHAR(75) null,
 	pluginType VARCHAR(75) null,
 	roles VARCHAR(75) null,
@@ -656,7 +658,7 @@ create table PollsChoice (
 create table PollsQuestion (
 	questionId VARCHAR(75) not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -677,7 +679,7 @@ create table PollsVote (
 
 create table Portlet (
 	portletId VARCHAR(75) not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	roles VARCHAR(75) null,
 	active_ BOOLEAN,
 	primary key (portletId, companyId)
@@ -693,7 +695,7 @@ create table PortletPreferences (
 
 create table RatingsEntry (
 	entryId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -737,14 +739,14 @@ create table Resource_ (
 
 create table ResourceCode (
 	codeId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	name VARCHAR(75) null,
 	scope VARCHAR(75) null
 );
 
 create table Role_ (
 	roleId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null,
 	name VARCHAR(75) null,
@@ -767,7 +769,7 @@ create table SCFrameworkVersi_SCProductVers (
 create table SCFrameworkVersion (
 	frameworkVersionId LONG not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -796,7 +798,7 @@ create table SCLicenses_SCProductEntries (
 create table SCProductEntry (
 	productEntryId LONG not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -812,7 +814,7 @@ create table SCProductEntry (
 
 create table SCProductVersion (
 	productVersionId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -828,7 +830,7 @@ create table SCProductVersion (
 create table ShoppingCart (
 	cartId VARCHAR(75) not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -842,7 +844,7 @@ create table ShoppingCart (
 create table ShoppingCategory (
 	categoryId VARCHAR(75) not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -855,7 +857,7 @@ create table ShoppingCategory (
 create table ShoppingCoupon (
 	couponId VARCHAR(75) not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -874,7 +876,7 @@ create table ShoppingCoupon (
 
 create table ShoppingItem (
 	itemId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -929,7 +931,7 @@ create table ShoppingItemPrice (
 create table ShoppingOrder (
 	orderId VARCHAR(75) not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -994,7 +996,7 @@ create table ShoppingOrderItem (
 
 create table Subscription (
 	subscriptionId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -1006,7 +1008,7 @@ create table Subscription (
 
 create table TagsAsset (
 	assetId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -1032,7 +1034,7 @@ create table TagsAssets_TagsEntries (
 
 create table TagsEntry (
 	entryId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -1042,7 +1044,7 @@ create table TagsEntry (
 
 create table TagsProperty (
 	propertyId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -1061,7 +1063,7 @@ create table TagsSource (
 
 create table User_ (
 	userId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	defaultUser BOOLEAN,
@@ -1087,7 +1089,7 @@ create table User_ (
 
 create table UserGroup (
 	userGroupId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	parentUserGroupId VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description STRING null
@@ -1140,7 +1142,7 @@ create table Users_UserGroups (
 
 create table UserTracker (
 	userTrackerId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	modifiedDate DATE null,
 	remoteAddr VARCHAR(75) null,
@@ -1157,7 +1159,7 @@ create table UserTrackerPath (
 
 create table Website (
 	websiteId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -1172,7 +1174,7 @@ create table Website (
 create table WikiNode (
 	nodeId VARCHAR(75) not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -1186,7 +1188,7 @@ create table WikiPage (
 	nodeId VARCHAR(75) not null,
 	title VARCHAR(75) not null,
 	version DOUBLE not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,

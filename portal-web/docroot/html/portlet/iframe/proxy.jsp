@@ -45,7 +45,8 @@ for (int i = 0; i < hiddenVariablesArray.length; i++) {
 	String hiddenKey = StringPool.BLANK;
 	String hiddenValue = StringPool.BLANK;
 
-	int pos = hiddenVariablesArray[i].indexOf("=");
+	int pos = hiddenVariablesArray[i].indexOf(StringPool.EQUAL);
+
 	if (pos != -1) {
 		hiddenKey = hiddenVariablesArray[i].substring(0, pos);
 		hiddenValue = hiddenVariablesArray[i].substring(pos + 1, hiddenVariablesArray[i].length());

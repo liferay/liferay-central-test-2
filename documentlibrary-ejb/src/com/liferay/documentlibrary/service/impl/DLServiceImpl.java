@@ -85,7 +85,7 @@ public class DLServiceImpl implements DLService {
 		PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE));
 
 	public void addDirectory(
-			String companyId, String repositoryId, String dirName)
+			long companyId, String repositoryId, String dirName)
 		throws PortalException, SystemException {
 
 		if ((dirName == null || dirName.equals("/")) ||
@@ -148,9 +148,9 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public void addFile(
-		String companyId, String portletId, long groupId,
-		String repositoryId, String fileName, File file)
-	throws PortalException, SystemException {
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, File file)
+		throws PortalException, SystemException {
 
 		if ((FILE_MAX_SIZE > 0) &&
 			((file == null) || (file.length() > FILE_MAX_SIZE))) {
@@ -181,8 +181,8 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public void addFile(
-		String companyId, String portletId, long groupId,
-		String repositoryId, String fileName, byte[] byteArray)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, byte[] byteArray)
 		throws PortalException, SystemException {
 
 		if ((FILE_MAX_SIZE > 0) &&
@@ -207,7 +207,7 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public void deleteDirectory(
-			String companyId, String portletId, String repositoryId,
+			long companyId, String portletId, String repositoryId,
 			String dirName)
 		throws PortalException, SystemException {
 
@@ -243,7 +243,7 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public void deleteFile(
-			String companyId, String portletId, String repositoryId,
+			long companyId, String portletId, String repositoryId,
 			String fileName)
 		throws PortalException, SystemException {
 
@@ -279,7 +279,7 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public void deleteFile(
-			String companyId, String portletId, String repositoryId,
+			long companyId, String portletId, String repositoryId,
 			String fileName, double versionNumber)
 		throws PortalException, SystemException {
 
@@ -317,7 +317,7 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public byte[] getFile(
-			String companyId, String repositoryId, String fileName)
+			long companyId, String repositoryId, String fileName)
 		throws PortalException, SystemException {
 
 		byte[] bytes = null;
@@ -336,7 +336,7 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public byte[] getFile(
-			String companyId, String repositoryId, String fileName,
+			long companyId, String repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
@@ -356,7 +356,7 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public String[] getFileNames(
-			String companyId, String repositoryId, String dirName)
+			long companyId, String repositoryId, String dirName)
 		throws PortalException, SystemException {
 
 		List fileNames = new ArrayList();
@@ -398,7 +398,7 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public long getFileSize(
-			String companyId, String repositoryId, String fileName)
+			long companyId, String repositoryId, String fileName)
 		throws PortalException, SystemException {
 
 		long size;
@@ -437,10 +437,10 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public void updateFile(
-		String companyId, String portletId, long groupId,
-		String repositoryId, String fileName, double versionNumber,
-		String sourceFileName, File file)
-	throws PortalException, SystemException {
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			File file)
+		throws PortalException, SystemException {
 
 		if ((FILE_MAX_SIZE > 0) &&
 			((file == null) || (file.length() > FILE_MAX_SIZE))) {
@@ -472,9 +472,9 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public void updateFile(
-		String companyId, String portletId, long groupId,
-		String repositoryId, String fileName, double versionNumber,
-		String sourceFileName, byte[] byteArray)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			byte[] byteArray)
 		throws PortalException, SystemException {
 
 		if ((FILE_MAX_SIZE > 0) &&
@@ -500,8 +500,8 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public void updateFile(
-			String companyId, String portletId, long groupId,
-			String repositoryId, String newRepositoryId, String fileName)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String newRepositoryId, String fileName)
 		throws PortalException, SystemException {
 
 		Session session = null;
@@ -574,8 +574,7 @@ public class DLServiceImpl implements DLService {
 				}
 
 				Indexer.addFile(
-					companyId, portletId, new Long(groupId), newRepositoryId,
-					fileName);
+					companyId, portletId, groupId, newRepositoryId, fileName);
 			}
 		}
 		catch (IOException ioe) {
@@ -595,8 +594,7 @@ public class DLServiceImpl implements DLService {
 	}
 
 	private void _deleteDirectory(
-			String companyId, String portletId, String repositoryId,
-			Node dirNode)
+			long companyId, String portletId, String repositoryId, Node dirNode)
 		throws IOException {
 
 		try {

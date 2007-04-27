@@ -65,8 +65,8 @@ import org.apache.lucene.index.Term;
 public class IndexerImpl {
 
 	public static void addFile(
-			String companyId, String portletId, Long groupId,
-			String repositoryId, String fileName)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName)
 		throws IOException {
 
 		if (_log.isDebugEnabled()) {
@@ -235,7 +235,7 @@ public class IndexerImpl {
 	}
 
 	public static void deleteFile(
-			String companyId, String portletId, String repositoryId,
+			long companyId, String portletId, String repositoryId,
 			String fileName)
 		throws IOException {
 
@@ -247,9 +247,9 @@ public class IndexerImpl {
 	}
 
 	public static void reIndex(String[] ids) throws SearchException {
-		String companyId = ids[0];
+		long companyId = GetterUtil.getLong(ids[0]);
 		String portletId = ids[1];
-		String groupId = ids[2];
+		long groupId = GetterUtil.getLong(ids[2]);
 		String repositoryId = ids[3];
 
 		Session session = null;
@@ -269,7 +269,7 @@ public class IndexerImpl {
 						JCRConstants.NT_FILE)) {
 
 					addFile(
-						companyId, portletId, new Long(groupId), repositoryId,
+						companyId, portletId, groupId, repositoryId,
 						node.getName());
 				}
 			}
@@ -285,8 +285,8 @@ public class IndexerImpl {
 	}
 
 	public static void updateFile(
-			String companyId, String portletId, Long groupId,
-			String repositoryId, String fileName)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName)
 		throws IOException {
 
 		try {

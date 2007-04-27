@@ -3,7 +3,7 @@
 
 <web-app>
 	<context-param>
-		<param-name>company_id</param-name>
+		<param-name>company_web_id</param-name>
 		<param-value>liferay.com</param-value>
 	</context-param>
 	<servlet>

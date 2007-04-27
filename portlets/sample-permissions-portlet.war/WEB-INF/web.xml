@@ -4,10 +4,6 @@
 <web-app>
 	<display-name>sample-permissions-portlet</display-name>
 	<context-param>
-		<param-name>company_id</param-name>
-		<param-value>liferay.com</param-value>
-	</context-param>
-	<context-param>
 		<param-name>portlet_properties</param-name>
 		<param-value>sample-permissions-portlet.properties</param-value>
 	</context-param>

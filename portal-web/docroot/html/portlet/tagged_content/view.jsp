@@ -137,7 +137,7 @@ for (int i = 0; i < results.size(); i++) {
 				<%
 				PKParser pkParser = new PKParser(classPK);
 
-				String companyId = pkParser.getString("companyId");
+				long companyId = pkParser.getLong("companyId");
 				long groupId = pkParser.getLong("groupId");
 				String articleId = pkParser.getString("articleId");
 				double version = pkParser.getDouble("version");

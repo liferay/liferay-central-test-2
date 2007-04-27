@@ -46,7 +46,7 @@ import java.util.Set;
  */
 public class PortletDataContext implements Serializable {
 
-	public PortletDataContext(String companyId, long groupId, Map parameterMap,
+	public PortletDataContext(long companyId, long groupId, Map parameterMap,
 							  Set primaryKeys, ZipReader zipReader) {
 
 		_companyId = companyId;
@@ -57,7 +57,7 @@ public class PortletDataContext implements Serializable {
 		_zipWriter = null;
 	}
 
-	public PortletDataContext(String companyId, long groupId, Map parameterMap,
+	public PortletDataContext(long companyId, long groupId, Map parameterMap,
 							  Set primaryKeys, ZipWriter zipWriter) {
 
 		_companyId = companyId;
@@ -68,7 +68,7 @@ public class PortletDataContext implements Serializable {
 		_zipWriter = zipWriter;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
@@ -116,7 +116,7 @@ public class PortletDataContext implements Serializable {
 		return sm.toString();
 	}
 
-	private String _companyId;
+	private long _companyId;
 	private long _groupId;
 	private Map _parameterMap;
 	private Set _primaryKeys;

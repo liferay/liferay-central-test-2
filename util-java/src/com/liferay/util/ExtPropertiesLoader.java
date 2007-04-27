@@ -52,10 +52,8 @@ public class ExtPropertiesLoader {
 		return props;
 	}
 
-	public static ExtPropertiesLoader getInstance(
-		String name, String companyId) {
-
-		String key = name + _COMPANY_ID_SEPARATOR +  companyId;
+	public static ExtPropertiesLoader getInstance(String name, long companyId) {
+		String key = name + _COMPANY_ID_SEPARATOR + companyId;
 
 		ExtPropertiesLoader props =
 			(ExtPropertiesLoader)_propsPool.get(key);
@@ -141,17 +139,23 @@ public class ExtPropertiesLoader {
 		_printSources(name);
 	}
 
-	private ExtPropertiesLoader(String name, String companyId) {
-		_conf = EasyConf.getConfiguration(companyId, name);
+	private ExtPropertiesLoader(String name, long companyId) {
+		String companyIdString = null;
+
+		if (companyId > 0) {
+			companyIdString = String.valueOf(companyId);
+		}
+
+		_conf = EasyConf.getConfiguration(companyIdString, name);
 
 		_printSources(name, companyId);
 	}
 
 	private void _printSources(String name) {
-		_printSources(name, null);
+		_printSources(name, 0);
 	}
 
-	private void _printSources(String name, String companyId) {
+	private void _printSources(String name, long companyId) {
 		List sources = getComponentProperties().getLoadedSources();
 
 		for (int i = sources.size() - 1; i >= 0; i--) {
@@ -159,7 +163,7 @@ public class ExtPropertiesLoader {
 
 			String info = "Loading " + source;
 
-			if (companyId != null) {
+			if (companyId > 0) {
 				info += " for " + companyId;
 			}
 

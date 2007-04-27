@@ -46,10 +46,9 @@ public interface PermissionCheckerBag extends Serializable {
 
 	public List getRoles();
 
-	public boolean isCompanyAdmin(String companyId) throws Exception;
+	public boolean isCompanyAdmin(long companyId) throws Exception;
 
-	public boolean isCommunityAdmin(
-			String companyId, long groupId, String name)
+	public boolean isCommunityAdmin(long companyId, long groupId, String name)
 		throws Exception;
 
 }

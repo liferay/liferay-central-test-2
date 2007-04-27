@@ -26,6 +26,7 @@ import com.liferay.documentlibrary.service.jms.IndexProducer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 
 import java.io.IOException;
@@ -44,15 +45,16 @@ import org.apache.commons.logging.LogFactory;
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addFile(
-			String companyId, String portletId, Long groupId,
-			String repositoryId, String fileName)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName)
 		throws IOException {
 
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "addFile",
 				new Object[] {
-					companyId, portletId, groupId, repositoryId, fileName
+					new LongWrapper(companyId), portletId,
+					new LongWrapper(groupId), repositoryId, fileName
 				});
 
 			IndexProducer.produce(methodWrapper);
@@ -68,14 +70,17 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void deleteFile(
-			String companyId, String portletId, String repositoryId,
+			long companyId, String portletId, String repositoryId,
 			String fileName)
 		throws IOException {
 
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "deleteFile",
-				new Object[] {companyId, portletId, repositoryId, fileName});
+				new Object[] {
+					new LongWrapper(companyId), portletId, repositoryId,
+					fileName
+				});
 
 			IndexProducer.produce(methodWrapper);
 		}
@@ -90,15 +95,16 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updateFile(
-			String companyId, String portletId, Long groupId,
-			String repositoryId, String fileName)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName)
 		throws IOException {
 
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "updateFile",
 				new Object[] {
-					companyId, portletId, groupId, repositoryId, fileName
+					new LongWrapper(companyId), portletId,
+					new LongWrapper(groupId), repositoryId, fileName
 				});
 
 			IndexProducer.produce(methodWrapper);

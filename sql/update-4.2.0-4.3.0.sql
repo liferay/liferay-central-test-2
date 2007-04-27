@@ -17,6 +17,10 @@ alter_column_type BookmarksFolder parentFolderId LONG;
 alter_column_type CalEvent eventId LONG;
 alter_column_type CalEvent groupId LONG;
 
+alter table Company add accountId LONG;
+alter table Company add webId VARCHAR(75) null;
+update Company set webId = companyId;
+
 alter_column_type Contact_ prefixId INTEGER;
 alter_column_type Contact_ suffixId INTEGER;
 alter_column_type Contact_ parentContactId LONG;
@@ -69,7 +73,7 @@ alter_column_type ListType listTypeId INTEGER;
 create table MBBan (
 	banId LONG not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -92,7 +96,7 @@ alter_column_type OrgLabor typeId INTEGER;
 
 create table PasswordPolicy (
 	passwordPolicyId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -137,7 +141,7 @@ alter_column_type Phone typeId INTEGER;
 
 create table PluginSetting (
 	pluginSettingId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	pluginId VARCHAR(75) null,
 	pluginType VARCHAR(75) null,
 	roles VARCHAR(75) null,
@@ -155,7 +159,7 @@ alter table Resource_ drop typeId;
 
 create table ResourceCode (
 	codeId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	name VARCHAR(75) null,
 	scope VARCHAR(75) null
 );
@@ -174,7 +178,7 @@ create table SCFrameworkVersi_SCProductVers (
 create table SCFrameworkVersion (
 	frameworkVersionId LONG not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -203,7 +207,7 @@ create table SCLicenses_SCProductEntries (
 create table SCProductEntry (
 	productEntryId LONG not null primary key,
 	groupId LONG not null,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -219,7 +223,7 @@ create table SCProductEntry (
 
 create table SCProductVersion (
 	productVersionId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -282,7 +286,7 @@ alter_column_type Subscription subscriptionId LONG;
 
 create table TagsAsset (
 	assetId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -308,7 +312,7 @@ create table TagsAssets_TagsEntries (
 
 create table TagsEntry (
 	entryId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -318,7 +322,7 @@ create table TagsEntry (
 
 create table TagsProperty (
 	propertyId LONG not null primary key,
-	companyId VARCHAR(75) not null,
+	companyId LONG not null,
 	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,

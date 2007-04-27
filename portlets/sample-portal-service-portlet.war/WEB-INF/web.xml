@@ -3,10 +3,6 @@
 
 <web-app>
 	<display-name>sample-portal-service-portlet</display-name>
-	<context-param>
-		<param-name>company_id</param-name>
-		<param-value>liferay.com</param-value>
-	</context-param>
 	<listener>
 		<listener-class>com.liferay.portal.kernel.servlet.PortletContextListener</listener-class>
 	</listener>

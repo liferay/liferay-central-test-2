@@ -74,8 +74,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public static final double DEFAULT_VERSION = 1.0;
 
 	public void addFile(
-			String companyId, String portletId, long groupId,
-			String repositoryId, String fileName, InputStream is)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, InputStream is)
 		throws PortalException, SystemException {
 
 		if ((fileName.indexOf("\\\\") != -1) ||
@@ -151,8 +151,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 					version.getName(), Double.toString(DEFAULT_VERSION), false);
 
 				Indexer.addFile(
-					companyId, portletId, new Long(groupId), repositoryId,
-					fileName);
+					companyId, portletId, groupId, repositoryId, fileName);
 			}
 		}
 		catch (IOException ioe) {
@@ -169,14 +168,14 @@ public class DLLocalServiceImpl implements DLLocalService {
 	}
 
 	public InputStream getFileAsStream(
-			String companyId, String repositoryId, String fileName)
+			long companyId, String repositoryId, String fileName)
 		throws PortalException, SystemException {
 
 		return getFileAsStream(companyId, repositoryId, fileName, 0);
 	}
 
 	public InputStream getFileAsStream(
-			String companyId, String repositoryId, String fileName,
+			long companyId, String repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
@@ -207,7 +206,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	}
 
 	public boolean hasFileContentNode(
-			String companyId, String repositoryId, String fileName,
+			long companyId, String repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
@@ -223,7 +222,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	}
 
 	public Hits search(
-			String companyId, String portletId, long groupId,
+			long companyId, String portletId, long groupId,
 			String[] repositoryIds, String keywords)
 		throws SystemException {
 
@@ -280,7 +279,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	}
 
 	public void updateFile(
-			String companyId, String portletId, long groupId,
+			long companyId, String portletId, long groupId,
 			String repositoryId, String fileName, double versionNumber,
 			String sourceFileName, InputStream is)
 		throws PortalException, SystemException {
@@ -339,8 +338,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 				version.getName(), versionLabel, false);
 
 			Indexer.updateFile(
-				companyId, portletId, new Long(groupId), repositoryId,
-				fileName);
+				companyId, portletId, groupId, repositoryId, fileName);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

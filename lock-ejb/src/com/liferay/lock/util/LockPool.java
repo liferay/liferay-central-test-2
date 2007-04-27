@@ -53,7 +53,7 @@ public class LockPool {
 		return _instance._getLock(className, pk);
 	}
 
-	public static Set getLocksByCompanyId(String companyId) {
+	public static Set getLocksByCompanyId(long companyId) {
 		Set locksByCompanyId = _instance._getLocksByCompanyId(companyId);
 
 		Iterator itr = locksByCompanyId.iterator();
@@ -105,7 +105,7 @@ public class LockPool {
 	}
 
 	public static void lock(
-			String className, Comparable pk, String companyId, long userId,
+			String className, Comparable pk, long companyId, long userId,
 			long expirationTime)
 		throws DuplicateLockException {
 
@@ -159,13 +159,15 @@ public class LockPool {
 		return locksByPK;
 	}
 
-	private Set _getLocksByCompanyId(String companyId) {
-		Set set = (Set)_locksByCompanyId.get(companyId);
+	private Set _getLocksByCompanyId(long companyId) {
+		Long companyIdObj = new Long(companyId);
+
+		Set set = (Set)_locksByCompanyId.get(companyIdObj);
 
 		if (set == null) {
 			set = Collections.synchronizedSet(new TreeSet());
 
-			_locksByCompanyId.put(companyId, set);
+			_locksByCompanyId.put(companyIdObj, set);
 		}
 
 		return set;
@@ -216,7 +218,7 @@ public class LockPool {
 	}
 
 	private void _lock(
-			String className, Comparable pk, String companyId, long userId,
+			String className, Comparable pk, long companyId, long userId,
 			long expirationTime)
 		throws DuplicateLockException {
 
