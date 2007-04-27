@@ -52,7 +52,7 @@ import java.util.List;
  *
  */
 public class CompanyPersistence extends BasePersistence {
-	public Company create(String companyId) {
+	public Company create(long companyId) {
 		Company company = new CompanyImpl();
 		company.setNew(true);
 		company.setPrimaryKey(companyId);
@@ -60,14 +60,15 @@ public class CompanyPersistence extends BasePersistence {
 		return company;
 	}
 
-	public Company remove(String companyId)
+	public Company remove(long companyId)
 		throws NoSuchCompanyException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Company company = (Company)session.get(CompanyImpl.class, companyId);
+			Company company = (Company)session.get(CompanyImpl.class,
+					new Long(companyId));
 
 			if (company == null) {
 				if (_log.isWarnEnabled()) {
@@ -145,7 +146,7 @@ public class CompanyPersistence extends BasePersistence {
 		}
 	}
 
-	public Company findByPrimaryKey(String companyId)
+	public Company findByPrimaryKey(long companyId)
 		throws NoSuchCompanyException, SystemException {
 		Company company = fetchByPrimaryKey(companyId);
 
@@ -162,14 +163,80 @@ public class CompanyPersistence extends BasePersistence {
 		return company;
 	}
 
-	public Company fetchByPrimaryKey(String companyId)
-		throws SystemException {
+	public Company fetchByPrimaryKey(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (Company)session.get(CompanyImpl.class, companyId);
+			return (Company)session.get(CompanyImpl.class, new Long(companyId));
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Company findByWebId(String webId)
+		throws NoSuchCompanyException, SystemException {
+		Company company = fetchByWebId(webId);
+
+		if (company == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No Company exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("webId=");
+			msg.append(webId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchCompanyException(msg.toString());
+		}
+
+		return company;
+	}
+
+	public Company fetchByWebId(String webId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+			if (webId == null) {
+				query.append("webId IS NULL");
+			}
+			else {
+				query.append("webId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (webId != null) {
+				q.setString(queryPos++, webId);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			Company company = (Company)list.get(0);
+
+			return company;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -321,6 +388,12 @@ public class CompanyPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByWebId(String webId)
+		throws NoSuchCompanyException, SystemException {
+		Company company = findByWebId(webId);
+		remove(company);
+	}
+
 	public void removeByMx(String mx)
 		throws NoSuchCompanyException, SystemException {
 		Company company = findByMx(mx);
@@ -332,6 +405,54 @@ public class CompanyPersistence extends BasePersistence {
 
 		while (itr.hasNext()) {
 			remove((Company)itr.next());
+		}
+	}
+
+	public int countByWebId(String webId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+			if (webId == null) {
+				query.append("webId IS NULL");
+			}
+			else {
+				query.append("webId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (webId != null) {
+				q.setString(queryPos++, webId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 

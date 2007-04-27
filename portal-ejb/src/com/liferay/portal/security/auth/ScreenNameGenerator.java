@@ -30,7 +30,7 @@ package com.liferay.portal.security.auth;
  */
 public class ScreenNameGenerator {
 
-	public String generate(String companyId, long userId) throws Exception {
+	public String generate(long companyId, long userId) throws Exception {
 		return String.valueOf(userId);
 	}
 

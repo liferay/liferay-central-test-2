@@ -53,9 +53,8 @@ import javax.ejb.SessionContext;
  *
  */
 public class PortletServiceEJBImpl implements PortletService, SessionBean {
-	public com.liferay.portal.model.Portlet updatePortlet(
-		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String roles, boolean active)
+	public com.liferay.portal.model.Portlet updatePortlet(long companyId,
+		java.lang.String portletId, java.lang.String roles, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

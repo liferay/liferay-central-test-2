@@ -56,7 +56,7 @@ public class DataTrackerModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "DataTracker";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "dataTrackerId", new Integer(Types.VARCHAR) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "createdOn", new Integer(Types.TIMESTAMP) },
 			{ "createdByUserId", new Integer(Types.BIGINT) },
 			{ "createdByUserName", new Integer(Types.VARCHAR) },
@@ -70,9 +70,6 @@ public class DataTrackerModelImpl extends BaseModelImpl {
 				"xss.allow.com.liferay.portal.model.DataTracker"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_DATATRACKERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker.dataTrackerId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.DataTracker.companyId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CREATEDBYUSERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker.createdByUserName"),
@@ -117,19 +114,12 @@ public class DataTrackerModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -308,7 +298,7 @@ public class DataTrackerModelImpl extends BaseModelImpl {
 	}
 
 	private String _dataTrackerId;
-	private String _companyId;
+	private long _companyId;
 	private Date _createdOn;
 	private long _createdByUserId;
 	private String _createdByUserName;

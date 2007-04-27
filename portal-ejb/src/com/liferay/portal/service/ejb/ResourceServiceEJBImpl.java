@@ -53,9 +53,8 @@ import javax.ejb.SessionContext;
  *
  */
 public class ResourceServiceEJBImpl implements ResourceService, SessionBean {
-	public com.liferay.portal.model.Resource getResource(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String scope, java.lang.String primKey)
+	public com.liferay.portal.model.Resource getResource(long companyId,
+		java.lang.String name, java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

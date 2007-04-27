@@ -54,7 +54,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static final String PORTLET_ID = PortletKeys.JOURNAL;
 
 	public static void addArticle(
-			String companyId, long groupId, String articleId, double version,
+			long companyId, long groupId, String articleId, double version,
 			String title, String description, String content, String type,
 			Date displayDate)
 		throws IOException {
@@ -105,7 +105,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	public static void deleteArticle(String companyId, String articleId)
+	public static void deleteArticle(long companyId, String articleId)
 		throws IOException {
 
 		LuceneUtil.deleteDocuments(
@@ -115,7 +115,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updateArticle(
-			String companyId, long groupId, String articleId, double version,
+			long companyId, long groupId, String articleId, double version,
 			String title, String description, String content, String type,
 			Date displayDate)
 		throws IOException {

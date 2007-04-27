@@ -74,7 +74,7 @@ import org.apache.commons.logging.LogFactory;
 public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 	public Permission addPermission(
-			String companyId, String actionId, long resourceId)
+			long companyId, String actionId, long resourceId)
 		throws PortalException, SystemException {
 
 		Permission permission = PermissionUtil.fetchByA_R(actionId, resourceId);
@@ -96,7 +96,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public List addPermissions(
-			String companyId, String name, long resourceId,
+			long companyId, String name, long resourceId,
 			boolean portletActions)
 		throws PortalException, SystemException {
 
@@ -159,7 +159,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public List getGroupPermissions(
-			long groupId, String companyId, String name, String scope,
+			long groupId, long companyId, String name, String scope,
 			String primKey)
 		throws SystemException {
 
@@ -191,7 +191,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public List getPermissions(
-			String companyId, String[] actionIds, long resourceId)
+			long companyId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		List permissions = new ArrayList();
@@ -219,7 +219,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public List getUserPermissions(
-			long userId, String companyId, String name, String scope,
+			long userId, long companyId, String name, String scope,
 			String primKey)
 		throws SystemException {
 
@@ -249,7 +249,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public boolean hasRolePermission(
-			String roleId, String companyId, String name, String scope,
+			String roleId, long companyId, String name, String scope,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -281,7 +281,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public boolean hasRolePermission(
-			String roleId, String companyId, String name, String scope,
+			String roleId, long companyId, String name, String scope,
 			String primKey, String actionId)
 		throws PortalException, SystemException {
 
@@ -493,7 +493,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void setRolePermission(
-			String roleId, String companyId, String name, String scope,
+			String roleId, long companyId, String name, String scope,
 			String primKey, String actionId)
 		throws PortalException, SystemException {
 
@@ -541,7 +541,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void setRolePermissions(
-			String roleId, String companyId, String name, String scope,
+			String roleId, long companyId, String name, String scope,
 			String primKey, String[] actionIds)
 		throws PortalException, SystemException {
 
@@ -583,7 +583,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void unsetRolePermission(
-			String roleId, String companyId, String name, String scope,
+			String roleId, long companyId, String name, String scope,
 			String primKey, String actionId)
 		throws PortalException, SystemException {
 
@@ -607,7 +607,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void unsetRolePermissions(
-			String roleId, String companyId, String name, String scope,
+			String roleId, long companyId, String name, String scope,
 			String actionId)
 		throws PortalException, SystemException {
 

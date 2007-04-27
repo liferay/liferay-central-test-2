@@ -94,7 +94,7 @@ public class MBMessageConsumer implements MessageListener {
 	}
 
 	private void _onMessage(String[] array) throws Exception {
-		String companyId = array[0];
+		long companyId = GetterUtil.getLong(array[0]);
 		long userId = GetterUtil.getLong(array[1]);
 		String[] categoryIds = StringUtil.split(array[2]);
 		String threadId = array[3];

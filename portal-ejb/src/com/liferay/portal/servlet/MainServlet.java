@@ -145,22 +145,10 @@ public class MainServlet extends ActionServlet {
 				_log.error(e, e);
 			}
 
-			// Company id
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Company id");
-			}
-
 			ServletContext ctx = getServletContext();
 
 			String servletContextName = GetterUtil.getString(
 				ctx.getServletContextName());
-
-			_companyId = ctx.getInitParameter("company_id");
-
-			ctx.setAttribute(WebKeys.COMPANY_ID, _companyId);
-
-			CompanyThreadLocal.setCompanyId(_companyId);
 
 			// Paths
 
@@ -236,6 +224,29 @@ public class MainServlet extends ActionServlet {
 				_log.error(e, e);
 			}
 
+			// Company id
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Company id");
+			}
+
+			String webId = GetterUtil.getString(
+				ctx.getInitParameter("company_web_id"));
+
+			try {
+				Company company = CompanyLocalServiceUtil.checkCompany(webId);
+
+				_companyId = company.getCompanyId();
+				_companyIdString = String.valueOf(_companyId);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+
+			ctx.setAttribute(WebKeys.COMPANY_ID, new Long(_companyId));
+
+			CompanyThreadLocal.setCompanyId(_companyId);
+
 			// Initialize display
 
 			if (_log.isDebugEnabled()) {
@@ -248,7 +259,7 @@ public class MainServlet extends ActionServlet {
 
 				PortletCategory portletCategory =
 					(PortletCategory)WebAppPool.get(
-						_companyId, WebKeys.PORTLET_CATEGORY);
+						_companyIdString, WebKeys.PORTLET_CATEGORY);
 
 				if (portletCategory == null) {
 					portletCategory = new PortletCategory();
@@ -260,7 +271,8 @@ public class MainServlet extends ActionServlet {
 				portletCategory.merge(newPortletCategory);
 
 				WebAppPool.put(
-					_companyId, WebKeys.PORTLET_CATEGORY, portletCategory);
+					_companyIdString, WebKeys.PORTLET_CATEGORY,
+					portletCategory);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -308,19 +320,6 @@ public class MainServlet extends ActionServlet {
 				_log.error(e, e);
 			}
 
-			// Check company
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Check company");
-			}
-
-			try {
-				CompanyLocalServiceUtil.checkCompany(_companyId);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-
 			// Check journal content search
 
 			if (_log.isDebugEnabled()) {
@@ -328,7 +327,7 @@ public class MainServlet extends ActionServlet {
 			}
 
 			if (GetterUtil.getBoolean(PropsUtil.get(
-					null, PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP))) {
+					0, PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP))) {
 
 				try {
 					JournalContentSearchLocalServiceUtil.checkContentSearches(
@@ -433,7 +432,8 @@ public class MainServlet extends ActionServlet {
 
 			messageResources.setServletContext(ctx);
 
-			WebAppPool.put(_companyId, Globals.MESSAGES_KEY, messageResources);
+			WebAppPool.put(
+				_companyIdString, Globals.MESSAGES_KEY, messageResources);
 
 			// Last modified paths
 
@@ -469,7 +469,7 @@ public class MainServlet extends ActionServlet {
 
 				EventsProcessor.process(PropsUtil.getArray(
 					PropsUtil.APPLICATION_STARTUP_EVENTS),
-					new String[] {_companyId});
+					new String[] {_companyIdString});
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -608,19 +608,19 @@ public class MainServlet extends ActionServlet {
 
 		// WebKeys.COMPANY_ID variable
 
-		String companyId = (String)ctx.getAttribute(WebKeys.COMPANY_ID);
+		Long companyIdObj = (Long)ctx.getAttribute(WebKeys.COMPANY_ID);
 
 		if (portalCtx.getAttribute(WebKeys.COMPANY_ID) == null) {
-			portalCtx.setAttribute(WebKeys.COMPANY_ID, companyId);
+			portalCtx.setAttribute(WebKeys.COMPANY_ID, companyIdObj);
 		}
 
 		if (ses.getAttribute(WebKeys.COMPANY_ID) == null) {
-			ses.setAttribute(WebKeys.COMPANY_ID, companyId);
+			ses.setAttribute(WebKeys.COMPANY_ID, companyIdObj);
 		}
 
-		req.setAttribute(WebKeys.COMPANY_ID, companyId);
+		req.setAttribute(WebKeys.COMPANY_ID, companyIdObj);
 
-		CompanyThreadLocal.setCompanyId(companyId);
+		CompanyThreadLocal.setCompanyId(companyIdObj.longValue());
 
 		// ROOT_PATH variable
 
@@ -789,7 +789,8 @@ public class MainServlet extends ActionServlet {
 		}
 		else if (ParamUtil.get(req, WebKeys.ENCRYPT, false)) {
 			try {
-				Company company = CompanyLocalServiceUtil.getCompany(companyId);
+				Company company = CompanyLocalServiceUtil.getCompanyById(
+					companyIdObj.longValue());
 
 				req = new EncryptedServletRequest(req, company.getKeyObj());
 			}
@@ -942,7 +943,7 @@ public class MainServlet extends ActionServlet {
 
 			// Clear the company id associated with this thread
 
-			CompanyThreadLocal.setCompanyId(null);
+			CompanyThreadLocal.setCompanyId(0);
 
 			// Clear the principal associated with this thread
 
@@ -980,7 +981,7 @@ public class MainServlet extends ActionServlet {
 
 			EventsProcessor.process(PropsUtil.getArray(
 				PropsUtil.APPLICATION_SHUTDOWN_EVENTS),
-				new String[] {_companyId});
+				new String[] {_companyIdString});
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -1018,7 +1019,8 @@ public class MainServlet extends ActionServlet {
 
 	private static Log _log = LogFactory.getLog(MainServlet.class);
 
-	private String _companyId;
+	private long _companyId;
+	private String _companyIdString;
 	private Set _lastModifiedPaths;
 
 }

@@ -228,16 +228,10 @@ public class TagsEntryServiceHttp {
 	}
 
 	public static java.util.List search(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String[] properties)
+		long companyId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -274,16 +268,10 @@ public class TagsEntryServiceHttp {
 	}
 
 	public static java.util.List search(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String[] properties, int begin, int end)
-		throws com.liferay.portal.SystemException {
+		long companyId, java.lang.String name, java.lang.String[] properties,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -325,16 +313,11 @@ public class TagsEntryServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
-		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties, int begin, int end)
+		HttpPrincipal httpPrincipal, long companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -375,17 +358,11 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
-	public static int searchCount(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String[] properties)
+	public static int searchCount(HttpPrincipal httpPrincipal, long companyId,
+		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = name;
 
 			if (name == null) {

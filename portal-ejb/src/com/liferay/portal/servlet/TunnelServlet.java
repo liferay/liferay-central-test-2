@@ -35,6 +35,7 @@ import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -66,7 +67,7 @@ public class TunnelServlet extends HttpServlet {
 
 		ServletContext ctx = getServletContext();
 
-		_companyId = ctx.getInitParameter("company_id");
+		_companyId = PortalUtil.getCompanyIdByWebId(ctx);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
@@ -140,6 +141,6 @@ public class TunnelServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(TunnelServlet.class);
 
-	private String _companyId;
+	private long _companyId;
 
 }

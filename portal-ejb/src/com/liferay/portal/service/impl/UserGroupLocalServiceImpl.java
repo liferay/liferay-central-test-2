@@ -61,7 +61,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public UserGroup addUserGroup(
-			long userId, String companyId, String name, String description)
+			long userId, long companyId, String name, String description)
 		throws PortalException, SystemException {
 
 		// User Group
@@ -129,7 +129,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return UserGroupUtil.findByPrimaryKey(userGroupId);
 	}
 
-	public UserGroup getUserGroup(String companyId, String name)
+	public UserGroup getUserGroup(long companyId, String name)
 		throws PortalException, SystemException {
 
 		return UserGroupFinder.findByC_N(companyId, name);
@@ -148,7 +148,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public List search(
-			String companyId, String name, String description,
+			long companyId, String name, String description,
 			LinkedHashMap params, int begin, int end)
 		throws SystemException {
 
@@ -157,7 +157,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public int searchCount(
-			String companyId, String name, String description,
+			long companyId, String name, String description,
 			LinkedHashMap params)
 		throws SystemException {
 
@@ -172,7 +172,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public UserGroup updateUserGroup(
-			String companyId, String userGroupId, String name,
+			long companyId, String userGroupId, String name,
 			String description)
 		throws PortalException, SystemException {
 
@@ -188,7 +188,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return userGroup;
 	}
 
-	protected void validate(String userGroupId, String companyId, String name)
+	protected void validate(String userGroupId, long companyId, String name)
 		throws PortalException, SystemException {
 
 		if ((Validator.isNull(name)) || (Validator.isNumber(name)) ||

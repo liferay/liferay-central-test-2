@@ -81,9 +81,8 @@ public class WebsiteLocalServiceEJBImpl implements WebsiteLocalService,
 		WebsiteLocalServiceFactory.getTxImpl().deleteWebsite(websiteId);
 	}
 
-	public void deleteWebsites(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException {
+	public void deleteWebsites(long companyId, java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException {
 		WebsiteLocalServiceFactory.getTxImpl().deleteWebsites(companyId,
 			className, classPK);
 	}
@@ -99,7 +98,7 @@ public class WebsiteLocalServiceEJBImpl implements WebsiteLocalService,
 		return WebsiteLocalServiceFactory.getTxImpl().getWebsites();
 	}
 
-	public java.util.List getWebsites(java.lang.String companyId,
+	public java.util.List getWebsites(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		return WebsiteLocalServiceFactory.getTxImpl().getWebsites(companyId,

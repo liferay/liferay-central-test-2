@@ -149,40 +149,38 @@ public class ResourceCodeUtil {
 		return getPersistence().fetchByPrimaryKey(codeId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId)
+	public static java.util.List findByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByCompanyId_First(
-		java.lang.String companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByCompanyId_Last(
-		java.lang.String companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.ResourceCode[] findByCompanyId_PrevAndNext(
-		long codeId, java.lang.String companyId,
+		long codeId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
@@ -231,16 +229,15 @@ public class ResourceCodeUtil {
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByC_N_S(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String scope)
+		long companyId, java.lang.String name, java.lang.String scope)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
 		return getPersistence().findByC_N_S(companyId, name, scope);
 	}
 
 	public static com.liferay.portal.model.ResourceCode fetchByC_N_S(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String scope) throws com.liferay.portal.SystemException {
+		long companyId, java.lang.String name, java.lang.String scope)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_N_S(companyId, name, scope);
 	}
 
@@ -273,7 +270,7 @@ public class ResourceCodeUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByCompanyId(java.lang.String companyId)
+	public static void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByCompanyId(companyId);
 	}
@@ -283,8 +280,8 @@ public class ResourceCodeUtil {
 		getPersistence().removeByName(name);
 	}
 
-	public static void removeByC_N_S(java.lang.String companyId,
-		java.lang.String name, java.lang.String scope)
+	public static void removeByC_N_S(long companyId, java.lang.String name,
+		java.lang.String scope)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
 		getPersistence().removeByC_N_S(companyId, name, scope);
@@ -294,7 +291,7 @@ public class ResourceCodeUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByCompanyId(java.lang.String companyId)
+	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
 	}
@@ -304,9 +301,8 @@ public class ResourceCodeUtil {
 		return getPersistence().countByName(name);
 	}
 
-	public static int countByC_N_S(java.lang.String companyId,
-		java.lang.String name, java.lang.String scope)
-		throws com.liferay.portal.SystemException {
+	public static int countByC_N_S(long companyId, java.lang.String name,
+		java.lang.String scope) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_N_S(companyId, name, scope);
 	}
 

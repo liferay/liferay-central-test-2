@@ -43,8 +43,7 @@ import java.util.TimeZone;
  */
 public class PrettyDateFormat extends DateFormat {
 
-	public PrettyDateFormat(
-			String companyId, Locale locale, TimeZone timeZone)
+	public PrettyDateFormat(long companyId, Locale locale, TimeZone timeZone)
 		throws LanguageException {
 
 		_companyId = companyId;
@@ -120,7 +119,7 @@ public class PrettyDateFormat extends DateFormat {
 		return dateFormatDateTime.parse(dateString, new ParsePosition(0));
 	}
 
-	private String _companyId;
+	private long _companyId;
 	private Locale _locale;
 	private TimeZone _timeZone;
 	private String _todayString;

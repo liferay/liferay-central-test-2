@@ -140,14 +140,16 @@ public class LiveUsers {
 	}
 
 	private Map _getLiveUsers() {
-		String companyId = CompanyThreadLocal.getCompanyId();
+		String companyIdString = String.valueOf(
+			CompanyThreadLocal.getCompanyId());
 
-		Map liveUsers = (Map)WebAppPool.get(companyId, WebKeys.LIVE_USERS);
+		Map liveUsers = (Map)WebAppPool.get(
+			companyIdString, WebKeys.LIVE_USERS);
 
 		if (liveUsers == null) {
 			liveUsers = CollectionFactory.getSyncHashMap();
 
-			WebAppPool.put(companyId, WebKeys.LIVE_USERS, liveUsers);
+			WebAppPool.put(companyIdString, WebKeys.LIVE_USERS, liveUsers);
 		}
 
 		return liveUsers;
@@ -266,7 +268,7 @@ public class LiveUsers {
 	private void _signIn(HttpServletRequest req) throws SystemException {
 		HttpSession ses = req.getSession();
 
-		String companyId = CompanyThreadLocal.getCompanyId();
+		long companyId = CompanyThreadLocal.getCompanyId();
 		long userId = GetterUtil.getLong(req.getRemoteUser());
 
 		Map liveUsers = _updateGroupStatus(userId, true);
@@ -353,7 +355,7 @@ public class LiveUsers {
 
 		Long userIdObj = new Long(userId);
 
-		String companyId = CompanyThreadLocal.getCompanyId();
+		long companyId = CompanyThreadLocal.getCompanyId();
 
 		Map liveUsers = _getLiveUsers();
 

@@ -284,17 +284,11 @@ public class OrganizationServiceHttp {
 	}
 
 	public static java.lang.String getOrganizationId(
-		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		java.lang.String name)
+		HttpPrincipal httpPrincipal, long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = name;
 
 			if (name == null) {

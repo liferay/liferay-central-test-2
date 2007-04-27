@@ -128,7 +128,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		return OrganizationLocalServiceFactory.getTxImpl().getOrganization(organizationId);
 	}
 
-	public java.lang.String getOrganizationId(java.lang.String companyId,
+	public java.lang.String getOrganizationId(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -159,7 +159,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 			organizationId);
 	}
 
-	public java.util.List search(java.lang.String companyId,
+	public java.util.List search(long companyId,
 		java.lang.String parentOrganizationId,
 		java.lang.String parentOrganizationComparator, java.lang.String name,
 		java.lang.String street, java.lang.String city, java.lang.String zip,
@@ -171,7 +171,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 			city, zip, regionId, countryId, params, andOperator, begin, end);
 	}
 
-	public int searchCount(java.lang.String companyId,
+	public int searchCount(long companyId,
 		java.lang.String parentOrganizationId,
 		java.lang.String parentOrganizationComparator, java.lang.String name,
 		java.lang.String street, java.lang.String city, java.lang.String zip,
@@ -209,7 +209,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 	}
 
 	public com.liferay.portal.model.Organization updateOrganization(
-		java.lang.String companyId, java.lang.String organizationId,
+		long companyId, java.lang.String organizationId,
 		java.lang.String parentOrganizationId, java.lang.String name,
 		java.lang.String regionId, java.lang.String countryId, int statusId,
 		boolean location)

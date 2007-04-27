@@ -41,7 +41,7 @@ public class UnicodeLanguageUtil {
 		return UnicodeFormatter.toString(LanguageUtil.get(user, key));
 	}
 
-	public static String get(String companyId, Locale locale, String key)
+	public static String get(long companyId, Locale locale, String key)
 		throws LanguageException {
 
 		return UnicodeFormatter.toString(

@@ -27,6 +27,7 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
@@ -61,7 +62,7 @@ public class ImageServlet extends HttpServlet {
 
 			ServletContext ctx = getServletContext();
 
-			_companyId = ctx.getInitParameter("company_id");
+			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
 		}
 	}
 
@@ -94,7 +95,7 @@ public class ImageServlet extends HttpServlet {
 		writeImage(req, res);
 	}
 
-	protected String getCompanyId() {
+	protected long getCompanyId() {
 		return _companyId;
 	}
 
@@ -331,6 +332,6 @@ public class ImageServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(ImageServlet.class);
 
-	private String _companyId;
+	private long _companyId;
 
 }

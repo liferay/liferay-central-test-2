@@ -74,7 +74,7 @@ public class OrganizationFinder {
 		OrganizationFinder.class.getName() + ".joinByOrganizationsRoles";
 
 	public static int countByC_PO_N_S_C_Z_R_C(
-			String companyId, String parentOrganizationId,
+			long companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, String regionId, String countryId,
 			LinkedHashMap params, boolean andOperator)
@@ -167,7 +167,7 @@ public class OrganizationFinder {
 	}
 
 	public static List findByC_PO_N_S_C_Z_R_C(
-			String companyId, String parentOrganizationId,
+			long companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, String regionId, String countryId,
 			LinkedHashMap params, boolean andOperator, int begin, int end)
@@ -272,7 +272,7 @@ public class OrganizationFinder {
 	}
 
 	private static int _countByPermissions(
-			String companyId, String parentOrganizationId,
+			long companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, String regionId, String countryId,
 			long resourceId, long groupId, boolean andOperator)
@@ -385,7 +385,7 @@ public class OrganizationFinder {
 	}
 
 	private static List _findByPermissions(
-			String companyId, String parentOrganizationId,
+			long companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, String regionId, String countryId,
 			long resourceId, long groupId, boolean andOperator, int begin,

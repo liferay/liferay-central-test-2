@@ -100,7 +100,7 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 		return OrganizationServiceFactory.getTxImpl().getOrganization(organizationId);
 	}
 
-	public java.lang.String getOrganizationId(java.lang.String companyId,
+	public java.lang.String getOrganizationId(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

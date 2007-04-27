@@ -431,7 +431,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			try {
 				Portlet portlet = null;
 
-				String companyId = PortalUtil.getCompanyId(req);
+				long companyId = PortalUtil.getCompanyId(req);
 				String portletId = ParamUtil.getString(req, "p_p_id");
 
 				if (Validator.isNotNull(portletId)) {

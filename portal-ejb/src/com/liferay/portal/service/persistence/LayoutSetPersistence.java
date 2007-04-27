@@ -324,7 +324,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		}
 	}
 
-	public LayoutSet findByC_V(String companyId, String virtualHost)
+	public LayoutSet findByC_V(long companyId, String virtualHost)
 		throws NoSuchLayoutSetException, SystemException {
 		LayoutSet layoutSet = fetchByC_V(companyId, virtualHost);
 
@@ -349,7 +349,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		return layoutSet;
 	}
 
-	public LayoutSet fetchByC_V(String companyId, String virtualHost)
+	public LayoutSet fetchByC_V(long companyId, String virtualHost)
 		throws SystemException {
 		Session session = null;
 
@@ -358,14 +358,7 @@ public class LayoutSetPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (virtualHost == null) {
@@ -381,10 +374,7 @@ public class LayoutSetPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (virtualHost != null) {
 				q.setString(queryPos++, virtualHost);
@@ -492,7 +482,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_V(String companyId, String virtualHost)
+	public void removeByC_V(long companyId, String virtualHost)
 		throws NoSuchLayoutSetException, SystemException {
 		LayoutSet layoutSet = findByC_V(companyId, virtualHost);
 		remove(layoutSet);
@@ -544,7 +534,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_V(String companyId, String virtualHost)
+	public int countByC_V(long companyId, String virtualHost)
 		throws SystemException {
 		Session session = null;
 
@@ -554,14 +544,7 @@ public class LayoutSetPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (virtualHost == null) {
@@ -577,10 +560,7 @@ public class LayoutSetPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (virtualHost != null) {
 				q.setString(queryPos++, virtualHost);

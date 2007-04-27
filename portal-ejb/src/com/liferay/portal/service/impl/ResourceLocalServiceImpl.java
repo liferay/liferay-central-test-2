@@ -63,7 +63,7 @@ import org.apache.commons.logging.LogFactory;
 public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 	public void addModelResources(
-			String companyId, long groupId, long userId, String name,
+			long companyId, long groupId, long userId, String name,
 			long primKey, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -74,7 +74,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void addModelResources(
-			String companyId, long groupId, long userId, String name,
+			long companyId, long groupId, long userId, String name,
 			String primKey, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -83,7 +83,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		// Company
 
-		addResource(companyId, name, ResourceImpl.SCOPE_COMPANY, companyId);
+		addResource(
+			companyId, name, ResourceImpl.SCOPE_COMPANY,
+			String.valueOf(companyId));
 
 		// Guest
 
@@ -145,7 +147,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public Resource addResource(
-			String companyId, String name, String scope, String primKey)
+			long companyId, String name, String scope, String primKey)
 		throws PortalException, SystemException {
 
 		ResourceCode resourceCode =
@@ -171,7 +173,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void addResources(
-			String companyId, long groupId, String name, boolean portletActions)
+			long companyId, long groupId, String name, boolean portletActions)
 		throws PortalException, SystemException {
 
 		addResources(
@@ -179,7 +181,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void addResources(
-			String companyId, long groupId, long userId, String name,
+			long companyId, long groupId, long userId, String name,
 			long primKey, boolean portletActions,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -190,7 +192,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void addResources(
-			String companyId, long groupId, long userId, String name,
+			long companyId, long groupId, long userId, String name,
 			String primKey, boolean portletActions,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -210,7 +212,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		// Company
 
 		addResource(
-			companyId, name, ResourceImpl.SCOPE_COMPANY, companyId);
+			companyId, name, ResourceImpl.SCOPE_COMPANY,
+			String.valueOf(companyId));
 
 		logAddResources(name, primKey, stopWatch, 2);
 
@@ -329,14 +332,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void deleteResource(
-			String companyId, String name, String scope, long primKey)
+			long companyId, String name, String scope, long primKey)
 		throws PortalException, SystemException {
 
 		deleteResource(companyId, name, scope, String.valueOf(primKey));
 	}
 
 	public void deleteResource(
-			String companyId, String name, String scope, String primKey)
+			long companyId, String name, String scope, String primKey)
 		throws PortalException, SystemException {
 
 		try {
@@ -387,7 +390,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public Resource getResource(
-			String companyId, String name, String scope, String primKey)
+			long companyId, String name, String scope, String primKey)
 		throws PortalException, SystemException {
 
 		ResourceCode resourceCode =
@@ -504,7 +507,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			String companyId, String name, boolean portletActions)
+			long companyId, String name, boolean portletActions)
 		throws PortalException, SystemException {
 
 		List actions = null;

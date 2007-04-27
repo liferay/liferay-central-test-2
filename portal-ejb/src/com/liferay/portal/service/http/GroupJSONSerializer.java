@@ -52,16 +52,7 @@ public class GroupJSONSerializer {
 	public static JSONObject toJSONObject(Group model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("groupId", model.getGroupId());
-
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
-
+		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("creatorUserId", model.getCreatorUserId());
 
 		String className = model.getClassName();

@@ -173,7 +173,7 @@ public class DLFolderLocalServiceEJBImpl implements DLFolderLocalService,
 			name);
 	}
 
-	public java.util.List getFolders(java.lang.String companyId)
+	public java.util.List getFolders(long companyId)
 		throws com.liferay.portal.SystemException {
 		return DLFolderLocalServiceFactory.getTxImpl().getFolders(companyId);
 	}
@@ -204,9 +204,8 @@ public class DLFolderLocalServiceEJBImpl implements DLFolderLocalService,
 			groupId, folderId);
 	}
 
-	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, long groupId, java.lang.String[] folderIds,
-		java.lang.String keywords)
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, java.lang.String[] folderIds, java.lang.String keywords)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFolderLocalServiceFactory.getTxImpl().search(companyId,

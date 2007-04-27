@@ -109,7 +109,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return _getFriendlyURLMappers();
 	}
 
-	public Portlet getPortletById(String companyId, String portletId)
+	public Portlet getPortletById(long companyId, String portletId)
 		throws SystemException {
 
 		portletId = PortalUtil.getJsSafePortletName(portletId);
@@ -143,18 +143,18 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlet;
 	}
 
-	public Portlet getPortletByStrutsPath(String companyId, String strutsPath)
+	public Portlet getPortletByStrutsPath(long companyId, String strutsPath)
 		throws SystemException {
 
 		return getPortletById(companyId, _getPortletId(strutsPath));
 	}
 
-	public List getPortlets(String companyId) throws SystemException {
+	public List getPortlets(long companyId) throws SystemException {
 		return getPortlets(companyId, true, true);
 	}
 
 	public List getPortlets(
-			String companyId, boolean showSystem, boolean showPortal)
+			long companyId, boolean showSystem, boolean showPortal)
 		throws SystemException {
 
 		Map portletsPool = _getPortletsPool(companyId);
@@ -185,7 +185,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlets;
 	}
 
-	public boolean hasPortlet(String companyId, String portletId)
+	public boolean hasPortlet(long companyId, String portletId)
 		throws SystemException {
 
 		portletId = PortalUtil.getJsSafePortletName(portletId);
@@ -374,7 +374,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	public Portlet updatePortlet(
-			String companyId, String portletId, String roles, boolean active)
+			long companyId, String portletId, String roles, boolean active)
 		throws PortalException, SystemException {
 
 		portletId = PortalUtil.getJsSafePortletName(portletId);
@@ -456,7 +456,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return (Map)SimpleCachePool.get(scpId);
 	}
 
-	private Map _getPortletsPool(String companyId) throws SystemException {
+	private Map _getPortletsPool(long companyId) throws SystemException {
+		Long companyIdObj = new Long(companyId);
+
 		String scpId =
 			PortletServiceImpl.class.getName() + ".companyPortletsPool";
 
@@ -468,7 +470,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			SimpleCachePool.put(scpId, companyPortletsPool);
 		}
 
-		Map portletsPool = (Map)companyPortletsPool.get(companyId);
+		Map portletsPool = (Map)companyPortletsPool.get(companyIdObj);
 
 		if (portletsPool == null) {
 			portletsPool = CollectionFactory.getSyncHashMap();
@@ -514,7 +516,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				}
 			}
 
-			companyPortletsPool.put(companyId, portletsPool);
+			companyPortletsPool.put(companyIdObj, portletsPool);
 		}
 
 		return portletsPool;
@@ -1104,7 +1106,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	}
 
-	private static final String _SHARED_KEY = "SHARED_KEY";
+	private static final long _SHARED_KEY = 0;
 
 	private static Log _log = LogFactory.getLog(PortletLocalServiceImpl.class);
 

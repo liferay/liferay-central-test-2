@@ -159,43 +159,40 @@ public class GroupUtil {
 		return getPersistence().fetchByLiveGroupId(liveGroupId);
 	}
 
-	public static com.liferay.portal.model.Group findByC_N(
-		java.lang.String companyId, java.lang.String name)
+	public static com.liferay.portal.model.Group findByC_N(long companyId,
+		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException {
 		return getPersistence().findByC_N(companyId, name);
 	}
 
-	public static com.liferay.portal.model.Group fetchByC_N(
-		java.lang.String companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
+	public static com.liferay.portal.model.Group fetchByC_N(long companyId,
+		java.lang.String name) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_N(companyId, name);
 	}
 
-	public static com.liferay.portal.model.Group findByC_F(
-		java.lang.String companyId, java.lang.String friendlyURL)
+	public static com.liferay.portal.model.Group findByC_F(long companyId,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException {
 		return getPersistence().findByC_F(companyId, friendlyURL);
 	}
 
-	public static com.liferay.portal.model.Group fetchByC_F(
-		java.lang.String companyId, java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException {
+	public static com.liferay.portal.model.Group fetchByC_F(long companyId,
+		java.lang.String friendlyURL) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_F(companyId, friendlyURL);
 	}
 
-	public static com.liferay.portal.model.Group findByC_C_C(
-		java.lang.String companyId, java.lang.String className,
-		java.lang.String classPK)
+	public static com.liferay.portal.model.Group findByC_C_C(long companyId,
+		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException {
 		return getPersistence().findByC_C_C(companyId, className, classPK);
 	}
 
-	public static com.liferay.portal.model.Group fetchByC_C_C(
-		java.lang.String companyId, java.lang.String className,
-		java.lang.String classPK) throws com.liferay.portal.SystemException {
+	public static com.liferay.portal.model.Group fetchByC_C_C(long companyId,
+		java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_C_C(companyId, className, classPK);
 	}
 
@@ -234,21 +231,19 @@ public class GroupUtil {
 		getPersistence().removeByLiveGroupId(liveGroupId);
 	}
 
-	public static void removeByC_N(java.lang.String companyId,
-		java.lang.String name)
+	public static void removeByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException {
 		getPersistence().removeByC_N(companyId, name);
 	}
 
-	public static void removeByC_F(java.lang.String companyId,
-		java.lang.String friendlyURL)
+	public static void removeByC_F(long companyId, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException {
 		getPersistence().removeByC_F(companyId, friendlyURL);
 	}
 
-	public static void removeByC_C_C(java.lang.String companyId,
+	public static void removeByC_C_C(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException {
@@ -264,19 +259,18 @@ public class GroupUtil {
 		return getPersistence().countByLiveGroupId(liveGroupId);
 	}
 
-	public static int countByC_N(java.lang.String companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static int countByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_N(companyId, name);
 	}
 
-	public static int countByC_F(java.lang.String companyId,
-		java.lang.String friendlyURL) throws com.liferay.portal.SystemException {
+	public static int countByC_F(long companyId, java.lang.String friendlyURL)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_F(companyId, friendlyURL);
 	}
 
-	public static int countByC_C_C(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException {
+	public static int countByC_C_C(long companyId, java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_C_C(companyId, className, classPK);
 	}
 

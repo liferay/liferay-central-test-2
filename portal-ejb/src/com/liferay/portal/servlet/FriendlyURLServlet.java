@@ -68,7 +68,7 @@ public class FriendlyURLServlet extends HttpServlet {
 
 			ServletContext ctx = getServletContext();
 
-			_companyId = ctx.getInitParameter("company_id");
+			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
 			_private = GetterUtil.getBoolean(
 				config.getInitParameter("private"));
 			_user = GetterUtil.getBoolean(
@@ -146,7 +146,7 @@ public class FriendlyURLServlet extends HttpServlet {
 		}
 	}
 
-	protected String getCompanyId() {
+	protected long getCompanyId() {
 		return _companyId;
 	}
 
@@ -239,7 +239,7 @@ public class FriendlyURLServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(FriendlyURLServlet.class);
 
-	private String _companyId;
+	private long _companyId;
 	private boolean _private;
 	private boolean _user;
 

@@ -22,10 +22,13 @@
 
 package com.liferay.portal.servlet.filters.autologin;
 
+import com.liferay.portal.kernel.util.PortalInitable;
+import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.AutoLoginException;
 import com.liferay.portal.security.pwd.PwdEncryptor;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
@@ -55,12 +58,12 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class AutoLoginFilter implements Filter {
+public class AutoLoginFilter implements Filter, PortalInitable {
 
-	public void init(FilterConfig config) {
-		ServletContext ctx = config.getServletContext();
+	public void portalInit() {
+		ServletContext ctx = _config.getServletContext();
 
-		_companyId = ctx.getInitParameter("company_id");
+		_companyId = PortalUtil.getCompanyIdByWebId(ctx);
 
 		_rootPath = GetterUtil.getString(
 			ctx.getInitParameter("root_path"), StringPool.SLASH);
@@ -68,6 +71,12 @@ public class AutoLoginFilter implements Filter {
 		if (_rootPath.equals(StringPool.SLASH)) {
 			_rootPath = StringPool.BLANK;
 		}
+	}
+
+	public void init(FilterConfig config) throws ServletException {
+		_config = config;
+
+		PortalInitableUtil.init(this);
 	}
 
 	public void doFilter(
@@ -83,7 +92,7 @@ public class AutoLoginFilter implements Filter {
 		String jUserName = (String)ses.getAttribute("j_username");
 
 		if ((remoteUser == null) && (jUserName == null)) {
-			req.setAttribute(WebKeys.COMPANY_ID, _companyId);
+			req.setAttribute(WebKeys.COMPANY_ID, new Long(_companyId));
 
 			String[] autoLogins = PropsUtil.getArray(
 				PropsUtil.AUTO_LOGIN_HOOKS);
@@ -166,7 +175,8 @@ public class AutoLoginFilter implements Filter {
 
 	private static Log _log = LogFactory.getLog(AutoLoginFilter.class);
 
-	private String _companyId;
+	private FilterConfig _config;
+	private long _companyId;
 	private String _rootPath;
 
 }

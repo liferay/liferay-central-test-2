@@ -74,7 +74,7 @@ public class PortletPreferencesLocalServiceImpl
 	}
 
 	public javax.portlet.PortletPreferences getDefaultPreferences(
-			String companyId, String portletId)
+			long companyId, String portletId)
 		throws PortalException, SystemException {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
@@ -113,7 +113,7 @@ public class PortletPreferencesLocalServiceImpl
 	}
 
 	public javax.portlet.PortletPreferences getPreferences(
-			String companyId, PortletPreferencesPK pk)
+			long companyId, PortletPreferencesPK pk)
 		throws PortalException, SystemException {
 
 		Map prefsPool = PortletPreferencesLocalUtil.getPreferencesPool(

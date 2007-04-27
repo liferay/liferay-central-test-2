@@ -107,7 +107,7 @@ public class ShoppingCouponServiceJSON {
 	}
 
 	public static JSONArray search(java.lang.String couponId,
-		java.lang.String plid, java.lang.String companyId, boolean active,
+		java.lang.String plid, long companyId, boolean active,
 		java.lang.String discountType, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

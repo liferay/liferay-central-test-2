@@ -81,7 +81,7 @@ public class ViewArticleContentAction extends Action {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			String companyId = themeDisplay.getCompanyId();
+			long companyId = themeDisplay.getCompanyId();
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String articleId = ParamUtil.getString(req, "articleId");
 			double version = ParamUtil.getDouble(
@@ -201,7 +201,7 @@ public class ViewArticleContentAction extends Action {
 
 	protected void format(
 			long groupId, String articleId, double version,
-			String previewArticleId, String companyId, Element root,
+			String previewArticleId, long companyId, Element root,
 			UploadServletRequest req)
 		throws Exception {
 

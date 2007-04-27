@@ -57,7 +57,7 @@ public class SitemapServlet extends HttpServlet {
 
 			ServletContext ctx = getServletContext();
 
-			_companyId = ctx.getInitParameter("company_id");
+			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
 		}
 	}
 
@@ -119,6 +119,6 @@ public class SitemapServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(SitemapServlet.class);
 
-	private String _companyId;
+	private long _companyId;
 
 }

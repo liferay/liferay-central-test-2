@@ -189,40 +189,38 @@ public class WikiNodeUtil {
 		return getPersistence().findByGroupId_PrevAndNext(nodeId, groupId, obc);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId)
+	public static java.util.List findByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode findByCompanyId_First(
-		java.lang.String companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchNodeException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode findByCompanyId_Last(
-		java.lang.String companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchNodeException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode[] findByCompanyId_PrevAndNext(
-		java.lang.String nodeId, java.lang.String companyId,
+		java.lang.String nodeId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchNodeException {
@@ -264,7 +262,7 @@ public class WikiNodeUtil {
 		getPersistence().removeByGroupId(groupId);
 	}
 
-	public static void removeByCompanyId(java.lang.String companyId)
+	public static void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByCompanyId(companyId);
 	}
@@ -278,7 +276,7 @@ public class WikiNodeUtil {
 		return getPersistence().countByGroupId(groupId);
 	}
 
-	public static int countByCompanyId(java.lang.String companyId)
+	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
 	}

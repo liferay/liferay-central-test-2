@@ -291,8 +291,8 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	public BookmarksEntry updateEntry(
-			String companyId, long entryId, long folderId, String name,
-			String url, String comments, String[] tagsEntries)
+			long entryId, long folderId, String name, String url,
+			String comments, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		// Entry

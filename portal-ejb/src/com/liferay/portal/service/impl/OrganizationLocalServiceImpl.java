@@ -223,7 +223,7 @@ public class OrganizationLocalServiceImpl
 		return OrganizationUtil.findByPrimaryKey(organizationId);
 	}
 
-	public String getOrganizationId(String companyId, String name)
+	public String getOrganizationId(long companyId, String name)
 		throws PortalException, SystemException {
 
 		try {
@@ -258,7 +258,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public List search(
-			String companyId, String parentOrganizationId,
+			long companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, String regionId, String countryId,
 			LinkedHashMap params, boolean andOperator, int begin, int end)
@@ -271,7 +271,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public int searchCount(
-			String companyId, String parentOrganizationId,
+			long companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, String regionId, String countryId,
 			LinkedHashMap params, boolean andOperator)
@@ -304,7 +304,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public Organization updateOrganization(
-			String companyId, String organizationId,
+			long companyId, String organizationId,
 			String parentOrganizationId, String name, String regionId,
 			String countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
@@ -345,7 +345,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	protected String getParentOrganizationId(
-			String companyId, String parentOrganizationId)
+			long companyId, String parentOrganizationId)
 		throws PortalException, SystemException {
 
 		if (!parentOrganizationId.equals(
@@ -358,7 +358,7 @@ public class OrganizationLocalServiceImpl
 				Organization parentOrganization =
 					OrganizationUtil.findByPrimaryKey(parentOrganizationId);
 
-				if (!companyId.equals(parentOrganization.getCompanyId())) {
+				if (companyId != parentOrganization.getCompanyId()) {
 					parentOrganizationId =
 						OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 				}
@@ -373,7 +373,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	protected void validate(
-			String companyId, String parentOrganizationId, String name,
+			long companyId, String parentOrganizationId, String name,
 			String countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
@@ -383,9 +383,8 @@ public class OrganizationLocalServiceImpl
 	}
 
 	protected void validate(
-			String companyId, String organizationId,
-			String parentOrganizationId, String name, String countryId,
-			int statusId, boolean location)
+			long companyId, String organizationId, String parentOrganizationId,
+			String name, String countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		if (location) {
@@ -393,7 +392,7 @@ public class OrganizationLocalServiceImpl
 				Organization organization =
 					OrganizationUtil.findByPrimaryKey(parentOrganizationId);
 
-				if (!companyId.equals(organization.getCompanyId())) {
+				if (companyId != organization.getCompanyId()) {
 					throw new OrganizationParentException();
 				}
 			}

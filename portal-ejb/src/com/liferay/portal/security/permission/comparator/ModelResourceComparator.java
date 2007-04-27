@@ -37,7 +37,7 @@ import java.util.Locale;
  */
 public class ModelResourceComparator implements Comparator, Serializable {
 
-	public ModelResourceComparator(String companyId, Locale locale) {
+	public ModelResourceComparator(long companyId, Locale locale) {
 		_companyId = companyId;
 		_locale = locale;
 	}
@@ -54,7 +54,7 @@ public class ModelResourceComparator implements Comparator, Serializable {
 		return resource1.compareTo(resource2);
 	}
 
-	private String _companyId;
+	private long _companyId;
 	private Locale _locale;
 
 }

@@ -73,8 +73,7 @@ public class ResourceCodeLocalServiceEJBImpl implements ResourceCodeLocalService
 	}
 
 	public com.liferay.portal.model.ResourceCode getResourceCode(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String scope)
+		long companyId, java.lang.String name, java.lang.String scope)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return ResourceCodeLocalServiceFactory.getTxImpl().getResourceCode(companyId,

@@ -87,7 +87,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_themeCompanyLimit = themeCompanyLimit;
 	}
 
-	public boolean isCompanyAvailable(String companyId) {
+	public boolean isCompanyAvailable(long companyId) {
 		return isAvailable(getThemeCompanyLimit(), companyId);
 	}
 
@@ -100,7 +100,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	}
 
 	public boolean isGroupAvailable(long groupId) {
-		return isAvailable(getThemeGroupLimit(), String.valueOf(groupId));
+		return isAvailable(getThemeGroupLimit(), groupId);
 	}
 
 	public String getName() {
@@ -264,7 +264,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
-	protected boolean isAvailable(ThemeCompanyLimit limit, String id) {
+	protected boolean isAvailable(ThemeCompanyLimit limit, long id) {
 		boolean available = true;
 
 		if (_log.isDebugEnabled()) {

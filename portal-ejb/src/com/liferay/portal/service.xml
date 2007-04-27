@@ -7,11 +7,11 @@
 
 		<!-- PK fields -->
 
-		<column name="accountId" type="String" primary="true" />
+		<column name="accountId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -19,7 +19,7 @@
 
 		<!-- Other fields -->
 
-		<column name="parentAccountId" type="String" />
+		<column name="parentAccountId" type="long" />
 		<column name="name" type="String" />
 		<column name="legalName" type="String" />
 		<column name="legalId" type="String" />
@@ -38,7 +38,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -99,10 +99,12 @@
 
 		<!-- PK fields -->
 
-		<column name="companyId" type="String" primary="true" />
+		<column name="companyId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
+		<column name="accountId" type="long" />
+		<column name="webId" type="String" />
 		<column name="key" type="String" />
 		<column name="portalURL" type="String" />
 		<column name="homeURL" type="String" />
@@ -110,6 +112,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="WebId" return-type="Company">
+			<finder-column name="webId" />
+		</finder>
 		<finder name="Mx" return-type="Company">
 			<finder-column name="mx" />
 		</finder>
@@ -122,7 +127,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -130,7 +135,7 @@
 
 		<!-- Other fields -->
 
-		<column name="accountId" type="String" />
+		<column name="accountId" type="long" />
 		<column name="parentContactId" type="long" />
 		<column name="firstName" type="String" />
 		<column name="middleName" type="String" />
@@ -193,7 +198,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="createdOn" type="Date" />
 		<column name="createdByUserId" type="long" />
 		<column name="createdByUserName" type="String" />
@@ -214,7 +219,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -266,7 +271,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="creatorUserId" type="long" />
 
 		<!-- Other fields -->
@@ -359,7 +364,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 
 		<!-- Other fields -->
 
@@ -409,7 +414,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 
 		<!-- Other fields -->
 
@@ -464,7 +469,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 
 		<!-- Other fields -->
 
@@ -584,7 +589,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -679,7 +684,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 
 		<!-- Other fields -->
 
@@ -710,7 +715,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -764,7 +769,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 
 		<!-- Other fields -->
 
@@ -789,7 +794,7 @@
 		<!-- PK fields -->
 
 		<column name="portletId" type="String" primary="true" />
-		<column name="companyId" type="String" primary="true" />
+		<column name="companyId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
@@ -908,7 +913,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 
 		<!-- Other fields -->
 
@@ -937,7 +942,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 
 		<!-- Other fields -->
 
@@ -982,7 +987,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -1019,7 +1024,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
@@ -1098,7 +1103,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 
 		<!-- Other fields -->
 
@@ -1180,7 +1185,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="modifiedDate" type="Date" />
 
@@ -1225,7 +1230,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />

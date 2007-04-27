@@ -107,7 +107,7 @@ public class JournalStructureLocalServiceEJBImpl
 			guestPermissions);
 	}
 
-	public void addStructureResources(java.lang.String companyId, long groupId,
+	public void addStructureResources(long companyId, long groupId,
 		java.lang.String structureId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -125,7 +125,7 @@ public class JournalStructureLocalServiceEJBImpl
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addStructureResources(java.lang.String companyId, long groupId,
+	public void addStructureResources(long companyId, long groupId,
 		java.lang.String structureId, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -144,7 +144,7 @@ public class JournalStructureLocalServiceEJBImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void checkNewLine(java.lang.String companyId, long groupId,
+	public void checkNewLine(long companyId, long groupId,
 		java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -152,7 +152,7 @@ public class JournalStructureLocalServiceEJBImpl
 			groupId, structureId);
 	}
 
-	public void deleteStructure(java.lang.String companyId, long groupId,
+	public void deleteStructure(long companyId, long groupId,
 		java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -168,7 +168,7 @@ public class JournalStructureLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure getStructure(
-		java.lang.String companyId, long groupId, java.lang.String structureId)
+		long companyId, long groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalStructureLocalServiceFactory.getTxImpl().getStructure(companyId,
@@ -197,7 +197,7 @@ public class JournalStructureLocalServiceEJBImpl
 												  .getStructuresCount(groupId);
 	}
 
-	public java.util.List search(java.lang.String companyId, long groupId,
+	public java.util.List search(long companyId, long groupId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -207,7 +207,7 @@ public class JournalStructureLocalServiceEJBImpl
 			obc);
 	}
 
-	public int searchCount(java.lang.String companyId, long groupId,
+	public int searchCount(long companyId, long groupId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.SystemException {
@@ -216,7 +216,7 @@ public class JournalStructureLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure updateStructure(
-		java.lang.String companyId, long groupId, java.lang.String structureId,
+		long companyId, long groupId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd)
 		throws com.liferay.portal.PortalException, 

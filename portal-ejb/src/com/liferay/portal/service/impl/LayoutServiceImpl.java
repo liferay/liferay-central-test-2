@@ -82,7 +82,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	}
 
 	public LayoutReference[] getLayoutReferences(
-			String companyId, String portletId, String prefsKey,
+			long companyId, String portletId, String prefsKey,
 			String prefsValue)
 		throws SystemException {
 

@@ -53,13 +53,12 @@ import javax.ejb.SessionContext;
  *
  */
 public class CompanyServiceEJBImpl implements CompanyService, SessionBean {
-	public com.liferay.portal.model.Company updateCompany(
-		java.lang.String companyId, java.lang.String portalURL,
-		java.lang.String homeURL, java.lang.String mx, java.lang.String name,
-		java.lang.String legalName, java.lang.String legalId,
-		java.lang.String legalType, java.lang.String sicCode,
-		java.lang.String tickerSymbol, java.lang.String industry,
-		java.lang.String type, java.lang.String size)
+	public com.liferay.portal.model.Company updateCompany(long companyId,
+		java.lang.String portalURL, java.lang.String homeURL,
+		java.lang.String mx, java.lang.String name, java.lang.String legalName,
+		java.lang.String legalId, java.lang.String legalType,
+		java.lang.String sicCode, java.lang.String tickerSymbol,
+		java.lang.String industry, java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -69,8 +68,8 @@ public class CompanyServiceEJBImpl implements CompanyService, SessionBean {
 			sicCode, tickerSymbol, industry, type, size);
 	}
 
-	public void updateDisplay(java.lang.String companyId,
-		java.lang.String languageId, java.lang.String timeZoneId)
+	public void updateDisplay(long companyId, java.lang.String languageId,
+		java.lang.String timeZoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -78,16 +77,16 @@ public class CompanyServiceEJBImpl implements CompanyService, SessionBean {
 			timeZoneId);
 	}
 
-	public void updateLogo(java.lang.String companyId, java.io.File file)
+	public void updateLogo(long companyId, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		CompanyServiceFactory.getTxImpl().updateLogo(companyId, file);
 	}
 
-	public void updateSecurity(java.lang.String companyId,
-		java.lang.String authType, boolean autoLogin, boolean sendPassword,
-		boolean strangers, boolean communityLogo)
+	public void updateSecurity(long companyId, java.lang.String authType,
+		boolean autoLogin, boolean sendPassword, boolean strangers,
+		boolean communityLogo)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

@@ -84,8 +84,8 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 	}
 
 	public com.liferay.portal.model.LayoutReference[] getLayoutReferences(
-		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String prefsKey, java.lang.String prefsValue)
+		long companyId, java.lang.String portletId, java.lang.String prefsKey,
+		java.lang.String prefsValue)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 

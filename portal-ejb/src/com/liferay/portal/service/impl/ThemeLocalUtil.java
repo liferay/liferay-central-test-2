@@ -77,7 +77,7 @@ import org.dom4j.io.SAXReader;
 public class ThemeLocalUtil {
 
 	public static ColorScheme getColorScheme(
-			String companyId, String themeId, String colorSchemeId)
+			long companyId, String themeId, String colorSchemeId)
 		throws PortalException, SystemException {
 
 		colorSchemeId = GetterUtil.getString(colorSchemeId);
@@ -109,7 +109,7 @@ public class ThemeLocalUtil {
 		return colorScheme;
 	}
 
-	public static Theme getTheme(String companyId, String themeId)
+	public static Theme getTheme(long companyId, String themeId)
 		throws PortalException, SystemException {
 
 		themeId = GetterUtil.getString(themeId);
@@ -123,7 +123,7 @@ public class ThemeLocalUtil {
 		return theme;
 	}
 
-	public static List getThemes(String companyId) {
+	public static List getThemes(long companyId) {
 		List themes = ListUtil.fromCollection(_getThemes(companyId).values());
 
 		Collections.sort(themes);
@@ -246,8 +246,10 @@ public class ThemeLocalUtil {
 		return _getGroupLimitExcludes(el);
 	}
 
-	private static Map _getThemes(String companyId) {
-		Map themes = (Map)_themesPool.get(companyId);
+	private static Map _getThemes(long companyId) {
+		Long companyIdObj = new Long(companyId);
+
+		Map themes = (Map)_themesPool.get(companyIdObj);
 
 		if (themes == null) {
 			themes = CollectionFactory.getSyncHashMap();
@@ -265,7 +267,7 @@ public class ThemeLocalUtil {
 				}
 			}
 
-			_themesPool.put(companyId, themes);
+			_themesPool.put(companyIdObj, themes);
 		}
 
 		return themes;

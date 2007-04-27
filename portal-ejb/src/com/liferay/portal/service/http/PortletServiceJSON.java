@@ -68,7 +68,7 @@ import org.json.JSONObject;
  *
  */
 public class PortletServiceJSON {
-	public static JSONObject updatePortlet(java.lang.String companyId,
+	public static JSONObject updatePortlet(long companyId,
 		java.lang.String portletId, java.lang.String roles, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

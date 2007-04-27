@@ -227,25 +227,20 @@ public class UserServiceHttp {
 	}
 
 	public static com.liferay.portal.model.User addUser(
-		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		boolean autoPassword, java.lang.String password1,
-		java.lang.String password2, boolean passwordReset,
-		boolean autoScreenName, java.lang.String screenName,
-		java.lang.String emailAddress, java.util.Locale locale,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, java.lang.String organizationId,
-		java.lang.String locationId, boolean sendEmail)
+		HttpPrincipal httpPrincipal, long companyId, boolean autoPassword,
+		java.lang.String password1, java.lang.String password2,
+		boolean passwordReset, boolean autoScreenName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.util.Locale locale, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String jobTitle,
+		java.lang.String organizationId, java.lang.String locationId,
+		boolean sendEmail)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = new BooleanWrapper(autoPassword);
 			Object paramObj2 = password1;
 
@@ -493,17 +488,12 @@ public class UserServiceHttp {
 	}
 
 	public static com.liferay.portal.model.User getUserByEmailAddress(
-		HttpPrincipal httpPrincipal, java.lang.String companyId,
+		HttpPrincipal httpPrincipal, long companyId,
 		java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = emailAddress;
 
 			if (emailAddress == null) {
@@ -572,17 +562,11 @@ public class UserServiceHttp {
 	}
 
 	public static com.liferay.portal.model.User getUserByScreenName(
-		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		java.lang.String screenName)
+		HttpPrincipal httpPrincipal, long companyId, java.lang.String screenName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = screenName;
 
 			if (screenName == null) {

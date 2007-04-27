@@ -458,7 +458,7 @@ public class JournalUtil {
 	}
 
 	public static String getTemplateScript(
-			String companyId, long groupId, String templateId, Map tokens,
+			long companyId, long groupId, String templateId, Map tokens,
 			String languageId)
 		throws PortalException, SystemException {
 
@@ -467,7 +467,7 @@ public class JournalUtil {
 	}
 
 	public static String getTemplateScript(
-			String companyId, long groupId, String templateId, Map tokens,
+			long companyId, long groupId, String templateId, Map tokens,
 			String languageId, boolean transform)
 		throws PortalException, SystemException {
 
@@ -527,7 +527,7 @@ public class JournalUtil {
 
 		Company company = themeDisplay.getCompany();
 
-		tokens.put("company_id", themeDisplay.getCompanyId());
+		tokens.put("company_id", String.valueOf(themeDisplay.getCompanyId()));
 		tokens.put("group_id", String.valueOf(groupId));
 		tokens.put("cms_url", themeDisplay.getPathRoot() + "/cms/servlet");
 		tokens.put("image_path", themeDisplay.getPathImage());

@@ -25,6 +25,7 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.LocaleUtil;
@@ -61,7 +62,7 @@ public class LanguageServlet extends HttpServlet {
 
 			ServletContext ctx = getServletContext();
 
-			_companyId = ctx.getInitParameter("company_id");
+			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
 			_lastModified =
 				(ReleaseInfo.getBuildDate().getTime() / 1000) * 1000;
 			_maxAge = "max-age=" + (Time.HOUR / 1000);
@@ -151,7 +152,7 @@ public class LanguageServlet extends HttpServlet {
 		ServletResponseUtil.write(res, value.getBytes());
 	}
 
-	protected String getCompanyId() {
+	protected long getCompanyId() {
 		return _companyId;
 	}
 
@@ -163,7 +164,7 @@ public class LanguageServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(LanguageServlet.class);
 
-	private String _companyId;
+	private long _companyId;
 	private long _lastModified;
 	private String _maxAge;
 

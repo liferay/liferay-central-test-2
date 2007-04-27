@@ -103,7 +103,7 @@ public class RoleServiceSoap {
 	}
 
 	public static com.liferay.portal.model.RoleSoap getGroupRole(
-		java.lang.String companyId, long groupId) throws RemoteException {
+		long companyId, long groupId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.getGroupRole(companyId,
 					groupId);
@@ -129,9 +129,8 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RoleSoap getRole(
-		java.lang.String companyId, java.lang.String name)
-		throws RemoteException {
+	public static com.liferay.portal.model.RoleSoap getRole(long companyId,
+		java.lang.String name) throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.getRole(companyId,
 					name);

@@ -89,7 +89,7 @@ public class EditConfigurationAction extends DynamicPortletAction {
 	}
 
 	protected Portlet getPortlet(PortletRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);

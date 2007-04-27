@@ -38,7 +38,7 @@ import java.util.Map;
 public class AuthPipeline {
 
 	public static int authenticateByEmailAddress(
-			String[] classes, String companyId, String emailAddress,
+			String[] classes, long companyId, String emailAddress,
 			String password, Map headerMap, Map parameterMap)
 		throws AuthException {
 
@@ -48,7 +48,7 @@ public class AuthPipeline {
 	}
 
 	public static int authenticateByScreenName(
-			String[] classes, String companyId, String screenName,
+			String[] classes, long companyId, String screenName,
 			String password, Map headerMap, Map parameterMap)
 		throws AuthException {
 
@@ -58,7 +58,7 @@ public class AuthPipeline {
 	}
 
 	public static int authenticateByUserId(
-			String[] classes, String companyId, long userId, String password,
+			String[] classes, long companyId, long userId, String password,
 			Map headerMap, Map parameterMap)
 		throws AuthException {
 
@@ -68,7 +68,7 @@ public class AuthPipeline {
 	}
 
 	public static void onFailureByEmailAddress(
-			String[] classes, String companyId, String emailAddress,
+			String[] classes, long companyId, String emailAddress,
 			Map headerMap, Map parameterMap)
 		throws AuthException {
 
@@ -78,7 +78,7 @@ public class AuthPipeline {
 	}
 
 	public static void onFailureByScreenName(
-			String[] classes, String companyId, String screenName,
+			String[] classes, long companyId, String screenName,
 			Map headerMap, Map parameterMap)
 		throws AuthException {
 
@@ -88,7 +88,7 @@ public class AuthPipeline {
 	}
 
 	public static void onFailureByUserId(
-			String[] classes, String companyId, long userId, Map headerMap,
+			String[] classes, long companyId, long userId, Map headerMap,
 			Map parameterMap)
 		throws AuthException {
 
@@ -98,7 +98,7 @@ public class AuthPipeline {
 	}
 
 	public static void onMaxFailuresByEmailAddress(
-			String[] classes, String companyId, String emailAddress,
+			String[] classes, long companyId, String emailAddress,
 			Map headerMap, Map parameterMap)
 		throws AuthException {
 
@@ -107,7 +107,7 @@ public class AuthPipeline {
 	}
 
 	public static void onMaxFailuresByScreenName(
-			String[] classes, String companyId, String screenName,
+			String[] classes, long companyId, String screenName,
 			Map headerMap, Map parameterMap)
 		throws AuthException {
 
@@ -116,7 +116,7 @@ public class AuthPipeline {
 	}
 
 	public static void onMaxFailuresByUserId(
-			String[] classes, String companyId, long userId, Map headerMap,
+			String[] classes, long companyId, long userId, Map headerMap,
 			Map parameterMap)
 		throws AuthException {
 
@@ -124,7 +124,7 @@ public class AuthPipeline {
 	}
 
 	private static int _authenticate(
-			String[] classes, String companyId, String login, String password,
+			String[] classes, long companyId, String login, String password,
 			String authType, Map headerMap, Map parameterMap)
 		throws AuthException {
 
@@ -177,7 +177,7 @@ public class AuthPipeline {
 	}
 
 	private static void _onFailure(
-			String[] classes, String companyId, String login, String authType,
+			String[] classes, long companyId, String login, String authType,
 			Map headerMap, Map parameterMap)
 		throws AuthException {
 

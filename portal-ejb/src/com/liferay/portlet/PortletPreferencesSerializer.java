@@ -115,7 +115,7 @@ public class PortletPreferencesSerializer {
 	}
 
 	public static PortletPreferencesImpl fromXML(
-			String companyId, PortletPreferencesPK pk, String xml)
+			long companyId, PortletPreferencesPK pk, String xml)
 		throws PortalException, SystemException {
 
 		try {

@@ -80,7 +80,7 @@ public class UserFinder {
 		UserFinder.class.getName() + ".joinByUsersUserGroups";
 
 	public static int countByC_FN_MN_LN_SN_EA_A(
-			String companyId, String firstName, String middleName,
+			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
 			boolean active, LinkedHashMap params, boolean andOperator)
 		throws SystemException {
@@ -146,7 +146,7 @@ public class UserFinder {
 	}
 
 	public static List findByC_FN_MN_LN_SN_EA_A(
-			String companyId, String firstName, String middleName,
+			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
 			boolean active, LinkedHashMap params, boolean andOperator,
 			int begin, int end, OrderByComparator obc)

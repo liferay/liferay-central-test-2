@@ -77,7 +77,7 @@ public class MessageListenerImpl implements MessageListener {
 			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
 				categoryId);
 
-			if (!category.getCompanyId().equals(company.getCompanyId())) {
+			if (category.getCompanyId() != company.getCompanyId()) {
 				return false;
 			}
 

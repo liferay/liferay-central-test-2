@@ -90,7 +90,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	}
 
 	public User addUser(
-			String companyId, boolean autoPassword, String password1,
+			long companyId, boolean autoPassword, String password1,
 			String password2, boolean passwordReset, boolean autoScreenName,
 			String screenName, String emailAddress, Locale locale,
 			String firstName, String middleName, String lastName,
@@ -153,7 +153,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return UserLocalServiceUtil.getRoleUsers(roleId);
 	}
 
-	public User getUserByEmailAddress(String companyId, String emailAddress)
+	public User getUserByEmailAddress(long companyId, String emailAddress)
 		throws PortalException, SystemException {
 
 		User user = UserLocalServiceUtil.getUserByEmailAddress(
@@ -174,7 +174,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return user;
 	}
 
-	public User getUserByScreenName(String companyId, String screenName)
+	public User getUserByScreenName(long companyId, String screenName)
 		throws PortalException, SystemException {
 
 		User user = UserLocalServiceUtil.getUserByScreenName(

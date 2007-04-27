@@ -68,7 +68,7 @@ public class EditUsersAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		long userId = PortalUtil.getUserId(req);
 
 		if (!RoleLocalServiceUtil.hasUserRole(

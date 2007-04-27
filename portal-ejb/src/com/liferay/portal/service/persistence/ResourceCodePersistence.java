@@ -183,7 +183,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId) throws SystemException {
+	public List findByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -191,24 +191,14 @@ public class ResourceCodePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return q.list();
 		}
@@ -220,12 +210,12 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end)
+	public List findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end,
+	public List findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -234,14 +224,7 @@ public class ResourceCodePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -253,10 +236,7 @@ public class ResourceCodePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -268,7 +248,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public ResourceCode findByCompanyId_First(String companyId,
+	public ResourceCode findByCompanyId_First(long companyId,
 		OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
@@ -287,7 +267,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public ResourceCode findByCompanyId_Last(String companyId,
+	public ResourceCode findByCompanyId_Last(long companyId,
 		OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
 		int count = countByCompanyId(companyId);
@@ -308,7 +288,7 @@ public class ResourceCodePersistence extends BasePersistence {
 	}
 
 	public ResourceCode[] findByCompanyId_PrevAndNext(long codeId,
-		String companyId, OrderByComparator obc)
+		long companyId, OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
 		ResourceCode resourceCode = findByPrimaryKey(codeId);
 		int count = countByCompanyId(companyId);
@@ -319,14 +299,7 @@ public class ResourceCodePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -338,10 +311,7 @@ public class ResourceCodePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					resourceCode);
@@ -535,7 +505,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public ResourceCode findByC_N_S(String companyId, String name, String scope)
+	public ResourceCode findByC_N_S(long companyId, String name, String scope)
 		throws NoSuchResourceCodeException, SystemException {
 		ResourceCode resourceCode = fetchByC_N_S(companyId, name, scope);
 
@@ -563,7 +533,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		return resourceCode;
 	}
 
-	public ResourceCode fetchByC_N_S(String companyId, String name, String scope)
+	public ResourceCode fetchByC_N_S(long companyId, String name, String scope)
 		throws SystemException {
 		Session session = null;
 
@@ -572,14 +542,7 @@ public class ResourceCodePersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -604,10 +567,7 @@ public class ResourceCodePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);
@@ -710,7 +670,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCompanyId(String companyId) throws SystemException {
+	public void removeByCompanyId(long companyId) throws SystemException {
 		Iterator itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
@@ -728,7 +688,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_N_S(String companyId, String name, String scope)
+	public void removeByC_N_S(long companyId, String name, String scope)
 		throws NoSuchResourceCodeException, SystemException {
 		ResourceCode resourceCode = findByC_N_S(companyId, name, scope);
 		remove(resourceCode);
@@ -742,7 +702,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCompanyId(String companyId) throws SystemException {
+	public int countByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -751,24 +711,14 @@ public class ResourceCodePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Iterator itr = q.list().iterator();
 
@@ -838,7 +788,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_N_S(String companyId, String name, String scope)
+	public int countByC_N_S(long companyId, String name, String scope)
 		throws SystemException {
 		Session session = null;
 
@@ -848,14 +798,7 @@ public class ResourceCodePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -880,10 +823,7 @@ public class ResourceCodePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);

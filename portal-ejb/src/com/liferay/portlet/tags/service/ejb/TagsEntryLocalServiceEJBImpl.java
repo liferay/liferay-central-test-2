@@ -93,7 +93,7 @@ public class TagsEntryLocalServiceEJBImpl implements TagsEntryLocalService,
 		TagsEntryLocalServiceFactory.getTxImpl().deleteEntry(entry);
 	}
 
-	public boolean hasEntry(java.lang.String companyId, java.lang.String name)
+	public boolean hasEntry(long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return TagsEntryLocalServiceFactory.getTxImpl().hasEntry(companyId, name);
@@ -118,44 +118,42 @@ public class TagsEntryLocalServiceEJBImpl implements TagsEntryLocalService,
 		return TagsEntryLocalServiceFactory.getTxImpl().getEntry(entryId);
 	}
 
-	public com.liferay.portlet.tags.model.TagsEntry getEntry(
-		java.lang.String companyId, java.lang.String name)
+	public com.liferay.portlet.tags.model.TagsEntry getEntry(long companyId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return TagsEntryLocalServiceFactory.getTxImpl().getEntry(companyId, name);
 	}
 
-	public long[] getEntryIds(java.lang.String companyId,
-		java.lang.String[] names)
+	public long[] getEntryIds(long companyId, java.lang.String[] names)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return TagsEntryLocalServiceFactory.getTxImpl().getEntryIds(companyId,
 			names);
 	}
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties)
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
 		return TagsEntryLocalServiceFactory.getTxImpl().search(companyId, name,
 			properties);
 	}
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties, int begin, int end)
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return TagsEntryLocalServiceFactory.getTxImpl().search(companyId, name,
 			properties, begin, end);
 	}
 
 	public com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String[] properties, int begin, int end)
-		throws com.liferay.portal.SystemException {
+		long companyId, java.lang.String name, java.lang.String[] properties,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return TagsEntryLocalServiceFactory.getTxImpl().searchAutocomplete(companyId,
 			name, properties, begin, end);
 	}
 
-	public int searchCount(java.lang.String companyId, java.lang.String name,
+	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
 		return TagsEntryLocalServiceFactory.getTxImpl().searchCount(companyId,

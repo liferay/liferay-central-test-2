@@ -139,11 +139,11 @@ public class TagsPropertyLocalServiceImpl
 		return TagsPropertyUtil.findByE_K(entryId, key);
 	}
 
-	public String[] getPropertyKeys(String companyId) throws SystemException {
+	public String[] getPropertyKeys(long companyId) throws SystemException {
 		return TagsPropertyKeyFinder.findByCompanyId(companyId);
 	}
 
-	public List getPropertyValues(String companyId, String key)
+	public List getPropertyValues(long companyId, String key)
 		throws SystemException {
 
 		return TagsPropertyFinder.findByC_K(companyId, key);

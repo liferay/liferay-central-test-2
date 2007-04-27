@@ -54,7 +54,7 @@ public class LayoutCacheUtil {
 			LayoutCacheFilter.class.getName() + ".refresh.time"));
 
 	static {
-		String[] companyIds = PortalInstances.getCompanyIds();
+		long[] companyIds = PortalInstances.getCompanyIds();
 
 		GROUP_NAME_ARRAY = new String[companyIds.length];
 
@@ -64,14 +64,14 @@ public class LayoutCacheUtil {
 	}
 
 	public static void clearCache() {
-		String[] companyIds = PortalInstances.getCompanyIds();
+		long[] companyIds = PortalInstances.getCompanyIds();
 
 		for (int i = 0; i < companyIds.length; i++) {
 			clearCache(companyIds[i]);
 		}
 	}
 
-	public static void clearCache(String companyId) {
+	public static void clearCache(long companyId) {
 		String groupName = _encodeGroupName(companyId);
 
 		_cache.flushGroup(groupName);
@@ -82,7 +82,7 @@ public class LayoutCacheUtil {
 	}
 
 	public static CacheResponseData getCacheResponseData(
-		String companyId, String key) {
+		long companyId, String key) {
 
 		CacheResponseData data = null;
 
@@ -110,7 +110,7 @@ public class LayoutCacheUtil {
 	}
 
 	public static void putCacheResponseData(
-		String companyId, String key, CacheResponseData data) {
+		long companyId, String key, CacheResponseData data) {
 
 		if (data != null) {
 			key = _encodeKey(companyId, key);
@@ -120,11 +120,11 @@ public class LayoutCacheUtil {
 		}
 	}
 
-	private static String _encodeGroupName(String companyId) {
+	private static String _encodeGroupName(long companyId) {
 		return LayoutCacheUtil.class.getName() + GROUP + companyId;
 	}
 
-	private static String _encodeKey(String companyId, String key) {
+	private static String _encodeKey(long companyId, String key) {
 		return _encodeGroupName(companyId) + StringPool.POUND + key;
 	}
 

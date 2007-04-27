@@ -76,7 +76,7 @@ public class ResourceFinder {
 		}
 	}
 
-	public static List findByC_P(String companyId, String primKey)
+	public static List findByC_P(long companyId, String primKey)
 		throws SystemException {
 
 		Session session = null;

@@ -36,7 +36,7 @@ import com.liferay.portal.service.persistence.AccountUtil;
  */
 public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
 
-	public Account getAccount(String accountId)
+	public Account getAccount(long accountId)
 		throws PortalException, SystemException {
 
 		return AccountUtil.findByPrimaryKey(accountId);

@@ -32,6 +32,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 
 import java.util.List;
@@ -84,7 +85,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public void reIndex(String[] ids) throws SearchException {
 		try {
-			String companyId = ids[0];
+			long companyId = GetterUtil.getLong(ids[0]);
 
 			List folders =
 				DLFolderLocalServiceUtil.getFolders(companyId);
@@ -97,7 +98,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 				String folderId = folder.getFolderId();
 
 				String[] newIds = {
-					companyId, portletId, String.valueOf(groupId), folderId
+					String.valueOf(companyId), portletId,
+					String.valueOf(groupId), folderId
 				};
 
 				DLServiceUtil.reIndex(newIds);

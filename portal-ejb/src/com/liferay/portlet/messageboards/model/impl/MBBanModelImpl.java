@@ -56,7 +56,7 @@ public class MBBanModelImpl extends BaseModelImpl {
 	public static Object[][] TABLE_COLUMNS = {
 			{ "banId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
@@ -66,9 +66,6 @@ public class MBBanModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBBan"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBBan.companyId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBBan.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -106,19 +103,12 @@ public class MBBanModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -249,7 +239,7 @@ public class MBBanModelImpl extends BaseModelImpl {
 
 	private long _banId;
 	private long _groupId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

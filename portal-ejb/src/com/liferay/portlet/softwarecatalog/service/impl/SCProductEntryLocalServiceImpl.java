@@ -387,7 +387,7 @@ public class SCProductEntryLocalServiceImpl
 
 	public void reIndex(String[] ids) throws SystemException {
 		try {
-			String companyId = ids[0];
+			long companyId = GetterUtil.getLong(ids[0]);
 
 			Iterator itr = SCProductEntryUtil.findByCompanyId(
 				companyId).iterator();
@@ -423,7 +423,7 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public Hits search(
-			String companyId, long groupId, String type, String keywords)
+			long companyId, long groupId, String type, String keywords)
 		throws SystemException {
 
 		try {

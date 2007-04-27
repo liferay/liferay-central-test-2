@@ -38,8 +38,8 @@ import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 public class JournalTemplatePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String companyId,
-			long groupId, String templateId, String actionId)
+			PermissionChecker permissionChecker, long companyId, long groupId,
+			String templateId, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
@@ -60,8 +60,8 @@ public class JournalTemplatePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String companyId,
-			long groupId, String templateId, String actionId)
+			PermissionChecker permissionChecker, long companyId, long groupId,
+			String templateId, String actionId)
 		throws PortalException, SystemException {
 
 		JournalTemplate template =

@@ -59,7 +59,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 			{ "layoutId", new Integer(Types.VARCHAR) },
 			{ "ownerId", new Integer(Types.VARCHAR) },
 			{ "articleId", new Integer(Types.VARCHAR) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
@@ -76,9 +76,6 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ARTICLEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch.articleId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch.companyId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalContentSearchModel"));
@@ -166,19 +163,12 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -248,6 +238,6 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	private String _layoutId;
 	private String _ownerId;
 	private String _articleId;
-	private String _companyId;
+	private long _companyId;
 	private long _groupId;
 }

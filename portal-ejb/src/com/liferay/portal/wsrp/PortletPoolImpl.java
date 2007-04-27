@@ -52,7 +52,7 @@ public class PortletPoolImpl implements PortletPool {
 	}
 
 	public Iterator getAllProducerOfferedPortlets() {
-		String companyId = WSRPUtil.getCompanyId();
+		long companyId = WSRPUtil.getCompanyId();
 		Iterator wsrpPortletsIt = null;
 		List wsrpPortlets = new ArrayList();
 
@@ -110,7 +110,7 @@ public class PortletPoolImpl implements PortletPool {
 					.get(portletHandle);
 
 			if (wsrpPortlet == null) {
-				String companyId = WSRPUtil.getCompanyId();
+				long companyId = WSRPUtil.getCompanyId();
 
 				com.liferay.portal.model.Portlet liferayPortlet = PortletLocalServiceUtil
 						.getPortletById(companyId, portletHandle);

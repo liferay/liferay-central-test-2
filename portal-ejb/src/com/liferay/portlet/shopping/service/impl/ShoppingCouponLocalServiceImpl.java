@@ -157,7 +157,7 @@ public class ShoppingCouponLocalServiceImpl
 	}
 
 	public List search(
-			String couponId, String plid, String companyId, boolean active,
+			String couponId, String plid, long companyId, boolean active,
 			String discountType, boolean andOperator, int begin, int end)
 		throws SystemException {
 
@@ -169,7 +169,7 @@ public class ShoppingCouponLocalServiceImpl
 	}
 
 	public int searchCount(
-			String couponId, long groupId, String companyId, boolean active,
+			String couponId, long groupId, long companyId, boolean active,
 			String discountType, boolean andOperator)
 		throws SystemException {
 
@@ -247,9 +247,9 @@ public class ShoppingCouponLocalServiceImpl
 	}
 
 	protected void validate(
-			String companyId, long groupId, String couponId,
-			boolean autoCouponId, String name, String description,
-			String limitCategories, String limitSkus)
+			long companyId, long groupId, String couponId, boolean autoCouponId,
+			String name, String description, String limitCategories,
+			String limitSkus)
 		throws PortalException, SystemException {
 
 		if (!autoCouponId) {
@@ -274,7 +274,7 @@ public class ShoppingCouponLocalServiceImpl
 	}
 
 	protected void validate(
-			String companyId, long groupId, String name, String description,
+			long companyId, long groupId, String name, String description,
 			String limitCategories, String limitSkus)
 		throws PortalException, SystemException {
 

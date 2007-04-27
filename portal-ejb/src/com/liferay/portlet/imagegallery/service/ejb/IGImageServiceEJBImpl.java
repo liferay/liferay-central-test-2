@@ -83,7 +83,7 @@ public class IGImageServiceEJBImpl implements IGImageService, SessionBean {
 			guestPermissions);
 	}
 
-	public void deleteImage(java.lang.String companyId, java.lang.String imageId)
+	public void deleteImage(long companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -91,7 +91,7 @@ public class IGImageServiceEJBImpl implements IGImageService, SessionBean {
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(
-		java.lang.String companyId, java.lang.String imageId)
+		long companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

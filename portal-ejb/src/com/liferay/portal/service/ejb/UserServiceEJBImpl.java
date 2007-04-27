@@ -82,7 +82,7 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		UserServiceFactory.getTxImpl().addUserGroupUsers(userGroupId, userIds);
 	}
 
-	public com.liferay.portal.model.User addUser(java.lang.String companyId,
+	public com.liferay.portal.model.User addUser(long companyId,
 		boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean passwordReset,
 		boolean autoScreenName, java.lang.String screenName,
@@ -133,8 +133,8 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		return UserServiceFactory.getTxImpl().getRoleUsers(roleId);
 	}
 
-	public com.liferay.portal.model.User getUserByEmailAddress(
-		java.lang.String companyId, java.lang.String emailAddress)
+	public com.liferay.portal.model.User getUserByEmailAddress(long companyId,
+		java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -151,8 +151,8 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		return UserServiceFactory.getTxImpl().getUserById(userId);
 	}
 
-	public com.liferay.portal.model.User getUserByScreenName(
-		java.lang.String companyId, java.lang.String screenName)
+	public com.liferay.portal.model.User getUserByScreenName(long companyId,
+		java.lang.String screenName)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

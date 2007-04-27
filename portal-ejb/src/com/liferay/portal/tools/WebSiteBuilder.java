@@ -358,7 +358,7 @@ public class WebSiteBuilder {
 				FileUtil.read(
 					"../portal-ejb/src/com/liferay/portal/tools/tmpl/" +
 						"web.xml.tmpl"),
-				new String[] {"[$COMPANY_ID$]", "[$SESSION_TIMEOUT$]"},
+				new String[] {"[$COMPANY_WEB_ID$]", "[$SESSION_TIMEOUT$]"},
 				new String[] {id, sessionTimeout});
 
 			File webXMLFile = new File(

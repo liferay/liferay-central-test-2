@@ -71,7 +71,7 @@ public class UserGroupFinder {
 		UserGroupFinder.class.getName() + ".joinByUserGroupsRoles";
 
 	public static int countByC_N_D(
-			String companyId, String name, String description,
+			long companyId, String name, String description,
 			LinkedHashMap params)
 		throws SystemException {
 
@@ -123,7 +123,7 @@ public class UserGroupFinder {
 		}
 	}
 
-	public static UserGroup findByC_N(String companyId, String name)
+	public static UserGroup findByC_N(long companyId, String name)
 		throws NoSuchUserGroupException, SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -165,7 +165,7 @@ public class UserGroupFinder {
 	}
 
 	public static List findByC_N_D(
-			String companyId, String name, String description,
+			long companyId, String name, String description,
 			LinkedHashMap params, int begin, int end)
 		throws SystemException {
 

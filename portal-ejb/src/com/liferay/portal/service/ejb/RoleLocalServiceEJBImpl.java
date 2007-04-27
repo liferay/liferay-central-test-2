@@ -65,24 +65,24 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 			begin, end);
 	}
 
-	public com.liferay.portal.model.Role addRole(long userId,
-		java.lang.String companyId, java.lang.String name, int type)
+	public com.liferay.portal.model.Role addRole(long userId, long companyId,
+		java.lang.String name, int type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().addRole(userId, companyId,
 			name, type);
 	}
 
-	public com.liferay.portal.model.Role addRole(long userId,
-		java.lang.String companyId, java.lang.String name, int type,
-		java.lang.String className, java.lang.String classPK)
+	public com.liferay.portal.model.Role addRole(long userId, long companyId,
+		java.lang.String name, int type, java.lang.String className,
+		java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().addRole(userId, companyId,
 			name, type, className, classPK);
 	}
 
-	public void checkSystemRoles(java.lang.String companyId)
+	public void checkSystemRoles(long companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalServiceFactory.getTxImpl().checkSystemRoles(companyId);
@@ -94,8 +94,8 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 		RoleLocalServiceFactory.getTxImpl().deleteRole(roleId);
 	}
 
-	public com.liferay.portal.model.Role getGroupRole(
-		java.lang.String companyId, long groupId)
+	public com.liferay.portal.model.Role getGroupRole(long companyId,
+		long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().getGroupRole(companyId,
@@ -108,7 +108,7 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 		return RoleLocalServiceFactory.getTxImpl().getGroupRoles(groupId);
 	}
 
-	public java.util.Map getResourceRoles(java.lang.String companyId,
+	public java.util.Map getResourceRoles(long companyId,
 		java.lang.String name, java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().getResourceRoles(companyId,
@@ -121,7 +121,7 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 		return RoleLocalServiceFactory.getTxImpl().getRole(roleId);
 	}
 
-	public com.liferay.portal.model.Role getRole(java.lang.String companyId,
+	public com.liferay.portal.model.Role getRole(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -158,7 +158,7 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 		return RoleLocalServiceFactory.getTxImpl().getUserRoles(userId);
 	}
 
-	public boolean hasUserRole(long userId, java.lang.String companyId,
+	public boolean hasUserRole(long userId, long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -166,7 +166,7 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 			companyId, name);
 	}
 
-	public boolean hasUserRoles(long userId, java.lang.String companyId,
+	public boolean hasUserRoles(long userId, long companyId,
 		java.lang.String[] names)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -174,15 +174,14 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 			companyId, names);
 	}
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String description,
-		java.lang.Integer type, int begin, int end)
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String description, java.lang.Integer type, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().search(companyId, name,
 			description, type, begin, end);
 	}
 
-	public int searchCount(java.lang.String companyId, java.lang.String name,
+	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer type)
 		throws com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().searchCount(companyId, name,

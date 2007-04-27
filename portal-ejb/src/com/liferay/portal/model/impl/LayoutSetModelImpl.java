@@ -54,7 +54,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "LayoutSet";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "ownerId", new Integer(Types.VARCHAR) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "privateLayout", new Integer(Types.BOOLEAN) },
@@ -69,9 +69,6 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 				"xss.allow.com.liferay.portal.model.LayoutSet"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_OWNERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.LayoutSet.ownerId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.LayoutSet.companyId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_THEMEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.LayoutSet.themeId"),
@@ -116,19 +113,12 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -315,7 +305,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	}
 
 	private String _ownerId;
-	private String _companyId;
+	private long _companyId;
 	private long _groupId;
 	private long _userId;
 	private boolean _privateLayout;

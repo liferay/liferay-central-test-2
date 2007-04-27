@@ -54,15 +54,12 @@ public class PermissionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Permission_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "permissionId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "actionId", new Integer(Types.VARCHAR) },
 			{ "resourceId", new Integer(Types.BIGINT) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Permission"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Permission.companyId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ACTIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Permission.actionId"),
 			XSS_ALLOW_BY_MODEL);
@@ -90,19 +87,12 @@ public class PermissionModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -192,7 +182,7 @@ public class PermissionModelImpl extends BaseModelImpl {
 	}
 
 	private long _permissionId;
-	private String _companyId;
+	private long _companyId;
 	private String _actionId;
 	private long _resourceId;
 }

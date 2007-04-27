@@ -26,7 +26,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="propertyId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="urn:http.service.tags.portlet.liferay.com" xmlns:tns2="http://model.tags.portlet.liferay.com" name="getPropertyValues" qname="operNS:getPropertyValues" returnQName="getPropertyValuesReturn" returnType="rtns:ArrayOf_tns2_TagsPropertySoap" returnItemType="tns2:TagsPropertySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="key" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://model.tags.portlet.liferay.com" name="updateProperty" qname="operNS:updateProperty" returnQName="updatePropertyReturn" returnType="rtns:TagsPropertySoap" soapAction="">

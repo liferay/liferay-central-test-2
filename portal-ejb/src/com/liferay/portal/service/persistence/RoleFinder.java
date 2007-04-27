@@ -71,7 +71,7 @@ public class RoleFinder {
 		RoleFinder.class.getName() + ".findByC_N_S_P";
 
 	public static int countByC_N_D_T(
-			String companyId, String name, String description, Integer type)
+			long companyId, String name, String description, Integer type)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -157,7 +157,7 @@ public class RoleFinder {
 		}
 	}
 
-	public static Role findByC_N(String companyId, String name)
+	public static Role findByC_N(long companyId, String name)
 		throws NoSuchRoleException, SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -253,7 +253,7 @@ public class RoleFinder {
 	}
 
 	public static List findByC_N_D_T(
-			String companyId, String name, String description, Integer type,
+			long companyId, String name, String description, Integer type,
 			int begin, int end)
 		throws SystemException {
 
@@ -300,7 +300,7 @@ public class RoleFinder {
 	}
 
 	public static Map findByC_N_S_P(
-			String companyId, String name, String scope, String primKey)
+			long companyId, String name, String scope, String primKey)
 		throws SystemException {
 
 		Session session = null;

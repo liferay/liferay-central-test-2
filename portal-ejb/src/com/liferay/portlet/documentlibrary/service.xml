@@ -12,7 +12,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="versionUserId" type="long" />
@@ -64,7 +64,7 @@
 
 		<!-- PK fields -->
 
-		<column name="companyId" type="String" primary="true" />
+		<column name="companyId" type="long" primary="true" />
 		<column name="userId" type="long" primary="true" />
 		<column name="folderId" type="String" primary="true" />
 		<column name="name" type="String" primary="true" />
@@ -97,7 +97,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -133,7 +133,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -169,7 +169,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />

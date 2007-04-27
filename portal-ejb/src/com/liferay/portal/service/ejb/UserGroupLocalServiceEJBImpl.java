@@ -74,8 +74,7 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 	}
 
 	public com.liferay.portal.model.UserGroup addUserGroup(long userId,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String description)
+		long companyId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserGroupLocalServiceFactory.getTxImpl().addUserGroup(userId,
@@ -95,8 +94,8 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 		return UserGroupLocalServiceFactory.getTxImpl().getUserGroup(userGroupId);
 	}
 
-	public com.liferay.portal.model.UserGroup getUserGroup(
-		java.lang.String companyId, java.lang.String name)
+	public com.liferay.portal.model.UserGroup getUserGroup(long companyId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserGroupLocalServiceFactory.getTxImpl().getUserGroup(companyId,
@@ -116,15 +115,14 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 			userGroupId);
 	}
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String description,
-		java.util.LinkedHashMap params, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String description, java.util.LinkedHashMap params,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return UserGroupLocalServiceFactory.getTxImpl().search(companyId, name,
 			description, params, begin, end);
 	}
 
-	public int searchCount(java.lang.String companyId, java.lang.String name,
+	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.util.LinkedHashMap params)
 		throws com.liferay.portal.SystemException {
 		return UserGroupLocalServiceFactory.getTxImpl().searchCount(companyId,
@@ -139,9 +137,9 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 			userGroupIds);
 	}
 
-	public com.liferay.portal.model.UserGroup updateUserGroup(
-		java.lang.String companyId, java.lang.String userGroupId,
-		java.lang.String name, java.lang.String description)
+	public com.liferay.portal.model.UserGroup updateUserGroup(long companyId,
+		java.lang.String userGroupId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserGroupLocalServiceFactory.getTxImpl().updateUserGroup(companyId,

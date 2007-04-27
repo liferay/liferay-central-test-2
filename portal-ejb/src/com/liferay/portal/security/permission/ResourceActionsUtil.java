@@ -70,7 +70,7 @@ public class ResourceActionsUtil {
 	public static final String MODEL_RESOURCE_NAME_PREFIX = "model.resource.";
 
 	public static String getAction(
-		String companyId, Locale locale, String action) {
+		long companyId, Locale locale, String action) {
 
 		try {
 			String key = ACTION_NAME_PREFIX + action;
@@ -144,7 +144,7 @@ public class ResourceActionsUtil {
 	}
 
 	public static String getModelResource(
-		String companyId, Locale locale, String name) {
+		long companyId, Locale locale, String name) {
 
 		try {
 			String key = MODEL_RESOURCE_NAME_PREFIX + name;
@@ -209,8 +209,7 @@ public class ResourceActionsUtil {
 		return _instance._getPortletModelResources(portletName);
 	}
 
-	public static List getPortletResourceActions(
-			String companyId, String name)
+	public static List getPortletResourceActions(long companyId, String name)
 		throws SystemException {
 
 		return _instance._getPortletResourceActions(companyId, name);
@@ -235,7 +234,7 @@ public class ResourceActionsUtil {
 	}
 
 	public static List getResourceActions(
-			String companyId, String portletResource, String modelResource)
+			long companyId, String portletResource, String modelResource)
 		throws SystemException {
 
 		List actions = null;
@@ -375,7 +374,7 @@ public class ResourceActionsUtil {
 		}
 	}
 
-	private List _getPortletResourceActions(String companyId, String name)
+	private List _getPortletResourceActions(long companyId, String name)
 		throws SystemException {
 
 		name = PortletImpl.getRootPortletId(name);

@@ -41,7 +41,7 @@ public class PortletServiceImpl
 	extends PrincipalBean implements PortletService {
 
 	public Portlet updatePortlet(
-			String companyId, String portletId, String roles, boolean active)
+			long companyId, String portletId, String roles, boolean active)
 		throws PortalException, SystemException {
 
 		if (!RoleLocalServiceUtil.hasUserRole(

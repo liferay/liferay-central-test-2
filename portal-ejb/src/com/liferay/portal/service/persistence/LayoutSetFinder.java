@@ -47,7 +47,7 @@ public class LayoutSetFinder {
 	public static String FIND_BY_C_V =
 		LayoutSetFinder.class.getName() + ".findByC_V";
 
-	public static LayoutSet findByC_V(String companyId, String virtualHost)
+	public static LayoutSet findByC_V(long companyId, String virtualHost)
 		throws NoSuchLayoutSetException, SystemException {
 
 		virtualHost = StringUtil.lowerCase(virtualHost);

@@ -80,7 +80,7 @@ public class EditPortletAction extends PortletAction {
 	}
 
 	protected void updatePortlet(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		String portletId = ParamUtil.getString(req, "portletId");
 
 		String roles = StringUtil.replace(ParamUtil.getString(

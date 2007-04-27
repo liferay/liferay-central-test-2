@@ -10,7 +10,7 @@
 		<parameter name="wsdlPortType" value="PluginSettingServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updatePluginSetting" qname="operNS:updatePluginSetting" returnQName="updatePluginSettingReturn" returnType="rtns:PluginSettingSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pluginId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pluginType" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roles" type="tns:string"></parameter>

@@ -55,13 +55,13 @@ import java.util.Date;
 public class AccountModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Account_";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "accountId", new Integer(Types.VARCHAR) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "accountId", new Integer(Types.BIGINT) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "parentAccountId", new Integer(Types.VARCHAR) },
+			{ "parentAccountId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "legalName", new Integer(Types.VARCHAR) },
 			{ "legalId", new Integer(Types.VARCHAR) },
@@ -74,17 +74,8 @@ public class AccountModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_ACCOUNTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.accountId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.companyId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTACCOUNTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.parentAccountId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.name"),
@@ -119,44 +110,30 @@ public class AccountModelImpl extends BaseModelImpl {
 	public AccountModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _accountId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setAccountId(pk);
 	}
 
-	public String getAccountId() {
-		return GetterUtil.getString(_accountId);
+	public long getAccountId() {
+		return _accountId;
 	}
 
-	public void setAccountId(String accountId) {
-		if (((accountId == null) && (_accountId != null)) ||
-				((accountId != null) && (_accountId == null)) ||
-				((accountId != null) && (_accountId != null) &&
-				!accountId.equals(_accountId))) {
-			if (!XSS_ALLOW_ACCOUNTID) {
-				accountId = XSSUtil.strip(accountId);
-			}
-
+	public void setAccountId(long accountId) {
+		if (accountId != _accountId) {
 			_accountId = accountId;
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -214,19 +191,12 @@ public class AccountModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getParentAccountId() {
-		return GetterUtil.getString(_parentAccountId);
+	public long getParentAccountId() {
+		return _parentAccountId;
 	}
 
-	public void setParentAccountId(String parentAccountId) {
-		if (((parentAccountId == null) && (_parentAccountId != null)) ||
-				((parentAccountId != null) && (_parentAccountId == null)) ||
-				((parentAccountId != null) && (_parentAccountId != null) &&
-				!parentAccountId.equals(_parentAccountId))) {
-			if (!XSS_ALLOW_PARENTACCOUNTID) {
-				parentAccountId = XSSUtil.strip(parentAccountId);
-			}
-
+	public void setParentAccountId(long parentAccountId) {
+		if (parentAccountId != _parentAccountId) {
 			_parentAccountId = parentAccountId;
 		}
 	}
@@ -409,9 +379,17 @@ public class AccountModelImpl extends BaseModelImpl {
 		}
 
 		AccountImpl account = (AccountImpl)obj;
-		String pk = account.getPrimaryKey();
+		long pk = account.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -428,9 +406,9 @@ public class AccountModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = account.getPrimaryKey();
+		long pk = account.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -439,16 +417,16 @@ public class AccountModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _accountId;
-	private String _companyId;
+	private long _accountId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _parentAccountId;
+	private long _parentAccountId;
 	private String _name;
 	private String _legalName;
 	private String _legalId;

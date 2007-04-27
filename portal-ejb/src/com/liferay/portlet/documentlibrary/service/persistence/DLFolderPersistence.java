@@ -341,7 +341,7 @@ public class DLFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId) throws SystemException {
+	public List findByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -350,14 +350,7 @@ public class DLFolderPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentFolderId ASC").append(", ");
@@ -367,10 +360,7 @@ public class DLFolderPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return q.list();
 		}
@@ -382,12 +372,12 @@ public class DLFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end)
+	public List findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end,
+	public List findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -397,14 +387,7 @@ public class DLFolderPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -421,10 +404,7 @@ public class DLFolderPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -436,8 +416,8 @@ public class DLFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public DLFolder findByCompanyId_First(String companyId,
-		OrderByComparator obc) throws NoSuchFolderException, SystemException {
+	public DLFolder findByCompanyId_First(long companyId, OrderByComparator obc)
+		throws NoSuchFolderException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -454,7 +434,7 @@ public class DLFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public DLFolder findByCompanyId_Last(String companyId, OrderByComparator obc)
+	public DLFolder findByCompanyId_Last(long companyId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -474,7 +454,7 @@ public class DLFolderPersistence extends BasePersistence {
 	}
 
 	public DLFolder[] findByCompanyId_PrevAndNext(String folderId,
-		String companyId, OrderByComparator obc)
+		long companyId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		DLFolder dlFolder = findByPrimaryKey(folderId);
 		int count = countByCompanyId(companyId);
@@ -486,14 +466,7 @@ public class DLFolderPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -510,10 +483,7 @@ public class DLFolderPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, dlFolder);
 			DLFolder[] array = new DLFolderImpl[3];
@@ -915,7 +885,7 @@ public class DLFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCompanyId(String companyId) throws SystemException {
+	public void removeByCompanyId(long companyId) throws SystemException {
 		Iterator itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
@@ -987,7 +957,7 @@ public class DLFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCompanyId(String companyId) throws SystemException {
+	public int countByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -997,24 +967,14 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Iterator itr = q.list().iterator();
 

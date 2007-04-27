@@ -64,7 +64,7 @@ public class RemotingServlet extends DispatcherServlet {
 
 		ServletContext ctx = getServletContext();
 
-		_companyId = ctx.getInitParameter("company_id");
+		_companyId = PortalUtil.getCompanyIdByWebId(ctx);
 	}
 
 	public Class getContextClass() {
@@ -132,6 +132,6 @@ public class RemotingServlet extends DispatcherServlet {
 
 	private static Log _log = LogFactory.getLog(RemotingServlet.class);
 
-	private String _companyId;
+	private long _companyId;
 
 }

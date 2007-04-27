@@ -68,8 +68,8 @@ import org.json.JSONObject;
  *
  */
 public class JournalArticleServiceJSON {
-	public static JSONObject getArticle(java.lang.String companyId,
-		long groupId, java.lang.String articleId, double version)
+	public static JSONObject getArticle(long companyId, long groupId,
+		java.lang.String articleId, double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.getArticle(companyId,
@@ -78,16 +78,15 @@ public class JournalArticleServiceJSON {
 		return JournalArticleJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void removeArticleLocale(java.lang.String companyId,
+	public static void removeArticleLocale(long companyId,
 		java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		JournalArticleServiceUtil.removeArticleLocale(companyId, languageId);
 	}
 
-	public static JSONObject removeArticleLocale(java.lang.String companyId,
-		long groupId, java.lang.String articleId, double version,
-		java.lang.String languageId)
+	public static JSONObject removeArticleLocale(long companyId, long groupId,
+		java.lang.String articleId, double version, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.removeArticleLocale(companyId,

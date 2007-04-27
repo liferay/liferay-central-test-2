@@ -157,7 +157,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Constructs a portlet with the specified parameters.
 	 */
 	public PortletImpl(String portletId, PluginPackage pluginPackage,
-					   PluginSetting pluginSetting, String companyId,
+					   PluginSetting pluginSetting, long companyId,
 					   String strutsPath, String configurationPath,
 					   String displayName, String portletClass,
 					   String indexerClass, String openSearchClass,

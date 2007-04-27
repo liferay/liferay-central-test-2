@@ -83,8 +83,8 @@ public class DLFileRankLocalServiceEJBImpl implements DLFileRankLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
-		long groupId, java.lang.String companyId, long userId,
-		java.lang.String folderId, java.lang.String name)
+		long groupId, long companyId, long userId, java.lang.String folderId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFileRankLocalServiceFactory.getTxImpl().updateFileRank(groupId,

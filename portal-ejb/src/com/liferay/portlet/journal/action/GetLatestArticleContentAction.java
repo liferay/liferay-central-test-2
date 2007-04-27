@@ -55,7 +55,7 @@ public class GetLatestArticleContentAction extends Action {
 		throws Exception {
 
 		try {
-			String companyId = PortalUtil.getCompanyId(req);
+			long companyId = PortalUtil.getCompanyId(req);
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String articleId = ParamUtil.getString(req, "articleId");
 

@@ -53,15 +53,7 @@ import java.util.List;
 public class JournalStructureJSONSerializer {
 	public static JSONObject toJSONObject(JournalStructure model) {
 		JSONObject jsonObj = new JSONObject();
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
-
+		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("groupId", model.getGroupId());
 
 		String structureId = model.getStructureId();

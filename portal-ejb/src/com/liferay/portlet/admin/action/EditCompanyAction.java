@@ -87,7 +87,7 @@ public class EditCompanyAction extends PortletAction {
 	}
 
 	protected void updateCompany(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 
 		String portalURL = ParamUtil.getString(req, "portalURL");
 		String homeURL = ParamUtil.getString(req, "homeURL");

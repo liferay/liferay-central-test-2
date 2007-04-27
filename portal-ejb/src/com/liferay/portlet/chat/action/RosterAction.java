@@ -56,14 +56,14 @@ public class RosterAction extends JSONAction {
 
 		JSONObject jo = new JSONObject();
 
-		if ("addEntry".equals(cmd)) {
+		if (cmd.equals("addEntry")) {
 			jo = addEntry(req);
 		}
-		else if ("getEntries".equals(cmd)) {
-			jo = MessagingUtil.getRosterEntries(req.getSession());
-		}
-		else if ("deleteEntries".equals(cmd)) {
+		else if (cmd.equals("deleteEntries")) {
 			jo = deleteEntries(req);
+		}
+		else if (cmd.equals("getEntries")) {
+			jo = MessagingUtil.getRosterEntries(req.getSession());
 		}
 
 		return jo.toString();
@@ -73,7 +73,7 @@ public class RosterAction extends JSONAction {
 		JSONObject jo = new JSONObject();
 
 		try {
-			String companyId = PortalUtil.getCompanyId(req);
+			long companyId = PortalUtil.getCompanyId(req);
 
 			long userId = ParamUtil.getLong(req, "userId");
 			String email = ParamUtil.getString(req, "email");

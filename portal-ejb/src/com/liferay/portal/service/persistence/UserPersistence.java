@@ -193,7 +193,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId) throws SystemException {
+	public List findByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -201,24 +201,14 @@ public class UserPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return q.list();
 		}
@@ -230,12 +220,12 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end)
+	public List findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end,
+	public List findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -244,14 +234,7 @@ public class UserPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -263,10 +246,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -278,7 +258,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User findByCompanyId_First(String companyId, OrderByComparator obc)
+	public User findByCompanyId_First(long companyId, OrderByComparator obc)
 		throws NoSuchUserException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
@@ -296,7 +276,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User findByCompanyId_Last(String companyId, OrderByComparator obc)
+	public User findByCompanyId_Last(long companyId, OrderByComparator obc)
 		throws NoSuchUserException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -315,7 +295,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User[] findByCompanyId_PrevAndNext(long userId, String companyId,
+	public User[] findByCompanyId_PrevAndNext(long userId, long companyId,
 		OrderByComparator obc) throws NoSuchUserException, SystemException {
 		User user = findByPrimaryKey(userId);
 		int count = countByCompanyId(companyId);
@@ -326,14 +306,7 @@ public class UserPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -345,10 +318,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, user);
 			User[] array = new UserImpl[3];
@@ -423,7 +393,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User findByC_U(String companyId, long userId)
+	public User findByC_U(long companyId, long userId)
 		throws NoSuchUserException, SystemException {
 		User user = fetchByC_U(companyId, userId);
 
@@ -448,7 +418,7 @@ public class UserPersistence extends BasePersistence {
 		return user;
 	}
 
-	public User fetchByC_U(String companyId, long userId)
+	public User fetchByC_U(long companyId, long userId)
 		throws SystemException {
 		Session session = null;
 
@@ -457,14 +427,7 @@ public class UserPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("userId = ?");
 			query.append(" ");
@@ -473,11 +436,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, userId);
 
 			List list = q.list();
@@ -498,7 +457,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User findByC_DU(String companyId, boolean defaultUser)
+	public User findByC_DU(long companyId, boolean defaultUser)
 		throws NoSuchUserException, SystemException {
 		User user = fetchByC_DU(companyId, defaultUser);
 
@@ -523,7 +482,7 @@ public class UserPersistence extends BasePersistence {
 		return user;
 	}
 
-	public User fetchByC_DU(String companyId, boolean defaultUser)
+	public User fetchByC_DU(long companyId, boolean defaultUser)
 		throws SystemException {
 		Session session = null;
 
@@ -532,14 +491,7 @@ public class UserPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("defaultUser = ?");
 			query.append(" ");
@@ -548,11 +500,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setBoolean(queryPos++, defaultUser);
 
 			List list = q.list();
@@ -573,7 +521,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_P(String companyId, String password)
+	public List findByC_P(long companyId, String password)
 		throws SystemException {
 		Session session = null;
 
@@ -582,14 +530,7 @@ public class UserPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (password == null) {
@@ -605,10 +546,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (password != null) {
 				q.setString(queryPos++, password);
@@ -624,13 +562,13 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_P(String companyId, String password, int begin, int end)
+	public List findByC_P(long companyId, String password, int begin, int end)
 		throws SystemException {
 		return findByC_P(companyId, password, begin, end, null);
 	}
 
-	public List findByC_P(String companyId, String password, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List findByC_P(long companyId, String password, int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
 		try {
@@ -638,14 +576,7 @@ public class UserPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (password == null) {
@@ -666,10 +597,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (password != null) {
 				q.setString(queryPos++, password);
@@ -685,7 +613,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User findByC_P_First(String companyId, String password,
+	public User findByC_P_First(long companyId, String password,
 		OrderByComparator obc) throws NoSuchUserException, SystemException {
 		List list = findByC_P(companyId, password, 0, 1, obc);
 
@@ -706,7 +634,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User findByC_P_Last(String companyId, String password,
+	public User findByC_P_Last(long companyId, String password,
 		OrderByComparator obc) throws NoSuchUserException, SystemException {
 		int count = countByC_P(companyId, password);
 		List list = findByC_P(companyId, password, count - 1, count, obc);
@@ -728,7 +656,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User[] findByC_P_PrevAndNext(long userId, String companyId,
+	public User[] findByC_P_PrevAndNext(long userId, long companyId,
 		String password, OrderByComparator obc)
 		throws NoSuchUserException, SystemException {
 		User user = findByPrimaryKey(userId);
@@ -740,14 +668,7 @@ public class UserPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (password == null) {
@@ -768,10 +689,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (password != null) {
 				q.setString(queryPos++, password);
@@ -793,7 +711,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User findByC_SN(String companyId, String screenName)
+	public User findByC_SN(long companyId, String screenName)
 		throws NoSuchUserException, SystemException {
 		User user = fetchByC_SN(companyId, screenName);
 
@@ -818,7 +736,7 @@ public class UserPersistence extends BasePersistence {
 		return user;
 	}
 
-	public User fetchByC_SN(String companyId, String screenName)
+	public User fetchByC_SN(long companyId, String screenName)
 		throws SystemException {
 		Session session = null;
 
@@ -827,14 +745,7 @@ public class UserPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (screenName == null) {
@@ -850,10 +761,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (screenName != null) {
 				q.setString(queryPos++, screenName);
@@ -877,7 +785,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public User findByC_EA(String companyId, String emailAddress)
+	public User findByC_EA(long companyId, String emailAddress)
 		throws NoSuchUserException, SystemException {
 		User user = fetchByC_EA(companyId, emailAddress);
 
@@ -902,7 +810,7 @@ public class UserPersistence extends BasePersistence {
 		return user;
 	}
 
-	public User fetchByC_EA(String companyId, String emailAddress)
+	public User fetchByC_EA(long companyId, String emailAddress)
 		throws SystemException {
 		Session session = null;
 
@@ -911,14 +819,7 @@ public class UserPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (emailAddress == null) {
@@ -934,10 +835,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (emailAddress != null) {
 				q.setString(queryPos++, emailAddress);
@@ -1036,7 +934,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCompanyId(String companyId) throws SystemException {
+	public void removeByCompanyId(long companyId) throws SystemException {
 		Iterator itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
@@ -1051,19 +949,19 @@ public class UserPersistence extends BasePersistence {
 		remove(user);
 	}
 
-	public void removeByC_U(String companyId, long userId)
+	public void removeByC_U(long companyId, long userId)
 		throws NoSuchUserException, SystemException {
 		User user = findByC_U(companyId, userId);
 		remove(user);
 	}
 
-	public void removeByC_DU(String companyId, boolean defaultUser)
+	public void removeByC_DU(long companyId, boolean defaultUser)
 		throws NoSuchUserException, SystemException {
 		User user = findByC_DU(companyId, defaultUser);
 		remove(user);
 	}
 
-	public void removeByC_P(String companyId, String password)
+	public void removeByC_P(long companyId, String password)
 		throws SystemException {
 		Iterator itr = findByC_P(companyId, password).iterator();
 
@@ -1073,13 +971,13 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_SN(String companyId, String screenName)
+	public void removeByC_SN(long companyId, String screenName)
 		throws NoSuchUserException, SystemException {
 		User user = findByC_SN(companyId, screenName);
 		remove(user);
 	}
 
-	public void removeByC_EA(String companyId, String emailAddress)
+	public void removeByC_EA(long companyId, String emailAddress)
 		throws NoSuchUserException, SystemException {
 		User user = findByC_EA(companyId, emailAddress);
 		remove(user);
@@ -1093,7 +991,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCompanyId(String companyId) throws SystemException {
+	public int countByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1102,24 +1000,14 @@ public class UserPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1179,7 +1067,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_U(String companyId, long userId)
+	public int countByC_U(long companyId, long userId)
 		throws SystemException {
 		Session session = null;
 
@@ -1189,14 +1077,7 @@ public class UserPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("userId = ?");
 			query.append(" ");
@@ -1205,11 +1086,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, userId);
 
 			Iterator itr = q.list().iterator();
@@ -1232,7 +1109,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_DU(String companyId, boolean defaultUser)
+	public int countByC_DU(long companyId, boolean defaultUser)
 		throws SystemException {
 		Session session = null;
 
@@ -1242,14 +1119,7 @@ public class UserPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("defaultUser = ?");
 			query.append(" ");
@@ -1258,11 +1128,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setBoolean(queryPos++, defaultUser);
 
 			Iterator itr = q.list().iterator();
@@ -1285,7 +1151,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_P(String companyId, String password)
+	public int countByC_P(long companyId, String password)
 		throws SystemException {
 		Session session = null;
 
@@ -1295,14 +1161,7 @@ public class UserPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (password == null) {
@@ -1318,10 +1177,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (password != null) {
 				q.setString(queryPos++, password);
@@ -1347,7 +1203,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_SN(String companyId, String screenName)
+	public int countByC_SN(long companyId, String screenName)
 		throws SystemException {
 		Session session = null;
 
@@ -1357,14 +1213,7 @@ public class UserPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (screenName == null) {
@@ -1380,10 +1229,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (screenName != null) {
 				q.setString(queryPos++, screenName);
@@ -1409,7 +1255,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_EA(String companyId, String emailAddress)
+	public int countByC_EA(long companyId, String emailAddress)
 		throws SystemException {
 		Session session = null;
 
@@ -1419,14 +1265,7 @@ public class UserPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (emailAddress == null) {
@@ -1442,10 +1281,7 @@ public class UserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (emailAddress != null) {
 				q.setString(queryPos++, emailAddress);

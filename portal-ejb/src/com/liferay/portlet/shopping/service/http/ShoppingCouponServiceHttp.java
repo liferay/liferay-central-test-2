@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.DoubleWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -262,9 +263,9 @@ public class ShoppingCouponServiceHttp {
 	}
 
 	public static java.util.List search(HttpPrincipal httpPrincipal,
-		java.lang.String couponId, java.lang.String plid,
-		java.lang.String companyId, boolean active,
-		java.lang.String discountType, boolean andOperator, int begin, int end)
+		java.lang.String couponId, java.lang.String plid, long companyId,
+		boolean active, java.lang.String discountType, boolean andOperator,
+		int begin, int end)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -280,12 +281,7 @@ public class ShoppingCouponServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = companyId;
-
-			if (companyId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(companyId);
 			Object paramObj3 = new BooleanWrapper(active);
 			Object paramObj4 = discountType;
 

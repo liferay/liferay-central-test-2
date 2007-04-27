@@ -185,7 +185,7 @@ public class PluginSettingPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId) throws SystemException {
+	public List findByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -193,24 +193,14 @@ public class PluginSettingPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return q.list();
 		}
@@ -222,12 +212,12 @@ public class PluginSettingPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end)
+	public List findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end,
+	public List findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -236,14 +226,7 @@ public class PluginSettingPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -255,10 +238,7 @@ public class PluginSettingPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -270,7 +250,7 @@ public class PluginSettingPersistence extends BasePersistence {
 		}
 	}
 
-	public PluginSetting findByCompanyId_First(String companyId,
+	public PluginSetting findByCompanyId_First(long companyId,
 		OrderByComparator obc)
 		throws NoSuchPluginSettingException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
@@ -289,7 +269,7 @@ public class PluginSettingPersistence extends BasePersistence {
 		}
 	}
 
-	public PluginSetting findByCompanyId_Last(String companyId,
+	public PluginSetting findByCompanyId_Last(long companyId,
 		OrderByComparator obc)
 		throws NoSuchPluginSettingException, SystemException {
 		int count = countByCompanyId(companyId);
@@ -310,7 +290,7 @@ public class PluginSettingPersistence extends BasePersistence {
 	}
 
 	public PluginSetting[] findByCompanyId_PrevAndNext(long pluginSettingId,
-		String companyId, OrderByComparator obc)
+		long companyId, OrderByComparator obc)
 		throws NoSuchPluginSettingException, SystemException {
 		PluginSetting pluginSetting = findByPrimaryKey(pluginSettingId);
 		int count = countByCompanyId(companyId);
@@ -321,14 +301,7 @@ public class PluginSettingPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -340,10 +313,7 @@ public class PluginSettingPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pluginSetting);
@@ -362,7 +332,7 @@ public class PluginSettingPersistence extends BasePersistence {
 		}
 	}
 
-	public PluginSetting findByC_I_T(String companyId, String pluginId,
+	public PluginSetting findByC_I_T(long companyId, String pluginId,
 		String pluginType) throws NoSuchPluginSettingException, SystemException {
 		PluginSetting pluginSetting = fetchByC_I_T(companyId, pluginId,
 				pluginType);
@@ -391,7 +361,7 @@ public class PluginSettingPersistence extends BasePersistence {
 		return pluginSetting;
 	}
 
-	public PluginSetting fetchByC_I_T(String companyId, String pluginId,
+	public PluginSetting fetchByC_I_T(long companyId, String pluginId,
 		String pluginType) throws SystemException {
 		Session session = null;
 
@@ -400,14 +370,7 @@ public class PluginSettingPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (pluginId == null) {
@@ -432,10 +395,7 @@ public class PluginSettingPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (pluginId != null) {
 				q.setString(queryPos++, pluginId);
@@ -538,7 +498,7 @@ public class PluginSettingPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCompanyId(String companyId) throws SystemException {
+	public void removeByCompanyId(long companyId) throws SystemException {
 		Iterator itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
@@ -547,8 +507,8 @@ public class PluginSettingPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_I_T(String companyId, String pluginId,
-		String pluginType) throws NoSuchPluginSettingException, SystemException {
+	public void removeByC_I_T(long companyId, String pluginId, String pluginType)
+		throws NoSuchPluginSettingException, SystemException {
 		PluginSetting pluginSetting = findByC_I_T(companyId, pluginId,
 				pluginType);
 		remove(pluginSetting);
@@ -562,7 +522,7 @@ public class PluginSettingPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCompanyId(String companyId) throws SystemException {
+	public int countByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -571,24 +531,14 @@ public class PluginSettingPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Iterator itr = q.list().iterator();
 
@@ -610,7 +560,7 @@ public class PluginSettingPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_I_T(String companyId, String pluginId, String pluginType)
+	public int countByC_I_T(long companyId, String pluginId, String pluginType)
 		throws SystemException {
 		Session session = null;
 
@@ -620,14 +570,7 @@ public class PluginSettingPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (pluginId == null) {
@@ -652,10 +595,7 @@ public class PluginSettingPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (pluginId != null) {
 				q.setString(queryPos++, pluginId);

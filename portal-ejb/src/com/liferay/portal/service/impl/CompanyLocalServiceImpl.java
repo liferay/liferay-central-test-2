@@ -95,23 +95,23 @@ import org.apache.lucene.search.Searcher;
  */
 public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
-	public void checkCompany(String companyId)
+	public Company checkCompany(String webId)
 		throws PortalException, SystemException {
 
 		// Company
 
-		String companyMx = companyId;
 		Date now = new Date();
 
 		Company company = null;
 
 		try {
-			company = CompanyUtil.findByPrimaryKey(companyId);
+			company = CompanyUtil.findByWebId(webId);
 		}
 		catch (NoSuchCompanyException nsce) {
 			String portalURL = "localhost";
 			String homeURL = "localhost";
-			String name = companyId;
+			String mx = webId;
+			String name = webId;
 			String legalName = null;
 			String legalId = null;
 			String legalType = null;
@@ -120,6 +120,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String industry = null;
 			String type = null;
 			String size = null;
+
+			long companyId = CounterLocalServiceUtil.increment(
+				Counter.class.getName());
 
 			company = CompanyUtil.create(companyId);
 
@@ -130,21 +133,21 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				throw new SystemException(ee);
 			}
 
+			company.setWebId(webId);
 			company.setPortalURL(portalURL);
 			company.setHomeURL(homeURL);
-			company.setMx(companyMx);
+			company.setMx(mx);
 
 			CompanyUtil.update(company);
 
 			updateCompany(
-				companyId, portalURL, homeURL, companyMx, name, legalName,
-				legalId, legalType, sicCode, tickerSymbol, industry, type,
-				size);
+				companyId, portalURL, homeURL, mx, name, legalName, legalId,
+				legalType, sicCode, tickerSymbol, industry, type, size);
 
 			// Demo settings
 
-			if (companyId.equals("liferay.net")) {
-				company = CompanyUtil.findByPrimaryKey(companyId);
+			if (webId.equals("liferay.net")) {
+				company = CompanyUtil.findByWebId(webId);
 
 				company.setPortalURL("demo.liferay.net");
 				company.setHomeURL("demo.liferay.net");
@@ -174,6 +177,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				}
 			}
 		}
+
+		long companyId = company.getCompanyId();
 
 		// Key
 
@@ -206,7 +211,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				CounterLocalServiceUtil.increment(Counter.class.getName()));
 			defaultUser.setPassword("password");
 			defaultUser.setScreenName(String.valueOf(defaultUser.getUserId()));
-			defaultUser.setEmailAddress("default@" + companyMx);
+			defaultUser.setEmailAddress("default@" + company.getMx());
 			defaultUser.setLanguageId(null);
 			defaultUser.setTimeZoneId(null);
 			defaultUser.setGreeting("Welcome!");
@@ -227,7 +232,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			defaultContact.setUserName(StringPool.BLANK);
 			defaultContact.setCreateDate(now);
 			defaultContact.setModifiedDate(now);
-			defaultContact.setAccountId(defaultUser.getCompanyId());
+			defaultContact.setAccountId(company.getAccountId());
 			defaultContact.setParentContactId(
 				ContactImpl.DEFAULT_PARENT_CONTACT_ID);
 			defaultContact.setFirstName(StringPool.BLANK);
@@ -260,7 +265,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String emailAddress =
 				PropsUtil.get(
 					PropsUtil.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX) +
-				"@" + companyMx;
+				"@" + webId;
 			Locale locale = defaultUser.getLocale();
 			String firstName = PropsUtil.get(
 				PropsUtil.DEFAULT_ADMIN_FIRST_NAME);
@@ -303,9 +308,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			RoleLocalServiceUtil.setUserRoles(user.getUserId(), roleIds);
 		}
+
+		return company;
 	}
 
-	public void checkCompanyKey(String companyId)
+	public void checkCompanyKey(long companyId)
 		throws PortalException, SystemException {
 
 		Company company = CompanyUtil.findByPrimaryKey(companyId);
@@ -326,7 +333,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return CompanyUtil.findAll();
 	}
 
-	public Company getCompany(String companyId)
+	public Company getCompanyById(long companyId)
 		throws PortalException, SystemException {
 
 		return CompanyUtil.findByPrimaryKey(companyId);
@@ -338,14 +345,20 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return CompanyUtil.findByMx(mx);
 	}
 
-	public Hits search(String companyId, String keywords)
+	public Company getCompanyByWebId(String webId)
+		throws PortalException, SystemException {
+
+		return CompanyUtil.findByWebId(webId);
+	}
+
+	public Hits search(long companyId, String keywords)
 		throws SystemException {
 
 		return search(companyId, null, 0, null, keywords);
 	}
 
 	public Hits search(
-			String companyId, String portletId, long groupId, String type,
+			long companyId, String portletId, long groupId, String type,
 			String keywords)
 		throws SystemException {
 
@@ -410,7 +423,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public Company updateCompany(
-			String companyId, String portalURL, String homeURL, String mx,
+			long companyId, String portalURL, String homeURL, String mx,
 			String name, String legalName, String legalId, String legalType,
 			String sicCode, String tickerSymbol, String industry, String type,
 			String size)
@@ -435,20 +448,25 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Account
 
-		String accountId = companyId;
-
 		Account account = null;
 
 		try {
-			account = AccountUtil.findByPrimaryKey(accountId);
+			account = AccountUtil.findByPrimaryKey(company.getAccountId());
 		}
 		catch (NoSuchAccountException nsae) {
+			long accountId = CounterLocalServiceUtil.increment(
+				Counter.class.getName());
+
 			account = AccountUtil.create(accountId);
 
 			account.setCreateDate(now);
 			account.setCompanyId(companyId);
 			account.setUserId(0);
 			account.setUserName(StringPool.BLANK);
+
+			company.setAccountId(accountId);
+
+			CompanyUtil.update(company);
 		}
 
 		account.setModifiedDate(now);
@@ -468,7 +486,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public void updateDisplay(
-			String companyId, String languageId, String timeZoneId)
+			long companyId, String languageId, String timeZoneId)
 		throws PortalException, SystemException {
 
 		User user = UserLocalServiceUtil.getDefaultUser(companyId);
@@ -479,11 +497,12 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		UserUtil.update(user);
 	}
 
-	public void updateLogo(String companyId, File file)
+	public void updateLogo(long companyId, File file)
 		throws PortalException, SystemException {
 
 		try {
-			ImageLocalUtil.put(companyId, FileUtil.getBytes(file));
+			ImageLocalUtil.put(
+				companyId + ".portal.company", FileUtil.getBytes(file));
 
 			BufferedImage thumbnail = ImageUtil.scale(ImageIO.read(file), .6);
 
@@ -493,7 +512,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			ImageIO.write(thumbnail, "png", bam);
 
-			ImageLocalUtil.put(companyId + ".png", bam.toByteArray());
+			ImageLocalUtil.put(
+				companyId + ".portal.company.png", bam.toByteArray());
 
 			// WBMP
 
@@ -501,7 +521,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			ImageUtil.encodeWBMP(thumbnail, bam);
 
-			ImageLocalUtil.put(companyId + ".wbmp", bam.toByteArray());
+			ImageLocalUtil.put(
+				companyId + ".portal.company.wbmp", bam.toByteArray());
 		}
 		catch (InterruptedException ie) {
 			throw new SystemException(ie);
@@ -512,7 +533,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public void updateSecurity(
-			String companyId, String authType, boolean autoLogin,
+			long companyId, String authType, boolean autoLogin,
 			boolean sendPassword, boolean strangers, boolean communityLogo)
 		throws PortalException, SystemException {
 

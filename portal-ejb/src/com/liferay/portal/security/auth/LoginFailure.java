@@ -33,19 +33,18 @@ import java.util.Map;
 public class LoginFailure implements AuthFailure {
 
 	public void onFailureByEmailAddress(
-			String companyId, String emailAddress, Map headerMap,
+			long companyId, String emailAddress, Map headerMap,
 			Map parameterMap)
 		throws AuthException {
 	}
 
 	public void onFailureByScreenName(
-			String companyId, String screenName, Map headerMap,
-			Map parameterMap)
+			long companyId, String screenName, Map headerMap, Map parameterMap)
 		throws AuthException {
 	}
 
 	public void onFailureByUserId(
-			String companyId, long userId, Map headerMap, Map parameterMap)
+			long companyId, long userId, Map headerMap, Map parameterMap)
 		throws AuthException {
 	}
 

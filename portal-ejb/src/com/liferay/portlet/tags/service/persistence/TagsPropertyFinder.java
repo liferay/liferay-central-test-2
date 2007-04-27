@@ -52,7 +52,7 @@ public class TagsPropertyFinder {
 	public static String FIND_BY_C_K =
 		TagsPropertyFinder.class.getName() + ".findByC_K";
 
-	public static int countByC_K(String companyId, String key)
+	public static int countByC_K(long companyId, String key)
 		throws SystemException {
 
 		Session session = null;
@@ -93,14 +93,14 @@ public class TagsPropertyFinder {
 		}
 	}
 
-	public static List findByC_K(String companyId, String key)
+	public static List findByC_K(long companyId, String key)
 		throws SystemException {
 
 		return findByC_K(companyId, key, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public static List findByC_K(
-			String companyId, String key, int begin, int end)
+			long companyId, String key, int begin, int end)
 		throws SystemException {
 
 		Session session = null;

@@ -89,7 +89,7 @@ public class EditCompanyLogoAction extends PortletAction {
 		UploadPortletRequest uploadReq =
 			PortalUtil.getUploadPortletRequest(req);
 
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 
 		File file = uploadReq.getFile("fileName");
 		byte[] bytes = FileUtil.getBytes(file);

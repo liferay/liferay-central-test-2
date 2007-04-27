@@ -71,7 +71,7 @@ public class ActionUtil {
 	}
 
 	public static void getArticle(HttpServletRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 		String articleId = ParamUtil.getString(req, "articleId");
 		double version = ParamUtil.getDouble(
@@ -110,7 +110,7 @@ public class ActionUtil {
 	}
 
 	public static void getStructure(HttpServletRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 		String structureId = ParamUtil.getString(req, "structureId");
 
@@ -147,7 +147,7 @@ public class ActionUtil {
 	}
 
 	public static void getTemplate(HttpServletRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 		String templateId = ParamUtil.getString(req, "templateId");
 

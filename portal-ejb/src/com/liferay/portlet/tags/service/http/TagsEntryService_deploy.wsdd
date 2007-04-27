@@ -10,12 +10,12 @@
 		<parameter name="wsdlPortType" value="TagsEntryServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="urn:http.service.tags.portlet.liferay.com" xmlns:tns2="http://model.tags.portlet.liferay.com" name="search" qname="operNS:search" returnQName="searchReturn" returnType="rtns:ArrayOf_tns2_TagsEntrySoap" returnItemType="tns2:TagsEntrySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="urn:http.service.tags.portlet.liferay.com" qname="properties" type="tns:ArrayOf_xsd_string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="urn:http.service.tags.portlet.liferay.com" xmlns:tns2="http://model.tags.portlet.liferay.com" name="search" qname="operNS:search" returnQName="searchReturn" returnType="rtns:ArrayOf_tns2_TagsEntrySoap" returnItemType="tns2:TagsEntrySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="urn:http.service.tags.portlet.liferay.com" qname="properties" type="tns:ArrayOf_xsd_string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
@@ -36,14 +36,14 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="searchAutocomplete" qname="operNS:searchAutocomplete" returnQName="searchAutocompleteReturn" returnType="rtns:anyType" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="urn:http.service.tags.portlet.liferay.com" qname="properties" type="tns:ArrayOf_xsd_string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="searchCount" qname="operNS:searchCount" returnQName="searchCountReturn" returnType="rtns:int" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="urn:http.service.tags.portlet.liferay.com" qname="properties" type="tns:ArrayOf_xsd_string"></parameter>
 		</operation>

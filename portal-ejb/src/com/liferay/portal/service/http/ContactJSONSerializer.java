@@ -53,16 +53,7 @@ public class ContactJSONSerializer {
 	public static JSONObject toJSONObject(Contact model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("contactId", model.getContactId());
-
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
-
+		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 
 		String userName = model.getUserName();
@@ -92,15 +83,7 @@ public class ContactJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String accountId = model.getAccountId();
-
-		if (accountId == null) {
-			jsonObj.put("accountId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("accountId", accountId.toString());
-		}
-
+		jsonObj.put("accountId", model.getAccountId());
 		jsonObj.put("parentContactId", model.getParentContactId());
 
 		String firstName = model.getFirstName();

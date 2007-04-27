@@ -103,8 +103,8 @@ public class TagsEntryServiceJSON {
 		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONArray search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties)
+	public static JSONArray search(long companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		java.util.List returnValue = TagsEntryServiceUtil.search(companyId,
 				name, properties);
@@ -112,8 +112,8 @@ public class TagsEntryServiceJSON {
 		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONArray search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties, int begin, int end)
+	public static JSONArray search(long companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		java.util.List returnValue = TagsEntryServiceUtil.search(companyId,
 				name, properties, begin, end);
@@ -121,7 +121,7 @@ public class TagsEntryServiceJSON {
 		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONArray searchAutocomplete(java.lang.String companyId,
+	public static JSONArray searchAutocomplete(long companyId,
 		java.lang.String name, java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		com.liferay.portal.kernel.json.JSONArrayWrapper returnValue = TagsEntryServiceUtil.searchAutocomplete(companyId,
@@ -130,8 +130,8 @@ public class TagsEntryServiceJSON {
 		return (JSONArray)returnValue.getValue();
 	}
 
-	public static int searchCount(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties)
+	public static int searchCount(long companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		int returnValue = TagsEntryServiceUtil.searchCount(companyId, name,
 				properties);

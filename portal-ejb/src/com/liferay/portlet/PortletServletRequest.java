@@ -238,9 +238,8 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 			return false;
 		}
 		else {
-			String companyId = PortalUtil.getCompanyId(_req);
-
 			try {
+				long companyId = PortalUtil.getCompanyId(_req);
 				long userId = GetterUtil.getLong(remoteUser);
 
 				return RoleLocalServiceUtil.hasUserRole(

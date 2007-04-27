@@ -56,7 +56,7 @@ import java.util.Date;
 public class IGImageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "IGImage";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "imageId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
@@ -70,9 +70,6 @@ public class IGImageModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage.companyId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_IMAGEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage.imageId"),
 			XSS_ALLOW_BY_MODEL);
@@ -97,19 +94,12 @@ public class IGImageModelImpl extends BaseModelImpl {
 		setImageId(pk.imageId);
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -291,7 +281,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 		return getPrimaryKey().hashCode();
 	}
 
-	private String _companyId;
+	private long _companyId;
 	private String _imageId;
 	private long _userId;
 	private Date _createDate;

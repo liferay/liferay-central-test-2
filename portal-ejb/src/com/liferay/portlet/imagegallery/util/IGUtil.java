@@ -53,7 +53,7 @@ public class IGUtil {
 		throws Exception {
 
 		if (Validator.isNotNull(imageId)) {
-			String companyId = PortalUtil.getCompanyId(req);
+			long companyId = PortalUtil.getCompanyId(req);
 
 			IGImage image = IGImageLocalServiceUtil.getImage(
 				companyId, imageId);

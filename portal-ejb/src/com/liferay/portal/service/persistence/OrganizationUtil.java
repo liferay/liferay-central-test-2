@@ -152,40 +152,38 @@ public class OrganizationUtil {
 		return getPersistence().fetchByPrimaryKey(organizationId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId)
+	public static java.util.List findByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Organization findByCompanyId_First(
-		java.lang.String companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Organization findByCompanyId_Last(
-		java.lang.String companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Organization[] findByCompanyId_PrevAndNext(
-		java.lang.String organizationId, java.lang.String companyId,
+		java.lang.String organizationId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException {
@@ -193,40 +191,38 @@ public class OrganizationUtil {
 			companyId, obc);
 	}
 
-	public static java.util.List findByLocations(java.lang.String companyId)
+	public static java.util.List findByLocations(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByLocations(companyId);
 	}
 
-	public static java.util.List findByLocations(java.lang.String companyId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByLocations(long companyId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByLocations(companyId, begin, end);
 	}
 
-	public static java.util.List findByLocations(java.lang.String companyId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByLocations(long companyId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByLocations(companyId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Organization findByLocations_First(
-		java.lang.String companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException {
 		return getPersistence().findByLocations_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Organization findByLocations_Last(
-		java.lang.String companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException {
 		return getPersistence().findByLocations_Last(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Organization[] findByLocations_PrevAndNext(
-		java.lang.String organizationId, java.lang.String companyId,
+		java.lang.String organizationId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException {
@@ -234,20 +230,20 @@ public class OrganizationUtil {
 			companyId, obc);
 	}
 
-	public static java.util.List findByC_P(java.lang.String companyId,
+	public static java.util.List findByC_P(long companyId,
 		java.lang.String parentOrganizationId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_P(companyId, parentOrganizationId);
 	}
 
-	public static java.util.List findByC_P(java.lang.String companyId,
+	public static java.util.List findByC_P(long companyId,
 		java.lang.String parentOrganizationId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_P(companyId, parentOrganizationId,
 			begin, end);
 	}
 
-	public static java.util.List findByC_P(java.lang.String companyId,
+	public static java.util.List findByC_P(long companyId,
 		java.lang.String parentOrganizationId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
@@ -256,7 +252,7 @@ public class OrganizationUtil {
 	}
 
 	public static com.liferay.portal.model.Organization findByC_P_First(
-		java.lang.String companyId, java.lang.String parentOrganizationId,
+		long companyId, java.lang.String parentOrganizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException {
@@ -265,7 +261,7 @@ public class OrganizationUtil {
 	}
 
 	public static com.liferay.portal.model.Organization findByC_P_Last(
-		java.lang.String companyId, java.lang.String parentOrganizationId,
+		long companyId, java.lang.String parentOrganizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException {
@@ -274,7 +270,7 @@ public class OrganizationUtil {
 	}
 
 	public static com.liferay.portal.model.Organization[] findByC_P_PrevAndNext(
-		java.lang.String organizationId, java.lang.String companyId,
+		java.lang.String organizationId, long companyId,
 		java.lang.String parentOrganizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
@@ -284,14 +280,14 @@ public class OrganizationUtil {
 	}
 
 	public static com.liferay.portal.model.Organization findByC_N(
-		java.lang.String companyId, java.lang.String name)
+		long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException {
 		return getPersistence().findByC_N(companyId, name);
 	}
 
 	public static com.liferay.portal.model.Organization fetchByC_N(
-		java.lang.String companyId, java.lang.String name)
+		long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_N(companyId, name);
 	}
@@ -325,24 +321,23 @@ public class OrganizationUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByCompanyId(java.lang.String companyId)
+	public static void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
-	public static void removeByLocations(java.lang.String companyId)
+	public static void removeByLocations(long companyId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByLocations(companyId);
 	}
 
-	public static void removeByC_P(java.lang.String companyId,
+	public static void removeByC_P(long companyId,
 		java.lang.String parentOrganizationId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByC_P(companyId, parentOrganizationId);
 	}
 
-	public static void removeByC_N(java.lang.String companyId,
-		java.lang.String name)
+	public static void removeByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException {
 		getPersistence().removeByC_N(companyId, name);
@@ -352,24 +347,24 @@ public class OrganizationUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByCompanyId(java.lang.String companyId)
+	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
-	public static int countByLocations(java.lang.String companyId)
+	public static int countByLocations(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByLocations(companyId);
 	}
 
-	public static int countByC_P(java.lang.String companyId,
+	public static int countByC_P(long companyId,
 		java.lang.String parentOrganizationId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_P(companyId, parentOrganizationId);
 	}
 
-	public static int countByC_N(java.lang.String companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static int countByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_N(companyId, name);
 	}
 

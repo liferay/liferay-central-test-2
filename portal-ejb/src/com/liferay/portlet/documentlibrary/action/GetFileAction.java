@@ -113,7 +113,7 @@ public class GetFileAction extends PortletAction {
 		InputStream is = null;
 
 		try {
-			String companyId = themeDisplay.getCompanyId();
+			long companyId = themeDisplay.getCompanyId();
 			long userId = themeDisplay.getUserId();
 
 			if (fileShortcutId <= 0) {

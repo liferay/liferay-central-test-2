@@ -66,14 +66,14 @@ public class TagsEntryServiceImpl
 		return TagsEntryLocalServiceUtil.getEntries(className, classPK);
 	}
 
-	public List search(String companyId, String name, String[] properties)
+	public List search(long companyId, String name, String[] properties)
 		throws SystemException {
 
 		return TagsEntryLocalServiceUtil.search(companyId, name, properties);
 	}
 
 	public List search(
-		String companyId, String name, String[] properties, int begin, int end)
+		long companyId, String name, String[] properties, int begin, int end)
 		throws SystemException {
 
 		return TagsEntryLocalServiceUtil.search(
@@ -81,7 +81,7 @@ public class TagsEntryServiceImpl
 	}
 
 	public JSONArrayWrapper searchAutocomplete(
-			String companyId, String name, String[] properties, int begin,
+			long companyId, String name, String[] properties, int begin,
 			int end)
 		throws SystemException {
 
@@ -89,7 +89,7 @@ public class TagsEntryServiceImpl
 			companyId, name, properties, begin, end);
 	}
 
-	public int searchCount(String companyId, String name, String[] properties)
+	public int searchCount(long companyId, String name, String[] properties)
 		throws SystemException {
 
 		return TagsEntryLocalServiceUtil.searchCount(

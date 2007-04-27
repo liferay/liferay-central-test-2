@@ -55,7 +55,7 @@ public class UserModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "User_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "userId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "defaultUser", new Integer(Types.BOOLEAN) },
@@ -80,9 +80,6 @@ public class UserModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.companyId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.password"),
 			XSS_ALLOW_BY_MODEL);
@@ -134,19 +131,12 @@ public class UserModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -539,7 +529,7 @@ public class UserModelImpl extends BaseModelImpl {
 	}
 
 	private long _userId;
-	private String _companyId;
+	private long _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _defaultUser;

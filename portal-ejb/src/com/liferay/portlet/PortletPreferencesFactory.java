@@ -141,7 +141,7 @@ public class PortletPreferencesFactory {
 			HttpServletRequest req, String portletId)
 		throws PortalException, SystemException {
 
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 
 		return PortletPreferencesLocalServiceUtil.getPreferences(
 			companyId, getPortletPreferencesPK(req, portletId));

@@ -38,13 +38,11 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class AccountUtil {
-	public static com.liferay.portal.model.Account create(
-		java.lang.String accountId) {
+	public static com.liferay.portal.model.Account create(long accountId) {
 		return getPersistence().create(accountId);
 	}
 
-	public static com.liferay.portal.model.Account remove(
-		java.lang.String accountId)
+	public static com.liferay.portal.model.Account remove(long accountId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAccountException {
 		ModelListener listener = _getListener();
@@ -139,14 +137,14 @@ public class AccountUtil {
 	}
 
 	public static com.liferay.portal.model.Account findByPrimaryKey(
-		java.lang.String accountId)
+		long accountId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAccountException {
 		return getPersistence().findByPrimaryKey(accountId);
 	}
 
 	public static com.liferay.portal.model.Account fetchByPrimaryKey(
-		java.lang.String accountId) throws com.liferay.portal.SystemException {
+		long accountId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(accountId);
 	}
 

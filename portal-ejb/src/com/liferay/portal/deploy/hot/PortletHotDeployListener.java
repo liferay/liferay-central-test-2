@@ -103,12 +103,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 			// Company ids
 
-			String[] companyIds = StringUtil.split(
-				ctx.getInitParameter("company_id"));
-
-			if ((companyIds.length == 1) && (companyIds[0].equals("*"))) {
-				companyIds = PortalInstances.getCompanyIds();
-			}
+			long[] companyIds = PortalInstances.getCompanyIds();
 
 			// Initialize portlets
 
@@ -294,11 +289,11 @@ public class PortletHotDeployListener implements HotDeployListener {
 				PortletLocalServiceUtil.getWARDisplay(servletContextName, xml);
 
 			for (int i = 0; i < companyIds.length; i++) {
-				String companyId = companyIds[i];
+				long companyId = companyIds[i];
 
 				PortletCategory portletCategory =
 					(PortletCategory)WebAppPool.get(
-						companyId, WebKeys.PORTLET_CATEGORY);
+						String.valueOf(companyId), WebKeys.PORTLET_CATEGORY);
 
 				if (portletCategory != null) {
 					portletCategory.merge(newPortletCategory);
@@ -374,7 +369,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 				return;
 			}
 
-			String[] companyIds = (String[])ovp.getKey();
+			long[] companyIds = (long[])ovp.getKey();
 			List portlets = (List)ovp.getValue();
 
 			Set portletIds = new HashSet();
@@ -401,11 +396,12 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 			if (portletIds.size() > 0) {
 				for (int i = 0; i < companyIds.length; i++) {
-					String companyId = companyIds[i];
+					long companyId = companyIds[i];
 
 					PortletCategory portletCategory =
 						(PortletCategory)WebAppPool.get(
-							companyId, WebKeys.PORTLET_CATEGORY);
+							String.valueOf(companyId),
+							WebKeys.PORTLET_CATEGORY);
 
 					portletCategory.separate(portletIds);
 				}

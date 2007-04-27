@@ -434,14 +434,14 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public InputStream getFileAsStream(
-			String companyId, long userId, String folderId, String name)
+			long companyId, long userId, String folderId, String name)
 		throws PortalException, SystemException {
 
 		return getFileAsStream(companyId, userId, folderId, name, -1);
 	}
 
 	public InputStream getFileAsStream(
-			String companyId, long userId, String folderId, String name,
+			long companyId, long userId, String folderId, String name,
 			double version)
 		throws PortalException, SystemException {
 
@@ -778,7 +778,7 @@ public class DLFileEntryLocalServiceImpl
 		return fileEntry;
 	}
 
-	protected String getFolderId(String companyId, String folderId)
+	protected String getFolderId(long companyId, String folderId)
 		throws PortalException, SystemException {
 
 		if (!folderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
@@ -788,7 +788,7 @@ public class DLFileEntryLocalServiceImpl
 			try {
 				DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 
-				if (!companyId.equals(folder.getCompanyId())) {
+				if (companyId != folder.getCompanyId()) {
 					folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 				}
 			}

@@ -33,22 +33,32 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CompanyThreadLocal {
 
-	public static String getCompanyId() {
-		String companyId = (String)_threadLocal.get();
+	public static long getCompanyId() {
+		Long companyIdObj = (Long)_threadLocal.get();
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("getCompanyId " + companyId);
+			_log.debug("getCompanyId " + companyIdObj);
 		}
 
-		return companyId;
+		if (companyIdObj != null) {
+			return companyIdObj.longValue();
+		}
+		else {
+			return 0;
+		}
 	}
 
-	public static void setCompanyId(String companyId) {
+	public static void setCompanyId(long companyId) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("setCompanyId " + companyId);
 		}
 
-		_threadLocal.set(companyId);
+		if (companyId > 0) {
+			_threadLocal.set(new Long(companyId));
+		}
+		else {
+			_threadLocal.set(null);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(CompanyThreadLocal.class);

@@ -362,7 +362,7 @@ public class SCProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId) throws SystemException {
+	public List findByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -371,14 +371,7 @@ public class SCProductEntryPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("modifiedDate DESC").append(", ");
@@ -388,10 +381,7 @@ public class SCProductEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return q.list();
 		}
@@ -403,12 +393,12 @@ public class SCProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end)
+	public List findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end,
+	public List findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -418,14 +408,7 @@ public class SCProductEntryPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -442,10 +425,7 @@ public class SCProductEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -457,7 +437,7 @@ public class SCProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public SCProductEntry findByCompanyId_First(String companyId,
+	public SCProductEntry findByCompanyId_First(long companyId,
 		OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
@@ -476,7 +456,7 @@ public class SCProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public SCProductEntry findByCompanyId_Last(String companyId,
+	public SCProductEntry findByCompanyId_Last(long companyId,
 		OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		int count = countByCompanyId(companyId);
@@ -497,7 +477,7 @@ public class SCProductEntryPersistence extends BasePersistence {
 	}
 
 	public SCProductEntry[] findByCompanyId_PrevAndNext(long productEntryId,
-		String companyId, OrderByComparator obc)
+		long companyId, OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		SCProductEntry scProductEntry = findByPrimaryKey(productEntryId);
 		int count = countByCompanyId(companyId);
@@ -509,14 +489,7 @@ public class SCProductEntryPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -533,10 +506,7 @@ public class SCProductEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scProductEntry);
@@ -823,7 +793,7 @@ public class SCProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCompanyId(String companyId) throws SystemException {
+	public void removeByCompanyId(long companyId) throws SystemException {
 		Iterator itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
@@ -889,7 +859,7 @@ public class SCProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCompanyId(String companyId) throws SystemException {
+	public int countByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -899,24 +869,14 @@ public class SCProductEntryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Iterator itr = q.list().iterator();
 

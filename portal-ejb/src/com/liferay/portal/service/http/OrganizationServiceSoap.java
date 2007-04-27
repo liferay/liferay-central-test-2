@@ -141,9 +141,8 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	public static java.lang.String getOrganizationId(
-		java.lang.String companyId, java.lang.String name)
-		throws RemoteException {
+	public static java.lang.String getOrganizationId(long companyId,
+		java.lang.String name) throws RemoteException {
 		try {
 			java.lang.String returnValue = OrganizationServiceUtil.getOrganizationId(companyId,
 					name);

@@ -58,7 +58,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 	public static Object[][] TABLE_COLUMNS = {
 			{ "questionId", new Integer(Types.VARCHAR) },
 			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
@@ -73,9 +73,6 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 			XSS_ALLOW);
 	public static boolean XSS_ALLOW_QUESTIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion.questionId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion.companyId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion.userName"),
@@ -127,19 +124,12 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -321,7 +311,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 
 	private String _questionId;
 	private long _groupId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

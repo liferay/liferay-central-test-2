@@ -68,21 +68,28 @@ public class PortalUtil_IW {
 		return PortalUtil.getCompany(req);
 	}
 
-	public java.lang.String getCompanyId(
-		javax.servlet.http.HttpServletRequest req) {
+	public long getCompanyId(javax.servlet.http.HttpServletRequest req) {
 		return PortalUtil.getCompanyId(req);
 	}
 
-	public java.lang.String getCompanyId(javax.portlet.ActionRequest req) {
+	public long getCompanyId(javax.portlet.ActionRequest req) {
 		return PortalUtil.getCompanyId(req);
 	}
 
-	public java.lang.String getCompanyId(javax.portlet.PortletRequest req) {
+	public long getCompanyId(javax.portlet.PortletRequest req) {
 		return PortalUtil.getCompanyId(req);
 	}
 
-	public java.lang.String getCompanyId(javax.portlet.RenderRequest req) {
+	public long getCompanyId(javax.portlet.RenderRequest req) {
 		return PortalUtil.getCompanyId(req);
+	}
+
+	public long getCompanyIdByWebId(javax.servlet.ServletContext ctx) {
+		return PortalUtil.getCompanyIdByWebId(ctx);
+	}
+
+	public long getCompanyIdByWebId(java.lang.String webId) {
+		return PortalUtil.getCompanyIdByWebId(webId);
 	}
 
 	public java.util.Date getDate(int month, int day, int year,

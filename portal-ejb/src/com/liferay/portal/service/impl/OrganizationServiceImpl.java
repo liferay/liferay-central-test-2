@@ -103,7 +103,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 		return OrganizationLocalServiceUtil.getOrganization(organizationId);
 	}
 
-	public String getOrganizationId(String companyId, String name)
+	public String getOrganizationId(long companyId, String name)
 		throws PortalException, SystemException {
 
 		return OrganizationLocalServiceUtil.getOrganizationId(companyId, name);

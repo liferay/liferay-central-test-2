@@ -84,7 +84,7 @@ public class ActionUtil {
 	}
 
 	public static void getImage(HttpServletRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		String imageId = ParamUtil.getString(req, "imageId");
 
 		IGImage image = null;

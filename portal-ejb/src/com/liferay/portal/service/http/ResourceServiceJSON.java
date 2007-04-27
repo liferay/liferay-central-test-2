@@ -68,8 +68,8 @@ import org.json.JSONObject;
  *
  */
 public class ResourceServiceJSON {
-	public static JSONObject getResource(java.lang.String companyId,
-		java.lang.String name, java.lang.String scope, java.lang.String primKey)
+	public static JSONObject getResource(long companyId, java.lang.String name,
+		java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Resource returnValue = ResourceServiceUtil.getResource(companyId,

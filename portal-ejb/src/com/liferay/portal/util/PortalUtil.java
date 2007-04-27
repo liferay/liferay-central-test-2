@@ -207,16 +207,16 @@ public class PortalUtil {
 	public static Company getCompany(HttpServletRequest req)
 		throws PortalException, SystemException {
 
-		String companyId = getCompanyId(req);
+		long companyId = getCompanyId(req);
 
-		if (companyId == null) {
+		if (companyId <= 0) {
 			return null;
 		}
 
 		Company company = (Company)req.getAttribute(WebKeys.COMPANY);
 
 		if (company == null) {
-			company = CompanyLocalServiceUtil.getCompany(companyId);
+			company = CompanyLocalServiceUtil.getCompanyById(companyId);
 
 			req.setAttribute(WebKeys.COMPANY, company);
 		}
@@ -236,23 +236,28 @@ public class PortalUtil {
 		return getCompany(getHttpServletRequest(req));
 	}
 
-	public static String getCompanyId(HttpServletRequest req) {
-		String companyId =
-			(String)req.getSession().getAttribute(WebKeys.COMPANY_ID);
+	public static long getCompanyId(HttpServletRequest req) {
+		Long companyIdObj =
+			(Long)req.getSession().getAttribute(WebKeys.COMPANY_ID);
 
-		if (companyId == null) {
-			companyId = (String)req.getAttribute(WebKeys.COMPANY_ID);
+		if (companyIdObj == null) {
+			companyIdObj = (Long)req.getAttribute(WebKeys.COMPANY_ID);
 		}
 
-		return companyId;
+		if (companyIdObj != null) {
+			return companyIdObj.longValue();
+		}
+		else {
+			return 0;
+		}
 	}
 
-	public static String getCompanyId(ActionRequest req) {
+	public static long getCompanyId(ActionRequest req) {
 		return getCompanyId(getHttpServletRequest(req));
 	}
 
-	public static String getCompanyId(PortletRequest req) {
-		String companyId = null;
+	public static long getCompanyId(PortletRequest req) {
+		long companyId = 0;
 
 		if (req instanceof ActionRequest) {
 			companyId = getCompanyId((ActionRequest)req);
@@ -264,8 +269,30 @@ public class PortalUtil {
 		return companyId;
 	}
 
-	public static String getCompanyId(RenderRequest req) {
+	public static long getCompanyId(RenderRequest req) {
 		return getCompanyId(getHttpServletRequest(req));
+	}
+
+	public static long getCompanyIdByWebId(ServletContext ctx) {
+		String webId = GetterUtil.getString(
+			ctx.getInitParameter("company_web_id"));
+
+		return getCompanyIdByWebId(webId);
+	}
+
+	public static long getCompanyIdByWebId(String webId) {
+		long companyId = 0;
+
+		try {
+			Company company = CompanyLocalServiceUtil.getCompanyByWebId(webId);
+
+			companyId = company.getCompanyId();
+		}
+		catch (Exception e) {
+			_log.error(e.getMessage());
+		}
+
+		return companyId;
 	}
 
 	public static Date getDate(

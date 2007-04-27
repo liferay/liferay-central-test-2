@@ -10,11 +10,11 @@
 		<parameter name="wsdlPortType" value="IGImageServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" name="deleteImage" qname="operNS:deleteImage" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="imageId" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://model.imagegallery.portlet.liferay.com" name="getImage" qname="operNS:getImage" returnQName="getImageReturn" returnType="rtns:IGImageSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="imageId" type="tns:string"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="getImage deleteImage"/>

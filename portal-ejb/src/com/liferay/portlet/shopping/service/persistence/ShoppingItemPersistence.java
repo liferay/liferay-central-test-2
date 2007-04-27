@@ -383,7 +383,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		}
 	}
 
-	public ShoppingItem findByC_S(String companyId, String sku)
+	public ShoppingItem findByC_S(long companyId, String sku)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = fetchByC_S(companyId, sku);
 
@@ -408,7 +408,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		return shoppingItem;
 	}
 
-	public ShoppingItem fetchByC_S(String companyId, String sku)
+	public ShoppingItem fetchByC_S(long companyId, String sku)
 		throws SystemException {
 		Session session = null;
 
@@ -418,14 +418,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (sku == null) {
@@ -443,10 +436,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (sku != null) {
 				q.setString(queryPos++, sku);
@@ -559,7 +549,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_S(String companyId, String sku)
+	public void removeByC_S(long companyId, String sku)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = findByC_S(companyId, sku);
 		remove(shoppingItem);
@@ -622,8 +612,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_S(String companyId, String sku)
-		throws SystemException {
+	public int countByC_S(long companyId, String sku) throws SystemException {
 		Session session = null;
 
 		try {
@@ -633,14 +622,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (sku == null) {
@@ -656,10 +638,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (sku != null) {
 				q.setString(queryPos++, sku);

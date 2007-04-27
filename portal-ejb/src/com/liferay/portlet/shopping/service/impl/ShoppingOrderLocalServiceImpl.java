@@ -357,7 +357,7 @@ public class ShoppingOrderLocalServiceImpl
 	}
 
 	public List search(
-			String orderId, long groupId, String companyId, long userId,
+			String orderId, long groupId, long companyId, long userId,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,
@@ -374,7 +374,7 @@ public class ShoppingOrderLocalServiceImpl
 	}
 
 	public int searchCount(
-			String orderId, long groupId, String companyId, long userId,
+			String orderId, long groupId, long companyId, long userId,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,

@@ -51,7 +51,7 @@ import java.util.List;
  *
  */
 public class AccountPersistence extends BasePersistence {
-	public Account create(String accountId) {
+	public Account create(long accountId) {
 		Account account = new AccountImpl();
 		account.setNew(true);
 		account.setPrimaryKey(accountId);
@@ -59,14 +59,15 @@ public class AccountPersistence extends BasePersistence {
 		return account;
 	}
 
-	public Account remove(String accountId)
+	public Account remove(long accountId)
 		throws NoSuchAccountException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Account account = (Account)session.get(AccountImpl.class, accountId);
+			Account account = (Account)session.get(AccountImpl.class,
+					new Long(accountId));
 
 			if (account == null) {
 				if (_log.isWarnEnabled()) {
@@ -144,7 +145,7 @@ public class AccountPersistence extends BasePersistence {
 		}
 	}
 
-	public Account findByPrimaryKey(String accountId)
+	public Account findByPrimaryKey(long accountId)
 		throws NoSuchAccountException, SystemException {
 		Account account = fetchByPrimaryKey(accountId);
 
@@ -161,14 +162,13 @@ public class AccountPersistence extends BasePersistence {
 		return account;
 	}
 
-	public Account fetchByPrimaryKey(String accountId)
-		throws SystemException {
+	public Account fetchByPrimaryKey(long accountId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (Account)session.get(AccountImpl.class, accountId);
+			return (Account)session.get(AccountImpl.class, new Long(accountId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);

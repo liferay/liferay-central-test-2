@@ -350,7 +350,7 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId) throws SystemException {
+	public List findByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -359,14 +359,7 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("priority ASC").append(", ");
@@ -376,10 +369,7 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return q.list();
 		}
@@ -391,12 +381,12 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end)
+	public List findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end,
+	public List findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -406,14 +396,7 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -430,10 +413,7 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -445,7 +425,7 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public SCFrameworkVersion findByCompanyId_First(String companyId,
+	public SCFrameworkVersion findByCompanyId_First(long companyId,
 		OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
@@ -464,7 +444,7 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public SCFrameworkVersion findByCompanyId_Last(String companyId,
+	public SCFrameworkVersion findByCompanyId_Last(long companyId,
 		OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		int count = countByCompanyId(companyId);
@@ -485,7 +465,7 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 	}
 
 	public SCFrameworkVersion[] findByCompanyId_PrevAndNext(
-		long frameworkVersionId, String companyId, OrderByComparator obc)
+		long frameworkVersionId, long companyId, OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		SCFrameworkVersion scFrameworkVersion = findByPrimaryKey(frameworkVersionId);
 		int count = countByCompanyId(companyId);
@@ -497,14 +477,7 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -521,10 +494,7 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scFrameworkVersion);
@@ -812,7 +782,7 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCompanyId(String companyId) throws SystemException {
+	public void removeByCompanyId(long companyId) throws SystemException {
 		Iterator itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
@@ -878,7 +848,7 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCompanyId(String companyId) throws SystemException {
+	public int countByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -888,24 +858,14 @@ public class SCFrameworkVersionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Iterator itr = q.list().iterator();
 

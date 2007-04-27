@@ -997,7 +997,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_G_A(String companyId, long groupId, String articleId)
+	public List findByC_G_A(long companyId, long groupId, String articleId)
 		throws SystemException {
 		Session session = null;
 
@@ -1007,14 +1007,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("groupId = ?");
 			query.append(" AND ");
@@ -1032,11 +1025,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, groupId);
 
 			if (articleId != null) {
@@ -1053,12 +1042,12 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_G_A(String companyId, long groupId, String articleId,
+	public List findByC_G_A(long companyId, long groupId, String articleId,
 		int begin, int end) throws SystemException {
 		return findByC_G_A(companyId, groupId, articleId, begin, end, null);
 	}
 
-	public List findByC_G_A(String companyId, long groupId, String articleId,
+	public List findByC_G_A(long companyId, long groupId, String articleId,
 		int begin, int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -1068,14 +1057,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("groupId = ?");
 			query.append(" AND ");
@@ -1098,11 +1080,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, groupId);
 
 			if (articleId != null) {
@@ -1119,8 +1097,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public JournalContentSearch findByC_G_A_First(String companyId,
-		long groupId, String articleId, OrderByComparator obc)
+	public JournalContentSearch findByC_G_A_First(long companyId, long groupId,
+		String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		List list = findByC_G_A(companyId, groupId, articleId, 0, 1, obc);
 
@@ -1144,8 +1122,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public JournalContentSearch findByC_G_A_Last(String companyId,
-		long groupId, String articleId, OrderByComparator obc)
+	public JournalContentSearch findByC_G_A_Last(long companyId, long groupId,
+		String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByC_G_A(companyId, groupId, articleId);
 		List list = findByC_G_A(companyId, groupId, articleId, count - 1,
@@ -1172,7 +1150,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 	}
 
 	public JournalContentSearch[] findByC_G_A_PrevAndNext(
-		JournalContentSearchPK journalContentSearchPK, String companyId,
+		JournalContentSearchPK journalContentSearchPK, long companyId,
 		long groupId, String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		JournalContentSearch journalContentSearch = findByPrimaryKey(journalContentSearchPK);
@@ -1185,14 +1163,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("groupId = ?");
 			query.append(" AND ");
@@ -1215,11 +1186,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, groupId);
 
 			if (articleId != null) {
@@ -1357,7 +1324,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_G_A(String companyId, long groupId, String articleId)
+	public void removeByC_G_A(long companyId, long groupId, String articleId)
 		throws SystemException {
 		Iterator itr = findByC_G_A(companyId, groupId, articleId).iterator();
 
@@ -1593,7 +1560,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_G_A(String companyId, long groupId, String articleId)
+	public int countByC_G_A(long companyId, long groupId, String articleId)
 		throws SystemException {
 		Session session = null;
 
@@ -1604,14 +1571,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("groupId = ?");
 			query.append(" AND ");
@@ -1629,11 +1589,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, groupId);
 
 			if (articleId != null) {

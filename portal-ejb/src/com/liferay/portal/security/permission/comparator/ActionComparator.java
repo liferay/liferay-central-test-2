@@ -37,7 +37,7 @@ import java.util.Locale;
  */
 public class ActionComparator implements Comparator, Serializable {
 
-	public ActionComparator(String companyId, Locale locale) {
+	public ActionComparator(long companyId, Locale locale) {
 		_companyId = companyId;
 		_locale = locale;
 	}
@@ -54,7 +54,7 @@ public class ActionComparator implements Comparator, Serializable {
 		return action1.compareTo(action2);
 	}
 
-	private String _companyId;
+	private long _companyId;
 	private Locale _locale;
 
 }

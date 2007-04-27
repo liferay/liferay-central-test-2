@@ -133,7 +133,7 @@ public class GroupFinder {
 	}
 
 	public static int countByC_N_D(
-			String companyId, String name, String description,
+			long companyId, String name, String description,
 			LinkedHashMap params)
 		throws SystemException {
 
@@ -192,7 +192,7 @@ public class GroupFinder {
 		}
 	}
 
-	public static Group findByC_N(String companyId, String name)
+	public static Group findByC_N(long companyId, String name)
 		throws NoSuchGroupException, SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -240,7 +240,7 @@ public class GroupFinder {
 	}
 
 	public static List findByC_N_D(
-			String companyId, String name, String description,
+			long companyId, String name, String description,
 			LinkedHashMap params, int begin, int end)
 		throws SystemException {
 
@@ -417,7 +417,7 @@ public class GroupFinder {
 	}
 
 	private static int _countByC_N_D(
-			Session session, String companyId, String name, String description,
+			Session session, long companyId, String name, String description,
 			LinkedHashMap params)
 		throws SystemException {
 

@@ -74,8 +74,7 @@ public class EditConfigurationAction extends PortletAction {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			String companyId = themeDisplay.getCompanyId();
-
+			long companyId = themeDisplay.getCompanyId();
 			long groupId = ParamUtil.getLong(req, "groupId");
 
 			String languageId = LanguageUtil.getLanguageId(req);

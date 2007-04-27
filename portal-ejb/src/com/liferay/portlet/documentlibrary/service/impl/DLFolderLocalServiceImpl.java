@@ -273,7 +273,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		return DLFolderUtil.findByP_N(parentFolderId, name);
 	}
 
-	public List getFolders(String companyId) throws SystemException {
+	public List getFolders(long companyId) throws SystemException {
 		return DLFolderUtil.findByCompanyId(companyId);
 	}
 
@@ -313,8 +313,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			String companyId, long groupId, String[] folderIds,
-			String keywords)
+			long companyId, long groupId, String[] folderIds, String keywords)
 		throws PortalException, SystemException {
 
 		return DLLocalServiceUtil.search(

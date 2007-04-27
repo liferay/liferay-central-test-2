@@ -66,8 +66,7 @@ public class AccountLocalServiceEJBImpl implements AccountLocalService,
 			begin, end);
 	}
 
-	public com.liferay.portal.model.Account getAccount(
-		java.lang.String accountId)
+	public com.liferay.portal.model.Account getAccount(long accountId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return AccountLocalServiceFactory.getTxImpl().getAccount(accountId);

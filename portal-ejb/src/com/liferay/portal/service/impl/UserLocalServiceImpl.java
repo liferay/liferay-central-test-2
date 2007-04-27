@@ -94,7 +94,6 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -179,7 +178,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public User addUser(
-			long creatorUserId, String companyId, boolean autoPassword,
+			long creatorUserId, long companyId, boolean autoPassword,
 			String password1, String password2, boolean passwordReset,
 			boolean autoScreenName, String screenName, String emailAddress,
 			Locale locale, String firstName, String middleName, String lastName,
@@ -190,6 +189,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// User
 
+		Company company = CompanyUtil.findByPrimaryKey(companyId);
 		screenName = screenName.trim().toLowerCase();
 		emailAddress = emailAddress.trim().toLowerCase();
 		Date now = new Date();
@@ -323,7 +323,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		contact.setUserName(creatorUserName);
 		contact.setCreateDate(now);
 		contact.setModifiedDate(now);
-		contact.setAccountId(user.getCompanyId());
+		contact.setAccountId(company.getAccountId());
 		contact.setParentContactId(ContactImpl.DEFAULT_PARENT_CONTACT_ID);
 		contact.setFirstName(firstName);
 		contact.setMiddleName(middleName);
@@ -424,7 +424,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public int authenticateByEmailAddress(
-			String companyId, String emailAddress, String password,
+			long companyId, String emailAddress, String password,
 			Map headerMap, Map parameterMap)
 		throws PortalException, SystemException {
 
@@ -434,7 +434,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public int authenticateByScreenName(
-			String companyId, String screenName, String password, Map headerMap,
+			long companyId, String screenName, String password, Map headerMap,
 			Map parameterMap)
 		throws PortalException, SystemException {
 
@@ -444,7 +444,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public int authenticateByUserId(
-			String companyId, long userId, String password, Map headerMap,
+			long companyId, long userId, String password, Map headerMap,
 			Map parameterMap)
 		throws PortalException, SystemException {
 
@@ -482,7 +482,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public KeyValuePair decryptUserId(
-			String companyId, String name, String password)
+			long companyId, String name, String password)
 		throws PortalException, SystemException {
 
 		Company company = CompanyUtil.findByPrimaryKey(companyId);
@@ -625,13 +625,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	public User getDefaultUser(String companyId)
+	public User getDefaultUser(long companyId)
 		throws PortalException, SystemException {
 
 		return UserUtil.findByC_DU(companyId, true);
 	}
 
-	public long getDefaultUserId(String companyId)
+	public long getDefaultUserId(long companyId)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByC_DU(companyId, true);
@@ -646,7 +646,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public List getPermissionUsers(
-			String companyId, long groupId, String name, String primKey,
+			long companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator,
 			int begin, int end)
@@ -669,7 +669,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public int getPermissionUsersCount(
-			String companyId, long groupId, String name, String primKey,
+			long companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator)
 		throws PortalException, SystemException {
@@ -702,8 +702,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return UserUtil.findByContactId(contactId);
 	}
 
-	public User getUserByEmailAddress(
-			String companyId, String emailAddress)
+	public User getUserByEmailAddress(long companyId, String emailAddress)
 		throws PortalException, SystemException {
 
 		emailAddress = emailAddress.trim().toLowerCase();
@@ -717,13 +716,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return UserUtil.findByPrimaryKey(userId);
 	}
 
-	public User getUserById(String companyId, long userId)
+	public User getUserById(long companyId, long userId)
 		throws PortalException, SystemException {
 
 		return UserUtil.findByC_U(companyId, userId);
 	}
 
-	public User getUserByScreenName(String companyId, String screenName)
+	public User getUserByScreenName(long companyId, String screenName)
 		throws PortalException, SystemException {
 
 		screenName = screenName.trim().toLowerCase();
@@ -731,7 +730,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return UserUtil.findByC_SN(companyId, screenName);
 	}
 
-	public long getUserIdByEmailAddress(String companyId, String emailAddress)
+	public long getUserIdByEmailAddress(long companyId, String emailAddress)
 		throws PortalException, SystemException {
 
 		emailAddress = emailAddress.trim().toLowerCase();
@@ -741,7 +740,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user.getUserId();
 	}
 
-	public long getUserIdByScreenName(String companyId, String screenName)
+	public long getUserIdByScreenName(long companyId, String screenName)
 		throws PortalException, SystemException {
 
 		screenName = screenName.trim().toLowerCase();
@@ -777,7 +776,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public List search(
-			String companyId, String firstName, String middleName,
+			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
 			boolean active, LinkedHashMap params, boolean andSearch, int begin,
 			int end, OrderByComparator obc)
@@ -789,7 +788,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public int searchCount(
-			String companyId, String firstName, String middleName,
+			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
 			boolean active, LinkedHashMap params, boolean andSearch)
 		throws SystemException {
@@ -800,7 +799,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void sendPassword(
-			String companyId, String emailAddress, String remoteAddr,
+			long companyId, String emailAddress, String remoteAddr,
 			String remoteHost, String userAgent)
 		throws PortalException, SystemException {
 
@@ -1091,6 +1090,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		validate(userId, screenName, emailAddress, firstName, lastName, smsSn);
 
 		User user = UserUtil.findByPrimaryKey(userId);
+		Company company = CompanyUtil.findByPrimaryKey(user.getCompanyId());
 
 		validateOrganizations(user.getCompanyId(), organizationId, locationId);
 
@@ -1163,7 +1163,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			contact.setCompanyId(user.getCompanyId());
 			contact.setUserName(StringPool.BLANK);
 			contact.setCreateDate(now);
-			contact.setAccountId(user.getCompanyId());
+			contact.setAccountId(company.getAccountId());
 			contact.setParentContactId(ContactImpl.DEFAULT_PARENT_CONTACT_ID);
 		}
 
@@ -1202,7 +1202,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected int authenticate(
-			String companyId, String login, String password, String authType,
+			long companyId, String login, String password, String authType,
 			Map headerMap, Map parameterMap)
 		throws PortalException, SystemException {
 
@@ -1418,7 +1418,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		try {
-			String companyId = user.getCompanyId();
+			long companyId = user.getCompanyId();
 
 			Company company = CompanyUtil.findByPrimaryKey(companyId);
 
@@ -1543,7 +1543,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			String companyId, boolean autoPassword, String password1,
+			long companyId, boolean autoPassword, String password1,
 			String password2, boolean autoScreenName, String screenName,
 			String emailAddress, String firstName, String lastName,
 			String organizationId, String locationId)
@@ -1599,7 +1599,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected void validateOrganizations(
-			String companyId, String organizationId, String locationId)
+			long companyId, String organizationId, String locationId)
 		throws PortalException, SystemException {
 
 		boolean organizationRequired = GetterUtil.getBoolean(PropsUtil.get(
@@ -1655,7 +1655,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validateScreenName(String companyId, String screenName)
+	protected void validateScreenName(long companyId, String screenName)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(screenName)) {
@@ -1676,14 +1676,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		for (int i = 0; i < anonymousNames.length; i++) {
 			if (screenName.equalsIgnoreCase(anonymousNames[i])) {
-				throw new UserScreenNameException();
-			}
-		}
-
-		String[] companyIds = PortalInstances.getCompanyIds();
-
-		for (int i = 0; i < companyIds.length; i++) {
-			if (screenName.indexOf(companyIds[i]) != -1) {
 				throw new UserScreenNameException();
 			}
 		}

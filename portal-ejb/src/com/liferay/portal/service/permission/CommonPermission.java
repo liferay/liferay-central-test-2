@@ -49,7 +49,9 @@ public class CommonPermission {
 		throws PortalException, SystemException {
 
 		if (className.equals(Account.class.getName())) {
-			Account account = AccountLocalServiceUtil.getAccount(classPK);
+			long accountId = GetterUtil.getLong(classPK);
+
+			Account account = AccountLocalServiceUtil.getAccount(accountId);
 
 			/*if (account.isDefaultAccount()) {
 				AccountPermission.check(permissionChecker, classPK, actionId);
@@ -59,8 +61,9 @@ public class CommonPermission {
 			}*/
 		}
 		else if (className.equals(Contact.class.getName())) {
-			User user = UserLocalServiceUtil.getUserByContactId(
-				GetterUtil.getLong(classPK));
+			long contactId = GetterUtil.getLong(classPK);
+
+			User user = UserLocalServiceUtil.getUserByContactId(contactId);
 
 			UserPermission.check(
 				permissionChecker, user.getUserId(),

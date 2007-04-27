@@ -95,16 +95,16 @@ public class JournalStructureServiceJSON {
 		return JournalStructureJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteStructure(java.lang.String companyId,
-		long groupId, java.lang.String structureId)
+	public static void deleteStructure(long companyId, long groupId,
+		java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		JournalStructureServiceUtil.deleteStructure(companyId, groupId,
 			structureId);
 	}
 
-	public static JSONObject getStructure(java.lang.String companyId,
-		long groupId, java.lang.String structureId)
+	public static JSONObject getStructure(long companyId, long groupId,
+		java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.getStructure(companyId,

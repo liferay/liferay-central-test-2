@@ -89,8 +89,7 @@ public class TagsPropertyServiceEJBImpl implements TagsPropertyService,
 		return TagsPropertyServiceFactory.getTxImpl().getProperties(entryId);
 	}
 
-	public java.util.List getPropertyValues(java.lang.String companyId,
-		java.lang.String key)
+	public java.util.List getPropertyValues(long companyId, java.lang.String key)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 

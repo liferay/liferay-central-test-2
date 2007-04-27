@@ -69,7 +69,7 @@ public class DescriptionHandlerImpl implements DescriptionHandler {
 	public PortletDescription getPortletDescription(String portletHandle,
 			RegistrationContext regContext, UserContext userContext,
 			String[] desiredLocales) throws WSRPException {
-		String companyId = WSRPUtil.getCompanyId();
+		long companyId = WSRPUtil.getCompanyId();
 
 		Portlet portlet = null;
 
@@ -93,7 +93,7 @@ public class DescriptionHandlerImpl implements DescriptionHandler {
 	public PortletDescription[] getProducerOfferedPortletDescriptions(
 			RegistrationContext regContext, String[] desiredLocales)
 			throws WSRPException {
-		String companyId = WSRPUtil.getCompanyId();
+		long companyId = WSRPUtil.getCompanyId();
 
 		PortletDescription[] portletDescriptions = null;
 

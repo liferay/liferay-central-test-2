@@ -42,7 +42,7 @@ public class RenderResponseFactory {
 
 	public static RenderResponseImpl create(
 			RenderRequestImpl req, HttpServletResponse res, String portletName,
-			String companyId)
+			long companyId)
 		throws Exception {
 
 		return create(req, res, portletName, companyId, null);
@@ -50,7 +50,7 @@ public class RenderResponseFactory {
 
 	public static RenderResponseImpl create(
 			RenderRequestImpl req, HttpServletResponse res, String portletName,
-			String companyId, String plid)
+			long companyId, String plid)
 		throws Exception {
 
 		if (CachePropsUtil.COMMONS_POOL_ENABLED) {

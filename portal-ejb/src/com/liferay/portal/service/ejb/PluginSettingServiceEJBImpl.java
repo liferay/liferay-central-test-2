@@ -55,8 +55,8 @@ import javax.ejb.SessionContext;
 public class PluginSettingServiceEJBImpl implements PluginSettingService,
 	SessionBean {
 	public com.liferay.portal.model.PluginSetting updatePluginSetting(
-		java.lang.String companyId, java.lang.String pluginId,
-		java.lang.String pluginType, java.lang.String roles, boolean active)
+		long companyId, java.lang.String pluginId, java.lang.String pluginType,
+		java.lang.String roles, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

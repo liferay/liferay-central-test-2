@@ -55,7 +55,7 @@ public class TagsEntryFinder {
 		TagsEntryFinder.class.getName() + ".findByC_N_P";
 
 	public static int countByC_N_P(
-			String companyId, String name, String[] properties)
+			long companyId, String name, String[] properties)
 		throws SystemException {
 
 		Session session = null;
@@ -101,7 +101,7 @@ public class TagsEntryFinder {
 	}
 
 	public static List findByC_N_P(
-			String companyId, String name, String[] properties)
+			long companyId, String name, String[] properties)
 		throws SystemException {
 
 		return findByC_N_P(
@@ -109,7 +109,7 @@ public class TagsEntryFinder {
 	}
 
 	public static List findByC_N_P(
-			String companyId, String name, String[] properties, int begin,
+			long companyId, String name, String[] properties, int begin,
 			int end)
 		throws SystemException {
 

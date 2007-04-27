@@ -200,7 +200,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId) throws SystemException {
+	public List findByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -208,14 +208,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
@@ -224,10 +217,7 @@ public class OrganizationPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return q.list();
 		}
@@ -239,12 +229,12 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end)
+	public List findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end,
+	public List findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -253,14 +243,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -276,10 +259,7 @@ public class OrganizationPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -291,7 +271,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public Organization findByCompanyId_First(String companyId,
+	public Organization findByCompanyId_First(long companyId,
 		OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
@@ -310,7 +290,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public Organization findByCompanyId_Last(String companyId,
+	public Organization findByCompanyId_Last(long companyId,
 		OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		int count = countByCompanyId(companyId);
@@ -331,7 +311,7 @@ public class OrganizationPersistence extends BasePersistence {
 	}
 
 	public Organization[] findByCompanyId_PrevAndNext(String organizationId,
-		String companyId, OrderByComparator obc)
+		long companyId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByPrimaryKey(organizationId);
 		int count = countByCompanyId(companyId);
@@ -342,14 +322,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -365,10 +338,7 @@ public class OrganizationPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					organization);
@@ -387,7 +357,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByLocations(String companyId) throws SystemException {
+	public List findByLocations(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -395,14 +365,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND parentOrganizationId != '-1' ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
@@ -411,10 +374,7 @@ public class OrganizationPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return q.list();
 		}
@@ -426,12 +386,12 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByLocations(String companyId, int begin, int end)
+	public List findByLocations(long companyId, int begin, int end)
 		throws SystemException {
 		return findByLocations(companyId, begin, end, null);
 	}
 
-	public List findByLocations(String companyId, int begin, int end,
+	public List findByLocations(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -440,14 +400,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND parentOrganizationId != '-1' ");
 
 			if (obc != null) {
@@ -463,10 +416,7 @@ public class OrganizationPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -478,7 +428,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public Organization findByLocations_First(String companyId,
+	public Organization findByLocations_First(long companyId,
 		OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		List list = findByLocations(companyId, 0, 1, obc);
@@ -497,7 +447,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public Organization findByLocations_Last(String companyId,
+	public Organization findByLocations_Last(long companyId,
 		OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		int count = countByLocations(companyId);
@@ -518,7 +468,7 @@ public class OrganizationPersistence extends BasePersistence {
 	}
 
 	public Organization[] findByLocations_PrevAndNext(String organizationId,
-		String companyId, OrderByComparator obc)
+		long companyId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByPrimaryKey(organizationId);
 		int count = countByLocations(companyId);
@@ -529,14 +479,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND parentOrganizationId != '-1' ");
 
 			if (obc != null) {
@@ -552,10 +495,7 @@ public class OrganizationPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					organization);
@@ -574,7 +514,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_P(String companyId, String parentOrganizationId)
+	public List findByC_P(long companyId, String parentOrganizationId)
 		throws SystemException {
 		Session session = null;
 
@@ -583,14 +523,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (parentOrganizationId == null) {
@@ -608,10 +541,7 @@ public class OrganizationPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (parentOrganizationId != null) {
 				q.setString(queryPos++, parentOrganizationId);
@@ -627,12 +557,12 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_P(String companyId, String parentOrganizationId,
+	public List findByC_P(long companyId, String parentOrganizationId,
 		int begin, int end) throws SystemException {
 		return findByC_P(companyId, parentOrganizationId, begin, end, null);
 	}
 
-	public List findByC_P(String companyId, String parentOrganizationId,
+	public List findByC_P(long companyId, String parentOrganizationId,
 		int begin, int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -641,14 +571,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (parentOrganizationId == null) {
@@ -673,10 +596,7 @@ public class OrganizationPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (parentOrganizationId != null) {
 				q.setString(queryPos++, parentOrganizationId);
@@ -692,7 +612,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public Organization findByC_P_First(String companyId,
+	public Organization findByC_P_First(long companyId,
 		String parentOrganizationId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		List list = findByC_P(companyId, parentOrganizationId, 0, 1, obc);
@@ -714,7 +634,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public Organization findByC_P_Last(String companyId,
+	public Organization findByC_P_Last(long companyId,
 		String parentOrganizationId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		int count = countByC_P(companyId, parentOrganizationId);
@@ -739,7 +659,7 @@ public class OrganizationPersistence extends BasePersistence {
 	}
 
 	public Organization[] findByC_P_PrevAndNext(String organizationId,
-		String companyId, String parentOrganizationId, OrderByComparator obc)
+		long companyId, String parentOrganizationId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByPrimaryKey(organizationId);
 		int count = countByC_P(companyId, parentOrganizationId);
@@ -750,14 +670,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (parentOrganizationId == null) {
@@ -782,10 +695,7 @@ public class OrganizationPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (parentOrganizationId != null) {
 				q.setString(queryPos++, parentOrganizationId);
@@ -808,7 +718,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public Organization findByC_N(String companyId, String name)
+	public Organization findByC_N(long companyId, String name)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = fetchByC_N(companyId, name);
 
@@ -833,7 +743,7 @@ public class OrganizationPersistence extends BasePersistence {
 		return organization;
 	}
 
-	public Organization fetchByC_N(String companyId, String name)
+	public Organization fetchByC_N(long companyId, String name)
 		throws SystemException {
 		Session session = null;
 
@@ -842,14 +752,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -867,10 +770,7 @@ public class OrganizationPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);
@@ -973,7 +873,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCompanyId(String companyId) throws SystemException {
+	public void removeByCompanyId(long companyId) throws SystemException {
 		Iterator itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
@@ -982,7 +882,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByLocations(String companyId) throws SystemException {
+	public void removeByLocations(long companyId) throws SystemException {
 		Iterator itr = findByLocations(companyId).iterator();
 
 		while (itr.hasNext()) {
@@ -991,7 +891,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_P(String companyId, String parentOrganizationId)
+	public void removeByC_P(long companyId, String parentOrganizationId)
 		throws SystemException {
 		Iterator itr = findByC_P(companyId, parentOrganizationId).iterator();
 
@@ -1001,7 +901,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_N(String companyId, String name)
+	public void removeByC_N(long companyId, String name)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByC_N(companyId, name);
 		remove(organization);
@@ -1015,7 +915,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCompanyId(String companyId) throws SystemException {
+	public int countByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1024,24 +924,14 @@ public class OrganizationPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1063,7 +953,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByLocations(String companyId) throws SystemException {
+	public int countByLocations(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1072,24 +962,14 @@ public class OrganizationPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND parentOrganizationId != '-1' ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1111,7 +991,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_P(String companyId, String parentOrganizationId)
+	public int countByC_P(long companyId, String parentOrganizationId)
 		throws SystemException {
 		Session session = null;
 
@@ -1121,14 +1001,7 @@ public class OrganizationPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (parentOrganizationId == null) {
@@ -1144,10 +1017,7 @@ public class OrganizationPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (parentOrganizationId != null) {
 				q.setString(queryPos++, parentOrganizationId);
@@ -1173,7 +1043,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_N(String companyId, String name)
+	public int countByC_N(long companyId, String name)
 		throws SystemException {
 		Session session = null;
 
@@ -1183,14 +1053,7 @@ public class OrganizationPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -1206,10 +1069,7 @@ public class OrganizationPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);

@@ -49,7 +49,7 @@ import org.apache.lucene.index.IndexWriter;
  */
 public class LuceneIndexer implements Runnable {
 
-	public LuceneIndexer(String companyId) {
+	public LuceneIndexer(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -100,7 +100,7 @@ public class LuceneIndexer implements Runnable {
 			_log.error(ioe.getMessage());
 		}
 
-		String[] indexIds = new String[] {_companyId};
+		String[] indexIds = new String[] {String.valueOf(_companyId)};
 
 		try {
 			List portlets = PortletLocalServiceUtil.getPortlets(_companyId);
@@ -160,7 +160,7 @@ public class LuceneIndexer implements Runnable {
 
 	private static Log _log = LogFactory.getLog(LuceneIndexer.class);
 
-	private String _companyId;
+	private long _companyId;
 	private boolean _finished;
 
 }

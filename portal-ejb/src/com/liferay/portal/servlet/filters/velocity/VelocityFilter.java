@@ -128,9 +128,10 @@ public class VelocityFilter implements Filter {
 
 				// Company
 
-				String companyId = ParamUtil.getString(req, "companyId");
+				long companyId = ParamUtil.getLong(req, "companyId");
 
-				Company company = CompanyLocalServiceUtil.getCompany(companyId);
+				Company company = CompanyLocalServiceUtil.getCompanyById(
+					companyId);
 
 				// Paths
 

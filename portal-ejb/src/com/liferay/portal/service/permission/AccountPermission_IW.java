@@ -35,7 +35,7 @@ public class AccountPermission_IW {
 
 	public void check(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String accountId, java.lang.String actionId)
+		long accountId, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		AccountPermission.check(permissionChecker, accountId, actionId);
@@ -51,7 +51,7 @@ public class AccountPermission_IW {
 
 	public boolean contains(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String accountId, java.lang.String actionId)
+		long accountId, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		return AccountPermission.contains(permissionChecker, accountId, actionId);

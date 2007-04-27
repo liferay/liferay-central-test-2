@@ -91,9 +91,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// File attachments
 
-		String companyId = rootMessage.getCompanyId();
-		String portletId = CompanyImpl.SYSTEM;
-		String repositoryId = CompanyImpl.SYSTEM;
+		long companyId = rootMessage.getCompanyId();
+		String portletId = CompanyImpl.SYSTEM_STRING;
+		String repositoryId = CompanyImpl.SYSTEM_STRING;
 		String dirName = thread.getAttachmentsDir();
 
 		try {

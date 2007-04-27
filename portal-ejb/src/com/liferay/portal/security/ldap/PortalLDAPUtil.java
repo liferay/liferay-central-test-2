@@ -71,7 +71,7 @@ import javax.naming.ldap.LdapContext;
 public class PortalLDAPUtil {
 
 	public static void exportToLDAP(Contact contact) throws Exception {
-		String companyId = contact.getCompanyId();
+		long companyId = contact.getCompanyId();
 
 		if (!isAuthEnabled(companyId)) {
 			return;
@@ -114,7 +114,7 @@ public class PortalLDAPUtil {
 	}
 
 	public static void exportToLDAP(User user) throws Exception {
-		String companyId = user.getCompanyId();
+		long companyId = user.getCompanyId();
 
 		if (!isAuthEnabled(companyId)) {
 			return;
@@ -159,7 +159,7 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static LdapContext getContext(String companyId) throws Exception {
+	public static LdapContext getContext(long companyId) throws Exception {
 		Properties env = new Properties();
 
 		env.put(
@@ -199,7 +199,7 @@ public class PortalLDAPUtil {
 		return ctx;
 	}
 
-	public static Properties getGroupMappings(String companyId)
+	public static Properties getGroupMappings(long companyId)
 		throws Exception {
 
 		Properties groupMappings = PropertiesUtil.load(
@@ -210,7 +210,7 @@ public class PortalLDAPUtil {
 		return groupMappings;
 	}
 
-	public static Binding getUser(String companyId, String screenName)
+	public static Binding getUser(long companyId, String screenName)
 		throws Exception {
 
 		LdapContext ctx = getContext(companyId);
@@ -240,9 +240,7 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static Properties getUserMappings(String companyId)
-		throws Exception {
-
+	public static Properties getUserMappings(long companyId) throws Exception {
 		Properties userMappings = PropertiesUtil.load(
 			PrefsPropsUtil.getString(companyId, PropsUtil.LDAP_USER_MAPPINGS));
 
@@ -251,11 +249,11 @@ public class PortalLDAPUtil {
 		return userMappings;
 	}
 
-	public static String getUsersDN(String companyId) throws Exception {
+	public static String getUsersDN(long companyId) throws Exception {
 		return PrefsPropsUtil.getString(companyId, PropsUtil.LDAP_USERS_DN);
 	}
 
-	public static boolean hasUser(String companyId, String screenName)
+	public static boolean hasUser(long companyId, String screenName)
 		throws Exception {
 
 		if (getUser(companyId, screenName) != null) {
@@ -276,7 +274,7 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static void importFromLDAP(String companyId) throws Exception {
+	public static void importFromLDAP(long companyId) throws Exception {
 		if (!isImportEnabled(companyId)) {
 			return;
 		}
@@ -319,7 +317,7 @@ public class PortalLDAPUtil {
 	}
 
 	public static User importFromLDAP(
-			long creatorUserId, String companyId, boolean autoPassword,
+			long creatorUserId, long companyId, boolean autoPassword,
 			String password1, String password2, boolean passwordReset,
 			boolean autoScreenName, String screenName, String emailAddress,
 			Locale locale, String firstName, String middleName, String lastName,
@@ -389,7 +387,7 @@ public class PortalLDAPUtil {
 		return user;
 	}
 
-	public static boolean isAuthEnabled(String companyId) throws Exception {
+	public static boolean isAuthEnabled(long companyId) throws Exception {
 		if (PrefsPropsUtil.getBoolean(companyId, PropsUtil.LDAP_AUTH_ENABLED)) {
 			return true;
 		}
@@ -398,7 +396,7 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static boolean isImportEnabled(String companyId) throws Exception {
+	public static boolean isImportEnabled(long companyId) throws Exception {
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsUtil.LDAP_IMPORT_ENABLED)) {
 
@@ -409,7 +407,7 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static boolean isImportOnStartup(String companyId) throws Exception {
+	public static boolean isImportOnStartup(long companyId) throws Exception {
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsUtil.LDAP_IMPORT_ON_STARTUP)) {
 
@@ -421,7 +419,7 @@ public class PortalLDAPUtil {
 	}
 
 	private static void _importFromLDAP(
-			String companyId, LdapContext ctx, Properties userMappings,
+			long companyId, LdapContext ctx, Properties userMappings,
 			Properties groupMappings, String baseDN, SearchResult result)
 		throws Exception {
 
@@ -492,7 +490,7 @@ public class PortalLDAPUtil {
 	}
 
 	private static void _importToLDAPGroup(
-			String companyId, LdapContext ctx, Properties groupMappings,
+			long companyId, LdapContext ctx, Properties groupMappings,
 			long userId, Attribute attr)
 		throws Exception {
 

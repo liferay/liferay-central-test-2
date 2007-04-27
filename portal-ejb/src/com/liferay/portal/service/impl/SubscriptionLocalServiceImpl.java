@@ -96,14 +96,14 @@ public class SubscriptionLocalServiceImpl
 	}
 
 	public void deleteSubscriptions(
-			String companyId, String className, String classPK)
+			long companyId, String className, String classPK)
 		throws SystemException {
 
 		SubscriptionUtil.removeByC_C_C(companyId, className, classPK);
 	}
 
 	public Subscription getSubscription(
-			String companyId, long userId, String className, String classPK)
+			long companyId, long userId, String className, String classPK)
 		throws PortalException, SystemException {
 
 		return SubscriptionUtil.findByC_U_C_C(
@@ -111,14 +111,14 @@ public class SubscriptionLocalServiceImpl
 	}
 
 	public List getSubscriptions(
-			String companyId, String className, String classPK)
+			long companyId, String className, String classPK)
 		throws PortalException, SystemException {
 
 		return SubscriptionUtil.findByC_C_C(companyId, className, classPK);
 	}
 
 	public boolean isSubscribed(
-			String companyId, long userId, String className, String classPK)
+			long companyId, long userId, String className, String classPK)
 		throws PortalException, SystemException {
 
 		try {

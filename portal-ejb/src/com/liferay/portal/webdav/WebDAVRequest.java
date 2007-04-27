@@ -80,7 +80,7 @@ public class WebDAVRequest {
 		return _groupPath;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
@@ -101,7 +101,7 @@ public class WebDAVRequest {
 	private HttpServletResponse _res;
 	private String _path = StringPool.BLANK;
 	private boolean _groupPath;
-	private String _companyId = StringPool.BLANK;
+	private long _companyId;
 	private long _groupId;
 	private long _userId;
 	private PermissionChecker _permissionChecker;

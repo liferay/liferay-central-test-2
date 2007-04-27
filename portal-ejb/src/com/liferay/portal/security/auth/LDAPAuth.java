@@ -67,8 +67,8 @@ public class LDAPAuth implements Authenticator {
 		"password-compare";
 
 	public int authenticateByEmailAddress(
-			String companyId, String emailAddress, String password,
-			Map headerMap, Map parameterMap)
+			long companyId, String emailAddress, String password, Map headerMap,
+			Map parameterMap)
 		throws AuthException {
 
 		try {
@@ -83,7 +83,7 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	public int authenticateByScreenName(
-			String companyId, String screenName, String password, Map headerMap,
+			long companyId, String screenName, String password, Map headerMap,
 			Map parameterMap)
 		throws AuthException {
 
@@ -99,7 +99,7 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	public int authenticateByUserId(
-			String companyId, long userId, String password, Map headerMap,
+			long companyId, long userId, String password, Map headerMap,
 			Map parameterMap)
 		throws AuthException {
 
@@ -116,8 +116,8 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected int authenticate(
-			String companyId, String emailAddress, String screenName,
-			long userId, String password)
+			long companyId, String emailAddress, String screenName, long userId,
+			String password)
 		throws Exception {
 
 		if (!PortalLDAPUtil.isAuthEnabled(companyId)) {
@@ -191,7 +191,8 @@ public class LDAPAuth implements Authenticator {
 				"@company_id@", "@email_address@", "@screen_name@", "@user_id@"
 			},
 			new String[] {
-				companyId, emailAddress, screenName, String.valueOf(userId)
+				String.valueOf(companyId), emailAddress, screenName,
+				String.valueOf(userId)
 			});
 
 		if (_log.isDebugEnabled()) {
@@ -254,7 +255,7 @@ public class LDAPAuth implements Authenticator {
 
 	protected boolean authenticate(
 			LdapContext ctx, Properties env, Binding binding, String baseDN,
-			Attribute userPassword, String companyId, String emailAddress,
+			Attribute userPassword, long companyId, String emailAddress,
 			String screenName, long userId, String password)
 		throws Exception {
 
@@ -319,7 +320,7 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected int authenticateOmniadmin(
-			String companyId, String emailAddress, long userId)
+			long companyId, String emailAddress, long userId)
 		throws Exception {
 
 		// Only allow omniadmin if Liferay password checking is enabled
@@ -350,7 +351,7 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected int authenticateRequired(
-			String companyId, long userId, String emailAddress, int failureCode)
+			long companyId, long userId, String emailAddress, int failureCode)
 		throws Exception {
 
 		if (PrefsPropsUtil.getBoolean(
@@ -364,7 +365,7 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected void processUser(
-			Attributes attrs, Properties userMappings, String companyId,
+			Attributes attrs, Properties userMappings, long companyId,
 			String emailAddress, String screenName, long userId,
 			String password)
 		throws Exception {

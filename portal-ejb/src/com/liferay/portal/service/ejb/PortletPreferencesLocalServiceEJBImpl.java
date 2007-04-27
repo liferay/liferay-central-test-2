@@ -88,7 +88,7 @@ public class PortletPreferencesLocalServiceEJBImpl
 	}
 
 	public javax.portlet.PortletPreferences getDefaultPreferences(
-		java.lang.String companyId, java.lang.String portletId)
+		long companyId, java.lang.String portletId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PortletPreferencesLocalServiceFactory.getTxImpl()
@@ -130,8 +130,7 @@ public class PortletPreferencesLocalServiceEJBImpl
 													.getPortletPreferencesByPortletId(portletId);
 	}
 
-	public javax.portlet.PortletPreferences getPreferences(
-		java.lang.String companyId,
+	public javax.portlet.PortletPreferences getPreferences(long companyId,
 		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -222,7 +222,7 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem getItem(
-		java.lang.String companyId, java.lang.String sku)
+		long companyId, java.lang.String sku)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return ShoppingItemLocalServiceFactory.getTxImpl().getItem(companyId,

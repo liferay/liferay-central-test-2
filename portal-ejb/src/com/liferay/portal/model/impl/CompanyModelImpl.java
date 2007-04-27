@@ -52,7 +52,9 @@ import java.sql.Types;
 public class CompanyModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Company";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
+			{ "accountId", new Integer(Types.BIGINT) },
+			{ "webId", new Integer(Types.VARCHAR) },
 			{ "key_", new Integer(Types.CLOB) },
 			{ "portalURL", new Integer(Types.VARCHAR) },
 			{ "homeURL", new Integer(Types.VARCHAR) },
@@ -60,8 +62,8 @@ public class CompanyModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Company.companyId"),
+	public static boolean XSS_ALLOW_WEBID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Company.webId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_KEY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company.key"),
@@ -81,28 +83,47 @@ public class CompanyModelImpl extends BaseModelImpl {
 	public CompanyModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _companyId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setCompanyId(pk);
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
+			_companyId = companyId;
+		}
+	}
+
+	public long getAccountId() {
+		return _accountId;
+	}
+
+	public void setAccountId(long accountId) {
+		if (accountId != _accountId) {
+			_accountId = accountId;
+		}
+	}
+
+	public String getWebId() {
+		return GetterUtil.getString(_webId);
+	}
+
+	public void setWebId(String webId) {
+		if (((webId == null) && (_webId != null)) ||
+				((webId != null) && (_webId == null)) ||
+				((webId != null) && (_webId != null) && !webId.equals(_webId))) {
+			if (!XSS_ALLOW_WEBID) {
+				webId = XSSUtil.strip(webId);
 			}
 
-			_companyId = companyId;
+			_webId = webId;
 		}
 	}
 
@@ -174,6 +195,8 @@ public class CompanyModelImpl extends BaseModelImpl {
 	public Object clone() {
 		CompanyImpl clone = new CompanyImpl();
 		clone.setCompanyId(getCompanyId());
+		clone.setAccountId(getAccountId());
+		clone.setWebId(getWebId());
 		clone.setKey(getKey());
 		clone.setPortalURL(getPortalURL());
 		clone.setHomeURL(getHomeURL());
@@ -188,9 +211,17 @@ public class CompanyModelImpl extends BaseModelImpl {
 		}
 
 		CompanyImpl company = (CompanyImpl)obj;
-		String pk = company.getPrimaryKey();
+		long pk = company.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -207,9 +238,9 @@ public class CompanyModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = company.getPrimaryKey();
+		long pk = company.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -218,10 +249,12 @@ public class CompanyModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _companyId;
+	private long _companyId;
+	private long _accountId;
+	private String _webId;
 	private String _key;
 	private String _portalURL;
 	private String _homeURL;

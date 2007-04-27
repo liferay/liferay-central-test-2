@@ -60,7 +60,7 @@ import javax.portlet.PortletPreferences;
 public class JournalContentSearchLocalServiceImpl
 	extends JournalContentSearchLocalServiceBaseImpl {
 
-	public void checkContentSearches(String companyId)
+	public void checkContentSearches(long companyId)
 		throws PortalException, SystemException {
 
 		List layouts = new ArrayList();
@@ -129,7 +129,7 @@ public class JournalContentSearchLocalServiceImpl
 	}
 
 	public void deleteArticleContentSearches(
-			String companyId, long groupId, String articleId)
+			long companyId, long groupId, String articleId)
 		throws SystemException {
 
 		JournalContentSearchUtil.removeByC_G_A(companyId, groupId, articleId);
@@ -152,7 +152,7 @@ public class JournalContentSearchLocalServiceImpl
 	}
 
 	public List getArticleContentSearches(
-			String companyId, long groupId, String articleId)
+			long companyId, long groupId, String articleId)
 		throws SystemException {
 
 		return JournalContentSearchUtil.findByC_G_A(
@@ -186,7 +186,7 @@ public class JournalContentSearchLocalServiceImpl
 	}
 
 	public JournalContentSearch updateContentSearch(
-			String portletId, String layoutId, String ownerId, String companyId,
+			String portletId, String layoutId, String ownerId, long companyId,
 			long groupId, String articleId)
 		throws PortalException, SystemException {
 
@@ -211,7 +211,7 @@ public class JournalContentSearchLocalServiceImpl
 	}
 
 	public List updateContentSearch(
-			String portletId, String layoutId, String ownerId, String companyId,
+			String portletId, String layoutId, String ownerId, long companyId,
 			long groupId, String[] articleIds)
 		throws PortalException, SystemException {
 

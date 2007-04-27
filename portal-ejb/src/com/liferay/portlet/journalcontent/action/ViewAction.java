@@ -57,8 +57,7 @@ public class ViewAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String companyId = themeDisplay.getCompanyId();
-
+		long companyId = themeDisplay.getCompanyId();
 		long groupId = GetterUtil.getLong(
 			prefs.getValue("group-id", StringPool.BLANK));
 		String[] articleIds = prefs.getValues("article-id", new String[0]);

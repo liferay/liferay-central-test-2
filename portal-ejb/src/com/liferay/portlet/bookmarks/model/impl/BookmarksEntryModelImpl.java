@@ -56,7 +56,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "BookmarksEntry";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "entryId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
@@ -69,9 +69,6 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.companyId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -105,19 +102,12 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -304,7 +294,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 	}
 
 	private long _entryId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private Date _createDate;
 	private Date _modifiedDate;

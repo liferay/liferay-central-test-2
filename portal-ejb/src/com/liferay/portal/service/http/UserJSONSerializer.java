@@ -53,15 +53,7 @@ public class UserJSONSerializer {
 	public static JSONObject toJSONObject(User model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("userId", model.getUserId());
-
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
+		jsonObj.put("companyId", model.getCompanyId());
 
 		Date createDate = model.getCreateDate();
 

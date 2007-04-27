@@ -70,7 +70,7 @@ public class PluginSettingLocalServiceImpl
 	}
 
 	public PluginSetting getPluginSetting(
-			String companyId, String pluginId, String pluginType)
+			long companyId, String pluginId, String pluginType)
 		throws PortalException, SystemException {
 
 		PluginSetting pluginSetting = PluginSettingUtil.fetchByC_I_T(
@@ -129,7 +129,7 @@ public class PluginSettingLocalServiceImpl
 	}
 
 	public PluginSetting updatePluginSetting(
-			String companyId, String pluginId, String pluginType, String roles,
+			long companyId, String pluginId, String pluginType, String roles,
 			boolean active)
 		throws PortalException, SystemException {
 

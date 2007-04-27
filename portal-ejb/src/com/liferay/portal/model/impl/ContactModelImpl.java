@@ -56,12 +56,12 @@ public class ContactModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Contact_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "contactId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "accountId", new Integer(Types.VARCHAR) },
+			{ "accountId", new Integer(Types.BIGINT) },
 			{ "parentContactId", new Integer(Types.BIGINT) },
 			{ "firstName", new Integer(Types.VARCHAR) },
 			{ "middleName", new Integer(Types.VARCHAR) },
@@ -85,14 +85,8 @@ public class ContactModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.companyId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ACCOUNTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.accountId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_FIRSTNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.firstName"),
@@ -163,19 +157,12 @@ public class ContactModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -233,19 +220,12 @@ public class ContactModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getAccountId() {
-		return GetterUtil.getString(_accountId);
+	public long getAccountId() {
+		return _accountId;
 	}
 
-	public void setAccountId(String accountId) {
-		if (((accountId == null) && (_accountId != null)) ||
-				((accountId != null) && (_accountId == null)) ||
-				((accountId != null) && (_accountId != null) &&
-				!accountId.equals(_accountId))) {
-			if (!XSS_ALLOW_ACCOUNTID) {
-				accountId = XSSUtil.strip(accountId);
-			}
-
+	public void setAccountId(long accountId) {
+		if (accountId != _accountId) {
 			_accountId = accountId;
 		}
 	}
@@ -638,12 +618,12 @@ public class ContactModelImpl extends BaseModelImpl {
 	}
 
 	private long _contactId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _accountId;
+	private long _accountId;
 	private long _parentContactId;
 	private String _firstName;
 	private String _middleName;

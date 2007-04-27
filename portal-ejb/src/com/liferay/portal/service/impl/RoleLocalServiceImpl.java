@@ -59,14 +59,14 @@ import java.util.Map;
  */
 public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
-	public Role addRole(long userId, String companyId, String name, int type)
+	public Role addRole(long userId, long companyId, String name, int type)
 		throws PortalException, SystemException {
 
 		return addRole(userId, companyId, name, type, null, null);
 	}
 
 	public Role addRole(
-			long userId, String companyId, String name, int type,
+			long userId, long companyId, String name, int type,
 			String className, String classPK)
 		throws PortalException, SystemException {
 
@@ -98,7 +98,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return role;
 	}
 
-	public void checkSystemRoles(String companyId)
+	public void checkSystemRoles(long companyId)
 		throws PortalException, SystemException {
 
 		// Regular roles
@@ -186,7 +186,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		RoleUtil.remove(roleId);
 	}
 
-	public Role getGroupRole(String companyId, long groupId)
+	public Role getGroupRole(long companyId, long groupId)
 		throws PortalException, SystemException {
 
 		return RoleUtil.findByC_C_C(
@@ -200,7 +200,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public Map getResourceRoles(
-			String companyId, String name, String scope, String primKey)
+			long companyId, String name, String scope, String primKey)
 		throws SystemException {
 
 		return RoleFinder.findByC_N_S_P(companyId, name, scope, primKey);
@@ -210,7 +210,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return RoleUtil.findByPrimaryKey(roleId);
 	}
 
-	public Role getRole(String companyId, String name)
+	public Role getRole(long companyId, String name)
 		throws PortalException, SystemException {
 
 		return RoleFinder.findByC_N(companyId, name);
@@ -246,7 +246,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return UserUtil.getRoles(userId);
 	}
 
-	public boolean hasUserRole(long userId, String companyId, String name)
+	public boolean hasUserRole(long userId, long companyId, String name)
 		throws PortalException, SystemException {
 
 		Role role = RoleFinder.findByC_N(companyId, name);
@@ -254,7 +254,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return UserUtil.containsRole(userId, role.getRoleId());
 	}
 
-	public boolean hasUserRoles(long userId, String companyId, String[] names)
+	public boolean hasUserRoles(long userId, long companyId, String[] names)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < names.length; i++) {
@@ -267,7 +267,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public List search(
-			String companyId, String name, String description, Integer type,
+			long companyId, String name, String description, Integer type,
 			int begin, int end)
 		throws SystemException {
 
@@ -276,7 +276,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public int searchCount(
-			String companyId, String name, String description, Integer type)
+			long companyId, String name, String description, Integer type)
 		throws SystemException {
 
 		return RoleFinder.countByC_N_D_T(companyId, name, description, type);
@@ -306,7 +306,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return role;
 	}
 
-	protected void validate(String roleId, String companyId, String name)
+	protected void validate(String roleId, long companyId, String name)
 		throws PortalException, SystemException {
 
 		if ((Validator.isNull(name)) || (Validator.isNumber(name)) ||

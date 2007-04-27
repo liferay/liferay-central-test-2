@@ -38,7 +38,7 @@ import com.liferay.portal.service.AccountLocalServiceUtil;
 public class AccountPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String accountId,
+			PermissionChecker permissionChecker, long accountId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -58,7 +58,7 @@ public class AccountPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String accountId,
+			PermissionChecker permissionChecker, long accountId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -76,8 +76,8 @@ public class AccountPermission {
 		long groupId = 0;
 
 		return permissionChecker.hasPermission(
-			groupId, Account.class.getName(),
-			account.getPrimaryKey().toString(), actionId);
+			groupId, Account.class.getName(), account.getPrimaryKey(),
+			actionId);
 	}
 
 }

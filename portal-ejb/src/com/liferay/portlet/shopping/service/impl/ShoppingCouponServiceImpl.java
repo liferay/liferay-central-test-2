@@ -86,7 +86,7 @@ public class ShoppingCouponServiceImpl
 	}
 
 	public List search(
-			String couponId, String plid, String companyId, boolean active,
+			String couponId, String plid, long companyId, boolean active,
 			String discountType, boolean andOperator, int begin, int end)
 		throws PortalException, SystemException {
 

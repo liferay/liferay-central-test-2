@@ -121,12 +121,12 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserSoap addUser(
-		java.lang.String companyId, boolean autoPassword,
-		java.lang.String password1, java.lang.String password2,
-		boolean passwordReset, boolean autoScreenName,
-		java.lang.String screenName, java.lang.String emailAddress,
-		String locale, java.lang.String firstName, java.lang.String middleName,
+	public static com.liferay.portal.model.UserSoap addUser(long companyId,
+		boolean autoPassword, java.lang.String password1,
+		java.lang.String password2, boolean passwordReset,
+		boolean autoScreenName, java.lang.String screenName,
+		java.lang.String emailAddress, String locale,
+		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, java.lang.String organizationId,
@@ -197,7 +197,7 @@ public class UserServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserSoap getUserByEmailAddress(
-		java.lang.String companyId, java.lang.String emailAddress)
+		long companyId, java.lang.String emailAddress)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.getUserByEmailAddress(companyId,
@@ -225,8 +225,7 @@ public class UserServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserSoap getUserByScreenName(
-		java.lang.String companyId, java.lang.String screenName)
-		throws RemoteException {
+		long companyId, java.lang.String screenName) throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.getUserByScreenName(companyId,
 					screenName);

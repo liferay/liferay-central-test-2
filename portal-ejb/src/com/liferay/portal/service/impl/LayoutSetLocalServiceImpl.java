@@ -62,7 +62,7 @@ import javax.imageio.ImageIO;
  */
 public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
-	public LayoutSet addLayoutSet(String ownerId, String companyId)
+	public LayoutSet addLayoutSet(String ownerId, long companyId)
 		throws PortalException, SystemException {
 
 		long groupId = LayoutImpl.getGroupId(ownerId);
@@ -121,7 +121,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		return LayoutSetUtil.findByPrimaryKey(ownerId);
 	}
 
-	public LayoutSet getLayoutSet(String companyId, String virtualHost)
+	public LayoutSet getLayoutSet(long companyId, String virtualHost)
 		throws PortalException, SystemException {
 
 		return LayoutSetFinder.findByC_V(companyId, virtualHost);

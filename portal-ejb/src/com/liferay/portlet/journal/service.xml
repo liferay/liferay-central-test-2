@@ -7,7 +7,7 @@
 
 		<!-- PK fields -->
 
-		<column name="companyId" type="String" primary="true" />
+		<column name="companyId" type="long" primary="true" />
 		<column name="groupId" type="long" primary="true" />
 		<column name="articleId" type="String" primary="true" />
 		<column name="version" type="double" primary="true" />
@@ -90,7 +90,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="groupId" type="long" />
 
 		<!-- Finder methods -->
@@ -120,7 +120,7 @@
 
 		<!-- PK fields -->
 
-		<column name="companyId" type="String" primary="true" />
+		<column name="companyId" type="long" primary="true" />
 		<column name="groupId" type="long" primary="true" />
 		<column name="structureId" type="String" primary="true" />
 
@@ -161,7 +161,7 @@
 
 		<!-- PK fields -->
 
-		<column name="companyId" type="String" primary="true" />
+		<column name="companyId" type="long" primary="true" />
 		<column name="groupId" type="long" primary="true" />
 		<column name="templateId" type="String" primary="true" />
 

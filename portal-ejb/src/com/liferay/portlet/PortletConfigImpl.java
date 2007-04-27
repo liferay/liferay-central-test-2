@@ -136,11 +136,11 @@ public class PortletConfigImpl implements PortletConfig {
 					_resourceBundle.equals(
 						StrutsResourceBundle.class.getName())) {
 
-					String companyId =
-						(String)_portletCtx.getAttribute(WebKeys.COMPANY_ID);
+					Long companyIdObj =
+						(Long)_portletCtx.getAttribute(WebKeys.COMPANY_ID);
 
 					bundle = StrutsResourceBundle.getBundle(
-						_portletName, companyId, locale);
+						_portletName, companyIdObj.longValue(), locale);
 				}
 				else {
 					PortletContextWrapper pcw =

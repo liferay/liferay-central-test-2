@@ -344,7 +344,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_T(String companyId, String templateId)
+	public List findByC_T(long companyId, String templateId)
 		throws SystemException {
 		Session session = null;
 
@@ -354,14 +354,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (templateId == null) {
@@ -379,10 +372,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (templateId != null) {
 				q.setString(queryPos++, templateId);
@@ -398,12 +388,12 @@ public class JournalTemplatePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_T(String companyId, String templateId, int begin,
-		int end) throws SystemException {
+	public List findByC_T(long companyId, String templateId, int begin, int end)
+		throws SystemException {
 		return findByC_T(companyId, templateId, begin, end, null);
 	}
 
-	public List findByC_T(String companyId, String templateId, int begin,
+	public List findByC_T(long companyId, String templateId, int begin,
 		int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -413,14 +403,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (templateId == null) {
@@ -445,10 +428,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (templateId != null) {
 				q.setString(queryPos++, templateId);
@@ -464,7 +444,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 		}
 	}
 
-	public JournalTemplate findByC_T_First(String companyId, String templateId,
+	public JournalTemplate findByC_T_First(long companyId, String templateId,
 		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
 		List list = findByC_T(companyId, templateId, 0, 1, obc);
 
@@ -485,7 +465,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 		}
 	}
 
-	public JournalTemplate findByC_T_Last(String companyId, String templateId,
+	public JournalTemplate findByC_T_Last(long companyId, String templateId,
 		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
 		int count = countByC_T(companyId, templateId);
 		List list = findByC_T(companyId, templateId, count - 1, count, obc);
@@ -508,9 +488,8 @@ public class JournalTemplatePersistence extends BasePersistence {
 	}
 
 	public JournalTemplate[] findByC_T_PrevAndNext(
-		JournalTemplatePK journalTemplatePK, String companyId,
-		String templateId, OrderByComparator obc)
-		throws NoSuchTemplateException, SystemException {
+		JournalTemplatePK journalTemplatePK, long companyId, String templateId,
+		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
 		JournalTemplate journalTemplate = findByPrimaryKey(journalTemplatePK);
 		int count = countByC_T(companyId, templateId);
 		Session session = null;
@@ -521,14 +500,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (templateId == null) {
@@ -553,10 +525,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (templateId != null) {
 				q.setString(queryPos++, templateId);
@@ -579,7 +548,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_G_S(String companyId, long groupId, String structureId)
+	public List findByC_G_S(long companyId, long groupId, String structureId)
 		throws SystemException {
 		Session session = null;
 
@@ -589,14 +558,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("groupId = ?");
 			query.append(" AND ");
@@ -616,11 +578,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, groupId);
 
 			if (structureId != null) {
@@ -637,12 +595,12 @@ public class JournalTemplatePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_G_S(String companyId, long groupId, String structureId,
+	public List findByC_G_S(long companyId, long groupId, String structureId,
 		int begin, int end) throws SystemException {
 		return findByC_G_S(companyId, groupId, structureId, begin, end, null);
 	}
 
-	public List findByC_G_S(String companyId, long groupId, String structureId,
+	public List findByC_G_S(long companyId, long groupId, String structureId,
 		int begin, int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -652,14 +610,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("groupId = ?");
 			query.append(" AND ");
@@ -686,11 +637,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, groupId);
 
 			if (structureId != null) {
@@ -707,7 +654,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 		}
 	}
 
-	public JournalTemplate findByC_G_S_First(String companyId, long groupId,
+	public JournalTemplate findByC_G_S_First(long companyId, long groupId,
 		String structureId, OrderByComparator obc)
 		throws NoSuchTemplateException, SystemException {
 		List list = findByC_G_S(companyId, groupId, structureId, 0, 1, obc);
@@ -732,7 +679,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 		}
 	}
 
-	public JournalTemplate findByC_G_S_Last(String companyId, long groupId,
+	public JournalTemplate findByC_G_S_Last(long companyId, long groupId,
 		String structureId, OrderByComparator obc)
 		throws NoSuchTemplateException, SystemException {
 		int count = countByC_G_S(companyId, groupId, structureId);
@@ -760,7 +707,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 	}
 
 	public JournalTemplate[] findByC_G_S_PrevAndNext(
-		JournalTemplatePK journalTemplatePK, String companyId, long groupId,
+		JournalTemplatePK journalTemplatePK, long companyId, long groupId,
 		String structureId, OrderByComparator obc)
 		throws NoSuchTemplateException, SystemException {
 		JournalTemplate journalTemplate = findByPrimaryKey(journalTemplatePK);
@@ -773,14 +720,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("groupId = ?");
 			query.append(" AND ");
@@ -807,11 +747,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, groupId);
 
 			if (structureId != null) {
@@ -924,7 +860,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_T(String companyId, String templateId)
+	public void removeByC_T(long companyId, String templateId)
 		throws SystemException {
 		Iterator itr = findByC_T(companyId, templateId).iterator();
 
@@ -934,7 +870,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_G_S(String companyId, long groupId, String structureId)
+	public void removeByC_G_S(long companyId, long groupId, String structureId)
 		throws SystemException {
 		Iterator itr = findByC_G_S(companyId, groupId, structureId).iterator();
 
@@ -991,7 +927,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_T(String companyId, String templateId)
+	public int countByC_T(long companyId, String templateId)
 		throws SystemException {
 		Session session = null;
 
@@ -1002,14 +938,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (templateId == null) {
@@ -1025,10 +954,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (templateId != null) {
 				q.setString(queryPos++, templateId);
@@ -1054,7 +980,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_G_S(String companyId, long groupId, String structureId)
+	public int countByC_G_S(long companyId, long groupId, String structureId)
 		throws SystemException {
 		Session session = null;
 
@@ -1065,14 +991,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("groupId = ?");
 			query.append(" AND ");
@@ -1090,11 +1009,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, groupId);
 
 			if (structureId != null) {

@@ -72,7 +72,7 @@ public class LuceneUtil {
 	public static final Pattern TERM_END_PATTERN =
 		Pattern.compile("(\\w{4,}?)\\b");
 
-	public static void acquireLock(String companyId) {
+	public static void acquireLock(long companyId) {
 		try {
 			_instance._sharedWriter.acquireLock(companyId, true);
 		}
@@ -155,11 +155,11 @@ public class LuceneUtil {
 		booleanQuery.add(termQuery, BooleanClause.Occur.MUST);
 	}
 
-	public static void delete(String companyId) {
+	public static void delete(long companyId) {
 		_instance._delete(companyId);
 	}
 
-	public static void deleteDocuments(String companyId, Term term)
+	public static void deleteDocuments(long companyId, Term term)
 		throws IOException {
 
 		try {
@@ -174,35 +174,35 @@ public class LuceneUtil {
 		return _instance._getAnalyzer();
 	}
 
-	public static Directory getLuceneDir(String companyId) {
+	public static Directory getLuceneDir(long companyId) {
 		return _instance._getLuceneDir(companyId);
 	}
 
-	public static IndexReader getReader(String companyId) throws IOException {
+	public static IndexReader getReader(long companyId) throws IOException {
 		return IndexReader.open(getLuceneDir(companyId));
 	}
 
-	public static IndexSearcher getSearcher(String companyId)
+	public static IndexSearcher getSearcher(long companyId)
 		throws IOException {
 
 		return new IndexSearcher(getLuceneDir(companyId));
 	}
 
-	public static IndexWriter getWriter(String companyId) throws IOException {
+	public static IndexWriter getWriter(long companyId) throws IOException {
 		return getWriter(companyId, false);
 	}
 
-	public static IndexWriter getWriter(String companyId, boolean create)
+	public static IndexWriter getWriter(long companyId, boolean create)
 		throws IOException {
 
 		return _instance._sharedWriter.getWriter(companyId, create);
 	}
 
-	public static void releaseLock(String companyId) {
+	public static void releaseLock(long companyId) {
 		_instance._sharedWriter.releaseLock(companyId);
 	}
 
-	public static void write(String companyId) throws IOException {
+	public static void write(long companyId) throws IOException {
 		_instance._sharedWriter.write(companyId);
 	}
 
@@ -274,7 +274,7 @@ public class LuceneUtil {
 		}
 	}
 
-	public void _delete(String companyId) {
+	public void _delete(long companyId) {
 		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
 				_LUCENE_STORE_TYPE_JDBC)) {
 
@@ -336,7 +336,7 @@ public class LuceneUtil {
 		}
 	}
 
-	public Directory _getLuceneDir(String companyId) {
+	public Directory _getLuceneDir(long companyId) {
 		Directory directory = null;
 
 		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
@@ -401,9 +401,8 @@ public class LuceneUtil {
 		return directory;
 	}
 
-	private String _getTableName(String companyId) {
-		return _LUCENE_TABLE_PREFIX + StringUtil.replace(
-			companyId, StringPool.PERIOD, StringPool.UNDERLINE);
+	private String _getTableName(long companyId) {
+		return _LUCENE_TABLE_PREFIX + companyId;
 	}
 
 	//private static final String _LUCENE_STORE_TYPE_FILE = "file";

@@ -151,40 +151,38 @@ public class PluginSettingUtil {
 		return getPersistence().fetchByPrimaryKey(pluginSettingId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId)
+	public static java.util.List findByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.PluginSetting findByCompanyId_First(
-		java.lang.String companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPluginSettingException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.PluginSetting findByCompanyId_Last(
-		java.lang.String companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPluginSettingException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.PluginSetting[] findByCompanyId_PrevAndNext(
-		long pluginSettingId, java.lang.String companyId,
+		long pluginSettingId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPluginSettingException {
@@ -193,16 +191,15 @@ public class PluginSettingUtil {
 	}
 
 	public static com.liferay.portal.model.PluginSetting findByC_I_T(
-		java.lang.String companyId, java.lang.String pluginId,
-		java.lang.String pluginType)
+		long companyId, java.lang.String pluginId, java.lang.String pluginType)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPluginSettingException {
 		return getPersistence().findByC_I_T(companyId, pluginId, pluginType);
 	}
 
 	public static com.liferay.portal.model.PluginSetting fetchByC_I_T(
-		java.lang.String companyId, java.lang.String pluginId,
-		java.lang.String pluginType) throws com.liferay.portal.SystemException {
+		long companyId, java.lang.String pluginId, java.lang.String pluginType)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_I_T(companyId, pluginId, pluginType);
 	}
 
@@ -235,13 +232,13 @@ public class PluginSettingUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByCompanyId(java.lang.String companyId)
+	public static void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
-	public static void removeByC_I_T(java.lang.String companyId,
-		java.lang.String pluginId, java.lang.String pluginType)
+	public static void removeByC_I_T(long companyId, java.lang.String pluginId,
+		java.lang.String pluginType)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPluginSettingException {
 		getPersistence().removeByC_I_T(companyId, pluginId, pluginType);
@@ -251,14 +248,13 @@ public class PluginSettingUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByCompanyId(java.lang.String companyId)
+	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
-	public static int countByC_I_T(java.lang.String companyId,
-		java.lang.String pluginId, java.lang.String pluginType)
-		throws com.liferay.portal.SystemException {
+	public static int countByC_I_T(long companyId, java.lang.String pluginId,
+		java.lang.String pluginType) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_I_T(companyId, pluginId, pluginType);
 	}
 

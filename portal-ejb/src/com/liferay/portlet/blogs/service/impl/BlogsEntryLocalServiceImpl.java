@@ -390,7 +390,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public void reIndex(String[] ids) throws SystemException {
 		try {
-			String companyId = ids[0];
+			long companyId = GetterUtil.getLong(ids[0]);
 
 			Iterator itr = BlogsEntryUtil.findByCompanyId(companyId).iterator();
 
@@ -423,7 +423,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			String companyId, long groupId, long userId, String[] categoryIds,
+			long companyId, long groupId, long userId, String[] categoryIds,
 			String keywords)
 		throws SystemException {
 
@@ -536,7 +536,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
-	protected long getCategoryId(String companyId, long categoryId)
+	protected long getCategoryId(long companyId, long categoryId)
 		throws PortalException, SystemException {
 
 		if (categoryId != BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
@@ -547,7 +547,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				BlogsCategory category =
 					BlogsCategoryUtil.findByPrimaryKey(categoryId);
 
-				if (!companyId.equals(category.getCompanyId())) {
+				if (companyId != category.getCompanyId()) {
 					categoryId = BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
 				}
 			}

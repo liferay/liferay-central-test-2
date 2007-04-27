@@ -184,7 +184,7 @@ public class UpdateLayoutAction extends Action {
 				// Pass in the portlet id because the portlet id may be the
 				// instance id. Namespace the request if necessary.
 
-				String companyId = PortalUtil.getCompanyId(req);
+				long companyId = PortalUtil.getCompanyId(req);
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					companyId, portletId);

@@ -49,8 +49,7 @@ public interface JournalCreationStrategy {
 	 *				JournalArticle, JournalStructure or JournalTemplate
 	 * @return		the author's user id, or 0 to use the original author
 	 */
-	public long getAuthorUserId(
-			String companyId, long groupId, Object journalObj)
+	public long getAuthorUserId(long companyId, long groupId, Object journalObj)
 		throws Exception;
 
 	/**
@@ -65,7 +64,7 @@ public interface JournalCreationStrategy {
 	 *				<code>getAuthorUserId()</code> does not return null
 	 */
 	public String getAuthorUserName(
-			String companyId, long groupId, Object journalObj)
+			long companyId, long groupId, Object journalObj)
 		throws Exception;
 
 	/**
@@ -80,7 +79,7 @@ public interface JournalCreationStrategy {
 	 *				approved
 	 */
 	public long getApprovalUserId(
-			String companyId, long groupId, Object journalObj)
+			long companyId, long groupId, Object journalObj)
 		throws Exception;
 
 	/**
@@ -95,7 +94,7 @@ public interface JournalCreationStrategy {
 	 *				<code>getApprovalUserId()</code> does not return null
 	 */
 	public String getApprovalUserName(
-			String companyId, long groupId, Object journalObj)
+			long companyId, long groupId, Object journalObj)
 		throws Exception;
 
 	/**
@@ -112,7 +111,7 @@ public interface JournalCreationStrategy {
 	 *				the content should be added unchanged
 	 */
 	public String getTransformedContent(
-			String companyId, long groupId, JournalArticle newArticle)
+			long companyId, long groupId, JournalArticle newArticle)
 		throws Exception;
 
 	/**
@@ -127,7 +126,7 @@ public interface JournalCreationStrategy {
 	 *				specified journalObj
 	 */
 	public boolean addCommunityPermissions(
-			String companyId, long groupId, Object journalObj)
+			long companyId, long groupId, Object journalObj)
 		throws Exception;
 
 	/**
@@ -142,7 +141,7 @@ public interface JournalCreationStrategy {
 	 *				specified journalObj
 	 */
 	public boolean addGuestPermissions(
-			String companyId, long groupId, Object journalObj)
+			long companyId, long groupId, Object journalObj)
 		throws Exception;
 
 }

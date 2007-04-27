@@ -133,8 +133,7 @@ public class TagsPropertyServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsPropertySoap[] getPropertyValues(
-		java.lang.String companyId, java.lang.String key)
-		throws RemoteException {
+		long companyId, java.lang.String key) throws RemoteException {
 		try {
 			java.util.List returnValue = TagsPropertyServiceUtil.getPropertyValues(companyId,
 					key);

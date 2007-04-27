@@ -39,8 +39,8 @@ import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 public class IGImagePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String companyId,
-			String imageId, String actionId)
+			PermissionChecker permissionChecker, long companyId, String imageId,
+			String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, companyId, imageId, actionId)) {
@@ -58,8 +58,8 @@ public class IGImagePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String companyId,
-			String imageId, String actionId)
+			PermissionChecker permissionChecker, long companyId, String imageId,
+			String actionId)
 		throws PortalException, SystemException {
 
 		IGImage image = IGImageLocalServiceUtil.getImage(companyId, imageId);

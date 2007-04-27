@@ -60,14 +60,7 @@ public class OrganizationJSONSerializer {
 			jsonObj.put("organizationId", organizationId.toString());
 		}
 
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
+		jsonObj.put("companyId", model.getCompanyId());
 
 		String parentOrganizationId = model.getParentOrganizationId();
 

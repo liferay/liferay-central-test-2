@@ -228,7 +228,7 @@ public class SCProductVersionLocalServiceImpl
 	}
 
 	protected SCProductEntry getProductEntry(
-			String companyId, long productEntryId)
+			long companyId, long productEntryId)
 		throws PortalException, SystemException {
 
 		// Ensure product entry exists and belongs to the proper company
@@ -236,7 +236,7 @@ public class SCProductVersionLocalServiceImpl
 		SCProductEntry productEntry =
 			SCProductEntryUtil.findByPrimaryKey(productEntryId);
 
-		if (!companyId.equals(productEntry.getCompanyId())) {
+		if (companyId != productEntry.getCompanyId()) {
 			throw new NoSuchProductEntryException();
 		}
 

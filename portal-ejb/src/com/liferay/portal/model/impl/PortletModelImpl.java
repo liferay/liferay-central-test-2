@@ -54,7 +54,7 @@ public class PortletModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Portlet";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "portletId", new Integer(Types.VARCHAR) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "roles", new Integer(Types.VARCHAR) },
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
@@ -62,9 +62,6 @@ public class PortletModelImpl extends BaseModelImpl {
 				"xss.allow.com.liferay.portal.model.Portlet"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_PORTLETID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Portlet.portletId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Portlet.companyId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ROLES = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Portlet.roles"),
@@ -101,19 +98,12 @@ public class PortletModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -198,7 +188,7 @@ public class PortletModelImpl extends BaseModelImpl {
 	}
 
 	private String _portletId;
-	private String _companyId;
+	private long _companyId;
 	private String _roles;
 	private boolean _active;
 }

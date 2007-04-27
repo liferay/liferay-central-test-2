@@ -26,7 +26,7 @@
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="addUser" qname="operNS:addUser" returnQName="addUserReturn" returnType="rtns:UserSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="autoPassword" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password1" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password2" type="tns:string"></parameter>
@@ -63,14 +63,14 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getUserByEmailAddress" qname="operNS:getUserByEmailAddress" returnQName="getUserByEmailAddressReturn" returnType="rtns:UserSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="emailAddress" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getUserById" qname="operNS:getUserById" returnQName="getUserByIdReturn" returnType="rtns:UserSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getUserByScreenName" qname="operNS:getUserByScreenName" returnQName="getUserByScreenNameReturn" returnType="rtns:UserSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="screenName" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="hasGroupUser" qname="operNS:hasGroupUser" returnQName="hasGroupUserReturn" returnType="rtns:boolean" soapAction="">

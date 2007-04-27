@@ -150,14 +150,14 @@ public class TagsEntryUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry findByC_N(
-		java.lang.String companyId, java.lang.String name)
+		long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.tags.NoSuchEntryException {
 		return getPersistence().findByC_N(companyId, name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry fetchByC_N(
-		java.lang.String companyId, java.lang.String name)
+		long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_N(companyId, name);
 	}
@@ -191,8 +191,7 @@ public class TagsEntryUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByC_N(java.lang.String companyId,
-		java.lang.String name)
+	public static void removeByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.tags.NoSuchEntryException {
 		getPersistence().removeByC_N(companyId, name);
@@ -202,8 +201,8 @@ public class TagsEntryUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByC_N(java.lang.String companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static int countByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_N(companyId, name);
 	}
 

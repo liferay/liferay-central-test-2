@@ -41,7 +41,7 @@ public class PropsUtil_IW {
 		return PropsUtil.get(key);
 	}
 
-	public java.lang.String get(java.lang.String companyId, java.lang.String key) {
+	public java.lang.String get(long companyId, java.lang.String key) {
 		return PropsUtil.get(companyId, key);
 	}
 

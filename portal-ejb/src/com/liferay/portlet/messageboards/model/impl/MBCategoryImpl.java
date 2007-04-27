@@ -45,7 +45,7 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 	}
 
 	public boolean isDiscussion() {
-		return Validator.equals(getCategoryId(), CompanyImpl.SYSTEM);
+		return Validator.equals(getCategoryId(), CompanyImpl.SYSTEM_STRING);
 	}
 
 }

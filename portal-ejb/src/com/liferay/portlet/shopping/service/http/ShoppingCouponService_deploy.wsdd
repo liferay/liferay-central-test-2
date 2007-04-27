@@ -12,7 +12,7 @@
 		<operation xmlns:operNS="urn:http.service.shopping.portlet.liferay.com" xmlns:rtns="urn:http.service.shopping.portlet.liferay.com" xmlns:tns2="http://model.shopping.portlet.liferay.com" name="search" qname="operNS:search" returnQName="searchReturn" returnType="rtns:ArrayOf_tns2_ShoppingCouponSoap" returnItemType="tns2:ShoppingCouponSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="couponId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="discountType" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="andOperator" type="tns:boolean"></parameter>

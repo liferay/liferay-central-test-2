@@ -201,10 +201,10 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 		MBCategoryLocalServiceFactory.getTxImpl().reIndex(ids);
 	}
 
-	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, long groupId,
-		java.lang.String[] categoryIds, java.lang.String threadId,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, java.lang.String[] categoryIds,
+		java.lang.String threadId, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
 		return MBCategoryLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, categoryIds, threadId, keywords);
 	}

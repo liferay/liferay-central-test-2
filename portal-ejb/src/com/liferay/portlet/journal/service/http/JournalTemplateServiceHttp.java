@@ -287,16 +287,11 @@ public class JournalTemplateServiceHttp {
 	}
 
 	public static void deleteTemplate(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, long groupId, java.lang.String templateId)
+		long companyId, long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = templateId;
 
@@ -330,17 +325,12 @@ public class JournalTemplateServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate getTemplate(
-		HttpPrincipal httpPrincipal, java.lang.String companyId, long groupId,
+		HttpPrincipal httpPrincipal, long companyId, long groupId,
 		java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = templateId;
 

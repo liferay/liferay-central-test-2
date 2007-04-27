@@ -195,7 +195,7 @@ public class TagsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public TagsEntry findByC_N(String companyId, String name)
+	public TagsEntry findByC_N(long companyId, String name)
 		throws NoSuchEntryException, SystemException {
 		TagsEntry tagsEntry = fetchByC_N(companyId, name);
 
@@ -220,7 +220,7 @@ public class TagsEntryPersistence extends BasePersistence {
 		return tagsEntry;
 	}
 
-	public TagsEntry fetchByC_N(String companyId, String name)
+	public TagsEntry fetchByC_N(long companyId, String name)
 		throws SystemException {
 		Session session = null;
 
@@ -229,14 +229,7 @@ public class TagsEntryPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -254,10 +247,7 @@ public class TagsEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);
@@ -360,7 +350,7 @@ public class TagsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_N(String companyId, String name)
+	public void removeByC_N(long companyId, String name)
 		throws NoSuchEntryException, SystemException {
 		TagsEntry tagsEntry = findByC_N(companyId, name);
 		remove(tagsEntry);
@@ -374,7 +364,7 @@ public class TagsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_N(String companyId, String name)
+	public int countByC_N(long companyId, String name)
 		throws SystemException {
 		Session session = null;
 
@@ -384,14 +374,7 @@ public class TagsEntryPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -407,10 +390,7 @@ public class TagsEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);

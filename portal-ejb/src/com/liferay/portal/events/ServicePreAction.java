@@ -129,7 +129,7 @@ public class ServicePreAction extends Action {
 
 			Company company = PortalUtil.getCompany(req);
 
-			String companyId = company.getCompanyId();
+			long companyId = company.getCompanyId();
 
 			// Paths
 
@@ -871,11 +871,11 @@ public class ServicePreAction extends Action {
 		return new Object[] {layout, layouts};
 	}
 
-	protected boolean isValidHost(String companyId, String host)
+	protected boolean isValidHost(long companyId, String host)
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(host)) {
-			Company company = CompanyLocalServiceUtil.getCompany(companyId);
+			Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 
 			if (company.getPortalURL().indexOf(host) == -1) {
 				return true;

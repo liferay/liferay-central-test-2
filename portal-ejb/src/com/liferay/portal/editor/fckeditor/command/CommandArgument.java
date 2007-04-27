@@ -74,7 +74,7 @@ public class CommandArgument {
 		return _req;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _themeDisplay.getCompanyId();
 	}
 

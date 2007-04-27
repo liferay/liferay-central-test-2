@@ -86,10 +86,10 @@ public class WorkflowDefinitionServiceImpl
 
 			// File
 
-			String companyId = user.getCompanyId();
-			String portletId = CompanyImpl.SYSTEM;
+			long companyId = user.getCompanyId();
+			String portletId = CompanyImpl.SYSTEM_STRING;
 			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
-			String repositoryId = CompanyImpl.SYSTEM;
+			String repositoryId = CompanyImpl.SYSTEM_STRING;
 			String dirName = "workflow/definitions";
 			String fileName = dirName  + "/" + definitionId + ".xml";
 
@@ -151,8 +151,8 @@ public class WorkflowDefinitionServiceImpl
 		throws PortalException, SystemException {
 
 		try {
-			String companyId = getUser().getCompanyId();
-			String repositoryId = CompanyImpl.SYSTEM;
+			long companyId = getUser().getCompanyId();
+			String repositoryId = CompanyImpl.SYSTEM_STRING;
 			String dirName = "workflow/definitions";
 			String fileName = dirName  + "/" + definitionId + ".xml";
 

@@ -69,7 +69,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 
 			ServletContext ctx = getServletContext();
 
-			_companyId = ctx.getInitParameter("company_id");
+			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
 
 			_rootPath = GetterUtil.getString(
 				ctx.getInitParameter("root_path"), StringPool.SLASH);
@@ -213,7 +213,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(SoftwareCatalogServlet.class);
 
-	private String _companyId;
+	private long _companyId;
 	private String _rootPath;
 	private String _imagePath;
 

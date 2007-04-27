@@ -72,7 +72,7 @@ public class IGImageServiceImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteImage(String companyId, String imageId)
+	public void deleteImage(long companyId, String imageId)
 		throws PortalException, SystemException {
 
 		IGImagePermission.check(
@@ -81,7 +81,7 @@ public class IGImageServiceImpl
 		IGImageLocalServiceUtil.deleteImage(companyId, imageId);
 	}
 
-	public IGImage getImage(String companyId, String imageId)
+	public IGImage getImage(long companyId, String imageId)
 		throws PortalException, SystemException {
 
 		IGImagePermission.check(

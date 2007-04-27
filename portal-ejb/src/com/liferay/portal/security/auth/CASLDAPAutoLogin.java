@@ -59,7 +59,7 @@ import org.apache.commons.logging.LogFactory;
 public class CASLDAPAutoLogin extends CASAutoLogin {
 
 	protected User processNoSuchUserException(
-			String companyId, String screenName, NoSuchUserException nsuse)
+			long companyId, String screenName, NoSuchUserException nsuse)
 		throws PortalException, SystemException {
 
 		try {
@@ -113,7 +113,7 @@ public class CASLDAPAutoLogin extends CASAutoLogin {
 					"@company_id@", "@email_address@", "@screen_name@"
 				},
 				new String[] {
-					companyId, "", screenName
+					String.valueOf(companyId), StringPool.BLANK, screenName
 				});
 
 			if (_log.isDebugEnabled()) {
@@ -163,7 +163,7 @@ public class CASLDAPAutoLogin extends CASAutoLogin {
 	}
 
 	protected User processUser(
-			Attributes attrs, Properties userMappings, String companyId,
+			Attributes attrs, Properties userMappings, long companyId,
 			String emailAddress, String screenName, long userId,
 			String password)
 		throws Exception {

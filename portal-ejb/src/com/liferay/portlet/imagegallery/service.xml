@@ -15,7 +15,7 @@
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="String" />
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
@@ -51,7 +51,7 @@
 
 		<!-- PK fields -->
 
-		<column name="companyId" type="String" primary="true" />
+		<column name="companyId" type="long" primary="true" />
 		<column name="imageId" type="String" primary="true" />
 
 		<!-- Audit fields -->

@@ -52,14 +52,14 @@ public class WebDAVUtil {
 		return path;
 	}
 
-	public static String getCompanyId(String path) {
+	public static long getCompanyId(String path) {
 		String[] pathArray = getPathArray(path);
 
 		if (pathArray.length <= 0) {
-			return StringPool.BLANK;
+			return 0;
 		}
 		else {
-			return pathArray[0];
+			return GetterUtil.getLong(pathArray[0]);
 		}
 	}
 

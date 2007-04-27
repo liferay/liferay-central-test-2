@@ -333,7 +333,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			}
 		}
 
-		String companyId = user.getCompanyId();
+		long companyId = user.getCompanyId();
 
 		Group guestGroup = GroupServiceUtil.getGroup(
 			companyId, GroupImpl.GUEST);
@@ -364,7 +364,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			stopWatch.start();
 		}
 
-		String companyId = user.getCompanyId();
+		long companyId = user.getCompanyId();
 
 		if (isAdmin(companyId, groupId, name)) {
 			return true;
@@ -442,7 +442,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		try {
 			Resource resource = ResourceServiceUtil.getResource(
-				companyId, name, ResourceImpl.SCOPE_COMPANY, companyId);
+				companyId, name, ResourceImpl.SCOPE_COMPANY,
+				String.valueOf(companyId));
 
 			resourceIds[3] = resource.getResourceId();
 		}
@@ -472,7 +473,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		return value;
 	}
 
-	protected boolean isAdmin(String companyId, long groupId, String name)
+	protected boolean isAdmin(long companyId, long groupId, String name)
 		throws Exception {
 
 		PermissionCheckerBag bag = getBag(groupId);

@@ -54,16 +54,7 @@ public class BlogsCategoryJSONSerializer {
 	public static JSONObject toJSONObject(BlogsCategory model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("categoryId", model.getCategoryId());
-
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
-
+		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 
 		String userName = model.getUserName();

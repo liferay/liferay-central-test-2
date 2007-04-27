@@ -71,8 +71,8 @@ public class UserImpl extends UserModelImpl implements User {
 		String companyMx = null;
 
 		try {
-			Company company =
-				CompanyLocalServiceUtil.getCompany(getCompanyId());
+			Company company = CompanyLocalServiceUtil.getCompanyById(
+				getCompanyId());
 
 			companyMx = company.getMx();
 		}
@@ -115,8 +115,8 @@ public class UserImpl extends UserModelImpl implements User {
 	public String getLogin() throws PortalException, SystemException {
 		String login = null;
 
-		Company company =
-			CompanyLocalServiceUtil.getCompany(getCompanyId());
+		Company company = CompanyLocalServiceUtil.getCompanyById(
+			getCompanyId());
 
 		if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA)) {
 			login = getEmailAddress();

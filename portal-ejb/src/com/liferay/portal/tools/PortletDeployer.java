@@ -174,29 +174,6 @@ public class PortletDeployer extends BaseDeployer {
 
 		root = doc.getRootElement();
 
-		boolean hasCompanyId = false;
-
-		itr1 = root.elements("context-param").iterator();
-
-		while (itr1.hasNext()) {
-			Element contextParam = (Element)itr1.next();
-
-			String paramName = contextParam.elementText("param-name");
-
-			if ((paramName != null) && (paramName.equals("company_id"))) {
-				hasCompanyId = true;
-
-				break;
-			}
-		}
-
-		if (!hasCompanyId) {
-			sm.append("<context-param>");
-			sm.append("<param-name>company_id</param-name>");
-			sm.append("<param-value>liferay.com</param-value>");
-			sm.append("</context-param>");
-		}
-
 		// Remove deprecated references to SharedServletWrapper
 
 		itr1 = root.elements("servlet").iterator();

@@ -547,7 +547,7 @@ public class ShoppingItemLocalServiceImpl
 		return ShoppingItemUtil.findByPrimaryKey(itemId);
 	}
 
-	public ShoppingItem getItem(String companyId, String sku)
+	public ShoppingItem getItem(long companyId, String sku)
 		throws PortalException, SystemException {
 
 		return ShoppingItemUtil.findByC_S(companyId, sku);
@@ -847,7 +847,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	protected void validate(
-			String companyId, String itemId, String sku, String name,
+			long companyId, String itemId, String sku, String name,
 			boolean smallImage, String smallImageURL, File smallFile,
 			byte[] smallBytes, boolean mediumImage, String mediumImageURL,
 			File mediumFile, byte[] mediumBytes, boolean largeImage,

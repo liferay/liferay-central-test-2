@@ -66,10 +66,10 @@ public class UserTrackerLocalServiceEJBImpl implements UserTrackerLocalService,
 			begin, end);
 	}
 
-	public com.liferay.portal.model.UserTracker addUserTracker(
-		java.lang.String companyId, long userId, java.util.Date modifiedDate,
-		java.lang.String remoteAddr, java.lang.String remoteHost,
-		java.lang.String userAgent, java.util.List userTrackerPaths)
+	public com.liferay.portal.model.UserTracker addUserTracker(long companyId,
+		long userId, java.util.Date modifiedDate, java.lang.String remoteAddr,
+		java.lang.String remoteHost, java.lang.String userAgent,
+		java.util.List userTrackerPaths)
 		throws com.liferay.portal.SystemException {
 		return UserTrackerLocalServiceFactory.getTxImpl().addUserTracker(companyId,
 			userId, modifiedDate, remoteAddr, remoteHost, userAgent,
@@ -82,8 +82,8 @@ public class UserTrackerLocalServiceEJBImpl implements UserTrackerLocalService,
 		UserTrackerLocalServiceFactory.getTxImpl().deleteUserTracker(userTrackerId);
 	}
 
-	public java.util.List getUserTrackers(java.lang.String companyId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public java.util.List getUserTrackers(long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return UserTrackerLocalServiceFactory.getTxImpl().getUserTrackers(companyId,
 			begin, end);
 	}

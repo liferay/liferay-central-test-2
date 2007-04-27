@@ -33,16 +33,14 @@ public class LanguageUtil_IW {
 		return _instance;
 	}
 
-	public java.lang.String format(java.lang.String companyId,
-		java.util.Locale locale, java.lang.String pattern,
-		java.lang.Object argument)
+	public java.lang.String format(long companyId, java.util.Locale locale,
+		java.lang.String pattern, java.lang.Object argument)
 		throws com.liferay.portal.language.LanguageException {
 		return LanguageUtil.format(companyId, locale, pattern, argument);
 	}
 
-	public java.lang.String format(java.lang.String companyId,
-		java.util.Locale locale, java.lang.String pattern,
-		java.lang.Object[] arguments)
+	public java.lang.String format(long companyId, java.util.Locale locale,
+		java.lang.String pattern, java.lang.Object[] arguments)
 		throws com.liferay.portal.language.LanguageException {
 		return LanguageUtil.format(companyId, locale, pattern, arguments);
 	}
@@ -119,15 +117,14 @@ public class LanguageUtil_IW {
 		return LanguageUtil.get(user, key, defaultValue);
 	}
 
-	public java.lang.String get(java.lang.String companyId,
-		java.util.Locale locale, java.lang.String key)
+	public java.lang.String get(long companyId, java.util.Locale locale,
+		java.lang.String key)
 		throws com.liferay.portal.language.LanguageException {
 		return LanguageUtil.get(companyId, locale, key);
 	}
 
-	public java.lang.String get(java.lang.String companyId,
-		java.util.Locale locale, java.lang.String key,
-		java.lang.String defaultValue)
+	public java.lang.String get(long companyId, java.util.Locale locale,
+		java.lang.String key, java.lang.String defaultValue)
 		throws com.liferay.portal.language.LanguageException {
 		return LanguageUtil.get(companyId, locale, key, defaultValue);
 	}

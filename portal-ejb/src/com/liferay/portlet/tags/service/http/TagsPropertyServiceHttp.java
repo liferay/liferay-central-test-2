@@ -227,15 +227,10 @@ public class TagsPropertyServiceHttp {
 	}
 
 	public static java.util.List getPropertyValues(
-		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		java.lang.String key) throws com.liferay.portal.SystemException {
+		HttpPrincipal httpPrincipal, long companyId, java.lang.String key)
+		throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = key;
 
 			if (key == null) {

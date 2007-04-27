@@ -48,13 +48,13 @@ public class ResourceCodeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		String companyId = (String)_companyIdColumn.getTemp();
+		Long companyIdObj = (Long)_companyIdColumn.getTemp();
 		String name = (String)_nameColumn.getTemp();
 		String scope = (String)_scopeColumn.getTemp();
 
 		ResourceCode resourceCode =
 			ResourceCodeLocalServiceUtil.getResourceCode(
-				companyId, name, scope);
+				companyIdObj.longValue(), name, scope);
 
 		return new Long(resourceCode.getCodeId());
 	}

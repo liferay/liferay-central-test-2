@@ -140,7 +140,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		TagsEntryUtil.remove(entry.getEntryId());
 	}
 
-	public boolean hasEntry(String companyId, String name)
+	public boolean hasEntry(long companyId, String name)
 		throws PortalException, SystemException {
 
 		if (TagsEntryUtil.fetchByC_N(companyId, name) == null) {
@@ -174,13 +174,13 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return TagsEntryUtil.findByPrimaryKey(entryId);
 	}
 
-	public TagsEntry getEntry(String companyId, String name)
+	public TagsEntry getEntry(long companyId, String name)
 		throws PortalException, SystemException {
 
 		return TagsEntryUtil.findByC_N(companyId, name);
 	}
 
-	public long[] getEntryIds(String companyId, String[] names)
+	public long[] getEntryIds(long companyId, String[] names)
 		throws PortalException, SystemException {
 
 		List list = new ArrayList(names.length);
@@ -206,14 +206,14 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return entryIds;
 	}
 
-	public List search(String companyId, String name, String[] properties)
+	public List search(long companyId, String name, String[] properties)
 		throws SystemException {
 
 		return TagsEntryFinder.findByC_N_P(companyId, name, properties);
 	}
 
 	public List search(
-			String companyId, String name, String[] properties, int begin,
+			long companyId, String name, String[] properties, int begin,
 			int end)
 		throws SystemException {
 
@@ -222,7 +222,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public JSONArrayWrapper searchAutocomplete(
-			String companyId, String name, String[] properties, int begin,
+			long companyId, String name, String[] properties, int begin,
 			int end)
 		throws SystemException {
 
@@ -233,7 +233,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			Autocomplete.listToJson(list, "name", "name"));
 	}
 
-	public int searchCount(String companyId, String name, String[] properties)
+	public int searchCount(long companyId, String name, String[] properties)
 		throws SystemException {
 
 		return TagsEntryFinder.countByC_N_P(companyId, name, properties);

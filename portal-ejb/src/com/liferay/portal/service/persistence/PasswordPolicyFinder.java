@@ -51,7 +51,7 @@ public class PasswordPolicyFinder {
 	public static String FIND_BY_C_N =
 		PasswordPolicyFinder.class.getName() + ".findByC_N";
 
-	public static int countByC_N(String companyId, String name)
+	public static int countByC_N(long companyId, String name)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -96,7 +96,7 @@ public class PasswordPolicyFinder {
 	}
 
 	public static List findByC_N(
-			String companyId, String name, int begin, int end)
+			long companyId, String name, int begin, int end)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);

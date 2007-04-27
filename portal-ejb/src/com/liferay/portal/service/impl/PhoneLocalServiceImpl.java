@@ -94,7 +94,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		PhoneUtil.remove(phoneId);
 	}
 
-	public void deletePhones(String companyId, String className, String classPK)
+	public void deletePhones(long companyId, String className, String classPK)
 		throws SystemException {
 
 		PhoneUtil.removeByC_C_C(companyId, className, classPK);
@@ -110,7 +110,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		return PhoneUtil.findAll();
 	}
 
-	public List getPhones(String companyId, String className, String classPK)
+	public List getPhones(long companyId, String className, String classPK)
 		throws SystemException {
 
 		return PhoneUtil.findByC_C_C(companyId, className, classPK);
@@ -124,7 +124,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		number = PhoneNumberUtil.strip(number);
 		extension = PhoneNumberUtil.strip(extension);
 
-		validate(phoneId, null, null, null, number, typeId, primary);
+		validate(phoneId, 0, null, null, number, typeId, primary);
 
 		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
 
@@ -140,7 +140,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			long phoneId, String companyId, String className, String classPK,
+			long phoneId, long companyId, String className, String classPK,
 			String number, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
@@ -168,8 +168,8 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			long phoneId, String companyId, String className,
-			String classPK, boolean primary)
+			long phoneId, long companyId, String className, String classPK,
+			boolean primary)
 		throws PortalException, SystemException {
 
 		// Check to make sure there isn't another phone with the same company

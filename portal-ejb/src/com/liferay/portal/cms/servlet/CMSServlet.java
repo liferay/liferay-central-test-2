@@ -31,6 +31,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ExtPropertiesLoader;
@@ -69,7 +70,7 @@ public class CMSServlet extends HttpServlet {
 
 			ServletContext ctx = getServletContext();
 
-			_companyId = ctx.getInitParameter("company_id");
+			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
 			_groupId = GetterUtil.getLong(config.getInitParameter("group_id"));
 
 			try {
@@ -152,7 +153,8 @@ public class CMSServlet extends HttpServlet {
 		try {
 			themeDisplay = ThemeDisplayFactory.create();
 
-			Company company = CompanyLocalServiceUtil.getCompany(_companyId);
+			Company company = CompanyLocalServiceUtil.getCompanyById(
+				_companyId);
 
 			themeDisplay.setCompany(company);
 			themeDisplay.setPortletGroupId(groupId);
@@ -215,7 +217,7 @@ public class CMSServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(CMSServlet.class);
 
-	private String _companyId;
+	private long _companyId;
 	private long _groupId;
 	private String _contextPath;
 	private String _rootPath;

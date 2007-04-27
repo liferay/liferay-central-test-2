@@ -201,7 +201,7 @@ public class StrutsUtil {
 	private static ServletContext _getPortalCtx(
 		ServletContext ctx, HttpServletRequest req) {
 
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 
 		ServletContext portalCtx = null;
 

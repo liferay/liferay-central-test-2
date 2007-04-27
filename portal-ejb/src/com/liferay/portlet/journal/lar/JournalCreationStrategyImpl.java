@@ -56,7 +56,7 @@ import org.apache.commons.logging.LogFactory;
 public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 
 	public long getAuthorUserId(
-			String companyId, long groupId, Object journalObj)
+			long companyId, long groupId, Object journalObj)
 		throws Exception {
 
 		User user = getFirstUser(groupId);
@@ -70,7 +70,7 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 	}
 
 	public String getAuthorUserName(
-			String companyId, long groupId, Object journalObj)
+			long companyId, long groupId, Object journalObj)
 		throws Exception {
 
 		User user = getFirstUser(groupId);
@@ -84,7 +84,7 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 	}
 
 	public String getApprovalUserName(
-			String companyId, long groupId, Object journalObj)
+			long companyId, long groupId, Object journalObj)
 		throws Exception {
 
 		User user = getFirstUser(groupId);
@@ -98,7 +98,7 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 	}
 
 	public long getApprovalUserId(
-			String companyId, long groupId, Object journalObj)
+			long companyId, long groupId, Object journalObj)
 		throws Exception {
 
 		User user = getFirstUser(groupId);
@@ -112,21 +112,21 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 	}
 
 	public String getTransformedContent(
-			String companyId, long groupId, JournalArticle newArticle)
+			long companyId, long groupId, JournalArticle newArticle)
 		throws Exception {
 
 		return null;
 	}
 
 	public boolean addCommunityPermissions(
-			String companyId, long groupId, Object journalObj)
+			long companyId, long groupId, Object journalObj)
 		throws Exception {
 
 		return true;
 	}
 
 	public boolean addGuestPermissions(
-			String companyId, long groupId, Object journalObj)
+			long companyId, long groupId, Object journalObj)
 		throws Exception {
 
 		return true;

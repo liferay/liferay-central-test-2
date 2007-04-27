@@ -38,8 +38,8 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 public class JournalArticlePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String companyId,
-			long groupId, String articleId, String actionId)
+			PermissionChecker permissionChecker, long companyId, long groupId,
+			String articleId, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
@@ -60,7 +60,7 @@ public class JournalArticlePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String companyId,
+			PermissionChecker permissionChecker, long companyId,
 			long groupId, String articleId, String actionId)
 		throws PortalException, SystemException {
 

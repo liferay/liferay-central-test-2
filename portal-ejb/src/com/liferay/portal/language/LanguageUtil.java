@@ -70,14 +70,14 @@ public class LanguageUtil {
 	public static final String DEFAULT_ENCODING = "UTF-8";
 
 	public static String format(
-			String companyId, Locale locale, String pattern, Object argument)
+			long companyId, Locale locale, String pattern, Object argument)
 		throws LanguageException {
 
 		return format(companyId, locale, pattern, new Object[] {argument});
 	}
 
 	public static String format(
-			String companyId, Locale locale, String pattern, Object[] arguments)
+			long companyId, Locale locale, String pattern, Object[] arguments)
 		throws LanguageException {
 
 		String value = null;
@@ -242,21 +242,21 @@ public class LanguageUtil {
 		return get(user.getCompanyId(), user.getLocale(), key, defaultValue);
 	}
 
-	public static String get(String companyId, Locale locale, String key)
+	public static String get(long companyId, Locale locale, String key)
 		throws LanguageException {
 
 		return get(companyId, locale, key, key);
 	}
 
 	public static String get(
-			String companyId, Locale locale, String key, String defaultValue)
+			long companyId, Locale locale, String key, String defaultValue)
 		throws LanguageException {
 
 		String value = null;
 
 		try {
 			MessageResources resources = (MessageResources)WebAppPool.get(
-				companyId, Globals.MESSAGES_KEY);
+				String.valueOf(companyId), Globals.MESSAGES_KEY);
 
 			value = resources.getMessage(locale, key);
 		}

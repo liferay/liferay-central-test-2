@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.lucene.CleanUpJob;
 import com.liferay.portal.lucene.LuceneIndexer;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 
@@ -59,7 +60,7 @@ public class LuceneServlet extends HttpServlet {
 
 			ServletContext ctx = getServletContext();
 
-			_companyId = ctx.getInitParameter("company_id");
+			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
 
 			if (GetterUtil.getBoolean(
 					PropsUtil.get(PropsUtil.INDEX_ON_STARTUP))) {
@@ -158,7 +159,7 @@ public class LuceneServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(LuceneServlet.class);
 
-	private String _companyId;
+	private long _companyId;
 	private LuceneIndexer _indexer;
 	private Thread _indexerThread;
 

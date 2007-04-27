@@ -29,7 +29,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="languageId" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getLayoutReferences" qname="operNS:getLayoutReferences" returnQName="getLayoutReferencesReturn" returnType="rtns:ArrayOf_tns2_LayoutReference" returnItemType="tns2:LayoutReference" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="portletId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="prefsKey" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="prefsValue" type="tns:string"></parameter>

@@ -57,7 +57,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static final String PORTLET_ID = PortletKeys.WIKI;
 
 	public static void addPage(
-			String companyId, long groupId, String nodeId, String title,
+			long companyId, long groupId, String nodeId, String title,
 			String content)
 	throws IOException {
 
@@ -97,7 +97,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	public static void deletePage(String companyId, String nodeId, String title)
+	public static void deletePage(long companyId, String nodeId, String title)
 		throws IOException {
 
 		LuceneUtil.deleteDocuments(
@@ -107,7 +107,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 				LuceneFields.getUID(PORTLET_ID, nodeId, title)));
 	}
 
-	public static void deletePages(String companyId, String nodeId)
+	public static void deletePages(long companyId, String nodeId)
 		throws IOException, ParseException {
 
 		BooleanQuery booleanQuery = new BooleanQuery();
@@ -149,9 +149,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updatePage(
-			String companyId, long groupId, String nodeId, String title,
+			long companyId, long groupId, String nodeId, String title,
 			String content)
-	throws IOException {
+		throws IOException {
 
 		try {
 			deletePage(companyId, nodeId, title);

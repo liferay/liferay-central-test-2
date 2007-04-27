@@ -64,7 +64,7 @@ public class TagsPropertyServiceImpl
 		return TagsPropertyLocalServiceUtil.getProperties(entryId);
 	}
 
-	public List getPropertyValues(String companyId, String key)
+	public List getPropertyValues(long companyId, String key)
 		throws SystemException {
 
 		return TagsPropertyLocalServiceUtil.getPropertyValues(companyId, key);

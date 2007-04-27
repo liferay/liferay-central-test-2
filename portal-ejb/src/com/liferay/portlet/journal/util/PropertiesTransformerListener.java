@@ -103,7 +103,8 @@ public class PropertiesTransformerListener extends TransformerListener {
 
 			newTokens.put("template_id", _GLOBAL_PROPERTIES);
 
-			String companyId = (String)tokens.get("company_id");
+			long companyId = GetterUtil.getLong(
+				(String)tokens.get("company_id"));
 			long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
 
 			String script = JournalUtil.getTemplateScript(

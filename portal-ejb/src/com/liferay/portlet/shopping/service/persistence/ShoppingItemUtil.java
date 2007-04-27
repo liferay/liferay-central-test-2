@@ -193,14 +193,14 @@ public class ShoppingItemUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByC_S(
-		java.lang.String companyId, java.lang.String sku)
+		long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence().findByC_S(companyId, sku);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByC_S(
-		java.lang.String companyId, java.lang.String sku)
+		long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_S(companyId, sku);
 	}
@@ -239,8 +239,7 @@ public class ShoppingItemUtil {
 		getPersistence().removeByCategoryId(categoryId);
 	}
 
-	public static void removeByC_S(java.lang.String companyId,
-		java.lang.String sku)
+	public static void removeByC_S(long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemException {
 		getPersistence().removeByC_S(companyId, sku);
@@ -255,8 +254,8 @@ public class ShoppingItemUtil {
 		return getPersistence().countByCategoryId(categoryId);
 	}
 
-	public static int countByC_S(java.lang.String companyId,
-		java.lang.String sku) throws com.liferay.portal.SystemException {
+	public static int countByC_S(long companyId, java.lang.String sku)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_S(companyId, sku);
 	}
 

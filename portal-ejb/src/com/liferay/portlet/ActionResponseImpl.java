@@ -378,7 +378,7 @@ public class ActionResponseImpl implements ActionResponse {
 		_req = null;
 		_res = null;
 		_portletName = null;
-		_companyId = null;
+		_companyId = 0;
 		_user = null;
 		_layout = null;
 		_plid = null;
@@ -415,7 +415,7 @@ public class ActionResponseImpl implements ActionResponse {
 	private HttpServletResponse _res;
 	private String _portletName;
 	private Portlet _portlet;
-	private String _companyId;
+	private long _companyId;
 	private User _user;
 	private Layout _layout;
 	private String _plid;

@@ -68,7 +68,7 @@ import org.json.JSONObject;
  *
  */
 public class CompanyServiceJSON {
-	public static JSONObject updateCompany(java.lang.String companyId,
+	public static JSONObject updateCompany(long companyId,
 		java.lang.String portalURL, java.lang.String homeURL,
 		java.lang.String mx, java.lang.String name, java.lang.String legalName,
 		java.lang.String legalId, java.lang.String legalType,
@@ -83,14 +83,14 @@ public class CompanyServiceJSON {
 		return CompanyJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void updateDisplay(java.lang.String companyId,
+	public static void updateDisplay(long companyId,
 		java.lang.String languageId, java.lang.String timeZoneId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		CompanyServiceUtil.updateDisplay(companyId, languageId, timeZoneId);
 	}
 
-	public static void updateSecurity(java.lang.String companyId,
+	public static void updateSecurity(long companyId,
 		java.lang.String authType, boolean autoLogin, boolean sendPassword,
 		boolean strangers, boolean communityLogo)
 		throws com.liferay.portal.SystemException, 

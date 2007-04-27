@@ -301,17 +301,11 @@ public class GroupServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Group getGroup(
-		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		java.lang.String name)
+		HttpPrincipal httpPrincipal, long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -450,16 +444,11 @@ public class GroupServiceHttp {
 	}
 
 	public static java.util.List search(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String description, java.lang.String[] params, int begin,
-		int end) throws com.liferay.portal.SystemException {
+		long companyId, java.lang.String name, java.lang.String description,
+		java.lang.String[] params, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -507,17 +496,11 @@ public class GroupServiceHttp {
 		}
 	}
 
-	public static int searchCount(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String description, java.lang.String[] params)
-		throws com.liferay.portal.SystemException {
+	public static int searchCount(HttpPrincipal httpPrincipal, long companyId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] params) throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = name;
 
 			if (name == null) {

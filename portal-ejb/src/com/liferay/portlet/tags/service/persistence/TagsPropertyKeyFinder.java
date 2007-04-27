@@ -49,7 +49,7 @@ public class TagsPropertyKeyFinder {
 	public static String FIND_BY_COMPANYID =
 		TagsPropertyKeyFinder.class.getName() + ".findByCompanyId";
 
-	public static int countByCompanyId(String companyId)
+	public static int countByCompanyId(long companyId)
 		throws SystemException {
 
 		Session session = null;
@@ -89,13 +89,13 @@ public class TagsPropertyKeyFinder {
 		}
 	}
 
-	public static String[] findByCompanyId(String companyId)
+	public static String[] findByCompanyId(long companyId)
 		throws SystemException {
 
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public static String[] findByCompanyId(String companyId, int begin, int end)
+	public static String[] findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;

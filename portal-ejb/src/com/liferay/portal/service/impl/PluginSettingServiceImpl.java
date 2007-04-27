@@ -41,7 +41,7 @@ public class PluginSettingServiceImpl
 	extends PrincipalBean implements PluginSettingService {
 
 	public PluginSetting updatePluginSetting(
-			String companyId, String pluginId, String pluginType, String roles,
+			long companyId, String pluginId, String pluginType, String roles,
 			boolean active)
 		throws PortalException, SystemException {
 

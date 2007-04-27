@@ -312,7 +312,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
-		String companyId = layoutSet.getCompanyId();
+		long companyId = layoutSet.getCompanyId();
 		long groupId = layoutSet.getGroupId();
 
 		ZipWriter zipWriter = new ZipWriter();
@@ -526,7 +526,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public LayoutReference[] getLayouts(
-			String companyId, String portletId, String prefsKey,
+			long companyId, String portletId, String prefsKey,
 			String prefsValue)
 		throws SystemException {
 
@@ -582,7 +582,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
-		String companyId = layoutSet.getCompanyId();
+		long companyId = layoutSet.getCompanyId();
 		long groupId = layoutSet.getGroupId();
 
 		ZipReader zipReader = new ZipReader(is);
@@ -1093,7 +1093,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected Element exportGroupPermissions(
-			String companyId, long groupId, String resourceName,
+			long companyId, long groupId, String resourceName,
 			String resourcePrimKey, Element parentEl, String elName)
 		throws PortalException, SystemException {
 
@@ -1117,7 +1117,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportGroupRoles(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String entityName, Element parentEl)
 		throws PortalException, SystemException {
 
@@ -1133,7 +1133,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportInheritedPermissions(
-			LayoutCache layoutCache, String companyId, String resourceName,
+			LayoutCache layoutCache, long companyId, String resourceName,
 			String resourcePrimKey, Element parentEl, String entityName)
 		throws PortalException, SystemException {
 
@@ -1169,7 +1169,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportInheritedRoles(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String entityName, Element parentEl)
 		throws PortalException, SystemException {
 
@@ -1208,7 +1208,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportLayoutPermissions(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, Layout layout, Element permissionsEl)
 		throws PortalException, SystemException {
 
@@ -1243,7 +1243,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportLayoutRoles(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			Element rolesEl)
 		throws PortalException, SystemException {
 
@@ -1339,7 +1339,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportPortletPermissions(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, Layout layout,
 			LayoutTypePortlet layoutTypePortlet, Set portletIds,
 			Element permissionsEl)
@@ -1427,7 +1427,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportPortletRoles(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			Set portletIds, Element rolesEl)
 		throws PortalException, SystemException {
 
@@ -1468,7 +1468,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected Element exportRoles(
-			String companyId, String resourceName, String scope,
+			long companyId, String resourceName, String scope,
 			String resourcePrimKey, Element parentEl, String elName,
 			List roles)
 		throws PortalException, SystemException {
@@ -1576,7 +1576,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportUserPermissions(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String resourcePrimKey, Element parentEl)
 		throws PortalException, SystemException {
 
@@ -1621,7 +1621,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportUserRoles(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, Element parentEl)
 		throws PortalException, SystemException {
 
@@ -1774,7 +1774,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importGroupPermissions(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String resourcePrimKey, Element parentEl,
 			String elName, boolean portletActions)
 		throws PortalException, SystemException {
@@ -1797,7 +1797,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importGroupRoles(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String entityName,
 			Element parentEl)
 		throws PortalException, SystemException {
@@ -1814,7 +1814,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importInheritedPermissions(
-			LayoutCache layoutCache, String companyId, String resourceName,
+			LayoutCache layoutCache, long companyId, String resourceName,
 			String resourcePrimKey, Element permissionsEl, String entityName,
 			boolean portletActions)
 		throws PortalException, SystemException {
@@ -1856,7 +1856,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importInheritedRoles(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String entityName, Element parentEl)
 		throws PortalException, SystemException {
 
@@ -1891,7 +1891,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importLayoutPermissions(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, Layout layout, Element permissionsEl)
 		throws PortalException, SystemException {
 
@@ -1926,7 +1926,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importLayoutRoles(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			Element rolesEl)
 		throws PortalException, SystemException {
 
@@ -2032,7 +2032,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importPortletPermissions(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, Layout layout, Element permissionsEl)
 		throws PortalException, SystemException {
 
@@ -2141,7 +2141,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importPortletRoles(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			Element rolesEl)
 		throws PortalException, SystemException {
 
@@ -2188,7 +2188,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importRolePermissions(
-			LayoutCache layoutCache, String companyId, String resourceName,
+			LayoutCache layoutCache, long companyId, String resourceName,
 			String scope, String resourcePrimKey, Element parentEl,
 			boolean communityRole)
 		throws PortalException, SystemException {
@@ -2289,7 +2289,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importUserPermissions(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String resourcePrimKey, Element parentEl,
 			boolean portletActions)
 		throws PortalException, SystemException {
@@ -2332,7 +2332,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importUserRoles(
-			LayoutCache layoutCache, String companyId, long groupId,
+			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, Element parentEl)
 		throws PortalException, SystemException {
 

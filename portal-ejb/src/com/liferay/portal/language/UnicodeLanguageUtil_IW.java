@@ -39,8 +39,8 @@ public class UnicodeLanguageUtil_IW {
 		return UnicodeLanguageUtil.get(user, key);
 	}
 
-	public java.lang.String get(java.lang.String companyId,
-		java.util.Locale locale, java.lang.String key)
+	public java.lang.String get(long companyId, java.util.Locale locale,
+		java.lang.String key)
 		throws com.liferay.portal.language.LanguageException {
 		return UnicodeLanguageUtil.get(companyId, locale, key);
 	}

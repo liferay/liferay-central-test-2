@@ -319,7 +319,7 @@ public class RenderResponseImpl implements RenderResponse {
 
 	protected void init(
 		RenderRequestImpl req, HttpServletResponse res, String portletName,
-		String companyId, String plid) {
+		long companyId, String plid) {
 
 		_req = req;
 		_res = res;
@@ -338,7 +338,7 @@ public class RenderResponseImpl implements RenderResponse {
 		_portletName = null;
 		_portlet = null;
 		_namespace = null;
-		_companyId = null;
+		_companyId = 0;
 		_plid = null;
 		_urlEncoder = null;
 		_title = null;
@@ -356,7 +356,7 @@ public class RenderResponseImpl implements RenderResponse {
 		return _portletName;
 	}
 
-	protected String getCompanyId() {
+	protected long getCompanyId() {
 		return _companyId;
 	}
 
@@ -399,7 +399,7 @@ public class RenderResponseImpl implements RenderResponse {
 	private String _portletName;
 	private Portlet _portlet;
 	private String _namespace;
-	private String _companyId;
+	private long _companyId;
 	private String _plid;
 	private Map _properties;
 	private URLEncoder _urlEncoder;

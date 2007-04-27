@@ -132,7 +132,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String subject, String body)
 		throws PortalException, SystemException {
 
-		String categoryId = CompanyImpl.SYSTEM;
+		String categoryId = CompanyImpl.SYSTEM_STRING;
 		List files = new ArrayList();
 		boolean anonymous = false;
 		double priority = 0.0;
@@ -320,10 +320,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// File attachments
 
 		if (files.size() > 0) {
-			String companyId = message.getCompanyId();
-			String portletId = CompanyImpl.SYSTEM;
+			long companyId = message.getCompanyId();
+			String portletId = CompanyImpl.SYSTEM_STRING;
 			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
-			String repositoryId = CompanyImpl.SYSTEM;
+			String repositoryId = CompanyImpl.SYSTEM_STRING;
 			String dirName = message.getAttachmentsDir();
 
 			try {
@@ -427,7 +427,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		try {
 			if (!category.isDiscussion()) {
 				Indexer.addMessage(
-					message.getCompanyId(), new Long(category.getGroupId()),
+					message.getCompanyId(), category.getGroupId(),
 					user.getFullName(), category.getCategoryId(), threadId,
 					messageId, subject, body);
 			}
@@ -571,9 +571,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// File attachments
 
 		if (message.isAttachments()) {
-			String companyId = message.getCompanyId();
-			String portletId = CompanyImpl.SYSTEM;
-			String repositoryId = CompanyImpl.SYSTEM;
+			long companyId = message.getCompanyId();
+			String portletId = CompanyImpl.SYSTEM_STRING;
+			String repositoryId = CompanyImpl.SYSTEM_STRING;
 			String dirName = message.getAttachmentsDir();
 
 			try {
@@ -595,9 +595,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			// File attachments
 
-			String companyId = message.getCompanyId();
-			String portletId = CompanyImpl.SYSTEM;
-			String repositoryId = CompanyImpl.SYSTEM;
+			long companyId = message.getCompanyId();
+			String portletId = CompanyImpl.SYSTEM_STRING;
+			String repositoryId = CompanyImpl.SYSTEM_STRING;
 			String dirName = message.getThreadAttachmentsDir();
 
 			try {
@@ -918,7 +918,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String messageId, String subject, String body)
 		throws PortalException, SystemException {
 
-		String categoryId = CompanyImpl.SYSTEM;
+		String categoryId = CompanyImpl.SYSTEM_STRING;
 		List files = new ArrayList();
 		double priority = 0.0;
 		String[] tagsEntries = null;
@@ -951,10 +951,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// File attachments
 
 		if (files.size() > 0) {
-			String companyId = message.getCompanyId();
-			String portletId = CompanyImpl.SYSTEM;
+			long companyId = message.getCompanyId();
+			String portletId = CompanyImpl.SYSTEM_STRING;
 			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
-			String repositoryId = CompanyImpl.SYSTEM;
+			String repositoryId = CompanyImpl.SYSTEM_STRING;
 			String dirName = message.getAttachmentsDir();
 
 			try {
@@ -1035,8 +1035,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				try {
 					if (!category.isDiscussion()) {
 						Indexer.updateMessage(
-							curMessage.getCompanyId(),
-							new Long(category.getGroupId()),
+							curMessage.getCompanyId(), category.getGroupId(),
 							curMessage.getUserName(), category.getCategoryId(),
 							curMessage.getThreadId(), curMessage.getMessageId(),
 							curMessage.getSubject(), curMessage.getBody());
@@ -1067,7 +1066,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		try {
 			if (!category.isDiscussion()) {
 				Indexer.updateMessage(
-					message.getCompanyId(), new Long(category.getGroupId()),
+					message.getCompanyId(), category.getGroupId(),
 					message.getUserName(), category.getCategoryId(),
 					message.getThreadId(), messageId, subject, body);
 			}
@@ -1280,7 +1279,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					"[$PORTLET_NAME$]"
 				},
 				new String[] {
-					company.getCompanyId(),
+					String.valueOf(company.getCompanyId()),
 					mailingListAddress,
 					user.getEmailAddress(),
 					user.getFullName(),
@@ -1297,7 +1296,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					"[$PORTLET_NAME$]"
 				},
 				new String[] {
-					company.getCompanyId(),
+					String.valueOf(company.getCompanyId()),
 					mailingListAddress,
 					user.getEmailAddress(),
 					user.getFullName(),
@@ -1344,7 +1343,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				},
 				new String[] {
 					category.getName(),
-					company.getCompanyId(),
+					String.valueOf(company.getCompanyId()),
 					fromAddress,
 					fromName,
 					mailingListAddress,
@@ -1373,7 +1372,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				},
 				new String[] {
 					category.getName(),
-					company.getCompanyId(),
+					String.valueOf(company.getCompanyId()),
 					fromAddress,
 					fromName,
 					mailingListAddress,
@@ -1393,7 +1392,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			MBMessageProducer.produce(
 				new String[] {
-					message.getCompanyId(), String.valueOf(message.getUserId()),
+					String.valueOf(message.getCompanyId()),
+					String.valueOf(message.getUserId()),
 					StringUtil.merge(categoryIds), message.getThreadId(),
 					fromName, fromAddress, subject, body, replyToAddress,
 					messageId, inReplyTo

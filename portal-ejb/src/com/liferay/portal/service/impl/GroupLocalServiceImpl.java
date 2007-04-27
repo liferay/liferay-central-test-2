@@ -187,7 +187,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		UserUtil.addGroups(userId, groupIds);
 	}
 
-	public void checkSystemGroups(String companyId)
+	public void checkSystemGroups(long companyId)
 		throws PortalException, SystemException {
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
@@ -330,7 +330,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		GroupUtil.remove(groupId);
 	}
 
-	public Group getFriendlyURLGroup(String companyId, String friendlyURL)
+	public Group getFriendlyURLGroup(long companyId, String friendlyURL)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(friendlyURL)) {
@@ -346,13 +346,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return GroupUtil.findByPrimaryKey(groupId);
 	}
 
-	public Group getGroup(String companyId, String name)
+	public Group getGroup(long companyId, String name)
 		throws PortalException, SystemException {
 
 		return GroupFinder.findByC_N(companyId, name);
 	}
 
-	public Group getOrganizationGroup(String companyId, String organizationId)
+	public Group getOrganizationGroup(long companyId, String organizationId)
 		throws PortalException, SystemException {
 
 		return GroupUtil.findByC_C_C(
@@ -387,14 +387,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return GroupUtil.findByLiveGroupId(liveGroupId);
 	}
 
-	public Group getUserGroup(String companyId, long userId)
+	public Group getUserGroup(long companyId, long userId)
 		throws PortalException, SystemException {
 
 		return GroupUtil.findByC_C_C(
 			companyId, User.class.getName(), String.valueOf(userId));
 	}
 
-	public Group getUserGroupGroup(String companyId, String userGroupId)
+	public Group getUserGroupGroup(long companyId, String userGroupId)
 		throws PortalException, SystemException {
 
 		return GroupUtil.findByC_C_C(
@@ -435,7 +435,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public List search(
-			String companyId, String name, String description,
+			long companyId, String name, String description,
 			LinkedHashMap params, int begin, int end)
 		throws SystemException {
 
@@ -444,7 +444,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public int searchCount(
-			String companyId, String name, String description,
+			long companyId, String name, String description,
 			LinkedHashMap params)
 		throws SystemException {
 
@@ -562,7 +562,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected void validateFriendlyURL(
-			long groupId, String companyId, String friendlyURL)
+			long groupId, long companyId, String friendlyURL)
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(friendlyURL)) {
@@ -598,7 +598,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validateName(long groupId, String companyId, String name)
+	protected void validateName(long groupId, long companyId, String name)
 		throws PortalException, SystemException {
 
 		if ((Validator.isNull(name)) || (Validator.isNumber(name)) ||

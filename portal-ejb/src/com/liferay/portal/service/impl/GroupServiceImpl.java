@@ -93,7 +93,7 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 		return GroupLocalServiceUtil.getGroup(groupId);
 	}
 
-	public Group getGroup(String companyId, String name)
+	public Group getGroup(long companyId, String name)
 		throws PortalException, SystemException {
 
 		return GroupLocalServiceUtil.getGroup(companyId, name);
@@ -118,7 +118,7 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 	}
 
 	public List search(
-			String companyId, String name, String description, String[] params,
+			long companyId, String name, String description, String[] params,
 			int begin, int end)
 		throws SystemException {
 
@@ -129,7 +129,7 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 	}
 
 	public int searchCount(
-			String companyId, String name, String description, String[] params)
+			long companyId, String name, String description, String[] params)
 		throws SystemException {
 
 		LinkedHashMap paramsObj = MapUtil.toLinkedHashMap(params);

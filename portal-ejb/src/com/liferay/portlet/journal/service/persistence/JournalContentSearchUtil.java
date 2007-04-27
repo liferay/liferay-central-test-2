@@ -327,21 +327,20 @@ public class JournalContentSearchUtil {
 			ownerId, groupId, articleId, obc);
 	}
 
-	public static java.util.List findByC_G_A(java.lang.String companyId,
-		long groupId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List findByC_G_A(long companyId, long groupId,
+		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_G_A(companyId, groupId, articleId);
 	}
 
-	public static java.util.List findByC_G_A(java.lang.String companyId,
-		long groupId, java.lang.String articleId, int begin, int end)
+	public static java.util.List findByC_G_A(long companyId, long groupId,
+		java.lang.String articleId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_G_A(companyId, groupId, articleId,
 			begin, end);
 	}
 
-	public static java.util.List findByC_G_A(java.lang.String companyId,
-		long groupId, java.lang.String articleId, int begin, int end,
+	public static java.util.List findByC_G_A(long companyId, long groupId,
+		java.lang.String articleId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_G_A(companyId, groupId, articleId,
@@ -349,7 +348,7 @@ public class JournalContentSearchUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch findByC_G_A_First(
-		java.lang.String companyId, long groupId, java.lang.String articleId,
+		long companyId, long groupId, java.lang.String articleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchContentSearchException {
@@ -358,7 +357,7 @@ public class JournalContentSearchUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch findByC_G_A_Last(
-		java.lang.String companyId, long groupId, java.lang.String articleId,
+		long companyId, long groupId, java.lang.String articleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchContentSearchException {
@@ -368,7 +367,7 @@ public class JournalContentSearchUtil {
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch[] findByC_G_A_PrevAndNext(
 		com.liferay.portlet.journal.service.persistence.JournalContentSearchPK journalContentSearchPK,
-		java.lang.String companyId, long groupId, java.lang.String articleId,
+		long companyId, long groupId, java.lang.String articleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchContentSearchException {
@@ -425,7 +424,7 @@ public class JournalContentSearchUtil {
 		getPersistence().removeByO_G_A(ownerId, groupId, articleId);
 	}
 
-	public static void removeByC_G_A(java.lang.String companyId, long groupId,
+	public static void removeByC_G_A(long companyId, long groupId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		getPersistence().removeByC_G_A(companyId, groupId, articleId);
 	}
@@ -454,7 +453,7 @@ public class JournalContentSearchUtil {
 		return getPersistence().countByO_G_A(ownerId, groupId, articleId);
 	}
 
-	public static int countByC_G_A(java.lang.String companyId, long groupId,
+	public static int countByC_G_A(long companyId, long groupId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_G_A(companyId, groupId, articleId);
 	}

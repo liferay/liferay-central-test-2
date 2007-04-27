@@ -74,7 +74,7 @@ public class JournalStructureServiceImpl
 	}
 
 	public void deleteStructure(
-			String companyId, long groupId, String structureId)
+			long companyId, long groupId, String structureId)
 		throws PortalException, SystemException {
 
 		JournalStructurePermission.check(
@@ -86,7 +86,7 @@ public class JournalStructureServiceImpl
 	}
 
 	public JournalStructure getStructure(
-			String companyId, long groupId, String structureId)
+			long companyId, long groupId, String structureId)
 		throws PortalException, SystemException {
 
 		JournalStructurePermission.check(

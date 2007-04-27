@@ -85,9 +85,8 @@ public class AddressLocalServiceEJBImpl implements AddressLocalService,
 		AddressLocalServiceFactory.getTxImpl().deleteAddress(addressId);
 	}
 
-	public void deleteAddresses(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException {
+	public void deleteAddresses(long companyId, java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException {
 		AddressLocalServiceFactory.getTxImpl().deleteAddresses(companyId,
 			className, classPK);
 	}
@@ -103,7 +102,7 @@ public class AddressLocalServiceEJBImpl implements AddressLocalService,
 		return AddressLocalServiceFactory.getTxImpl().getAddresses();
 	}
 
-	public java.util.List getAddresses(java.lang.String companyId,
+	public java.util.List getAddresses(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		return AddressLocalServiceFactory.getTxImpl().getAddresses(companyId,

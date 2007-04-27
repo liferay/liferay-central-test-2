@@ -52,24 +52,8 @@ import java.util.List;
 public class AccountJSONSerializer {
 	public static JSONObject toJSONObject(Account model) {
 		JSONObject jsonObj = new JSONObject();
-		String accountId = model.getAccountId();
-
-		if (accountId == null) {
-			jsonObj.put("accountId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("accountId", accountId.toString());
-		}
-
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
-
+		jsonObj.put("accountId", model.getAccountId());
+		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 
 		String userName = model.getUserName();
@@ -99,14 +83,7 @@ public class AccountJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String parentAccountId = model.getParentAccountId();
-
-		if (parentAccountId == null) {
-			jsonObj.put("parentAccountId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("parentAccountId", parentAccountId.toString());
-		}
+		jsonObj.put("parentAccountId", model.getParentAccountId());
 
 		String name = model.getName();
 

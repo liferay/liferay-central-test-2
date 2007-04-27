@@ -110,8 +110,8 @@ public class OrganizationServiceJSON {
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static java.lang.String getOrganizationId(
-		java.lang.String companyId, java.lang.String name)
+	public static java.lang.String getOrganizationId(long companyId,
+		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		java.lang.String returnValue = OrganizationServiceUtil.getOrganizationId(companyId,

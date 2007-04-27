@@ -62,15 +62,7 @@ public class ShoppingItemJSONSerializer {
 			jsonObj.put("itemId", itemId.toString());
 		}
 
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
-
+		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 
 		String userName = model.getUserName();

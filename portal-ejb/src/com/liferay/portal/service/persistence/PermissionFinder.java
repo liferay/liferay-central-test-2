@@ -770,7 +770,7 @@ public class PermissionFinder {
 	}
 
 	public static List findByG_C_N_S_P(
-			long groupId, String companyId, String name, String scope,
+			long groupId, long companyId, String name, String scope,
 			String primKey)
 		throws SystemException {
 
@@ -806,7 +806,7 @@ public class PermissionFinder {
 	}
 
 	public static List findByU_C_N_S_P(
-			long userId, String companyId, String name, String scope,
+			long userId, long companyId, String name, String scope,
 			String primKey)
 		throws SystemException {
 

@@ -53,7 +53,7 @@ public class Indexer
 	public static final String PORTLET_ID = PortletKeys.SOFTWARE_CATALOG;
 
 	public static void addProductEntry(
-			String companyId, long groupId, long userId, String userName,
+			long companyId, long groupId, long userId, String userName,
 			long productEntryId, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId)
@@ -104,7 +104,7 @@ public class Indexer
 
 	}
 
-	public static void deleteProductEntry(String companyId, long productEntryId)
+	public static void deleteProductEntry(long companyId, long productEntryId)
 		throws IOException {
 
 		LuceneUtil.deleteDocuments(
@@ -115,7 +115,7 @@ public class Indexer
 	}
 
 	public static void updateProductEntry(
-			String companyId, long groupId, long userId, String userName,
+			long companyId, long groupId, long userId, String userName,
 			long productEntryId, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId)

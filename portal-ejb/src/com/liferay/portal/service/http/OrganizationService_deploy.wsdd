@@ -32,7 +32,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getOrganizationId" qname="operNS:getOrganizationId" returnQName="getOrganizationIdReturn" returnType="rtns:string" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getUserOrganizations" qname="operNS:getUserOrganizations" returnQName="getUserOrganizationsReturn" returnType="rtns:ArrayOf_tns2_OrganizationSoap" returnItemType="tns2:OrganizationSoap" soapAction="">

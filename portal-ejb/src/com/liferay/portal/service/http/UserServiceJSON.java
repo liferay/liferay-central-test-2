@@ -95,12 +95,11 @@ public class UserServiceJSON {
 		UserServiceUtil.addUserGroupUsers(userGroupId, userIds);
 	}
 
-	public static JSONObject addUser(java.lang.String companyId,
-		boolean autoPassword, java.lang.String password1,
-		java.lang.String password2, boolean passwordReset,
-		boolean autoScreenName, java.lang.String screenName,
-		java.lang.String emailAddress, String locale,
-		java.lang.String firstName, java.lang.String middleName,
+	public static JSONObject addUser(long companyId, boolean autoPassword,
+		java.lang.String password1, java.lang.String password2,
+		boolean passwordReset, boolean autoScreenName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		String locale, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, java.lang.String organizationId,
@@ -145,7 +144,7 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONObject getUserByEmailAddress(java.lang.String companyId,
+	public static JSONObject getUserByEmailAddress(long companyId,
 		java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
@@ -163,7 +162,7 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject getUserByScreenName(java.lang.String companyId,
+	public static JSONObject getUserByScreenName(long companyId,
 		java.lang.String screenName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

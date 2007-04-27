@@ -56,7 +56,9 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 
 	public static final String AUTH_TYPE_ID = "userId";
 
-	public static final String SYSTEM = "system";
+	public static final long SYSTEM = 0;
+
+	public static final String SYSTEM_STRING = String.valueOf(SYSTEM);
 
 	public CompanyImpl() {
 	}
@@ -89,7 +91,7 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 		Account account = null;
 
 		try {
-			account = AccountLocalServiceUtil.getAccount(getCompanyId());
+			account = AccountLocalServiceUtil.getAccount(getAccountId());
 		}
 		catch (Exception e) {
 			account = new AccountImpl();

@@ -41,6 +41,7 @@ import com.liferay.portlet.wiki.service.base.WikiNodeLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.portlet.wiki.util.Indexer;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
 
@@ -249,7 +250,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 	public void reIndex(String[] ids) throws SystemException {
 		try {
-			String companyId = ids[0];
+			long companyId = GetterUtil.getLong(ids[0]);
 
 			Iterator itr1 = WikiNodeUtil.findByCompanyId(companyId).iterator();
 
@@ -286,7 +287,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			String companyId, long groupId, String[] nodeIds, String keywords)
+			long companyId, long groupId, String[] nodeIds, String keywords)
 		throws SystemException {
 
 		try {

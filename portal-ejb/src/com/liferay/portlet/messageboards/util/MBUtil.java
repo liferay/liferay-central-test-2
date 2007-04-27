@@ -323,7 +323,7 @@ public class MBUtil {
 		}
 	}
 
-	public static String getMailId(String messageId, String companyId) {
+	public static String getMailId(String messageId, long companyId) {
 		return StringPool.LESS_THAN + messageId + StringPool.PERIOD +
 			SMTP_PORTLET_PREFIX + StringPool.AT +
 				PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) +
@@ -331,7 +331,7 @@ public class MBUtil {
 	}
 
 	public static String getMailingListAddress(
-		String categoryId, String companyId) {
+		String categoryId, long companyId) {
 
 		return SMTP_PORTLET_PREFIX + categoryId + StringPool.AT +
 			PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + StringPool.PERIOD +

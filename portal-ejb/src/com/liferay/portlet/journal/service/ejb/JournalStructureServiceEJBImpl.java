@@ -84,7 +84,7 @@ public class JournalStructureServiceEJBImpl implements JournalStructureService,
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteStructure(java.lang.String companyId, long groupId,
+	public void deleteStructure(long companyId, long groupId,
 		java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -94,7 +94,7 @@ public class JournalStructureServiceEJBImpl implements JournalStructureService,
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure getStructure(
-		java.lang.String companyId, long groupId, java.lang.String structureId)
+		long companyId, long groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

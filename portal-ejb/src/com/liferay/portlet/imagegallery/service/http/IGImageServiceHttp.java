@@ -25,6 +25,7 @@ package com.liferay.portlet.imagegallery.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -223,17 +224,12 @@ public class IGImageServiceHttp {
 		}
 	}
 
-	public static void deleteImage(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String imageId)
+	public static void deleteImage(HttpPrincipal httpPrincipal, long companyId,
+		java.lang.String imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = imageId;
 
 			if (imageId == null) {
@@ -265,17 +261,11 @@ public class IGImageServiceHttp {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImage(
-		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		java.lang.String imageId)
+		HttpPrincipal httpPrincipal, long companyId, java.lang.String imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = imageId;
 
 			if (imageId == null) {

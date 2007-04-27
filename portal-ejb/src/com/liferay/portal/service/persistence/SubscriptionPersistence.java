@@ -330,7 +330,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_C_C(String companyId, String className, String classPK)
+	public List findByC_C_C(long companyId, String className, String classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -339,14 +339,7 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (className == null) {
@@ -371,10 +364,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (className != null) {
 				q.setString(queryPos++, className);
@@ -394,12 +384,12 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_C_C(String companyId, String className, String classPK,
+	public List findByC_C_C(long companyId, String className, String classPK,
 		int begin, int end) throws SystemException {
 		return findByC_C_C(companyId, className, classPK, begin, end, null);
 	}
 
-	public List findByC_C_C(String companyId, String className, String classPK,
+	public List findByC_C_C(long companyId, String className, String classPK,
 		int begin, int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -408,14 +398,7 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (className == null) {
@@ -445,10 +428,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (className != null) {
 				q.setString(queryPos++, className);
@@ -468,7 +448,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public Subscription findByC_C_C_First(String companyId, String className,
+	public Subscription findByC_C_C_First(long companyId, String className,
 		String classPK, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
 		List list = findByC_C_C(companyId, className, classPK, 0, 1, obc);
@@ -493,7 +473,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public Subscription findByC_C_C_Last(String companyId, String className,
+	public Subscription findByC_C_C_Last(long companyId, String className,
 		String classPK, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
 		int count = countByC_C_C(companyId, className, classPK);
@@ -521,8 +501,7 @@ public class SubscriptionPersistence extends BasePersistence {
 	}
 
 	public Subscription[] findByC_C_C_PrevAndNext(long subscriptionId,
-		String companyId, String className, String classPK,
-		OrderByComparator obc)
+		long companyId, String className, String classPK, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
 		int count = countByC_C_C(companyId, className, classPK);
@@ -533,14 +512,7 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (className == null) {
@@ -570,10 +542,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (className != null) {
 				q.setString(queryPos++, className);
@@ -600,7 +569,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public Subscription findByC_U_C_C(String companyId, long userId,
+	public Subscription findByC_U_C_C(long companyId, long userId,
 		String className, String classPK)
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = fetchByC_U_C_C(companyId, userId,
@@ -633,7 +602,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		return subscription;
 	}
 
-	public Subscription fetchByC_U_C_C(String companyId, long userId,
+	public Subscription fetchByC_U_C_C(long companyId, long userId,
 		String className, String classPK) throws SystemException {
 		Session session = null;
 
@@ -642,14 +611,7 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("userId = ?");
 			query.append(" AND ");
@@ -676,11 +638,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, userId);
 
 			if (className != null) {
@@ -793,7 +751,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_C_C(String companyId, String className, String classPK)
+	public void removeByC_C_C(long companyId, String className, String classPK)
 		throws SystemException {
 		Iterator itr = findByC_C_C(companyId, className, classPK).iterator();
 
@@ -803,9 +761,8 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_U_C_C(String companyId, long userId,
-		String className, String classPK)
-		throws NoSuchSubscriptionException, SystemException {
+	public void removeByC_U_C_C(long companyId, long userId, String className,
+		String classPK) throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = findByC_U_C_C(companyId, userId, className,
 				classPK);
 		remove(subscription);
@@ -857,7 +814,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_C_C(String companyId, String className, String classPK)
+	public int countByC_C_C(long companyId, String className, String classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -867,14 +824,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (className == null) {
@@ -899,10 +849,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (className != null) {
 				q.setString(queryPos++, className);
@@ -932,7 +879,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_U_C_C(String companyId, long userId, String className,
+	public int countByC_U_C_C(long companyId, long userId, String className,
 		String classPK) throws SystemException {
 		Session session = null;
 
@@ -942,14 +889,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 			query.append("userId = ?");
 			query.append(" AND ");
@@ -976,11 +916,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
+			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, userId);
 
 			if (className != null) {

@@ -53,14 +53,7 @@ import java.util.List;
 public class IGImageJSONSerializer {
 	public static JSONObject toJSONObject(IGImage model) {
 		JSONObject jsonObj = new JSONObject();
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
+		jsonObj.put("companyId", model.getCompanyId());
 
 		String imageId = model.getImageId();
 

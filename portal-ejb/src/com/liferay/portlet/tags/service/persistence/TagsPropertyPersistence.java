@@ -185,7 +185,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId) throws SystemException {
+	public List findByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -194,14 +194,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("key_ ASC");
@@ -210,10 +203,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return q.list();
 		}
@@ -225,12 +215,12 @@ public class TagsPropertyPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end)
+	public List findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(String companyId, int begin, int end,
+	public List findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -240,14 +230,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -263,10 +246,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -278,7 +258,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		}
 	}
 
-	public TagsProperty findByCompanyId_First(String companyId,
+	public TagsProperty findByCompanyId_First(long companyId,
 		OrderByComparator obc) throws NoSuchPropertyException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
@@ -296,7 +276,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		}
 	}
 
-	public TagsProperty findByCompanyId_Last(String companyId,
+	public TagsProperty findByCompanyId_Last(long companyId,
 		OrderByComparator obc) throws NoSuchPropertyException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -316,7 +296,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 	}
 
 	public TagsProperty[] findByCompanyId_PrevAndNext(long propertyId,
-		String companyId, OrderByComparator obc)
+		long companyId, OrderByComparator obc)
 		throws NoSuchPropertyException, SystemException {
 		TagsProperty tagsProperty = findByPrimaryKey(propertyId);
 		int count = countByCompanyId(companyId);
@@ -328,14 +308,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -351,10 +324,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					tagsProperty);
@@ -531,8 +501,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_K(String companyId, String key)
-		throws SystemException {
+	public List findByC_K(long companyId, String key) throws SystemException {
 		Session session = null;
 
 		try {
@@ -541,14 +510,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (key == null) {
@@ -566,10 +528,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (key != null) {
 				q.setString(queryPos++, key);
@@ -585,12 +544,12 @@ public class TagsPropertyPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_K(String companyId, String key, int begin, int end)
+	public List findByC_K(long companyId, String key, int begin, int end)
 		throws SystemException {
 		return findByC_K(companyId, key, begin, end, null);
 	}
 
-	public List findByC_K(String companyId, String key, int begin, int end,
+	public List findByC_K(long companyId, String key, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -600,14 +559,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (key == null) {
@@ -632,10 +584,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (key != null) {
 				q.setString(queryPos++, key);
@@ -651,7 +600,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		}
 	}
 
-	public TagsProperty findByC_K_First(String companyId, String key,
+	public TagsProperty findByC_K_First(long companyId, String key,
 		OrderByComparator obc) throws NoSuchPropertyException, SystemException {
 		List list = findByC_K(companyId, key, 0, 1, obc);
 
@@ -672,7 +621,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		}
 	}
 
-	public TagsProperty findByC_K_Last(String companyId, String key,
+	public TagsProperty findByC_K_Last(long companyId, String key,
 		OrderByComparator obc) throws NoSuchPropertyException, SystemException {
 		int count = countByC_K(companyId, key);
 		List list = findByC_K(companyId, key, count - 1, count, obc);
@@ -695,7 +644,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 	}
 
 	public TagsProperty[] findByC_K_PrevAndNext(long propertyId,
-		String companyId, String key, OrderByComparator obc)
+		long companyId, String key, OrderByComparator obc)
 		throws NoSuchPropertyException, SystemException {
 		TagsProperty tagsProperty = findByPrimaryKey(propertyId);
 		int count = countByC_K(companyId, key);
@@ -707,14 +656,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (key == null) {
@@ -739,10 +681,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (key != null) {
 				q.setString(queryPos++, key);
@@ -921,7 +860,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCompanyId(String companyId) throws SystemException {
+	public void removeByCompanyId(long companyId) throws SystemException {
 		Iterator itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
@@ -939,7 +878,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_K(String companyId, String key)
+	public void removeByC_K(long companyId, String key)
 		throws SystemException {
 		Iterator itr = findByC_K(companyId, key).iterator();
 
@@ -963,7 +902,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCompanyId(String companyId) throws SystemException {
+	public int countByCompanyId(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -973,24 +912,14 @@ public class TagsPropertyPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1051,8 +980,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_K(String companyId, String key)
-		throws SystemException {
+	public int countByC_K(long companyId, String key) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1062,14 +990,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.tags.model.TagsProperty WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
+			query.append("companyId = ?");
 			query.append(" AND ");
 
 			if (key == null) {
@@ -1085,10 +1006,7 @@ public class TagsPropertyPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
+			q.setLong(queryPos++, companyId);
 
 			if (key != null) {
 				q.setString(queryPos++, key);

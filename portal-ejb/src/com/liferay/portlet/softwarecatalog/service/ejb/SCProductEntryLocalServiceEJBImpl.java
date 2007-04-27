@@ -220,9 +220,9 @@ public class SCProductEntryLocalServiceEJBImpl
 		SCProductEntryLocalServiceFactory.getTxImpl().reIndex(ids);
 	}
 
-	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, long groupId, java.lang.String type,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, java.lang.String type, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
 		return SCProductEntryLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, type, keywords);
 	}

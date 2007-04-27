@@ -81,7 +81,7 @@ public class EditPluginSettingAction extends PortletAction {
 	}
 
 	protected void updatePluginSetting(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		String pluginId = ParamUtil.getString(req, "pluginId");
 		String pluginType = ParamUtil.getString(req, "pluginType");
 		String roles = StringUtil.replace(ParamUtil.getString(

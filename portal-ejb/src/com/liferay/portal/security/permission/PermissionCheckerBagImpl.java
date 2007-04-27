@@ -95,8 +95,8 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		return _roles;
 	}
 
-	public boolean isCompanyAdmin(String companyId) throws Exception {
-		String key = companyId;
+	public boolean isCompanyAdmin(long companyId) throws Exception {
+		String key = String.valueOf(companyId);
 
 		Boolean value = (Boolean)_isCompanyAdmin.get(key);
 
@@ -114,7 +114,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	}
 
 	public boolean isCommunityAdmin(
-			String companyId, long groupId, String name)
+			long companyId, long groupId, String name)
 		throws Exception {
 
 		String key =
@@ -132,7 +132,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	}
 
 	protected boolean isCommunityAdminImpl(
-			String companyId, long groupId, String name)
+			long companyId, long groupId, String name)
 		throws PortalException, RemoteException, SystemException {
 
 		if (groupId <= 0) {

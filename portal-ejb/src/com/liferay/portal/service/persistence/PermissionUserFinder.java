@@ -104,7 +104,7 @@ public class PermissionUserFinder {
 	public static int COUNT_USERS_TYPE_ROLE = 3;
 
 	public static int countByOrgGroupPermissions(
-			String companyId, String name, String primKey, String actionId)
+			long companyId, String name, String primKey, String actionId)
 		throws SystemException {
 
 		Session session = null;
@@ -148,7 +148,7 @@ public class PermissionUserFinder {
 	}
 
 	public static int countByPermissionAndRole(
-			String companyId, long groupId, String name, String primKey,
+			long companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator)
 		throws SystemException {
@@ -207,7 +207,7 @@ public class PermissionUserFinder {
 	}
 
 	public static int countByUserAndOrgGroupPermission(
-			String companyId, String name, String primKey, String actionId,
+			long companyId, String name, String primKey, String actionId,
 			String firstName, String middleName, String lastName,
 			String emailAddress, boolean andOperator)
 		throws SystemException {
@@ -244,7 +244,7 @@ public class PermissionUserFinder {
 	}
 
 	public static int countUsers(
-			Session session, String sql, String companyId, long groupId,
+			Session session, String sql, long companyId, long groupId,
 			String name, String primKey, String actionId, String firstName,
 			String middleName, String lastName, String emailAddress,
 			boolean andOperator, int countUsersType)
@@ -299,7 +299,7 @@ public class PermissionUserFinder {
 	}
 
 	public static List findByPermissionAndRole(
-			String companyId, long groupId, String name, String primKey,
+			long companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator,
 			int begin, int end)
@@ -392,7 +392,7 @@ public class PermissionUserFinder {
 	}
 
 	public static List findByUserAndOrgGroupPermission(
-			String companyId, String name, String primKey, String actionId,
+			long companyId, String name, String primKey, String actionId,
 			String firstName, String middleName, String lastName,
 			String emailAddress, boolean andOperator, int begin, int end)
 		throws SystemException {

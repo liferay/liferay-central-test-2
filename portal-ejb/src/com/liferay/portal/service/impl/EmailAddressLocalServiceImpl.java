@@ -93,7 +93,7 @@ public class EmailAddressLocalServiceImpl
 	}
 
 	public void deleteEmailAddresses(
-			String companyId, String className, String classPK)
+			long companyId, String className, String classPK)
 		throws SystemException {
 
 		EmailAddressUtil.removeByC_C_C(companyId, className, classPK);
@@ -112,7 +112,7 @@ public class EmailAddressLocalServiceImpl
 	}
 
 	public List getEmailAddresses(
-			String companyId, String className, String classPK)
+			long companyId, String className, String classPK)
 		throws SystemException {
 
 		return EmailAddressUtil.findByC_C_C(companyId, className, classPK);
@@ -123,7 +123,7 @@ public class EmailAddressLocalServiceImpl
 			boolean primary)
 		throws PortalException, SystemException {
 
-		validate(emailAddressId, null, null, null, address, typeId, primary);
+		validate(emailAddressId, 0, null, null, address, typeId, primary);
 
 		EmailAddress emailAddress =
 			EmailAddressUtil.findByPrimaryKey(emailAddressId);
@@ -139,7 +139,7 @@ public class EmailAddressLocalServiceImpl
 	}
 
 	protected void validate(
-			long emailAddressId, String companyId, String className,
+			long emailAddressId, long companyId, String className,
 			String classPK, String address, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
@@ -168,7 +168,7 @@ public class EmailAddressLocalServiceImpl
 	}
 
 	protected void validate(
-			long emailAddressId, String companyId, String className,
+			long emailAddressId, long companyId, String className,
 			String classPK, boolean primary)
 		throws PortalException, SystemException {
 

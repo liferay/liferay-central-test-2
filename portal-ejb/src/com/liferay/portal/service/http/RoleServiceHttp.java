@@ -145,16 +145,11 @@ public class RoleServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Role getGroupRole(
-		HttpPrincipal httpPrincipal, java.lang.String companyId, long groupId)
+		HttpPrincipal httpPrincipal, long companyId, long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = new LongWrapper(groupId);
 			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
 					"getGroupRole", new Object[] { paramObj0, paramObj1 });
@@ -222,17 +217,11 @@ public class RoleServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Role getRole(
-		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		java.lang.String name)
+		HttpPrincipal httpPrincipal, long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = name;
 
 			if (name == null) {

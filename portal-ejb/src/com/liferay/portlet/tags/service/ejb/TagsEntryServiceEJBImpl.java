@@ -88,8 +88,8 @@ public class TagsEntryServiceEJBImpl implements TagsEntryService, SessionBean {
 		return TagsEntryServiceFactory.getTxImpl().getEntries(className, classPK);
 	}
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties)
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
@@ -97,8 +97,8 @@ public class TagsEntryServiceEJBImpl implements TagsEntryService, SessionBean {
 			properties);
 	}
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties, int begin, int end)
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
@@ -107,8 +107,8 @@ public class TagsEntryServiceEJBImpl implements TagsEntryService, SessionBean {
 	}
 
 	public com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String[] properties, int begin, int end)
+		long companyId, java.lang.String name, java.lang.String[] properties,
+		int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
@@ -116,7 +116,7 @@ public class TagsEntryServiceEJBImpl implements TagsEntryService, SessionBean {
 			name, properties, begin, end);
 	}
 
-	public int searchCount(java.lang.String companyId, java.lang.String name,
+	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

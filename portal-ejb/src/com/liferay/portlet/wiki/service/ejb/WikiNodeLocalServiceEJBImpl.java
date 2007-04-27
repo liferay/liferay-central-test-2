@@ -180,9 +180,9 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 		WikiNodeLocalServiceFactory.getTxImpl().reIndex(ids);
 	}
 
-	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, long groupId, java.lang.String[] nodeIds,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, java.lang.String[] nodeIds, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
 		return WikiNodeLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, nodeIds, keywords);
 	}

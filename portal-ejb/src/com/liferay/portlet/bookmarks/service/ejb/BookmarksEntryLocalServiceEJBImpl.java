@@ -221,13 +221,13 @@ public class BookmarksEntryLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
-		java.lang.String companyId, long entryId, long folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
+		long entryId, long folderId, java.lang.String name,
+		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return BookmarksEntryLocalServiceFactory.getTxImpl().updateEntry(companyId,
-			entryId, folderId, name, url, comments, tagsEntries);
+		return BookmarksEntryLocalServiceFactory.getTxImpl().updateEntry(entryId,
+			folderId, name, url, comments, tagsEntries);
 	}
 
 	public void ejbCreate() throws CreateException {

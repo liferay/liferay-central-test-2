@@ -67,7 +67,7 @@ public class LayoutSetLocalServiceEJBImpl implements LayoutSetLocalService,
 	}
 
 	public com.liferay.portal.model.LayoutSet addLayoutSet(
-		java.lang.String ownerId, java.lang.String companyId)
+		java.lang.String ownerId, long companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return LayoutSetLocalServiceFactory.getTxImpl().addLayoutSet(ownerId,
@@ -87,8 +87,8 @@ public class LayoutSetLocalServiceEJBImpl implements LayoutSetLocalService,
 		return LayoutSetLocalServiceFactory.getTxImpl().getLayoutSet(ownerId);
 	}
 
-	public com.liferay.portal.model.LayoutSet getLayoutSet(
-		java.lang.String companyId, java.lang.String virtualHost)
+	public com.liferay.portal.model.LayoutSet getLayoutSet(long companyId,
+		java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return LayoutSetLocalServiceFactory.getTxImpl().getLayoutSet(companyId,

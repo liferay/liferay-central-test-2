@@ -22,13 +22,13 @@
 		<default-hints>
 			<hint name="display-width">150</hint>
 		</default-hints>
-		<field name="accountId" type="String" />
-		<field name="companyId" type="String" />
+		<field name="accountId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="parentAccountId" type="String" />
+		<field name="parentAccountId" type="long" />
 		<field name="name" type="String" />
 		<field name="legalName" type="String" />
 		<field name="legalId" type="String" />
@@ -44,7 +44,7 @@
 			<hint name="display-width">150</hint>
 		</default-hints>
 		<field name="addressId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -66,7 +66,9 @@
 		<default-hints>
 			<hint name="display-width">150</hint>
 		</default-hints>
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
+		<field name="accountId" type="long" />
+		<field name="webId" type="String" />
 		<field name="key" type="String">
 			<hint-collection name="CLOB" />
 		</field>
@@ -79,12 +81,12 @@
 			<hint name="display-width">150</hint>
 		</default-hints>
 		<field name="contactId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="accountId" type="String" />
+		<field name="accountId" type="long" />
 		<field name="parentContactId" type="long" />
 		<field name="firstName" type="String" />
 		<field name="middleName" type="String" />
@@ -120,7 +122,7 @@
 	</model>
 	<model name="com.liferay.portal.model.DataTracker">
 		<field name="dataTrackerId" type="String" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="createdOn" type="Date" />
 		<field name="createdByUserId" type="long" />
 		<field name="createdByUserName" type="String" />
@@ -132,7 +134,7 @@
 	</model>
 	<model name="com.liferay.portal.model.EmailAddress">
 		<field name="emailAddressId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -147,7 +149,7 @@
 	</model>
 	<model name="com.liferay.portal.model.Group">
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="creatorUserId" type="long" />
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
@@ -176,7 +178,7 @@
 	<model name="com.liferay.portal.model.Layout">
 		<field name="layoutId" type="String" />
 		<field name="ownerId" type="String" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="parentLayoutId" type="String" />
 		<field name="name" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -198,7 +200,7 @@
 	</model>
 	<model name="com.liferay.portal.model.LayoutSet">
 		<field name="ownerId" type="String" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="userId" type="long" />
 		<field name="privateLayout" type="boolean" />
@@ -216,7 +218,7 @@
 	</model>
 	<model name="com.liferay.portal.model.Organization">
 		<field name="organizationId" type="String" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="parentOrganizationId" type="String" />
 		<field name="name" type="String">
 			<hint name="display-width">150</hint>
@@ -260,7 +262,7 @@
 	</model>
 	<model name="com.liferay.portal.model.PasswordPolicy">
 		<field name="passwordPolicyId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -302,13 +304,13 @@
 	</model>
 	<model name="com.liferay.portal.model.Permission">
 		<field name="permissionId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="actionId" type="String" />
 		<field name="resourceId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.Phone">
 		<field name="phoneId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -326,7 +328,7 @@
 	</model>
 	<model name="com.liferay.portal.model.PluginSetting">
 		<field name="pluginSettingId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="pluginId" type="String" />
 		<field name="pluginType" type="String" />
 		<field name="roles" type="String" />
@@ -334,7 +336,7 @@
 	</model>
 	<model name="com.liferay.portal.model.Portlet">
 		<field name="portletId" type="String" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="roles" type="String" />
 		<field name="active" type="boolean" />
 	</model>
@@ -372,13 +374,13 @@
 	</model>
 	<model name="com.liferay.portal.model.ResourceCode">
 		<field name="codeId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="name" type="String" />
 		<field name="scope" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.Role">
 		<field name="roleId" type="String" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
 		<field name="name" type="String">
@@ -391,7 +393,7 @@
 	</model>
 	<model name="com.liferay.portal.model.Subscription">
 		<field name="subscriptionId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -405,7 +407,7 @@
 			<hint name="display-width">150</hint>
 		</default-hints>
 		<field name="userId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="defaultUser" type="boolean" />
@@ -432,7 +434,7 @@
 	</model>
 	<model name="com.liferay.portal.model.UserGroup">
 		<field name="userGroupId" type="String" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="parentUserGroupId" type="String" />
 		<field name="name" type="String">
 			<hint name="display-width">150</hint>
@@ -454,7 +456,7 @@
 	</model>
 	<model name="com.liferay.portal.model.UserTracker">
 		<field name="userTrackerId" type="String" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="modifiedDate" type="Date" />
 		<field name="remoteAddr" type="String" />
@@ -473,7 +475,7 @@
 	</model>
 	<model name="com.liferay.portal.model.Website">
 		<field name="websiteId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -486,7 +488,7 @@
 	</model>
 	<model name="com.liferay.portlet.blogs.model.BlogsCategory">
 		<field name="categoryId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -500,7 +502,7 @@
 	<model name="com.liferay.portlet.blogs.model.BlogsEntry">
 		<field name="entryId" type="long" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -514,7 +516,7 @@
 	</model>
 	<model name="com.liferay.portlet.bookmarks.model.BookmarksEntry">
 		<field name="entryId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
@@ -531,7 +533,7 @@
 	<model name="com.liferay.portlet.bookmarks.model.BookmarksFolder">
 		<field name="folderId" type="long" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
@@ -544,7 +546,7 @@
 	<model name="com.liferay.portlet.calendar.model.CalEvent">
 		<field name="eventId" type="long" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -573,7 +575,7 @@
 		<field name="name" type="String">
 			<hint name="max-length">100</hint>
 		</field>
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="versionUserId" type="long" />
@@ -594,7 +596,7 @@
 		</field>
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileRank">
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="folderId" type="String" />
 		<field name="name" type="String">
@@ -604,7 +606,7 @@
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileShortcut">
 		<field name="fileShortcutId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -619,7 +621,7 @@
 			<hint name="max-length">100</hint>
 		</field>
 		<field name="version" type="double" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -628,7 +630,7 @@
 	<model name="com.liferay.portlet.documentlibrary.model.DLFolder">
 		<field name="folderId" type="String" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -645,7 +647,7 @@
 	<model name="com.liferay.portlet.imagegallery.model.IGFolder">
 		<field name="folderId" type="String" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
@@ -656,7 +658,7 @@
 		</field>
 	</model>
 	<model name="com.liferay.portlet.imagegallery.model.IGImage">
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="imageId" type="String" />
 		<field name="userId" type="long" />
 		<field name="createDate" type="Date" />
@@ -670,7 +672,7 @@
 		<field name="size" type="int" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalArticle">
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="articleId" type="String">
 			<hint name="upper-case">true</hint>
@@ -704,11 +706,11 @@
 		<field name="layoutId" type="String" />
 		<field name="ownerId" type="String" />
 		<field name="articleId" type="String" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalStructure">
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="structureId" type="String">
 			<hint name="upper-case">true</hint>
@@ -726,7 +728,7 @@
 		</field>
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalTemplate">
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="templateId" type="String">
 			<hint name="upper-case">true</hint>
@@ -750,7 +752,7 @@
 	<model name="com.liferay.portlet.messageboards.model.MBBan">
 		<field name="banId" type="long" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -760,7 +762,7 @@
 	<model name="com.liferay.portlet.messageboards.model.MBCategory">
 		<field name="categoryId" type="String" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -781,7 +783,7 @@
 	<model name="com.liferay.portlet.messageboards.model.MBMessage">
 		<field name="topicId" type="String" />
 		<field name="messageId" type="String" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -827,7 +829,7 @@
 	<model name="com.liferay.portlet.polls.model.PollsQuestion">
 		<field name="questionId" type="String" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -847,7 +849,7 @@
 	</model>
 	<model name="com.liferay.portlet.ratings.model.RatingsEntry">
 		<field name="entryId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -867,7 +869,7 @@
 	<model name="com.liferay.portlet.shopping.model.ShoppingCart">
 		<field name="cartId" type="String" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -884,7 +886,7 @@
 	<model name="com.liferay.portlet.shopping.model.ShoppingCategory">
 		<field name="categoryId" type="String" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -900,7 +902,7 @@
 			<hint name="upper-case">true</hint>
 		</field>
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -924,7 +926,7 @@
 	</model>
 	<model name="com.liferay.portlet.shopping.model.ShoppingItem">
 		<field name="itemId" type="String" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -1002,7 +1004,7 @@
 		</default-hints>
 		<field name="orderId" type="String" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -1085,7 +1087,7 @@
 	<model name="com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion">
 		<field name="frameworkVersionId" type="long" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -1102,7 +1104,7 @@
 	<model name="com.liferay.portlet.softwarecatalog.model.SCProductEntry">
 		<field name="productEntryId" type="long" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -1125,7 +1127,7 @@
 	</model>
 	<model name="com.liferay.portlet.softwarecatalog.model.SCProductVersion">
 		<field name="productVersionId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -1148,7 +1150,7 @@
 	</model>
 	<model name="com.liferay.portlet.tags.model.TagsAsset">
 		<field name="assetId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -1167,7 +1169,7 @@
 	</model>
 	<model name="com.liferay.portlet.tags.model.TagsEntry">
 		<field name="entryId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -1176,7 +1178,7 @@
 	</model>
 	<model name="com.liferay.portlet.tags.model.TagsProperty">
 		<field name="propertyId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -1194,7 +1196,7 @@
 	<model name="com.liferay.portlet.wiki.model.WikiNode">
 		<field name="nodeId" type="String" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -1209,7 +1211,7 @@
 		<field name="nodeId" type="String" />
 		<field name="title" type="String" />
 		<field name="version" type="double" />
-		<field name="companyId" type="String" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />

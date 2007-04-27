@@ -56,7 +56,7 @@ public class CASAutoLogin implements AutoLogin {
 				(String)ses.getAttribute(CASFilter.CAS_FILTER_USER);
 
 			if (screenName != null) {
-				String companyId = PortalUtil.getCompanyId(req);
+				long companyId = PortalUtil.getCompanyId(req);
 				User user = null;
 
 				try {
@@ -83,7 +83,7 @@ public class CASAutoLogin implements AutoLogin {
 	}
 
 	protected User processNoSuchUserException(
-			String companyId, String screenName, NoSuchUserException nsue)
+			long companyId, String screenName, NoSuchUserException nsue)
 		throws PortalException, SystemException {
 
 		throw nsue;

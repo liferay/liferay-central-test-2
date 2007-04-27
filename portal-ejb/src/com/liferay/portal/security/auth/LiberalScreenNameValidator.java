@@ -32,7 +32,7 @@ import com.liferay.util.Validator;
  */
 public class LiberalScreenNameValidator extends ScreenNameValidator {
 
-	public boolean validate(String companyId, String screenName) {
+	public boolean validate(long companyId, String screenName) {
 		if (Validator.isNull(screenName)) {
 			return false;
 		}

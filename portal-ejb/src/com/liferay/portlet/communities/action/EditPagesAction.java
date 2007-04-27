@@ -311,7 +311,7 @@ public class EditPagesAction extends PortletAction {
 			ActionRequest req, Layout layout, Layout copyLayout)
 		throws Exception {
 
-		String companyId = layout.getCompanyId();
+		long companyId = layout.getCompanyId();
 
 		LayoutTypePortlet copyLayoutTypePortlet =
 			(LayoutTypePortlet)copyLayout.getLayoutType();
@@ -564,7 +564,7 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void updateLookAndFeel(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 
 		String layoutId = ParamUtil.getString(req, "layoutId");
 		String ownerId = ParamUtil.getString(req, "ownerId");

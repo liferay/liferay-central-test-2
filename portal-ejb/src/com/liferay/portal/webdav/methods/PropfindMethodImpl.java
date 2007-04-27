@@ -236,7 +236,7 @@ public class PropfindMethodImpl implements Method {
 
 	protected String getResponseXML(WebDAVRequest webDavReq) throws Exception {
 		WebDAVStorage storage = webDavReq.getWebDAVStorage();
-		String companyId = webDavReq.getCompanyId();
+		long companyId = webDavReq.getCompanyId();
 		long groupId = webDavReq.getGroupId();
 		DateFormat createDateFormat = getCreateDateFormat();
 		DateFormat modifiedDateFormat = getModifiedDateFormat();
@@ -252,7 +252,7 @@ public class PropfindMethodImpl implements Method {
 
 		doc.setRootElement(multistatus);
 
-		if (Validator.isNull(companyId)) {
+		if (companyId <= 0) {
 			return getResponseXML(doc);
 		}
 
@@ -260,7 +260,7 @@ public class PropfindMethodImpl implements Method {
 			addResponse(
 				new BaseResourceImpl(
 					storage.getRootPath() + StringPool.SLASH + companyId,
-					companyId, true),
+					String.valueOf(companyId), true),
 				props, multistatus, createDateFormat, modifiedDateFormat);
 
 			if (props.size() > 0) {

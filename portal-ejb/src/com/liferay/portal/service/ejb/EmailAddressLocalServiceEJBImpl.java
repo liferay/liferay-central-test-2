@@ -81,7 +81,7 @@ public class EmailAddressLocalServiceEJBImpl implements EmailAddressLocalService
 		EmailAddressLocalServiceFactory.getTxImpl().deleteEmailAddress(emailAddressId);
 	}
 
-	public void deleteEmailAddresses(java.lang.String companyId,
+	public void deleteEmailAddresses(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		EmailAddressLocalServiceFactory.getTxImpl().deleteEmailAddresses(companyId,
@@ -100,7 +100,7 @@ public class EmailAddressLocalServiceEJBImpl implements EmailAddressLocalService
 		return EmailAddressLocalServiceFactory.getTxImpl().getEmailAddresses();
 	}
 
-	public java.util.List getEmailAddresses(java.lang.String companyId,
+	public java.util.List getEmailAddresses(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		return EmailAddressLocalServiceFactory.getTxImpl().getEmailAddresses(companyId,

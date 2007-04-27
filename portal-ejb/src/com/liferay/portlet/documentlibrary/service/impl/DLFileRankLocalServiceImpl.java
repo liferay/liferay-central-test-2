@@ -59,7 +59,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	}
 
 	public DLFileRank updateFileRank(
-			long groupId, String companyId, long userId, String folderId,
+			long groupId, long companyId, long userId, String folderId,
 			String name)
 		throws PortalException, SystemException{
 

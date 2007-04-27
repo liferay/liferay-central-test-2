@@ -50,7 +50,7 @@ public class LayoutFinder {
 		LayoutFinder.class.getName() + ".findByC_P_P";
 
 	public static List findByC_P_P(
-			String companyId, String portletId, String prefsKey,
+			long companyId, String portletId, String prefsKey,
 			String prefsValue)
 		throws SystemException {
 

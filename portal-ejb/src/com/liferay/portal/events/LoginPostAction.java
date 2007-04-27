@@ -66,7 +66,7 @@ public class LoginPostAction extends Action {
 
 			HttpSession ses = req.getSession();
 
-			String companyId = PortalUtil.getCompanyId(req);
+			long companyId = PortalUtil.getCompanyId(req);
 			long userId = PortalUtil.getUserId(req);
 
 			if (GetterUtil.getBoolean(

@@ -150,40 +150,38 @@ public class UserGroupUtil {
 		return getPersistence().fetchByPrimaryKey(userGroupId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId)
+	public static java.util.List findByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.UserGroup findByCompanyId_First(
-		java.lang.String companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.UserGroup findByCompanyId_Last(
-		java.lang.String companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.UserGroup[] findByCompanyId_PrevAndNext(
-		java.lang.String userGroupId, java.lang.String companyId,
+		java.lang.String userGroupId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupException {
@@ -191,20 +189,20 @@ public class UserGroupUtil {
 			companyId, obc);
 	}
 
-	public static java.util.List findByC_P(java.lang.String companyId,
+	public static java.util.List findByC_P(long companyId,
 		java.lang.String parentUserGroupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_P(companyId, parentUserGroupId);
 	}
 
-	public static java.util.List findByC_P(java.lang.String companyId,
+	public static java.util.List findByC_P(long companyId,
 		java.lang.String parentUserGroupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_P(companyId, parentUserGroupId, begin,
 			end);
 	}
 
-	public static java.util.List findByC_P(java.lang.String companyId,
+	public static java.util.List findByC_P(long companyId,
 		java.lang.String parentUserGroupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
@@ -213,7 +211,7 @@ public class UserGroupUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroup findByC_P_First(
-		java.lang.String companyId, java.lang.String parentUserGroupId,
+		long companyId, java.lang.String parentUserGroupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupException {
@@ -222,7 +220,7 @@ public class UserGroupUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroup findByC_P_Last(
-		java.lang.String companyId, java.lang.String parentUserGroupId,
+		long companyId, java.lang.String parentUserGroupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupException {
@@ -230,7 +228,7 @@ public class UserGroupUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroup[] findByC_P_PrevAndNext(
-		java.lang.String userGroupId, java.lang.String companyId,
+		java.lang.String userGroupId, long companyId,
 		java.lang.String parentUserGroupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
@@ -239,15 +237,15 @@ public class UserGroupUtil {
 			parentUserGroupId, obc);
 	}
 
-	public static com.liferay.portal.model.UserGroup findByC_N(
-		java.lang.String companyId, java.lang.String name)
+	public static com.liferay.portal.model.UserGroup findByC_N(long companyId,
+		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupException {
 		return getPersistence().findByC_N(companyId, name);
 	}
 
 	public static com.liferay.portal.model.UserGroup fetchByC_N(
-		java.lang.String companyId, java.lang.String name)
+		long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_N(companyId, name);
 	}
@@ -281,19 +279,18 @@ public class UserGroupUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByCompanyId(java.lang.String companyId)
+	public static void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
-	public static void removeByC_P(java.lang.String companyId,
+	public static void removeByC_P(long companyId,
 		java.lang.String parentUserGroupId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByC_P(companyId, parentUserGroupId);
 	}
 
-	public static void removeByC_N(java.lang.String companyId,
-		java.lang.String name)
+	public static void removeByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupException {
 		getPersistence().removeByC_N(companyId, name);
@@ -303,19 +300,19 @@ public class UserGroupUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByCompanyId(java.lang.String companyId)
+	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
-	public static int countByC_P(java.lang.String companyId,
+	public static int countByC_P(long companyId,
 		java.lang.String parentUserGroupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_P(companyId, parentUserGroupId);
 	}
 
-	public static int countByC_N(java.lang.String companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static int countByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_N(companyId, name);
 	}
 

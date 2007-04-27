@@ -52,7 +52,7 @@ public class ShoppingCouponFinder {
 		ShoppingCouponFinder.class.getName() + ".findByC_G_C_A_DT";
 
 	public static int countByC_G_C_A_DT(
-			String couponId, long groupId, String companyId, boolean active,
+			String couponId, long groupId, long companyId, boolean active,
 			String discountType, boolean andOperator)
 		throws SystemException {
 
@@ -104,7 +104,7 @@ public class ShoppingCouponFinder {
 	}
 
 	public static List findByC_G_C_A_DT(
-			String couponId, long groupId, String companyId, boolean active,
+			String couponId, long groupId, long companyId, boolean active,
 			String discountType, boolean andOperator, int begin, int end)
 		throws SystemException {
 

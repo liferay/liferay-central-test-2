@@ -68,15 +68,15 @@ import org.json.JSONObject;
  *
  */
 public class JournalTemplateServiceJSON {
-	public static void deleteTemplate(java.lang.String companyId, long groupId,
+	public static void deleteTemplate(long companyId, long groupId,
 		java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		JournalTemplateServiceUtil.deleteTemplate(companyId, groupId, templateId);
 	}
 
-	public static JSONObject getTemplate(java.lang.String companyId,
-		long groupId, java.lang.String templateId)
+	public static JSONObject getTemplate(long companyId, long groupId,
+		java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.journal.model.JournalTemplate returnValue = JournalTemplateServiceUtil.getTemplate(companyId,

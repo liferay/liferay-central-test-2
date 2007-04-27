@@ -60,14 +60,7 @@ public class RoleJSONSerializer {
 			jsonObj.put("roleId", roleId.toString());
 		}
 
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
+		jsonObj.put("companyId", model.getCompanyId());
 
 		String className = model.getClassName();
 

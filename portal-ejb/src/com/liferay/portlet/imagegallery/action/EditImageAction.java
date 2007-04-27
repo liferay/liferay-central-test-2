@@ -126,7 +126,7 @@ public class EditImageAction extends PortletAction {
 	}
 
 	protected void deleteImage(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		String imageId = ParamUtil.getString(req, "imageId");
 
 		IGImageServiceUtil.deleteImage(companyId, imageId);

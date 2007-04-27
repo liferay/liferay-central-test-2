@@ -121,7 +121,7 @@ public class MessagingAction extends Action {
 			String tempId = ParamUtil.getString(req, "tempId", null);
 			long toId = ParamUtil.getLong(req, "toId");
 			String toAddr = ParamUtil.getString(req, "toAddr", null);
-			String companyId = PortalUtil.getCompanyId(req);
+			long companyId = PortalUtil.getCompanyId(req);
 			User fromUser = PortalUtil.getUser(req);
 			User toUser;
 

@@ -22,11 +22,7 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
-
-import java.util.Collections;
-import java.util.Set;
 
 /**
  * <a href="PortalInstances.java.html"><b><i>View Source</i></b></a>
@@ -36,23 +32,23 @@ import java.util.Set;
  */
 public class PortalInstances {
 
-	public static String getDefaultCompanyId() {
-		String[] companyIds = getCompanyIds();
+	public static long getDefaultCompanyId() {
+		long[] companyIds = getCompanyIds();
 
 		if (companyIds.length > 0) {
 			return companyIds[0];
 		}
 		else {
-			return null;
+			return 0;
 		}
 	}
 
-	public static String[] getCompanyIds() {
+	public static long[] getCompanyIds() {
 		return _instance._getCompanyIds();
 	}
 
-	public static boolean init(String companyId) {
-		return _instance._init(companyId);
+	public static void init(long companyId) {
+		_instance._init(companyId);
 	}
 
 	public static boolean matches() {
@@ -60,23 +56,29 @@ public class PortalInstances {
 	}
 
 	private PortalInstances() {
-		_companyIds =
-			Collections.synchronizedSet(CollectionFactory.getHashSet());
+		_companyIds = new long[0];
 	}
 
-	private String[] _getCompanyIds() {
-		return (String[])_companyIds.toArray(new String[0]);
+	private long[] _getCompanyIds() {
+		return _companyIds;
 	}
 
-	private boolean _init(String companyId) {
-		return _companyIds.add(companyId);
+	private void _init(long companyId) {
+		long[] companyIds = new long[_companyIds.length + 1];
+
+		System.arraycopy(
+			_companyIds, 0, companyIds, 0, _companyIds.length);
+
+		companyIds[_companyIds.length] = companyId;
+
+		_companyIds = companyIds;
 	}
 
 	private boolean _matches() {
 		int instances = GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.PORTAL_INSTANCES), 1);
 
-		if (instances > _companyIds.size()) {
+		if (instances > _companyIds.length) {
 			return false;
 		}
 
@@ -85,6 +87,6 @@ public class PortalInstances {
 
 	private static PortalInstances _instance = new PortalInstances();
 
-	private Set _companyIds;
+	private long[] _companyIds;
 
 }

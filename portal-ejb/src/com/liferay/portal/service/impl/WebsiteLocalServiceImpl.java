@@ -92,8 +92,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		WebsiteUtil.remove(websiteId);
 	}
 
-	public void deleteWebsites(
-			String companyId, String className, String classPK)
+	public void deleteWebsites(long companyId, String className, String classPK)
 		throws SystemException {
 
 		WebsiteUtil.removeByC_C_C(companyId, className, classPK);
@@ -109,7 +108,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		return WebsiteUtil.findAll();
 	}
 
-	public List getWebsites(String companyId, String className, String classPK)
+	public List getWebsites(long companyId, String className, String classPK)
 		throws SystemException {
 
 		return WebsiteUtil.findByC_C_C(companyId, className, classPK);
@@ -119,7 +118,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 			long websiteId, String url, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
-		validate(websiteId, null, null, null, url, typeId, primary);
+		validate(websiteId, 0, null, null, url, typeId, primary);
 
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
 
@@ -134,8 +133,8 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			long websiteId, String companyId, String className,
-			String classPK, String url, int typeId, boolean primary)
+			long websiteId, long companyId, String className, String classPK,
+			String url, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(url)) {
@@ -170,8 +169,8 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			long websiteId, String companyId, String className,
-			String classPK, boolean primary)
+			long websiteId, long companyId, String className, String classPK,
+			boolean primary)
 		throws PortalException, SystemException {
 
 		// Check to make sure there isn't another website with the same company

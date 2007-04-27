@@ -188,15 +188,15 @@ public class LayoutSetUtil {
 		return getPersistence().findByGroupId_PrevAndNext(ownerId, groupId, obc);
 	}
 
-	public static com.liferay.portal.model.LayoutSet findByC_V(
-		java.lang.String companyId, java.lang.String virtualHost)
+	public static com.liferay.portal.model.LayoutSet findByC_V(long companyId,
+		java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutSetException {
 		return getPersistence().findByC_V(companyId, virtualHost);
 	}
 
 	public static com.liferay.portal.model.LayoutSet fetchByC_V(
-		java.lang.String companyId, java.lang.String virtualHost)
+		long companyId, java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_V(companyId, virtualHost);
 	}
@@ -235,8 +235,7 @@ public class LayoutSetUtil {
 		getPersistence().removeByGroupId(groupId);
 	}
 
-	public static void removeByC_V(java.lang.String companyId,
-		java.lang.String virtualHost)
+	public static void removeByC_V(long companyId, java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutSetException {
 		getPersistence().removeByC_V(companyId, virtualHost);
@@ -251,8 +250,8 @@ public class LayoutSetUtil {
 		return getPersistence().countByGroupId(groupId);
 	}
 
-	public static int countByC_V(java.lang.String companyId,
-		java.lang.String virtualHost) throws com.liferay.portal.SystemException {
+	public static int countByC_V(long companyId, java.lang.String virtualHost)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_V(companyId, virtualHost);
 	}
 

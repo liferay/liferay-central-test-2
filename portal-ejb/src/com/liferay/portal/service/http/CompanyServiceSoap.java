@@ -78,12 +78,12 @@ import java.rmi.RemoteException;
  */
 public class CompanyServiceSoap {
 	public static com.liferay.portal.model.CompanySoap updateCompany(
-		java.lang.String companyId, java.lang.String portalURL,
-		java.lang.String homeURL, java.lang.String mx, java.lang.String name,
-		java.lang.String legalName, java.lang.String legalId,
-		java.lang.String legalType, java.lang.String sicCode,
-		java.lang.String tickerSymbol, java.lang.String industry,
-		java.lang.String type, java.lang.String size) throws RemoteException {
+		long companyId, java.lang.String portalURL, java.lang.String homeURL,
+		java.lang.String mx, java.lang.String name, java.lang.String legalName,
+		java.lang.String legalId, java.lang.String legalType,
+		java.lang.String sicCode, java.lang.String tickerSymbol,
+		java.lang.String industry, java.lang.String type, java.lang.String size)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
 					portalURL, homeURL, mx, name, legalName, legalId,
@@ -97,7 +97,7 @@ public class CompanyServiceSoap {
 		}
 	}
 
-	public static void updateDisplay(java.lang.String companyId,
+	public static void updateDisplay(long companyId,
 		java.lang.String languageId, java.lang.String timeZoneId)
 		throws RemoteException {
 		try {
@@ -109,7 +109,7 @@ public class CompanyServiceSoap {
 		}
 	}
 
-	public static void updateSecurity(java.lang.String companyId,
+	public static void updateSecurity(long companyId,
 		java.lang.String authType, boolean autoLogin, boolean sendPassword,
 		boolean strangers, boolean communityLogo) throws RemoteException {
 		try {

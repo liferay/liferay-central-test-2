@@ -111,8 +111,7 @@ public class GroupServiceJSON {
 		return GroupJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject getGroup(java.lang.String companyId,
-		java.lang.String name)
+	public static JSONObject getGroup(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.getGroup(companyId,
@@ -144,9 +143,9 @@ public class GroupServiceJSON {
 		return returnValue;
 	}
 
-	public static JSONArray search(java.lang.String companyId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] params, int begin, int end)
+	public static JSONArray search(long companyId, java.lang.String name,
+		java.lang.String description, java.lang.String[] params, int begin,
+		int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		java.util.List returnValue = GroupServiceUtil.search(companyId, name,
 				description, params, begin, end);
@@ -154,9 +153,8 @@ public class GroupServiceJSON {
 		return GroupJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static int searchCount(java.lang.String companyId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] params)
+	public static int searchCount(long companyId, java.lang.String name,
+		java.lang.String description, java.lang.String[] params)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		int returnValue = GroupServiceUtil.searchCount(companyId, name,
 				description, params);

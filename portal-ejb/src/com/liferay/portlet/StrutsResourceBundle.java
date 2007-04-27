@@ -41,12 +41,12 @@ import java.util.ResourceBundle;
 public class StrutsResourceBundle extends ResourceBundle {
 
 	public static ResourceBundle getBundle(
-		String portletName, String companyId, Locale locale) {
+		String portletName, long companyId, Locale locale) {
 
 		return new StrutsResourceBundle(portletName, companyId, locale);
 	}
 
-	public StrutsResourceBundle(String portletName, String companyId,
+	public StrutsResourceBundle(String portletName, long companyId,
 								Locale locale) {
 
 		_portletName = portletName;
@@ -89,7 +89,7 @@ public class StrutsResourceBundle extends ResourceBundle {
 	}
 
 	private String _portletName;
-	private String _companyId;
+	private long _companyId;
 	private Locale _locale;
 
 }

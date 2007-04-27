@@ -97,7 +97,7 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		return GroupServiceFactory.getTxImpl().getGroup(groupId);
 	}
 
-	public com.liferay.portal.model.Group getGroup(java.lang.String companyId,
+	public com.liferay.portal.model.Group getGroup(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -129,9 +129,9 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		return GroupServiceFactory.getTxImpl().hasUserGroup(userId, groupId);
 	}
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] params, int begin, int end)
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String description, java.lang.String[] params, int begin,
+		int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
@@ -139,7 +139,7 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 			description, params, begin, end);
 	}
 
-	public int searchCount(java.lang.String companyId, java.lang.String name,
+	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.String[] params)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

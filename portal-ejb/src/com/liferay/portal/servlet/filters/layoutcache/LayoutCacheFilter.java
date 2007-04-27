@@ -23,6 +23,8 @@
 package com.liferay.portal.servlet.filters.layoutcache;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.util.PortalInitable;
+import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
@@ -34,7 +36,6 @@ import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.servlet.FriendlyURLServlet;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.BrowserSniffer;
@@ -71,7 +72,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Javier de Ros
  *
  */
-public class LayoutCacheFilter implements Filter {
+public class LayoutCacheFilter implements Filter, PortalInitable {
 
 	public static final boolean USE_LAYOUT_CACHE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(LayoutCacheFilter.class.getName()), true);
@@ -80,22 +81,26 @@ public class LayoutCacheFilter implements Filter {
 		SystemProperties.get(LayoutCacheFilter.class.getName() + ".encoding"),
 		"UTF-8");
 
-	public void init(FilterConfig config) throws ServletException {
-		synchronized (FriendlyURLServlet.class) {
-			ServletContext ctx = config.getServletContext();
+	public void portalInit() {
+		ServletContext ctx = _config.getServletContext();
 
-			_companyId = ctx.getInitParameter("company_id");
+		_companyId = PortalUtil.getCompanyIdByWebId(ctx);
 
-			_pattern = GetterUtil.getInteger(
-				config.getInitParameter("pattern"));
+		_pattern = GetterUtil.getInteger(
+			_config.getInitParameter("pattern"));
 
-			if ((_pattern != _PATTERN_FRIENDLY) &&
-				(_pattern != _PATTERN_LAYOUT) &&
-				(_pattern != _PATTERN_RESOURCE)) {
+		if ((_pattern != _PATTERN_FRIENDLY) &&
+			(_pattern != _PATTERN_LAYOUT) &&
+			(_pattern != _PATTERN_RESOURCE)) {
 
-				throw new ServletException("Layout cache pattern is invalid");
-			}
+			_log.error("Layout cache pattern is invalid");
 		}
+	}
+
+	public void init(FilterConfig config) throws ServletException {
+		_config = config;
+
+		PortalInitableUtil.init(this);
 	}
 
 	public void doFilter(
@@ -448,7 +453,8 @@ public class LayoutCacheFilter implements Filter {
 
 	private static Log _log = LogFactory.getLog(LayoutCacheFilter.class);
 
-	private String _companyId;
+	private FilterConfig _config;
+	private long _companyId;
 	private int _pattern;
 
 }

@@ -132,8 +132,8 @@ public class TagsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntrySoap[] search(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String[] properties) throws RemoteException {
+		long companyId, java.lang.String name, java.lang.String[] properties)
+		throws RemoteException {
 		try {
 			java.util.List returnValue = TagsEntryServiceUtil.search(companyId,
 					name, properties);
@@ -147,9 +147,8 @@ public class TagsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntrySoap[] search(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String[] properties, int begin, int end)
-		throws RemoteException {
+		long companyId, java.lang.String name, java.lang.String[] properties,
+		int begin, int end) throws RemoteException {
 		try {
 			java.util.List returnValue = TagsEntryServiceUtil.search(companyId,
 					name, properties, begin, end);
@@ -163,9 +162,8 @@ public class TagsEntryServiceSoap {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String[] properties, int begin, int end)
-		throws RemoteException {
+		long companyId, java.lang.String name, java.lang.String[] properties,
+		int begin, int end) throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONArrayWrapper returnValue = TagsEntryServiceUtil.searchAutocomplete(companyId,
 					name, properties, begin, end);
@@ -178,9 +176,8 @@ public class TagsEntryServiceSoap {
 		}
 	}
 
-	public static int searchCount(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties)
-		throws RemoteException {
+	public static int searchCount(long companyId, java.lang.String name,
+		java.lang.String[] properties) throws RemoteException {
 		try {
 			int returnValue = TagsEntryServiceUtil.searchCount(companyId, name,
 					properties);

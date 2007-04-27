@@ -98,7 +98,7 @@ public class GetMessageAttachmentAction extends PortletAction {
 			MBMessage message = MBMessageServiceUtil.getMessage(messageId);
 
 			is = DLLocalServiceUtil.getFileAsStream(
-				message.getCompanyId(), CompanyImpl.SYSTEM,
+				message.getCompanyId(), CompanyImpl.SYSTEM_STRING,
 				message.getAttachmentsDir() + "/" + fileName);
 
 			ServletResponseUtil.sendFile(res, fileName, is);

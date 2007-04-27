@@ -68,8 +68,8 @@ public class RoleServiceEJBImpl implements RoleService, SessionBean {
 		RoleServiceFactory.getTxImpl().deleteRole(roleId);
 	}
 
-	public com.liferay.portal.model.Role getGroupRole(
-		java.lang.String companyId, long groupId)
+	public com.liferay.portal.model.Role getGroupRole(long companyId,
+		long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -85,7 +85,7 @@ public class RoleServiceEJBImpl implements RoleService, SessionBean {
 		return RoleServiceFactory.getTxImpl().getRole(roleId);
 	}
 
-	public com.liferay.portal.model.Role getRole(java.lang.String companyId,
+	public com.liferay.portal.model.Role getRole(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

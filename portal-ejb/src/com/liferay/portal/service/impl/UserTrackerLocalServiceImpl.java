@@ -49,7 +49,7 @@ public class UserTrackerLocalServiceImpl
 	// Business methods
 
 	public UserTracker addUserTracker(
-			String companyId, long userId, Date modifiedDate, String remoteAddr,
+			long companyId, long userId, Date modifiedDate, String remoteAddr,
 			String remoteHost, String userAgent, List userTrackerPaths)
 		throws SystemException {
 
@@ -104,7 +104,7 @@ public class UserTrackerLocalServiceImpl
 		UserTrackerUtil.remove(userTrackerId);
 	}
 
-	public List getUserTrackers(String companyId, int begin, int end)
+	public List getUserTrackers(long companyId, int begin, int end)
 		throws SystemException {
 
 		return UserTrackerUtil.findByCompanyId(companyId, begin, end);

@@ -46,10 +46,10 @@ import org.apache.wsrp4j.util.WindowStates;
  */
 public class WSRPUtil {
 
-	public static String getCompanyId() {
+	public static long getCompanyId() {
 		HttpServletRequest req = WSRPUtil.getHttpServletRequest();
 
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 
 		return companyId;
 	}

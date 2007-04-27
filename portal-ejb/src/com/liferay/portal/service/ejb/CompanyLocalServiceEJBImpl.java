@@ -66,13 +66,13 @@ public class CompanyLocalServiceEJBImpl implements CompanyLocalService,
 			begin, end);
 	}
 
-	public void checkCompany(java.lang.String companyId)
+	public com.liferay.portal.model.Company checkCompany(java.lang.String webId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		CompanyLocalServiceFactory.getTxImpl().checkCompany(companyId);
+		return CompanyLocalServiceFactory.getTxImpl().checkCompany(webId);
 	}
 
-	public void checkCompanyKey(java.lang.String companyId)
+	public void checkCompanyKey(long companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CompanyLocalServiceFactory.getTxImpl().checkCompanyKey(companyId);
@@ -83,11 +83,10 @@ public class CompanyLocalServiceEJBImpl implements CompanyLocalService,
 		return CompanyLocalServiceFactory.getTxImpl().getCompanies();
 	}
 
-	public com.liferay.portal.model.Company getCompany(
-		java.lang.String companyId)
+	public com.liferay.portal.model.Company getCompanyById(long companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return CompanyLocalServiceFactory.getTxImpl().getCompany(companyId);
+		return CompanyLocalServiceFactory.getTxImpl().getCompanyById(companyId);
 	}
 
 	public com.liferay.portal.model.Company getCompanyByMx(java.lang.String mx)
@@ -96,27 +95,31 @@ public class CompanyLocalServiceEJBImpl implements CompanyLocalService,
 		return CompanyLocalServiceFactory.getTxImpl().getCompanyByMx(mx);
 	}
 
-	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+	public com.liferay.portal.model.Company getCompanyByWebId(
+		java.lang.String webId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return CompanyLocalServiceFactory.getTxImpl().getCompanyByWebId(webId);
+	}
+
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		return CompanyLocalServiceFactory.getTxImpl().search(companyId, keywords);
 	}
 
-	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String portletId, long groupId,
-		java.lang.String type, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		java.lang.String portletId, long groupId, java.lang.String type,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		return CompanyLocalServiceFactory.getTxImpl().search(companyId,
 			portletId, groupId, type, keywords);
 	}
 
-	public com.liferay.portal.model.Company updateCompany(
-		java.lang.String companyId, java.lang.String portalURL,
-		java.lang.String homeURL, java.lang.String mx, java.lang.String name,
-		java.lang.String legalName, java.lang.String legalId,
-		java.lang.String legalType, java.lang.String sicCode,
-		java.lang.String tickerSymbol, java.lang.String industry,
-		java.lang.String type, java.lang.String size)
+	public com.liferay.portal.model.Company updateCompany(long companyId,
+		java.lang.String portalURL, java.lang.String homeURL,
+		java.lang.String mx, java.lang.String name, java.lang.String legalName,
+		java.lang.String legalId, java.lang.String legalType,
+		java.lang.String sicCode, java.lang.String tickerSymbol,
+		java.lang.String industry, java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return CompanyLocalServiceFactory.getTxImpl().updateCompany(companyId,
@@ -124,23 +127,23 @@ public class CompanyLocalServiceEJBImpl implements CompanyLocalService,
 			sicCode, tickerSymbol, industry, type, size);
 	}
 
-	public void updateDisplay(java.lang.String companyId,
-		java.lang.String languageId, java.lang.String timeZoneId)
+	public void updateDisplay(long companyId, java.lang.String languageId,
+		java.lang.String timeZoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CompanyLocalServiceFactory.getTxImpl().updateDisplay(companyId,
 			languageId, timeZoneId);
 	}
 
-	public void updateLogo(java.lang.String companyId, java.io.File file)
+	public void updateLogo(long companyId, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CompanyLocalServiceFactory.getTxImpl().updateLogo(companyId, file);
 	}
 
-	public void updateSecurity(java.lang.String companyId,
-		java.lang.String authType, boolean autoLogin, boolean sendPassword,
-		boolean strangers, boolean communityLogo)
+	public void updateSecurity(long companyId, java.lang.String authType,
+		boolean autoLogin, boolean sendPassword, boolean strangers,
+		boolean communityLogo)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CompanyLocalServiceFactory.getTxImpl().updateSecurity(companyId,

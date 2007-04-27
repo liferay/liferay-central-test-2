@@ -169,7 +169,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public void addStructureResources(
-			String companyId, long groupId, String structureId,
+			long companyId, long groupId, String structureId,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -193,7 +193,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public void addStructureResources(
-			String companyId, long groupId, String structureId,
+			long companyId, long groupId, String structureId,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -216,8 +216,7 @@ public class JournalStructureLocalServiceImpl
 			guestPermissions);
 	}
 
-	public void checkNewLine(
-			String companyId, long groupId, String structureId)
+	public void checkNewLine(long companyId, long groupId, String structureId)
 		throws PortalException, SystemException {
 
 		JournalStructure structure = JournalStructureUtil.findByPrimaryKey(
@@ -238,7 +237,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public void deleteStructure(
-			String companyId, long groupId, String structureId)
+			long companyId, long groupId, String structureId)
 		throws PortalException, SystemException {
 
 		structureId = structureId.trim().toUpperCase();
@@ -279,7 +278,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public JournalStructure getStructure(
-			String companyId, long groupId, String structureId)
+			long companyId, long groupId, String structureId)
 		throws PortalException, SystemException {
 
 		structureId = structureId.trim().toUpperCase();
@@ -329,7 +328,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public List search(
-			String companyId, long groupId, String structureId, String name,
+			long companyId, long groupId, String structureId, String name,
 			String description, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -340,7 +339,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public int searchCount(
-			String companyId, long groupId, String structureId, String name,
+			long companyId, long groupId, String structureId, String name,
 			String description, boolean andOperator)
 		throws SystemException {
 
@@ -349,7 +348,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public JournalStructure updateStructure(
-			String companyId, long groupId, String structureId, String name,
+			long companyId, long groupId, String structureId, String name,
 			String description, String xsd)
 		throws PortalException, SystemException {
 
@@ -381,7 +380,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	protected void validate(
-			String companyId, long groupId, String structureId,
+			long companyId, long groupId, String structureId,
 			boolean autoStructureId, String name, String description,
 			String xsd)
 		throws PortalException, SystemException {

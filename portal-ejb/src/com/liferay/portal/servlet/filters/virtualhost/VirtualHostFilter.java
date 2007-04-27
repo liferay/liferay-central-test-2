@@ -27,6 +27,8 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.PortalInitable;
+import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
@@ -66,7 +68,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class VirtualHostFilter implements Filter {
+public class VirtualHostFilter implements Filter, PortalInitable {
 
 	public static final boolean USE_VIRTUAL_HOST_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(VirtualHostFilter.class.getName()), true);
@@ -79,13 +81,19 @@ public class VirtualHostFilter implements Filter {
 		SystemProperties.get(VirtualHostFilter.class.getName() +
 			".ignore.paths"));
 
-	public void init(FilterConfig config) throws ServletException {
-		_ctx = config.getServletContext();
+	public void portalInit() {
+		_ctx = _config.getServletContext();
 
-		_companyId = _ctx.getInitParameter("company_id");
+		_companyId = PortalUtil.getCompanyIdByWebId(_ctx);
 		_ignoreHosts = SetUtil.fromArray(StringUtil.split(IGNORE_HOSTS));
 		_ignorePaths = SetUtil.fromString(ContentUtil.get(
 			_DEPENDENCIES_IGNORE_PATHS, true));
+	}
+
+	public void init(FilterConfig config) throws ServletException {
+		_config = config;
+
+		PortalInitableUtil.init(this);
 	}
 
 	public void doFilter(
@@ -199,7 +207,8 @@ public class VirtualHostFilter implements Filter {
 				return false;
 			}
 
-			Company company = CompanyLocalServiceUtil.getCompany(_companyId);
+			Company company = CompanyLocalServiceUtil.getCompanyById(
+				_companyId);
 
 			if (company.getPortalURL().indexOf(host) == -1) {
 				return true;
@@ -219,8 +228,9 @@ public class VirtualHostFilter implements Filter {
 
 	private static String _PATH_IMAGE = "/image/";
 
+	private FilterConfig _config;
 	private ServletContext _ctx;
-	private String _companyId;
+	private long _companyId;
 	private Set _ignoreHosts;
 	private Set _ignorePaths;
 

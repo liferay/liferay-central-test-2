@@ -39,7 +39,7 @@ import java.util.Locale;
  */
 public class PortletCategoryComparator implements Comparator, Serializable {
 
-	public PortletCategoryComparator(String companyId, Locale locale) {
+	public PortletCategoryComparator(long companyId, Locale locale) {
 		_companyId = companyId;
 		_locale = locale;
 	}
@@ -69,7 +69,7 @@ public class PortletCategoryComparator implements Comparator, Serializable {
 		return name1.compareTo(name2);
 	}
 
-	private String _companyId;
+	private long _companyId;
 	private Locale _locale;
 
 }

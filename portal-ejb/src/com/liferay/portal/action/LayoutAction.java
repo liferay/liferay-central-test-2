@@ -230,7 +230,7 @@ public class LayoutAction extends Action {
 
 		HttpSession ses = req.getSession();
 
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		User user = PortalUtil.getUser(req);
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 		String portletId = ParamUtil.getString(req, "p_p_id");

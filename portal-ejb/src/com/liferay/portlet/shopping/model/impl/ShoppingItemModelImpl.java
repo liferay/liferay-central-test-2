@@ -56,7 +56,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingItem";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "itemId", new Integer(Types.VARCHAR) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
@@ -91,9 +91,6 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 			XSS_ALLOW);
 	public static boolean XSS_ALLOW_ITEMID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.itemId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.companyId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.userName"),
@@ -156,19 +153,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -644,7 +634,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 	}
 
 	private String _itemId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

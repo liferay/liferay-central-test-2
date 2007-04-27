@@ -48,7 +48,7 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	}
 
 	public MBCategory getCategory() {
-		if (getCategoryId().equals(CompanyImpl.SYSTEM)) {
+		if (getCategoryId().equals(CompanyImpl.SYSTEM_STRING)) {
 			return null;
 		}
 
@@ -76,7 +76,7 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	}
 
 	public boolean isDiscussion() {
-		return Validator.equals(getCategoryId(), CompanyImpl.SYSTEM);
+		return Validator.equals(getCategoryId(), CompanyImpl.SYSTEM_STRING);
 	}
 
 	public String getThreadAttachmentsDir() {

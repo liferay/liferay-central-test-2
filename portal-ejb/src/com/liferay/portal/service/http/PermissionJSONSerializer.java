@@ -52,15 +52,7 @@ public class PermissionJSONSerializer {
 	public static JSONObject toJSONObject(Permission model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("permissionId", model.getPermissionId());
-
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
+		jsonObj.put("companyId", model.getCompanyId());
 
 		String actionId = model.getActionId();
 

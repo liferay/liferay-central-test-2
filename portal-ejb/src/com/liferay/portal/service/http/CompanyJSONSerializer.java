@@ -51,13 +51,16 @@ import java.util.List;
 public class CompanyJSONSerializer {
 	public static JSONObject toJSONObject(Company model) {
 		JSONObject jsonObj = new JSONObject();
-		String companyId = model.getCompanyId();
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("accountId", model.getAccountId());
 
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
+		String webId = model.getWebId();
+
+		if (webId == null) {
+			jsonObj.put("webId", StringPool.BLANK);
 		}
 		else {
-			jsonObj.put("companyId", companyId.toString());
+			jsonObj.put("webId", webId.toString());
 		}
 
 		String key = model.getKey();

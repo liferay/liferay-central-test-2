@@ -205,7 +205,7 @@ public class UserAttributes {
 		}
 
 		if (name.equals(LIFERAY_COMPANY_ID)) {
-			return _user.getCompanyId();
+			return String.valueOf(_user.getCompanyId());
 		}
 		else if (name.equals(LIFERAY_USER_ID)) {
 			return String.valueOf(_user.getUserId());

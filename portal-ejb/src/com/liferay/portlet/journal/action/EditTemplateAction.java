@@ -150,7 +150,7 @@ public class EditTemplateAction extends PortletAction {
 	}
 
 	protected void deleteTemplates(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] deleteTemplateIds = StringUtil.split(

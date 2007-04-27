@@ -69,14 +69,7 @@ public class LayoutJSONSerializer {
 			jsonObj.put("ownerId", ownerId.toString());
 		}
 
-		String companyId = model.getCompanyId();
-
-		if (companyId == null) {
-			jsonObj.put("companyId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("companyId", companyId.toString());
-		}
+		jsonObj.put("companyId", model.getCompanyId());
 
 		String parentLayoutId = model.getParentLayoutId();
 

@@ -57,7 +57,7 @@ import java.util.Map;
 public class LayoutCache  {
 
 	protected long getEntityGroupId(
-			String companyId, String entityName, String name)
+			long companyId, String entityName, String name)
 		throws PortalException, SystemException {
 
 		long entityGroupId = 0;
@@ -117,7 +117,7 @@ public class LayoutCache  {
 		return entityGroupId;
 	}
 
-	protected Map getEntityMap(String companyId, String entityName)
+	protected Map getEntityMap(long companyId, String entityName)
 		throws PortalException, SystemException {
 
 		Map entityMap = (Map)entityMapMap.get(entityName);
@@ -207,7 +207,7 @@ public class LayoutCache  {
 	}
 
 	protected Resource getResource(
-		String companyId, long groupId, String resourceName, String scope,
+		long companyId, long groupId, String resourceName, String scope,
 		String resourcePrimKey, boolean portletActions)
 		throws PortalException, SystemException {
 
@@ -243,7 +243,7 @@ public class LayoutCache  {
 		return resource;
 	}
 
-	protected Role getRole(String companyId, String roleName)
+	protected Role getRole(long companyId, String roleName)
 		throws PortalException, SystemException {
 
 		Role role = (Role)rolesMap.get(roleName);
@@ -261,7 +261,7 @@ public class LayoutCache  {
 		return role;
 	}
 
-	protected User getUser(String companyId, long groupId, String emailAddress)
+	protected User getUser(long companyId, long groupId, String emailAddress)
 		throws PortalException, SystemException {
 
 		List users = (List)usersMap.get(emailAddress);

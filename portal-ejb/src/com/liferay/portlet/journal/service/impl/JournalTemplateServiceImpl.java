@@ -81,8 +81,7 @@ public class JournalTemplateServiceImpl
 			smallFile, communityPermissions, guestPermissions);
 	}
 
-	public void deleteTemplate(
-			String companyId, long groupId, String templateId)
+	public void deleteTemplate(long companyId, long groupId, String templateId)
 		throws PortalException, SystemException {
 
 		JournalTemplatePermission.check(
@@ -94,7 +93,7 @@ public class JournalTemplateServiceImpl
 	}
 
 	public JournalTemplate getTemplate(
-			String companyId, long groupId, String templateId)
+			long companyId, long groupId, String templateId)
 		throws PortalException, SystemException {
 
 		JournalTemplatePermission.check(

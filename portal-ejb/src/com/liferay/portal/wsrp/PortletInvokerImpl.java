@@ -110,7 +110,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 			PortletMode mode = WSRPUtil.fromWsrpMode(wsrpMode);
 
 			ServletContext ctx = WSRPUtil.getServletContext();
-			String companyId = WSRPUtil.getCompanyId();
+			long companyId = WSRPUtil.getCompanyId();
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(companyId,
 					portletHandle);
@@ -187,7 +187,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 			PortletMode mode = WSRPUtil.fromWsrpMode(wsrpMode);
 
 			ServletContext ctx = WSRPUtil.getServletContext();
-			String companyId = WSRPUtil.getCompanyId();
+			long companyId = WSRPUtil.getCompanyId();
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(companyId,
 					portletHandle);
@@ -252,7 +252,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 		return actionParams;
 	}
 
-	private Layout _getDefaultUserLayout(String actualCompanyId)
+	private Layout _getDefaultUserLayout(long companyId)
 		throws PortalException, SystemException {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout("1", "PUB.1");

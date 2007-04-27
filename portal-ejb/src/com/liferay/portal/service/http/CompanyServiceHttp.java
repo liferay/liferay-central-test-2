@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -70,7 +71,7 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class CompanyServiceHttp {
 	public static com.liferay.portal.model.Company updateCompany(
-		HttpPrincipal httpPrincipal, java.lang.String companyId,
+		HttpPrincipal httpPrincipal, long companyId,
 		java.lang.String portalURL, java.lang.String homeURL,
 		java.lang.String mx, java.lang.String name, java.lang.String legalName,
 		java.lang.String legalId, java.lang.String legalType,
@@ -79,12 +80,7 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = portalURL;
 
 			if (portalURL == null) {
@@ -190,17 +186,11 @@ public class CompanyServiceHttp {
 	}
 
 	public static void updateDisplay(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String languageId,
-		java.lang.String timeZoneId)
+		long companyId, java.lang.String languageId, java.lang.String timeZoneId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = languageId;
 
 			if (languageId == null) {
@@ -238,17 +228,12 @@ public class CompanyServiceHttp {
 		}
 	}
 
-	public static void updateLogo(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.io.File file)
+	public static void updateLogo(HttpPrincipal httpPrincipal, long companyId,
+		java.io.File file)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = file;
 
 			if (file == null) {
@@ -280,18 +265,12 @@ public class CompanyServiceHttp {
 	}
 
 	public static void updateSecurity(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String authType,
-		boolean autoLogin, boolean sendPassword, boolean strangers,
-		boolean communityLogo)
+		long companyId, java.lang.String authType, boolean autoLogin,
+		boolean sendPassword, boolean strangers, boolean communityLogo)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = authType;
 
 			if (authType == null) {

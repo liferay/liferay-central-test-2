@@ -54,7 +54,7 @@ public class RenderPortletAction extends Action {
 
 		String ajaxId = req.getParameter("ajax_id");
 
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		String portletId = ParamUtil.getString(req, "p_p_id");
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(

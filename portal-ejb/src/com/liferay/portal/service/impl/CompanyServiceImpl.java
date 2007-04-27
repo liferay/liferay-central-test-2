@@ -43,7 +43,7 @@ public class CompanyServiceImpl
 	extends PrincipalBean implements CompanyService {
 
 	public Company updateCompany(
-			String companyId, String portalURL, String homeURL, String mx,
+			long companyId, String portalURL, String homeURL, String mx,
 			String name, String legalName, String legalId, String legalType,
 			String sicCode, String tickerSymbol, String industry, String type,
 			String size)
@@ -61,7 +61,7 @@ public class CompanyServiceImpl
 	}
 
 	public void updateDisplay(
-			String companyId, String languageId, String timeZoneId)
+			long companyId, String languageId, String timeZoneId)
 		throws PortalException, SystemException {
 
 		if (!RoleLocalServiceUtil.hasUserRole(
@@ -74,7 +74,7 @@ public class CompanyServiceImpl
 			companyId, languageId, timeZoneId);
 	}
 
-	public void updateLogo(String companyId, File file)
+	public void updateLogo(long companyId, File file)
 		throws PortalException, SystemException {
 
 		if (!RoleLocalServiceUtil.hasUserRole(
@@ -87,7 +87,7 @@ public class CompanyServiceImpl
 	}
 
 	public void updateSecurity(
-			String companyId, String authType, boolean autoLogin,
+			long companyId, String authType, boolean autoLogin,
 			boolean sendPassword, boolean strangers, boolean communityLogo)
 		throws PortalException, SystemException {
 

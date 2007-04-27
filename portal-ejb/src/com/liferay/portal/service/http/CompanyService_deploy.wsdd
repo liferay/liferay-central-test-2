@@ -10,7 +10,7 @@
 		<parameter name="wsdlPortType" value="CompanyServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateCompany" qname="operNS:updateCompany" returnQName="updateCompanyReturn" returnType="rtns:CompanySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="portalURL" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="homeURL" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="mx" type="tns:string"></parameter>
@@ -25,12 +25,12 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="size" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="updateDisplay" qname="operNS:updateDisplay" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="languageId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="timeZoneId" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="updateSecurity" qname="operNS:updateSecurity" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="authType" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="autoLogin" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sendPassword" type="tns:boolean"></parameter>

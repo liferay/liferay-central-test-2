@@ -127,13 +127,13 @@ public class TagsPropertyLocalServiceEJBImpl implements TagsPropertyLocalService
 			key);
 	}
 
-	public java.lang.String[] getPropertyKeys(java.lang.String companyId)
+	public java.lang.String[] getPropertyKeys(long companyId)
 		throws com.liferay.portal.SystemException {
 		return TagsPropertyLocalServiceFactory.getTxImpl().getPropertyKeys(companyId);
 	}
 
-	public java.util.List getPropertyValues(java.lang.String companyId,
-		java.lang.String key) throws com.liferay.portal.SystemException {
+	public java.util.List getPropertyValues(long companyId, java.lang.String key)
+		throws com.liferay.portal.SystemException {
 		return TagsPropertyLocalServiceFactory.getTxImpl().getPropertyValues(companyId,
 			key);
 	}

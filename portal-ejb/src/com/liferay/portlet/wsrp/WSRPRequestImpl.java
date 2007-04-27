@@ -171,7 +171,7 @@ public class WSRPRequestImpl extends GenericWSRPBaseRequestImpl implements
 			return this._modes;
 		}
 
-		String companyId = PortalUtil.getCompanyId(_portletRequest);
+		long companyId = PortalUtil.getCompanyId(_portletRequest);
 		try {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(companyId,
 					_windowSession.getWindowID());

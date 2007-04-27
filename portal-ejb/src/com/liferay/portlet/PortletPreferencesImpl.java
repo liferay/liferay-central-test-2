@@ -59,10 +59,10 @@ public class PortletPreferencesImpl
 	implements Cloneable, PortletPreferences, Serializable {
 
 	public PortletPreferencesImpl() {
-		this(null, null, new HashMap());
+		this(0, null, new HashMap());
 	}
 
-	public PortletPreferencesImpl(String companyId, PortletPreferencesPK pk,
+	public PortletPreferencesImpl(long companyId, PortletPreferencesPK pk,
 								  Map preferences) {
 
 		_companyId = companyId;
@@ -273,7 +273,7 @@ public class PortletPreferencesImpl
 		return new PortletPreferencesImpl(_companyId, _pk, preferencesClone);
 	}
 
-	protected String getCompanyId() {
+	protected long getCompanyId() {
 		return  _companyId;
 	}
 
@@ -347,7 +347,7 @@ public class PortletPreferencesImpl
 
 	private static Log _log = LogFactory.getLog(PortletPreferencesImpl.class);
 
-	private String _companyId = null;
+	private long _companyId;
 	private PortletPreferencesPK _pk = null;
 	private Map _preferences = null;
 	private PortletPreferences _defaultPreferences = null;

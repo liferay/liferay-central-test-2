@@ -24,6 +24,7 @@ package com.liferay.portlet.messageboards.util;
 
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portlet.messageboards.service.jms.IndexProducer;
@@ -46,7 +47,7 @@ import org.apache.lucene.queryParser.ParseException;
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addMessage(
-			String companyId, Long groupId, String userName,
+			long companyId, long groupId, String userName,
 			String categoryId, String threadId, String messageId, String title,
 			String content)
 		throws IOException {
@@ -55,8 +56,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "addMessage",
 				new Object[] {
-					companyId, groupId, userName, categoryId, threadId,
-					messageId, title, content
+					new LongWrapper(companyId), new LongWrapper(groupId),
+					userName, categoryId, threadId, messageId, title, content
 				});
 
 			IndexProducer.produce(methodWrapper);
@@ -71,13 +72,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	public static void deleteMessage(String companyId, String messageId)
+	public static void deleteMessage(long companyId, String messageId)
 		throws IOException {
 
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "deleteMessage",
-				new Object[] {companyId, messageId});
+				new Object[] {new LongWrapper(companyId), messageId});
 
 			IndexProducer.produce(methodWrapper);
 		}
@@ -91,13 +92,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	public static void deleteMessages(String companyId, String threadId)
+	public static void deleteMessages(long companyId, String threadId)
 		throws IOException, ParseException {
 
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "deleteMessages",
-				new Object[] {companyId, threadId});
+				new Object[] {new LongWrapper(companyId), threadId});
 
 			IndexProducer.produce(methodWrapper);
 		}
@@ -112,17 +113,16 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updateMessage(
-			String companyId, Long groupId, String userName,
-			String categoryId, String threadId, String messageId, String title,
-			String content)
+			long companyId, long groupId, String userName, String categoryId,
+			String threadId, String messageId, String title, String content)
 		throws IOException {
 
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "updateMessage",
 				new Object[] {
-					companyId, groupId, userName, categoryId, threadId,
-					messageId, title, content
+					new LongWrapper(companyId), new LongWrapper(groupId),
+					userName, categoryId, threadId, messageId, title, content
 				});
 
 			IndexProducer.produce(methodWrapper);

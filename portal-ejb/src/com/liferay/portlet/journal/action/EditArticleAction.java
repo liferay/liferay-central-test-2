@@ -184,7 +184,7 @@ public class EditArticleAction extends PortletAction {
 	}
 
 	protected void deleteArticles(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] deleteArticleIds = StringUtil.split(
@@ -206,7 +206,7 @@ public class EditArticleAction extends PortletAction {
 	}
 
 	protected void expireArticles(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] expireArticleIds = StringUtil.split(
@@ -251,7 +251,7 @@ public class EditArticleAction extends PortletAction {
 	}
 
 	protected void removeArticlesLocale(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] removeArticleLocaleIds = StringUtil.split(
@@ -276,8 +276,7 @@ public class EditArticleAction extends PortletAction {
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String companyId = PortalUtil.getCompanyId(req);
-
+		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String articleId = ParamUtil.getString(req, "articleId");

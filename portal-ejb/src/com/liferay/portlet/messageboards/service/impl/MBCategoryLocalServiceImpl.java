@@ -47,6 +47,7 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.IndexerImpl;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
 
@@ -296,15 +297,15 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	public MBCategory getSystemCategory()
 		throws PortalException, SystemException {
 
-		String categoryId = CompanyImpl.SYSTEM;
+		String categoryId = CompanyImpl.SYSTEM_STRING;
 
 		MBCategory category = MBCategoryUtil.fetchByPrimaryKey(categoryId);
 
 		if (category == null) {
 			category = MBCategoryUtil.create(categoryId);
 
-			category.setCompanyId(categoryId);
-			//category.setUserId(categoryId);
+			category.setCompanyId(CompanyImpl.SYSTEM);
+			category.setUserId(CompanyImpl.SYSTEM);
 
 			MBCategoryUtil.update(category);
 		}
@@ -314,7 +315,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 	public void reIndex(String[] ids) throws SystemException {
 		try {
-			String companyId = ids[0];
+			long companyId = GetterUtil.getLong(ids[0]);
 
 			Iterator itr1 = MBCategoryUtil.findByCompanyId(
 				companyId).iterator();
@@ -339,8 +340,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 					try {
 						IndexerImpl.addMessage(
-							companyId, new Long(groupId), userName, categoryId,
-							threadId, messageId, title, content);
+							companyId, groupId, userName, categoryId, threadId,
+							messageId, title, content);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + messageId, e1);
@@ -357,8 +358,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-   			String companyId, long groupId, String[] categoryIds,
-			String threadId, String keywords)
+   			long companyId, long groupId, String[] categoryIds, String threadId,
+			String keywords)
 		throws SystemException {
 
 		try {
@@ -553,8 +554,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				try {
 					if (!fromCategory.isDiscussion()) {
 						Indexer.updateMessage(
-							message.getCompanyId(),
-							new Long(fromCategory.getGroupId()),
+							message.getCompanyId(), fromCategory.getGroupId(),
 							message.getUserName(), toCategoryId,
 							message.getThreadId(), message.getMessageId(),
 							message.getSubject(), message.getBody());

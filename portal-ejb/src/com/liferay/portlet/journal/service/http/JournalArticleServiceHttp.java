@@ -441,17 +441,12 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
-		HttpPrincipal httpPrincipal, java.lang.String companyId, long groupId,
+		HttpPrincipal httpPrincipal, long companyId, long groupId,
 		java.lang.String articleId, double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = articleId;
 
@@ -489,18 +484,13 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static java.lang.String getArticleContent(
-		HttpPrincipal httpPrincipal, java.lang.String companyId, long groupId,
+		HttpPrincipal httpPrincipal, long companyId, long groupId,
 		java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = articleId;
 
@@ -552,19 +542,14 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static java.lang.String getArticleContent(
-		HttpPrincipal httpPrincipal, java.lang.String companyId, long groupId,
+		HttpPrincipal httpPrincipal, long companyId, long groupId,
 		java.lang.String articleId, double version,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = articleId;
 
@@ -618,18 +603,13 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static void deleteArticle(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, long groupId, java.lang.String articleId,
+		long companyId, long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = articleId;
 
@@ -679,18 +659,13 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static void expireArticle(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, long groupId, java.lang.String articleId,
+		long companyId, long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = articleId;
 
@@ -740,16 +715,11 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static void removeArticleLocale(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String languageId)
+		long companyId, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = languageId;
 
 			if (languageId == null) {
@@ -781,17 +751,12 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
-		HttpPrincipal httpPrincipal, java.lang.String companyId, long groupId,
+		HttpPrincipal httpPrincipal, long companyId, long groupId,
 		java.lang.String articleId, double version, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = articleId;
 
@@ -837,7 +802,7 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
-		HttpPrincipal httpPrincipal, java.lang.String companyId, long groupId,
+		HttpPrincipal httpPrincipal, long companyId, long groupId,
 		java.lang.String articleId, double version, boolean incrementVersion,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
@@ -853,12 +818,7 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = articleId;
 

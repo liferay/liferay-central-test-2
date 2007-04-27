@@ -61,7 +61,7 @@ public class GetTemplateAction extends Action {
 		throws Exception {
 
 		try {
-			String companyId = PortalUtil.getCompanyId(req);
+			long companyId = PortalUtil.getCompanyId(req);
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String templateId = getTemplateId(req);
 

@@ -86,7 +86,7 @@ public class UpgradeResource extends UpgradeProcess {
 
 	public static Object[][] _TABLE_COLUMNS = {
 		{"resourceId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.VARCHAR)},
+		{"companyId", new Integer(Types.BIGINT)},
 		{"name", new Integer(Types.VARCHAR)},
 		{"scope", new Integer(Types.VARCHAR)},
 		{"codeId", new Integer(Types.BIGINT)},

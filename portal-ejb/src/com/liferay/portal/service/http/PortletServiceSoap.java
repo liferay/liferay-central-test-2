@@ -78,8 +78,8 @@ import java.rmi.RemoteException;
  */
 public class PortletServiceSoap {
 	public static com.liferay.portal.model.PortletSoap updatePortlet(
-		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String roles, boolean active) throws RemoteException {
+		long companyId, java.lang.String portletId, java.lang.String roles,
+		boolean active) throws RemoteException {
 		try {
 			com.liferay.portal.model.Portlet returnValue = PortletServiceUtil.updatePortlet(companyId,
 					portletId, roles, active);

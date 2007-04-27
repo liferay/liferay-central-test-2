@@ -234,17 +234,16 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 		DLFileEntryLocalServiceFactory.getTxImpl().deleteFileEntry(fileEntry);
 	}
 
-	public java.io.InputStream getFileAsStream(java.lang.String companyId,
-		long userId, java.lang.String folderId, java.lang.String name)
+	public java.io.InputStream getFileAsStream(long companyId, long userId,
+		java.lang.String folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl().getFileAsStream(companyId,
 			userId, folderId, name);
 	}
 
-	public java.io.InputStream getFileAsStream(java.lang.String companyId,
-		long userId, java.lang.String folderId, java.lang.String name,
-		double version)
+	public java.io.InputStream getFileAsStream(long companyId, long userId,
+		java.lang.String folderId, java.lang.String name, double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl().getFileAsStream(companyId,

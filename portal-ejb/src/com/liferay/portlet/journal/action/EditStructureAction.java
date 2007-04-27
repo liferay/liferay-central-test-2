@@ -143,7 +143,7 @@ public class EditStructureAction extends PortletAction {
 	}
 
 	protected void deleteStructures(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] deleteStructureIds = StringUtil.split(

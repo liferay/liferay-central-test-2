@@ -210,7 +210,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteImage(String companyId, String imageId)
+	public void deleteImage(long companyId, String imageId)
 		throws PortalException, SystemException {
 
 		IGImage image = IGImageUtil.findByPrimaryKey(
@@ -293,7 +293,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 	}
 
-	public IGImage getImage(String companyId, String imageId)
+	public IGImage getImage(long companyId, String imageId)
 		throws PortalException, SystemException {
 
 		return IGImageUtil.findByPrimaryKey(
@@ -322,7 +322,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage updateImage(
-			String companyId, String imageId, String folderId,
+			long companyId, String imageId, String folderId,
 			String description, File file, String contentType,
 			String[] tagsEntries)
 		throws PortalException, SystemException {

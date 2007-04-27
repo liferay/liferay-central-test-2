@@ -68,15 +68,13 @@ import org.json.JSONObject;
  *
  */
 public class IGImageServiceJSON {
-	public static void deleteImage(java.lang.String companyId,
-		java.lang.String imageId)
+	public static void deleteImage(long companyId, java.lang.String imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		IGImageServiceUtil.deleteImage(companyId, imageId);
 	}
 
-	public static JSONObject getImage(java.lang.String companyId,
-		java.lang.String imageId)
+	public static JSONObject getImage(long companyId, java.lang.String imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImage(companyId,

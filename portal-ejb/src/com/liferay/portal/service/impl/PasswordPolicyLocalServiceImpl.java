@@ -116,13 +116,13 @@ public class PasswordPolicyLocalServiceImpl
 		return PasswordPolicyUtil.findByPrimaryKey(passwordPolicyId);
 	}
 
-	public List search(String companyId, String name, int begin, int end)
+	public List search(long companyId, String name, int begin, int end)
 		throws SystemException {
 
 		return PasswordPolicyFinder.findByC_N(companyId, name, begin, end);
 	}
 
-	public int searchCount(String companyId, String name)
+	public int searchCount(long companyId, String name)
 		throws SystemException {
 
 		return PasswordPolicyFinder.countByC_N(companyId, name);
@@ -172,7 +172,7 @@ public class PasswordPolicyLocalServiceImpl
 		return passwordPolicy;
 	}
 
-	protected void validate(String companyId, String name)
+	protected void validate(long companyId, String name)
 		throws PortalException, SystemException {
 	}
 

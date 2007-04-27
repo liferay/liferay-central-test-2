@@ -60,7 +60,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			{ "nodeId", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.DOUBLE) },
-			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
@@ -75,9 +75,6 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.title"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.companyId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.userName"),
@@ -147,19 +144,12 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
 	}
@@ -336,7 +326,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	private String _nodeId;
 	private String _title;
 	private double _version;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

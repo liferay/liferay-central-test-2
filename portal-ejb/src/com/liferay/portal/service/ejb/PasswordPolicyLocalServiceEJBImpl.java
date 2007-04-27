@@ -97,14 +97,13 @@ public class PasswordPolicyLocalServiceEJBImpl
 		return PasswordPolicyLocalServiceFactory.getTxImpl().getPolicy(passwordPolicyId);
 	}
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public java.util.List search(long companyId, java.lang.String name,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return PasswordPolicyLocalServiceFactory.getTxImpl().search(companyId,
 			name, begin, end);
 	}
 
-	public int searchCount(java.lang.String companyId, java.lang.String name)
+	public int searchCount(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return PasswordPolicyLocalServiceFactory.getTxImpl().searchCount(companyId,
 			name);

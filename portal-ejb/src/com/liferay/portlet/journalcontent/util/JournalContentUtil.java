@@ -55,7 +55,7 @@ public class JournalContentUtil {
 	}
 
 	public static String getContent(
-		String companyId, long groupId, String articleId, String languageId,
+		long companyId, long groupId, String articleId, String languageId,
 		ThemeDisplay themeDisplay) {
 
 		String content = null;

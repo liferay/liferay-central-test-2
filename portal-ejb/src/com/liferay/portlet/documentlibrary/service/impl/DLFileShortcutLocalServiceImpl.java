@@ -266,7 +266,7 @@ public class DLFileShortcutLocalServiceImpl
 		}
 	}
 
-	protected String getFolderId(String companyId, String folderId)
+	protected String getFolderId(long companyId, String folderId)
 		throws PortalException, SystemException {
 
 		if (!folderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
@@ -276,7 +276,7 @@ public class DLFileShortcutLocalServiceImpl
 			try {
 				DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 
-				if (!companyId.equals(folder.getCompanyId())) {
+				if (companyId != folder.getCompanyId()) {
 					folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 				}
 			}
@@ -294,7 +294,7 @@ public class DLFileShortcutLocalServiceImpl
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 			toFolderId, toName);
 
-		if (!user.getCompanyId().equals(fileEntry.getCompanyId())) {
+		if (user.getCompanyId() != fileEntry.getCompanyId()) {
 			throw new NoSuchFileEntryException();
 		}
 	}

@@ -102,7 +102,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 	}
 
 	public void deleteAddresses(
-			String companyId, String className, String classPK)
+			long companyId, String className, String classPK)
 		throws SystemException {
 
 		AddressUtil.removeByC_C_C(companyId, className, classPK);
@@ -118,7 +118,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		return AddressUtil.findAll();
 	}
 
-	public List getAddresses(String companyId, String className, String classPK)
+	public List getAddresses(long companyId, String className, String classPK)
 		throws SystemException {
 
 		return AddressUtil.findByC_C_C(companyId, className, classPK);
@@ -131,8 +131,8 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		validate(
-			addressId, null, null, null, street1, city, zip, regionId,
-			countryId, typeId, mailing, primary);
+			addressId, 0, null, null, street1, city, zip, regionId, countryId,
+			typeId, mailing, primary);
 
 		Address address = AddressUtil.findByPrimaryKey(addressId);
 
@@ -154,10 +154,9 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			long addressId, String companyId, String className,
-			String classPK, String street1, String city, String zip,
-			String regionId, String countryId, int typeId, boolean mailing,
-			boolean primary)
+			long addressId, long companyId, String className, String classPK,
+			String street1, String city, String zip, String regionId,
+			String countryId, int typeId, boolean mailing, boolean primary)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(street1)) {
@@ -201,8 +200,8 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			long addressId, String companyId, String className,
-			String classPK, boolean mailing, boolean primary)
+			long addressId, long companyId, String className, String classPK,
+			boolean mailing, boolean primary)
 		throws PortalException, SystemException {
 
 		// Check to make sure there isn't another address with the same company
