@@ -75,7 +75,7 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasEntry(java.lang.String companyId, java.lang.String name)
+	public boolean hasEntry(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -91,30 +91,28 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.tags.model.TagsEntry getEntry(
-		java.lang.String companyId, java.lang.String name)
+	public com.liferay.portlet.tags.model.TagsEntry getEntry(long companyId,
+		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public long[] getEntryIds(java.lang.String companyId,
-		java.lang.String[] names)
+	public long[] getEntryIds(long companyId, java.lang.String[] names)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties)
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
-		java.lang.String companyId, java.lang.String name,
+	public java.util.List search(long companyId, java.lang.String name,
 		java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int searchCount(java.lang.String companyId, java.lang.String name,
+	public com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
+		long companyId, java.lang.String name, java.lang.String[] properties,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;
 

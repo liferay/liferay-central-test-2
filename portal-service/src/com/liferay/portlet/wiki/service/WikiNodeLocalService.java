@@ -132,9 +132,9 @@ public interface WikiNodeLocalService {
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, long groupId, java.lang.String[] nodeIds,
-		java.lang.String keywords) throws com.liferay.portal.SystemException;
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, java.lang.String[] nodeIds, java.lang.String keywords)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiNode updateNode(
 		java.lang.String nodeId, java.lang.String name,

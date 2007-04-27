@@ -65,8 +65,7 @@ public class AccountLocalServiceUtil {
 		return accountLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static com.liferay.portal.model.Account getAccount(
-		java.lang.String accountId)
+	public static com.liferay.portal.model.Account getAccount(long accountId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();

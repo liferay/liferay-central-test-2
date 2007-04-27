@@ -92,11 +92,11 @@ public class DataTrackerSoap implements Serializable {
 		_dataTrackerId = dataTrackerId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -169,7 +169,7 @@ public class DataTrackerSoap implements Serializable {
 	}
 
 	private String _dataTrackerId;
-	private String _companyId;
+	private long _companyId;
 	private Date _createdOn;
 	private long _createdByUserId;
 	private String _createdByUserName;

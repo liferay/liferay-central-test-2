@@ -68,20 +68,20 @@ public interface TagsEntryService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties)
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties, int begin, int end)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
-		java.lang.String companyId, java.lang.String name,
+	public java.util.List search(long companyId, java.lang.String name,
 		java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public int searchCount(java.lang.String companyId, java.lang.String name,
+	public com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
+		long companyId, java.lang.String name, java.lang.String[] properties,
+		int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 

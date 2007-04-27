@@ -34,7 +34,7 @@ import java.io.Serializable;
  *
  */
 public class DLFileRankPK implements Comparable, Serializable {
-	public String companyId;
+	public long companyId;
 	public long userId;
 	public String folderId;
 	public String name;
@@ -42,7 +42,7 @@ public class DLFileRankPK implements Comparable, Serializable {
 	public DLFileRankPK() {
 	}
 
-	public DLFileRankPK(String companyId, long userId, String folderId,
+	public DLFileRankPK(long companyId, long userId, String folderId,
 		String name) {
 		this.companyId = companyId;
 		this.userId = userId;
@@ -50,11 +50,11 @@ public class DLFileRankPK implements Comparable, Serializable {
 		this.name = name;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		this.companyId = companyId;
 	}
 
@@ -89,7 +89,16 @@ public class DLFileRankPK implements Comparable, Serializable {
 
 		DLFileRankPK pk = (DLFileRankPK)obj;
 		int value = 0;
-		value = companyId.compareTo(pk.companyId);
+
+		if (companyId < pk.companyId) {
+			value = -1;
+		}
+		else if (companyId > pk.companyId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -138,7 +147,7 @@ public class DLFileRankPK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((companyId.equals(pk.companyId)) && (userId == pk.userId) &&
+		if ((companyId == pk.companyId) && (userId == pk.userId) &&
 				(folderId.equals(pk.folderId)) && (name.equals(pk.name))) {
 			return true;
 		}

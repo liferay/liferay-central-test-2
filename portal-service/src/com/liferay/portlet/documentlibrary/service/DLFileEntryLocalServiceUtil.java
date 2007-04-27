@@ -254,9 +254,8 @@ public class DLFileEntryLocalServiceUtil {
 		dlFileEntryLocalService.deleteFileEntry(fileEntry);
 	}
 
-	public static java.io.InputStream getFileAsStream(
-		java.lang.String companyId, long userId, java.lang.String folderId,
-		java.lang.String name)
+	public static java.io.InputStream getFileAsStream(long companyId,
+		long userId, java.lang.String folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
@@ -265,9 +264,9 @@ public class DLFileEntryLocalServiceUtil {
 			folderId, name);
 	}
 
-	public static java.io.InputStream getFileAsStream(
-		java.lang.String companyId, long userId, java.lang.String folderId,
-		java.lang.String name, double version)
+	public static java.io.InputStream getFileAsStream(long companyId,
+		long userId, java.lang.String folderId, java.lang.String name,
+		double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();

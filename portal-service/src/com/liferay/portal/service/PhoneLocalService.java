@@ -68,9 +68,8 @@ public interface PhoneLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deletePhones(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException;
+	public void deletePhones(long companyId, java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Phone getPhone(long phoneId)
 		throws com.liferay.portal.SystemException, 
@@ -78,9 +77,8 @@ public interface PhoneLocalService {
 
 	public java.util.List getPhones() throws com.liferay.portal.SystemException;
 
-	public java.util.List getPhones(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException;
+	public java.util.List getPhones(long companyId, java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Phone updatePhone(long phoneId,
 		java.lang.String number, java.lang.String extension, int typeId,

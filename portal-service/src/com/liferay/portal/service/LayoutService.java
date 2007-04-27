@@ -66,8 +66,8 @@ public interface LayoutService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portal.model.LayoutReference[] getLayoutReferences(
-		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String prefsKey, java.lang.String prefsValue)
+		long companyId, java.lang.String portletId, java.lang.String prefsKey,
+		java.lang.String prefsValue)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public byte[] exportLayouts(java.lang.String ownerId,

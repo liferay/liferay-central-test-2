@@ -66,23 +66,21 @@ public interface PortletLocalService {
 
 	public java.util.Map getFriendlyURLMappers();
 
-	public com.liferay.portal.model.Portlet getPortletById(
-		java.lang.String companyId, java.lang.String portletId)
-		throws com.liferay.portal.SystemException;
+	public com.liferay.portal.model.Portlet getPortletById(long companyId,
+		java.lang.String portletId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Portlet getPortletByStrutsPath(
-		java.lang.String companyId, java.lang.String strutsPath)
+		long companyId, java.lang.String strutsPath)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getPortlets(java.lang.String companyId)
+	public java.util.List getPortlets(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getPortlets(java.lang.String companyId,
-		boolean showSystem, boolean showPortal)
-		throws com.liferay.portal.SystemException;
+	public java.util.List getPortlets(long companyId, boolean showSystem,
+		boolean showPortal) throws com.liferay.portal.SystemException;
 
-	public boolean hasPortlet(java.lang.String companyId,
-		java.lang.String portletId) throws com.liferay.portal.SystemException;
+	public boolean hasPortlet(long companyId, java.lang.String portletId)
+		throws com.liferay.portal.SystemException;
 
 	public void initEAR(java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
@@ -91,9 +89,8 @@ public interface PortletLocalService {
 		java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
 
-	public com.liferay.portal.model.Portlet updatePortlet(
-		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String roles, boolean active)
+	public com.liferay.portal.model.Portlet updatePortlet(long companyId,
+		java.lang.String portletId, java.lang.String roles, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

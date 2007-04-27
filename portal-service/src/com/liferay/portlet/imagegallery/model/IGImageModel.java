@@ -53,9 +53,9 @@ public interface IGImageModel extends BaseModel {
 
 	public void setPrimaryKey(IGImagePK pk);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public String getImageId();
 

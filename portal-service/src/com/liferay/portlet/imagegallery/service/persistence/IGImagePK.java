@@ -34,22 +34,22 @@ import java.io.Serializable;
  *
  */
 public class IGImagePK implements Comparable, Serializable {
-	public String companyId;
+	public long companyId;
 	public String imageId;
 
 	public IGImagePK() {
 	}
 
-	public IGImagePK(String companyId, String imageId) {
+	public IGImagePK(long companyId, String imageId) {
 		this.companyId = companyId;
 		this.imageId = imageId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		this.companyId = companyId;
 	}
 
@@ -68,7 +68,16 @@ public class IGImagePK implements Comparable, Serializable {
 
 		IGImagePK pk = (IGImagePK)obj;
 		int value = 0;
-		value = companyId.compareTo(pk.companyId);
+
+		if (companyId < pk.companyId) {
+			value = -1;
+		}
+		else if (companyId > pk.companyId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -97,7 +106,7 @@ public class IGImagePK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((companyId.equals(pk.companyId)) && (imageId.equals(pk.imageId))) {
+		if ((companyId == pk.companyId) && (imageId.equals(pk.imageId))) {
 			return true;
 		}
 		else {

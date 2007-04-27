@@ -50,7 +50,7 @@ public class ThemeCompanyLimit implements Serializable {
 		_includes = includes;
 	}
 
-	public boolean isIncluded(String companyId) {
+	public boolean isIncluded(long companyId) {
 		return _matches(_includes, companyId);
 	}
 
@@ -62,11 +62,11 @@ public class ThemeCompanyLimit implements Serializable {
 		_excludes = excludes;
 	}
 
-	public boolean isExcluded(String companyId) {
+	public boolean isExcluded(long companyId) {
 		return _matches(_excludes, companyId);
 	}
 
-	private boolean _matches(List themeCompanyIds, String companyId) {
+	private boolean _matches(List themeCompanyIds, long companyId) {
 		for (int i = 0; i < themeCompanyIds.size(); i++) {
 			ThemeCompanyId themeCompanyId =
 				(ThemeCompanyId)themeCompanyIds.get(i);
@@ -75,14 +75,22 @@ public class ThemeCompanyLimit implements Serializable {
 
 			if (themeCompanyId.isPattern()) {
 				Pattern pattern = Pattern.compile(themeCompanyIdValue);
-				Matcher matcher = pattern.matcher(companyId);
+				Matcher matcher = pattern.matcher(String.valueOf(companyId));
 
 				if (matcher.matches()) {
 					return true;
 				}
 			}
 			else {
-				if (themeCompanyIdValue.equals(companyId)) {
+				Long themeCompanyIdValueLong = new Long(0);
+
+				try {
+					themeCompanyIdValueLong = new Long(themeCompanyIdValue);
+				}
+				catch (Exception e) {
+				}
+
+				if (themeCompanyIdValueLong.longValue() == companyId) {
 					return true;
 				}
 			}

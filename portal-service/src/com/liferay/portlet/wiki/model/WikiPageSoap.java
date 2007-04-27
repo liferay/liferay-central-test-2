@@ -112,11 +112,11 @@ public class WikiPageSoap implements Serializable {
 		_version = version;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -175,7 +175,7 @@ public class WikiPageSoap implements Serializable {
 	private String _nodeId;
 	private String _title;
 	private double _version;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

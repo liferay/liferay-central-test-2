@@ -55,9 +55,9 @@ public interface SCProductVersionModel extends BaseModel {
 
 	public void setProductVersionId(long productVersionId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 

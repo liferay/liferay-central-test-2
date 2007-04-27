@@ -105,11 +105,11 @@ public class UserSoap implements Serializable {
 		_userId = userId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -302,7 +302,7 @@ public class UserSoap implements Serializable {
 	}
 
 	private long _userId;
-	private String _companyId;
+	private long _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _defaultUser;

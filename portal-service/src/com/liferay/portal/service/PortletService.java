@@ -49,9 +49,8 @@ package com.liferay.portal.service;
  *
  */
 public interface PortletService {
-	public com.liferay.portal.model.Portlet updatePortlet(
-		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String roles, boolean active)
+	public com.liferay.portal.model.Portlet updatePortlet(long companyId,
+		java.lang.String portletId, java.lang.String roles, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

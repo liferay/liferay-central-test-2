@@ -53,9 +53,9 @@ public interface PermissionModel extends BaseModel {
 
 	public void setPermissionId(long permissionId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public String getActionId();
 

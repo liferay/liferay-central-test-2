@@ -55,9 +55,9 @@ public interface UserModel extends BaseModel {
 
 	public void setUserId(long userId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public Date getCreateDate();
 

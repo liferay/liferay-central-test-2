@@ -83,16 +83,16 @@ public class TagsEntryServiceUtil {
 		return tagsEntryService.getEntries(className, classPK);
 	}
 
-	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties)
+	public static java.util.List search(long companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.search(companyId, name, properties);
 	}
 
-	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties, int begin, int end)
+	public static java.util.List search(long companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
@@ -100,8 +100,8 @@ public class TagsEntryServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String[] properties, int begin, int end)
+		long companyId, java.lang.String name, java.lang.String[] properties,
+		int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
@@ -109,8 +109,8 @@ public class TagsEntryServiceUtil {
 			begin, end);
 	}
 
-	public static int searchCount(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties)
+	public static int searchCount(long companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 

@@ -85,7 +85,7 @@ public interface JournalStructureLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addStructureResources(java.lang.String companyId, long groupId,
+	public void addStructureResources(long companyId, long groupId,
 		java.lang.String structureId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -97,7 +97,7 @@ public interface JournalStructureLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addStructureResources(java.lang.String companyId, long groupId,
+	public void addStructureResources(long companyId, long groupId,
 		java.lang.String structureId, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -110,12 +110,12 @@ public interface JournalStructureLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void checkNewLine(java.lang.String companyId, long groupId,
+	public void checkNewLine(long companyId, long groupId,
 		java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteStructure(java.lang.String companyId, long groupId,
+	public void deleteStructure(long companyId, long groupId,
 		java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -126,7 +126,7 @@ public interface JournalStructureLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalStructure getStructure(
-		java.lang.String companyId, long groupId, java.lang.String structureId)
+		long companyId, long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -142,19 +142,19 @@ public interface JournalStructureLocalService {
 	public int getStructuresCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(java.lang.String companyId, long groupId,
+	public java.util.List search(long companyId, long groupId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public int searchCount(java.lang.String companyId, long groupId,
+	public int searchCount(long companyId, long groupId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure updateStructure(
-		java.lang.String companyId, long groupId, java.lang.String structureId,
+		long companyId, long groupId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd)
 		throws com.liferay.portal.SystemException, 

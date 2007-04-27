@@ -52,7 +52,7 @@ public class LockServiceUtil {
 		return lockService.getLock(className, pk);
 	}
 
-	public static Set getLocksByCompanyId(String companyId)
+	public static Set getLocksByCompanyId(long companyId)
 		throws RemoteException, SystemException {
 
 		LockService lockService = LockServiceFactory.getService();
@@ -86,7 +86,7 @@ public class LockServiceUtil {
 	}
 
 	public static void lock(
-			String className, Comparable pk, String companyId, long userId,
+			String className, Comparable pk, long companyId, long userId,
 			long expirationTime)
 		throws PortalException, RemoteException, SystemException {
 

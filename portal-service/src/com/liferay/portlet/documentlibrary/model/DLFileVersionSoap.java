@@ -110,11 +110,11 @@ public class DLFileVersionSoap implements Serializable {
 		_version = version;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -153,7 +153,7 @@ public class DLFileVersionSoap implements Serializable {
 	private String _folderId;
 	private String _name;
 	private double _version;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

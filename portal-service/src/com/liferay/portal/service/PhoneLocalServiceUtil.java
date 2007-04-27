@@ -84,9 +84,8 @@ public class PhoneLocalServiceUtil {
 		phoneLocalService.deletePhone(phoneId);
 	}
 
-	public static void deletePhones(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException {
+	public static void deletePhones(long companyId, java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 		phoneLocalService.deletePhones(companyId, className, classPK);
 	}
@@ -106,7 +105,7 @@ public class PhoneLocalServiceUtil {
 		return phoneLocalService.getPhones();
 	}
 
-	public static java.util.List getPhones(java.lang.String companyId,
+	public static java.util.List getPhones(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();

@@ -78,8 +78,8 @@ public class JournalStructureServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
-	public static void deleteStructure(java.lang.String companyId,
-		long groupId, java.lang.String structureId)
+	public static void deleteStructure(long companyId, long groupId,
+		java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
@@ -87,7 +87,7 @@ public class JournalStructureServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
-		java.lang.String companyId, long groupId, java.lang.String structureId)
+		long companyId, long groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();

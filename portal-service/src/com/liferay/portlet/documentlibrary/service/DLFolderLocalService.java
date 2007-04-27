@@ -129,7 +129,7 @@ public interface DLFolderLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getFolders(java.lang.String companyId)
+	public java.util.List getFolders(long companyId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getFolders(long groupId,
@@ -146,9 +146,8 @@ public interface DLFolderLocalService {
 	public void getSubfolderIds(java.util.List folderIds, long groupId,
 		java.lang.String folderId) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, long groupId, java.lang.String[] folderIds,
-		java.lang.String keywords)
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, java.lang.String[] folderIds, java.lang.String keywords)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

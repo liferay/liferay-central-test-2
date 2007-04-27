@@ -57,18 +57,18 @@ public interface RoleLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Role addRole(long userId,
-		java.lang.String companyId, java.lang.String name, int type)
+	public com.liferay.portal.model.Role addRole(long userId, long companyId,
+		java.lang.String name, int type)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Role addRole(long userId,
-		java.lang.String companyId, java.lang.String name, int type,
-		java.lang.String className, java.lang.String classPK)
+	public com.liferay.portal.model.Role addRole(long userId, long companyId,
+		java.lang.String name, int type, java.lang.String className,
+		java.lang.String classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void checkSystemRoles(java.lang.String companyId)
+	public void checkSystemRoles(long companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -76,8 +76,8 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Role getGroupRole(
-		java.lang.String companyId, long groupId)
+	public com.liferay.portal.model.Role getGroupRole(long companyId,
+		long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -85,7 +85,7 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.Map getResourceRoles(java.lang.String companyId,
+	public java.util.Map getResourceRoles(long companyId,
 		java.lang.String name, java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException;
 
@@ -93,7 +93,7 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Role getRole(java.lang.String companyId,
+	public com.liferay.portal.model.Role getRole(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -114,22 +114,21 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasUserRole(long userId, java.lang.String companyId,
+	public boolean hasUserRole(long userId, long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasUserRoles(long userId, java.lang.String companyId,
+	public boolean hasUserRoles(long userId, long companyId,
 		java.lang.String[] names)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String description,
-		java.lang.Integer type, int begin, int end)
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String description, java.lang.Integer type, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int searchCount(java.lang.String companyId, java.lang.String name,
+	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer type)
 		throws com.liferay.portal.SystemException;
 

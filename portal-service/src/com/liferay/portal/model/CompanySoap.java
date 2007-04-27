@@ -48,6 +48,8 @@ public class CompanySoap implements Serializable {
 	public static CompanySoap toSoapModel(Company model) {
 		CompanySoap soapModel = new CompanySoap();
 		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setAccountId(model.getAccountId());
+		soapModel.setWebId(model.getWebId());
 		soapModel.setKey(model.getKey());
 		soapModel.setPortalURL(model.getPortalURL());
 		soapModel.setHomeURL(model.getHomeURL());
@@ -70,20 +72,36 @@ public class CompanySoap implements Serializable {
 	public CompanySoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _companyId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setCompanyId(pk);
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
+	}
+
+	public long getAccountId() {
+		return _accountId;
+	}
+
+	public void setAccountId(long accountId) {
+		_accountId = accountId;
+	}
+
+	public String getWebId() {
+		return _webId;
+	}
+
+	public void setWebId(String webId) {
+		_webId = webId;
 	}
 
 	public String getKey() {
@@ -118,7 +136,9 @@ public class CompanySoap implements Serializable {
 		_mx = mx;
 	}
 
-	private String _companyId;
+	private long _companyId;
+	private long _accountId;
+	private String _webId;
 	private String _key;
 	private String _portalURL;
 	private String _homeURL;

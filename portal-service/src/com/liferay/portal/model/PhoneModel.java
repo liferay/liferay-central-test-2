@@ -55,9 +55,9 @@ public interface PhoneModel extends BaseModel {
 
 	public void setPhoneId(long phoneId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 

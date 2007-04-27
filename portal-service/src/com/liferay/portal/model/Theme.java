@@ -45,7 +45,7 @@ public interface Theme extends Comparable, Plugin, Serializable {
 
 	public void setThemeCompanyLimit(ThemeCompanyLimit themeCompanyLimit);
 
-	public boolean isCompanyAvailable(String companyId);
+	public boolean isCompanyAvailable(long companyId);
 
 	public ThemeGroupLimit getThemeGroupLimit();
 

@@ -53,9 +53,9 @@ public interface ResourceCodeModel extends BaseModel {
 
 	public void setCodeId(long codeId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public String getName();
 

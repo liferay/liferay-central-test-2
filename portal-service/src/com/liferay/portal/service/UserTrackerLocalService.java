@@ -57,16 +57,16 @@ public interface UserTrackerLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.UserTracker addUserTracker(
-		java.lang.String companyId, long userId, java.util.Date modifiedDate,
-		java.lang.String remoteAddr, java.lang.String remoteHost,
-		java.lang.String userAgent, java.util.List userTrackerPaths)
+	public com.liferay.portal.model.UserTracker addUserTracker(long companyId,
+		long userId, java.util.Date modifiedDate, java.lang.String remoteAddr,
+		java.lang.String remoteHost, java.lang.String userAgent,
+		java.util.List userTrackerPaths)
 		throws com.liferay.portal.SystemException;
 
 	public void deleteUserTracker(java.lang.String userTrackerId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getUserTrackers(java.lang.String companyId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List getUserTrackers(long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 }

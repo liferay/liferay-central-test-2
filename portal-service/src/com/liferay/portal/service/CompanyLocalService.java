@@ -57,19 +57,18 @@ public interface CompanyLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void checkCompany(java.lang.String companyId)
+	public com.liferay.portal.model.Company checkCompany(java.lang.String webId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void checkCompanyKey(java.lang.String companyId)
+	public void checkCompanyKey(long companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public java.util.List getCompanies()
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Company getCompany(
-		java.lang.String companyId)
+	public com.liferay.portal.model.Company getCompanyById(long companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -77,37 +76,39 @@ public interface CompanyLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String keywords)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String portletId, long groupId,
-		java.lang.String type, java.lang.String keywords)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Company updateCompany(
-		java.lang.String companyId, java.lang.String portalURL,
-		java.lang.String homeURL, java.lang.String mx, java.lang.String name,
-		java.lang.String legalName, java.lang.String legalId,
-		java.lang.String legalType, java.lang.String sicCode,
-		java.lang.String tickerSymbol, java.lang.String industry,
-		java.lang.String type, java.lang.String size)
+	public com.liferay.portal.model.Company getCompanyByWebId(
+		java.lang.String webId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updateDisplay(java.lang.String companyId,
-		java.lang.String languageId, java.lang.String timeZoneId)
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		java.lang.String keywords) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		java.lang.String portletId, long groupId, java.lang.String type,
+		java.lang.String keywords) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Company updateCompany(long companyId,
+		java.lang.String portalURL, java.lang.String homeURL,
+		java.lang.String mx, java.lang.String name, java.lang.String legalName,
+		java.lang.String legalId, java.lang.String legalType,
+		java.lang.String sicCode, java.lang.String tickerSymbol,
+		java.lang.String industry, java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updateLogo(java.lang.String companyId, java.io.File file)
+	public void updateDisplay(long companyId, java.lang.String languageId,
+		java.lang.String timeZoneId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updateSecurity(java.lang.String companyId,
-		java.lang.String authType, boolean autoLogin, boolean sendPassword,
-		boolean strangers, boolean communityLogo)
+	public void updateLogo(long companyId, java.io.File file)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void updateSecurity(long companyId, java.lang.String authType,
+		boolean autoLogin, boolean sendPassword, boolean strangers,
+		boolean communityLogo)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

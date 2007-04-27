@@ -241,7 +241,7 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItem(
-		java.lang.String companyId, java.lang.String sku)
+		long companyId, java.lang.String sku)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();

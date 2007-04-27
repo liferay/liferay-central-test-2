@@ -62,8 +62,7 @@ public interface UserGroupLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.UserGroup addUserGroup(long userId,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String description)
+		long companyId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -76,8 +75,8 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.UserGroup getUserGroup(
-		java.lang.String companyId, java.lang.String name)
+	public com.liferay.portal.model.UserGroup getUserGroup(long companyId,
+		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -89,12 +88,11 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String description,
-		java.util.LinkedHashMap params, int begin, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String description, java.util.LinkedHashMap params,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public int searchCount(java.lang.String companyId, java.lang.String name,
+	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.util.LinkedHashMap params)
 		throws com.liferay.portal.SystemException;
 
@@ -103,9 +101,9 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.UserGroup updateUserGroup(
-		java.lang.String companyId, java.lang.String userGroupId,
-		java.lang.String name, java.lang.String description)
+	public com.liferay.portal.model.UserGroup updateUserGroup(long companyId,
+		java.lang.String userGroupId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

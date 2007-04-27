@@ -76,22 +76,21 @@ public interface SubscriptionLocalService {
 	public void deleteSubscriptions(long userId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteSubscriptions(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException;
+	public void deleteSubscriptions(long companyId, java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Subscription getSubscription(
-		java.lang.String companyId, long userId, java.lang.String className,
+		long companyId, long userId, java.lang.String className,
 		java.lang.String classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getSubscriptions(java.lang.String companyId,
+	public java.util.List getSubscriptions(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean isSubscribed(java.lang.String companyId, long userId,
+	public boolean isSubscribed(long companyId, long userId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

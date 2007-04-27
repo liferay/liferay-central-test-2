@@ -243,14 +243,14 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
-		java.lang.String companyId, long entryId, long folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
+		long entryId, long folderId, java.lang.String name,
+		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
-		return bookmarksEntryLocalService.updateEntry(companyId, entryId,
-			folderId, name, url, comments, tagsEntries);
+		return bookmarksEntryLocalService.updateEntry(entryId, folderId, name,
+			url, comments, tagsEntries);
 	}
 }

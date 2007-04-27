@@ -38,68 +38,68 @@ import java.rmi.RemoteException;
 public interface DLService {
 
 	public void addDirectory(
-			String companyId, String repositoryId, String dirName)
+			long companyId, String repositoryId, String dirName)
 		throws PortalException, RemoteException, SystemException;
 
 	public void addFile(
-			String companyId, String portletId, long groupId,
-			String repositoryId, String fileName, File file)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, File file)
 		throws PortalException, RemoteException, SystemException;
 
 	public void addFile(
-			String companyId, String portletId, long groupId,
-			String repositoryId, String fileName, byte[] byteArray)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException;
 
 	public void deleteDirectory(
-			String companyId, String portletId, String repositoryId,
+			long companyId, String portletId, String repositoryId,
 			String dirName)
 		throws PortalException, RemoteException, SystemException;
 
 	public void deleteFile(
-			String companyId, String portletId, String repositoryId,
+			long companyId, String portletId, String repositoryId,
 			String fileName)
 		throws PortalException, RemoteException, SystemException;
 
 	public void deleteFile(
-			String companyId, String portletId, String repositoryId,
+			long companyId, String portletId, String repositoryId,
 			String fileName, double versionNumber)
 		throws PortalException, RemoteException, SystemException;
 
 	public byte[] getFile(
-			String companyId, String repositoryId, String fileName)
+			long companyId, String repositoryId, String fileName)
 		throws PortalException, RemoteException, SystemException;
 
 	public byte[] getFile(
-			String companyId, String repositoryId, String fileName,
+			long companyId, String repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, RemoteException, SystemException;
 
 	public String[] getFileNames(
-			String companyId, String repositoryId, String dirName)
+			long companyId, String repositoryId, String dirName)
 		throws PortalException, RemoteException, SystemException;
 
 	public long getFileSize(
-			String companyId, String repositoryId, String fileName)
+			long companyId, String repositoryId, String fileName)
 		throws PortalException, RemoteException, SystemException;
 
 	public void reIndex(String[] ids) throws RemoteException, SystemException;
 
 	public void updateFile(
-			String companyId, String portletId, long groupId,
-			String repositoryId, String fileName, double versionNumber,
-			String sourceFileName, File file)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			File file)
 		throws PortalException, RemoteException, SystemException;
 
 	public void updateFile(
-			String companyId, String portletId, long groupId,
-			String repositoryId, String fileName, double versionNumber,
-			String sourceFileName, byte[] byteArray)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			byte[] byteArray)
 		throws PortalException, RemoteException, SystemException;
 
 	public void updateFile(
-			String companyId, String portletId, long groupId,
-			String repositoryId, String newRepositoryId, String fileName)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String newRepositoryId, String fileName)
 		throws PortalException, RemoteException, SystemException;
 
 }

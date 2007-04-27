@@ -34,7 +34,7 @@ import java.io.Serializable;
  *
  */
 public class JournalArticlePK implements Comparable, Serializable {
-	public String companyId;
+	public long companyId;
 	public long groupId;
 	public String articleId;
 	public double version;
@@ -42,7 +42,7 @@ public class JournalArticlePK implements Comparable, Serializable {
 	public JournalArticlePK() {
 	}
 
-	public JournalArticlePK(String companyId, long groupId, String articleId,
+	public JournalArticlePK(long companyId, long groupId, String articleId,
 		double version) {
 		this.companyId = companyId;
 		this.groupId = groupId;
@@ -50,11 +50,11 @@ public class JournalArticlePK implements Comparable, Serializable {
 		this.version = version;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		this.companyId = companyId;
 	}
 
@@ -89,7 +89,16 @@ public class JournalArticlePK implements Comparable, Serializable {
 
 		JournalArticlePK pk = (JournalArticlePK)obj;
 		int value = 0;
-		value = companyId.compareTo(pk.companyId);
+
+		if (companyId < pk.companyId) {
+			value = -1;
+		}
+		else if (companyId > pk.companyId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -146,7 +155,7 @@ public class JournalArticlePK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((companyId.equals(pk.companyId)) && (groupId == pk.groupId) &&
+		if ((companyId == pk.companyId) && (groupId == pk.groupId) &&
 				(articleId.equals(pk.articleId)) && (version == pk.version)) {
 			return true;
 		}

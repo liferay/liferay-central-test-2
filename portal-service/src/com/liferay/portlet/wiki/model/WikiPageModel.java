@@ -65,9 +65,9 @@ public interface WikiPageModel extends BaseModel {
 
 	public void setVersion(double version);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 

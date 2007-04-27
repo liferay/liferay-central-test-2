@@ -37,32 +37,32 @@ import java.io.InputStream;
 public interface DLLocalService {
 
 	public void addFile(
-			String companyId, String portletId, long groupId,
-			String repositoryId, String fileName, InputStream is)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, InputStream is)
 		throws PortalException, SystemException;
 
 	public InputStream getFileAsStream(
-			String companyId, String repositoryId, String fileName)
+			long companyId, String repositoryId, String fileName)
 		throws PortalException, SystemException;
 
 	public InputStream getFileAsStream(
-			String companyId, String repositoryId, String fileName,
+			long companyId, String repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException;
 
 	public boolean hasFileContentNode(
-			String companyId, String repositoryId, String fileName,
+			long companyId, String repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException;
 
 	public Hits search(
-			String companyId, String portletId, long groupId,
+			long companyId, String portletId, long groupId,
 			String[] repositoryIds, String keywords)
 		throws SystemException;
 
 	public void updateFile(
-			String companyId, String portletId, long groupId,
-			String repositoryId, String fileName, double versionNumber,
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, double versionNumber,
 			String sourceFileName, InputStream is)
 	throws PortalException, SystemException;
 

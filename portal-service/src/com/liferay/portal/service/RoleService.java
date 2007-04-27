@@ -57,8 +57,8 @@ public interface RoleService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Role getGroupRole(
-		java.lang.String companyId, long groupId)
+	public com.liferay.portal.model.Role getGroupRole(long companyId,
+		long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -66,7 +66,7 @@ public interface RoleService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Role getRole(java.lang.String companyId,
+	public com.liferay.portal.model.Role getRole(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

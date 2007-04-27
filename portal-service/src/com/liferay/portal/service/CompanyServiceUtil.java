@@ -50,12 +50,11 @@ package com.liferay.portal.service;
  */
 public class CompanyServiceUtil {
 	public static com.liferay.portal.model.Company updateCompany(
-		java.lang.String companyId, java.lang.String portalURL,
-		java.lang.String homeURL, java.lang.String mx, java.lang.String name,
-		java.lang.String legalName, java.lang.String legalId,
-		java.lang.String legalType, java.lang.String sicCode,
-		java.lang.String tickerSymbol, java.lang.String industry,
-		java.lang.String type, java.lang.String size)
+		long companyId, java.lang.String portalURL, java.lang.String homeURL,
+		java.lang.String mx, java.lang.String name, java.lang.String legalName,
+		java.lang.String legalId, java.lang.String legalType,
+		java.lang.String sicCode, java.lang.String tickerSymbol,
+		java.lang.String industry, java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CompanyService companyService = CompanyServiceFactory.getService();
@@ -65,7 +64,7 @@ public class CompanyServiceUtil {
 			industry, type, size);
 	}
 
-	public static void updateDisplay(java.lang.String companyId,
+	public static void updateDisplay(long companyId,
 		java.lang.String languageId, java.lang.String timeZoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -73,14 +72,14 @@ public class CompanyServiceUtil {
 		companyService.updateDisplay(companyId, languageId, timeZoneId);
 	}
 
-	public static void updateLogo(java.lang.String companyId, java.io.File file)
+	public static void updateLogo(long companyId, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CompanyService companyService = CompanyServiceFactory.getService();
 		companyService.updateLogo(companyId, file);
 	}
 
-	public static void updateSecurity(java.lang.String companyId,
+	public static void updateSecurity(long companyId,
 		java.lang.String authType, boolean autoLogin, boolean sendPassword,
 		boolean strangers, boolean communityLogo)
 		throws com.liferay.portal.PortalException, 

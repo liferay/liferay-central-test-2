@@ -86,11 +86,11 @@ public class UserGroupSoap implements Serializable {
 		_userGroupId = userGroupId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -119,7 +119,7 @@ public class UserGroupSoap implements Serializable {
 	}
 
 	private String _userGroupId;
-	private String _companyId;
+	private long _companyId;
 	private String _parentUserGroupId;
 	private String _name;
 	private String _description;

@@ -42,7 +42,7 @@ public interface LockService {
 	public Lock getLock(String className, Comparable pk)
 		throws PortalException, RemoteException;
 
-	public Set getLocksByCompanyId(String companyId)
+	public Set getLocksByCompanyId(long companyId)
 		throws RemoteException;
 
 	public Set getLocksByUserId(long userId) throws RemoteException;
@@ -54,7 +54,7 @@ public interface LockService {
 		throws RemoteException;
 
 	public void lock(
-			String className, Comparable pk, String companyId, long userId,
+			String className, Comparable pk, long companyId, long userId,
 			long expirationTime)
 		throws PortalException, RemoteException;
 

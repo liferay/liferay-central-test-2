@@ -107,11 +107,11 @@ public class MBMessageSoap implements Serializable {
 		_messageId = messageId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -213,7 +213,7 @@ public class MBMessageSoap implements Serializable {
 
 	private String _topicId;
 	private String _messageId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

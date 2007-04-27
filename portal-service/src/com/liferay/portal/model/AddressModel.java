@@ -55,9 +55,9 @@ public interface AddressModel extends BaseModel {
 
 	public void setAddressId(long addressId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 

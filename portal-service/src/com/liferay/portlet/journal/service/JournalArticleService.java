@@ -92,49 +92,47 @@ public interface JournalArticleService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
-		java.lang.String companyId, long groupId, java.lang.String articleId,
-		double version)
+		long companyId, long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.lang.String getArticleContent(java.lang.String companyId,
-		long groupId, java.lang.String articleId, java.lang.String languageId,
+	public java.lang.String getArticleContent(long companyId, long groupId,
+		java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.lang.String getArticleContent(java.lang.String companyId,
-		long groupId, java.lang.String articleId, double version,
+	public java.lang.String getArticleContent(long companyId, long groupId,
+		java.lang.String articleId, double version,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteArticle(java.lang.String companyId, long groupId,
+	public void deleteArticle(long companyId, long groupId,
 		java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void expireArticle(java.lang.String companyId, long groupId,
+	public void expireArticle(long companyId, long groupId,
 		java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void removeArticleLocale(java.lang.String companyId,
-		java.lang.String languageId)
+	public void removeArticleLocale(long companyId, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
-		java.lang.String companyId, long groupId, java.lang.String articleId,
+		long companyId, long groupId, java.lang.String articleId,
 		double version, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
-		java.lang.String companyId, long groupId, java.lang.String articleId,
+		long companyId, long groupId, java.lang.String articleId,
 		double version, boolean incrementVersion, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,

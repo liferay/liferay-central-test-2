@@ -100,11 +100,11 @@ public class AddressSoap implements Serializable {
 		_addressId = addressId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -245,7 +245,7 @@ public class AddressSoap implements Serializable {
 	}
 
 	private long _addressId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

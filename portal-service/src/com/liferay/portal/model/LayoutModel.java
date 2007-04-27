@@ -58,9 +58,9 @@ public interface LayoutModel extends BaseModel {
 
 	public void setOwnerId(String ownerId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public String getParentLayoutId();
 

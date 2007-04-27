@@ -65,7 +65,7 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.User addUser(java.lang.String companyId,
+	public com.liferay.portal.model.User addUser(long companyId,
 		boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean passwordReset,
 		boolean autoScreenName, java.lang.String screenName,
@@ -94,8 +94,8 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.User getUserByEmailAddress(
-		java.lang.String companyId, java.lang.String emailAddress)
+	public com.liferay.portal.model.User getUserByEmailAddress(long companyId,
+		java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -103,8 +103,8 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.User getUserByScreenName(
-		java.lang.String companyId, java.lang.String screenName)
+	public com.liferay.portal.model.User getUserByScreenName(long companyId,
+		java.lang.String screenName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

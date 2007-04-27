@@ -58,7 +58,7 @@ public interface LayoutSetLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.LayoutSet addLayoutSet(
-		java.lang.String ownerId, java.lang.String companyId)
+		java.lang.String ownerId, long companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -71,8 +71,8 @@ public interface LayoutSetLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.LayoutSet getLayoutSet(
-		java.lang.String companyId, java.lang.String virtualHost)
+	public com.liferay.portal.model.LayoutSet getLayoutSet(long companyId,
+		java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

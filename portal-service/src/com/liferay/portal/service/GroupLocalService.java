@@ -79,7 +79,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void checkSystemGroups(java.lang.String companyId)
+	public void checkSystemGroups(long companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -87,8 +87,8 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Group getFriendlyURLGroup(
-		java.lang.String companyId, java.lang.String friendlyURL)
+	public com.liferay.portal.model.Group getFriendlyURLGroup(long companyId,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -96,13 +96,13 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Group getGroup(java.lang.String companyId,
+	public com.liferay.portal.model.Group getGroup(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Group getOrganizationGroup(
-		java.lang.String companyId, java.lang.String organizationId)
+	public com.liferay.portal.model.Group getOrganizationGroup(long companyId,
+		java.lang.String organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -118,13 +118,13 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Group getUserGroup(
-		java.lang.String companyId, long userId)
+	public com.liferay.portal.model.Group getUserGroup(long companyId,
+		long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Group getUserGroupGroup(
-		java.lang.String companyId, java.lang.String userGroupId)
+	public com.liferay.portal.model.Group getUserGroupGroup(long companyId,
+		java.lang.String userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -139,12 +139,11 @@ public interface GroupLocalService {
 	public boolean hasUserGroup(long userId, long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String description,
-		java.util.LinkedHashMap params, int begin, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String description, java.util.LinkedHashMap params,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public int searchCount(java.lang.String companyId, java.lang.String name,
+	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.util.LinkedHashMap params)
 		throws com.liferay.portal.SystemException;
 

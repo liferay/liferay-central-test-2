@@ -152,9 +152,8 @@ public class LayoutLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutReference[] getLayouts(
-		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String prefsKey, java.lang.String prefsValue)
-		throws com.liferay.portal.SystemException {
+		long companyId, java.lang.String portletId, java.lang.String prefsKey,
+		java.lang.String prefsValue) throws com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
 		return layoutLocalService.getLayouts(companyId, portletId, prefsKey,

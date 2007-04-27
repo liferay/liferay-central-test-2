@@ -57,13 +57,12 @@ public interface JournalContentSearchLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void checkContentSearches(java.lang.String companyId)
+	public void checkContentSearches(long companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteArticleContentSearches(java.lang.String companyId,
-		long groupId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException;
+	public void deleteArticleContentSearches(long companyId, long groupId,
+		java.lang.String articleId) throws com.liferay.portal.SystemException;
 
 	public void deleteLayoutContentSearches(java.lang.String layoutId,
 		java.lang.String ownerId) throws com.liferay.portal.SystemException;
@@ -74,8 +73,8 @@ public interface JournalContentSearchLocalService {
 	public java.util.List getArticleContentSearches()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getArticleContentSearches(
-		java.lang.String companyId, long groupId, java.lang.String articleId)
+	public java.util.List getArticleContentSearches(long companyId,
+		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getLayoutIds(java.lang.String ownerId, long groupId,
@@ -86,14 +85,14 @@ public interface JournalContentSearchLocalService {
 
 	public com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
 		java.lang.String portletId, java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String companyId, long groupId,
+		java.lang.String ownerId, long companyId, long groupId,
 		java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public java.util.List updateContentSearch(java.lang.String portletId,
-		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String companyId, long groupId, java.lang.String[] articleIds)
+		java.lang.String layoutId, java.lang.String ownerId, long companyId,
+		long groupId, java.lang.String[] articleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

@@ -55,9 +55,9 @@ public interface UserTrackerModel extends BaseModel {
 
 	public void setUserTrackerId(String userTrackerId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 

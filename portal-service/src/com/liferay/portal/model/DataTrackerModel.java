@@ -55,9 +55,9 @@ public interface DataTrackerModel extends BaseModel {
 
 	public void setDataTrackerId(String dataTrackerId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public Date getCreatedOn();
 

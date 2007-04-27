@@ -55,9 +55,9 @@ public interface WebsiteModel extends BaseModel {
 
 	public void setWebsiteId(long websiteId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 

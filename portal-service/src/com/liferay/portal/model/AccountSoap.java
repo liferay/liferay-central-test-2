@@ -82,27 +82,27 @@ public class AccountSoap implements Serializable {
 	public AccountSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _accountId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setAccountId(pk);
 	}
 
-	public String getAccountId() {
+	public long getAccountId() {
 		return _accountId;
 	}
 
-	public void setAccountId(String accountId) {
+	public void setAccountId(long accountId) {
 		_accountId = accountId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -138,11 +138,11 @@ public class AccountSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getParentAccountId() {
+	public long getParentAccountId() {
 		return _parentAccountId;
 	}
 
-	public void setParentAccountId(String parentAccountId) {
+	public void setParentAccountId(long parentAccountId) {
 		_parentAccountId = parentAccountId;
 	}
 
@@ -218,13 +218,13 @@ public class AccountSoap implements Serializable {
 		_size = size;
 	}
 
-	private String _accountId;
-	private String _companyId;
+	private long _accountId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _parentAccountId;
+	private long _parentAccountId;
 	private String _name;
 	private String _legalName;
 	private String _legalId;

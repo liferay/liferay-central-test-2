@@ -55,9 +55,9 @@ public interface RatingsEntryModel extends BaseModel {
 
 	public void setEntryId(long entryId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 

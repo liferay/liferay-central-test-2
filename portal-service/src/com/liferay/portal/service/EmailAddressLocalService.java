@@ -67,7 +67,7 @@ public interface EmailAddressLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteEmailAddresses(java.lang.String companyId,
+	public void deleteEmailAddresses(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
 
@@ -79,7 +79,7 @@ public interface EmailAddressLocalService {
 	public java.util.List getEmailAddresses()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getEmailAddresses(java.lang.String companyId,
+	public java.util.List getEmailAddresses(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
 

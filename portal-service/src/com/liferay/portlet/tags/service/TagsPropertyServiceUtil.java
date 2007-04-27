@@ -81,7 +81,7 @@ public class TagsPropertyServiceUtil {
 		return tagsPropertyService.getProperties(entryId);
 	}
 
-	public static java.util.List getPropertyValues(java.lang.String companyId,
+	public static java.util.List getPropertyValues(long companyId,
 		java.lang.String key)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();

@@ -67,9 +67,8 @@ public interface WebsiteLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteWebsites(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException;
+	public void deleteWebsites(long companyId, java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.SystemException, 
@@ -78,7 +77,7 @@ public interface WebsiteLocalService {
 	public java.util.List getWebsites()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getWebsites(java.lang.String companyId,
+	public java.util.List getWebsites(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
 

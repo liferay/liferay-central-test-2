@@ -88,11 +88,11 @@ public class RoleSoap implements Serializable {
 		_roleId = roleId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -137,7 +137,7 @@ public class RoleSoap implements Serializable {
 	}
 
 	private String _roleId;
-	private String _companyId;
+	private long _companyId;
 	private String _className;
 	private String _classPK;
 	private String _name;

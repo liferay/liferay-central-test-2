@@ -83,7 +83,7 @@ public class WebsiteLocalServiceUtil {
 		websiteLocalService.deleteWebsite(websiteId);
 	}
 
-	public static void deleteWebsites(java.lang.String companyId,
+	public static void deleteWebsites(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
@@ -105,7 +105,7 @@ public class WebsiteLocalServiceUtil {
 		return websiteLocalService.getWebsites();
 	}
 
-	public static java.util.List getWebsites(java.lang.String companyId,
+	public static java.util.List getWebsites(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();

@@ -91,11 +91,11 @@ public class RatingsEntrySoap implements Serializable {
 		_entryId = entryId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -156,7 +156,7 @@ public class RatingsEntrySoap implements Serializable {
 	}
 
 	private long _entryId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

@@ -66,12 +66,12 @@ public interface IGImageService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteImage(java.lang.String companyId, java.lang.String imageId)
+	public void deleteImage(long companyId, java.lang.String imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(
-		java.lang.String companyId, java.lang.String imageId)
+		long companyId, java.lang.String imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

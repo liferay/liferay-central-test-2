@@ -37,8 +37,8 @@ import java.io.InputStream;
 public class DLLocalServiceUtil {
 
 	public static void addFile(
-			String companyId, String portletId, long groupId,
-			String repositoryId, String fileName, InputStream is)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, InputStream is)
 		throws PortalException, SystemException {
 
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
@@ -48,7 +48,7 @@ public class DLLocalServiceUtil {
 	}
 
 	public static InputStream getFileAsStream(
-			String companyId, String repositoryId, String fileName)
+			long companyId, String repositoryId, String fileName)
 		throws PortalException, SystemException {
 
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
@@ -58,7 +58,7 @@ public class DLLocalServiceUtil {
 	}
 
 	public static InputStream getFileAsStream(
-			String companyId, String repositoryId, String fileName,
+			long companyId, String repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
@@ -69,7 +69,7 @@ public class DLLocalServiceUtil {
 	}
 
 	public static boolean hasFileContentNode(
-			String companyId, String repositoryId, String fileName,
+			long companyId, String repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
@@ -80,7 +80,7 @@ public class DLLocalServiceUtil {
 	}
 
 	public static Hits search(
-			String companyId, String portletId, long groupId,
+			long companyId, String portletId, long groupId,
 			String[] repositoryIds, String keywords)
 		throws SystemException {
 
@@ -91,9 +91,9 @@ public class DLLocalServiceUtil {
 	}
 
 	public static void updateFile(
-			String companyId, String portletId, long groupId,
-			String repositoryId, String fileName, double versionNumber,
-			String sourceFileName, InputStream is)
+			long companyId, String portletId, long groupId, String repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();

@@ -121,9 +121,8 @@ public class ShoppingOrderLocalServiceUtil {
 	}
 
 	public static java.util.List search(java.lang.String orderId, long groupId,
-		java.lang.String companyId, long userId,
-		java.lang.String billingFirstName, java.lang.String billingLastName,
-		java.lang.String billingEmailAddress,
+		long companyId, long userId, java.lang.String billingFirstName,
+		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator, int begin,
@@ -139,9 +138,8 @@ public class ShoppingOrderLocalServiceUtil {
 	}
 
 	public static int searchCount(java.lang.String orderId, long groupId,
-		java.lang.String companyId, long userId,
-		java.lang.String billingFirstName, java.lang.String billingLastName,
-		java.lang.String billingEmailAddress,
+		long companyId, long userId, java.lang.String billingFirstName,
+		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator)

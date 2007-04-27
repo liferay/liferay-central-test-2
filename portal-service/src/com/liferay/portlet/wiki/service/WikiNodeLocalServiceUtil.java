@@ -202,9 +202,9 @@ public class WikiNodeLocalServiceUtil {
 		wikiNodeLocalService.reIndex(ids);
 	}
 
-	public static com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, long groupId, java.lang.String[] nodeIds,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, java.lang.String[] nodeIds, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 
 		return wikiNodeLocalService.search(companyId, groupId, nodeIds, keywords);

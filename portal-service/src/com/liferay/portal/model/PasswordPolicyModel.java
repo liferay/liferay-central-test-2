@@ -55,9 +55,9 @@ public interface PasswordPolicyModel extends BaseModel {
 
 	public void setPasswordPolicyId(long passwordPolicyId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 

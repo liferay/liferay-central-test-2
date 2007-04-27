@@ -57,13 +57,13 @@ public interface PermissionLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Permission addPermission(
-		java.lang.String companyId, java.lang.String actionId, long resourceId)
+	public com.liferay.portal.model.Permission addPermission(long companyId,
+		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List addPermissions(java.lang.String companyId,
-		java.lang.String name, long resourceId, boolean portletActions)
+	public java.util.List addPermissions(long companyId, java.lang.String name,
+		long resourceId, boolean portletActions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -78,9 +78,8 @@ public interface PermissionLocalService {
 	public java.util.List getGroupPermissions(long groupId, long resourceId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupPermissions(long groupId,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String scope, java.lang.String primKey)
+	public java.util.List getGroupPermissions(long groupId, long companyId,
+		java.lang.String name, java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getOrgGroupPermissions(
@@ -91,7 +90,7 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getPermissions(java.lang.String companyId,
+	public java.util.List getPermissions(long companyId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -103,9 +102,8 @@ public interface PermissionLocalService {
 	public java.util.List getUserPermissions(long userId, long resourceId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getUserPermissions(long userId,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String scope, java.lang.String primKey)
+	public java.util.List getUserPermissions(long userId, long companyId,
+		java.lang.String name, java.lang.String scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasGroupPermission(long groupId, java.lang.String actionId,
@@ -113,16 +111,14 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasRolePermission(java.lang.String roleId,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String scope, java.lang.String actionId)
+	public boolean hasRolePermission(java.lang.String roleId, long companyId,
+		java.lang.String name, java.lang.String scope, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasRolePermission(java.lang.String roleId,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String scope, java.lang.String primKey,
-		java.lang.String actionId)
+	public boolean hasRolePermission(java.lang.String roleId, long companyId,
+		java.lang.String name, java.lang.String scope,
+		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -153,17 +149,15 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void setRolePermission(java.lang.String roleId,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String scope, java.lang.String primKey,
-		java.lang.String actionId)
+	public void setRolePermission(java.lang.String roleId, long companyId,
+		java.lang.String name, java.lang.String scope,
+		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void setRolePermissions(java.lang.String roleId,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String scope, java.lang.String primKey,
-		java.lang.String[] actionIds)
+	public void setRolePermissions(java.lang.String roleId, long companyId,
+		java.lang.String name, java.lang.String scope,
+		java.lang.String primKey, java.lang.String[] actionIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -176,16 +170,14 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetRolePermission(java.lang.String roleId,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String scope, java.lang.String primKey,
-		java.lang.String actionId)
+	public void unsetRolePermission(java.lang.String roleId, long companyId,
+		java.lang.String name, java.lang.String scope,
+		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetRolePermissions(java.lang.String roleId,
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String scope, java.lang.String actionId)
+	public void unsetRolePermissions(java.lang.String roleId, long companyId,
+		java.lang.String name, java.lang.String scope, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

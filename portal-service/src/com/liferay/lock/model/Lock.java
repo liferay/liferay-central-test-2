@@ -38,7 +38,7 @@ public interface Lock extends Comparable, Serializable {
 
 	public Comparable getPrimaryKey();
 
-	public String getCompanyId();
+	public long getCompanyId();
 
 	public long getUserId();
 

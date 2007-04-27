@@ -69,7 +69,7 @@ public interface PortletPreferencesLocalService {
 			com.liferay.portal.PortalException;
 
 	public javax.portlet.PortletPreferences getDefaultPreferences(
-		java.lang.String companyId, java.lang.String portletId)
+		long companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -91,8 +91,7 @@ public interface PortletPreferencesLocalService {
 	public java.util.List getPortletPreferencesByPortletId(
 		java.lang.String portletId) throws com.liferay.portal.SystemException;
 
-	public javax.portlet.PortletPreferences getPreferences(
-		java.lang.String companyId,
+	public javax.portlet.PortletPreferences getPreferences(long companyId,
 		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

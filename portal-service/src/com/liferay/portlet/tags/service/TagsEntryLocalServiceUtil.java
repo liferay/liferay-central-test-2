@@ -98,8 +98,7 @@ public class TagsEntryLocalServiceUtil {
 		tagsEntryLocalService.deleteEntry(entry);
 	}
 
-	public static boolean hasEntry(java.lang.String companyId,
-		java.lang.String name)
+	public static boolean hasEntry(long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
@@ -133,7 +132,7 @@ public class TagsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry getEntry(
-		java.lang.String companyId, java.lang.String name)
+		long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
@@ -141,8 +140,7 @@ public class TagsEntryLocalServiceUtil {
 		return tagsEntryLocalService.getEntry(companyId, name);
 	}
 
-	public static long[] getEntryIds(java.lang.String companyId,
-		java.lang.String[] names)
+	public static long[] getEntryIds(long companyId, java.lang.String[] names)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
@@ -150,16 +148,16 @@ public class TagsEntryLocalServiceUtil {
 		return tagsEntryLocalService.getEntryIds(companyId, names);
 	}
 
-	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties)
+	public static java.util.List search(long companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.search(companyId, name, properties);
 	}
 
-	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties, int begin, int end)
+	public static java.util.List search(long companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
@@ -168,17 +166,16 @@ public class TagsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String[] properties, int begin, int end)
-		throws com.liferay.portal.SystemException {
+		long companyId, java.lang.String name, java.lang.String[] properties,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.searchAutocomplete(companyId, name,
 			properties, begin, end);
 	}
 
-	public static int searchCount(java.lang.String companyId,
-		java.lang.String name, java.lang.String[] properties)
+	public static int searchCount(long companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 

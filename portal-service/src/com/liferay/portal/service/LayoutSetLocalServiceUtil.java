@@ -66,7 +66,7 @@ public class LayoutSetLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutSet addLayoutSet(
-		java.lang.String ownerId, java.lang.String companyId)
+		java.lang.String ownerId, long companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
@@ -91,7 +91,7 @@ public class LayoutSetLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutSet getLayoutSet(
-		java.lang.String companyId, java.lang.String virtualHost)
+		long companyId, java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();

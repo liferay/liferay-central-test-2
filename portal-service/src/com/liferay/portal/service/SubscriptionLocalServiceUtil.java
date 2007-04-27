@@ -101,7 +101,7 @@ public class SubscriptionLocalServiceUtil {
 		subscriptionLocalService.deleteSubscriptions(userId);
 	}
 
-	public static void deleteSubscriptions(java.lang.String companyId,
+	public static void deleteSubscriptions(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
@@ -110,7 +110,7 @@ public class SubscriptionLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Subscription getSubscription(
-		java.lang.String companyId, long userId, java.lang.String className,
+		long companyId, long userId, java.lang.String className,
 		java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -120,7 +120,7 @@ public class SubscriptionLocalServiceUtil {
 			className, classPK);
 	}
 
-	public static java.util.List getSubscriptions(java.lang.String companyId,
+	public static java.util.List getSubscriptions(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -130,7 +130,7 @@ public class SubscriptionLocalServiceUtil {
 			classPK);
 	}
 
-	public static boolean isSubscribed(java.lang.String companyId, long userId,
+	public static boolean isSubscribed(long companyId, long userId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

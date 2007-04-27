@@ -109,11 +109,11 @@ public class ContactSoap implements Serializable {
 		_contactId = contactId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -149,11 +149,11 @@ public class ContactSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getAccountId() {
+	public long getAccountId() {
 		return _accountId;
 	}
 
-	public void setAccountId(String accountId) {
+	public void setAccountId(long accountId) {
 		_accountId = accountId;
 	}
 
@@ -322,12 +322,12 @@ public class ContactSoap implements Serializable {
 	}
 
 	private long _contactId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _accountId;
+	private long _accountId;
 	private long _parentContactId;
 	private String _firstName;
 	private String _middleName;

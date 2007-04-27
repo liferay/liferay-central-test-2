@@ -172,14 +172,13 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.io.InputStream getFileAsStream(java.lang.String companyId,
-		long userId, java.lang.String folderId, java.lang.String name)
+	public java.io.InputStream getFileAsStream(long companyId, long userId,
+		java.lang.String folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.io.InputStream getFileAsStream(java.lang.String companyId,
-		long userId, java.lang.String folderId, java.lang.String name,
-		double version)
+	public java.io.InputStream getFileAsStream(long companyId, long userId,
+		java.lang.String folderId, java.lang.String name, double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

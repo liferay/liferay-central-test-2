@@ -87,7 +87,7 @@ public class AddressLocalServiceUtil {
 		addressLocalService.deleteAddress(addressId);
 	}
 
-	public static void deleteAddresses(java.lang.String companyId,
+	public static void deleteAddresses(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
@@ -109,7 +109,7 @@ public class AddressLocalServiceUtil {
 		return addressLocalService.getAddresses();
 	}
 
-	public static java.util.List getAddresses(java.lang.String companyId,
+	public static java.util.List getAddresses(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();

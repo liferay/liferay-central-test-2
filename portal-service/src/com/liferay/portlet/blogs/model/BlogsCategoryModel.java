@@ -55,9 +55,9 @@ public interface BlogsCategoryModel extends BaseModel {
 
 	public void setCategoryId(long categoryId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 

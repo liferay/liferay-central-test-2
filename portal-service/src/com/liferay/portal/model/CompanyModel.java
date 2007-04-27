@@ -45,13 +45,21 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface CompanyModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
+
+	public long getAccountId();
+
+	public void setAccountId(long accountId);
+
+	public String getWebId();
+
+	public void setWebId(String webId);
 
 	public String getKey();
 

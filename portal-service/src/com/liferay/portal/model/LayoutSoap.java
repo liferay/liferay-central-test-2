@@ -107,11 +107,11 @@ public class LayoutSoap implements Serializable {
 		_ownerId = ownerId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -221,7 +221,7 @@ public class LayoutSoap implements Serializable {
 
 	private String _layoutId;
 	private String _ownerId;
-	private String _companyId;
+	private long _companyId;
 	private String _parentLayoutId;
 	private String _name;
 	private String _title;

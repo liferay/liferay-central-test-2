@@ -50,8 +50,8 @@ package com.liferay.portal.service;
  */
 public class PortletServiceUtil {
 	public static com.liferay.portal.model.Portlet updatePortlet(
-		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String roles, boolean active)
+		long companyId, java.lang.String portletId, java.lang.String roles,
+		boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PortletService portletService = PortletServiceFactory.getService();

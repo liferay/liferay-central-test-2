@@ -55,9 +55,9 @@ public interface ShoppingItemModel extends BaseModel {
 
 	public void setItemId(String itemId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 

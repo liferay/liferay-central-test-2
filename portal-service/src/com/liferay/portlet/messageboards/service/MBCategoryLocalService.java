@@ -145,10 +145,10 @@ public interface MBCategoryLocalService {
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, long groupId,
-		java.lang.String[] categoryIds, java.lang.String threadId,
-		java.lang.String keywords) throws com.liferay.portal.SystemException;
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, java.lang.String[] categoryIds,
+		java.lang.String threadId, java.lang.String keywords)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,

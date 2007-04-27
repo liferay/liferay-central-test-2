@@ -53,9 +53,9 @@ public interface GroupModel extends BaseModel {
 
 	public void setGroupId(long groupId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getCreatorUserId();
 

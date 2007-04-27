@@ -186,7 +186,7 @@ public class DLFolderLocalServiceUtil {
 		return dlFolderLocalService.getFolder(parentFolderId, name);
 	}
 
-	public static java.util.List getFolders(java.lang.String companyId)
+	public static java.util.List getFolders(long companyId)
 		throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -224,9 +224,8 @@ public class DLFolderLocalServiceUtil {
 		dlFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
 	}
 
-	public static com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, long groupId, java.lang.String[] folderIds,
-		java.lang.String keywords)
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, java.lang.String[] folderIds, java.lang.String keywords)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();

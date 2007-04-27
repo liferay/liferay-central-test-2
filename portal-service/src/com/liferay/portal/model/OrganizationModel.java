@@ -53,9 +53,9 @@ public interface OrganizationModel extends BaseModel {
 
 	public void setOrganizationId(String organizationId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public String getParentOrganizationId();
 

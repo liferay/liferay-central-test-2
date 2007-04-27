@@ -91,11 +91,11 @@ public class TagsPropertySoap implements Serializable {
 		_propertyId = propertyId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -156,7 +156,7 @@ public class TagsPropertySoap implements Serializable {
 	}
 
 	private long _propertyId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

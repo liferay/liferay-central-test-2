@@ -101,11 +101,11 @@ public class JournalArticleSoap implements Serializable {
 		setVersion(pk.version);
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -285,7 +285,7 @@ public class JournalArticleSoap implements Serializable {
 		_reviewDate = reviewDate;
 	}
 
-	private String _companyId;
+	private long _companyId;
 	private long _groupId;
 	private String _articleId;
 	private double _version;

@@ -107,11 +107,11 @@ public class ShoppingCouponSoap implements Serializable {
 		_groupId = groupId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -233,7 +233,7 @@ public class ShoppingCouponSoap implements Serializable {
 
 	private String _couponId;
 	private long _groupId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

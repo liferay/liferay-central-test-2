@@ -108,11 +108,11 @@ public class PasswordPolicySoap implements Serializable {
 		_passwordPolicyId = passwordPolicyId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -341,7 +341,7 @@ public class PasswordPolicySoap implements Serializable {
 	}
 
 	private long _passwordPolicyId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

@@ -87,7 +87,7 @@ public class PortletLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Portlet getPortletById(
-		java.lang.String companyId, java.lang.String portletId)
+		long companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
@@ -95,21 +95,21 @@ public class PortletLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Portlet getPortletByStrutsPath(
-		java.lang.String companyId, java.lang.String strutsPath)
+		long companyId, java.lang.String strutsPath)
 		throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
 		return portletLocalService.getPortletByStrutsPath(companyId, strutsPath);
 	}
 
-	public static java.util.List getPortlets(java.lang.String companyId)
+	public static java.util.List getPortlets(long companyId)
 		throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
 		return portletLocalService.getPortlets(companyId);
 	}
 
-	public static java.util.List getPortlets(java.lang.String companyId,
+	public static java.util.List getPortlets(long companyId,
 		boolean showSystem, boolean showPortal)
 		throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
@@ -117,8 +117,8 @@ public class PortletLocalServiceUtil {
 		return portletLocalService.getPortlets(companyId, showSystem, showPortal);
 	}
 
-	public static boolean hasPortlet(java.lang.String companyId,
-		java.lang.String portletId) throws com.liferay.portal.SystemException {
+	public static boolean hasPortlet(long companyId, java.lang.String portletId)
+		throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
 		return portletLocalService.hasPortlet(companyId, portletId);
@@ -140,8 +140,8 @@ public class PortletLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Portlet updatePortlet(
-		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String roles, boolean active)
+		long companyId, java.lang.String portletId, java.lang.String roles,
+		boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();

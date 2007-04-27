@@ -92,11 +92,11 @@ public class JournalTemplateSoap implements Serializable {
 		setTemplateId(pk.templateId);
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -208,7 +208,7 @@ public class JournalTemplateSoap implements Serializable {
 		_smallImageURL = smallImageURL;
 	}
 
-	private String _companyId;
+	private long _companyId;
 	private long _groupId;
 	private String _templateId;
 	private long _userId;

@@ -55,9 +55,9 @@ public interface ContactModel extends BaseModel {
 
 	public void setContactId(long contactId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 
@@ -75,9 +75,9 @@ public interface ContactModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public String getAccountId();
+	public long getAccountId();
 
-	public void setAccountId(String accountId);
+	public void setAccountId(long accountId);
 
 	public long getParentContactId();
 

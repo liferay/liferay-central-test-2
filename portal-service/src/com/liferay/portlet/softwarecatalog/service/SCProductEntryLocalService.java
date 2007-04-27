@@ -155,9 +155,9 @@ public interface SCProductEntryLocalService {
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, long groupId, java.lang.String type,
-		java.lang.String keywords) throws com.liferay.portal.SystemException;
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, java.lang.String type, java.lang.String keywords)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry updateProductEntry(
 		long productEntryId, java.lang.String name, java.lang.String type,

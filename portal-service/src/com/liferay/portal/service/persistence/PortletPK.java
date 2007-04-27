@@ -35,12 +35,12 @@ import java.io.Serializable;
  */
 public class PortletPK implements Comparable, Serializable {
 	public String portletId;
-	public String companyId;
+	public long companyId;
 
 	public PortletPK() {
 	}
 
-	public PortletPK(String portletId, String companyId) {
+	public PortletPK(String portletId, long companyId) {
 		this.portletId = portletId;
 		this.companyId = companyId;
 	}
@@ -53,11 +53,11 @@ public class PortletPK implements Comparable, Serializable {
 		this.portletId = portletId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		this.companyId = companyId;
 	}
 
@@ -74,7 +74,15 @@ public class PortletPK implements Comparable, Serializable {
 			return value;
 		}
 
-		value = companyId.compareTo(pk.companyId);
+		if (companyId < pk.companyId) {
+			value = -1;
+		}
+		else if (companyId > pk.companyId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -97,8 +105,7 @@ public class PortletPK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((portletId.equals(pk.portletId)) &&
-				(companyId.equals(pk.companyId))) {
+		if ((portletId.equals(pk.portletId)) && (companyId == pk.companyId)) {
 			return true;
 		}
 		else {

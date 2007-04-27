@@ -88,11 +88,11 @@ public class PortletSoap implements Serializable {
 		_portletId = portletId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -117,7 +117,7 @@ public class PortletSoap implements Serializable {
 	}
 
 	private String _portletId;
-	private String _companyId;
+	private long _companyId;
 	private String _roles;
 	private boolean _active;
 }

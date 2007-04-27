@@ -85,11 +85,11 @@ public class ResourceCodeSoap implements Serializable {
 		_codeId = codeId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -110,7 +110,7 @@ public class ResourceCodeSoap implements Serializable {
 	}
 
 	private long _codeId;
-	private String _companyId;
+	private long _companyId;
 	private String _name;
 	private String _scope;
 }

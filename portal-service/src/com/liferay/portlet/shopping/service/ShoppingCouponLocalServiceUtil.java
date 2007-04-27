@@ -109,7 +109,7 @@ public class ShoppingCouponLocalServiceUtil {
 	}
 
 	public static java.util.List search(java.lang.String couponId,
-		java.lang.String plid, java.lang.String companyId, boolean active,
+		java.lang.String plid, long companyId, boolean active,
 		java.lang.String discountType, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
@@ -119,9 +119,8 @@ public class ShoppingCouponLocalServiceUtil {
 	}
 
 	public static int searchCount(java.lang.String couponId, long groupId,
-		java.lang.String companyId, boolean active,
-		java.lang.String discountType, boolean andOperator)
-		throws com.liferay.portal.SystemException {
+		long companyId, boolean active, java.lang.String discountType,
+		boolean andOperator) throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
 		return shoppingCouponLocalService.searchCount(couponId, groupId,

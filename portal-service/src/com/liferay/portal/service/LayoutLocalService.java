@@ -104,9 +104,8 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.LayoutReference[] getLayouts(
-		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String prefsKey, java.lang.String prefsValue)
-		throws com.liferay.portal.SystemException;
+		long companyId, java.lang.String portletId, java.lang.String prefsKey,
+		java.lang.String prefsValue) throws com.liferay.portal.SystemException;
 
 	public void importLayouts(long userId, java.lang.String ownerId,
 		java.util.Map parameterMap, java.io.File file)

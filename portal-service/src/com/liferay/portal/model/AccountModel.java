@@ -47,17 +47,17 @@ import java.util.Date;
  *
  */
 public interface AccountModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getAccountId();
+	public long getAccountId();
 
-	public void setAccountId(String accountId);
+	public void setAccountId(long accountId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 
@@ -75,9 +75,9 @@ public interface AccountModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public String getParentAccountId();
+	public long getParentAccountId();
 
-	public void setParentAccountId(String parentAccountId);
+	public void setParentAccountId(long parentAccountId);
 
 	public String getName();
 

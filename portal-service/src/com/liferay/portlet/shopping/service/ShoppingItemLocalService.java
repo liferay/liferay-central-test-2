@@ -162,7 +162,7 @@ public interface ShoppingItemLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem getItem(
-		java.lang.String companyId, java.lang.String sku)
+		long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

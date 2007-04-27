@@ -55,9 +55,9 @@ public interface TagsPropertyModel extends BaseModel {
 
 	public void setPropertyId(long propertyId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 

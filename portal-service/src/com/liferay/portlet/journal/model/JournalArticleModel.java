@@ -53,9 +53,9 @@ public interface JournalArticleModel extends BaseModel {
 
 	public void setPrimaryKey(JournalArticlePK pk);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public long getGroupId();
 

@@ -54,9 +54,9 @@ public interface PortletModel extends BaseModel {
 
 	public void setPortletId(String portletId);
 
-	public String getCompanyId();
+	public long getCompanyId();
 
-	public void setCompanyId(String companyId);
+	public void setCompanyId(long companyId);
 
 	public String getRoles();
 

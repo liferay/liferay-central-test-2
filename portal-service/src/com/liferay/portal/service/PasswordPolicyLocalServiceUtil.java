@@ -101,16 +101,15 @@ public class PasswordPolicyLocalServiceUtil {
 		return passwordPolicyLocalService.getPolicy(passwordPolicyId);
 	}
 
-	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List search(long companyId, java.lang.String name,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
 		return passwordPolicyLocalService.search(companyId, name, begin, end);
 	}
 
-	public static int searchCount(java.lang.String companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static int searchCount(long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
 		return passwordPolicyLocalService.searchCount(companyId, name);

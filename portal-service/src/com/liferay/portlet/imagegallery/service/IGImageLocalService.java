@@ -112,7 +112,7 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteImage(java.lang.String companyId, java.lang.String imageId)
+	public void deleteImage(long companyId, java.lang.String imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -141,7 +141,7 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(
-		java.lang.String companyId, java.lang.String imageId)
+		long companyId, java.lang.String imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -159,10 +159,9 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		java.lang.String companyId, java.lang.String imageId,
-		java.lang.String folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries)
+		long companyId, java.lang.String imageId, java.lang.String folderId,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

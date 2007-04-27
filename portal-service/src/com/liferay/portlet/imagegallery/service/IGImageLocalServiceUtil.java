@@ -154,8 +154,7 @@ public class IGImageLocalServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
-	public static void deleteImage(java.lang.String companyId,
-		java.lang.String imageId)
+	public static void deleteImage(long companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
@@ -213,7 +212,7 @@ public class IGImageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImage(
-		java.lang.String companyId, java.lang.String imageId)
+		long companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
@@ -251,10 +250,9 @@ public class IGImageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		java.lang.String companyId, java.lang.String imageId,
-		java.lang.String folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries)
+		long companyId, java.lang.String imageId, java.lang.String folderId,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();

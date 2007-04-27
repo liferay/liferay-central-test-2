@@ -90,11 +90,11 @@ public class OrganizationSoap implements Serializable {
 		_organizationId = organizationId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -159,7 +159,7 @@ public class OrganizationSoap implements Serializable {
 	}
 
 	private String _organizationId;
-	private String _companyId;
+	private long _companyId;
 	private String _parentOrganizationId;
 	private String _name;
 	private boolean _recursable;

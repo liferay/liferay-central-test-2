@@ -67,7 +67,7 @@ public class ThemeDisplay implements Serializable {
 		setAccount(company.getAccount());
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _company.getCompanyId();
 	}
 

@@ -77,8 +77,7 @@ public class IGImageServiceUtil {
 			contentType, tagsEntries, communityPermissions, guestPermissions);
 	}
 
-	public static void deleteImage(java.lang.String companyId,
-		java.lang.String imageId)
+	public static void deleteImage(long companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGImageService igImageService = IGImageServiceFactory.getService();
@@ -86,7 +85,7 @@ public class IGImageServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImage(
-		java.lang.String companyId, java.lang.String imageId)
+		long companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGImageService igImageService = IGImageServiceFactory.getService();

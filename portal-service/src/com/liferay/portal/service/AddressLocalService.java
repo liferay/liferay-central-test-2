@@ -70,9 +70,8 @@ public interface AddressLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteAddresses(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException;
+	public void deleteAddresses(long companyId, java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Address getAddress(long addressId)
 		throws com.liferay.portal.SystemException, 
@@ -81,7 +80,7 @@ public interface AddressLocalService {
 	public java.util.List getAddresses()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getAddresses(java.lang.String companyId,
+	public java.util.List getAddresses(long companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
 

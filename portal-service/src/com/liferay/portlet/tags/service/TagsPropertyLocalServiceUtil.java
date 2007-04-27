@@ -140,14 +140,14 @@ public class TagsPropertyLocalServiceUtil {
 		return tagsPropertyLocalService.getProperty(entryId, key);
 	}
 
-	public static java.lang.String[] getPropertyKeys(java.lang.String companyId)
+	public static java.lang.String[] getPropertyKeys(long companyId)
 		throws com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
 		return tagsPropertyLocalService.getPropertyKeys(companyId);
 	}
 
-	public static java.util.List getPropertyValues(java.lang.String companyId,
+	public static java.util.List getPropertyValues(long companyId,
 		java.lang.String key) throws com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 

@@ -93,11 +93,11 @@ public class EmailAddressSoap implements Serializable {
 		_emailAddressId = emailAddressId;
 	}
 
-	public String getCompanyId() {
+	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
@@ -178,7 +178,7 @@ public class EmailAddressSoap implements Serializable {
 	}
 
 	private long _emailAddressId;
-	private String _companyId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
