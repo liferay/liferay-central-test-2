@@ -57,12 +57,11 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 	</div>
 </c:if>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= BlogsCategory.class %>" bean="<%= category %>" field="name" />
 	</td>
@@ -71,7 +70,6 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= BlogsCategory.class %>" bean="<%= category %>" field="description" />
 	</td>
@@ -79,7 +77,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 
 <c:if test="<%= category == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -87,7 +85,6 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= BlogsCategory.class.getName() %>"

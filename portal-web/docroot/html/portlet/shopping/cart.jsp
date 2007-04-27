@@ -401,12 +401,11 @@ for (int i = 0; itr.hasNext(); i++) {
 
 <br>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "subtotal") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
@@ -430,7 +429,6 @@ for (int i = 0; itr.hasNext(); i++) {
 		<td>
 			<%= LanguageUtil.get(pageContext, "you-save") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<span class="portlet-msg-error">
 			<%= currency.getSymbol() %><%= doubleFormat.format(discountSubtotal) %> (<%= percentFormat.format(ShoppingUtil.calculateDiscountPercent(items)) %>)
@@ -440,7 +438,7 @@ for (int i = 0; itr.hasNext(); i++) {
 </c:if>
 
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -448,7 +446,6 @@ for (int i = 0; itr.hasNext(); i++) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "shipping") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<c:choose>
 			<c:when test="<%= !shoppingPrefs.useAlternativeShipping() %>">
@@ -480,7 +477,7 @@ for (int i = 0; itr.hasNext(); i++) {
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -494,7 +491,6 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 		<td>
 			<%= LanguageUtil.get(pageContext, "insurance") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<select name="<portlet:namespace />insure">
 				<option <%= !cart.isInsure() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "none") %></option>
@@ -503,7 +499,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -513,7 +509,6 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 	<td>
 		<%= LanguageUtil.get(pageContext, "coupon-code") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />couponIds" size="30" style="text-transform: uppercase;" type="text" value="<%= cart.getCouponIds() %>">
 
@@ -528,7 +523,6 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 		<td>
 			<%= LanguageUtil.get(pageContext, "coupon-discount") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<span class="portlet-msg-error">
 			<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateCouponDiscount(items, coupon)) %>

@@ -35,12 +35,11 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 	<table border="0" cellpadding="8" cellspacing="0">
 	<tr>
 		<td>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "color") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:text property='<%= propertyPrefix + "BgColor" %>' onchange='<%= "preview." + previewObject + ".backgroundColor = this.value;" %>' /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onClick="colorPicker.toggle(this);" />
 				</td>
@@ -49,7 +48,6 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				<td>
 					<%= LanguageUtil.get(pageContext, "image") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:text property='<%= propertyPrefix + "BgImageUrl" %>' onchange='<%= "preview." + previewObject + ".backgroundImage = \'url(\' + this.value + \')\';" %>' />
 				</td>
@@ -58,7 +56,6 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				<td>
 					<%= LanguageUtil.get(pageContext, "attachment") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "BgImageAttach" %>' onchange='<%= "preview." + previewObject + ".backgroundAttachment = this.value;" %>'>
 						<html:optionsCollection property="listImageAttachments" />
@@ -69,7 +66,6 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				<td>
 					<%= LanguageUtil.get(pageContext, "position") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "BgImagePos" %>' onchange='<%= "preview." + previewObject + ".backgroundPosition = this.value;" %>'>
 						<html:optionsCollection property="listImagePositions" />
@@ -80,7 +76,6 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				<td>
 					<%= LanguageUtil.get(pageContext, "tile") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "BgImageTile" %>' onchange='<%= "preview." + previewObject + ".backgroundRepeat = this.value;" %>'>
 						<html:optionsCollection property="listImageTiling" />

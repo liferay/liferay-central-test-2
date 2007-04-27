@@ -75,16 +75,15 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 	</div>
 </c:if>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <c:if test="<%= folder != null %>">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "parent-folder") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 
@@ -108,7 +107,6 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 
 					<input id="<portlet:namespace />removeFolderButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeFolder();">
 				</td>
-				<td style="padding-left: 30px;"></td>
 				<td>
 					<liferay-ui:input-checkbox param="mergeWithParentFolder" />
 
@@ -119,7 +117,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -129,7 +127,6 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= IGFolder.class %>" bean="<%= folder %>" field="name" />
 	</td>
@@ -138,7 +135,6 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= IGFolder.class %>" bean="<%= folder %>" field="description" />
 	</td>
@@ -146,7 +142,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 
 <c:if test="<%= folder == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -154,7 +150,6 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= IGFolder.class.getName() %>"

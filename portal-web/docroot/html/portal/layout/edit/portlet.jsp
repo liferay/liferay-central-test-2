@@ -24,12 +24,11 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
-	<td nowrap>
+	<td>
 		<%= LanguageUtil.get(pageContext, "copy-page") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />copyLayoutId">
 			<option value=""></option>

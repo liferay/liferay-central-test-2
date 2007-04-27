@@ -50,7 +50,7 @@ List events = TICHUtil.getEvents();
 				</a>
 			</c:when>
 			<c:otherwise>
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 
 				<%
 				for (int i = 0; i < events.size(); i++) {
@@ -61,13 +61,12 @@ List events = TICHUtil.getEvents();
 						<td valign="top">
 							<b><i><%= event.getYear() %></i></b>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 							<%= event.getDescription() %>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3">
+						<td colspan="2">
 							<br>
 						</td>
 					</tr>
@@ -77,7 +76,7 @@ List events = TICHUtil.getEvents();
 				%>
 
 				<tr>
-					<td colspan="2"></td>
+					<td></td>
 					<td>
 						<%= LanguageUtil.get(pageContext, "source") %>:
 

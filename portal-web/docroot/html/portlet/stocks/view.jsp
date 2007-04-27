@@ -28,7 +28,7 @@
 
 <c:choose>
 	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 
 		<%
 		for (int i = 0; i < symbols.length; i++) {
@@ -41,13 +41,11 @@
 					<td>
 						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/stocks/view" /><portlet:param name="symbol" value="<%= stocks.getSymbol() %>" /></portlet:renderURL>" style="font-size: xx-small; font-weight: bold;"><%= stocks.getSymbol() %></a>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td align="right">
 						<span style="font-size: xx-small;">
 						<%= stocks.isLastTradeAvailable() ? decimalFormat.format(stocks.getLastTrade()) : LanguageUtil.get(pageContext, "not-available") %>
 						</span>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td align="right">
 						<c:if test="<%= stocks.getChange() < 0 %>">
 							<span class="portlet-msg-error" style="font-size: xx-small;">

@@ -55,7 +55,7 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 	}
 </script>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<span class="font-small" style="font-weight: bold;">
@@ -72,7 +72,6 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 
 		</span>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<span class="font-small">
 

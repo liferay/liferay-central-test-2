@@ -75,7 +75,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 
 <c:choose>
 	<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 
 		<%
 		Iterator itr = choices.iterator();
@@ -88,11 +88,9 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 				<td>
 					<input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>">
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<b><%= choice.getChoiceId() %>.</b>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<%= choice.getDescription() %>
 				</td>

@@ -56,18 +56,17 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 <liferay-ui:error key="emailMessageBody" message="please-enter-a-valid-body" />
 <liferay-ui:error key="emailMessageSubject" message="please-enter-a-valid-subject" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "subject") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />emailMessageSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageSubject %>">
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -75,7 +74,6 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 	<td>
 		<%= LanguageUtil.get(pageContext, "body") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
@@ -90,12 +88,11 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 
 <br><br>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<b>[$FROM_ADDRESS$]</b>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		The address of the email sender
 	</td>
@@ -104,7 +101,6 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 	<td>
 		<b>[$FROM_NAME$]</b>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		The name of the email sender
 	</td>
@@ -113,7 +109,6 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 	<td>
 		<b>[$PAGE_URL$]</b>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= PortalUtil.getPortalURL(request) %><%= PortalUtil.getLayoutURL(layout, themeDisplay) %>
 	</td>
@@ -122,7 +117,6 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 	<td>
 		<b>[$PORTAL_URL$]</b>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= company.getPortalURL() %>
 	</td>

@@ -34,12 +34,11 @@
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "bullet-style") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />bulletStyle">
 
@@ -60,7 +59,6 @@
 	<td>
 		<%= LanguageUtil.get(pageContext, "display-style") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />displayStyle">
 

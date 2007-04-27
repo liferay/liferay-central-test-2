@@ -24,12 +24,11 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="TypeSettingsProperties(url)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(url)" />">
 	</td>
@@ -38,7 +37,6 @@
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<textarea name="TypeSettingsProperties(description)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
 	</td>

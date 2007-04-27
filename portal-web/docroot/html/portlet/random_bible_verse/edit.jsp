@@ -31,12 +31,11 @@ Map bibles = RBVUtil.getBibles();
 <form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "language") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />language">
 			<option <%= language.equals("") ? "selected" : "" %> value=""><%= LanguageUtil.get(pageContext, "default-language") %></option>

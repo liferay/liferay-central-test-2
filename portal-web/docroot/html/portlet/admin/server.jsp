@@ -43,12 +43,11 @@
 	numberFormat.setMinimumIntegerDigits(2);
 	%>
 
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "uptime") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<c:if test="<%= days > 0 %>">
 				<%= days %> <%= LanguageUtil.get(pageContext, ((days > 1) ? "days" : "day")) %>,
@@ -68,7 +67,6 @@
 		<td>
 			<%= LanguageUtil.get(pageContext, "free-memory") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= numberFormat.format(runtime.freeMemory()) %> <%= LanguageUtil.get(pageContext, "bytes") %>
 		</td>
@@ -77,7 +75,6 @@
 		<td>
 			<%= LanguageUtil.get(pageContext, "total-memory") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= numberFormat.format(runtime.totalMemory()) %> <%= LanguageUtil.get(pageContext, "bytes") %>
 		</td>
@@ -86,7 +83,6 @@
 		<td>
 			<%= LanguageUtil.get(pageContext, "maximum-memory") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= numberFormat.format(runtime.maxMemory()) %> <%= LanguageUtil.get(pageContext, "bytes") %>
 		</td>
@@ -106,12 +102,11 @@
 
 			<br><br>
 
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "number-of-minutes") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<input name="<portlet:namespace />minutes" size="3" type="text">
 				</td>
@@ -120,7 +115,6 @@
 				<td>
 					<%= LanguageUtil.get(pageContext, "custom-message") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<textarea name="<portlet:namespace />message" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
 				</td>

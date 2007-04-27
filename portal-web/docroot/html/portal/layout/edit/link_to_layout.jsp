@@ -24,12 +24,11 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "link-to-layout") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%

@@ -58,18 +58,17 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<c:choose>
 			<c:when test="<%= Validator.isNull(categoryName) %>">
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td align="right">
 						<b><%= LanguageUtil.get(pageContext, "available-categories") %></b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<b><%= LanguageUtil.get(pageContext, "your-selections") %></b>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3">
+					<td colspan="2">
 						<br>
 					</td>
 				</tr>
@@ -91,7 +90,6 @@ portletURL.setParameter("tabs1", tabs1);
 							<%= categoryName %>
 							</a></b>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 
 						<c:if test="<%= selCategories.containsKey(categoryName) %>">
@@ -114,7 +112,7 @@ portletURL.setParameter("tabs1", tabs1);
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3">
+						<td colspan="2">
 							<br>
 						</td>
 					</tr>
@@ -166,7 +164,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br><br>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 
@@ -189,7 +187,6 @@ portletURL.setParameter("tabs1", tabs1);
 
 				</select>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td valign="top">
 				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16"></a><br>
 				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16"></a><br>
@@ -200,12 +197,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "num-of-articles-per-selection") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />apn">
 

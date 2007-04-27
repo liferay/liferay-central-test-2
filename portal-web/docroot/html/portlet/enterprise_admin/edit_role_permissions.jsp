@@ -545,12 +545,11 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			<%= breadcrumbs %>
 		</div>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<th>
 				<%= LanguageUtil.get(pageContext, "action") %>
 			</th>
-			<td style="padding-left: 10px;"></td>
 			<th>
 				<%= LanguageUtil.get(pageContext, (role.getType() == RoleImpl.TYPE_REGULAR) ? "scope" : "") %>
 			</th>
@@ -569,7 +568,6 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 				<td>
 					<%= ResourceActionsUtil.getAction(pageContext, actionId) %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<c:choose>
 						<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">

@@ -54,12 +54,11 @@
 		<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-login" />
 		<liferay-ui:error exception="<%= UserPasswordException.class %>" message="please-enter-a-valid-password" />
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "login") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />login" style="width: 120px;" type="text" value="<%= login %>">
 			</td>
@@ -68,7 +67,6 @@
 			<td>
 				<%= LanguageUtil.get(pageContext, "password") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />password" style="width: 120px;" type="password" value="<%= password %>">
 			</td>
@@ -81,7 +79,6 @@
 					<%= LanguageUtil.get(pageContext, "remember-me") %>
 					</span>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<input <%= rememberMe ? "checked" : "" %> type="checkbox"
 						onClick="

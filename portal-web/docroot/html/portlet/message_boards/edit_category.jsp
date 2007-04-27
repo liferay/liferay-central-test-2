@@ -76,16 +76,15 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 	</div>
 </c:if>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <c:if test="<%= category != null %>">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "parent-category") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 
@@ -102,14 +101,12 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 					%>
 
 					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>" id="<portlet:namespace />parentCategoryName">
-					<%= parentCategoryName %>
-					</a>
+					<%= parentCategoryName %></a>
 
 					<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
 
 					<input id="<portlet:namespace />removeCategoryButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeCategory();">
 				</td>
-				<td style="padding-left: 30px;"></td>
 				<td>
 					<liferay-ui:input-checkbox param="mergeWithParentCategory" />
 
@@ -120,7 +117,7 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -130,7 +127,6 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= MBCategory.class %>" bean="<%= category %>" field="name" />
 	</td>
@@ -139,7 +135,6 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= MBCategory.class %>" bean="<%= category %>" field="description" />
 	</td>
@@ -147,7 +142,7 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 
 <c:if test="<%= category == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -155,7 +150,6 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= MBCategory.class.getName() %>"

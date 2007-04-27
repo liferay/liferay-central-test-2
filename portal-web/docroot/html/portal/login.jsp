@@ -140,12 +140,11 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 		<input name="rememberMe" type="hidden" value="<%= rememberMe %>">
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "login") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="login" style="width: 150px;" type="text" value="<%= login %>">
 			</td>
@@ -154,7 +153,6 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 			<td>
 				<%= LanguageUtil.get(pageContext, "password") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<%= SessionParameters.get(request, "password") %>" style="width: 150px" type="password" value="<%= password %>">
 			</td>
@@ -167,7 +165,6 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 					<%= LanguageUtil.get(pageContext, "remember-me") %>
 					</span>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<input <%= rememberMe ? "checked" : "" %> type="checkbox"
 						onClick="
@@ -233,12 +230,11 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 		String emailAddress = ParamUtil.getString(request, "emailAddress");
 		%>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "email-address") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="emailAddress" size="30" type="text" value="<%= emailAddress %>">
 			</td>

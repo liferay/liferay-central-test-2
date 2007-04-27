@@ -36,12 +36,11 @@ List layoutList = layoutView.getList();
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "root-layout") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />rootLayoutId">
 
@@ -81,7 +80,6 @@ List layoutList = layoutView.getList();
 	<td>
 		<%= LanguageUtil.get(pageContext, "display-depth") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />displayDepth">
 			<option value="0"><%= LanguageUtil.get(pageContext, "unlimited") %></option>

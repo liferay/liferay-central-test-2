@@ -26,7 +26,7 @@
 
 <c:choose>
 	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 
@@ -39,7 +39,6 @@
 
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />"><img border="0" src="http://rev-fun.gospelcom.net/<%= currentCal.get(Calendar.YEAR) %>/<%= decimalFormat.format(currentCal.get(Calendar.MONTH) + 1) %>/<%= currentDate %>_sm.gif" width="72"></a>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				Reverend Fun, daily humor for daily people!
 			</td>
@@ -59,7 +58,7 @@
 		String nextDate = ReverendFunUtil.getNextDate(date);
 		%>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<b><%= DateFormat.getDateInstance(DateFormat.LONG, locale).format(dateFormat.parse(date)) %></b>

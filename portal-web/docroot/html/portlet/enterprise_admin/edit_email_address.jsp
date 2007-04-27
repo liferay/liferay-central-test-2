@@ -56,20 +56,17 @@ int typeId = BeanParamUtil.getInteger(emailAddress, request, "typeId");
 <liferay-ui:error exception="<%= EmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "address") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= EmailAddress.class %>" bean="<%= emailAddress %>" field="address" />
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />typeId">
 			<option value=""></option>
@@ -89,11 +86,9 @@ int typeId = BeanParamUtil.getInteger(emailAddress, request, "typeId");
 
 		</select>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "primary") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= EmailAddress.class %>" bean="<%= emailAddress %>" field="primary" />
 	</td>

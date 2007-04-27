@@ -87,7 +87,7 @@ Map errors = (Map)SessionErrors.get(renderRequest, EditTaskAction.class.getName(
 
 <liferay-ui:tabs names="task" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <%
 for (int i = 0; i < taskFormElements.size(); i++) {
@@ -107,7 +107,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 
 	<c:if test="<%= Validator.isNotNull(errorCode) %>">
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
 
 				<c:choose>
@@ -143,7 +143,6 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 				</span>
 			</c:if>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<c:choose>
 				<c:when test="<%= taskFormElement.isWritable() %>">

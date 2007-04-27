@@ -73,12 +73,11 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <br><br>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<b><%= LanguageUtil.get(pageContext, "format") %></b>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />format" onChange="<portlet:namespace />changeFormat(this);">
 			<option <%= format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) ? "selected" : "" %> value="classic_wiki"><%= LanguageUtil.get(pageContext, "classic-wiki") %></option>
@@ -104,12 +103,11 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <br><br>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "tags") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%

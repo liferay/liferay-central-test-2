@@ -95,12 +95,11 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 
 <form method="post" name="<portlet:namespace />fm" onSubmit="loadForm(document.<portlet:namespace />fm, '<liferay-portlet:renderURL anchor="false"><portlet:param name="struts_action" value="/unit_converter/view" /></liferay-portlet:renderURL>', 'p_p_id<portlet:namespace />'); return false;">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "from") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />fromValue" size="30" type="text" value="<%= conversion.getFromValue() %>">
 
@@ -170,7 +169,6 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	<td>
 		<%= LanguageUtil.get(pageContext, "to") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />to_value" size="30" type="text" value="<%= conversion.getToValue() %>">
 
@@ -240,7 +238,6 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />type"
 			onChange="

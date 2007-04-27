@@ -54,12 +54,11 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 <liferay-ui:error exception="<%= GroupNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= RequiredGroupException.class %>" message="old-group-name-is-a-required-system-group" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="name" />
 	</td>
@@ -68,7 +67,6 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="description" />
 	</td>
@@ -77,7 +75,6 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	<td>
 		<%= LanguageUtil.get(pageContext, "open") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input <%= type.equals(GroupImpl.TYPE_COMMUNITY_OPEN) ? "checked" : "" %> name="<portlet:namespace />type" value="<%= GroupImpl.TYPE_COMMUNITY_OPEN %>" type="checkbox">
 	</td>
@@ -86,7 +83,6 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	<td>
 		<%= LanguageUtil.get(pageContext, "active") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="active" defaultValue="<%= Boolean.TRUE %>" />
 	</td>

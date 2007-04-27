@@ -503,14 +503,13 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "id") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<c:choose>
@@ -522,7 +521,6 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 					</c:otherwise>
 				</c:choose>
 			</td>
-			<td style="padding-left: 30px;"></td>
 			<td>
 				<c:if test="<%= article == null %>">
 					<liferay-ui:input-checkbox param="autoArticleId" />
@@ -538,7 +536,6 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	<td>
 		<%= LanguageUtil.get(pageContext, "status") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<c:choose>
 			<c:when test="<%= article == null %>">
@@ -563,7 +560,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 
 <c:if test="<%= article != null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -571,14 +568,12 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		<td>
 			<%= LanguageUtil.get(pageContext, "version") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= version %>
 				</td>
-				<td style="padding-left: 30px;"></td>
 				<td>
 					<liferay-ui:input-checkbox param="incrementVersion" defaultValue="<%= incrementVersion %>" disabled="<%= disableIncrementVersion %>" />
 
@@ -591,7 +586,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 </c:if>
 
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -599,7 +594,6 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="title" />
 	</td>
@@ -608,13 +602,12 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="description" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -622,7 +615,6 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />type">
 
@@ -656,9 +648,8 @@ String[] availableLocales = null;
 			<td>
 				<%= LanguageUtil.get(pageContext, "language") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td>
 						<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />changeLanguageView();">
@@ -681,9 +672,8 @@ String[] availableLocales = null;
 							<input type="button" name="<portlet:namespace />removeArticleLocaleButton" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeArticleLocale();">
 						</c:if>
 					</td>
-					<td style="padding-left: 30px;"></td>
 					<td>
-						<table border="0" cellpadding="0" cellspacing="0">
+						<table class="liferay-table">
 
 						<%
 						contentDoc = null;
@@ -704,7 +694,6 @@ String[] availableLocales = null;
 							<td>
 								<%= LanguageUtil.get(pageContext, "default-language") %>
 							</td>
-							<td style="padding-left: 10px;"></td>
 							<td>
 								<select name="<portlet:namespace />defaultLanguageId" onChange="<portlet:namespace />changeLanguageView();">
 
@@ -755,7 +744,7 @@ String[] availableLocales = null;
 	</c:when>
 	<c:otherwise>
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<input name="<portlet:namespace />languageId" type="hidden" value="<%= defaultLanguageId %>">
 			</td>
 		</tr>
@@ -763,7 +752,7 @@ String[] availableLocales = null;
 </c:choose>
 
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -771,7 +760,6 @@ String[] availableLocales = null;
 	<td>
 		<%= LanguageUtil.get(pageContext, "display-date") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="displayDate" defaultValue="<%= displayDate %>" />
 	</td>
@@ -780,14 +768,12 @@ String[] availableLocales = null;
 	<td>
 		<%= LanguageUtil.get(pageContext, "expiration-date") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="expirationDate" defaultValue="<%= expirationDate %>" disabled="<%= neverExpire %>" />
 			</td>
-			<td style="padding-left: 30px;"></td>
 			<td>
 				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'expirationDate\', this.checked);" %>' />
 
@@ -801,14 +787,12 @@ String[] availableLocales = null;
 	<td>
 		<%= LanguageUtil.get(pageContext, "review-date") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="reviewDate" defaultValue="<%= reviewDate %>" disabled="<%= neverReview %>" />
 			</td>
-			<td style="padding-left: 30px;"></td>
 			<td>
 				<liferay-ui:input-checkbox param="neverReview" defaultValue="<%= neverReview %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'reviewDate\', this.checked);" %>' />
 
@@ -819,7 +803,7 @@ String[] availableLocales = null;
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -827,7 +811,6 @@ String[] availableLocales = null;
 	<td>
 		<%= LanguageUtil.get(pageContext, "tags") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
@@ -848,7 +831,7 @@ String[] availableLocales = null;
 
 <c:if test="<%= article == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -856,7 +839,6 @@ String[] availableLocales = null;
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= JournalArticle.class.getName() %>"
@@ -903,12 +885,11 @@ String[] availableLocales = null;
 
 <liferay-ui:tabs names="design" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "structure") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>">
 
@@ -929,7 +910,7 @@ String[] availableLocales = null;
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -937,7 +918,6 @@ String[] availableLocales = null;
 	<td>
 		<%= LanguageUtil.get(pageContext, "template") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<c:choose>
 			<c:when test="<%= templates.size() == 0 %>">

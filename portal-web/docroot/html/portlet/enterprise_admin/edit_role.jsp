@@ -58,34 +58,31 @@ String roleId = BeanParamUtil.getString(role, request, "roleId");
 		<liferay-ui:error exception="<%= RequiredRoleException.class %>" message="old-role-name-is-a-required-system-role" />
 		<liferay-ui:error exception="<%= RoleNameException.class %>" message="please-enter-a-valid-name" />
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 
 		<c:if test="<%= role != null %>">
 			<tr>
 				<td>
-					<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "old-name") %></font>
+					<%= LanguageUtil.get(pageContext, "old-name") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
-					<font class="portlet-font" style="font-size: x-small;"><%= role.getName() %></font>
+					<%= role.getName() %>
 				</td>
 			</tr>
 		</c:if>
 
 		<tr>
 			<td>
-				<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, ((role != null) ? "new-name" : "name")) %></font>
+				<%= LanguageUtil.get(pageContext, ((role != null) ? "new-name" : "name")) %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="name" />
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "type") %></font>
+				<%= LanguageUtil.get(pageContext, "type") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<c:choose>
 					<c:when test="<%= role == null %>">

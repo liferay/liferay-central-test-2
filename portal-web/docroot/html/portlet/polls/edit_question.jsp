@@ -94,12 +94,11 @@ if (choiceId > 0) {
 <liferay-ui:error exception="<%= QuestionExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
 <liferay-ui:error exception="<%= QuestionTitleException.class %>" message="please-enter-a-valid-title" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "title") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="title" />
 	</td>
@@ -108,13 +107,12 @@ if (choiceId > 0) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="description" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -122,14 +120,12 @@ if (choiceId > 0) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "expiration-date") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="expirationDate" defaultValue="<%= expirationDate %>" disabled="<%= neverExpire %>" />
 			</td>
-			<td style="padding-left: 30px;"></td>
 			<td>
 				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'expirationDate\', this.checked);" %>' />
 
@@ -140,7 +136,7 @@ if (choiceId > 0) {
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -148,12 +144,11 @@ if (choiceId > 0) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "choices") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 
 				<%
 				for (int i = 1; i <= choicesCount; i++) {
@@ -188,7 +183,6 @@ if (choiceId > 0) {
 						<td>
 							<%= c %>.
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 							<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_ID_PREFIX %><%= c %>" type="hidden" value="<%= c %>">
 
@@ -196,7 +190,6 @@ if (choiceId > 0) {
 						</td>
 
 						<c:if test="<%= choicesCount > 2 %>">
-							<td style="padding-left: 10px;"></td>
 							<td>
 								<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceId.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);">
 							</td>
@@ -210,7 +203,6 @@ if (choiceId > 0) {
 
 				</table>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td valign="bottom">
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "add-choice") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>'; submitForm(document.<portlet:namespace />fm);">
 			</td>
@@ -221,7 +213,7 @@ if (choiceId > 0) {
 
 <c:if test="<%= question == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -229,7 +221,6 @@ if (choiceId > 0) {
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= PollsQuestion.class.getName() %>"

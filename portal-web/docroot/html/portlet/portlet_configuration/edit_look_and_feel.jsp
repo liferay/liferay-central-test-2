@@ -81,16 +81,14 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>" />
 
 <div style="text-align: left;">
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "title") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>">
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<input name="<portlet:namespace />curLanguageId" type="hidden" value="<%= languageId %>">
 
@@ -110,23 +108,20 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 
 			</select>
 		</td>
-		<td style="padding-left: 30px;"></td>
 		<td>
 			<%= LanguageUtil.get(pageContext, "use-custom-title") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
-		<td colspan="3">
+		<td>
 			<liferay-ui:input-checkbox param="useCustomTitle" defaultValue="<%= useCustomTitle %>" />
 		</td>
 	</tr>
 	</table>
 
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "show-borders") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-checkbox param="showBorders" defaultValue="<%= showBorders %>" />
 		</td>
@@ -142,7 +137,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 
 <br><br>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<table class="liferay-table">
 <tr>
 	<td valign="top">
 		<liferay-util:include page="/html/portlet/portlet_configuration/styles_background.jsp">
@@ -171,7 +166,6 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 			<liferay-util:param name="previewObject" value="header" />
 		</liferay-util:include>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td valign="top">
 		<liferay-util:include page="/html/portlet/portlet_configuration/styles_text.jsp">
 			<liferay-util:param name="propertyPrefix" value="header" />
@@ -199,7 +193,6 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 			<liferay-util:param name="previewObject" value="content" />
 		</liferay-util:include>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td valign="top">
 		<liferay-util:include page="/html/portlet/portlet_configuration/styles_link.jsp">
 			<liferay-util:param name="propertyPrefix" value="content" />

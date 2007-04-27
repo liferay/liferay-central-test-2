@@ -41,12 +41,11 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 </div>
 
 <c:if test="<%= image != null %>">
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "thumbnail") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&large=1" target="_blank">
 			<img alt="<%= image.getDescription() %>" border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&small=1">
@@ -54,7 +53,7 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -62,7 +61,6 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 		<td>
 			<%= LanguageUtil.get(pageContext, "height") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= image.getHeight() %>
 		</td>
@@ -71,7 +69,6 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 		<td>
 			<%= LanguageUtil.get(pageContext, "width") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= image.getWidth() %>
 		</td>
@@ -80,13 +77,12 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 		<td>
 			<%= LanguageUtil.get(pageContext, "size") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= TextFormatter.formatKB(image.getSize(), locale) %>k
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -94,7 +90,6 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 		<td>
 			<%= LanguageUtil.get(pageContext, "url") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<a href="<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>" target="_blank">
 			<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>

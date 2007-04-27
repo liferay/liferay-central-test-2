@@ -27,12 +27,11 @@
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "map-address") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />mapAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= mapAddress %>">
 	</td>
@@ -41,13 +40,12 @@
 	<td>
 		<%= LanguageUtil.get(pageContext, "map-input-enabled") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="mapInputEnabled" defaultValue="<%= mapInputEnabled %>" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -55,7 +53,6 @@
 	<td>
 		<%= LanguageUtil.get(pageContext, "directions-address") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />directionsAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= directionsAddress %>">
 	</td>
@@ -64,13 +61,12 @@
 	<td>
 		<%= LanguageUtil.get(pageContext, "directions-input-enabled") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="directionsInputEnabled" defaultValue="<%= directionsInputEnabled %>" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -78,7 +74,6 @@
 	<td>
 		<%= LanguageUtil.get(pageContext, "height") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />height" size="4" type="text" value="<%= height %>"> px
 	</td>

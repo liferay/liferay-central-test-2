@@ -56,12 +56,11 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 
 	<liferay-ui:error key="titleRequired" message="please-enter-a-title" />
 
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "title") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<input name="<portlet:namespace />title" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= title %>">
 		</td>
@@ -70,7 +69,6 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 		<td>
 			<%= LanguageUtil.get(pageContext, "description") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<textarea name="<portlet:namespace/>description" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= description %></textarea>
 		</td>
@@ -85,12 +83,11 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 	<liferay-ui:error key="emailAddressRequired" message="please-enter-an-email-address" />
 	<liferay-ui:error key="emailAddressInvalid" message="please-enter-a-valid-email-address" />
 
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "subject") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= subject %>">
 		</td>
@@ -99,7 +96,6 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 		<td>
 			<%= LanguageUtil.get(pageContext, "email-address") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<input name="<portlet:namespace />emailAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
 		</td>
@@ -110,7 +106,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 <fieldset>
 	<legend><%= LanguageUtil.get(pageContext, "form-fields") %></legend>
 
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 
 	<%
 	for (int i = 1; i <= 10; i++) {
@@ -120,7 +116,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 	%>
 
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<b><%= LanguageUtil.get(pageContext, "field") %> <%= i %></b>
 			</td>
 		</tr>
@@ -128,7 +124,6 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 			<td>
 				<%= LanguageUtil.get(pageContext, "name") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace/>fieldLabel<%= i %>" size="50" type="text" value="<%= fieldLabel %>" />
 			</td>
@@ -137,7 +132,6 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 			<td>
 				<%= LanguageUtil.get(pageContext, "type") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select id="<portlet:namespace/>fieldType<%= i %>" name="<portlet:namespace/>fieldType<%= i %>" onchange="<portlet:namespace/>toggleOptions(<%= i %>);">
 					<option <%= (fieldType.equals("text")) ? "selected" : "" %> value="text"><%= LanguageUtil.get(pageContext, "text") %></option>
@@ -150,7 +144,6 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 			<td>
 				<%= LanguageUtil.get(pageContext, "options") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" type="text" size="50" value="<%= fieldOptions %>">
 
@@ -164,7 +157,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 
 		<c:if test="<%= (i + 1) <= 10 %>">
 			<tr>
-				<td colspan="3">
+				<td colspan="2">
 					<br>
 				</td>
 			</tr>

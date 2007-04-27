@@ -34,12 +34,11 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 	<table border="0" cellpadding="8" cellspacing="0">
 	<tr>
 		<td>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "color") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:text property='<%= propertyPrefix + "LinkColor" %>' onchange="preview.aColor(this.value);" /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
 				</td>
@@ -48,7 +47,6 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				<td>
 					<%= LanguageUtil.get(pageContext, "decoration") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkDecor" %>' onchange="preview.aDecor(this.value);">
 						<html:optionsCollection property="listFontDecorations" />
@@ -59,7 +57,6 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				<td>
 					<%= LanguageUtil.get(pageContext, "font") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkFont" %>' onchange="preview.aFont(this.value);">
 						<html:optionsCollection property="listFonts" />
@@ -70,7 +67,6 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				<td>
 					<%= LanguageUtil.get(pageContext, "size") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkSize" %>' onchange="preview.aSize(this.value);">
 						<html:optionsCollection property="listFontSizes" />
@@ -81,7 +77,6 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				<td>
 					<%= LanguageUtil.get(pageContext, "style") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:checkbox styleId='<%= propertyPrefix + "LinkStyle" %>' property='<%= propertyPrefix + "LinkStyle" %>' onclick="preview.aStyle(this.checked);" /> <%= LanguageUtil.get(pageContext, "italic") %>
 
@@ -104,12 +99,11 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 	<table border="0" cellpadding="8" cellspacing="0">
 	<tr>
 		<td>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "color") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:text property='<%= propertyPrefix + "LinkHoverColor" %>' onchange="preview.setHoverStyle('color', this.value);" /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
 				</td>
@@ -118,7 +112,6 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				<td>
 					<%= LanguageUtil.get(pageContext, "decoration") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkHoverDecor" %>' onchange="preview.setHoverStyle('decor', this.value);">
 						<html:optionsCollection property="listFontDecorations" />
@@ -129,7 +122,6 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				<td>
 					<%= LanguageUtil.get(pageContext, "font") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkHoverFont" %>' onchange="preview.setHoverStyle('font', this.value);">
 						<html:optionsCollection property="listFonts" />
@@ -140,7 +132,6 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				<td>
 					<%= LanguageUtil.get(pageContext, "size") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkHoverSize" %>' onchange="preview.setHoverStyle('size', this.value);">
 						<html:optionsCollection property="listFontSizes" />
@@ -151,7 +142,6 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				<td>
 					<%= LanguageUtil.get(pageContext, "style") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:checkbox styleId='<%= propertyPrefix + "LinkHoverStyle" %>' property='<%= propertyPrefix + "LinkHoverStyle" %>' onclick="preview.setHoverStyle('style', this.checked);" /> <%= LanguageUtil.get(pageContext, "italic") %>
 
@@ -174,12 +164,11 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 	<table border="0" cellpadding="8" cellspacing="0">
 	<tr>
 		<td>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "color") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:text property='<%= propertyPrefix + "LinkVisitedColor" %>' onchange="" /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
 				</td>
@@ -188,7 +177,6 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				<td>
 					<%= LanguageUtil.get(pageContext, "decoration") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkVisitedDecor" %>'>
 						<html:optionsCollection property="listFontDecorations" />
@@ -199,7 +187,6 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				<td>
 					<%= LanguageUtil.get(pageContext, "font") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkVisitedFont" %>'>
 						<html:optionsCollection property="listFonts" />
@@ -210,7 +197,6 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				<td>
 					<%= LanguageUtil.get(pageContext, "size") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkVisitedSize" %>'>
 						<html:optionsCollection property="listFontSizes" />
@@ -221,7 +207,6 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 				<td>
 					<%= LanguageUtil.get(pageContext, "style") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:checkbox styleId='<%= propertyPrefix + "LinkVisitedStyle" %>' property='<%= propertyPrefix + "LinkVisitedStyle" %>' /> <%= LanguageUtil.get(pageContext, "italic") %>
 

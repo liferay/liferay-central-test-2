@@ -50,13 +50,11 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 
 <liferay-ui:error exception="<%= FrameworkVersionNameException.class %>" message="please-enter-a-valid-name" />
 
-<table border="0" cellpadding="0" cellspacing="0">
-
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= SCFrameworkVersion.class %>" bean="<%= frameworkVersion %>" field="name" />
 	</td>
@@ -65,7 +63,6 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 	<td>
 		<%= LanguageUtil.get(pageContext, "url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= SCFrameworkVersion.class %>" bean="<%= frameworkVersion %>" field="url" />
 	</td>
@@ -74,7 +71,6 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 	<td>
 		<%= LanguageUtil.get(pageContext, "active") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" />
 	</td>
@@ -82,7 +78,7 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 
 <c:if test="<%= frameworkVersion == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -90,7 +86,6 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= SCFrameworkVersion.class.getName() %>"

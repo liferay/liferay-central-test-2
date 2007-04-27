@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/amazon_rankings/init.jsp" %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <%
 Set amazonRankingsSet = new TreeSet();
@@ -49,7 +49,6 @@ while (itr.hasNext()) {
 			<img border="0" src="<%= amazonRankings.getSmallImageURL() %>">
 			</a>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<span style="font-size: xx-small;">
 			<%= LanguageUtil.get(pageContext, "title") %>: <%= StringUtil.shorten(amazonRankings.getProductName(), _DESCRIPTION_LENGTH) %><br>

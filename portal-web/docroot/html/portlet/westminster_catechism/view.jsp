@@ -43,7 +43,7 @@ portletURL.setParameter("tabs1", tabs1);
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<c:choose>
 		<c:when test='<%= tabs1.equals("larger") %>'>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 
 			<%
 			List entries = WCUtil.getLarger();
@@ -56,7 +56,6 @@ portletURL.setParameter("tabs1", tabs1);
 					<td valign="top">
 						<b><%= i + 1 %>.</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td valign="top">
 						<a name="q<%= i + 1%>">
 
@@ -71,7 +70,7 @@ portletURL.setParameter("tabs1", tabs1);
 			%>
 
 			<tr>
-				<td colspan="3">
+				<td colspan="2">
 					<br>
 				</td>
 			</tr>
@@ -85,7 +84,6 @@ portletURL.setParameter("tabs1", tabs1);
 					<td valign="top">
 						<b><%= i + 1 %>.</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td valign="top">
 						<a name="a<%= i + 1%>">
 
@@ -95,7 +93,7 @@ portletURL.setParameter("tabs1", tabs1);
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"></td>
+					<td></td>
 					<td>
 						<%= WCUtil.translate(entry.getAnswer()) %>
 
@@ -103,7 +101,7 @@ portletURL.setParameter("tabs1", tabs1);
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"></td>
+					<td></td>
 					<td>
 						<span style="font-size: xx-small;">
 
@@ -161,7 +159,7 @@ portletURL.setParameter("tabs1", tabs1);
 			</table>
 		</c:when>
 		<c:when test='<%= tabs1.equals("shorter") %>'>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 
 			<%
 			List entries = WCUtil.getShorter();
@@ -174,7 +172,6 @@ portletURL.setParameter("tabs1", tabs1);
 					<td valign="top">
 						<b><%= i + 1 %>.</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td valign="top">
 						<a name="q<%= i + 1%>">
 
@@ -189,7 +186,7 @@ portletURL.setParameter("tabs1", tabs1);
 			%>
 
 			<tr>
-				<td colspan="3">
+				<td colspan="2">
 					<br>
 				</td>
 			</tr>
@@ -203,7 +200,6 @@ portletURL.setParameter("tabs1", tabs1);
 					<td valign="top">
 						<b><%= i + 1 %>.</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td valign="top">
 						<a name="a<%= i + 1%>">
 
@@ -213,7 +209,7 @@ portletURL.setParameter("tabs1", tabs1);
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"></td>
+					<td></td>
 					<td>
 						<%= WCUtil.translate(entry.getAnswer()) %>
 
@@ -221,7 +217,7 @@ portletURL.setParameter("tabs1", tabs1);
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"></td>
+					<td></td>
 					<td>
 						<span style="font-size: xx-small;">
 

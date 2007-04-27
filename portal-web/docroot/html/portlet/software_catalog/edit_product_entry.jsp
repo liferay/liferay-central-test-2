@@ -75,12 +75,11 @@ else {
 <liferay-ui:error exception="<%= ProductEntryImagesException.class %>" message="please-enter-a valid-main-screenshot" />
 <liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="name" />
 	</td>
@@ -89,7 +88,6 @@ else {
 	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace/>type">
 			<option <%= type.equals("portlet") ? "selected" : "" %> value="portlet"><%= LanguageUtil.get(pageContext, "portlet") %></option>
@@ -103,7 +101,6 @@ else {
 	<td>
 		<%= LanguageUtil.get(pageContext, "licenses") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace/>licenses" multiple="true">
 			<optgroup label="<%= LanguageUtil.get(pageContext, "recommended-licenses") %>">
@@ -146,7 +143,6 @@ else {
 	<td>
 		<%= LanguageUtil.get(pageContext, "page-url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="pageURL" />
 	</td>
@@ -155,7 +151,6 @@ else {
 	<td>
 		<%= LanguageUtil.get(pageContext, "short-description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="shortDescription" />
 	</td>
@@ -164,7 +159,6 @@ else {
 	<td>
 		<%= LanguageUtil.get(pageContext, "long-description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="longDescription" />
 	</td>
@@ -173,7 +167,6 @@ else {
 	<td>
 		<%= LanguageUtil.get(pageContext, "main-screenshot") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%
 		String mainImageName = SCProductEntryImpl.MAIN_IMAGE_NAME;
@@ -198,7 +191,6 @@ else {
 	<td>
 		<%= LanguageUtil.get(pageContext, "secondary-screenshots") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%
 		for (int i = 1; i < 5; i++) {
@@ -225,7 +217,7 @@ else {
 
 <c:if test="<%= productEntry == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -233,7 +225,6 @@ else {
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= SCProductEntry.class.getName() %>"
@@ -248,12 +239,11 @@ else {
 
 <liferay-ui:tabs names="plugin-repository" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "group-id") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="repoGroupId" />
 	</td>
@@ -262,7 +252,6 @@ else {
 	<td>
 		<%= LanguageUtil.get(pageContext, "artifact-id") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="repoArtifactId" />
 	</td>

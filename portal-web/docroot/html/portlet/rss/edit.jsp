@@ -105,12 +105,11 @@ for (int i = 0; i < urls.length; i++) {
 
 </table>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "num-of-entries-per-feed") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />entriesPerFeed">
 

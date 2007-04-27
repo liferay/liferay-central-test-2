@@ -56,28 +56,23 @@ int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= PhoneNumberException.class %>" message="please-enter-a-valid-phone-number" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "number") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="number" />
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "extension") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="extension" />
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />typeId">
 			<option value=""></option>
@@ -97,11 +92,9 @@ int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 
 		</select>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "primary") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="primary" />
 	</td>

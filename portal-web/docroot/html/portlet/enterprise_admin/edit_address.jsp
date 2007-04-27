@@ -62,15 +62,14 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 <liferay-ui:error exception="<%= NoSuchRegionException.class %>" message="please-select-a-region" />
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td valign="top">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "street1") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="street1" />
 			</td>
@@ -79,7 +78,6 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 			<td>
 				<%= LanguageUtil.get(pageContext, "street2") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="street2" />
 			</td>
@@ -88,7 +86,6 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 			<td>
 				<%= LanguageUtil.get(pageContext, "street3") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="street3" />
 			</td>
@@ -97,7 +94,6 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 			<td>
 				<%= LanguageUtil.get(pageContext, "city") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="city" />
 			</td>
@@ -106,21 +102,18 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 			<td>
 				<%= LanguageUtil.get(pageContext, "zip") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="zip" />
 			</td>
 		</tr>
 		</table>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td valign="top">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "country") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
 			</td>
@@ -129,7 +122,6 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 			<td>
 				<%= LanguageUtil.get(pageContext, "region") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
 			</td>
@@ -138,7 +130,6 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 			<td>
 				<%= LanguageUtil.get(pageContext, "type") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />typeId">
 					<option value=""></option>
@@ -163,7 +154,6 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 			<td>
 				<%= LanguageUtil.get(pageContext, "mailing") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="mailing" />
 			</td>
@@ -172,7 +162,6 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 			<td>
 				<%= LanguageUtil.get(pageContext, "primary") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="primary" />
 			</td>

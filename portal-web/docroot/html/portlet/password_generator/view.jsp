@@ -55,12 +55,11 @@ catch (Exception e) {
 
 <form method="post" name="<portlet:namespace />fm" onSubmit="loadForm(document.<portlet:namespace />fm, '<liferay-portlet:renderURL anchor="false"><portlet:param name="struts_action" value="/password_generator/view" /></liferay-portlet:renderURL>', 'p_p_id<portlet:namespace />'); return false;">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "numbers") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />numbers">
 			<option <%= numbers ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
@@ -72,7 +71,6 @@ catch (Exception e) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "lower-case-letters") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="lowerCaseLetters" defaultValue="<%= lowerCaseLetters %>" />
 	</td>
@@ -81,7 +79,6 @@ catch (Exception e) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "upper-case-letters") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="upperCaseLetters" defaultValue="<%= upperCaseLetters %>" />
 	</td>
@@ -90,7 +87,6 @@ catch (Exception e) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "length") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />length">
 

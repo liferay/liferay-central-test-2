@@ -66,12 +66,11 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 
 <br><br>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "temperature-format") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />fahrenheit">
 			<option <%= fahrenheit ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "fahrenheit") %></option>

@@ -48,12 +48,11 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 <liferay-ui:error exception="<%= DefinitionXmlException.class %>" message="an-error-occurred-while-parsing-your-xml-please-check-the-syntax-of-your-xml" />
 
 <c:if test="<%= definition != null %>">
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "name") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= definition.getName() %>
 		</td>
@@ -62,7 +61,6 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 		<td>
 			<%= LanguageUtil.get(pageContext, "version") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= definition.getVersion() %>
 		</td>
@@ -81,12 +79,11 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 <c:if test="<%= definition == null %>">
 	<br>
 
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= WorkflowDefinition.class.getName() %>"

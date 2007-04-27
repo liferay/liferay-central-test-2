@@ -50,15 +50,14 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 <liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td valign="top">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "first-name") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="firstName" />
 			</td>
@@ -67,7 +66,6 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 			<td>
 				<%= LanguageUtil.get(pageContext, "middle-name") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="middleName" />
 			</td>
@@ -76,7 +74,6 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 			<td>
 				<%= LanguageUtil.get(pageContext, "last-name") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
 			</td>
@@ -88,7 +85,6 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 					<td>
 						<%= LanguageUtil.get(pageContext, "user-id") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="userId" />
 					</td>
@@ -103,7 +99,6 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 			<td>
 				<%= LanguageUtil.get(pageContext, "email-address") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
 			</td>
@@ -115,7 +110,6 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 					<td>
 						<%= LanguageUtil.get(pageContext, "birthday") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="birthday" defaultValue="<%= birthday %>" />
 					</td>
@@ -133,7 +127,6 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 				<td>
 					<%= LanguageUtil.get(pageContext, "gender") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<select name="<portlet:namespace />male">
 						<option value="1"><%= LanguageUtil.get(pageContext, "male") %></option>
@@ -145,7 +138,6 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 		</table>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td valign="top">
 		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
 			<portlet:param name="struts_action" value="/my_account/captcha" />

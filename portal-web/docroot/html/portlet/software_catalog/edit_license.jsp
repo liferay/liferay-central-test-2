@@ -53,13 +53,11 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 
 <liferay-ui:error exception="<%= LicenseNameException.class %>" message="please-select-at-least-one-framework-version" />
 
-<table border="0" cellpadding="0" cellspacing="0">
-
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= SCLicense.class %>" bean="<%= license %>" field="name" />
 	</td>
@@ -68,7 +66,6 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 	<td>
 		<%= LanguageUtil.get(pageContext, "url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= SCLicense.class %>" bean="<%= license %>" field="url" />
 	</td>
@@ -77,7 +74,6 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 	<td>
 		<%= LanguageUtil.get(pageContext, "open-source") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="openSource" defaultValue="<%= openSource %>" />
 	</td>
@@ -86,7 +82,6 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 	<td>
 		<%= LanguageUtil.get(pageContext, "active") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" />
 	</td>
@@ -95,7 +90,6 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 	<td>
 		<%= LanguageUtil.get(pageContext, "recommended") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="recommended" defaultValue="<%= recommended %>" />
 	</td>

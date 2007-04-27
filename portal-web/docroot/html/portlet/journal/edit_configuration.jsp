@@ -115,12 +115,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("email-from") %>'>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "name") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
 			</td>
@@ -129,7 +128,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<%= LanguageUtil.get(pageContext, "address") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
 			</td>
@@ -137,12 +135,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.startsWith("article-approval-") || tabs2.startsWith("article-review-") %>'>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "enabled") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("article-approval-denied-email") %>'>
@@ -161,7 +158,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<br>
 			</td>
 		</tr>
@@ -169,7 +166,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<%= LanguageUtil.get(pageContext, "subject") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("article-approval-denied-email") %>'>
@@ -188,7 +184,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<br>
 			</td>
 		</tr>
@@ -196,7 +192,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<%= LanguageUtil.get(pageContext, "body") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
@@ -211,12 +206,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br><br>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<b>[$ARTICLE_ID$]</b>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				The article ID
 			</td>
@@ -225,7 +219,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<b>[$ARTICLE_TITLE$]</b>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				The article title
 			</td>
@@ -236,7 +229,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<td>
 					<b>[$ARTICLE_URL$]</b>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					The article URL
 				</td>
@@ -247,7 +239,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<b>[$ARTICLE_VERSION$]</b>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				The article version
 			</td>
@@ -256,7 +247,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<b>[$FROM_ADDRESS$]</b>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= emailFromAddress %>
 			</td>
@@ -265,7 +255,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<b>[$FROM_NAME$]</b>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= emailFromName %>
 			</td>
@@ -274,7 +263,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<b>[$PORTAL_URL$]</b>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= company.getPortalURL() %>
 			</td>
@@ -283,7 +271,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<b>[$PORTLET_NAME$]</b>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= ((RenderResponseImpl)renderResponse).getTitle() %>
 			</td>
@@ -292,7 +279,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<b>[$TO_ADDRESS$]</b>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				The address of the email recipient
 			</td>
@@ -301,7 +287,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<b>[$TO_NAME$]</b>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				The name of the email recipient
 			</td>

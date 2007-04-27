@@ -64,14 +64,13 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<%= BookmarksUtil.getBreadcrumbs(folderId, -1, pageContext, renderRequest, renderResponse) %>
 </div>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <c:if test="<%= entry != null %>">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "folder") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 
 			<%
@@ -86,7 +85,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -96,7 +95,6 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= BookmarksEntry.class %>" bean="<%= entry %>" field="name" />
 	</td>
@@ -105,7 +103,6 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<td>
 		<%= LanguageUtil.get(pageContext, "url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= BookmarksEntry.class %>" bean="<%= entry %>" field="url" />
 	</td>
@@ -114,7 +111,6 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= BookmarksEntry.class %>" bean="<%= entry %>" field="comments" />
 	</td>
@@ -125,7 +121,6 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 		<td>
 			<%= LanguageUtil.get(pageContext, "visits") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= entry.getVisits() %>
 		</td>
@@ -133,7 +128,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 </c:if>
 
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -141,7 +136,6 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<td>
 		<%= LanguageUtil.get(pageContext, "tags") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
@@ -162,7 +156,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 
 <c:if test="<%= entry == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -170,7 +164,6 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= BookmarksEntry.class.getName() %>"

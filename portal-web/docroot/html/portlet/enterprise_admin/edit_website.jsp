@@ -56,20 +56,17 @@ int typeId = BeanParamUtil.getInteger(website, request, "typeId");
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= Website.class %>" bean="<%= website %>" field="url" />
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />typeId">
 			<option value=""></option>
@@ -89,11 +86,9 @@ int typeId = BeanParamUtil.getInteger(website, request, "typeId");
 
 		</select>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "primary") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= Website.class %>" bean="<%= website %>" field="primary" />
 	</td>

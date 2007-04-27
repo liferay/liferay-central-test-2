@@ -634,12 +634,11 @@ else if (modelResource.equals(Layout.class.getName())) {
 						<input name="<portlet:namespace />organizationIntersection" type="hidden" value="0">
 					</c:when>
 					<c:otherwise>
-						<table border="0" cellpadding="0" cellspacing="0">
+						<table class="liferay-table">
 						<tr>
 							<td>
 								<%= LanguageUtil.get(pageContext, "permission-exclusive-to-members-of-current-location-and-community") %>
 							</td>
-							<td style="padding-left: 10px;"></td>
 							<td>
 								<select name="<portlet:namespace />organizationIntersection">
 									<option <%= organizationIntersection ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
@@ -911,12 +910,11 @@ else if (modelResource.equals(Layout.class.getName())) {
 		String selectedActionId = ParamUtil.getString(request, "selectedActionId");
 		%>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "list-users-with-the-permission-to-perform-the-action") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />selectedActionId">
 

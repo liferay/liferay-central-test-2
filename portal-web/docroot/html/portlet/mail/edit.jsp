@@ -100,12 +100,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<b><%= LanguageUtil.get(pageContext, recipientFinder.getName()) %></b>
 
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "enabled") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<select name="<portlet:namespace /><%= rfName %>">
 							<option value="<%= Boolean.TRUE.toString() %>" <%= enabled ? "selected='selected'" : "" %>><%= LanguageUtil.get(pageContext, "yes") %></option>
@@ -125,7 +124,6 @@ portletURL.setParameter("tabs1", tabs1);
 					<td>
 						<%= LanguageUtil.get(pageContext, option) %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<select name="<portlet:namespace /><%= rfName + StringPool.PERIOD + option %>">
 
@@ -165,12 +163,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br><br>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "email-address") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= LanguageUtil.get(pageContext, "folder") %>
 			</td>
@@ -199,7 +196,6 @@ portletURL.setParameter("tabs1", tabs1);
 				<td>
 					<input name="<portlet:namespace />filterEmailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<input name="<portlet:namespace />filterFolder<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= folder %>">
 				</td>
@@ -228,12 +224,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br><br>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "leave-a-copy-of-the-forwarded-message") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-select param="leaveCopy" defaultValue="<%= leaveCopy %>" />
 			</td>

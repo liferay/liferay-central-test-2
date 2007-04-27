@@ -88,14 +88,13 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 	<br><br>
 </c:if>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <c:if test="<%= image != null %>">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "folder") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 
 			<%
@@ -110,7 +109,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -120,7 +119,6 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 	<td>
 		<%= LanguageUtil.get(pageContext, "file") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 	</td>
@@ -129,13 +127,12 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= IGImage.class %>" bean="<%= image %>" field="description" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -143,7 +140,6 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 	<td>
 		<%= LanguageUtil.get(pageContext, "tags") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
@@ -164,7 +160,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 
 <c:if test="<%= image == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -172,7 +168,6 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= IGImage.class.getName() %>"

@@ -50,12 +50,11 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 <form method="post" name="<portlet:namespace />fm" onSubmit="loadForm(document.<portlet:namespace />fm, '<liferay-portlet:renderURL anchor="false"><portlet:param name="struts_action" value="/loan_calculator/view" /></liferay-portlet:renderURL>', 'p_p_id<portlet:namespace />'); return false;">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "loan-amount") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />loanAmount" size="5" type="text" value="<%= integerFormat.format(loanAmount) %>">
 	</td>
@@ -64,7 +63,6 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 	<td>
 		<%= LanguageUtil.get(pageContext, "interest-rate") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />interest" size="5" type="text" value="<%= doubleFormat.format(interest) %>">
 	</td>
@@ -73,7 +71,6 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 	<td>
 		<%= LanguageUtil.get(pageContext, "years") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />years" size="5" type="text" value="<%= years %>">
 	</td>
@@ -82,7 +79,6 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 	<td>
 		<%= LanguageUtil.get(pageContext, "monthly-payment") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<b><%= integerFormat.format(amountPerPayment) %></b>
 	</td>
@@ -91,7 +87,6 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 	<td>
 		<%= LanguageUtil.get(pageContext, "interest-paid") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<b><%= integerFormat.format(interestPaid) %></b>
 	</td>
@@ -100,7 +95,6 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 	<td>
 		<%= LanguageUtil.get(pageContext, "total-paid") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<b><%= integerFormat.format(totalPaid) %></b>
 	</td>

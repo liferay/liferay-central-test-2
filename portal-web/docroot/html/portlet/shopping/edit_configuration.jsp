@@ -101,18 +101,17 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br><br>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "paypal-email-address") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />payPalEmailAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= shoppingPrefs.getPayPalEmailAddress() %>">
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<br>
 			</td>
 		</tr>
@@ -120,7 +119,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<%= LanguageUtil.get(pageContext, "credit-cards") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 
 				<%
@@ -163,7 +161,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<br>
 			</td>
 		</tr>
@@ -171,7 +169,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<%= LanguageUtil.get(pageContext, "currency") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />currencyId">
 
@@ -192,7 +189,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<%= LanguageUtil.get(pageContext, "tax-state") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />taxState">
 
@@ -213,13 +209,12 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<%= LanguageUtil.get(pageContext, "tax-rate") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input maxlength="7" name="<portlet:namespace />taxRate" type="text" size="7" value="<%= taxFormat.format(shoppingPrefs.getTaxRate()) %>">
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<br>
 			</td>
 		</tr>
@@ -227,7 +222,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<%= LanguageUtil.get(pageContext, "minimum-order") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input maxlength="7" name="<portlet:namespace />minOrder" type="text" size="7" value="<%= currency.getSymbol() %><%= doubleFormat.format(shoppingPrefs.getMinOrder()) %>">
 			</td>
@@ -239,12 +233,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br><br>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "formula") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />shippingFormula">
 					<option <%= shoppingPrefs.getShippingFormula().equals("flat") ? "selected" : "" %> value="flat"><%= LanguageUtil.get(pageContext, "flat-amount") %></option>
@@ -253,7 +246,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<br>
 			</td>
 		</tr>
@@ -261,9 +254,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<%= LanguageUtil.get(pageContext, "values") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 
 				<%
 				int shippingRange = 0;
@@ -285,7 +277,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 								and over
 							</c:if>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 							<input maxlength="6" name="<portlet:namespace />shipping<%= i %>" size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getShipping()[i]) %>">
 						</td>
@@ -305,12 +296,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br><br>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "formula") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />insuranceFormula">
 					<option <%= shoppingPrefs.getInsuranceFormula().equals("flat") ? "selected" : "" %> value="flat"><%= LanguageUtil.get(pageContext, "flat-amount") %></option>
@@ -319,7 +309,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<br>
 			</td>
 		</tr>
@@ -327,9 +317,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<%= LanguageUtil.get(pageContext, "values") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 
 				<%
 				int insuranceRange = 0;
@@ -351,7 +340,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 								and over
 							</c:if>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 							<input maxlength="6" name="<portlet:namespace />insurance<%= i %>" size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getInsurance()[i]) %>">
 						</td>
@@ -382,12 +370,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<c:choose>
 			<c:when test='<%= tabs3.endsWith("-email") %>'>
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "enabled") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("confirmation-email") %>'>
@@ -400,7 +387,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3">
+					<td colspan="2">
 						<br>
 					</td>
 				</tr>
@@ -408,7 +395,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<%= LanguageUtil.get(pageContext, "subject") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("confirmation-email") %>'>
@@ -421,7 +407,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3">
+					<td colspan="2">
 						<br>
 					</td>
 				</tr>
@@ -429,7 +415,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<%= LanguageUtil.get(pageContext, "body") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
@@ -444,12 +429,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 				<br><br>
 
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td>
 						<b>[$FROM_ADDRESS$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<%= emailFromAddress %>
 					</td>
@@ -458,7 +442,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<b>[$FROM_NAME$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<%= emailFromName %>
 					</td>
@@ -467,7 +450,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<b>[$ORDER_BILLING_ADDRESS$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						The order billing address
 					</td>
@@ -476,7 +458,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<b>[$ORDER_CURRENCY$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						The order currency
 					</td>
@@ -485,7 +466,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<b>[$ORDER_NUMBER$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						The order ID
 					</td>
@@ -494,7 +474,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<b>[$ORDER_SHIPPING_ADDRESS$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						The order shipping address
 					</td>
@@ -503,7 +482,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<b>[$ORDER_TOTAL$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						The order total
 					</td>
@@ -512,7 +490,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<b>[$PORTAL_URL$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<%= company.getPortalURL() %>
 					</td>
@@ -521,7 +498,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<b>[$PORTLET_NAME$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
 					</td>
@@ -530,7 +506,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<b>[$TO_ADDRESS$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						The address of the email recipient
 					</td>
@@ -539,7 +514,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<b>[$TO_NAME$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						The name of the email recipient
 					</td>
@@ -547,12 +521,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</table>
 			</c:when>
 			<c:otherwise>
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "name") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
 					</td>
@@ -561,7 +534,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<%= LanguageUtil.get(pageContext, "address") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
 					</td>

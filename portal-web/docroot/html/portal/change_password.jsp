@@ -61,12 +61,11 @@
 	<br><br>
 </c:if>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "password") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="password1" size="30" type="password" value="">
 	</td>
@@ -75,7 +74,6 @@
 	<td>
 		<%= LanguageUtil.get(pageContext, "enter-again") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="password2" size="30" type="password" value="">
 	</td>

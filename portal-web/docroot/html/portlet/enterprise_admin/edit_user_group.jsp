@@ -52,25 +52,23 @@ String userGroupId = BeanParamUtil.getString(userGroup, request, "userGroupId");
 <liferay-ui:error exception="<%= RequiredUserGroupException.class %>" message="this-is-a-required-user-group" />
 <liferay-ui:error exception="<%= UserGroupNameException.class %>" message="please-enter-a-valid-name" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <c:if test="<%= userGroup != null %>">
 	<tr>
 		<td>
-			<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "old-name") %></font>
+			<%= LanguageUtil.get(pageContext, "old-name") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
-			<font class="portlet-font" style="font-size: x-small;"><%= userGroup.getName() %></font>
+			<%= userGroup.getName() %>
 		</td>
 	</tr>
 </c:if>
 
 <tr>
 	<td>
-		<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, ((userGroup != null) ? "new-name" : "name")) %></font>
+		<%= LanguageUtil.get(pageContext, ((userGroup != null) ? "new-name" : "name")) %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= UserGroup.class %>" bean="<%= userGroup %>" field="name" />
 	</td>

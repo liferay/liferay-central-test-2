@@ -119,6 +119,22 @@ ul.gamma .tree-item-hover {
 	margin-left: 5px;
 }
 
+.liferay-table {
+	border-collapse: collapse
+}
+
+.liferay-table tr td {
+	padding: 0 5px;
+}
+
+.liferay-table tr td:first-child, .liferay-table tr td.first-child {
+	padding-left: 0;
+}
+
+.liferay-table tr td:last-child, .liferay-table tr td.last-child {
+	padding-right: 0;
+}
+
 /* ---------- Quick note ---------- */
 
 .portlet-quick-note {

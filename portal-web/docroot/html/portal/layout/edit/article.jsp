@@ -24,12 +24,11 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "article-id") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="TypeSettingsProperties(article-id)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />">
 	</td>

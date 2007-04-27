@@ -179,14 +179,13 @@ if (message != null) {
 	<%= MBUtil.getBreadcrumbs(categoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse) %>
 </div>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <c:if test="<%= message != null %>">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "category") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 
 			<%
@@ -201,7 +200,7 @@ if (message != null) {
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -211,13 +210,12 @@ if (message != null) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "subject") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= MBMessage.class %>" field="subject" defaultValue="<%= subject %>" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -225,7 +223,6 @@ if (message != null) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "body") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
 
@@ -235,7 +232,7 @@ if (message != null) {
 
 <c:if test="<%= attachments %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -248,7 +245,6 @@ if (message != null) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "file") %> <%= i %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />msgFile<%= i %>" size="70" type="file">
 			</td>
@@ -262,7 +258,7 @@ if (message != null) {
 
 <c:if test="<%= message == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -270,7 +266,6 @@ if (message != null) {
 		<td>
 			<%= LanguageUtil.get(pageContext, "anonymous") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-checkbox param="anonymous" />
 		</td>
@@ -279,7 +274,7 @@ if (message != null) {
 
 <c:if test="<%= (priorities.length > 0) && MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.UPDATE_THREAD_PRIORITY) %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -287,7 +282,6 @@ if (message != null) {
 		<td>
 			<%= LanguageUtil.get(pageContext, "priority") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 
 			<%
@@ -335,7 +329,7 @@ if (message != null) {
 </c:if>
 
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -343,7 +337,6 @@ if (message != null) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "tags") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
@@ -364,7 +357,7 @@ if (message != null) {
 
 <c:if test="<%= message == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -372,7 +365,6 @@ if (message != null) {
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= MBMessage.class.getName() %>"

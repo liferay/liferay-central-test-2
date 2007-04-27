@@ -46,12 +46,11 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 
 <liferay-ui:tabs names="portlet" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "id") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= portletId %>
 	</td>
@@ -60,13 +59,12 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 	<td>
 		<%= LanguageUtil.get(pageContext, "title") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= PortalUtil.getPortletTitle(portlet, application, locale) %>
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -74,7 +72,6 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 	<td>
 		<%= LanguageUtil.get(pageContext, "active") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= Portlet.class %>" bean="<%= portlet %>" field="active" />
 	</td>

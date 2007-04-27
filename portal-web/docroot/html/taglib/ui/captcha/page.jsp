@@ -37,12 +37,11 @@ String url = (String)request.getAttribute("liferay-ui:captcha:url");
 
 	<br>
 
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "text-verification") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<input name="<%= namespace %>captchaText" size="10" type="text" value="">
 		</td>

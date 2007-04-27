@@ -35,12 +35,11 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 	<table border="0" cellpadding="8" cellspacing="0">
 	<tr>
 		<td>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "color") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:text property='<%= propertyPrefix + "TextColor" %>' onchange='<%= "preview." + previewObject + ".color = this.value;" %>' /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
 				</td>
@@ -49,7 +48,6 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				<td>
 					<%= LanguageUtil.get(pageContext, "decoration") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "TextDecor" %>' onchange='<%= "preview." + previewObject + ".textDecoration = this.value;" %>'>
 						<html:optionsCollection property="listFontDecorations" />
@@ -60,7 +58,6 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				<td>
 					<%= LanguageUtil.get(pageContext, "font") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "TextFont" %>' onchange='<%= "preview." + previewObject + ".fontFamily = this.value;" %>'>
 						<html:optionsCollection property="listFonts" />
@@ -71,7 +68,6 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				<td>
 					<%= LanguageUtil.get(pageContext, "size") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "TextSize" %>' onchange='<%= "preview." + previewObject + ".fontSize = this.value;" %>'>
 						<html:optionsCollection property="listFontSizes" />
@@ -82,7 +78,6 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				<td>
 					<%= LanguageUtil.get(pageContext, "style") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 
 					<%

@@ -75,14 +75,13 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 	</div>
 </c:if>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <c:if test="<%= folder != null %>">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "parent-folder") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 
 			<%
@@ -107,7 +106,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -117,7 +116,6 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= DLFolder.class %>" bean="<%= folder %>" field="name" />
 	</td>
@@ -126,7 +124,6 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= DLFolder.class %>" bean="<%= folder %>" field="description" />
 	</td>
@@ -134,7 +131,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 
 <c:if test="<%= folder != null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -142,7 +139,6 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 		<td>
 			<%= LanguageUtil.get(pageContext, "webdav-url") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 
 			<%
@@ -173,7 +169,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 
 <c:if test="<%= folder == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -181,7 +177,6 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= DLFolder.class.getName() %>"

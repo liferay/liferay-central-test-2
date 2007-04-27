@@ -86,13 +86,12 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 
 <fieldset>
 	<legend><%=LanguageUtil.get(pageContext, "main-fields")%></legend>
-	<table border="0" cellpadding="0" cellspacing="0">
 
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "version-name") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-field model="<%= SCProductVersion.class %>" bean="<%= productVersion %>" field="version" />
 		</td>
@@ -101,7 +100,6 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		<td>
 			<%= LanguageUtil.get(pageContext, "changeLog") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-field model="<%= SCProductVersion.class %>" bean="<%= productVersion %>" field="changeLog" />
 		</td>
@@ -110,7 +108,6 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		<td>
 			<%= LanguageUtil.get(pageContext, "supported-framework-versions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<select name="<portlet:namespace/>frameworkVersions" multiple="true">
 				<%
@@ -128,14 +125,16 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	</tr>
 	</table>
 </fieldset>
+
 <fieldset class="repository-fields">
 	<legend><%=LanguageUtil.get(pageContext, "repository-fields")%></legend>
-	<table border="0" cellpadding="0" cellspacing="0">
+
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "download-page-url") %>
 		</td>
-		<td style="padding-left: 10px;"></td>	<td>
+		<td>
 			<liferay-ui:input-field model="<%= SCProductVersion.class %>" bean="<%= productVersion %>" field="downloadPageURL" />
 		</td>
 	</tr>
@@ -143,7 +142,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			<td>
 				<%= LanguageUtil.get(pageContext, "direct-download-url") %> (<%= LanguageUtil.get(pageContext, "recommended") %>)
 			</td>
-			<td style="padding-left: 10px;"></td>	<td>
+			<td>
 				<liferay-ui:input-field model="<%= SCProductVersion.class %>" bean="<%= productVersion %>" field="directDownloadURL" />
 			</td>
 		</tr>
@@ -151,7 +150,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		<td>
 			<%= LanguageUtil.get(pageContext, "include-artifact-in-repository") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
+
 		<% if (Validator.isNotNull(productEntry.getRepoArtifactId()) && Validator.isNotNull(productEntry.getRepoArtifactId())) { %>
 			<td>
 				<select name="<portlet:namespace/>repoStoreArtifact" size="1">

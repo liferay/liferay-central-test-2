@@ -68,12 +68,11 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />typeId">
 			<option value=""></option>
@@ -98,7 +97,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 
 <br>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <%
 String[] days = CalendarUtil.getDays(locale);
@@ -149,11 +148,9 @@ for (int i = 0; i < days.length; i++) {
 		<td>
 			<%= days[i] %>
 		</td>
-		<td style="padding-left: 30px;"></td>
 		<td>
 			<%= LanguageUtil.get(pageContext, "open") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<select name="<portlet:namespace /><%= curParam %>Open">
 				<option value="-1"></option>
@@ -183,11 +180,9 @@ for (int i = 0; i < days.length; i++) {
 
 			</select>
 		</td>
-		<td style="padding-left: 30px;"></td>
 		<td>
 			<%= LanguageUtil.get(pageContext, "close") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<select name="<portlet:namespace /><%= curParam %>Close">
 				<option value="-1"></option>

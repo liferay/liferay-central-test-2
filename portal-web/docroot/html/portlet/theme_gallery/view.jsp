@@ -92,7 +92,7 @@ portletURL.setParameter("categoryId", categoryId);
 
 <br>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <%
 for (int i = 0; i < entries.size(); i++) {
@@ -111,7 +111,6 @@ for (int i = 0; i < entries.size(); i++) {
 
 			<%= entry.getDescription() %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<a href="http://content.liferay.com/4/images/<%= entry.getImageLarge() %>" target="_blank"><img border="0" src="http://content.liferay.com/4/images/<%= entry.getImageSmall() %>"></a>
 		</td>

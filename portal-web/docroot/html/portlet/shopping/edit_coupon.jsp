@@ -99,14 +99,13 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 <liferay-ui:error exception="<%= CouponStartDateException.class %>" message="please-enter-a-valid-start-date" />
 <liferay-ui:error exception="<%= DuplicateCouponIdException.class %>" message="please-enter-a-unique-id" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "id") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<c:choose>
@@ -118,7 +117,6 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 					</c:otherwise>
 				</c:choose>
 			</td>
-			<td style="padding-left: 30px;"></td>
 			<td>
 				<c:if test="<%= coupon == null %>">
 					<liferay-ui:input-checkbox param="autoCouponId" />
@@ -131,7 +129,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -139,7 +137,6 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="name" />
 	</td>
@@ -148,13 +145,12 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="description" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -162,7 +158,6 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	<td>
 		<%= LanguageUtil.get(pageContext, "start-date") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="startDate" defaultValue="<%= startDate %>" />
 	</td>
@@ -171,7 +166,6 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	<td>
 		<%= LanguageUtil.get(pageContext, "expiration-date") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -189,7 +183,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -197,7 +191,6 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	<td>
 		<%= LanguageUtil.get(pageContext, "active") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="active" />
 	</td>
@@ -226,28 +219,23 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <br><br>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "minimum-order") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />minOrder" size="4" type="text" value="<%= currency.getSymbol() %><%= doubleFormat.format(minOrder) %>">
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "discount") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />discount" size="4" type="text" value="<%= doubleFormat.format(discount) %>">
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "discount-type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />discountType">
 

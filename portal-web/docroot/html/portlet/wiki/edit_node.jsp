@@ -48,12 +48,11 @@ String nodeId = BeanParamUtil.getString(node, request, "nodeId");
 
 <liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= WikiNode.class %>" bean="<%= node %>" field="name" />
 	</td>
@@ -62,7 +61,6 @@ String nodeId = BeanParamUtil.getString(node, request, "nodeId");
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= WikiNode.class %>" bean="<%= node %>" field="description" />
 	</td>
@@ -70,7 +68,7 @@ String nodeId = BeanParamUtil.getString(node, request, "nodeId");
 
 <c:if test="<%= node == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br>
 		</td>
 	</tr>
@@ -78,7 +76,6 @@ String nodeId = BeanParamUtil.getString(node, request, "nodeId");
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= WikiNode.class.getName() %>"

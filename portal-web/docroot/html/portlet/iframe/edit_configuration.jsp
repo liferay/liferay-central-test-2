@@ -40,18 +40,17 @@ String htmlAttributes =
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "source-url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />src" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= src %>">
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -59,7 +58,6 @@ String htmlAttributes =
 	<td>
 		<%= LanguageUtil.get(pageContext, "authenticate") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="auth" defaultValue="<%= auth %>" />
 	</td>
@@ -68,7 +66,6 @@ String htmlAttributes =
 	<td>
 		<%= LanguageUtil.get(pageContext, "authentication-type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />authType">
 			<option <%= (authType.equals("basic")) ? "selected" : "" %> value="basic">Basic</option>
@@ -80,7 +77,6 @@ String htmlAttributes =
 	<td>
 		<%= LanguageUtil.get(pageContext, "form-method") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />formMethod">
 			<option <%= (formMethod.equals("get")) ? "selected" : "" %> value="get">Get</option>
@@ -92,7 +88,6 @@ String htmlAttributes =
 	<td>
 		<%= LanguageUtil.get(pageContext, "user-name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />userName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= userName %>">
 	</td>
@@ -101,7 +96,6 @@ String htmlAttributes =
 	<td>
 		<%= LanguageUtil.get(pageContext, "password") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />password" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= password %>">
 	</td>
@@ -110,13 +104,12 @@ String htmlAttributes =
 	<td>
 		<%= LanguageUtil.get(pageContext, "hidden-variables") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />hiddenVariables" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= hiddenVariables %>">
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br>
 	</td>
 </tr>
@@ -124,7 +117,6 @@ String htmlAttributes =
 	<td>
 		<%= LanguageUtil.get(pageContext, "html-attributes") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<textarea name="<portlet:namespace />htmlAttributes" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= htmlAttributes %></textarea>
 	</td>

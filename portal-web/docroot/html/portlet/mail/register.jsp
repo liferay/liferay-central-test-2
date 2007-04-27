@@ -46,16 +46,14 @@
 
 		<br><br>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<input name="<portlet:namespace />userName" type="text">
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<b>@</b>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<b><%= company.getMx() %></b>
 			</td>
@@ -73,28 +71,3 @@
 		</script>
 	</c:otherwise>
 </c:choose>
-
-<%--
-<c:if test="<%= SessionErrors.contains(renderRequest, DuplicateUserEmailAddressException.class.getName()) %>">
-	<tr>
-		<td colspan="5">
-			<font class="portlet-msg-error" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "the-email-address-you-requested-is-already-taken") %></font>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="5"><img border="0" height="8" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1"></td>
-	</tr>
-	</table>
-</c:if>
-
-<c:if test="<%= SessionErrors.contains(renderRequest, UserEmailAddressException.class.getName()) %>">
-	<tr>
-		<td colspan="5">
-			<font class="portlet-msg-error" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "please-enter-a-valid-email-address") %></font>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="5"><img border="0" height="8" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1"></td>
-	</tr>
-</c:if>
---%>

@@ -50,12 +50,11 @@ if (curTagsParam != null) {
 
 <input id="<%= namespace %><%= hiddenInput %>" type="hidden">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<input id="<%= randomNamespace %>tags" type="text">
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<span id="<%= randomNamespace %>tagsSummary"></span>
 	</td>

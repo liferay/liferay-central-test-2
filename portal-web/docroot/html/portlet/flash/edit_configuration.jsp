@@ -60,12 +60,11 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "movie") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />movie" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= movie %>">
 	</td>
@@ -74,7 +73,6 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 	<td>
 		<%= LanguageUtil.get(pageContext, "flash-attributes") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<textarea name="<portlet:namespace />flashAttributes" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); disableEsc();"><%= flashAttributes %></textarea>
 	</td>
@@ -83,7 +81,6 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 	<td>
 		<%= LanguageUtil.get(pageContext, "flash-variables") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<textarea name="<portlet:namespace />flashVariables" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= flashVariables %></textarea>
 	</td>

@@ -35,12 +35,11 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 
 <liferay-ui:error exception="<%= NoSuchNodeException.class %>" message="the-node-could-not-be-found" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "node") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />nodeId">
 			<option value=""></option>

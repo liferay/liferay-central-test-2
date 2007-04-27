@@ -26,7 +26,7 @@
 
 <form name="<portlet:namespace />fm" target="_blank" onSubmit="submitForm(document.<portlet:namespace />fm, 'http://www.weather.com/search/search', false); return false;">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <%
 for (int i = 0; i < zips.length; i++) {
@@ -39,7 +39,6 @@ for (int i = 0; i < zips.length; i++) {
 			<td>
 				<a href="http://www.weather.com/search/search?where=<%= weather.getZip() %>" style="font-size: xx-small; font-weight: bold;" target="_blank"><%= weather.getZip() %></a>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td align="right">
 				<span style="font-size: xx-small;">
 
@@ -53,7 +52,6 @@ for (int i = 0; i < zips.length; i++) {
 
 				</span>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td align="right">
 				<liferay-ui:png-image image="<%= PortalUtil.createSecureProxyURL(weather.getIconURL(), request.isSecure()) %>" height="34" width="61" />
 			</td>

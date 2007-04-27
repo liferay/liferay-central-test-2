@@ -35,12 +35,11 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 	<table border="0" cellpadding="8" cellspacing="0">
 	<tr>
 		<td>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "width") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "BorderWidth" %>' onchange='<%= "preview." + previewObject + ".borderWidth = this.value;" %>'>
 						<html:optionsCollection property="listBorderWidths" />
@@ -51,7 +50,6 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				<td>
 					<%= LanguageUtil.get(pageContext, "style") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:select property='<%= propertyPrefix + "BorderStyle" %>' onchange='<%= "preview." + previewObject + ".borderStyle = this.value;" %>'>
 						<html:optionsCollection property="listBorderStyles" />
@@ -62,7 +60,6 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				<td>
 					<%= LanguageUtil.get(pageContext, "color") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<html:text property='<%= propertyPrefix + "BorderColor" %>' onchange='<%= "preview." + previewObject + ".borderColor = this.value;" %>' /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
 				</td>

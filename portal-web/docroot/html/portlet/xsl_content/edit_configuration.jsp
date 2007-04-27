@@ -31,12 +31,11 @@
 <liferay-ui:error key="xslURL" message="please-enter-a-valid-xsl-url" />
 <liferay-ui:error key="transformation" message="an-error-occurred-while-processing-your-xml-and-xsl" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "xml-url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />xmlURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= xmlURL %>">
 	</td>
@@ -45,7 +44,6 @@
 	<td>
 		<%= LanguageUtil.get(pageContext, "xsl-url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />xslURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= xslURL %>">
 	</td>
