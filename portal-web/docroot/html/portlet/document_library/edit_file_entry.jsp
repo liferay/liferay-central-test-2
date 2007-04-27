@@ -92,9 +92,9 @@ portletURL.setParameter("name", name);
 	backURL="<%= redirect %>"
 />
 
-<%= DLUtil.getBreadcrumbs(folderId, null, pageContext, renderRequest, renderResponse) %>
-
-<br><br>
+<div class="breadcrumbs">
+	<%= DLUtil.getBreadcrumbs(folderId, null, pageContext, renderRequest, renderResponse) %>
+</div>
 
 <c:if test="<%= fileEntry != null %>">
 	<table border="0" cellpadding="0" cellspacing="0">

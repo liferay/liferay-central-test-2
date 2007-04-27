@@ -72,9 +72,9 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 <liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
 
 <c:if test="<%= !parentCategoryId.equals(ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) %>">
-	<%= ShoppingUtil.getBreadcrumbs(parentCategoryId, pageContext, renderRequest, renderResponse) %>
-
-	<br><br>
+	<div class="breadcrumbs">
+		<%= ShoppingUtil.getBreadcrumbs(parentCategoryId, pageContext, renderRequest, renderResponse) %>
+	</div>
 </c:if>
 
 <table border="0" cellpadding="0" cellspacing="0">

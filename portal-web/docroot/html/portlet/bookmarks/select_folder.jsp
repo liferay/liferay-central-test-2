@@ -35,9 +35,9 @@ long folderId = BeanParamUtil.getLong(folder, request, "folderId", BookmarksFold
 <liferay-ui:tabs names="folders" />
 
 <c:if test="<%= folder != null %>">
-	<%= BookmarksUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
-
-	<br><br>
+	<div class="breadcrumbs">
+		<%= BookmarksUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
+	</div>
 </c:if>
 
 <%

@@ -83,9 +83,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= StringUtil.merge(categoryIds) %>">
 
 		<c:if test="<%= category != null %>">
-			<%= BlogsUtil.getBreadcrumbs(category, pageContext, renderRequest, renderResponse) %>
-
-			<br><br>
+			<div class="breadcrumbs">
+				<%= BlogsUtil.getBreadcrumbs(category, pageContext, renderRequest, renderResponse) %>
+			</div>
 		</c:if>
 
 		<%

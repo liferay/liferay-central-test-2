@@ -175,9 +175,9 @@ if (message != null) {
 }
 %>
 
-<%= MBUtil.getBreadcrumbs(categoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse) %>
-
-<br><br>
+<div class="breadcrumbs">
+	<%= MBUtil.getBreadcrumbs(categoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse) %>
+</div>
 
 <table border="0" cellpadding="0" cellspacing="0">
 
@@ -420,7 +420,7 @@ if (message != null) {
 	String classHoverName = "portlet-section-body-hover";
 	%>
 
-	<%@ include file="/html/portlet/message_boards/view_thread_message.jsp" %>
+	<%@ include file="/html/portlet/message_boards/view_thread_message.jspf" %>
 </c:if>
 
 </form>

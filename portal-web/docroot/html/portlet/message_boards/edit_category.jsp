@@ -71,9 +71,9 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 <liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
 
 <c:if test="<%= !parentCategoryId.equals(MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) %>">
-	<%= MBUtil.getBreadcrumbs(parentCategoryId, null, pageContext, renderRequest, renderResponse) %>
-
-	<br><br>
+	<div class="breadcrumbs">
+		<%= MBUtil.getBreadcrumbs(parentCategoryId, null, pageContext, renderRequest, renderResponse) %>
+	</div>
 </c:if>
 
 <table border="0" cellpadding="0" cellspacing="0">

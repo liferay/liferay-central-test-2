@@ -37,9 +37,9 @@ String keywords = ParamUtil.getString(request, "keywords");
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>">
 <input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryIds %>">
 
-<%= ShoppingUtil.getBreadcrumbs(breadcrumbsCategoryId, pageContext, renderRequest, renderResponse) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
-
-<br><br>
+<div class="breadcrumbs">
+	<%= ShoppingUtil.getBreadcrumbs(breadcrumbsCategoryId, pageContext, renderRequest, renderResponse) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
+</div>
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();

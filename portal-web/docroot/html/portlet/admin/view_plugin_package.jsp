@@ -31,9 +31,9 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 
 %>
 
-<%= breadcrumbs.toString() %>
-
-<br><br>
+<div class="breadcrumbs">
+	<%= breadcrumbs.toString() %>
+</div>
 
 <liferay-ui:success key="pluginDownloaded" message="the-plugin-was-downloaded-successfully-and-is-now-being-installed" />
 

@@ -52,7 +52,7 @@
 					<br>
 
 					<%
-					PortletCategory portletCategory = (PortletCategory)WebAppPool.get(company.getCompanyId(), WebKeys.PORTLET_CATEGORY);
+					PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);
 
 					List categories = ListUtil.fromCollection(portletCategory.getCategories());
 

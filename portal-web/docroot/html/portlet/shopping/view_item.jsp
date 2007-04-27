@@ -76,9 +76,9 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 	<liferay-util:param name="tabs1" value="categories" />
 </liferay-util:include>
 
-<%= ShoppingUtil.getBreadcrumbs(item.getCategoryId(), pageContext, renderRequest, renderResponse) %>
-
-<br><br>
+<div class="breadcrumbs">
+	<%= ShoppingUtil.getBreadcrumbs(item.getCategoryId(), pageContext, renderRequest, renderResponse) %>
+</div>
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>

@@ -22,18 +22,13 @@
  */
 %>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-
 <c:if test="<%= (category == null) && (entry.getCategoryId() != BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) %>">
-	<tr>
-		<td>
-			<%= BlogsUtil.getBreadcrumbs(entry.getCategoryId(), pageContext, renderRequest, renderResponse) %>
-
-			<br><br>
-		</td>
-	</tr>
+	<div class="breadcrumbs">
+		<%= BlogsUtil.getBreadcrumbs(entry.getCategoryId(), pageContext, renderRequest, renderResponse) %>
+	</div>
 </c:if>
 
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td>
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewEntryURL">

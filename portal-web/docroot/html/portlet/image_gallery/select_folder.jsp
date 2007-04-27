@@ -35,9 +35,9 @@ String folderId = BeanParamUtil.getString(folder, request, "folderId", IGFolderI
 <liferay-ui:tabs names="folders" />
 
 <c:if test="<%= folder != null %>">
-	<%= IGUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
-
-	<br><br>
+	<div class="breadcrumbs">
+		<%= IGUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
+	</div>
 </c:if>
 
 <%

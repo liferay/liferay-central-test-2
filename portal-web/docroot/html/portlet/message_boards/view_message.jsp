@@ -79,7 +79,9 @@ else {
 <table cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td width="99%">
-		<%= MBUtil.getBreadcrumbs(null, message, pageContext, renderRequest, renderResponse) %>
+		<div class="breadcrumbs">
+			<%= MBUtil.getBreadcrumbs(null, message, pageContext, renderRequest, renderResponse) %>
+		</div>
 	</td>
 	<td>
 

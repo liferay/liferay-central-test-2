@@ -35,9 +35,9 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId", BlogsCa
 <liferay-ui:tabs names="categories" />
 
 <c:if test="<%= category != null %>">
-	<%= BlogsUtil.getBreadcrumbs(category, pageContext, renderRequest, renderResponse) %>
-
-	<br><br>
+	<div class="breadcrumbs">
+		<%= BlogsUtil.getBreadcrumbs(category, pageContext, renderRequest, renderResponse) %>
+	</div>
 </c:if>
 
 <%

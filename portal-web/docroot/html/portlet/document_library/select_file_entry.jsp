@@ -41,9 +41,9 @@ long groupId = BeanParamUtil.getLong(folder, request, "groupId");
 <liferay-ui:tabs names="folders" />
 
 <c:if test="<%= folder != null %>">
-	<%= DLUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
-
-	<br><br>
+	<div class="breadcrumbs">
+		<%= DLUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
+	</div>
 </c:if>
 
 <%

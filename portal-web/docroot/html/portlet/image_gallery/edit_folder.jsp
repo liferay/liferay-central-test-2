@@ -70,9 +70,9 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
 <c:if test="<%= !parentFolderId.equals(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) %>">
-	<%= IGUtil.getBreadcrumbs(parentFolderId, null, pageContext, renderRequest, renderResponse) %>
-
-	<br><br>
+	<div class="breadcrumbs">
+		<%= IGUtil.getBreadcrumbs(parentFolderId, null, pageContext, renderRequest, renderResponse) %>
+	</div>
 </c:if>
 
 <table border="0" cellpadding="0" cellspacing="0">

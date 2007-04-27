@@ -38,9 +38,9 @@ String categoryId = ParamUtil.get(request, "categoryId", ShoppingCategoryImpl.DE
 	<liferay-util:param name="tabs1" value="categories" />
 </liferay-util:include>
 
-<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderRequest, renderResponse) %>
-
-<br><br>
+<div class="breadcrumbs">
+	<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderRequest, renderResponse) %>
+</div>
 
 <%= LanguageUtil.get(pageContext, "add-all-isbn-numbers-separated-by-spaces") %>
 

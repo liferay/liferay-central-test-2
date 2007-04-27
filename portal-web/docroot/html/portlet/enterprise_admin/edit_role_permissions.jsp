@@ -251,10 +251,9 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 <c:choose>
 	<c:when test="<%= cmd.equals(Constants.VIEW) %>">
-
-		<%= breadcrumbs %>
-
-		<br><br>
+		<div class="breadcrumbs">
+			<%= breadcrumbs %>
+		</div>
 
 		<liferay-ui:success key="permissionDeleted" message="the-permission-was-deleted" />
 		<liferay-ui:success key="permissionsUpdated" message="the-role-permissions-was-updated" />
@@ -409,9 +408,9 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<br>
 
-		<%= breadcrumbs %>
-
-		<br><br>
+		<div class="breadcrumbs">
+			<%= breadcrumbs %>
+		</div>
 
 		<liferay-ui:tabs
 			names="current,available"
@@ -542,9 +541,9 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<br>
 
-		<%= breadcrumbs %>
-
-		<br><br>
+		<div class="breadcrumbs">
+			<%= breadcrumbs %>
+		</div>
 
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -617,9 +616,9 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<br>
 
-		<%= breadcrumbs %>
-
-		<br><br>
+		<div class="breadcrumbs">
+			<%= breadcrumbs %>
+		</div>
 
 		Proceed to the next step to define permissions to the <%= portletResourceName %> portlet itself.
 
@@ -728,9 +727,9 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<br>
 
-		<%= breadcrumbs %>
-
-		<br><br>
+		<div class="breadcrumbs">
+			<%= breadcrumbs %>
+		</div>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 

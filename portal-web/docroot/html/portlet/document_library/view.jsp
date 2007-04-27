@@ -77,9 +77,9 @@ portletURL.setParameter("folderId", folderId);
 	<c:when test='<%= tabs1.equals("folders") %>'>
 		<c:if test="<%= showSubfolders %>">
 			<c:if test="<%= showBreadcrumbs && (folder != null) %>">
-				<%= DLUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
-
-				<br><br>
+				<div class="breadcrumbs">
+					<%= DLUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
+				</div>
 			</c:if>
 
 			<%

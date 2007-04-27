@@ -23,20 +23,21 @@
 %>
 
 <%
-	String keywords = ParamUtil.getString(request, "keywords");
-	String tag = ParamUtil.getString(request, "tag");
-	String license = ParamUtil.getString(request, "license");
-	String installStatus = ParamUtil.getString(request, "installStatus");
-	if (Validator.isNull(installStatus)) {
-		installStatus = PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED;
-	}
+String keywords = ParamUtil.getString(request, "keywords");
+String tag = ParamUtil.getString(request, "tag");
+String license = ParamUtil.getString(request, "license");
+String installStatus = ParamUtil.getString(request, "installStatus");
 
-	try {
+if (Validator.isNull(installStatus)) {
+	installStatus = PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED;
+}
+
+try {
 %>
 
-<%= breadcrumbs.toString() %>
-
-<br><br>
+<div class="breadcrumbs">
+	<%= breadcrumbs.toString() %>
+</div>
 
 <input type="hidden" name="<portlet:namespace/>pluginType" value="<%=pluginType%>">
 

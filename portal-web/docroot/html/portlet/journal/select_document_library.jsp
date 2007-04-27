@@ -51,9 +51,9 @@ portletURL.setParameter("folderId", folderId);
 	breadcrumbs = StringUtil.replace(breadcrumbs, "document_library%2Fselect_folder", "journal%2Fselect_document_library");
 	%>
 
-	<%= breadcrumbs %>
-
-	<br><br>
+	<div class="breadcrumbs">
+		<%= breadcrumbs %>
+	</div>
 </c:if>
 
 <%

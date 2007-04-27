@@ -346,6 +346,7 @@
 						<include name="**/*.jpg" />
 						<include name="**/*.js" />
 						<include name="**/*.jsp" />
+						<include name="**/*.jspf" />
 						<include name="**/*.png" />
 						<include name="**/*.tld" />
 						<include name="**/*.vm" />

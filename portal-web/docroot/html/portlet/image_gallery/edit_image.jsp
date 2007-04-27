@@ -36,9 +36,9 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 
 <liferay-ui:tabs names="image" />
 
-<%= IGUtil.getBreadcrumbs(folderId, null, pageContext, renderRequest, renderResponse) %>
-
-<br><br>
+<div class="breadcrumbs">
+	<%= IGUtil.getBreadcrumbs(folderId, null, pageContext, renderRequest, renderResponse) %>
+</div>
 
 <c:if test="<%= image != null %>">
 	<table border="0" cellpadding="0" cellspacing="0">

@@ -60,9 +60,9 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 
 <liferay-ui:error exception="<%= EntryURLException.class %>" message="please-enter-a-valid-url" />
 
-<%= BookmarksUtil.getBreadcrumbs(folderId, -1, pageContext, renderRequest, renderResponse) %>
-
-<br><br>
+<div class="breadcrumbs">
+	<%= BookmarksUtil.getBreadcrumbs(folderId, -1, pageContext, renderRequest, renderResponse) %>
+</div>
 
 <table border="0" cellpadding="0" cellspacing="0">
 

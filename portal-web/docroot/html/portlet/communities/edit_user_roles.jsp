@@ -100,9 +100,9 @@ Assign Community roles to users.
 
 		<br>
 
-		<%= breadcrumbs %>
-
-		<br><br>
+		<div class="breadcrumbs">
+			<%= breadcrumbs %>
+		</div>
 
 		<liferay-ui:tabs
 			names="roles"
@@ -183,9 +183,9 @@ Assign Community roles to users.
 
 		<br>
 
-		<%= breadcrumbs %>
-
-		<br><br>
+		<div class="breadcrumbs">
+			<%= breadcrumbs %>
+		</div>
 
 		<liferay-ui:tabs
 			names="users"

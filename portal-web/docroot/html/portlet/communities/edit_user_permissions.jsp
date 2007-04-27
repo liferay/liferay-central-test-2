@@ -197,9 +197,9 @@ Assign permissions to users.
 
 				<br>
 
-				<%= breadcrumbs %>
-
-				<br><br>
+				<div class="breadcrumbs">
+					<%= breadcrumbs %>
+				</div>
 
 				<liferay-ui:tabs
 					names="current,available"
@@ -362,9 +362,9 @@ Assign permissions to users.
 
 			<br>
 
-			<%= breadcrumbs %>
-
-			<br><br>
+			<div class="breadcrumbs">
+				<%= breadcrumbs %>
+			</div>
 
 			Proceed to the next step to assign users with permissions to the <%= portletResourceName %> portlet itself.
 
@@ -439,9 +439,9 @@ Assign permissions to users.
 
 		<br>
 
-		<%= breadcrumbs %>
-
-		<br><br>
+		<div class="breadcrumbs">
+			<%= breadcrumbs %>
+		</div>
 
 		<%
 		List headerNames = new ArrayList();

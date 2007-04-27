@@ -49,9 +49,9 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
 		<c:if test="<%= folder != null %>">
-			<%= BookmarksUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
-
-			<br><br>
+			<div class="breadcrumbs">
+				<%= BookmarksUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
+			</div>
 		</c:if>
 
 		<%

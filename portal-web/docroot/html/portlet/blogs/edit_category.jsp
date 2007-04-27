@@ -52,9 +52,9 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 <liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
 
 <c:if test="<%= parentCategoryId != BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>">
-	<%= BlogsUtil.getBreadcrumbs(parentCategoryId, pageContext, renderRequest, renderResponse) %>
-
-	<br><br>
+	<div class="breadcrumbs">
+		<%= BlogsUtil.getBreadcrumbs(parentCategoryId, pageContext, renderRequest, renderResponse) %>
+	</div>
 </c:if>
 
 <table border="0" cellpadding="0" cellspacing="0">
