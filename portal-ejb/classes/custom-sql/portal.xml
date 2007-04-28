@@ -11,7 +11,7 @@
 			WHERE
 				[$WHERE$]
 				(Group_.groupId = ?) AND
-				(Group_.liveGroupId = -1)
+				(Group_.liveGroupId = 0)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.countByC_N_D">
@@ -26,7 +26,7 @@
 				(Group_.companyId = ?) AND
 				(Group_.className IS NULL OR Group_.className = '') AND
 				(Group_.classPK IS NULL OR Group_.classPK = '') AND
-				(Group_.liveGroupId = -1) AND
+				(Group_.liveGroupId = 0) AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
 		]]>
@@ -39,7 +39,7 @@
 				Group_
 			WHERE
 				(Group_.companyId = ?) AND
-				(Group_.liveGroupId = -1) AND
+				(Group_.liveGroupId = 0) AND
 				(lower(Group_.name) = ?)
 		]]>
 	</sql>
@@ -55,7 +55,7 @@
 				(Group_.companyId = ?) AND
 				(Group_.className IS NULL OR Group_.className = '') AND
 				(Group_.classPK IS NULL OR Group_.classPK = '') AND
-				(Group_.liveGroupId = -1) AND
+				(Group_.liveGroupId = 0) AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
 		]]>
@@ -63,7 +63,7 @@
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByActive">
 		<![CDATA[
 			WHERE
-				(Group_.liveGroupId = -1) AND
+				(Group_.liveGroupId = 0) AND
 				(Group_.active_ = ?)
 		]]>
 	</sql>
@@ -71,7 +71,7 @@
 		<![CDATA[
 			WHERE
 				(Group_.creatorUserId = ?) AND
-				(Group_.liveGroupId = -1)
+				(Group_.liveGroupId = 0)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByGroupsOrgs">
@@ -83,7 +83,7 @@
 				Users_Orgs ON
 					(Users_Orgs.organizationId = Groups_Orgs.organizationId)
 			WHERE
-				(Group_.liveGroupId = -1) AND
+				(Group_.liveGroupId = 0) AND
 				(Users_Orgs.userId = ?)
 		]]>
 	</sql>
@@ -93,7 +93,7 @@
 				Groups_Roles ON
 					(Groups_Roles.groupId = Group_.groupId)
 			WHERE
-				(Group_.liveGroupId = -1) AND
+				(Group_.liveGroupId = 0) AND
 				(Groups_Roles.roleId = ?)
 		]]>
 	</sql>
@@ -106,7 +106,7 @@
 				Users_UserGroups ON
 					(Users_UserGroups.userGroupId = Groups_UserGroups.userGroupId)
 			WHERE
-				(Group_.liveGroupId = -1) AND
+				(Group_.liveGroupId = 0) AND
 				(Users_UserGroups.userId = ?)
 		]]>
 	</sql>
@@ -116,7 +116,7 @@
 				LayoutSet ON
 					(LayoutSet.groupId = Group_.groupId)
 			WHERE
-				(Group_.liveGroupId = -1) AND
+				(Group_.liveGroupId = 0) AND
 				(LayoutSet.privateLayout = ?) AND
 				(LayoutSet.pageCount != 0)
 		]]>
@@ -127,7 +127,7 @@
 				LayoutSet ON
 					(LayoutSet.groupId = Group_.groupId)
 			WHERE
-				(Group_.liveGroupId = -1) AND
+				(Group_.liveGroupId = 0) AND
 				(LayoutSet.pageCount != 0)
 		]]>
 	</sql>
@@ -146,7 +146,7 @@
 				Roles_Permissions ON
 					(Roles_Permissions.permissionId = Permission_.permissionId)
 			WHERE
-				(Group_.liveGroupId = -1) AND
+				(Group_.liveGroupId = 0) AND
 				(ResourceCode.name = ?) AND
 				(ResourceCode.scope = ?) AND
 				(Permission_.actionId = ?) AND
@@ -165,7 +165,7 @@
 				Users_Groups ON
 					(Users_Groups.userId = ?)
 			WHERE
-				(Group_.liveGroupId = -1) AND
+				(Group_.liveGroupId = 0) AND
 				(Users_Groups.groupId = Group_.groupId)
 		]]>
 	</sql>

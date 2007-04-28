@@ -37,7 +37,7 @@ alter table Group_ add creatorUserId VARCHAR(75) null;
 alter_column_type Group_ parentGroupId LONG;
 alter table Group_ add liveGroupId LONG;
 alter table Group_ add active_ BOOLEAN;
-update Group_ set liveGroupId = -1;
+update Group_ set liveGroupId = 0;
 update Group_ set friendlyURL = '' where className = 'com.liferay.portal.model.User';
 update Group_ set active_ = TRUE;
 
