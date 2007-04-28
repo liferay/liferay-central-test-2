@@ -32,6 +32,7 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.test.TestCase;
 import com.liferay.test.TestProps;
+import com.liferay.util.GetterUtil;
 
 /**
  * <a href="BaseServiceTest.java.html"><b><i>View Source</i></b></a>
@@ -44,9 +45,11 @@ public class BaseServiceTest extends TestCase {
 	protected void setUp() throws Exception {
 		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
 
-		String userId = TestProps.get("service.user.id");
+		String remoteUser = TestProps.get("service.user.id");
 
-		PrincipalThreadLocal.setName(userId);
+		PrincipalThreadLocal.setName(remoteUser);
+
+		long userId = GetterUtil.getLong(remoteUser);
 
 		User user = UserLocalServiceUtil.getUserById(userId);
 

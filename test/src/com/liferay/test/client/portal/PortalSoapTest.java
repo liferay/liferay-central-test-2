@@ -45,18 +45,17 @@ public class PortalSoapTest extends BaseSoapTest {
 		try {
 			getPortalService().test();
 
-			boolean autoUserId = true;
-			String userId = "";
 			boolean autoPassword = true;
 			String password1 = null;
 			String password2 = null;
 			boolean passwordReset = false;
+			boolean autoScreenName = true;
+			String screenName = "";
 			String emailAddress = "PortalSoapTest@liferay.com";
 			String locale = Locale.getDefault().toString();
 			String firstName = "PortalSoapTest";
 			String middleName = "";
 			String lastName = "PortalSoapTest";
-			String nickName = null;
 			int prefixId = 0;
 			int suffixId = 0;
 			boolean male = true;
@@ -66,13 +65,14 @@ public class PortalSoapTest extends BaseSoapTest {
 			String jobTitle = null;
 			String organizationId = null;
 			String locationId = null;
+			boolean sendMail = false;
 
 			UserSoap user = getUserService().addUser(
-				TestConstants.COMPANY_ID, autoUserId, userId, autoPassword,
-				password1, password2, passwordReset, emailAddress,
-				locale, firstName, middleName, lastName, nickName, prefixId,
-				suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-				jobTitle, organizationId, locationId);
+				TestConstants.COMPANY_ID, autoPassword, password1, password2,
+				passwordReset, autoScreenName, screenName, emailAddress, locale,
+				firstName, middleName, lastName, prefixId, suffixId, male,
+				birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+				organizationId, locationId, false);
 
 			user = getUserService().getUserByEmailAddress(
 				TestConstants.COMPANY_ID, emailAddress);

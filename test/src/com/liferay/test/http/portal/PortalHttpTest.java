@@ -54,7 +54,6 @@ public class PortalHttpTest extends BaseHttpTest {
 			String firstName = "UserServiceHttpTest";
 			String middleName = "";
 			String lastName = "UserServiceHttpTest";
-			String nickName = null;
 			int prefixId = 0;
 			int suffixId = 0;
 			boolean male = true;
@@ -69,9 +68,9 @@ public class PortalHttpTest extends BaseHttpTest {
 			User user = UserServiceHttp.addUser(
 				getHttpPrincipal(), TestConstants.COMPANY_ID, autoPassword,
 				password1, password2, passwordReset, autoScreenName, screenName,
-				emailAddress, locale, firstName, middleName, lastName, nickName,
-				prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, organizationId, locationId, sendMail);
+				emailAddress, locale, firstName, middleName, lastName, prefixId,
+				suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+				jobTitle, organizationId, locationId, sendMail);
 
 			user = UserServiceHttp.getUserByEmailAddress(
 				getHttpPrincipal(), TestConstants.COMPANY_ID, emailAddress);

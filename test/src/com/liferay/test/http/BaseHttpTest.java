@@ -25,6 +25,7 @@ package com.liferay.test.http;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.test.TestCase;
 import com.liferay.test.TestProps;
+import com.liferay.util.GetterUtil;
 
 /**
  * <a href="BaseHttpTest.java.html"><b><i>View Source</i></b></a>
@@ -41,13 +42,15 @@ public class BaseHttpTest extends TestCase {
 	protected HttpPrincipal getHttpPrincipal(boolean authenticated) {
 		HttpPrincipal httpPrincipal = null;
 
+		String url = TestProps.get("http.url");
+		long userId = GetterUtil.getLong(TestProps.get("http.user.id"));
+		String password = TestProps.get("http.password");
+
 		if (authenticated) {
-			httpPrincipal = new HttpPrincipal(
-				TestProps.get("http.url"), TestProps.get("http.user.id"),
-				TestProps.get("http.password"));
+			httpPrincipal = new HttpPrincipal(url, userId, password);
 		}
 		else {
-			httpPrincipal = new HttpPrincipal(TestProps.get("http.url"));
+			httpPrincipal = new HttpPrincipal(url);
 		}
 
 		return httpPrincipal;

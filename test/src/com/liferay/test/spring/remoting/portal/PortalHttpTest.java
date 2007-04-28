@@ -56,7 +56,6 @@ public class PortalHttpTest extends TestCase {
 		String firstName = "UserServiceSpringRemotingTest";
 		String middleName = "";
 		String lastName = "UserServiceSpringRemotingTest";
-		String nickName = null;
 		int prefixId = 0;
 		int suffixId = 0;
 		boolean male = true;
@@ -71,7 +70,7 @@ public class PortalHttpTest extends TestCase {
 		User user = userService.addUser(
 			TestConstants.COMPANY_ID, autoPassword, password1, password2,
 			passwordReset, autoScreenName, screenName, emailAddress, locale,
-			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
+			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
 			locationId, sendMail);
 

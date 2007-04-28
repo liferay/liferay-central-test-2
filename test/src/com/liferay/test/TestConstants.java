@@ -30,6 +30,6 @@ package com.liferay.test;
  */
 public class TestConstants {
 
-	public static final String COMPANY_ID = "liferay.com";
+	public static final long COMPANY_ID = 2000;
 
 }
