@@ -30,6 +30,7 @@ import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.DefaultParentIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -72,10 +73,8 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		_categoryIdMapper = pkUpgradeColumn.getValueMapper();
-
-		_categoryIdMapper.appendException(
-			new Long(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID));
+		_categoryIdMapper = new DefaultParentIdMapper(
+			pkUpgradeColumn.getValueMapper());
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsCategoryImpl.TABLE_NAME, BlogsCategoryImpl.TABLE_COLUMNS,

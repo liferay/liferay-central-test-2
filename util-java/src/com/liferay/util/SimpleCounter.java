@@ -20,31 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.blogs.model.impl;
-
-import com.liferay.portlet.blogs.model.BlogsCategory;
+package com.liferay.util;
 
 /**
- * <a href="BlogsCategoryImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SimpleCounter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsCategoryImpl
-	extends BlogsCategoryModelImpl implements BlogsCategory {
+public class SimpleCounter {
 
-	public static final long DEFAULT_PARENT_CATEGORY_ID = 0;
-
-	public BlogsCategoryImpl() {
+	public synchronized long get() {
+		return _counter++;
 	}
 
-	public boolean isRoot() {
-		if (getParentCategoryId() == DEFAULT_PARENT_CATEGORY_ID) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+	private long _counter = 1;
 
 }

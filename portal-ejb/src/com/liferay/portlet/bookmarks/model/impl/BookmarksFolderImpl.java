@@ -33,7 +33,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 public class BookmarksFolderImpl
 	extends BookmarksFolderModelImpl implements BookmarksFolder {
 
-	public static final long DEFAULT_PARENT_FOLDER_ID = -1;
+	public static final long DEFAULT_PARENT_FOLDER_ID = 0;
 
 	public BookmarksFolderImpl() {
 	}

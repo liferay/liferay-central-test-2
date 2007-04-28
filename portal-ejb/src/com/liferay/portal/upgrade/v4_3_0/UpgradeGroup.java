@@ -23,7 +23,6 @@
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -41,6 +40,7 @@ import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.DefaultParentIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.OwnerIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.PreferencesUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.PrimKeyUpgradeColumnImpl;
@@ -104,12 +104,8 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		// Groups_Orgs
 
-		_groupIdMapper = pkUpgradeColumn.getValueMapper();
-
-		_groupIdMapper.appendException(
-			new Long(GroupImpl.DEFAULT_PARENT_GROUP_ID));
-		_groupIdMapper.appendException(new Long(0));
-		_groupIdMapper.appendException(StringPool.NULL);
+		_groupIdMapper = new DefaultParentIdMapper(
+			pkUpgradeColumn.getValueMapper());
 
 		_ownerIdMapper = new OwnerIdMapper(_groupIdMapper);
 

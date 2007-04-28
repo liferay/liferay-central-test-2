@@ -20,31 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.blogs.model.impl;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portlet.blogs.model.BlogsCategory;
+import com.liferay.portal.upgrade.util.ValueMapper;
 
 /**
- * <a href="BlogsCategoryImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultParentIdMapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsCategoryImpl
-	extends BlogsCategoryModelImpl implements BlogsCategory {
+public class DefaultParentIdMapper implements ValueMapper {
 
-	public static final long DEFAULT_PARENT_CATEGORY_ID = 0;
-
-	public BlogsCategoryImpl() {
+	public DefaultParentIdMapper(ValueMapper valueMapper) {
+		_valueMapper = valueMapper;
 	}
 
-	public boolean isRoot() {
-		if (getParentCategoryId() == DEFAULT_PARENT_CATEGORY_ID) {
-			return true;
+	public Object getNewValue(Object oldValue) throws Exception {
+		if (oldValue.equals("-1") || oldValue.equals("0") ||
+			oldValue.equals("")) {
+
+			return new Long(0);
 		}
 		else {
-			return false;
+			return _valueMapper.getNewValue(oldValue);
 		}
 	}
+
+	public void mapValue(Object oldValue, Object newValue) throws Exception {
+		_valueMapper.mapValue(oldValue, newValue);
+	}
+
+	public void appendException(Object exception) {
+		_valueMapper.appendException(exception);
+	}
+
+	private ValueMapper _valueMapper;
 
 }

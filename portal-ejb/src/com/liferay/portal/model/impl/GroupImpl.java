@@ -48,9 +48,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GroupImpl extends GroupModelImpl implements Group {
 
-	public static final long DEFAULT_PARENT_GROUP_ID = -1;
+	public static final long DEFAULT_PARENT_GROUP_ID = 0;
 
-	public static final long DEFAULT_LIVE_GROUP_ID = -1;
+	public static final long DEFAULT_LIVE_GROUP_ID = 0;
 
 	public static final String GUEST = GroupNames.GUEST;
 

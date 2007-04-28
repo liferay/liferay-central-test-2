@@ -35,7 +35,7 @@ import com.liferay.util.Validator;
  */
 public class ContactImpl extends ContactModelImpl implements Contact {
 
-	public static final long DEFAULT_PARENT_CONTACT_ID = -1;
+	public static final long DEFAULT_PARENT_CONTACT_ID = 0;
 
 	public static String getFullName(
 		String firstName, String middleName, String lastName) {

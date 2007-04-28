@@ -32,7 +32,7 @@ import com.liferay.portal.model.Account;
  */
 public class AccountImpl extends AccountModelImpl implements Account {
 
-	public static final String DEFAULT_PARENT_ACCOUNT_ID = "-1";
+	public static final long DEFAULT_PARENT_ACCOUNT_ID = 0;
 
 	public AccountImpl() {
 	}
