@@ -1,7 +1,6 @@
 insert into Counter values ('com.liferay.counter.model.Counter', 2000);
 insert into Counter values ('com.liferay.portal.model.Organization', 1000);
 insert into Counter values ('com.liferay.portal.model.Role', 1000);
-insert into Counter values ('com.liferay.portal.model.User.liferay.com', 1000);
 insert into Counter values ('com.liferay.portlet.imagegallery.model.IGFolder', 1000);
 insert into Counter values ('com.liferay.portlet.imagegallery.model.IGImage.liferay.com', 1000);
 insert into Counter values ('com.liferay.portlet.polls.model.PollsQuestion', 1000);

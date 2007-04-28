@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.velocity.VelocityUtil;
 import com.liferay.util.FileUtil;
+import com.liferay.util.SimpleCounter;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.DataAccess;
 
@@ -39,6 +40,9 @@ import java.io.StringReader;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.hibernate.dialect.DB2Dialect;
 import org.hibernate.dialect.DerbyDialect;
@@ -340,7 +344,11 @@ public abstract class DBUtil {
 	}
 
 	protected String evaluateVM(String template) throws Exception {
-		template = VelocityUtil.evaluate(template);
+		Map variables = new HashMap();
+
+		variables.put("counter", new SimpleCounter());
+
+		template = VelocityUtil.evaluate(template, variables);
 
 		// Trim insert statements because it breaks MySQL Query Browser
 

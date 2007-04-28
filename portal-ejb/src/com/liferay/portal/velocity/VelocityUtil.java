@@ -22,7 +22,12 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.util.Validator;
+
 import java.io.StringWriter;
+
+import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
@@ -36,13 +41,34 @@ import org.apache.velocity.app.Velocity;
 public class VelocityUtil {
 
 	public static String evaluate(String input) throws Exception {
+		return evaluate(input, null);
+	}
+
+	public static String evaluate(String input, Map variables)
+		throws Exception {
+
 		Velocity.init();
 
-		VelocityContext context = new VelocityContext();
+		VelocityContext vc = new VelocityContext();
+
+		if (variables != null) {
+			Iterator itr = variables.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry entry = (Map.Entry)itr.next();
+
+				String key = (String)entry.getKey();
+				Object value = entry.getValue();
+
+				if (Validator.isNotNull(key)) {
+					vc.put(key, value);
+				}
+			}
+		}
 
 		StringWriter output = new StringWriter();
 
-		Velocity.evaluate(context, output, VelocityUtil.class.getName(), input);
+		Velocity.evaluate(vc, output, VelocityUtil.class.getName(), input);
 
 		return output.toString();
 	}
