@@ -381,7 +381,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br /><br />
 
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<table class="liferay-table" width="100%">
 		<tr>
 			<td valign="top" width="33%">
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
@@ -420,7 +420,6 @@ portletURL.setParameter("tabs1", tabs1);
 
 				</table>
 			</td>
-			<td style="padding-left: 5px;"></td>
 			<td valign="top" width="33%">
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
 				<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
@@ -458,7 +457,6 @@ portletURL.setParameter("tabs1", tabs1);
 
 				</table>
 			</td>
-			<td style="padding-left: 5px;"></td>
 			<td valign="top" width="33%">
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
 				<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">

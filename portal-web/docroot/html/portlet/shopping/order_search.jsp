@@ -30,24 +30,20 @@ OrderSearch searchContainer = (OrderSearch)request.getAttribute("liferay-ui:sear
 OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "id") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "status") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "first-name") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "last-name") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "email-address") %>
 	</td>
@@ -56,7 +52,6 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 	<td>
 		<input name="<portlet:namespace /><%= OrderDisplayTerms.ORDER_ID %>" size="20" type="text" value="<%= displayTerms.getOrderId() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<select name="<%= OrderDisplayTerms.STATUS %>">
 			<option value=""></option>
@@ -73,15 +68,12 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 
 		</select>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= OrderDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= OrderDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= OrderDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>">
 	</td>
@@ -90,7 +82,7 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= OrderDisplayTerms.AND_OPERATOR %>">
@@ -98,7 +90,6 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
 		</select>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>

@@ -35,7 +35,6 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 			<td>
 				%
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td colspan="6">
 				<%= LanguageUtil.get(pageContext, "votes") %>
 			</td>
@@ -76,7 +75,6 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 				<td>
 					<%= percentFormat.format(votesPercent) %>
 				</td>
-				<td></td>
 				<td colspan="<%= votesPercentWidth > 0 ? "1" : "3" %>">
 					<%= numberFormat.format(choiceVotes) %>
 				</td>

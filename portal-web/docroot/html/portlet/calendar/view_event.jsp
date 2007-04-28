@@ -178,12 +178,11 @@ if ((event.getRepeating()) && (recurrence != null)) {
 </liferay-util:include>
 
 <div class="vevent">
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "date-and-time") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<c:choose>
 				<c:when test="<%= event.isTimeZoneSensitive() %>">
@@ -199,7 +198,6 @@ if ((event.getRepeating()) && (recurrence != null)) {
 		<td>
 			<%= LanguageUtil.get(pageContext, "duration") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 
 			<%
@@ -249,7 +247,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br />
 		</td>
 	</tr>
@@ -257,18 +255,14 @@ if ((event.getRepeating()) && (recurrence != null)) {
 		<td>
 			<%= LanguageUtil.get(pageContext, "title") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
-			<span class="summary">
-				<%= event.getTitle() %>
-			</span>
+			<span class="summary"><%= event.getTitle() %></span>
 		</td>
 	</tr>
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "description") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= event.getDescription() %>
 		</td>
@@ -277,15 +271,12 @@ if ((event.getRepeating()) && (recurrence != null)) {
 		<td>
 			<%= LanguageUtil.get(pageContext, "type") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
-			<span class="categories">
-				<%= LanguageUtil.get(pageContext, event.getType()) %>
-			</span>
+			<span class="categories"><%= LanguageUtil.get(pageContext, event.getType()) %></span>
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br />
 		</td>
 	</tr>
@@ -295,7 +286,6 @@ if ((event.getRepeating()) && (recurrence != null)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "repeat-daily") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<c:if test="<%= (dailyType == 0) %>">
 					<%= dailyInterval %> <%= LanguageUtil.get(pageContext, "day-s") %>
@@ -313,7 +303,6 @@ if ((event.getRepeating()) && (recurrence != null)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "repeat-weekly") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<abbr class="rrule" title="FREQ=WEEKLY">
 					<%= LanguageUtil.get(pageContext, "recur-every") %> <%= dailyInterval %> <%= LanguageUtil.get(pageContext, "weeks-on") %>
@@ -335,7 +324,6 @@ if ((event.getRepeating()) && (recurrence != null)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "repeat-monthly") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<c:if test="<%= (monthlyType == 0) %>">
 					<%= LanguageUtil.get(pageContext, "day") %> <%= monthlyDay0 %> <%= LanguageUtil.get(pageContext, "of-every") %> <%= monthlyInterval0 %> <%= LanguageUtil.get(pageContext, "month-s") %>
@@ -371,7 +359,6 @@ if ((event.getRepeating()) && (recurrence != null)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "repeat-yearly") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<abbr class="rrule" title="FREQ=YEARLY">
 					<c:if test="<%= (yearlyType == 0) %>">
@@ -408,7 +395,6 @@ if ((event.getRepeating()) && (recurrence != null)) {
 		<td>
 			<%= LanguageUtil.get(pageContext, "end-date") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<c:if test="<%= (endDateType == 0) %>">
 				<%= LanguageUtil.get(pageContext, "none") %>

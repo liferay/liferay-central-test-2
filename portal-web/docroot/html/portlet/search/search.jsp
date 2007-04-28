@@ -88,7 +88,7 @@ if (Validator.isNotNull(primarySearch)) {
 
 <br /><br />
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<table class="liferay-table" width="100%">
 
 <%
 for (int i = 0; i < portlets.size(); i++) {
@@ -198,7 +198,6 @@ for (int i = 0; i < portlets.size(); i++) {
 				<td valign="top" width="70%">
 		</c:when>
 		<c:when test="<%= i == 1 %>">
-			<td style="padding-left: 10px;"></td>
 			<td valign="top" width="30%">
 		</c:when>
 	</c:choose>

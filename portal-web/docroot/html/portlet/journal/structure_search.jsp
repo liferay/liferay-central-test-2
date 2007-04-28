@@ -30,16 +30,14 @@ StructureSearch searchContainer = (StructureSearch)request.getAttribute("liferay
 StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "id") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
@@ -48,11 +46,9 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 	<td>
 		<input name="<portlet:namespace /><%= StructureDisplayTerms.STRUCTURE_ID %>" size="20" type="text" value="<%= displayTerms.getStructureId() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= StructureDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= StructureDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
 	</td>
@@ -61,7 +57,7 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= StructureDisplayTerms.AND_OPERATOR %>">
@@ -69,7 +65,6 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
 		</select>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>

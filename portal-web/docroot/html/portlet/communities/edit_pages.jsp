@@ -365,7 +365,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 		</c:otherwise>
 	</c:choose>
 
-	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<table class="liferay-table" width="100%">
 	<tr>
 		<td valign="top">
 			<div id="<%= renderResponse.getNamespace() %>tree-output"></div>
@@ -389,7 +389,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 				);
 			</script>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td valign="top" width="75%">
 
 			<%

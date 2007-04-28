@@ -325,12 +325,11 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <liferay-ui:error exception="<%= EventStartDateException.class %>" message="please-enter-a-valid-start-date" />
 <liferay-ui:error exception="<%= EventTitleException.class %>" message="please-enter-a-valid-title" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "start-date") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= CalEvent.class %>" bean="<%= event %>" field="startDate" defaultValue="<%= startDate %>" />
 	</td>
@@ -339,7 +338,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<td>
 		<%= LanguageUtil.get(pageContext, "duration") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />durationHour">
 			<option <%= (durationHour.equals("0")) ? "selected" : "" %> value="0">0</option>
@@ -388,7 +386,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<td>
 		<%= LanguageUtil.get(pageContext, "all-day-event") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="allDay" defaultValue="<%= event == null ? false : event.isAllDay() %>" />
 	</td>
@@ -397,13 +394,12 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<td>
 		<%= LanguageUtil.get(pageContext, "time-zone-sensitive") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="timeZoneSensitive" defaultValue="<%= event == null ? true : event.isTimeZoneSensitive() %>" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -411,7 +407,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<td>
 		<%= LanguageUtil.get(pageContext, "title") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= CalEvent.class %>" field="title" defaultValue="<%= event == null ? LanguageUtil.get(pageContext, "new-event") : event.getTitle() %>" />
 	</td>
@@ -420,7 +415,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= CalEvent.class %>" bean="<%= event %>" field="description" />
 	</td>
@@ -429,7 +423,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />type">
 
@@ -449,7 +442,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <c:if test="<%= event == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br />
 		</td>
 	</tr>
@@ -457,7 +450,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= CalEvent.class.getName() %>"
@@ -480,7 +472,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <liferay-ui:error exception="<%= EventEndDateException.class %>" message="please-enter-a-valid-end-date" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<input <%= (recurrenceType == Recurrence.NO_RECURRENCE) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.NO_RECURRENCE %>" onClick="<portlet:namespace />showTable('<portlet:namespace />neverTable');"> <%= LanguageUtil.get(pageContext, "never") %><br />
@@ -489,7 +481,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		<input <%= (recurrenceType == Recurrence.MONTHLY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.MONTHLY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />monthlyTable');"> <%= LanguageUtil.get(pageContext, "monthly") %><br />
 		<input <%= (recurrenceType == Recurrence.YEARLY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.YEARLY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />yearlyTable');"> <%= LanguageUtil.get(pageContext, "yearly") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td valign="top">
 		<div id="<portlet:namespace />neverTable" style="display: none;">
 			<table border="0" cellpadding="0" cellspacing="0">
@@ -513,25 +504,22 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		</div>
 
 		<div id="<portlet:namespace />weeklyTable" style="display: none;">
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "recur-every") %> <input maxlength="2" name="<portlet:namespace />weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>"> <%= LanguageUtil.get(pageContext, "weeks-on") %>
 
-					<table border="0" cellpadding="0" cellspacing="0">
+					<table class="liferay-table">
 					<tr>
 						<td nowrap>
 							<input <%= weeklyPosSu ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.SUNDAY %>" type="checkbox"> <%= days[0] %>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td nowrap>
 							<input <%= weeklyPosMo ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.MONDAY %>" type="checkbox"> <%= days[1] %>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td nowrap>
 							<input <%= weeklyPosTu ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.TUESDAY %>" type="checkbox"> <%= days[2] %>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td nowrap>
 							<input <%= weeklyPosWe ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.WEDNESDAY %>" type="checkbox"> <%= days[3] %>
 						</td>
@@ -540,12 +528,10 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 						<td nowrap>
 							<input <%= weeklyPosTh ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.THURSDAY %>" type="checkbox"> <%= days[4] %>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td nowrap>
 							<input <%= weeklyPosFr ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.FRIDAY %>" type="checkbox"> <%= days[5] %>
 						</td>
-						<td style="padding-left: 10px;"></td>
-						<td colspan="3" nowrap>
+						<td colspan="2" nowrap>
 							<input <%= weeklyPosSa ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.SATURDAY %>" type="checkbox"> <%= days[6] %>
 						</td>
 					</tr>
@@ -556,7 +542,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		</div>
 
 		<div id="<portlet:namespace />monthlyTable" style="display: none;">
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td nowrap>
 					<input <%= (monthlyType == 0) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="0"> <%= LanguageUtil.get(pageContext, "day") %> <input maxlength="2" name="<portlet:namespace />monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>"> <%= LanguageUtil.get(pageContext, "of-every") %> <input maxlength="2" name="<portlet:namespace />monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>"> <%= LanguageUtil.get(pageContext, "month-s") %><br />
@@ -592,7 +578,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		</div>
 
 		<div id="<portlet:namespace />yearlyTable" style="display: none;">
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td nowrap>
 					<input <%= (yearlyType == 0) ? "checked" : "" %> name="<portlet:namespace />yearlyType" type="radio" value="0"> <%= LanguageUtil.get(pageContext, "every") %>
@@ -659,7 +645,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -667,9 +653,8 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<td>
 		<%= LanguageUtil.get(pageContext, "end-date") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td valign="top">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<input <%= (endDateType == 0) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="0"> <%= LanguageUtil.get(pageContext, "no-end-date") %><br />

@@ -30,20 +30,17 @@ ArticleSearch searchContainer = (ArticleSearch)request.getAttribute("liferay-ui:
 ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "id") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "version") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
@@ -52,15 +49,12 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	<td>
 		<input name="<portlet:namespace /><%= ArticleDisplayTerms.ARTICLE_ID %>" size="20" type="text" value="<%= displayTerms.getArticleId() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= ArticleDisplayTerms.VERSION %>" size="20" type="text" value="<%= displayTerms.getVersionString() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= ArticleDisplayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= ArticleDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
 	</td>
@@ -69,12 +63,10 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	<td>
 		<%= LanguageUtil.get(pageContext, "content") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
-	<td colspan="3">
+	<td colspan="2">
 		<c:choose>
 			<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
 				<%= LanguageUtil.get(pageContext, "status") %>
@@ -89,7 +81,6 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	<td>
 		<input name="<portlet:namespace /><%= ArticleDisplayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<select name="<portlet:namespace /><%= ArticleDisplayTerms.TYPE %>">
 			<option value=""></option>
@@ -106,8 +97,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 
 		</select>
 	</td>
-	<td style="padding-left: 5px;"></td>
-	<td colspan="3">
+	<td colspan="2">
 		<c:choose>
 			<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
 				<select name="<portlet:namespace /><%= ArticleDisplayTerms.STATUS %>">
@@ -146,7 +136,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= ArticleDisplayTerms.AND_OPERATOR %>">
@@ -154,7 +144,6 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
 		</select>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>

@@ -30,16 +30,14 @@ TaskSearch searchContainer = (TaskSearch)request.getAttribute("liferay-ui:search
 TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "task-name") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "definition-name") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "assigned-to") %>
 	</td>
@@ -48,11 +46,9 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 	<td>
 		<input name="<portlet:namespace /><%= TaskDisplayTerms.TASK_NAME %>" size="20" type="text" value="<%= displayTerms.getTaskName() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= TaskDisplayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<select name="<portlet:namespace /><%= TaskDisplayTerms.ASSIGNED_TO %>">
 			<option <%= displayTerms.getAssignedTo().equals("all") ? "selected" : "" %> value="all"><%= LanguageUtil.get(pageContext, "all") %></option>
@@ -63,7 +59,7 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 </table>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "create-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
@@ -112,7 +108,7 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= TaskDisplayTerms.AND_OPERATOR %>">
@@ -120,7 +116,6 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
 		</select>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>

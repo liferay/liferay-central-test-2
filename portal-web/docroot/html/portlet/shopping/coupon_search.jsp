@@ -30,16 +30,14 @@ CouponSearch searchContainer = (CouponSearch)request.getAttribute("liferay-ui:se
 CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "id") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "discount-type") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "active") %>
 	</td>
@@ -48,7 +46,6 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 	<td>
 		<input name="<portlet:namespace /><%= CouponDisplayTerms.COUPON_ID %>" size="20" type="text" value="<%= displayTerms.getCouponId() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<select name="<%= CouponDisplayTerms.DISCOUNT_TYPE %>">
 			<option value=""></option>
@@ -65,7 +62,6 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 
 		</select>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<select name="<portlet:namespace /><%= CouponDisplayTerms.ACTIVE %>">
 			<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
@@ -77,7 +73,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= CouponDisplayTerms.AND_OPERATOR %>">
@@ -85,7 +81,6 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
 		</select>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>

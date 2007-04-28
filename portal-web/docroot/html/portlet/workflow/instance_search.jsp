@@ -30,20 +30,17 @@ InstanceSearch searchContainer = (InstanceSearch)request.getAttribute("liferay-u
 InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<%--<td>
 		<%= LanguageUtil.get(pageContext, "instance-id") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "definition-id") %>
-	</td>
-	<td style="padding-left: 5px;"></td>--%>
+	</td>--%>
 	<td>
 		<%= LanguageUtil.get(pageContext, "definition-name") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "definition-version") %>
 	</td>
@@ -52,22 +49,19 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 	<%--<td>
 		<input name="<portlet:namespace /><%= InstanceDisplayTerms.INSTANCE_ID %>" size="20" type="text" value="<%= displayTerms.getInstanceIdString() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>">
-	</td>
-	<td style="padding-left: 5px;"></td>--%>
+	</td>--%>
 	<td>
 		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_VERSION %>" size="20" type="text" value="<%= displayTerms.getDefinitionVersion() %>">
 	</td>
 </tr>
 </table>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "start-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
@@ -102,7 +96,7 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= InstanceDisplayTerms.AND_OPERATOR %>">
@@ -110,7 +104,6 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
 		</select>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>

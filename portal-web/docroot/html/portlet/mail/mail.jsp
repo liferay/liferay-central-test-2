@@ -460,16 +460,14 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				<form method="post" name="<portlet:namespace />search" onSubmit='loadForm(document.<portlet:namespace />search, themeDisplay.getPathMain() + "/mail/action?sortBy=" + Mail.sortBy.value + "&asc=" + Mail.sortBy.asc, null, Mail.getSearchReturn); return false;'>
 				<input name="<%= Constants.CMD %>" type="hidden" value="getSearch" />
 
-				<table border="0" cellpadding="0" cellspacing="0" id="portlet-mail-toolbar-search">
+				<table class="liferay-table" id="portlet-mail-toolbar-search">
 				<tr>
 					<td>
 						<input class="font-small" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
 					</td>
-					<td style="padding-left: 5px;"></td>
 					<td>
 						<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="Search" type="image">
 					</td>
-					<td style="padding-left: 5px;"></td>
 					<td style="cursor: pointer; font-size: xx-small; text-align: right;">
 						<span onClick="showAdvancedSearch();"><%= LanguageUtil.get(pageContext, "more") %></span>
 					</td>
@@ -499,20 +497,17 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 		<input name="<%= Constants.CMD %>" type="hidden" value="getSearch" />
 
 		<div id="portlet-mail-toolbar-advanced-search" style="display: none;" width="100%">
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "from") %>
 				</td>
-				<td style="padding-left: 5px;"></td>
 				<td>
 					<%= LanguageUtil.get(pageContext, "to") %>
 				</td>
-				<td style="padding-left: 5px;"></td>
 				<td>
 					<%= LanguageUtil.get(pageContext, "subject") %>
 				</td>
-				<td style="padding-left: 5px;"></td>
 				<td>
 					<%= LanguageUtil.get(pageContext, "entire-message") %>
 				</td>
@@ -521,32 +516,25 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				<td>
 					<input name="<%= MailDisplayTerms.FROM %>" size="20" type="text">
 				</td>
-				<td style="padding-left: 5px;"></td>
 				<td>
 					<input name="<%= MailDisplayTerms.TO %>" size="20" type="text">
 				</td>
-				<td style="padding-left: 5px;"></td>
 				<td>
 					<input name="<%= MailDisplayTerms.SUBJECT %>" size="20" type="text">
 				</td>
-				<td style="padding-left: 5px;"></td>
 				<td>
 					<input name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
 				</td>
 			</tr>
 			</table>
 
-			<table border="0" cellpadding="0" cellspacing="0" id="portlet-mail-toolbar-advanced-search-dates">
-			<tr>
-				<td colspan="5">
-					<br />
-				</td>
-			</tr>
+			<br />
+
+			<table class="liferay-table" id="portlet-mail-toolbar-advanced-search-dates">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "within") %>
 				</td>
-				<td style="padding-left: 5px;"></td>
 				<td>
 					<select name="dateRange" onchange="changeRange(this.value)">
 						<%
@@ -560,7 +548,6 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 						%>
 					</select>
 				</td>
-				<td style="padding-left: 5px;"></td>
 				<td>
 					<div id="portlet-mail-toolbar-advanced-search-dates-input">
 						<%= LanguageUtil.get(pageContext, "of") %>
@@ -592,7 +579,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 
 			<br />
 
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<select name="<%= MailDisplayTerms.AND_OPERATOR %>">
@@ -600,11 +587,9 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 						<option value="false"><%= LanguageUtil.get(pageContext, "or") %></option>
 					</select>
 				</td>
-				<td style="padding-left: 5px;"></td>
 				<td>
 					<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 				</td>
-				<td style="padding-left: 5px;"></td>
 				<td>
 					<input type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="hideAdvancedSearch();">
 				</td>

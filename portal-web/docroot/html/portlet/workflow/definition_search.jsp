@@ -30,12 +30,11 @@ DefinitionSearch searchContainer = (DefinitionSearch)request.getAttribute("lifer
 DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<%--<td>
 		<%= LanguageUtil.get(pageContext, "definition-id") %>
-	</td>
-	<td style="padding-left: 5px;"></td>--%>
+	</td>--%>
 	<td>
 		<%= LanguageUtil.get(pageContext, "definition-name") %>
 	</td>
@@ -43,8 +42,7 @@ DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.ge
 <tr>
 	<%--<td>
 		<input name="<portlet:namespace /><%= DefinitionDisplayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>">
-	</td>
-	<td style="padding-left: 5px;"></td>--%>
+	</td>--%>
 	<td>
 		<input name="<portlet:namespace /><%= DefinitionDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
 	</td>
@@ -53,7 +51,7 @@ DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.ge
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= DefinitionDisplayTerms.AND_OPERATOR %>">
@@ -61,7 +59,6 @@ DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.ge
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
 		</select>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>

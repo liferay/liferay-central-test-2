@@ -30,16 +30,14 @@ UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search
 UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "first-name") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "middle-name") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "last-name") %>
 	</td>
@@ -48,11 +46,9 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	<td>
 		<input name="<portlet:namespace /><%= UserDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= UserDisplayTerms.MIDDLE_NAME %>" size="20" type="text" value="<%= displayTerms.getMiddleName() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= UserDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>">
 	</td>
@@ -61,20 +57,18 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	<td>
 		<%= LanguageUtil.get(pageContext, "screen-name") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "email-address") %>
 	</td>
 
 	<c:choose>
 		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-			<td style="padding-left: 5px;"></td>
 			<td>
 				<%= LanguageUtil.get(pageContext, "active") %>
 			</td>
 		</c:when>
 		<c:otherwise>
-			<td colspan="2"></td>
+			<td></td>
 		</c:otherwise>
 	</c:choose>
 </tr>
@@ -82,14 +76,12 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	<td>
 		<input name="<portlet:namespace /><%= UserDisplayTerms.SCREEN_NAME %>" size="20" type="text" value="<%= displayTerms.getScreenName() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input name="<portlet:namespace /><%= UserDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>">
 	</td>
 
 	<c:choose>
 		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-			<td style="padding-left: 5px;"></td>
 			<td>
 				<select name="<portlet:namespace /><%= UserDisplayTerms.ACTIVE %>">
 					<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
@@ -98,7 +90,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 			</td>
 		</c:when>
 		<c:otherwise>
-			<td colspan="2"></td>
+			<td></td>
 		</c:otherwise>
 	</c:choose>
 </tr>
@@ -106,7 +98,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= UserDisplayTerms.AND_OPERATOR %>">
@@ -114,7 +106,6 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
 		</select>
 	</td>
-	<td style="padding-left: 5px;"></td>
 	<td>
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>

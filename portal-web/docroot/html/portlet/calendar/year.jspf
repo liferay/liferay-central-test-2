@@ -28,17 +28,16 @@
 	}
 </script>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= selMonth %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear - 1 %>&<portlet:namespace />eventType=<%= eventType %>">
 				<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_left.png">
 				</a>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select onChange="self.location = '<%= portletURL.toString() %>&<portlet:namespace />year=' + this.value;">
 
@@ -54,7 +53,6 @@
 
 				</select>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= selMonth %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear + 1 %>&<portlet:namespace />eventType=<%= eventType %>">
 				<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_right.png">

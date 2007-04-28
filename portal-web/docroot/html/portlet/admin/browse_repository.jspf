@@ -35,26 +35,23 @@ if (Validator.isNull(installStatus)) {
 try {
 %>
 
-<div class="breadcrumbs">
-	<%= breadcrumbs.toString() %>
-</div>
+	<div class="breadcrumbs">
+		<%= breadcrumbs.toString() %>
+	</div>
 
-<input type="hidden" name="<portlet:namespace/>pluginType" value="<%=pluginType%>">
+	<input type="hidden" name="<portlet:namespace/>pluginType" value="<%=pluginType%>">
 
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "keywords") %>
 		</td>
-		<td style="padding-left: 5px;"></td>
 		<td>
 			<%= LanguageUtil.get(pageContext, "tag") %>
 		</td>
-		<td style="padding-left: 5px;"></td>
 		<td>
 			<%= LanguageUtil.get(pageContext, "repository") %>
 		</td>
-		<td style="padding-left: 5px;"></td>
 		<td>
 			<%= LanguageUtil.get(pageContext, "install-status") %>
 		</td>
@@ -63,7 +60,6 @@ try {
 		<td>
 			<input name="<portlet:namespace />keywords" size="20" type="text" value="<%= keywords %>">
 		</td>
-		<td style="padding-left: 5px;"></td>
 		<td>
 			<select name="<portlet:namespace/>tag">
 				<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
@@ -83,7 +79,6 @@ try {
 
 			</select>
 		</td>
-		<td style="padding-left: 5px;"></td>
 		<td>
 			<select name="<portlet:namespace/>repositoryURL">
 				<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
@@ -103,7 +98,6 @@ try {
 
 			</select>
 		</td>
-		<td style="padding-left: 5px;"></td>
 		<td>
 			<select name="<portlet:namespace/>installStatus">
 				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED%>"><%= LanguageUtil.get(pageContext, "not-installed-or-older-version-installed") %></option>
