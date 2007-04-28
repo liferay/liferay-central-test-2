@@ -88,7 +88,7 @@ decimalFormat.setMinimumFractionDigits(2);
 
 </select>
 
-<br><br>
+<br /><br />
 
 <c:choose>
 	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
@@ -104,7 +104,7 @@ decimalFormat.setMinimumFractionDigits(2);
 			%>
 
 				<td valign="top">
-					<%= LanguageUtil.get(pageContext, "currency." + symbol) %><br>
+					<%= LanguageUtil.get(pageContext, "currency." + symbol) %><br />
 					(<%= symbol %>)
 				</td>
 
@@ -158,15 +158,15 @@ decimalFormat.setMinimumFractionDigits(2);
 		<table border="1" cellpadding="0" cellspacing="0" width="520">
 		<tr>
 			<td align="center" width="33%">
-				<%= currency.getFromSymbol() %><br>
+				<%= currency.getFromSymbol() %><br />
 				<b><%= number %></b>
 			</td>
 			<td align="center" width="33%">
-				<%= currency.getToSymbol() %><br>
+				<%= currency.getToSymbol() %><br />
 				<b><%= decimalFormat.format(number * currency.getRate()) %></b>
 			</td>
 			<td align="center" width="34%">
-				<%= LanguageUtil.get(pageContext, "historical-charts") %><br>
+				<%= LanguageUtil.get(pageContext, "historical-charts") %><br />
 
 				<%
 				PortletURL portletURL = renderResponse.createRenderURL();
@@ -192,7 +192,7 @@ decimalFormat.setMinimumFractionDigits(2);
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<table border="1" cellpadding="2" cellspacing="0">
 		<tr>

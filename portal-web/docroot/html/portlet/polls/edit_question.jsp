@@ -113,7 +113,7 @@ if (choiceId > 0) {
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -137,7 +137,7 @@ if (choiceId > 0) {
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -214,7 +214,7 @@ if (choiceId > 0) {
 <c:if test="<%= question == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -231,7 +231,7 @@ if (choiceId > 0) {
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

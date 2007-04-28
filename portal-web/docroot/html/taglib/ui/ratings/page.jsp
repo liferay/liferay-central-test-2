@@ -64,7 +64,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 	<td style="padding-left: 30px;"></td>
 	<td>
 		<div style="font-size: xx-small; padding-bottom: 2px;">
-			<%= LanguageUtil.get(pageContext, "average") %> (<span id="<%= randomNamespace %>totalEntries"><%= stats.getTotalEntries() %></span> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)<br>
+			<%= LanguageUtil.get(pageContext, "average") %> (<span id="<%= randomNamespace %>totalEntries"><%= stats.getTotalEntries() %></span> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)<br />
 		</div>
 
 		<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= stats.getAverageScore() %> Stars')">

@@ -106,7 +106,7 @@ portletURL.setParameter("categoryId", categoryId);
 			sm.append("</b>");
 
 			if (Validator.isNotNull(curCategory.getDescription())) {
-				sm.append("<br>");
+				sm.append("<br />");
 				sm.append("<span style=\"font-size: xx-small;\">");
 				sm.append(curCategory.getDescription());
 				sm.append("</span>");
@@ -117,7 +117,7 @@ portletURL.setParameter("categoryId", categoryId);
 			List subcategories = MBCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), curCategory.getCategoryId(), 0, 5);
 
 			if (subcategories.size() > 0) {
-				sm.append("<br>");
+				sm.append("<br />");
 				sm.append("<span style=\"font-size: xx-small; font-weight: bold;\"><u>");
 				sm.append(LanguageUtil.get(pageContext, "subcategories"));
 				sm.append("</u>: ");
@@ -194,7 +194,7 @@ portletURL.setParameter("categoryId", categoryId);
 			</table>
 
 			<c:if test="<%= results.size() > 0 %>">
-				<br>
+				<br />
 			</c:if>
 		</c:if>
 
@@ -203,7 +203,7 @@ portletURL.setParameter("categoryId", categoryId);
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 		<c:if test="<%= (category != null) && (showAddCategoryButton || (results.size() > 0)) %>">
-			<br>
+			<br />
 		</c:if>
 
 		</form>
@@ -312,7 +312,7 @@ portletURL.setParameter("categoryId", categoryId);
 					try {
 						User user2 = UserLocalServiceUtil.getUserById(thread.getLastPostByUserId());
 
-						sm.append("<br>");
+						sm.append("<br />");
 						sm.append(LanguageUtil.get(pageContext, "by"));
 						sm.append(": ");
 						sm.append(user2.getFullName());
@@ -358,7 +358,7 @@ portletURL.setParameter("categoryId", categoryId);
 				</table>
 
 				<c:if test="<%= results.size() > 0 %>">
-					<br>
+					<br />
 				</c:if>
 			</c:if>
 
@@ -477,7 +477,7 @@ portletURL.setParameter("categoryId", categoryId);
 				try {
 					User user2 = UserLocalServiceUtil.getUserById(thread.getLastPostByUserId());
 
-					sm.append("<br>");
+					sm.append("<br />");
 					sm.append(LanguageUtil.get(pageContext, "by"));
 					sm.append(": ");
 					sm.append(user2.getFullName());
@@ -513,8 +513,8 @@ portletURL.setParameter("categoryId", categoryId);
 
 		<c:choose>
 			<c:when test='<%= tabs2.equals("general") %>'>
-				<%= LanguageUtil.get(pageContext, "num-of-categories") %>: <%= numberFormat.format(MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue())) %><br>
-				<%= LanguageUtil.get(pageContext, "num-of-posts") %>: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(portletGroupId.longValue())) %><br>
+				<%= LanguageUtil.get(pageContext, "num-of-categories") %>: <%= numberFormat.format(MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue())) %><br />
+				<%= LanguageUtil.get(pageContext, "num-of-posts") %>: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(portletGroupId.longValue())) %><br />
 				<%= LanguageUtil.get(pageContext, "num-of-participants") %>: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId.longValue())) %>
 			</c:when>
 			<c:when test='<%= tabs2.equals("top-posters") %>'>

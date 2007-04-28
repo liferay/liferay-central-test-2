@@ -61,7 +61,7 @@ String jPassword = (String)session.getAttribute("j_password");
 
 				<font face="Verdana, Tahoma, Arial" size="3">
 				<b><%= LanguageUtil.get(pageContext, "processing-login") %>
-				</font><br><br>
+				</font><br /><br />
 
 				<script type="text/javascript">
 				var progressBar = createBar(300, 15, "#FFFFFF", 1, "#000000", "<%= colorScheme.getPortletTitleBg() %>", 85, 7, 3, "");

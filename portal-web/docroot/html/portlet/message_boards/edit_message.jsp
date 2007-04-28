@@ -133,7 +133,7 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 	message = temp;
 	%>
 
-	<br>
+	<br />
 </c:if>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveMessage(); return false;">
@@ -201,7 +201,7 @@ if (message != null) {
 	</tr>
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 </c:if>
@@ -216,7 +216,7 @@ if (message != null) {
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -233,7 +233,7 @@ if (message != null) {
 <c:if test="<%= attachments %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 
@@ -259,7 +259,7 @@ if (message != null) {
 <c:if test="<%= message == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -275,7 +275,7 @@ if (message != null) {
 <c:if test="<%= (priorities.length > 0) && MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.UPDATE_THREAD_PRIORITY) %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -330,7 +330,7 @@ if (message != null) {
 
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -358,7 +358,7 @@ if (message != null) {
 <c:if test="<%= message == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -375,7 +375,7 @@ if (message != null) {
 
 </table>
 
-<br>
+<br />
 
 <c:if test="<%= message == null %>">
 	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
@@ -396,7 +396,7 @@ if (message != null) {
 <input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 <c:if test="<%= curParentMessage != null %>">
-	<br><br>
+	<br /><br />
 
 	<%= LanguageUtil.get(pageContext, "replying-to") %>:
 

@@ -70,7 +70,7 @@ if (wikiPage != null) {
 }
 %>
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tabs names="<%= tabsNames %>" />
 

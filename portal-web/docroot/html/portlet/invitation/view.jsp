@@ -38,7 +38,7 @@
 
 		<%= LanguageUtil.format(pageContext, "enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite", String.valueOf(InvitationUtil.getEmailMessageMaxRecipients())) %>
 
-		<br><br>
+		<br /><br />
 
 		<%
 		Set invalidEmailAddresses = (Set)SessionErrors.get(renderRequest, "emailAddresses");
@@ -57,13 +57,13 @@
 
 			<input name="<portlet:namespace />emailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
 
-			<br>
+			<br />
 
 		<%
 		}
 		%>
 
-		<br>
+		<br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "invite-friends") %>' onClick="submitForm(document.<portlet:namespace />fm);">
 

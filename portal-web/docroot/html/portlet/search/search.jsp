@@ -46,7 +46,7 @@ else {
 
 <input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
 
-<br><br>
+<br /><br />
 
 <%
 List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
@@ -86,7 +86,7 @@ if (Validator.isNotNull(primarySearch)) {
 
 <input type="button" value="Add Liferay as a Search Provider" onClick='window.external.AddSearchProvider("http://localhost:8080/c/search/open_search_description.xml");'>
 
-<br><br>
+<br /><br />
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 
@@ -166,7 +166,7 @@ for (int i = 0; i < portlets.size(); i++) {
 			sm.append(">");
 			sm.append("<span style=\"font-size: x-small; font-style: italic;\">");
 			sm.append(entryTitle);
-			sm.append("</span><br>");
+			sm.append("</span><br />");
 			sm.append(summary);
 			sm.append("</a>");
 
@@ -204,7 +204,7 @@ for (int i = 0; i < portlets.size(); i++) {
 	</c:choose>
 
 	<c:if test="<%= i > 1 %>">
-		<br>
+		<br />
 	</c:if>
 
 	<div style="border: 1px solid <%= colorScheme.getPortletMenuBg() %>; font-size: x-small; font-weight: bold; margin-bottom: 1px; padding: 3px 5px;">

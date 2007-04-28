@@ -51,10 +51,10 @@ while (itr.hasNext()) {
 		</td>
 		<td>
 			<span style="font-size: xx-small;">
-			<%= LanguageUtil.get(pageContext, "title") %>: <%= StringUtil.shorten(amazonRankings.getProductName(), _DESCRIPTION_LENGTH) %><br>
-			<%= LanguageUtil.get(pageContext, "author") %>: <%= StringUtil.shorten(StringUtil.merge(amazonRankings.getAuthors(), ", "), _DESCRIPTION_LENGTH) %><br>
-			<%= LanguageUtil.get(pageContext, "publisher") %>: <%= StringUtil.shorten(amazonRankings.getManufacturer() + "; (" + amazonRankings.getReleaseDateAsString() + ")", _DESCRIPTION_LENGTH) %><br>
-			<%= LanguageUtil.get(pageContext, "isbn") %>: <%= amazonRankings.getISBN() %><br>
+			<%= LanguageUtil.get(pageContext, "title") %>: <%= StringUtil.shorten(amazonRankings.getProductName(), _DESCRIPTION_LENGTH) %><br />
+			<%= LanguageUtil.get(pageContext, "author") %>: <%= StringUtil.shorten(StringUtil.merge(amazonRankings.getAuthors(), ", "), _DESCRIPTION_LENGTH) %><br />
+			<%= LanguageUtil.get(pageContext, "publisher") %>: <%= StringUtil.shorten(amazonRankings.getManufacturer() + "; (" + amazonRankings.getReleaseDateAsString() + ")", _DESCRIPTION_LENGTH) %><br />
+			<%= LanguageUtil.get(pageContext, "isbn") %>: <%= amazonRankings.getISBN() %><br />
 			<%= LanguageUtil.get(pageContext, "rank") %>: <%= numberFormat.format(amazonRankings.getSalesRank()) %>
 			</span>
 		</td>
@@ -63,7 +63,7 @@ while (itr.hasNext()) {
 	<c:if test="<%= itr.hasNext() %>">
 		<tr>
 			<td>
-				<br>
+				<br />
 			</td>
 		</tr>
 	</c:if>

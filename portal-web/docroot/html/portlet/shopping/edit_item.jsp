@@ -195,7 +195,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	</tr>
 	<tr>
 		<td colspan="3">
-			<br>
+			<br />
 		</td>
 	</tr>
 </c:if>
@@ -211,7 +211,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -243,7 +243,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -281,7 +281,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 <c:if test="<%= item == null %>">
 	<tr>
 		<td colspan="3">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -299,13 +299,13 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tabs names="fields" />
 
@@ -313,7 +313,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 <%= LanguageUtil.get(pageContext, "fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user") %>
 
-<br><br>
+<br /><br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 
@@ -390,7 +390,7 @@ for (int i = 0; i < fieldsCount; i++) {
 </table>
 
 <c:if test="<%= fieldsCount > 0 %>">
-	<br>
+	<br />
 </c:if>
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "add-field") %>' onClick="<portlet:namespace />addField();">
@@ -399,7 +399,7 @@ for (int i = 0; i < fieldsCount; i++) {
 	<input type="button" value='<%= LanguageUtil.get(pageContext, "edit-stock-quantity") %>' onClick="<portlet:namespace />editItemQuantities();">
 </c:if>
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tabs names="prices" />
 
@@ -600,7 +600,7 @@ for (int i = 0; i < pricesCount; i++) {
 			</table>
 
 			<c:if test="<%= (i + 1) < pricesCount %>">
-				<br>
+				<br />
 			</c:if>
 		</td>
 	</tr>
@@ -611,11 +611,11 @@ for (int i = 0; i < pricesCount; i++) {
 
 </table>
 
-<br>
+<br />
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "add-price") %>' onClick="<portlet:namespace />addPrice();">
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tabs names="images" />
 
@@ -682,7 +682,7 @@ for (int i = 0; i < pricesCount; i++) {
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -714,7 +714,7 @@ for (int i = 0; i < pricesCount; i++) {
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>

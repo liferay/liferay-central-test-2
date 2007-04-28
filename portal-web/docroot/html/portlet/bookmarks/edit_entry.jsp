@@ -86,7 +86,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	</tr>
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 </c:if>
@@ -129,7 +129,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -157,7 +157,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 <c:if test="<%= entry == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -174,7 +174,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

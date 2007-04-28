@@ -35,7 +35,7 @@ content = ParamUtil.getString(request, "content", content);
 
 <textarea name="<portlet:namespace />content" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= content %></textarea>
 
-<br><br>
+<br /><br />
 
 <input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 

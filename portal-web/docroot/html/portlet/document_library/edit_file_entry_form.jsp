@@ -109,7 +109,7 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 <c:if test='<%= !fileMaxSize.equals("0") %>'>
 	<%= LanguageUtil.format(pageContext, "upload-documents-no-larger-than-x-k", fileMaxSize, false) %>
 
-	<br><br>
+	<br /><br />
 </c:if>
 
 <table border="0" cellpadding="0" cellspacing="0">
@@ -135,7 +135,7 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 	</tr>
 	<tr>
 		<td colspan="3">
-			<br>
+			<br />
 		</td>
 	</tr>
 </c:if>
@@ -169,7 +169,7 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -212,7 +212,7 @@ if (fileEntry == null) {
 <c:if test="<%= fileEntry == null %>">
 	<tr>
 		<td colspan="3">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -230,7 +230,7 @@ if (fileEntry == null) {
 
 </table>
 
-<br>
+<br />
 
 <input <%= isLocked.booleanValue() && !hasLock.booleanValue() ? "disabled" : "" %> type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

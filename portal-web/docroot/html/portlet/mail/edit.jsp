@@ -80,7 +80,7 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("recipients") %>'>
 		<%= LanguageUtil.get(pageContext, "find-potential-recipients-from-the-following") %>
 
-		<br><br>
+		<br /><br />
 
 		<%
 		List recipientFinders = RecipientFinderLocator.getInstances();
@@ -150,7 +150,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			</table>
 
-			<br><br>
+			<br /><br />
 
 		<%
 			}
@@ -161,7 +161,7 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("filters") %>'>
 		<%= LanguageUtil.get(pageContext, "set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder") %>
 
-		<br><br>
+		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
@@ -207,7 +207,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		</table>
 
-		<br>
+		<br />
 	</c:when>
 	<c:when test='<%= tabs1.equals("forward-address") %>'>
 
@@ -218,11 +218,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<%= LanguageUtil.get(pageContext, "all-email-will-be-forwarded-to-the-email-addresses-below") %> <%= LanguageUtil.get(pageContext, "enter-one-email-address-per-line") %> <%= LanguageUtil.get(pageContext, "remove-all-entries-to-disable-email-forwarding") %>
 
-		<br><br>
+		<br /><br />
 
 		<textarea name="<portlet:namespace />forwardAddress" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= forwardAddress %></textarea>
 
-		<br><br>
+		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
@@ -235,7 +235,7 @@ portletURL.setParameter("tabs1", tabs1);
 		</tr>
 		</table>
 
-		<br>
+		<br />
 	</c:when>
 	<c:when test='<%= tabs1.equals("signature") || tabs1.equals("vacation-message") %>'>
 		<c:choose>
@@ -247,13 +247,13 @@ portletURL.setParameter("tabs1", tabs1);
 			</c:otherwise>
 		</c:choose>
 
-		<br><br>
+		<br /><br />
 
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
 		<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="">
 
-		<br><br>
+		<br /><br />
 	</c:when>
 </c:choose>
 

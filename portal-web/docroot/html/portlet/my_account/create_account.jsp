@@ -148,7 +148,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

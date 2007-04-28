@@ -50,7 +50,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 <%= LanguageUtil.get(pageContext, "search") %>
 </a>
 
-<br><br>
+<br /><br />
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -130,7 +130,7 @@ for (int i = 0; i < results.getLength(); i++) {
 </tr>
 </table>
 
-<br>
+<br />
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 

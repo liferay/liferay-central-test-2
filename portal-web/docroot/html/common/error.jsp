@@ -50,7 +50,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
 
 <center>
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0" width="95%">
 <tr>
@@ -66,7 +66,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
 			</c:otherwise>
 		</c:choose>
 
-		<br>
+		<br />
 
 		</font>
 
@@ -74,11 +74,11 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
 		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_MESSAGE_SHOW))) {
 		%>
 
-			<br>
+			<br />
 
 			<c:if test="<%= message != null %>">
 				<font face="Verdana, Tahoma, Arial" size="2">
-				<%= message %><br>
+				<%= message %><br />
 				</font>
 			</c:if>
 
@@ -100,7 +100,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
 </tr>
 </table>
 
-<br>
+<br />
 
 </center>
 

@@ -192,28 +192,28 @@ portletURL.setParameter("tabs1", tabs1);
 			%>
 
 			<c:if test="<%= (organization != null) || (role != null) || (userGroup != null) %>">
-				<br>
+				<br />
 			</c:if>
 
 			<c:if test="<%= organization != null %>">
 				<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>">
 
-				<%= LanguageUtil.get(pageContext, "filter-by-" + (organization.isRoot() ? "organization" : "location")) %>: <%= organization.getName() %><br>
+				<%= LanguageUtil.get(pageContext, "filter-by-" + (organization.isRoot() ? "organization" : "location")) %>: <%= organization.getName() %><br />
 			</c:if>
 
 			<c:if test="<%= role != null %>">
 				<input name="<portlet:namespace /><%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>">
 
-				<%= LanguageUtil.get(pageContext, "filter-by-role") %>: <%= role.getName() %><br>
+				<%= LanguageUtil.get(pageContext, "filter-by-role") %>: <%= role.getName() %><br />
 			</c:if>
 
 			<c:if test="<%= userGroup != null %>">
 				<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>">
 
-				<%= LanguageUtil.get(pageContext, "filter-by-user-group") %>: <%= userGroup.getName() %><br>
+				<%= LanguageUtil.get(pageContext, "filter-by-user-group") %>: <%= userGroup.getName() %><br />
 			</c:if>
 
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>';">
@@ -226,7 +226,7 @@ portletURL.setParameter("tabs1", tabs1);
 					<input type="button" value='<%= LanguageUtil.get(pageContext, "restore") %>' onClick="<portlet:namespace />deleteUsers('<%= Constants.RESTORE %>');">
 				</c:if>
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<%
@@ -441,7 +441,7 @@ portletURL.setParameter("tabs1", tabs1);
 			%>
 
 			<c:if test="<%= showSearch %>">
-				<br><div class="separator"></div><br>
+				<br /><div class="separator"></div><br />
 			</c:if>
 
 			<c:if test="<%= showButtons %>">
@@ -451,7 +451,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteOrganizations();">
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<%
@@ -570,7 +570,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer.setResults(results);
 			%>
 
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
@@ -578,7 +578,7 @@ portletURL.setParameter("tabs1", tabs1);
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteUserGroups();">
 			</c:if>
 
-			<br><br>
+			<br /><br />
 
 			<%
 			List resultRows = searchContainer.getResultRows();
@@ -646,12 +646,12 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer.setResults(results);
 			%>
 
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ROLE) %>">
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<%
@@ -727,12 +727,12 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer.setResults(results);
 			%>
 
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<%

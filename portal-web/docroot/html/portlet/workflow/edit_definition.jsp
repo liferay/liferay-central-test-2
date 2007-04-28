@@ -67,17 +67,17 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 	</tr>
 	</table>
 
-	<br>
+	<br />
 </c:if>
 
 <%= LanguageUtil.get(pageContext, "enter-the-workflow-definition-below-in-xml-format") %>
 
-<br><br>
+<br /><br />
 
-<liferay-ui:input-field model="<%= WorkflowDefinition.class %>" bean="<%= definition %>" field="xml" /><br>
+<liferay-ui:input-field model="<%= WorkflowDefinition.class %>" bean="<%= definition %>" field="xml" /><br />
 
 <c:if test="<%= definition == null %>">
-	<br>
+	<br />
 
 	<table class="liferay-table">
 	<tr>
@@ -93,7 +93,7 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 	</table>
 </c:if>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save-new-version") %>'>
 

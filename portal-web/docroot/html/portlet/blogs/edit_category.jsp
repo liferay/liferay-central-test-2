@@ -78,7 +78,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 <c:if test="<%= category == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -95,7 +95,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

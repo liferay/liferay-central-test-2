@@ -37,9 +37,9 @@
 </table>
 
 <c:if test="<%= editable %>">
-	<br>
+	<br />
 
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUser('sms');"><br>
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUser('sms');"><br />
 </c:if>
 
-<br>
+<br />

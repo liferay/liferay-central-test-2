@@ -25,7 +25,7 @@
 <tr>
 	<td id="<%= namespace %>messageScroll<%= message.getMessageId() %>">
 		<c:if test="<%= i > 0 %>">
-			<br>
+			<br />
 		</c:if>
 
 		<input name="<%= namespace %>messageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>">
@@ -41,7 +41,7 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input name="<%= namespace %>postReplySubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text"><br>
+				<input name="<%= namespace %>postReplySubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text"><br />
 			</td>
 		</tr>
 		<tr>
@@ -55,13 +55,13 @@
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "reply") %>' onClick="<%= namespace %>postReply(<%= i %>);">
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="document.getElementById('<%= namespace %>postReplyForm<%= i %>').style.display = 'none'; void('');">
 
-		<br><br>
+		<br /><br />
 	</td>
 </tr>
 
@@ -75,7 +75,7 @@
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<input name="<%= namespace %>editSubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= Html.toInputSafe(message.getSubject()) %>"><br>
+					<input name="<%= namespace %>editSubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= Html.toInputSafe(message.getSubject()) %>"><br />
 				</td>
 			</tr>
 			<tr>
@@ -89,13 +89,13 @@
 			</tr>
 			</table>
 
-			<br>
+			<br />
 
 			<input type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<%= namespace %>updateMessage(<%= i %>);">
 
 			<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="document.getElementById('<%= namespace %>editForm<%= i %>').style.display = 'none'; void('');">
 
-			<br><br>
+			<br /><br />
 		</td>
 	</tr>
 </c:if>

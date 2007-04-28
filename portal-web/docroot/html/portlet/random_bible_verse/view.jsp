@@ -32,7 +32,7 @@ Verse verse = RBVUtil.getVerse(prefs, locale);
 	<c:when test="<%= verse != null %>">
 		<%= verse.getText()%>
 
-		<br><br>
+		<br /><br />
 
 		<i><%= verse.getLocation() %></i>
 	</c:when>

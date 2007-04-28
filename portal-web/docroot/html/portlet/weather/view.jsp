@@ -64,7 +64,7 @@ for (int i = 0; i < zips.length; i++) {
 
 </table>
 
-<br>
+<br />
 
 <%= LanguageUtil.get(pageContext, "city-or-zip-code") %>
 

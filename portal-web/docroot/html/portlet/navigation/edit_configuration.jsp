@@ -29,7 +29,7 @@
 	queryString="struts_action=/navigation/view"
 />
 
-<br><div class="separator"></div><br>
+<br /><div class="separator"></div><br />
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
@@ -77,7 +77,7 @@
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 

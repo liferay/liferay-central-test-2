@@ -43,14 +43,14 @@
 		<c:if test="<%= (j + 1) < articles.size() %>">
 			<tr>
 				<td>
-					<br>
+					<br />
 				</td>
 			</tr>
 		</c:if>
 
 		<tr>
 			<td>
-				<a href="<%= article.getHeadlineURL() %>" target="_blank"><%= article.getHeadline() %></a><br>
+				<a href="<%= article.getHeadlineURL() %>" target="_blank"><%= article.getHeadline() %></a><br />
 
 				<span style="font-size: xx-small;">
 
@@ -85,7 +85,7 @@
 <c:if test="<%= (i + 1) < newsList.size() %>">
 	<tr>
 		<td>
-			<br>
+			<br />
 		</td>
 	</tr>
 </c:if>

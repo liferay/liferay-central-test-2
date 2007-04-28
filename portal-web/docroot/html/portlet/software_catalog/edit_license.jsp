@@ -96,7 +96,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

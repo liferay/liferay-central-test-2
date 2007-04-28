@@ -123,7 +123,7 @@ for (int i = 0; i < results.size(); i++) {
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 <c:if test="<%= folder != null %>">
-	<br>
+	<br />
 
 	<liferay-ui:tabs names="documents" />
 

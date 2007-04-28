@@ -38,7 +38,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <input name="<portlet:namespace />fileName" size="50" type="file">
 
-<br><br>
+<br /><br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

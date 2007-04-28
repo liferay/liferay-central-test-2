@@ -28,7 +28,7 @@
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
 		<%= LanguageUtil.get(pageContext, "global-tags-are-injected-to-all-pages-that-you-visit") %>
 
-		<br><br>
+		<br /><br />
 
 		<c:choose>
 			<c:when test="<%= entries.length > 0 %>">

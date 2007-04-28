@@ -124,7 +124,7 @@ List messages = treeWalker.getMessages();
 %>
 
 <c:if test="<%= messages.size() > 1 %>">
-	<br>
+	<br />
 
 	<table border="0" cellpadding="4" cellspacing="0" class="taglib-discussion" width="100%">
 	<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
@@ -169,7 +169,7 @@ List messages = treeWalker.getMessages();
 
 	</table>
 
-	<br>
+	<br />
 
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 
@@ -182,15 +182,15 @@ List messages = treeWalker.getMessages();
 
 		<tr>
 			<td>
-				<b><%= message.getSubject() %></b><br>
+				<b><%= message.getSubject() %></b><br />
 
 				<span style="font-size: xx-small;">
 				<%= LanguageUtil.get(pageContext, "by") %> <%= PortalUtil.getUserName(message.getUserId(), message.getUserName(), request) %>, <%= LanguageUtil.get(pageContext, "on") %> <%= dateFormatDateTime.format(message.getModifiedDate()) %>
 				</span>
 
-				<br><br>
+				<br /><br />
 
-				<%= StringUtil.replace(message.getBody(), "\n", "<br>") %>
+				<%= StringUtil.replace(message.getBody(), "\n", "<br />") %>
 			</td>
 		</tr>
 
@@ -199,7 +199,7 @@ List messages = treeWalker.getMessages();
 		<c:if test="<%= i + 1 < messages.size() %>">
 			<tr>
 				<td>
-					<br><div class="separator"></div><br>
+					<br /><div class="separator"></div><br />
 				</td>
 			</tr>
 		</c:if>

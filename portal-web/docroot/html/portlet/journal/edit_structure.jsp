@@ -235,7 +235,7 @@ int tabIndex = 1;
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -260,7 +260,7 @@ int tabIndex = 1;
 <c:if test="<%= structure == null %>">
 	<tr>
 		<td colspan="3">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -278,13 +278,13 @@ int tabIndex = 1;
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tabs names="xsd" />
 
@@ -300,7 +300,7 @@ int tabIndex = 1;
 	<input type="button" value="<bean:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_structure?groupId=<%= structure.getGroupId() %>&structureId=<%= structure.getStructureId() %>';">
 </c:if>
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 

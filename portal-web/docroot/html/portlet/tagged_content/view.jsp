@@ -155,7 +155,7 @@ for (int i = 0; i < results.size(); i++) {
 		</c:choose>
 	</div>
 
-	<br>
+	<br />
 
 <%
 }

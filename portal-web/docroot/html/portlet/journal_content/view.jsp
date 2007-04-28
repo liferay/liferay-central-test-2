@@ -113,24 +113,24 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 	<c:otherwise>
 		<%= LanguageUtil.get(pageContext, "please-contact-the-administrator-to-setup-this-portlet") %>
 
-		<br><br>
+		<br /><br />
 
 		<%= LanguageUtil.get(pageContext, "select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet") %>
 
-		<br>
+		<br />
 
 		<%
 		for (int i = 0; i < articleIds.length; i++) {
 		%>
 
 			<c:if test="<%= Validator.isNotNull(articleIds[i]) %>">
-				<br>
+				<br />
 
 				<span class="portlet-msg-error">
 				<%= LanguageUtil.format(pageContext, "x-is-not-approved,-does-not-have-any-content,-or-no-longer-exists", articleIds[i]) %>
 				</span>
 
-				<br>
+				<br />
 			</c:if>
 
 		<%
@@ -141,7 +141,7 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 </c:choose>
 
 <c:if test="<%= themeDisplay.isSignedIn() %>">
-	<br>
+	<br />
 
 	<%
 	JournalArticle article = null;
@@ -158,7 +158,7 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
 				/>
 
-				<br>
+				<br />
 			</c:if>
 
 			<c:if test="<%= enableComments %>">
@@ -175,7 +175,7 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					redirect="<%= currentURL %>"
 				/>
 
-				<br>
+				<br />
 			</c:if>
 
 			<span id="<portlet:namespace />editArticle<%= i %>" >

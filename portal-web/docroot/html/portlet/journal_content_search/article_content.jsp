@@ -44,7 +44,7 @@ String hitOwnerId = layout.getOwnerId();
 List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(hitOwnerId, groupId, articleId);
 %>
 
-<%= content %><br>
+<%= content %><br />
 
 <c:if test="<%= hitLayoutIds.size() > 0 %>">
 	<span style="font-size: xx-small;">
@@ -58,7 +58,7 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(hitOwnerId
 		String hitLayoutURL = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
 	%>
 
-		<br><a href="<%= hitLayoutURL %>"><%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= StringUtil.shorten(hitLayoutURL, 100) %></a>
+		<br /><a href="<%= hitLayoutURL %>"><%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= StringUtil.shorten(hitLayoutURL, 100) %></a>
 
 	<%
 	}

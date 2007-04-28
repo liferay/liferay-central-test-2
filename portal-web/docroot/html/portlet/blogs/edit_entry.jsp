@@ -111,7 +111,7 @@ if (entry != null) {
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -124,7 +124,7 @@ if (entry != null) {
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -139,7 +139,7 @@ if (entry != null) {
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -167,7 +167,7 @@ if (entry != null) {
 <c:if test="<%= entry == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -184,7 +184,7 @@ if (entry != null) {
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

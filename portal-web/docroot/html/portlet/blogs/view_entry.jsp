@@ -54,7 +54,7 @@ portletURL.setParameter("struts_action", "/blogs/view");
 </form>
 
 <c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.ADD_DISCUSSION) %>">
-	<br>
+	<br />
 
 	<liferay-ui:tabs names="comments" />
 

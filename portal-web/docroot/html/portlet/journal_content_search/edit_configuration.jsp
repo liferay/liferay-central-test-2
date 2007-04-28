@@ -29,7 +29,7 @@
 
 <%= LanguageUtil.get(pageContext, "please-select-the-article-type-that-you-would-like-to-limit-the-search-to") %>
 
-<br><br>
+<br /><br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -56,7 +56,7 @@
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 

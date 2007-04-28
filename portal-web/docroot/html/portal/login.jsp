@@ -75,7 +75,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 				</span>
 
-				<br><br>
+				<br /><br />
 
 				<%
 				%>
@@ -87,7 +87,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<%= LanguageUtil.get(pageContext, "authentication-failed") %>
 				</span>
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, CookieNotSupportedException.class.getName()) %>">
@@ -95,7 +95,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<%= LanguageUtil.get(pageContext, "authentication-failed-please-enable-browser-cookies") %>
 				</span>
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
@@ -103,7 +103,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<%= LanguageUtil.get(pageContext, "please-enter-a-valid-login") %>
 				</span>
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
@@ -112,7 +112,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<%= LanguageUtil.get(pageContext, "please-sign-in-to-continue") %>
 				</span>
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<c:if test='<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>'>
@@ -120,7 +120,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<%= LanguageUtil.get(pageContext, "please-enter-a-valid-login") %>
 				</span>
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
@@ -128,7 +128,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<%= LanguageUtil.get(pageContext, "please-enter-a-valid-password") %>
 				</span>
 
-				<br><br>
+				<br /><br />
 			</c:if>
 		</c:if>
 
@@ -181,7 +181,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 		</table>
 
-		<br>
+		<br />
 
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "sign-in") %>">
 
@@ -198,7 +198,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<%= LanguageUtil.get(pageContext, "your-request-processed-successfully") %>
 				</span>
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
@@ -206,7 +206,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<%= LanguageUtil.get(pageContext, "the-email-address-you-requested-is-not-registered-in-our-database") %>
 				</span>
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, SendPasswordException.class.getName()) %>">
@@ -214,7 +214,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<%= LanguageUtil.get(pageContext, "your-password-can-only-be-sent-to-an-external-email-address") %>
 				</span>
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>">
@@ -222,7 +222,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<%= LanguageUtil.get(pageContext, "please-enter-a-valid-email-address") %>
 				</span>
 
-				<br><br>
+				<br /><br />
 			</c:if>
 		</c:if>
 
@@ -241,7 +241,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "send-new-password") %>">
 

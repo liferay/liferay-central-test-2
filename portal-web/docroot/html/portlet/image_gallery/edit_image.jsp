@@ -54,7 +54,7 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 	</tr>
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -83,7 +83,7 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 	</tr>
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -98,7 +98,7 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 	</tr>
 	</table>
 
-	<br>
+	<br />
 </c:if>
 
 <%

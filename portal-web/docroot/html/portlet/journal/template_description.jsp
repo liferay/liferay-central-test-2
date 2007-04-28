@@ -39,7 +39,7 @@ String rowHREF = (String)row.getParameter("rowHREF");
 		<img border="0" src="<%= Validator.isNotNull(template.getSmallImageURL()) ? template.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + template.getGroupId() + "." + template.getTemplateId() + "&small=1" %>">
 	</c:when>
 	<c:otherwise>
-		<%= template.getName() %><br>
+		<%= template.getName() %><br />
 
 		<span style="font-size: xx-small;">
 		<%= template.getDescription() %>

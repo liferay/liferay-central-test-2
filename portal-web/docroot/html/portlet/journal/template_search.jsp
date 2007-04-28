@@ -59,7 +59,7 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 </tr>
 </table>
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -79,7 +79,7 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
 	<input name="<portlet:namespace /><%= TemplateDisplayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>">
 
-	<br>
+	<br />
 
-	<%= LanguageUtil.get(pageContext, "filter-by-structure") %>: <%= displayTerms.getStructureId() %><br>
+	<%= LanguageUtil.get(pageContext, "filter-by-structure") %>: <%= displayTerms.getStructureId() %><br />
 </c:if>

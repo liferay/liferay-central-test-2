@@ -180,7 +180,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 </tr>
 </table>
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -200,7 +200,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "send") %>' onClick="<portlet:namespace />sendMessage();">
 
@@ -208,7 +208,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/view" /></portlet:renderURL>';">
 
-<br><br>
+<br /><br />
 
 <liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
 

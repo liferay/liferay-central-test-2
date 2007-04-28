@@ -158,7 +158,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 		<c:if test="<%= (i + 1) <= 10 %>">
 			<tr>
 				<td colspan="2">
-					<br>
+					<br />
 				</td>
 			</tr>
 		</c:if>
@@ -170,7 +170,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 	</table>
 </fieldset>
 
-<br>
+<br />
 
 <input type="submit" value="<bean:message key="save" />">
 

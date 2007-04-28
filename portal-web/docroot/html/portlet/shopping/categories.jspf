@@ -89,7 +89,7 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append(curCategory.getName());
 
 	if (Validator.isNotNull(curCategory.getDescription())) {
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append("<span style=\"font-size: xx-small;\">");
 		sm.append(curCategory.getDescription());
 		sm.append("</span>");
@@ -144,7 +144,7 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 	</table>
 
 	<c:if test="<%= results.size() > 0 %>">
-		<br>
+		<br />
 	</c:if>
 </c:if>
 
@@ -153,7 +153,7 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 <c:if test="<%= category != null %>">
-	<br>
+	<br />
 </c:if>
 
 </form>
@@ -234,7 +234,7 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 		StringMaker sm = new StringMaker();
 
 		if (item.isSmallImage()) {
-			sm.append("<br>");
+			sm.append("<br />");
 			sm.append("<img alt=\"");
 			sm.append(item.getSku());
 			sm.append("\" border=\"0\" src=\"");
@@ -268,7 +268,7 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 		sm.append("<span style=\"font-size: xx-small;\">");
 
 		if (Validator.isNotNull(item.getDescription())) {
-			sm.append("<br>");
+			sm.append("<br />");
 			sm.append(item.getDescription());
 		}
 
@@ -282,7 +282,7 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 			String propsKey = (String)enu.nextElement();
 			String propsValue = props.getProperty(propsKey, StringPool.BLANK);
 
-			sm.append("<br>");
+			sm.append("<br />");
 			sm.append(propsKey);
 			sm.append(": ");
 			sm.append(propsValue);
@@ -344,7 +344,7 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 		</table>
 
 		<c:if test="<%= results.size() > 0 %>">
-			<br>
+			<br />
 		</c:if>
 	</c:if>
 

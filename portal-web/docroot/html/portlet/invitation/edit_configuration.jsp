@@ -67,7 +67,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -82,11 +82,11 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 </tr>
 </table>
 
-<br>
+<br />
 
 <b><%= LanguageUtil.get(pageContext, "definition-of-terms") %></b>
 
-<br><br>
+<br /><br />
 
 <table class="liferay-table">
 <tr>
@@ -123,7 +123,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

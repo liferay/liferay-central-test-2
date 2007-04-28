@@ -67,10 +67,10 @@ catch (Exception e) {
 
 					<c:choose>
 						<c:when test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-							<a style="font-weight: bold" href="<%= entry.getLink() %>" target="_blank"><%= entry.getTitle() %></a><br>
+							<a style="font-weight: bold" href="<%= entry.getLink() %>" target="_blank"><%= entry.getTitle() %></a><br />
 
 							<c:if test="<%= entry.getPublishedDate() != null %>">
-								<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br>
+								<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br />
 							</c:if>
 
 							<div class="font-small">

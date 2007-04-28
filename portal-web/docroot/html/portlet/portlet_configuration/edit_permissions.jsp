@@ -220,7 +220,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		</tr>
 		</table>
 
-		<br>
+		<br />
 	</c:otherwise>
 </c:choose>
 
@@ -313,11 +313,11 @@ else if (modelResource.equals(Layout.class.getName())) {
 				searchContainer.setResults(results);
 				%>
 
-				<br><div class="separator"></div><br>
+				<br /><div class="separator"></div><br />
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserPermissions();">
 
-				<br><br>
+				<br /><br />
 
 				<%
 				List headerNames = new ArrayList();
@@ -411,7 +411,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 					rightList="<%= rightList %>"
 				/>
 
-				<br>
+				<br />
 
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
@@ -488,11 +488,11 @@ else if (modelResource.equals(Layout.class.getName())) {
 				searchContainer.setResults(results);
 				%>
 
-				<br><div class="separator"></div><br>
+				<br /><div class="separator"></div><br />
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateOrganizationPermissions();">
 
-				<br><br>
+				<br /><br />
 
 				<%
 				List headerNames = new ArrayList();
@@ -627,7 +627,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 					rightList="<%= rightList %>"
 				/>
 
-				<br>
+				<br />
 
 				<c:choose>
 					<c:when test='<%= rootOrganization %>'>
@@ -648,7 +648,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 						</tr>
 						</table>
 
-						<br>
+						<br />
 					</c:otherwise>
 				</c:choose>
 
@@ -717,11 +717,11 @@ else if (modelResource.equals(Layout.class.getName())) {
 				searchContainer.setResults(results);
 				%>
 
-				<br><div class="separator"></div><br>
+				<br /><div class="separator"></div><br />
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserGroupPermissions();">
 
-				<br><br>
+				<br /><br />
 
 				<%
 				List headerNames = new ArrayList();
@@ -812,7 +812,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 					rightList="<%= rightList %>"
 				/>
 
-				<br>
+				<br />
 
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
@@ -894,7 +894,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 			rightList="<%= rightList %>"
 		/>
 
-		<br>
+		<br />
 
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
@@ -941,7 +941,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<%
 		portletURL.setParameter("selectedActionId", selectedActionId);
@@ -966,7 +966,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		searchContainer.setResults(results);
 		%>
 
-		<br><div class="separator"></div><br>
+		<br /><div class="separator"></div><br />
 
 		<%
 		List headerNames = new ArrayList();

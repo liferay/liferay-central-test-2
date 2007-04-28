@@ -35,7 +35,7 @@ String url = (String)request.getAttribute("liferay-ui:captcha:url");
 		<img src="<%= url %>">
 	</div>
 
-	<br>
+	<br />
 
 	<table class="liferay-table">
 	<tr>
@@ -48,5 +48,5 @@ String url = (String)request.getAttribute("liferay-ui:captcha:url");
 	</tr>
 	</table>
 
-	<br>
+	<br />
 </c:if>

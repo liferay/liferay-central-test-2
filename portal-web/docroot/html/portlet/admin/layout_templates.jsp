@@ -24,7 +24,7 @@
 
 <c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId()) && PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)%>">
 	<input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-layout-templates")%>'/>
-	<br><br>
+	<br /><br />
 </c:if>
 
 <%
@@ -81,7 +81,7 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append(layoutTemplate.getName());
 	sm.append("</b>");
 	sm.append("</a>");
-	sm.append("<br>");
+	sm.append("<br />");
 	sm.append("<span style=\"font-size: xx-small;\">");
 	sm.append(LanguageUtil.get(pageContext, "package"));
 	sm.append(": ");

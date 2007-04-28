@@ -29,7 +29,7 @@ SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay
 %>
 
 <c:if test="<%= searchContainer.getTotal() > searchContainer.getDelta() %>">
-	<br>
+	<br />
 </c:if>
 
 <liferay-ui:page-iterator

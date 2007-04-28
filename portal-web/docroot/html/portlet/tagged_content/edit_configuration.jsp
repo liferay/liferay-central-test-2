@@ -29,7 +29,7 @@
 
 <%= LanguageUtil.get(pageContext, "displayed-content-must-contain-the-following-tags") %>
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tags-selector
 	hiddenInput="entries"
@@ -37,11 +37,11 @@
 	focus="<%= true %>"
 />
 
-<br>
+<br />
 
 <%= LanguageUtil.get(pageContext, "displayed-content-must-not-contain-the-following-tags") %>
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tags-selector
 	hiddenInput="notEntries"
@@ -49,7 +49,7 @@
 	focus="<%= true %>"
 />
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -66,7 +66,7 @@
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 

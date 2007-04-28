@@ -101,7 +101,7 @@ int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

@@ -124,7 +124,7 @@ for (int i = 0; i < results.getLength(); i++) {
 
 <input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
-<br><br>
+<br /><br />
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 

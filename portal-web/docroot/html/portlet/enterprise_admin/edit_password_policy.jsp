@@ -106,7 +106,7 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 	</liferay-ui:section>
 </liferay-ui:tabs>
 
-<br>
+<br />
 
 <liferay-ui:tabs
 	names="password-syntax-checking"
@@ -146,7 +146,7 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 	</liferay-ui:section>
 </liferay-ui:tabs>
 
-<br>
+<br />
 
 <liferay-ui:tabs
 	names="password-history"
@@ -177,7 +177,7 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 	</liferay-ui:section>
 </liferay-ui:tabs>
 
-<br>
+<br />
 
 <liferay-ui:tabs
 	names="password-expiration"
@@ -226,7 +226,7 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 	</liferay-ui:section>
 </liferay-ui:tabs>
 
-<br>
+<br />
 
 <liferay-ui:tabs
 	names="lockout"
@@ -284,7 +284,7 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 	</liferay-ui:section>
 </liferay-ui:tabs>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

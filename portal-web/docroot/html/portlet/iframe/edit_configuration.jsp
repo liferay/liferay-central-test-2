@@ -51,7 +51,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -110,7 +110,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -123,13 +123,13 @@ String htmlAttributes =
 </tr>
 </table>
 
-<br>
+<br />
 
 <span class="portlet-msg-error" style="font-size: x-small;">
 <%= LanguageUtil.get(pageContext, "leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information") %>
 </span>
 
-<br><br>
+<br /><br />
 
 <input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 

@@ -33,11 +33,11 @@ hangmanWordList = ParamUtil.getString(request, "hangmanWordList", hangmanWordLis
 
 <%= LanguageUtil.get(pageContext, "add-hangman-words-separated-by-commas") %>
 
-<br><br>
+<br /><br />
 
 <textarea name="<portlet:namespace />hangmanWordList" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= hangmanWordList %></textarea>
 
-<br><br>
+<br /><br />
 
 <input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 

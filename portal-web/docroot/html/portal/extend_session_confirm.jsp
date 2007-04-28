@@ -48,7 +48,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		</tr>
 		<tr>
 			<td>
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>

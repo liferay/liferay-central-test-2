@@ -115,13 +115,13 @@ try {
 	</tr>
 	</table>
 
-	<br>
+	<br />
 
 	<input type="button" value='<%= LanguageUtil.get(pageContext, "search") %>' onClick="<portlet:namespace/>searchPlugins('<%=redirect%>')">
 
-	<br><br>
+	<br /><br />
 
-	<div class="separator" style="clear: both;"></div><br>
+	<div class="separator" style="clear: both;"></div><br />
 
 	<%
 	List headerNames = new ArrayList();
@@ -189,12 +189,12 @@ try {
 		sm.append("</a>");
 
 		if (Validator.isNotNull(pluginPackageShortDescription)) {
-			sm.append("<br>");
+			sm.append("<br />");
 			sm.append("<span style=\"font-size: xx-small;\">");
 			sm.append(LanguageUtil.get(pageContext, "package-id"));
 			sm.append(": ");
 			sm.append(pluginPackageModuleId);
-			sm.append("<br>");
+			sm.append("<br />");
 			sm.append(pluginPackageShortDescription);
 			sm.append("</span>");
 		}
@@ -228,7 +228,7 @@ try {
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-    <br>
+    <br />
 
 	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
@@ -240,7 +240,7 @@ try {
 		</c:if>
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "refresh") %>'  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');">
 
-		<br>
+		<br />
 
 		<liferay-util:include page="/html/portlet/admin/repository_report.jsp" />
 

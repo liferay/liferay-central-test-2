@@ -105,11 +105,11 @@ catch (Exception e) {
 </tr>
 </table>
 
-<br>
+<br />
 
 <b><%= newPassword %></b>
 
-<br><br>
+<br /><br />
 
 <input type="submit" value="<%= LanguageUtil.get(pageContext, "generate") %>">
 

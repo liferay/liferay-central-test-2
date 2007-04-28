@@ -37,12 +37,12 @@ if (translation == null) {
 <c:if test="<%= Validator.isNotNull(translation.getToText()) %>">
 	<%= translation.getToText() %>
 
-	<br><br>
+	<br /><br />
 </c:if>
 
 <textarea name="<portlet:namespace />text" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= translation.getFromText() %></textarea>
 
-<br><br>
+<br /><br />
 
 <select name="<portlet:namespace />id">
 	<option <%= (translation.getTranslationId().equals("en_zh")) ? "selected" : "" %> value="en_zh"><%= LanguageUtil.get(pageContext, "en_zh") %></option>

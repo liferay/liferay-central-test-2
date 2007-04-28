@@ -97,7 +97,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 
 				<%= LanguageUtil.get(pageContext, "unread-messages") %>: <%= folder.getUnreadMessageCount() %>
 
-				<br><br>
+				<br /><br />
 
 				<%
 				int count = 0;

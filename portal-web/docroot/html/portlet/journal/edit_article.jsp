@@ -561,7 +561,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <c:if test="<%= article != null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -587,7 +587,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -608,7 +608,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -753,7 +753,7 @@ String[] availableLocales = null;
 
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -804,7 +804,7 @@ String[] availableLocales = null;
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -832,7 +832,7 @@ String[] availableLocales = null;
 <c:if test="<%= article == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -849,7 +849,7 @@ String[] availableLocales = null;
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
@@ -881,7 +881,7 @@ String[] availableLocales = null;
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tabs names="design" />
 
@@ -911,7 +911,7 @@ String[] availableLocales = null;
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -961,7 +961,7 @@ String[] availableLocales = null;
 					</a>
 
 					<c:if test="<%= tableIteratorObj.isSmallImage() %>">
-						<br>
+						<br />
 
 						<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getGroupId() + "." + tableIteratorObj.getTemplateId() + "&small=1" %>" vspace="0">
 					</c:if>
@@ -972,7 +972,7 @@ String[] availableLocales = null;
 </tr>
 </table>
 
-<br>
+<br />
 
 <liferay-ui:tabs names="content" />
 

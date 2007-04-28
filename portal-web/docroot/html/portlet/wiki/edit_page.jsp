@@ -71,7 +71,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
 
-<br><br>
+<br /><br />
 
 <table class="liferay-table">
 <tr>
@@ -88,7 +88,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 </tr>
 </table>
 
-<br>
+<br />
 
 <c:choose>
 	<c:when test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
@@ -101,7 +101,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 	</c:otherwise>
 </c:choose>
 
-<br><br>
+<br /><br />
 
 <table class="liferay-table">
 <tr>
@@ -123,7 +123,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

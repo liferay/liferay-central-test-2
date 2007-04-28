@@ -29,7 +29,7 @@
 	queryString="struts_action=/google_gadget/view"
 />
 
-<br><div class="separator"></div><br>
+<br /><div class="separator"></div><br />
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
@@ -39,7 +39,7 @@
 	<td valign="top">
 		<input <%= (!customConf) ? "checked" : "" %> type="radio" name="<portlet:namespace />confType" value="recommended"> <%= LanguageUtil.get(pageContext, "choose-from-the-list-of-recommended-google-gadgets") %>
 
-		<br>
+		<br />
 
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -119,14 +119,14 @@
 
 		<a href="http://www.google.com/ig/directory?synd=open" target="GoogleGadgets"><%= LanguageUtil.get(pageContext, "or-obtain-the-google-gadget-code-directly-and-paste-it-below") %></a>
 
-		<br>
+		<br />
 
 		<textarea rows="5" cols="50" name="<portlet:namespace />gadgetCode"><%= gadgetCode %></textarea>
 	</td>
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 

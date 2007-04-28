@@ -95,7 +95,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 </tr>
 </table>
 
-<br>
+<br />
 
 <table class="liferay-table">
 
@@ -218,7 +218,7 @@ for (int i = 0; i < days.length; i++) {
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

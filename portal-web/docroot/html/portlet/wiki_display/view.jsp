@@ -47,11 +47,11 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 </tr>
 </table>
 
-<br>
+<br />
 
 <%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 
-<br>
+<br />
 
 <c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 
@@ -89,7 +89,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 	<c:choose>
 		<c:when test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
-			<br><br>
+			<br /><br />
 
 			<liferay-ui:tabs names="comments" />
 

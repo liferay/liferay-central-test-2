@@ -27,21 +27,21 @@
 
 <%= LanguageUtil.get(pageContext, "upload-a-war-file-to-install-a-layout-template,-portlet,-or-theme") %>
 
-<br><br>
+<br /><br />
 
 <input name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 
-<br><br>
+<br /><br />
 
 <%= LanguageUtil.get(pageContext, "specify-an-optional-context-for-deployment") %>
 
 <%= LanguageUtil.format(pageContext, "for-example-x", "<i>sample-jsp-portlet</i>") %>
 
-<br><br>
+<br /><br />
 
 <input name="<portlet:namespace />deploymentContext" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;">
 
-<br><br>
+<br /><br />
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "install") %>' onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('localDeploy', '<%= uploadProgressId %>');">
 

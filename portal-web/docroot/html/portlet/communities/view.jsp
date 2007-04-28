@@ -79,12 +79,12 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	searchContainer.setResults(results);
 	%>
 
-	<br><div class="separator"></div><br>
+	<br /><div class="separator"></div><br />
 
 	<c:if test="<%= PortalPermission.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "create-community") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 
-		<br><br>
+		<br /><br />
 	</c:if>
 
 	<liferay-ui:error exception="<%= NoSuchLayoutSetException.class %>">
@@ -153,7 +153,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		if ((tabs1.equals("communities-owned") || tabs1.equals("communities-joined")) &&
 			((publicLayoutsPageCount > 0) || (privateLayoutsPageCount > 0))) {
 
-			sm.append("<br>");
+			sm.append("<br />");
 			sm.append("<span style=\"font-size: xx-small;\">");
 
 			if (publicLayoutsPageCount > 0) {
@@ -188,7 +188,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 				}
 			}
 
-			sm.append("<br>");
+			sm.append("<br />");
 
 			if (privateLayoutsPageCount > 0) {
 				rowURL.setParameter("ownerId", LayoutImpl.PRIVATE + group.getGroupId());

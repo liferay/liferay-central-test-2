@@ -28,21 +28,21 @@
 
 <%= LanguageUtil.format(pageContext, "for-example-x", "<i>http://easynews.dl.sourceforge.net/sourceforge/lportal/sample-jsp-portlet-" + ReleaseInfo.getVersion() + ".war</i>") %>
 
-<br><br>
+<br /><br />
 
 <input name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="">
 
-<br><br>
+<br /><br />
 
 <%= LanguageUtil.get(pageContext, "specify-an-optional-context-for-deployment") %>
 
 <%= LanguageUtil.format(pageContext, "for-example-x", "<i>sample-jsp-portlet</i>") %>
 
-<br><br>
+<br /><br />
 
 <input name="<portlet:namespace />remoteDeployWARName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="">
 
-<br><br>
+<br /><br />
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "install") %>' onClick="<%= downloadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy', '<%= downloadProgressId %>');">
 

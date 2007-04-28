@@ -84,7 +84,7 @@ portletURL.setParameter("name", name);
 		</c:otherwise>
 	</c:choose>
 
-	<br><br>
+	<br /><br />
 </c:if>
 
 <liferay-ui:tabs
@@ -138,7 +138,7 @@ portletURL.setParameter("name", name);
 	</tr>
 	<tr>
 		<td colspan="3">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -155,7 +155,7 @@ portletURL.setParameter("name", name);
 
 <c:if test='<%= strutsAction.equals("/document_library/edit_file_entry") && ((fileEntry == null) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE)) %>'>
 	<c:if test="<%= fileEntry != null %>">
-		<br>
+		<br />
 	</c:if>
 
 	<%
@@ -178,12 +178,12 @@ portletURL.setParameter("name", name);
 	/>
 
 	<c:if test="<%= fileEntry != null %>">
-		<br>
+		<br />
 	</c:if>
 </c:if>
 
 <c:if test="<%= fileEntry != null %>">
-	<br>
+	<br />
 
 	<liferay-ui:ratings
 		className="<%= DLFileEntry.class.getName() %>"
@@ -191,7 +191,7 @@ portletURL.setParameter("name", name);
 		url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry" %>'
 	/>
 
-	<br>
+	<br />
 
 	<%
 	String tabs2Names = "version-history,comments";

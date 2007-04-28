@@ -46,6 +46,6 @@ catch (Exception e) {
 <%= LanguageUtil.get(pageContext, "thank-you-for-your-purchase") %>
 </span>
 
-<br><br>
+<br /><br />
 
 <%= LanguageUtil.get(pageContext, "your-order-number-is") %> <b><%= orderId %></b>. <%= LanguageUtil.get(pageContext, "you-will-receive-an-email-shortly-with-your-order-summary-and-further-details") %>

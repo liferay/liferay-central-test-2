@@ -61,7 +61,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 						<a href="#a<%= i + 1 %>"><u><%= WCUtil.translate(entry.getQuestion()) %></u></a>
 
-						<br><br>
+						<br /><br />
 					</td>
 				</tr>
 
@@ -71,7 +71,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<tr>
 				<td colspan="2">
-					<br>
+					<br />
 				</td>
 			</tr>
 
@@ -89,7 +89,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 						<b><%= WCUtil.translate(entry.getQuestion()) %></b>&nbsp;&nbsp;<a href="#q<%= i + 1 %>">&laquo;</a>
 
-						<br><br>
+						<br /><br />
 					</td>
 				</tr>
 				<tr>
@@ -97,7 +97,7 @@ portletURL.setParameter("tabs1", tabs1);
 					<td>
 						<%= WCUtil.translate(entry.getAnswer()) %>
 
-						<br><br>
+						<br /><br />
 					</td>
 				</tr>
 				<tr>
@@ -129,7 +129,7 @@ portletURL.setParameter("tabs1", tabs1);
 						%>
 
 
-							<br>
+							<br />
 
 						<%
 							if ((char)letter == 'z') {
@@ -137,7 +137,7 @@ portletURL.setParameter("tabs1", tabs1);
 								letterSuffix = Integer.toString(GetterUtil.getInteger(letterSuffix) + 1);
 						%>
 
-							<br>
+							<br />
 
 						<%
 							}
@@ -147,7 +147,7 @@ portletURL.setParameter("tabs1", tabs1);
 						}
 						%>
 
-						<%= (i + 1) < entries.size() ? "<br><br>" : "" %>
+						<%= (i + 1) < entries.size() ? "<br /><br />" : "" %>
 
 						</span>
 					</td>
@@ -177,7 +177,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 						<a href="#a<%= i + 1 %>"><u><%= WCUtil.translate(entry.getQuestion()) %></u></a>
 
-						<br><br>
+						<br /><br />
 					</td>
 				</tr>
 
@@ -187,7 +187,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<tr>
 				<td colspan="2">
-					<br>
+					<br />
 				</td>
 			</tr>
 
@@ -205,7 +205,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 						<b><%= WCUtil.translate(entry.getQuestion()) %></b>&nbsp;&nbsp;<a href="#q<%= i + 1 %>">&laquo;</a>
 
-						<br><br>
+						<br /><br />
 					</td>
 				</tr>
 				<tr>
@@ -213,7 +213,7 @@ portletURL.setParameter("tabs1", tabs1);
 					<td>
 						<%= WCUtil.translate(entry.getAnswer()) %>
 
-						<br><br>
+						<br /><br />
 					</td>
 				</tr>
 				<tr>
@@ -244,13 +244,13 @@ portletURL.setParameter("tabs1", tabs1);
 						%>
 
 
-							<br>
+							<br />
 
 						<%
 						}
 						%>
 
-						<%= (i + 1) < entries.size() ? "<br><br>" : "" %>
+						<%= (i + 1) < entries.size() ? "<br /><br />" : "" %>
 
 						</span>
 					</td>

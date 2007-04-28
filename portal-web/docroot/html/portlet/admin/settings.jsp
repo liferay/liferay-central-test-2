@@ -61,11 +61,11 @@
 				</tr>
 				</table>
 
-				<br>
+				<br />
 
 				<%= LanguageUtil.get(pageContext, "the-ldap-url-format-is") %>
 
-				<br><br>
+				<br /><br />
 
 				<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
@@ -106,19 +106,19 @@
 				</tr>
 				</table>
 
-				<br>
+				<br />
 
 				<%= LanguageUtil.get(pageContext, "enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user") %>
 
-				<br><br>
+				<br /><br />
 
 				<textarea name="<portlet:namespace />searchFilter" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_SEARCH_FILTER)) %></textarea>
 
-				<br><br>
+				<br /><br />
 
 				<%= LanguageUtil.get(pageContext, "enter-the-encryption-algorithm-used-for-passwords-stored-in-the-ldap-server") %>
 
-				<br><br>
+				<br /><br />
 
 				<select name="<portlet:namespace />passwordEncryptionAlgorithm">
 					<option value=""></option>
@@ -139,15 +139,15 @@
 
 				</select>
 
-				<br><br>
+				<br /><br />
 
 				<%= LanguageUtil.get(pageContext, "if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay") %>
 
-				<br><br>
+				<br /><br />
 
 				<textarea name="<portlet:namespace />userMappings" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_MAPPINGS)) %></textarea>
 
-				<br><br>
+				<br /><br />
 
 				<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
@@ -166,7 +166,7 @@
 				</tr>
 				</table>
 
-				<br>
+				<br />
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateLdap');">
 			</c:when>
@@ -214,7 +214,7 @@
 				</tr>
 				</table>
 
-				<br>
+				<br />
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateSecurity');">
 			</c:otherwise>
@@ -223,57 +223,57 @@
 	<c:when test='<%= tabs2.equals("default-user-associations") %>'>
 		<%= LanguageUtil.get(pageContext, "enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users") %>
 
-		<br><br>
+		<br /><br />
 
 		<textarea name="<portlet:namespace />defaultGroupNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_GROUP_NAMES) %></textarea>
 
-		<br><br>
+		<br /><br />
 
 		<%= LanguageUtil.get(pageContext, "enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users") %>
 
-		<br><br>
+		<br /><br />
 
 		<textarea name="<portlet:namespace />defaultRoleNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_ROLE_NAMES) %></textarea>
 
-		<br><br>
+		<br /><br />
 
 		<%= LanguageUtil.get(pageContext, "enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users") %>
 
-		<br><br>
+		<br /><br />
 
 		<textarea name="<portlet:namespace />defaultUserGroupNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES) %></textarea>
 
-		<br><br>
+		<br /><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateDefaultGroupsAndRoles');">
 	</c:when>
 	<c:when test='<%= tabs2.equals("reserved-screen-names") %>'>
 		<%= LanguageUtil.get(pageContext, "enter-one-screen-name-per-line-to-reserve-the-screen-name") %>
 
-		<br><br>
+		<br /><br />
 
 		<textarea name="<portlet:namespace />reservedScreenNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_SCREEN_NAMES) %></textarea>
 
-		<br><br>
+		<br /><br />
 
 		<%= LanguageUtil.get(pageContext, "enter-one-user-email-address-per-line-to-reserve-the-user-email-address") %>
 
-		<br><br>
+		<br /><br />
 
 		<textarea name="<portlet:namespace />reservedEmailAddresses" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES) %></textarea>
 
-		<br><br>
+		<br /><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateReservedUsers');">
 	</c:when>
 	<c:when test='<%= tabs2.equals("mail-host-names") %>'>
 		<%= LanguageUtil.format(pageContext, "enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x", company.getMx(), false) %>
 
-		<br><br>
+		<br /><br />
 
 		<textarea name="<portlet:namespace />mailHostNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES) %></textarea>
 
-		<br><br>
+		<br /><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateMailHostNames');">
 	</c:when>
@@ -352,7 +352,7 @@
 				</tr>
 				<tr>
 					<td colspan="3">
-						<br>
+						<br />
 					</td>
 				</tr>
 				<tr>
@@ -373,7 +373,7 @@
 				</tr>
 				<tr>
 					<td colspan="3">
-						<br>
+						<br />
 					</td>
 				</tr>
 				<tr>
@@ -389,11 +389,11 @@
 				</tr>
 				</table>
 
-				<br>
+				<br />
 
 				<b><%= LanguageUtil.get(pageContext, "definition-of-terms") %></b>
 
-				<br><br>
+				<br /><br />
 
 				<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
@@ -525,7 +525,7 @@
 			</c:otherwise>
 		</c:choose>
 
-		<br>
+		<br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveEmails();">
 	</c:when>

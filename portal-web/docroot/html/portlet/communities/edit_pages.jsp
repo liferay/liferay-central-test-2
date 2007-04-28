@@ -301,7 +301,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 		</tr>
 		</table>
 
-		<br>
+		<br />
 	</c:if>
 
 	<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
@@ -333,7 +333,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 	</tr>
 	</table>
 
-	<br>
+	<br />
 </c:if>
 
 <c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.MY_ACCOUNT)) && (group != null) %>">
@@ -355,13 +355,13 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 			<input type="button" value='<%= LanguageUtil.get(pageContext, "copy-from-live") %>'  onClick="<portlet:namespace />copyFromLive();">
 
-			<br><br>
+			<br /><br />
 		</c:when>
 		<c:otherwise>
 			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || selGroup.isStagingGroup()) && (pagesCount > 0) %>">
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "view-pages") %>'  onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();">
 
-				<br><br>
+				<br /><br />
 			</c:if>
 		</c:otherwise>
 	</c:choose>
@@ -406,7 +406,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 				</c:otherwise>
 			</c:choose>
 
-			<br><br>
+			<br /><br />
 
 			<%
 			String tabs3Names = "page,children,look-and-feel";
@@ -593,7 +593,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							</tr>
 							<tr>
 								<td colspan="3">
-									<br>
+									<br />
 								</td>
 							</tr>
 							<tr>
@@ -652,7 +652,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 							<tr>
 								<td colspan="3">
-									<br>
+									<br />
 								</td>
 							</tr>
 							<tr>
@@ -680,7 +680,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					</tr>
 					<tr>
 						<td>
-							<br><div class="separator"></div><br>
+							<br /><div class="separator"></div><br />
 						</td>
 					</tr>
 					<tr>
@@ -695,7 +695,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					</tr>
 					</table>
 
-					<br>
+					<br />
 
 					<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
@@ -761,7 +761,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<%= LanguageUtil.get(pageContext, "add-child-pages") %>
 
-					<br><br>
+					<br /><br />
 
 					<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
@@ -775,7 +775,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					</tr>
 					<tr>
 						<td colspan="3">
-							<br>
+							<br />
 						</td>
 					</tr>
 					<tr>
@@ -810,9 +810,9 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					</tr>
 					</table>
 
-					<br>
+					<br />
 
-					<input type="submit" value='<%= LanguageUtil.get(pageContext, "add-page") %>'><br>
+					<input type="submit" value='<%= LanguageUtil.get(pageContext, "add-page") %>'><br />
 
 					<script type="text/javascript">
 						document.<portlet:namespace />fm.<portlet:namespace />name.focus();
@@ -830,7 +830,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					%>
 
 					<c:if test="<%= (selLayoutChildren != null) && (selLayoutChildren.size() > 0) %>">
-						<br><div class="separator"></div><br>
+						<br /><div class="separator"></div><br />
 
 						<liferay-ui:error exception="<%= RequiredLayoutException.class %>">
 
@@ -853,7 +853,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 						<%= LanguageUtil.get(pageContext, "set-the-display-order-of-child-pages") %>
 
-						<br><br>
+						<br /><br />
 
 						<table border="0" cellpadding="0" cellspacing="0">
 						<tr>
@@ -875,14 +875,14 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							</td>
 							<td style="padding-left: 10px;"></td>
 							<td valign="top">
-								<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16"></a><br>
-								<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16"></a><br>
-								<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" vspace="2" width="16"></a><br>
+								<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16"></a><br />
+								<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16"></a><br />
+								<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" vspace="2" width="16"></a><br />
 							</td>
 						</tr>
 						</table>
 
-						<br>
+						<br />
 
 						<input type="button" value='<%= LanguageUtil.get(pageContext, "update-display-order") %>' onClick="<portlet:namespace />updateDisplayOrder();">
 					</c:if>
@@ -920,7 +920,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							</td>
 						</table>
 
-						<br>
+						<br />
 					</c:if>
 
 					<liferay-ui:tabs names="themes,color-schemes,css" refresh="<%= false %>">
@@ -952,7 +952,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 								<table border="0" cellpadding="0" cellspacing="0">
 								<tr>
 									<td align="center">
-										<%= tableIteratorObj.getName() %> <input <%= selTheme.getThemeId().equals(tableIteratorObj.getThemeId()) ? "checked" : "" %> name="<portlet:namespace />themeId" type="radio" value="<%= tableIteratorObj.getThemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= tableIteratorObj.getThemeId() %>', '', '<%= sectionParam %>', '<%= sectionName %>');"><br>
+										<%= tableIteratorObj.getName() %> <input <%= selTheme.getThemeId().equals(tableIteratorObj.getThemeId()) ? "checked" : "" %> name="<portlet:namespace />themeId" type="radio" value="<%= tableIteratorObj.getThemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= tableIteratorObj.getThemeId() %>', '', '<%= sectionParam %>', '<%= sectionName %>');"><br />
 
 										<img border="0" hspace="0" src="<%= tableIteratorObj.getContextPath() %><%= tableIteratorObj.getImagesPath() %>/thumbnail.png" vspace="0">
 									</td>
@@ -978,7 +978,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 										<table border="0" cellpadding="0" cellspacing="0">
 										<tr>
 											<td align="center">
-												<%= tableIteratorObj.getName() %> <input <%= selColorScheme.getColorSchemeId().equals(tableIteratorObj.getColorSchemeId()) ? "checked" : "" %> name="<portlet:namespace />colorSchemeId" type="radio" value="<%= tableIteratorObj.getColorSchemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= tableIteratorObj.getColorSchemeId() %>', '<%= sectionParam %>', '<%= sectionName %>')"><br>
+												<%= tableIteratorObj.getName() %> <input <%= selColorScheme.getColorSchemeId().equals(tableIteratorObj.getColorSchemeId()) ? "checked" : "" %> name="<portlet:namespace />colorSchemeId" type="radio" value="<%= tableIteratorObj.getColorSchemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= tableIteratorObj.getColorSchemeId() %>', '<%= sectionParam %>', '<%= sectionName %>')"><br />
 
 												<img border="0" hspace="0" src="<%= selTheme.getContextPath() %><%= tableIteratorObj.getColorSchemeImagesPath() %>/thumbnail.png" vspace="0">
 											</td>
@@ -1008,11 +1008,11 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 							<%= LanguageUtil.get(pageContext, "insert-custom-css-that-will-loaded-after-the-theme") %>
 
-							<br><br>
+							<br /><br />
 
 							<textarea name="<portlet:namespace />css" style="height: 200px; width: 400px"><%= cssText %></textarea>
 
-							<br><br>
+							<br /><br />
 
 							<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '', '<%= sectionParam %>', '<%= sectionName %>');"/>
 						</liferay-ui:section>
@@ -1027,12 +1027,12 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<%= LanguageUtil.get(pageContext, "upload-a-logo-for-the-" + (privateLayout ? "private" : "public") + "-pages-that-will-be-used-instead-of-the-default-enterprise-logo") %>
 
-					<br><br>
+					<br /><br />
 
 					<c:if test="<%= layoutSet.isLogo() %>">
 						<img src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= layoutSet.getOwnerId() %>">
 
-						<br><br>
+						<br /><br />
 					</c:if>
 
 					<table border="0" cellpadding="0" cellspacing="0">
@@ -1056,7 +1056,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					</tr>
 					</table>
 
-					<br>
+					<br />
 
 					<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />updateLogo();">
 				</c:when>
@@ -1152,7 +1152,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<%= LanguageUtil.format(pageContext, "for-example,-if-the-public-virtual-host-is-www.helloworld.com-and-the-friendly-url-is-/helloworld", new Object[] {Http.getProtocol(request), Http.getProtocol(request) + "://" + company.getPortalURL() + themeDisplay.getPathFriendlyURLPublic()}) %>
 
-					<br><br>
+					<br /><br />
 
 					<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
@@ -1194,13 +1194,13 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					</table>
 
 					<c:if test="<%= group.isCommunity() %>">
-						<br>
+						<br />
 
 						<%= LanguageUtil.get(pageContext, "enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages") %>
 
 						<%= LanguageUtil.format(pageContext, "the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages", new Object[] {Http.getProtocol(request) + "://" + company.getPortalURL() + themeDisplay.getPathFriendlyURLPublic(), Http.getProtocol(request) + "://" + company.getPortalURL() + group.getPathFriendlyURL(false, themeDisplay)}) %>
 
-						<br><br>
+						<br /><br />
 
 						<table border="0" cellpadding="0" cellspacing="0">
 						<tr>
@@ -1220,7 +1220,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						</table>
 					</c:if>
 
-					<br>
+					<br />
 
 					<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 				</c:when>
@@ -1242,7 +1242,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<%= LanguageUtil.get(pageContext, "the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website") %> <%= LanguageUtil.format(pageContext, "see-x-for-more-information", "<a href=\"http://www.sitemaps.org\" target=\"_blank\">http://www.sitemaps.org</a>") %>
 
-					<br><br>
+					<br /><br />
 
 					<%= LanguageUtil.format(pageContext, "send-sitemap-information-to-preview", new Object[] {"<a target=\"_blank\" href=\"" + sitemapUrl + "\">", "</a>"}) %>
 

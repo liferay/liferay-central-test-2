@@ -31,29 +31,29 @@ String csz = ParamUtil.getString(request, "csz");
 
 <form action="<portlet:renderURL><portlet:param name="struts_action" value="/csz_search/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
-<%= LanguageUtil.get(pageContext, "street-address") %> <i>(<%= LanguageUtil.get(pageContext, "optional") %>)</i><br>
+<%= LanguageUtil.get(pageContext, "street-address") %> <i>(<%= LanguageUtil.get(pageContext, "optional") %>)</i><br />
 
 <input name="<portlet:namespace />street" size="30" type="text" value="<%= street %>">
 
-<br><br>
+<br /><br />
 
-<%= LanguageUtil.get(pageContext, "city-state-or-zip") %><br>
+<%= LanguageUtil.get(pageContext, "city-state-or-zip") %><br />
 
 <input name="<portlet:namespace />csz" size="30" type="text" value="<%= csz %>">
 
-<br><br>
+<br /><br />
 
 <select name="<portlet:namespace />country">
 	<option value="USA">USA</option>
 </select>
 
-<br><br>
+<br /><br />
 
 <input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(street) %>">
-		<br><br>
+		<br /><br />
 
 		<%
 		List list = CSZUtil.getCSZAddressByCityAndState(csz);
@@ -71,14 +71,14 @@ String csz = ParamUtil.getString(request, "csz");
 			<c:otherwise>
 				<%= LanguageUtil.get(pageContext, "the-following-zip-code-was-found-associated-with-the-given-street-city-and-state") %>
 
-				<br><br>
+				<br /><br />
 
 				<%
 				for (int i = 0; i < list.size(); i++) {
 					CSZAddress cszAddress = (CSZAddress)list.get(i);
 				%>
 
-					<%= cszAddress.getZip() %><br>
+					<%= cszAddress.getZip() %><br />
 
 				<%
 				}
@@ -90,7 +90,7 @@ String csz = ParamUtil.getString(request, "csz");
 	<c:when test="<%= Validator.isNotNull(csz) %>">
 		<c:choose>
 			<c:when test="<%= Validator.isNumber(csz) %>">
-				<br><br>
+				<br /><br />
 
 				<%
 				List list = CSZUtil.getCSZAddressByZip(csz);
@@ -108,14 +108,14 @@ String csz = ParamUtil.getString(request, "csz");
 					<c:otherwise>
 						<%= LanguageUtil.get(pageContext, "the-following-city-and-state-pairs-were-found-associated-with-the-given-zip") %>
 
-						<br><br>
+						<br /><br />
 
 						<%
 						for (int i = 0; i < list.size(); i++) {
 							CSZAddress cszAddress = (CSZAddress)list.get(i);
 						%>
 
-							<%= cszAddress.getCity() %>, <%= cszAddress.getState() %><br>
+							<%= cszAddress.getCity() %>, <%= cszAddress.getState() %><br />
 
 						<%
 						}
@@ -125,7 +125,7 @@ String csz = ParamUtil.getString(request, "csz");
 				</c:choose>
 			</c:when>
 			<c:otherwise>
-				<br><br>
+				<br /><br />
 
 				<%
 				List list = CSZUtil.getCSZAddressByCityAndState(csz);
@@ -143,14 +143,14 @@ String csz = ParamUtil.getString(request, "csz");
 					<c:otherwise>
 						<%= LanguageUtil.get(pageContext, "the-following-zip-codes-were-found-associated-with-the-given-city-and-state") %>
 
-						<br><br>
+						<br /><br />
 
 						<%
 						for (int i = 0; i < list.size(); i++) {
 							CSZAddress cszAddress = (CSZAddress)list.get(i);
 						%>
 
-							<%= cszAddress.getZip() %><br>
+							<%= cszAddress.getZip() %><br />
 
 						<%
 						}

@@ -74,7 +74,7 @@
 
 		</table>
 
-		<br>
+		<br />
 
 		<input maxlength="10" name="<portlet:namespace />symbol" size="10" type="text"> <input type="submit" value='<%= LanguageUtil.get(pageContext, "get-quote") %>'>
 	</c:when>
@@ -136,18 +136,18 @@
 
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "get-quote") %>">
 
-		<br><br>
+		<br /><br />
 
 		<c:choose>
 			<c:when test="<%= stocks != null %>">
 				<table border="1" cellpadding="0" cellspacing="0" width="579">
 				<tr>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "last-trade") %><br>
+						<%= LanguageUtil.get(pageContext, "last-trade") %><br />
 						<b><%= decimalFormat.format(stocks.getLastTrade()) %></b>
 					</td>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "change") %><br>
+						<%= LanguageUtil.get(pageContext, "change") %><br />
 
 						<c:if test="<%= stocks.isChangeAvailable() && stocks.isPreviousCloseAvailable() %>">
 							<c:if test="<%= stocks.getChange() < 0 %>">
@@ -172,29 +172,29 @@
 						</c:if>
 					</td>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "day-high") %><br>
+						<%= LanguageUtil.get(pageContext, "day-high") %><br />
 						<b><%= stocks.isDayHighAvailable() ? decimalFormat.format(stocks.getDayHigh()) : LanguageUtil.get(pageContext, "not-available") %></b>
 					</td>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "day-low") %><br>
+						<%= LanguageUtil.get(pageContext, "day-low") %><br />
 						<b><%= stocks.isDayLowAvailable() ? decimalFormat.format(stocks.getDayLow()) : LanguageUtil.get(pageContext, "not-available") %></b>
 					</td>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "open") %><br>
+						<%= LanguageUtil.get(pageContext, "open") %><br />
 						<b><%= stocks.isOpenAvailable() ? decimalFormat.format(stocks.getOpen()) : LanguageUtil.get(pageContext, "not-available") %></b>
 					</td>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "previous-close") %><br>
+						<%= LanguageUtil.get(pageContext, "previous-close") %><br />
 						<b><%= stocks.isPreviousCloseAvailable() ? decimalFormat.format(stocks.getPreviousClose()) : LanguageUtil.get(pageContext, "not-available") %></b>
 					</td>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "volume") %><br>
+						<%= LanguageUtil.get(pageContext, "volume") %><br />
 						<b><%= stocks.isVolumeAvailable() ? numberFormat.format(stocks.getVolume()) : LanguageUtil.get(pageContext, "not-available") %></b>
 					</td>
 				</tr>
 				</table>
 
-				<br>
+				<br />
 
 				<table border="0" cellpadding="0" cellspacing="0" width="579">
 				<tr>

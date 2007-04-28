@@ -50,7 +50,7 @@
 
 		<input checked name="showxref_cb" type="checkbox"> <span style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "cross-references") %></span>
 
-		<br><br>
+		<br /><br />
 
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "lookup") %>">
 
@@ -72,7 +72,7 @@
 				return false;"
 		>
 
-		<input name="<portlet:namespace />passage" type="text" size="30"><br>
+		<input name="<portlet:namespace />passage" type="text" size="30"><br />
 
 		<input name="<portlet:namespace />version" type="checkbox" value="ESV"> <span style="font-size: xx-small;">ESV</span>
 
@@ -88,7 +88,7 @@
 
 		<input name="<portlet:namespace />version" type="checkbox" value="KJV"> <span style="font-size: xx-small;">KJV</span>
 
-		<br><br>
+		<br /><br />
 
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "compare") %>">
 
@@ -117,13 +117,13 @@
 			<option value="FULL_TEXT"><%= LanguageUtil.get(pageContext, "similar-phrase") %></option>
 		</select>
 
-		<br>
+		<br />
 
 		<input name="SearchWholeWords" type="checkbox" value="yes"> <span style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "match-whole-words") %></span>
 
 		<input name="SearchAsLink" type="checkbox" value="yes"> <span style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "references-only") %></span>
 
-		<br><br>
+		<br /><br />
 
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -302,7 +302,7 @@
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 

@@ -75,7 +75,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 </tr>
 </table>
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>

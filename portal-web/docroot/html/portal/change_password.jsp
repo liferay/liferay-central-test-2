@@ -34,7 +34,7 @@
 <%= LanguageUtil.get(pageContext, "the-system-policy-requires-you-to-change-your-password-at-this-time") %>
 </span>
 
-<br><br>
+<br /><br />
 
 <c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
 
@@ -58,7 +58,7 @@
 
 	</span>
 
-	<br><br>
+	<br /><br />
 </c:if>
 
 <table class="liferay-table">
@@ -80,7 +80,7 @@
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value="<%= LanguageUtil.get(pageContext, "save") %>">
 

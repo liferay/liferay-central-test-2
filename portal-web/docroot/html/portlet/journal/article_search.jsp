@@ -144,7 +144,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 </tr>
 </table>
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -164,15 +164,15 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
 	<input name="<portlet:namespace /><%= ArticleDisplayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>">
 
-	<br>
+	<br />
 
-	<%= LanguageUtil.get(pageContext, "filter-by-structure") %>: <%= displayTerms.getStructureId() %><br>
+	<%= LanguageUtil.get(pageContext, "filter-by-structure") %>: <%= displayTerms.getStructureId() %><br />
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getTemplateId()) %>">
 	<input name="<portlet:namespace /><%= ArticleDisplayTerms.TEMPLATE_ID %>" type="hidden" value="<%= displayTerms.getTemplateId() %>">
 
-	<br>
+	<br />
 
-	<%= LanguageUtil.get(pageContext, "filter-by-template") %>: <%= displayTerms.getTemplateId() %><br>
+	<%= LanguageUtil.get(pageContext, "filter-by-template") %>: <%= displayTerms.getTemplateId() %><br />
 </c:if>

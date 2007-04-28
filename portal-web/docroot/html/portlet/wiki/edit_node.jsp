@@ -69,7 +69,7 @@ String nodeId = BeanParamUtil.getString(node, request, "nodeId");
 <c:if test="<%= node == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -86,7 +86,7 @@ String nodeId = BeanParamUtil.getString(node, request, "nodeId");
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

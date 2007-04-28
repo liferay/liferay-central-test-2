@@ -130,7 +130,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -151,7 +151,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -184,7 +184,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -197,27 +197,27 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tabs names="discount" />
 
 <%= LanguageUtil.format(pageContext, "coupons-can-be-set-to-only-apply-to-orders-above-a-minimum-amount", currency.getSymbol() + doubleFormat.format(0), false) %>
 
-<br><br>
+<br /><br />
 
 <%= LanguageUtil.get(pageContext, "set-the-discount-amount-and-the-discount-type") %>
 
-<br><br>
+<br /><br />
 
 <%= LanguageUtil.get(pageContext, "if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order") %>
 
-<br><br>
+<br /><br />
 
 <table class="liferay-table">
 <tr>
@@ -254,7 +254,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </tr>
 </table>
 
-<br>
+<br />
 
 <liferay-ui:tabs names="limits" />
 
@@ -280,17 +280,17 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <%= LanguageUtil.get(pageContext, "leave-this-blank-if-the-coupon-does-not-check-for-the-parent-categories-of-an-item") %>
 
-<br><br>
+<br /><br />
 
 <liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="limitCategories" />
 
-<br><br>
+<br /><br />
 
 <%= LanguageUtil.get(pageContext, "this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-delimited-list-of-item-skus") %>
 
 <%= LanguageUtil.get(pageContext, "leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku") %>
 
-<br><br>
+<br /><br />
 
 <liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="limitSkus" />
 

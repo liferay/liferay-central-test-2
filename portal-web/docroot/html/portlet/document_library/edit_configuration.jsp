@@ -77,7 +77,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -118,7 +118,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -174,7 +174,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 </table>
 
-<br>
+<br />
 
 <liferay-ui:tabs names="documents-listing" />
 
@@ -199,7 +199,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -255,7 +255,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />folderColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFolderColumns); document.<portlet:namespace />fm.<portlet:namespace />fileEntryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFileEntryColumns); submitForm(document.<portlet:namespace />fm);">
 

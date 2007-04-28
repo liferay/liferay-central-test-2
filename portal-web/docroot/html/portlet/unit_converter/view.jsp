@@ -272,7 +272,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value="<%= LanguageUtil.get(pageContext, "convert") %>">
 

@@ -114,7 +114,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td colspan="2">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -127,7 +127,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td colspan="2">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -142,11 +142,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<b><%= LanguageUtil.get(pageContext, "definition-of-terms") %></b>
 
-		<br><br>
+		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
@@ -217,7 +217,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</c:when>
 </c:choose>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

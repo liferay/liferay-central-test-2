@@ -112,7 +112,7 @@
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 

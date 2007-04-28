@@ -79,7 +79,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<br>
+				<br />
 
 				<img src="http://rev-fun.gospelcom.net/add_toon_info.php?date=<%= date %>">
 			</td>

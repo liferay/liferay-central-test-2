@@ -57,7 +57,7 @@ List results = JournalStructureLocalServiceUtil.search(company.getCompanyId(), s
 searchContainer.setResults(results);
 %>
 
-<br><div class="separator"></div><br>
+<br /><div class="separator"></div><br />
 
 <%
 
@@ -91,7 +91,7 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append(structure.getName());
 
 	if (Validator.isNotNull(structure.getDescription())) {
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append("<span style=\"font-size: xx-small;\">");
 		sm.append(structure.getDescription());
 		sm.append("</span>");

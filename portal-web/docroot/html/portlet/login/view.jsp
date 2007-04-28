@@ -95,7 +95,7 @@
 
 		</table>
 
-		<br>
+		<br />
 
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "sign-in") %>">
 
@@ -104,7 +104,7 @@
 		</c:if>
 
 		<c:if test="<%= company.isSendPassword() %>">
-			<br><br>
+			<br /><br />
 
 			<a href="<%= themeDisplay.getPathMain() %>/portal/login?tabs1=forgot-password" style="font-size: xx-small;">
 			<%= LanguageUtil.get(pageContext, "forgot-password") %>?

@@ -90,7 +90,7 @@ portletURL.setParameter("categoryId", categoryId);
 </tr>
 </table>
 
-<br>
+<br />
 
 <table class="liferay-table">
 
@@ -107,7 +107,7 @@ for (int i = 0; i < entries.size(); i++) {
 				- <a href="http://prdownloads.sourceforge.net/lportal/<%= entry.getDownload() %>?download"><%= entry.getDownload() %></a>
 			</c:if>
 
-			<br>
+			<br />
 
 			<%= entry.getDescription() %>
 		</td>

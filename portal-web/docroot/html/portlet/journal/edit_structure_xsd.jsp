@@ -97,7 +97,7 @@ boolean useEditorApplet = editorType.equals("applet");
 </tr>
 </table>
 
-<br>
+<br />
 
 <c:choose>
 	<c:when test="<%= useEditorApplet %>">
@@ -109,7 +109,7 @@ boolean useEditorApplet = editorType.equals("applet");
 	</c:otherwise>
 </c:choose>
 
-<br><br>
+<br /><br />
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<portlet:namespace />updateStructureXsd();">
 

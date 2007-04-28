@@ -60,7 +60,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 	</div>
 </div>
 
-<br><div class="separator"></div><br>
+<br /><div class="separator"></div><br />
 
 <script type="text/javascript">
 	function <portlet:namespace />updateLookAndFeel(cmd) {
@@ -129,13 +129,13 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 	</table>
 </div>
 
-<br>
+<br />
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />updateLookAndFeel();">
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "reset") %>' onClick="<portlet:namespace />updateLookAndFeel('<%= Constants.RESET %>');">
 
-<br><br>
+<br /><br />
 
 <table class="liferay-table">
 <tr>
@@ -145,21 +145,21 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 			<liferay-util:param name="previewObject" value="container" />
 		</liferay-util:include>
 
-		<br>
+		<br />
 
 		<liferay-util:include page="/html/portlet/portlet_configuration/styles_border.jsp">
 			<liferay-util:param name="propertyPrefix" value="portlet" />
 			<liferay-util:param name="previewObject" value="container" />
 		</liferay-util:include>
 
-		<br>
+		<br />
 
 		<liferay-util:include page="/html/portlet/portlet_configuration/styles_background.jsp">
 			<liferay-util:param name="propertyPrefix" value="header" />
 			<liferay-util:param name="previewObject" value="header" />
 		</liferay-util:include>
 
-		<br>
+		<br />
 
 		<liferay-util:include page="/html/portlet/portlet_configuration/styles_border.jsp">
 			<liferay-util:param name="propertyPrefix" value="header" />
@@ -172,21 +172,21 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 			<liferay-util:param name="previewObject" value="title" />
 		</liferay-util:include>
 
-		<br>
+		<br />
 
 		<liferay-util:include page="/html/portlet/portlet_configuration/styles_background.jsp">
 			<liferay-util:param name="propertyPrefix" value="content" />
 			<liferay-util:param name="previewObject" value="content" />
 		</liferay-util:include>
 
-		<br>
+		<br />
 
 		<liferay-util:include page="/html/portlet/portlet_configuration/styles_border.jsp">
 			<liferay-util:param name="propertyPrefix" value="content" />
 			<liferay-util:param name="previewObject" value="content" />
 		</liferay-util:include>
 
-		<br>
+		<br />
 
 		<liferay-util:include page="/html/portlet/portlet_configuration/styles_text.jsp">
 			<liferay-util:param name="propertyPrefix" value="content" />

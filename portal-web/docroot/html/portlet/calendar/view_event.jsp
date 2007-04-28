@@ -250,7 +250,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</tr>
 	<tr>
 		<td colspan="3">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -286,7 +286,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</tr>
 	<tr>
 		<td colspan="3">
-			<br>
+			<br />
 		</td>
 	</tr>
 

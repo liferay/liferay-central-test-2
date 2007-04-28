@@ -44,7 +44,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 	<c:when test="<%= userTracker == null %>">
 		<%= LanguageUtil.get(pageContext, "session-id-not-found") %>
 
-		<br><br>
+		<br /><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 	</c:when>
@@ -117,7 +117,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		</tr>
 		<tr>
 			<td colspan="3">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -140,7 +140,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
@@ -273,7 +273,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<c:if test="<%= userSessionAlive && !session.getId().equals(userTrackerId) %>">
 			<input type="submit" value='<%= LanguageUtil.get(pageContext, "kill-session") %>'>

@@ -44,10 +44,10 @@ String message = (String)request.getAttribute("liferay-ui:upload-progress:messag
 <iframe frameborder="0" id="<%= id %>-poller" src="" style="width: 0; height: 0;"></iframe>
 
 <div id="<%= id %>-bar-div" style="text-align: center; display: none;">
-	<br>
+	<br />
 
 	<c:if test="<%= Validator.isNotNull(message) %>">
-		<%= LanguageUtil.get(pageContext, message) %>...<br>
+		<%= LanguageUtil.get(pageContext, message) %>...<br />
 	</c:if>
 
 	<div style="background: url(<%= themeDisplay.getPathThemeImages() %>/progress_bar/incomplete_middle.png) scroll repeat-x top left; margin: auto; text-align: left; width: 80%;">

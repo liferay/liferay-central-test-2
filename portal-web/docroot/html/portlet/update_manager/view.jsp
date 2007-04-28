@@ -149,7 +149,7 @@ try {
 		sm.append("<b>");
 		sm.append(pluginPackageName);
 		sm.append("</b> ");
-		sm.append("<br>/");
+		sm.append("<br />/");
 		sm.append(pluginPackageContext);
 
 		row.addText(sm.toString());
@@ -217,14 +217,14 @@ try {
 <%
 	if (total == 0) {
 %>
-		<br>
+		<br />
 
 		<%= LanguageUtil.get(pageContext, "there-are-no-plugins-installed")%>
 <%
 	}
 %>
 
-   <br>
+   <br />
 
    <input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-plugins")%>'/>
 
@@ -236,7 +236,7 @@ try {
 	   </c:if>
 	   <input type="button" value='<%= LanguageUtil.get(pageContext, "refresh") %>'  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');">
 
-	   <br>
+	   <br />
 
 	   <liferay-util:include page="/html/portlet/admin/repository_report.jsp" />
 

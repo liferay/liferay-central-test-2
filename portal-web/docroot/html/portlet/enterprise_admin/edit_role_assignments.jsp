@@ -75,7 +75,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 
 <%= LanguageUtil.get(pageContext, "edit-assignments-for-role") %>: <%= role.getName() %>
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tabs
 	names="users,communities,organizations,locations,user-groups"
@@ -130,11 +130,11 @@ portletURL.setParameter("roleId", role.getRoleId());
 		searchContainer.setResults(results);
 		%>
 
-		<br><div class="separator"></div><br>
+		<br /><div class="separator"></div><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-		<br><br>
+		<br /><br />
 
 		<%
 		List headerNames = new ArrayList();
@@ -207,11 +207,11 @@ portletURL.setParameter("roleId", role.getRoleId());
 		searchContainer.setResults(results);
 		%>
 
-		<br><div class="separator"></div><br>
+		<br /><div class="separator"></div><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-		<br><br>
+		<br /><br />
 
 		<%
 		List headerNames = new ArrayList();
@@ -289,11 +289,11 @@ portletURL.setParameter("roleId", role.getRoleId());
 		searchContainer.setResults(results);
 		%>
 
-		<br><div class="separator"></div><br>
+		<br /><div class="separator"></div><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-		<br><br>
+		<br /><br />
 
 		<%
 		List headerNames = new ArrayList();
@@ -375,11 +375,11 @@ portletURL.setParameter("roleId", role.getRoleId());
 		searchContainer.setResults(results);
 		%>
 
-		<br><div class="separator"></div><br>
+		<br /><div class="separator"></div><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-		<br><br>
+		<br /><br />
 
 		<%
 		List headerNames = new ArrayList();

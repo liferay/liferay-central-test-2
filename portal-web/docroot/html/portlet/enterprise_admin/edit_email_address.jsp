@@ -95,7 +95,7 @@ int typeId = BeanParamUtil.getInteger(emailAddress, request, "typeId");
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

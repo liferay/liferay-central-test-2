@@ -64,7 +64,7 @@ portletURL.setParameter("userGroupId", userGroup.getUserGroupId());
 
 <%= LanguageUtil.get(pageContext, "edit-assignments-for-user-group") %>: <%= userGroup.getName() %>
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tabs
 	names="current,available"
@@ -111,11 +111,11 @@ List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.g
 searchContainer.setResults(results);
 %>
 
-<br><div class="separator"></div><br>
+<br /><div class="separator"></div><br />
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateUserGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-<br><br>
+<br /><br />
 
 <%
 List headerNames = new ArrayList();

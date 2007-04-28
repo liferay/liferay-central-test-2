@@ -25,7 +25,7 @@
 <%= ReleaseInfo.getReleaseInfo() %>
 
 <c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId()) %>">
-	<br><br>
+	<br /><br />
 
 	<%
 	Date uptime = (Date)SimpleCachePool.get(StartupAction.class.getName() + ".uptime");
@@ -91,16 +91,16 @@
 
 	<c:choose>
 		<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
-			<br>
+			<br />
 
 			<html:link page="/admin/view?windowState=maximized&portletMode=view&actionURL=0"><bean:message key="more-options" /></html:link> &raquo;
 		</c:when>
 		<c:otherwise>
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<%= LanguageUtil.get(pageContext, "shutdown-the-server-in-the-specified-number-of-minutes") %>
 
-			<br><br>
+			<br /><br />
 
 			<table class="liferay-table">
 			<tr>
@@ -121,11 +121,11 @@
 			</tr>
 			</table>
 
-			<br>
+			<br />
 
-			<input type="button" value='<%= LanguageUtil.get(pageContext, "shutdown") %>' onClick="<portlet:namespace />saveServer('shutdown');"><br>
+			<input type="button" value='<%= LanguageUtil.get(pageContext, "shutdown") %>' onClick="<portlet:namespace />saveServer('shutdown');"><br />
 
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>
@@ -283,11 +283,11 @@
 
 						</table>
 
-						<br>
+						<br />
 
 						<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveServer('updateLogLevels');">
 
-						<br><br>
+						<br /><br />
 					</div>
 				</td>
 			</tr>
@@ -350,7 +350,7 @@
 
 						</table>
 
-						<br>
+						<br />
 					</div>
 				</td>
 			</tr>

@@ -107,7 +107,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 	</tr>
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 </c:if>
@@ -132,7 +132,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 <c:if test="<%= folder != null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -170,7 +170,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 <c:if test="<%= folder == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -187,7 +187,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

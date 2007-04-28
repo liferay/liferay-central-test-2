@@ -142,7 +142,7 @@ for (int i = 0; i < rowsCount; i++) {
 
 </table>
 
-<br>
+<br />
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<portlet:namespace />updateItemQuantities();">
 

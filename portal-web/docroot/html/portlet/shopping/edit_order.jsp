@@ -63,13 +63,13 @@ WindowState windowState = renderRequest.getWindowState();
 	<c:when test="<%= windowState.equals(LiferayWindowState.POP_UP) %>">
 		<a href="<%= themeDisplay.getURLHome() %>"><img src="<%= themeDisplay.getCompanyLogo() %>"></a>
 
-		<br><br>
+		<br /><br />
 
 		<span style="font-size: small;">
 		<b><%= LanguageUtil.get(pageContext, "invoice") %></b>
 		</span>
 
-		<br><br>
+		<br /><br />
 	</c:when>
 	<c:otherwise>
 		<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
@@ -108,14 +108,14 @@ WindowState windowState = renderRequest.getWindowState();
 </tr>
 </table>
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
 		<b><%= LanguageUtil.get(pageContext, "billing-address") %></b>
 
-		<br><br>
+		<br /><br />
 
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -214,7 +214,7 @@ WindowState windowState = renderRequest.getWindowState();
 	<td valign="top">
 		<b><%= LanguageUtil.get(pageContext, "shipping-address") %></b>
 
-		<br><br>
+		<br /><br />
 
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -312,13 +312,13 @@ WindowState windowState = renderRequest.getWindowState();
 </tr>
 </table>
 
-<br>
+<br />
 
 <c:choose>
 	<c:when test="<%= shoppingPrefs.usePayPal() %>">
 		<b>PayPal</b>
 
-		<br><br>
+		<br /><br />
 
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -398,7 +398,7 @@ WindowState windowState = renderRequest.getWindowState();
 	<c:otherwise>
 		<b><%= LanguageUtil.get(pageContext, "credit-card") %></b>
 
-		<br><br>
+		<br /><br />
 
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -454,16 +454,16 @@ WindowState windowState = renderRequest.getWindowState();
 	</c:otherwise>
 </c:choose>
 
-<br>
+<br />
 
 <c:if test="<%= Validator.isNotNull(order.getComments()) %>">
 	<b><%= LanguageUtil.get(pageContext, "comments") %></b>
 
-	<br><br>
+	<br /><br />
 
 	<%= order.getComments() %>
 
-	<br><br>
+	<br /><br />
 </c:if>
 
 <%
@@ -557,7 +557,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -628,7 +628,7 @@ for (int i = 0; itr.hasNext(); i++) {
 </table>
 
 <c:if test="<%= !windowState.equals(LiferayWindowState.POP_UP) %>">
-	<br>
+	<br />
 
 	<c:if test="<%= shoppingPrefs.usePayPal() %>">
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveOrder();">
@@ -648,7 +648,7 @@ for (int i = 0; itr.hasNext(); i++) {
 </form>
 
 <c:if test="<%= !windowState.equals(LiferayWindowState.POP_UP) %>">
-	<br>
+	<br />
 
 	<liferay-ui:tabs names="comments" />
 

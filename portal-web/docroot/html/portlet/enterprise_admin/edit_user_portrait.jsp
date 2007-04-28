@@ -41,11 +41,11 @@ long userId = ParamUtil.getLong(request, "p_u_i_d");
 
 <%= LanguageUtil.format(pageContext, "upload-a-gif-or-jpeg-that-is-x-pixels-tall-and-x-pixels-wide", new Object[] {"120", "100"}, false) %>
 
-<br><br>
+<br /><br />
 
 <input name="<portlet:namespace />fileName" size="50" type="file">
 
-<br><br>
+<br /><br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

@@ -59,7 +59,7 @@
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -73,16 +73,16 @@
 </tr>
 </table>
 
-<br>
+<br />
 
 <%= LanguageUtil.get(pageContext, "enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page") %>
 
-<br><br>
+<br /><br />
 
 <textarea name="<portlet:namespace />roles" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= StringUtil
 	.merge(pluginSetting.getRolesArray(), "\n") %></textarea>
 
-<br><br>
+<br /><br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

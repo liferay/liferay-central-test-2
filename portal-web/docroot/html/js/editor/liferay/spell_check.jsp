@@ -271,9 +271,9 @@ List invalidWords = WordsUtil.checkSpelling(text);
 		</table>
 	</td>
 	<td align="center">
-		<input class="button" type="button" value="Ignore" onClick="ignore();"> <input class="button" type="button" value="Ignore All" onClick="ignoreAll();"><br><br>
+		<input class="button" type="button" value="Ignore" onClick="ignore();"> <input class="button" type="button" value="Ignore All" onClick="ignoreAll();"><br /><br />
 
-		<input class="button" type="button" value="Change" onClick="change();"> <input class="button" type="button" value="Change All" onClick="changeAll();"><br><br>
+		<input class="button" type="button" value="Change" onClick="change();"> <input class="button" type="button" value="Change All" onClick="changeAll();"><br /><br />
 
 		<input class="button" type="button" value="Finish" onClick="finish();"> <input class="button" type="button" value="Cancel" onClick="self.close();">
 	</td>

@@ -194,7 +194,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		</tr>
 		<tr>
 			<td colspan="3">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -325,7 +325,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		<c:if test="<%= fieldEnableContactBirthday || fieldEnableContactMale %>">
 			<tr>
 				<td colspan="3">
-					<br>
+					<br />
 				</td>
 			</tr>
 		</c:if>
@@ -387,7 +387,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 	<c:if test="<%= user2 != null %>">
 		<td style="padding-left: 30px;"></td>
 		<td align="center" valign="top">
-			<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getUserId() %>"><br>
+			<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getUserId() %>"><br />
 
 			<c:if test="<%= editable %>">
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" /></portlet:renderURL>" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "change") %></a>
@@ -398,11 +398,11 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 </table>
 
 <c:if test="<%= editable %>">
-	<br>
+	<br />
 
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUser('<%= user2 == null ? Constants.ADD : Constants.UPDATE %>');"><br>
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUser('<%= user2 == null ? Constants.ADD : Constants.UPDATE %>');"><br />
 </c:if>
 
 <c:if test="<%= user2 != null %>">
-	<br>
+	<br />
 </c:if>

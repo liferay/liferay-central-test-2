@@ -56,6 +56,6 @@ String suggestion = (String)request.getAttribute(WebKeys.GOOGLE_SPELLING_SUGGEST
 	document.<portlet:namespace />fm.<portlet:namespace />args.focus();
 </script>
 
-<br>
+<br />
 
 <%= LanguageUtil.format(pageContext, "googles-spelling-suggestion-for", new Object[] {"<i>" + args + "</i>", "<b>" + suggestion + "</b>"}, false) %>

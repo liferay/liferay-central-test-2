@@ -83,7 +83,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 	<td>
 		<b><%= LanguageUtil.get(pageContext, "billing-address") %></b>
 
-		<br><br>
+		<br /><br />
 
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -182,7 +182,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 	<td valign="top">
 		<b><%= LanguageUtil.get(pageContext, "shipping-address") %></b>
 
-		<br><br>
+		<br /><br />
 
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -281,11 +281,11 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 </table>
 
 <c:if test="<%= !shoppingPrefs.usePayPal() %>">
-	<br>
+	<br />
 
 	<b><%= LanguageUtil.get(pageContext, "credit-card") %></b>
 
-	<br><br>
+	<br /><br />
 
 	<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
@@ -340,16 +340,16 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 	</table>
 </c:if>
 
-<br>
+<br />
 
 <c:if test="<%= Validator.isNotNull(order.getComments()) %>">
 	<b><%= LanguageUtil.get(pageContext, "comments") %></b>
 
-	<br><br>
+	<br /><br />
 
 	<%= order.getComments() %>
 
-	<br><br>
+	<br /><br />
 </c:if>
 
 <%
@@ -467,7 +467,7 @@ for (int i = 0; itr.hasNext(); i++) {
 <input name="<portlet:namespace />itemIds" type="hidden" value="<%= itemIds %>">
 <input name="<portlet:namespace />couponIds" type="hidden" value="<%= cart.getCouponIds() %>">
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -541,7 +541,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="button" value='<%= shoppingPrefs.usePayPal() ? LanguageUtil.get(pageContext, "continue") : LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />continueCheckout();">
 

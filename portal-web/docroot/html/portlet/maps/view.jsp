@@ -39,23 +39,23 @@ String csz = ParamUtil.getString(request, "csz");
 	<td valign="top">
 		<html:form action="/maps/view?windowState=maximized" method="post" focus="street" onsubmit="submitForm(this); return false;">
 
-		<%= LanguageUtil.get(pageContext, "street-address") %><br>
+		<%= LanguageUtil.get(pageContext, "street-address") %><br />
 
 		<html:text name="mapsMapsForm" property="street" size="30" />
 
-		<br>
+		<br />
 
-		<%= LanguageUtil.get(pageContext, "city-state-or-zip") %><br>
+		<%= LanguageUtil.get(pageContext, "city-state-or-zip") %><br />
 
 		<html:text name="mapsMapsForm" property="csz" size="30" />
 
-		<br>
+		<br />
 
 		<select name="<portlet:namespace />country">
 			<option value="USA">USA</option>
 		</select>
 
-		<br><br>
+		<br /><br />
 
 		<html:submit><bean:message key="search" /></html:submit>
 
@@ -85,7 +85,7 @@ String csz = ParamUtil.getString(request, "csz");
 				<c:when test="<%= map == null %>">
 					<span class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "a-map-could-not-be-found-for-the-address") %></span>
 
-					<br><br>
+					<br /><br />
 
 					<b><%= street %>, <%= csz %></b>.
 				</c:when>

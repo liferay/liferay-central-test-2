@@ -95,11 +95,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<c:when test='<%= tabs2.equals("payment-settings") %>'>
 		<%= LanguageUtil.get(pageContext, "enter-a-paypal-email-address-to-send-all-payments-to-paypal") %> <%= LanguageUtil.format(pageContext, "go-to-paypal-and-set-up-ipn-to-post-to-x", "<b>http://" + company.getPortalURL() + themeDisplay.getPathMain() + "/shopping/notify</b>", false) %>
 
-		<br><br>
+		<br /><br />
 
 		<%= LanguageUtil.get(pageContext, "enter-a-blank-paypal-email-address-to-disable-paypal") %>
 
-		<br><br>
+		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
@@ -112,7 +112,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td colspan="2">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -162,7 +162,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td colspan="2">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -215,7 +215,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td colspan="2">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -231,7 +231,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<c:when test='<%= tabs2.equals("shipping-calculation") %>'>
 		<%= LanguageUtil.get(pageContext, "calculate-a-flat-shipping-amount-based-on-the-total-amount-of-the-purchase") %> <span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <%= LanguageUtil.get(pageContext, "calculate-the-shipping-based-on-a-percentage-of-the-total-amount-of-the-purchase") %>
 
-		<br><br>
+		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
@@ -247,7 +247,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td colspan="2">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -294,7 +294,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<c:when test='<%= tabs2.equals("insurance-calculation") %>'>
 		<%= LanguageUtil.get(pageContext, "calculate-a-flat-insurance-amount-based-on-the-total-amount-of-the-purchase") %> <span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <%= LanguageUtil.get(pageContext, "calculate-the-insurance-based-on-a-percentage-of-the-total-amount-of-the-purchase") %>
 
-		<br><br>
+		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
@@ -310,7 +310,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td colspan="2">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -388,7 +388,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td colspan="2">
-						<br>
+						<br />
 					</td>
 				</tr>
 				<tr>
@@ -408,7 +408,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td colspan="2">
-						<br>
+						<br />
 					</td>
 				</tr>
 				<tr>
@@ -423,11 +423,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				</table>
 
-				<br>
+				<br />
 
 				<b><%= LanguageUtil.get(pageContext, "definition-of-terms") %></b>
 
-				<br><br>
+				<br /><br />
 
 				<table class="liferay-table">
 				<tr>
@@ -544,7 +544,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</c:when>
 </c:choose>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

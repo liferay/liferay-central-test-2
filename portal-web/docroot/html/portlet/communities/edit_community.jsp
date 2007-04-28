@@ -89,7 +89,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

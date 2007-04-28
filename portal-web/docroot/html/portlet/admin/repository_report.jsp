@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/admin/init.jsp" %>
 
 <c:if test="<%= SessionMessages.contains(renderRequest, WebKeys.PLUGIN_REPOSITORY_REPORT) %>">
-	<br>
+	<br />
 
 	<%
 	RepositoryReport repositoryReport = (RepositoryReport)SessionMessages.get(renderRequest, WebKeys.PLUGIN_REPOSITORY_REPORT);
@@ -53,7 +53,7 @@
 			</c:otherwise>
 		</c:choose>
 
-		<br>
+		<br />
 
 	<%
 	}

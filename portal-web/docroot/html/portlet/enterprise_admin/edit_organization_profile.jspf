@@ -155,13 +155,13 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 </table>
 
 <c:if test="<%= editable %>">
-	<br>
+	<br />
 
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveOrganization('<%= organization == null ? Constants.ADD : Constants.UPDATE %>');"><br>
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveOrganization('<%= organization == null ? Constants.ADD : Constants.UPDATE %>');"><br />
 </c:if>
 
 <c:if test="<%= organization != null %>">
-	<br>
+	<br />
 </c:if>
 
 <script type="text/javascript">

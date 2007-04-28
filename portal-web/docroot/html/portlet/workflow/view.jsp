@@ -72,12 +72,12 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer.setResults(results);
 			%>
 
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.WORKFLOW, ActionKeys.ADD_DEFINITION) %>">
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/workflow/edit_definition" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 
-				<br><br>
+				<br /><br />
 			</c:if>
 
 			<%
@@ -156,7 +156,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer.setResults(results);
 			%>
 
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<%
 			List resultRows = searchContainer.getResultRows();
@@ -254,7 +254,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer.setResults(results);
 			%>
 
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<%
 			List resultRows = searchContainer.getResultRows();

@@ -39,11 +39,11 @@ List events = TICHUtil.getEvents();
 
 				<b><i><%= event.getYear() %></i></b>
 
-				<br><br>
+				<br /><br />
 
 				<%= event.getDescription() %>
 
-				<br><br>
+				<br /><br />
 
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />">
 				<%= LanguageUtil.get(pageContext, "read-more") %> &raquo;
@@ -67,7 +67,7 @@ List events = TICHUtil.getEvents();
 					</tr>
 					<tr>
 						<td colspan="2">
-							<br>
+							<br />
 						</td>
 					</tr>
 

@@ -90,7 +90,7 @@ if (role != null) {
 
 Assign Community roles to users.
 
-<br><br>
+<br /><br />
 
 <c:choose>
 	<c:when test="<%= role == null %>">
@@ -98,7 +98,7 @@ Assign Community roles to users.
 			Step 1 of 2: Choose a role.
 		</div>
 
-		<br>
+		<br />
 
 		<div class="breadcrumbs">
 			<%= breadcrumbs %>
@@ -135,7 +135,7 @@ Assign Community roles to users.
 			searchContainer.setResults(results);
 			%>
 
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<%
 			List resultRows = searchContainer.getResultRows();
@@ -181,7 +181,7 @@ Assign Community roles to users.
 			Step 2 of 2: Assign Community roles to users. <i>Current</i> signifies current users associated with the <i><%= role.getName() %></i> role. <i>Available</i> signifies all users associated with the <i><%= group.getName() %></i> community.
 		</div>
 
-		<br>
+		<br />
 
 		<div class="breadcrumbs">
 			<%= breadcrumbs %>
@@ -228,11 +228,11 @@ Assign Community roles to users.
 		searchContainer.setResults(results);
 		%>
 
-		<br><div class="separator"></div><br>
+		<br /><div class="separator"></div><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateUserGroupRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-		<br><br>
+		<br /><br />
 
 		<%
 		List headerNames = new ArrayList();

@@ -69,7 +69,7 @@ catch (Throwable t) {
 					</tr>
 					<tr>
 						<td colspan="3">
-							<br>
+							<br />
 						</td>
 					</tr>
 				</c:if>
@@ -86,7 +86,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td colspan="3">
-						<br>
+						<br />
 					</td>
 				</tr>
 				<tr>
@@ -102,7 +102,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td colspan="3">
-						<br>
+						<br />
 					</td>
 				</tr>
 				<tr>
@@ -118,7 +118,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td colspan="3">
-						<br>
+						<br />
 					</td>
 				</tr>
 				<tr>
@@ -134,7 +134,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td colspan="3">
-						<br>
+						<br />
 					</td>
 				</tr>
 				<tr>
@@ -150,7 +150,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td colspan="3">
-						<br>
+						<br />
 					</td>
 				</tr>
 				<tr>
@@ -178,7 +178,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td colspan="3">
-						<br>
+						<br />
 					</td>
 				</tr>
 				</table>
@@ -186,7 +186,7 @@ catch (Throwable t) {
 		</tr>
 		<tr>
 			<td>
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>

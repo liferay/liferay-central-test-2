@@ -110,7 +110,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 <tr>
 	<td>
 		<c:if test="<%= count.getValue() > 0 %>">
-			<br>
+			<br />
 		</c:if>
 
 		<table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-color: <%= colorScheme.getPortletMenuBg() %>; border-width: 1px; border-style: dashed; padding: 4px;">

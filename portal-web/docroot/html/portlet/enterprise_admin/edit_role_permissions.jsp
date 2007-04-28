@@ -185,30 +185,30 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			defaultOn="false"
 		/>
 
-		<br><br>
+		<br /><br />
 
 		<div id="toggle_id_enterprise_admin_edit_role_permissions" style="display: <liferay-ui:toggle-value id="toggle_id_enterprise_admin_edit_role_permissions" />;">
 			<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
 				This is a <i>Regular</i> role. That means this role can be associated directly with users, communities, organizations, locations, or user groups.
 
-				<br><br>
+				<br /><br />
 
 				To add permissions to this role, you must first choose a portlet or a resource. A resource is a type of object that belongs to a portlet. For example, <i>Category</i> is a resource that belongs to the <i>Message Boards</i> portlet.
 
-				<br><br>
+				<br /><br />
 
 				Once you choose the portlet or resource, configure the actions that this role has and the scope of the actions.
 
-				<br><br>
+				<br /><br />
 
 				For example, you can give this role the <i>Delete</i> action on the <i>Category</i> resource with the <i>Enterprise</i> scope. This means anyone associated with this role can delete all Message Boards Categories.
 
-				<br><br>
+				<br /><br />
 
 				Or, you can give this role the <i>Delete</i> action on the <i>Category</i> resource with the <i>Communities</i> scope. You must then choose a list of communities. This means anyone associated with this role can delete Message Boards Categories in the selected communities.
 			</div>
 
-			<br>
+			<br />
 		</div>
 	</c:when>
 	<c:otherwise>
@@ -221,30 +221,30 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			defaultOn="false"
 		/>
 
-		<br><br>
+		<br /><br />
 
 		<div id="toggle_id_enterprise_admin_edit_role_permissions" style="display: <liferay-ui:toggle-value id="toggle_id_enterprise_admin_edit_role_permissions" />;">
 			<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
 				This is a <i>Community</i> role. That means this role is only valid for a user in a given community. A user can have one set of Community roles in one community, and another set of Community roles in another community.
 
-				<br><br>
+				<br /><br />
 
 				To add permissions to this role, you must first choose a portlet or a resource. A resource is a type of object that belongs to a portlet. For example, <i>Category</i> is a resource that belongs to the <i>Message Boards</i> portlet.
 
-				<br><br>
+				<br /><br />
 
 				Once you choose the portlet or resource, configure the actions that this role has.
 
-				<br><br>
+				<br /><br />
 
 				You must then go to the Communities portlet to associate different users with the appropriate Community roles.
 
-				<br><br>
+				<br /><br />
 
 				For example, you may have a role called <i>Message Boards Moderator</i>. You give this role the <i>Delete</i> action on the <i>Category</i> resource. A user can then have this role for community X and not have this role for community Y. That means this user can delete Message Boards Categories for community X but not for community Y.
 			</div>
 
-			<br>
+			<br />
 		</div>
 	</c:otherwise>
 </c:choose>
@@ -375,7 +375,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		<input  type="button" value="<%=LanguageUtil.get(pageContext, "add-permissions")%>" onClick="self.location = '<%= addPermissionURL %>';">
 
 		<c:if test="<%= total > 0 %>">
-			<br><br>
+			<br /><br />
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
@@ -406,7 +406,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			</c:choose>
 		</div>
 
-		<br>
+		<br />
 
 		<div class="breadcrumbs">
 			<%= breadcrumbs %>
@@ -454,11 +454,11 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		searchContainer.setResults(results);
 		%>
 
-		<br><div class="separator"></div><br>
+		<br /><div class="separator"></div><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos %>);">
 
-		<br><br>
+		<br /><br />
 
 		<%
 		List resultRows = searchContainer.getResultRows();
@@ -482,7 +482,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
-		<br>
+		<br />
 
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
@@ -539,7 +539,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			</c:choose>
 		</div>
 
-		<br>
+		<br />
 
 		<div class="breadcrumbs">
 			<%= breadcrumbs %>
@@ -603,7 +603,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		</table>
 
-		<br>
+		<br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />updateActions();">
 	</c:when>
@@ -612,7 +612,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			Step 2 of <%= totalSteps %>: Choose a resource or proceed to the next step.
 		</div>
 
-		<br>
+		<br />
 
 		<div class="breadcrumbs">
 			<%= breadcrumbs %>
@@ -620,18 +620,18 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		Proceed to the next step to define permissions to the <%= portletResourceName %> portlet itself.
 
-		<br><br>
+		<br /><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="self.location = '<%= portletURL.toString() %>&editPortletPermissions=1';">
 
 		<c:if test="<%= modelResources.size() > 0 %>">
-			<br><br>
+			<br /><br />
 
 			<liferay-ui:tabs names="resources" />
 
 			Define permissions to a resource that belongs to the <%= portletResourceName %> portlet.
 
-			<br><br>
+			<br /><br />
 
 			<%
 			SearchContainer searchContainer = new SearchContainer();
@@ -723,7 +723,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			Step 1 of <%= totalSteps %>: Choose a portlet.
 		</div>
 
-		<br>
+		<br />
 
 		<div class="breadcrumbs">
 			<%= breadcrumbs %>

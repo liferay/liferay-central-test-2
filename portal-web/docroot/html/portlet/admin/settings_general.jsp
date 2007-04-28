@@ -148,11 +148,11 @@ User user2 = company.getDefaultUser();
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveEnterprise('<%= Constants.UPDATE %>');">
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tabs names="display" param="tabs2" />
 
@@ -198,14 +198,14 @@ User user2 = company.getDefaultUser();
 	</td>
 	<td style="padding-left: 30px;"></td>
 	<td align="center" valign="top">
-		<img src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= company.getCompanyId() %>"><br>
+		<img src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= company.getCompanyId() %>"><br />
 
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_enterprise_logo" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "change") %></a><br>
+		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_enterprise_logo" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "change") %></a><br />
 	</td>
 </tr>
 </table>
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -219,11 +219,11 @@ User user2 = company.getDefaultUser();
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveEnterprise('display');">
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tabs
 	names="email-addresses,addresses,websites,phone-numbers"

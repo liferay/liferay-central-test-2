@@ -164,7 +164,7 @@ if (Validator.isNotNull(modelResource)) {
 
 Assign permissions to users.
 
-<br><br>
+<br /><br />
 
 <c:choose>
 	<c:when test="<%= editUserPermissions %>">
@@ -195,7 +195,7 @@ Assign permissions to users.
 					</c:choose>
 				</div>
 
-				<br>
+				<br />
 
 				<div class="breadcrumbs">
 					<%= breadcrumbs %>
@@ -239,11 +239,11 @@ Assign permissions to users.
 				searchContainer.setResults(results);
 				%>
 
-				<br><div class="separator"></div><br>
+				<br /><div class="separator"></div><br />
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserPermissions();">
 
-				<br><br>
+				<br /><br />
 
 				<%
 				List headerNames = new ArrayList();
@@ -337,7 +337,7 @@ Assign permissions to users.
 					rightList="<%= rightList %>"
 				/>
 
-				<br>
+				<br />
 
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
@@ -360,7 +360,7 @@ Assign permissions to users.
 				Step 2 of 3: Choose a resource or proceed to the next step.
 			</div>
 
-			<br>
+			<br />
 
 			<div class="breadcrumbs">
 				<%= breadcrumbs %>
@@ -368,7 +368,7 @@ Assign permissions to users.
 
 			Proceed to the next step to assign users with permissions to the <%= portletResourceName %> portlet itself.
 
-			<br><br>
+			<br /><br />
 
 			<%
 			portletURL.setParameter("editUserPermissions", "1");
@@ -383,13 +383,13 @@ Assign permissions to users.
 		</c:if>
 
 		<c:if test="<%= (modelResources != null) && (modelResources.size() > 0) %>">
-			<br><br>
+			<br /><br />
 
 			<liferay-ui:tabs names="resources" />
 
 			Assign users with permissions to a resource that belongs to the <%= portletResourceName %> portlet.
 
-			<br><br>
+			<br /><br />
 
 			<%
 			SearchContainer searchContainer = new SearchContainer();
@@ -437,7 +437,7 @@ Assign permissions to users.
 			Step 1 of 3: Choose a portlet.
 		</div>
 
-		<br>
+		<br />
 
 		<div class="breadcrumbs">
 			<%= breadcrumbs %>

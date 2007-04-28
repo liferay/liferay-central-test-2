@@ -111,14 +111,14 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </tr>
 </table>
 
-<br>
+<br />
 
 <div>
 	<b><%= LanguageUtil.get(pageContext, "total-votes") %>:</b> <%= numberFormat.format(totalVotes) %>
 </div>
 
 <c:if test="<%= portletName.equals(PortletKeys.POLLS) %>">
-	<br>
+	<br />
 
 	<div>
 		<b><%= LanguageUtil.get(pageContext, "charts") %>:</b>
@@ -130,7 +130,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 	</div>
 
 	<c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
-		<br>
+		<br />
 
 		<liferay-ui:tabs names="actual-votes" />
 
@@ -193,7 +193,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </c:if>
 
 <c:if test="<%= question.isExpired() %>">
-	<br>
+	<br />
 
 	<div style="font-size: xx-small;">
 	<%= LanguageUtil.format(pageContext, "voting-is-disabled-because-this-poll-expired-on-x", dateFormatDateTime.format(question.getExpirationDate())) %>.

@@ -138,7 +138,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -161,7 +161,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -192,7 +192,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -242,7 +242,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 </tr>
 <tr>
 	<td colspan="3">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -276,7 +276,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 <c:if test="<%= template == null %>">
 	<tr>
 		<td colspan="3">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -294,7 +294,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

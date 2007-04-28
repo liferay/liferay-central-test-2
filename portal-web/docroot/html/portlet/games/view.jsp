@@ -75,7 +75,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<input type="submit" value="<%= LanguageUtil.get(pageContext, "new-game") %>">
 
-		<br><br>
+		<br /><br />
 
 		<applet archive="minesweeper.jar" code="jmapplet" codebase="<%= themeDisplay.getPathApplet() %>" height="<%= appletHeight %>" width="<%= appletWidth %>">
 			<param name="level" value="<%= level %>" />

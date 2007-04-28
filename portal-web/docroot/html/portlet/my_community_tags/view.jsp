@@ -28,7 +28,7 @@
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
 		<%= LanguageUtil.get(pageContext, "community-tags-are-injected-to-all-pages-of-this-community") %>
 
-		<br><br>
+		<br /><br />
 
 		<c:choose>
 			<c:when test="<%= entries.length > 0 %>">

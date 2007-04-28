@@ -62,15 +62,15 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <c:if test="<%= editable %>">
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_org_labor" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="organizationId" value="<%= organization.getOrganizationId() %>" /></portlet:renderURL>';"><br>
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_org_labor" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="organizationId" value="<%= organization.getOrganizationId() %>" /></portlet:renderURL>';"><br />
 
 	<c:if test="<%= results.size() > 0 %>">
-		<br>
+		<br />
 	</c:if>
 </c:if>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <c:if test="<%= editable || (results.size() > 0) %>">
-	<br>
+	<br />
 </c:if>

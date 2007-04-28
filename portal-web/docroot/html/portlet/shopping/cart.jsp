@@ -115,15 +115,15 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 	String[] badItemIds = StringUtil.split(cmqe.getMessage());
 	%>
 
-	<%= LanguageUtil.get(pageContext, "all-quantities-must-be-greater-than-the-minimum-quantity-of-the-item") %><br>
+	<%= LanguageUtil.get(pageContext, "all-quantities-must-be-greater-than-the-minimum-quantity-of-the-item") %><br />
 
 	<c:if test="<%= minQuantityMultiple %>">
-		<br>
+		<br />
 
-		<%= LanguageUtil.get(pageContext, "all-quantities-must-be-a-multiple-of-the-minimum-quantity-of-the-item") %><br>
+		<%= LanguageUtil.get(pageContext, "all-quantities-must-be-a-multiple-of-the-minimum-quantity-of-the-item") %><br />
 	</c:if>
 
-	<br>
+	<br />
 
 	<%= LanguageUtil.get(pageContext, "please-reenter-your-quantity-for-the-items-with-the-following-skus") %>
 
@@ -198,7 +198,7 @@ for (int i = 0; itr.hasNext(); i++) {
 	StringMaker sm = new StringMaker();
 
 	if (item.isSmallImage()) {
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append("<img alt=\"");
 		sm.append(item.getSku());
 		sm.append("\" border=\"0\" src=\"");
@@ -232,7 +232,7 @@ for (int i = 0; itr.hasNext(); i++) {
 	sm.append("<span style=\"font-size: xx-small;\">");
 
 	if (Validator.isNotNull(item.getDescription())) {
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append(item.getDescription());
 	}
 
@@ -246,14 +246,14 @@ for (int i = 0; itr.hasNext(); i++) {
 		String propsKey = (String)enu.nextElement();
 		String propsValue = props.getProperty(propsKey, StringPool.BLANK);
 
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append(propsKey);
 		sm.append(": ");
 		sm.append(propsValue);
 	}*/
 
 	if (PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.SHOPPING_ITEM_SHOW_AVAILABILITY)) {
-		sm.append("<br><br>");
+		sm.append("<br /><br />");
 
 		if (ShoppingUtil.isInStock(item, itemFields, fieldsArray)) {
 			sm.append(LanguageUtil.get(pageContext, "availability"));
@@ -276,7 +276,7 @@ for (int i = 0; itr.hasNext(); i++) {
 	}
 
 	if (fieldsArray.length > 0) {
-		sm.append("<br>");
+		sm.append("<br />");
 	}
 
 	for (int j = 0; j < fieldsArray.length; j++) {
@@ -285,20 +285,20 @@ for (int i = 0; itr.hasNext(); i++) {
 		String fieldName = fieldsArray[j].substring(0, pos);
 		String fieldValue = fieldsArray[j].substring(pos + 1, fieldsArray[j].length());
 
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append(fieldName);
 		sm.append(": ");
 		sm.append(fieldValue);
 	}
 
 	if (itemPrices.length > 0) {
-		sm.append("<br>");
+		sm.append("<br />");
 	}
 
 	for (int j = 0; j < itemPrices.length; j++) {
 		ShoppingItemPrice itemPrice = itemPrices[j];
 
-		sm.append("<br>");
+		sm.append("<br />");
 
 		if ((itemPrice.getMinQuantity() == 0) && (itemPrice.getMaxQuantity() == 0)) {
 			sm.append(LanguageUtil.get(pageContext, "price"));
@@ -399,7 +399,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<br>
+<br />
 
 <table class="liferay-table">
 <tr>
@@ -439,7 +439,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 <tr>
@@ -478,7 +478,7 @@ for (int i = 0; itr.hasNext(); i++) {
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
+		<br />
 	</td>
 </tr>
 
@@ -500,7 +500,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 	</tr>
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 </c:if>
@@ -533,7 +533,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 
 </table>
 
-<br>
+<br />
 
 <%
 String[] ccTypes = shoppingPrefs.getCcTypes();
@@ -543,7 +543,7 @@ if (shoppingPrefs.usePayPal()) {
 
 	<img src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_paypal.png">
 
-	<br><br>
+	<br /><br />
 
 <%
 }
@@ -557,7 +557,7 @@ else if (!shoppingPrefs.usePayPal() && (ccTypes.length > 0)) {
 	}
 %>
 
-	<br><br>
+	<br /><br />
 
 <%
 }

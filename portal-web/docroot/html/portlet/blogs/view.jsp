@@ -128,7 +128,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			sm.append(curCategory.getName());
 
 			if (Validator.isNotNull(curCategory.getDescription())) {
-				sm.append("<br>");
+				sm.append("<br />");
 				sm.append("<span style=\"font-size: xx-small;\">");
 				sm.append(curCategory.getDescription());
 				sm.append("</span>");
@@ -183,7 +183,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			</table>
 
 			<c:if test="<%= results.size() > 0 %>">
-				<br>
+				<br />
 			</c:if>
 		</c:if>
 
@@ -217,7 +217,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			%>
 
 			<c:if test="<%= results.size() > 0 %>">
-				<br>
+				<br />
 
 				<liferay-ui:tabs
 					names="entries"

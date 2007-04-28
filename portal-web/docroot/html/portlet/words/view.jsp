@@ -46,13 +46,13 @@ String[] words = (String[])request.getAttribute(WebKeys.WORDS_LIST);
 <input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
 <c:if test="<%= (words != null) && (words.length > 0) %>">
-	<br><br>
+	<br /><br />
 
 	<%
 	for (int i = 0; i < words.length; i++) {
 	%>
 
-		<%= words[i] %><br>
+		<%= words[i] %><br />
 
 	<%
 	}

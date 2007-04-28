@@ -142,7 +142,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), String
 
 	</select>
 
-	<br><br>
+	<br /><br />
 </c:if>
 
 <table class="liferay-table">
@@ -259,7 +259,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), String
 </tr>
 </table>
 
-<br>
+<br />
 
 <liferay-ui:tabs names="shipping-address" />
 
@@ -304,7 +304,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), String
 </tr>
 </table>
 
-<br>
+<br />
 
 <table class="liferay-table">
 <tr>
@@ -420,7 +420,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), String
 </tr>
 </table>
 
-<br>
+<br />
 
 <%
 String[] ccTypes = shoppingPrefs.getCcTypes();
@@ -444,7 +444,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 	}
 	%>
 
-	<br><br>
+	<br /><br />
 
 	<table class="liferay-table">
 	<tr>
@@ -524,11 +524,11 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 	</tr>
 	</table>
 
-	<br>
+	<br />
 
 	<img src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_ver_number.png">
 
-	<br><br>
+	<br /><br />
 
 	<table class="liferay-table">
 	<tr>
@@ -541,14 +541,14 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 	</tr>
 	</table>
 
-	<br>
+	<br />
 </c:if>
 
 <liferay-ui:tabs names="comments" />
 
 <liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="comments" />
 
-<br><br>
+<br /><br />
 
 <input type="button" value="<bean:message key="continue" />" onClick="submitForm(document.<portlet:namespace />fm);">
 

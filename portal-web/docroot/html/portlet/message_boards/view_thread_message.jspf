@@ -32,7 +32,7 @@
 						<%= LanguageUtil.get(pageContext, "anonymous") %>
 					</c:when>
 					<c:otherwise>
-						<b><%= PortalUtil.getUserName(message.getUserId(), message.getUserName(), request) %></b><br>
+						<b><%= PortalUtil.getUserName(message.getUserId(), message.getUserName(), request) %></b><br />
 
 						<span style="font-size: xx-small;">
 
@@ -46,7 +46,7 @@
 								String rank = MBUtil.getUserRank(portletSetup, LocaleUtil.toLanguageId(locale), posts);
 							%>
 
-								<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" style="margin:10px 0px; width: 75%;"><br>
+								<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" style="margin:10px 0px; width: 75%;"><br />
 
 								<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
 									<div>
@@ -57,11 +57,11 @@
 								<c:if test="<%= Validator.isNotNull(organization.getOrganizationId()) %>">
 									<%= LanguageUtil.get(pageContext, "organization") %>: <%= organization.getName() %>
 
-									<br><br>
+									<br /><br />
 								</c:if>
 
-								<%= LanguageUtil.get(pageContext, "rank") %>: <%= rank %><br>
-								<%= LanguageUtil.get(pageContext, "posts") %>: <%= posts %><br>
+								<%= LanguageUtil.get(pageContext, "rank") %>: <%= rank %><br />
+								<%= LanguageUtil.get(pageContext, "posts") %>: <%= posts %><br />
 								<%= LanguageUtil.get(pageContext, "joined") %>: <%= dateFormatDate.format(user2.getCreateDate()) %>
 
 							<%
@@ -345,7 +345,7 @@
 				<%= msgBody %>
 
 				<c:if test="<%= message.isAttachments() %>">
-					<br><br>
+					<br /><br />
 
 					<%
 					String[] fileNames = null;
@@ -368,7 +368,7 @@
 
 								<img src="<%= themeDisplay.getPathMain() %>/message_boards/get_message_attachment?messageId=<%= message.getMessageId() %>&attachment=<%= Http.encodeURL(fileName) %>">
 
-								<br><br>
+								<br /><br />
 
 						<%
 							}

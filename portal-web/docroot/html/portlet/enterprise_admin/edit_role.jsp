@@ -98,7 +98,7 @@ String roleId = BeanParamUtil.getString(role, request, "roleId");
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

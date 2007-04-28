@@ -97,7 +97,7 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append(curCategory.getName());
 
 	if (Validator.isNotNull(curCategory.getDescription())) {
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append("<span style=\"font-size: xx-small;\">");
 		sm.append(curCategory.getDescription());
 		sm.append("</span>");

@@ -121,7 +121,7 @@ for (int i = 0; i < results.size(); i++) {
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 <c:if test="<%= results.size() > 0 %>">
-	<br>
+	<br />
 </c:if>
 
 <c:if test="<%= folder != null %>">
@@ -178,7 +178,7 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append(fileEntry.getTitle());
 
 		if (Validator.isNotNull(fileEntry.getDescription())) {
-			sm.append("<br>");
+			sm.append("<br />");
 			sm.append("<span style=\"font-size: xx-small;\">");
 			sm.append(fileEntry.getDescription());
 			sm.append("</span>");

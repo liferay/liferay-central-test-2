@@ -53,7 +53,7 @@ boolean showAddEntryButton = tabs1.equals("entries") && PortletPermission.contai
 	</table>
 
 	<c:if test="<%= results.size() > 0 %>">
-		<br>
+		<br />
 	</c:if>
 </c:if>
 
@@ -65,7 +65,7 @@ for (int i = 0; i < results.size(); i++) {
 	<%@ include file="/html/portlet/blogs/view_entry_content.jsp" %>
 
 	<c:if test="<%= i + 1 < results.size() %>">
-		<br><div class="separator"></div><br>
+		<br /><div class="separator"></div><br />
 	</c:if>
 
 <%

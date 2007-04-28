@@ -235,7 +235,7 @@ else {
 
 </table>
 
-<br>
+<br />
 
 <liferay-ui:ratings
 	className="<%= SCProductEntry.class.getName() %>"
@@ -318,7 +318,7 @@ else {
 				sm.append("</b>");
 
 				if (Validator.isNotNull(curProductVersion.getChangeLog())) {
-					sm.append("<br>");
+					sm.append("<br />");
 					sm.append("<span style=\"font-size: xx-small;\">");
 					sm.append(curProductVersion.getChangeLog());
 					sm.append("</span>");

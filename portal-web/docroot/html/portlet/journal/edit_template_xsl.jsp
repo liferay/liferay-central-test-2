@@ -110,7 +110,7 @@ else {
 </tr>
 </table>
 
-<br>
+<br />
 
 <c:choose>
 	<c:when test="<%= useEditorApplet %>">
@@ -123,7 +123,7 @@ else {
 	</c:otherwise>
 </c:choose>
 
-<br><br>
+<br /><br />
 
 <input type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<portlet:namespace />updateTemplateXsl();">
 

@@ -126,7 +126,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer.setResults(results);
 			%>
 
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
@@ -136,7 +136,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteArticles();">
 
-			<br><br>
+			<br /><br />
 
 			<%
 			List resultRows = searchContainer.getResultRows();
@@ -229,7 +229,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer.setResults(results);
 			%>
 
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_STRUCTURE) %>">
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
@@ -237,7 +237,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteStructures();">
 
-			<br><br>
+			<br /><br />
 
 			<%
 			List resultRows = searchContainer.getResultRows();
@@ -267,7 +267,7 @@ portletURL.setParameter("tabs1", tabs1);
 				sm.append(structure.getName());
 
 				if (Validator.isNotNull(structure.getDescription())) {
-					sm.append("<br>");
+					sm.append("<br />");
 					sm.append("<span style=\"font-size: xx-small;\">");
 					sm.append(structure.getDescription());
 					sm.append("</span>");
@@ -324,7 +324,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer.setResults(results);
 			%>
 
-			<br><div class="separator"></div><br>
+			<br /><div class="separator"></div><br />
 
 			<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_TEMPLATE) %>">
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
@@ -332,7 +332,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteTemplates();">
 
-			<br><br>
+			<br /><br />
 
 			<%
 			List resultRows = searchContainer.getResultRows();
@@ -379,7 +379,7 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("recent") %>'>
 		<%= LanguageUtil.format(pageContext, "this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed", Integer.toString(JournalUtil.MAX_STACK_SIZE), false) %>
 
-		<br><br>
+		<br /><br />
 
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>

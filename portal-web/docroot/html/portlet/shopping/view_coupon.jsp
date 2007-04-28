@@ -30,10 +30,10 @@ ShoppingCoupon coupon = (ShoppingCoupon)request.getAttribute(WebKeys.SHOPPING_CO
 
 <b><%= coupon.getCouponId() %></b>
 
-<br><br>
+<br /><br />
 
 <%= coupon.getName() %>
 
-<br><br>
+<br /><br />
 
 <%= coupon.getDescription() %>

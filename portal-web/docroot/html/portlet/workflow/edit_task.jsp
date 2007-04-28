@@ -189,7 +189,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 								String curValue = (String)valueList.get(j);
 							%>
 
-								<input <%= value.equals(curValue) ? "checked" : "" %> name="<portlet:namespace /><%= displayName %>" type="radio" value="<%= curValue %>"> <%= LanguageUtil.get(pageContext, curValue) %><br>
+								<input <%= value.equals(curValue) ? "checked" : "" %> name="<portlet:namespace /><%= displayName %>" type="radio" value="<%= curValue %>"> <%= LanguageUtil.get(pageContext, curValue) %><br />
 
 							<%
 							}
@@ -250,7 +250,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 
 </table>
 
-<br>
+<br />
 
 <%
 for (int i = 0; i < taskTransitions.size(); i++) {

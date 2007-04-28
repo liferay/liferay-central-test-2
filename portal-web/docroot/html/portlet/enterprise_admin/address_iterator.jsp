@@ -78,12 +78,12 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append(address.getStreet1());
 
 	if (Validator.isNotNull(address.getStreet2())) {
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append(address.getStreet2());
 	}
 
 	if (Validator.isNotNull(address.getStreet3())) {
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append(address.getStreet3());
 	}
 
@@ -115,15 +115,15 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <c:if test="<%= editable %>">
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_address" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="className" value="<%= className %>" /><portlet:param name="classPK" value="<%= classPK %>" /></portlet:renderURL>';"><br>
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_address" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="className" value="<%= className %>" /><portlet:param name="classPK" value="<%= classPK %>" /></portlet:renderURL>';"><br />
 
 	<c:if test="<%= results.size() > 0 %>">
-		<br>
+		<br />
 	</c:if>
 </c:if>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <c:if test="<%= editable || (results.size() > 0) %>">
-	<br>
+	<br />
 </c:if>

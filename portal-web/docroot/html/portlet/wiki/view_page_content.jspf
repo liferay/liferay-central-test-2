@@ -49,7 +49,7 @@
 </tr>
 </table>
 
-<br>
+<br />
 
 <div>
 	<liferay-ui:tags-summary

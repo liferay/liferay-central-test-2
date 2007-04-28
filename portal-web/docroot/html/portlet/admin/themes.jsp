@@ -24,7 +24,7 @@
 
 <c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId())  && PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)%>">
 	<input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-themes")%>'/>
-	<br><br>
+	<br /><br />
 </c:if>
 <%
 List headerNames = new ArrayList();
@@ -80,12 +80,12 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append(theme2.getName());
 	sm.append("</b>");
 	sm.append("</a>");
-	sm.append("<br>");
+	sm.append("<br />");
 	sm.append("<span style=\"font-size: xx-small;\">");
 	sm.append(LanguageUtil.get(pageContext, "package"));
 	sm.append(": ");
 	sm.append((theme2.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(theme2.getPluginPackage().getName() + context));
-	sm.append("<br>");
+	sm.append("<br />");
 	sm.append(LanguageUtil.get(pageContext, "color-schemes"));
 	sm.append(": ");
 	List colorSchemes = theme2.getColorSchemes();

@@ -57,7 +57,7 @@ List results = JournalTemplateLocalServiceUtil.search(company.getCompanyId(), se
 searchContainer.setResults(results);
 %>
 
-<br><div class="separator"></div><br>
+<br /><div class="separator"></div><br />
 
 <%
 

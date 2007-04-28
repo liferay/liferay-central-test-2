@@ -88,7 +88,7 @@ for (int i = 0; i < results.size(); i++) {
 	StringMaker sm = new StringMaker();
 
 	if (item.isSmallImage()) {
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append("<img alt=\"");
 		sm.append(item.getSku());
 		sm.append("\" border=\"0\" src=\"");
@@ -122,7 +122,7 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append("<span style=\"font-size: xx-small;\">");
 
 	if (Validator.isNotNull(item.getDescription())) {
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append(item.getDescription());
 	}
 
@@ -136,7 +136,7 @@ for (int i = 0; i < results.size(); i++) {
 		String propsKey = (String)enu.nextElement();
 		String propsValue = props.getProperty(propsKey, StringPool.BLANK);
 
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append(propsKey);
 		sm.append(": ");
 		sm.append(propsValue);
@@ -177,7 +177,7 @@ for (int i = 0; i < results.size(); i++) {
 
 <input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
-<br><br>
+<br /><br />
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 

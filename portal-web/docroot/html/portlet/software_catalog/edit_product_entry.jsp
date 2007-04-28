@@ -218,7 +218,7 @@ else {
 <c:if test="<%= productEntry == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -235,7 +235,7 @@ else {
 
 </table>
 
-<br>
+<br />
 
 <liferay-ui:tabs names="plugin-repository" />
 
@@ -258,7 +258,7 @@ else {
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

@@ -186,7 +186,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	</tr>
 	<tr>
 		<td colspan="3">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -200,12 +200,12 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	</tr>
 	</table>
 
-	<br>
+	<br />
 </c:if>
 
 <%= LanguageUtil.get(pageContext, "you-can-create-a-shortcut-to-any-document-that-you-have-read-access-for") %>
 
-<br><br>
+<br /><br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -252,7 +252,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 <c:if test="<%= fileShortcut == null %>">
 	<tr>
 		<td colspan="3">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -271,19 +271,19 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 </table>
 
 <c:if test='<%= strutsAction.equals("/document_library/edit_file_shortcut") && ((fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE)) %>'>
-	<br>
+	<br />
 
 	<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
 	<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
-	<br>
+	<br />
 </c:if>
 
 </form>
 
 <c:if test="<%= (fileShortcut != null) && (toFileEntry != null) %>">
-	<br>
+	<br />
 
 	<liferay-ui:ratings
 		className="<%= DLFileEntry.class.getName() %>"
@@ -291,7 +291,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry" %>'
 	/>
 
-	<br>
+	<br />
 
 	<%
 	String tabs2Names = "version-history,comments";

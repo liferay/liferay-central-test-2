@@ -79,7 +79,7 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 <c:if test="<%= frameworkVersion == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -96,7 +96,7 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

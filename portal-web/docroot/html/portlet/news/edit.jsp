@@ -69,7 +69,7 @@ portletURL.setParameter("tabs1", tabs1);
 				</tr>
 				<tr>
 					<td colspan="2">
-						<br>
+						<br />
 					</td>
 				</tr>
 
@@ -101,7 +101,7 @@ portletURL.setParameter("tabs1", tabs1);
 								Feed feed = (Feed)feedList.get(i);
 							%>
 
-								<%= feed.getShortName() %><br>
+								<%= feed.getShortName() %><br />
 
 							<%
 							}
@@ -113,7 +113,7 @@ portletURL.setParameter("tabs1", tabs1);
 					</tr>
 					<tr>
 						<td colspan="2">
-							<br>
+							<br />
 						</td>
 					</tr>
 
@@ -131,7 +131,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<b><%= categoryName %></b>
 
-				<br><br>
+				<br /><br />
 
 				<liferay-ui:table-iterator
 					list="<%= ListUtil.fromCollection(feedSet) %>"
@@ -144,7 +144,7 @@ portletURL.setParameter("tabs1", tabs1);
 					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/news/view" /><portlet:param name="url" value="<%= tableIteratorObj.getFeedURL() %>" /></portlet:renderURL>"><%= tableIteratorObj.getShortName() %></a>
 				</liferay-ui:table-iterator>
 
-				<br>
+				<br />
 
 				<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listChecked(document.<portlet:namespace />fm); submitForm(document.<portlet:namespace />fm);">
 
@@ -162,7 +162,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<%= LanguageUtil.get(pageContext, "set-the-display-order-of-news-feeds") %>
 
-		<br><br>
+		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
@@ -188,14 +188,14 @@ portletURL.setParameter("tabs1", tabs1);
 				</select>
 			</td>
 			<td valign="top">
-				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16"></a><br>
-				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16"></a><br>
-				<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" vspace="2" width="16"></a><br>
+				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16"></a><br />
+				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16"></a><br />
+				<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" vspace="2" width="16"></a><br />
 			</td>
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<table class="liferay-table">
 		<tr>
@@ -220,7 +220,7 @@ portletURL.setParameter("tabs1", tabs1);
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel); submitForm(document.<portlet:namespace />fm);">
 	</c:when>

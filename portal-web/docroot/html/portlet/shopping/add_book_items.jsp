@@ -44,11 +44,11 @@ String categoryId = ParamUtil.get(request, "categoryId", ShoppingCategoryImpl.DE
 
 <%= LanguageUtil.get(pageContext, "add-all-isbn-numbers-separated-by-spaces") %>
 
-<br><br>
+<br /><br />
 
 <textarea name="<portlet:namespace />isbns" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
 
-<br><br>
+<br /><br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

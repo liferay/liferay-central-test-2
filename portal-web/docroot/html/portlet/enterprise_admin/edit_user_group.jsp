@@ -75,7 +75,7 @@ String userGroupId = BeanParamUtil.getString(userGroup, request, "userGroupId");
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

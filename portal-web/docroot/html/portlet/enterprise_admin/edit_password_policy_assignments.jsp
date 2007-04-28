@@ -75,7 +75,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 <%= LanguageUtil.get(pageContext, "edit-assignments-for-password-policy") %>: <%= passwordPolicy.getName() %>
 
-<br><br>
+<br /><br />
 
 <liferay-ui:tabs
 	names="users,organizations,locations"
@@ -123,11 +123,11 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		searchContainer.setResults(results);
 		%>
 
-		<br><div class="separator"></div><br>
+		<br /><div class="separator"></div><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updatePasswordPolicyUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-		<br><br>
+		<br /><br />
 
 		<%
 		List headerNames = new ArrayList();
@@ -209,11 +209,11 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		searchContainer.setResults(results);
 		%>
 
-		<br><div class="separator"></div><br>
+		<br /><div class="separator"></div><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updatePasswordPolicyOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-		<br><br>
+		<br /><br />
 
 		<%
 		List headerNames = new ArrayList();

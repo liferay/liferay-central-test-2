@@ -101,7 +101,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="submit" value="<%= LanguageUtil.get(pageContext, "calculate") %>">
 

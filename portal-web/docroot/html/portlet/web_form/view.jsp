@@ -33,11 +33,11 @@ String description = prefs.getValue("description", StringPool.BLANK);
 
 <h3><%= title %></h3>
 
-<br>
+<br />
 
 <%= description %>
 
-<br><br>
+<br /><br />
 
 <liferay-ui:success key="emailSent" message="the-email-was-sent-successfuly" />
 
@@ -57,7 +57,7 @@ for (int i = 1; i <= 10; i++) {
 	String type = prefs.getValue("fieldType" + i, "text");
 %>
 
-	<label for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label><br>
+	<label for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label><br />
 
 	<c:choose>
 		<c:when test='<%= type.equals("text") %>'>
@@ -88,7 +88,7 @@ for (int i = 1; i <= 10; i++) {
 		</c:when>
 	</c:choose>
 
-	<br><br>
+	<br /><br />
 
 <%
 }

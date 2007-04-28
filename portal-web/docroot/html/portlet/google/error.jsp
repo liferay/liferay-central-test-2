@@ -30,7 +30,7 @@
 
 <%= LanguageUtil.get(pageContext, "an-unexpected-error-occurred-while-connecting-to-google") %>
 
-<br><br>
+<br /><br />
 
 <%= LanguageUtil.get(pageContext, "please-ensure-the-administrator-has-configured-a-proper-google-license") %>
 

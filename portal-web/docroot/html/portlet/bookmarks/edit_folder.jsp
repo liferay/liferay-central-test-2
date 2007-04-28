@@ -118,7 +118,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 	</tr>
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 </c:if>
@@ -143,7 +143,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 <c:if test="<%= folder == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -160,7 +160,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

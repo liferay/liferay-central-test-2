@@ -26,7 +26,7 @@
 	<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="comments" />
 
 	<c:if test="<%= editable %>">
-		<br><br>
+		<br /><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUser('comments');">
 	</c:if>

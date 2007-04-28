@@ -91,7 +91,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 	</table>
 </fieldset>
 
-<br>
+<br />
 
 <fieldset>
 	<legend><b><%= LanguageUtil.get(pageContext, "hover-link") %></b></legend>
@@ -156,7 +156,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 	</table>
 </fieldset>
 
-<br>
+<br />
 
 <fieldset>
 	<legend><b><%= LanguageUtil.get(pageContext, "visited-link") %></b></legend>

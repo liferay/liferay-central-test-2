@@ -115,11 +115,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<b><%= LanguageUtil.get(pageContext, "definition-of-terms") %></b>
 
-		<br><br>
+		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
@@ -183,7 +183,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td colspan="2">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -203,7 +203,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td colspan="2">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -216,7 +216,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td colspan="2">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -229,11 +229,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<b><%= LanguageUtil.get(pageContext, "definition-of-terms") %></b>
 
-		<br><br>
+		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
@@ -345,7 +345,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<c:when test='<%= tabs2.equals("thread-priorities") %>'>
 		<%= LanguageUtil.get(pageContext, "enter-the-name,-image,-and-priority-level-in-descending-order") %>
 
-		<br><br>
+		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
@@ -406,13 +406,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<c:when test='<%= tabs2.equals("user-ranks") %>'>
 		<%= LanguageUtil.get(pageContext, "enter-rank-and-minimum-post-pairs-per-line") %>
 
-		<br><br>
+		<br /><br />
 
 		<%
 		String languageId = ParamUtil.getString(request, "languageId", LocaleUtil.toLanguageId(locale));
 		%>
 
-		<textarea name="<portlet:namespace />ranks" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= StringUtil.merge(prefs.getValues(MBUtil.getRanksKey(languageId), new String[0]), StringPool.NEW_LINE) %></textarea><br>
+		<textarea name="<portlet:namespace />ranks" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= StringUtil.merge(prefs.getValues(MBUtil.getRanksKey(languageId), new String[0]), StringPool.NEW_LINE) %></textarea><br />
 
 		<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />getLocalizedRanks();">
 
@@ -430,7 +430,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		</select>
 
-		<br>
+		<br />
 
 		<script type="text/javascript">
 			function <portlet:namespace />getLocalizedRanks() {
@@ -440,7 +440,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</c:when>
 </c:choose>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

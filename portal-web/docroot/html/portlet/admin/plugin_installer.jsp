@@ -253,7 +253,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 			<c:when test="<%= ServerDetector.isJBoss() %>">
 				<tr>
 					<td colspan="3">
-						<br>
+						<br />
 					</td>
 				</tr>
 				<tr>
@@ -293,7 +293,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 			<c:when test="<%= ServerDetector.isTomcat() %>">
 				<tr>
 					<td colspan="3">
-						<br>
+						<br />
 					</td>
 				</tr>
 				<tr>
@@ -323,12 +323,12 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 
 		<tr>
 			<td colspan="3">
-				<br>
+				<br />
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "plugin-repositories") %><br>
+				<%= LanguageUtil.get(pageContext, "plugin-repositories") %><br />
 
 				<span style="font-size: xx-small;">(<%= LanguageUtil.get(pageContext, "enter-one-url-per-line") %>)</span>
 			</td>
@@ -341,7 +341,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveDeployConfiguration();">
 	</c:when>

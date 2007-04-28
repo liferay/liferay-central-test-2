@@ -122,7 +122,7 @@ else {
 </tr>
 </table>
 
-<br><br>
+<br /><br />
 
 <div style="background-color: <%= colorScheme.getLayoutTabBg() %>; border: 1px solid <%= colorScheme.getPortletFontDim() %>; margin-bottom: 5px; padding: 3px 5px;">
 	<span style="float: left;">

@@ -63,7 +63,7 @@ integerFormat.setMaximumFractionDigits(0);
 	document.<portlet:namespace />fm.<portlet:namespace />args.focus();
 </script>
 
-<br>
+<br />
 
 <table border="0" cellpadding="4" cellspacing="0" width="100%">
 <tr class="portlet-section-header">
@@ -90,7 +90,7 @@ integerFormat.setMaximumFractionDigits(0);
 </tr>
 </table>
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 
@@ -103,12 +103,12 @@ for (int i = 0; i < resultElements.length; i++) {
 
 	<tr>
 		<td>
-			<span style="font-size: small;"><a href="<%= resultElement.getURL() %>" target="_blank"><%= resultElement.getTitle() %></a></span><br>
+			<span style="font-size: small;"><a href="<%= resultElement.getURL() %>" target="_blank"><%= resultElement.getTitle() %></a></span><br />
 
-			<%= resultElement.getSnippet() %><br>
+			<%= resultElement.getSnippet() %><br />
 
 			<c:if test="<%= Validator.isNotNull(resultElement.getSummary()) %>">
-				<%= LanguageUtil.get(pageContext, "description") %>: <%= resultElement.getSummary() %><br>
+				<%= LanguageUtil.get(pageContext, "description") %>: <%= resultElement.getSummary() %><br />
 			</c:if>
 
 			<%
@@ -116,7 +116,7 @@ for (int i = 0; i < resultElements.length; i++) {
 			%>
 
 			<c:if test="<%= Validator.isNotNull(categoryName) %>">
-				<%= LanguageUtil.get(pageContext, "category") %>: <a href="http://directory.google.com/<%= categoryName %>" target="_blank"><%= StringUtil.replace(categoryName.substring(4, categoryName.length()), "/", " &gt; ") %></a><br>
+				<%= LanguageUtil.get(pageContext, "category") %>: <a href="http://directory.google.com/<%= categoryName %>" target="_blank"><%= StringUtil.replace(categoryName.substring(4, categoryName.length()), "/", " &gt; ") %></a><br />
 			</c:if>
 
 			<span class="portlet-msg-success"><%= resultElement.getURL() %> - <%= resultElement.getCachedSize() %></span> - <a href="<%= themeDisplay.getPathMain() %>/google/cached?args=<%= StringUtil.replace(resultElement.getURL(), "http://", StringPool.BLANK) %>" target="_blank"><%= LanguageUtil.get(pageContext, "cached") %></a>
@@ -138,7 +138,7 @@ for (int i = 0; i < resultElements.length; i++) {
 	<c:if test="<%= i + 1 < resultElements.length %>">
 		<tr>
 			<td>
-				<br>
+				<br />
 			</td>
 		</tr>
 	</c:if>
@@ -149,7 +149,7 @@ for (int i = 0; i < resultElements.length; i++) {
 
 </table>
 
-<br>
+<br />
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();

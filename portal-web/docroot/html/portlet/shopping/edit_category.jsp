@@ -119,7 +119,7 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 	</tr>
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 </c:if>
@@ -144,7 +144,7 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 <c:if test="<%= category == null %>">
 	<tr>
 		<td colspan="2">
-			<br>
+			<br />
 		</td>
 	</tr>
 	<tr>
@@ -161,7 +161,7 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 
 </table>
 
-<br>
+<br />
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

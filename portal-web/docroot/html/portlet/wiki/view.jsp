@@ -117,7 +117,7 @@ boolean showAddNodeButton = PortletPermission.contains(permissionChecker, plid, 
 	</table>
 
 	<c:if test="<%= results.size() > 0 %>">
-		<br>
+		<br />
 	</c:if>
 </c:if>
 

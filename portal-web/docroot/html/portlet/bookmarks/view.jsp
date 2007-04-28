@@ -101,7 +101,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			sm.append("</b>");
 
 			if (Validator.isNotNull(curFolder.getDescription())) {
-				sm.append("<br>");
+				sm.append("<br />");
 				sm.append("<span style=\"font-size: xx-small;\">");
 				sm.append(curFolder.getDescription());
 				sm.append("</span>");
@@ -112,7 +112,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			List subfolders = BookmarksFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), curFolder.getFolderId(), 0, 5);
 
 			if (subfolders.size() > 0) {
-				sm.append("<br>");
+				sm.append("<br />");
 				sm.append("<span style=\"font-size: xx-small; font-weight: bold;\"><u>");
 				sm.append(LanguageUtil.get(pageContext, "subfolders"));
 				sm.append("</u>: ");
@@ -165,10 +165,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		%>
 
 		<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER) %>">
-			<input type="button" value='<%= LanguageUtil.get(pageContext, "add-folder") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';"><br>
+			<input type="button" value='<%= LanguageUtil.get(pageContext, "add-folder") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';"><br />
 
 			<c:if test="<%= results.size() > 0 %>">
-				<br>
+				<br />
 			</c:if>
 		</c:if>
 
@@ -177,7 +177,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 		<c:if test="<%= folder != null %>">
-			<br>
+			<br />
 
 			<liferay-ui:tabs names="entries" />
 
@@ -247,10 +247,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			%>
 
 			<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_ENTRY) %>">
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "add-entry") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';"><br>
+				<input type="button" value='<%= LanguageUtil.get(pageContext, "add-entry") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';"><br />
 
 				<c:if test="<%= results.size() > 0 %>">
-					<br>
+					<br />
 				</c:if>
 			</c:if>
 

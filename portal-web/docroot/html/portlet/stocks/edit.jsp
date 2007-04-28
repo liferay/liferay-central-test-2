@@ -60,11 +60,11 @@ symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
 
 <%= LanguageUtil.get(pageContext, "add-all-ticker-symbols-separated-by-spaces") %>
 
-<br><br>
+<br /><br />
 
 <textarea name="<portlet:namespace />symbols" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= symbolsString %></textarea>
 
-<br><br>
+<br /><br />
 
 <input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 

@@ -34,17 +34,17 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 <%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
 
-<br><br>
+<br /><br />
 
 <%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 
-<br>
+<br />
 
 <input name="<portlet:namespace />keywords" size="30" type="text">
 
 <input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 
-<br><br>
+<br /><br />
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -149,7 +149,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 </form>
 
 <c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
-	<br>
+	<br />
 
 	<liferay-ui:tabs names="comments" />
 

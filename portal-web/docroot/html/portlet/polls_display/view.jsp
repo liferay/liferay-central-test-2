@@ -71,7 +71,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 
 <%= question.getDescription() %>
 
-<br><br>
+<br /><br />
 
 <c:choose>
 	<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
@@ -102,7 +102,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 
 		</table>
 
-		<br>
+		<br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "vote") %>' onClick="submitForm(document.<portlet:namespace />fm);">
 	</c:when>

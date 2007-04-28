@@ -22,7 +22,7 @@
  */
 %>
 
-<br>
+<br />
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
@@ -44,25 +44,25 @@
 <tr>
 	<td>
 		<div id="<portlet:namespace />metaTags" style="display: none;">
-			<br>
+			<br />
 
-			<%= LanguageUtil.get(pageContext, "meta-robots") %><br>
+			<%= LanguageUtil.get(pageContext, "meta-robots") %><br />
 
 			<textarea name="TypeSettingsProperties(meta-robots)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-robots)" /></textarea>
 
-			<br><br>
+			<br /><br />
 
-			<%= LanguageUtil.get(pageContext, "meta-description") %><br>
+			<%= LanguageUtil.get(pageContext, "meta-description") %><br />
 
 			<textarea name="TypeSettingsProperties(meta-description)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-description)" /></textarea>
 
-			<br><br>
+			<br /><br />
 
-			<%= LanguageUtil.get(pageContext, "meta-keywords") %><br>
+			<%= LanguageUtil.get(pageContext, "meta-keywords") %><br />
 
 			<textarea name="TypeSettingsProperties(meta-keywords)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-keywords)" /></textarea>
 
-			<br><br>
+			<br /><br />
 		</div>
 	</td>
 </tr>
@@ -85,21 +85,21 @@
 <tr>
 	<td>
 		<div id="<portlet:namespace />javascript" style="display: none;">
-			<br>
+			<br />
 
-			<%= LanguageUtil.get(pageContext, "javascript-1") %><br>
+			<%= LanguageUtil.get(pageContext, "javascript-1") %><br />
 
 			<textarea name="TypeSettingsProperties(javascript-1)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-1)" /></textarea>
 
-			<br><br>
+			<br /><br />
 
-			<%= LanguageUtil.get(pageContext, "javascript-2") %><br>
+			<%= LanguageUtil.get(pageContext, "javascript-2") %><br />
 
 			<textarea name="TypeSettingsProperties(javascript-2)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-2)" /></textarea>
 
-			<br><br>
+			<br /><br />
 
-			<%= LanguageUtil.get(pageContext, "javascript-3") %><br>
+			<%= LanguageUtil.get(pageContext, "javascript-3") %><br />
 
 			<textarea name="TypeSettingsProperties(javascript-3)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-3)" /></textarea>
 		</div>
@@ -126,7 +126,7 @@
 	<tr>
 		<td>
 			<div id="<portlet:namespace />sitemap" style="display: none;">
-				<br>
+				<br />
 
 				<%
 				boolean include = GetterUtil.getBoolean(selLayout.getTypeSettingsProperties().getProperty("sitemap-include"), true);

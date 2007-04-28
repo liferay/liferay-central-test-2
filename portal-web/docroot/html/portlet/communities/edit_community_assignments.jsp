@@ -99,7 +99,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 </tr>
 </table>
 
-<br>
+<br />
 
 <liferay-ui:tabs
 	names="users,organizations,locations,user-groups"
@@ -149,11 +149,11 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				searchContainer.setResults(results);
 				%>
 
-				<br><div class="separator"></div><br>
+				<br /><div class="separator"></div><br />
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-				<br><br>
+				<br /><br />
 
 				<%
 				List headerNames = new ArrayList();
@@ -225,7 +225,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 				<%= LanguageUtil.get(pageContext, "edit-community-roles-for-user")%>: <%= selectedUser.getFullName() %>
 
-				<br><br>
+				<br /><br />
 
 				<%
 				RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
@@ -264,11 +264,11 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					updateRoleAssignmentsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					%>
 
-					<br><div class="separator"></div><br>
+					<br /><div class="separator"></div><br />
 
 					<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateUserGroupRole('<%= updateRoleAssignmentsURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-					<br><br>
+					<br /><br />
 
 					<%
 					List resultRows = searchContainer.getResultRows();
@@ -343,11 +343,11 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		searchContainer.setResults(results);
 		%>
 
-		<br><div class="separator"></div><br>
+		<br /><div class="separator"></div><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateGroupOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-		<br><br>
+		<br /><br />
 
 		<%
 		List headerNames = new ArrayList();
@@ -427,11 +427,11 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		searchContainer.setResults(results);
 		%>
 
-		<br><div class="separator"></div><br>
+		<br /><div class="separator"></div><br />
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateGroupUserGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-		<br><br>
+		<br /><br />
 
 		<%
 		List headerNames = new ArrayList();

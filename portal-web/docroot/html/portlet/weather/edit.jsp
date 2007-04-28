@@ -60,11 +60,11 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 
 <%= LanguageUtil.get(pageContext, "enter-one-city-or-zip-code-per-line") %>
 
-<br><br>
+<br /><br />
 
 <textarea name="<portlet:namespace />zips" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= zipsString %></textarea>
 
-<br><br>
+<br /><br />
 
 <table class="liferay-table">
 <tr>
@@ -80,7 +80,7 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 

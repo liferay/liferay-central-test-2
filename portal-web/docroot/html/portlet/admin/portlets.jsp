@@ -23,7 +23,7 @@
 %>
 <c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId()) && PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
 	<input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-portlets")%>'/>
-	<br><br>
+	<br /><br />
 </c:if>
 
 
@@ -80,13 +80,13 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append("</b>");
 	sm.append("</a>");
 
-	sm.append("<br>");
+	sm.append("<br />");
 	sm.append("<span style=\"font-size: xx-small;\">");
 	sm.append(LanguageUtil.get(pageContext, "package"));
 	sm.append(": ");
 	sm.append((portlet.getPluginPackage() == null)?LanguageUtil.get(pageContext, "unknown"):(portlet.getPluginPackage().getName() + context));
 	if (Validator.isNotNull(displayName) && !title.equals(displayName)) {
-		sm.append("<br>");
+		sm.append("<br />");
 		sm.append(portlet.getDisplayName());
 	}
 	sm.append("</span>");

@@ -30,7 +30,7 @@
 
 		<%= LanguageUtil.get(pageContext, "this-email-address-will-also-serve-as-your-login") %>
 
-		<br><br>
+		<br /><br />
 
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" />
 
@@ -44,7 +44,7 @@
 
 		<%= LanguageUtil.get(pageContext, "choose-a-user-name-for-your-personal-company-email-address") %>
 
-		<br><br>
+		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
@@ -60,7 +60,7 @@
 		</tr>
 		</table>
 
-		<br>
+		<br />
 
 		<input type="submit" value='<%= LanguageUtil.get(pageContext, "register") %>'>
 

@@ -60,7 +60,7 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(portletGroupId.longV
 </tr>
 </table>
 
-<br>
+<br />
 
 <input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 
