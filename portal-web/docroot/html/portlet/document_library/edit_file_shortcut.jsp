@@ -145,12 +145,11 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 </div>
 
 <c:if test="<%= (fileShortcut != null) && (toFileEntry != null) %>">
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "name") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?fileShortcutId=<%= fileShortcutId %>">
 			<%= toFileEntry.getTitle() %>
@@ -161,7 +160,6 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		<td>
 			<%= LanguageUtil.get(pageContext, "version") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= toFileEntry.getVersion() %>
 		</td>
@@ -170,7 +168,6 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		<td>
 			<%= LanguageUtil.get(pageContext, "size") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= TextFormatter.formatKB(toFileEntry.getSize(), locale) %>k
 		</td>
@@ -179,7 +176,6 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		<td>
 			<%= LanguageUtil.get(pageContext, "downloads") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= toFileEntry.getReadCount() %>
 		</td>
@@ -193,7 +189,6 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		<td>
 			<%= LanguageUtil.get(pageContext, "url") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<input class="form-text" readonly="true" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathMain() %>/document_library/get_file?fileShortcutId=<%= fileShortcutId %>" onClick="javascript: this.focus(); this.select();">
 		</td>
@@ -207,12 +202,11 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 <br /><br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "community") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
@@ -232,7 +226,6 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<td>
 		<%= LanguageUtil.get(pageContext, "document") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
@@ -251,7 +244,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 <c:if test="<%= fileShortcut == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br />
 		</td>
 	</tr>
@@ -259,7 +252,6 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= DLFileShortcut.class.getName() %>"

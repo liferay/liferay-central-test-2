@@ -60,12 +60,11 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		}
 		%>
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "session-id") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= userTrackerId %>
 			</td>
@@ -74,7 +73,6 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 			<td>
 				<%= LanguageUtil.get(pageContext, "user-id") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= userTracker.getUserId() %>
 			</td>
@@ -83,7 +81,6 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 			<td>
 				<%= LanguageUtil.get(pageContext, "name") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= (user2 != null) ? user2.getFullName() : LanguageUtil.get(pageContext, "not-available") %>
 			</td>
@@ -92,7 +89,6 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 			<td>
 				<%= LanguageUtil.get(pageContext, "email-address") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= (user2 != null) ? user2.getEmailAddress() : LanguageUtil.get(pageContext, "not-available") %>
 			</td>
@@ -101,7 +97,6 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 			<td>
 				<%= LanguageUtil.get(pageContext, "last-request") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= dateFormatDateTime.format(userTracker.getModifiedDate()) %>
 			</td>
@@ -110,13 +105,12 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 			<td>
 				<%= LanguageUtil.get(pageContext, "num-of-hits") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= userTracker.getHits() %>
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<br />
 			</td>
 		</tr>
@@ -124,7 +118,6 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 			<td>
 				<%= LanguageUtil.get(pageContext, "browser-os-type") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= userTracker.getUserAgent() %>
 			</td>
@@ -133,7 +126,6 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 			<td>
 				<%= LanguageUtil.get(pageContext, "remote-host-ip") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= userTracker.getRemoteAddr() %> / <%= userTracker.getRemoteHost() %>
 			</td>

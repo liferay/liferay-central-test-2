@@ -71,12 +71,11 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 
 <h2><%= productEntry.getName() %> <%= (lastProductVersion == null)?"":lastProductVersion.getVersion() %></h2>
 
-<table cellpadding="2" cellspacing="4">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, productEntry.getType()) %>
 	</td>
@@ -85,7 +84,6 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 	<td>
 		<%= LanguageUtil.get(pageContext, "licenses") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
@@ -103,43 +101,44 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 
 	</td>
 </tr>
-<c:if test="<%=Validator.isNotNull(productEntry.getPageURL())%>">
+
+<c:if test="<%= Validator.isNotNull(productEntry.getPageURL()) %>">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "page-url") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<a href="<%= productEntry.getPageURL() %>"><%= productEntry.getPageURL() %></a>
 		</td>
 	</tr>
 </c:if>
+
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "short-description") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= productEntry.getShortDescription() %>
 	</td>
 </tr>
-<c:if test="<%=Validator.isNotNull(productEntry.getLongDescription())%>">
+
+<c:if test="<%= Validator.isNotNull(productEntry.getLongDescription()) %>">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "long-description") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= productEntry.getLongDescription() %>
 		</td>
 	</tr>
 </c:if>
+
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "screenshots") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
+
 		<%
 		String imageName = SCProductEntryImpl.MAIN_IMAGE_NAME;
 		String imageId = productEntry.getImageId(imageName);
@@ -167,12 +166,12 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 if (lastProductVersion != null) {
 %>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		&nbsp;
 	</td>
 </tr>
 <tr>
-	<th colspan="3">
+	<th colspan="2">
 		<%= LanguageUtil.get(pageContext, "information-about-the-latest-version") %>:
 	</th>
 </tr>
@@ -180,7 +179,6 @@ if (lastProductVersion != null) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "release-date") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= lastProductVersion.getModifiedDate() %>
 	</td>
@@ -188,7 +186,6 @@ if (lastProductVersion != null) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "changeLog") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= lastProductVersion.getChangeLog() %>
 	</td>
@@ -197,7 +194,6 @@ if (lastProductVersion != null) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "supported-framework-versions") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= _buildFrameworkVersions(lastProductVersion.getFrameworkVersions()) %>
 	</td>
@@ -206,7 +202,6 @@ if (lastProductVersion != null) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "download-links") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<% if (Validator.isNotNull(lastProductVersion.getDirectDownloadURL())) { %>
 			<a href="<%=lastProductVersion.getDirectDownloadURL()%>">
@@ -225,7 +220,7 @@ if (lastProductVersion != null) {
 else {
 %>
 	<tr>
-		<td style="color:red" colspan="3">
+		<td style="color:red" colspan="2">
 			<b><%=LanguageUtil.get(pageContext, "note") %></b>: <%=LanguageUtil.get(pageContext, "this-product-has-not-yet-uploaded-any-release")%>
 		</td>
 	</tr>

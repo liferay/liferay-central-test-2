@@ -32,7 +32,6 @@
 	<td>
 		<%= LanguageUtil.get(pageContext, "author") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="ExtraSettingsProperties(author)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(author)" />">
 	</td>
@@ -41,7 +40,6 @@
 	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="ExtraSettingsProperties(type)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(type)" />">
 	</td>

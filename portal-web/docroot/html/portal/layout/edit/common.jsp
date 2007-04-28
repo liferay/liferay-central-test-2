@@ -133,12 +133,11 @@
 				String changeFrequency = selLayout.getTypeSettingsProperties().getProperty("sitemap-changefreq", "daily");
 				%>
 
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "include") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<select name="TypeSettingsProperties(sitemap-include)">
 							<option <%= (include) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
@@ -150,7 +149,6 @@
 					<td>
 						<%= LanguageUtil.get(pageContext, "page-priority") %> (0.0 - 1.0)
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<input name="TypeSettingsProperties(sitemap-priority)" size="3" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(sitemap-priority)" />">
 					</td>
@@ -159,7 +157,6 @@
 					<td>
 						<%= LanguageUtil.get(pageContext, "change-frequency") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<select name="TypeSettingsProperties(sitemap-changefreq)">
 							<option <%= (changeFrequency.equals("always")) ? "selected" : "" %> value="always"><%= LanguageUtil.get(pageContext, "always") %></option>

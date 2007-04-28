@@ -34,12 +34,11 @@
 </tr>
 <tr id="<%= namespace %>postReplyForm<%= i %>" style="display: none;">
 	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "subject") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<%= namespace %>postReplySubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text"><br />
 			</td>
@@ -48,7 +47,6 @@
 			<td>
 				<%= LanguageUtil.get(pageContext, "body") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<textarea name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
 			</td>
@@ -68,12 +66,11 @@
 <c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
 	<tr id="<%= namespace %>editForm<%= i %>" style="display: none;">
 		<td>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "subject") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<input name="<%= namespace %>editSubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= Html.toInputSafe(message.getSubject()) %>"><br />
 				</td>
@@ -82,7 +79,6 @@
 				<td>
 					<%= LanguageUtil.get(pageContext, "body") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<textarea name="<%= namespace %>editBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= Html.toInputSafe(message.getBody()) %></textarea>
 				</td>
@@ -102,7 +98,7 @@
 
 <tr>
 	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 
@@ -121,7 +117,6 @@
 				topHREF = "javascript: " + namespace + "scrollIntoView('0');";
 				%>
 
-				<td style="padding-left: 15px;"></td>
 				<td>
 					<liferay-ui:icon image="top" url="<%= topHREF %>" />
 
@@ -134,7 +129,6 @@
 					editHREF = "javascript: document.getElementById('" + namespace + "editForm" + i + "').style.display = ''; void('');";
 					%>
 
-					<td style="padding-left: 15px;"></td>
 					<td>
 						<liferay-ui:icon image="edit" url="<%= editHREF %>" />
 
@@ -148,7 +142,6 @@
 					deleteHREF = "javascript: " + namespace + "deleteMessage(" + i + ");";
 					%>
 
-					<td style="padding-left: 15px;"></td>
 					<td>
 						<liferay-ui:icon-delete url="<%= deleteHREF %>" />
 

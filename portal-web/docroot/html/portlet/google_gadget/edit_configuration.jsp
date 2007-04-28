@@ -34,19 +34,18 @@
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td valign="top">
 		<input <%= (!customConf) ? "checked" : "" %> type="radio" name="<portlet:namespace />confType" value="recommended"> <%= LanguageUtil.get(pageContext, "choose-from-the-list-of-recommended-google-gadgets") %>
 
 		<br />
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "gadget") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select id="<portlet:namespace />gadgetId" name="<portlet:namespace />gadgetId">
 
@@ -67,7 +66,6 @@
 			<td>
 				<%= LanguageUtil.get(pageContext, "title") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />title" type="text" value="<%= title %>">
 			</td>
@@ -76,7 +74,6 @@
 			<td>
 				<%= LanguageUtil.get(pageContext, "width") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />width" size="4" type="text" value="<%= width %>"> px
 			</td>
@@ -85,7 +82,6 @@
 			<td>
 				<%= LanguageUtil.get(pageContext, "height") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />height" size="4" type="text" value="<%= height %>"> px
 			</td>
@@ -94,7 +90,6 @@
 			<td>
 				<%= LanguageUtil.get(pageContext, "border") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />borderId">
 
@@ -113,7 +108,6 @@
 		</tr>
 		</table>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td valign="top">
 		<input <%= (customConf) ? "checked" : "" %> type="radio" name="<portlet:namespace />confType" value="custom">
 

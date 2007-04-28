@@ -78,19 +78,18 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 	<liferay-util:param name="tabs1" value="cart" />
 </liferay-util:include>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<b><%= LanguageUtil.get(pageContext, "billing-address") %></b>
 
 		<br /><br />
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "first-name") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingFirstName() %>
 			</td>
@@ -99,7 +98,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "last-name") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingLastName() %>
 			</td>
@@ -108,7 +106,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "email-address") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingEmailAddress() %>
 			</td>
@@ -117,7 +114,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "company") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingCompany() %>
 			</td>
@@ -126,7 +122,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "street") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingStreet() %>
 			</td>
@@ -135,7 +130,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "city") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingCity() %>:
 			</td>
@@ -144,7 +138,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "state") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingState() %>
 			</td>
@@ -153,7 +146,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "zip") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingZip() %>
 			</td>
@@ -162,7 +154,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "country") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingCountry() %>
 			</td>
@@ -171,25 +162,22 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "phone") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingPhone() %>
 			</td>
 		</tr>
 		</table>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td valign="top">
 		<b><%= LanguageUtil.get(pageContext, "shipping-address") %></b>
 
 		<br /><br />
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "first-name") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingFirstName() %>
 			</td>
@@ -198,7 +186,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "last-name") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingLastName() %>
 			</td>
@@ -207,7 +194,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "email-address") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingEmailAddress() %>
 			</td>
@@ -216,7 +202,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "company") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingCompany() %>
 			</td>
@@ -225,7 +210,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "street") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingStreet() %>
 			</td>
@@ -234,7 +218,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "city") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingCity() %>:
 			</td>
@@ -243,7 +226,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "state") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingState() %>
 			</td>
@@ -252,7 +234,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "zip") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingZip() %>
 			</td>
@@ -261,7 +242,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "country") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingCountry() %>
 			</td>
@@ -270,7 +250,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "phone") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingPhone() %>
 			</td>
@@ -287,12 +266,11 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 
 	<br /><br />
 
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "full-name") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= order.getCcName() %>
 		</td>
@@ -301,7 +279,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		<td>
 			<%= LanguageUtil.get(pageContext, "type") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= LanguageUtil.get(pageContext, "cc_" + order.getCcType()) %>
 		</td>
@@ -310,7 +287,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		<td>
 			<%= LanguageUtil.get(pageContext, "number") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= CreditCard.hide(order.getCcNumber()) %>
 		</td>
@@ -319,7 +295,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		<td>
 			<%= LanguageUtil.get(pageContext, "expiration-date") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= CalendarUtil.getMonths(locale)[order.getCcExpMonth()] %>, <%= order.getCcExpYear() %>
 		</td>
@@ -330,7 +305,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<td>
 				<%= LanguageUtil.get(pageContext, "verification-number") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getCcVerNumber() %>
 			</td>
@@ -469,12 +443,11 @@ for (int i = 0; itr.hasNext(); i++) {
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "subtotal") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateActualSubtotal(items)) %>
 	</td>
@@ -483,7 +456,6 @@ for (int i = 0; itr.hasNext(); i++) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "tax") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateTax(items, order.getBillingState())) %>
 	</td>
@@ -492,7 +464,6 @@ for (int i = 0; itr.hasNext(); i++) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "shipping") %> <%= Validator.isNotNull(altShippingName) ? "(" + altShippingName + ")" : StringPool.BLANK %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateAlternativeShipping(items, altShipping)) %>
 	</td>
@@ -507,7 +478,6 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 		<td>
 			<%= LanguageUtil.get(pageContext, "insurance") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= currency.getSymbol() %><%= doubleFormat.format(insurance) %>
 		</td>
@@ -519,7 +489,6 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 		<td>
 			<%= LanguageUtil.get(pageContext, "coupon-discount") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateCouponDiscount(items, order.getBillingState(), coupon)) %>
 
@@ -534,7 +503,6 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 	<td>
 		<%= LanguageUtil.get(pageContext, "total") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateTotal(items, order.getBillingState(), coupon, altShipping, cart.isInsure())) %>
 	</td>

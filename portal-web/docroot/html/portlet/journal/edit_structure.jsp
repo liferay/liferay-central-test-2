@@ -202,12 +202,11 @@ int tabIndex = 1;
 <liferay-ui:error exception="<%= StructureIdException.class %>" message="please-enter-a-valid-id" />
 <liferay-ui:error exception="<%= StructureNameException.class %>" message="please-enter-a-valid-name" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "id") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -234,7 +233,7 @@ int tabIndex = 1;
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -242,7 +241,6 @@ int tabIndex = 1;
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalStructure.class %>" bean="<%= structure %>" field="name" />
 	</td>
@@ -251,7 +249,6 @@ int tabIndex = 1;
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalStructure.class %>" bean="<%= structure %>" field="description" />
 	</td>
@@ -259,7 +256,7 @@ int tabIndex = 1;
 
 <c:if test="<%= structure == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br />
 		</td>
 	</tr>
@@ -267,7 +264,6 @@ int tabIndex = 1;
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= JournalStructure.class.getName() %>"

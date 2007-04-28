@@ -78,12 +78,11 @@ WindowState windowState = renderRequest.getWindowState();
 	</c:otherwise>
 </c:choose>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "order") %> #:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<b><%= order.getOrderId() %></b>
 	</td>
@@ -92,7 +91,6 @@ WindowState windowState = renderRequest.getWindowState();
 	<td>
 		<%= LanguageUtil.get(pageContext, "order-date") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= dateFormatDateTime.format(order.getCreateDate()) %>
 	</td>
@@ -101,7 +99,6 @@ WindowState windowState = renderRequest.getWindowState();
 	<td>
 		<%= LanguageUtil.get(pageContext, "last-modified") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= dateFormatDateTime.format(order.getModifiedDate()) %>
 	</td>
@@ -110,19 +107,18 @@ WindowState windowState = renderRequest.getWindowState();
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<b><%= LanguageUtil.get(pageContext, "billing-address") %></b>
 
 		<br /><br />
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "first-name") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingFirstName() %>
 			</td>
@@ -131,7 +127,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "last-name") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingLastName() %>
 			</td>
@@ -140,7 +135,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "email-address") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingEmailAddress() %>
 			</td>
@@ -149,7 +143,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "company") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingCompany() %>
 			</td>
@@ -158,7 +151,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "street") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingStreet() %>
 			</td>
@@ -167,7 +159,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "city") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingCity() %>:
 			</td>
@@ -176,7 +167,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "state") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingState() %>
 			</td>
@@ -185,7 +175,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "zip") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingZip() %>
 			</td>
@@ -194,7 +183,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "country") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingCountry() %>
 			</td>
@@ -203,25 +191,22 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "phone") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getBillingPhone() %>
 			</td>
 		</tr>
 		</table>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td valign="top">
 		<b><%= LanguageUtil.get(pageContext, "shipping-address") %></b>
 
 		<br /><br />
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "first-name") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingFirstName() %>
 			</td>
@@ -230,7 +215,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "last-name") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingLastName() %>
 			</td>
@@ -239,7 +223,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "email-address") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingEmailAddress() %>
 			</td>
@@ -248,7 +231,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "company") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingCompany() %>
 			</td>
@@ -257,7 +239,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "street") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingStreet() %>
 			</td>
@@ -266,7 +247,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "city") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingCity() %>:
 			</td>
@@ -275,7 +255,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "state") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingState() %>
 			</td>
@@ -284,7 +263,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "zip") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingZip() %>
 			</td>
@@ -293,7 +271,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "country") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingCountry() %>
 			</td>
@@ -302,7 +279,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "phone") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getShippingPhone() %>
 			</td>
@@ -320,12 +296,11 @@ WindowState windowState = renderRequest.getWindowState();
 
 		<br /><br />
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "status") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />ppPaymentStatus">
 
@@ -346,7 +321,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "transaction-id") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppTxnId" />
 			</td>
@@ -355,7 +329,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "payment-gross") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppPaymentGross" defaultValue="<%= currency.getSymbol() + doubleFormat.format(order.getPpPaymentGross()) %>" />
 			</td>
@@ -364,7 +337,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "receiver-email-address") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppReceiverEmail" />
 			</td>
@@ -373,7 +345,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "payer-email-address") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppPayerEmail" />
 			</td>
@@ -382,7 +353,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "paypal-order") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 
 				<%
@@ -400,12 +370,11 @@ WindowState windowState = renderRequest.getWindowState();
 
 		<br /><br />
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "full-name") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= order.getCcName() %>
 			</td>
@@ -414,7 +383,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "type") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= LanguageUtil.get(pageContext, "cc_" + order.getCcType()) %>
 			</td>
@@ -423,7 +391,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "number") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= CreditCard.hide(order.getCcNumber()) %>
 			</td>
@@ -432,7 +399,6 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 				<%= LanguageUtil.get(pageContext, "expiration-date") %>:
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<%= CalendarUtil.getMonths(locale)[order.getCcExpMonth()] %>, <%= order.getCcExpYear() %>
 			</td>
@@ -443,7 +409,6 @@ WindowState windowState = renderRequest.getWindowState();
 				<td>
 					<%= LanguageUtil.get(pageContext, "verification-number") %>:
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<%= order.getCcVerNumber() %>
 				</td>
@@ -559,12 +524,11 @@ for (int i = 0; itr.hasNext(); i++) {
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "subtotal") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateActualSubtotal(results)) %>
 	</td>
@@ -573,7 +537,6 @@ for (int i = 0; itr.hasNext(); i++) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "tax") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(order.getTax()) %>
 	</td>
@@ -582,7 +545,6 @@ for (int i = 0; itr.hasNext(); i++) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "shipping") %> <%= Validator.isNotNull(order.getAltShipping()) ? "(" + order.getAltShipping() + ")" : StringPool.BLANK %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(order.getShipping()) %>
 	</td>
@@ -593,7 +555,6 @@ for (int i = 0; itr.hasNext(); i++) {
 		<td>
 			<%= LanguageUtil.get(pageContext, "insurance") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= currency.getSymbol() %><%= doubleFormat.format(order.getInsurance()) %>
 		</td>
@@ -605,7 +566,6 @@ for (int i = 0; itr.hasNext(); i++) {
 		<td>
 			<%= LanguageUtil.get(pageContext, "coupon-discount") %>:
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= currency.getSymbol() %><%= doubleFormat.format(order.getCouponDiscount()) %>
 
@@ -620,7 +580,6 @@ for (int i = 0; itr.hasNext(); i++) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "total") %>:
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateTotal(order)) %>
 	</td>

@@ -105,14 +105,13 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 <liferay-ui:error exception="<%= TemplateNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= TemplateXslException.class %>" message="please-enter-a-valid-script-template" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "id") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<c:choose>
@@ -124,7 +123,6 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 					</c:otherwise>
 				</c:choose>
 			</td>
-			<td style="padding-left: 30px;"></td>
 			<td>
 				<c:if test="<%= template == null %>">
 					<liferay-ui:input-checkbox param="autoTemplateId" />
@@ -137,7 +135,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -145,7 +143,6 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="name" />
 	</td>
@@ -154,13 +151,12 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="description" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -168,7 +164,6 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<td>
 		<%= LanguageUtil.get(pageContext, "structure") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>">
 
@@ -191,7 +186,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -199,7 +194,6 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<td>
 		<%= LanguageUtil.get(pageContext, "script") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />xsl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 
@@ -214,7 +208,6 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<td>
 		<%= LanguageUtil.get(pageContext, "language-type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />langType">
 
@@ -235,13 +228,12 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<td>
 		<%= LanguageUtil.get(pageContext, "format-script") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="formatXsl" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -249,7 +241,6 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<td>
 		<%= LanguageUtil.get(pageContext, "small-image-url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="smallImageURL" />
 	</td>
@@ -258,7 +249,6 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<td>
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <%= LanguageUtil.get(pageContext, "small-image") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />smallFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 	</td>
@@ -267,7 +257,6 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<td>
 		<%= LanguageUtil.get(pageContext, "use-small-image") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="smallImage" />
 	</td>
@@ -275,7 +264,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 <c:if test="<%= template == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br />
 		</td>
 	</tr>
@@ -283,7 +272,6 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= JournalTemplate.class.getName() %>"

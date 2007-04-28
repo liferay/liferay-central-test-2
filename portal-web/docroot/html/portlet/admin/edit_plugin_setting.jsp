@@ -47,18 +47,17 @@
 
 <liferay-ui:tabs names="plugin-setting" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "id") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= pluginId %>
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -66,7 +65,6 @@
 	<td>
 		<%= LanguageUtil.get(pageContext, "active") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= PluginSetting.class %>" bean="<%= pluginSetting %>" field="active" />
 	</td>
@@ -79,8 +77,7 @@
 
 <br /><br />
 
-<textarea name="<portlet:namespace />roles" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= StringUtil
-	.merge(pluginSetting.getRolesArray(), "\n") %></textarea>
+<textarea name="<portlet:namespace />roles" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= StringUtil.merge(pluginSetting.getRolesArray(), "\n") %></textarea>
 
 <br /><br />
 

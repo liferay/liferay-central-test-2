@@ -187,12 +187,11 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 			String fieldDescription = itemField.getDescription();
 		%>
 
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= fieldName %>:
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<select name="<portlet:namespace />fieldName<%= fieldName %>">
 						<option value=""><%= LanguageUtil.get(pageContext, "select-option") %></option>
@@ -211,7 +210,6 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 				</td>
 
 				<c:if test="<%= Validator.isNotNull(fieldDescription) %>">
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<%= fieldDescription %>
 					</td>

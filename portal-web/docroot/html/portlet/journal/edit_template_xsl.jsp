@@ -95,12 +95,11 @@ else {
 
 <form method="post" name="<portlet:namespace />fm">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<b><%= LanguageUtil.get(pageContext, "editor-type") %></b>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />editorType" onChange="<portlet:namespace />updateEditorType();">
 			<option value="1"><%= LanguageUtil.get(pageContext, "html") %></option>

@@ -172,14 +172,13 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderRequest, renderResponse) %>
 </div>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <c:if test="<%= item != null %>">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "category") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 
 			<%
@@ -194,7 +193,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br />
 		</td>
 	</tr>
@@ -204,13 +203,12 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	<td>
 		<%= LanguageUtil.get(pageContext, "sku") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="sku" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -218,7 +216,6 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="name" />
 	</td>
@@ -227,7 +224,6 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	<td>
 		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="description" />
 	</td>
@@ -236,39 +232,33 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	<td>
 		<%= LanguageUtil.get(pageContext, "properties") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="properties" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "requires-shipping") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="requiresShipping" />
 			</td>
-			<td style="padding-left: 30px;"></td>
 			<td>
 				<%= LanguageUtil.get(pageContext, "featured") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="featured" />
 			</td>
 
 			<c:if test="<%= fieldsCount == 0 %>">
-				<td style="padding-left: 30px;"></td>
 				<td>
 					<%= LanguageUtil.get(pageContext, "stock-quantity") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="stockQuantity" />
 				</td>
@@ -280,7 +270,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 <c:if test="<%= item == null %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br />
 		</td>
 	</tr>
@@ -288,7 +278,6 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-permissions
 				modelName="<%= ShoppingItem.class.getName() %>"
@@ -315,7 +304,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 <br /><br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <%
 for (int i = 0; i < fieldsCount; i++) {
@@ -354,29 +343,23 @@ for (int i = 0; i < fieldsCount; i++) {
 		<td>
 			<%= LanguageUtil.get(pageContext, "name") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-field model="<%= ShoppingItemField.class %>" field="name" fieldParam='<%= "fieldName" + i %>' defaultValue="<%= fieldName %>" />
 		</td>
-		<td style="padding-left: 30px;"></td>
 		<td>
 			<%= LanguageUtil.get(pageContext, "values") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-field model="<%= ShoppingItemField.class %>" field="values" fieldParam='<%= "fieldValues" + i %>' defaultValue='<%= StringUtil.merge(fieldValues, ", ") %>' />
 		</td>
-		<td style="padding-left: 30px;"></td>
 		<td>
 			<%= LanguageUtil.get(pageContext, "description") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<liferay-ui:input-field model="<%= ShoppingItemField.class %>" field="description" fieldParam='<%= "fieldDescription" + i %>' defaultValue="<%= fieldDescription %>" />
 		</td>
 
 		<c:if test="<%= fieldsCount > 0 %>">
-			<td style="padding-left: 30px;"></td>
 			<td>
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteField(<%= i %>);">
 			</td>
@@ -405,7 +388,7 @@ for (int i = 0; i < fieldsCount; i++) {
 
 <input name="<portlet:namespace />prices" type="hidden" value="">
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 
 <%
 for (int i = 0; i < pricesCount; i++) {
@@ -512,86 +495,69 @@ for (int i = 0; i < pricesCount; i++) {
 
 	<tr>
 		<td>
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "min-qty") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="minQuantity" fieldParam='<%= "minQuantity" + i %>' defaultValue="<%= String.valueOf(minQuantity) %>" />
 				</td>
-				<td style="padding-left: 30px;"></td>
 				<td>
 					<%= LanguageUtil.get(pageContext, "max-qty") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="maxQuantity" fieldParam='<%= "maxQuantity" + i %>' defaultValue="<%= String.valueOf(maxQuantity) %>" />
 				</td>
-				<td style="padding-left: 30px;"></td>
 				<td>
 					<%= LanguageUtil.get(pageContext, "price") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="price" fieldParam='<%= "price" + i %>' defaultValue="<%= currency.getSymbol() + doubleFormat.format(price) %>" />
 				</td>
-				<td style="padding-left: 30px;"></td>
 				<td>
 					<%= LanguageUtil.get(pageContext, "discount") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="discount" fieldParam='<%= "discount" + i %>' defaultValue="<%= percentFormat.format(discount) %>" />
 				</td>
-				<td style="padding-left: 30px;"></td>
 				<td>
 					<%= LanguageUtil.get(pageContext, "taxable") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<liferay-ui:input-checkbox param='<%= "taxable" + i %>' defaultValue="<%= taxable %>" />
 				</td>
 			</tr>
 			</table>
 
-			<table border="0" cellpadding="0" cellspacing="0">
+			<table class="liferay-table">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "shipping") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="shipping" fieldParam='<%= "shipping" + i %>' defaultValue="<%= currency.getSymbol() + doubleFormat.format(shipping) %>" />
 				</td>
-				<td style="padding-left: 30px;"></td>
 				<td>
 					<%= LanguageUtil.get(pageContext, "use-shipping-formula") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<liferay-ui:input-checkbox param='<%= "useShippingFormula" + i %>' defaultValue="<%= useShippingFormula %>" />
 				</td>
-				<td style="padding-left: 30px;"></td>
 				<td>
 					<%= LanguageUtil.get(pageContext, "active") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<liferay-ui:input-checkbox param='<%= "active" + i %>' defaultValue="<%= active %>" />
 				</td>
-				<td style="padding-left: 30px;"></td>
 				<td>
 					<%= LanguageUtil.get(pageContext, "default") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<input <%= defaultPrice ? "checked" : "" %> name="<portlet:namespace />defaultPrice" type="radio" value="<%= i %>" onClick="document.<portlet:namespace />fm.<portlet:namespace />active<%= i %>.checked = true;">
 				</td>
 
 				<c:if test="<%= pricesCount > 1 %>">
-					<td style="padding-left: 30px;"></td>
 					<td>
 						<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deletePrice(<%= i %>);">
 					</td>
@@ -652,12 +618,11 @@ for (int i = 0; i < pricesCount; i++) {
 
 <liferay-ui:error exception="<%= ItemSmallImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "small-image-url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="smallImageURL" />
 	</td>
@@ -666,7 +631,6 @@ for (int i = 0; i < pricesCount; i++) {
 	<td>
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <%= LanguageUtil.get(pageContext, "small-image") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />smallFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 	</td>
@@ -675,13 +639,12 @@ for (int i = 0; i < pricesCount; i++) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "use-small-image") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="smallImage" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -689,7 +652,6 @@ for (int i = 0; i < pricesCount; i++) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "medium-image-url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="mediumImageURL" />
 	</td>
@@ -698,7 +660,6 @@ for (int i = 0; i < pricesCount; i++) {
 	<td>
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <%= LanguageUtil.get(pageContext, "medium-image") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />mediumFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 	</td>
@@ -707,13 +668,12 @@ for (int i = 0; i < pricesCount; i++) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "use-medium-image") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="mediumImage" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -721,7 +681,6 @@ for (int i = 0; i < pricesCount; i++) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "large-image-url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="largeImageURL" />
 	</td>
@@ -730,7 +689,6 @@ for (int i = 0; i < pricesCount; i++) {
 	<td>
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <%= LanguageUtil.get(pageContext, "large-image") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />largeFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 	</td>
@@ -739,7 +697,6 @@ for (int i = 0; i < pricesCount; i++) {
 	<td>
 		<%= LanguageUtil.get(pageContext, "use-large-image") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="largeImage" />
 	</td>

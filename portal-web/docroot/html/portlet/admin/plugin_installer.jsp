@@ -135,19 +135,17 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 		<%@ include file="/html/portlet/admin/download_file.jsp" %>
 	</c:when>
 	<c:when test='<%=tabs1.equals("configuration") %>'>
-		<table border="0" cellpadding="0" cellspacing="0">
-		<% if (!PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)) { %>
-		<tr>
-			<td colspan="3">
-				<%= LanguageUtil.get(pageContext, "installation-of-plugins-is-disabled") %> <%-- -enable-and-configure-it-to-install-new-plugins --%>
-			</td>
-		</tr>
-		<% } %>
+		<c:if test="<%= !PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
+			<%= LanguageUtil.get(pageContext, "installation-of-plugins-is-disabled") %>
+
+			<br /><br />
+		</c:if>
+
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "enabled") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>" />
 			</td>
@@ -156,7 +154,6 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 			<td>
 				<%= LanguageUtil.get(pageContext, "deploy-directory") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />deployDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR) %>">
 			</td>
@@ -165,7 +162,6 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 			<td>
 				<%= LanguageUtil.get(pageContext, "dest-directory") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />destDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR) %>">
 			</td>
@@ -174,7 +170,6 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 			<td>
 				<%= LanguageUtil.get(pageContext, "interval") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />interval">
 					<option value="0"><%= LanguageUtil.get(pageContext, "disable") %></option>
@@ -207,7 +202,6 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 			<td>
 				<%= LanguageUtil.get(pageContext, "blacklist-threshold") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />blacklistThreshold">
 
@@ -239,7 +233,6 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 			<td>
 				<%= LanguageUtil.get(pageContext, "unpack-war") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-checkbox param="unpackWar" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_UNPACK_WAR) %>" />
 			</td>
@@ -252,7 +245,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 		<c:choose>
 			<c:when test="<%= ServerDetector.isJBoss() %>">
 				<tr>
-					<td colspan="3">
+					<td colspan="2">
 						<br />
 					</td>
 				</tr>
@@ -260,7 +253,6 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 					<td>
 						<%= LanguageUtil.get(pageContext, "jboss-prefix") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<select name="<portlet:namespace />jbossPrefix">
 							<option></option>
@@ -292,7 +284,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 		<c:choose>
 			<c:when test="<%= ServerDetector.isTomcat() %>">
 				<tr>
-					<td colspan="3">
+					<td colspan="2">
 						<br />
 					</td>
 				</tr>
@@ -300,7 +292,6 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 					<td>
 						<%= LanguageUtil.get(pageContext, "tomcat-conf-dir") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<input name="<portlet:namespace />tomcatConfDir" size="75" type="text" value="<%= tomcatConfDir %>">
 					</td>
@@ -309,7 +300,6 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 					<td>
 						<%= LanguageUtil.get(pageContext, "tomcat-lib-dir") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<input name="<portlet:namespace />tomcatLibDir" size="75" type="text" value="<%= tomcatLibDir %>">
 					</td>
@@ -322,7 +312,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 		</c:choose>
 
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<br />
 			</td>
 		</tr>
@@ -332,7 +322,6 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 
 				<span style="font-size: xx-small;">(<%= LanguageUtil.get(pageContext, "enter-one-url-per-line") %>)</span>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<textarea name="<portlet:namespace />pluginRepositories" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES) %></textarea>
 

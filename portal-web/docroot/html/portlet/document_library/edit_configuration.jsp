@@ -59,16 +59,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <liferay-ui:tabs names="folders-listing" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "root-folder") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<a href="<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= WindowState.MAXIMIZED.toString() %>"><liferay-portlet:param name="struts_action" value="/document_library/view" /><liferay-portlet:param name="folderId" value="<%= rootFolderId %>" /></liferay-portlet:renderURL>" id="<portlet:namespace />rootFolderName">
-		<%= rootFolderName %>
-		</a>
+		<%= rootFolderName %></a>
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var folderWindow = window.open('<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><liferay-portlet:param name="struts_action" value="/document_library/select_folder" /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
 
@@ -76,7 +74,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -84,7 +82,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<td>
 		<%= LanguageUtil.get(pageContext, "show-breadcrumbs") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="showBreadcrumbs" defaultValue="<%= showBreadcrumbs %>" />
 	</td>
@@ -93,7 +90,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<td>
 		<%= LanguageUtil.get(pageContext, "show-search") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="showFoldersSearch" defaultValue="<%= showFoldersSearch %>" />
 	</td>
@@ -102,7 +98,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<td>
 		<%= LanguageUtil.get(pageContext, "show-subfolders") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="showSubfolders" defaultValue="<%= showSubfolders %>" />
 	</td>
@@ -111,13 +106,12 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<td>
 		<%= LanguageUtil.get(pageContext, "folders-per-page") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>">
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -125,7 +119,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<td>
 		<%= LanguageUtil.get(pageContext, "show-columns") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
@@ -178,12 +171,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <liferay-ui:tabs names="documents-listing" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "show-search") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="showFileEntriesSearch" defaultValue="<%= showFileEntriesSearch %>" />
 	</td>
@@ -192,13 +184,12 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<td>
 		<%= LanguageUtil.get(pageContext, "documents-per-page") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>">
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -206,7 +197,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<td>
 		<%= LanguageUtil.get(pageContext, "show-columns") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%

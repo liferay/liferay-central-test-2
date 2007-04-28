@@ -41,12 +41,11 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 <liferay-ui:error key="errorResponseFromServer" message="connecting-to-the-repository-returned-an-error" />
 <liferay-ui:error key="invalidUrl" message="plugin-does-not-have-a-valid-url" />
 
-<table border="0" cellpadding="3" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<b><a href="<%= pluginPackage.getPageURL() %>"><%= pluginPackage.getName() %></a></b> (v<%= pluginPackage.getVersion() %>) <a href="<%= pluginPackage.getArtifactURL() %>">[<%= LanguageUtil.get(pageContext, "download") %>]</a>
 	</td>
@@ -55,7 +54,6 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 	<td>
 		<%= LanguageUtil.get(pageContext, "author") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, pluginPackage.getAuthor()) %>
 	</td>
@@ -64,7 +62,6 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 	<td>
 		<%= LanguageUtil.get(pageContext, "types") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%
 		Iterator itr = pluginPackage.getTypes().iterator();
@@ -84,7 +81,6 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 	<td>
 		<%= LanguageUtil.get(pageContext, "tags") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
@@ -106,7 +102,6 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 	<td>
 		<%= LanguageUtil.get(pageContext, "licenses") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
@@ -142,7 +137,6 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 	<td>
 		<%= LanguageUtil.get(pageContext, "liferay-versions") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
@@ -164,13 +158,12 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 	<td>
 		<%= LanguageUtil.get(pageContext, "repository") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<a href="<%= pluginPackage.getRepositoryURL() %>"><%= pluginPackage.getRepositoryURL() %></a>
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="2">
 		<br />
 	</td>
 </tr>
@@ -178,7 +171,6 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 	<td>
 		<%= LanguageUtil.get(pageContext, "short-description") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= pluginPackage.getShortDescription() %>
 	</td>
@@ -189,7 +181,6 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 		<td>
 			<%= LanguageUtil.get(pageContext, "long-description") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= pluginPackage.getLongDescription() %>
 		</td>
@@ -201,7 +192,6 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 		<td>
 			<%= LanguageUtil.get(pageContext, "change-log") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= pluginPackage.getChangeLog() %>
 		</td>
@@ -214,7 +204,7 @@ List screenshots = pluginPackage.getScreenshots();
 
 <c:if test="<%= (screenshots != null) && !screenshots.isEmpty() %>">
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br />
 		</td>
 	</tr>
@@ -222,7 +212,6 @@ List screenshots = pluginPackage.getScreenshots();
 		<td>
 			<%= LanguageUtil.get(pageContext, "screenshots") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 
 			<%

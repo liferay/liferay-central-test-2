@@ -321,12 +321,11 @@ viewPagesURL.setParameter("ownerId", ownerId);
 </c:if>
 
 <c:if test='<%= tabs1.equals("staging") %>'>
-	<table border="0" cellpadding="5" cellspacing="5">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "activate-staging") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<input <%= (stagingGroup != null) ? "checked" : "" %> name="<portlet:namespace />activateStaging" type="checkbox" onClick="<portlet:namespace />updateStagingState();">
 		</td>
@@ -548,19 +547,17 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td>
-							<table border="0" cellpadding="0" cellspacing="0">
+							<table class="liferay-table">
 							<tr>
 								<td>
 									<%= LanguageUtil.get(pageContext, "name") %>
 								</td>
-								<td style="padding-left: 10px;"></td>
 								<td>
-									<table border="0" cellpadding="0" cellspacing="0">
+									<table class="liferay-table">
 									<tr>
 										<td>
 											<input name="<portlet:namespace />name" size="30" type="text" value="<%= name %>">
 										</td>
-										<td style="padding-left: 10px;"></td>
 										<td>
 											<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />savePage();">
 
@@ -586,13 +583,12 @@ viewPagesURL.setParameter("ownerId", ownerId);
 								<td>
 									<%= LanguageUtil.get(pageContext, "html-title") %>
 								</td>
-								<td style="padding-left: 10px;"></td>
 								<td>
 									<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>">
 								</td>
 							</tr>
 							<tr>
-								<td colspan="3">
+								<td colspan="2">
 									<br />
 								</td>
 							</tr>
@@ -600,7 +596,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 								<td>
 									<%= LanguageUtil.get(pageContext, "type") %>
 								</td>
-								<td style="padding-left: 10px;"></td>
 								<td>
 									<select name="<portlet:namespace />type">
 
@@ -621,7 +616,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 								<td>
 									<%= LanguageUtil.get(pageContext, "hidden") %>
 								</td>
-								<td style="padding-left: 10px;"></td>
 								<td>
 									<liferay-ui:input-checkbox param="hidden" defaultValue="<%= selLayout.isHidden() %>" />
 								</td>
@@ -632,7 +626,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 									<td>
 										<%= LanguageUtil.get(pageContext, "friendly-url") %>
 									</td>
-									<td style="padding-left: 10px;"></td>
 									<td nowrap>
 
 										<%
@@ -651,7 +644,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							</c:if>
 
 							<tr>
-								<td colspan="3">
+								<td colspan="2">
 									<br />
 								</td>
 							</tr>
@@ -659,7 +652,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 								<td>
 									<%= LanguageUtil.get(pageContext, "icon") %>
 								</td>
-								<td style="padding-left: 10px;"></td>
 								<td>
 									<liferay-theme:layout-icon layout="<%= selLayout %>" />
 
@@ -670,7 +662,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 								<td>
 									<%= LanguageUtil.get(pageContext, "use-icon") %>
 								</td>
-								<td style="padding-left: 10px;"></td>
 								<td>
 									<liferay-ui:input-checkbox param="iconImage" defaultValue="<%= selLayout.isIconImage() %>" />
 								</td>
@@ -763,18 +754,17 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<br /><br />
 
-					<table border="0" cellpadding="0" cellspacing="0">
+					<table class="liferay-table">
 					<tr>
 						<td>
 							<%= LanguageUtil.get(pageContext, "name") %>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 							<input name="<portlet:namespace />name" size="30" type="text" value="<%= name %>">
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3">
+						<td colspan="2">
 							<br />
 						</td>
 					</tr>
@@ -782,7 +772,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						<td>
 							<%= LanguageUtil.get(pageContext, "type") %>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 							<select name="<portlet:namespace />type">
 
@@ -803,7 +792,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						<td>
 							<%= LanguageUtil.get(pageContext, "hidden") %>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 							<liferay-ui:input-checkbox param="hidden" defaultValue="<%= hidden %>" />
 						</td>
@@ -855,7 +843,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 						<br /><br />
 
-						<table border="0" cellpadding="0" cellspacing="0">
+						<table class="liferay-table">
 						<tr>
 							<td>
 								<select name="<portlet:namespace />layoutIdsBox" size="7">
@@ -873,7 +861,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 								</select>
 							</td>
-							<td style="padding-left: 10px;"></td>
 							<td valign="top">
 								<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16"></a><br />
 								<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16"></a><br />
@@ -906,12 +893,11 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					%>
 
 					<c:if test="<%= selLayout != null %>">
-						<table border="0" cellpadding="0" cellspacing="0">
+						<table class="liferay-table">
 						<tr>
 							<td>
 								<%= LanguageUtil.get(pageContext, "inherit-look-and-feel-from-the-" + (privateLayout ? "public" : "private") + "-root-node") %>
 							</td>
-							<td style="padding-left: 10px;"></td>
 							<td>
 								<select name="<portlet:namespace />hidden" onChange="if (this.value == 1) { <portlet:namespace />updateLookAndFeel('', ''); } else { <portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= selColorScheme.getColorSchemeId() %>'); }">
 									<option <%= (selLayout.isInheritLookAndFeel()) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
@@ -1035,12 +1021,11 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						<br /><br />
 					</c:if>
 
-					<table border="0" cellpadding="0" cellspacing="0">
+					<table class="liferay-table">
 					<tr>
 						<td>
 							<%= LanguageUtil.get(pageContext, "logo") %>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 							<input name="<portlet:namespace />logoFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />logo.value = true; document.<portlet:namespace />fm.<portlet:namespace />logoCheckbox.checked = true;">
 						</td>
@@ -1049,7 +1034,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						<td>
 							<%= LanguageUtil.get(pageContext, "use-logo") %>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 							<liferay-ui:input-checkbox param="logo" defaultValue="<%= layoutSet.isLogo() %>" />
 						</td>
@@ -1154,12 +1138,11 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<br /><br />
 
-					<table border="0" cellpadding="0" cellspacing="0">
+					<table class="liferay-table">
 					<tr>
 						<td>
 							<%= LanguageUtil.get(pageContext, "public-virtual-host") %>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td nowrap>
 
 							<%
@@ -1177,7 +1160,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						<td>
 							<%= LanguageUtil.get(pageContext, "private-virtual-host") %>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td nowrap>
 
 							<%
@@ -1202,12 +1184,11 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 						<br /><br />
 
-						<table border="0" cellpadding="0" cellspacing="0">
+						<table class="liferay-table">
 						<tr>
 							<td>
 								<%= LanguageUtil.get(pageContext, "friendly-url") %>
 							</td>
-							<td style="padding-left: 10px;"></td>
 							<td nowrap>
 
 								<%

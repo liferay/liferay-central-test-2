@@ -40,12 +40,11 @@
 
 		<c:choose>
 			<c:when test='<%= tabs3.equals("ldap") %>'>
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "enabled") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= ParamUtil.getBoolean(request, "enabled", PortalLDAPUtil.isAuthEnabled(company.getCompanyId())) %>' />
 					</td>
@@ -54,7 +53,6 @@
 					<td>
 						<%= LanguageUtil.get(pageContext, "required") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<liferay-ui:input-checkbox param="required" defaultValue='<%= ParamUtil.getBoolean(request, "required", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_AUTH_REQUIRED)) %>' />
 					</td>
@@ -67,12 +65,11 @@
 
 				<br /><br />
 
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "base-provider-url") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<input name="<portlet:namespace />baseProviderURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_PROVIDER_URL)) %>'>
 					</td>
@@ -81,7 +78,6 @@
 					<td>
 						<%= LanguageUtil.get(pageContext, "base-dn") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<input name="<portlet:namespace />baseDN" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_DN)) %>'>
 					</td>
@@ -90,7 +86,6 @@
 					<td>
 						<%= LanguageUtil.get(pageContext, "principal") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<input name="<portlet:namespace />principal" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_PRINCIPAL)) %>'>
 					</td>
@@ -99,7 +94,6 @@
 					<td>
 						<%= LanguageUtil.get(pageContext, "credentials") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<input name="<portlet:namespace />credentials" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_CREDENTIALS)) %>'>
 					</td>
@@ -149,7 +143,7 @@
 
 				<br /><br />
 
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td>
 						<select name="<portlet:namespace />defaultLdap">
@@ -159,7 +153,6 @@
 							<option>Novell eDirectory</option>
 						</select>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<input type="button" value='<%= LanguageUtil.get(pageContext, "reset-values") %>' onClick="<portlet:namespace />updateDefaultLdap();">
 					</td>
@@ -171,12 +164,11 @@
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateLdap');">
 			</c:when>
 			<c:otherwise>
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "how-do-users-authenticate") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<select name="<portlet:namespace />authType">
 							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_EA %>"><%= LanguageUtil.get(pageContext, "by-email-address") %></option>
@@ -189,7 +181,6 @@
 					<td>
 						<%= LanguageUtil.get(pageContext, "allow-users-to-automatically-login") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<liferay-ui:input-checkbox param="autoLogin" defaultValue="<%= company.isAutoLogin() %>" />
 					</td>
@@ -198,7 +189,6 @@
 					<td>
 						<%= LanguageUtil.get(pageContext, "allow-users-to-request-forgotten-passwords") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<liferay-ui:input-checkbox param="sendPassword" defaultValue="<%= company.isSendPassword() %>" />
 					</td>
@@ -207,7 +197,6 @@
 					<td>
 						<%= LanguageUtil.get(pageContext, "allow-strangers-to-create-accounts") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<liferay-ui:input-checkbox param="strangers" defaultValue="<%= company.isStrangers() %>" />
 					</td>
@@ -333,12 +322,11 @@
 
 		<c:choose>
 			<c:when test='<%= tabs3.endsWith("-notification") %>'>
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "enabled") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("account-created-notification") %>'>
@@ -351,7 +339,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3">
+					<td colspan="2">
 						<br />
 					</td>
 				</tr>
@@ -359,7 +347,6 @@
 					<td>
 						<%= LanguageUtil.get(pageContext, "subject") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("account-created-notification") %>'>
@@ -372,7 +359,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3">
+					<td colspan="2">
 						<br />
 					</td>
 				</tr>
@@ -380,7 +367,6 @@
 					<td>
 						<%= LanguageUtil.get(pageContext, "body") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
@@ -395,12 +381,11 @@
 
 				<br /><br />
 
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<td>
 						<b>[$FROM_ADDRESS$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<%= emailFromAddress %>
 					</td>
@@ -409,7 +394,6 @@
 					<td>
 						<b>[$FROM_NAME$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<%= emailFromName %>
 					</td>
@@ -418,7 +402,6 @@
 					<td>
 						<b>[$PORTAL_URL$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<%= company.getPortalURL() %>
 					</td>
@@ -429,7 +412,6 @@
 						<td>
 							<b>[$REMOTE_ADDRESS$]</b>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 							The browser's remote address
 						</td>
@@ -438,7 +420,6 @@
 						<td>
 							<b>[$REMOTE_HOST$]</b>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 							The browser's remote host
 						</td>
@@ -449,7 +430,6 @@
 					<td>
 						<b>[$TO_ADDRESS$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						The address of the email recipient
 					</td>
@@ -458,7 +438,6 @@
 					<td>
 						<b>[$TO_NAME$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						The name of the email recipient
 					</td>
@@ -469,7 +448,6 @@
 						<td>
 							<b>[$USER_AGENT$]</b>
 						</td>
-						<td style="padding-left: 10px;"></td>
 						<td>
 							The browser's user agent
 						</td>
@@ -480,7 +458,6 @@
 					<td>
 						<b>[$USER_ID$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						The user ID
 					</td>
@@ -489,7 +466,6 @@
 					<td>
 						<b>[$USER_PASSWORD$]</b>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						The user password
 					</td>
@@ -497,17 +473,16 @@
 				</table>
 			</c:when>
 			<c:otherwise>
-				<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td colspan="3">
-							<%= LanguageUtil.get(pageContext, "the-remitent-of-mail-notifications-will-be") %>:
-						</td>
-					</tr>
+				<table class="liferay-table">
+				<tr>
+					<td colspan="2">
+						<%= LanguageUtil.get(pageContext, "the-remitent-of-mail-notifications-will-be") %>:
+					</td>
+				</tr>
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "name") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
 					</td>
@@ -516,7 +491,6 @@
 					<td>
 						<%= LanguageUtil.get(pageContext, "address") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
 					</td>

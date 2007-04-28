@@ -30,15 +30,14 @@ User user2 = company.getDefaultUser();
 <liferay-ui:error exception="<%= CompanyHomeURLException.class %>" message="please-enter-a-valid-home-url" />
 <liferay-ui:error exception="<%= CompanyPortalURLException.class %>" message="please-enter-a-valid-portal-url" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td valign="top">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "name") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="name" />
 			</td>
@@ -47,7 +46,6 @@ User user2 = company.getDefaultUser();
 			<td>
 				<%= LanguageUtil.get(pageContext, "legal-name") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="legalName" />
 			</td>
@@ -56,7 +54,6 @@ User user2 = company.getDefaultUser();
 			<td>
 				<%= LanguageUtil.get(pageContext, "legal-id") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="legalId" />
 			</td>
@@ -65,21 +62,18 @@ User user2 = company.getDefaultUser();
 			<td>
 				<%= LanguageUtil.get(pageContext, "legal-type") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="legalType" />
 			</td>
 		</tr>
 		</table>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td valign="top">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "sic-code") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="sicCode" />
 			</td>
@@ -88,7 +82,6 @@ User user2 = company.getDefaultUser();
 			<td>
 				<%= LanguageUtil.get(pageContext, "ticker-symbol") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="tickerSymbol" />
 			</td>
@@ -97,7 +90,6 @@ User user2 = company.getDefaultUser();
 			<td>
 				<%= LanguageUtil.get(pageContext, "industry") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="industry" />
 			</td>
@@ -106,21 +98,18 @@ User user2 = company.getDefaultUser();
 			<td>
 				<%= LanguageUtil.get(pageContext, "type") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="type" />
 			</td>
 		</tr>
 		</table>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td valign="top">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "portal-url") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="portalURL" />
 			</td>
@@ -129,7 +118,6 @@ User user2 = company.getDefaultUser();
 			<td>
 				<%= LanguageUtil.get(pageContext, "home-url") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="homeURL" />
 			</td>
@@ -138,7 +126,6 @@ User user2 = company.getDefaultUser();
 			<td>
 				<%= LanguageUtil.get(pageContext, "mail-domain") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="mx" disabled="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MAIL_MX_UPDATE)) %>" />
 			</td>
@@ -156,15 +143,14 @@ User user2 = company.getDefaultUser();
 
 <liferay-ui:tabs names="display" param="tabs2" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td valign="top">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "language") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />languageId">
 
@@ -189,14 +175,12 @@ User user2 = company.getDefaultUser();
 			<td>
 				<%= LanguageUtil.get(pageContext, "time-zone") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-time-zone name="timeZoneId" value="<%= user2.getTimeZone().getID() %>" />
 			</td>
 		</tr>
 		</table>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td align="center" valign="top">
 		<img src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= company.getCompanyId() %>"><br />
 
@@ -207,12 +191,11 @@ User user2 = company.getDefaultUser();
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "allow-community-administrators-to-use-their-own-logo") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-checkbox param="communityLogo" defaultValue="<%= company.isCommunityLogo() %>" />
 	</td>

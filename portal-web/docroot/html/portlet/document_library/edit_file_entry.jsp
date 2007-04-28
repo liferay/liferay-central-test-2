@@ -97,12 +97,11 @@ portletURL.setParameter("name", name);
 </div>
 
 <c:if test="<%= fileEntry != null %>">
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "name") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>">
 			<%= fileEntry.getTitle() %>
@@ -113,7 +112,6 @@ portletURL.setParameter("name", name);
 		<td>
 			<%= LanguageUtil.get(pageContext, "version") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= fileEntry.getVersion() %>
 		</td>
@@ -122,7 +120,6 @@ portletURL.setParameter("name", name);
 		<td>
 			<%= LanguageUtil.get(pageContext, "size") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= TextFormatter.formatKB(fileEntry.getSize(), locale) %>k
 		</td>
@@ -131,13 +128,12 @@ portletURL.setParameter("name", name);
 		<td>
 			<%= LanguageUtil.get(pageContext, "downloads") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= fileEntry.getReadCount() %>
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="2">
 			<br />
 		</td>
 	</tr>
@@ -145,7 +141,6 @@ portletURL.setParameter("name", name);
 		<td>
 			<%= LanguageUtil.get(pageContext, "url") %>
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<input class="form-text" readonly="true" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>" onClick="javascript: this.focus(); this.select();">
 		</td>

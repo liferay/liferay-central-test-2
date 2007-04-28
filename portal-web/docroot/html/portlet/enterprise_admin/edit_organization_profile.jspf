@@ -69,15 +69,14 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 <liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-organization" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td valign="top">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "name") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= organization %>" field="name" />
 			</td>
@@ -90,7 +89,6 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 				<td>
 					<%= LanguageUtil.get(pageContext, "organization") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<a class="portlet-font" href="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= organizationId %>" /></portlet:actionURL>" id="<portlet:namespace />parentOrganizationName" style="font-size: x-small;"><%= parentOrganizationName %></a>
 
@@ -105,7 +103,6 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 			<td>
 				<%= LanguageUtil.get(pageContext, "status") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />statusId">
 					<option value=""></option>
@@ -128,14 +125,12 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 		</tr>
 		</table>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td valign="top">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "country") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
 			</td>
@@ -144,7 +139,6 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 			<td>
 				<%= LanguageUtil.get(pageContext, "region") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
 			</td>

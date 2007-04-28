@@ -157,17 +157,16 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 <liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
 <liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td valign="top">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 
 		<c:if test="<%= user2 != null %>">
 			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "user-id") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<%= user2.getUserId() %>
 				</td>
@@ -178,7 +177,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "screen-name") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
 			</td>
@@ -187,13 +185,12 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "email-address") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3">
+			<td colspan="2">
 				<br />
 			</td>
 		</tr>
@@ -201,7 +198,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "prefix") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />prefixId">
 					<option value=""></option>
@@ -226,7 +222,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "first-name") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="firstName" />
 			</td>
@@ -235,7 +230,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "middle-name") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="middleName" />
 			</td>
@@ -244,7 +238,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "last-name") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
 			</td>
@@ -253,7 +246,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "suffix") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<select name="<portlet:namespace />suffixId">
 					<option value=""></option>
@@ -276,9 +268,8 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		</tr>
 		</table>
 	</td>
-	<td style="padding-left: 30px;"></td>
 	<td valign="top">
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 
 		<%
 		boolean fieldEnableContactBirthday = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY));
@@ -290,7 +281,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 					<td>
 						<%= LanguageUtil.get(pageContext, "birthday") %>
 					</td>
-					<td style="padding-left: 10px;"></td>
 					<td>
 						<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="birthday" defaultValue="<%= birthday %>" />
 					</td>
@@ -312,7 +302,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				<td>
 					<%= LanguageUtil.get(pageContext, "gender") %>
 				</td>
-				<td style="padding-left: 10px;"></td>
 				<td>
 					<select name="<portlet:namespace />male">
 						<option value="1"><%= LanguageUtil.get(pageContext, "male") %></option>
@@ -324,7 +313,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 
 		<c:if test="<%= fieldEnableContactBirthday || fieldEnableContactMale %>">
 			<tr>
-				<td colspan="3">
+				<td colspan="2">
 					<br />
 				</td>
 			</tr>
@@ -334,7 +323,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "organization") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>">
 
@@ -355,7 +343,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "location") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<input name="<portlet:namespace />locationId" type="hidden" value="<%= locationId %>">
 
@@ -376,7 +363,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<td>
 				<%= LanguageUtil.get(pageContext, "job-title") %>
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="jobTitle" />
 			</td>
@@ -385,7 +371,6 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 	</td>
 
 	<c:if test="<%= user2 != null %>">
-		<td style="padding-left: 30px;"></td>
 		<td align="center" valign="top">
 			<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getUserId() %>"><br />
 

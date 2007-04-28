@@ -141,12 +141,11 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 <liferay-ui:error exception="<%= ContentException.class %>" message="please-enter-valid-content" />
 <liferay-ui:error exception="<%= RecipientException.class %>" message="please-enter-a-valid-email-address" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "to") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input id="<portlet:namespace />to" name="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text">
 	</td>
@@ -155,7 +154,6 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 	<td>
 		<%= LanguageUtil.get(pageContext, "cc") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input id="<portlet:namespace />cc" name="<portlet:namespace />cc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= cc %>">
 	</td>
@@ -164,7 +162,6 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 	<td>
 		<%= LanguageUtil.get(pageContext, "bcc") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input id="<portlet:namespace />bcc" name="<portlet:namespace />bcc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= bcc %>">
 	</td>
@@ -173,7 +170,6 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 	<td>
 		<%= LanguageUtil.get(pageContext, "subject") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= subject %>">
 	</td>
@@ -182,12 +178,11 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td valign="top">
 		<%= LanguageUtil.get(pageContext, "attachments") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />files">
 		<tr>

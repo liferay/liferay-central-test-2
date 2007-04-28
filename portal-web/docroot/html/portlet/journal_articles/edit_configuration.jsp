@@ -35,12 +35,11 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 
 <liferay-ui:error exception="<%= NoSuchGroupException.class %>" message="the-community-could-not-be-found" />
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table class="liferay-table">
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "community") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />groupId">
 			<option value=""></option>
@@ -63,7 +62,6 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 	<td>
 		<%= LanguageUtil.get(pageContext, "article-type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />type">
 			<option value=""></option>
@@ -85,7 +83,6 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 	<td>
 		<%= LanguageUtil.get(pageContext, "display-url") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />pageURL">
 			<option <%= pageURL.equals("maximized") ? "selected" : "" %> value="maximized"><%= LanguageUtil.get(pageContext, "maximized") %></option>
@@ -97,7 +94,6 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 	<td>
 		<%= LanguageUtil.get(pageContext, "display-per-page") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />pageDelta">
 
@@ -120,7 +116,6 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 	<td>
 		<%= LanguageUtil.get(pageContext, "order-by-column") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />orderByCol">
 			<option <%= orderByCol.equals("display-date") ? "selected" : "" %> value="display-date"><%= LanguageUtil.get(pageContext, "display-date") %></option>
@@ -135,7 +130,6 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 	<td>
 		<%= LanguageUtil.get(pageContext, "order-by-type") %>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />orderByType">
 			<option <%= orderByType.equals("asc") ? "selected" : "" %> value="asc"><%= LanguageUtil.get(pageContext, "ascending") %></option>
