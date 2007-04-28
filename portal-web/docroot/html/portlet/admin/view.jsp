@@ -119,16 +119,16 @@ String tabsNames = "server,monitoring,plugins,settings";
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("monitoring") %>'>
-		<%@ include file="/html/portlet/admin/monitoring.jsp" %>
+		<%@ include file="/html/portlet/admin/monitoring.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("plugins") %>'>
-		<%@ include file="/html/portlet/admin/plugins.jsp" %>
+		<%@ include file="/html/portlet/admin/plugins.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("settings") %>'>
-		<%@ include file="/html/portlet/admin/settings.jsp" %>
+		<%@ include file="/html/portlet/admin/settings.jspf" %>
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/html/portlet/admin/server.jsp" %>
+		<%@ include file="/html/portlet/admin/server.jspf" %>
 	</c:otherwise>
 </c:choose>
 

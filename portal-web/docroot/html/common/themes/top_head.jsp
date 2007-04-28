@@ -24,8 +24,8 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<%@ include file="/html/common/themes/top_meta.jsp" %>
-<%@ include file="/html/common/themes/top_meta-ext.jsp" %>
+<%@ include file="/html/common/themes/top_meta.jspf" %>
+<%@ include file="/html/common/themes/top_meta-ext.jspf" %>
 
 <link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/liferay.ico" />
 
@@ -87,8 +87,8 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 	</style>
 </c:if>
 
-<%@ include file="/html/common/themes/top_js.jsp" %>
-<%@ include file="/html/common/themes/top_js-ext.jsp" %>
+<%@ include file="/html/common/themes/top_js.jspf" %>
+<%@ include file="/html/common/themes/top_js-ext.jspf" %>
 
 <c:if test="<%= portlets != null %>">
 

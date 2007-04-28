@@ -51,12 +51,12 @@ installPluginsURL.setParameter("tabs2", tabs2);
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("themes") %>'>
-		<%@ include file="/html/portlet/admin/themes.jsp" %>
+		<%@ include file="/html/portlet/admin/themes.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs2.equals("layout-templates") %>'>
-		<%@ include file="/html/portlet/admin/layout_templates.jsp" %>
+		<%@ include file="/html/portlet/admin/layout_templates.jspf" %>
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/html/portlet/admin/portlets.jsp" %>
+		<%@ include file="/html/portlet/admin/portlets.jspf" %>
 	</c:otherwise>
 </c:choose>

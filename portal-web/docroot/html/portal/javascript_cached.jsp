@@ -130,4 +130,4 @@ Calendar._TT["TT_DATE_FORMAT"] = "%a, %b %e";
 
 Calendar._TT["WEEKEND"] = "0,6";
 
-<%@ include file="/html/portal/layout/view/portlet_js.jsp" %>
+<%@ include file="/html/portal/layout/view/portlet_js.jspf" %>

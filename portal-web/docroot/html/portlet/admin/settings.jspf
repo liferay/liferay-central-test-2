@@ -504,7 +504,7 @@
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveEmails();">
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/html/portlet/admin/settings_general.jsp" %>
+		<%@ include file="/html/portlet/admin/settings_general.jspf" %>
 	</c:otherwise>
 </c:choose>
 

@@ -326,7 +326,7 @@ if (portlet.isActive() && access) {
 PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletDisplay.getId(), true, true);
 %>
 
-<%@ include file="/html/portal/render_portlet-ext.jsp" %>
+<%@ include file="/html/portal/render_portlet-ext.jspf" %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() %>">
 
@@ -357,7 +357,7 @@ PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(requ
 		<a name="p_<%= portletId %>"></a>
 </c:if>
 
-<%@ include file="/html/common/themes/portlet_css.jsp" %>
+<%@ include file="/html/common/themes/portlet_css.jspf" %>
 
 <c:choose>
 	<c:when test="<%= !access && !portlet.isShowPortletAccessDenied() %>">

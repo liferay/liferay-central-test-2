@@ -290,7 +290,7 @@ containerStyles = sm.toString();
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isStateExclusive() %>">
-		<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
+		<%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
 	</c:when>
 	<c:when test="<%= themeDisplay.isStatePopUp() %>">
 		<div>
@@ -312,7 +312,7 @@ containerStyles = sm.toString();
 			<c:when test="<%= portletDecorate %>">
 				<liferay-theme:wrap-portlet page="portlet.jsp">
 					<div class="portlet-content-container" <%= containerStyles %>>
-						<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
+						<%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
 					</div>
 				</liferay-theme:wrap-portlet>
 
@@ -346,7 +346,7 @@ containerStyles = sm.toString();
 						</div>
 					</c:if>
 
-					<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
+					<%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
 				</div>
 
 				<c:if test="<%= freeformPortlet %>">

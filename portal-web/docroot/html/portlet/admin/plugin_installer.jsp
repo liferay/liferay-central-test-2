@@ -129,10 +129,10 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 
 <c:choose>
 	<c:when test='<%=tabs1.equals("upload-file") %>'>
-		<%@ include file="/html/portlet/admin/upload_file.jsp" %>
+		<%@ include file="/html/portlet/admin/upload_file.jspf" %>
 	</c:when>
 	<c:when test='<%=tabs1.equals("download-file") %>'>
-		<%@ include file="/html/portlet/admin/download_file.jsp" %>
+		<%@ include file="/html/portlet/admin/download_file.jspf" %>
 	</c:when>
 	<c:when test='<%=tabs1.equals("configuration") %>'>
 		<c:if test="<%= !PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
@@ -350,10 +350,10 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(moduleId) && Validator.isNotNull(repositoryURL) %>">
-				<%@ include file="/html/portlet/admin/view_plugin_package.jsp" %>
+				<%@ include file="/html/portlet/admin/view_plugin_package.jspf" %>
 			</c:when>
 			<c:otherwise>
-				<%@ include file="/html/portlet/admin/browse_repository.jsp" %>
+				<%@ include file="/html/portlet/admin/browse_repository.jspf" %>
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>

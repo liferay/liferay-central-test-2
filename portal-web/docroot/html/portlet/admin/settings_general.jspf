@@ -218,7 +218,7 @@ User user2 = company.getDefaultUser();
 			<liferay-util:param name="editable" value="true" />
 			<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 			<liferay-util:param name="className" value="<%= Account.class.getName() %>" />
-			<liferay-util:param name="classPK" value="<%= account.getAccountId() %>" />
+			<liferay-util:param name="classPK" value="<%= String.valueOf(account.getAccountId()) %>" />
 		</liferay-util:include>
 	</liferay-ui:section>
 	<liferay-ui:section>
@@ -226,7 +226,7 @@ User user2 = company.getDefaultUser();
 			<liferay-util:param name="editable" value="true" />
 			<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 			<liferay-util:param name="className" value="<%= Account.class.getName() %>" />
-			<liferay-util:param name="classPK" value="<%= account.getAccountId() %>" />
+			<liferay-util:param name="classPK" value="<%= String.valueOf(account.getAccountId()) %>" />
 		</liferay-util:include>
 	</liferay-ui:section>
 	<liferay-ui:section>
@@ -234,7 +234,7 @@ User user2 = company.getDefaultUser();
 			<liferay-util:param name="editable" value="true" />
 			<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 			<liferay-util:param name="className" value="<%= Account.class.getName() %>" />
-			<liferay-util:param name="classPK" value="<%= account.getAccountId() %>" />
+			<liferay-util:param name="classPK" value="<%= String.valueOf(account.getAccountId()) %>" />
 		</liferay-util:include>
 	</liferay-ui:section>
 	<liferay-ui:section>
@@ -242,7 +242,7 @@ User user2 = company.getDefaultUser();
 			<liferay-util:param name="editable" value="true" />
 			<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 			<liferay-util:param name="className" value="<%= Account.class.getName() %>" />
-			<liferay-util:param name="classPK" value="<%= account.getAccountId() %>" />
+			<liferay-util:param name="classPK" value="<%= String.valueOf(account.getAccountId()) %>" />
 		</liferay-util:include>
 	</liferay-ui:section>
 </liferay-ui:tabs>

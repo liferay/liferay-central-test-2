@@ -24,10 +24,8 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
-<%@ include file="/html/portal/layout/view/embedded_js.jsp" %>
+<%@ include file="/html/portal/layout/view/embedded_js.jspf" %>
 
 <div id="iframe">
 	<iframe frameborder="0" height="100%" src="<%= layout.getTypeSettingsProperties().getProperty("url") %>" width="100%" onLoad="resizeIframe();"></iframe>
 </div>
-
-<%@ include file="/html/portal/layout/edit/common.jsp" %>

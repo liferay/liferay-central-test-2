@@ -42,3 +42,5 @@
 	</td>
 </tr>
 </table>
+
+<%@ include file="/html/portal/layout/edit/common.jspf" %>

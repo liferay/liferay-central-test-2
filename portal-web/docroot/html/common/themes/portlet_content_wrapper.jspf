@@ -26,15 +26,15 @@
 	<c:when test="<%= portletDisplay.isActive() %>">
 		<c:choose>
 			<c:when test="<%= themeDisplay.isStateExclusive() %>">
-				<%@ include file="/html/common/themes/portlet_content.jsp" %>
+				<%@ include file="/html/common/themes/portlet_content.jspf" %>
 			</c:when>
 			<c:when test="<%= portletDisplay.isAccess() %>">
 				<div>
 					<c:if test='<%= !tilesPortletContent.endsWith("/error.jsp") %>'>
-						<%@ include file="/html/common/themes/portlet_messages.jsp" %>
+						<%@ include file="/html/common/themes/portlet_messages.jspf" %>
 					</c:if>
 
-					<%@ include file="/html/common/themes/portlet_content.jsp" %>
+					<%@ include file="/html/common/themes/portlet_content.jspf" %>
 				</div>
 			</c:when>
 			<c:otherwise>

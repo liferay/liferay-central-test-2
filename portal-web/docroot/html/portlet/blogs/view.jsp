@@ -60,7 +60,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		searchContainer.setResults(results);
 		%>
 
-		<%@ include file="/html/portlet/blogs/view_entries.jsp" %>
+		<%@ include file="/html/portlet/blogs/view_entries.jspf" %>
 
 		</form>
 
@@ -224,7 +224,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					param="tabs2"
 				/>
 
-				<%@ include file="/html/portlet/blogs/view_entries.jsp" %>
+				<%@ include file="/html/portlet/blogs/view_entries.jspf" %>
 			</c:if>
 
 			</form>

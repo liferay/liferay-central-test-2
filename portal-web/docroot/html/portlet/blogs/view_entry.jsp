@@ -49,7 +49,7 @@ portletURL.setParameter("struts_action", "/blogs/view");
 	backURL="<%= redirect %>"
 />
 
-<%@ include file="/html/portlet/blogs/view_entry_content.jsp" %>
+<%@ include file="/html/portlet/blogs/view_entry_content.jspf" %>
 
 </form>
 
