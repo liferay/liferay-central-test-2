@@ -459,6 +459,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		try {
 			User user = UserUtil.findByPrimaryKey(userId);
 
+			if (user.isDefaultUser()) {
+				_log.error(
+					"The default user should never be allowed to authenticate");
+
+				return false;
+			}
+
 			String password = user.getPassword();
 
 			if (password.equals(encPwd)) {
@@ -1266,6 +1273,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 		catch (NoSuchUserException nsue) {
+			return Authenticator.DNE;
+		}
+
+		if (user.isDefaultUser()) {
+			_log.error(
+				"The default user should never be allowed to authenticate");
+
 			return Authenticator.DNE;
 		}
 
