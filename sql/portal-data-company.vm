@@ -16,17 +16,11 @@ insert into Account_ (accountId, companyId, userId, userName, createDate, modifi
 ##
 
 #set($administratorRoleId = $counter.get())
-#set($communityAdministratorRoleId = $counter.get())
-#set($communityMemberRoleId = $counter.get())
-#set($communityOwnerRoleId = $counter.get())
 #set($guestRoleId = $counter.get())
 #set($powerUserRoleId = $counter.get())
 #set($userRoleId = $counter.get())
 
 insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ('$administratorRoleId', $companyId, '', '', 'Administrator', '', 1);
-insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ('$communityAdministratorRoleId', $companyId, '', '', 'Community Administrator', '', 2);
-insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ('$communityMemberRoleId', $companyId, '', '', 'Community Member', '', 2);
-insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ('$communityOwnerRoleId', $companyId, '', '', 'Community Owner', '', 2);
 insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ('$guestRoleId', $companyId, '', '', 'Guest', '', 1);
 insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ('$powerUserRoleId', $companyId, '', '', 'Power User', '', 1);
 insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ('$userRoleId', $companyId, '', '', 'User', '', 1);
