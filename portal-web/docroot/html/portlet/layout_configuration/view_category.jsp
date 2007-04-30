@@ -71,7 +71,7 @@ while (itr1.hasNext()) {
 			try {
 				externalPortletCategory = resourceBundle.getString(portletCategory.getName());
 			}
-			catch (java.util.MissingResourceException mre) {
+			catch (MissingResourceException mre) {
 			}
 		}
 	}
@@ -88,7 +88,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 			<td>
 				<div style="padding: 2px; font-weight: bold;">
 					<a href="javascript: void(0);" onClick="LayoutConfiguration.toggleCategory(this);">
-					<img src="<%= themeDisplay.getPathThemeImages() + "/arrows/01_right.png" %>" /> <%= Validator.isNotNull(externalPortletCategory)?externalPortletCategory:LanguageUtil.get(pageContext, portletCategory.getName()) %>
+					<img src="<%= themeDisplay.getPathThemeImages() + "/arrows/01_right.png" %>" /> <%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %>
 					</a>
 				</div>
 			</td>

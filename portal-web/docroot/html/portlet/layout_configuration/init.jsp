@@ -25,3 +25,5 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.plugin.PluginUtil" %>
+
+<%@ page import="java.util.MissingResourceException" %>
