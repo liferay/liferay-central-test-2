@@ -47,8 +47,8 @@ if (!parentOrganizationId.equals(OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID
 	}
 }
 
-String regionId = BeanParamUtil.getString(organization, request, "regionId");
-String countryId = BeanParamUtil.getString(organization, request, "countryId");
+long regionId = BeanParamUtil.getLong(organization, request, "regionId");
+long countryId = BeanParamUtil.getLong(organization, request, "countryId");
 int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 %>
 

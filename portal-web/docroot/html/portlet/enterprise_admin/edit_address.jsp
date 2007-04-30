@@ -34,8 +34,8 @@ long addressId = BeanParamUtil.getLong(address, request, "addressId");
 String className = BeanParamUtil.getString(address, request, "className");
 String classPK = BeanParamUtil.getString(address, request, "classPK");
 
-String regionId = BeanParamUtil.getString(address, request, "regionId");
-String countryId = BeanParamUtil.getString(address, request, "countryId");
+long regionId = BeanParamUtil.getLong(address, request, "regionId");
+long countryId = BeanParamUtil.getLong(address, request, "countryId");
 int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 %>
 
