@@ -236,7 +236,7 @@ Liferay.Navigation = new Class({
 		var navList = navBlock.find('ul:first');
 
 		if (instance._isSortable) {
-			var float = navList.find('> li').css('float');
+			var floatStyle = navList.find('> li').css('float');
 
 			var items = navList.find('li');
 			var anchors = items.find('a');
@@ -260,7 +260,7 @@ Liferay.Navigation = new Class({
 					handle: (instance._isUseHandle ? '.sort-handle' : 'a'),
 					opacity: 0.8,
 					revert:	true,
-					floats:	(float == 'left' || float == 'right'),
+					floats:	(floatStyle == 'left' || floatStyle == 'right'),
 					tolerance: 'pointer',
 					onStop: function() {
 						instance._saveSortables(this);

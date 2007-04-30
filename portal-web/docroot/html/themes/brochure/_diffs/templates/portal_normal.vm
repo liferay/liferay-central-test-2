@@ -15,7 +15,7 @@
 
 <body class="$css_class">
 
-$theme.include($top_warning_include)
+$theme.include($top_messages_include)
 
 <div id="wrapper">
 	<div id="banner">
