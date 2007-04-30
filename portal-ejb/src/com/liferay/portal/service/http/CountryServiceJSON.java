@@ -83,7 +83,7 @@ public class CountryServiceJSON {
 		return CountryJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONObject getCountry(java.lang.String countryId)
+	public static JSONObject getCountry(long countryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountry(countryId);

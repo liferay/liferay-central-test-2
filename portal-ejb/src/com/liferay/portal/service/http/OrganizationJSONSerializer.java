@@ -81,25 +81,8 @@ public class OrganizationJSONSerializer {
 		}
 
 		jsonObj.put("recursable", model.getRecursable());
-
-		String regionId = model.getRegionId();
-
-		if (regionId == null) {
-			jsonObj.put("regionId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("regionId", regionId.toString());
-		}
-
-		String countryId = model.getCountryId();
-
-		if (countryId == null) {
-			jsonObj.put("countryId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("countryId", countryId.toString());
-		}
-
+		jsonObj.put("regionId", model.getRegionId());
+		jsonObj.put("countryId", model.getCountryId());
 		jsonObj.put("statusId", model.getStatusId());
 
 		String comments = model.getComments();

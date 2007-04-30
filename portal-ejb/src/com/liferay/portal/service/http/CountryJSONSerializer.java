@@ -51,14 +51,7 @@ import java.util.List;
 public class CountryJSONSerializer {
 	public static JSONObject toJSONObject(Country model) {
 		JSONObject jsonObj = new JSONObject();
-		String countryId = model.getCountryId();
-
-		if (countryId == null) {
-			jsonObj.put("countryId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("countryId", countryId.toString());
-		}
+		jsonObj.put("countryId", model.getCountryId());
 
 		String name = model.getName();
 

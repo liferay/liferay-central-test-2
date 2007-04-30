@@ -25,8 +25,8 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.http.TunnelUtil;
@@ -123,16 +123,11 @@ public class CountryServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Country getCountry(
-		HttpPrincipal httpPrincipal, java.lang.String countryId)
+		HttpPrincipal httpPrincipal, long countryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = countryId;
-
-			if (countryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(countryId);
 			MethodWrapper methodWrapper = new MethodWrapper(CountryServiceUtil.class.getName(),
 					"getCountry", new Object[] { paramObj0 });
 			Object returnObj = null;

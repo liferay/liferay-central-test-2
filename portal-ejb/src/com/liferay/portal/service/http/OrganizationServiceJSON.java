@@ -86,8 +86,7 @@ public class OrganizationServiceJSON {
 
 	public static JSONObject addOrganization(
 		java.lang.String parentOrganizationId, java.lang.String name,
-		java.lang.String regionId, java.lang.String countryId, int statusId,
-		boolean location)
+		long regionId, long countryId, int statusId, boolean location)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
@@ -152,8 +151,8 @@ public class OrganizationServiceJSON {
 
 	public static JSONObject updateOrganization(
 		java.lang.String organizationId, java.lang.String parentOrganizationId,
-		java.lang.String name, java.lang.String regionId,
-		java.lang.String countryId, int statusId, boolean location)
+		java.lang.String name, long regionId, long countryId, int statusId,
+		boolean location)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,

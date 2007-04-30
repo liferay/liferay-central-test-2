@@ -76,8 +76,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 
 	public com.liferay.portal.model.Organization addOrganization(long userId,
 		java.lang.String parentOrganizationId, java.lang.String name,
-		java.lang.String regionId, java.lang.String countryId, int statusId,
-		boolean location)
+		long regionId, long countryId, int statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return OrganizationLocalServiceFactory.getTxImpl().addOrganization(userId,
@@ -163,7 +162,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		java.lang.String parentOrganizationId,
 		java.lang.String parentOrganizationComparator, java.lang.String name,
 		java.lang.String street, java.lang.String city, java.lang.String zip,
-		java.lang.String regionId, java.lang.String countryId,
+		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap params, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return OrganizationLocalServiceFactory.getTxImpl().search(companyId,
@@ -175,7 +174,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		java.lang.String parentOrganizationId,
 		java.lang.String parentOrganizationComparator, java.lang.String name,
 		java.lang.String street, java.lang.String city, java.lang.String zip,
-		java.lang.String regionId, java.lang.String countryId,
+		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap params, boolean andOperator)
 		throws com.liferay.portal.SystemException {
 		return OrganizationLocalServiceFactory.getTxImpl().searchCount(companyId,
@@ -211,8 +210,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 	public com.liferay.portal.model.Organization updateOrganization(
 		long companyId, java.lang.String organizationId,
 		java.lang.String parentOrganizationId, java.lang.String name,
-		java.lang.String regionId, java.lang.String countryId, int statusId,
-		boolean location)
+		long regionId, long countryId, int statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return OrganizationLocalServiceFactory.getTxImpl().updateOrganization(companyId,

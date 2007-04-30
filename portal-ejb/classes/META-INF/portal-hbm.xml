@@ -40,8 +40,8 @@
 		<property name="street3" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="city" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="zip" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="regionId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="countryId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="regionId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="countryId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="mailing" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
@@ -92,7 +92,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.CountryImpl" table="Country">
 		<cache usage="read-write" />
-		<id name="countryId" type="java.lang.String">
+		<id name="countryId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
@@ -216,8 +216,8 @@
 		<property name="parentOrganizationId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="recursable" type="com.liferay.util.dao.hibernate.BooleanType" />
-		<property name="regionId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="countryId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="regionId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="countryId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="statusId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="comments" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
@@ -365,10 +365,10 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.RegionImpl" table="Region">
 		<cache usage="read-write" />
-		<id name="regionId" type="java.lang.String">
+		<id name="regionId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="countryId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="countryId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="regionCode" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />

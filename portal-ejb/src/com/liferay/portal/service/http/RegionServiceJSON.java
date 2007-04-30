@@ -76,7 +76,7 @@ public class RegionServiceJSON {
 		return RegionJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONArray getRegions(java.lang.String countryId)
+	public static JSONArray getRegions(long countryId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		java.util.List returnValue = RegionServiceUtil.getRegions(countryId);
 
@@ -90,8 +90,7 @@ public class RegionServiceJSON {
 		return RegionJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONArray getRegions(java.lang.String countryId,
-		boolean active)
+	public static JSONArray getRegions(long countryId, boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		java.util.List returnValue = RegionServiceUtil.getRegions(countryId,
 				active);
@@ -99,7 +98,7 @@ public class RegionServiceJSON {
 		return RegionJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONObject getRegion(java.lang.String regionId)
+	public static JSONObject getRegion(long regionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Region returnValue = RegionServiceUtil.getRegion(regionId);

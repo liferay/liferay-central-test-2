@@ -56,8 +56,8 @@
 		<field name="street3" type="String" />
 		<field name="city" type="String" />
 		<field name="zip" type="String" />
-		<field name="regionId" type="String" />
-		<field name="countryId" type="String" />
+		<field name="regionId" type="long" />
+		<field name="countryId" type="long" />
 		<field name="typeId" type="int" />
 		<field name="mailing" type="boolean" />
 		<field name="primary" type="boolean" />
@@ -112,7 +112,7 @@
 		<field name="hoursOfOperation" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.Country">
-		<field name="countryId" type="String" />
+		<field name="countryId" type="long" />
 		<field name="name" type="String" />
 		<field name="a2" type="String" />
 		<field name="a3" type="String" />
@@ -228,8 +228,8 @@
 			<hint name="display-width">150</hint>
 		</field>
 		<field name="recursable" type="boolean" />
-		<field name="regionId" type="String" />
-		<field name="countryId" type="String" />
+		<field name="regionId" type="long" />
+		<field name="countryId" type="long" />
 		<field name="statusId" type="int" />
 		<field name="comments" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -353,8 +353,8 @@
 		</field>
 	</model>
 	<model name="com.liferay.portal.model.Region">
-		<field name="regionId" type="String" />
-		<field name="countryId" type="String" />
+		<field name="regionId" type="long" />
+		<field name="countryId" type="long" />
 		<field name="regionCode" type="String" />
 		<field name="name" type="String" />
 		<field name="active" type="boolean" />

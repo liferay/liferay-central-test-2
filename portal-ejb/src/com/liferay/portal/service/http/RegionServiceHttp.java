@@ -25,8 +25,8 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.RegionServiceUtil;
 import com.liferay.portal.service.http.TunnelUtil;
@@ -96,14 +96,9 @@ public class RegionServiceHttp {
 	}
 
 	public static java.util.List getRegions(HttpPrincipal httpPrincipal,
-		java.lang.String countryId) throws com.liferay.portal.SystemException {
+		long countryId) throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = countryId;
-
-			if (countryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(countryId);
 			MethodWrapper methodWrapper = new MethodWrapper(RegionServiceUtil.class.getName(),
 					"getRegions", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -155,15 +150,10 @@ public class RegionServiceHttp {
 	}
 
 	public static java.util.List getRegions(HttpPrincipal httpPrincipal,
-		java.lang.String countryId, boolean active)
+		long countryId, boolean active)
 		throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = countryId;
-
-			if (countryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(countryId);
 			Object paramObj1 = new BooleanWrapper(active);
 			MethodWrapper methodWrapper = new MethodWrapper(RegionServiceUtil.class.getName(),
 					"getRegions", new Object[] { paramObj0, paramObj1 });
@@ -189,16 +179,11 @@ public class RegionServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Region getRegion(
-		HttpPrincipal httpPrincipal, java.lang.String regionId)
+		HttpPrincipal httpPrincipal, long regionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = regionId;
-
-			if (regionId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(regionId);
 			MethodWrapper methodWrapper = new MethodWrapper(RegionServiceUtil.class.getName(),
 					"getRegion", new Object[] { paramObj0 });
 			Object returnObj = null;

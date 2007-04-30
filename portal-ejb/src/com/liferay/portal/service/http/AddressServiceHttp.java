@@ -75,8 +75,8 @@ public class AddressServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String className,
 		java.lang.String classPK, java.lang.String street1,
 		java.lang.String street2, java.lang.String street3,
-		java.lang.String city, java.lang.String zip, java.lang.String regionId,
-		java.lang.String countryId, int typeId, boolean mailing, boolean primary)
+		java.lang.String city, java.lang.String zip, long regionId,
+		long countryId, int typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -122,18 +122,8 @@ public class AddressServiceHttp {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = regionId;
-
-			if (regionId == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = countryId;
-
-			if (countryId == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj7 = new LongWrapper(regionId);
+			Object paramObj8 = new LongWrapper(countryId);
 			Object paramObj9 = new IntegerWrapper(typeId);
 			Object paramObj10 = new BooleanWrapper(mailing);
 			Object paramObj11 = new BooleanWrapper(primary);
@@ -278,8 +268,8 @@ public class AddressServiceHttp {
 	public static com.liferay.portal.model.Address updateAddress(
 		HttpPrincipal httpPrincipal, long addressId, java.lang.String street1,
 		java.lang.String street2, java.lang.String street3,
-		java.lang.String city, java.lang.String zip, java.lang.String regionId,
-		java.lang.String countryId, int typeId, boolean mailing, boolean primary)
+		java.lang.String city, java.lang.String zip, long regionId,
+		long countryId, int typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -314,18 +304,8 @@ public class AddressServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = regionId;
-
-			if (regionId == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = countryId;
-
-			if (countryId == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj6 = new LongWrapper(regionId);
+			Object paramObj7 = new LongWrapper(countryId);
 			Object paramObj8 = new IntegerWrapper(typeId);
 			Object paramObj9 = new BooleanWrapper(mailing);
 			Object paramObj10 = new BooleanWrapper(primary);

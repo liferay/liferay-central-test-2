@@ -60,7 +60,7 @@ public class RegionServiceEJBImpl implements RegionService, SessionBean {
 		return RegionServiceFactory.getTxImpl().getRegions();
 	}
 
-	public java.util.List getRegions(java.lang.String countryId)
+	public java.util.List getRegions(long countryId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
@@ -74,14 +74,14 @@ public class RegionServiceEJBImpl implements RegionService, SessionBean {
 		return RegionServiceFactory.getTxImpl().getRegions(active);
 	}
 
-	public java.util.List getRegions(java.lang.String countryId, boolean active)
+	public java.util.List getRegions(long countryId, boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return RegionServiceFactory.getTxImpl().getRegions(countryId, active);
 	}
 
-	public com.liferay.portal.model.Region getRegion(java.lang.String regionId)
+	public com.liferay.portal.model.Region getRegion(long regionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

@@ -58,8 +58,8 @@ public class OrganizationModelImpl extends BaseModelImpl {
 			{ "parentOrganizationId", new Integer(Types.VARCHAR) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "recursable", new Integer(Types.BOOLEAN) },
-			{ "regionId", new Integer(Types.VARCHAR) },
-			{ "countryId", new Integer(Types.VARCHAR) },
+			{ "regionId", new Integer(Types.BIGINT) },
+			{ "countryId", new Integer(Types.BIGINT) },
 			{ "statusId", new Integer(Types.INTEGER) },
 			{ "comments", new Integer(Types.VARCHAR) }
 		};
@@ -73,12 +73,6 @@ public class OrganizationModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_REGIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Organization.regionId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COUNTRYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Organization.countryId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.comments"),
@@ -173,36 +167,22 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getRegionId() {
-		return GetterUtil.getString(_regionId);
+	public long getRegionId() {
+		return _regionId;
 	}
 
-	public void setRegionId(String regionId) {
-		if (((regionId == null) && (_regionId != null)) ||
-				((regionId != null) && (_regionId == null)) ||
-				((regionId != null) && (_regionId != null) &&
-				!regionId.equals(_regionId))) {
-			if (!XSS_ALLOW_REGIONID) {
-				regionId = XSSUtil.strip(regionId);
-			}
-
+	public void setRegionId(long regionId) {
+		if (regionId != _regionId) {
 			_regionId = regionId;
 		}
 	}
 
-	public String getCountryId() {
-		return GetterUtil.getString(_countryId);
+	public long getCountryId() {
+		return _countryId;
 	}
 
-	public void setCountryId(String countryId) {
-		if (((countryId == null) && (_countryId != null)) ||
-				((countryId != null) && (_countryId == null)) ||
-				((countryId != null) && (_countryId != null) &&
-				!countryId.equals(_countryId))) {
-			if (!XSS_ALLOW_COUNTRYID) {
-				countryId = XSSUtil.strip(countryId);
-			}
-
+	public void setCountryId(long countryId) {
+		if (countryId != _countryId) {
 			_countryId = countryId;
 		}
 	}
@@ -298,8 +278,8 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	private String _parentOrganizationId;
 	private String _name;
 	private boolean _recursable;
-	private String _regionId;
-	private String _countryId;
+	private long _regionId;
+	private long _countryId;
 	private int _statusId;
 	private String _comments;
 }

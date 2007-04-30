@@ -231,16 +231,10 @@
 						(lower(Address.street2) LIKE ? [$AND_OR_NULL_CHECK$]) OR
 						(lower(Address.street3) LIKE ? [$AND_OR_NULL_CHECK$])
 					) [$AND_OR_CONNECTOR$]
+					((Organization_.regionId = ?) OR (Address.regionId = ?)) [$AND_OR_CONNECTOR$]
+					((Organization_.countryId = ?) OR (Address.countryId = ?)) [$AND_OR_CONNECTOR$]
 					(lower(Address.city) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(lower(Address.zip) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(
-						(Organization_.regionId = ? [$AND_OR_NULL_CHECK$]) OR
-						(Address.regionId = ? [$AND_OR_NULL_CHECK$])
-					) [$AND_OR_CONNECTOR$]
-					(
-						(Organization_.countryId = ? [$AND_OR_NULL_CHECK$]) OR
-						(Address.countryId = ? [$AND_OR_NULL_CHECK$])
-					)
+					(lower(Address.zip) LIKE ? [$AND_OR_NULL_CHECK$])
 				)
 		]]>
 	</sql>
@@ -266,16 +260,10 @@
 						(lower(Address.street2) LIKE ? [$AND_OR_NULL_CHECK$]) OR
 						(lower(Address.street3) LIKE ? [$AND_OR_NULL_CHECK$])
 					) [$AND_OR_CONNECTOR$]
+					((Organization_.regionId = ?) OR (Address.regionId = ?)) [$AND_OR_CONNECTOR$]
+					((Organization_.countryId = ?) OR (Address.countryId = ?)) [$AND_OR_CONNECTOR$]
 					(lower(Address.city) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(lower(Address.zip) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(
-						(Organization_.regionId = ? [$AND_OR_NULL_CHECK$]) OR
-						(Address.regionId = ? [$AND_OR_NULL_CHECK$])
-					) [$AND_OR_CONNECTOR$]
-					(
-						(Organization_.countryId = ? [$AND_OR_NULL_CHECK$]) OR
-						(Address.countryId = ? [$AND_OR_NULL_CHECK$])
-					)
+					(lower(Address.zip) LIKE ? [$AND_OR_NULL_CHECK$])
 				)
 		]]>
 	</sql>

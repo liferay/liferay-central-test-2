@@ -52,20 +52,14 @@ import java.sql.Types;
 public class RegionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Region";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "regionId", new Integer(Types.VARCHAR) },
-			{ "countryId", new Integer(Types.VARCHAR) },
+			{ "regionId", new Integer(Types.BIGINT) },
+			{ "countryId", new Integer(Types.BIGINT) },
 			{ "regionCode", new Integer(Types.VARCHAR) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Region"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_REGIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Region.regionId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COUNTRYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Region.countryId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_REGIONCODE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Region.regionCode"),
 			XSS_ALLOW_BY_MODEL);
@@ -78,44 +72,30 @@ public class RegionModelImpl extends BaseModelImpl {
 	public RegionModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _regionId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setRegionId(pk);
 	}
 
-	public String getRegionId() {
-		return GetterUtil.getString(_regionId);
+	public long getRegionId() {
+		return _regionId;
 	}
 
-	public void setRegionId(String regionId) {
-		if (((regionId == null) && (_regionId != null)) ||
-				((regionId != null) && (_regionId == null)) ||
-				((regionId != null) && (_regionId != null) &&
-				!regionId.equals(_regionId))) {
-			if (!XSS_ALLOW_REGIONID) {
-				regionId = XSSUtil.strip(regionId);
-			}
-
+	public void setRegionId(long regionId) {
+		if (regionId != _regionId) {
 			_regionId = regionId;
 		}
 	}
 
-	public String getCountryId() {
-		return GetterUtil.getString(_countryId);
+	public long getCountryId() {
+		return _countryId;
 	}
 
-	public void setCountryId(String countryId) {
-		if (((countryId == null) && (_countryId != null)) ||
-				((countryId != null) && (_countryId == null)) ||
-				((countryId != null) && (_countryId != null) &&
-				!countryId.equals(_countryId))) {
-			if (!XSS_ALLOW_COUNTRYID) {
-				countryId = XSSUtil.strip(countryId);
-			}
-
+	public void setCountryId(long countryId) {
+		if (countryId != _countryId) {
 			_countryId = countryId;
 		}
 	}
@@ -208,9 +188,9 @@ public class RegionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = region.getPrimaryKey();
+		long pk = region.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -219,11 +199,11 @@ public class RegionModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _regionId;
-	private String _countryId;
+	private long _regionId;
+	private long _countryId;
 	private String _regionCode;
 	private String _name;
 	private boolean _active;

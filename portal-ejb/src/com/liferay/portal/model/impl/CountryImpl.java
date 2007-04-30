@@ -32,7 +32,7 @@ import com.liferay.portal.model.Country;
  */
 public class CountryImpl extends CountryModelImpl implements Country {
 
-	public static final String DEFAULT_COUNTRY_ID = "19";
+	public static final int DEFAULT_COUNTRY_ID = 19;
 
 	public CountryImpl() {
 	}

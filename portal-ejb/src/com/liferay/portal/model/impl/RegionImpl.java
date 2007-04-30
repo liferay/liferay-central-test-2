@@ -32,7 +32,7 @@ import com.liferay.portal.model.Region;
  */
 public class RegionImpl extends RegionModelImpl implements Region {
 
-	public static final String DEFAULT_REGION_ID = "5";
+	public static final int DEFAULT_REGION_ID = 5;
 
 	public RegionImpl() {
 	}

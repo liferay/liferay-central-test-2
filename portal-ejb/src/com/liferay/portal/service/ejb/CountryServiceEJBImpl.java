@@ -67,8 +67,7 @@ public class CountryServiceEJBImpl implements CountryService, SessionBean {
 		return CountryServiceFactory.getTxImpl().getCountries(active);
 	}
 
-	public com.liferay.portal.model.Country getCountry(
-		java.lang.String countryId)
+	public com.liferay.portal.model.Country getCountry(long countryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

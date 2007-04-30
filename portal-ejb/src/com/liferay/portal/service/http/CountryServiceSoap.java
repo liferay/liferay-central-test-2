@@ -104,7 +104,7 @@ public class CountryServiceSoap {
 	}
 
 	public static com.liferay.portal.model.CountrySoap getCountry(
-		java.lang.String countryId) throws RemoteException {
+		long countryId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountry(countryId);
 

@@ -53,8 +53,8 @@
 		<column name="street3" type="String" />
 		<column name="city" type="String" />
 		<column name="zip" type="String" />
-		<column name="regionId" type="String" />
-		<column name="countryId" type="String" />
+		<column name="regionId" type="long" />
+		<column name="countryId" type="long" />
 		<column name="typeId" type="int" />
 		<column name="mailing" type="boolean" />
 		<column name="primary" type="boolean" />
@@ -167,7 +167,7 @@
 
 		<!-- PK fields -->
 
-		<column name="countryId" type="String" primary="true" />
+		<column name="countryId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
@@ -480,8 +480,8 @@
 		<column name="parentOrganizationId" type="String" />
 		<column name="name" type="String" />
 		<column name="recursable" type="boolean" />
-		<column name="regionId" type="String" />
-		<column name="countryId" type="String" />
+		<column name="regionId" type="long" />
+		<column name="countryId" type="long" />
 		<column name="statusId" type="int" />
 		<column name="comments" type="String" />
 
@@ -843,11 +843,11 @@
 
 		<!-- PK fields -->
 
-		<column name="regionId" type="String" primary="true" />
+		<column name="regionId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
-		<column name="countryId" type="String" />
+		<column name="countryId" type="long" />
 		<column name="regionCode" type="String" />
 		<column name="name" type="String" />
 		<column name="active" type="boolean" />

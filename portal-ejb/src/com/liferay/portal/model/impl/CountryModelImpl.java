@@ -52,7 +52,7 @@ import java.sql.Types;
 public class CountryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Country";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "countryId", new Integer(Types.VARCHAR) },
+			{ "countryId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "a2", new Integer(Types.VARCHAR) },
 			{ "a3", new Integer(Types.VARCHAR) },
@@ -62,9 +62,6 @@ public class CountryModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Country"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_COUNTRYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Country.countryId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Country.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -86,27 +83,20 @@ public class CountryModelImpl extends BaseModelImpl {
 	public CountryModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _countryId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setCountryId(pk);
 	}
 
-	public String getCountryId() {
-		return GetterUtil.getString(_countryId);
+	public long getCountryId() {
+		return _countryId;
 	}
 
-	public void setCountryId(String countryId) {
-		if (((countryId == null) && (_countryId != null)) ||
-				((countryId != null) && (_countryId == null)) ||
-				((countryId != null) && (_countryId != null) &&
-				!countryId.equals(_countryId))) {
-			if (!XSS_ALLOW_COUNTRYID) {
-				countryId = XSSUtil.strip(countryId);
-			}
-
+	public void setCountryId(long countryId) {
+		if (countryId != _countryId) {
 			_countryId = countryId;
 		}
 	}
@@ -247,9 +237,9 @@ public class CountryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = country.getPrimaryKey();
+		long pk = country.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -258,10 +248,10 @@ public class CountryModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _countryId;
+	private long _countryId;
 	private String _name;
 	private String _a2;
 	private String _a3;

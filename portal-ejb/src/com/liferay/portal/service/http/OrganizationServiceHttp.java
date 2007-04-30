@@ -148,8 +148,8 @@ public class OrganizationServiceHttp {
 
 	public static com.liferay.portal.model.Organization addOrganization(
 		HttpPrincipal httpPrincipal, java.lang.String parentOrganizationId,
-		java.lang.String name, java.lang.String regionId,
-		java.lang.String countryId, int statusId, boolean location)
+		java.lang.String name, long regionId, long countryId, int statusId,
+		boolean location)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -165,18 +165,8 @@ public class OrganizationServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = regionId;
-
-			if (regionId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = countryId;
-
-			if (countryId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(regionId);
+			Object paramObj3 = new LongWrapper(countryId);
 			Object paramObj4 = new IntegerWrapper(statusId);
 			Object paramObj5 = new BooleanWrapper(location);
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
@@ -470,8 +460,7 @@ public class OrganizationServiceHttp {
 	public static com.liferay.portal.model.Organization updateOrganization(
 		HttpPrincipal httpPrincipal, java.lang.String organizationId,
 		java.lang.String parentOrganizationId, java.lang.String name,
-		java.lang.String regionId, java.lang.String countryId, int statusId,
-		boolean location)
+		long regionId, long countryId, int statusId, boolean location)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -493,18 +482,8 @@ public class OrganizationServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = regionId;
-
-			if (regionId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = countryId;
-
-			if (countryId == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj3 = new LongWrapper(regionId);
+			Object paramObj4 = new LongWrapper(countryId);
 			Object paramObj5 = new IntegerWrapper(statusId);
 			Object paramObj6 = new BooleanWrapper(location);
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),

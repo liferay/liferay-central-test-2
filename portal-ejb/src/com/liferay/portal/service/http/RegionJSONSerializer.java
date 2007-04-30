@@ -51,23 +51,8 @@ import java.util.List;
 public class RegionJSONSerializer {
 	public static JSONObject toJSONObject(Region model) {
 		JSONObject jsonObj = new JSONObject();
-		String regionId = model.getRegionId();
-
-		if (regionId == null) {
-			jsonObj.put("regionId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("regionId", regionId.toString());
-		}
-
-		String countryId = model.getCountryId();
-
-		if (countryId == null) {
-			jsonObj.put("countryId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("countryId", countryId.toString());
-		}
+		jsonObj.put("regionId", model.getRegionId());
+		jsonObj.put("countryId", model.getCountryId());
 
 		String regionCode = model.getRegionCode();
 
