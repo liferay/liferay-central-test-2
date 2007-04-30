@@ -62,7 +62,9 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionHistory;
+import javax.jcr.version.VersionIterator;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -248,6 +250,90 @@ public class DLServiceImpl implements DLService {
 		throws PortalException, SystemException {
 
 		Session session = null;
+
+		// A bug in Jackrabbit requires us to create a dummy node and delete the
+		// version tree manually to successfully delete a file
+
+		// Create a dummy node
+
+		try {
+			session = JCRFactoryUtil.createSession();
+
+			Node rootNode = DLUtil.getRootNode(session, companyId);
+			Node repositoryNode = DLUtil.getFolderNode(rootNode, repositoryId);
+			Node fileNode = repositoryNode.getNode(fileName);
+			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
+
+			contentNode.checkout();
+
+			contentNode.setProperty(JCRConstants.JCR_MIME_TYPE, "text/plain");
+			contentNode.setProperty(JCRConstants.JCR_DATA, "");
+			contentNode.setProperty(
+				JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
+
+			session.save();
+
+			Version version = contentNode.checkin();
+
+			contentNode.getVersionHistory().addVersionLabel(
+				version.getName(), "0.0", false);
+		}
+		catch (PathNotFoundException pnfe) {
+			throw new NoSuchFileException(fileName);
+		}
+		catch (RepositoryException re) {
+			throw new SystemException(re);
+		}
+		finally {
+			if (session != null) {
+				session.logout();
+			}
+		}
+
+		// Delete version tree
+
+		try {
+			session = JCRFactoryUtil.createSession();
+
+			Node rootNode = DLUtil.getRootNode(session, companyId);
+			Node repositoryNode = DLUtil.getFolderNode(rootNode, repositoryId);
+			Node fileNode = repositoryNode.getNode(fileName);
+			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
+
+			VersionHistory versionHistory = contentNode.getVersionHistory();
+
+			VersionIterator itr = versionHistory.getAllVersions();
+
+			while (itr.hasNext()){
+				Version version = itr.nextVersion();
+
+				if (itr.getPosition() == itr.getSize()) {
+					break;
+				}
+				else {
+					if (!StringUtils.equals(
+							JCRConstants.JCR_ROOT_VERSION, version.getName())) {
+
+						versionHistory.removeVersion(version.getName());
+					}
+				}
+			}
+
+			session.save();
+		}
+		catch (PathNotFoundException pnfe) {
+			throw new NoSuchFileException(fileName);
+		}
+		catch (RepositoryException re) {
+			throw new SystemException(re);
+		}
+		finally {
+			if (session != null) {
+				session.logout();
+			}
+		}
+
+		// Delete file
 
 		try {
 			session = JCRFactoryUtil.createSession();

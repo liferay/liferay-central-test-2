@@ -40,6 +40,8 @@ public interface JCRConstants {
 
 	public static final String JCR_MIME_TYPE = "jcr:mimeType";
 
+	public static final String JCR_ROOT_VERSION = "jcr:rootVersion";
+
 	public static final String MIX_VERSIONABLE = "mix:versionable";
 
 	public static final String NT_FILE = "nt:file";
