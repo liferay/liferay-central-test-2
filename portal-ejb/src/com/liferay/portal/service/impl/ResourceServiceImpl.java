@@ -38,7 +38,7 @@ public class ResourceServiceImpl
 	extends PrincipalBean implements ResourceService {
 
 	public Resource getResource(
-			long companyId, String name, String scope, String primKey)
+			long companyId, String name, int scope, String primKey)
 		throws PortalException, SystemException {
 
 		return ResourceLocalServiceUtil.getResource(

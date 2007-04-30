@@ -380,7 +380,7 @@
 		<field name="codeId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="name" type="String" />
-		<field name="scope" type="String" />
+		<field name="scope" type="int" />
 	</model>
 	<model name="com.liferay.portal.model.Role">
 		<field name="roleId" type="String" />

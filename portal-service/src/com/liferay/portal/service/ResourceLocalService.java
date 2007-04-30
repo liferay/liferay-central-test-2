@@ -72,7 +72,7 @@ public interface ResourceLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Resource addResource(long companyId,
-		java.lang.String name, java.lang.String scope, java.lang.String primKey)
+		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -103,12 +103,12 @@ public interface ResourceLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteResource(long companyId, java.lang.String name,
-		java.lang.String scope, long primKey)
+		int scope, long primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public void deleteResource(long companyId, java.lang.String name,
-		java.lang.String scope, java.lang.String primKey)
+		int scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -128,7 +128,7 @@ public interface ResourceLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Resource getResource(long companyId,
-		java.lang.String name, java.lang.String scope, java.lang.String primKey)
+		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

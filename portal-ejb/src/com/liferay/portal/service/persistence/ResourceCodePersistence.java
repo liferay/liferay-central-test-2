@@ -505,7 +505,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public ResourceCode findByC_N_S(long companyId, String name, String scope)
+	public ResourceCode findByC_N_S(long companyId, String name, int scope)
 		throws NoSuchResourceCodeException, SystemException {
 		ResourceCode resourceCode = fetchByC_N_S(companyId, name, scope);
 
@@ -533,7 +533,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		return resourceCode;
 	}
 
-	public ResourceCode fetchByC_N_S(long companyId, String name, String scope)
+	public ResourceCode fetchByC_N_S(long companyId, String name, int scope)
 		throws SystemException {
 		Session session = null;
 
@@ -553,14 +553,7 @@ public class ResourceCodePersistence extends BasePersistence {
 			}
 
 			query.append(" AND ");
-
-			if (scope == null) {
-				query.append("scope IS NULL");
-			}
-			else {
-				query.append("scope = ?");
-			}
-
+			query.append("scope = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -573,9 +566,7 @@ public class ResourceCodePersistence extends BasePersistence {
 				q.setString(queryPos++, name);
 			}
 
-			if (scope != null) {
-				q.setString(queryPos++, scope);
-			}
+			q.setInteger(queryPos++, scope);
 
 			List list = q.list();
 
@@ -688,7 +679,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_N_S(long companyId, String name, String scope)
+	public void removeByC_N_S(long companyId, String name, int scope)
 		throws NoSuchResourceCodeException, SystemException {
 		ResourceCode resourceCode = findByC_N_S(companyId, name, scope);
 		remove(resourceCode);
@@ -788,7 +779,7 @@ public class ResourceCodePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_N_S(long companyId, String name, String scope)
+	public int countByC_N_S(long companyId, String name, int scope)
 		throws SystemException {
 		Session session = null;
 
@@ -809,14 +800,7 @@ public class ResourceCodePersistence extends BasePersistence {
 			}
 
 			query.append(" AND ");
-
-			if (scope == null) {
-				query.append("scope IS NULL");
-			}
-			else {
-				query.append("scope = ?");
-			}
-
+			query.append("scope = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -829,9 +813,7 @@ public class ResourceCodePersistence extends BasePersistence {
 				q.setString(queryPos++, name);
 			}
 
-			if (scope != null) {
-				q.setString(queryPos++, scope);
-			}
+			q.setInteger(queryPos++, scope);
 
 			Iterator itr = q.list().iterator();
 

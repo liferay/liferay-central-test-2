@@ -606,9 +606,18 @@ public class GroupFinder {
 					List values = (List)entry.getValue();
 
 					for (int i = 0; i < values.size(); i++) {
-						String value = (String)values.get(i);
+						Object value = values.get(i);
 
-						qPos.add(value);
+						if (value instanceof Integer) {
+							Integer valueInteger = (Integer)value;
+
+							qPos.add(valueInteger);
+						}
+						else if (value instanceof String) {
+							String valueString = (String)value;
+
+							qPos.add(valueString);
+						}
 					}
 				}
 				else {

@@ -922,7 +922,7 @@
 		<!-- Other fields -->
 
 		<column name="name" type="String" />
-		<column name="scope" type="String" />
+		<column name="scope" type="int" />
 
 		<!-- Finder methods -->
 

@@ -49,8 +49,7 @@ public class ResourceCodeLocalServiceImpl
 		return ResourceCodeUtil.findByPrimaryKey(codeId);
 	}
 
-	public ResourceCode getResourceCode(
-			long companyId, String name, String scope)
+	public ResourceCode getResourceCode(long companyId, String name, int scope)
 		throws PortalException, SystemException {
 
 		// Always cache the resource code. This table exists to improve
@@ -83,7 +82,7 @@ public class ResourceCodeLocalServiceImpl
 		return resourceCode;
 	}
 
-	protected String encodeKey(long companyId, String name, String scope) {
+	protected String encodeKey(long companyId, String name, int scope) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(companyId);

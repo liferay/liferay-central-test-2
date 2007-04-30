@@ -174,15 +174,15 @@ public class EditRolePermissionsAction extends PortletAction {
 		for (int i = 0; i < actions.size(); i++) {
 			String actionId = (String)actions.get(i);
 
-			String scope = ParamUtil.getString(req, "scope" + actionId);
+			int scope = ParamUtil.getInteger(req, "scope" + actionId);
 
-			if (scope.equals(ResourceImpl.SCOPE_COMPANY)) {
+			if (scope == ResourceImpl.SCOPE_COMPANY) {
 				PermissionServiceUtil.setRolePermission(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
 					scope, String.valueOf(themeDisplay.getCompanyId()),
 					actionId);
 			}
-			else if (scope.equals(ResourceImpl.SCOPE_GROUP)) {
+			else if (scope == ResourceImpl.SCOPE_GROUP) {
 				if (role.getType() == RoleImpl.TYPE_COMMUNITY) {
 					PermissionServiceUtil.setRolePermission(
 						roleId, themeDisplay.getPortletGroupId(), selResource,

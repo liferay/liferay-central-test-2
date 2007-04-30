@@ -200,7 +200,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public Map getResourceRoles(
-			long companyId, String name, String scope, String primKey)
+			long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
 		return RoleFinder.findByC_N_S_P(companyId, name, scope, primKey);

@@ -36,13 +36,13 @@ import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
  */
 public class ResourceImpl extends ResourceModelImpl implements Resource {
 
-	public static final String SCOPE_INDIVIDUAL = "individual";
+	public static final int SCOPE_INDIVIDUAL = 4;
 
-	public static final String SCOPE_GROUP = "group";
+	public static final int SCOPE_GROUP = 2;
 
-	public static final String SCOPE_GROUP_TEMPLATE = "groupTemplate";
+	public static final int SCOPE_GROUP_TEMPLATE = 3;
 
-	public static final String SCOPE_COMPANY = "company";
+	public static final int SCOPE_COMPANY = 1;
 
 	public ResourceImpl() {
 	}

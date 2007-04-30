@@ -23,7 +23,9 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
+import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 
@@ -52,9 +54,27 @@ public class ResourceCodeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		String name = (String)_nameColumn.getTemp();
 		String scope = (String)_scopeColumn.getTemp();
 
+		int newScope = 0;
+
+		if (scope.equals("individual")) {
+			newScope = ResourceImpl.SCOPE_INDIVIDUAL;
+		}
+		else if (scope.equals("group")) {
+			newScope = ResourceImpl.SCOPE_GROUP;
+		}
+		else if (scope.equals("groupTemplate")) {
+			newScope = ResourceImpl.SCOPE_GROUP_TEMPLATE;
+		}
+		else if (scope.equals("company")) {
+			newScope = ResourceImpl.SCOPE_COMPANY;
+		}
+		else {
+			throw new UpgradeException("Scope " + scope + " is invalid");
+		}
+
 		ResourceCode resourceCode =
 			ResourceCodeLocalServiceUtil.getResourceCode(
-				companyIdObj.longValue(), name, scope);
+				companyIdObj.longValue(), name, newScope);
 
 		return new Long(resourceCode.getCodeId());
 	}

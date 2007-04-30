@@ -61,7 +61,7 @@ public interface ResourceCodeModel extends BaseModel {
 
 	public void setName(String name);
 
-	public String getScope();
+	public int getScope();
 
-	public void setScope(String scope);
+	public void setScope(int scope);
 }

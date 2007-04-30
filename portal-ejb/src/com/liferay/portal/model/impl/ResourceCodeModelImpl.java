@@ -56,15 +56,12 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 			{ "codeId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
-			{ "scope", new Integer(Types.VARCHAR) }
+			{ "scope", new Integer(Types.INTEGER) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.ResourceCode"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.ResourceCode.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SCOPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.ResourceCode.scope"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ResourceCodeModel"));
@@ -116,18 +113,12 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getScope() {
-		return GetterUtil.getString(_scope);
+	public int getScope() {
+		return _scope;
 	}
 
-	public void setScope(String scope) {
-		if (((scope == null) && (_scope != null)) ||
-				((scope != null) && (_scope == null)) ||
-				((scope != null) && (_scope != null) && !scope.equals(_scope))) {
-			if (!XSS_ALLOW_SCOPE) {
-				scope = XSSUtil.strip(scope);
-			}
-
+	public void setScope(int scope) {
+		if (scope != _scope) {
 			_scope = scope;
 		}
 	}
@@ -192,5 +183,5 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 	private long _codeId;
 	private long _companyId;
 	private String _name;
-	private String _scope;
+	private int _scope;
 }

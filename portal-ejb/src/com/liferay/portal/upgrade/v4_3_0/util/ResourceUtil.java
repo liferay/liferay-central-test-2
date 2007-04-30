@@ -77,7 +77,7 @@ public class ResourceUtil {
 			ps = con.prepareStatement(_SELECT_PRIMKEY);
 
 			ps.setString(1, name);
-			ps.setString(2, ResourceImpl.SCOPE_INDIVIDUAL);
+			ps.setInt(2, ResourceImpl.SCOPE_INDIVIDUAL);
 
 			rs = ps.executeQuery();
 
@@ -144,7 +144,7 @@ public class ResourceUtil {
 
 				ps.setString(1, newPk);
 				ps.setString(2, name);
-				ps.setString(3, ResourceImpl.SCOPE_INDIVIDUAL);
+				ps.setInt(3, ResourceImpl.SCOPE_INDIVIDUAL);
 				ps.setString(4, oldPk);
 
 				if (useBatch) {
@@ -197,7 +197,7 @@ public class ResourceUtil {
 				String badPk = (String)itr.next();
 
 				ps.setString(1, name);
-				ps.setString(2, ResourceImpl.SCOPE_INDIVIDUAL);
+				ps.setInt(2, ResourceImpl.SCOPE_INDIVIDUAL);
 				ps.setString(3, badPk);
 
 				if (useBatch) {

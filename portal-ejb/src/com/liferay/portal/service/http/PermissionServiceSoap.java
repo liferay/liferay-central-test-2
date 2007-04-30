@@ -158,9 +158,8 @@ public class PermissionServiceSoap {
 	}
 
 	public static void setRolePermission(java.lang.String roleId, long groupId,
-		java.lang.String name, java.lang.String scope,
-		java.lang.String primKey, java.lang.String actionId)
-		throws RemoteException {
+		java.lang.String name, int scope, java.lang.String primKey,
+		java.lang.String actionId) throws RemoteException {
 		try {
 			PermissionServiceUtil.setRolePermission(roleId, groupId, name,
 				scope, primKey, actionId);
@@ -197,7 +196,7 @@ public class PermissionServiceSoap {
 	}
 
 	public static void unsetRolePermission(java.lang.String roleId,
-		long groupId, java.lang.String name, java.lang.String scope,
+		long groupId, java.lang.String name, int scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws RemoteException {
 		try {
@@ -211,7 +210,7 @@ public class PermissionServiceSoap {
 	}
 
 	public static void unsetRolePermissions(java.lang.String roleId,
-		long groupId, java.lang.String name, java.lang.String scope,
+		long groupId, java.lang.String name, int scope,
 		java.lang.String actionId) throws RemoteException {
 		try {
 			PermissionServiceUtil.unsetRolePermissions(roleId, groupId, name,

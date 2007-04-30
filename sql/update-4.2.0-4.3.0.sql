@@ -165,7 +165,7 @@ create table ResourceCode (
 	codeId LONG not null primary key,
 	companyId LONG not null,
 	name VARCHAR(75) null,
-	scope VARCHAR(75) null
+	scope INTEGER
 );
 
 alter table Role_ add type_ INTEGER;

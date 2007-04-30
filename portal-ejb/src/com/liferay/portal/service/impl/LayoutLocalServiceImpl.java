@@ -1477,7 +1477,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected Element exportRoles(
-			long companyId, String resourceName, String scope,
+			long companyId, String resourceName, int scope,
 			String resourcePrimKey, Element parentEl, String elName,
 			List roles)
 		throws PortalException, SystemException {
@@ -1507,7 +1507,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					Element actionKeyEl = roleEl.addElement("action-key");
 
 					actionKeyEl.addText(action);
-					actionKeyEl.addAttribute("scope", scope);
+					actionKeyEl.addAttribute("scope", String.valueOf(scope));
 				}
 			}
 		}
@@ -2198,7 +2198,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected void importRolePermissions(
 			LayoutCache layoutCache, long companyId, String resourceName,
-			String scope, String resourcePrimKey, Element parentEl,
+			int scope, String resourcePrimKey, Element parentEl,
 			boolean communityRole)
 		throws PortalException, SystemException {
 

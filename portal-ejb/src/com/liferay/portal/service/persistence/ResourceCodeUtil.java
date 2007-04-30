@@ -229,14 +229,14 @@ public class ResourceCodeUtil {
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByC_N_S(
-		long companyId, java.lang.String name, java.lang.String scope)
+		long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
 		return getPersistence().findByC_N_S(companyId, name, scope);
 	}
 
 	public static com.liferay.portal.model.ResourceCode fetchByC_N_S(
-		long companyId, java.lang.String name, java.lang.String scope)
+		long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_N_S(companyId, name, scope);
 	}
@@ -281,7 +281,7 @@ public class ResourceCodeUtil {
 	}
 
 	public static void removeByC_N_S(long companyId, java.lang.String name,
-		java.lang.String scope)
+		int scope)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
 		getPersistence().removeByC_N_S(companyId, name, scope);
@@ -302,7 +302,7 @@ public class ResourceCodeUtil {
 	}
 
 	public static int countByC_N_S(long companyId, java.lang.String name,
-		java.lang.String scope) throws com.liferay.portal.SystemException {
+		int scope) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_N_S(companyId, name, scope);
 	}
 

@@ -62,7 +62,7 @@ public interface ResourceCodeLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.ResourceCode getResourceCode(
-		long companyId, java.lang.String name, java.lang.String scope)
+		long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

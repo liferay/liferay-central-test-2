@@ -207,8 +207,8 @@ public class LayoutCache  {
 	}
 
 	protected Resource getResource(
-		long companyId, long groupId, String resourceName, String scope,
-		String resourcePrimKey, boolean portletActions)
+			long companyId, long groupId, String resourceName, int scope,
+			String resourcePrimKey, boolean portletActions)
 		throws PortalException, SystemException {
 
 		StringMaker sm = new StringMaker();

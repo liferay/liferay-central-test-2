@@ -358,7 +358,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-   			long companyId, long groupId, String[] categoryIds, String threadId,
+			long companyId, long groupId, String[] categoryIds, String threadId,
 			String keywords)
 		throws SystemException {
 

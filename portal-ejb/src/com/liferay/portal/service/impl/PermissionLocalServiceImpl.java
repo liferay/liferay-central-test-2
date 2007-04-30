@@ -159,7 +159,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public List getGroupPermissions(
-			long groupId, long companyId, String name, String scope,
+			long groupId, long companyId, String name, int scope,
 			String primKey)
 		throws SystemException {
 
@@ -219,8 +219,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public List getUserPermissions(
-			long userId, long companyId, String name, String scope,
-			String primKey)
+			long userId, long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
 		return PermissionFinder.findByU_C_N_S_P(
@@ -249,7 +248,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public boolean hasRolePermission(
-			String roleId, long companyId, String name, String scope,
+			String roleId, long companyId, String name, int scope,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -281,7 +280,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public boolean hasRolePermission(
-			String roleId, long companyId, String name, String scope,
+			String roleId, long companyId, String name, int scope,
 			String primKey, String actionId)
 		throws PortalException, SystemException {
 
@@ -493,25 +492,25 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void setRolePermission(
-			String roleId, long companyId, String name, String scope,
+			String roleId, long companyId, String name, int scope,
 			String primKey, String actionId)
 		throws PortalException, SystemException {
 
-		if (scope.equals(ResourceImpl.SCOPE_COMPANY)) {
+		if (scope == ResourceImpl.SCOPE_COMPANY) {
 
 			// Remove group permission
 
 			unsetRolePermissions(
 				roleId, companyId, name, ResourceImpl.SCOPE_GROUP, actionId);
 		}
-		else if (scope.equals(ResourceImpl.SCOPE_GROUP)) {
+		else if (scope == ResourceImpl.SCOPE_GROUP) {
 
 			// Remove company permission
 
 			unsetRolePermissions(
 				roleId, companyId, name, ResourceImpl.SCOPE_COMPANY, actionId);
 		}
-		else if (scope.equals(ResourceImpl.SCOPE_INDIVIDUAL)) {
+		else if (scope == ResourceImpl.SCOPE_INDIVIDUAL) {
 			throw new NoSuchPermissionException();
 		}
 
@@ -541,7 +540,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void setRolePermissions(
-			String roleId, long companyId, String name, String scope,
+			String roleId, long companyId, String name, int scope,
 			String primKey, String[] actionIds)
 		throws PortalException, SystemException {
 
@@ -583,7 +582,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void unsetRolePermission(
-			String roleId, long companyId, String name, String scope,
+			String roleId, long companyId, String name, int scope,
 			String primKey, String actionId)
 		throws PortalException, SystemException {
 
@@ -607,7 +606,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void unsetRolePermissions(
-			String roleId, long companyId, String name, String scope,
+			String roleId, long companyId, String name, int scope,
 			String actionId)
 		throws PortalException, SystemException {
 

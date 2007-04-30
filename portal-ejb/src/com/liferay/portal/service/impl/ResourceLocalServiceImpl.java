@@ -147,7 +147,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public Resource addResource(
-			long companyId, String name, String scope, String primKey)
+			long companyId, String name, int scope, String primKey)
 		throws PortalException, SystemException {
 
 		ResourceCode resourceCode =
@@ -332,14 +332,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void deleteResource(
-			long companyId, String name, String scope, long primKey)
+			long companyId, String name, int scope, long primKey)
 		throws PortalException, SystemException {
 
 		deleteResource(companyId, name, scope, String.valueOf(primKey));
 	}
 
 	public void deleteResource(
-			long companyId, String name, String scope, String primKey)
+			long companyId, String name, int scope, String primKey)
 		throws PortalException, SystemException {
 
 		try {
@@ -390,7 +390,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public Resource getResource(
-			long companyId, String name, String scope, String primKey)
+			long companyId, String name, int scope, String primKey)
 		throws PortalException, SystemException {
 
 		ResourceCode resourceCode =

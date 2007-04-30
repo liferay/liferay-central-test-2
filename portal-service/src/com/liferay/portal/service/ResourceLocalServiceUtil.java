@@ -88,7 +88,7 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Resource addResource(
-		long companyId, java.lang.String name, java.lang.String scope,
+		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -145,7 +145,7 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static void deleteResource(long companyId, java.lang.String name,
-		java.lang.String scope, long primKey)
+		int scope, long primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
@@ -153,7 +153,7 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static void deleteResource(long companyId, java.lang.String name,
-		java.lang.String scope, java.lang.String primKey)
+		int scope, java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
@@ -191,7 +191,7 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Resource getResource(
-		long companyId, java.lang.String name, java.lang.String scope,
+		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

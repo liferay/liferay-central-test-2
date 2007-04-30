@@ -86,7 +86,7 @@ public interface RoleLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.Map getResourceRoles(long companyId,
-		java.lang.String name, java.lang.String scope, java.lang.String primKey)
+		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role getRole(java.lang.String roleId)

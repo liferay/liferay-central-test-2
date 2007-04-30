@@ -102,7 +102,7 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 	}
 
 	public java.util.List getGroupPermissions(long groupId, long companyId,
-		java.lang.String name, java.lang.String scope, java.lang.String primKey)
+		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException {
 		return PermissionLocalServiceFactory.getTxImpl().getGroupPermissions(groupId,
 			companyId, name, scope, primKey);
@@ -142,7 +142,7 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 	}
 
 	public java.util.List getUserPermissions(long userId, long companyId,
-		java.lang.String name, java.lang.String scope, java.lang.String primKey)
+		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException {
 		return PermissionLocalServiceFactory.getTxImpl().getUserPermissions(userId,
 			companyId, name, scope, primKey);
@@ -157,7 +157,7 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 	}
 
 	public boolean hasRolePermission(java.lang.String roleId, long companyId,
-		java.lang.String name, java.lang.String scope, java.lang.String actionId)
+		java.lang.String name, int scope, java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PermissionLocalServiceFactory.getTxImpl().hasRolePermission(roleId,
@@ -165,8 +165,8 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 	}
 
 	public boolean hasRolePermission(java.lang.String roleId, long companyId,
-		java.lang.String name, java.lang.String scope,
-		java.lang.String primKey, java.lang.String actionId)
+		java.lang.String name, int scope, java.lang.String primKey,
+		java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PermissionLocalServiceFactory.getTxImpl().hasRolePermission(roleId,
@@ -216,8 +216,8 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 	}
 
 	public void setRolePermission(java.lang.String roleId, long companyId,
-		java.lang.String name, java.lang.String scope,
-		java.lang.String primKey, java.lang.String actionId)
+		java.lang.String name, int scope, java.lang.String primKey,
+		java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalServiceFactory.getTxImpl().setRolePermission(roleId,
@@ -225,8 +225,8 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 	}
 
 	public void setRolePermissions(java.lang.String roleId, long companyId,
-		java.lang.String name, java.lang.String scope,
-		java.lang.String primKey, java.lang.String[] actionIds)
+		java.lang.String name, int scope, java.lang.String primKey,
+		java.lang.String[] actionIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalServiceFactory.getTxImpl().setRolePermissions(roleId,
@@ -249,8 +249,8 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 	}
 
 	public void unsetRolePermission(java.lang.String roleId, long companyId,
-		java.lang.String name, java.lang.String scope,
-		java.lang.String primKey, java.lang.String actionId)
+		java.lang.String name, int scope, java.lang.String primKey,
+		java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalServiceFactory.getTxImpl().unsetRolePermission(roleId,
@@ -258,7 +258,7 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 	}
 
 	public void unsetRolePermissions(java.lang.String roleId, long companyId,
-		java.lang.String name, java.lang.String scope, java.lang.String actionId)
+		java.lang.String name, int scope, java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalServiceFactory.getTxImpl().unsetRolePermissions(roleId,

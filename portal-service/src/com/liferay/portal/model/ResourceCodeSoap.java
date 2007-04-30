@@ -101,16 +101,16 @@ public class ResourceCodeSoap implements Serializable {
 		_name = name;
 	}
 
-	public String getScope() {
+	public int getScope() {
 		return _scope;
 	}
 
-	public void setScope(String scope) {
+	public void setScope(int scope) {
 		_scope = scope;
 	}
 
 	private long _codeId;
 	private long _companyId;
 	private String _name;
-	private String _scope;
+	private int _scope;
 }

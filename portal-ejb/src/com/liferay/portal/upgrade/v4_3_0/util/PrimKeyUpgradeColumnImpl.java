@@ -64,12 +64,12 @@ public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		ResourceCode resourceCode =
 			ResourceCodeLocalServiceUtil.getResourceCode(codeId.longValue());
 
-		String scope = resourceCode.getScope();
+		int scope = resourceCode.getScope();
 
-		if (scope.equals(ResourceImpl.SCOPE_GROUP)) {
+		if (scope == ResourceImpl.SCOPE_GROUP) {
 			newValue = _groupIdMapper.getNewValue(new Long((String)oldValue));
 		}
-		else if (scope.equals(ResourceImpl.SCOPE_INDIVIDUAL)) {
+		else if (scope == ResourceImpl.SCOPE_INDIVIDUAL) {
 			String primKey = (String)oldValue;
 
 			if (primKey.startsWith(LayoutImpl.PUBLIC) ||

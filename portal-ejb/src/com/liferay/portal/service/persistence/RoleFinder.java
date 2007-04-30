@@ -300,7 +300,7 @@ public class RoleFinder {
 	}
 
 	public static Map findByC_N_S_P(
-			long companyId, String name, String scope, String primKey)
+			long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
 		Session session = null;

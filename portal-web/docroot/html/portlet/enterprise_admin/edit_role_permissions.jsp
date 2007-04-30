@@ -341,7 +341,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 				List rolePermissions = new ArrayList();
 
 				rolePermissions.add(resourceName);
-				rolePermissions.add(ResourceImpl.SCOPE_GROUP);
+				rolePermissions.add(new Integer(ResourceImpl.SCOPE_GROUP));
 				rolePermissions.add(actionId);
 				rolePermissions.add(role.getRoleId());
 
@@ -438,7 +438,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			List rolePermissions = new ArrayList();
 
 			rolePermissions.add(selResource);
-			rolePermissions.add(ResourceImpl.SCOPE_GROUP);
+			rolePermissions.add(new Integer(ResourceImpl.SCOPE_GROUP));
 			rolePermissions.add(actionId);
 			rolePermissions.add(role.getRoleId());
 

@@ -109,8 +109,8 @@ public class PermissionServiceImpl
 	}
 
 	public void setRolePermission(
-			String roleId, long groupId, String name, String scope,
-			String primKey, String actionId)
+			String roleId, long groupId, String name, int scope, String primKey,
+			String actionId)
 		throws PortalException, SystemException {
 
 		checkPermission(
@@ -142,8 +142,8 @@ public class PermissionServiceImpl
 	}
 
 	public void unsetRolePermission(
-			String roleId, long groupId, String name, String scope,
-			String primKey, String actionId)
+			String roleId, long groupId, String name, int scope, String primKey,
+			String actionId)
 		throws PortalException, SystemException {
 
 		checkPermission(
@@ -154,7 +154,7 @@ public class PermissionServiceImpl
 	}
 
 	public void unsetRolePermissions(
-			String roleId, long groupId, String name, String scope,
+			String roleId, long groupId, String name, int scope,
 			String actionId)
 		throws PortalException, SystemException {
 

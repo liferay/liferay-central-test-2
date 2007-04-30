@@ -24,6 +24,7 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -349,8 +350,7 @@ public class PermissionServiceHttp {
 
 	public static void setRolePermission(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, long groupId, java.lang.String name,
-		java.lang.String scope, java.lang.String primKey,
-		java.lang.String actionId)
+		int scope, java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -367,12 +367,7 @@ public class PermissionServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = scope;
-
-			if (scope == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj3 = new IntegerWrapper(scope);
 			Object paramObj4 = primKey;
 
 			if (primKey == null) {
@@ -492,8 +487,7 @@ public class PermissionServiceHttp {
 
 	public static void unsetRolePermission(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, long groupId, java.lang.String name,
-		java.lang.String scope, java.lang.String primKey,
-		java.lang.String actionId)
+		int scope, java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -510,12 +504,7 @@ public class PermissionServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = scope;
-
-			if (scope == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj3 = new IntegerWrapper(scope);
 			Object paramObj4 = primKey;
 
 			if (primKey == null) {
@@ -558,7 +547,7 @@ public class PermissionServiceHttp {
 
 	public static void unsetRolePermissions(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, long groupId, java.lang.String name,
-		java.lang.String scope, java.lang.String actionId)
+		int scope, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -575,12 +564,7 @@ public class PermissionServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = scope;
-
-			if (scope == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj3 = new IntegerWrapper(scope);
 			Object paramObj4 = actionId;
 
 			if (actionId == null) {

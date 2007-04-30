@@ -24,6 +24,7 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -71,7 +72,7 @@ import com.liferay.portal.service.http.TunnelUtil;
 public class ResourceServiceHttp {
 	public static com.liferay.portal.model.Resource getResource(
 		HttpPrincipal httpPrincipal, long companyId, java.lang.String name,
-		java.lang.String scope, java.lang.String primKey)
+		int scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -82,12 +83,7 @@ public class ResourceServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = scope;
-
-			if (scope == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new IntegerWrapper(scope);
 			Object paramObj3 = primKey;
 
 			if (primKey == null) {

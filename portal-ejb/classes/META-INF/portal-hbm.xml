@@ -399,7 +399,7 @@
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="scope" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="scope" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.RoleImpl" table="Role_">
 		<cache usage="read-write" />
