@@ -84,6 +84,24 @@ public class LayoutSetJSONSerializer {
 			jsonObj.put("colorSchemeId", colorSchemeId.toString());
 		}
 
+		String wapThemeId = model.getWapThemeId();
+
+		if (wapThemeId == null) {
+			jsonObj.put("wapThemeId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("wapThemeId", wapThemeId.toString());
+		}
+
+		String wapColorSchemeId = model.getWapColorSchemeId();
+
+		if (wapColorSchemeId == null) {
+			jsonObj.put("wapColorSchemeId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("wapColorSchemeId", wapColorSchemeId.toString());
+		}
+
 		String css = model.getCss();
 
 		if (css == null) {

@@ -43,6 +43,13 @@ public class PluginUtil {
 	public static List restrictPlugins(List plugins, User user)
 		throws PortalException, SystemException {
 
+		return restrictPlugins(plugins, user.getCompanyId(), user.getUserId());
+	}
+
+	public static List restrictPlugins(
+			List plugins, long companyId, long userId)
+		throws PortalException, SystemException {
+
 		List visiblePlugins = new ArrayList(plugins.size());
 
 		for (int i = 0; i < plugins.size(); i++) {
@@ -50,11 +57,10 @@ public class PluginUtil {
 
 			PluginSetting pluginSetting =
 				PluginSettingLocalServiceUtil.getPluginSetting(
-					user.getCompanyId(), plugin.getPluginId(),
-					plugin.getPluginType());
+					companyId, plugin.getPluginId(), plugin.getPluginType());
 
 			if (pluginSetting.isActive() &&
-				pluginSetting.hasPermission(user.getUserId())) {
+				pluginSetting.hasPermission(userId)) {
 
 				visiblePlugins.add(plugin);
 			}

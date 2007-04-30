@@ -166,7 +166,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 	public Layout updateLookAndFeel(
 			String layoutId, String ownerId, String themeId,
-			String colorSchemeId, String css)
+			String colorSchemeId, String css, boolean wapTheme)
 		throws PortalException, SystemException {
 
 		LayoutPermission.check(
@@ -176,7 +176,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			getUserId(), themeId, ThemeImpl.PLUGIN_TYPE);
 
 		return LayoutLocalServiceUtil.updateLookAndFeel(
-			layoutId, ownerId, themeId, colorSchemeId, css);
+			layoutId, ownerId, themeId, colorSchemeId, css, wapTheme);
 	}
 
 	public Layout updateName(

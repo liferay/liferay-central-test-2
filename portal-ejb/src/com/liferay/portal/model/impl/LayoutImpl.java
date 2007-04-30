@@ -492,7 +492,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return getLayoutSet().getTheme();
 		}
 		else {
-			return ThemeLocalUtil.getTheme(getCompanyId(), getThemeId());
+			return ThemeLocalUtil.getTheme(getCompanyId(), getThemeId(), false);
 		}
 	}
 
@@ -504,7 +504,31 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 		else {
 			return ThemeLocalUtil.getColorScheme(
-				getCompanyId(), getTheme().getThemeId(), getColorSchemeId());
+				getCompanyId(), getTheme().getThemeId(), getColorSchemeId(),
+				false);
+		}
+	}
+
+	public Theme getWapTheme() throws PortalException, SystemException {
+		if (isInheritLookAndFeel()) {
+			return getLayoutSet().getWapTheme();
+		}
+		else {
+			return ThemeLocalUtil.getTheme(
+				getCompanyId(), getWapThemeId(), true);
+		}
+	}
+
+	public ColorScheme getWapColorScheme()
+		throws PortalException, SystemException {
+
+		if (isInheritLookAndFeel()) {
+			return getLayoutSet().getWapColorScheme();
+		}
+		else {
+			return ThemeLocalUtil.getColorScheme(
+				getCompanyId(), getWapTheme().getThemeId(),
+				getWapColorSchemeId(), true);
 		}
 	}
 

@@ -69,6 +69,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
+import com.liferay.util.BrowserSniffer;
 import com.liferay.util.CookieUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
@@ -383,16 +384,36 @@ public class ServicePreAction extends Action {
 			Theme theme = null;
 			ColorScheme colorScheme = null;
 
+			boolean wapTheme = BrowserSniffer.is_wap_xhtml(req);
+
 			if (layout != null) {
-				theme = layout.getTheme();
-				colorScheme = layout.getColorScheme();
+				if (wapTheme) {
+					theme = layout.getWapTheme();
+					colorScheme = layout.getWapColorScheme();
+				}
+				else {
+					theme = layout.getTheme();
+					colorScheme = layout.getColorScheme();
+				}
 			}
 			else {
-				theme = ThemeLocalUtil.getTheme(
-					companyId, ThemeImpl.getDefaultThemeId());
+				String themeId = null;
+				String colorSchemeId = null;
+
+				if (wapTheme) {
+					themeId = ThemeImpl.getDefaultWapThemeId();
+					colorSchemeId =
+						ColorSchemeImpl.getDefaultWapColorSchemeId();
+				}
+				else {
+					themeId = ThemeImpl.getDefaultRegularThemeId();
+					colorSchemeId =
+						ColorSchemeImpl.getDefaultRegularColorSchemeId();
+				}
+
+				theme = ThemeLocalUtil.getTheme(companyId, themeId, wapTheme);
 				colorScheme = ThemeLocalUtil.getColorScheme(
-					companyId, theme.getThemeId(),
-					ColorSchemeImpl.getDefaultColorSchemeId());
+					companyId, theme.getThemeId(), colorSchemeId, wapTheme);
 			}
 
 			req.setAttribute(WebKeys.THEME, theme);

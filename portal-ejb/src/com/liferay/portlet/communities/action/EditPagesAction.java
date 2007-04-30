@@ -572,10 +572,11 @@ public class EditPagesAction extends PortletAction {
 		String themeId = ParamUtil.getString(req, "themeId");
 		String colorSchemeId = ParamUtil.getString(req, "colorSchemeId");
 		String css = ParamUtil.getString(req, "css");
+		boolean wapTheme = ParamUtil.getBoolean(req, "wapTheme");
 
 		if (Validator.isNotNull(themeId) && Validator.isNull(colorSchemeId)) {
 			ColorScheme colorScheme = ThemeLocalUtil.getColorScheme(
-				companyId, themeId, colorSchemeId);
+				companyId, themeId, colorSchemeId, wapTheme);
 
 			colorSchemeId = colorScheme.getColorSchemeId();
 		}
@@ -585,14 +586,14 @@ public class EditPagesAction extends PortletAction {
 			// Update layout set
 
 			LayoutSetServiceUtil.updateLookAndFeel(
-				ownerId, themeId, colorSchemeId, css);
+				ownerId, themeId, colorSchemeId, css, wapTheme);
 		}
 		else {
 
 			// Update layout
 
 			LayoutServiceUtil.updateLookAndFeel(
-				layoutId, ownerId, themeId, colorSchemeId, css);
+				layoutId, ownerId, themeId, colorSchemeId, css, wapTheme);
 		}
 	}
 

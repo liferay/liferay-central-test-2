@@ -378,6 +378,8 @@
 		<column name="iconImage" type="boolean" />
 		<column name="themeId" type="String" />
 		<column name="colorSchemeId" type="String" />
+		<column name="wapThemeId" type="String" />
+		<column name="wapColorSchemeId" type="String" />
 		<column name="css" type="String" />
 		<column name="priority" type="int" />
 
@@ -424,6 +426,8 @@
 		<column name="logo" type="boolean" />
 		<column name="themeId" type="String" />
 		<column name="colorSchemeId" type="String" />
+		<column name="wapThemeId" type="String" />
+		<column name="wapColorSchemeId" type="String" />
 		<column name="css" type="String" />
 		<column name="pageCount" type="int" />
 		<column name="virtualHost" type="String" />

@@ -649,7 +649,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 				if (importThemeId != null) {
 					themeId = importThemeId;
-					colorSchemeId = ColorSchemeImpl.getDefaultColorSchemeId();
+					colorSchemeId =
+						ColorSchemeImpl.getDefaultRegularColorSchemeId();
 
 					useThemeZip = true;
 				}
@@ -664,8 +665,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
+		boolean wapTheme = false;
+
 		LayoutSetLocalServiceUtil.updateLookAndFeel(
-			ownerId, themeId, colorSchemeId, StringPool.BLANK);
+			ownerId, themeId, colorSchemeId, StringPool.BLANK, wapTheme);
 
 		// Layouts
 
@@ -965,15 +968,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public Layout updateLookAndFeel(
 			String layoutId, String ownerId, String themeId,
-			String colorSchemeId, String css)
+			String colorSchemeId, String css, boolean wapTheme)
 		throws PortalException, SystemException {
 
 		Layout layout = LayoutUtil.findByPrimaryKey(
 			new LayoutPK(layoutId, ownerId));
 
-		layout.setThemeId(themeId);
-		layout.setColorSchemeId(colorSchemeId);
-		layout.setCss(css);
+		if (wapTheme) {
+			layout.setWapThemeId(themeId);
+			layout.setWapColorSchemeId(colorSchemeId);
+		}
+		else {
+			layout.setThemeId(themeId);
+			layout.setColorSchemeId(colorSchemeId);
+			layout.setCss(css);
+		}
 
 		LayoutUtil.update(layout);
 

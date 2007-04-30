@@ -92,6 +92,10 @@
 	#set ( $is_first_parent = $page.isFirstParent() )
 
 	#set ( $the_title = $languageUtil.get($company_id, $locale, $the_title, $page.getName($locale)) )
+
+	#if ( $page.getType().equals("portlet") )
+		#set ( $is_portlet_page = true )
+	#end
 #end
 
 #if ( $layouts )

@@ -425,6 +425,8 @@ create table Layout (
 	iconImage BOOLEAN,
 	themeId VARCHAR(75) null,
 	colorSchemeId VARCHAR(75) null,
+	wapThemeId VARCHAR(75) null,
+	wapColorSchemeId VARCHAR(75) null,
 	css VARCHAR(75) null,
 	priority INTEGER,
 	primary key (layoutId, ownerId)
@@ -439,6 +441,8 @@ create table LayoutSet (
 	logo BOOLEAN,
 	themeId VARCHAR(75) null,
 	colorSchemeId VARCHAR(75) null,
+	wapThemeId VARCHAR(75) null,
+	wapColorSchemeId VARCHAR(75) null,
 	css VARCHAR(75) null,
 	pageCount INTEGER,
 	virtualHost VARCHAR(75) null

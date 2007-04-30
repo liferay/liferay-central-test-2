@@ -75,8 +75,8 @@ public class StrutsUtil {
 		if (!res.isCommitted()) {
 			String path = Constants.TEXT_HTML_DIR + uri;
 
-			if (BrowserSniffer.is_wml(req)) {
-				path = Constants.TEXT_WML_DIR + uri;
+			if (BrowserSniffer.is_wap_xhtml(req)) {
+				path = Constants.TEXT_WAP_DIR + uri;
 			}
 
 			if (_log.isDebugEnabled()) {
@@ -99,8 +99,8 @@ public class StrutsUtil {
 				String errorPath =
 					Constants.TEXT_HTML_DIR + Constants.COMMON_ERROR;
 
-				if (BrowserSniffer.is_wml(req)) {
-					path = Constants.TEXT_WML_DIR + Constants.COMMON_ERROR;
+				if (BrowserSniffer.is_wap_xhtml(req)) {
+					path = Constants.TEXT_WAP_DIR + Constants.COMMON_ERROR;
 				}
 
 				rd = portalCtx.getRequestDispatcher(errorPath);
@@ -132,8 +132,8 @@ public class StrutsUtil {
 
 		String path = Constants.TEXT_HTML_DIR + uri;
 
-		if (BrowserSniffer.is_wml(req)) {
-			path = Constants.TEXT_WML_DIR + uri;
+		if (BrowserSniffer.is_wap_xhtml(req)) {
+			path = Constants.TEXT_WAP_DIR + uri;
 		}
 
 		if (_log.isDebugEnabled()) {

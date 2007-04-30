@@ -56,7 +56,7 @@ public interface LayoutSetService {
 
 	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
-		java.lang.String colorSchemeId, java.lang.String css)
+		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

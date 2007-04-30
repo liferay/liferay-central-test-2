@@ -50,9 +50,14 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 
 	public static final String PLUGIN_TYPE = "theme";
 
-	public static String getDefaultThemeId() {
+	public static String getDefaultRegularThemeId() {
 		return PortalUtil.getJsSafePortletName(
-			PropsUtil.get(PropsUtil.DEFAULT_THEME_ID));
+			PropsUtil.get(PropsUtil.DEFAULT_REGULAR_THEME_ID));
+	}
+
+	public static String getDefaultWapThemeId() {
+		return PortalUtil.getJsSafePortletName(
+			PropsUtil.get(PropsUtil.DEFAULT_WAP_THEME_ID));
 	}
 
 	public ThemeImpl() {
@@ -169,6 +174,18 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 
 	public void setSetting(String key, String value) {
 		_settings.setProperty(key, value);
+	}
+
+	public boolean getWapTheme() {
+		return _wapTheme;
+	}
+
+	public boolean isWapTheme() {
+		return _wapTheme;
+	}
+
+	public void setWapTheme(boolean wapTheme) {
+		_wapTheme = wapTheme;
 	}
 
 	public List getColorSchemes() {
@@ -349,6 +366,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private String _javaScriptPath = "${root-path}/javascript";
 	private String _templateExtension = "vm";
 	private Properties _settings = new Properties();
+	private boolean _wapTheme;
 	private Map _colorSchemesMap = new HashMap();
 	private String _servletContextName = StringPool.BLANK;
 	private boolean _warFile;

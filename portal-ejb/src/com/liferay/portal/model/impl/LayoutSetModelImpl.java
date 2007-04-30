@@ -61,6 +61,8 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 			{ "logo", new Integer(Types.BOOLEAN) },
 			{ "themeId", new Integer(Types.VARCHAR) },
 			{ "colorSchemeId", new Integer(Types.VARCHAR) },
+			{ "wapThemeId", new Integer(Types.VARCHAR) },
+			{ "wapColorSchemeId", new Integer(Types.VARCHAR) },
 			{ "css", new Integer(Types.VARCHAR) },
 			{ "pageCount", new Integer(Types.INTEGER) },
 			{ "virtualHost", new Integer(Types.VARCHAR) }
@@ -75,6 +77,12 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COLORSCHEMEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.LayoutSet.colorSchemeId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_WAPTHEMEID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.LayoutSet.wapThemeId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_WAPCOLORSCHEMEID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.LayoutSet.wapColorSchemeId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CSS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.LayoutSet.css"),
@@ -205,6 +213,40 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getWapThemeId() {
+		return GetterUtil.getString(_wapThemeId);
+	}
+
+	public void setWapThemeId(String wapThemeId) {
+		if (((wapThemeId == null) && (_wapThemeId != null)) ||
+				((wapThemeId != null) && (_wapThemeId == null)) ||
+				((wapThemeId != null) && (_wapThemeId != null) &&
+				!wapThemeId.equals(_wapThemeId))) {
+			if (!XSS_ALLOW_WAPTHEMEID) {
+				wapThemeId = XSSUtil.strip(wapThemeId);
+			}
+
+			_wapThemeId = wapThemeId;
+		}
+	}
+
+	public String getWapColorSchemeId() {
+		return GetterUtil.getString(_wapColorSchemeId);
+	}
+
+	public void setWapColorSchemeId(String wapColorSchemeId) {
+		if (((wapColorSchemeId == null) && (_wapColorSchemeId != null)) ||
+				((wapColorSchemeId != null) && (_wapColorSchemeId == null)) ||
+				((wapColorSchemeId != null) && (_wapColorSchemeId != null) &&
+				!wapColorSchemeId.equals(_wapColorSchemeId))) {
+			if (!XSS_ALLOW_WAPCOLORSCHEMEID) {
+				wapColorSchemeId = XSSUtil.strip(wapColorSchemeId);
+			}
+
+			_wapColorSchemeId = wapColorSchemeId;
+		}
+	}
+
 	public String getCss() {
 		return GetterUtil.getString(_css);
 	}
@@ -258,6 +300,8 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		clone.setLogo(getLogo());
 		clone.setThemeId(getThemeId());
 		clone.setColorSchemeId(getColorSchemeId());
+		clone.setWapThemeId(getWapThemeId());
+		clone.setWapColorSchemeId(getWapColorSchemeId());
 		clone.setCss(getCss());
 		clone.setPageCount(getPageCount());
 		clone.setVirtualHost(getVirtualHost());
@@ -312,6 +356,8 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	private boolean _logo;
 	private String _themeId;
 	private String _colorSchemeId;
+	private String _wapThemeId;
+	private String _wapColorSchemeId;
 	private String _css;
 	private int _pageCount;
 	private String _virtualHost;

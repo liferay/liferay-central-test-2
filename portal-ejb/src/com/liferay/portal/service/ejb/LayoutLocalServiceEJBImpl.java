@@ -206,11 +206,11 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 	public com.liferay.portal.model.Layout updateLookAndFeel(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String themeId, java.lang.String colorSchemeId,
-		java.lang.String css)
+		java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return LayoutLocalServiceFactory.getTxImpl().updateLookAndFeel(layoutId,
-			ownerId, themeId, colorSchemeId, css);
+			ownerId, themeId, colorSchemeId, css, wapTheme);
 	}
 
 	public com.liferay.portal.model.Layout updateName(

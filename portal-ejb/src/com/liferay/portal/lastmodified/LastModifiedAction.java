@@ -27,6 +27,7 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.BrowserSniffer;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 
@@ -77,10 +78,12 @@ public abstract class LastModifiedAction extends Action {
 			(!theme.getThemeId().equals(themeId)) ||
 			(!colorScheme.getColorSchemeId().equals(colorSchemeId))) {
 
+			boolean wapTheme = BrowserSniffer.is_wap_xhtml(req);
+
 			theme = ThemeLocalUtil.getTheme(
-				themeDisplay.getCompanyId(), themeId);
+				themeDisplay.getCompanyId(), themeId, wapTheme);
 			colorScheme = ThemeLocalUtil.getColorScheme(
-				themeDisplay.getCompanyId(), themeId, colorSchemeId);
+				themeDisplay.getCompanyId(), themeId, colorSchemeId, wapTheme);
 
 			themeDisplay.setLookAndFeel(theme, colorScheme);
 

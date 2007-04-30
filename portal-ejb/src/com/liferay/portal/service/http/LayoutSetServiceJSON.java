@@ -70,11 +70,11 @@ import org.json.JSONObject;
 public class LayoutSetServiceJSON {
 	public static JSONObject updateLookAndFeel(java.lang.String ownerId,
 		java.lang.String themeId, java.lang.String colorSchemeId,
-		java.lang.String css)
+		java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateLookAndFeel(ownerId,
-				themeId, colorSchemeId, css);
+				themeId, colorSchemeId, css, wapTheme);
 
 		return LayoutSetJSONSerializer.toJSONObject(returnValue);
 	}

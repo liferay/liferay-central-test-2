@@ -84,7 +84,9 @@ public class PluginSettingLocalServiceImpl
 					pluginId, false, null);
 			}
 			else if (pluginType.equals(ThemeImpl.PLUGIN_TYPE)) {
-				plugin = ThemeLocalUtil.getTheme(companyId, pluginId);
+				boolean wapTheme = true;
+
+				plugin = ThemeLocalUtil.getTheme(companyId, pluginId, wapTheme);
 			}
 
 			if ((plugin == null) ||

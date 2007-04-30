@@ -61,4 +61,12 @@ public interface LayoutSet extends LayoutSetModel {
 	public com.liferay.portal.model.ColorScheme getColorScheme()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.Theme getWapTheme()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.ColorScheme getWapColorScheme()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

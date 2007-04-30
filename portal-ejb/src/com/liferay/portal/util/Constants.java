@@ -130,7 +130,7 @@ public interface Constants {
 
 	public static final String TEXT_HTML_DIR = "/html";
 
-	public static final String TEXT_WML_DIR = "/wml";
+	public static final String TEXT_WAP_DIR = "/wap";
 
 	// Data source
 

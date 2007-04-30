@@ -66,6 +66,8 @@ public class LayoutModelImpl extends BaseModelImpl {
 			{ "iconImage", new Integer(Types.BOOLEAN) },
 			{ "themeId", new Integer(Types.VARCHAR) },
 			{ "colorSchemeId", new Integer(Types.VARCHAR) },
+			{ "wapThemeId", new Integer(Types.VARCHAR) },
+			{ "wapColorSchemeId", new Integer(Types.VARCHAR) },
 			{ "css", new Integer(Types.VARCHAR) },
 			{ "priority", new Integer(Types.INTEGER) }
 		};
@@ -100,6 +102,12 @@ public class LayoutModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COLORSCHEMEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.colorSchemeId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_WAPTHEMEID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Layout.wapThemeId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_WAPCOLORSCHEMEID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Layout.wapColorSchemeId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CSS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.css"),
@@ -324,6 +332,40 @@ public class LayoutModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getWapThemeId() {
+		return GetterUtil.getString(_wapThemeId);
+	}
+
+	public void setWapThemeId(String wapThemeId) {
+		if (((wapThemeId == null) && (_wapThemeId != null)) ||
+				((wapThemeId != null) && (_wapThemeId == null)) ||
+				((wapThemeId != null) && (_wapThemeId != null) &&
+				!wapThemeId.equals(_wapThemeId))) {
+			if (!XSS_ALLOW_WAPTHEMEID) {
+				wapThemeId = XSSUtil.strip(wapThemeId);
+			}
+
+			_wapThemeId = wapThemeId;
+		}
+	}
+
+	public String getWapColorSchemeId() {
+		return GetterUtil.getString(_wapColorSchemeId);
+	}
+
+	public void setWapColorSchemeId(String wapColorSchemeId) {
+		if (((wapColorSchemeId == null) && (_wapColorSchemeId != null)) ||
+				((wapColorSchemeId != null) && (_wapColorSchemeId == null)) ||
+				((wapColorSchemeId != null) && (_wapColorSchemeId != null) &&
+				!wapColorSchemeId.equals(_wapColorSchemeId))) {
+			if (!XSS_ALLOW_WAPCOLORSCHEMEID) {
+				wapColorSchemeId = XSSUtil.strip(wapColorSchemeId);
+			}
+
+			_wapColorSchemeId = wapColorSchemeId;
+		}
+	}
+
 	public String getCss() {
 		return GetterUtil.getString(_css);
 	}
@@ -365,6 +407,8 @@ public class LayoutModelImpl extends BaseModelImpl {
 		clone.setIconImage(getIconImage());
 		clone.setThemeId(getThemeId());
 		clone.setColorSchemeId(getColorSchemeId());
+		clone.setWapThemeId(getWapThemeId());
+		clone.setWapColorSchemeId(getWapColorSchemeId());
 		clone.setCss(getCss());
 		clone.setPriority(getPriority());
 
@@ -442,6 +486,8 @@ public class LayoutModelImpl extends BaseModelImpl {
 	private boolean _iconImage;
 	private String _themeId;
 	private String _colorSchemeId;
+	private String _wapThemeId;
+	private String _wapColorSchemeId;
 	private String _css;
 	private int _priority;
 }

@@ -154,13 +154,13 @@ public class LayoutServiceUtil {
 	public static com.liferay.portal.model.Layout updateLookAndFeel(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String themeId, java.lang.String colorSchemeId,
-		java.lang.String css)
+		java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
 		return layoutService.updateLookAndFeel(layoutId, ownerId, themeId,
-			colorSchemeId, css);
+			colorSchemeId, css, wapTheme);
 	}
 
 	public static com.liferay.portal.model.Layout updateName(

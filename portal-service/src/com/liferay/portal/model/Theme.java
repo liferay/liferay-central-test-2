@@ -87,6 +87,12 @@ public interface Theme extends Comparable, Plugin, Serializable {
 
 	public void setSetting(String key, String value);
 
+	public boolean getWapTheme();
+
+	public boolean isWapTheme();
+
+	public void setWapTheme(boolean wapTheme);
+
 	public List getColorSchemes();
 
 	public Map getColorSchemesMap();

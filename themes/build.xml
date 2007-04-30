@@ -25,16 +25,16 @@
 	</target>
 
 	<target name="compile-module">
-		<copy todir="${module.name}.war">
-			<fileset
-				dir="${project.dir}/portal-web/docroot/html/themes/_common"
-				excludes="templates/init.vm"
-			/>
-		</copy>
-
 		<if>
 			<available file="${module.name}.war/_diffs" />
 			<then>
+				<copy todir="${module.name}.war">
+					<fileset
+						dir="${project.dir}/portal-web/docroot/html/themes/_common"
+						excludes="templates/init.vm"
+					/>
+				</copy>
+
 				<copy todir="${module.name}.war" overwrite="yes">
 					<fileset
 						dir="${module.name}.war/_diffs"

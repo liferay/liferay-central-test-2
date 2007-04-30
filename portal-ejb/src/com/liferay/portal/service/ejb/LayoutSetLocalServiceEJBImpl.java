@@ -104,11 +104,11 @@ public class LayoutSetLocalServiceEJBImpl implements LayoutSetLocalService,
 
 	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
-		java.lang.String colorSchemeId, java.lang.String css)
+		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return LayoutSetLocalServiceFactory.getTxImpl().updateLookAndFeel(ownerId,
-			themeId, colorSchemeId, css);
+			themeId, colorSchemeId, css, wapTheme);
 	}
 
 	public com.liferay.portal.model.LayoutSet updatePageCount(

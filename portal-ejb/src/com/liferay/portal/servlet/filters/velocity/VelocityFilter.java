@@ -34,6 +34,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityVariables;
+import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.LocaleUtil;
@@ -154,9 +155,12 @@ public class VelocityFilter implements Filter {
 				String colorSchemeId = ParamUtil.getString(
 					req, "colorSchemeId");
 
-				Theme theme = ThemeLocalUtil.getTheme(companyId, themeId);
+				boolean wapTheme = BrowserSniffer.is_wap_xhtml(httpReq);
+
+				Theme theme = ThemeLocalUtil.getTheme(
+					companyId, themeId, wapTheme);
 				ColorScheme colorScheme = ThemeLocalUtil.getColorScheme(
-					companyId, theme.getThemeId(), colorSchemeId);
+					companyId, theme.getThemeId(), colorSchemeId, wapTheme);
 
 				// Theme display
 

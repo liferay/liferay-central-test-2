@@ -56,7 +56,8 @@ public class LayoutSetServiceImpl
 	}
 
 	public LayoutSet updateLookAndFeel(
-			String ownerId, String themeId, String colorSchemeId, String css)
+			String ownerId, String themeId, String colorSchemeId, String css,
+			boolean wapTheme)
 		throws PortalException, SystemException {
 
 		long groupId = LayoutImpl.getGroupId(ownerId);
@@ -68,7 +69,7 @@ public class LayoutSetServiceImpl
 			getUserId(), themeId, ThemeImpl.PLUGIN_TYPE);
 
 		return LayoutSetLocalServiceUtil.updateLookAndFeel(
-			ownerId, themeId, colorSchemeId, css);
+			ownerId, themeId, colorSchemeId, css, wapTheme);
 	}
 
 	public LayoutSet updateVirtualHost(String ownerId, String virtualHost)

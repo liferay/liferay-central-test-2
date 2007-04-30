@@ -22,28 +22,10 @@
  */
 %>
 
-<%@ page import="com.liferay.portal.model.Company" %>
-<%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
-<%@ page import="com.liferay.portal.util.WebKeys" %>
+<%@ include file="/wap/common/init.jsp" %>
 
 <%
-response.setContentType("text/vnd.wap.wml");
-
-ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
-
-Company company = themeDisplay.getCompany();
+response.setContentType("application/vnd.wap.xhtml+xml");
 %>
 
-<?xml version="1.0"?>
-<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
-
-<wml>
-	<card id="home" title="<%= company.getName() %>">
-		<p>
-			<img alt="Logo" src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= company.getCompanyId() %>&wbmp=1" />
-		</p>
-		<p>
-			<%= company.getName() %>
-		</p>
-	</card>
-</wml>
+<liferay-theme:include page="portal_normal.jsp" />

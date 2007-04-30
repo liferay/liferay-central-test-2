@@ -106,6 +106,14 @@ public interface LayoutModel extends BaseModel {
 
 	public void setColorSchemeId(String colorSchemeId);
 
+	public String getWapThemeId();
+
+	public void setWapThemeId(String wapThemeId);
+
+	public String getWapColorSchemeId();
+
+	public void setWapColorSchemeId(String wapColorSchemeId);
+
 	public String getCss();
 
 	public void setCss(String css);

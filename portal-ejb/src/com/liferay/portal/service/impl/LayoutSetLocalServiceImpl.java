@@ -75,8 +75,12 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		layoutSet.setGroupId(groupId);
 		layoutSet.setUserId(userId);
 		layoutSet.setPrivateLayout(privateLayout);
-		layoutSet.setThemeId(ThemeImpl.getDefaultThemeId());
-		layoutSet.setColorSchemeId(ColorSchemeImpl.getDefaultColorSchemeId());
+		layoutSet.setThemeId(ThemeImpl.getDefaultRegularThemeId());
+		layoutSet.setColorSchemeId(
+			ColorSchemeImpl.getDefaultRegularColorSchemeId());
+		layoutSet.setWapThemeId(ThemeImpl.getDefaultWapThemeId());
+		layoutSet.setWapColorSchemeId(
+			ColorSchemeImpl.getDefaultWapColorSchemeId());
 		layoutSet.setCss(StringPool.BLANK);
 
 		LayoutSetUtil.update(layoutSet);
@@ -183,14 +187,21 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 	}
 
 	public LayoutSet updateLookAndFeel(
-			String ownerId, String themeId, String colorSchemeId, String css)
+			String ownerId, String themeId, String colorSchemeId, String css,
+			boolean wapTheme)
 		throws PortalException, SystemException {
 
 		LayoutSet layoutSet = LayoutSetUtil.findByPrimaryKey(ownerId);
 
-		layoutSet.setThemeId(themeId);
-		layoutSet.setColorSchemeId(colorSchemeId);
-		layoutSet.setCss(css);
+		if (wapTheme) {
+			layoutSet.setWapThemeId(themeId);
+			layoutSet.setWapColorSchemeId(colorSchemeId);
+		}
+		else {
+			layoutSet.setThemeId(themeId);
+			layoutSet.setColorSchemeId(colorSchemeId);
+			layoutSet.setCss(css);
+		}
 
 		LayoutSetUtil.update(layoutSet);
 
@@ -207,8 +218,14 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			LayoutSet otherLayoutSet = LayoutSetUtil.findByPrimaryKey(
 				otherOwnerId);
 
-			otherLayoutSet.setThemeId(themeId);
-			otherLayoutSet.setColorSchemeId(colorSchemeId);
+			if (wapTheme) {
+				otherLayoutSet.setWapThemeId(themeId);
+				otherLayoutSet.setWapColorSchemeId(colorSchemeId);
+			}
+			else {
+				otherLayoutSet.setThemeId(themeId);
+				otherLayoutSet.setColorSchemeId(colorSchemeId);
+			}
 
 			LayoutSetUtil.update(otherLayoutSet);
 		}

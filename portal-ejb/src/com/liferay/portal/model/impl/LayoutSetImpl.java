@@ -53,14 +53,26 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 	}
 
 	public Theme getTheme() throws PortalException, SystemException {
-		return ThemeLocalUtil.getTheme(getCompanyId(), getThemeId());
+		return ThemeLocalUtil.getTheme(getCompanyId(), getThemeId(), false);
 	}
 
 	public ColorScheme getColorScheme()
 		throws PortalException, SystemException {
 
 		return ThemeLocalUtil.getColorScheme(
-			getCompanyId(), getTheme().getThemeId(), getColorSchemeId());
+			getCompanyId(), getTheme().getThemeId(), getColorSchemeId(), false);
+	}
+
+	public Theme getWapTheme() throws PortalException, SystemException {
+		return ThemeLocalUtil.getTheme(getCompanyId(), getWapThemeId(), true);
+	}
+
+	public ColorScheme getWapColorScheme()
+		throws PortalException, SystemException {
+
+		return ThemeLocalUtil.getColorScheme(
+			getCompanyId(), getWapTheme().getThemeId(), getWapColorSchemeId(),
+			true);
 	}
 
 }

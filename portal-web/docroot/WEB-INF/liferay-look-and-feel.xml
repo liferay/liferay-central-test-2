@@ -50,4 +50,8 @@
 			<css-class>linux</css-class>
 		</color-scheme>
 	</theme>
+	<theme id="mobile" name="Mobile">
+		<root-path>/wap/themes/${theme-id}</root-path>
+		<wap-theme>true</wap-theme>
+	</theme>
 </look-and-feel>

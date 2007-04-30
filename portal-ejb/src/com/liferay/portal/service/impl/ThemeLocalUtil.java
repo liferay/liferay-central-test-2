@@ -32,6 +32,7 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
+import com.liferay.portal.plugin.PluginUtil;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
@@ -77,12 +78,13 @@ import org.dom4j.io.SAXReader;
 public class ThemeLocalUtil {
 
 	public static ColorScheme getColorScheme(
-			long companyId, String themeId, String colorSchemeId)
+			long companyId, String themeId, String colorSchemeId,
+			boolean wapTheme)
 		throws PortalException, SystemException {
 
 		colorSchemeId = GetterUtil.getString(colorSchemeId);
 
-		Theme theme = getTheme(companyId, themeId);
+		Theme theme = getTheme(companyId, themeId, wapTheme);
 
 		Map colorSchemesMap = theme.getColorSchemesMap();
 
@@ -98,8 +100,13 @@ public class ThemeLocalUtil {
 		}
 
 		if (colorScheme == null) {
-			colorScheme = (ColorScheme)colorSchemesMap.get(
-				ColorSchemeImpl.getDefaultColorSchemeId());
+			if (wapTheme) {
+				colorSchemeId = ColorSchemeImpl.getDefaultWapColorSchemeId();
+			}
+			else {
+				colorSchemeId =
+					ColorSchemeImpl.getDefaultRegularColorSchemeId();
+			}
 		}
 
 		if (colorScheme == null) {
@@ -109,7 +116,8 @@ public class ThemeLocalUtil {
 		return colorScheme;
 	}
 
-	public static Theme getTheme(long companyId, String themeId)
+	public static Theme getTheme(
+			long companyId, String themeId, boolean wapTheme)
 		throws PortalException, SystemException {
 
 		themeId = GetterUtil.getString(themeId);
@@ -117,14 +125,38 @@ public class ThemeLocalUtil {
 		Theme theme = (Theme)_getThemes(companyId).get(themeId);
 
 		if (theme == null) {
-			theme = (Theme)_themes.get(ThemeImpl.getDefaultThemeId());
+			if (wapTheme) {
+				themeId = ThemeImpl.getDefaultWapThemeId();
+			}
+			else {
+				themeId = ThemeImpl.getDefaultRegularThemeId();
+			}
+
+			theme = (Theme)_themes.get(themeId);
 		}
 
 		return theme;
 	}
 
-	public static List getThemes(long companyId) {
+	public static List getThemes(
+			long companyId, long groupId, long userId, boolean wapTheme)
+		throws PortalException, SystemException {
+
 		List themes = ListUtil.fromCollection(_getThemes(companyId).values());
+
+		themes = PluginUtil.restrictPlugins(themes, companyId, userId);
+
+		Iterator itr = themes.iterator();
+
+		while (itr.hasNext()) {
+			Theme theme = (Theme)itr.next();
+
+			if ((!theme.isGroupAvailable(groupId)) ||
+				(theme.isWapTheme() != wapTheme)) {
+
+				itr.remove();
+			}
+		}
 
 		Collections.sort(themes);
 
@@ -538,6 +570,9 @@ public class ThemeLocalUtil {
 					themeModel.setSetting(key, value);
 				}
 			}
+
+			themeModel.setWapTheme(GetterUtil.getBoolean(
+				theme.elementText("wap-theme"), themeModel.isWapTheme()));
 
 			Element rolesEl = theme.element("roles");
 

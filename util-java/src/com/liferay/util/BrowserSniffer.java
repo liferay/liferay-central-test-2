@@ -308,6 +308,27 @@ public class BrowserSniffer {
 		}
 	}
 
+	public static boolean is_wap_xhtml(HttpServletRequest req) {
+		if (req == null) {
+			return false;
+		}
+
+		String accept = req.getHeader(HttpHeaders.ACCEPT);
+
+		if (accept == null) {
+			return false;
+		}
+
+		accept = accept.toLowerCase();
+
+		if (accept.indexOf("wap.xhtml") != -1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static boolean is_wml(HttpServletRequest req) {
 		if (req == null) {
 			return false;

@@ -32,6 +32,7 @@ import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Randomizer;
 
@@ -89,7 +90,11 @@ public class RandomLookAndFeelAction extends Action {
 
 			Randomizer randomizer = Randomizer.getInstance();
 
-			List themes = ThemeLocalUtil.getThemes(themeDisplay.getCompanyId());
+			boolean wapTheme = BrowserSniffer.is_wap_xhtml(req);
+
+			List themes = ThemeLocalUtil.getThemes(
+				themeDisplay.getCompanyId(), themeDisplay.getPortletGroupId(),
+				themeDisplay.getUserId(), wapTheme);
 
 			if (themes.size() > 0) {
 				Theme theme = (Theme)themes.get(
@@ -103,7 +108,7 @@ public class RandomLookAndFeelAction extends Action {
 				LayoutServiceUtil.updateLookAndFeel(
 					layout.getLayoutId(), layout.getOwnerId(),
 					theme.getThemeId(), colorScheme.getColorSchemeId(),
-					layout.getCss());
+					layout.getCss(), wapTheme);
 
 				themeDisplay.setLookAndFeel(theme, colorScheme);
 

@@ -218,6 +218,14 @@ public class PropsUtil {
 
 	public static final String DEFAULT_COLOR_SCHEME_ID = "default.color.scheme.id";
 
+	public static final String DEFAULT_REGULAR_THEME_ID = "default.regular.theme.id";
+
+	public static final String DEFAULT_REGULAR_COLOR_SCHEME_ID = "default.regular.color.scheme.id";
+
+	public static final String DEFAULT_WAP_THEME_ID = "default.wap.theme.id";
+
+	public static final String DEFAULT_WAP_COLOR_SCHEME_ID = "default.wap.color.scheme.id";
+
 	public static final String THEME_SYNC_ON_GROUP = "theme.sync.on.group";
 
 	// Request

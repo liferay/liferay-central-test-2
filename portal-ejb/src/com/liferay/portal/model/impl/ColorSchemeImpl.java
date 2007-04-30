@@ -131,13 +131,18 @@ public class ColorSchemeImpl implements ColorScheme {
 	public static final String PORTLET_SECTION_SELECTED_HOVER_BG =
 		"portlet-section-selected-hover-bg";
 
-	public static String getDefaultColorSchemeId() {
-		return PropsUtil.get(PropsUtil.DEFAULT_COLOR_SCHEME_ID);
+	public static String getDefaultRegularColorSchemeId() {
+		return PropsUtil.get(PropsUtil.DEFAULT_REGULAR_COLOR_SCHEME_ID);
+	}
+
+	public static String getDefaultWapColorSchemeId() {
+		return PropsUtil.get(PropsUtil.DEFAULT_WAP_COLOR_SCHEME_ID);
 	}
 
 	public static ColorScheme getNullColorScheme() {
 		return new ColorSchemeImpl(
-			getDefaultColorSchemeId(), StringPool.BLANK, StringPool.BLANK);
+			getDefaultRegularColorSchemeId(), StringPool.BLANK,
+			StringPool.BLANK);
 	}
 
 	public ColorSchemeImpl() {
