@@ -10,29 +10,29 @@
 		<parameter name="wsdlPortType" value="WikiPageServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="addPage" qname="operNS:addPage" returnQName="addPageReturn" returnType="rtns:WikiPageSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" name="deletePage" qname="operNS:deletePage" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="getPage" qname="operNS:getPage" returnQName="getPageReturn" returnType="rtns:WikiPageSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="getPage" qname="operNS:getPage" returnQName="getPageReturn" returnType="rtns:WikiPageSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="version" type="tns:double"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="revertPage" qname="operNS:revertPage" returnQName="revertPageReturn" returnType="rtns:WikiPageSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="version" type="tns:double"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="updatePage" qname="operNS:updatePage" returnQName="updatePageReturn" returnType="rtns:WikiPageSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="content" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="format" type="tns:string"></parameter>

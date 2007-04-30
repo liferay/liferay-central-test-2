@@ -31,6 +31,7 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 
 import javax.portlet.PortletConfig;
@@ -58,7 +59,8 @@ public class ViewAction extends PortletAction {
 		try {
 			PortletPreferences prefs = req.getPreferences();
 
-			String nodeId = prefs.getValue("node-id", StringPool.BLANK);
+			long nodeId = GetterUtil.getLong(
+				prefs.getValue("node-id", StringPool.BLANK));
 			String title = ParamUtil.getString(
 				req, "title", WikiPageImpl.FRONT_PAGE);
 

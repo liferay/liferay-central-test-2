@@ -34,24 +34,24 @@ import java.io.Serializable;
  *
  */
 public class WikiPagePK implements Comparable, Serializable {
-	public String nodeId;
+	public long nodeId;
 	public String title;
 	public double version;
 
 	public WikiPagePK() {
 	}
 
-	public WikiPagePK(String nodeId, String title, double version) {
+	public WikiPagePK(long nodeId, String title, double version) {
 		this.nodeId = nodeId;
 		this.title = title;
 		this.version = version;
 	}
 
-	public String getNodeId() {
+	public long getNodeId() {
 		return nodeId;
 	}
 
-	public void setNodeId(String nodeId) {
+	public void setNodeId(long nodeId) {
 		this.nodeId = nodeId;
 	}
 
@@ -78,7 +78,16 @@ public class WikiPagePK implements Comparable, Serializable {
 
 		WikiPagePK pk = (WikiPagePK)obj;
 		int value = 0;
-		value = nodeId.compareTo(pk.nodeId);
+
+		if (nodeId < pk.nodeId) {
+			value = -1;
+		}
+		else if (nodeId > pk.nodeId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -121,7 +130,7 @@ public class WikiPagePK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((nodeId.equals(pk.nodeId)) && (title.equals(pk.title)) &&
+		if ((nodeId == pk.nodeId) && (title.equals(pk.title)) &&
 				(version == pk.version)) {
 			return true;
 		}

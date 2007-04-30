@@ -63,7 +63,7 @@ public class EditConfigurationAction extends PortletAction {
 				return;
 			}
 
-			String nodeId = ParamUtil.getString(req, "nodeId");
+			long nodeId = ParamUtil.getLong(req, "nodeId");
 
 			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
 
@@ -74,7 +74,7 @@ public class EditConfigurationAction extends PortletAction {
 				PortletPreferencesFactory.getPortletSetup(
 					req, portletResource, true, true);
 
-			prefs.setValue("node-id", node.getNodeId());
+			prefs.setValue("node-id", String.valueOf(node.getNodeId()));
 
 			prefs.store();
 

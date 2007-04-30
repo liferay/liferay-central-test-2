@@ -41,7 +41,7 @@ public class NodeFilter extends ClassicToHTMLFilter {
 
 	public NodeFilter(Fetcher context, TractFetcher pages, Map remoteNames,
 					  String spec, NodeRepository nodeRepository,
-					  PortletURL portletURL, String nodeId) {
+					  PortletURL portletURL, long nodeId) {
 
 		super(context, pages, remoteNames, spec);
 
@@ -58,12 +58,12 @@ public class NodeFilter extends ClassicToHTMLFilter {
 		return _portletURL;
 	}
 
-	public String getNodeId() {
+	public long getNodeId() {
 		return _nodeId;
 	}
 
 	private NodeRepository _nodeRepository;
 	private PortletURL _portletURL;
-	private String _nodeId;
+	private long _nodeId;
 
 }

@@ -7,7 +7,7 @@
 
 		<!-- PK fields -->
 
-		<column name="nodeId" type="String" primary="true" />
+		<column name="nodeId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -50,7 +50,7 @@
 
 		<!-- PK fields -->
 
-		<column name="nodeId" type="String" primary="true" />
+		<column name="nodeId" type="long" primary="true" />
 		<column name="title" type="String" primary="true" />
 		<column name="version" type="double" primary="true" />
 

@@ -76,19 +76,19 @@ public class WikiNodeSoap implements Serializable {
 	public WikiNodeSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _nodeId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setNodeId(pk);
 	}
 
-	public String getNodeId() {
+	public long getNodeId() {
 		return _nodeId;
 	}
 
-	public void setNodeId(String nodeId) {
+	public void setNodeId(long nodeId) {
 		_nodeId = nodeId;
 	}
 
@@ -164,7 +164,7 @@ public class WikiNodeSoap implements Serializable {
 		_lastPostDate = lastPostDate;
 	}
 
-	private String _nodeId;
+	private long _nodeId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;

@@ -73,15 +73,14 @@ public class WikiNodeServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
-	public static void deleteNode(java.lang.String nodeId)
+	public static void deleteNode(long nodeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
 		wikiNodeService.deleteNode(nodeId);
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiNode getNode(
-		java.lang.String nodeId)
+	public static com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
@@ -90,8 +89,7 @@ public class WikiNodeServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode updateNode(
-		java.lang.String nodeId, java.lang.String name,
-		java.lang.String description)
+		long nodeId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();

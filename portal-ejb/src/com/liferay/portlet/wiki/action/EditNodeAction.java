@@ -31,7 +31,6 @@ import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -111,7 +110,7 @@ public class EditNodeAction extends PortletAction {
 	}
 
 	protected void deleteNode(ActionRequest req) throws Exception {
-		String nodeId = ParamUtil.getString(req, "nodeId");
+		long nodeId = ParamUtil.getLong(req, "nodeId");
 
 		WikiNodeServiceUtil.deleteNode(nodeId);
 	}
@@ -119,7 +118,7 @@ public class EditNodeAction extends PortletAction {
 	protected void updateNode(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String nodeId = ParamUtil.getString(req, "nodeId");
+		long nodeId = ParamUtil.getLong(req, "nodeId");
 
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
@@ -129,7 +128,7 @@ public class EditNodeAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (Validator.isNull(nodeId)) {
+		if (nodeId <= 0) {
 
 			// Add node
 

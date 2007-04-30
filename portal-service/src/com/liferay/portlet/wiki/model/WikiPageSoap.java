@@ -88,11 +88,11 @@ public class WikiPageSoap implements Serializable {
 		setVersion(pk.version);
 	}
 
-	public String getNodeId() {
+	public long getNodeId() {
 		return _nodeId;
 	}
 
-	public void setNodeId(String nodeId) {
+	public void setNodeId(long nodeId) {
 		_nodeId = nodeId;
 	}
 
@@ -172,7 +172,7 @@ public class WikiPageSoap implements Serializable {
 		_head = head;
 	}
 
-	private String _nodeId;
+	private long _nodeId;
 	private String _title;
 	private double _version;
 	private long _companyId;

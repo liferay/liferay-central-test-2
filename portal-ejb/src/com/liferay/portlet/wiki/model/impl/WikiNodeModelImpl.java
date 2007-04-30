@@ -55,7 +55,7 @@ import java.util.Date;
 public class WikiNodeModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "WikiNode";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "nodeId", new Integer(Types.VARCHAR) },
+			{ "nodeId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
@@ -68,9 +68,6 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiNode"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_NODEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.wiki.model.WikiNode.nodeId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiNode.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -86,27 +83,20 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 	public WikiNodeModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _nodeId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setNodeId(pk);
 	}
 
-	public String getNodeId() {
-		return GetterUtil.getString(_nodeId);
+	public long getNodeId() {
+		return _nodeId;
 	}
 
-	public void setNodeId(String nodeId) {
-		if (((nodeId == null) && (_nodeId != null)) ||
-				((nodeId != null) && (_nodeId == null)) ||
-				((nodeId != null) && (_nodeId != null) &&
-				!nodeId.equals(_nodeId))) {
-			if (!XSS_ALLOW_NODEID) {
-				nodeId = XSSUtil.strip(nodeId);
-			}
-
+	public void setNodeId(long nodeId) {
+		if (nodeId != _nodeId) {
 			_nodeId = nodeId;
 		}
 	}
@@ -277,9 +267,9 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = wikiNode.getPrimaryKey();
+		long pk = wikiNode.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -288,10 +278,10 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _nodeId;
+	private long _nodeId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;

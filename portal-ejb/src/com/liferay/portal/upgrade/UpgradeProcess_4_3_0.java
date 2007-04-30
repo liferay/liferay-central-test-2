@@ -26,15 +26,18 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradeAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeBlogs;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeBookmarks;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeCalendar;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeCompany;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeContact;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeGroup;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeOrgLabor;
 import com.liferay.portal.upgrade.v4_3_0.UpgradePasswordTracker;
 import com.liferay.portal.upgrade.v4_3_0.UpgradePhone;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeResource;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeSubscription;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUser;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeWiki;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -59,7 +62,9 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 
 		// Upgrade Resource_
 
+		upgrade(new UpgradeCompany());
 		upgrade(new UpgradeResource());
+		upgrade(new UpgradeUser());
 
 		// Upgrade all other tables
 
@@ -70,11 +75,12 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradeContact());
 		upgrade(new UpgradeEmailAddress());
 		upgrade(new UpgradeGroup());
+		upgrade(new UpgradeOrgLabor());
 		upgrade(new UpgradePasswordTracker());
 		upgrade(new UpgradePhone());
 		upgrade(new UpgradeSubscription());
-		upgrade(new UpgradeUser());
 		upgrade(new UpgradeWebsite());
+		upgrade(new UpgradeWiki());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_0.class);

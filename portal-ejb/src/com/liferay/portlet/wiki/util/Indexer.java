@@ -28,6 +28,7 @@ import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.StringUtil;
 
@@ -57,9 +58,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static final String PORTLET_ID = PortletKeys.WIKI;
 
 	public static void addPage(
-			long companyId, long groupId, String nodeId, String title,
+			long companyId, long groupId, long nodeId, String title,
 			String content)
-	throws IOException {
+		throws IOException {
 
 		content = Html.stripHtml(content);
 
@@ -97,7 +98,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	public static void deletePage(long companyId, String nodeId, String title)
+	public static void deletePage(long companyId, long nodeId, String title)
 		throws IOException {
 
 		LuceneUtil.deleteDocuments(
@@ -107,7 +108,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 				LuceneFields.getUID(PORTLET_ID, nodeId, title)));
 	}
 
-	public static void deletePages(long companyId, String nodeId)
+	public static void deletePages(long companyId, long nodeId)
 		throws IOException, ParseException {
 
 		BooleanQuery booleanQuery = new BooleanQuery();
@@ -149,7 +150,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updatePage(
-			long companyId, long groupId, String nodeId, String title,
+			long companyId, long groupId, long nodeId, String title,
 			String content)
 		throws IOException {
 
@@ -177,10 +178,10 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// URL
 
-		String nodeId = doc.get("nodeId");
+		long nodeId = GetterUtil.getLong(doc.get("nodeId"));
 
 		portletURL.setParameter("struts_action", "/wiki/view_page");
-		portletURL.setParameter("nodeId", nodeId);
+		portletURL.setParameter("nodeId", String.valueOf(nodeId));
 		portletURL.setParameter("title", title);
 
 		return new DocumentSummary(title, content, portletURL);

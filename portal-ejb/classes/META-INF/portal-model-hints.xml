@@ -1198,7 +1198,7 @@
 		<field name="acronym" type="String" />
 	</model>
 	<model name="com.liferay.portlet.wiki.model.WikiNode">
-		<field name="nodeId" type="String" />
+		<field name="nodeId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -1212,7 +1212,7 @@
 		<field name="lastPostDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.wiki.model.WikiPage">
-		<field name="nodeId" type="String" />
+		<field name="nodeId" type="long" />
 		<field name="title" type="String" />
 		<field name="version" type="double" />
 		<field name="companyId" type="long" />

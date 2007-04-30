@@ -30,7 +30,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
-String nodeId = BeanParamUtil.getString(wikiPage, request, "nodeId");
+long nodeId = BeanParamUtil.getLong(wikiPage, request, "nodeId");
 String title = BeanParamUtil.getString(wikiPage, request, "title");
 
 String content = BeanParamUtil.getString(wikiPage, request, "content");

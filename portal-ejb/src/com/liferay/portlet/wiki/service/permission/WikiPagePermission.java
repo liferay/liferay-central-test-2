@@ -39,7 +39,7 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 public class WikiPagePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String nodeId, String title,
+			PermissionChecker permissionChecker, long nodeId, String title,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -58,7 +58,7 @@ public class WikiPagePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String nodeId, String title,
+			PermissionChecker permissionChecker, long nodeId, String title,
 			String actionId)
 		throws PortalException, SystemException {
 

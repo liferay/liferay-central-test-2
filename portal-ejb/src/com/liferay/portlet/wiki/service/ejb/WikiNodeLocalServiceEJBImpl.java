@@ -100,8 +100,8 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 			communityPermissions, guestPermissions);
 	}
 
-	public void addNodeResources(java.lang.String nodeId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+	public void addNodeResources(long nodeId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiNodeLocalServiceFactory.getTxImpl().addNodeResources(nodeId,
@@ -116,7 +116,7 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addNodeResources(java.lang.String nodeId,
+	public void addNodeResources(long nodeId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -134,7 +134,7 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteNode(java.lang.String nodeId)
+	public void deleteNode(long nodeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiNodeLocalServiceFactory.getTxImpl().deleteNode(nodeId);
@@ -152,8 +152,7 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 		WikiNodeLocalServiceFactory.getTxImpl().deleteNodes(groupId);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode getNode(
-		java.lang.String nodeId)
+	public com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return WikiNodeLocalServiceFactory.getTxImpl().getNode(nodeId);
@@ -181,15 +180,14 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String[] nodeIds, java.lang.String keywords)
+		long groupId, long[] nodeIds, java.lang.String keywords)
 		throws com.liferay.portal.SystemException {
 		return WikiNodeLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, nodeIds, keywords);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode updateNode(
-		java.lang.String nodeId, java.lang.String name,
-		java.lang.String description)
+	public com.liferay.portlet.wiki.model.WikiNode updateNode(long nodeId,
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return WikiNodeLocalServiceFactory.getTxImpl().updateNode(nodeId, name,

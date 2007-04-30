@@ -111,8 +111,7 @@ public class WikiNodeServiceSoap {
 		}
 	}
 
-	public static void deleteNode(java.lang.String nodeId)
-		throws RemoteException {
+	public static void deleteNode(long nodeId) throws RemoteException {
 		try {
 			WikiNodeServiceUtil.deleteNode(nodeId);
 		}
@@ -123,7 +122,7 @@ public class WikiNodeServiceSoap {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNodeSoap getNode(
-		java.lang.String nodeId) throws RemoteException {
+		long nodeId) throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.getNode(nodeId);
 
@@ -136,8 +135,8 @@ public class WikiNodeServiceSoap {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNodeSoap updateNode(
-		java.lang.String nodeId, java.lang.String name,
-		java.lang.String description) throws RemoteException {
+		long nodeId, java.lang.String name, java.lang.String description)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.updateNode(nodeId,
 					name, description);

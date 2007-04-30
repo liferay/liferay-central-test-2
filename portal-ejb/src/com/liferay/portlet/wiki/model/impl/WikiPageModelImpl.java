@@ -57,7 +57,7 @@ import java.util.Date;
 public class WikiPageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "WikiPage";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "nodeId", new Integer(Types.VARCHAR) },
+			{ "nodeId", new Integer(Types.BIGINT) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.DOUBLE) },
 			{ "companyId", new Integer(Types.BIGINT) },
@@ -70,9 +70,6 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_NODEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.nodeId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.title"),
 			XSS_ALLOW_BY_MODEL);
@@ -101,19 +98,12 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		setVersion(pk.version);
 	}
 
-	public String getNodeId() {
-		return GetterUtil.getString(_nodeId);
+	public long getNodeId() {
+		return _nodeId;
 	}
 
-	public void setNodeId(String nodeId) {
-		if (((nodeId == null) && (_nodeId != null)) ||
-				((nodeId != null) && (_nodeId == null)) ||
-				((nodeId != null) && (_nodeId != null) &&
-				!nodeId.equals(_nodeId))) {
-			if (!XSS_ALLOW_NODEID) {
-				nodeId = XSSUtil.strip(nodeId);
-			}
-
+	public void setNodeId(long nodeId) {
+		if (nodeId != _nodeId) {
 			_nodeId = nodeId;
 		}
 	}
@@ -265,7 +255,16 @@ public class WikiPageModelImpl extends BaseModelImpl {
 
 		WikiPageImpl wikiPage = (WikiPageImpl)obj;
 		int value = 0;
-		value = getNodeId().compareTo(wikiPage.getNodeId());
+
+		if (getNodeId() < wikiPage.getNodeId()) {
+			value = -1;
+		}
+		else if (getNodeId() > wikiPage.getNodeId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -323,7 +322,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		return getPrimaryKey().hashCode();
 	}
 
-	private String _nodeId;
+	private long _nodeId;
 	private String _title;
 	private double _version;
 	private long _companyId;

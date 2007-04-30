@@ -53,9 +53,9 @@ public interface WikiPageModel extends BaseModel {
 
 	public void setPrimaryKey(WikiPagePK pk);
 
-	public String getNodeId();
+	public long getNodeId();
 
-	public void setNodeId(String nodeId);
+	public void setNodeId(long nodeId);
 
 	public String getTitle();
 

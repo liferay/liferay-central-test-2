@@ -41,5 +41,5 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
 
-String nodeId = prefs.getValue("node-id", StringPool.BLANK);
+long nodeId = GetterUtil.getLong(prefs.getValue("node-id", StringPool.BLANK));
 %>

@@ -55,7 +55,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 	portletURL.setWindowState(WindowState.MAXIMIZED);
 
 	portletURL.setParameter("redirect", currentURL);
-	portletURL.setParameter("nodeId", node.getNodeId());
+	portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 	portletURL.setParameter("title", wikiPage.getTitle());
 	%>
 

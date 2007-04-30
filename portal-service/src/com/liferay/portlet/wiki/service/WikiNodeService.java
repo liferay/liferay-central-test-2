@@ -63,18 +63,16 @@ public interface WikiNodeService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteNode(java.lang.String nodeId)
+	public void deleteNode(long nodeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portlet.wiki.model.WikiNode getNode(
-		java.lang.String nodeId)
+	public com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portlet.wiki.model.WikiNode updateNode(
-		java.lang.String nodeId, java.lang.String name,
-		java.lang.String description)
+	public com.liferay.portlet.wiki.model.WikiNode updateNode(long nodeId,
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

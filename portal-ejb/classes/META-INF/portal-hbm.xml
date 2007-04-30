@@ -1229,7 +1229,7 @@
 	</class>
 	<class name="com.liferay.portlet.wiki.model.impl.WikiNodeImpl" table="WikiNode">
 		<cache usage="read-write" />
-		<id name="nodeId" type="java.lang.String">
+		<id name="nodeId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />

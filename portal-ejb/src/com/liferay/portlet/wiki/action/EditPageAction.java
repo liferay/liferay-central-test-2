@@ -122,14 +122,14 @@ public class EditPageAction extends PortletAction {
 	}
 
 	protected void deletePage(ActionRequest req) throws Exception {
-		String nodeId = ParamUtil.getString(req, "nodeId");
+		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
 
 		WikiPageServiceUtil.deletePage(nodeId, title);
 	}
 
 	protected void revertPage(ActionRequest req) throws Exception {
-		String nodeId = ParamUtil.getString(req, "nodeId");
+		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
 		double version = ParamUtil.getDouble(req, "version");
 
@@ -137,7 +137,7 @@ public class EditPageAction extends PortletAction {
 	}
 
 	protected void updatePage(ActionRequest req) throws Exception {
-		String nodeId = ParamUtil.getString(req, "nodeId");
+		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
 
 		String content = ParamUtil.getString(req, "content");

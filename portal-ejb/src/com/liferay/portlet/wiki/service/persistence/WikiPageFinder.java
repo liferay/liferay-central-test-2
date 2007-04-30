@@ -56,7 +56,7 @@ public class WikiPageFinder {
 		WikiPageFinder.class.getName() + ".findByCreateDate";
 
 	public static int countByCreateDate(
-			String nodeId, Date createDate, boolean before)
+			long nodeId, Date createDate, boolean before)
 		throws SystemException {
 
 		return countByCreateDate(
@@ -64,7 +64,7 @@ public class WikiPageFinder {
 	}
 
 	public static int countByCreateDate(
-			String nodeId, Timestamp createDate, boolean before)
+			long nodeId, Timestamp createDate, boolean before)
 		throws SystemException {
 
 		Session session = null;
@@ -116,7 +116,7 @@ public class WikiPageFinder {
 	}
 
 	public static List findByCreateDate(
-			String nodeId, Date createDate, boolean before, int begin, int end)
+			long nodeId, Date createDate, boolean before, int begin, int end)
 		throws SystemException {
 
 		return findByCreateDate(
@@ -124,7 +124,7 @@ public class WikiPageFinder {
 	}
 
 	public static List findByCreateDate(
-			String nodeId, Timestamp createDate, boolean before, int begin,
+			long nodeId, Timestamp createDate, boolean before, int begin,
 			int end)
 		throws SystemException {
 

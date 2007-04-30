@@ -10,7 +10,7 @@
 		<parameter name="wsdlPortType" value="WikiNodeServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="getNode" qname="operNS:getNode" returnQName="getNodeReturn" returnType="rtns:WikiNodeSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="addNode" qname="operNS:addNode" returnQName="addNodeReturn" returnType="rtns:WikiNodeSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:string"></parameter>
@@ -27,10 +27,10 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" name="deleteNode" qname="operNS:deleteNode" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="updateNode" qname="operNS:updateNode" returnQName="updateNodeReturn" returnType="rtns:WikiNodeSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
 		</operation>

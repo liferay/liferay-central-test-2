@@ -73,7 +73,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
-	public WikiPage addPage(long userId, String nodeId, String title)
+	public WikiPage addPage(long userId, long nodeId, String title)
 		throws PortalException, SystemException {
 
 		// Page
@@ -105,7 +105,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void addPageResources(
-			String nodeId, String title, boolean addCommunityPermissions,
+			long nodeId, String title, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -128,7 +128,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void addPageResources(
-			String nodeId, String title, String[] communityPermissions,
+			long nodeId, String title, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -149,7 +149,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			communityPermissions, guestPermissions);
 	}
 
-	public void deletePage(String nodeId, String title)
+	public void deletePage(long nodeId, String title)
 		throws PortalException, SystemException {
 
 		List pages = WikiPageUtil.findByN_T_H(nodeId, title, true, 0, 1);
@@ -190,7 +190,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		WikiPageUtil.removeByN_T(page.getNodeId(), page.getTitle());
 	}
 
-	public void deletePages(String nodeId)
+	public void deletePages(long nodeId)
 		throws PortalException, SystemException {
 
 		Iterator itr = WikiPageUtil.findByN_H(nodeId, true).iterator();
@@ -202,7 +202,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	public List getLinks(String nodeId, String title) throws SystemException {
+	public List getLinks(long nodeId, String title) throws SystemException {
 		List links = new ArrayList();
 
 		List pages = WikiPageUtil.findByN_H(nodeId, true);
@@ -231,7 +231,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return links;
 	}
 
-	public List getOrphans(String nodeId) throws SystemException {
+	public List getOrphans(long nodeId) throws SystemException {
 		List pageTitles = new ArrayList();
 
 		List pages = WikiPageUtil.findByN_H(nodeId, true);
@@ -284,7 +284,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return orphans;
 	}
 
-	public WikiPage getPage(String nodeId, String title)
+	public WikiPage getPage(long nodeId, String title)
 		throws PortalException, SystemException {
 
 		List pages = WikiPageUtil.findByN_T_H(nodeId, title, true, 0, 1);
@@ -297,7 +297,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	public WikiPage getPage(String nodeId, String title, double version)
+	public WikiPage getPage(long nodeId, String title, double version)
 		throws PortalException, SystemException {
 
 		WikiPage page = null;
@@ -313,21 +313,21 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return page;
 	}
 
-	public List getPages(String nodeId, int begin, int end)
+	public List getPages(long nodeId, int begin, int end)
 		throws SystemException {
 
 		return WikiPageUtil.findByNodeId(
 			nodeId, begin, end, new PageCreateDateComparator(false));
 	}
 
-	public List getPages(String nodeId, String title, int begin, int end)
+	public List getPages(long nodeId, String title, int begin, int end)
 		throws SystemException {
 
 		return WikiPageUtil.findByN_T(
 			nodeId, title, begin, end, new PageCreateDateComparator(false));
 	}
 
-	public List getPages(String nodeId, boolean head, int begin, int end)
+	public List getPages(long nodeId, boolean head, int begin, int end)
 		throws SystemException {
 
 		return WikiPageUtil.findByN_H(
@@ -335,7 +335,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public List getPages(
-			String nodeId, String title, boolean head, int begin, int end)
+			long nodeId, String title, boolean head, int begin, int end)
 		throws SystemException {
 
 		return WikiPageUtil.findByN_T_H(
@@ -343,29 +343,29 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			new PageCreateDateComparator(false));
 	}
 
-	public int getPagesCount(String nodeId) throws SystemException {
+	public int getPagesCount(long nodeId) throws SystemException {
 		return WikiPageUtil.countByNodeId(nodeId);
 	}
 
-	public int getPagesCount(String nodeId, String title)
+	public int getPagesCount(long nodeId, String title)
 		throws SystemException {
 
 		return WikiPageUtil.countByN_T(nodeId, title);
 	}
 
-	public int getPagesCount(String nodeId, boolean head)
+	public int getPagesCount(long nodeId, boolean head)
 		throws SystemException {
 
 		return WikiPageUtil.countByN_H(nodeId, head);
 	}
 
-	public int getPagesCount(String nodeId, String title, boolean head)
+	public int getPagesCount(long nodeId, String title, boolean head)
 		throws SystemException {
 
 		return WikiPageUtil.countByN_T_H(nodeId, title, head);
 	}
 
-	public List getRecentChanges(String nodeId, int begin, int end)
+	public List getRecentChanges(long nodeId, int begin, int end)
 		throws SystemException {
 
 		Calendar cal = new GregorianCalendar();
@@ -376,7 +376,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			nodeId, cal.getTime(), false, begin, end);
 	}
 
-	public int getRecentChangesCount(String nodeId) throws SystemException {
+	public int getRecentChangesCount(long nodeId) throws SystemException {
 		Calendar cal = new GregorianCalendar();
 
 		cal.add(Calendar.WEEK_OF_YEAR, -1);
@@ -385,7 +385,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public WikiPage revertPage(
-			long userId, String nodeId, String title, double version)
+			long userId, long nodeId, String title, double version)
 		throws PortalException, SystemException {
 
 		WikiPage oldPage = getPage(nodeId, title, version);
@@ -396,7 +396,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public WikiPage updatePage(
-			long userId, String nodeId, String title, String content,
+			long userId, long nodeId, String title, String content,
 			String format, String[] tagsEntries)
 		throws PortalException, SystemException {
 
@@ -472,7 +472,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validate(String nodeId, String content, String format)
+	protected void validate(long nodeId, String content, String format)
 		throws PortalException {
 
 		if (format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT)) {

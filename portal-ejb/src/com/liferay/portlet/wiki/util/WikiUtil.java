@@ -56,11 +56,11 @@ public class WikiUtil {
 		return _instance._convert(filter, content);
 	}
 
-	public static NodeFilter getFilter(String nodeId) {
+	public static NodeFilter getFilter(long nodeId) {
 		return _instance._getFilter(null, nodeId);
 	}
 
-	public static NodeFilter getFilter(PortletURL portletURL, String nodeId) {
+	public static NodeFilter getFilter(PortletURL portletURL, long nodeId) {
 		return _instance._getFilter(portletURL, nodeId);
 	}
 
@@ -116,7 +116,8 @@ public class WikiUtil {
 		PortletURLImpl portletURL = (PortletURLImpl)filter.getPortletURL();
 
 		if (portletURL != null) {
-			portletURL.setParameter("nodeId", filter.getNodeId());
+			portletURL.setParameter(
+				"nodeId", String.valueOf(filter.getNodeId()));
 
 			Iterator itr = filter.getTitles().keySet().iterator();
 
@@ -137,7 +138,7 @@ public class WikiUtil {
 		return newContent;
 	}
 
-	private NodeFilter _getFilter(PortletURL portletURL, String nodeId) {
+	private NodeFilter _getFilter(PortletURL portletURL, long nodeId) {
 		MapStringRepository context = new MapStringRepository();
 		NodeRepository nodeRepository = new NodeRepository(nodeId);
 		PageRepository pageRepository = new PageRepository(nodeRepository);

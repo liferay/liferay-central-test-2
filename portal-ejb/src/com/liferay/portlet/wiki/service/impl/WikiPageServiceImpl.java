@@ -41,7 +41,7 @@ import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
 public class WikiPageServiceImpl
 	extends PrincipalBean implements WikiPageService {
 
-	public WikiPage addPage(String nodeId, String title)
+	public WikiPage addPage(long nodeId, String title)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
@@ -50,7 +50,7 @@ public class WikiPageServiceImpl
 		return WikiPageLocalServiceUtil.addPage(getUserId(), nodeId, title);
 	}
 
-	public void deletePage(String nodeId, String title)
+	public void deletePage(long nodeId, String title)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
@@ -59,7 +59,7 @@ public class WikiPageServiceImpl
 		WikiPageLocalServiceUtil.deletePage(nodeId, title);
 	}
 
-	public WikiPage getPage(String nodeId, String title)
+	public WikiPage getPage(long nodeId, String title)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
@@ -68,7 +68,7 @@ public class WikiPageServiceImpl
 		return WikiPageLocalServiceUtil.getPage(nodeId, title);
 	}
 
-	public WikiPage getPage(String nodeId, String title, double version)
+	public WikiPage getPage(long nodeId, String title, double version)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
@@ -77,7 +77,7 @@ public class WikiPageServiceImpl
 		return WikiPageLocalServiceUtil.getPage(nodeId, title, version);
 	}
 
-	public WikiPage revertPage(String nodeId, String title, double version)
+	public WikiPage revertPage(long nodeId, String title, double version)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
@@ -88,7 +88,7 @@ public class WikiPageServiceImpl
 	}
 
 	public WikiPage updatePage(
-			String nodeId, String title, String content, String format,
+			long nodeId, String title, String content, String format,
 			String[] tagsEntries)
 		throws PortalException, SystemException {
 

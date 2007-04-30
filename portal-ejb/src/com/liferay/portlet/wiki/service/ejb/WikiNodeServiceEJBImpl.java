@@ -78,15 +78,14 @@ public class WikiNodeServiceEJBImpl implements WikiNodeService, SessionBean {
 			description, communityPermissions, guestPermissions);
 	}
 
-	public void deleteNode(java.lang.String nodeId)
+	public void deleteNode(long nodeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		WikiNodeServiceFactory.getTxImpl().deleteNode(nodeId);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode getNode(
-		java.lang.String nodeId)
+	public com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -94,9 +93,8 @@ public class WikiNodeServiceEJBImpl implements WikiNodeService, SessionBean {
 		return WikiNodeServiceFactory.getTxImpl().getNode(nodeId);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode updateNode(
-		java.lang.String nodeId, java.lang.String name,
-		java.lang.String description)
+	public com.liferay.portlet.wiki.model.WikiNode updateNode(long nodeId,
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

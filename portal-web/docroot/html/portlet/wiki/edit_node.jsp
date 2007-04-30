@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
-String nodeId = BeanParamUtil.getString(node, request, "nodeId");
+long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 %>
 
 <script type="text/javascript">

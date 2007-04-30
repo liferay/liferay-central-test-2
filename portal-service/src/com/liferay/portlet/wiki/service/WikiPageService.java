@@ -49,34 +49,33 @@ package com.liferay.portlet.wiki.service;
  *
  */
 public interface WikiPageService {
-	public com.liferay.portlet.wiki.model.WikiPage addPage(
-		java.lang.String nodeId, java.lang.String title)
+	public com.liferay.portlet.wiki.model.WikiPage addPage(long nodeId,
+		java.lang.String title)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deletePage(java.lang.String nodeId, java.lang.String title)
+	public void deletePage(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portlet.wiki.model.WikiPage getPage(
-		java.lang.String nodeId, java.lang.String title)
+	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
+		java.lang.String title)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portlet.wiki.model.WikiPage getPage(
-		java.lang.String nodeId, java.lang.String title, double version)
+	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
+		java.lang.String title, double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portlet.wiki.model.WikiPage revertPage(
-		java.lang.String nodeId, java.lang.String title, double version)
+	public com.liferay.portlet.wiki.model.WikiPage revertPage(long nodeId,
+		java.lang.String title, double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portlet.wiki.model.WikiPage updatePage(
-		java.lang.String nodeId, java.lang.String title,
-		java.lang.String content, java.lang.String format,
-		java.lang.String[] tagsEntries)
+	public com.liferay.portlet.wiki.model.WikiPage updatePage(long nodeId,
+		java.lang.String title, java.lang.String content,
+		java.lang.String format, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

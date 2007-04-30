@@ -38,7 +38,7 @@ import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 public class WikiNodePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String nodeId, String actionId)
+			PermissionChecker permissionChecker, long nodeId, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, nodeId, actionId)) {
@@ -56,7 +56,7 @@ public class WikiNodePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String nodeId, String actionId)
+			PermissionChecker permissionChecker, long nodeId, String actionId)
 		throws PortalException, SystemException {
 
 		WikiNode node = WikiNodeLocalServiceUtil.getNode(nodeId);
@@ -69,8 +69,8 @@ public class WikiNodePermission {
 		throws PortalException, SystemException {
 
 		return permissionChecker.hasPermission(
-			node.getGroupId(), WikiNode.class.getName(),
-			node.getPrimaryKey().toString(), actionId);
+			node.getGroupId(), WikiNode.class.getName(), node.getPrimaryKey(),
+			actionId);
 	}
 
 }

@@ -373,4 +373,7 @@ alter_column_type Users_Permissions permissionId LONG;
 alter_column_type Website websiteId LONG;
 alter_column_type Website typeId INTEGER;
 
+alter_column_type WikiNode nodeId LONG;
 alter_column_type WikiNode groupId LONG;
+
+alter_column_type WikiPage nodeId LONG;

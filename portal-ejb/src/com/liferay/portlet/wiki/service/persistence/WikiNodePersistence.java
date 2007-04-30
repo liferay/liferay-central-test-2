@@ -53,7 +53,7 @@ import java.util.List;
  *
  */
 public class WikiNodePersistence extends BasePersistence {
-	public WikiNode create(String nodeId) {
+	public WikiNode create(long nodeId) {
 		WikiNode wikiNode = new WikiNodeImpl();
 		wikiNode.setNew(true);
 		wikiNode.setPrimaryKey(nodeId);
@@ -61,14 +61,15 @@ public class WikiNodePersistence extends BasePersistence {
 		return wikiNode;
 	}
 
-	public WikiNode remove(String nodeId)
+	public WikiNode remove(long nodeId)
 		throws NoSuchNodeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			WikiNode wikiNode = (WikiNode)session.get(WikiNodeImpl.class, nodeId);
+			WikiNode wikiNode = (WikiNode)session.get(WikiNodeImpl.class,
+					new Long(nodeId));
 
 			if (wikiNode == null) {
 				if (_log.isWarnEnabled()) {
@@ -147,7 +148,7 @@ public class WikiNodePersistence extends BasePersistence {
 		}
 	}
 
-	public WikiNode findByPrimaryKey(String nodeId)
+	public WikiNode findByPrimaryKey(long nodeId)
 		throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = fetchByPrimaryKey(nodeId);
 
@@ -163,13 +164,13 @@ public class WikiNodePersistence extends BasePersistence {
 		return wikiNode;
 	}
 
-	public WikiNode fetchByPrimaryKey(String nodeId) throws SystemException {
+	public WikiNode fetchByPrimaryKey(long nodeId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (WikiNode)session.get(WikiNodeImpl.class, nodeId);
+			return (WikiNode)session.get(WikiNodeImpl.class, new Long(nodeId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -287,7 +288,7 @@ public class WikiNodePersistence extends BasePersistence {
 		}
 	}
 
-	public WikiNode[] findByGroupId_PrevAndNext(String nodeId, long groupId,
+	public WikiNode[] findByGroupId_PrevAndNext(long nodeId, long groupId,
 		OrderByComparator obc) throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = findByPrimaryKey(nodeId);
 		int count = countByGroupId(groupId);
@@ -440,9 +441,8 @@ public class WikiNodePersistence extends BasePersistence {
 		}
 	}
 
-	public WikiNode[] findByCompanyId_PrevAndNext(String nodeId,
-		long companyId, OrderByComparator obc)
-		throws NoSuchNodeException, SystemException {
+	public WikiNode[] findByCompanyId_PrevAndNext(long nodeId, long companyId,
+		OrderByComparator obc) throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = findByPrimaryKey(nodeId);
 		int count = countByCompanyId(companyId);
 		Session session = null;

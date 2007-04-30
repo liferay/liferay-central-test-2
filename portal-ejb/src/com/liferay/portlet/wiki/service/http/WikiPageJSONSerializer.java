@@ -53,14 +53,7 @@ import java.util.List;
 public class WikiPageJSONSerializer {
 	public static JSONObject toJSONObject(WikiPage model) {
 		JSONObject jsonObj = new JSONObject();
-		String nodeId = model.getNodeId();
-
-		if (nodeId == null) {
-			jsonObj.put("nodeId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("nodeId", nodeId.toString());
-		}
+		jsonObj.put("nodeId", model.getNodeId());
 
 		String title = model.getTitle();
 

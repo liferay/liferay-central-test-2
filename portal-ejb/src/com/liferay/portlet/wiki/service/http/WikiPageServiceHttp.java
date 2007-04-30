@@ -25,6 +25,7 @@ package com.liferay.portlet.wiki.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.DoubleWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -71,17 +72,11 @@ import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
  */
 public class WikiPageServiceHttp {
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(
-		HttpPrincipal httpPrincipal, java.lang.String nodeId,
-		java.lang.String title)
+		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = nodeId;
-
-			if (nodeId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(nodeId);
 			Object paramObj1 = title;
 
 			if (title == null) {
@@ -115,17 +110,12 @@ public class WikiPageServiceHttp {
 		}
 	}
 
-	public static void deletePage(HttpPrincipal httpPrincipal,
-		java.lang.String nodeId, java.lang.String title)
+	public static void deletePage(HttpPrincipal httpPrincipal, long nodeId,
+		java.lang.String title)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = nodeId;
-
-			if (nodeId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(nodeId);
 			Object paramObj1 = title;
 
 			if (title == null) {
@@ -157,17 +147,11 @@ public class WikiPageServiceHttp {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(
-		HttpPrincipal httpPrincipal, java.lang.String nodeId,
-		java.lang.String title)
+		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = nodeId;
-
-			if (nodeId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(nodeId);
 			Object paramObj1 = title;
 
 			if (title == null) {
@@ -202,17 +186,12 @@ public class WikiPageServiceHttp {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(
-		HttpPrincipal httpPrincipal, java.lang.String nodeId,
-		java.lang.String title, double version)
+		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
+		double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = nodeId;
-
-			if (nodeId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(nodeId);
 			Object paramObj1 = title;
 
 			if (title == null) {
@@ -248,17 +227,12 @@ public class WikiPageServiceHttp {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
-		HttpPrincipal httpPrincipal, java.lang.String nodeId,
-		java.lang.String title, double version)
+		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
+		double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = nodeId;
-
-			if (nodeId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(nodeId);
 			Object paramObj1 = title;
 
 			if (title == null) {
@@ -295,18 +269,13 @@ public class WikiPageServiceHttp {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
-		HttpPrincipal httpPrincipal, java.lang.String nodeId,
-		java.lang.String title, java.lang.String content,
-		java.lang.String format, java.lang.String[] tagsEntries)
+		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
+		java.lang.String content, java.lang.String format,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = nodeId;
-
-			if (nodeId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(nodeId);
 			Object paramObj1 = title;
 
 			if (title == null) {

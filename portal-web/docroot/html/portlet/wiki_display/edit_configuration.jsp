@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/wiki_display/init.jsp" %>
 
 <%
-nodeId = ParamUtil.getString(request, "nodeId", nodeId);
+nodeId = ParamUtil.getLong(request, "nodeId", nodeId);
 
 List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 %>
@@ -49,7 +49,7 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 				WikiNode node = (WikiNode)nodes.get(i);
 			%>
 
-				<option <%= nodeId.equals(node.getNodeId()) ? "selected" : "" %> value="<%= node.getNodeId() %>"><%= node.getName() %></option>
+				<option <%= (nodeId == node.getNodeId()) ? "selected" : "" %> value="<%= node.getNodeId() %>"><%= node.getName() %></option>
 
 			<%
 			}

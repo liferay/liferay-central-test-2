@@ -55,14 +55,14 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	WikiNode node = (WikiNode)results.get(i);
 
-	ResultRow row = new ResultRow(node, node.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(node, node.getPrimaryKey(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/wiki/view_page");
-	rowURL.setParameter("nodeId", node.getNodeId());
+	rowURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 	rowURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
 
 	// Name

@@ -32,13 +32,13 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td>
-		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki_display/view" /><portlet:param name="nodeId" value="<%= node.getNodeId() %>" /><portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" /></portlet:renderURL>">
+		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki_display/view" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" /></portlet:renderURL>">
 		<%= node.getName() %>
 		</a>
 
 		&raquo;
 
-		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki_display/view" /><portlet:param name="nodeId" value="<%= node.getNodeId() %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /></portlet:renderURL>">
+		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki_display/view" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /></portlet:renderURL>">
 		<%= wikiPage.getTitle() %>
 		</a>
 	</td>
@@ -62,7 +62,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 	portletURL.setParameter("struts_action", "/wiki_display/edit_page");
 	portletURL.setParameter("redirect", currentURL);
-	portletURL.setParameter("nodeId", node.getNodeId());
+	portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 	portletURL.setParameter("title", wikiPage.getTitle());
 	%>
 

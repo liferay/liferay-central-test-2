@@ -47,13 +47,13 @@ import java.util.Date;
  *
  */
 public interface WikiNodeModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getNodeId();
+	public long getNodeId();
 
-	public void setNodeId(String nodeId);
+	public void setNodeId(long nodeId);
 
 	public long getGroupId();
 

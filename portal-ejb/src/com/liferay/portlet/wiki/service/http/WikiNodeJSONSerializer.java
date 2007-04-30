@@ -53,15 +53,7 @@ import java.util.List;
 public class WikiNodeJSONSerializer {
 	public static JSONObject toJSONObject(WikiNode model) {
 		JSONObject jsonObj = new JSONObject();
-		String nodeId = model.getNodeId();
-
-		if (nodeId == null) {
-			jsonObj.put("nodeId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("nodeId", nodeId.toString());
-		}
-
+		jsonObj.put("nodeId", model.getNodeId());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());

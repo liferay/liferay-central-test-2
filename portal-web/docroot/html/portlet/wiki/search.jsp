@@ -28,12 +28,12 @@
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = null;
 
-String nodeId = BeanParamUtil.getString(node, request, "nodeId");
+long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 
-String[] nodeIds = null;
+long[] nodeIds = null;
 
 if (node != null) {
-	nodeIds = new String[] {nodeId};
+	nodeIds = new long[] {nodeId};
 }
 
 String keywords = ParamUtil.getString(request, "keywords");
@@ -46,7 +46,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 &raquo;
 
-<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/search" /><portlet:param name="nodeId" value="<%= nodeId %>" /><portlet:param name="keywords" value="<%= keywords %>" /></portlet:renderURL>">
+<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/search" /><portlet:param name="nodeId" value="<%= String.valueOf(nodeId) %>" /><portlet:param name="keywords" value="<%= keywords %>" /></portlet:renderURL>">
 <%= LanguageUtil.get(pageContext, "search") %>
 </a>
 
@@ -58,7 +58,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/wiki/search");
-portletURL.setParameter("nodeId", nodeId);
+portletURL.setParameter("nodeId", String.valueOf(nodeId));
 portletURL.setParameter("keywords", keywords);
 
 List headerNames = new ArrayList();
@@ -100,7 +100,7 @@ for (int i = 0; i < results.getLength(); i++) {
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/wiki/view_page");
-	rowURL.setParameter("nodeId", curNodeId);
+	rowURL.setParameter("nodeId", String.valueOf(curNodeId));
 	rowURL.setParameter("title", title);
 
 	row.addText(curNode.getName(), rowURL);

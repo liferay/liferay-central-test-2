@@ -40,7 +40,7 @@ import org.stringtree.util.tract.Tract;
  */
 public class NodeRepository extends BasicDriver {
 
-	public NodeRepository(String nodeId) {
+	public NodeRepository(long nodeId) {
 		_nodeId = nodeId;
 		_names = new HashMap();
 	}
@@ -92,7 +92,7 @@ public class NodeRepository extends BasicDriver {
 		return _names;
 	}
 
-	private String _nodeId;
+	private long _nodeId;
 	private Map _names;
 
 }

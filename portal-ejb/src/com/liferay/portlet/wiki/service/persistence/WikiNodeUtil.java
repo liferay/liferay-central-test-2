@@ -38,13 +38,11 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class WikiNodeUtil {
-	public static com.liferay.portlet.wiki.model.WikiNode create(
-		java.lang.String nodeId) {
+	public static com.liferay.portlet.wiki.model.WikiNode create(long nodeId) {
 		return getPersistence().create(nodeId);
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiNode remove(
-		java.lang.String nodeId)
+	public static com.liferay.portlet.wiki.model.WikiNode remove(long nodeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchNodeException {
 		ModelListener listener = _getListener();
@@ -140,14 +138,14 @@ public class WikiNodeUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode findByPrimaryKey(
-		java.lang.String nodeId)
+		long nodeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchNodeException {
 		return getPersistence().findByPrimaryKey(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode fetchByPrimaryKey(
-		java.lang.String nodeId) throws com.liferay.portal.SystemException {
+		long nodeId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(nodeId);
 	}
 
@@ -182,7 +180,7 @@ public class WikiNodeUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode[] findByGroupId_PrevAndNext(
-		java.lang.String nodeId, long groupId,
+		long nodeId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchNodeException {
@@ -220,7 +218,7 @@ public class WikiNodeUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode[] findByCompanyId_PrevAndNext(
-		java.lang.String nodeId, long companyId,
+		long nodeId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchNodeException {

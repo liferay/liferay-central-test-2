@@ -68,8 +68,7 @@ import org.json.JSONObject;
  *
  */
 public class WikiPageServiceJSON {
-	public static JSONObject addPage(java.lang.String nodeId,
-		java.lang.String title)
+	public static JSONObject addPage(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.addPage(nodeId,
@@ -78,15 +77,13 @@ public class WikiPageServiceJSON {
 		return WikiPageJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deletePage(java.lang.String nodeId,
-		java.lang.String title)
+	public static void deletePage(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		WikiPageServiceUtil.deletePage(nodeId, title);
 	}
 
-	public static JSONObject getPage(java.lang.String nodeId,
-		java.lang.String title)
+	public static JSONObject getPage(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.getPage(nodeId,
@@ -95,8 +92,8 @@ public class WikiPageServiceJSON {
 		return WikiPageJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject getPage(java.lang.String nodeId,
-		java.lang.String title, double version)
+	public static JSONObject getPage(long nodeId, java.lang.String title,
+		double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.getPage(nodeId,
@@ -105,8 +102,8 @@ public class WikiPageServiceJSON {
 		return WikiPageJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject revertPage(java.lang.String nodeId,
-		java.lang.String title, double version)
+	public static JSONObject revertPage(long nodeId, java.lang.String title,
+		double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.revertPage(nodeId,
@@ -115,9 +112,9 @@ public class WikiPageServiceJSON {
 		return WikiPageJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updatePage(java.lang.String nodeId,
-		java.lang.String title, java.lang.String content,
-		java.lang.String format, java.lang.String[] tagsEntries)
+	public static JSONObject updatePage(long nodeId, java.lang.String title,
+		java.lang.String content, java.lang.String format,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.updatePage(nodeId,

@@ -91,13 +91,13 @@ public class WikiNodeServiceJSON {
 		return WikiNodeJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteNode(java.lang.String nodeId)
+	public static void deleteNode(long nodeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		WikiNodeServiceUtil.deleteNode(nodeId);
 	}
 
-	public static JSONObject getNode(java.lang.String nodeId)
+	public static JSONObject getNode(long nodeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.getNode(nodeId);
@@ -105,8 +105,8 @@ public class WikiNodeServiceJSON {
 		return WikiNodeJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateNode(java.lang.String nodeId,
-		java.lang.String name, java.lang.String description)
+	public static JSONObject updateNode(long nodeId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.updateNode(nodeId,

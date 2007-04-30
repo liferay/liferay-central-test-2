@@ -30,7 +30,6 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -58,11 +57,11 @@ public class ActionUtil {
 	}
 
 	public static void getNode(HttpServletRequest req) throws Exception {
-		String nodeId = ParamUtil.getString(req, "nodeId");
+		long nodeId = ParamUtil.getLong(req, "nodeId");
 
 		WikiNode node = null;
 
-		if (Validator.isNotNull(nodeId)) {
+		if (nodeId > 0) {
 			node = WikiNodeServiceUtil.getNode(nodeId);
 		}
 
@@ -82,7 +81,7 @@ public class ActionUtil {
 	}
 
 	public static void getPage(HttpServletRequest req) throws Exception {
-		String nodeId = ParamUtil.getString(req, "nodeId");
+		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
 		double version = ParamUtil.getDouble(req, "version");
 

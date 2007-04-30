@@ -1176,7 +1176,7 @@ create table Website (
 );
 
 create table WikiNode (
-	nodeId VARCHAR(75) not null primary key,
+	nodeId LONG primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -1189,7 +1189,7 @@ create table WikiNode (
 );
 
 create table WikiPage (
-	nodeId VARCHAR(75) not null,
+	nodeId LONG,
 	title VARCHAR(75) not null,
 	version DOUBLE,
 	companyId LONG,

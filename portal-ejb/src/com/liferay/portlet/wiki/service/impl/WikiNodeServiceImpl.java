@@ -71,7 +71,7 @@ public class WikiNodeServiceImpl
 			guestPermissions);
 	}
 
-	public void deleteNode(String nodeId)
+	public void deleteNode(long nodeId)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
@@ -80,7 +80,7 @@ public class WikiNodeServiceImpl
 		WikiNodeLocalServiceUtil.deleteNode(nodeId);
 	}
 
-	public WikiNode getNode(String nodeId)
+	public WikiNode getNode(long nodeId)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
@@ -89,7 +89,7 @@ public class WikiNodeServiceImpl
 		return WikiNodeLocalServiceUtil.getNode(nodeId);
 	}
 
-	public WikiNode updateNode(String nodeId, String name, String description)
+	public WikiNode updateNode(long nodeId, String name, String description)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(

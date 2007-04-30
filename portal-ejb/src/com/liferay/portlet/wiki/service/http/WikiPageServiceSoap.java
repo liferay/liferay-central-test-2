@@ -79,8 +79,7 @@ import java.rmi.RemoteException;
  */
 public class WikiPageServiceSoap {
 	public static com.liferay.portlet.wiki.model.WikiPageSoap addPage(
-		java.lang.String nodeId, java.lang.String title)
-		throws RemoteException {
+		long nodeId, java.lang.String title) throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.addPage(nodeId,
 					title);
@@ -93,8 +92,8 @@ public class WikiPageServiceSoap {
 		}
 	}
 
-	public static void deletePage(java.lang.String nodeId,
-		java.lang.String title) throws RemoteException {
+	public static void deletePage(long nodeId, java.lang.String title)
+		throws RemoteException {
 		try {
 			WikiPageServiceUtil.deletePage(nodeId, title);
 		}
@@ -105,8 +104,7 @@ public class WikiPageServiceSoap {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageSoap getPage(
-		java.lang.String nodeId, java.lang.String title)
-		throws RemoteException {
+		long nodeId, java.lang.String title) throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.getPage(nodeId,
 					title);
@@ -120,7 +118,7 @@ public class WikiPageServiceSoap {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageSoap getPage(
-		java.lang.String nodeId, java.lang.String title, double version)
+		long nodeId, java.lang.String title, double version)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.getPage(nodeId,
@@ -135,7 +133,7 @@ public class WikiPageServiceSoap {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageSoap revertPage(
-		java.lang.String nodeId, java.lang.String title, double version)
+		long nodeId, java.lang.String title, double version)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.revertPage(nodeId,
@@ -150,9 +148,9 @@ public class WikiPageServiceSoap {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageSoap updatePage(
-		java.lang.String nodeId, java.lang.String title,
-		java.lang.String content, java.lang.String format,
-		java.lang.String[] tagsEntries) throws RemoteException {
+		long nodeId, java.lang.String title, java.lang.String content,
+		java.lang.String format, java.lang.String[] tagsEntries)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.updatePage(nodeId,
 					title, content, format, tagsEntries);

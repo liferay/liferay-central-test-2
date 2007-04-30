@@ -67,16 +67,15 @@ public class WikiPageLocalServiceEJBImpl implements WikiPageLocalService,
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
-		java.lang.String nodeId, java.lang.String title)
+		long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().addPage(userId, nodeId,
 			title);
 	}
 
-	public void addPageResources(java.lang.String nodeId,
-		java.lang.String title, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public void addPageResources(long nodeId, java.lang.String title,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiPageLocalServiceFactory.getTxImpl().addPageResources(nodeId, title,
@@ -92,8 +91,8 @@ public class WikiPageLocalServiceEJBImpl implements WikiPageLocalService,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addPageResources(java.lang.String nodeId,
-		java.lang.String title, java.lang.String[] communityPermissions,
+	public void addPageResources(long nodeId, java.lang.String title,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -111,7 +110,7 @@ public class WikiPageLocalServiceEJBImpl implements WikiPageLocalService,
 			communityPermissions, guestPermissions);
 	}
 
-	public void deletePage(java.lang.String nodeId, java.lang.String title)
+	public void deletePage(long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiPageLocalServiceFactory.getTxImpl().deletePage(nodeId, title);
@@ -123,99 +122,98 @@ public class WikiPageLocalServiceEJBImpl implements WikiPageLocalService,
 		WikiPageLocalServiceFactory.getTxImpl().deletePage(page);
 	}
 
-	public void deletePages(java.lang.String nodeId)
+	public void deletePages(long nodeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiPageLocalServiceFactory.getTxImpl().deletePages(nodeId);
 	}
 
-	public java.util.List getLinks(java.lang.String nodeId,
-		java.lang.String title) throws com.liferay.portal.SystemException {
+	public java.util.List getLinks(long nodeId, java.lang.String title)
+		throws com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getLinks(nodeId, title);
 	}
 
-	public java.util.List getOrphans(java.lang.String nodeId)
+	public java.util.List getOrphans(long nodeId)
 		throws com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getOrphans(nodeId);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage getPage(
-		java.lang.String nodeId, java.lang.String title)
+	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
+		java.lang.String title)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getPage(nodeId, title);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage getPage(
-		java.lang.String nodeId, java.lang.String title, double version)
+	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
+		java.lang.String title, double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getPage(nodeId, title,
 			version);
 	}
 
-	public java.util.List getPages(java.lang.String nodeId, int begin, int end)
+	public java.util.List getPages(long nodeId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getPages(nodeId, begin,
 			end);
 	}
 
-	public java.util.List getPages(java.lang.String nodeId,
-		java.lang.String title, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public java.util.List getPages(long nodeId, java.lang.String title,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getPages(nodeId, title,
 			begin, end);
 	}
 
-	public java.util.List getPages(java.lang.String nodeId, boolean head,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public java.util.List getPages(long nodeId, boolean head, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getPages(nodeId, head,
 			begin, end);
 	}
 
-	public java.util.List getPages(java.lang.String nodeId,
-		java.lang.String title, boolean head, int begin, int end)
+	public java.util.List getPages(long nodeId, java.lang.String title,
+		boolean head, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getPages(nodeId, title,
 			head, begin, end);
 	}
 
-	public int getPagesCount(java.lang.String nodeId)
+	public int getPagesCount(long nodeId)
 		throws com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getPagesCount(nodeId);
 	}
 
-	public int getPagesCount(java.lang.String nodeId, java.lang.String title)
+	public int getPagesCount(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getPagesCount(nodeId,
 			title);
 	}
 
-	public int getPagesCount(java.lang.String nodeId, boolean head)
+	public int getPagesCount(long nodeId, boolean head)
 		throws com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getPagesCount(nodeId,
 			head);
 	}
 
-	public int getPagesCount(java.lang.String nodeId, java.lang.String title,
-		boolean head) throws com.liferay.portal.SystemException {
+	public int getPagesCount(long nodeId, java.lang.String title, boolean head)
+		throws com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getPagesCount(nodeId,
 			title, head);
 	}
 
-	public java.util.List getRecentChanges(java.lang.String nodeId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public java.util.List getRecentChanges(long nodeId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getRecentChanges(nodeId,
 			begin, end);
 	}
 
-	public int getRecentChangesCount(java.lang.String nodeId)
+	public int getRecentChangesCount(long nodeId)
 		throws com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().getRecentChangesCount(nodeId);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long userId,
-		java.lang.String nodeId, java.lang.String title, double version)
+		long nodeId, java.lang.String title, double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().revertPage(userId,
@@ -223,9 +221,8 @@ public class WikiPageLocalServiceEJBImpl implements WikiPageLocalService,
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(long userId,
-		java.lang.String nodeId, java.lang.String title,
-		java.lang.String content, java.lang.String format,
-		java.lang.String[] tagsEntries)
+		long nodeId, java.lang.String title, java.lang.String content,
+		java.lang.String format, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return WikiPageLocalServiceFactory.getTxImpl().updatePage(userId,

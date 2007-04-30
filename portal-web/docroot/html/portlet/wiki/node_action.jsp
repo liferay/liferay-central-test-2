@@ -34,7 +34,7 @@ WikiNode node = (WikiNode)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/wiki/edit_node" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="nodeId" value="<%= node.getNodeId() %>" />
+		<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -44,7 +44,7 @@ WikiNode node = (WikiNode)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= WikiNode.class.getName() %>"
 		modelResourceDescription="<%= node.getName() %>"
-		resourcePrimKey="<%= node.getPrimaryKey().toString() %>"
+		resourcePrimKey="<%= String.valueOf(node.getPrimaryKey()) %>"
 		var="permissionsURL"
 	/>
 
@@ -56,7 +56,7 @@ WikiNode node = (WikiNode)row.getObject();
 		<portlet:param name="struts_action" value="/wiki/edit_node" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="nodeId" value="<%= node.getNodeId() %>" />
+		<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />

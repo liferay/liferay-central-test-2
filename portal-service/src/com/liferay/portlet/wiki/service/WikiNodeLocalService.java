@@ -81,8 +81,8 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addNodeResources(java.lang.String nodeId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+	public void addNodeResources(long nodeId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -91,7 +91,7 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addNodeResources(java.lang.String nodeId,
+	public void addNodeResources(long nodeId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -103,7 +103,7 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteNode(java.lang.String nodeId)
+	public void deleteNode(long nodeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -115,8 +115,7 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.wiki.model.WikiNode getNode(
-		java.lang.String nodeId)
+	public com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -133,12 +132,11 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String[] nodeIds, java.lang.String keywords)
+		long groupId, long[] nodeIds, java.lang.String keywords)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.wiki.model.WikiNode updateNode(
-		java.lang.String nodeId, java.lang.String name,
-		java.lang.String description)
+	public com.liferay.portlet.wiki.model.WikiNode updateNode(long nodeId,
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

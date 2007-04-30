@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -104,8 +105,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		validate(name);
 
-		String nodeId = String.valueOf(CounterLocalServiceUtil.increment(
-			WikiNode.class.getName()));
+		long nodeId = CounterLocalServiceUtil.increment(
+			Counter.class.getName());
 
 		WikiNode node = WikiNodeUtil.create(nodeId);
 
@@ -137,7 +138,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	}
 
 	public void addNodeResources(
-			String nodeId, boolean addCommunityPermissions,
+			long nodeId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -153,12 +154,12 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			node.getCompanyId(), node.getGroupId(),	node.getUserId(),
-			WikiNode.class.getName(), node.getPrimaryKey().toString(), false,
+			WikiNode.class.getName(), node.getPrimaryKey(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addNodeResources(
-			String nodeId, String[] communityPermissions,
+			long nodeId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -174,11 +175,11 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addModelResources(
 			node.getCompanyId(), node.getGroupId(),	node.getUserId(),
-			WikiNode.class.getName(), node.getPrimaryKey().toString(),
+			WikiNode.class.getName(), node.getPrimaryKey(),
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteNode(String nodeId)
+	public void deleteNode(long nodeId)
 		throws PortalException, SystemException {
 
 		WikiNode node = WikiNodeUtil.findByPrimaryKey(nodeId);
@@ -209,7 +210,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			node.getCompanyId(), WikiNode.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, node.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, node.getPrimaryKey());
 
 		// Node
 
@@ -228,7 +229,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		}
 	}
 
-	public WikiNode getNode(String nodeId)
+	public WikiNode getNode(long nodeId)
 		throws PortalException, SystemException {
 
 		return WikiNodeUtil.findByPrimaryKey(nodeId);
@@ -257,7 +258,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			while (itr1.hasNext()) {
 				WikiNode node = (WikiNode)itr1.next();
 
-				String nodeId = node.getNodeId();
+				long nodeId = node.getNodeId();
 
 				Iterator itr2 = WikiPageUtil.findByNodeId(nodeId).iterator();
 
@@ -287,7 +288,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long groupId, String[] nodeIds, String keywords)
+			long companyId, long groupId, long[] nodeIds, String keywords)
 		throws SystemException {
 
 		try {
@@ -311,7 +312,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 				BooleanQuery nodeIdsQuery = new BooleanQuery();
 
 				for (int i = 0; i < nodeIds.length; i++) {
-					Term term = new Term("nodeId", nodeIds[i]);
+					Term term = new Term("nodeId", String.valueOf(nodeIds[i]));
 					TermQuery termQuery = new TermQuery(term);
 
 					nodeIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
@@ -345,7 +346,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		}
 	}
 
-	public WikiNode updateNode(String nodeId, String name, String description)
+	public WikiNode updateNode(long nodeId, String name, String description)
 		throws PortalException, SystemException {
 
 		validate(name);
