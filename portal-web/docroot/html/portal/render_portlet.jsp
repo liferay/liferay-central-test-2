@@ -326,7 +326,7 @@ if (portlet.isActive() && access) {
 PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletDisplay.getId(), true, true);
 %>
 
-<%@ include file="/html/portal/render_portlet-ext.jspf" %>
+<%@ include file="/html/portal/render_portlet-ext.jsp" %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() %>">
 
