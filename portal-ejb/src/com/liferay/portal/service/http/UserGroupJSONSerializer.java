@@ -51,15 +51,7 @@ import java.util.List;
 public class UserGroupJSONSerializer {
 	public static JSONObject toJSONObject(UserGroup model) {
 		JSONObject jsonObj = new JSONObject();
-		String userGroupId = model.getUserGroupId();
-
-		if (userGroupId == null) {
-			jsonObj.put("userGroupId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userGroupId", userGroupId.toString());
-		}
-
+		jsonObj.put("userGroupId", model.getUserGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 
 		String parentUserGroupId = model.getParentUserGroupId();

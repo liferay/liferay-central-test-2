@@ -46,7 +46,7 @@ public class UserSearchTerms extends UserDisplayTerms {
 		active = ParamUtil.getBoolean(req, ACTIVE, true);
 		organizationId = DAOParamUtil.getString(req, ORGANIZATION_ID);
 		roleId = DAOParamUtil.getString(req, ROLE_ID);
-		userGroupId = DAOParamUtil.getString(req, USER_GROUP_ID);
+		userGroupId = ParamUtil.getLong(req, USER_GROUP_ID);
 	}
 
 }

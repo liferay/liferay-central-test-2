@@ -188,7 +188,7 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Group getUserGroupGroup(
-		long companyId, java.lang.String userGroupId)
+		long companyId, long userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();

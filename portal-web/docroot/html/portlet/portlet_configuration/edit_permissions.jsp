@@ -671,7 +671,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 		<%
 		String userGroupIds = ParamUtil.getString(request, "userGroupIds");
-		String[] userGroupIdsArray = StringUtil.split(userGroupIds);
+		long[] userGroupIdsArray = StringUtil.split(userGroupIds, 0L);
 		int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
 		%>
 
@@ -736,7 +736,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				for (int i = 0; i < results.size(); i++) {
 					UserGroup userGroup = (UserGroup)results.get(i);
 
-					ResultRow row = new ResultRow(userGroup, userGroup.getPrimaryKey().toString(), i);
+					ResultRow row = new ResultRow(userGroup, userGroup.getPrimaryKey(), i);
 
 					// Name
 

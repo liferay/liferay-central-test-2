@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicateUserGroupException;
 import com.liferay.portal.NoSuchUserGroupException;
@@ -54,7 +55,7 @@ import java.util.List;
  */
 public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
-	public void addGroupUserGroups(long groupId, String[] userGroupIds)
+	public void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.addUserGroups(groupId, userGroupIds);
@@ -66,10 +67,10 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		// User Group
 
-		validate(null, companyId, name);
+		validate(0, companyId, name);
 
-		String userGroupId = String.valueOf(CounterLocalServiceUtil.increment(
-			UserGroup.class.getName()));
+		long userGroupId = CounterLocalServiceUtil.increment(
+			Counter.class.getName());
 
 		UserGroup userGroup = UserGroupUtil.create(userGroupId);
 
@@ -85,18 +86,19 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		GroupLocalServiceUtil.addGroup(
 			userId, UserGroup.class.getName(),
-			userGroup.getPrimaryKey().toString(), null, null, null, null, true);
+			String.valueOf(userGroup.getPrimaryKey()), null, null, null, null,
+			true);
 
 		// Resources
 
 		ResourceLocalServiceUtil.addResources(
 			companyId, 0, userId, UserGroup.class.getName(),
-			userGroup.getPrimaryKey().toString(), false, false, false);
+			userGroup.getPrimaryKey(), false, false, false);
 
 		return userGroup;
 	}
 
-	public void deleteUserGroup(String userGroupId)
+	public void deleteUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
 		UserGroup userGroup = UserGroupUtil.findByPrimaryKey(userGroupId);
@@ -115,15 +117,14 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			userGroup.getCompanyId(), UserGroup.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL,
-			userGroup.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, userGroup.getPrimaryKey());
 
 		// User Group
 
 		UserGroupUtil.remove(userGroupId);
 	}
 
-	public UserGroup getUserGroup(String userGroupId)
+	public UserGroup getUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
 		return UserGroupUtil.findByPrimaryKey(userGroupId);
@@ -141,7 +142,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return UserUtil.getUserGroups(userId);
 	}
 
-	public boolean hasGroupUserGroup(long groupId, String userGroupId)
+	public boolean hasGroupUserGroup(long groupId, long userGroupId)
 		throws PortalException, SystemException {
 
 		return GroupUtil.containsUserGroup(groupId, userGroupId);
@@ -165,14 +166,14 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			companyId, name, description, params);
 	}
 
-	public void unsetGroupUserGroups(long groupId, String[] userGroupIds)
+	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.removeUserGroups(groupId, userGroupIds);
 	}
 
 	public UserGroup updateUserGroup(
-			long companyId, String userGroupId, String name,
+			long companyId, long userGroupId, String name,
 			String description)
 		throws PortalException, SystemException {
 
@@ -188,7 +189,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return userGroup;
 	}
 
-	protected void validate(String userGroupId, long companyId, String name)
+	protected void validate(long userGroupId, long companyId, String name)
 		throws PortalException, SystemException {
 
 		if ((Validator.isNull(name)) || (Validator.isNumber(name)) ||
@@ -201,8 +202,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		try {
 			UserGroup userGroup = UserGroupFinder.findByC_N(companyId, name);
 
-			if ((userGroupId == null) ||
-				!userGroup.getUserGroupId().equals(userGroupId)) {
+			if ((userGroupId <= 0) ||
+				(userGroup.getUserGroupId() != userGroupId)) {
 
 				throw new DuplicateUserGroupException();
 			}

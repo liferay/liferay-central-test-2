@@ -84,7 +84,7 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		UserLocalServiceFactory.getTxImpl().addRoleUsers(roleId, userIds);
 	}
 
-	public void addUserGroupUsers(java.lang.String userGroupId, long[] userIds)
+	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().addUserGroupUsers(userGroupId,
@@ -295,7 +295,7 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		return UserLocalServiceFactory.getTxImpl().hasRoleUser(roleId, userId);
 	}
 
-	public boolean hasUserGroupUser(java.lang.String userGroupId, long userId)
+	public boolean hasUserGroupUser(long userGroupId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().hasUserGroupUser(userGroupId,
@@ -344,7 +344,7 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		UserLocalServiceFactory.getTxImpl().setRoleUsers(roleId, userIds);
 	}
 
-	public void setUserGroupUsers(java.lang.String userGroupId, long[] userIds)
+	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().setUserGroupUsers(userGroupId,
@@ -370,7 +370,7 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		UserLocalServiceFactory.getTxImpl().unsetRoleUsers(roleId, userIds);
 	}
 
-	public void unsetUserGroupUsers(java.lang.String userGroupId, long[] userIds)
+	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().unsetUserGroupUsers(userGroupId,

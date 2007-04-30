@@ -44,7 +44,7 @@ import java.util.List;
 public class UserGroupServiceImpl
 	extends PrincipalBean implements UserGroupService {
 
-	public void addGroupUserGroups(long groupId, String[] userGroupIds)
+	public void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -66,7 +66,7 @@ public class UserGroupServiceImpl
 			user.getUserId(), user.getCompanyId(), name, description);
 	}
 
-	public void deleteUserGroup(String userGroupId)
+	public void deleteUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(
@@ -75,7 +75,7 @@ public class UserGroupServiceImpl
 		UserGroupLocalServiceUtil.deleteUserGroup(userGroupId);
 	}
 
-	public UserGroup getUserGroup(String userGroupId)
+	public UserGroup getUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(
@@ -90,7 +90,7 @@ public class UserGroupServiceImpl
 		return UserGroupLocalServiceUtil.getUserUserGroups(userId);
 	}
 
-	public void unsetGroupUserGroups(long groupId, String[] userGroupIds)
+	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -101,7 +101,7 @@ public class UserGroupServiceImpl
 	}
 
 	public UserGroup updateUserGroup(
-			String userGroupId, String name, String description)
+			long userGroupId, String name, String description)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(

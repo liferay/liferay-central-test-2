@@ -1645,7 +1645,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsUserGroup(long pk, String userGroupPK)
+	public boolean containsUserGroup(long pk, long userGroupPK)
 		throws SystemException {
 		try {
 			return containsUserGroup.contains(pk, userGroupPK);
@@ -1664,7 +1664,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUserGroup(long pk, String userGroupPK)
+	public void addUserGroup(long pk, long userGroupPK)
 		throws NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserGroupException, SystemException {
 		try {
@@ -1687,7 +1687,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUserGroups(long pk, String[] userGroupPKs)
+	public void addUserGroups(long pk, long[] userGroupPKs)
 		throws NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserGroupException, SystemException {
 		try {
@@ -1724,7 +1724,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUserGroup(long pk, String userGroupPK)
+	public void removeUserGroup(long pk, long userGroupPK)
 		throws NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserGroupException, SystemException {
 		try {
@@ -1747,7 +1747,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUserGroups(long pk, String[] userGroupPKs)
+	public void removeUserGroups(long pk, long[] userGroupPKs)
 		throws NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserGroupException, SystemException {
 		try {
@@ -1774,7 +1774,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void setUserGroups(long pk, String[] userGroupPKs)
+	public void setUserGroups(long pk, long[] userGroupPKs)
 		throws NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserGroupException, SystemException {
 		try {
@@ -2312,7 +2312,7 @@ public class GroupPersistence extends BasePersistence {
 		protected ContainsUserGroup(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSERGROUP);
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2321,8 +2321,10 @@ public class GroupPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(long groupId, String userGroupId) {
-			List results = execute(new Object[] { new Long(groupId), userGroupId });
+		protected boolean contains(long groupId, long userGroupId) {
+			List results = execute(new Object[] {
+						new Long(groupId), new Long(userGroupId)
+					});
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -2342,13 +2344,13 @@ public class GroupPersistence extends BasePersistence {
 				"INSERT INTO Groups_UserGroups (groupId, userGroupId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void add(long groupId, String userGroupId) {
+		protected void add(long groupId, long userGroupId) {
 			if (!_persistence.containsUserGroup.contains(groupId, userGroupId)) {
-				update(new Object[] { new Long(groupId), userGroupId });
+				update(new Object[] { new Long(groupId), new Long(userGroupId) });
 			}
 		}
 
@@ -2373,12 +2375,12 @@ public class GroupPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_UserGroups WHERE groupId = ? AND userGroupId = ?");
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void remove(long groupId, String userGroupId) {
-			update(new Object[] { new Long(groupId), userGroupId });
+		protected void remove(long groupId, long userGroupId) {
+			update(new Object[] { new Long(groupId), new Long(userGroupId) });
 		}
 	}
 

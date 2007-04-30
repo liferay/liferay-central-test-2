@@ -53,7 +53,7 @@ import javax.ejb.SessionContext;
  *
  */
 public class UserGroupServiceEJBImpl implements UserGroupService, SessionBean {
-	public void addGroupUserGroups(long groupId, java.lang.String[] userGroupIds)
+	public void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -71,15 +71,14 @@ public class UserGroupServiceEJBImpl implements UserGroupService, SessionBean {
 			description);
 	}
 
-	public void deleteUserGroup(java.lang.String userGroupId)
+	public void deleteUserGroup(long userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		UserGroupServiceFactory.getTxImpl().deleteUserGroup(userGroupId);
 	}
 
-	public com.liferay.portal.model.UserGroup getUserGroup(
-		java.lang.String userGroupId)
+	public com.liferay.portal.model.UserGroup getUserGroup(long userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -95,8 +94,7 @@ public class UserGroupServiceEJBImpl implements UserGroupService, SessionBean {
 		return UserGroupServiceFactory.getTxImpl().getUserUserGroups(userId);
 	}
 
-	public void unsetGroupUserGroups(long groupId,
-		java.lang.String[] userGroupIds)
+	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -105,8 +103,7 @@ public class UserGroupServiceEJBImpl implements UserGroupService, SessionBean {
 	}
 
 	public com.liferay.portal.model.UserGroup updateUserGroup(
-		java.lang.String userGroupId, java.lang.String name,
-		java.lang.String description)
+		long userGroupId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

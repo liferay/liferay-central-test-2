@@ -641,8 +641,8 @@ public class GroupUtil {
 		return getPersistence().getUserGroupsSize(pk);
 	}
 
-	public static boolean containsUserGroup(long pk,
-		java.lang.String userGroupPK) throws com.liferay.portal.SystemException {
+	public static boolean containsUserGroup(long pk, long userGroupPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsUserGroup(pk, userGroupPK);
 	}
 
@@ -651,7 +651,7 @@ public class GroupUtil {
 		return getPersistence().containsUserGroups(pk);
 	}
 
-	public static void addUserGroup(long pk, java.lang.String userGroupPK)
+	public static void addUserGroup(long pk, long userGroupPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserGroupException {
@@ -666,7 +666,7 @@ public class GroupUtil {
 		getPersistence().addUserGroup(pk, userGroup);
 	}
 
-	public static void addUserGroups(long pk, java.lang.String[] userGroupPKs)
+	public static void addUserGroups(long pk, long[] userGroupPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserGroupException {
@@ -686,7 +686,7 @@ public class GroupUtil {
 		getPersistence().clearUserGroups(pk);
 	}
 
-	public static void removeUserGroup(long pk, java.lang.String userGroupPK)
+	public static void removeUserGroup(long pk, long userGroupPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserGroupException {
@@ -701,7 +701,7 @@ public class GroupUtil {
 		getPersistence().removeUserGroup(pk, userGroup);
 	}
 
-	public static void removeUserGroups(long pk, java.lang.String[] userGroupPKs)
+	public static void removeUserGroups(long pk, long[] userGroupPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserGroupException {
@@ -715,7 +715,7 @@ public class GroupUtil {
 		getPersistence().removeUserGroups(pk, userGroups);
 	}
 
-	public static void setUserGroups(long pk, java.lang.String[] userGroupPKs)
+	public static void setUserGroups(long pk, long[] userGroupPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserGroupException {

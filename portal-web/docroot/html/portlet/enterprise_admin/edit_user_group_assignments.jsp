@@ -38,7 +38,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", "/enterprise_admin/edit_user_group_assignments");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
-portletURL.setParameter("userGroupId", userGroup.getUserGroupId());
+portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
 %>
 
 <script type="text/javascript">
@@ -99,7 +99,7 @@ else if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 }
 
 if (tabs2.equals("current")) {
-	userParams.put("usersUserGroups", userGroup.getUserGroupId());
+	userParams.put("usersUserGroups", new Long(userGroup.getUserGroupId()));
 }
 
 int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());

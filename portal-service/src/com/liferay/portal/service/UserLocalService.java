@@ -69,7 +69,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addUserGroupUsers(java.lang.String userGroupId, long[] userIds)
+	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -205,7 +205,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasUserGroupUser(java.lang.String userGroupId, long userId)
+	public boolean hasUserGroupUser(long userGroupId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -236,7 +236,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void setUserGroupUsers(java.lang.String userGroupId, long[] userIds)
+	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -252,7 +252,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetUserGroupUsers(java.lang.String userGroupId, long[] userIds)
+	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

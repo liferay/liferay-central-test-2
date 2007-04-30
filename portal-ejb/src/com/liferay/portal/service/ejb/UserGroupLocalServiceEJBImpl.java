@@ -66,7 +66,7 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 			begin, end);
 	}
 
-	public void addGroupUserGroups(long groupId, java.lang.String[] userGroupIds)
+	public void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupLocalServiceFactory.getTxImpl().addGroupUserGroups(groupId,
@@ -81,14 +81,13 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 			companyId, name, description);
 	}
 
-	public void deleteUserGroup(java.lang.String userGroupId)
+	public void deleteUserGroup(long userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupLocalServiceFactory.getTxImpl().deleteUserGroup(userGroupId);
 	}
 
-	public com.liferay.portal.model.UserGroup getUserGroup(
-		java.lang.String userGroupId)
+	public com.liferay.portal.model.UserGroup getUserGroup(long userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserGroupLocalServiceFactory.getTxImpl().getUserGroup(userGroupId);
@@ -108,7 +107,7 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 		return UserGroupLocalServiceFactory.getTxImpl().getUserUserGroups(userId);
 	}
 
-	public boolean hasGroupUserGroup(long groupId, java.lang.String userGroupId)
+	public boolean hasGroupUserGroup(long groupId, long userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserGroupLocalServiceFactory.getTxImpl().hasGroupUserGroup(groupId,
@@ -129,8 +128,7 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 			name, description, params);
 	}
 
-	public void unsetGroupUserGroups(long groupId,
-		java.lang.String[] userGroupIds)
+	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupLocalServiceFactory.getTxImpl().unsetGroupUserGroups(groupId,
@@ -138,8 +136,7 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 	}
 
 	public com.liferay.portal.model.UserGroup updateUserGroup(long companyId,
-		java.lang.String userGroupId, java.lang.String name,
-		java.lang.String description)
+		long userGroupId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserGroupLocalServiceFactory.getTxImpl().updateUserGroup(companyId,

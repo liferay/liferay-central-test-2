@@ -287,26 +287,26 @@ create table Group_ (
 );
 
 create table Groups_Orgs (
-	groupId LONG not null,
+	groupId LONG,
 	organizationId VARCHAR(75) not null,
 	primary key (groupId, organizationId)
 );
 
 create table Groups_Permissions (
-	groupId LONG not null,
-	permissionId LONG not null,
+	groupId LONG,
+	permissionId LONG,
 	primary key (groupId, permissionId)
 );
 
 create table Groups_Roles (
-	groupId LONG not null,
+	groupId LONG,
 	roleId VARCHAR(75) not null,
 	primary key (groupId, roleId)
 );
 
 create table Groups_UserGroups (
-	groupId LONG not null,
-	userGroupId VARCHAR(75) not null,
+	groupId LONG,
+	userGroupId LONG,
 	primary key (groupId, userGroupId)
 );
 
@@ -760,7 +760,7 @@ create table Role_ (
 
 create table Roles_Permissions (
 	roleId VARCHAR(75) not null,
-	permissionId LONG not null,
+	permissionId LONG,
 	primary key (roleId, permissionId)
 );
 
@@ -1092,7 +1092,7 @@ create table User_ (
 );
 
 create table UserGroup (
-	userGroupId VARCHAR(75) not null primary key,
+	userGroupId LONG primary key,
 	companyId LONG,
 	parentUserGroupId VARCHAR(75) null,
 	name VARCHAR(75) null,
@@ -1116,7 +1116,7 @@ create table UserIdMapper (
 
 create table Users_Groups (
 	userId VARCHAR(75) not null,
-	groupId LONG not null,
+	groupId LONG,
 	primary key (userId, groupId)
 );
 
@@ -1128,7 +1128,7 @@ create table Users_Orgs (
 
 create table Users_Permissions (
 	userId VARCHAR(75) not null,
-	permissionId LONG not null,
+	permissionId LONG,
 	primary key (userId, permissionId)
 );
 
@@ -1140,7 +1140,7 @@ create table Users_Roles (
 
 create table Users_UserGroups (
 	userId VARCHAR(75) not null,
-	userGroupId VARCHAR(75) not null,
+	userGroupId LONG,
 	primary key (userId, userGroupId)
 );
 

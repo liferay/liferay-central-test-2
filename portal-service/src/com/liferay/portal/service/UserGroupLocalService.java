@@ -57,7 +57,7 @@ public interface UserGroupLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void addGroupUserGroups(long groupId, java.lang.String[] userGroupIds)
+	public void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -66,12 +66,11 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteUserGroup(java.lang.String userGroupId)
+	public void deleteUserGroup(long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.UserGroup getUserGroup(
-		java.lang.String userGroupId)
+	public com.liferay.portal.model.UserGroup getUserGroup(long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -84,7 +83,7 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasGroupUserGroup(long groupId, java.lang.String userGroupId)
+	public boolean hasGroupUserGroup(long groupId, long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -96,14 +95,12 @@ public interface UserGroupLocalService {
 		java.lang.String description, java.util.LinkedHashMap params)
 		throws com.liferay.portal.SystemException;
 
-	public void unsetGroupUserGroups(long groupId,
-		java.lang.String[] userGroupIds)
+	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.UserGroup updateUserGroup(long companyId,
-		java.lang.String userGroupId, java.lang.String name,
-		java.lang.String description)
+		long userGroupId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

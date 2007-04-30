@@ -445,7 +445,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		for (int i = 0; i < results.size(); i++) {
 			UserGroup userGroup = (UserGroup)results.get(i);
 
-			ResultRow row = new ResultRow(userGroup, userGroup.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(userGroup, userGroup.getPrimaryKey(), i);
 
 			// Name
 

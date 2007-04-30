@@ -1103,7 +1103,7 @@
 
 		<!-- PK fields -->
 
-		<column name="userGroupId" type="String" primary="true" />
+		<column name="userGroupId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 

@@ -87,8 +87,7 @@ public class UserLocalServiceUtil {
 		userLocalService.addRoleUsers(roleId, userIds);
 	}
 
-	public static void addUserGroupUsers(java.lang.String userGroupId,
-		long[] userIds)
+	public static void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -344,8 +343,7 @@ public class UserLocalServiceUtil {
 		return userLocalService.hasRoleUser(roleId, userId);
 	}
 
-	public static boolean hasUserGroupUser(java.lang.String userGroupId,
-		long userId)
+	public static boolean hasUserGroupUser(long userGroupId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -402,8 +400,7 @@ public class UserLocalServiceUtil {
 		userLocalService.setRoleUsers(roleId, userIds);
 	}
 
-	public static void setUserGroupUsers(java.lang.String userGroupId,
-		long[] userIds)
+	public static void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -432,8 +429,7 @@ public class UserLocalServiceUtil {
 		userLocalService.unsetRoleUsers(roleId, userIds);
 	}
 
-	public static void unsetUserGroupUsers(java.lang.String userGroupId,
-		long[] userIds)
+	public static void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();

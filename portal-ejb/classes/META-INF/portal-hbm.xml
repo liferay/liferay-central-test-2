@@ -457,7 +457,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.UserGroupImpl" table="UserGroup">
 		<cache usage="read-write" />
-		<id name="userGroupId" type="java.lang.String">
+		<id name="userGroupId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />

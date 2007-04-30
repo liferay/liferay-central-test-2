@@ -36,6 +36,7 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradePhone;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeResource;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeSubscription;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUser;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeUserGroup;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWiki;
 
@@ -65,6 +66,8 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradeCompany());
 		upgrade(new UpgradeResource());
 		upgrade(new UpgradeUser());
+		upgrade(new UpgradeUserGroup());
+		upgrade(new UpgradeGroup());
 
 		// Upgrade all other tables
 
@@ -74,7 +77,6 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradeCalendar());
 		upgrade(new UpgradeContact());
 		upgrade(new UpgradeEmailAddress());
-		upgrade(new UpgradeGroup());
 		upgrade(new UpgradeOrgLabor());
 		upgrade(new UpgradePasswordTracker());
 		upgrade(new UpgradePhone());

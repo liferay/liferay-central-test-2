@@ -111,9 +111,9 @@ portletURL.setParameter("tabs1", tabs1);
 			<%
 			UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-			String organizationId = DAOParamUtil.getString(request, "organizationId");
-			String roleId = DAOParamUtil.getString(request, "roleId");
-			String userGroupId = DAOParamUtil.getString(request, "userGroupId");
+			String organizationId = searchTerms.getOrganizationId();
+			String roleId = searchTerms.getRoleId();
+			long userGroupId = searchTerms.getUserGroupId();
 
 			if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				String locationId = user.getLocation().getOrganizationId();
@@ -148,8 +148,8 @@ portletURL.setParameter("tabs1", tabs1);
 				userParams.put("usersRoles", roleId);
 			}
 
-			if (Validator.isNotNull(userGroupId)) {
-				userParams.put("usersUserGroups", userGroupId);
+			if (userGroupId > 0) {
+				userParams.put("usersUserGroups", new Long(userGroupId));
 			}
 
 			int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
@@ -182,7 +182,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			UserGroup userGroup = null;
 
-			if (Validator.isNotNull(userGroupId)) {
+			if (userGroupId > 0) {
 				try {
 					userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
 				}
@@ -586,7 +586,7 @@ portletURL.setParameter("tabs1", tabs1);
 			for (int i = 0; i < results.size(); i++) {
 				UserGroup userGroup = (UserGroup)results.get(i);
 
-				ResultRow row = new ResultRow(userGroup, userGroup.getPrimaryKey().toString(), i);
+				ResultRow row = new ResultRow(userGroup, userGroup.getPrimaryKey(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -594,7 +594,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				rowURL.setParameter("struts_action", "/enterprise_admin/edit_user_group");
 				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("userGroupId", userGroup.getUserGroupId());
+				rowURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
 
 				// Name
 

@@ -186,16 +186,11 @@ public class UserServiceHttp {
 	}
 
 	public static void addUserGroupUsers(HttpPrincipal httpPrincipal,
-		java.lang.String userGroupId, long[] userIds)
+		long userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userGroupId;
-
-			if (userGroupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userGroupId);
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
@@ -751,16 +746,11 @@ public class UserServiceHttp {
 	}
 
 	public static void setUserGroupUsers(HttpPrincipal httpPrincipal,
-		java.lang.String userGroupId, long[] userIds)
+		long userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userGroupId;
-
-			if (userGroupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userGroupId);
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
@@ -906,16 +896,11 @@ public class UserServiceHttp {
 	}
 
 	public static void unsetUserGroupUsers(HttpPrincipal httpPrincipal,
-		java.lang.String userGroupId, long[] userIds)
+		long userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userGroupId;
-
-			if (userGroupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(userGroupId);
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {

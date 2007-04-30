@@ -2372,7 +2372,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsUserGroup(long pk, String userGroupPK)
+	public boolean containsUserGroup(long pk, long userGroupPK)
 		throws SystemException {
 		try {
 			return containsUserGroup.contains(pk, userGroupPK);
@@ -2391,7 +2391,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUserGroup(long pk, String userGroupPK)
+	public void addUserGroup(long pk, long userGroupPK)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2414,7 +2414,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUserGroups(long pk, String[] userGroupPKs)
+	public void addUserGroups(long pk, long[] userGroupPKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2451,7 +2451,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUserGroup(long pk, String userGroupPK)
+	public void removeUserGroup(long pk, long userGroupPK)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2474,7 +2474,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUserGroups(long pk, String[] userGroupPKs)
+	public void removeUserGroups(long pk, long[] userGroupPKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2501,7 +2501,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setUserGroups(long pk, String[] userGroupPKs)
+	public void setUserGroups(long pk, long[] userGroupPKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchUserGroupException, 
 			SystemException {
 		try {
@@ -2881,7 +2881,7 @@ public class UserPersistence extends BasePersistence {
 		protected ContainsUserGroup(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSERGROUP);
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2890,8 +2890,10 @@ public class UserPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(long userId, String userGroupId) {
-			List results = execute(new Object[] { new Long(userId), userGroupId });
+		protected boolean contains(long userId, long userGroupId) {
+			List results = execute(new Object[] {
+						new Long(userId), new Long(userGroupId)
+					});
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -2911,13 +2913,13 @@ public class UserPersistence extends BasePersistence {
 				"INSERT INTO Users_UserGroups (userId, userGroupId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void add(long userId, String userGroupId) {
+		protected void add(long userId, long userGroupId) {
 			if (!_persistence.containsUserGroup.contains(userId, userGroupId)) {
-				update(new Object[] { new Long(userId), userGroupId });
+				update(new Object[] { new Long(userId), new Long(userGroupId) });
 			}
 		}
 
@@ -2942,12 +2944,12 @@ public class UserPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_UserGroups WHERE userId = ? AND userGroupId = ?");
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void remove(long userId, String userGroupId) {
-			update(new Object[] { new Long(userId), userGroupId });
+		protected void remove(long userId, long userGroupId) {
+			update(new Object[] { new Long(userId), new Long(userGroupId) });
 		}
 	}
 

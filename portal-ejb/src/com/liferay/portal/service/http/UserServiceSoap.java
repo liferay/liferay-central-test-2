@@ -110,8 +110,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void addUserGroupUsers(java.lang.String userGroupId,
-		long[] userIds) throws RemoteException {
+	public static void addUserGroupUsers(long userGroupId, long[] userIds)
+		throws RemoteException {
 		try {
 			UserServiceUtil.addUserGroupUsers(userGroupId, userIds);
 		}
@@ -286,8 +286,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void setUserGroupUsers(java.lang.String userGroupId,
-		long[] userIds) throws RemoteException {
+	public static void setUserGroupUsers(long userGroupId, long[] userIds)
+		throws RemoteException {
 		try {
 			UserServiceUtil.setUserGroupUsers(userGroupId, userIds);
 		}
@@ -330,8 +330,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void unsetUserGroupUsers(java.lang.String userGroupId,
-		long[] userIds) throws RemoteException {
+	public static void unsetUserGroupUsers(long userGroupId, long[] userIds)
+		throws RemoteException {
 		try {
 			UserServiceUtil.unsetUserGroupUsers(userGroupId, userIds);
 		}

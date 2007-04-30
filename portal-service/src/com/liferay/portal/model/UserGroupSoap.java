@@ -70,19 +70,19 @@ public class UserGroupSoap implements Serializable {
 	public UserGroupSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _userGroupId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setUserGroupId(pk);
 	}
 
-	public String getUserGroupId() {
+	public long getUserGroupId() {
 		return _userGroupId;
 	}
 
-	public void setUserGroupId(String userGroupId) {
+	public void setUserGroupId(long userGroupId) {
 		_userGroupId = userGroupId;
 	}
 
@@ -118,7 +118,7 @@ public class UserGroupSoap implements Serializable {
 		_description = description;
 	}
 
-	private String _userGroupId;
+	private long _userGroupId;
 	private long _companyId;
 	private String _parentUserGroupId;
 	private String _name;

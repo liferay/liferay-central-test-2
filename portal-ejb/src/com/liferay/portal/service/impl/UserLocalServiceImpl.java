@@ -171,7 +171,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		RoleUtil.addUsers(roleId, userIds);
 	}
 
-	public void addUserGroupUsers(String userGroupId, long[] userIds)
+	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupUtil.addUsers(userGroupId, userIds);
@@ -776,7 +776,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return RoleUtil.containsUser(roleId, userId);
 	}
 
-	public boolean hasUserGroupUser(String userGroupId, long userId)
+	public boolean hasUserGroupUser(long userGroupId, long userId)
 		throws PortalException, SystemException {
 
 		return UserGroupUtil.containsUser(userGroupId, userId);
@@ -935,7 +935,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		RoleUtil.setUsers(roleId, userIds);
 	}
 
-	public void setUserGroupUsers(String userGroupId, long[] userIds)
+	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupUtil.setUsers(userGroupId, userIds);
@@ -963,7 +963,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		RoleUtil.removeUsers(roleId, userIds);
 	}
 
-	public void unsetUserGroupUsers(String userGroupId, long[] userIds)
+	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupUtil.removeUsers(userGroupId, userIds);

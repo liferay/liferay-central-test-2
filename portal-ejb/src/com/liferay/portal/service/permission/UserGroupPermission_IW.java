@@ -35,14 +35,14 @@ public class UserGroupPermission_IW {
 
 	public void check(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String userGroupId, java.lang.String actionId)
+		long userGroupId, java.lang.String actionId)
 		throws com.liferay.portal.security.auth.PrincipalException {
 		UserGroupPermission.check(permissionChecker, userGroupId, actionId);
 	}
 
 	public boolean contains(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String userGroupId, java.lang.String actionId) {
+		long userGroupId, java.lang.String actionId) {
 		return UserGroupPermission.contains(permissionChecker, userGroupId,
 			actionId);
 	}

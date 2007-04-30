@@ -53,7 +53,7 @@ import java.sql.Types;
 public class UserGroupModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "UserGroup";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "userGroupId", new Integer(Types.VARCHAR) },
+			{ "userGroupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "parentUserGroupId", new Integer(Types.VARCHAR) },
 			{ "name", new Integer(Types.VARCHAR) },
@@ -61,9 +61,6 @@ public class UserGroupModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserGroup"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERGROUPID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserGroup.userGroupId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PARENTUSERGROUPID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserGroup.parentUserGroupId"),
 			XSS_ALLOW_BY_MODEL);
@@ -79,27 +76,20 @@ public class UserGroupModelImpl extends BaseModelImpl {
 	public UserGroupModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _userGroupId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setUserGroupId(pk);
 	}
 
-	public String getUserGroupId() {
-		return GetterUtil.getString(_userGroupId);
+	public long getUserGroupId() {
+		return _userGroupId;
 	}
 
-	public void setUserGroupId(String userGroupId) {
-		if (((userGroupId == null) && (_userGroupId != null)) ||
-				((userGroupId != null) && (_userGroupId == null)) ||
-				((userGroupId != null) && (_userGroupId != null) &&
-				!userGroupId.equals(_userGroupId))) {
-			if (!XSS_ALLOW_USERGROUPID) {
-				userGroupId = XSSUtil.strip(userGroupId);
-			}
-
+	public void setUserGroupId(long userGroupId) {
+		if (userGroupId != _userGroupId) {
 			_userGroupId = userGroupId;
 		}
 	}
@@ -205,9 +195,9 @@ public class UserGroupModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = userGroup.getPrimaryKey();
+		long pk = userGroup.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -216,10 +206,10 @@ public class UserGroupModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _userGroupId;
+	private long _userGroupId;
 	private long _companyId;
 	private String _parentUserGroupId;
 	private String _name;

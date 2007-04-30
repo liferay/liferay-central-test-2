@@ -45,13 +45,13 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface UserGroupModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getUserGroupId();
+	public long getUserGroupId();
 
-	public void setUserGroupId(String userGroupId);
+	public void setUserGroupId(long userGroupId);
 
 	public long getCompanyId();
 

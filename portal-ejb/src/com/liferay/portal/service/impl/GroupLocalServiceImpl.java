@@ -394,11 +394,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			companyId, User.class.getName(), String.valueOf(userId));
 	}
 
-	public Group getUserGroupGroup(long companyId, String userGroupId)
+	public Group getUserGroupGroup(long companyId, long userGroupId)
 		throws PortalException, SystemException {
 
 		return GroupUtil.findByC_C_C(
-			companyId, UserGroup.class.getName(), userGroupId);
+			companyId, UserGroup.class.getName(), String.valueOf(userGroupId));
 	}
 
 	public List getUserGroupsGroups(List userGroups)
@@ -611,7 +611,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		try {
 			Group group = GroupFinder.findByC_N(companyId, name);
 
-			if ((groupId <= 0) || group.getGroupId() != groupId) {
+			if ((groupId <= 0) || (group.getGroupId() != groupId)) {
 				throw new DuplicateGroupException();
 			}
 		}

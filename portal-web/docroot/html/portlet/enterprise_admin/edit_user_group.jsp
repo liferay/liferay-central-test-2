@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 UserGroup userGroup = (UserGroup)request.getAttribute(WebKeys.USER_GROUP);
 
-String userGroupId = BeanParamUtil.getString(userGroup, request, "userGroupId");
+long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 %>
 
 <script type="text/javascript">

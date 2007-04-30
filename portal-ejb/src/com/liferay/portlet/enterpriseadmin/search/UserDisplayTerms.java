@@ -64,7 +64,7 @@ public class UserDisplayTerms extends DisplayTerms {
 		active = ParamUtil.getBoolean(req, ACTIVE, true);
 		organizationId = ParamUtil.getString(req, ORGANIZATION_ID);
 		roleId = ParamUtil.getString(req, ROLE_ID);
-		userGroupId = ParamUtil.getString(req, USER_GROUP_ID);
+		userGroupId = ParamUtil.getLong(req, USER_GROUP_ID);
 	}
 
 	public String getFirstName() {
@@ -103,7 +103,7 @@ public class UserDisplayTerms extends DisplayTerms {
 		return roleId;
 	}
 
-	public String getUserGroupId() {
+	public long getUserGroupId() {
 		return userGroupId;
 	}
 
@@ -115,6 +115,6 @@ public class UserDisplayTerms extends DisplayTerms {
 	protected boolean active;
 	protected String organizationId;
 	protected String roleId;
-	protected String userGroupId;
+	protected long userGroupId;
 
 }

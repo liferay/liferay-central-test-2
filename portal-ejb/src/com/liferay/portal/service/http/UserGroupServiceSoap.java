@@ -77,8 +77,8 @@ import java.rmi.RemoteException;
  *
  */
 public class UserGroupServiceSoap {
-	public static void addGroupUserGroups(long groupId,
-		java.lang.String[] userGroupIds) throws RemoteException {
+	public static void addGroupUserGroups(long groupId, long[] userGroupIds)
+		throws RemoteException {
 		try {
 			UserGroupServiceUtil.addGroupUserGroups(groupId, userGroupIds);
 		}
@@ -103,7 +103,7 @@ public class UserGroupServiceSoap {
 		}
 	}
 
-	public static void deleteUserGroup(java.lang.String userGroupId)
+	public static void deleteUserGroup(long userGroupId)
 		throws RemoteException {
 		try {
 			UserGroupServiceUtil.deleteUserGroup(userGroupId);
@@ -115,7 +115,7 @@ public class UserGroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserGroupSoap getUserGroup(
-		java.lang.String userGroupId) throws RemoteException {
+		long userGroupId) throws RemoteException {
 		try {
 			com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.getUserGroup(userGroupId);
 
@@ -140,8 +140,8 @@ public class UserGroupServiceSoap {
 		}
 	}
 
-	public static void unsetGroupUserGroups(long groupId,
-		java.lang.String[] userGroupIds) throws RemoteException {
+	public static void unsetGroupUserGroups(long groupId, long[] userGroupIds)
+		throws RemoteException {
 		try {
 			UserGroupServiceUtil.unsetGroupUserGroups(groupId, userGroupIds);
 		}
@@ -152,8 +152,8 @@ public class UserGroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserGroupSoap updateUserGroup(
-		java.lang.String userGroupId, java.lang.String name,
-		java.lang.String description) throws RemoteException {
+		long userGroupId, java.lang.String name, java.lang.String description)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.updateUserGroup(userGroupId,
 					name, description);

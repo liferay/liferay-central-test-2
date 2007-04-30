@@ -252,11 +252,11 @@ public class ActionUtil {
 	public static void getUserGroup(HttpServletRequest req)
 		throws Exception {
 
-		String userGroupId = ParamUtil.getString(req, "userGroupId");
+		long userGroupId = ParamUtil.getLong(req, "userGroupId");
 
 		UserGroup userGroup = null;
 
-		if (Validator.isNotNull(userGroupId)) {
+		if (userGroupId > 0) {
 			userGroup = UserGroupServiceUtil.getUserGroup(userGroupId);
 		}
 

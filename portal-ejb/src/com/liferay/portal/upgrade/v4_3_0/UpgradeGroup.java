@@ -363,7 +363,6 @@ public class UpgradeGroup extends UpgradeProcess {
 	}
 
 	private ValueMapper _groupIdMapper;
-
 	private ValueMapper _ownerIdMapper;
 
 	private static final String _TABLE_GROUPS_ORGS = "Groups_Orgs";

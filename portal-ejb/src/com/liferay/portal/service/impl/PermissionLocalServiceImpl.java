@@ -54,6 +54,7 @@ import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.comparator.PermissionComparator;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
@@ -446,7 +447,9 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			associatedGroupId = organization.getGroup().getGroupId();
 		}
 		else if (className.equals(UserGroup.class.getName())) {
-			UserGroup userGroup = UserGroupUtil.findByPrimaryKey(classPK);
+			long userGroupId = GetterUtil.getLong(classPK);
+
+			UserGroup userGroup = UserGroupUtil.findByPrimaryKey(userGroupId);
 
 			associatedGroupId = userGroup.getGroup().getGroupId();
 		}

@@ -118,8 +118,8 @@ public class EditUserGroupAction extends PortletAction {
 	}
 
 	protected void deleteUserGroups(ActionRequest req) throws Exception {
-		String[] deleteUserGroupIds = StringUtil.split(
-			ParamUtil.getString(req, "deleteUserGroupIds"));
+		long[] deleteUserGroupIds = StringUtil.split(
+			ParamUtil.getString(req, "deleteUserGroupIds"), 0L);
 
 		for (int i = 0; i < deleteUserGroupIds.length; i++) {
 			UserGroupServiceUtil.deleteUserGroup(deleteUserGroupIds[i]);
@@ -127,14 +127,12 @@ public class EditUserGroupAction extends PortletAction {
 	}
 
 	protected void updateUserGroup(ActionRequest req) throws Exception {
-		String cmd = ParamUtil.getString(req, Constants.CMD);
-
-		String userGroupId = ParamUtil.getString(req, "userGroupId");
+		long userGroupId = ParamUtil.getLong(req, "userGroupId");
 
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
 
-		if (cmd.equals(Constants.ADD)) {
+		if (userGroupId <= 0) {
 
 			// Add user group
 

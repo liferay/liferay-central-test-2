@@ -56,6 +56,7 @@ alter_column_type Groups_Permissions permissionId LONG;
 alter_column_type Groups_Roles groupId LONG;
 
 alter_column_type Groups_UserGroups groupId LONG;
+alter_column_type Groups_UserGroups userGroupId LONG;
 
 alter_column_type IGFolder groupId LONG;
 
@@ -359,6 +360,8 @@ alter table User_ add screenName VARCHAR(75) null;
 update User_ set defaultUser = FALSE;
 update User_ set screenName = userId;
 
+alter_column_type UserGroup userGroupId LONG;
+
 create table UserGroupRole (
 	userId LONG,
 	groupId LONG,
@@ -369,6 +372,8 @@ create table UserGroupRole (
 alter_column_type Users_Groups groupId LONG;
 
 alter_column_type Users_Permissions permissionId LONG;
+
+alter_column_type Users_UserGroups userGroupId LONG;
 
 alter_column_type Website websiteId LONG;
 alter_column_type Website typeId INTEGER;

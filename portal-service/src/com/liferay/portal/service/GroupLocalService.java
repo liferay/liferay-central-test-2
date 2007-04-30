@@ -124,7 +124,7 @@ public interface GroupLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Group getUserGroupGroup(long companyId,
-		java.lang.String userGroupId)
+		long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

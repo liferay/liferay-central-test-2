@@ -80,7 +80,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.addRoleUsers(roleId, userIds);
 	}
 
-	public void addUserGroupUsers(String userGroupId, long[] userIds)
+	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(
@@ -214,7 +214,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.setRoleUsers(roleId, userIds);
 	}
 
-	public void setUserGroupUsers(String userGroupId, long[] userIds)
+	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(
@@ -251,7 +251,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.unsetRoleUsers(roleId, userIds);
 	}
 
-	public void unsetUserGroupUsers(String userGroupId, long[] userIds)
+	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(

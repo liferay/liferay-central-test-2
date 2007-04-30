@@ -35,7 +35,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 public class UserGroupPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String userGroupId,
+			PermissionChecker permissionChecker, long userGroupId,
 			String actionId)
 		throws PrincipalException {
 
@@ -45,7 +45,7 @@ public class UserGroupPermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, String userGroupId,
+		PermissionChecker permissionChecker, long userGroupId,
 		String actionId) {
 
 		return permissionChecker.hasPermission(

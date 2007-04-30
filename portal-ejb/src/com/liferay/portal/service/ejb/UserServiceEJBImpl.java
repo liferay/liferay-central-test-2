@@ -75,7 +75,7 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		UserServiceFactory.getTxImpl().addRoleUsers(roleId, userIds);
 	}
 
-	public void addUserGroupUsers(java.lang.String userGroupId, long[] userIds)
+	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -191,7 +191,7 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		UserServiceFactory.getTxImpl().setRoleUsers(roleId, userIds);
 	}
 
-	public void setUserGroupUsers(java.lang.String userGroupId, long[] userIds)
+	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -220,7 +220,7 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		UserServiceFactory.getTxImpl().unsetRoleUsers(roleId, userIds);
 	}
 
-	public void unsetUserGroupUsers(java.lang.String userGroupId, long[] userIds)
+	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

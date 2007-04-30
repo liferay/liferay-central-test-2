@@ -201,14 +201,14 @@ public class EditPermissionsAction extends PortletAction {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
 		long resourceId = ParamUtil.getLong(req, "resourceId");
-		String userGroupId = ParamUtil.getString(
+		long userGroupId = ParamUtil.getLong(
 			req, "userGroupIdsPosValue");
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "userGroupIdActionIds"));
 
 		PermissionServiceUtil.setGroupPermissions(
-			UserGroup.class.getName(), userGroupId, layout.getGroupId(),
-			actionIds, resourceId);
+			UserGroup.class.getName(), String.valueOf(userGroupId),
+			layout.getGroupId(), actionIds, resourceId);
 	}
 
 	protected void updateUserPermissions(ActionRequest req) throws Exception {

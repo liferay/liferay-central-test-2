@@ -34,7 +34,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="userGroupId" value="<%= userGroup.getUserGroupId() %>" />
+		<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -44,7 +44,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= UserGroup.class.getName() %>"
 		modelResourceDescription="<%= userGroup.getName() %>"
-		resourcePrimKey="<%= userGroup.getPrimaryKey().toString() %>"
+		resourcePrimKey="<%= String.valueOf(userGroup.getPrimaryKey()) %>"
 		var="permissionsURL"
 	/>
 
@@ -54,7 +54,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 <c:if test="<%= UserGroupPermission.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_USERS) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" />
-		<portlet:param name="userGroupId" value="<%= userGroup.getUserGroupId() %>" />
+		<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="assign" url="<%= assignURL %>" />
@@ -73,7 +73,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 		</c:when>
 	</c:choose>
 
-	<portlet:param name="userGroupId" value="<%= userGroup.getUserGroupId() %>" />
+	<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 </portlet:renderURL>
 
 <liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
@@ -83,7 +83,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="deleteUserGroupIds" value="<%= userGroup.getUserGroupId() %>" />
+		<portlet:param name="deleteUserGroupIds" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />
