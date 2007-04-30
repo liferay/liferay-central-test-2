@@ -54,16 +54,16 @@ public class UpgradeWebsite extends UpgradeProcess {
 		}
 	}
 
+	private void _upgradeCounter() throws Exception {
+		CounterLocalServiceUtil.reset(Website.class.getName());
+	}
+
 	private void _upgradeWebsite() throws Exception {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
-	}
-
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(Website.class.getName());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeWebsite.class);

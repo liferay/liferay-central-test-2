@@ -61,6 +61,11 @@ public class UpgradeBlogs extends UpgradeProcess {
 		}
 	}
 
+	private void _upgradeCounter() throws Exception {
+		CounterLocalServiceUtil.reset(BlogsCategory.class.getName());
+		CounterLocalServiceUtil.reset(BlogsEntry.class.getName());
+	}
+
 	private void _upgradeBlogs() throws Exception {
 
 		// BlogsCategory
@@ -101,11 +106,6 @@ public class UpgradeBlogs extends UpgradeProcess {
 			_categoryIdMapper, BlogsCategory.class.getName());
 
 		ResourceUtil.upgradePrimKey(_entryIdMapper, BlogsEntry.class.getName());
-	}
-
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(BlogsCategory.class.getName());
-		CounterLocalServiceUtil.reset(BlogsEntry.class.getName());
 	}
 
 	private ValueMapper _categoryIdMapper;

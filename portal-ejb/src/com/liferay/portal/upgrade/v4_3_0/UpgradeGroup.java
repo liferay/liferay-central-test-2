@@ -91,6 +91,10 @@ public class UpgradeGroup extends UpgradeProcess {
 		}
 	}
 
+	private void _upgradeCounter() throws Exception {
+		CounterLocalServiceUtil.reset(Group.class.getName());
+	}
+
 	private void _upgradeGroupIds() throws Exception {
 
 		// Group_
@@ -356,10 +360,6 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradePrimKeyColumn);
 
 		upgradeTable.updateTable();
-	}
-
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(Group.class.getName());
 	}
 
 	private ValueMapper _groupIdMapper;

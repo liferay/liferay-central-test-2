@@ -54,16 +54,16 @@ public class UpgradePhone extends UpgradeProcess {
 		}
 	}
 
+	private void _upgradeCounter() throws Exception {
+		CounterLocalServiceUtil.reset(Phone.class.getName());
+	}
+
 	private void _upgradePhone() throws Exception {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			PhoneImpl.TABLE_NAME, PhoneImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
-	}
-
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(Phone.class.getName());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradePhone.class);

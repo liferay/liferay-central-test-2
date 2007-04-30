@@ -54,16 +54,16 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 		}
 	}
 
+	private void _upgradeCounter() throws Exception {
+		CounterLocalServiceUtil.reset(EmailAddress.class.getName());
+	}
+
 	private void _upgradeEmailAddress() throws Exception {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			EmailAddressImpl.TABLE_NAME, EmailAddressImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
-	}
-
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(EmailAddress.class.getName());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeEmailAddress.class);

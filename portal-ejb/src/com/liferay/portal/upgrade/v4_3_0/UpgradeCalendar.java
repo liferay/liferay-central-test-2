@@ -69,12 +69,12 @@ public class UpgradeCalendar extends UpgradeProcess {
 		_eventIdMapper = pkUpgradeColumn.getValueMapper();
 	}
 
-	private void _upgradeResource() throws Exception {
-		ResourceUtil.upgradePrimKey(_eventIdMapper, CalEvent.class.getName());
-	}
-
 	private void _upgradeCounter() throws Exception {
 		CounterLocalServiceUtil.reset(CalEvent.class.getName());
+	}
+
+	private void _upgradeResource() throws Exception {
+		ResourceUtil.upgradePrimKey(_eventIdMapper, CalEvent.class.getName());
 	}
 
 	private ValueMapper _eventIdMapper;

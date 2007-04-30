@@ -61,6 +61,11 @@ public class UpgradeBookmarks extends UpgradeProcess {
 		}
 	}
 
+	private void _upgradeCounter() throws Exception {
+		CounterLocalServiceUtil.reset(BookmarksFolder.class.getName());
+		CounterLocalServiceUtil.reset(BookmarksEntry.class.getName());
+	}
+
 	private void _upgradeBookmarks() throws Exception {
 
 		// BookmarksFolder
@@ -102,11 +107,6 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		ResourceUtil.upgradePrimKey(
 			_entryIdMapper, BookmarksEntry.class.getName());
-	}
-
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(BookmarksFolder.class.getName());
-		CounterLocalServiceUtil.reset(BookmarksEntry.class.getName());
 	}
 
 	private ValueMapper _folderIdMapper;
