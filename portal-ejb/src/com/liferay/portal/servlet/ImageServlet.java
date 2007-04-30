@@ -130,6 +130,8 @@ public class ImageServlet extends HttpServlet {
 		// Company logo
 
 		if (path.startsWith("/company_logo")) {
+			imageId = _companyId + ".portal.company";
+
 			if (ParamUtil.get(req, "png", false)) {
 				imageId += ".png";
 
@@ -140,6 +142,12 @@ public class ImageServlet extends HttpServlet {
 
 				//res.setContentType("image/vnd.wap.wbmp");
 			}
+		}
+
+		// User portrait
+
+		if (path.startsWith("/user_portrait")) {
+			imageId = _companyId + ".portal.user." + imageId;
 		}
 
 		// Image gallery

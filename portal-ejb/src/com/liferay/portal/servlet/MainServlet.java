@@ -765,11 +765,6 @@ public class MainServlet extends ActionServlet {
 
 		req.setCharacterEncoding(strutsCharEncoding);
 
-		/*if (!BrowserSniffer.is_wml(req)) {
-			res.setContentType(
-				Constants.TEXT_HTML + "; charset=" + strutsCharEncoding);
-		}*/
-
 		// Determine content type
 
 		String contentType = req.getHeader(HttpHeaders.CONTENT_TYPE);
