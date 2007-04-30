@@ -27,6 +27,7 @@ alter_column_type Contact_ parentContactId LONG;
 
 alter_column_type Counter currentId LONG;
 
+update Country set countryId = '51' where countryId = '51`';
 alter_column_type Country countryId LONG;
 
 alter_column_type CyrusUser userId LONG;
