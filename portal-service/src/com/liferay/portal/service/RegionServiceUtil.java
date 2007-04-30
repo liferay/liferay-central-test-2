@@ -56,7 +56,7 @@ public class RegionServiceUtil {
 		return regionService.getRegions();
 	}
 
-	public static java.util.List getRegions(java.lang.String countryId)
+	public static java.util.List getRegions(long countryId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RegionService regionService = RegionServiceFactory.getService();
 
@@ -70,16 +70,14 @@ public class RegionServiceUtil {
 		return regionService.getRegions(active);
 	}
 
-	public static java.util.List getRegions(java.lang.String countryId,
-		boolean active)
+	public static java.util.List getRegions(long countryId, boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RegionService regionService = RegionServiceFactory.getService();
 
 		return regionService.getRegions(countryId, active);
 	}
 
-	public static com.liferay.portal.model.Region getRegion(
-		java.lang.String regionId)
+	public static com.liferay.portal.model.Region getRegion(long regionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RegionService regionService = RegionServiceFactory.getService();

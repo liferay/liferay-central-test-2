@@ -70,9 +70,11 @@ public class OrganizationSearch extends SearchContainer {
 		iteratorURL.setParameter(
 			OrganizationDisplayTerms.ZIP, displayTerms.getZip());
 		iteratorURL.setParameter(
-			OrganizationDisplayTerms.COUNTRY_ID, displayTerms.getCountryId());
+			OrganizationDisplayTerms.COUNTRY_ID,
+			String.valueOf(displayTerms.getCountryId()));
 		iteratorURL.setParameter(
-			OrganizationDisplayTerms.REGION_ID, displayTerms.getRegionId());
+			OrganizationDisplayTerms.REGION_ID,
+			String.valueOf(displayTerms.getRegionId()));
 		iteratorURL.setParameter(
 			OrganizationDisplayTerms.PARENT_ORGANIZATION_ID,
 			displayTerms.getParentOrganizationId());

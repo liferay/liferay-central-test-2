@@ -45,17 +45,17 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface RegionModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getRegionId();
+	public long getRegionId();
 
-	public void setRegionId(String regionId);
+	public void setRegionId(long regionId);
 
-	public String getCountryId();
+	public long getCountryId();
 
-	public void setCountryId(String countryId);
+	public void setCountryId(long countryId);
 
 	public String getRegionCode();
 

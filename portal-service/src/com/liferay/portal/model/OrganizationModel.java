@@ -71,13 +71,13 @@ public interface OrganizationModel extends BaseModel {
 
 	public void setRecursable(boolean recursable);
 
-	public String getRegionId();
+	public long getRegionId();
 
-	public void setRegionId(String regionId);
+	public void setRegionId(long regionId);
 
-	public String getCountryId();
+	public long getCountryId();
 
-	public void setCountryId(String countryId);
+	public void setCountryId(long countryId);
 
 	public int getStatusId();
 

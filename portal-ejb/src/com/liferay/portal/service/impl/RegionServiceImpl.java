@@ -38,13 +38,11 @@ import java.util.List;
  */
 public class RegionServiceImpl extends PrincipalBean implements RegionService {
 
-	// Business methods
-
 	public List getRegions() throws SystemException {
 		return RegionUtil.findAll();
 	}
 
-	public List getRegions(String countryId) throws SystemException {
+	public List getRegions(long countryId) throws SystemException {
 		return RegionUtil.findByCountryId(countryId);
 	}
 
@@ -52,13 +50,13 @@ public class RegionServiceImpl extends PrincipalBean implements RegionService {
 		return RegionUtil.findByActive(active);
 	}
 
-	public List getRegions(String countryId, boolean active)
+	public List getRegions(long countryId, boolean active)
 		throws SystemException {
 
 		return RegionUtil.findByC_A(countryId, active);
 	}
 
-	public Region getRegion(String regionId)
+	public Region getRegion(long regionId)
 		throws PortalException, SystemException {
 
 		return RegionUtil.findByPrimaryKey(regionId);

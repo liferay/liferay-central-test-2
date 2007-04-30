@@ -47,7 +47,7 @@ public class CountryServiceImpl
 		return CountryUtil.findByActive(active);
 	}
 
-	public Country getCountry(String countryId)
+	public Country getCountry(long countryId)
 		throws PortalException, SystemException {
 
 		return CountryUtil.findByPrimaryKey(countryId);

@@ -76,7 +76,7 @@ public class OrganizationFinder {
 	public static int countByC_PO_N_S_C_Z_R_C(
 			long companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
-			String city, String zip, String regionId, String countryId,
+			String city, String zip, Long regionId, Long countryId,
 			LinkedHashMap params, boolean andOperator)
 		throws SystemException {
 
@@ -107,6 +107,15 @@ public class OrganizationFinder {
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C);
 
+			if (regionId == null) {
+				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+			}
+
+			if (countryId == null) {
+				sql = StringUtil.replace(
+					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+			}
+
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
 			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
 			sql = StringUtil.replace(
@@ -133,18 +142,21 @@ public class OrganizationFinder {
 			qPos.add(street);
 			qPos.add(street);
 			qPos.add(street);
+
+			if (regionId != null) {
+				qPos.add(regionId);
+				qPos.add(regionId);
+			}
+
+			if (countryId != null) {
+				qPos.add(countryId);
+				qPos.add(countryId);
+			}
+
 			qPos.add(city);
 			qPos.add(city);
 			qPos.add(zip);
 			qPos.add(zip);
-			qPos.add(regionId);
-			qPos.add(regionId);
-			qPos.add(regionId);
-			qPos.add(regionId);
-			qPos.add(countryId);
-			qPos.add(countryId);
-			qPos.add(countryId);
-			qPos.add(countryId);
 
 			Iterator itr = q.list().iterator();
 
@@ -169,7 +181,7 @@ public class OrganizationFinder {
 	public static List findByC_PO_N_S_C_Z_R_C(
 			long companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
-			String city, String zip, String regionId, String countryId,
+			String city, String zip, Long regionId, Long countryId,
 			LinkedHashMap params, boolean andOperator, int begin, int end)
 		throws SystemException {
 
@@ -199,6 +211,15 @@ public class OrganizationFinder {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C);
+
+			if (regionId == null) {
+				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+			}
+
+			if (countryId == null) {
+				sql = StringUtil.replace(
+					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+			}
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
 			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
@@ -234,18 +255,21 @@ public class OrganizationFinder {
 			qPos.add(street);
 			qPos.add(street);
 			qPos.add(street);
+
+			if (regionId != null) {
+				qPos.add(regionId);
+				qPos.add(regionId);
+			}
+
+			if (countryId != null) {
+				qPos.add(countryId);
+				qPos.add(countryId);
+			}
+
 			qPos.add(city);
 			qPos.add(city);
 			qPos.add(zip);
 			qPos.add(zip);
-			qPos.add(regionId);
-			qPos.add(regionId);
-			qPos.add(regionId);
-			qPos.add(regionId);
-			qPos.add(countryId);
-			qPos.add(countryId);
-			qPos.add(countryId);
-			qPos.add(countryId);
 
 			List list = new ArrayList();
 
@@ -274,7 +298,7 @@ public class OrganizationFinder {
 	private static int _countByPermissions(
 			long companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
-			String city, String zip, String regionId, String countryId,
+			String city, String zip, Long regionId, Long countryId,
 			long resourceId, long groupId, boolean andOperator)
 		throws SystemException {
 
@@ -323,6 +347,15 @@ public class OrganizationFinder {
 
 			sql = sm.toString();
 
+			if (regionId == null) {
+				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+			}
+
+			if (countryId == null) {
+				sql = StringUtil.replace(
+					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+			}
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.setCacheable(false);
@@ -348,18 +381,21 @@ public class OrganizationFinder {
 				qPos.add(street);
 				qPos.add(street);
 				qPos.add(street);
+
+				if (regionId != null) {
+					qPos.add(regionId);
+					qPos.add(regionId);
+				}
+
+				if (countryId != null) {
+					qPos.add(countryId);
+					qPos.add(countryId);
+				}
+
 				qPos.add(city);
 				qPos.add(city);
 				qPos.add(zip);
 				qPos.add(zip);
-				qPos.add(regionId);
-				qPos.add(regionId);
-				qPos.add(regionId);
-				qPos.add(regionId);
-				qPos.add(countryId);
-				qPos.add(countryId);
-				qPos.add(countryId);
-				qPos.add(countryId);
 			}
 
 			int count = 0;
@@ -387,7 +423,7 @@ public class OrganizationFinder {
 	private static List _findByPermissions(
 			long companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
-			String city, String zip, String regionId, String countryId,
+			String city, String zip, Long regionId, Long countryId,
 			long resourceId, long groupId, boolean andOperator, int begin,
 			int end)
 		throws SystemException {
@@ -439,6 +475,15 @@ public class OrganizationFinder {
 
 			sql = sm.toString();
 
+			if (regionId == null) {
+				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+			}
+
+			if (countryId == null) {
+				sql = StringUtil.replace(
+					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+			}
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.setCacheable(false);
@@ -464,18 +509,21 @@ public class OrganizationFinder {
 				qPos.add(street);
 				qPos.add(street);
 				qPos.add(street);
+
+				if (regionId != null) {
+					qPos.add(regionId);
+					qPos.add(regionId);
+				}
+
+				if (countryId != null) {
+					qPos.add(countryId);
+					qPos.add(countryId);
+				}
+
 				qPos.add(city);
 				qPos.add(city);
 				qPos.add(zip);
 				qPos.add(zip);
-				qPos.add(regionId);
-				qPos.add(regionId);
-				qPos.add(regionId);
-				qPos.add(regionId);
-				qPos.add(countryId);
-				qPos.add(countryId);
-				qPos.add(countryId);
-				qPos.add(countryId);
 			}
 
 			List list = new ArrayList();
@@ -639,5 +687,13 @@ public class OrganizationFinder {
 			}
 		}
 	}
+
+	private static String _COUNTRY_ID_SQL =
+		"((Organization_.countryId = ?) OR (Address.countryId = ?)) " +
+			"[$AND_OR_CONNECTOR$]";
+
+	private static String _REGION_ID_SQL =
+		"((Organization_.regionId = ?) OR (Address.regionId = ?)) " +
+			"[$AND_OR_CONNECTOR$]";
 
 }

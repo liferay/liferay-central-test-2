@@ -136,8 +136,8 @@ public class EditAddressAction extends PortletAction {
 		String street3 = ParamUtil.getString(req, "street3");
 		String city = ParamUtil.getString(req, "city");
 		String zip = ParamUtil.getString(req, "zip");
-		String regionId = ParamUtil.getString(req, "regionId");
-		String countryId = ParamUtil.getString(req, "countryId");
+		long regionId = ParamUtil.getLong(req, "regionId");
+		long countryId = ParamUtil.getLong(req, "countryId");
 		int typeId = ParamUtil.getInteger(req, "typeId");
 		boolean mailing = ParamUtil.getBoolean(req, "mailing");
 		boolean primary = ParamUtil.getBoolean(req, "primary");

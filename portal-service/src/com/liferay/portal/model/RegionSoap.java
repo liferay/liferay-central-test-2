@@ -70,27 +70,27 @@ public class RegionSoap implements Serializable {
 	public RegionSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _regionId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setRegionId(pk);
 	}
 
-	public String getRegionId() {
+	public long getRegionId() {
 		return _regionId;
 	}
 
-	public void setRegionId(String regionId) {
+	public void setRegionId(long regionId) {
 		_regionId = regionId;
 	}
 
-	public String getCountryId() {
+	public long getCountryId() {
 		return _countryId;
 	}
 
-	public void setCountryId(String countryId) {
+	public void setCountryId(long countryId) {
 		_countryId = countryId;
 	}
 
@@ -122,8 +122,8 @@ public class RegionSoap implements Serializable {
 		_active = active;
 	}
 
-	private String _regionId;
-	private String _countryId;
+	private long _regionId;
+	private long _countryId;
 	private String _regionCode;
 	private String _name;
 	private boolean _active;

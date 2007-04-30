@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.enterpriseadmin.search;
 
+import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.DAOParamUtil;
 
 import javax.portlet.RenderRequest;
@@ -41,10 +42,28 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 		street = DAOParamUtil.getLike(req, STREET);
 		city = DAOParamUtil.getLike(req, CITY);
 		zip = DAOParamUtil.getLike(req, ZIP);
-		regionId = DAOParamUtil.getString(req, REGION_ID);
-		countryId = DAOParamUtil.getString(req, COUNTRY_ID);
+		regionId = ParamUtil.getLong(req, REGION_ID);
+		countryId = ParamUtil.getLong(req, COUNTRY_ID);
 		parentOrganizationId = DAOParamUtil.getString(
 			req, PARENT_ORGANIZATION_ID);
+	}
+
+	public Long getRegionIdObj() {
+		if (regionId == 0) {
+			return null;
+		}
+		else {
+			return new Long(regionId);
+		}
+	}
+
+	public Long getCountryIdObj() {
+		if (countryId == 0) {
+			return null;
+		}
+		else {
+			return new Long(countryId);
+		}
 	}
 
 }

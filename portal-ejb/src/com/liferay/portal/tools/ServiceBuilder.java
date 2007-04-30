@@ -6160,11 +6160,10 @@ public class ServiceBuilder {
 						sm.append("invalid");
 					}
 
-					if (col.isPrimary() || colName.equals("groupId") ||
-						colName.equals("companyId") ||
-						colName.equals("userId")) {
-
-						sm.append(" not null");
+					if (col.isPrimary()) {
+						if (!col.isPrimitiveType()) {
+							sm.append(" not null");
+						}
 
 						if (col.isPrimary() && !entity.hasCompoundPK()) {
 							sm.append(" primary key");

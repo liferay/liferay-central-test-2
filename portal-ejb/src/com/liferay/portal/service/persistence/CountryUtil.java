@@ -38,13 +38,11 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class CountryUtil {
-	public static com.liferay.portal.model.Country create(
-		java.lang.String countryId) {
+	public static com.liferay.portal.model.Country create(long countryId) {
 		return getPersistence().create(countryId);
 	}
 
-	public static com.liferay.portal.model.Country remove(
-		java.lang.String countryId)
+	public static com.liferay.portal.model.Country remove(long countryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchCountryException {
 		ModelListener listener = _getListener();
@@ -139,14 +137,14 @@ public class CountryUtil {
 	}
 
 	public static com.liferay.portal.model.Country findByPrimaryKey(
-		java.lang.String countryId)
+		long countryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchCountryException {
 		return getPersistence().findByPrimaryKey(countryId);
 	}
 
 	public static com.liferay.portal.model.Country fetchByPrimaryKey(
-		java.lang.String countryId) throws com.liferay.portal.SystemException {
+		long countryId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(countryId);
 	}
 
@@ -181,7 +179,7 @@ public class CountryUtil {
 	}
 
 	public static com.liferay.portal.model.Country[] findByActive_PrevAndNext(
-		java.lang.String countryId, boolean active,
+		long countryId, boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchCountryException {

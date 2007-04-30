@@ -68,8 +68,8 @@ public class OrganizationServiceImpl extends PrincipalBean
 	}
 
 	public Organization addOrganization(
-			String parentOrganizationId, String name, String regionId,
-			String countryId, int statusId, boolean location)
+			String parentOrganizationId, String name, long regionId,
+			long countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		if (location) {
@@ -149,8 +149,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 
 	public Organization updateOrganization(
 			String organizationId, String parentOrganizationId, String name,
-			String regionId, String countryId, int statusId,
-			boolean location)
+			long regionId, long countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		checkPermission(organizationId, ActionKeys.UPDATE);

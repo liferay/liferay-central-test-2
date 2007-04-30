@@ -72,19 +72,19 @@ public class CountrySoap implements Serializable {
 	public CountrySoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _countryId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setCountryId(pk);
 	}
 
-	public String getCountryId() {
+	public long getCountryId() {
 		return _countryId;
 	}
 
-	public void setCountryId(String countryId) {
+	public void setCountryId(long countryId) {
 		_countryId = countryId;
 	}
 
@@ -140,7 +140,7 @@ public class CountrySoap implements Serializable {
 		_active = active;
 	}
 
-	private String _countryId;
+	private long _countryId;
 	private String _name;
 	private String _a2;
 	private String _a3;

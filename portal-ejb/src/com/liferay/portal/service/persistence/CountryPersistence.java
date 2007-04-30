@@ -52,7 +52,7 @@ import java.util.List;
  *
  */
 public class CountryPersistence extends BasePersistence {
-	public Country create(String countryId) {
+	public Country create(long countryId) {
 		Country country = new CountryImpl();
 		country.setNew(true);
 		country.setPrimaryKey(countryId);
@@ -60,14 +60,15 @@ public class CountryPersistence extends BasePersistence {
 		return country;
 	}
 
-	public Country remove(String countryId)
+	public Country remove(long countryId)
 		throws NoSuchCountryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Country country = (Country)session.get(CountryImpl.class, countryId);
+			Country country = (Country)session.get(CountryImpl.class,
+					new Long(countryId));
 
 			if (country == null) {
 				if (_log.isWarnEnabled()) {
@@ -145,7 +146,7 @@ public class CountryPersistence extends BasePersistence {
 		}
 	}
 
-	public Country findByPrimaryKey(String countryId)
+	public Country findByPrimaryKey(long countryId)
 		throws NoSuchCountryException, SystemException {
 		Country country = fetchByPrimaryKey(countryId);
 
@@ -162,14 +163,13 @@ public class CountryPersistence extends BasePersistence {
 		return country;
 	}
 
-	public Country fetchByPrimaryKey(String countryId)
-		throws SystemException {
+	public Country fetchByPrimaryKey(long countryId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (Country)session.get(CountryImpl.class, countryId);
+			return (Country)session.get(CountryImpl.class, new Long(countryId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -287,7 +287,7 @@ public class CountryPersistence extends BasePersistence {
 		}
 	}
 
-	public Country[] findByActive_PrevAndNext(String countryId, boolean active,
+	public Country[] findByActive_PrevAndNext(long countryId, boolean active,
 		OrderByComparator obc) throws NoSuchCountryException, SystemException {
 		Country country = findByPrimaryKey(countryId);
 		int count = countByActive(active);

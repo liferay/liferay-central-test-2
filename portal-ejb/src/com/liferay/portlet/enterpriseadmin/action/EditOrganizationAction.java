@@ -174,8 +174,8 @@ public class EditOrganizationAction extends PortletAction {
 
 		String name = ParamUtil.getString(req, "name");
 		int statusId = ParamUtil.getInteger(req, "statusId");
-		String regionId = ParamUtil.getString(req, "regionId");
-		String countryId = ParamUtil.getString(req, "countryId");
+		long regionId = ParamUtil.getLong(req, "regionId");
+		long countryId = ParamUtil.getLong(req, "countryId");
 
 		Organization organization = null;
 

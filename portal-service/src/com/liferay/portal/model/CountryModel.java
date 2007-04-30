@@ -45,13 +45,13 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface CountryModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getCountryId();
+	public long getCountryId();
 
-	public void setCountryId(String countryId);
+	public void setCountryId(long countryId);
 
 	public String getName();
 

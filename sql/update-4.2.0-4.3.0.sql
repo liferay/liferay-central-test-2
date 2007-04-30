@@ -27,6 +27,12 @@ alter_column_type Contact_ parentContactId LONG;
 
 alter_column_type Counter currentId LONG;
 
+alter_column_type Country countryId LONG;
+
+alter_column_type CyrusUser userId LONG;
+
+alter_column_type CyrusVirtual userId LONG;
+
 alter_column_type DLFolder groupId LONG;
 
 alter_column_type EmailAddress emailAddressId LONG;
@@ -75,7 +81,7 @@ update LayoutSet set logo = FALSE;
 alter_column_type ListType listTypeId INTEGER;
 
 create table MBBan (
-	banId LONG not null primary key,
+	banId LONG primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -99,7 +105,7 @@ alter_column_type OrgGroupRole groupId LONG;
 alter_column_type OrgLabor typeId INTEGER;
 
 create table PasswordPolicy (
-	passwordPolicyId LONG not null primary key,
+	passwordPolicyId LONG primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -128,7 +134,7 @@ create table PasswordPolicy (
 );
 
 create table PasswordPolicyRel (
-	passwordPolicyRelId LONG not null primary key,
+	passwordPolicyRelId LONG primary key,
 	passwordPolicyId LONG,
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null
@@ -144,7 +150,7 @@ alter_column_type Phone phoneId LONG;
 alter_column_type Phone typeId INTEGER;
 
 create table PluginSetting (
-	pluginSettingId LONG not null primary key,
+	pluginSettingId LONG primary key,
 	companyId LONG,
 	pluginId VARCHAR(75) null,
 	pluginType VARCHAR(75) null,
@@ -154,6 +160,8 @@ create table PluginSetting (
 
 alter_column_type PollsQuestion groupId LONG;
 
+alter_column_type Region regionId LONG;
+
 alter_column_type Release_ releaseId LONG;
 alter table Release_ add verified BOOLEAN;
 
@@ -162,7 +170,7 @@ alter table Resource_ add codeId LONG;
 alter table Resource_ drop typeId;
 
 create table ResourceCode (
-	codeId LONG not null primary key,
+	codeId LONG primary key,
 	companyId LONG,
 	name VARCHAR(75) null,
 	scope INTEGER
@@ -180,7 +188,7 @@ create table SCFrameworkVersi_SCProductVers (
 );
 
 create table SCFrameworkVersion (
-	frameworkVersionId LONG not null primary key,
+	frameworkVersionId LONG primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -194,7 +202,7 @@ create table SCFrameworkVersion (
 );
 
 create table SCLicense (
-	licenseId LONG not null primary key,
+	licenseId LONG primary key,
 	name VARCHAR(75) null,
 	url VARCHAR(1024) null,
 	openSource BOOLEAN,
@@ -209,7 +217,7 @@ create table SCLicenses_SCProductEntries (
 );
 
 create table SCProductEntry (
-	productEntryId LONG not null primary key,
+	productEntryId LONG primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -226,7 +234,7 @@ create table SCProductEntry (
 );
 
 create table SCProductVersion (
-	productVersionId LONG not null primary key,
+	productVersionId LONG primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -289,7 +297,7 @@ alter_column_type ShoppingOrder groupId LONG;
 alter_column_type Subscription subscriptionId LONG;
 
 create table TagsAsset (
-	assetId LONG not null primary key,
+	assetId LONG primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -315,7 +323,7 @@ create table TagsAssets_TagsEntries (
 );
 
 create table TagsEntry (
-	entryId LONG not null primary key,
+	entryId LONG primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -325,7 +333,7 @@ create table TagsEntry (
 );
 
 create table TagsProperty (
-	propertyId LONG not null primary key,
+	propertyId LONG primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -337,7 +345,7 @@ create table TagsProperty (
 );
 
 create table TagsSource (
-	sourceId LONG not null primary key,
+	sourceId LONG primary key,
 	parentSourceId LONG,
 	name VARCHAR(75) null,
 	acronym VARCHAR(75) null
@@ -350,8 +358,8 @@ update User_ set defaultUser = FALSE;
 update User_ set screenName = userId;
 
 create table UserGroupRole (
-	userId LONG not null,
-	groupId LONG not null,
+	userId LONG,
+	groupId LONG,
 	roleId VARCHAR(75) not null,
 	primary key (userId, groupId, roleId)
 );

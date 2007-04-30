@@ -55,8 +55,7 @@ public interface CountryService {
 	public java.util.List getCountries(boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Country getCountry(
-		java.lang.String countryId)
+	public com.liferay.portal.model.Country getCountry(long countryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

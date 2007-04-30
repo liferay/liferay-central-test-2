@@ -75,7 +75,7 @@ public class OrganizationLocalServiceImpl
 
 	public Organization addOrganization(
 			long userId, String parentOrganizationId, String name,
-			String regionId, String countryId, int statusId, boolean location)
+			long regionId, long countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		// Organization
@@ -260,7 +260,7 @@ public class OrganizationLocalServiceImpl
 	public List search(
 			long companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
-			String city, String zip, String regionId, String countryId,
+			String city, String zip, Long regionId, Long countryId,
 			LinkedHashMap params, boolean andOperator, int begin, int end)
 		throws SystemException {
 
@@ -273,7 +273,7 @@ public class OrganizationLocalServiceImpl
 	public int searchCount(
 			long companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
-			String city, String zip, String regionId, String countryId,
+			String city, String zip, Long regionId, Long countryId,
 			LinkedHashMap params, boolean andOperator)
 		throws SystemException {
 
@@ -304,9 +304,9 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public Organization updateOrganization(
-			long companyId, String organizationId,
-			String parentOrganizationId, String name, String regionId,
-			String countryId, int statusId, boolean location)
+			long companyId, String organizationId, String parentOrganizationId,
+			String name, long regionId, long countryId, int statusId,
+			boolean location)
 		throws PortalException, SystemException {
 
 		parentOrganizationId = getParentOrganizationId(
@@ -374,7 +374,7 @@ public class OrganizationLocalServiceImpl
 
 	protected void validate(
 			long companyId, String parentOrganizationId, String name,
-			String countryId, int statusId, boolean location)
+			long countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		validate(
@@ -384,7 +384,7 @@ public class OrganizationLocalServiceImpl
 
 	protected void validate(
 			long companyId, String organizationId, String parentOrganizationId,
-			String name, String countryId, int statusId, boolean location)
+			String name, long countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		if (location) {
