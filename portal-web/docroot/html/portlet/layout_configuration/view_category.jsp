@@ -43,6 +43,8 @@ List portlets = new ArrayList();
 
 Iterator itr1 = portletCategory.getPortlets().iterator();
 
+String externalPortletCategory = null;
+
 while (itr1.hasNext()) {
 	String portletId = (String)itr1.next();
 
@@ -60,6 +62,18 @@ while (itr1.hasNext()) {
 		else {
 			portlets.add(portlet);
 		}
+		
+		if (portlet.isWARFile() && Validator.isNull(externalPortletCategory)) {
+			PortletConfig ptltConfig = PortletConfigFactory.create(portlet, application);
+
+			ResourceBundle resourceBundle = ptltConfig.getResourceBundle(locale);
+			
+			try {
+				externalPortletCategory = resourceBundle.getString(portletCategory.getName());
+			}
+			catch (java.util.MissingResourceException mre) {
+			}
+		}
 	}
 }
 
@@ -74,7 +88,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 			<td>
 				<div style="padding: 2px; font-weight: bold;">
 					<a href="javascript: void(0);" onClick="LayoutConfiguration.toggleCategory(this);">
-					<img src="<%= themeDisplay.getPathThemeImages() + "/arrows/01_right.png" %>" /> <%= LanguageUtil.get(pageContext, portletCategory.getName()) %>
+					<img src="<%= themeDisplay.getPathThemeImages() + "/arrows/01_right.png" %>" /> <%= Validator.isNotNull(externalPortletCategory)?externalPortletCategory:LanguageUtil.get(pageContext, portletCategory.getName()) %>
 					</a>
 				</div>
 			</td>
