@@ -45,13 +45,13 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface OrgLaborModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getOrgLaborId();
+	public long getOrgLaborId();
 
-	public void setOrgLaborId(String orgLaborId);
+	public void setOrgLaborId(long orgLaborId);
 
 	public String getOrganizationId();
 

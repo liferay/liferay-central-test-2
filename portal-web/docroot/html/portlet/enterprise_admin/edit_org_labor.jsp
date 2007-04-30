@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 OrgLabor orgLabor = (OrgLabor)request.getAttribute(WebKeys.ORG_LABOR);
 
-String orgLaborId = BeanParamUtil.getString(orgLabor, request, "orgLaborId");
+long orgLaborId = BeanParamUtil.getLong(orgLabor, request, "orgLaborId");
 
 String organizationId = BeanParamUtil.getString(orgLabor, request, "organizationId");
 int typeId = BeanParamUtil.getInteger(orgLabor, request, "typeId");

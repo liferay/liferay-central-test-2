@@ -96,7 +96,7 @@ public class OrgLaborServiceSoap {
 		}
 	}
 
-	public static void deleteOrgLabor(java.lang.String orgLaborId)
+	public static void deleteOrgLabor(long orgLaborId)
 		throws RemoteException {
 		try {
 			OrgLaborServiceUtil.deleteOrgLabor(orgLaborId);
@@ -108,7 +108,7 @@ public class OrgLaborServiceSoap {
 	}
 
 	public static com.liferay.portal.model.OrgLaborSoap getOrgLabor(
-		java.lang.String orgLaborId) throws RemoteException {
+		long orgLaborId) throws RemoteException {
 		try {
 			com.liferay.portal.model.OrgLabor returnValue = OrgLaborServiceUtil.getOrgLabor(orgLaborId);
 
@@ -134,10 +134,10 @@ public class OrgLaborServiceSoap {
 	}
 
 	public static com.liferay.portal.model.OrgLaborSoap updateOrgLabor(
-		java.lang.String orgLaborId, int sunOpen, int sunClose, int monOpen,
-		int monClose, int tueOpen, int tueClose, int wedOpen, int wedClose,
-		int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
-		int satClose) throws RemoteException {
+		long orgLaborId, int sunOpen, int sunClose, int monOpen, int monClose,
+		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
+		int thuClose, int friOpen, int friClose, int satOpen, int satClose)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.OrgLabor returnValue = OrgLaborServiceUtil.updateOrgLabor(orgLaborId,
 					sunOpen, sunClose, monOpen, monClose, tueOpen, tueClose,

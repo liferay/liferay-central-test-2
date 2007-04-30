@@ -239,7 +239,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.OrgLaborImpl" table="OrgLabor">
 		<cache usage="read-write" />
-		<id name="orgLaborId" type="java.lang.String">
+		<id name="orgLaborId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="organizationId" type="com.liferay.util.dao.hibernate.StringType" />

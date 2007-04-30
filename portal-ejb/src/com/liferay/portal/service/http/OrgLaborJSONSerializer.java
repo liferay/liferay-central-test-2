@@ -51,14 +51,7 @@ import java.util.List;
 public class OrgLaborJSONSerializer {
 	public static JSONObject toJSONObject(OrgLabor model) {
 		JSONObject jsonObj = new JSONObject();
-		String orgLaborId = model.getOrgLaborId();
-
-		if (orgLaborId == null) {
-			jsonObj.put("orgLaborId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("orgLaborId", orgLaborId.toString());
-		}
+		jsonObj.put("orgLaborId", model.getOrgLaborId());
 
 		String organizationId = model.getOrganizationId();
 

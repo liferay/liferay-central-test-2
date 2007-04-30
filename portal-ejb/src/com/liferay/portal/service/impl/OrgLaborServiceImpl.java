@@ -60,7 +60,7 @@ public class OrgLaborServiceImpl
 			friClose, satOpen, satClose);
 	}
 
-	public void deleteOrgLabor(String orgLaborId)
+	public void deleteOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
 
 		OrgLabor orgLabor = OrgLaborUtil.findByPrimaryKey(orgLaborId);
@@ -70,7 +70,7 @@ public class OrgLaborServiceImpl
 		OrgLaborLocalServiceUtil.deleteOrgLabor(orgLaborId);
 	}
 
-	public OrgLabor getOrgLabor(String orgLaborId)
+	public OrgLabor getOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
 
 		OrgLabor orgLabor = OrgLaborUtil.findByPrimaryKey(orgLaborId);
@@ -89,7 +89,7 @@ public class OrgLaborServiceImpl
 	}
 
 	public OrgLabor updateOrgLabor(
-			String orgLaborId, int sunOpen, int sunClose, int monOpen,
+			long orgLaborId, int sunOpen, int sunClose, int monOpen,
 			int monClose, int tueOpen, int tueClose, int wedOpen, int wedClose,
 			int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
 			int satClose)

@@ -174,11 +174,11 @@ public class ActionUtil {
 	}
 
 	public static void getOrgLabor(HttpServletRequest req) throws Exception {
-		String orgLaborId = ParamUtil.getString(req, "orgLaborId");
+		long orgLaborId = ParamUtil.getLong(req, "orgLaborId");
 
 		OrgLabor orgLabor = null;
 
-		if (Validator.isNotNull(orgLaborId)) {
+		if (orgLaborId > 0) {
 			orgLabor = OrgLaborServiceUtil.getOrgLabor(orgLaborId);
 		}
 

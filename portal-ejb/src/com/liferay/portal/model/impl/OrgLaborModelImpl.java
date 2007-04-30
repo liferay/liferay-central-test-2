@@ -53,7 +53,7 @@ import java.sql.Types;
 public class OrgLaborModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "OrgLabor";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "orgLaborId", new Integer(Types.VARCHAR) },
+			{ "orgLaborId", new Integer(Types.BIGINT) },
 			{ "organizationId", new Integer(Types.VARCHAR) },
 			{ "typeId", new Integer(Types.INTEGER) },
 			{ "sunOpen", new Integer(Types.INTEGER) },
@@ -73,9 +73,6 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgLabor"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_ORGLABORID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.OrgLabor.orgLaborId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ORGANIZATIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgLabor.organizationId"),
 			XSS_ALLOW_BY_MODEL);
@@ -85,27 +82,20 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 	public OrgLaborModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _orgLaborId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setOrgLaborId(pk);
 	}
 
-	public String getOrgLaborId() {
-		return GetterUtil.getString(_orgLaborId);
+	public long getOrgLaborId() {
+		return _orgLaborId;
 	}
 
-	public void setOrgLaborId(String orgLaborId) {
-		if (((orgLaborId == null) && (_orgLaborId != null)) ||
-				((orgLaborId != null) && (_orgLaborId == null)) ||
-				((orgLaborId != null) && (_orgLaborId != null) &&
-				!orgLaborId.equals(_orgLaborId))) {
-			if (!XSS_ALLOW_ORGLABORID) {
-				orgLaborId = XSSUtil.strip(orgLaborId);
-			}
-
+	public void setOrgLaborId(long orgLaborId) {
+		if (orgLaborId != _orgLaborId) {
 			_orgLaborId = orgLaborId;
 		}
 	}
@@ -344,9 +334,9 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = orgLabor.getPrimaryKey();
+		long pk = orgLabor.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -355,10 +345,10 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _orgLaborId;
+	private long _orgLaborId;
 	private String _organizationId;
 	private int _typeId;
 	private int _sunOpen;

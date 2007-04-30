@@ -29,7 +29,6 @@ import com.liferay.portal.service.OrgLaborServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -110,13 +109,13 @@ public class EditOrgLaborAction extends PortletAction {
 	}
 
 	protected void deleteOrgLabor(ActionRequest req) throws Exception {
-		String orgLaborId = ParamUtil.getString(req, "orgLaborId");
+		long orgLaborId = ParamUtil.getLong(req, "orgLaborId");
 
 		OrgLaborServiceUtil.deleteOrgLabor(orgLaborId);
 	}
 
 	protected void updateOrgLabor(ActionRequest req) throws Exception {
-		String orgLaborId = ParamUtil.getString(req, "orgLaborId");
+		long orgLaborId = ParamUtil.getLong(req, "orgLaborId");
 
 		String organizationId = ParamUtil.getString(req, "organizationId");
 		int typeId = ParamUtil.getInteger(req, "typeId");
@@ -142,7 +141,7 @@ public class EditOrgLaborAction extends PortletAction {
 		int satOpen = ParamUtil.getInteger(req, "satOpen");
 		int satClose = ParamUtil.getInteger(req, "satClose");
 
-		if (Validator.isNull(orgLaborId)) {
+		if (orgLaborId <= 0) {
 
 			// Add organization labor
 

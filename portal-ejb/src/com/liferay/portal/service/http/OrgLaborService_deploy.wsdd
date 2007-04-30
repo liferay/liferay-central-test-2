@@ -28,16 +28,16 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="satClose" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteOrgLabor" qname="operNS:deleteOrgLabor" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="orgLaborId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="orgLaborId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getOrgLabor" qname="operNS:getOrgLabor" returnQName="getOrgLaborReturn" returnType="rtns:OrgLaborSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="orgLaborId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="orgLaborId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getOrgLabors" qname="operNS:getOrgLabors" returnQName="getOrgLaborsReturn" returnType="rtns:ArrayOf_tns2_OrgLaborSoap" returnItemType="tns2:OrgLaborSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateOrgLabor" qname="operNS:updateOrgLabor" returnQName="updateOrgLaborReturn" returnType="rtns:OrgLaborSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="orgLaborId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="orgLaborId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sunOpen" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sunClose" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="monOpen" type="tns:int"></parameter>

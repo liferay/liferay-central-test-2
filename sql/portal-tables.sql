@@ -559,7 +559,7 @@ create table OrgGroupRole (
 );
 
 create table OrgLabor (
-	orgLaborId VARCHAR(75) not null primary key,
+	orgLaborId LONG primary key,
 	organizationId VARCHAR(75) null,
 	typeId INTEGER,
 	sunOpen INTEGER,

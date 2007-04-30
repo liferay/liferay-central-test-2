@@ -83,13 +83,13 @@ public class OrgLaborServiceJSON {
 		return OrgLaborJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteOrgLabor(java.lang.String orgLaborId)
+	public static void deleteOrgLabor(long orgLaborId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		OrgLaborServiceUtil.deleteOrgLabor(orgLaborId);
 	}
 
-	public static JSONObject getOrgLabor(java.lang.String orgLaborId)
+	public static JSONObject getOrgLabor(long orgLaborId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.OrgLabor returnValue = OrgLaborServiceUtil.getOrgLabor(orgLaborId);
@@ -105,10 +105,10 @@ public class OrgLaborServiceJSON {
 		return OrgLaborJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONObject updateOrgLabor(java.lang.String orgLaborId,
-		int sunOpen, int sunClose, int monOpen, int monClose, int tueOpen,
-		int tueClose, int wedOpen, int wedClose, int thuOpen, int thuClose,
-		int friOpen, int friClose, int satOpen, int satClose)
+	public static JSONObject updateOrgLabor(long orgLaborId, int sunOpen,
+		int sunClose, int monOpen, int monClose, int tueOpen, int tueClose,
+		int wedOpen, int wedClose, int thuOpen, int thuClose, int friOpen,
+		int friClose, int satOpen, int satClose)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.OrgLabor returnValue = OrgLaborServiceUtil.updateOrgLabor(orgLaborId,

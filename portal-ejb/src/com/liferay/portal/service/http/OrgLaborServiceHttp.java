@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -132,16 +133,11 @@ public class OrgLaborServiceHttp {
 	}
 
 	public static void deleteOrgLabor(HttpPrincipal httpPrincipal,
-		java.lang.String orgLaborId)
+		long orgLaborId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = orgLaborId;
-
-			if (orgLaborId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(orgLaborId);
 			MethodWrapper methodWrapper = new MethodWrapper(OrgLaborServiceUtil.class.getName(),
 					"deleteOrgLabor", new Object[] { paramObj0 });
 
@@ -167,16 +163,11 @@ public class OrgLaborServiceHttp {
 	}
 
 	public static com.liferay.portal.model.OrgLabor getOrgLabor(
-		HttpPrincipal httpPrincipal, java.lang.String orgLaborId)
+		HttpPrincipal httpPrincipal, long orgLaborId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = orgLaborId;
-
-			if (orgLaborId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(orgLaborId);
 			MethodWrapper methodWrapper = new MethodWrapper(OrgLaborServiceUtil.class.getName(),
 					"getOrgLabor", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -243,19 +234,14 @@ public class OrgLaborServiceHttp {
 	}
 
 	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
-		HttpPrincipal httpPrincipal, java.lang.String orgLaborId, int sunOpen,
+		HttpPrincipal httpPrincipal, long orgLaborId, int sunOpen,
 		int sunClose, int monOpen, int monClose, int tueOpen, int tueClose,
 		int wedOpen, int wedClose, int thuOpen, int thuClose, int friOpen,
 		int friClose, int satOpen, int satClose)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = orgLaborId;
-
-			if (orgLaborId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(orgLaborId);
 			Object paramObj1 = new IntegerWrapper(sunOpen);
 			Object paramObj2 = new IntegerWrapper(sunClose);
 			Object paramObj3 = new IntegerWrapper(monOpen);

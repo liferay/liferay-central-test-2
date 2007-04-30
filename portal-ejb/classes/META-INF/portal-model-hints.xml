@@ -246,7 +246,7 @@
 		<field name="roleId" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.OrgLabor">
-		<field name="orgLaborId" type="String" />
+		<field name="orgLaborId" type="long" />
 		<field name="organizationId" type="String" />
 		<field name="typeId" type="int" />
 		<field name="sunOpen" type="int" />

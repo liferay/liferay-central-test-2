@@ -38,13 +38,11 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class OrgLaborUtil {
-	public static com.liferay.portal.model.OrgLabor create(
-		java.lang.String orgLaborId) {
+	public static com.liferay.portal.model.OrgLabor create(long orgLaborId) {
 		return getPersistence().create(orgLaborId);
 	}
 
-	public static com.liferay.portal.model.OrgLabor remove(
-		java.lang.String orgLaborId)
+	public static com.liferay.portal.model.OrgLabor remove(long orgLaborId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrgLaborException {
 		ModelListener listener = _getListener();
@@ -139,14 +137,14 @@ public class OrgLaborUtil {
 	}
 
 	public static com.liferay.portal.model.OrgLabor findByPrimaryKey(
-		java.lang.String orgLaborId)
+		long orgLaborId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrgLaborException {
 		return getPersistence().findByPrimaryKey(orgLaborId);
 	}
 
 	public static com.liferay.portal.model.OrgLabor fetchByPrimaryKey(
-		java.lang.String orgLaborId) throws com.liferay.portal.SystemException {
+		long orgLaborId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(orgLaborId);
 	}
 
@@ -187,7 +185,7 @@ public class OrgLaborUtil {
 	}
 
 	public static com.liferay.portal.model.OrgLabor[] findByOrganizationId_PrevAndNext(
-		java.lang.String orgLaborId, java.lang.String organizationId,
+		long orgLaborId, java.lang.String organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrgLaborException {

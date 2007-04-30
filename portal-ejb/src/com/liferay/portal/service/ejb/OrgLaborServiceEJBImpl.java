@@ -68,15 +68,14 @@ public class OrgLaborServiceEJBImpl implements OrgLaborService, SessionBean {
 			satClose);
 	}
 
-	public void deleteOrgLabor(java.lang.String orgLaborId)
+	public void deleteOrgLabor(long orgLaborId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		OrgLaborServiceFactory.getTxImpl().deleteOrgLabor(orgLaborId);
 	}
 
-	public com.liferay.portal.model.OrgLabor getOrgLabor(
-		java.lang.String orgLaborId)
+	public com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -92,11 +91,10 @@ public class OrgLaborServiceEJBImpl implements OrgLaborService, SessionBean {
 		return OrgLaborServiceFactory.getTxImpl().getOrgLabors(organizationId);
 	}
 
-	public com.liferay.portal.model.OrgLabor updateOrgLabor(
-		java.lang.String orgLaborId, int sunOpen, int sunClose, int monOpen,
-		int monClose, int tueOpen, int tueClose, int wedOpen, int wedClose,
-		int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
-		int satClose)
+	public com.liferay.portal.model.OrgLabor updateOrgLabor(long orgLaborId,
+		int sunOpen, int sunClose, int monOpen, int monClose, int tueOpen,
+		int tueClose, int wedOpen, int wedClose, int thuOpen, int thuClose,
+		int friOpen, int friClose, int satOpen, int satClose)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

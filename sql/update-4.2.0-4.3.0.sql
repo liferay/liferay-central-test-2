@@ -103,6 +103,7 @@ alter_column_type OrgGroupPermission groupId LONG;
 
 alter_column_type OrgGroupRole groupId LONG;
 
+alter_column_type OrgLabor orgLaborId LONG;
 alter_column_type OrgLabor typeId INTEGER;
 
 create table PasswordPolicy (

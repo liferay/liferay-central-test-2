@@ -57,12 +57,11 @@ public interface OrgLaborService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteOrgLabor(java.lang.String orgLaborId)
+	public void deleteOrgLabor(long orgLaborId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.OrgLabor getOrgLabor(
-		java.lang.String orgLaborId)
+	public com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -70,11 +69,10 @@ public interface OrgLaborService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.OrgLabor updateOrgLabor(
-		java.lang.String orgLaborId, int sunOpen, int sunClose, int monOpen,
-		int monClose, int tueOpen, int tueClose, int wedOpen, int wedClose,
-		int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
-		int satClose)
+	public com.liferay.portal.model.OrgLabor updateOrgLabor(long orgLaborId,
+		int sunOpen, int sunClose, int monOpen, int monClose, int tueOpen,
+		int tueClose, int wedOpen, int wedClose, int thuOpen, int thuClose,
+		int friOpen, int friClose, int satOpen, int satClose)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

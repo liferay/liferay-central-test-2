@@ -82,19 +82,19 @@ public class OrgLaborSoap implements Serializable {
 	public OrgLaborSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _orgLaborId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setOrgLaborId(pk);
 	}
 
-	public String getOrgLaborId() {
+	public long getOrgLaborId() {
 		return _orgLaborId;
 	}
 
-	public void setOrgLaborId(String orgLaborId) {
+	public void setOrgLaborId(long orgLaborId) {
 		_orgLaborId = orgLaborId;
 	}
 
@@ -226,7 +226,7 @@ public class OrgLaborSoap implements Serializable {
 		_satClose = satClose;
 	}
 
-	private String _orgLaborId;
+	private long _orgLaborId;
 	private String _organizationId;
 	private int _typeId;
 	private int _sunOpen;

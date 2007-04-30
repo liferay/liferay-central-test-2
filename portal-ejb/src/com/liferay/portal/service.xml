@@ -551,7 +551,7 @@
 
 		<!-- PK fields -->
 
-		<column name="orgLaborId" type="String" primary="true" />
+		<column name="orgLaborId" type="long" primary="true" />
 
 		<!-- Other fields -->
 

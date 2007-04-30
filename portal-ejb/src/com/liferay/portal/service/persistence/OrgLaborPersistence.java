@@ -52,7 +52,7 @@ import java.util.List;
  *
  */
 public class OrgLaborPersistence extends BasePersistence {
-	public OrgLabor create(String orgLaborId) {
+	public OrgLabor create(long orgLaborId) {
 		OrgLabor orgLabor = new OrgLaborImpl();
 		orgLabor.setNew(true);
 		orgLabor.setPrimaryKey(orgLaborId);
@@ -60,7 +60,7 @@ public class OrgLaborPersistence extends BasePersistence {
 		return orgLabor;
 	}
 
-	public OrgLabor remove(String orgLaborId)
+	public OrgLabor remove(long orgLaborId)
 		throws NoSuchOrgLaborException, SystemException {
 		Session session = null;
 
@@ -68,7 +68,7 @@ public class OrgLaborPersistence extends BasePersistence {
 			session = openSession();
 
 			OrgLabor orgLabor = (OrgLabor)session.get(OrgLaborImpl.class,
-					orgLaborId);
+					new Long(orgLaborId));
 
 			if (orgLabor == null) {
 				if (_log.isWarnEnabled()) {
@@ -146,7 +146,7 @@ public class OrgLaborPersistence extends BasePersistence {
 		}
 	}
 
-	public OrgLabor findByPrimaryKey(String orgLaborId)
+	public OrgLabor findByPrimaryKey(long orgLaborId)
 		throws NoSuchOrgLaborException, SystemException {
 		OrgLabor orgLabor = fetchByPrimaryKey(orgLaborId);
 
@@ -163,14 +163,15 @@ public class OrgLaborPersistence extends BasePersistence {
 		return orgLabor;
 	}
 
-	public OrgLabor fetchByPrimaryKey(String orgLaborId)
+	public OrgLabor fetchByPrimaryKey(long orgLaborId)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (OrgLabor)session.get(OrgLaborImpl.class, orgLaborId);
+			return (OrgLabor)session.get(OrgLaborImpl.class,
+				new Long(orgLaborId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -311,7 +312,7 @@ public class OrgLaborPersistence extends BasePersistence {
 		}
 	}
 
-	public OrgLabor[] findByOrganizationId_PrevAndNext(String orgLaborId,
+	public OrgLabor[] findByOrganizationId_PrevAndNext(long orgLaborId,
 		String organizationId, OrderByComparator obc)
 		throws NoSuchOrgLaborException, SystemException {
 		OrgLabor orgLabor = findByPrimaryKey(orgLaborId);

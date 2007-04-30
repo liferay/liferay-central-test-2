@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -52,8 +53,8 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 
 		validate(typeId);
 
-		String orgLaborId = String.valueOf(CounterLocalServiceUtil.increment(
-			OrgLabor.class.getName()));
+		long orgLaborId = CounterLocalServiceUtil.increment(
+			Counter.class.getName());
 
 		OrgLabor orgLabor = OrgLaborUtil.create(orgLaborId);
 
@@ -79,13 +80,13 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 		return orgLabor;
 	}
 
-	public void deleteOrgLabor(String orgLaborId)
+	public void deleteOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
 
 		OrgLaborUtil.remove(orgLaborId);
 	}
 
-	public OrgLabor getOrgLabor(String orgLaborId)
+	public OrgLabor getOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
 
 		return OrgLaborUtil.findByPrimaryKey(orgLaborId);
@@ -96,7 +97,7 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 	}
 
 	public OrgLabor updateOrgLabor(
-			String orgLaborId, int sunOpen, int sunClose, int monOpen,
+			long orgLaborId, int sunOpen, int sunClose, int monOpen,
 			int monClose, int tueOpen, int tueClose, int wedOpen, int wedClose,
 			int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
 			int satClose)
