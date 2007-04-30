@@ -116,4 +116,4 @@
 #set ( $session_timeout_include = "/html/common/themes/session_timeout.jsp" )
 #set ( $sound_alerts_include = "/html/common/themes/sound_alerts.jsp" )
 #set ( $top_head_include = "/html/common/themes/top_head.jsp" )
-#set ( $top_warning_include = "/html/common/themes/top_warning.jsp" )
+#set ( $top_messages_include = "/html/common/themes/top_messages.jsp" )
