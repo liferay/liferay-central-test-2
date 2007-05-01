@@ -44,8 +44,16 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portal.comm.CommLink">
+		<priority value="DEBUG" />
+	</category>
+
 	<category name="com.liferay.portal.deploy">
 		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.deploy.hot.ThemeLoaderHotDeployListener">
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.editor">
@@ -200,6 +208,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.servlet.LanguageServlet">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portal.servlet.MainServlet">
 		<priority value="ERROR" />
 	</category>
@@ -213,6 +225,10 @@
 	</category>
 
 	<category name="com.liferay.portal.servlet.filters">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.servlet.filters.velocity.VelocityFilter">
 		<priority value="ERROR" />
 	</category>
 
@@ -244,11 +260,19 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.struts.PortletRequestProcessor">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portal.struts.StrutsURLEncoder">
 		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.struts.StrutsUtil">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.theme.ThemeLoader">
 		<priority value="ERROR" />
 	</category>
 
@@ -281,6 +305,10 @@
 	</category>
 
 	<category name="com.liferay.portal.velocity.ServletVelocityResourceListener">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.velocity.VelocityContextPool">
 		<priority value="ERROR" />
 	</category>
 
@@ -341,7 +369,7 @@
 	</category>
 
 	<category name="com.liferay.portlet.mail">
-		<priority value="ERROR" />
+		<priority value="WARN" />
 	</category>
 
 	<category name="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl">
@@ -373,7 +401,7 @@
 	</category>
 
 	<category name="com.liferay.util.mail">
-		<priority value="ERROR" />
+		<priority value="WARN" />
 	</category>
 
 	<category name="com.liferay.util.servlet.ServletResponseUtil">
@@ -453,6 +481,10 @@
 	</category>
 
 	<category name="org.apache.wsrp4j">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="org.apache.xbean">
 		<priority value="ERROR" />
 	</category>
 

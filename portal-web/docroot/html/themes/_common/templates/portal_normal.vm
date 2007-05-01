@@ -11,7 +11,7 @@
 
 	#css($css_main_file)
 	#js($js_main_file)
-	
+
 	#if ($company_logo != "")
 	<style>
 		#banner .logo {
