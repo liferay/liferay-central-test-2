@@ -13,19 +13,20 @@
 	#js($js_main_file)
 
 	#if ($company_logo != "")
-	<style>
-		#banner .logo {
-			padding: 0.52em 0.6em 0.48em;
-		}
-		#banner .logo a {
-			background: url($company_logo) no-repeat;
-			display: block;
-			font-size: 0;
-			height:  50px;
-			text-indent: -9999em;
-			width:  200px;
-		}
-	</style>
+		<style>
+			#banner .logo {
+				padding: 0.52em 0.6em 0.48em;
+			}
+
+			#banner .logo a {
+				background: url($company_logo) no-repeat;
+				display: block;
+				font-size: 0;
+				height:  50px;
+				text-indent: -9999em;
+				width:  200px;
+			}
+		</style>
 	#end
 </head>
 

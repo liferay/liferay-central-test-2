@@ -145,8 +145,8 @@ body.staging {
 .popup {
 	background: #fff;
 	border: 1px solid #777;
-	position: absolute;
 	padding: 0.4em;
+	position: absolute;
 }
 
 .popup-header {
