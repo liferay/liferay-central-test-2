@@ -34,6 +34,7 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.ContactIdUpgradeColumnImpl;
@@ -55,15 +56,14 @@ public class UpgradeContact extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeContact();
-			_upgradeTable();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeContact() throws Exception {
+	private void _upgrade() throws Exception {
 
 		// Contact_
 
@@ -77,25 +77,31 @@ public class UpgradeContact extends UpgradeProcess {
 
 		ValueMapper contactIdMapper = upgradeColumn.getValueMapper();
 
+		TempUpgradeColumnImpl upgradeUserIdColumn = new TempUpgradeColumnImpl(
+			"userId");
+
+		UpgradeColumn upgradeContactIdColumn = new ContactIdUpgradeColumnImpl(
+			"contactId", upgradeUserIdColumn, contactIdMapper);
+
+		TempUpgradeColumnImpl upgradeClassNameColumn =
+			new TempUpgradeColumnImpl("className");
+
+		UpgradeColumn upgradeClassPKColumn = new ContactIdUpgradeColumnImpl(
+			"classPK", upgradeClassNameColumn, contactIdMapper);
+
 		// User_
 
-		TempUpgradeColumnImpl tempColumn = new TempUpgradeColumnImpl("userId");
-
 		upgradeTable = new DefaultUpgradeTableImpl(
-			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS, tempColumn,
-			new ContactIdUpgradeColumnImpl(
-				"contactId", tempColumn, contactIdMapper));
+			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS,
+			upgradeUserIdColumn, upgradeContactIdColumn);
 
 		upgradeTable.updateTable();
 
 		// Address
 
-		tempColumn = new TempUpgradeColumnImpl("className");
-
 		upgradeTable = new DefaultUpgradeTableImpl(
-			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS, tempColumn,
-			new ContactIdUpgradeColumnImpl(
-				"classPK", tempColumn, contactIdMapper));
+			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS,
+			upgradeClassNameColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
@@ -103,35 +109,32 @@ public class UpgradeContact extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			EmailAddressImpl.TABLE_NAME, EmailAddressImpl.TABLE_COLUMNS,
-			tempColumn, new ContactIdUpgradeColumnImpl(
-				"classPK", tempColumn, contactIdMapper));
+			upgradeClassNameColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
 		// Phone
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			PhoneImpl.TABLE_NAME, PhoneImpl.TABLE_COLUMNS, tempColumn,
-			new ContactIdUpgradeColumnImpl(
-				"classPK", tempColumn, contactIdMapper));
+			PhoneImpl.TABLE_NAME, PhoneImpl.TABLE_COLUMNS,
+			upgradeClassNameColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
 		// Website
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS, tempColumn,
-			new ContactIdUpgradeColumnImpl(
-				"classPK", tempColumn, contactIdMapper));
+			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS,
+			upgradeClassNameColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
+
+		// Schema
+
+		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
 	}
 
-	private void _upgradeTable() throws Exception {
-		DBUtil.getInstance().executeSQL(_ALTER_COLUMN);
-	}
-
-	private static final String _ALTER_COLUMN =
+	private static final String _UPGRADE_SCHEMA =
 		"alter_column_type Contact_ contactId LONG";
 
 	private static Log _log = LogFactory.getLog(UpgradeContact.class);

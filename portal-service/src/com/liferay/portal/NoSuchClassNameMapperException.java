@@ -23,7 +23,8 @@
 package com.liferay.portal;
 
 /**
- * <a href="NoSuchClassNameMapperException.java.html"><b><i>View Source</i></b></a>
+ * <a href="NoSuchClassNameMapperException.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *

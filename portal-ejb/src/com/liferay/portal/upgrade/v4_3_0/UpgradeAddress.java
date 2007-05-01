@@ -46,24 +46,26 @@ public class UpgradeAddress extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeAddress();
-			_upgradeCounter();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(Address.class.getName());
-	}
+	private void _upgrade() throws Exception {
 
-	private void _upgradeAddress() throws Exception {
+		// Address
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
+
+		// Counter
+
+		CounterLocalServiceUtil.reset(Address.class.getName());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeAddress.class);

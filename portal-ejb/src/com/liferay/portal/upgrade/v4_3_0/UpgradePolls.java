@@ -28,6 +28,7 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
@@ -51,20 +52,14 @@ public class UpgradePolls extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradePolls();
-			_upgradeResource();
-			_upgradeCounter();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(PollsQuestion.class.getName());
-	}
-
-	private void _upgradePolls() throws Exception {
+	private void _upgrade() throws Exception {
 
 		// PollsQuestion
 
@@ -76,29 +71,34 @@ public class UpgradePolls extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		_questionIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper questionIdMapper = pkUpgradeColumn.getValueMapper();
+
+		UpgradeColumn upgradeQuestionIdColumn = new SwapUpgradeColumnImpl(
+			"questionId", questionIdMapper);
 
 		// PollsChoice
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			PollsChoiceImpl.TABLE_NAME, PollsChoiceImpl.TABLE_COLUMNS,
-			new SwapUpgradeColumnImpl("questionId", _questionIdMapper));
+			upgradeQuestionIdColumn);
 
 		// PollsVote
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			PollsVoteImpl.TABLE_NAME, PollsVoteImpl.TABLE_COLUMNS,
-			new SwapUpgradeColumnImpl("questionId", _questionIdMapper));
+			upgradeQuestionIdColumn);
 
 		upgradeTable.updateTable();
-	}
 
-	private void _upgradeResource() throws Exception {
+		// Resource
+
 		ResourceUtil.upgradePrimKey(
-			_questionIdMapper, PollsQuestion.class.getName());
-	}
+			questionIdMapper, PollsQuestion.class.getName());
 
-	private ValueMapper _questionIdMapper;
+		// Counter
+
+		CounterLocalServiceUtil.reset(PollsQuestion.class.getName());
+	}
 
 	private static Log _log = LogFactory.getLog(UpgradePolls.class);
 

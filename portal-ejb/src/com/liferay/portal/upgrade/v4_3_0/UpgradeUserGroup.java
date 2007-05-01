@@ -52,25 +52,14 @@ public class UpgradeUserGroup extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeUserGroup();
-			_upgradeResource();
-			_upgradeCounter();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(UserGroup.class.getName());
-	}
-
-	private void _upgradeResource() throws Exception {
-		ResourceUtil.upgradePrimKey(
-			_userGroupIdMapper, UserGroup.class.getName());
-	}
-
-	private void _upgradeUserGroup() throws Exception {
+	private void _upgrade() throws Exception {
 
 		// UserGroup
 
@@ -82,10 +71,10 @@ public class UpgradeUserGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		_userGroupIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper userGroupIdMapper = pkUpgradeColumn.getValueMapper();
 
 		UpgradeColumn upgradeUserGroupIdColumn =
-			new SwapUpgradeColumnImpl("userGroupId", _userGroupIdMapper);
+			new SwapUpgradeColumnImpl("userGroupId", userGroupIdMapper);
 
 		// Groups_UserGroups
 
@@ -102,9 +91,16 @@ public class UpgradeUserGroup extends UpgradeProcess {
 			upgradeUserGroupIdColumn);
 
 		upgradeTable.updateTable();
-	}
 
-	private ValueMapper _userGroupIdMapper;
+		// Resource
+
+		ResourceUtil.upgradePrimKey(
+			userGroupIdMapper, UserGroup.class.getName());
+
+		// Counter
+
+		CounterLocalServiceUtil.reset(UserGroup.class.getName());
+	}
 
 	private static final String _TABLE_GROUPS_USERGROUPS = "Groups_UserGroups";
 

@@ -48,16 +48,14 @@ public class UpgradeCalendar extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeCalendar();
-			_upgradeResource();
-			_upgradeCounter();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeCalendar() throws Exception {
+	private void _upgrade() throws Exception {
 		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
@@ -66,18 +64,16 @@ public class UpgradeCalendar extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		_eventIdMapper = pkUpgradeColumn.getValueMapper();
-	}
+		ValueMapper eventIdMapper = pkUpgradeColumn.getValueMapper();
 
-	private void _upgradeCounter() throws Exception {
+		// Resource
+
+		ResourceUtil.upgradePrimKey(eventIdMapper, CalEvent.class.getName());
+
+		// Counter
+
 		CounterLocalServiceUtil.reset(CalEvent.class.getName());
 	}
-
-	private void _upgradeResource() throws Exception {
-		ResourceUtil.upgradePrimKey(_eventIdMapper, CalEvent.class.getName());
-	}
-
-	private ValueMapper _eventIdMapper;
 
 	private static Log _log = LogFactory.getLog(UpgradeCalendar.class);
 

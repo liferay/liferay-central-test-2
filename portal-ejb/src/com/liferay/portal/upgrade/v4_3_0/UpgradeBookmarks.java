@@ -28,6 +28,7 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.DefaultParentIdMapper;
@@ -52,21 +53,14 @@ public class UpgradeBookmarks extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeBookmarks();
-			_upgradeResource();
-			_upgradeCounter();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(BookmarksFolder.class.getName());
-		CounterLocalServiceUtil.reset(BookmarksEntry.class.getName());
-	}
-
-	private void _upgradeBookmarks() throws Exception {
+	private void _upgrade() throws Exception {
 
 		// BookmarksFolder
 
@@ -78,14 +72,20 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		_folderIdMapper = new DefaultParentIdMapper(
+		ValueMapper folderIdMapper = new DefaultParentIdMapper(
 			pkUpgradeColumn.getValueMapper());
+
+		UpgradeColumn upgradeParentFolderIdColumn = new SwapUpgradeColumnImpl(
+			"parentFolderId", folderIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksFolderImpl.TABLE_NAME, BookmarksFolderImpl.TABLE_COLUMNS,
-			new SwapUpgradeColumnImpl("parentFolderId", _folderIdMapper));
+			upgradeParentFolderIdColumn);
 
 		upgradeTable.updateTable();
+
+		UpgradeColumn upgradeFolderIdColumn = new SwapUpgradeColumnImpl(
+			"folderId", folderIdMapper);
 
 		// BookmarksEntry
 
@@ -93,24 +93,24 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksEntryImpl.TABLE_NAME, BookmarksEntryImpl.TABLE_COLUMNS,
-			pkUpgradeColumn,
-			new SwapUpgradeColumnImpl("folderId", _folderIdMapper));
+			pkUpgradeColumn, upgradeFolderIdColumn);
 
 		upgradeTable.updateTable();
 
-		_entryIdMapper = pkUpgradeColumn.getValueMapper();
-	}
+		ValueMapper entryIdMapper = pkUpgradeColumn.getValueMapper();
 
-	private void _upgradeResource() throws Exception {
-		ResourceUtil.upgradePrimKey(
-			_folderIdMapper, BookmarksFolder.class.getName());
+		// Resource
 
 		ResourceUtil.upgradePrimKey(
-			_entryIdMapper, BookmarksEntry.class.getName());
-	}
+			folderIdMapper, BookmarksFolder.class.getName());
+		ResourceUtil.upgradePrimKey(
+			entryIdMapper, BookmarksEntry.class.getName());
 
-	private ValueMapper _folderIdMapper;
-	private ValueMapper _entryIdMapper;
+		// Counter
+
+		CounterLocalServiceUtil.reset(BookmarksFolder.class.getName());
+		CounterLocalServiceUtil.reset(BookmarksEntry.class.getName());
+	}
 
 	private static Log _log = LogFactory.getLog(UpgradeBookmarks.class);
 

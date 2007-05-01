@@ -28,6 +28,7 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.DefaultParentIdMapper;
@@ -52,21 +53,14 @@ public class UpgradeBlogs extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeBlogs();
-			_upgradeResource();
-			_upgradeCounter();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(BlogsCategory.class.getName());
-		CounterLocalServiceUtil.reset(BlogsEntry.class.getName());
-	}
-
-	private void _upgradeBlogs() throws Exception {
+	private void _upgrade() throws Exception {
 
 		// BlogsCategory
 
@@ -78,14 +72,20 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		_categoryIdMapper = new DefaultParentIdMapper(
+		ValueMapper categoryIdMapper = new DefaultParentIdMapper(
 			pkUpgradeColumn.getValueMapper());
+
+		UpgradeColumn upgradeParentCategoryIdColumn = new SwapUpgradeColumnImpl(
+			"parentCategoryId", categoryIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsCategoryImpl.TABLE_NAME, BlogsCategoryImpl.TABLE_COLUMNS,
-			new SwapUpgradeColumnImpl("parentCategoryId", _categoryIdMapper));
+			upgradeParentCategoryIdColumn);
 
 		upgradeTable.updateTable();
+
+		UpgradeColumn upgradeCategoryIdColumn = new SwapUpgradeColumnImpl(
+			"categoryId", categoryIdMapper);
 
 		// BlogsEntry
 
@@ -93,23 +93,23 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,
-			pkUpgradeColumn,
-			new SwapUpgradeColumnImpl("categoryId", _categoryIdMapper));
+			pkUpgradeColumn, upgradeCategoryIdColumn);
 
 		upgradeTable.updateTable();
 
-		_entryIdMapper = pkUpgradeColumn.getValueMapper();
-	}
+		ValueMapper entryIdMapper = pkUpgradeColumn.getValueMapper();
 
-	private void _upgradeResource() throws Exception {
+		// Resource
+
 		ResourceUtil.upgradePrimKey(
-			_categoryIdMapper, BlogsCategory.class.getName());
+			categoryIdMapper, BlogsCategory.class.getName());
+		ResourceUtil.upgradePrimKey(entryIdMapper, BlogsEntry.class.getName());
 
-		ResourceUtil.upgradePrimKey(_entryIdMapper, BlogsEntry.class.getName());
+		// Counter
+
+		CounterLocalServiceUtil.reset(BlogsCategory.class.getName());
+		CounterLocalServiceUtil.reset(BlogsEntry.class.getName());
 	}
-
-	private ValueMapper _categoryIdMapper;
-	private ValueMapper _entryIdMapper;
 
 	private static Log _log = LogFactory.getLog(UpgradeBlogs.class);
 

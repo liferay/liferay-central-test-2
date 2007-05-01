@@ -164,8 +164,7 @@ public class UpgradeGroup extends UpgradeProcess {
 		// Users_Groups
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_USERS_GROUPS, _COLUMNS_USERS_GROUPS,
-			upgradeGroupIdColumn);
+			_TABLE_USERS_GROUPS, _COLUMNS_USERS_GROUPS, upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
 

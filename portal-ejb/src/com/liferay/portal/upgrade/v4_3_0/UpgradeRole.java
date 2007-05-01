@@ -53,24 +53,14 @@ public class UpgradeRole extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeRole();
-			_upgradeResource();
-			_upgradeCounter();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(Role.class.getName());
-	}
-
-	private void _upgradeResource() throws Exception {
-		ResourceUtil.upgradePrimKey(_roleIdMapper, Role.class.getName());
-	}
-
-	private void _upgradeRole() throws Exception {
+	private void _upgrade() throws Exception {
 
 		// Role
 
@@ -81,10 +71,10 @@ public class UpgradeRole extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		_roleIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper roleIdMapper = pkUpgradeColumn.getValueMapper();
 
-		UpgradeColumn upgradeRoleIdColumn =
-			new SwapUpgradeColumnImpl("roleId", _roleIdMapper);
+		UpgradeColumn upgradeRoleIdColumn = new SwapUpgradeColumnImpl(
+			"roleId", roleIdMapper);
 
 		// Groups_Roles
 
@@ -113,9 +103,15 @@ public class UpgradeRole extends UpgradeProcess {
 			_TABLE_USERS_ROLES, _COLUMNS_USERS_ROLES, upgradeRoleIdColumn);
 
 		upgradeTable.updateTable();
-	}
 
-	private ValueMapper _roleIdMapper;
+		// Resource
+
+		ResourceUtil.upgradePrimKey(roleIdMapper, Role.class.getName());
+
+		// Counter
+
+		CounterLocalServiceUtil.reset(Role.class.getName());
+	}
 
 	private static final String _TABLE_GROUPS_ROLES = "Groups_Roles";
 

@@ -46,24 +46,26 @@ public class UpgradeSubscription extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeSubscription();
-			_upgradeCounter();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(Subscription.class.getName());
-	}
+	private void _upgrade() throws Exception {
 
-	private void _upgradeSubscription() throws Exception {
+		// Subscription
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			SubscriptionImpl.TABLE_NAME, SubscriptionImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
+
+		// Counter
+
+		CounterLocalServiceUtil.reset(Subscription.class.getName());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeSubscription.class);

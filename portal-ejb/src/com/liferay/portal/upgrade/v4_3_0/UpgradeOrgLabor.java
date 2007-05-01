@@ -46,24 +46,24 @@ public class UpgradeOrgLabor extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeOrgLabor();
-			_upgradeCounter();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(OrgLabor.class.getName());
-	}
+	private void _upgrade() throws Exception {
 
-	private void _upgradeOrgLabor() throws Exception {
+		// OrgLabor
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			OrgLaborImpl.TABLE_NAME, OrgLaborImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
+
+		// Counter
 
 		CounterLocalServiceUtil.reset(OrgLabor.class.getName());
 	}

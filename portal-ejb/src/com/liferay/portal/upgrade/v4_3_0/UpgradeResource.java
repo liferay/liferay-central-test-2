@@ -48,15 +48,17 @@ public class UpgradeResource extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeResource();
-			_upgradeTable();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeResource() throws Exception {
+	private void _upgrade() throws Exception {
+
+		// Resource
+
 		TempUpgradeColumnImpl companyIdColumn =
 			new TempUpgradeColumnImpl("companyId");
 		TempUpgradeColumnImpl nameColumn = new TempUpgradeColumnImpl("name");
@@ -70,13 +72,13 @@ public class UpgradeResource extends UpgradeProcess {
 			scopeColumn, codeColumn);
 
 		upgradeTable.updateTable();
+
+		// Schema
+
+		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
 	}
 
-	private void _upgradeTable() throws Exception {
-		DBUtil.getInstance().executeSQL(_DROP_COLUMNS);
-	}
-
-	private static final String[] _DROP_COLUMNS = {
+	private static final String[] _UPGRADE_SCHEMA = {
 		"alter table Resource_ drop companyId;",
 		"alter table Resource_ drop name;",
 		"alter table Resource_ drop scope;"

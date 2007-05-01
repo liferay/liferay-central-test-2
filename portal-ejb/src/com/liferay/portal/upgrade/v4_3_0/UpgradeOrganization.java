@@ -56,25 +56,14 @@ public class UpgradeOrganization extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeOrganization();
-			_upgradeResource();
-			_upgradeCounter();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(Organization.class.getName());
-	}
-
-	private void _upgradeResource() throws Exception {
-		ResourceUtil.upgradePrimKey(
-			_organizationIdMapper, Organization.class.getName());
-	}
-
-	private void _upgradeOrganization() throws Exception {
+	private void _upgrade() throws Exception {
 
 		// Organization
 
@@ -86,12 +75,12 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		_organizationIdMapper = new DefaultParentIdMapper(
+		ValueMapper organizationIdMapper = new DefaultParentIdMapper(
 			pkUpgradeColumn.getValueMapper());
 
 		UpgradeColumn upgradeParentOrganizationIdColumn =
 			new SwapUpgradeColumnImpl(
-				"parentOrganizationId", _organizationIdMapper);
+				"parentOrganizationId", organizationIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			OrganizationImpl.TABLE_NAME, OrganizationImpl.TABLE_COLUMNS,
@@ -99,8 +88,8 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		UpgradeColumn upgradeOrganizationIdColumn =
-			new SwapUpgradeColumnImpl("organizationId", _organizationIdMapper);
+		UpgradeColumn upgradeOrganizationIdColumn = new SwapUpgradeColumnImpl(
+			"organizationId", organizationIdMapper);
 
 		// Groups_Orgs
 
@@ -135,9 +124,16 @@ public class UpgradeOrganization extends UpgradeProcess {
 			upgradeOrganizationIdColumn);
 
 		upgradeTable.updateTable();
-	}
 
-	private ValueMapper _organizationIdMapper;
+		// Resource
+
+		ResourceUtil.upgradePrimKey(
+			organizationIdMapper, Organization.class.getName());
+
+		// Counter
+
+		CounterLocalServiceUtil.reset(Organization.class.getName());
+	}
 
 	private static final String _TABLE_GROUPS_ORGS = "Groups_Orgs";
 

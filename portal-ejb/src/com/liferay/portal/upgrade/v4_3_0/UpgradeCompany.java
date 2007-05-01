@@ -41,7 +41,7 @@ public class UpgradeCompany extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeCompany();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -55,7 +55,7 @@ public class UpgradeCompany extends UpgradeProcess {
 			"' where companyId = '" + companyId + "';";
 	}
 
-	private void _upgradeCompany() throws Exception {
+	private void _upgrade() throws Exception {
 		DBUtil dbUtil = DBUtil.getInstance();
 
 		String[] webIds = new String[0];

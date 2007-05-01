@@ -28,6 +28,7 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
@@ -50,9 +51,7 @@ public class UpgradeWiki extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeWiki();
-			_upgradeResource();
-			_upgradeCounter();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -63,7 +62,7 @@ public class UpgradeWiki extends UpgradeProcess {
 		CounterLocalServiceUtil.reset(WikiNode.class.getName());
 	}
 
-	private void _upgradeWiki() throws Exception {
+	private void _upgrade() throws Exception {
 
 		// WikiNode
 
@@ -75,23 +74,27 @@ public class UpgradeWiki extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		_nodeIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper nodeIdMapper = pkUpgradeColumn.getValueMapper();
+
+		UpgradeColumn upgradeNodeIdColumn = new SwapUpgradeColumnImpl(
+			"nodeId", nodeIdMapper);
 
 		// WikiPage
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS,
-			new SwapUpgradeColumnImpl("nodeId", _nodeIdMapper));
+			upgradeNodeIdColumn);
 
 		upgradeTable.updateTable();
-	}
 
-	private void _upgradeResource() throws Exception {
-		ResourceUtil.upgradePrimKey(
-			_nodeIdMapper, WikiNode.class.getName());
-	}
+		// Resource
 
-	private ValueMapper _nodeIdMapper;
+		ResourceUtil.upgradePrimKey(nodeIdMapper, WikiNode.class.getName());
+
+		// Counter
+
+		CounterLocalServiceUtil.reset(WikiNode.class.getName());
+	}
 
 	private static Log _log = LogFactory.getLog(UpgradeWiki.class);
 
