@@ -15,7 +15,7 @@
 	#if ($company_logo != "")
 	<style>
 		#banner .logo {
-			padding: 0.52em 0.6em 0.51em;
+			padding: 0.52em 0.6em 0.48em;
 		}
 		#banner .logo a {
 			background: url($company_logo) no-repeat;
