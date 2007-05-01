@@ -144,13 +144,14 @@ body.staging {
 
 .popup {
 	background: #fff;
-	border: 2px solid #777;
+	border: 1px solid #777;
 	position: absolute;
+	padding: 0.4em;
 }
 
 .popup-header {
 	background: #EEF0F1 none repeat scroll 0%;
-	border-bottom: 2px solid #777;
+	border-bottom: 1px solid #aaa;
 	color: #333;
 	cursor: move;
 	margin-bottom: 20px;
@@ -159,15 +160,20 @@ body.staging {
 }
 
 .popup-title {
-	float: left;
-	font-size: 1.8em;
+	font-size: 1.5em;
 	font-weight: bold;
+	min-height: 1em;
+	width: 90%;
+}
+
+.ie6 .popup-title {
+	height: 1em;
 }
 
 .popup-close {
 	cursor: pointer;
-	float: right;
-	text-align: right;
+	position: absolute;
+	right: 0.5em;
 }
 
 .popup-message {

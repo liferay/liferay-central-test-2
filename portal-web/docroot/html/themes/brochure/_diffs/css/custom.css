@@ -51,16 +51,14 @@ font {
 }
 
 #banner .logo {
-	background: url(../images/custom/liferay_logo.png) no-repeat;
+	background: url() no-repeat;
 	display: block;
 	float: none;
 	font-size: 0;
-	height: 49px;
 	margin-bottom: 20px;
 	margin-left: 0.5em;
 	padding: 0;
 	text-indent: -9999em;
-	width: auto;
 }
 
 #banner .logo a {

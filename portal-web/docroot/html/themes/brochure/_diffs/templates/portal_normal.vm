@@ -11,6 +11,16 @@
 
 	#css($css_main_file)
 	#js($js_main_file)
+	
+	#if ($company_logo != "")
+		<style>
+			#banner .logo {
+				background: url($company_logo) no-repeat;
+				height: 50px;
+				width: 200px;
+			}
+		</style>
+	#end
 </head>
 
 <body class="$css_class">
