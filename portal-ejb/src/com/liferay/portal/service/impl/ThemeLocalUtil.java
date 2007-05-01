@@ -550,6 +550,9 @@ public class ThemeLocalUtil {
 
 			themeContextReplace.addValue("javascript-path", javaScriptPath);
 
+			String virtualPath = GetterUtil.getString(
+				theme.elementText("virtual-path"), themeModel.getVirtualPath());
+
 			String templateExtension = GetterUtil.getString(
 				theme.elementText("template-extension"),
 				themeModel.getTemplateExtension());
@@ -560,6 +563,7 @@ public class ThemeLocalUtil {
 			themeModel.setCssPath(cssPath);
 			themeModel.setImagesPath(imagesPath);
 			themeModel.setJavaScriptPath(javaScriptPath);
+			themeModel.setVirtualPath(virtualPath);
 			themeModel.setTemplateExtension(templateExtension);
 
 			Element settingsEl = theme.element("settings");

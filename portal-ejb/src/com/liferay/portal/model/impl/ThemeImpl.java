@@ -156,6 +156,14 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_javaScriptPath = javaScriptPath;
 	}
 
+	public String getVirtualPath() {
+		return _virtualPath;
+	}
+
+	public void setVirtualPath(String virtualPath) {
+		_virtualPath = virtualPath;
+	}
+
 	public String getTemplateExtension() {
 		return _templateExtension;
 	}
@@ -364,6 +372,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private String _cssPath = "${root-path}/css";
 	private String _imagesPath = "${root-path}/images";
 	private String _javaScriptPath = "${root-path}/javascript";
+	private String _virtualPath = StringPool.BLANK;
 	private String _templateExtension = "vm";
 	private Properties _settings = new Properties();
 	private boolean _wapTheme;

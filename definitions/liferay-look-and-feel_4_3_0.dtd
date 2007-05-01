@@ -112,8 +112,8 @@ See the comments in the group-id element.
 The theme element contains the declarative data of a theme.
 -->
 <!ELEMENT theme (root-path?, templates-path?, css-path?, images-path?,
-javascript-path?, template-extension?, settings?, wap-theme?, roles?,
-color-scheme*, layout-templates?)>
+javascript-path?, virtual-path?, template-extension?, settings?, wap-theme?,
+roles?, color-scheme*, layout-templates?)>
 
 <!--
 The id attribute specifies the unique key for a theme. For convenience, the id
@@ -190,6 +190,22 @@ the theme element as ${javascript-path}.
 The default value is "${root-path}/javascript".
 -->
 <!ELEMENT javascript-path (#PCDATA)>
+
+<!--
+The virtual-path value sets the virtual path used to fetch the CSS, images, and
+JavaScript files. By default, the portal returns the theme's servlet path. This
+setting allows you to override it.
+
+For example, suppose your theme is deployed to the servlet path "/test-theme"
+and your theme image-path is "/xyz/images". By default, the portal will return
+"/test-theme/xyz/images" for the path of the theme's images. You can override it
+by setting virtual-path to "/virtual" and have the portal return
+"/virtual/xyz/images". This is useful when you want all static files to be
+served by Apache for better performance.
+
+The default value is "" which means this is not used.
+-->
+<!ELEMENT virtual-path (#PCDATA)>
 
 <!--
 The templates-extension value sets the file extension of the files located in

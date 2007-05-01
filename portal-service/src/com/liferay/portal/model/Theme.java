@@ -77,6 +77,10 @@ public interface Theme extends Comparable, Plugin, Serializable {
 
 	public void setJavaScriptPath(String javaScriptPath);
 
+	public String getVirtualPath();
+
+	public void setVirtualPath(String virtualPath);
+
 	public String getTemplateExtension();
 
 	public void setTemplateExtension(String templateExtension);
