@@ -55,10 +55,9 @@ import javax.ejb.SessionContext;
  */
 public class IGImageServiceEJBImpl implements IGImageService, SessionBean {
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long folderId, java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -69,9 +68,8 @@ public class IGImageServiceEJBImpl implements IGImageService, SessionBean {
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries,
+		long folderId, java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -83,26 +81,25 @@ public class IGImageServiceEJBImpl implements IGImageService, SessionBean {
 			guestPermissions);
 	}
 
-	public void deleteImage(long companyId, java.lang.String imageId)
+	public void deleteImage(long imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		IGImageServiceFactory.getTxImpl().deleteImage(companyId, imageId);
+		IGImageServiceFactory.getTxImpl().deleteImage(imageId);
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGImage getImage(
-		long companyId, java.lang.String imageId)
+	public com.liferay.portlet.imagegallery.model.IGImage getImage(long imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return IGImageServiceFactory.getTxImpl().getImage(companyId, imageId);
+		return IGImageServiceFactory.getTxImpl().getImage(imageId);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		java.lang.String imageId, java.lang.String folderId,
-		java.lang.String description, java.io.File file,
-		java.lang.String contentType, java.lang.String[] tagsEntries)
+		long imageId, long folderId, java.lang.String description,
+		java.io.File file, java.lang.String contentType,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

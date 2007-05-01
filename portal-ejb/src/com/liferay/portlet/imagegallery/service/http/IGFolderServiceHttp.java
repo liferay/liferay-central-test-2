@@ -25,6 +25,7 @@ package com.liferay.portlet.imagegallery.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -72,7 +73,7 @@ import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 public class IGFolderServiceHttp {
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		HttpPrincipal httpPrincipal, java.lang.String plid,
-		java.lang.String parentFolderId, java.lang.String name,
+		long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -84,12 +85,7 @@ public class IGFolderServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = parentFolderId;
-
-			if (parentFolderId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(parentFolderId);
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -137,7 +133,7 @@ public class IGFolderServiceHttp {
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		HttpPrincipal httpPrincipal, java.lang.String plid,
-		java.lang.String parentFolderId, java.lang.String name,
+		long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -149,12 +145,7 @@ public class IGFolderServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = parentFolderId;
-
-			if (parentFolderId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(parentFolderId);
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -210,17 +201,11 @@ public class IGFolderServiceHttp {
 		}
 	}
 
-	public static void deleteFolder(HttpPrincipal httpPrincipal,
-		java.lang.String folderId)
+	public static void deleteFolder(HttpPrincipal httpPrincipal, long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			MethodWrapper methodWrapper = new MethodWrapper(IGFolderServiceUtil.class.getName(),
 					"deleteFolder", new Object[] { paramObj0 });
 
@@ -246,16 +231,11 @@ public class IGFolderServiceHttp {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder getFolder(
-		HttpPrincipal httpPrincipal, java.lang.String folderId)
+		HttpPrincipal httpPrincipal, long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			MethodWrapper methodWrapper = new MethodWrapper(IGFolderServiceUtil.class.getName(),
 					"getFolder", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -284,24 +264,14 @@ public class IGFolderServiceHttp {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
-		HttpPrincipal httpPrincipal, java.lang.String folderId,
-		java.lang.String parentFolderId, java.lang.String name,
-		java.lang.String description, boolean mergeWithParentFolder)
+		HttpPrincipal httpPrincipal, long folderId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean mergeWithParentFolder)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = parentFolderId;
-
-			if (parentFolderId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj1 = new LongWrapper(parentFolderId);
 			Object paramObj2 = name;
 
 			if (name == null) {

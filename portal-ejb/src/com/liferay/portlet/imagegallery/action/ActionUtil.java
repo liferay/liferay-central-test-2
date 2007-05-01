@@ -30,7 +30,6 @@ import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -58,12 +57,12 @@ public class ActionUtil {
 	}
 
 	public static void getFolder(HttpServletRequest req) throws Exception {
-		String folderId = ParamUtil.getString(req, "folderId");
+		long folderId = ParamUtil.getLong(req, "folderId");
 
 		IGFolder folder = null;
 
-		if (Validator.isNotNull(folderId) &&
-			!folderId.equals(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+		if ((folderId > 0) &&
+			(folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			folder = IGFolderServiceUtil.getFolder(folderId);
 		}
@@ -84,13 +83,12 @@ public class ActionUtil {
 	}
 
 	public static void getImage(HttpServletRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
-		String imageId = ParamUtil.getString(req, "imageId");
+		long imageId = ParamUtil.getLong(req, "imageId");
 
 		IGImage image = null;
 
-		if (Validator.isNotNull(imageId)) {
-			image = IGImageServiceUtil.getImage(companyId, imageId);
+		if (imageId > 0) {
+			image = IGImageServiceUtil.getImage(imageId);
 		}
 
 		req.setAttribute(WebKeys.IMAGE_GALLERY_IMAGE, image);

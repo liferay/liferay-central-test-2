@@ -79,10 +79,9 @@ import java.rmi.RemoteException;
  */
 public class IGFolderServiceSoap {
 	public static com.liferay.portlet.imagegallery.model.IGFolderSoap addFolder(
-		java.lang.String plid, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws RemoteException {
+		java.lang.String plid, long parentFolderId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.addFolder(plid,
 					parentFolderId, name, description, addCommunityPermissions,
@@ -97,9 +96,8 @@ public class IGFolderServiceSoap {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolderSoap addFolder(
-		java.lang.String plid, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+		java.lang.String plid, long parentFolderId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.addFolder(plid,
@@ -114,8 +112,7 @@ public class IGFolderServiceSoap {
 		}
 	}
 
-	public static void deleteFolder(java.lang.String folderId)
-		throws RemoteException {
+	public static void deleteFolder(long folderId) throws RemoteException {
 		try {
 			IGFolderServiceUtil.deleteFolder(folderId);
 		}
@@ -126,7 +123,7 @@ public class IGFolderServiceSoap {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolderSoap getFolder(
-		java.lang.String folderId) throws RemoteException {
+		long folderId) throws RemoteException {
 		try {
 			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.getFolder(folderId);
 
@@ -139,9 +136,9 @@ public class IGFolderServiceSoap {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolderSoap updateFolder(
-		java.lang.String folderId, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentFolder) throws RemoteException {
+		long folderId, long parentFolderId, java.lang.String name,
+		java.lang.String description, boolean mergeWithParentFolder)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.updateFolder(folderId,
 					parentFolderId, name, description, mergeWithParentFolder);

@@ -162,7 +162,9 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 			sb.insert(0, StringPool.SLASH);
 			%>
 
-			<input class="form-text" readonly="true" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= PortalUtil.getPortalURL(request) %>/tunnel-web/secure/webdav/document_library/<%= company.getCompanyId() %><%= sb.toString() %>" onClick="javascript: this.focus(); this.select();">
+			<liferay-ui:input-resource
+				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/document_library/" + company.getCompanyId() + sb.toString() %>'
+			/>
 		</td>
 	</tr>
 </c:if>

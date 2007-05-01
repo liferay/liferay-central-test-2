@@ -30,7 +30,6 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -48,15 +47,14 @@ import javax.servlet.jsp.PageContext;
 public class IGUtil {
 
 	public static String getBreadcrumbs(
-			String folderId, String imageId, PageContext pageContext,
+			long folderId, long imageId, PageContext pageContext,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		if (Validator.isNotNull(imageId)) {
+		if (imageId > 0) {
 			long companyId = PortalUtil.getCompanyId(req);
 
-			IGImage image = IGImageLocalServiceUtil.getImage(
-				companyId, imageId);
+			IGImage image = IGImageLocalServiceUtil.getImage(imageId);
 
 			return getBreadcrumbs(
 				image.getFolder(), image, pageContext, req, res);
@@ -118,14 +116,16 @@ public class IGUtil {
 
 					portletURL.setParameter(
 						"struts_action", "/image_gallery/select_folder");
-					portletURL.setParameter("folderId", folder.getFolderId());
+					portletURL.setParameter(
+						"folderId", String.valueOf(folder.getFolderId()));
 				}
 				else {
 					portletURL.setWindowState(WindowState.MAXIMIZED);
 
 					portletURL.setParameter(
 						"struts_action", "/image_gallery/view");
-					portletURL.setParameter("folderId", folder.getFolderId());
+					portletURL.setParameter(
+						"folderId", String.valueOf(folder.getFolderId()));
 				}
 
 				String folderLink =
@@ -156,7 +156,8 @@ public class IGUtil {
 			imageURL.setWindowState(WindowState.MAXIMIZED);
 
 			imageURL.setParameter("struts_action", "/image_gallery/edit_image");
-			imageURL.setParameter("imageId", image.getImageId());
+			imageURL.setParameter(
+				"imageId", String.valueOf(image.getImageId()));
 
 			String imageLink =
 				"<a href=\"" + imageURL.toString() + "\">" +

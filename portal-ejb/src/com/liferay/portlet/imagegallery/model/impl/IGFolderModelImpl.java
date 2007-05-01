@@ -55,25 +55,19 @@ import java.util.Date;
 public class IGFolderModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "IGFolder";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "folderId", new Integer(Types.VARCHAR) },
+			{ "folderId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "parentFolderId", new Integer(Types.VARCHAR) },
+			{ "parentFolderId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.imagegallery.model.IGFolder"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_FOLDERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.imagegallery.model.IGFolder.folderId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTFOLDERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.imagegallery.model.IGFolder.parentFolderId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.imagegallery.model.IGFolder.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -86,27 +80,20 @@ public class IGFolderModelImpl extends BaseModelImpl {
 	public IGFolderModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _folderId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setFolderId(pk);
 	}
 
-	public String getFolderId() {
-		return GetterUtil.getString(_folderId);
+	public long getFolderId() {
+		return _folderId;
 	}
 
-	public void setFolderId(String folderId) {
-		if (((folderId == null) && (_folderId != null)) ||
-				((folderId != null) && (_folderId == null)) ||
-				((folderId != null) && (_folderId != null) &&
-				!folderId.equals(_folderId))) {
-			if (!XSS_ALLOW_FOLDERID) {
-				folderId = XSSUtil.strip(folderId);
-			}
-
+	public void setFolderId(long folderId) {
+		if (folderId != _folderId) {
 			_folderId = folderId;
 		}
 	}
@@ -167,19 +154,12 @@ public class IGFolderModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getParentFolderId() {
-		return GetterUtil.getString(_parentFolderId);
+	public long getParentFolderId() {
+		return _parentFolderId;
 	}
 
-	public void setParentFolderId(String parentFolderId) {
-		if (((parentFolderId == null) && (_parentFolderId != null)) ||
-				((parentFolderId != null) && (_parentFolderId == null)) ||
-				((parentFolderId != null) && (_parentFolderId != null) &&
-				!parentFolderId.equals(_parentFolderId))) {
-			if (!XSS_ALLOW_PARENTFOLDERID) {
-				parentFolderId = XSSUtil.strip(parentFolderId);
-			}
-
+	public void setParentFolderId(long parentFolderId) {
+		if (parentFolderId != _parentFolderId) {
 			_parentFolderId = parentFolderId;
 		}
 	}
@@ -239,7 +219,16 @@ public class IGFolderModelImpl extends BaseModelImpl {
 
 		IGFolderImpl igFolder = (IGFolderImpl)obj;
 		int value = 0;
-		value = getFolderId().compareTo(igFolder.getFolderId());
+
+		if (getFolderId() < igFolder.getFolderId()) {
+			value = -1;
+		}
+		else if (getFolderId() > igFolder.getFolderId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -269,9 +258,9 @@ public class IGFolderModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = igFolder.getPrimaryKey();
+		long pk = igFolder.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -280,16 +269,16 @@ public class IGFolderModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _folderId;
+	private long _folderId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _parentFolderId;
+	private long _parentFolderId;
 	private String _name;
 	private String _description;
 }

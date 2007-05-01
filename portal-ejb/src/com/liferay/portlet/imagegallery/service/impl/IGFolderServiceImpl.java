@@ -41,7 +41,7 @@ public class IGFolderServiceImpl
 	extends PrincipalBean implements IGFolderService {
 
 	public IGFolder addFolder(
-			String plid, String parentFolderId, String name, String description,
+			String plid, long parentFolderId, String name, String description,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -55,7 +55,7 @@ public class IGFolderServiceImpl
 	}
 
 	public IGFolder addFolder(
-			String plid, String parentFolderId, String name, String description,
+			String plid, long parentFolderId, String name, String description,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -68,7 +68,7 @@ public class IGFolderServiceImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteFolder(String folderId)
+	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(
@@ -77,7 +77,7 @@ public class IGFolderServiceImpl
 		IGFolderLocalServiceUtil.deleteFolder(folderId);
 	}
 
-	public IGFolder getFolder(String folderId)
+	public IGFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(
@@ -87,8 +87,8 @@ public class IGFolderServiceImpl
 	}
 
 	public IGFolder updateFolder(
-			String folderId, String parentFolderId, String name,
-			String description, boolean mergeWithParentFolder)
+			long folderId, long parentFolderId, String name, String description,
+			boolean mergeWithParentFolder)
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(

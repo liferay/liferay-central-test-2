@@ -29,15 +29,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 
-String imageId = BeanParamUtil.getString(image, request, "imageId");
+long imageId = BeanParamUtil.getLong(image, request, "imageId");
 
-String folderId = BeanParamUtil.getString(image, request, "folderId");
+long folderId = BeanParamUtil.getLong(image, request, "folderId");
 %>
 
 <liferay-ui:tabs names="image" />
 
 <div class="breadcrumbs">
-	<%= IGUtil.getBreadcrumbs(folderId, null, pageContext, renderRequest, renderResponse) %>
+	<%= IGUtil.getBreadcrumbs(folderId, 0, pageContext, renderRequest, renderResponse) %>
 </div>
 
 <c:if test="<%= image != null %>">
@@ -91,9 +91,9 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 			<%= LanguageUtil.get(pageContext, "url") %>
 		</td>
 		<td>
-			<a href="<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>" target="_blank">
-			<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>
-			</a>
+			<liferay-ui:input-resource
+				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathImage() + "/image_gallery?img_id" + image.getImageId() %>'
+			/>
 		</td>
 	</tr>
 	</table>
@@ -109,8 +109,8 @@ String uploadProgressId = "igImageUploadProgress";
 	<portlet:param name="struts_action" value="/image_gallery/edit_image" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
-	<portlet:param name="imageId" value="<%= imageId %>" />
-	<portlet:param name="folderId" value="<%= folderId %>" />
+	<portlet:param name="imageId" value="<%= String.valueOf(imageId) %>" />
+	<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 </portlet:renderURL>
 
 <liferay-ui:upload-progress

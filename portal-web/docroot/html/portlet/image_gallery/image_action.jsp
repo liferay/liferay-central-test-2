@@ -34,7 +34,7 @@ IGImage image = (IGImage)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/image_gallery/edit_image" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="imageId" value="<%= image.getImageId() %>" />
+		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -43,8 +43,8 @@ IGImage image = (IGImage)row.getObject();
 <c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.PERMISSIONS) %>">
 	<liferay-security:permissionsURL
 		modelResource="<%= IGImage.class.getName() %>"
-		modelResourceDescription="<%= image.getImageId() %>"
-		resourcePrimKey="<%= image.getPrimaryKey().toString() %>"
+		modelResourceDescription="<%= String.valueOf(image.getImageId()) %>"
+		resourcePrimKey="<%= String.valueOf(image.getImageId()) %>"
 		var="permissionsURL"
 	/>
 
@@ -56,7 +56,7 @@ IGImage image = (IGImage)row.getObject();
 		<portlet:param name="struts_action" value="/image_gallery/edit_image" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="imageId" value="<%= image.getImageId() %>" />
+		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />

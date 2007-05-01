@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.imagegallery.model;
 
-import com.liferay.portlet.imagegallery.service.persistence.IGImagePK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,8 +48,8 @@ import java.util.List;
 public class IGImageSoap implements Serializable {
 	public static IGImageSoap toSoapModel(IGImage model) {
 		IGImageSoap soapModel = new IGImageSoap();
-		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setImageId(model.getImageId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
@@ -78,13 +76,20 @@ public class IGImageSoap implements Serializable {
 	public IGImageSoap() {
 	}
 
-	public IGImagePK getPrimaryKey() {
-		return new IGImagePK(_companyId, _imageId);
+	public long getPrimaryKey() {
+		return _imageId;
 	}
 
-	public void setPrimaryKey(IGImagePK pk) {
-		setCompanyId(pk.companyId);
-		setImageId(pk.imageId);
+	public void setPrimaryKey(long pk) {
+		setImageId(pk);
+	}
+
+	public long getImageId() {
+		return _imageId;
+	}
+
+	public void setImageId(long imageId) {
+		_imageId = imageId;
 	}
 
 	public long getCompanyId() {
@@ -93,14 +98,6 @@ public class IGImageSoap implements Serializable {
 
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
-	}
-
-	public String getImageId() {
-		return _imageId;
-	}
-
-	public void setImageId(String imageId) {
-		_imageId = imageId;
 	}
 
 	public long getUserId() {
@@ -127,11 +124,11 @@ public class IGImageSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getFolderId() {
+	public long getFolderId() {
 		return _folderId;
 	}
 
-	public void setFolderId(String folderId) {
+	public void setFolderId(long folderId) {
 		_folderId = folderId;
 	}
 
@@ -167,12 +164,12 @@ public class IGImageSoap implements Serializable {
 		_size = size;
 	}
 
+	private long _imageId;
 	private long _companyId;
-	private String _imageId;
 	private long _userId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _folderId;
+	private long _folderId;
 	private String _description;
 	private int _height;
 	private int _width;

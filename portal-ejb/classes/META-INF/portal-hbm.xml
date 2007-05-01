@@ -679,7 +679,7 @@
 	</class>
 	<class name="com.liferay.portlet.imagegallery.model.impl.IGFolderImpl" table="IGFolder">
 		<cache usage="read-write" />
-		<id name="folderId" type="java.lang.String">
+		<id name="folderId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
@@ -687,20 +687,20 @@
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="parentFolderId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="parentFolderId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.imagegallery.model.impl.IGImageImpl" table="IGImage">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.imagegallery.service.persistence.IGImagePK">
-			<key-property name="companyId" />
-			<key-property name="imageId" />
-		</composite-id>
+		<id name="imageId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="folderId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="folderId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="height" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="width" type="com.liferay.util.dao.hibernate.IntegerType" />

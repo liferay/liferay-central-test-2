@@ -31,7 +31,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
-import com.liferay.util.Validator;
 
 /**
  * <a href="IGFolderPermission.java.html"><b><i>View Source</i></b></a>
@@ -42,7 +41,7 @@ import com.liferay.util.Validator;
 public class IGFolderPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String plid, String folderId,
+			PermissionChecker permissionChecker, String plid, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -52,7 +51,7 @@ public class IGFolderPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, String folderId,
+			PermissionChecker permissionChecker, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -72,12 +71,11 @@ public class IGFolderPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String plid, String folderId,
+			PermissionChecker permissionChecker, String plid, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (Validator.equals(
-				folderId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+		if (folderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 
 			return PortletPermission.contains(
 				permissionChecker, plid, PortletKeys.IMAGE_GALLERY, actionId);
@@ -88,8 +86,7 @@ public class IGFolderPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String folderId,
-			String actionId)
+			PermissionChecker permissionChecker, long folderId, String actionId)
 		throws PortalException, SystemException {
 
 		IGFolder folder = IGFolderLocalServiceUtil.getFolder(folderId);
@@ -103,8 +100,8 @@ public class IGFolderPermission {
 		throws PortalException, SystemException {
 
 		return permissionChecker.hasPermission(
-			folder.getGroupId(), IGFolder.class.getName(),
-			folder.getPrimaryKey().toString(), actionId);
+			folder.getGroupId(), IGFolder.class.getName(), folder.getFolderId(),
+			actionId);
 	}
 
 }

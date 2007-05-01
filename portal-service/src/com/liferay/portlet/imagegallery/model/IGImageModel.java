@@ -24,8 +24,6 @@ package com.liferay.portlet.imagegallery.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import com.liferay.portlet.imagegallery.service.persistence.IGImagePK;
-
 import java.util.Date;
 
 /**
@@ -49,17 +47,17 @@ import java.util.Date;
  *
  */
 public interface IGImageModel extends BaseModel {
-	public IGImagePK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(IGImagePK pk);
+	public void setPrimaryKey(long pk);
+
+	public long getImageId();
+
+	public void setImageId(long imageId);
 
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);
-
-	public String getImageId();
-
-	public void setImageId(String imageId);
 
 	public long getUserId();
 
@@ -73,9 +71,9 @@ public interface IGImageModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public String getFolderId();
+	public long getFolderId();
 
-	public void setFolderId(String folderId);
+	public void setFolderId(long folderId);
 
 	public String getDescription();
 

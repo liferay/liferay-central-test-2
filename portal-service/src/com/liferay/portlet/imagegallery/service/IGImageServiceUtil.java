@@ -50,10 +50,9 @@ package com.liferay.portlet.imagegallery.service;
  */
 public class IGImageServiceUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long folderId, java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGImageService igImageService = IGImageServiceFactory.getService();
@@ -64,9 +63,8 @@ public class IGImageServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries,
+		long folderId, java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -77,26 +75,26 @@ public class IGImageServiceUtil {
 			contentType, tagsEntries, communityPermissions, guestPermissions);
 	}
 
-	public static void deleteImage(long companyId, java.lang.String imageId)
+	public static void deleteImage(long imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGImageService igImageService = IGImageServiceFactory.getService();
-		igImageService.deleteImage(companyId, imageId);
+		igImageService.deleteImage(imageId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImage(
-		long companyId, java.lang.String imageId)
+		long imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGImageService igImageService = IGImageServiceFactory.getService();
 
-		return igImageService.getImage(companyId, imageId);
+		return igImageService.getImage(imageId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		java.lang.String imageId, java.lang.String folderId,
-		java.lang.String description, java.io.File file,
-		java.lang.String contentType, java.lang.String[] tagsEntries)
+		long imageId, long folderId, java.lang.String description,
+		java.io.File file, java.lang.String contentType,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGImageService igImageService = IGImageServiceFactory.getService();

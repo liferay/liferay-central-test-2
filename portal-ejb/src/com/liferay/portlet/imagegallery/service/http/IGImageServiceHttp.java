@@ -72,19 +72,14 @@ import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
  */
 public class IGImageServiceHttp {
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
-		HttpPrincipal httpPrincipal, java.lang.String folderId,
+		HttpPrincipal httpPrincipal, long folderId,
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			Object paramObj1 = description;
 
 			if (description == null) {
@@ -143,7 +138,7 @@ public class IGImageServiceHttp {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
-		HttpPrincipal httpPrincipal, java.lang.String folderId,
+		HttpPrincipal httpPrincipal, long folderId,
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
@@ -151,12 +146,7 @@ public class IGImageServiceHttp {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			Object paramObj1 = description;
 
 			if (description == null) {
@@ -224,20 +214,13 @@ public class IGImageServiceHttp {
 		}
 	}
 
-	public static void deleteImage(HttpPrincipal httpPrincipal, long companyId,
-		java.lang.String imageId)
+	public static void deleteImage(HttpPrincipal httpPrincipal, long imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-			Object paramObj1 = imageId;
-
-			if (imageId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(imageId);
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"deleteImage", new Object[] { paramObj0, paramObj1 });
+					"deleteImage", new Object[] { paramObj0 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -261,19 +244,13 @@ public class IGImageServiceHttp {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImage(
-		HttpPrincipal httpPrincipal, long companyId, java.lang.String imageId)
+		HttpPrincipal httpPrincipal, long imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-			Object paramObj1 = imageId;
-
-			if (imageId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(imageId);
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getImage", new Object[] { paramObj0, paramObj1 });
+					"getImage", new Object[] { paramObj0 });
 			Object returnObj = null;
 
 			try {
@@ -300,25 +277,14 @@ public class IGImageServiceHttp {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		HttpPrincipal httpPrincipal, java.lang.String imageId,
-		java.lang.String folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries)
+		HttpPrincipal httpPrincipal, long imageId, long folderId,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = imageId;
-
-			if (imageId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = folderId;
-
-			if (folderId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(imageId);
+			Object paramObj1 = new LongWrapper(folderId);
 			Object paramObj2 = description;
 
 			if (description == null) {

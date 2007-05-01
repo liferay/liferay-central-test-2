@@ -67,7 +67,7 @@ public class IGImageLocalServiceEJBImpl implements IGImageLocalService,
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long userId, java.lang.String folderId, java.lang.String description,
+		long userId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -79,7 +79,7 @@ public class IGImageLocalServiceEJBImpl implements IGImageLocalService,
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long userId, java.lang.String folderId, java.lang.String description,
+		long userId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
@@ -92,7 +92,7 @@ public class IGImageLocalServiceEJBImpl implements IGImageLocalService,
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long userId, java.lang.String folderId, java.lang.String description,
+		long userId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,
 		java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
@@ -107,9 +107,8 @@ public class IGImageLocalServiceEJBImpl implements IGImageLocalService,
 			guestPermissions);
 	}
 
-	public void addImageResources(java.lang.String folderId,
-		java.lang.String imageId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public void addImageResources(long folderId, long imageId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGImageLocalServiceFactory.getTxImpl().addImageResources(folderId,
@@ -126,8 +125,8 @@ public class IGImageLocalServiceEJBImpl implements IGImageLocalService,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addImageResources(java.lang.String folderId,
-		java.lang.String imageId, java.lang.String[] communityPermissions,
+	public void addImageResources(long folderId, long imageId,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -146,10 +145,10 @@ public class IGImageLocalServiceEJBImpl implements IGImageLocalService,
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteImage(long companyId, java.lang.String imageId)
+	public void deleteImage(long imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		IGImageLocalServiceFactory.getTxImpl().deleteImage(companyId, imageId);
+		IGImageLocalServiceFactory.getTxImpl().deleteImage(imageId);
 	}
 
 	public void deleteImage(
@@ -159,7 +158,7 @@ public class IGImageLocalServiceEJBImpl implements IGImageLocalService,
 		IGImageLocalServiceFactory.getTxImpl().deleteImage(image);
 	}
 
-	public void deleteImages(java.lang.String folderId)
+	public void deleteImages(long folderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGImageLocalServiceFactory.getTxImpl().deleteImages(folderId);
@@ -193,45 +192,43 @@ public class IGImageLocalServiceEJBImpl implements IGImageLocalService,
 			userId);
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGImage getImage(
-		long companyId, java.lang.String imageId)
+	public com.liferay.portlet.imagegallery.model.IGImage getImage(long imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return IGImageLocalServiceFactory.getTxImpl().getImage(companyId,
-			imageId);
+		return IGImageLocalServiceFactory.getTxImpl().getImage(imageId);
 	}
 
-	public java.util.List getImages(java.lang.String folderId)
+	public java.util.List getImages(long folderId)
 		throws com.liferay.portal.SystemException {
 		return IGImageLocalServiceFactory.getTxImpl().getImages(folderId);
 	}
 
-	public java.util.List getImages(java.lang.String folderId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public java.util.List getImages(long folderId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return IGImageLocalServiceFactory.getTxImpl().getImages(folderId,
 			begin, end);
 	}
 
-	public java.util.List getImages(java.lang.String folderId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List getImages(long folderId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return IGImageLocalServiceFactory.getTxImpl().getImages(folderId,
 			begin, end, obc);
 	}
 
-	public int getImagesCount(java.lang.String folderId)
+	public int getImagesCount(long folderId)
 		throws com.liferay.portal.SystemException {
 		return IGImageLocalServiceFactory.getTxImpl().getImagesCount(folderId);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		long companyId, java.lang.String imageId, java.lang.String folderId,
-		java.lang.String description, java.io.File file,
-		java.lang.String contentType, java.lang.String[] tagsEntries)
+		long imageId, long folderId, java.lang.String description,
+		java.io.File file, java.lang.String contentType,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return IGImageLocalServiceFactory.getTxImpl().updateImage(companyId,
-			imageId, folderId, description, file, contentType, tagsEntries);
+		return IGImageLocalServiceFactory.getTxImpl().updateImage(imageId,
+			folderId, description, file, contentType, tagsEntries);
 	}
 
 	public void ejbCreate() throws CreateException {

@@ -50,35 +50,32 @@ package com.liferay.portlet.imagegallery.service;
  */
 public interface IGImageService {
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long folderId, java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries,
+		long folderId, java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteImage(long companyId, java.lang.String imageId)
+	public void deleteImage(long imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portlet.imagegallery.model.IGImage getImage(
-		long companyId, java.lang.String imageId)
+	public com.liferay.portlet.imagegallery.model.IGImage getImage(long imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		java.lang.String imageId, java.lang.String folderId,
-		java.lang.String description, java.io.File file,
-		java.lang.String contentType, java.lang.String[] tagsEntries)
+		long imageId, long folderId, java.lang.String description,
+		java.io.File file, java.lang.String contentType,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

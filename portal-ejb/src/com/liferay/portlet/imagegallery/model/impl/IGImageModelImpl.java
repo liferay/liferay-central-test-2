@@ -25,8 +25,6 @@ package com.liferay.portlet.imagegallery.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.imagegallery.service.persistence.IGImagePK;
-
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -56,12 +54,12 @@ import java.util.Date;
 public class IGImageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "IGImage";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "imageId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
-			{ "imageId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "folderId", new Integer(Types.VARCHAR) },
+			{ "folderId", new Integer(Types.BIGINT) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "height", new Integer(Types.INTEGER) },
 			{ "width", new Integer(Types.INTEGER) },
@@ -70,12 +68,6 @@ public class IGImageModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_IMAGEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage.imageId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FOLDERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage.folderId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage.description"),
 			XSS_ALLOW_BY_MODEL);
@@ -85,13 +77,22 @@ public class IGImageModelImpl extends BaseModelImpl {
 	public IGImageModelImpl() {
 	}
 
-	public IGImagePK getPrimaryKey() {
-		return new IGImagePK(_companyId, _imageId);
+	public long getPrimaryKey() {
+		return _imageId;
 	}
 
-	public void setPrimaryKey(IGImagePK pk) {
-		setCompanyId(pk.companyId);
-		setImageId(pk.imageId);
+	public void setPrimaryKey(long pk) {
+		setImageId(pk);
+	}
+
+	public long getImageId() {
+		return _imageId;
+	}
+
+	public void setImageId(long imageId) {
+		if (imageId != _imageId) {
+			_imageId = imageId;
+		}
 	}
 
 	public long getCompanyId() {
@@ -101,23 +102,6 @@ public class IGImageModelImpl extends BaseModelImpl {
 	public void setCompanyId(long companyId) {
 		if (companyId != _companyId) {
 			_companyId = companyId;
-		}
-	}
-
-	public String getImageId() {
-		return GetterUtil.getString(_imageId);
-	}
-
-	public void setImageId(String imageId) {
-		if (((imageId == null) && (_imageId != null)) ||
-				((imageId != null) && (_imageId == null)) ||
-				((imageId != null) && (_imageId != null) &&
-				!imageId.equals(_imageId))) {
-			if (!XSS_ALLOW_IMAGEID) {
-				imageId = XSSUtil.strip(imageId);
-			}
-
-			_imageId = imageId;
 		}
 	}
 
@@ -157,19 +141,12 @@ public class IGImageModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getFolderId() {
-		return GetterUtil.getString(_folderId);
+	public long getFolderId() {
+		return _folderId;
 	}
 
-	public void setFolderId(String folderId) {
-		if (((folderId == null) && (_folderId != null)) ||
-				((folderId != null) && (_folderId == null)) ||
-				((folderId != null) && (_folderId != null) &&
-				!folderId.equals(_folderId))) {
-			if (!XSS_ALLOW_FOLDERID) {
-				folderId = XSSUtil.strip(folderId);
-			}
-
+	public void setFolderId(long folderId) {
+		if (folderId != _folderId) {
 			_folderId = folderId;
 		}
 	}
@@ -223,8 +200,8 @@ public class IGImageModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		IGImageImpl clone = new IGImageImpl();
-		clone.setCompanyId(getCompanyId());
 		clone.setImageId(getImageId());
+		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
@@ -244,7 +221,16 @@ public class IGImageModelImpl extends BaseModelImpl {
 
 		IGImageImpl igImage = (IGImageImpl)obj;
 		int value = 0;
-		value = getImageId().compareTo(igImage.getImageId());
+
+		if (getImageId() < igImage.getImageId()) {
+			value = -1;
+		}
+		else if (getImageId() > igImage.getImageId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -267,9 +253,9 @@ public class IGImageModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		IGImagePK pk = igImage.getPrimaryKey();
+		long pk = igImage.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -278,15 +264,15 @@ public class IGImageModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
+	private long _imageId;
 	private long _companyId;
-	private String _imageId;
 	private long _userId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _folderId;
+	private long _folderId;
 	private String _description;
 	private int _height;
 	private int _width;

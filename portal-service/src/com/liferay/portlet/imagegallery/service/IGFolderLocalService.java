@@ -58,14 +58,14 @@ public interface IGFolderLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		long userId, java.lang.String plid, java.lang.String parentFolderId,
+		long userId, java.lang.String plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		long userId, java.lang.String plid, java.lang.String parentFolderId,
+		long userId, java.lang.String plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -73,7 +73,7 @@ public interface IGFolderLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		long userId, java.lang.String plid, java.lang.String parentFolderId,
+		long userId, java.lang.String plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
@@ -82,7 +82,7 @@ public interface IGFolderLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addFolderResources(java.lang.String folderId,
+	public void addFolderResources(long folderId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -93,7 +93,7 @@ public interface IGFolderLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addFolderResources(java.lang.String folderId,
+	public void addFolderResources(long folderId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -106,7 +106,7 @@ public interface IGFolderLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteFolder(java.lang.String folderId)
+	public void deleteFolder(long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -120,31 +120,28 @@ public interface IGFolderLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder getFolder(
-		java.lang.String folderId)
+		long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public java.util.List getFolders(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getFolders(long groupId,
-		java.lang.String parentFolderId)
+	public java.util.List getFolders(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getFolders(long groupId,
-		java.lang.String parentFolderId, int begin, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List getFolders(long groupId, long parentFolderId,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public int getFoldersCount(long groupId, java.lang.String parentFolderId)
+	public int getFoldersCount(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
 	public void getSubfolderIds(java.util.List folderIds, long groupId,
-		java.lang.String folderId) throws com.liferay.portal.SystemException;
+		long folderId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
-		java.lang.String folderId, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentFolder)
+		long folderId, long parentFolderId, java.lang.String name,
+		java.lang.String description, boolean mergeWithParentFolder)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

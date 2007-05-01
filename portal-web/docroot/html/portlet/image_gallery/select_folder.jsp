@@ -27,7 +27,7 @@
 <%
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
-String folderId = BeanParamUtil.getString(folder, request, "folderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long folderId = BeanParamUtil.getLong(folder, request, "folderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 %>
 
 <form method="post" name="<portlet:namespace />fm">
@@ -69,14 +69,14 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	IGFolder curFolder = (IGFolder)results.get(i);
 
-	ResultRow row = new ResultRow(curFolder, curFolder.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(LiferayWindowState.POP_UP);
 
 	rowURL.setParameter("struts_action", "/image_gallery/select_folder");
-	rowURL.setParameter("folderId", curFolder.getFolderId());
+	rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 	// Name
 

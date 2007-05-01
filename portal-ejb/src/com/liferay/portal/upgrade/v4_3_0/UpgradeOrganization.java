@@ -86,12 +86,12 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		_organizationIdMapper = pkUpgradeColumn.getValueMapper();
+		_organizationIdMapper = new DefaultParentIdMapper(
+			pkUpgradeColumn.getValueMapper());
 
 		UpgradeColumn upgradeParentOrganizationIdColumn =
 			new SwapUpgradeColumnImpl(
-				"parentOrganizationId",
-			new DefaultParentIdMapper(_organizationIdMapper));
+				"parentOrganizationId", _organizationIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			OrganizationImpl.TABLE_NAME, OrganizationImpl.TABLE_COLUMNS,

@@ -45,7 +45,7 @@ public class IGImageServiceImpl
 	extends PrincipalBean implements IGImageService {
 
 	public IGImage addImage(
-			String folderId, String description, File file, String contentType,
+			long folderId, String description, File file, String contentType,
 			String[] tagsEntries, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -59,7 +59,7 @@ public class IGImageServiceImpl
 	}
 
 	public IGImage addImage(
-			String folderId, String description, File file, String contentType,
+			long folderId, String description, File file, String contentType,
 			String[] tagsEntries, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -72,38 +72,36 @@ public class IGImageServiceImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteImage(long companyId, String imageId)
+	public void deleteImage(long imageId)
 		throws PortalException, SystemException {
 
 		IGImagePermission.check(
-			getPermissionChecker(), companyId, imageId, ActionKeys.DELETE);
+			getPermissionChecker(), imageId, ActionKeys.DELETE);
 
-		IGImageLocalServiceUtil.deleteImage(companyId, imageId);
+		IGImageLocalServiceUtil.deleteImage(imageId);
 	}
 
-	public IGImage getImage(long companyId, String imageId)
+	public IGImage getImage(long imageId)
 		throws PortalException, SystemException {
 
 		IGImagePermission.check(
-			getPermissionChecker(), companyId, imageId, ActionKeys.VIEW);
+			getPermissionChecker(), imageId, ActionKeys.VIEW);
 
-		return IGImageLocalServiceUtil.getImage(companyId, imageId);
+		return IGImageLocalServiceUtil.getImage(imageId);
 	}
 
 	public IGImage updateImage(
-			String imageId, String folderId, String description, File file,
+			long imageId, long folderId, String description, File file,
 			String contentType, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		User user = getUser();
 
 		IGImagePermission.check(
-			getPermissionChecker(), user.getCompanyId(), imageId,
-			ActionKeys.UPDATE);
+			getPermissionChecker(), imageId, ActionKeys.UPDATE);
 
 		return IGImageLocalServiceUtil.updateImage(
-			user.getCompanyId(), imageId, folderId, description, file,
-			contentType, tagsEntries);
+			imageId, folderId, description, file, contentType, tagsEntries);
 	}
 
 }

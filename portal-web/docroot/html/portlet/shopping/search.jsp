@@ -156,11 +156,7 @@ for (int i = 0; i < results.size(); i++) {
 		row.addText(currency.getSymbol() + doubleFormat.format(item.getPrice()), rowURL);
 	}
 	else {
-		row.addText(
-			"<span class=\"portlet-msg-success\">" +
-			currency.getSymbol() + doubleFormat.format(ShoppingUtil.calculateActualPrice(item)) +
-			"</span>",
-			rowURL);
+		row.addText("<span class=\"portlet-msg-success\">" + currency.getSymbol() + doubleFormat.format(ShoppingUtil.calculateActualPrice(item)) + "</span>", rowURL);
 	}
 
 	// Action

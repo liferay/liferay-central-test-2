@@ -311,29 +311,28 @@ create table Groups_UserGroups (
 );
 
 create table IGFolder (
-	folderId VARCHAR(75) not null primary key,
+	folderId LONG primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	createDate DATE null,
 	modifiedDate DATE null,
-	parentFolderId VARCHAR(75) null,
+	parentFolderId LONG,
 	name VARCHAR(75) null,
 	description STRING null
 );
 
 create table IGImage (
+	imageId LONG primary key,
 	companyId LONG,
-	imageId VARCHAR(75) not null,
 	userId LONG,
 	createDate DATE null,
 	modifiedDate DATE null,
-	folderId VARCHAR(75) null,
+	folderId LONG,
 	description STRING null,
 	height INTEGER,
 	width INTEGER,
-	size_ INTEGER,
-	primary key (companyId, imageId)
+	size_ INTEGER
 );
 
 create table Image (

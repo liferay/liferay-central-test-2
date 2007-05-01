@@ -53,17 +53,8 @@ import java.util.List;
 public class IGImageJSONSerializer {
 	public static JSONObject toJSONObject(IGImage model) {
 		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("imageId", model.getImageId());
 		jsonObj.put("companyId", model.getCompanyId());
-
-		String imageId = model.getImageId();
-
-		if (imageId == null) {
-			jsonObj.put("imageId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("imageId", imageId.toString());
-		}
-
 		jsonObj.put("userId", model.getUserId());
 
 		Date createDate = model.getCreateDate();
@@ -84,14 +75,7 @@ public class IGImageJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String folderId = model.getFolderId();
-
-		if (folderId == null) {
-			jsonObj.put("folderId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("folderId", folderId.toString());
-		}
+		jsonObj.put("folderId", model.getFolderId());
 
 		String description = model.getDescription();
 

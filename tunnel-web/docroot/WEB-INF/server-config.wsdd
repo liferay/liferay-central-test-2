@@ -1565,7 +1565,7 @@
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://model.imagegallery.portlet.liferay.com" name="addFolder" qname="operNS:addFolder" returnQName="addFolderReturn" returnType="rtns:IGFolderSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentFolderId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentFolderId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
 			<parameter xmlns:tns="urn:http.service.imagegallery.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
@@ -1573,21 +1573,21 @@
 		</operation>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://model.imagegallery.portlet.liferay.com" name="addFolder" qname="operNS:addFolder" returnQName="addFolderReturn" returnType="rtns:IGFolderSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentFolderId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentFolderId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" name="deleteFolder" qname="operNS:deleteFolder" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://model.imagegallery.portlet.liferay.com" name="getFolder" qname="operNS:getFolder" returnQName="getFolderReturn" returnType="rtns:IGFolderSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://model.imagegallery.portlet.liferay.com" name="updateFolder" qname="operNS:updateFolder" returnQName="updateFolderReturn" returnType="rtns:IGFolderSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentFolderId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentFolderId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="mergeWithParentFolder" type="tns:boolean"></parameter>
@@ -1599,21 +1599,18 @@
 	<service name="Portlet_Image_Gallery_IGImageService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.imagegallery.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="IGImageServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://model.imagegallery.portlet.liferay.com,http://persistence.service.imagegallery.portlet.liferay.com"/>
+		<parameter name="schemaUnqualified" value="http://model.imagegallery.portlet.liferay.com"/>
 		<parameter name="wsdlServicePort" value="Portlet_Image_Gallery_IGImageService"/>
 		<parameter name="className" value="com.liferay.portlet.imagegallery.service.http.IGImageServiceSoap"/>
 		<parameter name="wsdlPortType" value="IGImageServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" name="deleteImage" qname="operNS:deleteImage" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="imageId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="imageId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://model.imagegallery.portlet.liferay.com" name="getImage" qname="operNS:getImage" returnQName="getImageReturn" returnType="rtns:IGImageSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="imageId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="imageId" type="tns:long"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="getImage deleteImage"/>
-		<typeMapping xmlns:ns="http://persistence.service.imagegallery.portlet.liferay.com" qname="ns:IGImagePK" type="java:com.liferay.portlet.imagegallery.service.persistence.IGImagePK" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://model.imagegallery.portlet.liferay.com" qname="ns:IGImageSoap" type="java:com.liferay.portlet.imagegallery.model.IGImageSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 	<service name="Portlet_Journal_JournalArticleService" provider="java:RPC" style="rpc" use="encoded">

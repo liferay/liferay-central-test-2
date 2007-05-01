@@ -29,14 +29,14 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
-String folderId = BeanParamUtil.getString(folder, request, "folderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long folderId = BeanParamUtil.getLong(folder, request, "folderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/image_gallery/view");
-portletURL.setParameter("folderId", folderId);
+portletURL.setParameter("folderId", String.valueOf(folderId));
 %>
 
 <form method="post" name="<portlet:namespace />">
@@ -77,14 +77,14 @@ portletURL.setParameter("folderId", folderId);
 		for (int i = 0; i < results.size(); i++) {
 			IGFolder curFolder = (IGFolder)results.get(i);
 
-			ResultRow row = new ResultRow(curFolder, curFolder.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
 			rowURL.setWindowState(WindowState.MAXIMIZED);
 
 			rowURL.setParameter("struts_action", "/image_gallery/view");
-			rowURL.setParameter("folderId", curFolder.getFolderId());
+			rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 			// Name and description
 
@@ -120,7 +120,7 @@ portletURL.setParameter("folderId", folderId);
 				for (int j = 0; j < subfolders.size(); j++) {
 					IGFolder subfolder = (IGFolder)subfolders.get(j);
 
-					rowURL.setParameter("folderId", subfolder.getFolderId());
+					rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
 
 					sm.append("<a href=\"");
 					sm.append(rowURL);
@@ -133,7 +133,7 @@ portletURL.setParameter("folderId", folderId);
 					}
 				}
 
-				rowURL.setParameter("folderId", curFolder.getFolderId());
+				rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 				sm.append("</span>");
 			}
@@ -144,7 +144,7 @@ portletURL.setParameter("folderId", folderId);
 
 			List subfolderIds = new ArrayList();
 
-			subfolderIds.add(curFolder.getFolderId());
+			subfolderIds.add(new Long(curFolder.getFolderId()));
 
 			IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId.longValue(), curFolder.getFolderId());
 
@@ -165,7 +165,7 @@ portletURL.setParameter("folderId", folderId);
 		%>
 
 		<c:if test="<%= IGFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER) %>">
-			<input type="button" value='<%= LanguageUtil.get(pageContext, "add-folder") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= folderId %>" /></portlet:renderURL>';"><br />
+			<input type="button" value='<%= LanguageUtil.get(pageContext, "add-folder") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';"><br />
 
 			<c:if test="<%= results.size() > 0 %>">
 				<br />
@@ -205,7 +205,7 @@ portletURL.setParameter("folderId", folderId);
 			for (int i = 0; i < results.size(); i++) {
 				IGImage image = (IGImage)results.get(i);
 
-				ResultRow row = new ResultRow(image, image.getPrimaryKey().toString(), i);
+				ResultRow row = new ResultRow(image, image.getImageId(), i);
 
 				// Thumbnail
 
@@ -231,11 +231,11 @@ portletURL.setParameter("folderId", folderId);
 
 			<c:if test="<%= showAddImageButton || (results.size() > 0) %>">
 				<c:if test="<%= showAddImageButton %>">
-					<input type="button" value='<%= LanguageUtil.get(pageContext, "add-image") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>';">
+					<input type="button" value='<%= LanguageUtil.get(pageContext, "add-image") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';">
 				</c:if>
 
 				<c:if test="<%= results.size() > 0 %>">
-					<input type="button" value='<%= LanguageUtil.get(pageContext, "view-slide-show") %>' onClick="var slideShowWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view_slide_show" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>', 'slideShow', 'directories=no,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no'); void(''); slideShowWindow.focus();">
+					<input type="button" value='<%= LanguageUtil.get(pageContext, "view-slide-show") %>' onClick="var slideShowWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view_slide_show" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'slideShow', 'directories=no,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no'); void(''); slideShowWindow.focus();">
 				</c:if>
 
 				<c:if test="<%= results.size() > 0 %>">
@@ -282,7 +282,7 @@ portletURL.setParameter("folderId", folderId);
 		for (int i = 0; i < results.size(); i++) {
 			IGImage image = (IGImage)results.get(i);
 
-			ResultRow row = new ResultRow(image, image.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(image, image.getImageId(), i);
 
 			// Thumbnail
 

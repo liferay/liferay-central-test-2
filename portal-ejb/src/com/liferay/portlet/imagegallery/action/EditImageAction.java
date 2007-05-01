@@ -126,19 +126,18 @@ public class EditImageAction extends PortletAction {
 	}
 
 	protected void deleteImage(ActionRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
-		String imageId = ParamUtil.getString(req, "imageId");
+		long imageId = ParamUtil.getLong(req, "imageId");
 
-		IGImageServiceUtil.deleteImage(companyId, imageId);
+		IGImageServiceUtil.deleteImage(imageId);
 	}
 
 	protected void updateImage(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq =
 			PortalUtil.getUploadPortletRequest(req);
 
-		String imageId = ParamUtil.getString(uploadReq, "imageId");
+		long imageId = ParamUtil.getLong(uploadReq, "imageId");
 
-		String folderId = ParamUtil.getString(uploadReq, "folderId");
+		long folderId = ParamUtil.getLong(uploadReq, "folderId");
 		String description = ParamUtil.getString(uploadReq, "description");
 
 		if (Validator.isNull(description)) {
@@ -156,7 +155,7 @@ public class EditImageAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (Validator.isNull(imageId)) {
+		if (imageId <= 0) {
 
 			// Add image
 

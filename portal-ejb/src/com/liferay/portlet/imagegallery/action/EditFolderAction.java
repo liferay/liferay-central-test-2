@@ -31,7 +31,6 @@ import com.liferay.portlet.imagegallery.FolderNameException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -112,7 +111,7 @@ public class EditFolderAction extends PortletAction {
 	}
 
 	protected void deleteFolder(ActionRequest req) throws Exception {
-		String folderId = ParamUtil.getString(req, "folderId");
+		long folderId = ParamUtil.getLong(req, "folderId");
 
 		IGFolderServiceUtil.deleteFolder(folderId);
 	}
@@ -120,9 +119,9 @@ public class EditFolderAction extends PortletAction {
 	protected void updateFolder(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String folderId = ParamUtil.getString(req, "folderId");
+		long folderId = ParamUtil.getLong(req, "folderId");
 
-		String parentFolderId = ParamUtil.getString(req, "parentFolderId");
+		long parentFolderId = ParamUtil.getLong(req, "parentFolderId");
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
 
@@ -134,7 +133,7 @@ public class EditFolderAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (Validator.isNull(folderId)) {
+		if (folderId <= 0) {
 
 			// Add folder
 

@@ -67,7 +67,7 @@ public class IGFolderLocalServiceEJBImpl implements IGFolderLocalService,
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		long userId, java.lang.String plid, java.lang.String parentFolderId,
+		long userId, java.lang.String plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -78,7 +78,7 @@ public class IGFolderLocalServiceEJBImpl implements IGFolderLocalService,
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		long userId, java.lang.String plid, java.lang.String parentFolderId,
+		long userId, java.lang.String plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -90,7 +90,7 @@ public class IGFolderLocalServiceEJBImpl implements IGFolderLocalService,
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		long userId, java.lang.String plid, java.lang.String parentFolderId,
+		long userId, java.lang.String plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
@@ -103,7 +103,7 @@ public class IGFolderLocalServiceEJBImpl implements IGFolderLocalService,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
-	public void addFolderResources(java.lang.String folderId,
+	public void addFolderResources(long folderId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -120,7 +120,7 @@ public class IGFolderLocalServiceEJBImpl implements IGFolderLocalService,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addFolderResources(java.lang.String folderId,
+	public void addFolderResources(long folderId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -139,7 +139,7 @@ public class IGFolderLocalServiceEJBImpl implements IGFolderLocalService,
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteFolder(java.lang.String folderId)
+	public void deleteFolder(long folderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGFolderLocalServiceFactory.getTxImpl().deleteFolder(folderId);
@@ -159,7 +159,7 @@ public class IGFolderLocalServiceEJBImpl implements IGFolderLocalService,
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGFolder getFolder(
-		java.lang.String folderId)
+		long folderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return IGFolderLocalServiceFactory.getTxImpl().getFolder(folderId);
@@ -170,36 +170,33 @@ public class IGFolderLocalServiceEJBImpl implements IGFolderLocalService,
 		return IGFolderLocalServiceFactory.getTxImpl().getFolders(groupId);
 	}
 
-	public java.util.List getFolders(long groupId,
-		java.lang.String parentFolderId)
+	public java.util.List getFolders(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException {
 		return IGFolderLocalServiceFactory.getTxImpl().getFolders(groupId,
 			parentFolderId);
 	}
 
-	public java.util.List getFolders(long groupId,
-		java.lang.String parentFolderId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public java.util.List getFolders(long groupId, long parentFolderId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return IGFolderLocalServiceFactory.getTxImpl().getFolders(groupId,
 			parentFolderId, begin, end);
 	}
 
-	public int getFoldersCount(long groupId, java.lang.String parentFolderId)
+	public int getFoldersCount(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException {
 		return IGFolderLocalServiceFactory.getTxImpl().getFoldersCount(groupId,
 			parentFolderId);
 	}
 
 	public void getSubfolderIds(java.util.List folderIds, long groupId,
-		java.lang.String folderId) throws com.liferay.portal.SystemException {
+		long folderId) throws com.liferay.portal.SystemException {
 		IGFolderLocalServiceFactory.getTxImpl().getSubfolderIds(folderIds,
 			groupId, folderId);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
-		java.lang.String folderId, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentFolder)
+		long folderId, long parentFolderId, java.lang.String name,
+		java.lang.String description, boolean mergeWithParentFolder)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return IGFolderLocalServiceFactory.getTxImpl().updateFolder(folderId,

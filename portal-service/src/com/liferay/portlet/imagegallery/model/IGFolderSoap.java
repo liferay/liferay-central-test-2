@@ -75,19 +75,19 @@ public class IGFolderSoap implements Serializable {
 	public IGFolderSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _folderId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setFolderId(pk);
 	}
 
-	public String getFolderId() {
+	public long getFolderId() {
 		return _folderId;
 	}
 
-	public void setFolderId(String folderId) {
+	public void setFolderId(long folderId) {
 		_folderId = folderId;
 	}
 
@@ -131,11 +131,11 @@ public class IGFolderSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getParentFolderId() {
+	public long getParentFolderId() {
 		return _parentFolderId;
 	}
 
-	public void setParentFolderId(String parentFolderId) {
+	public void setParentFolderId(long parentFolderId) {
 		_parentFolderId = parentFolderId;
 	}
 
@@ -155,13 +155,13 @@ public class IGFolderSoap implements Serializable {
 		_description = description;
 	}
 
-	private String _folderId;
+	private long _folderId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _parentFolderId;
+	private long _parentFolderId;
 	private String _name;
 	private String _description;
 }

@@ -54,7 +54,7 @@ import java.util.List;
 public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 	public IGFolder addFolder(
-			long userId, String plid, String parentFolderId, String name,
+			long userId, String plid, long parentFolderId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -66,7 +66,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	}
 
 	public IGFolder addFolder(
-			long userId, String plid, String parentFolderId, String name,
+			long userId, String plid, long parentFolderId, String name,
 			String description, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -77,7 +77,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	}
 
 	public IGFolder addFolder(
-			long userId, String plid, String parentFolderId, String name,
+			long userId, String plid, long parentFolderId, String name,
 			String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
@@ -92,8 +92,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		validate(name);
 
-		String folderId = String.valueOf(CounterLocalServiceUtil.increment(
-			IGFolder.class.getName()));
+		long folderId = CounterLocalServiceUtil.increment();
 
 		IGFolder folder = IGFolderUtil.create(folderId);
 
@@ -125,7 +124,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	}
 
 	public void addFolderResources(
-			String folderId, boolean addCommunityPermissions,
+			long folderId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -142,12 +141,12 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			IGFolder.class.getName(), folder.getPrimaryKey().toString(),
-			false, addCommunityPermissions, addGuestPermissions);
+			IGFolder.class.getName(), folder.getFolderId(), false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addFolderResources(
-			String folderId, String[] communityPermissions,
+			long folderId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -163,11 +162,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addModelResources(
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			IGFolder.class.getName(), folder.getPrimaryKey().toString(),
+			IGFolder.class.getName(), folder.getFolderId(),
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteFolder(String folderId)
+	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
 		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
@@ -197,7 +196,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			folder.getCompanyId(), IGFolder.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, folder.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, folder.getFolderId());
 
 		// Folder
 
@@ -216,7 +215,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		}
 	}
 
-	public IGFolder getFolder(String folderId)
+	public IGFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
 		return IGFolderUtil.findByPrimaryKey(folderId);
@@ -226,27 +225,27 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		return IGFolderUtil.findByGroupId(groupId);
 	}
 
-	public List getFolders(long groupId, String parentFolderId)
+	public List getFolders(long groupId, long parentFolderId)
 		throws SystemException {
 
 		return IGFolderUtil.findByG_P(groupId, parentFolderId);
 	}
 
 	public List getFolders(
-			long groupId, String parentFolderId, int begin, int end)
+			long groupId, long parentFolderId, int begin, int end)
 		throws SystemException {
 
 		return IGFolderUtil.findByG_P(groupId, parentFolderId, begin, end);
 	}
 
-	public int getFoldersCount(long groupId, String parentFolderId)
+	public int getFoldersCount(long groupId, long parentFolderId)
 		throws SystemException {
 
 		return IGFolderUtil.countByG_P(groupId, parentFolderId);
 	}
 
 	public void getSubfolderIds(
-			List folderIds, long groupId, String folderId)
+			List folderIds, long groupId, long folderId)
 		throws SystemException {
 
 		Iterator itr = IGFolderUtil.findByG_P(groupId, folderId).iterator();
@@ -254,7 +253,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			IGFolder folder = (IGFolder)itr.next();
 
-			folderIds.add(folder.getFolderId());
+			folderIds.add(new Long(folder.getFolderId()));
 
 			getSubfolderIds(
 				folderIds, folder.getGroupId(), folder.getFolderId());
@@ -262,15 +261,15 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	}
 
 	public IGFolder updateFolder(
-			String folderId, String parentFolderId, String name,
-			String description, boolean mergeWithParentFolder)
+			long folderId, long parentFolderId, String name, String description,
+			boolean mergeWithParentFolder)
 		throws PortalException, SystemException {
 
 		// Folder
 
 		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
 
-		String oldFolderId = folder.getParentFolderId();
+		long oldFolderId = folder.getParentFolderId();
 		parentFolderId = getParentFolderId(folder, parentFolderId);
 
 		validate(name);
@@ -284,8 +283,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		// Merge folders
 
-		if (mergeWithParentFolder && !oldFolderId.equals(parentFolderId) &&
-			!parentFolderId.equals(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+		if (mergeWithParentFolder && (oldFolderId != parentFolderId) &&
+			(parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			mergeFolders(folder, parentFolderId);
 		}
@@ -293,10 +292,10 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		return folder;
 	}
 
-	protected String getParentFolderId(long groupId, String parentFolderId)
+	protected long getParentFolderId(long groupId, long parentFolderId)
 		throws SystemException {
 
-		if (!parentFolderId.equals(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+		if (parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			IGFolder parentFolder =
 				IGFolderUtil.fetchByPrimaryKey(parentFolderId);
 
@@ -310,14 +309,14 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		return parentFolderId;
 	}
 
-	protected String getParentFolderId(IGFolder folder, String parentFolderId)
+	protected long getParentFolderId(IGFolder folder, long parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId.equals(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+		if (parentFolderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			return parentFolderId;
 		}
 
-		if (folder.getFolderId().equals(parentFolderId)) {
+		if (folder.getFolderId() == parentFolderId) {
 			return folder.getParentFolderId();
 		}
 		else {
@@ -335,7 +334,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			getSubfolderIds(
 				subfolderIds, folder.getGroupId(), folder.getFolderId());
 
-			if (subfolderIds.contains(parentFolderId)) {
+			if (subfolderIds.contains(new Long(parentFolderId))) {
 				return folder.getParentFolderId();
 			}
 
@@ -343,7 +342,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		}
 	}
 
-	protected void mergeFolders(IGFolder fromFolder, String toFolderId)
+	protected void mergeFolders(IGFolder fromFolder, long toFolderId)
 		throws PortalException, SystemException {
 
 		Iterator itr = IGFolderUtil.findByG_P(

@@ -53,7 +53,7 @@ import java.util.List;
  *
  */
 public class IGFolderPersistence extends BasePersistence {
-	public IGFolder create(String folderId) {
+	public IGFolder create(long folderId) {
 		IGFolder igFolder = new IGFolderImpl();
 		igFolder.setNew(true);
 		igFolder.setPrimaryKey(folderId);
@@ -61,7 +61,7 @@ public class IGFolderPersistence extends BasePersistence {
 		return igFolder;
 	}
 
-	public IGFolder remove(String folderId)
+	public IGFolder remove(long folderId)
 		throws NoSuchFolderException, SystemException {
 		Session session = null;
 
@@ -69,7 +69,7 @@ public class IGFolderPersistence extends BasePersistence {
 			session = openSession();
 
 			IGFolder igFolder = (IGFolder)session.get(IGFolderImpl.class,
-					folderId);
+					new Long(folderId));
 
 			if (igFolder == null) {
 				if (_log.isWarnEnabled()) {
@@ -148,7 +148,7 @@ public class IGFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public IGFolder findByPrimaryKey(String folderId)
+	public IGFolder findByPrimaryKey(long folderId)
 		throws NoSuchFolderException, SystemException {
 		IGFolder igFolder = fetchByPrimaryKey(folderId);
 
@@ -165,14 +165,13 @@ public class IGFolderPersistence extends BasePersistence {
 		return igFolder;
 	}
 
-	public IGFolder fetchByPrimaryKey(String folderId)
-		throws SystemException {
+	public IGFolder fetchByPrimaryKey(long folderId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (IGFolder)session.get(IGFolderImpl.class, folderId);
+			return (IGFolder)session.get(IGFolderImpl.class, new Long(folderId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -294,7 +293,7 @@ public class IGFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public IGFolder[] findByGroupId_PrevAndNext(String folderId, long groupId,
+	public IGFolder[] findByGroupId_PrevAndNext(long folderId, long groupId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		IGFolder igFolder = findByPrimaryKey(folderId);
 		int count = countByGroupId(groupId);
@@ -341,7 +340,7 @@ public class IGFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_P(long groupId, String parentFolderId)
+	public List findByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		Session session = null;
 
@@ -353,14 +352,7 @@ public class IGFolderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("folderId ASC").append(", ");
@@ -371,10 +363,7 @@ public class IGFolderPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			return q.list();
 		}
@@ -386,12 +375,12 @@ public class IGFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_P(long groupId, String parentFolderId, int begin,
-		int end) throws SystemException {
+	public List findByG_P(long groupId, long parentFolderId, int begin, int end)
+		throws SystemException {
 		return findByG_P(groupId, parentFolderId, begin, end, null);
 	}
 
-	public List findByG_P(long groupId, String parentFolderId, int begin,
+	public List findByG_P(long groupId, long parentFolderId, int begin,
 		int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -403,14 +392,7 @@ public class IGFolderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -428,10 +410,7 @@ public class IGFolderPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -443,7 +422,7 @@ public class IGFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public IGFolder findByG_P_First(long groupId, String parentFolderId,
+	public IGFolder findByG_P_First(long groupId, long parentFolderId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
@@ -464,7 +443,7 @@ public class IGFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public IGFolder findByG_P_Last(long groupId, String parentFolderId,
+	public IGFolder findByG_P_Last(long groupId, long parentFolderId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		int count = countByG_P(groupId, parentFolderId);
 		List list = findByG_P(groupId, parentFolderId, count - 1, count, obc);
@@ -486,8 +465,8 @@ public class IGFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public IGFolder[] findByG_P_PrevAndNext(String folderId, long groupId,
-		String parentFolderId, OrderByComparator obc)
+	public IGFolder[] findByG_P_PrevAndNext(long folderId, long groupId,
+		long parentFolderId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		IGFolder igFolder = findByPrimaryKey(folderId);
 		int count = countByG_P(groupId, parentFolderId);
@@ -501,14 +480,7 @@ public class IGFolderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -526,10 +498,7 @@ public class IGFolderPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igFolder);
 			IGFolder[] array = new IGFolderImpl[3];
@@ -637,7 +606,7 @@ public class IGFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByG_P(long groupId, String parentFolderId)
+	public void removeByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		Iterator itr = findByG_P(groupId, parentFolderId).iterator();
 
@@ -694,7 +663,7 @@ public class IGFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByG_P(long groupId, String parentFolderId)
+	public int countByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		Session session = null;
 
@@ -707,14 +676,7 @@ public class IGFolderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -722,10 +684,7 @@ public class IGFolderPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			Iterator itr = q.list().iterator();
 

@@ -23,7 +23,6 @@
 package com.liferay.portlet.imagegallery.model.impl;
 
 import com.liferay.portlet.imagegallery.model.IGFolder;
-import com.liferay.util.Validator;
 
 /**
  * <a href="IGFolderImpl.java.html"><b><i>View Source</i></b></a>
@@ -33,13 +32,18 @@ import com.liferay.util.Validator;
  */
 public class IGFolderImpl extends IGFolderModelImpl implements IGFolder {
 
-	public static final String DEFAULT_PARENT_FOLDER_ID = "-1";
+	public static final long DEFAULT_PARENT_FOLDER_ID = 0;
 
 	public IGFolderImpl() {
 	}
 
 	public boolean isRoot() {
-		return Validator.equals(getParentFolderId(), DEFAULT_PARENT_FOLDER_ID);
+		if (getParentFolderId() == DEFAULT_PARENT_FOLDER_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

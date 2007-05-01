@@ -47,13 +47,13 @@ import java.util.Date;
  *
  */
 public interface IGFolderModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getFolderId();
+	public long getFolderId();
 
-	public void setFolderId(String folderId);
+	public void setFolderId(long folderId);
 
 	public long getGroupId();
 
@@ -75,9 +75,9 @@ public interface IGFolderModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public String getParentFolderId();
+	public long getParentFolderId();
 
-	public void setParentFolderId(String parentFolderId);
+	public void setParentFolderId(long parentFolderId);
 
 	public String getName();
 

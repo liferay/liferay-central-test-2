@@ -142,7 +142,9 @@ portletURL.setParameter("name", name);
 			<%= LanguageUtil.get(pageContext, "url") %>
 		</td>
 		<td>
-			<input class="form-text" readonly="true" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>" onClick="javascript: this.focus(); this.select();">
+			<liferay-ui:input-resource
+				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + folderId + "&name=" + Http.encodeURL(name) %>'
+			/>
 		</td>
 	</tr>
 	</table>

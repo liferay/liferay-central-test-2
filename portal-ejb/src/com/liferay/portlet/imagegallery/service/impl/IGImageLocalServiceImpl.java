@@ -41,7 +41,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageFinder;
-import com.liferay.portlet.imagegallery.service.persistence.IGImagePK;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.FileUtil;
@@ -69,7 +68,7 @@ import javax.imageio.ImageIO;
 public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public IGImage addImage(
-			long userId, String folderId, String description, File file,
+			long userId, long folderId, String description, File file,
 			String contentType, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -81,7 +80,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage addImage(
-			long userId, String folderId, String description, File file,
+			long userId, long folderId, String description, File file,
 			String contentType, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -92,7 +91,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage addImage(
-			long userId, String folderId, String description, File file,
+			long userId, long folderId, String description, File file,
 			String contentType, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
@@ -110,14 +109,11 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			validate(file, bytes);
 
-			String imageId = String.valueOf(CounterLocalServiceUtil.increment(
-				IGImage.class.getName() + "." + user.getCompanyId()));
+			long imageId = CounterLocalServiceUtil.increment();
 
-			IGImagePK pk = new IGImagePK(user.getCompanyId(), imageId);
+			IGImage image = IGImageUtil.create(imageId);
 
-			IGImage image = IGImageUtil.create(pk);
-
-			image.setCompanyId(pk.companyId);
+			image.setCompanyId(user.getCompanyId());
 			image.setUserId(user.getUserId());
 			image.setCreateDate(now);
 			image.setModifiedDate(now);
@@ -153,7 +149,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			TagsAssetLocalServiceUtil.updateAsset(
 				userId, IGImage.class.getName(),
-				image.getPrimaryKey().toString(), tagsEntries);
+				String.valueOf(image.getImageId()), tagsEntries);
 
 			return image;
 		}
@@ -163,13 +159,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public void addImageResources(
-			String folderId, String imageId, boolean addCommunityPermissions,
+			long folderId, long imageId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
-		IGImage image = IGImageUtil.findByPrimaryKey(
-			new IGImagePK(folder.getCompanyId(), imageId));
+		IGImage image = IGImageUtil.findByPrimaryKey(imageId);
 
 		addImageResources(
 			folder, image, addCommunityPermissions, addGuestPermissions);
@@ -182,18 +177,17 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			image.getCompanyId(), folder.getGroupId(), image.getUserId(),
-			IGImage.class.getName(), image.getPrimaryKey().toString(),
-			false, addCommunityPermissions, addGuestPermissions);
+			IGImage.class.getName(), image.getImageId(), false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addImageResources(
-			String folderId, String imageId, String[] communityPermissions,
+			long folderId, long imageId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
-		IGImage image = IGImageUtil.findByPrimaryKey(
-			new IGImagePK(folder.getCompanyId(), imageId));
+		IGImage image = IGImageUtil.findByPrimaryKey(imageId);
 
 		addImageResources(
 			folder, image, communityPermissions, guestPermissions);
@@ -206,15 +200,14 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addModelResources(
 			image.getCompanyId(), folder.getGroupId(), image.getUserId(),
-			IGImage.class.getName(), image.getPrimaryKey().toString(),
-			communityPermissions, guestPermissions);
+			IGImage.class.getName(), image.getImageId(), communityPermissions,
+			guestPermissions);
 	}
 
-	public void deleteImage(long companyId, String imageId)
+	public void deleteImage(long imageId)
 		throws PortalException, SystemException {
 
-		IGImage image = IGImageUtil.findByPrimaryKey(
-			new IGImagePK(companyId, imageId));
+		IGImage image = IGImageUtil.findByPrimaryKey(imageId);
 
 		deleteImage(image);
 	}
@@ -225,13 +218,13 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		// Tags
 
 		TagsAssetLocalServiceUtil.deleteAsset(
-			IGImage.class.getName(), image.getPrimaryKey().toString());
+			IGImage.class.getName(), String.valueOf(image.getImageId()));
 
 		// Resources
 
 		ResourceLocalServiceUtil.deleteResource(
 			image.getCompanyId(), IGImage.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, image.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, image.getImageId());
 
 		// Images
 
@@ -243,7 +236,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		IGImageUtil.remove(image.getPrimaryKey());
 	}
 
-	public void deleteImages(String folderId)
+	public void deleteImages(long folderId)
 		throws PortalException, SystemException {
 
 		Iterator itr = IGImageUtil.findByFolderId(folderId).iterator();
@@ -293,46 +286,43 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 	}
 
-	public IGImage getImage(long companyId, String imageId)
+	public IGImage getImage(long imageId)
 		throws PortalException, SystemException {
 
-		return IGImageUtil.findByPrimaryKey(
-			new IGImagePK(companyId, imageId));
+		return IGImageUtil.findByPrimaryKey(imageId);
 	}
 
-	public List getImages(String folderId) throws SystemException {
+	public List getImages(long folderId) throws SystemException {
 		return IGImageUtil.findByFolderId(folderId);
 	}
 
-	public List getImages(String folderId, int begin, int end)
+	public List getImages(long folderId, int begin, int end)
 		throws SystemException {
 
 		return IGImageUtil.findByFolderId(folderId, begin, end);
 	}
 
 	public List getImages(
-			String folderId, int begin, int end, OrderByComparator obc)
+			long folderId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return IGImageUtil.findByFolderId(folderId, begin, end, obc);
 	}
 
-	public int getImagesCount(String folderId) throws SystemException {
+	public int getImagesCount(long folderId) throws SystemException {
 		return IGImageUtil.countByFolderId(folderId);
 	}
 
 	public IGImage updateImage(
-			long companyId, String imageId, String folderId,
-			String description, File file, String contentType,
-			String[] tagsEntries)
+			long imageId, long folderId, String description, File file,
+			String contentType, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		try {
 
 			// Image
 
-			IGImage image = IGImageUtil.findByPrimaryKey(
-				new IGImagePK(companyId, imageId));
+			IGImage image = IGImageUtil.findByPrimaryKey(imageId);
 
 			IGFolder folder = getFolder(image, folderId);
 
@@ -370,7 +360,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			TagsAssetLocalServiceUtil.updateAsset(
 				image.getUserId(), IGImage.class.getName(),
-				image.getPrimaryKey().toString(), tagsEntries);
+				String.valueOf(image.getImageId()), tagsEntries);
 
 			return image;
 		}
@@ -379,10 +369,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 	}
 
-	protected IGFolder getFolder(IGImage image, String folderId)
+	protected IGFolder getFolder(IGImage image, long folderId)
 		throws PortalException, SystemException {
 
-		if (!image.getFolderId().equals(folderId)) {
+		if (image.getFolderId() != folderId) {
 			IGFolder oldFolder = IGFolderUtil.findByPrimaryKey(
 				image.getFolderId());
 

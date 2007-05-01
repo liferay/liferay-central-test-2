@@ -39,11 +39,10 @@ import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 public class IGImagePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long companyId, String imageId,
-			String actionId)
+			PermissionChecker permissionChecker, long imageId, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, companyId, imageId, actionId)) {
+		if (!contains(permissionChecker, imageId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -58,11 +57,10 @@ public class IGImagePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long companyId, String imageId,
-			String actionId)
+			PermissionChecker permissionChecker, long imageId, String actionId)
 		throws PortalException, SystemException {
 
-		IGImage image = IGImageLocalServiceUtil.getImage(companyId, imageId);
+		IGImage image = IGImageLocalServiceUtil.getImage(imageId);
 
 		return contains(permissionChecker, image, actionId);
 	}
@@ -74,8 +72,8 @@ public class IGImagePermission {
 		IGFolder folder = image.getFolder();
 
 		return permissionChecker.hasPermission(
-			folder.getGroupId(), IGImage.class.getName(),
-			image.getPrimaryKey().toString(), actionId);
+			folder.getGroupId(), IGImage.class.getName(), image.getImageId(),
+			actionId);
 	}
 
 }

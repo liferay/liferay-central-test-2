@@ -140,7 +140,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 				filesEl.appendChild(fileEl);
 
-				fileEl.setAttribute("name", image.getImageId());
+				fileEl.setAttribute("name", String.valueOf(image.getImageId()));
 				fileEl.setAttribute("desc", image.getDescription());
 				fileEl.setAttribute("size", getSize(image.getSize()));
 				fileEl.setAttribute(

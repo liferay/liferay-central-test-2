@@ -78,10 +78,9 @@ import java.rmi.RemoteException;
  *
  */
 public class IGImageServiceSoap {
-	public static void deleteImage(long companyId, java.lang.String imageId)
-		throws RemoteException {
+	public static void deleteImage(long imageId) throws RemoteException {
 		try {
-			IGImageServiceUtil.deleteImage(companyId, imageId);
+			IGImageServiceUtil.deleteImage(imageId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -90,10 +89,9 @@ public class IGImageServiceSoap {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImageSoap getImage(
-		long companyId, java.lang.String imageId) throws RemoteException {
+		long imageId) throws RemoteException {
 		try {
-			com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImage(companyId,
-					imageId);
+			com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImage(imageId);
 
 			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModel(returnValue);
 		}
