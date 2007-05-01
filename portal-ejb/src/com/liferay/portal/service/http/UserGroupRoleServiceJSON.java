@@ -67,28 +67,28 @@ import com.liferay.portal.service.UserGroupRoleServiceUtil;
  */
 public class UserGroupRoleServiceJSON {
 	public static void addUserGroupRoles(long userId, long groupId,
-		java.lang.String[] roleIds)
+		long[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserGroupRoleServiceUtil.addUserGroupRoles(userId, groupId, roleIds);
 	}
 
 	public static void addUserGroupRoles(long[] userIds, long groupId,
-		java.lang.String roleId)
+		long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserGroupRoleServiceUtil.addUserGroupRoles(userIds, groupId, roleId);
 	}
 
 	public static void deleteUserGroupRoles(long userId, long groupId,
-		java.lang.String[] roleIds)
+		long[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserGroupRoleServiceUtil.deleteUserGroupRoles(userId, groupId, roleIds);
 	}
 
 	public static void deleteUserGroupRoles(long[] userIds, long groupId,
-		java.lang.String roleId)
+		long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserGroupRoleServiceUtil.deleteUserGroupRoles(userIds, groupId, roleId);

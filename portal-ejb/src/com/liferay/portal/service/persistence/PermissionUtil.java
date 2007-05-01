@@ -393,7 +393,7 @@ public class PermissionUtil {
 		return getPersistence().getRolesSize(pk);
 	}
 
-	public static boolean containsRole(long pk, java.lang.String rolePK)
+	public static boolean containsRole(long pk, long rolePK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().containsRole(pk, rolePK);
 	}
@@ -403,7 +403,7 @@ public class PermissionUtil {
 		return getPersistence().containsRoles(pk);
 	}
 
-	public static void addRole(long pk, java.lang.String rolePK)
+	public static void addRole(long pk, long rolePK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException, 
 			com.liferay.portal.NoSuchPermissionException {
@@ -417,7 +417,7 @@ public class PermissionUtil {
 		getPersistence().addRole(pk, role);
 	}
 
-	public static void addRoles(long pk, java.lang.String[] rolePKs)
+	public static void addRoles(long pk, long[] rolePKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException, 
 			com.liferay.portal.NoSuchPermissionException {
@@ -437,7 +437,7 @@ public class PermissionUtil {
 		getPersistence().clearRoles(pk);
 	}
 
-	public static void removeRole(long pk, java.lang.String rolePK)
+	public static void removeRole(long pk, long rolePK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException, 
 			com.liferay.portal.NoSuchPermissionException {
@@ -451,7 +451,7 @@ public class PermissionUtil {
 		getPersistence().removeRole(pk, role);
 	}
 
-	public static void removeRoles(long pk, java.lang.String[] rolePKs)
+	public static void removeRoles(long pk, long[] rolePKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException, 
 			com.liferay.portal.NoSuchPermissionException {
@@ -465,7 +465,7 @@ public class PermissionUtil {
 		getPersistence().removeRoles(pk, roles);
 	}
 
-	public static void setRoles(long pk, java.lang.String[] rolePKs)
+	public static void setRoles(long pk, long[] rolePKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException, 
 			com.liferay.portal.NoSuchPermissionException {

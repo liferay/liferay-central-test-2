@@ -65,7 +65,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addRoleUsers(java.lang.String roleId, long[] userIds)
+	public void addRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -117,7 +117,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteRoleUser(java.lang.String roleId, long userId)
+	public void deleteRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -157,7 +157,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getRoleUsers(java.lang.String roleId)
+	public java.util.List getRoleUsers(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -201,7 +201,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasRoleUser(java.lang.String roleId, long userId)
+	public boolean hasRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -232,7 +232,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void setRoleUsers(java.lang.String roleId, long[] userIds)
+	public void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -248,7 +248,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetRoleUsers(java.lang.String roleId, long[] userIds)
+	public void unsetRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

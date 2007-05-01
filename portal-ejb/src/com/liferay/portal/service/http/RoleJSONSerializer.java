@@ -51,15 +51,7 @@ import java.util.List;
 public class RoleJSONSerializer {
 	public static JSONObject toJSONObject(Role model) {
 		JSONObject jsonObj = new JSONObject();
-		String roleId = model.getRoleId();
-
-		if (roleId == null) {
-			jsonObj.put("roleId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("roleId", roleId.toString());
-		}
-
+		jsonObj.put("roleId", model.getRoleId());
 		jsonObj.put("companyId", model.getCompanyId());
 
 		String className = model.getClassName();

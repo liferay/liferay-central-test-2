@@ -57,23 +57,19 @@ public interface UserGroupRoleLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void addUserGroupRoles(long userId, long groupId,
-		java.lang.String[] roleIds)
+	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addUserGroupRoles(long[] userIds, long groupId,
-		java.lang.String roleId)
+	public void addUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteUserGroupRoles(long userId, long groupId,
-		java.lang.String[] roleIds)
+	public void deleteUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteUserGroupRoles(long[] userIds, long groupId,
-		java.lang.String roleId)
+	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -83,7 +79,7 @@ public interface UserGroupRoleLocalService {
 	public void deleteUserGroupRolesByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteUserGroupRolesByRoleId(java.lang.String roleId)
+	public void deleteUserGroupRolesByRoleId(long roleId)
 		throws com.liferay.portal.SystemException;
 
 	public void deleteUserGroupRolesByUserId(long userId)
@@ -93,8 +89,7 @@ public interface UserGroupRoleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasUserGroupRole(long userId, long groupId,
-		java.lang.String roleId)
+	public boolean hasUserGroupRole(long userId, long groupId, long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

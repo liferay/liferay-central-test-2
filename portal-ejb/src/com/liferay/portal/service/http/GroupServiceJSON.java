@@ -91,7 +91,7 @@ public class GroupServiceJSON {
 		return GroupJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
+	public static void addRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		GroupServiceUtil.addRoleGroups(roleId, groupIds);
@@ -162,13 +162,13 @@ public class GroupServiceJSON {
 		return returnValue;
 	}
 
-	public static void setRoleGroups(java.lang.String roleId, long[] groupIds)
+	public static void setRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		GroupServiceUtil.setRoleGroups(roleId, groupIds);
 	}
 
-	public static void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
+	public static void unsetRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		GroupServiceUtil.unsetRoleGroups(roleId, groupIds);

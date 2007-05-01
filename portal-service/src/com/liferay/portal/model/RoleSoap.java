@@ -72,19 +72,19 @@ public class RoleSoap implements Serializable {
 	public RoleSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _roleId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setRoleId(pk);
 	}
 
-	public String getRoleId() {
+	public long getRoleId() {
 		return _roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(long roleId) {
 		_roleId = roleId;
 	}
 
@@ -136,7 +136,7 @@ public class RoleSoap implements Serializable {
 		_type = type;
 	}
 
-	private String _roleId;
+	private long _roleId;
 	private long _companyId;
 	private String _className;
 	private String _classPK;

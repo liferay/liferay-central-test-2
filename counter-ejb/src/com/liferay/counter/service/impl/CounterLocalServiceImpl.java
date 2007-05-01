@@ -40,6 +40,10 @@ public class CounterLocalServiceImpl implements CounterLocalService {
 		return CounterUtil.getNames();
 	}
 
+	public long increment() throws SystemException {
+		return CounterUtil.increment();
+	}
+
 	public long increment(String name) throws SystemException {
 		return CounterUtil.increment(name);
 	}

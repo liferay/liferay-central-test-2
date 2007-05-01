@@ -67,7 +67,7 @@ public class UserGroupRoleLocalServiceUtil {
 	}
 
 	public static void addUserGroupRoles(long userId, long groupId,
-		java.lang.String[] roleIds)
+		long[] roleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
@@ -75,7 +75,7 @@ public class UserGroupRoleLocalServiceUtil {
 	}
 
 	public static void addUserGroupRoles(long[] userIds, long groupId,
-		java.lang.String roleId)
+		long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class UserGroupRoleLocalServiceUtil {
 	}
 
 	public static void deleteUserGroupRoles(long userId, long groupId,
-		java.lang.String[] roleIds)
+		long[] roleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
@@ -91,7 +91,7 @@ public class UserGroupRoleLocalServiceUtil {
 	}
 
 	public static void deleteUserGroupRoles(long[] userIds, long groupId,
-		java.lang.String roleId)
+		long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
@@ -110,7 +110,7 @@ public class UserGroupRoleLocalServiceUtil {
 		userGroupRoleLocalService.deleteUserGroupRolesByGroupId(groupId);
 	}
 
-	public static void deleteUserGroupRolesByRoleId(java.lang.String roleId)
+	public static void deleteUserGroupRolesByRoleId(long roleId)
 		throws com.liferay.portal.SystemException {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
 		userGroupRoleLocalService.deleteUserGroupRolesByRoleId(roleId);
@@ -131,7 +131,7 @@ public class UserGroupRoleLocalServiceUtil {
 	}
 
 	public static boolean hasUserGroupRole(long userId, long groupId,
-		java.lang.String roleId)
+		long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();

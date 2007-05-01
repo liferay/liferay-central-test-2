@@ -300,7 +300,7 @@ create table Groups_Permissions (
 
 create table Groups_Roles (
 	groupId LONG,
-	roleId VARCHAR(75) not null,
+	roleId LONG,
 	primary key (groupId, roleId)
 );
 
@@ -554,7 +554,7 @@ create table OrgGroupPermission (
 create table OrgGroupRole (
 	organizationId VARCHAR(75) not null,
 	groupId LONG,
-	roleId VARCHAR(75) not null,
+	roleId LONG,
 	primary key (organizationId, groupId, roleId)
 );
 
@@ -749,7 +749,7 @@ create table ResourceCode (
 );
 
 create table Role_ (
-	roleId VARCHAR(75) not null primary key,
+	roleId LONG primary key,
 	companyId LONG,
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null,
@@ -759,7 +759,7 @@ create table Role_ (
 );
 
 create table Roles_Permissions (
-	roleId VARCHAR(75) not null,
+	roleId LONG,
 	permissionId LONG,
 	primary key (roleId, permissionId)
 );
@@ -1102,7 +1102,7 @@ create table UserGroup (
 create table UserGroupRole (
 	userId LONG,
 	groupId LONG,
-	roleId VARCHAR(75) not null,
+	roleId LONG,
 	primary key (userId, groupId, roleId)
 );
 
@@ -1134,7 +1134,7 @@ create table Users_Permissions (
 
 create table Users_Roles (
 	userId VARCHAR(75) not null,
-	roleId VARCHAR(75) not null,
+	roleId LONG,
 	primary key (userId, roleId)
 );
 

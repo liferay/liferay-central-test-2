@@ -35,7 +35,7 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
-String roleId = BeanParamUtil.getString(role, request, "roleId");
+long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -45,7 +45,7 @@ portletURL.setParameter("struts_action", "/communities/edit_user_roles");
 //portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-portletURL.setParameter("roleId", roleId);
+portletURL.setParameter("roleId", String.valueOf(roleId));
 
 // Breadcrumbs
 
@@ -65,7 +65,7 @@ breadcrumbsURL.setParameter("struts_action", "/communities/edit_user_roles");
 breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + group.getName() + "</a>";
 
 if (role != null) {
-	breadcrumbsURL.setParameter("roleId", roleId);
+	breadcrumbsURL.setParameter("roleId", String.valueOf(roleId));
 
 	breadcrumbs += " &raquo; <a href=\"" + breadcrumbsURL.toString() + "\">" + role.getName() + "</a>";
 }
@@ -143,7 +143,7 @@ Assign Community roles to users.
 			for (int i = 0; i < results.size(); i++) {
 				Role curRole = (Role)results.get(i);
 
-				ResultRow row = new ResultRow(curRole, curRole.getPrimaryKey().toString(), i);
+				ResultRow row = new ResultRow(curRole, curRole.getRoleId(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -152,7 +152,7 @@ Assign Community roles to users.
 				rowURL.setParameter("struts_action", "/communities/edit_user_roles");
 				rowURL.setParameter("redirect", currentURL);
 				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-				rowURL.setParameter("roleId", curRole.getRoleId());
+				rowURL.setParameter("roleId", String.valueOf(curRole.getRoleId()));
 
 				// Name
 
@@ -216,7 +216,7 @@ Assign Community roles to users.
 		userParams.put("usersGroups", new Long(group.getGroupId()));
 
 		if (tabs1.equals("current")) {
-			userParams.put("userGroupRole", new String[] {String.valueOf(group.getGroupId()), roleId});
+			userParams.put("userGroupRole", new Long[] {new Long(group.getGroupId()), new Long(roleId)});
 		}
 
 		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());

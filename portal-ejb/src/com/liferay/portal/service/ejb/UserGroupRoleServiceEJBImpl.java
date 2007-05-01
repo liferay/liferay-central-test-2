@@ -54,8 +54,7 @@ import javax.ejb.SessionContext;
  */
 public class UserGroupRoleServiceEJBImpl implements UserGroupRoleService,
 	SessionBean {
-	public void addUserGroupRoles(long userId, long groupId,
-		java.lang.String[] roleIds)
+	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -63,8 +62,7 @@ public class UserGroupRoleServiceEJBImpl implements UserGroupRoleService,
 			groupId, roleIds);
 	}
 
-	public void addUserGroupRoles(long[] userIds, long groupId,
-		java.lang.String roleId)
+	public void addUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -72,8 +70,7 @@ public class UserGroupRoleServiceEJBImpl implements UserGroupRoleService,
 			groupId, roleId);
 	}
 
-	public void deleteUserGroupRoles(long userId, long groupId,
-		java.lang.String[] roleIds)
+	public void deleteUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -81,8 +78,7 @@ public class UserGroupRoleServiceEJBImpl implements UserGroupRoleService,
 			groupId, roleIds);
 	}
 
-	public void deleteUserGroupRoles(long[] userIds, long groupId,
-		java.lang.String roleId)
+	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

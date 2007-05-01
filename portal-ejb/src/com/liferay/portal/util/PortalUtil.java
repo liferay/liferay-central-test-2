@@ -1036,10 +1036,10 @@ public class PortalUtil {
 			GetterUtil.getBoolean(
 				PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE))) {
 
-			long doAsUserId = ParamUtil.getLong(req, "doAsUserId");
+			String doAsUserIdString = ParamUtil.getString(req, "doAsUserId");
 
 			try {
-				doAsUserId = _getDoAsUserId(req, doAsUserId);
+				long doAsUserId = _getDoAsUserId(req, doAsUserIdString);
 
 				if (doAsUserId > 0) {
 					if (_log.isDebugEnabled()) {
@@ -1050,7 +1050,7 @@ public class PortalUtil {
 				}
 			}
 			catch (Exception e) {
-				_log.error("Unable to impersonate user " + doAsUserId, e);
+				_log.error("Unable to impersonate user " + doAsUserIdString, e);
 			}
 		}
 
@@ -1509,10 +1509,11 @@ public class PortalUtil {
 		}
 	}
 
-	private static long _getDoAsUserId(HttpServletRequest req, long doAsUserId)
+	private static long _getDoAsUserId(
+			HttpServletRequest req, String doAsUserIdString)
 		throws Exception {
 
-		if (doAsUserId <= 0) {
+		if (Validator.isNull(doAsUserIdString)) {
 			return 0;
 		}
 
@@ -1526,8 +1527,8 @@ public class PortalUtil {
 
 		Company company = getCompany(req);
 
-		doAsUserId = GetterUtil.getLong(
-			Encryptor.decrypt(company.getKeyObj(), String.valueOf(doAsUserId)));
+		long doAsUserId = GetterUtil.getLong(
+			Encryptor.decrypt(company.getKeyObj(), doAsUserIdString));
 
 		User doAsUser = UserLocalServiceUtil.getUserById(doAsUserId);
 

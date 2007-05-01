@@ -89,7 +89,7 @@ public class UserSearch extends SearchContainer {
 		iteratorURL.setParameter(
 			UserDisplayTerms.ORGANIZATION_ID, displayTerms.getOrganizationId());
 		iteratorURL.setParameter(
-			UserDisplayTerms.ROLE_ID, displayTerms.getRoleId());
+			UserDisplayTerms.ROLE_ID, String.valueOf(displayTerms.getRoleId()));
 		iteratorURL.setParameter(
 			UserDisplayTerms.USER_GROUP_ID,
 			String.valueOf(displayTerms.getUserGroupId()));

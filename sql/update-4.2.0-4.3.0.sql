@@ -54,6 +54,7 @@ alter_column_type Groups_Permissions groupId LONG;
 alter_column_type Groups_Permissions permissionId LONG;
 
 alter_column_type Groups_Roles groupId LONG;
+alter_column_type Groups_Roles roleId LONG;
 
 alter_column_type Groups_UserGroups groupId LONG;
 alter_column_type Groups_UserGroups userGroupId LONG;
@@ -103,6 +104,7 @@ alter_column_type OrgGroupPermission permissionId LONG;
 alter_column_type OrgGroupPermission groupId LONG;
 
 alter_column_type OrgGroupRole groupId LONG;
+alter_column_type OrgGroupRole roleId LONG;
 
 alter_column_type OrgLabor orgLaborId LONG;
 alter_column_type OrgLabor typeId INTEGER;
@@ -179,9 +181,11 @@ create table ResourceCode (
 	scope INTEGER
 );
 
+alter_column_type Role_ roleId LONG;
 alter table Role_ add type_ INTEGER;
 update Role_ SET type_ = 1;
 
+alter_column_type Roles_Permissions roleId LONG;
 alter_column_type Roles_Permissions permissionId LONG;
 
 create table SCFrameworkVersi_SCProductVers (
@@ -365,13 +369,15 @@ alter_column_type UserGroup userGroupId LONG;
 create table UserGroupRole (
 	userId LONG,
 	groupId LONG,
-	roleId VARCHAR(75) not null,
+	roleId LONG,
 	primary key (userId, groupId, roleId)
 );
 
 alter_column_type Users_Groups groupId LONG;
 
 alter_column_type Users_Permissions permissionId LONG;
+
+alter_column_type Users_Roles roleId LONG;
 
 alter_column_type Users_UserGroups userGroupId LONG;
 

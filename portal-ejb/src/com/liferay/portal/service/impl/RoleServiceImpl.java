@@ -53,7 +53,7 @@ public class RoleServiceImpl extends PrincipalBean implements RoleService {
 			user.getUserId(), user.getCompanyId(), name, type);
 	}
 
-	public void deleteRole(String roleId)
+	public void deleteRole(long roleId)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.DELETE);
@@ -67,7 +67,7 @@ public class RoleServiceImpl extends PrincipalBean implements RoleService {
 		return RoleLocalServiceUtil.getGroupRole(companyId, groupId);
 	}
 
-	public Role getRole(String roleId)
+	public Role getRole(long roleId)
 		throws PortalException, SystemException {
 
 		return RoleLocalServiceUtil.getRole(roleId);
@@ -97,7 +97,7 @@ public class RoleServiceImpl extends PrincipalBean implements RoleService {
 		return RoleLocalServiceUtil.getUserRoles(userId);
 	}
 
-	public Role updateRole(String roleId, String name)
+	public Role updateRole(long roleId, String name)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -53,8 +52,7 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 
 		validate(typeId);
 
-		long orgLaborId = CounterLocalServiceUtil.increment(
-			Counter.class.getName());
+		long orgLaborId = CounterLocalServiceUtil.increment();
 
 		OrgLabor orgLabor = OrgLaborUtil.create(orgLaborId);
 

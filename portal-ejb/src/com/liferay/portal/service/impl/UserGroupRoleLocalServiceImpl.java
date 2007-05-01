@@ -41,11 +41,11 @@ import java.util.List;
 public class UserGroupRoleLocalServiceImpl
 	extends UserGroupRoleLocalServiceBaseImpl {
 
-	public void addUserGroupRoles(long userId, long groupId, String[] roleIds)
+	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < roleIds.length; i++) {
-			String roleId = roleIds[i];
+			long roleId = roleIds[i];
 
 			UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);
 
@@ -55,7 +55,7 @@ public class UserGroupRoleLocalServiceImpl
 		}
 	}
 
-	public void addUserGroupRoles(long[] userIds, long groupId, String roleId)
+	public void addUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < userIds.length; i++) {
@@ -70,11 +70,11 @@ public class UserGroupRoleLocalServiceImpl
 	}
 
 	public void deleteUserGroupRoles(
-			long userId, long groupId, String[] roleIds)
+			long userId, long groupId, long[] roleIds)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < roleIds.length; i++) {
-			String roleId = roleIds[i];
+			long roleId = roleIds[i];
 
 			try {
 				UserGroupRoleUtil.remove(
@@ -85,8 +85,7 @@ public class UserGroupRoleLocalServiceImpl
 		}
 	}
 
-	public void deleteUserGroupRoles(
-			long[] userIds, long groupId, String roleId)
+	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < userIds.length; i++) {
@@ -117,7 +116,7 @@ public class UserGroupRoleLocalServiceImpl
 		UserGroupRoleUtil.removeByGroupId(groupId);
 	}
 
-	public void deleteUserGroupRolesByRoleId(String roleId)
+	public void deleteUserGroupRolesByRoleId(long roleId)
 		throws SystemException {
 
 		UserGroupRoleUtil.removeByRoleId(roleId);
@@ -135,7 +134,7 @@ public class UserGroupRoleLocalServiceImpl
 		return UserGroupRoleUtil.findByU_G(userId, groupId);
 	}
 
-	public boolean hasUserGroupRole(long userId, long groupId, String roleId)
+	public boolean hasUserGroupRole(long userId, long groupId, long roleId)
 		throws PortalException, SystemException {
 
 		UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);

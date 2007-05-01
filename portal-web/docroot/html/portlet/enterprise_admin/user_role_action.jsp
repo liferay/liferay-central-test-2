@@ -39,7 +39,7 @@ String redirect = (String)objArray[2];
 	<portlet:param name="<%= Constants.CMD %>" value="deleteRole" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
-	<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
+	<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 </portlet:actionURL>
 
 <liferay-ui:icon image="unlink" message="remove" url="<%= portletURL %>" />

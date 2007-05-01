@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserGroupRole;
 
 import org.json.JSONArray;
@@ -53,15 +52,7 @@ public class UserGroupRoleJSONSerializer {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("groupId", model.getGroupId());
-
-		String roleId = model.getRoleId();
-
-		if (roleId == null) {
-			jsonObj.put("roleId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("roleId", roleId.toString());
-		}
+		jsonObj.put("roleId", model.getRoleId());
 
 		return jsonObj;
 	}

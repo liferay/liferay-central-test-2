@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
-String roleId = BeanParamUtil.getString(role, request, "roleId");
+long roleId = BeanParamUtil.getLong(role, request, "roleId");
 %>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">

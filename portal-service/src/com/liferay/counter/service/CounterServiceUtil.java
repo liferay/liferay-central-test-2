@@ -42,6 +42,12 @@ public class CounterServiceUtil {
 		return counterService.getNames();
 	}
 
+	public static long increment() throws RemoteException, SystemException {
+		CounterService counterService = CounterServiceFactory.getService();
+
+		return counterService.increment();
+	}
+
 	public static long increment(String name)
 		throws RemoteException, SystemException {
 

@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.tags.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -122,8 +121,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		TagsAsset asset = TagsAssetUtil.fetchByC_C(className, classPK);
 
 		if (asset == null) {
-			long assetId = CounterLocalServiceUtil.increment(
-				Counter.class.getName());
+			long assetId = CounterLocalServiceUtil.increment();
 
 			asset = TagsAssetUtil.create(assetId);
 

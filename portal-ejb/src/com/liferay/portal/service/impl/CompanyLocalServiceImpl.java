@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.AccountNameException;
 import com.liferay.portal.CompanyHomeURLException;
@@ -121,8 +120,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String type = null;
 			String size = null;
 
-			long companyId = CounterLocalServiceUtil.increment(
-				Counter.class.getName());
+			long companyId = CounterLocalServiceUtil.increment();
 
 			company = CompanyUtil.create(companyId);
 
@@ -198,8 +196,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 		}
 		catch (NoSuchUserException nsue) {
-			long userId = CounterLocalServiceUtil.increment(
-				Counter.class.getName());
+			long userId = CounterLocalServiceUtil.increment();
 
 			defaultUser = UserUtil.create(userId);
 
@@ -207,8 +204,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			defaultUser.setCreateDate(now);
 			defaultUser.setModifiedDate(now);
 			defaultUser.setDefaultUser(true);
-			defaultUser.setContactId(
-				CounterLocalServiceUtil.increment(Counter.class.getName()));
+			defaultUser.setContactId(CounterLocalServiceUtil.increment());
 			defaultUser.setPassword("password");
 			defaultUser.setScreenName(String.valueOf(defaultUser.getUserId()));
 			defaultUser.setEmailAddress("default@" + company.getMx());
@@ -302,7 +298,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			Role powerUserRole = RoleLocalServiceUtil.getRole(
 				companyId, RoleImpl.POWER_USER);
 
-			String[] roleIds = new String[] {
+			long[] roleIds = new long[] {
 				adminRole.getRoleId(), powerUserRole.getRoleId()
 			};
 
@@ -454,8 +450,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			account = AccountUtil.findByPrimaryKey(company.getAccountId());
 		}
 		catch (NoSuchAccountException nsae) {
-			long accountId = CounterLocalServiceUtil.increment(
-				Counter.class.getName());
+			long accountId = CounterLocalServiceUtil.increment();
 
 			account = AccountUtil.create(accountId);
 

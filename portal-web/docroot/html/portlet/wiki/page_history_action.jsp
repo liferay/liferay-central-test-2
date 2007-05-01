@@ -32,7 +32,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pageURL">
 	<portlet:param name="struts_action" value="/wiki/view_page" />
-	<portlet:param name="nodeId" value="<%= wikiPage.getNodeId() %>" />
+	<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
 	<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
 </portlet:renderURL>
 
@@ -40,7 +40,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 	<portlet:param name="struts_action" value="/wiki/edit_page" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.REVERT %>" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="nodeId" value="<%= wikiPage.getNodeId() %>" />
+	<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
 	<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
 </portlet:actionURL>
 

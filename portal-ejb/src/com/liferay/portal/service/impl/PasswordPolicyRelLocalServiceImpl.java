@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPasswordPolicyRelException;
 import com.liferay.portal.PortalException;
@@ -62,8 +61,7 @@ public class PasswordPolicyRelLocalServiceImpl
 		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
 
-		long passwordPolicyRelId = CounterLocalServiceUtil.increment(
-			Counter.class.getName());
+		long passwordPolicyRelId = CounterLocalServiceUtil.increment();
 
 		passwordPolicyRel = PasswordPolicyRelUtil.create(passwordPolicyRelId);
 

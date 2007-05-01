@@ -403,7 +403,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.RoleImpl" table="Role_">
 		<cache usage="read-write" />
-		<id name="roleId" type="java.lang.String">
+		<id name="roleId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />

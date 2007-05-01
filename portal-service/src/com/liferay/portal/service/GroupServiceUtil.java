@@ -71,7 +71,7 @@ public class GroupServiceUtil {
 			friendlyURL, active);
 	}
 
-	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
+	public static void addRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
@@ -144,14 +144,14 @@ public class GroupServiceUtil {
 		return groupService.searchCount(companyId, name, description, params);
 	}
 
-	public static void setRoleGroups(java.lang.String roleId, long[] groupIds)
+	public static void setRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 		groupService.setRoleGroups(roleId, groupIds);
 	}
 
-	public static void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
+	public static void unsetRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();

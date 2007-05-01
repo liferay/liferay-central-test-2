@@ -53,7 +53,7 @@ public interface RoleService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteRole(java.lang.String roleId)
+	public void deleteRole(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -62,7 +62,7 @@ public interface RoleService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Role getRole(java.lang.String roleId)
+	public com.liferay.portal.model.Role getRole(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -83,7 +83,7 @@ public interface RoleService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Role updateRole(java.lang.String roleId,
+	public com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

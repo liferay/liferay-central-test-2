@@ -82,7 +82,7 @@ public class UserServiceJSON {
 		UserServiceUtil.addPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
-	public static void addRoleUsers(java.lang.String roleId, long[] userIds)
+	public static void addRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.addRoleUsers(roleId, userIds);
@@ -115,7 +115,7 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteRoleUser(java.lang.String roleId, long userId)
+	public static void deleteRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.deleteRoleUser(roleId, userId);
@@ -135,7 +135,7 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONArray getRoleUsers(java.lang.String roleId)
+	public static JSONArray getRoleUsers(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		java.util.List returnValue = UserServiceUtil.getRoleUsers(roleId);
@@ -179,7 +179,7 @@ public class UserServiceJSON {
 		return returnValue;
 	}
 
-	public static boolean hasRoleUser(java.lang.String roleId, long userId)
+	public static boolean hasRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		boolean returnValue = UserServiceUtil.hasRoleUser(roleId, userId);
@@ -193,7 +193,7 @@ public class UserServiceJSON {
 		UserServiceUtil.setGroupUsers(groupId, userIds);
 	}
 
-	public static void setRoleUsers(java.lang.String roleId, long[] userIds)
+	public static void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.setRoleUsers(roleId, userIds);
@@ -218,7 +218,7 @@ public class UserServiceJSON {
 		UserServiceUtil.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
-	public static void unsetRoleUsers(java.lang.String roleId, long[] userIds)
+	public static void unsetRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		UserServiceUtil.unsetRoleUsers(roleId, userIds);

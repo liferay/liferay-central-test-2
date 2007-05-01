@@ -57,7 +57,7 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void addRoleUsers(java.lang.String roleId, long[] userIds)
+	public void addRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -78,7 +78,7 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteRoleUser(java.lang.String roleId, long userId)
+	public void deleteRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -90,7 +90,7 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.util.List getRoleUsers(java.lang.String roleId)
+	public java.util.List getRoleUsers(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -112,7 +112,7 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public boolean hasRoleUser(java.lang.String roleId, long userId)
+	public boolean hasRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -120,7 +120,7 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void setRoleUsers(java.lang.String roleId, long[] userIds)
+	public void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -136,7 +136,7 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void unsetRoleUsers(java.lang.String roleId, long[] userIds)
+	public void unsetRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

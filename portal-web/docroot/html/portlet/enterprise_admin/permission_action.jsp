@@ -37,7 +37,7 @@ Role role = (Role)objArray[1];
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
 	<portlet:param name="<%= Constants.CMD %>" value="unset_permission" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
+	<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 	<portlet:param name="permissionId" value="<%= String.valueOf(permission.getPermissionId()) %>" />
 </portlet:actionURL>
 

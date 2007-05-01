@@ -230,7 +230,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addRoleGroups" qname="operNS:addRoleGroups" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="groupIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteGroup" qname="operNS:deleteGroup" soapAction="">
@@ -260,11 +260,11 @@
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="params" type="tns:ArrayOf_xsd_string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="setRoleGroups" qname="operNS:setRoleGroups" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="groupIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetRoleGroups" qname="operNS:unsetRoleGroups" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="groupIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateGroup" qname="operNS:updateGroup" returnQName="updateGroupReturn" returnType="rtns:GroupSoap" soapAction="">
@@ -651,7 +651,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="resourceId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="setRolePermission" qname="operNS:setRolePermission" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="scope" type="tns:int"></parameter>
@@ -665,12 +665,12 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="resourceId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetRolePermission" qname="operNS:unsetRolePermission" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="permissionId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetRolePermission" qname="operNS:unsetRolePermission" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="scope" type="tns:int"></parameter>
@@ -678,7 +678,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="actionId" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetRolePermissions" qname="operNS:unsetRolePermissions" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="scope" type="tns:int"></parameter>
@@ -833,14 +833,14 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="type" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteRole" qname="operNS:deleteRole" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getGroupRole" qname="operNS:getGroupRole" returnQName="getGroupRoleReturn" returnType="rtns:RoleSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getRole" qname="operNS:getRole" returnQName="getRoleReturn" returnType="rtns:RoleSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getRole" qname="operNS:getRole" returnQName="getRoleReturn" returnType="rtns:RoleSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
@@ -858,7 +858,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateRole" qname="operNS:updateRole" returnQName="updateRoleReturn" returnType="rtns:RoleSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="getUserGroupRoles getGroupRole addRole getRole getUserRelatedRoles deleteRole getUserRoles updateRole"/>
@@ -877,25 +877,24 @@
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addUserGroupRoles" qname="operNS:addUserGroupRoles" soapAction="">
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addUserGroupRoles" qname="operNS:addUserGroupRoles" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
-			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="roleIds" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="roleIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteUserGroupRoles" qname="operNS:deleteUserGroupRoles" soapAction="">
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteUserGroupRoles" qname="operNS:deleteUserGroupRoles" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
-			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="roleIds" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="roleIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="addUserGroupRoles deleteUserGroupRoles"/>
-		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 	</service>
 	<service name="Portal_UserGroupService" provider="java:RPC" style="rpc" use="encoded">
@@ -954,7 +953,7 @@
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addRoleUsers" qname="operNS:addRoleUsers" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addUserGroupUsers" qname="operNS:addUserGroupUsers" soapAction="">
@@ -986,7 +985,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sendEmail" type="tns:boolean"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteRoleUser" qname="operNS:deleteRoleUser" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteUser" qname="operNS:deleteUser" soapAction="">
@@ -996,7 +995,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getRoleUsers" qname="operNS:getRoleUsers" returnQName="getRoleUsersReturn" returnType="rtns:ArrayOf_tns2_UserSoap" returnItemType="tns2:UserSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getUserByEmailAddress" qname="operNS:getUserByEmailAddress" returnQName="getUserByEmailAddressReturn" returnType="rtns:UserSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
@@ -1014,7 +1013,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="hasRoleUser" qname="operNS:hasRoleUser" returnQName="hasRoleUserReturn" returnType="rtns:boolean" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="setGroupUsers" qname="operNS:setGroupUsers" soapAction="">
@@ -1022,7 +1021,7 @@
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="setRoleUsers" qname="operNS:setRoleUsers" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="setUserGroupUsers" qname="operNS:setUserGroupUsers" soapAction="">
@@ -1038,7 +1037,7 @@
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetRoleUsers" qname="operNS:unsetRoleUsers" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetUserGroupUsers" qname="operNS:unsetUserGroupUsers" soapAction="">

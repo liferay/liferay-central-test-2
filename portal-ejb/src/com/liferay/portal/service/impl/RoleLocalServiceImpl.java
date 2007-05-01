@@ -72,10 +72,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		// Role
 
-		validate(null, companyId, name);
+		validate(0, companyId, name);
 
-		String roleId = String.valueOf(CounterLocalServiceUtil.increment(
-			Role.class.getName()));
+		long roleId = CounterLocalServiceUtil.increment();
 
 		Role role = RoleUtil.create(roleId);
 
@@ -91,8 +90,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		if (userId > 0) {
 			ResourceLocalServiceUtil.addResources(
-				companyId, 0, userId, Role.class.getName(),
-				role.getPrimaryKey().toString(), false, false, false);
+				companyId, 0, userId, Role.class.getName(), role.getRoleId(),
+				false, false, false);
 		}
 
 		return role;
@@ -157,7 +156,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteRole(String roleId)
+	public void deleteRole(long roleId)
 		throws PortalException, SystemException {
 
 		Role role = RoleUtil.findByPrimaryKey(roleId);
@@ -173,7 +172,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 			ResourceLocalServiceUtil.deleteResource(
 				role.getCompanyId(), Role.class.getName(),
-				ResourceImpl.SCOPE_INDIVIDUAL, role.getPrimaryKey().toString());
+				ResourceImpl.SCOPE_INDIVIDUAL, role.getRoleId());
 		}
 
 		if (role.getType() == RoleImpl.TYPE_COMMUNITY) {
@@ -206,7 +205,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return RoleFinder.findByC_N_S_P(companyId, name, scope, primKey);
 	}
 
-	public Role getRole(String roleId) throws PortalException, SystemException {
+	public Role getRole(long roleId) throws PortalException, SystemException {
 		return RoleUtil.findByPrimaryKey(roleId);
 	}
 
@@ -282,13 +281,13 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return RoleFinder.countByC_N_D_T(companyId, name, description, type);
 	}
 
-	public void setUserRoles(long userId, String[] roleIds)
+	public void setUserRoles(long userId, long[] roleIds)
 		throws PortalException, SystemException {
 
 		UserUtil.setRoles(userId, roleIds);
 	}
 
-	public Role updateRole(String roleId, String name)
+	public Role updateRole(long roleId, String name)
 		throws PortalException, SystemException {
 
 		Role role = RoleUtil.findByPrimaryKey(roleId);
@@ -306,7 +305,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return role;
 	}
 
-	protected void validate(String roleId, long companyId, String name)
+	protected void validate(long roleId, long companyId, String name)
 		throws PortalException, SystemException {
 
 		if ((Validator.isNull(name)) || (Validator.isNumber(name)) ||
@@ -319,7 +318,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		try {
 			Role role = RoleFinder.findByC_N(companyId, name);
 
-			if ((roleId == null) || !role.getRoleId().equals(roleId)) {
+			if ((roleId <= 0) || (role.getRoleId() != roleId)) {
 				throw new DuplicateRoleException();
 			}
 		}

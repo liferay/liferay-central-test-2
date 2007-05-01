@@ -40,7 +40,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/edit_role_assignment
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
-portletURL.setParameter("roleId", role.getRoleId());
+portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 %>
 
 <script type="text/javascript">
@@ -118,7 +118,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		}
 
 		if (tabs3.equals("current")) {
-			userParams.put("usersRoles", role.getRoleId());
+			userParams.put("usersRoles", new Long(role.getRoleId()));
 		}
 
 		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
@@ -195,7 +195,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		LinkedHashMap groupParams = new LinkedHashMap();
 
 		if (tabs3.equals("current")) {
-			groupParams.put("groupsRoles", role.getRoleId());
+			groupParams.put("groupsRoles", new Long(role.getRoleId()));
 		}
 
 		int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
@@ -277,7 +277,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		LinkedHashMap organizationParams = new LinkedHashMap();
 
 		if (tabs3.equals("current")) {
-			organizationParams.put("organizationsRoles", role.getRoleId());
+			organizationParams.put("organizationsRoles", new Long(role.getRoleId()));
 		}
 
 		int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator());
@@ -363,7 +363,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		if (tabs3.equals("current")) {
 			List userGroupsRoles = new ArrayList();
 
-			userGroupParams.put("userGroupsRoles", role.getRoleId());
+			userGroupParams.put("userGroupsRoles", new Long(role.getRoleId()));
 		}
 
 		int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);
@@ -375,7 +375,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		searchContainer.setResults(results);
 		%>
 
-		<br /><div class="separator"></div><br />
+		<div class="separator"></div>
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 

@@ -52,7 +52,7 @@ import java.sql.Types;
 public class RoleModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Role_";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "roleId", new Integer(Types.VARCHAR) },
+			{ "roleId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "className", new Integer(Types.VARCHAR) },
 			{ "classPK", new Integer(Types.VARCHAR) },
@@ -62,9 +62,6 @@ public class RoleModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Role"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_ROLEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Role.roleId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Role.className"),
 			XSS_ALLOW_BY_MODEL);
@@ -83,27 +80,20 @@ public class RoleModelImpl extends BaseModelImpl {
 	public RoleModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _roleId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setRoleId(pk);
 	}
 
-	public String getRoleId() {
-		return GetterUtil.getString(_roleId);
+	public long getRoleId() {
+		return _roleId;
 	}
 
-	public void setRoleId(String roleId) {
-		if (((roleId == null) && (_roleId != null)) ||
-				((roleId != null) && (_roleId == null)) ||
-				((roleId != null) && (_roleId != null) &&
-				!roleId.equals(_roleId))) {
-			if (!XSS_ALLOW_ROLEID) {
-				roleId = XSSUtil.strip(roleId);
-			}
-
+	public void setRoleId(long roleId) {
+		if (roleId != _roleId) {
 			_roleId = roleId;
 		}
 	}
@@ -238,9 +228,9 @@ public class RoleModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = role.getPrimaryKey();
+		long pk = role.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -249,10 +239,10 @@ public class RoleModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _roleId;
+	private long _roleId;
 	private long _companyId;
 	private String _className;
 	private String _classPK;

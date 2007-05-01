@@ -85,7 +85,7 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 			classPK, liveGroupId, name, description, type, friendlyURL, active);
 	}
 
-	public void addRoleGroups(java.lang.String roleId, long[] groupIds)
+	public void addRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalServiceFactory.getTxImpl().addRoleGroups(roleId, groupIds);
@@ -144,7 +144,7 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		return GroupLocalServiceFactory.getTxImpl().getOrganizationsGroups(organizations);
 	}
 
-	public java.util.List getRoleGroups(java.lang.String roleId)
+	public java.util.List getRoleGroups(long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return GroupLocalServiceFactory.getTxImpl().getRoleGroups(roleId);
@@ -178,7 +178,7 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		return GroupLocalServiceFactory.getTxImpl().getUserGroupsGroups(userGroups);
 	}
 
-	public boolean hasRoleGroup(java.lang.String roleId, long groupId)
+	public boolean hasRoleGroup(long roleId, long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return GroupLocalServiceFactory.getTxImpl().hasRoleGroup(roleId, groupId);
@@ -203,7 +203,7 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 			name, description, params);
 	}
 
-	public void setRoleGroups(java.lang.String roleId, long[] groupIds)
+	public void setRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalServiceFactory.getTxImpl().setRoleGroups(roleId, groupIds);
@@ -215,7 +215,7 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		GroupLocalServiceFactory.getTxImpl().setUserGroups(userId, groupIds);
 	}
 
-	public void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
+	public void unsetRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalServiceFactory.getTxImpl().unsetRoleGroups(roleId, groupIds);

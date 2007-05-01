@@ -56,15 +56,12 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl {
 	public static Object[][] TABLE_COLUMNS = {
 			{ "organizationId", new Integer(Types.VARCHAR) },
 			{ "groupId", new Integer(Types.BIGINT) },
-			{ "roleId", new Integer(Types.VARCHAR) }
+			{ "roleId", new Integer(Types.BIGINT) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgGroupRole"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_ORGANIZATIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgGroupRole.organizationId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ROLEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.OrgGroupRole.roleId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgGroupRoleModel"));
@@ -109,19 +106,12 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getRoleId() {
-		return GetterUtil.getString(_roleId);
+	public long getRoleId() {
+		return _roleId;
 	}
 
-	public void setRoleId(String roleId) {
-		if (((roleId == null) && (_roleId != null)) ||
-				((roleId != null) && (_roleId == null)) ||
-				((roleId != null) && (_roleId != null) &&
-				!roleId.equals(_roleId))) {
-			if (!XSS_ALLOW_ROLEID) {
-				roleId = XSSUtil.strip(roleId);
-			}
-
+	public void setRoleId(long roleId) {
+		if (roleId != _roleId) {
 			_roleId = roleId;
 		}
 	}
@@ -176,5 +166,5 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl {
 
 	private String _organizationId;
 	private long _groupId;
-	private String _roleId;
+	private long _roleId;
 }

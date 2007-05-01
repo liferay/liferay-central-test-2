@@ -84,6 +84,10 @@ public class CounterPersistence extends BasePersistence {
 		}
 	}
 
+	public long increment() throws SystemException {
+		return increment(_NAME);
+	}
+
 	public long increment(String name) throws SystemException {
 		return increment(name, _MINIMUM_INCREMENT_SIZE);
 	}
@@ -293,6 +297,8 @@ public class CounterPersistence extends BasePersistence {
 
 	private static final int _COUNTER_INCREMENT = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.COUNTER_INCREMENT), _MINIMUM_INCREMENT_SIZE);
+
+	private static final String _NAME = Counter.class.getName();
 
 	private static Map registerLookup = new HashMap();
 

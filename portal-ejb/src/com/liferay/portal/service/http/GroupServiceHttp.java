@@ -197,17 +197,12 @@ public class GroupServiceHttp {
 		}
 	}
 
-	public static void addRoleGroups(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, long[] groupIds)
+	public static void addRoleGroups(HttpPrincipal httpPrincipal, long roleId,
+		long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = groupIds;
 
 			if (groupIds == null) {
@@ -543,17 +538,12 @@ public class GroupServiceHttp {
 		}
 	}
 
-	public static void setRoleGroups(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, long[] groupIds)
+	public static void setRoleGroups(HttpPrincipal httpPrincipal, long roleId,
+		long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = groupIds;
 
 			if (groupIds == null) {
@@ -585,16 +575,11 @@ public class GroupServiceHttp {
 	}
 
 	public static void unsetRoleGroups(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, long[] groupIds)
+		long roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = groupIds;
 
 			if (groupIds == null) {

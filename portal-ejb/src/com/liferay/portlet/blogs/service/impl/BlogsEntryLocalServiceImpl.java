@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.blogs.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -145,8 +144,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		validate(title, content);
 
-		long entryId = CounterLocalServiceUtil.increment(
-			Counter.class.getName());
+		long entryId = CounterLocalServiceUtil.increment();
 
 		BlogsEntry entry = BlogsEntryUtil.create(entryId);
 

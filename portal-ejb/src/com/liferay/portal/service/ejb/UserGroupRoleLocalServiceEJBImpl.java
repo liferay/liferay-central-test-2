@@ -66,32 +66,28 @@ public class UserGroupRoleLocalServiceEJBImpl
 			begin, end);
 	}
 
-	public void addUserGroupRoles(long userId, long groupId,
-		java.lang.String[] roleIds)
+	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupRoleLocalServiceFactory.getTxImpl().addUserGroupRoles(userId,
 			groupId, roleIds);
 	}
 
-	public void addUserGroupRoles(long[] userIds, long groupId,
-		java.lang.String roleId)
+	public void addUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupRoleLocalServiceFactory.getTxImpl().addUserGroupRoles(userIds,
 			groupId, roleId);
 	}
 
-	public void deleteUserGroupRoles(long userId, long groupId,
-		java.lang.String[] roleIds)
+	public void deleteUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupRoleLocalServiceFactory.getTxImpl().deleteUserGroupRoles(userId,
 			groupId, roleIds);
 	}
 
-	public void deleteUserGroupRoles(long[] userIds, long groupId,
-		java.lang.String roleId)
+	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupRoleLocalServiceFactory.getTxImpl().deleteUserGroupRoles(userIds,
@@ -110,7 +106,7 @@ public class UserGroupRoleLocalServiceEJBImpl
 										.deleteUserGroupRolesByGroupId(groupId);
 	}
 
-	public void deleteUserGroupRolesByRoleId(java.lang.String roleId)
+	public void deleteUserGroupRolesByRoleId(long roleId)
 		throws com.liferay.portal.SystemException {
 		UserGroupRoleLocalServiceFactory.getTxImpl()
 										.deleteUserGroupRolesByRoleId(roleId);
@@ -129,8 +125,7 @@ public class UserGroupRoleLocalServiceEJBImpl
 			groupId);
 	}
 
-	public boolean hasUserGroupRole(long userId, long groupId,
-		java.lang.String roleId)
+	public boolean hasUserGroupRole(long userId, long groupId, long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserGroupRoleLocalServiceFactory.getTxImpl().hasUserGroupRole(userId,

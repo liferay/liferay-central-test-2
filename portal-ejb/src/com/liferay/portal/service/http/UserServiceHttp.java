@@ -144,17 +144,12 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void addRoleUsers(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, long[] userIds)
+	public static void addRoleUsers(HttpPrincipal httpPrincipal, long roleId,
+		long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
@@ -346,17 +341,12 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void deleteRoleUser(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, long userId)
+	public static void deleteRoleUser(HttpPrincipal httpPrincipal, long roleId,
+		long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = new LongWrapper(userId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"deleteRoleUser", new Object[] { paramObj0, paramObj1 });
@@ -445,16 +435,11 @@ public class UserServiceHttp {
 	}
 
 	public static java.util.List getRoleUsers(HttpPrincipal httpPrincipal,
-		java.lang.String roleId)
+		long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"getRoleUsers", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -629,17 +614,12 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static boolean hasRoleUser(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, long userId)
+	public static boolean hasRoleUser(HttpPrincipal httpPrincipal, long roleId,
+		long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = new LongWrapper(userId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"hasRoleUser", new Object[] { paramObj0, paramObj1 });
@@ -704,17 +684,12 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void setRoleUsers(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, long[] userIds)
+	public static void setRoleUsers(HttpPrincipal httpPrincipal, long roleId,
+		long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {
@@ -854,17 +829,12 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void unsetRoleUsers(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, long[] userIds)
+	public static void unsetRoleUsers(HttpPrincipal httpPrincipal, long roleId,
+		long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = userIds;
 
 			if (userIds == null) {

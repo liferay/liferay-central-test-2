@@ -88,7 +88,7 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 		RoleLocalServiceFactory.getTxImpl().checkSystemRoles(companyId);
 	}
 
-	public void deleteRole(java.lang.String roleId)
+	public void deleteRole(long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalServiceFactory.getTxImpl().deleteRole(roleId);
@@ -115,7 +115,7 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 			name, scope, primKey);
 	}
 
-	public com.liferay.portal.model.Role getRole(java.lang.String roleId)
+	public com.liferay.portal.model.Role getRole(long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().getRole(roleId);
@@ -188,13 +188,13 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 			description, type);
 	}
 
-	public void setUserRoles(long userId, java.lang.String[] roleIds)
+	public void setUserRoles(long userId, long[] roleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalServiceFactory.getTxImpl().setUserRoles(userId, roleIds);
 	}
 
-	public com.liferay.portal.model.Role updateRole(java.lang.String roleId,
+	public com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

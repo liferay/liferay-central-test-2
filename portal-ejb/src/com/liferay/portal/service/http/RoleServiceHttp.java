@@ -109,17 +109,11 @@ public class RoleServiceHttp {
 		}
 	}
 
-	public static void deleteRole(HttpPrincipal httpPrincipal,
-		java.lang.String roleId)
+	public static void deleteRole(HttpPrincipal httpPrincipal, long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
 					"deleteRole", new Object[] { paramObj0 });
 
@@ -179,16 +173,11 @@ public class RoleServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Role getRole(
-		HttpPrincipal httpPrincipal, java.lang.String roleId)
+		HttpPrincipal httpPrincipal, long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
 					"getRole", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -362,17 +351,11 @@ public class RoleServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Role updateRole(
-		HttpPrincipal httpPrincipal, java.lang.String roleId,
-		java.lang.String name)
+		HttpPrincipal httpPrincipal, long roleId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = name;
 
 			if (name == null) {

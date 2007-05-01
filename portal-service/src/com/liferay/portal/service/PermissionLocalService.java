@@ -95,7 +95,7 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getRolePermissions(java.lang.String roleId)
+	public java.util.List getRolePermissions(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -111,12 +111,12 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasRolePermission(java.lang.String roleId, long companyId,
+	public boolean hasRolePermission(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasRolePermission(java.lang.String roleId, long companyId,
+	public boolean hasRolePermission(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
@@ -149,13 +149,13 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void setRolePermission(java.lang.String roleId, long companyId,
+	public void setRolePermission(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void setRolePermissions(java.lang.String roleId, long companyId,
+	public void setRolePermissions(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String[] actionIds)
 		throws com.liferay.portal.SystemException, 
@@ -166,17 +166,17 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetRolePermission(java.lang.String roleId, long permissionId)
+	public void unsetRolePermission(long roleId, long permissionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetRolePermission(java.lang.String roleId, long companyId,
+	public void unsetRolePermission(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetRolePermissions(java.lang.String roleId, long companyId,
+	public void unsetRolePermissions(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

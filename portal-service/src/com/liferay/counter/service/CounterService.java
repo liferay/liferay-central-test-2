@@ -38,6 +38,8 @@ public interface CounterService {
 
 	public List getNames() throws RemoteException, SystemException;
 
+	public long increment() throws RemoteException, SystemException;
+
 	public long increment(String name)
 		throws RemoteException, SystemException;
 

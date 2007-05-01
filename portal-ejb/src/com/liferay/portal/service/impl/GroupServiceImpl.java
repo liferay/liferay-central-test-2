@@ -70,7 +70,7 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 			friendlyURL, active);
 	}
 
-	public void addRoleGroups(String roleId, long[] groupIds)
+	public void addRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
@@ -138,7 +138,7 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 			companyId, name, description, paramsObj);
 	}
 
-	public void setRoleGroups(String roleId, long[] groupIds)
+	public void setRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
@@ -146,7 +146,7 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 		GroupLocalServiceUtil.setRoleGroups(roleId, groupIds);
 	}
 
-	public void unsetRoleGroups(String roleId, long[] groupIds)
+	public void unsetRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);

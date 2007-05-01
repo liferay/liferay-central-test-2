@@ -20,10 +20,10 @@ insert into Account_ (accountId, companyId, userId, userName, createDate, modifi
 #set($powerUserRoleId = $counter.get())
 #set($userRoleId = $counter.get())
 
-insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ('$administratorRoleId', $companyId, '', '', 'Administrator', '', 1);
-insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ('$guestRoleId', $companyId, '', '', 'Guest', '', 1);
-insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ('$powerUserRoleId', $companyId, '', '', 'Power User', '', 1);
-insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ('$userRoleId', $companyId, '', '', 'User', '', 1);
+insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ($administratorRoleId, $companyId, '', '', 'Administrator', '', 1);
+insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ($guestRoleId, $companyId, '', '', 'Guest', '', 1);
+insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ($powerUserRoleId, $companyId, '', '', 'Power User', '', 1);
+insert into Role_ (roleId, companyId, className, classPK, name, description, type_) values ($userRoleId, $companyId, '', '', 'User', '', 1);
 
 ##
 ## Groups
@@ -175,9 +175,9 @@ insert into Users_Groups values ($testUserId, $supportGroupId);
 insert into Users_Orgs (userId, organizationId) values ($testUserId, '$usaOrganizationId');
 insert into Users_Orgs (userId, organizationId) values ($testUserId, '$laxOrganizationId');
 
-insert into Users_Roles values ($testUserId, '$administratorRoleId');
-insert into Users_Roles values ($testUserId, '$powerUserRoleId');
-insert into Users_Roles values ($testUserId, '$userRoleId');
+insert into Users_Roles values ($testUserId, $administratorRoleId);
+insert into Users_Roles values ($testUserId, $powerUserRoleId);
+insert into Users_Roles values ($testUserId, $userRoleId);
 
 ##
 ## Batch Users
@@ -201,7 +201,7 @@ insert into Users_Roles values ($testUserId, '$userRoleId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$usaOrganizationId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$laxOrganizationId');
 
-	insert into Users_Roles values ($batchUserId, '$userRoleId');
+	insert into Users_Roles values ($batchUserId, $userRoleId);
 #end
 
 #foreach($count in [200..209])
@@ -222,7 +222,7 @@ insert into Users_Roles values ($testUserId, '$userRoleId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$usaOrganizationId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$sfoOrganizationId');
 
-	insert into Users_Roles values ($batchUserId, '$userRoleId');
+	insert into Users_Roles values ($batchUserId, $userRoleId);
 #end
 
 #foreach($count in [300..309])
@@ -243,7 +243,7 @@ insert into Users_Roles values ($testUserId, '$userRoleId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$usaOrganizationId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$ordOrganizationId');
 
-	insert into Users_Roles values ($batchUserId, '$userRoleId');
+	insert into Users_Roles values ($batchUserId, $userRoleId);
 #end
 
 #foreach($count in [400..409])
@@ -264,7 +264,7 @@ insert into Users_Roles values ($testUserId, '$userRoleId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$usaOrganizationId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$nycOrganizationId');
 
-	insert into Users_Roles values ($batchUserId, '$userRoleId');
+	insert into Users_Roles values ($batchUserId, $userRoleId);
 #end
 
 #foreach($count in [500..509])
@@ -285,7 +285,7 @@ insert into Users_Roles values ($testUserId, '$userRoleId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$eurOrganizationId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$fraOrganizationId');
 
-	insert into Users_Roles values ($batchUserId, '$userRoleId');
+	insert into Users_Roles values ($batchUserId, $userRoleId);
 #end
 
 #foreach($count in [600..609])
@@ -306,7 +306,7 @@ insert into Users_Roles values ($testUserId, '$userRoleId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$eurOrganizationId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$madOrganizationId');
 
-	insert into Users_Roles values ($batchUserId, '$userRoleId');
+	insert into Users_Roles values ($batchUserId, $userRoleId);
 #end
 
 #foreach($count in [700..709])
@@ -327,7 +327,7 @@ insert into Users_Roles values ($testUserId, '$userRoleId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$asiOrganizationId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$dlcOrganizationId');
 
-	insert into Users_Roles values ($batchUserId, '$userRoleId');
+	insert into Users_Roles values ($batchUserId, $userRoleId);
 #end
 
 #foreach($count in [800..809])
@@ -348,5 +348,5 @@ insert into Users_Roles values ($testUserId, '$userRoleId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$asiOrganizationId');
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, '$hkgOrganizationId');
 
-	insert into Users_Roles values ($batchUserId, '$userRoleId');
+	insert into Users_Roles values ($batchUserId, $userRoleId);
 #end

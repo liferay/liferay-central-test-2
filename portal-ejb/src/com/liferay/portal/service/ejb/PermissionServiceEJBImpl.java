@@ -111,7 +111,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			groupId, actionIds, resourceId);
 	}
 
-	public void setRolePermission(java.lang.String roleId, long groupId,
+	public void setRolePermission(long roleId, long groupId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
@@ -130,8 +130,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			groupId, actionIds, resourceId);
 	}
 
-	public void unsetRolePermission(java.lang.String roleId, long groupId,
-		long permissionId)
+	public void unsetRolePermission(long roleId, long groupId, long permissionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -139,7 +138,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			groupId, permissionId);
 	}
 
-	public void unsetRolePermission(java.lang.String roleId, long groupId,
+	public void unsetRolePermission(long roleId, long groupId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
@@ -149,7 +148,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			groupId, name, scope, primKey, actionId);
 	}
 
-	public void unsetRolePermissions(java.lang.String roleId, long groupId,
+	public void unsetRolePermissions(long roleId, long groupId,
 		java.lang.String name, int scope, java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

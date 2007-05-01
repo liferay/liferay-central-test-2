@@ -35,7 +35,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 public class RolePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String roleId, String actionId)
+			PermissionChecker permissionChecker, long roleId, String actionId)
 		throws PrincipalException {
 
 		if (!contains(permissionChecker, roleId, actionId)) {
@@ -44,7 +44,7 @@ public class RolePermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, String roleId, String actionId) {
+		PermissionChecker permissionChecker, long roleId, String actionId) {
 
 		return permissionChecker.hasPermission(
 			0, Role.class.getName(), roleId, actionId);

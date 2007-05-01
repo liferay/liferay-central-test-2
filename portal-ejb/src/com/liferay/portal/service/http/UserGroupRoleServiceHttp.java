@@ -70,7 +70,7 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class UserGroupRoleServiceHttp {
 	public static void addUserGroupRoles(HttpPrincipal httpPrincipal,
-		long userId, long groupId, java.lang.String[] roleIds)
+		long userId, long groupId, long[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -79,7 +79,7 @@ public class UserGroupRoleServiceHttp {
 			Object paramObj2 = roleIds;
 
 			if (roleIds == null) {
-				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+				paramObj2 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserGroupRoleServiceUtil.class.getName(),
@@ -108,7 +108,7 @@ public class UserGroupRoleServiceHttp {
 	}
 
 	public static void addUserGroupRoles(HttpPrincipal httpPrincipal,
-		long[] userIds, long groupId, java.lang.String roleId)
+		long[] userIds, long groupId, long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -119,12 +119,7 @@ public class UserGroupRoleServiceHttp {
 			}
 
 			Object paramObj1 = new LongWrapper(groupId);
-			Object paramObj2 = roleId;
-
-			if (roleId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(roleId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserGroupRoleServiceUtil.class.getName(),
 					"addUserGroupRoles",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
@@ -151,7 +146,7 @@ public class UserGroupRoleServiceHttp {
 	}
 
 	public static void deleteUserGroupRoles(HttpPrincipal httpPrincipal,
-		long userId, long groupId, java.lang.String[] roleIds)
+		long userId, long groupId, long[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -160,7 +155,7 @@ public class UserGroupRoleServiceHttp {
 			Object paramObj2 = roleIds;
 
 			if (roleIds == null) {
-				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+				paramObj2 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserGroupRoleServiceUtil.class.getName(),
@@ -189,7 +184,7 @@ public class UserGroupRoleServiceHttp {
 	}
 
 	public static void deleteUserGroupRoles(HttpPrincipal httpPrincipal,
-		long[] userIds, long groupId, java.lang.String roleId)
+		long[] userIds, long groupId, long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -200,12 +195,7 @@ public class UserGroupRoleServiceHttp {
 			}
 
 			Object paramObj1 = new LongWrapper(groupId);
-			Object paramObj2 = roleId;
-
-			if (roleId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(roleId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserGroupRoleServiceUtil.class.getName(),
 					"deleteUserGroupRoles",
 					new Object[] { paramObj0, paramObj1, paramObj2 });

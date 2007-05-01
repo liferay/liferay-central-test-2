@@ -110,7 +110,7 @@ public class EditRoleAssignmentsAction extends PortletAction {
 	}
 
 	protected void updateRoleGroups(ActionRequest req) throws Exception {
-		String roleId = ParamUtil.getString(req, "roleId");
+		long roleId = ParamUtil.getLong(req, "roleId");
 
 		long[] addGroupIds = StringUtil.split(
 			ParamUtil.getString(req, "addGroupIds"), 0L);
@@ -122,7 +122,7 @@ public class EditRoleAssignmentsAction extends PortletAction {
 	}
 
 	protected void updateRoleUsers(ActionRequest req) throws Exception {
-		String roleId = ParamUtil.getString(req, "roleId");
+		long roleId = ParamUtil.getLong(req, "roleId");
 
 		long[] addUserIds = StringUtil.split(
 			ParamUtil.getString(req, "addUserIds"), 0L);

@@ -89,7 +89,7 @@ public class GroupLocalServiceUtil {
 			liveGroupId, name, description, type, friendlyURL, active);
 	}
 
-	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
+	public static void addRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -161,7 +161,7 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getOrganizationsGroups(organizations);
 	}
 
-	public static java.util.List getRoleGroups(java.lang.String roleId)
+	public static java.util.List getRoleGroups(long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -204,7 +204,7 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getUserGroupsGroups(userGroups);
 	}
 
-	public static boolean hasRoleGroup(java.lang.String roleId, long groupId)
+	public static boolean hasRoleGroup(long roleId, long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -237,7 +237,7 @@ public class GroupLocalServiceUtil {
 			params);
 	}
 
-	public static void setRoleGroups(java.lang.String roleId, long[] groupIds)
+	public static void setRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -251,7 +251,7 @@ public class GroupLocalServiceUtil {
 		groupLocalService.setUserGroups(userId, groupIds);
 	}
 
-	public static void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
+	public static void unsetRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();

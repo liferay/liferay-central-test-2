@@ -96,15 +96,15 @@ public class OrgGroupRoleSoap implements Serializable {
 		_groupId = groupId;
 	}
 
-	public String getRoleId() {
+	public long getRoleId() {
 		return _roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(long roleId) {
 		_roleId = roleId;
 	}
 
 	private String _organizationId;
 	private long _groupId;
-	private String _roleId;
+	private long _roleId;
 }

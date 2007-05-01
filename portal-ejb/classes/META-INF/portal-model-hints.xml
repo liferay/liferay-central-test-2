@@ -243,7 +243,7 @@
 	<model name="com.liferay.portal.model.OrgGroupRole">
 		<field name="organizationId" type="String" />
 		<field name="groupId" type="long" />
-		<field name="roleId" type="String" />
+		<field name="roleId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.OrgLabor">
 		<field name="orgLaborId" type="long" />
@@ -383,7 +383,7 @@
 		<field name="scope" type="int" />
 	</model>
 	<model name="com.liferay.portal.model.Role">
-		<field name="roleId" type="String" />
+		<field name="roleId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
@@ -450,7 +450,7 @@
 	<model name="com.liferay.portal.model.UserGroupRole">
 		<field name="userId" type="long" />
 		<field name="groupId" type="long" />
-		<field name="roleId" type="String" />
+		<field name="roleId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.UserIdMapper">
 		<field name="userId" type="long" />

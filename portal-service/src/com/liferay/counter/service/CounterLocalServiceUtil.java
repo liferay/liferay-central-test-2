@@ -41,6 +41,13 @@ public class CounterLocalServiceUtil {
 		return counterService.getNames();
 	}
 
+	public static long increment() throws SystemException {
+		CounterLocalService counterService =
+			CounterLocalServiceFactory.getService();
+
+		return counterService.increment();
+	}
+
 	public static long increment(String name) throws SystemException {
 		CounterLocalService counterService =
 			CounterLocalServiceFactory.getService();

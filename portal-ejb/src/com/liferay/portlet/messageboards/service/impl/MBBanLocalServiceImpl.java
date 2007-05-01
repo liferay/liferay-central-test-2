@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -59,7 +58,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
-		long banId = CounterLocalServiceUtil.increment(Counter.class.getName());
+		long banId = CounterLocalServiceUtil.increment();
 
 		MBBan ban = MBBanUtil.fetchByG_B(groupId, banUserId);
 

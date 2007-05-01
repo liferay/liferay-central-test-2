@@ -72,7 +72,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
-portletURL.setParameter("roleId", role.getRoleId());
+portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("modelResource", modelResource);
 
@@ -84,7 +84,7 @@ addPermissionURL.setParameter("struts_action", "/enterprise_admin/edit_role_perm
 addPermissionURL.setParameter(Constants.CMD, Constants.EDIT);
 addPermissionURL.setParameter("tabs1", "roles");
 addPermissionURL.setParameter("redirect", currentURL);
-addPermissionURL.setParameter("roleId", role.getRoleId());
+addPermissionURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 boolean editPortletPermissions = ParamUtil.getBoolean(request, "editPortletPermissions");
 
@@ -102,7 +102,7 @@ breadcrumbsURL.setWindowState(WindowState.MAXIMIZED);
 
 breadcrumbsURL.setParameter("struts_action", "/enterprise_admin/view");
 breadcrumbsURL.setParameter("tabs1", tabs1);
-breadcrumbsURL.setParameter("roleId", role.getRoleId());
+breadcrumbsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + LanguageUtil.get(pageContext, "roles") + "</a> &raquo; ";
 
@@ -319,7 +319,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			editResourcePermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
 			editResourcePermissionsURL.setParameter("tabs1", "roles");
 			editResourcePermissionsURL.setParameter("redirect", currentURL);
-			editResourcePermissionsURL.setParameter("roleId", role.getRoleId());
+			editResourcePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 			editResourcePermissionsURL.setParameter(resourceNameParam, resource.getName());
 
 			row.addText(resourceLabel, editResourcePermissionsURL);
@@ -343,7 +343,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 				rolePermissions.add(resourceName);
 				rolePermissions.add(new Integer(ResourceImpl.SCOPE_GROUP));
 				rolePermissions.add(actionId);
-				rolePermissions.add(role.getRoleId());
+				rolePermissions.add(new Long(role.getRoleId()));
 
 				groupParams.put("rolePermissions", rolePermissions);
 
@@ -440,7 +440,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			rolePermissions.add(selResource);
 			rolePermissions.add(new Integer(ResourceImpl.SCOPE_GROUP));
 			rolePermissions.add(actionId);
-			rolePermissions.add(role.getRoleId());
+			rolePermissions.add(new Long(role.getRoleId()));
 
 			groupParams.put("rolePermissions", rolePermissions);
 		}
@@ -454,7 +454,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		searchContainer.setResults(results);
 		%>
 
-		<br /><div class="separator"></div><br />
+		<div class="separator"></div>
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos %>);">
 
@@ -656,7 +656,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
-				rowURL.setParameter("roleId", role.getRoleId());
+				rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 				rowURL.setParameter("portletResource", portletResource);
 				rowURL.setParameter("modelResource", curModelResource);
 
@@ -706,7 +706,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			rowURL.setWindowState(WindowState.MAXIMIZED);
 
 			rowURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
-			rowURL.setParameter("roleId", role.getRoleId());
+			rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 			rowURL.setParameter("portletResource", portlet.getPortletId());
 
 			// Name

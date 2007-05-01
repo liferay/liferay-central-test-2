@@ -109,7 +109,7 @@ public class PermissionServiceImpl
 	}
 
 	public void setRolePermission(
-			String roleId, long groupId, String name, int scope, String primKey,
+			long roleId, long groupId, String name, int scope, String primKey,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -132,7 +132,7 @@ public class PermissionServiceImpl
 	}
 
 	public void unsetRolePermission(
-			String roleId, long groupId, long permissionId)
+			long roleId, long groupId, long permissionId)
 		throws SystemException, PortalException {
 
 		checkPermission(
@@ -142,7 +142,7 @@ public class PermissionServiceImpl
 	}
 
 	public void unsetRolePermission(
-			String roleId, long groupId, String name, int scope, String primKey,
+			long roleId, long groupId, String name, int scope, String primKey,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -154,8 +154,7 @@ public class PermissionServiceImpl
 	}
 
 	public void unsetRolePermissions(
-			String roleId, long groupId, String name, int scope,
-			String actionId)
+			long roleId, long groupId, String name, int scope, String actionId)
 		throws PortalException, SystemException {
 
 		checkPermission(
@@ -185,6 +184,15 @@ public class PermissionServiceImpl
 		checkPermission(
 			permissionChecker, groupId, resource.getName(),
 			resource.getPrimKey().toString());
+	}
+
+	protected void checkPermission(
+			PermissionChecker permissionChecker, long groupId, String name,
+			long primKey)
+		throws PortalException, SystemException {
+
+		checkPermission(
+			permissionChecker, groupId, name, String.valueOf(primKey));
 	}
 
 	protected void checkPermission(

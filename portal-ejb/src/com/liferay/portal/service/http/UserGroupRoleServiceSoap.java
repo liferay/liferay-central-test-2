@@ -78,7 +78,7 @@ import java.rmi.RemoteException;
  */
 public class UserGroupRoleServiceSoap {
 	public static void addUserGroupRoles(long userId, long groupId,
-		java.lang.String[] roleIds) throws RemoteException {
+		long[] roleIds) throws RemoteException {
 		try {
 			UserGroupRoleServiceUtil.addUserGroupRoles(userId, groupId, roleIds);
 		}
@@ -89,7 +89,7 @@ public class UserGroupRoleServiceSoap {
 	}
 
 	public static void addUserGroupRoles(long[] userIds, long groupId,
-		java.lang.String roleId) throws RemoteException {
+		long roleId) throws RemoteException {
 		try {
 			UserGroupRoleServiceUtil.addUserGroupRoles(userIds, groupId, roleId);
 		}
@@ -100,7 +100,7 @@ public class UserGroupRoleServiceSoap {
 	}
 
 	public static void deleteUserGroupRoles(long userId, long groupId,
-		java.lang.String[] roleIds) throws RemoteException {
+		long[] roleIds) throws RemoteException {
 		try {
 			UserGroupRoleServiceUtil.deleteUserGroupRoles(userId, groupId,
 				roleIds);
@@ -112,7 +112,7 @@ public class UserGroupRoleServiceSoap {
 	}
 
 	public static void deleteUserGroupRoles(long[] userIds, long groupId,
-		java.lang.String roleId) throws RemoteException {
+		long roleId) throws RemoteException {
 		try {
 			UserGroupRoleServiceUtil.deleteUserGroupRoles(userIds, groupId,
 				roleId);

@@ -349,17 +349,12 @@ public class PermissionServiceHttp {
 	}
 
 	public static void setRolePermission(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, long groupId, java.lang.String name,
-		int scope, java.lang.String primKey, java.lang.String actionId)
+		long roleId, long groupId, java.lang.String name, int scope,
+		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = name;
 
@@ -448,16 +443,11 @@ public class PermissionServiceHttp {
 	}
 
 	public static void unsetRolePermission(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, long groupId, long permissionId)
+		long roleId, long groupId, long permissionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = new LongWrapper(permissionId);
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
@@ -486,17 +476,12 @@ public class PermissionServiceHttp {
 	}
 
 	public static void unsetRolePermission(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, long groupId, java.lang.String name,
-		int scope, java.lang.String primKey, java.lang.String actionId)
+		long roleId, long groupId, java.lang.String name, int scope,
+		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = name;
 
@@ -546,17 +531,12 @@ public class PermissionServiceHttp {
 	}
 
 	public static void unsetRolePermissions(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, long groupId, java.lang.String name,
-		int scope, java.lang.String actionId)
+		long roleId, long groupId, java.lang.String name, int scope,
+		java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = roleId;
-
-			if (roleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(roleId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = name;
 

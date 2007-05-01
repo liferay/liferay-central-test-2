@@ -34,7 +34,7 @@ Role role = (Role)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL ">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
+		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -44,7 +44,7 @@ Role role = (Role)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= Role.class.getName() %>"
 		modelResourceDescription="<%= role.getName() %>"
-		resourcePrimKey="<%= role.getPrimaryKey().toString() %>"
+		resourcePrimKey="<%= String.valueOf(role.getRoleId()) %>"
 		var="permissionsURL"
 	/>
 
@@ -55,7 +55,7 @@ Role role = (Role)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editRolePermissionsURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
-		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
+		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="define_permissions" url="<%= editRolePermissionsURL %>" />
@@ -64,7 +64,7 @@ Role role = (Role)row.getObject();
 <c:if test="<%= (role.getType() == RoleImpl.TYPE_REGULAR) && RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_USERS) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role_assignments" />
-		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
+		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
@@ -83,7 +83,7 @@ Role role = (Role)row.getObject();
 		</c:when>
 	</c:choose>
 
-	<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
+	<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 </portlet:renderURL>
 
 <liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
@@ -93,7 +93,7 @@ Role role = (Role)row.getObject();
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
+		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />

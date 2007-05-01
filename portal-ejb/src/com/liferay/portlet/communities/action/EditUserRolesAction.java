@@ -107,7 +107,7 @@ public class EditUserRolesAction extends PortletAction {
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(req, "groupId");
-		String roleId = ParamUtil.getString(req, "roleId");
+		long roleId = ParamUtil.getLong(req, "roleId");
 
 		long[] addUserIds = StringUtil.split(
 			ParamUtil.getString(req, "addUserIds"), 0L);

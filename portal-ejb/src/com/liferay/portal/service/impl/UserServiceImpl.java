@@ -72,7 +72,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.addPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
-	public void addRoleUsers(String roleId, long[] userIds)
+	public void addRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
@@ -121,7 +121,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			locationId, sendEmail);
 	}
 
-	public void deleteRoleUser(String roleId, long userId)
+	public void deleteRoleUser(long roleId, long userId)
 		throws PortalException, SystemException {
 
 		checkPermission(userId, ActionKeys.UPDATE);
@@ -147,7 +147,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return UserLocalServiceUtil.getGroupUsers(groupId);
 	}
 
-	public List getRoleUsers(String roleId)
+	public List getRoleUsers(long roleId)
 		throws PortalException, SystemException {
 
 		return UserLocalServiceUtil.getRoleUsers(roleId);
@@ -191,7 +191,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return UserLocalServiceUtil.hasGroupUser(groupId, userId);
 	}
 
-	public boolean hasRoleUser(String roleId, long userId)
+	public boolean hasRoleUser(long roleId, long userId)
 		throws PortalException, SystemException {
 
 		return UserLocalServiceUtil.hasRoleUser(roleId, userId);
@@ -206,7 +206,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.setGroupUsers(groupId, userIds);
 	}
 
-	public void setRoleUsers(String roleId, long[] userIds)
+	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
@@ -243,7 +243,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			passwordPolicyId, userIds);
 	}
 
-	public void unsetRoleUsers(String roleId, long[] userIds)
+	public void unsetRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);

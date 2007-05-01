@@ -36,6 +36,8 @@ public interface CounterLocalService {
 
 	public List getNames() throws SystemException;
 
+	public long increment() throws SystemException;
+
 	public long increment(String name) throws SystemException;
 
 	public long increment(String name, int size) throws SystemException;

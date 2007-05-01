@@ -90,7 +90,7 @@ for (int i = 0; i < results.getLength(); i++) {
 
 	// Node and page
 
-	String curNodeId = doc.get("nodeId");
+	long curNodeId = GetterUtil.getLong(doc.get("nodeId"));
 	String title = doc.get("title");
 
 	WikiNode curNode = WikiNodeLocalServiceUtil.getNode(curNodeId);

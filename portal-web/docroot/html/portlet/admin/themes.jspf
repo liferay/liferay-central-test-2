@@ -26,6 +26,7 @@
 	<input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-themes")%>'/>
 	<br /><br />
 </c:if>
+
 <%
 List headerNames = new ArrayList();
 
@@ -35,7 +36,7 @@ headerNames.add("roles");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-List themes = themes = ThemeLocalUtil.getThemes(company.getCompanyId());
+List themes = ThemeLocalUtil.getThemes(company.getCompanyId());
 
 int total = themes.size();
 

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicateGroupException;
 import com.liferay.portal.GroupFriendlyURLException;
@@ -118,8 +117,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		validateFriendlyURL(0, user.getCompanyId(), friendlyURL);
 
-		long groupId = CounterLocalServiceUtil.increment(
-			Counter.class.getName());
+		long groupId = CounterLocalServiceUtil.increment();
 
 		if (Validator.isNotNull(className) && Validator.isNotNull(classPK)) {
 			name = String.valueOf(groupId);
@@ -164,7 +162,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				group.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
 
 			UserGroupRoleLocalServiceUtil.addUserGroupRoles(
-				userId, groupId, new String[] {role.getRoleId()});
+				userId, groupId, new long[] {role.getRoleId()});
 
 			// User
 
@@ -175,7 +173,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return group;
 	}
 
-	public void addRoleGroups(String roleId, long[] groupIds)
+	public void addRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		RoleUtil.addGroups(roleId, groupIds);
@@ -375,7 +373,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return organizationGroups;
 	}
 
-	public List getRoleGroups(String roleId)
+	public List getRoleGroups(long roleId)
 		throws PortalException, SystemException {
 
 		return RoleUtil.getGroups(roleId);
@@ -417,7 +415,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return userGroupGroups;
 	}
 
-	public boolean hasRoleGroup(String roleId, long groupId)
+	public boolean hasRoleGroup(long roleId, long groupId)
 		throws PortalException, SystemException {
 
 		return RoleUtil.containsGroup(roleId, groupId);
@@ -451,7 +449,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return GroupFinder.countByC_N_D(companyId, name, description, params);
 	}
 
-	public void setRoleGroups(String roleId, long[] groupIds)
+	public void setRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		RoleUtil.setGroups(roleId, groupIds);
@@ -463,7 +461,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		UserUtil.setGroups(userId, groupIds);
 	}
 
-	public void unsetRoleGroups(String roleId, long[] groupIds)
+	public void unsetRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		RoleUtil.removeGroups(roleId, groupIds);

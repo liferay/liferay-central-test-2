@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicateUserGroupException;
 import com.liferay.portal.NoSuchUserGroupException;
@@ -69,8 +68,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		validate(0, companyId, name);
 
-		long userGroupId = CounterLocalServiceUtil.increment(
-			Counter.class.getName());
+		long userGroupId = CounterLocalServiceUtil.increment();
 
 		UserGroup userGroup = UserGroupUtil.create(userGroupId);
 

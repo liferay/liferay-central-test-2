@@ -71,7 +71,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addRoleGroups(java.lang.String roleId, long[] groupIds)
+	public void addRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -110,7 +110,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getRoleGroups(java.lang.String roleId)
+	public java.util.List getRoleGroups(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -132,7 +132,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasRoleGroup(java.lang.String roleId, long groupId)
+	public boolean hasRoleGroup(long roleId, long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -147,7 +147,7 @@ public interface GroupLocalService {
 		java.lang.String description, java.util.LinkedHashMap params)
 		throws com.liferay.portal.SystemException;
 
-	public void setRoleGroups(java.lang.String roleId, long[] groupIds)
+	public void setRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -155,7 +155,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
+	public void unsetRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

@@ -78,7 +78,7 @@ public class RoleServiceJSON {
 		return RoleJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteRole(java.lang.String roleId)
+	public static void deleteRole(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		RoleServiceUtil.deleteRole(roleId);
@@ -93,7 +93,7 @@ public class RoleServiceJSON {
 		return RoleJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject getRole(java.lang.String roleId)
+	public static JSONObject getRole(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Role returnValue = RoleServiceUtil.getRole(roleId);
@@ -137,8 +137,7 @@ public class RoleServiceJSON {
 		return RoleJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONObject updateRole(java.lang.String roleId,
-		java.lang.String name)
+	public static JSONObject updateRole(long roleId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Role returnValue = RoleServiceUtil.updateRole(roleId,

@@ -39,6 +39,10 @@ public class CounterUtil {
 		return getPersistence().getNames();
 	}
 
+	public static long increment() throws SystemException {
+		return getPersistence().increment();
+	}
+
 	public static long increment(String name) throws SystemException {
 		return getPersistence().increment(name);
 	}

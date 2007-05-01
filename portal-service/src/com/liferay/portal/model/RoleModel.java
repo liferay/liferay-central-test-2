@@ -45,13 +45,13 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface RoleModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getRoleId();
+	public long getRoleId();
 
-	public void setRoleId(String roleId);
+	public void setRoleId(long roleId);
 
 	public long getCompanyId();
 

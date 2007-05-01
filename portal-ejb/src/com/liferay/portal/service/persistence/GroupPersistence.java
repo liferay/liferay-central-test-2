@@ -1406,8 +1406,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsRole(long pk, String rolePK)
-		throws SystemException {
+	public boolean containsRole(long pk, long rolePK) throws SystemException {
 		try {
 			return containsRole.contains(pk, rolePK);
 		}
@@ -1425,7 +1424,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void addRole(long pk, String rolePK)
+	public void addRole(long pk, long rolePK)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -1447,7 +1446,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void addRoles(long pk, String[] rolePKs)
+	public void addRoles(long pk, long[] rolePKs)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -1484,7 +1483,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeRole(long pk, String rolePK)
+	public void removeRole(long pk, long rolePK)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -1506,7 +1505,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeRoles(long pk, String[] rolePKs)
+	public void removeRoles(long pk, long[] rolePKs)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -1533,7 +1532,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void setRoles(long pk, String[] rolePKs)
+	public void setRoles(long pk, long[] rolePKs)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2238,7 +2237,7 @@ public class GroupPersistence extends BasePersistence {
 		protected ContainsRole(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSROLE);
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2247,8 +2246,10 @@ public class GroupPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(long groupId, String roleId) {
-			List results = execute(new Object[] { new Long(groupId), roleId });
+		protected boolean contains(long groupId, long roleId) {
+			List results = execute(new Object[] {
+						new Long(groupId), new Long(roleId)
+					});
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -2268,13 +2269,13 @@ public class GroupPersistence extends BasePersistence {
 				"INSERT INTO Groups_Roles (groupId, roleId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void add(long groupId, String roleId) {
+		protected void add(long groupId, long roleId) {
 			if (!_persistence.containsRole.contains(groupId, roleId)) {
-				update(new Object[] { new Long(groupId), roleId });
+				update(new Object[] { new Long(groupId), new Long(roleId) });
 			}
 		}
 
@@ -2299,12 +2300,12 @@ public class GroupPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Roles WHERE groupId = ? AND roleId = ?");
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void remove(long groupId, String roleId) {
-			update(new Object[] { new Long(groupId), roleId });
+		protected void remove(long groupId, long roleId) {
+			update(new Object[] { new Long(groupId), new Long(roleId) });
 		}
 	}
 

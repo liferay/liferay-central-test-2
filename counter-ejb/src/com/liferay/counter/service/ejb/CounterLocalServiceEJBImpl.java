@@ -45,6 +45,10 @@ public class CounterLocalServiceEJBImpl
 		return CounterLocalServiceFactory.getTxImpl().getNames();
 	}
 
+	public long increment() throws SystemException {
+		return CounterLocalServiceFactory.getTxImpl().increment();
+	}
+
 	public long increment(String name) throws SystemException {
 		return CounterLocalServiceFactory.getTxImpl().increment(name);
 	}

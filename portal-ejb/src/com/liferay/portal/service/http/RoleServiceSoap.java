@@ -91,8 +91,7 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static void deleteRole(java.lang.String roleId)
-		throws RemoteException {
+	public static void deleteRole(long roleId) throws RemoteException {
 		try {
 			RoleServiceUtil.deleteRole(roleId);
 		}
@@ -116,8 +115,8 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RoleSoap getRole(
-		java.lang.String roleId) throws RemoteException {
+	public static com.liferay.portal.model.RoleSoap getRole(long roleId)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.getRole(roleId);
 
@@ -184,9 +183,8 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RoleSoap updateRole(
-		java.lang.String roleId, java.lang.String name)
-		throws RemoteException {
+	public static com.liferay.portal.model.RoleSoap updateRole(long roleId,
+		java.lang.String name) throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.updateRole(roleId,
 					name);

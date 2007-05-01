@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.ContactBirthdayException;
@@ -154,7 +153,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long userId = userIds[i];
 
 			UserGroupRoleLocalServiceUtil.addUserGroupRoles(
-				userId, groupId, new String[] {role.getRoleId()});
+				userId, groupId, new long[] {role.getRoleId()});
 		}
 	}
 
@@ -165,7 +164,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			passwordPolicyId, User.class.getName(), userIds);
 	}
 
-	public void addRoleUsers(String roleId, long[] userIds)
+	public void addRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
 		RoleUtil.addUsers(roleId, userIds);
@@ -222,8 +221,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				System.currentTimeMillis() + Time.DAY * passwordsLifespan);
 		}
 
-		long userId = CounterLocalServiceUtil.increment(
-			Counter.class.getName());
+		long userId = CounterLocalServiceUtil.increment();
 
 		if (autoScreenName) {
 			ScreenNameGenerator screenNameGenerator =
@@ -259,8 +257,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setCreateDate(now);
 		user.setModifiedDate(now);
 		user.setDefaultUser(false);
-		user.setContactId(
-			CounterLocalServiceUtil.increment(Counter.class.getName()));
+		user.setContactId(CounterLocalServiceUtil.increment());
 		user.setPassword(PwdEncryptor.encrypt(password1));
 		user.setPasswordUnencrypted(password1);
 		user.setPasswordEncrypted(true);
@@ -535,7 +532,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			passwordPolicyId, User.class.getName(), String.valueOf(userId));
 	}
 
-	public void deleteRoleUser(String roleId, long userId)
+	public void deleteRoleUser(long roleId, long userId)
 		throws PortalException, SystemException {
 
 		RoleUtil.removeUser(roleId, userId);
@@ -697,7 +694,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	public List getRoleUsers(String roleId)
+	public List getRoleUsers(long roleId)
 		throws PortalException, SystemException {
 
 		return RoleUtil.getUsers(roleId);
@@ -770,7 +767,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			passwordPolicyId, User.class.getName(), String.valueOf(userId));
 	}
 
-	public boolean hasRoleUser(String roleId, long userId)
+	public boolean hasRoleUser(long roleId, long userId)
 		throws PortalException, SystemException {
 
 		return RoleUtil.containsUser(roleId, userId);
@@ -929,7 +926,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		GroupUtil.setUsers(groupId, userIds);
 	}
 
-	public void setRoleUsers(String roleId, long[] userIds)
+	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
 		RoleUtil.setUsers(roleId, userIds);
@@ -957,7 +954,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			passwordPolicyId, User.class.getName(), userIds);
 	}
 
-	public void unsetRoleUsers(String roleId, long[] userIds)
+	public void unsetRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
 		RoleUtil.removeUsers(roleId, userIds);
@@ -1104,8 +1101,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setModifiedDate(now);
 
 		if (user.getContactId() <= 0) {
-			user.setContactId(
-				CounterLocalServiceUtil.increment(Counter.class.getName()));
+			user.setContactId(CounterLocalServiceUtil.increment());
 		}
 
 		user.setScreenName(screenName);

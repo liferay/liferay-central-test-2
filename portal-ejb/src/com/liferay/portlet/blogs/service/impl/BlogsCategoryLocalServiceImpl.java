@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.blogs.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -93,8 +92,7 @@ public class BlogsCategoryLocalServiceImpl
 
 		validate(name);
 
-		long categoryId = CounterLocalServiceUtil.increment(
-			Counter.class.getName());
+		long categoryId = CounterLocalServiceUtil.increment();
 
 		BlogsCategory category = BlogsCategoryUtil.create(categoryId);
 

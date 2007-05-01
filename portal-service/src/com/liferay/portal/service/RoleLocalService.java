@@ -72,7 +72,7 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteRole(java.lang.String roleId)
+	public void deleteRole(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -89,7 +89,7 @@ public interface RoleLocalService {
 		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Role getRole(java.lang.String roleId)
+	public com.liferay.portal.model.Role getRole(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -132,11 +132,11 @@ public interface RoleLocalService {
 		java.lang.String description, java.lang.Integer type)
 		throws com.liferay.portal.SystemException;
 
-	public void setUserRoles(long userId, java.lang.String[] roleIds)
+	public void setUserRoles(long userId, long[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Role updateRole(java.lang.String roleId,
+	public com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

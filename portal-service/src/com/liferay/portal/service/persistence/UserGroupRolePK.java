@@ -36,12 +36,12 @@ import java.io.Serializable;
 public class UserGroupRolePK implements Comparable, Serializable {
 	public long userId;
 	public long groupId;
-	public String roleId;
+	public long roleId;
 
 	public UserGroupRolePK() {
 	}
 
-	public UserGroupRolePK(long userId, long groupId, String roleId) {
+	public UserGroupRolePK(long userId, long groupId, long roleId) {
 		this.userId = userId;
 		this.groupId = groupId;
 		this.roleId = roleId;
@@ -63,11 +63,11 @@ public class UserGroupRolePK implements Comparable, Serializable {
 		this.groupId = groupId;
 	}
 
-	public String getRoleId() {
+	public long getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(long roleId) {
 		this.roleId = roleId;
 	}
 
@@ -107,7 +107,15 @@ public class UserGroupRolePK implements Comparable, Serializable {
 			return value;
 		}
 
-		value = roleId.compareTo(pk.roleId);
+		if (roleId < pk.roleId) {
+			value = -1;
+		}
+		else if (roleId > pk.roleId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -131,7 +139,7 @@ public class UserGroupRolePK implements Comparable, Serializable {
 		}
 
 		if ((userId == pk.userId) && (groupId == pk.groupId) &&
-				(roleId.equals(pk.roleId))) {
+				(roleId == pk.roleId)) {
 			return true;
 		}
 		else {

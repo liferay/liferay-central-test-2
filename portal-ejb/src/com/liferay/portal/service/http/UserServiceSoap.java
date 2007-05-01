@@ -99,7 +99,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void addRoleUsers(java.lang.String roleId, long[] userIds)
+	public static void addRoleUsers(long roleId, long[] userIds)
 		throws RemoteException {
 		try {
 			UserServiceUtil.addRoleUsers(roleId, userIds);
@@ -149,7 +149,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void deleteRoleUser(java.lang.String roleId, long userId)
+	public static void deleteRoleUser(long roleId, long userId)
 		throws RemoteException {
 		try {
 			UserServiceUtil.deleteRoleUser(roleId, userId);
@@ -183,8 +183,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserSoap[] getRoleUsers(
-		java.lang.String roleId) throws RemoteException {
+	public static com.liferay.portal.model.UserSoap[] getRoleUsers(long roleId)
+		throws RemoteException {
 		try {
 			java.util.List returnValue = UserServiceUtil.getRoleUsers(roleId);
 
@@ -251,7 +251,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static boolean hasRoleUser(java.lang.String roleId, long userId)
+	public static boolean hasRoleUser(long roleId, long userId)
 		throws RemoteException {
 		try {
 			boolean returnValue = UserServiceUtil.hasRoleUser(roleId, userId);
@@ -275,7 +275,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void setRoleUsers(java.lang.String roleId, long[] userIds)
+	public static void setRoleUsers(long roleId, long[] userIds)
 		throws RemoteException {
 		try {
 			UserServiceUtil.setRoleUsers(roleId, userIds);
@@ -319,7 +319,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void unsetRoleUsers(java.lang.String roleId, long[] userIds)
+	public static void unsetRoleUsers(long roleId, long[] userIds)
 		throws RemoteException {
 		try {
 			UserServiceUtil.unsetRoleUsers(roleId, userIds);

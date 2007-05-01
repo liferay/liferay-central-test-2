@@ -61,7 +61,7 @@ public interface GroupService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void addRoleGroups(java.lang.String roleId, long[] groupIds)
+	public void addRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -98,11 +98,11 @@ public interface GroupService {
 		java.lang.String description, java.lang.String[] params)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public void setRoleGroups(java.lang.String roleId, long[] groupIds)
+	public void setRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
+	public void unsetRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

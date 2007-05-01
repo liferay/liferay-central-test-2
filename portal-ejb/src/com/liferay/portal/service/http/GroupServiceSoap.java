@@ -109,7 +109,7 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
+	public static void addRoleGroups(long roleId, long[] groupIds)
 		throws RemoteException {
 		try {
 			GroupServiceUtil.addRoleGroups(roleId, groupIds);
@@ -227,7 +227,7 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static void setRoleGroups(java.lang.String roleId, long[] groupIds)
+	public static void setRoleGroups(long roleId, long[] groupIds)
 		throws RemoteException {
 		try {
 			GroupServiceUtil.setRoleGroups(roleId, groupIds);
@@ -238,7 +238,7 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
+	public static void unsetRoleGroups(long roleId, long[] groupIds)
 		throws RemoteException {
 		try {
 			GroupServiceUtil.unsetRoleGroups(roleId, groupIds);

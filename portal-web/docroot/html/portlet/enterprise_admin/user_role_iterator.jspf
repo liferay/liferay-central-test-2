@@ -39,7 +39,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	Role role = (Role)results.get(i);
 
-	ResultRow row = new ResultRow(new Object[]{user2, role, currentURL + sectionRedirectParams}, role.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(new Object[]{user2, role, currentURL + sectionRedirectParams}, role.getRoleId(), i);
 
 	// Name
 

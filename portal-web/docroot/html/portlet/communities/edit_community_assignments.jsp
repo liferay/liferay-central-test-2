@@ -276,7 +276,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					for (int i = 0; i < results.size(); i++) {
 						Role role = (Role)results.get(i);
 
-						ResultRow row = new ResultRow(role, role.getPrimaryKey().toString(), i);
+						ResultRow row = new ResultRow(role, role.getRoleId(), i);
 
 						// Name
 

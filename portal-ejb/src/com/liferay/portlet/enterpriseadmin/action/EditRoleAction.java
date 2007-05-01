@@ -117,20 +117,18 @@ public class EditRoleAction extends PortletAction {
 	}
 
 	protected void deleteRole(ActionRequest req) throws Exception {
-		String roleId = ParamUtil.getString(req, "roleId");
+		long roleId = ParamUtil.getLong(req, "roleId");
 
 		RoleServiceUtil.deleteRole(roleId);
 	}
 
 	protected void updateRole(ActionRequest req) throws Exception {
-		String cmd = ParamUtil.getString(req, Constants.CMD);
-
-		String roleId = ParamUtil.getString(req, "roleId");
+		long roleId = ParamUtil.getLong(req, "roleId");
 
 		String name = ParamUtil.getString(req, "name");
 		int type = ParamUtil.getInteger(req, "type");
 
-		if (cmd.equals(Constants.ADD)) {
+		if (roleId <= 0) {
 
 			// Add role
 

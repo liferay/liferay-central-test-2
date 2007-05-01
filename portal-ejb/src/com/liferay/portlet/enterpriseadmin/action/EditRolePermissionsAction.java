@@ -127,7 +127,7 @@ public class EditRolePermissionsAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String roleId = ParamUtil.getString(req, "roleId");
+		long roleId = ParamUtil.getLong(req, "roleId");
 		long permissionId = ParamUtil.getLong(req, "permissionId");
 
 		PermissionServiceUtil.unsetRolePermission(
@@ -148,7 +148,7 @@ public class EditRolePermissionsAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String roleId = ParamUtil.getString(req, "roleId");
+		long roleId = ParamUtil.getLong(req, "roleId");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 		String modelResource = ParamUtil.getString(req, "modelResource");
@@ -236,7 +236,7 @@ public class EditRolePermissionsAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String roleId = ParamUtil.getString(req, "roleId");
+		long roleId = ParamUtil.getLong(req, "roleId");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 		String modelResource = ParamUtil.getString(req, "modelResource");

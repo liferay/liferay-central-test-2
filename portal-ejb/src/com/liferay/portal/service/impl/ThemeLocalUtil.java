@@ -138,11 +138,19 @@ public class ThemeLocalUtil {
 		return theme;
 	}
 
+	public static List getThemes(long companyId) {
+		List themes = ListUtil.fromCollection(_getThemes(companyId).values());
+
+		Collections.sort(themes);
+
+		return themes;
+	}
+
 	public static List getThemes(
 			long companyId, long groupId, long userId, boolean wapTheme)
 		throws PortalException, SystemException {
 
-		List themes = ListUtil.fromCollection(_getThemes(companyId).values());
+		List themes = getThemes(companyId);
 
 		themes = PluginUtil.restrictPlugins(themes, companyId, userId);
 
@@ -157,8 +165,6 @@ public class ThemeLocalUtil {
 				itr.remove();
 			}
 		}
-
-		Collections.sort(themes);
 
 		return themes;
 	}

@@ -221,7 +221,7 @@ public class EditUserAction extends PortletAction {
 	protected void deleteRole(ActionRequest req) throws Exception {
 		User user = PortalUtil.getSelectedUser(req);
 
-		String roleId = ParamUtil.getString(req, "roleId");
+		long roleId = ParamUtil.getLong(req, "roleId");
 
 		UserServiceUtil.deleteRoleUser(roleId, user.getUserId());
 	}

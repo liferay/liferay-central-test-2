@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.bookmarks.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -95,8 +94,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		validate(name);
 
-		long folderId = CounterLocalServiceUtil.increment(
-			Counter.class.getName());
+		long folderId = CounterLocalServiceUtil.increment();
 
 		BookmarksFolder folder = BookmarksFolderUtil.create(folderId);
 

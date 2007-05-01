@@ -80,7 +80,7 @@ public class UserLocalServiceUtil {
 		userLocalService.addPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
-	public static void addRoleUsers(java.lang.String roleId, long[] userIds)
+	public static void addRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -174,7 +174,7 @@ public class UserLocalServiceUtil {
 		userLocalService.deletePasswordPolicyUser(passwordPolicyId, userId);
 	}
 
-	public static void deleteRoleUser(java.lang.String roleId, long userId)
+	public static void deleteRoleUser(long roleId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -248,7 +248,7 @@ public class UserLocalServiceUtil {
 			emailAddress, andOperator);
 	}
 
-	public static java.util.List getRoleUsers(java.lang.String roleId)
+	public static java.util.List getRoleUsers(long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -335,7 +335,7 @@ public class UserLocalServiceUtil {
 		return userLocalService.hasPasswordPolicyUser(passwordPolicyId, userId);
 	}
 
-	public static boolean hasRoleUser(java.lang.String roleId, long userId)
+	public static boolean hasRoleUser(long roleId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -393,7 +393,7 @@ public class UserLocalServiceUtil {
 		userLocalService.setGroupUsers(groupId, userIds);
 	}
 
-	public static void setRoleUsers(java.lang.String roleId, long[] userIds)
+	public static void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -422,7 +422,7 @@ public class UserLocalServiceUtil {
 		userLocalService.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
-	public static void unsetRoleUsers(java.lang.String roleId, long[] userIds)
+	public static void unsetRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();

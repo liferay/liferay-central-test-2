@@ -38,7 +38,7 @@ import com.liferay.portal.service.permission.GroupPermission;
 public class UserGroupRoleServiceImpl
 	extends PrincipalBean implements UserGroupRoleService {
 
-	public void addUserGroupRoles(long userId, long groupId, String[] roleIds)
+	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -48,7 +48,7 @@ public class UserGroupRoleServiceImpl
 			userId, groupId, roleIds);
 	}
 
-	public void addUserGroupRoles(long[] userIds, long groupId, String roleId)
+	public void addUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -58,8 +58,7 @@ public class UserGroupRoleServiceImpl
 			userIds, groupId, roleId);
 	}
 
-	public void deleteUserGroupRoles(
-			long userId, long groupId, String[] roleIds)
+	public void deleteUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -69,8 +68,7 @@ public class UserGroupRoleServiceImpl
 			userId, groupId, roleIds);
 	}
 
-	public void deleteUserGroupRoles(
-			long[] userIds, long groupId, String roleId)
+	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(

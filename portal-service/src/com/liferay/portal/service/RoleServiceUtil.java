@@ -58,7 +58,7 @@ public class RoleServiceUtil {
 		return roleService.addRole(name, type);
 	}
 
-	public static void deleteRole(java.lang.String roleId)
+	public static void deleteRole(long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RoleService roleService = RoleServiceFactory.getService();
@@ -74,7 +74,7 @@ public class RoleServiceUtil {
 		return roleService.getGroupRole(companyId, groupId);
 	}
 
-	public static com.liferay.portal.model.Role getRole(java.lang.String roleId)
+	public static com.liferay.portal.model.Role getRole(long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RoleService roleService = RoleServiceFactory.getService();
@@ -116,8 +116,8 @@ public class RoleServiceUtil {
 		return roleService.getUserRoles(userId);
 	}
 
-	public static com.liferay.portal.model.Role updateRole(
-		java.lang.String roleId, java.lang.String name)
+	public static com.liferay.portal.model.Role updateRole(long roleId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RoleService roleService = RoleServiceFactory.getService();

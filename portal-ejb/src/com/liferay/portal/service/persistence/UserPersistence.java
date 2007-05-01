@@ -2134,8 +2134,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsRole(long pk, String rolePK)
-		throws SystemException {
+	public boolean containsRole(long pk, long rolePK) throws SystemException {
 		try {
 			return containsRole.contains(pk, rolePK);
 		}
@@ -2153,7 +2152,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addRole(long pk, String rolePK)
+	public void addRole(long pk, long rolePK)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2175,7 +2174,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addRoles(long pk, String[] rolePKs)
+	public void addRoles(long pk, long[] rolePKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2211,7 +2210,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeRole(long pk, String rolePK)
+	public void removeRole(long pk, long rolePK)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2233,7 +2232,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeRoles(long pk, String[] rolePKs)
+	public void removeRoles(long pk, long[] rolePKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2260,7 +2259,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setRoles(long pk, String[] rolePKs)
+	public void setRoles(long pk, long[] rolePKs)
 		throws NoSuchUserException, com.liferay.portal.NoSuchRoleException, 
 			SystemException {
 		try {
@@ -2807,7 +2806,7 @@ public class UserPersistence extends BasePersistence {
 		protected ContainsRole(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSROLE);
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2816,8 +2815,10 @@ public class UserPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(long userId, String roleId) {
-			List results = execute(new Object[] { new Long(userId), roleId });
+		protected boolean contains(long userId, long roleId) {
+			List results = execute(new Object[] {
+						new Long(userId), new Long(roleId)
+					});
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -2837,13 +2838,13 @@ public class UserPersistence extends BasePersistence {
 				"INSERT INTO Users_Roles (userId, roleId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void add(long userId, String roleId) {
+		protected void add(long userId, long roleId) {
 			if (!_persistence.containsRole.contains(userId, roleId)) {
-				update(new Object[] { new Long(userId), roleId });
+				update(new Object[] { new Long(userId), new Long(roleId) });
 			}
 		}
 
@@ -2868,12 +2869,12 @@ public class UserPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Roles WHERE userId = ? AND roleId = ?");
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void remove(long userId, String roleId) {
-			update(new Object[] { new Long(userId), roleId });
+		protected void remove(long userId, long roleId) {
+			update(new Object[] { new Long(userId), new Long(roleId) });
 		}
 	}
 

@@ -226,11 +226,11 @@ public class ActionUtil {
 	public static void getRole(HttpServletRequest req)
 		throws Exception {
 
-		String roleId = ParamUtil.getString(req, "roleId");
+		long roleId = ParamUtil.getLong(req, "roleId");
 
 		Role role = null;
 
-		if (Validator.isNotNull(roleId)) {
+		if (roleId > 0) {
 			role = RoleServiceUtil.getRole(roleId);
 		}
 

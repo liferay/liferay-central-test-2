@@ -123,7 +123,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		searchContainer.setResults(results);
 		%>
 
-		<br /><div class="separator"></div><br />
+		<div class="separator"></div>
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updatePasswordPolicyUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
@@ -209,7 +209,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		searchContainer.setResults(results);
 		%>
 
-		<br /><div class="separator"></div><br />
+		<div class="separator"></div>
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updatePasswordPolicyOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 

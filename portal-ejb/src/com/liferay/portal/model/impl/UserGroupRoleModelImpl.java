@@ -27,7 +27,6 @@ import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
-import com.liferay.util.XSSUtil;
 
 import java.sql.Types;
 
@@ -56,13 +55,10 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 	public static Object[][] TABLE_COLUMNS = {
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
-			{ "roleId", new Integer(Types.VARCHAR) }
+			{ "roleId", new Integer(Types.BIGINT) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserGroupRole"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_ROLEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserGroupRole.roleId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserGroupRoleModel"));
 
@@ -99,19 +95,12 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getRoleId() {
-		return GetterUtil.getString(_roleId);
+	public long getRoleId() {
+		return _roleId;
 	}
 
-	public void setRoleId(String roleId) {
-		if (((roleId == null) && (_roleId != null)) ||
-				((roleId != null) && (_roleId == null)) ||
-				((roleId != null) && (_roleId != null) &&
-				!roleId.equals(_roleId))) {
-			if (!XSS_ALLOW_ROLEID) {
-				roleId = XSSUtil.strip(roleId);
-			}
-
+	public void setRoleId(long roleId) {
+		if (roleId != _roleId) {
 			_roleId = roleId;
 		}
 	}
@@ -166,5 +155,5 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 
 	private long _userId;
 	private long _groupId;
-	private String _roleId;
+	private long _roleId;
 }

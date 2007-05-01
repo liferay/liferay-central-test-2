@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.calendar.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.PortalException;
@@ -218,8 +217,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			title, startDateMonth, startDateDay, startDateYear, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay);
 
-		long eventId = CounterLocalServiceUtil.increment(
-			Counter.class.getName());
+		long eventId = CounterLocalServiceUtil.increment();
 
 		CalEvent event = CalEventUtil.create(eventId);
 

@@ -46,6 +46,10 @@ public class CounterServiceEJBImpl implements CounterService, SessionBean {
 		return CounterServiceFactory.getTxImpl().getNames();
 	}
 
+	public long increment() throws RemoteException, SystemException {
+		return CounterServiceFactory.getTxImpl().increment();
+	}
+
 	public long increment(String name) throws RemoteException, SystemException {
 		return CounterServiceFactory.getTxImpl().increment(name);
 	}

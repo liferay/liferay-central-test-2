@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.tags.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -80,8 +79,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			throw new DuplicateEntryException();
 		}
 
-		long entryId = CounterLocalServiceUtil.increment(
-			Counter.class.getName());
+		long entryId = CounterLocalServiceUtil.increment();
 
 		TagsEntry entry = TagsEntryUtil.create(entryId);
 

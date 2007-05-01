@@ -101,7 +101,7 @@ else {
 searchContainer.setResults(results);
 %>
 
-<br /><div class="separator"></div><br />
+<div class="separator"></div>
 
 <%
 List resultRows = searchContainer.getResultRows();
