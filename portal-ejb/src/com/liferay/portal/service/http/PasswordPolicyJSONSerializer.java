@@ -101,10 +101,6 @@ public class PasswordPolicyJSONSerializer {
 			jsonObj.put("description", description.toString());
 		}
 
-		jsonObj.put("changeable", model.getChangeable());
-		jsonObj.put("changeRequired", model.getChangeRequired());
-		jsonObj.put("minAge", model.getMinAge());
-
 		String storageScheme = model.getStorageScheme();
 
 		if (storageScheme == null) {
@@ -114,6 +110,9 @@ public class PasswordPolicyJSONSerializer {
 			jsonObj.put("storageScheme", storageScheme.toString());
 		}
 
+		jsonObj.put("changeable", model.getChangeable());
+		jsonObj.put("changeRequired", model.getChangeRequired());
+		jsonObj.put("minAge", model.getMinAge());
 		jsonObj.put("checkSyntax", model.getCheckSyntax());
 		jsonObj.put("allowDictionaryWords", model.getAllowDictionaryWords());
 		jsonObj.put("minLength", model.getMinLength());
@@ -125,8 +124,8 @@ public class PasswordPolicyJSONSerializer {
 		jsonObj.put("graceLimit", model.getGraceLimit());
 		jsonObj.put("lockout", model.getLockout());
 		jsonObj.put("maxFailure", model.getMaxFailure());
-		jsonObj.put("requireUnlock", model.getRequireUnlock());
 		jsonObj.put("lockoutDuration", model.getLockoutDuration());
+		jsonObj.put("requireUnlock", model.getRequireUnlock());
 		jsonObj.put("resetFailureCount", model.getResetFailureCount());
 
 		return jsonObj;

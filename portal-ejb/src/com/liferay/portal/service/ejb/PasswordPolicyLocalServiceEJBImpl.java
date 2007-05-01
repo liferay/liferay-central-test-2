@@ -68,20 +68,19 @@ public class PasswordPolicyLocalServiceEJBImpl
 
 	public com.liferay.portal.model.PasswordPolicy addPolicy(long userId,
 		java.lang.String name, java.lang.String description,
-		boolean changeable, boolean changeRequired, int minAge,
-		java.lang.String storageScheme, boolean checkSyntax,
+		java.lang.String storageScheme, boolean changeable,
+		boolean changeRequired, long minAge, boolean checkSyntax,
 		boolean allowDictionaryWords, int minLength, boolean history,
-		int historyCount, boolean expireable, int maxAge, int warningTime,
-		int graceLimit, boolean lockout, int maxFailure, boolean requireUnlock,
-		int lockoutDuration, int resetFailureCount)
+		int historyCount, boolean expireable, long maxAge, long warningTime,
+		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
+		long resetFailureCount)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PasswordPolicyLocalServiceFactory.getTxImpl().addPolicy(userId,
-			name, description, changeable, changeRequired, minAge,
-			storageScheme, checkSyntax, allowDictionaryWords, minLength,
-			history, historyCount, expireable, maxAge, warningTime, graceLimit,
-			lockout, maxFailure, requireUnlock, lockoutDuration,
-			resetFailureCount);
+			name, description, storageScheme, changeable, changeRequired,
+			minAge, checkSyntax, allowDictionaryWords, minLength, history,
+			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,
+			maxFailure, lockoutDuration, resetFailureCount);
 	}
 
 	public void deletePolicy(long passwordPolicyId)
@@ -111,20 +110,19 @@ public class PasswordPolicyLocalServiceEJBImpl
 
 	public com.liferay.portal.model.PasswordPolicy updatePolicy(
 		long passwordPolicyId, java.lang.String name,
-		java.lang.String description, boolean changeable,
-		boolean changeRequired, int minAge, java.lang.String storageScheme,
+		java.lang.String description, java.lang.String storageScheme,
+		boolean changeable, boolean changeRequired, long minAge,
 		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
-		boolean history, int historyCount, boolean expireable, int maxAge,
-		int warningTime, int graceLimit, boolean lockout, int maxFailure,
-		boolean requireUnlock, int lockoutDuration, int resetFailureCount)
+		boolean history, int historyCount, boolean expireable, long maxAge,
+		long warningTime, int graceLimit, boolean lockout, int maxFailure,
+		long lockoutDuration, long resetFailureCount)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PasswordPolicyLocalServiceFactory.getTxImpl().updatePolicy(passwordPolicyId,
-			name, description, changeable, changeRequired, minAge,
-			storageScheme, checkSyntax, allowDictionaryWords, minLength,
-			history, historyCount, expireable, maxAge, warningTime, graceLimit,
-			lockout, maxFailure, requireUnlock, lockoutDuration,
-			resetFailureCount);
+			name, description, storageScheme, changeable, changeRequired,
+			minAge, checkSyntax, allowDictionaryWords, minLength, history,
+			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,
+			maxFailure, lockoutDuration, resetFailureCount);
 	}
 
 	public void ejbCreate() throws CreateException {

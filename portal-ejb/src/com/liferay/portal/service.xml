@@ -619,24 +619,24 @@
 
 		<column name="name" type="String" />
 		<column name="description" type="String" />
+		<column name="storageScheme" type="String" />
 		<column name="changeable" type="boolean" />
 		<column name="changeRequired" type="boolean" />
-		<column name="minAge" type="int" />
-		<column name="storageScheme" type="String" />
+		<column name="minAge" type="long" />
 		<column name="checkSyntax" type="boolean" />
 		<column name="allowDictionaryWords" type="boolean" />
 		<column name="minLength" type="int" />
 		<column name="history" type="boolean" />
 		<column name="historyCount" type="int" />
 		<column name="expireable" type="boolean" />
-		<column name="maxAge" type="int" />
-		<column name="warningTime" type="int" />
+		<column name="maxAge" type="long" />
+		<column name="warningTime" type="long" />
 		<column name="graceLimit" type="int" />
 		<column name="lockout" type="boolean" />
 		<column name="maxFailure" type="int" />
+		<column name="lockoutDuration" type="long" />
 		<column name="requireUnlock" type="boolean" />
-		<column name="lockoutDuration" type="int" />
-		<column name="resetFailureCount" type="int" />
+		<column name="resetFailureCount" type="long" />
 
 		<!-- Finder methods -->
 

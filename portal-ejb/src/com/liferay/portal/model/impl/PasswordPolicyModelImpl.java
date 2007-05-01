@@ -63,24 +63,24 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
+			{ "storageScheme", new Integer(Types.VARCHAR) },
 			{ "changeable", new Integer(Types.BOOLEAN) },
 			{ "changeRequired", new Integer(Types.BOOLEAN) },
-			{ "minAge", new Integer(Types.INTEGER) },
-			{ "storageScheme", new Integer(Types.VARCHAR) },
+			{ "minAge", new Integer(Types.BIGINT) },
 			{ "checkSyntax", new Integer(Types.BOOLEAN) },
 			{ "allowDictionaryWords", new Integer(Types.BOOLEAN) },
 			{ "minLength", new Integer(Types.INTEGER) },
 			{ "history", new Integer(Types.BOOLEAN) },
 			{ "historyCount", new Integer(Types.INTEGER) },
 			{ "expireable", new Integer(Types.BOOLEAN) },
-			{ "maxAge", new Integer(Types.INTEGER) },
-			{ "warningTime", new Integer(Types.INTEGER) },
+			{ "maxAge", new Integer(Types.BIGINT) },
+			{ "warningTime", new Integer(Types.BIGINT) },
 			{ "graceLimit", new Integer(Types.INTEGER) },
 			{ "lockout", new Integer(Types.BOOLEAN) },
 			{ "maxFailure", new Integer(Types.INTEGER) },
+			{ "lockoutDuration", new Integer(Types.BIGINT) },
 			{ "requireUnlock", new Integer(Types.BOOLEAN) },
-			{ "lockoutDuration", new Integer(Types.INTEGER) },
-			{ "resetFailureCount", new Integer(Types.INTEGER) }
+			{ "resetFailureCount", new Integer(Types.BIGINT) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordPolicy"), XSS_ALLOW);
@@ -216,6 +216,23 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getStorageScheme() {
+		return GetterUtil.getString(_storageScheme);
+	}
+
+	public void setStorageScheme(String storageScheme) {
+		if (((storageScheme == null) && (_storageScheme != null)) ||
+				((storageScheme != null) && (_storageScheme == null)) ||
+				((storageScheme != null) && (_storageScheme != null) &&
+				!storageScheme.equals(_storageScheme))) {
+			if (!XSS_ALLOW_STORAGESCHEME) {
+				storageScheme = XSSUtil.strip(storageScheme);
+			}
+
+			_storageScheme = storageScheme;
+		}
+	}
+
 	public boolean getChangeable() {
 		return _changeable;
 	}
@@ -244,30 +261,13 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public int getMinAge() {
+	public long getMinAge() {
 		return _minAge;
 	}
 
-	public void setMinAge(int minAge) {
+	public void setMinAge(long minAge) {
 		if (minAge != _minAge) {
 			_minAge = minAge;
-		}
-	}
-
-	public String getStorageScheme() {
-		return GetterUtil.getString(_storageScheme);
-	}
-
-	public void setStorageScheme(String storageScheme) {
-		if (((storageScheme == null) && (_storageScheme != null)) ||
-				((storageScheme != null) && (_storageScheme == null)) ||
-				((storageScheme != null) && (_storageScheme != null) &&
-				!storageScheme.equals(_storageScheme))) {
-			if (!XSS_ALLOW_STORAGESCHEME) {
-				storageScheme = XSSUtil.strip(storageScheme);
-			}
-
-			_storageScheme = storageScheme;
 		}
 	}
 
@@ -347,21 +347,21 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public int getMaxAge() {
+	public long getMaxAge() {
 		return _maxAge;
 	}
 
-	public void setMaxAge(int maxAge) {
+	public void setMaxAge(long maxAge) {
 		if (maxAge != _maxAge) {
 			_maxAge = maxAge;
 		}
 	}
 
-	public int getWarningTime() {
+	public long getWarningTime() {
 		return _warningTime;
 	}
 
-	public void setWarningTime(int warningTime) {
+	public void setWarningTime(long warningTime) {
 		if (warningTime != _warningTime) {
 			_warningTime = warningTime;
 		}
@@ -401,6 +401,16 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getLockoutDuration() {
+		return _lockoutDuration;
+	}
+
+	public void setLockoutDuration(long lockoutDuration) {
+		if (lockoutDuration != _lockoutDuration) {
+			_lockoutDuration = lockoutDuration;
+		}
+	}
+
 	public boolean getRequireUnlock() {
 		return _requireUnlock;
 	}
@@ -415,21 +425,11 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public int getLockoutDuration() {
-		return _lockoutDuration;
-	}
-
-	public void setLockoutDuration(int lockoutDuration) {
-		if (lockoutDuration != _lockoutDuration) {
-			_lockoutDuration = lockoutDuration;
-		}
-	}
-
-	public int getResetFailureCount() {
+	public long getResetFailureCount() {
 		return _resetFailureCount;
 	}
 
-	public void setResetFailureCount(int resetFailureCount) {
+	public void setResetFailureCount(long resetFailureCount) {
 		if (resetFailureCount != _resetFailureCount) {
 			_resetFailureCount = resetFailureCount;
 		}
@@ -445,10 +445,10 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 		clone.setModifiedDate(getModifiedDate());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
+		clone.setStorageScheme(getStorageScheme());
 		clone.setChangeable(getChangeable());
 		clone.setChangeRequired(getChangeRequired());
 		clone.setMinAge(getMinAge());
-		clone.setStorageScheme(getStorageScheme());
 		clone.setCheckSyntax(getCheckSyntax());
 		clone.setAllowDictionaryWords(getAllowDictionaryWords());
 		clone.setMinLength(getMinLength());
@@ -460,8 +460,8 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 		clone.setGraceLimit(getGraceLimit());
 		clone.setLockout(getLockout());
 		clone.setMaxFailure(getMaxFailure());
-		clone.setRequireUnlock(getRequireUnlock());
 		clone.setLockoutDuration(getLockoutDuration());
+		clone.setRequireUnlock(getRequireUnlock());
 		clone.setResetFailureCount(getResetFailureCount());
 
 		return clone;
@@ -522,22 +522,22 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 	private Date _modifiedDate;
 	private String _name;
 	private String _description;
+	private String _storageScheme;
 	private boolean _changeable;
 	private boolean _changeRequired;
-	private int _minAge;
-	private String _storageScheme;
+	private long _minAge;
 	private boolean _checkSyntax;
 	private boolean _allowDictionaryWords;
 	private int _minLength;
 	private boolean _history;
 	private int _historyCount;
 	private boolean _expireable;
-	private int _maxAge;
-	private int _warningTime;
+	private long _maxAge;
+	private long _warningTime;
 	private int _graceLimit;
 	private boolean _lockout;
 	private int _maxFailure;
+	private long _lockoutDuration;
 	private boolean _requireUnlock;
-	private int _lockoutDuration;
-	private int _resetFailureCount;
+	private long _resetFailureCount;
 }

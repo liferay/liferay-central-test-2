@@ -69,20 +69,19 @@ import org.json.JSONObject;
  */
 public class PasswordPolicyServiceJSON {
 	public static JSONObject addPolicy(java.lang.String name,
-		java.lang.String description, boolean changeable,
-		boolean changeRequired, int minAge, java.lang.String storageScheme,
+		java.lang.String description, java.lang.String storageScheme,
+		boolean changeable, boolean changeRequired, long minAge,
 		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
-		boolean history, int historyCount, boolean expireable, int maxAge,
-		int warningTime, int graceLimit, boolean lockout, int maxFailure,
-		boolean requireUnlock, int lockoutDuration, int resetFailureCount)
+		boolean history, int historyCount, boolean expireable, long maxAge,
+		long warningTime, int graceLimit, boolean lockout, int maxFailure,
+		long lockoutDuration, long resetFailureCount)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.addPolicy(name,
-				description, changeable, changeRequired, minAge, storageScheme,
+				description, storageScheme, changeable, changeRequired, minAge,
 				checkSyntax, allowDictionaryWords, minLength, history,
 				historyCount, expireable, maxAge, warningTime, graceLimit,
-				lockout, maxFailure, requireUnlock, lockoutDuration,
-				resetFailureCount);
+				lockout, maxFailure, lockoutDuration, resetFailureCount);
 
 		return PasswordPolicyJSONSerializer.toJSONObject(returnValue);
 	}
@@ -95,20 +94,19 @@ public class PasswordPolicyServiceJSON {
 
 	public static JSONObject updatePolicy(long passwordPolicyId,
 		java.lang.String name, java.lang.String description,
-		boolean changeable, boolean changeRequired, int minAge,
-		java.lang.String storageScheme, boolean checkSyntax,
+		java.lang.String storageScheme, boolean changeable,
+		boolean changeRequired, long minAge, boolean checkSyntax,
 		boolean allowDictionaryWords, int minLength, boolean history,
-		int historyCount, boolean expireable, int maxAge, int warningTime,
-		int graceLimit, boolean lockout, int maxFailure, boolean requireUnlock,
-		int lockoutDuration, int resetFailureCount)
+		int historyCount, boolean expireable, long maxAge, long warningTime,
+		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
+		long resetFailureCount)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.updatePolicy(passwordPolicyId,
-				name, description, changeable, changeRequired, minAge,
-				storageScheme, checkSyntax, allowDictionaryWords, minLength,
-				history, historyCount, expireable, maxAge, warningTime,
-				graceLimit, lockout, maxFailure, requireUnlock,
-				lockoutDuration, resetFailureCount);
+				name, description, storageScheme, changeable, changeRequired,
+				minAge, checkSyntax, allowDictionaryWords, minLength, history,
+				historyCount, expireable, maxAge, warningTime, graceLimit,
+				lockout, maxFailure, lockoutDuration, resetFailureCount);
 
 		return PasswordPolicyJSONSerializer.toJSONObject(returnValue);
 	}

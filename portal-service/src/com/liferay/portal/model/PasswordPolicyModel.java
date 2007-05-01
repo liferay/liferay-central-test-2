@@ -83,6 +83,10 @@ public interface PasswordPolicyModel extends BaseModel {
 
 	public void setDescription(String description);
 
+	public String getStorageScheme();
+
+	public void setStorageScheme(String storageScheme);
+
 	public boolean getChangeable();
 
 	public boolean isChangeable();
@@ -95,13 +99,9 @@ public interface PasswordPolicyModel extends BaseModel {
 
 	public void setChangeRequired(boolean changeRequired);
 
-	public int getMinAge();
+	public long getMinAge();
 
-	public void setMinAge(int minAge);
-
-	public String getStorageScheme();
-
-	public void setStorageScheme(String storageScheme);
+	public void setMinAge(long minAge);
 
 	public boolean getCheckSyntax();
 
@@ -135,13 +135,13 @@ public interface PasswordPolicyModel extends BaseModel {
 
 	public void setExpireable(boolean expireable);
 
-	public int getMaxAge();
+	public long getMaxAge();
 
-	public void setMaxAge(int maxAge);
+	public void setMaxAge(long maxAge);
 
-	public int getWarningTime();
+	public long getWarningTime();
 
-	public void setWarningTime(int warningTime);
+	public void setWarningTime(long warningTime);
 
 	public int getGraceLimit();
 
@@ -157,17 +157,17 @@ public interface PasswordPolicyModel extends BaseModel {
 
 	public void setMaxFailure(int maxFailure);
 
+	public long getLockoutDuration();
+
+	public void setLockoutDuration(long lockoutDuration);
+
 	public boolean getRequireUnlock();
 
 	public boolean isRequireUnlock();
 
 	public void setRequireUnlock(boolean requireUnlock);
 
-	public int getLockoutDuration();
+	public long getResetFailureCount();
 
-	public void setLockoutDuration(int lockoutDuration);
-
-	public int getResetFailureCount();
-
-	public void setResetFailureCount(int resetFailureCount);
+	public void setResetFailureCount(long resetFailureCount);
 }

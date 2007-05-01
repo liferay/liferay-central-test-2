@@ -30,7 +30,44 @@ String redirect = ParamUtil.getString(request, "redirect");
 PasswordPolicy passwordPolicy = (PasswordPolicy)request.getAttribute(WebKeys.PASSWORD_POLICY);
 
 long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "passwordPolicyId");
+
+long minAge = BeanParamUtil.getLong(passwordPolicy, request, "minAge");
+int historyCount = BeanParamUtil.getInteger(passwordPolicy, request, "historyCount");
+long maxAge = BeanParamUtil.getLong(passwordPolicy, request, "maxAge");
+long warningTime = BeanParamUtil.getLong(passwordPolicy, request, "warningTime");
+long resetFailureCount = BeanParamUtil.getLong(passwordPolicy, request, "resetFailureCount");
+boolean requireUnlock = BeanParamUtil.getBoolean(passwordPolicy, request, "requireUnlock");
+long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDuration");
 %>
+
+<script type="text/javascript">
+	function <portlet:namespace />toggleBoxes(checkBoxId, toggleBoxId) {
+		var checkBox = jQuery('#<portlet:namespace />' + checkBoxId);
+		var toggleBox = jQuery('#<portlet:namespace />' + toggleBoxId);
+	
+		if (!checkBox.is(':checked')){
+			toggleBox.hide();
+		}
+	
+		checkBox.click(
+			function(){
+				toggleBox.toggle();
+			}
+		);
+	}
+	
+	jQuery(
+		function() {
+			document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+	
+			<portlet:namespace />toggleBoxes('changeableCheckbox', 'changeableSettings');
+			<portlet:namespace />toggleBoxes('checkSyntaxCheckbox', 'syntaxSettings');
+			<portlet:namespace />toggleBoxes('historyCheckbox', 'historySettings');
+			<portlet:namespace />toggleBoxes('expireableCheckbox', 'expirationSettings');
+			<portlet:namespace />toggleBoxes('lockoutCheckbox', 'lockoutSettings');
+		}
+	);
+</script>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="password-policies" />
@@ -67,33 +104,6 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "changeable") %>
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="changeable" />
-				<span title="Check box if user is allowed to change their password.">?</span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "change-required") %>
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="changeRequired" />
-				<span title="Check box if users are required to change password the first time they login.">?</span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "minimum-age") %>
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="minAge" />
-				<span title="Minimum Age - The age (in seconds) that a password must be before it can be changed again. (0 seconds = User can change password immediately, 300 seconds = 5 minutes, 86400 seconds = 1 day).">?</span>
-			</td>
-		</tr>
-		<tr>
-			<td>
 				<%= LanguageUtil.get(pageContext, "encryption-type") %>
 			</td>
 			<td>
@@ -102,6 +112,50 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 				</select>
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<%= LanguageUtil.get(pageContext, "changeable") %>
+			</td>
+			<td>
+				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="changeable" />
+
+				<liferay-ui:icon-help message="changeable-help" />
+			</td>
+		</tr>
+		<tbody id="<portlet:namespace />changeableSettings">
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "change-required") %>
+				</td>
+				<td>
+					<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="changeRequired" />
+
+					<liferay-ui:icon-help message="change-required-help" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "minimum-age") %>
+				</td>
+				<td>
+					<select name="<portlet:namespace />minAge">
+
+						<%
+						for (int i = 0; i < 15; i++) {
+						%>
+
+							<option value="<%= _DURATIONS[i] %>" <%= (minAge == _DURATIONS[i]) ? "selected" : "" %>><%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %></option>
+
+						<%
+						}
+						%>
+
+					</select>
+
+					<liferay-ui:icon-help message="minimum-age-help" />
+				</td>
+			</tr>
+		</tbody>
 		</table>
 	</liferay-ui:section>
 </liferay-ui:tabs>
@@ -121,27 +175,32 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="checkSyntax" />
-				<span title="Check box if passwords are to be checked for length requirements and use of trivial words (such as dictionary words and user information).">?</span>
+
+				<liferay-ui:icon-help message="syntax-checking-enabled-help" />
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "allow-dictionary-words") %>
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="allowDictionaryWords" />
-				<span title="Check box if passwords can not contain dictionary words.">?</span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "minimum-length") %>
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="minLength" />
-				<span title="Minimum Length - Minimum length of characters that a password can be.">?</span>
-			</td>
-		</tr>
+		<tbody id="<portlet:namespace />syntaxSettings">
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "allow-dictionary-words") %>
+				</td>
+				<td>
+					<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="allowDictionaryWords" />
+
+					<liferay-ui:icon-help message="allow-dictionary-words-help" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "minimum-length") %>
+				</td>
+				<td>
+					<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="minLength" />
+
+					<liferay-ui:icon-help message="minimum-length-help" />
+				</td>
+			</tr>
+		</tbody>
 		</table>
 	</liferay-ui:section>
 </liferay-ui:tabs>
@@ -161,16 +220,32 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="history" />
-				<span title="Check box if passwords can not be recycled.">?</span>
+
+				<liferay-ui:icon-help message="history-enabled-help" />
 			</td>
 		</tr>
-		<tr>
+		<tr id="<portlet:namespace />historySettings">
 			<td>
 				<%= LanguageUtil.get(pageContext, "history-count") %>
 			</td>
 			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="historyCount" />
-				<span title="History Count - Number of passwords to store in history, to make sure they are not recycled in the future (2 to 24 passwords).">?</span>
+				<select name="<portlet:namespace />historyCount">
+
+					<%
+					for (int i = 2; i < 25; i++) {
+					%>
+
+						<option value="<%= i %>" <%= (historyCount == i) ? "selected" : "" %>><%= i %></option>
+
+					<%
+					}
+					%>
+
+				</select>
+
+				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="" />
+
+				<liferay-ui:icon-help message="history-count-help" />
 			</td>
 		</tr>
 		</table>
@@ -192,36 +267,66 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="expireable" />
-				<span title="Check box if passwords will automatically expire after a specified time.">?</span>
+
+				<liferay-ui:icon-help message="expiration-enabled-help" />
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "maximum-age") %>
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="maxAge" />
-				<span title="Maximum Age - The age (in seconds) before a password will expire and the user is required to change the password. (2592000 seconds = 30 days, 7776000 seconds = 90 days)">?</span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "warning-time") %>
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="warningTime" />
-				<span title="Warning Time - The time (in seconds), before the password expires, to warn the user that the password will be expiring. (86400 seconds = 1 day)">?</span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "grace-limit") %>
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="graceLimit" />
-				<span title="Grace Limit - The number of logins which are permitted with a password that has expired">?</span>
-			</td>
-		</tr>
+		<tbody id="<portlet:namespace />expirationSettings">
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "maximum-age") %>
+				</td>
+				<td>
+					<select name="<portlet:namespace />maxAge">
+
+						<%
+						for (int i = 15; i < _DURATIONS.length; i++) {
+						%>
+
+							<option value="<%= _DURATIONS[i] %>" <%= (maxAge == _DURATIONS[i]) ? "selected" : "" %>><%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %></option>
+
+						<%
+						}
+						%>
+
+					</select>
+
+					<liferay-ui:icon-help message="maximum-age-help" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "warning-time") %>
+				</td>
+				<td>
+					<select name="<portlet:namespace />warningTime">
+
+						<%
+						for (int i = 7; i < 15; i++) {
+						%>
+
+							<option value="<%= _DURATIONS[i] %>" <%= (warningTime == _DURATIONS[i]) ? "selected" : "" %>><%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %></option>
+
+						<%
+						}
+						%>
+
+					</select>
+
+					<liferay-ui:icon-help message="warning-time-help" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "grace-limit") %>
+				</td>
+				<td>
+					<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="graceLimit" />
+
+					<liferay-ui:icon-help message="grace-limit-help" />
+				</td>
+			</tr>
+		</tbody>
 		</table>
 	</liferay-ui:section>
 </liferay-ui:tabs>
@@ -241,45 +346,68 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="lockout" />
-				<span title="Check box if users will be locked out of system after a certain number of failed login attempts.">?</span>
+
+				<liferay-ui:icon-help message="lockout-enabled-help" />
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "maximum-failure") %>
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="maxFailure" />
-				<span title="Maximim Failure - The number of failed login attempts before user is locked out.">?</span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "reset-failure-count") %>
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="resetFailureCount" />
-				<span title="Reset Failure Count - The time (in seconds) after which the ''Login Failure Count'' is reset.">?</span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "require-unlock") %>
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="requireUnlock" />
-				<span title="Require Unlock - Check box if users are locked out indefinately until an Administrator manually unlocks their account.">?</span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "lockout-duration") %>
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="lockoutDuration" />
-				<span title="Lockout Duration - The time (in seconds) that a User Account will have to wait before he or she can login again.  This value wil be ignored if 'RequireUnlock' value is checked.">?</span>
-			</td>
-		</tr>
+		<tbody id="<portlet:namespace />lockoutSettings">
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "maximum-failure") %>
+				</td>
+				<td>
+					<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="maxFailure" />
+
+					<liferay-ui:icon-help message="minimum-length-help" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "reset-failure-count") %>
+				</td>
+				<td>
+					<select name="<portlet:namespace />resetFailureCount">
+
+						<%
+						for (int i = 0; i < 15; i++) {
+						%>
+
+							<option value="<%= _DURATIONS[i] %>" <%= (resetFailureCount == _DURATIONS[i]) ? "selected" : "" %>><%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %></option>
+
+						<%
+						}
+						%>
+
+					</select>
+
+					<liferay-ui:icon-help message="reset-failure-count-help" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "lockout-duration") %>
+				</td>
+				<td>
+					<select name="<portlet:namespace />lockoutDuration">
+
+						<option value="0" <%= (requireUnlock) ? "selected" : "" %>><%= LanguageUtil.get(pageContext, "until-unlocked-by-an-administrator") %></option>
+
+						<%
+						for (int i = 0; i < 15; i++) {
+						%>
+
+							<option value="<%= _DURATIONS[i] %>" <%= (!requireUnlock && (lockoutDuration == _DURATIONS[i])) ? "selected" : "" %>><%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %></option>
+
+						<%
+						}
+						%>
+
+					</select>
+
+					<liferay-ui:icon-help message="lockout-duration-help" />
+				</td>
+			</tr>
+		</tbody>
 		</table>
 	</liferay-ui:section>
 </liferay-ui:tabs>
@@ -292,6 +420,6 @@ long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "password
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-</script>
+<%!
+private static final long[] _DURATIONS = {300, 600, 1800, 3600, 7200, 10800, 21600, 43200, 86400, 172800, 259200, 345600, 432000, 518400, 604800, 1209600, 1814400, 2419200, 4838400, 7862400, 15724800, 31449600};
+%>

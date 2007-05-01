@@ -125,7 +125,7 @@ public class EditPasswordPolicyAction extends PortletAction {
 		String description = ParamUtil.getString(req, "description");
 		boolean changeable = ParamUtil.getBoolean(req, "changeable");
 		boolean changeRequired = ParamUtil.getBoolean(req, "changeRequired");
-		int minAge = ParamUtil.getInteger(req, "minAge");
+		long minAge = ParamUtil.getLong(req, "minAge");
 		String storageScheme = ParamUtil.getString(req, "storageScheme");
 		boolean checkSyntax = ParamUtil.getBoolean(req, "checkSyntax");
 		boolean allowDictionaryWords = ParamUtil.getBoolean(
@@ -134,36 +134,35 @@ public class EditPasswordPolicyAction extends PortletAction {
 		boolean history = ParamUtil.getBoolean(req, "history");
 		int historyCount = ParamUtil.getInteger(req, "historyCount");
 		boolean expireable = ParamUtil.getBoolean(req, "expireable");
-		int maxAge = ParamUtil.getInteger(req, "maxAge");
-		int warningTime = ParamUtil.getInteger(req, "warningTime");
+		long maxAge = ParamUtil.getLong(req, "maxAge");
+		long warningTime = ParamUtil.getLong(req, "warningTime");
 		int graceLimit = ParamUtil.getInteger(req, "graceLimit");
 		boolean lockout = ParamUtil.getBoolean(req, "lockout");
 		int maxFailure = ParamUtil.getInteger(req, "maxFailure");
-		boolean requireUnlock = ParamUtil.getBoolean(req, "requireUnlock");
-		int lockoutDuration = ParamUtil.getInteger(req, "lockoutDuration");
-		int resetFailureCount = ParamUtil.getInteger(req, "resetFailureCount");
+		long lockoutDuration = ParamUtil.getLong(req, "lockoutDuration");
+		long resetFailureCount = ParamUtil.getLong(req, "resetFailureCount");
 
 		if (passwordPolicyId <= 0) {
 
 			// Add password policy
 
 			PasswordPolicyServiceUtil.addPolicy(
-				name, description, changeable, changeRequired, minAge,
-				storageScheme, checkSyntax, allowDictionaryWords, minLength,
+				name, description, storageScheme, changeable, changeRequired,
+				minAge, checkSyntax, allowDictionaryWords, minLength,
 				history, historyCount, expireable, maxAge, warningTime,
-				graceLimit, lockout, maxFailure, requireUnlock,
-				lockoutDuration, resetFailureCount);
+				graceLimit, lockout, maxFailure, lockoutDuration,
+				resetFailureCount);
 		}
 		else {
 
 			// Update password policy
 
 			PasswordPolicyServiceUtil.updatePolicy(
-				passwordPolicyId, name, description, changeable, changeRequired,
-				minAge, storageScheme, checkSyntax, allowDictionaryWords,
+				passwordPolicyId, name, description, storageScheme, changeable,
+				changeRequired, minAge, checkSyntax, allowDictionaryWords,
 				minLength, history, historyCount, expireable, maxAge,
-				warningTime, graceLimit, lockout, maxFailure, requireUnlock,
-				lockoutDuration, resetFailureCount);
+				warningTime, graceLimit, lockout, maxFailure, lockoutDuration,
+				resetFailureCount);
 		}
 	}
 

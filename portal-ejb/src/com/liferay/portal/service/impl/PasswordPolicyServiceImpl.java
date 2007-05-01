@@ -41,22 +41,22 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 	implements PasswordPolicyService {
 
 	public PasswordPolicy addPolicy(
-			String name, String description, boolean changeable,
-			boolean changeRequired, int minAge, String storageScheme,
+			String name, String description, String storageScheme,
+			boolean changeable, boolean changeRequired, long minAge,
 			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
-			boolean history, int historyCount, boolean expireable, int maxAge,
-			int warningTime, int graceLimit, boolean lockout, int maxFailure,
-			boolean requireUnlock, int lockoutDuration, int resetFailureCount)
+			boolean history, int historyCount, boolean expireable, long maxAge,
+			long warningTime, int graceLimit, boolean lockout, int maxFailure,
+			long lockoutDuration, long resetFailureCount)
 		throws PortalException, SystemException {
 
 		PortalPermission.check(
 			getPermissionChecker(), ActionKeys.ADD_PASSWORD_POLICY);
 
 		return PasswordPolicyLocalServiceUtil.addPolicy(
-			getUserId(), name, description, changeable, changeRequired, minAge,
-			storageScheme, checkSyntax, allowDictionaryWords, minLength,
-			history, historyCount, expireable, maxAge, warningTime, graceLimit,
-			lockout, maxFailure, requireUnlock, lockoutDuration,
+			getUserId(), name, description, storageScheme, changeable,
+			changeRequired, minAge, checkSyntax, allowDictionaryWords,
+			minLength, history, historyCount, expireable, maxAge, warningTime,
+			graceLimit, lockout, maxFailure, lockoutDuration,
 			resetFailureCount);
 	}
 
@@ -71,22 +71,22 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 
 	public PasswordPolicy updatePolicy(
 			long passwordPolicyId, String name, String description,
-			boolean changeable, boolean changeRequired, int minAge,
-			String storageScheme, boolean checkSyntax,
-			boolean allowDictionaryWords, int minLength, boolean history,
-			int historyCount, boolean expireable, int maxAge, int warningTime,
-			int graceLimit, boolean lockout, int maxFailure,
-			boolean requireUnlock, int lockoutDuration, int resetFailureCount)
+			String storageScheme, boolean changeable, boolean changeRequired,
+			long minAge, boolean checkSyntax, boolean allowDictionaryWords,
+			int minLength, boolean history, int historyCount,
+			boolean expireable, long maxAge, long warningTime, int graceLimit,
+			boolean lockout, int maxFailure, long lockoutDuration,
+			long resetFailureCount)
 		throws PortalException, SystemException {
 
 		PasswordPolicyPermission.check(
 			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
-		return PasswordPolicyLocalServiceUtil.updatePolicy(passwordPolicyId,
-			name, description, changeable, changeRequired, minAge,
-			storageScheme, checkSyntax, allowDictionaryWords, minLength,
-			history, historyCount, expireable, maxAge, warningTime, graceLimit,
-			lockout, maxFailure, requireUnlock, lockoutDuration,
+		return PasswordPolicyLocalServiceUtil.updatePolicy(
+			passwordPolicyId, name, description, storageScheme, changeable,
+			changeRequired, minAge, checkSyntax, allowDictionaryWords,
+			minLength, history, historyCount, expireable, maxAge, warningTime,
+			graceLimit, lockout, maxFailure, lockoutDuration,
 			resetFailureCount);
 	}
 

@@ -46,12 +46,12 @@ public class PasswordPolicyLocalServiceImpl
 	extends PasswordPolicyLocalServiceBaseImpl {
 
 	public PasswordPolicy addPolicy(
-			long userId, String name, String description, boolean changeable,
-			boolean changeRequired, int minAge, String storageScheme,
+			long userId, String name, String description, String storageScheme,
+			boolean changeable, boolean changeRequired, long minAge,
 			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
-			boolean history, int historyCount, boolean expireable, int maxAge,
-			int warningTime, int graceLimit, boolean lockout, int maxFailure,
-			boolean requireUnlock, int lockoutDuration, int resetFailureCount)
+			boolean history, int historyCount, boolean expireable, long maxAge,
+			long warningTime, int graceLimit, boolean lockout, int maxFailure,
+			long lockoutDuration, long resetFailureCount)
 		throws PortalException, SystemException {
 
 		// Password policy
@@ -74,10 +74,10 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setModifiedDate(now);
 		passwordPolicy.setName(name);
 		passwordPolicy.setDescription(description);
+		passwordPolicy.setStorageScheme(storageScheme);
 		passwordPolicy.setChangeable(changeable);
 		passwordPolicy.setChangeRequired(changeRequired);
 		passwordPolicy.setMinAge(minAge);
-		passwordPolicy.setStorageScheme(storageScheme);
 		passwordPolicy.setCheckSyntax(checkSyntax);
 		passwordPolicy.setAllowDictionaryWords(allowDictionaryWords);
 		passwordPolicy.setMinLength(minLength);
@@ -89,8 +89,8 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setGraceLimit(graceLimit);
 		passwordPolicy.setLockout(lockout);
 		passwordPolicy.setMaxFailure(maxFailure);
-		passwordPolicy.setRequireUnlock(requireUnlock);
 		passwordPolicy.setLockoutDuration(lockoutDuration);
+		passwordPolicy.setRequireUnlock(lockoutDuration == 0);
 		passwordPolicy.setResetFailureCount(resetFailureCount);
 
 		PasswordPolicyUtil.update(passwordPolicy);
@@ -130,12 +130,12 @@ public class PasswordPolicyLocalServiceImpl
 
 	public PasswordPolicy updatePolicy(
 			long passwordPolicyId, String name, String description,
-			boolean changeable, boolean changeRequired, int minAge,
-			String storageScheme, boolean checkSyntax,
-			boolean allowDictionaryWords, int minLength, boolean history,
-			int historyCount, boolean expireable, int maxAge, int warningTime,
-			int graceLimit, boolean lockout, int maxFailure,
-			boolean requireUnlock, int lockoutDuration, int resetFailureCount)
+			String storageScheme, boolean changeable, boolean changeRequired,
+			long minAge, boolean checkSyntax, boolean allowDictionaryWords,
+			int minLength, boolean history, int historyCount,
+			boolean expireable, long maxAge, long warningTime, int graceLimit,
+			boolean lockout, int maxFailure, long lockoutDuration,
+			long resetFailureCount)
 		throws PortalException, SystemException {
 
 		Date now = new Date();
@@ -148,10 +148,10 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setModifiedDate(now);
 		passwordPolicy.setName(name);
 		passwordPolicy.setDescription(description);
+		passwordPolicy.setStorageScheme(storageScheme);
 		passwordPolicy.setChangeable(changeable);
 		passwordPolicy.setChangeRequired(changeRequired);
 		passwordPolicy.setMinAge(minAge);
-		passwordPolicy.setStorageScheme(storageScheme);
 		passwordPolicy.setCheckSyntax(checkSyntax);
 		passwordPolicy.setAllowDictionaryWords(allowDictionaryWords);
 		passwordPolicy.setMinLength(minLength);
@@ -163,8 +163,8 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setGraceLimit(graceLimit);
 		passwordPolicy.setLockout(lockout);
 		passwordPolicy.setMaxFailure(maxFailure);
-		passwordPolicy.setRequireUnlock(requireUnlock);
 		passwordPolicy.setLockoutDuration(lockoutDuration);
+		passwordPolicy.setRequireUnlock(lockoutDuration == 0);
 		passwordPolicy.setResetFailureCount(resetFailureCount);
 
 		PasswordPolicyUtil.update(passwordPolicy);

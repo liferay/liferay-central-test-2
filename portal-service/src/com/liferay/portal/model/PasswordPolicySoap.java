@@ -56,10 +56,10 @@ public class PasswordPolicySoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
+		soapModel.setStorageScheme(model.getStorageScheme());
 		soapModel.setChangeable(model.getChangeable());
 		soapModel.setChangeRequired(model.getChangeRequired());
 		soapModel.setMinAge(model.getMinAge());
-		soapModel.setStorageScheme(model.getStorageScheme());
 		soapModel.setCheckSyntax(model.getCheckSyntax());
 		soapModel.setAllowDictionaryWords(model.getAllowDictionaryWords());
 		soapModel.setMinLength(model.getMinLength());
@@ -71,8 +71,8 @@ public class PasswordPolicySoap implements Serializable {
 		soapModel.setGraceLimit(model.getGraceLimit());
 		soapModel.setLockout(model.getLockout());
 		soapModel.setMaxFailure(model.getMaxFailure());
-		soapModel.setRequireUnlock(model.getRequireUnlock());
 		soapModel.setLockoutDuration(model.getLockoutDuration());
+		soapModel.setRequireUnlock(model.getRequireUnlock());
 		soapModel.setResetFailureCount(model.getResetFailureCount());
 
 		return soapModel;
@@ -164,6 +164,14 @@ public class PasswordPolicySoap implements Serializable {
 		_description = description;
 	}
 
+	public String getStorageScheme() {
+		return _storageScheme;
+	}
+
+	public void setStorageScheme(String storageScheme) {
+		_storageScheme = storageScheme;
+	}
+
 	public boolean getChangeable() {
 		return _changeable;
 	}
@@ -188,20 +196,12 @@ public class PasswordPolicySoap implements Serializable {
 		_changeRequired = changeRequired;
 	}
 
-	public int getMinAge() {
+	public long getMinAge() {
 		return _minAge;
 	}
 
-	public void setMinAge(int minAge) {
+	public void setMinAge(long minAge) {
 		_minAge = minAge;
-	}
-
-	public String getStorageScheme() {
-		return _storageScheme;
-	}
-
-	public void setStorageScheme(String storageScheme) {
-		_storageScheme = storageScheme;
 	}
 
 	public boolean getCheckSyntax() {
@@ -268,19 +268,19 @@ public class PasswordPolicySoap implements Serializable {
 		_expireable = expireable;
 	}
 
-	public int getMaxAge() {
+	public long getMaxAge() {
 		return _maxAge;
 	}
 
-	public void setMaxAge(int maxAge) {
+	public void setMaxAge(long maxAge) {
 		_maxAge = maxAge;
 	}
 
-	public int getWarningTime() {
+	public long getWarningTime() {
 		return _warningTime;
 	}
 
-	public void setWarningTime(int warningTime) {
+	public void setWarningTime(long warningTime) {
 		_warningTime = warningTime;
 	}
 
@@ -312,6 +312,14 @@ public class PasswordPolicySoap implements Serializable {
 		_maxFailure = maxFailure;
 	}
 
+	public long getLockoutDuration() {
+		return _lockoutDuration;
+	}
+
+	public void setLockoutDuration(long lockoutDuration) {
+		_lockoutDuration = lockoutDuration;
+	}
+
 	public boolean getRequireUnlock() {
 		return _requireUnlock;
 	}
@@ -324,19 +332,11 @@ public class PasswordPolicySoap implements Serializable {
 		_requireUnlock = requireUnlock;
 	}
 
-	public int getLockoutDuration() {
-		return _lockoutDuration;
-	}
-
-	public void setLockoutDuration(int lockoutDuration) {
-		_lockoutDuration = lockoutDuration;
-	}
-
-	public int getResetFailureCount() {
+	public long getResetFailureCount() {
 		return _resetFailureCount;
 	}
 
-	public void setResetFailureCount(int resetFailureCount) {
+	public void setResetFailureCount(long resetFailureCount) {
 		_resetFailureCount = resetFailureCount;
 	}
 
@@ -348,22 +348,22 @@ public class PasswordPolicySoap implements Serializable {
 	private Date _modifiedDate;
 	private String _name;
 	private String _description;
+	private String _storageScheme;
 	private boolean _changeable;
 	private boolean _changeRequired;
-	private int _minAge;
-	private String _storageScheme;
+	private long _minAge;
 	private boolean _checkSyntax;
 	private boolean _allowDictionaryWords;
 	private int _minLength;
 	private boolean _history;
 	private int _historyCount;
 	private boolean _expireable;
-	private int _maxAge;
-	private int _warningTime;
+	private long _maxAge;
+	private long _warningTime;
 	private int _graceLimit;
 	private boolean _lockout;
 	private int _maxFailure;
+	private long _lockoutDuration;
 	private boolean _requireUnlock;
-	private int _lockoutDuration;
-	private int _resetFailureCount;
+	private long _resetFailureCount;
 }

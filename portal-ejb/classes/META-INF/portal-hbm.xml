@@ -278,24 +278,24 @@
 		<property name="modifiedDate" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="storageScheme" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="changeable" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="changeRequired" type="com.liferay.util.dao.hibernate.BooleanType" />
-		<property name="minAge" type="com.liferay.util.dao.hibernate.IntegerType" />
-		<property name="storageScheme" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="minAge" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="checkSyntax" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="allowDictionaryWords" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="minLength" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="history" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="historyCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="expireable" type="com.liferay.util.dao.hibernate.BooleanType" />
-		<property name="maxAge" type="com.liferay.util.dao.hibernate.IntegerType" />
-		<property name="warningTime" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="maxAge" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="warningTime" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="graceLimit" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="lockout" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="maxFailure" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="lockoutDuration" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="requireUnlock" type="com.liferay.util.dao.hibernate.BooleanType" />
-		<property name="lockoutDuration" type="com.liferay.util.dao.hibernate.IntegerType" />
-		<property name="resetFailureCount" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="resetFailureCount" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.PasswordPolicyRelImpl" table="PasswordPolicyRel">
 		<cache usage="read-write" />

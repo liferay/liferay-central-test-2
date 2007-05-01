@@ -279,24 +279,24 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
+		<field name="storageScheme" type="String" />
 		<field name="changeable" type="boolean" />
 		<field name="changeRequired" type="boolean" />
-		<field name="minAge" type="int" />
-		<field name="storageScheme" type="String" />
+		<field name="minAge" type="long" />
 		<field name="checkSyntax" type="boolean" />
 		<field name="allowDictionaryWords" type="boolean" />
 		<field name="minLength" type="int" />
 		<field name="history" type="boolean" />
 		<field name="historyCount" type="int" />
 		<field name="expireable" type="boolean" />
-		<field name="maxAge" type="int" />
-		<field name="warningTime" type="int" />
+		<field name="maxAge" type="long" />
+		<field name="warningTime" type="long" />
 		<field name="graceLimit" type="int" />
 		<field name="lockout" type="boolean" />
 		<field name="maxFailure" type="int" />
+		<field name="lockoutDuration" type="long" />
 		<field name="requireUnlock" type="boolean" />
-		<field name="lockoutDuration" type="int" />
-		<field name="resetFailureCount" type="int" />
+		<field name="resetFailureCount" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.PasswordPolicyRel">
 		<field name="passwordPolicyRelId" type="long" />

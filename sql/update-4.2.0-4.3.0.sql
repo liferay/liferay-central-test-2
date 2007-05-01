@@ -18,7 +18,7 @@ alter_column_type CalEvent eventId LONG;
 alter_column_type CalEvent groupId LONG;
 
 create table ClassNameMapper (
-	classNameMapperId LONG primary key,
+	classNameMapperId LONG not null primary key,
 	className VARCHAR(75) null
 );
 
@@ -121,36 +121,36 @@ alter_column_type OrgLabor organizationId LONG;
 alter_column_type OrgLabor typeId INTEGER;
 
 create table PasswordPolicy (
-	passwordPolicyId LONG primary key,
-	companyId LONG,
-	userId LONG,
+	passwordPolicyId LONG not null primary key,
+	companyId LONG not null,
+	userId LONG not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
 	description STRING null,
+	storageScheme VARCHAR(75) null,
 	changeable BOOLEAN,
 	changeRequired BOOLEAN,
-	minAge INTEGER,
-	storageScheme VARCHAR(75) null,
+	minAge LONG,
 	checkSyntax BOOLEAN,
 	allowDictionaryWords BOOLEAN,
 	minLength INTEGER,
 	history BOOLEAN,
 	historyCount INTEGER,
 	expireable BOOLEAN,
-	maxAge INTEGER,
-	warningTime INTEGER,
+	maxAge LONG,
+	warningTime LONG,
 	graceLimit INTEGER,
 	lockout BOOLEAN,
 	maxFailure INTEGER,
+	lockoutDuration LONG,
 	requireUnlock BOOLEAN,
-	lockoutDuration INTEGER,
-	resetFailureCount INTEGER
+	resetFailureCount LONG
 );
 
 create table PasswordPolicyRel (
-	passwordPolicyRelId LONG primary key,
+	passwordPolicyRelId LONG not null primary key,
 	passwordPolicyId LONG,
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null
@@ -166,8 +166,8 @@ alter_column_type Phone phoneId LONG;
 alter_column_type Phone typeId INTEGER;
 
 create table PluginSetting (
-	pluginSettingId LONG primary key,
-	companyId LONG,
+	pluginSettingId LONG not null primary key,
+	companyId LONG not null,
 	pluginId VARCHAR(75) null,
 	pluginType VARCHAR(75) null,
 	roles VARCHAR(75) null,
@@ -191,8 +191,8 @@ alter table Resource_ add codeId LONG;
 alter table Resource_ drop typeId;
 
 create table ResourceCode (
-	codeId LONG primary key,
-	companyId LONG,
+	codeId LONG not null primary key,
+	companyId LONG not null,
 	name VARCHAR(75) null,
 	scope INTEGER
 );
@@ -383,9 +383,9 @@ update User_ set screenName = userId;
 alter_column_type UserGroup userGroupId LONG;
 
 create table UserGroupRole (
-	userId LONG,
-	groupId LONG,
-	roleId LONG,
+	userId LONG not null,
+	groupId LONG not null,
+	roleId LONG not null,
 	primary key (userId, groupId, roleId)
 );
 
