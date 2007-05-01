@@ -703,6 +703,21 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>input-resource</name>
+		<tagclass>com.liferay.taglib.ui.InputResourceTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>url</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>input-select</name>
 		<tagclass>com.liferay.taglib.ui.InputSelectTag</tagclass>
 		<bodycontent>JSP</bodycontent>
