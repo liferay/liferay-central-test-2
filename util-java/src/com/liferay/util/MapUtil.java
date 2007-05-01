@@ -50,7 +50,9 @@ public class MapUtil {
 	public static boolean getBoolean(
 		Map map, String key, boolean defaultValue) {
 
-		return GetterUtil.getBoolean(getString(map, key), defaultValue);
+		return GetterUtil.getBoolean(
+				getString(map, key, Boolean.toString(
+						defaultValue)), defaultValue);
 	}
 
 	public static String getString(Map map, String key) {
