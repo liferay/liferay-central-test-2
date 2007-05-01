@@ -313,7 +313,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				searchContainer.setResults(results);
 				%>
 
-				<br /><div class="separator"></div><br />
+				<div class="separator"></div>
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserPermissions();">
 
@@ -488,7 +488,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				searchContainer.setResults(results);
 				%>
 
-				<br /><div class="separator"></div><br />
+				<div class="separator"></div>
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateOrganizationPermissions();">
 
@@ -717,7 +717,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				searchContainer.setResults(results);
 				%>
 
-				<br /><div class="separator"></div><br />
+				<div class="separator"></div>
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserGroupPermissions();">
 
@@ -966,7 +966,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		searchContainer.setResults(results);
 		%>
 
-		<br /><div class="separator"></div><br />
+		<div class="separator"></div>
 
 		<%
 		List headerNames = new ArrayList();

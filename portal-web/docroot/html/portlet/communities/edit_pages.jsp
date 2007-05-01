@@ -673,7 +673,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					</tr>
 					<tr>
 						<td>
-							<br /><div class="separator"></div><br />
+							<div class="separator"></div>
 						</td>
 					</tr>
 					<tr>
@@ -820,7 +820,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					%>
 
 					<c:if test="<%= (selLayoutChildren != null) && (selLayoutChildren.size() > 0) %>">
-						<br /><div class="separator"></div><br />
+						<div class="separator"></div>
 
 						<liferay-ui:error exception="<%= RequiredLayoutException.class %>">
 

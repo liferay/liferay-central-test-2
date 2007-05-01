@@ -149,7 +149,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				searchContainer.setResults(results);
 				%>
 
-				<br /><div class="separator"></div><br />
+				<div class="separator"></div>
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
@@ -264,7 +264,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					updateRoleAssignmentsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					%>
 
-					<br /><div class="separator"></div><br />
+					<div class="separator"></div>
 
 					<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateUserGroupRole('<%= updateRoleAssignmentsURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
@@ -343,7 +343,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		searchContainer.setResults(results);
 		%>
 
-		<br /><div class="separator"></div><br />
+		<div class="separator"></div>
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateGroupOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
@@ -427,7 +427,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		searchContainer.setResults(results);
 		%>
 
-		<br /><div class="separator"></div><br />
+		<div class="separator"></div>
 
 		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateGroupUserGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 

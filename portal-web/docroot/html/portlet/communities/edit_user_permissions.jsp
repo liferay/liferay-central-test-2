@@ -239,7 +239,7 @@ Assign permissions to users.
 				searchContainer.setResults(results);
 				%>
 
-				<br /><div class="separator"></div><br />
+				<div class="separator"></div>
 
 				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserPermissions();">
 

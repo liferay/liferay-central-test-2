@@ -80,7 +80,7 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 	searchContainer.setResults(results);
 	%>
 
-	<br /><div class="separator"></div><br />
+	<div class="separator"></div>
 
 	<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteOrders();">
 
