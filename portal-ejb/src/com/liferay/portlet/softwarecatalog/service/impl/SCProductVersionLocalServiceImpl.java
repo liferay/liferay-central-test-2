@@ -149,7 +149,7 @@ public class SCProductVersionLocalServiceImpl
 
 		// Product version
 
-		SCProductVersionUtil.remove(productVersion.getPrimaryKey());
+		SCProductVersionUtil.remove(productVersion.getProductVersionId());
 	}
 
 	public void deleteProductVersions(long productEntryId)

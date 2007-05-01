@@ -44,7 +44,7 @@ BookmarksFolder folder = (BookmarksFolder)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= BookmarksFolder.class.getName() %>"
 		modelResourceDescription="<%= folder.getName() %>"
-		resourcePrimKey="<%= String.valueOf(folder.getPrimaryKey()) %>"
+		resourcePrimKey="<%= String.valueOf(folder.getFolderId()) %>"
 		var="permissionsURL"
 	/>
 

@@ -334,7 +334,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				for (int i = 0; i < results.size(); i++) {
 					User user2 = (User)results.get(i);
 
-					ResultRow row = new ResultRow(user2, user2.getPrimaryKey(), i);
+					ResultRow row = new ResultRow(user2, user2.getUserId(), i);
 
 					// Name, screen name, and email address
 
@@ -736,7 +736,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				for (int i = 0; i < results.size(); i++) {
 					UserGroup userGroup = (UserGroup)results.get(i);
 
-					ResultRow row = new ResultRow(userGroup, userGroup.getPrimaryKey(), i);
+					ResultRow row = new ResultRow(userGroup, userGroup.getUserGroupId(), i);
 
 					// Name
 
@@ -981,7 +981,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		for (int i = 0; i < results.size(); i++) {
 			User user2 = (User)results.get(i);
 
-			ResultRow row = new ResultRow(user2, user2.getPrimaryKey(), i);
+			ResultRow row = new ResultRow(user2, user2.getUserId(), i);
 
 			// Name and email address
 

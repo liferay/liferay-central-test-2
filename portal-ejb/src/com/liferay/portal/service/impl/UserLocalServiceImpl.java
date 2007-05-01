@@ -291,8 +291,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		ResourceLocalServiceUtil.addResources(
-			companyId, 0, creatorUserId, User.class.getName(),
-			user.getPrimaryKey(), false, false, false);
+			companyId, 0, creatorUserId, User.class.getName(), user.getUserId(),
+			false, false, false);
 
 		// Mail
 
@@ -349,7 +349,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		GroupLocalServiceUtil.addGroup(
 			user.getUserId(), User.class.getName(),
-			String.valueOf(user.getPrimaryKey()), null, null, null, null, true);
+			String.valueOf(user.getUserId()), null, null, null, null, true);
 
 		// Default groups
 
@@ -601,7 +601,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			user.getCompanyId(), User.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, user.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, user.getUserId());
 
 		// Group roles
 

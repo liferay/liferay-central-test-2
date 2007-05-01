@@ -174,7 +174,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				for (int i = 0; i < results.size(); i++) {
 					User user2 = (User)results.get(i);
 
-					ResultRow row = new ResultRow(new Object[] {user2, group}, user2.getPrimaryKey(), i);
+					ResultRow row = new ResultRow(new Object[] {user2, group}, user2.getUserId(), i);
 
 					// Name, screen name, and email address
 
@@ -445,7 +445,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		for (int i = 0; i < results.size(); i++) {
 			UserGroup userGroup = (UserGroup)results.get(i);
 
-			ResultRow row = new ResultRow(userGroup, userGroup.getPrimaryKey(), i);
+			ResultRow row = new ResultRow(userGroup, userGroup.getUserGroupId(), i);
 
 			// Name
 

@@ -44,7 +44,7 @@ WikiNode node = (WikiNode)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= WikiNode.class.getName() %>"
 		modelResourceDescription="<%= node.getName() %>"
-		resourcePrimKey="<%= String.valueOf(node.getPrimaryKey()) %>"
+		resourcePrimKey="<%= String.valueOf(node.getNodeId()) %>"
 		var="permissionsURL"
 	/>
 

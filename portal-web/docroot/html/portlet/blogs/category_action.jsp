@@ -44,7 +44,7 @@ BlogsCategory category = (BlogsCategory)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= BlogsCategory.class.getName() %>"
 		modelResourceDescription="<%= category.getName() %>"
-		resourcePrimKey="<%= String.valueOf(category.getPrimaryKey()) %>"
+		resourcePrimKey="<%= String.valueOf(category.getCategoryId()) %>"
 		var="permissionsURL"
 	/>
 

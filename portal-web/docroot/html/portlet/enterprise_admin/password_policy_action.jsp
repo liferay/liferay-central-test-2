@@ -44,7 +44,7 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= PasswordPolicy.class.getName() %>"
 		modelResourceDescription="<%= passwordPolicy.getName() %>"
-		resourcePrimKey="<%= String.valueOf(passwordPolicy.getPrimaryKey()) %>"
+		resourcePrimKey="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>"
 		var="permissionsURL"
 	/>
 

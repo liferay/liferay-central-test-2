@@ -154,7 +154,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			ResourceLocalServiceUtil.addResources(
 				group.getCompanyId(), 0, 0, Group.class.getName(),
-				group.getPrimaryKey(), false, false, false);
+				group.getGroupId(), false, false, false);
 
 			// Community roles
 
@@ -320,7 +320,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			ResourceLocalServiceUtil.deleteResource(
 				group.getCompanyId(), Group.class.getName(),
-				ResourceImpl.SCOPE_INDIVIDUAL, group.getPrimaryKey());
+				ResourceImpl.SCOPE_INDIVIDUAL, group.getGroupId());
 		}
 
 		// Group

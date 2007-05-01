@@ -67,7 +67,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	Phone phone = (Phone)results.get(i);
 
-	ResultRow row = new ResultRow(phone, phone.getPrimaryKey(), i);
+	ResultRow row = new ResultRow(phone, phone.getPhoneId(), i);
 
 	row.addText(phone.getNumber());
 	row.addText(phone.getExtension());

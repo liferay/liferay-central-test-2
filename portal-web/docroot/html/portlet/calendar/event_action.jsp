@@ -49,7 +49,7 @@ CalEvent event = (CalEvent)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= CalEvent.class.getName() %>"
 		modelResourceDescription="<%= event.getTitle() %>"
-		resourcePrimKey="<%= String.valueOf(event.getPrimaryKey()) %>"
+		resourcePrimKey="<%= String.valueOf(event.getEventId()) %>"
 		var="permissionsURL"
 	/>
 

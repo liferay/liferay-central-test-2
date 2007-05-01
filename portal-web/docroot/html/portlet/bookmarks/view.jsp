@@ -77,7 +77,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		for (int i = 0; i < results.size(); i++) {
 			BookmarksFolder curFolder = (BookmarksFolder)results.get(i);
 
-			ResultRow row = new ResultRow(curFolder, curFolder.getPrimaryKey(), i);
+			ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -204,7 +204,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			for (int i = 0; i < results.size(); i++) {
 				BookmarksEntry entry = (BookmarksEntry)results.get(i);
 
-				ResultRow row = new ResultRow(entry, entry.getPrimaryKey(), i);
+				ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
 				StringMaker sm = new StringMaker();
 
@@ -292,7 +292,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		for (int i = 0; i < results.size(); i++) {
 			BookmarksEntry entry = (BookmarksEntry)results.get(i);
 
-			ResultRow row = new ResultRow(entry, entry.getPrimaryKey(), i);
+			ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
 			StringMaker sm = new StringMaker();
 

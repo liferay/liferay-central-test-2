@@ -44,7 +44,7 @@ BookmarksEntry entry = (BookmarksEntry)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= BookmarksEntry.class.getName() %>"
 		modelResourceDescription="<%= entry.getName() %>"
-		resourcePrimKey="<%= String.valueOf(entry.getPrimaryKey()) %>"
+		resourcePrimKey="<%= String.valueOf(entry.getEntryId()) %>"
 		var="permissionsURL"
 	/>
 

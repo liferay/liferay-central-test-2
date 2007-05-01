@@ -152,7 +152,7 @@ if (entry != null) {
 		String classPK = StringPool.BLANK;
 
 		if (entry != null) {
-			classPK = String.valueOf(entry.getPrimaryKey());
+			classPK = String.valueOf(entry.getEntryId());
 		}
 		%>
 

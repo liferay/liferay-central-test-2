@@ -47,7 +47,7 @@ String tabs1 = (String)objArray[1];
 	<liferay-security:permissionsURL
 		modelResource="<%= Group.class.getName() %>"
 		modelResourceDescription="<%= group.getName() %>"
-		resourcePrimKey="<%= String.valueOf(group.getPrimaryKey()) %>"
+		resourcePrimKey="<%= String.valueOf(group.getGroupId()) %>"
 		var="permissionsURL"
 	/>
 

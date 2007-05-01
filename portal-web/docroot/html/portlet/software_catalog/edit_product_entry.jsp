@@ -112,7 +112,7 @@ else {
 					SCLicense license = (SCLicense) itr.next();
 				%>
 
-					<option <%= licenseIds.contains(new Long(license.getLicenseId())) ? "selected" : "" %> value="<%= license.getPrimaryKey() %>"><%= license.getName() %></option>
+					<option <%= licenseIds.contains(new Long(license.getLicenseId())) ? "selected" : "" %> value="<%= license.getLicenseId() %>"><%= license.getName() %></option>
 
 				<%
 				}
@@ -129,7 +129,7 @@ else {
 					SCLicense license = (SCLicense) itr.next();
 				%>
 
-					<option <%= licenseIds.contains(new Long(license.getLicenseId())) ? "selected" : "" %> value="<%= license.getPrimaryKey() %>"><%= license.getName() %></option>
+					<option <%= licenseIds.contains(new Long(license.getLicenseId())) ? "selected" : "" %> value="<%= license.getLicenseId() %>"><%= license.getName() %></option>
 
 				<%
 				}

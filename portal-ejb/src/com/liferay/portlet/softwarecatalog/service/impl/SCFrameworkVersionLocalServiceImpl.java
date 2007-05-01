@@ -144,8 +144,8 @@ public class SCFrameworkVersionLocalServiceImpl
 		ResourceLocalServiceUtil.addResources(
 			frameworkVersion.getCompanyId(), frameworkVersion.getGroupId(),
 			frameworkVersion.getUserId(), SCFrameworkVersion.class.getName(),
-			frameworkVersion.getPrimaryKey(), false, addCommunityPermissions,
-			addGuestPermissions);
+			frameworkVersion.getFrameworkVersionId(), false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addFrameworkVersionResources(
@@ -168,7 +168,7 @@ public class SCFrameworkVersionLocalServiceImpl
 		ResourceLocalServiceUtil.addModelResources(
 			frameworkVersion.getCompanyId(), frameworkVersion.getGroupId(),
 			frameworkVersion.getUserId(), SCFrameworkVersion.class.getName(),
-			frameworkVersion.getPrimaryKey(), communityPermissions,
+			frameworkVersion.getFrameworkVersionId(), communityPermissions,
 			guestPermissions);
 	}
 

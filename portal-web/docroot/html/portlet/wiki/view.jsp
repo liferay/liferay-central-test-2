@@ -55,7 +55,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	WikiNode node = (WikiNode)results.get(i);
 
-	ResultRow row = new ResultRow(node, node.getPrimaryKey(), i);
+	ResultRow row = new ResultRow(node, node.getNodeId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 

@@ -124,7 +124,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	for (int i = 0; i < results.size(); i++) {
 		Group group = (Group)results.get(i);
 
-		ResultRow row = new ResultRow(new Object[] {group, tabs1}, group.getPrimaryKey(), i);
+		ResultRow row = new ResultRow(new Object[] {group, tabs1}, group.getGroupId(), i);
 
 		PortletURL rowURL = renderResponse.createActionURL();
 

@@ -49,7 +49,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	OrgLabor orgLabor = (OrgLabor)results.get(i);
 
-	ResultRow row = new ResultRow(orgLabor, orgLabor.getPrimaryKey(), i);
+	ResultRow row = new ResultRow(orgLabor, orgLabor.getOrgLaborId(), i);
 
 	row.addText(orgLabor.getType().getName());
 

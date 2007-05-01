@@ -234,7 +234,7 @@ else {
 
 <liferay-ui:ratings
 	className="<%= SCProductEntry.class.getName() %>"
-	classPK="<%= String.valueOf(productEntry.getPrimaryKey()) %>"
+	classPK="<%= String.valueOf(productEntry.getProductEntryId()) %>"
 	url='<%= themeDisplay.getPathMain() + "/software_catalog/rate_product_entry" %>'
 />
 
@@ -264,7 +264,7 @@ else {
 		<liferay-ui:discussion
 			formAction="<%= discussionURL %>"
 			className="<%= SCProductEntry.class.getName() %>"
-			classPK="<%= String.valueOf(productEntry.getPrimaryKey()) %>"
+			classPK="<%= String.valueOf(productEntry.getProductEntryId()) %>"
 			userId="<%= productEntry.getUserId() %>"
 			subject="<%= productEntry.getName() %>"
 			redirect="<%= currentURL %>"
@@ -302,7 +302,7 @@ else {
 			for (int i = 0; i < results.size(); i++) {
 				SCProductVersion curProductVersion = (SCProductVersion) results.get(i);
 
-				ResultRow row = new ResultRow(curProductVersion, String.valueOf(curProductVersion.getPrimaryKey()), i);
+				ResultRow row = new ResultRow(curProductVersion, String.valueOf(curProductVersion.getProductVersionId()), i);
 
 				// Name and description
 

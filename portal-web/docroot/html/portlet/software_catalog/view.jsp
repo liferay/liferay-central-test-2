@@ -217,7 +217,7 @@ portletURL.setParameter("tabs1", tabs1);
 		for (int i = 0; i < results.size(); i++) {
 			SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) results.get(i);
 
-			ResultRow row = new ResultRow(frameworkVersion, frameworkVersion.getPrimaryKey(), i);
+			ResultRow row = new ResultRow(frameworkVersion, frameworkVersion.getFrameworkVersionId(), i);
 
 			String rowHREF = frameworkVersion.getUrl();
 
@@ -292,7 +292,7 @@ portletURL.setParameter("tabs1", tabs1);
 		for (int i = 0; i < results.size(); i++) {
 			SCLicense license = (SCLicense) results.get(i);
 
-			ResultRow row = new ResultRow(license, license.getPrimaryKey(), i);
+			ResultRow row = new ResultRow(license, license.getLicenseId(), i);
 
 			String rowHREF = license.getUrl();
 

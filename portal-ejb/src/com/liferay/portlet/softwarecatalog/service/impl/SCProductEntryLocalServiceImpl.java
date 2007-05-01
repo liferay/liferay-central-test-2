@@ -219,7 +219,7 @@ public class SCProductEntryLocalServiceImpl
 		ResourceLocalServiceUtil.addResources(
 			productEntry.getCompanyId(), productEntry.getGroupId(),
 			productEntry.getUserId(), SCProductEntry.class.getName(),
-			productEntry.getPrimaryKey(), false, addCommunityPermissions,
+			productEntry.getProductEntryId(), false, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -243,7 +243,7 @@ public class SCProductEntryLocalServiceImpl
 		ResourceLocalServiceUtil.addModelResources(
 			productEntry.getCompanyId(), productEntry.getGroupId(),
 			productEntry.getUserId(), SCProductEntry.class.getName(),
-			productEntry.getPrimaryKey(), communityPermissions,
+			productEntry.getProductEntryId(), communityPermissions,
 			guestPermissions);
 	}
 
@@ -279,7 +279,7 @@ public class SCProductEntryLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			productEntry.getCompanyId(), SCProductEntry.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, productEntry.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, productEntry.getProductEntryId());
 
 		// Product entry
 

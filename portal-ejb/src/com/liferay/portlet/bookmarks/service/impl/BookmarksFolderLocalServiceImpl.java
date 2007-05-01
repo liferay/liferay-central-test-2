@@ -143,7 +143,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		ResourceLocalServiceUtil.addResources(
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			BookmarksFolder.class.getName(), folder.getPrimaryKey(), false,
+			BookmarksFolder.class.getName(), folder.getFolderId(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -164,7 +164,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		ResourceLocalServiceUtil.addModelResources(
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			BookmarksFolder.class.getName(), folder.getPrimaryKey(),
+			BookmarksFolder.class.getName(), folder.getFolderId(),
 			communityPermissions, guestPermissions);
 	}
 
@@ -198,7 +198,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			folder.getCompanyId(), BookmarksFolder.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, folder.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, folder.getFolderId());
 
 		// Folder
 

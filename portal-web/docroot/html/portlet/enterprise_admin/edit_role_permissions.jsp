@@ -466,7 +466,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		for (int i = 0; i < results.size(); i++) {
 			Group group = (Group)results.get(i);
 
-			ResultRow row = new ResultRow(group, String.valueOf(group.getPrimaryKey()), i);
+			ResultRow row = new ResultRow(group, group.getGroupId(), i);
 
 			// Name
 

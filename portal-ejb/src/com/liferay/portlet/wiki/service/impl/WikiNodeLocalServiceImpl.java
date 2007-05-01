@@ -152,7 +152,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			node.getCompanyId(), node.getGroupId(),	node.getUserId(),
-			WikiNode.class.getName(), node.getPrimaryKey(), false,
+			WikiNode.class.getName(), node.getNodeId(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -173,8 +173,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addModelResources(
 			node.getCompanyId(), node.getGroupId(),	node.getUserId(),
-			WikiNode.class.getName(), node.getPrimaryKey(),
-			communityPermissions, guestPermissions);
+			WikiNode.class.getName(), node.getNodeId(), communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteNode(long nodeId)
@@ -208,7 +208,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			node.getCompanyId(), WikiNode.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, node.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, node.getNodeId());
 
 		// Node
 

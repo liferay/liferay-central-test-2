@@ -143,7 +143,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		for (int i = 0; i < results.size(); i++) {
 			User user2 = (User)results.get(i);
 
-			ResultRow row = new ResultRow(user2, user2.getPrimaryKey(), i);
+			ResultRow row = new ResultRow(user2, user2.getUserId(), i);
 
 			// Name, screen name, and email address
 

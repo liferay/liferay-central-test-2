@@ -211,7 +211,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
-			BlogsEntry.class.getName(), entry.getPrimaryKey(), false,
+			BlogsEntry.class.getName(), entry.getEntryId(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -232,7 +232,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addModelResources(
 			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
-			BlogsEntry.class.getName(), entry.getPrimaryKey(),
+			BlogsEntry.class.getName(), entry.getEntryId(),
 			communityPermissions, guestPermissions);
 	}
 
@@ -282,7 +282,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			entry.getCompanyId(), BlogsEntry.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, entry.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, entry.getEntryId());
 
 		// Entry
 

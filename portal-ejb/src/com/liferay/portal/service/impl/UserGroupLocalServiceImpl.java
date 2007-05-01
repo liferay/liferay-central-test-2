@@ -84,14 +84,14 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		GroupLocalServiceUtil.addGroup(
 			userId, UserGroup.class.getName(),
-			String.valueOf(userGroup.getPrimaryKey()), null, null, null, null,
+			String.valueOf(userGroup.getUserGroupId()), null, null, null, null,
 			true);
 
 		// Resources
 
 		ResourceLocalServiceUtil.addResources(
 			companyId, 0, userId, UserGroup.class.getName(),
-			userGroup.getPrimaryKey(), false, false, false);
+			userGroup.getUserGroupId(), false, false, false);
 
 		return userGroup;
 	}
@@ -115,7 +115,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			userGroup.getCompanyId(), UserGroup.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, userGroup.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, userGroup.getUserGroupId());
 
 		// User Group
 

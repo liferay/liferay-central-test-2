@@ -44,7 +44,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= UserGroup.class.getName() %>"
 		modelResourceDescription="<%= userGroup.getName() %>"
-		resourcePrimKey="<%= String.valueOf(userGroup.getPrimaryKey()) %>"
+		resourcePrimKey="<%= String.valueOf(userGroup.getUserGroupId()) %>"
 		var="permissionsURL"
 	/>
 

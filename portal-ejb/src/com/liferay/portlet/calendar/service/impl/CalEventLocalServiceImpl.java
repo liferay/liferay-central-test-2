@@ -282,7 +282,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			event.getCompanyId(), event.getGroupId(), event.getUserId(),
-			CalEvent.class.getName(), event.getPrimaryKey(), false,
+			CalEvent.class.getName(), event.getEventId(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -303,8 +303,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addModelResources(
 			event.getCompanyId(), event.getGroupId(), event.getUserId(),
-			CalEvent.class.getName(), event.getPrimaryKey(),
-			communityPermissions, guestPermissions);
+			CalEvent.class.getName(), event.getEventId(), communityPermissions,
+			guestPermissions);
 	}
 
 	public void checkEvents() throws PortalException, SystemException {
@@ -369,7 +369,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			event.getCompanyId(), CalEvent.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, event.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, event.getEventId());
 
 		// Event
 

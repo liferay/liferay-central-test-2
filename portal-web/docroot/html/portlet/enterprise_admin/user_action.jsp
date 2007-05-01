@@ -54,7 +54,7 @@
 		<liferay-security:permissionsURL
 			modelResource="<%= User.class.getName() %>"
 			modelResourceDescription="<%= user2.getFullName() %>"
-			resourcePrimKey="<%= String.valueOf(user2.getPrimaryKey()) %>"
+			resourcePrimKey="<%= String.valueOf(user2.getUserId()) %>"
 			var="permissionsUserURL"
 		/>
 

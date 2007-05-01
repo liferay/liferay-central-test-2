@@ -142,7 +142,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 		String classPK = StringPool.BLANK;
 
 		if (entry != null) {
-			classPK = String.valueOf(entry.getPrimaryKey());
+			classPK = String.valueOf(entry.getEntryId());
 		}
 		%>
 

@@ -235,7 +235,7 @@ portletURL.setParameter("tabs1", tabs1);
 			for (int i = 0; i < results.size(); i++) {
 				User user2 = (User)results.get(i);
 
-				ResultRow row = new ResultRow(user2, user2.getPrimaryKey(), i);
+				ResultRow row = new ResultRow(user2, user2.getUserId(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -586,7 +586,7 @@ portletURL.setParameter("tabs1", tabs1);
 			for (int i = 0; i < results.size(); i++) {
 				UserGroup userGroup = (UserGroup)results.get(i);
 
-				ResultRow row = new ResultRow(userGroup, userGroup.getPrimaryKey(), i);
+				ResultRow row = new ResultRow(userGroup, userGroup.getUserGroupId(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -741,7 +741,7 @@ portletURL.setParameter("tabs1", tabs1);
 			for (int i = 0; i < results.size(); i++) {
 				PasswordPolicy passwordPolicy = (PasswordPolicy)results.get(i);
 
-				ResultRow row = new ResultRow(passwordPolicy, String.valueOf(passwordPolicy.getPrimaryKey()), i);
+				ResultRow row = new ResultRow(passwordPolicy, passwordPolicy.getPasswordPolicyId(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
