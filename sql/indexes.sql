@@ -20,6 +20,8 @@ create index IX_12EE4898 on CalEvent (groupId);
 create index IX_4FDDD2BF on CalEvent (groupId, repeating);
 create index IX_FCD7C63D on CalEvent (groupId, type_);
 
+create index IX_FA1B0DE9 on ClassNameMapper (className);
+
 create index IX_12566EC2 on Company (mx);
 create index IX_EC00543C on Company (webId);
 

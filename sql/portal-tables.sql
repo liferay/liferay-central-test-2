@@ -113,6 +113,11 @@ create table CalEvent (
 	secondReminder INTEGER
 );
 
+create table ClassNameMapper (
+	classNameMapperId LONG primary key,
+	className VARCHAR(75) null
+);
+
 create table Company (
 	companyId LONG primary key,
 	accountId LONG,

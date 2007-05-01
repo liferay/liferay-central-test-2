@@ -95,6 +95,22 @@
 			<finder-column name="primary" />
 		</finder>
 	</entity>
+	<entity name="ClassNameMapper" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="classNameMapperId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="className" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="ClassName" return-type="ClassNameMapper">
+			<finder-column name="className" />
+		</finder>
+	</entity>
 	<entity name="Company" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

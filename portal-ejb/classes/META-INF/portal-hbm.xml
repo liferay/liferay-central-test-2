@@ -46,6 +46,13 @@
 		<property name="mailing" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
+	<class name="com.liferay.portal.model.impl.ClassNameMapperImpl" table="ClassNameMapper">
+		<cache usage="read-write" />
+		<id name="classNameMapperId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
 	<class name="com.liferay.portal.model.impl.CompanyImpl" table="Company">
 		<cache usage="read-write" />
 		<id name="companyId" type="long">

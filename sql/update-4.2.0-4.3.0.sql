@@ -17,6 +17,11 @@ alter_column_type BookmarksFolder parentFolderId LONG;
 alter_column_type CalEvent eventId LONG;
 alter_column_type CalEvent groupId LONG;
 
+create table ClassNameMapper (
+	classNameMapperId LONG primary key,
+	className VARCHAR(75) null
+);
+
 alter table Company add accountId LONG;
 alter table Company add webId VARCHAR(75) null;
 update Company set webId = companyId;

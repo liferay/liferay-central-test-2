@@ -1,0 +1,253 @@
+/**
+ * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portal.service.persistence;
+
+import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.util.PropsUtil;
+
+import com.liferay.util.GetterUtil;
+import com.liferay.util.Validator;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * <a href="ClassNameMapperUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class ClassNameMapperUtil {
+	public static com.liferay.portal.model.ClassNameMapper create(
+		long classNameMapperId) {
+		return getPersistence().create(classNameMapperId);
+	}
+
+	public static com.liferay.portal.model.ClassNameMapper remove(
+		long classNameMapperId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchClassNameMapperException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(findByPrimaryKey(classNameMapperId));
+		}
+
+		com.liferay.portal.model.ClassNameMapper classNameMapper = getPersistence()
+																	   .remove(classNameMapperId);
+
+		if (listener != null) {
+			listener.onAfterRemove(classNameMapper);
+		}
+
+		return classNameMapper;
+	}
+
+	public static com.liferay.portal.model.ClassNameMapper remove(
+		com.liferay.portal.model.ClassNameMapper classNameMapper)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(classNameMapper);
+		}
+
+		classNameMapper = getPersistence().remove(classNameMapper);
+
+		if (listener != null) {
+			listener.onAfterRemove(classNameMapper);
+		}
+
+		return classNameMapper;
+	}
+
+	public static com.liferay.portal.model.ClassNameMapper update(
+		com.liferay.portal.model.ClassNameMapper classNameMapper)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = classNameMapper.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(classNameMapper);
+			}
+			else {
+				listener.onBeforeUpdate(classNameMapper);
+			}
+		}
+
+		classNameMapper = getPersistence().update(classNameMapper);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(classNameMapper);
+			}
+			else {
+				listener.onAfterUpdate(classNameMapper);
+			}
+		}
+
+		return classNameMapper;
+	}
+
+	public static com.liferay.portal.model.ClassNameMapper update(
+		com.liferay.portal.model.ClassNameMapper classNameMapper,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = classNameMapper.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(classNameMapper);
+			}
+			else {
+				listener.onBeforeUpdate(classNameMapper);
+			}
+		}
+
+		classNameMapper = getPersistence().update(classNameMapper, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(classNameMapper);
+			}
+			else {
+				listener.onAfterUpdate(classNameMapper);
+			}
+		}
+
+		return classNameMapper;
+	}
+
+	public static com.liferay.portal.model.ClassNameMapper findByPrimaryKey(
+		long classNameMapperId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchClassNameMapperException {
+		return getPersistence().findByPrimaryKey(classNameMapperId);
+	}
+
+	public static com.liferay.portal.model.ClassNameMapper fetchByPrimaryKey(
+		long classNameMapperId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(classNameMapperId);
+	}
+
+	public static com.liferay.portal.model.ClassNameMapper findByClassName(
+		java.lang.String className)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchClassNameMapperException {
+		return getPersistence().findByClassName(className);
+	}
+
+	public static com.liferay.portal.model.ClassNameMapper fetchByClassName(
+		java.lang.String className) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByClassName(className);
+	}
+
+	public static java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findWithDynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
+			end);
+	}
+
+	public static java.util.List findAll()
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findAll();
+	}
+
+	public static java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(begin, end);
+	}
+
+	public static java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(begin, end, obc);
+	}
+
+	public static void removeByClassName(java.lang.String className)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchClassNameMapperException {
+		getPersistence().removeByClassName(className);
+	}
+
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
+	public static int countByClassName(java.lang.String className)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByClassName(className);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
+	}
+
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
+	public static ClassNameMapperPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(ClassNameMapperPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static ClassNameMapperUtil _getUtil() {
+		if (_util == null) {
+			_util = (ClassNameMapperUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = ClassNameMapperUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.ClassNameMapper"));
+	private static Log _log = LogFactory.getLog(ClassNameMapperUtil.class);
+	private static ClassNameMapperUtil _util;
+	private ClassNameMapperPersistence _persistence;
+}

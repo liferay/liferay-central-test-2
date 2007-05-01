@@ -62,6 +62,10 @@
 		<field name="mailing" type="boolean" />
 		<field name="primary" type="boolean" />
 	</model>
+	<model name="com.liferay.portal.model.ClassNameMapper">
+		<field name="classNameMapperId" type="long" />
+		<field name="className" type="String" />
+	</model>
 	<model name="com.liferay.portal.model.Company">
 		<default-hints>
 			<hint name="display-width">150</hint>
