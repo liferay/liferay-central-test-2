@@ -79,11 +79,11 @@ public class PollsChoiceSoap implements Serializable {
 		setChoiceId(pk.choiceId);
 	}
 
-	public String getQuestionId() {
+	public long getQuestionId() {
 		return _questionId;
 	}
 
-	public void setQuestionId(String questionId) {
+	public void setQuestionId(long questionId) {
 		_questionId = questionId;
 	}
 
@@ -103,7 +103,7 @@ public class PollsChoiceSoap implements Serializable {
 		_description = description;
 	}
 
-	private String _questionId;
+	private long _questionId;
 	private String _choiceId;
 	private String _description;
 }

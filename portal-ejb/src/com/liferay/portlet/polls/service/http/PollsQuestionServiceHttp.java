@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -230,16 +231,11 @@ public class PollsQuestionServiceHttp {
 	}
 
 	public static void deleteQuestion(HttpPrincipal httpPrincipal,
-		java.lang.String questionId)
+		long questionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = questionId;
-
-			if (questionId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(questionId);
 			MethodWrapper methodWrapper = new MethodWrapper(PollsQuestionServiceUtil.class.getName(),
 					"deleteQuestion", new Object[] { paramObj0 });
 
@@ -265,16 +261,11 @@ public class PollsQuestionServiceHttp {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion getQuestion(
-		HttpPrincipal httpPrincipal, java.lang.String questionId)
+		HttpPrincipal httpPrincipal, long questionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = questionId;
-
-			if (questionId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(questionId);
 			MethodWrapper methodWrapper = new MethodWrapper(PollsQuestionServiceUtil.class.getName(),
 					"getQuestion", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -303,20 +294,14 @@ public class PollsQuestionServiceHttp {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
-		HttpPrincipal httpPrincipal, java.lang.String questionId,
-		java.lang.String title, java.lang.String description,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		java.util.List choices)
+		HttpPrincipal httpPrincipal, long questionId, java.lang.String title,
+		java.lang.String description, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, java.util.List choices)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = questionId;
-
-			if (questionId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(questionId);
 			Object paramObj1 = title;
 
 			if (title == null) {

@@ -34,22 +34,22 @@ import java.io.Serializable;
  *
  */
 public class PollsChoicePK implements Comparable, Serializable {
-	public String questionId;
+	public long questionId;
 	public String choiceId;
 
 	public PollsChoicePK() {
 	}
 
-	public PollsChoicePK(String questionId, String choiceId) {
+	public PollsChoicePK(long questionId, String choiceId) {
 		this.questionId = questionId;
 		this.choiceId = choiceId;
 	}
 
-	public String getQuestionId() {
+	public long getQuestionId() {
 		return questionId;
 	}
 
-	public void setQuestionId(String questionId) {
+	public void setQuestionId(long questionId) {
 		this.questionId = questionId;
 	}
 
@@ -68,7 +68,16 @@ public class PollsChoicePK implements Comparable, Serializable {
 
 		PollsChoicePK pk = (PollsChoicePK)obj;
 		int value = 0;
-		value = questionId.compareTo(pk.questionId);
+
+		if (questionId < pk.questionId) {
+			value = -1;
+		}
+		else if (questionId > pk.questionId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -97,8 +106,7 @@ public class PollsChoicePK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((questionId.equals(pk.questionId)) &&
-				(choiceId.equals(pk.choiceId))) {
+		if ((questionId == pk.questionId) && (choiceId.equals(pk.choiceId))) {
 			return true;
 		}
 		else {

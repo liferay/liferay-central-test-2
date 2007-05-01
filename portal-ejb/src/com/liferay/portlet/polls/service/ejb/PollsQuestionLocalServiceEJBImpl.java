@@ -113,7 +113,7 @@ public class PollsQuestionLocalServiceEJBImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void addQuestionResources(java.lang.String questionId,
+	public void addQuestionResources(long questionId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -130,7 +130,7 @@ public class PollsQuestionLocalServiceEJBImpl
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addQuestionResources(java.lang.String questionId,
+	public void addQuestionResources(long questionId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -149,7 +149,7 @@ public class PollsQuestionLocalServiceEJBImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteQuestion(java.lang.String questionId)
+	public void deleteQuestion(long questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PollsQuestionLocalServiceFactory.getTxImpl().deleteQuestion(questionId);
@@ -169,7 +169,7 @@ public class PollsQuestionLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.polls.model.PollsQuestion getQuestion(
-		java.lang.String questionId)
+		long questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PollsQuestionLocalServiceFactory.getTxImpl().getQuestion(questionId);
@@ -192,7 +192,7 @@ public class PollsQuestionLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
-		long userId, java.lang.String questionId, java.lang.String title,
+		long userId, long questionId, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices)

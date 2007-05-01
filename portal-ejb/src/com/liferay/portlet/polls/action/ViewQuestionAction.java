@@ -37,7 +37,7 @@ import javax.portlet.ActionRequest;
 public class ViewQuestionAction extends EditQuestionAction {
 
 	protected void updateQuestion(ActionRequest req) throws Exception {
-		String questionId = ParamUtil.getString(req, "questionId");
+		long questionId = ParamUtil.getLong(req, "questionId");
 		String choiceId = ParamUtil.getString(req, "choiceId");
 
 		PollsVoteServiceUtil.addVote(questionId, choiceId);

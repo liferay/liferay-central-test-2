@@ -139,7 +139,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 		portletURL.setParameter("struts_action", "/polls/view_question");
 		portletURL.setParameter("redirect", redirect);
-		portletURL.setParameter("questionId", question.getQuestionId());
+		portletURL.setParameter("questionId", String.valueOf(question.getQuestionId()));
 
 		List headerNames = new ArrayList();
 

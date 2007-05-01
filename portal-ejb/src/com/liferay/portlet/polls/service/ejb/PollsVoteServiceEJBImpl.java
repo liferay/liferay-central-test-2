@@ -54,8 +54,8 @@ import javax.ejb.SessionContext;
  *
  */
 public class PollsVoteServiceEJBImpl implements PollsVoteService, SessionBean {
-	public com.liferay.portlet.polls.model.PollsVote addVote(
-		java.lang.String questionId, java.lang.String choiceId)
+	public com.liferay.portlet.polls.model.PollsVote addVote(long questionId,
+		java.lang.String choiceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

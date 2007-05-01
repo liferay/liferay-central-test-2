@@ -47,13 +47,13 @@ import java.util.Date;
  *
  */
 public interface PollsQuestionModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getQuestionId();
+	public long getQuestionId();
 
-	public void setQuestionId(String questionId);
+	public void setQuestionId(long questionId);
 
 	public long getGroupId();
 

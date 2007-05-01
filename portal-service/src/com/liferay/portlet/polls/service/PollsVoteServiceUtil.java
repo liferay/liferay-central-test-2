@@ -50,7 +50,7 @@ package com.liferay.portlet.polls.service;
  */
 public class PollsVoteServiceUtil {
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
-		java.lang.String questionId, java.lang.String choiceId)
+		long questionId, java.lang.String choiceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PollsVoteService pollsVoteService = PollsVoteServiceFactory.getService();

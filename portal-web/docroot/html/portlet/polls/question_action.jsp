@@ -34,7 +34,7 @@ PollsQuestion question = (PollsQuestion)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/polls/edit_question" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="questionId" value="<%= question.getQuestionId() %>" />
+		<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -44,7 +44,7 @@ PollsQuestion question = (PollsQuestion)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= PollsQuestion.class.getName() %>"
 		modelResourceDescription="<%= question.getTitle() %>"
-		resourcePrimKey="<%= question.getPrimaryKey().toString() %>"
+		resourcePrimKey="<%= String.valueOf(question.getQuestionId()) %>"
 		var="permissionsURL"
 	/>
 
@@ -56,7 +56,7 @@ PollsQuestion question = (PollsQuestion)row.getObject();
 		<portlet:param name="struts_action" value="/polls/edit_question" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="questionId" value="<%= question.getQuestionId() %>" />
+		<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />

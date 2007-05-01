@@ -40,7 +40,7 @@ import java.util.List;
 public class PollsChoiceLocalServiceImpl
 	extends PollsChoiceLocalServiceBaseImpl {
 
-	public PollsChoice getChoice(String questionId, String choiceId)
+	public PollsChoice getChoice(long questionId, String choiceId)
 		throws PortalException, SystemException {
 
 		PollsChoicePK pk = new PollsChoicePK(questionId, choiceId);
@@ -48,7 +48,7 @@ public class PollsChoiceLocalServiceImpl
 		return PollsChoiceUtil.findByPrimaryKey(pk);
 	}
 
-	public List getChoices(String questionId) throws SystemException {
+	public List getChoices(long questionId) throws SystemException {
 		return PollsChoiceUtil.findByQuestionId(questionId);
 	}
 

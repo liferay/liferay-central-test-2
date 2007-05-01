@@ -56,7 +56,7 @@ import java.util.Date;
 public class PollsQuestionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PollsQuestion";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "questionId", new Integer(Types.VARCHAR) },
+			{ "questionId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
@@ -71,9 +71,6 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_QUESTIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion.questionId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -89,27 +86,20 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 	public PollsQuestionModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _questionId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setQuestionId(pk);
 	}
 
-	public String getQuestionId() {
-		return GetterUtil.getString(_questionId);
+	public long getQuestionId() {
+		return _questionId;
 	}
 
-	public void setQuestionId(String questionId) {
-		if (((questionId == null) && (_questionId != null)) ||
-				((questionId != null) && (_questionId == null)) ||
-				((questionId != null) && (_questionId != null) &&
-				!questionId.equals(_questionId))) {
-			if (!XSS_ALLOW_QUESTIONID) {
-				questionId = XSSUtil.strip(questionId);
-			}
-
+	public void setQuestionId(long questionId) {
+		if (questionId != _questionId) {
 			_questionId = questionId;
 		}
 	}
@@ -295,9 +285,9 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = pollsQuestion.getPrimaryKey();
+		long pk = pollsQuestion.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -306,10 +296,10 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _questionId;
+	private long _questionId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;

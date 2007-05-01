@@ -28,6 +28,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.polls.NoSuchQuestionException;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
+import com.liferay.util.GetterUtil;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -54,7 +55,8 @@ public class ViewAction extends PortletAction {
 		try {
 			PortletPreferences prefs = req.getPreferences();
 
-			String questionId = prefs.getValue("question-id", StringPool.BLANK);
+			long questionId = GetterUtil.getLong(
+				prefs.getValue("question-id", StringPool.BLANK));
 
 			PollsQuestion question =
 				PollsQuestionServiceUtil.getQuestion(questionId);

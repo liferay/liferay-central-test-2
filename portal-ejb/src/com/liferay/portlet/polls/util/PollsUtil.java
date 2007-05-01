@@ -55,7 +55,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class PollsUtil {
 
-	public static CategoryDataset getVotesDataset(String questionId)
+	public static CategoryDataset getVotesDataset(long questionId)
 		throws SystemException {
 
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -78,7 +78,7 @@ public class PollsUtil {
 		return dataset;
 	}
 
-	public static boolean hasVoted(HttpServletRequest req, String questionId)
+	public static boolean hasVoted(HttpServletRequest req, long questionId)
 		throws PortalException, SystemException {
 
 		ThemeDisplay themeDisplay =
@@ -110,19 +110,19 @@ public class PollsUtil {
 		}
 	}
 
-	public static void saveVote(ActionRequest req, String questionId) {
+	public static void saveVote(ActionRequest req, long questionId) {
 		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
 
 		saveVote(reqImpl.getHttpServletRequest(), questionId);
 	}
 
-	public static void saveVote(RenderRequest req, String questionId) {
+	public static void saveVote(RenderRequest req, long questionId) {
 		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
 
 		saveVote(reqImpl.getHttpServletRequest(), questionId);
 	}
 
-	public static void saveVote(HttpServletRequest req, String questionId) {
+	public static void saveVote(HttpServletRequest req, long questionId) {
 		HttpSession ses = req.getSession();
 
 		ses.setAttribute(

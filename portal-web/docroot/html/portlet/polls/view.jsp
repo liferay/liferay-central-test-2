@@ -56,7 +56,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	PollsQuestion question = (PollsQuestion)results.get(i);
 
-	ResultRow row = new ResultRow(question, question.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(question, question.getQuestionId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -64,7 +64,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	rowURL.setParameter("struts_action", "/polls/view_question");
 	rowURL.setParameter("redirect", currentURL);
-	rowURL.setParameter("questionId", question.getQuestionId());
+	rowURL.setParameter("questionId", String.valueOf(question.getQuestionId()));
 
 	// Title
 

@@ -122,7 +122,7 @@ public class PollsQuestionServiceSoap {
 		}
 	}
 
-	public static void deleteQuestion(java.lang.String questionId)
+	public static void deleteQuestion(long questionId)
 		throws RemoteException {
 		try {
 			PollsQuestionServiceUtil.deleteQuestion(questionId);
@@ -134,7 +134,7 @@ public class PollsQuestionServiceSoap {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestionSoap getQuestion(
-		java.lang.String questionId) throws RemoteException {
+		long questionId) throws RemoteException {
 		try {
 			com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.getQuestion(questionId);
 
@@ -147,11 +147,10 @@ public class PollsQuestionServiceSoap {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestionSoap updateQuestion(
-		java.lang.String questionId, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, java.util.List choices)
-		throws RemoteException {
+		long questionId, java.lang.String title, java.lang.String description,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		java.util.List choices) throws RemoteException {
 		try {
 			com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.updateQuestion(questionId,
 					title, description, expirationDateMonth, expirationDateDay,

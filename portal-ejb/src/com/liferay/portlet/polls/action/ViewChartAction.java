@@ -68,7 +68,8 @@ public class ViewChartAction extends Action {
 
 			User user = themeDisplay.getUser();
 
-			String questionId = ParamUtil.getString(req, "questionId");
+			long questionId = ParamUtil.getLong(req, "questionId");
+
 			String chartType = ParamUtil.getString(req, "chartType", "pie");
 
 			CategoryDataset dataset = PollsUtil.getVotesDataset(questionId);

@@ -55,16 +55,13 @@ import java.sql.Types;
 public class PollsChoiceModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PollsChoice";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "questionId", new Integer(Types.VARCHAR) },
+			{ "questionId", new Integer(Types.BIGINT) },
 			{ "choiceId", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsChoice"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_QUESTIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.polls.model.PollsChoice.questionId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CHOICEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsChoice.choiceId"),
 			XSS_ALLOW_BY_MODEL);
@@ -86,19 +83,12 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 		setChoiceId(pk.choiceId);
 	}
 
-	public String getQuestionId() {
-		return GetterUtil.getString(_questionId);
+	public long getQuestionId() {
+		return _questionId;
 	}
 
-	public void setQuestionId(String questionId) {
-		if (((questionId == null) && (_questionId != null)) ||
-				((questionId != null) && (_questionId == null)) ||
-				((questionId != null) && (_questionId != null) &&
-				!questionId.equals(_questionId))) {
-			if (!XSS_ALLOW_QUESTIONID) {
-				questionId = XSSUtil.strip(questionId);
-			}
-
+	public void setQuestionId(long questionId) {
+		if (questionId != _questionId) {
 			_questionId = questionId;
 		}
 	}
@@ -190,7 +180,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 		return getPrimaryKey().hashCode();
 	}
 
-	private String _questionId;
+	private long _questionId;
 	private String _choiceId;
 	private String _description;
 }

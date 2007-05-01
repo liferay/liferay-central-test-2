@@ -62,7 +62,7 @@ public class EditConfigurationAction extends PortletAction {
 				return;
 			}
 
-			String questionId = ParamUtil.getString(req, "questionId");
+			long questionId = ParamUtil.getLong(req, "questionId");
 
 			PollsQuestionServiceUtil.getQuestion(questionId);
 
@@ -73,7 +73,7 @@ public class EditConfigurationAction extends PortletAction {
 				PortletPreferencesFactory.getPortletSetup(
 					req, portletResource, true, true);
 
-			prefs.setValue("question-id", questionId);
+			prefs.setValue("question-id", String.valueOf(questionId));
 
 			prefs.store();
 

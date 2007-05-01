@@ -53,7 +53,7 @@ import java.util.List;
  *
  */
 public class PollsQuestionPersistence extends BasePersistence {
-	public PollsQuestion create(String questionId) {
+	public PollsQuestion create(long questionId) {
 		PollsQuestion pollsQuestion = new PollsQuestionImpl();
 		pollsQuestion.setNew(true);
 		pollsQuestion.setPrimaryKey(questionId);
@@ -61,7 +61,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 		return pollsQuestion;
 	}
 
-	public PollsQuestion remove(String questionId)
+	public PollsQuestion remove(long questionId)
 		throws NoSuchQuestionException, SystemException {
 		Session session = null;
 
@@ -69,7 +69,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 			session = openSession();
 
 			PollsQuestion pollsQuestion = (PollsQuestion)session.get(PollsQuestionImpl.class,
-					questionId);
+					new Long(questionId));
 
 			if (pollsQuestion == null) {
 				if (_log.isWarnEnabled()) {
@@ -150,7 +150,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 		}
 	}
 
-	public PollsQuestion findByPrimaryKey(String questionId)
+	public PollsQuestion findByPrimaryKey(long questionId)
 		throws NoSuchQuestionException, SystemException {
 		PollsQuestion pollsQuestion = fetchByPrimaryKey(questionId);
 
@@ -167,7 +167,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 		return pollsQuestion;
 	}
 
-	public PollsQuestion fetchByPrimaryKey(String questionId)
+	public PollsQuestion fetchByPrimaryKey(long questionId)
 		throws SystemException {
 		Session session = null;
 
@@ -175,7 +175,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 			session = openSession();
 
 			return (PollsQuestion)session.get(PollsQuestionImpl.class,
-				questionId);
+				new Long(questionId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -295,7 +295,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 		}
 	}
 
-	public PollsQuestion[] findByGroupId_PrevAndNext(String questionId,
+	public PollsQuestion[] findByGroupId_PrevAndNext(long questionId,
 		long groupId, OrderByComparator obc)
 		throws NoSuchQuestionException, SystemException {
 		PollsQuestion pollsQuestion = findByPrimaryKey(questionId);

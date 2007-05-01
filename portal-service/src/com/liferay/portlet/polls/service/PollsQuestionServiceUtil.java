@@ -82,7 +82,7 @@ public class PollsQuestionServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
-	public static void deleteQuestion(java.lang.String questionId)
+	public static void deleteQuestion(long questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
@@ -90,7 +90,7 @@ public class PollsQuestionServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion getQuestion(
-		java.lang.String questionId)
+		long questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
@@ -99,10 +99,10 @@ public class PollsQuestionServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
-		java.lang.String questionId, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, java.util.List choices)
+		long questionId, java.lang.String title, java.lang.String description,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		java.util.List choices)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();

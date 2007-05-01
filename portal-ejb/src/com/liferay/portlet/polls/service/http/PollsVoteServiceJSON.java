@@ -68,8 +68,7 @@ import org.json.JSONObject;
  *
  */
 public class PollsVoteServiceJSON {
-	public static JSONObject addVote(java.lang.String questionId,
-		java.lang.String choiceId)
+	public static JSONObject addVote(long questionId, java.lang.String choiceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.polls.model.PollsVote returnValue = PollsVoteServiceUtil.addVote(questionId,

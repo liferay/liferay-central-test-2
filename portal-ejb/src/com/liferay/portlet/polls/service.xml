@@ -7,7 +7,7 @@
 
 		<!-- PK fields -->
 
-		<column name="questionId" type="String" primary="true" />
+		<column name="questionId" type="long" primary="true" />
 		<column name="choiceId" type="String" primary="true" />
 
 		<!-- Other fields -->
@@ -30,7 +30,7 @@
 
 		<!-- PK fields -->
 
-		<column name="questionId" type="String" primary="true" />
+		<column name="questionId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -71,7 +71,7 @@
 
 		<!-- PK fields -->
 
-		<column name="questionId" type="String" primary="true" />
+		<column name="questionId" type="long" primary="true" />
 		<column name="userId" type="long" primary="true" />
 
 		<!-- Other fields -->

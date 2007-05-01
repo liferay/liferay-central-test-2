@@ -53,9 +53,9 @@ public interface PollsVoteModel extends BaseModel {
 
 	public void setPrimaryKey(PollsVotePK pk);
 
-	public String getQuestionId();
+	public long getQuestionId();
 
-	public void setQuestionId(String questionId);
+	public void setQuestionId(long questionId);
 
 	public long getUserId();
 

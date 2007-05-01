@@ -46,7 +46,7 @@ import java.util.List;
  */
 public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 
-	public PollsVote addVote(long userId, String questionId, String choiceId)
+	public PollsVote addVote(long userId, long questionId, String choiceId)
 		throws PortalException, SystemException {
 
 		// Question
@@ -87,7 +87,7 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 		return vote;
 	}
 
-	public PollsVote getVote(String questionId, long userId)
+	public PollsVote getVote(long questionId, long userId)
 		throws PortalException, SystemException {
 
 		PollsVotePK pk = new PollsVotePK(questionId, userId);
@@ -95,23 +95,23 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 		return PollsVoteUtil.findByPrimaryKey(pk);
 	}
 
-	public List getVotes(String questionId, int begin, int end)
+	public List getVotes(long questionId, int begin, int end)
 		throws SystemException {
 
 		return PollsVoteUtil.findByQuestionId(questionId, begin, end);
 	}
 
-	public List getVotes(String questionId, String choiceId, int begin, int end)
+	public List getVotes(long questionId, String choiceId, int begin, int end)
 		throws SystemException {
 
 		return PollsVoteUtil.findByQ_C(questionId, choiceId,  begin, end);
 	}
 
-	public int getVotesCount(String questionId) throws SystemException {
+	public int getVotesCount(long questionId) throws SystemException {
 		return PollsVoteUtil.countByQuestionId(questionId);
 	}
 
-	public int getVotesCount(String questionId, String choiceId)
+	public int getVotesCount(long questionId, String choiceId)
 		throws SystemException {
 
 		return PollsVoteUtil.countByQ_C(questionId, choiceId);

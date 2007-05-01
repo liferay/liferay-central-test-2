@@ -877,7 +877,7 @@
 	</class>
 	<class name="com.liferay.portlet.polls.model.impl.PollsQuestionImpl" table="PollsQuestion">
 		<cache usage="read-write" />
-		<id name="questionId" type="java.lang.String">
+		<id name="questionId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />

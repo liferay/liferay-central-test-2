@@ -82,7 +82,7 @@ public class PollsQuestionServiceImpl
 			guestPermissions);
 	}
 
-	public void deleteQuestion(String questionId)
+	public void deleteQuestion(long questionId)
 		throws PortalException, SystemException {
 
 		PollsQuestionPermission.check(
@@ -91,7 +91,7 @@ public class PollsQuestionServiceImpl
 		PollsQuestionLocalServiceUtil.deleteQuestion(questionId);
 	}
 
-	public PollsQuestion getQuestion(String questionId)
+	public PollsQuestion getQuestion(long questionId)
 		throws PortalException, SystemException {
 
 		PollsQuestionPermission.check(
@@ -101,7 +101,7 @@ public class PollsQuestionServiceImpl
 	}
 
 	public PollsQuestion updateQuestion(
-			String questionId, String title, String description,
+			long questionId, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire, List choices)

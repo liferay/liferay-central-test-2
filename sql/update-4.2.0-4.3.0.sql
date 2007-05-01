@@ -163,7 +163,12 @@ create table PluginSetting (
 	active_ BOOLEAN
 );
 
+alter_column_type PollsChoice questionId LONG;
+
+alter_column_type PollsQuestion questionId LONG;
 alter_column_type PollsQuestion groupId LONG;
+
+alter_column_type PollsVote questionId LONG;
 
 alter_column_type Region regionId LONG;
 

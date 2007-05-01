@@ -113,8 +113,7 @@ public class PollsQuestionLocalServiceImpl
 
 		validate(title, description, choices);
 
-		String questionId = String.valueOf(CounterLocalServiceUtil.increment(
-			PollsQuestion.class.getName()));
+		long questionId = CounterLocalServiceUtil.increment();
 
 		PollsQuestion question = PollsQuestionUtil.create(questionId);
 
@@ -160,7 +159,7 @@ public class PollsQuestionLocalServiceImpl
 	}
 
 	public void addQuestionResources(
-			String questionId, boolean addCommunityPermissions,
+			long questionId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -178,12 +177,12 @@ public class PollsQuestionLocalServiceImpl
 		ResourceLocalServiceUtil.addResources(
 			question.getCompanyId(), question.getGroupId(),
 			question.getUserId(), PollsQuestion.class.getName(),
-			question.getPrimaryKey().toString(), false, addCommunityPermissions,
+			question.getQuestionId(), false, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public void addQuestionResources(
-			String questionId, String[] communityPermissions,
+			long questionId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -200,11 +199,10 @@ public class PollsQuestionLocalServiceImpl
 		ResourceLocalServiceUtil.addModelResources(
 			question.getCompanyId(), question.getGroupId(),
 			question.getUserId(), PollsQuestion.class.getName(),
-			question.getPrimaryKey().toString(), communityPermissions,
-			guestPermissions);
+			question.getQuestionId(), communityPermissions, guestPermissions);
 	}
 
-	public void deleteQuestion(String questionId)
+	public void deleteQuestion(long questionId)
 		throws PortalException, SystemException {
 
 		PollsQuestion question = PollsQuestionUtil.findByPrimaryKey(questionId);
@@ -227,7 +225,7 @@ public class PollsQuestionLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			question.getCompanyId(), PollsQuestion.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, question.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, question.getQuestionId());
 
 		// Question
 
@@ -246,7 +244,7 @@ public class PollsQuestionLocalServiceImpl
 		}
 	}
 
-	public PollsQuestion getQuestion(String questionId)
+	public PollsQuestion getQuestion(long questionId)
 		throws PortalException, SystemException {
 
 		return PollsQuestionUtil.findByPrimaryKey(questionId);
@@ -267,7 +265,7 @@ public class PollsQuestionLocalServiceImpl
 	}
 
 	public PollsQuestion updateQuestion(
-			long userId, String questionId, String title, String description,
+			long userId, long questionId, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire, List choices)

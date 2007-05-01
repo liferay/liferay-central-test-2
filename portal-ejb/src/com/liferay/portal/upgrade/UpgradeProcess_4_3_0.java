@@ -33,6 +33,7 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradeGroup;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeOrgLabor;
 import com.liferay.portal.upgrade.v4_3_0.UpgradePasswordTracker;
 import com.liferay.portal.upgrade.v4_3_0.UpgradePhone;
+import com.liferay.portal.upgrade.v4_3_0.UpgradePolls;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeResource;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeSubscription;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUser;
@@ -61,7 +62,7 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		// Upgrade Resource_
+		// Upgrade major tables
 
 		upgrade(new UpgradeCompany());
 		upgrade(new UpgradeResource());
@@ -80,6 +81,7 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradeOrgLabor());
 		upgrade(new UpgradePasswordTracker());
 		upgrade(new UpgradePhone());
+		upgrade(new UpgradePolls());
 		upgrade(new UpgradeSubscription());
 		upgrade(new UpgradeWebsite());
 		upgrade(new UpgradeWiki());

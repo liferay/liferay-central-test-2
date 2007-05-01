@@ -184,7 +184,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByQuestionId(String questionId) throws SystemException {
+	public List findByQuestionId(long questionId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -193,14 +193,7 @@ public class PollsChoicePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
-
-			if (questionId == null) {
-				query.append("questionId IS NULL");
-			}
-			else {
-				query.append("questionId = ?");
-			}
-
+			query.append("questionId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("choiceId ASC");
@@ -209,10 +202,7 @@ public class PollsChoicePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (questionId != null) {
-				q.setString(queryPos++, questionId);
-			}
+			q.setLong(queryPos++, questionId);
 
 			return q.list();
 		}
@@ -224,12 +214,12 @@ public class PollsChoicePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByQuestionId(String questionId, int begin, int end)
+	public List findByQuestionId(long questionId, int begin, int end)
 		throws SystemException {
 		return findByQuestionId(questionId, begin, end, null);
 	}
 
-	public List findByQuestionId(String questionId, int begin, int end,
+	public List findByQuestionId(long questionId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -239,14 +229,7 @@ public class PollsChoicePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
-
-			if (questionId == null) {
-				query.append("questionId IS NULL");
-			}
-			else {
-				query.append("questionId = ?");
-			}
-
+			query.append("questionId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -262,10 +245,7 @@ public class PollsChoicePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (questionId != null) {
-				q.setString(queryPos++, questionId);
-			}
+			q.setLong(queryPos++, questionId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -277,7 +257,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		}
 	}
 
-	public PollsChoice findByQuestionId_First(String questionId,
+	public PollsChoice findByQuestionId_First(long questionId,
 		OrderByComparator obc) throws NoSuchChoiceException, SystemException {
 		List list = findByQuestionId(questionId, 0, 1, obc);
 
@@ -295,7 +275,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		}
 	}
 
-	public PollsChoice findByQuestionId_Last(String questionId,
+	public PollsChoice findByQuestionId_Last(long questionId,
 		OrderByComparator obc) throws NoSuchChoiceException, SystemException {
 		int count = countByQuestionId(questionId);
 		List list = findByQuestionId(questionId, count - 1, count, obc);
@@ -315,7 +295,7 @@ public class PollsChoicePersistence extends BasePersistence {
 	}
 
 	public PollsChoice[] findByQuestionId_PrevAndNext(
-		PollsChoicePK pollsChoicePK, String questionId, OrderByComparator obc)
+		PollsChoicePK pollsChoicePK, long questionId, OrderByComparator obc)
 		throws NoSuchChoiceException, SystemException {
 		PollsChoice pollsChoice = findByPrimaryKey(pollsChoicePK);
 		int count = countByQuestionId(questionId);
@@ -327,14 +307,7 @@ public class PollsChoicePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
-
-			if (questionId == null) {
-				query.append("questionId IS NULL");
-			}
-			else {
-				query.append("questionId = ?");
-			}
-
+			query.append("questionId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -350,10 +323,7 @@ public class PollsChoicePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (questionId != null) {
-				q.setString(queryPos++, questionId);
-			}
+			q.setLong(queryPos++, questionId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pollsChoice);
@@ -451,7 +421,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByQuestionId(String questionId) throws SystemException {
+	public void removeByQuestionId(long questionId) throws SystemException {
 		Iterator itr = findByQuestionId(questionId).iterator();
 
 		while (itr.hasNext()) {
@@ -468,7 +438,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByQuestionId(String questionId) throws SystemException {
+	public int countByQuestionId(long questionId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -478,24 +448,14 @@ public class PollsChoicePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
-
-			if (questionId == null) {
-				query.append("questionId IS NULL");
-			}
-			else {
-				query.append("questionId = ?");
-			}
-
+			query.append("questionId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (questionId != null) {
-				q.setString(queryPos++, questionId);
-			}
+			q.setLong(queryPos++, questionId);
 
 			Iterator itr = q.list().iterator();
 

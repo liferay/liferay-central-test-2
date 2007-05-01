@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/polls_display/init.jsp" %>
 
 <%
-questionId = ParamUtil.getString(request, "questionId", questionId);
+questionId = ParamUtil.getLong(request, "questionId", questionId);
 
 List questions = PollsQuestionLocalServiceUtil.getQuestions(portletGroupId.longValue());
 %>
@@ -49,7 +49,7 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(portletGroupId.longV
 				PollsQuestion question = (PollsQuestion)questions.get(i);
 			%>
 
-				<option <%= questionId.equals(question.getQuestionId()) ? "selected" : "" %> value="<%= question.getQuestionId() %>"><%= question.getTitle() %></option>
+				<option <%= (questionId == question.getQuestionId()) ? "selected" : "" %> value="<%= question.getQuestionId() %>"><%= question.getTitle() %></option>
 
 			<%
 			}

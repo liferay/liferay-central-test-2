@@ -38,7 +38,7 @@ import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
 public class PollsQuestionPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String questionId,
+			PermissionChecker permissionChecker, long questionId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -58,7 +58,7 @@ public class PollsQuestionPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String questionId,
+			PermissionChecker permissionChecker, long questionId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -75,7 +75,7 @@ public class PollsQuestionPermission {
 
 		return permissionChecker.hasPermission(
 			question.getGroupId(), PollsQuestion.class.getName(),
-			question.getPrimaryKey().toString(), actionId);
+			question.getQuestionId(), actionId);
 	}
 
 }

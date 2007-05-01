@@ -58,10 +58,10 @@ public interface PollsChoiceLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsChoice getChoice(
-		java.lang.String questionId, java.lang.String choiceId)
+		long questionId, java.lang.String choiceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getChoices(java.lang.String questionId)
+	public java.util.List getChoices(long questionId)
 		throws com.liferay.portal.SystemException;
 }

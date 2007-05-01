@@ -826,12 +826,12 @@
 		<field name="priority" type="double" />
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsChoice">
-		<field name="questionId" type="String" />
+		<field name="questionId" type="long" />
 		<field name="choiceId" type="String" />
 		<field name="description" type="String" />
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsQuestion">
-		<field name="questionId" type="String" />
+		<field name="questionId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -846,7 +846,7 @@
 		<field name="lastVoteDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsVote">
-		<field name="questionId" type="String" />
+		<field name="questionId" type="long" />
 		<field name="userId" type="long" />
 		<field name="choiceId" type="String" />
 		<field name="voteDate" type="Date" />

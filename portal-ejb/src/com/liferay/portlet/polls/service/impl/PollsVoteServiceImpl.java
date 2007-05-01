@@ -45,7 +45,7 @@ import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 public class PollsVoteServiceImpl extends PrincipalBean
 	implements PollsVoteService {
 
-	public PollsVote addVote(String questionId, String choiceId)
+	public PollsVote addVote(long questionId, String choiceId)
 		throws PortalException, SystemException {
 
 		long userId = 0;

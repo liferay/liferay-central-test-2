@@ -77,19 +77,19 @@ public class PollsQuestionSoap implements Serializable {
 	public PollsQuestionSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _questionId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setQuestionId(pk);
 	}
 
-	public String getQuestionId() {
+	public long getQuestionId() {
 		return _questionId;
 	}
 
-	public void setQuestionId(String questionId) {
+	public void setQuestionId(long questionId) {
 		_questionId = questionId;
 	}
 
@@ -173,7 +173,7 @@ public class PollsQuestionSoap implements Serializable {
 		_lastVoteDate = lastVoteDate;
 	}
 
-	private String _questionId;
+	private long _questionId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;

@@ -101,13 +101,13 @@ public class PollsQuestionServiceJSON {
 		return PollsQuestionJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteQuestion(java.lang.String questionId)
+	public static void deleteQuestion(long questionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		PollsQuestionServiceUtil.deleteQuestion(questionId);
 	}
 
-	public static JSONObject getQuestion(java.lang.String questionId)
+	public static JSONObject getQuestion(long questionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.getQuestion(questionId);
@@ -115,7 +115,7 @@ public class PollsQuestionServiceJSON {
 		return PollsQuestionJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateQuestion(java.lang.String questionId,
+	public static JSONObject updateQuestion(long questionId,
 		java.lang.String title, java.lang.String description,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,

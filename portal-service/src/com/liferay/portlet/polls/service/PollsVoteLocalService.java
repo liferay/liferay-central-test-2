@@ -58,25 +58,24 @@ public interface PollsVoteLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsVote addVote(long userId,
-		java.lang.String questionId, java.lang.String choiceId)
+		long questionId, java.lang.String choiceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.polls.model.PollsVote getVote(
-		java.lang.String questionId, long userId)
+	public com.liferay.portlet.polls.model.PollsVote getVote(long questionId,
+		long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getVotes(java.lang.String questionId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public java.util.List getVotes(java.lang.String questionId,
-		java.lang.String choiceId, int begin, int end)
+	public java.util.List getVotes(long questionId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int getVotesCount(java.lang.String questionId)
+	public java.util.List getVotes(long questionId, java.lang.String choiceId,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public int getVotesCount(long questionId)
 		throws com.liferay.portal.SystemException;
 
-	public int getVotesCount(java.lang.String questionId,
-		java.lang.String choiceId) throws com.liferay.portal.SystemException;
+	public int getVotesCount(long questionId, java.lang.String choiceId)
+		throws com.liferay.portal.SystemException;
 }

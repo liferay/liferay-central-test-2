@@ -119,7 +119,7 @@ public class PollsQuestionLocalServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
-	public static void addQuestionResources(java.lang.String questionId,
+	public static void addQuestionResources(long questionId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -138,7 +138,7 @@ public class PollsQuestionLocalServiceUtil {
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public static void addQuestionResources(java.lang.String questionId,
+	public static void addQuestionResources(long questionId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -159,7 +159,7 @@ public class PollsQuestionLocalServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
-	public static void deleteQuestion(java.lang.String questionId)
+	public static void deleteQuestion(long questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
@@ -182,7 +182,7 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion getQuestion(
-		java.lang.String questionId)
+		long questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
@@ -212,7 +212,7 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
-		long userId, java.lang.String questionId, java.lang.String title,
+		long userId, long questionId, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices)

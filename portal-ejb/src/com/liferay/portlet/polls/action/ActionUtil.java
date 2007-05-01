@@ -27,7 +27,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -55,11 +54,11 @@ public class ActionUtil {
 	}
 
 	public static void getQuestion(HttpServletRequest req) throws Exception {
-		String questionId = ParamUtil.getString(req, "questionId");
+		long questionId = ParamUtil.getLong(req, "questionId");
 
 		PollsQuestion question = null;
 
-		if (Validator.isNotNull(questionId)) {
+		if (questionId > 0) {
 			question = PollsQuestionServiceUtil.getQuestion(questionId);
 		}
 

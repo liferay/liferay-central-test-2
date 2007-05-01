@@ -53,15 +53,7 @@ import java.util.List;
 public class PollsVoteJSONSerializer {
 	public static JSONObject toJSONObject(PollsVote model) {
 		JSONObject jsonObj = new JSONObject();
-		String questionId = model.getQuestionId();
-
-		if (questionId == null) {
-			jsonObj.put("questionId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("questionId", questionId.toString());
-		}
-
+		jsonObj.put("questionId", model.getQuestionId());
 		jsonObj.put("userId", model.getUserId());
 
 		String choiceId = model.getChoiceId();

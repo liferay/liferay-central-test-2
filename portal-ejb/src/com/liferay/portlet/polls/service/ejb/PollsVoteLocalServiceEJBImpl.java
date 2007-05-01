@@ -67,41 +67,40 @@ public class PollsVoteLocalServiceEJBImpl implements PollsVoteLocalService,
 	}
 
 	public com.liferay.portlet.polls.model.PollsVote addVote(long userId,
-		java.lang.String questionId, java.lang.String choiceId)
+		long questionId, java.lang.String choiceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PollsVoteLocalServiceFactory.getTxImpl().addVote(userId,
 			questionId, choiceId);
 	}
 
-	public com.liferay.portlet.polls.model.PollsVote getVote(
-		java.lang.String questionId, long userId)
+	public com.liferay.portlet.polls.model.PollsVote getVote(long questionId,
+		long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PollsVoteLocalServiceFactory.getTxImpl().getVote(questionId,
 			userId);
 	}
 
-	public java.util.List getVotes(java.lang.String questionId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public java.util.List getVotes(long questionId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return PollsVoteLocalServiceFactory.getTxImpl().getVotes(questionId,
 			begin, end);
 	}
 
-	public java.util.List getVotes(java.lang.String questionId,
-		java.lang.String choiceId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public java.util.List getVotes(long questionId, java.lang.String choiceId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return PollsVoteLocalServiceFactory.getTxImpl().getVotes(questionId,
 			choiceId, begin, end);
 	}
 
-	public int getVotesCount(java.lang.String questionId)
+	public int getVotesCount(long questionId)
 		throws com.liferay.portal.SystemException {
 		return PollsVoteLocalServiceFactory.getTxImpl().getVotesCount(questionId);
 	}
 
-	public int getVotesCount(java.lang.String questionId,
-		java.lang.String choiceId) throws com.liferay.portal.SystemException {
+	public int getVotesCount(long questionId, java.lang.String choiceId)
+		throws com.liferay.portal.SystemException {
 		return PollsVoteLocalServiceFactory.getTxImpl().getVotesCount(questionId,
 			choiceId);
 	}

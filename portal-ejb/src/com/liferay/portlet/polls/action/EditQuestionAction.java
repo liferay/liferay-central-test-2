@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.polls.action;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
@@ -142,7 +141,7 @@ public class EditQuestionAction extends PortletAction {
 	}
 
 	protected void deleteQuestion(ActionRequest req) throws Exception {
-		String questionId = ParamUtil.getString(req, "questionId");
+		long questionId = ParamUtil.getLong(req, "questionId");
 
 		PollsQuestionServiceUtil.deleteQuestion(questionId);
 
@@ -151,7 +150,7 @@ public class EditQuestionAction extends PortletAction {
 	protected void updateQuestion(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String questionId = ParamUtil.getString(req, "questionId");
+		long questionId = ParamUtil.getLong(req, "questionId");
 
 		String title = ParamUtil.getString(req, "title");
 		String description = ParamUtil.getString(req, "description");
@@ -190,7 +189,7 @@ public class EditQuestionAction extends PortletAction {
 					String choiceDescription = ParamUtil.getString(req, param);
 
 					PollsChoice choice = PollsChoiceUtil.create(
-						new PollsChoicePK(StringPool.BLANK, choiceId));
+						new PollsChoicePK(0, choiceId));
 
 					choice.setDescription(choiceDescription);
 
@@ -206,7 +205,7 @@ public class EditQuestionAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (Validator.isNull(questionId)) {
+		if (questionId <= 0) {
 
 			// Add question
 

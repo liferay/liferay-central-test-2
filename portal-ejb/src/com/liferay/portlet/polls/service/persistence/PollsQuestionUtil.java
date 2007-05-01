@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PollsQuestionUtil {
 	public static com.liferay.portlet.polls.model.PollsQuestion create(
-		java.lang.String questionId) {
+		long questionId) {
 		return getPersistence().create(questionId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion remove(
-		java.lang.String questionId)
+		long questionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		ModelListener listener = _getListener();
@@ -140,14 +140,14 @@ public class PollsQuestionUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion findByPrimaryKey(
-		java.lang.String questionId)
+		long questionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByPrimaryKey(questionId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion fetchByPrimaryKey(
-		java.lang.String questionId) throws com.liferay.portal.SystemException {
+		long questionId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(questionId);
 	}
 
@@ -182,7 +182,7 @@ public class PollsQuestionUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion[] findByGroupId_PrevAndNext(
-		java.lang.String questionId, long groupId,
+		long questionId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.polls.NoSuchQuestionException {
