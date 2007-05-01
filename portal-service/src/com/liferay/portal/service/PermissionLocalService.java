@@ -82,8 +82,8 @@ public interface PermissionLocalService {
 		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getOrgGroupPermissions(
-		java.lang.String organizationId, long groupId, long resourceId)
+	public java.util.List getOrgGroupPermissions(long organizationId,
+		long groupId, long resourceId)
 		throws com.liferay.portal.SystemException;
 
 	public long getLatestPermissionId()
@@ -144,8 +144,8 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void setOrgGroupPermissions(java.lang.String organizationId,
-		long groupId, java.lang.String[] actionIds, long resourceId)
+	public void setOrgGroupPermissions(long organizationId, long groupId,
+		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

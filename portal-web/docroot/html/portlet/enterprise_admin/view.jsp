@@ -111,26 +111,26 @@ portletURL.setParameter("tabs1", tabs1);
 			<%
 			UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-			String organizationId = searchTerms.getOrganizationId();
+			long organizationId = searchTerms.getOrganizationId();
 			long roleId = searchTerms.getRoleId();
 			long userGroupId = searchTerms.getUserGroupId();
 
 			if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
-				String locationId = user.getLocation().getOrganizationId();
+				long locationId = user.getLocation().getOrganizationId();
 
 				organizationId = locationId;
 			}
 			else if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-				String parentOrganizationId = user.getOrganization().getOrganizationId();
+				long parentOrganizationId = user.getOrganization().getOrganizationId();
 
-				if (Validator.isNull(organizationId) || organizationId.equals(parentOrganizationId)) {
+				if ((organizationId <= 0) || (organizationId == parentOrganizationId)) {
 					organizationId = parentOrganizationId;
 				}
 				else {
 					try {
 						Organization location = OrganizationLocalServiceUtil.getOrganization(organizationId);
 
-						if (!location.getParentOrganizationId().equals(parentOrganizationId)) {
+						if (location.getParentOrganizationId() != parentOrganizationId) {
 							organizationId = parentOrganizationId;
 						}
 					}
@@ -142,7 +142,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			LinkedHashMap userParams = new LinkedHashMap();
 
-			userParams.put("usersOrgs", organizationId);
+			userParams.put("usersOrgs", new Long(organizationId));
 
 			if (roleId > 0) {
 				userParams.put("usersRoles", new Long(roleId));
@@ -162,7 +162,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			Organization organization = null;
 
-			if (Validator.isNotNull(organizationId)) {
+			if ((organizationId > 0)) {
 				try {
 					organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
 				}
@@ -266,7 +266,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				Organization location = user2.getLocation();
 
-				if (Validator.isNull(location.getOrganizationId())) {
+				if ((location.getOrganizationId() <= 0)) {
 					location = user2.getOrganization();
 				}
 
@@ -405,7 +405,7 @@ portletURL.setParameter("tabs1", tabs1);
 				results.add(user.getLocation());
 			}
 			else {
-				String parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
+				long parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 				String parentOrganizationComparator = StringPool.EQUAL;
 
 				if (!rootOrganization) {
@@ -414,13 +414,13 @@ portletURL.setParameter("tabs1", tabs1);
 						parentOrganizationComparator = StringPool.EQUAL;
 					}
 					else {
-						parentOrganizationId = ParamUtil.getString(request, "parentOrganizationId", OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
+						parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
 
-						if (Validator.isNull(parentOrganizationId)) {
+						if ((parentOrganizationId <= 0)) {
 							parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 						}
 
-						if (parentOrganizationId.equals(OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID)) {
+						if (parentOrganizationId == OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
 							parentOrganizationComparator = StringPool.NOT_EQUAL;
 						}
 					}
@@ -460,7 +460,7 @@ portletURL.setParameter("tabs1", tabs1);
 			for (int i = 0; i < results.size(); i++) {
 				Organization organization = (Organization)results.get(i);
 
-				ResultRow row = new ResultRow(organization, organization.getPrimaryKey().toString(), i);
+				ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
 
 				String strutsAction = "/enterprise_admin/edit_organization";
 
@@ -473,7 +473,7 @@ portletURL.setParameter("tabs1", tabs1);
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", strutsAction);
-				rowURL.setParameter("organizationId", organization.getOrganizationId());
+				rowURL.setParameter("organizationId", String.valueOf(organization.getOrganizationId()));
 
 				// Name
 

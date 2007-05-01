@@ -23,7 +23,7 @@
 %>
 
 <%
-if ((parentOrganizationId == null) || (parentOrganizationId.equals(StringPool.NULL))) {
+if (parentOrganizationId <= 0) {
 	parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 
 	if (organization != null) {
@@ -37,7 +37,7 @@ if (!rootOrganization && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 
 String parentOrganizationName = ParamUtil.getString(request, "parentOrganizationName");
 
-if (!parentOrganizationId.equals(OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID)) {
+if (parentOrganizationId != OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
 	try {
 		Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(parentOrganizationId);
 
@@ -90,7 +90,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 					<%= LanguageUtil.get(pageContext, "organization") %>
 				</td>
 				<td>
-					<a class="portlet-font" href="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= organizationId %>" /></portlet:actionURL>" id="<portlet:namespace />parentOrganizationName" style="font-size: x-small;"><%= parentOrganizationName %></a>
+					<a class="portlet-font" href="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" /></portlet:actionURL>" id="<portlet:namespace />parentOrganizationName" style="font-size: x-small;"><%= parentOrganizationName %></a>
 
 					<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
 						<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();">

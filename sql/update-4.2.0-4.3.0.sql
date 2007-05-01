@@ -49,6 +49,7 @@ update Group_ set friendlyURL = '' where className = 'com.liferay.portal.model.U
 update Group_ set active_ = TRUE;
 
 alter_column_type Groups_Orgs groupId LONG;
+alter_column_type Groups_Orgs organizationId LONG;
 
 alter_column_type Groups_Permissions groupId LONG;
 alter_column_type Groups_Permissions permissionId LONG;
@@ -98,15 +99,20 @@ alter_column_type MBCategory groupId LONG;
 
 alter_column_type MBStatsUser groupId LONG;
 
+alter_column_type Organization_ organizationId LONG;
+alter_column_type Organization_ parentOrganizationId LONG;
 alter_column_type Organization_ statusId INTEGER;
 
-alter_column_type OrgGroupPermission permissionId LONG;
+alter_column_type OrgGroupPermission organizationId LONG;
 alter_column_type OrgGroupPermission groupId LONG;
+alter_column_type OrgGroupPermission permissionId LONG;
 
+alter_column_type OrgGroupRole organizationId LONG;
 alter_column_type OrgGroupRole groupId LONG;
 alter_column_type OrgGroupRole roleId LONG;
 
 alter_column_type OrgLabor orgLaborId LONG;
+alter_column_type OrgLabor organizationId LONG;
 alter_column_type OrgLabor typeId INTEGER;
 
 create table PasswordPolicy (
@@ -379,6 +385,8 @@ create table UserGroupRole (
 );
 
 alter_column_type Users_Groups groupId LONG;
+
+alter_column_type Users_Orgs organizationId LONG;
 
 alter_column_type Users_Permissions permissionId LONG;
 

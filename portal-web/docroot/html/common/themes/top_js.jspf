@@ -33,7 +33,7 @@
 			// properly encode with encodeURIComponent. It leaves a '+' as a '+'
 			// whereas Firefox correctly encodes a '+' to '%2B'.
 
-			return "<%= Http.encodeURL(String.valueOf(themeDisplay.getDoAsUserId())) %>";
+			return "<%= Http.encodeURL(themeDisplay.getDoAsUserId()) %>";
 		},
 		getPlid : function() {
 			return "<%= themeDisplay.getPlid() %>";

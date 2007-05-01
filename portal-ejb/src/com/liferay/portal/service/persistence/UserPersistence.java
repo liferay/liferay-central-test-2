@@ -1658,7 +1658,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsOrganization(long pk, String organizationPK)
+	public boolean containsOrganization(long pk, long organizationPK)
 		throws SystemException {
 		try {
 			return containsOrganization.contains(pk, organizationPK);
@@ -1677,7 +1677,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addOrganization(long pk, String organizationPK)
+	public void addOrganization(long pk, long organizationPK)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1700,7 +1700,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addOrganizations(long pk, String[] organizationPKs)
+	public void addOrganizations(long pk, long[] organizationPKs)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1737,7 +1737,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeOrganization(long pk, String organizationPK)
+	public void removeOrganization(long pk, long organizationPK)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1760,7 +1760,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeOrganizations(long pk, String[] organizationPKs)
+	public void removeOrganizations(long pk, long[] organizationPKs)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1787,7 +1787,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setOrganizations(long pk, String[] organizationPKs)
+	public void setOrganizations(long pk, long[] organizationPKs)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -2655,7 +2655,7 @@ public class UserPersistence extends BasePersistence {
 		protected ContainsOrganization(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSORGANIZATION);
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2664,8 +2664,10 @@ public class UserPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(long userId, String organizationId) {
-			List results = execute(new Object[] { new Long(userId), organizationId });
+		protected boolean contains(long userId, long organizationId) {
+			List results = execute(new Object[] {
+						new Long(userId), new Long(organizationId)
+					});
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -2685,14 +2687,14 @@ public class UserPersistence extends BasePersistence {
 				"INSERT INTO Users_Orgs (userId, organizationId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void add(long userId, String organizationId) {
+		protected void add(long userId, long organizationId) {
 			if (!_persistence.containsOrganization.contains(userId,
 						organizationId)) {
-				update(new Object[] { new Long(userId), organizationId });
+				update(new Object[] { new Long(userId), new Long(organizationId) });
 			}
 		}
 
@@ -2717,12 +2719,12 @@ public class UserPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Orgs WHERE userId = ? AND organizationId = ?");
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void remove(long userId, String organizationId) {
-			update(new Object[] { new Long(userId), organizationId });
+		protected void remove(long userId, long organizationId) {
+			update(new Object[] { new Long(userId), new Long(organizationId) });
 		}
 	}
 

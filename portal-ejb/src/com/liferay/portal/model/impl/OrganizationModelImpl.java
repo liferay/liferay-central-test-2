@@ -53,9 +53,9 @@ import java.sql.Types;
 public class OrganizationModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Organization_";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "organizationId", new Integer(Types.VARCHAR) },
+			{ "organizationId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
-			{ "parentOrganizationId", new Integer(Types.VARCHAR) },
+			{ "parentOrganizationId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "recursable", new Integer(Types.BOOLEAN) },
 			{ "regionId", new Integer(Types.BIGINT) },
@@ -65,12 +65,6 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_ORGANIZATIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Organization.organizationId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTORGANIZATIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Organization.parentOrganizationId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -83,27 +77,20 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	public OrganizationModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _organizationId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setOrganizationId(pk);
 	}
 
-	public String getOrganizationId() {
-		return GetterUtil.getString(_organizationId);
+	public long getOrganizationId() {
+		return _organizationId;
 	}
 
-	public void setOrganizationId(String organizationId) {
-		if (((organizationId == null) && (_organizationId != null)) ||
-				((organizationId != null) && (_organizationId == null)) ||
-				((organizationId != null) && (_organizationId != null) &&
-				!organizationId.equals(_organizationId))) {
-			if (!XSS_ALLOW_ORGANIZATIONID) {
-				organizationId = XSSUtil.strip(organizationId);
-			}
-
+	public void setOrganizationId(long organizationId) {
+		if (organizationId != _organizationId) {
 			_organizationId = organizationId;
 		}
 	}
@@ -118,21 +105,12 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getParentOrganizationId() {
-		return GetterUtil.getString(_parentOrganizationId);
+	public long getParentOrganizationId() {
+		return _parentOrganizationId;
 	}
 
-	public void setParentOrganizationId(String parentOrganizationId) {
-		if (((parentOrganizationId == null) && (_parentOrganizationId != null)) ||
-				((parentOrganizationId != null) &&
-				(_parentOrganizationId == null)) ||
-				((parentOrganizationId != null) &&
-				(_parentOrganizationId != null) &&
-				!parentOrganizationId.equals(_parentOrganizationId))) {
-			if (!XSS_ALLOW_PARENTORGANIZATIONID) {
-				parentOrganizationId = XSSUtil.strip(parentOrganizationId);
-			}
-
+	public void setParentOrganizationId(long parentOrganizationId) {
+		if (parentOrganizationId != _parentOrganizationId) {
 			_parentOrganizationId = parentOrganizationId;
 		}
 	}
@@ -259,9 +237,9 @@ public class OrganizationModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = organization.getPrimaryKey();
+		long pk = organization.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -270,12 +248,12 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _organizationId;
+	private long _organizationId;
 	private long _companyId;
-	private String _parentOrganizationId;
+	private long _parentOrganizationId;
 	private String _name;
 	private boolean _recursable;
 	private long _regionId;

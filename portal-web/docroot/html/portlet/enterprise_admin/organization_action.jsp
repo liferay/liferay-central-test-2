@@ -29,7 +29,7 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 Organization organization = (Organization)row.getObject();
 
-String organizationId = organization.getOrganizationId();
+long organizationId = organization.getOrganizationId();
 
 boolean rootOrganization = organization.isRoot();
 
@@ -42,14 +42,14 @@ if (!rootOrganization) {
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationURL">
 	<portlet:param name="struts_action" value="<%= strutsAction %>" />
-	<portlet:param name="organizationId" value="<%= organizationId %>" />
+	<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
 </portlet:renderURL>
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteOrganizationURL">
 	<portlet:param name="struts_action" value="<%= strutsAction %>" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-	<portlet:param name="deleteOrganizationIds" value="<%= organizationId %>" />
+	<portlet:param name="deleteOrganizationIds" value="<%= String.valueOf(organizationId) %>" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
 </portlet:actionURL>
 
@@ -61,7 +61,7 @@ String addUserURLString = null;
 	<c:when test="<%= rootOrganization %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserToOrganizationURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-			<portlet:param name="organizationId" value="<%= organizationId %>" />
+			<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 			<portlet:param name="organizationName" value="<%= organization.getName() %>" />
 		</portlet:renderURL>
 
@@ -78,9 +78,9 @@ String addUserURLString = null;
 
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserToLocationURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-			<portlet:param name="organizationId" value="<%= parentOrganizaton.getOrganizationId() %>" />
+			<portlet:param name="organizationId" value="<%= String.valueOf(parentOrganizaton.getOrganizationId()) %>" />
 			<portlet:param name="organizationName" value="<%= parentOrganizaton.getName() %>" />
-			<portlet:param name="locationId" value="<%= organizationId %>" />
+			<portlet:param name="locationId" value="<%= String.valueOf(organizationId) %>" />
 			<portlet:param name="locationName" value="<%= organization.getName() %>" />
 		</portlet:renderURL>
 
@@ -94,19 +94,19 @@ String addUserURLString = null;
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/view" />
 	<portlet:param name="tabs1" value="users" />
-	<portlet:param name="organizationId" value="<%= organizationId %>" />
+	<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 </portlet:renderURL>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addLocationURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_location" />
-	<portlet:param name="parentOrganizationId" value="<%= organizationId %>" />
+	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
 	<portlet:param name="parentOrganizationName" value="<%= organization.getName() %>" />
 </portlet:renderURL>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewLocationsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/view" />
 	<portlet:param name="tabs1" value="locations" />
-	<portlet:param name="parentOrganizationId" value="<%= organizationId %>" />
+	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
 </portlet:renderURL>
 
 <c:choose>
@@ -119,7 +119,7 @@ String addUserURLString = null;
 			<liferay-security:permissionsURL
 				modelResource="com.liferay.portal.model.Location"
 				modelResourceDescription="<%= organization.getName() %>"
-				resourcePrimKey="<%= organization.getPrimaryKey().toString() %>"
+				resourcePrimKey="<%= String.valueOf(organization.getOrganizationId()) %>"
 				var="editLocationPermissionsURL"
 			/>
 
@@ -157,7 +157,7 @@ String addUserURLString = null;
 						<liferay-security:permissionsURL
 							modelResource="<%= Organization.class.getName() %>"
 							modelResourceDescription="<%= organization.getName() %>"
-							resourcePrimKey="<%= organization.getPrimaryKey().toString() %>"
+							resourcePrimKey="<%= String.valueOf(organization.getOrganizationId()) %>"
 							var="editRootOrganizationPermissionsURL"
 						/>
 
@@ -169,7 +169,7 @@ String addUserURLString = null;
 						<liferay-security:permissionsURL
 							modelResource="com.liferay.portal.model.Location"
 							modelResourceDescription="<%= organization.getName() %>"
-							resourcePrimKey="<%= organization.getPrimaryKey().toString() %>"
+							resourcePrimKey="<%= String.valueOf(organization.getOrganizationId()) %>"
 							var="editOrganizationPermissionsURL"
 						/>
 

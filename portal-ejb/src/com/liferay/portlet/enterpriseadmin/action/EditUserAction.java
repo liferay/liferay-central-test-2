@@ -379,8 +379,8 @@ public class EditUserAction extends PortletAction {
 		int birthdayDay = ParamUtil.getInteger(req, "birthdayDay");
 		int birthdayYear = ParamUtil.getInteger(req, "birthdayYear");
 		String jobTitle = ParamUtil.getString(req, "jobTitle");
-		String organizationId = ParamUtil.getString(req, "organizationId");
-		String locationId = ParamUtil.getString(req, "locationId");
+		long organizationId = ParamUtil.getLong(req, "organizationId");
+		long locationId = ParamUtil.getLong(req, "locationId");
 		boolean sendEmail = true;
 
 		User user = null;

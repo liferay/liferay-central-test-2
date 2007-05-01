@@ -70,7 +70,7 @@ import org.json.JSONObject;
  */
 public class OrganizationServiceJSON {
 	public static void addGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+		long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		OrganizationServiceUtil.addGroupOrganizations(groupId, organizationIds);
@@ -84,9 +84,9 @@ public class OrganizationServiceJSON {
 			organizationIds);
 	}
 
-	public static JSONObject addOrganization(
-		java.lang.String parentOrganizationId, java.lang.String name,
-		long regionId, long countryId, int statusId, boolean location)
+	public static JSONObject addOrganization(long parentOrganizationId,
+		java.lang.String name, long regionId, long countryId, int statusId,
+		boolean location)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
@@ -95,13 +95,13 @@ public class OrganizationServiceJSON {
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteOrganization(java.lang.String organizationId)
+	public static void deleteOrganization(long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		OrganizationServiceUtil.deleteOrganization(organizationId);
 	}
 
-	public static JSONObject getOrganization(java.lang.String organizationId)
+	public static JSONObject getOrganization(long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.getOrganization(organizationId);
@@ -109,11 +109,10 @@ public class OrganizationServiceJSON {
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static java.lang.String getOrganizationId(long companyId,
-		java.lang.String name)
+	public static long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		java.lang.String returnValue = OrganizationServiceUtil.getOrganizationId(companyId,
+		long returnValue = OrganizationServiceUtil.getOrganizationId(companyId,
 				name);
 
 		return returnValue;
@@ -128,14 +127,14 @@ public class OrganizationServiceJSON {
 	}
 
 	public static void setGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+		long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		OrganizationServiceUtil.setGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+		long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		OrganizationServiceUtil.unsetGroupOrganizations(groupId, organizationIds);
@@ -149,10 +148,9 @@ public class OrganizationServiceJSON {
 			organizationIds);
 	}
 
-	public static JSONObject updateOrganization(
-		java.lang.String organizationId, java.lang.String parentOrganizationId,
-		java.lang.String name, long regionId, long countryId, int statusId,
-		boolean location)
+	public static JSONObject updateOrganization(long organizationId,
+		long parentOrganizationId, java.lang.String name, long regionId,
+		long countryId, int statusId, boolean location)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
@@ -162,8 +160,8 @@ public class OrganizationServiceJSON {
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateOrganization(
-		java.lang.String organizationId, java.lang.String comments)
+	public static JSONObject updateOrganization(long organizationId,
+		java.lang.String comments)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,

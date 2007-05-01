@@ -29,7 +29,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.util.Validator;
 
 import java.util.List;
 
@@ -45,14 +44,18 @@ import org.apache.commons.logging.LogFactory;
 public class OrganizationImpl
 	extends OrganizationModelImpl implements Organization {
 
-	public static final String DEFAULT_PARENT_ORGANIZATION_ID = "-1";
+	public static final int DEFAULT_PARENT_ORGANIZATION_ID = 0;
 
 	public OrganizationImpl() {
 	}
 
 	public boolean isRoot() {
-		return Validator.equals(
-			getParentOrganizationId(), DEFAULT_PARENT_ORGANIZATION_ID);
+		if (getParentOrganizationId() == DEFAULT_PARENT_ORGANIZATION_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public Group getGroup() {
@@ -94,7 +97,8 @@ public class OrganizationImpl
 
 	public List getAddresses() throws PortalException, SystemException {
 		return AddressLocalServiceUtil.getAddresses(
-			getCompanyId(), Organization.class.getName(), getOrganizationId());
+			getCompanyId(), Organization.class.getName(),
+			String.valueOf(getOrganizationId()));
 	}
 
 	private static Log _log = LogFactory.getLog(Organization.class);

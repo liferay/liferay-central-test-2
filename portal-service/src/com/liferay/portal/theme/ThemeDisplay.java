@@ -121,11 +121,11 @@ public class ThemeDisplay implements Serializable {
 		return _realUser.getUserId();
 	}
 
-	public long getDoAsUserId() {
+	public String getDoAsUserId() {
 		return _doAsUserId;
 	}
 
-	public void setDoAsUserId(long doAsUserId) {
+	public void setDoAsUserId(String doAsUserId) {
 		_doAsUserId = doAsUserId;
 	}
 
@@ -644,7 +644,7 @@ public class ThemeDisplay implements Serializable {
 		_realCompanyLogo = StringPool.BLANK;
 		_user = null;
 		_realUser = null;
-		_doAsUserId = 0;
+		_doAsUserId = StringPool.BLANK;
 		_layoutSetLogo = StringPool.BLANK;
 		_layout = null;
 		_layouts = null;
@@ -711,7 +711,7 @@ public class ThemeDisplay implements Serializable {
 	private Account _account;
 	private User _user;
 	private User _realUser;
-	private long _doAsUserId = 0;
+	private String _doAsUserId = StringPool.BLANK;
 	private Contact _contact;
 	private String _layoutSetLogo = StringPool.BLANK;
 	private Layout _layout;

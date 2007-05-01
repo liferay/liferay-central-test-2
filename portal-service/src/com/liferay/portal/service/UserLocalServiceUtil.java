@@ -102,8 +102,8 @@ public class UserLocalServiceUtil {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, java.lang.String organizationId,
-		java.lang.String locationId, boolean sendEmail)
+		java.lang.String jobTitle, long organizationId, long locationId,
+		boolean sendEmail)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -492,8 +492,8 @@ public class UserLocalServiceUtil {
 		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String icqSn, java.lang.String jabberSn,
 		java.lang.String msnSn, java.lang.String skypeSn,
-		java.lang.String ymSn, java.lang.String jobTitle,
-		java.lang.String organizationId, java.lang.String locationId)
+		java.lang.String ymSn, java.lang.String jobTitle, long organizationId,
+		long locationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();

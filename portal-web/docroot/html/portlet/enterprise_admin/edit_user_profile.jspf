@@ -40,11 +40,9 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 String organizationName = ParamUtil.getString(request, "organizationName");
 
-String organizationId = request.getParameter("organizationId");
+long organizationId = ParamUtil.getLong(request, "organizationId");
 
-if ((organizationId == null) || (organizationId.equals(StringPool.NULL))) {
-	organizationId = "";
-
+if (organizationId <= 0) {
 	if (user2 != null) {
 		Organization organization = user2.getOrganization();
 
@@ -71,11 +69,9 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(Portlet
 
 String locationName = ParamUtil.getString(request, "locationName");
 
-String locationId = request.getParameter("locationId");
+long locationId = ParamUtil.getLong(request, "locationId");
 
-if ((locationId == null) || (locationId.equals(StringPool.NULL))) {
-	locationId = "";
-
+if (locationId <= 0) {
 	if (user2 != null) {
 		Organization location = user2.getLocation();
 
@@ -326,7 +322,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<td>
 				<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>">
 
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= organizationId %>" /></portlet:renderURL>" id="<portlet:namespace />organizationName">
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" /></portlet:renderURL>" id="<portlet:namespace />organizationName">
 				<%= organizationName %>
 				</a>
 
@@ -334,7 +330,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 					<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();">
 
 					<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED)) %>">
-						<input <%= Validator.isNull(organizationId) ? "disabled" : "" %> id="<portlet:namespace />removeOrganizationButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeOrganization();">
+						<input <%= (organizationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeOrganizationButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeOrganization();">
 					</c:if>
 				</c:if>
 			</td>
@@ -346,7 +342,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<td>
 				<input name="<portlet:namespace />locationId" type="hidden" value="<%= locationId %>">
 
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_location" /><portlet:param name="organizationId" value="<%= locationId %>" /></portlet:renderURL>" id="<portlet:namespace />locationName">
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_location" /><portlet:param name="organizationId" value="<%= String.valueOf(locationId) %>" /></portlet:renderURL>" id="<portlet:namespace />locationName">
 				<%= locationName %>
 				</a>
 
@@ -354,7 +350,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 					<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var locationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_location" /></portlet:renderURL>&<portlet:namespace />parentOrganizationId=' + document.<portlet:namespace />fm.<portlet:namespace />organizationId.value, 'location', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); locationWindow.focus();">
 
 					<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED)) %>">
-						<input <%= Validator.isNull(locationId) ? "disabled" : "" %> id="<portlet:namespace />removeLocationButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeLocation();">
+						<input <%= (locationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeLocationButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeLocation();">
 					</c:if>
 				</c:if>
 			</td>

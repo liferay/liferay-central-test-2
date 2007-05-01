@@ -76,10 +76,10 @@ Role role = (Role)row.getObject();
 
 	<c:choose>
 		<c:when test="<%= portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-			<portlet:param name="organizationId" value="<%= user.getOrganization().getOrganizationId() %>" />
+			<portlet:param name="organizationId" value="<%= String.valueOf(user.getOrganization().getOrganizationId()) %>" />
 		</c:when>
 		<c:when test="<%= portletName.equals(PortletKeys.LOCATION_ADMIN) %>">
-			<portlet:param name="organizationId" value="<%= user.getLocation().getOrganizationId() %>" />
+			<portlet:param name="organizationId" value="<%= String.valueOf(user.getLocation().getOrganizationId()) %>" />
 		</c:when>
 	</c:choose>
 

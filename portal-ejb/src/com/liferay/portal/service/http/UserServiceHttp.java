@@ -224,9 +224,8 @@ public class UserServiceHttp {
 		java.util.Locale locale, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName, int prefixId,
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String jobTitle,
-		java.lang.String organizationId, java.lang.String locationId,
-		boolean sendEmail)
+		int birthdayYear, java.lang.String jobTitle, long organizationId,
+		long locationId, boolean sendEmail)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -294,18 +293,8 @@ public class UserServiceHttp {
 				paramObj18 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj19 = organizationId;
-
-			if (organizationId == null) {
-				paramObj19 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj20 = locationId;
-
-			if (locationId == null) {
-				paramObj20 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj19 = new LongWrapper(organizationId);
+			Object paramObj20 = new LongWrapper(locationId);
 			Object paramObj21 = new BooleanWrapper(sendEmail);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"addUser",
@@ -1065,8 +1054,7 @@ public class UserServiceHttp {
 		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String skypeSn, java.lang.String ymSn,
-		java.lang.String jobTitle, java.lang.String organizationId,
-		java.lang.String locationId)
+		java.lang.String jobTitle, long organizationId, long locationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -1185,18 +1173,8 @@ public class UserServiceHttp {
 				paramObj24 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj25 = organizationId;
-
-			if (organizationId == null) {
-				paramObj25 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj26 = locationId;
-
-			if (locationId == null) {
-				paramObj26 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj25 = new LongWrapper(organizationId);
+			Object paramObj26 = new LongWrapper(locationId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"updateUser",
 					new Object[] {

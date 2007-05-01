@@ -930,7 +930,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsOrganization(long pk, String organizationPK)
+	public boolean containsOrganization(long pk, long organizationPK)
 		throws SystemException {
 		try {
 			return containsOrganization.contains(pk, organizationPK);
@@ -949,7 +949,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void addOrganization(long pk, String organizationPK)
+	public void addOrganization(long pk, long organizationPK)
 		throws NoSuchGroupException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -972,7 +972,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void addOrganizations(long pk, String[] organizationPKs)
+	public void addOrganizations(long pk, long[] organizationPKs)
 		throws NoSuchGroupException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1009,7 +1009,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeOrganization(long pk, String organizationPK)
+	public void removeOrganization(long pk, long organizationPK)
 		throws NoSuchGroupException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1032,7 +1032,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeOrganizations(long pk, String[] organizationPKs)
+	public void removeOrganizations(long pk, long[] organizationPKs)
 		throws NoSuchGroupException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -1059,7 +1059,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public void setOrganizations(long pk, String[] organizationPKs)
+	public void setOrganizations(long pk, long[] organizationPKs)
 		throws NoSuchGroupException, 
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
@@ -2084,7 +2084,7 @@ public class GroupPersistence extends BasePersistence {
 		protected ContainsOrganization(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSORGANIZATION);
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2093,9 +2093,9 @@ public class GroupPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(long groupId, String organizationId) {
+		protected boolean contains(long groupId, long organizationId) {
 			List results = execute(new Object[] {
-						new Long(groupId), organizationId
+						new Long(groupId), new Long(organizationId)
 					});
 
 			if (results.size() > 0) {
@@ -2116,14 +2116,15 @@ public class GroupPersistence extends BasePersistence {
 				"INSERT INTO Groups_Orgs (groupId, organizationId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void add(long groupId, String organizationId) {
+		protected void add(long groupId, long organizationId) {
 			if (!_persistence.containsOrganization.contains(groupId,
 						organizationId)) {
-				update(new Object[] { new Long(groupId), organizationId });
+				update(new Object[] { new Long(groupId), new Long(
+							organizationId) });
 			}
 		}
 
@@ -2148,12 +2149,12 @@ public class GroupPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE groupId = ? AND organizationId = ?");
 			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void remove(long groupId, String organizationId) {
-			update(new Object[] { new Long(groupId), organizationId });
+		protected void remove(long groupId, long organizationId) {
+			update(new Object[] { new Long(groupId), new Long(organizationId) });
 		}
 	}
 

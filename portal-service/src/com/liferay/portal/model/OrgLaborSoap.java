@@ -98,11 +98,11 @@ public class OrgLaborSoap implements Serializable {
 		_orgLaborId = orgLaborId;
 	}
 
-	public String getOrganizationId() {
+	public long getOrganizationId() {
 		return _organizationId;
 	}
 
-	public void setOrganizationId(String organizationId) {
+	public void setOrganizationId(long organizationId) {
 		_organizationId = organizationId;
 	}
 
@@ -227,7 +227,7 @@ public class OrgLaborSoap implements Serializable {
 	}
 
 	private long _orgLaborId;
-	private String _organizationId;
+	private long _organizationId;
 	private int _typeId;
 	private int _sunOpen;
 	private int _sunClose;

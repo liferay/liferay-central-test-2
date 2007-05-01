@@ -35,8 +35,8 @@ public class UserPermission_IW {
 
 	public void check(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		long userId, java.lang.String organizationId,
-		java.lang.String locationId, java.lang.String actionId)
+		long userId, long organizationId, long locationId,
+		java.lang.String actionId)
 		throws com.liferay.portal.security.auth.PrincipalException {
 		UserPermission.check(permissionChecker, userId, organizationId,
 			locationId, actionId);
@@ -44,8 +44,8 @@ public class UserPermission_IW {
 
 	public boolean contains(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		long userId, java.lang.String organizationId,
-		java.lang.String locationId, java.lang.String actionId) {
+		long userId, long organizationId, long locationId,
+		java.lang.String actionId) {
 		return UserPermission.contains(permissionChecker, userId,
 			organizationId, locationId, actionId);
 	}

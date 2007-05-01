@@ -122,10 +122,10 @@ public class EditGroupAssignmentsAction extends PortletAction {
 
 		long groupId = ParamUtil.getLong(req, "groupId");
 
-		String[] addOrganizationIds = StringUtil.split(
-			ParamUtil.getString(req, "addOrganizationIds"));
-		String[] removeOrganizationIds = StringUtil.split(
-			ParamUtil.getString(req, "removeOrganizationIds"));
+		long[] addOrganizationIds = StringUtil.split(
+			ParamUtil.getString(req, "addOrganizationIds"), 0L);
+		long[] removeOrganizationIds = StringUtil.split(
+			ParamUtil.getString(req, "removeOrganizationIds"), 0L);
 
 		OrganizationServiceUtil.addGroupOrganizations(
 			groupId, addOrganizationIds);

@@ -96,7 +96,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			String firstName, String middleName, String lastName,
 			int prefixId, int suffixId, boolean male, int birthdayMonth,
 			int birthdayDay, int birthdayYear, String jobTitle,
-			String organizationId, String locationId, boolean sendEmail)
+			long organizationId, long locationId, boolean sendEmail)
 		throws PortalException, SystemException {
 
 		Company company = CompanyUtil.findByPrimaryKey(companyId);
@@ -309,7 +309,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
 			String smsSn, String aimSn, String icqSn, String jabberSn,
 			String msnSn, String skypeSn, String ymSn, String jobTitle,
-			String organizationId, String locationId)
+			long organizationId, long locationId)
 		throws PortalException, SystemException {
 
 		checkPermission(userId, organizationId, locationId, ActionKeys.UPDATE);
@@ -333,8 +333,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	}
 
 	protected void checkPermission(
-			long userId, String organizationId, String locationId,
-			String actionId)
+			long userId, long organizationId, long locationId, String actionId)
 		throws PortalException, SystemException {
 
 		UserPermission.check(

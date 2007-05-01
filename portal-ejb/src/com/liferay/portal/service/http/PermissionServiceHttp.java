@@ -304,17 +304,12 @@ public class PermissionServiceHttp {
 	}
 
 	public static void setOrgGroupPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String organizationId, long groupId,
-		java.lang.String[] actionIds, long resourceId)
+		long organizationId, long groupId, java.lang.String[] actionIds,
+		long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = organizationId;
-
-			if (organizationId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(organizationId);
 			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = actionIds;
 

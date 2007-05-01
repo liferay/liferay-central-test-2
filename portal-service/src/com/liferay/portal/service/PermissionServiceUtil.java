@@ -96,7 +96,7 @@ public class PermissionServiceUtil {
 			actionIds, resourceId);
 	}
 
-	public static void setOrgGroupPermissions(java.lang.String organizationId,
+	public static void setOrgGroupPermissions(long organizationId,
 		long groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

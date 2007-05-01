@@ -35,7 +35,7 @@ public class LocationPermission_IW {
 
 	public void check(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String locationId, java.lang.String actionId)
+		long locationId, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		LocationPermission.check(permissionChecker, locationId, actionId);
@@ -43,7 +43,7 @@ public class LocationPermission_IW {
 
 	public boolean contains(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String locationId, java.lang.String actionId)
+		long locationId, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		return LocationPermission.contains(permissionChecker, locationId,

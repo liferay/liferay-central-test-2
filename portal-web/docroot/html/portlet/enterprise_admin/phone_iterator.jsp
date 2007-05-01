@@ -32,8 +32,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 String className = ParamUtil.getString(request, "className");
 String classPK = ParamUtil.getString(request, "classPK");
 
-String organizationId = ParamUtil.getString(request, "organizationId");
-String locationId = ParamUtil.getString(request, "locationId");
+long organizationId = ParamUtil.getLong(request, "organizationId");
+long locationId = ParamUtil.getLong(request, "locationId");
 
 SearchContainer searchContainer = new SearchContainer();
 
@@ -52,12 +52,12 @@ searchContainer.setHeaderNames(headerNames);
 
 List results = new ArrayList();
 
-if (!className.equals(Organization.class.getName()) && Validator.isNotNull(organizationId)) {
-	results = PhoneServiceUtil.getPhones(Organization.class.getName(), organizationId);
+if (!className.equals(Organization.class.getName()) && (organizationId > 0)) {
+	results = PhoneServiceUtil.getPhones(Organization.class.getName(), String.valueOf(organizationId));
 }
 
-if (Validator.isNotNull(locationId)) {
-	results = PhoneServiceUtil.getPhones(Organization.class.getName(), locationId);
+if ((locationId > 0)) {
+	results = PhoneServiceUtil.getPhones(Organization.class.getName(), String.valueOf(locationId));
 }
 
 results.addAll(PhoneServiceUtil.getPhones(className, classPK));

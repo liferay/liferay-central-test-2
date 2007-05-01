@@ -187,7 +187,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-		String parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
+		long parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 		String parentOrganizationComparator = StringPool.EQUAL;
 
 		if (!rootOrganization) {
@@ -232,7 +232,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		for (int i = 0; i < results.size(); i++) {
 			Organization organization = (Organization)results.get(i);
 
-			ResultRow row = new ResultRow(organization, organization.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
 
 			// Name
 

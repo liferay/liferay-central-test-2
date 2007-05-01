@@ -54,7 +54,7 @@
 									</div>
 								</c:if>
 
-								<c:if test="<%= Validator.isNotNull(organization.getOrganizationId()) %>">
+								<c:if test="<%= organization.getOrganizationId() > 0 %>">
 									<%= LanguageUtil.get(pageContext, "organization") %>: <%= organization.getName() %>
 
 									<br /><br />

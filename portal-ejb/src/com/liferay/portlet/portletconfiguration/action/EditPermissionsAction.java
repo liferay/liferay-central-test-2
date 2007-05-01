@@ -177,7 +177,7 @@ public class EditPermissionsAction extends PortletAction {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
 		long resourceId = ParamUtil.getLong(req, "resourceId");
-		String organizationId = ParamUtil.getString(
+		long organizationId = ParamUtil.getLong(
 			req, "organizationIdsPosValue");
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "organizationIdActionIds"));
@@ -186,7 +186,7 @@ public class EditPermissionsAction extends PortletAction {
 
 		if (!organizationIntersection) {
 			PermissionServiceUtil.setGroupPermissions(
-				Organization.class.getName(), organizationId,
+				Organization.class.getName(), String.valueOf(organizationId),
 				layout.getGroupId(), actionIds, resourceId);
 		}
 		else {

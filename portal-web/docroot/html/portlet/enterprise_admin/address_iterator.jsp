@@ -32,8 +32,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 String className = ParamUtil.getString(request, "className");
 String classPK = ParamUtil.getString(request, "classPK");
 
-String organizationId = ParamUtil.getString(request, "organizationId");
-String locationId = ParamUtil.getString(request, "locationId");
+long organizationId = ParamUtil.getLong(request, "organizationId");
+long locationId = ParamUtil.getLong(request, "locationId");
 
 SearchContainer searchContainer = new SearchContainer();
 
@@ -54,12 +54,12 @@ searchContainer.setHeaderNames(headerNames);
 
 List results = new ArrayList();
 
-if (!className.equals(Organization.class.getName()) && Validator.isNotNull(organizationId)) {
-	results = AddressServiceUtil.getAddresses(Organization.class.getName(), organizationId);
+if (!className.equals(Organization.class.getName()) && (organizationId > 0)) {
+	results = AddressServiceUtil.getAddresses(Organization.class.getName(), String.valueOf(organizationId));
 }
 
-if (Validator.isNotNull(locationId)) {
-	results = AddressServiceUtil.getAddresses(Organization.class.getName(), locationId);
+if ((locationId > 0)) {
+	results = AddressServiceUtil.getAddresses(Organization.class.getName(), String.valueOf(locationId));
 }
 
 results.addAll(AddressServiceUtil.getAddresses(className, classPK));

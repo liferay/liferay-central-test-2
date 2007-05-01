@@ -350,11 +350,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return GroupFinder.findByC_N(companyId, name);
 	}
 
-	public Group getOrganizationGroup(long companyId, String organizationId)
+	public Group getOrganizationGroup(long companyId, long organizationId)
 		throws PortalException, SystemException {
 
 		return GroupUtil.findByC_C_C(
-			companyId, Organization.class.getName(), organizationId);
+			companyId, Organization.class.getName(),
+			String.valueOf(organizationId));
 	}
 
 	public List getOrganizationsGroups(List organizations)

@@ -288,7 +288,7 @@ create table Group_ (
 
 create table Groups_Orgs (
 	groupId LONG,
-	organizationId VARCHAR(75) not null,
+	organizationId LONG,
 	primary key (groupId, organizationId)
 );
 
@@ -533,9 +533,9 @@ create table MBThread (
 );
 
 create table Organization_ (
-	organizationId VARCHAR(75) not null primary key,
+	organizationId LONG primary key,
 	companyId LONG,
-	parentOrganizationId VARCHAR(75) null,
+	parentOrganizationId LONG,
 	name VARCHAR(75) null,
 	recursable BOOLEAN,
 	regionId LONG,
@@ -545,14 +545,14 @@ create table Organization_ (
 );
 
 create table OrgGroupPermission (
-	organizationId VARCHAR(75) not null,
+	organizationId LONG,
 	groupId LONG,
 	permissionId LONG,
 	primary key (organizationId, groupId, permissionId)
 );
 
 create table OrgGroupRole (
-	organizationId VARCHAR(75) not null,
+	organizationId LONG,
 	groupId LONG,
 	roleId LONG,
 	primary key (organizationId, groupId, roleId)
@@ -560,7 +560,7 @@ create table OrgGroupRole (
 
 create table OrgLabor (
 	orgLaborId LONG primary key,
-	organizationId VARCHAR(75) null,
+	organizationId LONG,
 	typeId INTEGER,
 	sunOpen INTEGER,
 	sunClose INTEGER,
@@ -1115,31 +1115,31 @@ create table UserIdMapper (
 );
 
 create table Users_Groups (
-	userId VARCHAR(75) not null,
+	userId LONG,
 	groupId LONG,
 	primary key (userId, groupId)
 );
 
 create table Users_Orgs (
-	userId VARCHAR(75) not null,
-	organizationId VARCHAR(75) not null,
+	userId LONG,
+	organizationId LONG,
 	primary key (userId, organizationId)
 );
 
 create table Users_Permissions (
-	userId VARCHAR(75) not null,
+	userId LONG,
 	permissionId LONG,
 	primary key (userId, permissionId)
 );
 
 create table Users_Roles (
-	userId VARCHAR(75) not null,
+	userId LONG,
 	roleId LONG,
 	primary key (userId, roleId)
 );
 
 create table Users_UserGroups (
-	userId VARCHAR(75) not null,
+	userId LONG,
 	userGroupId LONG,
 	primary key (userId, userGroupId)
 );

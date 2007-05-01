@@ -31,7 +31,7 @@ OrgLabor orgLabor = (OrgLabor)request.getAttribute(WebKeys.ORG_LABOR);
 
 long orgLaborId = BeanParamUtil.getLong(orgLabor, request, "orgLaborId");
 
-String organizationId = BeanParamUtil.getString(orgLabor, request, "organizationId");
+long organizationId = BeanParamUtil.getLong(orgLabor, request, "organizationId");
 int typeId = BeanParamUtil.getInteger(orgLabor, request, "typeId");
 int sunOpen = BeanParamUtil.getInteger(orgLabor, request, "sunOpen", -1);
 int sunClose = BeanParamUtil.getInteger(orgLabor, request, "sunClose", -1);

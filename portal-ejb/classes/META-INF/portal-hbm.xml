@@ -209,11 +209,11 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.OrganizationImpl" table="Organization_">
 		<cache usage="read-write" />
-		<id name="organizationId" type="java.lang.String">
+		<id name="organizationId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="parentOrganizationId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="parentOrganizationId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="recursable" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="regionId" type="com.liferay.util.dao.hibernate.LongType" />
@@ -242,7 +242,7 @@
 		<id name="orgLaborId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="organizationId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="organizationId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="sunOpen" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="sunClose" type="com.liferay.util.dao.hibernate.IntegerType" />

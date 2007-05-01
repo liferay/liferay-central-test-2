@@ -434,7 +434,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		boolean rootOrganization = tabs2.equals("organizations");
 
 		String organizationIds = ParamUtil.getString(request, "organizationIds");
-		String[] organizationIdsArray = StringUtil.split(organizationIds);
+		long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
 		int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 		%>
 
@@ -465,7 +465,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				<%
 				OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-				String parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
+				long parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 				String parentOrganizationComparator = StringPool.EQUAL;
 
 				if (!rootOrganization) {
@@ -516,7 +516,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				for (int i = 0; i < results.size(); i++) {
 					Organization organization = (Organization)results.get(i);
 
-					ResultRow row = new ResultRow(organization, organization.getPrimaryKey().toString(), i);
+					ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
 
 					// Name
 

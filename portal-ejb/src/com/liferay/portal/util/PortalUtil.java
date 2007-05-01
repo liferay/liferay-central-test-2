@@ -449,7 +449,7 @@ public class PortalUtil {
 		String layoutFriendlyURL = getLayoutFriendlyURL(layout, themeDisplay);
 
 		if (Validator.isNotNull(layoutFriendlyURL)) {
-			if (doAsUser && (themeDisplay.getDoAsUserId() > 0)) {
+			if (doAsUser && Validator.isNotNull(themeDisplay.getDoAsUserId())) {
 				layoutFriendlyURL = Http.addParameter(
 					layoutFriendlyURL, "doAsUserId",
 					themeDisplay.getDoAsUserId());
@@ -460,7 +460,7 @@ public class PortalUtil {
 
 		String layoutURL = getLayoutActualURL(layout, themeDisplay);
 
-		if (doAsUser && (themeDisplay.getDoAsUserId() > 0)) {
+		if (doAsUser && Validator.isNotNull(themeDisplay.getDoAsUserId())) {
 			layoutURL = Http.addParameter(
 				layoutURL, "doAsUserId", themeDisplay.getDoAsUserId());
 		}
@@ -1532,8 +1532,8 @@ public class PortalUtil {
 
 		User doAsUser = UserLocalServiceUtil.getUserById(doAsUserId);
 
-		String organizationId = doAsUser.getOrganization().getOrganizationId();
-		String locationId = doAsUser.getLocation().getOrganizationId();
+		long organizationId = doAsUser.getOrganization().getOrganizationId();
+		long locationId = doAsUser.getLocation().getOrganizationId();
 
 		User realUser = UserLocalServiceUtil.getUserById(
 			realUserIdObj.longValue());

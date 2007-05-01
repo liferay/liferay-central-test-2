@@ -45,21 +45,21 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface OrganizationModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getOrganizationId();
+	public long getOrganizationId();
 
-	public void setOrganizationId(String organizationId);
+	public void setOrganizationId(long organizationId);
 
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);
 
-	public String getParentOrganizationId();
+	public long getParentOrganizationId();
 
-	public void setParentOrganizationId(String parentOrganizationId);
+	public void setParentOrganizationId(long parentOrganizationId);
 
 	public String getName();
 

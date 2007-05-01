@@ -275,8 +275,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			int birthdayDay = 1;
 			int birthdayYear = 1970;
 			String jobTitle = StringPool.BLANK;
-			String organizationId = null;
-			String locationId = null;
+			long organizationId = 0;
+			long locationId = 0;
 
 			User user = UserLocalServiceUtil.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,

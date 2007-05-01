@@ -46,7 +46,7 @@ public class OrgLaborServiceImpl
 	extends PrincipalBean implements OrgLaborService {
 
 	public OrgLabor addOrgLabor(
-			String organizationId, int typeId, int sunOpen, int sunClose,
+			long organizationId, int typeId, int sunOpen, int sunClose,
 			int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,
 			int wedClose, int thuOpen, int thuClose, int friOpen, int friClose,
 			int satOpen, int satClose)
@@ -80,7 +80,7 @@ public class OrgLaborServiceImpl
 		return orgLabor;
 	}
 
-	public List getOrgLabors(String organizationId)
+	public List getOrgLabors(long organizationId)
 		throws PortalException, SystemException {
 
 		checkPermission(organizationId, ActionKeys.VIEW);
@@ -105,7 +105,7 @@ public class OrgLaborServiceImpl
 			satClose);
 	}
 
-	protected void checkPermission(String organizationId, String actionId)
+	protected void checkPermission(long organizationId, String actionId)
 		throws PortalException, SystemException {
 
 		Organization organization =

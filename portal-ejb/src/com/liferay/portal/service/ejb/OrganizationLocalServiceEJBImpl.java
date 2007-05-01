@@ -66,8 +66,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 			begin, end);
 	}
 
-	public void addGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+	public void addGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalServiceFactory.getTxImpl().addGroupOrganizations(groupId,
@@ -75,8 +74,8 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 	}
 
 	public com.liferay.portal.model.Organization addOrganization(long userId,
-		java.lang.String parentOrganizationId, java.lang.String name,
-		long regionId, long countryId, int statusId, boolean location)
+		long parentOrganizationId, java.lang.String name, long regionId,
+		long countryId, int statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return OrganizationLocalServiceFactory.getTxImpl().addOrganization(userId,
@@ -100,7 +99,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 			organizationIds);
 	}
 
-	public void deleteOrganization(java.lang.String organizationId)
+	public void deleteOrganization(long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalServiceFactory.getTxImpl().deleteOrganization(organizationId);
@@ -121,14 +120,13 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 	}
 
 	public com.liferay.portal.model.Organization getOrganization(
-		java.lang.String organizationId)
+		long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return OrganizationLocalServiceFactory.getTxImpl().getOrganization(organizationId);
 	}
 
-	public java.lang.String getOrganizationId(long companyId,
-		java.lang.String name)
+	public long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return OrganizationLocalServiceFactory.getTxImpl().getOrganizationId(companyId,
@@ -141,8 +139,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		return OrganizationLocalServiceFactory.getTxImpl().getUserOrganizations(userId);
 	}
 
-	public boolean hasGroupOrganization(long groupId,
-		java.lang.String organizationId)
+	public boolean hasGroupOrganization(long groupId, long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return OrganizationLocalServiceFactory.getTxImpl().hasGroupOrganization(groupId,
@@ -150,7 +147,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 	}
 
 	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
-		java.lang.String organizationId)
+		long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return OrganizationLocalServiceFactory.getTxImpl()
@@ -158,8 +155,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 			organizationId);
 	}
 
-	public java.util.List search(long companyId,
-		java.lang.String parentOrganizationId,
+	public java.util.List search(long companyId, long parentOrganizationId,
 		java.lang.String parentOrganizationComparator, java.lang.String name,
 		java.lang.String street, java.lang.String city, java.lang.String zip,
 		java.lang.Long regionId, java.lang.Long countryId,
@@ -170,8 +166,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 			city, zip, regionId, countryId, params, andOperator, begin, end);
 	}
 
-	public int searchCount(long companyId,
-		java.lang.String parentOrganizationId,
+	public int searchCount(long companyId, long parentOrganizationId,
 		java.lang.String parentOrganizationComparator, java.lang.String name,
 		java.lang.String street, java.lang.String city, java.lang.String zip,
 		java.lang.Long regionId, java.lang.Long countryId,
@@ -182,16 +177,14 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 			city, zip, regionId, countryId, params, andOperator);
 	}
 
-	public void setGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+	public void setGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalServiceFactory.getTxImpl().setGroupOrganizations(groupId,
 			organizationIds);
 	}
 
-	public void unsetGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+	public void unsetGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalServiceFactory.getTxImpl().unsetGroupOrganizations(groupId,
@@ -208,9 +201,9 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 	}
 
 	public com.liferay.portal.model.Organization updateOrganization(
-		long companyId, java.lang.String organizationId,
-		java.lang.String parentOrganizationId, java.lang.String name,
-		long regionId, long countryId, int statusId, boolean location)
+		long companyId, long organizationId, long parentOrganizationId,
+		java.lang.String name, long regionId, long countryId, int statusId,
+		boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return OrganizationLocalServiceFactory.getTxImpl().updateOrganization(companyId,
@@ -219,7 +212,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 	}
 
 	public com.liferay.portal.model.Organization updateOrganization(
-		java.lang.String organizationId, java.lang.String comments)
+		long organizationId, java.lang.String comments)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return OrganizationLocalServiceFactory.getTxImpl().updateOrganization(organizationId,

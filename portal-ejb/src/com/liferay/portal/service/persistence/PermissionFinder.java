@@ -702,7 +702,7 @@ public class PermissionFinder {
 	}
 
 	public static List findByO_G_R(
-			String organizationId, long groupId, long resourceId)
+			long organizationId, long groupId, long resourceId)
 		throws SystemException {
 
 		Session session = null;

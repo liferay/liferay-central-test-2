@@ -102,7 +102,7 @@ public interface GroupLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Group getOrganizationGroup(long companyId,
-		java.lang.String organizationId)
+		long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

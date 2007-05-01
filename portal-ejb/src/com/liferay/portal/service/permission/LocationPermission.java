@@ -41,7 +41,7 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 public class LocationPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String locationId,
+			PermissionChecker permissionChecker, long locationId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -51,7 +51,7 @@ public class LocationPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String locationId,
+			PermissionChecker permissionChecker, long locationId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -69,7 +69,7 @@ public class LocationPermission {
 
 			Organization location = user.getLocation();
 
-			if (locationId.equals(location.getOrganizationId())) {
+			if (locationId == location.getOrganizationId()) {
 				return true;
 			}
 			else {
@@ -80,7 +80,7 @@ public class LocationPermission {
 			Organization location =
 				OrganizationLocalServiceUtil.getOrganization(locationId);
 
-			String parentOrganizationId = location.getParentOrganizationId();
+			long parentOrganizationId = location.getParentOrganizationId();
 
 			if (permissionChecker.hasPermission(
 					0, Organization.class.getName(), parentOrganizationId,

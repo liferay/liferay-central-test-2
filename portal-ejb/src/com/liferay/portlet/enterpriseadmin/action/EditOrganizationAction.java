@@ -37,7 +37,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -145,8 +144,8 @@ public class EditOrganizationAction extends PortletAction {
 	}
 
 	protected void deleteOrganizations(ActionRequest req) throws Exception {
-		String[] deleteOrganizationIds = StringUtil.split(
-			ParamUtil.getString(req, "deleteOrganizationIds"));
+		long[] deleteOrganizationIds = StringUtil.split(
+			ParamUtil.getString(req, "deleteOrganizationIds"), 0L);
 
 		for (int i = 0; i < deleteOrganizationIds.length; i++) {
 			OrganizationServiceUtil.deleteOrganization(
@@ -155,7 +154,7 @@ public class EditOrganizationAction extends PortletAction {
 	}
 
 	protected Organization updateComments(ActionRequest req) throws Exception {
-		String organizationId = ParamUtil.getString(req, "organizationId");
+		long organizationId = ParamUtil.getLong(req, "organizationId");
 
 		String comments = ParamUtil.getString(req, "comments");
 
@@ -166,12 +165,11 @@ public class EditOrganizationAction extends PortletAction {
 	protected Organization updateOrganization(ActionRequest req)
 		throws Exception {
 
-		String organizationId = ParamUtil.getString(req, "organizationId");
+		long organizationId = ParamUtil.getLong(req, "organizationId");
 
-		String parentOrganizationId = ParamUtil.get(
+		long parentOrganizationId = ParamUtil.getLong(
 			req, "parentOrganizationId",
 			OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
-
 		String name = ParamUtil.getString(req, "name");
 		int statusId = ParamUtil.getInteger(req, "statusId");
 		long regionId = ParamUtil.getLong(req, "regionId");
@@ -179,7 +177,7 @@ public class EditOrganizationAction extends PortletAction {
 
 		Organization organization = null;
 
-		if (Validator.isNull(organizationId)) {
+		if (organizationId <= 0) {
 
 			// Add organization
 

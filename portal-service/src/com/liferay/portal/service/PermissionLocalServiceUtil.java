@@ -116,8 +116,8 @@ public class PermissionLocalServiceUtil {
 			name, scope, primKey);
 	}
 
-	public static java.util.List getOrgGroupPermissions(
-		java.lang.String organizationId, long groupId, long resourceId)
+	public static java.util.List getOrgGroupPermissions(long organizationId,
+		long groupId, long resourceId)
 		throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
@@ -238,7 +238,7 @@ public class PermissionLocalServiceUtil {
 			actionIds, resourceId);
 	}
 
-	public static void setOrgGroupPermissions(java.lang.String organizationId,
+	public static void setOrgGroupPermissions(long organizationId,
 		long groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

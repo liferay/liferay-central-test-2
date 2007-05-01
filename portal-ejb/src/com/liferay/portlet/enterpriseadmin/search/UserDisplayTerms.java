@@ -62,7 +62,7 @@ public class UserDisplayTerms extends DisplayTerms {
 		screenName = ParamUtil.getString(req, SCREEN_NAME);
 		emailAddress = ParamUtil.getString(req, EMAIL_ADDRESS);
 		active = ParamUtil.getBoolean(req, ACTIVE, true);
-		organizationId = ParamUtil.getString(req, ORGANIZATION_ID);
+		organizationId = ParamUtil.getLong(req, ORGANIZATION_ID);
 		roleId = ParamUtil.getLong(req, ROLE_ID);
 		userGroupId = ParamUtil.getLong(req, USER_GROUP_ID);
 	}
@@ -95,7 +95,7 @@ public class UserDisplayTerms extends DisplayTerms {
 		this.active = active;
 	}
 
-	public String getOrganizationId() {
+	public long getOrganizationId() {
 		return organizationId;
 	}
 
@@ -113,7 +113,7 @@ public class UserDisplayTerms extends DisplayTerms {
 	protected String screenName;
 	protected String emailAddress;
 	protected boolean active;
-	protected String organizationId;
+	protected long organizationId;
 	protected long roleId;
 	protected long userGroupId;
 

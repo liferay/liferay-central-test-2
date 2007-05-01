@@ -35,14 +35,14 @@ public class OrganizationPermission_IW {
 
 	public void check(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String organizationId, java.lang.String actionId)
+		long organizationId, java.lang.String actionId)
 		throws com.liferay.portal.security.auth.PrincipalException {
 		OrganizationPermission.check(permissionChecker, organizationId, actionId);
 	}
 
 	public boolean contains(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String organizationId, java.lang.String actionId) {
+		long organizationId, java.lang.String actionId) {
 		return OrganizationPermission.contains(permissionChecker,
 			organizationId, actionId);
 	}

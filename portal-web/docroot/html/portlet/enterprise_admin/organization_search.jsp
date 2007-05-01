@@ -98,7 +98,7 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 <%
 Organization organization = null;
 
-if (Validator.isNotNull(displayTerms.getParentOrganizationId())) {
+if (displayTerms.getParentOrganizationId() > 0) {
 	try {
 		organization = OrganizationLocalServiceUtil.getOrganization(displayTerms.getParentOrganizationId());
 	}

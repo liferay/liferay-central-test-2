@@ -45,8 +45,7 @@ import java.util.List;
 public class OrganizationServiceImpl extends PrincipalBean
 	implements OrganizationService {
 
-	public void addGroupOrganizations(
-			long groupId, String[] organizationIds)
+	public void addGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -68,7 +67,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 	}
 
 	public Organization addOrganization(
-			String parentOrganizationId, String name, long regionId,
+			long parentOrganizationId, String name, long regionId,
 			long countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
@@ -87,7 +86,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 			statusId, location);
 	}
 
-	public void deleteOrganization(String organizationId)
+	public void deleteOrganization(long organizationId)
 		throws PortalException, SystemException {
 
 		checkPermission(organizationId, ActionKeys.DELETE);
@@ -95,7 +94,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 		OrganizationLocalServiceUtil.deleteOrganization(organizationId);
 	}
 
-	public Organization getOrganization(String organizationId)
+	public Organization getOrganization(long organizationId)
 		throws PortalException, SystemException {
 
 		checkPermission(organizationId, ActionKeys.VIEW);
@@ -103,7 +102,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 		return OrganizationLocalServiceUtil.getOrganization(organizationId);
 	}
 
-	public String getOrganizationId(long companyId, String name)
+	public long getOrganizationId(long companyId, String name)
 		throws PortalException, SystemException {
 
 		return OrganizationLocalServiceUtil.getOrganizationId(companyId, name);
@@ -115,7 +114,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 		return OrganizationLocalServiceUtil.getUserOrganizations(userId);
 	}
 
-	public void setGroupOrganizations(long groupId, String[] organizationIds)
+	public void setGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -125,8 +124,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 			groupId, organizationIds);
 	}
 
-	public void unsetGroupOrganizations(
-			long groupId, String[] organizationIds)
+	public void unsetGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -148,7 +146,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 	}
 
 	public Organization updateOrganization(
-			String organizationId, String parentOrganizationId, String name,
+			long organizationId, long parentOrganizationId, String name,
 			long regionId, long countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
@@ -159,8 +157,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 			name, regionId, countryId, statusId, location);
 	}
 
-	public Organization updateOrganization(
-			String organizationId, String comments)
+	public Organization updateOrganization(long organizationId, String comments)
 		throws PortalException, SystemException {
 
 		checkPermission(organizationId, ActionKeys.UPDATE);
@@ -169,7 +166,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 			organizationId, comments);
 	}
 
-	protected void checkPermission(String organizationId, String actionId)
+	protected void checkPermission(long organizationId, String actionId)
 		throws PortalException, SystemException {
 
 		Organization organization =

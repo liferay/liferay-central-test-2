@@ -98,7 +98,7 @@ public class PermissionServiceImpl
 	}
 
 	public void setOrgGroupPermissions(
-			String organizationId, long groupId, String[] actionIds,
+			long organizationId, long groupId, String[] actionIds,
 			long resourceId)
 		throws PortalException, SystemException {
 

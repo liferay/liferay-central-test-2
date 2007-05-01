@@ -50,7 +50,7 @@ package com.liferay.portal.service;
  */
 public class OrganizationServiceUtil {
 	public static void addGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+		long[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
@@ -67,8 +67,8 @@ public class OrganizationServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Organization addOrganization(
-		java.lang.String parentOrganizationId, java.lang.String name,
-		long regionId, long countryId, int statusId, boolean location)
+		long parentOrganizationId, java.lang.String name, long regionId,
+		long countryId, int statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
@@ -77,7 +77,7 @@ public class OrganizationServiceUtil {
 			regionId, countryId, statusId, location);
 	}
 
-	public static void deleteOrganization(java.lang.String organizationId)
+	public static void deleteOrganization(long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
@@ -85,7 +85,7 @@ public class OrganizationServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Organization getOrganization(
-		java.lang.String organizationId)
+		long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
@@ -93,8 +93,7 @@ public class OrganizationServiceUtil {
 		return organizationService.getOrganization(organizationId);
 	}
 
-	public static java.lang.String getOrganizationId(long companyId,
-		java.lang.String name)
+	public static long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
@@ -111,7 +110,7 @@ public class OrganizationServiceUtil {
 	}
 
 	public static void setGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+		long[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
@@ -119,7 +118,7 @@ public class OrganizationServiceUtil {
 	}
 
 	public static void unsetGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+		long[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
@@ -136,9 +135,8 @@ public class OrganizationServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Organization updateOrganization(
-		java.lang.String organizationId, java.lang.String parentOrganizationId,
-		java.lang.String name, long regionId, long countryId, int statusId,
-		boolean location)
+		long organizationId, long parentOrganizationId, java.lang.String name,
+		long regionId, long countryId, int statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
@@ -148,7 +146,7 @@ public class OrganizationServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Organization updateOrganization(
-		java.lang.String organizationId, java.lang.String comments)
+		long organizationId, java.lang.String comments)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();

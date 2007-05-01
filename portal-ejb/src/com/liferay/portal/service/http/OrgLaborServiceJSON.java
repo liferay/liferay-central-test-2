@@ -69,10 +69,10 @@ import org.json.JSONObject;
  *
  */
 public class OrgLaborServiceJSON {
-	public static JSONObject addOrgLabor(java.lang.String organizationId,
-		int typeId, int sunOpen, int sunClose, int monOpen, int monClose,
-		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
-		int thuClose, int friOpen, int friClose, int satOpen, int satClose)
+	public static JSONObject addOrgLabor(long organizationId, int typeId,
+		int sunOpen, int sunClose, int monOpen, int monClose, int tueOpen,
+		int tueClose, int wedOpen, int wedClose, int thuOpen, int thuClose,
+		int friOpen, int friClose, int satOpen, int satClose)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.OrgLabor returnValue = OrgLaborServiceUtil.addOrgLabor(organizationId,
@@ -97,7 +97,7 @@ public class OrgLaborServiceJSON {
 		return OrgLaborJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONArray getOrgLabors(java.lang.String organizationId)
+	public static JSONArray getOrgLabors(long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		java.util.List returnValue = OrgLaborServiceUtil.getOrgLabors(organizationId);

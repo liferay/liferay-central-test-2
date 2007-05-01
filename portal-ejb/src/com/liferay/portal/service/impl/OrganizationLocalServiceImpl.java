@@ -67,15 +67,15 @@ import java.util.List;
 public class OrganizationLocalServiceImpl
 	extends OrganizationLocalServiceBaseImpl {
 
-	public void addGroupOrganizations(long groupId, String[] organizationIds)
+	public void addGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.addOrganizations(groupId, organizationIds);
 	}
 
 	public Organization addOrganization(
-			long userId, String parentOrganizationId, String name,
-			long regionId, long countryId, int statusId, boolean location)
+			long userId, long parentOrganizationId, String name, long regionId,
+			long countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		// Organization
@@ -88,8 +88,7 @@ public class OrganizationLocalServiceImpl
 			user.getCompanyId(), parentOrganizationId, name, countryId,
 			statusId, location);
 
-		String organizationId = String.valueOf(
-			CounterLocalServiceUtil.increment(Organization.class.getName()));
+		long organizationId = CounterLocalServiceUtil.increment();
 
 		Organization organization = OrganizationUtil.create(organizationId);
 
@@ -106,8 +105,8 @@ public class OrganizationLocalServiceImpl
 
 		GroupLocalServiceUtil.addGroup(
 			userId, Organization.class.getName(),
-			organization.getPrimaryKey().toString(), null, null, null, null,
-			true);
+			String.valueOf(organization.getOrganizationId()), null, null, null,
+			null, true);
 
 		// Resources
 
@@ -127,7 +126,7 @@ public class OrganizationLocalServiceImpl
 
 		ResourceLocalServiceUtil.addResources(
 			organization.getCompanyId(), 0, userId, name,
-			organization.getPrimaryKey().toString(), false, false, false);
+			organization.getOrganizationId(), false, false, false);
 	}
 
 	public void addPasswordPolicyOrganizations(
@@ -138,7 +137,7 @@ public class OrganizationLocalServiceImpl
 			passwordPolicyId, Organization.class.getName(), organizationIds);
 	}
 
-	public void deleteOrganization(String organizationId)
+	public void deleteOrganization(long organizationId)
 		throws PortalException, SystemException {
 
 		Organization organization =
@@ -163,30 +162,31 @@ public class OrganizationLocalServiceImpl
 
 		AddressLocalServiceUtil.deleteAddresses(
 			organization.getCompanyId(), Organization.class.getName(),
-			organization.getOrganizationId());
+			String.valueOf(organization.getOrganizationId()));
 
 		// Email addresses
 
 		EmailAddressLocalServiceUtil.deleteEmailAddresses(
 			organization.getCompanyId(), Organization.class.getName(),
-			organization.getOrganizationId());
+			String.valueOf(organization.getOrganizationId()));
 
 		// Password policy relation
 
 		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRel(
-			Organization.class.getName(), organization.getOrganizationId());
+			Organization.class.getName(),
+			String.valueOf(organization.getOrganizationId()));
 
 		// Phone
 
 		PhoneLocalServiceUtil.deletePhones(
 			organization.getCompanyId(), Organization.class.getName(),
-			organization.getOrganizationId());
+			String.valueOf(organization.getOrganizationId()));
 
 		// Website
 
 		WebsiteLocalServiceUtil.deleteWebsites(
 			organization.getCompanyId(), Organization.class.getName(),
-			organization.getOrganizationId());
+			String.valueOf(organization.getOrganizationId()));
 
 		// Group
 
@@ -204,7 +204,7 @@ public class OrganizationLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			organization.getCompanyId(), name, ResourceImpl.SCOPE_INDIVIDUAL,
-			organization.getPrimaryKey().toString());
+			organization.getOrganizationId());
 
 		// Organization
 
@@ -217,13 +217,13 @@ public class OrganizationLocalServiceImpl
 		return GroupUtil.getOrganizations(groupId);
 	}
 
-	public Organization getOrganization(String organizationId)
+	public Organization getOrganization(long organizationId)
 		throws PortalException, SystemException {
 
 		return OrganizationUtil.findByPrimaryKey(organizationId);
 	}
 
-	public String getOrganizationId(long companyId, String name)
+	public long getOrganizationId(long companyId, String name)
 		throws PortalException, SystemException {
 
 		try {
@@ -233,7 +233,7 @@ public class OrganizationLocalServiceImpl
 			return organization.getOrganizationId();
 		}
 		catch (NoSuchOrganizationException nsoge) {
-			return null;
+			return 0;
 		}
 	}
 
@@ -243,22 +243,23 @@ public class OrganizationLocalServiceImpl
 		return UserUtil.getOrganizations(userId);
 	}
 
-	public boolean hasGroupOrganization(long groupId, String organizationId)
+	public boolean hasGroupOrganization(long groupId, long organizationId)
 		throws PortalException, SystemException {
 
 		return GroupUtil.containsOrganization(groupId, organizationId);
 	}
 
 	public boolean hasPasswordPolicyOrganization(
-			long passwordPolicyId, String organizationId)
+			long passwordPolicyId, long organizationId)
 		throws PortalException, SystemException {
 
 		return PasswordPolicyRelLocalServiceUtil.hasPasswordPolicyRel(
-			passwordPolicyId, Organization.class.getName(), organizationId);
+			passwordPolicyId, Organization.class.getName(),
+			String.valueOf(organizationId));
 	}
 
 	public List search(
-			long companyId, String parentOrganizationId,
+			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, Long regionId, Long countryId,
 			LinkedHashMap params, boolean andOperator, int begin, int end)
@@ -271,7 +272,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public int searchCount(
-			long companyId, String parentOrganizationId,
+			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, Long regionId, Long countryId,
 			LinkedHashMap params, boolean andOperator)
@@ -282,14 +283,13 @@ public class OrganizationLocalServiceImpl
 			street, city, zip, regionId, countryId, params, andOperator);
 	}
 
-	public void setGroupOrganizations(long groupId, String[] organizationIds)
+	public void setGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.setOrganizations(groupId, organizationIds);
 	}
 
-	public void unsetGroupOrganizations(
-			long groupId, String[] organizationIds)
+	public void unsetGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.removeOrganizations(groupId, organizationIds);
@@ -304,7 +304,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public Organization updateOrganization(
-			long companyId, String organizationId, String parentOrganizationId,
+			long companyId, long organizationId, long parentOrganizationId,
 			String name, long regionId, long countryId, int statusId,
 			boolean location)
 		throws PortalException, SystemException {
@@ -330,8 +330,7 @@ public class OrganizationLocalServiceImpl
 		return organization;
 	}
 
-	public Organization updateOrganization(
-			String organizationId, String comments)
+	public Organization updateOrganization(long organizationId, String comments)
 		throws PortalException, SystemException {
 
 		Organization organization =
@@ -344,12 +343,12 @@ public class OrganizationLocalServiceImpl
 		return organization;
 	}
 
-	protected String getParentOrganizationId(
-			long companyId, String parentOrganizationId)
+	protected long getParentOrganizationId(
+			long companyId, long parentOrganizationId)
 		throws PortalException, SystemException {
 
-		if (!parentOrganizationId.equals(
-				OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID)) {
+		if (parentOrganizationId !=
+				OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
 
 			// Ensure parent organization exists and belongs to the proper
 			// company
@@ -373,17 +372,17 @@ public class OrganizationLocalServiceImpl
 	}
 
 	protected void validate(
-			long companyId, String parentOrganizationId, String name,
+			long companyId, long parentOrganizationId, String name,
 			long countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		validate(
-			companyId, null, parentOrganizationId, name, countryId, statusId,
+			companyId, 0, parentOrganizationId, name, countryId, statusId,
 			location);
 	}
 
 	protected void validate(
-			long companyId, String organizationId, String parentOrganizationId,
+			long companyId, long organizationId, long parentOrganizationId,
 			String name, long countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
@@ -411,9 +410,8 @@ public class OrganizationLocalServiceImpl
 					OrganizationUtil.findByC_N(companyId, name);
 
 				if (organization.getName().equalsIgnoreCase(name)) {
-					if ((organizationId == null) ||
-						(!organization.getOrganizationId().equals(
-								organizationId))) {
+					if ((organizationId <= 0) ||
+						(organization.getOrganizationId() != organizationId)) {
 
 						throw new DuplicateOrganizationException();
 					}

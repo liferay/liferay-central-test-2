@@ -58,7 +58,7 @@ public class OrganizationDisplayTerms extends DisplayTerms {
 		zip = ParamUtil.getString(req, ZIP);
 		regionId = ParamUtil.getLong(req, REGION_ID);
 		countryId = ParamUtil.getLong(req, COUNTRY_ID);
-		parentOrganizationId = ParamUtil.getString(req, PARENT_ORGANIZATION_ID);
+		parentOrganizationId = ParamUtil.getLong(req, PARENT_ORGANIZATION_ID);
 	}
 
 	public String getName() {
@@ -85,7 +85,7 @@ public class OrganizationDisplayTerms extends DisplayTerms {
 		return countryId;
 	}
 
-	public String getParentOrganizationId() {
+	public long getParentOrganizationId() {
 		return parentOrganizationId;
 	}
 
@@ -95,6 +95,6 @@ public class OrganizationDisplayTerms extends DisplayTerms {
 	protected String zip;
 	protected long regionId;
 	protected long countryId;
-	protected String parentOrganizationId;
+	protected long parentOrganizationId;
 
 }

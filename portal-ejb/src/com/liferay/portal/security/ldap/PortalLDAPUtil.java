@@ -323,7 +323,7 @@ public class PortalLDAPUtil {
 			Locale locale, String firstName, String middleName, String lastName,
 			int prefixId, int suffixId, boolean male, int birthdayMonth,
 			int birthdayDay, int birthdayYear, String jobTitle,
-			String organizationId, String locationId, boolean sendEmail,
+			long organizationId, long locationId, boolean sendEmail,
 			boolean checkExists, boolean updatePassword)
 		throws PortalException, SystemException {
 
@@ -468,8 +468,8 @@ public class PortalLDAPUtil {
 		int birthdayYear = 1970;
 		String jobTitle = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("jobTitle"));
-		String organizationId = null;
-		String locationId = null;
+		long organizationId = 0;
+		long locationId = 0;
 		boolean sendEmail = false;
 
 		User user = importFromLDAP(

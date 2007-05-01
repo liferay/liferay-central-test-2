@@ -416,8 +416,8 @@ public class LDAPAuth implements Authenticator {
 		int birthdayYear = 1970;
 		String jobTitle = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("jobTitle"));
-		String organizationId = null;
-		String locationId = null;
+		long organizationId = 0;
+		long locationId = 0;
 		boolean sendEmail = false;
 		boolean checkExists = true;
 		boolean updatePassword = true;

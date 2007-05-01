@@ -76,8 +76,8 @@ public interface PermissionService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void setOrgGroupPermissions(java.lang.String organizationId,
-		long groupId, java.lang.String[] actionIds, long resourceId)
+	public void setOrgGroupPermissions(long organizationId, long groupId,
+		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

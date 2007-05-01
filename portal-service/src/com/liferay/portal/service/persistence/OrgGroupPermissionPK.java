@@ -34,25 +34,25 @@ import java.io.Serializable;
  *
  */
 public class OrgGroupPermissionPK implements Comparable, Serializable {
-	public String organizationId;
+	public long organizationId;
 	public long groupId;
 	public long permissionId;
 
 	public OrgGroupPermissionPK() {
 	}
 
-	public OrgGroupPermissionPK(String organizationId, long groupId,
+	public OrgGroupPermissionPK(long organizationId, long groupId,
 		long permissionId) {
 		this.organizationId = organizationId;
 		this.groupId = groupId;
 		this.permissionId = permissionId;
 	}
 
-	public String getOrganizationId() {
+	public long getOrganizationId() {
 		return organizationId;
 	}
 
-	public void setOrganizationId(String organizationId) {
+	public void setOrganizationId(long organizationId) {
 		this.organizationId = organizationId;
 	}
 
@@ -79,7 +79,16 @@ public class OrgGroupPermissionPK implements Comparable, Serializable {
 
 		OrgGroupPermissionPK pk = (OrgGroupPermissionPK)obj;
 		int value = 0;
-		value = organizationId.compareTo(pk.organizationId);
+
+		if (organizationId < pk.organizationId) {
+			value = -1;
+		}
+		else if (organizationId > pk.organizationId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -130,8 +139,8 @@ public class OrgGroupPermissionPK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((organizationId.equals(pk.organizationId)) &&
-				(groupId == pk.groupId) && (permissionId == pk.permissionId)) {
+		if ((organizationId == pk.organizationId) && (groupId == pk.groupId) &&
+				(permissionId == pk.permissionId)) {
 			return true;
 		}
 		else {

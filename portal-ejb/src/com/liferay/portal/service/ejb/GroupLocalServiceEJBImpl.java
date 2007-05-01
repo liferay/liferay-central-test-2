@@ -131,7 +131,7 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 	}
 
 	public com.liferay.portal.model.Group getOrganizationGroup(long companyId,
-		java.lang.String organizationId)
+		long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return GroupLocalServiceFactory.getTxImpl().getOrganizationGroup(companyId,

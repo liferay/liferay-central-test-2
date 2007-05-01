@@ -77,7 +77,7 @@ public class OrganizationSearch extends SearchContainer {
 			String.valueOf(displayTerms.getRegionId()));
 		iteratorURL.setParameter(
 			OrganizationDisplayTerms.PARENT_ORGANIZATION_ID,
-			displayTerms.getParentOrganizationId());
+			String.valueOf(displayTerms.getParentOrganizationId()));
 	}
 
 }

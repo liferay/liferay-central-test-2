@@ -58,7 +58,7 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 
 			Organization organization = user.getOrganization();
 
-			if (Validator.isNotNull(organization.getOrganizationId())) {
+			if (organization.getOrganizationId() > 0) {
 				return _options;
 			}
 		}
@@ -84,13 +84,14 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 
 			LinkedHashMap params = null;
 
-			if (Validator.isNotNull(organization.getOrganizationId()) &&
+			if ((organization.getOrganizationId() > 0) &&
 				(Validator.isNull(optionOrganization) ||
 				 optionOrganization.equals("my-organization"))) {
 
 				params = new LinkedHashMap();
 
-				params.put("usersOrgs", organization.getOrganizationId());
+				params.put(
+					"usersOrgs", new Long(organization.getOrganizationId()));
 			}
 
 			List results = UserLocalServiceUtil.search(

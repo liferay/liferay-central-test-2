@@ -74,19 +74,19 @@ public class OrganizationSoap implements Serializable {
 	public OrganizationSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _organizationId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setOrganizationId(pk);
 	}
 
-	public String getOrganizationId() {
+	public long getOrganizationId() {
 		return _organizationId;
 	}
 
-	public void setOrganizationId(String organizationId) {
+	public void setOrganizationId(long organizationId) {
 		_organizationId = organizationId;
 	}
 
@@ -98,11 +98,11 @@ public class OrganizationSoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getParentOrganizationId() {
+	public long getParentOrganizationId() {
 		return _parentOrganizationId;
 	}
 
-	public void setParentOrganizationId(String parentOrganizationId) {
+	public void setParentOrganizationId(long parentOrganizationId) {
 		_parentOrganizationId = parentOrganizationId;
 	}
 
@@ -158,9 +158,9 @@ public class OrganizationSoap implements Serializable {
 		_comments = comments;
 	}
 
-	private String _organizationId;
+	private long _organizationId;
 	private long _companyId;
-	private String _parentOrganizationId;
+	private long _parentOrganizationId;
 	private String _name;
 	private boolean _recursable;
 	private long _regionId;

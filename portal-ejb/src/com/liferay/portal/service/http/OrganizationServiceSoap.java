@@ -78,7 +78,7 @@ import java.rmi.RemoteException;
  */
 public class OrganizationServiceSoap {
 	public static void addGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds) throws RemoteException {
+		long[] organizationIds) throws RemoteException {
 		try {
 			OrganizationServiceUtil.addGroupOrganizations(groupId,
 				organizationIds);
@@ -102,8 +102,8 @@ public class OrganizationServiceSoap {
 	}
 
 	public static com.liferay.portal.model.OrganizationSoap addOrganization(
-		java.lang.String parentOrganizationId, java.lang.String name,
-		long regionId, long countryId, int statusId, boolean location)
+		long parentOrganizationId, java.lang.String name, long regionId,
+		long countryId, int statusId, boolean location)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
@@ -117,7 +117,7 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	public static void deleteOrganization(java.lang.String organizationId)
+	public static void deleteOrganization(long organizationId)
 		throws RemoteException {
 		try {
 			OrganizationServiceUtil.deleteOrganization(organizationId);
@@ -129,7 +129,7 @@ public class OrganizationServiceSoap {
 	}
 
 	public static com.liferay.portal.model.OrganizationSoap getOrganization(
-		java.lang.String organizationId) throws RemoteException {
+		long organizationId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.getOrganization(organizationId);
 
@@ -141,10 +141,10 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	public static java.lang.String getOrganizationId(long companyId,
-		java.lang.String name) throws RemoteException {
+	public static long getOrganizationId(long companyId, java.lang.String name)
+		throws RemoteException {
 		try {
-			java.lang.String returnValue = OrganizationServiceUtil.getOrganizationId(companyId,
+			long returnValue = OrganizationServiceUtil.getOrganizationId(companyId,
 					name);
 
 			return returnValue;
@@ -169,7 +169,7 @@ public class OrganizationServiceSoap {
 	}
 
 	public static void setGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds) throws RemoteException {
+		long[] organizationIds) throws RemoteException {
 		try {
 			OrganizationServiceUtil.setGroupOrganizations(groupId,
 				organizationIds);
@@ -181,7 +181,7 @@ public class OrganizationServiceSoap {
 	}
 
 	public static void unsetGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds) throws RemoteException {
+		long[] organizationIds) throws RemoteException {
 		try {
 			OrganizationServiceUtil.unsetGroupOrganizations(groupId,
 				organizationIds);
@@ -205,9 +205,9 @@ public class OrganizationServiceSoap {
 	}
 
 	public static com.liferay.portal.model.OrganizationSoap updateOrganization(
-		java.lang.String organizationId, java.lang.String parentOrganizationId,
-		java.lang.String name, long regionId, long countryId, int statusId,
-		boolean location) throws RemoteException {
+		long organizationId, long parentOrganizationId, java.lang.String name,
+		long regionId, long countryId, int statusId, boolean location)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
 					parentOrganizationId, name, regionId, countryId, statusId,
@@ -222,7 +222,7 @@ public class OrganizationServiceSoap {
 	}
 
 	public static com.liferay.portal.model.OrganizationSoap updateOrganization(
-		java.lang.String organizationId, java.lang.String comments)
+		long organizationId, java.lang.String comments)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,

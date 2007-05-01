@@ -74,7 +74,7 @@ public class OrganizationFinder {
 		OrganizationFinder.class.getName() + ".joinByOrganizationsRoles";
 
 	public static int countByC_PO_N_S_C_Z_R_C(
-			long companyId, String parentOrganizationId,
+			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, Long regionId, Long countryId,
 			LinkedHashMap params, boolean andOperator)
@@ -179,7 +179,7 @@ public class OrganizationFinder {
 	}
 
 	public static List findByC_PO_N_S_C_Z_R_C(
-			long companyId, String parentOrganizationId,
+			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, Long regionId, Long countryId,
 			LinkedHashMap params, boolean andOperator, int begin, int end)
@@ -240,7 +240,7 @@ public class OrganizationFinder {
 
 			q.setCacheable(false);
 
-			q.addScalar("orgId", Hibernate.STRING);
+			q.addScalar("orgId", Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -277,10 +277,10 @@ public class OrganizationFinder {
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
-				String organizationId = (String)itr.next();
+				Long organizationId = (Long)itr.next();
 
 				Organization organization = OrganizationUtil.findByPrimaryKey(
-					organizationId);
+					organizationId.longValue());
 
 				list.add(organization);
 			}
@@ -296,7 +296,7 @@ public class OrganizationFinder {
 	}
 
 	private static int _countByPermissions(
-			long companyId, String parentOrganizationId,
+			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, Long regionId, Long countryId,
 			long resourceId, long groupId, boolean andOperator)
@@ -421,7 +421,7 @@ public class OrganizationFinder {
 	}
 
 	private static List _findByPermissions(
-			long companyId, String parentOrganizationId,
+			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, Long regionId, Long countryId,
 			long resourceId, long groupId, boolean andOperator, int begin,
@@ -488,7 +488,7 @@ public class OrganizationFinder {
 
 			q.setCacheable(false);
 
-			q.addScalar("orgId", Hibernate.STRING);
+			q.addScalar("orgId", Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -532,10 +532,10 @@ public class OrganizationFinder {
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
-				String organizationId = (String)itr.next();
+				Long organizationId = (Long)itr.next();
 
 				Organization organization = OrganizationUtil.findByPrimaryKey(
-					organizationId);
+					organizationId.longValue());
 
 				list.add(organization);
 			}

@@ -50,7 +50,7 @@ package com.liferay.portal.service;
  */
 public class OrgLaborServiceUtil {
 	public static com.liferay.portal.model.OrgLabor addOrgLabor(
-		java.lang.String organizationId, int typeId, int sunOpen, int sunClose,
+		long organizationId, int typeId, int sunOpen, int sunClose,
 		int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,
 		int wedClose, int thuOpen, int thuClose, int friOpen, int friClose,
 		int satOpen, int satClose)
@@ -78,7 +78,7 @@ public class OrgLaborServiceUtil {
 		return orgLaborService.getOrgLabor(orgLaborId);
 	}
 
-	public static java.util.List getOrgLabors(java.lang.String organizationId)
+	public static java.util.List getOrgLabors(long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();

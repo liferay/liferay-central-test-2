@@ -44,8 +44,7 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 		zip = DAOParamUtil.getLike(req, ZIP);
 		regionId = ParamUtil.getLong(req, REGION_ID);
 		countryId = ParamUtil.getLong(req, COUNTRY_ID);
-		parentOrganizationId = DAOParamUtil.getString(
-			req, PARENT_ORGANIZATION_ID);
+		parentOrganizationId = ParamUtil.getLong(req, PARENT_ORGANIZATION_ID);
 	}
 
 	public Long getRegionIdObj() {

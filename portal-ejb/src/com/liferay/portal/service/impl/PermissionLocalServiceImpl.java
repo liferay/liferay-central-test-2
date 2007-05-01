@@ -169,7 +169,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public List getOrgGroupPermissions(
-			String organizationId, long groupId, long resourceId)
+			long organizationId, long groupId, long resourceId)
 		throws SystemException {
 
 		return PermissionFinder.findByO_G_R(
@@ -438,11 +438,13 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		long associatedGroupId = 0;
 
 		if (className.equals(Organization.class.getName())) {
+			long organizationId = GetterUtil.getLong(classPK);
+
 			Organization organization =
-				OrganizationUtil.findByPrimaryKey(classPK);
+				OrganizationUtil.findByPrimaryKey(organizationId);
 
 			OrgGroupPermissionFinder.removeByO_G_R(
-				classPK, groupId, resourceId);
+				organizationId, groupId, resourceId);
 
 			associatedGroupId = organization.getGroup().getGroupId();
 		}
@@ -458,7 +460,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void setOrgGroupPermissions(
-			String organizationId, long groupId, String[] actionIds,
+			long organizationId, long groupId, String[] actionIds,
 			long resourceId)
 		throws PortalException, SystemException {
 

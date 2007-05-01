@@ -37,8 +37,8 @@
 
 	long userId = user2.getUserId();
 
-	String organizationId = user2.getOrganization().getOrganizationId();
-	String locationId = user2.getLocation().getOrganizationId();
+	long organizationId = user2.getOrganization().getOrganizationId();
+	long locationId = user2.getLocation().getOrganizationId();
 	%>
 
 	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) %>">

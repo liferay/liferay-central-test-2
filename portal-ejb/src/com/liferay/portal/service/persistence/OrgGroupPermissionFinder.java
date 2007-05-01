@@ -47,7 +47,7 @@ public class OrgGroupPermissionFinder {
 		OrgGroupPermissionFinder.class.getName() + ".findByO_G_R";
 
 	public static void removeByO_G_R(
-			String organizatonId, long groupId, long resourceId)
+			long organizationId, long groupId, long resourceId)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 
 		Session session = null;
@@ -66,7 +66,7 @@ public class OrgGroupPermissionFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(resourceId);
-			qPos.add(organizatonId);
+			qPos.add(organizationId);
 			qPos.add(groupId);
 
 			Iterator itr = q.list().iterator();

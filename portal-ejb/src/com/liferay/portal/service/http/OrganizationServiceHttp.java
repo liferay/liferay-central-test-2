@@ -72,7 +72,7 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class OrganizationServiceHttp {
 	public static void addGroupOrganizations(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String[] organizationIds)
+		long groupId, long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -80,7 +80,7 @@ public class OrganizationServiceHttp {
 			Object paramObj1 = organizationIds;
 
 			if (organizationIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
@@ -147,18 +147,13 @@ public class OrganizationServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Organization addOrganization(
-		HttpPrincipal httpPrincipal, java.lang.String parentOrganizationId,
+		HttpPrincipal httpPrincipal, long parentOrganizationId,
 		java.lang.String name, long regionId, long countryId, int statusId,
 		boolean location)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = parentOrganizationId;
-
-			if (parentOrganizationId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(parentOrganizationId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -201,16 +196,11 @@ public class OrganizationServiceHttp {
 	}
 
 	public static void deleteOrganization(HttpPrincipal httpPrincipal,
-		java.lang.String organizationId)
+		long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = organizationId;
-
-			if (organizationId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(organizationId);
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"deleteOrganization", new Object[] { paramObj0 });
 
@@ -236,16 +226,11 @@ public class OrganizationServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Organization getOrganization(
-		HttpPrincipal httpPrincipal, java.lang.String organizationId)
+		HttpPrincipal httpPrincipal, long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = organizationId;
-
-			if (organizationId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(organizationId);
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"getOrganization", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -273,8 +258,8 @@ public class OrganizationServiceHttp {
 		}
 	}
 
-	public static java.lang.String getOrganizationId(
-		HttpPrincipal httpPrincipal, long companyId, java.lang.String name)
+	public static long getOrganizationId(HttpPrincipal httpPrincipal,
+		long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -304,7 +289,7 @@ public class OrganizationServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.lang.String)returnObj;
+			return ((Long)returnObj).longValue();
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -346,7 +331,7 @@ public class OrganizationServiceHttp {
 	}
 
 	public static void setGroupOrganizations(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String[] organizationIds)
+		long groupId, long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -354,7 +339,7 @@ public class OrganizationServiceHttp {
 			Object paramObj1 = organizationIds;
 
 			if (organizationIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
@@ -383,7 +368,7 @@ public class OrganizationServiceHttp {
 	}
 
 	public static void unsetGroupOrganizations(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String[] organizationIds)
+		long groupId, long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -391,7 +376,7 @@ public class OrganizationServiceHttp {
 			Object paramObj1 = organizationIds;
 
 			if (organizationIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
@@ -458,24 +443,14 @@ public class OrganizationServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Organization updateOrganization(
-		HttpPrincipal httpPrincipal, java.lang.String organizationId,
-		java.lang.String parentOrganizationId, java.lang.String name,
-		long regionId, long countryId, int statusId, boolean location)
+		HttpPrincipal httpPrincipal, long organizationId,
+		long parentOrganizationId, java.lang.String name, long regionId,
+		long countryId, int statusId, boolean location)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = organizationId;
-
-			if (organizationId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = parentOrganizationId;
-
-			if (parentOrganizationId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(organizationId);
+			Object paramObj1 = new LongWrapper(parentOrganizationId);
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -518,17 +493,12 @@ public class OrganizationServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Organization updateOrganization(
-		HttpPrincipal httpPrincipal, java.lang.String organizationId,
+		HttpPrincipal httpPrincipal, long organizationId,
 		java.lang.String comments)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = organizationId;
-
-			if (organizationId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(organizationId);
 			Object paramObj1 = comments;
 
 			if (comments == null) {

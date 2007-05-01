@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.OrgLaborServiceUtil;
 import com.liferay.portal.service.http.TunnelUtil;
@@ -71,19 +70,14 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class OrgLaborServiceHttp {
 	public static com.liferay.portal.model.OrgLabor addOrgLabor(
-		HttpPrincipal httpPrincipal, java.lang.String organizationId,
-		int typeId, int sunOpen, int sunClose, int monOpen, int monClose,
-		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
-		int thuClose, int friOpen, int friClose, int satOpen, int satClose)
+		HttpPrincipal httpPrincipal, long organizationId, int typeId,
+		int sunOpen, int sunClose, int monOpen, int monClose, int tueOpen,
+		int tueClose, int wedOpen, int wedClose, int thuOpen, int thuClose,
+		int friOpen, int friClose, int satOpen, int satClose)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = organizationId;
-
-			if (organizationId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(organizationId);
 			Object paramObj1 = new IntegerWrapper(typeId);
 			Object paramObj2 = new IntegerWrapper(sunOpen);
 			Object paramObj3 = new IntegerWrapper(sunClose);
@@ -196,16 +190,11 @@ public class OrgLaborServiceHttp {
 	}
 
 	public static java.util.List getOrgLabors(HttpPrincipal httpPrincipal,
-		java.lang.String organizationId)
+		long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = organizationId;
-
-			if (organizationId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(organizationId);
 			MethodWrapper methodWrapper = new MethodWrapper(OrgLaborServiceUtil.class.getName(),
 					"getOrgLabors", new Object[] { paramObj0 });
 			Object returnObj = null;

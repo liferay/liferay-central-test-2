@@ -51,9 +51,7 @@ public class OrgGroupPermissionImpl
 			while (itr.hasNext()) {
 				Organization organization = (Organization)itr.next();
 
-				if (organization.getOrganizationId().equals(
-						getOrganizationId())) {
-
+				if (organization.getOrganizationId() == getOrganizationId()) {
 					return true;
 				}
 			}

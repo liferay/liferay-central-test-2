@@ -469,7 +469,7 @@
 
 		<!-- PK fields -->
 
-		<column name="organizationId" type="String" primary="true" />
+		<column name="organizationId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -477,7 +477,7 @@
 
 		<!-- Other fields -->
 
-		<column name="parentOrganizationId" type="String" />
+		<column name="parentOrganizationId" type="long" />
 		<column name="name" type="String" />
 		<column name="recursable" type="boolean" />
 		<column name="regionId" type="long" />
@@ -501,7 +501,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="Locations" return-type="Collection" where="parentOrganizationId != '-1'" db-index="false">
+		<finder name="Locations" return-type="Collection" where="parentOrganizationId != 0" db-index="false">
 			<finder-column name="companyId" />
 		</finder>
 		<finder name="C_P" return-type="Collection">
@@ -517,7 +517,7 @@
 
 		<!-- PK fields -->
 
-		<column name="organizationId" type="String" primary="true" />
+		<column name="organizationId" type="long" primary="true" />
 		<column name="groupId" type="long" primary="true" />
 		<column name="permissionId" type="long" primary="true" />
 
@@ -534,7 +534,7 @@
 
 		<!-- PK fields -->
 
-		<column name="organizationId" type="String" primary="true" />
+		<column name="organizationId" type="long" primary="true" />
 		<column name="groupId" type="long" primary="true" />
 		<column name="roleId" type="long" primary="true" />
 
@@ -555,7 +555,7 @@
 
 		<!-- Other fields -->
 
-		<column name="organizationId" type="String" />
+		<column name="organizationId" type="long" />
 		<column name="typeId" type="int" />
 		<column name="sunOpen" type="int" />
 		<column name="sunClose" type="int" />

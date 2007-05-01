@@ -111,10 +111,10 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		LinkedHashMap userParams = new LinkedHashMap();
 
 		if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-			userParams.put("usersOrgs", user.getOrganization().getOrganizationId());
+			userParams.put("usersOrgs", new Long(user.getOrganization().getOrganizationId()));
 		}
 		else if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
-			userParams.put("usersOrgs", user.getLocation().getOrganizationId());
+			userParams.put("usersOrgs", new Long(user.getLocation().getOrganizationId()));
 		}
 
 		if (tabs3.equals("current")) {
@@ -267,7 +267,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-		String parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
+		long parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 		String parentOrganizationComparator = StringPool.EQUAL;
 
 		if (!rootOrganization) {

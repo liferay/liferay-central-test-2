@@ -92,10 +92,10 @@ UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 LinkedHashMap userParams = new LinkedHashMap();
 
 if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-	userParams.put("usersOrgs", user.getOrganization().getOrganizationId());
+	userParams.put("usersOrgs", new Long(user.getOrganization().getOrganizationId()));
 }
 else if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
-	userParams.put("usersOrgs", user.getLocation().getOrganizationId());
+	userParams.put("usersOrgs", new Long(user.getLocation().getOrganizationId()));
 }
 
 if (tabs2.equals("current")) {

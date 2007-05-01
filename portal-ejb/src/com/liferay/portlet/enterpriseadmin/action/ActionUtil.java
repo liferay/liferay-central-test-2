@@ -149,11 +149,11 @@ public class ActionUtil {
 	public static void getOrganization(HttpServletRequest req)
 		throws Exception {
 
-		String organizationId = ParamUtil.getString(req, "organizationId");
+		long organizationId = ParamUtil.getLong(req, "organizationId");
 
 		Organization organization = null;
 
-		if (Validator.isNotNull(organizationId)) {
+		if (organizationId > 0) {
 			organization =
 				OrganizationServiceUtil.getOrganization(organizationId);
 		}

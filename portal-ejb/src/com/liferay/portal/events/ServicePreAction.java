@@ -182,7 +182,7 @@ public class ServicePreAction extends Action {
 				}
 			}
 
-			long doAsUserId = ParamUtil.getLong(req, "doAsUserId");
+			String doAsUserId = ParamUtil.getString(req, "doAsUserId");
 
 			// Permission checker
 

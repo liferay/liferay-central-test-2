@@ -587,9 +587,9 @@ public class PortletURLImpl implements PortletURL, Serializable {
 			}
 		}
 		else {
-			long doAsUserId = themeDisplay.getDoAsUserId();
+			String doAsUserId = themeDisplay.getDoAsUserId();
 
-			if (doAsUserId > 0) {
+			if (Validator.isNotNull(doAsUserId)) {
 				sm.append("doAsUserId");
 				sm.append(StringPool.EQUAL);
 				sm.append(processValue(key, doAsUserId));

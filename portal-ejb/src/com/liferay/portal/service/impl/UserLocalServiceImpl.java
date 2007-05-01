@@ -183,7 +183,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			Locale locale, String firstName, String middleName, String lastName,
 			int prefixId, int suffixId, boolean male, int birthdayMonth,
 			int birthdayDay, int birthdayYear, String jobTitle,
-			String organizationId, String locationId, boolean sendEmail)
+			long organizationId, long locationId, boolean sendEmail)
 		throws PortalException, SystemException {
 
 		// User
@@ -337,11 +337,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		UserUtil.clearOrganizations(userId);
 
-		if (Validator.isNotNull(organizationId)) {
+		if (organizationId > 0) {
 			UserUtil.addOrganization(userId, organizationId);
 		}
 
-		if (Validator.isNotNull(locationId)) {
+		if (locationId  > 0) {
 			UserUtil.addOrganization(userId, locationId);
 		}
 
@@ -1082,7 +1082,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
 			String smsSn, String aimSn, String icqSn, String jabberSn,
 			String msnSn, String skypeSn, String ymSn, String jobTitle,
-			String organizationId, String locationId)
+			long organizationId, long locationId)
 		throws PortalException, SystemException {
 
 		// User
@@ -1193,11 +1193,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		UserUtil.clearOrganizations(userId);
 
-		if (Validator.isNotNull(organizationId)) {
+		if (organizationId  > 0) {
 			UserUtil.addOrganization(userId, organizationId);
 		}
 
-		if (Validator.isNotNull(locationId)) {
+		if (locationId  > 0) {
 			UserUtil.addOrganization(userId, locationId);
 		}
 
@@ -1556,7 +1556,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long companyId, boolean autoPassword, String password1,
 			String password2, boolean autoScreenName, String screenName,
 			String emailAddress, String firstName, String lastName,
-			String organizationId, String locationId)
+			long organizationId, long locationId)
 		throws PortalException, SystemException {
 
 		if (!autoScreenName) {
@@ -1609,7 +1609,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected void validateOrganizations(
-			long companyId, String organizationId, String locationId)
+			long companyId, long organizationId, long locationId)
 		throws PortalException, SystemException {
 
 		boolean organizationRequired = GetterUtil.getBoolean(PropsUtil.get(
@@ -1624,19 +1624,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		Organization organization = null;
 
-		if (organizationRequired || Validator.isNotNull(organizationId)) {
+		if (organizationRequired || (organizationId  > 0)) {
 			organization = OrganizationUtil.findByPrimaryKey(organizationId);
 		}
 
 		Organization location = null;
 
-		if (locationRequired || Validator.isNotNull(locationId)) {
+		if (locationRequired || (locationId > 0)) {
 			location = OrganizationUtil.findByPrimaryKey(locationId);
 		}
 
 		if ((organization != null) && (location != null)) {
-			if (!location.getParentOrganizationId().equals(
-					organization.getOrganizationId())) {
+			if (location.getParentOrganizationId() !=
+					organization.getOrganizationId()) {
 
 				throw new OrganizationParentException();
 			}

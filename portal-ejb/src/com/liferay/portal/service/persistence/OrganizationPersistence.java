@@ -65,7 +65,7 @@ import java.util.List;
  *
  */
 public class OrganizationPersistence extends BasePersistence {
-	public Organization create(String organizationId) {
+	public Organization create(long organizationId) {
 		Organization organization = new OrganizationImpl();
 		organization.setNew(true);
 		organization.setPrimaryKey(organizationId);
@@ -73,7 +73,7 @@ public class OrganizationPersistence extends BasePersistence {
 		return organization;
 	}
 
-	public Organization remove(String organizationId)
+	public Organization remove(long organizationId)
 		throws NoSuchOrganizationException, SystemException {
 		Session session = null;
 
@@ -81,7 +81,7 @@ public class OrganizationPersistence extends BasePersistence {
 			session = openSession();
 
 			Organization organization = (Organization)session.get(OrganizationImpl.class,
-					organizationId);
+					new Long(organizationId));
 
 			if (organization == null) {
 				if (_log.isWarnEnabled()) {
@@ -164,7 +164,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public Organization findByPrimaryKey(String organizationId)
+	public Organization findByPrimaryKey(long organizationId)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = fetchByPrimaryKey(organizationId);
 
@@ -182,7 +182,7 @@ public class OrganizationPersistence extends BasePersistence {
 		return organization;
 	}
 
-	public Organization fetchByPrimaryKey(String organizationId)
+	public Organization fetchByPrimaryKey(long organizationId)
 		throws SystemException {
 		Session session = null;
 
@@ -190,7 +190,7 @@ public class OrganizationPersistence extends BasePersistence {
 			session = openSession();
 
 			return (Organization)session.get(OrganizationImpl.class,
-				organizationId);
+				new Long(organizationId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -310,7 +310,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public Organization[] findByCompanyId_PrevAndNext(String organizationId,
+	public Organization[] findByCompanyId_PrevAndNext(long organizationId,
 		long companyId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByPrimaryKey(organizationId);
@@ -366,7 +366,7 @@ public class OrganizationPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
 			query.append("companyId = ?");
-			query.append(" AND parentOrganizationId != '-1' ");
+			query.append(" AND parentOrganizationId != 0 ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
@@ -401,7 +401,7 @@ public class OrganizationPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
 			query.append("companyId = ?");
-			query.append(" AND parentOrganizationId != '-1' ");
+			query.append(" AND parentOrganizationId != 0 ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
@@ -467,7 +467,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public Organization[] findByLocations_PrevAndNext(String organizationId,
+	public Organization[] findByLocations_PrevAndNext(long organizationId,
 		long companyId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByPrimaryKey(organizationId);
@@ -480,7 +480,7 @@ public class OrganizationPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
 			query.append("companyId = ?");
-			query.append(" AND parentOrganizationId != '-1' ");
+			query.append(" AND parentOrganizationId != 0 ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
@@ -514,7 +514,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_P(long companyId, String parentOrganizationId)
+	public List findByC_P(long companyId, long parentOrganizationId)
 		throws SystemException {
 		Session session = null;
 
@@ -525,14 +525,7 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (parentOrganizationId == null) {
-				query.append("parentOrganizationId IS NULL");
-			}
-			else {
-				query.append("parentOrganizationId = ?");
-			}
-
+			query.append("parentOrganizationId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
@@ -542,10 +535,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (parentOrganizationId != null) {
-				q.setString(queryPos++, parentOrganizationId);
-			}
+			q.setLong(queryPos++, parentOrganizationId);
 
 			return q.list();
 		}
@@ -557,13 +547,13 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_P(long companyId, String parentOrganizationId,
-		int begin, int end) throws SystemException {
+	public List findByC_P(long companyId, long parentOrganizationId, int begin,
+		int end) throws SystemException {
 		return findByC_P(companyId, parentOrganizationId, begin, end, null);
 	}
 
-	public List findByC_P(long companyId, String parentOrganizationId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+	public List findByC_P(long companyId, long parentOrganizationId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
 		try {
@@ -573,14 +563,7 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (parentOrganizationId == null) {
-				query.append("parentOrganizationId IS NULL");
-			}
-			else {
-				query.append("parentOrganizationId = ?");
-			}
-
+			query.append("parentOrganizationId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -597,10 +580,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (parentOrganizationId != null) {
-				q.setString(queryPos++, parentOrganizationId);
-			}
+			q.setLong(queryPos++, parentOrganizationId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -613,7 +593,7 @@ public class OrganizationPersistence extends BasePersistence {
 	}
 
 	public Organization findByC_P_First(long companyId,
-		String parentOrganizationId, OrderByComparator obc)
+		long parentOrganizationId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		List list = findByC_P(companyId, parentOrganizationId, 0, 1, obc);
 
@@ -635,7 +615,7 @@ public class OrganizationPersistence extends BasePersistence {
 	}
 
 	public Organization findByC_P_Last(long companyId,
-		String parentOrganizationId, OrderByComparator obc)
+		long parentOrganizationId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		int count = countByC_P(companyId, parentOrganizationId);
 		List list = findByC_P(companyId, parentOrganizationId, count - 1,
@@ -658,8 +638,8 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public Organization[] findByC_P_PrevAndNext(String organizationId,
-		long companyId, String parentOrganizationId, OrderByComparator obc)
+	public Organization[] findByC_P_PrevAndNext(long organizationId,
+		long companyId, long parentOrganizationId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByPrimaryKey(organizationId);
 		int count = countByC_P(companyId, parentOrganizationId);
@@ -672,14 +652,7 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (parentOrganizationId == null) {
-				query.append("parentOrganizationId IS NULL");
-			}
-			else {
-				query.append("parentOrganizationId = ?");
-			}
-
+			query.append("parentOrganizationId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -696,10 +669,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (parentOrganizationId != null) {
-				q.setString(queryPos++, parentOrganizationId);
-			}
+			q.setLong(queryPos++, parentOrganizationId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					organization);
@@ -891,7 +861,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_P(long companyId, String parentOrganizationId)
+	public void removeByC_P(long companyId, long parentOrganizationId)
 		throws SystemException {
 		Iterator itr = findByC_P(companyId, parentOrganizationId).iterator();
 
@@ -963,7 +933,7 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
 			query.append("companyId = ?");
-			query.append(" AND parentOrganizationId != '-1' ");
+			query.append(" AND parentOrganizationId != 0 ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
@@ -991,7 +961,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_P(long companyId, String parentOrganizationId)
+	public int countByC_P(long companyId, long parentOrganizationId)
 		throws SystemException {
 		Session session = null;
 
@@ -1003,14 +973,7 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (parentOrganizationId == null) {
-				query.append("parentOrganizationId IS NULL");
-			}
-			else {
-				query.append("parentOrganizationId = ?");
-			}
-
+			query.append("parentOrganizationId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -1018,10 +981,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (parentOrganizationId != null) {
-				q.setString(queryPos++, parentOrganizationId);
-			}
+			q.setLong(queryPos++, parentOrganizationId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1128,17 +1088,17 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public List getGroups(String pk)
+	public List getGroups(long pk)
 		throws NoSuchOrganizationException, SystemException {
 		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getGroups(String pk, int begin, int end)
+	public List getGroups(long pk, int begin, int end)
 		throws NoSuchOrganizationException, SystemException {
 		return getGroups(pk, begin, end, null);
 	}
 
-	public List getGroups(String pk, int begin, int end, OrderByComparator obc)
+	public List getGroups(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		Session session = null;
 
@@ -1175,7 +1135,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public int getGroupsSize(String pk) throws SystemException {
+	public int getGroupsSize(long pk) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1208,7 +1168,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsGroup(String pk, long groupPK)
+	public boolean containsGroup(long pk, long groupPK)
 		throws SystemException {
 		try {
 			return containsGroup.contains(pk, groupPK);
@@ -1218,7 +1178,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsGroups(String pk) throws SystemException {
+	public boolean containsGroups(long pk) throws SystemException {
 		if (getGroupsSize(pk) > 0) {
 			return true;
 		}
@@ -1227,7 +1187,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void addGroup(String pk, long groupPK)
+	public void addGroup(long pk, long groupPK)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1238,7 +1198,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void addGroup(String pk, com.liferay.portal.model.Group group)
+	public void addGroup(long pk, com.liferay.portal.model.Group group)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1249,7 +1209,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void addGroups(String pk, long[] groupPKs)
+	public void addGroups(long pk, long[] groupPKs)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1262,7 +1222,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void addGroups(String pk, List groups)
+	public void addGroups(long pk, List groups)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1276,7 +1236,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void clearGroups(String pk)
+	public void clearGroups(long pk)
 		throws NoSuchOrganizationException, SystemException {
 		try {
 			clearGroups.clear(pk);
@@ -1286,7 +1246,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeGroup(String pk, long groupPK)
+	public void removeGroup(long pk, long groupPK)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1297,7 +1257,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeGroup(String pk, com.liferay.portal.model.Group group)
+	public void removeGroup(long pk, com.liferay.portal.model.Group group)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1308,7 +1268,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeGroups(String pk, long[] groupPKs)
+	public void removeGroups(long pk, long[] groupPKs)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1321,7 +1281,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeGroups(String pk, List groups)
+	public void removeGroups(long pk, List groups)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1335,7 +1295,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void setGroups(String pk, long[] groupPKs)
+	public void setGroups(long pk, long[] groupPKs)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1350,7 +1310,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void setGroups(String pk, List groups)
+	public void setGroups(long pk, List groups)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1366,17 +1326,17 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public List getUsers(String pk)
+	public List getUsers(long pk)
 		throws NoSuchOrganizationException, SystemException {
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getUsers(String pk, int begin, int end)
+	public List getUsers(long pk, int begin, int end)
 		throws NoSuchOrganizationException, SystemException {
 		return getUsers(pk, begin, end, null);
 	}
 
-	public List getUsers(String pk, int begin, int end, OrderByComparator obc)
+	public List getUsers(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		Session session = null;
 
@@ -1409,7 +1369,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public int getUsersSize(String pk) throws SystemException {
+	public int getUsersSize(long pk) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1442,8 +1402,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsUser(String pk, long userPK)
-		throws SystemException {
+	public boolean containsUser(long pk, long userPK) throws SystemException {
 		try {
 			return containsUser.contains(pk, userPK);
 		}
@@ -1452,7 +1411,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsUsers(String pk) throws SystemException {
+	public boolean containsUsers(long pk) throws SystemException {
 		if (getUsersSize(pk) > 0) {
 			return true;
 		}
@@ -1461,7 +1420,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUser(String pk, long userPK)
+	public void addUser(long pk, long userPK)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1472,7 +1431,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUser(String pk, com.liferay.portal.model.User user)
+	public void addUser(long pk, com.liferay.portal.model.User user)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1483,7 +1442,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUsers(String pk, long[] userPKs)
+	public void addUsers(long pk, long[] userPKs)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1496,7 +1455,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void addUsers(String pk, List users)
+	public void addUsers(long pk, List users)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1510,7 +1469,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void clearUsers(String pk)
+	public void clearUsers(long pk)
 		throws NoSuchOrganizationException, SystemException {
 		try {
 			clearUsers.clear(pk);
@@ -1520,7 +1479,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUser(String pk, long userPK)
+	public void removeUser(long pk, long userPK)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1531,7 +1490,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUser(String pk, com.liferay.portal.model.User user)
+	public void removeUser(long pk, com.liferay.portal.model.User user)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1542,7 +1501,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUsers(String pk, long[] userPKs)
+	public void removeUsers(long pk, long[] userPKs)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1555,7 +1514,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeUsers(String pk, List users)
+	public void removeUsers(long pk, List users)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1569,7 +1528,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void setUsers(String pk, long[] userPKs)
+	public void setUsers(long pk, long[] userPKs)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1584,7 +1543,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void setUsers(String pk, List users)
+	public void setUsers(long pk, List users)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchUserException, SystemException {
 		try {
@@ -1623,7 +1582,7 @@ public class OrganizationPersistence extends BasePersistence {
 	protected class ContainsGroup extends MappingSqlQuery {
 		protected ContainsGroup(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSGROUP);
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
@@ -1633,9 +1592,9 @@ public class OrganizationPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(String organizationId, long groupId) {
+		protected boolean contains(long organizationId, long groupId) {
 			List results = execute(new Object[] {
-						organizationId, new Long(groupId)
+						new Long(organizationId), new Long(groupId)
 					});
 
 			if (results.size() > 0) {
@@ -1655,14 +1614,15 @@ public class OrganizationPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Groups_Orgs (organizationId, groupId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void add(String organizationId, long groupId) {
+		protected void add(long organizationId, long groupId) {
 			if (!_persistence.containsGroup.contains(organizationId, groupId)) {
-				update(new Object[] { organizationId, new Long(groupId) });
+				update(new Object[] { new Long(organizationId), new Long(
+							groupId) });
 			}
 		}
 
@@ -1673,12 +1633,12 @@ public class OrganizationPersistence extends BasePersistence {
 		protected ClearGroups(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE organizationId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void clear(String organizationId) {
-			update(new Object[] { organizationId });
+		protected void clear(long organizationId) {
+			update(new Object[] { new Long(organizationId) });
 		}
 	}
 
@@ -1686,20 +1646,20 @@ public class OrganizationPersistence extends BasePersistence {
 		protected RemoveGroup(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE organizationId = ? AND groupId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void remove(String organizationId, long groupId) {
-			update(new Object[] { organizationId, new Long(groupId) });
+		protected void remove(long organizationId, long groupId) {
+			update(new Object[] { new Long(organizationId), new Long(groupId) });
 		}
 	}
 
 	protected class ContainsUser extends MappingSqlQuery {
 		protected ContainsUser(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSER);
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
@@ -1709,9 +1669,10 @@ public class OrganizationPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(String organizationId, long userId) {
-			List results = execute(new Object[] { organizationId, new Long(
-							userId) });
+		protected boolean contains(long organizationId, long userId) {
+			List results = execute(new Object[] {
+						new Long(organizationId), new Long(userId)
+					});
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -1730,14 +1691,14 @@ public class OrganizationPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Users_Orgs (organizationId, userId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void add(String organizationId, long userId) {
+		protected void add(long organizationId, long userId) {
 			if (!_persistence.containsUser.contains(organizationId, userId)) {
-				update(new Object[] { organizationId, new Long(userId) });
+				update(new Object[] { new Long(organizationId), new Long(userId) });
 			}
 		}
 
@@ -1748,12 +1709,12 @@ public class OrganizationPersistence extends BasePersistence {
 		protected ClearUsers(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Orgs WHERE organizationId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void clear(String organizationId) {
-			update(new Object[] { organizationId });
+		protected void clear(long organizationId) {
+			update(new Object[] { new Long(organizationId) });
 		}
 	}
 
@@ -1761,13 +1722,13 @@ public class OrganizationPersistence extends BasePersistence {
 		protected RemoveUser(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Orgs WHERE organizationId = ? AND userId = ?");
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
-		protected void remove(String organizationId, long userId) {
-			update(new Object[] { organizationId, new Long(userId) });
+		protected void remove(long organizationId, long userId) {
+			update(new Object[] { new Long(organizationId), new Long(userId) });
 		}
 	}
 

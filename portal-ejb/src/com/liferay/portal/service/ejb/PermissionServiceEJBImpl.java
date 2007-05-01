@@ -102,8 +102,8 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			classPK, groupId, actionIds, resourceId);
 	}
 
-	public void setOrgGroupPermissions(java.lang.String organizationId,
-		long groupId, java.lang.String[] actionIds, long resourceId)
+	public void setOrgGroupPermissions(long organizationId, long groupId,
+		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

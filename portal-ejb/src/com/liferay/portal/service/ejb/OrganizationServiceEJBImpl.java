@@ -54,8 +54,7 @@ import javax.ejb.SessionContext;
  */
 public class OrganizationServiceEJBImpl implements OrganizationService,
 	SessionBean {
-	public void addGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+	public void addGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -73,8 +72,8 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 	}
 
 	public com.liferay.portal.model.Organization addOrganization(
-		java.lang.String parentOrganizationId, java.lang.String name,
-		long regionId, long countryId, int statusId, boolean location)
+		long parentOrganizationId, java.lang.String name, long regionId,
+		long countryId, int statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -83,7 +82,7 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 			name, regionId, countryId, statusId, location);
 	}
 
-	public void deleteOrganization(java.lang.String organizationId)
+	public void deleteOrganization(long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -91,7 +90,7 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 	}
 
 	public com.liferay.portal.model.Organization getOrganization(
-		java.lang.String organizationId)
+		long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -99,8 +98,7 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 		return OrganizationServiceFactory.getTxImpl().getOrganization(organizationId);
 	}
 
-	public java.lang.String getOrganizationId(long companyId,
-		java.lang.String name)
+	public long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -117,8 +115,7 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 		return OrganizationServiceFactory.getTxImpl().getUserOrganizations(userId);
 	}
 
-	public void setGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+	public void setGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -126,8 +123,7 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 			organizationIds);
 	}
 
-	public void unsetGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+	public void unsetGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -145,9 +141,8 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 	}
 
 	public com.liferay.portal.model.Organization updateOrganization(
-		java.lang.String organizationId, java.lang.String parentOrganizationId,
-		java.lang.String name, long regionId, long countryId, int statusId,
-		boolean location)
+		long organizationId, long parentOrganizationId, java.lang.String name,
+		long regionId, long countryId, int statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -157,7 +152,7 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 	}
 
 	public com.liferay.portal.model.Organization updateOrganization(
-		java.lang.String organizationId, java.lang.String comments)
+		long organizationId, java.lang.String comments)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

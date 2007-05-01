@@ -26,7 +26,6 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
-import com.liferay.util.XSSUtil;
 
 import java.sql.Types;
 
@@ -54,7 +53,7 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "OrgLabor";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "orgLaborId", new Integer(Types.BIGINT) },
-			{ "organizationId", new Integer(Types.VARCHAR) },
+			{ "organizationId", new Integer(Types.BIGINT) },
 			{ "typeId", new Integer(Types.INTEGER) },
 			{ "sunOpen", new Integer(Types.INTEGER) },
 			{ "sunClose", new Integer(Types.INTEGER) },
@@ -73,9 +72,6 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgLabor"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_ORGANIZATIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.OrgLabor.organizationId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgLaborModel"));
 
@@ -100,19 +96,12 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getOrganizationId() {
-		return GetterUtil.getString(_organizationId);
+	public long getOrganizationId() {
+		return _organizationId;
 	}
 
-	public void setOrganizationId(String organizationId) {
-		if (((organizationId == null) && (_organizationId != null)) ||
-				((organizationId != null) && (_organizationId == null)) ||
-				((organizationId != null) && (_organizationId != null) &&
-				!organizationId.equals(_organizationId))) {
-			if (!XSS_ALLOW_ORGANIZATIONID) {
-				organizationId = XSSUtil.strip(organizationId);
-			}
-
+	public void setOrganizationId(long organizationId) {
+		if (organizationId != _organizationId) {
 			_organizationId = organizationId;
 		}
 	}
@@ -297,7 +286,16 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 
 		OrgLaborImpl orgLabor = (OrgLaborImpl)obj;
 		int value = 0;
-		value = getOrganizationId().compareTo(orgLabor.getOrganizationId());
+
+		if (getOrganizationId() < orgLabor.getOrganizationId()) {
+			value = -1;
+		}
+		else if (getOrganizationId() > orgLabor.getOrganizationId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -349,7 +347,7 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 	}
 
 	private long _orgLaborId;
-	private String _organizationId;
+	private long _organizationId;
 	private int _typeId;
 	private int _sunOpen;
 	private int _sunClose;

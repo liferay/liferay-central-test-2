@@ -80,11 +80,11 @@ public class OrgGroupRoleSoap implements Serializable {
 		setRoleId(pk.roleId);
 	}
 
-	public String getOrganizationId() {
+	public long getOrganizationId() {
 		return _organizationId;
 	}
 
-	public void setOrganizationId(String organizationId) {
+	public void setOrganizationId(long organizationId) {
 		_organizationId = organizationId;
 	}
 
@@ -104,7 +104,7 @@ public class OrgGroupRoleSoap implements Serializable {
 		_roleId = roleId;
 	}
 
-	private String _organizationId;
+	private long _organizationId;
 	private long _groupId;
 	private long _roleId;
 }

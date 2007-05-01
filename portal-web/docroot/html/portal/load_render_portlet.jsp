@@ -46,7 +46,7 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 		<div class="loading-animation" id="p_load<%= portletDisplay.getNamespace() %>"></div>
 
 		<%
-		long doAsUserId = themeDisplay.getDoAsUserId();
+		String doAsUserId = themeDisplay.getDoAsUserId();
 
 		StringMaker url = new StringMaker();
 
@@ -63,9 +63,9 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 		url.append("&p_p_col_count=");
 		url.append(columnCount);
 
-		if (doAsUserId > 0) {
+		if (Validator.isNotNull(doAsUserId)) {
 			url.append("&doAsUserId=");
-			url.append(Http.encodeURL(String.valueOf(doAsUserId)));
+			url.append(Http.encodeURL(doAsUserId));
 		}
 
 		String ppid = ParamUtil.getString(request, "p_p_id");

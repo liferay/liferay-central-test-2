@@ -50,9 +50,9 @@ public interface OrgGroupPermissionModel extends BaseModel {
 
 	public void setPrimaryKey(OrgGroupPermissionPK pk);
 
-	public String getOrganizationId();
+	public long getOrganizationId();
 
-	public void setOrganizationId(String organizationId);
+	public void setOrganizationId(long organizationId);
 
 	public long getGroupId();
 

@@ -117,7 +117,7 @@ public class EditOrgLaborAction extends PortletAction {
 	protected void updateOrgLabor(ActionRequest req) throws Exception {
 		long orgLaborId = ParamUtil.getLong(req, "orgLaborId");
 
-		String organizationId = ParamUtil.getString(req, "organizationId");
+		long organizationId = ParamUtil.getLong(req, "organizationId");
 		int typeId = ParamUtil.getInteger(req, "typeId");
 
 		int sunOpen = ParamUtil.getInteger(req, "sunOpen");

@@ -71,15 +71,18 @@ public class CommonPermission {
 				user.getLocation().getOrganizationId(), actionId);
 		}
 		else if (className.equals(Organization.class.getName())) {
+			long organizationId = GetterUtil.getLong(classPK);
+
 			Organization organization =
-				OrganizationLocalServiceUtil.getOrganization(classPK);
+				OrganizationLocalServiceUtil.getOrganization(organizationId);
 
 			if (organization.isRoot()) {
 				OrganizationPermission.check(
-					permissionChecker, classPK, actionId);
+					permissionChecker, organizationId, actionId);
 			}
 			else {
-				LocationPermission.check(permissionChecker, classPK, actionId);
+				LocationPermission.check(
+					permissionChecker, organizationId, actionId);
 			}
 		}
 		else {

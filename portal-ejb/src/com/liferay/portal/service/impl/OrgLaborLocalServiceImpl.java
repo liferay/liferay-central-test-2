@@ -44,7 +44,7 @@ import java.util.List;
 public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 
 	public OrgLabor addOrgLabor(
-			String organizationId, int typeId, int sunOpen, int sunClose,
+			long organizationId, int typeId, int sunOpen, int sunClose,
 			int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,
 			int wedClose, int thuOpen, int thuClose, int friOpen, int friClose,
 			int satOpen, int satClose)
@@ -90,7 +90,7 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 		return OrgLaborUtil.findByPrimaryKey(orgLaborId);
 	}
 
-	public List getOrgLabors(String organizationId) throws SystemException {
+	public List getOrgLabors(long organizationId) throws SystemException {
 		return OrgLaborUtil.findByOrganizationId(organizationId);
 	}
 

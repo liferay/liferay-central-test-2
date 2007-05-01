@@ -27,7 +27,6 @@ import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
-import com.liferay.util.XSSUtil;
 
 import java.sql.Types;
 
@@ -54,16 +53,13 @@ import java.sql.Types;
 public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "OrgGroupPermission";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "organizationId", new Integer(Types.VARCHAR) },
+			{ "organizationId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "permissionId", new Integer(Types.BIGINT) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgGroupPermission"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ORGANIZATIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.OrgGroupPermission.organizationId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgGroupPermissionModel"));
 
@@ -80,19 +76,12 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 		setPermissionId(pk.permissionId);
 	}
 
-	public String getOrganizationId() {
-		return GetterUtil.getString(_organizationId);
+	public long getOrganizationId() {
+		return _organizationId;
 	}
 
-	public void setOrganizationId(String organizationId) {
-		if (((organizationId == null) && (_organizationId != null)) ||
-				((organizationId != null) && (_organizationId == null)) ||
-				((organizationId != null) && (_organizationId != null) &&
-				!organizationId.equals(_organizationId))) {
-			if (!XSS_ALLOW_ORGANIZATIONID) {
-				organizationId = XSSUtil.strip(organizationId);
-			}
-
+	public void setOrganizationId(long organizationId) {
+		if (organizationId != _organizationId) {
 			_organizationId = organizationId;
 		}
 	}
@@ -165,7 +154,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 		return getPrimaryKey().hashCode();
 	}
 
-	private String _organizationId;
+	private long _organizationId;
 	private long _groupId;
 	private long _permissionId;
 }

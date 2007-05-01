@@ -28,7 +28,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
-import com.liferay.util.Validator;
 
 /**
  * <a href="UserPermission.java.html"><b><i>View Source</i></b></a>
@@ -40,7 +39,7 @@ public class UserPermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, long userId,
-			String organizationId, String locationId, String actionId)
+			long organizationId, long locationId, String actionId)
 		throws PrincipalException {
 
 		if (!contains(
@@ -52,8 +51,8 @@ public class UserPermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, long userId, String organizationId,
-		String locationId, String actionId) {
+		PermissionChecker permissionChecker, long userId, long organizationId,
+		long locationId, String actionId) {
 
 		PermissionCheckerImpl permissionCheckerImpl =
 			(PermissionCheckerImpl)permissionChecker;
@@ -72,14 +71,14 @@ public class UserPermission {
 
 			return true;
 		}
-		else if (Validator.isNotNull(organizationId) &&
+		else if ((organizationId > 0) &&
 				 permissionChecker.hasPermission(
 					0, Organization.class.getName(), organizationId,
 					organizationActionId)) {
 
 			return true;
 		}
-		else if (Validator.isNotNull(locationId) &&
+		else if ((locationId  > 0) &&
 				 permissionChecker.hasPermission(
 					0, "com.liferay.portal.model.Location", locationId,
 					organizationActionId)) {

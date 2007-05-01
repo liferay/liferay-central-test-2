@@ -144,7 +144,7 @@ public class PermissionServiceSoap {
 		}
 	}
 
-	public static void setOrgGroupPermissions(java.lang.String organizationId,
+	public static void setOrgGroupPermissions(long organizationId,
 		long groupId, java.lang.String[] actionIds, long resourceId)
 		throws RemoteException {
 		try {

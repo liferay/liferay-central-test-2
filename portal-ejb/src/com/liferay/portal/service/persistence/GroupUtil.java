@@ -302,8 +302,7 @@ public class GroupUtil {
 		return getPersistence().getOrganizationsSize(pk);
 	}
 
-	public static boolean containsOrganization(long pk,
-		java.lang.String organizationPK)
+	public static boolean containsOrganization(long pk, long organizationPK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().containsOrganization(pk, organizationPK);
 	}
@@ -313,7 +312,7 @@ public class GroupUtil {
 		return getPersistence().containsOrganizations(pk);
 	}
 
-	public static void addOrganization(long pk, java.lang.String organizationPK)
+	public static void addOrganization(long pk, long organizationPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchOrganizationException {
@@ -328,8 +327,7 @@ public class GroupUtil {
 		getPersistence().addOrganization(pk, organization);
 	}
 
-	public static void addOrganizations(long pk,
-		java.lang.String[] organizationPKs)
+	public static void addOrganizations(long pk, long[] organizationPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchOrganizationException {
@@ -349,8 +347,7 @@ public class GroupUtil {
 		getPersistence().clearOrganizations(pk);
 	}
 
-	public static void removeOrganization(long pk,
-		java.lang.String organizationPK)
+	public static void removeOrganization(long pk, long organizationPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchOrganizationException {
@@ -365,8 +362,7 @@ public class GroupUtil {
 		getPersistence().removeOrganization(pk, organization);
 	}
 
-	public static void removeOrganizations(long pk,
-		java.lang.String[] organizationPKs)
+	public static void removeOrganizations(long pk, long[] organizationPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchOrganizationException {
@@ -380,8 +376,7 @@ public class GroupUtil {
 		getPersistence().removeOrganizations(pk, organizations);
 	}
 
-	public static void setOrganizations(long pk,
-		java.lang.String[] organizationPKs)
+	public static void setOrganizations(long pk, long[] organizationPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchOrganizationException {

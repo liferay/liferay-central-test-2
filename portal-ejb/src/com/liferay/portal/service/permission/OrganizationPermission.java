@@ -38,7 +38,7 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 public class OrganizationPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String organizationId,
+			PermissionChecker permissionChecker, long organizationId,
 			String actionId)
 		throws PrincipalException {
 
@@ -48,7 +48,7 @@ public class OrganizationPermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, String organizationId,
+		PermissionChecker permissionChecker, long organizationId,
 		String actionId) {
 
 		PermissionCheckerImpl permissionCheckerImpl =
@@ -64,7 +64,7 @@ public class OrganizationPermission {
 
 			Organization organization = user.getOrganization();
 
-			if (organizationId.equals(organization.getOrganizationId())) {
+			if (organizationId == organization.getOrganizationId()) {
 				return true;
 			}
 			else {

@@ -49,8 +49,7 @@ package com.liferay.portal.service;
  *
  */
 public interface OrganizationService {
-	public void addGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+	public void addGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -60,22 +59,21 @@ public interface OrganizationService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portal.model.Organization addOrganization(
-		java.lang.String parentOrganizationId, java.lang.String name,
-		long regionId, long countryId, int statusId, boolean location)
+		long parentOrganizationId, java.lang.String name, long regionId,
+		long countryId, int statusId, boolean location)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteOrganization(java.lang.String organizationId)
+	public void deleteOrganization(long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portal.model.Organization getOrganization(
-		java.lang.String organizationId)
+		long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.lang.String getOrganizationId(long companyId,
-		java.lang.String name)
+	public long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -83,13 +81,11 @@ public interface OrganizationService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void setGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+	public void setGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void unsetGroupOrganizations(long groupId,
-		java.lang.String[] organizationIds)
+	public void unsetGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -99,14 +95,13 @@ public interface OrganizationService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portal.model.Organization updateOrganization(
-		java.lang.String organizationId, java.lang.String parentOrganizationId,
-		java.lang.String name, long regionId, long countryId, int statusId,
-		boolean location)
+		long organizationId, long parentOrganizationId, java.lang.String name,
+		long regionId, long countryId, int statusId, boolean location)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portal.model.Organization updateOrganization(
-		java.lang.String organizationId, java.lang.String comments)
+		long organizationId, java.lang.String comments)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

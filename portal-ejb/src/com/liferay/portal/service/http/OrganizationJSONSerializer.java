@@ -51,25 +51,9 @@ import java.util.List;
 public class OrganizationJSONSerializer {
 	public static JSONObject toJSONObject(Organization model) {
 		JSONObject jsonObj = new JSONObject();
-		String organizationId = model.getOrganizationId();
-
-		if (organizationId == null) {
-			jsonObj.put("organizationId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("organizationId", organizationId.toString());
-		}
-
+		jsonObj.put("organizationId", model.getOrganizationId());
 		jsonObj.put("companyId", model.getCompanyId());
-
-		String parentOrganizationId = model.getParentOrganizationId();
-
-		if (parentOrganizationId == null) {
-			jsonObj.put("parentOrganizationId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("parentOrganizationId", parentOrganizationId.toString());
-		}
+		jsonObj.put("parentOrganizationId", model.getParentOrganizationId());
 
 		String name = model.getName();
 
