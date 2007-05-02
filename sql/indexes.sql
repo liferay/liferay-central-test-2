@@ -1,8 +1,4 @@
 create index IX_93D5AD4E on Address (companyId);
-create index IX_4F4BDD05 on Address (companyId, className);
-create index IX_DB84CC7E on Address (companyId, className, classPK);
-create index IX_845FAC7D on Address (companyId, className, classPK, mailing);
-create index IX_E47E614F on Address (companyId, className, classPK, primary_);
 create index IX_ABD7DAC0 on Address (companyId, classNameId);
 create index IX_71CB1123 on Address (companyId, classNameId, classPK);
 create index IX_923BD178 on Address (companyId, classNameId, classPK, mailing);
@@ -24,7 +20,6 @@ create index IX_12EE4898 on CalEvent (groupId);
 create index IX_4FDDD2BF on CalEvent (groupId, repeating);
 create index IX_FCD7C63D on CalEvent (groupId, type_);
 
-create index IX_F5179851 on ClassName_ (className);
 create index IX_B27A301F on ClassName_ (value);
 
 create index IX_12566EC2 on Company (mx);
@@ -50,15 +45,11 @@ create index IX_49C37475 on DLFolder (groupId, parentFolderId);
 create index IX_51556082 on DLFolder (parentFolderId, name);
 
 create index IX_1BB072CA on EmailAddress (companyId);
-create index IX_A9801209 on EmailAddress (companyId, className);
-create index IX_C161FBFA on EmailAddress (companyId, className, classPK);
-create index IX_F5B365CB on EmailAddress (companyId, className, classPK, primary_);
 create index IX_49D2DEC4 on EmailAddress (companyId, classNameId);
 create index IX_551A519F on EmailAddress (companyId, classNameId, classPK);
 create index IX_2A2CB130 on EmailAddress (companyId, classNameId, classPK, primary_);
 create index IX_7B43CD8 on EmailAddress (userId);
 
-create index IX_5849ABF2 on Group_ (companyId, className, classPK);
 create index IX_D0D5E397 on Group_ (companyId, classNameId, classPK);
 create index IX_5BDDB872 on Group_ (companyId, friendlyURL);
 create index IX_5AA68501 on Group_ (companyId, name);
@@ -141,9 +132,7 @@ create index IX_418E4522 on Organization_ (companyId, parentOrganizationId);
 
 create index IX_61941D2 on PasswordPolicy (name);
 
-create index IX_44D3DF82 on PasswordPolicyRel (className, classPK);
 create index IX_C3A17327 on PasswordPolicyRel (classNameId, classPK);
-create index IX_367C759E on PasswordPolicyRel (passwordPolicyId, className, classPK);
 create index IX_ED7CF243 on PasswordPolicyRel (passwordPolicyId, classNameId, classPK);
 
 create index IX_326F75BD on PasswordTracker (userId);
@@ -152,9 +141,6 @@ create index IX_4D19C2B8 on Permission_ (actionId, resourceId);
 create index IX_F090C113 on Permission_ (resourceId);
 
 create index IX_9F704A14 on Phone (companyId);
-create index IX_139DA87F on Phone (companyId, className);
-create index IX_A074A44 on Phone (companyId, className, classPK);
-create index IX_2CAADF95 on Phone (companyId, className, classPK, primary_);
 create index IX_A2E4AFBA on Phone (companyId, classNameId);
 create index IX_9A53569 on Phone (companyId, classNameId, classPK);
 create index IX_812CE07A on Phone (companyId, classNameId, classPK, primary_);
@@ -194,7 +180,6 @@ create index IX_2578FBD3 on Resource_ (codeId);
 create index IX_67DE7856 on Resource_ (codeId, primKey);
 
 create index IX_449A10B9 on Role_ (companyId);
-create index IX_ED284C69 on Role_ (companyId, className, classPK);
 create index IX_A88E424E on Role_ (companyId, classNameId, classPK);
 create index IX_EBC931B8 on Role_ (companyId, name);
 
@@ -232,9 +217,7 @@ create index IX_119B5630 on ShoppingOrder (groupId, userId, ppPaymentStatus);
 
 create index IX_B5F82C7A on ShoppingOrderItem (orderId);
 
-create index IX_E00DE435 on Subscription (companyId, className, classPK);
 create index IX_786D171A on Subscription (companyId, classNameId, classPK);
-create index IX_FC7B066F on Subscription (companyId, userId, className, classPK);
 create index IX_2E1A92D4 on Subscription (companyId, userId, classNameId, classPK);
 create index IX_54243AFD on Subscription (userId);
 
@@ -274,9 +257,6 @@ create index IX_5ADBE171 on User_ (contactId);
 create index LIFERAY_003 on Users_Permissions (permissionId);
 
 create index IX_96F07007 on Website (companyId);
-create index IX_66A45CAC on Website (companyId, className);
-create index IX_5233F8B7 on Website (companyId, className, classPK);
-create index IX_82125A48 on Website (companyId, className, classPK, primary_);
 create index IX_4F0F0CA7 on Website (companyId, classNameId);
 create index IX_F960131C on Website (companyId, classNameId, classPK);
 create index IX_1AA07A6D on Website (companyId, classNameId, classPK, primary_);
