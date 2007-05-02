@@ -26,6 +26,7 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
@@ -114,7 +115,8 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	}
 
 	public boolean isCommunityAdmin(
-			long companyId, long groupId, String name)
+			PermissionChecker permissionChecker, long companyId, long groupId,
+			String name)
 		throws Exception {
 
 		String key =
@@ -123,7 +125,9 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		Boolean value = (Boolean)_isCommunityAdmin.get(key);
 
 		if (value == null) {
-			value = new Boolean(isCommunityAdminImpl(companyId, groupId, name));
+			value = new Boolean(
+				isCommunityAdminImpl(
+					permissionChecker, companyId, groupId, name));
 
 			_isCommunityAdmin.put(key, value);
 		}
@@ -132,7 +136,8 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	}
 
 	protected boolean isCommunityAdminImpl(
-			long companyId, long groupId, String name)
+			PermissionChecker permissionChecker, long companyId, long groupId,
+			String name)
 		throws PortalException, RemoteException, SystemException {
 
 		if (groupId <= 0) {
@@ -150,8 +155,27 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 
 				return true;
 			}
+
+			if (permissionChecker.hasUserPermission(
+					groupId, Group.class.getName(), String.valueOf(groupId),
+					ActionKeys.ADMINISTRATE, false)) {
+
+				return true;
+			}
 		}
 		catch (NoSuchResourceException nsre) {
+		}
+		catch (PortalException pe) {
+			throw pe;
+		}
+		catch (RemoteException re) {
+			throw re;
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 
 		try {

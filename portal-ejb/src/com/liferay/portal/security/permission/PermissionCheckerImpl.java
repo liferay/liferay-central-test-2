@@ -293,7 +293,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				}
 
 				if (!value) {
-					value = hasUserPermission(groupId, name, primKey, actionId);
+					value = hasUserPermission(
+						groupId, name, primKey, actionId, true);
 				}
 
 				return value;
@@ -352,8 +353,9 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		}
 	}
 
-	protected boolean hasUserPermission(
-			long groupId, String name, String primKey, String actionId)
+	public boolean hasUserPermission(
+			long groupId, String name, String primKey, String actionId,
+			boolean checkAdmin)
 		throws Exception {
 
 		StopWatch stopWatch = null;
@@ -366,7 +368,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		long companyId = user.getCompanyId();
 
-		if (isAdmin(companyId, groupId, name)) {
+		if (checkAdmin && isAdmin(companyId, groupId, name)) {
 			return true;
 		}
 
@@ -486,7 +488,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			return true;
 		}
 
-		if (bag.isCommunityAdmin(companyId, groupId, name)) {
+		if (bag.isCommunityAdmin(this, companyId, groupId, name)) {
 			return true;
 		}
 
