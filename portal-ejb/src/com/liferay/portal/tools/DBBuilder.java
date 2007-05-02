@@ -54,19 +54,6 @@ public class DBBuilder {
 			_buildSQLFile("portal-minimal");
 			_buildSQLFile("indexes");
 			_buildSQLFile("sequences");
-			_buildSQLFile("update-1.7.5-1.8.0");
-			_buildSQLFile("update-1.8.0-1.9.0");
-			_buildSQLFile("update-1.9.1-1.9.5");
-			_buildSQLFile("update-1.9.5-2.0.0");
-			_buildSQLFile("update-2.0.3-2.1.0");
-			_buildSQLFile("update-2.1.1-2.2.0");
-			_buildSQLFile("update-2.2.1-2.2.5");
-			_buildSQLFile("update-3.1.0-3.2.0");
-			_buildSQLFile("update-3.2.0-3.5.0");
-			_buildSQLFile("update-3.5.0-3.6.0");
-			_buildSQLFile("update-3.6.0-4.0.0");
-			_buildSQLFile("update-4.0.0-4.1.0");
-			_buildSQLFile("update-4.1.0-4.2.0");
 			_buildSQLFile("update-4.2.0-4.3.0");
 			_buildCreateFile();
 		}
