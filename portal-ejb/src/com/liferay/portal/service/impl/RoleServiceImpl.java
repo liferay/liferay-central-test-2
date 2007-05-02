@@ -97,6 +97,22 @@ public class RoleServiceImpl extends PrincipalBean implements RoleService {
 		return RoleLocalServiceUtil.getUserRoles(userId);
 	}
 
+	public boolean hasUserRole(
+			long userId, long companyId, String name, boolean inherited)
+		throws PortalException, SystemException {
+
+		return RoleLocalServiceUtil.hasUserRole(
+			userId, companyId, name, inherited);
+	}
+
+	public boolean hasUserRoles(
+			long userId, long companyId, String[] names, boolean inherited)
+		throws PortalException, SystemException {
+
+		return RoleLocalServiceUtil.hasUserRoles(
+			userId, companyId, names, inherited);
+	}
+
 	public Role updateRole(long roleId, String name)
 		throws PortalException, SystemException {
 

@@ -115,12 +115,12 @@ public interface RoleLocalService {
 			com.liferay.portal.PortalException;
 
 	public boolean hasUserRole(long userId, long companyId,
-		java.lang.String name)
+		java.lang.String name, boolean inherited)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public boolean hasUserRoles(long userId, long companyId,
-		java.lang.String[] names)
+		java.lang.String[] names, boolean inherited)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

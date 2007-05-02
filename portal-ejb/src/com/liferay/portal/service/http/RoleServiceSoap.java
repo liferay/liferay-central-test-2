@@ -183,6 +183,34 @@ public class RoleServiceSoap {
 		}
 	}
 
+	public static boolean hasUserRole(long userId, long companyId,
+		java.lang.String name, boolean inherited) throws RemoteException {
+		try {
+			boolean returnValue = RoleServiceUtil.hasUserRole(userId,
+					companyId, name, inherited);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean hasUserRoles(long userId, long companyId,
+		java.lang.String[] names, boolean inherited) throws RemoteException {
+		try {
+			boolean returnValue = RoleServiceUtil.hasUserRoles(userId,
+					companyId, names, inherited);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.RoleSoap updateRole(long roleId,
 		java.lang.String name) throws RemoteException {
 		try {

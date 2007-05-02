@@ -201,7 +201,7 @@ public class RenderRequestImpl implements RenderRequest {
 				long userId = GetterUtil.getLong(remoteUser);
 
 				return RoleLocalServiceUtil.hasUserRole(
-					userId, companyId, role);
+					userId, companyId, role, true);
 			}
 			catch (Exception e) {
 				_log.warn(e);

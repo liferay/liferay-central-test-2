@@ -137,6 +137,26 @@ public class RoleServiceJSON {
 		return RoleJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static boolean hasUserRole(long userId, long companyId,
+		java.lang.String name, boolean inherited)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		boolean returnValue = RoleServiceUtil.hasUserRole(userId, companyId,
+				name, inherited);
+
+		return returnValue;
+	}
+
+	public static boolean hasUserRoles(long userId, long companyId,
+		java.lang.String[] names, boolean inherited)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		boolean returnValue = RoleServiceUtil.hasUserRoles(userId, companyId,
+				names, inherited);
+
+		return returnValue;
+	}
+
 	public static JSONObject updateRole(long roleId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

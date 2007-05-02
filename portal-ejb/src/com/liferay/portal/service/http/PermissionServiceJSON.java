@@ -83,6 +83,16 @@ public class PermissionServiceJSON {
 		return returnValue;
 	}
 
+	public static boolean hasUserPermission(long userId,
+		java.lang.String actionId, long resourceId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		boolean returnValue = PermissionServiceUtil.hasUserPermission(userId,
+				actionId, resourceId);
+
+		return returnValue;
+	}
+
 	public static boolean hasUserPermissions(long userId, long groupId,
 		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)

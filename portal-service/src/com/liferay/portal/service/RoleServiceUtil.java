@@ -116,6 +116,24 @@ public class RoleServiceUtil {
 		return roleService.getUserRoles(userId);
 	}
 
+	public static boolean hasUserRole(long userId, long companyId,
+		java.lang.String name, boolean inherited)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RoleService roleService = RoleServiceFactory.getService();
+
+		return roleService.hasUserRole(userId, companyId, name, inherited);
+	}
+
+	public static boolean hasUserRoles(long userId, long companyId,
+		java.lang.String[] names, boolean inherited)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RoleService roleService = RoleServiceFactory.getService();
+
+		return roleService.hasUserRoles(userId, companyId, names, inherited);
+	}
+
 	public static com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 

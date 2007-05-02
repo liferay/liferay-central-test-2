@@ -119,12 +119,12 @@ public class PluginSettingImpl
 				return true;
 			}
 			else if (RoleLocalServiceUtil.hasUserRoles(
-						userId, getCompanyId(), _rolesArray)) {
+						userId, getCompanyId(), _rolesArray, true)) {
 
 				return true;
 			}
 			else if (RoleLocalServiceUtil.hasUserRole(
-						userId, getCompanyId(), RoleImpl.ADMINISTRATOR)) {
+						userId, getCompanyId(), RoleImpl.ADMINISTRATOR, true)) {
 
 				return true;
 			}

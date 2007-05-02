@@ -102,6 +102,20 @@ public class PermissionServiceSoap {
 		}
 	}
 
+	public static boolean hasUserPermission(long userId,
+		java.lang.String actionId, long resourceId) throws RemoteException {
+		try {
+			boolean returnValue = PermissionServiceUtil.hasUserPermission(userId,
+					actionId, resourceId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static boolean hasUserPermissions(long userId, long groupId,
 		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)

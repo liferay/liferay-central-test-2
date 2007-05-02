@@ -178,21 +178,21 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static boolean hasUserRole(long userId, long companyId,
-		java.lang.String name)
+		java.lang.String name, boolean inherited)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-		return roleLocalService.hasUserRole(userId, companyId, name);
+		return roleLocalService.hasUserRole(userId, companyId, name, inherited);
 	}
 
 	public static boolean hasUserRoles(long userId, long companyId,
-		java.lang.String[] names)
+		java.lang.String[] names, boolean inherited)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-		return roleLocalService.hasUserRoles(userId, companyId, names);
+		return roleLocalService.hasUserRoles(userId, companyId, names, inherited);
 	}
 
 	public static java.util.List search(long companyId, java.lang.String name,

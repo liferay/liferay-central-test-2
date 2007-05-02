@@ -45,7 +45,7 @@ public class PortletServiceImpl
 		throws PortalException, SystemException {
 
 		if (!RoleLocalServiceUtil.hasUserRole(
-				getUserId(), companyId, RoleImpl.ADMINISTRATOR)) {
+				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}

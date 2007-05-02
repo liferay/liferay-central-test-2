@@ -31,15 +31,13 @@ import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.GroupServiceUtil;
-import com.liferay.portal.service.PermissionLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.PermissionServiceUtil;
+import com.liferay.portal.service.ResourceServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
-import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.rmi.RemoteException;
@@ -103,11 +101,10 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		Boolean value = (Boolean)_isCompanyAdmin.get(key);
 
 		if (value == null) {
-			Role adminRole = RoleServiceUtil.getRole(
-				companyId, RoleImpl.ADMINISTRATOR);
+			boolean hasAdminRole = RoleServiceUtil.hasUserRole(
+				_userId, companyId, RoleImpl.ADMINISTRATOR, true);
 
-			value = new Boolean(
-				UserServiceUtil.hasRoleUser(adminRole.getRoleId(), _userId));
+			value = new Boolean(hasAdminRole);
 
 			_isCompanyAdmin.put(key, value);
 		}
@@ -146,11 +143,11 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		}
 
 		try {
-			Resource resource = ResourceLocalServiceUtil.getResource(
+			Resource resource = ResourceServiceUtil.getResource(
 				companyId, Group.class.getName(), ResourceImpl.SCOPE_INDIVIDUAL,
 				String.valueOf(groupId));
 
-			if (PermissionLocalServiceUtil.hasUserPermission(
+			if (PermissionServiceUtil.hasUserPermission(
 					_userId, ActionKeys.ADMINISTRATE,
 					resource.getResourceId())) {
 

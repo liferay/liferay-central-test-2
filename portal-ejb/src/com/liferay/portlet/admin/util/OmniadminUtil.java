@@ -62,7 +62,7 @@ public class OmniadminUtil {
 				User user = UserLocalServiceUtil.getUserById(userId);
 
 				return RoleLocalServiceUtil.hasUserRole(
-					userId, user.getCompanyId(), RoleImpl.ADMINISTRATOR);
+					userId, user.getCompanyId(), RoleImpl.ADMINISTRATOR, true);
 			}
 			catch (Exception e) {
 				_log.error(e);

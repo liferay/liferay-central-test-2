@@ -72,6 +72,16 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			actionId, resourceId);
 	}
 
+	public boolean hasUserPermission(long userId, java.lang.String actionId,
+		long resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return PermissionServiceFactory.getTxImpl().hasUserPermission(userId,
+			actionId, resourceId);
+	}
+
 	public boolean hasUserPermissions(long userId, long groupId,
 		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)

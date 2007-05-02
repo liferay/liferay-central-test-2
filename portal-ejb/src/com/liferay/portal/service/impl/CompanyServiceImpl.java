@@ -50,7 +50,7 @@ public class CompanyServiceImpl
 		throws PortalException, SystemException {
 
 		if (!RoleLocalServiceUtil.hasUserRole(
-				getUserId(), companyId, RoleImpl.ADMINISTRATOR)) {
+				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}
@@ -65,7 +65,7 @@ public class CompanyServiceImpl
 		throws PortalException, SystemException {
 
 		if (!RoleLocalServiceUtil.hasUserRole(
-				getUserId(), companyId, RoleImpl.ADMINISTRATOR)) {
+				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}
@@ -78,7 +78,7 @@ public class CompanyServiceImpl
 		throws PortalException, SystemException {
 
 		if (!RoleLocalServiceUtil.hasUserRole(
-				getUserId(), companyId, RoleImpl.ADMINISTRATOR)) {
+				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}
@@ -92,7 +92,7 @@ public class CompanyServiceImpl
 		throws PortalException, SystemException {
 
 		if (!RoleLocalServiceUtil.hasUserRole(
-				getUserId(), companyId, RoleImpl.ADMINISTRATOR)) {
+				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}

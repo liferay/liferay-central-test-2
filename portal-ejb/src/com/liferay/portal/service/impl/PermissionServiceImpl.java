@@ -67,6 +67,14 @@ public class PermissionServiceImpl
 			groupId, actionId, resourceId);
 	}
 
+	public boolean hasUserPermission(
+			long userId, String actionId, long resourceId)
+		throws PortalException, SystemException {
+
+		return PermissionLocalServiceUtil.hasUserPermission(
+			userId, actionId, resourceId);
+	}
+
 	public boolean hasUserPermissions(
 			long userId, long groupId, String actionId, long[] resourceIds,
 			PermissionCheckerBag permissionCheckerBag)

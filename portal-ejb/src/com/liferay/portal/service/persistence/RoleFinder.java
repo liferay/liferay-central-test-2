@@ -55,6 +55,18 @@ public class RoleFinder {
 	public static String COUNT_BY_C_N_D_T =
 		RoleFinder.class.getName() + ".countByC_N_D_T";
 
+	public static String COUNT_BY_COMMUNITY =
+		RoleFinder.class.getName() + ".countByCommunity";
+
+	public static String COUNT_BY_ORGANIZATION =
+		RoleFinder.class.getName() + ".countByOrganization";
+
+	public static String COUNT_BY_USER =
+		RoleFinder.class.getName() + ".countByUser";
+
+	public static String COUNT_BY_USER_GROUP =
+		RoleFinder.class.getName() + ".countByUserGroup";
+
 	public static String FIND_BY_USER_GROUP_ROLE =
 		RoleFinder.class.getName() + ".findByUserGroupRole";
 
@@ -69,6 +81,61 @@ public class RoleFinder {
 
 	public static String FIND_BY_C_N_S_P =
 		RoleFinder.class.getName() + ".findByC_N_S_P";
+
+	public static int countByR_U(long roleId, long userId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			StringMaker sm = new StringMaker();
+
+			sm.append("(");
+			sm.append(CustomSQLUtil.get(COUNT_BY_COMMUNITY));
+			sm.append(") UNION (");
+			sm.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION));
+			sm.append(") UNION (");
+			sm.append(CustomSQLUtil.get(COUNT_BY_USER));
+			sm.append(") UNION (");
+			sm.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP));
+			sm.append(")");
+
+			SQLQuery q = session.createSQLQuery(sm.toString());
+
+			q.setCacheable(false);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			for (int i = 0; i < 4; i++) {
+				qPos.add(roleId);
+				qPos.add(userId);
+			}
+
+			int count = 0;
+
+			Iterator itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				Long l = (Long)itr.next();
+
+				if (l != null) {
+					count += l.intValue();
+				}
+			}
+
+			return count;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
 
 	public static int countByC_N_D_T(
 			long companyId, String name, String description, Integer type)

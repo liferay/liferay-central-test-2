@@ -159,19 +159,19 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 	}
 
 	public boolean hasUserRole(long userId, long companyId,
-		java.lang.String name)
+		java.lang.String name, boolean inherited)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().hasUserRole(userId,
-			companyId, name);
+			companyId, name, inherited);
 	}
 
 	public boolean hasUserRoles(long userId, long companyId,
-		java.lang.String[] names)
+		java.lang.String[] names, boolean inherited)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().hasUserRoles(userId,
-			companyId, names);
+			companyId, names, inherited);
 	}
 
 	public java.util.List search(long companyId, java.lang.String name,

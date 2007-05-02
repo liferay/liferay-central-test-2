@@ -246,19 +246,51 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return UserUtil.getRoles(userId);
 	}
 
-	public boolean hasUserRole(long userId, long companyId, String name)
+	/**
+	 * Returns true if the user has the role.
+	 *
+	 * @param		userId the user id of the user
+	 * @param		companyId the company id of the company
+	 * @param		name the name of the role
+	 * @param		inherited boolean value for whether to check roles inherited
+	 *				from the community, organization, location, or user group
+	 * @return		true if the user has the role
+	 */
+	public boolean hasUserRole(
+			long userId, long companyId, String name, boolean inherited)
 		throws PortalException, SystemException {
 
 		Role role = RoleFinder.findByC_N(companyId, name);
 
-		return UserUtil.containsRole(userId, role.getRoleId());
+		if (inherited) {
+			return UserUtil.containsRole(userId, role.getRoleId());
+		}
+		else {
+			if (RoleFinder.countByR_U(role.getRoleId(), userId) > 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 	}
 
-	public boolean hasUserRoles(long userId, long companyId, String[] names)
+	/**
+	 * Returns true if the user has any one of the specified roles.
+	 *
+	 * @param		userId the user id of the user
+	 * @param		companyId the company id of the company
+	 * @param		names an array of role names
+	 * @param		inherited boolean value for whether to check roles inherited
+	 *				from the community, organization, location, or user group
+	 * @return		true if the user has the role
+	 */
+	public boolean hasUserRoles(
+			long userId, long companyId, String[] names, boolean inherited)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < names.length; i++) {
-			if (hasUserRole(userId, companyId, names[i])) {
+			if (hasUserRole(userId, companyId, names[i], inherited)) {
 				return true;
 			}
 		}

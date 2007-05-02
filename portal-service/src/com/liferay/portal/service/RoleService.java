@@ -83,6 +83,16 @@ public interface RoleService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public boolean hasUserRole(long userId, long companyId,
+		java.lang.String name, boolean inherited)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public boolean hasUserRoles(long userId, long companyId,
+		java.lang.String[] names, boolean inherited)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 

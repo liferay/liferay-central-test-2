@@ -543,6 +543,13 @@ Liferay.Service.Portal.Permission = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	hasUserPermission: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "hasUserPermission";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	hasUserPermissions: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "hasUserPermissions";
@@ -749,6 +756,20 @@ Liferay.Service.Portal.Role = {
 	getUserRoles: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getUserRoles";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	hasUserRole: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "hasUserRole";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	hasUserRoles: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "hasUserRoles";
 
 		return Liferay.Service.ajax(params, callback);
 	},

@@ -67,6 +67,15 @@ public class PermissionServiceUtil {
 			resourceId);
 	}
 
+	public static boolean hasUserPermission(long userId,
+		java.lang.String actionId, long resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PermissionService permissionService = PermissionServiceFactory.getService();
+
+		return permissionService.hasUserPermission(userId, actionId, resourceId);
+	}
+
 	public static boolean hasUserPermissions(long userId, long groupId,
 		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
