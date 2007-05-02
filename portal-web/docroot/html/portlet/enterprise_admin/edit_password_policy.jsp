@@ -44,22 +44,22 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 	function <portlet:namespace />toggleBoxes(checkBoxId, toggleBoxId) {
 		var checkBox = jQuery('#<portlet:namespace />' + checkBoxId);
 		var toggleBox = jQuery('#<portlet:namespace />' + toggleBoxId);
-	
+
 		if (!checkBox.is(':checked')){
 			toggleBox.hide();
 		}
-	
+
 		checkBox.click(
 			function(){
 				toggleBox.toggle();
 			}
 		);
 	}
-	
+
 	jQuery(
 		function() {
 			document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-	
+
 			<portlet:namespace />toggleBoxes('changeableCheckbox', 'changeableSettings');
 			<portlet:namespace />toggleBoxes('checkSyntaxCheckbox', 'syntaxSettings');
 			<portlet:namespace />toggleBoxes('historyCheckbox', 'historySettings');

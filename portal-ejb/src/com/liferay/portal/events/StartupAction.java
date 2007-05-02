@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.model.Release;
+import com.liferay.portal.service.ClassNameMapperLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
@@ -89,6 +90,10 @@ public class StartupAction extends SimpleAction {
 			// Disable database caching before upgrade
 
 			CacheRegistry.setActive(false);
+
+			// Class name wrappers
+
+			ClassNameMapperLocalServiceUtil.checkClassNameMappers();
 
 			// Upgrade
 

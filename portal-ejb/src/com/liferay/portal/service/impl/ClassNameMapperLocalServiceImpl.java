@@ -26,10 +26,12 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ClassNameMapper;
+import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.service.base.ClassNameMapperLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.ClassNameMapperUtil;
 import com.liferay.util.CollectionFactory;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,6 +43,18 @@ import java.util.Map;
  */
 public class ClassNameMapperLocalServiceImpl
 	extends ClassNameMapperLocalServiceBaseImpl {
+
+	public void checkClassNameMappers()
+		throws PortalException, SystemException {
+
+		List models = ModelHintsUtil.getModels();
+
+		for (int i = 0; i < models.size(); i++) {
+			String className = (String)models.get(i);
+
+			getClassNameMapper(className);
+		}
+	}
 
 	public ClassNameMapper getClassNameMapper(long classNameMapperId)
 		throws PortalException, SystemException {

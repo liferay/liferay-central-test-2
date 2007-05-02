@@ -66,6 +66,13 @@ public class ClassNameMapperLocalServiceUtil {
 			begin, end);
 	}
 
+	public static void checkClassNameMappers()
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ClassNameMapperLocalService classNameMapperLocalService = ClassNameMapperLocalServiceFactory.getService();
+		classNameMapperLocalService.checkClassNameMappers();
+	}
+
 	public static com.liferay.portal.model.ClassNameMapper getClassNameMapper(
 		long classNameMapperId)
 		throws com.liferay.portal.PortalException, 

@@ -26,12 +26,16 @@ import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.ListUtil;
 import com.liferay.util.StringUtil;
 
 import java.io.StringReader;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,6 +62,10 @@ public class ModelHintsUtil {
 
 	public static Element getFieldsEl(String model, String field) {
 		return _instance._getFieldsEl(model, field);
+	}
+
+	public static List getModels() {
+		return _instance._getModels();
 	}
 
 	public static String getType(String model, String field) {
@@ -97,6 +105,7 @@ public class ModelHintsUtil {
 		_hintCollections = CollectionFactory.getHashMap();
 		_defaultHints = CollectionFactory.getHashMap();
 		_modelFields = CollectionFactory.getHashMap();
+		_models = new TreeSet();
 
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
@@ -126,6 +135,10 @@ public class ModelHintsUtil {
 		else {
 			return (Element)fields.get(field + _ELEMENTS_SUFFIX);
 		}
+	}
+
+	private List _getModels() {
+		return ListUtil.fromCollection(_models);
 	}
 
 	private String _getType(String model, String field) {
@@ -237,6 +250,8 @@ public class ModelHintsUtil {
 				_modelFields.put(name, fields);
 			}
 
+			_models.add(name);
+
 			Iterator itr2 = model.elements("field").iterator();
 
 			while (itr2.hasNext()) {
@@ -291,5 +306,6 @@ public class ModelHintsUtil {
 	private Map _hintCollections;
 	private Map _defaultHints;
 	private Map _modelFields;
+	private Set _models;
 
 }

@@ -57,6 +57,10 @@ public interface ClassNameMapperLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public void checkClassNameMappers()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.ClassNameMapper getClassNameMapper(
 		long classNameMapperId)
 		throws com.liferay.portal.SystemException, 

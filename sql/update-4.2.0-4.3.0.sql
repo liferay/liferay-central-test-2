@@ -18,7 +18,7 @@ alter_column_type CalEvent eventId LONG;
 alter_column_type CalEvent groupId LONG;
 
 create table ClassNameMapper (
-	classNameMapperId LONG not null primary key,
+	classNameMapperId LONG primary key,
 	className VARCHAR(75) null
 );
 
@@ -121,9 +121,9 @@ alter_column_type OrgLabor organizationId LONG;
 alter_column_type OrgLabor typeId INTEGER;
 
 create table PasswordPolicy (
-	passwordPolicyId LONG not null primary key,
-	companyId LONG not null,
-	userId LONG not null,
+	passwordPolicyId LONG primary key,
+	companyId LONG,
+	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
@@ -150,7 +150,7 @@ create table PasswordPolicy (
 );
 
 create table PasswordPolicyRel (
-	passwordPolicyRelId LONG not null primary key,
+	passwordPolicyRelId LONG primary key,
 	passwordPolicyId LONG,
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null
@@ -166,8 +166,8 @@ alter_column_type Phone phoneId LONG;
 alter_column_type Phone typeId INTEGER;
 
 create table PluginSetting (
-	pluginSettingId LONG not null primary key,
-	companyId LONG not null,
+	pluginSettingId LONG primary key,
+	companyId LONG,
 	pluginId VARCHAR(75) null,
 	pluginType VARCHAR(75) null,
 	roles VARCHAR(75) null,
@@ -191,8 +191,8 @@ alter table Resource_ add codeId LONG;
 alter table Resource_ drop typeId;
 
 create table ResourceCode (
-	codeId LONG not null primary key,
-	companyId LONG not null,
+	codeId LONG primary key,
+	companyId LONG,
 	name VARCHAR(75) null,
 	scope INTEGER
 );
@@ -383,9 +383,9 @@ update User_ set screenName = userId;
 alter_column_type UserGroup userGroupId LONG;
 
 create table UserGroupRole (
-	userId LONG not null,
-	groupId LONG not null,
-	roleId LONG not null,
+	userId LONG,
+	groupId LONG,
+	roleId LONG,
 	primary key (userId, groupId, roleId)
 );
 
