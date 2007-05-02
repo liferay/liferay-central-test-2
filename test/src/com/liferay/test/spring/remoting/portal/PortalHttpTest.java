@@ -63,8 +63,8 @@ public class PortalHttpTest extends TestCase {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = null;
-		String organizationId = null;
-		String locationId = null;
+		long organizationId = 0;
+		long locationId = 0;
 		boolean sendMail = false;
 
 		User user = userService.addUser(
