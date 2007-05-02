@@ -59,6 +59,7 @@ import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
+import com.liferay.portal.service.ClassNameMapperServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
@@ -201,6 +202,17 @@ public class PortalUtil {
 			params.put(org.apache.wsrp4j.util.Constants.URL, url);
 
 			return URLGeneratorImpl.getResourceProxyURL(params);
+		}
+	}
+
+	public static long getClassNameId(String className)
+		throws PortalException, SystemException {
+
+		try {
+			return ClassNameMapperServiceUtil.getClassNameMapperId(className);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
 		}
 	}
 

@@ -20,48 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.service.impl;
 
-import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.service.ClassNameMapperService;
+import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.ClassNameMapper;
+import com.liferay.portal.model.ModelHintsUtil;
+import com.liferay.portal.service.ClassNameMapperLocalServiceUtil;
+
 
 /**
- * <a href="PasswordPolicyRelModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>PasswordPolicyRel</code>
- * table in the database.
- * </p>
+ * <a href="ClassNameMapperServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordPolicyRel
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelImpl
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelModelImpl
- *
  */
-public interface PasswordPolicyRelModel extends BaseModel {
-	public long getPrimaryKey();
+public class ClassNameMapperServiceImpl
+	extends PrincipalBean implements ClassNameMapperService {
 
-	public void setPrimaryKey(long pk);
+	public long getClassNameMapperId(String className)
+		throws PortalException, SystemException {
 
-	public long getPasswordPolicyRelId();
+		return ClassNameMapperLocalServiceUtil.getClassNameMapperId(className);
+	}
 
-	public void setPasswordPolicyRelId(long passwordPolicyRelId);
-
-	public long getPasswordPolicyId();
-
-	public void setPasswordPolicyId(long passwordPolicyId);
-
-	public long getClassNameId();
-
-	public void setClassNameId(long classNameId);
-
-	public long getClassPK();
-
-	public void setClassPK(long classPK);
 }

@@ -49,7 +49,7 @@ public class PasswordPolicyRelSoap implements Serializable {
 		PasswordPolicyRelSoap soapModel = new PasswordPolicyRelSoap();
 		soapModel.setPasswordPolicyRelId(model.getPasswordPolicyRelId());
 		soapModel.setPasswordPolicyId(model.getPasswordPolicyId());
-		soapModel.setClassName(model.getClassName());
+		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
 
 		return soapModel;
@@ -93,24 +93,24 @@ public class PasswordPolicyRelSoap implements Serializable {
 		_passwordPolicyId = passwordPolicyId;
 	}
 
-	public String getClassName() {
-		return _className;
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public void setClassName(String className) {
-		_className = className;
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
 	}
 
-	public String getClassPK() {
+	public long getClassPK() {
 		return _classPK;
 	}
 
-	public void setClassPK(String classPK) {
+	public void setClassPK(long classPK) {
 		_classPK = classPK;
 	}
 
 	private long _passwordPolicyRelId;
 	private long _passwordPolicyId;
-	private String _className;
-	private String _classPK;
+	private long _classNameId;
+	private long _classPK;
 }

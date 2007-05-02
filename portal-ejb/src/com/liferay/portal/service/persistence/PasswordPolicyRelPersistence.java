@@ -186,16 +186,16 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 		}
 	}
 
-	public PasswordPolicyRel findByC_C(String className, String classPK)
+	public PasswordPolicyRel findByC_C(long classNameId, long classPK)
 		throws NoSuchPasswordPolicyRelException, SystemException {
-		PasswordPolicyRel passwordPolicyRel = fetchByC_C(className, classPK);
+		PasswordPolicyRel passwordPolicyRel = fetchByC_C(classNameId, classPK);
 
 		if (passwordPolicyRel == null) {
 			StringMaker msg = new StringMaker();
 			msg.append("No PasswordPolicyRel exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -211,7 +211,7 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 		return passwordPolicyRel;
 	}
 
-	public PasswordPolicyRel fetchByC_C(String className, String classPK)
+	public PasswordPolicyRel fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -221,37 +221,17 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			List list = q.list();
 
@@ -272,10 +252,10 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 	}
 
 	public PasswordPolicyRel findByP_C_C(long passwordPolicyId,
-		String className, String classPK)
+		long classNameId, long classPK)
 		throws NoSuchPasswordPolicyRelException, SystemException {
 		PasswordPolicyRel passwordPolicyRel = fetchByP_C_C(passwordPolicyId,
-				className, classPK);
+				classNameId, classPK);
 
 		if (passwordPolicyRel == null) {
 			StringMaker msg = new StringMaker();
@@ -284,8 +264,8 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 			msg.append("passwordPolicyId=");
 			msg.append(passwordPolicyId);
 			msg.append(", ");
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -302,7 +282,7 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 	}
 
 	public PasswordPolicyRel fetchByP_C_C(long passwordPolicyId,
-		String className, String classPK) throws SystemException {
+		long classNameId, long classPK) throws SystemException {
 		Session session = null;
 
 		try {
@@ -313,23 +293,9 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 				"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
 			query.append("passwordPolicyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -337,14 +303,8 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, passwordPolicyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			List list = q.list();
 
@@ -439,17 +399,16 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_C(String className, String classPK)
+	public void removeByC_C(long classNameId, long classPK)
 		throws NoSuchPasswordPolicyRelException, SystemException {
-		PasswordPolicyRel passwordPolicyRel = findByC_C(className, classPK);
+		PasswordPolicyRel passwordPolicyRel = findByC_C(classNameId, classPK);
 		remove(passwordPolicyRel);
 	}
 
-	public void removeByP_C_C(long passwordPolicyId, String className,
-		String classPK)
-		throws NoSuchPasswordPolicyRelException, SystemException {
+	public void removeByP_C_C(long passwordPolicyId, long classNameId,
+		long classPK) throws NoSuchPasswordPolicyRelException, SystemException {
 		PasswordPolicyRel passwordPolicyRel = findByP_C_C(passwordPolicyId,
-				className, classPK);
+				classNameId, classPK);
 		remove(passwordPolicyRel);
 	}
 
@@ -461,7 +420,7 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_C(String className, String classPK)
+	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -472,37 +431,17 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			Iterator itr = q.list().iterator();
 
@@ -524,8 +463,8 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByP_C_C(long passwordPolicyId, String className,
-		String classPK) throws SystemException {
+	public int countByP_C_C(long passwordPolicyId, long classNameId,
+		long classPK) throws SystemException {
 		Session session = null;
 
 		try {
@@ -537,23 +476,9 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 				"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
 			query.append("passwordPolicyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -561,14 +486,8 @@ public class PasswordPolicyRelPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, passwordPolicyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			Iterator itr = q.list().iterator();
 

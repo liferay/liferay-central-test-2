@@ -173,8 +173,7 @@ public class OrganizationLocalServiceImpl
 		// Password policy relation
 
 		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRel(
-			Organization.class.getName(),
-			String.valueOf(organization.getOrganizationId()));
+			Organization.class.getName(), organization.getOrganizationId());
 
 		// Phone
 
@@ -254,8 +253,7 @@ public class OrganizationLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return PasswordPolicyRelLocalServiceUtil.hasPasswordPolicyRel(
-			passwordPolicyId, Organization.class.getName(),
-			String.valueOf(organizationId));
+			passwordPolicyId, Organization.class.getName(), organizationId);
 	}
 
 	public List search(

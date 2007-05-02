@@ -20,12 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
-
-import com.liferay.portal.model.BaseModel;
+package com.liferay.portal.service;
 
 /**
- * <a href="PasswordPolicyRelModel.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClassNameMapperService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be overwritten
@@ -33,35 +31,25 @@ import com.liferay.portal.model.BaseModel;
  * </p>
  *
  * <p>
- * This interface is a model that represents the <code>PasswordPolicyRel</code>
- * table in the database.
+ * This interface defines the service. The default implementation is <code>com.liferay.portal.service.impl.ClassNameMapperServiceImpl</code>.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
+ * </p>
+ *
+ * <p>
+ * This is a remote service. Methods of this service are expected to have security
+ * checks based on the propagated JAAS credentials because this service can be accessed
+ * remotely.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordPolicyRel
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelImpl
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelModelImpl
+ * @see com.liferay.portal.service.ClassNameMapperServiceFactory
+ * @see com.liferay.portal.service.ClassNameMapperServiceUtil
  *
  */
-public interface PasswordPolicyRelModel extends BaseModel {
-	public long getPrimaryKey();
-
-	public void setPrimaryKey(long pk);
-
-	public long getPasswordPolicyRelId();
-
-	public void setPasswordPolicyRelId(long passwordPolicyRelId);
-
-	public long getPasswordPolicyId();
-
-	public void setPasswordPolicyId(long passwordPolicyId);
-
-	public long getClassNameId();
-
-	public void setClassNameId(long classNameId);
-
-	public long getClassPK();
-
-	public void setClassPK(long classPK);
+public interface ClassNameMapperService {
+	public long getClassNameMapperId(java.lang.String className)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

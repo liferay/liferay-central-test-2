@@ -58,13 +58,7 @@ public interface PasswordPolicyRelLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicyRel addPasswordPolicyRel(
-		long passwordPolicyId, java.lang.String className,
-		java.lang.String classPK)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public void addPasswordPolicyRels(long passwordPolicyId,
-		java.lang.String className, java.lang.String[] classPKs)
+		long passwordPolicyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -73,18 +67,12 @@ public interface PasswordPolicyRelLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deletePasswordPolicyRel(java.lang.String className,
-		java.lang.String classPK)
+	public void deletePasswordPolicyRel(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public void deletePasswordPolicyRel(long passwordPolicyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public void deletePasswordPolicyRels(long passwordPolicyId,
-		java.lang.String className, java.lang.String[] classPKs)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -94,18 +82,17 @@ public interface PasswordPolicyRelLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
-		long passwordPolicyId, java.lang.String className,
-		java.lang.String classPK)
+		long passwordPolicyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public boolean hasPasswordPolicyRel(long passwordPolicyId,
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

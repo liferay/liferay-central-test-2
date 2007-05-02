@@ -88,6 +88,13 @@ public class ClassNameMapperLocalServiceEJBImpl
 												 .getClassNameMapper(className);
 	}
 
+	public long getClassNameMapperId(java.lang.String className)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return ClassNameMapperLocalServiceFactory.getTxImpl()
+												 .getClassNameMapperId(className);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

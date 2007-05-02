@@ -20,12 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.service.http;
 
-import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.ClassNameMapper;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.List;
 
 /**
- * <a href="PasswordPolicyRelModel.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClassNameMapperJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be overwritten
@@ -33,35 +39,40 @@ import com.liferay.portal.model.BaseModel;
  * </p>
  *
  * <p>
- * This interface is a model that represents the <code>PasswordPolicyRel</code>
- * table in the database.
+ * This class is used by <code>com.liferay.portal.service.http.ClassNameMapperServiceJSON</code>
+ * to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordPolicyRel
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelImpl
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelModelImpl
+ * @see com.liferay.portal.service.http.ClassNameMapperServiceJSON
  *
  */
-public interface PasswordPolicyRelModel extends BaseModel {
-	public long getPrimaryKey();
+public class ClassNameMapperJSONSerializer {
+	public static JSONObject toJSONObject(ClassNameMapper model) {
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("classNameMapperId", model.getClassNameMapperId());
 
-	public void setPrimaryKey(long pk);
+		String className = model.getClassName();
 
-	public long getPasswordPolicyRelId();
+		if (className == null) {
+			jsonObj.put("className", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("className", className.toString());
+		}
 
-	public void setPasswordPolicyRelId(long passwordPolicyRelId);
+		return jsonObj;
+	}
 
-	public long getPasswordPolicyId();
+	public static JSONArray toJSONArray(List models) {
+		JSONArray jsonArray = new JSONArray();
 
-	public void setPasswordPolicyId(long passwordPolicyId);
+		for (int i = 0; i < models.size(); i++) {
+			ClassNameMapper model = (ClassNameMapper)models.get(i);
+			jsonArray.put(toJSONObject(model));
+		}
 
-	public long getClassNameId();
-
-	public void setClassNameId(long classNameId);
-
-	public long getClassPK();
-
-	public void setClassPK(long classPK);
+		return jsonArray;
+	}
 }

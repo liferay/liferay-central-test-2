@@ -303,8 +303,8 @@
 			<generator class="assigned" />
 		</id>
 		<property name="passwordPolicyId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.PasswordTrackerImpl" table="PasswordTracker">
 		<cache usage="read-write" />

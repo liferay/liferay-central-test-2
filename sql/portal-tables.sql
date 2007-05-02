@@ -614,8 +614,8 @@ create table PasswordPolicy (
 create table PasswordPolicyRel (
 	passwordPolicyRelId LONG primary key,
 	passwordPolicyId LONG,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null
+	classNameId LONG,
+	classPK LONG
 );
 
 create table PasswordTracker (

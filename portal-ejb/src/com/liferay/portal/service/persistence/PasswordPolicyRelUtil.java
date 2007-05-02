@@ -153,30 +153,30 @@ public class PasswordPolicyRelUtil {
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel findByC_C(
-		java.lang.String className, java.lang.String classPK)
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordPolicyRelException {
-		return getPersistence().findByC_C(className, classPK);
+		return getPersistence().findByC_C(classNameId, classPK);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel fetchByC_C(
-		java.lang.String className, java.lang.String classPK)
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByC_C(className, classPK);
+		return getPersistence().fetchByC_C(classNameId, classPK);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel findByP_C_C(
-		long passwordPolicyId, java.lang.String className,
-		java.lang.String classPK)
+		long passwordPolicyId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordPolicyRelException {
-		return getPersistence().findByP_C_C(passwordPolicyId, className, classPK);
+		return getPersistence().findByP_C_C(passwordPolicyId, classNameId,
+			classPK);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel fetchByP_C_C(
-		long passwordPolicyId, java.lang.String className,
-		java.lang.String classPK) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByP_C_C(passwordPolicyId, className,
+		long passwordPolicyId, long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByP_C_C(passwordPolicyId, classNameId,
 			classPK);
 	}
 
@@ -209,33 +209,31 @@ public class PasswordPolicyRelUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByC_C(java.lang.String className,
-		java.lang.String classPK)
+	public static void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordPolicyRelException {
-		getPersistence().removeByC_C(className, classPK);
+		getPersistence().removeByC_C(classNameId, classPK);
 	}
 
-	public static void removeByP_C_C(long passwordPolicyId,
-		java.lang.String className, java.lang.String classPK)
+	public static void removeByP_C_C(long passwordPolicyId, long classNameId,
+		long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordPolicyRelException {
-		getPersistence().removeByP_C_C(passwordPolicyId, className, classPK);
+		getPersistence().removeByP_C_C(passwordPolicyId, classNameId, classPK);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
 
-	public static int countByC_C(java.lang.String className,
-		java.lang.String classPK) throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_C(className, classPK);
+	public static int countByC_C(long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_C(classNameId, classPK);
 	}
 
-	public static int countByP_C_C(long passwordPolicyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByP_C_C(passwordPolicyId, className,
+	public static int countByP_C_C(long passwordPolicyId, long classNameId,
+		long classPK) throws com.liferay.portal.SystemException {
+		return getPersistence().countByP_C_C(passwordPolicyId, classNameId,
 			classPK);
 	}
 

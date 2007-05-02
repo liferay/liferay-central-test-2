@@ -529,7 +529,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRel(
-			passwordPolicyId, User.class.getName(), String.valueOf(userId));
+			passwordPolicyId, User.class.getName(), userId);
 	}
 
 	public void deleteRoleUser(long roleId, long userId)
@@ -560,7 +560,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Password policy relation
 
 		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRel(
-			User.class.getName(), String.valueOf(userId));
+			User.class.getName(), userId);
 
 		// Old passwords
 
@@ -764,7 +764,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return PasswordPolicyRelLocalServiceUtil.hasPasswordPolicyRel(
-			passwordPolicyId, User.class.getName(), String.valueOf(userId));
+			passwordPolicyId, User.class.getName(), userId);
 	}
 
 	public boolean hasRoleUser(long roleId, long userId)

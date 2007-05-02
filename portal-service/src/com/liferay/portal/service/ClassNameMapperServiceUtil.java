@@ -20,12 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
-
-import com.liferay.portal.model.BaseModel;
+package com.liferay.portal.service;
 
 /**
- * <a href="PasswordPolicyRelModel.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClassNameMapperServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be overwritten
@@ -33,35 +31,29 @@ import com.liferay.portal.model.BaseModel;
  * </p>
  *
  * <p>
- * This interface is a model that represents the <code>PasswordPolicyRel</code>
- * table in the database.
+ * This class provides static methods for the <code>com.liferay.portal.service.ClassNameMapperService</code>
+ * bean. The static methods of this class calls the same methods of the bean instance.
+ * It's convenient to be able to just write one line to call a method on a bean
+ * instead of writing a lookup call and a method call.
+ * </p>
+ *
+ * <p>
+ * <code>com.liferay.portal.service.ClassNameMapperServiceFactory</code> is responsible
+ * for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordPolicyRel
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelImpl
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelModelImpl
+ * @see com.liferay.portal.service.ClassNameMapperService
+ * @see com.liferay.portal.service.ClassNameMapperServiceFactory
  *
  */
-public interface PasswordPolicyRelModel extends BaseModel {
-	public long getPrimaryKey();
+public class ClassNameMapperServiceUtil {
+	public static long getClassNameMapperId(java.lang.String className)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ClassNameMapperService classNameMapperService = ClassNameMapperServiceFactory.getService();
 
-	public void setPrimaryKey(long pk);
-
-	public long getPasswordPolicyRelId();
-
-	public void setPasswordPolicyRelId(long passwordPolicyRelId);
-
-	public long getPasswordPolicyId();
-
-	public void setPasswordPolicyId(long passwordPolicyId);
-
-	public long getClassNameId();
-
-	public void setClassNameId(long classNameId);
-
-	public long getClassPK();
-
-	public void setClassPK(long classPK);
+		return classNameMapperService.getClassNameMapperId(className);
+	}
 }

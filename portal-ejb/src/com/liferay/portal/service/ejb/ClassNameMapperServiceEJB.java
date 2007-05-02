@@ -20,12 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.service.ClassNameMapperService;
+
+import javax.ejb.EJBObject;
 
 /**
- * <a href="PasswordPolicyRelModel.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClassNameMapperServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be overwritten
@@ -33,35 +35,19 @@ import com.liferay.portal.model.BaseModel;
  * </p>
  *
  * <p>
- * This interface is a model that represents the <code>PasswordPolicyRel</code>
- * table in the database.
+ * This class is the EJB interface of the service that is used when Liferay is run
+ * inside a full J2EE container.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordPolicyRel
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelImpl
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelModelImpl
+ * @see com.liferay.portal.service.ClassNameMapperService
+ * @see com.liferay.portal.service.ClassNameMapperServiceUtil
+ * @see com.liferay.portal.service.ejb.ClassNameMapperServiceEJBImpl
+ * @see com.liferay.portal.service.ejb.ClassNameMapperServiceHome
+ * @see com.liferay.portal.service.impl.ClassNameMapperServiceImpl
  *
  */
-public interface PasswordPolicyRelModel extends BaseModel {
-	public long getPrimaryKey();
-
-	public void setPrimaryKey(long pk);
-
-	public long getPasswordPolicyRelId();
-
-	public void setPasswordPolicyRelId(long passwordPolicyRelId);
-
-	public long getPasswordPolicyId();
-
-	public void setPasswordPolicyId(long passwordPolicyId);
-
-	public long getClassNameId();
-
-	public void setClassNameId(long classNameId);
-
-	public long getClassPK();
-
-	public void setClassPK(long classPK);
+public interface ClassNameMapperServiceEJB extends EJBObject,
+	ClassNameMapperService {
 }

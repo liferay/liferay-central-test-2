@@ -70,4 +70,8 @@ public interface ClassNameMapperLocalService {
 		java.lang.String className)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public long getClassNameMapperId(java.lang.String className)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPasswordPolicyRelException;
 import com.liferay.portal.PortalException;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.service.base.PasswordPolicyRelLocalServiceBaseImpl;
@@ -41,12 +42,14 @@ public class PasswordPolicyRelLocalServiceImpl
 	extends PasswordPolicyRelLocalServiceBaseImpl {
 
 	public PasswordPolicyRel addPasswordPolicyRel(
-			long passwordPolicyId, String className, String classPK)
+			long passwordPolicyId, String className, long classPK)
 		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		PasswordPolicyRel passwordPolicyRel =
 			PasswordPolicyRelUtil.fetchByP_C_C(
-				passwordPolicyId, className, classPK);
+				passwordPolicyId, classNameId, classPK);
 
 		if (passwordPolicyRel != null) {
 			return null;
@@ -56,7 +59,7 @@ public class PasswordPolicyRelLocalServiceImpl
 
 			// Ensure that models only have one password policy
 
-			PasswordPolicyRelUtil.removeByC_C(className, classPK);
+			PasswordPolicyRelUtil.removeByC_C(classNameId, classPK);
 		}
 		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
@@ -66,7 +69,7 @@ public class PasswordPolicyRelLocalServiceImpl
 		passwordPolicyRel = PasswordPolicyRelUtil.create(passwordPolicyRelId);
 
 		passwordPolicyRel.setPasswordPolicyId(passwordPolicyId);
-		passwordPolicyRel.setClassName(className);
+		passwordPolicyRel.setClassNameId(classNameId);
 		passwordPolicyRel.setClassPK(classPK);
 
 		PasswordPolicyRelUtil.update(passwordPolicyRel);
@@ -75,7 +78,7 @@ public class PasswordPolicyRelLocalServiceImpl
 	}
 
 	public void addPasswordPolicyRels(
-			long passwordPolicyId, String className, String[] classPKs)
+			long passwordPolicyId, String className, long[] classPKs)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < classPKs.length; i++) {
@@ -83,40 +86,34 @@ public class PasswordPolicyRelLocalServiceImpl
 		}
 	}
 
-	public void addPasswordPolicyRels(
-			long passwordPolicyId, String className, long[] classPKs)
-		throws PortalException, SystemException {
-
-		for (int i = 0; i < classPKs.length; i++) {
-			addPasswordPolicyRel(
-				passwordPolicyId, className, String.valueOf(classPKs[i]));
-		}
-	}
-
-	public void deletePasswordPolicyRel(String className, String classPK)
+	public void deletePasswordPolicyRel(String className, long classPK)
 		throws PortalException, SystemException {
 
 		try {
-			PasswordPolicyRelUtil.removeByC_C(className, classPK);
+			long classNameId = PortalUtil.getClassNameId(className);
+
+			PasswordPolicyRelUtil.removeByC_C(classNameId, classPK);
 		}
 		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
 	}
 
 	public void deletePasswordPolicyRel(
-			long passwordPolicyId, String className, String classPK)
+			long passwordPolicyId, String className, long classPK)
 		throws PortalException, SystemException {
 
 		try {
+			long classNameId = PortalUtil.getClassNameId(className);
+
 			PasswordPolicyRelUtil.removeByP_C_C(
-				passwordPolicyId, className, classPK);
+				passwordPolicyId, classNameId, classPK);
 		}
 		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
 	}
 
 	public void deletePasswordPolicyRels(
-			long passwordPolicyId, String className, String[] classPKs)
+			long passwordPolicyId, String className, long[] classPKs)
 		throws PortalException, SystemException {
 
 		for (int i = 0; i < classPKs.length; i++) {
@@ -124,37 +121,32 @@ public class PasswordPolicyRelLocalServiceImpl
 		}
 	}
 
-	public void deletePasswordPolicyRels(
-			long passwordPolicyId, String className, long[] classPKs)
+	public PasswordPolicyRel getPasswordPolicyRel(String className, long classPK)
 		throws PortalException, SystemException {
 
-		for (int i = 0; i < classPKs.length; i++) {
-			deletePasswordPolicyRel(
-				passwordPolicyId, className, String.valueOf(classPKs[i]));
-		}
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return PasswordPolicyRelUtil.findByC_C(classNameId, classPK);
 	}
 
 	public PasswordPolicyRel getPasswordPolicyRel(
-			String className, String classPK)
+			long passwordPolicyId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		return PasswordPolicyRelUtil.findByC_C(className, classPK);
-	}
-
-	public PasswordPolicyRel getPasswordPolicyRel(
-			long passwordPolicyId, String className, String classPK)
-		throws PortalException, SystemException {
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		return PasswordPolicyRelUtil.findByP_C_C(
-			passwordPolicyId, className, classPK);
+			passwordPolicyId, classNameId, classPK);
 	}
 
 	public boolean hasPasswordPolicyRel(
-			long passwordPolicyId, String className, String classPK)
+			long passwordPolicyId, String className, long classPK)
 		throws PortalException, SystemException {
 
+		long classNameId = PortalUtil.getClassNameId(className);
+
 		if (PasswordPolicyRelUtil.fetchByP_C_C(
-				passwordPolicyId, className, classPK) != null) {
+				passwordPolicyId, classNameId, classPK) != null) {
 
 			return true;
 		}

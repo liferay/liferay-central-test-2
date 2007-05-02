@@ -90,4 +90,12 @@ public class ClassNameMapperLocalServiceUtil {
 
 		return classNameMapperLocalService.getClassNameMapper(className);
 	}
+
+	public static long getClassNameMapperId(java.lang.String className)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ClassNameMapperLocalService classNameMapperLocalService = ClassNameMapperLocalServiceFactory.getService();
+
+		return classNameMapperLocalService.getClassNameMapperId(className);
+	}
 }

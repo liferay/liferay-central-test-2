@@ -90,6 +90,14 @@ public class ClassNameMapperLocalServiceImpl
 		return classNameMapper;
 	}
 
+	public long getClassNameMapperId(String className)
+		throws PortalException, SystemException {
+
+		ClassNameMapper classNameMapper = getClassNameMapper(className);
+
+		return classNameMapper.getClassNameMapperId();
+	}
+
 	private static Map _classNameMappers = CollectionFactory.getSyncHashMap();
 
 }
