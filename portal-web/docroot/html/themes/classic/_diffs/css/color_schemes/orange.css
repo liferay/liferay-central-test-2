@@ -238,6 +238,7 @@
 /* ---------- Table or section header ---------- */
 
 .orange .portlet-section-header {
+	background: #f4e6d1;
 }
 
 .orange .portlet-section-header th {

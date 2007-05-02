@@ -137,6 +137,8 @@
 /* ---------- Table or section header ---------- */
 
 .portlet-section-header {
+	background: #d9e1ec;
+	padding: 1px 0 0;
 }
 
 .portlet-section-header th {

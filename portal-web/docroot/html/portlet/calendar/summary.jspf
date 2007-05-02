@@ -27,39 +27,38 @@
 		self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="tabs1" value="day" /><portlet:param name="eventType" value="<%= eventType %>" /></portlet:renderURL>&<portlet:namespace />month=' + month + '&<portlet:namespace />day=' + day + '&<portlet:namespace />year=' + year;
 	}
 </script>
-
-<div style="float: left; padding-right: 10px;">
-
-	<%
-	int maxDayOfMonth = selCal.getActualMaximum(Calendar.DATE);
-
-	Set data = new HashSet();
-
-	for (int i = 1; i <= maxDayOfMonth; i++) {
-		Calendar tempCal = (Calendar)selCal.clone();
-		tempCal.set(Calendar.MONTH, selMonth);
-		tempCal.set(Calendar.DATE, i);
-		tempCal.set(Calendar.YEAR, selYear);
-
-		boolean hasEvents = CalEventLocalServiceUtil.hasEvents(portletGroupId.longValue(), tempCal, eventType);
-
-		if (hasEvents) {
-			data.add(new Integer(i));
-		}
-	}
-	%>
-
-	<liferay-ui:calendar
-		month="<%= selMonth %>"
-		day="<%= selDay %>"
-		year="<%= selYear %>"
-		headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG, locale) %>"
-		data="<%= data %>"
-	/>
-</div>
-
-<div style="float: left">
-	<%@ include file="/html/portlet/calendar/event_iterator.jspf" %>
-</div>
-
-<div style="clear: both"></div>
+<table width="100%">
+	<tr>
+		<td valign="top" width="1%">
+			<%
+			int maxDayOfMonth = selCal.getActualMaximum(Calendar.DATE);
+		
+			Set data = new HashSet();
+		
+			for (int i = 1; i <= maxDayOfMonth; i++) {
+				Calendar tempCal = (Calendar)selCal.clone();
+				tempCal.set(Calendar.MONTH, selMonth);
+				tempCal.set(Calendar.DATE, i);
+				tempCal.set(Calendar.YEAR, selYear);
+		
+				boolean hasEvents = CalEventLocalServiceUtil.hasEvents(portletGroupId.longValue(), tempCal, eventType);
+		
+				if (hasEvents) {
+					data.add(new Integer(i));
+				}
+			}
+			%>
+		
+			<liferay-ui:calendar
+				month="<%= selMonth %>"
+				day="<%= selDay %>"
+				year="<%= selYear %>"
+				headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG, locale) %>"
+				data="<%= data %>"
+			/>
+		</td>
+		<td valign="top">
+			<%@ include file="/html/portlet/calendar/event_iterator.jspf" %>
+		</td>
+	</tr>
+</table>

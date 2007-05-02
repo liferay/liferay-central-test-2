@@ -37,10 +37,10 @@ DateFormat dateFormat = new SimpleDateFormat("MMMM, yyyy", locale);
 DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 %>
 
-<table class="liferay-table" width="100%">
+<table width="100%">
 <tr>
 	<td>
-		<table class="liferay-table">
+		<table>
 		<tr>
 			<td>
 				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) - 1 %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=<%= eventType %>">

@@ -224,6 +224,7 @@
 /* ---------- Table or section header ---------- */
 
 .green .portlet-section-header {
+	background: #dcecd9;
 }
 
 .green .portlet-section-header th {

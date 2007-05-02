@@ -28,10 +28,10 @@
 	}
 </script>
 
-<table class="liferay-table">
+<table>
 <tr>
 	<td>
-		<table class="liferay-table">
+		<table>
 		<tr>
 			<td>
 				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= selMonth %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear - 1 %>&<portlet:namespace />eventType=<%= eventType %>">
