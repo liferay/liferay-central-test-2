@@ -174,7 +174,7 @@ public abstract class CustomSQLUtil {
 			}
 			else {
 				String id = sql.attributeValue("id");
-				String content = trim(sql.getText());
+				String content = transform(sql.getText());
 
 				content = replaceIsNull(content);
 
@@ -183,7 +183,7 @@ public abstract class CustomSQLUtil {
 		}
 	}
 
-	protected String trim(String sql) {
+	protected String transform(String sql) {
 		StringMaker sm = new StringMaker();
 
 		try {

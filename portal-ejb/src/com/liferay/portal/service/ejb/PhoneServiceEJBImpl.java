@@ -54,8 +54,8 @@ import javax.ejb.SessionContext;
  */
 public class PhoneServiceEJBImpl implements PhoneService, SessionBean {
 	public com.liferay.portal.model.Phone addPhone(java.lang.String className,
-		java.lang.String classPK, java.lang.String number,
-		java.lang.String extension, int typeId, boolean primary)
+		long classPK, java.lang.String number, java.lang.String extension,
+		int typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -79,8 +79,7 @@ public class PhoneServiceEJBImpl implements PhoneService, SessionBean {
 		return PhoneServiceFactory.getTxImpl().getPhone(phoneId);
 	}
 
-	public java.util.List getPhones(java.lang.String className,
-		java.lang.String classPK)
+	public java.util.List getPhones(java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

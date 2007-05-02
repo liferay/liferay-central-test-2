@@ -33,6 +33,7 @@ import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.base.WebsiteLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.persistence.WebsiteUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Validator;
 
 import java.net.MalformedURLException;
@@ -53,15 +54,16 @@ import java.util.List;
 public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 
 	public Website addWebsite(
-			long userId, String className, String classPK, String url,
-			int typeId, boolean primary)
+			long userId, String className, long classPK, String url, int typeId,
+			boolean primary)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
 		validate(
-			0, user.getCompanyId(), className, classPK, url, typeId,
+			0, user.getCompanyId(), classNameId, classPK, url, typeId,
 			primary);
 
 		long websiteId = CounterLocalServiceUtil.increment();
@@ -73,7 +75,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		website.setUserName(user.getFullName());
 		website.setCreateDate(now);
 		website.setModifiedDate(now);
-		website.setClassName(className);
+		website.setClassNameId(classNameId);
 		website.setClassPK(classPK);
 		website.setUrl(url);
 		website.setTypeId(typeId);
@@ -90,10 +92,12 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		WebsiteUtil.remove(websiteId);
 	}
 
-	public void deleteWebsites(long companyId, String className, String classPK)
+	public void deleteWebsites(long companyId, String className, long classPK)
 		throws SystemException {
 
-		WebsiteUtil.removeByC_C_C(companyId, className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		WebsiteUtil.removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Website getWebsite(long websiteId)
@@ -106,17 +110,19 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		return WebsiteUtil.findAll();
 	}
 
-	public List getWebsites(long companyId, String className, String classPK)
+	public List getWebsites(long companyId, String className, long classPK)
 		throws SystemException {
 
-		return WebsiteUtil.findByC_C_C(companyId, className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return WebsiteUtil.findByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Website updateWebsite(
 			long websiteId, String url, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
-		validate(websiteId, 0, null, null, url, typeId, primary);
+		validate(websiteId, 0, 0, 0, url, typeId, primary);
 
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
 
@@ -131,7 +137,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			long websiteId, long companyId, String className, String classPK,
+			long websiteId, long companyId, long classNameId, long classPK,
 			String url, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
@@ -151,23 +157,23 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 			Website website = WebsiteUtil.findByPrimaryKey(websiteId);
 
 			companyId = website.getCompanyId();
-			className = website.getClassName();
+			classNameId = website.getClassNameId();
 			classPK = website.getClassPK();
 		}
 
 		try {
 			ListTypeServiceUtil.validate(
-				typeId, className + ListTypeImpl.WEBSITE);
+				typeId, classNameId, ListTypeImpl.WEBSITE);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);
 		}
 
-		validate(websiteId, companyId, className, classPK, primary);
+		validate(websiteId, companyId, classNameId, classPK, primary);
 	}
 
 	protected void validate(
-			long websiteId, long companyId, String className, String classPK,
+			long websiteId, long companyId, long classNameId, long classPK,
 			boolean primary)
 		throws PortalException, SystemException {
 
@@ -176,7 +182,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 
 		if (primary) {
 			Iterator itr = WebsiteUtil.findByC_C_C_P(
-				companyId, className, classPK, primary).iterator();
+				companyId, classNameId, classPK, primary).iterator();
 
 			while (itr.hasNext()) {
 				Website website = (Website)itr.next();

@@ -34,8 +34,7 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.GroupNames;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -64,10 +63,10 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	public boolean isCommunity() {
-		String className = getClassName();
-		String classPK = getClassPK();
+		long classNameId = getClassNameId();
+		long classPK = getClassPK();
 
-		if (Validator.isNull(className) && Validator.isNull(classPK)) {
+		if ((classNameId <= 0) && (classPK <= 0)) {
 			return true;
 		}
 		else {
@@ -76,31 +75,34 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	public boolean isOrganization() {
-		String className = getClassName();
-		String classPK = getClassPK();
+		long classNameId = getClassNameId();
+		long classPK = getClassPK();
 
-		if (Validator.isNotNull(className) && Validator.isNotNull(classPK) &&
-			className.equals(Organization.class.getName())) {
+		if ((classNameId > 0) && (classPK > 0)) {
+			long organizationClassNameId = PortalUtil.getClassNameId(
+				Organization.class);
 
-			return true;
+			if (classNameId == organizationClassNameId) {
+				return true;
+			}
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	public boolean isUser() {
-		String className = getClassName();
-		String classPK = getClassPK();
+		long classNameId = getClassNameId();
+		long classPK = getClassPK();
 
-		if (Validator.isNotNull(className) && Validator.isNotNull(classPK) &&
-			className.equals(User.class.getName())) {
+		if ((classNameId > 0) && (classPK > 0)) {
+			long userClassNameId = PortalUtil.getClassNameId(User.class);
 
-			return true;
+			if (classNameId == userClassNameId) {
+				return true;
+			}
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	public Group getLiveGroup() {
@@ -193,7 +195,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		throws PortalException, SystemException {
 
 		if (privateLayout && isUser()) {
-			long userId = GetterUtil.getLong(getClassPK());
+			long userId = getClassPK();
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 

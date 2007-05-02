@@ -198,6 +198,30 @@
 					</resource-ref>
 				</session>
 				<session>
+					<ejb-name>com_liferay_portal_service_ejb_ClassNameLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/ClassNameLocalServiceHome</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
+					<ejb-name>com_liferay_portal_service_ejb_ClassNameServiceEJB</ejb-name>
+					<jndi-name>com_liferay_portal_service_ejb_ClassNameServiceEJB</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
 					<ejb-name>com_liferay_portal_service_ejb_CompanyLocalServiceEJB</ejb-name>
 					<jndi-name>ejb/liferay/CompanyLocalServiceHome</jndi-name>
 					<resource-ref>
@@ -248,18 +272,6 @@
 				<session>
 					<ejb-name>com_liferay_portal_service_ejb_CountryServiceEJB</ejb-name>
 					<jndi-name>com_liferay_portal_service_ejb_CountryServiceEJB</jndi-name>
-					<resource-ref>
-						<ref-name>jdbc/LiferayPool</ref-name>
-						<resource-link>LiferayPool</resource-link>
-					</resource-ref>
-					<resource-ref>
-						<ref-name>mail/MailSession</ref-name>
-						<resource-link>LiferayMailSession</resource-link>
-					</resource-ref>
-				</session>
-				<session>
-					<ejb-name>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB</ejb-name>
-					<jndi-name>ejb/liferay/DataTrackerLocalServiceHome</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>
@@ -428,6 +440,42 @@
 				<session>
 					<ejb-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</ejb-name>
 					<jndi-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
+					<ejb-name>com_liferay_portal_service_ejb_PasswordPolicyLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/PasswordPolicyLocalServiceHome</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
+					<ejb-name>com_liferay_portal_service_ejb_PasswordPolicyServiceEJB</ejb-name>
+					<jndi-name>com_liferay_portal_service_ejb_PasswordPolicyServiceEJB</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
+					<ejb-name>com_liferay_portal_service_ejb_PasswordPolicyRelLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/PasswordPolicyRelLocalServiceHome</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>

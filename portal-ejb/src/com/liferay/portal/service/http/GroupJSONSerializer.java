@@ -54,25 +54,8 @@ public class GroupJSONSerializer {
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("creatorUserId", model.getCreatorUserId());
-
-		String className = model.getClassName();
-
-		if (className == null) {
-			jsonObj.put("className", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("className", className.toString());
-		}
-
-		String classPK = model.getClassPK();
-
-		if (classPK == null) {
-			jsonObj.put("classPK", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("classPK", classPK.toString());
-		}
-
+		jsonObj.put("classNameId", model.getClassNameId());
+		jsonObj.put("classPK", model.getClassPK());
 		jsonObj.put("parentGroupId", model.getParentGroupId());
 		jsonObj.put("liveGroupId", model.getLiveGroupId());
 

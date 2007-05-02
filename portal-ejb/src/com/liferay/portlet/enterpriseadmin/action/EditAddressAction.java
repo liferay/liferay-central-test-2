@@ -129,7 +129,7 @@ public class EditAddressAction extends PortletAction {
 		long addressId = ParamUtil.getLong(req, "addressId");
 
 		String className = ParamUtil.getString(req, "className");
-		String classPK = ParamUtil.getString(req, "classPK");
+		long classPK = ParamUtil.getLong(req, "classPK");
 
 		String street1 = ParamUtil.getString(req, "street1");
 		String street2 = ParamUtil.getString(req, "street2");

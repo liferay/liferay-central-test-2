@@ -44,8 +44,8 @@
 			</bean-pool>
 		</ejb>
 		<ejb>
-			<ejb-name>com_liferay_portal_service_ejb_ClassNameMapperLocalServiceEJB</ejb-name>
-			<jndi-name>ejb/liferay/ClassNameMapperLocalServiceHome</jndi-name>
+			<ejb-name>com_liferay_portal_service_ejb_ClassNameLocalServiceEJB</ejb-name>
+			<jndi-name>ejb/liferay/ClassNameLocalServiceHome</jndi-name>
 			<bean-pool>
 				<steady-pool-size>0</steady-pool-size>
 				<resize-quantity>60</resize-quantity>
@@ -54,8 +54,8 @@
 			</bean-pool>
 		</ejb>
 		<ejb>
-			<ejb-name>com_liferay_portal_service_ejb_ClassNameMapperServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portal_service_ejb_ClassNameMapperServiceEJB</jndi-name>
+			<ejb-name>com_liferay_portal_service_ejb_ClassNameServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portal_service_ejb_ClassNameServiceEJB</jndi-name>
 			<bean-pool>
 				<steady-pool-size>0</steady-pool-size>
 				<resize-quantity>60</resize-quantity>
@@ -106,16 +106,6 @@
 		<ejb>
 			<ejb-name>com_liferay_portal_service_ejb_CountryServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portal_service_ejb_CountryServiceEJB</jndi-name>
-			<bean-pool>
-				<steady-pool-size>0</steady-pool-size>
-				<resize-quantity>60</resize-quantity>
-				<max-pool-size>60</max-pool-size>
-				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
-			</bean-pool>
-		</ejb>
-		<ejb>
-			<ejb-name>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB</ejb-name>
-			<jndi-name>ejb/liferay/DataTrackerLocalServiceHome</jndi-name>
 			<bean-pool>
 				<steady-pool-size>0</steady-pool-size>
 				<resize-quantity>60</resize-quantity>

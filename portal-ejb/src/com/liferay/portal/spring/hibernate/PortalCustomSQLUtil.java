@@ -22,6 +22,8 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringUtil;
 
@@ -41,6 +43,19 @@ public class PortalCustomSQLUtil
 
 	protected String[] getConfigs() {
 		return StringUtil.split(PropsUtil.get(PropsUtil.CUSTOM_SQL_CONFIGS));
+	}
+
+	protected String transform(String sql) {
+		sql = super.transform(sql);
+
+		long organizationClassNameId = PortalUtil.getClassNameId(
+			Organization.class);
+
+		sql = StringUtil.replace(
+			sql, "[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]",
+			String.valueOf(organizationClassNameId));
+
+		return sql;
 	}
 
 }

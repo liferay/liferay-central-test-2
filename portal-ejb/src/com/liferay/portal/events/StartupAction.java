@@ -28,7 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.model.Release;
-import com.liferay.portal.service.ClassNameMapperLocalServiceUtil;
+import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
@@ -91,9 +91,9 @@ public class StartupAction extends SimpleAction {
 
 			CacheRegistry.setActive(false);
 
-			// Class name wrappers
+			// Class names
 
-			ClassNameMapperLocalServiceUtil.checkClassNameMappers();
+			ClassNameLocalServiceUtil.checkClassNames();
 
 			// Upgrade
 

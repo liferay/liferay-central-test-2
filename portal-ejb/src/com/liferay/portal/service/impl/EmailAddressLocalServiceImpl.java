@@ -33,6 +33,7 @@ import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.base.EmailAddressLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.EmailAddressUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Validator;
 
 import java.rmi.RemoteException;
@@ -53,15 +54,16 @@ public class EmailAddressLocalServiceImpl
 	extends EmailAddressLocalServiceBaseImpl {
 
 	public EmailAddress addEmailAddress(
-			long userId, String className, String classPK, String address,
+			long userId, String className, long classPK, String address,
 			int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
 		validate(
-			0, user.getCompanyId(), className, classPK, address, typeId,
+			0, user.getCompanyId(), classNameId, classPK, address, typeId,
 			primary);
 
 		long emailAddressId = CounterLocalServiceUtil.increment();
@@ -73,7 +75,7 @@ public class EmailAddressLocalServiceImpl
 		emailAddress.setUserName(user.getFullName());
 		emailAddress.setCreateDate(now);
 		emailAddress.setModifiedDate(now);
-		emailAddress.setClassName(className);
+		emailAddress.setClassNameId(classNameId);
 		emailAddress.setClassPK(classPK);
 		emailAddress.setAddress(address);
 		emailAddress.setTypeId(typeId);
@@ -91,10 +93,12 @@ public class EmailAddressLocalServiceImpl
 	}
 
 	public void deleteEmailAddresses(
-			long companyId, String className, String classPK)
+			long companyId, String className, long classPK)
 		throws SystemException {
 
-		EmailAddressUtil.removeByC_C_C(companyId, className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		EmailAddressUtil.removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public EmailAddress getEmailAddress(long emailAddressId)
@@ -103,25 +107,24 @@ public class EmailAddressLocalServiceImpl
 		return EmailAddressUtil.findByPrimaryKey(emailAddressId);
 	}
 
-	public List getEmailAddresses()
-		throws SystemException {
-
+	public List getEmailAddresses() throws SystemException {
 		return EmailAddressUtil.findAll();
 	}
 
 	public List getEmailAddresses(
-			long companyId, String className, String classPK)
+			long companyId, String className, long classPK)
 		throws SystemException {
 
-		return EmailAddressUtil.findByC_C_C(companyId, className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return EmailAddressUtil.findByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public EmailAddress updateEmailAddress(
-			long emailAddressId, String address, int typeId,
-			boolean primary)
+			long emailAddressId, String address, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
-		validate(emailAddressId, 0, null, null, address, typeId, primary);
+		validate(emailAddressId, 0, 0, 0, address, typeId, primary);
 
 		EmailAddress emailAddress =
 			EmailAddressUtil.findByPrimaryKey(emailAddressId);
@@ -137,8 +140,8 @@ public class EmailAddressLocalServiceImpl
 	}
 
 	protected void validate(
-			long emailAddressId, long companyId, String className,
-			String classPK, String address, int typeId, boolean primary)
+			long emailAddressId, long companyId, long classNameId,
+			long classPK, String address, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		if (!Validator.isEmailAddress(address)) {
@@ -150,24 +153,24 @@ public class EmailAddressLocalServiceImpl
 				EmailAddressUtil.findByPrimaryKey(emailAddressId);
 
 			companyId = emailAddress.getCompanyId();
-			className = emailAddress.getClassName();
+			classNameId = emailAddress.getClassNameId();
 			classPK = emailAddress.getClassPK();
 		}
 
 		try {
 			ListTypeServiceUtil.validate(
-				typeId, className + ListTypeImpl.EMAIL_ADDRESS);
+				typeId, classNameId, ListTypeImpl.EMAIL_ADDRESS);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);
 		}
 
-		validate(emailAddressId, companyId, className, classPK, primary);
+		validate(emailAddressId, companyId, classNameId, classPK, primary);
 	}
 
 	protected void validate(
-			long emailAddressId, long companyId, String className,
-			String classPK, boolean primary)
+			long emailAddressId, long companyId, long classNameId, long classPK,
+			boolean primary)
 		throws PortalException, SystemException {
 
 		// Check to make sure there isn't another emailAddress with the same
@@ -176,7 +179,7 @@ public class EmailAddressLocalServiceImpl
 
 		if (primary) {
 			Iterator itr = EmailAddressUtil.findByC_C_C_P(
-				companyId, className, classPK, primary).iterator();
+				companyId, classNameId, classPK, primary).iterator();
 
 			while (itr.hasNext()) {
 				EmailAddress emailAddress = (EmailAddress)itr.next();

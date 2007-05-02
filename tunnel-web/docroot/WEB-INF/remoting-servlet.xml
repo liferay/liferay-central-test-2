@@ -26,17 +26,17 @@
 		<property name="service" ref="com.liferay.portal.service.AddressService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portal.service.AddressService" />
 	</bean>
-	<bean name="/com_liferay_portal_service_spring_ClassNameMapperService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.ClassNameMapperService.transaction" />
-		<property name="serviceInterface" value="com.liferay.portal.service.ClassNameMapperService" />
+	<bean name="/com_liferay_portal_service_spring_ClassNameService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ClassNameService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ClassNameService" />
 	</bean>
-	<bean name="/com_liferay_portal_service_spring_ClassNameMapperService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.ClassNameMapperService.transaction" />
-		<property name="serviceInterface" value="com.liferay.portal.service.ClassNameMapperService" />
+	<bean name="/com_liferay_portal_service_spring_ClassNameService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ClassNameService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ClassNameService" />
 	</bean>
-	<bean name="/com_liferay_portal_service_spring_ClassNameMapperService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.ClassNameMapperService.transaction" />
-		<property name="serviceInterface" value="com.liferay.portal.service.ClassNameMapperService" />
+	<bean name="/com_liferay_portal_service_spring_ClassNameService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ClassNameService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ClassNameService" />
 	</bean>
 	<bean name="/com_liferay_portal_service_spring_CompanyService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.CompanyService.transaction" />

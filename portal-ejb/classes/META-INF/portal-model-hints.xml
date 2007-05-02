@@ -49,8 +49,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="street1" type="String" />
 		<field name="street2" type="String" />
 		<field name="street3" type="String" />
@@ -62,9 +62,9 @@
 		<field name="mailing" type="boolean" />
 		<field name="primary" type="boolean" />
 	</model>
-	<model name="com.liferay.portal.model.ClassNameMapper">
-		<field name="classNameMapperId" type="long" />
-		<field name="className" type="String" />
+	<model name="com.liferay.portal.model.ClassName">
+		<field name="classNameId" type="long" />
+		<field name="value" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.Company">
 		<default-hints>
@@ -124,18 +124,6 @@
 		<field name="idd" type="String" />
 		<field name="active" type="boolean" />
 	</model>
-	<model name="com.liferay.portal.model.DataTracker">
-		<field name="dataTrackerId" type="String" />
-		<field name="companyId" type="long" />
-		<field name="createdOn" type="Date" />
-		<field name="createdByUserId" type="long" />
-		<field name="createdByUserName" type="String" />
-		<field name="updatedOn" type="Date" />
-		<field name="updatedBy" type="String" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
-		<field name="active" type="boolean" />
-	</model>
 	<model name="com.liferay.portal.model.EmailAddress">
 		<field name="emailAddressId" type="long" />
 		<field name="companyId" type="long" />
@@ -143,8 +131,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="address" type="String">
 			<hint name="display-width">150</hint>
 		</field>
@@ -155,8 +143,8 @@
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="creatorUserId" type="long" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="parentGroupId" type="long" />
 		<field name="liveGroupId" type="long" />
 		<field name="name" type="String">
@@ -323,8 +311,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="number" type="String">
 			<hint name="display-width">60</hint>
 		</field>
@@ -389,8 +377,8 @@
 	<model name="com.liferay.portal.model.Role">
 		<field name="roleId" type="long" />
 		<field name="companyId" type="long" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="name" type="String">
 			<hint name="display-width">150</hint>
 		</field>
@@ -406,8 +394,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="frequency" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.User">
@@ -488,8 +476,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="url" type="String" />
 		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />

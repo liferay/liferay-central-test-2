@@ -76,7 +76,7 @@ public class RoleLocalServiceUtil {
 
 	public static com.liferay.portal.model.Role addRole(long userId,
 		long companyId, java.lang.String name, int type,
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();

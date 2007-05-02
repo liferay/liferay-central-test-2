@@ -497,7 +497,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_C(long companyId, String className)
+	public List findByC_C(long companyId, long classNameId)
 		throws SystemException {
 		Session session = null;
 
@@ -508,14 +508,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC");
@@ -525,10 +518,7 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
+			q.setLong(queryPos++, classNameId);
 
 			return q.list();
 		}
@@ -540,12 +530,12 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_C(long companyId, String className, int begin, int end)
+	public List findByC_C(long companyId, long classNameId, int begin, int end)
 		throws SystemException {
-		return findByC_C(companyId, className, begin, end, null);
+		return findByC_C(companyId, classNameId, begin, end, null);
 	}
 
-	public List findByC_C(long companyId, String className, int begin, int end,
+	public List findByC_C(long companyId, long classNameId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -556,14 +546,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -580,10 +563,7 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
+			q.setLong(queryPos++, classNameId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -595,10 +575,10 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public EmailAddress findByC_C_First(long companyId, String className,
+	public EmailAddress findByC_C_First(long companyId, long classNameId,
 		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		List list = findByC_C(companyId, className, 0, 1, obc);
+		List list = findByC_C(companyId, classNameId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -607,8 +587,8 @@ public class EmailAddressPersistence extends BasePersistence {
 			msg.append("companyId=");
 			msg.append(companyId);
 			msg.append(", ");
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
@@ -617,11 +597,11 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public EmailAddress findByC_C_Last(long companyId, String className,
+	public EmailAddress findByC_C_Last(long companyId, long classNameId,
 		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		int count = countByC_C(companyId, className);
-		List list = findByC_C(companyId, className, count - 1, count, obc);
+		int count = countByC_C(companyId, classNameId);
+		List list = findByC_C(companyId, classNameId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -630,8 +610,8 @@ public class EmailAddressPersistence extends BasePersistence {
 			msg.append("companyId=");
 			msg.append(companyId);
 			msg.append(", ");
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
@@ -641,10 +621,10 @@ public class EmailAddressPersistence extends BasePersistence {
 	}
 
 	public EmailAddress[] findByC_C_PrevAndNext(long emailAddressId,
-		long companyId, String className, OrderByComparator obc)
+		long companyId, long classNameId, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
-		int count = countByC_C(companyId, className);
+		int count = countByC_C(companyId, classNameId);
 		Session session = null;
 
 		try {
@@ -654,14 +634,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -678,10 +651,7 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
+			q.setLong(queryPos++, classNameId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					emailAddress);
@@ -700,7 +670,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_C_C(long companyId, String className, String classPK)
+	public List findByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -711,23 +681,9 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC");
@@ -737,14 +693,8 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			return q.list();
 		}
@@ -756,12 +706,12 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_C_C(long companyId, String className, String classPK,
+	public List findByC_C_C(long companyId, long classNameId, long classPK,
 		int begin, int end) throws SystemException {
-		return findByC_C_C(companyId, className, classPK, begin, end, null);
+		return findByC_C_C(companyId, classNameId, classPK, begin, end, null);
 	}
 
-	public List findByC_C_C(long companyId, String className, String classPK,
+	public List findByC_C_C(long companyId, long classNameId, long classPK,
 		int begin, int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -772,23 +722,9 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -805,14 +741,8 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -824,10 +754,10 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public EmailAddress findByC_C_C_First(long companyId, String className,
-		String classPK, OrderByComparator obc)
+	public EmailAddress findByC_C_C_First(long companyId, long classNameId,
+		long classPK, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		List list = findByC_C_C(companyId, className, classPK, 0, 1, obc);
+		List list = findByC_C_C(companyId, classNameId, classPK, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -836,8 +766,8 @@ public class EmailAddressPersistence extends BasePersistence {
 			msg.append("companyId=");
 			msg.append(companyId);
 			msg.append(", ");
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -849,11 +779,11 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public EmailAddress findByC_C_C_Last(long companyId, String className,
-		String classPK, OrderByComparator obc)
+	public EmailAddress findByC_C_C_Last(long companyId, long classNameId,
+		long classPK, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		int count = countByC_C_C(companyId, className, classPK);
-		List list = findByC_C_C(companyId, className, classPK, count - 1,
+		int count = countByC_C_C(companyId, classNameId, classPK);
+		List list = findByC_C_C(companyId, classNameId, classPK, count - 1,
 				count, obc);
 
 		if (list.size() == 0) {
@@ -863,8 +793,8 @@ public class EmailAddressPersistence extends BasePersistence {
 			msg.append("companyId=");
 			msg.append(companyId);
 			msg.append(", ");
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -877,10 +807,10 @@ public class EmailAddressPersistence extends BasePersistence {
 	}
 
 	public EmailAddress[] findByC_C_C_PrevAndNext(long emailAddressId,
-		long companyId, String className, String classPK, OrderByComparator obc)
+		long companyId, long classNameId, long classPK, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
-		int count = countByC_C_C(companyId, className, classPK);
+		int count = countByC_C_C(companyId, classNameId, classPK);
 		Session session = null;
 
 		try {
@@ -890,23 +820,9 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -923,14 +839,8 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					emailAddress);
@@ -949,7 +859,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_C_C_P(long companyId, String className, String classPK,
+	public List findByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
 		Session session = null;
 
@@ -960,23 +870,9 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" AND ");
 			query.append("primary_ = ?");
 			query.append(" ");
@@ -988,15 +884,8 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 			q.setBoolean(queryPos++, primary);
 
 			return q.list();
@@ -1009,13 +898,13 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_C_C_P(long companyId, String className, String classPK,
+	public List findByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary, int begin, int end) throws SystemException {
-		return findByC_C_C_P(companyId, className, classPK, primary, begin,
+		return findByC_C_C_P(companyId, classNameId, classPK, primary, begin,
 			end, null);
 	}
 
-	public List findByC_C_C_P(long companyId, String className, String classPK,
+	public List findByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		Session session = null;
@@ -1027,23 +916,9 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" AND ");
 			query.append("primary_ = ?");
 			query.append(" ");
@@ -1062,15 +937,8 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 			q.setBoolean(queryPos++, primary);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
@@ -1083,11 +951,11 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public EmailAddress findByC_C_C_P_First(long companyId, String className,
-		String classPK, boolean primary, OrderByComparator obc)
+	public EmailAddress findByC_C_C_P_First(long companyId, long classNameId,
+		long classPK, boolean primary, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		List list = findByC_C_C_P(companyId, className, classPK, primary, 0, 1,
-				obc);
+		List list = findByC_C_C_P(companyId, classNameId, classPK, primary, 0,
+				1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1096,8 +964,8 @@ public class EmailAddressPersistence extends BasePersistence {
 			msg.append("companyId=");
 			msg.append(companyId);
 			msg.append(", ");
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -1112,11 +980,11 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public EmailAddress findByC_C_C_P_Last(long companyId, String className,
-		String classPK, boolean primary, OrderByComparator obc)
+	public EmailAddress findByC_C_C_P_Last(long companyId, long classNameId,
+		long classPK, boolean primary, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		int count = countByC_C_C_P(companyId, className, classPK, primary);
-		List list = findByC_C_C_P(companyId, className, classPK, primary,
+		int count = countByC_C_C_P(companyId, classNameId, classPK, primary);
+		List list = findByC_C_C_P(companyId, classNameId, classPK, primary,
 				count - 1, count, obc);
 
 		if (list.size() == 0) {
@@ -1126,8 +994,8 @@ public class EmailAddressPersistence extends BasePersistence {
 			msg.append("companyId=");
 			msg.append(companyId);
 			msg.append(", ");
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -1143,11 +1011,11 @@ public class EmailAddressPersistence extends BasePersistence {
 	}
 
 	public EmailAddress[] findByC_C_C_P_PrevAndNext(long emailAddressId,
-		long companyId, String className, String classPK, boolean primary,
+		long companyId, long classNameId, long classPK, boolean primary,
 		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
-		int count = countByC_C_C_P(companyId, className, classPK, primary);
+		int count = countByC_C_C_P(companyId, classNameId, classPK, primary);
 		Session session = null;
 
 		try {
@@ -1157,23 +1025,9 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" AND ");
 			query.append("primary_ = ?");
 			query.append(" ");
@@ -1192,15 +1046,8 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 			q.setBoolean(queryPos++, primary);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -1317,9 +1164,9 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_C(long companyId, String className)
+	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
-		Iterator itr = findByC_C(companyId, className).iterator();
+		Iterator itr = findByC_C(companyId, classNameId).iterator();
 
 		while (itr.hasNext()) {
 			EmailAddress emailAddress = (EmailAddress)itr.next();
@@ -1327,9 +1174,9 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_C_C(long companyId, String className, String classPK)
+	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Iterator itr = findByC_C_C(companyId, className, classPK).iterator();
+		Iterator itr = findByC_C_C(companyId, classNameId, classPK).iterator();
 
 		while (itr.hasNext()) {
 			EmailAddress emailAddress = (EmailAddress)itr.next();
@@ -1337,9 +1184,9 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_C_C_P(long companyId, String className,
-		String classPK, boolean primary) throws SystemException {
-		Iterator itr = findByC_C_C_P(companyId, className, classPK, primary)
+	public void removeByC_C_C_P(long companyId, long classNameId, long classPK,
+		boolean primary) throws SystemException {
+		Iterator itr = findByC_C_C_P(companyId, classNameId, classPK, primary)
 						   .iterator();
 
 		while (itr.hasNext()) {
@@ -1432,7 +1279,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_C(long companyId, String className)
+	public int countByC_C(long companyId, long classNameId)
 		throws SystemException {
 		Session session = null;
 
@@ -1444,14 +1291,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -1459,10 +1299,7 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
+			q.setLong(queryPos++, classNameId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1484,7 +1321,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_C_C(long companyId, String className, String classPK)
+	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -1496,23 +1333,9 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -1520,14 +1343,8 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			Iterator itr = q.list().iterator();
 
@@ -1549,7 +1366,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_C_C_P(long companyId, String className, String classPK,
+	public int countByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
 		Session session = null;
 
@@ -1561,23 +1378,9 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" AND ");
 			query.append("primary_ = ?");
 			query.append(" ");
@@ -1587,15 +1390,8 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 			q.setBoolean(queryPos++, primary);
 
 			Iterator itr = q.list().iterator();

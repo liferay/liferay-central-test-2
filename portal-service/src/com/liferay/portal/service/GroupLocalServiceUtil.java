@@ -66,9 +66,9 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Group addGroup(long userId,
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active)
+		java.lang.String className, long classPK, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -78,7 +78,7 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Group addGroup(long userId,
-		java.lang.String className, java.lang.String classPK, long liveGroupId,
+		java.lang.String className, long classPK, long liveGroupId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 

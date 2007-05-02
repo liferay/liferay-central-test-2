@@ -61,8 +61,8 @@ public class AddressModelImpl extends BaseModelImpl {
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "className", new Integer(Types.VARCHAR) },
-			{ "classPK", new Integer(Types.VARCHAR) },
+			{ "classNameId", new Integer(Types.BIGINT) },
+			{ "classPK", new Integer(Types.BIGINT) },
 			{ "street1", new Integer(Types.VARCHAR) },
 			{ "street2", new Integer(Types.VARCHAR) },
 			{ "street3", new Integer(Types.VARCHAR) },
@@ -78,12 +78,6 @@ public class AddressModelImpl extends BaseModelImpl {
 				"xss.allow.com.liferay.portal.model.Address"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Address.className"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Address.classPK"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_STREET1 = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.street1"),
@@ -187,36 +181,22 @@ public class AddressModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getClassName() {
-		return GetterUtil.getString(_className);
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public void setClassName(String className) {
-		if (((className == null) && (_className != null)) ||
-				((className != null) && (_className == null)) ||
-				((className != null) && (_className != null) &&
-				!className.equals(_className))) {
-			if (!XSS_ALLOW_CLASSNAME) {
-				className = XSSUtil.strip(className);
-			}
-
-			_className = className;
+	public void setClassNameId(long classNameId) {
+		if (classNameId != _classNameId) {
+			_classNameId = classNameId;
 		}
 	}
 
-	public String getClassPK() {
-		return GetterUtil.getString(_classPK);
+	public long getClassPK() {
+		return _classPK;
 	}
 
-	public void setClassPK(String classPK) {
-		if (((classPK == null) && (_classPK != null)) ||
-				((classPK != null) && (_classPK == null)) ||
-				((classPK != null) && (_classPK != null) &&
-				!classPK.equals(_classPK))) {
-			if (!XSS_ALLOW_CLASSPK) {
-				classPK = XSSUtil.strip(classPK);
-			}
-
+	public void setClassPK(long classPK) {
+		if (classPK != _classPK) {
 			_classPK = classPK;
 		}
 	}
@@ -370,7 +350,7 @@ public class AddressModelImpl extends BaseModelImpl {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setClassName(getClassName());
+		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
 		clone.setStreet1(getStreet1());
 		clone.setStreet2(getStreet2());
@@ -436,8 +416,8 @@ public class AddressModelImpl extends BaseModelImpl {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _className;
-	private String _classPK;
+	private long _classNameId;
+	private long _classPK;
 	private String _street1;
 	private String _street2;
 	private String _street3;

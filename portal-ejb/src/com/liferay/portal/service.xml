@@ -46,8 +46,8 @@
 
 		<!-- Other fields -->
 
-		<column name="className" type="String" />
-		<column name="classPK" type="String" />
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
 		<column name="street1" type="String" />
 		<column name="street2" type="String" />
 		<column name="street3" type="String" />
@@ -75,40 +75,40 @@
 		</finder>
 		<finder name="C_C" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 		</finder>
 		<finder name="C_C_C" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
 		<finder name="C_C_C_M" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 			<finder-column name="mailing" />
 		</finder>
 		<finder name="C_C_C_P" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 			<finder-column name="primary" />
 		</finder>
 	</entity>
-	<entity name="ClassNameMapper" local-service="true" remote-service="true">
+	<entity name="ClassName" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
-		<column name="classNameMapperId" type="long" primary="true" />
+		<column name="classNameId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
-		<column name="className" type="String" />
+		<column name="value" type="String" />
 
 		<!-- Finder methods -->
 
-		<finder name="ClassName" return-type="ClassNameMapper">
-			<finder-column name="className" />
+		<finder name="Value" return-type="ClassName">
+			<finder-column name="value" />
 		</finder>
 	</entity>
 	<entity name="Company" local-service="true" remote-service="true">
@@ -206,27 +206,6 @@
 			<finder-column name="active" />
 		</finder>
 	</entity>
-	<entity name="DataTracker" local-service="true" remote-service="remote">
-
-		<!-- PK fields -->
-
-		<column name="dataTrackerId" type="String" primary="true" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="createdOn" type="Date" />
-		<column name="createdByUserId" type="long" />
-		<column name="createdByUserName" type="String" />
-		<column name="updatedOn" type="Date" />
-		<column name="updatedBy" type="String" />
-
-		<!-- Other fields -->
-
-		<column name="className" type="String" />
-		<column name="classPK" type="String" />
-		<column name="active" type="boolean" />
-	</entity>
 	<entity name="EmailAddress" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -243,8 +222,8 @@
 
 		<!-- Other fields -->
 
-		<column name="className" type="String" />
-		<column name="classPK" type="String" />
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
 		<column name="address" type="String" />
 		<column name="typeId" type="int" />
 		<column name="primary" type="boolean" />
@@ -265,16 +244,16 @@
 		</finder>
 		<finder name="C_C" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 		</finder>
 		<finder name="C_C_C" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
 		<finder name="C_C_C_P" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 			<finder-column name="primary" />
 		</finder>
@@ -292,8 +271,8 @@
 
 		<!-- Other fields -->
 
-		<column name="className" type="String" />
-		<column name="classPK" type="String" />
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
 		<column name="parentGroupId" type="long" />
 		<column name="liveGroupId" type="long" />
 		<column name="name" type="String" />
@@ -331,7 +310,7 @@
 		</finder>
 		<finder name="C_C_C" return-type="Group">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
 
@@ -743,8 +722,8 @@
 
 		<!-- Other fields -->
 
-		<column name="className" type="String" />
-		<column name="classPK" type="String" />
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
 		<column name="number" type="String" />
 		<column name="extension" type="String" />
 		<column name="typeId" type="int" />
@@ -766,16 +745,16 @@
 		</finder>
 		<finder name="C_C" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 		</finder>
 		<finder name="C_C_C" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
 		<finder name="C_C_C_P" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 			<finder-column name="primary" />
 		</finder>
@@ -966,8 +945,8 @@
 
 		<!-- Other fields -->
 
-		<column name="className" type="String" />
-		<column name="classPK" type="String" />
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="type" type="int" />
@@ -995,7 +974,7 @@
 		</finder>
 		<finder name="C_C_C" return-type="Role">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
 	</entity>
@@ -1015,8 +994,8 @@
 
 		<!-- Other fields -->
 
-		<column name="className" type="String" />
-		<column name="classPK" type="String" />
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
 		<column name="frequency" type="String" />
 
 		<!-- Finder methods -->
@@ -1026,13 +1005,13 @@
 		</finder>
 		<finder name="C_C_C" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
 		<finder name="C_U_C_C" return-type="Subscription">
 			<finder-column name="companyId" />
 			<finder-column name="userId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
 	</entity>
@@ -1258,8 +1237,8 @@
 
 		<!-- Other fields -->
 
-		<column name="className" type="String" />
-		<column name="classPK" type="String" />
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
 		<column name="url" type="String" />
 		<column name="typeId" type="int" />
 		<column name="primary" type="boolean" />
@@ -1280,16 +1259,16 @@
 		</finder>
 		<finder name="C_C" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 		</finder>
 		<finder name="C_C_C" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
 		<finder name="C_C_C_P" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 			<finder-column name="primary" />
 		</finder>

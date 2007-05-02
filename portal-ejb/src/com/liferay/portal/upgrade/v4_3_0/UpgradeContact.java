@@ -135,7 +135,7 @@ public class UpgradeContact extends UpgradeProcess {
 	}
 
 	private static final String _UPGRADE_SCHEMA =
-		"alter_column_type Contact_ contactId LONG";
+		"alter_column_type Contact_ contactId LONG;";
 
 	private static Log _log = LogFactory.getLog(UpgradeContact.class);
 

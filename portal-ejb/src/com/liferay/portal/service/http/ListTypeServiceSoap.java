@@ -114,5 +114,16 @@ public class ListTypeServiceSoap {
 		}
 	}
 
+	public static void validate(int listTypeId, long classNameId,
+		java.lang.String type) throws RemoteException {
+		try {
+			ListTypeServiceUtil.validate(listTypeId, classNameId, type);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(ListTypeServiceSoap.class);
 }

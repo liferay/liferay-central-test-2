@@ -573,14 +573,14 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		SubscriptionLocalServiceUtil.addSubscription(
-			userId, MBCategory.class.getName(), categoryId);
+			userId, MBCategory.class.getName(), GetterUtil.getLong(categoryId));
 	}
 
 	public void unsubscribeCategory(long userId, String categoryId)
 		throws PortalException, SystemException {
 
 		SubscriptionLocalServiceUtil.deleteSubscription(
-			userId, MBCategory.class.getName(), categoryId);
+			userId, MBCategory.class.getName(), GetterUtil.getLong(categoryId));
 	}
 
 	protected void validate(String name) throws PortalException {

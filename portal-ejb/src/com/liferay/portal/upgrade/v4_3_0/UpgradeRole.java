@@ -26,6 +26,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.OrgGroupRoleImpl;
 import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -34,6 +35,7 @@ import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassNameUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
 
 import java.sql.Types;
@@ -67,7 +69,8 @@ public class UpgradeRole extends UpgradeProcess {
 		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			RoleImpl.TABLE_NAME, RoleImpl.TABLE_COLUMNS, pkUpgradeColumn);
+			RoleImpl.TABLE_NAME, RoleImpl.TABLE_COLUMNS, pkUpgradeColumn,
+			new ClassNameUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
 
@@ -111,6 +114,10 @@ public class UpgradeRole extends UpgradeProcess {
 		// Counter
 
 		CounterLocalServiceUtil.reset(Role.class.getName());
+
+		// Schema
+
+		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
 	}
 
 	private static final String _TABLE_GROUPS_ROLES = "Groups_Roles";
@@ -132,6 +139,11 @@ public class UpgradeRole extends UpgradeProcess {
 	private static final Object[][] _COLUMNS_USERS_ROLES = {
 		{"userId", new Integer(Types.BIGINT)},
 		{"roleId", new Integer(Types.BIGINT)}
+	};
+
+	private static final String[] _UPGRADE_SCHEMA = {
+		"alter_column_type Role_ classNameId LONG;",
+		"alter_column_type Role_ classPK LONG;"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeGroup.class);

@@ -55,8 +55,8 @@ public class GroupModelImpl extends BaseModelImpl {
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "creatorUserId", new Integer(Types.BIGINT) },
-			{ "className", new Integer(Types.VARCHAR) },
-			{ "classPK", new Integer(Types.VARCHAR) },
+			{ "classNameId", new Integer(Types.BIGINT) },
+			{ "classPK", new Integer(Types.BIGINT) },
 			{ "parentGroupId", new Integer(Types.BIGINT) },
 			{ "liveGroupId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
@@ -67,12 +67,6 @@ public class GroupModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Group.className"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Group.classPK"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -129,36 +123,22 @@ public class GroupModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getClassName() {
-		return GetterUtil.getString(_className);
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public void setClassName(String className) {
-		if (((className == null) && (_className != null)) ||
-				((className != null) && (_className == null)) ||
-				((className != null) && (_className != null) &&
-				!className.equals(_className))) {
-			if (!XSS_ALLOW_CLASSNAME) {
-				className = XSSUtil.strip(className);
-			}
-
-			_className = className;
+	public void setClassNameId(long classNameId) {
+		if (classNameId != _classNameId) {
+			_classNameId = classNameId;
 		}
 	}
 
-	public String getClassPK() {
-		return GetterUtil.getString(_classPK);
+	public long getClassPK() {
+		return _classPK;
 	}
 
-	public void setClassPK(String classPK) {
-		if (((classPK == null) && (_classPK != null)) ||
-				((classPK != null) && (_classPK == null)) ||
-				((classPK != null) && (_classPK != null) &&
-				!classPK.equals(_classPK))) {
-			if (!XSS_ALLOW_CLASSPK) {
-				classPK = XSSUtil.strip(classPK);
-			}
-
+	public void setClassPK(long classPK) {
+		if (classPK != _classPK) {
 			_classPK = classPK;
 		}
 	}
@@ -268,7 +248,7 @@ public class GroupModelImpl extends BaseModelImpl {
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setCreatorUserId(getCreatorUserId());
-		clone.setClassName(getClassName());
+		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
 		clone.setParentGroupId(getParentGroupId());
 		clone.setLiveGroupId(getLiveGroupId());
@@ -328,8 +308,8 @@ public class GroupModelImpl extends BaseModelImpl {
 	private long _groupId;
 	private long _companyId;
 	private long _creatorUserId;
-	private String _className;
-	private String _classPK;
+	private long _classNameId;
+	private long _classPK;
 	private long _parentGroupId;
 	private long _liveGroupId;
 	private String _name;

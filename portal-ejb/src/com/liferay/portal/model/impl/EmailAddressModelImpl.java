@@ -62,8 +62,8 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "className", new Integer(Types.VARCHAR) },
-			{ "classPK", new Integer(Types.VARCHAR) },
+			{ "classNameId", new Integer(Types.BIGINT) },
+			{ "classPK", new Integer(Types.BIGINT) },
 			{ "address", new Integer(Types.VARCHAR) },
 			{ "typeId", new Integer(Types.INTEGER) },
 			{ "primary_", new Integer(Types.BOOLEAN) }
@@ -72,12 +72,6 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 				"xss.allow.com.liferay.portal.model.EmailAddress"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.EmailAddress.className"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.EmailAddress.classPK"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ADDRESS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress.address"),
@@ -169,36 +163,22 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getClassName() {
-		return GetterUtil.getString(_className);
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public void setClassName(String className) {
-		if (((className == null) && (_className != null)) ||
-				((className != null) && (_className == null)) ||
-				((className != null) && (_className != null) &&
-				!className.equals(_className))) {
-			if (!XSS_ALLOW_CLASSNAME) {
-				className = XSSUtil.strip(className);
-			}
-
-			_className = className;
+	public void setClassNameId(long classNameId) {
+		if (classNameId != _classNameId) {
+			_classNameId = classNameId;
 		}
 	}
 
-	public String getClassPK() {
-		return GetterUtil.getString(_classPK);
+	public long getClassPK() {
+		return _classPK;
 	}
 
-	public void setClassPK(String classPK) {
-		if (((classPK == null) && (_classPK != null)) ||
-				((classPK != null) && (_classPK == null)) ||
-				((classPK != null) && (_classPK != null) &&
-				!classPK.equals(_classPK))) {
-			if (!XSS_ALLOW_CLASSPK) {
-				classPK = XSSUtil.strip(classPK);
-			}
-
+	public void setClassPK(long classPK) {
+		if (classPK != _classPK) {
 			_classPK = classPK;
 		}
 	}
@@ -252,7 +232,7 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setClassName(getClassName());
+		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
 		clone.setAddress(getAddress());
 		clone.setTypeId(getTypeId());
@@ -311,8 +291,8 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _className;
-	private String _classPK;
+	private long _classNameId;
+	private long _classPK;
 	private String _address;
 	private int _typeId;
 	private boolean _primary;

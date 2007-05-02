@@ -121,7 +121,7 @@ public class EditWebsiteAction extends PortletAction {
 		long websiteId = ParamUtil.getLong(req, "websiteId");
 
 		String className = ParamUtil.getString(req, "className");
-		String classPK = ParamUtil.getString(req, "classPK");
+		long classPK = ParamUtil.getLong(req, "classPK");
 
 		String url = ParamUtil.getString(req, "url");
 		int typeId = ParamUtil.getInteger(req, "typeId");

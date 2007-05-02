@@ -55,8 +55,8 @@ import javax.ejb.SessionContext;
 public class EmailAddressServiceEJBImpl implements EmailAddressService,
 	SessionBean {
 	public com.liferay.portal.model.EmailAddress addEmailAddress(
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String address, int typeId, boolean primary)
+		java.lang.String className, long classPK, java.lang.String address,
+		int typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -82,7 +82,7 @@ public class EmailAddressServiceEJBImpl implements EmailAddressService,
 	}
 
 	public java.util.List getEmailAddresses(java.lang.String className,
-		java.lang.String classPK)
+		long classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

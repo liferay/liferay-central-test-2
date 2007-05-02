@@ -190,68 +190,65 @@ public class SubscriptionUtil {
 			userId, obc);
 	}
 
-	public static java.util.List findByC_C_C(long companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C(companyId, className, classPK);
+	public static java.util.List findByC_C_C(long companyId, long classNameId,
+		long classPK) throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_C_C(companyId, classNameId, classPK);
 	}
 
-	public static java.util.List findByC_C_C(long companyId,
-		java.lang.String className, java.lang.String classPK, int begin, int end)
+	public static java.util.List findByC_C_C(long companyId, long classNameId,
+		long classPK, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C(companyId, className, classPK,
+		return getPersistence().findByC_C_C(companyId, classNameId, classPK,
 			begin, end);
 	}
 
-	public static java.util.List findByC_C_C(long companyId,
-		java.lang.String className, java.lang.String classPK, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByC_C_C(long companyId, long classNameId,
+		long classPK, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C(companyId, className, classPK,
+		return getPersistence().findByC_C_C(companyId, classNameId, classPK,
 			begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Subscription findByC_C_C_First(
-		long companyId, java.lang.String className, java.lang.String classPK,
+		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchSubscriptionException {
-		return getPersistence().findByC_C_C_First(companyId, className,
+		return getPersistence().findByC_C_C_First(companyId, classNameId,
 			classPK, obc);
 	}
 
 	public static com.liferay.portal.model.Subscription findByC_C_C_Last(
-		long companyId, java.lang.String className, java.lang.String classPK,
+		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchSubscriptionException {
-		return getPersistence().findByC_C_C_Last(companyId, className, classPK,
-			obc);
+		return getPersistence().findByC_C_C_Last(companyId, classNameId,
+			classPK, obc);
 	}
 
 	public static com.liferay.portal.model.Subscription[] findByC_C_C_PrevAndNext(
-		long subscriptionId, long companyId, java.lang.String className,
-		java.lang.String classPK,
+		long subscriptionId, long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchSubscriptionException {
 		return getPersistence().findByC_C_C_PrevAndNext(subscriptionId,
-			companyId, className, classPK, obc);
+			companyId, classNameId, classPK, obc);
 	}
 
 	public static com.liferay.portal.model.Subscription findByC_U_C_C(
-		long companyId, long userId, java.lang.String className,
-		java.lang.String classPK)
+		long companyId, long userId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchSubscriptionException {
-		return getPersistence().findByC_U_C_C(companyId, userId, className,
+		return getPersistence().findByC_U_C_C(companyId, userId, classNameId,
 			classPK);
 	}
 
 	public static com.liferay.portal.model.Subscription fetchByC_U_C_C(
-		long companyId, long userId, java.lang.String className,
-		java.lang.String classPK) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByC_U_C_C(companyId, userId, className,
+		long companyId, long userId, long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_U_C_C(companyId, userId, classNameId,
 			classPK);
 	}
 
@@ -289,17 +286,16 @@ public class SubscriptionUtil {
 		getPersistence().removeByUserId(userId);
 	}
 
-	public static void removeByC_C_C(long companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByC_C_C(companyId, className, classPK);
+	public static void removeByC_C_C(long companyId, long classNameId,
+		long classPK) throws com.liferay.portal.SystemException {
+		getPersistence().removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public static void removeByC_U_C_C(long companyId, long userId,
-		java.lang.String className, java.lang.String classPK)
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchSubscriptionException {
-		getPersistence().removeByC_U_C_C(companyId, userId, className, classPK);
+		getPersistence().removeByC_U_C_C(companyId, userId, classNameId, classPK);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -311,15 +307,15 @@ public class SubscriptionUtil {
 		return getPersistence().countByUserId(userId);
 	}
 
-	public static int countByC_C_C(long companyId, java.lang.String className,
-		java.lang.String classPK) throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_C_C(companyId, className, classPK);
+	public static int countByC_C_C(long companyId, long classNameId,
+		long classPK) throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public static int countByC_U_C_C(long companyId, long userId,
-		java.lang.String className, java.lang.String classPK)
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_U_C_C(companyId, userId, className,
+		return getPersistence().countByC_U_C_C(companyId, userId, classNameId,
 			classPK);
 	}
 

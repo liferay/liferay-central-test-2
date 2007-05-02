@@ -213,7 +213,7 @@
 				(Resource_.primKey = ?) AND
 				(Resource_.scope = 4) AND
 				(Permission_.actionId = ?) AND
-				(Group_.className = 'com.liferay.portal.model.Organization') AND
+				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]) AND
 				(
 					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
@@ -267,7 +267,7 @@
 					)
 				) AND
 				(Permission_.actionId = ?) AND
-				(Group_.className = 'com.liferay.portal.model.Organization') AND
+				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]) AND
 				(
 					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
@@ -547,7 +547,7 @@
 				(Resource_.primKey = ?) AND
 				(Resource_.scope = 4) AND
 				(Permission_.actionId = ?) AND
-				(Group_.className = 'com.liferay.portal.model.Organization') AND
+				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]) AND
 				(
 					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
@@ -601,7 +601,7 @@
 					)
 				) AND
 				(Permission_.actionId = ?) AND
-				(Group_.className = 'com.liferay.portal.model.Organization') AND
+				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]) AND
 				(
 					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]

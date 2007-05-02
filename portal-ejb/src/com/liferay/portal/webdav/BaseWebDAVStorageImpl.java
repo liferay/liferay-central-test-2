@@ -28,7 +28,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
@@ -108,9 +107,9 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 			String name = group.getName();
 
 			if (group.isUser()) {
-				long groupUserId = GetterUtil.getLong(group.getClassPK());
+				long userId = group.getClassPK();
 
-				User user = UserLocalServiceUtil.getUserById(groupUserId);
+				User user = UserLocalServiceUtil.getUserById(userId);
 
 				name = user.getFullName();
 			}

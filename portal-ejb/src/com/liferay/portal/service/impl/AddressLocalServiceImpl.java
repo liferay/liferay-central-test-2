@@ -35,6 +35,7 @@ import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.base.AddressLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.AddressUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Validator;
 
 import java.rmi.RemoteException;
@@ -53,17 +54,18 @@ import java.util.List;
 public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 	public Address addAddress(
-			long userId, String className, String classPK, String street1,
+			long userId, String className, long classPK, String street1,
 			String street2, String street3, String city, String zip,
 			long regionId, long countryId, int typeId, boolean mailing,
 			boolean primary)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
 		validate(
-			0, user.getCompanyId(), className, classPK, street1, city, zip,
+			0, user.getCompanyId(), classNameId, classPK, street1, city, zip,
 			regionId, countryId, typeId, mailing, primary);
 
 		long addressId = CounterLocalServiceUtil.increment();
@@ -75,7 +77,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		address.setUserName(user.getFullName());
 		address.setCreateDate(now);
 		address.setModifiedDate(now);
-		address.setClassName(className);
+		address.setClassNameId(classNameId);
 		address.setClassPK(classPK);
 		address.setStreet1(street1);
 		address.setStreet2(street2);
@@ -99,11 +101,12 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		AddressUtil.remove(addressId);
 	}
 
-	public void deleteAddresses(
-			long companyId, String className, String classPK)
+	public void deleteAddresses(long companyId, String className, long classPK)
 		throws SystemException {
 
-		AddressUtil.removeByC_C_C(companyId, className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		AddressUtil.removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Address getAddress(long addressId)
@@ -116,10 +119,12 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		return AddressUtil.findAll();
 	}
 
-	public List getAddresses(long companyId, String className, String classPK)
+	public List getAddresses(long companyId, String className, long classPK)
 		throws SystemException {
 
-		return AddressUtil.findByC_C_C(companyId, className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return AddressUtil.findByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Address updateAddress(
@@ -129,8 +134,8 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		validate(
-			addressId, 0, null, null, street1, city, zip, regionId, countryId,
-			typeId, mailing, primary);
+			addressId, 0, 0, 0, street1, city, zip, regionId, countryId, typeId,
+			mailing, primary);
 
 		Address address = AddressUtil.findByPrimaryKey(addressId);
 
@@ -152,7 +157,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			long addressId, long companyId, String className, String classPK,
+			long addressId, long companyId, long classNameId, long classPK,
 			String street1, String city, String zip, long regionId,
 			long countryId, int typeId, boolean mailing, boolean primary)
 		throws PortalException, SystemException {
@@ -182,23 +187,23 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 			Address address = AddressUtil.findByPrimaryKey(addressId);
 
 			companyId = address.getCompanyId();
-			className = address.getClassName();
+			classNameId = address.getClassNameId();
 			classPK = address.getClassPK();
 		}
 
 		try {
 			ListTypeServiceUtil.validate(
-				typeId, className + ListTypeImpl.ADDRESS);
+				typeId, classNameId, ListTypeImpl.ADDRESS);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);
 		}
 
-		validate(addressId, companyId, className, classPK, mailing, primary);
+		validate(addressId, companyId, classNameId, classPK, mailing, primary);
 	}
 
 	protected void validate(
-			long addressId, long companyId, String className, String classPK,
+			long addressId, long companyId, long classNameId, long classPK,
 			boolean mailing, boolean primary)
 		throws PortalException, SystemException {
 
@@ -207,7 +212,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 		if (mailing) {
 			Iterator itr = AddressUtil.findByC_C_C_M(
-				companyId, className, classPK, mailing).iterator();
+				companyId, classNameId, classPK, mailing).iterator();
 
 			while (itr.hasNext()) {
 				Address address = (Address)itr.next();
@@ -227,7 +232,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 		if (primary) {
 			Iterator itr = AddressUtil.findByC_C_C_P(
-				companyId, className, classPK, primary).iterator();
+				companyId, classNameId, classPK, primary).iterator();
 
 			while (itr.hasNext()) {
 				Address address = (Address)itr.next();

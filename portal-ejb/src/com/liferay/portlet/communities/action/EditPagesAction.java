@@ -60,7 +60,6 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.communities.form.PageForm;
 import com.liferay.util.FileUtil;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -232,7 +231,7 @@ public class EditPagesAction extends PortletAction {
 			ActionKeys.MANAGE_LAYOUTS);
 
 		if (group.isUser()) {
-			long groupUserId = GetterUtil.getLong(group.getClassPK());
+			long groupUserId = group.getClassPK();
 
 			if ((groupUserId == user.getUserId()) &&
 				!user.isLayoutsRequired()) {

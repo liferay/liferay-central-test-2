@@ -199,16 +199,16 @@ public class RoleUtil {
 	}
 
 	public static com.liferay.portal.model.Role findByC_C_C(long companyId,
-		java.lang.String className, java.lang.String classPK)
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException {
-		return getPersistence().findByC_C_C(companyId, className, classPK);
+		return getPersistence().findByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public static com.liferay.portal.model.Role fetchByC_C_C(long companyId,
-		java.lang.String className, java.lang.String classPK)
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByC_C_C(companyId, className, classPK);
+		return getPersistence().fetchByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -251,11 +251,11 @@ public class RoleUtil {
 		getPersistence().removeByC_N(companyId, name);
 	}
 
-	public static void removeByC_C_C(long companyId,
-		java.lang.String className, java.lang.String classPK)
+	public static void removeByC_C_C(long companyId, long classNameId,
+		long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException {
-		getPersistence().removeByC_C_C(companyId, className, classPK);
+		getPersistence().removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -272,9 +272,9 @@ public class RoleUtil {
 		return getPersistence().countByC_N(companyId, name);
 	}
 
-	public static int countByC_C_C(long companyId, java.lang.String className,
-		java.lang.String classPK) throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_C_C(companyId, className, classPK);
+	public static int countByC_C_C(long companyId, long classNameId,
+		long classPK) throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

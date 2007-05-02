@@ -50,11 +50,10 @@ package com.liferay.portal.service;
  */
 public interface AddressService {
 	public com.liferay.portal.model.Address addAddress(
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String street1, java.lang.String street2,
-		java.lang.String street3, java.lang.String city, java.lang.String zip,
-		long regionId, long countryId, int typeId, boolean mailing,
-		boolean primary)
+		java.lang.String className, long classPK, java.lang.String street1,
+		java.lang.String street2, java.lang.String street3,
+		java.lang.String city, java.lang.String zip, long regionId,
+		long countryId, int typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -66,8 +65,7 @@ public interface AddressService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.util.List getAddresses(java.lang.String className,
-		java.lang.String classPK)
+	public java.util.List getAddresses(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

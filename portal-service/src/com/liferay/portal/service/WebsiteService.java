@@ -50,8 +50,8 @@ package com.liferay.portal.service;
  */
 public interface WebsiteService {
 	public com.liferay.portal.model.Website addWebsite(
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String url, int typeId, boolean primary)
+		java.lang.String className, long classPK, java.lang.String url,
+		int typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -63,8 +63,7 @@ public interface WebsiteService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.util.List getWebsites(java.lang.String className,
-		java.lang.String classPK)
+	public java.util.List getWebsites(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

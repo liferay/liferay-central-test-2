@@ -25,7 +25,9 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ListType;
+import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ListTypeService;
 import com.liferay.portal.service.persistence.ListTypeUtil;
 
@@ -62,6 +64,15 @@ public class ListTypeServiceImpl
 
 			throw nslte;
 		}
+	}
+
+	public void validate(int listTypeId, long classNameId, String type)
+		throws PortalException, SystemException {
+
+		ClassName className = ClassNameLocalServiceUtil.getClassName(
+			classNameId);
+
+		validate(listTypeId, className.getValue() + type);
 	}
 
 }

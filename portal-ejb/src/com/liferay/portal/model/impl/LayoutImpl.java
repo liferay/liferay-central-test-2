@@ -253,14 +253,15 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		else {
 			Group group = getGroup();
 
-			String className = group.getClassName();
+			if (group.getClassNameId() > 0) {
+				long userClassNameId = PortalUtil.getClassNameId(User.class);
 
-			if (className.equals(User.class.getName())) {
-				return false;
+				if (group.getClassNameId() == userClassNameId) {
+					return false;
+				}
 			}
-			else {
-				return true;
-			}
+
+			return true;
 		}
 	}
 

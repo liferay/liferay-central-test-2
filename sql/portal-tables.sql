@@ -24,8 +24,8 @@ create table Address (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
+	classNameId LONG,
+	classPK LONG,
 	street1 VARCHAR(75) null,
 	street2 VARCHAR(75) null,
 	street3 VARCHAR(75) null,
@@ -113,9 +113,9 @@ create table CalEvent (
 	secondReminder INTEGER
 );
 
-create table ClassNameMapper (
-	classNameMapperId LONG primary key,
-	className VARCHAR(75) null
+create table ClassName_ (
+	classNameId LONG primary key,
+	value VARCHAR(75) null
 );
 
 create table Company (
@@ -181,19 +181,6 @@ create table CyrusUser (
 create table CyrusVirtual (
 	emailAddress VARCHAR(75) not null primary key,
 	userId LONG
-);
-
-create table DataTracker (
-	dataTrackerId VARCHAR(75) not null primary key,
-	companyId LONG,
-	createdOn DATE null,
-	createdByUserId LONG,
-	createdByUserName VARCHAR(75) null,
-	updatedOn DATE null,
-	updatedBy VARCHAR(75) null,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
-	active_ BOOLEAN
 );
 
 create table DLFileEntry (
@@ -269,8 +256,8 @@ create table EmailAddress (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
+	classNameId LONG,
+	classPK LONG,
 	address VARCHAR(75) null,
 	typeId INTEGER,
 	primary_ BOOLEAN
@@ -280,8 +267,8 @@ create table Group_ (
 	groupId LONG primary key,
 	companyId LONG,
 	creatorUserId LONG,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
+	classNameId LONG,
+	classPK LONG,
 	parentGroupId LONG,
 	liveGroupId LONG,
 	name VARCHAR(75) null,
@@ -639,8 +626,8 @@ create table Phone (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
+	classNameId LONG,
+	classPK LONG,
 	number_ VARCHAR(75) null,
 	extension VARCHAR(75) null,
 	typeId INTEGER,
@@ -755,8 +742,8 @@ create table ResourceCode (
 create table Role_ (
 	roleId LONG primary key,
 	companyId LONG,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
+	classNameId LONG,
+	classPK LONG,
 	name VARCHAR(75) null,
 	description STRING null,
 	type_ INTEGER
@@ -1009,8 +996,8 @@ create table Subscription (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
+	classNameId LONG,
+	classPK LONG,
 	frequency VARCHAR(75) null
 );
 
@@ -1172,8 +1159,8 @@ create table Website (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
+	classNameId LONG,
+	classPK LONG,
 	url VARCHAR(75) null,
 	typeId INTEGER,
 	primary_ BOOLEAN

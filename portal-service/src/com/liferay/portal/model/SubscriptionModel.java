@@ -75,13 +75,13 @@ public interface SubscriptionModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public String getClassName();
+	public long getClassNameId();
 
-	public void setClassName(String className);
+	public void setClassNameId(long classNameId);
 
-	public String getClassPK();
+	public long getClassPK();
 
-	public void setClassPK(String classPK);
+	public void setClassPK(long classPK);
 
 	public String getFrequency();
 

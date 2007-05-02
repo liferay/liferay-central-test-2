@@ -75,6 +75,14 @@ public class ListTypeServiceEJBImpl implements ListTypeService, SessionBean {
 		ListTypeServiceFactory.getTxImpl().validate(listTypeId, type);
 	}
 
+	public void validate(int listTypeId, long classNameId, java.lang.String type)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		ListTypeServiceFactory.getTxImpl().validate(listTypeId, classNameId,
+			type);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

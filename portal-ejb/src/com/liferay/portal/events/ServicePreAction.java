@@ -922,7 +922,7 @@ public class ServicePreAction extends Action {
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		if (group.isUser()) {
-			long groupUserId = GetterUtil.getLong(group.getClassPK());
+			long groupUserId = group.getClassPK();
 
 			if (groupUserId == user.getUserId()) {
 				return true;

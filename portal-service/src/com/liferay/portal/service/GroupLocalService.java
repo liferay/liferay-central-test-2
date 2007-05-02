@@ -58,14 +58,14 @@ public interface GroupLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group addGroup(long userId,
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active)
+		java.lang.String className, long classPK, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Group addGroup(long userId,
-		java.lang.String className, java.lang.String classPK, long liveGroupId,
+		java.lang.String className, long classPK, long liveGroupId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.SystemException, 

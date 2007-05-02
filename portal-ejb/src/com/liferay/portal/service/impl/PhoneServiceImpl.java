@@ -42,7 +42,7 @@ import java.util.List;
 public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 
 	public Phone addPhone(
-			String className, String classPK, String number, String extension,
+			String className, long classPK, String number, String extension,
 			int typeId, boolean primary)
 		throws PortalException, SystemException {
 
@@ -60,7 +60,7 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
 
 		CommonPermission.checkPermission(
-			getPermissionChecker(), phone.getClassName(), phone.getClassPK(),
+			getPermissionChecker(), phone.getClassNameId(), phone.getClassPK(),
 			ActionKeys.UPDATE);
 
 		PhoneLocalServiceUtil.deletePhone(phoneId);
@@ -72,13 +72,13 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
 
 		CommonPermission.checkPermission(
-			getPermissionChecker(), phone.getClassName(), phone.getClassPK(),
+			getPermissionChecker(), phone.getClassNameId(), phone.getClassPK(),
 			ActionKeys.VIEW);
 
 		return phone;
 	}
 
-	public List getPhones(String className, String classPK)
+	public List getPhones(String className, long classPK)
 		throws PortalException, SystemException {
 
 		CommonPermission.checkPermission(
@@ -96,7 +96,7 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
 
 		CommonPermission.checkPermission(
-			getPermissionChecker(), phone.getClassName(), phone.getClassPK(),
+			getPermissionChecker(), phone.getClassNameId(), phone.getClassPK(),
 			ActionKeys.UPDATE);
 
 		return PhoneLocalServiceUtil.updatePhone(

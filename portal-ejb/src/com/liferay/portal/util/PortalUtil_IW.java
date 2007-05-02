@@ -47,6 +47,18 @@ public class PortalUtil_IW {
 		return PortalUtil.createSecureProxyURL(url, secure);
 	}
 
+	public java.lang.String getClassName(long classNameId) {
+		return PortalUtil.getClassName(classNameId);
+	}
+
+	public long getClassNameId(java.lang.Class classObj) {
+		return PortalUtil.getClassNameId(classObj);
+	}
+
+	public long getClassNameId(java.lang.String value) {
+		return PortalUtil.getClassNameId(value);
+	}
+
 	public com.liferay.portal.model.Company getCompany(
 		javax.servlet.http.HttpServletRequest req)
 		throws com.liferay.portal.SystemException, 

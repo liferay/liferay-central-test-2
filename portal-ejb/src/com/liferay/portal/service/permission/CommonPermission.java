@@ -33,7 +33,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.AccountLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * <a href="CommonPermission.java.html"><b><i>View Source</i></b></a>
@@ -44,14 +44,22 @@ import com.liferay.util.GetterUtil;
 public class CommonPermission {
 
 	public static void checkPermission(
+			PermissionChecker permissionChecker, long classNameId,
+			long classPK, String actionId)
+		throws PortalException, SystemException {
+
+		String className = PortalUtil.getClassName(classNameId);
+
+		checkPermission(permissionChecker, className, classPK, actionId);
+	}
+
+	public static void checkPermission(
 			PermissionChecker permissionChecker, String className,
-			String classPK, String actionId)
+			long classPK, String actionId)
 		throws PortalException, SystemException {
 
 		if (className.equals(Account.class.getName())) {
-			long accountId = GetterUtil.getLong(classPK);
-
-			Account account = AccountLocalServiceUtil.getAccount(accountId);
+			Account account = AccountLocalServiceUtil.getAccount(classPK);
 
 			/*if (account.isDefaultAccount()) {
 				AccountPermission.check(permissionChecker, classPK, actionId);
@@ -61,9 +69,7 @@ public class CommonPermission {
 			}*/
 		}
 		else if (className.equals(Contact.class.getName())) {
-			long contactId = GetterUtil.getLong(classPK);
-
-			User user = UserLocalServiceUtil.getUserByContactId(contactId);
+			User user = UserLocalServiceUtil.getUserByContactId(classPK);
 
 			UserPermission.check(
 				permissionChecker, user.getUserId(),
@@ -71,18 +77,15 @@ public class CommonPermission {
 				user.getLocation().getOrganizationId(), actionId);
 		}
 		else if (className.equals(Organization.class.getName())) {
-			long organizationId = GetterUtil.getLong(classPK);
-
 			Organization organization =
-				OrganizationLocalServiceUtil.getOrganization(organizationId);
+				OrganizationLocalServiceUtil.getOrganization(classPK);
 
 			if (organization.isRoot()) {
 				OrganizationPermission.check(
-					permissionChecker, organizationId, actionId);
+					permissionChecker, classPK, actionId);
 			}
 			else {
-				LocationPermission.check(
-					permissionChecker, organizationId, actionId);
+				LocationPermission.check(permissionChecker, classPK, actionId);
 			}
 		}
 		else {

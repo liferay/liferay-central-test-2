@@ -59,4 +59,8 @@ public interface ListTypeService {
 	public void validate(int listTypeId, java.lang.String type)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public void validate(int listTypeId, long classNameId, java.lang.String type)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

@@ -142,6 +142,7 @@ public class ServiceBuilder {
 		badTableNames.add("Account");
 		badTableNames.add("Action");
 		badTableNames.add("Cache");
+		badTableNames.add("ClassName");
 		badTableNames.add("Contact");
 		badTableNames.add("Group");
 		badTableNames.add("Organization");

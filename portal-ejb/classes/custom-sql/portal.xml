@@ -24,8 +24,8 @@
 			WHERE
 				[$WHERE$]
 				(Group_.companyId = ?) AND
-				(Group_.className IS NULL OR Group_.className = '') AND
-				(Group_.classPK IS NULL OR Group_.classPK = '') AND
+				(Group_.classNameId = 0) AND
+				(Group_.classPK = 0) AND
 				(Group_.liveGroupId = 0) AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
@@ -53,8 +53,8 @@
 			WHERE
 				[$WHERE$]
 				(Group_.companyId = ?) AND
-				(Group_.className IS NULL OR Group_.className = '') AND
-				(Group_.classPK IS NULL OR Group_.classPK = '') AND
+				(Group_.classNameId = 0) AND
+				(Group_.classPK = 0) AND
 				(Group_.liveGroupId = 0) AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
@@ -615,8 +615,8 @@
 				Role_
 			WHERE
 				(Role_.companyId = ?) AND
-				(Role_.className IS NULL OR Role_.className = '') AND
-				(Role_.classPK IS NULL OR Role_.classPK = '') AND
+				(Role_.classNameId = 0) AND
+				(Role_.classPK = 0) AND
 				(lower(Role_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Role_.description) LIKE ? OR ? IS NULL) AND (Role_.type_ = ?)
 		]]>
@@ -682,8 +682,8 @@
 				Role_
 			WHERE
 				(Role_.companyId = ?) AND
-				(Role_.className IS NULL OR Role_.className = '') AND
-				(Role_.classPK IS NULL OR Role_.classPK = '') AND
+				(Role_.classNameId = 0) AND
+				(Role_.classPK = 0) AND
 				(lower(Role_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Role_.description) LIKE ? OR ? IS NULL) AND (Role_.type_ = ?)
 			ORDER BY

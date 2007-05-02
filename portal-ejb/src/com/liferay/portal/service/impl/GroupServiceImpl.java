@@ -53,8 +53,7 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 			getPermissionChecker(), ActionKeys.ADD_COMMUNITY);
 
 		return GroupLocalServiceUtil.addGroup(
-			getUserId(), null, null, name, description, type, friendlyURL,
-			active);
+			getUserId(), null, 0, name, description, type, friendlyURL, active);
 	}
 
 	public Group addGroup(
@@ -66,7 +65,7 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 			getPermissionChecker(), liveGroupId, ActionKeys.UPDATE);
 
 		return GroupLocalServiceUtil.addGroup(
-			getUserId(), null, null, liveGroupId, name, description, type,
+			getUserId(), null, 0, liveGroupId, name, description, type,
 			friendlyURL, active);
 	}
 

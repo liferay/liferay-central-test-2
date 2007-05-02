@@ -54,20 +54,14 @@ public class RoleModelImpl extends BaseModelImpl {
 	public static Object[][] TABLE_COLUMNS = {
 			{ "roleId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
-			{ "className", new Integer(Types.VARCHAR) },
-			{ "classPK", new Integer(Types.VARCHAR) },
+			{ "classNameId", new Integer(Types.BIGINT) },
+			{ "classPK", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "type_", new Integer(Types.INTEGER) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Role"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Role.className"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Role.classPK"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Role.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -108,36 +102,22 @@ public class RoleModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getClassName() {
-		return GetterUtil.getString(_className);
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public void setClassName(String className) {
-		if (((className == null) && (_className != null)) ||
-				((className != null) && (_className == null)) ||
-				((className != null) && (_className != null) &&
-				!className.equals(_className))) {
-			if (!XSS_ALLOW_CLASSNAME) {
-				className = XSSUtil.strip(className);
-			}
-
-			_className = className;
+	public void setClassNameId(long classNameId) {
+		if (classNameId != _classNameId) {
+			_classNameId = classNameId;
 		}
 	}
 
-	public String getClassPK() {
-		return GetterUtil.getString(_classPK);
+	public long getClassPK() {
+		return _classPK;
 	}
 
-	public void setClassPK(String classPK) {
-		if (((classPK == null) && (_classPK != null)) ||
-				((classPK != null) && (_classPK == null)) ||
-				((classPK != null) && (_classPK != null) &&
-				!classPK.equals(_classPK))) {
-			if (!XSS_ALLOW_CLASSPK) {
-				classPK = XSSUtil.strip(classPK);
-			}
-
+	public void setClassPK(long classPK) {
+		if (classPK != _classPK) {
 			_classPK = classPK;
 		}
 	}
@@ -189,7 +169,7 @@ public class RoleModelImpl extends BaseModelImpl {
 		RoleImpl clone = new RoleImpl();
 		clone.setRoleId(getRoleId());
 		clone.setCompanyId(getCompanyId());
-		clone.setClassName(getClassName());
+		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
@@ -244,8 +224,8 @@ public class RoleModelImpl extends BaseModelImpl {
 
 	private long _roleId;
 	private long _companyId;
-	private String _className;
-	private String _classPK;
+	private long _classNameId;
+	private long _classPK;
 	private String _name;
 	private String _description;
 	private int _type;

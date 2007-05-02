@@ -67,7 +67,7 @@ public class SubscriptionLocalServiceEJBImpl implements SubscriptionLocalService
 	}
 
 	public com.liferay.portal.model.Subscription addSubscription(long userId,
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return SubscriptionLocalServiceFactory.getTxImpl().addSubscription(userId,
@@ -75,8 +75,7 @@ public class SubscriptionLocalServiceEJBImpl implements SubscriptionLocalService
 	}
 
 	public com.liferay.portal.model.Subscription addSubscription(long userId,
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String frequency)
+		java.lang.String className, long classPK, java.lang.String frequency)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return SubscriptionLocalServiceFactory.getTxImpl().addSubscription(userId,
@@ -84,7 +83,7 @@ public class SubscriptionLocalServiceEJBImpl implements SubscriptionLocalService
 	}
 
 	public void deleteSubscription(long userId, java.lang.String className,
-		java.lang.String classPK)
+		long classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SubscriptionLocalServiceFactory.getTxImpl().deleteSubscription(userId,
@@ -97,14 +96,13 @@ public class SubscriptionLocalServiceEJBImpl implements SubscriptionLocalService
 	}
 
 	public void deleteSubscriptions(long companyId, java.lang.String className,
-		java.lang.String classPK) throws com.liferay.portal.SystemException {
+		long classPK) throws com.liferay.portal.SystemException {
 		SubscriptionLocalServiceFactory.getTxImpl().deleteSubscriptions(companyId,
 			className, classPK);
 	}
 
 	public com.liferay.portal.model.Subscription getSubscription(
-		long companyId, long userId, java.lang.String className,
-		java.lang.String classPK)
+		long companyId, long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return SubscriptionLocalServiceFactory.getTxImpl().getSubscription(companyId,
@@ -112,7 +110,7 @@ public class SubscriptionLocalServiceEJBImpl implements SubscriptionLocalService
 	}
 
 	public java.util.List getSubscriptions(long companyId,
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return SubscriptionLocalServiceFactory.getTxImpl().getSubscriptions(companyId,
@@ -120,7 +118,7 @@ public class SubscriptionLocalServiceEJBImpl implements SubscriptionLocalService
 	}
 
 	public boolean isSubscribed(long companyId, long userId,
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return SubscriptionLocalServiceFactory.getTxImpl().isSubscribed(companyId,

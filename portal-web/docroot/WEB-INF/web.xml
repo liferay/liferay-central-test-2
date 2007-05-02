@@ -102,11 +102,11 @@
 		<ejb-link>com_liferay_portal_service_ejb_AddressServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
-		<ejb-ref-name>com_liferay_portal_service_ejb_ClassNameMapperServiceEJB</ejb-ref-name>
+		<ejb-ref-name>com_liferay_portal_service_ejb_ClassNameServiceEJB</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.liferay.portal.service.ejb.ClassNameMapperServiceHome</home>
-		<remote>com.liferay.portal.service.ejb.ClassNameMapperServiceEJB</remote>
-		<ejb-link>com_liferay_portal_service_ejb_ClassNameMapperServiceEJB</ejb-link>
+		<home>com.liferay.portal.service.ejb.ClassNameServiceHome</home>
+		<remote>com.liferay.portal.service.ejb.ClassNameServiceEJB</remote>
+		<ejb-link>com_liferay_portal_service_ejb_ClassNameServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
 		<ejb-ref-name>com_liferay_portal_service_ejb_CompanyServiceEJB</ejb-ref-name>
@@ -571,11 +571,11 @@
 		<ejb-link>com_liferay_portal_service_ejb_AddressLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/ClassNameMapperLocalServiceHome</ejb-ref-name>
+		<ejb-ref-name>ejb/liferay/ClassNameLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portal.service.ejb.ClassNameMapperLocalServiceHome</local-home>
-		<local>com.liferay.portal.service.ejb.ClassNameMapperLocalServiceEJB</local>
-		<ejb-link>com_liferay_portal_service_ejb_ClassNameMapperLocalServiceEJB</ejb-link>
+		<local-home>com.liferay.portal.service.ejb.ClassNameLocalServiceHome</local-home>
+		<local>com.liferay.portal.service.ejb.ClassNameLocalServiceEJB</local>
+		<ejb-link>com_liferay_portal_service_ejb_ClassNameLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
@@ -590,13 +590,6 @@
 		<local-home>com.liferay.portal.service.ejb.ContactLocalServiceHome</local-home>
 		<local>com.liferay.portal.service.ejb.ContactLocalServiceEJB</local>
 		<ejb-link>com_liferay_portal_service_ejb_ContactLocalServiceEJB</ejb-link>
-	</ejb-local-ref>
-	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portal.service.ejb.DataTrackerLocalServiceHome</local-home>
-		<local>com.liferay.portal.service.ejb.DataTrackerLocalServiceEJB</local>
-		<ejb-link>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>

@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -50,6 +51,7 @@ import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
+import com.liferay.portal.service.ClassNameServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
@@ -59,7 +61,6 @@ import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
-import com.liferay.portal.service.ClassNameMapperServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
@@ -205,14 +206,32 @@ public class PortalUtil {
 		}
 	}
 
-	public static long getClassNameId(String className)
-		throws PortalException, SystemException {
-
+	public static String getClassName(long classNameId) {
 		try {
-			return ClassNameMapperServiceUtil.getClassNameMapperId(className);
+			ClassName className = ClassNameServiceUtil.getClassName(
+				classNameId);
+
+			return className.getValue();
 		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
+		catch (Exception e) {
+			throw new RuntimeException(
+				"Unable to get class name from id " + classNameId);
+		}
+	}
+
+	public static long getClassNameId(Class classObj) {
+		return getClassNameId(classObj.getName());
+	}
+
+	public static long getClassNameId(String value) {
+		try {
+			ClassName className = ClassNameServiceUtil.getClassName(value);
+
+			return className.getClassNameId();
+		}
+		catch (Exception e) {
+			throw new RuntimeException(
+				"Unable to get class name from value " + value);
 		}
 	}
 

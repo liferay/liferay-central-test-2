@@ -33,8 +33,8 @@
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="street1" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="street2" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="street3" type="com.liferay.util.dao.hibernate.StringType" />
@@ -46,12 +46,12 @@
 		<property name="mailing" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.model.impl.ClassNameMapperImpl" table="ClassNameMapper">
+	<class name="com.liferay.portal.model.impl.ClassNameImpl" table="ClassName_">
 		<cache usage="read-write" />
-		<id name="classNameMapperId" type="long">
+		<id name="classNameId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="value" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.CompanyImpl" table="Company">
 		<cache usage="read-write" />
@@ -109,21 +109,6 @@
 		<property name="idd" column="idd_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.model.impl.DataTrackerImpl" table="DataTracker">
-		<cache usage="read-write" />
-		<id name="dataTrackerId" type="java.lang.String">
-			<generator class="assigned" />
-		</id>
-		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="createdOn" />
-		<property name="createdByUserId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="createdByUserName" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="updatedOn" />
-		<property name="updatedBy" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
-	</class>
 	<class name="com.liferay.portal.model.impl.EmailAddressImpl" table="EmailAddress">
 		<cache usage="read-write" />
 		<id name="emailAddressId" type="long">
@@ -134,8 +119,8 @@
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="address" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
@@ -147,8 +132,8 @@
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="creatorUserId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="parentGroupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="liveGroupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
@@ -334,8 +319,8 @@
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="number" column="number_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="extension" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
@@ -414,8 +399,8 @@
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.IntegerType" />
@@ -430,8 +415,8 @@
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="frequency" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.UserImpl" table="User_">
@@ -520,8 +505,8 @@
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="url" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />

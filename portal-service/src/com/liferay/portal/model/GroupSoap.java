@@ -50,7 +50,7 @@ public class GroupSoap implements Serializable {
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setCreatorUserId(model.getCreatorUserId());
-		soapModel.setClassName(model.getClassName());
+		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
 		soapModel.setParentGroupId(model.getParentGroupId());
 		soapModel.setLiveGroupId(model.getLiveGroupId());
@@ -109,19 +109,19 @@ public class GroupSoap implements Serializable {
 		_creatorUserId = creatorUserId;
 	}
 
-	public String getClassName() {
-		return _className;
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public void setClassName(String className) {
-		_className = className;
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
 	}
 
-	public String getClassPK() {
+	public long getClassPK() {
 		return _classPK;
 	}
 
-	public void setClassPK(String classPK) {
+	public void setClassPK(long classPK) {
 		_classPK = classPK;
 	}
 
@@ -188,8 +188,8 @@ public class GroupSoap implements Serializable {
 	private long _groupId;
 	private long _companyId;
 	private long _creatorUserId;
-	private String _className;
-	private String _classPK;
+	private long _classNameId;
+	private long _classPK;
 	private long _parentGroupId;
 	private long _liveGroupId;
 	private String _name;

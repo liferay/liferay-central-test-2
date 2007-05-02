@@ -111,7 +111,7 @@ public class MBMessageConsumer implements MessageListener {
 		// Threads
 
 		List subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
-			companyId, MBThread.class.getName(), threadId);
+			companyId, MBThread.class.getName(), GetterUtil.getLong(threadId));
 
 		_sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,
@@ -121,7 +121,8 @@ public class MBMessageConsumer implements MessageListener {
 
 		for (int i = 0; i < categoryIds.length; i++) {
 			subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
-				companyId, MBCategory.class.getName(), categoryIds[i]);
+				companyId, MBCategory.class.getName(),
+				GetterUtil.getLong(categoryIds[i]));
 
 			_sendEmail(
 				userId, fromName, fromAddress, subject, body, subscriptions,

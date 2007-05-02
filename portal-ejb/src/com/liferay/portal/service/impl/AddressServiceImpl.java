@@ -44,7 +44,7 @@ public class AddressServiceImpl
 	extends PrincipalBean implements AddressService {
 
 	public Address addAddress(
-			String className, String classPK, String street1, String street2,
+			String className, long classPK, String street1, String street2,
 			String street3, String city, String zip, long regionId,
 			long countryId, int typeId, boolean mailing, boolean primary)
 		throws PortalException, SystemException {
@@ -63,7 +63,7 @@ public class AddressServiceImpl
 		Address address = AddressUtil.findByPrimaryKey(addressId);
 
 		CommonPermission.checkPermission(
-			getPermissionChecker(), address.getClassName(),
+			getPermissionChecker(), address.getClassNameId(),
 			address.getClassPK(), ActionKeys.UPDATE);
 
 		AddressLocalServiceUtil.deleteAddress(addressId);
@@ -75,13 +75,13 @@ public class AddressServiceImpl
 		Address address = AddressUtil.findByPrimaryKey(addressId);
 
 		CommonPermission.checkPermission(
-			getPermissionChecker(), address.getClassName(),
+			getPermissionChecker(), address.getClassNameId(),
 			address.getClassPK(), ActionKeys.VIEW);
 
 		return address;
 	}
 
-	public List getAddresses(String className, String classPK)
+	public List getAddresses(String className, long classPK)
 		throws PortalException, SystemException {
 
 		CommonPermission.checkPermission(
@@ -100,7 +100,7 @@ public class AddressServiceImpl
 		Address address = AddressUtil.findByPrimaryKey(addressId);
 
 		CommonPermission.checkPermission(
-			getPermissionChecker(), address.getClassName(),
+			getPermissionChecker(), address.getClassNameId(),
 			address.getClassPK(), ActionKeys.UPDATE);
 
 		return AddressLocalServiceUtil.updateAddress(

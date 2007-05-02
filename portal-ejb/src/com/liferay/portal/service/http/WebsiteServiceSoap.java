@@ -78,9 +78,8 @@ import java.rmi.RemoteException;
  */
 public class WebsiteServiceSoap {
 	public static com.liferay.portal.model.WebsiteSoap addWebsite(
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String url, int typeId, boolean primary)
-		throws RemoteException {
+		java.lang.String className, long classPK, java.lang.String url,
+		int typeId, boolean primary) throws RemoteException {
 		try {
 			com.liferay.portal.model.Website returnValue = WebsiteServiceUtil.addWebsite(className,
 					classPK, url, typeId, primary);
@@ -117,8 +116,7 @@ public class WebsiteServiceSoap {
 	}
 
 	public static com.liferay.portal.model.WebsiteSoap[] getWebsites(
-		java.lang.String className, java.lang.String classPK)
-		throws RemoteException {
+		java.lang.String className, long classPK) throws RemoteException {
 		try {
 			java.util.List returnValue = WebsiteServiceUtil.getWebsites(className,
 					classPK);

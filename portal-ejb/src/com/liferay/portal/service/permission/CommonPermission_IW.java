@@ -35,8 +35,16 @@ public class CommonPermission_IW {
 
 	public void checkPermission(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String actionId)
+		long classNameId, long classPK, java.lang.String actionId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		CommonPermission.checkPermission(permissionChecker, classNameId,
+			classPK, actionId);
+	}
+
+	public void checkPermission(
+		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
+		java.lang.String className, long classPK, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		CommonPermission.checkPermission(permissionChecker, className, classPK,

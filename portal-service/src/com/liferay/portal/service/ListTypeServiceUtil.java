@@ -70,4 +70,12 @@ public class ListTypeServiceUtil {
 		ListTypeService listTypeService = ListTypeServiceFactory.getService();
 		listTypeService.validate(listTypeId, type);
 	}
+
+	public static void validate(int listTypeId, long classNameId,
+		java.lang.String type)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ListTypeService listTypeService = ListTypeServiceFactory.getService();
+		listTypeService.validate(listTypeId, classNameId, type);
+	}
 }

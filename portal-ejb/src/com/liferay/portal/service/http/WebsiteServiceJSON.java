@@ -70,8 +70,7 @@ import org.json.JSONObject;
  */
 public class WebsiteServiceJSON {
 	public static JSONObject addWebsite(java.lang.String className,
-		java.lang.String classPK, java.lang.String url, int typeId,
-		boolean primary)
+		long classPK, java.lang.String url, int typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Website returnValue = WebsiteServiceUtil.addWebsite(className,
@@ -94,8 +93,7 @@ public class WebsiteServiceJSON {
 		return WebsiteJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONArray getWebsites(java.lang.String className,
-		java.lang.String classPK)
+	public static JSONArray getWebsites(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		java.util.List returnValue = WebsiteServiceUtil.getWebsites(className,

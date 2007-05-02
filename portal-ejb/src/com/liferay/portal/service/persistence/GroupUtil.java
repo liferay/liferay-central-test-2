@@ -184,16 +184,16 @@ public class GroupUtil {
 	}
 
 	public static com.liferay.portal.model.Group findByC_C_C(long companyId,
-		java.lang.String className, java.lang.String classPK)
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException {
-		return getPersistence().findByC_C_C(companyId, className, classPK);
+		return getPersistence().findByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public static com.liferay.portal.model.Group fetchByC_C_C(long companyId,
-		java.lang.String className, java.lang.String classPK)
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByC_C_C(companyId, className, classPK);
+		return getPersistence().fetchByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -243,11 +243,11 @@ public class GroupUtil {
 		getPersistence().removeByC_F(companyId, friendlyURL);
 	}
 
-	public static void removeByC_C_C(long companyId,
-		java.lang.String className, java.lang.String classPK)
+	public static void removeByC_C_C(long companyId, long classNameId,
+		long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException {
-		getPersistence().removeByC_C_C(companyId, className, classPK);
+		getPersistence().removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -269,9 +269,9 @@ public class GroupUtil {
 		return getPersistence().countByC_F(companyId, friendlyURL);
 	}
 
-	public static int countByC_C_C(long companyId, java.lang.String className,
-		java.lang.String classPK) throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_C_C(companyId, className, classPK);
+	public static int countByC_C_C(long companyId, long classNameId,
+		long classPK) throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

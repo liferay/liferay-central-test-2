@@ -122,7 +122,7 @@ public class EditEmailAddressAction extends PortletAction {
 		long emailAddressId = ParamUtil.getLong(req, "emailAddressId");
 
 		String className = ParamUtil.getString(req, "className");
-		String classPK = ParamUtil.getString(req, "classPK");
+		long classPK = ParamUtil.getLong(req, "classPK");
 
 		String address = ParamUtil.getString(req, "address");
 		int typeId = ParamUtil.getInteger(req, "typeId");

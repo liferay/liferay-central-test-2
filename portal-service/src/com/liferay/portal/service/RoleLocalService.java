@@ -64,7 +64,7 @@ public interface RoleLocalService {
 
 	public com.liferay.portal.model.Role addRole(long userId, long companyId,
 		java.lang.String name, int type, java.lang.String className,
-		java.lang.String classPK)
+		long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

@@ -83,9 +83,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		// Group
 
 		GroupLocalServiceUtil.addGroup(
-			userId, UserGroup.class.getName(),
-			String.valueOf(userGroup.getUserGroupId()), null, null, null, null,
-			true);
+			userId, UserGroup.class.getName(), userGroup.getUserGroupId(), null,
+			null, null, null, true);
 
 		// Resources
 

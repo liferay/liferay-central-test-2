@@ -70,10 +70,10 @@ import org.json.JSONObject;
  */
 public class AddressServiceJSON {
 	public static JSONObject addAddress(java.lang.String className,
-		java.lang.String classPK, java.lang.String street1,
-		java.lang.String street2, java.lang.String street3,
-		java.lang.String city, java.lang.String zip, long regionId,
-		long countryId, int typeId, boolean mailing, boolean primary)
+		long classPK, java.lang.String street1, java.lang.String street2,
+		java.lang.String street3, java.lang.String city, java.lang.String zip,
+		long regionId, long countryId, int typeId, boolean mailing,
+		boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Address returnValue = AddressServiceUtil.addAddress(className,
@@ -98,7 +98,7 @@ public class AddressServiceJSON {
 	}
 
 	public static JSONArray getAddresses(java.lang.String className,
-		java.lang.String classPK)
+		long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		java.util.List returnValue = AddressServiceUtil.getAddresses(className,

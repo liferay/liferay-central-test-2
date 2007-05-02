@@ -44,7 +44,7 @@ public class EmailAddressServiceImpl
 	extends PrincipalBean implements EmailAddressService {
 
 	public EmailAddress addEmailAddress(
-			String className, String classPK, String address, int typeId,
+			String className, long classPK, String address, int typeId,
 			boolean primary)
 		throws PortalException, SystemException {
 
@@ -62,7 +62,7 @@ public class EmailAddressServiceImpl
 			EmailAddressUtil.findByPrimaryKey(emailAddressId);
 
 		CommonPermission.checkPermission(
-			getPermissionChecker(), emailAddress.getClassName(),
+			getPermissionChecker(), emailAddress.getClassNameId(),
 			emailAddress.getClassPK(), ActionKeys.UPDATE);
 
 		EmailAddressLocalServiceUtil.deleteEmailAddress(emailAddressId);
@@ -75,13 +75,13 @@ public class EmailAddressServiceImpl
 			EmailAddressUtil.findByPrimaryKey(emailAddressId);
 
 		CommonPermission.checkPermission(
-			getPermissionChecker(), emailAddress.getClassName(),
+			getPermissionChecker(), emailAddress.getClassNameId(),
 			emailAddress.getClassPK(), ActionKeys.VIEW);
 
 		return emailAddress;
 	}
 
-	public List getEmailAddresses(String className, String classPK)
+	public List getEmailAddresses(String className, long classPK)
 		throws PortalException, SystemException {
 
 		CommonPermission.checkPermission(
@@ -99,7 +99,7 @@ public class EmailAddressServiceImpl
 			EmailAddressUtil.findByPrimaryKey(emailAddressId);
 
 		CommonPermission.checkPermission(
-			getPermissionChecker(), emailAddress.getClassName(),
+			getPermissionChecker(), emailAddress.getClassNameId(),
 			emailAddress.getClassPK(), ActionKeys.UPDATE);
 
 		return EmailAddressLocalServiceUtil.updateEmailAddress(

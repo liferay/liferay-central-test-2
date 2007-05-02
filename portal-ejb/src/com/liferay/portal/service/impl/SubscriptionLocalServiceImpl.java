@@ -32,6 +32,7 @@ import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.service.base.SubscriptionLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.SubscriptionUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PortalUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -47,7 +48,7 @@ public class SubscriptionLocalServiceImpl
 	extends SubscriptionLocalServiceBaseImpl {
 
 	public Subscription addSubscription(
-			long userId, String className, String classPK)
+			long userId, String className, long classPK)
 		throws PortalException, SystemException {
 
 		return addSubscription(
@@ -55,10 +56,11 @@ public class SubscriptionLocalServiceImpl
 	}
 
 	public Subscription addSubscription(
-			long userId, String className, String classPK, String frequency)
+			long userId, String className, long classPK, String frequency)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
 		long subscriptionId = CounterLocalServiceUtil.increment();
@@ -70,7 +72,7 @@ public class SubscriptionLocalServiceImpl
 		subscription.setUserName(user.getFullName());
 		subscription.setCreateDate(now);
 		subscription.setModifiedDate(now);
-		subscription.setClassName(className);
+		subscription.setClassNameId(classNameId);
 		subscription.setClassPK(classPK);
 		subscription.setFrequency(frequency);
 
@@ -80,13 +82,14 @@ public class SubscriptionLocalServiceImpl
 	}
 
 	public void deleteSubscription(
-			long userId, String className, String classPK)
+			long userId, String className, long classPK)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		SubscriptionUtil.removeByC_U_C_C(
-			user.getCompanyId(), userId, className, classPK);
+			user.getCompanyId(), userId, classNameId, classPK);
 	}
 
 	public void deleteSubscriptions(long userId) throws SystemException {
@@ -94,34 +97,42 @@ public class SubscriptionLocalServiceImpl
 	}
 
 	public void deleteSubscriptions(
-			long companyId, String className, String classPK)
+			long companyId, String className, long classPK)
 		throws SystemException {
 
-		SubscriptionUtil.removeByC_C_C(companyId, className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		SubscriptionUtil.removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Subscription getSubscription(
-			long companyId, long userId, String className, String classPK)
+			long companyId, long userId, String className, long classPK)
 		throws PortalException, SystemException {
 
+		long classNameId = PortalUtil.getClassNameId(className);
+
 		return SubscriptionUtil.findByC_U_C_C(
-			companyId, userId, className, classPK);
+			companyId, userId, classNameId, classPK);
 	}
 
 	public List getSubscriptions(
-			long companyId, String className, String classPK)
+			long companyId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		return SubscriptionUtil.findByC_C_C(companyId, className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return SubscriptionUtil.findByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public boolean isSubscribed(
-			long companyId, long userId, String className, String classPK)
+			long companyId, long userId, String className, long classPK)
 		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		try {
 			SubscriptionUtil.findByC_U_C_C(
-				companyId, userId, className, classPK);
+				companyId, userId, classNameId, classPK);
 
 			return true;
 		}

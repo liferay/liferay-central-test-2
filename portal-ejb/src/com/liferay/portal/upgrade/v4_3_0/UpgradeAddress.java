@@ -25,11 +25,13 @@ package com.liferay.portal.upgrade.v4_3_0;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.impl.AddressImpl;
+import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassNameUpgradeColumnImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,6 +40,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UpgradeAddress.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
 public class UpgradeAddress extends UpgradeProcess {
@@ -59,14 +62,23 @@ public class UpgradeAddress extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl());
+			new PKUpgradeColumnImpl(), new ClassNameUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
 
 		// Counter
 
 		CounterLocalServiceUtil.reset(Address.class.getName());
+
+		// Schema
+
+		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
 	}
+
+	private static final String[] _UPGRADE_SCHEMA = {
+		"alter_column_type Address classNameId LONG;",
+		"alter_column_type Address classPK LONG;"
+	};
 
 	private static Log _log = LogFactory.getLog(UpgradeAddress.class);
 

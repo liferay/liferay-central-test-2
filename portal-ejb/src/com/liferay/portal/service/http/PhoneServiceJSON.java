@@ -69,9 +69,9 @@ import org.json.JSONObject;
  *
  */
 public class PhoneServiceJSON {
-	public static JSONObject addPhone(java.lang.String className,
-		java.lang.String classPK, java.lang.String number,
-		java.lang.String extension, int typeId, boolean primary)
+	public static JSONObject addPhone(java.lang.String className, long classPK,
+		java.lang.String number, java.lang.String extension, int typeId,
+		boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Phone returnValue = PhoneServiceUtil.addPhone(className,
@@ -94,8 +94,7 @@ public class PhoneServiceJSON {
 		return PhoneJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONArray getPhones(java.lang.String className,
-		java.lang.String classPK)
+	public static JSONArray getPhones(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		java.util.List returnValue = PhoneServiceUtil.getPhones(className,

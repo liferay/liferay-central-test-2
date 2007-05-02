@@ -1,4 +1,5 @@
 alter_column_type Address addressId LONG;
+alter_column_name Address className classNameId VARCHAR(75) null;
 alter_column_type Address typeId INTEGER;
 
 alter_column_type BlogsCategory categoryId LONG;
@@ -17,9 +18,9 @@ alter_column_type BookmarksFolder parentFolderId LONG;
 alter_column_type CalEvent eventId LONG;
 alter_column_type CalEvent groupId LONG;
 
-create table ClassNameMapper (
-	classNameMapperId LONG primary key,
-	className VARCHAR(75) null
+create table ClassName_ (
+	classNameId LONG primary key,
+	value VARCHAR(75) null
 );
 
 alter table Company add accountId LONG;
@@ -39,13 +40,17 @@ alter_column_type CyrusUser userId LONG;
 
 alter_column_type CyrusVirtual userId LONG;
 
+drop table DataTracker;
+
 alter_column_type DLFolder groupId LONG;
 
 alter_column_type EmailAddress emailAddressId LONG;
+alter_column_name EmailAddress className classNameId VARCHAR(75) null;
 alter_column_type EmailAddress typeId INTEGER;
 
 alter_column_type Group_ groupId LONG;
 alter table Group_ add creatorUserId VARCHAR(75) null;
+alter_column_name Group_ className classNameId VARCHAR(75) null;
 alter_column_type Group_ parentGroupId LONG;
 alter table Group_ add liveGroupId LONG;
 alter table Group_ add active_ BOOLEAN;
@@ -163,6 +168,7 @@ alter_column_type Permission_ permissionId LONG;
 alter_column_type Permission_ resourceId LONG;
 
 alter_column_type Phone phoneId LONG;
+alter_column_name Phone className classNameId VARCHAR(75) null;
 alter_column_type Phone typeId INTEGER;
 
 create table PluginSetting (
@@ -198,6 +204,7 @@ create table ResourceCode (
 );
 
 alter_column_type Role_ roleId LONG;
+alter_column_name Role_ className classNameId VARCHAR(75) null;
 alter table Role_ add type_ INTEGER;
 update Role_ SET type_ = 1;
 
@@ -318,6 +325,7 @@ alter_column_type ShoppingCoupon groupId LONG;
 alter_column_type ShoppingOrder groupId LONG;
 
 alter_column_type Subscription subscriptionId LONG;
+alter_column_name Subscription className classNameId VARCHAR(75) null;
 
 create table TagsAsset (
 	assetId LONG primary key,
@@ -400,6 +408,7 @@ alter_column_type Users_Roles roleId LONG;
 alter_column_type Users_UserGroups userGroupId LONG;
 
 alter_column_type Website websiteId LONG;
+alter_column_name Website className classNameId VARCHAR(75) null;
 alter_column_type Website typeId INTEGER;
 
 alter_column_type WikiNode nodeId LONG;

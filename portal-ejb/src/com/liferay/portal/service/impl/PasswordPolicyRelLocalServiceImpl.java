@@ -25,11 +25,11 @@ package com.liferay.portal.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPasswordPolicyRelException;
 import com.liferay.portal.PortalException;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.service.base.PasswordPolicyRelLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PasswordPolicyRelUtil;
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * <a href="PasswordPolicyRelLocalServiceImpl.java.html"><b><i>View Source</i>
@@ -121,7 +121,8 @@ public class PasswordPolicyRelLocalServiceImpl
 		}
 	}
 
-	public PasswordPolicyRel getPasswordPolicyRel(String className, long classPK)
+	public PasswordPolicyRel getPasswordPolicyRel(
+			String className, long classPK)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);

@@ -31,6 +31,7 @@ import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
 import com.liferay.portal.model.impl.OrgGroupRoleImpl;
 import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -40,6 +41,7 @@ import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassNameUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.DefaultParentIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.OwnerIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.PreferencesUpgradeColumnImpl;
@@ -85,6 +87,7 @@ public class UpgradeGroup extends UpgradeProcess {
 			_upgradeResources();
 			_upgradeLucene();
 			_upgradeCounter();
+			_upgradeSchema();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -102,7 +105,8 @@ public class UpgradeGroup extends UpgradeProcess {
 		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS, pkUpgradeColumn);
+			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS, pkUpgradeColumn,
+			new ClassNameUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
 
@@ -361,6 +365,10 @@ public class UpgradeGroup extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
+	private void _upgradeSchema() throws Exception {
+		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
+	}
+
 	private ValueMapper _groupIdMapper;
 	private ValueMapper _ownerIdMapper;
 
@@ -398,6 +406,11 @@ public class UpgradeGroup extends UpgradeProcess {
 	private static final Object[][] _COLUMNS_USERS_GROUPS = {
 		{"groupId", new Integer(Types.BIGINT)},
 		{"userId", new Integer(Types.VARCHAR)}
+	};
+
+	private static final String[] _UPGRADE_SCHEMA = {
+		"alter_column_type Group_ classNameId LONG;",
+		"alter_column_type Group_ classPK LONG;"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeGroup.class);

@@ -67,7 +67,7 @@ public class EmailAddressLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
-		long userId, java.lang.String className, java.lang.String classPK,
+		long userId, java.lang.String className, long classPK,
 		java.lang.String address, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -85,7 +85,7 @@ public class EmailAddressLocalServiceUtil {
 	}
 
 	public static void deleteEmailAddresses(long companyId,
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 		emailAddressLocalService.deleteEmailAddresses(companyId, className,
@@ -109,7 +109,7 @@ public class EmailAddressLocalServiceUtil {
 	}
 
 	public static java.util.List getEmailAddresses(long companyId,
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 

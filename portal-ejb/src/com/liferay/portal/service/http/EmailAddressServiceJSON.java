@@ -70,8 +70,7 @@ import org.json.JSONObject;
  */
 public class EmailAddressServiceJSON {
 	public static JSONObject addEmailAddress(java.lang.String className,
-		java.lang.String classPK, java.lang.String address, int typeId,
-		boolean primary)
+		long classPK, java.lang.String address, int typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.EmailAddress returnValue = EmailAddressServiceUtil.addEmailAddress(className,
@@ -95,7 +94,7 @@ public class EmailAddressServiceJSON {
 	}
 
 	public static JSONArray getEmailAddresses(java.lang.String className,
-		java.lang.String classPK)
+		long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		java.util.List returnValue = EmailAddressServiceUtil.getEmailAddresses(className,

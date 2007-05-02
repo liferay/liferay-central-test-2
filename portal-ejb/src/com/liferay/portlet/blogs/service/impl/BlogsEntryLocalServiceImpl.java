@@ -331,7 +331,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String name = group.getName();
 
 		if (group.isUser()) {
-			long userId = GetterUtil.getLong(group.getClassPK());
+			long userId = group.getClassPK();
 
 			User user = UserUtil.findByPrimaryKey(userId);
 

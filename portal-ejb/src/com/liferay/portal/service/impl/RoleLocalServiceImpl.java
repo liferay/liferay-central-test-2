@@ -62,15 +62,17 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public Role addRole(long userId, long companyId, String name, int type)
 		throws PortalException, SystemException {
 
-		return addRole(userId, companyId, name, type, null, null);
+		return addRole(userId, companyId, name, type, null, 0);
 	}
 
 	public Role addRole(
 			long userId, long companyId, String name, int type,
-			String className, String classPK)
+			String className, long classPK)
 		throws PortalException, SystemException {
 
 		// Role
+
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		validate(0, companyId, name);
 
@@ -79,7 +81,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		Role role = RoleUtil.create(roleId);
 
 		role.setCompanyId(companyId);
-		role.setClassName(className);
+		role.setClassNameId(classNameId);
 		role.setClassPK(classPK);
 		role.setName(name);
 		role.setType(type);
@@ -167,9 +169,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		// Resources
 
-		if (Validator.isNull(role.getClassName()) &&
-			Validator.isNull(role.getClassPK())) {
-
+		if ((role.getClassNameId() <= 0) && (role.getClassPK() <= 0)) {
 			ResourceLocalServiceUtil.deleteResource(
 				role.getCompanyId(), Role.class.getName(),
 				ResourceImpl.SCOPE_INDIVIDUAL, role.getRoleId());
@@ -188,8 +188,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public Role getGroupRole(long companyId, long groupId)
 		throws PortalException, SystemException {
 
-		return RoleUtil.findByC_C_C(
-			companyId, Group.class.getName(), String.valueOf(groupId));
+		long classNameId = PortalUtil.getClassNameId(Group.class);
+
+		return RoleUtil.findByC_C_C(companyId, classNameId, groupId);
 	}
 
 	public List getGroupRoles(long groupId)

@@ -54,7 +54,7 @@ public class PhoneSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setClassName(model.getClassName());
+		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
 		soapModel.setNumber(model.getNumber());
 		soapModel.setExtension(model.getExtension());
@@ -134,19 +134,19 @@ public class PhoneSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getClassName() {
-		return _className;
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public void setClassName(String className) {
-		_className = className;
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
 	}
 
-	public String getClassPK() {
+	public long getClassPK() {
 		return _classPK;
 	}
 
-	public void setClassPK(String classPK) {
+	public void setClassPK(long classPK) {
 		_classPK = classPK;
 	}
 
@@ -192,8 +192,8 @@ public class PhoneSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _className;
-	private String _classPK;
+	private long _classNameId;
+	private long _classPK;
 	private String _number;
 	private String _extension;
 	private int _typeId;

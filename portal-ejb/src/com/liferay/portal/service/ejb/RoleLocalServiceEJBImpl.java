@@ -75,7 +75,7 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 
 	public com.liferay.portal.model.Role addRole(long userId, long companyId,
 		java.lang.String name, int type, java.lang.String className,
-		java.lang.String classPK)
+		long classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().addRole(userId, companyId,

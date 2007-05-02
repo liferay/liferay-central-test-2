@@ -121,7 +121,7 @@ public class EditPhoneAction extends PortletAction {
 		long phoneId = ParamUtil.getLong(req, "phoneId");
 
 		String className = ParamUtil.getString(req, "className");
-		String classPK = ParamUtil.getString(req, "classPK");
+		long classPK = ParamUtil.getLong(req, "classPK");
 
 		String number = ParamUtil.getString(req, "number");
 		String extension = ParamUtil.getString(req, "extension");

@@ -43,7 +43,7 @@ public class WebsiteServiceImpl
 	extends PrincipalBean implements WebsiteService {
 
 	public Website addWebsite(
-			String className, String classPK, String url, int typeId,
+			String className, long classPK, String url, int typeId,
 			boolean primary)
 		throws PortalException, SystemException {
 
@@ -60,7 +60,7 @@ public class WebsiteServiceImpl
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
 
 		CommonPermission.checkPermission(
-			getPermissionChecker(), website.getClassName(),
+			getPermissionChecker(), website.getClassNameId(),
 			website.getClassPK(), ActionKeys.UPDATE);
 
 		WebsiteLocalServiceUtil.deleteWebsite(websiteId);
@@ -72,13 +72,13 @@ public class WebsiteServiceImpl
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
 
 		CommonPermission.checkPermission(
-			getPermissionChecker(), website.getClassName(),
+			getPermissionChecker(), website.getClassNameId(),
 			website.getClassPK(), ActionKeys.VIEW);
 
 		return website;
 	}
 
-	public List getWebsites(String className, String classPK)
+	public List getWebsites(String className, long classPK)
 		throws PortalException, SystemException {
 
 		CommonPermission.checkPermission(
@@ -95,7 +95,7 @@ public class WebsiteServiceImpl
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
 
 		CommonPermission.checkPermission(
-			getPermissionChecker(), website.getClassName(),
+			getPermissionChecker(), website.getClassNameId(),
 			website.getClassPK(), ActionKeys.UPDATE);
 
 		return WebsiteLocalServiceUtil.updateWebsite(

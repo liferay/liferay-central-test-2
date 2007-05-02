@@ -89,4 +89,11 @@ public class ListTypeServiceJSON {
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		ListTypeServiceUtil.validate(listTypeId, type);
 	}
+
+	public static void validate(int listTypeId, long classNameId,
+		java.lang.String type)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		ListTypeServiceUtil.validate(listTypeId, classNameId, type);
+	}
 }

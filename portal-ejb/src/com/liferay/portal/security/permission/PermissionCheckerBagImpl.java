@@ -40,6 +40,7 @@ import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 
 import java.rmi.RemoteException;
 
@@ -181,8 +182,10 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		try {
 			Group group = GroupServiceUtil.getGroup(groupId);
 
-			if (group.getClassName().equals(User.class.getName()) &&
-				group.getClassPK().equals(String.valueOf(_userId))) {
+			long userClassNameId = PortalUtil.getClassNameId(User.class);
+
+			if ((group.getClassNameId() == userClassNameId) &&
+				(group.getClassPK() == _userId)) {
 
 				return true;
 			}

@@ -83,12 +83,12 @@ Liferay.Service.Portal.Address = {
 	}
 };
 
-Liferay.Service.Portal.ClassNameMapper = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "ClassNameMapper" + Liferay.Service.classNameSuffix,
+Liferay.Service.Portal.ClassName = {
+	serviceClassName: Liferay.Service.Portal.servicePackage + "ClassName" + Liferay.Service.classNameSuffix,
 
-	getClassNameMapperId: function(params, callback) {
+	getClassName: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getClassNameMapperId";
+		params.serviceMethodName = "getClassName";
 
 		return Liferay.Service.ajax(params, callback);
 	}

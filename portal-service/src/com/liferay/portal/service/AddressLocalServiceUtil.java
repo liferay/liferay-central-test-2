@@ -66,11 +66,10 @@ public class AddressLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Address addAddress(long userId,
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String street1, java.lang.String street2,
-		java.lang.String street3, java.lang.String city, java.lang.String zip,
-		long regionId, long countryId, int typeId, boolean mailing,
-		boolean primary)
+		java.lang.String className, long classPK, java.lang.String street1,
+		java.lang.String street2, java.lang.String street3,
+		java.lang.String city, java.lang.String zip, long regionId,
+		long countryId, int typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
@@ -88,7 +87,7 @@ public class AddressLocalServiceUtil {
 	}
 
 	public static void deleteAddresses(long companyId,
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 		addressLocalService.deleteAddresses(companyId, className, classPK);
@@ -110,7 +109,7 @@ public class AddressLocalServiceUtil {
 	}
 
 	public static java.util.List getAddresses(long companyId,
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 

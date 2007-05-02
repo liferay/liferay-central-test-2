@@ -97,8 +97,7 @@ public class OrganizationImpl
 
 	public List getAddresses() throws PortalException, SystemException {
 		return AddressLocalServiceUtil.getAddresses(
-			getCompanyId(), Organization.class.getName(),
-			String.valueOf(getOrganizationId()));
+			getCompanyId(), Organization.class.getName(), getOrganizationId());
 	}
 
 	private static Log _log = LogFactory.getLog(Organization.class);

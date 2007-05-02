@@ -33,6 +33,7 @@ import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.base.PhoneLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PhoneUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.format.PhoneNumberUtil;
 
@@ -51,18 +52,19 @@ import java.util.List;
 public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 	public Phone addPhone(
-			long userId, String className, String classPK, String number,
+			long userId, String className, long classPK, String number,
 			String extension, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
 		number = PhoneNumberUtil.strip(number);
 		extension = PhoneNumberUtil.strip(extension);
 
 		validate(
-			0, user.getCompanyId(), className, classPK, number, typeId,
+			0, user.getCompanyId(), classNameId, classPK, number, typeId,
 			primary);
 
 		long phoneId = CounterLocalServiceUtil.increment();
@@ -74,7 +76,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		phone.setUserName(user.getFullName());
 		phone.setCreateDate(now);
 		phone.setModifiedDate(now);
-		phone.setClassName(className);
+		phone.setClassNameId(classNameId);
 		phone.setClassPK(classPK);
 		phone.setNumber(number);
 		phone.setExtension(extension);
@@ -92,10 +94,12 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		PhoneUtil.remove(phoneId);
 	}
 
-	public void deletePhones(long companyId, String className, String classPK)
+	public void deletePhones(long companyId, String className, long classPK)
 		throws SystemException {
 
-		PhoneUtil.removeByC_C_C(companyId, className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		PhoneUtil.removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Phone getPhone(long phoneId)
@@ -108,10 +112,12 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		return PhoneUtil.findAll();
 	}
 
-	public List getPhones(long companyId, String className, String classPK)
+	public List getPhones(long companyId, String className, long classPK)
 		throws SystemException {
 
-		return PhoneUtil.findByC_C_C(companyId, className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return PhoneUtil.findByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Phone updatePhone(
@@ -122,7 +128,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		number = PhoneNumberUtil.strip(number);
 		extension = PhoneNumberUtil.strip(extension);
 
-		validate(phoneId, 0, null, null, number, typeId, primary);
+		validate(phoneId, 0, 0, 0, number, typeId, primary);
 
 		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
 
@@ -138,7 +144,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			long phoneId, long companyId, String className, String classPK,
+			long phoneId, long companyId, long classNameId, long classPK,
 			String number, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
@@ -150,23 +156,23 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 			Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
 
 			companyId = phone.getCompanyId();
-			className = phone.getClassName();
+			classNameId = phone.getClassNameId();
 			classPK = phone.getClassPK();
 		}
 
 		try {
 			ListTypeServiceUtil.validate(
-				typeId, className + ListTypeImpl.PHONE);
+				typeId, classNameId, ListTypeImpl.PHONE);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);
 		}
 
-		validate(phoneId, companyId, className, classPK, primary);
+		validate(phoneId, companyId, classNameId, classPK, primary);
 	}
 
 	protected void validate(
-			long phoneId, long companyId, String className, String classPK,
+			long phoneId, long companyId, long classNameId, long classPK,
 			boolean primary)
 		throws PortalException, SystemException {
 
@@ -175,7 +181,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 		if (primary) {
 			Iterator itr = PhoneUtil.findByC_C_C_P(
-				companyId, className, classPK, primary).iterator();
+				companyId, classNameId, classPK, primary).iterator();
 
 			while (itr.hasNext()) {
 				Phone phone = (Phone)itr.next();

@@ -104,13 +104,13 @@
 			<ref bean="com.liferay.portal.service.persistence.AddressPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ClassNameMapperLocalService.professional" class="com.liferay.portal.service.impl.ClassNameMapperLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.ClassNameMapperLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portal.service.ClassNameLocalService.professional" class="com.liferay.portal.service.impl.ClassNameLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.ClassNameLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portal.service.ClassNameMapperLocalService.professional" />
+			<ref bean="com.liferay.portal.service.ClassNameLocalService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -118,18 +118,18 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ClassNameMapperLocalServiceFactory" class="com.liferay.portal.service.ClassNameMapperLocalServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portal.service.ClassNameLocalServiceFactory" class="com.liferay.portal.service.ClassNameLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portal.service.ClassNameMapperLocalService.transaction" />
+			<ref bean="com.liferay.portal.service.ClassNameLocalService.transaction" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ClassNameMapperService.professional" class="com.liferay.portal.service.impl.ClassNameMapperServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.ClassNameMapperService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portal.service.ClassNameService.professional" class="com.liferay.portal.service.impl.ClassNameServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.ClassNameService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portal.service.ClassNameMapperService.professional" />
+			<ref bean="com.liferay.portal.service.ClassNameService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -137,12 +137,12 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ClassNameMapperServiceFactory" class="com.liferay.portal.service.ClassNameMapperServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portal.service.ClassNameServiceFactory" class="com.liferay.portal.service.ClassNameServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portal.service.ClassNameMapperService.transaction" />
+			<ref bean="com.liferay.portal.service.ClassNameService.transaction" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.ClassNameMapperPersistence" class="com.liferay.portal.service.persistence.ClassNameMapperPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.ClassNamePersistence" class="com.liferay.portal.service.persistence.ClassNamePersistence" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -150,9 +150,9 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.ClassNameMapperUtil" class="com.liferay.portal.service.persistence.ClassNameMapperUtil" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.ClassNameUtil" class="com.liferay.portal.service.persistence.ClassNameUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.ClassNameMapperPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.ClassNamePersistence" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.CompanyLocalService.professional" class="com.liferay.portal.service.impl.CompanyLocalServiceImpl" lazy-init="true" />
@@ -287,38 +287,6 @@
 	<bean id="com.liferay.portal.service.persistence.CountryUtil" class="com.liferay.portal.service.persistence.CountryUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.CountryPersistence" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.DataTrackerLocalService.professional" class="com.liferay.portal.service.impl.DataTrackerLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.DataTrackerLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.DataTrackerLocalService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.DataTrackerLocalServiceFactory" class="com.liferay.portal.service.DataTrackerLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.DataTrackerLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.DataTrackerPersistence" class="com.liferay.portal.service.persistence.DataTrackerPersistence" lazy-init="true">
-		<property name="dataSource">
-			<ref bean="liferayDataSource" />
-		</property>
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.DataTrackerUtil" class="com.liferay.portal.service.persistence.DataTrackerUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.DataTrackerPersistence" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.EmailAddressLocalService.professional" class="com.liferay.portal.service.impl.EmailAddressLocalServiceImpl" lazy-init="true" />

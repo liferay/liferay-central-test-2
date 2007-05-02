@@ -420,9 +420,9 @@ public class RolePersistence extends BasePersistence {
 		}
 	}
 
-	public Role findByC_C_C(long companyId, String className, String classPK)
+	public Role findByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchRoleException, SystemException {
-		Role role = fetchByC_C_C(companyId, className, classPK);
+		Role role = fetchByC_C_C(companyId, classNameId, classPK);
 
 		if (role == null) {
 			StringMaker msg = new StringMaker();
@@ -431,8 +431,8 @@ public class RolePersistence extends BasePersistence {
 			msg.append("companyId=");
 			msg.append(companyId);
 			msg.append(", ");
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -448,7 +448,7 @@ public class RolePersistence extends BasePersistence {
 		return role;
 	}
 
-	public Role fetchByC_C_C(long companyId, String className, String classPK)
+	public Role fetchByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -459,23 +459,9 @@ public class RolePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Role WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
@@ -485,14 +471,8 @@ public class RolePersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			List list = q.list();
 
@@ -606,9 +586,9 @@ public class RolePersistence extends BasePersistence {
 		remove(role);
 	}
 
-	public void removeByC_C_C(long companyId, String className, String classPK)
+	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchRoleException, SystemException {
-		Role role = findByC_C_C(companyId, className, classPK);
+		Role role = findByC_C_C(companyId, classNameId, classPK);
 		remove(role);
 	}
 
@@ -710,7 +690,7 @@ public class RolePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_C_C(long companyId, String className, String classPK)
+	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -722,23 +702,9 @@ public class RolePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Role WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -746,14 +712,8 @@ public class RolePersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			Iterator itr = q.list().iterator();
 

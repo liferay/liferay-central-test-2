@@ -72,9 +72,9 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class PhoneServiceHttp {
 	public static com.liferay.portal.model.Phone addPhone(
-		HttpPrincipal httpPrincipal, java.lang.String className,
-		java.lang.String classPK, java.lang.String number,
-		java.lang.String extension, int typeId, boolean primary)
+		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
+		java.lang.String number, java.lang.String extension, int typeId,
+		boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -84,12 +84,7 @@ public class PhoneServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = classPK;
-
-			if (classPK == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(classPK);
 			Object paramObj2 = number;
 
 			if (number == null) {
@@ -198,7 +193,7 @@ public class PhoneServiceHttp {
 	}
 
 	public static java.util.List getPhones(HttpPrincipal httpPrincipal,
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -208,12 +203,7 @@ public class PhoneServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = classPK;
-
-			if (classPK == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(classPK);
 			MethodWrapper methodWrapper = new MethodWrapper(PhoneServiceUtil.class.getName(),
 					"getPhones", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;

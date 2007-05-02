@@ -83,23 +83,8 @@ public class EmailAddressJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String className = model.getClassName();
-
-		if (className == null) {
-			jsonObj.put("className", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("className", className.toString());
-		}
-
-		String classPK = model.getClassPK();
-
-		if (classPK == null) {
-			jsonObj.put("classPK", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("classPK", classPK.toString());
-		}
+		jsonObj.put("classNameId", model.getClassNameId());
+		jsonObj.put("classPK", model.getClassPK());
 
 		String address = model.getAddress();
 

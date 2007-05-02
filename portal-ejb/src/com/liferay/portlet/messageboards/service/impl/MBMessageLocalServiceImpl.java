@@ -614,7 +614,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			SubscriptionLocalServiceUtil.deleteSubscriptions(
 				message.getCompanyId(), MBThread.class.getName(),
-				message.getThreadId());
+				GetterUtil.getLong(message.getThreadId()));
 
 			// Thread
 
@@ -901,7 +901,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID, messageId));
 
 		SubscriptionLocalServiceUtil.addSubscription(
-			userId, MBThread.class.getName(), message.getThreadId());
+			userId, MBThread.class.getName(),
+			GetterUtil.getLong(message.getThreadId()));
 	}
 
 	public void unsubscribeMessage(long userId, String messageId)
@@ -911,7 +912,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID, messageId));
 
 		SubscriptionLocalServiceUtil.deleteSubscription(
-			userId, MBThread.class.getName(), message.getThreadId());
+			userId, MBThread.class.getName(),
+			GetterUtil.getLong(message.getThreadId()));
 	}
 
 	public MBMessage updateDiscussionMessage(

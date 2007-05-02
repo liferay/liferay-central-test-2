@@ -66,25 +66,25 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 
 		AddressLocalServiceUtil.deleteAddresses(
 			contact.getCompanyId(), Contact.class.getName(),
-			String.valueOf(contact.getContactId()));
+			contact.getContactId());
 
 		// Email addresses
 
 		EmailAddressLocalServiceUtil.deleteEmailAddresses(
 			contact.getCompanyId(), Contact.class.getName(),
-			String.valueOf(contact.getContactId()));
+			contact.getContactId());
 
 		// Phone
 
 		PhoneLocalServiceUtil.deletePhones(
 			contact.getCompanyId(), Contact.class.getName(),
-			String.valueOf(contact.getContactId()));
+			contact.getContactId());
 
 		// Website
 
 		WebsiteLocalServiceUtil.deleteWebsites(
 			contact.getCompanyId(), Contact.class.getName(),
-			String.valueOf(contact.getContactId()));
+			contact.getContactId());
 
 		// Contact
 

@@ -406,9 +406,9 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public Group findByC_C_C(long companyId, String className, String classPK)
+	public Group findByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchGroupException, SystemException {
-		Group group = fetchByC_C_C(companyId, className, classPK);
+		Group group = fetchByC_C_C(companyId, classNameId, classPK);
 
 		if (group == null) {
 			StringMaker msg = new StringMaker();
@@ -417,8 +417,8 @@ public class GroupPersistence extends BasePersistence {
 			msg.append("companyId=");
 			msg.append(companyId);
 			msg.append(", ");
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -434,7 +434,7 @@ public class GroupPersistence extends BasePersistence {
 		return group;
 	}
 
-	public Group fetchByC_C_C(long companyId, String className, String classPK)
+	public Group fetchByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -445,23 +445,9 @@ public class GroupPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Group WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
@@ -471,14 +457,8 @@ public class GroupPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			List list = q.list();
 
@@ -595,9 +575,9 @@ public class GroupPersistence extends BasePersistence {
 		remove(group);
 	}
 
-	public void removeByC_C_C(long companyId, String className, String classPK)
+	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchGroupException, SystemException {
-		Group group = findByC_C_C(companyId, className, classPK);
+		Group group = findByC_C_C(companyId, classNameId, classPK);
 		remove(group);
 	}
 
@@ -751,7 +731,7 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_C_C(long companyId, String className, String classPK)
+	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -763,23 +743,9 @@ public class GroupPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Group WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -787,14 +753,8 @@ public class GroupPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			Iterator itr = q.list().iterator();
 

@@ -57,13 +57,13 @@ public interface RoleModel extends BaseModel {
 
 	public void setCompanyId(long companyId);
 
-	public String getClassName();
+	public long getClassNameId();
 
-	public void setClassName(String className);
+	public void setClassNameId(long classNameId);
 
-	public String getClassPK();
+	public long getClassPK();
 
-	public void setClassPK(String classPK);
+	public void setClassPK(long classPK);
 
 	public String getName();
 

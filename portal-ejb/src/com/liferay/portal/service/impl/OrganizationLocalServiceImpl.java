@@ -105,8 +105,7 @@ public class OrganizationLocalServiceImpl
 
 		GroupLocalServiceUtil.addGroup(
 			userId, Organization.class.getName(),
-			String.valueOf(organization.getOrganizationId()), null, null, null,
-			null, true);
+			organization.getOrganizationId(), null, null, null, null, true);
 
 		// Resources
 
@@ -162,13 +161,13 @@ public class OrganizationLocalServiceImpl
 
 		AddressLocalServiceUtil.deleteAddresses(
 			organization.getCompanyId(), Organization.class.getName(),
-			String.valueOf(organization.getOrganizationId()));
+			organization.getOrganizationId());
 
 		// Email addresses
 
 		EmailAddressLocalServiceUtil.deleteEmailAddresses(
 			organization.getCompanyId(), Organization.class.getName(),
-			String.valueOf(organization.getOrganizationId()));
+			organization.getOrganizationId());
 
 		// Password policy relation
 
@@ -179,13 +178,13 @@ public class OrganizationLocalServiceImpl
 
 		PhoneLocalServiceUtil.deletePhones(
 			organization.getCompanyId(), Organization.class.getName(),
-			String.valueOf(organization.getOrganizationId()));
+			organization.getOrganizationId());
 
 		// Website
 
 		WebsiteLocalServiceUtil.deleteWebsites(
 			organization.getCompanyId(), Organization.class.getName(),
-			String.valueOf(organization.getOrganizationId()));
+			organization.getOrganizationId());
 
 		// Group
 

@@ -90,7 +90,7 @@ import java.util.List;
 public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public Group addGroup(
-			long userId, String className, String classPK, String name,
+			long userId, String className, long classPK, String name,
 			String description, String type, String friendlyURL, boolean active)
 		throws PortalException, SystemException {
 
@@ -100,7 +100,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public Group addGroup(
-			long userId, String className, String classPK, long liveGroupId,
+			long userId, String className, long classPK, long liveGroupId,
 			String name, String description, String type, String friendlyURL,
 			boolean active)
 		throws PortalException, SystemException {
@@ -108,18 +108,19 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Group
 
 		User user = UserUtil.findByPrimaryKey(userId);
+		long classNameId = PortalUtil.getClassNameId(className);
 
-		if (Validator.isNull(className) || Validator.isNull(classPK)) {
+		if ((classNameId <= 0) || (classPK <= 0)) {
 			validateName(0, user.getCompanyId(), name);
 		}
 
-		friendlyURL = getFriendlyURL(className, friendlyURL);
+		friendlyURL = getFriendlyURL(classNameId, friendlyURL);
 
 		validateFriendlyURL(0, user.getCompanyId(), friendlyURL);
 
 		long groupId = CounterLocalServiceUtil.increment();
 
-		if (Validator.isNotNull(className) && Validator.isNotNull(classPK)) {
+		if ((classNameId > 0) && (classPK > 0)) {
 			name = String.valueOf(groupId);
 		}
 
@@ -127,7 +128,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		group.setCompanyId(user.getCompanyId());
 		group.setCreatorUserId(userId);
-		group.setClassName(className);
+		group.setClassNameId(classNameId);
 		group.setClassPK(classPK);
 		group.setParentGroupId(GroupImpl.DEFAULT_PARENT_GROUP_ID);
 		group.setLiveGroupId(liveGroupId);
@@ -147,8 +148,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		LayoutSetLocalServiceUtil.addLayoutSet(
 			LayoutImpl.PUBLIC + groupId, group.getCompanyId());
 
-		if (Validator.isNull(className) && Validator.isNull(classPK) &&
-			!user.isDefaultUser()) {
+		if ((classNameId <= 0) && (classPK <= 0) && !user.isDefaultUser()) {
 
 			// Resources
 
@@ -207,7 +207,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				}
 
 				group = addGroup(
-					defaultUserId, null, null, systemGroups[i], null, null,
+					defaultUserId, null, 0, systemGroups[i], null, null,
 					friendlyURL, true);
 			}
 
@@ -315,9 +315,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			ResourceLocalServiceUtil.deleteResource(resource);
 		}
 
-		if (Validator.isNull(group.getClassName()) &&
-			Validator.isNull(group.getClassPK())) {
-
+		if ((group.getClassNameId() <= 0) && (group.getClassPK() <= 0)) {
 			ResourceLocalServiceUtil.deleteResource(
 				group.getCompanyId(), Group.class.getName(),
 				ResourceImpl.SCOPE_INDIVIDUAL, group.getGroupId());
@@ -353,9 +351,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public Group getOrganizationGroup(long companyId, long organizationId)
 		throws PortalException, SystemException {
 
-		return GroupUtil.findByC_C_C(
-			companyId, Organization.class.getName(),
-			String.valueOf(organizationId));
+		long classNameId = PortalUtil.getClassNameId(Organization.class);
+
+		return GroupUtil.findByC_C_C(companyId, classNameId, organizationId);
 	}
 
 	public List getOrganizationsGroups(List organizations)
@@ -389,15 +387,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public Group getUserGroup(long companyId, long userId)
 		throws PortalException, SystemException {
 
-		return GroupUtil.findByC_C_C(
-			companyId, User.class.getName(), String.valueOf(userId));
+		long classNameId = PortalUtil.getClassNameId(User.class);
+
+		return GroupUtil.findByC_C_C(companyId, classNameId, userId);
 	}
 
 	public Group getUserGroupGroup(long companyId, long userGroupId)
 		throws PortalException, SystemException {
 
-		return GroupUtil.findByC_C_C(
-			companyId, UserGroup.class.getName(), String.valueOf(userGroupId));
+		long classNameId = PortalUtil.getClassNameId(UserGroup.class);
+
+		return GroupUtil.findByC_C_C(companyId, classNameId, userGroupId);
 	}
 
 	public List getUserGroupsGroups(List userGroups)
@@ -481,11 +481,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);
 
-		String className = group.getClassName();
-		String classPK = group.getClassPK();
-		friendlyURL = getFriendlyURL(className, friendlyURL);
+		long classNameId = group.getClassNameId();
+		long classPK = group.getClassPK();
+		friendlyURL = getFriendlyURL(classNameId, friendlyURL);
 
-		if (Validator.isNull(className) || Validator.isNull(classPK)) {
+		if ((classNameId <= 0) || (classPK <= 0)) {
 			validateName(group.getGroupId(), group.getCompanyId(), name);
 		}
 
@@ -549,15 +549,18 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			layout.getTypeSettings());
 	}
 
-	protected String getFriendlyURL(String className, String friendlyURL) {
-		if (Validator.isNotNull(className) &&
-			className.equals(User.class.getName())) {
+	protected String getFriendlyURL(long classNameId, String friendlyURL)
+		throws PortalException, SystemException {
 
-			return StringPool.BLANK;
+		if (classNameId > 0) {
+			long userClassNameId = PortalUtil.getClassNameId(User.class);
+
+			if (classNameId == userClassNameId) {
+				return StringPool.BLANK;
+			}
 		}
-		else {
-			return friendlyURL;
-		}
+
+		return friendlyURL;
 	}
 
 	protected void validateFriendlyURL(
