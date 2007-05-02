@@ -24,6 +24,7 @@ package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
+import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.util.Http;
@@ -40,7 +41,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class ThemeLoaderHotDeployListener extends ThemeHotDeployListener {
+public class ThemeLoaderHotDeployListener implements HotDeployListener {
 
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
 		String servletContextName = null;
@@ -48,7 +49,7 @@ public class ThemeLoaderHotDeployListener extends ThemeHotDeployListener {
 		try {
 			ServletContext ctx = event.getServletContext();
 
-			servletContextName = getServletContextName(ctx);
+			servletContextName = ctx.getServletContextName();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Invoking deploy for " + servletContextName);
@@ -81,7 +82,7 @@ public class ThemeLoaderHotDeployListener extends ThemeHotDeployListener {
 		try {
 			ServletContext ctx = event.getServletContext();
 
-			servletContextName = getServletContextName(ctx);
+			servletContextName = ctx.getServletContextName();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Invoking undeploy for " + servletContextName);

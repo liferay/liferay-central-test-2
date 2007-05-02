@@ -1525,6 +1525,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String lookAndFeelXML = ContentUtil.get(
 			"com/liferay/portal/dependencies/liferay-look-and-feel.xml.tmpl");
 
+		lookAndFeelXML = StringUtil.replace(
+			lookAndFeelXML,
+			new String[] {
+				"[$TEMPLATE_EXTENSION$]", "[$VIRTUAL_PATH$]"
+			},
+			new String[] {
+				theme.getTemplateExtension(), theme.getVirtualPath()
+			}
+		);
+
 		zipWriter.addEntry("liferay-look-and-feel.xml", lookAndFeelXML);
 
 		String servletContextName = theme.getServletContextName();

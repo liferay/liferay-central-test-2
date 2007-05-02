@@ -26,8 +26,6 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
@@ -35,7 +33,6 @@ import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
-import com.liferay.util.Validator;
 
 import java.util.List;
 import java.util.Map;
@@ -61,7 +58,7 @@ public class ThemeHotDeployListener implements HotDeployListener {
 		try {
 			ServletContext ctx = event.getServletContext();
 
-			servletContextName = getServletContextName(ctx);
+			servletContextName = ctx.getServletContextName();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Invoking deploy for " + servletContextName);
@@ -105,7 +102,7 @@ public class ThemeHotDeployListener implements HotDeployListener {
 		try {
 			ServletContext ctx = event.getServletContext();
 
-			servletContextName = getServletContextName(ctx);
+			servletContextName = ctx.getServletContextName();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Invoking undeploy for " + servletContextName);
@@ -159,23 +156,6 @@ public class ThemeHotDeployListener implements HotDeployListener {
 		catch (Exception e2) {
 			throw new HotDeployException(
 				"Error unregistering themes for " + servletContextName, e2);
-		}
-	}
-
-	protected String getServletContextName(ServletContext ctx) {
-		String themePath = ctx.getInitParameter("theme_path");
-
-		if (Validator.isNotNull(themePath)) {
-			StringMaker sm = new StringMaker();
-
-			sm.append(themePath);
-			sm.append(StringPool.SLASH);
-			sm.append(ctx.getServletContextName());
-
-			return sm.toString();
-		}
-		else {
-			return ctx.getServletContextName();
 		}
 	}
 
