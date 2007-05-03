@@ -93,7 +93,7 @@ String csz = ParamUtil.getString(request, "csz");
 					<table border="1" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>
-							<input border="0" height="353" name="mqmap" src="http://mq-mapgend.websys.aol.com:80/?e=9&GetMapDirect=<%= map.getMapDirect() %>" type="image" width="463">
+							<input border="0" height="353" name="mqmap" src="http://mq-mapgend.websys.aol.com:80/?e=9&GetMapDirect=<%= map.getMapDirect() %>" type="image" width="463" />
 						</td>
 					</tr>
 					</table>

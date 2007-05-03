@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/tagged_content/init.jsp" %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <bean:message key="displayed-content-must-contain-the-following-tags" />
 
@@ -67,6 +67,6 @@
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

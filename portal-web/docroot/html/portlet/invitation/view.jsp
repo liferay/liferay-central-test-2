@@ -34,7 +34,7 @@
 	</c:when>
 	<c:otherwise>
 		<form action="<portlet:actionURL><portlet:param name="struts_action" value="/invitation/view" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-		<input name="redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>" />">
+		<input name="redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>" />" />
 
 		<%= LanguageUtil.format(pageContext, "enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite", String.valueOf(InvitationUtil.getEmailMessageMaxRecipients())) %>
 
@@ -55,7 +55,7 @@
 				</div>
 			</c:if>
 
-			<input name="<portlet:namespace />emailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
+			<input name="<portlet:namespace />emailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>" />
 
 			<br />
 
@@ -65,7 +65,7 @@
 
 		<br />
 
-		<input type="button" value="<bean:message key="invite-friends" />" onClick="submitForm(document.<portlet:namespace />fm);">
+		<input type="button" value="<bean:message key="invite-friends" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 		</form>
 	</c:otherwise>

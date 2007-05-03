@@ -50,7 +50,7 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= OrderDisplayTerms.ORDER_ID %>" size="20" type="text" value="<%= displayTerms.getOrderId() %>">
+		<input name="<portlet:namespace /><%= OrderDisplayTerms.ORDER_ID %>" size="20" type="text" value="<%= displayTerms.getOrderId() %>" />
 	</td>
 	<td>
 		<select name="<%= OrderDisplayTerms.STATUS %>">
@@ -69,13 +69,13 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 		</select>
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= OrderDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>">
+		<input name="<portlet:namespace /><%= OrderDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= OrderDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>">
+		<input name="<portlet:namespace /><%= OrderDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= OrderDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>">
+		<input name="<portlet:namespace /><%= OrderDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>" />
 	</td>
 </tr>
 </table>
@@ -91,7 +91,7 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />">
+		<input type="submit" value="<bean:message key="search" />" />
 	</td>
 </tr>
 </table>

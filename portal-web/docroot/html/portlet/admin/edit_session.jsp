@@ -35,8 +35,8 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_session" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />userTrackerId" type="hidden" value="<%= userTrackerId %>">
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />userTrackerId" type="hidden" value="<%= userTrackerId %>" />
 
 <liferay-ui:tabs names="session" />
 
@@ -46,7 +46,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 
 		<br /><br />
 
-		<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+		<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 	</c:when>
 	<c:otherwise>
 
@@ -268,10 +268,10 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		<br />
 
 		<c:if test="<%= userSessionAlive && !session.getId().equals(userTrackerId) %>">
-			<input type="submit" value="<bean:message key="kill-session" />">
+			<input type="submit" value="<bean:message key="kill-session" />" />
 		</c:if>
 
-		<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+		<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 	</c:otherwise>
 </c:choose>
 

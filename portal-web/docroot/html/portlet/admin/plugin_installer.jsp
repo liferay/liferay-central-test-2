@@ -110,13 +110,13 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 
 </script>
 <form method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace />referer" type="hidden" value="<%=referer%>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%=currentURL%>">
-<input name="<portlet:namespace />pluginType" type="hidden" value="<%= pluginType %>">
-<input name="<portlet:namespace />progressId" type="hidden" value="">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />referer" type="hidden" value="<%=referer%>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%=currentURL%>" />
+<input name="<portlet:namespace />pluginType" type="hidden" value="<%= pluginType %>" />
+<input name="<portlet:namespace />progressId" type="hidden" value="" />
 
 <h3><bean:message key="plugin-package-installer" /></h3>
 
@@ -155,7 +155,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 				<bean:message key="deploy-directory" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />deployDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR) %>">
+				<input name="<portlet:namespace />deployDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR) %>" />
 			</td>
 		</tr>
 		<tr>
@@ -163,7 +163,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 				<bean:message key="dest-directory" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />destDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR) %>">
+				<input name="<portlet:namespace />destDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR) %>" />
 			</td>
 		</tr>
 		<tr>
@@ -272,7 +272,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<input name="<portlet:namespace />jbossPrefix" type="hidden" value="<%= jbossPrefix %>">
+				<input name="<portlet:namespace />jbossPrefix" type="hidden" value="<%= jbossPrefix %>" />
 			</c:otherwise>
 		</c:choose>
 
@@ -293,7 +293,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 						<bean:message key="tomcat-conf-dir" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />tomcatConfDir" size="75" type="text" value="<%= tomcatConfDir %>">
+						<input name="<portlet:namespace />tomcatConfDir" size="75" type="text" value="<%= tomcatConfDir %>" />
 					</td>
 				</tr>
 				<tr>
@@ -301,13 +301,13 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 						<bean:message key="tomcat-lib-dir" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />tomcatLibDir" size="75" type="text" value="<%= tomcatLibDir %>">
+						<input name="<portlet:namespace />tomcatLibDir" size="75" type="text" value="<%= tomcatLibDir %>" />
 					</td>
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<input name="<portlet:namespace />tomcatConfDir" type="hidden" value="<%= tomcatConfDir %>">
-				<input name="<portlet:namespace />tomcatLibDir" type="hidden" value="<%= tomcatLibDir %>">
+				<input name="<portlet:namespace />tomcatConfDir" type="hidden" value="<%= tomcatConfDir %>" />
+				<input name="<portlet:namespace />tomcatLibDir" type="hidden" value="<%= tomcatLibDir %>" />
 			</c:otherwise>
 		</c:choose>
 
@@ -332,7 +332,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 
 		<br />
 
-		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveDeployConfiguration();">
+		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveDeployConfiguration();" />
 	</c:when>
 	<c:otherwise>
 

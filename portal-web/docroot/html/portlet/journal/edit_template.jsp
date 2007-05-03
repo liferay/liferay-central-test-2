@@ -91,11 +91,11 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveTemplate(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
-<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>">
-<input name="<portlet:namespace />xslContent" type="hidden" value="<%= JS.encodeURIComponent(xsl) %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
+<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
+<input name="<portlet:namespace />xslContent" type="hidden" value="<%= JS.encodeURIComponent(xsl) %>" />
 
 <liferay-ui:tabs names="template" />
 
@@ -165,7 +165,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<bean:message key="structure" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>">
+		<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>" />
 
 		<c:choose>
 			<c:when test="<%= (template == null) || (Validator.isNotNull(structureId)) %>">
@@ -179,7 +179,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		</c:choose>
 
 		<c:if test="<%= (template == null) || (Validator.isNull(template.getStructureId())) %>">
-			<input type="button" value="<bean:message key="select" />" onClick="var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); structureWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); structureWindow.focus();">
 
 			<input <%= Validator.isNull(structureId) ? "disabled" : "" %> id="<portlet:namespace />removeStructureButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeStructure();">
 		</c:if>
@@ -195,12 +195,12 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<bean:message key="script" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />xsl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<input name="<portlet:namespace />xsl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
 
-		<input type="button" value="<bean:message key="launch-editor" />" onClick="var templateXslWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm.<portlet:namespace />langType.value, 'templateXsl', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); templateXslWindow.focus();">
+		<input type="button" value="<bean:message key="launch-editor" />" onClick="var templateXslWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm.<portlet:namespace />langType.value, 'templateXsl', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); templateXslWindow.focus();">
 
 		<c:if test="<%= template != null %>">
-			<input type="button" value="<bean:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= String.valueOf(template.getGroupId()) %>&templateId=<%= template.getTemplateId() %>&transform=0';">
+			<input type="button" value="<bean:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= String.valueOf(template.getGroupId()) %>&templateId=<%= template.getTemplateId() %>&transform=0';" />
 		</c:if>
 	</td>
 </tr>
@@ -250,7 +250,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="small-image" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />smallFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<input name="<portlet:namespace />smallFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
 	</td>
 </tr>
 <tr>
@@ -284,9 +284,9 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

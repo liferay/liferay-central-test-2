@@ -26,10 +26,10 @@
 
 <c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET) %>">
 	<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>" method="post" name="layoutTemplates">
-	<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>">
-	<input name="<%= Constants.CMD %>" type="hidden" value="template">
-	<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= PortalUtil.getLayoutURL(layout, themeDisplay) %>">
-	<input name="refresh" type="hidden" value="true">
+	<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
+	<input name="<%= Constants.CMD %>" type="hidden" value="template" />
+	<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= PortalUtil.getLayoutURL(layout, themeDisplay) %>" />
+	<input name="refresh" type="hidden" value="true" />
 
 	<table cellpadding="0" cellspacing="10" border="0" width="100%" style="margin-top: 10px;">
 

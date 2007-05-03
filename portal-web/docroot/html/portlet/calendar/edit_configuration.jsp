@@ -66,9 +66,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 </script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveConfiguration(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 
 <liferay-ui:tabs
 	names="email-from,event-reminder-email"
@@ -89,7 +89,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="name" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
+				<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>" />
 			</td>
 		</tr>
 		<tr>
@@ -97,7 +97,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="address" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
+				<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>" />
 			</td>
 		</tr>
 		</table>
@@ -122,7 +122,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="subject" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailEventReminderSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailEventReminderSubject %>">
+				<input name="<portlet:namespace />emailEventReminderSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailEventReminderSubject %>" />
 			</td>
 		</tr>
 		<tr>
@@ -137,7 +137,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-				<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="">
+				<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="" />
 			</td>
 		</tr>
 		</table>
@@ -219,9 +219,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

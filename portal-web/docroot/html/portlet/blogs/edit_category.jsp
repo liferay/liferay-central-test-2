@@ -42,10 +42,10 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_category" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCategory(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>">
-<input name="<portlet:namespace />parentCategoryId" type="hidden" value="<%= parentCategoryId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
+<input name="<portlet:namespace />parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
 
 <liferay-ui:tabs names="category" />
 
@@ -97,9 +97,9 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

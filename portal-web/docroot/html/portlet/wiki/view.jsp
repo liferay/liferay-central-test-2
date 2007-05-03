@@ -101,16 +101,16 @@ boolean showAddNodeButton = PortletPermission.contains(permissionChecker, plid, 
 	<tr>
 		<c:if test="<%= showAddNodeButton %>">
 			<td>
-				<input type="button" value="<bean:message key="add-node" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add-node" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 			</td>
 			<td style="padding-left: 30px;"></td>
 		</c:if>
 
 		<c:if test="<%= results.size() > 0 %>">
 			<td>
-				<input name="<portlet:namespace />keywords" size="30" type="text">
+				<input name="<portlet:namespace />keywords" size="30" type="text" />
 
-				<input type="submit" value="<bean:message key="search-nodes" />">
+				<input type="submit" value="<bean:message key="search-nodes" />" />
 			</td>
 		</c:if>
 	</tr>

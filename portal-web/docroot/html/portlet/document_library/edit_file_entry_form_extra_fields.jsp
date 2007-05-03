@@ -33,7 +33,7 @@
 		<bean:message key="author" />
 	</td>
 	<td>
-		<input name="ExtraSettingsProperties(author)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(author)" />">
+		<input name="ExtraSettingsProperties(author)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(author)" />" />
 	</td>
 </tr>
 <tr>
@@ -41,6 +41,6 @@
 		<bean:message key="type" />
 	</td>
 	<td>
-		<input name="ExtraSettingsProperties(type)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(type)" />">
+		<input name="ExtraSettingsProperties(type)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(type)" />" />
 	</td>
 </tr>--%>

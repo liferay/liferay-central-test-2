@@ -60,10 +60,10 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_category" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCategory(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>">
-<input name="<portlet:namespace />parentCategoryId" type="hidden" value="<%= parentCategoryId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
+<input name="<portlet:namespace />parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
 
 <liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="categories" />
@@ -104,9 +104,9 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>" id="<portlet:namespace />parentCategoryName">
 					<%= parentCategoryName %></a>
 
-					<input type="button" value="<bean:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+					<input type="button" value="<bean:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
 
-					<input id="<portlet:namespace />removeCategoryButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeCategory();">
+					<input id="<portlet:namespace />removeCategoryButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeCategory();" />
 				</td>
 				<td>
 					<liferay-ui:input-checkbox param="mergeWithParentCategory" />
@@ -163,9 +163,9 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

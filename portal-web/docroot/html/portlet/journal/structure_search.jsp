@@ -44,13 +44,13 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= StructureDisplayTerms.STRUCTURE_ID %>" size="20" type="text" value="<%= displayTerms.getStructureId() %>">
+		<input name="<portlet:namespace /><%= StructureDisplayTerms.STRUCTURE_ID %>" size="20" type="text" value="<%= displayTerms.getStructureId() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= StructureDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
+		<input name="<portlet:namespace /><%= StructureDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= StructureDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
+		<input name="<portlet:namespace /><%= StructureDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
 	</td>
 </tr>
 </table>
@@ -66,7 +66,7 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />">
+		<input type="submit" value="<bean:message key="search" />" />
 	</td>
 </tr>
 </table>

@@ -68,8 +68,8 @@ portletURL.setParameter("tabs1", tabs1);
 </script>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/mail/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 
 <liferay-ui:tabs
 	names="recipients,filters,forward-address,signature,vacation-message"
@@ -194,10 +194,10 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<tr>
 				<td>
-					<input name="<portlet:namespace />filterEmailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
+					<input name="<portlet:namespace />filterEmailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>" />
 				</td>
 				<td>
-					<input name="<portlet:namespace />filterFolder<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= folder %>">
+					<input name="<portlet:namespace />filterFolder<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= folder %>" />
 				</td>
 			</tr>
 
@@ -251,13 +251,13 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-		<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="">
+		<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="" />
 
 		<br /><br />
 	</c:when>
 </c:choose>
 
-<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />savePreferences();">
+<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />savePreferences();" />
 
 </form>
 

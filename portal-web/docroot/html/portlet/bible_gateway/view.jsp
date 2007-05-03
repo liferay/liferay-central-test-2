@@ -30,10 +30,10 @@
 >
 	<liferay-ui:section>
 		<form method="get" target="_blank" name="<portlet:namespace />fm1" onSubmit="if (!document.<portlet:namespace />fm1.showfn_cb.checked) { document.<portlet:namespace />fm1.showfn.value = 'no'; } if (!document.<portlet:namespace />fm1.showxref_cb.checked) { document.<portlet:namespace />fm1.showxref.value = 'no'; } submitForm(document.<portlet:namespace />fm1, 'http://www.biblegateway.com/cgi-bin/bible', false); return false;">
-		<input name="showfn" type="hidden" value="yes">
-		<input name="showxref" type="hidden" value="yes">
+		<input name="showfn" type="hidden" value="yes" />
+		<input name="showxref" type="hidden" value="yes" />
 
-		<input name="passage" type="text" size="30">
+		<input name="passage" type="text" size="30" />
 
 		<select name="version">
 			<option value="ESV">ESV</option>
@@ -46,13 +46,13 @@
 			<option value="NKJV">NKJV</option>
 		</select>
 
-		<input checked name="showfn_cb" type="checkbox"> <span style="font-size: xx-small;"><bean:message key="footnotes" /></span>
+		<input checked name="showfn_cb" type="checkbox" /> <span style="font-size: xx-small;"><bean:message key="footnotes" /></span>
 
-		<input checked name="showxref_cb" type="checkbox"> <span style="font-size: xx-small;"><bean:message key="cross-references" /></span>
+		<input checked name="showxref_cb" type="checkbox" /> <span style="font-size: xx-small;"><bean:message key="cross-references" /></span>
 
 		<br /><br />
 
-		<input type="submit" value="<bean:message key="lookup" />">
+		<input type="submit" value="<bean:message key="lookup" />" />
 
 		</form>
 	</liferay-ui:section>
@@ -72,32 +72,32 @@
 				return false;"
 		>
 
-		<input name="<portlet:namespace />passage" type="text" size="30"><br />
+		<input name="<portlet:namespace />passage" type="text" size="30" /><br />
 
-		<input name="<portlet:namespace />version" type="checkbox" value="ESV"> <span style="font-size: xx-small;">ESV</span>
+		<input name="<portlet:namespace />version" type="checkbox" value="ESV" /> <span style="font-size: xx-small;">ESV</span>
 
-		<input name="<portlet:namespace />version" type="checkbox" value="NIV"> <span style="font-size: xx-small;">NIV</span>
+		<input name="<portlet:namespace />version" type="checkbox" value="NIV" /> <span style="font-size: xx-small;">NIV</span>
 
-		<input name="<portlet:namespace />version" type="checkbox" value="NASB"> <span style="font-size: xx-small;">NASB</span>
+		<input name="<portlet:namespace />version" type="checkbox" value="NASB" /> <span style="font-size: xx-small;">NASB</span>
 
-		<input name="<portlet:namespace />version" type="checkbox" value="MSG"> <span style="font-size: xx-small;">MSG</span>
+		<input name="<portlet:namespace />version" type="checkbox" value="MSG" /> <span style="font-size: xx-small;">MSG</span>
 
-		<input name="<portlet:namespace />version" type="checkbox" value="AMP"> <span style="font-size: xx-small;">AMP</span>
+		<input name="<portlet:namespace />version" type="checkbox" value="AMP" /> <span style="font-size: xx-small;">AMP</span>
 
-		<input name="<portlet:namespace />version" type="checkbox" value="NLT"> <span style="font-size: xx-small;">NLT</span>
+		<input name="<portlet:namespace />version" type="checkbox" value="NLT" /> <span style="font-size: xx-small;">NLT</span>
 
-		<input name="<portlet:namespace />version" type="checkbox" value="KJV"> <span style="font-size: xx-small;">KJV</span>
+		<input name="<portlet:namespace />version" type="checkbox" value="KJV" /> <span style="font-size: xx-small;">KJV</span>
 
 		<br /><br />
 
-		<input type="submit" value="<bean:message key="compare" />">
+		<input type="submit" value="<bean:message key="compare" />" />
 
 		</form>
 	</liferay-ui:section>
 	<liferay-ui:section>
 		<form method="get" target="_blank" name="<portlet:namespace />fm3" onSubmit="submitForm(document.<portlet:namespace />fm3, 'http://www.biblegateway.com/cgi-bin/bible', false); return false;">
 
-		<input name="search" type="text" size="30">
+		<input name="search" type="text" size="30" />
 
 		<select name="version">
 			<option value="ESV">ESV</option>
@@ -119,9 +119,9 @@
 
 		<br />
 
-		<input name="SearchWholeWords" type="checkbox" value="yes"> <span style="font-size: xx-small;"><bean:message key="match-whole-words" /></span>
+		<input name="SearchWholeWords" type="checkbox" value="yes" /> <span style="font-size: xx-small;"><bean:message key="match-whole-words" /></span>
 
-		<input name="SearchAsLink" type="checkbox" value="yes"> <span style="font-size: xx-small;"><bean:message key="references-only" /></span>
+		<input name="SearchAsLink" type="checkbox" value="yes" /> <span style="font-size: xx-small;"><bean:message key="references-only" /></span>
 
 		<br /><br />
 
@@ -304,7 +304,7 @@
 
 		<br />
 
-		<input type="submit" value="<bean:message key="search" />">
+		<input type="submit" value="<bean:message key="search" />" />
 
 		</form>
 	</liferay-ui:section>

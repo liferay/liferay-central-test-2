@@ -79,11 +79,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 </script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveConfiguration(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />ccTypes" type="hidden" value="">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />ccTypes" type="hidden" value="" />
 
 <liferay-ui:tabs
 	names="payment-settings,shipping-calculation,insurance-calculation,emails"
@@ -107,7 +107,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="paypal-email-address" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />payPalEmailAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= shoppingPrefs.getPayPalEmailAddress() %>">
+				<input name="<portlet:namespace />payPalEmailAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= shoppingPrefs.getPayPalEmailAddress() %>" />
 			</td>
 		</tr>
 		<tr>
@@ -210,7 +210,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="tax-rate" />
 			</td>
 			<td>
-				<input maxlength="7" name="<portlet:namespace />taxRate" type="text" size="7" value="<%= taxFormat.format(shoppingPrefs.getTaxRate()) %>">
+				<input maxlength="7" name="<portlet:namespace />taxRate" type="text" size="7" value="<%= taxFormat.format(shoppingPrefs.getTaxRate()) %>" />
 			</td>
 		</tr>
 		<tr>
@@ -223,7 +223,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="minimum-order" />
 			</td>
 			<td>
-				<input maxlength="7" name="<portlet:namespace />minOrder" type="text" size="7" value="<%= currency.getSymbol() %><%= doubleFormat.format(shoppingPrefs.getMinOrder()) %>">
+				<input maxlength="7" name="<portlet:namespace />minOrder" type="text" size="7" value="<%= currency.getSymbol() %><%= doubleFormat.format(shoppingPrefs.getMinOrder()) %>" />
 			</td>
 		</tr>
 		</table>
@@ -278,7 +278,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 							</c:if>
 						</td>
 						<td>
-							<input maxlength="6" name="<portlet:namespace />shipping<%= i %>" size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getShipping()[i]) %>">
+							<input maxlength="6" name="<portlet:namespace />shipping<%= i %>" size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getShipping()[i]) %>" />
 						</td>
 					</tr>
 
@@ -341,7 +341,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 							</c:if>
 						</td>
 						<td>
-							<input maxlength="6" name="<portlet:namespace />insurance<%= i %>" size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getInsurance()[i]) %>">
+							<input maxlength="6" name="<portlet:namespace />insurance<%= i %>" size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getInsurance()[i]) %>" />
 						</td>
 					</tr>
 
@@ -398,10 +398,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("confirmation-email") %>'>
-								<input name="<portlet:namespace />emailOrderConfirmationSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailOrderConfirmationSubject %>">
+								<input name="<portlet:namespace />emailOrderConfirmationSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailOrderConfirmationSubject %>" />
 							</c:when>
 							<c:when test='<%= tabs3.equals("shipping-email") %>'>
-								<input name="<portlet:namespace />emailOrderShippingSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailOrderShippingSubject %>">
+								<input name="<portlet:namespace />emailOrderShippingSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailOrderShippingSubject %>" />
 							</c:when>
 						</c:choose>
 					</td>
@@ -418,7 +418,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-						<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="">
+						<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="" />
 					</td>
 				</tr>
 				</table>
@@ -527,7 +527,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<bean:message key="name" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
+						<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>" />
 					</td>
 				</tr>
 				<tr>
@@ -535,7 +535,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<bean:message key="address" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
+						<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>" />
 					</td>
 				</tr>
 				</table>
@@ -546,9 +546,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

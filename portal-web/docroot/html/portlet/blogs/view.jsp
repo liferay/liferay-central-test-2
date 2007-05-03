@@ -46,7 +46,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 <c:choose>
 	<c:when test='<%= tabs1.equals("entries") %>'>
 		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-		<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(layout.getGroupId()) %>">
+		<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(layout.getGroupId()) %>" />
 
 		<%
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, null, null);
@@ -79,8 +79,8 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		%>
 
 		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>">
-		<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= StringUtil.merge(categoryIds) %>">
+		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
+		<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= StringUtil.merge(categoryIds) %>" />
 
 		<c:if test="<%= category != null %>">
 			<div class="breadcrumbs">
@@ -167,16 +167,16 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			<tr>
 				<c:if test="<%= showAddCategoryButton %>">
 					<td>
-						<input type="button" value="<bean:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';">
+						<input type="button" value="<bean:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/blogs/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';">
 					</td>
 					<td style="padding-left: 30px;"></td>
 				</c:if>
 
 				<c:if test="<%= results.size() > 0 %>">
 					<td>
-						<input name="<portlet:namespace />keywords" size="30" type="text">
+						<input name="<portlet:namespace />keywords" size="30" type="text" />
 
-						<input type="submit" value="<bean:message key="search-categories" />">
+						<input type="submit" value="<bean:message key="search-categories" />" />
 					</td>
 				</c:if>
 			</tr>
@@ -201,8 +201,8 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		<c:if test="<%= category != null %>">
 			<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
-			<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>">
-			<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryId %>">
+			<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
+			<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryId %>" />
 
 			<%
 			searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, null, null);

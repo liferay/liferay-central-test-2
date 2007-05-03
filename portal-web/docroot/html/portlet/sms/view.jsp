@@ -31,7 +31,7 @@ String message = ParamUtil.getString(request, "message");
 %>
 
 <form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SEND %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SEND %>" />
 
 <liferay-ui:success key='<%= portletConfig.getPortletName() + ".send" %>' message="you-have-successfully-sent-a-sms-message" />
 
@@ -43,7 +43,7 @@ String message = ParamUtil.getString(request, "message");
 		<bean:message key="to" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= to %>">
+		<input name="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= to %>" />
 	</td>
 </tr>
 <tr>
@@ -51,7 +51,7 @@ String message = ParamUtil.getString(request, "message");
 		<bean:message key="subject" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" value="<%= subject %>">
+		<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" value="<%= subject %>" />
 	</td>
 </tr>
 <tr>
@@ -65,7 +65,7 @@ String message = ParamUtil.getString(request, "message");
 <tr>
 	<td></td>
 	<td>
-		<input disabled maxlength="3" name="<portlet:namespace />length" size="3" type="text" value="<%= subject.length() + message.length() %>">
+		<input disabled maxlength="3" name="<portlet:namespace />length" size="3" type="text" value="<%= subject.length() + message.length() %>" />
 
 		<span style="font-size: xx-small;">(500 <bean:message key="characters-maximum" />)</span>
 	</td>
@@ -74,7 +74,7 @@ String message = ParamUtil.getString(request, "message");
 
 <br />
 
-<input type="submit" value="<bean:message key="send-text-message" />">
+<input type="submit" value="<bean:message key="send-text-message" />" />
 
 </form>
 

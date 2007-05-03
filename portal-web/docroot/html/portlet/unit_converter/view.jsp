@@ -101,7 +101,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 		<bean:message key="from" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />fromValue" size="30" type="text" value="<%= conversion.getFromValue() %>">
+		<input name="<portlet:namespace />fromValue" size="30" type="text" value="<%= conversion.getFromValue() %>" />
 
 		<select name="<portlet:namespace />fromId">
 			<c:if test="<%= type == 0 %>">
@@ -170,7 +170,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 		<bean:message key="to" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />to_value" size="30" type="text" value="<%= conversion.getToValue() %>">
+		<input name="<portlet:namespace />to_value" size="30" type="text" value="<%= conversion.getToValue() %>" />
 
 		<select name="<portlet:namespace />toId">
 			<c:if test="<%= type == 0 %>">
@@ -274,7 +274,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 
 <br />
 
-<input type="submit" value="<bean:message key="convert" />">
+<input type="submit" value="<bean:message key="convert" />" />
 
 </form>
 

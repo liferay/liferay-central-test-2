@@ -38,7 +38,7 @@ PasswordPolicyDisplayTerms displayTerms = (PasswordPolicyDisplayTerms)searchCont
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= PasswordPolicyDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
+		<input name="<portlet:namespace /><%= PasswordPolicyDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
 	</td>
 </tr>
 </table>
@@ -48,7 +48,7 @@ PasswordPolicyDisplayTerms displayTerms = (PasswordPolicyDisplayTerms)searchCont
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<input type="submit" value="<bean:message key="search" />">
+		<input type="submit" value="<bean:message key="search" />" />
 	</td>
 </tr>
 </table>

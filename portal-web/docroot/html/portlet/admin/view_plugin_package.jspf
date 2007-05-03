@@ -221,7 +221,7 @@ List screenshots = pluginPackage.getScreenshots();
 				Screenshot screenshot = (Screenshot)itr.next();
 			%>
 
-				<a href="<%= screenshot.getLargeImageURL() %>"><img align="left" src="<%= screenshot.getThumbnailURL() %>" width="120"></a>
+				<a href="<%= screenshot.getLargeImageURL() %>"><img align="left" src="<%= screenshot.getThumbnailURL() %>" width="120" /></a>
 
 			<%
 			}
@@ -235,9 +235,9 @@ List screenshots = pluginPackage.getScreenshots();
 
 <br />
 
-<input type="hidden" name="<portlet:namespace/>url" value="<%= pluginPackage.getArtifactURL() %>">
+<input type="hidden" name="<portlet:namespace/>url" value="<%= pluginPackage.getArtifactURL() %>" />
 
-<input type="button" value='<%=LanguageUtil.get(pageContext, "install")%>' onClick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy', '<%= downloadProgressId %>', '<%= currentURL %>');">
+<input type="button" value='<%=LanguageUtil.get(pageContext, "install")%>' onClick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy', '<%= downloadProgressId %>', '<%= currentURL %>');" />
 
 <liferay-ui:upload-progress
 	id="<%= downloadProgressId %>"

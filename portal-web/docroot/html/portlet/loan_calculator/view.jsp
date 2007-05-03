@@ -56,7 +56,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		<bean:message key="loan-amount" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />loanAmount" size="5" type="text" value="<%= integerFormat.format(loanAmount) %>">
+		<input name="<portlet:namespace />loanAmount" size="5" type="text" value="<%= integerFormat.format(loanAmount) %>" />
 	</td>
 </tr>
 <tr>
@@ -64,7 +64,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		<bean:message key="interest-rate" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />interest" size="5" type="text" value="<%= doubleFormat.format(interest) %>">
+		<input name="<portlet:namespace />interest" size="5" type="text" value="<%= doubleFormat.format(interest) %>" />
 	</td>
 </tr>
 <tr>
@@ -72,7 +72,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		<bean:message key="years" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />years" size="5" type="text" value="<%= years %>">
+		<input name="<portlet:namespace />years" size="5" type="text" value="<%= years %>" />
 	</td>
 </tr>
 <tr>
@@ -103,7 +103,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 <br />
 
-<input type="submit" value="<bean:message key="calculate" />">
+<input type="submit" value="<bean:message key="calculate" />" />
 
 </form>
 

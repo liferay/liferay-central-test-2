@@ -44,35 +44,35 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SAVE %>">
-<input name="<portlet:namespace />billingFirstName" type="hidden" value="<%= order.getBillingFirstName() %>">
-<input name="<portlet:namespace />billingLastName" type="hidden" value="<%= order.getBillingLastName() %>">
-<input name="<portlet:namespace />billingEmailAddress" type="hidden" value="<%= order.getBillingEmailAddress() %>">
-<input name="<portlet:namespace />billingCompany" type="hidden" value="<%= order.getBillingCompany() %>">
-<input name="<portlet:namespace />billingStreet" type="hidden" value="<%= order.getBillingStreet() %>">
-<input name="<portlet:namespace />billingCity" type="hidden" value="<%= order.getBillingCity() %>">
-<input name="<portlet:namespace />billingState" type="hidden" value="<%= order.getBillingState() %>">
-<input name="<portlet:namespace />billingZip" type="hidden" value="<%= order.getBillingZip() %>">
-<input name="<portlet:namespace />billingCountry" type="hidden" value="<%= order.getBillingCountry() %>">
-<input name="<portlet:namespace />billingPhone" type="hidden" value="<%= order.getBillingPhone() %>">
-<input name="<portlet:namespace />shipToBilling" type="hidden" value="<%= order.isShipToBilling() %>">
-<input name="<portlet:namespace />shippingFirstName" type="hidden" value="<%= order.getShippingFirstName() %>">
-<input name="<portlet:namespace />shippingLastName" type="hidden" value="<%= order.getShippingLastName() %>">
-<input name="<portlet:namespace />shippingEmailAddress" type="hidden" value="<%= order.getShippingEmailAddress() %>">
-<input name="<portlet:namespace />shippingCompany" type="hidden" value="<%= order.getShippingCompany() %>">
-<input name="<portlet:namespace />shippingStreet" type="hidden" value="<%= order.getShippingStreet() %>">
-<input name="<portlet:namespace />shippingCity" type="hidden" value="<%= order.getShippingCity() %>">
-<input name="<portlet:namespace />shippingState" type="hidden" value="<%= order.getShippingState() %>">
-<input name="<portlet:namespace />shippingZip" type="hidden" value="<%= order.getShippingZip() %>">
-<input name="<portlet:namespace />shippingCountry" type="hidden" value="<%= order.getShippingCountry() %>">
-<input name="<portlet:namespace />shippingPhone" type="hidden" value="<%= order.getShippingPhone() %>">
-<input name="<portlet:namespace />ccName" type="hidden" value="<%= order.getCcName() %>">
-<input name="<portlet:namespace />ccType" type="hidden" value="<%= order.getCcType() %>">
-<input name="<portlet:namespace />ccNumber" type="hidden" value="<%= order.getCcNumber() %>">
-<input name="<portlet:namespace />ccExpMonth" type="hidden" value="<%= order.getCcExpMonth() %>">
-<input name="<portlet:namespace />ccExpYear" type="hidden" value="<%= order.getCcExpYear() %>">
-<input name="<portlet:namespace />ccVerNumber" type="hidden" value="<%= order.getCcVerNumber() %>">
-<input name="<portlet:namespace />comments" type="hidden" value="<%= order.getComments() %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SAVE %>" />
+<input name="<portlet:namespace />billingFirstName" type="hidden" value="<%= order.getBillingFirstName() %>" />
+<input name="<portlet:namespace />billingLastName" type="hidden" value="<%= order.getBillingLastName() %>" />
+<input name="<portlet:namespace />billingEmailAddress" type="hidden" value="<%= order.getBillingEmailAddress() %>" />
+<input name="<portlet:namespace />billingCompany" type="hidden" value="<%= order.getBillingCompany() %>" />
+<input name="<portlet:namespace />billingStreet" type="hidden" value="<%= order.getBillingStreet() %>" />
+<input name="<portlet:namespace />billingCity" type="hidden" value="<%= order.getBillingCity() %>" />
+<input name="<portlet:namespace />billingState" type="hidden" value="<%= order.getBillingState() %>" />
+<input name="<portlet:namespace />billingZip" type="hidden" value="<%= order.getBillingZip() %>" />
+<input name="<portlet:namespace />billingCountry" type="hidden" value="<%= order.getBillingCountry() %>" />
+<input name="<portlet:namespace />billingPhone" type="hidden" value="<%= order.getBillingPhone() %>" />
+<input name="<portlet:namespace />shipToBilling" type="hidden" value="<%= order.isShipToBilling() %>" />
+<input name="<portlet:namespace />shippingFirstName" type="hidden" value="<%= order.getShippingFirstName() %>" />
+<input name="<portlet:namespace />shippingLastName" type="hidden" value="<%= order.getShippingLastName() %>" />
+<input name="<portlet:namespace />shippingEmailAddress" type="hidden" value="<%= order.getShippingEmailAddress() %>" />
+<input name="<portlet:namespace />shippingCompany" type="hidden" value="<%= order.getShippingCompany() %>" />
+<input name="<portlet:namespace />shippingStreet" type="hidden" value="<%= order.getShippingStreet() %>" />
+<input name="<portlet:namespace />shippingCity" type="hidden" value="<%= order.getShippingCity() %>" />
+<input name="<portlet:namespace />shippingState" type="hidden" value="<%= order.getShippingState() %>" />
+<input name="<portlet:namespace />shippingZip" type="hidden" value="<%= order.getShippingZip() %>" />
+<input name="<portlet:namespace />shippingCountry" type="hidden" value="<%= order.getShippingCountry() %>" />
+<input name="<portlet:namespace />shippingPhone" type="hidden" value="<%= order.getShippingPhone() %>" />
+<input name="<portlet:namespace />ccName" type="hidden" value="<%= order.getCcName() %>" />
+<input name="<portlet:namespace />ccType" type="hidden" value="<%= order.getCcType() %>" />
+<input name="<portlet:namespace />ccNumber" type="hidden" value="<%= order.getCcNumber() %>" />
+<input name="<portlet:namespace />ccExpMonth" type="hidden" value="<%= order.getCcExpMonth() %>" />
+<input name="<portlet:namespace />ccExpYear" type="hidden" value="<%= order.getCcExpYear() %>" />
+<input name="<portlet:namespace />ccVerNumber" type="hidden" value="<%= order.getCcVerNumber() %>" />
+<input name="<portlet:namespace />comments" type="hidden" value="<%= order.getComments() %>" />
 
 <liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="cart" />
@@ -438,8 +438,8 @@ for (int i = 0; itr.hasNext(); i++) {
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<input name="<portlet:namespace />itemIds" type="hidden" value="<%= itemIds %>">
-<input name="<portlet:namespace />couponIds" type="hidden" value="<%= cart.getCouponIds() %>">
+<input name="<portlet:namespace />itemIds" type="hidden" value="<%= itemIds %>" />
+<input name="<portlet:namespace />couponIds" type="hidden" value="<%= cart.getCouponIds() %>" />
 
 <br />
 
@@ -511,6 +511,6 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 
 <br />
 
-<input type="button" value='<%= shoppingPrefs.usePayPal() ? LanguageUtil.get(pageContext, "continue") : LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />continueCheckout();">
+<input type="button" value='<%= shoppingPrefs.usePayPal() ? LanguageUtil.get(pageContext, "continue") : LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />continueCheckout();" />
 
 </form>

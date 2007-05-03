@@ -68,9 +68,9 @@ for (int i = 0; i < zips.length; i++) {
 
 <bean:message key="city-or-zip-code" />
 
-<input name="where" size="23" type="text">
+<input name="where" size="23" type="text" />
 
-<input type="submit" value="<bean:message key="search" />">
+<input type="submit" value="<bean:message key="search" />" />
 
 </form>
 

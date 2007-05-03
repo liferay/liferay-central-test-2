@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/web_proxy/init.jsp" %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <table class="liferay-table">
 <tr>
@@ -33,7 +33,7 @@
 		<bean:message key="url" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />initUrl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= initUrl %>">
+		<input name="<portlet:namespace />initUrl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= initUrl %>" />
 	</td>
 </tr>
 <tr>
@@ -41,7 +41,7 @@
 		<bean:message key="scope" /> (<bean:message key="regex" />)
 	</td>
 	<td>
-		<input name="<portlet:namespace />scope" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= scope %>">
+		<input name="<portlet:namespace />scope" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= scope %>" />
 	</td>
 </tr>
 <tr>
@@ -49,7 +49,7 @@
 		<bean:message key="proxy-host" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />proxyHost" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyHost %>">
+		<input name="<portlet:namespace />proxyHost" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyHost %>" />
 	</td>
 </tr>
 <tr>
@@ -57,7 +57,7 @@
 		<bean:message key="proxy-port" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />proxyPort" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyPort %>">
+		<input name="<portlet:namespace />proxyPort" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyPort %>" />
 	</td>
 </tr>
 <tr>
@@ -77,7 +77,7 @@
 		<bean:message key="proxy-authentication-username" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />proxyAuthenticationUsername" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationUsername %>">
+		<input name="<portlet:namespace />proxyAuthenticationUsername" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationUsername %>" />
 	</td>
 </tr>
 <tr>
@@ -85,7 +85,7 @@
 		<bean:message key="proxy-authentication-password" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />proxyAuthenticationPassword" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationPassword %>">
+		<input name="<portlet:namespace />proxyAuthenticationPassword" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationPassword %>" />
 	</td>
 </tr>
 <tr>
@@ -93,7 +93,7 @@
 		<bean:message key="proxy-authentication-host" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />proxyAuthenticationHost" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationHost %>">
+		<input name="<portlet:namespace />proxyAuthenticationHost" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationHost %>" />
 	</td>
 </tr>
 <tr>
@@ -101,7 +101,7 @@
 		<bean:message key="proxy-authentication-domain" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />proxyAuthenticationDomain" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationDomain %>">
+		<input name="<portlet:namespace />proxyAuthenticationDomain" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationDomain %>" />
 	</td>
 </tr>
 <tr>
@@ -121,7 +121,7 @@
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

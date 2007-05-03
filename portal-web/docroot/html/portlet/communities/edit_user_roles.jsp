@@ -82,11 +82,11 @@ if (role != null) {
 </script>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>">
-<input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
+<input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />
 
 Assign Community roles to users.
 
@@ -174,8 +174,8 @@ Assign Community roles to users.
 		</c:if>
 	</c:when>
 	<c:otherwise>
-		<input name="<portlet:namespace />addUserIds" type="hidden" value="">
-		<input name="<portlet:namespace />removeUserIds" type="hidden" value="">
+		<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
+		<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
 
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
 			Step 2 of 2: Assign Community roles to users. <i>Current</i> signifies current users associated with the <i><%= role.getName() %></i> role. <i>Available</i> signifies all users associated with the <i><%= group.getName() %></i> community.
@@ -230,7 +230,7 @@ Assign Community roles to users.
 
 		<div class="separator"></div>
 
-		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
 		<br /><br />
 

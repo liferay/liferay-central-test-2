@@ -61,7 +61,7 @@ for (int i = 1; i <= 10; i++) {
 
 	<c:choose>
 		<c:when test='<%= type.equals("text") %>'>
-			<input name="<portlet:namespace /><%= fieldName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= fieldValue %>">
+			<input name="<portlet:namespace /><%= fieldName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= fieldValue %>" />
 		</c:when>
 		<c:when test='<%= type.equals("textarea") %>'>
 			<textarea name="<portlet:namespace /><%= fieldName %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= fieldValue %></textarea>
@@ -94,6 +94,6 @@ for (int i = 1; i <= 10; i++) {
 }
 %>
 
-<input type="submit" value="<bean:message key="send" />">
+<input type="submit" value="<bean:message key="send" />" />
 
 </form>

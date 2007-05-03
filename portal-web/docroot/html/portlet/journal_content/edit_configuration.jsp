@@ -113,9 +113,9 @@ type = ParamUtil.getString(request, "type", type);
 </script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />pages">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
 
 <table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />articles">
 <tr>
@@ -136,8 +136,8 @@ type = ParamUtil.getString(request, "type", type);
 <div class="separator"></div>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
 
 <liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-article-could-not-be-found" />
 

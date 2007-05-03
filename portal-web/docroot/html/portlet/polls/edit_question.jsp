@@ -83,11 +83,11 @@ if (choiceId > 0) {
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/edit_question" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveQuestion(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />questionId" type="hidden" value="<%= questionId %>">
-<input name="<portlet:namespace />choicesCount" type="hidden" value="<%= choicesCount %>">
-<input name="<portlet:namespace />choiceId" type="hidden" value="">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />questionId" type="hidden" value="<%= questionId %>" />
+<input name="<portlet:namespace />choicesCount" type="hidden" value="<%= choicesCount %>" />
+<input name="<portlet:namespace />choiceId" type="hidden" value="" />
 
 <liferay-ui:error exception="<%= QuestionChoiceException.class %>" message="please-enter-valid-choices" />
 <liferay-ui:error exception="<%= QuestionDescriptionException.class %>" message="please-enter-a-valid-description" />
@@ -184,14 +184,14 @@ if (choiceId > 0) {
 							<%= c %>.
 						</td>
 						<td>
-							<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_ID_PREFIX %><%= c %>" type="hidden" value="<%= c %>">
+							<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_ID_PREFIX %><%= c %>" type="hidden" value="<%= c %>" />
 
 							<liferay-ui:input-field model="<%= PollsChoice.class %>" field="description" fieldParam="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c %>" defaultValue="<%= choiceDesc %>" />
 						</td>
 
 						<c:if test="<%= choicesCount > 2 %>">
 							<td>
-								<input type="button" value="<bean:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceId.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);">
+								<input type="button" value="<bean:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceId.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);" />
 							</td>
 						</c:if>
 
@@ -204,7 +204,7 @@ if (choiceId > 0) {
 				</table>
 			</td>
 			<td valign="bottom">
-				<input type="button" value="<bean:message key="add-choice" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>'; submitForm(document.<portlet:namespace />fm);">
+				<input type="button" value="<bean:message key="add-choice" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>'; submitForm(document.<portlet:namespace />fm);" />
 			</td>
 		</tr>
 		</table>
@@ -233,9 +233,9 @@ if (choiceId > 0) {
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

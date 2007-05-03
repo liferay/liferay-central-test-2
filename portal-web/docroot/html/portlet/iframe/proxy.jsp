@@ -31,9 +31,9 @@ String[] hiddenVariablesArray = StringUtil.split(hiddenVariables, StringPool.SEM
 <html dir="<bean:message key="lang.dir" />">
 
 <head>
-	<meta content="no-cache" http-equiv="Cache-Control">
-	<meta content="no-cache" http-equiv="Pragma">
-	<meta content="0" http-equiv="Expires">
+	<meta content="no-cache" http-equiv="Cache-Control" />
+	<meta content="no-cache" http-equiv="Pragma" />
+	<meta content="0" http-equiv="Expires" />
 </head>
 
 <body onLoad="setTimeout('document.fm.submit()', 100);">
@@ -53,7 +53,7 @@ for (int i = 0; i < hiddenVariablesArray.length; i++) {
 	}
 %>
 
-	<input name="<%= hiddenKey %>" type="hidden" value="<%= hiddenValue %>">
+	<input name="<%= hiddenKey %>" type="hidden" value="<%= hiddenValue %>" />
 
 <%
 }
@@ -68,7 +68,7 @@ if (pos != -1) {
 }
 %>
 
-<input name="<%= userNameKey %>" type="hidden" value="<%= userNameValue %>">
+<input name="<%= userNameKey %>" type="hidden" value="<%= userNameValue %>" />
 
 <%
 String passwordKey = StringPool.BLANK;
@@ -81,7 +81,7 @@ if (pos != -1) {
 }
 %>
 
-<input name="<%= passwordKey %>" type="hidden" value="<%= passwordValue %>">
+<input name="<%= passwordKey %>" type="hidden" value="<%= passwordValue %>" />
 
 </form>
 

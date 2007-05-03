@@ -31,7 +31,7 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <liferay-ui:error exception="<%= NoSuchGroupException.class %>" message="the-community-could-not-be-found" />
 
@@ -141,6 +141,6 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

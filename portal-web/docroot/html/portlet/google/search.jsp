@@ -48,14 +48,14 @@ integerFormat.setMaximumFractionDigits(0);
 		return false;"
 >
 
-<input name="<portlet:namespace />args" size="30" type="text" value="<%= searchResult.getSearchQuery() %>">
+<input name="<portlet:namespace />args" size="30" type="text" value="<%= searchResult.getSearchQuery() %>" />
 
 <select name="<portlet:namespace />directive">
 	<option selected value="search"><bean:message key="search" /></option>
 	<option value="spell"><bean:message key="spell" /></option>
 </select>
 
-<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<bean:message key="search" />" type="image">
+<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<bean:message key="search" />" type="image" />
 
 </form>
 

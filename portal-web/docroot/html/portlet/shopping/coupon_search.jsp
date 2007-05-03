@@ -44,7 +44,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= CouponDisplayTerms.COUPON_ID %>" size="20" type="text" value="<%= displayTerms.getCouponId() %>">
+		<input name="<portlet:namespace /><%= CouponDisplayTerms.COUPON_ID %>" size="20" type="text" value="<%= displayTerms.getCouponId() %>" />
 	</td>
 	<td>
 		<select name="<%= CouponDisplayTerms.DISCOUNT_TYPE %>">
@@ -82,7 +82,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />">
+		<input type="submit" value="<bean:message key="search" />" />
 	</td>
 </tr>
 </table>

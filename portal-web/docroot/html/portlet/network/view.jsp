@@ -36,8 +36,8 @@ portletURL.setParameter("tabs1", tabs1);
 %>
 
 <form action="<portlet:renderURL><portlet:param name="struts_action" value="/network/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SEARCH %>">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SEARCH %>" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 
 <liferay-ui:tabs
 	names="dns-lookup,ftp,irc,ssh,vnc,whois"
@@ -62,7 +62,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<liferay-ui:error exception="<%= DNSLookup.class %>" message="please-enter-a-valid-host-name-or-ip" />
 
-		<input name="<portlet:namespace />domain" size="30" type="text" value="<%= domain %>"> <input type="submit" value="<bean:message key="search" />">
+		<input name="<portlet:namespace />domain" size="30" type="text" value="<%= domain %>" /> <input type="submit" value="<bean:message key="search" />" />
 
 		<c:if test="<%= dnsLookup != null %>">
 <pre>
@@ -181,7 +181,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<liferay-ui:error exception="<%= Whois.class %>" message="an-unexpected-error-occurred" />
 
-		<input name="<portlet:namespace />domain" size="30" type="text" value="<%= domain %>"> <input type="submit" value="<bean:message key="search" />">
+		<input name="<portlet:namespace />domain" size="30" type="text" value="<%= domain %>" /> <input type="submit" value="<bean:message key="search" />" />
 
 		<c:if test="<%= whois != null %>">
 <pre>

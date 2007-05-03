@@ -42,11 +42,11 @@
 							int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId.longValue(), message.getUserId()).getMessageCount();
 							String rank = MBUtil.getUserRank(portletSetup, LocaleUtil.toLanguageId(locale), posts);
 						%>
-							<img class="message-board-user-icon" src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>"><br />
+							<img class="message-board-user-icon" src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" /><br />
 
 							<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
 								<div>
-									<a href="javascript: Messaging.chat({toId:'<%= message.getUserId() %>', toName:'<%= message.getUserName() %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png"></a>
+									<a href="javascript: Messaging.chat({toId:'<%= message.getUserId() %>', toName:'<%= message.getUserName() %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png" /></a>
 								</div>
 							</c:if>
 
@@ -69,7 +69,7 @@
 						%>
 
 						<c:if test="<%= (user.getUserId() != user2.getUserId()) && PortletPermission.contains(permissionChecker, themeDisplay.getPlid(), ActionKeys.BAN_USER) %>">
-							<hr>
+							<hr />
 
 							<c:choose>
 								<c:when test="<%= MBBanLocalServiceUtil.hasBan(portletGroupId.longValue(), user2.getUserId()) %>">
@@ -80,7 +80,7 @@
 										<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
 									</portlet:actionURL>
 
-									<a href="<%= unbanUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unban_user.png"></a> <a href="<%= unbanUserURL.toString() %>"><bean:message key="unban-this-user" /></a>
+									<a href="<%= unbanUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unban_user.png" /></a> <a href="<%= unbanUserURL.toString() %>"><bean:message key="unban-this-user" /></a>
 								</c:when>
 								<c:otherwise>
 									<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banUserURL">
@@ -90,7 +90,7 @@
 										<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
 									</portlet:actionURL>
 
-									<a href="<%= banUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ban_user.png"></a> <a href="<%= banUserURL.toString() %>"><bean:message key="ban-this-user" /></a>
+									<a href="<%= banUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ban_user.png" /></a> <a href="<%= banUserURL.toString() %>"><bean:message key="ban-this-user" /></a>
 								</c:otherwise>
 							</c:choose>
 						</c:if>
@@ -346,7 +346,7 @@
 							if (StringUtil.endsWith(fileName, ".gif") || StringUtil.endsWith(fileName, ".jpg") || StringUtil.endsWith(fileName, ".png")) {
 						%>
 
-								<img src="<%= themeDisplay.getPathMain() %>/message_boards/get_message_attachment?messageId=<%= message.getMessageId() %>&attachment=<%= Http.encodeURL(fileName) %>">
+								<img src="<%= themeDisplay.getPathMain() %>/message_boards/get_message_attachment?messageId=<%= message.getMessageId() %>&attachment=<%= Http.encodeURL(fileName) %>" />
 
 								<br /><br />
 

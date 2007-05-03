@@ -32,7 +32,7 @@
 <div class="separator"></div>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <table class="liferay-table">
 <tr>
@@ -67,7 +67,7 @@
 				<bean:message key="title" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />title" type="text" value="<%= title %>">
+				<input name="<portlet:namespace />title" type="text" value="<%= title %>" />
 			</td>
 		</tr>
 		<tr>
@@ -75,7 +75,7 @@
 				<bean:message key="width" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />width" size="4" type="text" value="<%= width %>"> px
+				<input name="<portlet:namespace />width" size="4" type="text" value="<%= width %>" /> px
 			</td>
 		</tr>
 		<tr>
@@ -83,7 +83,7 @@
 				<bean:message key="height" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />height" size="4" type="text" value="<%= height %>"> px
+				<input name="<portlet:namespace />height" size="4" type="text" value="<%= height %>" /> px
 			</td>
 		</tr>
 		<tr>
@@ -122,7 +122,7 @@
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

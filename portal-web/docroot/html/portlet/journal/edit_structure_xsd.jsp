@@ -110,13 +110,13 @@ boolean useEditorApplet = editorType.equals("applet");
 
 <br /><br />
 
-<input type="button" value="<bean:message key="update" />" onClick="<portlet:namespace />updateStructureXsd();">
+<input type="button" value="<bean:message key="update" />" onClick="<portlet:namespace />updateStructureXsd();" />
 
 <c:if test="<%= !useEditorApplet %>">
-	<input type="button" value="<bean:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xsdContent);">
+	<input type="button" value="<bean:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xsdContent);" />
 </c:if>
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.close();">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.close();" />
 
 </form>
 

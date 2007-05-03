@@ -87,10 +87,10 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 			<bean:message key="title" />
 		</td>
 		<td>
-			<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>">
+			<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace />curLanguageId" type="hidden" value="<%= languageId %>">
+			<input name="<portlet:namespace />curLanguageId" type="hidden" value="<%= languageId %>" />
 
 			<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLookAndFeel();">
 
@@ -131,9 +131,9 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />updateLookAndFeel();">
+<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />updateLookAndFeel();" />
 
-<input type="button" value="<bean:message key="reset" />" onClick="<portlet:namespace />updateLookAndFeel('<%= Constants.RESET %>');">
+<input type="button" value="<bean:message key="reset" />" onClick="<portlet:namespace />updateLookAndFeel('<%= Constants.RESET %>');" />
 
 <br /><br />
 

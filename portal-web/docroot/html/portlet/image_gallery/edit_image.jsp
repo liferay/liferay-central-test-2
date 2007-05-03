@@ -48,7 +48,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 		</td>
 		<td>
 			<a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&large=1" target="_blank">
-			<img alt="<%= image.getDescription() %>" border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&small=1">
+			<img alt="<%= image.getDescription() %>" border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&small=1" />
 			</a>
 		</td>
 	</tr>

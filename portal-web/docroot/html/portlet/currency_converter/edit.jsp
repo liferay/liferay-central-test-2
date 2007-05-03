@@ -25,8 +25,8 @@
 <%@ include file="/html/portlet/currency_converter/init.jsp" %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/currency_converter/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />symbols" type="hidden" value="">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />symbols" type="hidden" value="" />
 
 <%
 
@@ -75,6 +75,6 @@ Collections.sort(rightList, new KeyValuePairComparator(false, true));
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />symbols.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions); submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />symbols.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions); submitForm(document.<portlet:namespace />fm);" />
 
 </form>

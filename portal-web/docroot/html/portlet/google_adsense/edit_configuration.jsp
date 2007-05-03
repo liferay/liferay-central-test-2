@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/google_adsense/init.jsp" %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <table class="liferay-table">
 <tr>
@@ -33,7 +33,7 @@
 		<bean:message key="ad-client" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />adClient" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= adClient %>">
+		<input name="<portlet:namespace />adClient" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= adClient %>" />
 	</td>
 </tr>
 <tr>
@@ -41,7 +41,7 @@
 		<bean:message key="ad-channel" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />adChannel" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= adChannel %>">
+		<input name="<portlet:namespace />adChannel" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= adChannel %>" />
 	</td>
 </tr>
 <tr>
@@ -94,7 +94,7 @@
 		<bean:message key="color-border" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />colorBorder" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorBorder %>">
+		<input name="<portlet:namespace />colorBorder" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorBorder %>" />
 	</td>
 </tr>
 <tr>
@@ -102,7 +102,7 @@
 		<bean:message key="color-background" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />colorBg" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorBg %>">
+		<input name="<portlet:namespace />colorBg" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorBg %>" />
 	</td>
 </tr>
 <tr>
@@ -110,7 +110,7 @@
 		<bean:message key="color-link" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />colorLink" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorLink %>">
+		<input name="<portlet:namespace />colorLink" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorLink %>" />
 	</td>
 </tr>
 <tr>
@@ -118,7 +118,7 @@
 		<bean:message key="color-text" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />colorText" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorText %>">
+		<input name="<portlet:namespace />colorText" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorText %>" />
 	</td>
 </tr>
 <tr>
@@ -126,14 +126,14 @@
 		<bean:message key="color-url" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />colorUrl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorUrl %>">
+		<input name="<portlet:namespace />colorUrl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorUrl %>" />
 	</td>
 </tr>
 </table>
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

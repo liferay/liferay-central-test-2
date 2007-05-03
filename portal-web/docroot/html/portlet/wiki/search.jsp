@@ -40,7 +40,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 %>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>">
+<input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
 
 <%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
 
@@ -120,9 +120,9 @@ for (int i = 0; i < results.getLength(); i++) {
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td>
-		<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
+		<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
 
-		<input type="submit" value="<bean:message key="search" />">
+		<input type="submit" value="<bean:message key="search" />" />
 	</td>
 	<td align="right">
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />

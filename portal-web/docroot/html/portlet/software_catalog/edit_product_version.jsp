@@ -71,9 +71,9 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_version" /><portlet:param name="productEntryId" value="<%= Long.toString(productEntryId) %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />productVersionId" type="hidden" value="<%= productVersionId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />productVersionId" type="hidden" value="<%= productVersionId %>" />
 
 <liferay-ui:tabs names="product-entry" />
 
@@ -169,8 +169,8 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 </fieldset>
 
 <div class="form-buttons">
-	<input type="submit" value="<bean:message key="save" />">
-	<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+	<input type="submit" value="<bean:message key="save" />" />
+	<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 </div>
 
 </form>

@@ -53,8 +53,8 @@ portletURL.setParameter("categoryId", categoryId);
 <c:choose>
 	<c:when test='<%= tabs1.equals("categories") %>'>
 		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>">
-		<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= StringUtil.merge(categoryIds) %>">
+		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
+		<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= StringUtil.merge(categoryIds) %>" />
 
 		<c:if test="<%= category != null %>">
 			<div class="breadcrumbs">
@@ -178,15 +178,15 @@ portletURL.setParameter("categoryId", categoryId);
 			<tr>
 				<c:if test="<%= showAddCategoryButton %>">
 					<td>
-						<input type="button" value="<bean:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
+						<input type="button" value="<bean:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
 					</td>
 				</c:if>
 
 				<c:if test="<%= results.size() > 0 %>">
 					<td>
-						<input name="<portlet:namespace />keywords" size="30" type="text">
+						<input name="<portlet:namespace />keywords" size="30" type="text" />
 
-						<input type="submit" value="<bean:message key="search-categories" />">
+						<input type="submit" value="<bean:message key="search-categories" />" />
 					</td>
 				</c:if>
 			</tr>
@@ -215,8 +215,8 @@ portletURL.setParameter("categoryId", categoryId);
 
 		<c:if test="<%= category != null %>">
 			<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
-			<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>">
-			<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryId %>">
+			<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
+			<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryId %>" />
 
 			<liferay-ui:tabs names="threads" />
 
@@ -341,15 +341,15 @@ portletURL.setParameter("categoryId", categoryId);
 				<tr>
 					<c:if test="<%= showAddMessageButton %>">
 						<td>
-							<input type="button" value="<bean:message key="post-new-thread" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
+							<input type="button" value="<bean:message key="post-new-thread" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
 						</td>
 					</c:if>
 
 					<c:if test="<%= results.size() > 0 %>">
 						<td>
-							<input name="<portlet:namespace />keywords" size="30" type="text">
+							<input name="<portlet:namespace />keywords" size="30" type="text" />
 
-							<input type="submit" value="<bean:message key="search-threads" />">
+							<input type="submit" value="<bean:message key="search-threads" />" />
 						</td>
 					</c:if>
 				</tr>

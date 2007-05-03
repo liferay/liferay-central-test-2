@@ -132,7 +132,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:actionURL>" autocomplete="off" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_render" value="/mail/view" /></portlet:renderURL>">
+<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_render" value="/mail/view" /></portlet:renderURL>">
 <input name="<portlet:namespace />originalId" type="hidden" value="<%= originalId %>" />
 <input name="<portlet:namespace />inReplyTo" type="hidden" value="<%= inReplyTo %>" />
 <input name="<portlet:namespace />references" type="hidden" value="<%= references %>" />
@@ -147,7 +147,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		<bean:message key="to" />
 	</td>
 	<td>
-		<input id="<portlet:namespace />to" name="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text">
+		<input id="<portlet:namespace />to" name="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" />
 	</td>
 </tr>
 <tr>
@@ -155,7 +155,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		<bean:message key="cc" />
 	</td>
 	<td>
-		<input id="<portlet:namespace />cc" name="<portlet:namespace />cc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= cc %>">
+		<input id="<portlet:namespace />cc" name="<portlet:namespace />cc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= cc %>" />
 	</td>
 </tr>
 <tr>
@@ -163,7 +163,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		<bean:message key="bcc" />
 	</td>
 	<td>
-		<input id="<portlet:namespace />bcc" name="<portlet:namespace />bcc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= bcc %>">
+		<input id="<portlet:namespace />bcc" name="<portlet:namespace />bcc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= bcc %>" />
 	</td>
 </tr>
 <tr>
@@ -171,7 +171,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		<bean:message key="subject" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= subject %>">
+		<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= subject %>" />
 	</td>
 </tr>
 </table>
@@ -197,11 +197,11 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 
 <br />
 
-<input type="button" value="<bean:message key="send" />" onClick="<portlet:namespace />sendMessage();">
+<input type="button" value="<bean:message key="send" />" onClick="<portlet:namespace />sendMessage();" />
 
-<input type="button" value="<bean:message key="save-draft" />" onclick="<portlet:namespace />saveMessage();">
+<input type="button" value="<bean:message key="save-draft" />" onclick="<portlet:namespace />saveMessage();" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/view" /></portlet:renderURL>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/mail/view" /></portlet:renderURL>';">
 
 <br /><br />
 

@@ -59,10 +59,10 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_org_labor" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrgLabor(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />orgLaborId" type="hidden" value="<%= orgLaborId %>">
-<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />orgLaborId" type="hidden" value="<%= orgLaborId %>" />
+<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
 
 <liferay-ui:tabs names="service" />
 
@@ -220,9 +220,9 @@ for (int i = 0; i < days.length; i++) {
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

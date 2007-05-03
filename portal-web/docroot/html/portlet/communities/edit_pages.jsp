@@ -277,19 +277,19 @@ viewPagesURL.setParameter("ownerId", ownerId);
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= selPlid %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
-<input name="<portlet:namespace />liveGroupId" type="hidden" value="<%= liveGroupId %>">
-<input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
-<input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>">
-<input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>">
-<input name="<portlet:namespace />ownerId" type="hidden" value="<%= ownerId %>">
-<input name="<portlet:namespace />privateLayout" type="hidden" value="<%= privateLayout %>">
-<input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browser") ? "false" : "true" %>'>
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= selPlid %>" />
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
+<input name="<portlet:namespace />liveGroupId" type="hidden" value="<%= liveGroupId %>" />
+<input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
+<input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>" />
+<input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>" />
+<input name="<portlet:namespace />ownerId" type="hidden" value="<%= ownerId %>" />
+<input name="<portlet:namespace />privateLayout" type="hidden" value="<%= privateLayout %>" />
+<input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browser") ? "false" : "true" %>' />
 
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
@@ -350,18 +350,18 @@ viewPagesURL.setParameter("ownerId", ownerId);
 	<c:choose>
 		<c:when test='<%= tabs1.equals("staging") %>'>
 			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || !selGroup.isStagingGroup()) && (pagesCount > 0)  %>">
-				<input type="button" value="<bean:message key="view-pages" />"  onClick="var stagingGroupWindow = window.open('<%= viewPagesURL%>'); void(''); stagingGroupWindow.focus();">
+				<input type="button" value="<bean:message key="view-pages" />"  onClick="var stagingGroupWindow = window.open('<%= viewPagesURL%>'); void(''); stagingGroupWindow.focus();" />
 			</c:if>
 
-			<input type="button" value="<bean:message key="publish-to-live" />"  onClick="<portlet:namespace />publishToLive();">
+			<input type="button" value="<bean:message key="publish-to-live" />"  onClick="<portlet:namespace />publishToLive();" />
 
-			<input type="button" value="<bean:message key="copy-from-live" />"  onClick="<portlet:namespace />copyFromLive();">
+			<input type="button" value="<bean:message key="copy-from-live" />"  onClick="<portlet:namespace />copyFromLive();" />
 
 			<br /><br />
 		</c:when>
 		<c:otherwise>
 			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || selGroup.isStagingGroup()) && (pagesCount > 0) %>">
-				<input type="button" value="<bean:message key="view-pages" />"  onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();">
+				<input type="button" value="<bean:message key="view-pages" />"  onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();" />
 
 				<br /><br />
 			</c:if>
@@ -544,7 +544,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 					%>
 
-					<input name="<portlet:namespace />curLanguageId" type="hidden" value="<%= languageId %>">
+					<input name="<portlet:namespace />curLanguageId" type="hidden" value="<%= languageId %>" />
 
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
@@ -558,7 +558,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 									<table class="liferay-table">
 									<tr>
 										<td>
-											<input name="<portlet:namespace />name" size="30" type="text" value="<%= name %>">
+											<input name="<portlet:namespace />name" size="30" type="text" value="<%= name %>" />
 										</td>
 										<td>
 											<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />savePage();">
@@ -586,7 +586,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 									<bean:message key="html-title" />
 								</td>
 								<td>
-									<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>">
+									<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>" />
 								</td>
 							</tr>
 							<tr>
@@ -640,7 +640,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 										<%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= group.getPathFriendlyURL(privateLayout, themeDisplay) %><%= parentFriendlyURL %>
 
-										<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>"> <%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
+										<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>" /> <%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
 									</td>
 								</tr>
 							</c:if>
@@ -657,7 +657,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 								<td>
 									<liferay-theme:layout-icon layout="<%= selLayout %>" />
 
-									<input name="<portlet:namespace />iconFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />iconImage.value = true; document.<portlet:namespace />fm.<portlet:namespace />iconImageCheckbox.checked = true;">
+									<input name="<portlet:namespace />iconFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />iconImage.value = true; document.<portlet:namespace />fm.<portlet:namespace />iconImageCheckbox.checked = true;" />
 								</td>
 							</tr>
 							<tr>
@@ -690,7 +690,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<br />
 
-					<input type="submit" value="<bean:message key="save" />">
+					<input type="submit" value="<bean:message key="save" />" />
 
 					<liferay-security:permissionsURL
 						modelResource="<%= Layout.class.getName() %>"
@@ -699,9 +699,9 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						var="permissionURL"
 					/>
 
-					<input type="button" value="<bean:message key="permissions" />" onClick="self.location = '<%= permissionURL %>';">
+					<input type="button" value="<bean:message key="permissions" />" onClick="self.location = '<%= permissionURL %>';" />
 
-					<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deletePage();">
+					<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deletePage();" />
 
 					<script type="text/javascript">
 						document.<portlet:namespace />fm.<portlet:namespace />name.focus();
@@ -743,8 +743,8 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					</script>
 				</c:when>
 				<c:when test='<%= tabs3.equals("children") %>'>
-					<input name="<portlet:namespace />parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>">
-					<input name="<portlet:namespace />layoutIds" type="hidden" value="">
+					<input name="<portlet:namespace />parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>" />
+					<input name="<portlet:namespace />layoutIds" type="hidden" value="" />
 
 					<%
 					String name = ParamUtil.getString(request, "name");
@@ -762,7 +762,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							<bean:message key="name" />
 						</td>
 						<td>
-							<input name="<portlet:namespace />name" size="30" type="text" value="<%= name %>">
+							<input name="<portlet:namespace />name" size="30" type="text" value="<%= name %>" />
 						</td>
 					</tr>
 					<tr>
@@ -802,7 +802,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<br />
 
-					<input type="submit" value="<bean:message key="add-page" />"><br />
+					<input type="submit" value="<bean:message key="add-page" />" /><br />
 
 					<script type="text/javascript">
 						document.<portlet:namespace />fm.<portlet:namespace />name.focus();
@@ -864,16 +864,16 @@ viewPagesURL.setParameter("ownerId", ownerId);
 								</select>
 							</td>
 							<td valign="top">
-								<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16"></a><br />
-								<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16"></a><br />
-								<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" vspace="2" width="16"></a><br />
+								<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
+								<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a><br />
+								<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" vspace="2" width="16" /></a><br />
 							</td>
 						</tr>
 						</table>
 
 						<br />
 
-						<input type="button" value="<bean:message key="update-display-order" />" onClick="<portlet:namespace />updateDisplayOrder();">
+						<input type="button" value="<bean:message key="update-display-order" />" onClick="<portlet:namespace />updateDisplayOrder();" />
 					</c:if>
 				</c:when>
 				<c:when test='<%= tabs3.equals("look-and-feel") %>'>
@@ -938,7 +938,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 											<td align="center">
 												<%= tableIteratorObj.getName() %> <input <%= selTheme.getThemeId().equals(tableIteratorObj.getThemeId()) ? "checked" : "" %> name="<portlet:namespace />themeId" type="radio" value="<%= tableIteratorObj.getThemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= tableIteratorObj.getThemeId() %>', '', '<%= sectionParam %>', '<%= sectionName %>');"><br />
 
-												<img border="0" hspace="0" src="<%= tableIteratorObj.getContextPath() %><%= tableIteratorObj.getImagesPath() %>/thumbnail.png" vspace="0">
+												<img border="0" hspace="0" src="<%= tableIteratorObj.getContextPath() %><%= tableIteratorObj.getImagesPath() %>/thumbnail.png" vspace="0" />
 											</td>
 										</tr>
 										</table>
@@ -964,7 +964,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 													<td align="center">
 														<%= tableIteratorObj.getName() %> <input <%= selColorScheme.getColorSchemeId().equals(tableIteratorObj.getColorSchemeId()) ? "checked" : "" %> name="<portlet:namespace />colorSchemeId" type="radio" value="<%= tableIteratorObj.getColorSchemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= tableIteratorObj.getColorSchemeId() %>', '<%= sectionParam %>', '<%= sectionName %>')"><br />
 
-														<img border="0" hspace="0" src="<%= selTheme.getContextPath() %><%= tableIteratorObj.getColorSchemeImagesPath() %>/thumbnail.png" vspace="0">
+														<img border="0" hspace="0" src="<%= selTheme.getContextPath() %><%= tableIteratorObj.getColorSchemeImagesPath() %>/thumbnail.png" vspace="0" />
 													</td>
 												</tr>
 												</table>
@@ -1055,7 +1055,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 									<td align="center">
 										<%= tableIteratorObj.getName() %> <input <%= selTheme.getThemeId().equals(tableIteratorObj.getThemeId()) ? "checked" : "" %> name="<portlet:namespace />themeId" type="radio" value="<%= tableIteratorObj.getThemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= tableIteratorObj.getThemeId() %>', '');"><br />
 
-										<img border="0" hspace="0" src="<%= tableIteratorObj.getContextPath() %><%= tableIteratorObj.getImagesPath() %>/thumbnail.png" vspace="0">
+										<img border="0" hspace="0" src="<%= tableIteratorObj.getContextPath() %><%= tableIteratorObj.getImagesPath() %>/thumbnail.png" vspace="0" />
 									</td>
 								</tr>
 								</table>
@@ -1075,7 +1075,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					<br /><br />
 
 					<c:if test="<%= layoutSet.isLogo() %>">
-						<img src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= layoutSet.getOwnerId() %>">
+						<img src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= layoutSet.getOwnerId() %>" />
 
 						<br /><br />
 					</c:if>
@@ -1086,7 +1086,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							<bean:message key="logo" />
 						</td>
 						<td>
-							<input name="<portlet:namespace />logoFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />logo.value = true; document.<portlet:namespace />fm.<portlet:namespace />logoCheckbox.checked = true;">
+							<input name="<portlet:namespace />logoFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />logo.value = true; document.<portlet:namespace />fm.<portlet:namespace />logoCheckbox.checked = true;" />
 						</td>
 					</tr>
 					<tr>
@@ -1101,7 +1101,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<br />
 
-					<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />updateLogo();">
+					<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />updateLogo();" />
 				</c:when>
 				<c:when test='<%= tabs3.equals("import-export") %>'>
 					<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
@@ -1112,7 +1112,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						<br /><br />
 
 						<div>
-							<input name="<portlet:namespace />importFileName" size="50" type="file">
+							<input name="<portlet:namespace />importFileName" size="50" type="file" />
 						</div>
 
 						<br />
@@ -1145,7 +1145,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 						<br />
 
-						<input type="button" value="<bean:message key="import" />" onClick="<portlet:namespace />importPages();">
+						<input type="button" value="<bean:message key="import" />" onClick="<portlet:namespace />importPages();" />
 
 						<div class="separator"></div>
 					</c:if>
@@ -1155,7 +1155,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					<br /><br />
 
 					<div>
-						<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar">
+						<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar" />
 					</div>
 
 					<br />
@@ -1188,7 +1188,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<br />
 
-					<input type="button" value="<bean:message key="export" />" onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>.value;">
+					<input type="button" value="<bean:message key="export" />" onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" /><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>.value;">
 				</c:when>
 				<c:when test='<%= tabs3.equals("virtual-host") %>'>
 					<bean:message key="enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url" />
@@ -1212,7 +1212,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							String publicVirtualHost = ParamUtil.getString(request, "publicVirtualHost", BeanParamUtil.getString(publicLayoutSet, request, "virtualHost"));
 							%>
 
-							<input name="<portlet:namespace />publicVirtualHost" size="50" type="text" value="<%= publicVirtualHost %>">
+							<input name="<portlet:namespace />publicVirtualHost" size="50" type="text" value="<%= publicVirtualHost %>" />
 						</td>
 					</tr>
 					<tr>
@@ -1229,7 +1229,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							String privateVirtualHost = ParamUtil.getString(request, "privateVirtualHost", BeanParamUtil.getString(privateLayoutSet, request, "virtualHost"));
 							%>
 
-							<input name="<portlet:namespace />privateVirtualHost" size="50" type="text" value="<%= privateVirtualHost %>">
+							<input name="<portlet:namespace />privateVirtualHost" size="50" type="text" value="<%= privateVirtualHost %>" />
 						</td>
 					</tr>
 					</table>
@@ -1254,7 +1254,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 								String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 								%>
 
-								<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
+								<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>" />
 							</td>
 						</tr>
 						</table>
@@ -1262,7 +1262,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<br />
 
-					<input type="submit" value="<bean:message key="save" />">
+					<input type="submit" value="<bean:message key="save" />" />
 				</c:when>
 				<c:when test='<%= tabs3.equals("sitemap") %>'>
 

@@ -40,7 +40,7 @@
 </script>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/rss/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <liferay-ui:error exception="<%= ValidatorException.class %>">
 
@@ -130,6 +130,6 @@ for (int i = 0; i < urls.length; i++) {
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

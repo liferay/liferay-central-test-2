@@ -92,9 +92,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 </script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveConfiguration(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 
 <liferay-ui:tabs
 	names="email-from,article-approval-denied-email,article-approval-granted-email,article-approval-requested-email,article-review-email"
@@ -121,7 +121,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="name" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
+				<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>" />
 			</td>
 		</tr>
 		<tr>
@@ -129,7 +129,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="address" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
+				<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>" />
 			</td>
 		</tr>
 		</table>
@@ -169,16 +169,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("article-approval-denied-email") %>'>
-						<input name="<portlet:namespace />emailArticleApprovalDeniedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleApprovalDeniedSubject %>">
+						<input name="<portlet:namespace />emailArticleApprovalDeniedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleApprovalDeniedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-approval-granted-email") %>'>
-						<input name="<portlet:namespace />emailArticleApprovalGrantedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleApprovalGrantedSubject %>">
+						<input name="<portlet:namespace />emailArticleApprovalGrantedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleApprovalGrantedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-approval-requested-email") %>'>
-						<input name="<portlet:namespace />emailArticleApprovalRequestedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleApprovalRequestedSubject %>">
+						<input name="<portlet:namespace />emailArticleApprovalRequestedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleApprovalRequestedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-review-email") %>'>
-						<input name="<portlet:namespace />emailArticleReviewSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleReviewSubject %>">
+						<input name="<portlet:namespace />emailArticleReviewSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleReviewSubject %>" />
 					</c:when>
 				</c:choose>
 			</td>
@@ -195,7 +195,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-				<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="">
+				<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="" />
 			</td>
 		</tr>
 		</table>
@@ -297,9 +297,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

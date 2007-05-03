@@ -76,7 +76,7 @@
 
 		<br />
 
-		<input maxlength="10" name="<portlet:namespace />symbol" size="10" type="text"> <input type="submit" value="<bean:message key="get-quote" />">
+		<input maxlength="10" name="<portlet:namespace />symbol" size="10" type="text" /> <input type="submit" value="<bean:message key="get-quote" />" />
 	</c:when>
 	<c:otherwise>
 
@@ -113,7 +113,7 @@
 		}
 		%>
 
-		<input maxlength="10" name="<portlet:namespace />symbol" size="10" type="text" value="<%= symbol %>">
+		<input maxlength="10" name="<portlet:namespace />symbol" size="10" type="text" value="<%= symbol %>" />
 
 		<select name="<portlet:namespace />time" onChange="submitForm(document.<portlet:namespace />fm);">
 			<option <%= (time == 1) ? "selected" : "" %> value="1">1 <bean:message key="day" /></option>
@@ -134,7 +134,7 @@
 			<option <%= (time == 20) ? "selected" : "" %> value="20"><bean:message key="all-data" /></option>
 		</select>
 
-		<input type="submit" value="<bean:message key="get-quote" />">
+		<input type="submit" value="<bean:message key="get-quote" />" />
 
 		<br /><br />
 
@@ -199,7 +199,7 @@
 				<table border="0" cellpadding="0" cellspacing="0" width="579">
 				<tr>
 					<td align="center">
-						<img src="<%= Http.getProtocol(request) %>://chart.bigcharts.com/bc3/quickchart/chart.asp?symb=<%= symbol %>&freq=<%= freq %>&time=<%= time %>">
+						<img src="<%= Http.getProtocol(request) %>://chart.bigcharts.com/bc3/quickchart/chart.asp?symb=<%= symbol %>&freq=<%= freq %>&time=<%= time %>" />
 					</td>
 				</tr>
 				</table>

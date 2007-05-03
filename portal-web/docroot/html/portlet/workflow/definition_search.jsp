@@ -41,10 +41,10 @@ DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.ge
 </tr>
 <tr>
 	<%--<td>
-		<input name="<portlet:namespace /><%= DefinitionDisplayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>">
+		<input name="<portlet:namespace /><%= DefinitionDisplayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>" />
 	</td>--%>
 	<td>
-		<input name="<portlet:namespace /><%= DefinitionDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
+		<input name="<portlet:namespace /><%= DefinitionDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
 	</td>
 </tr>
 </table>
@@ -60,7 +60,7 @@ DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.ge
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />">
+		<input type="submit" value="<bean:message key="search" />" />
 	</td>
 </tr>
 </table>

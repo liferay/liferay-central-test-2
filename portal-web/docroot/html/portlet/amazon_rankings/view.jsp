@@ -46,7 +46,7 @@ while (itr.hasNext()) {
 	<tr>
 		<td>
 			<a href="http://www.amazon.com/exec/obidos/ASIN/<%= amazonRankings.getISBN() %>" target="_blank">
-			<img border="0" src="<%= amazonRankings.getSmallImageURL() %>">
+			<img border="0" src="<%= amazonRankings.getSmallImageURL() %>" />
 			</a>
 		</td>
 		<td>

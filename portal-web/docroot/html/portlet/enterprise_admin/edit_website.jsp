@@ -45,11 +45,11 @@ int typeId = BeanParamUtil.getInteger(website, request, "typeId");
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_website" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveWebsite(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />websiteId" type="hidden" value="<%= String.valueOf(websiteId) %>">
-<input name="<portlet:namespace />className" type="hidden" value="<%= className %>">
-<input name="<portlet:namespace />classPK" type="hidden" value="<%= classPK %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />websiteId" type="hidden" value="<%= String.valueOf(websiteId) %>" />
+<input name="<portlet:namespace />className" type="hidden" value="<%= className %>" />
+<input name="<portlet:namespace />classPK" type="hidden" value="<%= classPK %>" />
 
 <liferay-ui:tabs names="website" />
 
@@ -97,9 +97,9 @@ int typeId = BeanParamUtil.getInteger(website, request, "typeId");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

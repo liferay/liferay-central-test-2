@@ -64,10 +64,10 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/edit_page" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>">
-<input name="<portlet:namespace />title" type="hidden" value="<%= title %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
+<input name="<portlet:namespace />title" type="hidden" value="<%= title %>" />
 
 <%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
 
@@ -94,7 +94,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 	<c:when test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
 
-		<input name="<portlet:namespace />content" type="hidden" value="">
+		<input name="<portlet:namespace />content" type="hidden" value="" />
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="content" />
@@ -125,9 +125,9 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

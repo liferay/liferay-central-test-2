@@ -61,8 +61,8 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 %>
 
 <form action="<portlet:renderURL><portlet:param name="struts_action" value="/polls_display/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>">
-<input name="<portlet:namespace />questionId" type="hidden" value="<%= question.getQuestionId() %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+<input name="<portlet:namespace />questionId" type="hidden" value="<%= question.getQuestionId() %>" />
 
 <liferay-ui:success key="vote_added" message="thank-you-for-your-vote" />
 
@@ -86,7 +86,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 
 			<tr>
 				<td>
-					<input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>">
+					<input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" />
 				</td>
 				<td>
 					<b><%= choice.getChoiceId() %>.</b>
@@ -104,7 +104,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 
 		<br />
 
-		<input type="button" value="<bean:message key="vote" />" onClick="submitForm(document.<portlet:namespace />fm);">
+		<input type="button" value="<bean:message key="vote" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/polls/view_question_results.jspf" %>

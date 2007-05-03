@@ -39,9 +39,9 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/workflow/edit_definition" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveDefinition(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />definitionId" type="hidden" value="<%= definitionId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />definitionId" type="hidden" value="<%= definitionId %>" />
 
 <liferay-ui:tabs names="definition" />
 
@@ -95,9 +95,9 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 
 <br />
 
-<input type="submit" value="<bean:message key="save-new-version" />">
+<input type="submit" value="<bean:message key="save-new-version" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

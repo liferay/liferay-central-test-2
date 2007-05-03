@@ -53,15 +53,15 @@ WindowState windowState = renderRequest.getWindowState();
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 <input name="<portlet:namespace />orderId" type="hidden" value="<%= orderId %>" />
 <input name="<portlet:namespace />emailType" type="hidden" value="" />
 <input name="<portlet:namespace />deleteOrderIds" type="hidden" value="<%= orderId %>" />
 
 <c:choose>
 	<c:when test="<%= windowState.equals(LiferayWindowState.POP_UP) %>">
-		<a href="<%= themeDisplay.getURLHome() %>"><img src="<%= themeDisplay.getCompanyLogo() %>"></a>
+		<a href="<%= themeDisplay.getURLHome() %>"><img src="<%= themeDisplay.getCompanyLogo() %>" /></a>
 
 		<br /><br />
 
@@ -590,18 +590,18 @@ for (int i = 0; itr.hasNext(); i++) {
 	<br />
 
 	<c:if test="<%= shoppingPrefs.usePayPal() %>">
-		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveOrder();">
+		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveOrder();" />
 	</c:if>
 
-	<input type="button" value="<bean:message key="invoice" />" onClick="window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="orderId" value="<%= orderId %>" /></portlet:renderURL>');">
+	<input type="button" value="<bean:message key="invoice" />" onClick="window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="orderId" value="<%= orderId %>" /></portlet:renderURL>');">
 
-	<input type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendOrderEmail() ? "" : "re") + "send-confirmation-email") %>' onClick="<portlet:namespace />sendEmail('confirmation');">
+	<input type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendOrderEmail() ? "" : "re") + "send-confirmation-email") %>' onClick="<portlet:namespace />sendEmail('confirmation');" />
 
-	<input type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendShippingEmail() ? "" : "re") + "send-shipping-email") %>' onClick="<portlet:namespace />sendEmail('shipping');">
+	<input type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendShippingEmail() ? "" : "re") + "send-shipping-email") %>' onClick="<portlet:namespace />sendEmail('shipping');" />
 
-	<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteOrder();">
+	<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteOrder();" />
 
-	<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+	<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 </c:if>
 
 </form>

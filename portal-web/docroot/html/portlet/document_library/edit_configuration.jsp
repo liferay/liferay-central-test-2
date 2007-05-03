@@ -49,11 +49,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 </script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />rootFolderId" type="hidden" value="<%= rootFolderId %>">
-<input name="<portlet:namespace />folderColumns" type="hidden" value="">
-<input name="<portlet:namespace />fileEntryColumns" type="hidden" value="">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />rootFolderId" type="hidden" value="<%= rootFolderId %>" />
+<input name="<portlet:namespace />folderColumns" type="hidden" value="" />
+<input name="<portlet:namespace />fileEntryColumns" type="hidden" value="" />
 
 <liferay-ui:error key="rootFolderId" message="please-enter-a-valid-root-folder" />
 
@@ -68,9 +68,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<a href="<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= WindowState.MAXIMIZED.toString() %>"><liferay-portlet:param name="struts_action" value="/document_library/view" /><liferay-portlet:param name="folderId" value="<%= rootFolderId %>" /></liferay-portlet:renderURL>" id="<portlet:namespace />rootFolderName">
 		<%= rootFolderName %></a>
 
-		<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><liferay-portlet:param name="struts_action" value="/document_library/select_folder" /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
+		<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><liferay-portlet:param name="struts_action" value="/document_library/select_folder" /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
 
-		<input type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeFolder();">
+		<input type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeFolder();" />
 	</td>
 </tr>
 <tr>
@@ -107,7 +107,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<bean:message key="folders-per-page" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>">
+		<input name="<portlet:namespace />foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>" />
 	</td>
 </tr>
 <tr>
@@ -185,7 +185,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<bean:message key="documents-per-page" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>">
+		<input name="<portlet:namespace />fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>" />
 	</td>
 </tr>
 <tr>
@@ -247,8 +247,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />folderColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFolderColumns); document.<portlet:namespace />fm.<portlet:namespace />fileEntryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFileEntryColumns); submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />folderColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFolderColumns); document.<portlet:namespace />fm.<portlet:namespace />fileEntryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFileEntryColumns); submitForm(document.<portlet:namespace />fm);" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>

@@ -463,10 +463,10 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				<table class="liferay-table" id="portlet-mail-toolbar-search">
 				<tr>
 					<td>
-						<input class="font-small" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
+						<input class="font-small" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text" />
 					</td>
 					<td>
-						<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="Search" type="image">
+						<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="Search" type="image" />
 					</td>
 					<td style="cursor: pointer; font-size: xx-small; text-align: right;">
 						<span onClick="showAdvancedSearch();"><bean:message key="more" /></span>
@@ -514,16 +514,16 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			</tr>
 			<tr>
 				<td>
-					<input name="<%= MailDisplayTerms.FROM %>" size="20" type="text">
+					<input name="<%= MailDisplayTerms.FROM %>" size="20" type="text" />
 				</td>
 				<td>
-					<input name="<%= MailDisplayTerms.TO %>" size="20" type="text">
+					<input name="<%= MailDisplayTerms.TO %>" size="20" type="text" />
 				</td>
 				<td>
-					<input name="<%= MailDisplayTerms.SUBJECT %>" size="20" type="text">
+					<input name="<%= MailDisplayTerms.SUBJECT %>" size="20" type="text" />
 				</td>
 				<td>
-					<input name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
+					<input name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text" />
 				</td>
 			</tr>
 			</table>
@@ -588,10 +588,10 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 					</select>
 				</td>
 				<td>
-					<input type="submit" value="<bean:message key="search" />">
+					<input type="submit" value="<bean:message key="search" />" />
 				</td>
 				<td>
-					<input type="button" value="<bean:message key="cancel" />" onClick="hideAdvancedSearch();">
+					<input type="button" value="<bean:message key="cancel" />" onClick="hideAdvancedSearch();" />
 				</td>
 			</tr>
 			</table>

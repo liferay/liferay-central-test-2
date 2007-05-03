@@ -51,8 +51,8 @@ portletURL.setParameter("categoryId", categoryId);
 %>
 
 <form action="<portlet:renderURL />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>">
-<input name="<portlet:namespace />cur" type="hidden" value="1">
+<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
+<input name="<portlet:namespace />cur" type="hidden" value="1" />
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
@@ -112,7 +112,7 @@ for (int i = 0; i < entries.size(); i++) {
 			<%= entry.getDescription() %>
 		</td>
 		<td>
-			<a href="http://content.liferay.com/4/images/<%= entry.getImageLarge() %>" target="_blank"><img border="0" src="http://content.liferay.com/4/images/<%= entry.getImageSmall() %>"></a>
+			<a href="http://content.liferay.com/4/images/<%= entry.getImageLarge() %>" target="_blank"><img border="0" src="http://content.liferay.com/4/images/<%= entry.getImageSmall() %>" /></a>
 		</td>
 	</tr>
 

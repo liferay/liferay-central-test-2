@@ -30,7 +30,7 @@
 
 <br /><br />
 
-<input name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="">
+<input name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="" />
 
 <br /><br />
 
@@ -40,11 +40,11 @@
 
 <br /><br />
 
-<input name="<portlet:namespace />remoteDeployWARName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="">
+<input name="<portlet:namespace />remoteDeployWARName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="" />
 
 <br /><br />
 
-<input type="button" value="<bean:message key="install" />" onClick="<%= downloadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy', '<%= downloadProgressId %>');">
+<input type="button" value="<bean:message key="install" />" onClick="<%= downloadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy', '<%= downloadProgressId %>');" />
 
 <liferay-ui:upload-progress
 	id="<%= downloadProgressId %>"

@@ -38,7 +38,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/my_account/create_account" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />
@@ -91,7 +91,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<input name="<portlet:namespace />autoUserId" type="hidden" value="1">
+				<input name="<portlet:namespace />autoUserId" type="hidden" value="1" />
 			</c:otherwise>
 		</c:choose>
 
@@ -116,9 +116,9 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<input name="<portlet:namespace />birthdayMonth" type="hidden" value="<%= Calendar.JANUARY %>">
-				<input name="<portlet:namespace />birthdayDay" type="hidden" value="1">
-				<input name="<portlet:namespace />birthdayYear" type="hidden" value="1970">
+				<input name="<portlet:namespace />birthdayMonth" type="hidden" value="<%= Calendar.JANUARY %>" />
+				<input name="<portlet:namespace />birthdayDay" type="hidden" value="1" />
+				<input name="<portlet:namespace />birthdayYear" type="hidden" value="1970" />
 			</c:otherwise>
 		</c:choose>
 
@@ -150,7 +150,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
 </form>
 

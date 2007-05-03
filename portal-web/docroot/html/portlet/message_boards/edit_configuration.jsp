@@ -75,9 +75,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 </script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 
 <liferay-ui:tabs
 	names="email-from,message-added-email,message-updated-email,thread-priorities,user-ranks"
@@ -102,7 +102,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="name" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
+				<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>" />
 			</td>
 		</tr>
 		<tr>
@@ -110,7 +110,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="address" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
+				<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>" />
 			</td>
 		</tr>
 		</table>
@@ -193,10 +193,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("message-added-email") %>'>
-						<input class="liferay-input-text" name="<portlet:namespace />emailMessageAddedSubjectPrefix" type="text" value="<%= emailMessageAddedSubjectPrefix %>">
+						<input class="liferay-input-text" name="<portlet:namespace />emailMessageAddedSubjectPrefix" type="text" value="<%= emailMessageAddedSubjectPrefix %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("message-updated-email") %>'>
-						<input class="liferay-input-text" name="<portlet:namespace />emailMessageUpdatedSubjectPrefix" type="text" value="<%= emailMessageUpdatedSubjectPrefix %>">
+						<input class="liferay-input-text" name="<portlet:namespace />emailMessageUpdatedSubjectPrefix" type="text" value="<%= emailMessageUpdatedSubjectPrefix %>" />
 					</c:when>
 				</c:choose>
 			</td>
@@ -387,13 +387,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 			<tr>
 				<td>
-					<input name="<portlet:namespace />priorityName<%= i %>" size="20" type="text" value="<%= name %>">
+					<input name="<portlet:namespace />priorityName<%= i %>" size="20" type="text" value="<%= name %>" />
 				</td>
 				<td>
-					<input name="<portlet:namespace />priorityImage<%= i %>" size="50" type="text" value="<%= image %>">
+					<input name="<portlet:namespace />priorityImage<%= i %>" size="50" type="text" value="<%= image %>" />
 				</td>
 				<td>
-					<input name="<portlet:namespace />priorityValue<%= i %>" size="4" type="text" value="<%= value %>">
+					<input name="<portlet:namespace />priorityValue<%= i %>" size="4" type="text" value="<%= value %>" />
 				</td>
 			</tr>
 
@@ -442,9 +442,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

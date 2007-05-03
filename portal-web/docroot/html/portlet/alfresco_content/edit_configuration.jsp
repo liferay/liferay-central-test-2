@@ -43,8 +43,8 @@ catch (Exception e) {
 
 <div class="portlet-alfresco-content">
 	<form action="<liferay-portlet:actionURL portletConfiguration="true" />" class="uni-form" id="<portlet:namespace />fm1" method="post" name="<portlet:namespace />fm1">
-	<input id="<portlet:namespace /><%= Constants.CMD %>" name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-	<input id="<portlet:namespace />uuid"  name="<portlet:namespace />uuid" type="hidden" value="<%= uuid %>">
+	<input id="<portlet:namespace /><%= Constants.CMD %>" name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<input id="<portlet:namespace />uuid"  name="<portlet:namespace />uuid" type="hidden" value="<%= uuid %>" />
 
 	<fieldset class="block-labels">
 		<div class="ctrl-holder">
@@ -56,7 +56,7 @@ catch (Exception e) {
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />password"><bean:message key="password" /></label>
 
-			<input class="text-input" id="<portlet:namespace />password" name="<portlet:namespace />password" type="password" value="<%= password %>">
+			<input class="text-input" id="<portlet:namespace />password" name="<portlet:namespace />password" type="password" value="<%= password %>" />
 		</div>
 
 		<div class="ctrl-holder">
@@ -312,7 +312,7 @@ catch (Exception e) {
 			<input class="text-input" id="<portlet:namespace />userId" name="<portlet:namespace />userId" type="text" value="<%= userId %>" />
 
 			<div class="button-holder">
-				<input type="submit" value="<bean:message key="search" />">
+				<input type="submit" value="<bean:message key="search" />" />
 			</div>
 		</div>
 	</fieldset>

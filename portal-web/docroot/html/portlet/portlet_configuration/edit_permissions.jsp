@@ -197,10 +197,10 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 </script>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />permissionsRedirect" type="hidden" value="">
-<input name="<portlet:namespace />cur" type="hidden" value="<%= cur %>">
-<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resource.getResourceId() %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />permissionsRedirect" type="hidden" value="" />
+<input name="<portlet:namespace />cur" type="hidden" value="<%= cur %>" />
+<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resource.getResourceId() %>" />
 
 <c:choose>
 	<c:when test="<%= Validator.isNull(modelResource) %>">
@@ -264,10 +264,10 @@ else if (modelResource.equals(Layout.class.getName())) {
 		int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 		%>
 
-		<input name="<portlet:namespace />userIds" type="hidden" value="<%= userIds %>">
-		<input name="<portlet:namespace />userIdsPos" type="hidden" value="<%= userIdsPos %>">
-		<input name="<portlet:namespace />userIdsPosValue" type="hidden" value="">
-		<input name="<portlet:namespace />userIdActionIds" type="hidden" value="">
+		<input name="<portlet:namespace />userIds" type="hidden" value="<%= userIds %>" />
+		<input name="<portlet:namespace />userIdsPos" type="hidden" value="<%= userIdsPos %>" />
+		<input name="<portlet:namespace />userIdsPosValue" type="hidden" value="" />
+		<input name="<portlet:namespace />userIdActionIds" type="hidden" value="" />
 
 		<c:choose>
 			<c:when test="<%= userIdsArray.length == 0 %>">
@@ -315,7 +315,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				<div class="separator"></div>
 
-				<input type="button" value="<bean:message key="update-permissions" />" onClick="<portlet:namespace />updateUserPermissions();">
+				<input type="button" value="<bean:message key="update-permissions" />" onClick="<portlet:namespace />updateUserPermissions();" />
 
 				<br /><br />
 
@@ -421,7 +421,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 						<input <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
 					</td>
 					<td align="right">
-						<input type="button" value="<bean:message key="finished" />" onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');">
+						<input type="button" value="<bean:message key="finished" />" onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');" />
 					</td>
 				</tr>
 				</table>
@@ -438,10 +438,10 @@ else if (modelResource.equals(Layout.class.getName())) {
 		int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 		%>
 
-		<input name="<portlet:namespace />organizationIds" type="hidden" value="<%= organizationIds %>">
-		<input name="<portlet:namespace />organizationIdsPos" type="hidden" value="<%= organizationIdsPos %>">
-		<input name="<portlet:namespace />organizationIdsPosValue" type="hidden" value="">
-		<input name="<portlet:namespace />organizationIdActionIds" type="hidden" value="">
+		<input name="<portlet:namespace />organizationIds" type="hidden" value="<%= organizationIds %>" />
+		<input name="<portlet:namespace />organizationIdsPos" type="hidden" value="<%= organizationIdsPos %>" />
+		<input name="<portlet:namespace />organizationIdsPosValue" type="hidden" value="" />
+		<input name="<portlet:namespace />organizationIdActionIds" type="hidden" value="" />
 
 		<c:choose>
 			<c:when test="<%= organizationIdsArray.length == 0 %>">
@@ -490,7 +490,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				<div class="separator"></div>
 
-				<input type="button" value="<bean:message key="update-permissions" />" onClick="<portlet:namespace />updateOrganizationPermissions();">
+				<input type="button" value="<bean:message key="update-permissions" />" onClick="<portlet:namespace />updateOrganizationPermissions();" />
 
 				<br /><br />
 
@@ -631,7 +631,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				<c:choose>
 					<c:when test='<%= rootOrganization %>'>
-						<input name="<portlet:namespace />organizationIntersection" type="hidden" value="0">
+						<input name="<portlet:namespace />organizationIntersection" type="hidden" value="0" />
 					</c:when>
 					<c:otherwise>
 						<table class="liferay-table">
@@ -660,7 +660,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 						<input <%= organizationIdsPos + 1 < organizationIdsArray.length ? "" : "disabled" %> type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos + 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
 					</td>
 					<td align="right">
-						<input type="button" value="<bean:message key="finished" />" onClick="<portlet:namespace />saveOrganizationPermissions(-1, '<%= organizationIdsArray[organizationIdsPos] %>');">
+						<input type="button" value="<bean:message key="finished" />" onClick="<portlet:namespace />saveOrganizationPermissions(-1, '<%= organizationIdsArray[organizationIdsPos] %>');" />
 					</td>
 				</tr>
 				</table>
@@ -675,10 +675,10 @@ else if (modelResource.equals(Layout.class.getName())) {
 		int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
 		%>
 
-		<input name="<portlet:namespace />userGroupIds" type="hidden" value="<%= userGroupIds %>">
-		<input name="<portlet:namespace />userGroupIdsPos" type="hidden" value="<%= userGroupIdsPos %>">
-		<input name="<portlet:namespace />userGroupIdsPosValue" type="hidden" value="">
-		<input name="<portlet:namespace />userGroupIdActionIds" type="hidden" value="">
+		<input name="<portlet:namespace />userGroupIds" type="hidden" value="<%= userGroupIds %>" />
+		<input name="<portlet:namespace />userGroupIdsPos" type="hidden" value="<%= userGroupIdsPos %>" />
+		<input name="<portlet:namespace />userGroupIdsPosValue" type="hidden" value="" />
+		<input name="<portlet:namespace />userGroupIdActionIds" type="hidden" value="" />
 
 		<c:choose>
 			<c:when test="<%= userGroupIdsArray.length == 0 %>">
@@ -719,7 +719,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				<div class="separator"></div>
 
-				<input type="button" value="<bean:message key="update-permissions" />" onClick="<portlet:namespace />updateUserGroupPermissions();">
+				<input type="button" value="<bean:message key="update-permissions" />" onClick="<portlet:namespace />updateUserGroupPermissions();" />
 
 				<br /><br />
 
@@ -822,7 +822,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 						<input <%= userGroupIdsPos + 1 < userGroupIdsArray.length ? "" : "disabled" %> type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos + 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
 					</td>
 					<td align="right">
-						<input type="button" value="<bean:message key="finished" />" onClick="<portlet:namespace />saveUserGroupPermissions(-1, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
+						<input type="button" value="<bean:message key="finished" />" onClick="<portlet:namespace />saveUserGroupPermissions(-1, '<%= userGroupIdsArray[userGroupIdsPos] %>');" />
 					</td>
 				</tr>
 				</table>
@@ -842,8 +842,8 @@ else if (modelResource.equals(Layout.class.getName())) {
 		}
 		%>
 
-		<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>">
-		<input name="<portlet:namespace />groupIdActionIds" type="hidden" value="">
+		<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
+		<input name="<portlet:namespace />groupIdActionIds" type="hidden" value="" />
 
 		<%
 		List permissions = PermissionLocalServiceUtil.getGroupPermissions(group.getGroupId(), resource.getResourceId());
@@ -899,7 +899,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td align="right">
-				<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveGroupPermissions();">
+				<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveGroupPermissions();" />
 			</td>
 		</tr>
 		</table>

@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/xsl_content/init.jsp" %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <liferay-ui:error key="xmlURL" message="please-enter-a-valid-xml-url" />
 <liferay-ui:error key="xslURL" message="please-enter-a-valid-xsl-url" />
@@ -37,7 +37,7 @@
 		<bean:message key="xml-url" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />xmlURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= xmlURL %>">
+		<input name="<portlet:namespace />xmlURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= xmlURL %>" />
 	</td>
 </tr>
 <tr>
@@ -45,13 +45,13 @@
 		<bean:message key="xsl-url" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />xslURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= xslURL %>">
+		<input name="<portlet:namespace />xslURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= xslURL %>" />
 	</td>
 </tr>
 </table>
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

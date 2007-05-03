@@ -46,7 +46,7 @@
 		%>
 
 		<form action="<portlet:actionURL><portlet:param name="struts_action" value="/login/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-		<input name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>">
+		<input name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>" />
 
 		<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
 		<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />
@@ -60,7 +60,7 @@
 				<bean:message key="login" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />login" style="width: 120px;" type="text" value="<%= login %>">
+				<input name="<portlet:namespace />login" style="width: 120px;" type="text" value="<%= login %>" />
 			</td>
 		</tr>
 		<tr>
@@ -68,7 +68,7 @@
 				<bean:message key="password" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />password" style="width: 120px;" type="password" value="<%= password %>">
+				<input name="<portlet:namespace />password" style="width: 120px;" type="password" value="<%= password %>" />
 			</td>
 		</tr>
 
@@ -97,10 +97,10 @@
 
 		<br />
 
-		<input type="submit" value="<bean:message key="sign-in" />">
+		<input type="submit" value="<bean:message key="sign-in" />" />
 
 		<c:if test="<%= company.isStrangers() %>">
-			<input type="button" value="<bean:message key="create-account" />" onClick="self.location = '<%= themeDisplay.getURLCreateAccount() %>';">
+			<input type="button" value="<bean:message key="create-account" />" onClick="self.location = '<%= themeDisplay.getURLCreateAccount() %>';" />
 		</c:if>
 
 		<c:if test="<%= company.isSendPassword() %>">

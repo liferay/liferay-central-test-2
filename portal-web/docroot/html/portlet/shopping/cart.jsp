@@ -98,9 +98,9 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/cart" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCart(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>">
-<input name="<portlet:namespace />itemIds" type="hidden" value="">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+<input name="<portlet:namespace />itemIds" type="hidden" value="" />
 
 <liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="cart" />
@@ -510,7 +510,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 		<bean:message key="coupon-code" />:
 	</td>
 	<td>
-		<input name="<portlet:namespace />couponIds" size="30" style="text-transform: uppercase;" type="text" value="<%= cart.getCouponIds() %>">
+		<input name="<portlet:namespace />couponIds" size="30" style="text-transform: uppercase;" type="text" value="<%= cart.getCouponIds() %>" />
 
 		<c:if test="<%= coupon != null %>">
 			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= coupon.getCouponId() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();" style="font-size: xx-small;">(<bean:message key="description" />)</a>
@@ -541,7 +541,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 if (shoppingPrefs.usePayPal()) {
 %>
 
-	<img src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_paypal.png">
+	<img src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_paypal.png" />
 
 	<br /><br />
 
@@ -551,7 +551,7 @@ else if (!shoppingPrefs.usePayPal() && (ccTypes.length > 0)) {
 	for (int i = 0; i < ccTypes.length; i++) {
 %>
 
-		<img src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_<%= ccTypes[i] %>.png">
+		<img src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_<%= ccTypes[i] %>.png" />
 
 <%
 	}
@@ -563,10 +563,10 @@ else if (!shoppingPrefs.usePayPal() && (ccTypes.length > 0)) {
 }
 %>
 
-<input type="button" value="<bean:message key="update-cart" />" onClick="<portlet:namespace />updateCart();">
+<input type="button" value="<bean:message key="update-cart" />" onClick="<portlet:namespace />updateCart();" />
 
-<input type="button" value="<bean:message key="empty-cart" />" onClick="<portlet:namespace />emptyCart();">
+<input type="button" value="<bean:message key="empty-cart" />" onClick="<portlet:namespace />emptyCart();" />
 
-<input type="button" value="<bean:message key="checkout" />" onClick="<portlet:namespace />checkout();">
+<input type="button" value="<bean:message key="checkout" />" onClick="<portlet:namespace />checkout();" />
 
 </form>

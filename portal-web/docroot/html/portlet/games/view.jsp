@@ -34,7 +34,7 @@ portletURL.setParameter("tabs1", tabs1);
 %>
 
 <form action="<portlet:renderURL><portlet:param name="struts_action" value="/games/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 
 <liferay-ui:tabs
 	names="hangman,minesweeper"
@@ -65,7 +65,7 @@ portletURL.setParameter("tabs1", tabs1);
 		}
 		%>
 
-		<input name="<portlet:namespace />level" type="hidden" value="<%= level %>">
+		<input name="<portlet:namespace />level" type="hidden" value="<%= level %>" />
 
 		<select onChange="document.<portlet:namespace />fm.<portlet:namespace />level.value = this[this.selectedIndex].value; submitForm(document.<portlet:namespace />fm);">
 			<option value="beginner"><bean:message key="beginner" /></option>
@@ -73,7 +73,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<option <%= level.equals("expert") ? "selected" : "" %> value="expert"><bean:message key="expert" /></option>
 		</select>
 
-		<input type="submit" value="<bean:message key="new-game" />">
+		<input type="submit" value="<bean:message key="new-game" />" />
 
 		<br /><br />
 

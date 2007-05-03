@@ -38,7 +38,7 @@
 <c:if test="<%= editable %>">
 	<br />
 
-	<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUser('sms');"><br />
+	<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUser('sms');" /><br />
 </c:if>
 
 <br />

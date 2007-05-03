@@ -124,13 +124,13 @@ else {
 
 <br /><br />
 
-<input type="button" value="<bean:message key="update" />" onClick="<portlet:namespace />updateTemplateXsl();">
+<input type="button" value="<bean:message key="update" />" onClick="<portlet:namespace />updateTemplateXsl();" />
 
 <c:if test="<%= !useEditorApplet %>">
-	<input type="button" value="<bean:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xslContent);">
+	<input type="button" value="<bean:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xslContent);" />
 </c:if>
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.close();">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.close();" />
 
 </form>
 

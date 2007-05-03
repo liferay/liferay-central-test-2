@@ -36,14 +36,14 @@
 		return false;"
 >
 
-<input name="<portlet:namespace />args" size="30" type="text">
+<input name="<portlet:namespace />args" size="30" type="text" />
 
 <select name="<portlet:namespace />directive">
 	<option value="search"><bean:message key="search" /></option>
 	<option value="spell"><bean:message key="spell" /></option>
 </select>
 
-<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<bean:message key="search" />" type="image">
+<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<bean:message key="search" />" type="image" />
 
 </form>
 

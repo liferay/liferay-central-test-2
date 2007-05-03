@@ -42,8 +42,8 @@ portletURL.setParameter("tabs1", tabs1);
 </script>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />deleteOrderIds" type="hidden" value="">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />deleteOrderIds" type="hidden" value="" />
 
 <%
 OrderSearch searchContainer = new OrderSearch(renderRequest, portletURL);
@@ -82,7 +82,7 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 
 	<div class="separator"></div>
 
-	<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteOrders();">
+	<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteOrders();" />
 
 	<br /><br />
 

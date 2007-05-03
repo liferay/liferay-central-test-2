@@ -36,10 +36,10 @@ String keywords = ParamUtil.getString(request, "keywords");
 %>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>">
-<input name="<portlet:namespace />breadcrumbsMessageId" type="hidden" value="<%= breadcrumbsMessageId %>">
-<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryIds %>">
-<input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>">
+<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
+<input name="<portlet:namespace />breadcrumbsMessageId" type="hidden" value="<%= breadcrumbsMessageId %>" />
+<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryIds %>" />
+<input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>" />
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
@@ -120,9 +120,9 @@ for (int i = 0; i < results.getLength(); i++) {
 }
 %>
 
-<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
+<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
 
-<input type="submit" value="<bean:message key="search" />">
+<input type="submit" value="<bean:message key="search" />" />
 
 <br /><br />
 

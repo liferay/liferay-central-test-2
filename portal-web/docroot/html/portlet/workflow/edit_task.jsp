@@ -79,11 +79,11 @@ Map errors = (Map)SessionErrors.get(renderRequest, EditTaskAction.class.getName(
 </script>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/workflow/edit_task" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />taskCmd" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />taskId" type="hidden" value="<%= taskId %>">
-<input name="<portlet:namespace />instanceId" type="hidden" value="<%= instanceId %>">
-<input name="<portlet:namespace />taskTransition" type="hidden" value="">
+<input name="<portlet:namespace />taskCmd" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />taskId" type="hidden" value="<%= taskId %>" />
+<input name="<portlet:namespace />instanceId" type="hidden" value="<%= instanceId %>" />
+<input name="<portlet:namespace />taskTransition" type="hidden" value="" />
 
 <liferay-ui:tabs names="task" />
 
@@ -174,13 +174,13 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 								defaultValue="<%= cal %>"
 							/>
 
-							<input name="<portlet:namespace /><%= displayName %>" type="hidden" value="">
+							<input name="<portlet:namespace /><%= displayName %>" type="hidden" value="" />
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_EMAIL) || type.equals(WorkflowTaskFormElement.TYPE_NUMBER) || type.equals(WorkflowTaskFormElement.TYPE_PHONE) || type.equals(WorkflowTaskFormElement.TYPE_TEXT) %>">
-							<input name="<portlet:namespace /><%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= value %>">
+							<input name="<portlet:namespace /><%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= value %>" />
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_PASSWORD) %>">
-							<input name="<portlet:namespace /><%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value="<%= value %>">
+							<input name="<portlet:namespace /><%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value="<%= value %>" />
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_RADIO) %>">
 
@@ -257,12 +257,12 @@ for (int i = 0; i < taskTransitions.size(); i++) {
 	String taskTransition = (String)taskTransitions.get(i);
 %>
 
-	<input type="button" name="<%= LanguageUtil.get(pageContext, taskTransition) %>" value="<%= LanguageUtil.get(pageContext, taskTransition) %>" onClick="<portlet:namespace />saveTask('<%= taskTransition %>');">
+	<input type="button" name="<%= LanguageUtil.get(pageContext, taskTransition) %>" value="<%= LanguageUtil.get(pageContext, taskTransition) %>" onClick="<portlet:namespace />saveTask('<%= taskTransition %>');" />
 
 <%
 }
 %>
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>

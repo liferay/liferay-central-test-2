@@ -114,15 +114,15 @@ String key = PropsUtil.get(PropsUtil.GOOGLE_MAPS_LICENSE);
 		<form name="<portlet:namespace />fm">
 
 		<c:if test="<%= mapInputEnabled %>">
-			<input name="<portlet:namespace />mapAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= mapAddress %>" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getMap(); return false; }">
+			<input name="<portlet:namespace />mapAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= mapAddress %>" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getMap(); return false; }" />
 
-			<input type="button" value="<bean:message key="get-map" />" onClick="<portlet:namespace />getMap();">
+			<input type="button" value="<bean:message key="get-map" />" onClick="<portlet:namespace />getMap();" />
 		</c:if>
 
 		<c:if test="<%= directionsInputEnabled %>">
-			<input name="<portlet:namespace />directionsAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= directionsAddress %>" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getDirections(); return false; }">
+			<input name="<portlet:namespace />directionsAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= directionsAddress %>" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getDirections(); return false; }" />
 
-			<input type="button" value="<bean:message key="get-directions" />" onClick="<portlet:namespace />getDirections();">
+			<input type="button" value="<bean:message key="get-directions" />" onClick="<portlet:namespace />getDirections();" />
 		</c:if>
 
 		<c:if test="<%= mapInputEnabled || directionsInputEnabled %>">

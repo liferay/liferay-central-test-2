@@ -132,7 +132,7 @@ for (int i = 0; i < rowsCount; i++) {
 		%>
 
 		<td>
-			<input name="<portlet:namespace />fieldsQuantity<%= i %>" type="text" size="4" value="<%= fieldsQuantity %>">
+			<input name="<portlet:namespace />fieldsQuantity<%= i %>" type="text" size="4" value="<%= fieldsQuantity %>" />
 		</td>
 	</tr>
 
@@ -144,8 +144,8 @@ for (int i = 0; i < rowsCount; i++) {
 
 <br />
 
-<input type="button" value="<bean:message key="update" />" onClick="<portlet:namespace />updateItemQuantities();">
+<input type="button" value="<bean:message key="update" />" onClick="<portlet:namespace />updateItemQuantities();" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.close();">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.close();" />
 
 </form>

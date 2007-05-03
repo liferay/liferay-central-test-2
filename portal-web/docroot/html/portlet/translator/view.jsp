@@ -70,7 +70,7 @@ if (translation == null) {
 	<option <%= (translation.getTranslationId().equals("es_en")) ? "selected" : "" %> value="es_en"><bean:message key="es_en" /></option>
 </select>
 
-<input type="submit" value="<bean:message key="translate" />">
+<input type="submit" value="<bean:message key="translate" />" />
 
 </form>
 

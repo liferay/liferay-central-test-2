@@ -187,13 +187,13 @@ int tabIndex = 1;
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveStructure(); return false;">
-<input name="scroll" type="hidden" value="">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
-<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>">
-<input name="<portlet:namespace />move_up" type="hidden" value="">
-<input name="<portlet:namespace />move_depth" type="hidden" value="">
+<input name="scroll" type="hidden" value="" />
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
+<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>" />
+<input name="<portlet:namespace />move_up" type="hidden" value="" />
+<input name="<portlet:namespace />move_depth" type="hidden" value="" />
 
 <liferay-ui:tabs names="structure" />
 
@@ -276,9 +276,9 @@ int tabIndex = 1;
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 <br /><br />
 
@@ -286,14 +286,14 @@ int tabIndex = 1;
 
 <liferay-ui:error exception="<%= StructureXsdException.class %>" message="please-enter-a-valid-xsd" />
 
-<input name="<portlet:namespace />xsd" type="hidden" value="">
+<input name="<portlet:namespace />xsd" type="hidden" value="" />
 
-<input type="button" value="<bean:message key="add-row" />" onClick="<portlet:namespace />editElement('add', -1);">
+<input type="button" value="<bean:message key="add-row" />" onClick="<portlet:namespace />editElement('add', -1);" />
 
-<input type="button" value="<bean:message key="launch-editor" />" onClick="var structureXsdWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>', 'structureXsd', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); structureXsdWindow.focus();">
+<input type="button" value="<bean:message key="launch-editor" />" onClick="var structureXsdWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>', 'structureXsd', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); structureXsdWindow.focus();">
 
 <c:if test="<%= structure != null %>">
-	<input type="button" value="<bean:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_structure?groupId=<%= structure.getGroupId() %>&structureId=<%= structure.getStructureId() %>';">
+	<input type="button" value="<bean:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_structure?groupId=<%= structure.getGroupId() %>&structureId=<%= structure.getStructureId() %>';" />
 </c:if>
 
 <br />

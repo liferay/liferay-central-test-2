@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/google_maps/init.jsp" %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <table class="liferay-table">
 <tr>
@@ -33,7 +33,7 @@
 		<bean:message key="map-address" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />mapAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= mapAddress %>">
+		<input name="<portlet:namespace />mapAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= mapAddress %>" />
 	</td>
 </tr>
 <tr>
@@ -54,7 +54,7 @@
 		<bean:message key="directions-address" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />directionsAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= directionsAddress %>">
+		<input name="<portlet:namespace />directionsAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= directionsAddress %>" />
 	</td>
 </tr>
 <tr>
@@ -75,14 +75,14 @@
 		<bean:message key="height" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />height" size="4" type="text" value="<%= height %>"> px
+		<input name="<portlet:namespace />height" size="4" type="text" value="<%= height %>" /> px
 	</td>
 </tr>
 </table>
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

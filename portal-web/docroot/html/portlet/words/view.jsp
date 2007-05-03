@@ -32,18 +32,18 @@ String[] words = (String[])request.getAttribute(WebKeys.WORDS_LIST);
 %>
 
 <form action="<portlet:renderURL><portlet:param name="struts_action" value="/words/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SEARCH %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SEARCH %>" />
 
 <liferay-ui:error exception="<%= ScramblerException.class %>" message="please-enter-a-word-that-is-at-least-3-characters-long" />
 
-<input name="<portlet:namespace />word" type="text" value="<%= word %>">
+<input name="<portlet:namespace />word" type="text" value="<%= word %>" />
 
 <select name="<portlet:namespace />scramble">
 	<option <%= scramble ? "selected" : "" %> value="1"><bean:message key="scramble" /></option>
 	<option <%= !scramble ? "selected" : "" %> value="0"><bean:message key="unscramble" /></option>
 </select>
 
-<input type="submit" value="<bean:message key="search" />">
+<input type="submit" value="<bean:message key="search" />" />
 
 <c:if test="<%= (words != null) && (words.length > 0) %>">
 	<br /><br />

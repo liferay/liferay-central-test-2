@@ -71,7 +71,7 @@
 						<bean:message key="base-provider-url" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />baseProviderURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_PROVIDER_URL)) %>'>
+						<input name="<portlet:namespace />baseProviderURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_PROVIDER_URL)) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -79,7 +79,7 @@
 						<bean:message key="base-dn" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />baseDN" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_DN)) %>'>
+						<input name="<portlet:namespace />baseDN" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_DN)) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -87,7 +87,7 @@
 						<bean:message key="principal" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />principal" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_PRINCIPAL)) %>'>
+						<input name="<portlet:namespace />principal" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_PRINCIPAL)) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -95,7 +95,7 @@
 						<bean:message key="credentials" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />credentials" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_CREDENTIALS)) %>'>
+						<input name="<portlet:namespace />credentials" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_CREDENTIALS)) %>' />
 					</td>
 				</tr>
 				</table>
@@ -154,14 +154,14 @@
 						</select>
 					</td>
 					<td>
-						<input type="button" value="<bean:message key="reset-values" />" onClick="<portlet:namespace />updateDefaultLdap();">
+						<input type="button" value="<bean:message key="reset-values" />" onClick="<portlet:namespace />updateDefaultLdap();" />
 					</td>
 				</tr>
 				</table>
 
 				<br />
 
-				<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateLdap');">
+				<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateLdap');" />
 			</c:when>
 			<c:otherwise>
 				<table class="liferay-table">
@@ -205,7 +205,7 @@
 
 				<br />
 
-				<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateSecurity');">
+				<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateSecurity');" />
 			</c:otherwise>
 		</c:choose>
 	</c:when>
@@ -234,7 +234,7 @@
 
 		<br /><br />
 
-		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateDefaultGroupsAndRoles');">
+		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateDefaultGroupsAndRoles');" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("reserved-screen-names") %>'>
 		<bean:message key="enter-one-screen-name-per-line-to-reserve-the-screen-name" />
@@ -253,7 +253,7 @@
 
 		<br /><br />
 
-		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateReservedUsers');">
+		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateReservedUsers');" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("mail-host-names") %>'>
 		<%= LanguageUtil.format(pageContext, "enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x", company.getMx(), false) %>
@@ -264,7 +264,7 @@
 
 		<br /><br />
 
-		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateMailHostNames');">
+		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateMailHostNames');" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("email-notifications") %>'>
 		<script type="text/javascript">
@@ -350,10 +350,10 @@
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("account-created-notification") %>'>
-								<input name="<portlet:namespace />emailUserAddedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailUserAddedSubject %>">
+								<input name="<portlet:namespace />emailUserAddedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailUserAddedSubject %>" />
 							</c:when>
 							<c:when test='<%= tabs3.equals("password-changed-notification") %>'>
-								<input name="<portlet:namespace />emailPasswordSentSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailPasswordSentSubject %>">
+								<input name="<portlet:namespace />emailPasswordSentSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailPasswordSentSubject %>" />
 							</c:when>
 						</c:choose>
 					</td>
@@ -370,7 +370,7 @@
 					<td>
 						<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-						<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="">
+						<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="" />
 					</td>
 				</tr>
 				</table>
@@ -484,7 +484,7 @@
 						<bean:message key="name" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
+						<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>" />
 					</td>
 				</tr>
 				<tr>
@@ -492,7 +492,7 @@
 						<bean:message key="address" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
+						<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>" />
 					</td>
 				</tr>
 				</table>
@@ -501,7 +501,7 @@
 
 		<br />
 
-		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveEmails();">
+		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveEmails();" />
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/admin/settings_general.jspf" %>

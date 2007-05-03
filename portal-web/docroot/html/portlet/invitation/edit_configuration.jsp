@@ -51,7 +51,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 </script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveConfiguration(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <liferay-ui:error key="emailMessageBody" message="please-enter-a-valid-body" />
 <liferay-ui:error key="emailMessageSubject" message="please-enter-a-valid-subject" />
@@ -62,7 +62,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 		<bean:message key="subject" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />emailMessageSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageSubject %>">
+		<input name="<portlet:namespace />emailMessageSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageSubject %>" />
 	</td>
 </tr>
 <tr>
@@ -77,7 +77,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 	<td>
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-		<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="">
+		<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="" />
 	</td>
 </tr>
 </table>
@@ -125,7 +125,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
 </form>
 

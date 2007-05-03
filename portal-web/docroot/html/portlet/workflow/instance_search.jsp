@@ -47,16 +47,16 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 </tr>
 <tr>
 	<%--<td>
-		<input name="<portlet:namespace /><%= InstanceDisplayTerms.INSTANCE_ID %>" size="20" type="text" value="<%= displayTerms.getInstanceIdString() %>">
+		<input name="<portlet:namespace /><%= InstanceDisplayTerms.INSTANCE_ID %>" size="20" type="text" value="<%= displayTerms.getInstanceIdString() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>">
+		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>" />
 	</td>--%>
 	<td>
-		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>">
+		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_VERSION %>" size="20" type="text" value="<%= displayTerms.getDefinitionVersion() %>">
+		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_VERSION %>" size="20" type="text" value="<%= displayTerms.getDefinitionVersion() %>" />
 	</td>
 </tr>
 </table>
@@ -105,7 +105,7 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />">
+		<input type="submit" value="<bean:message key="search" />" />
 	</td>
 </tr>
 </table>

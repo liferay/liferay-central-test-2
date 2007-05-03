@@ -36,8 +36,8 @@ portletURL.setParameter("tabs1", tabs1);
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/news/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 
 <liferay-ui:tabs
 	names="news-selections,display-settings"
@@ -53,8 +53,8 @@ portletURL.setParameter("tabs1", tabs1);
 		Set selFeeds = NewsUtil.getSelFeeds(prefs);
 		%>
 
-		<input name="<portlet:namespace />categoryName" type="hidden" value="<%= categoryName %>">
-		<input name="<portlet:namespace />feeds" type="hidden" value="">
+		<input name="<portlet:namespace />categoryName" type="hidden" value="<%= categoryName %>" />
+		<input name="<portlet:namespace />feeds" type="hidden" value="" />
 
 		<c:choose>
 			<c:when test="<%= Validator.isNull(categoryName) %>">
@@ -146,9 +146,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<br />
 
-				<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listChecked(document.<portlet:namespace />fm); submitForm(document.<portlet:namespace />fm);">
+				<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listChecked(document.<portlet:namespace />fm); submitForm(document.<portlet:namespace />fm);" />
 
-				<input type="button" value="<bean:message key="back" />" onClick="self.location = '<portlet:actionURL><portlet:param name="struts_action" value="/news/edit" /></portlet:actionURL>';">
+				<input type="button" value="<bean:message key="back" />" onClick="self.location = '<portlet:actionURL><portlet:param name="struts_action" value="/news/edit" /></portlet:actionURL>';" />
 			</c:otherwise>
 		</c:choose>
 	</c:when>
@@ -158,7 +158,7 @@ portletURL.setParameter("tabs1", tabs1);
 		Set selFeeds = NewsUtil.getSelFeeds(prefs);
 		%>
 
-		<input name="<portlet:namespace />feeds" type="hidden" value="">
+		<input name="<portlet:namespace />feeds" type="hidden" value="" />
 
 		<bean:message key="set-the-display-order-of-news-feeds" />
 
@@ -188,9 +188,9 @@ portletURL.setParameter("tabs1", tabs1);
 				</select>
 			</td>
 			<td valign="top">
-				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16"></a><br />
-				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16"></a><br />
-				<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" vspace="2" width="16"></a><br />
+				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
+				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a><br />
+				<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" vspace="2" width="16" /></a><br />
 			</td>
 		</tr>
 		</table>
@@ -222,7 +222,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br />
 
-		<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel); submitForm(document.<portlet:namespace />fm);">
+		<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel); submitForm(document.<portlet:namespace />fm);" />
 	</c:when>
 </c:choose>
 

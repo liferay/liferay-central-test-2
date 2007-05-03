@@ -111,6 +111,6 @@ catch (Exception e) {
 
 <br /><br />
 
-<input type="submit" value="<bean:message key="generate" />">
+<input type="submit" value="<bean:message key="generate" />" />
 
 </form>

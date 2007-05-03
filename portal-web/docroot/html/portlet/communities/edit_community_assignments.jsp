@@ -82,11 +82,11 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 </script>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
@@ -111,8 +111,8 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 	<c:when test='<%= tabs1.equals("users") %>'>
 		<c:choose>
 			<c:when test="<%= selectedUser == null %>">
-				<input name="<portlet:namespace />addUserIds" type="hidden" value="">
-				<input name="<portlet:namespace />removeUserIds" type="hidden" value="">
+				<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
+				<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
 
 				<liferay-ui:tabs
 					names="current,available"
@@ -151,7 +151,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 				<div class="separator"></div>
 
-				<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+				<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
 				<br /><br />
 
@@ -219,9 +219,9 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 			</c:when>
 			<c:otherwise>
-				<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= selectedUser.getUserId() %>">
-				<input name="<portlet:namespace />addRoleIds" type="hidden" value="">
-				<input name="<portlet:namespace />removeRoleIds" type="hidden" value="">
+				<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= selectedUser.getUserId() %>" />
+				<input name="<portlet:namespace />addRoleIds" type="hidden" value="" />
+				<input name="<portlet:namespace />removeRoleIds" type="hidden" value="" />
 
 				<%= LanguageUtil.get(pageContext, "edit-community-roles-for-user")%>: <%= selectedUser.getFullName() %>
 
@@ -266,7 +266,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 					<div class="separator"></div>
 
-					<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRole('<%= updateRoleAssignmentsURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+					<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRole('<%= updateRoleAssignmentsURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
 					<br /><br />
 
@@ -296,8 +296,8 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		</c:choose>
 	</c:when>
 	<c:when test='<%= tabs1.equals("organizations") || tabs1.equals("locations") %>'>
-		<input name="<portlet:namespace />addOrganizationIds" type="hidden" value="">
-		<input name="<portlet:namespace />removeOrganizationIds" type="hidden" value="">
+		<input name="<portlet:namespace />addOrganizationIds" type="hidden" value="" />
+		<input name="<portlet:namespace />removeOrganizationIds" type="hidden" value="" />
 
 		<liferay-ui:tabs
 			names="current,available"
@@ -345,7 +345,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 		<div class="separator"></div>
 
-		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateGroupOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateGroupOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
 		<br /><br />
 
@@ -389,8 +389,8 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("user-groups") %>'>
-		<input name="<portlet:namespace />addUserGroupIds" type="hidden" value="">
-		<input name="<portlet:namespace />removeUserGroupIds" type="hidden" value="">
+		<input name="<portlet:namespace />addUserGroupIds" type="hidden" value="" />
+		<input name="<portlet:namespace />removeUserGroupIds" type="hidden" value="" />
 
 		<liferay-ui:tabs
 			names="current,available"
@@ -429,7 +429,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 		<div class="separator"></div>
 
-		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUserGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUserGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
 		<br /><br />
 

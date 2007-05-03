@@ -156,11 +156,11 @@ if (Validator.isNotNull(modelResource)) {
 </script>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />permissionsRedirect" type="hidden" value="">
-<input name="<portlet:namespace />cur" type="hidden" value="<%= cur %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= group.getGroupId() %>">
-<input name="<portlet:namespace />resourceId" type="hidden" value='<%= (resource != null) ? String.valueOf(resource.getResourceId()) : "" %>'>
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />permissionsRedirect" type="hidden" value="" />
+<input name="<portlet:namespace />cur" type="hidden" value="<%= cur %>" />
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= group.getGroupId() %>" />
+<input name="<portlet:namespace />resourceId" type="hidden" value='<%= (resource != null) ? String.valueOf(resource.getResourceId()) : "" %>' />
 
 Assign permissions to users.
 
@@ -175,10 +175,10 @@ Assign permissions to users.
 		int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 		%>
 
-		<input name="<portlet:namespace />userIds" type="hidden" value="<%= userIds %>">
-		<input name="<portlet:namespace />userIdsPos" type="hidden" value="<%= userIdsPos %>">
-		<input name="<portlet:namespace />userIdsPosValue" type="hidden" value="">
-		<input name="<portlet:namespace />userIdActionIds" type="hidden" value="">
+		<input name="<portlet:namespace />userIds" type="hidden" value="<%= userIds %>" />
+		<input name="<portlet:namespace />userIdsPos" type="hidden" value="<%= userIdsPos %>" />
+		<input name="<portlet:namespace />userIdsPosValue" type="hidden" value="" />
+		<input name="<portlet:namespace />userIdActionIds" type="hidden" value="" />
 
 		<c:choose>
 			<c:when test="<%= userIdsArray.length == 0 %>">
@@ -241,7 +241,7 @@ Assign permissions to users.
 
 				<div class="separator"></div>
 
-				<input type="button" value="<bean:message key="update-permissions" />" onClick="<portlet:namespace />updateUserPermissions();">
+				<input type="button" value="<bean:message key="update-permissions" />" onClick="<portlet:namespace />updateUserPermissions();" />
 
 				<br /><br />
 
@@ -347,7 +347,7 @@ Assign permissions to users.
 						<input <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
 					</td>
 					<td align="right">
-						<input type="button" value="<bean:message key="finished" />" onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');">
+						<input type="button" value="<bean:message key="finished" />" onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');" />
 					</td>
 				</tr>
 				</table>
@@ -374,7 +374,7 @@ Assign permissions to users.
 			portletURL.setParameter("editUserPermissions", "1");
 			%>
 
-			<input type="button" value="<bean:message key="next" />" onClick="self.location = '<%= portletURL.toString() %>';">
+			<input type="button" value="<bean:message key="next" />" onClick="self.location = '<%= portletURL.toString() %>';" />
 
 			<%
 			portletURL.setParameter("editUserPermissions", String.valueOf(editUserPermissions));

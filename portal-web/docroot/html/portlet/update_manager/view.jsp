@@ -78,9 +78,9 @@ editServerURL.setParameter("redirect", redirect);
 </script>
 
 <form method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />referer" type="hidden" value="<%=redirect%>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%=redirect%>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />referer" type="hidden" value="<%=redirect%>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%=redirect%>" />
 
 
 <%
@@ -234,7 +234,7 @@ try {
 	   <c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
 			<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
 	   </c:if>
-	   <input type="button" value="<bean:message key="refresh" />"  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');">
+	   <input type="button" value="<bean:message key="refresh" />"  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');" />
 
 	   <br />
 

@@ -62,9 +62,9 @@ else {
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" enctype="multipart/form-data" onSubmit="<portlet:namespace />saveProductEntry(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />productEntryId" type="hidden" value="<%= productEntryId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />productEntryId" type="hidden" value="<%= productEntryId %>" />
 
 <liferay-ui:tabs names="product" />
 
@@ -171,7 +171,7 @@ else {
 		<%
 		String mainImageName = SCProductEntryImpl.MAIN_IMAGE_NAME;
 		%>
-		<input name="<portlet:namespace />screenshot_update_<%=mainImageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<input name="<portlet:namespace />screenshot_update_<%=mainImageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
 		<%
 		if (productEntry != null) {
 			String imageId = productEntry.getImageId(mainImageName);
@@ -197,7 +197,7 @@ else {
 			String imageName = Integer.toString(i);
 		%>
  			<br clear="all"/>
-			<input name="<portlet:namespace />screenshot_update_<%=imageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+			<input name="<portlet:namespace />screenshot_update_<%=imageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
 		<%
 			if (productEntry != null) {
 				String imageId = productEntry.getImageId(imageName);
@@ -260,9 +260,9 @@ else {
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

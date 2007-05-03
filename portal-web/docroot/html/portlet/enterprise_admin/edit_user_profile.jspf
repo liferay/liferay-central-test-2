@@ -283,9 +283,9 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<input name="<portlet:namespace />birthdayMonth" type="hidden" value="<%= Calendar.JANUARY %>">
-				<input name="<portlet:namespace />birthdayDay" type="hidden" value="1">
-				<input name="<portlet:namespace />birthdayYear" type="hidden" value="1970">
+				<input name="<portlet:namespace />birthdayMonth" type="hidden" value="<%= Calendar.JANUARY %>" />
+				<input name="<portlet:namespace />birthdayDay" type="hidden" value="1" />
+				<input name="<portlet:namespace />birthdayYear" type="hidden" value="1970" />
 			</c:otherwise>
 		</c:choose>
 
@@ -320,14 +320,14 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				<bean:message key="organization" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>">
+				<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
 
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" /></portlet:renderURL>" id="<portlet:namespace />organizationName">
 				<%= organizationName %>
 				</a>
 
 				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
-					<input type="button" value="<bean:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();">
+					<input type="button" value="<bean:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();">
 
 					<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED)) %>">
 						<input <%= (organizationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeOrganizationButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeOrganization();">
@@ -340,14 +340,14 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				<bean:message key="location" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />locationId" type="hidden" value="<%= locationId %>">
+				<input name="<portlet:namespace />locationId" type="hidden" value="<%= locationId %>" />
 
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_location" /><portlet:param name="organizationId" value="<%= String.valueOf(locationId) %>" /></portlet:renderURL>" id="<portlet:namespace />locationName">
 				<%= locationName %>
 				</a>
 
 				<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && editable %>">
-					<input type="button" value="<bean:message key="select" />" onClick="var locationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_location" /></portlet:renderURL>&<portlet:namespace />parentOrganizationId=' + document.<portlet:namespace />fm.<portlet:namespace />organizationId.value, 'location', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); locationWindow.focus();">
+					<input type="button" value="<bean:message key="select" />" onClick="var locationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/enterprise_admin/select_location" /></portlet:renderURL>&<portlet:namespace />parentOrganizationId=' + document.<portlet:namespace />fm.<portlet:namespace />organizationId.value, 'location', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); locationWindow.focus();">
 
 					<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED)) %>">
 						<input <%= (locationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeLocationButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeLocation();">
@@ -368,7 +368,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 
 	<c:if test="<%= user2 != null %>">
 		<td align="center" valign="top">
-			<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getUserId() %>"><br />
+			<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getUserId() %>" /><br />
 
 			<c:if test="<%= editable %>">
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" /></portlet:renderURL>" style="font-size: xx-small;"><bean:message key="change" /></a>
@@ -381,7 +381,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 <c:if test="<%= editable %>">
 	<br />
 
-	<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUser('<%= user2 == null ? Constants.ADD : Constants.UPDATE %>');"><br />
+	<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUser('<%= user2 == null ? Constants.ADD : Constants.UPDATE %>');" /><br />
 </c:if>
 
 <c:if test="<%= user2 != null %>">

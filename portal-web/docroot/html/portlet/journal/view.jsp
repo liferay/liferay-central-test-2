@@ -70,7 +70,7 @@ portletURL.setParameter("tabs1", tabs1);
 </script>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 
 <liferay-ui:tabs
 	names="articles,structures,templates,recent"
@@ -79,8 +79,8 @@ portletURL.setParameter("tabs1", tabs1);
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("articles") %>'>
-		<input name="<portlet:namespace />deleteArticleIds" type="hidden" value="">
-		<input name="<portlet:namespace />expireArticleIds" type="hidden" value="">
+		<input name="<portlet:namespace />deleteArticleIds" type="hidden" value="" />
+		<input name="<portlet:namespace />expireArticleIds" type="hidden" value="" />
 
 		<%
 		String orderByCol = ParamUtil.getString(request, "orderByCol");
@@ -129,12 +129,12 @@ portletURL.setParameter("tabs1", tabs1);
 			<div class="separator"></div>
 
 			<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
-				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 			</c:if>
 
-			<input type="button" value="<bean:message key="expire" />" onClick="<portlet:namespace />expireArticles();">
+			<input type="button" value="<bean:message key="expire" />" onClick="<portlet:namespace />expireArticles();" />
 
-			<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteArticles();">
+			<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteArticles();" />
 
 			<br /><br />
 
@@ -196,7 +196,7 @@ portletURL.setParameter("tabs1", tabs1);
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("structures") %>'>
-		<input name="<portlet:namespace />deleteStructureIds" type="hidden" value="">
+		<input name="<portlet:namespace />deleteStructureIds" type="hidden" value="" />
 
 		<liferay-ui:error exception="<%= RequiredStructureException.class %>" message="required-structures-could-not-be-deleted" />
 
@@ -232,10 +232,10 @@ portletURL.setParameter("tabs1", tabs1);
 			<div class="separator"></div>
 
 			<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_STRUCTURE) %>">
-				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 			</c:if>
 
-			<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteStructures();">
+			<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteStructures();" />
 
 			<br /><br />
 
@@ -291,7 +291,7 @@ portletURL.setParameter("tabs1", tabs1);
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("templates") %>'>
-		<input name="<portlet:namespace />deleteTemplateIds" type="hidden" value="">
+		<input name="<portlet:namespace />deleteTemplateIds" type="hidden" value="" />
 
 		<liferay-ui:error exception="<%= RequiredTemplateException.class %>" message="required-templates-could-not-be-deleted" />
 
@@ -327,10 +327,10 @@ portletURL.setParameter("tabs1", tabs1);
 			<div class="separator"></div>
 
 			<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_TEMPLATE) %>">
-				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 			</c:if>
 
-			<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteTemplates();">
+			<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteTemplates();" />
 
 			<br /><br />
 

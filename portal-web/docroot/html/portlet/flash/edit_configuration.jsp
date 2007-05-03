@@ -58,7 +58,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <table class="liferay-table">
 <tr>
@@ -66,7 +66,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 		<bean:message key="movie" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />movie" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= movie %>">
+		<input name="<portlet:namespace />movie" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= movie %>" />
 	</td>
 </tr>
 <tr>
@@ -89,7 +89,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

@@ -62,12 +62,12 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy_assignments" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="">
-<input name="<portlet:namespace />passwordPolicyId" type="hidden" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="" />
+<input name="<portlet:namespace />passwordPolicyId" type="hidden" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="password-policies" />
@@ -85,8 +85,8 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("users") %>'>
-		<input name="<portlet:namespace />addUserIds" type="hidden" value="">
-		<input name="<portlet:namespace />removeUserIds" type="hidden" value="">
+		<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
+		<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
 
 		<liferay-ui:tabs
 			names="current,available"
@@ -125,7 +125,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 		<div class="separator"></div>
 
-		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updatePasswordPolicyUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updatePasswordPolicyUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
 		<br /><br />
 
@@ -162,8 +162,8 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("organizations") || tabs2.equals("locations") %>'>
-		<input name="<portlet:namespace />addOrganizationIds" type="hidden" value="">
-		<input name="<portlet:namespace />removeOrganizationIds" type="hidden" value="">
+		<input name="<portlet:namespace />addOrganizationIds" type="hidden" value="" />
+		<input name="<portlet:namespace />removeOrganizationIds" type="hidden" value="" />
 
 		<liferay-ui:tabs
 			names="current,available"
@@ -211,7 +211,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 		<div class="separator"></div>
 
-		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updatePasswordPolicyOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updatePasswordPolicyOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
 		<br /><br />
 

@@ -29,7 +29,7 @@
 
 <br /><br />
 
-<input name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+<input name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
 
 <br /><br />
 
@@ -39,11 +39,11 @@
 
 <br /><br />
 
-<input name="<portlet:namespace />deploymentContext" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;">
+<input name="<portlet:namespace />deploymentContext" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" />
 
 <br /><br />
 
-<input type="button" value="<bean:message key="install" />" onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('localDeploy', '<%= uploadProgressId %>');">
+<input type="button" value="<bean:message key="install" />" onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('localDeploy', '<%= uploadProgressId %>');" />
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"

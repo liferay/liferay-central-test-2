@@ -107,7 +107,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="cart" />
@@ -438,7 +438,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 	for (int i = 0; i < ccTypes.length; i++) {
 	%>
 
-		<img src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_<%= ccTypes[i] %>.png">
+		<img src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_<%= ccTypes[i] %>.png" />
 
 	<%
 	}
@@ -526,7 +526,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 
 	<br />
 
-	<img src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_ver_number.png">
+	<img src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_ver_number.png" />
 
 	<br /><br />
 
@@ -550,7 +550,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 
 <br /><br />
 
-<input type="button" value="<bean:message key="continue" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="continue" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

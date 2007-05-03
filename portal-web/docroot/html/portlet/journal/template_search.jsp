@@ -44,13 +44,13 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= TemplateDisplayTerms.TEMPLATE_ID %>" size="20" type="text" value="<%= displayTerms.getTemplateId() %>">
+		<input name="<portlet:namespace /><%= TemplateDisplayTerms.TEMPLATE_ID %>" size="20" type="text" value="<%= displayTerms.getTemplateId() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= TemplateDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
+		<input name="<portlet:namespace /><%= TemplateDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= TemplateDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
+		<input name="<portlet:namespace /><%= TemplateDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
 	</td>
 </tr>
 </table>
@@ -66,13 +66,13 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />">
+		<input type="submit" value="<bean:message key="search" />" />
 	</td>
 </tr>
 </table>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
-	<input name="<portlet:namespace /><%= TemplateDisplayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>">
+	<input name="<portlet:namespace /><%= TemplateDisplayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
 
 	<br />
 

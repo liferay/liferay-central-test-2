@@ -37,7 +37,7 @@
 				currentCal.setTime(dateFormat.parse(currentDate));
 				%>
 
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />"><img border="0" src="http://rev-fun.gospelcom.net/<%= currentCal.get(Calendar.YEAR) %>/<%= decimalFormat.format(currentCal.get(Calendar.MONTH) + 1) %>/<%= currentDate %>_sm.gif" width="72"></a>
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />"><img border="0" src="http://rev-fun.gospelcom.net/<%= currentCal.get(Calendar.YEAR) %>/<%= decimalFormat.format(currentCal.get(Calendar.MONTH) + 1) %>/<%= currentDate %>_sm.gif" width="72" /></a>
 			</td>
 			<td>
 				Reverend Fun, daily humor for daily people!
@@ -81,7 +81,7 @@
 			<td colspan="2">
 				<br />
 
-				<img src="http://rev-fun.gospelcom.net/add_toon_info.php?date=<%= date %>">
+				<img src="http://rev-fun.gospelcom.net/add_toon_info.php?date=<%= date %>" />
 			</td>
 		</tr>
 		</table>

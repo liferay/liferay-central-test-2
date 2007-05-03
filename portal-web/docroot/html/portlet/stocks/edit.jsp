@@ -33,7 +33,7 @@ symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/stocks/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <liferay-ui:error exception="<%= ValidatorException.class %>">
 
@@ -66,7 +66,7 @@ symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
 
 <br /><br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

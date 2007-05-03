@@ -161,14 +161,14 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="">
-<input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>">
-<input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>">
-<input name="<portlet:namespace />modelResource" type="hidden" value="<%= modelResource %>">
-<input name="<portlet:namespace />groupScopePos" type="hidden" value="<%= groupScopePos %>">
-<input name="<portlet:namespace />groupScopeActionIds" type="hidden" value="<%= groupScopeActionIds %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="" />
+<input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>" />
+<input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>" />
+<input name="<portlet:namespace />modelResource" type="hidden" value="<%= modelResource %>" />
+<input name="<portlet:namespace />groupScopePos" type="hidden" value="<%= groupScopePos %>" />
+<input name="<portlet:namespace />groupScopeActionIds" type="hidden" value="<%= groupScopeActionIds %>" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="<%= tabs1 %>" />
@@ -372,7 +372,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		}
 		%>
 
-		<input  type="button" value="<%=LanguageUtil.get(pageContext, "add-permissions")%>" onClick="self.location = '<%= addPermissionURL %>';">
+		<input  type="button" value="<%=LanguageUtil.get(pageContext, "add-permissions")%>" onClick="self.location = '<%= addPermissionURL %>';" />
 
 		<c:if test="<%= total > 0 %>">
 			<br /><br />
@@ -383,8 +383,8 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		</c:if>
 	</c:when>
 	<c:when test="<%= (groupScopePos >= 0) && (groupScopeActionIdsArray.length > 0) %>">
-		<input name="<portlet:namespace />addGroupIds" type="hidden" value="">
-		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="">
+		<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
+		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="" />
 
 		<%
 		String actionId = groupScopeActionIdsArray[groupScopePos];
@@ -456,7 +456,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<div class="separator"></div>
 
-		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos %>);">
+		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos %>);" />
 
 		<br /><br />
 
@@ -487,9 +487,9 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td>
-				<input type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos - 1 %>);">
+				<input type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos - 1 %>);" />
 
-				<input type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos + 1 %>);">
+				<input type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos + 1 %>);" />
 			</td>
 		</tr>
 		</table>
@@ -605,7 +605,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<br />
 
-		<input type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />updateActions();">
+		<input type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />updateActions();" />
 	</c:when>
 	<c:when test="<%= Validator.isNotNull(portletResource) %>">
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
@@ -622,7 +622,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<br /><br />
 
-		<input type="button" value="<bean:message key="next" />" onClick="self.location = '<%= portletURL.toString() %>&editPortletPermissions=1';">
+		<input type="button" value="<bean:message key="next" />" onClick="self.location = '<%= portletURL.toString() %>&editPortletPermissions=1';" />
 
 		<c:if test="<%= modelResources.size() > 0 %>">
 			<br /><br />

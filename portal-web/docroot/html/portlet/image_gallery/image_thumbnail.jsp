@@ -31,5 +31,5 @@ IGImage image = (IGImage)row.getObject();
 %>
 
 <a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&large=1" target="_blank">
-<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&small=1" title="<%= image.getDescription() %>">
+<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&small=1" title="<%= image.getDescription() %>" />
 </a>

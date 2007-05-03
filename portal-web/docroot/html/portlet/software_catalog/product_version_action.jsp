@@ -31,12 +31,12 @@ SCProductVersion productVersion = (SCProductVersion) row.getObject();
 %>
 <% if (Validator.isNotNull(productVersion.getDirectDownloadURL())) { %>
 	<a href="<%=productVersion.getDirectDownloadURL()%>">
-		<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "direct-download")%>')" alt="<%=LanguageUtil.get(pageContext, "direct-download")%>" align="absmiddle" border="0">
+		<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "direct-download")%>')" alt="<%=LanguageUtil.get(pageContext, "direct-download")%>" align="absmiddle" border="0" />
 	</a>
 <% } %>
 <% if (Validator.isNotNull(productVersion.getDownloadPageURL())) { %>
 	<a href="<%=productVersion.getDownloadPageURL()%>">
-		<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "download-page")%>')" alt="<%=LanguageUtil.get(pageContext, "download-page")%>" align="absmiddle" border="0">
+		<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "download-page")%>')" alt="<%=LanguageUtil.get(pageContext, "download-page")%>" align="absmiddle" border="0" />
 	</a>
 <% } %>
 

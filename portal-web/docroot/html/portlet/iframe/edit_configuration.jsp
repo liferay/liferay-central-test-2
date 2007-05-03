@@ -38,7 +38,7 @@ String htmlAttributes =
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <table class="liferay-table">
 <tr>
@@ -46,7 +46,7 @@ String htmlAttributes =
 		<bean:message key="source-url" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />src" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= src %>">
+		<input name="<portlet:namespace />src" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= src %>" />
 	</td>
 </tr>
 <tr>
@@ -89,7 +89,7 @@ String htmlAttributes =
 		<bean:message key="user-name" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />userName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= userName %>">
+		<input name="<portlet:namespace />userName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= userName %>" />
 	</td>
 </tr>
 <tr>
@@ -97,7 +97,7 @@ String htmlAttributes =
 		<bean:message key="password" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />password" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= password %>">
+		<input name="<portlet:namespace />password" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= password %>" />
 	</td>
 </tr>
 <tr>
@@ -105,7 +105,7 @@ String htmlAttributes =
 		<bean:message key="hidden-variables" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />hiddenVariables" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= hiddenVariables %>">
+		<input name="<portlet:namespace />hiddenVariables" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= hiddenVariables %>" />
 	</td>
 </tr>
 <tr>
@@ -131,7 +131,7 @@ String htmlAttributes =
 
 <br /><br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

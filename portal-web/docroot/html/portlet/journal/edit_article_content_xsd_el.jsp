@@ -102,10 +102,10 @@ IntegerWrapper count = (IntegerWrapper)request.getAttribute(WebKeys.JOURNAL_STRU
 Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH);
 %>
 
-<input id="<portlet:namespace />structure_el<%= count.getValue() %>_depth" type="hidden" value="<%= depth %>">
-<input id="<portlet:namespace />structure_el<%= count.getValue() %>_name" type="hidden" value="<%= elName %>">
-<input id="<portlet:namespace />structure_el<%= count.getValue() %>_type" type="hidden" value="<%= elType %>">
-<input id="<portlet:namespace />structure_el<%= count.getValue() %>_localized" type="hidden" value='<%= !elLanguageId.equals(StringPool.BLANK) ? languageId : "false" %>'>
+<input id="<portlet:namespace />structure_el<%= count.getValue() %>_depth" type="hidden" value="<%= depth %>" />
+<input id="<portlet:namespace />structure_el<%= count.getValue() %>_name" type="hidden" value="<%= elName %>" />
+<input id="<portlet:namespace />structure_el<%= count.getValue() %>_type" type="hidden" value="<%= elType %>" />
+<input id="<portlet:namespace />structure_el<%= count.getValue() %>_localized" type="hidden" value='<%= !elLanguageId.equals(StringPool.BLANK) ? languageId : "false" %>' />
 
 <tr>
 	<td>
@@ -116,7 +116,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 		<table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-color: <%= colorScheme.getPortletMenuBg() %>; border-width: 1px; border-style: dashed; padding: 4px;">
 		<tr>
 			<c:if test="<%= depth.intValue() > 0 %>">
-				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="<%= depth.intValue() * 50 %>"></td>
+				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="<%= depth.intValue() * 50 %>" /></td>
 			</c:if>
 
 			<td width="100%">
@@ -124,7 +124,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 				<tr>
 					<td>
 						<c:if test='<%= elType.equals("text") %>'>
-							<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" size="75" type="text" value="<%= elContent %>" onChange="<portlet:namespace />contentChanged();">
+							<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" size="75" type="text" value="<%= elContent %>" onChange="<portlet:namespace />contentChanged();" />
 						</c:if>
 
 						<c:if test='<%= elType.equals("text_box") %>'>
@@ -149,7 +149,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 						</c:if>
 
 						<c:if test='<%= elType.equals("image") %>'>
-							<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" name="structure_image_<%= elName + (!elLanguageId.equals(StringPool.BLANK) ? "_" + languageId : "") %>" size="75" type="file" onChange="<portlet:namespace />contentChanged();">
+							<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" name="structure_image_<%= elName + (!elLanguageId.equals(StringPool.BLANK) ? "_" + languageId : "") %>" size="75" type="file" onChange="<portlet:namespace />contentChanged();" />
 
 							<c:if test="<%= Validator.isNotNull(elContent) %>">
 								<span style="font-size: xx-small; margin-left: 15px;">
@@ -159,15 +159,15 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 						</c:if>
 
 						<c:if test='<%= elType.equals("image_gallery") %>'>
-							<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" size="75" type="text" value="<%= elContent %>" onChange="<portlet:namespace />contentChanged();"> <input type="button" value="<bean:message key="select" />" onClick="<portlet:namespace />imageGalleryInput = '<portlet:namespace />structure_el<%= count.getValue() %>_content'; var imageGalleryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'imageGallery', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); imageGalleryWindow.focus();">
+							<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" size="75" type="text" value="<%= elContent %>" onChange="<portlet:namespace />contentChanged();" /> <input type="button" value="<bean:message key="select" />" onClick="<portlet:namespace />imageGalleryInput = '<portlet:namespace />structure_el<%= count.getValue() %>_content'; var imageGalleryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'imageGallery', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); imageGalleryWindow.focus();">
 						</c:if>
 
 						<c:if test='<%= elType.equals("document_library") %>'>
-							<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" size="75" type="text" value="<%= elContent %>" onChange="<portlet:namespace />contentChanged();"> <input type="button" value="<bean:message key="select" />" onClick="<portlet:namespace />documentLibraryInput = '<portlet:namespace />structure_el<%= count.getValue() %>_content';  var documentLibraryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'documentLibrary', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); documentLibraryWindow.focus();">
+							<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" size="75" type="text" value="<%= elContent %>" onChange="<portlet:namespace />contentChanged();" /> <input type="button" value="<bean:message key="select" />" onClick="<portlet:namespace />documentLibraryInput = '<portlet:namespace />structure_el<%= count.getValue() %>_content';  var documentLibraryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'documentLibrary', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); documentLibraryWindow.focus();">
 						</c:if>
 
 						<c:if test='<%= elType.equals("boolean") %>'>
-							<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" type="checkbox" <%= elContent.equals("true") ? "checked" : "" %> onChange="<portlet:namespace />contentChanged();">
+							<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" type="checkbox" <%= elContent.equals("true") ? "checked" : "" %> onChange="<portlet:namespace />contentChanged();" />
 						</c:if>
 
 						<c:if test='<%= elType.equals("list") %>'>
@@ -239,17 +239,17 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 								<table>
 								<tr>
 									<td>
-										<img name="<portlet:namespace />image_<%= elName %>_img" hspace="0" src="<%= elContent %>" vspace="0">
+										<img name="<portlet:namespace />image_<%= elName %>_img" hspace="0" src="<%= elContent %>" vspace="0" />
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />setImageDeleteState(this, '<portlet:namespace />structure_el<%= count.getValue() %>_delete_state', '<portlet:namespace />image_<%= elName %>_img', '<portlet:namespace />structure_el<%= count.getValue() %>_content');">
+										<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />setImageDeleteState(this, '<portlet:namespace />structure_el<%= count.getValue() %>_delete_state', '<portlet:namespace />image_<%= elName %>_img', '<portlet:namespace />structure_el<%= count.getValue() %>_content');" />
 									</td>
 								</tr>
 								</table>
 
-								<input id="<portlet:namespace />structure_el<%= count.getValue() %>_delete_state" type="hidden" value="">
+								<input id="<portlet:namespace />structure_el<%= count.getValue() %>_delete_state" type="hidden" value="" />
 							</div>
 						</td>
 					</tr>
@@ -266,12 +266,12 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 			<td>
 				<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
-					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="2"></td>
+					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="2" /></td>
 					<td width="125">
 						<span style="font-size: xx-small;"><b><%= TextFormatter.format(elName, TextFormatter.J) %></b></span>
 					</td>
 					<td>
-						<input type="checkbox" <%= elLanguageId.equals(StringPool.BLANK) ? "" : "checked" %> onClick="if (this.checked) { document.<portlet:namespace />fm.<portlet:namespace />structure_el<%= count.getValue() %>_localized.value = '<%= languageId %>'; } else { if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view") %>')) { document.<portlet:namespace />fm.<portlet:namespace />structure_el<%= count.getValue() %>_localized.value = 'false'; } else { this.checked = true; }};"> <span style="font-size: xx-small;"><bean:message key="localized" /></span>
+						<input type="checkbox" <%= elLanguageId.equals(StringPool.BLANK) ? "" : "checked" %> onClick="if (this.checked) { document.<portlet:namespace />fm.<portlet:namespace />structure_el<%= count.getValue() %>_localized.value = '<%= languageId %>'; } else { if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view") %>')) { document.<portlet:namespace />fm.<portlet:namespace />structure_el<%= count.getValue() %>_localized.value = 'false'; } else { this.checked = true; }};" /> <span style="font-size: xx-small;"><bean:message key="localized" /></span>
 					</td>
 				</tr>
 				</table>

@@ -38,27 +38,27 @@ Boolean hasSiblings = (Boolean)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL
 IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX);
 %>
 
-<input id="<portlet:namespace />structure_el<%= count.getValue() %>_depth" type="hidden" value="<%= depth %>">
+<input id="<portlet:namespace />structure_el<%= count.getValue() %>_depth" type="hidden" value="<%= depth %>" />
 
 <tr>
-	<td><img border="0" height="10" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1"></td>
+	<td><img border="0" height="10" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1" /></td>
 </tr>
 <tr>
 	<td>
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<c:if test="<%= depth.intValue() > 0 %>">
-				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="<%= depth.intValue() * 50 %>"></td>
+				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="<%= depth.intValue() * 50 %>" /></td>
 			</c:if>
 
 			<td>
-				<input id="<portlet:namespace />structure_el<%= count.getValue() %>_name" tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elName %>">
+				<input id="<portlet:namespace />structure_el<%= count.getValue() %>_name" tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elName %>" />
 			</td>
-			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="10"></td>
+			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="10" /></td>
 			<td>
 				<c:choose>
 					<c:when test='<%= parentElType.equals("list") || parentElType.equals("multi-list") %>'>
-						<input id="<portlet:namespace />structure_el<%= count.getValue() %>_type" tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elType %>">
+						<input id="<portlet:namespace />structure_el<%= count.getValue() %>_type" tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elType %>" />
 					</c:when>
 					<c:otherwise>
 						<select id="<portlet:namespace />structure_el<%= count.getValue() %>_type" tabindex="<%= tabIndex.getValue() %>">
@@ -78,40 +78,40 @@ IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX
 			</td>
 
 			<c:if test='<%= !parentElType.equals("list") && !parentElType.equals("multi-list") %>'>
-				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5"></td>
+				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5" /></td>
 				<td>
 					<a href="javascript: <portlet:namespace />editElement('add', <%= count.getValue() %>);">
-					<img border="0" height="9" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<bean:message key="add" />" vspace="0" width="9">
+					<img border="0" height="9" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<bean:message key="add" />" vspace="0" width="9" />
 					</a>
 				</td>
 			</c:if>
 
-			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5"></td>
+			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5" /></td>
 
 			<c:choose>
 				<c:when test="<%= el.elements().size() == 0 %>">
 					<td>
 						<a href="javascript: <portlet:namespace />editElement('remove', <%= count.getValue() %>);">
-						<img border="0" height="9" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_minus.png" title="<bean:message key="remove" />" vspace="0" width="9">
+						<img border="0" height="9" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_minus.png" title="<bean:message key="remove" />" vspace="0" width="9" />
 						</a>
 					</td>
 				</c:when>
 				<c:otherwise>
-					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="9"></td>
+					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="9" /></td>
 				</c:otherwise>
 			</c:choose>
 
 			<c:if test="<%= hasSiblings.booleanValue() %>">
-				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="10"></td>
+				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="10" /></td>
 				<td>
 					<a href="javascript: <portlet:namespace />moveElement(true, <%= count.getValue() %>);">
-					<img border="0" height="11" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png" title="<bean:message key="up" />" vspace="0" width="11">
+					<img border="0" height="11" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png" title="<bean:message key="up" />" vspace="0" width="11" />
 					</a>
 				</td>
-				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5"></td>
+				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5" /></td>
 				<td>
 					<a href="javascript: <portlet:namespace />moveElement(false, <%= count.getValue() %>);">
-					<img border="0" height="11" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_down.png" title="<bean:message key="down" />" vspace="0" width="11">
+					<img border="0" height="11" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_down.png" title="<bean:message key="down" />" vspace="0" width="11" />
 					</a>
 				</td>
 			</c:if>

@@ -83,9 +83,9 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_coupon" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCoupon(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />couponId" type="hidden" value="<%= couponId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />couponId" type="hidden" value="<%= couponId %>" />
 
 <liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="coupons" />
@@ -199,9 +199,9 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 <br /><br />
 
@@ -225,13 +225,13 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 		<bean:message key="minimum-order" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />minOrder" size="4" type="text" value="<%= currency.getSymbol() %><%= doubleFormat.format(minOrder) %>">
+		<input name="<portlet:namespace />minOrder" size="4" type="text" value="<%= currency.getSymbol() %><%= doubleFormat.format(minOrder) %>" />
 	</td>
 	<td>
 		<bean:message key="discount" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />discount" size="4" type="text" value="<%= doubleFormat.format(discount) %>">
+		<input name="<portlet:namespace />discount" size="4" type="text" value="<%= doubleFormat.format(discount) %>" />
 	</td>
 	<td>
 		<bean:message key="discount-type" />

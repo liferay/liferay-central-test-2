@@ -60,10 +60,10 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFolder(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>">
-<input name="<portlet:namespace />parentFolderId" type="hidden" value="<%= parentFolderId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
+<input name="<portlet:namespace />parentFolderId" type="hidden" value="<%= parentFolderId %>" />
 
 <liferay-ui:tabs names="folder" />
 
@@ -100,9 +100,9 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 			<%= parentFolderName %>
 			</a>
 
-			<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= parentFolderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= parentFolderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
 
-			<input id="<portlet:namespace />removeFolderButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeFolder();">
+			<input id="<portlet:namespace />removeFolderButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeFolder();" />
 		</td>
 	</tr>
 	<tr>
@@ -191,9 +191,9 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

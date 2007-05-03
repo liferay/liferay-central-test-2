@@ -40,9 +40,9 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 </script>
 
 <form method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveUserGroup(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />userGroupId" type="hidden" value="<%= userGroupId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />userGroupId" type="hidden" value="<%= userGroupId %>" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="user-groups" />
@@ -77,7 +77,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
 </form>
 

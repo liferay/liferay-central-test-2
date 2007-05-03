@@ -33,13 +33,13 @@ String csz = ParamUtil.getString(request, "csz");
 
 <bean:message key="street-address" /> <i>(<bean:message key="optional" />)</i><br />
 
-<input name="<portlet:namespace />street" size="30" type="text" value="<%= street %>">
+<input name="<portlet:namespace />street" size="30" type="text" value="<%= street %>" />
 
 <br /><br />
 
 <bean:message key="city-state-or-zip" /><br />
 
-<input name="<portlet:namespace />csz" size="30" type="text" value="<%= csz %>">
+<input name="<portlet:namespace />csz" size="30" type="text" value="<%= csz %>" />
 
 <br /><br />
 
@@ -49,7 +49,7 @@ String csz = ParamUtil.getString(request, "csz");
 
 <br /><br />
 
-<input type="submit" value="<bean:message key="search" />">
+<input type="submit" value="<bean:message key="search" />" />
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(street) %>">

@@ -30,7 +30,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 %>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>">
+<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 
 <%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
 
@@ -40,9 +40,9 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 <br />
 
-<input name="<portlet:namespace />keywords" size="30" type="text">
+<input name="<portlet:namespace />keywords" size="30" type="text" />
 
-<input type="submit" value="<bean:message key="search" />">
+<input type="submit" value="<bean:message key="search" />" />
 
 <br /><br />
 

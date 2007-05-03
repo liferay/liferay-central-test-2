@@ -49,7 +49,7 @@
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<input name="<portlet:namespace />userName" type="text">
+				<input name="<portlet:namespace />userName" type="text" />
 			</td>
 			<td>
 				<b>@</b>
@@ -62,7 +62,7 @@
 
 		<br />
 
-		<input type="submit" value="<bean:message key="register" />">
+		<input type="submit" value="<bean:message key="register" />" />
 
 		</form>
 

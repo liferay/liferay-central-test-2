@@ -82,7 +82,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	<div class="separator"></div>
 
 	<c:if test="<%= PortalPermission.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
-		<input type="button" value="<bean:message key="create-community" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+		<input type="button" value="<bean:message key="create-community" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/communities/edit_community" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 
 		<br /><br />
 	</c:if>

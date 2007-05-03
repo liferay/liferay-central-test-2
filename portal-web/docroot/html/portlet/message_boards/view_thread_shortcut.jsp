@@ -48,10 +48,10 @@ if (treeWalker.isOdd()) {
 		<c:if test="<%= !message.isRoot() %>">
 			<c:choose>
 				<c:when test="<%= !lastNode %>">
-					<img class="message-board-tree" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/t.png">
+					<img class="message-board-tree" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/t.png" />
 				</c:when>
 				<c:otherwise>
-					<img class="message-board-tree" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/l.png">
+					<img class="message-board-tree" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/l.png" />
 				</c:otherwise>
 			</c:choose>
 		</c:if>

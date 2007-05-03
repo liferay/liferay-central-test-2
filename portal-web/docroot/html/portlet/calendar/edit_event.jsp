@@ -313,9 +313,9 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEvent(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />eventId" type="hidden" value="<%= eventId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />eventId" type="hidden" value="<%= eventId %>" />
 
 <liferay-util:include page="/html/portlet/calendar/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="events" />
@@ -462,9 +462,9 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 <br /><br />
 
@@ -496,7 +496,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td>
-					<input <%= (dailyType == 0) ? "checked" : "" %> name="<portlet:namespace />dailyType" type="radio" value="0"> <input maxlength="3" name="<portlet:namespace />dailyInterval" size="3" type="text" value="<%= dailyInterval %>"> <bean:message key="day-s" /><br />
+					<input <%= (dailyType == 0) ? "checked" : "" %> name="<portlet:namespace />dailyType" type="radio" value="0"> <input maxlength="3" name="<portlet:namespace />dailyInterval" size="3" type="text" value="<%= dailyInterval %>" /> <bean:message key="day-s" /><br />
 					<input <%= (dailyType == 1) ? "checked" : "" %> name="<portlet:namespace />dailyType" type="radio" value="1"> <bean:message key="every-weekday" />
 				</td>
 			</tr>
@@ -507,7 +507,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<bean:message key="recur-every" /> <input maxlength="2" name="<portlet:namespace />weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>"> <bean:message key="weeks-on" />
+					<bean:message key="recur-every" /> <input maxlength="2" name="<portlet:namespace />weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>" /> <bean:message key="weeks-on" />
 
 					<table class="liferay-table">
 					<tr>
@@ -545,7 +545,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<table class="liferay-table">
 			<tr>
 				<td nowrap>
-					<input <%= (monthlyType == 0) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="0"> <bean:message key="day" /> <input maxlength="2" name="<portlet:namespace />monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>"> <bean:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>"> <bean:message key="month-s" /><br />
+					<input <%= (monthlyType == 0) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="0"> <bean:message key="day" /> <input maxlength="2" name="<portlet:namespace />monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>" /> <bean:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>" /> <bean:message key="month-s" /><br />
 
 					<input <%= (monthlyType == 1) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="1">
 
@@ -571,7 +571,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 						<option <%= (monthlyDay1 == Calendar.SATURDAY) ? "selected" : "" %> value="<%= Calendar.SATURDAY %>"><%= days[6] %></option>
 					</select>
 
-					<bean:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />monthlyInterval1" size="2" type="text" value="<%= monthlyInterval1 %>"> <bean:message key="month-s" />
+					<bean:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />monthlyInterval1" size="2" type="text" value="<%= monthlyInterval1 %>" /> <bean:message key="month-s" />
 				</td>
 			</tr>
 			</table>
@@ -597,7 +597,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 					</select>
 
-					<input maxlength="2" name="<portlet:namespace />yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>"> <bean:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>"> <bean:message key="year-s" /><br />
+					<input maxlength="2" name="<portlet:namespace />yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>" /> <bean:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>" /> <bean:message key="year-s" /><br />
 
 					<input <%= (yearlyType == 1) ? "checked" : "" %> name="<portlet:namespace />yearlyType" type="radio" value="1"> <bean:message key="the" />
 
@@ -637,7 +637,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 					</select>
 
-					<bean:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>"> <bean:message key="year-s" />
+					<bean:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>" /> <bean:message key="year-s" />
 				</td>
 			</tr>
 			</table>
@@ -658,7 +658,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		<tr>
 			<td>
 				<input <%= (endDateType == 0) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="0"> <bean:message key="no-end-date" /><br />
-				<%--<input <%= (endDateType == 1) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="1"> End after <input maxlength="3" name="<portlet:namespace />endDateOccurrence" size="3" type="text" value="<%= endDateOccurrence %>"> occurrence(s)<br />--%>
+				<%--<input <%= (endDateType == 1) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="1"> End after <input maxlength="3" name="<portlet:namespace />endDateOccurrence" size="3" type="text" value="<%= endDateOccurrence %>" /> occurrence(s)<br />--%>
 
 				<input <%= (endDateType == 2) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="2"> <bean:message key="end-by" />
 

@@ -42,9 +42,9 @@ decimalFormat.setMinimumFractionDigits(2);
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/currency_converter/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
-<input type="submit" value="<bean:message key="convert" />">
+<input type="submit" value="<bean:message key="convert" />" />
 
-<input name="<portlet:namespace />number" size="3" type="text" value="<%= number %>">
+<input name="<portlet:namespace />number" size="3" type="text" value="<%= number %>" />
 
 <select name="<portlet:namespace />from">
 
@@ -197,7 +197,7 @@ decimalFormat.setMinimumFractionDigits(2);
 		<table border="1" cellpadding="2" cellspacing="0">
 		<tr>
 			<td>
-				<img height="288" src="http://ichart.yahoo.com/z?s=<%= currency.getSymbol() %>=X&t=<%= chartId %>?" width="512">
+				<img height="288" src="http://ichart.yahoo.com/z?s=<%= currency.getSymbol() %>=X&t=<%= chartId %>?" width="512" />
 			</td>
 		</tr>
 		</table>

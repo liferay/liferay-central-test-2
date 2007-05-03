@@ -191,9 +191,9 @@ catch (Throwable t) {
 		</tr>
 		<tr>
 			<td align="center">
-				<input type="button" value="<bean:message key="save-settings" />" onClick="submitForm(document.<portlet:namespace />fm);">
+				<input type="button" value="<bean:message key="save-settings" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
-				<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wsrp/edit" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wsrp/edit" /></portlet:renderURL>';" />
 			</td>
 		</tr>
 		</table>

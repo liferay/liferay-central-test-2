@@ -85,7 +85,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<input type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />showPrevious();"> <input type="button" value="<bean:message key="play" />" onClick="<portlet:namespace />play();"> <input type="button" value="<bean:message key="pause" />" onClick="<portlet:namespace />pause();"> <input type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />showNext();">
+		<input type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />showPrevious();" /> <input type="button" value="<bean:message key="play" />" onClick="<portlet:namespace />play();" /> <input type="button" value="<bean:message key="pause" />" onClick="<portlet:namespace />pause();" /> <input type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />showNext();" />
 	</td>
 	<td>
 		<bean:message key="speed" />
@@ -125,7 +125,7 @@
 			IGImage image = (IGImage)images.get(0);
 		%>
 
-			<img border="0" name="<portlet:namespace />slideShow" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&large=1">
+			<img border="0" name="<portlet:namespace />slideShow" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&large=1" />
 
 		<%
 		}

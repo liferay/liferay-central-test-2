@@ -118,7 +118,7 @@ for (int i = 0; i < results.size(); i++) {
 				%>
 
 				<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= fileEntry.getFolderId() %>&name=<%= Http.encodeURL(fileEntry.getName()) %>">
-				<img align="left" border="0" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileEntry.getName()) %>.png"><%= fileEntry.getTitle() %>
+				<img align="left" border="0" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileEntry.getName()) %>.png" /><%= fileEntry.getTitle() %>
 				</a>
 			</c:when>
 			<c:when test="<%= className.equals(IGImage.class.getName()) %>">
@@ -130,7 +130,7 @@ for (int i = 0; i < results.size(); i++) {
 				String imageId = pkParser.getString("imageId");
 				%>
 
-				<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= imageId %>&large=1">
+				<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= imageId %>&large=1" />
 			</c:when>
 			<c:when test="<%= className.equals(JournalArticle.class.getName()) %>">
 

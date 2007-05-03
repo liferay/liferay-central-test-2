@@ -61,11 +61,11 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 </script>
 
 <form action="<portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveImage(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />uploadProgressId" type="hidden" value="<%= uploadProgressId %>">
-<input name="<portlet:namespace />imageId" type="hidden" value="<%= imageId %>">
-<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
+<input name="<portlet:namespace />imageId" type="hidden" value="<%= imageId %>" />
+<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 
 <liferay-ui:error exception="<%= ImageNameException.class %>">
 
@@ -105,7 +105,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 			<%= folder.getName() %>
 			</a>
 
-			<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/image_gallery/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
 		</td>
 	</tr>
 	<tr>
@@ -120,7 +120,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 		<bean:message key="file" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<input name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
 	</td>
 </tr>
 <tr>
@@ -180,9 +180,9 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="parent.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="parent.location = '<%= redirect %>';" />
 
 </form>
 

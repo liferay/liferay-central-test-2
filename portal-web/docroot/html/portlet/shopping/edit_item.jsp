@@ -149,16 +149,16 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveItem(); return false;">
-<input name="scroll" type="hidden" value="">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>">
-<input name="<portlet:namespace />itemId" type="hidden" value="<%= itemId %>">
-<input name="<portlet:namespace />fieldsCount" type="hidden" value="<%= fieldsCount %>">
-<input name="<portlet:namespace />fieldId" type="hidden" value="">
-<input name="<portlet:namespace />fieldsQuantities" type="hidden" value="<%= fieldsQuantities %>">
-<input name="<portlet:namespace />pricesCount" type="hidden" value="<%= pricesCount %>">
-<input name="<portlet:namespace />priceId" type="hidden" value="">
+<input name="scroll" type="hidden" value="" />
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
+<input name="<portlet:namespace />itemId" type="hidden" value="<%= itemId %>" />
+<input name="<portlet:namespace />fieldsCount" type="hidden" value="<%= fieldsCount %>" />
+<input name="<portlet:namespace />fieldId" type="hidden" value="" />
+<input name="<portlet:namespace />fieldsQuantities" type="hidden" value="<%= fieldsQuantities %>" />
+<input name="<portlet:namespace />pricesCount" type="hidden" value="<%= pricesCount %>" />
+<input name="<portlet:namespace />priceId" type="hidden" value="" />
 
 <liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="categories" />
@@ -189,7 +189,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 			<%= category.getName() %>
 			</a>
 
-			<input type="button" value="<bean:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
 		</td>
 	</tr>
 	<tr>
@@ -290,15 +290,15 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 <br /><br />
 
 <liferay-ui:tabs names="fields" />
 
-<input name="<portlet:namespace />fields" type="hidden" value="">
+<input name="<portlet:namespace />fields" type="hidden" value="" />
 
 <bean:message key="fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user" />
 
@@ -361,7 +361,7 @@ for (int i = 0; i < fieldsCount; i++) {
 
 		<c:if test="<%= fieldsCount > 0 %>">
 			<td>
-				<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteField(<%= i %>);">
+				<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteField(<%= i %>);" />
 			</td>
 		</c:if>
 	</tr>
@@ -376,17 +376,17 @@ for (int i = 0; i < fieldsCount; i++) {
 	<br />
 </c:if>
 
-<input type="button" value="<bean:message key="add-field" />" onClick="<portlet:namespace />addField();">
+<input type="button" value="<bean:message key="add-field" />" onClick="<portlet:namespace />addField();" />
 
 <c:if test="<%= fieldsCount > 0 %>">
-	<input type="button" value="<bean:message key="edit-stock-quantity" />" onClick="<portlet:namespace />editItemQuantities();">
+	<input type="button" value="<bean:message key="edit-stock-quantity" />" onClick="<portlet:namespace />editItemQuantities();" />
 </c:if>
 
 <br /><br />
 
 <liferay-ui:tabs names="prices" />
 
-<input name="<portlet:namespace />prices" type="hidden" value="">
+<input name="<portlet:namespace />prices" type="hidden" value="" />
 
 <table class="liferay-table">
 
@@ -559,7 +559,7 @@ for (int i = 0; i < pricesCount; i++) {
 
 				<c:if test="<%= pricesCount > 1 %>">
 					<td>
-						<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deletePrice(<%= i %>);">
+						<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deletePrice(<%= i %>);" />
 					</td>
 				</c:if>
 			</tr>
@@ -579,7 +579,7 @@ for (int i = 0; i < pricesCount; i++) {
 
 <br />
 
-<input type="button" value="<bean:message key="add-price" />" onClick="<portlet:namespace />addPrice();">
+<input type="button" value="<bean:message key="add-price" />" onClick="<portlet:namespace />addPrice();" />
 
 <br /><br />
 
@@ -632,7 +632,7 @@ for (int i = 0; i < pricesCount; i++) {
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="small-image" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />smallFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<input name="<portlet:namespace />smallFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
 	</td>
 </tr>
 <tr>
@@ -661,7 +661,7 @@ for (int i = 0; i < pricesCount; i++) {
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="medium-image" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />mediumFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<input name="<portlet:namespace />mediumFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
 	</td>
 </tr>
 <tr>
@@ -690,7 +690,7 @@ for (int i = 0; i < pricesCount; i++) {
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="large-image" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />largeFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		<input name="<portlet:namespace />largeFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
 	</td>
 </tr>
 <tr>

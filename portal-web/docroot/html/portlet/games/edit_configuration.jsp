@@ -29,7 +29,7 @@ hangmanWordList = ParamUtil.getString(request, "hangmanWordList", hangmanWordLis
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <bean:message key="add-hangman-words-separated-by-commas" />
 
@@ -39,7 +39,7 @@ hangmanWordList = ParamUtil.getString(request, "hangmanWordList", hangmanWordLis
 
 <br /><br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

@@ -123,14 +123,14 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_shortcut" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFileShortcut(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />fileShortcutId" type="hidden" value="<%= fileShortcutId %>">
-<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>">
-<input name="<portlet:namespace />toGroupId" type="hidden" value="<%= toGroupId %>">
-<input name="<portlet:namespace />toFolderId" type="hidden" value="<%= toFolderId %>">
-<input name="<portlet:namespace />toName" type="hidden" value="<%= toName %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />fileShortcutId" type="hidden" value="<%= fileShortcutId %>" />
+<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
+<input name="<portlet:namespace />toGroupId" type="hidden" value="<%= toGroupId %>" />
+<input name="<portlet:namespace />toFolderId" type="hidden" value="<%= toFolderId %>" />
+<input name="<portlet:namespace />toName" type="hidden" value="<%= toName %>" />
 
 <liferay-ui:tabs
 	names="shortcut"
@@ -220,7 +220,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		</span>
 
 		<c:if test='<%= strutsAction.equals("/document_library/edit_file_shortcut") && ((fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE)) %>'>
-			<input type="button" value="<bean:message key="select" />" onClick="var toGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_group" /></portlet:renderURL>', 'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var toGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/document_library/select_group" /></portlet:renderURL>', 'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();">
 		</c:if>
 	</td>
 </tr>
@@ -267,9 +267,9 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 <c:if test='<%= strutsAction.equals("/document_library/edit_file_shortcut") && ((fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE)) %>'>
 	<br />
 
-	<input type="submit" value="<bean:message key="save" />">
+	<input type="submit" value="<bean:message key="save" />" />
 
-	<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+	<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 	<br />
 </c:if>

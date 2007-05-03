@@ -41,7 +41,7 @@
 	</td>
 	<td>
 		<c:if test="<%= Validator.isNotNull(contact2.getIcqSn()) %>">
-			<img border="0" hspace="0" src="http://web.icq.com/whitepages/online?icq=<%= contact2.getIcqSn() %>&img=5" vspace="0">
+			<img border="0" hspace="0" src="http://web.icq.com/whitepages/online?icq=<%= contact2.getIcqSn() %>&img=5" vspace="0" />
 		</c:if>
 	</td>
 </tr>
@@ -72,7 +72,7 @@
 	</td>
 	<td>
 		<c:if test="<%= Validator.isNotNull(contact2.getSkypeSn()) %>">
-			<a href="callto://<%= contact2.getSkypeSn() %>"><img src="http://mystatus.skype.com/smallicon/<%= contact2.getSkypeSn() %>"></a>
+			<a href="callto://<%= contact2.getSkypeSn() %>"><img src="http://mystatus.skype.com/smallicon/<%= contact2.getSkypeSn() %>" /></a>
 		</c:if>
 	</td>
 </tr>
@@ -85,7 +85,7 @@
 	</td>
 	<td>
 		<c:if test="<%= Validator.isNotNull(contact2.getYmSn()) %>">
-			<img border="0" hspace="0" src="http://opi.yahoo.com/online?u=<%= contact2.getYmSn() %>&m=g&t=0" vspace="0">
+			<img border="0" hspace="0" src="http://opi.yahoo.com/online?u=<%= contact2.getYmSn() %>&m=g&t=0" vspace="0" />
 		</c:if>
 	</td>
 </tr>
@@ -94,7 +94,7 @@
 <c:if test="<%= editable %>">
 	<br />
 
-	<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUser('im');"><br />
+	<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUser('im');" /><br />
 </c:if>
 
 <br />

@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/my_global_tags/init.jsp" %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/my_global_tags/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <bean:message key="set-your-global-tags" />
 
@@ -39,6 +39,6 @@
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

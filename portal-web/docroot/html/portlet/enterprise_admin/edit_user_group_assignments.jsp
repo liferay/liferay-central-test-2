@@ -52,11 +52,11 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="">
-<input name="<portlet:namespace />userGroupId" type="hidden" value="<%= userGroup.getUserGroupId() %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="" />
+<input name="<portlet:namespace />userGroupId" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="user-groups" />
@@ -72,8 +72,8 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 	url="<%= portletURL.toString() %>"
 />
 
-<input name="<portlet:namespace />addUserIds" type="hidden" value="">
-<input name="<portlet:namespace />removeUserIds" type="hidden" value="">
+<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
+<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
 
 <%
 UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
@@ -113,7 +113,7 @@ searchContainer.setResults(results);
 
 <div class="separator"></div>
 
-<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
 <br /><br />
 

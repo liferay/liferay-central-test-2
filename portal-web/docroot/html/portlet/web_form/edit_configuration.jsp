@@ -48,8 +48,8 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 </script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 
 <fieldset>
 	<legend><bean:message key="form-information" /></legend>
@@ -62,7 +62,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 			<bean:message key="title" />
 		</td>
 		<td>
-			<input name="<portlet:namespace />title" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= title %>">
+			<input name="<portlet:namespace />title" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= title %>" />
 		</td>
 	</tr>
 	<tr>
@@ -89,7 +89,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 			<bean:message key="subject" />
 		</td>
 		<td>
-			<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= subject %>">
+			<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= subject %>" />
 		</td>
 	</tr>
 	<tr>
@@ -97,7 +97,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 			<bean:message key="email-address" />
 		</td>
 		<td>
-			<input name="<portlet:namespace />emailAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
+			<input name="<portlet:namespace />emailAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>" />
 		</td>
 	</tr>
 	</table>
@@ -145,7 +145,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 				<bean:message key="options" />
 			</td>
 			<td>
-				<input id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" type="text" size="50" value="<%= fieldOptions %>">
+				<input id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" type="text" size="50" value="<%= fieldOptions %>" />
 
 				(<bean:message key="add-options-separated-by-commas" />)
 
@@ -172,8 +172,8 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>

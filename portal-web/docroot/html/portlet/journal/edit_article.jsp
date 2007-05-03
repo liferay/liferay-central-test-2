@@ -479,21 +479,21 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
-<input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= originalRedirect %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
-<input name="<portlet:namespace />articleId" type="hidden" value="<%= articleId %>">
-<input name="<portlet:namespace />version" type="hidden" value="<%= version %>">
-<input name="<portlet:namespace />content" type="hidden" value="">
-<input name="<portlet:namespace />articleURL" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:renderURL>">
-<input name="<portlet:namespace />approve" type="hidden" value="">
+<input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>" />
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= originalRedirect %>" />
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
+<input name="<portlet:namespace />articleId" type="hidden" value="<%= articleId %>" />
+<input name="<portlet:namespace />version" type="hidden" value="<%= version %>" />
+<input name="<portlet:namespace />content" type="hidden" value="" />
+<input name="<portlet:namespace />articleURL" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:renderURL>">
+<input name="<portlet:namespace />approve" type="hidden" value="" />
 <input name="<portlet:namespace />deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 <input name="<portlet:namespace />expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
-<input name="title" type="hidden" value="">
-<input name="xml" type="hidden" value="">
-<input name="xsl" type="hidden" value="">
+<input name="title" type="hidden" value="" />
+<input name="xml" type="hidden" value="" />
+<input name="xsl" type="hidden" value="" />
 
 <liferay-ui:tabs names="article" />
 
@@ -669,7 +669,7 @@ String[] availableLocales = null;
 						</select>
 
 						<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
-							<input type="button" name="<portlet:namespace />removeArticleLocaleButton" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeArticleLocale();">
+							<input type="button" name="<portlet:namespace />removeArticleLocaleButton" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeArticleLocale();" />
 						</c:if>
 					</td>
 					<td>
@@ -745,7 +745,7 @@ String[] availableLocales = null;
 	<c:otherwise>
 		<tr>
 			<td colspan="2">
-				<input name="<portlet:namespace />languageId" type="hidden" value="<%= defaultLanguageId %>">
+				<input name="<portlet:namespace />languageId" type="hidden" value="<%= defaultLanguageId %>" />
 			</td>
 		</tr>
 	</c:otherwise>
@@ -851,35 +851,35 @@ String[] availableLocales = null;
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />">
+<input type="submit" value="<bean:message key="save" />" />
 
 <c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE) %>">
-	<input type="button" value="<bean:message key="save-and-approve" />" onClick="<portlet:namespace />saveAndApproveArticle();">
+	<input type="button" value="<bean:message key="save-and-approve" />" onClick="<portlet:namespace />saveAndApproveArticle();" />
 
 	<c:if test="<%= article != null %>">
-		<input type="button" value="<bean:message key="approve" />" onClick="<portlet:namespace />approveArticle();">
+		<input type="button" value="<bean:message key="approve" />" onClick="<portlet:namespace />approveArticle();" />
 	</c:if>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(structureId) %>">
-	<input type="button" value="<bean:message key="preview" />" onClick="<portlet:namespace />previewArticle();">
+	<input type="button" value="<bean:message key="preview" />" onClick="<portlet:namespace />previewArticle();" />
 </c:if>
 
 <c:if test="<%= structure != null %>">
-	<input type="button" value="<bean:message key="download" />" onClick="<portlet:namespace />downloadArticleContent();">
+	<input type="button" value="<bean:message key="download" />" onClick="<portlet:namespace />downloadArticleContent();" />
 </c:if>
 
 <c:if test="<%= article != null %>">
 	<c:if test="<%= !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
-		<input type="button" value="<bean:message key="expire" />" onClick="<portlet:namespace />expireArticle();">
+		<input type="button" value="<bean:message key="expire" />" onClick="<portlet:namespace />expireArticle();" />
 	</c:if>
 
 	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
-		<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteArticle();">
+		<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteArticle();" />
 	</c:if>
 </c:if>
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 <br /><br />
 
@@ -891,7 +891,7 @@ String[] availableLocales = null;
 		<bean:message key="structure" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>">
+		<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>" />
 
 		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="structureId" value="<%= structureId %>" /></portlet:renderURL>" id="<portlet:namespace />structureName">
 		<%= structureName %>
@@ -921,7 +921,7 @@ String[] availableLocales = null;
 	<td>
 		<c:choose>
 			<c:when test="<%= templates.size() == 0 %>">
-				<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>">
+				<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
 
 				<input type="button" value="<bean:message key="select" />"
 					onClick="
@@ -952,7 +952,7 @@ String[] availableLocales = null;
 					}
 					%>
 
-					<input id="<portlet:namespace />template<%= tableIteratorObj.getTemplateId() %>_xsl" type="hidden" value="<%= JS.encodeURIComponent(tableIteratorObj.getXsl()) %>">
+					<input id="<portlet:namespace />template<%= tableIteratorObj.getTemplateId() %>_xsl" type="hidden" value="<%= JS.encodeURIComponent(tableIteratorObj.getXsl()) %>" />
 
 					<input <%= templateChecked ? "checked" : "" %> name="<portlet:namespace />templateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>">
 
@@ -963,7 +963,7 @@ String[] availableLocales = null;
 					<c:if test="<%= tableIteratorObj.isSmallImage() %>">
 						<br />
 
-						<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getGroupId() + "." + tableIteratorObj.getTemplateId() + "&small=1" %>" vspace="0">
+						<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getGroupId() + "." + tableIteratorObj.getTemplateId() + "&small=1" %>" vspace="0" />
 					</c:if>
 				</liferay-ui:table-iterator>
 			</c:otherwise>
@@ -985,7 +985,7 @@ String[] availableLocales = null;
 	<c:otherwise>
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 
-		<input name="<portlet:namespace />available_locales" type="hidden" value="">
+		<input name="<portlet:namespace />available_locales" type="hidden" value="" />
 
 		<%
 		Document xsdDoc = reader.read(new StringReader(structure.getXsd()));
@@ -1003,7 +1003,7 @@ String[] availableLocales = null;
 					if (!availableLocales[i].equals(defaultLanguageId)) {
 		%>
 
-						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= availableLocales[i] %>">
+						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= availableLocales[i] %>" />
 
 						<script type="text/javascript">
 							document.<portlet:namespace />fm.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].style.color = '<%= colorScheme.getPortletMsgError() %>';
@@ -1045,7 +1045,7 @@ String[] availableLocales = null;
 			contentDoc = docFactory.createDocument(docFactory.createElement("root"));
 		%>
 
-			<input name="<portlet:namespace />available_locales" type="hidden" value="<%= defaultLanguageId %>">
+			<input name="<portlet:namespace />available_locales" type="hidden" value="<%= defaultLanguageId %>" />
 
 		<%
 		}

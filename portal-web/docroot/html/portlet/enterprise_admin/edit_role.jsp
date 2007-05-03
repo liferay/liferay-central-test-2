@@ -50,9 +50,9 @@ long roleId = BeanParamUtil.getLong(role, request, "roleId");
 		</script>
 
 		<form method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveRole(); return false;">
-		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-		<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-		<input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>">
+		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+		<input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />
 
 		<liferay-ui:error exception="<%= DuplicateRoleException.class %>" message="please-enter-a-unique-name" />
 		<liferay-ui:error exception="<%= RequiredRoleException.class %>" message="old-role-name-is-a-required-system-role" />
@@ -100,9 +100,9 @@ long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
 		<br />
 
-		<input type="submit" value="<bean:message key="save" />">
+		<input type="submit" value="<bean:message key="save" />" />
 
-		<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+		<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 		</form>
 

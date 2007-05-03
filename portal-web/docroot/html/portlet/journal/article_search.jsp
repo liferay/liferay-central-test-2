@@ -47,16 +47,16 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= ArticleDisplayTerms.ARTICLE_ID %>" size="20" type="text" value="<%= displayTerms.getArticleId() %>">
+		<input name="<portlet:namespace /><%= ArticleDisplayTerms.ARTICLE_ID %>" size="20" type="text" value="<%= displayTerms.getArticleId() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= ArticleDisplayTerms.VERSION %>" size="20" type="text" value="<%= displayTerms.getVersionString() %>">
+		<input name="<portlet:namespace /><%= ArticleDisplayTerms.VERSION %>" size="20" type="text" value="<%= displayTerms.getVersionString() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= ArticleDisplayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>">
+		<input name="<portlet:namespace /><%= ArticleDisplayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= ArticleDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
+		<input name="<portlet:namespace /><%= ArticleDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
 	</td>
 </tr>
 <tr>
@@ -79,7 +79,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= ArticleDisplayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>">
+		<input name="<portlet:namespace /><%= ArticleDisplayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>" />
 	</td>
 	<td>
 		<select name="<portlet:namespace /><%= ArticleDisplayTerms.TYPE %>">
@@ -145,13 +145,13 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />">
+		<input type="submit" value="<bean:message key="search" />" />
 	</td>
 </tr>
 </table>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
-	<input name="<portlet:namespace /><%= ArticleDisplayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>">
+	<input name="<portlet:namespace /><%= ArticleDisplayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
 
 	<br />
 
@@ -159,7 +159,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getTemplateId()) %>">
-	<input name="<portlet:namespace /><%= ArticleDisplayTerms.TEMPLATE_ID %>" type="hidden" value="<%= displayTerms.getTemplateId() %>">
+	<input name="<portlet:namespace /><%= ArticleDisplayTerms.TEMPLATE_ID %>" type="hidden" value="<%= displayTerms.getTemplateId() %>" />
 
 	<br />
 

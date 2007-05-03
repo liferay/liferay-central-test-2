@@ -137,14 +137,14 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 </c:if>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveMessage(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />messageId" type="hidden" value="<%= messageId %>">
-<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>">
-<input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>">
-<input name="<portlet:namespace />parentMessageId" type="hidden" value="<%= parentMessageId %>">
-<input name="<portlet:namespace />attachments" type="hidden" value="<%= attachments %>">
-<input name="<portlet:namespace />preview" type="hidden" value="">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />messageId" type="hidden" value="<%= messageId %>" />
+<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
+<input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>" />
+<input name="<portlet:namespace />parentMessageId" type="hidden" value="<%= parentMessageId %>" />
+<input name="<portlet:namespace />attachments" type="hidden" value="<%= attachments %>" />
+<input name="<portlet:namespace />preview" type="hidden" value="" />
 
 <liferay-ui:tabs names="message" />
 
@@ -196,7 +196,7 @@ if (message != null) {
 			<%= category.getName() %>
 			</a>
 
-			<input type="button" value="<bean:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
 		</td>
 	</tr>
 	<tr>
@@ -226,7 +226,7 @@ if (message != null) {
 	<td>
 		<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
 
-		<input name="<portlet:namespace />body" type="hidden" value="">
+		<input name="<portlet:namespace />body" type="hidden" value="" />
 	</td>
 </tr>
 
@@ -246,7 +246,7 @@ if (message != null) {
 				<bean:message key="file" /> <%= i %>
 			</td>
 			<td>
-				<input name="<portlet:namespace />msgFile<%= i %>" size="70" type="file">
+				<input name="<portlet:namespace />msgFile<%= i %>" size="70" type="file" />
 			</td>
 		</tr>
 
@@ -385,15 +385,15 @@ if (message != null) {
 	<liferay-ui:captcha url="<%= captchaURL %>" />
 </c:if>
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, (message != null) ? "update" : ((Validator.isNull(threadId) ? "post-new-thread" : "reply"))) %>'>
+<input type="submit" value='<%= LanguageUtil.get(pageContext, (message != null) ? "update" : ((Validator.isNull(threadId) ? "post-new-thread" : "reply"))) %>' />
 
 <c:if test="<%= MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.ADD_FILE) %>">
-	<input type="button" value='<%= LanguageUtil.get(pageContext, ((attachments) ? "remove" : "attach") + "-files") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />attachments.value = '<%= !attachments %>'; submitForm(document.<portlet:namespace />fm);">
+	<input type="button" value='<%= LanguageUtil.get(pageContext, ((attachments) ? "remove" : "attach") + "-files") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />attachments.value = '<%= !attachments %>'; submitForm(document.<portlet:namespace />fm);" />
 </c:if>
 
-<input type="button" value="<bean:message key="preview" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />preview.value = 'true'; submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="preview" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />preview.value = 'true'; submitForm(document.<portlet:namespace />fm);" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 <c:if test="<%= curParentMessage != null %>">
 	<br /><br />
