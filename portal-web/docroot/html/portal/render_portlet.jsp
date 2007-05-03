@@ -70,7 +70,7 @@ catch (NoSuchResourceException nsre) {
 				}
 			}
 			else if (group.isUser()) {
-				long groupUserId = GetterUtil.getLong(group.getClassPK());
+				long groupUserId = group.getClassPK();
 
 				if (groupUserId == user.getUserId()) {
 					addDefaultResource = true;

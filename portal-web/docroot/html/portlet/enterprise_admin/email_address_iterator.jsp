@@ -30,7 +30,8 @@ boolean editable = ParamUtil.getBoolean(request, "editable");
 String redirect = ParamUtil.getString(request, "redirect");
 
 String className = ParamUtil.getString(request, "className");
-String classPK = ParamUtil.getString(request, "classPK");
+long classNameId = PortalUtil.getClassNameId(className);
+long classPK = ParamUtil.getLong(request, "classPK");
 
 SearchContainer searchContainer = new SearchContainer();
 
@@ -59,7 +60,7 @@ for (int i = 0; i < results.size(); i++) {
 	row.addText(LanguageUtil.get(pageContext, emailAddress.isPrimary() ? "yes" : "no"));
 
 	if (editable) {
-		if (className.equals(emailAddress.getClassName())) {
+		if (classNameId == emailAddress.getClassNameId()) {
 			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/email_address_action.jsp");
 		}
 		else {
@@ -72,7 +73,7 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <c:if test="<%= editable %>">
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_email_address" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="className" value="<%= className %>" /><portlet:param name="classPK" value="<%= classPK %>" /></portlet:renderURL>';"><br />
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_email_address" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="className" value="<%= className %>" /><portlet:param name="classPK" value="<%= String.valueOf(classPK) %>" /></portlet:renderURL>';"><br />
 
 	<c:if test="<%= results.size() > 0 %>">
 		<br />

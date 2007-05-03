@@ -30,7 +30,8 @@ boolean editable = ParamUtil.getBoolean(request, "editable");
 String redirect = ParamUtil.getString(request, "redirect");
 
 String className = ParamUtil.getString(request, "className");
-String classPK = ParamUtil.getString(request, "classPK");
+long classNameId = PortalUtil.getClassNameId(className);
+long classPK = ParamUtil.getLong(request, "classPK");
 
 long organizationId = ParamUtil.getLong(request, "organizationId");
 long locationId = ParamUtil.getLong(request, "locationId");
@@ -53,11 +54,11 @@ searchContainer.setHeaderNames(headerNames);
 List results = new ArrayList();
 
 if (!className.equals(Organization.class.getName()) && (organizationId > 0)) {
-	results = PhoneServiceUtil.getPhones(Organization.class.getName(), String.valueOf(organizationId));
+	results = PhoneServiceUtil.getPhones(Organization.class.getName(), organizationId);
 }
 
 if ((locationId > 0)) {
-	results = PhoneServiceUtil.getPhones(Organization.class.getName(), String.valueOf(locationId));
+	results = PhoneServiceUtil.getPhones(Organization.class.getName(), locationId);
 }
 
 results.addAll(PhoneServiceUtil.getPhones(className, classPK));
@@ -75,7 +76,7 @@ for (int i = 0; i < results.size(); i++) {
 	row.addText(LanguageUtil.get(pageContext, phone.isPrimary() ? "yes" : "no"));
 
 	if (editable) {
-		if (className.equals(phone.getClassName())) {
+		if (classNameId == phone.getClassNameId()) {
 			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/phone_action.jsp");
 		}
 		else {
@@ -88,7 +89,7 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <c:if test="<%= editable %>">
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_phone" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="className" value="<%= className %>" /><portlet:param name="classPK" value="<%= classPK %>" /></portlet:renderURL>';"><br />
+	<input type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_phone" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="className" value="<%= className %>" /><portlet:param name="classPK" value="<%= String.valueOf(classPK) %>" /></portlet:renderURL>';"><br />
 
 	<c:if test="<%= results.size() > 0 %>">
 		<br />
