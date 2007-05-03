@@ -157,20 +157,20 @@ public class InitAction extends SimpleAction {
 					SystemProperties.get(SystemProperties.TMP_DIR) +
 						File.separator + Time.getTimestamp());
 
-				String repositoryXmlPath = 
-					"com/liferay/portal/jcr/jackrabbit/dependencies/" + 
+				String repositoryXmlPath =
+					"com/liferay/portal/jcr/jackrabbit/dependencies/" +
 						"repository-ext.xml";
-				
-				ClassLoader cl = getClass().getClassLoader();
-				
-				if (cl.getResource(repositoryXmlPath) == null) {
-					repositoryXmlPath = 
-						"com/liferay/portal/jcr/jackrabbit/dependencies/" + 
+
+				ClassLoader classLoader = getClass().getClassLoader();
+
+				if (classLoader.getResource(repositoryXmlPath) == null) {
+					repositoryXmlPath =
+						"com/liferay/portal/jcr/jackrabbit/dependencies/" +
 							"repository.xml";
 				}
-				
+
 				String content = StringUtil.read(
-					getClass().getClassLoader(), repositoryXmlPath);
+					classLoader, repositoryXmlPath);
 
 				FileUtil.write(tempFile, content);
 
