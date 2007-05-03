@@ -148,19 +148,29 @@ public class InitAction extends SimpleAction {
 		// JCR
 
 		try {
-			File repistoryRoot = new File(JCRFactoryImpl.REPOSITORY_ROOT);
+			File repositoryRoot = new File(JCRFactoryImpl.REPOSITORY_ROOT);
 
-			if (!repistoryRoot.exists()) {
-				repistoryRoot.mkdirs();
+			if (!repositoryRoot.exists()) {
+				repositoryRoot.mkdirs();
 
 				File tempFile = new File(
 					SystemProperties.get(SystemProperties.TMP_DIR) +
 						File.separator + Time.getTimestamp());
 
+				String repositoryXmlPath = 
+					"com/liferay/portal/jcr/jackrabbit/dependencies/" + 
+						"repository-ext.xml";
+				
+				ClassLoader cl = getClass().getClassLoader();
+				
+				if (cl.getResource(repositoryXmlPath) == null) {
+					repositoryXmlPath = 
+						"com/liferay/portal/jcr/jackrabbit/dependencies/" + 
+							"repository.xml";
+				}
+				
 				String content = StringUtil.read(
-					getClass().getClassLoader(),
-					"com/liferay/portal/jcr/jackrabbit/dependencies/" +
-						"repository.xml");
+					getClass().getClassLoader(), repositoryXmlPath);
 
 				FileUtil.write(tempFile, content);
 
