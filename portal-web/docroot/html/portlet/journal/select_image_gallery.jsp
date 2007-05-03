@@ -29,14 +29,14 @@ long groupId = ParamUtil.getLong(request, "groupId");
 
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
-String folderId = BeanParamUtil.getString(folder, request, "folderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long folderId = BeanParamUtil.getLong(folder, request, "folderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 portletURL.setParameter("struts_action", "/journal/select_image_gallery");
-portletURL.setParameter("folderId", folderId);
+portletURL.setParameter("folderId", String.valueOf(folderId));
 %>
 
 <form method="post" name="<portlet:namespace />">
@@ -78,14 +78,14 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	IGFolder curFolder = (IGFolder)results.get(i);
 
-	ResultRow row = new ResultRow(curFolder, curFolder.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(LiferayWindowState.POP_UP);
 
 	rowURL.setParameter("struts_action", "/journal/select_image_gallery");
-	rowURL.setParameter("folderId", curFolder.getFolderId());
+	rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 	// Name
 
@@ -95,7 +95,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	List subfolderIds = new ArrayList();
 
-	subfolderIds.add(curFolder.getFolderId());
+	subfolderIds.add(new Long(curFolder.getFolderId()));
 
 	IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
@@ -142,7 +142,7 @@ for (int i = 0; i < results.size(); i++) {
 	for (int i = 0; i < results.size(); i++) {
 		IGImage image = (IGImage)results.get(i);
 
-		ResultRow row = new ResultRow(image, image.getPrimaryKey().toString(), i);
+		ResultRow row = new ResultRow(image, image.getImageId(), i);
 
 		// Thumbnail
 

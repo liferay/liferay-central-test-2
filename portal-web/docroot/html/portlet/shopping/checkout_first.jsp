@@ -63,7 +63,7 @@ if (request.getParameter("ccExpMonth") == null) {
 
 String ccVerNumber = ParamUtil.getString(request, "ccVerNumber");
 
-List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), String.valueOf(contact.getContactId()));
+List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contact.getContactId());
 %>
 
 <script type="text/javascript">
