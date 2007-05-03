@@ -32,7 +32,7 @@ String url = (String)request.getAttribute("liferay-ui:captcha:url");
 
 <c:if test="<%= CaptchaUtil.isEnabled(renderRequest) %>">
 	<div>
-		<img src="<%= url %>">
+		<img src="<%= url %>" />
 	</div>
 
 	<br />
@@ -40,10 +40,10 @@ String url = (String)request.getAttribute("liferay-ui:captcha:url");
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "text-verification") %>
+			<bean:message key="text-verification" />
 		</td>
 		<td>
-			<input name="<%= namespace %>captchaText" size="10" type="text" value="">
+			<input name="<%= namespace %>captchaText" size="10" type="text" value="" />
 		</td>
 	</tr>
 	</table>

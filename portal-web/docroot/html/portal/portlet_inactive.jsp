@@ -25,5 +25,5 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <span class="portlet-msg-error">
-<%= LanguageUtil.get(pageContext, "this-portlet-is-inactive") %>
+<bean:message key="this-portlet-is-inactive" />
 </span>

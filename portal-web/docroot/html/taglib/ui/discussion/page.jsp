@@ -92,15 +92,15 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 </script>
 
 <form action="<%= formAction %>" method="post" name="<%= formName %>">
-<input name="<%= namespace %><%= Constants.CMD %>" type="hidden" value="">
-<input name="<%= namespace %>redirect" type="hidden" value="<%= redirect %>">
-<input name="<%= namespace %>className" type="hidden" value="<%= className %>">
-<input name="<%= namespace %>classPK" type="hidden" value="<%= classPK %>">
-<input name="<%= namespace %>messageId" type="hidden" value="">
-<input name="<%= namespace %>threadId" type="hidden" value="<%= thread.getThreadId() %>">
-<input name="<%= namespace %>parentMessageId" type="hidden" value="">
-<input name="<%= namespace %>subject" type="hidden" value="">
-<input name="<%= namespace %>body" type="hidden" value="">
+<input name="<%= namespace %><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<%= namespace %>redirect" type="hidden" value="<%= redirect %>" />
+<input name="<%= namespace %>className" type="hidden" value="<%= className %>" />
+<input name="<%= namespace %>classPK" type="hidden" value="<%= classPK %>" />
+<input name="<%= namespace %>messageId" type="hidden" value="" />
+<input name="<%= namespace %>threadId" type="hidden" value="<%= thread.getThreadId() %>" />
+<input name="<%= namespace %>parentMessageId" type="hidden" value="" />
+<input name="<%= namespace %>subject" type="hidden" value="" />
+<input name="<%= namespace %>body" type="hidden" value="" />
 
 <table border="0" cellpadding="0" cellspacing="0" id="<%= namespace %>messageScroll0" width="100%">
 
@@ -129,15 +129,15 @@ List messages = treeWalker.getMessages();
 	<table border="0" cellpadding="4" cellspacing="0" class="taglib-discussion" width="100%">
 	<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
 		<td>
-			<%= LanguageUtil.get(pageContext, "threaded-replies") %>
+			<bean:message key="threaded-replies" />
 		</td>
 		<td></td>
 		<td>
-			<%= LanguageUtil.get(pageContext, "author") %>
+			<bean:message key="author" />
 		</td>
 		<td></td>
 		<td>
-			<%= LanguageUtil.get(pageContext, "date") %>
+			<bean:message key="date" />
 		</td>
 	</tr>
 
@@ -185,7 +185,7 @@ List messages = treeWalker.getMessages();
 				<b><%= message.getSubject() %></b><br />
 
 				<span style="font-size: xx-small;">
-				<%= LanguageUtil.get(pageContext, "by") %> <%= PortalUtil.getUserName(message.getUserId(), message.getUserName(), request) %>, <%= LanguageUtil.get(pageContext, "on") %> <%= dateFormatDateTime.format(message.getModifiedDate()) %>
+				<bean:message key="by" /> <%= PortalUtil.getUserName(message.getUserId(), message.getUserName(), request) %>, <bean:message key="on" /> <%= dateFormatDateTime.format(message.getModifiedDate()) %>
 				</span>
 
 				<br /><br />

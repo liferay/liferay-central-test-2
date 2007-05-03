@@ -27,7 +27,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "copy-page") %>
+		<bean:message key="copy-page" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />copyLayoutId">

@@ -29,5 +29,5 @@ Layout selLayout = (Layout)request.getAttribute("liferay-theme:layout-icon:layou
 %>
 
 <c:if test="<%= (selLayout != null) && selLayout.isIconImage() %>">
-	<img src="<%= themeDisplay.getPathImage() %>/layout_icon?img_id=<%= selLayout.getPlid() %>">
+	<img src="<%= themeDisplay.getPathImage() %>/layout_icon?img_id=<%= selLayout.getPlid() %>" />
 </c:if>

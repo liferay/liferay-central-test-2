@@ -173,7 +173,7 @@ function minimizePortlet(plid, portletId, restore, doAsUserId) {
 
 			html = html.replace(", true", ", false");
 			html = html.replace("restore.png", "minimize.png");
-			html = html.replace("<%= LanguageUtil.get(pageContext, "restore") %>", "<%= LanguageUtil.get(pageContext, "minimize") %>");
+			html = html.replace("<bean:message key="restore" />", "<bean:message key="minimize" />");
 
 			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");
 		}
@@ -182,7 +182,7 @@ function minimizePortlet(plid, portletId, restore, doAsUserId) {
 
 			html = html.replace(", false", ", true");
 			html = html.replace("minimize.png", "restore.png");
-			html = html.replace("<%= LanguageUtil.get(pageContext, "minimize") %>", "<%= LanguageUtil.get(pageContext, "restore") %>");
+			html = html.replace("<bean:message key="minimize" />", "<bean:message key="restore" />");
 
 			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");
 		}

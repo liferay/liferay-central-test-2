@@ -34,6 +34,6 @@ boolean value = ParamUtil.getBoolean(request, param, defaultValue.booleanValue()
 %>
 
 <select <%= disabled ? "disabled" : "" %> name="<%= namespace %><%= param %>">
-	<option <%= (value) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-	<option <%= (!value) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
+	<option <%= (value) ? "selected" : "" %> value="1"><bean:message key="yes" /></option>
+	<option <%= (!value) ? "selected" : "" %> value="0"><bean:message key="no" /></option>
 </select>

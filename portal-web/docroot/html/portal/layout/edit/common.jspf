@@ -30,11 +30,11 @@
 		<table border="0" cellpadding="4" cellspacing="0" width="100%">
 		<tr>
 			<td class="beta-gradient">
-				<b><%= LanguageUtil.get(pageContext, "meta-tags") %>:</b>
+				<b><bean:message key="meta-tags" />:</b>
 			</td>
 			<td align="right" class="beta-gradient">
 				<span style="font-size: xx-small;">
-				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />metaTags'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />metaTags'); self.focus();"><span><bean:message key="show" /></span><span style="display: none;"><bean:message key="hide" /></span></a>]
 				</span>
 			</td>
 		</tr>
@@ -46,19 +46,19 @@
 		<div id="<portlet:namespace />metaTags" style="display: none;">
 			<br />
 
-			<%= LanguageUtil.get(pageContext, "meta-robots") %><br />
+			<bean:message key="meta-robots" /><br />
 
 			<textarea name="TypeSettingsProperties(meta-robots)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-robots)" /></textarea>
 
 			<br /><br />
 
-			<%= LanguageUtil.get(pageContext, "meta-description") %><br />
+			<bean:message key="meta-description" /><br />
 
 			<textarea name="TypeSettingsProperties(meta-description)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-description)" /></textarea>
 
 			<br /><br />
 
-			<%= LanguageUtil.get(pageContext, "meta-keywords") %><br />
+			<bean:message key="meta-keywords" /><br />
 
 			<textarea name="TypeSettingsProperties(meta-keywords)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-keywords)" /></textarea>
 
@@ -71,11 +71,11 @@
 		<table border="0" cellpadding="4" cellspacing="0" width="100%">
 		<tr>
 			<td class="beta-gradient">
-				<b><%= LanguageUtil.get(pageContext, "javascript") %>:</b>
+				<b><bean:message key="javascript" />:</b>
 			</td>
 			<td align="right" class="beta-gradient">
 				<span style="font-size: xx-small;">
-				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />javascript'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />javascript'); self.focus();"><span><bean:message key="show" /></span><span style="display: none;"><bean:message key="hide" /></span></a>]
 				</span>
 			</td>
 		</tr>
@@ -87,19 +87,19 @@
 		<div id="<portlet:namespace />javascript" style="display: none;">
 			<br />
 
-			<%= LanguageUtil.get(pageContext, "javascript-1") %><br />
+			<bean:message key="javascript-1" /><br />
 
 			<textarea name="TypeSettingsProperties(javascript-1)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-1)" /></textarea>
 
 			<br /><br />
 
-			<%= LanguageUtil.get(pageContext, "javascript-2") %><br />
+			<bean:message key="javascript-2" /><br />
 
 			<textarea name="TypeSettingsProperties(javascript-2)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-2)" /></textarea>
 
 			<br /><br />
 
-			<%= LanguageUtil.get(pageContext, "javascript-3") %><br />
+			<bean:message key="javascript-3" /><br />
 
 			<textarea name="TypeSettingsProperties(javascript-3)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-3)" /></textarea>
 		</div>
@@ -112,11 +112,11 @@
 			<table border="0" cellpadding="4" cellspacing="0" width="100%">
 			<tr>
 				<td class="beta-gradient">
-					<b><%= LanguageUtil.get(pageContext, "sitemap-protocol") %>:</b>
+					<b><bean:message key="sitemap-protocol" />:</b>
 				</td>
 				<td align="right" class="beta-gradient">
 					<span style="font-size: xx-small;">
-					[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />sitemap'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+					[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />sitemap'); self.focus();"><span><bean:message key="show" /></span><span style="display: none;"><bean:message key="hide" /></span></a>]
 					</span>
 				</td>
 			</tr>
@@ -136,36 +136,36 @@
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "include") %>
+						<bean:message key="include" />
 					</td>
 					<td>
 						<select name="TypeSettingsProperties(sitemap-include)">
-							<option <%= (include) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-							<option <%= (!include) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
+							<option <%= (include) ? "selected" : "" %> value="1"><bean:message key="yes" /></option>
+							<option <%= (!include) ? "selected" : "" %> value="0"><bean:message key="no" /></option>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "page-priority") %> (0.0 - 1.0)
+						<bean:message key="page-priority" /> (0.0 - 1.0)
 					</td>
 					<td>
-						<input name="TypeSettingsProperties(sitemap-priority)" size="3" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(sitemap-priority)" />">
+						<input name="TypeSettingsProperties(sitemap-priority)" size="3" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(sitemap-priority)" />" />
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "change-frequency") %>
+						<bean:message key="change-frequency" />
 					</td>
 					<td>
 						<select name="TypeSettingsProperties(sitemap-changefreq)">
-							<option <%= (changeFrequency.equals("always")) ? "selected" : "" %> value="always"><%= LanguageUtil.get(pageContext, "always") %></option>
-							<option <%= (changeFrequency.equals("hourly")) ? "selected" : "" %> value="hourly"><%= LanguageUtil.get(pageContext, "hourly") %></option>
-							<option <%= (changeFrequency.equals("daily")) ? "selected" : "" %> value="daily"><%= LanguageUtil.get(pageContext, "daily") %></option>
-							<option <%= (changeFrequency.equals("weekly")) ? "selected" : "" %> value="weekly"><%= LanguageUtil.get(pageContext, "weekly") %></option>
-							<option <%= (changeFrequency.equals("monthly")) ? "selected" : "" %> value="monthly"><%= LanguageUtil.get(pageContext, "monthly") %></option>
-							<option <%= (changeFrequency.equals("yearly")) ? "selected" : "" %> value="yearly"><%= LanguageUtil.get(pageContext, "yearly") %></option>
-							<option <%= (changeFrequency.equals("never")) ? "selected" : "" %> value="never"><%= LanguageUtil.get(pageContext, "never") %></option>
+							<option <%= (changeFrequency.equals("always")) ? "selected" : "" %> value="always"><bean:message key="always" /></option>
+							<option <%= (changeFrequency.equals("hourly")) ? "selected" : "" %> value="hourly"><bean:message key="hourly" /></option>
+							<option <%= (changeFrequency.equals("daily")) ? "selected" : "" %> value="daily"><bean:message key="daily" /></option>
+							<option <%= (changeFrequency.equals("weekly")) ? "selected" : "" %> value="weekly"><bean:message key="weekly" /></option>
+							<option <%= (changeFrequency.equals("monthly")) ? "selected" : "" %> value="monthly"><bean:message key="monthly" /></option>
+							<option <%= (changeFrequency.equals("yearly")) ? "selected" : "" %> value="yearly"><bean:message key="yearly" /></option>
+							<option <%= (changeFrequency.equals("never")) ? "selected" : "" %> value="never"><bean:message key="never" /></option>
 						</select>
 					</td>
 				</tr>

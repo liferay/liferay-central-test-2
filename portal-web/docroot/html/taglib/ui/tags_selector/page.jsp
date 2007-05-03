@@ -48,12 +48,12 @@ if (curTagsParam != null) {
 }
 %>
 
-<input id="<%= namespace %><%= hiddenInput %>" type="hidden">
+<input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
 
 <table class="liferay-table">
 <tr>
 	<td>
-		<input id="<%= randomNamespace %>tags" type="text">
+		<input id="<%= randomNamespace %>tags" type="text" />
 	</td>
 	<td>
 		<span id="<%= randomNamespace %>tagsSummary"></span>

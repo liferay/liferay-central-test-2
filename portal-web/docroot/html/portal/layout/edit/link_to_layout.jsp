@@ -27,7 +27,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "link-to-layout") %>
+		<bean:message key="link-to-layout" />
 	</td>
 	<td>
 

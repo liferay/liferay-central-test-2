@@ -104,25 +104,25 @@ Calendar._SMN = new Array(
 
 Calendar._TT = {};
 
-Calendar._TT["ABOUT"] = "<%= LanguageUtil.get(pageContext, "date-selection") %>";
+Calendar._TT["ABOUT"] = "<bean:message key="date-selection" />";
 Calendar._TT["ABOUT"] = Calendar._TT["ABOUT"].replace("{0}", String.fromCharCode(0x2039));
 Calendar._TT["ABOUT"] = Calendar._TT["ABOUT"].replace("{1}", String.fromCharCode(0x203a));
 
 Calendar._TT["ABOUT_TIME"] = "";
-Calendar._TT["CLOSE"] = "<%= LanguageUtil.get(pageContext, "close") %>";
+Calendar._TT["CLOSE"] = "<bean:message key="close" />";
 Calendar._TT["DAY_FIRST"] = "Display %s First";
 Calendar._TT["DRAG_TO_MOVE"] = "";
-Calendar._TT["GO_TODAY"] = "<%= LanguageUtil.get(pageContext, "today") %>";
-Calendar._TT["INFO"] = "<%= LanguageUtil.get(pageContext, "help") %>";
-Calendar._TT["NEXT_MONTH"] = "<%= LanguageUtil.get(pageContext, "next-month") %>";
-Calendar._TT["NEXT_YEAR"] = "<%= LanguageUtil.get(pageContext, "next-year") %>";
+Calendar._TT["GO_TODAY"] = "<bean:message key="today" />";
+Calendar._TT["INFO"] = "<bean:message key="help" />";
+Calendar._TT["NEXT_MONTH"] = "<bean:message key="next-month" />";
+Calendar._TT["NEXT_YEAR"] = "<bean:message key="next-year" />";
 Calendar._TT["PART_TODAY"] = "";
-Calendar._TT["PREV_MONTH"] = "<%= LanguageUtil.get(pageContext, "previous-month") %>";
-Calendar._TT["PREV_YEAR"] = "<%= LanguageUtil.get(pageContext, "previous-year") %>";
-Calendar._TT["SEL_DATE"] = "<%= LanguageUtil.get(pageContext, "select-date") %>";
+Calendar._TT["PREV_MONTH"] = "<bean:message key="previous-month" />";
+Calendar._TT["PREV_YEAR"] = "<bean:message key="previous-year" />";
+Calendar._TT["SEL_DATE"] = "<bean:message key="select-date" />";
 Calendar._TT["SUN_FIRST"] = "";
 Calendar._TT["TIME_PART"] = "";
-Calendar._TT["TODAY"] = "<%= LanguageUtil.get(pageContext, "today") %>";
+Calendar._TT["TODAY"] = "<bean:message key="today" />";
 Calendar._TT["WK"] = "";
 
 Calendar._TT["DEF_DATE_FORMAT"] = "%Y-%m-%d";

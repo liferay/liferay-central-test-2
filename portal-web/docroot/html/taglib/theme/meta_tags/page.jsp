@@ -31,7 +31,7 @@
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaRobots) %>">
-		<meta name="robots" content="<%= metaRobots %>">
+		<meta name="robots" content="<%= metaRobots %>" />
 	</c:if>
 
 	<%
@@ -39,7 +39,7 @@
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaDescription) %>">
-		<meta name="description" content="<%= metaDescription %>">
+		<meta name="description" content="<%= metaDescription %>" />
 	</c:if>
 
 	<%
@@ -47,6 +47,6 @@
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaKeywords) %>">
-		<meta name="keywords" content="<%= metaKeywords %>">
+		<meta name="keywords" content="<%= metaKeywords %>" />
 	</c:if>
 </c:if>

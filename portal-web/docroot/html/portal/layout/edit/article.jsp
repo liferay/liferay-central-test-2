@@ -27,10 +27,10 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "article-id") %>
+		<bean:message key="article-id" />
 	</td>
 	<td>
-		<input name="TypeSettingsProperties(article-id)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />">
+		<input name="TypeSettingsProperties(article-id)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />" />
 	</td>
 </tr>
 </table>

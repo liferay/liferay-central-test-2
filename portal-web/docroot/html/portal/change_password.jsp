@@ -25,13 +25,13 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <form action="<%= themeDisplay.getPathMain() %>/portal/change_password" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
-<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>">
-<input name="<%= Constants.CMD %>" type="hidden" value="password">
-<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>/portal/layout?doAsUserId=<%= themeDisplay.getDoAsUserId() %>">
-<input name="passwordReset" type="hidden" value="false">
+<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
+<input name="<%= Constants.CMD %>" type="hidden" value="password" />
+<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>/portal/layout?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" />
+<input name="passwordReset" type="hidden" value="false" />
 
 <span class="portlet-msg-error">
-<%= LanguageUtil.get(pageContext, "the-system-policy-requires-you-to-change-your-password-at-this-time") %>
+<bean:message key="the-system-policy-requires-you-to-change-your-password-at-this-time" />
 </span>
 
 <br /><br />
@@ -45,15 +45,15 @@
 	<span class="portlet-msg-error" style="font-size: xx-small;">
 
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
-		<%= LanguageUtil.get(pageContext, "please-enter-matching-passwords") %>
+		<bean:message key="please-enter-matching-passwords" />
 	</c:if>
 
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_INVALID %>">
-		<%= LanguageUtil.get(pageContext, "please-enter-a-valid-password") %>
+		<bean:message key="please-enter-a-valid-password" />
 	</c:if>
 
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_ALREADY_USED %>">
-		<%= LanguageUtil.get(pageContext, "please-enter-a-password-that-has-not-already-been-used") %>
+		<bean:message key="please-enter-a-password-that-has-not-already-been-used" />
 	</c:if>
 
 	</span>
@@ -64,25 +64,25 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "password") %>
+		<bean:message key="password" />
 	</td>
 	<td>
-		<input name="password1" size="30" type="password" value="">
+		<input name="password1" size="30" type="password" value="" />
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "enter-again") %>
+		<bean:message key="enter-again" />
 	</td>
 	<td>
-		<input name="password2" size="30" type="password" value="">
+		<input name="password2" size="30" type="password" value="" />
 	</td>
 </tr>
 </table>
 
 <br />
 
-<input type="submit" value="<%= LanguageUtil.get(pageContext, "save") %>">
+<input type="submit" value="<bean:message key="save" />" />
 
 </form>
 

@@ -59,10 +59,10 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
 
 		<c:choose>
 			<c:when test="<%= exception instanceof PrincipalException %>">
-				<%= LanguageUtil.get(pageContext, "you-do-not-have-permission-to-view-this-page") %>
+				<bean:message key="you-do-not-have-permission-to-view-this-page" />
 			</c:when>
 			<c:otherwise>
-				<%= LanguageUtil.get(pageContext, "an-unexpected-system-error-occurred") %>
+				<bean:message key="an-unexpected-system-error-occurred" />
 			</c:otherwise>
 		</c:choose>
 

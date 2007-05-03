@@ -24,4 +24,4 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
-<%= LanguageUtil.get(pageContext, "please-contact-the-administrator-to-setup-this-portlet") %>
+<bean:message key="please-contact-the-administrator-to-setup-this-portlet" />

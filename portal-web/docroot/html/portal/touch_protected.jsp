@@ -27,10 +27,10 @@
 <html dir="<bean:message key="lang.dir" />">
 
 <head>
-	<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageUtil.getCharset(locale) %>" http-equiv="content-type">
-	<meta content="no-cache" http-equiv="Cache-Control">
-	<meta content="no-cache" http-equiv="Pragma">
-	<meta content="0" http-equiv="Expires">
+	<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageUtil.getCharset(locale) %>" http-equiv="content-type" />
+	<meta content="no-cache" http-equiv="Cache-Control" />
+	<meta content="no-cache" http-equiv="Pragma" />
+	<meta content="0" http-equiv="Expires" />
 	<script src="<%= themeDisplay.getPathJavaScript() %>/misc/xp_progress.js" type="text/javascript"></script>
 </head>
 
@@ -42,7 +42,7 @@
 <tr>
 	<td align="center" valign="middle">
 		<font face="Verdana, Tahoma, Arial" size="3">
-		<b><%= LanguageUtil.get(pageContext, "processing-login") %>
+		<b><bean:message key="processing-login" />
 		</font><br /><br />
 
 		<script type="text/javascript">

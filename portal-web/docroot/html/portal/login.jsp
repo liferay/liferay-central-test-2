@@ -51,8 +51,8 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 >
 	<liferay-ui:section>
 		<form action="<%= themeDisplay.getPathMain() %>/portal/login" method="post" name="fm1">
-		<input name="<%= Constants.CMD %>" type="hidden" value="already-registered">
-		<input name="<%= sectionParam %>" type="hidden" value="already-registered">
+		<input name="<%= Constants.CMD %>" type="hidden" value="already-registered" />
+		<input name="<%= sectionParam %>" type="hidden" value="already-registered" />
 
 		<c:if test="<%= sectionSelected.booleanValue() %>">
 			<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>
@@ -84,7 +84,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, AuthException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<%= LanguageUtil.get(pageContext, "authentication-failed") %>
+				<bean:message key="authentication-failed" />
 				</span>
 
 				<br /><br />
@@ -92,7 +92,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, CookieNotSupportedException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<%= LanguageUtil.get(pageContext, "authentication-failed-please-enable-browser-cookies") %>
+				<bean:message key="authentication-failed-please-enable-browser-cookies" />
 				</span>
 
 				<br /><br />
@@ -100,7 +100,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<%= LanguageUtil.get(pageContext, "please-enter-a-valid-login") %>
+				<bean:message key="please-enter-a-valid-login" />
 				</span>
 
 				<br /><br />
@@ -108,8 +108,8 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<%= LanguageUtil.get(pageContext, "you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication") %>
-				<%= LanguageUtil.get(pageContext, "please-sign-in-to-continue") %>
+				<bean:message key="you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication" />
+				<bean:message key="please-sign-in-to-continue" />
 				</span>
 
 				<br /><br />
@@ -117,7 +117,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test='<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>'>
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<%= LanguageUtil.get(pageContext, "please-enter-a-valid-login") %>
+				<bean:message key="please-enter-a-valid-login" />
 				</span>
 
 				<br /><br />
@@ -125,7 +125,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<%= LanguageUtil.get(pageContext, "please-enter-a-valid-password") %>
+				<bean:message key="please-enter-a-valid-password" />
 				</span>
 
 				<br /><br />
@@ -138,23 +138,23 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 		%>
 
-		<input name="rememberMe" type="hidden" value="<%= rememberMe %>">
+		<input name="rememberMe" type="hidden" value="<%= rememberMe %>" />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "login") %>
+				<bean:message key="login" />
 			</td>
 			<td>
-				<input name="login" style="width: 150px;" type="text" value="<%= login %>">
+				<input name="login" style="width: 150px;" type="text" value="<%= login %>" />
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "password") %>
+				<bean:message key="password" />
 			</td>
 			<td>
-				<input name="<%= SessionParameters.get(request, "password") %>" style="width: 150px" type="password" value="<%= password %>">
+				<input name="<%= SessionParameters.get(request, "password") %>" style="width: 150px" type="password" value="<%= password %>" />
 			</td>
 		</tr>
 
@@ -162,7 +162,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 			<tr>
 				<td>
 					<span style="font-size: xx-small;">
-					<%= LanguageUtil.get(pageContext, "remember-me") %>
+					<bean:message key="remember-me" />
 					</span>
 				</td>
 				<td>
@@ -183,19 +183,19 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 		<br />
 
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "sign-in") %>">
+		<input type="submit" value="<bean:message key="sign-in" />" />
 
 		</form>
 	</liferay-ui:section>
 	<liferay-ui:section>
 		<form action="<%= themeDisplay.getPathMain() %>/portal/login" method="post" name="fm2">
-		<input name="<%= Constants.CMD %>" type="hidden" value="<%= sectionName %>">
-		<input name="<%= sectionParam %>" type="hidden" value="<%= sectionName %>">
+		<input name="<%= Constants.CMD %>" type="hidden" value="<%= sectionName %>" />
+		<input name="<%= sectionParam %>" type="hidden" value="<%= sectionName %>" />
 
 		<c:if test="<%= sectionSelected.booleanValue() %>">
 			<c:if test='<%= SessionMessages.contains(request, "request_processed") %>'>
 				<span class="portlet-msg-success" style="font-size: xx-small;">
-				<%= LanguageUtil.get(pageContext, "your-request-processed-successfully") %>
+				<bean:message key="your-request-processed-successfully" />
 				</span>
 
 				<br /><br />
@@ -203,7 +203,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<%= LanguageUtil.get(pageContext, "the-email-address-you-requested-is-not-registered-in-our-database") %>
+				<bean:message key="the-email-address-you-requested-is-not-registered-in-our-database" />
 				</span>
 
 				<br /><br />
@@ -211,7 +211,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, SendPasswordException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<%= LanguageUtil.get(pageContext, "your-password-can-only-be-sent-to-an-external-email-address") %>
+				<bean:message key="your-password-can-only-be-sent-to-an-external-email-address" />
 				</span>
 
 				<br /><br />
@@ -219,7 +219,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<%= LanguageUtil.get(pageContext, "please-enter-a-valid-email-address") %>
+				<bean:message key="please-enter-a-valid-email-address" />
 				</span>
 
 				<br /><br />
@@ -233,17 +233,17 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "email-address") %>
+				<bean:message key="email-address" />
 			</td>
 			<td>
-				<input name="emailAddress" size="30" type="text" value="<%= emailAddress %>">
+				<input name="emailAddress" size="30" type="text" value="<%= emailAddress %>" />
 			</td>
 		</tr>
 		</table>
 
 		<br />
 
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "send-new-password") %>">
+		<input type="submit" value="<bean:message key="send-new-password" />" />
 
 		</form>
 	</liferay-ui:section>

@@ -42,7 +42,7 @@ String rowBreak = (String)request.getAttribute("liferay-ui:error:rowBreak");
 	<c:when test="<%= key == null %>">
 		<c:if test="<%= !SessionErrors.isEmpty(renderRequest) %>">
 			<span class="portlet-msg-error">
-			<%= LanguageUtil.get(pageContext, "you-have-entered-invalid-data") %>
+			<bean:message key="you-have-entered-invalid-data" />
 			</span>
 
 			<%= rowBreak %>

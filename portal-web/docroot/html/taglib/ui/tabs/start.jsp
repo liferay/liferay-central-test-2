@@ -81,7 +81,7 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 %>
 
 <c:if test="<%= names.length > 0 %>">
-	<input name="<%= namespace %><%= param %>TabsScroll" type="hidden">
+	<input name="<%= namespace %><%= param %>TabsScroll" type="hidden" />
 
 	<ul class="tabs">
 
@@ -134,7 +134,7 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 
 		<c:if test="<%= Validator.isNotNull(backURL) %>">
 			<li class="toggle">
-				<a href="<%= backURL %>">&laquo; <%= LanguageUtil.get(pageContext, "back") %></a>
+				<a href="<%= backURL %>">&laquo; <bean:message key="back" /></a>
 			</li>
 		</c:if>
 	</ul>

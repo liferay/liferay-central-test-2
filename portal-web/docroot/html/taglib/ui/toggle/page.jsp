@@ -62,4 +62,4 @@ String defaultImage = (String)request.getAttribute("liferay-ui:toggle:defaultIma
 	}
 </script>
 
-<img hspace="0" id="<%= id %>_image" vspace="0" src="<%= defaultImage %>" onClick="<%= stateVar %>Toggle();">
+<img hspace="0" id="<%= id %>_image" vspace="0" src="<%= defaultImage %>" onClick="<%= stateVar %>Toggle();" />

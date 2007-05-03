@@ -25,8 +25,8 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <form action="<%= themeDisplay.getPathMain() %>/portal/update_terms_of_use" name="fm">
-<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>">
-<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>/portal/layout?doAsUserId=<%= themeDisplay.getDoAsUserId() %>">
+<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
+<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>/portal/layout?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" />
 
 Welcome to our site. We maintain this web site as a service to our members. By using our site, you are agreeing to comply with and be bound by the following terms of use. Please review the following terms carefully. If you do not agree to these terms, you should not use this site.
 
@@ -193,6 +193,6 @@ Welcome to our site. We maintain this web site as a service to our members. By u
 	</li>
 </ol>
 
-<input type="button" value="<%= LanguageUtil.get(pageContext, "i-agree") %>" onClick="submitForm(document.fm);"> <input type="button" value="<%= LanguageUtil.get(pageContext, "i-disagree") %>" onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "you-must-agree-with-the-terms-of-use-to-continue") %>');">
+<input type="button" value="<bean:message key="i-agree" />" onClick="submitForm(document.fm);" /> <input type="button" value="<bean:message key="i-disagree" />" onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "you-must-agree-with-the-terms-of-use-to-continue") %>');" />
 
 </form>

@@ -40,10 +40,10 @@ String jPassword = (String)session.getAttribute("j_password");
 		<html dir="<bean:message key="lang.dir" />">
 
 		<head>
-			<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageUtil.getCharset(locale) %>" http-equiv="content-type">
-			<meta content="no-cache" http-equiv="Cache-Control">
-			<meta content="no-cache" http-equiv="Pragma">
-			<meta content="0" http-equiv="Expires">
+			<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageUtil.getCharset(locale) %>" http-equiv="content-type" />
+			<meta content="no-cache" http-equiv="Cache-Control" />
+			<meta content="no-cache" http-equiv="Pragma" />
+			<meta content="0" http-equiv="Expires" />
 			<script src="<%= themeDisplay.getPathJavaScript() %>/misc/xp_progress.js" type="text/javascript"></script>
 		</head>
 
@@ -55,12 +55,12 @@ String jPassword = (String)session.getAttribute("j_password");
 		<tr>
 			<td align="center" valign="middle">
 				<form action="<%= jSecurityCheck %>" method="post" name="fm">
-				<input name="j_username" type="hidden" value="<%= jUserName %>">
-				<input name="j_password" type="hidden" value="<%= jPassword %>">
+				<input name="j_username" type="hidden" value="<%= jUserName %>" />
+				<input name="j_password" type="hidden" value="<%= jPassword %>" />
 				</form>
 
 				<font face="Verdana, Tahoma, Arial" size="3">
-				<b><%= LanguageUtil.get(pageContext, "processing-login") %>
+				<b><bean:message key="processing-login" />
 				</font><br /><br />
 
 				<script type="text/javascript">
@@ -106,10 +106,10 @@ String jPassword = (String)session.getAttribute("j_password");
 
 		<head>
 			<title></title>
-			<meta content="0; url=<%= themeDisplay.getPathMain() %>" http-equiv="refresh">
-			<meta content="no-cache" http-equiv="Cache-Control">
-			<meta content="no-cache" http-equiv="Pragma">
-			<meta content="0" http-equiv="Expires">
+			<meta content="0; url=<%= themeDisplay.getPathMain() %>" http-equiv="refresh" />
+			<meta content="no-cache" http-equiv="Cache-Control" />
+			<meta content="no-cache" http-equiv="Pragma" />
+			<meta content="0" http-equiv="Expires" />
 		</head>
 
 		<body onLoad="javascript:location.replace('<%= themeDisplay.getPathMain() %>')">

@@ -52,13 +52,13 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		<table cellpadding="2" cellspacing="0" id="<%= namespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
 		<tr>
 			<th style="text-align: right;">
-				<%= LanguageUtil.get(pageContext, "action") %>
+				<bean:message key="action" />
 			</th>
 			<th style="text-align: center;">
-				<%= LanguageUtil.get(pageContext, "community") %>
+				<bean:message key="community" />
 			</th>
 			<th style="text-align: center;">
-				<%= LanguageUtil.get(pageContext, "guest") %>
+				<bean:message key="guest" />
 			</th>
 		</tr>
 
@@ -104,15 +104,15 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 		</table>
 
-		<input id="<%= namespace %>inputPermissionsShowConfigure" name="<%= namespace %>inputPermissionsShowConfigure" type="hidden" value="<%= inputPermissionsShowConfigure %>">
-		<input id="<%= namespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>">
+		<input id="<%= namespace %>inputPermissionsShowConfigure" name="<%= namespace %>inputPermissionsShowConfigure" type="hidden" value="<%= inputPermissionsShowConfigure %>" />
+		<input id="<%= namespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>" />
 
 		<div id="<%= namespace %>inputPermissionsConfigureLink" style="display: <%= inputPermissionsShowConfigure ? "none" : "" %>;">
-		<a href="javascript: <%= namespace %>inputPermissionsConfigure();"><%= LanguageUtil.get(pageContext, "configure") %> &raquo;</a>
+		<a href="javascript: <%= namespace %>inputPermissionsConfigure();"><bean:message key="configure" /> &raquo;</a>
 		</div>
 
 		<div id="<%= namespace %>inputPermissionsMoreLink" style="display: <%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "none" : "" %>;">
-		<a href="javascript: <%= namespace %>inputPermissionsMore();"><%= LanguageUtil.get(pageContext, "more") %> &raquo;</a>
+		<a href="javascript: <%= namespace %>inputPermissionsMore();"><bean:message key="more" /> &raquo;</a>
 		</div>
 
 		<script type="text/javascript">
@@ -166,12 +166,12 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		boolean addGuestPermissions = ParamUtil.getBoolean(request, "addGuestPermissions", true);
 		%>
 
-		<input name="<%= namespace %>addCommunityPermissions" type="hidden" value="<%= addCommunityPermissions %>">
-		<input name="<%= namespace %>addGuestPermissions" type="hidden" value="<%= addGuestPermissions %>">
+		<input name="<%= namespace %>addCommunityPermissions" type="hidden" value="<%= addCommunityPermissions %>" />
+		<input name="<%= namespace %>addGuestPermissions" type="hidden" value="<%= addGuestPermissions %>" />
 
-		<input <%= addCommunityPermissions ? "checked" : "" %> name="<%= namespace %>addCommunityPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <%= LanguageUtil.get(pageContext, "assign-default-permissions-to-community") %><br />
-		<input <%= addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addGuestPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addGuestPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <%= LanguageUtil.get(pageContext, "assign-default-permissions-to-guest") %><br />
-		<input <%= !addCommunityPermissions && !addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addUserPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = !this.checked; document.<%= formName %>.<%= namespace %>addGuestPermissions.value = !this.checked; <%= namespace %>checkUserPermissions();"> <%= LanguageUtil.get(pageContext, "only-assign-permissions-to-me") %>
+		<input <%= addCommunityPermissions ? "checked" : "" %> name="<%= namespace %>addCommunityPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <bean:message key="assign-default-permissions-to-community" /><br />
+		<input <%= addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addGuestPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addGuestPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <bean:message key="assign-default-permissions-to-guest" /><br />
+		<input <%= !addCommunityPermissions && !addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addUserPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = !this.checked; document.<%= formName %>.<%= namespace %>addGuestPermissions.value = !this.checked; <%= namespace %>checkUserPermissions();"> <bean:message key="only-assign-permissions-to-me" />
 
 		<script type="text/javascript">
 			function <%= namespace %>checkCommunityAndGuestPermissions() {

@@ -60,11 +60,11 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 	<td>
 		<span class="font-small" style="font-weight: bold;">
 
-		<%= LanguageUtil.get(pageContext, "page") %>
+		<bean:message key="page" />
 
-		<input id="<%= namespace %>page-iterator-value" size="1" style="font-weight: italicized;" type="text" value="<%= curValue %>" onKeyPress="if (event.keyCode == 13) { <%= namespace %>submitPageIterator(); return false; }">
+		<input id="<%= namespace %>page-iterator-value" size="1" style="font-weight: italicized;" type="text" value="<%= curValue %>" onKeyPress="if (event.keyCode == 13) { <%= namespace %>submitPageIterator(); return false; }" />
 
-		<%= LanguageUtil.get(pageContext, "of") %>
+		<bean:message key="of" />
 
 		<%= pages %>
 
@@ -79,7 +79,7 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 			<a href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 		</c:if>
 
-		<%= LanguageUtil.get(pageContext, "first") %>
+		<bean:message key="first" />
 
 		<c:if test="<%= curValue != 1 %>">
 			</a>
@@ -91,7 +91,7 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 			<a href="<%= _getHREF(formName, curParam, curValue - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 		</c:if>
 
-		<%= LanguageUtil.get(pageContext, "previous") %>
+		<bean:message key="previous" />
 
 		<c:if test="<%= curValue != 1 %>">
 			</a>
@@ -103,7 +103,7 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 			<a href="<%= _getHREF(formName, curParam, curValue + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 		</c:if>
 
-		<%= LanguageUtil.get(pageContext, "next") %>
+		<bean:message key="next" />
 
 		<c:if test="<%= curValue != pages %>">
 			</a>
@@ -115,7 +115,7 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 			<a href="<%= _getHREF(formName, curParam, pages, jsCall, url, urlAnchor) %>" target="<%= target %>">
 		</c:if>
 
-		<%= LanguageUtil.get(pageContext, "last") %>
+		<bean:message key="last" />
 
 		<c:if test="<%= curValue != pages %>">
 			</a>

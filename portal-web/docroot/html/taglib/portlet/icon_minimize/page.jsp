@@ -38,6 +38,6 @@
 	%>
 
 	<span id="p_p_body_<%= portletDisplay.getId() %>_min_buttons">
-	<a href="<%= url %>"><img align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/portlet/<%= image %>.png" title="<%= LanguageUtil.get(pageContext, image) %>"></a>
+	<a href="<%= url %>"><img align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/portlet/<%= image %>.png" title="<%= LanguageUtil.get(pageContext, image) %>" /></a>
 	</span>
 </c:if>

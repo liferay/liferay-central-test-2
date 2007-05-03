@@ -22,14 +22,14 @@
  */
 %>
 
-<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageUtil.DEFAULT_ENCODING %>" http-equiv="content-type">
+<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageUtil.DEFAULT_ENCODING %>" http-equiv="content-type" />
 
 <%
 String refreshRate = request.getParameter("refresh_rate");
 %>
 
 <c:if test='<%= (refreshRate != null) && (!refreshRate.equals("0")) %>'>
-	<meta content="<%= refreshRate %>;" http-equiv="Refresh">
+	<meta content="<%= refreshRate %>;" http-equiv="Refresh" />
 </c:if>
 
 <%
@@ -37,9 +37,9 @@ String cacheControl = request.getParameter("cache_control");
 %>
 
 <c:if test='<%= (cacheControl != null) && (cacheControl.equals("0")) %>'>
-	<meta content="no-cache" http-equiv="Cache-Control">
-	<meta content="no-cache" http-equiv="Pragma">
-	<meta content="0" http-equiv="Expires">
+	<meta content="no-cache" http-equiv="Cache-Control" />
+	<meta content="no-cache" http-equiv="Pragma" />
+	<meta content="0" http-equiv="Expires" />
 </c:if>
 
 <liferay-theme:meta-tags />

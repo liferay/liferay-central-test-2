@@ -25,5 +25,5 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <span class="portlet-msg-error">
-<%= LanguageUtil.get(pageContext, "jaas-is-not-configured-properly") %>
+<bean:message key="jaas-is-not-configured-properly" />
 </span>
